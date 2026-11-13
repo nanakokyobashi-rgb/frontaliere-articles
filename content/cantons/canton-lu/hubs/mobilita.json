@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "d73ee06e541cfc18f5d517c5867d52c17bf5ff15a7a38e3dc7488ae22f8887f1",
+  "updatedAt": "2026-11-13T12:13:48.902Z",
+  "contentHash": "437c4d942b0ed1ebe9b2c7b03d0b0afe7032fa3755d54f81878269a5e77b85b3",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-12T20:34:04.832Z",
+      "updatedAt": "2026-11-13T02:11:53.904Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T14:02:55.343Z",
+      "updatedAt": "2026-11-12T22:54:56.926Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "4",
-          "note": "segnalazioni aggiornate: 12 novembre 2026"
+          "note": "segnalazioni aggiornate: 13 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "31",
-          "note": "segnalazioni aggiornate: 12 novembre 2026"
+          "value": "29",
+          "note": "segnalazioni aggiornate: 13 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-12T20:34:04.832Z"
+          "updatedAt": "2026-11-13T02:11:53.904Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -115,7 +115,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -179,7 +179,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "en": {
       "canton": "LU",
@@ -190,12 +190,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "4",
-          "note": "reports as of 12 November 2026"
+          "note": "reports as of 13 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "31",
-          "note": "reports as of 12 November 2026"
+          "value": "29",
+          "note": "reports as of 13 November 2026"
         }
       ],
       "dataBlocks": [
@@ -254,7 +254,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-12T20:34:04.832Z"
+          "updatedAt": "2026-11-13T02:11:53.904Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -277,7 +277,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -339,7 +339,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "de": {
       "canton": "LU",
@@ -350,12 +350,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "4",
-          "note": "Meldungen vom 12. November 2026"
+          "note": "Meldungen vom 13. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "31",
-          "note": "Meldungen vom 12. November 2026"
+          "value": "29",
+          "note": "Meldungen vom 13. November 2026"
         }
       ],
       "dataBlocks": [
@@ -414,7 +414,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-12T20:34:04.832Z"
+          "updatedAt": "2026-11-13T02:11:53.904Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -437,7 +437,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -499,7 +499,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "fr": {
       "canton": "LU",
@@ -510,12 +510,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "4",
-          "note": "signalements au 12 novembre 2026"
+          "note": "signalements au 13 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "31",
-          "note": "signalements au 12 novembre 2026"
+          "value": "29",
+          "note": "signalements au 13 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -574,7 +574,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-12T20:34:04.832Z"
+          "updatedAt": "2026-11-13T02:11:53.904Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -597,7 +597,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -661,7 +661,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     }
   }
 }

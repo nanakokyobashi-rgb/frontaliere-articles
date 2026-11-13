@@ -4,17 +4,17 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "e59e58df85747f94c507f6fa8902d57706bf1bd4548a3d407527db7746e4b351",
+  "updatedAt": "2026-11-13T12:13:48.902Z",
+  "contentHash": "60c61803b712c90ea93455f98a5a1a04ef82c4ac75a3273d5d6657dd0b587751",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-12T20:34:04.832Z",
+      "updatedAt": "2026-11-13T02:11:53.904Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T14:02:55.343Z",
+      "updatedAt": "2026-11-12T22:54:56.926Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "21",
-          "note": "segnalazioni aggiornate: 12 novembre 2026"
+          "value": "19",
+          "note": "segnalazioni aggiornate: 13 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "77",
-          "note": "segnalazioni aggiornate: 12 novembre 2026"
+          "note": "segnalazioni aggiornate: 13 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -73,12 +73,6 @@
               "date": "2026-10-12T08:09:00.000Z"
             },
             {
-              "label": "A6W Diramazione Lattigen -> Port tra Raccordo autostradale Diramazione Lattigen E Svincolo autostradale Wimmis Situazione: chiusa cantiere, lunghezza [km] 2.2 Limitazione del traffico: corsia chiusa",
-              "value": "Chiusura",
-              "detail": "fine prevista: 13 novembre 2026",
-              "date": "2026-10-22T18:00:00.000Z"
-            },
-            {
               "label": "Thun <-> Beatenberg Luogo Thun Situazione: chiusa cantiere Causa: lavori di costruzione",
               "value": "Chiusura",
               "detail": "fine prevista: 26 marzo 2027",
@@ -88,10 +82,15 @@
               "label": "H6 Gletsch <-> Guttannen Passo Passo del Grimsel Situazione: chiusa",
               "value": "Chiusura",
               "date": "2026-10-27T08:00:00.000Z"
+            },
+            {
+              "label": "H6 Gletsch <-> Guttannen tra Luogo Gletsch E Passo Passo del Grimsel Situazione: chiusa Causa: chiusura invernale",
+              "value": "Chiusura",
+              "date": "2026-11-06T15:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-12T20:34:04.832Z"
+          "updatedAt": "2026-11-13T02:11:53.904Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +128,7 @@
               "url": "https://www.bernmobil.ch/de/neue-haltestellenanzeigen-fuer-bern"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -181,7 +180,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "en": {
       "canton": "BE",
@@ -191,13 +190,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "21",
-          "note": "reports as of 12 November 2026"
+          "value": "19",
+          "note": "reports as of 13 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "77",
-          "note": "reports as of 12 November 2026"
+          "note": "reports as of 13 November 2026"
         }
       ],
       "dataBlocks": [
@@ -237,12 +236,6 @@
               "date": "2026-10-12T08:09:00.000Z"
             },
             {
-              "label": "A6W Diramazione Lattigen -> Port tra Raccordo autostradale Diramazione Lattigen E Svincolo autostradale Wimmis Situazione: chiusa cantiere, lunghezza [km] 2.2 Limitazione del traffico: corsia chiusa",
-              "value": "Closure",
-              "detail": "until 13 November 2026",
-              "date": "2026-10-22T18:00:00.000Z"
-            },
-            {
               "label": "Thun <-> Beatenberg Luogo Thun Situazione: chiusa cantiere Causa: lavori di costruzione",
               "value": "Closure",
               "detail": "until 26 March 2027",
@@ -252,10 +245,15 @@
               "label": "H6 Gletsch <-> Guttannen Passo Passo del Grimsel Situazione: chiusa",
               "value": "Closure",
               "date": "2026-10-27T08:00:00.000Z"
+            },
+            {
+              "label": "H6 Gletsch <-> Guttannen tra Luogo Gletsch E Passo Passo del Grimsel Situazione: chiusa Causa: chiusura invernale",
+              "value": "Closure",
+              "date": "2026-11-06T15:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-12T20:34:04.832Z"
+          "updatedAt": "2026-11-13T02:11:53.904Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -293,7 +291,7 @@
               "url": "https://www.bernmobil.ch/de/neue-haltestellenanzeigen-fuer-bern"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +343,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "de": {
       "canton": "BE",
@@ -355,13 +353,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "21",
-          "note": "Meldungen vom 12. November 2026"
+          "value": "19",
+          "note": "Meldungen vom 13. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "77",
-          "note": "Meldungen vom 12. November 2026"
+          "note": "Meldungen vom 13. November 2026"
         }
       ],
       "dataBlocks": [
@@ -401,12 +399,6 @@
               "date": "2026-10-12T08:09:00.000Z"
             },
             {
-              "label": "A6W Verzweigung Lattigen -> Port zwischen Autobahndreieck Verzweigung Lattigen und Anschluss Wimmis Sachlage: Strecke gesperrt Baustelle, Länge [km] 2.2 Verkehrsführung: Fahrstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 13. November 2026",
-              "date": "2026-10-22T18:00:00.000Z"
-            },
-            {
               "label": "Thun <-> Beatenberg Ortschaft Thun Sachlage: Strecke gesperrt Baustelle Ursache: Bauarbeiten",
               "value": "Sperrung",
               "detail": "bis 26. März 2027",
@@ -416,10 +408,15 @@
               "label": "H6 Gletsch <-> Guttannen Pass Grimsel-Pass Sachlage: Strecke gesperrt",
               "value": "Sperrung",
               "date": "2026-10-27T08:00:00.000Z"
+            },
+            {
+              "label": "H6 Gletsch <-> Guttannen zwischen Ortschaft Gletsch und Pass Grimsel-Pass Sachlage: Strecke gesperrt Ursache: Wintersperre",
+              "value": "Sperrung",
+              "date": "2026-11-06T15:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-12T20:34:04.832Z"
+          "updatedAt": "2026-11-13T02:11:53.904Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -457,7 +454,7 @@
               "url": "https://www.bernmobil.ch/de/neue-haltestellenanzeigen-fuer-bern"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +506,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     },
     "fr": {
       "canton": "BE",
@@ -519,13 +516,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "21",
-          "note": "signalements au 12 novembre 2026"
+          "value": "19",
+          "note": "signalements au 13 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "77",
-          "note": "signalements au 12 novembre 2026"
+          "note": "signalements au 13 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -565,12 +562,6 @@
               "date": "2026-10-12T08:09:00.000Z"
             },
             {
-              "label": "A6W Echangeur de Lattigen -> Port entre Echangeur Echangeur de Lattigen et Jonction autoroutière Wimmis Situation: fermé travaux, longueur [km] 2.2 Gestion du trafic: voie fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 13 novembre 2026",
-              "date": "2026-10-22T18:00:00.000Z"
-            },
-            {
               "label": "Thoune <-> Beatenberg Localité Thoune Situation: fermé travaux Raison: travaux de construction",
               "value": "Fermeture",
               "detail": "jusqu’au 26 mars 2027",
@@ -580,10 +571,15 @@
               "label": "H6 Gletsch <-> Guttannen Col Col du Grimsel Situation: fermé",
               "value": "Fermeture",
               "date": "2026-10-27T08:00:00.000Z"
+            },
+            {
+              "label": "H6 Gletsch <-> Guttannen entre Localité Gletsch et Col Col du Grimsel Situation: fermé Raison: fermeture hivernale",
+              "value": "Fermeture",
+              "date": "2026-11-06T15:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-12T20:34:04.832Z"
+          "updatedAt": "2026-11-13T02:11:53.904Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -621,7 +617,7 @@
               "url": "https://www.bernmobil.ch/de/neue-haltestellenanzeigen-fuer-bern"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -673,7 +669,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-13T12:13:48.902Z"
     }
   }
 }
