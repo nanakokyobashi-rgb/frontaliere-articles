@@ -713,7 +713,7 @@ test('il fallback storico corto applica il contratto strutturale prima del final
     `${src.slice(historicalAt, historicalEnd)}\nreturn translatePendingBodyWithHistoricalChain;`,
   );
   const makeTranslateInChunks = new Function(
-    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature',
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation',
     `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
   );
   const splitIntoTranslationChunks = buildChunker();
@@ -743,6 +743,7 @@ test('il fallback storico corto applica il contratto strutturale prima del final
     balanceMarkdownMarkers,
     hasSameLineSkeleton,
     lineStructuralSignature,
+    detectTruncation,
   );
   assert.equal(
     await historical(source, 'de', 'body1', {
@@ -771,6 +772,7 @@ test('il fallback storico corto applica il contratto strutturale prima del final
       balanceMarkdownMarkers,
       hasSameLineSkeleton,
       lineStructuralSignature,
+      detectTruncation,
     );
     const translated = await historical(source, 'de', 'body1', { callWithRetry, translateInChunks });
     assert.equal(translated, '', `${label}: il body deve restare non recuperato`);
@@ -1001,7 +1003,7 @@ test('il join della traduzione riusa i separatori sorgente invece di inventare p
   const realChunker = buildChunker();
   const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
   const makeTranslator = new Function(
-    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature',
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation',
     `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
   );
   const translateInChunks = makeTranslator(
@@ -1013,6 +1015,7 @@ test('il join della traduzione riusa i separatori sorgente invece di inventare p
     balanceMarkdownMarkers,
     hasSameLineSkeleton,
     lineStructuralSignature,
+    detectTruncation,
   );
   const source = [
     '- prima voce [comparatore fiscale](nav:calculator) e `codice interno` resta nella lista',
@@ -1035,11 +1038,38 @@ test('il join della traduzione riusa i separatori sorgente invece di inventare p
   );
 });
 
+test('il joiner rifiuta testo perso dentro un chunk anche se la forma resta valida', async () => {
+  const realChunker = buildChunker();
+  const makeTranslator = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  );
+  let providerCalls = 0;
+  const translateInChunks = makeTranslator(
+    (bodyText) => realChunker(bodyText, 20),
+    async (prompt) => ({ body1: providerCalls++ === 0 ? prompt : 'Frase completa.' }),
+    (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+  );
+  const source = Array.from({ length: 140 }, (_, index) => `parola${index}`).join(' ');
+
+  assert.equal(
+    await translateInChunks(source, 'body1', (chunk) => chunk, 'test', 'de'),
+    null,
+    'un chunk ricomposto come frase valida ma perso nel contenuto deve restare non recuperato',
+  );
+});
+
 test('il joiner protegge prefissi Markdown annidati e lo scheletro delle pipe', async () => {
   const realChunker = buildChunker();
   const makeTranslator = (mutate) => {
     const translateInChunks = new Function(
-      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature',
+      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation',
       `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
     )(
       (bodyText) => realChunker(bodyText, 50),
@@ -1050,6 +1080,7 @@ test('il joiner protegge prefissi Markdown annidati e lo scheletro delle pipe', 
       balanceMarkdownMarkers,
       hasSameLineSkeleton,
       lineStructuralSignature,
+      detectTruncation,
     );
     return (bodyText) => translateInChunks(bodyText, 'body1', (chunk) => chunk, 'test', 'de');
   };
@@ -1075,7 +1106,7 @@ test('il joiner rifiuta un link Markdown alterato dopo la ricomposizione', async
   const realChunker = buildChunker();
   const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
   const makeTranslator = new Function(
-    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature',
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation',
     `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
   );
   const translateInChunks = makeTranslator(
@@ -1087,6 +1118,7 @@ test('il joiner rifiuta un link Markdown alterato dopo la ricomposizione', async
     balanceMarkdownMarkers,
     hasSameLineSkeleton,
     lineStructuralSignature,
+    detectTruncation,
   );
   const source = 'Prima [etichetta lunga](nav:calculator) dopo altre parole.';
 
@@ -1102,7 +1134,7 @@ test('il joiner protegge reference link, definizioni e autolink', async () => {
   const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
   const makeTranslator = (mutate) => {
     const translateInChunks = new Function(
-      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature',
+      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation',
       `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
     );
     const translate = translateInChunks(
@@ -1114,6 +1146,7 @@ test('il joiner protegge reference link, definizioni e autolink', async () => {
       balanceMarkdownMarkers,
       hasSameLineSkeleton,
       lineStructuralSignature,
+      detectTruncation,
     );
     return (bodyText) => translate(bodyText, 'body1', (chunk) => chunk, 'test', 'de');
   };
@@ -1152,7 +1185,7 @@ test('il joiner protegge anche le definizioni dentro prefissi Markdown', async (
   const realChunker = buildChunker();
   const makeTranslator = (mutate) => {
     const translateInChunks = new Function(
-      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature',
+      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation',
       `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
     )(
       (bodyText) => realChunker(bodyText, 50),
@@ -1163,6 +1196,7 @@ test('il joiner protegge anche le definizioni dentro prefissi Markdown', async (
       balanceMarkdownMarkers,
       hasSameLineSkeleton,
       lineStructuralSignature,
+      detectTruncation,
     );
     return (bodyText) => translateInChunks(bodyText, 'body1', (chunk) => chunk, 'test', 'de');
   };
@@ -1190,7 +1224,7 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
   const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
   const makeTranslator = (mutate) => {
     const translateInChunks = new Function(
-      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature',
+      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation',
       `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
     )(
       splitWithSmallTarget,
@@ -1201,6 +1235,7 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
       balanceMarkdownMarkers,
       hasSameLineSkeleton,
       lineStructuralSignature,
+      detectTruncation,
     );
     return (bodyText) => translateInChunks(bodyText, 'body1', (chunk) => chunk, 'test', 'de');
   };
@@ -1252,7 +1287,7 @@ test('il joiner rifiuta immagini mutate, struttura Markdown alterata e code span
   const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
   const makeTranslator = (mutate) => {
     const translateInChunks = new Function(
-      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature',
+      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation',
       `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
     )(
       splitWithSmallTarget,
@@ -1263,6 +1298,7 @@ test('il joiner rifiuta immagini mutate, struttura Markdown alterata e code span
       balanceMarkdownMarkers,
       hasSameLineSkeleton,
       lineStructuralSignature,
+      detectTruncation,
     );
     return (bodyText) => translateInChunks(bodyText, 'body1', (chunk) => chunk, 'test', 'de');
   };
@@ -1302,6 +1338,13 @@ test('il joiner rifiuta immagini mutate, struttura Markdown alterata e code span
     'un code span rimosso non deve passare il guard',
   );
 
+  const unbalancedCodeSource = 'Prima testo senza code span dopo altre parole da tradurre.';
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('testo', 'testo`'))(unbalancedCodeSource),
+    null,
+    'un delimitatore di code span orfano deve essere rifiutato',
+  );
+
   for (const [label, sourceSpan, mutate] of [
     ['enfasi con asterisco', '*frase protetta*', (chunk) => chunk.replace('*frase protetta*', 'frase protetta')],
     ['enfasi con underscore', '_frase protetta_', (chunk) => chunk.replace('_frase protetta_', 'frase protetta')],
@@ -1316,21 +1359,53 @@ test('il joiner rifiuta immagini mutate, struttura Markdown alterata e code span
   }
 });
 
+test('il joiner rifiuta un anchor HTML spostato su testo diverso', async () => {
+  const realChunker = buildChunker();
+  const makeTranslator = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  );
+  const source = 'Prima <a class="source" href="https://example.test/html">anchor</a> dopo altre parole.';
+  const translated = source.replace(
+    '<a class="source" href="https://example.test/html">anchor</a> dopo',
+    '<a class="source" href="https://example.test/html">anchor dopo</a>',
+  );
+  const translateInChunks = makeTranslator(
+    (bodyText) => realChunker(bodyText, 50),
+    async () => ({ body1: translated }),
+    (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+  );
+
+  assert.equal(
+    await translateInChunks(source, 'body1', (chunk) => chunk, 'test', 'de'),
+    null,
+    'un anchor chiuso ma con copertura testuale diversa non deve passare il contratto',
+  );
+});
+
 test('il recovery missing-field usa il chunker per un body oversized', async () => {
   const countWords = new Function(`${COUNT_WORDS_SRC}\nreturn countWords;`)();
   const splitIntoTranslationChunks = buildChunker();
   const makeTranslator = new Function(
-    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature',
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation',
     `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
   );
   const longIt = Array.from(
     { length: TRANSLATION_CHUNK_THRESHOLD + 1 },
     (_, index) => `parola${index}`,
   ).join(' ');
+  const sourceChunks = splitIntoTranslationChunks(longIt);
   const calls = [];
   const callWithRetry = async (prompt, maxTokens, label) => {
+    const chunkIndex = calls.length;
     calls.push({ prompt, maxTokens, label });
-    return { body1: `Deutscher Chunk ${String.fromCharCode(64 + calls.length)}` };
+    return { body1: sourceChunks[chunkIndex].replaceAll('parola', 'Wort') };
   };
   const translateInChunks = makeTranslator(
     splitIntoTranslationChunks,
@@ -1341,6 +1416,7 @@ test('il recovery missing-field usa il chunker per un body oversized', async () 
     balanceMarkdownMarkers,
     hasSameLineSkeleton,
     lineStructuralSignature,
+    detectTruncation,
   );
   const buildPendingBodyRetranslationPrompt = new Function(
     `${BUILD_PENDING_BODY_PROMPT_SRC}\nreturn buildPendingBodyRetranslationPrompt;`,
@@ -1404,7 +1480,10 @@ test('il recovery missing-field usa il chunker per un body oversized', async () 
     ['de:body1-missing-retry-p1', 'de:body1-missing-retry-p2'],
   );
   assert.ok(calls.every(({ prompt }) => prompt.includes('parte 1 di 2') || prompt.includes('parte 2 di 2')));
-  assert.match(data.content.de.body1, /^Deutscher Chunk A Deutscher Chunk B$/);
+  assert.equal(
+    data.content.de.body1,
+    sourceChunks.join(' ').replaceAll('parola', 'Wort'),
+  );
 });
 
 test('se il circuit breaker apre Codex dopo la selezione, la lane passa alla catena storica', async () => {

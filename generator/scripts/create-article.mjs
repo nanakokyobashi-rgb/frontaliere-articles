@@ -15512,6 +15512,19 @@ async function translateArticle(data) {
       '',
     );
 
+    // The structural contracts below cannot see prose silently dropped from a
+    // chunk. A response can preserve every marker, link and number and still
+    // be a short, punctuated summary. Run the same source-vs-translation
+    // completeness guard used by the body truncation path before any caller
+    // can write the recomposed result (the oversized missing-field retry used
+    // to accept this string directly).
+    const completenessMiss = detectTruncation(joined, {
+      label: `${targetLang}:${fieldKey}-chunked`,
+      locale: targetLang,
+      referenceText: bodyText,
+    }).some((issue) => issue.code === 'translation-semantic-truncation');
+    if (completenessMiss) return null;
+
     // A translated chunk may change visible prose, but it must not add, drop or
     // replace a Markdown block marker. Compare the complete source/joined line
     // skeleton before accepting the recomposed body; otherwise a provider can
@@ -15671,9 +15684,17 @@ async function translateArticle(data) {
       // contents. Scan them independently so a code span nested in a link label
       // is not hidden by the link parser below.
       const codeSpans = [];
+      const unbalancedCodeSpans = [];
       for (let cursor = 0; cursor < value.length; cursor += 1) {
+        if (value[cursor] !== '`') continue;
         const codeEnd = readCodeSpanEnd(value, cursor);
-        if (codeEnd === null) continue;
+        if (codeEnd === null) {
+          let runEnd = cursor + 1;
+          while (value[runEnd] === '`') runEnd += 1;
+          unbalancedCodeSpans.push(value.slice(cursor, runEnd));
+          cursor = runEnd - 1;
+          continue;
+        }
         codeSpans.push(value.slice(cursor, codeEnd));
         cursor = codeEnd - 1;
       }
@@ -15878,7 +15899,19 @@ async function translateArticle(data) {
                   }
                   if (/(?:^|\W)href$/u.test(attributeName)) hrefs.push(target);
                 }
-                htmlAnchors.push({ hrefs, closed: readHtmlAnchorCloseEnd(tagEnd) !== null });
+                const closeEnd = readHtmlAnchorCloseEnd(tagEnd);
+                htmlAnchors.push({
+                  hrefs,
+                  closed: closeEnd !== null,
+                  // Keep the complete source-owned anchor span in document
+                  // order. Hrefs alone allow a provider to move the opening
+                  // and closing tags onto different prose while retaining a
+                  // valid, closed anchor; the span skeleton makes that
+                  // topology change fail closed before publication.
+                  skeleton: closeEnd === null
+                    ? value.slice(cursor, tagEnd)
+                    : value.slice(cursor, closeEnd),
+                });
                 cursor = tagEnd - 1;
                 continue;
               }
@@ -15909,10 +15942,14 @@ async function translateArticle(data) {
       const links = linkEntries
         .sort((left, right) => left.index - right.index)
         .map(({ signature }) => signature);
-      return { links, definitions, codeSpans, htmlAnchors };
+      return { links, definitions, codeSpans, unbalancedCodeSpans, htmlAnchors };
     };
     const sourceLinkContract = markdownLinkContract(bodyText);
     const joinedLinkContract = markdownLinkContract(joined);
+    if (sourceLinkContract.unbalancedCodeSpans.length > 0
+      || joinedLinkContract.unbalancedCodeSpans.length > 0) {
+      return null;
+    }
     if (sourceLinkContract.htmlAnchors.some(({ closed }) => !closed)
       || joinedLinkContract.htmlAnchors.some(({ closed }) => !closed)) {
       return null;
