@@ -1128,6 +1128,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cantonsrat-respinge-puk-soh': {
+    title: 'Soletta: il Cantonsrat respinge la PUK sulla SOH',
+    description: 'Il Cantonsrat di Soletta respinge la richiesta SVP di una PUK sulla SOH: 65 contrari, 26 favorevoli e 4 astensioni dopo il rapporto sulla gestione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, soletta, cantonsrat, respinge, sulla',
+    ogTitle: 'Soletta: il Cantonsrat respinge la PUK sulla SOH',
+    ogDescription: 'Dopo il rapporto di luglio della Commissione della gestione, la SVP aveva chiesto una commissione d\'inchiesta sulla Solothurner Spitäler AG. Le altre frazioni e il governo hanno citato costi, tempi e l\'assenza di nuovi elementi significativi.',
+    canonicalPath: '/articoli-soletta/cantonsrat-respinge-puk-soh/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Soletta: il Cantonsrat respinge la PUK sulla SOH",
+      "description": "Il Cantonsrat di Soletta respinge la richiesta SVP di una PUK sulla SOH: 65 contrari, 26 favorevoli e 4 astensioni dopo il rapporto sulla gestione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cantonsrat-respinge-puk-soh.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-13T12:05:22+00:00",
+      "dateModified": "2026-11-13T12:05:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/cantonsrat-respinge-puk-soh/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
