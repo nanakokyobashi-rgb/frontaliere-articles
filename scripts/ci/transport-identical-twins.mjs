@@ -1481,18 +1481,17 @@ export function readsContentOf(rel, text) {
  * («Questo file.»), contarlo come bloccante non è un rinvio: è un NO
  * PERMANENTE.
  *
- * **Ma l'eccezione vale solo per chi lo NOMINA, non per chi lo LEGGE**, e la
- * differenza è misurabile su
- * `generator/tests/crawler-cross-repo-artifacts.test.mjs`: quel fixture non
+ * **Ma l'eccezione vale solo per chi lo NOMINA, non per chi lo LEGGE**. Un
+ * fixture come `generator/tests/crawler-cross-repo-artifacts.test.mjs` non
  * verifica che il manifest esista, asserisce sul suo CONTENUTO contro un altro
  * file — per ogni `artifacts[]` del contract pretende l'entry
  * `.github/workflows/<file>` con `mode`, `sitePath` e `baseline` uguali a
  * `artifactSha256`. Quelle entry non entrano nell'insieme chiuso: il fixture le
  * nomina via template, e i loro path sono `unsafeTarget` («il token del ciclo
  * non ha lo scope `workflows`»), quindi nessuna passata potrà mai riscriverle.
- * Portare giù il fixture e il contract lasciando il manifest fermo fa fallire
- * il test su `mapping loop-sync assente` o su una `baseline` diversa — cioè
- * esattamente la PR di trasporto rossa che `permanentBlock` esiste per evitare.
+ * Un fixture di questo tipo, se dipende anche da dati o codice adattati del
+ * corpus, deve essere dichiarato `adapted`: portarlo insieme al contract come
+ * `identical` lascerebbe il manifest fermo e produrrebbe una PR rossa.
  * Il libro mastro è neutro finché lo si nomina; sul suo contenuto è un
  * accoppiamento come gli altri.
  */

@@ -569,11 +569,12 @@ test('il manifest NOMINATO in prosa non e\u2019 un accoppiamento; LETTO lo resta
   // verifica che il manifest esista, ASSERISCE sul suo contenuto contro il
   // contract (`baseline` = `artifactSha256` per ogni artifact). Le entry
   // `.github/workflows/*` su cui asserisce sono `unsafeTarget`, quindi nessuna
-  // passata potra' riscriverle: portare giu' fixture e contract lasciando il
-  // manifest fermo e' la PR di trasporto rossa che spegne il canale.
+  // passata potra' riscriverle: un fixture cosi' non e' trasportabile da solo.
+  // Nel manifest reale e' quindi `adapted`; il clone sintetico sotto dimostra
+  // che la guardia resterebbe attiva se qualcuno lo riclassificasse per errore.
   const reads = 'generator/tests/crawler-cross-repo-artifacts.test.mjs';
   const entry = manifest.files.find((e) => e.path === reads);
-  assert.equal(entry.mode, 'identical', 'il caso vale solo su un gemello che il canale potrebbe portare');
+  assert.equal(entry.mode, 'adapted', 'il fixture con dipendenze corpus non deve rientrare nel trasporto isolato');
   assert.equal(
     readsContentOf('scripts/ci/loop-sync-manifest.json', fs.readFileSync(path.join(ROOT, reads), 'utf8')),
     true,
@@ -583,9 +584,10 @@ test('il manifest NOMINATO in prosa non e\u2019 un accoppiamento; LETTO lo resta
     couplings.some((c) => c.path === 'scripts/ci/loop-sync-manifest.json'),
     'chi legge il manifest resta accoppiato al manifest',
   );
+  const hypotheticalIdentical = { ...entry, mode: 'identical' };
   assert.ok(
-    permanentBlock(entry, { outOfScopePrefixes: manifest.scope.outOfScope || [], couplings }),
-    'e il blocco conservativo resta: la copia a mano e\u2019 l\u2019unica azione che lo sblocca',
+    permanentBlock(hypotheticalIdentical, { outOfScopePrefixes: manifest.scope.outOfScope || [], couplings }),
+    'se riclassificato per errore, il blocco conservativo impedisce la copia isolata',
   );
 });
 
