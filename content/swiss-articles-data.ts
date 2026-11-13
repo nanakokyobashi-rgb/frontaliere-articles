@@ -30322,6 +30322,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'fiscalita-svizzera-tre-livelli',
+    category: 'fiscale',
+    date: '2026-11-13T01:58:45.077Z',
+    image: '/images/blog/article-fiscalita-svizzera-tre-livelli.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
