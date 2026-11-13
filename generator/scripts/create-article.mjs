@@ -14357,8 +14357,17 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
     if (text[nameEnd] !== '>' && text[nameEnd] !== '/' && !/[\s]/u.test(text[nameEnd] || '')) {
       return null;
     }
+    if (text[nameEnd] === '>') {
+      return {
+        end: nameEnd + 1,
+        kind: 'tag',
+        name: nameMatch[1].toLowerCase(),
+        closing: false,
+        selfClosing: false,
+      };
+    }
     let quote = null;
-    for (let end = nameEnd + 1; end < text.length; end += 1) {
+    for (let end = nameEnd; end < text.length; end += 1) {
       const char = text[end];
       if (quote !== null) {
         if (char === quote) quote = null;
@@ -15691,15 +15700,30 @@ async function translateArticle(data) {
     const pipeSkeleton = (line) => {
       const value = String(line ?? '');
       const pipes = [];
+      const cells = [];
+      let cellStart = 0;
+      const cellShape = (cell) => {
+        const trimmed = cell.trim();
+        if (!trimmed) return 'empty';
+        if (/^:?-{3,}:?$/u.test(trimmed)) return 'separator';
+        return 'content';
+      };
       for (let cursor = 0; cursor < value.length; cursor += 1) {
         if (value[cursor] !== '|') continue;
         let slashCount = 0;
         for (let previous = cursor - 1; previous >= 0 && value[previous] === '\\'; previous -= 1) {
           slashCount += 1;
         }
-        pipes.push(slashCount % 2 === 1 ? 'escaped' : 'raw');
+        const escaped = slashCount % 2 === 1;
+        pipes.push(escaped ? 'escaped' : 'raw');
+        if (!escaped) {
+          cells.push(cellShape(value.slice(cellStart, cursor)));
+          cellStart = cursor + 1;
+        }
       }
-      return pipes;
+      if (!pipes.includes('raw')) return pipes;
+      cells.push(cellShape(value.slice(cellStart)));
+      return { pipes, cells };
     };
     const isLocalizedOrdinalLine = (sourceLine, translatedLine) => {
       const sourceOrdinal = String(sourceLine ?? '').match(/^(\s*)(\d{1,2})[°º]\s+/u);
@@ -16155,26 +16179,81 @@ async function translateArticle(data) {
     // percent/degree unit must remain identical after the join. The one
     // locale-only exception is a line-leading ordinal: Italian `1°`/`1º` can
     // become `1.` in a target locale, so both spellings normalize to `.`.
+    // When a subject span survives the translation unchanged (or retains a
+    // source-owned capitalized anchor), keep the number attached to that span;
+    // comparing only the global digit sequence would accept `A: 100, B: 200`
+    // becoming `B: 100, A: 200`.
     const numericContract = (text) => {
       const value = String(text ?? '');
       const numberPattern = /(?<![\p{L}\p{N}_])[+\-−]?\d+(?:[.,'’\u00a0\u202f ]\d+)*(?:\s*[%°º])?(?![\p{L}\p{N}_])/gu;
+      const spanBoundary = (char) => char === '\n' || ',;!?|'.includes(char);
       const isLineLeadingOrdinal = (index) => {
         const lineStart = value.lastIndexOf('\n', index - 1) + 1;
         return /^[ \t]*\d{1,2}(?:[°º]|\.)\s/u.test(value.slice(lineStart));
       };
-      return [...value.matchAll(numberPattern)].map((match) => {
+      const numberEntries = [...value.matchAll(numberPattern)].map((match) => {
         const [token] = match;
         const unit = token.match(/[%°º]$/u)?.[0] || '';
         const number = unit ? token.slice(0, -unit.length) : token;
         const sign = number.match(/^[+\-−]/u)?.[0] || '';
         const unsigned = sign ? number.slice(sign.length) : number;
         const normalizedUnit = isLineLeadingOrdinal(match.index) ? '.' : unit;
-        return `${sign}${unsigned.replace(/[.,'’\u00a0\u202f ]/gu, '')}:${normalizedUnit}`;
+        return {
+          value: `${sign}${unsigned.replace(/[.,'’\u00a0\u202f ]/gu, '')}:${normalizedUnit}`,
+          index: match.index,
+        };
       });
+      const numberPatternForSpan = new RegExp(numberPattern.source, numberPattern.flags);
+      const associations = numberEntries.map(({ value: number, index }) => {
+        let start = index;
+        while (start > 0 && !spanBoundary(value[start - 1])) start -= 1;
+        let end = index;
+        while (end < value.length && !spanBoundary(value[end])) end += 1;
+        const span = value.slice(start, end);
+        const withoutNumbers = span
+          .replace(numberPatternForSpan, '#')
+          .replace(/\s+/gu, ' ')
+          .trim();
+        const anchors = [...withoutNumbers.matchAll(/(?<![\p{L}\p{N}_])[\p{Lu}][\p{L}\p{N}_’'-]*/gu)]
+          .map(([anchor]) => anchor.toLowerCase())
+          .join('|');
+        return { number, exactSpan: withoutNumbers.toLowerCase(), anchorSpan: anchors };
+      });
+      return {
+        values: numberEntries.map(({ value }) => value),
+        associations,
+      };
     };
-    if (JSON.stringify(numericContract(bodyText)) !== JSON.stringify(numericContract(joined))) {
+    const sourceNumericContract = numericContract(bodyText);
+    const joinedNumericContract = numericContract(joined);
+    if (JSON.stringify(sourceNumericContract.values) !== JSON.stringify(joinedNumericContract.values)) {
       return null;
     }
+    const compareNumericAssociations = (key) => {
+      const sourceBySpan = new Map();
+      const joinedBySpan = new Map();
+      for (const { number, ...association } of sourceNumericContract.associations) {
+        const span = association[key];
+        if (!span) continue;
+        if (!sourceBySpan.has(span)) sourceBySpan.set(span, []);
+        sourceBySpan.get(span).push(number);
+      }
+      for (const { number, ...association } of joinedNumericContract.associations) {
+        const span = association[key];
+        if (!span) continue;
+        if (!joinedBySpan.has(span)) joinedBySpan.set(span, []);
+        joinedBySpan.get(span).push(number);
+      }
+      const sourceKeys = [...sourceBySpan.keys()].sort();
+      const joinedKeys = [...joinedBySpan.keys()].sort();
+      if (sourceKeys.length === 0 || JSON.stringify(sourceKeys) !== JSON.stringify(joinedKeys)) return null;
+      return sourceKeys.every((span) => JSON.stringify(sourceBySpan.get(span)) === JSON.stringify(joinedBySpan.get(span)));
+    };
+    const exactAssociation = compareNumericAssociations('exactSpan');
+    const anchorAssociation = exactAssociation === null
+      ? compareNumericAssociations('anchorSpan')
+      : null;
+    if (exactAssociation === false || anchorAssociation === false) return null;
 
     // `balanceMarkdownMarkers` only repairs/validates bold `**` and separator
     // lines. Keep the full source-owned delimiter skeleton here as well, so a

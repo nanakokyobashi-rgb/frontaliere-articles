@@ -1124,6 +1124,11 @@ test('il joiner protegge prefissi Markdown annidati e lo scheletro delle pipe', 
     null,
     'la perdita di una pipe interna alla tabella non deve passare il guard',
   );
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('| colonna | valore |', '| colonna valore | |'))(source),
+    null,
+    'la redistribuzione del contenuto fra celle della tabella non deve passare il guard',
+  );
 });
 
 test('il joiner rifiuta un link Markdown alterato dopo la ricomposizione', async () => {
@@ -1303,6 +1308,40 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
   assert.ok(
     signedGroupedChunks.some((chunk) => chunk.includes('-12 345')),
     'il token numerico con segno e separatore non deve essere spezzato tra richieste',
+  );
+
+  const associationSource = 'A: 100, B: 200';
+  const associationTranslator = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  )(
+    (bodyText) => realChunker(bodyText, 50),
+    async (prompt) => ({ body1: prompt.replace(associationSource, 'B: 100, A: 200') }),
+    (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+  );
+  assert.equal(
+    await associationTranslator(associationSource, 'body1', (chunk) => chunk, 'test', 'de'),
+    null,
+    'un numero riassociato al soggetto sbagliato deve essere rifiutato anche con la stessa sequenza globale',
+  );
+});
+
+test('il chunker mantiene interi i tag HTML senza attributi', () => {
+  const source = 'Prima <span>testo importante</span> e <br> dopo altre parole.';
+  const chunks = buildChunker()(source, 3);
+  assert.ok(
+    chunks.some((chunk) => chunk.includes('<span>testo importante</span>')),
+    'un elemento HTML senza attributi non deve essere spezzato al suo interno',
+  );
+  assert.ok(
+    chunks.some((chunk) => chunk.includes('<br>')),
+    'un tag void senza attributi deve restare un atomo HTML',
   );
 });
 
