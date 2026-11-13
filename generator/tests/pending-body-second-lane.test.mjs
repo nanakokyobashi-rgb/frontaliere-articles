@@ -46,6 +46,7 @@ import { detectTruncation } from '../scripts/lib/article-factuality-gates.mjs';
 import {
   balanceMarkdownMarkers,
   codexCallDeadlineMs,
+  hasSameLineStructure,
   hasSameLineSkeleton,
   lineStructuralSignature,
   opaqueSpanSignature,
@@ -1099,6 +1100,51 @@ test('il joiner rifiuta testo perso dentro un chunk anche se la forma resta vali
   );
 });
 
+test('la guardia distingue URL bare con apostrofi e chiusure HTML mancanti', () => {
+  const bare = "Leggi https://example.test/O'Connor per i dettagli.";
+  assert.deepEqual(opaqueSpanSignature(bare), ["https://example.test/O'Connor"]);
+  assert.equal(
+    hasSameLineStructure(bare, "Lies https://example.test/O'Connor für die Details."),
+    true,
+  );
+  assert.equal(
+    hasSameLineStructure(bare, "Lies https://example.test/O'Changed für die Details."),
+    false,
+  );
+
+  const html = "Prima <a href=\"https://example.test/O'Connor\">anchor</a> dopo.";
+  assert.deepEqual(opaqueSpanSignature(html), ["https://example.test/O'Connor"]);
+  assert.equal(hasSameLineStructure(html, html.replace('anchor', 'Anker')), true);
+  assert.equal(hasSameLineStructure(html, html.replace('</a>', '')), false);
+});
+
+test('il contratto numerico ignora URL e code span source-owned', async () => {
+  const realChunker = buildChunker();
+  const makeTranslator = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  );
+  const source = 'Leggi [la fonte](https://example.com/123) e usa `456` per capire il dato.';
+  const translated = 'Read [the source](https://example.com/123) and use `456` to understand the figure.';
+  const translateInChunks = makeTranslator(
+    (bodyText) => realChunker(bodyText, 50),
+    async () => ({ body1: translated }),
+    (text) => String(text).trim().split(/\s+/u).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+    opaqueSpanSignature,
+  );
+
+  assert.equal(
+    await translateInChunks(source, 'body1', (chunk) => chunk, 'test-numeric', 'en'),
+    translated,
+  );
+});
+
 test('il joiner protegge prefissi Markdown annidati e lo scheletro delle pipe', async () => {
   const realChunker = buildChunker();
   const makeTranslator = (mutate) => {
@@ -1125,6 +1171,17 @@ test('il joiner protegge prefissi Markdown annidati e lo scheletro delle pipe', 
   ].join('\n');
 
   assert.equal(await makeTranslator((chunk) => chunk)(source), source);
+  const tableSource = '| Regione | Aliquota |';
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('| Regione | Aliquota |', '| Aliquota | Regione |'))(tableSource),
+    null,
+    'le colonne non devono poter essere scambiate quando il provider conserva i valori source-owned',
+  );
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('| Regione | Aliquota |', '| Region | Tax rate |'))(tableSource),
+    '| Region | Tax rate |',
+    'il testo delle celle deve poter essere tradotto senza perdere l’ordine delle colonne',
+  );
   assert.equal(
     await makeTranslator((chunk) => chunk.replace('> - ', '> '))(source),
     null,

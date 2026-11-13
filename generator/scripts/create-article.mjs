@@ -15702,12 +15702,20 @@ async function translateArticle(data) {
       const value = String(line ?? '');
       const pipes = [];
       const cells = [];
+      const rawCells = [];
       let cellStart = 0;
       const cellShape = (cell) => {
         const trimmed = cell.trim();
         if (!trimmed) return 'empty';
         if (/^:?-{3,}:?$/u.test(trimmed)) return 'separator';
-        return 'content';
+        // A cell's prose is translatable, but its source-owned atoms must stay
+        // attached to that column. Keeping this identity per cell closes the
+        // gap where a provider moves a URL, placeholder or other protected
+        // value to a different column while preserving the number of cells.
+        return {
+          kind: 'content',
+          opaque: opaqueSpanSignature(trimmed),
+        };
       };
       for (let cursor = 0; cursor < value.length; cursor += 1) {
         if (value[cursor] !== '|') continue;
@@ -15718,13 +15726,17 @@ async function translateArticle(data) {
         const escaped = slashCount % 2 === 1;
         pipes.push(escaped ? 'escaped' : 'raw');
         if (!escaped) {
-          cells.push(cellShape(value.slice(cellStart, cursor)));
+          const cell = value.slice(cellStart, cursor);
+          cells.push(cellShape(cell));
+          rawCells.push(cell.trim());
           cellStart = cursor + 1;
         }
       }
       if (!pipes.includes('raw')) return pipes;
-      cells.push(cellShape(value.slice(cellStart)));
-      return { pipes, cells };
+      const cell = value.slice(cellStart);
+      cells.push(cellShape(cell));
+      rawCells.push(cell.trim());
+      return { pipes, cells, rawCells };
     };
     const isLocalizedOrdinalLine = (sourceLine, translatedLine) => {
       const sourceOrdinal = String(sourceLine ?? '').match(/^(\s*)(\d{1,2})[°º]\s+/u);
@@ -15745,8 +15757,31 @@ async function translateArticle(data) {
         && !isLocalizedOrdinalLine(sourceLine, joinedLine)) {
         return null;
       }
-      if (JSON.stringify(pipeSkeleton(sourceLine)) !== JSON.stringify(pipeSkeleton(joinedLine))) {
+      const sourcePipe = pipeSkeleton(sourceLine);
+      const joinedPipe = pipeSkeleton(joinedLine);
+      const sourcePipeShape = sourcePipe && sourcePipe.rawCells
+        ? { pipes: sourcePipe.pipes, cells: sourcePipe.cells }
+        : sourcePipe;
+      const joinedPipeShape = joinedPipe && joinedPipe.rawCells
+        ? { pipes: joinedPipe.pipes, cells: joinedPipe.cells }
+        : joinedPipe;
+      if (JSON.stringify(sourcePipeShape) !== JSON.stringify(joinedPipeShape)) {
         return null;
+      }
+      if (sourcePipe?.rawCells && joinedPipe?.rawCells) {
+        const sourceCellPositions = new Map();
+        sourcePipe.rawCells.forEach((cell, cellIndex) => {
+          if (!sourceCellPositions.has(cell)) sourceCellPositions.set(cell, []);
+          sourceCellPositions.get(cell).push(cellIndex);
+        });
+        for (const [cellIndex, joinedCell] of joinedPipe.rawCells.entries()) {
+          const sourcePositions = sourceCellPositions.get(joinedCell);
+          // Exact source text is a source-owned identity only when the
+          // provider preserved it. If it did, an exact value must remain in
+          // its original column; translated prose is deliberately allowed to
+          // differ and is validated by the per-cell opaque contract above.
+          if (sourcePositions && !sourcePositions.includes(cellIndex)) return null;
+        }
       }
     }
 
@@ -16192,8 +16227,53 @@ async function translateArticle(data) {
     // source-owned capitalized anchor), keep the number attached to that span;
     // comparing only the global digit sequence would accept `A: 100, B: 200`
     // becoming `B: 100, A: 200`.
-    const numericContract = (text) => {
+    const maskSourceOwnedForNumbers = (text, codeSpans) => {
       const value = String(text ?? '');
+      const ranges = [];
+      const addOccurrences = (needle) => {
+        if (!needle) return;
+        let cursor = 0;
+        while (cursor < value.length) {
+          const start = value.indexOf(needle, cursor);
+          if (start < 0) break;
+          ranges.push({ start, end: start + needle.length });
+          cursor = start + needle.length;
+        }
+      };
+      for (const codeSpan of codeSpans || []) addOccurrences(codeSpan);
+
+      let lineStart = 0;
+      while (lineStart <= value.length) {
+        const lineEnd = value.indexOf('\n', lineStart);
+        const end = lineEnd === -1 ? value.length : lineEnd;
+        const line = value.slice(lineStart, end);
+        let search = 0;
+        for (const span of opaqueSpanSignature(line)) {
+          const start = line.indexOf(span, search);
+          if (start < 0) continue;
+          ranges.push({ start: lineStart + start, end: lineStart + start + span.length });
+          search = start + span.length;
+        }
+        if (lineEnd === -1) break;
+        lineStart = lineEnd + 1;
+      }
+
+      ranges.sort((left, right) => left.start - right.start || right.end - left.end);
+      let cursor = 0;
+      let masked = '';
+      for (const { start, end } of ranges) {
+        if (start < cursor) continue;
+        masked += value.slice(cursor, start) + ' '.repeat(end - start);
+        cursor = end;
+      }
+      return masked + value.slice(cursor);
+    };
+    const numericContract = (text, codeSpans = []) => {
+      // URLs and code spans are source-owned atoms, not numeric facts. Mask
+      // them before matching numbers so `/123` in a link target or ``123`` in
+      // code cannot create an association that a normal label translation
+      // makes impossible to prove.
+      const value = maskSourceOwnedForNumbers(text, codeSpans);
       const numberPattern = /(?<![\p{L}\p{N}_])[+\-−]?\d+(?:[.,'’\u00a0\u202f ]\d+)*(?:\s*[%°º])?(?![\p{L}\p{N}_])/gu;
       const spanBoundary = (char) => char === '\n' || ',;!?|'.includes(char);
       const isLineLeadingOrdinal = (match, token) => {
@@ -16246,8 +16326,8 @@ async function translateArticle(data) {
         associations,
       };
     };
-    const sourceNumericContract = numericContract(bodyText);
-    const joinedNumericContract = numericContract(joined);
+    const sourceNumericContract = numericContract(bodyText, sourceLinkContract.codeSpans);
+    const joinedNumericContract = numericContract(joined, joinedLinkContract.codeSpans);
     if (JSON.stringify(sourceNumericContract.values) !== JSON.stringify(joinedNumericContract.values)) {
       return null;
     }

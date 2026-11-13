@@ -29,7 +29,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { translateWithMyMemory } from './mymemory-translate.mjs';
 import { finalizeTranslatedText, maskProtectedTokens, normalizeGermanGenderForms, normalizeProtectedTokenSentinels } from './translation-glossary.mjs';
-import { stripTranslationSentinels, translationSentinelRegExp } from './translation-sentinels.mjs';
+import { translationSentinelRegExp } from './translation-sentinels.mjs';
 import { translateWithLocalOpusMt, localOpusMtEnabled } from './local-opus-mt.mjs';
 import { getKeyFactsHeading, getTldrHeading } from './ai-search-template.mjs';
 import { detectAiMetaResponse } from './ai-meta-response.mjs';
@@ -691,7 +691,8 @@ export function lineStructuralSignature(line) {
   return { kind: 'text', signature: `${signaturePrefix}text`, prefix: indent, text: candidate };
 }
 
-const INLINE_OPAQUE_RE = /(?:https?:\/\/[^\s<>"']+|www\.[^\s<>"']+|[\p{L}\p{N}._%+-]+@[\p{L}\p{N}.-]+\.[\p{L}]{2,})/giu;
+const URL_PREFIX_RE = /(?:https?:\/\/|www\.)/giu;
+const EMAIL_RE = /[\p{L}\p{N}._%+'-]+@[\p{L}\p{N}.-]+\.[\p{L}]{2,}/giu;
 const PLACEHOLDER_RE = /(?:\{\{[^{}\n]*\}\}|\$\{[^{}\n]*\}|\[\[[^\[\]\n]*\]\]|\{[^{}\n]*\}|%[A-Za-z0-9_]+)/gu;
 function isWholeTranslationSentinel(span) {
   const matches = String(span).match(translationSentinelRegExp());
@@ -741,10 +742,8 @@ export function numericDriftTokens(sourceText, translatedText) {
  * `translateWithMyMemory`; a null from that tier is a tier miss.
  */
 export function hasTranslatableLineText(line) {
-  const candidate = stripTranslationSentinels(lineStructuralSignature(line).text)
-    .replace(INLINE_OPAQUE_RE, '')
-    .replace(PLACEHOLDER_RE, '')
-    .trim();
+  const text = lineStructuralSignature(line).text;
+  const candidate = maskRanges(text, guardOpaqueSpanRanges(text)).trim();
   return /\p{L}/u.test(candidate);
 }
 
@@ -766,6 +765,67 @@ function hasSameOpaqueSpans(sourceLine, translatedLine) {
   const translated = opaqueSpanSignature(translatedLine);
   return source.length === translated.length
     && source.every((span, index) => span === translated[index]);
+}
+
+const HTML_VOID_TAGS = new Set([
+  'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link',
+  'meta', 'param', 'source', 'track', 'wbr',
+]);
+
+function htmlStructureSignature(text) {
+  const value = String(text ?? '');
+  const tokens = [];
+  const stack = [];
+  const errors = [];
+  const readCodeSpanEnd = (start) => {
+    if (value[start] !== '`') return null;
+    let markerLength = 0;
+    while (value[start + markerLength] === '`') markerLength += 1;
+    let end = start + markerLength;
+    while (end < value.length) {
+      if (value[end] !== '`') {
+        end += 1;
+        continue;
+      }
+      let runEnd = end + 1;
+      while (value[runEnd] === '`') runEnd += 1;
+      if (runEnd - end === markerLength) return runEnd;
+      end = runEnd;
+    }
+    return null;
+  };
+
+  for (let cursor = 0; cursor < value.length; cursor += 1) {
+    const codeEnd = readCodeSpanEnd(cursor);
+    if (codeEnd !== null) {
+      cursor = codeEnd - 1;
+      continue;
+    }
+    if (value[cursor] !== '<') continue;
+    const tag = readHtmlTagEnd(value, cursor);
+    if (tag === null) {
+      const possibleName = value.slice(cursor + 1).match(/^\/?([A-Za-z][A-Za-z0-9:_-]*)/u);
+      if (possibleName) errors.push(`unclosed:${possibleName[1].toLowerCase()}`);
+      continue;
+    }
+    if (tag.comment) {
+      cursor = tag.end - 1;
+      continue;
+    }
+    const raw = value.slice(cursor, tag.end);
+    const selfClosing = !tag.closing
+      && (HTML_VOID_TAGS.has(tag.name) || /\/\s*>$/u.test(raw));
+    tokens.push(`${tag.closing ? 'close' : 'open'}:${tag.name}${selfClosing ? '/self' : ''}`);
+    if (tag.closing) {
+      if (stack.at(-1) !== tag.name) errors.push(`unexpected-close:${tag.name}`);
+      else stack.pop();
+    } else if (!selfClosing) {
+      stack.push(tag.name);
+    }
+    cursor = tag.end - 1;
+  }
+  for (const name of stack) errors.push(`unclosed:${name}`);
+  return { tokens, errors };
 }
 
 function isLocalizedOrdinalLine(sourceLine, translatedLine) {
@@ -792,6 +852,13 @@ export function hasSameLineSkeleton(sourceText, translatedText) {
 }
 
 export function hasSameLineStructure(sourceText, translatedText) {
+  const sourceHtml = htmlStructureSignature(sourceText);
+  const translatedHtml = htmlStructureSignature(translatedText);
+  if (sourceHtml.errors.length > 0
+    || translatedHtml.errors.length > 0
+    || JSON.stringify(sourceHtml.tokens) !== JSON.stringify(translatedHtml.tokens)) {
+    return false;
+  }
   const sourceLines = normalizeStructuredBlock(sourceText).split('\n');
   const translatedLines = normalizeStructuredBlock(translatedText).split('\n');
   return sourceLines.length === translatedLines.length
@@ -1018,18 +1085,165 @@ function spanRanges(text, source) {
   }));
 }
 
+function readHtmlTagEnd(text, start) {
+  if (text[start] !== '<') return null;
+  if (text.startsWith('<!--', start)) {
+    const commentEnd = text.indexOf('-->', start + 4);
+    return commentEnd === -1 ? null : { end: commentEnd + 3, comment: true };
+  }
+  const closing = text[start + 1] === '/';
+  const nameStart = start + (closing ? 2 : 1);
+  const nameMatch = text.slice(nameStart).match(/^([A-Za-z][A-Za-z0-9:_-]*)/u);
+  if (!nameMatch) return null;
+  const nameEnd = nameStart + nameMatch[0].length;
+  // Markdown autolinks such as `<https://example.test>` are not HTML tags.
+  if (text[nameEnd] !== '>' && text[nameEnd] !== '/' && !/[\s]/u.test(text[nameEnd] || '')) {
+    return null;
+  }
+  let quote = null;
+  for (let cursor = nameEnd; cursor < text.length; cursor += 1) {
+    const char = text[cursor];
+    if (quote !== null) {
+      if (char === quote) quote = null;
+      continue;
+    }
+    if (char === '"' || char === "'") {
+      quote = char;
+    } else if (char === '>') {
+      return {
+        end: cursor + 1,
+        comment: false,
+        name: nameMatch[1].toLowerCase(),
+        closing,
+      };
+    }
+  }
+  return null;
+}
+
+function collectInlineOpaqueRanges(text, start = 0, end = String(text).length) {
+  const value = String(text);
+  const ranges = [];
+  const segment = value.slice(start, end);
+  for (const match of segment.matchAll(URL_PREFIX_RE)) {
+    const urlStart = start + match.index;
+    const previous = value[urlStart - 1];
+    if (previous && /[\p{L}\p{N}_]/u.test(previous)) continue;
+    let urlEnd = urlStart + match[0].length;
+    while (urlEnd < end) {
+      const char = value[urlEnd];
+      if (/\s|[<>"]/u.test(char)) break;
+      // An apostrophe is valid inside a bare URL (`O'Connor`) but an ASCII
+      // quote immediately before a boundary is the surrounding prose quote.
+      if (char === "'" && (!value[urlEnd + 1] || /\s|[<>"]/u.test(value[urlEnd + 1]))) break;
+      urlEnd += 1;
+    }
+    if (urlEnd > urlStart + match[0].length) ranges.push({ start: urlStart, end: urlEnd });
+  }
+  for (const match of segment.matchAll(EMAIL_RE)) {
+    ranges.push({
+      start: start + match.index,
+      end: start + match.index + match[0].length,
+    });
+  }
+  return ranges;
+}
+
+function collectHtmlAttributeOpaqueRanges(text, tagStart, tagEnd) {
+  const value = String(text);
+  if (value.startsWith('<!--', tagStart)) return [];
+  const closing = value[tagStart + 1] === '/';
+  if (closing) return [];
+  const nameStart = tagStart + 1;
+  const nameMatch = value.slice(nameStart).match(/^([A-Za-z][A-Za-z0-9:_-]*)/u);
+  if (!nameMatch) return [];
+  let cursor = nameStart + nameMatch[0].length;
+  const ranges = [];
+  while (cursor < tagEnd - 1) {
+    while (cursor < tagEnd - 1 && /\s/u.test(value[cursor])) cursor += 1;
+    if (cursor >= tagEnd - 1 || value[cursor] === '/' || value[cursor] === '>') break;
+    const attributeStart = cursor;
+    while (cursor < tagEnd - 1 && !/[\s=/>]/u.test(value[cursor])) cursor += 1;
+    if (cursor === attributeStart) {
+      cursor += 1;
+      continue;
+    }
+    while (cursor < tagEnd - 1 && /\s/u.test(value[cursor])) cursor += 1;
+    if (value[cursor] !== '=') continue;
+    cursor += 1;
+    while (cursor < tagEnd - 1 && /\s/u.test(value[cursor])) cursor += 1;
+    let valueStart = cursor;
+    let valueEnd = cursor;
+    const quote = value[cursor] === '"' || value[cursor] === "'" ? value[cursor] : '';
+    if (quote) {
+      valueStart = cursor + 1;
+      valueEnd = valueStart;
+      while (valueEnd < tagEnd - 1 && value[valueEnd] !== quote) valueEnd += 1;
+      cursor = valueEnd < tagEnd - 1 ? valueEnd + 1 : valueEnd;
+    } else {
+      while (valueEnd < tagEnd - 1 && !/[\s>]/u.test(value[valueEnd])) valueEnd += 1;
+      cursor = valueEnd;
+    }
+    ranges.push(...collectInlineOpaqueRanges(value, valueStart, valueEnd));
+  }
+  return ranges;
+}
+
+function mergeRanges(ranges) {
+  const sorted = ranges
+    .filter(({ start, end }) => Number.isInteger(start) && end > start)
+    .sort((left, right) => left.start - right.start || right.end - left.end);
+  const merged = [];
+  for (const range of sorted) {
+    const previous = merged.at(-1);
+    if (previous && range.start <= previous.end) {
+      previous.end = Math.max(previous.end, range.end);
+    } else {
+      merged.push({ ...range });
+    }
+  }
+  return merged;
+}
+
+function maskRanges(text, ranges) {
+  const value = String(text ?? '');
+  let cursor = 0;
+  let masked = '';
+  for (const { start, end } of ranges) {
+    if (start < cursor) continue;
+    masked += value.slice(cursor, start) + ' '.repeat(end - start);
+    cursor = end;
+  }
+  return masked + value.slice(cursor);
+}
+
+function sourceOwnedSpanRanges(text, { includeNumbers = false } = {}) {
+  const value = String(text ?? '');
+  const ranges = [
+    ...spanRanges(value, PLACEHOLDER_RE.source),
+    ...spanRanges(value, translationSentinelRegExp().source),
+  ];
+  let segmentStart = 0;
+  for (let cursor = 0; cursor < value.length; cursor += 1) {
+    if (value[cursor] !== '<') continue;
+    const tag = readHtmlTagEnd(value, cursor);
+    if (tag === null) continue;
+    ranges.push(...collectInlineOpaqueRanges(value, segmentStart, cursor));
+    if (!tag.comment) ranges.push(...collectHtmlAttributeOpaqueRanges(value, cursor, tag.end));
+    segmentStart = tag.end;
+    cursor = tag.end - 1;
+  }
+  ranges.push(...collectInlineOpaqueRanges(value, segmentStart, value.length));
+  if (includeNumbers) ranges.push(...spanRanges(value, NUMERIC_CHUNK_RE.source));
+  return mergeRanges(ranges);
+}
+
 function guardOpaqueSpanRanges(text) {
-  return spanRanges(
-    text,
-    `${INLINE_OPAQUE_RE.source}|${PLACEHOLDER_RE.source}|${translationSentinelRegExp().source}`,
-  );
+  return sourceOwnedSpanRanges(text);
 }
 
 function chunkAtomicSpanRanges(text) {
-  return spanRanges(
-    text,
-    `${INLINE_OPAQUE_RE.source}|${PLACEHOLDER_RE.source}|${NUMERIC_CHUNK_RE.source}|${translationSentinelRegExp().source}`,
-  );
+  return sourceOwnedSpanRanges(text, { includeNumbers: true });
 }
 
 function _splitOversizedSegment(text, maxChars, separatorAfter) {
