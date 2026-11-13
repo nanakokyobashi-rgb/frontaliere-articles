@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T22:45:08.796Z",
-  "contentHash": "ae79d138fc388aeb056b08c858cc56e33529aa11d2046b4d0e08bf41c7332e0f",
+  "updatedAt": "2026-11-13T02:47:52.804Z",
+  "contentHash": "61255c8f40e5e1aa4ee2b417dfc4e5ffd56277b8c5db7a6167ad68143320a013",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "70",
+          "value": "65",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,64 +38,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Sing along! – Workshop with Christian Klucker",
-              "detail": "Pontresina",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sing-along-workshop-with-christian-klucker/"
+              "label": "Offener Treff im \"Il Fuorn\", La Punt Chamues-ch",
+              "detail": "La Punt Chamues-ch",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/la-punt-chamues-ch/offener-treff-im-il-fuorn-la-punt-chamues-ch_A1DWMb3"
             },
             {
-              "label": "Sing mit! – Workshop mit Christian Klucker",
-              "detail": "Hotel Maistra 160, Pontresina",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/events/music/pontresina/sing-along-workshop-with-christian-klucker_AvfucA7"
+              "label": "Begegnungs- und Feierabendtreff in Cumbel",
+              "detail": "Begegnungsraum Posta Veglia",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/cumbel/begegnungs-und-feierabendtreff-in-cumbel_A5QVLYa"
             },
             {
-              "label": "Seniorentanznachmittag",
-              "detail": "Mehrzweckhalle Tircal",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/domat-ems/seniorentanznachmittag_AYadQ9Z"
+              "label": "Bergflohmarkt Chur",
+              "detail": "Kirchgemeindehaus Titthof, Chur",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bergflohmarkt-chur/"
             },
             {
-              "label": "Seniorentanznachmittag",
+              "label": "Erzählnacht \"Stimmen\"",
+              "detail": "Thusis",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-stimmen/"
+            },
+            {
+              "label": "Notte del racconto",
+              "detail": "Brusio",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/notte-del-racconto/"
+            },
+            {
+              "label": "100. Geburtstag Pfarrkirchenorgel",
               "detail": "Domat/Ems",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/seniorentanznachmittag/"
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-geburtstag-pfarrkirchenorgel/"
             },
             {
-              "label": "Visita guidata e degustazione presso la Cantina Davaz",
-              "detail": "7306 Fläsch, Fläsch",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visita-guidata-e-degustazione-presso-la-cantina-davaz/"
+              "label": "Duo con Brezza: Barbara Godenzi ed Astrid Schumacher",
+              "detail": "Nuovo Monastero Santa Maria, Poschiavo",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/evenements/musique/poschiavo/duo-con-brezza-barbara-godenzi-et-astrid-schumacher_AesEKYb"
             },
             {
-              "label": "Zeitlos - Eine etwas andere Kirchenführung",
-              "detail": "Scuol",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/scuol/zeitlos-eine-etwas-andere-kirchenfuehrung_A8nPLQP"
+              "label": "zuoz globe sounds - WALDHAUS VARIATIONEN",
+              "detail": "Lyceum Alpinum Zuoz, Zuoz",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuoz/zuoz-globe-sounds-waldhaus-variationen_ACaxdFQ"
             },
             {
-              "label": "Führung im Kulturarchiv Oberengadin, Chesa Planta Zuoz",
-              "detail": "Chesa Planta, Kulturarchiv Oberengadin in Zuoz, Zuoz",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/events/this-that/zuoz/guided-tour-of-the-upper-engadine-cultural-archive-chesa-planta-zuoz_AMpH1ph"
+              "label": "Reena Krishnaraja",
+              "detail": "Klosters",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reena-krishnaraja-2/"
             },
             {
-              "label": "Kochkurs Brot & Butter - Vom Sauerteig bis zur selbstgemachten Butter",
-              "detail": "Chur",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kochkurs-brot-butter-vom-sauerteig-bis-zur-selbstgemachten-butter/"
-            },
-            {
-              "label": "Konfirmationsunterricht",
-              "detail": "Evang.-ref. Kirchgemeindehaus Zizers, Zizers",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zizers/konfirmationsunterricht_ADu8Hmq"
-            },
-            {
-              "label": "Krimi Dinner",
-              "detail": "Valbella Resort, Vaz/Obervaz",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/krimi-dinner/"
+              "label": "Fitness- und Yogakurse",
+              "detail": "Hotel Schweizerhof — in corso, ultimo giorno: 30 novembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -171,7 +171,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "en": {
       "canton": "GR",
@@ -181,7 +181,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "70",
+          "value": "65",
           "note": "from the site’s events calendar"
         }
       ],
@@ -192,64 +192,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Sing along! – Workshop with Christian Klucker",
-              "detail": "Pontresina",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sing-along-workshop-with-christian-klucker/"
+              "label": "Offener Treff im \"The Fuorn\", The Punt Chamues-ch",
+              "detail": "La Punt Chamues-ch",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/la-punt-chamues-ch/offener-treff-im-il-fuorn-la-punt-chamues-ch_A1DWMb3"
             },
             {
-              "label": "Sing along! – Workshop with Christian Klucker",
-              "detail": "Hotel Maistra 160, Pontresina",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/events/music/pontresina/sing-along-workshop-with-christian-klucker_AvfucA7"
+              "label": "Begegnungs- und Feierabendtreff in Cumbel",
+              "detail": "Begegnungsraum Posta Veglia",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/cumbel/begegnungs-und-feierabendtreff-in-cumbel_A5QVLYa"
             },
             {
-              "label": "Seniorentanznachmittag",
-              "detail": "Mehrzweckhalle Tircal",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/domat-ems/seniorentanznachmittag_AYadQ9Z"
+              "label": "Bergflohmarkt Chur",
+              "detail": "Kirchgemeindehaus Titthof, Chur",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bergflohmarkt-chur/"
             },
             {
-              "label": "Seniorentanznachmittag",
+              "label": "Erzählnacht \"Stimmen\"",
+              "detail": "Thusis",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-stimmen/"
+            },
+            {
+              "label": "Notte del racconto",
+              "detail": "Brusio",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/notte-del-racconto/"
+            },
+            {
+              "label": "100. Geburtstag Pfarrkirchenorgel",
               "detail": "Domat/Ems",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/seniorentanznachmittag/"
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-geburtstag-pfarrkirchenorgel/"
             },
             {
-              "label": "Guided tour and tasting at the Davaz Winery",
-              "detail": "7306 Fläsch, Fläsch",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visita-guidata-e-degustazione-presso-la-cantina-davaz/"
+              "label": "Duo con Brezza: Barbara Godenzi and Astrid Schumacher",
+              "detail": "Nuovo Monastero Santa Maria, Poschiavo",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/evenements/musique/poschiavo/duo-con-brezza-barbara-godenzi-et-astrid-schumacher_AesEKYb"
             },
             {
-              "label": "Timeless - a different kind of church tour",
-              "detail": "Scuol",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/scuol/zeitlos-eine-etwas-andere-kirchenfuehrung_A8nPLQP"
+              "label": "zuoz globe sounds - WALDHAUS VARIATIONEN",
+              "detail": "Lyceum Alpinum Zuoz, Zuoz",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuoz/zuoz-globe-sounds-waldhaus-variationen_ACaxdFQ"
             },
             {
-              "label": "Guided tour of the Upper Engadine Cultural Archive, Chesa Planta Zuoz",
-              "detail": "Chesa Planta, Kulturarchiv Oberengadin in Zuoz, Zuoz",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/events/this-that/zuoz/guided-tour-of-the-upper-engadine-cultural-archive-chesa-planta-zuoz_AMpH1ph"
+              "label": "Reena Krishnaraja",
+              "detail": "Klosters",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reena-krishnaraja-2/"
             },
             {
-              "label": "Kochkurs Brot & Butter - Vom Sauerteig bis zur selbstgemachten Butter",
-              "detail": "Chur",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kochkurs-brot-butter-vom-sauerteig-bis-zur-selbstgemachten-butter/"
-            },
-            {
-              "label": "Konfirmationsunterricht",
-              "detail": "Evang.-ref. Kirchgemeindehaus Zizers, Zizers",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zizers/konfirmationsunterricht_ADu8Hmq"
-            },
-            {
-              "label": "Krimi Dinner",
-              "detail": "Valbella Resort, Vaz/Obervaz",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/krimi-dinner/"
+              "label": "Fitness and yoga classes",
+              "detail": "Hotel Schweizerhof — ongoing, last day: 30 November 2026",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -325,7 +325,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "de": {
       "canton": "GR",
@@ -335,7 +335,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "70",
+          "value": "65",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -346,64 +346,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Sing mit! – Workshop mit Christian Klucker",
-              "detail": "Pontresina",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sing-along-workshop-with-christian-klucker/"
+              "label": "Offener Treff im „Il Fuorn“, La Punt Chamues-ch",
+              "detail": "La Punt Chamues-ch",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/la-punt-chamues-ch/offener-treff-im-il-fuorn-la-punt-chamues-ch_A1DWMb3"
             },
             {
-              "label": "Sing mit! – Workshop mit Christian Klucker",
-              "detail": "Hotel Maistra 160, Pontresina",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/events/music/pontresina/sing-along-workshop-with-christian-klucker_AvfucA7"
+              "label": "Begegnungs- und Feierabendtreff in Cumbel",
+              "detail": "Begegnungsraum Posta Veglia",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/cumbel/begegnungs-und-feierabendtreff-in-cumbel_A5QVLYa"
             },
             {
-              "label": "Seniorentanznachmittag",
-              "detail": "Mehrzweckhalle Tircal",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/domat-ems/seniorentanznachmittag_AYadQ9Z"
+              "label": "Bergflohmarkt Chur",
+              "detail": "Kirchgemeindehaus Titthof, Chur",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bergflohmarkt-chur/"
             },
             {
-              "label": "Seniorentanznachmittag",
+              "label": "Erzählnacht \"Stimmen\"",
+              "detail": "Thusis",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-stimmen/"
+            },
+            {
+              "label": "Notte del racconto",
+              "detail": "Brusio",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/notte-del-racconto/"
+            },
+            {
+              "label": "100. Geburtstag Pfarrkirchenorgel",
               "detail": "Domat/Ems",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/seniorentanznachmittag/"
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-geburtstag-pfarrkirchenorgel/"
             },
             {
-              "label": "Führung und Degustation im Weingut Davaz",
-              "detail": "7306 Fläsch, Fläsch",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visita-guidata-e-degustazione-presso-la-cantina-davaz/"
+              "label": "Duo con Brezza: Barbara Godenzi und Astrid Schumacher",
+              "detail": "Nuovo Monastero Santa Maria, Poschiavo",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/evenements/musique/poschiavo/duo-con-brezza-barbara-godenzi-et-astrid-schumacher_AesEKYb"
             },
             {
-              "label": "Zeitlos - Eine etwas andere Kirchenführung",
-              "detail": "Scuol",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/scuol/zeitlos-eine-etwas-andere-kirchenfuehrung_A8nPLQP"
+              "label": "zuoz globe sounds - WALDHAUS VARIATIONEN",
+              "detail": "Lyceum Alpinum Zuoz, Zuoz",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuoz/zuoz-globe-sounds-waldhaus-variationen_ACaxdFQ"
             },
             {
-              "label": "Führung im Kulturarchiv Oberengadin, Chesa Planta Zuoz",
-              "detail": "Chesa Planta, Kulturarchiv Oberengadin in Zuoz, Zuoz",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/events/this-that/zuoz/guided-tour-of-the-upper-engadine-cultural-archive-chesa-planta-zuoz_AMpH1ph"
+              "label": "Reena Krishnaraja",
+              "detail": "Klosters",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reena-krishnaraja-2/"
             },
             {
-              "label": "Kochkurs Brot & Butter - Vom Sauerteig bis zur selbstgemachten Butter",
-              "detail": "Chur",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kochkurs-brot-butter-vom-sauerteig-bis-zur-selbstgemachten-butter/"
-            },
-            {
-              "label": "Konfirmationsunterricht",
-              "detail": "Evang.-ref. Kirchgemeindehaus Zizers, Zizers",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zizers/konfirmationsunterricht_ADu8Hmq"
-            },
-            {
-              "label": "Krimi Dinner",
-              "detail": "Valbella Resort, Vaz/Obervaz",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/krimi-dinner/"
+              "label": "Fitness- und Yogakurse",
+              "detail": "Hotel Schweizerhof — läuft, letzter Tag: 30. November 2026",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -479,7 +479,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "fr": {
       "canton": "GR",
@@ -489,7 +489,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "70",
+          "value": "65",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -500,64 +500,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Sing along! – Workshop with Christian Klucker",
-              "detail": "Pontresina",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sing-along-workshop-with-christian-klucker/"
+              "label": "Offener Treff im « Il Fuorn », La Punt Chamues-ch",
+              "detail": "La Punt Chamues-ch",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/la-punt-chamues-ch/offener-treff-im-il-fuorn-la-punt-chamues-ch_A1DWMb3"
             },
             {
-              "label": "Sing mit! – Workshop mit Christian Klucker",
-              "detail": "Hotel Maistra 160, Pontresina",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/events/music/pontresina/sing-along-workshop-with-christian-klucker_AvfucA7"
+              "label": "Begegnungs- und Feierabendtreff in Cumbel",
+              "detail": "Begegnungsraum Posta Veglia",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/cumbel/begegnungs-und-feierabendtreff-in-cumbel_A5QVLYa"
             },
             {
-              "label": "Seniorentanznachmittag",
-              "detail": "Mehrzweckhalle Tircal",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/domat-ems/seniorentanznachmittag_AYadQ9Z"
+              "label": "Bergflohmarkt Chur",
+              "detail": "Kirchgemeindehaus Titthof, Chur",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bergflohmarkt-chur/"
             },
             {
-              "label": "Seniorentanznachmittag",
+              "label": "Erzählnacht \"Stimmen\"",
+              "detail": "Thusis",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-stimmen/"
+            },
+            {
+              "label": "Notte del racconto",
+              "detail": "Brusio",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/notte-del-racconto/"
+            },
+            {
+              "label": "100. Geburtstag Pfarrkirchenorgel",
               "detail": "Domat/Ems",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/seniorentanznachmittag/"
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-geburtstag-pfarrkirchenorgel/"
             },
             {
-              "label": "Visite guidée et dégustation au domaine viticole Davaz",
-              "detail": "7306 Fläsch, Fläsch",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visita-guidata-e-degustazione-presso-la-cantina-davaz/"
+              "label": "Duo con Brezza : Barbara Godenzi et Astrid Schumacher",
+              "detail": "Nuovo Monastero Santa Maria, Poschiavo",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/evenements/musique/poschiavo/duo-con-brezza-barbara-godenzi-et-astrid-schumacher_AesEKYb"
             },
             {
-              "label": "Zeitlos - Eine etwas andere Kirchenführung",
-              "detail": "Scuol",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/evenements/scuol/zeitlos-eine-etwas-andere-kirchenfuehrung_A8nPLQP"
+              "label": "zuoz globe sounds - WALDHAUS VARIATIONEN",
+              "detail": "Lyceum Alpinum Zuoz, Zuoz",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuoz/zuoz-globe-sounds-waldhaus-variationen_ACaxdFQ"
             },
             {
-              "label": "Führung im Kulturarchiv Oberengadin, Chesa Planta Zuoz",
-              "detail": "Chesa Planta, Kulturarchiv Oberengadin in Zuoz, Zuoz",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/events/this-that/zuoz/guided-tour-of-the-upper-engadine-cultural-archive-chesa-planta-zuoz_AMpH1ph"
+              "label": "Reena Krishnaraja",
+              "detail": "Klosters",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reena-krishnaraja-2/"
             },
             {
-              "label": "Kochkurs Brot & Butter - Vom Sauerteig bis zur selbstgemachten Butter",
-              "detail": "Chur",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kochkurs-brot-butter-vom-sauerteig-bis-zur-selbstgemachten-butter/"
-            },
-            {
-              "label": "Confirmations du territoire",
-              "detail": "Evang.-ref. Kirchgemeindehaus Zizers, Zizers",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zizers/konfirmationsunterricht_ADu8Hmq"
-            },
-            {
-              "label": "Krimi Dinner",
-              "detail": "Valbella Resort, Vaz/Obervaz",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/krimi-dinner/"
+              "label": "Fitness- und Yogakurse",
+              "detail": "Hotel Schweizerhof — en cours, dernier jour : 30 novembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -633,7 +633,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     }
   }
 }

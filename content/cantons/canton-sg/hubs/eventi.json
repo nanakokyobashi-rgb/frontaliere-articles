@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T22:45:08.796Z",
-  "contentHash": "b18b2eb5706f3e9ab0b684057153b5325cc52f9da584b046706c923d63a2c551",
+  "updatedAt": "2026-11-13T02:47:52.804Z",
+  "contentHash": "93d7c53ec92ff7c51d43de0ea69a9b233e7eb42eea83d145060852c2be8ede10",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "81",
+          "value": "77",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Mütter-Väterberatung",
-              "detail": "Familienzentrum, Uzwil",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/uzwil/gemeinde/muetter-vaeterberatung_AyfjpPk"
+              "label": "Naturjodel und Jodellieder",
+              "detail": "Klangwelt Toggenburg",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-und-jodellieder-1/"
             },
             {
-              "label": "Meditation als Möglichkeit für inneres Gleichgewicht - bequem von zuhause",
-              "detail": "Uzwil",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/uzwil/meditation-als-moeglichkeit-fuer-inneres-gleichgewicht-bequem-von-zuhause_At5NVkW"
+              "label": "SCHLAGER BOOM",
+              "detail": "Lichtensteig",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlager-boom/"
+            },
+            {
+              "label": "A-Live - 25 Years Best Of (Limited Shows)",
+              "detail": "Dömli, Ebnat-Kappel",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/a-live-25-years-best-of-limited-shows_AhbGaDm"
+            },
+            {
+              "label": "Fabio Landert - Die verbotene Frucht",
+              "detail": "Wil SG",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fabio-landert-die-verbotene-frucht-12/"
+            },
+            {
+              "label": "My mUSicAl journey",
+              "detail": "Niederbüren",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/my-musical-journey/"
+            },
+            {
+              "label": "Pub Quiz",
+              "detail": "Gallus Pub",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/st-gallen/pub-quiz_AF9fHWX"
             },
             {
               "label": "Berufsmesse Zürichsee-Linth",
-              "detail": "Eschenbach SG, Eschenbach (SG)",
-              "date": "2026-11-12",
+              "detail": "Eschenbach SG, Eschenbach (SG) — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/berufsmesse-zuerichsee-linth/"
             },
             {
-              "label": "REXERSIZE. TRY OUT PREMIERE. FlORIAN REXER SOLO PROGRAMM.",
-              "detail": "Krone Mosnang, Mosnang",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rexersize-try-out-premiere-florian-rexer-solo-programm/"
-            },
-            {
-              "label": "Das Pubquiz im Kulturmuseum: Kein bisschen primitiv",
-              "detail": "St. Gallen",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-pubquiz-im-kulturmuseum-kein-bisschen-primitiv/"
-            },
-            {
-              "label": "Music & Dine with Jimi Hendrix Vibes by Asep Stone",
-              "detail": "Restaurant JAKOB",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/music-und-dine-with-jimi-hendrix-vibes-by-asep-stone_A1f9cXw"
-            },
-            {
               "label": "Katharina Knie auf dem Chabisplatz",
-              "detail": "Rorschach",
-              "date": "2026-11-12",
+              "detail": "Rorschach — in corso, ultimo giorno: 22 novembre 2026",
+              "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/katharina-knie-auf-dem-chabisplatz/"
             },
             {
               "label": "Wild-Buffet",
               "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann — in corso, ultimo giorno: 21 novembre 2026",
-              "date": "2026-11-12",
+              "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-buffet-2/"
             },
             {
-              "label": "Fokusmodul – Meisner-Workout",
-              "detail": "Switzerland Innovation Park Ost — in corso, ultimo giorno: 12 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
-            },
-            {
-              "label": "Naturjodel und Jodellieder",
-              "detail": "Klangwelt Toggenburg",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-und-jodellieder-1/"
+              "label": "Naturena: Adventsdekoration mit Schwemmholz",
+              "detail": "Oberschan, Wartau",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturena-adventsdekoration-mit-schwemmholz/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "en": {
       "canton": "SG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "81",
+          "value": "77",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,64 +138,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Mütter-Väterberatung",
-              "detail": "Familienzentrum, Uzwil",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/uzwil/gemeinde/muetter-vaeterberatung_AyfjpPk"
+              "label": "Naturjodel und Jodellieder",
+              "detail": "Klangwelt Toggenburg",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-und-jodellieder-1/"
             },
             {
-              "label": "Meditation as a way to achieve inner balance – comfortably from home",
-              "detail": "Uzwil",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/uzwil/meditation-als-moeglichkeit-fuer-inneres-gleichgewicht-bequem-von-zuhause_At5NVkW"
+              "label": "SCHLAGER BOOM",
+              "detail": "Lichtensteig",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlager-boom/"
+            },
+            {
+              "label": "A-Live - 25 Years Best Of (Limited Shows)",
+              "detail": "Dömli, Ebnat-Kappel",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/a-live-25-years-best-of-limited-shows_AhbGaDm"
+            },
+            {
+              "label": "Fabio Landert - Die verbotene Frucht",
+              "detail": "Wil SG",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fabio-landert-die-verbotene-frucht-12/"
+            },
+            {
+              "label": "My mUSicAl journey",
+              "detail": "Niederbüren",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/my-musical-journey/"
+            },
+            {
+              "label": "Pub Quiz",
+              "detail": "Gallus Pub",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/st-gallen/pub-quiz_AF9fHWX"
             },
             {
               "label": "Berufsmesse Zürichsee-Linth",
-              "detail": "Eschenbach SG, Eschenbach (SG)",
-              "date": "2026-11-12",
+              "detail": "Eschenbach SG, Eschenbach (SG) — ongoing, last day: 14 November 2026",
+              "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/berufsmesse-zuerichsee-linth/"
             },
             {
-              "label": "REXERSIZE. TRY OUT PREMIERE. FlORIAN REXER SOLO PROGRAMM.",
-              "detail": "Krone Mosnang, Mosnang",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rexersize-try-out-premiere-florian-rexer-solo-programm/"
-            },
-            {
-              "label": "Das Pubquiz im Kulturmuseum: Kein bisschen primitiv",
-              "detail": "St. Gallen",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-pubquiz-im-kulturmuseum-kein-bisschen-primitiv/"
-            },
-            {
-              "label": "Music & Dine with Jimi Hendrix Vibes by Asep Stone",
-              "detail": "Restaurant JAKOB",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/music-und-dine-with-jimi-hendrix-vibes-by-asep-stone_A1f9cXw"
-            },
-            {
               "label": "Katharina Knie auf dem Chabisplatz",
-              "detail": "Rorschach",
-              "date": "2026-11-12",
+              "detail": "Rorschach — ongoing, last day: 22 November 2026",
+              "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/katharina-knie-auf-dem-chabisplatz/"
             },
             {
               "label": "Wild-Buffet",
               "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann — ongoing, last day: 21 November 2026",
-              "date": "2026-11-12",
+              "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-buffet-2/"
             },
             {
-              "label": "Fokusmodul-Meisner -ork",
-              "detail": "Switzerland Innovation Park Ost — ongoing, last day: 12 November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
-            },
-            {
-              "label": "Naturjodel und Jodellieder",
-              "detail": "Klangwelt Toggenburg",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-und-jodellieder-1/"
+              "label": "Naturena: Adventsdekoration mit Schwemmholz",
+              "detail": "Oberschan, Wartau",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturena-adventsdekoration-mit-schwemmholz/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "de": {
       "canton": "SG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "81",
+          "value": "77",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,64 +243,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Mütter-Väterberatung",
-              "detail": "Familienzentrum, Uzwil",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/uzwil/gemeinde/muetter-vaeterberatung_AyfjpPk"
+              "label": "Naturjodel und Jodellieder",
+              "detail": "Klangwelt Toggenburg",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-und-jodellieder-1/"
             },
             {
-              "label": "Meditation als Möglichkeit für inneres Gleichgewicht – bequem von zuhause aus",
-              "detail": "Uzwil",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/uzwil/meditation-als-moeglichkeit-fuer-inneres-gleichgewicht-bequem-von-zuhause_At5NVkW"
+              "label": "SCHLAGER BOOM",
+              "detail": "Lichtensteig",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlager-boom/"
+            },
+            {
+              "label": "A-Live - 25 Years Best Of (Limited Shows)",
+              "detail": "Dömli, Ebnat-Kappel",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/a-live-25-years-best-of-limited-shows_AhbGaDm"
+            },
+            {
+              "label": "Fabio Landert - Die verbotene Frucht",
+              "detail": "Wil SG",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fabio-landert-die-verbotene-frucht-12/"
+            },
+            {
+              "label": "My mUSicAl journey",
+              "detail": "Niederbüren",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/my-musical-journey/"
+            },
+            {
+              "label": "Pub Quiz",
+              "detail": "Gallus Pub",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/st-gallen/pub-quiz_AF9fHWX"
             },
             {
               "label": "Berufsmesse Zürichsee-Linth",
-              "detail": "Eschenbach SG, Eschenbach (SG)",
-              "date": "2026-11-12",
+              "detail": "Eschenbach SG, Eschenbach (SG) — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/berufsmesse-zuerichsee-linth/"
             },
             {
-              "label": "REXERSIZE. TRY OUT PREMIERE. FlORIAN REXER SOLO PROGRAMM.",
-              "detail": "Krone Mosnang, Mosnang",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rexersize-try-out-premiere-florian-rexer-solo-programm/"
-            },
-            {
-              "label": "Das Pubquiz im Kulturmuseum: Kein bisschen primitiv",
-              "detail": "St. Gallen",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-pubquiz-im-kulturmuseum-kein-bisschen-primitiv/"
-            },
-            {
-              "label": "Music & Dine with Jimi Hendrix Vibes by Asep Stone",
-              "detail": "Restaurant JAKOB",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/music-und-dine-with-jimi-hendrix-vibes-by-asep-stone_A1f9cXw"
-            },
-            {
               "label": "Katharina Knie auf dem Chabisplatz",
-              "detail": "Rorschach",
-              "date": "2026-11-12",
+              "detail": "Rorschach — läuft, letzter Tag: 22. November 2026",
+              "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/katharina-knie-auf-dem-chabisplatz/"
             },
             {
               "label": "Wild-Buffet",
               "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann — läuft, letzter Tag: 21. November 2026",
-              "date": "2026-11-12",
+              "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-buffet-2/"
             },
             {
-              "label": "Fokusmodul-Meisner-Grafforkout",
-              "detail": "Switzerland Innovation Park Ost — läuft, letzter Tag: 12. November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
-            },
-            {
-              "label": "Naturjodel und Jodellieder",
-              "detail": "Klangwelt Toggenburg",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-und-jodellieder-1/"
+              "label": "Naturena: Adventsdekoration mit Schwemmholz",
+              "detail": "Oberschan, Wartau",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturena-adventsdekoration-mit-schwemmholz/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "fr": {
       "canton": "SG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "81",
+          "value": "77",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,64 +348,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Mütter-Väterberatung",
-              "detail": "Familienzentrum, Uzwil",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/uzwil/gemeinde/muetter-vaeterberatung_AyfjpPk"
+              "label": "Naturjodel und Jodellieder",
+              "detail": "Klangwelt Toggenburg",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-und-jodellieder-1/"
             },
             {
-              "label": "La méditation comme moyen d’atteindre l’équilibre intérieur – confortablement depuis chez soi",
-              "detail": "Uzwil",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/uzwil/meditation-als-moeglichkeit-fuer-inneres-gleichgewicht-bequem-von-zuhause_At5NVkW"
+              "label": "SCHLAGER BOOM",
+              "detail": "Lichtensteig",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlager-boom/"
+            },
+            {
+              "label": "A-Live - 25 Years Best Of (Limited Shows)",
+              "detail": "Dömli, Ebnat-Kappel",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/a-live-25-years-best-of-limited-shows_AhbGaDm"
+            },
+            {
+              "label": "Fabio Landert - Die verbotene Frucht",
+              "detail": "Wil SG",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fabio-landert-die-verbotene-frucht-12/"
+            },
+            {
+              "label": "My mUSicAl journey",
+              "detail": "Niederbüren",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/my-musical-journey/"
+            },
+            {
+              "label": "Pub Quiz",
+              "detail": "Gallus Pub",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/st-gallen/pub-quiz_AF9fHWX"
             },
             {
               "label": "Berufsmesse Zürichsee-Linth",
-              "detail": "Eschenbach SG, Eschenbach (SG)",
-              "date": "2026-11-12",
+              "detail": "Eschenbach SG, Eschenbach (SG) — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/berufsmesse-zuerichsee-linth/"
             },
             {
-              "label": "REXERSIZE. TRY OUT PREMIERE. FlORIAN REXER SOLO PROGRAMM.",
-              "detail": "Krone Mosnang, Mosnang",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rexersize-try-out-premiere-florian-rexer-solo-programm/"
-            },
-            {
-              "label": "Das Pubquiz im Kulturmuseum: Kein bisschen primitiv",
-              "detail": "St. Gallen",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-pubquiz-im-kulturmuseum-kein-bisschen-primitiv/"
-            },
-            {
-              "label": "Music & Dine with Jimi Hendrix Vibes by Asep Stone",
-              "detail": "Restaurant JAKOB",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/music-und-dine-with-jimi-hendrix-vibes-by-asep-stone_A1f9cXw"
-            },
-            {
               "label": "Katharina Knie auf dem Chabisplatz",
-              "detail": "Rorschach",
-              "date": "2026-11-12",
+              "detail": "Rorschach — en cours, dernier jour : 22 novembre 2026",
+              "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/katharina-knie-auf-dem-chabisplatz/"
             },
             {
               "label": "Wild-Buffet",
               "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann — en cours, dernier jour : 21 novembre 2026",
-              "date": "2026-11-12",
+              "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-buffet-2/"
             },
             {
-              "label": "Module d'alimentation-Meisner-ork",
-              "detail": "Switzerland Innovation Park Ost — en cours, dernier jour : 12 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
-            },
-            {
-              "label": "Naturjodel und Jodellieder",
-              "detail": "Klangwelt Toggenburg",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-und-jodellieder-1/"
+              "label": "Naturena: Adventsdekoration mit Schwemmholz",
+              "detail": "Oberschan, Wartau",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturena-adventsdekoration-mit-schwemmholz/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     }
   }
 }

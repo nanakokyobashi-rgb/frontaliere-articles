@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "fisco",
-  "updatedAt": "2026-11-12T10:45:43.005Z",
-  "contentHash": "7e1657b9138958988add61f21e6a5c637af445b64129d46c9d912d8a2015584b",
+  "updatedAt": "2026-11-13T02:47:52.804Z",
+  "contentHash": "e2d8f0be28a898ef97d868bf2d5a162c207899ad9a9d1b468d97d48a8d805622",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -120,7 +120,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -143,16 +143,16 @@
           "date": "2026-10-07T11:12:50.818Z"
         },
         {
-          "title": "Budget esercizio 2027 e investimenti: preavviso al Consiglio comunale",
-          "url": "/articoli-vaud/budget-2027-preavviso-consiglio/",
-          "excerpt": "Il preavviso relativo al budget 2027, identificato come Préavis N°2026/75, è stato diffuso al Consiglio comunale il 23 ottobre 2026.",
-          "date": "2026-10-23T16:03:30.868Z"
-        },
-        {
           "title": "Vaud: la destra rilancia il bouclier fiscal",
           "url": "/articoli-vaud/vaud-revision-bouclier-fiscal-2024/",
           "excerpt": "Il Gran Consiglio vota per ripristinare la revisione 2024 dello scudo fiscale, nonostante il voto popolare. La sinistra annuncia un referendum.",
           "date": "2026-10-07T10:47:31.180Z"
+        },
+        {
+          "title": "Budget esercizio 2027 e investimenti: preavviso al Consiglio comunale",
+          "url": "/articoli-vaud/budget-2027-preavviso-consiglio/",
+          "excerpt": "Il preavviso relativo al budget 2027, identificato come Préavis N°2026/75, è stato diffuso al Consiglio comunale il 23 ottobre 2026.",
+          "date": "2026-10-23T16:03:30.868Z"
         },
         {
           "title": "Vaud rivede il budget 2027 per coprire il buco dei 12%",
@@ -200,7 +200,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-12T10:45:43.005Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "en": {
       "canton": "VD",
@@ -298,7 +298,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -321,16 +321,16 @@
           "date": "2026-10-07T11:12:50.818Z"
         },
         {
-          "title": "2027 budget and investments: advance notice to the City Council",
-          "url": "/en/vaud-articles/budget-2027-preavis-council/",
-          "excerpt": "The advance notice relating to the 2027 budget, identified as Préavis N°2026/75, was circulated to the Municipal Council on October 23, 2026.",
-          "date": "2026-10-23T16:03:30.868Z"
-        },
-        {
           "title": "Vaud: the right revives the tax shield",
           "url": "/en/vaud-articles/vaud-tax-shield-revision-2024/",
           "excerpt": "The Grand Council votes to restore the 2024 revision of the tax shield, despite the popular vote. The left announces a referendum.",
           "date": "2026-10-07T10:47:31.180Z"
+        },
+        {
+          "title": "2027 budget and investments: advance notice to the City Council",
+          "url": "/en/vaud-articles/budget-2027-preavis-council/",
+          "excerpt": "The advance notice relating to the 2027 budget, identified as Préavis N°2026/75, was circulated to the Municipal Council on October 23, 2026.",
+          "date": "2026-10-23T16:03:30.868Z"
         },
         {
           "title": "Vaud revises the 2027 budget to cover the 12% shortfall",
@@ -377,7 +377,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-12T10:45:43.005Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "de": {
       "canton": "VD",
@@ -475,7 +475,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -498,16 +498,16 @@
           "date": "2026-10-07T11:12:50.818Z"
         },
         {
-          "title": "Budget für das Geschäftsjahr 2027 und Investitionen: Vorlage an den Gemeinderat",
-          "url": "/de/waadt-artikel/budget-2027-vorab-rat/",
-          "excerpt": "Auf der einen Seite steht der angegebene Zeitraum, das Geschäftsjahr 2027; auf der anderen Seite steht das als Préavis N°2026/75 bezeichnete Dokument, das am 23. Oktober 2026 übermittelt wurde.",
-          "date": "2026-10-23T16:03:30.868Z"
-        },
-        {
           "title": "Waadt: Die Rechte belebt den fiskalischen Bouclier neu.",
           "url": "/de/waadt-artikel/waadt-steuerbremse-revision-2024/",
           "excerpt": "Der Grosse Rat stimmt dafür, die Revision 2024 des Fiskalschildes trotz der Volksabstimmung wieder aufzunehmen. Die Linke kündigt ein Referendum an.",
           "date": "2026-10-07T10:47:31.180Z"
+        },
+        {
+          "title": "Budget für das Geschäftsjahr 2027 und Investitionen: Vorlage an den Gemeinderat",
+          "url": "/de/waadt-artikel/budget-2027-vorab-rat/",
+          "excerpt": "Auf der einen Seite steht der angegebene Zeitraum, das Geschäftsjahr 2027; auf der anderen Seite steht das als Préavis N°2026/75 bezeichnete Dokument, das am 23. Oktober 2026 übermittelt wurde.",
+          "date": "2026-10-23T16:03:30.868Z"
         },
         {
           "title": "Waadt überarbeitet das Budget 2027, um die 12%-Lücke zu schliessen",
@@ -554,7 +554,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-12T10:45:43.005Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "fr": {
       "canton": "VD",
@@ -652,7 +652,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -675,16 +675,16 @@
           "date": "2026-10-07T11:12:50.818Z"
         },
         {
-          "title": "Budget de l’exercice 2027 et investissements : préavis au Conseil communal",
-          "url": "/fr/articles-vaud/budget-2027-preavis-conseil/",
-          "excerpt": "Le préavis relatif au budget 2027, identifié comme Préavis N°2026/75, a été diffusé au Conseil communal le 23 octobre 2026.",
-          "date": "2026-10-23T16:03:30.868Z"
-        },
-        {
           "title": "Vaud : la droite relance le bouclier fiscal",
           "url": "/fr/articles-vaud/vaud-la-droite-relance-le-bouclier-fiscal/",
           "excerpt": "Le Grand Conseil vote pour rétablir la révision 2024 du bouclier fiscal, malgré le vote populaire. La gauche annonce un référendum.",
           "date": "2026-10-07T10:47:31.180Z"
+        },
+        {
+          "title": "Budget de l’exercice 2027 et investissements : préavis au Conseil communal",
+          "url": "/fr/articles-vaud/budget-2027-preavis-conseil/",
+          "excerpt": "Le préavis relatif au budget 2027, identifié comme Préavis N°2026/75, a été diffusé au Conseil communal le 23 octobre 2026.",
+          "date": "2026-10-23T16:03:30.868Z"
         },
         {
           "title": "Vaud revoit le budget 2027 pour combler le trou de 12 %",
@@ -732,7 +732,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-12T10:45:43.005Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     }
   }
 }

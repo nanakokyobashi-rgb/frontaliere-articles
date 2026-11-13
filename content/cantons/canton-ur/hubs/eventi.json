@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T04:11:33.979Z",
-  "contentHash": "93724b8d0a2f4ff983907d20d54eef9e5e4f94d6aebe55e083fc0821cad02f7f",
+  "updatedAt": "2026-11-13T02:47:52.804Z",
+  "contentHash": "04d09377611e00eb59f42f1472c42c9c80ba62faf840b73dec89f564a0d3d612",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-11T04:25:04.802Z",
+      "updatedAt": "2026-11-12T14:41:08.896Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "14",
+          "value": "13",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,12 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "TriffAltdorf - Verlag Bildfluss mit Christof Hirtler und Christian de Simoni",
-              "detail": "Altdorf",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-verlag-bildfluss-mit-christof-hirtler-und-christian-de-simoni/"
-            },
             {
               "label": "Gabirano",
               "detail": "theater(uri), Altdorf (UR)",
@@ -91,11 +85,17 @@
               "detail": "Altdorf, Altdorf (UR)",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/orgelnacht/"
+            },
+            {
+              "label": "ZW. HEUTE UND MORGEN",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zw-heute-und-morgen/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "en": {
       "canton": "UR",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "14",
+          "value": "13",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,12 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "TriffAltdorf - Verlag Bildfluss mit Christof Hirtler und Christian de Simoni",
-              "detail": "Altdorf",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-verlag-bildfluss-mit-christof-hirtler-und-christian-de-simoni/"
-            },
             {
               "label": "Gabirano",
               "detail": "theater(uri), Altdorf (UR)",
@@ -196,11 +190,17 @@
               "detail": "Altdorf, Altdorf (UR)",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/orgelnacht/"
+            },
+            {
+              "label": "ZW. HEUTE UND MORGEN",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zw-heute-und-morgen/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "de": {
       "canton": "UR",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "14",
+          "value": "13",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,12 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "TriffAltdorf - Verlag Bildfluss mit Christof Hirtler und Christian de Simoni",
-              "detail": "Altdorf",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-verlag-bildfluss-mit-christof-hirtler-und-christian-de-simoni/"
-            },
             {
               "label": "Gabirano",
               "detail": "theater(uri), Altdorf (UR)",
@@ -301,11 +295,17 @@
               "detail": "Altdorf, Altdorf (UR)",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/orgelnacht/"
+            },
+            {
+              "label": "ZW. HEUTE UND MORGEN",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zw-heute-und-morgen/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "fr": {
       "canton": "UR",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "14",
+          "value": "13",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,12 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "TriffAltdorf - Verlag Bildfluss mit Christof Hirtler und Christian de Simoni",
-              "detail": "Altdorf",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-verlag-bildfluss-mit-christof-hirtler-und-christian-de-simoni/"
-            },
             {
               "label": "Gabirano",
               "detail": "theater(uri), Altdorf (UR)",
@@ -406,11 +400,17 @@
               "detail": "Altdorf, Altdorf (UR)",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/orgelnacht/"
+            },
+            {
+              "label": "ZW. HEUTE UND MORGEN",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zw-heute-und-morgen/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     }
   }
 }

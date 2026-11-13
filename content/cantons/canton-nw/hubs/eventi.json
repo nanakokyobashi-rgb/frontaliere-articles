@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T22:45:08.796Z",
-  "contentHash": "5aaf0b923e053cbf3cbb18e96c08614f27203f99e1142057b97d76821c266953",
+  "updatedAt": "2026-11-13T02:47:52.804Z",
+  "contentHash": "e6ee34f282f35d62a21c45531a89a8495b6f1a9b3af34a5f759be9e7160a32af",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "62",
+          "value": "64",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,36 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "5. / 6. Primar: Zukunftstag",
-              "detail": "Emmetten",
-              "date": "2026-11-12",
-              "url": "https://www.nw.ch/anlaesseaktuelles/93967"
-            },
-            {
-              "label": "Herbstgenossengemeinde",
-              "detail": "Altes Schützenhaus Beckenried, Beckenried, Beckenried",
-              "date": "2026-11-12",
-              "url": "https://www.nw.ch/anlaesseaktuelles/90493"
-            },
-            {
-              "label": "Ausstellung «Undenklichkeit» von Gauthier Cerf",
-              "detail": "Kulturraum Ermitage, Beckenried, Beckenried — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95335"
-            },
-            {
-              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
-              "detail": "Kulturraum, Buochs, Buochs — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
             {
               "label": "Die frohe Botschaft von Jesus Christus",
               "detail": "Bücher von Matt, Stans, Stans",
@@ -87,10 +57,40 @@
               "url": "https://www.nw.ch/anlaesseaktuelles/89069"
             },
             {
+              "label": "Ausstellung «Undenklichkeit» von Gauthier Cerf",
+              "detail": "Kulturraum Ermitage, Beckenried, Beckenried — in corso, ultimo giorno: 22 novembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95335"
+            },
+            {
+              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
+              "detail": "Kulturraum, Buochs, Buochs — in corso, ultimo giorno: 22 novembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
+            },
+            {
+              "label": "De Otto gwünnt im Lotto",
+              "detail": "Gemeindesaal Stansstad, Stansstad — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
+            },
+            {
               "label": "ABGESAGT - Stubete auf dem Stanserhorn",
               "detail": "Drehrestaurant Stanserhorn, Stans, Stans",
               "date": "2026-11-14",
               "url": "https://www.nw.ch/anlaesseaktuelles/94042"
+            },
+            {
+              "label": "Beyrer Chiubi",
+              "detail": "Kirchensaal, Büren, Büren NW",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/87154"
+            },
+            {
+              "label": "d'Wärchi - Shibori (Japanische Färbetechnik)",
+              "detail": "d'Wärchi, Stans, Stans",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94348"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/nidvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "en": {
       "canton": "NW",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "62",
+          "value": "64",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,36 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "5. / 6. Primar: Zukunftstag",
-              "detail": "Emmetten",
-              "date": "2026-11-12",
-              "url": "https://www.nw.ch/anlaesseaktuelles/93967"
-            },
-            {
-              "label": "Herbstgenossengemeinde",
-              "detail": "Altes Schützenhaus Beckenried, Beckenried, Beckenried",
-              "date": "2026-11-12",
-              "url": "https://www.nw.ch/anlaesseaktuelles/90493"
-            },
-            {
-              "label": "Ausstellung «Undenklichkeit» von Gauthier Cerf",
-              "detail": "Kulturraum Ermitage, Beckenried, Beckenried — ongoing, last day: 22 November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95335"
-            },
-            {
-              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
-              "detail": "Kulturraum, Buochs, Buochs — ongoing, last day: 22 November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — ongoing, last day: 14 November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
             {
               "label": "Die frohe Botschaft von Jesus Christus",
               "detail": "Bücher von Matt, Stans, Stans",
@@ -192,10 +162,40 @@
               "url": "https://www.nw.ch/anlaesseaktuelles/89069"
             },
             {
+              "label": "Ausstellung «Undenklichkeit» von Gauthier Cerf",
+              "detail": "Kulturraum Ermitage, Beckenried, Beckenried — ongoing, last day: 22 November 2026",
+              "date": "2026-11-13",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95335"
+            },
+            {
+              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
+              "detail": "Kulturraum, Buochs, Buochs — ongoing, last day: 22 November 2026",
+              "date": "2026-11-13",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
+            },
+            {
+              "label": "De Otto gwünnt im Lotto",
+              "detail": "Gemeindesaal Stansstad, Stansstad — ongoing, last day: 14 November 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
+            },
+            {
               "label": "ABGESAGT - Stubete auf dem Stanserhorn",
               "detail": "Drehrestaurant Stanserhorn, Stans, Stans",
               "date": "2026-11-14",
               "url": "https://www.nw.ch/anlaesseaktuelles/94042"
+            },
+            {
+              "label": "Beyrer Chiubi",
+              "detail": "Kirchensaal, Büren, Büren NW",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/87154"
+            },
+            {
+              "label": "d'Wärchi - Shibori (Japanische Färbetechnik)",
+              "detail": "d'Wärchi, Stans, Stans",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94348"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/nidwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "de": {
       "canton": "NW",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "62",
+          "value": "64",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,36 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "5. / 6. Primar: Zukunftstag",
-              "detail": "Emmetten",
-              "date": "2026-11-12",
-              "url": "https://www.nw.ch/anlaesseaktuelles/93967"
-            },
-            {
-              "label": "Herbstgenossengemeinde",
-              "detail": "Altes Schützenhaus Beckenried, Beckenried, Beckenried",
-              "date": "2026-11-12",
-              "url": "https://www.nw.ch/anlaesseaktuelles/90493"
-            },
-            {
-              "label": "Ausstellung «Undenklichkeit» von Gauthier Cerf",
-              "detail": "Kulturraum Ermitage, Beckenried, Beckenried — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95335"
-            },
-            {
-              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
-              "detail": "Kulturraum, Buochs, Buochs — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
             {
               "label": "Die frohe Botschaft von Jesus Christus",
               "detail": "Bücher von Matt, Stans, Stans",
@@ -297,10 +267,40 @@
               "url": "https://www.nw.ch/anlaesseaktuelles/89069"
             },
             {
+              "label": "Ausstellung «Undenklichkeit» von Gauthier Cerf",
+              "detail": "Kulturraum Ermitage, Beckenried, Beckenried — läuft, letzter Tag: 22. November 2026",
+              "date": "2026-11-13",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95335"
+            },
+            {
+              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
+              "detail": "Kulturraum, Buochs, Buochs — läuft, letzter Tag: 22. November 2026",
+              "date": "2026-11-13",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
+            },
+            {
+              "label": "De Otto gwünnt im Lotto",
+              "detail": "Gemeindesaal Stansstad, Stansstad — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
+            },
+            {
               "label": "ABGESAGT - Stubete auf dem Stanserhorn",
               "detail": "Drehrestaurant Stanserhorn, Stans, Stans",
               "date": "2026-11-14",
               "url": "https://www.nw.ch/anlaesseaktuelles/94042"
+            },
+            {
+              "label": "Beyrer Chiubi",
+              "detail": "Kirchensaal, Büren, Büren NW",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/87154"
+            },
+            {
+              "label": "d'Wärchi - Shibori (Japanische Färbetechnik)",
+              "detail": "d'Wärchi, Stans, Stans",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94348"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/nidwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "fr": {
       "canton": "NW",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "62",
+          "value": "64",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,36 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "5. / 6. Primar: Zukunftstag",
-              "detail": "Emmetten",
-              "date": "2026-11-12",
-              "url": "https://www.nw.ch/anlaesseaktuelles/93967"
-            },
-            {
-              "label": "Herbstgenossengemeinde",
-              "detail": "Altes Schützenhaus Beckenried, Beckenried, Beckenried",
-              "date": "2026-11-12",
-              "url": "https://www.nw.ch/anlaesseaktuelles/90493"
-            },
-            {
-              "label": "Ausstellung «Undenklichkeit» von Gauthier Cerf",
-              "detail": "Kulturraum Ermitage, Beckenried, Beckenried — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95335"
-            },
-            {
-              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
-              "detail": "Kulturraum, Buochs, Buochs — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
             {
               "label": "Die frohe Botschaft von Jesus Christus",
               "detail": "Bücher von Matt, Stans, Stans",
@@ -402,10 +372,40 @@
               "url": "https://www.nw.ch/anlaesseaktuelles/89069"
             },
             {
+              "label": "Ausstellung «Undenklichkeit» von Gauthier Cerf",
+              "detail": "Kulturraum Ermitage, Beckenried, Beckenried — en cours, dernier jour : 22 novembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95335"
+            },
+            {
+              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
+              "detail": "Kulturraum, Buochs, Buochs — en cours, dernier jour : 22 novembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
+            },
+            {
+              "label": "De Otto gwünnt im Lotto",
+              "detail": "Gemeindesaal Stansstad, Stansstad — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
+            },
+            {
               "label": "ABGESAGT - Stubete auf dem Stanserhorn",
               "detail": "Drehrestaurant Stanserhorn, Stans, Stans",
               "date": "2026-11-14",
               "url": "https://www.nw.ch/anlaesseaktuelles/94042"
+            },
+            {
+              "label": "Beyrer Chiubi",
+              "detail": "Kirchensaal, Büren, Büren NW",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/87154"
+            },
+            {
+              "label": "d'Wärchi - Shibori (Japanische Färbetechnik)",
+              "detail": "d'Wärchi, Stans, Stans",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94348"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/nidwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     }
   }
 }

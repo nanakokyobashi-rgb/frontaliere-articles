@@ -4,12 +4,12 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T21:05:42.386Z",
-  "contentHash": "def4460796e935b1e8f23a912dd67334e60afabcb0364245660e694cd97048e5",
+  "updatedAt": "2026-11-13T02:47:52.804Z",
+  "contentHash": "898241221c5720f0dd9dd1219f7042647bf0af565ef8a44e03591055eff07c5e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T12:24:28.563Z",
+      "updatedAt": "2026-11-12T14:41:08.896Z",
       "keyFacts": 1
     },
     {
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "29",
+          "value": "30",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,12 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "SKIES - Klavierabend mit Nikola Pešić",
-              "detail": "Schaffhausen",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/skies-klavierabend-mit-nikola-pei/"
-            },
             {
               "label": "5 Jahre Bachturnhalle",
               "detail": "Theater Bachturnhalle",
@@ -96,11 +90,17 @@
               "detail": "Schaffhausen",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/hanna-harald-6/"
+            },
+            {
+              "label": "Legenden und Sagen aus dem Tessin",
+              "detail": "Schaffhausen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/legenden-und-sagen-aus-dem-tessin/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-11-12T12:24:28.563Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -160,7 +160,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "en": {
       "canton": "SH",
@@ -170,7 +170,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "29",
+          "value": "30",
           "note": "from the site’s events calendar"
         }
       ],
@@ -180,12 +180,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "SKIES - Klavierabend mit Nikola Pešić",
-              "detail": "Schaffhausen",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/skies-klavierabend-mit-nikola-pei/"
-            },
             {
               "label": "5 Years of the Bachturnhalle",
               "detail": "Theater Bachturnhalle",
@@ -239,11 +233,17 @@
               "detail": "Schaffhausen",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/hanna-harald-6/"
+            },
+            {
+              "label": "Legenden und Sagen aus dem Tessin",
+              "detail": "Schaffhausen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/legenden-und-sagen-aus-dem-tessin/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-11-12T12:24:28.563Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -303,7 +303,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "de": {
       "canton": "SH",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "29",
+          "value": "30",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -323,12 +323,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "SKIES - Klavierabend mit Nikola Pešić",
-              "detail": "Schaffhausen",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/skies-klavierabend-mit-nikola-pei/"
-            },
             {
               "label": "5 Jahre Bachturnhalle",
               "detail": "Theater Bachturnhalle",
@@ -382,11 +376,17 @@
               "detail": "Schaffhausen",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/hanna-harald-6/"
+            },
+            {
+              "label": "Legenden und Sagen aus dem Tessin",
+              "detail": "Schaffhausen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/legenden-und-sagen-aus-dem-tessin/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-11-12T12:24:28.563Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -446,7 +446,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "fr": {
       "canton": "SH",
@@ -456,7 +456,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "29",
+          "value": "30",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -466,12 +466,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "SKIES - Klavierabend mit Nikola Pešić",
-              "detail": "Schaffhausen",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/skies-klavierabend-mit-nikola-pei/"
-            },
             {
               "label": "Les 5 ans de la salle de sport Bachturnhalle",
               "detail": "Theater Bachturnhalle",
@@ -525,11 +519,17 @@
               "detail": "Schaffhausen",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/hanna-harald-6/"
+            },
+            {
+              "label": "Legenden und Sagen aus dem Tessin",
+              "detail": "Schaffhausen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/legenden-und-sagen-aus-dem-tessin/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-11-12T12:24:28.563Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -589,7 +589,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     }
   }
 }

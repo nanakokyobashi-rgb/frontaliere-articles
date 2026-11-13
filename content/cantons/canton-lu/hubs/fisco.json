@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "fisco",
-  "updatedAt": "2026-11-07T00:55:35.159Z",
-  "contentHash": "5e653d077d813983f833554fc43087f2a9c60209d500d398df386fa7de563834",
+  "updatedAt": "2026-11-13T02:47:52.804Z",
+  "contentHash": "e8fb4fe8244ac60e63e54ae6ff5c93a923e33746764aab58cd7acff70a0f3d3d",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-05T22:54:19.931Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -115,21 +115,21 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Kriens decide una riduzione delle imposte",
-          "url": "/articoli-lucerna/kriens-riduce-imposte/",
-          "excerpt": "Zentralplus segnala la decisione di Kriens; il materiale disponibile non indica importo, percentuale o decorrenza della riduzione.",
-          "date": "2026-11-07T00:45:28.812Z"
-        },
         {
           "title": "Canton Lucerna riduce le imposte: decisione definitiva",
           "url": "/articoli-lucerna/lucerna-riduce-imposte/",
           "excerpt": "La fonte Zentralplus presenta come definitiva la riduzione delle imposte nel Canton Lucerna; il dataset fiscale 2026 riporta oneri sui redditi annui e valori A0.",
           "date": "2026-10-21T01:30:31.409Z"
+        },
+        {
+          "title": "Kriens decide una riduzione delle imposte",
+          "url": "/articoli-lucerna/kriens-riduce-imposte/",
+          "excerpt": "Zentralplus segnala la decisione di Kriens; il materiale disponibile non indica importo, percentuale o decorrenza della riduzione.",
+          "date": "2026-11-07T00:45:28.812Z"
         },
         {
           "title": "Lucerna: interessi fiscali 2027 restano allo 0%",
@@ -191,7 +191,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-07T00:55:35.159Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "en": {
       "canton": "LU",
@@ -284,21 +284,21 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Kriens decides on a tax reduction",
-          "url": "/en/lucerne-articles/kriens-tax-cut/",
-          "excerpt": "Zentralplus reports Kriens’s decision; the available material does not specify the amount, percentage, or effective date of the reduction.",
-          "date": "2026-11-07T00:45:28.812Z"
-        },
         {
           "title": "Canton Lucerne cuts taxes: final decision",
           "url": "/en/lucerne-articles/lucerne-canton-cuts-taxes/",
           "excerpt": "The Zentralplus source presents the tax reduction in the Canton of Lucerne as definitive; the 2026 tax dataset reports tax burdens on annual incomes and A0 values.",
           "date": "2026-10-21T01:30:31.409Z"
+        },
+        {
+          "title": "Kriens decides on a tax reduction",
+          "url": "/en/lucerne-articles/kriens-tax-cut/",
+          "excerpt": "Zentralplus reports Kriens’s decision; the available material does not specify the amount, percentage, or effective date of the reduction.",
+          "date": "2026-11-07T00:45:28.812Z"
         },
         {
           "title": "Lucerne: tax interest 2027 remains at 0%",
@@ -360,7 +360,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-07T00:55:35.159Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "de": {
       "canton": "LU",
@@ -453,21 +453,21 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Kriens beschließt eine Steuersenkung",
-          "url": "/de/luzern-artikel/kriens-steuersenkung/",
-          "excerpt": "Der Titel der von Zentralplus veröffentlichten Nachricht weist darauf hin, dass Kriens eine Steuersenkung beschlossen hat.",
-          "date": "2026-11-07T00:45:28.812Z"
-        },
         {
           "title": "Kanton Luzern senkt die Steuern: endgültige Entscheidung",
           "url": "/de/luzern-artikel/luzern-senkt-steuern/",
           "excerpt": "Die Quelle Zentralplus stellt die Steuersenkung im Kanton Luzern als endgültig dar; der Steuerdatensatz 2026 weist Belastungen für Jahreseinkommen und A0-Werte aus.",
           "date": "2026-10-21T01:30:31.409Z"
+        },
+        {
+          "title": "Kriens beschließt eine Steuersenkung",
+          "url": "/de/luzern-artikel/kriens-steuersenkung/",
+          "excerpt": "Der Titel der von Zentralplus veröffentlichten Nachricht weist darauf hin, dass Kriens eine Steuersenkung beschlossen hat.",
+          "date": "2026-11-07T00:45:28.812Z"
         },
         {
           "title": "Luzern: Steuerzinsen 2027 bleiben bei 0%",
@@ -529,7 +529,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-07T00:55:35.159Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "fr": {
       "canton": "LU",
@@ -622,21 +622,21 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-11-05T22:54:19.931Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Kriens décide une réduction des impôts",
-          "url": "/fr/articles-lucerne/baisse-impots-kriens/",
-          "excerpt": "Zentralplus signale la décision de Kriens ; le matériel disponible n’indique ni le montant, ni le pourcentage, ni la date d’entrée en vigueur de la réduction.",
-          "date": "2026-11-07T00:45:28.812Z"
-        },
         {
           "title": "Le canton de Lucerne réduit les impôts : décision définitive",
           "url": "/fr/articles-lucerne/lucerne-baisse-impots/",
           "excerpt": "La source Zentralplus présente la réduction des impôts dans le canton de Lucerne comme définitive ; le jeu de données fiscales 2026 indique des charges sur les revenus annuels et des valeurs A0.",
           "date": "2026-10-21T01:30:31.409Z"
+        },
+        {
+          "title": "Kriens décide une réduction des impôts",
+          "url": "/fr/articles-lucerne/baisse-impots-kriens/",
+          "excerpt": "Zentralplus signale la décision de Kriens ; le matériel disponible n’indique ni le montant, ni le pourcentage, ni la date d’entrée en vigueur de la réduction.",
+          "date": "2026-11-07T00:45:28.812Z"
         },
         {
           "title": "Lucerne : les intérêts fiscaux 2027 restent à 0%",
@@ -698,7 +698,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-07T00:55:35.159Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     }
   }
 }

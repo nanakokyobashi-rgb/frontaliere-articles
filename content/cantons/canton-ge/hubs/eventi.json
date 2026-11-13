@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T22:45:08.796Z",
-  "contentHash": "f52366cd52716640c90ee6bc42c8b97b5a88b0f9d7b32c984e05c4124d726f49",
+  "updatedAt": "2026-11-13T02:47:52.804Z",
+  "contentHash": "75c1856e2d4f4f976b0b5a11a206b27c5b9c10a869c98134c9b497eedaf659dd",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "364",
+          "value": "368",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,64 +38,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "\"Désirs brutes\" Rubén Barrios-Rodríguez . Exposition",
+              "label": "80e Concours de Genève – Finale 2 – Orchestre de la Suisse Romande",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/desirs-brutes-ruben-barrios-rodriguez-exposition"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/concours-geneve-finale-2-orchestre-suisse-romande"
             },
             {
-              "label": "Atelier Care",
+              "label": "AMANTS A MI TEMPS",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/atelier-care"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/amants-temps"
             },
             {
-              "label": "Atelier Créer sa propre lampe",
+              "label": "Annulé - Bianca Costa",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/atelier-creer-propre-lampe"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/bianca-costa"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Mène l'enquête au cœur de la ruche",
+              "label": "Christoph Irniger & Marc Perrenoud",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-mene-enquete-coeur-ruche"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/christoph-irniger-marc-perrenoud"
             },
             {
-              "label": "Atelier-formation \"Apprendre à fabriquer ses cosmétiques naturels\"",
+              "label": "Complet - MEG X Nuit du conte 2026 : voix",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/atelier-formation-apprendre-fabriquer-cosmetiques-naturels"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/meg-nuit-conte-2026-voix"
             },
             {
-              "label": "Ateliers numériques de novembre - Permanence numérique Rive droite",
+              "label": "Créatures de la Terre - NUIT DU CONTE",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-novembre-permanence-numerique-rive"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/creatures-terre-nuit-conte"
             },
             {
-              "label": "Ateliers pour seniors | @ssistance PC, Mac et tablettes numériques",
+              "label": "DJ ARIAS · LATINO",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/ateliers-seniors-ssistance-tablettes-numeriques"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/arias-latino"
             },
             {
-              "label": "BABY TEETH",
+              "label": "Entrañas",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/baby-teeth"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/entranas"
             },
             {
-              "label": "BAG Blues Challenge",
+              "label": "EQUINOX x Kiosque des Bastions: HOUSE TO TECH HOUSE",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/blues-challenge"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/equinox-kiosque-bastions-house-tech-house"
             },
             {
-              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "label": "Film (Festival Celtiques) - Projection du film Ecosse, terres de légendes, dans le cadre du festival Celtiques…",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/film-festival-celtiques-projection-film-ecosse-terres-legendes-cadre-festival-celtiques-organise-adem"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -140,7 +140,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "en": {
       "canton": "GE",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "364",
+          "value": "368",
           "note": "from the site’s events calendar"
         }
       ],
@@ -161,64 +161,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "\"Désirs brutes\" Rubén Barrios-Rodríguez . Exposition",
+              "label": "80e Concours de Genève – Finale 2 – Orchestre de la Suisse Romande",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/desirs-brutes-ruben-barrios-rodriguez-exposition"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/concours-geneve-finale-2-orchestre-suisse-romande"
             },
             {
-              "label": "Atelier Care",
+              "label": "AMANTS A MI TEMPS",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/atelier-care"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/amants-temps"
             },
             {
-              "label": "Atelier Créer sa propre lampe",
+              "label": "Annulé - Bianca Costa",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/atelier-creer-propre-lampe"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/bianca-costa"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Mène l'enquête au cœur de la ruche",
+              "label": "Christoph Irniger & Marc Perrenoud",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-mene-enquete-coeur-ruche"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/christoph-irniger-marc-perrenoud"
             },
             {
-              "label": "Atelier-formation \"Apprendre à fabriquer ses cosmétiques naturels\"",
+              "label": "Complet - MEG X Nuit du conte 2026 : voix",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/atelier-formation-apprendre-fabriquer-cosmetiques-naturels"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/meg-nuit-conte-2026-voix"
             },
             {
-              "label": "Ateliers numériques de novembre - Permanence numérique Rive droite",
+              "label": "Créatures de la Terre - NUIT DU CONTE",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-novembre-permanence-numerique-rive"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/creatures-terre-nuit-conte"
             },
             {
-              "label": "Ateliers pour seniors | @ssistance PC, Mac et tablettes numériques",
+              "label": "DJ ARIAS · LATINO",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/ateliers-seniors-ssistance-tablettes-numeriques"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/arias-latino"
             },
             {
-              "label": "BABY TEETH",
+              "label": "Entrañas",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/baby-teeth"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/entranas"
             },
             {
-              "label": "BAG Blues Challenge",
+              "label": "EQUINOX x Kiosque des Bastions: HOUSE TO TECH HOUSE",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/blues-challenge"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/equinox-kiosque-bastions-house-tech-house"
             },
             {
-              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "label": "Film (Festival Celtiques) - Projection du film Ecosse, terres de légendes, dans le cadre du festival Celtiques…",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/film-festival-celtiques-projection-film-ecosse-terres-legendes-cadre-festival-celtiques-organise-adem"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -263,7 +263,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "de": {
       "canton": "GE",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "364",
+          "value": "368",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -284,64 +284,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "\"Désirs brutes\" Rubén Barrios-Rodríguez . Exposition",
+              "label": "80e Concours de Genève – Finale 2 – Orchestre de la Suisse Romande",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/desirs-brutes-ruben-barrios-rodriguez-exposition"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/concours-geneve-finale-2-orchestre-suisse-romande"
             },
             {
-              "label": "Atelier Care",
+              "label": "AMANTS A MI TEMPS",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/atelier-care"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/amants-temps"
             },
             {
-              "label": "Atelier Créer sa propre lampe",
+              "label": "Annulé - Bianca Costa",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/atelier-creer-propre-lampe"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/bianca-costa"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Mène l'enquête au cœur de la ruche",
+              "label": "Christoph Irniger & Marc Perrenoud",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-mene-enquete-coeur-ruche"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/christoph-irniger-marc-perrenoud"
             },
             {
-              "label": "Atelier-formation \"Apprendre à fabriquer ses cosmétiques naturels\"",
+              "label": "Complet - MEG X Nuit du conte 2026 : voix",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/atelier-formation-apprendre-fabriquer-cosmetiques-naturels"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/meg-nuit-conte-2026-voix"
             },
             {
-              "label": "Ateliers numériques de novembre - Permanence numérique Rive droite",
+              "label": "Créatures de la Terre - NUIT DU CONTE",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-novembre-permanence-numerique-rive"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/creatures-terre-nuit-conte"
             },
             {
-              "label": "Ateliers pour seniors | @ssistance PC, Mac et tablettes numériques",
+              "label": "DJ ARIAS · LATINO",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/ateliers-seniors-ssistance-tablettes-numeriques"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/arias-latino"
             },
             {
-              "label": "BABY TEETH",
+              "label": "Entrañas",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/baby-teeth"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/entranas"
             },
             {
-              "label": "BAG Blues Challenge",
+              "label": "EQUINOX x Kiosque des Bastions: HOUSE TO TECH HOUSE",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/blues-challenge"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/equinox-kiosque-bastions-house-tech-house"
             },
             {
-              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "label": "Film (Festival Celtiques) - Projection du film Ecosse, terres de légendes, dans le cadre du festival Celtiques…",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/film-festival-celtiques-projection-film-ecosse-terres-legendes-cadre-festival-celtiques-organise-adem"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "fr": {
       "canton": "GE",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "364",
+          "value": "368",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -407,64 +407,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "\"Désirs brutes\" Rubén Barrios-Rodríguez . Exposition",
+              "label": "80e Concours de Genève – Finale 2 – Orchestre de la Suisse Romande",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/desirs-brutes-ruben-barrios-rodriguez-exposition"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/concours-geneve-finale-2-orchestre-suisse-romande"
             },
             {
-              "label": "Atelier Care",
+              "label": "AMANTS A MI TEMPS",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/atelier-care"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/amants-temps"
             },
             {
-              "label": "Atelier Créer sa propre lampe",
+              "label": "Annulé - Bianca Costa",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/atelier-creer-propre-lampe"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/bianca-costa"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Mène l'enquête au cœur de la ruche",
+              "label": "Christoph Irniger & Marc Perrenoud",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-mene-enquete-coeur-ruche"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/christoph-irniger-marc-perrenoud"
             },
             {
-              "label": "Atelier-formation \"Apprendre à fabriquer ses cosmétiques naturels\"",
+              "label": "Complet - MEG X Nuit du conte 2026 : voix",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/atelier-formation-apprendre-fabriquer-cosmetiques-naturels"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/meg-nuit-conte-2026-voix"
             },
             {
-              "label": "Ateliers numériques de novembre - Permanence numérique Rive droite",
+              "label": "Créatures de la Terre - NUIT DU CONTE",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-novembre-permanence-numerique-rive"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/creatures-terre-nuit-conte"
             },
             {
-              "label": "Ateliers pour seniors | @ssistance PC, Mac et tablettes numériques",
+              "label": "DJ ARIAS · LATINO",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/ateliers-seniors-ssistance-tablettes-numeriques"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/arias-latino"
             },
             {
-              "label": "BABY TEETH",
+              "label": "Entrañas",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/baby-teeth"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/entranas"
             },
             {
-              "label": "BAG Blues Challenge",
+              "label": "EQUINOX x Kiosque des Bastions: HOUSE TO TECH HOUSE",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/blues-challenge"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/equinox-kiosque-bastions-house-tech-house"
             },
             {
-              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "label": "Film (Festival Celtiques) - Projection du film Ecosse, terres de légendes, dans le cadre du festival Celtiques…",
               "detail": "Genève",
-              "date": "2026-11-12",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+              "date": "2026-11-13",
+              "url": "https://www.geneve.ch/agenda/film-festival-celtiques-projection-film-ecosse-terres-legendes-cadre-festival-celtiques-organise-adem"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     }
   }
 }

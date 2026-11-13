@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T22:45:08.796Z",
-  "contentHash": "4733bf0209a2bfa06b0629b71bb90d85c8b4e96868033c366f991197397e2c02",
+  "updatedAt": "2026-11-13T02:47:52.804Z",
+  "contentHash": "2d97e32d8c3868ad0fa04789170f7bbf66a75668e1c3eb7e679cae115b98cedd",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "31",
+          "value": "34",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,12 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Les voix d’Armand Niquille",
-              "detail": "Fribourg",
-              "date": "2026-11-12",
-              "url": "https://www.fr.ch/bcu/evenements/les-voix-darmand-niquille"
-            },
             {
               "label": "3ème concert à l’abonnement : Danish String Quartet",
               "detail": "Fribourg",
@@ -96,6 +90,12 @@
               "detail": "Fribourg",
               "date": "2026-11-17",
               "url": "https://www.fr.ch/bcu/evenements/the-librarians-projection"
+            },
+            {
+              "label": "AUBÉTOILE | SOUND BATH",
+              "detail": "MIAM",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/evenements/musique/fribourg/aubetoile-sound-bath_AGTkky5"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -155,7 +155,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "en": {
       "canton": "FR",
@@ -165,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "31",
+          "value": "34",
           "note": "from the site’s events calendar"
         }
       ],
@@ -175,12 +175,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Les voix d’Armand Niquille",
-              "detail": "Fribourg",
-              "date": "2026-11-12",
-              "url": "https://www.fr.ch/bcu/evenements/les-voix-darmand-niquille"
-            },
             {
               "label": "3ème concert à l’abonnement : Danish String Quartet",
               "detail": "Fribourg",
@@ -234,6 +228,12 @@
               "detail": "Fribourg",
               "date": "2026-11-17",
               "url": "https://www.fr.ch/bcu/evenements/the-librarians-projection"
+            },
+            {
+              "label": "AUBÉTOILE | SOUND BATH",
+              "detail": "MIAM",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/evenements/musique/fribourg/aubetoile-sound-bath_AGTkky5"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -293,7 +293,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "de": {
       "canton": "FR",
@@ -303,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "31",
+          "value": "34",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -313,12 +313,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Les voix d’Armand Niquille",
-              "detail": "Fribourg",
-              "date": "2026-11-12",
-              "url": "https://www.fr.ch/bcu/evenements/les-voix-darmand-niquille"
-            },
             {
               "label": "3ème concert à l’abonnement : Danish String Quartet",
               "detail": "Fribourg",
@@ -372,6 +366,12 @@
               "detail": "Fribourg",
               "date": "2026-11-17",
               "url": "https://www.fr.ch/bcu/evenements/the-librarians-projection"
+            },
+            {
+              "label": "AUBÉTOILE | SOUND BATH",
+              "detail": "MIAM",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/evenements/musique/fribourg/aubetoile-sound-bath_AGTkky5"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -431,7 +431,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "fr": {
       "canton": "FR",
@@ -441,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "31",
+          "value": "34",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -451,12 +451,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Les voix d’Armand Niquille",
-              "detail": "Fribourg",
-              "date": "2026-11-12",
-              "url": "https://www.fr.ch/bcu/evenements/les-voix-darmand-niquille"
-            },
             {
               "label": "3ème concert à l’abonnement : Danish String Quartet",
               "detail": "Fribourg",
@@ -510,6 +504,12 @@
               "detail": "Fribourg",
               "date": "2026-11-17",
               "url": "https://www.fr.ch/bcu/evenements/the-librarians-projection"
+            },
+            {
+              "label": "AUBÉTOILE | SOUND BATH",
+              "detail": "MIAM",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/evenements/musique/fribourg/aubetoile-sound-bath_AGTkky5"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -569,7 +569,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-12T22:45:08.796Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     }
   }
 }

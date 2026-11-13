@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-12T21:05:42.386Z",
-  "contentHash": "4d85a4e8883d7f3cad2f1ac26752fcd1c7af6550a588d15615571cc86823b939",
+  "updatedAt": "2026-11-13T02:47:52.804Z",
+  "contentHash": "cb267e8b2711b3c2ab3882dddc27a3efe9e1495af4ba82862836dc43da36d5f8",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-12T11:55:14.710Z",
+      "updatedAt": "2026-11-12T20:34:04.832Z",
       "keyFacts": 2
     },
     {
@@ -95,7 +95,7 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Traffico",
-              "date": "2026-11-12T11:55:14.710Z",
+              "date": "2026-11-12T20:34:04.832Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -119,12 +119,12 @@
             {
               "label": "Les projets fédéraux en matière de mobilité progressent dans les Montagnes neuchâteloises",
               "value": "Cantiere",
-              "date": "2026-11-12T11:55:14.710Z",
+              "date": "2026-11-12T20:34:04.832Z",
               "url": "https://www.ne.ch/communiques-de-presse/les-projets-federaux-en-matiere-de-mobilite-progressent-dans-les-montagnes-neuchateloises"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-12T11:55:14.710Z"
+          "updatedAt": "2026-11-12T20:34:04.832Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -201,7 +201,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "en": {
       "canton": "NE",
@@ -274,7 +274,7 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Traffic",
-              "date": "2026-11-12T11:55:14.710Z",
+              "date": "2026-11-12T20:34:04.832Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -298,12 +298,12 @@
             {
               "label": "Les projets fédéraux en matière de mobilité progressent dans les Montagnes neuchâteloises",
               "value": "Roadworks",
-              "date": "2026-11-12T11:55:14.710Z",
+              "date": "2026-11-12T20:34:04.832Z",
               "url": "https://www.ne.ch/communiques-de-presse/les-projets-federaux-en-matiere-de-mobilite-progressent-dans-les-montagnes-neuchateloises"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-12T11:55:14.710Z"
+          "updatedAt": "2026-11-12T20:34:04.832Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -380,7 +380,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "de": {
       "canton": "NE",
@@ -453,7 +453,7 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Verkehr",
-              "date": "2026-11-12T11:55:14.710Z",
+              "date": "2026-11-12T20:34:04.832Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -477,12 +477,12 @@
             {
               "label": "Les projets fédéraux en matière de mobilité progressent dans les Montagnes neuchâteloises",
               "value": "Baustelle",
-              "date": "2026-11-12T11:55:14.710Z",
+              "date": "2026-11-12T20:34:04.832Z",
               "url": "https://www.ne.ch/communiques-de-presse/les-projets-federaux-en-matiere-de-mobilite-progressent-dans-les-montagnes-neuchateloises"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-12T11:55:14.710Z"
+          "updatedAt": "2026-11-12T20:34:04.832Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -559,7 +559,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "fr": {
       "canton": "NE",
@@ -632,7 +632,7 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Trafic",
-              "date": "2026-11-12T11:55:14.710Z",
+              "date": "2026-11-12T20:34:04.832Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -656,12 +656,12 @@
             {
               "label": "Les projets fédéraux en matière de mobilité progressent dans les Montagnes neuchâteloises",
               "value": "Chantier",
-              "date": "2026-11-12T11:55:14.710Z",
+              "date": "2026-11-12T20:34:04.832Z",
               "url": "https://www.ne.ch/communiques-de-presse/les-projets-federaux-en-matiere-de-mobilite-progressent-dans-les-montagnes-neuchateloises"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-12T11:55:14.710Z"
+          "updatedAt": "2026-11-12T20:34:04.832Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -738,7 +738,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     }
   }
 }

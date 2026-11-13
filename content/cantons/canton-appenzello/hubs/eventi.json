@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T04:11:33.979Z",
-  "contentHash": "9e235a671d54e039d13b5b941a738a72ccbb804b34565ff51eec4bd0a00d495f",
+  "updatedAt": "2026-11-13T02:47:52.804Z",
+  "contentHash": "77bb655c292382b26f3378ee97d751c6ffe8dc16666044d3ef235a5a6f65ed39",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-11T04:25:04.802Z",
+      "updatedAt": "2026-11-12T14:41:08.896Z",
       "keyFacts": 1
     }
   ],
@@ -33,18 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Giovedì conferenza Museo Heiden / Hüben und Drüben",
-              "detail": "Museum Heiden, Heiden",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/heiden/donnerstagsvortrag-museum-heiden-hueben-und-drueben_AyuRZ9j"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel — in corso, ultimo giorno: 9 dicembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
-            {
               "label": "Fiera \"A26",
               "detail": "Appenzello",
               "date": "2026-11-13",
@@ -61,6 +49,12 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/simon-enzler-1/"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — in corso, ultimo giorno: 9 dicembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Evento di intrattenimento Saumchörli Herisau",
@@ -91,11 +85,17 @@
               "detail": "Gonten",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
+            },
+            {
+              "label": "Preisträgerkonzert des II. Kammermusikwettbewerbs Paul Juon",
+              "detail": "Kunsthalle Appenzell, Appenzell",
+              "date": "2026-11-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/preistraegerkonzert-des-ii-kammermusikwettbewerbs-paul-juon_AZcYYpi"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -144,18 +144,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Thursday lecture Museum Heiden / Hüben und Drüben",
-              "detail": "Museum Heiden, Heiden",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/heiden/donnerstagsvortrag-museum-heiden-hueben-und-drueben_AyuRZ9j"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel — ongoing, last day: 9 December 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
-            {
               "label": "Trade fair \"A26\"",
               "detail": "Appenzello",
               "date": "2026-11-13",
@@ -172,6 +160,12 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/simon-enzler-1/"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — ongoing, last day: 9 December 2026",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Entertainment event Saumchörli Herisau",
@@ -202,11 +196,17 @@
               "detail": "Gonten",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
+            },
+            {
+              "label": "Preisträgerkonzert des II. Kammermusikwettbewerbs Paul Juon",
+              "detail": "Kunsthalle Appenzell, Appenzell",
+              "date": "2026-11-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/preistraegerkonzert-des-ii-kammermusikwettbewerbs-paul-juon_AZcYYpi"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -255,18 +255,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Donnerstagsvortrag Museum Heiden / Hüben und Drüben",
-              "detail": "Museum Heiden, Heiden",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/heiden/donnerstagsvortrag-museum-heiden-hueben-und-drueben_AyuRZ9j"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel — läuft, letzter Tag: 9. Dezember 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
-            {
               "label": "Gewerbemesse «A26»",
               "detail": "Appenzello",
               "date": "2026-11-13",
@@ -283,6 +271,12 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/simon-enzler-1/"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — läuft, letzter Tag: 9. Dezember 2026",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Unterhaltungsanlass Saumchörli Herisau",
@@ -313,11 +307,17 @@
               "detail": "Gonten",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
+            },
+            {
+              "label": "Preisträgerkonzert des II. Kammermusikwettbewerbs Paul Juon",
+              "detail": "Kunsthalle Appenzell, Appenzell",
+              "date": "2026-11-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/preistraegerkonzert-des-ii-kammermusikwettbewerbs-paul-juon_AZcYYpi"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -366,18 +366,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Conférence du jeudi au musée de Heiden / Hüben und Drüben",
-              "detail": "Museum Heiden, Heiden",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/heiden/donnerstagsvortrag-museum-heiden-hueben-und-drueben_AyuRZ9j"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel — en cours, dernier jour : 9 décembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
-            {
               "label": "Foire commerciale \"A26",
               "detail": "Appenzello",
               "date": "2026-11-13",
@@ -394,6 +382,12 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-13",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/simon-enzler-1/"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — en cours, dernier jour : 9 décembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Manifestation de divertissement Saumchörli Herisau",
@@ -424,11 +418,17 @@
               "detail": "Gonten",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
+            },
+            {
+              "label": "Preisträgerkonzert des II. Kammermusikwettbewerbs Paul Juon",
+              "detail": "Kunsthalle Appenzell, Appenzell",
+              "date": "2026-11-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/preistraegerkonzert-des-ii-kammermusikwettbewerbs-paul-juon_AZcYYpi"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     }
   }
 }

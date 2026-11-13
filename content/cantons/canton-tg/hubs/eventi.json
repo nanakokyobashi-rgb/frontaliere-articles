@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-11-12T04:11:33.979Z",
-  "contentHash": "e82200255839d67c3b9d7b63924a4661c1a09d266d1882c279913c889ee3c3f4",
+  "updatedAt": "2026-11-13T02:47:52.804Z",
+  "contentHash": "339d9abd8780eae36fe0d305239bd39f6322700994796c312b2b60efb512966d",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-11T04:25:04.802Z",
+      "updatedAt": "2026-11-12T14:41:08.896Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-12T14:02:55.343Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "59",
+          "value": "57",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,48 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Fiirobig",
-              "detail": "Weinfelden",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiirobig-2/"
-            },
-            {
-              "label": "Bäume fällen, Dämme bauen, Burgen graben: 60 Jahre Biber im Thurgau",
-              "detail": "Röm.-kath. Begegnungszentrum, Münsterlingen",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muensterlingen/baeume-faellen-daemme-bauen-burgen-graben-60-jahre-biber-im-thurgau_ARutaww"
-            },
-            {
-              "label": "Louis Chevrolet: Wie ein Schweizer Name die Autowelt eroberte",
-              "detail": "Weinfelden",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/louis-chevrolet-wie-ein-schweizer-name-die-autowelt-eroberte/"
-            },
-            {
-              "label": "Miss Allie «Paradiesvogel Tour» – Schweizer Premiere",
-              "detail": "Sport- und Kulturzentrum Dreispitz, Kreuzlingen",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/miss-allie-paradiesvogel-tour-schweizer-premiere_AxyvTRE"
-            },
-            {
-              "label": "Starbugs Comedy - Showtime",
-              "detail": "Kongresszentrum Thurgauerhof, Weinfelden",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starbugs-comedy-showtime-7/"
-            },
-            {
-              "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen — in corso, ultimo giorno: 13 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — in corso, ultimo giorno: 24 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
             {
               "label": "Meise-Stamm",
               "detail": "Arbon",
@@ -96,11 +54,53 @@
               "detail": "Seeparksaal, Arbon",
               "date": "2026-11-13",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/melody-poprock-night_AjWXxDL"
+            },
+            {
+              "label": "Riklin & Schaub - Lieder, die ins Augen gehen",
+              "detail": "Sport- und Kulturzentrum Dreispitz, Kreuzlingen",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/riklin-und-schaub-lieder-die-ins-augen-gehen_ABBRCCP"
+            },
+            {
+              "label": "Tacchi",
+              "detail": "Kulturrausch",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/buerglen-tg/tacchi_ApwiyPU"
+            },
+            {
+              "label": "La Table d'Amis | Tavolata",
+              "detail": "Restaurant Seegarten, Kreuzlingen — in corso, ultimo giorno: 13 novembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — in corso, ultimo giorno: 24 novembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
+              "label": "RedWeek",
+              "detail": "Röm.-kath. Kirche St. Johannes, Weinfelden",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/redweek/"
+            },
+            {
+              "label": "Gespräch: Zvieri. Rätselhaftes und Überraschendes",
+              "detail": "Kreuzlingen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gespraech-zvieri-raetselhaftes-und-ueberraschendes/"
+            },
+            {
+              "label": "Retro Revolution",
+              "detail": "Seeparksaal, Arbon",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/retro-revolution_A3XeD99"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -151,7 +151,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "en": {
       "canton": "TG",
@@ -161,7 +161,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "59",
+          "value": "57",
           "note": "from the site’s events calendar"
         }
       ],
@@ -171,48 +171,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Fiirobig",
-              "detail": "Weinfelden",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiirobig-2/"
-            },
-            {
-              "label": "Bäume fällen, Dämme bauen, Burgen graben: 60 Jahre Biber im Thurgau",
-              "detail": "Röm.-kath. Begegnungszentrum, Münsterlingen",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muensterlingen/baeume-faellen-daemme-bauen-burgen-graben-60-jahre-biber-im-thurgau_ARutaww"
-            },
-            {
-              "label": "Louis Chevrolet: Wie ein Schweizer Name die Autowelt eroberte",
-              "detail": "Weinfelden",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/louis-chevrolet-wie-ein-schweizer-name-die-autowelt-eroberte/"
-            },
-            {
-              "label": "Miss Allie «Paradiesvogel Tour» – Schweizer Premiere",
-              "detail": "Sport- und Kulturzentrum Dreispitz, Kreuzlingen",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/miss-allie-paradiesvogel-tour-schweizer-premiere_AxyvTRE"
-            },
-            {
-              "label": "Starbugs Comedy - Showtime",
-              "detail": "Kongresszentrum Thurgauerhof, Weinfelden",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starbugs-comedy-showtime-7/"
-            },
-            {
-              "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen — ongoing, last day: 13 November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — ongoing, last day: 24 November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
             {
               "label": "Meise-Stamm",
               "detail": "Arbon",
@@ -230,11 +188,53 @@
               "detail": "Seeparksaal, Arbon",
               "date": "2026-11-13",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/melody-poprock-night_AjWXxDL"
+            },
+            {
+              "label": "Riklin & Schaub - Lieder, die ins Augen gehen",
+              "detail": "Sport- und Kulturzentrum Dreispitz, Kreuzlingen",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/riklin-und-schaub-lieder-die-ins-augen-gehen_ABBRCCP"
+            },
+            {
+              "label": "Tacchi",
+              "detail": "Kulturrausch",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/buerglen-tg/tacchi_ApwiyPU"
+            },
+            {
+              "label": "La Table d'Amis | Tavolata",
+              "detail": "Restaurant Seegarten, Kreuzlingen — ongoing, last day: 13 November 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — ongoing, last day: 24 November 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
+              "label": "RedWeek",
+              "detail": "Röm.-kath. Kirche St. Johannes, Weinfelden",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/redweek/"
+            },
+            {
+              "label": "Gespräch: Zvieri. Rätselhaftes und Überraschendes",
+              "detail": "Kreuzlingen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gespraech-zvieri-raetselhaftes-und-ueberraschendes/"
+            },
+            {
+              "label": "Retro Revolution",
+              "detail": "Seeparksaal, Arbon",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/retro-revolution_A3XeD99"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -257,7 +257,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +285,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "de": {
       "canton": "TG",
@@ -295,7 +295,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "59",
+          "value": "57",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -305,48 +305,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Fiirobig",
-              "detail": "Weinfelden",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiirobig-2/"
-            },
-            {
-              "label": "Bäume fällen, Dämme bauen, Burgen graben: 60 Jahre Biber im Thurgau",
-              "detail": "Röm.-kath. Begegnungszentrum, Münsterlingen",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muensterlingen/baeume-faellen-daemme-bauen-burgen-graben-60-jahre-biber-im-thurgau_ARutaww"
-            },
-            {
-              "label": "Louis Chevrolet: Wie ein Schweizer Name die Autowelt eroberte",
-              "detail": "Weinfelden",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/louis-chevrolet-wie-ein-schweizer-name-die-autowelt-eroberte/"
-            },
-            {
-              "label": "Miss Allie «Paradiesvogel Tour» – Schweizer Premiere",
-              "detail": "Sport- und Kulturzentrum Dreispitz, Kreuzlingen",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/miss-allie-paradiesvogel-tour-schweizer-premiere_AxyvTRE"
-            },
-            {
-              "label": "Starbugs Comedy - Showtime",
-              "detail": "Kongresszentrum Thurgauerhof, Weinfelden",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starbugs-comedy-showtime-7/"
-            },
-            {
-              "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen — läuft, letzter Tag: 13. November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — läuft, letzter Tag: 24. November 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
             {
               "label": "Meise-Stamm",
               "detail": "Arbon",
@@ -364,11 +322,53 @@
               "detail": "Seeparksaal, Arbon",
               "date": "2026-11-13",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/melody-poprock-night_AjWXxDL"
+            },
+            {
+              "label": "Riklin & Schaub - Lieder, die ins Augen gehen",
+              "detail": "Sport- und Kulturzentrum Dreispitz, Kreuzlingen",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/riklin-und-schaub-lieder-die-ins-augen-gehen_ABBRCCP"
+            },
+            {
+              "label": "Tacchi",
+              "detail": "Kulturrausch",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/buerglen-tg/tacchi_ApwiyPU"
+            },
+            {
+              "label": "La Table d'Amis | Tavolata",
+              "detail": "Restaurant Seegarten, Kreuzlingen — läuft, letzter Tag: 13. November 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — läuft, letzter Tag: 24. November 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
+              "label": "RedWeek",
+              "detail": "Röm.-kath. Kirche St. Johannes, Weinfelden",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/redweek/"
+            },
+            {
+              "label": "Gespräch: Zvieri. Rätselhaftes und Überraschendes",
+              "detail": "Kreuzlingen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gespraech-zvieri-raetselhaftes-und-ueberraschendes/"
+            },
+            {
+              "label": "Retro Revolution",
+              "detail": "Seeparksaal, Arbon",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/retro-revolution_A3XeD99"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -391,7 +391,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -419,7 +419,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     },
     "fr": {
       "canton": "TG",
@@ -429,7 +429,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "59",
+          "value": "57",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -439,48 +439,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Fiirobig",
-              "detail": "Weinfelden",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiirobig-2/"
-            },
-            {
-              "label": "Bäume fällen, Dämme bauen, Burgen graben: 60 Jahre Biber im Thurgau",
-              "detail": "Röm.-kath. Begegnungszentrum, Münsterlingen",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muensterlingen/baeume-faellen-daemme-bauen-burgen-graben-60-jahre-biber-im-thurgau_ARutaww"
-            },
-            {
-              "label": "Louis Chevrolet: Wie ein Schweizer Name die Autowelt eroberte",
-              "detail": "Weinfelden",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/louis-chevrolet-wie-ein-schweizer-name-die-autowelt-eroberte/"
-            },
-            {
-              "label": "Miss Allie «Paradiesvogel Tour» – Schweizer Premiere",
-              "detail": "Sport- und Kulturzentrum Dreispitz, Kreuzlingen",
-              "date": "2026-11-12",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/miss-allie-paradiesvogel-tour-schweizer-premiere_AxyvTRE"
-            },
-            {
-              "label": "Starbugs Comedy - Showtime",
-              "detail": "Kongresszentrum Thurgauerhof, Weinfelden",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starbugs-comedy-showtime-7/"
-            },
-            {
-              "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen — en cours, dernier jour : 13 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — en cours, dernier jour : 24 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
             {
               "label": "Meise-Stamm",
               "detail": "Arbon",
@@ -498,11 +456,53 @@
               "detail": "Seeparksaal, Arbon",
               "date": "2026-11-13",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/melody-poprock-night_AjWXxDL"
+            },
+            {
+              "label": "Riklin & Schaub - Lieder, die ins Augen gehen",
+              "detail": "Sport- und Kulturzentrum Dreispitz, Kreuzlingen",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/riklin-und-schaub-lieder-die-ins-augen-gehen_ABBRCCP"
+            },
+            {
+              "label": "Tacchi",
+              "detail": "Kulturrausch",
+              "date": "2026-11-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/buerglen-tg/tacchi_ApwiyPU"
+            },
+            {
+              "label": "La Table d'Amis | Tavolata",
+              "detail": "Restaurant Seegarten, Kreuzlingen — en cours, dernier jour : 13 novembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — en cours, dernier jour : 24 novembre 2026",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
+              "label": "RedWeek",
+              "detail": "Röm.-kath. Kirche St. Johannes, Weinfelden",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/redweek/"
+            },
+            {
+              "label": "Gespräch: Zvieri. Rätselhaftes und Überraschendes",
+              "detail": "Kreuzlingen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gespraech-zvieri-raetselhaftes-und-ueberraschendes/"
+            },
+            {
+              "label": "Retro Revolution",
+              "detail": "Seeparksaal, Arbon",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/retro-revolution_A3XeD99"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-11-11T04:25:04.802Z"
+          "updatedAt": "2026-11-12T14:41:08.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -525,7 +525,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-12T14:02:55.343Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +553,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-12T04:11:33.979Z"
+      "updatedAt": "2026-11-13T02:47:52.804Z"
     }
   }
 }
