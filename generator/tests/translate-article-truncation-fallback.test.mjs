@@ -49,6 +49,8 @@ import { decodeHtmlEntities } from '../scripts/lib/decode-html-entities.mjs';
 // esattamente la funzione che il loop ritagliato riceve in produzione, e una
 // copia locale nel test divergerebbe in silenzio dal fix (AGENTS.md #6).
 import { translatedStringOrNull, isSourcePassthrough, joinTranslatedChunks, translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
+import { balanceMarkdownMarkers, hasSameLineSkeleton, lineStructuralSignature, opaqueSpanSignature } from '../scripts/lib/free-translate.mjs';
+import { detectTruncation } from '../scripts/lib/article-factuality-gates.mjs';
 import { localizedToponymInstruction } from '../scripts/lib/localized-toponyms.mjs';
 import { hasUsableContentText, hasUsableTranslatedText, metaFieldPlausibilityMiss } from '../scripts/lib/body2-payload-verdict.mjs';
 import { rejectRawFaqControlEscape } from '../../scripts/lib/faq-control-contract.mjs';
@@ -137,9 +139,26 @@ const MISSING_FIELD_LOOP_SRC = extractMissingFieldLoop();
  * passano esplicitamente non esercitano il ramo warning IT-esso-stesso-troncato
  * (#705). `warnings` raccoglie i messaggi di `console.warn` per assert.
  */
-async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTruncation, warnings = [], translationReport, freeMt = true }) {
+async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTruncation, warnings = [], translationReport, freeMt = true, translateInChunks = null }) {
   const capturingConsole = { error: () => {}, warn: (msg) => warnings.push(msg) };
   const RUN_REPORT = { translation: translationReport || createFreeMtRecoveryReport() };
+  const noopTranslateInChunks = async (bodyText, fieldKey, makeChunkPrompt, labelPrefix, targetLang, { pretranslatedResult = null } = {}) => {
+    if (pretranslatedResult !== null) return translatedStringOrNull(pretranslatedResult?.[fieldKey], targetLang);
+    throw new Error('translateInChunks chiamato senza mock — il test non lo aspettava per un body oversized');
+  };
+  const chunkTranslator = translateInChunks || noopTranslateInChunks;
+  const validatePretranslatedBody = async (bodyText, fieldKey, translated, targetLang, labelPrefix) => {
+    const text = translatedStringOrNull(translated, targetLang);
+    if (text === null) return null;
+    return chunkTranslator(
+      bodyText,
+      fieldKey,
+      () => '',
+      labelPrefix,
+      targetLang,
+      { pretranslatedResult: { [fieldKey]: text } },
+    );
+  };
   // `markBodyTranslationPending` e' quello VERO (#1875): e' lui a decidere che
   // il body resta assente invece di ricevere l'italiano, e un mock qui non
   // proverebbe quel comportamento.
@@ -147,13 +166,14 @@ async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTrunc
     'data', 'itContent', 'callWithRetry', 'translatedStringOrNull', 'hasUsableTranslatedText', 'metaFieldPlausibilityMiss', 'detectTruncation', 'console',
     'ARTICLE_TRANSLATE_FREE_MT', 'claimFreeMtLlmFallback', 'wasFreeMtUnusable', 'maxFreeMtLlmFallbacksPerLocale', 'RUN_REPORT', 'MAX_FREE_MT_LLM_FALLBACKS_PER_RUN', 'MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE',
     'markBodyTranslationPending', 'isSourcePassthrough', 'rejectRawFaqControlEscape', 'normalizeLocalizedToponymText',
-    'safeSignalDiagnosticTextForLog',
+    'translateInChunks', 'validatePretranslatedBody',
+    'safeSignalDiagnosticTextForLog', 'countWords', 'TRANSLATION_CHUNK_THRESHOLD', 'buildPendingBodyRetranslationPrompt',
     `return (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
   );
   // `metaFieldPlausibilityMiss` e' il floor VERO (#798), non un mock: il ramo
   // floor-miss del loop tiene il valore tradotto invece di cadere sul fallback
   // IT, e un mock qui non proverebbe quel comportamento.
-  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, freeMt, claimFreeMtLlmFallback, wasFreeMtUnusable, maxFreeMtLlmFallbacksPerLocale, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE, markBodyTranslationPending, isSourcePassthrough, rejectRawFaqControlEscape, normalizeLocalizedToponymText, ARTICLE_SIGNAL_LOG_HELPERS.safeSignalDiagnosticTextForLog);
+  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, freeMt, claimFreeMtLlmFallback, wasFreeMtUnusable, maxFreeMtLlmFallbacksPerLocale, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE, markBodyTranslationPending, isSourcePassthrough, rejectRawFaqControlEscape, normalizeLocalizedToponymText, chunkTranslator, validatePretranslatedBody, ARTICLE_SIGNAL_LOG_HELPERS.safeSignalDiagnosticTextForLog, REAL_COUNT_WORDS, TRANSLATION_CHUNK_THRESHOLD, REAL_BUILD_PENDING_BODY_RETRANSLATION_PROMPT);
   return RUN_REPORT;
 }
 
@@ -189,21 +209,35 @@ async function runTruncationRetryLoop({ data, itContent, detectTruncation, callW
   const sanitizeBodyText = (v) => v;
   const countWords = (s) => String(s).split(/\s+/).filter(Boolean).length;
   const capturingConsole = { error: () => {}, warn: (msg) => warnings.push(msg) };
-  const noopTranslateInChunks = async () => {
-    throw new Error('translateInChunks chiamato senza mock — il test non lo aspettava per un campo sotto soglia');
+  const noopTranslateInChunks = async (bodyText, fieldKey, makeChunkPrompt, labelPrefix, targetLang, { pretranslatedResult = null } = {}) => {
+    if (pretranslatedResult !== null) return translatedStringOrNull(pretranslatedResult?.[fieldKey], targetLang);
+    throw new Error('translateInChunks chiamato senza mock — il test non lo aspettava per un body oversized');
+  };
+  const chunkTranslator = translateInChunks || noopTranslateInChunks;
+  const validatePretranslatedBody = async (bodyText, fieldKey, translated, targetLang, labelPrefix) => {
+    const text = translatedStringOrNull(translated, targetLang);
+    if (text === null) return null;
+    return chunkTranslator(
+      bodyText,
+      fieldKey,
+      () => '',
+      labelPrefix,
+      targetLang,
+      { pretranslatedResult: { [fieldKey]: text } },
+    );
   };
   const RUN_REPORT = { translation: translationReport || createFreeMtRecoveryReport() };
   const fn = new Function(
     'data', 'itContent', 'detectTruncation', 'callWithRetry', 'translateInChunks',
     'TRANSLATION_CHUNK_THRESHOLD', 'translatedStringOrNull', 'sanitizeBodyText', 'countWords', 'console',
-    'markBodyTranslationPending', 'RUN_REPORT', 'isSourcePassthrough',
+    'markBodyTranslationPending', 'RUN_REPORT', 'isSourcePassthrough', 'validatePretranslatedBody',
     'safeSignalDiagnosticTextForLog',
     `${REAL_TRUNCATION_SRC}\nreturn (async () => { ${LOOP_SRC} })();`,
   );
   await fn(
-    data, itContent, detectTruncation, callWithRetry, translateInChunks || noopTranslateInChunks,
+    data, itContent, detectTruncation, callWithRetry, chunkTranslator,
     TRANSLATION_CHUNK_THRESHOLD, translatedStringOrNull, sanitizeBodyText, countWords, capturingConsole,
-    markBodyTranslationPending, RUN_REPORT, isSourcePassthrough,
+    markBodyTranslationPending, RUN_REPORT, isSourcePassthrough, validatePretranslatedBody,
     ARTICLE_SIGNAL_LOG_HELPERS.safeSignalDiagnosticTextForLog,
   );
   return RUN_REPORT;
@@ -282,6 +316,34 @@ test('itValue >700 parole: il retry usa il sub-chunking di translateBodyField in
   );
 });
 
+test('ramo truncation-retry breve: il risultato passa dal contratto prima della scrittura', async () => {
+  const data = { content: { en: { body1: 'The first translation is cut and' } } };
+  const itContent = { body1: 'La traduzione italiana completa contiene due fatti.' };
+  const calls = [];
+  const detectTruncation = (text) => (
+    text === 'The first translation is cut and' ? ['incomplete-ending'] : []
+  );
+  const callWithRetry = async () => ({ body1: 'B: 100, A: 200' });
+  const translateInChunks = async (bodyText, fieldKey, makeChunkPrompt, labelPrefix, targetLang, options) => {
+    calls.push({ bodyText, fieldKey, labelPrefix, targetLang, options });
+    return null;
+  };
+
+  const report = await runTruncationRetryLoop({
+    data,
+    itContent,
+    detectTruncation,
+    callWithRetry,
+    translateInChunks,
+  });
+
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].fieldKey, 'body1');
+  assert.equal(calls[0].options.pretranslatedResult.body1, 'B: 100, A: 200');
+  assert.equal(Object.hasOwn(data.content.en, 'body1'), false);
+  assert.deepEqual(report.translation.pendingBodyFields, { 'en:body1': 'truncation-retry-structure' });
+});
+
 test('itValue whitespace-only: il body tradotto troncato NON viene sovrascritto (#691)', async () => {
   const data = { content: { en: { body1: 'This sentence never ends and' } } };
   // Un fallback fatto di soli spazi è truthy: senza `.trim()` bypassava il
@@ -310,6 +372,43 @@ test('ramo missing-field: itValue whitespace-only lancia l\'errore invece di pub
     () => runMissingFieldLoop({ data, itContent, callWithRetry }),
     (error) => error.qualityReject === true && /Campo body1 mancante nella traduzione en/.test(error.message),
   );
+});
+
+test('ramo missing-field breve: il risultato passa dal contratto prima della writeField', async () => {
+  const complete = { ...META_PLAUSIBILI, body2: 'B2', body3: 'B3' };
+  const data = {
+    content: {
+      en: { ...complete, body1: undefined },
+      de: { ...complete, body1: 'Deutscher Text.' },
+      fr: { ...complete, body1: 'Texte français.' },
+    },
+  };
+  const itContent = {
+    ...META_PLAUSIBILI,
+    body1: 'A: 100, B: 200',
+    body2: 'Secondo corpo italiano.',
+    body3: 'Terzo corpo italiano.',
+  };
+  const calls = [];
+  const callWithRetry = async () => ({ body1: 'B: 100, A: 200' });
+  const translateInChunks = async (bodyText, fieldKey, makeChunkPrompt, labelPrefix, targetLang, options) => {
+    calls.push({ bodyText, fieldKey, labelPrefix, targetLang, options });
+    return null;
+  };
+
+  const report = await runMissingFieldLoop({
+    data,
+    itContent,
+    callWithRetry,
+    freeMt: false,
+    translateInChunks,
+  });
+
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].fieldKey, 'body1');
+  assert.equal(calls[0].options.pretranslatedResult.body1, 'B: 100, A: 200');
+  assert.equal(Object.hasOwn(data.content.en, 'body1'), false);
+  assert.deepEqual(report.translation.pendingBodyFields, { 'en:body1': 'retry-structure' });
 });
 
 test('excerpt tradotto senza sorgente valida è un quality reject dichiarato', async () => {
@@ -1311,23 +1410,33 @@ const TRANSLATE_CONTENT_SRC = (() => {
   return src.slice(a, src.indexOf('\n  }\n', a) + 4);
 })();
 const TRANSLATE_IN_CHUNKS_SRC = (() => {
-  const a = src.indexOf('  async function translateInChunks(bodyText, fieldKey, makeChunkPrompt, labelPrefix, targetLang) {');
+  const a = src.indexOf(`  async function translateInChunks(
+    bodyText,
+    fieldKey,
+    makeChunkPrompt,
+    labelPrefix,
+    targetLang,
+    { pretranslatedResult = null } = {},
+  ) {`);
   assert.notEqual(a, -1, 'translateInChunks non trovata — aggiornare questo test');
   return src.slice(a, src.indexOf('\n  }\n', a) + 4);
 })();
 const SPLIT_CHUNKS_SRC = extractFunctionSource('function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {');
 const COUNT_WORDS_SRC = extractFunctionSource("function countWords(text = '') {");
+const BUILD_PENDING_BODY_PROMPT_SRC = extractFunctionSource("function buildPendingBodyRetranslationPrompt({ langName, field, itValue, partLabel = '' }) {");
+const REAL_COUNT_WORDS = new Function(`${COUNT_WORDS_SRC}\nreturn countWords;`)();
+const REAL_BUILD_PENDING_BODY_RETRANSLATION_PROMPT = new Function(`${BUILD_PENDING_BODY_PROMPT_SRC}\nreturn buildPendingBodyRetranslationPrompt;`)();
 
 async function runLegacyTranslateContent(sourceContent, callWithRetry) {
   const fn = new Function(
     'sourceContent', 'callWithRetry', 'ARTICLE_TRANSLATE_FREE_MT', 'translateContentFreeMt', 'TRANSLATION_CHUNK_THRESHOLD',
-    'translatedStringOrNull', 'isSourcePassthrough', 'sanitizeBodyText', 'joinTranslatedChunks', 'localizedToponymInstruction', 'console', 'editorialHeadlineGuidance',
+    'translatedStringOrNull', 'isSourcePassthrough', 'sanitizeBodyText', 'joinTranslatedChunks', 'localizedToponymInstruction', 'console', 'editorialHeadlineGuidance', 'hasSameLineSkeleton', 'lineStructuralSignature', 'opaqueSpanSignature', 'detectTruncation', 'balanceMarkdownMarkers',
     `${COLLECT_BODY_SECTIONS_SRC}\n${COUNT_WORDS_SRC}\n${SPLIT_CHUNKS_SRC}\n${TRANSLATE_IN_CHUNKS_SRC}\n${TRANSLATE_CONTENT_SRC}\n`
     + "return translateContent('it', 'fr', '4/5', sourceContent);",
   );
   return fn(
     sourceContent, callWithRetry, false, async () => { throw new Error('ramo free-MT non atteso'); }, TRANSLATION_CHUNK_THRESHOLD,
-    translatedStringOrNull, isSourcePassthrough, (v) => v, joinTranslatedChunks, localizedToponymInstruction, { error: () => {}, warn: () => {} }, editorialHeadlineGuidance,
+    translatedStringOrNull, isSourcePassthrough, (v) => v, joinTranslatedChunks, localizedToponymInstruction, { error: () => {}, warn: () => {} }, editorialHeadlineGuidance, hasSameLineSkeleton, lineStructuralSignature, opaqueSpanSignature, detectTruncation, balanceMarkdownMarkers,
   );
 }
 
@@ -1343,6 +1452,41 @@ test('percorso legacy ARTICLE_TRANSLATE_FREE_MT=0, chiamata singola: un body ide
 
   assert.equal(Object.hasOwn(out, 'body1'), false, 'la copia italiana e\' scartata: il campo entra nella recovery');
   assert.equal(out.body2, 'Deuxième corps traduit.');
+});
+
+test('percorso legacy single-call: ogni contratto source-owned rifiuta l\'output alterato', async () => {
+  const sourceCases = [
+    {
+      label: 'destinazione Markdown relativa',
+      source: 'Prima [pagina](/vecchio-percorso) dopo altre parole.',
+      translated: 'Avant [page](/nouveau-parcours) après d’autres mots.',
+    },
+    {
+      label: 'numero e unita',
+      source: 'Aliquota 10% per i lavoratori frontalieri.',
+      translated: 'Taux 20% pour les travailleurs frontaliers.',
+    },
+    {
+      label: 'prefisso strutturale annidato',
+      source: '> - voce da mantenere nella citazione.',
+      translated: '> entrée à conserver dans la citation.',
+    },
+    {
+      label: 'associazione delle celle della tabella',
+      source: '| prima voce | seconda voce |',
+      translated: '| deuxième | première |',
+    },
+  ];
+  for (const { label, source, translated } of sourceCases) {
+    const out = await runLegacyTranslateContent(
+      { title: 'Titolo', excerpt: 'Riassunto', body1: source },
+      async (prompt) => {
+        if (prompt.includes('- title:')) return { title: 'Titre', excerpt: 'Résumé' };
+        return { body1: translated };
+      },
+    );
+    assert.equal(Object.hasOwn(out, 'body1'), false, `${label}: output alterato non deve passare il guard single-call`);
+  }
 });
 
 test('percorso legacy ARTICLE_TRANSLATE_FREE_MT=0, a chunk: un chunk identico al suo italiano scarta il campo', async () => {

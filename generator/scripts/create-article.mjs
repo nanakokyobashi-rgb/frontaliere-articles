@@ -367,6 +367,9 @@ function guardProviderInputCapForCall(promptCall, {
 import {
   freeTranslateWithRetry,
   balanceMarkdownMarkers,
+  hasSameLineSkeleton,
+  lineStructuralSignature,
+  opaqueSpanSignature,
   setCodexTranslateProcessDeadline,
   translateWithCodexEngine,
   withCodexTranslationLane,
@@ -378,7 +381,6 @@ import {
   translateFieldFreeMt,
   translatedStringOrNull,
   isSourcePassthrough,
-  joinTranslatedChunks,
   ensureMunicipalityNames,
 } from './lib/article-free-mt.mjs';
 import {
@@ -14262,26 +14264,538 @@ function countWords(text = '') {
 // prompt, reproducing the same truncation it was retrying to fix).
 const TRANSLATION_CHUNK_THRESHOLD = 700;
 
-// Split body text into ~chunkTarget-word pieces at paragraph boundaries, for
-// translating oversized fields as parallel sub-chunks that stay under the
-// model's per-call output cap.
+// Split body text into ~chunkTarget-word pieces, keeping paragraph boundaries
+// where possible and cutting inside an oversized paragraph when necessary.
+// Protected Markdown and numeric atoms are kept intact; an atom that cannot
+// fit is rejected before any provider call rather than being sent over the cap
+// with a structural split. This is shared by the initial translation and both
+// retry paths, so every route keeps the same per-call output-cap safety net.
 function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
-  const paragraphs = (bodyText || '').split(/\n\n+/);
   const chunks = [];
+  const separators = [];
+  const source = String(bodyText || '');
+  const pieces = [];
+  let pendingSeparator = '';
+  // Keep the same numeric shapes atomic as the free-MT chunker: grouped and
+  // decimal numbers may use ASCII space, NBSP or narrow NBSP, in addition to
+  // dots, commas and Swiss apostrophes.
+
+  function readCodeSpanEnd(text, start) {
+    if (text[start] !== '`') return null;
+    let markerLength = 0;
+    while (text[start + markerLength] === '`') markerLength += 1;
+
+    // A code span closes only on a backtick run with exactly the same length
+    // as its opener. `indexOf(marker)` would accept the first `markerLength`
+    // characters of a longer run, splitting a valid span such as
+    // ``codice ``` interno`` into two unrelated atoms.
+    let end = start + markerLength;
+    while (end < text.length) {
+      if (text[end] !== '`') {
+        end += 1;
+        continue;
+      }
+      let runEnd = end + 1;
+      while (text[runEnd] === '`') runEnd += 1;
+      if (runEnd - end === markerLength) return runEnd;
+      end = runEnd;
+    }
+    return null;
+  }
+
+  const HTML_VOID_TAGS = new Set([
+    'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link',
+    'meta', 'param', 'source', 'track', 'wbr',
+  ]);
+
+  function readHtmlTag(text, start) {
+    if (text[start] !== '<') return null;
+    if (text.startsWith('<!--', start)) {
+      const commentEnd = text.indexOf('-->', start + 4);
+      return commentEnd === -1
+        ? null
+        : { end: commentEnd + 3, kind: 'comment' };
+    }
+    if (text[start + 1] === '/') {
+      const nameMatch = text.slice(start + 2).match(/^([A-Za-z][A-Za-z0-9:_-]*)/u);
+      if (!nameMatch) return null;
+      const nameEnd = start + 2 + nameMatch[0].length;
+      if (text[nameEnd] !== '>' && !/[\s]/u.test(text[nameEnd] || '')) return null;
+      if (text[nameEnd] === '>') {
+        return {
+          end: nameEnd + 1,
+          kind: 'tag',
+          name: nameMatch[1].toLowerCase(),
+          closing: true,
+          selfClosing: false,
+        };
+      }
+      let quote = null;
+      for (let end = nameEnd; end < text.length; end += 1) {
+        const char = text[end];
+        if (quote !== null) {
+          if (char === quote) quote = null;
+        } else if (char === '"' || char === "'") {
+          quote = char;
+        } else if (char === '>') {
+          return {
+            end: end + 1,
+            kind: 'tag',
+            name: nameMatch[1].toLowerCase(),
+            closing: true,
+            selfClosing: false,
+          };
+        }
+      }
+      return null;
+    }
+
+    const nameMatch = text.slice(start + 1).match(/^([A-Za-z][A-Za-z0-9:_-]*)/u);
+    if (!nameMatch) return null;
+    const nameEnd = start + 1 + nameMatch[0].length;
+    // `<https://...>` and other autolinks are not HTML tags. Requiring a
+    // delimiter after the tag name keeps them out of the raw-HTML scanner.
+    if (text[nameEnd] !== '>' && text[nameEnd] !== '/' && !/[\s]/u.test(text[nameEnd] || '')) {
+      return null;
+    }
+    if (text[nameEnd] === '>') {
+      return {
+        end: nameEnd + 1,
+        kind: 'tag',
+        name: nameMatch[1].toLowerCase(),
+        closing: false,
+        selfClosing: false,
+      };
+    }
+    let quote = null;
+    for (let end = nameEnd; end < text.length; end += 1) {
+      const char = text[end];
+      if (quote !== null) {
+        if (char === quote) quote = null;
+      } else if (char === '"' || char === "'") {
+        quote = char;
+      } else if (char === '>') {
+        const raw = text.slice(start, end + 1);
+        if (text[nameEnd] === '/' && !/\/\s*>$/u.test(raw)) return null;
+        return {
+          end: end + 1,
+          kind: 'tag',
+          name: nameMatch[1].toLowerCase(),
+          closing: false,
+          selfClosing: /\/\s*>$/u.test(raw),
+        };
+      }
+    }
+    return null;
+  }
+
+  function readHtmlElementEnd(text, start) {
+    const opening = readHtmlTag(text, start);
+    if (opening === null || opening.kind !== 'tag' || opening.closing) return null;
+    if (opening.selfClosing || HTML_VOID_TAGS.has(opening.name)) return opening.end;
+
+    let depth = 1;
+    let cursor = opening.end;
+    while (cursor < text.length) {
+      const codeEnd = readCodeSpanEnd(text, cursor);
+      if (codeEnd !== null) {
+        cursor = codeEnd;
+        continue;
+      }
+      if (text[cursor] !== '<') {
+        cursor += 1;
+        continue;
+      }
+      const token = readHtmlTag(text, cursor);
+      if (token === null) {
+        cursor += 1;
+        continue;
+      }
+      if (token.kind === 'tag' && token.name === opening.name) {
+        if (token.closing) {
+          depth -= 1;
+          if (depth === 0) return token.end;
+        } else if (!token.selfClosing) {
+          depth += 1;
+        }
+      }
+      cursor = token.end;
+    }
+    return null;
+  }
+
+  function readBalancedBracketEnd(text, start) {
+    if (text[start] !== '[') return null;
+    let depth = 0;
+    let index = start;
+    while (index < text.length) {
+      if (text[index] === '\\') {
+        index += 2;
+        continue;
+      }
+      // Brackets inside a code span are literal label text, not delimiters.
+      if (text[index] === '`') {
+        const codeEnd = readCodeSpanEnd(text, index);
+        if (codeEnd !== null) {
+          index = codeEnd;
+          continue;
+        }
+      }
+      if (text[index] === '[') {
+        depth += 1;
+      } else if (text[index] === ']') {
+        depth -= 1;
+        if (depth === 0) return index;
+      }
+      index += 1;
+    }
+    return null;
+  }
+
+  function readBalancedParenthesisEnd(text, start) {
+    if (text[start] !== '(') return null;
+    let depth = 0;
+    let index = start;
+    while (index < text.length) {
+      if (text[index] === '\\') {
+        index += 2;
+        continue;
+      }
+      if (text[index] === '(') {
+        depth += 1;
+      } else if (text[index] === ')') {
+        depth -= 1;
+        if (depth === 0) return index + 1;
+      }
+      index += 1;
+    }
+    return null;
+  }
+
+  function readLinkEnd(text, start) {
+    const bracketStart = text[start] === '!' ? start + 1 : start;
+    if (text[bracketStart] !== '[') return null;
+
+    // Link labels may contain nested brackets; a first-`]` scan turns
+    // `[outer [inner] label](url)` into ordinary words and permits a chunk
+    // boundary inside the label.
+    const labelEnd = readBalancedBracketEnd(text, bracketStart);
+    if (labelEnd === null) return null;
+
+    const suffixStart = labelEnd + 1;
+    if (text[suffixStart] === '(') {
+      const inlineEnd = readBalancedParenthesisEnd(text, suffixStart);
+      return inlineEnd === null ? null : inlineEnd;
+    }
+
+    // Full and collapsed reference links use a second balanced label:
+    // `[label][reference]` and `[label][]` (images included).
+    if (text[suffixStart] === '[') {
+      const referenceEnd = readBalancedBracketEnd(text, suffixStart);
+      return referenceEnd === null ? null : referenceEnd + 1;
+    }
+
+    // A shortcut reference link has no suffix. Without resolving definitions
+    // here, retaining every balanced label is the safe choice: it also keeps
+    // ordinary bracketed text intact instead of cutting through its label.
+    return labelEnd + 1;
+  }
+
+  function readDelimitedSpanEnd(text, start, marker) {
+    if (!text.startsWith(marker, start)) return null;
+    // A single-marker emphasis span can contain a nested double-marker span,
+    // e.g. `*prima **seconda** dopo*`. The first `*` of `**` is not the
+    // outer closer: skip the complete nested span before looking again. The
+    // same scan must also skip complete code spans and links: their contents
+    // are literal Markdown text, so a marker inside either one cannot close
+    // this outer span.
+    const nestedMarker = marker.length === 1 ? marker.repeat(2) : null;
+    let end = start + marker.length;
+    while (end < text.length) {
+      if (text[end] === '\\') {
+        // An escaped marker is literal. Consume a whole run so two
+        // backslashes before a marker retain their normal Markdown meaning.
+        const slashStart = end;
+        while (text[end] === '\\') end += 1;
+        if ((end - slashStart) % 2 === 1) end += 1;
+        continue;
+      }
+      const codeEnd = readCodeSpanEnd(text, end);
+      if (codeEnd !== null) {
+        end = codeEnd;
+        continue;
+      }
+      const linkEnd = readLinkEnd(text, end);
+      if (linkEnd !== null) {
+        end = linkEnd;
+        continue;
+      }
+      if (nestedMarker && text.startsWith(nestedMarker, end)) {
+        const nestedEnd = readDelimitedSpanEnd(text, end, nestedMarker);
+        if (nestedEnd !== null) {
+          end = nestedEnd;
+          continue;
+        }
+      }
+      if (text.startsWith(marker, end)) return end + marker.length;
+      end += 1;
+    }
+    return null;
+  }
+
+  function readPlainAtomEnd(text, start) {
+    let end = start;
+    while (end < text.length && !/\s/.test(text[end])) end += 1;
+    return end;
+  }
+
+  function readNumericAtomEnd(text, start) {
+    const hasSign = ['+', '-', '−'].includes(text[start]);
+    const numberStart = hasSign ? start + 1 : start;
+    const previous = text[start - 1];
+    if (previous && /[\p{L}\p{N}_]/u.test(previous)) return null;
+    if (!/\d/u.test(text[numberStart] || '')) return null;
+
+    const isDigit = (char) => /\d/u.test(char || '');
+    const isSeparator = (char) => /[.,'’\u00a0\u202f ]/u.test(char || '');
+    let end = numberStart;
+    while (isDigit(text[end])) end += 1;
+    while (isSeparator(text[end]) && isDigit(text[end + 1])) {
+      end += 1;
+      while (isDigit(text[end])) end += 1;
+    }
+
+    let unitStart = end;
+    while (/\s/u.test(text[unitStart] || '')) unitStart += 1;
+    if (['%', '°', 'º'].includes(text[unitStart])) end = unitStart + 1;
+
+    const next = text[end];
+    if (next && /[\p{L}\p{N}_]/u.test(next)) return null;
+    return end;
+  }
+
+  function readNumericMarkdownAtomEnd(text, start) {
+    const numericEnd = readNumericAtomEnd(text, start);
+    if (numericEnd === null) return null;
+    let end = numericEnd;
+    // Keep punctuation wrapping the number with it. Otherwise `(12 345)` can
+    // still be cut between the space-separated digit groups and its closing
+    // parenthesis even though `readNumericAtomEnd` protected the number.
+    while (end < text.length && isWrapperPunctuation(text[end])) end += 1;
+    return end;
+  }
+
+  function readCoreProtectedMarkdownEnd(text, start) {
+    const codeEnd = readCodeSpanEnd(text, start);
+    if (codeEnd !== null) return codeEnd;
+    const htmlEnd = readHtmlElementEnd(text, start);
+    if (htmlEnd !== null) return htmlEnd;
+    const linkEnd = readLinkEnd(text, start);
+    if (linkEnd !== null) return linkEnd;
+    // Keep every complete emphasis span in one request. In particular, the
+    // single-marker forms are valid Markdown too; omitting them lets a cut
+    // land between `*...*` or `_..._` and leaves the joiner with no source
+    // boundary at which it can repair the pair.
+    for (const marker of ['**', '__', '~~', '*', '_']) {
+      const delimitedEnd = readDelimitedSpanEnd(text, start, marker);
+      if (delimitedEnd !== null) return delimitedEnd;
+    }
+    return null;
+  }
+
+  function isMarkdownPunctuation(char) {
+    return Boolean(char) && (/^[\p{P}\p{S}]$/u.test(char) || char === '`');
+  }
+
+  function isWrapperPunctuation(char) {
+    // Do not absorb the opener of a second adjacent Markdown atom (for
+    // example `[link](url)*another span*`) as if it closed the wrapper around
+    // the first one. The closing punctuation that can wrap a protected atom
+    // remains covered, including Unicode quotation marks.
+    const isOpeningDelimiter = /^[\p{Ps}\p{Pi}]$/u.test(char || '');
+    return isMarkdownPunctuation(char)
+      && !'`*_~[!'.includes(char)
+      && !isOpeningDelimiter;
+  }
+
+  function readProtectedMarkdownEnd(text, start) {
+    const directEnd = readCoreProtectedMarkdownEnd(text, start);
+    if (directEnd !== null) return directEnd;
+
+    // A valid protected atom can be wrapped in punctuation, e.g.
+    // `([label with many words](url))` or `(*a long phrase*)`. Search only
+    // through the contiguous punctuation prefix, then retain its closing
+    // punctuation with the protected atom so a chunk boundary cannot land
+    // inside the Markdown construct or its wrapper.
+    for (let candidate = start; candidate < text.length; candidate += 1) {
+      if (!isMarkdownPunctuation(text[candidate])) break;
+      const coreEnd = readCoreProtectedMarkdownEnd(text, candidate);
+      if (coreEnd === null) continue;
+      let end = coreEnd;
+      while (end < text.length && isWrapperPunctuation(text[end])) end += 1;
+      return end;
+    }
+    return null;
+  }
+
+  function readMarkdownAtom(text, start) {
+    const directProtectedEnd = readProtectedMarkdownEnd(text, start);
+    if (directProtectedEnd !== null) {
+      return { end: directProtectedEnd, protectedEnd: directProtectedEnd };
+    }
+
+    // A plain token can run directly into a Markdown atom. Stop treating the
+    // first whitespace inside the atom as the boundary: `testo[etichetta
+    // lunga](nav:azione)` must travel as one protected piece.
+    const plainEnd = readPlainAtomEnd(text, start);
+    for (let candidate = start + 1; candidate < plainEnd; candidate += 1) {
+      const protectedEnd = readProtectedMarkdownEnd(text, candidate);
+      if (protectedEnd !== null) {
+        return { end: protectedEnd, protectedEnd };
+      }
+      // A numeric atom may start after a punctuation wrapper. In particular,
+      // the first whitespace in `(12 345)` makes `plainEnd` stop at `(12`; scan
+      // its digit candidate before accepting that partial token as plain text.
+      if ([...text.slice(start, candidate)].every(isMarkdownPunctuation)) {
+        const numericEnd = readNumericMarkdownAtomEnd(text, candidate);
+        if (numericEnd !== null) {
+          return { end: numericEnd, protectedEnd: numericEnd };
+        }
+      }
+    }
+
+    const numericEnd = readNumericMarkdownAtomEnd(text, start);
+    if (numericEnd !== null) {
+      return { end: numericEnd, protectedEnd: numericEnd };
+    }
+    return { end: plainEnd, protectedEnd: null };
+  }
+
+  function readStructuredLineContentStart(text, start) {
+    if (start > 0 && text[start - 1] !== '\n') return null;
+    const lineEnd = text.indexOf('\n', start);
+    const end = lineEnd === -1 ? text.length : lineEnd;
+    let cursor = start;
+    let consumed = false;
+
+    // `lineStructuralSignature` is the shared Markdown grammar. Use its kind
+    // to admit every marker the normal translator accepts (including tabs,
+    // `•` and tables), then consume the original prefix without normalizing
+    // the source bytes that must be sent back through the joiner.
+    while (cursor < end) {
+      const signature = lineStructuralSignature(text.slice(cursor, end));
+      if (!['heading', 'bullet', 'ordered', 'quote', 'table'].includes(signature.kind)) break;
+
+      while (cursor < end && /[ \t]/u.test(text[cursor])) cursor += 1;
+      if (signature.kind === 'heading') {
+        while (cursor < end && text[cursor] === '#') cursor += 1;
+      } else if (signature.kind === 'ordered') {
+        while (cursor < end && /\d/u.test(text[cursor])) cursor += 1;
+        if (text[cursor] === '.' || text[cursor] === ')') cursor += 1;
+      } else {
+        cursor += 1;
+      }
+      while (cursor < end && /[ \t]/u.test(text[cursor])) cursor += 1;
+      consumed = true;
+    }
+    return consumed ? cursor : null;
+  }
+
+  function readStructuredLineAtom(text, start) {
+    const contentStart = readStructuredLineContentStart(text, start);
+    if (contentStart === null) return null;
+    if (contentStart >= text.length || /\s/.test(text[contentStart])) {
+      return { end: contentStart, protectedEnd: null };
+    }
+    return readMarkdownAtom(text, contentStart);
+  }
+
+  let index = 0;
+  while (index < source.length) {
+    let atomStart;
+    let structuredEnd = null;
+    let protectedEnd = null;
+    if (/\s/.test(source[index])) {
+      const separatorStart = index;
+      while (index < source.length && /\s/.test(source[index])) index += 1;
+      // Keep indentation with a list/quote/heading marker. The old loop
+      // consumed it into `pendingSeparator` first, so a chunk boundary at the
+      // next word could leave `  -` or `> ` at the end of a request.
+      const lineStart = source.lastIndexOf('\n', index - 1) + 1;
+      if (lineStart < separatorStart) {
+        pendingSeparator += source.slice(separatorStart, index);
+        continue;
+      }
+      const structuredAtom = readStructuredLineAtom(source, lineStart);
+      if (structuredAtom === null) {
+        pendingSeparator += source.slice(separatorStart, index);
+        continue;
+      }
+      pendingSeparator += source.slice(separatorStart, lineStart);
+      atomStart = lineStart;
+      structuredEnd = structuredAtom.end;
+      protectedEnd = structuredAtom.protectedEnd;
+      index = structuredAtom.end;
+    } else {
+      atomStart = index;
+      const structuredAtom = readStructuredLineAtom(source, index);
+      if (structuredAtom !== null) {
+        structuredEnd = structuredAtom.end;
+        protectedEnd = structuredAtom.protectedEnd;
+        index = structuredAtom.end;
+      } else {
+        const markdownAtom = readMarkdownAtom(source, index);
+        protectedEnd = markdownAtom.protectedEnd;
+        index = markdownAtom.end;
+      }
+    }
+
+    if (index <= atomStart) index = atomStart + 1;
+    const atomText = source.slice(atomStart, index);
+    const atomWords = countWords(atomText);
+    if (protectedEnd !== null && atomWords > chunkTarget) {
+      throw new Error(
+        `protected translation atom exceeds translation chunk cap (${atomWords} > ${chunkTarget} words)`,
+      );
+    }
+    const atomParts = !structuredEnd
+      && protectedEnd === null
+      && atomWords > chunkTarget
+      ? atomText.split(/([#>*`_~\-]+)/).filter(Boolean)
+      : [atomText];
+    for (const [partIndex, part] of atomParts.entries()) {
+      pieces.push({
+        text: part,
+        words: countWords(part),
+        separatorBefore: pieces.length === 0 || partIndex > 0 ? '' : pendingSeparator,
+      });
+    }
+    pendingSeparator = '';
+  }
+
   let currentChunk = '';
   let currentWords = 0;
-  for (const p of paragraphs) {
-    const pWords = countWords(p);
-    if (currentWords + pWords > chunkTarget && currentChunk) {
-      chunks.push(currentChunk);
-      currentChunk = p;
-      currentWords = pWords;
-    } else {
-      currentChunk += (currentChunk ? '\n\n' : '') + p;
-      currentWords += pWords;
+  const flushCurrent = () => {
+    if (!currentChunk) return;
+    chunks.push(currentChunk);
+    currentChunk = '';
+    currentWords = 0;
+  };
+
+  for (const piece of pieces) {
+    if (currentChunk && currentWords + piece.words > chunkTarget) {
+      flushCurrent();
+      separators.push(piece.separatorBefore);
     }
+    currentChunk += (currentChunk ? piece.separatorBefore : '') + piece.text;
+    currentWords += piece.words;
   }
-  if (currentChunk) chunks.push(currentChunk);
+  flushCurrent();
+
+  // The array stays a string[] for every existing caller, while this metadata
+  // lets the joiner distinguish an internal word-boundary cut (' ') from an
+  // original Markdown paragraph/list break ('\n' or '\n\n').
+  Object.defineProperty(chunks, 'separators', { value: separators });
   return chunks;
 }
 
@@ -14550,9 +15064,17 @@ function preserveMunicipalityNamesInMetadata(data) {
 // Free-MT replacement for translateContent: same return shape ({title, excerpt,
 // body1..bodyN, faq?}) but each field via the quota-free cascade. Missing/failed
 // fields are simply omitted → the existing missing-field recovery loop in
-// translateArticle re-translates them (LLM); if that fails, title/excerpt/FAQ
-// fall back to IT and a bodyN stays untranslated (#1875).
-async function translateContentFreeMt(sourceLang, targetLang, targetLabel, sourceContent) {
+// translateArticle re-translates them (LLM). Body outputs are additionally
+// passed through translateInChunks' source-owned contract before they return;
+// if that fails, title/excerpt/FAQ fall back to IT and a bodyN stays
+// untranslated (#1875).
+async function translateContentFreeMt(
+  sourceLang,
+  targetLang,
+  targetLabel,
+  sourceContent,
+  { validateBody = null } = {},
+) {
   console.error(`🌍 [${targetLabel}] Traduzione ${targetLang.toUpperCase()} via cascade MT gratuita (no quota LLM)...`);
   const bodyFields = Object.keys(collectBodySections(sourceContent));
   const [title, excerpt, ...bodyValues] = await Promise.all([
@@ -14565,7 +15087,20 @@ async function translateContentFreeMt(sourceLang, targetLang, targetLabel, sourc
       'excerpt',
       { preserveMunicipalityNames: true },
     ),
-    ...bodyFields.map((field) => freeMtField(sourceContent[field], sourceLang, targetLang, 'description', field)),
+    ...bodyFields.map(async (field) => {
+      const translated = await freeMtField(sourceContent[field], sourceLang, targetLang, 'description', field);
+      if (!translated || typeof validateBody !== 'function') return translated;
+      const validated = await validateBody({
+        field,
+        sourceText: sourceContent[field],
+        translated,
+      });
+      if (validated === null) {
+        console.error(`  ⚠️  ${targetLang}:${field} — contratto strutturale/link/numerico non valido nel free-MT, campo scartato: recupero per-campo downstream`);
+        return '';
+      }
+      return validated;
+    }),
   ]);
 
   let faq;
@@ -14621,8 +15156,25 @@ Rispondi con un JSON object (no markdown, no code fences):
 {"${field}": "..."}`;
 }
 
+function buildPendingBodyRetranslationPrompt({ langName, field, itValue, partLabel = '' }) {
+  return `Traduci COMPLETAMENTE in ${langName} il seguente corpo dell'articolo per il sito Frontaliere Ticino.
+
+VINCOLI OBBLIGATORI:
+- non riassumere e non omettere frasi o paragrafi;
+- mantieni la stessa struttura Markdown, inclusi heading, elenchi, citazioni e interruzioni di riga;
+- mantieni invariati i nomi propri, i toponimi, le cifre e le destinazioni dei link nav: protette dai marcatori;
+- non aggiungere spiegazioni, prefissi o code fences.
+
+CONTENUTO ITALIANO DA TRADURRE:
+- ${field}${partLabel}: ${itValue}
+
+Rispondi con un JSON object (no markdown, no code fences):
+{"${field}": "..."}`;
+}
+
 /**
- * Un body rimasto in attesa (#1875), tradotto dalla corsia Codex del job.
+ * Un body rimasto in attesa (#1875), recuperato dalla corsia Codex del job
+ * oppure dalla catena storica quando il circuit breaker ha escluso Codex.
  *
  * Il motore e' quello della bonifica dei body bloccanti
  * (`translateWithCodexEngine`, lib/free-translate.mjs), con il trasporto
@@ -14630,7 +15182,9 @@ Rispondi con un JSON object (no markdown, no code fences):
  * pero' da `translateFieldFreeMt`, lo stesso percorso di ogni altro body
  * tradotto dal free-MT: link `nav:` mascherati e verificati, surrogati
  * isolati, completezza minima del body (`semantic-truncation`, un riassunto
- * di Codex con un finale valido non passa) e passthrough. Qualunque rifiuto,
+ * di Codex con un finale valido non passa) e passthrough. L'output non vuoto
+ * passa poi dal contratto source-owned di `translateInChunks`, che vincola
+ * anche numeri, celle e struttura prima dell'ammissione. Qualunque rifiuto,
  * o un errore di trasporto, torna come '' e il body resta in attesa. I
  * rifiuti NON finiscono in `recordFreeMtUnusableOutput`: i loop che usano
  * quel report per il cap sono gia' chiusi.
@@ -14656,10 +15210,32 @@ let _pendingBodyCodexDeadlineMs = null;
 let _pendingBodySecondLaneArmed = false;
 
 function pendingBodySecondLaneAvailable() {
-  return _pendingBodySecondLaneArmed && isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY);
+  // `isModelAvailable` only proves that the Codex configuration is present;
+  // the lane wrapper also refuses a missing broker socket. Keep selection and
+  // wrapper fallback on the same physical precondition.
+  const brokerSocket = String(process.env.CODEX_AUTH_BROKER_SOCKET || '').trim();
+  return _pendingBodySecondLaneArmed
+    && brokerSocket !== ''
+    && existsSync(brokerSocket)
+    && !getCascadeStats().codexTranslation?.stopReason
+    && isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY);
 }
 
-async function translatePendingBodyWithCodex(itValue, locale, field, { onCodexCall = null } = {}) {
+function legacyTranslationChain() {
+  return DEFAULT_CHAIN.filter((model) => model !== AI_MODELS.CODEX_CLI_PRIMARY);
+}
+
+function pendingBodyRecoveryAvailable() {
+  return pendingBodySecondLaneAvailable()
+    || (_pendingBodySecondLaneArmed && legacyTranslationChain().some((model) => isModelAvailable(model)));
+}
+
+async function translatePendingBodyWithCodex(
+  itValue,
+  locale,
+  field,
+  { onCodexCall = null, callWithRetry = null, translateInChunks = null } = {},
+) {
   const codex = AI_MODELS.CODEX_CLI_PRIMARY;
   const codexDeadlineOptions = (deadlineMs) => ({
     deadlineMs,
@@ -14667,7 +15243,14 @@ async function translatePendingBodyWithCodex(itValue, locale, field, { onCodexCa
   return withCodexTranslationLane({
     processDeadlineMs: _pendingBodyCodexDeadlineMs,
     fallback: () => {
-      throw new Error('finestra residua troppo corta o lane Codex non disponibile');
+      // La disponibilità può cambiare dopo la selezione della corsia: il
+      // circuit-breaker può fermare Codex mentre la richiesta aspetta in coda.
+      // Il fallback storico è ammesso solo se il predicato condiviso prova che
+      // la corsia è ferma, anche quando il modello risulta ancora disponibile.
+      if (!pendingBodySecondLaneAvailable() && typeof callWithRetry === 'function') {
+        return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry, translateInChunks });
+      }
+      throw new Error('lane Codex fermata senza prova di indisponibilità del modello');
     },
     run: async ({ deadlineMs: laneDeadlineMs, admission, admitCall, reserveTransportRetry }) => {
       // Mantieni il guard esplicito del chiamante dopo l'ammissione: il
@@ -14698,6 +15281,7 @@ async function translatePendingBodyWithCodex(itValue, locale, field, { onCodexCa
         ...codexDeadlineOptions(callDeadlineMs),
       });
       const rejected = [];
+      let codexModelUnavailable = false;
       const text = await translateFieldFreeMt({
         text: itValue,
         sourceLang: 'it',
@@ -14705,6 +15289,10 @@ async function translatePendingBodyWithCodex(itValue, locale, field, { onCodexCa
         fieldType: 'description',
         fieldName: field,
         translate: async ({ text: masked, sourceLang, targetLang, fieldType }) => {
+          if (!isModelAvailable(codex)) {
+            codexModelUnavailable = true;
+            throw new Error('modello Codex non disponibile prima della chiamata fisica');
+          }
           const callAdmission = admitCall();
           if (!callAdmission) {
             throw new Error('budget Codex esaurito prima della chiamata fisica');
@@ -14724,6 +15312,13 @@ async function translatePendingBodyWithCodex(itValue, locale, field, { onCodexCa
               fieldType,
               call: callForDeadline(callDeadlineMs),
             });
+          } catch (error) {
+            // Il breaker del modello può scattare tra il controllo per-segmento
+            // e il completamento del trasporto. In quel caso il wrapper di
+            // translateFieldFreeMt assorbe l'errore: ricordiamo lo stop per
+            // poter riprovare il body intero sulla catena storica.
+            if (!isModelAvailable(codex)) codexModelUnavailable = true;
+            throw error;
           } finally {
             callAdmission.finish();
           }
@@ -14732,12 +15327,119 @@ async function translatePendingBodyWithCodex(itValue, locale, field, { onCodexCa
         onWarn: (msg) => console.error(`  ⚠️  [seconda corsia] ${msg}`),
         onUnusableOutput: (event) => rejected.push(event?.reason || 'unusable'),
       });
-      if (!text && rejected.length > 0) {
+      const validatedText = text && typeof translateInChunks === 'function'
+        ? await translateInChunks(
+          itValue,
+          field,
+          () => '',
+          `${locale}:${field}-pending-codex-validation`,
+          locale,
+          { pretranslatedResult: { [field]: text } },
+        )
+        : text;
+      if (text && validatedText === null) rejected.push('structure');
+      if (!validatedText
+        && (codexModelUnavailable || !pendingBodySecondLaneAvailable())
+        && typeof callWithRetry === 'function') {
+        // `translateFieldFreeMt` cattura lo stop della cascata segmentata e
+        // restituisce un campo vuoto. Riprova lo stesso body sulla catena
+        // storica solo se il breaker ha provato l'indisponibilità di Codex.
+        return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry, translateInChunks });
+      }
+      if (!validatedText && rejected.length > 0) {
         console.error(`  ⚠️  [seconda corsia] ${locale}:${field} rifiutato da translateFieldFreeMt (${rejected.join(', ')})`);
       }
-      return text;
+      return validatedText;
     },
   });
+}
+
+/**
+ * Recupera un body pending con la catena storica quando il circuit-breaker
+ * Codex ha spento la lane primaria. Passa comunque dal traduttore di campo,
+ * così i marker nav, la struttura Markdown, il passthrough e la completezza
+ * minima hanno lo stesso contratto della seconda corsia Codex.
+ */
+async function translatePendingBodyWithHistoricalChain(
+  itValue,
+  locale,
+  field,
+  { callWithRetry, translateInChunks } = {},
+) {
+  if (typeof callWithRetry !== 'function') {
+    throw new TypeError('translatePendingBodyWithHistoricalChain: `callWithRetry` è richiesto');
+  }
+  if (typeof translateInChunks !== 'function') {
+    throw new TypeError('translatePendingBodyWithHistoricalChain: `translateInChunks` è richiesto per il contratto strutturale');
+  }
+  const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
+  const rejected = [];
+  const text = await translateFieldFreeMt({
+    text: itValue,
+    sourceLang: 'it',
+    targetLang: locale,
+    fieldType: 'description',
+    fieldName: field,
+    translate: async ({ text: masked }) => {
+      if (countWords(masked || '') > TRANSLATION_CHUNK_THRESHOLD) {
+        // Reuse the same chunker as the legacy translation and truncation
+        // paths: the historical fallback must not send an oversized body in
+        // one request after Codex has stopped.
+        const chunked = await translateInChunks(
+          masked,
+          field,
+          (chunk, i, total) => buildPendingBodyRetranslationPrompt({
+            langName,
+            field,
+            itValue: chunk,
+            partLabel: total > 1 ? `, parte ${i + 1} di ${total}` : '',
+          }),
+          `${locale}:${field}-pending-retry`,
+          locale,
+        );
+        return chunked;
+      }
+      const parsed = await callWithRetry(
+        buildPendingBodyRetranslationPrompt({
+          langName,
+          field,
+          itValue: masked,
+        }),
+        Math.max(5000, Math.ceil(countWords(masked || '') * 5)),
+        `${locale}:${field}-pending-retry`,
+        { translation: true },
+      );
+      const translated = translatedStringOrNull(parsed?.[field], locale);
+      if (translated === null) {
+        rejected.push('non-string');
+        return '';
+      }
+      // Reuse the exact same source-owned contract as the chunked path on the
+      // already translated short body. `pretranslatedResult` avoids a second
+      // provider call while still running skeleton, links, numbers, markers
+      // and completeness checks before `translateFieldFreeMt` can finalize it.
+      const validated = await translateInChunks(
+        masked,
+        field,
+        () => '',
+        `${locale}:${field}-pending-retry-validation`,
+        locale,
+        { pretranslatedResult: { [field]: translated } },
+      );
+      if (validated === null) {
+        rejected.push('structure');
+        return '';
+      }
+      return validated;
+    },
+    balanceMarkdown: balanceMarkdownMarkers,
+    onWarn: (msg) => console.error(`  ⚠️  [seconda corsia storica] ${msg}`),
+    onUnusableOutput: (event) => rejected.push(event?.reason || 'unusable'),
+  });
+  if (!text && rejected.length > 0) {
+    console.error(`  ⚠️  ${locale}:${field} rifiutato dalla catena storica (${rejected.join(', ')})`);
+  }
+  return text;
 }
 
 /** La seconda corsia non avvia una chiamata dopo lo stop cooperativo o a ridosso della scadenza dichiarata. */
@@ -14796,14 +15498,6 @@ async function translateArticle(data) {
   resetBodyTranslationPending(data);
   const cascadeStatsBeforeTranslation = getCascadeStats();
   let translationRecoveryCodexCalls = 0;
-
-  // A recovery call is a translation call only when it opts into the Codex
-  // model explicitly. The fallback remains the scored historical chain with
-  // Codex removed, so a missing/disabled broker cannot strand the legacy path
-  // and fact-checks or second opinions cannot inherit this preference.
-  function legacyTranslationChain() {
-    return DEFAULT_CHAIN.filter((model) => model !== AI_MODELS.CODEX_CLI_PRIMARY);
-  }
 
   function legacyTranslationOptions() {
     // I producer importati non dichiarano una scadenza di processo: non
@@ -14928,29 +15622,942 @@ async function translateArticle(data) {
     }
   }
 
-  // Sub-chunk an oversized field into ~500-word paragraph pieces, translate
-  // each chunk in parallel via callWithRetry, and join. Shared by
-  // translateBodyField's initial translation below and the truncation-retry
-  // loop further down (#688): both send a field to the model as a single
-  // prompt when it's short, and both need the same chunking safety net once
-  // it isn't, since a single oversized prompt can hit the model's per-call
-  // output cap and come back truncated regardless of how many retries wrap it.
-  async function translateInChunks(bodyText, fieldKey, makeChunkPrompt, labelPrefix, targetLang) {
-    const chunks = splitIntoTranslationChunks(bodyText);
-    const translated = await Promise.all(
-      chunks.map((chunk, i) =>
-        callWithRetry(
-          makeChunkPrompt(chunk, i, chunks.length),
-          Math.max(5000, Math.ceil(countWords(chunk) * 5)),
-          `${labelPrefix}-p${i + 1}`,
-          { translation: true },
+  // Sub-chunk an oversized field into ~500-word pieces (at paragraph
+  // boundaries where possible, inside an oversized paragraph otherwise),
+  // translate each chunk in parallel via callWithRetry, and join. Shared by
+  // translateBodyField's initial translation below, the free-MT acceptance
+  // path, and the truncation-retry loop further down (#688): all three send a
+  // field to a provider as a single prompt when it's short, and all need the
+  // same source-owned contract before anything can be written.
+  async function translateInChunks(
+    bodyText,
+    fieldKey,
+    makeChunkPrompt,
+    labelPrefix,
+    targetLang,
+    { pretranslatedResult = null } = {},
+  ) {
+    const chunks = pretranslatedResult === null
+      ? splitIntoTranslationChunks(bodyText)
+      : [bodyText];
+    const translated = pretranslatedResult === null
+      ? await Promise.all(
+        chunks.map((chunk, i) =>
+          callWithRetry(
+            makeChunkPrompt(chunk, i, chunks.length),
+            Math.max(5000, Math.ceil(countWords(chunk) * 5)),
+            `${labelPrefix}-p${i + 1}`,
+            { translation: true },
+          ),
         ),
-      ),
-    );
+      )
+      : [pretranslatedResult];
     // `chunks` passati al join: un chunk tornato identico al suo italiano
     // rende nullo l'intero campo (`isSourcePassthrough`, #1875), come un chunk
-    // non-stringa.
-    return joinTranslatedChunks(translated, fieldKey, targetLang, chunks);
+    // non-stringa. I confini sono quelli della sorgente: una divisione dentro
+    // un paragrafo non deve diventare un nuovo paragrafo Markdown.
+    if (!Array.isArray(translated) || translated.length === 0) return null;
+    const parts = [];
+    for (const [index, result] of translated.entries()) {
+      const part = translatedStringOrNull(result?.[fieldKey], targetLang);
+      if (part === null || isSourcePassthrough(part, chunks[index])) return null;
+      parts.push(part);
+    }
+    const separators = chunks.separators || [];
+    const joined = parts.reduce(
+      (joined, part, index) => joined + (index === 0 ? '' : separators[index - 1] ?? '') + part,
+      '',
+    );
+
+    // The structural contracts below cannot see prose silently dropped from a
+    // chunk. A response can preserve every marker, link and number and still
+    // be a short, punctuated summary. Run the same source-vs-translation
+    // completeness guard used by the body truncation path before any caller
+    // can write the recomposed result (the oversized missing-field retry used
+    // to accept this string directly).
+    const completenessMiss = detectTruncation(joined, {
+      label: `${targetLang}:${fieldKey}-chunked`,
+      locale: targetLang,
+      referenceText: bodyText,
+    }).some((issue) => issue.code === 'translation-semantic-truncation');
+    if (completenessMiss) return null;
+
+    // A translated chunk may change visible prose, but it must not add, drop or
+    // replace a Markdown block marker. Compare the complete source/joined line
+    // skeleton before accepting the recomposed body; otherwise a provider can
+    // turn a list, heading or table line into a different structure while all
+    // source-owned routes and inline markers still look valid.
+    if (!hasSameLineSkeleton(bodyText, joined)) return null;
+
+    // `hasSameLineSkeleton` deliberately compares only the first structural
+    // marker. That is enough for the shared line guard, but not for a composed
+    // body: `> - voce` and `> voce` are both `quote`, while a table's inner
+    // pipes are not part of its coarse `table` signature. Keep the complete
+    // nested prefix and every escaped/raw pipe in the source-owned contract.
+    const normalizeJoinLines = (text) => String(text ?? '')
+      .replace(/\u00a0/g, ' ')
+      .replace(/\r\n?/g, '\n')
+      .split('\n')
+      .map((line) => {
+        const indent = line.match(/^[ \t]*/u)?.[0] || '';
+        const content = line.slice(indent.length).replace(/[ \t]+/gu, ' ').trim();
+        return content ? `${indent}${content}` : '';
+      })
+      .join('\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .replace(/^\n+|\n+$/g, '')
+      .split('\n');
+    const fullStructuralPrefix = (line) => {
+      const value = String(line ?? '');
+      const structuralKinds = new Set(['heading', 'bullet', 'ordered', 'quote', 'table']);
+      let cursor = 0;
+      let prefixEnd = 0;
+      while (cursor < value.length) {
+        const beforePrefix = cursor;
+        while (cursor < value.length && /[ \t]/u.test(value[cursor])) cursor += 1;
+        const signature = lineStructuralSignature(value.slice(cursor));
+        if (!structuralKinds.has(signature.kind)) break;
+        if (signature.kind === 'heading') {
+          while (cursor < value.length && value[cursor] === '#') cursor += 1;
+        } else if (signature.kind === 'ordered') {
+          while (cursor < value.length && /\d/u.test(value[cursor])) cursor += 1;
+          if (value[cursor] === '.' || value[cursor] === ')') cursor += 1;
+        } else {
+          cursor += 1;
+        }
+        while (cursor < value.length && /[ \t]/u.test(value[cursor])) cursor += 1;
+        if (cursor <= beforePrefix) break;
+        prefixEnd = cursor;
+      }
+      return value.slice(0, prefixEnd);
+    };
+    const pipeSkeleton = (line) => {
+      const value = String(line ?? '');
+      const pipes = [];
+      const cells = [];
+      const rawCells = [];
+      let cellStart = 0;
+      const cellShape = (cell) => {
+        const trimmed = cell.trim();
+        if (!trimmed) return 'empty';
+        if (/^:?-{3,}:?$/u.test(trimmed)) return 'separator';
+        // A cell's prose is translatable, but its source-owned atoms must stay
+        // attached to that column. Keeping this identity per cell closes the
+        // gap where a provider moves a URL, placeholder or other protected
+        // value to a different column while preserving the number of cells.
+        // Rows whose cells have no such atom are checked again after the
+        // numeric contract below; more than one unproven cell is rejected
+        // because translated prose alone cannot prove its column identity.
+        return {
+          kind: 'content',
+          opaque: opaqueSpanSignature(trimmed),
+        };
+      };
+      for (let cursor = 0; cursor < value.length; cursor += 1) {
+        if (value[cursor] !== '|') continue;
+        let slashCount = 0;
+        for (let previous = cursor - 1; previous >= 0 && value[previous] === '\\'; previous -= 1) {
+          slashCount += 1;
+        }
+        const escaped = slashCount % 2 === 1;
+        pipes.push(escaped ? 'escaped' : 'raw');
+        if (!escaped) {
+          const cell = value.slice(cellStart, cursor);
+          cells.push(cellShape(cell));
+          rawCells.push(cell.trim());
+          cellStart = cursor + 1;
+        }
+      }
+      if (!pipes.includes('raw')) return pipes;
+      const cell = value.slice(cellStart);
+      cells.push(cellShape(cell));
+      rawCells.push(cell.trim());
+      return { pipes, cells, rawCells };
+    };
+    const isLocalizedOrdinalLine = (sourceLine, translatedLine) => {
+      const sourceOrdinal = String(sourceLine ?? '').match(/^(\s*)(\d{1,2})[°º]\s+/u);
+      const translatedOrdinal = String(translatedLine ?? '').match(/^(\s*)(\d{1,2})\.\s+/u);
+      return Boolean(
+        sourceOrdinal
+        && translatedOrdinal
+        && sourceOrdinal[1] === translatedOrdinal[1]
+        && sourceOrdinal[2] === translatedOrdinal[2],
+      );
+    };
+    const sourceStructureLines = normalizeJoinLines(bodyText);
+    const joinedStructureLines = normalizeJoinLines(joined);
+    if (sourceStructureLines.length !== joinedStructureLines.length) return null;
+    for (const [index, sourceLine] of sourceStructureLines.entries()) {
+      const joinedLine = joinedStructureLines[index];
+      if (fullStructuralPrefix(sourceLine) !== fullStructuralPrefix(joinedLine)
+        && !isLocalizedOrdinalLine(sourceLine, joinedLine)) {
+        return null;
+      }
+      const sourcePipe = pipeSkeleton(sourceLine);
+      const joinedPipe = pipeSkeleton(joinedLine);
+      const sourcePipeShape = sourcePipe && sourcePipe.rawCells
+        ? { pipes: sourcePipe.pipes, cells: sourcePipe.cells }
+        : sourcePipe;
+      const joinedPipeShape = joinedPipe && joinedPipe.rawCells
+        ? { pipes: joinedPipe.pipes, cells: joinedPipe.cells }
+        : joinedPipe;
+      if (JSON.stringify(sourcePipeShape) !== JSON.stringify(joinedPipeShape)) {
+        return null;
+      }
+    }
+
+    const readCodeSpanEnd = (value, start) => {
+      if (value[start] !== '`') return null;
+      let markerLength = 0;
+      while (value[start + markerLength] === '`') markerLength += 1;
+      let end = start + markerLength;
+      while (end < value.length) {
+        if (value[end] !== '`') {
+          end += 1;
+          continue;
+        }
+        let runEnd = end + 1;
+        while (value[runEnd] === '`') runEnd += 1;
+        if (runEnd - end === markerLength) return runEnd;
+        end = runEnd;
+      }
+      return null;
+    };
+
+    // A chunk boundary must never make a Markdown link disappear or change
+    // its destination after the provider responses are recombined. Compare
+    // the complete link contract in source order: inline destinations,
+    // full/collapsed/shortcut reference keys, reference definitions and
+    // autolink destinations and HTML-anchor hrefs. Visible labels remain
+    // translatable, but every source-owned route must stay byte-stable
+    // (reference keys are compared case-insensitively because Markdown
+    // resolves them that way). The shared opaque-span guard below also covers
+    // bare URLs, email addresses, placeholders and translation sentinels that
+    // are not enclosed in link syntax.
+    const markdownLinkContract = (text) => {
+      const value = String(text ?? '');
+      const normalizeReference = (label) => String(label)
+        .replace(/[ \t\n]+/gu, ' ')
+        .trim()
+        .toLowerCase();
+      const readBalancedBracketEnd = (start) => {
+        if (value[start] !== '[') return null;
+        let depth = 0;
+        for (let index = start; index < value.length; index += 1) {
+          if (value[index] === '\\') {
+            index += 1;
+            continue;
+          }
+          const codeEnd = readCodeSpanEnd(value, index);
+          if (codeEnd !== null) {
+            index = codeEnd - 1;
+            continue;
+          }
+          if (value[index] === '[') depth += 1;
+          else if (value[index] === ']') {
+            depth -= 1;
+            if (depth === 0) return index;
+          }
+        }
+        return null;
+      };
+      const readBalancedParenthesisEnd = (start) => {
+        if (value[start] !== '(') return null;
+        let depth = 0;
+        for (let index = start; index < value.length; index += 1) {
+          if (value[index] === '\\') {
+            index += 1;
+            continue;
+          }
+          if (value[index] === '(') depth += 1;
+          else if (value[index] === ')') {
+            depth -= 1;
+            if (depth === 0) return index + 1;
+          }
+        }
+        return null;
+      };
+      // Code spans are source-owned, including their delimiter width and exact
+      // contents. Scan them independently so a code span nested in a link label
+      // is not hidden by the link parser below.
+      const codeSpans = [];
+      const unbalancedCodeSpans = [];
+      for (let cursor = 0; cursor < value.length; cursor += 1) {
+        if (value[cursor] !== '`') continue;
+        const codeEnd = readCodeSpanEnd(value, cursor);
+        if (codeEnd === null) {
+          let runEnd = cursor + 1;
+          while (value[runEnd] === '`') runEnd += 1;
+          unbalancedCodeSpans.push(value.slice(cursor, runEnd));
+          cursor = runEnd - 1;
+          continue;
+        }
+        codeSpans.push(value.slice(cursor, codeEnd));
+        cursor = codeEnd - 1;
+      }
+
+      const definitions = [];
+      const definitionKeys = new Set();
+      const readDefinitionLabelStart = (lineStart, lineEnd) => {
+        let cursor = lineStart;
+        let consumedPrefix = false;
+        while (cursor < lineEnd) {
+          while (cursor < lineEnd && /[ \t]/u.test(value[cursor])) cursor += 1;
+          const marker = value[cursor];
+          let next = cursor;
+          if (marker === '>') {
+            next += 1;
+          } else if (
+            ['-', '*', '+', '•'].includes(marker)
+            && (next + 1 >= lineEnd || /[ \t]/u.test(value[next + 1]))
+          ) {
+            next += 1;
+          } else {
+            const ordered = value.slice(cursor, lineEnd).match(/^\d+[.)](?:[ \t]+|$)/u);
+            if (!ordered) {
+              return {
+                labelStart: cursor,
+                consumedPrefix,
+                leadingIndent: cursor - lineStart,
+              };
+            }
+            next += ordered[0].length;
+          }
+          cursor = next;
+          consumedPrefix = true;
+        }
+        return {
+          labelStart: cursor,
+          consumedPrefix,
+          leadingIndent: cursor - lineStart,
+        };
+      };
+      for (let lineStart = 0; lineStart < value.length;) {
+        const nextLine = value.indexOf('\n', lineStart);
+        const lineEnd = nextLine === -1 ? value.length : nextLine;
+        const { labelStart, consumedPrefix, leadingIndent } = readDefinitionLabelStart(lineStart, lineEnd);
+        const labelEnd = readBalancedBracketEnd(labelStart);
+        if ((consumedPrefix || leadingIndent <= 3) && labelEnd !== null && value[labelEnd + 1] === ':') {
+          const key = normalizeReference(value.slice(labelStart + 1, labelEnd));
+          let targetStart = labelEnd + 2;
+          while (/[ \t]/u.test(value[targetStart] || '')) targetStart += 1;
+          let targetEnd = targetStart;
+          if (value[targetStart] === '<') {
+            targetEnd = targetStart + 1;
+            while (targetEnd < value.length && value[targetEnd] !== '>' && value[targetEnd] !== '\n') {
+              if (value[targetEnd] === '\\') targetEnd += 1;
+              targetEnd += 1;
+            }
+            if (value[targetEnd] === '>') targetEnd += 1;
+          } else if (value[targetStart] === '(') {
+            targetEnd = readBalancedParenthesisEnd(targetStart) ?? targetStart;
+          } else {
+            while (targetEnd < value.length && !/[ \t\n]/u.test(value[targetEnd])) targetEnd += 1;
+          }
+          if (key && targetEnd > targetStart) {
+            definitions.push({ key, target: value.slice(targetStart, targetEnd) });
+            definitionKeys.add(key);
+          }
+        }
+        if (nextLine === -1) break;
+        lineStart = nextLine + 1;
+      }
+
+      const linkEntries = [];
+      const htmlAnchors = [];
+      const htmlTags = [];
+      const unbalancedHtml = [];
+      const readHtmlTagEnd = (start) => {
+        let quote = null;
+        for (let index = start + 1; index < value.length; index += 1) {
+          const char = value[index];
+          if (quote !== null) {
+            if (char === quote) quote = null;
+            continue;
+          }
+          if (char === '"' || char === "'") {
+            quote = char;
+          } else if (char === '>') {
+            return index + 1;
+          }
+        }
+        return null;
+      };
+      const HTML_VOID_TAGS = new Set([
+        'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link',
+        'meta', 'param', 'source', 'track', 'wbr',
+      ]);
+      const readHtmlToken = (start) => {
+        if (value[start] !== '<') return null;
+        if (value.startsWith('<!--', start)) {
+          const commentEnd = value.indexOf('-->', start + 4);
+          return commentEnd === -1
+            ? null
+            : {
+              end: commentEnd + 3,
+              kind: 'comment',
+              raw: value.slice(start, commentEnd + 3),
+            };
+        }
+        const closing = value[start + 1] === '/';
+        const nameStart = start + (closing ? 2 : 1);
+        const nameMatch = value.slice(nameStart).match(/^([A-Za-z][A-Za-z0-9:_-]*)/u);
+        if (!nameMatch) return null;
+        const nameEnd = nameStart + nameMatch[0].length;
+        // Do not mistake Markdown autolinks such as `<https://...>` for an
+        // unclosed HTML element. A real tag has whitespace, `/` or `>` after
+        // its name.
+        if (value[nameEnd] !== '>' && value[nameEnd] !== '/' && !/[\s]/u.test(value[nameEnd] || '')) {
+          return null;
+        }
+        const end = readHtmlTagEnd(start);
+        if (end === null) return null;
+        const raw = value.slice(start, end);
+        if (!closing && value[nameEnd] === '/' && !/\/\s*>$/u.test(raw)) return null;
+        return {
+          end,
+          kind: 'tag',
+          name: nameMatch[1].toLowerCase(),
+          closing,
+          selfClosing: !closing && /\/\s*>$/u.test(raw),
+          raw,
+        };
+      };
+      const readHtmlAnchorCloseEnd = (start) => {
+        let depth = 1;
+        for (let cursor = start; cursor < value.length; cursor += 1) {
+          const codeEnd = readCodeSpanEnd(value, cursor);
+          if (codeEnd !== null) {
+            cursor = codeEnd - 1;
+            continue;
+          }
+          if (value[cursor] !== '<') continue;
+          const tagEnd = readHtmlTagEnd(cursor);
+          if (tagEnd === null) continue;
+          const tag = value.slice(cursor, tagEnd);
+          if (/^<a(?![\p{L}\p{N}_])/iu.test(tag) && !/\/\s*>$/u.test(tag)) {
+            depth += 1;
+          } else if (/^<\/a\s*>$/iu.test(tag)) {
+            depth -= 1;
+            if (depth === 0) return tagEnd;
+          }
+          cursor = tagEnd - 1;
+        }
+        return null;
+      };
+      const scanHtmlTags = () => {
+        const stack = [];
+        for (let cursor = 0; cursor < value.length; cursor += 1) {
+          const codeEnd = readCodeSpanEnd(value, cursor);
+          if (codeEnd !== null) {
+            cursor = codeEnd - 1;
+            continue;
+          }
+          const token = readHtmlToken(cursor);
+          if (token === null) continue;
+          htmlTags.push(`${token.kind}:${token.raw}`);
+          if (token.kind === 'tag') {
+            if (token.closing) {
+              if (stack.at(-1) !== token.name) {
+                unbalancedHtml.push(`unexpected-close:${token.name}`);
+              } else {
+                stack.pop();
+              }
+            } else if (!token.selfClosing && !HTML_VOID_TAGS.has(token.name)) {
+              stack.push(token.name);
+            }
+          }
+          cursor = token.end - 1;
+        }
+        for (const name of stack) unbalancedHtml.push(`unclosed:${name}`);
+      };
+      scanHtmlTags();
+      const parseLinkAt = (start) => {
+        const linkKind = value[start] === '!' ? 'image' : 'link';
+        const labelStart = value[start] === '!' ? start + 1 : start;
+        if (value[labelStart] !== '[') return null;
+        const labelEnd = readBalancedBracketEnd(labelStart);
+        if (labelEnd === null) return null;
+        const label = value.slice(labelStart + 1, labelEnd);
+        const suffixStart = labelEnd + 1;
+        if (value[suffixStart] === '(') {
+          const end = readBalancedParenthesisEnd(suffixStart);
+          if (end === null) return null;
+          return {
+            end,
+            labelStart,
+            labelEnd,
+            signature: `${linkKind}:inline:${value.slice(suffixStart + 1, end - 1)}`,
+          };
+        }
+        if (value[suffixStart] === '[') {
+          const referenceEnd = readBalancedBracketEnd(suffixStart);
+          if (referenceEnd === null) return null;
+          const reference = value.slice(suffixStart + 1, referenceEnd);
+          return {
+            end: referenceEnd + 1,
+            labelStart,
+            labelEnd,
+            signature: `${linkKind}:reference:${normalizeReference(reference || label)}`,
+          };
+        }
+        const key = normalizeReference(label);
+        return {
+          end: labelEnd + 1,
+          labelStart,
+          labelEnd,
+          signature: definitionKeys.has(key) ? `${linkKind}:reference:${key}` : null,
+        };
+      };
+
+      const scanMarkdownLinks = (start, end) => {
+        for (let cursor = start; cursor < end; cursor += 1) {
+          const codeEnd = readCodeSpanEnd(value, cursor);
+          if (codeEnd !== null) {
+            cursor = codeEnd - 1;
+            continue;
+          }
+          if (value[cursor] === '<') {
+            const tagEnd = readHtmlTagEnd(cursor);
+            if (tagEnd !== null) {
+              const tag = value.slice(cursor, tagEnd);
+              if (/^<a(?![\p{L}\p{N}_])/iu.test(tag)) {
+                const hrefs = [];
+                let attributeCursor = 2;
+                while (attributeCursor < tag.length - 1) {
+                  while (/\s/u.test(tag[attributeCursor] || '')) attributeCursor += 1;
+                  if (tag[attributeCursor] === '/' || tag[attributeCursor] === '>') {
+                    attributeCursor += 1;
+                    continue;
+                  }
+                  const attributeStart = attributeCursor;
+                  while (
+                    attributeCursor < tag.length - 1
+                    && !/[\s=/>]/u.test(tag[attributeCursor])
+                  ) attributeCursor += 1;
+                  if (attributeCursor === attributeStart) {
+                    attributeCursor += 1;
+                    continue;
+                  }
+                  const attributeName = tag.slice(attributeStart, attributeCursor).toLowerCase();
+                  const nameEnd = attributeCursor;
+                  while (/\s/u.test(tag[attributeCursor] || '')) attributeCursor += 1;
+                  let target = '';
+                  if (tag[attributeCursor] === '=') {
+                    attributeCursor += 1;
+                    while (/\s/u.test(tag[attributeCursor] || '')) attributeCursor += 1;
+                    const quote = ['"', "'"].includes(tag[attributeCursor]) ? tag[attributeCursor] : '';
+                    if (quote) {
+                      const targetStart = attributeCursor + 1;
+                      const targetEnd = tag.indexOf(quote, targetStart);
+                      if (targetEnd < 0) break;
+                      target = tag.slice(targetStart, targetEnd);
+                      attributeCursor = targetEnd + 1;
+                    } else {
+                      const targetStart = attributeCursor;
+                      while (attributeCursor < tag.length - 1 && !/[\s>]/u.test(tag[attributeCursor])) {
+                        attributeCursor += 1;
+                      }
+                      target = tag.slice(targetStart, attributeCursor);
+                    }
+                  } else {
+                    attributeCursor = nameEnd;
+                  }
+                  if (/(?:^|\W)href$/u.test(attributeName)) hrefs.push(target);
+                }
+                const closeEnd = readHtmlAnchorCloseEnd(tagEnd);
+                htmlAnchors.push({
+                  hrefs,
+                  closed: closeEnd !== null,
+                  // The label is translated, so it is deliberately excluded
+                  // from this source-owned signature. The complete HTML tag
+                  // sequence below still protects opening/closing topology,
+                  // while this entry keeps the anchor destinations ordered.
+                  skeleton: value.slice(cursor, tagEnd),
+                });
+                cursor = tagEnd - 1;
+                continue;
+              }
+            }
+            const endOfAutolink = value.indexOf('>', cursor + 1);
+            if (endOfAutolink !== -1 && endOfAutolink < end) {
+              const target = value.slice(cursor + 1, endOfAutolink);
+              if (/^(?:[A-Za-z][A-Za-z0-9+.-]{1,31}:[^ <>]+|[^ <>@]+@[^ <>@]+)$/u.test(target)) {
+                linkEntries.push({ index: cursor, signature: `autolink:${target}` });
+                cursor = endOfAutolink;
+                continue;
+              }
+            }
+          }
+          if (value[cursor] !== '[' && value[cursor] !== '!') continue;
+          const parsed = parseLinkAt(cursor);
+          if (parsed === null || parsed.end > end) continue;
+          // A link label is itself Markdown. Scan it before skipping the outer
+          // link so an image or link nested in the label remains source-owned.
+          scanMarkdownLinks(parsed.labelStart + 1, parsed.labelEnd);
+          if (parsed.signature !== null) {
+            linkEntries.push({ index: cursor, signature: parsed.signature });
+          }
+          cursor = parsed.end - 1;
+        }
+      };
+      scanMarkdownLinks(0, value.length);
+      const links = linkEntries
+        .sort((left, right) => left.index - right.index)
+        .map(({ signature }) => signature);
+      return {
+        links,
+        definitions,
+        codeSpans,
+        unbalancedCodeSpans,
+        htmlAnchors,
+        htmlTags,
+        unbalancedHtml,
+      };
+    };
+    const sourceLinkContract = markdownLinkContract(bodyText);
+    const joinedLinkContract = markdownLinkContract(joined);
+    if (sourceLinkContract.unbalancedCodeSpans.length > 0
+      || joinedLinkContract.unbalancedCodeSpans.length > 0) {
+      return null;
+    }
+    if (sourceLinkContract.htmlAnchors.some(({ closed }) => !closed)
+      || joinedLinkContract.htmlAnchors.some(({ closed }) => !closed)) {
+      return null;
+    }
+    if (sourceLinkContract.unbalancedHtml.length > 0
+      || joinedLinkContract.unbalancedHtml.length > 0) {
+      return null;
+    }
+    if (JSON.stringify(sourceLinkContract) !== JSON.stringify(joinedLinkContract)) {
+      return null;
+    }
+    const opaqueSpanContract = (text) => String(text ?? '')
+      .split(/\r\n?|\n/u)
+      .flatMap((line) => opaqueSpanSignature(line));
+    if (JSON.stringify(opaqueSpanContract(bodyText)) !== JSON.stringify(opaqueSpanContract(joined))) {
+      return null;
+    }
+
+    // Numeric values are source-owned too. Locale-specific grouping and
+    // decimal separators may change, but the sign, ordered digit sequence and
+    // percent/degree unit must remain identical after the join. The one
+    // locale-only exception is a line-leading ordinal: Italian `1°`/`1º` can
+    // become `1.` in a target locale, so both spellings normalize to `.`.
+    // When a subject span survives the translation unchanged (or retains a
+    // source-owned capitalized anchor), keep the number attached to that span;
+    // comparing only the global digit sequence would accept `A: 100, B: 200`
+    // becoming `B: 100, A: 200`.
+    const maskSourceOwnedForNumbers = (text, codeSpans) => {
+      const value = String(text ?? '');
+      const ranges = [];
+      const addOccurrences = (needle) => {
+        if (!needle) return;
+        let cursor = 0;
+        while (cursor < value.length) {
+          const start = value.indexOf(needle, cursor);
+          if (start < 0) break;
+          ranges.push({ start, end: start + needle.length });
+          cursor = start + needle.length;
+        }
+      };
+      for (const codeSpan of codeSpans || []) addOccurrences(codeSpan);
+
+      let lineStart = 0;
+      while (lineStart <= value.length) {
+        const lineEnd = value.indexOf('\n', lineStart);
+        const end = lineEnd === -1 ? value.length : lineEnd;
+        const line = value.slice(lineStart, end);
+        let search = 0;
+        for (const span of opaqueSpanSignature(line)) {
+          const start = line.indexOf(span, search);
+          if (start < 0) continue;
+          ranges.push({ start: lineStart + start, end: lineStart + start + span.length });
+          search = start + span.length;
+        }
+        if (lineEnd === -1) break;
+        lineStart = lineEnd + 1;
+      }
+
+      ranges.sort((left, right) => left.start - right.start || right.end - left.end);
+      let cursor = 0;
+      let masked = '';
+      for (const { start, end } of ranges) {
+        if (start < cursor) continue;
+        masked += value.slice(cursor, start) + ' '.repeat(end - start);
+        cursor = end;
+      }
+      return masked + value.slice(cursor);
+    };
+    const numericContract = (text, codeSpans = []) => {
+      // URLs and code spans are source-owned atoms, not numeric facts. Mask
+      // them before matching numbers so `/123` in a link target or ``123`` in
+      // code cannot create an association that a normal label translation
+      // makes impossible to prove.
+      const value = maskSourceOwnedForNumbers(text, codeSpans);
+      const numberPattern = /(?<![\p{L}\p{N}_])[+\-−]?\d+(?:[.,'’\u00a0\u202f ]\d+)*(?:\s*[%°º])?(?![\p{L}\p{N}_])/gu;
+      const spanBoundary = (char) => char === '\n' || ',;!?|'.includes(char);
+      const isLineLeadingOrdinal = (match, token) => {
+        const lineStart = value.lastIndexOf('\n', match.index - 1) + 1;
+        const leadingOrdinal = value.slice(lineStart).match(/^[ \t]*\d{1,2}(?:[°º]|\.)\s/u);
+        if (!leadingOrdinal) return false;
+        const indentLength = leadingOrdinal[0].match(/^[ \t]*/u)?.[0].length || 0;
+        return match.index === lineStart + indentLength
+          && (/[°º]$/u.test(token) || value[match.index + token.length] === '.');
+      };
+      const numberEntries = [...value.matchAll(numberPattern)].map((match) => {
+        const [token] = match;
+        const unit = token.match(/[%°º]$/u)?.[0] || '';
+        const number = unit ? token.slice(0, -unit.length) : token;
+        const sign = number.match(/^[+\-−]/u)?.[0] || '';
+        const unsigned = sign ? number.slice(sign.length) : number;
+        const lineLeadingOrdinal = isLineLeadingOrdinal(match, token);
+        const normalizedUnit = lineLeadingOrdinal ? '.' : unit;
+        const tokenEnd = match.index + token.length
+          + (lineLeadingOrdinal && value[match.index + token.length] === '.' ? 1 : 0);
+        return {
+          value: `${sign}${unsigned.replace(/[.,'’\u00a0\u202f ]/gu, '')}:${normalizedUnit}`,
+          index: match.index,
+          end: tokenEnd,
+        };
+      });
+      const associations = numberEntries.map(({ value: number, index }) => {
+        let start = index;
+        while (start > 0 && !spanBoundary(value[start - 1])) start -= 1;
+        let end = index;
+        while (end < value.length && !spanBoundary(value[end])) end += 1;
+        const span = value.slice(start, end);
+        const numberRanges = numberEntries
+          .filter((entry) => entry.index >= start && entry.end <= end)
+          .sort((left, right) => right.index - left.index);
+        const withoutNumbers = numberRanges.reduce((without, entry) => {
+          const relativeStart = entry.index - start;
+          const relativeEnd = entry.end - start;
+          return `${without.slice(0, relativeStart)}#${without.slice(relativeEnd)}`;
+        }, span)
+          .replace(/\s+/gu, ' ')
+          .trim();
+        const anchorTokens = [...withoutNumbers.matchAll(/(?<![\p{L}\p{N}_])[\p{Lu}][\p{L}\p{N}_’'-]*/gu)]
+          .map(([anchor]) => anchor.toLowerCase())
+        return {
+          number,
+          exactSpan: withoutNumbers.toLowerCase(),
+          anchorSpan: anchorTokens.join('|'),
+        };
+      });
+      return {
+        values: numberEntries.map(({ value }) => value),
+        associations,
+      };
+    };
+    const sourceNumericContract = numericContract(bodyText, sourceLinkContract.codeSpans);
+    const joinedNumericContract = numericContract(joined, joinedLinkContract.codeSpans);
+    if (JSON.stringify(sourceNumericContract.values) !== JSON.stringify(joinedNumericContract.values)) {
+      return null;
+    }
+    // A capitalized token is only a candidate anchor. It becomes evidence of
+    // source ownership when the same normalized token survives in both full
+    // texts; a sentence starter such as `Il`/`The` must not bind a number to
+    // translated prose. Keep the association check for genuinely invariant
+    // labels/proper names, and fall back to the already-verified number order
+    // when translation has left no source-owned anchor to compare.
+    const anchorTokens = (contract) => new Set(
+      contract.associations.flatMap(({ anchorSpan }) => anchorSpan ? anchorSpan.split('|') : []),
+    );
+    const sourceAnchorTokens = anchorTokens(sourceNumericContract);
+    const joinedAnchorTokens = anchorTokens(joinedNumericContract);
+    const invariantAnchorTokens = new Set(
+      [...sourceAnchorTokens].filter((anchor) => joinedAnchorTokens.has(anchor)),
+    );
+    const withInvariantAnchors = (contract) => ({
+      ...contract,
+      associations: contract.associations.map((association) => ({
+        ...association,
+        anchorSpan: association.anchorSpan
+          .split('|')
+          .filter((anchor) => invariantAnchorTokens.has(anchor))
+          .join('|'),
+      })),
+    });
+    const sourceAnchoredNumericContract = withInvariantAnchors(sourceNumericContract);
+    const joinedAnchoredNumericContract = withInvariantAnchors(joinedNumericContract);
+
+    const compareNumericAssociations = (
+      key,
+      sourceContract = sourceNumericContract,
+      joinedContract = joinedNumericContract,
+    ) => {
+      const sourceBySpan = new Map();
+      const joinedBySpan = new Map();
+      for (const { number, ...association } of sourceContract.associations) {
+        const span = association[key];
+        if (!span) continue;
+        if (!sourceBySpan.has(span)) sourceBySpan.set(span, []);
+        sourceBySpan.get(span).push(number);
+      }
+      for (const { number, ...association } of joinedContract.associations) {
+        const span = association[key];
+        if (!span) continue;
+        if (!joinedBySpan.has(span)) joinedBySpan.set(span, []);
+        joinedBySpan.get(span).push(number);
+      }
+      const sourceKeys = [...sourceBySpan.keys()].sort();
+      const joinedKeys = [...joinedBySpan.keys()].sort();
+      if (sourceKeys.length === 0 || JSON.stringify(sourceKeys) !== JSON.stringify(joinedKeys)) return null;
+      return sourceKeys.every((span) => JSON.stringify(sourceBySpan.get(span)) === JSON.stringify(joinedBySpan.get(span)));
+    };
+    const exactAssociation = compareNumericAssociations('exactSpan');
+    const anchorAssociation = exactAssociation === null && invariantAnchorTokens.size > 0
+      ? compareNumericAssociations(
+        'anchorSpan',
+        sourceAnchoredNumericContract,
+        joinedAnchoredNumericContract,
+      )
+      : null;
+    const anchorAssociationCoversEveryFact = sourceNumericContract.associations.length > 0
+      && sourceAnchoredNumericContract.associations.every(({ anchorSpan }) => Boolean(anchorSpan))
+      && joinedAnchoredNumericContract.associations.every(({ anchorSpan }) => Boolean(anchorSpan))
+      && anchorAssociation === true;
+    // A global digit sequence is enough when no source-owned anchor survives;
+    // there is no association evidence left to contradict the ordered facts.
+    // When invariant anchors remain, they must cover every fact so a possible
+    // reassociation cannot be published.
+    const hasInvariantAnchorEvidence = invariantAnchorTokens.size > 0;
+    const numericAssociationMismatch = exactAssociation === false
+      || (exactAssociation === null
+        && hasInvariantAnchorEvidence
+        && !anchorAssociationCoversEveryFact);
+    if (sourceNumericContract.values.length > 0 && numericAssociationMismatch) return null;
+
+    // A table can preserve its pipes and per-cell opaque atoms while still
+    // swapping two cells made only of translatable prose. Such cells have no
+    // source-owned identity after translation, so accept at most one unresolved
+    // cell per row (all other cells provide a unique association by position/proof).
+    // This is deliberately fail-closed: a table with two or more unresolved
+    // cells, or duplicate proofs on changed cells, cannot demonstrate that the
+    // provider kept the facts in their original columns.
+    const tableCellProof = (cell) => ({
+      opaque: opaqueSpanSignature(cell),
+      numeric: numericContract(cell).values,
+    });
+    for (const [index, sourceLine] of sourceStructureLines.entries()) {
+      const joinedLine = joinedStructureLines[index];
+      const sourcePipe = pipeSkeleton(sourceLine);
+      const joinedPipe = pipeSkeleton(joinedLine);
+      if (!sourcePipe?.rawCells || !joinedPipe?.rawCells) continue;
+      const cellEntries = sourcePipe.rawCells.map((sourceCell, cellIndex) => {
+        const joinedCell = joinedPipe.rawCells[cellIndex];
+        return {
+          sourceCell,
+          joinedCell,
+          sourceProof: tableCellProof(sourceCell),
+          joinedProof: tableCellProof(joinedCell),
+        };
+      });
+      const changedProofCounts = new Map();
+      for (const { sourceCell, joinedCell, sourceProof } of cellEntries) {
+        if (sourceCell === joinedCell) continue;
+        if (sourceProof.opaque.length === 0 && sourceProof.numeric.length === 0) continue;
+        const proofKey = JSON.stringify(sourceProof);
+        changedProofCounts.set(proofKey, (changedProofCounts.get(proofKey) || 0) + 1);
+      }
+      let unresolvedCells = 0;
+      for (const { sourceCell, joinedCell, sourceProof, joinedProof } of cellEntries) {
+        if (sourceCell === joinedCell) continue;
+        if (JSON.stringify(sourceProof) !== JSON.stringify(joinedProof)) return null;
+        const proofKey = JSON.stringify(sourceProof);
+        if (
+          (sourceProof.opaque.length === 0 && sourceProof.numeric.length === 0)
+          || changedProofCounts.get(proofKey) > 1
+        ) {
+          unresolvedCells += 1;
+        }
+      }
+      if (unresolvedCells > 1) return null;
+    }
+
+    // `balanceMarkdownMarkers` only repairs/validates bold `**` and separator
+    // lines. Keep the full source-owned delimiter skeleton here as well, so a
+    // provider cannot silently turn `*testo*`, `_testo_` or `~~testo~~` into
+    // plain prose (or swap one delimiter family for another).
+    const markdownMarkerContract = (text) => {
+      const value = String(text ?? '');
+      const candidates = [];
+      const isWord = (char) => Boolean(char) && /[\p{L}\p{N}]/u.test(char);
+      const isEscaped = (start) => {
+        let slashCount = 0;
+        for (let index = start - 1; index >= 0 && value[index] === '\\'; index -= 1) {
+          slashCount += 1;
+        }
+        return slashCount % 2 === 1;
+      };
+
+      for (let cursor = 0; cursor < value.length; cursor += 1) {
+        const codeEnd = readCodeSpanEnd(value, cursor);
+        if (codeEnd !== null) {
+          cursor = codeEnd - 1;
+          continue;
+        }
+        if (!'*_~'.includes(value[cursor]) || isEscaped(cursor)) continue;
+        const marker = value[cursor];
+        let end = cursor + 1;
+        while (value[end] === marker) end += 1;
+        const run = value.slice(cursor, end);
+        if (marker === '~' && run.length < 2) {
+          cursor = end - 1;
+          continue;
+        }
+        // Intraword underscores are literal text, not emphasis delimiters.
+        if (marker === '_' && isWord(value[cursor - 1]) && isWord(value[end])) {
+          cursor = end - 1;
+          continue;
+        }
+        candidates.push(run);
+        cursor = end - 1;
+      }
+
+      const stack = [];
+      const matched = new Set();
+      candidates.forEach((marker, index) => {
+        const open = stack[stack.length - 1];
+        if (open !== undefined && candidates[open] === marker) {
+          matched.add(open);
+          matched.add(index);
+          stack.pop();
+        } else {
+          stack.push(index);
+        }
+      });
+      return candidates.filter((_, index) => matched.has(index));
+    };
+    if (JSON.stringify(markdownMarkerContract(bodyText)) !== JSON.stringify(markdownMarkerContract(joined))) {
+      return null;
+    }
+
+    // `balanceMarkdownMarkers` is intentionally used as a validator here:
+    // changing the joined text would mean the provider returned broken
+    // Markdown, not something the separator joiner can safely repair.
+    const balanced = balanceMarkdownMarkers(joined, { sourceText: bodyText });
+    if (balanced !== joined) return null;
+    return joined;
+  }
+
+  // Validate every already translated body through the same source-owned
+  // contract as the chunked legacy path. The free-MT route has its own
+  // line/opaque guard, but it cannot prove numeric associations or table-cell
+  // ownership; pretranslatedResult lets this validator run without a second
+  // provider call.
+  async function validatePretranslatedBody(bodyText, fieldKey, translated, targetLang, labelPrefix) {
+    const text = translatedStringOrNull(translated, targetLang);
+    if (text === null) return null;
+    return translateInChunks(
+      bodyText,
+      fieldKey,
+      () => '',
+      labelPrefix,
+      targetLang,
+      { pretranslatedResult: { [fieldKey]: text } },
+    );
   }
 
   async function translateContent(sourceLang, targetLang, targetLabel, sourceContent) {
@@ -14960,7 +16567,15 @@ async function translateArticle(data) {
     // an untranslated body for bodyN — #1875), so this never degrades below the
     // legacy path's worst case. Opt-out via ARTICLE_TRANSLATE_FREE_MT=0.
     if (ARTICLE_TRANSLATE_FREE_MT) {
-      return translateContentFreeMt(sourceLang, targetLang, targetLabel, sourceContent);
+      return translateContentFreeMt(sourceLang, targetLang, targetLabel, sourceContent, {
+        validateBody: ({ field, sourceText, translated }) => validatePretranslatedBody(
+          sourceText,
+          field,
+          translated,
+          targetLang,
+          `${targetLang}:${field.replace('body', 'b')}-free-mt-validation`,
+        ),
+      });
     }
     // Use scored chain (no model pinning) — falls back through all models automatically
     const langName = targetLang === 'en' ? 'inglese' : targetLang === 'de' ? 'tedesco' : 'francese';
@@ -15041,10 +16656,27 @@ ${localizedToponymInstruction(targetLang)}`;
           console.error(`  ⚠️  ${lang}:${bodyKey} identico all'italiano — campo scartato, recupero per-campo downstream`);
           return {};
         }
-        return { [bodyKey]: sanitizeBodyText(text) };
+        // The single-call path must use the same source-owned contracts as the
+        // chunked path. `pretranslatedResult` validates this response without
+        // issuing another provider request, so links, numbers, nested prefixes
+        // and table-cell associations cannot bypass the acceptance guard.
+        const validated = await translateInChunks(
+          bodyText,
+          bodyKey,
+          () => '',
+          `${lang}:${bodyKey.replace('body', 'b')}-validation`,
+          lang,
+          { pretranslatedResult: result },
+        );
+        if (validated === null) {
+          console.error(`  ⚠️  ${lang}:${bodyKey} — contratto strutturale/link/numerico non valido, campo scartato: recupero per-campo downstream`);
+          return {};
+        }
+        return { [bodyKey]: sanitizeBodyText(validated) };
       }
 
-      // Sub-chunk: split at paragraph boundaries into ~500-word pieces,
+      // Sub-chunk: split into ~500-word pieces, at paragraph boundaries where
+      // possible and inside an oversized paragraph otherwise,
       // translate each in parallel, and join. A chunk the model returned as
       // an object used to be stringified into the joined body as
       // "[object Object]" — one corrupted paragraph in the middle of
@@ -15325,7 +16957,18 @@ ${localizedToponymInstruction(targetLang)}`;
       // copia identica ha gia' il suo retry dedicato piu' sotto.
       const bodyPassthrough = !faqPart && /^body\d+$/.test(field)
         && isSourcePassthrough(valoreTradotto, readField(itContent));
-      if (traduzioneUsabile && !floorMiss && !freeMtRejected && !bodyPassthrough && !faqControlRejected) continue;
+      // Una FAQ puo' essere rimasta nella copia italiana anche se il free-MT
+      // ha gia' registrato il rifiuto del campo indicizzato. In quel caso il
+      // valore e' materialmente usabile ma non e' una traduzione: riapri la
+      // recovery solo quando il report prova il rifiuto di quella precisa
+      // coppia, cosi' un fallback legacy legittimo non paga un retry spurio.
+      const faqPassthrough = faqPart && freeMtRejected
+        && isSourcePassthrough(valoreTradotto, readField(itContent));
+      // `unusableFields` records that an earlier free-MT response was rejected;
+      // a later retry may already have supplied a usable value for that same
+      // field. The current value decides whether recovery is needed; the
+      // historical rejection only scopes the fallback cap below.
+      if (traduzioneUsabile && !floorMiss && !bodyPassthrough && !faqPassthrough && !faqControlRejected) continue;
       // ULTIMA RISORSA ASIMMETRICA. Un campo implausibile e' comunque prosa
       // NELLA LINGUA GIUSTA: se il retry non produce di meglio si tiene quello,
       // MAI il fallback IT, che pubblicherebbe italiano sotto `/de/` (#831).
@@ -15361,7 +17004,7 @@ ${localizedToponymInstruction(targetLang)}`;
           ? `  ⚠️  Campo ${field} nella traduzione ${locale} contiene un carattere di controllo non pubblicabile — retry traduzione mirata...`
           : floorMiss
           ? `  ⚠️  Campo ${field} nella traduzione ${locale} troppo corto per essere un ${field} (${floorMiss}) — retry traduzione mirata...`
-          : bodyPassthrough
+          : bodyPassthrough || faqPassthrough
             ? `  ⚠️  Campo ${field} nella traduzione ${locale} identico all'italiano — retry traduzione mirata...`
             : `  ⚠️  Campo ${field} mancante nella traduzione ${locale} — retry traduzione mirata...`,
       );
@@ -15408,17 +17051,58 @@ ${localizedToponymInstruction(targetLang)}`;
         try {
           // Reuse the in-scope callWithRetry (callLLM + JSON repair + truncation
           // back-off) for a focused single-field re-translation.
-          const parsed = await callWithRetry(
-            `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${retryFieldLabel}):\n${itValue}\n\nFormato risposta: ${faqPart ? `{"faq": [{"${faqPart}": "..."}]}` : `{"${field}": "..."}`}`,
-            1500,
-            `${locale}:${recoveryField}-missing-retry`,
-            { translation: true },
-          );
+          const oversizedBody = isBodyField
+            && typeof translateInChunks === 'function'
+            && countWords(itValue) > TRANSLATION_CHUNK_THRESHOLD;
+          let retried;
+          if (oversizedBody) {
+            // Keep the missing-field recovery under the same per-request cap
+            // as the initial and truncation-retry paths. Sending this body
+            // monolithically would bypass the guard exactly when the legacy
+            // route is asked to repair a missing field.
+            console.error(`    📦 ${locale}:${field} = ${countWords(itValue)} parole → sub-chunking missing-field retry...`);
+            const chunked = await translateInChunks(
+              itValue,
+              field,
+              (chunk, i, total) => buildPendingBodyRetranslationPrompt({
+                langName,
+                field,
+                itValue: chunk,
+                partLabel: total > 1 ? `, parte ${i + 1} di ${total}` : '',
+              }),
+              `${locale}:${recoveryField}-missing-retry`,
+              locale,
+            );
+            retried = translatedStringOrNull(chunked, locale);
+          } else {
+            const parsed = await callWithRetry(
+              `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${retryFieldLabel}):\n${itValue}\n\nFormato risposta: ${faqPart ? `{"faq": [{"${faqPart}": "..."}]}` : `{"${field}": "..."}`}`,
+              1500,
+              `${locale}:${recoveryField}-missing-retry`,
+              { translation: true },
+            );
+            const rawRetried = translatedStringOrNull(readRetryValue(parsed), locale);
+            // Anche un retry breve e' una risposta body: non puo' saltare il
+            // contratto source-owned solo perche' non richiede sub-chunking.
+            retried = isBodyField
+              ? await validatePretranslatedBody(
+                itValue,
+                field,
+                rawRetried,
+                locale,
+                `${locale}:${recoveryField}-missing-validation`,
+              )
+              : rawRetried;
+            if (isBodyField && rawRetried !== null && retried === null) {
+              pendingReason = isSourcePassthrough(rawRetried, itValue)
+                ? 'retry-passthrough'
+                : 'retry-structure';
+            }
+          }
           // `String(retried)` on an object yields "[object Object]" — truthy and
           // different from the IT value, so the old check ASSIGNED it. Require a
           // real string so a non-string retry falls through to the no-translation
           // outcome below (pending body, or IT fallback for title/excerpt/FAQ).
-          const retried = translatedStringOrNull(readRetryValue(parsed), locale);
           const retriedControlRejected = Boolean(
             faqPart && rejectRawFaqControlEscape(normalizeLocalizedToponymText(retried)),
           );
@@ -15517,6 +17201,7 @@ ${localizedToponymInstruction(targetLang)}`;
       };
       try {
         let retried;
+        let rawRetried = null;
         if (countWords(itValue || '') > TRANSLATION_CHUNK_THRESHOLD) {
           // A single-prompt retry on an oversized field can hit the model's
           // own output cap and come back truncated again — the exact failure
@@ -15538,13 +17223,27 @@ ${localizedToponymInstruction(targetLang)}`;
             `${locale}:${field}-truncation-retry`,
             { translation: true },
           );
-          retried = translatedStringOrNull(parsed?.[field], locale);
+          rawRetried = translatedStringOrNull(parsed?.[field], locale);
+          // Il retry breve non scrive mai il risultato raw: il contratto
+          // chunked deve vedere anche numeri, link, marker e celle qui.
+          retried = await validatePretranslatedBody(
+            itValue,
+            field,
+            rawRetried,
+            locale,
+            `${locale}:${field}-truncation-validation`,
+          );
+          if (rawRetried !== null && retried === null) {
+            pendingReason = isSourcePassthrough(rawRetried, itValue)
+              ? 'truncation-retry-passthrough'
+              : 'truncation-retry-structure';
+          }
         }
         // Il retry puo' restituire l'italiano completo: non troncato, quindi il
         // solo `detectTruncation` lo accettava e la copia italiana restava
         // pubblicata (#1875). Stesso predicato di ogni altro punto di
         // accettazione di un body tradotto.
-        const retriedPassthrough = isSourcePassthrough(retried, itValue);
+        const retriedPassthrough = isSourcePassthrough(rawRetried ?? retried, itValue);
         if (retriedPassthrough) pendingReason = 'truncation-retry-passthrough';
         if (retried && !retriedPassthrough && !isRealTranslationTruncation(detectTruncation(retried, truncationOpts))) {
           data.content[locale][field] = sanitizeBodyText(retried);
@@ -15634,25 +17333,41 @@ ${localizedToponymInstruction(targetLang)}`;
   // viene committato: run 37220516797 (`de:body1`), 37153946271 (`fr:body1`,
   // `fr:body2`), entrambe con la cascata free esaurita e il tier Codex del
   // free-MT gia' fermo sul suo budget. Prima della guardia ogni body in attesa
-  // riceve UN tentativo sulla corsia Codex del job, pinnata (non la cascata
-  // free appena fallita) e con la scadenza che il processo ha dichiarato.
+  // riceve UN tentativo sulla corsia Codex del job, pinnata e con la scadenza
+  // che il processo ha dichiarato. Se il circuit-breaker ha gia' spento Codex,
+  // usa la catena storica senza Codex: il fallimento della lane primaria non
+  // deve trasformare una recovery ancora possibile in un missing-key certo.
   // L'uscita passa da `translateFieldFreeMt` come ogni body free-MT (nav-link,
-  // completezza, passthrough): vedi `translatePendingBodyWithCodex`. La guardia resta
+  // completezza, passthrough): vedi i due helper di recovery. La guardia resta
   // invariata: se anche Codex non traduce, il body resta in attesa e
   // l'articolo resta fuori da main. Vedi `retryPendingBodyTranslations`.
   // Sopra quel percorso, gli stessi predicati del retry di troncamento: testo
   // usabile nel locale, non l'italiano ricopiato, non troncato a meta' frase.
+  const initialPendingBodyLane = pendingBodySecondLaneAvailable()
+    ? AI_MODELS.CODEX_CLI_PRIMARY
+    : 'historical-translation-chain';
   await retryPendingBodyTranslations(data, {
     report: RUN_REPORT.translation,
-    lane: AI_MODELS.CODEX_CLI_PRIMARY,
-    isLaneAvailable: () => pendingBodySecondLaneAvailable(),
+    lane: initialPendingBodyLane,
+    isLaneAvailable: () => pendingBodyRecoveryAvailable(),
     shouldStop: () => pendingBodyLaneShouldStop(),
-    translate: ({ locale, field, itValue }) => translatePendingBodyWithCodex(
-      itValue,
-      locale,
-      field,
-      { onCodexCall: () => { translationRecoveryCodexCalls += 1; } },
-    ),
+    translate: ({ locale, field, itValue }) => pendingBodySecondLaneAvailable()
+      ? translatePendingBodyWithCodex(
+        itValue,
+        locale,
+        field,
+        {
+          onCodexCall: () => { translationRecoveryCodexCalls += 1; },
+          callWithRetry,
+          translateInChunks,
+        },
+      )
+      : translatePendingBodyWithHistoricalChain(
+        itValue,
+        locale,
+        field,
+        { callWithRetry, translateInChunks },
+      ),
     rejectReason: ({ locale, field, itValue, text }) => {
       if (translatedStringOrNull(text, locale) === null) return 'testo non usabile';
       if (isSourcePassthrough(text, itValue)) return "identico all'italiano";

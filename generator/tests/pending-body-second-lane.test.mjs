@@ -12,11 +12,14 @@
  *     → `content/blog-body/de/contributo-sanitario-settembre.ts: chiave mancante body1`;
  *   - run 37153946271 (2026-10-03): `fr:body1`, `fr:body2` → due `missing-key`.
  * In entrambe la cascata free era esaurita e il tier Codex del free-MT si era
- * gia' fermato sul suo budget, mentre la corsia Codex del job era pronta.
+ * gia' fermato sul suo budget. La corsia del job preferisce Codex, ma deve
+ * poter usare anche la catena storica se il circuit breaker ha gia' escluso
+ * Codex prima del secondo tentativo.
  *
  * IL FIX. Prima della guardia, `translateArticle()` passa ogni body in attesa a
- * `retryPendingBodyTranslations` con la corsia Codex pinnata. La guardia resta
- * invariata: se anche Codex non traduce, il body resta in attesa.
+ * `retryPendingBodyTranslations`, preferendo la corsia Codex pinnata e usando
+ * la catena storica senza Codex quando la prima e' gia' indisponibile. La
+ * guardia resta invariata: se nessuna corsia traduce, il body resta in attesa.
  *
  * COME GIRA. La funzione di libreria e' importata davvero; il blocco di
  * `translateArticle()` che la chiama e' ritagliato VERBATIM dal sorgente ed
@@ -40,11 +43,64 @@ import {
 } from '../scripts/lib/free-mt-recovery.mjs';
 import { translatedStringOrNull, isSourcePassthrough, translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
 import { detectTruncation } from '../scripts/lib/article-factuality-gates.mjs';
-import { codexCallDeadlineMs } from '../scripts/lib/free-translate.mjs';
+import {
+  balanceMarkdownMarkers,
+  codexCallDeadlineMs,
+  hasSameLineStructure,
+  hasSameLineSkeleton,
+  lineStructuralSignature,
+  opaqueSpanSignature,
+} from '../scripts/lib/free-translate.mjs';
 import { sanitizeBodyText } from '../scripts/lib/sanitize-body-braces.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const src = readFileSync(path.resolve(HERE, '../scripts/create-article.mjs'), 'utf-8');
+
+function extractFunctionSource(startMarker) {
+  const start = src.indexOf(startMarker);
+  assert.notEqual(start, -1, `${startMarker} non trovata in create-article.mjs`);
+  const end = src.indexOf('\n}\n', start);
+  assert.notEqual(end, -1, `fine di ${startMarker} non trovata in create-article.mjs`);
+  return src.slice(start, end + 2);
+}
+
+const COUNT_WORDS_SRC = extractFunctionSource("function countWords(text = '') {");
+const SPLIT_TRANSLATION_CHUNKS_SRC = extractFunctionSource(
+  'function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {',
+);
+function buildChunker() {
+  return new Function(
+    'lineStructuralSignature',
+    `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
+  )(lineStructuralSignature);
+}
+const TRANSLATE_IN_CHUNKS_SRC = (() => {
+  const start = src.indexOf('  async function translateInChunks(\n    bodyText,\n    fieldKey,\n    makeChunkPrompt,\n    labelPrefix,\n    targetLang,\n    { pretranslatedResult = null } = {},\n  ) {');
+  assert.notEqual(start, -1, 'translateInChunks non trovata in create-article.mjs');
+  const end = src.indexOf('\n  }\n', start);
+  assert.notEqual(end, -1, 'fine di translateInChunks non trovata in create-article.mjs');
+  return src.slice(start, end + 4);
+})();
+const MISSING_FIELD_LOOP_SRC = (() => {
+  const marker = '`${locale}:${recoveryField}-missing-retry`,';
+  const at = src.indexOf(marker);
+  assert.notEqual(at, -1, 'loop missing-field non trovato in create-article.mjs');
+  const loopStart = src.lastIndexOf("for (const locale of ['en', 'de', 'fr']) {", at);
+  const loopEnd = src.indexOf('\n  // Detect a translated body field cut off mid-sentence', at);
+  assert.ok(loopStart !== -1 && loopEnd !== -1, 'confini del loop missing-field non trovati');
+  return src.slice(loopStart, loopEnd);
+})();
+const BUILD_PENDING_BODY_PROMPT_SRC = (() => {
+  const start = src.indexOf('function buildPendingBodyRetranslationPrompt(');
+  assert.notEqual(start, -1, 'buildPendingBodyRetranslationPrompt non trovata');
+  const end = src.indexOf('\n}\n', start);
+  assert.notEqual(end, -1, 'fine di buildPendingBodyRetranslationPrompt non trovata');
+  return src.slice(start, end + 2);
+})();
+const TRANSLATION_CHUNK_THRESHOLD = Number(
+  src.match(/const TRANSLATION_CHUNK_THRESHOLD = (\d+);/)?.[1],
+);
+assert.ok(Number.isFinite(TRANSLATION_CHUNK_THRESHOLD), 'TRANSLATION_CHUNK_THRESHOLD non trovata');
 
 const IT_BODY = {
   body1: 'Il contributo sanitario di settembre cambia per i frontalieri del Ticino. La nuova aliquota vale da subito e riguarda chi lavora in Svizzera.',
@@ -244,6 +300,9 @@ test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scaden
   assert.match(body, /fieldName: field,/);
   assert.match(body, /chain: \[codex\]/);
   assert.match(body, /prefer: \[codex\]/);
+  assert.match(body, /fallback: \(\) => \{[\s\S]*if \(!pendingBodySecondLaneAvailable\(\) && typeof callWithRetry === 'function'\)[\s\S]*translatePendingBodyWithHistoricalChain\(itValue, locale, field, \{ callWithRetry, translateInChunks \}\)/);
+  assert.match(body, /const validatedText = text && typeof translateInChunks === 'function'[\s\S]*pretranslatedResult/);
+  assert.match(body, /if \(!validatedText\n\s+&& \(codexModelUnavailable \|\| !pendingBodySecondLaneAvailable\(\)\)/);
   // Nessun orologio di modulo: i producer che importano translateArticle()
   // (publish-journalist-article.mjs) non hanno CREATE_ARTICLE_MAX_WALL_MS.
   assert.doesNotMatch(body, /RUN_START_MS|RUN_WALL_BUDGET_MS/);
@@ -259,17 +318,79 @@ test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scaden
   assert.doesNotMatch(stop.slice(0, stop.indexOf('\n}\n')), /RUN_START_MS|wallBudgetExceeded/);
 });
 
+test('il free-MT applica il contratto chunked ai body prima di conservarli', () => {
+  const freeMtStart = src.indexOf('async function translateContentFreeMt(');
+  assert.notEqual(freeMtStart, -1, 'translateContentFreeMt non trovata');
+  const freeMtEnd = src.indexOf('\n}\n', freeMtStart) + 2;
+  const freeMtBody = src.slice(freeMtStart, freeMtEnd);
+  assert.match(freeMtBody, /validateBody = null/);
+  assert.match(freeMtBody, /const validated = await validateBody\(/);
+  assert.match(freeMtBody, /contratto strutturale\/link\/numerico non valido nel free-MT/);
+  const translateContentStart = src.indexOf('async function translateContent(sourceLang, targetLang, targetLabel, sourceContent) {');
+  const translateContentBody = src.slice(translateContentStart, src.indexOf('\n  }\n\n  const itContent', translateContentStart));
+  assert.match(translateContentBody, /validateBody: \(\{ field, sourceText, translated \}\) => validatePretranslatedBody\(/);
+  assert.match(translateContentBody, /pretranslatedResult/);
+});
+
 test('la corsia si arma solo nel percorso CLI: i producer importati (publish-journalist) non la interrogano', () => {
   const avail = src.slice(src.indexOf('function pendingBodySecondLaneAvailable() {'));
-  assert.match(avail.slice(0, avail.indexOf('\n}\n')), /_pendingBodySecondLaneArmed && isModelAvailable\(AI_MODELS\.CODEX_CLI_PRIMARY\)/);
+  assert.match(avail.slice(0, avail.indexOf('\n}\n')), /_pendingBodySecondLaneArmed/);
+  assert.match(avail.slice(0, avail.indexOf('\n}\n')), /CODEX_AUTH_BROKER_SOCKET/);
+  assert.match(avail.slice(0, avail.indexOf('\n}\n')), /existsSync\(brokerSocket\)/);
+  assert.match(avail.slice(0, avail.indexOf('\n}\n')), /getCascadeStats\(\)\.codexTranslation\?\.stopReason/);
+  assert.match(avail.slice(0, avail.indexOf('\n}\n')), /isModelAvailable\(AI_MODELS\.CODEX_CLI_PRIMARY\)/);
+  assert.match(src, /function pendingBodyRecoveryAvailable\(\) \{/);
+  assert.match(src, /pendingBodySecondLaneAvailable\(\)\n\s+\|\| \(_pendingBodySecondLaneArmed && legacyTranslationChain\(\)\.some\(\(model\) => isModelAvailable\(model\)\)\)/);
   assert.match(src, /^let _pendingBodySecondLaneArmed = false;$/m);
   const arms = [...src.matchAll(/_pendingBodySecondLaneArmed = true;/g)].map((m) => m.index);
   assert.equal(arms.length, 1);
   const installStart = src.indexOf('function installCodexTranslateProcessDeadline() {');
   assert.ok(arms[0] > installStart && arms[0] < src.indexOf('\n}\n', installStart), 'la corsia va armata solo da installCodexTranslateProcessDeadline (ramo CLI)');
   const { block } = extractSecondLaneBlock();
-  assert.match(block, /isLaneAvailable: \(\) => pendingBodySecondLaneAvailable\(\),/);
+  assert.match(block, /isLaneAvailable: \(\) => pendingBodyRecoveryAvailable\(\),/);
+  assert.match(src, /translatePendingBodyWithCodex\([\s\S]*callWithRetry,/);
   assert.match(src, /pending_recovered=\$\{JSON\.stringify\(recovery\.pendingBodyRecovered \|\| \{\}\)\}/);
+});
+
+test('lo stop della lane Codex non seleziona una corsia che poi fallirebbe', () => {
+  const at = src.indexOf('function pendingBodySecondLaneAvailable() {');
+  const end = src.indexOf('\n}\n', at) + 2;
+  const makeGuard = new Function(
+    'getCascadeStats', 'isModelAvailable', 'AI_MODELS',
+    '_pendingBodySecondLaneArmed', 'existsSync',
+    `${src.slice(at, end)}\nreturn pendingBodySecondLaneAvailable;`,
+  );
+  const previousSocket = process.env.CODEX_AUTH_BROKER_SOCKET;
+  process.env.CODEX_AUTH_BROKER_SOCKET = 'codex-broker.sock';
+  try {
+    const available = makeGuard(
+      () => ({ codexTranslation: { stopReason: '' } }),
+      () => true,
+      { CODEX_CLI_PRIMARY: 'codex-cli/test' },
+      true,
+      () => true,
+    );
+    const stopped = makeGuard(
+      () => ({ codexTranslation: { stopReason: 'budget esaurito' } }),
+      () => true,
+      { CODEX_CLI_PRIMARY: 'codex-cli/test' },
+      true,
+      () => true,
+    );
+    const brokerMissing = makeGuard(
+      () => ({ codexTranslation: { stopReason: '' } }),
+      () => true,
+      { CODEX_CLI_PRIMARY: 'codex-cli/test' },
+      true,
+      () => false,
+    );
+    assert.equal(available(), true);
+    assert.equal(stopped(), false);
+    assert.equal(brokerMissing(), false);
+  } finally {
+    if (previousSocket === undefined) delete process.env.CODEX_AUTH_BROKER_SOCKET;
+    else process.env.CODEX_AUTH_BROKER_SOCKET = previousSocket;
+  }
 });
 
 /** Il predicato condiviso col retry di troncamento, ritagliato verbatim dal sorgente. */
@@ -279,18 +400,27 @@ function realTruncationSrc() {
   return src.slice(at, src.indexOf('\n}\n', at) + 2);
 }
 
-async function runSecondLaneBlock({ data, RUN_REPORT, translatePendingBodyWithCodex, codexAvailable = true }) {
+async function runSecondLaneBlock({
+  data,
+  RUN_REPORT,
+  translatePendingBodyWithCodex,
+  translatePendingBodyWithHistoricalChain = async () => '',
+  codexAvailable = true,
+  historicalAvailable = false,
+}) {
   const { block } = extractSecondLaneBlock();
   const AI_MODELS = { CODEX_CLI_PRIMARY: 'codex-cli/test' };
   const fn = new Function(
-    'data', 'RUN_REPORT', 'retryPendingBodyTranslations', 'AI_MODELS', 'pendingBodySecondLaneAvailable', 'pendingBodyLaneShouldStop',
-    'translatePendingBodyWithCodex', 'translatedStringOrNull', 'isSourcePassthrough', 'detectTruncation', 'sanitizeBodyText', 'console',
+    'data', 'RUN_REPORT', 'retryPendingBodyTranslations', 'AI_MODELS', 'pendingBodySecondLaneAvailable', 'pendingBodyRecoveryAvailable', 'pendingBodyLaneShouldStop',
+    'translatePendingBodyWithCodex', 'translatePendingBodyWithHistoricalChain', 'callWithRetry', 'translatedStringOrNull', 'isSourcePassthrough', 'detectTruncation', 'sanitizeBodyText', 'translateInChunks', 'console',
     `${realTruncationSrc()}\nreturn (async () => { ${block} })();`,
   );
   const quiet = { error: () => {}, warn: () => {}, log: () => {} };
   await fn(
-    data, RUN_REPORT, retryPendingBodyTranslations, AI_MODELS, () => codexAvailable, () => false,
-    translatePendingBodyWithCodex, translatedStringOrNull, isSourcePassthrough, detectTruncation, sanitizeBodyText, quiet,
+    data, RUN_REPORT, retryPendingBodyTranslations, AI_MODELS, () => codexAvailable,
+    () => codexAvailable || historicalAvailable, () => false,
+    translatePendingBodyWithCodex, translatePendingBodyWithHistoricalChain, async () => ({}),
+    translatedStringOrNull, isSourcePassthrough, detectTruncation, sanitizeBodyText, null, quiet,
   );
 }
 
@@ -323,7 +453,7 @@ test('nel cablaggio vero l\'italiano ricopiato e il testo troncato restano in at
   }
 });
 
-test('senza corsia Codex disponibile il blocco non chiama nulla e il body resta in attesa', async () => {
+test('senza Codex né catena storica disponibile il blocco non chiama nulla e il body resta in attesa', async () => {
   const RUN_REPORT = { translation: createFreeMtRecoveryReport({ bodyFieldCount: 3 }) };
   const data = articleWithPendingDeBody1(RUN_REPORT.translation);
   let calls = 0;
@@ -336,4 +466,1469 @@ test('senza corsia Codex disponibile il blocco non chiama nulla e il body resta 
   assert.equal(calls, 0);
   assert.deepEqual(missingKeys(data), ['de:body1']);
   assert.equal(RUN_REPORT.translation.pendingBodyRetry.stoppedBy, 'lane-unavailable');
+});
+
+test('con Codex indisponibile la catena storica recupera il body pending', async () => {
+  const RUN_REPORT = { translation: createFreeMtRecoveryReport({ bodyFieldCount: 3 }) };
+  const data = articleWithPendingDeBody1(RUN_REPORT.translation);
+  const asked = [];
+  await runSecondLaneBlock({
+    data,
+    RUN_REPORT,
+    codexAvailable: false,
+    historicalAvailable: true,
+    translatePendingBodyWithCodex: async () => { throw new Error('Codex non deve essere chiamato'); },
+    translatePendingBodyWithHistoricalChain: async (itValue, locale, field, { callWithRetry }) => {
+      asked.push({ itValue, locale, field, hasRetry: typeof callWithRetry === 'function' });
+      return DE_BODY.body1;
+    },
+  });
+  assert.deepEqual(asked, [{ itValue: IT_BODY.body1, locale: 'de', field: 'body1', hasRetry: true }]);
+  assert.deepEqual(missingKeys(data), []);
+  assert.equal(data.content.de.body1, sanitizeBodyText(DE_BODY.body1));
+  assert.deepEqual(RUN_REPORT.translation.pendingBodyFields, {});
+  assert.deepEqual(RUN_REPORT.translation.pendingBodyRecovered, { 'de:body1': 'historical-translation-chain' });
+});
+
+function createPendingBodyCodexTranslatorFixture({
+  isModelAvailable,
+  admissionDecision,
+  translateWithCodexEngine,
+  laneStopsBeforeRun = false,
+  laneStopped = false,
+}) {
+  const at = src.indexOf('async function translatePendingBodyWithCodex(');
+  assert.notEqual(at, -1, 'translatePendingBodyWithCodex non trovata');
+  const end = src.indexOf('\n}\n', at) + 2;
+  const factory = new Function(
+    'AI_MODELS', '_pendingBodyCodexDeadlineMs', 'CODEX_TRANSLATE_TRANSPORT_RETRIES',
+    'withCodexTranslationLane', 'codexCallDeadlineMs', '_aiCallLLM', 'translateWithCodexEngine', 'isModelAvailable',
+    'translateFieldFreeMt', 'balanceMarkdownMarkers', 'translatePendingBodyWithHistoricalChain', 'pendingBodySecondLaneAvailable', 'console',
+    `${src.slice(at, end)}\nreturn translatePendingBodyWithCodex;`,
+  );
+  const processDeadlineMs = Date.now() + 300_000;
+  let admissionAttempts = 0;
+  let codexCalls = 0;
+  let historicalCalls = 0;
+  let currentLaneStopped = laneStopped;
+  const admission = { deadlineMs: processDeadlineMs, finish() {} };
+  const withCodexTranslationLane = ({ run, fallback }) => {
+    if (laneStopsBeforeRun) {
+      try {
+        return Promise.resolve(fallback());
+      } catch (error) {
+        return Promise.reject(error);
+      }
+    }
+    return run({
+      deadlineMs: processDeadlineMs,
+      admission,
+      admitCall: () => {
+        admissionAttempts += 1;
+        const decision = admissionDecision(admissionAttempts, admission);
+        if (!decision) currentLaneStopped = true;
+        return decision;
+      },
+      reserveTransportRetry: () => false,
+    });
+  };
+  const expected = 'Der vollständige Artikel wurde über die historische Übersetzung wiederhergestellt.';
+  const translatePendingBodyWithHistoricalChain = async (itValue, locale, field, { callWithRetry }) => {
+    historicalCalls += 1;
+    assert.ok(itValue.includes('## In breve'));
+    assert.equal(locale, 'de');
+    assert.equal(field, 'body1');
+    assert.equal(typeof callWithRetry, 'function');
+    return expected;
+  };
+  const translatePendingBodyWithCodex = factory(
+    { CODEX_CLI_PRIMARY: 'codex-cli/test' },
+    processDeadlineMs,
+    2,
+    withCodexTranslationLane,
+    codexCallDeadlineMs,
+    () => { throw new Error('il test non deve arrivare al trasporto reale'); },
+    async (args) => {
+      codexCalls += 1;
+      return translateWithCodexEngine(args);
+    },
+    isModelAvailable,
+    translateFieldFreeMt,
+    (text) => text,
+    translatePendingBodyWithHistoricalChain,
+    () => !currentLaneStopped && isModelAvailable(),
+    { error() {}, warn() {}, log() {} },
+  );
+  return {
+    expected,
+    counts: () => ({ admissionAttempts, codexCalls, historicalCalls }),
+    translate: (text) => translatePendingBodyWithCodex(text, 'de', 'body1', { callWithRetry: async () => ({}) }),
+  };
+}
+
+test('il body ricade sulla catena storica solo quando il breaker prova indisponibilità tra segmenti', async () => {
+  const source = [
+    'Il primo paragrafo contiene contesto sufficiente e viene tradotto prima che si esaurisca il budget Codex condiviso.',
+    '',
+    '## In breve',
+    '',
+    'Il secondo paragrafo resta da tradurre quando la nuova admission viene rifiutata per budget esaurito.',
+  ].join('\n');
+  const successfulSegment = async () => 'Der erste Absatz wurde erfolgreich übersetzt und bleibt in der richtigen Sprache.';
+  const runScenario = async ({ modelAvailable, admissionDecision, translateWithCodexEngine = successfulSegment }) => {
+    let availabilityChecks = 0;
+    const fixture = createPendingBodyCodexTranslatorFixture({
+      isModelAvailable: () => {
+        availabilityChecks += 1;
+        return modelAvailable(availabilityChecks);
+      },
+      admissionDecision,
+      translateWithCodexEngine,
+    });
+    const translated = await fixture.translate(source);
+    return { translated, counts: fixture.counts(), availabilityChecks };
+  };
+
+  const budgetStopped = await runScenario({
+    modelAvailable: () => true,
+    admissionDecision: (attempt, admission) => attempt === 1 ? admission : null,
+  });
+  assert.equal(budgetStopped.translated, 'Der vollständige Artikel wurde über die historische Übersetzung wiederhergestellt.');
+  assert.deepEqual(budgetStopped.counts, { admissionAttempts: 2, codexCalls: 1, historicalCalls: 1 });
+  assert.equal(budgetStopped.availabilityChecks, 2);
+
+  const breakerStopped = await runScenario({
+    modelAvailable: (check) => check === 1,
+    admissionDecision: (_attempt, admission) => admission,
+  });
+  assert.equal(breakerStopped.translated, 'Der vollständige Artikel wurde über die historische Übersetzung wiederhergestellt.');
+  assert.deepEqual(breakerStopped.counts, { admissionAttempts: 1, codexCalls: 1, historicalCalls: 1 });
+  assert.equal(breakerStopped.availabilityChecks, 2);
+
+  const breakerStoppedAfterTransportFailure = await runScenario({
+    modelAvailable: (check) => check === 1,
+    admissionDecision: (_attempt, admission) => admission,
+    translateWithCodexEngine: async () => { throw new Error('il trasporto apre il breaker Codex'); },
+  });
+  assert.equal(breakerStoppedAfterTransportFailure.translated, 'Der vollständige Artikel wurde über die historische Übersetzung wiederhergestellt.');
+  assert.deepEqual(breakerStoppedAfterTransportFailure.counts, { admissionAttempts: 1, codexCalls: 1, historicalCalls: 1 });
+  assert.equal(breakerStoppedAfterTransportFailure.availabilityChecks, 2);
+});
+
+test('il callback di fallback della lane usa la catena storica quando il breaker è aperto', async () => {
+  const source = [
+    'Il primo paragrafo contiene contesto sufficiente per verificare il fallback della lane.',
+    '',
+    '## In breve',
+    '',
+    'Il secondo paragrafo completa il corpo usato dalla regressione.',
+  ].join('\n');
+  const stoppedWithoutBreaker = createPendingBodyCodexTranslatorFixture({
+    isModelAvailable: () => true,
+    admissionDecision: (_attempt, admission) => admission,
+    translateWithCodexEngine: async () => '',
+    laneStopsBeforeRun: true,
+  });
+  await assert.rejects(stoppedWithoutBreaker.translate(source), /lane Codex fermata senza prova di indisponibilità/);
+  assert.deepEqual(stoppedWithoutBreaker.counts(), { admissionAttempts: 0, codexCalls: 0, historicalCalls: 0 });
+
+  const stoppedByBudget = createPendingBodyCodexTranslatorFixture({
+    isModelAvailable: () => true,
+    admissionDecision: (_attempt, admission) => admission,
+    translateWithCodexEngine: async () => '',
+    laneStopsBeforeRun: true,
+    laneStopped: true,
+  });
+  assert.equal(await stoppedByBudget.translate(source), stoppedByBudget.expected);
+  assert.deepEqual(stoppedByBudget.counts(), { admissionAttempts: 0, codexCalls: 0, historicalCalls: 1 });
+
+  const stoppedByBreaker = createPendingBodyCodexTranslatorFixture({
+    isModelAvailable: () => false,
+    admissionDecision: (_attempt, admission) => admission,
+    translateWithCodexEngine: async () => '',
+    laneStopsBeforeRun: true,
+  });
+  assert.equal(await stoppedByBreaker.translate(source), stoppedByBreaker.expected);
+  assert.deepEqual(stoppedByBreaker.counts(), { admissionAttempts: 0, codexCalls: 0, historicalCalls: 1 });
+});
+
+test('output non valido o errore non classificato come breaker non attiva la catena storica', async () => {
+  const source = 'Questo corpo ha abbastanza testo per arrivare al traduttore senza un heading di template.';
+  for (const translateWithCodexEngine of [
+    async () => '',
+    async () => { throw new Error('errore di trasporto non classificato dal breaker'); },
+  ]) {
+    const fixture = createPendingBodyCodexTranslatorFixture({
+      isModelAvailable: () => true,
+      admissionDecision: (_attempt, admission) => admission,
+      translateWithCodexEngine,
+    });
+    assert.equal(await fixture.translate(source), '');
+    assert.deepEqual(fixture.counts(), { admissionAttempts: 1, codexCalls: 1, historicalCalls: 0 });
+  }
+});
+
+test('la catena storica riusa il chunker per un body pending sopra soglia', async () => {
+  const at = src.indexOf('async function translatePendingBodyWithHistoricalChain(');
+  assert.notEqual(at, -1, 'translatePendingBodyWithHistoricalChain non trovata');
+  const end = src.indexOf('\n}\n', at) + 2;
+  const makeHistoricalTranslator = new Function(
+    'translateFieldFreeMt', 'translatedStringOrNull', 'balanceMarkdownMarkers',
+    'buildPendingBodyRetranslationPrompt', 'countWords', 'TRANSLATION_CHUNK_THRESHOLD',
+    'console',
+    `${src.slice(at, end)}\nreturn translatePendingBodyWithHistoricalChain;`,
+  );
+  const longIt = Array.from({ length: 701 }, (_, i) => `parola${i}`).join(' ');
+  const expected = longIt.replaceAll('parola', 'Wort');
+  let chunkCall = null;
+  let wholeBodyCalls = 0;
+  const translateInChunks = async (bodyText, field, makePrompt, labelPrefix, targetLang) => {
+    chunkCall = {
+      bodyText,
+      field,
+      prompt: makePrompt('primo chunk', 0, 2),
+      labelPrefix,
+      targetLang,
+    };
+    return expected;
+  };
+  const callWithRetry = async () => {
+    wholeBodyCalls += 1;
+    throw new Error('il body oversized non deve entrare nella richiesta singola');
+  };
+  const translatePendingBodyWithHistoricalChain = makeHistoricalTranslator(
+    translateFieldFreeMt,
+    translatedStringOrNull,
+    (value) => value,
+    ({ field, itValue, partLabel = '' }) => `body ${field}${partLabel}: ${itValue}`,
+    (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+    700,
+    { error() {}, warn() {}, log() {} },
+  );
+
+  const translated = await translatePendingBodyWithHistoricalChain(
+    longIt,
+    'de',
+    'body1',
+    { callWithRetry, translateInChunks },
+  );
+
+  assert.deepEqual(chunkCall, {
+    bodyText: longIt,
+    field: 'body1',
+    prompt: 'body body1, parte 1 di 2: primo chunk',
+    labelPrefix: 'de:body1-pending-retry',
+    targetLang: 'de',
+  });
+  assert.equal(wholeBodyCalls, 0);
+  assert.equal(translated, expected);
+});
+
+test('il fallback storico corto applica il contratto strutturale prima del finalize', async () => {
+  const historicalAt = src.indexOf('async function translatePendingBodyWithHistoricalChain(');
+  assert.notEqual(historicalAt, -1, 'translatePendingBodyWithHistoricalChain non trovata');
+  const historicalEnd = src.indexOf('\n}\n', historicalAt) + 2;
+  const makeHistoricalTranslator = new Function(
+    'translateFieldFreeMt', 'translatedStringOrNull', 'balanceMarkdownMarkers',
+    'buildPendingBodyRetranslationPrompt', 'countWords', 'TRANSLATION_CHUNK_THRESHOLD',
+    'console',
+    `${src.slice(historicalAt, historicalEnd)}\nreturn translatePendingBodyWithHistoricalChain;`,
+  );
+  const makeTranslateInChunks = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  );
+  const splitIntoTranslationChunks = buildChunker();
+  const countWords = (text) => String(text).trim().split(/\s+/u).filter(Boolean).length;
+  const source = 'Prima <a href="https://example.test/html">anchor</a> dopo altre parole.';
+  const historical = makeHistoricalTranslator(
+    translateFieldFreeMt,
+    translatedStringOrNull,
+    balanceMarkdownMarkers,
+    ({ field, itValue }) => `body ${field}: ${itValue}`,
+    countWords,
+    TRANSLATION_CHUNK_THRESHOLD,
+    { error() {}, warn() {}, log() {} },
+  );
+
+  let successfulProviderCalls = 0;
+  const successfulCallWithRetry = async () => {
+    successfulProviderCalls += 1;
+    return { body1: source.replace('Prima', 'Zuerst') };
+  };
+  const successfulTranslateInChunks = makeTranslateInChunks(
+    splitIntoTranslationChunks,
+    successfulCallWithRetry,
+    countWords,
+    translatedStringOrNull,
+    isSourcePassthrough,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+    opaqueSpanSignature,
+  );
+  assert.equal(
+    await historical(source, 'de', 'body1', {
+      callWithRetry: successfulCallWithRetry,
+      translateInChunks: successfulTranslateInChunks,
+    }),
+    source.replace('Prima', 'Zuerst'),
+  );
+  assert.equal(successfulProviderCalls, 1);
+
+  for (const [label, mutate] of [
+    ['href HTML alterato', (value) => value.replace('https://example.test/html', 'https://evil.example/html')],
+    ['anchor HTML senza chiusura', (value) => value.replace('</a>', '')],
+  ]) {
+    let providerCalls = 0;
+    const callWithRetry = async () => {
+      providerCalls += 1;
+      return { body1: mutate(source) };
+    };
+    const translateInChunks = makeTranslateInChunks(
+      splitIntoTranslationChunks,
+      callWithRetry,
+      countWords,
+      translatedStringOrNull,
+      isSourcePassthrough,
+      balanceMarkdownMarkers,
+      hasSameLineSkeleton,
+      lineStructuralSignature,
+      detectTruncation,
+      opaqueSpanSignature,
+    );
+    const translated = await historical(source, 'de', 'body1', { callWithRetry, translateInChunks });
+    assert.equal(translated, '', `${label}: il body deve restare non recuperato`);
+    assert.equal(providerCalls, 1, `${label}: la validazione non deve fare una seconda chiamata`);
+  }
+});
+
+test('il chunker spezza anche un singolo paragrafo oltre il limite di parole', () => {
+  const countWords = new Function(`${COUNT_WORDS_SRC}\nreturn countWords;`)();
+  const splitIntoTranslationChunks = buildChunker();
+  const source = Array.from({ length: 1_101 }, (_, index) => `parola${index}`).join(' ');
+  const chunks = splitIntoTranslationChunks(source, 500);
+
+  assert.deepEqual(chunks.map(countWords), [500, 500, 101]);
+  assert.ok(chunks.every((chunk) => countWords(chunk) <= 500));
+  const rebuilt = chunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : chunks.separators[index - 1]) + chunk,
+    '',
+  );
+  assert.equal(rebuilt, source);
+});
+
+test('il chunker protegge Markdown adiacente al testo e numeri con separatori Unicode', () => {
+  const splitIntoTranslationChunks = buildChunker();
+  const link = '[etichetta lunga](nav:calculator)';
+  const numbers = ['12 345', '1\u202f234,56', "80'000"];
+  const source = `testo${link} ${numbers[0]} lavoratori ${numbers[1]} euro e ${numbers[2]} franchi.`;
+  const chunks = splitIntoTranslationChunks(source, 3);
+  const rebuilt = chunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : chunks.separators[index - 1]) + chunk,
+    '',
+  );
+
+  assert.equal(rebuilt, source);
+  assert.equal(chunks.filter((chunk) => chunk.includes(link)).length, 1, 'il link adiacente al testo deve restare intero');
+  for (const number of numbers) {
+    assert.equal(chunks.filter((chunk) => chunk.includes(number)).length, 1, `numero spezzato: ${number}`);
+  }
+
+  const wrappedNumberSource = 'Prima (12 345) dopo altre parole da spezzare ancora oggi.';
+  const wrappedNumberChunks = splitIntoTranslationChunks(wrappedNumberSource, 3);
+  const wrappedNumberRebuilt = wrappedNumberChunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : wrappedNumberChunks.separators[index - 1]) + chunk,
+    '',
+  );
+  assert.equal(wrappedNumberRebuilt, wrappedNumberSource);
+  assert.ok(
+    wrappedNumberChunks.some((chunk) => chunk.includes('(12 345)')),
+    'un numero dopo una parentesi di apertura deve restare intero con il wrapper',
+  );
+  assert.ok(
+    wrappedNumberChunks.every((chunk) => !chunk.includes('(12') || chunk.includes('(12 345)')),
+    'un confine non deve cadere dentro un numero racchiuso tra parentesi',
+  );
+});
+
+test('il chunker mantiene integri gli elementi HTML con attributi e testo interno', () => {
+  const splitIntoTranslationChunks = buildChunker();
+  const elements = [
+    '<span class="source-mark">testo</span>',
+    '<strong>in evidenza</strong>',
+    '<img src="https://example.test/icon.png" alt="icona">',
+  ];
+  const source = `Prima parola ${elements[0]} poi ${elements[1]} e ${elements[2]} fine da spezzare ancora oggi.`;
+  const chunks = splitIntoTranslationChunks(source, 6);
+  const rebuilt = chunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : chunks.separators[index - 1]) + chunk,
+    '',
+  );
+
+  assert.equal(rebuilt, source);
+  for (const element of elements) {
+    assert.equal(
+      chunks.filter((chunk) => chunk.includes(element)).length,
+      1,
+      `elemento HTML spezzato: ${element}`,
+    );
+  }
+});
+
+test('il chunker protegge link, code e prefissi di lista e conserva i separatori Markdown', () => {
+  const splitIntoTranslationChunks = buildChunker();
+  const link = '[comparatore fiscale](nav:calculator)';
+  const code = '`codice interno`';
+  const source = [
+    `- prima voce ${link} e ${code} resta nella lista`,
+    '- seconda voce con altre parole da spezzare ancora oggi',
+    '',
+    'Paragrafo finale con altre parole da spezzare.',
+  ].join('\n');
+  const chunks = splitIntoTranslationChunks(source, 3);
+  const rebuilt = chunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : chunks.separators[index - 1]) + chunk,
+    '',
+  );
+
+  assert.equal(rebuilt, source, 'i separatori originali devono ricostruire la sorgente');
+  assert.ok(chunks.some((chunk) => chunk.includes(link)), 'il link deve restare intero in un solo chunk');
+  assert.ok(chunks.every((chunk) => !chunk.includes('[comparatore') || chunk.includes(link)));
+  assert.ok(chunks.some((chunk) => chunk.includes(code)), 'il code span deve restare intero in un solo chunk');
+  assert.ok(chunks.every((chunk) => !/(^|\n)\s*[-+*]\s*$/.test(chunk)), 'un marker di lista non deve restare orfano');
+  assert.ok(chunks.separators.includes(' '), 'un taglio interno deve conservare lo spazio sorgente');
+  assert.ok(chunks.separators.some((separator) => separator.includes('\n\n')), 'il confine di paragrafo deve restare distinto');
+
+  const wrappedLink = '([etichetta con molte parole](https://example.test))';
+  const wrappedEmphasis = '(*frase lunga*)';
+  const wrappedSource = `Prima ${wrappedLink} dopo ${wrappedEmphasis} fine.`;
+  const wrappedChunks = splitIntoTranslationChunks(wrappedSource, 4);
+  const wrappedRebuilt = wrappedChunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : wrappedChunks.separators[index - 1]) + chunk,
+    '',
+  );
+  assert.equal(wrappedRebuilt, wrappedSource, 'i wrapper di punteggiatura devono restare ricostruibili');
+  assert.ok(wrappedChunks.some((chunk) => chunk.includes(wrappedLink)), 'il link wrapped deve restare intero');
+  assert.ok(wrappedChunks.some((chunk) => chunk.includes(wrappedEmphasis)), 'l’enfasi wrapped deve restare intera');
+
+  const adjacentWrappedLinks = '([link1](url1))([link2](url2))';
+  const adjacentChunks = splitIntoTranslationChunks(adjacentWrappedLinks, 1);
+  const adjacentRebuilt = adjacentChunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : adjacentChunks.separators[index - 1]) + chunk,
+    '',
+  );
+  assert.equal(adjacentRebuilt, adjacentWrappedLinks);
+  assert.deepEqual(adjacentChunks, [
+    '([link1](url1))',
+    '([link2](url2))',
+  ], 'un opener adiacente non deve finire nel wrapper del link precedente');
+});
+
+test('il chunker bilancia run di backtick, label nidificate e link reference', () => {
+  const splitIntoTranslationChunks = buildChunker();
+  const code = '``codice ``` interno``';
+  const nestedLink = '[etichetta [nidificata]](https://example.test/percorso_(v2))';
+  const referenceLink = '[riferimento [nidificato]][destinazione]';
+  const source = `Prima parola ${code} dopo ${nestedLink} ancora ${referenceLink} fine.`;
+  const chunks = splitIntoTranslationChunks(source, 3);
+  const rebuilt = chunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : chunks.separators[index - 1]) + chunk,
+    '',
+  );
+
+  assert.equal(rebuilt, source);
+  for (const atom of [code, nestedLink, referenceLink]) {
+    assert.ok(chunks.some((chunk) => chunk.includes(atom)), `atomo Markdown spezzato: ${atom}`);
+  }
+});
+
+test('il chunker protegge anche enfasi singole e rifiuta gli atomi protetti oversize prima dell’invio', () => {
+  const splitIntoTranslationChunks = buildChunker();
+  const shortSource = 'Prima *frase breve* dopo _altra prova_.';
+  const shortChunks = splitIntoTranslationChunks(shortSource, 2);
+  const rebuilt = shortChunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : shortChunks.separators[index - 1]) + chunk,
+    '',
+  );
+
+  assert.equal(rebuilt, shortSource);
+  assert.ok(shortChunks.some((chunk) => chunk.includes('*frase breve*')));
+  assert.ok(shortChunks.some((chunk) => chunk.includes('_altra prova_')));
+
+  const longWords = Array.from({ length: 501 }, (_, index) => `parola${index}`).join(' ');
+  for (const protectedSource of [
+    `\`${longWords}\``,
+    `[${longWords}](https://example.test)`,
+    `([${longWords}](https://example.test))`,
+    `**${longWords}**`,
+    `__${longWords}__`,
+    `~~${longWords}~~`,
+    `*${longWords}*`,
+    `_${longWords}_`,
+    `(*${longWords}*)`,
+  ]) {
+    assert.throws(
+      () => splitIntoTranslationChunks(protectedSource, 500),
+      /protected translation atom exceeds translation chunk cap/,
+    );
+  }
+});
+
+test('il chunker mantiene intere le enfasi singole con delimitatori doppi annidati', () => {
+  const splitIntoTranslationChunks = buildChunker();
+  const nestedSpans = [
+    '*prima **seconda** dopo*',
+    '_prima __seconda__ dopo_',
+  ];
+  const source = `Introduzione ${nestedSpans[0]} e ${nestedSpans[1]} conclusione.`;
+  const chunks = splitIntoTranslationChunks(source, 3);
+  const rebuilt = chunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : chunks.separators[index - 1]) + chunk,
+    '',
+  );
+
+  assert.equal(rebuilt, source);
+  for (const span of nestedSpans) {
+    assert.ok(
+      chunks.some((chunk) => chunk.includes(span)),
+      `il delimitatore annidato deve restare intero: ${span}`,
+    );
+  }
+});
+
+test('il chunker salta code span e link annidati prima di chiudere un’enfasi esterna', () => {
+  const splitIntoTranslationChunks = buildChunker();
+  const nestedSpan = '*testo `a * b` e [link *interno*](https://example.test) finale*';
+  const source = `Prima ${nestedSpan} dopo.`;
+  const chunks = splitIntoTranslationChunks(source, 8);
+  const rebuilt = chunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : chunks.separators[index - 1]) + chunk,
+    '',
+  );
+
+  assert.equal(rebuilt, source);
+  assert.ok(
+    chunks.some((chunk) => chunk.includes(nestedSpan)),
+    'code span e link annidati non devono chiudere prematuramente l’enfasi',
+  );
+});
+
+test('il chunker mantiene indentazione, marker e primo atomo strutturale nello stesso chunk', () => {
+  const splitIntoTranslationChunks = buildChunker();
+  const source = [
+    'Introduzione breve',
+    '  - prima voce elenco',
+    '   > citazione breve',
+    '> - primo elemento annidato',
+    ' # heading finale',
+    '\t• prima voce tabulata',
+    '\t| prima cella tabulata',
+    '| prima cella tabella',
+  ].join('\n');
+  const chunks = splitIntoTranslationChunks(source, 2);
+  const rebuilt = chunks.reduce(
+    (joined, chunk, index) => joined + (index === 0 ? '' : chunks.separators[index - 1]) + chunk,
+    '',
+  );
+
+  assert.equal(rebuilt, source);
+  assert.ok(chunks.some((chunk) => chunk.includes('  - prima')));
+  assert.ok(chunks.some((chunk) => chunk.includes('   > citazione')));
+  assert.ok(chunks.some((chunk) => chunk.includes('> - primo')));
+  assert.ok(chunks.some((chunk) => chunk.includes(' # heading')));
+  assert.ok(chunks.some((chunk) => chunk.includes('\t• prima')));
+  assert.ok(chunks.some((chunk) => chunk.includes('\t| prima')));
+  assert.ok(chunks.some((chunk) => chunk.includes('| prima')));
+  assert.ok(
+    chunks.every((chunk) => !/(^|\n)[ \t]{0,3}(?:[-+*•]|\d+[.)]|#{1,6}|>|\|)(?:[ \t]+(?:[-+*•]|\d+[.)]|#{1,6}|>|\|))*[ \t]*$/u.test(chunk)),
+    'nessun marker strutturale deve restare orfano a fine chunk',
+  );
+});
+
+test('il join della traduzione riusa i separatori sorgente invece di inventare paragrafi', async () => {
+  const realChunker = buildChunker();
+  const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
+  const makeTranslator = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  );
+  const translateInChunks = makeTranslator(
+    splitWithSmallTarget,
+    async (prompt) => ({ body1: prompt }),
+    (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+    opaqueSpanSignature,
+  );
+  const source = [
+    '- prima voce [comparatore fiscale](nav:calculator) e `codice interno` resta nella lista',
+    '- seconda voce con altre parole da spezzare ancora oggi',
+    '',
+    'Paragrafo finale con altre parole da spezzare.',
+  ].join('\n');
+
+  const translated = await translateInChunks(source, 'body1', (chunk) => chunk, 'test', 'de');
+
+  assert.equal(translated, source, 'un traduttore che conserva i chunk non deve cambiare la struttura Markdown');
+
+  const adjacentSource = '([primo secondo terzo](url1))([link2](url2))';
+  const adjacentChunks = realChunker(adjacentSource, 3);
+  assert.deepEqual(adjacentChunks.separators, [''], 'il confine tra atomi adiacenti deve registrare il separatore vuoto');
+  assert.equal(
+    await translateInChunks(adjacentSource, 'body1', (chunk) => chunk, 'test-adjacent', 'de'),
+    adjacentSource,
+    'il joiner non deve inventare un nuovo paragrafo tra atomi adiacenti',
+  );
+});
+
+test('il joiner rifiuta testo perso dentro un chunk anche se la forma resta valida', async () => {
+  const realChunker = buildChunker();
+  const makeTranslator = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  );
+  let providerCalls = 0;
+  const translateInChunks = makeTranslator(
+    (bodyText) => realChunker(bodyText, 20),
+    async (prompt) => ({ body1: providerCalls++ === 0 ? prompt : 'Frase completa.' }),
+    (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+    opaqueSpanSignature,
+  );
+  const source = Array.from({ length: 140 }, (_, index) => `parola${index}`).join(' ');
+
+  assert.equal(
+    await translateInChunks(source, 'body1', (chunk) => chunk, 'test', 'de'),
+    null,
+    'un chunk ricomposto come frase valida ma perso nel contenuto deve restare non recuperato',
+  );
+});
+
+test('la guardia distingue URL bare con apostrofi e chiusure HTML mancanti', () => {
+  const bare = "Leggi https://example.test/O'Connor per i dettagli.";
+  assert.deepEqual(opaqueSpanSignature(bare), ["https://example.test/O'Connor"]);
+  assert.equal(
+    hasSameLineStructure(bare, "Lies https://example.test/O'Connor für die Details."),
+    true,
+  );
+  assert.equal(
+    hasSameLineStructure(bare, "Lies https://example.test/O'Changed für die Details."),
+    false,
+  );
+
+  const html = "Prima <a href=\"https://example.test/O'Connor\">anchor</a> dopo.";
+  assert.deepEqual(opaqueSpanSignature(html), ["https://example.test/O'Connor"]);
+  assert.equal(hasSameLineStructure(html, html.replace('anchor', 'Anker')), true);
+  assert.equal(hasSameLineStructure(html, html.replace('</a>', '')), false);
+
+  const relativeAttributes = 'Prima <a href="nav:calculator" data-source="article">anchor</a> <img src="/images/icon.png" alt="icona"> dopo.';
+  assert.equal(
+    hasSameLineStructure(relativeAttributes, relativeAttributes.replace('anchor', 'Anker')),
+    true,
+  );
+  assert.equal(
+    hasSameLineStructure(relativeAttributes, relativeAttributes.replace('nav:calculator', 'nav:exchange')),
+    false,
+    'un href relativo source-owned alterato deve essere rifiutato',
+  );
+  assert.equal(
+    hasSameLineStructure(relativeAttributes, relativeAttributes.replace('/images/icon.png', '/images/other.png')),
+    false,
+    'un src relativo source-owned alterato deve essere rifiutato',
+  );
+  assert.equal(
+    hasSameLineStructure(relativeAttributes, relativeAttributes.replace('data-source="article"', 'data-source="other"')),
+    false,
+    'un attributo source-owned alterato deve essere rifiutato anche senza URL',
+  );
+
+  const autolinkUrl = 'Leggi <https://example.test/auto> per i dettagli.';
+  assert.deepEqual(opaqueSpanSignature(autolinkUrl), ['https://example.test/auto']);
+  assert.equal(
+    hasSameLineStructure(autolinkUrl, 'Read <https://example.test/auto> for details.'),
+    true,
+  );
+  assert.equal(
+    hasSameLineStructure(autolinkUrl, 'Read <https://evil.example/auto> for details.'),
+    false,
+  );
+
+  for (const target of ['tel:12345', 'urn:isbn:978-3-16-148410-0']) {
+    const autolinkUri = `Consulta <${target}> per i dettagli.`;
+    assert.deepEqual(opaqueSpanSignature(autolinkUri), [target], target);
+    assert.equal(
+      hasSameLineStructure(autolinkUri, `Read <${target}> for details.`),
+      true,
+      `${target} deve restare un autolink URI anche senza slash`,
+    );
+    assert.equal(
+      hasSameLineStructure(autolinkUri, `Read <${target}-changed> for details.`),
+      false,
+      `${target} alterato deve essere rifiutato`,
+    );
+  }
+
+  const autolinkEmail = 'Scrivi <mail@example.test> per i dettagli.';
+  assert.equal(
+    hasSameLineStructure(autolinkEmail, 'Write <mail@example.test> for details.'),
+    true,
+  );
+  assert.equal(
+    hasSameLineStructure(autolinkEmail, 'Write mail@example.test for details.'),
+    false,
+    'rimuovere i delimitatori di un autolink email deve essere rifiutato',
+  );
+
+  const interleavedOpaque = 'Prima https://example.test/before e <https://example.test/auto> e User@example.test tra <mail@example.test> e dopo.';
+  assert.deepEqual(
+    opaqueSpanSignature(interleavedOpaque),
+    [
+      'https://example.test/before',
+      'https://example.test/auto',
+      'User@example.test',
+      'mail@example.test',
+    ],
+    'URL ed email bare prima e fra autolink devono restare source-owned',
+  );
+  assert.equal(
+    hasSameLineStructure(
+      interleavedOpaque,
+      interleavedOpaque.replace('User@example.test', 'changed@example.test'),
+    ),
+    false,
+    'un’email bare fra autolink non deve poter essere alterata dal provider',
+  );
+});
+
+test('il contratto numerico non usa la maiuscola della prosa come anchor', async () => {
+  const realChunker = buildChunker();
+  const makeTranslator = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  );
+  const source = 'Il progetto dura 12 mesi.';
+  const translated = 'The project lasts 12 months.';
+  const translateInChunks = makeTranslator(
+    (bodyText) => realChunker(bodyText, 50),
+    async () => ({ body1: translated }),
+    (text) => String(text).trim().split(/\s+/u).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+    opaqueSpanSignature,
+  );
+
+  assert.equal(
+    await translateInChunks(source, 'body1', (chunk) => chunk, 'test-prose-anchor', 'en'),
+    translated,
+    'la traduzione di una frase normale non deve essere scartata perché cambia la parola iniziale maiuscola',
+  );
+});
+
+test('il contratto numerico ignora URL e code span source-owned', async () => {
+  const realChunker = buildChunker();
+  const makeTranslator = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  );
+  const source = 'Leggi [la fonte](https://example.com/123) e usa `456` per capire il dato.';
+  const translated = 'Read [the source](https://example.com/123) and use `456` to understand the figure.';
+  const translateInChunks = makeTranslator(
+    (bodyText) => realChunker(bodyText, 50),
+    async () => ({ body1: translated }),
+    (text) => String(text).trim().split(/\s+/u).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+    opaqueSpanSignature,
+  );
+
+  assert.equal(
+    await translateInChunks(source, 'body1', (chunk) => chunk, 'test-numeric', 'en'),
+    translated,
+  );
+});
+
+test('il joiner protegge prefissi Markdown annidati e lo scheletro delle pipe', async () => {
+  const realChunker = buildChunker();
+  const makeTranslator = (mutate) => {
+    const translateInChunks = new Function(
+      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+      `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+    )(
+      (bodyText) => realChunker(bodyText, 50),
+      async (prompt) => ({ body1: mutate(prompt) }),
+      (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+      translatedStringOrNull,
+      () => false,
+      balanceMarkdownMarkers,
+      hasSameLineSkeleton,
+      lineStructuralSignature,
+      detectTruncation,
+      opaqueSpanSignature,
+    );
+    return (bodyText) => translateInChunks(bodyText, 'body1', (chunk) => chunk, 'test', 'de');
+  };
+  const source = [
+    '> - voce annidata con testo tradotto',
+    '| colonna | valore |',
+  ].join('\n');
+
+  assert.equal(await makeTranslator((chunk) => chunk)(source), source);
+  const tableSource = '| Regione | CHF |';
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('| Regione | CHF |', '| CHF | Regione |'))(tableSource),
+    null,
+    'le colonne non devono poter essere scambiate quando il provider conserva i valori source-owned',
+  );
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('| Regione | CHF |', '| Region | CHF |'))(tableSource),
+    '| Region | CHF |',
+    'il testo delle celle deve poter essere tradotto quando una prova source-owned dimostra l’ordine delle colonne',
+  );
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('> - ', '> '))(source),
+    null,
+    'la perdita del bullet dentro il blockquote non deve passare il guard',
+  );
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('| valore', 'valore'))(source),
+    null,
+    'la perdita di una pipe interna alla tabella non deve passare il guard',
+  );
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('| colonna | valore |', '| colonna valore | |'))(source),
+    null,
+    'la redistribuzione del contenuto fra celle della tabella non deve passare il guard',
+  );
+});
+
+test('il joiner rifiuta un link Markdown alterato dopo la ricomposizione', async () => {
+  const realChunker = buildChunker();
+  const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
+  const makeTranslator = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  );
+  const translateInChunks = makeTranslator(
+    splitWithSmallTarget,
+    async (prompt) => ({ body1: prompt.replace('nav:calculator', 'nav:exchange') }),
+    (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+    opaqueSpanSignature,
+  );
+  const source = 'Prima [etichetta lunga](nav:calculator) dopo altre parole.';
+
+  assert.equal(
+    await translateInChunks(source, 'body1', (chunk) => chunk, 'test', 'de'),
+    null,
+    'un target nav modificato non deve arrivare al sanitizer finale',
+  );
+});
+
+test('il joiner protegge reference link, definizioni e autolink', async () => {
+  const realChunker = buildChunker();
+  const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 10);
+  const makeTranslator = (mutate) => {
+    const translateInChunks = new Function(
+      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+      `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+    );
+    const translate = translateInChunks(
+      splitWithSmallTarget,
+      async (prompt) => ({ body1: mutate(prompt) }),
+      (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+      translatedStringOrNull,
+      () => false,
+      balanceMarkdownMarkers,
+      hasSameLineSkeleton,
+      lineStructuralSignature,
+      detectTruncation,
+      opaqueSpanSignature,
+    );
+    return (bodyText) => translate(bodyText, 'body1', (chunk) => chunk, 'test', 'de');
+  };
+  const source = [
+    'Prima [link completo][destinazione] e [link collassato][] e <https://example.test/auto> e <a class="source" href="https://example.test/html">anchor</a>.',
+    '',
+    '[destinazione]: https://example.test/destinazione',
+    '[link collassato]: https://example.test/collassato',
+  ].join('\n');
+
+  assert.equal(await makeTranslator((chunk) => chunk)(source), source);
+  for (const [label, mutate] of [
+    ['reference', (chunk) => chunk.replaceAll('[destinazione]', '[altra-destinazione]')],
+    ['definition', (chunk) => chunk.replace('https://example.test/destinazione', 'https://evil.example/destinazione')],
+    ['autolink', (chunk) => chunk.replace('<https://example.test/auto>', '<https://evil.example/auto>')],
+    ['html anchor', (chunk) => chunk.replace('https://example.test/html', 'https://evil.example/html')],
+    ['html anchor senza chiusura', (chunk) => chunk.replace('</a>', '')],
+  ]) {
+    assert.equal(
+      await makeTranslator(mutate)(source),
+      null,
+      `${label} alterato dopo il join non deve passare il guard`,
+    );
+  }
+
+  const nestedImageSource = 'Prima [pagina ![icona](https://example.test/icon.png)](https://example.test/page) dopo altre parole.';
+  assert.equal(await makeTranslator((chunk) => chunk)(nestedImageSource), nestedImageSource);
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('https://example.test/icon.png', 'https://evil.example/icon.png'))(nestedImageSource),
+    null,
+    'un’immagine Markdown annidata nella label non deve essere nascosta dal link esterno',
+  );
+
+  const opaqueSource = 'Prima https://example.test/CasePath e User@example.com con {{amount}} dopo altre parole.';
+  assert.equal(await makeTranslator((chunk) => chunk)(opaqueSource), opaqueSource);
+  for (const [label, mutate] of [
+    ['URL bare', (chunk) => chunk.replace('https://example.test/CasePath', 'https://evil.example/changed')],
+    ['email', (chunk) => chunk.replace('User@example.com', 'user@example.com')],
+    ['placeholder', (chunk) => chunk.replace('{{amount}}', '{{other}}')],
+  ]) {
+    assert.equal(
+      await makeTranslator(mutate)(opaqueSource),
+      null,
+      `${label} source-owned fuori da una sintassi link non deve passare il guard`,
+    );
+  }
+});
+
+test('il joiner protegge anche le definizioni dentro prefissi Markdown', async () => {
+  const realChunker = buildChunker();
+  const makeTranslator = (mutate) => {
+    const translateInChunks = new Function(
+      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+      `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+    )(
+      (bodyText) => realChunker(bodyText, 50),
+      async (prompt) => ({ body1: mutate(prompt) }),
+      (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+      translatedStringOrNull,
+      () => false,
+      balanceMarkdownMarkers,
+      hasSameLineSkeleton,
+      lineStructuralSignature,
+      detectTruncation,
+      opaqueSpanSignature,
+    );
+    return (bodyText) => translateInChunks(bodyText, 'body1', (chunk) => chunk, 'test', 'de');
+  };
+  const source = [
+    '> [quote-ref]: https://example.test/quote',
+    '- [list-ref]: https://example.test/list',
+    'Usa [quote-ref] e [list-ref] nel testo.',
+  ].join('\n');
+
+  assert.equal(await makeTranslator((chunk) => chunk)(source), source);
+  for (const [label, target] of [
+    ['blockquote', 'https://example.test/quote'],
+    ['lista', 'https://example.test/list'],
+  ]) {
+    assert.equal(
+      await makeTranslator((chunk) => chunk.replace(target, 'https://evil.example/changed'))(source),
+      null,
+      `la definizione dentro ${label} non deve poter cambiare destinazione`,
+    );
+  }
+});
+
+test('il joiner protegge la sequenza numerica ma ammette i separatori locali', async () => {
+  const realChunker = buildChunker();
+  const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
+  const makeTranslator = (mutate) => {
+    const translateInChunks = new Function(
+      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+      `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+    )(
+      splitWithSmallTarget,
+      async (prompt) => ({ body1: mutate(prompt) }),
+      (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+      translatedStringOrNull,
+      () => false,
+      balanceMarkdownMarkers,
+      hasSameLineSkeleton,
+      lineStructuralSignature,
+      detectTruncation,
+      opaqueSpanSignature,
+    );
+    return (bodyText) => translateInChunks(bodyText, 'body1', (chunk) => chunk, 'test', 'de');
+  };
+  const source = 'Prima (12 345) dopo altre parole da spezzare ancora oggi.';
+
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('12 345', '12.345'))(source),
+    source.replace('12 345', '12.345'),
+    'la localizzazione dei separatori numerici deve restare ammessa',
+  );
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('12 345', '12.346'))(source),
+    null,
+    'una cifra modificata non deve arrivare al sanitizer finale',
+  );
+
+  const signedSource = 'Prima -12% dopo altre parole da spezzare ancora oggi.';
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('-12%', '12%'))(signedSource),
+    null,
+    'un segno meno rimosso non deve arrivare al sanitizer finale',
+  );
+
+  for (const ordinalMarker of ['°', 'º']) {
+    const ordinalSource = `1${ordinalMarker} gennaio 2026 con altre parole da spezzare ancora oggi.`;
+    assert.equal(
+      await makeTranslator((chunk) => chunk.replace(`1${ordinalMarker}`, '1.'))(ordinalSource),
+      ordinalSource.replace(`1${ordinalMarker}`, '1.'),
+      `un ordinale italiano ${ordinalMarker} a inizio riga può diventare il punto ordinale della lingua target`,
+    );
+  }
+
+  const degreeSource = 'Temperatura misurata a 12° dopo altre parole da spezzare ancora oggi.';
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('12°', '12.'))(degreeSource),
+    null,
+    'il punto ordinale non deve allentare il controllo di una misura in gradi',
+  );
+
+  const signedGroupedChunks = realChunker('Valore -12 345 dopo', 2);
+  assert.ok(
+    signedGroupedChunks.some((chunk) => chunk.includes('-12 345')),
+    'il token numerico con segno e separatore non deve essere spezzato tra richieste',
+  );
+
+  const associationSource = 'A: 100, B: 200';
+  const associationTranslator = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  )(
+    (bodyText) => realChunker(bodyText, 50),
+    async (prompt) => ({ body1: prompt.replace(associationSource, 'B: 100, A: 200') }),
+    (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+    opaqueSpanSignature,
+  );
+  assert.equal(
+    await associationTranslator(associationSource, 'body1', (chunk) => chunk, 'test', 'de'),
+    null,
+    'un numero riassociato al soggetto sbagliato deve essere rifiutato anche con la stessa sequenza globale',
+  );
+
+  const lowercaseAssociationSource = 'a: 100, b: 200';
+  const lowercaseAssociationTranslator = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  )(
+    (bodyText) => realChunker(bodyText, 50),
+    async (prompt) => ({ body1: prompt.replace(lowercaseAssociationSource, 'b: 100, a: 200') }),
+    (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+    opaqueSpanSignature,
+  );
+  assert.equal(
+    await lowercaseAssociationTranslator(lowercaseAssociationSource, 'body1', (chunk) => chunk, 'test', 'de'),
+    null,
+    'un numero riassociato con label lowercase non allineabili deve essere rifiutato',
+  );
+
+  const translatedLabelsSource = 'Alpha: 100, Beta: 200';
+  const translatedLabelsTranslator = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  )(
+    (bodyText) => realChunker(bodyText, 50),
+    async (prompt) => ({ body1: prompt.replace(translatedLabelsSource, 'Gamma: 200, Delta: 100') }),
+    (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+    opaqueSpanSignature,
+  );
+  assert.equal(
+    await translatedLabelsTranslator(translatedLabelsSource, 'body1', (chunk) => chunk, 'test', 'de'),
+    null,
+    'più numeri senza un’associazione source-owned devono essere rifiutati fail-closed',
+  );
+
+  const translatedLabelsPreserved = 'Gamma: 100, Delta: 200';
+  const translatedLabelsPreservedTranslator = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  )(
+    (bodyText) => realChunker(bodyText, 50),
+    async (prompt) => ({ body1: prompt.replace(translatedLabelsSource, translatedLabelsPreserved) }),
+    (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+    opaqueSpanSignature,
+  );
+  assert.equal(
+    await translatedLabelsPreservedTranslator(translatedLabelsSource, 'body1', (chunk) => chunk, 'test', 'de'),
+    translatedLabelsPreserved,
+    'la sequenza numerica ordinata basta quando tutti i label sono stati localizzati',
+  );
+});
+
+test('il chunker mantiene interi i tag HTML senza attributi', () => {
+  const source = 'Prima <span>testo importante</span> e <br> dopo altre parole.';
+  const chunks = buildChunker()(source, 3);
+  assert.ok(
+    chunks.some((chunk) => chunk.includes('<span>testo importante</span>')),
+    'un elemento HTML senza attributi non deve essere spezzato al suo interno',
+  );
+  assert.ok(
+    chunks.some((chunk) => chunk.includes('<br>')),
+    'un tag void senza attributi deve restare un atomo HTML',
+  );
+});
+
+test('il joiner rifiuta immagini mutate, struttura Markdown alterata e code span variati', async () => {
+  const realChunker = buildChunker();
+  const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
+  const makeTranslator = (mutate) => {
+    const translateInChunks = new Function(
+      'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+      `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+    )(
+      splitWithSmallTarget,
+      async (prompt) => ({ body1: mutate(prompt) }),
+      (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+      translatedStringOrNull,
+      () => false,
+      balanceMarkdownMarkers,
+      hasSameLineSkeleton,
+      lineStructuralSignature,
+      detectTruncation,
+      opaqueSpanSignature,
+    );
+    return (bodyText) => translateInChunks(bodyText, 'body1', (chunk) => chunk, 'test', 'de');
+  };
+
+  const imageSource = [
+    '- Prima ![icona](https://example.test/icon.png) e ![icona][icona-ref] nella lista.',
+    '',
+    '[icona-ref]: https://example.test/icon.png',
+  ].join('\n');
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replaceAll('![', '['))(imageSource),
+    null,
+    'un’immagine trasformata in link normale, anche reference, non deve passare',
+  );
+
+  const structuralSource = [
+    '- voce strutturata con altre parole da tradurre.',
+    '# titolo strutturato con altre parole da tradurre.',
+    '| colonna | valore |',
+  ].join('\n');
+  for (const [label, mutate] of [
+    ['lista trasformata in heading', (chunk) => chunk.replace('- ', '# ')],
+    ['heading senza marker', (chunk) => chunk.replace('# titolo', 'titolo')],
+    ['tabella senza marker', (chunk) => chunk.replace('| colonna', 'colonna')],
+  ]) {
+    assert.equal(
+      await makeTranslator(mutate)(structuralSource),
+      null,
+      `${label}: lo scheletro Markdown alterato non deve passare`,
+    );
+  }
+
+  const codeSource = 'Prima `comando --flag` dopo altre parole da tradurre.';
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('`comando --flag`', 'comando --flag'))(codeSource),
+    null,
+    'un code span rimosso non deve passare il guard',
+  );
+
+  const unbalancedCodeSource = 'Prima testo senza code span dopo altre parole da tradurre.';
+  assert.equal(
+    await makeTranslator((chunk) => chunk.replace('testo', 'testo`'))(unbalancedCodeSource),
+    null,
+    'un delimitatore di code span orfano deve essere rifiutato',
+  );
+
+  for (const [label, sourceSpan, mutate] of [
+    ['enfasi con asterisco', '*frase protetta*', (chunk) => chunk.replace('*frase protetta*', 'frase protetta')],
+    ['enfasi con underscore', '_frase protetta_', (chunk) => chunk.replace('_frase protetta_', 'frase protetta')],
+    ['barrato', '~~frase protetta~~', (chunk) => chunk.replace('~~frase protetta~~', 'frase protetta')],
+  ]) {
+    const markerSource = `Prima ${sourceSpan} dopo altre parole da tradurre.`;
+    assert.equal(
+      await makeTranslator(mutate)(markerSource),
+      null,
+      `${label}: il provider non deve poter rimuovere i delimitatori Markdown`,
+    );
+  }
+});
+
+test('il joiner ammette label HTML tradotte ma rifiuta la topologia alterata', async () => {
+  const realChunker = buildChunker();
+  const source = 'Prima <a class="source" href="https://example.test/html">anchor</a> dopo altre parole.';
+  const makeTranslator = (translated) => new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  )(
+    (bodyText) => realChunker(bodyText, 50),
+    async () => ({ body1: translated }),
+    (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+    opaqueSpanSignature,
+  );
+
+  assert.equal(
+    await makeTranslator(source.replace('anchor', 'Anker'))(source, 'body1', (chunk) => chunk, 'test', 'de'),
+    source.replace('anchor', 'Anker'),
+    'il testo visibile dell’anchor deve restare traducibile',
+  );
+  const alteredTopology = source.replace(
+    'anchor</a>',
+    '<strong>anchor</strong></a>',
+  );
+  assert.equal(
+    await makeTranslator(alteredTopology)(source, 'body1', (chunk) => chunk, 'test', 'de'),
+    null,
+    'un elemento HTML aggiunto dentro l’anchor deve essere rifiutato',
+  );
+});
+
+test('il joiner valida anche gli elementi HTML generici e gli attributi source-owned', async () => {
+  const realChunker = buildChunker();
+  const source = 'Prima <span class="source-mark">testo</span> e <strong>evidenza</strong> con <img src="https://example.test/icon.png" alt="icona"> finale.';
+  const makeTranslator = (translated) => new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  )(
+    (bodyText) => realChunker(bodyText, 50),
+    async () => ({ body1: translated }),
+    (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+    opaqueSpanSignature,
+  );
+
+  assert.equal(
+    await makeTranslator(source.replace('testo', 'Text').replace('evidenza', 'Hervorhebung'))(source, 'body1', (chunk) => chunk, 'test', 'de'),
+    source.replace('testo', 'Text').replace('evidenza', 'Hervorhebung'),
+    'il testo interno degli elementi HTML deve restare traducibile',
+  );
+  for (const [label, mutate] of [
+    ['attributo span', (text) => text.replace('source-mark', 'changed-mark')],
+    ['chiusura strong', (text) => text.replace('</strong>', '')],
+    ['destinazione img', (text) => text.replace('https://example.test/icon.png', 'https://evil.example/icon.png')],
+  ]) {
+    assert.equal(
+      await makeTranslator(mutate(source))(source, 'body1', (chunk) => chunk, 'test', 'de'),
+      null,
+      `${label}: l’HTML alterato non deve passare il contratto`,
+    );
+  }
+});
+
+test('il recovery missing-field usa il chunker per un body oversized', async () => {
+  const countWords = new Function(`${COUNT_WORDS_SRC}\nreturn countWords;`)();
+  const splitIntoTranslationChunks = buildChunker();
+  const makeTranslator = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  );
+  const longIt = Array.from(
+    { length: TRANSLATION_CHUNK_THRESHOLD + 1 },
+    (_, index) => `parola${index}`,
+  ).join(' ');
+  const sourceChunks = splitIntoTranslationChunks(longIt);
+  const calls = [];
+  const callWithRetry = async (prompt, maxTokens, label) => {
+    const chunkIndex = calls.length;
+    calls.push({ prompt, maxTokens, label });
+    return { body1: sourceChunks[chunkIndex].replaceAll('parola', 'Wort') };
+  };
+  const translateInChunks = makeTranslator(
+    splitIntoTranslationChunks,
+    callWithRetry,
+    countWords,
+    translatedStringOrNull,
+    isSourcePassthrough,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+    opaqueSpanSignature,
+  );
+  const buildPendingBodyRetranslationPrompt = new Function(
+    `${BUILD_PENDING_BODY_PROMPT_SRC}\nreturn buildPendingBodyRetranslationPrompt;`,
+  )();
+  const itContent = {
+    title: 'Titolo di prova plausibile',
+    excerpt: 'Un riassunto di prova abbastanza lungo.',
+    body1: longIt,
+  };
+  const data = {
+    content: {
+      it: itContent,
+      en: { title: 'English title', excerpt: 'English excerpt', body1: 'English body.' },
+      de: { title: 'Deutscher Titel', excerpt: 'Deutscher Auszug' },
+      fr: { title: 'Titre français', excerpt: 'Résumé français', body1: 'Corps français.' },
+    },
+  };
+  const hasUsableTranslatedText = (value) => typeof value === 'string' && value.trim().length > 0;
+  const metaFieldPlausibilityMiss = () => null;
+  const quiet = { error() {}, warn() {}, log() {} };
+  const fn = new Function(
+    'data', 'itContent', 'callWithRetry', 'translatedStringOrNull', 'hasUsableTranslatedText',
+    'metaFieldPlausibilityMiss', 'detectTruncation', 'console', 'ARTICLE_TRANSLATE_FREE_MT',
+    'claimFreeMtLlmFallback', 'wasFreeMtUnusable', 'maxFreeMtLlmFallbacksPerLocale', 'RUN_REPORT',
+    'MAX_FREE_MT_LLM_FALLBACKS_PER_RUN', 'MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE',
+    'markBodyTranslationPending', 'isSourcePassthrough', 'rejectRawFaqControlEscape',
+    'normalizeLocalizedToponymText', 'safeSignalDiagnosticTextForLog', 'translateInChunks',
+    'countWords', 'TRANSLATION_CHUNK_THRESHOLD', 'buildPendingBodyRetranslationPrompt',
+    `return (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
+  );
+  await fn(
+    data,
+    itContent,
+    callWithRetry,
+    translatedStringOrNull,
+    hasUsableTranslatedText,
+    metaFieldPlausibilityMiss,
+    () => [],
+    quiet,
+    false,
+    () => true,
+    () => false,
+    () => 7,
+    { translation: {} },
+    7,
+    7,
+    markBodyTranslationPending,
+    isSourcePassthrough,
+    () => false,
+    (value) => String(value),
+    (value) => String(value),
+    translateInChunks,
+    countWords,
+    TRANSLATION_CHUNK_THRESHOLD,
+    buildPendingBodyRetranslationPrompt,
+  );
+
+  assert.equal(calls.length, 2, 'un body appena sopra soglia deve usare piu richieste');
+  assert.deepEqual(
+    calls.map(({ label }) => label),
+    ['de:body1-missing-retry-p1', 'de:body1-missing-retry-p2'],
+  );
+  assert.ok(calls.every(({ prompt }) => prompt.includes('parte 1 di 2') || prompt.includes('parte 2 di 2')));
+  assert.equal(
+    data.content.de.body1,
+    sourceChunks.join(' ').replaceAll('parola', 'Wort'),
+  );
+});
+
+test('se il circuit breaker apre Codex dopo la selezione, la lane passa alla catena storica', async () => {
+  const at = src.indexOf('async function translatePendingBodyWithCodex(');
+  assert.notEqual(at, -1, 'translatePendingBodyWithCodex non trovata');
+  const end = src.indexOf('\n}\n', at) + 2;
+  const factory = new Function(
+    'AI_MODELS', '_pendingBodyCodexDeadlineMs', 'CODEX_TRANSLATE_TRANSPORT_RETRIES',
+    'withCodexTranslationLane', 'codexCallDeadlineMs', '_aiCallLLM', 'translateWithCodexEngine',
+    'translateFieldFreeMt', 'balanceMarkdownMarkers', 'translatePendingBodyWithHistoricalChain', 'isModelAvailable', 'console',
+    `${src.slice(at, end)}\nreturn translatePendingBodyWithCodex;`,
+  );
+  const processDeadlineMs = Date.now() + 300_000;
+  const admission = { deadlineMs: processDeadlineMs, finish() {} };
+  let admissionAttempts = 0;
+  let codexCalls = 0;
+  let historicalCalls = 0;
+  const withCodexTranslationLane = ({ run }) => run({
+    deadlineMs: processDeadlineMs,
+    admission,
+    admitCall: () => {
+      admissionAttempts += 1;
+      return admission;
+    },
+    reserveTransportRetry: () => false,
+  });
+  const expected = 'Der vollständige Artikel wurde über die historische Übersetzung wiederhergestellt.';
+  const translatePendingBodyWithHistoricalChain = async (itValue, locale, field, { callWithRetry }) => {
+    historicalCalls += 1;
+    assert.ok(itValue.includes('## In breve'));
+    assert.equal(locale, 'de');
+    assert.equal(field, 'body1');
+    assert.equal(typeof callWithRetry, 'function');
+    return expected;
+  };
+  const translatePendingBodyWithCodex = factory(
+    { CODEX_CLI_PRIMARY: 'codex-cli/test' },
+    processDeadlineMs,
+    2,
+    withCodexTranslationLane,
+    codexCallDeadlineMs,
+    () => { throw new Error('il test non deve arrivare al trasporto reale'); },
+    async () => {
+      codexCalls += 1;
+      throw new Error('circuit breaker Codex aperto dopo la selezione');
+    },
+    translateFieldFreeMt,
+    (text) => text,
+    translatePendingBodyWithHistoricalChain,
+    () => false,
+    { error() {}, warn() {}, log() {} },
+  );
+  const source = [
+    'Il primo paragrafo contiene contesto sufficiente e viene tradotto dopo la selezione della corsia Codex.',
+    '',
+    '## In breve',
+    '',
+    'Il breaker rende Codex indisponibile prima della chiamata fisica.',
+  ].join('\n');
+
+  const translated = await translatePendingBodyWithCodex(source, 'de', 'body1', { callWithRetry: async () => ({}) });
+
+  assert.equal(translated, expected);
+  assert.equal(admissionAttempts, 0);
+  assert.equal(codexCalls, 0);
+  assert.equal(historicalCalls, 1);
 });
