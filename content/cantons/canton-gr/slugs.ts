@@ -23,6 +23,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'ofenberg-chiusura-notte': { it: 'ofenberg-chiusura-notte', en: 'ofenbergstrasse-night-closure', de: 'ofenbergstrasse-nachtsperre', fr: 'fermeture-nocturne-ofenbergstrasse' },
  'innhub-la-punt-rinvio-apertura': { it: 'innhub-la-punt-rinvio-apertura', en: 'innhub-la-punt-opening-delay', de: 'innhub-la-punt-eroeffnung-verschoben', fr: 'innhub-la-punt-report-ouverture' },
  'vallo-protezione-sorte-lostallo': { it: 'vallo-protezione-sorte-lostallo', en: 'protection-barrier-sorte-lostallo', de: 'schutzmauer-sorte-lostallo', fr: 'mur-protection-sorte-lostallo' },
+ 'imc-oberengadin-weekend': { it: 'imc-oberengadin-weekend', en: 'oberengadin-imc-closed-weekends', de: 'imc-oberengadin-wochenende-geschlossen', fr: 'imc-oberengadin-fermee-weekends' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
