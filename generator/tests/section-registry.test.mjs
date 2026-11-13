@@ -77,6 +77,7 @@ import {
   buildSitemap,
   familySectionPages,
   isPaginationSitemapEligible,
+  pushPaginationSitemapEntry,
   SECTION_PATHS,
 } from '../../scripts/lib/build-sitemap.mjs';
 import { countXmlTags } from '../../scripts/lib/count-xml-tags.mjs';
@@ -391,6 +392,22 @@ test('la policy sitemap paginata ammette solo la pagina canonica 1', () => {
   assert.equal(isPaginationSitemapEligible(2), false);
   assert.equal(isPaginationSitemapEligible(0), false);
   assert.equal(isPaginationSitemapEligible(Number.NaN), false);
+});
+
+test('l append della sitemap paginata usa la stessa policy della pagina', () => {
+  const entries = [];
+
+  assert.equal(pushPaginationSitemapEntry(entries, 1, 'page-1'), true);
+  assert.equal(pushPaginationSitemapEntry(entries, 2, 'page-2'), false);
+  assert.deepEqual(entries, ['page-1']);
+});
+
+test('build-api instrada l append dell archivio nel wrapper dell engine', () => {
+  const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
+
+  assert.match(build, /const \{ pushPaginationSitemapEntry \} = await load\('engine\/shared\/paginationIndexPolicy\.ts'\);/u);
+  assert.match(build, /pushPaginationSitemapEntry\(urls, page,/u);
+  assert.doesNotMatch(build, /if \(!isPaginationSitemapEligible\(page\)\) continue/u);
 });
 
 test('sitemap di famiglia rifiuta uno slug hub mancante prima di interpolarlo', () => {
