@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-decisioni-grand-conseil-10-novembre.webp",
-      "sha256": "433a937577ca82b200d19b772dd48892700101df885de4f5d0e226d6a64bfb6d"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-decisioni-grand-conseil-10-novembre-480w.webp",
-      "sha256": "1c6cc2779f4975fa86ab5ff16a003652648228976464d885f211badcf3325087"
-    }
-  ]
+  "items": []
 }
