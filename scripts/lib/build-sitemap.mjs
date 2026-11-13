@@ -214,6 +214,18 @@ export function isPaginationSitemapEligible(page) {
   return Number.isSafeInteger(page) && page === 1;
 }
 
+/**
+ * Keep the page-policy decision adjacent to the mutation for the plain-Node
+ * builder. `build-api.mjs` uses the mirror's TypeScript helper directly under
+ * tsx; this module must remain importable by the dependency-free node:test
+ * gate.
+ */
+export function pushPaginationSitemapEntry(entries, page, entry) {
+  if (!isPaginationSitemapEligible(page)) return false;
+  entries.push(entry);
+  return true;
+}
+
 const SITEMAP_LOCALES = ['it', 'en', 'de', 'fr'];
 
 /**
@@ -319,10 +331,11 @@ export function buildFamilySectionSitemap({
   );
   const pageUrls = [];
   for (const page of familySectionPages(section, archiveUnionSize(meta, slugMap), pageSize)) {
-    if (page.key === 'archive' || page.key.startsWith('archive:')) {
-      const pageNumber = page.key === 'archive' ? 1 : Number(page.key.slice('archive:'.length));
-      if (!isPaginationSitemapEligible(pageNumber)) continue;
-    }
+    const pageNumber = page.key === 'archive'
+      ? 1
+      : page.key.startsWith('archive:')
+        ? Number(page.key.slice('archive:'.length))
+        : null;
     if (SITEMAP_LOCALES.some((loc) => retiredPaths.has(page.paths[loc]))) continue;
     for (const loc of SITEMAP_LOCALES) {
       const parts = [`  <url>`, `    <loc>${SITE}${xmlEsc(page.paths[loc])}</loc>`];
@@ -335,7 +348,9 @@ export function buildFamilySectionSitemap({
       parts.push(`    <changefreq>daily</changefreq>`);
       parts.push(`    <priority>${page.priority}</priority>`);
       parts.push(`  </url>`);
-      pageUrls.push(parts.join('\n'));
+      const entry = parts.join('\n');
+      if (pageNumber === null) pageUrls.push(entry);
+      else pushPaginationSitemapEntry(pageUrls, pageNumber, entry);
     }
   }
   const urls = [...pageUrls, ...articleUrls];
