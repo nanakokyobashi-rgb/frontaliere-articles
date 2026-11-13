@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-iniziativa-congedo-parentale-riuscita.webp",
+      "sha256": "88d06b70e8399d7f8326f4f3d12219c913c617ae5c8c5a2c7e05e95d049ab1a5"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-iniziativa-congedo-parentale-riuscita-480w.webp",
+      "sha256": "b6e831d3499951b840c55a54edb655d9fe8d2c2304d4cfd9e0638884b56f4eb0"
+    }
+  ]
 }
