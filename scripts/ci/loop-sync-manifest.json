@@ -5087,12 +5087,10 @@
     {
       "path": "generator/tests/crawler-cross-repo-artifacts.test.mjs",
       "sitePath": ".github/corpus-workflows/observers/generator/tests/crawler-cross-repo-artifacts.test.mjs",
-      "mode": "adapted",
-      "reason": "Il test degli artifact crawler aggiunge un'asserzione su `transportVerdict` che importa `scripts/ci/loop-drift-check.mjs`, corpus-only e assente dal sito; il gemello sitePath è quindi un artifact osservato, non un test mirrorabile come identical. La divergenza resta governata da #339 finché il verdetto di trasporto non è condiviso.",
-      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/339",
+      "mode": "identical",
       "baseline": {
-        "site": "4a6968ab3d01e038",
-        "corpus": "4a6968ab3d01e038",
+        "site": "382670e473ce7f7a",
+        "corpus": "382670e473ce7f7a",
         "alignedAt": "2026-11-13"
       },
       "couplingSnapshot": [
@@ -5114,10 +5112,6 @@
         },
         {
           "path": "scripts/ci/crawler-generation-observer-selector.mjs",
-          "mode": "non registrato"
-        },
-        {
-          "path": "scripts/ci/loop-drift-check.mjs",
           "mode": "non registrato"
         },
         {
