@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "45cf45bddb68264676394195d0a7924d796a594222d0b63cb0aae24e1fc2f884",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "3f91e30838d988864df248c6a880929a836f83e4480a3d341fc7c5e738ef3f89",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T14:41:08.896Z",
+      "updatedAt": "2026-11-13T04:23:25.174Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "193",
+          "value": "183",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Tal und Sagenmuseum Veranstaltungen 2026",
-              "detail": "Tal & Sagen Museum, Lauterbrunnen",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lauterbrunnen/tal-und-sagenmuseum-veranstaltungen-2026_AaPRiG3"
+              "label": "Adventsmarkt Detligen",
+              "detail": "Detligen, Radelfingen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-detligen/"
             },
             {
-              "label": "Fondue Chinoise Boat on Lake Thun",
-              "detail": "Thun",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fondue-chinoise-boat-on-lake-thun/"
+              "label": "Serata Oldies ad Aarwangen Sabato 14 novembre 2026",
+              "detail": "Aarwangen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/serata-oldies-ad-aarwangen-sabato-14-novembre-2026/"
             },
             {
-              "label": "Lottomatch SV Meiringen",
+              "label": "Internationales Flag Football Turnier: Capital Winter Classics",
+              "detail": "Sportplatz Bodenweid",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/internationales-flag-football-turnier-capital-winter-classics/"
+            },
+            {
+              "label": "Yodels and Polyphonies of the Baka People – a Workshop with Su Hart",
+              "detail": "Biel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/yodels-and-polyphonies-of-the-baka-people-a-workshop-with-su-hart/"
+            },
+            {
+              "label": "14. Weihnachtsausstellung",
               "detail": "Meiringen-Hasliberg, Hasliberg",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lottomatch-sv-meiringen/"
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/14-weihnachtsausstellung/"
             },
             {
-              "label": "Loupe-Märit",
-              "detail": "Laupen",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/loupe-maerit/"
+              "label": "«Murten, ausgeschlachtet.» – Panorama-Touren",
+              "detail": "Historisches Museum Bern, Bern",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/murten-ausgeschlachtet-panorama-touren_AjsxJm7"
             },
             {
-              "label": "Evento natalizio",
-              "detail": "Rathausplatz, Thun",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/christmas-event/"
+              "label": "Adventskranz Work-Shop/ Kurs inkl. Prosecco und Tea Time",
+              "detail": "Bern",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-workshop-kurs-inkl-prosecco-und-tea-time/"
             },
             {
-              "label": "Permaculture Planning with Sarah Daum",
-              "detail": "Alpine Permakultur Schweibenalp",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/planification-en-permaculture-avec-sarah-daum/"
+              "label": "Sophie Ullrich – Hot Sauce in My Eyes",
+              "detail": "Galerie da Mihi",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/sophie-ullrich-hot-sauce-in-my-eyes_AxYxnJp"
             },
             {
-              "label": "La mer pour horizon",
-              "detail": "Centre interrégional de perfectionnement (CIP), Tramelan",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-mer-pour-horizon/"
+              "label": "Erlebniskurs: Bushcraft · Survival & Permakultur",
+              "detail": "Spiez",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erlebniskurs-bushcraft-survival-permakultur/"
             },
             {
-              "label": "Prof. Bernhard Pörksen: „Die Kunst des Zuhörens. Über den Mut, sich der Welt zu öffnen“",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/prof-bernhard-poerksen-die-kunst-des-zuhoerens-ueber-den-mut-sich-der-welt-zu-oeffnen/"
-            },
-            {
-              "label": "Laurie Altman in concert",
-              "detail": "Hotel Eden Spiez, Spiez",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/laurie-altman-in-concert_A4RkNhU"
-            },
-            {
-              "label": "Layāli und Amanés - Bern",
-              "detail": "Evang.-ref. Pauluskirche, Bern",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/layali-und-amanes-bern/"
+              "label": "BYO-MOVIE-RAFFLE. Die Film-Lotterie mit der KMG",
+              "detail": "Bern",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/byomovieraffle-die-filmlotterie-mit-der-kmg-sa-141126-kellerkino-bern/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "193",
+          "value": "183",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Tal und Sagenmuseum Veranstaltungen 2026",
-              "detail": "Tal & Sagen Museum, Lauterbrunnen",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lauterbrunnen/tal-und-sagenmuseum-veranstaltungen-2026_AaPRiG3"
+              "label": "Adventsmarkt Detligen",
+              "detail": "Detligen, Radelfingen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-detligen/"
             },
             {
-              "label": "Fondue Chinoise Boat on Lake Thun",
-              "detail": "Thun",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fondue-chinoise-boat-on-lake-thun/"
+              "label": "Oldies Night in Aarwangen Saturday, November 14, 2026",
+              "detail": "Aarwangen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/serata-oldies-ad-aarwangen-sabato-14-novembre-2026/"
             },
             {
-              "label": "Lottomatch SV Meiringen",
+              "label": "Internationales Flag Football Turnier: Capital Winter Classics",
+              "detail": "Sportplatz Bodenweid",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/internationales-flag-football-turnier-capital-winter-classics/"
+            },
+            {
+              "label": "Yodels and Polyphonies of the Baka People – a Workshop with Su Hart",
+              "detail": "Biel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/yodels-and-polyphonies-of-the-baka-people-a-workshop-with-su-hart/"
+            },
+            {
+              "label": "14. Weihnachtsausstellung",
               "detail": "Meiringen-Hasliberg, Hasliberg",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lottomatch-sv-meiringen/"
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/14-weihnachtsausstellung/"
             },
             {
-              "label": "Loupe-Märit",
-              "detail": "Laupen",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/loupe-maerit/"
+              "label": "«Murten, ausgeschlachtet.» – Panorama-Touren",
+              "detail": "Historisches Museum Bern, Bern",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/murten-ausgeschlachtet-panorama-touren_AjsxJm7"
             },
             {
-              "label": "Christmas Event",
-              "detail": "Rathausplatz, Thun",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/christmas-event/"
+              "label": "Adventskranz Work-Shop/ Kurs inkl. Prosecco und Tea Time",
+              "detail": "Bern",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-workshop-kurs-inkl-prosecco-und-tea-time/"
             },
             {
-              "label": "Permaculture Planning with Sarah Daum",
-              "detail": "Alpine Permakultur Schweibenalp",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/planification-en-permaculture-avec-sarah-daum/"
+              "label": "Sophie Ullrich – Hot Sauce in My Eyes",
+              "detail": "Galerie da Mihi",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/sophie-ullrich-hot-sauce-in-my-eyes_AxYxnJp"
             },
             {
-              "label": "La mer pour horizon",
-              "detail": "Centre interrégional de perfectionnement (CIP), Tramelan",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-mer-pour-horizon/"
+              "label": "Erlebniskurs: Bushcraft · Survival & Permakultur",
+              "detail": "Spiez",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erlebniskurs-bushcraft-survival-permakultur/"
             },
             {
-              "label": "Prof. Bernhard Pörksen: „Die Kunst des Zuhörens. Über den Mut, sich der Welt zu öffnen“",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/prof-bernhard-poerksen-die-kunst-des-zuhoerens-ueber-den-mut-sich-der-welt-zu-oeffnen/"
-            },
-            {
-              "label": "Laurie Altman in concert",
-              "detail": "Hotel Eden Spiez, Spiez",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/laurie-altman-in-concert_A4RkNhU"
-            },
-            {
-              "label": "The Am",
-              "detail": "Evang.-ref. Pauluskirche, Bern",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/layali-und-amanes-bern/"
+              "label": "BYO-MOVIE-RAFFLE. Die Film-Lotterie mit der KMG",
+              "detail": "Bern",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/byomovieraffle-die-filmlotterie-mit-der-kmg-sa-141126-kellerkino-bern/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "193",
+          "value": "183",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,69 +279,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Tal und Sagenmuseum Veranstaltungen 2026",
-              "detail": "Tal & Sagen Museum, Lauterbrunnen",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lauterbrunnen/tal-und-sagenmuseum-veranstaltungen-2026_AaPRiG3"
+              "label": "Adventsmarkt Detligen",
+              "detail": "Detligen, Radelfingen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-detligen/"
             },
             {
-              "label": "Fondue-Chinoise-Schiff Thunersee",
-              "detail": "Thun",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fondue-chinoise-boat-on-lake-thun/"
+              "label": "Oldies Night Aarwangen Samstag ,14.November 2026",
+              "detail": "Aarwangen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/serata-oldies-ad-aarwangen-sabato-14-novembre-2026/"
             },
             {
-              "label": "Lottomatch SV Meiringen",
+              "label": "Internationales Flag Football Turnier: Capital Winter Classics",
+              "detail": "Sportplatz Bodenweid",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/internationales-flag-football-turnier-capital-winter-classics/"
+            },
+            {
+              "label": "Yodels and Polyphonies of the Baka People – a Workshop with Su Hart",
+              "detail": "Biel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/yodels-and-polyphonies-of-the-baka-people-a-workshop-with-su-hart/"
+            },
+            {
+              "label": "14. Weihnachtsausstellung",
               "detail": "Meiringen-Hasliberg, Hasliberg",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lottomatch-sv-meiringen/"
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/14-weihnachtsausstellung/"
             },
             {
-              "label": "Loupe-Märit",
-              "detail": "Laupen",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/loupe-maerit/"
+              "label": "«Murten, ausgeschlachtet.» – Panorama-Touren",
+              "detail": "Historisches Museum Bern, Bern",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/murten-ausgeschlachtet-panorama-touren_AjsxJm7"
             },
             {
-              "label": "Christmas Event",
-              "detail": "Rathausplatz, Thun",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/christmas-event/"
+              "label": "Adventskranz Work-Shop/ Kurs inkl. Prosecco und Tea Time",
+              "detail": "Bern",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-workshop-kurs-inkl-prosecco-und-tea-time/"
             },
             {
-              "label": "Permakulturplanung mit Sarah Daum",
-              "detail": "Alpine Permakultur Schweibenalp",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/planification-en-permaculture-avec-sarah-daum/"
+              "label": "Sophie Ullrich – Hot Sauce in My Eyes",
+              "detail": "Galerie da Mihi",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/sophie-ullrich-hot-sauce-in-my-eyes_AxYxnJp"
             },
             {
-              "label": "La mer pour horizon",
-              "detail": "Centre interrégional de perfectionnement (CIP), Tramelan",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-mer-pour-horizon/"
+              "label": "Erlebniskurs: Bushcraft · Survival & Permakultur",
+              "detail": "Spiez",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erlebniskurs-bushcraft-survival-permakultur/"
             },
             {
-              "label": "Prof. Bernhard Pörksen: „Die Kunst des Zuhörens. Über den Mut, sich der Welt zu öffnen“",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/prof-bernhard-poerksen-die-kunst-des-zuhoerens-ueber-den-mut-sich-der-welt-zu-oeffnen/"
-            },
-            {
-              "label": "Laurie Altman in concert",
-              "detail": "Hotel Eden Spiez, Spiez",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/laurie-altman-in-concert_A4RkNhU"
-            },
-            {
-              "label": "Die andrli und amanes - Bern",
-              "detail": "Evang.-ref. Pauluskirche, Bern",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/layali-und-amanes-bern/"
+              "label": "BYO-MOVIE-RAFFLE. Die Film-Lotterie mit der KMG",
+              "detail": "Bern",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/byomovieraffle-die-filmlotterie-mit-der-kmg-sa-141126-kellerkino-bern/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "193",
+          "value": "183",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,69 +402,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Tal und Sagenmuseum Veranstaltungen 2026",
-              "detail": "Tal & Sagen Museum, Lauterbrunnen",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lauterbrunnen/tal-und-sagenmuseum-veranstaltungen-2026_AaPRiG3"
+              "label": "Adventsmarkt Detligen",
+              "detail": "Detligen, Radelfingen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-detligen/"
             },
             {
-              "label": "Bateau de fondue chinoise sur le lac de Thoune",
-              "detail": "Thun",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fondue-chinoise-boat-on-lake-thun/"
+              "label": "Soirée Oldies à Aarwangen Samedi 14 novembre 2026",
+              "detail": "Aarwangen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/serata-oldies-ad-aarwangen-sabato-14-novembre-2026/"
             },
             {
-              "label": "Lottomatch SV Meiringen",
+              "label": "Internationales Flag Football Turnier: Capital Winter Classics",
+              "detail": "Sportplatz Bodenweid",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/internationales-flag-football-turnier-capital-winter-classics/"
+            },
+            {
+              "label": "Yodels and Polyphonies of the Baka People – a Workshop with Su Hart",
+              "detail": "Biel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/yodels-and-polyphonies-of-the-baka-people-a-workshop-with-su-hart/"
+            },
+            {
+              "label": "14. Weihnachtsausstellung",
               "detail": "Meiringen-Hasliberg, Hasliberg",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lottomatch-sv-meiringen/"
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/14-weihnachtsausstellung/"
             },
             {
-              "label": "Loupe-Märit",
-              "detail": "Laupen",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/loupe-maerit/"
+              "label": "«Murten, ausgeschlachtet.» – Panorama-Touren",
+              "detail": "Historisches Museum Bern, Bern",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/murten-ausgeschlachtet-panorama-touren_AjsxJm7"
             },
             {
-              "label": "Événement de Noël",
-              "detail": "Rathausplatz, Thun",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/christmas-event/"
+              "label": "Adventskranz Work-Shop/ Kurs inkl. Prosecco und Tea Time",
+              "detail": "Bern",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-workshop-kurs-inkl-prosecco-und-tea-time/"
             },
             {
-              "label": "Planification en permaculture avec Sarah Daum",
-              "detail": "Alpine Permakultur Schweibenalp",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/planification-en-permaculture-avec-sarah-daum/"
+              "label": "Sophie Ullrich – Hot Sauce in My Eyes",
+              "detail": "Galerie da Mihi",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/sophie-ullrich-hot-sauce-in-my-eyes_AxYxnJp"
             },
             {
-              "label": "La mer pour horizon",
-              "detail": "Centre interrégional de perfectionnement (CIP), Tramelan",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-mer-pour-horizon/"
+              "label": "Erlebniskurs: Bushcraft · Survival & Permakultur",
+              "detail": "Spiez",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erlebniskurs-bushcraft-survival-permakultur/"
             },
             {
-              "label": "Prof. Bernhard Pörksen: „Die Kunst des Zuhörens. Über den Mut, sich der Welt zu öffnen“",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/prof-bernhard-poerksen-die-kunst-des-zuhoerens-ueber-den-mut-sich-der-welt-zu-oeffnen/"
-            },
-            {
-              "label": "Laurie Altman in concert",
-              "detail": "Hotel Eden Spiez, Spiez",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/laurie-altman-in-concert_A4RkNhU"
-            },
-            {
-              "label": "Layāli und Amanés - Berne",
-              "detail": "Evang.-ref. Pauluskirche, Bern",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/layali-und-amanes-bern/"
+              "label": "BYO-MOVIE-RAFFLE. Die Film-Lotterie mit der KMG",
+              "detail": "Bern",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/byomovieraffle-die-filmlotterie-mit-der-kmg-sa-141126-kellerkino-bern/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }

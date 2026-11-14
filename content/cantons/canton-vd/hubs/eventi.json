@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "1aeed003ee6e3f7ebd523858192ae1c2d0f183d71660ad4a19fe40121bbc4987",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "0803e61f7ba81c3429cbeab7b6c92951b1933bfa18d2dc25b5fe35017e2bebdb",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T14:41:08.896Z",
+      "updatedAt": "2026-11-13T04:23:25.174Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T14:02:55.343Z",
+      "updatedAt": "2026-11-12T22:54:56.926Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "71",
+          "value": "75",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Candlelight concert: Quatuor Amoroso",
-              "detail": "Salavaux, Vully-les-Lacs",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/candlelight-concert-quatuor-amoroso/"
+              "label": "KALIKA (FR) + SUPPORT",
+              "detail": "Losanna, Lausanne",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kalika-fr-support/"
             },
             {
-              "label": "Jérémie Kisling",
-              "detail": "Chexbres",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jeremie-kisling-1/"
+              "label": "KALIKA (FR) + SUPPORT",
+              "detail": "Le Romandie",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/kalika-fr-support_AmABReg"
             },
             {
-              "label": "Le WEEKEND des PIRATES",
-              "detail": "Barberousse",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lausanne/le-weekend-des-pirates_AcaTff8"
+              "label": "Painting exhibition",
+              "detail": "Vevey",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/painting-exhibition-1/"
             },
             {
-              "label": "La ferme des Pralies - Marché à la ferme",
-              "detail": "La Ferme des Pralies, Arnex-sur-Nyon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/evenements/culture-populaire/arnex-sur-nyon/la-ferme-des-pralies-marche-a-la-ferme_AW9mVmH"
+              "label": "Rota Fortunae - Les PCGB",
+              "detail": "Pavillon Naftule",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/rota-fortunae-les-pcgb_AQXS8Aa"
             },
             {
-              "label": "Storytelling Night",
-              "detail": "Aigle",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/storytelling-night/"
+              "label": "Noci, edera e cipolle: ricette per inchiostri e tinture",
+              "detail": "Musée national suisse, Prangins",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/noci-edera-e-cipolle-ricette-per-inchiostri-e-tinture/"
+            },
+            {
+              "label": "Atelier \"Journée mondiale du faux timbre d'artiste\"",
+              "detail": "Lausanne",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-journee-mondiale-du-faux-timbre-dartiste/"
             },
             {
               "label": "Gala Stand Up - Montreux Comedy 2026",
-              "detail": "Théâtre de Beaulieu, Lausanne",
-              "date": "2026-11-13",
+              "detail": "Théâtre de Beaulieu, Lausanne — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gala-stand-up-montreux-comedy-2026/"
-            },
-            {
-              "label": "Alfredo Rodriguez Trio",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/alfredo-rodriguez-trio_A5DGmBr"
             },
             {
               "label": "Montreux Art Gallery",
               "detail": "MAG – Montreux Art Gallery, Montreux — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.guidle.com/it/evenements/montreux/montreux-art-gallery-mag_AJFLXN1"
             },
             {
               "label": "Montreux Comedy",
               "detail": "Montreux Comedy Festival, Montreux — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy/"
             },
             {
               "label": "Montreux Comedy Festival",
               "detail": "Théâtre de Beaulieu, Lausanne — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy-festival/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -145,7 +145,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "VD",
@@ -155,7 +155,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "71",
+          "value": "75",
           "note": "from the site’s events calendar"
         }
       ],
@@ -166,69 +166,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Candlelight concert: Quatuor Amoroso",
-              "detail": "Salavaux, Vully-les-Lacs",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/candlelight-concert-quatuor-amoroso/"
+              "label": "KALIKA (FR) + FANCY DOLCY (FR)",
+              "detail": "Losanna, Lausanne",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kalika-fr-support/"
             },
             {
-              "label": "Jérémie Kisling",
-              "detail": "Chexbres",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jeremie-kisling-1/"
+              "label": "KALIKA (FR) + SUPPORT",
+              "detail": "Le Romandie",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/kalika-fr-support_AmABReg"
             },
             {
-              "label": "The PIRATES WEEKEND",
-              "detail": "Barberousse",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lausanne/le-weekend-des-pirates_AcaTff8"
+              "label": "Painting exhibition",
+              "detail": "Vevey",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/painting-exhibition-1/"
             },
             {
-              "label": "La ferme des Pralies - Marché à la ferme",
-              "detail": "La Ferme des Pralies, Arnex-sur-Nyon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/evenements/culture-populaire/arnex-sur-nyon/la-ferme-des-pralies-marche-a-la-ferme_AW9mVmH"
+              "label": "Rota Fortunae - Les PCGB",
+              "detail": "Pavillon Naftule",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/rota-fortunae-les-pcgb_AQXS8Aa"
             },
             {
-              "label": "Storytelling Night",
-              "detail": "Aigle",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/storytelling-night/"
+              "label": "Walnuts, ivy and onions: ink and dye recipes",
+              "detail": "Musée national suisse, Prangins",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/noci-edera-e-cipolle-ricette-per-inchiostri-e-tinture/"
+            },
+            {
+              "label": "Atelier \"Journée mondiale du faux timbre d'artiste\"",
+              "detail": "Lausanne",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-journee-mondiale-du-faux-timbre-dartiste/"
             },
             {
               "label": "Gala Stand Up - Montreux Comedy 2026",
-              "detail": "Théâtre de Beaulieu, Lausanne",
-              "date": "2026-11-13",
+              "detail": "Théâtre de Beaulieu, Lausanne — ongoing, last day: 15 November 2026",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gala-stand-up-montreux-comedy-2026/"
-            },
-            {
-              "label": "Alfredo Rodriguez Trio",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/alfredo-rodriguez-trio_A5DGmBr"
             },
             {
               "label": "Montreux Art Gallery",
               "detail": "MAG – Montreux Art Gallery, Montreux — ongoing, last day: 15 November 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.guidle.com/it/evenements/montreux/montreux-art-gallery-mag_AJFLXN1"
             },
             {
               "label": "Montreux Comedy",
               "detail": "Montreux Comedy Festival, Montreux — ongoing, last day: 22 November 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy/"
             },
             {
               "label": "Montreux Comedy Festival",
               "detail": "Théâtre de Beaulieu, Lausanne — ongoing, last day: 22 November 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy-festival/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -251,7 +251,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -273,7 +273,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "VD",
@@ -283,7 +283,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "71",
+          "value": "75",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -294,69 +294,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Kerzenlichtkonzert: Quatuor Amoroso",
-              "detail": "Salavaux, Vully-les-Lacs",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/candlelight-concert-quatuor-amoroso/"
+              "label": "KALIKA (FR) + FANCY DOLCY (FR)",
+              "detail": "Losanna, Lausanne",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kalika-fr-support/"
             },
             {
-              "label": "Jérémie Kisling",
-              "detail": "Chexbres",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jeremie-kisling-1/"
+              "label": "KALIKA (FR) + SUPPORT",
+              "detail": "Le Romandie",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/kalika-fr-support_AmABReg"
             },
             {
-              "label": "Die WEEKENDS der PIRATEN",
-              "detail": "Barberousse",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lausanne/le-weekend-des-pirates_AcaTff8"
+              "label": "Ausstellung von Gemälden",
+              "detail": "Vevey",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/painting-exhibition-1/"
             },
             {
-              "label": "La ferme des Pralies - Marché à la ferme",
-              "detail": "La Ferme des Pralies, Arnex-sur-Nyon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/evenements/culture-populaire/arnex-sur-nyon/la-ferme-des-pralies-marche-a-la-ferme_AW9mVmH"
+              "label": "Rota Fortunae - Les PCGB",
+              "detail": "Pavillon Naftule",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/rota-fortunae-les-pcgb_AQXS8Aa"
             },
             {
-              "label": "Erzählnacht 2024",
-              "detail": "Aigle",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/storytelling-night/"
+              "label": "Tinten- und Färberrezepturen mit Nüssen, Efeu und Zwiebeln",
+              "detail": "Musée national suisse, Prangins",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/noci-edera-e-cipolle-ricette-per-inchiostri-e-tinture/"
+            },
+            {
+              "label": "Atelier \"Journée mondiale du faux timbre d'artiste\"",
+              "detail": "Lausanne",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-journee-mondiale-du-faux-timbre-dartiste/"
             },
             {
               "label": "Gala Stand Up - Montreux Comedy 2026",
-              "detail": "Théâtre de Beaulieu, Lausanne",
-              "date": "2026-11-13",
+              "detail": "Théâtre de Beaulieu, Lausanne — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gala-stand-up-montreux-comedy-2026/"
-            },
-            {
-              "label": "Alfredo Rodriguez Trio",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/alfredo-rodriguez-trio_A5DGmBr"
             },
             {
               "label": "Montreux Art Gallery",
               "detail": "MAG – Montreux Art Gallery, Montreux — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.guidle.com/it/evenements/montreux/montreux-art-gallery-mag_AJFLXN1"
             },
             {
               "label": "Montreux Comedy",
               "detail": "Montreux Comedy Festival, Montreux — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy/"
             },
             {
               "label": "Montreux Comedy Festival",
               "detail": "Théâtre de Beaulieu, Lausanne — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy-festival/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -379,7 +379,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -401,7 +401,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "VD",
@@ -411,7 +411,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "71",
+          "value": "75",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -422,69 +422,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Concert à la Bougie : Quatuor Amoroso",
-              "detail": "Salavaux, Vully-les-Lacs",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/candlelight-concert-quatuor-amoroso/"
+              "label": "KALIKA (FR) + FANCY DOLCY (FR)",
+              "detail": "Losanna, Lausanne",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kalika-fr-support/"
             },
             {
-              "label": "Jérémie Kisling",
-              "detail": "Chexbres",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jeremie-kisling-1/"
+              "label": "KALIKA (FR) + SUPPORT",
+              "detail": "Le Romandie",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/kalika-fr-support_AmABReg"
             },
             {
-              "label": "Le WEEK-END des PIRATES",
-              "detail": "Barberousse",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lausanne/le-weekend-des-pirates_AcaTff8"
+              "label": "René Blöchlinger, peintures et gravures",
+              "detail": "Vevey",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/painting-exhibition-1/"
             },
             {
-              "label": "La ferme des Pralies - Marché à la ferme",
-              "detail": "La Ferme des Pralies, Arnex-sur-Nyon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/evenements/culture-populaire/arnex-sur-nyon/la-ferme-des-pralies-marche-a-la-ferme_AW9mVmH"
+              "label": "Rota Fortunae - Les PCGB",
+              "detail": "Pavillon Naftule",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/rota-fortunae-les-pcgb_AQXS8Aa"
             },
             {
-              "label": "Nuit du Conte",
-              "detail": "Aigle",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/storytelling-night/"
+              "label": "Des noix, du lierre et des oignons: recettes d'encres et de teintures",
+              "detail": "Musée national suisse, Prangins",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/noci-edera-e-cipolle-ricette-per-inchiostri-e-tinture/"
+            },
+            {
+              "label": "Atelier \"Journée mondiale du faux timbre d'artiste\"",
+              "detail": "Lausanne",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-journee-mondiale-du-faux-timbre-dartiste/"
             },
             {
               "label": "Gala Stand Up - Montreux Comedy 2026",
-              "detail": "Théâtre de Beaulieu, Lausanne",
-              "date": "2026-11-13",
+              "detail": "Théâtre de Beaulieu, Lausanne — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gala-stand-up-montreux-comedy-2026/"
-            },
-            {
-              "label": "Alfredo Rodriguez Trio",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/alfredo-rodriguez-trio_A5DGmBr"
             },
             {
               "label": "Montreux Art Gallery",
               "detail": "MAG – Montreux Art Gallery, Montreux — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.guidle.com/it/evenements/montreux/montreux-art-gallery-mag_AJFLXN1"
             },
             {
               "label": "Montreux Comedy",
               "detail": "Montreux Comedy Festival, Montreux — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy/"
             },
             {
               "label": "Montreux Comedy Festival",
               "detail": "Théâtre de Beaulieu, Lausanne — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy-festival/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -507,7 +507,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -529,7 +529,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }

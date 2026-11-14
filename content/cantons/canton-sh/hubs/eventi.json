@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-11-13T12:13:48.902Z",
-  "contentHash": "afd30f84a994b761dfd0c6736dbb6c6c246c1c32d7a94d4944ed7a314ee1ae10",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "6019268f89bddb9d3803287ff0433f256ead47351efd7ea807e3f877b7043a71",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "30",
+          "value": "31",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,30 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "5 Jahre Bachturnhalle",
-              "detail": "Theater Bachturnhalle",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/5-jahre-bachturnhalle_Afg9Vtd"
-            },
-            {
-              "label": "5 Years of the Bachturnhalle",
-              "detail": "Theater Bachturnhalle, Schaffhausen",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/5-years-of-the-bachturnhalle/"
-            },
-            {
-              "label": "LUNIK [CH]",
-              "detail": "Kulturzentrum Kammgarn",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/evenements/musique/schaffhouse/lunik-ch_AvBrZmJ"
-            },
-            {
-              "label": "LUNIK [CH]",
-              "detail": "Kulturzentrum Kammgarn, Schaffhausen",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lunik-ch/"
-            },
             {
               "label": "Painting studio",
               "detail": "Schaffhausen",
@@ -80,6 +56,18 @@
               "url": "https://www.guidle.com/it/events/music/schaffhausen/shakra-ch_AugjFVX"
             },
             {
+              "label": "5 Jahre Bachturnhalle",
+              "detail": "Theater Bachturnhalle — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/5-jahre-bachturnhalle_Afg9Vtd"
+            },
+            {
+              "label": "5 Years of the Bachturnhalle",
+              "detail": "Theater Bachturnhalle, Schaffhausen — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/5-years-of-the-bachturnhalle/"
+            },
+            {
               "label": "7th Schaffhausen Vinyl Exchange",
               "detail": "Schaffhausen",
               "date": "2026-11-15",
@@ -96,6 +84,18 @@
               "detail": "Schaffhausen",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/legenden-und-sagen-aus-dem-tessin/"
+            },
+            {
+              "label": "Murder Mystery Dinner / PIZZA, PASTA, MURDER",
+              "detail": "Schaffhausen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/murder-mystery-dinner-pizza-pasta-murder/"
+            },
+            {
+              "label": "Schaffhausen Klassik Extrakonzert 1: «LUX AETERNA»",
+              "detail": "Schaffhausen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhausen-klassik-extrakonzert-1-lux-aeterna/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -160,7 +160,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T12:13:48.902Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "SH",
@@ -170,7 +170,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "30",
+          "value": "31",
           "note": "from the site’s events calendar"
         }
       ],
@@ -180,30 +180,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "5 Years of the Bachturnhalle",
-              "detail": "Theater Bachturnhalle",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/5-jahre-bachturnhalle_Afg9Vtd"
-            },
-            {
-              "label": "5 Years of the Bachturnhalle",
-              "detail": "Theater Bachturnhalle, Schaffhausen",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/5-years-of-the-bachturnhalle/"
-            },
-            {
-              "label": "LUNIK [CH]",
-              "detail": "Kulturzentrum Kammgarn",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/evenements/musique/schaffhouse/lunik-ch_AvBrZmJ"
-            },
-            {
-              "label": "LUNIK [CH]",
-              "detail": "Kulturzentrum Kammgarn, Schaffhausen",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lunik-ch/"
-            },
             {
               "label": "Painting studio",
               "detail": "Schaffhausen",
@@ -223,6 +199,18 @@
               "url": "https://www.guidle.com/it/events/music/schaffhausen/shakra-ch_AugjFVX"
             },
             {
+              "label": "5 Years of the Bachturnhalle",
+              "detail": "Theater Bachturnhalle — ongoing, last day: 15 November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/5-jahre-bachturnhalle_Afg9Vtd"
+            },
+            {
+              "label": "5 Years of the Bachturnhalle",
+              "detail": "Theater Bachturnhalle, Schaffhausen — ongoing, last day: 15 November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/5-years-of-the-bachturnhalle/"
+            },
+            {
               "label": "7th Schaffhausen Vinyl Exchange",
               "detail": "Schaffhausen",
               "date": "2026-11-15",
@@ -239,6 +227,18 @@
               "detail": "Schaffhausen",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/legenden-und-sagen-aus-dem-tessin/"
+            },
+            {
+              "label": "Murder Mystery Dinner / PIZZA, PASTA, MURDER",
+              "detail": "Schaffhausen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/murder-mystery-dinner-pizza-pasta-murder/"
+            },
+            {
+              "label": "Schaffhausen Klassik Extrakonzert 1: «LUX AETERNA»",
+              "detail": "Schaffhausen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhausen-klassik-extrakonzert-1-lux-aeterna/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -303,7 +303,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T12:13:48.902Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "SH",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "30",
+          "value": "31",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -323,30 +323,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "5 Jahre Bachturnhalle",
-              "detail": "Theater Bachturnhalle",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/5-jahre-bachturnhalle_Afg9Vtd"
-            },
-            {
-              "label": "5 Jahre Bachturnhalle",
-              "detail": "Theater Bachturnhalle, Schaffhausen",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/5-years-of-the-bachturnhalle/"
-            },
-            {
-              "label": "LUNIK [CH]",
-              "detail": "Kulturzentrum Kammgarn",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/evenements/musique/schaffhouse/lunik-ch_AvBrZmJ"
-            },
-            {
-              "label": "LUNIK [CH]",
-              "detail": "Kulturzentrum Kammgarn, Schaffhausen",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lunik-ch/"
-            },
             {
               "label": "Mal-Atelier",
               "detail": "Schaffhausen",
@@ -366,6 +342,18 @@
               "url": "https://www.guidle.com/it/events/music/schaffhausen/shakra-ch_AugjFVX"
             },
             {
+              "label": "5 Jahre Bachturnhalle",
+              "detail": "Theater Bachturnhalle — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/5-jahre-bachturnhalle_Afg9Vtd"
+            },
+            {
+              "label": "5 Jahre Bachturnhalle",
+              "detail": "Theater Bachturnhalle, Schaffhausen — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/5-years-of-the-bachturnhalle/"
+            },
+            {
               "label": "7. Schaffhauser Vinylbörse",
               "detail": "Schaffhausen",
               "date": "2026-11-15",
@@ -382,6 +370,18 @@
               "detail": "Schaffhausen",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/legenden-und-sagen-aus-dem-tessin/"
+            },
+            {
+              "label": "DinnerKrimi / PIZZA, PASTA, MORD",
+              "detail": "Schaffhausen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/murder-mystery-dinner-pizza-pasta-murder/"
+            },
+            {
+              "label": "Schaffhausen Klassik Extrakonzert 1: «LUX AETERNA»",
+              "detail": "Schaffhausen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhausen-klassik-extrakonzert-1-lux-aeterna/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -446,7 +446,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-13T12:13:48.902Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "SH",
@@ -456,7 +456,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "30",
+          "value": "31",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -466,30 +466,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Les 5 ans de la salle de sport Bachturnhalle",
-              "detail": "Theater Bachturnhalle",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/5-jahre-bachturnhalle_Afg9Vtd"
-            },
-            {
-              "label": "Les 5 ans de la salle de sport Bachturnhalle",
-              "detail": "Theater Bachturnhalle, Schaffhausen",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/5-years-of-the-bachturnhalle/"
-            },
-            {
-              "label": "LUNIK [CH]",
-              "detail": "Kulturzentrum Kammgarn",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/evenements/musique/schaffhouse/lunik-ch_AvBrZmJ"
-            },
-            {
-              "label": "LUNIK [CH]",
-              "detail": "Kulturzentrum Kammgarn, Schaffhausen",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lunik-ch/"
-            },
             {
               "label": "Atelier de peinture",
               "detail": "Schaffhausen",
@@ -509,6 +485,18 @@
               "url": "https://www.guidle.com/it/events/music/schaffhausen/shakra-ch_AugjFVX"
             },
             {
+              "label": "Les 5 ans de la salle de sport Bachturnhalle",
+              "detail": "Theater Bachturnhalle — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/5-jahre-bachturnhalle_Afg9Vtd"
+            },
+            {
+              "label": "Les 5 ans de la salle de sport Bachturnhalle",
+              "detail": "Theater Bachturnhalle, Schaffhausen — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/5-years-of-the-bachturnhalle/"
+            },
+            {
               "label": "7e bourse aux vinyles de Schaffhouse",
               "detail": "Schaffhausen",
               "date": "2026-11-15",
@@ -525,6 +513,18 @@
               "detail": "Schaffhausen",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/legenden-und-sagen-aus-dem-tessin/"
+            },
+            {
+              "label": "Dîner policier / PIZZA, PÂTES, MEURTRE",
+              "detail": "Schaffhausen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/murder-mystery-dinner-pizza-pasta-murder/"
+            },
+            {
+              "label": "Schaffhausen Klassik Extrakonzert 1: «LUX AETERNA»",
+              "detail": "Schaffhausen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhausen-klassik-extrakonzert-1-lux-aeterna/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -589,7 +589,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-13T12:13:48.902Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }

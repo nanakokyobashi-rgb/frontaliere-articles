@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "0bdeee6772718e2d0a851a9dc0c5e037c167bb25fc6ddf6ef3a45a53a463d8a9",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "74c0ea94130874941826155811d01e8853e8ad8b379619a8c2ced9edce57e691",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T14:41:08.896Z",
+      "updatedAt": "2026-11-13T04:23:25.174Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "26",
+          "value": "23",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,35 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Turnrevue Niederurnen 2026",
-              "detail": "Niederurnen, Glarus Nord",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
-            },
-            {
-              "label": "Caffè linguistico nella libreria Wortreich",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/eventi/questo-e-quello/glarona/caffe-linguistico-nella-libreria-wortreich_AicfFnM"
-            },
-            {
-              "label": "Das Schweizer Sexpubquiz – Wissen, Lachen, Überraschungen",
-              "detail": "Glarus",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-schweizer-sexpubquiz-wissen-lachen-ueberraschungen/"
-            },
-            {
-              "label": "Fluch der Rabenmutter",
-              "detail": "Schwanden",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fluch-der-rabenmutter/"
-            },
-            {
-              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
-              "detail": "Schützenhaus Glarus, Glarus — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
-            },
             {
               "label": "Glarner Repair Café: Reparieren statt Wegwerfen",
               "detail": "Glarus",
@@ -90,11 +61,41 @@
               "detail": "Glarus",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/abendkino-im-wortreich-springsteen/"
+            },
+            {
+              "label": "Turnrevue Niederurnen 2026",
+              "detail": "Niederurnen, Glarus Nord — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
+            },
+            {
+              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
+              "detail": "Schützenhaus Glarus, Glarus — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
+            },
+            {
+              "label": "Jubiläumskonzert Chinderjodelchörli Glarnerland",
+              "detail": "Gesellschaftshaus Ennenda",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jubilaeumskonzert-chinderjodelchoerli-glarnerland/"
+            },
+            {
+              "label": "Seniorenkino im Wortreich: \"Rebuilding\"",
+              "detail": "Wortreich Buchhandlung & Antiquariat, Glarus",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/seniorenkino-im-wortreich-rebuilding/"
+            },
+            {
+              "label": "KISS Suppenznacht",
+              "detail": "ReVier Ennenda, Glarus",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kiss-suppenznacht/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -116,7 +117,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "GL",
@@ -126,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "26",
+          "value": "23",
           "note": "from the site’s events calendar"
         }
       ],
@@ -136,35 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Turnrevue Niederurnen 2026",
-              "detail": "Niederurnen, Glarus Nord",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
-            },
-            {
-              "label": "Language Café in the Wortreich bookshop",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/eventi/questo-e-quello/glarona/caffe-linguistico-nella-libreria-wortreich_AicfFnM"
-            },
-            {
-              "label": "Das Schweizer Sexpubquiz – Wissen, Lachen, Überraschungen",
-              "detail": "Glarus",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-schweizer-sexpubquiz-wissen-lachen-ueberraschungen/"
-            },
-            {
-              "label": "Fluch der Rabenmutter",
-              "detail": "Schwanden",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fluch-der-rabenmutter/"
-            },
-            {
-              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
-              "detail": "Schützenhaus Glarus, Glarus — ongoing, last day: 14 November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
-            },
             {
               "label": "Glarner Repair Café: Reparieren statt Wegwerfen",
               "detail": "Glarus",
@@ -194,11 +166,41 @@
               "detail": "Glarus",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/abendkino-im-wortreich-springsteen/"
+            },
+            {
+              "label": "Turnrevue Niederurnen 2026",
+              "detail": "Niederurnen, Glarus Nord — ongoing, last day: 15 November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
+            },
+            {
+              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
+              "detail": "Schützenhaus Glarus, Glarus — ongoing, last day: 14 November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
+            },
+            {
+              "label": "Jubiläumskonzert Chinderjodelchörli Glarnerland",
+              "detail": "Gesellschaftshaus Ennenda",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jubilaeumskonzert-chinderjodelchoerli-glarnerland/"
+            },
+            {
+              "label": "Seniorenkino im Wortreich: \"Rebuilding\"",
+              "detail": "Wortreich Buchhandlung & Antiquariat, Glarus",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/seniorenkino-im-wortreich-rebuilding/"
+            },
+            {
+              "label": "KISS Suppenznacht",
+              "detail": "ReVier Ennenda, Glarus",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kiss-suppenznacht/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -220,7 +222,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "GL",
@@ -230,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "26",
+          "value": "23",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -240,35 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Turnrevue Niederurnen 2026",
-              "detail": "Niederurnen, Glarus Nord",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
-            },
-            {
-              "label": "Sprach-Café in der Buchhandlung Wortreich",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/eventi/questo-e-quello/glarona/caffe-linguistico-nella-libreria-wortreich_AicfFnM"
-            },
-            {
-              "label": "Das Schweizer Sexpubquiz – Wissen, Lachen, Überraschungen",
-              "detail": "Glarus",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-schweizer-sexpubquiz-wissen-lachen-ueberraschungen/"
-            },
-            {
-              "label": "Fluch der Rabenmutter",
-              "detail": "Schwanden",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fluch-der-rabenmutter/"
-            },
-            {
-              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
-              "detail": "Schützenhaus Glarus, Glarus — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
-            },
             {
               "label": "Glarner Repair Café: Reparieren statt Wegwerfen",
               "detail": "Glarus",
@@ -298,11 +271,41 @@
               "detail": "Glarus",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/abendkino-im-wortreich-springsteen/"
+            },
+            {
+              "label": "Turnrevue Niederurnen 2026",
+              "detail": "Niederurnen, Glarus Nord — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
+            },
+            {
+              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
+              "detail": "Schützenhaus Glarus, Glarus — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
+            },
+            {
+              "label": "Jubiläumskonzert Chinderjodelchörli Glarnerland",
+              "detail": "Gesellschaftshaus Ennenda",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jubilaeumskonzert-chinderjodelchoerli-glarnerland/"
+            },
+            {
+              "label": "Seniorenkino im Wortreich: \"Rebuilding\"",
+              "detail": "Wortreich Buchhandlung & Antiquariat, Glarus",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/seniorenkino-im-wortreich-rebuilding/"
+            },
+            {
+              "label": "KISS Suppenznacht",
+              "detail": "ReVier Ennenda, Glarus",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kiss-suppenznacht/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -324,7 +327,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "GL",
@@ -334,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "26",
+          "value": "23",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -344,35 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Turnrevue Niederurnen 2026",
-              "detail": "Niederurnen, Glarus Nord",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
-            },
-            {
-              "label": "Café linguistique à la librairie Wortreich",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/eventi/questo-e-quello/glarona/caffe-linguistico-nella-libreria-wortreich_AicfFnM"
-            },
-            {
-              "label": "Das Schweizer Sexpubquiz – Wissen, Lachen, Überraschungen",
-              "detail": "Glarus",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-schweizer-sexpubquiz-wissen-lachen-ueberraschungen/"
-            },
-            {
-              "label": "Fluch der Rabenmutter",
-              "detail": "Schwanden",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fluch-der-rabenmutter/"
-            },
-            {
-              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
-              "detail": "Schützenhaus Glarus, Glarus — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
-            },
             {
               "label": "Glarner Repair Café: Reparieren statt Wegwerfen",
               "detail": "Glarus",
@@ -402,11 +376,41 @@
               "detail": "Glarus",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/abendkino-im-wortreich-springsteen/"
+            },
+            {
+              "label": "Turnrevue Niederurnen 2026",
+              "detail": "Niederurnen, Glarus Nord — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
+            },
+            {
+              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
+              "detail": "Schützenhaus Glarus, Glarus — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
+            },
+            {
+              "label": "Jubiläumskonzert Chinderjodelchörli Glarnerland",
+              "detail": "Gesellschaftshaus Ennenda",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jubilaeumskonzert-chinderjodelchoerli-glarnerland/"
+            },
+            {
+              "label": "Seniorenkino im Wortreich: \"Rebuilding\"",
+              "detail": "Wortreich Buchhandlung & Antiquariat, Glarus",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/seniorenkino-im-wortreich-rebuilding/"
+            },
+            {
+              "label": "KISS Suppenznacht",
+              "detail": "ReVier Ennenda, Glarus",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kiss-suppenznacht/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -428,7 +432,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }

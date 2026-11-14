@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-11-13T16:35:44.669Z",
-  "contentHash": "ee7db36884630ae07e38542c345609cbc4cc265f174ea9f415dfbace160c25a4",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "e684a07305eec6766dc28b47b771a9c7ed51687c536ea08eb1c974e2bbe06827",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "23",
+          "value": "22",
           "note": "segnalazioni aggiornate: 13 novembre 2026"
         },
         {
@@ -131,10 +131,10 @@
               "date": "2026-10-27T12:15:00.000Z"
             },
             {
-              "label": "Leuk -> Jeizinen tra Luogo Leuk E Luogo Bratsch Situazione: chiusa Causa: lavori di manutenzione",
+              "label": "Turtmann -> Gruben tra Luogo Turtmann E Luogo Gruben Situazione: chiusa Causa: lavori di manutenzione",
               "value": "Chiusura",
-              "detail": "fine prevista: 13 novembre 2026",
-              "date": "2026-11-02T10:24:00.000Z"
+              "detail": "fine prevista: 17 novembre 2026",
+              "date": "2026-11-02T10:32:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -246,7 +246,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-13T16:35:44.669Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "VS",
@@ -261,7 +261,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "23",
+          "value": "22",
           "note": "reports as of 13 November 2026"
         },
         {
@@ -355,10 +355,10 @@
               "date": "2026-10-27T12:15:00.000Z"
             },
             {
-              "label": "Leuk -> Jeizinen tra Luogo Leuk E Luogo Bratsch Situazione: chiusa Causa: lavori di manutenzione",
+              "label": "Turtmann -> Gruben tra Luogo Turtmann E Luogo Gruben Situazione: chiusa Causa: lavori di manutenzione",
               "value": "Closure",
-              "detail": "until 13 November 2026",
-              "date": "2026-11-02T10:24:00.000Z"
+              "detail": "until 17 November 2026",
+              "date": "2026-11-02T10:32:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -470,7 +470,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-13T16:35:44.669Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "VS",
@@ -485,7 +485,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "23",
+          "value": "22",
           "note": "Meldungen vom 13. November 2026"
         },
         {
@@ -579,10 +579,10 @@
               "date": "2026-10-27T12:15:00.000Z"
             },
             {
-              "label": "Leuk -> Jeizinen zwischen Ortschaft Leuk und Ortschaft Bratsch Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
+              "label": "Turtmann -> Gruben zwischen Ortschaft Turtmann und Ortschaft Gruben Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
               "value": "Sperrung",
-              "detail": "bis 13. November 2026",
-              "date": "2026-11-02T10:24:00.000Z"
+              "detail": "bis 17. November 2026",
+              "date": "2026-11-02T10:32:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -694,7 +694,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-13T16:35:44.669Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "VS",
@@ -709,7 +709,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "23",
+          "value": "22",
           "note": "signalements au 13 novembre 2026"
         },
         {
@@ -803,10 +803,10 @@
               "date": "2026-10-27T12:15:00.000Z"
             },
             {
-              "label": "Loèche -> Jeizinen entre Localité Loèche et Localité Bratsch Situation: fermé Raison: travaux de maintenance",
+              "label": "Tourtemagne -> Gruben entre Localité Tourtemagne et Localité Gruben Situation: fermé Raison: travaux de maintenance",
               "value": "Fermeture",
-              "detail": "jusqu’au 13 novembre 2026",
-              "date": "2026-11-02T10:24:00.000Z"
+              "detail": "jusqu’au 17 novembre 2026",
+              "date": "2026-11-02T10:32:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -918,7 +918,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-13T16:35:44.669Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }

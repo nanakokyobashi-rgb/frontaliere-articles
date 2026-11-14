@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-11-13T16:35:44.669Z",
-  "contentHash": "ebc3385171b9bf8a044fb5dd0a28d028d9c2b393ad19cf1dab49fba4c36c5a30",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "7f701f3d02aa7e27603f5dd0fa757af4272ffe56b157268597f70683759a28ea",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -59,21 +59,6 @@
           "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
           "items": [
             {
-              "label": "Pharmacie Erard",
-              "detail": "Alle, Ajoie",
-              "date": "2026-11-07T07:00:00.000Z"
-            },
-            {
-              "label": "Voirol",
-              "detail": "Delémont, Delémont",
-              "date": "2026-11-07T07:00:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-13T17:30:00.000Z"
-            },
-            {
               "label": "Sun Store Milliet Gare",
               "detail": "Porrentruy, Ajoie",
               "date": "2026-11-14T07:00:00.000Z"
@@ -87,6 +72,21 @@
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-11-14T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-15T09:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-15T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-15T17:30:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
@@ -169,7 +169,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-13T16:35:44.669Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "JU",
@@ -206,21 +206,6 @@
           "description": "Upcoming duty shifts published by the canton’s official service.",
           "items": [
             {
-              "label": "Pharmacie Erard",
-              "detail": "Alle, Ajoie",
-              "date": "2026-11-07T07:00:00.000Z"
-            },
-            {
-              "label": "Voirol",
-              "detail": "Delémont, Delémont",
-              "date": "2026-11-07T07:00:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-13T17:30:00.000Z"
-            },
-            {
               "label": "Sun Store Milliet Gare",
               "detail": "Porrentruy, Ajoie",
               "date": "2026-11-14T07:00:00.000Z"
@@ -234,6 +219,21 @@
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-11-14T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-15T09:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-15T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-15T17:30:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
@@ -312,7 +312,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-13T16:35:44.669Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "JU",
@@ -349,21 +349,6 @@
           "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
           "items": [
             {
-              "label": "Pharmacie Erard",
-              "detail": "Alle, Ajoie",
-              "date": "2026-11-07T07:00:00.000Z"
-            },
-            {
-              "label": "Voirol",
-              "detail": "Delémont, Delémont",
-              "date": "2026-11-07T07:00:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-13T17:30:00.000Z"
-            },
-            {
               "label": "Sun Store Milliet Gare",
               "detail": "Porrentruy, Ajoie",
               "date": "2026-11-14T07:00:00.000Z"
@@ -377,6 +362,21 @@
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-11-14T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-15T09:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-15T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-15T17:30:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
@@ -455,7 +455,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-13T16:35:44.669Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "JU",
@@ -492,21 +492,6 @@
           "description": "Prochaines gardes publiées par le service officiel du canton.",
           "items": [
             {
-              "label": "Pharmacie Erard",
-              "detail": "Alle, Ajoie",
-              "date": "2026-11-07T07:00:00.000Z"
-            },
-            {
-              "label": "Voirol",
-              "detail": "Delémont, Delémont",
-              "date": "2026-11-07T07:00:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-13T17:30:00.000Z"
-            },
-            {
               "label": "Sun Store Milliet Gare",
               "detail": "Porrentruy, Ajoie",
               "date": "2026-11-14T07:00:00.000Z"
@@ -520,6 +505,21 @@
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-11-14T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-15T09:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-15T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-15T17:30:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
@@ -594,7 +594,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-13T16:35:44.669Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }

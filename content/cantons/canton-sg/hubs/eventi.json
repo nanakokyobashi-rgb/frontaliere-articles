@@ -4,12 +4,12 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "93d7c53ec92ff7c51d43de0ea69a9b233e7eb42eea83d145060852c2be8ede10",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "4744ff7abcd0a90654a762892e5aa463147516e4d2eb260b81ab3f035dd76ee4",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T14:41:08.896Z",
+      "updatedAt": "2026-11-13T04:23:25.174Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "77",
+          "value": "78",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Naturjodel und Jodellieder",
-              "detail": "Klangwelt Toggenburg",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-und-jodellieder-1/"
-            },
-            {
-              "label": "SCHLAGER BOOM",
-              "detail": "Lichtensteig",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlager-boom/"
-            },
-            {
-              "label": "A-Live - 25 Years Best Of (Limited Shows)",
-              "detail": "Dömli, Ebnat-Kappel",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/a-live-25-years-best-of-limited-shows_AhbGaDm"
-            },
-            {
-              "label": "Fabio Landert - Die verbotene Frucht",
-              "detail": "Wil SG",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fabio-landert-die-verbotene-frucht-12/"
-            },
-            {
-              "label": "My mUSicAl journey",
-              "detail": "Niederbüren",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/my-musical-journey/"
-            },
-            {
-              "label": "Pub Quiz",
-              "detail": "Gallus Pub",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/st-gallen/pub-quiz_AF9fHWX"
-            },
-            {
-              "label": "Berufsmesse Zürichsee-Linth",
-              "detail": "Eschenbach SG, Eschenbach (SG) — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/berufsmesse-zuerichsee-linth/"
-            },
-            {
-              "label": "Katharina Knie auf dem Chabisplatz",
-              "detail": "Rorschach — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/katharina-knie-auf-dem-chabisplatz/"
-            },
-            {
-              "label": "Wild-Buffet",
-              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann — in corso, ultimo giorno: 21 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-buffet-2/"
-            },
-            {
               "label": "Naturena: Adventsdekoration mit Schwemmholz",
               "detail": "Oberschan, Wartau",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturena-adventsdekoration-mit-schwemmholz/"
+            },
+            {
+              "label": "Skizzen und Portraits mit Kohle",
+              "detail": "Wil SG, Wil (SG)",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/skizzen-und-portraits-mit-kohle/"
+            },
+            {
+              "label": "Adventsmarkt im LinthArt-Atelier mit Kerzen ziehen",
+              "detail": "LinthArt-Atelier, Weesen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsmarkt-im-linthart-atelier-mit-kerzen-ziehen/"
+            },
+            {
+              "label": "Chüeligurt herstellen",
+              "detail": "Alt St. Johann",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chueeligurt-herstellen/"
+            },
+            {
+              "label": "Erlebnis-Braukurs in der Brauerei Schützengarten",
+              "detail": "St. Gallen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erlebnis-braukurs-in-der-brauerei-schuetzengarten/"
+            },
+            {
+              "label": "Wild trifft Vegan",
+              "detail": "Wildhaus, Wildhaus-Alt St. Johann",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-trifft-vegan/"
+            },
+            {
+              "label": "Cena tra amici",
+              "detail": "Ristorante La Scala",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/events/music/rapperswil-sg/dinner-with-friends_AwbG1DS"
+            },
+            {
+              "label": "Sundaze",
+              "detail": "Musikbeiz Adler",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/sundaze_AKwYVJr"
+            },
+            {
+              "label": "Tonhallenkonzert",
+              "detail": "Tonhalle",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/tonhallenkonzert_AAQfgmf"
+            },
+            {
+              "label": "OLDIE‘S DISCO",
+              "detail": "Kalberhalle, Lichtensteig",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oldies-disco/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/san-gallo/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "SG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "77",
+          "value": "78",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Naturjodel und Jodellieder",
-              "detail": "Klangwelt Toggenburg",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-und-jodellieder-1/"
-            },
-            {
-              "label": "SCHLAGER BOOM",
-              "detail": "Lichtensteig",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlager-boom/"
-            },
-            {
-              "label": "A-Live - 25 Years Best Of (Limited Shows)",
-              "detail": "Dömli, Ebnat-Kappel",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/a-live-25-years-best-of-limited-shows_AhbGaDm"
-            },
-            {
-              "label": "Fabio Landert - Die verbotene Frucht",
-              "detail": "Wil SG",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fabio-landert-die-verbotene-frucht-12/"
-            },
-            {
-              "label": "My mUSicAl journey",
-              "detail": "Niederbüren",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/my-musical-journey/"
-            },
-            {
-              "label": "Pub Quiz",
-              "detail": "Gallus Pub",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/st-gallen/pub-quiz_AF9fHWX"
-            },
-            {
-              "label": "Berufsmesse Zürichsee-Linth",
-              "detail": "Eschenbach SG, Eschenbach (SG) — ongoing, last day: 14 November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/berufsmesse-zuerichsee-linth/"
-            },
-            {
-              "label": "Katharina Knie auf dem Chabisplatz",
-              "detail": "Rorschach — ongoing, last day: 22 November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/katharina-knie-auf-dem-chabisplatz/"
-            },
-            {
-              "label": "Wild-Buffet",
-              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann — ongoing, last day: 21 November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-buffet-2/"
-            },
-            {
               "label": "Naturena: Adventsdekoration mit Schwemmholz",
               "detail": "Oberschan, Wartau",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturena-adventsdekoration-mit-schwemmholz/"
+            },
+            {
+              "label": "Skizzen und Portraits mit Kohle",
+              "detail": "Wil SG, Wil (SG)",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/skizzen-und-portraits-mit-kohle/"
+            },
+            {
+              "label": "Adventsmarkt im LinthArt-Atelier mit Kerzen ziehen",
+              "detail": "LinthArt-Atelier, Weesen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsmarkt-im-linthart-atelier-mit-kerzen-ziehen/"
+            },
+            {
+              "label": "Chüeligurt herstellen",
+              "detail": "Alt St. Johann",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chueeligurt-herstellen/"
+            },
+            {
+              "label": "Erlebnis-Braukurs in der Brauerei Schützengarten",
+              "detail": "St. Gallen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erlebnis-braukurs-in-der-brauerei-schuetzengarten/"
+            },
+            {
+              "label": "Wild trifft Vegan",
+              "detail": "Wildhaus, Wildhaus-Alt St. Johann",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-trifft-vegan/"
+            },
+            {
+              "label": "Dinner with Friends",
+              "detail": "Ristorante La Scala",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/events/music/rapperswil-sg/dinner-with-friends_AwbG1DS"
+            },
+            {
+              "label": "Sundaze",
+              "detail": "Musikbeiz Adler",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/sundaze_AKwYVJr"
+            },
+            {
+              "label": "Tonhallenkonzert",
+              "detail": "Tonhalle",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/tonhallenkonzert_AAQfgmf"
+            },
+            {
+              "label": "OLDIE‘S DISCO",
+              "detail": "Kalberhalle, Lichtensteig",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oldies-disco/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/st-gallen/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "SG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "77",
+          "value": "78",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Naturjodel und Jodellieder",
-              "detail": "Klangwelt Toggenburg",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-und-jodellieder-1/"
-            },
-            {
-              "label": "SCHLAGER BOOM",
-              "detail": "Lichtensteig",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlager-boom/"
-            },
-            {
-              "label": "A-Live - 25 Years Best Of (Limited Shows)",
-              "detail": "Dömli, Ebnat-Kappel",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/a-live-25-years-best-of-limited-shows_AhbGaDm"
-            },
-            {
-              "label": "Fabio Landert - Die verbotene Frucht",
-              "detail": "Wil SG",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fabio-landert-die-verbotene-frucht-12/"
-            },
-            {
-              "label": "My mUSicAl journey",
-              "detail": "Niederbüren",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/my-musical-journey/"
-            },
-            {
-              "label": "Pub Quiz",
-              "detail": "Gallus Pub",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/st-gallen/pub-quiz_AF9fHWX"
-            },
-            {
-              "label": "Berufsmesse Zürichsee-Linth",
-              "detail": "Eschenbach SG, Eschenbach (SG) — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/berufsmesse-zuerichsee-linth/"
-            },
-            {
-              "label": "Katharina Knie auf dem Chabisplatz",
-              "detail": "Rorschach — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/katharina-knie-auf-dem-chabisplatz/"
-            },
-            {
-              "label": "Wild-Buffet",
-              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann — läuft, letzter Tag: 21. November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-buffet-2/"
-            },
-            {
               "label": "Naturena: Adventsdekoration mit Schwemmholz",
               "detail": "Oberschan, Wartau",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturena-adventsdekoration-mit-schwemmholz/"
+            },
+            {
+              "label": "Skizzen und Portraits mit Kohle",
+              "detail": "Wil SG, Wil (SG)",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/skizzen-und-portraits-mit-kohle/"
+            },
+            {
+              "label": "Adventsmarkt im LinthArt-Atelier mit Kerzen ziehen",
+              "detail": "LinthArt-Atelier, Weesen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsmarkt-im-linthart-atelier-mit-kerzen-ziehen/"
+            },
+            {
+              "label": "Chüeligurt herstellen",
+              "detail": "Alt St. Johann",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chueeligurt-herstellen/"
+            },
+            {
+              "label": "Erlebnis-Braukurs in der Brauerei Schützengarten",
+              "detail": "St. Gallen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erlebnis-braukurs-in-der-brauerei-schuetzengarten/"
+            },
+            {
+              "label": "Wild trifft Vegan",
+              "detail": "Wildhaus, Wildhaus-Alt St. Johann",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-trifft-vegan/"
+            },
+            {
+              "label": "Dinner for Friends",
+              "detail": "Ristorante La Scala",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/events/music/rapperswil-sg/dinner-with-friends_AwbG1DS"
+            },
+            {
+              "label": "Sundaze",
+              "detail": "Musikbeiz Adler",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/sundaze_AKwYVJr"
+            },
+            {
+              "label": "Tonhallenkonzert",
+              "detail": "Tonhalle",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/tonhallenkonzert_AAQfgmf"
+            },
+            {
+              "label": "OLDIE‘S DISCO",
+              "detail": "Kalberhalle, Lichtensteig",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oldies-disco/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/st-gallen/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "SG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "77",
+          "value": "78",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Naturjodel und Jodellieder",
-              "detail": "Klangwelt Toggenburg",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-und-jodellieder-1/"
-            },
-            {
-              "label": "SCHLAGER BOOM",
-              "detail": "Lichtensteig",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlager-boom/"
-            },
-            {
-              "label": "A-Live - 25 Years Best Of (Limited Shows)",
-              "detail": "Dömli, Ebnat-Kappel",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/a-live-25-years-best-of-limited-shows_AhbGaDm"
-            },
-            {
-              "label": "Fabio Landert - Die verbotene Frucht",
-              "detail": "Wil SG",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fabio-landert-die-verbotene-frucht-12/"
-            },
-            {
-              "label": "My mUSicAl journey",
-              "detail": "Niederbüren",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/my-musical-journey/"
-            },
-            {
-              "label": "Pub Quiz",
-              "detail": "Gallus Pub",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/st-gallen/pub-quiz_AF9fHWX"
-            },
-            {
-              "label": "Berufsmesse Zürichsee-Linth",
-              "detail": "Eschenbach SG, Eschenbach (SG) — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/berufsmesse-zuerichsee-linth/"
-            },
-            {
-              "label": "Katharina Knie auf dem Chabisplatz",
-              "detail": "Rorschach — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/katharina-knie-auf-dem-chabisplatz/"
-            },
-            {
-              "label": "Wild-Buffet",
-              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann — en cours, dernier jour : 21 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-buffet-2/"
-            },
-            {
               "label": "Naturena: Adventsdekoration mit Schwemmholz",
               "detail": "Oberschan, Wartau",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturena-adventsdekoration-mit-schwemmholz/"
+            },
+            {
+              "label": "Skizzen et Portraits avec Kohle",
+              "detail": "Wil SG, Wil (SG)",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/skizzen-und-portraits-mit-kohle/"
+            },
+            {
+              "label": "Adventsmarkt im LinthArt-Atelier mit Kerzen ziehen",
+              "detail": "LinthArt-Atelier, Weesen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsmarkt-im-linthart-atelier-mit-kerzen-ziehen/"
+            },
+            {
+              "label": "Chüeligurt herstellen",
+              "detail": "Alt St. Johann",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chueeligurt-herstellen/"
+            },
+            {
+              "label": "Erlebnis-Braukurs in der Brauerei Schützengarten",
+              "detail": "St. Gallen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erlebnis-braukurs-in-der-brauerei-schuetzengarten/"
+            },
+            {
+              "label": "Wild trifft Vegan",
+              "detail": "Wildhaus, Wildhaus-Alt St. Johann",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-trifft-vegan/"
+            },
+            {
+              "label": "Dîner entre amis",
+              "detail": "Ristorante La Scala",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/events/music/rapperswil-sg/dinner-with-friends_AwbG1DS"
+            },
+            {
+              "label": "Sundaze",
+              "detail": "Musikbeiz Adler",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/sundaze_AKwYVJr"
+            },
+            {
+              "label": "Tonhallenkonzert",
+              "detail": "Tonhalle",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/tonhallenkonzert_AAQfgmf"
+            },
+            {
+              "label": "OLDIE‘S DISCO",
+              "detail": "Kalberhalle, Lichtensteig",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oldies-disco/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/saint-gall/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }

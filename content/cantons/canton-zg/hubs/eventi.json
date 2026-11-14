@@ -4,17 +4,17 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "44062ce400a2c733beb8134816253a4377ff81a7a0d11a68923f6098a67f03bf",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "44914ab228bab8c55361f8088a2f32691ffb69ba26c3106da39e5070ae542c42",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T14:41:08.896Z",
+      "updatedAt": "2026-11-13T04:23:25.174Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T14:02:55.343Z",
+      "updatedAt": "2026-11-12T22:54:56.926Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "28",
+          "value": "30",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,42 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "more than music cham.",
-              "detail": "Röm.-kath.Pfarreiheim St. Jakob, Cham",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/more-than-music-cham_AQFw8Gm"
-            },
-            {
-              "label": "Der Besuch der alten Dame",
-              "detail": "Chollerhalle, Zug",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-besuch-der-alten-dame-2/"
-            },
-            {
-              "label": "Benefizkonzert",
-              "detail": "Jugendkulturzentrum Industrie45",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/benefizkonzert_AreUZ5c"
-            },
-            {
-              "label": "JuMi-Treff­punkt",
-              "detail": "Jugendanimation Zug, Zug — in corso, ultimo giorno: 10 dicembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/jumi-treffpunkt_AmxXLv7"
-            },
-            {
-              "label": "Taschenlampenführung durch die Burg",
-              "detail": "Zug — in corso, ultimo giorno: 13 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
-            },
-            {
-              "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenführung für Erwachsene",
-              "detail": "Museum Burg Zug, Zug — in corso, ultimo giorno: 27 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
-            },
             {
               "label": "Die Theatergruppe Oberägeri präsentiert \"Mordsfreundin\"",
               "detail": "Oberägeri",
@@ -86,6 +50,24 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/miss-helvetia-und-band_AVTi3SH"
             },
             {
+              "label": "Der Besuch der alten Dame",
+              "detail": "Chollerhalle, Zug — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-besuch-der-alten-dame-2/"
+            },
+            {
+              "label": "JuMi-Treff­punkt",
+              "detail": "Jugendanimation Zug, Zug — in corso, ultimo giorno: 10 dicembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/jumi-treffpunkt_AmxXLv7"
+            },
+            {
+              "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenführung für Erwachsene",
+              "detail": "Museum Burg Zug, Zug — in corso, ultimo giorno: 27 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
+            },
+            {
               "label": "Zuger Bläserquintett - LOS JETZT, NORDWÄRTS",
               "detail": "Theater im Burgbachkeller",
               "date": "2026-11-15",
@@ -96,11 +78,29 @@
               "detail": "Zug",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/pop-up-flohmi/"
+            },
+            {
+              "label": "Kirchenkonzert 2026",
+              "detail": "Röm.-kath. Pfarrkirche Johannes der Täufer, Menzingen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kirchenkonzert-2026/"
+            },
+            {
+              "label": "Kirchenkonzert Musikgesellschaft Menzingen und Jodlerklub Bärgbrünneli Menzingen",
+              "detail": "Menzingen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kirchenkonzert-musikgesellschaft-menzingen-und-jodlerklub-baergbruenneli-menzingen/"
+            },
+            {
+              "label": "Schattensaiten und Lichtblicke",
+              "detail": "Allenwinden, Baar",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schattensaiten-und-lichtblicke/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zugo/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://stadtzug.ch/de/news/2026/november-2026/veranstaltung-demenz-im-blick-wiederholung-aufgrund-grosser-nachfrage"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "ZG",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "28",
+          "value": "30",
           "note": "from the site’s events calendar"
         }
       ],
@@ -160,42 +160,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "more than music cham.",
-              "detail": "Röm.-kath.Pfarreiheim St. Jakob, Cham",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/more-than-music-cham_AQFw8Gm"
-            },
-            {
-              "label": "Der Besuch der alten Dame",
-              "detail": "Chollerhalle, Zug",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-besuch-der-alten-dame-2/"
-            },
-            {
-              "label": "Benefizkonzert",
-              "detail": "Jugendkulturzentrum Industrie45",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/benefizkonzert_AreUZ5c"
-            },
-            {
-              "label": "JuMi-Treff­punkt",
-              "detail": "Jugendanimation Zug, Zug — ongoing, last day: 10 December 2026",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/jumi-treffpunkt_AmxXLv7"
-            },
-            {
-              "label": "Taschenlampenführung durch die Burg",
-              "detail": "Zug — ongoing, last day: 13 November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
-            },
-            {
-              "label": "Gallows, Wheel, and Pyre: A Flashlight Tour for Adults",
-              "detail": "Museum Burg Zug, Zug — ongoing, last day: 27 November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
-            },
             {
               "label": "The Theater Group Oberägeri presents \"Mordsfreundin\"",
               "detail": "Oberägeri",
@@ -209,6 +173,24 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/miss-helvetia-und-band_AVTi3SH"
             },
             {
+              "label": "Der Besuch der alten Dame",
+              "detail": "Chollerhalle, Zug — ongoing, last day: 14 November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-besuch-der-alten-dame-2/"
+            },
+            {
+              "label": "JuMi-Treff­punkt",
+              "detail": "Jugendanimation Zug, Zug — ongoing, last day: 10 December 2026",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/jumi-treffpunkt_AmxXLv7"
+            },
+            {
+              "label": "Gallows, Wheel, and Pyre: A Flashlight Tour for Adults",
+              "detail": "Museum Burg Zug, Zug — ongoing, last day: 27 November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
+            },
+            {
               "label": "Zuger Bläserquintett - LOS JETZT, NORDWÄRTS",
               "detail": "Theater im Burgbachkeller",
               "date": "2026-11-15",
@@ -219,11 +201,29 @@
               "detail": "Zug",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/pop-up-flohmi/"
+            },
+            {
+              "label": "Kirchenkonzert 2026",
+              "detail": "Röm.-kath. Pfarrkirche Johannes der Täufer, Menzingen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kirchenkonzert-2026/"
+            },
+            {
+              "label": "Kirchenkonzert Musikgesellschaft Menzingen und Jodlerklub Bärgbrünneli Menzingen",
+              "detail": "Menzingen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kirchenkonzert-musikgesellschaft-menzingen-und-jodlerklub-baergbruenneli-menzingen/"
+            },
+            {
+              "label": "Schattensaiten und Lichtblicke",
+              "detail": "Allenwinden, Baar",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schattensaiten-und-lichtblicke/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zug/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://stadtzug.ch/de/news/2026/november-2026/veranstaltung-demenz-im-blick-wiederholung-aufgrund-grosser-nachfrage"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "ZG",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "28",
+          "value": "30",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -283,42 +283,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "more than music cham.",
-              "detail": "Röm.-kath.Pfarreiheim St. Jakob, Cham",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/more-than-music-cham_AQFw8Gm"
-            },
-            {
-              "label": "Der Besuch der alten Dame",
-              "detail": "Chollerhalle, Zug",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-besuch-der-alten-dame-2/"
-            },
-            {
-              "label": "Benefizkonzert",
-              "detail": "Jugendkulturzentrum Industrie45",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/benefizkonzert_AreUZ5c"
-            },
-            {
-              "label": "JuMi-Treff­punkt",
-              "detail": "Jugendanimation Zug, Zug — läuft, letzter Tag: 10. Dezember 2026",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/jumi-treffpunkt_AmxXLv7"
-            },
-            {
-              "label": "Taschenlampenführung durch die Burg",
-              "detail": "Zug — läuft, letzter Tag: 13. November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
-            },
-            {
-              "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenf Acrymmhrung f acrymmr er Acrymmachsene",
-              "detail": "Museum Burg Zug, Zug — läuft, letzter Tag: 27. November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
-            },
             {
               "label": "Die Theatergruppe Oberägeri präsentiert „Mordsfreundin“",
               "detail": "Oberägeri",
@@ -332,6 +296,24 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/miss-helvetia-und-band_AVTi3SH"
             },
             {
+              "label": "Der Besuch der alten Dame",
+              "detail": "Chollerhalle, Zug — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-besuch-der-alten-dame-2/"
+            },
+            {
+              "label": "JuMi-Treff­punkt",
+              "detail": "Jugendanimation Zug, Zug — läuft, letzter Tag: 10. Dezember 2026",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/jumi-treffpunkt_AmxXLv7"
+            },
+            {
+              "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenf Acrymmhrung f acrymmr er Acrymmachsene",
+              "detail": "Museum Burg Zug, Zug — läuft, letzter Tag: 27. November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
+            },
+            {
               "label": "Zuger Bläserquintett - LOS JETZT, NORDWÄRTS",
               "detail": "Theater im Burgbachkeller",
               "date": "2026-11-15",
@@ -342,11 +324,29 @@
               "detail": "Zug",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/pop-up-flohmi/"
+            },
+            {
+              "label": "Kirchenkonzert 2026",
+              "detail": "Röm.-kath. Pfarrkirche Johannes der Täufer, Menzingen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kirchenkonzert-2026/"
+            },
+            {
+              "label": "Kirchenkonzert Musikgesellschaft Menzingen und Jodlerklub Bärgbrünneli Menzingen",
+              "detail": "Menzingen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kirchenkonzert-musikgesellschaft-menzingen-und-jodlerklub-baergbruenneli-menzingen/"
+            },
+            {
+              "label": "Schattensaiten und Lichtblicke",
+              "detail": "Allenwinden, Baar",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schattensaiten-und-lichtblicke/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zug/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://stadtzug.ch/de/news/2026/november-2026/veranstaltung-demenz-im-blick-wiederholung-aufgrund-grosser-nachfrage"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "ZG",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "28",
+          "value": "30",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -406,42 +406,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "more than music cham.",
-              "detail": "Röm.-kath.Pfarreiheim St. Jakob, Cham",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/more-than-music-cham_AQFw8Gm"
-            },
-            {
-              "label": "Der Besuch der alten Dame",
-              "detail": "Chollerhalle, Zug",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-besuch-der-alten-dame-2/"
-            },
-            {
-              "label": "Benefizkonzert",
-              "detail": "Jugendkulturzentrum Industrie45",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/benefizkonzert_AreUZ5c"
-            },
-            {
-              "label": "JuMi-Treff­punkt",
-              "detail": "Jugendanimation Zug, Zug — en cours, dernier jour : 10 décembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/jumi-treffpunkt_AmxXLv7"
-            },
-            {
-              "label": "Taschenlampenführung durch die Burg",
-              "detail": "Zug — en cours, dernier jour : 13 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
-            },
-            {
-              "label": "La potence, la roue et le bûcher. La visite guidée à la lampe de poche pour adultes",
-              "detail": "Museum Burg Zug, Zug — en cours, dernier jour : 27 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
-            },
             {
               "label": "Die Theatergruppe Oberägeri präsentiert « Mordsfreundin »",
               "detail": "Oberägeri",
@@ -455,6 +419,24 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/miss-helvetia-und-band_AVTi3SH"
             },
             {
+              "label": "Der Besuch der alten Dame",
+              "detail": "Chollerhalle, Zug — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-besuch-der-alten-dame-2/"
+            },
+            {
+              "label": "JuMi-Treff­punkt",
+              "detail": "Jugendanimation Zug, Zug — en cours, dernier jour : 10 décembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/jumi-treffpunkt_AmxXLv7"
+            },
+            {
+              "label": "La potence, la roue et le bûcher. La visite guidée à la lampe de poche pour adultes",
+              "detail": "Museum Burg Zug, Zug — en cours, dernier jour : 27 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
+            },
+            {
               "label": "Zuger Bläserquintett - LOS JETZT, NORDWÄRTS",
               "detail": "Theater im Burgbachkeller",
               "date": "2026-11-15",
@@ -465,11 +447,29 @@
               "detail": "Zug",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/pop-up-flohmi/"
+            },
+            {
+              "label": "Kirchenkonzert 2026",
+              "detail": "Röm.-kath. Pfarrkirche Johannes der Täufer, Menzingen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kirchenkonzert-2026/"
+            },
+            {
+              "label": "Kirchenkonzert Musikgesellschaft Menzingen und Jodlerklub Bärgbrünneli Menzingen",
+              "detail": "Menzingen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kirchenkonzert-musikgesellschaft-menzingen-und-jodlerklub-baergbruenneli-menzingen/"
+            },
+            {
+              "label": "Schattensaiten und Lichtblicke",
+              "detail": "Allenwinden, Baar",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schattensaiten-und-lichtblicke/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zoug/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://stadtzug.ch/de/news/2026/november-2026/veranstaltung-demenz-im-blick-wiederholung-aufgrund-grosser-nachfrage"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }

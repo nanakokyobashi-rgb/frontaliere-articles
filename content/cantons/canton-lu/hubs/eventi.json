@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "32003e38a79db36c8806b9a0dc32fd2ca2fbc01ceda7b76eb117d6631e753ee5",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "c86c62f0051b58ac9b9f104ab52087faa66ce50b20c65b796f8c80369f5a8526",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T14:41:08.896Z",
+      "updatedAt": "2026-11-13T04:23:25.174Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T14:02:55.343Z",
+      "updatedAt": "2026-11-12T22:54:56.926Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "63",
+          "value": "56",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,75 +38,84 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Whiskey evening - In the Rischlistube",
-              "detail": "Hotel Rischli",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/whiskey-evening-in-the-rischlistube/"
+              "label": "\"Schau rein\" Vielfalt vor der Haustür",
+              "detail": "Sempach",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schau-rein-vielfalt-vor-der-haustuer-4/"
             },
             {
-              "label": "Traditional Farmers' Festival",
-              "detail": "Weggis",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/traditional-farmers-festival/"
+              "label": "Teddybär Spital Luzern 2026",
+              "detail": "Kantonsspital Luzern, Luzern",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/teddybaer-spital-luzern-2026/"
             },
             {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "detail": "Sursee",
-              "date": "2026-11-13",
-              "url": "https://www.stadtluzern.ch/sitzung/7694305"
-            },
-            {
-              "label": "Wissen am Mittag",
+              "label": "Wir sind Energiestadt Gold – feiern Sie mit uns",
               "detail": "Luzern",
-              "date": "2026-11-13",
-              "url": "https://www.stadtluzern.ch/sitzung/7660906"
+              "date": "2026-11-14",
+              "url": "https://www.stadtluzern.ch/sitzung/7794205"
             },
             {
-              "label": "Salonkonzert",
+              "label": "Führung durch das Schloss Schauensee",
+              "detail": "Kriens",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fuehrung-durch-das-schloss-schauensee/"
+            },
+            {
+              "label": "Malkurse für Kinder",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/luzern/malkurse-fuer-kinder_A6kYMXh"
+            },
+            {
+              "label": "Kinderanlass: Adventskalender aus alten Socken",
               "detail": "Luzern",
-              "date": "2026-11-13",
-              "url": "https://www.stadtluzern.ch/sitzung/7463719"
+              "date": "2026-11-14",
+              "url": "https://www.stadtluzern.ch/sitzung/7626907"
             },
             {
-              "label": "Advent and Christmas Market at Wyher Castle",
-              "detail": "Ettiswil",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advents-und-weihnachtsmarkt-im-schloss-wyher/"
+              "label": "Musik aus der Twilight-Saga mit Mystery Ensemble",
+              "detail": "Evang.-ref. Matthäuskirche",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/musik-aus-der-twilight-saga-mit-mystery-ensemble_AKReYT6"
             },
             {
-              "label": "Chormusik von ukrainischen und europäischen Komponisten",
-              "detail": "Lucerne, Luzern",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chormusik-von-ukrainischen-und-europaeischen-komponisten/"
+              "label": "Musik aus der Twilight-Saga",
+              "detail": "Evang.-ref. Matthäuskirche",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/musik-aus-der-twilight-saga_AWiZFMR"
             },
             {
-              "label": "Spieleabend für Erwachsene in der Ludothek",
-              "detail": "Willisau",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spieleabend-fuer-erwachsene-in-der-ludothek-3/"
+              "label": "Der Backgammon Chor Luzern präsentiert: Voyage, Voyage",
+              "detail": "Pfarreiheim St. Paul, Luzern",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/der-backgammon-chor-luzern-praesentiert-voyage-voyage_AWxDPaq"
             },
             {
-              "label": "Frank Richter",
-              "detail": "Theater Duo Fischbach, Fischbach",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/frank-richter-2/"
-            },
-            {
-              "label": "To Athena",
-              "detail": "Schüür",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/luzern/to-athena_AEiuYPW"
+              "label": "Noah Veraguth",
+              "detail": "KKL Luzern, Luzern",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/noah-veraguth_AyKN8vM"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Kinderanlass: Adventskalender aus alten Socken",
+              "date": "2026-11-13T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7626907"
+            },
+            {
+              "label": "Wir sind Energiestadt Gold – feiern Sie mit uns",
+              "date": "2026-11-13T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7794205"
+            },
             {
               "label": "Wissen am Mittag",
               "date": "2026-11-12T23:00:00.000Z",
@@ -126,19 +135,9 @@
               "label": "Kunstmuseum-Führung mit Gespräch für die Generation 60plus",
               "date": "2026-11-11T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7287119"
-            },
-            {
-              "label": "29. Sitzung des Grossen Stadtrates von Luzern vom 12. November 2026",
-              "date": "2026-11-11T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7771576"
-            },
-            {
-              "label": "«Melodie» - Film im Rahmen der «Lebensreise»",
-              "date": "2026-11-10T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7629682"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -172,7 +171,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "LU",
@@ -182,7 +181,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "63",
+          "value": "56",
           "note": "from the site’s events calendar"
         }
       ],
@@ -193,75 +192,84 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Whiskey evening - In the Rischlistube",
-              "detail": "Hotel Rischli",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/whiskey-evening-in-the-rischlistube/"
+              "label": "\"Schau rein\" Vielfalt vor der Haustür",
+              "detail": "Sempach",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schau-rein-vielfalt-vor-der-haustuer-4/"
             },
             {
-              "label": "Traditional Farmers' Festival",
-              "detail": "Weggis",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/traditional-farmers-festival/"
+              "label": "Teddybär Spital Luzern 2026",
+              "detail": "Kantonsspital Luzern, Luzern",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/teddybaer-spital-luzern-2026/"
             },
             {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "detail": "Sursee",
-              "date": "2026-11-13",
-              "url": "https://www.stadtluzern.ch/sitzung/7694305"
-            },
-            {
-              "label": "Wissen am Mittag",
+              "label": "Wir sind Energiestadt Gold – feiern Sie mit uns",
               "detail": "Luzern",
-              "date": "2026-11-13",
-              "url": "https://www.stadtluzern.ch/sitzung/7660906"
+              "date": "2026-11-14",
+              "url": "https://www.stadtluzern.ch/sitzung/7794205"
             },
             {
-              "label": "Salonkonzert",
+              "label": "Führung durch das Schloss Schauensee",
+              "detail": "Kriens",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fuehrung-durch-das-schloss-schauensee/"
+            },
+            {
+              "label": "Malkurse für Kinder",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/luzern/malkurse-fuer-kinder_A6kYMXh"
+            },
+            {
+              "label": "Kinderanlass: Adventskalender aus alten Socken",
               "detail": "Luzern",
-              "date": "2026-11-13",
-              "url": "https://www.stadtluzern.ch/sitzung/7463719"
+              "date": "2026-11-14",
+              "url": "https://www.stadtluzern.ch/sitzung/7626907"
             },
             {
-              "label": "Advent and Christmas Market at Wyher Castle",
-              "detail": "Ettiswil",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advents-und-weihnachtsmarkt-im-schloss-wyher/"
+              "label": "Musik aus der Twilight-Saga mit Mystery Ensemble",
+              "detail": "Evang.-ref. Matthäuskirche",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/musik-aus-der-twilight-saga-mit-mystery-ensemble_AKReYT6"
             },
             {
-              "label": "Chormusik von ukrainischen und europäischen Komponisten",
-              "detail": "Lucerne, Luzern",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chormusik-von-ukrainischen-und-europaeischen-komponisten/"
+              "label": "Music from the Twilight Saga",
+              "detail": "Evang.-ref. Matthäuskirche",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/musik-aus-der-twilight-saga_AWiZFMR"
             },
             {
-              "label": "Spieleabend für Erwachsene in der Ludothek",
-              "detail": "Willisau",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spieleabend-fuer-erwachsene-in-der-ludothek-3/"
+              "label": "Der Backgammon Chor Luzern präsentiert: Voyage, Voyage",
+              "detail": "Pfarreiheim St. Paul, Luzern",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/der-backgammon-chor-luzern-praesentiert-voyage-voyage_AWxDPaq"
             },
             {
-              "label": "Frank Richter",
-              "detail": "Theater Duo Fischbach, Fischbach",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/frank-richter-2/"
-            },
-            {
-              "label": "To Athena",
-              "detail": "Schüür",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/luzern/to-athena_AEiuYPW"
+              "label": "Noah Veraguth",
+              "detail": "KKL Luzern, Luzern",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/noah-veraguth_AyKN8vM"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Kinderanlass: Adventskalender aus alten Socken",
+              "date": "2026-11-13T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7626907"
+            },
+            {
+              "label": "Wir sind Energiestadt Gold – feiern Sie mit uns",
+              "date": "2026-11-13T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7794205"
+            },
             {
               "label": "Wissen am Mittag",
               "date": "2026-11-12T23:00:00.000Z",
@@ -281,19 +289,9 @@
               "label": "Kunstmuseum-Führung mit Gespräch für die Generation 60plus",
               "date": "2026-11-11T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7287119"
-            },
-            {
-              "label": "29. Sitzung des Grossen Stadtrates von Luzern vom 12. November 2026",
-              "date": "2026-11-11T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7771576"
-            },
-            {
-              "label": "«Melodie» - Film im Rahmen der «Lebensreise»",
-              "date": "2026-11-10T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7629682"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +325,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "LU",
@@ -337,7 +335,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "63",
+          "value": "56",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -348,75 +346,84 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Whiskey-Abend – In der Rischlistube",
-              "detail": "Hotel Rischli",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/whiskey-evening-in-the-rischlistube/"
+              "label": "\"Schau rein\" Vielfalt vor der Haustür",
+              "detail": "Sempach",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schau-rein-vielfalt-vor-der-haustuer-4/"
             },
             {
-              "label": "Sennenchilbi Weggis",
-              "detail": "Weggis",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/traditional-farmers-festival/"
+              "label": "Teddybär Spital Luzern 2026",
+              "detail": "Kantonsspital Luzern, Luzern",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/teddybaer-spital-luzern-2026/"
             },
             {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "detail": "Sursee",
-              "date": "2026-11-13",
-              "url": "https://www.stadtluzern.ch/sitzung/7694305"
-            },
-            {
-              "label": "Wissen am Mittag",
+              "label": "Wir sind Energiestadt Gold – feiern Sie mit uns",
               "detail": "Luzern",
-              "date": "2026-11-13",
-              "url": "https://www.stadtluzern.ch/sitzung/7660906"
+              "date": "2026-11-14",
+              "url": "https://www.stadtluzern.ch/sitzung/7794205"
             },
             {
-              "label": "Salonkonzert",
+              "label": "Führung durch das Schloss Schauensee",
+              "detail": "Kriens",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fuehrung-durch-das-schloss-schauensee/"
+            },
+            {
+              "label": "Malkurse für Kinder",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/luzern/malkurse-fuer-kinder_A6kYMXh"
+            },
+            {
+              "label": "Kinderanlass: Adventskalender aus alten Socken",
               "detail": "Luzern",
-              "date": "2026-11-13",
-              "url": "https://www.stadtluzern.ch/sitzung/7463719"
+              "date": "2026-11-14",
+              "url": "https://www.stadtluzern.ch/sitzung/7626907"
             },
             {
-              "label": "Advents-und Weihnachtsmarkt im Schloss Wyher",
-              "detail": "Ettiswil",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advents-und-weihnachtsmarkt-im-schloss-wyher/"
+              "label": "Musik aus der Twilight-Saga mit Mystery Ensemble",
+              "detail": "Evang.-ref. Matthäuskirche",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/musik-aus-der-twilight-saga-mit-mystery-ensemble_AKReYT6"
             },
             {
-              "label": "Chormusik von ukrainischen und europäischen Komponisten",
-              "detail": "Lucerne, Luzern",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chormusik-von-ukrainischen-und-europaeischen-komponisten/"
+              "label": "Musik aus der T Graffilight-Saga",
+              "detail": "Evang.-ref. Matthäuskirche",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/musik-aus-der-twilight-saga_AWiZFMR"
             },
             {
-              "label": "Spieleabend für Erwachsene in der Ludothek",
-              "detail": "Willisau",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spieleabend-fuer-erwachsene-in-der-ludothek-3/"
+              "label": "Der Backgammon Chor Luzern präsentiert: Voyage, Voyage",
+              "detail": "Pfarreiheim St. Paul, Luzern",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/der-backgammon-chor-luzern-praesentiert-voyage-voyage_AWxDPaq"
             },
             {
-              "label": "Frank Richter",
-              "detail": "Theater Duo Fischbach, Fischbach",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/frank-richter-2/"
-            },
-            {
-              "label": "To Athena",
-              "detail": "Schüür",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/luzern/to-athena_AEiuYPW"
+              "label": "Noah Veraguth",
+              "detail": "KKL Luzern, Luzern",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/noah-veraguth_AyKN8vM"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Kinderanlass: Adventskalender aus alten Socken",
+              "date": "2026-11-13T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7626907"
+            },
+            {
+              "label": "Wir sind Energiestadt Gold – feiern Sie mit uns",
+              "date": "2026-11-13T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7794205"
+            },
             {
               "label": "Wissen am Mittag",
               "date": "2026-11-12T23:00:00.000Z",
@@ -436,19 +443,9 @@
               "label": "Kunstmuseum-Führung mit Gespräch für die Generation 60plus",
               "date": "2026-11-11T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7287119"
-            },
-            {
-              "label": "29. Sitzung des Grossen Stadtrates von Luzern vom 12. November 2026",
-              "date": "2026-11-11T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7771576"
-            },
-            {
-              "label": "«Melodie» - Film im Rahmen der «Lebensreise»",
-              "date": "2026-11-10T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7629682"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -482,7 +479,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "LU",
@@ -492,7 +489,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "63",
+          "value": "56",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -503,75 +500,84 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Soirée whisky - Au Rischlistube",
-              "detail": "Hotel Rischli",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/whiskey-evening-in-the-rischlistube/"
+              "label": "« Venir et découvrir » - La diversité à votre porte",
+              "detail": "Sempach",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schau-rein-vielfalt-vor-der-haustuer-4/"
             },
             {
-              "label": "Bénichon de Weggis",
-              "detail": "Weggis",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/traditional-farmers-festival/"
+              "label": "Teddybär Spital Luzern 2026",
+              "detail": "Kantonsspital Luzern, Luzern",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/teddybaer-spital-luzern-2026/"
             },
             {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "detail": "Sursee",
-              "date": "2026-11-13",
-              "url": "https://www.stadtluzern.ch/sitzung/7694305"
-            },
-            {
-              "label": "Wissen am Mittag",
+              "label": "Wir sind Energiestadt Gold – feiern Sie mit uns",
               "detail": "Luzern",
-              "date": "2026-11-13",
-              "url": "https://www.stadtluzern.ch/sitzung/7660906"
+              "date": "2026-11-14",
+              "url": "https://www.stadtluzern.ch/sitzung/7794205"
             },
             {
-              "label": "Salonkonzert",
+              "label": "Führung durch das Schloss Schauensee",
+              "detail": "Kriens",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fuehrung-durch-das-schloss-schauensee/"
+            },
+            {
+              "label": "Malkurse für Kinder",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/luzern/malkurse-fuer-kinder_A6kYMXh"
+            },
+            {
+              "label": "Kinderanlass: Adventskalender aus alten Socken",
               "detail": "Luzern",
-              "date": "2026-11-13",
-              "url": "https://www.stadtluzern.ch/sitzung/7463719"
+              "date": "2026-11-14",
+              "url": "https://www.stadtluzern.ch/sitzung/7626907"
             },
             {
-              "label": "Marché de l'Avent et de Noël au château de Wyher",
-              "detail": "Ettiswil",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advents-und-weihnachtsmarkt-im-schloss-wyher/"
+              "label": "Musik aus der Twilight-Saga mit Mystery Ensemble",
+              "detail": "Evang.-ref. Matthäuskirche",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/musik-aus-der-twilight-saga-mit-mystery-ensemble_AKReYT6"
             },
             {
-              "label": "Chormusik von ukrainischen und europäischen Komponisten",
-              "detail": "Lucerne, Luzern",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chormusik-von-ukrainischen-und-europaeischen-komponisten/"
+              "label": "Musique de la saga Twilight",
+              "detail": "Evang.-ref. Matthäuskirche",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/musik-aus-der-twilight-saga_AWiZFMR"
             },
             {
-              "label": "Spieleabend für Erwachsene in der Ludothek",
-              "detail": "Willisau",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spieleabend-fuer-erwachsene-in-der-ludothek-3/"
+              "label": "Der Backgammon Chor Luzern präsentiert: Voyage, Voyage",
+              "detail": "Pfarreiheim St. Paul, Luzern",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/der-backgammon-chor-luzern-praesentiert-voyage-voyage_AWxDPaq"
             },
             {
-              "label": "Frank Richter",
-              "detail": "Theater Duo Fischbach, Fischbach",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/frank-richter-2/"
-            },
-            {
-              "label": "To Athena",
-              "detail": "Schüür",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/luzern/to-athena_AEiuYPW"
+              "label": "Noah Veraguth",
+              "detail": "KKL Luzern, Luzern",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/noah-veraguth_AyKN8vM"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Kinderanlass: Adventskalender aus alten Socken",
+              "date": "2026-11-13T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7626907"
+            },
+            {
+              "label": "Wir sind Energiestadt Gold – feiern Sie mit uns",
+              "date": "2026-11-13T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7794205"
+            },
             {
               "label": "Wissen am Mittag",
               "date": "2026-11-12T23:00:00.000Z",
@@ -591,19 +597,9 @@
               "label": "Kunstmuseum-Führung mit Gespräch für die Generation 60plus",
               "date": "2026-11-11T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7287119"
-            },
-            {
-              "label": "29. Sitzung des Grossen Stadtrates von Luzern vom 12. November 2026",
-              "date": "2026-11-11T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7771576"
-            },
-            {
-              "label": "«Melodie» - Film im Rahmen der «Lebensreise»",
-              "date": "2026-11-10T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7629682"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -637,7 +633,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }

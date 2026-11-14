@@ -4,12 +4,12 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "eventi",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "e6ee34f282f35d62a21c45531a89a8495b6f1a9b3af34a5f759be9e7160a32af",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "917cbac69bd2333b71da2ed0d345dd103e3288c03b26309f7954dae325cbadc2",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T14:41:08.896Z",
+      "updatedAt": "2026-11-13T04:23:25.174Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "64",
+          "value": "63",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,48 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Die frohe Botschaft von Jesus Christus",
-              "detail": "Bücher von Matt, Stans, Stans",
-              "date": "2026-11-13",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95047"
-            },
-            {
-              "label": "GV Kirchenchor St.Jakob",
-              "detail": "Restaurant Gruob, Ennetmoos, Ennetmoos",
-              "date": "2026-11-13",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94792"
-            },
-            {
-              "label": "Latärnliumzug",
-              "detail": "Stans",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lataernliumzug/"
-            },
-            {
-              "label": "Oldie Disco",
-              "detail": "Süesswinkel, Buochs, Buochs",
-              "date": "2026-11-13",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89069"
-            },
-            {
-              "label": "Ausstellung «Undenklichkeit» von Gauthier Cerf",
-              "detail": "Kulturraum Ermitage, Beckenried, Beckenried — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95335"
-            },
-            {
-              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
-              "detail": "Kulturraum, Buochs, Buochs — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
             {
               "label": "ABGESAGT - Stubete auf dem Stanserhorn",
               "detail": "Drehrestaurant Stanserhorn, Stans, Stans",
@@ -91,11 +49,53 @@
               "detail": "d'Wärchi, Stans, Stans",
               "date": "2026-11-14",
               "url": "https://www.nw.ch/anlaesseaktuelles/94348"
+            },
+            {
+              "label": "Diä schnellste Stanser Meitli und Buebä 2026",
+              "detail": "Sportanlage Eichli, Stans, Stans",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/90481"
+            },
+            {
+              "label": "FMG Frauen-Zmorgä",
+              "detail": "Pfarreizentrum, Ennetbürgen, Ennetbürgen",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/86053"
+            },
+            {
+              "label": "Laternenweg mit Samichlais Geschichte",
+              "detail": "Emmetten, Emmetten, Emmetten",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94819"
+            },
+            {
+              "label": "Oeltrotte-Zmorgä",
+              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/93058"
+            },
+            {
+              "label": "Repair Café Stans",
+              "detail": "Schulzentrum Turmatt, Stans, Stans",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94930"
+            },
+            {
+              "label": "Samichlais-Briefkasten",
+              "detail": "Pfarrhaus Emmetten, beim Pfarrhaus Emmetten, Emmetten",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94822"
+            },
+            {
+              "label": "d'Wärchi – Shibori (Japanische Färbetechnik)",
+              "detail": "Stans",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dwaerchi-shibori-japanische-faerbetechnik/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/nidvaldo/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/nidvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "NW",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "64",
+          "value": "63",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,48 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Die frohe Botschaft von Jesus Christus",
-              "detail": "Bücher von Matt, Stans, Stans",
-              "date": "2026-11-13",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95047"
-            },
-            {
-              "label": "GV Kirchenchor St.Jakob",
-              "detail": "Restaurant Gruob, Ennetmoos, Ennetmoos",
-              "date": "2026-11-13",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94792"
-            },
-            {
-              "label": "Latärnliumzug",
-              "detail": "Stans",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lataernliumzug/"
-            },
-            {
-              "label": "Oldie Disco",
-              "detail": "Süesswinkel, Buochs, Buochs",
-              "date": "2026-11-13",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89069"
-            },
-            {
-              "label": "Ausstellung «Undenklichkeit» von Gauthier Cerf",
-              "detail": "Kulturraum Ermitage, Beckenried, Beckenried — ongoing, last day: 22 November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95335"
-            },
-            {
-              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
-              "detail": "Kulturraum, Buochs, Buochs — ongoing, last day: 22 November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — ongoing, last day: 14 November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
             {
               "label": "ABGESAGT - Stubete auf dem Stanserhorn",
               "detail": "Drehrestaurant Stanserhorn, Stans, Stans",
@@ -196,11 +154,53 @@
               "detail": "d'Wärchi, Stans, Stans",
               "date": "2026-11-14",
               "url": "https://www.nw.ch/anlaesseaktuelles/94348"
+            },
+            {
+              "label": "Diä schnellste Stanser Meitli und Buebä 2026",
+              "detail": "Sportanlage Eichli, Stans, Stans",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/90481"
+            },
+            {
+              "label": "FMG Frauen-Zmorgä",
+              "detail": "Pfarreizentrum, Ennetbürgen, Ennetbürgen",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/86053"
+            },
+            {
+              "label": "Laternenweg mit Samichlais Geschichte",
+              "detail": "Emmetten, Emmetten, Emmetten",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94819"
+            },
+            {
+              "label": "Oeltrotte-Zmorgä",
+              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/93058"
+            },
+            {
+              "label": "Repair Café Stans",
+              "detail": "Schulzentrum Turmatt, Stans, Stans",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94930"
+            },
+            {
+              "label": "Samichlais-Briefkasten",
+              "detail": "Pfarrhaus Emmetten, beim Pfarrhaus Emmetten, Emmetten",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94822"
+            },
+            {
+              "label": "d'Wärchi – Shibori (Japanische Färbetechnik)",
+              "detail": "Stans",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dwaerchi-shibori-japanische-faerbetechnik/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/nidwalden/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/nidwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "NW",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "64",
+          "value": "63",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,48 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Die frohe Botschaft von Jesus Christus",
-              "detail": "Bücher von Matt, Stans, Stans",
-              "date": "2026-11-13",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95047"
-            },
-            {
-              "label": "GV Kirchenchor St.Jakob",
-              "detail": "Restaurant Gruob, Ennetmoos, Ennetmoos",
-              "date": "2026-11-13",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94792"
-            },
-            {
-              "label": "Latärnliumzug",
-              "detail": "Stans",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lataernliumzug/"
-            },
-            {
-              "label": "Oldie Disco",
-              "detail": "Süesswinkel, Buochs, Buochs",
-              "date": "2026-11-13",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89069"
-            },
-            {
-              "label": "Ausstellung «Undenklichkeit» von Gauthier Cerf",
-              "detail": "Kulturraum Ermitage, Beckenried, Beckenried — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95335"
-            },
-            {
-              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
-              "detail": "Kulturraum, Buochs, Buochs — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
             {
               "label": "ABGESAGT - Stubete auf dem Stanserhorn",
               "detail": "Drehrestaurant Stanserhorn, Stans, Stans",
@@ -301,11 +259,53 @@
               "detail": "d'Wärchi, Stans, Stans",
               "date": "2026-11-14",
               "url": "https://www.nw.ch/anlaesseaktuelles/94348"
+            },
+            {
+              "label": "Diä schnellste Stanser Meitli und Buebä 2026",
+              "detail": "Sportanlage Eichli, Stans, Stans",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/90481"
+            },
+            {
+              "label": "FMG Frauen-Zmorgä",
+              "detail": "Pfarreizentrum, Ennetbürgen, Ennetbürgen",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/86053"
+            },
+            {
+              "label": "Laternenweg mit Samichlais Geschichte",
+              "detail": "Emmetten, Emmetten, Emmetten",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94819"
+            },
+            {
+              "label": "Oeltrotte-Zmorgä",
+              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/93058"
+            },
+            {
+              "label": "Repair Café Stans",
+              "detail": "Schulzentrum Turmatt, Stans, Stans",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94930"
+            },
+            {
+              "label": "Samichlais-Briefkasten",
+              "detail": "Pfarrhaus Emmetten, beim Pfarrhaus Emmetten, Emmetten",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94822"
+            },
+            {
+              "label": "d'Wärchi – Shibori (Japanische Färbetechnik)",
+              "detail": "Stans",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dwaerchi-shibori-japanische-faerbetechnik/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/nidwalden/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/nidwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "NW",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "64",
+          "value": "63",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,48 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Die frohe Botschaft von Jesus Christus",
-              "detail": "Bücher von Matt, Stans, Stans",
-              "date": "2026-11-13",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95047"
-            },
-            {
-              "label": "GV Kirchenchor St.Jakob",
-              "detail": "Restaurant Gruob, Ennetmoos, Ennetmoos",
-              "date": "2026-11-13",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94792"
-            },
-            {
-              "label": "Latärnliumzug",
-              "detail": "Stans",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lataernliumzug/"
-            },
-            {
-              "label": "Oldie Disco",
-              "detail": "Süesswinkel, Buochs, Buochs",
-              "date": "2026-11-13",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89069"
-            },
-            {
-              "label": "Ausstellung «Undenklichkeit» von Gauthier Cerf",
-              "detail": "Kulturraum Ermitage, Beckenried, Beckenried — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95335"
-            },
-            {
-              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
-              "detail": "Kulturraum, Buochs, Buochs — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
             {
               "label": "ABGESAGT - Stubete auf dem Stanserhorn",
               "detail": "Drehrestaurant Stanserhorn, Stans, Stans",
@@ -406,11 +364,53 @@
               "detail": "d'Wärchi, Stans, Stans",
               "date": "2026-11-14",
               "url": "https://www.nw.ch/anlaesseaktuelles/94348"
+            },
+            {
+              "label": "Diä schnellste Stanser Meitli und Buebä 2026",
+              "detail": "Sportanlage Eichli, Stans, Stans",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/90481"
+            },
+            {
+              "label": "FMG Frauen-Zmorgä",
+              "detail": "Pfarreizentrum, Ennetbürgen, Ennetbürgen",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/86053"
+            },
+            {
+              "label": "Laternenweg mit Samichlais Geschichte",
+              "detail": "Emmetten, Emmetten, Emmetten",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94819"
+            },
+            {
+              "label": "Oeltrotte-Zmorgä",
+              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/93058"
+            },
+            {
+              "label": "Repair Café Stans",
+              "detail": "Schulzentrum Turmatt, Stans, Stans",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94930"
+            },
+            {
+              "label": "Samichlais-Briefkasten",
+              "detail": "Pfarrhaus Emmetten, beim Pfarrhaus Emmetten, Emmetten",
+              "date": "2026-11-14",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94822"
+            },
+            {
+              "label": "d'Wärchi – Shibori (Japanische Färbetechnik)",
+              "detail": "Stans",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dwaerchi-shibori-japanische-faerbetechnik/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/nidwald/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/nidwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "b00156f6f6389960f8a24253f5920f2ceb287164289a775d7aa6688c9e1ae82e",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "4cdcf8efb9bf2ab62d11d8d5480bd0ababf0c87b654bd126042eccbc97a121aa",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T14:41:08.896Z",
+      "updatedAt": "2026-11-13T04:23:25.174Z",
       "keyFacts": 1
     }
   ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "La Glareyarde of award-winning wines 2026",
-              "detail": "VINEA, Sierre",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-glareyarde-der-praemierten-weine-2026/"
+              "label": "50ème Corrida d'Octodure [EN]",
+              "detail": "Corrida d'Octodure, Martigny",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/50eme-corrida-doctodure-de/"
             },
             {
-              "label": "Nendaz Film Festival",
-              "detail": "Salle polyvalente, Nendaz",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/filmfestival-nendaz/"
+              "label": "Cariton",
+              "detail": "Jardins de l'église de St-Pierre-de-Clages",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/evenements/musique/st-pierre-de-clages/cariton_AVRq9JN"
             },
             {
-              "label": "RESTORE | Yin Yoga",
-              "detail": "Zermatt",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/restore-yin-yoga/"
+              "label": "Kapellenfest Fafleralp",
+              "detail": "3918 Wiler (Lötschen), Wiler (Lötschen)",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jodlerabend-in-wiler/"
             },
             {
-              "label": "Tennisturnier: Burgener Sport Cup",
-              "detail": "Fiesch",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tennisturnier-burgener-sport-cup/"
+              "label": "Nuit des Musées Valais [EN]",
+              "detail": "Association Valaisanne des Musées, Martigny",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nuit-des-musees-valais-en/"
             },
             {
-              "label": "Bernhard Betschart – Ganz nah",
-              "detail": "Hotel Glocke",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/events/music/reckingen-vs/bernhard-betschart-up-close_ABfGp56"
+              "label": "Opening - on paper",
+              "detail": "Atelier Galerie de la Zîle falcon, Sierre",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/vernissage-sur-papiers/"
             },
             {
-              "label": "Bernhard Betschart – Up Close",
-              "detail": "Reckingen, Goms",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bernhard-betschart-ganz-nah-1/"
+              "label": "Siku",
+              "detail": "le Spot → Valère, Sion",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/siku/"
             },
             {
-              "label": "Storytelling Night",
-              "detail": "Sion / Sitten, Sion",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nuit-du-conte/"
+              "label": "Where the funk is my red nose !?",
+              "detail": "Place Maurice-Zermatten, Sion",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/where-the-funk-is-my-red-nose/"
             },
             {
-              "label": "Dear Luigi, I hate You",
-              "detail": "Sierre",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dear-luigi-i-hate-you/"
+              "label": "Literarisches Frühstück",
+              "detail": "Médiathèque Valais - Sion, Sion",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/events/music/sion/literary-breakfast_AUDKc9e"
             },
             {
-              "label": "BOODER \"AH...L'ÉCOLE!\"",
-              "detail": "Saint-Maurice",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/booder-ahlecole/"
+              "label": "Literary Breakfast",
+              "detail": "Médiathèque Valais - Sion, Sion",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ptit-dej-litteraire-1/"
             },
             {
-              "label": "Polar Mania",
-              "detail": "Jazz Chälli, Visp",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/polomanie-1/"
+              "label": "Repair Café 2026",
+              "detail": "DILEI, Leuk",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/repair-cafe-2026/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vallese/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "VS",
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "La Glareyarde of award-winning wines 2026",
-              "detail": "VINEA, Sierre",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-glareyarde-der-praemierten-weine-2026/"
+              "label": "50ème Corrida d'Octodure [EN]",
+              "detail": "Corrida d'Octodure, Martigny",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/50eme-corrida-doctodure-de/"
             },
             {
-              "label": "Nendaz Film Festival",
-              "detail": "Salle polyvalente, Nendaz",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/filmfestival-nendaz/"
+              "label": "Cariton",
+              "detail": "Jardins de l'église de St-Pierre-de-Clages",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/evenements/musique/st-pierre-de-clages/cariton_AVRq9JN"
             },
             {
-              "label": "RESTORE | Yin Yoga",
-              "detail": "Zermatt",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/restore-yin-yoga/"
+              "label": "Kapellenfest Fafleralp",
+              "detail": "3918 Wiler (Lötschen), Wiler (Lötschen)",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jodlerabend-in-wiler/"
             },
             {
-              "label": "Tennisturnier: Burgener Sport Cup",
-              "detail": "Fiesch",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tennisturnier-burgener-sport-cup/"
+              "label": "Nuit des Musées Valais [EN]",
+              "detail": "Association Valaisanne des Musées, Martigny",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nuit-des-musees-valais-en/"
             },
             {
-              "label": "Bernhard Betschart – Up Close",
-              "detail": "Hotel Glocke",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/events/music/reckingen-vs/bernhard-betschart-up-close_ABfGp56"
+              "label": "Opening - on paper",
+              "detail": "Atelier Galerie de la Zîle falcon, Sierre",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/vernissage-sur-papiers/"
             },
             {
-              "label": "Bernhard Betschart – Up Close",
-              "detail": "Reckingen, Goms",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bernhard-betschart-ganz-nah-1/"
+              "label": "Siku",
+              "detail": "le Spot → Valère, Sion",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/siku/"
             },
             {
-              "label": "Storytelling Night",
-              "detail": "Sion / Sitten, Sion",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nuit-du-conte/"
+              "label": "Where the funk is my red nose !?",
+              "detail": "Place Maurice-Zermatten, Sion",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/where-the-funk-is-my-red-nose/"
             },
             {
-              "label": "Dear Luigi, I hate You",
-              "detail": "Sierre",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dear-luigi-i-hate-you/"
+              "label": "Literary Breakfast",
+              "detail": "Médiathèque Valais - Sion, Sion",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/events/music/sion/literary-breakfast_AUDKc9e"
             },
             {
-              "label": "BOODER \"AH...L'ÉCOLE!\"",
-              "detail": "Saint-Maurice",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/booder-ahlecole/"
+              "label": "Literary Breakfast",
+              "detail": "Médiathèque Valais - Sion, Sion",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ptit-dej-litteraire-1/"
             },
             {
-              "label": "Polar Mania",
-              "detail": "Jazz Chälli, Visp",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/polomanie-1/"
+              "label": "Repair Café 2026",
+              "detail": "DILEI, Leuk",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/repair-cafe-2026/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/valais/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "VS",
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Die Glareyarde der prämierten Weine 2026",
-              "detail": "VINEA, Sierre",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-glareyarde-der-praemierten-weine-2026/"
+              "label": "50ème Corrida d'Octodure [DE]",
+              "detail": "Corrida d'Octodure, Martigny",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/50eme-corrida-doctodure-de/"
             },
             {
-              "label": "Filmfestival Nendaz",
-              "detail": "Salle polyvalente, Nendaz",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/filmfestival-nendaz/"
+              "label": "Cariton",
+              "detail": "Jardins de l'église de St-Pierre-de-Clages",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/evenements/musique/st-pierre-de-clages/cariton_AVRq9JN"
             },
             {
-              "label": "RESTORE | Yin Yoga",
-              "detail": "Zermatt",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/restore-yin-yoga/"
+              "label": "Jodlerabend in Wiler",
+              "detail": "3918 Wiler (Lötschen), Wiler (Lötschen)",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jodlerabend-in-wiler/"
             },
             {
-              "label": "Tennisturnier: Burgener Sport Cup",
-              "detail": "Fiesch",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tennisturnier-burgener-sport-cup/"
+              "label": "Nuit des Musées Valais [DE]",
+              "detail": "Association Valaisanne des Musées, Martigny",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nuit-des-musees-valais-en/"
             },
             {
-              "label": "Bernhard Betschart – Ganz nah",
-              "detail": "Hotel Glocke",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/events/music/reckingen-vs/bernhard-betschart-up-close_ABfGp56"
+              "label": "Vernissage – Arbeiten auf Papier",
+              "detail": "Atelier Galerie de la Zîle falcon, Sierre",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/vernissage-sur-papiers/"
             },
             {
-              "label": "Bernhard Betschart – Ganz nah",
-              "detail": "Reckingen, Goms",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bernhard-betschart-ganz-nah-1/"
+              "label": "Siku",
+              "detail": "le Spot → Valère, Sion",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/siku/"
             },
             {
-              "label": "Märchennacht",
-              "detail": "Sion / Sitten, Sion",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nuit-du-conte/"
+              "label": "Where the funk is my red nose !?",
+              "detail": "Place Maurice-Zermatten, Sion",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/where-the-funk-is-my-red-nose/"
             },
             {
-              "label": "Dear Luigi, I hate You",
-              "detail": "Sierre",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dear-luigi-i-hate-you/"
+              "label": "Literarisches Frühstück",
+              "detail": "Médiathèque Valais - Sion, Sion",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/events/music/sion/literary-breakfast_AUDKc9e"
             },
             {
-              "label": "BOODER \"AH...L'ÉCOLE!\"",
-              "detail": "Saint-Maurice",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/booder-ahlecole/"
+              "label": "Literarisches Frühstück",
+              "detail": "Médiathèque Valais - Sion, Sion",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ptit-dej-litteraire-1/"
             },
             {
-              "label": "Polarmanie",
-              "detail": "Jazz Chälli, Visp",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/polomanie-1/"
+              "label": "Repair Café 2026",
+              "detail": "DILEI, Leuk",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/repair-cafe-2026/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/wallis/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "VS",
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "La Glareyarde des vins médaillés 2026",
-              "detail": "VINEA, Sierre",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-glareyarde-der-praemierten-weine-2026/"
+              "label": "50ème Corrida d'Octodure",
+              "detail": "Corrida d'Octodure, Martigny",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/50eme-corrida-doctodure-de/"
             },
             {
-              "label": "Nendaz Film Festival",
-              "detail": "Salle polyvalente, Nendaz",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/filmfestival-nendaz/"
+              "label": "Cariton",
+              "detail": "Jardins de l'église de St-Pierre-de-Clages",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/evenements/musique/st-pierre-de-clages/cariton_AVRq9JN"
             },
             {
-              "label": "RESTORE | Yin Yoga",
-              "detail": "Zermatt",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/restore-yin-yoga/"
+              "label": "Kapellenfest Fafleralp",
+              "detail": "3918 Wiler (Lötschen), Wiler (Lötschen)",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jodlerabend-in-wiler/"
             },
             {
-              "label": "Tennisturnier: Burgener Sport Cup",
-              "detail": "Fiesch",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tennisturnier-burgener-sport-cup/"
+              "label": "Nuit des Musées Valais",
+              "detail": "Association Valaisanne des Musées, Martigny",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nuit-des-musees-valais-en/"
             },
             {
-              "label": "Bernhard Betschart – Ganz nah",
-              "detail": "Hotel Glocke",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/events/music/reckingen-vs/bernhard-betschart-up-close_ABfGp56"
+              "label": "Vernissage - sur papiers",
+              "detail": "Atelier Galerie de la Zîle falcon, Sierre",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/vernissage-sur-papiers/"
             },
             {
-              "label": "Bernhard Betschart – Ganz nah",
-              "detail": "Reckingen, Goms",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bernhard-betschart-ganz-nah-1/"
+              "label": "Siku",
+              "detail": "le Spot → Valère, Sion",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/siku/"
             },
             {
-              "label": "Nuit du conte",
-              "detail": "Sion / Sitten, Sion",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nuit-du-conte/"
+              "label": "Where the funk is my red nose !?",
+              "detail": "Place Maurice-Zermatten, Sion",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/where-the-funk-is-my-red-nose/"
             },
             {
-              "label": "Dear Luigi, I hate You",
-              "detail": "Sierre",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dear-luigi-i-hate-you/"
+              "label": "P'tit déj littéraire",
+              "detail": "Médiathèque Valais - Sion, Sion",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/events/music/sion/literary-breakfast_AUDKc9e"
             },
             {
-              "label": "BOODER \"AH...L'ÉCOLE!\"",
-              "detail": "Saint-Maurice",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/booder-ahlecole/"
+              "label": "P'tit déj littéraire",
+              "detail": "Médiathèque Valais - Sion, Sion",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ptit-dej-litteraire-1/"
             },
             {
-              "label": "La manie polaire",
-              "detail": "Jazz Chälli, Visp",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/polomanie-1/"
+              "label": "Repair Café 2026",
+              "detail": "DILEI, Leuk",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/repair-cafe-2026/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/valais/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }

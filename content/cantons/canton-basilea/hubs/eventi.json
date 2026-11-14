@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "b66238fd23e79314b6fb2ea7839cbf59b3887001007f6f01bfa5c9394587b0a9",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "4bb92f782b376ecfe22c3b07030b3a6bbc7faa6e1c9c0e961ba764c9a5b7ac0e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T14:41:08.896Z",
+      "updatedAt": "2026-11-13T04:23:25.174Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "81",
+          "value": "82",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Schweizer Erzählnacht 2026",
-              "detail": "Riehen",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schweizer-erzaehlnacht-2026/"
+              "label": "Kreativbox",
+              "detail": "Museum der Kulturen Basel, Basel",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/basel/kreativbox_AvCq2gm"
+            },
+            {
+              "label": "DSCHUNGELBUCH - DAS MUSICAL",
+              "detail": "Basel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dschungelbuch-das-musical-2/"
+            },
+            {
+              "label": "Miss Allie - Paradiesvogel",
+              "detail": "Scala Basel, Basel",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/miss-allie-paradiesvogel_AZxDvZm"
+            },
+            {
+              "label": "TAFS - Bägg in Etschgen",
+              "detail": "Kuppel Basel, Basel",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/tafs-baegg-in-etschgen_A9WUFLt"
+            },
+            {
+              "label": "Jovana Nikic: «Konserviert»",
+              "detail": "Basel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jovana-nikic-konserviert-1/"
+            },
+            {
+              "label": "FIEBERTANZ w/ Monoblock B live",
+              "detail": "Parterre One, Basel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fiebertanz-w-monoblock-b-live/"
             },
             {
               "label": "Wochenmarkt auf dem Lindenplatz Allschwil",
-              "detail": "Lindenplatz, Allschwil",
-              "date": "2026-11-13",
+              "detail": "Lindenplatz, Allschwil — in corso, ultimo giorno: 27 novembre 2026",
+              "date": "2026-11-14",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/allschwil/wochenmarkt-auf-dem-lindenplatz-allschwil_ANByB5x"
             },
             {
-              "label": "Xang & Fun - Immer wieder geht die Sonne auf",
-              "detail": "Pflegheim Wendelin, Riehen",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/riehen/xang-und-fun-immer-wieder-geht-die-sonne-auf_A5yPAsW"
-            },
-            {
-              "label": "Das Kriminal Dinner - Krimidinner mit Kitzel für Nerven und Gaumen",
-              "detail": "Park-Restaurant Lange Erlen, Basel",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-kriminal-dinner-krimidinner-mit-kitzel-fuer-nerven-und-gaumen-9/"
-            },
-            {
-              "label": "AQUA SONANS - klingendes Wasser. Konzert für Orgel & Elektronik",
-              "detail": "Allschwil",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aqua-sonans-klingendes-wasser-konzert-fuer-orgel-elektronik/"
-            },
-            {
-              "label": "dArtagnan",
-              "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/dartagnan_AHgQk85"
-            },
-            {
-              "label": "Feigenwinter-Moret-Pfammatter",
-              "detail": "Kulturscheune, Liestal",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/liestal/feigenwinter-moret-pfammatter_AXumEgv"
-            },
-            {
-              "label": "Loredana & Kilian - Warum ist SIE/ER so?",
-              "detail": "Musical Theater Basel, Basel",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/loredana-und-kilian-warum-ist-sieer-so_AmYbg6M"
-            },
-            {
               "label": "Six Chicks - Gluck & Gloria",
-              "detail": "Theater Fauteuil - Tabourettli",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/basel/six-chicks-gluck-und-gloria_ABa7fLt"
-            },
-            {
-              "label": "Six Chicks - Gluck & Gloria",
-              "detail": "Basel",
-              "date": "2026-11-13",
+              "detail": "Basel — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/six-chicks-gluck-gloria/"
+            },
+            {
+              "label": "Endstation",
+              "detail": "Basel — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
+            },
+            {
+              "label": "Aroma-Massage",
+              "detail": "Bio-Medica Fachschule, Basel — in corso, ultimo giorno: 18 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "81",
+          "value": "82",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Schweizer Erzählnacht 2026",
-              "detail": "Riehen",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schweizer-erzaehlnacht-2026/"
+              "label": "Creativbox",
+              "detail": "Museum der Kulturen Basel, Basel",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/basel/kreativbox_AvCq2gm"
+            },
+            {
+              "label": "DSCHUNGELBUCH - DAS MUSICAL",
+              "detail": "Basel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dschungelbuch-das-musical-2/"
+            },
+            {
+              "label": "Miss Allie - Paradiesvogel",
+              "detail": "Scala Basel, Basel",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/miss-allie-paradiesvogel_AZxDvZm"
+            },
+            {
+              "label": "TAFS - Bägg in Etschgen",
+              "detail": "Kuppel Basel, Basel",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/tafs-baegg-in-etschgen_A9WUFLt"
+            },
+            {
+              "label": "Jovana Nikic: «Konserviert»",
+              "detail": "Basel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jovana-nikic-konserviert-1/"
+            },
+            {
+              "label": "FIEBERTANZ w/ Monoblock B live",
+              "detail": "Parterre One, Basel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fiebertanz-w-monoblock-b-live/"
             },
             {
               "label": "Wochenmarkt auf dem Lindenplatz Allschwil",
-              "detail": "Lindenplatz, Allschwil",
-              "date": "2026-11-13",
+              "detail": "Lindenplatz, Allschwil — ongoing, last day: 27 November 2026",
+              "date": "2026-11-14",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/allschwil/wochenmarkt-auf-dem-lindenplatz-allschwil_ANByB5x"
             },
             {
-              "label": "Xang & Fun - Immer wieder geht die Sonne auf",
-              "detail": "Pflegheim Wendelin, Riehen",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/riehen/xang-und-fun-immer-wieder-geht-die-sonne-auf_A5yPAsW"
-            },
-            {
-              "label": "Das Kriminal Dinner - Krimidinner mit Kitzel für Nerven und Gaumen",
-              "detail": "Park-Restaurant Lange Erlen, Basel",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-kriminal-dinner-krimidinner-mit-kitzel-fuer-nerven-und-gaumen-9/"
-            },
-            {
-              "label": "AQUA SONANS - klingendes Wasser. Konzert für Orgel & Elektronik",
-              "detail": "Allschwil",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aqua-sonans-klingendes-wasser-konzert-fuer-orgel-elektronik/"
-            },
-            {
-              "label": "dArtagnan",
-              "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/dartagnan_AHgQk85"
-            },
-            {
-              "label": "Feigenwinter-Moret-Pfammatter",
-              "detail": "Kulturscheune, Liestal",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/liestal/feigenwinter-moret-pfammatter_AXumEgv"
-            },
-            {
-              "label": "Loredana & Kilian - Warum ist SIE/ER so?",
-              "detail": "Musical Theater Basel, Basel",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/loredana-und-kilian-warum-ist-sieer-so_AmYbg6M"
-            },
-            {
               "label": "Six Chicks - Gluck & Gloria",
-              "detail": "Theater Fauteuil - Tabourettli",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/basel/six-chicks-gluck-und-gloria_ABa7fLt"
-            },
-            {
-              "label": "Six Chicks - Gluck & Gloria",
-              "detail": "Basel",
-              "date": "2026-11-13",
+              "detail": "Basel — ongoing, last day: 14 November 2026",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/six-chicks-gluck-gloria/"
+            },
+            {
+              "label": "Endstation",
+              "detail": "Basel — ongoing, last day: 15 November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
+            },
+            {
+              "label": "Aroma-Massage",
+              "detail": "Bio-Medica Fachschule, Basel — ongoing, last day: 18 November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "81",
+          "value": "82",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Schweizer Erzählnacht 2026",
-              "detail": "Riehen",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schweizer-erzaehlnacht-2026/"
+              "label": "Kreativbo",
+              "detail": "Museum der Kulturen Basel, Basel",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/basel/kreativbox_AvCq2gm"
+            },
+            {
+              "label": "DSCHUNGELBUCH - DAS MUSICAL",
+              "detail": "Basel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dschungelbuch-das-musical-2/"
+            },
+            {
+              "label": "Miss Allie - Paradiesvogel",
+              "detail": "Scala Basel, Basel",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/miss-allie-paradiesvogel_AZxDvZm"
+            },
+            {
+              "label": "TAFS - Bägg in Etschgen",
+              "detail": "Kuppel Basel, Basel",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/tafs-baegg-in-etschgen_A9WUFLt"
+            },
+            {
+              "label": "Jovana Nikic: «Konserviert»",
+              "detail": "Basel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jovana-nikic-konserviert-1/"
+            },
+            {
+              "label": "FIEBERTANZ w/ Monoblock B live",
+              "detail": "Parterre One, Basel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fiebertanz-w-monoblock-b-live/"
             },
             {
               "label": "Wochenmarkt auf dem Lindenplatz Allschwil",
-              "detail": "Lindenplatz, Allschwil",
-              "date": "2026-11-13",
+              "detail": "Lindenplatz, Allschwil — läuft, letzter Tag: 27. November 2026",
+              "date": "2026-11-14",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/allschwil/wochenmarkt-auf-dem-lindenplatz-allschwil_ANByB5x"
             },
             {
-              "label": "Xang & Fun - Immer wieder geht die Sonne auf",
-              "detail": "Pflegheim Wendelin, Riehen",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/riehen/xang-und-fun-immer-wieder-geht-die-sonne-auf_A5yPAsW"
-            },
-            {
-              "label": "Das Kriminal Dinner - Krimidinner mit Kitzel für Nerven und Gaumen",
-              "detail": "Park-Restaurant Lange Erlen, Basel",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-kriminal-dinner-krimidinner-mit-kitzel-fuer-nerven-und-gaumen-9/"
-            },
-            {
-              "label": "AQUA SONANS - klingendes Wasser. Konzert für Orgel & Elektronik",
-              "detail": "Allschwil",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aqua-sonans-klingendes-wasser-konzert-fuer-orgel-elektronik/"
-            },
-            {
-              "label": "dArtagnan",
-              "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/dartagnan_AHgQk85"
-            },
-            {
-              "label": "Feigenwinter-Moret-Pfammatter",
-              "detail": "Kulturscheune, Liestal",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/liestal/feigenwinter-moret-pfammatter_AXumEgv"
-            },
-            {
-              "label": "Loredana & Kilian - Warum ist SIE/ER so?",
-              "detail": "Musical Theater Basel, Basel",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/loredana-und-kilian-warum-ist-sieer-so_AmYbg6M"
-            },
-            {
               "label": "Six Chicks - Gluck & Gloria",
-              "detail": "Theater Fauteuil - Tabourettli",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/basel/six-chicks-gluck-und-gloria_ABa7fLt"
-            },
-            {
-              "label": "Six Chicks - Gluck & Gloria",
-              "detail": "Basel",
-              "date": "2026-11-13",
+              "detail": "Basel — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/six-chicks-gluck-gloria/"
+            },
+            {
+              "label": "Endstation",
+              "detail": "Basel — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
+            },
+            {
+              "label": "Aroma-Massage",
+              "detail": "Bio-Medica Fachschule, Basel — läuft, letzter Tag: 18. November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "81",
+          "value": "82",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Schweizer Erzählnacht 2026",
-              "detail": "Riehen",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schweizer-erzaehlnacht-2026/"
+              "label": "Boîte créative",
+              "detail": "Museum der Kulturen Basel, Basel",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/basel/kreativbox_AvCq2gm"
+            },
+            {
+              "label": "DSCHUNGELBUCH - DAS MUSICAL",
+              "detail": "Basel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dschungelbuch-das-musical-2/"
+            },
+            {
+              "label": "Miss Allie - Paradiesvogel",
+              "detail": "Scala Basel, Basel",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/miss-allie-paradiesvogel_AZxDvZm"
+            },
+            {
+              "label": "TAFS - Bägg in Etschgen",
+              "detail": "Kuppel Basel, Basel",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/tafs-baegg-in-etschgen_A9WUFLt"
+            },
+            {
+              "label": "Jovana Nikic: «Konserviert»",
+              "detail": "Basel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jovana-nikic-konserviert-1/"
+            },
+            {
+              "label": "FIEBERTANZ w/ Monoblock B live",
+              "detail": "Parterre One, Basel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fiebertanz-w-monoblock-b-live/"
             },
             {
               "label": "Wochenmarkt auf dem Lindenplatz Allschwil",
-              "detail": "Lindenplatz, Allschwil",
-              "date": "2026-11-13",
+              "detail": "Lindenplatz, Allschwil — en cours, dernier jour : 27 novembre 2026",
+              "date": "2026-11-14",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/allschwil/wochenmarkt-auf-dem-lindenplatz-allschwil_ANByB5x"
             },
             {
-              "label": "Xang & Fun - Immer wieder geht die Sonne auf",
-              "detail": "Pflegheim Wendelin, Riehen",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/riehen/xang-und-fun-immer-wieder-geht-die-sonne-auf_A5yPAsW"
-            },
-            {
-              "label": "Das Kriminal Dinner - Krimidinner mit Kitzel für Nerven und Gaumen",
-              "detail": "Park-Restaurant Lange Erlen, Basel",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-kriminal-dinner-krimidinner-mit-kitzel-fuer-nerven-und-gaumen-9/"
-            },
-            {
-              "label": "AQUA SONANS - klingendes Wasser. Konzert für Orgel & Elektronik",
-              "detail": "Allschwil",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aqua-sonans-klingendes-wasser-konzert-fuer-orgel-elektronik/"
-            },
-            {
-              "label": "dArtagnan",
-              "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/dartagnan_AHgQk85"
-            },
-            {
-              "label": "Feigenwinter-Moret-Pfammatter",
-              "detail": "Kulturscheune, Liestal",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/liestal/feigenwinter-moret-pfammatter_AXumEgv"
-            },
-            {
-              "label": "Loredana & Kilian - Warum ist SIE/ER so?",
-              "detail": "Musical Theater Basel, Basel",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/loredana-und-kilian-warum-ist-sieer-so_AmYbg6M"
-            },
-            {
               "label": "Six Chicks - Gluck & Gloria",
-              "detail": "Theater Fauteuil - Tabourettli",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/basel/six-chicks-gluck-und-gloria_ABa7fLt"
-            },
-            {
-              "label": "Six Chicks - Gluck & Gloria",
-              "detail": "Basel",
-              "date": "2026-11-13",
+              "detail": "Basel — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/six-chicks-gluck-gloria/"
+            },
+            {
+              "label": "Endstation",
+              "detail": "Basel — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endstation/"
+            },
+            {
+              "label": "Aroma-Massage",
+              "detail": "Bio-Medica Fachschule, Basel — en cours, dernier jour : 18 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }

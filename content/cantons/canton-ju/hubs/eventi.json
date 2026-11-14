@@ -4,12 +4,12 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "eventi",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "bb7cfccd1714627bf1e365bf4ecbe4f002b970f119066034db3c3a4c9cbaf577",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "75604a0b647b755457a2af183d2a1f94a80fc262fcd24d6234d3f46e8e0fdb4b",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T14:41:08.896Z",
+      "updatedAt": "2026-11-13T04:23:25.174Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "3",
+          "value": "4",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,27 +33,33 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Résistance artistique",
-              "detail": "Delémont — in corso, ultimo giorno: 21 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
-            },
-            {
               "label": "Léopold Lemarchand",
               "detail": "Vicques",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/leopold-lemarchand/"
             },
             {
+              "label": "Résistance artistique",
+              "detail": "Delémont — in corso, ultimo giorno: 21 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
+            },
+            {
               "label": "CARTE-BLANCHE AU FESTIVAL DE LA TARTE AUX NOIX: KAYA + TRIBUTE SOUND SYSTEM",
               "detail": "Le Soleil, Saignelégier",
               "date": "2026-11-21",
               "url": "https://www.guidle.com/it/evenements/musique/saignelegier/carte-blanche-au-festival-de-la-tarte-aux-noix-kaya-tribute-sound-system_AaEd8Tb"
+            },
+            {
+              "label": "Bourvil en chanson",
+              "detail": "Vicques",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bourvil-en-chanson/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/giura/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -81,7 +87,7 @@
           "url": "/eventi/giura/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "JU",
@@ -91,7 +97,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "3",
+          "value": "4",
           "note": "from the site’s events calendar"
         }
       ],
@@ -102,27 +108,33 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Résistance artistique",
-              "detail": "Delémont — ongoing, last day: 21 November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
-            },
-            {
               "label": "Léopold Lemarchand",
               "detail": "Vicques",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/leopold-lemarchand/"
             },
             {
+              "label": "Résistance artistique",
+              "detail": "Delémont — ongoing, last day: 21 November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
+            },
+            {
               "label": "CARTE-BLANCHE AU FESTIVAL DE LA TARTE AUX NOIX: KAYA + TRIBUTE SOUND SYSTEM",
               "detail": "Le Soleil, Saignelégier",
               "date": "2026-11-21",
               "url": "https://www.guidle.com/it/evenements/musique/saignelegier/carte-blanche-au-festival-de-la-tarte-aux-noix-kaya-tribute-sound-system_AaEd8Tb"
+            },
+            {
+              "label": "Bourvil en chanson",
+              "detail": "Vicques",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bourvil-en-chanson/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/jura/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -150,7 +162,7 @@
           "url": "/en/events/jura/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "JU",
@@ -160,7 +172,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "3",
+          "value": "4",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -171,27 +183,33 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Résistance artistique",
-              "detail": "Delémont — läuft, letzter Tag: 21. November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
-            },
-            {
               "label": "Léopold Lemarchand",
               "detail": "Vicques",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/leopold-lemarchand/"
             },
             {
+              "label": "Résistance artistique",
+              "detail": "Delémont — läuft, letzter Tag: 21. November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
+            },
+            {
               "label": "CARTE-BLANCHE AU FESTIVAL DE LA TARTE AUX NOIX: KAYA + TRIBUTE SOUND SYSTEM",
               "detail": "Le Soleil, Saignelégier",
               "date": "2026-11-21",
               "url": "https://www.guidle.com/it/evenements/musique/saignelegier/carte-blanche-au-festival-de-la-tarte-aux-noix-kaya-tribute-sound-system_AaEd8Tb"
+            },
+            {
+              "label": "Bourvil en chanson",
+              "detail": "Vicques",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bourvil-en-chanson/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/jura/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -219,7 +237,7 @@
           "url": "/de/veranstaltungen/jura/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "JU",
@@ -229,7 +247,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "3",
+          "value": "4",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -240,27 +258,33 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Résistance artistique",
-              "detail": "Delémont — en cours, dernier jour : 21 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
-            },
-            {
               "label": "Léopold Lemarchand",
               "detail": "Vicques",
               "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/leopold-lemarchand/"
             },
             {
+              "label": "Résistance artistique",
+              "detail": "Delémont — en cours, dernier jour : 21 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
+            },
+            {
               "label": "CARTE-BLANCHE AU FESTIVAL DE LA TARTE AUX NOIX: KAYA + TRIBUTE SOUND SYSTEM",
               "detail": "Le Soleil, Saignelégier",
               "date": "2026-11-21",
               "url": "https://www.guidle.com/it/evenements/musique/saignelegier/carte-blanche-au-festival-de-la-tarte-aux-noix-kaya-tribute-sound-system_AaEd8Tb"
+            },
+            {
+              "label": "Bourvil en chanson",
+              "detail": "Vicques",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bourvil-en-chanson/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/jura/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -288,7 +312,7 @@
           "url": "/fr/evenements/jura/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }

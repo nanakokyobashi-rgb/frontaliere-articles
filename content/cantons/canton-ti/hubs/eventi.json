@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "56ce1448c6147f11db0ec07a5dd7f1d1f8a9ac9f6da679fbd3359664b46130a7",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "c11ad25ae1699ce488f918b81466c7340bcefb7dc71888b42de4f9f2f85754fd",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T14:41:08.896Z",
+      "updatedAt": "2026-11-13T04:23:25.174Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "265",
+          "value": "255",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Insieme InPista",
-              "detail": "Piazza Girasole, Massagno",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64994"
+              "label": "39° Castellinaria - Festival del cinema giovane",
+              "detail": "Mercato Coperto, Bellinzona",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64838"
             },
             {
-              "label": "L'épistolière",
-              "detail": "Centro Elisarion, Minusio",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/63970"
+              "label": "RITORNA IL MERCANTICO A BELLINZONA",
+              "detail": "Piazza Giusppe Buffi, Bellinzona",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64982"
             },
             {
-              "label": "BLA Biennale - Le latitudini dell'arte",
-              "detail": "Villa Santa Lucia, Lugano",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/63945"
+              "label": "Donne del Centro incontra la popolazione",
+              "detail": "Bellinzona",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64911"
             },
             {
-              "label": "Ticino. Sguardi laterali",
-              "detail": "SpazioReale, Bellinzona",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64633"
+              "label": "Giornata InUtile",
+              "detail": "Negozio inUtile, Lugano",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64889"
             },
             {
-              "label": "Notte del racconto 2026. Voci",
-              "detail": "Biblioteca cantonale, Lugano",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64464"
+              "label": "54°grande mostra minerali e fossili",
+              "detail": "Padiglione delle feste, Lugano",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64278"
             },
             {
-              "label": "Mastri birrai in festa",
-              "detail": "Birrificio RudBir, Gordola",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64888"
+              "label": "Evento Artigiano 2026",
+              "detail": "Asilo Ciani, Lugano",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64912"
             },
             {
-              "label": "Commentare la poesia del Novecento",
-              "detail": "Biblioteca cantonale, Lugano",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64697"
+              "label": "Evento speciale per famiglie",
+              "detail": "Museo in erba, Lugano",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64855"
             },
             {
-              "label": "Dream Horse",
-              "detail": "Rialto il Cinema, Muralto",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64832"
+              "label": "Il mercatino solidale benefico di Natale",
+              "detail": "Via Lavizzari 10, Bellinzona",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64988"
             },
             {
-              "label": "L'Amministrazione cantonale nell'era digitale",
-              "detail": "Palexpo FEVI, Sala 2 (2° piano), Locarno",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64588"
+              "label": "Il mercatino solidale benefico di Natale di Mario",
+              "detail": "Via Lavizzari 10, Bellinzona",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64830"
             },
             {
-              "label": "Pieces of Mind - Mostra Martina Varini",
-              "detail": "Casa comunale, Bioggio",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64938"
+              "label": "Imparare l'AI giocando: Lab per ragazzi e genitori",
+              "detail": "Suglio Business Center, Manno",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64762"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "265",
+          "value": "255",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,69 +184,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Together on the slopes",
-              "detail": "Piazza Girasole, Massagno",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64994"
+              "label": "39th Castellinaria - Festival of young cinema",
+              "detail": "Mercato Coperto, Bellinzona",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64838"
             },
             {
-              "label": "L 'épistolière",
-              "detail": "Centro Elisarion, Minusio",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/63970"
+              "label": "MERCHANDISE RETURNS TO BELLINZONA",
+              "detail": "Piazza Giusppe Buffi, Bellinzona",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64982"
             },
             {
-              "label": "BLA Biennale - The latitudes of art",
-              "detail": "Villa Santa Lucia, Lugano",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/63945"
+              "label": "Women of the Centre meet the population",
+              "detail": "Bellinzona",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64911"
             },
             {
-              "label": "Ticino. Side glances",
-              "detail": "SpazioReale, Bellinzona",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64633"
+              "label": "Useless Day",
+              "detail": "Negozio inUtile, Lugano",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64889"
             },
             {
-              "label": "Story Night 2026. Voices",
-              "detail": "Biblioteca cantonale, Lugano",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64464"
+              "label": "54thlarge mineral and fossil exhibition",
+              "detail": "Padiglione delle feste, Lugano",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64278"
             },
             {
-              "label": "Master brewers in celebration",
-              "detail": "Birrificio RudBir, Gordola",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64888"
+              "label": "Artisan Event 2026",
+              "detail": "Asilo Ciani, Lugano",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64912"
             },
             {
-              "label": "Commenting on the poetry of the twentieth century",
-              "detail": "Biblioteca cantonale, Lugano",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64697"
+              "label": "Special event for families",
+              "detail": "Museo in erba, Lugano",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64855"
             },
             {
-              "label": "Dream Horse",
-              "detail": "Rialto il Cinema, Muralto",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64832"
+              "label": "The charity Christmas market",
+              "detail": "Via Lavizzari 10, Bellinzona",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64988"
             },
             {
-              "label": "Cantonal administration in the digital age",
-              "detail": "Palexpo FEVI, Sala 2 (2° piano), Locarno",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64588"
+              "label": "Mario's Christmas charity market",
+              "detail": "Via Lavizzari 10, Bellinzona",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64830"
             },
             {
-              "label": "Pieces of Mind - Martina Varini Exhibition",
-              "detail": "Casa comunale, Bioggio",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64938"
+              "label": "Learning AI through Play: A Lab for Kids and Parents",
+              "detail": "Suglio Business Center, Manno",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64762"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "265",
+          "value": "255",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -335,69 +335,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Gemeinsam auf der Piste",
-              "detail": "Piazza Girasole, Massagno",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64994"
+              "label": "39. Castellinaria – Festival des jungen Kinos",
+              "detail": "Mercato Coperto, Bellinzona",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64838"
             },
             {
-              "label": "L 'épistolière",
-              "detail": "Centro Elisarion, Minusio",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/63970"
+              "label": "DER MERCANTICO KEHRT NACH BELLINZONA ZURÜCK",
+              "detail": "Piazza Giusppe Buffi, Bellinzona",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64982"
             },
             {
-              "label": "BLA Biennale - Die Breitengrade der Kunst",
-              "detail": "Villa Santa Lucia, Lugano",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/63945"
+              "label": "Frauen aus dem Zentrum treffen die Bevölkerung",
+              "detail": "Bellinzona",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64911"
             },
             {
-              "label": "Tessin. Seitliche Blicke",
-              "detail": "SpazioReale, Bellinzona",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64633"
+              "label": "Nutzloser Tag",
+              "detail": "Negozio inUtile, Lugano",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64889"
             },
             {
-              "label": "Erzählnacht 2026. Stimmen",
-              "detail": "Biblioteca cantonale, Lugano",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64464"
+              "label": "54.große Mineralien- und Fossilienausstellung",
+              "detail": "Padiglione delle feste, Lugano",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64278"
             },
             {
-              "label": "Meisterbrauer zur Feier",
-              "detail": "Birrificio RudBir, Gordola",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64888"
+              "label": "Event Handwerker 2026",
+              "detail": "Asilo Ciani, Lugano",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64912"
             },
             {
-              "label": "Die Poesie des zwanzigsten Jahrhunderts kommentieren",
-              "detail": "Biblioteca cantonale, Lugano",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64697"
+              "label": "Sonderveranstaltung für Familien",
+              "detail": "Museo in erba, Lugano",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64855"
             },
             {
-              "label": "Traumpferd",
-              "detail": "Rialto il Cinema, Muralto",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64832"
+              "label": "Der wohltätige Solidaritätsmarkt zu Weihnachten",
+              "detail": "Via Lavizzari 10, Bellinzona",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64988"
             },
             {
-              "label": "Die kantonale Verwaltung im digitalen Zeitalter",
-              "detail": "Palexpo FEVI, Sala 2 (2° piano), Locarno",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64588"
+              "label": "Marios Weihnachts-Wohltätigkeitsmarkt",
+              "detail": "Via Lavizzari 10, Bellinzona",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64830"
             },
             {
-              "label": "Pieces of Mind - Ausstellung Martina Varini",
-              "detail": "Casa comunale, Bioggio",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64938"
+              "label": "KI spielerisch lernen: Ein Labor für Kinder und Eltern",
+              "detail": "Suglio Business Center, Manno",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64762"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "265",
+          "value": "255",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -486,69 +486,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Ensemble sur les pistes",
-              "detail": "Piazza Girasole, Massagno",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64994"
+              "label": "39e Castellinaria - Festival du jeune cinéma",
+              "detail": "Mercato Coperto, Bellinzona",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64838"
             },
             {
-              "label": "L’épistolière",
-              "detail": "Centro Elisarion, Minusio",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/63970"
+              "label": "LE MERCANTIQUE REVIENT À BELLINZONE",
+              "detail": "Piazza Giusppe Buffi, Bellinzona",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64982"
             },
             {
-              "label": "BLA Biennale - Les latitudes de l'art",
-              "detail": "Villa Santa Lucia, Lugano",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/63945"
+              "label": "Les femmes du Centre rencontrent la population",
+              "detail": "Bellinzona",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64911"
             },
             {
-              "label": "Tessin. Regards latéraux",
-              "detail": "SpazioReale, Bellinzona",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64633"
+              "label": "Journée inutile",
+              "detail": "Negozio inUtile, Lugano",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64889"
             },
             {
-              "label": "Nuit du conte 2026. Voix",
-              "detail": "Biblioteca cantonale, Lugano",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64464"
+              "label": "54èmegrande exposition minéraux et fossiles",
+              "detail": "Padiglione delle feste, Lugano",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64278"
             },
             {
-              "label": "Maîtres brasseurs en célébration",
-              "detail": "Birrificio RudBir, Gordola",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64888"
+              "label": "Événement Artisan 2026",
+              "detail": "Asilo Ciani, Lugano",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64912"
             },
             {
-              "label": "Commenter la poésie du XXe siècle",
-              "detail": "Biblioteca cantonale, Lugano",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64697"
+              "label": "Événement spécial pour les familles",
+              "detail": "Museo in erba, Lugano",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64855"
             },
             {
-              "label": "Cheval de rêve",
-              "detail": "Rialto il Cinema, Muralto",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64832"
+              "label": "Le marché solidaire bénéfique de Noël",
+              "detail": "Via Lavizzari 10, Bellinzona",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64988"
             },
             {
-              "label": "L'administration cantonale à l'ère numérique",
-              "detail": "Palexpo FEVI, Sala 2 (2° piano), Locarno",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64588"
+              "label": "Le marché caritatif de Noël de Mario",
+              "detail": "Via Lavizzari 10, Bellinzona",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64830"
             },
             {
-              "label": "Pieces of Mind - Afficher Martina Varini",
-              "detail": "Casa comunale, Bioggio",
-              "date": "2026-11-13",
-              "url": "https://www.tio.ch/agenda/day/20261113/64938"
+              "label": "Apprendre l'IA par le jeu : un laboratoire pour enfants et parents",
+              "detail": "Suglio Business Center, Manno",
+              "date": "2026-11-14",
+              "url": "https://www.tio.ch/agenda/day/20261114/64762"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "8e80802007f2f84a8b467a4f31c4ff6ca89a7115e3cc82074ede8dbfa5b5cb6c",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "d53121f9b6bed84b5f4f8f07b3390ee5aedaec01be16c090b0d649c1cc30164e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T14:41:08.896Z",
+      "updatedAt": "2026-11-13T04:23:25.174Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "345",
+          "value": "339",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,68 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Swiss Robotics Day 2026",
-              "detail": "StageOne Event & Convention Hall",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/swiss-robotics-day-2026_AnyLk2f"
+              "label": "Kerzenziehen 2026",
+              "detail": "Kloten",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-2026-1/"
             },
             {
-              "label": "Agenti in movimento, workshop per ragazzi ed evento per genitori e accompagnatori",
-              "detail": "Amthaus",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/agents-on-the-move-workshop-for-boys-and-parents-event-for-caregivers/"
+              "label": "Altdorfer Chilbi",
+              "detail": "Winkel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/altdorfer-chilbi/"
             },
             {
-              "label": "Mütter- und Väterberatung",
-              "detail": "Bibliothek, Russikon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/fehraltorf/muetter-und-vaeterberatung_AWdT39u"
+              "label": "BASAR organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/basar-organisiert-vom-frauenverein/"
             },
             {
-              "label": "Ökumenischer Frauentreff - Darmgesundheit und darmfreundliche Ernährung",
-              "detail": "Evang.-ref. Kirchgemeindehaus, Dietikon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/oekumenischer-frauentreff-darmgesundheit-und-darmfreundliche-ernaehrung_AJugDN4"
+              "label": "Deutsch, Vorbereitung zur Einbürgerung",
+              "detail": "Dübendorf",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/deutsch-vorbereitung-zur-einbuergerung-4/"
             },
             {
-              "label": "«Gemeinsam statt einsam» - Mittagstisch",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/restaurants/alle/effretikon/gemeinsam-statt-einsam-mittagstisch_AqXuLRJ"
+              "label": "Hier entdeckst du eine Welt, die kaum jemand kennt",
+              "detail": "Züripilz",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/events/nature-man-animal/zuerich/life-is-raging-down-below-the-mushroom-tour-that-shows-zurich-differently_A5ZnKXu"
             },
             {
-              "label": "Fritigs-Jass Pro Senectute Illnau-Effretikon",
-              "detail": "Restaurant Villa Barone, Illnau-Effretikon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/effretikon/jass-gruppen_AMyxaA5"
+              "label": "Repair-Café Kloten",
+              "detail": "Hegnerhof, Kloten",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kloten/repair-cafe-kloten_AVqtXuX"
             },
             {
-              "label": "Lernstube On Tour",
-              "detail": "Interkulturelles Forum Pfäffikon, Pfäffikon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/pfaeffikon-zh/lernstube-on-tour_AukNdbc"
-            },
-            {
-              "label": "Friday Pyjama Party",
-              "detail": "Schlieren",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/friday-pyjama-party/"
-            },
-            {
-              "label": "Pigiama party del venerdì",
-              "detail": "Schlieren",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/pigiama-party-del-venerdi/"
-            },
-            {
-              "label": "Schule machen – Das Bildungswesen im KI-Zeitalter",
+              "label": "Expat Expo Zurich 2026",
               "detail": "Zurich, Zürich",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schule-machen-das-bildungswesen-im-ki-zeitalter/"
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/expat-expo-zurich-2026/"
+            },
+            {
+              "label": "Martinimärt Rümlang 14.11.2026",
+              "detail": "Rümlang",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/martinimaert-ruemlang-14112026/"
+            },
+            {
+              "label": "Graubünden in Zürich – Bündner Manuskripte in der ZB",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/graubuenden-in-zuerich-buendner-manuskripte-in-der-zb/"
+            },
+            {
+              "label": "Preview «Elektra»",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/preview-elektra/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -122,7 +123,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "ZH",
@@ -132,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "345",
+          "value": "339",
           "note": "from the site’s events calendar"
         }
       ],
@@ -143,68 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Swiss Robotics Day 2026",
-              "detail": "StageOne Event & Convention Hall",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/swiss-robotics-day-2026_AnyLk2f"
+              "label": "Kerzenziehen 2026",
+              "detail": "Kloten",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-2026-1/"
             },
             {
-              "label": "Agents on the move, workshop for boys and parents' event for caregivers",
-              "detail": "Amthaus",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/agents-on-the-move-workshop-for-boys-and-parents-event-for-caregivers/"
+              "label": "Altdorfer Chilbi",
+              "detail": "Winkel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/altdorfer-chilbi/"
             },
             {
-              "label": "Mütter- und Väterberatung",
-              "detail": "Bibliothek, Russikon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/fehraltorf/muetter-und-vaeterberatung_AWdT39u"
+              "label": "BASAR organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/basar-organisiert-vom-frauenverein/"
             },
             {
-              "label": "Ökumenischer Frauentreff - Darmgesundheit und darmfreundliche Ernährung",
-              "detail": "Evang.-ref. Kirchgemeindehaus, Dietikon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/oekumenischer-frauentreff-darmgesundheit-und-darmfreundliche-ernaehrung_AJugDN4"
+              "label": "Deutsch, Vorbereitung zur Einbürgerung",
+              "detail": "Dübendorf",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/deutsch-vorbereitung-zur-einbuergerung-4/"
             },
             {
-              "label": "«Gemeinsam statt einsam» - Mittagstisch",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/restaurants/alle/effretikon/gemeinsam-statt-einsam-mittagstisch_AqXuLRJ"
+              "label": "Life is raging down below: The mushroom tour that shows Zurich differently",
+              "detail": "Züripilz",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/events/nature-man-animal/zuerich/life-is-raging-down-below-the-mushroom-tour-that-shows-zurich-differently_A5ZnKXu"
             },
             {
-              "label": "Fritigs-Jass Pro Senectute Illnau-Effretikon",
-              "detail": "Restaurant Villa Barone, Illnau-Effretikon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/effretikon/jass-gruppen_AMyxaA5"
+              "label": "Repair-Café Kloten",
+              "detail": "Hegnerhof, Kloten",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kloten/repair-cafe-kloten_AVqtXuX"
             },
             {
-              "label": "Lernstube On Tour",
-              "detail": "Interkulturelles Forum Pfäffikon, Pfäffikon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/pfaeffikon-zh/lernstube-on-tour_AukNdbc"
-            },
-            {
-              "label": "Friday Pyjama Party",
-              "detail": "Schlieren",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/friday-pyjama-party/"
-            },
-            {
-              "label": "Friday Pajama Party",
-              "detail": "Schlieren",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/pigiama-party-del-venerdi/"
-            },
-            {
-              "label": "Schule machen – Das Bildungswesen im KI-Zeitalter",
+              "label": "Expat Expo Zurich 2026",
               "detail": "Zurich, Zürich",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schule-machen-das-bildungswesen-im-ki-zeitalter/"
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/expat-expo-zurich-2026/"
+            },
+            {
+              "label": "Martinimärt Rümlang 14.11.2026",
+              "detail": "Rümlang",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/martinimaert-ruemlang-14112026/"
+            },
+            {
+              "label": "Graubünden in Zürich – Bündner Manuskripte in der ZB",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/graubuenden-in-zuerich-buendner-manuskripte-in-der-zb/"
+            },
+            {
+              "label": "Preview «Elektra»",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/preview-elektra/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -232,7 +234,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "ZH",
@@ -242,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "345",
+          "value": "339",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -253,68 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Swiss Robotics Day 2026",
-              "detail": "StageOne Event & Convention Hall",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/swiss-robotics-day-2026_AnyLk2f"
+              "label": "Kerzenziehen 2026",
+              "detail": "Kloten",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-2026-1/"
             },
             {
-              "label": "Agenten auf dem Weg, Workshop für Jungs und Elternanlass für Bezugspersonen",
-              "detail": "Amthaus",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/agents-on-the-move-workshop-for-boys-and-parents-event-for-caregivers/"
+              "label": "Altdorfer Chilbi",
+              "detail": "Winkel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/altdorfer-chilbi/"
             },
             {
-              "label": "Mütter- und Väterberatung",
-              "detail": "Bibliothek, Russikon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/fehraltorf/muetter-und-vaeterberatung_AWdT39u"
+              "label": "BASAR organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/basar-organisiert-vom-frauenverein/"
             },
             {
-              "label": "Ökumenischer Frauentreff - Darmgesundheit und darmfreundliche Ernährung",
-              "detail": "Evang.-ref. Kirchgemeindehaus, Dietikon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/oekumenischer-frauentreff-darmgesundheit-und-darmfreundliche-ernaehrung_AJugDN4"
+              "label": "Deutsch, Vorbereitung zur Einbürgerung",
+              "detail": "Dübendorf",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/deutsch-vorbereitung-zur-einbuergerung-4/"
             },
             {
-              "label": "«Gemeinsam statt einsam» - Mittagstisch",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/restaurants/alle/effretikon/gemeinsam-statt-einsam-mittagstisch_AqXuLRJ"
+              "label": "Hier entdeckst du eine Welt, die kaum jemand kennt",
+              "detail": "Züripilz",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/events/nature-man-animal/zuerich/life-is-raging-down-below-the-mushroom-tour-that-shows-zurich-differently_A5ZnKXu"
             },
             {
-              "label": "Fritigs-Jass Pro Senectute Illnau-Effretikon",
-              "detail": "Restaurant Villa Barone, Illnau-Effretikon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/effretikon/jass-gruppen_AMyxaA5"
+              "label": "Repair-Café Kloten",
+              "detail": "Hegnerhof, Kloten",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kloten/repair-cafe-kloten_AVqtXuX"
             },
             {
-              "label": "Lernstube auf Tour",
-              "detail": "Interkulturelles Forum Pfäffikon, Pfäffikon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/pfaeffikon-zh/lernstube-on-tour_AukNdbc"
-            },
-            {
-              "label": "Friday Pyjama Party",
-              "detail": "Schlieren",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/friday-pyjama-party/"
-            },
-            {
-              "label": "Friday Pyjama Party",
-              "detail": "Schlieren",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/pigiama-party-del-venerdi/"
-            },
-            {
-              "label": "Schule machen – Das Bildungswesen im KI-Zeitalter",
+              "label": "Expat Expo Zurich 2026",
               "detail": "Zurich, Zürich",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schule-machen-das-bildungswesen-im-ki-zeitalter/"
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/expat-expo-zurich-2026/"
+            },
+            {
+              "label": "Martinimärt Rümlang 14.11.2026",
+              "detail": "Rümlang",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/martinimaert-ruemlang-14112026/"
+            },
+            {
+              "label": "Graubünden in Zürich – Bündner Manuskripte in der ZB",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/graubuenden-in-zuerich-buendner-manuskripte-in-der-zb/"
+            },
+            {
+              "label": "Preview «Elektra»",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/preview-elektra/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -342,7 +345,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "ZH",
@@ -352,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "345",
+          "value": "339",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -363,68 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Swiss Robotics Day 2026",
-              "detail": "StageOne Event & Convention Hall",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/swiss-robotics-day-2026_AnyLk2f"
+              "label": "Kerzenziehen 2026",
+              "detail": "Kloten",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-2026-1/"
             },
             {
-              "label": "Agents sur le chemin, atelier pour les garçons et événement parental pour les personnes de référence",
-              "detail": "Amthaus",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/agents-on-the-move-workshop-for-boys-and-parents-event-for-caregivers/"
+              "label": "Altdorfer Chilbi",
+              "detail": "Winkel",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/altdorfer-chilbi/"
             },
             {
-              "label": "Mütter- und Väterberatung",
-              "detail": "Bibliothek, Russikon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/fehraltorf/muetter-und-vaeterberatung_AWdT39u"
+              "label": "BASAR organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/basar-organisiert-vom-frauenverein/"
             },
             {
-              "label": "Ökumenischer Frauentreff - Darmgesundheit und darmfreundliche Ernährung",
-              "detail": "Evang.-ref. Kirchgemeindehaus, Dietikon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/oekumenischer-frauentreff-darmgesundheit-und-darmfreundliche-ernaehrung_AJugDN4"
+              "label": "Deutsch, Vorbereitung zur Einbürgerung",
+              "detail": "Dübendorf",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/deutsch-vorbereitung-zur-einbuergerung-4/"
             },
             {
-              "label": "«Gemeinsam statt einsam» - Mittagstisch",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/restaurants/alle/effretikon/gemeinsam-statt-einsam-mittagstisch_AqXuLRJ"
+              "label": "Hier entdeckst du eine Welt, die kaum jemand kennt",
+              "detail": "Züripilz",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/events/nature-man-animal/zuerich/life-is-raging-down-below-the-mushroom-tour-that-shows-zurich-differently_A5ZnKXu"
             },
             {
-              "label": "Fritigs-Jass Pro Senectute Illnau-Effretikon",
-              "detail": "Restaurant Villa Barone, Illnau-Effretikon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/effretikon/jass-gruppen_AMyxaA5"
+              "label": "Repair-Café Kloten",
+              "detail": "Hegnerhof, Kloten",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kloten/repair-cafe-kloten_AVqtXuX"
             },
             {
-              "label": "Lernstube en tournée",
-              "detail": "Interkulturelles Forum Pfäffikon, Pfäffikon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/pfaeffikon-zh/lernstube-on-tour_AukNdbc"
-            },
-            {
-              "label": "Friday Pyjama Party",
-              "detail": "Schlieren",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/friday-pyjama-party/"
-            },
-            {
-              "label": "Soirée pyjama du vendredi",
-              "detail": "Schlieren",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/pigiama-party-del-venerdi/"
-            },
-            {
-              "label": "Schule machen – Das Bildungswesen im KI-Zeitalter",
+              "label": "Expat Expo Zurich 2026",
               "detail": "Zurich, Zürich",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schule-machen-das-bildungswesen-im-ki-zeitalter/"
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/expat-expo-zurich-2026/"
+            },
+            {
+              "label": "Martinimärt Rümlang 14.11.2026",
+              "detail": "Rümlang",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/martinimaert-ruemlang-14112026/"
+            },
+            {
+              "label": "Graubünden in Zürich – Bündner Manuskripte in der ZB",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/graubuenden-in-zuerich-buendner-manuskripte-in-der-zb/"
+            },
+            {
+              "label": "Preview «Elektra»",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/preview-elektra/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -452,7 +456,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }

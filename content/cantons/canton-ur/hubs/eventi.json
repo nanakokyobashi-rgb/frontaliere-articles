@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "04d09377611e00eb59f42f1472c42c9c80ba62faf840b73dec89f564a0d3d612",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "9ccc1d23e7fb0768147713c24c86da8be0dec8b777b87eadfb6ce7d0265638e9",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T14:41:08.896Z",
+      "updatedAt": "2026-11-13T04:23:25.174Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "13",
+          "value": "12",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,18 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Gabirano",
-              "detail": "theater(uri), Altdorf (UR)",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gabirano/"
-            },
-            {
-              "label": "Oldies-Disco",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oldies-disco-1/"
-            },
             {
               "label": "Altdorfer Beenälisuppä",
               "detail": "Altdorf",
@@ -91,11 +79,23 @@
               "detail": "Altdorf, Altdorf (UR)",
               "date": "2026-11-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/zw-heute-und-morgen/"
+            },
+            {
+              "label": "TriffAltdorf Mittagstreff: Restaurant Pizzeria Wilhelm Tell",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-24",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-mittagstreff-restaurant-pizzeria-wilhelm-tell/"
+            },
+            {
+              "label": "TriffAltdorf Lesetreff",
+              "detail": "TriffAltdorf, Altdorf (UR)",
+              "date": "2026-11-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesetreff/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "UR",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "13",
+          "value": "12",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,18 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Gabirano",
-              "detail": "theater(uri), Altdorf (UR)",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gabirano/"
-            },
-            {
-              "label": "Oldies-Disco",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oldies-disco-1/"
-            },
             {
               "label": "Altdorfer Beenälisuppä",
               "detail": "Altdorf",
@@ -196,11 +184,23 @@
               "detail": "Altdorf, Altdorf (UR)",
               "date": "2026-11-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/zw-heute-und-morgen/"
+            },
+            {
+              "label": "TriffAltdorf Mittagstreff: Restaurant Pizzeria Wilhelm Tell",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-24",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-mittagstreff-restaurant-pizzeria-wilhelm-tell/"
+            },
+            {
+              "label": "TriffAltdorf Lesetreff",
+              "detail": "TriffAltdorf, Altdorf (UR)",
+              "date": "2026-11-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesetreff/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "UR",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "13",
+          "value": "12",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,18 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Gabirano",
-              "detail": "theater(uri), Altdorf (UR)",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gabirano/"
-            },
-            {
-              "label": "Oldies-Disco",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oldies-disco-1/"
-            },
             {
               "label": "Altdorfer Beenälisuppä",
               "detail": "Altdorf",
@@ -301,11 +289,23 @@
               "detail": "Altdorf, Altdorf (UR)",
               "date": "2026-11-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/zw-heute-und-morgen/"
+            },
+            {
+              "label": "TriffAltdorf Mittagstreff: Restaurant Pizzeria Wilhelm Tell",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-24",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-mittagstreff-restaurant-pizzeria-wilhelm-tell/"
+            },
+            {
+              "label": "TriffAltdorf Lesetreff",
+              "detail": "TriffAltdorf, Altdorf (UR)",
+              "date": "2026-11-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesetreff/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "UR",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "13",
+          "value": "12",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,18 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Gabirano",
-              "detail": "theater(uri), Altdorf (UR)",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gabirano/"
-            },
-            {
-              "label": "Oldies-Disco",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oldies-disco-1/"
-            },
             {
               "label": "Altdorfer Beenälisuppä",
               "detail": "Altdorf",
@@ -406,11 +394,23 @@
               "detail": "Altdorf, Altdorf (UR)",
               "date": "2026-11-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/zw-heute-und-morgen/"
+            },
+            {
+              "label": "TriffAltdorf Mittagstreff: Restaurant Pizzeria Wilhelm Tell",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-11-24",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-mittagstreff-restaurant-pizzeria-wilhelm-tell/"
+            },
+            {
+              "label": "TriffAltdorf Lesetreff",
+              "detail": "TriffAltdorf, Altdorf (UR)",
+              "date": "2026-11-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesetreff/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }

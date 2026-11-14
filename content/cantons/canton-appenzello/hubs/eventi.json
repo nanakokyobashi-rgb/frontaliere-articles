@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "77bb655c292382b26f3378ee97d751c6ffe8dc16666044d3ef235a5a6f65ed39",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "9156c7653578ed861dce27face6b310c891f7635d946cbb8ae4925782b0b3ce4",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T14:41:08.896Z",
+      "updatedAt": "2026-11-13T04:23:25.174Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "11",
+          "value": "12",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,30 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Fiera \"A26",
-              "detail": "Appenzello",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
-            },
-            {
-              "label": "J. S. Bach: BWV 226 \"Lo Spirito aiuta\" e BWV 229 \"Vieni, Gesù, vieni\".",
-              "detail": "Evang.-ref. Kirche Trogen, Trogen",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/trogen/j-s-bach-bwv-226-der-geist-hilft-und-bwv-229-komm-jesu-komm_AAmxSs7"
-            },
-            {
-              "label": "Simon Enzler",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/simon-enzler-1/"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel — in corso, ultimo giorno: 9 dicembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
             {
               "label": "Evento di intrattenimento Saumchörli Herisau",
               "detail": "Casino Herisau, Herisau",
@@ -67,6 +43,18 @@
               "detail": "Assel-Keller, Schönengrund",
               "date": "2026-11-14",
               "url": "https://www.guidle.com/it/events/music/schoenengrund/todisco-und-pupato_A79PrWc"
+            },
+            {
+              "label": "Fiera \"A26",
+              "detail": "Appenzello — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — in corso, ultimo giorno: 9 dicembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Ein Abend mit Joachim B. Schmidt",
@@ -91,11 +79,23 @@
               "detail": "Kunsthalle Appenzell, Appenzell",
               "date": "2026-11-22",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/preistraegerkonzert-des-ii-kammermusikwettbewerbs-paul-juon_AZcYYpi"
+            },
+            {
+              "label": "Vita! - Una serata incerta con Jane Mumford",
+              "detail": "Trogen",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/vita-una-serata-incerta-con-jane-mumford/"
+            },
+            {
+              "label": "Benefizkonzert apacella",
+              "detail": "Schulhaus Gringel, Appenzell",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/benfizkonzert-apacella/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "11",
+          "value": "12",
           "note": "from the site’s events calendar"
         }
       ],
@@ -143,30 +143,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Trade fair \"A26\"",
-              "detail": "Appenzello",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
-            },
-            {
-              "label": "J. S. Bach: BWV 226 \"The Spirit helps\" and BWV 229 \"Come, Jesus, come\"",
-              "detail": "Evang.-ref. Kirche Trogen, Trogen",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/trogen/j-s-bach-bwv-226-der-geist-hilft-und-bwv-229-komm-jesu-komm_AAmxSs7"
-            },
-            {
-              "label": "Simon Enzler",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/simon-enzler-1/"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel — ongoing, last day: 9 December 2026",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
             {
               "label": "Entertainment event Saumchörli Herisau",
               "detail": "Casino Herisau, Herisau",
@@ -178,6 +154,18 @@
               "detail": "Assel-Keller, Schönengrund",
               "date": "2026-11-14",
               "url": "https://www.guidle.com/it/events/music/schoenengrund/todisco-und-pupato_A79PrWc"
+            },
+            {
+              "label": "Trade fair \"A26\"",
+              "detail": "Appenzello — ongoing, last day: 15 November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — ongoing, last day: 9 December 2026",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Ein Abend mit Joachim B. Schmidt",
@@ -202,11 +190,23 @@
               "detail": "Kunsthalle Appenzell, Appenzell",
               "date": "2026-11-22",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/preistraegerkonzert-des-ii-kammermusikwettbewerbs-paul-juon_AZcYYpi"
+            },
+            {
+              "label": "Live! - An uncertain evening with Jane Mumford",
+              "detail": "Trogen",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/vita-una-serata-incerta-con-jane-mumford/"
+            },
+            {
+              "label": "Benefizkonzert apacella",
+              "detail": "Schulhaus Gringel, Appenzell",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/benfizkonzert-apacella/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "11",
+          "value": "12",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -254,30 +254,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Gewerbemesse «A26»",
-              "detail": "Appenzello",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
-            },
-            {
-              "label": "J. S. Bach: BWV 226 «Der Geist hilft» und BWV 229 «Komm, Jesu, komm»",
-              "detail": "Evang.-ref. Kirche Trogen, Trogen",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/trogen/j-s-bach-bwv-226-der-geist-hilft-und-bwv-229-komm-jesu-komm_AAmxSs7"
-            },
-            {
-              "label": "Simon Enzler",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/simon-enzler-1/"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel — läuft, letzter Tag: 9. Dezember 2026",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
             {
               "label": "Unterhaltungsanlass Saumchörli Herisau",
               "detail": "Casino Herisau, Herisau",
@@ -289,6 +265,18 @@
               "detail": "Assel-Keller, Schönengrund",
               "date": "2026-11-14",
               "url": "https://www.guidle.com/it/events/music/schoenengrund/todisco-und-pupato_A79PrWc"
+            },
+            {
+              "label": "Gewerbemesse «A26»",
+              "detail": "Appenzello — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — läuft, letzter Tag: 9. Dezember 2026",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Ein Abend mit Joachim B. Schmidt",
@@ -313,11 +301,23 @@
               "detail": "Kunsthalle Appenzell, Appenzell",
               "date": "2026-11-22",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/preistraegerkonzert-des-ii-kammermusikwettbewerbs-paul-juon_AZcYYpi"
+            },
+            {
+              "label": "Leben! – Ein unsicherer Abend mit Jane Mumford",
+              "detail": "Trogen",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/vita-una-serata-incerta-con-jane-mumford/"
+            },
+            {
+              "label": "Benefizkonzert apacella",
+              "detail": "Schulhaus Gringel, Appenzell",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/benfizkonzert-apacella/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "11",
+          "value": "12",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -365,30 +365,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Foire commerciale \"A26",
-              "detail": "Appenzello",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
-            },
-            {
-              "label": "J. S. Bach : BWV 226 \"Der Geist hilft\" et BWV 229 \"Komm, Jesu, komm\" (Viens, Jésus, viens)",
-              "detail": "Evang.-ref. Kirche Trogen, Trogen",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/trogen/j-s-bach-bwv-226-der-geist-hilft-und-bwv-229-komm-jesu-komm_AAmxSs7"
-            },
-            {
-              "label": "Simon Enzler",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/simon-enzler-1/"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel — en cours, dernier jour : 9 décembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
             {
               "label": "Manifestation de divertissement Saumchörli Herisau",
               "detail": "Casino Herisau, Herisau",
@@ -400,6 +376,18 @@
               "detail": "Assel-Keller, Schönengrund",
               "date": "2026-11-14",
               "url": "https://www.guidle.com/it/events/music/schoenengrund/todisco-und-pupato_A79PrWc"
+            },
+            {
+              "label": "Foire commerciale \"A26",
+              "detail": "Appenzello — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — en cours, dernier jour : 9 décembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Ein Abend mit Joachim B. Schmidt",
@@ -424,11 +412,23 @@
               "detail": "Kunsthalle Appenzell, Appenzell",
               "date": "2026-11-22",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/preistraegerkonzert-des-ii-kammermusikwettbewerbs-paul-juon_AZcYYpi"
+            },
+            {
+              "label": "La vie ! - Une soirée incertaine avec Jane Mumford",
+              "detail": "Trogen",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/vita-una-serata-incerta-con-jane-mumford/"
+            },
+            {
+              "label": "Benefizkonzert apacella",
+              "detail": "Schulhaus Gringel, Appenzell",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/benfizkonzert-apacella/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }

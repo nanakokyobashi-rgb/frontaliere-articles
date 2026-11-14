@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-11-13T16:35:44.669Z",
-  "contentHash": "74a548904e48df589c88baf3cd8d11652dfea190c113e7dd8f5aaf7b8a6666ec",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "140298437e3a29221123e00d16b3c8b1c6ada673b7a692bb35d9bffaf09c56a5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -16,11 +16,6 @@
       "id": "farmacie-di-turno",
       "updatedAt": "2026-11-13T02:53:12.870Z",
       "keyFacts": 0
-    },
-    {
-      "id": "aste-targhe",
-      "updatedAt": "2026-11-12T23:38:44.682Z",
-      "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
@@ -40,11 +35,6 @@
           "value": "740,20 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
-        },
-        {
-          "label": "Aste di targhe in corso",
-          "value": "2",
-          "note": "offerta mediana 8550 CHF"
         }
       ],
       "dataBlocks": [
@@ -74,26 +64,6 @@
           "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
           "items": [
             {
-              "label": "Martinoli",
-              "detail": "Dongio, Biasca e Valli",
-              "date": "2026-11-06T17:00:00.000Z"
-            },
-            {
-              "label": "Camorino",
-              "detail": "Camorino, Bellinzonese",
-              "date": "2026-11-06T17:30:00.000Z"
-            },
-            {
-              "label": "Farmacia Stella",
-              "detail": "Lugano, Luganese",
-              "date": "2026-11-07T07:00:00.000Z"
-            },
-            {
-              "label": "San Nicolao",
-              "detail": "Novazzano, Mendrisiotto",
-              "date": "2026-11-10T07:00:00.000Z"
-            },
-            {
               "label": "Pharmantica",
               "detail": "Biasca, Biasca e Valli",
               "date": "2026-11-13T17:00:00.000Z"
@@ -102,35 +72,31 @@
               "label": "S. Gottardo",
               "detail": "Bellinzona, Bellinzonese",
               "date": "2026-11-13T17:30:00.000Z"
+            },
+            {
+              "label": "Montalbano",
+              "detail": "San Pietro di Stabio, Mendrisiotto",
+              "date": "2026-11-14T07:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Sun Store Lugano Beltramina",
+              "detail": "Lugano, Luganese",
+              "date": "2026-11-14T07:00:00.000Z"
+            },
+            {
+              "label": "Moesa",
+              "detail": "Castione, Bellinzonese",
+              "date": "2026-11-16T17:30:00.000Z"
+            },
+            {
+              "label": "Zanini SA",
+              "detail": "Stabio, Mendrisiotto",
+              "date": "2026-11-17T07:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
           "updatedAt": "2026-11-13T02:53:12.870Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Aste delle targhe",
-          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
-          "items": [
-            {
-              "label": "TI735",
-              "value": "16.200 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-15T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1543"
-            },
-            {
-              "label": "TI12396",
-              "value": "900 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-15T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1544"
-            }
-          ],
-          "sourceName": "Ufficio cantonale della circolazione",
-          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-12T23:38:44.682Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -256,7 +222,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-11-13T16:35:44.669Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "TI",
@@ -269,11 +235,6 @@
           "value": "740.20 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
-        },
-        {
-          "label": "Plate auctions running",
-          "value": "2",
-          "note": "typical bid 8,550 CHF"
         }
       ],
       "dataBlocks": [
@@ -303,26 +264,6 @@
           "description": "Upcoming duty shifts published by the canton’s official service.",
           "items": [
             {
-              "label": "Martinoli",
-              "detail": "Dongio, Biasca e Valli",
-              "date": "2026-11-06T17:00:00.000Z"
-            },
-            {
-              "label": "Camorino",
-              "detail": "Camorino, Bellinzonese",
-              "date": "2026-11-06T17:30:00.000Z"
-            },
-            {
-              "label": "Farmacia Stella",
-              "detail": "Lugano, Luganese",
-              "date": "2026-11-07T07:00:00.000Z"
-            },
-            {
-              "label": "San Nicolao",
-              "detail": "Novazzano, Mendrisiotto",
-              "date": "2026-11-10T07:00:00.000Z"
-            },
-            {
               "label": "Pharmantica",
               "detail": "Biasca, Biasca e Valli",
               "date": "2026-11-13T17:00:00.000Z"
@@ -331,35 +272,31 @@
               "label": "S. Gottardo",
               "detail": "Bellinzona, Bellinzonese",
               "date": "2026-11-13T17:30:00.000Z"
+            },
+            {
+              "label": "Montalbano",
+              "detail": "San Pietro di Stabio, Mendrisiotto",
+              "date": "2026-11-14T07:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Sun Store Lugano Beltramina",
+              "detail": "Lugano, Luganese",
+              "date": "2026-11-14T07:00:00.000Z"
+            },
+            {
+              "label": "Moesa",
+              "detail": "Castione, Bellinzonese",
+              "date": "2026-11-16T17:30:00.000Z"
+            },
+            {
+              "label": "Zanini SA",
+              "detail": "Stabio, Mendrisiotto",
+              "date": "2026-11-17T07:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
           "updatedAt": "2026-11-13T02:53:12.870Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Number plate auctions",
-          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
-          "items": [
-            {
-              "label": "TI735",
-              "value": "16,200 CHF",
-              "detail": "current bid",
-              "date": "2026-11-15T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1543"
-            },
-            {
-              "label": "TI12396",
-              "value": "900 CHF",
-              "detail": "current bid",
-              "date": "2026-11-15T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1544"
-            }
-          ],
-          "sourceName": "Cantonal road traffic office",
-          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-12T23:38:44.682Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -480,7 +417,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-11-13T16:35:44.669Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "TI",
@@ -493,11 +430,6 @@
           "value": "740.20 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
-        },
-        {
-          "label": "Laufende Kontrollschild-Auktionen",
-          "value": "2",
-          "note": "mittleres Gebot 8’550 CHF"
         }
       ],
       "dataBlocks": [
@@ -527,26 +459,6 @@
           "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
           "items": [
             {
-              "label": "Martinoli",
-              "detail": "Dongio, Biasca e Valli",
-              "date": "2026-11-06T17:00:00.000Z"
-            },
-            {
-              "label": "Camorino",
-              "detail": "Camorino, Bellinzonese",
-              "date": "2026-11-06T17:30:00.000Z"
-            },
-            {
-              "label": "Farmacia Stella",
-              "detail": "Lugano, Luganese",
-              "date": "2026-11-07T07:00:00.000Z"
-            },
-            {
-              "label": "San Nicolao",
-              "detail": "Novazzano, Mendrisiotto",
-              "date": "2026-11-10T07:00:00.000Z"
-            },
-            {
               "label": "Pharmantica",
               "detail": "Biasca, Biasca e Valli",
               "date": "2026-11-13T17:00:00.000Z"
@@ -555,35 +467,31 @@
               "label": "S. Gottardo",
               "detail": "Bellinzona, Bellinzonese",
               "date": "2026-11-13T17:30:00.000Z"
+            },
+            {
+              "label": "Montalbano",
+              "detail": "San Pietro di Stabio, Mendrisiotto",
+              "date": "2026-11-14T07:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Sun Store Lugano Beltramina",
+              "detail": "Lugano, Luganese",
+              "date": "2026-11-14T07:00:00.000Z"
+            },
+            {
+              "label": "Moesa",
+              "detail": "Castione, Bellinzonese",
+              "date": "2026-11-16T17:30:00.000Z"
+            },
+            {
+              "label": "Zanini SA",
+              "detail": "Stabio, Mendrisiotto",
+              "date": "2026-11-17T07:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
           "updatedAt": "2026-11-13T02:53:12.870Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Kontrollschild-Auktionen",
-          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
-          "items": [
-            {
-              "label": "TI735",
-              "value": "16’200 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-15T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1543"
-            },
-            {
-              "label": "TI12396",
-              "value": "900 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-15T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1544"
-            }
-          ],
-          "sourceName": "Kantonales Strassenverkehrsamt",
-          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-12T23:38:44.682Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -704,7 +612,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-11-13T16:35:44.669Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "TI",
@@ -717,11 +625,6 @@
           "value": "740,20 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
-        },
-        {
-          "label": "Enchères de plaques en cours",
-          "value": "2",
-          "note": "offre centrale 8 550 CHF"
         }
       ],
       "dataBlocks": [
@@ -751,26 +654,6 @@
           "description": "Prochaines gardes publiées par le service officiel du canton.",
           "items": [
             {
-              "label": "Martinoli",
-              "detail": "Dongio, Biasca e Valli",
-              "date": "2026-11-06T17:00:00.000Z"
-            },
-            {
-              "label": "Camorino",
-              "detail": "Camorino, Bellinzonese",
-              "date": "2026-11-06T17:30:00.000Z"
-            },
-            {
-              "label": "Farmacia Stella",
-              "detail": "Lugano, Luganese",
-              "date": "2026-11-07T07:00:00.000Z"
-            },
-            {
-              "label": "San Nicolao",
-              "detail": "Novazzano, Mendrisiotto",
-              "date": "2026-11-10T07:00:00.000Z"
-            },
-            {
               "label": "Pharmantica",
               "detail": "Biasca, Biasca e Valli",
               "date": "2026-11-13T17:00:00.000Z"
@@ -779,35 +662,31 @@
               "label": "S. Gottardo",
               "detail": "Bellinzona, Bellinzonese",
               "date": "2026-11-13T17:30:00.000Z"
+            },
+            {
+              "label": "Montalbano",
+              "detail": "San Pietro di Stabio, Mendrisiotto",
+              "date": "2026-11-14T07:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Sun Store Lugano Beltramina",
+              "detail": "Lugano, Luganese",
+              "date": "2026-11-14T07:00:00.000Z"
+            },
+            {
+              "label": "Moesa",
+              "detail": "Castione, Bellinzonese",
+              "date": "2026-11-16T17:30:00.000Z"
+            },
+            {
+              "label": "Zanini SA",
+              "detail": "Stabio, Mendrisiotto",
+              "date": "2026-11-17T07:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
           "updatedAt": "2026-11-13T02:53:12.870Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Enchères de plaques",
-          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
-          "items": [
-            {
-              "label": "TI735",
-              "value": "16 200 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-15T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1543"
-            },
-            {
-              "label": "TI12396",
-              "value": "900 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-15T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1544"
-            }
-          ],
-          "sourceName": "Office cantonal de la circulation",
-          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-12T23:38:44.682Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -925,7 +804,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-11-13T16:35:44.669Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }

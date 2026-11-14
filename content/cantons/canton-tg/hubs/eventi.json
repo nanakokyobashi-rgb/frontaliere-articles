@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "339d9abd8780eae36fe0d305239bd39f6322700994796c312b2b60efb512966d",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "5b9b147c94ffbe8ad3b35ccdb9632ede9f22649c09e3b79dd0fb4d10c3a115a7",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T14:41:08.896Z",
+      "updatedAt": "2026-11-13T04:23:25.174Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T14:02:55.343Z",
+      "updatedAt": "2026-11-12T22:54:56.926Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "57",
+          "value": "58",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,48 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Meise-Stamm",
-              "detail": "Arbon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/suche/arbon/meise-stamm_AdK4bit"
-            },
-            {
-              "label": "DE CHLY PRINZ SPRICHT SCHWEIZERDEUTSCH",
-              "detail": "Regionalbibliothek Weinfelden, Weinfelden",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-chly-prinz-spricht-schweizerdeutsch/"
-            },
-            {
-              "label": "Melody Pop/Rock Night",
-              "detail": "Seeparksaal, Arbon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/melody-poprock-night_AjWXxDL"
-            },
-            {
-              "label": "Riklin & Schaub - Lieder, die ins Augen gehen",
-              "detail": "Sport- und Kulturzentrum Dreispitz, Kreuzlingen",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/riklin-und-schaub-lieder-die-ins-augen-gehen_ABBRCCP"
-            },
-            {
-              "label": "Tacchi",
-              "detail": "Kulturrausch",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/buerglen-tg/tacchi_ApwiyPU"
-            },
-            {
-              "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen — in corso, ultimo giorno: 13 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — in corso, ultimo giorno: 24 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
             {
               "label": "RedWeek",
               "detail": "Röm.-kath. Kirche St. Johannes, Weinfelden",
@@ -96,11 +54,53 @@
               "detail": "Seeparksaal, Arbon",
               "date": "2026-11-14",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/retro-revolution_A3XeD99"
+            },
+            {
+              "label": "Final-Event von Frauenfeld ROCKT",
+              "detail": "KAFF Kulturlokal, Frauenfeld",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/final-event-von-frauenfeld-rockt_A4fXHwE"
+            },
+            {
+              "label": "Simon Enzler",
+              "detail": "Weinfelden",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/simon-enzler-25/"
+            },
+            {
+              "label": "Duo Simili Konzert",
+              "detail": "Löwen Arena, Sommeri",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sommeri/duo-simili-konzert_AJFhVkU"
+            },
+            {
+              "label": "Chili con Carne - Rockabilly scharf wie Chili",
+              "detail": "Heaven Music Club",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/populaer/balterswil/chili-con-carne-rockabilly-scharf-wie-chili_A5uPiUH"
+            },
+            {
+              "label": "Chili con Carne - Rockabilly scharf wie Chili",
+              "detail": "Heaven Music Club, Bichelsee-Balterswil",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/chili-con-carne-rockabilly-scharf-wie-chili/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — in corso, ultimo giorno: 24 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
+              "label": "Chinderfiir",
+              "detail": "Weinfelden",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chinderfiir-5/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -151,7 +151,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "TG",
@@ -161,7 +161,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "57",
+          "value": "58",
           "note": "from the site’s events calendar"
         }
       ],
@@ -171,48 +171,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Meise-Stamm",
-              "detail": "Arbon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/suche/arbon/meise-stamm_AdK4bit"
-            },
-            {
-              "label": "DE CHLY PRINZ SPRICHT SCHWEIZERDEUTSCH",
-              "detail": "Regionalbibliothek Weinfelden, Weinfelden",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-chly-prinz-spricht-schweizerdeutsch/"
-            },
-            {
-              "label": "Melody Pop/Rock Night",
-              "detail": "Seeparksaal, Arbon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/melody-poprock-night_AjWXxDL"
-            },
-            {
-              "label": "Riklin & Schaub - Lieder, die ins Augen gehen",
-              "detail": "Sport- und Kulturzentrum Dreispitz, Kreuzlingen",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/riklin-und-schaub-lieder-die-ins-augen-gehen_ABBRCCP"
-            },
-            {
-              "label": "Tacchi",
-              "detail": "Kulturrausch",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/buerglen-tg/tacchi_ApwiyPU"
-            },
-            {
-              "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen — ongoing, last day: 13 November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — ongoing, last day: 24 November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
             {
               "label": "RedWeek",
               "detail": "Röm.-kath. Kirche St. Johannes, Weinfelden",
@@ -230,11 +188,53 @@
               "detail": "Seeparksaal, Arbon",
               "date": "2026-11-14",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/retro-revolution_A3XeD99"
+            },
+            {
+              "label": "Final-Event von Frauenfeld ROCKT",
+              "detail": "KAFF Kulturlokal, Frauenfeld",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/final-event-von-frauenfeld-rockt_A4fXHwE"
+            },
+            {
+              "label": "Simon Enzler",
+              "detail": "Weinfelden",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/simon-enzler-25/"
+            },
+            {
+              "label": "Duo Simili Konzert",
+              "detail": "Löwen Arena, Sommeri",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sommeri/duo-simili-konzert_AJFhVkU"
+            },
+            {
+              "label": "Chili con Carne - Rockabilly scharf wie Chili",
+              "detail": "Heaven Music Club",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/populaer/balterswil/chili-con-carne-rockabilly-scharf-wie-chili_A5uPiUH"
+            },
+            {
+              "label": "Chili con Carne - Rockabilly scharf wie Chili",
+              "detail": "Heaven Music Club, Bichelsee-Balterswil",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/chili-con-carne-rockabilly-scharf-wie-chili/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — ongoing, last day: 24 November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
+              "label": "Chinderfiir",
+              "detail": "Weinfelden",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chinderfiir-5/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -257,7 +257,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +285,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "TG",
@@ -295,7 +295,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "57",
+          "value": "58",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -305,48 +305,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Meise-Stamm",
-              "detail": "Arbon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/suche/arbon/meise-stamm_AdK4bit"
-            },
-            {
-              "label": "DE CHLY PRINZ SPRICHT SCHWEIZERDEUTSCH",
-              "detail": "Regionalbibliothek Weinfelden, Weinfelden",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-chly-prinz-spricht-schweizerdeutsch/"
-            },
-            {
-              "label": "Melody Pop/Rock Night",
-              "detail": "Seeparksaal, Arbon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/melody-poprock-night_AjWXxDL"
-            },
-            {
-              "label": "Riklin & Schaub - Lieder, die ins Augen gehen",
-              "detail": "Sport- und Kulturzentrum Dreispitz, Kreuzlingen",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/riklin-und-schaub-lieder-die-ins-augen-gehen_ABBRCCP"
-            },
-            {
-              "label": "Tacchi",
-              "detail": "Kulturrausch",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/buerglen-tg/tacchi_ApwiyPU"
-            },
-            {
-              "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen — läuft, letzter Tag: 13. November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — läuft, letzter Tag: 24. November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
             {
               "label": "RedWeek",
               "detail": "Röm.-kath. Kirche St. Johannes, Weinfelden",
@@ -364,11 +322,53 @@
               "detail": "Seeparksaal, Arbon",
               "date": "2026-11-14",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/retro-revolution_A3XeD99"
+            },
+            {
+              "label": "Finale-Event von Frauenfeld ROCKT",
+              "detail": "KAFF Kulturlokal, Frauenfeld",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/final-event-von-frauenfeld-rockt_A4fXHwE"
+            },
+            {
+              "label": "Simon Enzler",
+              "detail": "Weinfelden",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/simon-enzler-25/"
+            },
+            {
+              "label": "Duo Simili Konzert",
+              "detail": "Löwen Arena, Sommeri",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sommeri/duo-simili-konzert_AJFhVkU"
+            },
+            {
+              "label": "Chili con Carne - Rockabilly scharf wie Chili",
+              "detail": "Heaven Music Club",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/populaer/balterswil/chili-con-carne-rockabilly-scharf-wie-chili_A5uPiUH"
+            },
+            {
+              "label": "Chili con Carne - Rockabilly scharf wie Chili",
+              "detail": "Heaven Music Club, Bichelsee-Balterswil",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/chili-con-carne-rockabilly-scharf-wie-chili/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — läuft, letzter Tag: 24. November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
+              "label": "Chinderfiir",
+              "detail": "Weinfelden",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chinderfiir-5/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -391,7 +391,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -419,7 +419,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "TG",
@@ -429,7 +429,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "57",
+          "value": "58",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -439,48 +439,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Meise-Stamm",
-              "detail": "Arbon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/suche/arbon/meise-stamm_AdK4bit"
-            },
-            {
-              "label": "DE CHLY PRINZ SPRICHT SCHWEIZERDEUTSCH",
-              "detail": "Regionalbibliothek Weinfelden, Weinfelden",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-chly-prinz-spricht-schweizerdeutsch/"
-            },
-            {
-              "label": "Melody Pop/Rock Night",
-              "detail": "Seeparksaal, Arbon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/melody-poprock-night_AjWXxDL"
-            },
-            {
-              "label": "Riklin & Schaub - Lieder, die ins Augen gehen",
-              "detail": "Sport- und Kulturzentrum Dreispitz, Kreuzlingen",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/riklin-und-schaub-lieder-die-ins-augen-gehen_ABBRCCP"
-            },
-            {
-              "label": "Tacchi",
-              "detail": "Kulturrausch",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/buerglen-tg/tacchi_ApwiyPU"
-            },
-            {
-              "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen — en cours, dernier jour : 13 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — en cours, dernier jour : 24 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
             {
               "label": "RedWeek",
               "detail": "Röm.-kath. Kirche St. Johannes, Weinfelden",
@@ -498,11 +456,53 @@
               "detail": "Seeparksaal, Arbon",
               "date": "2026-11-14",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/retro-revolution_A3XeD99"
+            },
+            {
+              "label": "Événement final von Frauenfeld ROCKT",
+              "detail": "KAFF Kulturlokal, Frauenfeld",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/final-event-von-frauenfeld-rockt_A4fXHwE"
+            },
+            {
+              "label": "Simon Enzler",
+              "detail": "Weinfelden",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/simon-enzler-25/"
+            },
+            {
+              "label": "Duo Simili Konzert",
+              "detail": "Löwen Arena, Sommeri",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sommeri/duo-simili-konzert_AJFhVkU"
+            },
+            {
+              "label": "Chili con Carne - Rockabilly scharf wie Chili",
+              "detail": "Heaven Music Club",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/populaer/balterswil/chili-con-carne-rockabilly-scharf-wie-chili_A5uPiUH"
+            },
+            {
+              "label": "Chili con Carne - Rockabilly scharf wie Chili",
+              "detail": "Heaven Music Club, Bichelsee-Balterswil",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/chili-con-carne-rockabilly-scharf-wie-chili/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — en cours, dernier jour : 24 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
+              "label": "Chinderfiir",
+              "detail": "Weinfelden",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chinderfiir-5/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -525,7 +525,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-12T22:54:56.926Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +553,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }

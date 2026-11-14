@@ -4,12 +4,12 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "0e592ebbecb37014b0175264b9e24e002cdf92ef1d0dc4d60978e4d3c9224073",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "6eafd3460351d1b71f8a5ebfeae37592a871613d885fde54b8baa260e771fa5a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T14:41:08.896Z",
+      "updatedAt": "2026-11-13T04:23:25.174Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "111",
+          "value": "108",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Was Zähne putzen und mentale Klarheit gemeinsam haben",
-              "detail": "Refektorium",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-zaehne-putzen-und-mentale-klarheit-gemeinsam-haben/"
+              "label": "Hand anlegen – altes Handwerk, neue Entdeckungen",
+              "detail": "Mellingen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hand-anlegen-altes-handwerk-neue-entdeckungen-unterwegs-in-mellingen/"
             },
             {
-              "label": "Waldspaziergänge in der kälteren Jahreszeit (Waldbaden)",
-              "detail": "Chrissys Kräuter-Apotheke, Ammerswil",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/ammerswil-ag/waldspaziergaenge-in-der-kaelteren-jahreszeit-waldbaden_AhFK3MJ"
+              "label": "Face-o-mat. Performance mit Tobias Gutmann",
+              "detail": "Aargauer Kunsthaus, Aarau",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/faceomat-performance-mit-tobias-gutmann/"
             },
             {
-              "label": "Waldspaziergänge in der kälteren Jahreszeit (Waldbaden)",
-              "detail": "Chrissys Kräuter-Apotheke, Lenzburg",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/waldspaziergaenge-in-der-kaelteren-jahreszeit-waldbaden/"
+              "label": "3. Südtiroler Weinmesse im Schloss Bad Zurzach",
+              "detail": "Bad Zurzach, Zurzach",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/3-suedtiroler-weinmesse-im-schloss-bad-zurzach/"
             },
             {
-              "label": "Adventsverkauf Effingerhort",
-              "detail": "Holderbank AG",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsverkauf-effingerhort/"
+              "label": "SzeneJam - Offene Jam-Bühne im Kultur Tipi",
+              "detail": "Baden",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/szenejam-offene-jam-buehne-im-kultur-tipi/"
             },
             {
-              "label": "Schweizer Erzählnacht - STIMMEN",
-              "detail": "Bremgarten",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schweizer-erzaehlnacht/"
+              "label": "1. Familienkonzert – Die Bremer Stadtmusikanten",
+              "detail": "Berufsfachschule BBB, Baden",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/1-familienkonzert-die-bremer-stadtmusikanten_A1CbkFZ"
             },
             {
-              "label": "Les Touristes (CH)",
-              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/les-touristes-ch_AL5WeA6"
+              "label": "Öffentliche Sagenführung",
+              "detail": "Rathaus, Rheinfelden",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oeffentliche-sagenfuehrung-1/"
             },
             {
-              "label": "Shirley Grimes \"TENDER\" Album Release",
-              "detail": "Konservi, Seon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/shirley-grimes-tender-album-release_AAxgeRb"
+              "label": "ECHO - Gemeinschaftskonzert Blockflötenorchester Belflauto & Soprabasso",
+              "detail": "Evang.-ref. Stadtkirche Aarau, Aarau",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/echo-gemeinschaftskonzert-blockfloetenorchester-belflauto-und-soprabasso_AnqSTY7"
             },
             {
-              "label": "Turnerabende Birrwil",
-              "detail": "Birrwil",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnerabende-birrwil/"
+              "label": "Jurassic Cuisine - PUR - Edition 5",
+              "detail": "Hirschen Erlinsbach AG, Erlinsbach (AG)",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jurassic-cuisine-pur-edition-5-1/"
             },
             {
-              "label": "Löwenzahnhonig",
-              "detail": "Royal, Baden",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/loewenzahnhonig_ALQcirU"
+              "label": "Racletteabend",
+              "detail": "Böbikon, Zurzach",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/racletteabend-1/"
             },
             {
-              "label": "Circus Knie",
-              "detail": "Schaustellerplatz im Schachen, Aarau — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/circus-knie-2026-6/"
+              "label": "Falstaff",
+              "detail": "Baden",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/falstaff-2/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "AG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "111",
+          "value": "108",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Was Zähne putzen und mentale Klarheit gemeinsam haben",
-              "detail": "Refektorium",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-zaehne-putzen-und-mentale-klarheit-gemeinsam-haben/"
+              "label": "Hand anlegen – altes Handwerk, neue Entdeckungen",
+              "detail": "Mellingen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hand-anlegen-altes-handwerk-neue-entdeckungen-unterwegs-in-mellingen/"
             },
             {
-              "label": "Waldspaziergänge in der kälteren Jahreszeit (Waldbaden)",
-              "detail": "Chrissys Kräuter-Apotheke, Ammerswil",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/ammerswil-ag/waldspaziergaenge-in-der-kaelteren-jahreszeit-waldbaden_AhFK3MJ"
+              "label": "Face-o-mat. Performance mit Tobias Gutmann",
+              "detail": "Aargauer Kunsthaus, Aarau",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/faceomat-performance-mit-tobias-gutmann/"
             },
             {
-              "label": "Waldspaziergänge in der kälteren Jahreszeit (Waldbaden)",
-              "detail": "Chrissys Kräuter-Apotheke, Lenzburg",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/waldspaziergaenge-in-der-kaelteren-jahreszeit-waldbaden/"
+              "label": "3. Südtiroler Weinmesse im Schloss Bad Zurzach",
+              "detail": "Bad Zurzach, Zurzach",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/3-suedtiroler-weinmesse-im-schloss-bad-zurzach/"
             },
             {
-              "label": "Adventsverkauf Effingerhort",
-              "detail": "Holderbank AG",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsverkauf-effingerhort/"
+              "label": "SzeneJam - Offene Jam-Bühne im Kultur Tipi",
+              "detail": "Baden",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/szenejam-offene-jam-buehne-im-kultur-tipi/"
             },
             {
-              "label": "Schweizer Erzählnacht - STIMMEN",
-              "detail": "Bremgarten",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schweizer-erzaehlnacht/"
+              "label": "1. Familienkonzert – Die Bremer Stadtmusikanten",
+              "detail": "Berufsfachschule BBB, Baden",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/1-familienkonzert-die-bremer-stadtmusikanten_A1CbkFZ"
             },
             {
-              "label": "Les Touristes (CH)",
-              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/les-touristes-ch_AL5WeA6"
+              "label": "Öffentliche Sagenführung",
+              "detail": "Rathaus, Rheinfelden",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oeffentliche-sagenfuehrung-1/"
             },
             {
-              "label": "Shirley Grimes \"TENDER\" Album Release",
-              "detail": "Konservi, Seon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/shirley-grimes-tender-album-release_AAxgeRb"
+              "label": "ECHO - Gemeinschaftskonzert Blockflötenorchester Belflute & Soprabasso",
+              "detail": "Evang.-ref. Stadtkirche Aarau, Aarau",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/echo-gemeinschaftskonzert-blockfloetenorchester-belflauto-und-soprabasso_AnqSTY7"
             },
             {
-              "label": "Turnerabende Birrwil",
-              "detail": "Birrwil",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnerabende-birrwil/"
+              "label": "Jurassic Cuisine - PUR - Edition 5",
+              "detail": "Hirschen Erlinsbach AG, Erlinsbach (AG)",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jurassic-cuisine-pur-edition-5-1/"
             },
             {
-              "label": "Löwenzahnhonig",
-              "detail": "Royal, Baden",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/loewenzahnhonig_ALQcirU"
+              "label": "Racletteabend",
+              "detail": "Böbikon, Zurzach",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/racletteabend-1/"
             },
             {
-              "label": "Circus Knie",
-              "detail": "Schaustellerplatz im Schachen, Aarau — ongoing, last day: 15 November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/circus-knie-2026-6/"
+              "label": "Falstaff",
+              "detail": "Baden",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/falstaff-2/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "AG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "111",
+          "value": "108",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Was Zähne putzen und mentale Klarheit gemeinsam haben",
-              "detail": "Refektorium",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-zaehne-putzen-und-mentale-klarheit-gemeinsam-haben/"
+              "label": "Hand anlegen – altes Handwerk, neue Entdeckungen",
+              "detail": "Mellingen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hand-anlegen-altes-handwerk-neue-entdeckungen-unterwegs-in-mellingen/"
             },
             {
-              "label": "Waldspaziergänge in der kälteren Jahreszeit (Waldbaden)",
-              "detail": "Chrissys Kräuter-Apotheke, Ammerswil",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/ammerswil-ag/waldspaziergaenge-in-der-kaelteren-jahreszeit-waldbaden_AhFK3MJ"
+              "label": "Face-o-mat. Performance mit Tobias Gutmann",
+              "detail": "Aargauer Kunsthaus, Aarau",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/faceomat-performance-mit-tobias-gutmann/"
             },
             {
-              "label": "Waldspaziergänge in der kälteren Jahreszeit (Waldbaden)",
-              "detail": "Chrissys Kräuter-Apotheke, Lenzburg",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/waldspaziergaenge-in-der-kaelteren-jahreszeit-waldbaden/"
+              "label": "3. Südtiroler Weinmesse im Schloss Bad Zurzach",
+              "detail": "Bad Zurzach, Zurzach",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/3-suedtiroler-weinmesse-im-schloss-bad-zurzach/"
             },
             {
-              "label": "Adventsverkauf Effingerhort",
-              "detail": "Holderbank AG",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsverkauf-effingerhort/"
+              "label": "SzeneJam - Offene Jam-Bühne im Kultur Tipi",
+              "detail": "Baden",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/szenejam-offene-jam-buehne-im-kultur-tipi/"
             },
             {
-              "label": "Schweizer Erzählnacht - STIMMEN",
-              "detail": "Bremgarten",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schweizer-erzaehlnacht/"
+              "label": "1. Familienkonzert – Die Bremer Stadtmusikanten",
+              "detail": "Berufsfachschule BBB, Baden",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/1-familienkonzert-die-bremer-stadtmusikanten_A1CbkFZ"
             },
             {
-              "label": "Les Touristes (CH)",
-              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/les-touristes-ch_AL5WeA6"
+              "label": "Öffentliche Sagenführung",
+              "detail": "Rathaus, Rheinfelden",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oeffentliche-sagenfuehrung-1/"
             },
             {
-              "label": "Shirley Grimes \"TENDER\" Album Release",
-              "detail": "Konservi, Seon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/shirley-grimes-tender-album-release_AAxgeRb"
+              "label": "Echo - Gemeinschaftskonzert Blockflötenorchester Belflauto & Soprabass",
+              "detail": "Evang.-ref. Stadtkirche Aarau, Aarau",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/echo-gemeinschaftskonzert-blockfloetenorchester-belflauto-und-soprabasso_AnqSTY7"
             },
             {
-              "label": "Turnerabende Birrwil",
-              "detail": "Birrwil",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnerabende-birrwil/"
+              "label": "Jurassic Cuisine - PUR - Edition 5",
+              "detail": "Hirschen Erlinsbach AG, Erlinsbach (AG)",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jurassic-cuisine-pur-edition-5-1/"
             },
             {
-              "label": "Löwenzahnhonig",
-              "detail": "Royal, Baden",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/loewenzahnhonig_ALQcirU"
+              "label": "Racletteabend",
+              "detail": "Böbikon, Zurzach",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/racletteabend-1/"
             },
             {
-              "label": "Circus Knie",
-              "detail": "Schaustellerplatz im Schachen, Aarau — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/circus-knie-2026-6/"
+              "label": "Falstaff",
+              "detail": "Baden",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/falstaff-2/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "AG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "111",
+          "value": "108",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Was Zähne putzen und mentale Klarheit gemeinsam haben",
-              "detail": "Refektorium",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-zaehne-putzen-und-mentale-klarheit-gemeinsam-haben/"
+              "label": "Hand anlegen – altes Handwerk, neue Entdeckungen",
+              "detail": "Mellingen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hand-anlegen-altes-handwerk-neue-entdeckungen-unterwegs-in-mellingen/"
             },
             {
-              "label": "Waldspaziergänge in der kälteren Jahreszeit (Waldbaden)",
-              "detail": "Chrissys Kräuter-Apotheke, Ammerswil",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/ammerswil-ag/waldspaziergaenge-in-der-kaelteren-jahreszeit-waldbaden_AhFK3MJ"
+              "label": "Face-o-mat. Performance mit Tobias Gutmann",
+              "detail": "Aargauer Kunsthaus, Aarau",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/faceomat-performance-mit-tobias-gutmann/"
             },
             {
-              "label": "Waldspaziergänge in der kälteren Jahreszeit (Waldbaden)",
-              "detail": "Chrissys Kräuter-Apotheke, Lenzburg",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/waldspaziergaenge-in-der-kaelteren-jahreszeit-waldbaden/"
+              "label": "3. Südtiroler Weinmesse im Schloss Bad Zurzach",
+              "detail": "Bad Zurzach, Zurzach",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/3-suedtiroler-weinmesse-im-schloss-bad-zurzach/"
             },
             {
-              "label": "Adventsverkauf Effingerhort",
-              "detail": "Holderbank AG",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsverkauf-effingerhort/"
+              "label": "SzeneJam - Offene Jam-Bühne im Kultur Tipi",
+              "detail": "Baden",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/szenejam-offene-jam-buehne-im-kultur-tipi/"
             },
             {
-              "label": "Schweizer Erzählnacht - STIMMEN",
-              "detail": "Bremgarten",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schweizer-erzaehlnacht/"
+              "label": "1. Familienkonzert – Die Bremer Stadtmusikanten",
+              "detail": "Berufsfachschule BBB, Baden",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/1-familienkonzert-die-bremer-stadtmusikanten_A1CbkFZ"
             },
             {
-              "label": "Les Touristes (CH)",
-              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/les-touristes-ch_AL5WeA6"
+              "label": "Öffentliche Sagenführung",
+              "detail": "Rathaus, Rheinfelden",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oeffentliche-sagenfuehrung-1/"
             },
             {
-              "label": "Shirley Grimes \"TENDER\" Album Release",
-              "detail": "Konservi, Seon",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/shirley-grimes-tender-album-release_AAxgeRb"
+              "label": "ECHO - Gemeinschaftskonzert Blockflötenorchester Belflauto & Surbasse",
+              "detail": "Evang.-ref. Stadtkirche Aarau, Aarau",
+              "date": "2026-11-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/echo-gemeinschaftskonzert-blockfloetenorchester-belflauto-und-soprabasso_AnqSTY7"
             },
             {
-              "label": "Turnerabende Birrwil",
-              "detail": "Birrwil",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnerabende-birrwil/"
+              "label": "Jurassic Cuisine - PUR - Edition 5",
+              "detail": "Hirschen Erlinsbach AG, Erlinsbach (AG)",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jurassic-cuisine-pur-edition-5-1/"
             },
             {
-              "label": "Löwenzahnhonig",
-              "detail": "Royal, Baden",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/loewenzahnhonig_ALQcirU"
+              "label": "Racletteabend",
+              "detail": "Böbikon, Zurzach",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/racletteabend-1/"
             },
             {
-              "label": "Circus Knie",
-              "detail": "Schaustellerplatz im Schachen, Aarau — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/circus-knie-2026-6/"
+              "label": "Falstaff",
+              "detail": "Baden",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/falstaff-2/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }

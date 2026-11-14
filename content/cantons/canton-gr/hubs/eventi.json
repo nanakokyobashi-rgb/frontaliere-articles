@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-11-13T13:04:15.100Z",
-  "contentHash": "596893b46032fa1e3e0defe100cfff2994b50f1ec9dfb68d07f9c3fb15ec082e",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "3242482c1fd9f443f3a971464fde938de00c3301ca50953c7dc7e6eb83138e77",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "65",
+          "value": "61",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,64 +38,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Offener Treff im \"Il Fuorn\", La Punt Chamues-ch",
-              "detail": "La Punt Chamues-ch",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/la-punt-chamues-ch/offener-treff-im-il-fuorn-la-punt-chamues-ch_A1DWMb3"
+              "label": "Folk in Val",
+              "detail": "Roveredo GR",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/folk-in-val/"
             },
             {
-              "label": "Begegnungs- und Feierabendtreff in Cumbel",
-              "detail": "Begegnungsraum Posta Veglia",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/cumbel/begegnungs-und-feierabendtreff-in-cumbel_A5QVLYa"
+              "label": "Riparazione Caffè Heinzenberg/Domleschg/Schams",
+              "detail": "Almens, Domleschg",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/riparazione-caffe-heinzenbergdomleschgschams/"
+            },
+            {
+              "label": "Lost in Quiet – Langer Samstag",
+              "detail": "Chur",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lost-in-quiet-langer-samstag/"
+            },
+            {
+              "label": "Maiale alpino e manzo Wagyu",
+              "detail": "Zunfthaus zur Rebleuten",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/maiale-alpino-e-manzo-wagyu/"
+            },
+            {
+              "label": "Anderswo, daheim",
+              "detail": "Davos",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/anderswo-daheim/"
+            },
+            {
+              "label": "Sound Healing - eine Klangreise",
+              "detail": "Evang.-ref. Kirche Felsberg, Felsberg",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sound-healing-eine-klangreise/"
+            },
+            {
+              "label": "Binary Sunset - Langer Samstag",
+              "detail": "Chur",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/binary-sunset-langer-samstag/"
             },
             {
               "label": "Bergflohmarkt Chur",
-              "detail": "Kirchgemeindehaus Titthof, Chur",
-              "date": "2026-11-13",
+              "detail": "Kirchgemeindehaus Titthof, Chur — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bergflohmarkt-chur/"
-            },
-            {
-              "label": "Erzählnacht \"Stimmen\"",
-              "detail": "Thusis",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-stimmen/"
-            },
-            {
-              "label": "Notte del racconto",
-              "detail": "Brusio",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/notte-del-racconto/"
-            },
-            {
-              "label": "100. Geburtstag Pfarrkirchenorgel",
-              "detail": "Domat/Ems",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-geburtstag-pfarrkirchenorgel/"
-            },
-            {
-              "label": "Duo con Brezza: Barbara Godenzi ed Astrid Schumacher",
-              "detail": "Nuovo Monastero Santa Maria, Poschiavo",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/evenements/musique/poschiavo/duo-con-brezza-barbara-godenzi-et-astrid-schumacher_AesEKYb"
-            },
-            {
-              "label": "zuoz globe sounds - WALDHAUS VARIATIONEN",
-              "detail": "Lyceum Alpinum Zuoz, Zuoz",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuoz/zuoz-globe-sounds-waldhaus-variationen_ACaxdFQ"
-            },
-            {
-              "label": "Reena Krishnaraja",
-              "detail": "Klosters",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reena-krishnaraja-2/"
             },
             {
               "label": "Fitness- und Yogakurse",
               "detail": "Hotel Schweizerhof — in corso, ultimo giorno: 30 novembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
+            },
+            {
+              "label": "Peduzzis traditionelle Huus-Metzgete 2026",
+              "detail": "Val Surses: Savognin, Surses — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/peduzzis-traditionelle-huus-metzgete-2026/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -177,7 +177,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T13:04:15.100Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "GR",
@@ -187,7 +187,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "65",
+          "value": "61",
           "note": "from the site’s events calendar"
         }
       ],
@@ -198,64 +198,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Offener Treff im \"The Fuorn\", The Punt Chamues-ch",
-              "detail": "La Punt Chamues-ch",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/la-punt-chamues-ch/offener-treff-im-il-fuorn-la-punt-chamues-ch_A1DWMb3"
+              "label": "Folk in Val",
+              "detail": "Roveredo GR",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/folk-in-val/"
             },
             {
-              "label": "Begegnungs- und Feierabendtreff in Cumbel",
-              "detail": "Begegnungsraum Posta Veglia",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/cumbel/begegnungs-und-feierabendtreff-in-cumbel_A5QVLYa"
+              "label": "Repair Café Heinzenberg/Domleschg/Schams",
+              "detail": "Almens, Domleschg",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/riparazione-caffe-heinzenbergdomleschgschams/"
+            },
+            {
+              "label": "Lost in Quiet – Langer Samstag",
+              "detail": "Chur",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lost-in-quiet-langer-samstag/"
+            },
+            {
+              "label": "Alpine pork & Wagyu beef",
+              "detail": "Zunfthaus zur Rebleuten",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/maiale-alpino-e-manzo-wagyu/"
+            },
+            {
+              "label": "Anderswo, daheim",
+              "detail": "Davos",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/anderswo-daheim/"
+            },
+            {
+              "label": "Sound Healing - eine Klangreise",
+              "detail": "Evang.-ref. Kirche Felsberg, Felsberg",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sound-healing-eine-klangreise/"
+            },
+            {
+              "label": "Binary Sunset - Langer Samstag",
+              "detail": "Chur",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/binary-sunset-langer-samstag/"
             },
             {
               "label": "Bergflohmarkt Chur",
-              "detail": "Kirchgemeindehaus Titthof, Chur",
-              "date": "2026-11-13",
+              "detail": "Kirchgemeindehaus Titthof, Chur — ongoing, last day: 14 November 2026",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bergflohmarkt-chur/"
-            },
-            {
-              "label": "Erzählnacht \"Stimmen\"",
-              "detail": "Thusis",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-stimmen/"
-            },
-            {
-              "label": "Notte del racconto",
-              "detail": "Brusio",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/notte-del-racconto/"
-            },
-            {
-              "label": "100. Geburtstag Pfarrkirchenorgel",
-              "detail": "Domat/Ems",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-geburtstag-pfarrkirchenorgel/"
-            },
-            {
-              "label": "Duo con Brezza: Barbara Godenzi and Astrid Schumacher",
-              "detail": "Nuovo Monastero Santa Maria, Poschiavo",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/evenements/musique/poschiavo/duo-con-brezza-barbara-godenzi-et-astrid-schumacher_AesEKYb"
-            },
-            {
-              "label": "zuoz globe sounds - WALDHAUS VARIATIONEN",
-              "detail": "Lyceum Alpinum Zuoz, Zuoz",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuoz/zuoz-globe-sounds-waldhaus-variationen_ACaxdFQ"
-            },
-            {
-              "label": "Reena Krishnaraja",
-              "detail": "Klosters",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reena-krishnaraja-2/"
             },
             {
               "label": "Fitness and yoga classes",
               "detail": "Hotel Schweizerhof — ongoing, last day: 30 November 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
+            },
+            {
+              "label": "Peduzzis traditionelle Huus-Metzgete 2026",
+              "detail": "Val Surses: Savognin, Surses — ongoing, last day: 14 November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/peduzzis-traditionelle-huus-metzgete-2026/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -337,7 +337,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T13:04:15.100Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "GR",
@@ -347,7 +347,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "65",
+          "value": "61",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -358,64 +358,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Offener Treff im „Il Fuorn“, La Punt Chamues-ch",
-              "detail": "La Punt Chamues-ch",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/la-punt-chamues-ch/offener-treff-im-il-fuorn-la-punt-chamues-ch_A1DWMb3"
+              "label": "Folk in Val",
+              "detail": "Roveredo GR",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/folk-in-val/"
             },
             {
-              "label": "Begegnungs- und Feierabendtreff in Cumbel",
-              "detail": "Begegnungsraum Posta Veglia",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/cumbel/begegnungs-und-feierabendtreff-in-cumbel_A5QVLYa"
+              "label": "Repair Café Heinzenberg/Domleschg/Schams",
+              "detail": "Almens, Domleschg",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/riparazione-caffe-heinzenbergdomleschgschams/"
+            },
+            {
+              "label": "Lost in Quiet – Langer Samstag",
+              "detail": "Chur",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lost-in-quiet-langer-samstag/"
+            },
+            {
+              "label": "Alpenschwein & Wagyu Beef",
+              "detail": "Zunfthaus zur Rebleuten",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/maiale-alpino-e-manzo-wagyu/"
+            },
+            {
+              "label": "Anderswo, daheim",
+              "detail": "Davos",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/anderswo-daheim/"
+            },
+            {
+              "label": "Sound Healing - eine Klangreise",
+              "detail": "Evang.-ref. Kirche Felsberg, Felsberg",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sound-healing-eine-klangreise/"
+            },
+            {
+              "label": "Binary Sunset - Langer Samstag",
+              "detail": "Chur",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/binary-sunset-langer-samstag/"
             },
             {
               "label": "Bergflohmarkt Chur",
-              "detail": "Kirchgemeindehaus Titthof, Chur",
-              "date": "2026-11-13",
+              "detail": "Kirchgemeindehaus Titthof, Chur — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bergflohmarkt-chur/"
-            },
-            {
-              "label": "Erzählnacht \"Stimmen\"",
-              "detail": "Thusis",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-stimmen/"
-            },
-            {
-              "label": "Notte del racconto",
-              "detail": "Brusio",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/notte-del-racconto/"
-            },
-            {
-              "label": "100. Geburtstag Pfarrkirchenorgel",
-              "detail": "Domat/Ems",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-geburtstag-pfarrkirchenorgel/"
-            },
-            {
-              "label": "Duo con Brezza: Barbara Godenzi und Astrid Schumacher",
-              "detail": "Nuovo Monastero Santa Maria, Poschiavo",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/evenements/musique/poschiavo/duo-con-brezza-barbara-godenzi-et-astrid-schumacher_AesEKYb"
-            },
-            {
-              "label": "zuoz globe sounds - WALDHAUS VARIATIONEN",
-              "detail": "Lyceum Alpinum Zuoz, Zuoz",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuoz/zuoz-globe-sounds-waldhaus-variationen_ACaxdFQ"
-            },
-            {
-              "label": "Reena Krishnaraja",
-              "detail": "Klosters",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reena-krishnaraja-2/"
             },
             {
               "label": "Fitness- und Yogakurse",
               "detail": "Hotel Schweizerhof — läuft, letzter Tag: 30. November 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
+            },
+            {
+              "label": "Peduzzis traditionelle Huus-Metzgete 2026",
+              "detail": "Val Surses: Savognin, Surses — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/peduzzis-traditionelle-huus-metzgete-2026/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -497,7 +497,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-13T13:04:15.100Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "GR",
@@ -507,7 +507,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "65",
+          "value": "61",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -518,64 +518,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Offener Treff im « Il Fuorn », La Punt Chamues-ch",
-              "detail": "La Punt Chamues-ch",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/la-punt-chamues-ch/offener-treff-im-il-fuorn-la-punt-chamues-ch_A1DWMb3"
+              "label": "Folk in Val",
+              "detail": "Roveredo GR",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/folk-in-val/"
             },
             {
-              "label": "Begegnungs- und Feierabendtreff in Cumbel",
-              "detail": "Begegnungsraum Posta Veglia",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/cumbel/begegnungs-und-feierabendtreff-in-cumbel_A5QVLYa"
+              "label": "Repair Café Heinzenberg/Domleschg/Schams",
+              "detail": "Almens, Domleschg",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/riparazione-caffe-heinzenbergdomleschgschams/"
+            },
+            {
+              "label": "Lost in Quiet – Langer Samstag",
+              "detail": "Chur",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lost-in-quiet-langer-samstag/"
+            },
+            {
+              "label": "Porc des Alpes & Wagyu Beef",
+              "detail": "Zunfthaus zur Rebleuten",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/maiale-alpino-e-manzo-wagyu/"
+            },
+            {
+              "label": "Anderswo, daheim",
+              "detail": "Davos",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/anderswo-daheim/"
+            },
+            {
+              "label": "Sound Healing - eine Klangreise",
+              "detail": "Evang.-ref. Kirche Felsberg, Felsberg",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sound-healing-eine-klangreise/"
+            },
+            {
+              "label": "Binary Sunset - Langer Samstag",
+              "detail": "Chur",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/binary-sunset-langer-samstag/"
             },
             {
               "label": "Bergflohmarkt Chur",
-              "detail": "Kirchgemeindehaus Titthof, Chur",
-              "date": "2026-11-13",
+              "detail": "Kirchgemeindehaus Titthof, Chur — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bergflohmarkt-chur/"
-            },
-            {
-              "label": "Erzählnacht \"Stimmen\"",
-              "detail": "Thusis",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-stimmen/"
-            },
-            {
-              "label": "Notte del racconto",
-              "detail": "Brusio",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/notte-del-racconto/"
-            },
-            {
-              "label": "100. Geburtstag Pfarrkirchenorgel",
-              "detail": "Domat/Ems",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-geburtstag-pfarrkirchenorgel/"
-            },
-            {
-              "label": "Duo con Brezza : Barbara Godenzi et Astrid Schumacher",
-              "detail": "Nuovo Monastero Santa Maria, Poschiavo",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/evenements/musique/poschiavo/duo-con-brezza-barbara-godenzi-et-astrid-schumacher_AesEKYb"
-            },
-            {
-              "label": "zuoz globe sounds - WALDHAUS VARIATIONEN",
-              "detail": "Lyceum Alpinum Zuoz, Zuoz",
-              "date": "2026-11-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuoz/zuoz-globe-sounds-waldhaus-variationen_ACaxdFQ"
-            },
-            {
-              "label": "Reena Krishnaraja",
-              "detail": "Klosters",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reena-krishnaraja-2/"
             },
             {
               "label": "Fitness- und Yogakurse",
               "detail": "Hotel Schweizerhof — en cours, dernier jour : 30 novembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
+            },
+            {
+              "label": "Peduzzis traditionelle Huus-Metzgete 2026",
+              "detail": "Val Surses: Savognin, Surses — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/peduzzis-traditionelle-huus-metzgete-2026/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -657,7 +657,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-13T13:04:15.100Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }

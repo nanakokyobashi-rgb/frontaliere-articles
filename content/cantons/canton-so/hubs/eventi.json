@@ -4,12 +4,12 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "eventi",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "338a7ea1af51c26761732d37d8bb6c71ee9da9d42c158a2fd70805da97220f58",
+  "updatedAt": "2026-11-14T15:15:31.434Z",
+  "contentHash": "68014e602259984ade129d6828f59f0ffaa031df00d9dfa90705eceb78bee8f5",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-12T14:41:08.896Z",
+      "updatedAt": "2026-11-13T04:23:25.174Z",
       "keyFacts": 1
     }
   ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Piemont Festival",
-              "detail": "Selzach",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/piemont-festival/"
+              "label": "Lottomatch",
+              "detail": "Seewen SO, Seewen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lottomatch/"
+            },
+            {
+              "label": "Lapsus - Ego!",
+              "detail": "Olten",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lapsus-ego-16/"
             },
             {
               "label": "Theaterstück \"Der Spiele-Abend\" - eine eskalierende Komödie",
-              "detail": "Olten",
-              "date": "2026-11-13",
+              "detail": "Olten — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/theaterstueck-der-spiele-abend-eine-eskalierende-komoedie-1/"
             },
             {
               "label": "tunSolothurn.ch",
               "detail": "Derendingen — in corso, ultimo giorno: 18 novembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/tunsolothurnch/"
             },
             {
               "label": "Mental abschalten – besser schlafen – Wie Sie das abendliche Grübeln abschalten",
               "detail": "Solothurn — in corso, ultimo giorno: 26 novembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mental-abschalten-besser-schlafen-wie-sie-das-abendliche-gruebeln-abschalten/"
             },
             {
               "label": "TANZINOLTEN – Festival für Zeitgenössische Tanz",
               "detail": "Olten — in corso, ultimo giorno: 21 novembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzinolten-festival-fuer-zeitgenoessische-tanz/"
             },
             {
               "label": "Geologie der Schweiz",
               "detail": "Solothurn — in corso, ultimo giorno: 24 novembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/geologie-der-schweiz/"
             },
             {
               "label": "Offizieller Bahnkurs November 2026",
               "detail": "Grenchen — in corso, ultimo giorno: 23 novembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/offizieller-bahnkurs-november-2026/"
             },
             {
               "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn — in corso, ultimo giorno: 3 dicembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
             },
             {
               "label": "Kursreihe Schweizer Landwirtschaft",
               "detail": "Solothurn — in corso, ultimo giorno: 18 novembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
-            },
-            {
-              "label": "Was ist Jazz?",
-              "detail": "Solothurn — in corso, ultimo giorno: 24 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/soletta/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/soletta/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "en": {
       "canton": "SO",
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Piemont Festival",
-              "detail": "Selzach",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/piemont-festival/"
+              "label": "Lottomatch",
+              "detail": "Seewen SO, Seewen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lottomatch/"
+            },
+            {
+              "label": "Lapsus - Ego!",
+              "detail": "Olten",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lapsus-ego-16/"
             },
             {
               "label": "Theaterstück \"Der Spiele-Abend\" - eine eskalierende Komödie",
-              "detail": "Olten",
-              "date": "2026-11-13",
+              "detail": "Olten — ongoing, last day: 14 November 2026",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/theaterstueck-der-spiele-abend-eine-eskalierende-komoedie-1/"
             },
             {
               "label": "tunSolothurn.ch",
               "detail": "Derendingen — ongoing, last day: 18 November 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/tunsolothurnch/"
             },
             {
               "label": "Mental abschalten – besser schlafen – Wie Sie das abendliche Grübeln abschalten",
               "detail": "Solothurn — ongoing, last day: 26 November 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mental-abschalten-besser-schlafen-wie-sie-das-abendliche-gruebeln-abschalten/"
             },
             {
               "label": "TANZINOLTEN – Festival für Zeitgenössische Tanz",
               "detail": "Olten — ongoing, last day: 21 November 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzinolten-festival-fuer-zeitgenoessische-tanz/"
             },
             {
               "label": "Geologie der Schweiz",
               "detail": "Solothurn — ongoing, last day: 24 November 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/geologie-der-schweiz/"
             },
             {
               "label": "Offizieller Bahnkurs November 2026",
               "detail": "Grenchen — ongoing, last day: 23 November 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/offizieller-bahnkurs-november-2026/"
             },
             {
               "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn — ongoing, last day: 3 December 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
             },
             {
               "label": "Kursreihe Schweizer Landwirtschaft",
               "detail": "Solothurn — ongoing, last day: 18 November 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
-            },
-            {
-              "label": "Was ist Jazz?",
-              "detail": "Solothurn — ongoing, last day: 24 November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/solothurn/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/solothurn/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "de": {
       "canton": "SO",
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Piemont Festival",
-              "detail": "Selzach",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/piemont-festival/"
+              "label": "Lottomatch",
+              "detail": "Seewen SO, Seewen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lottomatch/"
+            },
+            {
+              "label": "Lapsus - Ego!",
+              "detail": "Olten",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lapsus-ego-16/"
             },
             {
               "label": "Theaterstück \"Der Spiele-Abend\" - eine eskalierende Komödie",
-              "detail": "Olten",
-              "date": "2026-11-13",
+              "detail": "Olten — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/theaterstueck-der-spiele-abend-eine-eskalierende-komoedie-1/"
             },
             {
               "label": "tunSolothurn.ch",
               "detail": "Derendingen — läuft, letzter Tag: 18. November 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/tunsolothurnch/"
             },
             {
               "label": "Mental abschalten – besser schlafen – Wie Sie das abendliche Grübeln abschalten",
               "detail": "Solothurn — läuft, letzter Tag: 26. November 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mental-abschalten-besser-schlafen-wie-sie-das-abendliche-gruebeln-abschalten/"
             },
             {
               "label": "TANZINOLTEN – Festival für Zeitgenössische Tanz",
               "detail": "Olten — läuft, letzter Tag: 21. November 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzinolten-festival-fuer-zeitgenoessische-tanz/"
             },
             {
               "label": "Geologie der Schweiz",
               "detail": "Solothurn — läuft, letzter Tag: 24. November 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/geologie-der-schweiz/"
             },
             {
               "label": "Offizieller Bahnkurs November 2026",
               "detail": "Grenchen — läuft, letzter Tag: 23. November 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/offizieller-bahnkurs-november-2026/"
             },
             {
               "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn — läuft, letzter Tag: 3. Dezember 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
             },
             {
               "label": "Kursreihe Schweizer Landwirtschaft",
               "detail": "Solothurn — läuft, letzter Tag: 18. November 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
-            },
-            {
-              "label": "Was ist Jazz?",
-              "detail": "Solothurn — läuft, letzter Tag: 24. November 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/solothurn/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/solothurn/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     },
     "fr": {
       "canton": "SO",
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Piemont Festival",
-              "detail": "Selzach",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/piemont-festival/"
+              "label": "Lottomatch",
+              "detail": "Seewen SO, Seewen",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lottomatch/"
+            },
+            {
+              "label": "Lapsus - Ego!",
+              "detail": "Olten",
+              "date": "2026-11-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lapsus-ego-16/"
             },
             {
               "label": "Theaterstück \"Der Spiele-Abend\" - eine eskalierende Komödie",
-              "detail": "Olten",
-              "date": "2026-11-13",
+              "detail": "Olten — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/theaterstueck-der-spiele-abend-eine-eskalierende-komoedie-1/"
             },
             {
               "label": "tunSolothurn.ch",
               "detail": "Derendingen — en cours, dernier jour : 18 novembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/tunsolothurnch/"
             },
             {
               "label": "Mental abschalten – besser schlafen – Wie Sie das abendliche Grübeln abschalten",
               "detail": "Solothurn — en cours, dernier jour : 26 novembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mental-abschalten-besser-schlafen-wie-sie-das-abendliche-gruebeln-abschalten/"
             },
             {
               "label": "TANZINOLTEN – Festival für Zeitgenössische Tanz",
               "detail": "Olten — en cours, dernier jour : 21 novembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzinolten-festival-fuer-zeitgenoessische-tanz/"
             },
             {
               "label": "Geologie der Schweiz",
               "detail": "Solothurn — en cours, dernier jour : 24 novembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/geologie-der-schweiz/"
             },
             {
               "label": "Offizieller Bahnkurs November 2026",
               "detail": "Grenchen — en cours, dernier jour : 23 novembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/offizieller-bahnkurs-november-2026/"
             },
             {
               "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn — en cours, dernier jour : 3 décembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
             },
             {
               "label": "Kursreihe Schweizer Landwirtschaft",
               "detail": "Solothurn — en cours, dernier jour : 18 novembre 2026",
-              "date": "2026-11-13",
+              "date": "2026-11-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
-            },
-            {
-              "label": "Was ist Jazz?",
-              "detail": "Solothurn — en cours, dernier jour : 24 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/soleure/",
-          "updatedAt": "2026-11-12T14:41:08.896Z"
+          "updatedAt": "2026-11-13T04:23:25.174Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/soleure/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-14T15:15:31.434Z"
     }
   }
 }
