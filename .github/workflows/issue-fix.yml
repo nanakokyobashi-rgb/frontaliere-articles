@@ -337,7 +337,8 @@ jobs:
           set -euo pipefail
           mkdir -p "$CTX_DIR/mutex-bin"
           gh issue view "$ISSUE_NUMBER" --repo "$GH_REPO" --json number,title,body,labels,state > "$CTX_DIR/issue.json"
-          node --input-type=module - "$CTX_DIR/issue.json" "$CTX_DIR/scope-issue.json" "$ISSUE_NUMBER" "$GH_REPO" >> "$GITHUB_OUTPUT" <<'NODE'
+          {
+          node --input-type=module - "$CTX_DIR/issue.json" "$CTX_DIR/scope-issue.json" "$ISSUE_NUMBER" "$GH_REPO" <<'NODE'
           import fs from 'node:fs';
           import { dailyBucketInfo, dailyBucketScopeDecision } from './scripts/ci/followup-resolution-match.mjs';
 
@@ -476,9 +477,10 @@ jobs:
           process.stdout.write(JSON.stringify(sameRepositoryPrs));
           NODE
           chmod +x "$CTX_DIR/mutex-bin/gh"
-          printf 'mutex_bin=%s\n' "$CTX_DIR/mutex-bin" >> "$GITHUB_OUTPUT"
-          printf 'mutex_base_path=%s\n' "$PATH" >> "$GITHUB_OUTPUT"
-          printf 'mutex_real_gh=%s\n' "$TRUSTED_GH" >> "$GITHUB_OUTPUT"
+          printf 'mutex_bin=%s\n' "$CTX_DIR/mutex-bin"
+          printf 'mutex_base_path=%s\n' "$PATH"
+          printf 'mutex_real_gh=%s\n' "$TRUSTED_GH"
+          } >> "$GITHUB_OUTPUT"
 
       # ── Pre-flight 2b: dispatch stantio ───────────────────────────────────
       # Il pre-flight 2 risponde a «e' gia' risolta?», e su una PR aperta fa
@@ -559,7 +561,7 @@ jobs:
             exit 0
           fi
           node scripts/ci/check-workflows-scope.mjs
-          blocked=$(awk -F= '$1 == "workflows_blocked" { value = $2 } END { print value }' "$GITHUB_OUTPUT")
+          blocked=$(awk -F= "\$1 == \"workflows_blocked\" { value = \$2 } END { print value }" "$GITHUB_OUTPUT")
           if [ "${DAILY_BUCKET:-false}" = 'true' ] && [ "${blocked:-false}" = 'true' ]; then
             marker_file="$RUNNER_TEMP/daily-workflows-scope-${ISSUE_NUMBER}.md"
             {
