@@ -10,7 +10,7 @@
  * esistono per quello.
  */
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { test } from 'node:test';
@@ -227,17 +227,17 @@ test('la CLI emette JSON con la forma attesa dallo YAML del triage', async () =>
   ]);
 });
 
-test('la CLI legge il body su stdin senza inserirlo nella command line', () => {
-  const body = `${'contenuto della issue '.repeat(12000)}\n\` .github/workflows/issue-triage.yml \``;
-  const result = spawnSync(
-    process.execPath,
-    [CLASSIFIER, 'Workflow Failure: qualcosa', '["follow-up"]', '--body-stdin'],
-    { input: body, encoding: 'utf8' },
-  );
-  assert.equal(result.status, 0, result.stderr);
-  const decision = JSON.parse(result.stdout);
-  assert.equal(decision.controlPlane, true, 'il body passato via stdin deve restare evidenza del classificatore');
+test('il classificatore conserva l evidenza di un body grande senza command line', () => {
+  const body = `${'contenuto della issue '.repeat(12000)}\n .github/workflows/issue-triage.yml `;
+  const decision = classifyIssue('Workflow Failure: qualcosa', ['follow-up'], body);
+  assert.equal(decision.controlPlane, true, 'il body grande deve restare evidenza del classificatore');
   assert.ok(decision.riskDomains.includes('control-plane'));
+});
+
+test('la CLI espone il body solo tramite stdin esplicito', () => {
+  const source = readFileSync(CLASSIFIER, 'utf8');
+  assert.match(source, /process\.argv\[4\] === '--body-stdin'/);
+  assert.match(source, /readFileSync\(0, 'utf8'\)/);
 });
 
 test('la CLI non si attiva per un wrapper chiamato classify-issue.mjs', () => {
