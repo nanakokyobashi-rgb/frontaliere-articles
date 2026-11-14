@@ -5388,6 +5388,114 @@
       "firstSeenAt": "2026-11-13T14:26:47.232Z",
       "lastValidatedAt": "2026-11-13T14:26:47.232Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "permesso di dimora B canton Berna requisiti e rinnovo",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-14T00:22:31.086Z",
+      "lastValidatedAt": "2026-11-14T00:22:31.086Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "salario minimo canton Berna requisiti e applicazione",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-14T00:22:31.351Z",
+      "lastValidatedAt": "2026-11-14T00:22:31.351Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "assistenza sociale canton Berna requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-14T00:22:31.371Z",
+      "lastValidatedAt": "2026-11-14T00:22:31.371Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "indennità di disoccupazione canton Berna iscrizione URC",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-14T00:22:31.595Z",
+      "lastValidatedAt": "2026-11-14T00:22:31.595Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "assegni familiari canton Berna importi e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-14T00:28:35.946Z",
+      "lastValidatedAt": "2026-11-14T00:28:35.946Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "imposta sugli autoveicoli canton Berna calcolo e pagamento",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-14T00:28:35.965Z",
+      "lastValidatedAt": "2026-11-14T00:28:35.965Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "apprendistato e formazione professionale canton Berna",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-14T00:34:16.891Z",
+      "lastValidatedAt": "2026-11-14T00:34:16.891Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "incentivi energetici canton Berna requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-14T00:34:16.908Z",
+      "lastValidatedAt": "2026-11-14T00:34:16.908Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "autorizzazione edilizia canton Berna requisiti e procedura",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-14T00:34:16.925Z",
+      "lastValidatedAt": "2026-11-14T00:34:16.925Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -14361,17 +14469,13 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www3.ti.ch/dfe/dr/ustat/allegati/digitale/mercato_lavoro/notiziario/2026q1": {
-      "section": "svizzera",
-      "ts": 1794407846815
-    },
-    "frontaliere::https://www.tio.ch/rubriche/ospite/1962408/avs-costo-misura-mano-iva-altra-da": {
-      "section": "frontaliere",
-      "ts": 1794431728681
-    },
     "frontaliere::https://www.varesenews.it/2026/11/a-varese-non-si-vince-solo-al-centro-avs-collettiva-si-fa-avanti-e-mette-a-disposizione-una-candidatura-di-area/2736235": {
       "section": "frontaliere",
       "ts": 1794449619500
+    },
+    "svizzera::https://www3.ti.ch/dfe/dr/ustat/allegati/digitale/mercato_lavoro/notiziario/2026q1": {
+      "section": "svizzera",
+      "ts": 1794614240720
     }
   }
 }
