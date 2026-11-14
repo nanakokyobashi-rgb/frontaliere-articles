@@ -75,7 +75,7 @@ function buildChunker() {
   )(lineStructuralSignature);
 }
 const TRANSLATE_IN_CHUNKS_SRC = (() => {
-  const start = src.indexOf('  async function translateInChunks(\n    bodyText,\n    fieldKey,\n    makeChunkPrompt,\n    labelPrefix,\n    targetLang,\n    { pretranslatedResult = null } = {},\n  ) {');
+  const start = src.indexOf('  async function translateInChunks(\n    bodyText,\n    fieldKey,\n    makeChunkPrompt,\n    labelPrefix,\n    targetLang,\n    { pretranslatedResult = null, forceLegacy = false } = {},\n  ) {');
   assert.notEqual(start, -1, 'translateInChunks non trovata in create-article.mjs');
   const end = src.indexOf('\n  }\n', start);
   assert.notEqual(end, -1, 'fine di translateInChunks non trovata in create-article.mjs');
@@ -302,7 +302,7 @@ test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scaden
   assert.match(body, /prefer: \[codex\]/);
   assert.match(body, /fallback: \(\) => \{[\s\S]*if \(!pendingBodySecondLaneAvailable\(\) && typeof callWithRetry === 'function'\)[\s\S]*translatePendingBodyWithHistoricalChain\(itValue, locale, field, \{ callWithRetry, translateInChunks \}\)/);
   assert.match(body, /const validatedText = text && typeof translateInChunks === 'function'[\s\S]*pretranslatedResult/);
-  assert.match(body, /if \(!validatedText\n\s+&& \(codexModelUnavailable \|\| !pendingBodySecondLaneAvailable\(\)\)/);
+  assert.match(body, /if \(!validatedText\n\s+&& \(codexModelUnavailable \|\| !pendingBodySecondLaneAvailable\(\) \|\| rejected\.length > 0\)/);
   // Nessun orologio di modulo: i producer che importano translateArticle()
   // (publish-journalist-article.mjs) non hanno CREATE_ARTICLE_MAX_WALL_MS.
   assert.doesNotMatch(body, /RUN_START_MS|RUN_WALL_BUDGET_MS/);
@@ -652,8 +652,14 @@ test('il callback di fallback della lane usa la catena storica quando il breaker
   assert.deepEqual(stoppedByBreaker.counts(), { admissionAttempts: 0, codexCalls: 0, historicalCalls: 1 });
 });
 
-test('output non valido o errore non classificato come breaker non attiva la catena storica', async () => {
-  const source = 'Questo corpo ha abbastanza testo per arrivare al traduttore senza un heading di template.';
+test('output non valido o errore non classificato come breaker attiva la catena storica senza ripetere Codex', async () => {
+  const source = [
+    'Questo corpo ha abbastanza testo per arrivare al traduttore senza un heading di template.',
+    '',
+    '## In breve',
+    '',
+    'La catena storica può recuperare il corpo quando Codex restituisce un output non accettabile.',
+  ].join('\n');
   for (const translateWithCodexEngine of [
     async () => '',
     async () => { throw new Error('errore di trasporto non classificato dal breaker'); },
@@ -663,8 +669,8 @@ test('output non valido o errore non classificato come breaker non attiva la cat
       admissionDecision: (_attempt, admission) => admission,
       translateWithCodexEngine,
     });
-    assert.equal(await fixture.translate(source), '');
-    assert.deepEqual(fixture.counts(), { admissionAttempts: 1, codexCalls: 1, historicalCalls: 0 });
+    assert.equal(await fixture.translate(source), fixture.expected);
+    assert.deepEqual(fixture.counts(), { admissionAttempts: 1, codexCalls: 1, historicalCalls: 1 });
   }
 });
 

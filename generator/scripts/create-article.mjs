@@ -15178,7 +15178,8 @@ Rispondi con un JSON object (no markdown, no code fences):
 
 /**
  * Un body rimasto in attesa (#1875), recuperato dalla corsia Codex del job
- * oppure dalla catena storica quando il circuit breaker ha escluso Codex.
+ * oppure dalla catena storica quando Codex ha esaurito la corsia o ha
+ * prodotto un output che il contratto del body ha rifiutato.
  *
  * Il motore e' quello della bonifica dei body bloccanti
  * (`translateWithCodexEngine`, lib/free-translate.mjs), con il trasporto
@@ -15249,8 +15250,9 @@ async function translatePendingBodyWithCodex(
     fallback: () => {
       // La disponibilità può cambiare dopo la selezione della corsia: il
       // circuit-breaker può fermare Codex mentre la richiesta aspetta in coda.
-      // Il fallback storico è ammesso solo se il predicato condiviso prova che
-      // la corsia è ferma, anche quando il modello risulta ancora disponibile.
+      // Il fallback storico è ammesso se il predicato condiviso prova che la
+      // corsia è ferma. Se Codex ha prodotto un output rifiutato, il fallback
+      // viene invece scelto sotto: ripetere la stessa corsia non è recovery.
       if (!pendingBodySecondLaneAvailable() && typeof callWithRetry === 'function') {
         return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry, translateInChunks });
       }
@@ -15343,11 +15345,12 @@ async function translatePendingBodyWithCodex(
         : text;
       if (text && validatedText === null) rejected.push('structure');
       if (!validatedText
-        && (codexModelUnavailable || !pendingBodySecondLaneAvailable())
+        && (codexModelUnavailable || !pendingBodySecondLaneAvailable() || rejected.length > 0)
         && typeof callWithRetry === 'function') {
         // `translateFieldFreeMt` cattura lo stop della cascata segmentata e
-        // restituisce un campo vuoto. Riprova lo stesso body sulla catena
-        // storica solo se il breaker ha provato l'indisponibilità di Codex.
+        // restituisce un campo vuoto. Se Codex ha anche prodotto un output
+        // rifiutato, riprovare la stessa corsia ricreerebbe il difetto: la
+        // catena storica riceve `forceLegacy` e non torna al Codex disponibile.
         return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry, translateInChunks });
       }
       if (!validatedText && rejected.length > 0) {
@@ -15359,8 +15362,9 @@ async function translatePendingBodyWithCodex(
 }
 
 /**
- * Recupera un body pending con la catena storica quando il circuit-breaker
- * Codex ha spento la lane primaria. Passa comunque dal traduttore di campo,
+ * Recupera un body pending con la catena storica quando la lane primaria
+ * Codex è spenta o ha prodotto un output rifiutato. Passa comunque dal
+ * traduttore di campo,
  * così i marker nav, la struttura Markdown, il passthrough e la completezza
  * minima hanno lo stesso contratto della seconda corsia Codex.
  */
@@ -15400,6 +15404,7 @@ async function translatePendingBodyWithHistoricalChain(
           }),
           `${locale}:${field}-pending-retry`,
           locale,
+          { forceLegacy: true },
         );
         return chunked;
       }
@@ -15411,7 +15416,7 @@ async function translatePendingBodyWithHistoricalChain(
         }),
         Math.max(5000, Math.ceil(countWords(masked || '') * 5)),
         `${locale}:${field}-pending-retry`,
-        { translation: true },
+        { translation: true, forceLegacy: true },
       );
       const translated = translatedStringOrNull(parsed?.[field], locale);
       if (translated === null) {
@@ -15537,7 +15542,7 @@ async function translateArticle(data) {
     };
   }
 
-  async function callWithRetry(prompt, maxTokens, label, { translation = false } = {}) {
+  async function callWithRetry(prompt, maxTokens, label, { translation = false, forceLegacy = false } = {}) {
     const safePrompt = `${prompt}\n\n${JSON_QUOTE_SAFETY_RULE_IT}`;
     // Niente try/catch attorno a callLLM qui, a differenza del gemello
     // requestHeadlineSelection (#391) — verificato in review su PR #604
@@ -15572,7 +15577,10 @@ async function translateArticle(data) {
       // but only the shared Codex lane count can enter the broker at once.
       // If Codex is disabled/missing, callLLM receives an explicit non-Codex
       // historical chain immediately instead of being aborted before it runs.
-      if (!isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY)) return historicalCall();
+      // A pending-body fallback has already rejected Codex output. Calling
+      // the preferred lane again would replay the same failure, so that path
+      // explicitly selects the historical chain without Codex.
+      if (forceLegacy || !isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY)) return historicalCall();
       return withCodexTranslationLane({
         processDeadlineMs: _pendingBodyCodexDeadlineMs ?? undefined,
         fallback: historicalCall,
@@ -15639,7 +15647,7 @@ async function translateArticle(data) {
     makeChunkPrompt,
     labelPrefix,
     targetLang,
-    { pretranslatedResult = null } = {},
+    { pretranslatedResult = null, forceLegacy = false } = {},
   ) {
     const chunks = pretranslatedResult === null
       ? splitIntoTranslationChunks(bodyText)
@@ -15651,7 +15659,7 @@ async function translateArticle(data) {
             makeChunkPrompt(chunk, i, chunks.length),
             Math.max(5000, Math.ceil(countWords(chunk) * 5)),
             `${labelPrefix}-p${i + 1}`,
-            { translation: true },
+            { translation: true, ...(forceLegacy ? { forceLegacy: true } : {}) },
           ),
         ),
       )
