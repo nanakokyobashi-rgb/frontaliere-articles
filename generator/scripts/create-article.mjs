@@ -16307,8 +16307,13 @@ async function translateArticle(data) {
       // code cannot create an association that a normal label translation
       // makes impossible to prove.
       const value = maskSourceOwnedForNumbers(text, codeSpans);
-      const numberPattern = /(?<![\p{L}\p{N}_])[+\-−]?\d+(?:[.,'’\u00a0\u202f ]\d+)*(?:\s*[%°º])?(?![\p{L}\p{N}_])/gu;
+      // The ordinal marker is part of an Italian date, not a measurement:
+      // `1° gennaio 2026` can become `January 1, 2026`, `1. Januar 2026`
+      // or `1er janvier 2026`. Keep localized ordinal suffixes in the token
+      // so the date-aware normalization below can compare the same day.
+      const numberPattern = /(?<![\p{L}\p{N}_])[+\-−]?\d+(?:[.,'’\u00a0\u202f ]\d+)*(?:(?:\s*[%°º])|(?:st|nd|rd|th|er|re|e)(?![\p{L}\p{N}_]))?(?![\p{L}\p{N}_])/giu;
       const spanBoundary = (char) => char === '\n' || ',;!?|'.includes(char);
+      const dateMonthPattern = /(?:gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre|january|february|march|april|may|june|july|august|september|october|november|december|januar|februar|märz|maerz|april|mai|juni|juli|august|september|oktober|november|dezember|janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|septembre|octobre|novembre|décembre|decembre)\b/iu;
       const isLineLeadingOrdinal = (match, token) => {
         const lineStart = value.lastIndexOf('\n', match.index - 1) + 1;
         const leadingOrdinal = value.slice(lineStart).match(/^[ \t]*\d{1,2}(?:[°º]|\.)\s/u);
@@ -16317,16 +16322,39 @@ async function translateArticle(data) {
         return match.index === lineStart + indentLength
           && (/[°º]$/u.test(token) || value[match.index + token.length] === '.');
       };
+      const isDateOrdinal = (match, token) => {
+        const rawNumber = token
+          .replace(/[%°º]/gu, '')
+          .replace(/(?:st|nd|rd|th|er|re|e)$/iu, '')
+          .replace(/^[+\-−]/u, '')
+          .replace(/[.,'’\u00a0\u202f ]/gu, '');
+        const day = Number(rawNumber);
+        if (!Number.isInteger(day) || day < 1 || day > 31) return false;
+        const before = value.slice(0, match.index);
+        const after = value.slice(match.index + token.length);
+        const monthBefore = new RegExp(`${dateMonthPattern.source}[\\s,./-]{0,4}$`, 'iu').test(before);
+        const monthAfter = new RegExp(`^[\\s,./-]{0,4}${dateMonthPattern.source}`, 'iu').test(after);
+        // A degree marker alone is not enough: `12°` remains a degree
+        // measurement. The month on either side is the proof that this is a
+        // localized date ordinal, including an English day without a suffix.
+        return monthBefore || monthAfter;
+      };
       const numberEntries = [...value.matchAll(numberPattern)].map((match) => {
         const [token] = match;
         const unit = token.match(/[%°º]$/u)?.[0] || '';
-        const number = unit ? token.slice(0, -unit.length) : token;
+        const ordinalSuffix = token.match(/(?:st|nd|rd|th|er|re|e)$/iu)?.[0] || '';
+        const number = unit
+          ? token.slice(0, -unit.length)
+          : ordinalSuffix
+            ? token.slice(0, -ordinalSuffix.length)
+            : token;
         const sign = number.match(/^[+\-−]/u)?.[0] || '';
         const unsigned = sign ? number.slice(sign.length) : number;
         const lineLeadingOrdinal = isLineLeadingOrdinal(match, token);
-        const normalizedUnit = lineLeadingOrdinal ? '.' : unit;
+        const dateOrdinal = isDateOrdinal(match, token);
+        const normalizedUnit = dateOrdinal ? 'date-ordinal' : lineLeadingOrdinal ? '.' : unit || ordinalSuffix;
         const tokenEnd = match.index + token.length
-          + (lineLeadingOrdinal && value[match.index + token.length] === '.' ? 1 : 0);
+          + ((lineLeadingOrdinal || dateOrdinal) && value[match.index + token.length] === '.' ? 1 : 0);
         return {
           value: `${sign}${unsigned.replace(/[.,'’\u00a0\u202f ]/gu, '')}:${normalizedUnit}`,
           index: match.index,

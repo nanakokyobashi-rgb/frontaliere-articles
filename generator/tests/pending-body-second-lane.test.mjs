@@ -1468,8 +1468,8 @@ test('il joiner protegge anche le definizioni dentro prefissi Markdown', async (
 
 test('il joiner protegge la sequenza numerica ma ammette i separatori locali', async () => {
   const realChunker = buildChunker();
-  const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
-  const makeTranslator = (mutate) => {
+  const makeTranslator = (mutate, chunkTarget = 3) => {
+    const splitWithSmallTarget = (bodyText) => realChunker(bodyText, chunkTarget);
     const translateInChunks = new Function(
       'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
       `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
@@ -1521,6 +1521,28 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     await makeTranslator((chunk) => chunk.replace('12°', '12.'))(degreeSource),
     null,
     'il punto ordinale non deve allentare il controllo di una misura in gradi',
+  );
+
+  const inlineDateSource = 'La misura vale dal 1° gennaio 2026 e resta valida.';
+  const inlineDateTarget = 'The measure applies from January 1, 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(inlineDateSource, inlineDateTarget),
+      500,
+    )(inlineDateSource),
+    inlineDateTarget,
+    'un ordinale inline può diventare un giorno senza suffisso quando la data resta riconoscibile',
+  );
+
+  const frenchDateSource = 'La misura vale dal 1° gennaio 2026 e resta valida.';
+  const frenchDateTarget = 'La mesure s’applique dès le 1er janvier 2026 et reste valable.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(frenchDateSource, frenchDateTarget),
+      500,
+    )(frenchDateSource),
+    frenchDateTarget,
+    'un ordinale inline francese con suffisso er conserva lo stesso giorno',
   );
 
   const signedGroupedChunks = realChunker('Valore -12 345 dopo', 2);
