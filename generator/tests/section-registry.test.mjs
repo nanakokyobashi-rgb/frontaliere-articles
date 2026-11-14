@@ -72,6 +72,7 @@ import {
 } from '../../scripts/lib/corpus-sections.mjs';
 import {
   archiveUnionSize,
+  assertArchivePageKey,
   buildArticleUrlBlocks,
   buildFamilySectionSitemap,
   buildSitemap,
@@ -392,6 +393,17 @@ test('la policy sitemap paginata ammette solo la pagina canonica 1', () => {
   assert.equal(isPaginationSitemapEligible(2), false);
   assert.equal(isPaginationSitemapEligible(0), false);
   assert.equal(isPaginationSitemapEligible(Number.NaN), false);
+});
+
+test('la sitemap rifiuta chiavi archive malformate prima dell append', () => {
+  assert.equal(assertArchivePageKey('archive:2'), 2);
+  for (const key of ['archive:', 'archive:NaN', 'archive:2.5', 'archive:1', 'archive:9007199254740993']) {
+    assert.throws(
+      () => assertArchivePageKey(key),
+      /chiave archivio non valida/u,
+      `la chiave ${key} deve essere rifiutata esplicitamente`,
+    );
+  }
 });
 
 test('l append della sitemap paginata usa la stessa policy della pagina', () => {

@@ -209,6 +209,21 @@ export function sectionPathsOf(section, all = ARTICLE_SECTION_CORE_ALL) {
 /** Lo slug dell'archivio completo per locale (`/<sezione>/tutti/` e la sua catena `page-N`). */
 export const ARCHIVE_ALL_SLUG = Object.freeze({ it: 'tutti', en: 'all', de: 'alle', fr: 'tous' });
 
+const ARCHIVE_PAGE_KEY_RE = /^archive:(\d+)$/;
+
+/**
+ * Parse an archive page key without allowing malformed values to disappear
+ * through the pagination sitemap policy.
+ */
+export function assertArchivePageKey(key) {
+  const match = typeof key === 'string' ? ARCHIVE_PAGE_KEY_RE.exec(key) : null;
+  const page = match ? Number(match[1]) : NaN;
+  if (!Number.isSafeInteger(page) || page < 2) {
+    throw new Error(`buildFamilySectionSitemap: chiave archivio non valida (${String(key)})`);
+  }
+  return page;
+}
+
 /** Only the canonical first archive page belongs in a public sitemap. */
 export function isPaginationSitemapEligible(page) {
   return Number.isSafeInteger(page) && page === 1;
@@ -333,8 +348,8 @@ export function buildFamilySectionSitemap({
   for (const page of familySectionPages(section, archiveUnionSize(meta, slugMap), pageSize)) {
     const pageNumber = page.key === 'archive'
       ? 1
-      : page.key.startsWith('archive:')
-        ? Number(page.key.slice('archive:'.length))
+      : typeof page.key === 'string' && page.key.startsWith('archive:')
+        ? assertArchivePageKey(page.key)
         : null;
     if (SITEMAP_LOCALES.some((loc) => retiredPaths.has(page.paths[loc]))) continue;
     for (const loc of SITEMAP_LOCALES) {
