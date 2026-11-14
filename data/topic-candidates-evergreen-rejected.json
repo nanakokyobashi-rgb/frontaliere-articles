@@ -14565,13 +14565,13 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/11/a-varese-non-si-vince-solo-al-centro-avs-collettiva-si-fa-avanti-e-mette-a-disposizione-una-candidatura-di-area/2736235": {
-      "section": "frontaliere",
-      "ts": 1794449619500
-    },
     "svizzera::https://www3.ti.ch/dfe/dr/ustat/allegati/digitale/mercato_lavoro/notiziario/2026q1": {
       "section": "svizzera",
       "ts": 1794614240720
+    },
+    "frontaliere::https://www.varesenews.it/2026/11/ho-41-anni-esperienza-e-voglia-di-lavorare-ma-a-varese-trovare-un-impiego-sembra-impossibile/2738917": {
+      "section": "frontaliere",
+      "ts": 1794671213752
     }
   }
 }
