@@ -29,8 +29,14 @@ export const REVIEW_CLAIM_STATES = Object.freeze([
 ]);
 
 const CLAIM_STATE_SET = new Set(REVIEW_CLAIM_STATES);
+// `codex_timeout`: il watchdog interno di `codex exec` e' scaduto senza verdetto.
+// E' una sotto-causa di `cancelled` (stessa riattivabilita') tenuta distinta nel
+// ledger perche' il retry sulla stessa PR+HEAD deve poter scendere di effort
+// invece di rifare la stessa review identica (vedi `priorCodexTimeouts`).
+export const CODEX_TIMEOUT_CAUSE = 'codex_timeout';
 const CLAIM_CAUSE_SET = new Set([
   'cancelled',
+  CODEX_TIMEOUT_CAUSE,
   'completed',
   'max_turns',
   'non_retryable',
@@ -270,6 +276,28 @@ export function claimStatusFromOutcome({
   return 'completed';
 }
 
+/**
+ * Quante review Codex sulla stessa PR+HEAD sono morte sul watchdog interno.
+ * Conta i token distinti il cui ULTIMO evento e' un fallimento con causa
+ * `codex_timeout`; ignora fingerprint e revisione del body (un body corretto non
+ * rende piu' veloce la review del codice). Un claim `active` o `completed` non
+ * conta: solo il fallimento provato. Serve allo step `tier` di tests.yml per
+ * scendere di effort al retry.
+ */
+export function priorCodexTimeouts({ claims = [], prNumber, headSha } = {}) {
+  const pr = String(prNumber ?? '').trim();
+  const head = String(headSha ?? '').trim().toLowerCase();
+  if (!PR_RE.test(pr) || !SHA_RE.test(head)) return 0;
+  const tokens = new Set();
+  for (const claim of claims || []) {
+    if (!claim || claim.prNumber !== pr || claim.headSha !== head) continue;
+    if (claim.cause !== CODEX_TIMEOUT_CAUSE) continue;
+    if (claim.state !== 'failed-transient' && claim.state !== 'failed-terminal') continue;
+    tokens.add(claim.token);
+  }
+  return tokens.size;
+}
+
 function gh(args) {
   return execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
 }
@@ -493,7 +521,7 @@ function finalizeClaim(base, repo) {
   const priorClaims = latestReviewClaims(comments, { dedupeKey: base.dedupeKey })
     .filter((claim) => claim.token !== token);
   const reviewFallbackApproved = process.env.REVIEW_GATE_FALLBACK_APPROVED === 'true';
-  const retryableCause = ['cancelled', 'max_turns', 'rate_limit', 'server_error'].includes(cause);
+  const retryableCause = ['cancelled', CODEX_TIMEOUT_CAUSE, 'max_turns', 'rate_limit', 'server_error'].includes(cause);
   const permanentCause = cause === 'non_retryable' || cause === 'probe_failed';
   let state = REVIEW_CLAIM_STATES.includes(process.env.CLAIM_STATUS)
     ? process.env.CLAIM_STATUS
@@ -556,6 +584,30 @@ function claimMain() {
   }
 }
 
+/**
+ * `--prior-timeout`: stampa `prior_codex_timeouts=N` (e lo appende a
+ * GITHUB_OUTPUT). Fail-open verso la review PIENA: se i commenti non sono
+ * leggibili restituisce 0 e lo dice, perche' abbassare l'effort su un dubbio
+ * degraderebbe una review funnel-critical senza prova di un timeout.
+ */
+function priorTimeoutMain() {
+  const repo = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
+  const prNumber = String(process.env.PR_NUMBER || '').trim();
+  const headSha = String(process.env.HEAD_SHA || '').trim().toLowerCase();
+  let count = 0;
+  try {
+    if (!repo) throw new Error('repo mancante');
+    count = priorCodexTimeouts({ claims: latestReviewClaims(readComments(repo, prNumber)), prNumber, headSha });
+  } catch (error) {
+    console.log(`::warning::Timeout Codex precedenti non verificabili (${String(error?.message || error).slice(0, 200)}) -> review a effort pieno.`);
+    count = 0;
+  }
+  const line = `prior_codex_timeouts=${count}`;
+  console.log(line);
+  if (process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT, `${line}\n`);
+  return count;
+}
+
 const invokedDirectly = (() => {
   try {
     return fs.realpathSync(fileURLToPath(import.meta.url)) === fs.realpathSync(process.argv[1] || '');
@@ -566,4 +618,5 @@ const invokedDirectly = (() => {
 
 if (invokedDirectly) {
   if (process.argv.includes('--claim')) claimMain();
+  else if (process.argv.includes('--prior-timeout')) priorTimeoutMain();
 }

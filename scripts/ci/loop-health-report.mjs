@@ -42,7 +42,7 @@ const CLAIM_HEALTH_STATE_SET = new Set([
   'active', 'completed', 'failed-terminal', 'failed-transient', 'released',
 ]);
 const CLAIM_HEALTH_CAUSE_SET = new Set([
-  'cancelled', 'completed', 'max_turns', 'non_retryable', 'probe_failed',
+  'cancelled', 'codex_timeout', 'completed', 'max_turns', 'non_retryable', 'probe_failed',
   'rate_limit', 'released', 'server_error', 'startup_failure', 'none',
   'verdict_posted',
 ]);
