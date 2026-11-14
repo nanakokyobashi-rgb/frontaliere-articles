@@ -5087,7 +5087,9 @@
     {
       "path": "generator/tests/crawler-cross-repo-artifacts.test.mjs",
       "sitePath": ".github/corpus-workflows/observers/generator/tests/crawler-cross-repo-artifacts.test.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Il fixture verifica il contratto del generatore, i dataset `data/jobs/by-crawler/` e il manifest del corpus, e importa il closer `scripts/ci/close-recovered-failure-issues.mjs`, che qui e' `adapted`. Una copia byte-per-byte isolata dal sito lascerebbe dipendenze non registrate, `corpus-only` e adattate e renderebbe rossa la PR di trasporto; le modifiche del test vanno riapplicate manualmente sopra l'adattamento.",
+      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3809",
       "baseline": {
         "site": "382670e473ce7f7a",
         "corpus": "382670e473ce7f7a",
