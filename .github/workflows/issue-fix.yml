@@ -101,8 +101,12 @@ jobs:
         run: |
           set -euo pipefail
           body=$(gh issue view "$ISSUE" --repo "$REPO" --json body --jq '.body // ""')
-          contract=$(node --input-type=module - "$body" <<'NODE'
-          const body = process.argv[2] || '';
+          body_file=$(mktemp)
+          trap 'rm -f "$body_file"' EXIT
+          printf '%s' "$body" > "$body_file"
+          contract=$(node --input-type=module - "$body_file" <<'NODE'
+          import fs from 'node:fs';
+          const body = fs.readFileSync(process.argv[2], 'utf8');
           const marker = /<!-- L11_ISSUE_CONTRACT:\s*(\{.*\})\s*-->/ms.exec(body);
           if (!marker) { process.stdout.write(JSON.stringify({ present: false, valid: false, fixable: false })); process.exit(0); }
           let c;
@@ -1377,14 +1381,18 @@ jobs:
           # questo punto. Il commento non è un gate del merge; collega solo la
           # PR realmente aperta al candidate/source record osservato.
           ISSUE_BODY=$(gh issue view "$ISSUE" --repo "$REPO" --json body --jq '.body // ""' 2>/dev/null || true)
-          CONTRACT=$(node --input-type=module - "$ISSUE_BODY" <<'NODE'
-          const body = process.argv[2] || '';
+          body_file=$(mktemp)
+          printf '%s' "$ISSUE_BODY" > "$body_file"
+          CONTRACT=$(node --input-type=module - "$body_file" <<'NODE'
+          import fs from 'node:fs';
+          const body = fs.readFileSync(process.argv[2], 'utf8');
           const marker = /<!-- L11_ISSUE_CONTRACT:\s*(\{.*\})\s*-->/ms.exec(body);
           if (!marker) process.exit(0);
           try { JSON.parse(marker[1]); } catch { process.exit(0); }
           process.stdout.write(marker[1]);
           NODE
           )
+          rm -f "$body_file"
           if [ -n "$CONTRACT" ]; then
             HEAD_SHA=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json headRefOid --jq '.headRefOid' 2>/dev/null || true)
             PROOF=$(node --input-type=module - "$CONTRACT" "$PR_NUMBER" "$HEAD_SHA" <<'NODE'

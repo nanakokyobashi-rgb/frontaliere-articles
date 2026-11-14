@@ -227,6 +227,19 @@ test('la CLI emette JSON con la forma attesa dallo YAML del triage', async () =>
   ]);
 });
 
+test('la CLI legge il body su stdin senza inserirlo nella command line', () => {
+  const body = `${'contenuto della issue '.repeat(12000)}\n\` .github/workflows/issue-triage.yml \``;
+  const result = spawnSync(
+    process.execPath,
+    [CLASSIFIER, 'Workflow Failure: qualcosa', '["follow-up"]', '--body-stdin'],
+    { input: body, encoding: 'utf8' },
+  );
+  assert.equal(result.status, 0, result.stderr);
+  const decision = JSON.parse(result.stdout);
+  assert.equal(decision.controlPlane, true, 'il body passato via stdin deve restare evidenza del classificatore');
+  assert.ok(decision.riskDomains.includes('control-plane'));
+});
+
 test('la CLI non si attiva per un wrapper chiamato classify-issue.mjs', () => {
   const directory = mkdtempSync(path.join(tmpdir(), 'frontaliere-classify-'));
   const wrapper = path.join(directory, 'classify-issue.mjs');
