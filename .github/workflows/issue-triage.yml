@@ -166,8 +166,12 @@ jobs:
           # .github/workflows e scripts/ci) venga scambiata per una richiesta
           # umana o per un'autorizzazione implicita. Un contratto assente resta
           # sul classificatore normale; uno presente ma invalido è review-only.
-          l11_contract=$(node --input-type=module - "$body" <<'NODE'
-          const body = process.argv[2] || '';
+          body_file=$(mktemp)
+          trap 'rm -f "$body_file"' EXIT
+          printf '%s' "$body" > "$body_file"
+          l11_contract=$(node --input-type=module - "$body_file" <<'NODE'
+          import fs from 'node:fs';
+          const body = fs.readFileSync(process.argv[2], 'utf8');
           const marker = /<!-- L11_ISSUE_CONTRACT:\s*(\{.*\})\s*-->/ms.exec(body);
           if (!marker) {
             process.stdout.write(JSON.stringify({ present: false, valid: false, fixable: false }));
@@ -238,7 +242,7 @@ jobs:
             exit 0
           fi
 
-          decision=$(node scripts/lib/classify-issue.mjs "$title" "$labels_json" "$body")
+          decision=$(printf '%s' "$body" | node scripts/lib/classify-issue.mjs "$title" "$labels_json" --body-stdin)
           echo "decision=$decision"
           cat=$(node -e "process.stdout.write(JSON.parse(process.argv[1]).category)" "$decision")
           autofix=$(node -e "process.stdout.write(String(JSON.parse(process.argv[1]).autofix===true))" "$decision")
@@ -357,8 +361,11 @@ jobs:
             [ -n "$issue" ] || continue
             number=$(printf '%s' "$issue" | jq -r '.number')
             body=$(printf '%s' "$issue" | jq -r '.body // ""')
-            contract=$(node --input-type=module - "$body" <<'NODE'
-          const body = process.argv[2] || '';
+            body_file=$(mktemp)
+            printf '%s' "$body" > "$body_file"
+            contract=$(node --input-type=module - "$body_file" <<'NODE'
+          import fs from 'node:fs';
+          const body = fs.readFileSync(process.argv[2], 'utf8');
           const marker = /<!-- L11_ISSUE_CONTRACT:\s*(\{.*\})\s*-->/ms.exec(body);
           if (!marker) { process.stdout.write(JSON.stringify({ present: false, valid: false, fixable: false })); process.exit(0); }
           let c;
@@ -380,6 +387,7 @@ jobs:
           process.stdout.write(JSON.stringify({ present: true, valid: fixable || reviewOnly, fixable }));
           NODE
             )
+            rm -f "$body_file"
             present=$(printf '%s' "$contract" | jq -r '.present == true')
             valid=$(printf '%s' "$contract" | jq -r '.valid == true')
             fixable=$(printf '%s' "$contract" | jq -r '.fixable == true')

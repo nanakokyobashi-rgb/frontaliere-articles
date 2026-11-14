@@ -59,10 +59,10 @@
  * Uso modulo:
  *   import { classifyIssue } from './classify-issue.mjs';
  * Uso CLI:
- *   node scripts/lib/classify-issue.mjs "<title>" '<labels-json-array>'
+ *   node scripts/lib/classify-issue.mjs "<title>" '<labels-json-array>' [--body-stdin]
  */
 
-import { realpathSync } from 'node:fs';
+import { readFileSync, realpathSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import {
   classifyAutomationRisk,
@@ -240,5 +240,6 @@ if (isDirectRun) {
   } catch {
     labels = [];
   }
-  process.stdout.write(JSON.stringify(classifyIssue(title, labels)));
+  const body = process.argv[4] === '--body-stdin' ? readFileSync(0, 'utf8') : '';
+  process.stdout.write(JSON.stringify(classifyIssue(title, labels, body)));
 }

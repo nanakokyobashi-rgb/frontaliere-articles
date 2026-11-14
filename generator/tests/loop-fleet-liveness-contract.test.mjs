@@ -26,6 +26,9 @@ test('L11 triage legge il contratto machine-readable prima del classificatore ge
   assert.match(workflow, /contract\.route === 'bounded-fix-queue'/);
   assert.match(workflow, /c\.remediationPr === null/);
   assert.match(workflow, /--add-label operations-audit-review/);
+  assert.match(workflow, /fs\.readFileSync\(process\.argv\[2\], 'utf8'\)/);
+  assert.doesNotMatch(workflow, /node --input-type=module - "\$body"/);
+  assert.match(workflow, /printf '%s' "\$body" \| node scripts\/lib\/classify-issue\.mjs "\$title" "\$labels_json" --body-stdin/);
   assert.doesNotMatch(workflow, /--add-label\s+needs-human/);
   assert.doesNotMatch(workflow, /id-token:\s+write/);
 });
@@ -37,6 +40,10 @@ test('il marker L11 attraversa JSON multilinea e distingue assente da JSON inval
     0,
   );
   assert.equal(matcherCount, 4, 'tutte le copie del matcher L11 devono usare dotall');
+  for (const workflow of workflows) {
+    assert.match(workflow, /fs\.readFileSync\(process\.argv\[2\], 'utf8'\)/);
+    assert.doesNotMatch(workflow, /node --input-type=module - "\$(?:body|ISSUE_BODY)"/);
+  }
 
   const parseMarker = (body) => {
     const marker = L11_MARKER.exec(body);

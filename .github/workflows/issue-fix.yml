@@ -101,8 +101,12 @@ jobs:
         run: |
           set -euo pipefail
           body=$(gh issue view "$ISSUE" --repo "$REPO" --json body --jq '.body // ""')
-          contract=$(node --input-type=module - "$body" <<'NODE'
-          const body = process.argv[2] || '';
+          body_file=$(mktemp)
+          trap 'rm -f "$body_file"' EXIT
+          printf '%s' "$body" > "$body_file"
+          contract=$(node --input-type=module - "$body_file" <<'NODE'
+          import fs from 'node:fs';
+          const body = fs.readFileSync(process.argv[2], 'utf8');
           const marker = /<!-- L11_ISSUE_CONTRACT:\s*(\{.*\})\s*-->/ms.exec(body);
           if (!marker) { process.stdout.write(JSON.stringify({ present: false, valid: false, fixable: false })); process.exit(0); }
           let c;
@@ -333,7 +337,8 @@ jobs:
           set -euo pipefail
           mkdir -p "$CTX_DIR/mutex-bin"
           gh issue view "$ISSUE_NUMBER" --repo "$GH_REPO" --json number,title,body,labels,state > "$CTX_DIR/issue.json"
-          node --input-type=module - "$CTX_DIR/issue.json" "$CTX_DIR/scope-issue.json" "$ISSUE_NUMBER" "$GH_REPO" >> "$GITHUB_OUTPUT" <<'NODE'
+          {
+          node --input-type=module - "$CTX_DIR/issue.json" "$CTX_DIR/scope-issue.json" "$ISSUE_NUMBER" "$GH_REPO" <<'NODE'
           import fs from 'node:fs';
           import { dailyBucketInfo, dailyBucketScopeDecision } from './scripts/ci/followup-resolution-match.mjs';
 
@@ -472,9 +477,10 @@ jobs:
           process.stdout.write(JSON.stringify(sameRepositoryPrs));
           NODE
           chmod +x "$CTX_DIR/mutex-bin/gh"
-          printf 'mutex_bin=%s\n' "$CTX_DIR/mutex-bin" >> "$GITHUB_OUTPUT"
-          printf 'mutex_base_path=%s\n' "$PATH" >> "$GITHUB_OUTPUT"
-          printf 'mutex_real_gh=%s\n' "$TRUSTED_GH" >> "$GITHUB_OUTPUT"
+          printf 'mutex_bin=%s\n' "$CTX_DIR/mutex-bin"
+          printf 'mutex_base_path=%s\n' "$PATH"
+          printf 'mutex_real_gh=%s\n' "$TRUSTED_GH"
+          } >> "$GITHUB_OUTPUT"
 
       # ── Pre-flight 2b: dispatch stantio ───────────────────────────────────
       # Il pre-flight 2 risponde a «e' gia' risolta?», e su una PR aperta fa
@@ -555,7 +561,7 @@ jobs:
             exit 0
           fi
           node scripts/ci/check-workflows-scope.mjs
-          blocked=$(awk -F= '$1 == "workflows_blocked" { value = $2 } END { print value }' "$GITHUB_OUTPUT")
+          blocked=$(grep -E '^workflows_blocked=' "$GITHUB_OUTPUT" | tail -n 1 | cut -d= -f2-)
           if [ "${DAILY_BUCKET:-false}" = 'true' ] && [ "${blocked:-false}" = 'true' ]; then
             marker_file="$RUNNER_TEMP/daily-workflows-scope-${ISSUE_NUMBER}.md"
             {
@@ -565,7 +571,7 @@ jobs:
           Il guard ha esaminato esclusivamente l'item daily selezionato. Il fixer non viene avviato perché il token non può modificare il workflow citato; il bucket resta aperto e gli altri FU non vengono dichiarati risolti.
 
           EOF
-              printf 'Item attribuito: `%s`\n\n' "$DAILY_ITEM_ID"
+              printf "Item attribuito: \`%s\`\n\n" "$DAILY_ITEM_ID"
               cat <<'EOF'
           <!-- FIX_OUTCOME: blocked-workflows-scope -->
           EOF
@@ -1377,14 +1383,18 @@ jobs:
           # questo punto. Il commento non è un gate del merge; collega solo la
           # PR realmente aperta al candidate/source record osservato.
           ISSUE_BODY=$(gh issue view "$ISSUE" --repo "$REPO" --json body --jq '.body // ""' 2>/dev/null || true)
-          CONTRACT=$(node --input-type=module - "$ISSUE_BODY" <<'NODE'
-          const body = process.argv[2] || '';
+          body_file=$(mktemp)
+          printf '%s' "$ISSUE_BODY" > "$body_file"
+          CONTRACT=$(node --input-type=module - "$body_file" <<'NODE'
+          import fs from 'node:fs';
+          const body = fs.readFileSync(process.argv[2], 'utf8');
           const marker = /<!-- L11_ISSUE_CONTRACT:\s*(\{.*\})\s*-->/ms.exec(body);
           if (!marker) process.exit(0);
           try { JSON.parse(marker[1]); } catch { process.exit(0); }
           process.stdout.write(marker[1]);
           NODE
           )
+          rm -f "$body_file"
           if [ -n "$CONTRACT" ]; then
             HEAD_SHA=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json headRefOid --jq '.headRefOid' 2>/dev/null || true)
             PROOF=$(node --input-type=module - "$CONTRACT" "$PR_NUMBER" "$HEAD_SHA" <<'NODE'
