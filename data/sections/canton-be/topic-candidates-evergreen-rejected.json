@@ -4,101 +4,21 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://www.be.ch/de/start.html?newsid=0a0d974d-dd49-425b-aa35-c3489ea79b07": {
+    "canton-be::https://ajour.ch/story/707145/kanton-bern-l%c3%a4uft-mit-neuausschreibung-der-arbeitsintegration-auf": {
       "section": "canton-be",
-      "ts": 1794295281502
+      "ts": 1794637040642
     },
-    "canton-be::https://ajour.ch/story/706261/kanton-bern-verschickt-dritte-und-letzte-steuerrechnung-des-jahres": {
+    "canton-be::https://www.lejdj.ch/articles/cancer-de-la-prostate-bienne-elargit-son-arsenal-medical-et-humain-106095": {
       "section": "canton-be",
-      "ts": 1794339951535
+      "ts": 1794637041640
     },
-    "canton-be::https://ajour.ch/story/706416/les-policiers-bernois-devraient-pouvoir-siger-au-grand-conseil": {
+    "canton-be::https://ajour.ch/story/706868/wechsel-an-der-spitze-des-handels-und-industrievereins-bielseelandberner-jura": {
       "section": "canton-be",
-      "ts": 1794340915017
-    },
-    "canton-be::https://ajour.ch/story/706407/berner-regierung-lehnt-steuerabzug-f%c3%bcr-klimaanlagen-ab": {
-      "section": "canton-be",
-      "ts": 1794340916635
-    },
-    "canton-be::https://ajour.ch/story/706415/umstrittener-vorschlag-kommt-ins-kantonsparlament-polizisten-sollen-in-den-grossrat-d%c3%bcrfen": {
-      "section": "canton-be",
-      "ts": 1794340918318
-    },
-    "canton-be::https://ajour.ch/story/706280/digitaler-stadtplan-berns-erh%c3%a4lt-ein-update": {
-      "section": "canton-be",
-      "ts": 1794340919825
-    },
-    "canton-be::https://ajour.ch/story/706252/infoveranstaltung-zu-ahverg%c3%a4nzungsleistungen": {
-      "section": "canton-be",
-      "ts": 1794340921380
-    },
-    "canton-be::https://ajour.ch/story/706253/commission-du-grand-conseil-bernois-pour-des-mesures-daustrit": {
-      "section": "canton-be",
-      "ts": 1794378113756
-    },
-    "canton-be::https://ajour.ch/story/706247/fragen-zur-pensionierung-werden-vom-vz-verm%c3%b6genszentrum-jetzt-auch-in-biel-beantwortet": {
-      "section": "canton-be",
-      "ts": 1794378115145
-    },
-    "canton-be::https://ajour.ch/story/706206/es-wird-dazu-kommen-baumeschneider-warnt-vor-ahvk%c3%bcrzungen": {
-      "section": "canton-be",
-      "ts": 1794378116434
-    },
-    "canton-be::https://ajour.ch/story/706378/sbb-sp%c3%bcren-dieselschock-auch-deshalb-setzt-die-bahn-auf-%c3%b6koalternativen": {
-      "section": "canton-be",
-      "ts": 1794378117961
-    },
-    "canton-be::https://ajour.ch/story/706300/ventilatoren-und-sonnensegel-gegen-hitze-an-schulen": {
-      "section": "canton-be",
-      "ts": 1794414474422
-    },
-    "canton-be::https://ajour.ch/story/706464/angriff-auf-pensionskasse-des-bundes-hacker-fordern-offenbar-l%c3%b6segeld": {
-      "section": "canton-be",
-      "ts": 1794414475779
-    },
-    "canton-be::https://ajour.ch/story/706369/berner-regierung-will-badeverbote-zum-schutz-von-fischen-pr%c3%bcfen": {
-      "section": "canton-be",
-      "ts": 1794414477440
-    },
-    "canton-be::https://ajour.ch/story/706394/erstmals-seit-corona-weltweite-coemissionen-aus-fossilen-energien-sinken": {
-      "section": "canton-be",
-      "ts": 1794414478780
-    },
-    "canton-be::https://www.be.ch/de/start.html?newsid=d55a3b6e-cf26-4f3f-b7bb-15657bc46e6f": {
-      "section": "canton-be",
-      "ts": 1794415912863
-    },
-    "canton-be::https://ajour.ch/story/706255/kanton-bern-und-bauernverband-wollen-enger-zusammenarbeiten": {
-      "section": "canton-be",
-      "ts": 1794415915454
+      "ts": 1794637043240
     },
     "canton-be::https://ajour.ch/story/706695/lentreprise-bernoise-ypsomed-relve-ses-ambitions-miparcours": {
       "section": "canton-be",
-      "ts": 1794415916993
-    },
-    "canton-be::https://ajour.ch/story/706673/freiburger-kantonsparlament-genehmigt-budget-2027": {
-      "section": "canton-be",
-      "ts": 1794445287833
-    },
-    "canton-be::https://ajour.ch/story/706210/zweite-abstimmung-%c3%bcber-die-heiratsstrafe-wer-gewinnt-diesmal-wer-verliert": {
-      "section": "canton-be",
-      "ts": 1794445289571
-    },
-    "canton-be::https://ajour.ch/story/706492/die-swissinfobelegschaft-protestiert-in-bern-gegen-stellenabbau": {
-      "section": "canton-be",
-      "ts": 1794446239511
-    },
-    "canton-be::https://ajour.ch/story/706406/zukunft-biel-prr-und-fdp-stellen-sich-gegen-das-bieler-budget-2027": {
-      "section": "canton-be",
-      "ts": 1794446241049
-    },
-    "canton-be::https://ajour.ch/story/706360/gegen-h%c3%b6here-steuern-in-biel": {
-      "section": "canton-be",
-      "ts": 1794446242955
-    },
-    "canton-be::https://ajour.ch/story/706228/finanzkommission-verlangt-budgetk%c3%bcrzungen": {
-      "section": "canton-be",
-      "ts": 1794446244536
+      "ts": 1794637044774
     }
   }
 }
