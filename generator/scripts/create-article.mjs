@@ -17347,8 +17347,9 @@ ${localizedToponymInstruction(targetLang)}`;
   // free-MT gia' fermo sul suo budget. Prima della guardia ogni body in attesa
   // riceve UN tentativo sulla corsia Codex del job, pinnata e con la scadenza
   // che il processo ha dichiarato. Se il circuit-breaker ha gia' spento Codex,
-  // usa la catena storica senza Codex: il fallimento della lane primaria non
-  // deve trasformare una recovery ancora possibile in un missing-key certo.
+  // oppure il suo output viene rifiutato dal contratto del body, usa la catena
+  // storica senza Codex: il fallimento della lane primaria non deve trasformare
+  // una recovery ancora possibile in un missing-key certo.
   // L'uscita passa da `translateFieldFreeMt` come ogni body free-MT (nav-link,
   // completezza, passthrough): vedi i due helper di recovery. La guardia resta
   // invariata: se anche Codex non traduce, il body resta in attesa e

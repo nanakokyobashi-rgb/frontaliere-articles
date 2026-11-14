@@ -14,12 +14,12 @@
  * In entrambe la cascata free era esaurita e il tier Codex del free-MT si era
  * gia' fermato sul suo budget. La corsia del job preferisce Codex, ma deve
  * poter usare anche la catena storica se il circuit breaker ha gia' escluso
- * Codex prima del secondo tentativo.
+ * Codex o se Codex continua a produrre output che il contratto rifiuta.
  *
  * IL FIX. Prima della guardia, `translateArticle()` passa ogni body in attesa a
  * `retryPendingBodyTranslations`, preferendo la corsia Codex pinnata e usando
- * la catena storica senza Codex quando la prima e' gia' indisponibile. La
- * guardia resta invariata: se nessuna corsia traduce, il body resta in attesa.
+ * la catena storica senza Codex quando la prima e' indisponibile o rifiutata.
+ * La guardia resta invariata: se nessuna corsia traduce, il body resta in attesa.
  *
  * COME GIRA. La funzione di libreria e' importata davvero; il blocco di
  * `translateArticle()` che la chiama e' ritagliato VERBATIM dal sorgente ed
@@ -687,8 +687,10 @@ test('la catena storica riusa il chunker per un body pending sopra soglia', asyn
   const longIt = Array.from({ length: 701 }, (_, i) => `parola${i}`).join(' ');
   const expected = longIt.replaceAll('parola', 'Wort');
   let chunkCall = null;
+  let chunkOptions = null;
   let wholeBodyCalls = 0;
-  const translateInChunks = async (bodyText, field, makePrompt, labelPrefix, targetLang) => {
+  const translateInChunks = async (bodyText, field, makePrompt, labelPrefix, targetLang, options) => {
+    chunkOptions = options;
     chunkCall = {
       bodyText,
       field,
@@ -728,6 +730,7 @@ test('la catena storica riusa il chunker per un body pending sopra soglia', asyn
   });
   assert.equal(wholeBodyCalls, 0);
   assert.equal(translated, expected);
+  assert.deepEqual(chunkOptions, { forceLegacy: true });
 });
 
 test('il fallback storico corto applica il contratto strutturale prima del finalize', async () => {
@@ -758,8 +761,10 @@ test('il fallback storico corto applica il contratto strutturale prima del final
   );
 
   let successfulProviderCalls = 0;
-  const successfulCallWithRetry = async () => {
+  let successfulProviderOptions = null;
+  const successfulCallWithRetry = async (...args) => {
     successfulProviderCalls += 1;
+    successfulProviderOptions = args[3];
     return { body1: source.replace('Prima', 'Zuerst') };
   };
   const successfulTranslateInChunks = makeTranslateInChunks(
@@ -782,6 +787,7 @@ test('il fallback storico corto applica il contratto strutturale prima del final
     source.replace('Prima', 'Zuerst'),
   );
   assert.equal(successfulProviderCalls, 1);
+  assert.deepEqual(successfulProviderOptions, { translation: true, forceLegacy: true });
 
   for (const [label, mutate] of [
     ['href HTML alterato', (value) => value.replace('https://example.test/html', 'https://evil.example/html')],
