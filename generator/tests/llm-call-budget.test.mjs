@@ -441,7 +441,7 @@ test('④ il percorso legacy usa la catena storica quando Codex non e\' disponib
   assert.notEqual(at, -1, 'fallback storico della traduzione legacy sparito');
   const region = CODE.slice(at, at + 1800);
   assert.match(region, /if \(!translation\) return historicalCall\(\);/);
-  assert.match(region, /if \(!isModelAvailable\(AI_MODELS\.CODEX_CLI_PRIMARY\)\) return historicalCall\(\);/);
+  assert.match(region, /if \(forceLegacy \|\| !isModelAvailable\(AI_MODELS\.CODEX_CLI_PRIMARY\)\) return historicalCall\(\);/);
   assert.match(region, /fallback: historicalCall/);
   assert.match(region, /run: async \(\{ deadlineMs, reserveTransportRetry \}\)/);
 });
