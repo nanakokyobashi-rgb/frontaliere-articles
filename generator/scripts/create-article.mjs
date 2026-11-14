@@ -16301,7 +16301,7 @@ async function translateArticle(data) {
       }
       return masked + value.slice(cursor);
     };
-    const numericContract = (text, codeSpans = []) => {
+    const numericContract = (text, codeSpans = [], { sourceDateOrdinals = null } = {}) => {
       // URLs and code spans are source-owned atoms, not numeric facts. Mask
       // them before matching numbers so `/123` in a link target or ``123`` in
       // code cannot create an association that a normal label translation
@@ -16324,6 +16324,17 @@ async function translateArticle(data) {
       // and the ASCII forms of accented names). This block is extracted
       // verbatim by the translation-contract tests, so it stays self-contained.
       const dateMonthPattern = /(?<![\p{L}\p{N}_])(?:gennaio|gen|febbraio|feb|marzo|mar|aprile|apr|maggio|mag|giugno|giu|luglio|lug|agosto|ago|settembre|set|ottobre|ott|novembre|nov|dicembre|dic|january|jan|february|march|april|may|june|jun|july|jul|august|aug|september|sep|sept|october|oct|november|december|dec|januar|jan|februar|februrar|märz|marz|maerz|mai|juni|jun|juli|jul|august|aug|september|sep|sept|oktober|okt|november|dezember|dez|janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|septembre|octobre|novembre|décembre|decembre)\b/iu;
+      const dateGrammar = {
+        monthPattern: new RegExp(dateMonthPattern.source, 'giu'),
+        dayToMonthGap: /^(?:[\s.,:;/]|(?:of|de|le|del|du|au)\b)*$/iu,
+        monthToDayGap: /^(?:[\s.,:;/])*$/u,
+        rangeGap: /^(?:[\s.,]*(?:[-‐‑‒–—−]|(?:to|through|and|e|bis|à|au)\b)[\s.,]*)$/iu,
+      };
+      const dateMonths = [...value.matchAll(dateGrammar.monthPattern)].map((match) => ({
+        start: match.index,
+        end: match.index + match[0].length,
+      }));
+      const gapMatches = (pattern, start, end) => start <= end && pattern.test(value.slice(start, end));
       const isLineLeadingOrdinal = (match, token) => {
         const lineStart = value.lastIndexOf('\n', match.index - 1) + 1;
         const leadingOrdinal = value.slice(lineStart).match(/^[ \t]*\d{1,2}(?:[°º]|\.)\s/u);
@@ -16332,32 +16343,7 @@ async function translateArticle(data) {
         return match.index === lineStart + indentLength
           && (/[°º]$/u.test(token) || value[match.index + token.length] === '.');
       };
-      const isDateOrdinal = (match, token, unit) => {
-        // A percentage remains a measurement even when it sits next to a
-        // month (`12% a maggio`); only degree/ordinal markers may be
-        // reclassified as a localized date ordinal.
-        if (unit === '%') return false;
-        const rawNumber = token
-          .replace(/[°º]/gu, '')
-          .replace(localizedOrdinalSuffixAtEnd, '')
-          .replace(/^[+\-−]/u, '')
-          .replace(/[.,'’\u00a0\u202f ]/gu, '');
-        const day = Number(rawNumber);
-        if (!Number.isInteger(day) || day < 1 || day > 31) return false;
-        const before = value.slice(0, match.index);
-        const after = value.slice(match.index + token.length);
-        const monthBefore = new RegExp(`${dateMonthPattern.source}[\\s,./:;-]{0,4}$`, 'iu').test(before);
-        const monthAfter = new RegExp(`^[\\s,./:;-]{0,4}${dateMonthPattern.source}`, 'iu').test(after);
-        // A degree marker after a month is a measurement (`maggio: 12° C`),
-        // not a month-first date. Localized dates place the marker before the
-        // month (`12° maggio`); keep that valid day-first form while refusing
-        // the measurement branch even if a translation drops the marker.
-        if (unit === '°' || unit === 'º') return monthAfter;
-        // The month on either side is the proof for a suffix-less localized
-        // date ordinal, including an English day without a suffix.
-        return monthBefore || monthAfter;
-      };
-      const numberEntries = [...value.matchAll(numberPattern)].map((match) => {
+      const numberCandidates = [...value.matchAll(numberPattern)].map((match) => {
         const [token] = match;
         const unit = token.match(/[%°º]$/u)?.[0] || '';
         const ordinalSuffix = token.match(localizedOrdinalSuffixAtEnd)?.[0] || '';
@@ -16368,15 +16354,91 @@ async function translateArticle(data) {
             : token;
         const sign = number.match(/^[+\-−]/u)?.[0] || '';
         const unsigned = sign ? number.slice(sign.length) : number;
+        return {
+          match,
+          token,
+          unit,
+          ordinalSuffix,
+          number,
+          sign,
+          unsigned,
+          start: match.index,
+          end: match.index + token.length,
+        };
+      });
+      const hasMonthBefore = (candidate) => dateMonths.some(({ end }) =>
+        end <= candidate.start && gapMatches(dateGrammar.monthToDayGap, end, candidate.start));
+      const hasMonthAfter = (candidate) => dateMonths.some(({ start }) =>
+        start >= candidate.end && gapMatches(dateGrammar.dayToMonthGap, candidate.end, start));
+      const isDateRange = (left, right) => right && (
+        gapMatches(dateGrammar.rangeGap, left.end, right.start)
+        // A hyphen immediately before the next number is consumed as that
+        // number's sign by `numberPattern` when the left endpoint ends in an
+        // ordinal marker (`1°-3`). Treat it as the range separator before
+        // normalizing the endpoint's sign away.
+        || (right.sign === '-' || right.sign === '−')
+          && gapMatches(/^(?:[\s.,]*)$/u, left.end, right.start)
+      );
+      const hasRangeMonthBefore = (candidateIndex) => candidateIndex > 0
+        && isDateRange(numberCandidates[candidateIndex - 1], numberCandidates[candidateIndex])
+        && hasMonthBefore(numberCandidates[candidateIndex - 1]);
+      const hasRangeMonthAfter = (candidateIndex) => candidateIndex + 1 < numberCandidates.length
+        && isDateRange(numberCandidates[candidateIndex], numberCandidates[candidateIndex + 1])
+        && hasMonthAfter(numberCandidates[candidateIndex + 1]);
+      const hasDateRangeBefore = (candidateIndex) => candidateIndex > 0
+        && isDateRange(numberCandidates[candidateIndex - 1], numberCandidates[candidateIndex])
+        && (hasMonthBefore(numberCandidates[candidateIndex - 1]) || hasMonthAfter(numberCandidates[candidateIndex]));
+      const hasDateRangeAfter = (candidateIndex) => candidateIndex + 1 < numberCandidates.length
+        && isDateRange(numberCandidates[candidateIndex], numberCandidates[candidateIndex + 1])
+        && (hasMonthBefore(numberCandidates[candidateIndex]) || hasMonthAfter(numberCandidates[candidateIndex + 1]));
+      const isDateOrdinal = (candidate, candidateIndex) => {
+        const { token, unit, unsigned } = candidate;
+        // A percentage remains a measurement even when it sits next to a
+        // month (`12% a maggio`); only degree/ordinal markers may be
+        // reclassified as a localized date ordinal.
+        if (unit === '%') return false;
+        // A target can only inherit the date interpretation of the numeric
+        // fact at the same position in the source. Without this anchor, a
+        // translated phrase such as `Marcia 12 miglia` → `March 12 miles`
+        // invents a date merely because the target happens to contain a
+        // month-like word before the number.
+        if (Array.isArray(sourceDateOrdinals) && sourceDateOrdinals[candidateIndex] !== true) return false;
+        const rangeMonthBefore = hasRangeMonthBefore(candidateIndex);
+        const rangeMonthAfter = hasRangeMonthAfter(candidateIndex);
+        const dateRangeEndpoint = hasDateRangeBefore(candidateIndex) || hasDateRangeAfter(candidateIndex);
+        if ((candidate.sign === '-' || candidate.sign === '−') && !dateRangeEndpoint) return false;
+        if (candidate.sign === '+') return false;
+        const dayDigits = unsigned.replace(/[.,'’\u00a0\u202f ]/gu, '');
+        if (!/^\d{1,2}$/u.test(dayDigits)) return false;
+        const day = Number(dayDigits);
+        if (!Number.isInteger(day) || day < 1 || day > 31) return false;
+        const monthBefore = hasMonthBefore(candidate);
+        const monthAfter = hasMonthAfter(candidate);
+        // A degree marker after a month is a measurement (`maggio: 12° C`),
+        // not a month-first date. Localized dates place the marker before the
+        // month (`12° maggio`); keep that valid day-first form, including the
+        // first endpoint of a range, while refusing the measurement branch
+        // even if a translation drops the marker.
+        if (unit === '°' || unit === 'º') return monthAfter || rangeMonthAfter;
+        // A month on either side is accepted only as part of this shared date
+        // grammar. Range endpoints inherit the proof from the other endpoint,
+        // so `1°-3 gennaio` and `January 1-3` normalize identically.
+        return monthBefore || monthAfter || rangeMonthBefore || rangeMonthAfter;
+      };
+      const numberEntries = numberCandidates.map((candidate, candidateIndex) => {
+        const { match, token, unit, ordinalSuffix, sign, unsigned } = candidate;
         const lineLeadingOrdinal = isLineLeadingOrdinal(match, token);
-        const dateOrdinal = isDateOrdinal(match, token, unit);
+        const dateOrdinal = isDateOrdinal(candidate, candidateIndex);
+        const dateRangeEndpoint = hasDateRangeBefore(candidateIndex) || hasDateRangeAfter(candidateIndex);
+        const normalizedSign = dateOrdinal && dateRangeEndpoint && (sign === '-' || sign === '−') ? '' : sign;
         const normalizedUnit = dateOrdinal ? 'date-ordinal' : lineLeadingOrdinal ? '.' : unit || ordinalSuffix;
-        const tokenEnd = match.index + token.length
+        const tokenEnd = candidate.end
           + ((lineLeadingOrdinal || dateOrdinal) && value[match.index + token.length] === '.' ? 1 : 0);
         return {
-          value: `${sign}${unsigned.replace(/[.,'’\u00a0\u202f ]/gu, '')}:${normalizedUnit}`,
+          value: `${normalizedSign}${unsigned.replace(/[.,'’\u00a0\u202f ]/gu, '')}:${normalizedUnit}`,
           index: match.index,
           end: tokenEnd,
+          dateOrdinal,
         };
       });
       const associations = numberEntries.map(({ value: number, index }) => {
@@ -16405,11 +16467,14 @@ async function translateArticle(data) {
       });
       return {
         values: numberEntries.map(({ value }) => value),
+        dateOrdinals: numberEntries.map(({ dateOrdinal }) => dateOrdinal),
         associations,
       };
     };
     const sourceNumericContract = numericContract(bodyText, sourceLinkContract.codeSpans);
-    const joinedNumericContract = numericContract(joined, joinedLinkContract.codeSpans);
+    const joinedNumericContract = numericContract(joined, joinedLinkContract.codeSpans, {
+      sourceDateOrdinals: sourceNumericContract.dateOrdinals,
+    });
     if (JSON.stringify(sourceNumericContract.values) !== JSON.stringify(joinedNumericContract.values)) {
       return null;
     }
@@ -16494,10 +16559,14 @@ async function translateArticle(data) {
     // This is deliberately fail-closed: a table with two or more unresolved
     // cells, or duplicate proofs on changed cells, cannot demonstrate that the
     // provider kept the facts in their original columns.
-    const tableCellProof = (cell) => ({
-      opaque: opaqueSpanSignature(cell),
-      numeric: numericContract(cell).values,
-    });
+    const tableCellProof = (cell, sourceDateOrdinals = null) => {
+      const contract = numericContract(cell, [], { sourceDateOrdinals });
+      return {
+        opaque: opaqueSpanSignature(cell),
+        numeric: contract.values,
+        dateOrdinals: contract.dateOrdinals,
+      };
+    };
     for (const [index, sourceLine] of sourceStructureLines.entries()) {
       const joinedLine = joinedStructureLines[index];
       const sourcePipe = pipeSkeleton(sourceLine);
@@ -16509,9 +16578,12 @@ async function translateArticle(data) {
           sourceCell,
           joinedCell,
           sourceProof: tableCellProof(sourceCell),
-          joinedProof: tableCellProof(joinedCell),
+          joinedProof: null,
         };
       });
+      for (const entry of cellEntries) {
+        entry.joinedProof = tableCellProof(entry.joinedCell, entry.sourceProof.dateOrdinals);
+      }
       const changedProofCounts = new Map();
       for (const { sourceCell, joinedCell, sourceProof } of cellEntries) {
         if (sourceCell === joinedCell) continue;

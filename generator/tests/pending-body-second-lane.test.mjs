@@ -1546,6 +1546,38 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     'un ordinale inline può diventare un giorno senza suffisso quando la data resta riconoscibile',
   );
 
+  const connectorDateTarget = 'The measure applies from 1st of January 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(inlineDateSource, connectorDateTarget),
+      500,
+    )(inlineDateSource),
+    connectorDateTarget,
+    'il connettore inglese of non deve cambiare il contratto numerico della data',
+  );
+
+  const dateRangeSource = 'La misura vale dal 1°-3 gennaio 2026 e resta valida.';
+  const dateRangeTarget = 'The measure applies from January 1-3, 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(dateRangeSource, dateRangeTarget),
+      500,
+    )(dateRangeSource),
+    dateRangeTarget,
+    'gli estremi di un intervallo di date devono condividere la normalizzazione ordinale',
+  );
+
+  const nonDateSource = 'Marcia 12 miglia lungo il percorso e resta in forma.';
+  const nonDateTarget = 'March 12 miles along the route and stays fit.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(nonDateSource, nonDateTarget),
+      500,
+    )(nonDateSource),
+    nonDateTarget,
+    'un mese apparso solo nella traduzione non deve trasformare una misura in una data',
+  );
+
   const frenchDateSource = 'La misura vale dal 1° gennaio 2026 e resta valida.';
   const frenchDateTarget = 'La mesure s’applique dès le 1er janvier 2026 et reste valable.';
   assert.equal(
