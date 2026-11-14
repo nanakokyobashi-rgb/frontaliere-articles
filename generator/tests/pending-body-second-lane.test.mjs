@@ -1545,6 +1545,16 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     'un ordinale inline francese con suffisso er conserva lo stesso giorno',
   );
 
+  const frenchFeminineDateTarget = 'La mesure s’applique dès le 1ère janvier 2026 et reste valable.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(frenchDateSource, frenchFeminineDateTarget),
+      500,
+    )(frenchDateSource),
+    frenchFeminineDateTarget,
+    'un ordinale inline francese con suffisso ère conserva lo stesso giorno',
+  );
+
   const inlinePercentDateSource = 'La misura vale 12% a maggio 2026 e resta valida.';
   const inlinePercentDateTarget = 'The measure is 12% in May 2026 and remains valid.';
   assert.equal(

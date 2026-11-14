@@ -16311,7 +16311,12 @@ async function translateArticle(data) {
       // `1° gennaio 2026` can become `January 1, 2026`, `1. Januar 2026`
       // or `1er janvier 2026`. Keep localized ordinal suffixes in the token
       // so the date-aware normalization below can compare the same day.
-      const numberPattern = /(?<![\p{L}\p{N}_])[+\-−]?\d+(?:[.,'’\u00a0\u202f ]\d+)*(?:(?:\s*[%°º])|(?:st|nd|rd|th|er|re|e)(?![\p{L}\p{N}_]))?(?![\p{L}\p{N}_])/giu;
+      const localizedOrdinalSuffixPattern = String.raw`(?:st|nd|rd|th|er|ère|re|e)`;
+      const localizedOrdinalSuffixAtEnd = new RegExp(`${localizedOrdinalSuffixPattern}$`, 'iu');
+      const numberPattern = new RegExp(
+        String.raw`(?<![\p{L}\p{N}_])[+\-−]?\d+(?:[.,'’\u00a0\u202f ]\d+)*(?:(?:\s*[%°º])|(?:${localizedOrdinalSuffixPattern}(?![\p{L}\p{N}_])))?(?![\p{L}\p{N}_])`,
+        'giu',
+      );
       const spanBoundary = (char) => char === '\n' || ',;!?|'.includes(char);
       const dateMonthPattern = /(?:gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre|january|february|march|april|may|june|july|august|september|october|november|december|januar|februar|märz|maerz|april|mai|juni|juli|august|september|oktober|november|dezember|janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|septembre|octobre|novembre|décembre|decembre)\b/iu;
       const isLineLeadingOrdinal = (match, token) => {
@@ -16329,7 +16334,7 @@ async function translateArticle(data) {
         if (unit === '%') return false;
         const rawNumber = token
           .replace(/[°º]/gu, '')
-          .replace(/(?:st|nd|rd|th|er|re|e)$/iu, '')
+          .replace(localizedOrdinalSuffixAtEnd, '')
           .replace(/^[+\-−]/u, '')
           .replace(/[.,'’\u00a0\u202f ]/gu, '');
         const day = Number(rawNumber);
@@ -16346,7 +16351,7 @@ async function translateArticle(data) {
       const numberEntries = [...value.matchAll(numberPattern)].map((match) => {
         const [token] = match;
         const unit = token.match(/[%°º]$/u)?.[0] || '';
-        const ordinalSuffix = token.match(/(?:st|nd|rd|th|er|re|e)$/iu)?.[0] || '';
+        const ordinalSuffix = token.match(localizedOrdinalSuffixAtEnd)?.[0] || '';
         const number = unit
           ? token.slice(0, -unit.length)
           : ordinalSuffix
