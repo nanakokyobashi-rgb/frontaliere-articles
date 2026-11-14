@@ -597,7 +597,7 @@ jobs:
               # In funzione perché serve DUE volte (vedi sotto).
               f_reread_live() {
                 F_LIVE=$(gh api --paginate "repos/$REPO/pulls/$N" --jq '[.state, .head.sha, .base.ref, .head.ref, (.draft | tostring), (if (.mergeable_state // "") == "" then "unknown" else .mergeable_state end), ([.labels[]?.name] | join(","))] | @tsv' 2>/dev/null || true)
-                F_LIVE_STATE= F_LIVE_HEAD= F_LIVE_BASE= F_LIVE_BRANCH= F_LIVE_DRAFT= F_LIVE_MERGEABLE= F_LIVE_LABELS=
+                F_LIVE_STATE='' F_LIVE_HEAD='' F_LIVE_BASE='' F_LIVE_BRANCH='' F_LIVE_DRAFT='' F_LIVE_MERGEABLE='' F_LIVE_LABELS=''
                 IFS=$'\t' read -r F_LIVE_STATE F_LIVE_HEAD F_LIVE_BASE F_LIVE_BRANCH F_LIVE_DRAFT F_LIVE_MERGEABLE F_LIVE_LABELS <<<"$F_LIVE" || true
                 F_LIVE_OK=true
                 [ "${F_LIVE_STATE:-}" = "open" ] || F_LIVE_OK=false
