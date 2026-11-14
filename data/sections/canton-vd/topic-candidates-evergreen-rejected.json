@@ -4,22 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vd::https://www.estrepublicain.fr/economie/2026/11/10/face-a-l-instabilite-sociale-en-france-la-devise-suisse-se-renforce-et-ca-profite-aux-frontaliers": {
-      "section": "canton-vd",
-      "ts": 1794457507625
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/pret-immobilier-chf-tournant-juridique": {
-      "section": "canton-vd",
-      "ts": 1794457927610
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/declaration-dris-tou-couple-frontalier": {
-      "section": "canton-vd",
-      "ts": 1794487763438
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/retraite-frontalier-polypensionne": {
-      "section": "canton-vd",
-      "ts": 1794488197921
-    },
     "canton-vd::https://latele.ch/articles/chomeurs-frontaliers-couts-supplementaires-pour-berne": {
       "section": "canton-vd",
       "ts": 1794523114976
@@ -39,6 +23,10 @@
     "canton-vd::https://www.ledauphine.com/sante/2026/11/13/trois-rendez-vous-a-l-hopital-prive-des-pays-de-savoie-pour-prendre-soin-de-sa-sante": {
       "section": "canton-vd",
       "ts": 1794626739829
+    },
+    "canton-vd::https://www.ledauphine.com/economie/2026/11/14/nous-ressentons-le-besoin-de-m-engager-davantage-pourquoi-deux-stars-du-trail-xavier-thevenard-et-vincent-bouillard-se-mobilisent-contre-l-a412": {
+      "section": "canton-vd",
+      "ts": 1794693861146
     }
   }
 }
