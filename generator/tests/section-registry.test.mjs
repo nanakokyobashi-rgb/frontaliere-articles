@@ -397,7 +397,8 @@ test('la policy sitemap paginata ammette solo la pagina canonica 1', () => {
 
 test('la sitemap rifiuta chiavi archive malformate prima dell append', () => {
   assert.equal(assertArchivePageKey('archive:2'), 2);
-  for (const key of ['archive:', 'archive:NaN', 'archive:2.5', 'archive:1', 'archive:9007199254740993']) {
+  assert.equal(assertArchivePageKey(`archive:${Number.MAX_SAFE_INTEGER}`), Number.MAX_SAFE_INTEGER);
+  for (const key of ['archive:', 'archive:NaN', 'archive:2.5', 'archive:01', 'archive:1', 'archive:9007199254740992', 'archive:9007199254740993']) {
     assert.throws(
       () => assertArchivePageKey(key),
       /chiave archivio non valida/u,

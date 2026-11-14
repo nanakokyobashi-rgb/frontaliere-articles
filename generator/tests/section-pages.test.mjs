@@ -94,7 +94,7 @@ import { parseCantonLandingCardLimitExport } from '../../scripts/lib/canton-land
 import { declaredRegistryErrors, SECTION_REGISTRY_FILE } from '../../scripts/lib/section-registry.mjs';
 import { sourceRegistryIds } from '../../scripts/lib/corpus-floors.mjs';
 import { bodyRegex, fetchEdgeSectionRegistry, liveR2ReconciliationPlan, liveRegistryTransitionSections, r2ApiPushPlan, r2PublishPlan } from '../../scripts/ci/fast-publish-section.mjs';
-import { CANTON_LANDING_CARD_LIMIT, cdnUrlFor, expectedSectionPages, headState, orphanedArticleCandidates, planSectionBackfill, reconcile } from '../../scripts/reconcile-section-pages.mjs';
+import { CANTON_LANDING_CARD_LIMIT, SectionSitemapIncoherentError, cdnUrlFor, expectedSectionPages, headState, orphanedArticleCandidates, planSectionBackfill, reconcile } from '../../scripts/reconcile-section-pages.mjs';
 import { heroCdnUploads } from '../../scripts/lib/article-render-pipeline.mjs';
 import { cantonSectionPaths } from '../scripts/lib/canton-section-profile.mjs';
 import { corpusPath } from '../scripts/lib/corpus-paths.mjs';
@@ -4187,6 +4187,20 @@ test('reconcile: pagine attese = tutti gli URL annunciati da loc e alternate del
   assert.throws(() => expectedSectionPages({ id: 'canton-zz', paths: {} }, {}, SITEMAP_TI), /sconosciuta/);
   const incoherent = SITEMAP_TI.replace('/articoli-ticino/a-it/', '/articoli-ticino/retired-not-in-slugs/');
   assert.throws(() => expectedSectionPages(CATALOG_TI, SLUGS_TI, incoherent), /non compare in slugs\.json\.cantons/);
+});
+
+test('reconcile: rifiuta pagine archivio non canoniche prima del backfill', () => {
+  for (const page of ['page-1/', 'page-01/', 'page-9007199254740993/']) {
+    const malformed = SITEMAP_TI.replace(
+      '/articoli-ticino/tutti/page-2/',
+      `/articoli-ticino/tutti/${page}`,
+    );
+    assert.throws(
+      () => expectedSectionPages(CATALOG_TI, SLUGS_TI, malformed),
+      (error) => error instanceof SectionSitemapIncoherentError && /non ha una pagina canonica/u.test(error.message),
+      page,
+    );
+  }
 });
 
 test('reconcile: non interpola slug hub vuoti o ereditati', () => {
