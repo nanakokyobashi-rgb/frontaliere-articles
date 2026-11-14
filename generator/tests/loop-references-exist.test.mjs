@@ -806,6 +806,14 @@ const DECLARED_ABSENT = {
       'Descrittiva: la firma B e\' generica e non conosce nessun workflow per nome. La catena ' +
       'di pubblicazione di questo repo e\' `publish-api.yml`, che non c\'entra con quella.',
   },
+  'scripts/ci/scan-job-timeouts.mjs :: scripts/ci/lib/github-api-retry.mjs': {
+    kind: 'site-only',
+    reason:
+      'Il commento del twin identical cita il helper di retry posseduto dal sito per spiegare ' +
+      'il contratto di trasporto, ma lo scanner qui resta auto-contenuto e non lo importa ne\' ' +
+      'lo esegue. La sua assenza nel corpus e\' quindi intenzionale e non nasconde una ' +
+      'dipendenza runtime.',
+  },
   'scripts/ci/scan-job-timeouts.mjs :: .github/workflows/foo.yml': {
     kind: 'example',
     reason:
