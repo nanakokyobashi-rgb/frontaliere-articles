@@ -905,7 +905,9 @@
     },
     {
       "path": "scripts/ci/pr-contribution-fingerprint.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3823",
+      "reason": "Il CLI del fingerprint riusa la semantica del contributo PR, ma il gemello site-ahead importa `scripts/ci/auto-merge-eval.mjs`, che nel corpus e' `adapted` per i gate e i consumer locali. La chiusura degli import relativi dimostra che una copia byte-per-byte isolata lascerebbe una dipendenza non `identical` e puo' rendere rossa la PR di trasporto; le modifiche vanno riapplicate manualmente sopra l'adattamento. La divergenza resta governata da #3823 finche' i due contratti non vengono riconciliati.",
       "baseline": {
         "site": "185c2a177882f683",
         "corpus": "185c2a177882f683",

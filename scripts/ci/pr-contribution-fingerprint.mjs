@@ -4,7 +4,7 @@
  *
  * Riusa ESATTAMENTE `prContributionFingerprint` di auto-merge-eval.mjs (3-dot vs
  * merge-base con main, code-only, invariante alla churn di main) così che il
- * re-review guard di `pr-review-loop.yml` e il carry-forward dell'LGTM di
+ * re-review guard del workflow di test corrente e il carry-forward dell'LGTM di
  * auto-merge-eval decidano "contributo invariato" con LA STESSA semantica — niente
  * drift by-construction (AGENTS.md #6).
  *
