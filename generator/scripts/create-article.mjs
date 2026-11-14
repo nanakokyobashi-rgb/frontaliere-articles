@@ -16322,9 +16322,13 @@ async function translateArticle(data) {
         return match.index === lineStart + indentLength
           && (/[°º]$/u.test(token) || value[match.index + token.length] === '.');
       };
-      const isDateOrdinal = (match, token) => {
+      const isDateOrdinal = (match, token, unit) => {
+        // A percentage remains a measurement even when it sits next to a
+        // month (`12% a maggio`); only degree/ordinal markers may be
+        // reclassified as a localized date ordinal.
+        if (unit === '%') return false;
         const rawNumber = token
-          .replace(/[%°º]/gu, '')
+          .replace(/[°º]/gu, '')
           .replace(/(?:st|nd|rd|th|er|re|e)$/iu, '')
           .replace(/^[+\-−]/u, '')
           .replace(/[.,'’\u00a0\u202f ]/gu, '');
@@ -16351,7 +16355,7 @@ async function translateArticle(data) {
         const sign = number.match(/^[+\-−]/u)?.[0] || '';
         const unsigned = sign ? number.slice(sign.length) : number;
         const lineLeadingOrdinal = isLineLeadingOrdinal(match, token);
-        const dateOrdinal = isDateOrdinal(match, token);
+        const dateOrdinal = isDateOrdinal(match, token, unit);
         const normalizedUnit = dateOrdinal ? 'date-ordinal' : lineLeadingOrdinal ? '.' : unit || ordinalSuffix;
         const tokenEnd = match.index + token.length
           + ((lineLeadingOrdinal || dateOrdinal) && value[match.index + token.length] === '.' ? 1 : 0);

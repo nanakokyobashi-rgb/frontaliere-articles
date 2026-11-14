@@ -1545,6 +1545,25 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     'un ordinale inline francese con suffisso er conserva lo stesso giorno',
   );
 
+  const inlinePercentDateSource = 'La misura vale 12% a maggio 2026 e resta valida.';
+  const inlinePercentDateTarget = 'The measure is 12% in May 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(inlinePercentDateSource, inlinePercentDateTarget),
+      500,
+    )(inlinePercentDateSource),
+    inlinePercentDateTarget,
+    'una percentuale accanto a un mese resta una misura, non un ordinale di data',
+  );
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(inlinePercentDateSource, inlinePercentDateTarget.replace('12%', '12')),
+      500,
+    )(inlinePercentDateSource),
+    null,
+    'la traduzione non puo\' perdere una percentuale solo perche\' il numero e\' vicino a un mese',
+  );
+
   const signedGroupedChunks = realChunker('Valore -12 345 dopo', 2);
   assert.ok(
     signedGroupedChunks.some((chunk) => chunk.includes('-12 345')),
