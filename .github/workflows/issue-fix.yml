@@ -561,7 +561,7 @@ jobs:
             exit 0
           fi
           node scripts/ci/check-workflows-scope.mjs
-          blocked=$(awk -F= "\$1 == \"workflows_blocked\" { value = \$2 } END { print value }" "$GITHUB_OUTPUT")
+          blocked=$(grep -E '^workflows_blocked=' "$GITHUB_OUTPUT" | tail -n 1 | cut -d= -f2-)
           if [ "${DAILY_BUCKET:-false}" = 'true' ] && [ "${blocked:-false}" = 'true' ]; then
             marker_file="$RUNNER_TEMP/daily-workflows-scope-${ISSUE_NUMBER}.md"
             {
