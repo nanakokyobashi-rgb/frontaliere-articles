@@ -571,7 +571,7 @@ jobs:
           Il guard ha esaminato esclusivamente l'item daily selezionato. Il fixer non viene avviato perché il token non può modificare il workflow citato; il bucket resta aperto e gli altri FU non vengono dichiarati risolti.
 
           EOF
-              printf 'Item attribuito: `%s`\n\n' "$DAILY_ITEM_ID"
+              printf "Item attribuito: \`%s\`\n\n" "$DAILY_ITEM_ID"
               cat <<'EOF'
           <!-- FIX_OUTCOME: blocked-workflows-scope -->
           EOF
