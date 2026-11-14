@@ -58,6 +58,7 @@ import {
 } from './lib/canton-landing-card-limit.mjs';
 import { fetchPageManifest, pageManifestUrl } from './lib/section-page-manifest.mjs';
 import { assertHubLocaleSlug, assertHubTopicEntries } from './lib/assert-hub-locale-slug.mjs';
+import { assertArchivePageKey } from './lib/build-sitemap.mjs';
 import { sitemapPaths } from './publish-section-edge.mjs';
 import { validateEdgeSectionRegistry } from './lib/section-registry.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../generator/scripts/lib/fetch-with-ref-timeout.mjs';
@@ -267,9 +268,23 @@ export function expectedSectionPages(entry, slugs, sitemapXml) {
     const hubSlugs = assertHubTopicEntries(entry.id, ARTICLE_SECTION_CORE_ALL[entry.id].topicHubs)
       .map(([topic, localizedSlugs]) => assertHubLocaleSlug(entry.id, topic, locale, localizedSlugs));
     const isHub = hubSlugs.some((slug) => canonicalPath === `${prefix}${slug}/`);
-    const isArchive = canonicalPath === archivePrefix || (
-      canonicalPath.startsWith(archivePrefix) && /^page-\d+\/$/.test(canonicalPath.slice(archivePrefix.length))
-    );
+    const archivePageMatch = canonicalPath.startsWith(archivePrefix)
+      ? /^page-(\d+)\/$/.exec(canonicalPath.slice(archivePrefix.length))
+      : null;
+    let isArchive = canonicalPath === archivePrefix;
+    if (archivePageMatch) {
+      try {
+        // The builder owns the canonical archive-page contract. Convert the
+        // URL form to its key form instead of maintaining a second numeric
+        // validator that could accept a different page set.
+        assertArchivePageKey(`archive:${archivePageMatch[1]}`);
+      } catch {
+        throw new SectionSitemapIncoherentError(
+          `sitemap di ${entry.id}: URL archivio ${canonicalPath} non ha una pagina canonica`,
+        );
+      }
+      isArchive = true;
+    }
     if (!isLanding && !isHub && !isArchive) {
       throw new SectionSitemapIncoherentError(
         `sitemap di ${entry.id}: URL articolo ${canonicalPath} non compare in slugs.json.cantons — ` +

@@ -217,8 +217,9 @@ const ARCHIVE_PAGE_KEY_RE = /^archive:(\d+)$/;
  */
 export function assertArchivePageKey(key) {
   const match = typeof key === 'string' ? ARCHIVE_PAGE_KEY_RE.exec(key) : null;
-  const page = match ? Number(match[1]) : NaN;
-  if (!Number.isSafeInteger(page) || page < 2) {
+  const rawPage = match?.[1];
+  const page = rawPage === undefined ? NaN : Number(rawPage);
+  if (!Number.isSafeInteger(page) || page < 2 || String(page) !== rawPage) {
     throw new Error(`buildFamilySectionSitemap: chiave archivio non valida (${String(key)})`);
   }
   return page;
