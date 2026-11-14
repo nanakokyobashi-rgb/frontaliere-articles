@@ -219,6 +219,21 @@ test('pr-delivery-evidence: il coupling adattato non rientra nel trasporto isola
   assert.match(entry.reason, /publish-api/);
 });
 
+test('pr-contribution-fingerprint: il coupling adattato non rientra nel trasporto isolato (#3823)', () => {
+  const entry = byPath.get('scripts/ci/pr-contribution-fingerprint.mjs');
+  const dependency = byPath.get('scripts/ci/auto-merge-eval.mjs');
+  assert.ok(entry, 'pr-contribution-fingerprint.mjs deve restare censito');
+  assert.ok(dependency, 'auto-merge-eval.mjs deve restare censito');
+  assert.equal(entry.mode, 'adapted');
+  assert.equal(
+    entry.adaptationIssue,
+    'https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3823',
+  );
+  assert.equal(dependency.mode, 'adapted');
+  assert.match(entry.reason, /auto-merge-eval/);
+  assert.match(entry.reason, /isolat/i);
+});
+
 test('reconcile-conflict-handoffs: il coupling adattato non rientra nel trasporto isolato (#3686)', () => {
   const entry = byPath.get('scripts/ci/reconcile-conflict-handoffs.mjs');
   const dependency = byPath.get('scripts/ci/followup-resolution-match.mjs');
