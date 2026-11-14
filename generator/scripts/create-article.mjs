@@ -16318,7 +16318,12 @@ async function translateArticle(data) {
         'giu',
       );
       const spanBoundary = (char) => char === '\n' || ',;!?|'.includes(char);
-      const dateMonthPattern = /(?:gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre|january|february|march|april|may|june|july|august|september|october|november|december|januar|februar|märz|maerz|april|mai|juni|juli|august|september|oktober|november|dezember|janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|septembre|octobre|novembre|décembre|decembre)\b/iu;
+      // Keep the inline-date lexicon aligned with the headline date forms:
+      // source and target may use full names or the abbreviated spellings
+      // already accepted by the generator (`Aug.`, `Sept.`, `mag`, `marz`,
+      // and the ASCII forms of accented names). This block is extracted
+      // verbatim by the translation-contract tests, so it stays self-contained.
+      const dateMonthPattern = /(?<![\p{L}\p{N}_])(?:gennaio|gen|febbraio|feb|marzo|mar|aprile|apr|maggio|mag|giugno|giu|luglio|lug|agosto|ago|settembre|set|ottobre|ott|novembre|nov|dicembre|dic|january|jan|february|march|april|may|june|jun|july|jul|august|aug|september|sep|sept|october|oct|november|december|dec|januar|jan|februar|februrar|märz|marz|maerz|mai|juni|jun|juli|jul|august|aug|september|sep|sept|oktober|okt|november|dezember|dez|janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|septembre|octobre|novembre|décembre|decembre)\b/iu;
       const isLineLeadingOrdinal = (match, token) => {
         const lineStart = value.lastIndexOf('\n', match.index - 1) + 1;
         const leadingOrdinal = value.slice(lineStart).match(/^[ \t]*\d{1,2}(?:[°º]|\.)\s/u);
@@ -16341,11 +16346,15 @@ async function translateArticle(data) {
         if (!Number.isInteger(day) || day < 1 || day > 31) return false;
         const before = value.slice(0, match.index);
         const after = value.slice(match.index + token.length);
-        const monthBefore = new RegExp(`${dateMonthPattern.source}[\\s,./-]{0,4}$`, 'iu').test(before);
-        const monthAfter = new RegExp(`^[\\s,./-]{0,4}${dateMonthPattern.source}`, 'iu').test(after);
-        // A degree marker alone is not enough: `12°` remains a degree
-        // measurement. The month on either side is the proof that this is a
-        // localized date ordinal, including an English day without a suffix.
+        const monthBefore = new RegExp(`${dateMonthPattern.source}[\\s,./:;-]{0,4}$`, 'iu').test(before);
+        const monthAfter = new RegExp(`^[\\s,./:;-]{0,4}${dateMonthPattern.source}`, 'iu').test(after);
+        // A degree marker after a month is a measurement (`maggio: 12° C`),
+        // not a month-first date. Localized dates place the marker before the
+        // month (`12° maggio`); keep that valid day-first form while refusing
+        // the measurement branch even if a translation drops the marker.
+        if (unit === '°' || unit === 'º') return monthAfter;
+        // The month on either side is the proof for a suffix-less localized
+        // date ordinal, including an English day without a suffix.
         return monthBefore || monthAfter;
       };
       const numberEntries = [...value.matchAll(numberPattern)].map((match) => {

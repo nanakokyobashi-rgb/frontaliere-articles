@@ -1523,6 +1523,18 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     'il punto ordinale non deve allentare il controllo di una misura in gradi',
   );
 
+  for (const degreeMarker of ['°', 'º']) {
+    for (const separator of [' ', ': ']) {
+      const monthBeforeDegreeSource = `A maggio${separator}12${degreeMarker} C dopo altre parole da spezzare ancora oggi.`;
+      const droppedDegree = monthBeforeDegreeSource.replace(`12${degreeMarker}`, '12');
+      assert.equal(
+        await makeTranslator((chunk) => chunk.replace(monthBeforeDegreeSource, droppedDegree), 500)(monthBeforeDegreeSource),
+        null,
+        `una misura ${degreeMarker} dopo un mese non deve diventare un ordinale se la traduzione perde il marker`,
+      );
+    }
+  }
+
   const inlineDateSource = 'La misura vale dal 1° gennaio 2026 e resta valida.';
   const inlineDateTarget = 'The measure applies from January 1, 2026 and remains valid.';
   assert.equal(
@@ -1573,6 +1585,35 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     null,
     'la traduzione non puo\' perdere una percentuale solo perche\' il numero e\' vicino a un mese',
   );
+
+  for (const [label, source, target] of [
+    [
+      'abbreviazione inglese Aug.',
+      'La misura vale dal 1° agosto 2026 e resta valida.',
+      'The measure applies from Aug. 1, 2026 and remains valid.',
+    ],
+    [
+      'abbreviazione tedesca Sept.',
+      'La misura vale dal 1° settembre 2026 e resta valida.',
+      'Die Maßnahme gilt ab dem 1. Sept. 2026 und bleibt gültig.',
+    ],
+    [
+      'abbreviazione italiana mag',
+      'La misura vale dal 1° maggio 2026 e resta valida.',
+      'La misura vale dal 1 mag 2026 e resta valida.',
+    ],
+    [
+      'forma ASCII tedesca marz',
+      'La misura vale dal 1° marzo 2026 e resta valida.',
+      'Die Maßnahme gilt ab dem 1. marz 2026 und bleibt gültig.',
+    ],
+  ]) {
+    assert.equal(
+      await makeTranslator((chunk) => chunk.replace(source, target), 500)(source),
+      target,
+      `${label}: una data inline abbreviata deve conservare il giorno`,
+    );
+  }
 
   const signedGroupedChunks = realChunker('Valore -12 345 dopo', 2);
   assert.ok(
