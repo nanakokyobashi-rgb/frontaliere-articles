@@ -5496,6 +5496,102 @@
       "firstSeenAt": "2026-11-14T00:34:16.925Z",
       "lastValidatedAt": "2026-11-14T00:34:16.925Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "voto cantonale canton Berna guida a iniziative e referendum",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-14T10:16:16.877Z",
+      "lastValidatedAt": "2026-11-14T10:16:16.877Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "elezioni cantonali canton Berna guida a calendario e voto",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-14T10:16:16.906Z",
+      "lastValidatedAt": "2026-11-14T10:16:16.906Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "protezione civile canton Berna requisiti e indennità",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-14T10:16:16.928Z",
+      "lastValidatedAt": "2026-11-14T10:16:16.928Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "avs e prestazioni complementari canton Berna cassa di compensazione",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-14T10:19:57.183Z",
+      "lastValidatedAt": "2026-11-14T10:19:57.183Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "assicurazione immobili canton Berna guida a obbligo e premi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-14T10:25:13.543Z",
+      "lastValidatedAt": "2026-11-14T10:25:13.543Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "aprire un'attività canton Berna registro di commercio e costi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-14T10:44:25.716Z",
+      "lastValidatedAt": "2026-11-14T10:44:25.716Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "formazione continua canton Berna requisiti e contributi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-14T10:44:25.735Z",
+      "lastValidatedAt": "2026-11-14T10:44:25.735Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "patente di guida canton Berna conversione ed esami",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-14T10:44:25.954Z",
+      "lastValidatedAt": "2026-11-14T10:44:25.954Z",
+      "expiresAt": null
     }
   ],
   "strikes": [

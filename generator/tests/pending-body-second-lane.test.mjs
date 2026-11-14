@@ -14,12 +14,12 @@
  * In entrambe la cascata free era esaurita e il tier Codex del free-MT si era
  * gia' fermato sul suo budget. La corsia del job preferisce Codex, ma deve
  * poter usare anche la catena storica se il circuit breaker ha gia' escluso
- * Codex prima del secondo tentativo.
+ * Codex o se Codex continua a produrre output che il contratto rifiuta.
  *
  * IL FIX. Prima della guardia, `translateArticle()` passa ogni body in attesa a
  * `retryPendingBodyTranslations`, preferendo la corsia Codex pinnata e usando
- * la catena storica senza Codex quando la prima e' gia' indisponibile. La
- * guardia resta invariata: se nessuna corsia traduce, il body resta in attesa.
+ * la catena storica senza Codex quando la prima e' indisponibile o rifiutata.
+ * La guardia resta invariata: se nessuna corsia traduce, il body resta in attesa.
  *
  * COME GIRA. La funzione di libreria e' importata davvero; il blocco di
  * `translateArticle()` che la chiama e' ritagliato VERBATIM dal sorgente ed
@@ -75,7 +75,7 @@ function buildChunker() {
   )(lineStructuralSignature);
 }
 const TRANSLATE_IN_CHUNKS_SRC = (() => {
-  const start = src.indexOf('  async function translateInChunks(\n    bodyText,\n    fieldKey,\n    makeChunkPrompt,\n    labelPrefix,\n    targetLang,\n    { pretranslatedResult = null } = {},\n  ) {');
+  const start = src.indexOf('  async function translateInChunks(\n    bodyText,\n    fieldKey,\n    makeChunkPrompt,\n    labelPrefix,\n    targetLang,\n    { pretranslatedResult = null, forceLegacy = false } = {},\n  ) {');
   assert.notEqual(start, -1, 'translateInChunks non trovata in create-article.mjs');
   const end = src.indexOf('\n  }\n', start);
   assert.notEqual(end, -1, 'fine di translateInChunks non trovata in create-article.mjs');
@@ -302,7 +302,7 @@ test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scaden
   assert.match(body, /prefer: \[codex\]/);
   assert.match(body, /fallback: \(\) => \{[\s\S]*if \(!pendingBodySecondLaneAvailable\(\) && typeof callWithRetry === 'function'\)[\s\S]*translatePendingBodyWithHistoricalChain\(itValue, locale, field, \{ callWithRetry, translateInChunks \}\)/);
   assert.match(body, /const validatedText = text && typeof translateInChunks === 'function'[\s\S]*pretranslatedResult/);
-  assert.match(body, /if \(!validatedText\n\s+&& \(codexModelUnavailable \|\| !pendingBodySecondLaneAvailable\(\)\)/);
+  assert.match(body, /if \(!validatedText\n\s+&& \(codexModelUnavailable \|\| !pendingBodySecondLaneAvailable\(\) \|\| rejected\.length > 0\)/);
   // Nessun orologio di modulo: i producer che importano translateArticle()
   // (publish-journalist-article.mjs) non hanno CREATE_ARTICLE_MAX_WALL_MS.
   assert.doesNotMatch(body, /RUN_START_MS|RUN_WALL_BUDGET_MS/);
@@ -652,8 +652,14 @@ test('il callback di fallback della lane usa la catena storica quando il breaker
   assert.deepEqual(stoppedByBreaker.counts(), { admissionAttempts: 0, codexCalls: 0, historicalCalls: 1 });
 });
 
-test('output non valido o errore non classificato come breaker non attiva la catena storica', async () => {
-  const source = 'Questo corpo ha abbastanza testo per arrivare al traduttore senza un heading di template.';
+test('output non valido o errore non classificato come breaker attiva la catena storica senza ripetere Codex', async () => {
+  const source = [
+    'Questo corpo ha abbastanza testo per arrivare al traduttore senza un heading di template.',
+    '',
+    '## In breve',
+    '',
+    'La catena storica può recuperare il corpo quando Codex restituisce un output non accettabile.',
+  ].join('\n');
   for (const translateWithCodexEngine of [
     async () => '',
     async () => { throw new Error('errore di trasporto non classificato dal breaker'); },
@@ -663,8 +669,8 @@ test('output non valido o errore non classificato come breaker non attiva la cat
       admissionDecision: (_attempt, admission) => admission,
       translateWithCodexEngine,
     });
-    assert.equal(await fixture.translate(source), '');
-    assert.deepEqual(fixture.counts(), { admissionAttempts: 1, codexCalls: 1, historicalCalls: 0 });
+    assert.equal(await fixture.translate(source), fixture.expected);
+    assert.deepEqual(fixture.counts(), { admissionAttempts: 1, codexCalls: 1, historicalCalls: 1 });
   }
 });
 
@@ -681,8 +687,10 @@ test('la catena storica riusa il chunker per un body pending sopra soglia', asyn
   const longIt = Array.from({ length: 701 }, (_, i) => `parola${i}`).join(' ');
   const expected = longIt.replaceAll('parola', 'Wort');
   let chunkCall = null;
+  let chunkOptions = null;
   let wholeBodyCalls = 0;
-  const translateInChunks = async (bodyText, field, makePrompt, labelPrefix, targetLang) => {
+  const translateInChunks = async (bodyText, field, makePrompt, labelPrefix, targetLang, options) => {
+    chunkOptions = options;
     chunkCall = {
       bodyText,
       field,
@@ -722,6 +730,7 @@ test('la catena storica riusa il chunker per un body pending sopra soglia', asyn
   });
   assert.equal(wholeBodyCalls, 0);
   assert.equal(translated, expected);
+  assert.deepEqual(chunkOptions, { forceLegacy: true });
 });
 
 test('il fallback storico corto applica il contratto strutturale prima del finalize', async () => {
@@ -752,8 +761,10 @@ test('il fallback storico corto applica il contratto strutturale prima del final
   );
 
   let successfulProviderCalls = 0;
-  const successfulCallWithRetry = async () => {
+  let successfulProviderOptions = null;
+  const successfulCallWithRetry = async (...args) => {
     successfulProviderCalls += 1;
+    successfulProviderOptions = args[3];
     return { body1: source.replace('Prima', 'Zuerst') };
   };
   const successfulTranslateInChunks = makeTranslateInChunks(
@@ -776,6 +787,7 @@ test('il fallback storico corto applica il contratto strutturale prima del final
     source.replace('Prima', 'Zuerst'),
   );
   assert.equal(successfulProviderCalls, 1);
+  assert.deepEqual(successfulProviderOptions, { translation: true, forceLegacy: true });
 
   for (const [label, mutate] of [
     ['href HTML alterato', (value) => value.replace('https://example.test/html', 'https://evil.example/html')],

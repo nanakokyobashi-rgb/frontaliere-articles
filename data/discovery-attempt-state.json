@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "frontaliereProvenAttempts": 128,
+  "frontaliereProvenAttempts": 130,
   "frontaliereDiscoveryResetAt": 128,
-  "svizzeraProvenAttempts": 115,
-  "svizzeraDiscoveryResetAt": 112
+  "svizzeraProvenAttempts": 116,
+  "svizzeraDiscoveryResetAt": 115
 }

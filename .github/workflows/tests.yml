@@ -1278,16 +1278,32 @@ jobs:
           # cambiava solo lo scope mentre l'action passava sempre
           # `model_reasoning_effort=max`. Il tier `tests-only` non invoca Codex
           # (model `none`), quindi l'effort che emette non viene mai speso.
+          #
+          # Retry dopo un timeout del watchdog sulla STESSA PR+HEAD: il tier
+          # (cioe' lo scope) non cambia, ma la review non puo' ripartire identica
+          # (effort `max`, stesso tetto turni) perche' ha gia' dimostrato di non
+          # chiudere in tempo: #3812 (2 file, +29/-2) ha bruciato 3 review su 3 al
+          # watchdog da 1800s senza output. Dopo un timeout l'effort scende a
+          # `high`; dopo due il tetto turni scende a 35. `minimal` (12 turni) e
+          # `tests-only` (nessun Codex) non hanno niente da scendere.
+          prior_timeouts=$(GITHUB_OUTPUT=/dev/null HEAD_SHA="$HEAD_SHA" PR_NUMBER="$PR_NUMBER" node scripts/ci/review-claim.mjs --prior-timeout 2>/dev/null | sed -n 's/^prior_codex_timeouts=\([0-9][0-9]*\)$/\1/p' | tail -1 || true)
+          case "${prior_timeouts:-}" in ''|*[!0-9]*) prior_timeouts=0 ;; esac
           set_tier() {
-            local effort=high
+            local effort=high turns="$3" note=""
             case "$1" in high|high-mega) effort=max ;; esac
+            if [ "${prior_timeouts:-0}" -gt 0 ] && [ "$1" != tests-only ] && [ "$1" != minimal ]; then
+              effort=high
+              if [ "${prior_timeouts:-0}" -ge 2 ] && [ "$turns" -gt 35 ]; then turns=35; fi
+              note=" [degradato: ${prior_timeouts:-0} timeout Codex precedenti su questa HEAD]"
+            fi
             {
               echo "tier=$1"
               echo "model=$2"
-              echo "max_turns=$3"
+              echo "max_turns=$turns"
               echo "effort=$effort"
+              echo "prior_codex_timeouts=${prior_timeouts:-0}"
             } >> "$GITHUB_OUTPUT"
-            echo "Review tier: $1 ($2, max-turns $3, effort $effort)"
+            echo "Review tier: $1 ($2, max-turns $turns, effort $effort)$note"
           }
           # Body corretto sulla stessa HEAD dopo un verdetto non approvante
           # (ramo `body_rereview` del guard): la HEAD non e' cambiata, quindi
@@ -1918,7 +1934,16 @@ jobs:
           fi
           if [ "$CLASSIFICATION_CAUSE" = 'cancelled' ]; then
             set_review_output review_aborted true
-            set_review_output review_abort_cause cancelled
+            # Il watchdog interno (`codex exec` oltre il tetto senza verdetto) e'
+            # una cancellazione DIVERSA da quella del runner: stessa
+            # riattivabilita', ma il ledger dei claim la registra a parte cosi' lo
+            # step `tier` del retry sulla stessa HEAD scende di effort invece di
+            # rifare la stessa review identica fino al timeout successivo (#3812).
+            if [ "$(printf '%s' "$CLASSIFICATION_JSON" | jq -r '.source // empty')" = 'watchdog' ]; then
+              set_review_output review_abort_cause codex_timeout
+            else
+              set_review_output review_abort_cause cancelled
+            fi
             set_review_output retryable_failure true
             echo "::error::Review Codex cancellata prima del verdetto — rilanciare il job."
             exit 1
