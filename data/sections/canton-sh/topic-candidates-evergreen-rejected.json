@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sh::https://www.schaffhausen24.ch/articles/418539-zoll-findet-11-kilo-cannabis-im-kofferraum": {
-      "section": "canton-sh",
-      "ts": 1794435902744
-    },
     "canton-sh::https://grenzgaengerzentrum.de/ratgeber/altersvorsorge/welche-nachteile-hat-die-grenzgaenger-direktversicherung": {
       "section": "canton-sh",
       "ts": 1794571058097
@@ -19,6 +15,10 @@
     "canton-sh::https://sh.ch/webseite/kanton-schaffhausen/beh-rde/regierung/staatskanzlei/medienmitteilungen-24463585-de.html": {
       "section": "canton-sh",
       "ts": 1794571885101
+    },
+    "canton-sh::https://www.radiomunot.ch/p/spital-drama-gesundheitskommission-aussert-sich-1tljzzwoze3p3szlwwhzrn": {
+      "section": "canton-sh",
+      "ts": 1794623529365
     }
   }
 }

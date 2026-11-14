@@ -35,6 +35,10 @@
     "canton-vd::https://www.guidedufrontalier.com/actualites/hebdo-frontalier-13-20-novembre-2026": {
       "section": "canton-vd",
       "ts": 1794576508876
+    },
+    "canton-vd::https://www.ledauphine.com/sante/2026/11/13/trois-rendez-vous-a-l-hopital-prive-des-pays-de-savoie-pour-prendre-soin-de-sa-sante": {
+      "section": "canton-vd",
+      "ts": 1794626739829
     }
   }
 }

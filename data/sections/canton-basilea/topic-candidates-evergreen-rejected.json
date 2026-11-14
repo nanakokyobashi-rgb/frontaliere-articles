@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-basilea::https://grenzgaengerzentrum.de/ratgeber/lohn-gehalt/grenzgaenger-schweiz-wechselkurs": {
-      "section": "canton-basilea",
-      "ts": 1794436720828
-    },
     "canton-basilea::https://grenzgaengerzentrum.de/ratgeber/altersvorsorge/welche-nachteile-hat-die-grenzgaenger-direktversicherung": {
       "section": "canton-basilea",
       "ts": 1794525290170
@@ -19,6 +15,10 @@
     "canton-basilea::https://www.riehen.ch/aktuelles/meldungen/gemeinderatsbeschluss-betreffend-verguetungs-und-belastungszinssatz-auf-steuern-fuer-das-kalenderjahr-2027.php": {
       "section": "canton-basilea",
       "ts": 1794555684347
+    },
+    "canton-basilea::https://grenzgaengerzentrum.de/ratgeber/lohn-gehalt/grenzgaenger-schweiz-werbungskosten": {
+      "section": "canton-basilea",
+      "ts": 1794638925045
     }
   }
 }
