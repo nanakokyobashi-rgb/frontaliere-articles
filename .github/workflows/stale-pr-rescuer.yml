@@ -1219,6 +1219,34 @@ jobs:
               continue
             fi
 
+            # Il check `tests` puo' essere rosso perche' il REVIEW GATE e' morto
+            # (la review Codex ha superato il watchdog interno o i turni) e non
+            # perche' i test falliscono. Il ledger dei claim lo dice: l'ultimo
+            # evento di ogni tentativo sulla HEAD corrente e' un fallimento con
+            # causa `codex_timeout`/`max_turns`, e nessun tentativo ha chiuso
+            # con un verdetto. Senza questa distinzione la classe C consegnava
+            # «se il rosso e' REALE va fixato a mano»: un invito a cercare un
+            # test rotto che non esiste (#3812: 3/3 review in timeout).
+            # Illeggibile o malformato = false: si resta sulla classe C.
+            REVIEW_GATE_DEATH=$(printf '%s' "$deferred_comments" | jq -r --arg head "$HEAD" '
+              def trusted:
+                ((.user.login // "") == ""
+                  or ((.user.login // "") | test("^(github-actions\\[bot\\]|frontaliere-automation(\\[bot\\])?|claude(\\[bot\\])?|nanakokyobashi-rgb|valerielinc-ops)$"; "i")));
+              def claim:
+                (.body // "")
+                | try (capture("PR_REVIEW_CLAIM: (?<payload>\\{[^\\n]*\\}) -->").payload | fromjson) catch null;
+              [ .[]? | if type == "array" then .[]? else . end ] as $comments
+              | [ $comments[] | select(trusted) | claim
+                  | select(. != null and (.token | type) == "string"
+                    and ((.headSha // "") | ascii_downcase) == ($head | ascii_downcase)) ] as $events
+              | ($events | group_by(.token) | map(last)) as $latest
+              | (any($latest[]; .state == "completed")) as $done
+              | (any($latest[]; (.state == "failed-transient" or .state == "failed-terminal")
+                  and (.cause == "codex_timeout" or .cause == "max_turns"))) as $dead
+              | ($dead and ($done | not))
+            ' 2>/dev/null || echo false)
+            [ "$REVIEW_GATE_DEATH" = "true" ] || REVIEW_GATE_DEATH=false
+
             REASON=""; RESCUE=""; CLASS=""
             if [ -n "$LAST_CID" ] && [ "$LAST_CID" != "$HEAD" ] && [ "$TESTS_CONCL" = "success" ] && [ "$LAST_LGTM" = "0" ]; then
               CLASS="D"
@@ -1241,6 +1269,13 @@ jobs:
               # 🔴 Important findings"), segnalando come stallo una PR sana.
               REASON="🔴 Important non ripreso (review sull'head corrente, auto-merge skippato, nessun commit nuovo)"
               RESCUE="applica il fix del 🔴 in un nuovo commit sullo stesso branch \`$BRANCH\` → re-review automatica."
+            elif [ "$TESTS_PENDING" = "0" ] && [ "$TESTS_CONCL" != "success" ] && [ "$REVIEW_GATE_DEATH" = "true" ]; then
+              CLASS="G"
+              # G — review gate morto, NON test rossi. Stessa label di C (la PR
+              # e' ferma e deve restare visibile), ma la diagnosi e il rimedio
+              # sono altri: il codice non ha un test rotto da cercare.
+              REASON="check \`$CI_CHECK_NAME\` = \`$TESTS_CONCL\` sull'head da >2h perché la review Codex è morta sulla HEAD \`${HEAD:0:7}\` (watchdog interno o tetto turni, dal ledger dei claim) senza pubblicare un verdetto — è il review gate, non i test"
+              RESCUE="non cercare un test rosso: \`review-quota-rescuer\` riesegue \`tests\` una volta con effort ridotto (lo step \`Determine review tier\` legge i timeout già registrati sulla HEAD). Se la review muore ancora, riduci o dividi la PR (meno file di codice nel contributo) oppure fai la review a mano col contratto di \`REVIEW.md\`."
             elif [ "$TESTS_PENDING" = "0" ] && [ "$TESTS_CONCL" != "success" ]; then
               CLASS="C"
               REASON="check \`$CI_CHECK_NAME\` = \`$TESTS_CONCL\` sull'head da >2h, nessun run in volo e nessun segnale a valle (il reviewer gira solo su test verdi) — stallo silenzioso"

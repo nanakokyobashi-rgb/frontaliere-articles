@@ -814,6 +814,96 @@ test('guard 3 — con i test rossi il rimedio resta quello della classe C', opts
   assert.match(body, /stallo silenzioso/, body);
 });
 
+// ── G. Review gate morto: il rosso NON e' un test rosso ─────────────────────
+//
+// Corpus #3812: 3/3 review Codex oltre il watchdog senza output. Il check
+// `tests` e' rosso per il review gate, ma la classe C diceva «se il rosso e'
+// REALE va fixato a mano». Il ledger dei claim distingue i due casi.
+
+const claimComment = ({ id, token, state, cause, head = HEAD_SHA }) => ({
+  id,
+  body: `<!-- PR_REVIEW_CLAIM: ${JSON.stringify({
+    version: 1,
+    token,
+    prNumber: '901',
+    headSha: head,
+    eventKey: `run:${id}`,
+    contributionFingerprint: 'c'.repeat(64),
+    state,
+    ...(cause ? { cause } : {}),
+    issuedAt: 1,
+    expiresAt: 2,
+    runId: String(id),
+  })} -->`,
+});
+
+test('G — review morta sul watchdog: classe G, non «test rossi» (classe C)', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'failure' }),
+    reviews: reviews({ commit: OLD_SHA, body: 'nessun blocco' }),
+    comments: [
+      claimComment({ id: 11, token: 't1', state: 'active' }),
+      claimComment({ id: 12, token: 't1', state: 'failed-transient', cause: 'codex_timeout' }),
+    ],
+  });
+  const body = only(r);
+  assert.match(body, /class=G head=/, body);
+  assert.doesNotMatch(body, /class=C head=/, body);
+  assert.doesNotMatch(body, /va fixato a mano/, body);
+  assert.match(body, /review Codex è morta/, body);
+  assert.match(body, /non cercare un test rosso/, body);
+  assert.deepEqual(r.labeled, [901], 'la PR resta visibile con stale-review come in C');
+});
+
+test('G — anche max_turns e failed-terminal del ledger contano come review morta', opts, () => {
+  for (const [state, cause] of [['failed-transient', 'max_turns'], ['failed-terminal', 'codex_timeout']]) {
+    const body = only(runScan({
+      prs: openPr(),
+      checks: checkRuns({ concl: 'failure' }),
+      reviews: reviews({ commit: OLD_SHA, body: 'nessun blocco' }),
+      comments: [claimComment({ id: 21, token: 't1', state, cause })],
+    }));
+    assert.match(body, /class=G head=/, `${state}/${cause}\n${body}`);
+  }
+});
+
+test('G — guard: ledger di un\'altra HEAD, causa diversa, claim poi completato o ledger muto restano classe C', opts, () => {
+  const cases = {
+    'altra HEAD': [claimComment({ id: 31, token: 't1', state: 'failed-transient', cause: 'codex_timeout', head: OLD_SHA })],
+    'causa 429': [claimComment({ id: 32, token: 't1', state: 'failed-transient', cause: 'rate_limit' })],
+    'claim attivo': [claimComment({ id: 33, token: 't1', state: 'active' })],
+    'poi completato': [
+      claimComment({ id: 34, token: 't1', state: 'failed-transient', cause: 'codex_timeout' }),
+      claimComment({ id: 35, token: 't2', state: 'completed', cause: 'verdict_posted' }),
+    ],
+    'timeout poi sostituito dallo stesso token': [
+      claimComment({ id: 36, token: 't1', state: 'failed-transient', cause: 'codex_timeout' }),
+      claimComment({ id: 37, token: 't1', state: 'active' }),
+    ],
+    'nessun claim': [],
+  };
+  for (const [name, comments] of Object.entries(cases)) {
+    const body = only(runScan({
+      prs: openPr(),
+      checks: checkRuns({ concl: 'failure' }),
+      reviews: reviews({ commit: OLD_SHA, body: 'nessun blocco' }),
+      comments,
+    }));
+    assert.match(body, /class=C head=/, `${name}: deve restare C\n${body}`);
+  }
+});
+
+test('G — con i test verdi il ledger non cambia nulla (resta D)', opts, () => {
+  const body = only(runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: OLD_SHA, body: '🔴 **Important**: rotto' }),
+    comments: [claimComment({ id: 41, token: 't1', state: 'failed-transient', cause: 'codex_timeout' })],
+  }));
+  assert.match(body, /class=D head=/, body);
+});
+
 // ── 3. Le due celle che devono restare MUTE ────────────────────────────────
 
 test('un run in volo sull\'head non è uno stallo: nessuna azione', opts, () => {
