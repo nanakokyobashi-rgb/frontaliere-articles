@@ -224,6 +224,14 @@ export function readManifestSnapshot(manifestPath = MANIFEST_PATH) {
       }
     }
   }
+  // Un artefatto `scalarFingerprint` in `adapted` non è una sorgente
+  // indipendente: va rigenerato insieme alle costanti adattate che lo
+  // dichiarano. Non entra in `locked` (che continua a indicare i gemelli
+  // `identical` instradabili), ma la sua presenza nella diagnosi impedisce di
+  // considerare chiusa una consegna che non può trasportare l'artefatto.
+  for (const f of files) {
+    if (f.mode === 'adapted' && declaredCouplings.has(f.path)) stranded.add(f.path);
+  }
   for (const f of files) {
     if (SITE_ABSENT_MODES.has(f.mode)) absent.add(f.path);
   }
