@@ -94,7 +94,7 @@ const src = readFileSync(CREATE_ARTICLE, 'utf-8');
 // quei blocchi usano anche questi helper: includiamo il sorgente di produzione
 // invece di ricopiarne una versione che potrebbe divergere.
 const TABLE_HEADER_MARKER_HELPERS_SRC = (() => {
-  const start = src.indexOf('function tableHeaderColumnMarker(lineIndex, cellIndex) {');
+  const start = src.indexOf('const TABLE_HEADER_COLUMN_MARKER_NONCE_KEY =');
   assert.notEqual(start, -1, 'helper dei marker per le colonne non trovato');
   const end = src.indexOf('\n// Thin in-script wrapper: bind the lib field-translator', start);
   assert.notEqual(end, -1, 'fine degli helper dei marker per le colonne non trovata');

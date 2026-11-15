@@ -75,7 +75,7 @@ function buildChunker() {
   )(lineStructuralSignature);
 }
 const TABLE_HEADER_MARKER_HELPERS_SRC = (() => {
-  const start = src.indexOf('function tableHeaderColumnMarker(lineIndex, cellIndex) {');
+  const start = src.indexOf('const TABLE_HEADER_COLUMN_MARKER_NONCE_KEY =');
   assert.notEqual(start, -1, 'helper dei marker per le colonne non trovato');
   const end = src.indexOf('\n// Thin in-script wrapper: bind the lib field-translator', start);
   assert.notEqual(end, -1, 'fine degli helper dei marker per le colonne non trovata');
@@ -1343,14 +1343,16 @@ test('il joiner protegge prefissi Markdown annidati e lo scheletro delle pipe', 
     null,
     'un’intestazione localizzata senza mapping per-colonna deve restare rifiutata',
   );
-  const markedTranslatedTableWithHeader = makeTableHeaderMarkers
-    .tableHeaderColumnMarkers(translatedTableWithHeader).markedText;
+  const sourceHeaderMarkers = makeTableHeaderMarkers.tableHeaderColumnMarkers(tableWithHeader).markers;
+  const markedTranslatedTableWithHeader = [
+    `| Segment ${sourceHeaderMarkers.find(({ cellIndex }) => cellIndex === 1).marker} | Reported change ${sourceHeaderMarkers.find(({ cellIndex }) => cellIndex === 2).marker} |`,
+    ...translatedTableWithHeader.split('\n').slice(1),
+  ].join('\n');
   assert.equal(
     await makeTranslator(() => markedTranslatedTableWithHeader)(tableWithHeader),
     translatedTableWithHeader,
     'le etichette di intestazione possono essere localizzate quando la riga separatrice dimostra la struttura della tabella',
   );
-  const sourceHeaderMarkers = makeTableHeaderMarkers.tableHeaderColumnMarkers(tableWithHeader).markers;
   const swappedLocalizedHeader = [
     `| Reported change ${sourceHeaderMarkers.find(({ cellIndex }) => cellIndex === 2).marker} | Segment ${sourceHeaderMarkers.find(({ cellIndex }) => cellIndex === 1).marker} |`,
     ...markedTranslatedTableWithHeader.split('\n').slice(1),
@@ -1384,6 +1386,23 @@ test('il joiner protegge prefissi Markdown annidati e lo scheletro delle pipe', 
     null,
     'la redistribuzione del contenuto fra celle della tabella non deve passare il guard',
   );
+  for (const frame of ['', '> ', '- ', '> - ', '- > ']) {
+    const framedTable = [
+      `${frame}| Segmento | Valore |`,
+      `${frame}|---|---:|`,
+    ].join('\n');
+    const framedMarkers = makeTableHeaderMarkers.tableHeaderColumnMarkers(framedTable);
+    assert.equal(framedMarkers.collision, false, `il frame Markdown ${JSON.stringify(frame)} non deve creare una collisione`);
+    assert.deepEqual(
+      framedMarkers.markers.map(({ cellIndex }) => cellIndex).sort((a, b) => a - b),
+      [1, 2],
+      `il frame Markdown ${JSON.stringify(frame)} non deve diventare una colonna della tabella`,
+    );
+  }
+  const articleOwnedMarker = '<span data-frontaliere-table-column="article-owned"></span>\n| Segmento | Valore |\n|---|---:|';
+  const collision = makeTableHeaderMarkers.tableHeaderColumnMarkers(articleOwnedMarker);
+  assert.equal(collision.collision, true, 'uno span già presente nell’articolo deve fermare il trasporto dei marker');
+  assert.equal(collision.markedText, articleOwnedMarker, 'uno span già presente non deve essere cancellato');
 });
 
 test('il joiner rifiuta un link Markdown alterato dopo la ricomposizione', async () => {

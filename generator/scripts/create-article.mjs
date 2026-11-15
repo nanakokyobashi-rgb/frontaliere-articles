@@ -15014,13 +15014,40 @@ const ARTICLE_TRANSLATE_FREE_MT = String(process.env.ARTICLE_TRANSLATE_FREE_MT ?
  * article content: the validator removes it after proving that each marker
  * stayed in its source column.
  */
-function tableHeaderColumnMarker(lineIndex, cellIndex) {
-  return `<span data-frontaliere-table-column="${lineIndex}-${cellIndex}"></span>`;
+const TABLE_HEADER_COLUMN_MARKER_NONCE_KEY = Symbol.for('frontaliere.table-header-column-marker-nonce');
+const TABLE_HEADER_COLUMN_MARKER_NONCE = globalThis[TABLE_HEADER_COLUMN_MARKER_NONCE_KEY]
+  ?? (globalThis[TABLE_HEADER_COLUMN_MARKER_NONCE_KEY] = `${Date.now().toString(36)}${Math.random().toString(36).slice(2)}`.slice(-16));
+
+function tableHeaderColumnMarkerRegExp(currentRunOnly = true) {
+  const markerAttribute = currentRunOnly
+    ? `data-frontaliere-table-marker="v3${TABLE_HEADER_COLUMN_MARKER_NONCE}"`
+    : 'data-frontaliere-table-marker="v3[^"]+"';
+  return new RegExp(
+    `<span data-frontaliere-table-column="h(\\d+)-c(\\d+)" data-frontaliere-table-source="([0-9a-f]{8})" ${markerAttribute}><\\/span>`,
+    'gu',
+  );
+}
+
+function tableHeaderColumnMarker(headerIndex, cellIndex, sourceFingerprint = '00000000') {
+  return `<span data-frontaliere-table-column="h${headerIndex}-c${cellIndex}" data-frontaliere-table-source="${sourceFingerprint}" data-frontaliere-table-marker="v3${TABLE_HEADER_COLUMN_MARKER_NONCE}"></span>`;
+}
+
+function tableHeaderColumnPayloadFingerprint(value) {
+  // FNV-1a is deliberately local and deterministic: the token is an opaque
+  // source-owned identity, not a security boundary. Keeping it here avoids a
+  // crypto dependency in the extracted test harnesses and makes a provider's
+  // «marker stayed in the cell» claim auditable per payload.
+  let hash = 2166136261;
+  for (const codePoint of String(value ?? '').replace(/\s+/gu, ' ').trim()) {
+    hash ^= codePoint.codePointAt(0);
+    hash = Math.imul(hash, 16777619);
+  }
+  return (hash >>> 0).toString(16).padStart(8, '0');
 }
 
 function stripTableHeaderColumnMarkers(value) {
   return String(value ?? '').replace(
-    /[ \t]?<span data-frontaliere-table-column="\d+-\d+"><\/span>/gu,
+    new RegExp(`[ \\t]?${tableHeaderColumnMarkerRegExp().source}`, 'gu'),
     '',
   );
 }
@@ -15048,50 +15075,120 @@ function tableHeaderColumnPipeLayout(line) {
   return { cells, firstRawPipe, lastRawPipe };
 }
 
+function tableHeaderColumnFramePrefix(prefix) {
+  const normalized = String(prefix ?? '').trim();
+  if (!normalized) return '';
+  let remainder = normalized;
+  let consumedFrame = false;
+  while (remainder) {
+    const blockquote = remainder.match(/^>\s*/u);
+    if (blockquote) {
+      consumedFrame = true;
+      remainder = remainder.slice(blockquote[0].length).trimStart();
+      continue;
+    }
+    const listOrHeading = remainder.match(/^(?:#{1,6}|[-+*•]|\d+[.)])(?:\s+|$)/u);
+    if (!listOrHeading) return null;
+    consumedFrame = true;
+    remainder = remainder.slice(listOrHeading[0].length).trimStart();
+  }
+  return consumedFrame ? normalized.replace(/\s+/gu, ' ') : null;
+}
+
+function tableHeaderColumnFrame(line, layout) {
+  if (!layout) return null;
+  const value = String(line ?? '');
+  const prefix = value.slice(0, layout.firstRawPipe).trim();
+  const framePrefix = tableHeaderColumnFramePrefix(prefix);
+  const hasLeadingFrame = framePrefix !== null;
+  const suffix = value.slice(layout.lastRawPipe + 1).trim();
+  const hasTrailingFrame = !suffix;
+  const firstColumn = hasLeadingFrame ? 1 : 0;
+  const lastColumn = layout.cells.length - (hasTrailingFrame ? 2 : 1);
+  if (firstColumn > lastColumn) return null;
+  return {
+    firstColumn,
+    lastColumn,
+    prefix: framePrefix ?? '',
+    hasLeadingFrame,
+    hasTrailingFrame,
+  };
+}
+
+function tableHeaderColumnHeaderInfo(lines, lineIndex) {
+  const line = lines[lineIndex] ?? '';
+  const separatorLine = lines[lineIndex + 1] ?? '';
+  const layout = tableHeaderColumnPipeLayout(line);
+  const separatorLayout = tableHeaderColumnPipeLayout(separatorLine);
+  const frame = tableHeaderColumnFrame(line, layout);
+  const separatorFrame = tableHeaderColumnFrame(separatorLine, separatorLayout);
+  if (!layout || !separatorLayout || !frame || !separatorFrame) return null;
+  if (
+    frame.firstColumn !== separatorFrame.firstColumn
+    || frame.lastColumn !== separatorFrame.lastColumn
+    || frame.prefix !== separatorFrame.prefix
+  ) return null;
+  const separatorCells = separatorLayout.cells
+    .slice(separatorFrame.firstColumn, separatorFrame.lastColumn + 1)
+    .map(({ start, end }) => separatorLine.slice(start, end).trim());
+  if (!separatorCells.some((cell) => /^:?-{3,}:?$/u.test(cell))) return null;
+  if (!separatorCells.every((cell) => /^:?-{3,}:?$/u.test(cell))) return null;
+  return { layout, frame, separatorLayout, separatorFrame };
+}
+
 function tableHeaderColumnMarkers(value) {
-  const source = stripTableHeaderColumnMarkers(value);
+  const raw = String(value ?? '');
+  const generatedMarkersRemoved = raw.replace(
+    tableHeaderColumnMarkerRegExp(),
+    '',
+  );
+  // Never erase an article-owned span merely because it uses the transport's
+  // old/public attribute name. A collision is fail-closed and remains visible
+  // to the caller instead of silently disappearing from every locale.
+  if (/data-frontaliere-table-column\s*=/u.test(generatedMarkersRemoved)) {
+    return { markedText: raw, markers: [], collision: true };
+  }
+  const source = stripTableHeaderColumnMarkers(raw);
   const lines = source.split('\n');
   const markers = [];
+  let headerIndex = 0;
   const markedLines = lines.map((line, lineIndex) => {
-    const layout = tableHeaderColumnPipeLayout(line);
-    const separatorLine = lines[lineIndex + 1] ?? '';
-    const separatorLayout = tableHeaderColumnPipeLayout(separatorLine);
-    if (!layout || !separatorLayout) return line;
-    const separatorCells = separatorLayout.cells.map(({ start, end }) => separatorLine.slice(start, end).trim());
-    if (!separatorCells.some((cell) => /^:?-{3,}:?$/u.test(cell))) return line;
-    if (!separatorCells.every((cell) => cell === '' || /^:?-{3,}:?$/u.test(cell))) return line;
-
-    // The first/last empty segment is framing when the row has a leading or
-    // trailing pipe. A Markdown prefix (`>`, `-`, `1.`...) before the first
-    // pipe is framing too; it is not a table column.
-    const prefix = line.slice(0, layout.firstRawPipe).trim();
-    const hasLeadingFrame = !prefix || /^(?:#{1,6}|>|[-+*•]|\d+[.)])(?:[ \t]|$)/u.test(prefix);
-    const suffix = line.slice(layout.lastRawPipe + 1).trim();
-    const hasTrailingFrame = !suffix;
-    const firstColumn = hasLeadingFrame ? 1 : 0;
-    const lastColumn = layout.cells.length - (hasTrailingFrame ? 2 : 1);
-    if (firstColumn > lastColumn) return line;
+    const info = tableHeaderColumnHeaderInfo(lines, lineIndex);
+    if (!info) return line;
+    const { layout, frame } = info;
+    const currentHeaderIndex = headerIndex;
+    headerIndex += 1;
 
     let marked = line;
-    for (let cellIndex = lastColumn; cellIndex >= firstColumn; cellIndex -= 1) {
+    for (let cellIndex = frame.lastColumn; cellIndex >= frame.firstColumn; cellIndex -= 1) {
       const cell = layout.cells[cellIndex];
       const cellText = line.slice(cell.start, cell.end);
       const trailingWhitespace = cellText.match(/[ \t]*$/u)?.[0] || '';
       const insertAt = cell.end - trailingWhitespace.length;
       const hasCellText = line.slice(cell.start, insertAt).trim() !== '';
-      const marker = tableHeaderColumnMarker(lineIndex, cellIndex);
+      const sourceFingerprint = tableHeaderColumnPayloadFingerprint(cellText);
+      const marker = tableHeaderColumnMarker(currentHeaderIndex, cellIndex, sourceFingerprint);
       marked = `${marked.slice(0, insertAt)}${hasCellText ? ' ' : ''}${marker}${marked.slice(insertAt)}`;
-      markers.push({ lineIndex, cellIndex, marker });
+      markers.push({
+        lineIndex,
+        headerIndex: currentHeaderIndex,
+        cellIndex,
+        sourceFingerprint,
+        sourceText: cellText.trim(),
+        marker,
+      });
     }
     return marked;
   });
-  return { markedText: markedLines.join('\n'), markers };
+  return { markedText: markedLines.join('\n'), markers, collision: false };
 }
 
 function tableHeaderColumnMarkersMatch(value, expectedMarkers) {
   const text = String(value ?? '');
+  const lines = text.split('\n');
   const found = [];
-  for (const match of text.matchAll(/<span data-frontaliere-table-column="\d+-\d+"><\/span>/gu)) {
+  const currentRunMarkers = tableHeaderColumnMarkerRegExp();
+  for (const match of text.matchAll(currentRunMarkers)) {
     const marker = match[0];
     const position = match.index ?? -1;
     if (position < 0) return false;
@@ -15099,17 +15196,46 @@ function tableHeaderColumnMarkersMatch(value, expectedMarkers) {
     const lineStart = text.lastIndexOf('\n', position - 1) + 1;
     const lineEnd = text.indexOf('\n', position);
     const line = text.slice(lineStart, lineEnd === -1 ? text.length : lineEnd);
-    const layout = tableHeaderColumnPipeLayout(line);
+    const info = tableHeaderColumnHeaderInfo(lines, lineIndex);
+    if (!info) return false;
+    const { layout, frame } = info;
     const localPosition = position - lineStart;
-    const cellIndex = layout?.cells.findIndex(({ start, end }) => localPosition >= start && localPosition < end);
-    found.push({ lineIndex, cellIndex, marker });
+    const cellIndex = layout.cells.findIndex(({ start, end }) => localPosition >= start && localPosition < end);
+    if (cellIndex < frame.firstColumn || cellIndex > frame.lastColumn) return false;
+    const cell = layout.cells[cellIndex];
+    const cellText = stripTableHeaderColumnMarkers(line.slice(cell.start, cell.end)).trim();
+    found.push({
+      lineIndex,
+      headerIndex: Number(match[1]),
+      cellIndex,
+      sourceFingerprint: match[3],
+      sourceText: cellText,
+      marker,
+    });
   }
+  if (/data-frontaliere-table-column\s*=/u.test(text.replace(tableHeaderColumnMarkerRegExp(), ''))) return false;
   if (found.length !== expectedMarkers.length) return false;
-  return expectedMarkers.every(({ lineIndex, cellIndex, marker }) => {
+  return expectedMarkers.every(({ headerIndex, cellIndex, sourceFingerprint, sourceText, marker }) => {
     const matches = found.filter((entry) => entry.marker === marker);
-    return matches.length === 1
-      && matches[0].lineIndex === lineIndex
-      && matches[0].cellIndex === cellIndex;
+    if (matches.length !== 1) return false;
+    const foundEntry = matches[0];
+    if (
+      foundEntry.headerIndex !== headerIndex
+      || foundEntry.cellIndex !== cellIndex
+      || foundEntry.sourceFingerprint !== sourceFingerprint
+    ) return false;
+    // A provider must not be able to leave the markers in place while
+    // swapping two source-only labels. Exact source-text reuse in another
+    // marked cell is strong evidence of that permutation; translated prose is
+    // allowed, but a copied neighbour is not.
+    const normalizedFound = foundEntry.sourceText.replace(/\s+/gu, ' ').trim();
+    const normalizedExpected = String(sourceText ?? '').replace(/\s+/gu, ' ').trim();
+    if (normalizedFound !== normalizedExpected && expectedMarkers.some((other) => (
+      other.headerIndex === headerIndex
+      && other.cellIndex !== cellIndex
+      && String(other.sourceText ?? '').replace(/\s+/gu, ' ').trim() === normalizedFound
+    ))) return false;
+    return true;
   });
 }
 
@@ -15129,9 +15255,12 @@ function freeMtField(
   field = fieldType,
   { preserveMunicipalityNames = false } = {},
 ) {
-  const sourceText = /^body\d+$/u.test(field)
-    ? tableHeaderColumnMarkers(text).markedText
-    : text;
+  let sourceText = text;
+  if (/^body\d+$/u.test(field)) {
+    const markedBody = tableHeaderColumnMarkers(text);
+    if (markedBody.collision) return '';
+    sourceText = markedBody.markedText;
+  }
   return translateFieldFreeMt({
     text: sourceText,
     sourceLang,
@@ -15400,8 +15529,10 @@ async function translatePendingBodyWithCodex(
       });
       const rejected = [];
       let codexModelUnavailable = false;
+      const markedBody = tableHeaderColumnMarkers(itValue);
+      if (markedBody.collision) return null;
       const text = await translateFieldFreeMt({
-        text: tableHeaderColumnMarkers(itValue).markedText,
+        text: markedBody.markedText,
         sourceLang: 'it',
         targetLang: locale,
         fieldType: 'description',
@@ -15494,8 +15625,10 @@ async function translatePendingBodyWithHistoricalChain(
   }
   const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
   const rejected = [];
+  const markedBody = tableHeaderColumnMarkers(itValue);
+  if (markedBody.collision) return null;
   const text = await translateFieldFreeMt({
-    text: tableHeaderColumnMarkers(itValue).markedText,
+    text: markedBody.markedText,
     sourceLang: 'it',
     targetLang: locale,
     fieldType: 'description',
@@ -15766,6 +15899,7 @@ async function translateArticle(data) {
     // expected mapping so nested validation remains idempotent.
     bodyText = stripTableHeaderColumnMarkers(bodyText);
     const tableHeaderMarkers = tableHeaderColumnMarkers(bodyText);
+    if (tableHeaderMarkers.collision) return null;
     const chunks = pretranslatedResult === null
       ? splitIntoTranslationChunks(tableHeaderMarkers.markedText)
       : [tableHeaderMarkers.markedText];
@@ -17342,7 +17476,9 @@ ${localizedToponymInstruction(targetLang)}`;
 
       if (words <= TRANSLATION_CHUNK_THRESHOLD) {
         // Normal single-call translation
-        const markedBodyText = tableHeaderColumnMarkers(bodyText).markedText;
+        const markedBody = tableHeaderColumnMarkers(bodyText);
+        if (markedBody.collision) return {};
+        const markedBodyText = markedBody.markedText;
         const result = await callWithRetry(makePrompt(
           `CONTENUTO ITALIANO DA TRADURRE:\n- ${bodyKey}: ${markedBodyText}`,
           `{"${bodyKey}": "..."}`,
@@ -17785,9 +17921,12 @@ ${localizedToponymInstruction(targetLang)}`;
             );
             retried = translatedStringOrNull(chunked, locale);
           } else {
-            const recoverySourceText = isBodyField
-              ? tableHeaderColumnMarkers(itValue).markedText
-              : itValue;
+            let recoverySourceText = itValue;
+            if (isBodyField) {
+              const markedBody = tableHeaderColumnMarkers(itValue);
+              if (markedBody.collision) throw new Error('collisione del marker di tabella nel body sorgente');
+              recoverySourceText = markedBody.markedText;
+            }
             const parsed = await callWithRetry(
               `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. Rispondi SOLO con JSON (no markdown):\n\n${isBodyField ? '- Copia ogni marcatore opaco <span data-frontaliere-table-column="riga-cella"></span> esattamente nella stessa cella della tabella; non tradurlo.' : ''}\n\nCAMPO ITALIANO (${retryFieldLabel}):\n${recoverySourceText}\n\nFormato risposta: ${faqPart ? `{"faq": [{"${faqPart}": "..."}]}` : `{"${field}": "..."}`}`,
               1500,
@@ -17908,7 +18047,9 @@ ${localizedToponymInstruction(targetLang)}`;
       console.error(`  ⚠️  Traduzione ${field} (${locale}) troncata — retry traduzione mirata...`);
       const buildRetryPrompt = (chunkText, i, total) => {
         const partLabel = total > 1 ? `, parte ${i + 1} di ${total}` : '';
-        const markedChunkText = tableHeaderColumnMarkers(chunkText).markedText;
+        const markedChunk = tableHeaderColumnMarkers(chunkText);
+        if (markedChunk.collision) throw new Error('collisione del marker di tabella nel body sorgente');
+        const markedChunkText = markedChunk.markedText;
         return `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. `
           + `La traduzione deve essere COMPLETA fino all'ultima frase: non troncare, non interrompere a metà periodo. `
           + `Copia ogni marcatore opaco <span data-frontaliere-table-column="riga-cella"></span> esattamente nella stessa cella della tabella; non tradurlo. `
