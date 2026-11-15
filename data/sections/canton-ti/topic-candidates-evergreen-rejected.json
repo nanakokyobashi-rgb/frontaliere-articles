@@ -4,17 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ti::https://www.ilgiorno.it/como/cronaca/frontalieri-in-finanziaria-la-tassa-fdf34935": {
+    "canton-ti::https://www.ilgiorno.it/como/cronaca/polizze-sanitarie-alle-stelle-in-f0a74e0f": {
       "section": "canton-ti",
-      "ts": 1794107491909
-    },
-    "canton-ti::https://www.laprovinciadicomo.it/stories/le-aziende-comunicazione/mendrisio-il-lato-easy-della-svizzera-o_3990873_11?int_campaign=sesaab.in-collaborazione-con-citta-di-mendrisio.native&int_content=3990873.homepage.mendrisio-il-lato-easy-della-svizzera-o_3990873_11&int_medium=ecodibergamo.homepage.native&int_source=la-provincia-di-como": {
-      "section": "canton-ti",
-      "ts": 1794183283427
-    },
-    "canton-ti::https://www.ocst.ch/articoli/17-news-frontalieri/2509-frontalieri-e-tassa-sulla-salute-esito-dellincontro-unitario-stra-sindacati-svizzeri-e-italiani": {
-      "section": "canton-ti",
-      "ts": 1794230265207
+      "ts": 1794779749130
     }
   }
 }
