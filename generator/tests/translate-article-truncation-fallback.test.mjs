@@ -89,6 +89,18 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
 const src = readFileSync(CREATE_ARTICLE, 'utf-8');
 
+// I blocchi ritagliati qui sotto sono chiusure verbatim di create-article.mjs.
+// Da quando il contratto delle tabelle protegge l'identita' delle colonne,
+// quei blocchi usano anche questi helper: includiamo il sorgente di produzione
+// invece di ricopiarne una versione che potrebbe divergere.
+const TABLE_HEADER_MARKER_HELPERS_SRC = (() => {
+  const start = src.indexOf('function tableHeaderColumnMarker(lineIndex, cellIndex) {');
+  assert.notEqual(start, -1, 'helper dei marker per le colonne non trovato');
+  const end = src.indexOf('\n// Thin in-script wrapper: bind the lib field-translator', start);
+  assert.notEqual(end, -1, 'fine degli helper dei marker per le colonne non trovata');
+  return src.slice(start, end);
+})();
+
 /** Ritaglia il loop di truncation-retry di `translateArticle()` VERBATIM. */
 function extractTruncationRetryLoop() {
   const marker = '`${locale}:${field}-truncation-retry`,';
@@ -168,7 +180,7 @@ async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTrunc
     'markBodyTranslationPending', 'isSourcePassthrough', 'rejectRawFaqControlEscape', 'normalizeLocalizedToponymText',
     'translateInChunks', 'validatePretranslatedBody',
     'safeSignalDiagnosticTextForLog', 'countWords', 'TRANSLATION_CHUNK_THRESHOLD', 'buildPendingBodyRetranslationPrompt',
-    `return (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
+    `${TABLE_HEADER_MARKER_HELPERS_SRC}\nreturn (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
   );
   // `metaFieldPlausibilityMiss` e' il floor VERO (#798), non un mock: il ramo
   // floor-miss del loop tiene il valore tradotto invece di cadere sul fallback
@@ -232,7 +244,7 @@ async function runTruncationRetryLoop({ data, itContent, detectTruncation, callW
     'TRANSLATION_CHUNK_THRESHOLD', 'translatedStringOrNull', 'sanitizeBodyText', 'countWords', 'console',
     'markBodyTranslationPending', 'RUN_REPORT', 'isSourcePassthrough', 'validatePretranslatedBody',
     'safeSignalDiagnosticTextForLog',
-    `${REAL_TRUNCATION_SRC}\nreturn (async () => { ${LOOP_SRC} })();`,
+    `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${REAL_TRUNCATION_SRC}\nreturn (async () => { ${LOOP_SRC} })();`,
   );
   await fn(
     data, itContent, detectTruncation, callWithRetry, chunkTranslator,
@@ -1431,7 +1443,7 @@ async function runLegacyTranslateContent(sourceContent, callWithRetry) {
   const fn = new Function(
     'sourceContent', 'callWithRetry', 'ARTICLE_TRANSLATE_FREE_MT', 'translateContentFreeMt', 'TRANSLATION_CHUNK_THRESHOLD',
     'translatedStringOrNull', 'isSourcePassthrough', 'sanitizeBodyText', 'joinTranslatedChunks', 'localizedToponymInstruction', 'console', 'editorialHeadlineGuidance', 'hasSameLineSkeleton', 'lineStructuralSignature', 'opaqueSpanSignature', 'detectTruncation', 'balanceMarkdownMarkers',
-    `${COLLECT_BODY_SECTIONS_SRC}\n${COUNT_WORDS_SRC}\n${SPLIT_CHUNKS_SRC}\n${TRANSLATE_IN_CHUNKS_SRC}\n${TRANSLATE_CONTENT_SRC}\n`
+    `${COLLECT_BODY_SECTIONS_SRC}\n${COUNT_WORDS_SRC}\n${SPLIT_CHUNKS_SRC}\n${TABLE_HEADER_MARKER_HELPERS_SRC}\n${TRANSLATE_IN_CHUNKS_SRC}\n${TRANSLATE_CONTENT_SRC}\n`
     + "return translateContent('it', 'fr', '4/5', sourceContent);",
   );
   return fn(
