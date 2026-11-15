@@ -192,10 +192,10 @@ export const PARTNERIZE_TAG_SNIPPET = `<script>${initialDocumentGuard.content}</
  */
 export const ADSENSE_CLIENT_ID = 'ca-pub-8628054934855353';
 
-export const AD_RECOVERY_VERSIONED_FILENAME = 'site-support-253b6b9df5da.js';
+export const AD_RECOVERY_VERSIONED_FILENAME = 'site-support-b6f23de7d52d.js';
 export const AD_RECOVERY_SNIPPET = `<script defer data-cfasync="false" src="/assets/${AD_RECOVERY_VERSIONED_FILENAME}"></script>`;
 
-export const ADSENSE_LOADER_FILENAME = 'adsense-loader-9aa873313b19.js';
+export const ADSENSE_LOADER_FILENAME = 'adsense-loader-54e21784f42d.js';
 
 export const ADSENSE_LAZY_LOADER = `<script defer src="/assets/${ADSENSE_LOADER_FILENAME}"></script>`;
 
