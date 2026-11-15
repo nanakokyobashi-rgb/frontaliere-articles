@@ -4460,12 +4460,13 @@
     {
       "path": "host/shell-contract-fingerprint.json",
       "sitePath": "tests/articles-shell-contract-fingerprint.json",
-      "mode": "identical",
-      "reason": "Impronta SHA-256 dei 23 campi scalari di SiteShellContract, prodotta e verificata da host/tests/shell-contract-fingerprint.test.mjs. Il gemello del sito e' tests/articles-shell-contract-fingerprint.json con gli stessi valori, incluso lo snippet Meta Pixel content-addressed e consent-gated; i due artefatti restano identical e il gate runtime impedisce di spedire l'engine senza la sua meta' host/.",
+      "mode": "adapted",
+      "reason": "Impronta SHA-256 dei 23 campi scalari di SiteShellContract, prodotta e verificata da host/tests/shell-contract-fingerprint.test.mjs. Il gemello del sito e' tests/articles-shell-contract-fingerprint.json, ma i digest differiscono intenzionalmente: il sito registra gli URL globali stabili e la shell host include i nomi content-addressed degli asset. La dichiarazione scalarFingerprint su host/constants.ts confronta separatamente entrambi i valori.",
       "baseline": {
-        "site": "cace919981b8a649",
-        "corpus": "cace919981b8a649",
-        "alignedAt": "2026-11-09"
+        "site": "cb29a37dd7c6ce74",
+        "corpus": "f5198cca59c9534a",
+        "alignedAt": "2026-11-15",
+        "forcedAt": "2026-11-15T19:04:16.629Z"
       }
     },
     {
