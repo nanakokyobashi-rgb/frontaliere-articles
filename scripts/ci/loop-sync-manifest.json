@@ -898,9 +898,9 @@
       "path": "scripts/ci/lib/fetchPrFiles.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "bb2cab414b8361a1",
-        "corpus": "bb2cab414b8361a1",
-        "alignedAt": "2026-11-02"
+        "site": "b5fbce8127da4a62",
+        "corpus": "b5fbce8127da4a62",
+        "alignedAt": "2026-11-15"
       }
     },
     {
