@@ -682,11 +682,15 @@ export function handoffDecision({
   // `no-root-cause`).
   const residual = [...new Set(shippable.filter((p) => stuckSet.has(p) || !locked.has(p)))];
   if (residual.length) {
-    const blockedTransportResidual = residual.filter((p) => stuckSet.has(p));
+    const strandedTwins = residual.filter((p) => stuckSet.has(p) && locked.has(p));
+    const adaptedArtifacts = residual.filter((p) => stuckSet.has(p) && !locked.has(p));
     const otherResidual = residual.filter((p) => !stuckSet.has(p));
     const details = [];
-    if (blockedTransportResidual.length) {
-      details.push(`${blockedTransportResidual.length} path non trasportabili automaticamente (${blockedTransportResidual.join(', ')}): restano da gestire qui insieme ai rispettivi partner`);
+    if (strandedTwins.length) {
+      details.push(`${strandedTwins.length} gemelli che nessun trasporto porta giu' (${strandedTwins.join(', ')}): la discesa e' una copia a mano`);
+    }
+    if (adaptedArtifacts.length) {
+      details.push(`${adaptedArtifacts.length} artefatti adattati non trasportabili automaticamente (${adaptedArtifacts.join(', ')}): restano da gestire qui insieme ai rispettivi partner`);
     }
     if (otherResidual.length) {
       details.push(`${otherResidual.length} altri path citati non garantiti dal trasporto (${otherResidual.join(', ')})`);
