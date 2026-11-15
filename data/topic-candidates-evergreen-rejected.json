@@ -14600,6 +14600,14 @@
     "frontaliere::https://www.ticinonews.ch/ticino/mendrisio-parcheggi-gratuiti-negli-autosili-nel-periodo-natalizio-446623": {
       "section": "frontaliere",
       "ts": 1794696184287
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1962940/lavoro-giovani-record-disoccupazione-valori": {
+      "section": "frontaliere",
+      "ts": 1794730426537
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1962829/svizzera-disoccupazione-anni-federale-toccato": {
+      "section": "frontaliere",
+      "ts": 1794730467333
     }
   }
 }
