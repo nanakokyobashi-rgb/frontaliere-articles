@@ -1136,11 +1136,11 @@ jobs:
                Questo container è **già** un checkout isolato monouso: **non** creare worktree interni. La regola worktree-first vale per le sessioni locali con un `main` condiviso, non qui — crearne uno brucia turni rifacendo la meccanica del checkout.
             2. Diagnosi della **root cause**, non del sintomo. **Budget:** se dopo ~15 turni non emerge una root cause chiara, NON continuare a scavare: restringi lo scope o termina pulito con outcome `no-root-cause`.
             3. Fix chirurgico alla **CLASSE del bug, non al singolo file**. Niente refactor drive-by, ma per un fix di pattern (regex, guard, soglia, selettore) cerca con `rg` i gemelli in `generator/`, `engine/`, `host/`, `scripts/` e sweepa l'intera classe **nella stessa PR**, oppure giustifica ogni gemello non toccato in `## Non implementato`. Toccare i file gemelli con lo stesso antipattern non è drive-by: è il fix completo, e previene il 🔴 del reviewer che costerebbe due cicli di quota.
-            4. **Checkpoint WIP — commit e push IMMEDIATI.** Appena il fix è applicato, anche prima di testarlo: `git add -A && git commit -m "wip(issue-$ISSUE_NUMBER): checkpoint pre-test"`, poi assegna `push_ref="HEAD:refs/heads/fix/issue-$ISSUE_NUMBER"` e invoca `git push -u origin "$push_ref"`. Il ref completo è obbligatorio per il bridge Git confinato al branch corrente. Se il run muore dopo questo punto il branch sopravvive col diff reale, recuperabile al retry. Senza checkpoint, un run morto per max-turns perde il 100% del lavoro col container.
+            4. **Checkpoint WIP — commit e push IMMEDIATI.** Appena il fix è applicato, anche prima di testarlo: `git add -A && git commit -m "wip(issue-$ISSUE_NUMBER): checkpoint pre-test"`, poi assegna `push_ref="HEAD:refs/heads/fix/issue-$ISSUE_NUMBER"` e invoca `git push -u origin "$push_ref"`. Il ref completo è obbligatorio per il bridge Git confinato al branch corrente. Se il run muore dopo questo punto il branch sopravvive col diff reale, recuperabile al retry. Senza checkpoint, un run morto per max-turns perde il 100% del lavoro col container. Il checkpoint NON è il commit consegnato: il passo 7 aggiunge sempre un commit conventional come HEAD finale.
             5. Mai abbassare un quality gate o un test per far passare qualcosa.
             6. **Gate test pre-PR (obbligatorio):** `node --test 'generator/tests/*.test.mjs'`. **Non** usare vitest: questo repo non ce l'ha. Non usare `npm test` cieco. Il glob è necessario — `node --test <dir>` su Node 22 collassa la cartella in un unico test fallito invece di scoprire i file. Rosso → fixa la root cause e rigira. Una PR coi test rossi non riceve review e resta ferma: è un ciclo sprecato.
-            7. Commit (no-op se dal checkpoint non è cambiato altro — una storia wip+fix sul branch va bene).
-            8. Push.
+            7. Commit FINALE (OBBLIGATORIO, mai un no-op): l'HEAD della PR NON deve MAI essere il checkpoint `wip(issue-$ISSUE_NUMBER): checkpoint pre-test` — la guardia F7 del review gate (Re-review guard su HEAD WIP) chiude fail-closed senza modello ogni PR con HEAD WIP, e la PR resterebbe senza review. Se dopo il passo 4 ci sono cambi (es. fix ai test rossi del passo 6) committali con messaggio conventional; se non è cambiato altro crea comunque `git commit --allow-empty -m "fix(issue-$ISSUE_NUMBER): <titolo breve del fix>"`. Gate PII su diff e messaggio. Non serve squashare: la storia wip+fix sul branch va bene purché l'ULTIMO commit sia conventional. Lo step deterministico `Finalize PR HEAD` rimedia se lo dimentichi, ma tu non contarci.
+            8. Push (aggiorna il branch già pushato al passo 4 col commit conventional del passo 7). Prima di aprire la PR verifica che `git log -1 --format=%s` NON inizi per `wip(`.
             9. Apri la PR con `gh pr create`. Body OBBLIGATORIO:
                ```
                ## Implementato
@@ -1308,6 +1308,86 @@ jobs:
               || echo "::warning::wip-salvage: commento sulla issue non postato (il branch pero' e' salvo)."
           else
             echo "::warning::wip-salvage: push di $BRANCH fallito — il lavoro resta solo nel container e andra' perso."
+          fi
+
+      - name: Finalize PR HEAD (never deliver a WIP checkpoint, zero-Claude)
+        # PERCHE' ESISTE (portato dal sito, misurato il 2026-11-15 su
+        # #18842/#18843/#18844 la' dove il Re-review guard F7 di tests.yml chiude
+        # fail-closed SENZA modello ogni PR con HEAD `wip(issue-N): checkpoint ...`).
+        # Il passo 7 del prompt diceva che, se dopo il checkpoint non cambiava
+        # altro, il commit finale era un no-op e «una storia wip+fix va bene»: una
+        # PR consegnata con il solo checkpoint come HEAD non e' un commit da
+        # rivedere. Il corpus non ha (ancora) la guardia F7 nel proprio
+        # `tests.yml`, ma tiene lo stesso contratto del gemello del sito, cosi' la
+        # regola non diverge e una futura guardia non trova PR gia' bloccate.
+        #
+        # Questo step e' la meta' deterministica del passo 7: se la PR aperta su
+        # `fix/issue-N` ha ancora come HEAD il checkpoint (e il container sta su
+        # quello stesso commit), aggiunge un commit conventional anche vuoto e lo
+        # pusha normale (mai force). Il salvataggio automatico sopra non apre PR
+        # e non passa di qui: i checkpoint di sessioni morte restano tali.
+        #
+        # Best-effort: un fallimento e' un warning, mai un job rosso.
+        if: always() && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true' && steps.identical_restore_wip.outputs.verified == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+        run: |
+          set -uo pipefail
+          BRANCH="fix/issue-$ISSUE"
+          if ! PR_HEAD=$(gh pr list --repo "$REPO" --head "$BRANCH" --state open --json headRefOid \
+            --jq '.[0].headRefOid // empty' 2>/dev/null); then
+            echo "::warning::finalize-head: lookup PR non disponibile su $BRANCH — nessuna mutazione."
+            exit 0
+          fi
+          if [ -z "$PR_HEAD" ]; then
+            echo "finalize-head: nessuna PR aperta su $BRANCH → niente da finalizzare."
+            exit 0
+          fi
+          LOCAL_HEAD=$(git rev-parse HEAD 2>/dev/null || echo none)
+          if [ "$LOCAL_HEAD" != "$PR_HEAD" ]; then
+            echo "finalize-head: l'HEAD della PR (${PR_HEAD:0:12}) non e' il commit del container (${LOCAL_HEAD:0:12}) → nessuna mutazione."
+            exit 0
+          fi
+          SUBJECT=$(git log -1 --format=%s HEAD)
+          if ! [[ "$SUBJECT" =~ ^wip\(issue-[0-9]+\):[[:space:]]checkpoint ]]; then
+            echo "finalize-head: l'HEAD non e' un checkpoint WIP → niente da fare."
+            exit 0
+          fi
+          if [ -n "$(git status --porcelain=v1)" ]; then
+            echo "::warning::finalize-head: working tree non pulito — nessun commit/push per non perdere modifiche residue."
+            exit 0
+          fi
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "::warning::finalize-head: GITHUB_PAT_NANAKO assente — finalizzazione rifiutata per non riattivare la PR con GITHUB_TOKEN."
+            exit 0
+          fi
+          # Titolo su una riga, senza `#` (mai keyword di chiusura adiacente a un
+          # numero nel commit message: AGENTS.md) e al massimo 72 caratteri.
+          TITLE=$(printf '%s' "$ISSUE_TITLE" | tr '\r\n' '  ' | tr -d '#' | sed 's/[[:space:]]\{1,\}/ /g; s/^ //; s/ $//' | LC_ALL=C.UTF-8 cut -c1-72)
+          [ -n "$TITLE" ] || TITLE="deliver reviewed fix"
+          git commit -q --allow-empty \
+            -m "fix(issue-$ISSUE): $TITLE" \
+            -m "Commit finale non-WIP aggiunto dallo step deterministico di issue-fix.yml: l'HEAD della PR era ancora il checkpoint pre-test, che la guardia F7 del review gate chiude fail-closed senza review." || {
+            echo "::warning::finalize-head: commit rifiutato (hook o gate PII) — la PR resta sul checkpoint."
+            exit 0
+          }
+          # Stessa identita' di push di «Configure git identity»: l'extraheader
+          # di actions/checkout ha la precedenza sull'URL del remote, quindi lo
+          # toglie l'helper condiviso (niente nuova copia inline: il test
+          # configure-main-push-auth ne ammette una sola per workflow).
+          if ! git show origin/main:scripts/lib/clear-checkout-git-credentials.sh 2>/dev/null | bash; then
+            echo "::warning::finalize-head: credenziali di checkout non rimovibili — nessun push, la PR resta sul checkpoint."
+            exit 0
+          fi
+          git remote set-url origin "https://x-access-token:${GITHUB_PAT_NANAKO}@github.com/${REPO}.git"
+          if git push origin "HEAD:refs/heads/$BRANCH" 2>&1 | tail -3; then
+            echo "finalize-head: $BRANCH ora ha HEAD $(git rev-parse --short HEAD) (commit conventional, non WIP)."
+          else
+            echo "::warning::finalize-head: push di $BRANCH fallito — la PR resta sul checkpoint."
           fi
 
       - name: Evaluate current PR delivery evidence (zero-Claude)
