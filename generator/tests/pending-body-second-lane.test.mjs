@@ -83,7 +83,7 @@ const TABLE_HEADER_MARKER_HELPERS_SRC = (() => {
 })();
 const makeTableHeaderMarkers = new Function(
   'lineStructuralSignature',
-  `${TABLE_HEADER_MARKER_HELPERS_SRC}\nreturn { tableHeaderColumnMarkers, tableHeaderColumnMarker };`,
+  `${TABLE_HEADER_MARKER_HELPERS_SRC}\nreturn { tableHeaderColumnMarkers, tableHeaderColumnMarker, tableHeaderColumnMarkersMatch };`,
 )(lineStructuralSignature);
 const TRANSLATE_IN_CHUNKS_SRC = (() => {
   const start = src.indexOf('  async function translateInChunks(\n    bodyText,\n    fieldKey,\n    makeChunkPrompt,\n    labelPrefix,\n    targetLang,\n    { pretranslatedResult = null, forceLegacy = false } = {},\n  ) {');
@@ -1404,6 +1404,23 @@ test('il joiner protegge prefissi Markdown annidati e lo scheletro delle pipe', 
     await makeTranslator(() => swappedTableHeaders)(twoTableSource),
     null,
     'una riga di intestazione intera non può trasferire i marker fra due tabelle con lo stesso layout',
+  );
+  const shiftedSecondHeader = [
+    twoTableMarked[0],
+    twoTableMarked[1],
+    '',
+    twoTableMarked[2],
+    twoTableMarked[3],
+    twoTableMarked[4],
+    twoTableMarked[5],
+  ].join('\n');
+  assert.equal(
+    makeTableHeaderMarkers.tableHeaderColumnMarkersMatch(
+      shiftedSecondHeader,
+      makeTableHeaderMarkers.tableHeaderColumnMarkers(twoTableSource).markers,
+    ),
+    false,
+    'un marker non può seguire la tabella sbagliata se la sua riga sorgente è stata spostata',
   );
   const swappedTextDataRow = tableWithHeader.replace(
     '| Case unifamiliari | +2,1% |',

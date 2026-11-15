@@ -470,11 +470,11 @@ function tableHeaderColumnMarkersMatch(value, expectedMarkers) {
   }
   if (/data-frontaliere-table-column\s*=/u.test(text.replace(tableHeaderColumnMarkerRegExp(), ''))) return false;
   if (found.length !== expectedMarkers.length) return false;
-  return expectedMarkers.every(({ headerIndex, cellIndex, sourceFingerprint, sourceText, marker }) => {
+  return expectedMarkers.every(({ lineIndex, headerIndex, cellIndex, sourceFingerprint, sourceText, marker }) => {
     const matches = found.filter((entry) => entry.marker === marker);
     if (matches.length !== 1) return false;
     const foundEntry = matches[0];
-    if (foundEntry.headerIndex !== headerIndex || foundEntry.outputHeaderIndex !== headerIndex || foundEntry.cellIndex !== cellIndex || foundEntry.sourceFingerprint !== sourceFingerprint) return false;
+    if (foundEntry.lineIndex !== lineIndex || foundEntry.headerIndex !== headerIndex || foundEntry.outputHeaderIndex !== headerIndex || foundEntry.cellIndex !== cellIndex || foundEntry.sourceFingerprint !== sourceFingerprint) return false;
     const normalizedFound = foundEntry.sourceText.replace(/\s+/gu, ' ').trim();
     const normalizedExpected = String(sourceText ?? '').replace(/\s+/gu, ' ').trim();
     if (normalizedFound !== normalizedExpected && expectedMarkers.some((other) => (
