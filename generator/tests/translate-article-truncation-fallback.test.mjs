@@ -168,7 +168,7 @@ async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTrunc
     'markBodyTranslationPending', 'isSourcePassthrough', 'rejectRawFaqControlEscape', 'normalizeLocalizedToponymText',
     'translateInChunks', 'validatePretranslatedBody',
     'safeSignalDiagnosticTextForLog', 'countWords', 'TRANSLATION_CHUNK_THRESHOLD', 'buildPendingBodyRetranslationPrompt',
-    `return (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
+    `${TABLE_HEADER_MARKER_HELPERS_SRC}\nreturn (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
   );
   // `metaFieldPlausibilityMiss` e' il floor VERO (#798), non un mock: il ramo
   // floor-miss del loop tiene il valore tradotto invece di cadere sul fallback
@@ -232,7 +232,7 @@ async function runTruncationRetryLoop({ data, itContent, detectTruncation, callW
     'TRANSLATION_CHUNK_THRESHOLD', 'translatedStringOrNull', 'sanitizeBodyText', 'countWords', 'console',
     'markBodyTranslationPending', 'RUN_REPORT', 'isSourcePassthrough', 'validatePretranslatedBody',
     'safeSignalDiagnosticTextForLog',
-    `${REAL_TRUNCATION_SRC}\nreturn (async () => { ${LOOP_SRC} })();`,
+    `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${REAL_TRUNCATION_SRC}\nreturn (async () => { ${LOOP_SRC} })();`,
   );
   await fn(
     data, itContent, detectTruncation, callWithRetry, chunkTranslator,
@@ -1421,6 +1421,13 @@ const TRANSLATE_IN_CHUNKS_SRC = (() => {
   assert.notEqual(a, -1, 'translateInChunks non trovata — aggiornare questo test');
   return src.slice(a, src.indexOf('\n  }\n', a) + 4);
 })();
+const TABLE_HEADER_MARKER_HELPERS_SRC = (() => {
+  const a = src.indexOf('function tableHeaderColumnMarker(lineIndex, cellIndex) {');
+  assert.notEqual(a, -1, 'helper dei marker per le colonne non trovato — aggiornare questo test');
+  const end = src.indexOf('\n// Thin in-script wrapper: bind the lib field-translator', a);
+  assert.notEqual(end, -1, 'fine degli helper dei marker per le colonne non trovata');
+  return src.slice(a, end);
+})();
 const SPLIT_CHUNKS_SRC = extractFunctionSource('function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {');
 const COUNT_WORDS_SRC = extractFunctionSource("function countWords(text = '') {");
 const BUILD_PENDING_BODY_PROMPT_SRC = extractFunctionSource("function buildPendingBodyRetranslationPrompt({ langName, field, itValue, partLabel = '' }) {");
@@ -1431,7 +1438,7 @@ async function runLegacyTranslateContent(sourceContent, callWithRetry) {
   const fn = new Function(
     'sourceContent', 'callWithRetry', 'ARTICLE_TRANSLATE_FREE_MT', 'translateContentFreeMt', 'TRANSLATION_CHUNK_THRESHOLD',
     'translatedStringOrNull', 'isSourcePassthrough', 'sanitizeBodyText', 'joinTranslatedChunks', 'localizedToponymInstruction', 'console', 'editorialHeadlineGuidance', 'hasSameLineSkeleton', 'lineStructuralSignature', 'opaqueSpanSignature', 'detectTruncation', 'balanceMarkdownMarkers',
-    `${COLLECT_BODY_SECTIONS_SRC}\n${COUNT_WORDS_SRC}\n${SPLIT_CHUNKS_SRC}\n${TRANSLATE_IN_CHUNKS_SRC}\n${TRANSLATE_CONTENT_SRC}\n`
+    `${COLLECT_BODY_SECTIONS_SRC}\n${COUNT_WORDS_SRC}\n${SPLIT_CHUNKS_SRC}\n${TABLE_HEADER_MARKER_HELPERS_SRC}\n${TRANSLATE_IN_CHUNKS_SRC}\n${TRANSLATE_CONTENT_SRC}\n`
     + "return translateContent('it', 'fr', '4/5', sourceContent);",
   );
   return fn(
