@@ -4236,7 +4236,7 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti host adattate dal sito: il fingerprint confronta i 23 scalari authoritative di SiteShellContract. Il digest e87ec4c2… include gli URL content-addressed di site-support, AdSense, Partnerize e Meta Pixel; il runtime Firebase mantiene il match sulla chiave esatta e non espone segreti.",
+      "reason": "Costanti host adattate dal sito: il fingerprint confronta i 23 scalari autorevoli del SiteShellContract; nomi content-addressed e byte degli asset statici sono verificati separatamente in host/third-party-shell-assets-fingerprint.json e host/third-party-shell-assets.json. Il runtime Firebase mantiene il match sulla chiave esatta e non espone segreti.",
       "baseline": {
         "site": "141382885e28264f",
         "corpus": "6c61c6bf12afc98a",
