@@ -364,14 +364,17 @@ export function descentBlock(entry, { couplings = [], blockedForever = new Set()
 }
 
 /**
- * I path `identical` che nessun canale porta giu': `identical` **senza**
- * «trasportato» (#972 item 4). Sorgente unica, come `mirrorLockedPaths()`.
+ * I path per cui una consegna automatica non basta: gemelli `identical` che
+ * nessun canale porta giu' e artefatti `scalarFingerprint` adattati da gestire
+ * insieme al partner dichiarato. Sorgente unica, come `mirrorLockedPaths()`.
+ * `strandedTwinPaths` mantiene il nome storico per compatibilita' con i consumer.
  *
  * Serve a una decisione sola: una consegna che nomina uno di questi non
  * autorizza a chiudere qui. La chiusura dei `blocked-*` poggia sulla frase «la
  * fix scendera' col mirror, e la condizione che ha aperto questa issue non ci
- * sara' piu'»; per un gemello che il trasporto rifiuta per sempre quella frase
- * e' falsa, e la issue chiusa era l'unico portatore della diagnosi.
+ * sara' piu'». Se il path non puo' essere consegnato da solo — gemello senza
+ * trasporto o artefatto derivato da un partner adattato — quella frase e'
+ * falsa, e la issue chiusa era l'unico portatore della diagnosi.
  *
  * Manifest illeggibile → insieme vuoto, cioe' nessun blocco alla chiusura: il
  * fallimento sicuro qui e' il comportamento di prima.
@@ -583,10 +586,10 @@ export function handoffDecision({
   const absent = siteAbsent ?? snapshot?.absent ?? new Set();
   const locked = lockedPaths ?? snapshot?.locked ?? new Map();
   const names = siteNames ?? snapshot?.names ?? new Map();
-  // `identical` non implica «trasportato» (#972 item 4): questi sono i gemelli
-  // che nessun canale porta giu'. Non cambiano l'instradamento — la diagnosi va
-  // consegnata comunque, e' di la' che si scrive la fix — ma tolgono alla
-  // consegna la facolta' di chiudere qui.
+  // `identical` non implica «trasportato» (#972 item 4): questo insieme include
+  // i gemelli senza canale automatico e gli artefatti `scalarFingerprint`
+  // adattati che vanno gestiti col partner dichiarato. Non cambia
+  // l'instradamento; impedisce solo di chiudere una consegna che lascia lavoro.
   const stuckSet = stranded ?? snapshot?.stranded ?? new Set();
   // UN solo idioma di traduzione per i due rami: «come si chiama di la'» e' una
   // domanda sola, e la risposta viene dal manifest INTERO (`sitePathMap`), non
@@ -670,23 +673,24 @@ export function handoffDecision({
   }
   // `identical` non implica «trasportato» (#972 item 4). La chiusura dei
   // `blocked-*` dice, nel commento che lascia: «quando la fix scendera' col
-  // mirror, la condizione che ha aperto questa issue non ci sara' piu'». Per un
-  // gemello che `transport-identical-twins.mjs` rifiuta per SEMPRE quella frase
-  // e' falsa — salvo i workflow nella allowlist dedicata sito → corpus, che
-  // hanno un canale esplicito e quindi non sono stranded. Un workflow restante
-  // fuori da quella allowlist e' invece precisamente quello che un
-  // `blocked-workflows-scope` nomina: il fix di la' non scendera' mai da solo,
-  // la discesa e' una copia a mano. Anche gli altri path citati ma non
-  // `identical` restano residui: la diagnosi puo' essere aggregata e chiudere
-  // qui mentre una sua meta' e' ancora lavoro del corpus (la stessa regola gia'
-  // usata dal ramo `no-root-cause`).
+  // mirror, la condizione che ha aperto questa issue non ci sara' piu'». Un
+  // gemello senza canale automatico o un artefatto derivato da un partner
+  // adattato non soddisfano quella promessa. I workflow fuori dalla allowlist
+  // dedicata sito → corpus sono un esempio; anche gli altri path citati ma non
+  // `identical` restano residui, cosi' una diagnosi aggregata non chiude mentre
+  // una sua meta' e' ancora lavoro del corpus (la stessa regola del ramo
+  // `no-root-cause`).
   const residual = [...new Set(shippable.filter((p) => stuckSet.has(p) || !locked.has(p)))];
   if (residual.length) {
-    const stuckResidual = residual.filter((p) => stuckSet.has(p));
+    const strandedTwins = residual.filter((p) => stuckSet.has(p) && locked.has(p));
+    const adaptedArtifacts = residual.filter((p) => stuckSet.has(p) && !locked.has(p));
     const otherResidual = residual.filter((p) => !stuckSet.has(p));
     const details = [];
-    if (stuckResidual.length) {
-      details.push(`${stuckResidual.length} gemelli che nessun trasporto porta giu' (${stuckResidual.join(', ')}): la discesa e' una copia a mano`);
+    if (strandedTwins.length) {
+      details.push(`${strandedTwins.length} gemelli che nessun trasporto porta giu' (${strandedTwins.join(', ')}): la discesa e' una copia a mano`);
+    }
+    if (adaptedArtifacts.length) {
+      details.push(`${adaptedArtifacts.length} artefatti adattati non trasportabili automaticamente (${adaptedArtifacts.join(', ')}): restano da gestire qui insieme ai rispettivi partner`);
     }
     if (otherResidual.length) {
       details.push(`${otherResidual.length} altri path citati non garantiti dal trasporto (${otherResidual.join(', ')})`);
