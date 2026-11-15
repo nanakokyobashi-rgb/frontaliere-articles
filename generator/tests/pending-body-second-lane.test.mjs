@@ -1782,6 +1782,36 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     'un ordinale inline francese con suffisso ère conserva lo stesso giorno',
   );
 
+  const frenchShortDateSource = 'La misura vale dal 1° febbraio 2026 e resta valida.';
+  for (const [label, frenchShortDateTarget] of [
+    ['ordinale francese superscritto e mese abbreviato', 'La mesure s’applique dès le 1ᵉʳ févr. 2026 et reste valable.'],
+    ['accento francese scomposto', `La mesure s’applique dès le 1er fe\u0301vrier 2026 et reste valable.`],
+  ]) {
+    assert.equal(
+      await makeTranslator(
+        (chunk) => chunk.replace(frenchShortDateSource, frenchShortDateTarget),
+        500,
+      )(frenchShortDateSource),
+      frenchShortDateTarget,
+      `${label}: la forma locale deve conservare il fatto calendario`,
+    );
+  }
+
+  const germanShortDateSource = 'La misura vale dal 1° marzo 2026 e resta valida.';
+  for (const [label, germanShortDateTarget] of [
+    ['abbreviazione tedesca con dieresi', 'Die Maßnahme gilt ab dem 1. Mär. 2026 und bleibt gültig.'],
+    ['abbreviazione tedesca Mrz', 'Die Maßnahme gilt ab dem 1. Mrz. 2026 und bleibt gültig.'],
+  ]) {
+    assert.equal(
+      await makeTranslator(
+        (chunk) => chunk.replace(germanShortDateSource, germanShortDateTarget),
+        500,
+      )(germanShortDateSource),
+      germanShortDateTarget,
+      `${label}: la forma locale deve conservare il fatto calendario`,
+    );
+  }
+
   const inlinePercentDateSource = 'La misura vale 12% a maggio 2026 e resta valida.';
   const inlinePercentDateTarget = 'The measure is 12% in May 2026 and remains valid.';
   assert.equal(

@@ -16315,7 +16315,7 @@ async function translateArticle(data) {
       // `1° gennaio 2026` can become `January 1, 2026`, `1. Januar 2026`
       // or `1er janvier 2026`. Keep localized ordinal suffixes in the token
       // so the date-aware normalization below can compare the same day.
-      const localizedOrdinalSuffixPattern = String.raw`(?:st|nd|rd|th|er|ère|re|e)`;
+      const localizedOrdinalSuffixPattern = String.raw`(?:ᵉʳ|ᵉ|st|nd|rd|th|er|ère|re|e)`;
       const localizedOrdinalSuffixAtEnd = new RegExp(`${localizedOrdinalSuffixPattern}$`, 'iu');
       const numberPattern = new RegExp(
         String.raw`(?<![\p{L}\p{N}_])[+\-−]?\d+(?:[.,'’\u00a0\u202f ]\d+)*(?:(?:\s*[%°º])|(?:${localizedOrdinalSuffixPattern}(?![\p{L}\p{N}_])))?(?![\p{L}\p{N}_])`,
@@ -16327,7 +16327,6 @@ async function translateArticle(data) {
       // already accepted by the generator (`Aug.`, `Sept.`, `mag`, `marz`,
       // and the ASCII forms of accented names). This block is extracted
       // verbatim by the translation-contract tests, so it stays self-contained.
-      const dateMonthPattern = /(?<![\p{L}\p{N}_])(?:gennaio|gen|febbraio|feb|marzo|mar|aprile|apr|maggio|mag|giugno|giu|luglio|lug|agosto|ago|settembre|set|ottobre|ott|novembre|nov|dicembre|dic|january|jan|february|march|april|may|june|jun|july|jul|august|aug|september|sep|sept|october|oct|november|december|dec|januar|jan|februar|märz|marz|maerz|mai|juni|jun|juli|jul|august|aug|september|sep|sept|oktober|okt|november|dezember|dez|janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|septembre|octobre|novembre|décembre|decembre)\b/iu;
       const dateMonthNames = new Map(Object.entries({
         gennaio: 0, gen: 0, febbraio: 1, feb: 1, marzo: 2, mar: 2, aprile: 3, apr: 3,
         maggio: 4, mag: 4, giugno: 5, giu: 5, luglio: 6, lug: 6, agosto: 7, ago: 7,
@@ -16335,14 +16334,44 @@ async function translateArticle(data) {
         january: 0, jan: 0, february: 1, march: 2, april: 3, may: 4, june: 5, jun: 5,
         july: 6, jul: 6, august: 7, aug: 7, september: 8, sep: 8, sept: 8,
         october: 9, oct: 9, november: 10, december: 11, dec: 11,
-        januar: 0, jan: 0, februar: 1, märz: 2, marz: 2, maerz: 2,
+        januar: 0, jan: 0, februar: 1, märz: 2, mär: 2, mrz: 2, marz: 2, maerz: 2,
         mai: 4, juni: 5, jun: 5, juli: 6, jul: 6, august: 7, aug: 7,
         september: 8, sep: 8, sept: 8, oktober: 9, okt: 9, november: 10,
         dezember: 11, dez: 11,
-        janvier: 0, février: 1, fevrier: 1, mars: 2, avril: 3, mai: 4, juin: 5,
-        juillet: 6, août: 7, aout: 7, septembre: 8, octobre: 9, novembre: 10,
-        décembre: 11, decembre: 11,
+        janvier: 0, janv: 0, février: 1, févr: 1, fevrier: 1, fevr: 1,
+        mars: 2, avril: 3, avr: 3, mai: 4, juin: 5, juillet: 6, juil: 6,
+        août: 7, aout: 7, aou: 7, septembre: 8, octobre: 9, oct: 9, novembre: 10,
+        décembre: 11, decembre: 11, déc: 11,
       }));
+      const escapeRegexLiteral = (text) => text.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
+      const accentTolerantMonthPattern = (label) => {
+        const decomposed = [...label.normalize('NFD')];
+        let pattern = '';
+        for (let index = 0; index < decomposed.length; index += 1) {
+          const base = decomposed[index];
+          if (/\p{M}/u.test(base)) continue;
+          let markEnd = index + 1;
+          while (markEnd < decomposed.length && /\p{M}/u.test(decomposed[markEnd])) markEnd += 1;
+          const composed = decomposed.slice(index, markEnd).join('').normalize('NFC');
+          const decomposedPattern = `${escapeRegexLiteral(base)}\\p{M}*`;
+          pattern += composed === base
+            ? decomposedPattern
+            : `(?:${escapeRegexLiteral(composed)}|${decomposedPattern})`;
+          index = markEnd - 1;
+        }
+        return pattern;
+      };
+      const dateMonthPattern = new RegExp(
+        String.raw`(?<![\p{L}\p{N}_])(?:${[...dateMonthNames.keys()]
+          .sort((left, right) => right.length - left.length)
+          .map(accentTolerantMonthPattern)
+          .join('|')})\.?(?![\p{L}\p{N}_])`,
+        'giu',
+      );
+      const normalizeDateMonthToken = (token) => token
+        .normalize('NFC')
+        .toLowerCase()
+        .replace(/\.$/u, '');
       const dateGrammar = {
         monthPattern: new RegExp(dateMonthPattern.source, 'giu'),
         dayToMonthGap: /^(?:[\s.,:;/]|(?:of|de|le|del|du|au|di)\b|d['’])*$/iu,
@@ -16352,7 +16381,7 @@ async function translateArticle(data) {
       const dateMonths = [...value.matchAll(dateGrammar.monthPattern)].map((match) => ({
         start: match.index,
         end: match.index + match[0].length,
-        month: dateMonthNames.get(match[0].toLowerCase()),
+        month: dateMonthNames.get(normalizeDateMonthToken(match[0])),
       }));
       const gapMatches = (pattern, start, end) => start <= end && pattern.test(value.slice(start, end));
       const isLineLeadingOrdinal = (match, token) => {
@@ -16493,7 +16522,7 @@ async function translateArticle(data) {
         'iu',
       );
       const measurementAfterPattern = new RegExp(
-        '^[ \\t]*(?:[,;:][ \\t]*)?' + measurementUnitPattern + '(?=$|[ \\t.,;:!?)]|\\b)',
+        '^[ \\t]*(?:[,;:][ \\t]*)?' + measurementUnitPattern + '(?![\\p{L}\\p{N}_])',
         'iu',
       );
       const hasAdjacentMeasurementUnit = (candidate) => (
