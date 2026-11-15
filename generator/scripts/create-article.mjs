@@ -15136,6 +15136,39 @@ function tableHeaderColumnHeaderInfo(lines, lineIndex) {
   return { layout, frame, separatorLayout, separatorFrame };
 }
 
+function tableHeaderColumnHeaderOccurrenceIndex(lines, lineIndex) {
+  let occurrenceIndex = 0;
+  for (let index = 0; index <= lineIndex; index += 1) {
+    if (!tableHeaderColumnHeaderInfo(lines, index)) continue;
+    if (index === lineIndex) return occurrenceIndex;
+    occurrenceIndex += 1;
+  }
+  return -1;
+}
+
+function tableHeaderColumnSourceOwnedTokens(value) {
+  const tokens = [];
+  const text = String(value ?? '');
+  for (const match of text.matchAll(/(?:https?:\/\/[^\s)]+|nav:[^\s)]+|`[^`]+`|\b\d[\d.,:%\/-]*)/gu)) {
+    tokens.push(match[0].replace(/[.,;:!?]+$/u, ''));
+  }
+  return [...new Set(tokens.filter(Boolean))];
+}
+
+function tableHeaderColumnPayloadHasSourceOwnedProof(sourceText, translatedText, expectedMarkers) {
+  const sourceTokens = tableHeaderColumnSourceOwnedTokens(sourceText);
+  if (sourceTokens.length === 0) return false;
+  const translatedTokens = new Set(tableHeaderColumnSourceOwnedTokens(translatedText));
+  if (!sourceTokens.every((token) => translatedTokens.has(token))) return false;
+
+  // A shared token cannot identify a column. Require at least one source-owned
+  // atom that belongs only to this header cell, otherwise two labels can still
+  // be permuted while preserving the same visible proof.
+  return sourceTokens.some((token) => expectedMarkers.filter((other) => (
+    tableHeaderColumnSourceOwnedTokens(other.sourceText).includes(token)
+  )).length === 1);
+}
+
 function tableHeaderColumnMarkers(value) {
   const raw = String(value ?? '');
   const generatedMarkersRemoved = raw.replace(
@@ -15199,6 +15232,8 @@ function tableHeaderColumnMarkersMatch(value, expectedMarkers) {
     const info = tableHeaderColumnHeaderInfo(lines, lineIndex);
     if (!info) return false;
     const { layout, frame } = info;
+    const outputHeaderIndex = tableHeaderColumnHeaderOccurrenceIndex(lines, lineIndex);
+    if (outputHeaderIndex < 0) return false;
     const localPosition = position - lineStart;
     const cellIndex = layout.cells.findIndex(({ start, end }) => localPosition >= start && localPosition < end);
     if (cellIndex < frame.firstColumn || cellIndex > frame.lastColumn) return false;
@@ -15207,6 +15242,7 @@ function tableHeaderColumnMarkersMatch(value, expectedMarkers) {
     found.push({
       lineIndex,
       headerIndex: Number(match[1]),
+      outputHeaderIndex,
       cellIndex,
       sourceFingerprint: match[3],
       sourceText: cellText,
@@ -15221,6 +15257,7 @@ function tableHeaderColumnMarkersMatch(value, expectedMarkers) {
     const foundEntry = matches[0];
     if (
       foundEntry.headerIndex !== headerIndex
+      || foundEntry.outputHeaderIndex !== headerIndex
       || foundEntry.cellIndex !== cellIndex
       || foundEntry.sourceFingerprint !== sourceFingerprint
     ) return false;
@@ -15235,7 +15272,18 @@ function tableHeaderColumnMarkersMatch(value, expectedMarkers) {
       && other.cellIndex !== cellIndex
       && String(other.sourceText ?? '').replace(/\s+/gu, ' ').trim() === normalizedFound
     ))) return false;
-    return true;
+    // A marker is source-owned, but its fingerprint describes the marker, not
+    // the prose a provider places beside it. Purely translated labels are
+    // therefore ambiguous: a provider can keep the markers in their original
+    // cells while swapping the two visible meanings. Accept changed prose
+    // only when the cell retains a unique source-owned atom (number, URL,
+    // nav/code token); otherwise fail closed.
+    return normalizedFound === normalizedExpected
+      || tableHeaderColumnPayloadHasSourceOwnedProof(
+        sourceText,
+        foundEntry.sourceText,
+        expectedMarkers.filter((other) => other.headerIndex === headerIndex),
+      );
   });
 }
 

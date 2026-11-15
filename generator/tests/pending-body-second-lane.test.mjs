@@ -1350,8 +1350,8 @@ test('il joiner protegge prefissi Markdown annidati e lo scheletro delle pipe', 
   ].join('\n');
   assert.equal(
     await makeTranslator(() => markedTranslatedTableWithHeader)(tableWithHeader),
-    translatedTableWithHeader,
-    'le etichette di intestazione possono essere localizzate quando la riga separatrice dimostra la struttura della tabella',
+    null,
+    'le etichette puramente testuali restano ambigue anche quando la riga separatrice dimostra la struttura della tabella',
   );
   const swappedLocalizedHeader = [
     `| Reported change ${sourceHeaderMarkers.find(({ cellIndex }) => cellIndex === 2).marker} | Segment ${sourceHeaderMarkers.find(({ cellIndex }) => cellIndex === 1).marker} |`,
@@ -1361,6 +1361,49 @@ test('il joiner protegge prefissi Markdown annidati e lo scheletro delle pipe', 
     await makeTranslator(() => swappedLocalizedHeader)(tableWithHeader),
     null,
     'due etichette localizzate scambiate devono essere rifiutate anche quando la tabella resta strutturalmente valida',
+  );
+  const anchoredTableWithHeader = [
+    '| Segmento 2024 | Variazione riportata 2025 |',
+    '|---|---:|',
+    '| Appartamenti | +4,4% |',
+  ].join('\n');
+  const anchoredTranslatedTableWithHeader = [
+    '| Segment 2024 | Reported change 2025 |',
+    '|---|---:|',
+    '| Condominiums | +4.4% |',
+  ].join('\n');
+  const anchoredMarkers = makeTableHeaderMarkers.tableHeaderColumnMarkers(anchoredTableWithHeader).markers;
+  const markedAnchoredTranslatedTable = [
+    `| Segment 2024 ${anchoredMarkers.find(({ cellIndex }) => cellIndex === 1).marker} | Reported change 2025 ${anchoredMarkers.find(({ cellIndex }) => cellIndex === 2).marker} |`,
+    ...anchoredTranslatedTableWithHeader.split('\n').slice(1),
+  ].join('\n');
+  assert.equal(
+    await makeTranslator(() => markedAnchoredTranslatedTable)(anchoredTableWithHeader),
+    anchoredTranslatedTableWithHeader,
+    'un’etichetta localizzata con un ancoraggio source-owned unico può passare',
+  );
+
+  const twoTableSource = [
+    '| Primo 2024 | A 2025 |',
+    '|---|---|',
+    '| riga uno | valore uno |',
+    '| Secondo 2026 | B 2027 |',
+    '|---|---|',
+    '| riga due | valore due |',
+  ].join('\n');
+  const twoTableMarked = makeTableHeaderMarkers.tableHeaderColumnMarkers(twoTableSource).markedText.split('\n');
+  const swappedTableHeaders = [
+    twoTableMarked[3],
+    twoTableMarked[4],
+    twoTableMarked[2],
+    twoTableMarked[0],
+    twoTableMarked[1],
+    twoTableMarked[5],
+  ].join('\n');
+  assert.equal(
+    await makeTranslator(() => swappedTableHeaders)(twoTableSource),
+    null,
+    'una riga di intestazione intera non può trasferire i marker fra due tabelle con lo stesso layout',
   );
   const swappedTextDataRow = tableWithHeader.replace(
     '| Case unifamiliari | +2,1% |',

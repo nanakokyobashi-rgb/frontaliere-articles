@@ -261,6 +261,232 @@ export function bodyFieldsForSource(src, id) {
   return BODY_FIELDS.filter((field) => fields.has(field));
 }
 
+// Keep the published-body repair writer on the same source-owned table-header
+// transport as create-article.mjs. This path writes existing locales directly;
+// omitting the contract here would let a reordered translated header reach
+// content/ and dist/api/ even though the production writer rejects it.
+const TABLE_HEADER_COLUMN_MARKER_NONCE_KEY = Symbol.for('frontaliere.table-header-column-marker-nonce');
+const TABLE_HEADER_COLUMN_MARKER_NONCE = globalThis[TABLE_HEADER_COLUMN_MARKER_NONCE_KEY]
+  ?? (globalThis[TABLE_HEADER_COLUMN_MARKER_NONCE_KEY] = `${Date.now().toString(36)}${Math.random().toString(36).slice(2)}`.slice(-16));
+
+function tableHeaderColumnMarkerRegExp(currentRunOnly = true) {
+  const markerAttribute = currentRunOnly
+    ? `data-frontaliere-table-marker="v3${TABLE_HEADER_COLUMN_MARKER_NONCE}"`
+    : 'data-frontaliere-table-marker="v3[^"]+"';
+  return new RegExp(
+    `<span data-frontaliere-table-column="h(\\d+)-c(\\d+)" data-frontaliere-table-source="([0-9a-f]{8})" ${markerAttribute}><\\/span>`,
+    'gu',
+  );
+}
+
+function tableHeaderColumnMarker(headerIndex, cellIndex, sourceFingerprint = '00000000') {
+  return `<span data-frontaliere-table-column="h${headerIndex}-c${cellIndex}" data-frontaliere-table-source="${sourceFingerprint}" data-frontaliere-table-marker="v3${TABLE_HEADER_COLUMN_MARKER_NONCE}"></span>`;
+}
+
+function tableHeaderColumnPayloadFingerprint(value) {
+  let hash = 2166136261;
+  for (const codePoint of String(value ?? '').replace(/\s+/gu, ' ').trim()) {
+    hash ^= codePoint.codePointAt(0);
+    hash = Math.imul(hash, 16777619);
+  }
+  return (hash >>> 0).toString(16).padStart(8, '0');
+}
+
+function stripTableHeaderColumnMarkers(value) {
+  return String(value ?? '').replace(
+    new RegExp(`[ \\t]?${tableHeaderColumnMarkerRegExp().source}`, 'gu'),
+    '',
+  );
+}
+
+function tableHeaderColumnPipeLayout(line) {
+  const value = String(line ?? '');
+  const cells = [];
+  let cellStart = 0;
+  let firstRawPipe = -1;
+  let lastRawPipe = -1;
+  for (let cursor = 0; cursor < value.length; cursor += 1) {
+    if (value[cursor] !== '|') continue;
+    let slashCount = 0;
+    for (let previous = cursor - 1; previous >= 0 && value[previous] === '\\'; previous -= 1) slashCount += 1;
+    if (slashCount % 2 === 1) continue;
+    if (firstRawPipe === -1) firstRawPipe = cursor;
+    lastRawPipe = cursor;
+    cells.push({ start: cellStart, end: cursor });
+    cellStart = cursor + 1;
+  }
+  if (firstRawPipe === -1) return null;
+  cells.push({ start: cellStart, end: value.length });
+  return { cells, firstRawPipe, lastRawPipe };
+}
+
+function tableHeaderColumnFramePrefix(prefix) {
+  const normalized = String(prefix ?? '').trim();
+  if (!normalized) return '';
+  let remainder = normalized;
+  let consumedFrame = false;
+  while (remainder) {
+    const blockquote = remainder.match(/^>\s*/u);
+    if (blockquote) {
+      consumedFrame = true;
+      remainder = remainder.slice(blockquote[0].length).trimStart();
+      continue;
+    }
+    const listOrHeading = remainder.match(/^(?:#{1,6}|[-+*•]|\d+[.)])(?:\s+|$)/u);
+    if (!listOrHeading) return null;
+    consumedFrame = true;
+    remainder = remainder.slice(listOrHeading[0].length).trimStart();
+  }
+  return consumedFrame ? normalized.replace(/\s+/gu, ' ') : null;
+}
+
+function tableHeaderColumnFrame(line, layout) {
+  if (!layout) return null;
+  const value = String(line ?? '');
+  const prefix = value.slice(0, layout.firstRawPipe).trim();
+  const framePrefix = tableHeaderColumnFramePrefix(prefix);
+  const hasLeadingFrame = framePrefix !== null;
+  const suffix = value.slice(layout.lastRawPipe + 1).trim();
+  const hasTrailingFrame = !suffix;
+  const firstColumn = hasLeadingFrame ? 1 : 0;
+  const lastColumn = layout.cells.length - (hasTrailingFrame ? 2 : 1);
+  if (firstColumn > lastColumn) return null;
+  return {
+    firstColumn,
+    lastColumn,
+    prefix: framePrefix ?? '',
+    hasLeadingFrame,
+    hasTrailingFrame,
+  };
+}
+
+function tableHeaderColumnHeaderInfo(lines, lineIndex) {
+  const line = lines[lineIndex] ?? '';
+  const separatorLine = lines[lineIndex + 1] ?? '';
+  const layout = tableHeaderColumnPipeLayout(line);
+  const separatorLayout = tableHeaderColumnPipeLayout(separatorLine);
+  const frame = tableHeaderColumnFrame(line, layout);
+  const separatorFrame = tableHeaderColumnFrame(separatorLine, separatorLayout);
+  if (!layout || !separatorLayout || !frame || !separatorFrame) return null;
+  if (
+    frame.firstColumn !== separatorFrame.firstColumn
+    || frame.lastColumn !== separatorFrame.lastColumn
+    || frame.prefix !== separatorFrame.prefix
+  ) return null;
+  const separatorCells = separatorLayout.cells
+    .slice(separatorFrame.firstColumn, separatorFrame.lastColumn + 1)
+    .map(({ start, end }) => separatorLine.slice(start, end).trim());
+  if (!separatorCells.some((cell) => /^:?-{3,}:?$/u.test(cell))) return null;
+  if (!separatorCells.every((cell) => /^:?-{3,}:?$/u.test(cell))) return null;
+  return { layout, frame, separatorLayout, separatorFrame };
+}
+
+function tableHeaderColumnHeaderOccurrenceIndex(lines, lineIndex) {
+  let occurrenceIndex = 0;
+  for (let index = 0; index <= lineIndex; index += 1) {
+    if (!tableHeaderColumnHeaderInfo(lines, index)) continue;
+    if (index === lineIndex) return occurrenceIndex;
+    occurrenceIndex += 1;
+  }
+  return -1;
+}
+
+function tableHeaderColumnSourceOwnedTokens(value) {
+  const tokens = [];
+  const text = String(value ?? '');
+  for (const match of text.matchAll(/(?:https?:\/\/[^\s)]+|nav:[^\s)]+|`[^`]+`|\b\d[\d.,:%\/-]*)/gu)) {
+    tokens.push(match[0].replace(/[.,;:!?]+$/u, ''));
+  }
+  return [...new Set(tokens.filter(Boolean))];
+}
+
+function tableHeaderColumnPayloadHasSourceOwnedProof(sourceText, translatedText, expectedMarkers) {
+  const sourceTokens = tableHeaderColumnSourceOwnedTokens(sourceText);
+  if (sourceTokens.length === 0) return false;
+  const translatedTokens = new Set(tableHeaderColumnSourceOwnedTokens(translatedText));
+  if (!sourceTokens.every((token) => translatedTokens.has(token))) return false;
+  return sourceTokens.some((token) => expectedMarkers.filter((other) => (
+    tableHeaderColumnSourceOwnedTokens(other.sourceText).includes(token)
+  )).length === 1);
+}
+
+function tableHeaderColumnMarkers(value) {
+  const raw = String(value ?? '');
+  const generatedMarkersRemoved = raw.replace(tableHeaderColumnMarkerRegExp(), '');
+  if (/data-frontaliere-table-column\s*=/u.test(generatedMarkersRemoved)) {
+    return { markedText: raw, markers: [], collision: true };
+  }
+  const source = stripTableHeaderColumnMarkers(raw);
+  const lines = source.split('\n');
+  const markers = [];
+  let headerIndex = 0;
+  const markedLines = lines.map((line, lineIndex) => {
+    const info = tableHeaderColumnHeaderInfo(lines, lineIndex);
+    if (!info) return line;
+    const { layout, frame } = info;
+    const currentHeaderIndex = headerIndex;
+    headerIndex += 1;
+    let marked = line;
+    for (let cellIndex = frame.lastColumn; cellIndex >= frame.firstColumn; cellIndex -= 1) {
+      const cell = layout.cells[cellIndex];
+      const cellText = line.slice(cell.start, cell.end);
+      const trailingWhitespace = cellText.match(/[ \t]*$/u)?.[0] || '';
+      const insertAt = cell.end - trailingWhitespace.length;
+      const hasCellText = line.slice(cell.start, insertAt).trim() !== '';
+      const sourceFingerprint = tableHeaderColumnPayloadFingerprint(cellText);
+      const marker = tableHeaderColumnMarker(currentHeaderIndex, cellIndex, sourceFingerprint);
+      marked = `${marked.slice(0, insertAt)}${hasCellText ? ' ' : ''}${marker}${marked.slice(insertAt)}`;
+      markers.push({ lineIndex, headerIndex: currentHeaderIndex, cellIndex, sourceFingerprint, sourceText: cellText.trim(), marker });
+    }
+    return marked;
+  });
+  return { markedText: markedLines.join('\n'), markers, collision: false };
+}
+
+function tableHeaderColumnMarkersMatch(value, expectedMarkers) {
+  const text = String(value ?? '');
+  const lines = text.split('\n');
+  const found = [];
+  const currentRunMarkers = tableHeaderColumnMarkerRegExp();
+  for (const match of text.matchAll(currentRunMarkers)) {
+    const marker = match[0];
+    const position = match.index ?? -1;
+    if (position < 0) return false;
+    const lineIndex = text.slice(0, position).split('\n').length - 1;
+    const lineStart = text.lastIndexOf('\n', position - 1) + 1;
+    const lineEnd = text.indexOf('\n', position);
+    const line = text.slice(lineStart, lineEnd === -1 ? text.length : lineEnd);
+    const info = tableHeaderColumnHeaderInfo(lines, lineIndex);
+    if (!info) return false;
+    const { layout, frame } = info;
+    const outputHeaderIndex = tableHeaderColumnHeaderOccurrenceIndex(lines, lineIndex);
+    if (outputHeaderIndex < 0) return false;
+    const localPosition = position - lineStart;
+    const cellIndex = layout.cells.findIndex(({ start, end }) => localPosition >= start && localPosition < end);
+    if (cellIndex < frame.firstColumn || cellIndex > frame.lastColumn) return false;
+    const cell = layout.cells[cellIndex];
+    const cellText = stripTableHeaderColumnMarkers(line.slice(cell.start, cell.end)).trim();
+    found.push({ lineIndex, headerIndex: Number(match[1]), outputHeaderIndex, cellIndex, sourceFingerprint: match[3], sourceText: cellText, marker });
+  }
+  if (/data-frontaliere-table-column\s*=/u.test(text.replace(tableHeaderColumnMarkerRegExp(), ''))) return false;
+  if (found.length !== expectedMarkers.length) return false;
+  return expectedMarkers.every(({ headerIndex, cellIndex, sourceFingerprint, sourceText, marker }) => {
+    const matches = found.filter((entry) => entry.marker === marker);
+    if (matches.length !== 1) return false;
+    const foundEntry = matches[0];
+    if (foundEntry.headerIndex !== headerIndex || foundEntry.outputHeaderIndex !== headerIndex || foundEntry.cellIndex !== cellIndex || foundEntry.sourceFingerprint !== sourceFingerprint) return false;
+    const normalizedFound = foundEntry.sourceText.replace(/\s+/gu, ' ').trim();
+    const normalizedExpected = String(sourceText ?? '').replace(/\s+/gu, ' ').trim();
+    if (normalizedFound !== normalizedExpected && expectedMarkers.some((other) => (
+      other.headerIndex === headerIndex
+      && other.cellIndex !== cellIndex
+      && String(other.sourceText ?? '').replace(/\s+/gu, ' ').trim() === normalizedFound
+    ))) return false;
+    return normalizedFound === normalizedExpected
+      || tableHeaderColumnPayloadHasSourceOwnedProof(sourceText, foundEntry.sourceText, expectedMarkers.filter((other) => other.headerIndex === headerIndex));
+  });
+}
+
 /**
  * Lo scan storico degli articoli misura i residui per RIGA, non sul body
  * concatenato: un blocco italiano di tre righe dentro una traduzione buona
@@ -2949,6 +3175,14 @@ export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeT
   } else {
     // Ri-traduzione: OGNI carattere qui esce dalla cascata MT, mai da una regex.
     for (const f of Object.keys(italianSections)) {
+      const markedBody = tableHeaderColumnMarkers(italianSections[f]);
+      if (markedBody.collision) {
+        missingField ??= f;
+        missingFields.push(f);
+        translationFailures.push({ field: f, stage: 'table-header-marker-collision' });
+        translationFieldResults.push({ field: f, status: 'rejected' });
+        continue;
+      }
       const translationOutcome = {
         passthroughs: 0,
         errors: 0,
@@ -2957,7 +3191,7 @@ export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeT
         tierAttempts: [],
       };
       const out = await translateFieldFreeMt({
-        text: italianSections[f],
+        text: markedBody.markedText,
         sourceLang: 'it',
         targetLang: pair.locale,
         fieldType: 'description',
@@ -2966,17 +3200,23 @@ export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeT
         balanceMarkdown: balanceMarkdownMarkers,
         translationOutcome,
       });
-      if (!out) {
+      const validated = out && tableHeaderColumnMarkersMatch(out, markedBody.markers)
+        ? stripTableHeaderColumnMarkers(out)
+        : null;
+      if (!validated) {
         missingField ??= f;
         missingFields.push(f);
-        translationFailures.push({ field: f, ...summarizeTranslationFailure(translationOutcome) });
-        translationFieldResults.push({ field: f, status: 'empty' });
+        translationFailures.push({
+          field: f,
+          ...(out ? { stage: 'table-header-marker-contract' } : summarizeTranslationFailure(translationOutcome)),
+        });
+        translationFieldResults.push({ field: f, status: out ? 'rejected' : 'empty' });
         continue;
       }
       // Stesso post-processing del percorso di produzione (`create-article.mjs`
       // lo applica alla stessa identica uscita di `translateFieldFreeMt`): la
       // cascata e' la stessa, e da qui in poi lo e' anche cio' che le succede.
-      const sanitized = sanitizeTranslatedField(out, pair.locale);
+      const sanitized = sanitizeTranslatedField(validated, pair.locale);
       if (sanitized === null) {
         missingField ??= f;
         missingFields.push(f);
