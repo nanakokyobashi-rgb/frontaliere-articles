@@ -1577,6 +1577,19 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     'il connettore italiano di deve restare nella grammatica giorno-mese',
   );
 
+  for (const [label, elision] of [['apostrofo ASCII', "d'"], ['apostrofo tipografico', 'd’']]) {
+    const elidedDateSource = `La misura vale dal 1° ${elision}ottobre 2026 e resta valida.`;
+    const elidedDateTarget = 'The measure applies from October 1, 2026 and remains valid.';
+    assert.equal(
+      await makeTranslator(
+        (chunk) => chunk.replace(elidedDateSource, elidedDateTarget),
+        500,
+      )(elidedDateSource),
+      elidedDateTarget,
+      `${label}: l’elisione italiana deve restare nella grammatica giorno-mese`,
+    );
+  }
+
   const germanFebruaryDateSource = 'La misura vale dal 1° febbraio 2026 e resta valida.';
   const germanFebruaryDateTarget = 'Die Maßnahme gilt ab dem 1. Februar 2026 und bleibt gültig.';
   assert.equal(
@@ -1653,6 +1666,24 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     null,
     'un mese errato nel primo estremo di un intervallo cross-month deve essere rifiutato',
   );
+  for (const [label, sourceRange, targetRange] of [
+    [
+      'separatore Unicode',
+      'La misura vale dal 31° gennaio–2° febbraio 2026 e resta valida.',
+      'The measure applies from January 31–February 2, 2026 and remains valid.',
+    ],
+    [
+      'separatore senza spazi',
+      'La misura vale dal 31° gennaio-2° febbraio 2026 e resta valida.',
+      'The measure applies from January 31-February 2, 2026 and remains valid.',
+    ],
+  ]) {
+    assert.equal(
+      await makeTranslator((chunk) => chunk.replace(sourceRange, targetRange), 500)(sourceRange),
+      targetRange,
+      `${label}: ogni estremo deve conservare il proprio mese`,
+    );
+  }
 
   const reorderedCalendarSource = 'Nel 2026, 1° gennaio la misura resta valida.';
   const reorderedCalendarTarget = 'On January 1, 2026 the measure remains valid.';
@@ -1684,6 +1715,18 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     reorderedCalendarTableTarget,
     'lo stesso riordino calendariale deve funzionare anche nella prova per celle di tabella',
   );
+  for (const [label, separator] of [['virgola', ','], ['punto e virgola', ';']]) {
+    const reassignedCalendarSource = `A 2026${separator} B 1° gennaio la misura resta valida.`;
+    const reassignedCalendarTarget = `A 1 January${separator} B 2026 the measure remains valid.`;
+    assert.equal(
+      await makeTranslator(
+        (chunk) => chunk.replace(reassignedCalendarSource, reassignedCalendarTarget),
+        500,
+      )(reassignedCalendarSource),
+      null,
+      `un anno non deve attraversare una clausola separata da ${label}`,
+    );
+  }
   const reorderedNonCalendarSource = 'Nel 2026, 1° gennaio e 2 persone attendono.';
   const reorderedNonCalendarTarget = 'On January 1, 2 people, 2026 are waiting.';
   assert.equal(
