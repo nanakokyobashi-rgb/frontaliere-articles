@@ -1782,33 +1782,56 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     'un ordinale inline francese con suffisso ère conserva lo stesso giorno',
   );
 
-  const frenchShortDateSource = 'La misura vale dal 1° febbraio 2026 e resta valida.';
-  for (const [label, frenchShortDateTarget] of [
-    ['ordinale francese superscritto e mese abbreviato', 'La mesure s’applique dès le 1ᵉʳ févr. 2026 et reste valable.'],
-    ['accento francese scomposto', `La mesure s’applique dès le 1er fe\u0301vrier 2026 et reste valable.`],
+  for (const [label, sourceMonth, targetMonth] of [
+    ['janv.', 'gennaio', 'janv.'],
+    ['févr.', 'febbraio', 'févr.'],
+    ['avr.', 'aprile', 'avr.'],
+    ['juil.', 'luglio', 'juil.'],
+    ['déc.', 'dicembre', 'déc.'],
   ]) {
+    const abbreviatedSource = `La misura vale dal 1° ${sourceMonth} 2026 e resta valida.`;
+    const abbreviatedTarget = `La mesure s’applique dès le 1er ${targetMonth} 2026 et reste valable.`;
     assert.equal(
       await makeTranslator(
-        (chunk) => chunk.replace(frenchShortDateSource, frenchShortDateTarget),
+        (chunk) => chunk.replace(abbreviatedSource, abbreviatedTarget),
         500,
-      )(frenchShortDateSource),
-      frenchShortDateTarget,
-      `${label}: la forma locale deve conservare il fatto calendario`,
+      )(abbreviatedSource),
+      abbreviatedTarget,
+      `l’abbreviazione francese ${label} deve restare una data locale`,
     );
   }
 
-  const germanShortDateSource = 'La misura vale dal 1° marzo 2026 e resta valida.';
-  for (const [label, germanShortDateTarget] of [
-    ['abbreviazione tedesca con dieresi', 'Die Maßnahme gilt ab dem 1. Mär. 2026 und bleibt gültig.'],
-    ['abbreviazione tedesca Mrz', 'Die Maßnahme gilt ab dem 1. Mrz. 2026 und bleibt gültig.'],
-  ]) {
+  const decomposedFrenchDateSource = 'La misura vale dal 1° febbraio 2026 e resta valida.';
+  const decomposedFrenchDateTarget = 'La mesure s’applique dès le 1er fe\u0301vrier 2026 et reste valable.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(decomposedFrenchDateSource, decomposedFrenchDateTarget),
+      500,
+    )(decomposedFrenchDateSource),
+    decomposedFrenchDateTarget,
+    'un accento francese scomposto non deve far scartare la data',
+  );
+
+  const typographicFrenchDateTarget = 'La mesure s’applique dès le 1ᵉʳ janvier 2026 et reste valable.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(frenchDateSource, typographicFrenchDateTarget),
+      500,
+    )(frenchDateSource),
+    typographicFrenchDateTarget,
+    'l’ordinale francese tipografico ᵉʳ deve restare una data locale',
+  );
+
+  const germanMarchDateSource = 'La misura vale dal 1° marzo 2026 e resta valida.';
+  for (const germanMonth of ['Mär.', 'Mrz.']) {
+    const germanMarchDateTarget = `Die Maßnahme gilt ab dem 1. ${germanMonth} 2026 und bleibt gültig.`;
     assert.equal(
       await makeTranslator(
-        (chunk) => chunk.replace(germanShortDateSource, germanShortDateTarget),
+        (chunk) => chunk.replace(germanMarchDateSource, germanMarchDateTarget),
         500,
-      )(germanShortDateSource),
-      germanShortDateTarget,
-      `${label}: la forma locale deve conservare il fatto calendario`,
+      )(germanMarchDateSource),
+      germanMarchDateTarget,
+      `l’abbreviazione tedesca ${germanMonth} deve restare una data locale`,
     );
   }
 

@@ -16323,66 +16323,73 @@ async function translateArticle(data) {
       );
       const spanBoundary = (char) => char === '\n' || ',;!?|'.includes(char);
       // Keep the inline-date lexicon aligned with the headline date forms:
-      // source and target may use full names or the abbreviated spellings
-      // already accepted by the generator (`Aug.`, `Sept.`, `mag`, `marz`,
-      // and the ASCII forms of accented names). This block is extracted
-      // verbatim by the translation-contract tests, so it stays self-contained.
-      const dateMonthNames = new Map(Object.entries({
-        gennaio: 0, gen: 0, febbraio: 1, feb: 1, marzo: 2, mar: 2, aprile: 3, apr: 3,
-        maggio: 4, mag: 4, giugno: 5, giu: 5, luglio: 6, lug: 6, agosto: 7, ago: 7,
-        settembre: 8, set: 8, ottobre: 9, ott: 9, novembre: 10, nov: 10, dicembre: 11, dic: 11,
-        january: 0, jan: 0, february: 1, march: 2, april: 3, may: 4, june: 5, jun: 5,
-        july: 6, jul: 6, august: 7, aug: 7, september: 8, sep: 8, sept: 8,
-        october: 9, oct: 9, november: 10, december: 11, dec: 11,
-        januar: 0, jan: 0, februar: 1, märz: 2, mär: 2, mrz: 2, marz: 2, maerz: 2,
-        mai: 4, juni: 5, jun: 5, juli: 6, jul: 6, august: 7, aug: 7,
-        september: 8, sep: 8, sept: 8, oktober: 9, okt: 9, november: 10,
-        dezember: 11, dez: 11,
-        janvier: 0, janv: 0, février: 1, févr: 1, fevrier: 1, fevr: 1,
-        mars: 2, avril: 3, avr: 3, mai: 4, juin: 5, juillet: 6, juil: 6,
-        août: 7, aout: 7, aou: 7, septembre: 8, octobre: 9, oct: 9, novembre: 10,
-        décembre: 11, decembre: 11, déc: 11,
-      }));
-      const escapeRegexLiteral = (text) => text.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
-      const accentTolerantMonthPattern = (label) => {
-        const decomposed = [...label.normalize('NFD')];
-        let pattern = '';
-        for (let index = 0; index < decomposed.length; index += 1) {
-          const base = decomposed[index];
-          if (/\p{M}/u.test(base)) continue;
-          let markEnd = index + 1;
-          while (markEnd < decomposed.length && /\p{M}/u.test(decomposed[markEnd])) markEnd += 1;
-          const composed = decomposed.slice(index, markEnd).join('').normalize('NFC');
-          const decomposedPattern = `${escapeRegexLiteral(base)}\\p{M}*`;
-          pattern += composed === base
-            ? decomposedPattern
-            : `(?:${escapeRegexLiteral(composed)}|${decomposedPattern})`;
-          index = markEnd - 1;
-        }
-        return pattern;
-      };
+      // source and target may use full names, dotted abbreviations, or
+      // decomposed accents. The aliases are the single source for both the
+      // matcher and canonical month lookup. This block is extracted verbatim
+      // by the translation-contract tests, so it stays self-contained.
+      const normalizeDateMatchText = (text) => String(text ?? '')
+        .normalize('NFD')
+        .replace(/\p{M}/gu, '');
+      const dateMonthAliases = [
+        ['gennaio', 0], ['gen', 0], ['febbraio', 1], ['feb', 1], ['marzo', 2], ['mar', 2],
+        ['aprile', 3], ['apr', 3], ['maggio', 4], ['mag', 4], ['giugno', 5], ['giu', 5],
+        ['luglio', 6], ['lug', 6], ['agosto', 7], ['ago', 7], ['settembre', 8], ['set', 8],
+        ['ottobre', 9], ['ott', 9], ['novembre', 10], ['nov', 10], ['dicembre', 11], ['dic', 11],
+        ['january', 0], ['jan', 0], ['february', 1], ['march', 2], ['april', 3], ['may', 4],
+        ['june', 5], ['jun', 5], ['july', 6], ['jul', 6], ['august', 7], ['aug', 7],
+        ['september', 8], ['sep', 8], ['sept', 8], ['october', 9], ['oct', 9],
+        ['november', 10], ['december', 11], ['dec', 11],
+        ['januar', 0], ['februar', 1], ['märz', 2], ['marz', 2], ['maerz', 2], ['mär', 2], ['mrz', 2],
+        ['mai', 4], ['juni', 5], ['oktober', 9], ['okt', 9], ['dezember', 11], ['dez', 11],
+        ['janvier', 0], ['janv', 0], ['février', 1], ['févr', 1], ['fevrier', 1], ['fevr', 1],
+        ['mars', 2], ['avril', 3], ['avr', 3], ['juin', 5], ['juillet', 6], ['juil', 6],
+        ['août', 7], ['aout', 7], ['aou', 7], ['septembre', 8], ['octobre', 9], ['novembre', 10],
+        ['décembre', 11], ['decembre', 11], ['déc', 11],
+      ];
+      const dateMonthNames = new Map(dateMonthAliases.map(([name, month]) => [
+        normalizeDateMatchText(name).toLowerCase(),
+        month,
+      ]));
+      const dateMonthLexicon = [...dateMonthNames.keys()]
+        .sort((left, right) => right.length - left.length)
+        .join('|');
       const dateMonthPattern = new RegExp(
-        String.raw`(?<![\p{L}\p{N}_])(?:${[...dateMonthNames.keys()]
-          .sort((left, right) => right.length - left.length)
-          .map(accentTolerantMonthPattern)
-          .join('|')})\.?(?![\p{L}\p{N}_])`,
-        'giu',
+        String.raw`(?<![\p{L}\p{N}_])(?:${dateMonthLexicon})(?![\p{L}\p{N}_])`,
+        'iu',
       );
-      const normalizeDateMonthToken = (token) => token
-        .normalize('NFC')
-        .toLowerCase()
-        .replace(/\.$/u, '');
+      // NFD plus mark removal makes `février` and `février` equivalent. Keep
+      // a UTF-16 start/end map so the original value remains authoritative for
+      // all gap and range checks after the normalized matcher finds a month.
+      const normalizedDateValueParts = [];
+      const dateMatchStarts = [];
+      const dateMatchEnds = [];
+      for (let originalIndex = 0; originalIndex < value.length;) {
+        const codePoint = value.codePointAt(originalIndex);
+        const originalEnd = originalIndex + (codePoint > 0xffff ? 2 : 1);
+        const normalizedChunk = normalizeDateMatchText(value.slice(originalIndex, originalEnd));
+        normalizedDateValueParts.push(normalizedChunk);
+        for (let normalizedIndex = 0; normalizedIndex < normalizedChunk.length; normalizedIndex += 1) {
+          dateMatchStarts.push(originalIndex);
+          dateMatchEnds.push(originalEnd);
+        }
+        originalIndex = originalEnd;
+      }
+      const normalizedDateValue = normalizedDateValueParts.join('');
       const dateGrammar = {
         monthPattern: new RegExp(dateMonthPattern.source, 'giu'),
         dayToMonthGap: /^(?:[\s.,:;/]|(?:of|de|le|del|du|au|di)\b|d['’])*$/iu,
         monthToDayGap: /^(?:[\s.,:;/])*$/u,
         rangeGap: /^(?:[\s.,]*(?:[-‐‑‒–—−]|(?:to|through|and|e|bis|à|au|al|und|et)\b)[\s.,]*)$/iu,
       };
-      const dateMonths = [...value.matchAll(dateGrammar.monthPattern)].map((match) => ({
-        start: match.index,
-        end: match.index + match[0].length,
-        month: dateMonthNames.get(normalizeDateMonthToken(match[0])),
-      }));
+      const dateMonths = [...normalizedDateValue.matchAll(dateGrammar.monthPattern)].map((match) => {
+        const start = dateMatchStarts[match.index] ?? value.length;
+        const end = dateMatchEnds[match.index + match[0].length - 1] ?? start;
+        return {
+          start,
+          end,
+          month: dateMonthNames.get(normalizeDateMatchText(match[0]).toLowerCase()),
+        };
+      });
       const gapMatches = (pattern, start, end) => start <= end && pattern.test(value.slice(start, end));
       const isLineLeadingOrdinal = (match, token) => {
         const lineStart = value.lastIndexOf('\n', match.index - 1) + 1;
@@ -16521,6 +16528,9 @@ async function translateArticle(data) {
         '(?:^|[ \\t([{,:;])' + measurementUnitPattern + '[ \\t]*$',
         'iu',
       );
+      // `\\b` is ASCII-biased under Unicode and would classify the `F` in
+      // `févr.` as Fahrenheit. A Unicode letter/digit boundary keeps month
+      // abbreviations from looking like adjacent measurement units.
       const measurementAfterPattern = new RegExp(
         '^[ \\t]*(?:[,;:][ \\t]*)?' + measurementUnitPattern + '(?![\\p{L}\\p{N}_])',
         'iu',
