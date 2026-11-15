@@ -5592,6 +5592,30 @@
       "firstSeenAt": "2026-11-14T10:44:25.954Z",
       "lastValidatedAt": "2026-11-14T10:44:25.954Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "imposta di successione e donazione canton Berna aliquote",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-15T00:23:50.428Z",
+      "lastValidatedAt": "2026-11-15T00:23:50.428Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "giorni festivi canton Berna guida a calendario e regole",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-15T00:23:50.620Z",
+      "lastValidatedAt": "2026-11-15T00:23:50.620Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
