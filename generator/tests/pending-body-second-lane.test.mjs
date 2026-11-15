@@ -1546,6 +1546,17 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     'un ordinale inline può diventare un giorno senza suffisso quando la data resta riconoscibile',
   );
 
+  const spaceSeparatedYearSource = 'La misura vale dal 12° agosto 2026 e resta valida.';
+  const spaceSeparatedYearTarget = 'The measure applies from August 12 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(spaceSeparatedYearSource, spaceSeparatedYearTarget),
+      500,
+    )(spaceSeparatedYearSource),
+    spaceSeparatedYearTarget,
+    'un anno di quattro cifre separato da spazio non deve essere consumato come raggruppamento del giorno',
+  );
+
   const wrongMonthTarget = 'The measure applies from February 1, 2026 and remains valid.';
   assert.equal(
     await makeTranslator(
@@ -1605,6 +1616,7 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
   for (const [label, localizedRangeTarget] of [
     ['connettore tedesco und', 'Die Maßnahme gilt ab dem 1. und 3. Januar 2026 und bleibt gültig.'],
     ['connettore francese et', 'La mesure s’applique du 1er et 3 janvier 2026 et reste valable.'],
+    ['connettore francese à', 'La mesure s’applique du 1er à 3 janvier 2026 et reste valable.'],
   ]) {
     assert.equal(
       await makeTranslator(

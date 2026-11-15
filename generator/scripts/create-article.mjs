@@ -16379,7 +16379,7 @@ async function translateArticle(data) {
         monthPattern: new RegExp(dateMonthPattern.source, 'giu'),
         dayToMonthGap: /^(?:[\s.,:;/]|(?:of|de|le|del|du|au|di)\b|d['’])*$/iu,
         monthToDayGap: /^(?:[\s.,:;/])*$/u,
-        rangeGap: /^(?:[\s.,]*(?:[-‐‑‒–—−]|(?:to|through|and|e|bis|à|au|al|und|et)\b)[\s.,]*)$/iu,
+        rangeGap: /^(?:[\s.,]*(?:[-‐‑‒–—−]|(?:to|through|and|e|bis|au|al|und|et)\b|(?<![\p{L}\p{N}_])à(?![\p{L}\p{N}_]))[\s.,]*)$/iu,
       };
       const dateMonths = [...normalizedDateValue.matchAll(dateGrammar.monthPattern)].map((match) => {
         const start = dateMatchStarts[match.index] ?? value.length;
@@ -16399,8 +16399,11 @@ async function translateArticle(data) {
         return match.index === lineStart + indentLength
           && (/[°º]$/u.test(token) || value[match.index + token.length] === '.');
       };
-      const numberCandidates = [...value.matchAll(numberPattern)].map((match) => {
-        const [token] = match;
+      const hasDateMonthAroundNumber = (start, end) => dateMonths.some(({ start: monthStart, end: monthEnd }) => (
+        monthEnd <= start && gapMatches(dateGrammar.monthToDayGap, monthEnd, start)
+        || monthStart >= end && gapMatches(dateGrammar.dayToMonthGap, end, monthStart)
+      ));
+      const numberCandidateFromToken = (match, token, start) => {
         const unit = token.match(/[%°º]$/u)?.[0] || '';
         const ordinalSuffix = token.match(localizedOrdinalSuffixAtEnd)?.[0] || '';
         const number = unit
@@ -16418,9 +16421,26 @@ async function translateArticle(data) {
           number,
           sign,
           unsigned,
-          start: match.index,
-          end: match.index + token.length,
+          start,
+          end: start + token.length,
         };
+      };
+      const numberCandidates = [...value.matchAll(numberPattern)].flatMap((match) => {
+        const [token] = match;
+        // A four-digit year separated by a space is not a grouped number when
+        // it is directly adjacent to a month: `August 12 2026` must expose
+        // both the day and the year to the calendar proof. Keep ordinary
+        // grouped quantities such as `12 345` as one source-owned token.
+        const separatedYear = token.match(/^(\d{1,2})([ \u00a0\u202f]+)(\d{4})$/u);
+        if (separatedYear && hasDateMonthAroundNumber(match.index, match.index + token.length)) {
+          const [, dayToken, separator, yearToken] = separatedYear;
+          const yearStart = match.index + dayToken.length + separator.length;
+          return [
+            numberCandidateFromToken(match, dayToken, match.index),
+            numberCandidateFromToken({ index: yearStart }, yearToken, yearStart),
+          ];
+        }
+        return [numberCandidateFromToken(match, token, match.index)];
       });
       const monthsBefore = (candidate) => dateMonths.filter(({ end }) =>
         end <= candidate.start && gapMatches(dateGrammar.monthToDayGap, end, candidate.start));
