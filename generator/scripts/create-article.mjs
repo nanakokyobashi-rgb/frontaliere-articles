@@ -16256,6 +16256,8 @@ async function translateArticle(data) {
     // percent/degree unit must remain identical after the join. The one
     // locale-only exception is a line-leading ordinal: Italian `1°`/`1º` can
     // become `1.` in a target locale, so both spellings normalize to `.`.
+    // Inline date ordinals also carry the canonical month, so `1° gennaio`
+    // cannot become `February 1` while preserving the same day sequence.
     // When a subject span survives the translation unchanged (or retains a
     // source-owned capitalized anchor), keep the number attached to that span;
     // comparing only the global digit sequence would accept `A: 100, B: 200`
@@ -16324,15 +16326,31 @@ async function translateArticle(data) {
       // and the ASCII forms of accented names). This block is extracted
       // verbatim by the translation-contract tests, so it stays self-contained.
       const dateMonthPattern = /(?<![\p{L}\p{N}_])(?:gennaio|gen|febbraio|feb|marzo|mar|aprile|apr|maggio|mag|giugno|giu|luglio|lug|agosto|ago|settembre|set|ottobre|ott|novembre|nov|dicembre|dic|january|jan|february|march|april|may|june|jun|july|jul|august|aug|september|sep|sept|october|oct|november|december|dec|januar|jan|februar|februrar|märz|marz|maerz|mai|juni|jun|juli|jul|august|aug|september|sep|sept|oktober|okt|november|dezember|dez|janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|septembre|octobre|novembre|décembre|decembre)\b/iu;
+      const dateMonthNames = new Map(Object.entries({
+        gennaio: 0, gen: 0, febbraio: 1, feb: 1, marzo: 2, mar: 2, aprile: 3, apr: 3,
+        maggio: 4, mag: 4, giugno: 5, giu: 5, luglio: 6, lug: 6, agosto: 7, ago: 7,
+        settembre: 8, set: 8, ottobre: 9, ott: 9, novembre: 10, nov: 10, dicembre: 11, dic: 11,
+        january: 0, jan: 0, february: 1, march: 2, april: 3, may: 4, june: 5, jun: 5,
+        july: 6, jul: 6, august: 7, aug: 7, september: 8, sep: 8, sept: 8,
+        october: 9, oct: 9, november: 10, december: 11, dec: 11,
+        januar: 0, jan: 0, februar: 1, februrar: 1, märz: 2, marz: 2, maerz: 2,
+        mai: 4, juni: 5, jun: 5, juli: 6, jul: 6, august: 7, aug: 7,
+        september: 8, sep: 8, sept: 8, oktober: 9, okt: 9, november: 10,
+        dezember: 11, dez: 11,
+        janvier: 0, février: 1, fevrier: 1, mars: 2, avril: 3, mai: 4, juin: 5,
+        juillet: 6, août: 7, aout: 7, septembre: 8, octobre: 9, novembre: 10,
+        décembre: 11, decembre: 11,
+      }));
       const dateGrammar = {
         monthPattern: new RegExp(dateMonthPattern.source, 'giu'),
         dayToMonthGap: /^(?:[\s.,:;/]|(?:of|de|le|del|du|au)\b)*$/iu,
         monthToDayGap: /^(?:[\s.,:;/])*$/u,
-        rangeGap: /^(?:[\s.,]*(?:[-‐‑‒–—−]|(?:to|through|and|e|bis|à|au)\b)[\s.,]*)$/iu,
+        rangeGap: /^(?:[\s.,]*(?:[-‐‑‒–—−]|(?:to|through|and|e|bis|à|au|al|und|et)\b)[\s.,]*)$/iu,
       };
       const dateMonths = [...value.matchAll(dateGrammar.monthPattern)].map((match) => ({
         start: match.index,
         end: match.index + match[0].length,
+        month: dateMonthNames.get(match[0].toLowerCase()),
       }));
       const gapMatches = (pattern, start, end) => start <= end && pattern.test(value.slice(start, end));
       const isLineLeadingOrdinal = (match, token) => {
@@ -16366,10 +16384,12 @@ async function translateArticle(data) {
           end: match.index + token.length,
         };
       });
-      const hasMonthBefore = (candidate) => dateMonths.some(({ end }) =>
+      const monthsBefore = (candidate) => dateMonths.filter(({ end }) =>
         end <= candidate.start && gapMatches(dateGrammar.monthToDayGap, end, candidate.start));
-      const hasMonthAfter = (candidate) => dateMonths.some(({ start }) =>
+      const monthsAfter = (candidate) => dateMonths.filter(({ start }) =>
         start >= candidate.end && gapMatches(dateGrammar.dayToMonthGap, candidate.end, start));
+      const hasMonthBefore = (candidate) => monthsBefore(candidate).length > 0;
+      const hasMonthAfter = (candidate) => monthsAfter(candidate).length > 0;
       const isDateRange = (left, right) => right && (
         gapMatches(dateGrammar.rangeGap, left.end, right.start)
         // A hyphen immediately before the next number is consumed as that
@@ -16391,12 +16411,45 @@ async function translateArticle(data) {
       const hasDateRangeAfter = (candidateIndex) => candidateIndex + 1 < numberCandidates.length
         && isDateRange(numberCandidates[candidateIndex], numberCandidates[candidateIndex + 1])
         && (hasMonthBefore(numberCandidates[candidateIndex]) || hasMonthAfter(numberCandidates[candidateIndex + 1]));
+      const dateMonthForCandidate = (candidateIndex) => {
+        const candidate = numberCandidates[candidateIndex];
+        const monthCandidates = [
+          ...monthsBefore(candidate),
+          ...monthsAfter(candidate),
+        ];
+        if (hasRangeMonthBefore(candidateIndex)) {
+          monthCandidates.push(...monthsBefore(numberCandidates[candidateIndex - 1]));
+        }
+        if (hasRangeMonthAfter(candidateIndex)) {
+          monthCandidates.push(...monthsAfter(numberCandidates[candidateIndex + 1]));
+        }
+        const months = new Set(
+          monthCandidates
+            .map(({ month }) => month)
+            .filter((month) => Number.isInteger(month)),
+        );
+        return months.size === 1 ? [...months][0] : null;
+      };
+      const measurementUnitPattern = '(?:[$€£¥₣]|CHF|EUR|USD|GBP|JPY|CNY|CAD|AUD|SEK|NOK|DKK|PLN|RUB|INR|franchi?|francs?|euro?s?|dollari?|dollars?|km²|m²|cm²|mm²|km|cm|mm|kg|mg|ml|miglia|miglio|miles?|chilometri?|metri?|litri?|ore?|giorni?|months?|days?|C|F|K)';
+      const measurementBeforePattern = new RegExp(
+        '(?:^|[ \\t([{,:;])' + measurementUnitPattern + '[ \\t]*$',
+        'iu',
+      );
+      const measurementAfterPattern = new RegExp(
+        '^[ \\t]*(?:[,;:][ \\t]*)?' + measurementUnitPattern + '(?=$|[ \\t.,;:!?)]|\\b)',
+        'iu',
+      );
+      const hasAdjacentMeasurementUnit = (candidate) => (
+        measurementBeforePattern.test(value.slice(Math.max(0, candidate.start - 64), candidate.start))
+        || measurementAfterPattern.test(value.slice(candidate.end))
+      );
       const isDateOrdinal = (candidate, candidateIndex) => {
-        const { token, unit, unsigned } = candidate;
+        const { unit, unsigned } = candidate;
         // A percentage remains a measurement even when it sits next to a
         // month (`12% a maggio`); only degree/ordinal markers may be
         // reclassified as a localized date ordinal.
         if (unit === '%') return false;
+        if (hasAdjacentMeasurementUnit(candidate)) return false;
         // A target can only inherit the date interpretation of the numeric
         // fact at the same position in the source. Without this anchor, a
         // translated phrase such as `Marcia 12 miglia` → `March 12 miles`
@@ -16414,24 +16467,28 @@ async function translateArticle(data) {
         if (!Number.isInteger(day) || day < 1 || day > 31) return false;
         const monthBefore = hasMonthBefore(candidate);
         const monthAfter = hasMonthAfter(candidate);
+        const dateMonth = dateMonthForCandidate(candidateIndex);
         // A degree marker after a month is a measurement (`maggio: 12° C`),
         // not a month-first date. Localized dates place the marker before the
         // month (`12° maggio`); keep that valid day-first form, including the
         // first endpoint of a range, while refusing the measurement branch
         // even if a translation drops the marker.
-        if (unit === '°' || unit === 'º') return monthAfter || rangeMonthAfter;
+        if (unit === '°' || unit === 'º') return dateMonth !== null && (monthAfter || rangeMonthAfter);
         // A month on either side is accepted only as part of this shared date
         // grammar. Range endpoints inherit the proof from the other endpoint,
         // so `1°-3 gennaio` and `January 1-3` normalize identically.
-        return monthBefore || monthAfter || rangeMonthBefore || rangeMonthAfter;
+        return dateMonth !== null && (monthBefore || monthAfter || rangeMonthBefore || rangeMonthAfter);
       };
       const numberEntries = numberCandidates.map((candidate, candidateIndex) => {
         const { match, token, unit, ordinalSuffix, sign, unsigned } = candidate;
         const lineLeadingOrdinal = isLineLeadingOrdinal(match, token);
         const dateOrdinal = isDateOrdinal(candidate, candidateIndex);
+        const dateMonth = dateOrdinal ? dateMonthForCandidate(candidateIndex) : null;
         const dateRangeEndpoint = hasDateRangeBefore(candidateIndex) || hasDateRangeAfter(candidateIndex);
         const normalizedSign = dateOrdinal && dateRangeEndpoint && (sign === '-' || sign === '−') ? '' : sign;
-        const normalizedUnit = dateOrdinal ? 'date-ordinal' : lineLeadingOrdinal ? '.' : unit || ordinalSuffix;
+        const normalizedUnit = dateOrdinal
+          ? 'date-ordinal:' + dateMonth
+          : lineLeadingOrdinal ? '.' : unit || ordinalSuffix;
         const tokenEnd = candidate.end
           + ((lineLeadingOrdinal || dateOrdinal) && value[match.index + token.length] === '.' ? 1 : 0);
         return {

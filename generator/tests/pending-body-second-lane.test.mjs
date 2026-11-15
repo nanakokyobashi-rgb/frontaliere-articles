@@ -1546,6 +1546,16 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     'un ordinale inline può diventare un giorno senza suffisso quando la data resta riconoscibile',
   );
 
+  const wrongMonthTarget = 'The measure applies from February 1, 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(inlineDateSource, wrongMonthTarget),
+      500,
+    )(inlineDateSource),
+    null,
+    'il mese normalizzato appartiene alla prova numerica della data',
+  );
+
   const connectorDateTarget = 'The measure applies from 1st of January 2026 and remains valid.';
   assert.equal(
     await makeTranslator(
@@ -1556,6 +1566,21 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     'il connettore inglese of non deve cambiare il contratto numerico della data',
   );
 
+  const localizedRangeSource = 'La misura vale dal 1° al 3 gennaio 2026 e resta valida.';
+  for (const [label, localizedRangeTarget] of [
+    ['connettore tedesco und', 'Die Maßnahme gilt ab dem 1. und 3. Januar 2026 und bleibt gültig.'],
+    ['connettore francese et', 'La mesure s’applique du 1er et 3 janvier 2026 et reste valable.'],
+  ]) {
+    assert.equal(
+      await makeTranslator(
+        (chunk) => chunk.replace(localizedRangeSource, localizedRangeTarget),
+        500,
+      )(localizedRangeSource),
+      localizedRangeTarget,
+      `${label}: entrambi gli estremi devono restare ordinali di data`,
+    );
+  }
+
   const dateRangeSource = 'La misura vale dal 1°-3 gennaio 2026 e resta valida.';
   const dateRangeTarget = 'The measure applies from January 1-3, 2026 and remains valid.';
   assert.equal(
@@ -1565,6 +1590,16 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     )(dateRangeSource),
     dateRangeTarget,
     'gli estremi di un intervallo di date devono condividere la normalizzazione ordinale',
+  );
+
+  const wrongMonthRangeTarget = 'The measure applies from February 1-3, 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(dateRangeSource, wrongMonthRangeTarget),
+      500,
+    )(dateRangeSource),
+    null,
+    'il mese errato deve essere rifiutato anche quando la data è un intervallo',
   );
 
   const nonDateSource = 'Marcia 12 miglia lungo il percorso e resta in forma.';
@@ -1616,6 +1651,17 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     )(inlinePercentDateSource),
     null,
     'la traduzione non puo\' perdere una percentuale solo perche\' il numero e\' vicino a un mese',
+  );
+
+  const amountSource = 'La voce maggio: 12 CHF resta nel riepilogo e non è una data.';
+  const amountTarget = 'The May: CHF 12 entry remains in the summary and is not a date.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(amountSource, amountTarget),
+      500,
+    )(amountSource),
+    amountTarget,
+    'un importo con valuta vicino a un mese non deve diventare un ordinale di data',
   );
 
   for (const [label, source, target] of [
