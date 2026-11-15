@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "servizi",
-  "updatedAt": "2026-11-13T16:35:44.669Z",
-  "contentHash": "da53c4e70c2ccc31a2bf6d814da9c160a9fc1507a9824a1ede2ff7d3a991a2ba",
+  "updatedAt": "2026-11-15T12:42:19.424Z",
+  "contentHash": "7bea7ca1b866014729ac20135a4fc7bee08a6393da99e6b3fbd9da089f939b06",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,8 +13,13 @@
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-15T06:51:41.323Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T22:54:56.926Z",
+      "updatedAt": "2026-11-14T21:43:27.949Z",
       "keyFacts": 0
     }
   ],
@@ -49,10 +54,34 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Altdorf",
+              "value": "6 °C",
+              "detail": "oggi da 6 a 13 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-15T06:51:41.323Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Kantonsspital Uri: Kostenrahmen eingehalten - Neubau ...",
+              "date": "2026-11-13",
+              "url": "https://www.ur.ch/_rte/information/139162"
+            },
+            {
+              "label": "Kantonsspital Uri: Kostenrahmen eingehalten - Neubau ...",
+              "date": "2026-11-13",
+              "url": "https://www.ur.ch/_rte/information/139570"
+            },
             {
               "label": "Änderung der Verordnung über Zulassung, Aufenthalt ...",
               "date": "2026-10-29",
@@ -64,7 +93,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -73,12 +102,6 @@
           "url": "/articoli-uri/presidenza-spiringen-schuler/",
           "excerpt": "Peter Schuler, vicepresidente in carica, subentrerà a René Müller il 1° gennaio; il mandato indicato è 2026/27.",
           "date": "2026-11-08T05:26:38.176Z"
-        },
-        {
-          "title": "Autorizzazione edilizia canton Uri: requisiti e procedura",
-          "url": "/articoli-svizzera/permesso-edilizio-uri/",
-          "excerpt": "Nel Cantone di Uri l'autorizzazione edilizia richiede verifiche su requisiti, documenti, uffici, termini e opposizioni: i lavori partono solo dopo il permesso.",
-          "date": "2026-10-11T11:17:28.171Z"
         },
         {
           "title": "Permesso B nel Canton Uri: requisiti e rinnovo",
@@ -91,6 +114,12 @@
           "url": "/articoli-svizzera/premi-cassa-malati-uri-riduzione/",
           "excerpt": "Guida ai premi della cassa malati obbligatoria nel Cantone di Uri, fasce, franchigie e requisiti per la riduzione dei premi.",
           "date": "2026-08-28T04:09:53.075Z"
+        },
+        {
+          "title": "Autorizzazione edilizia canton Uri: requisiti e procedura",
+          "url": "/articoli-svizzera/permesso-edilizio-uri/",
+          "excerpt": "Nel Cantone di Uri l'autorizzazione edilizia richiede verifiche su requisiti, documenti, uffici, termini e opposizioni: i lavori partono solo dopo il permesso.",
+          "date": "2026-10-11T11:17:28.171Z"
         },
         {
           "title": "Permesso di dimora B Uri: requisiti e rinnovo",
@@ -144,7 +173,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-13T16:35:44.669Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "en": {
       "canton": "UR",
@@ -176,10 +205,34 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Altdorf",
+              "value": "6 °C",
+              "detail": "today from 6 to 13 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-15T06:51:41.323Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Kantonsspital Uri: Kostenrahmen eingehalten - Neubau ...",
+              "date": "2026-11-13",
+              "url": "https://www.ur.ch/_rte/information/139162"
+            },
+            {
+              "label": "Kantonsspital Uri: Kostenrahmen eingehalten - Neubau ...",
+              "date": "2026-11-13",
+              "url": "https://www.ur.ch/_rte/information/139570"
+            },
             {
               "label": "Änderung der Verordnung über Zulassung, Aufenthalt ...",
               "date": "2026-10-29",
@@ -191,7 +244,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -200,12 +253,6 @@
           "url": "/en/uri-articles/spiringen-municipal-president-schuler/",
           "excerpt": "Peter Schuler, the incumbent vice president, will succeed René Müller on January 1; the term indicated is 2026/27.",
           "date": "2026-11-08T05:26:38.176Z"
-        },
-        {
-          "title": "Building permit in the canton of Uri: requirements and procedure",
-          "url": "/en/swiss-articles/uri-building-permit-requirements/",
-          "excerpt": "In the Canton of Uri, a building permit requires checks on requirements, documents, offices, deadlines and objections: work may begin only after the permit has been issued.",
-          "date": "2026-10-11T11:17:28.171Z"
         },
         {
           "title": "Permit B in Canton Uri: Requirements and Renewal",
@@ -218,6 +265,12 @@
           "url": "/en/swiss-articles/health-insurance-uri-reduction/",
           "excerpt": "Guide to the compulsory health insurance premiums in the Canton of Uri, bands, deductibles and requirements for the reduction of premiums.",
           "date": "2026-08-28T04:09:53.075Z"
+        },
+        {
+          "title": "Building permit in the canton of Uri: requirements and procedure",
+          "url": "/en/swiss-articles/uri-building-permit-requirements/",
+          "excerpt": "In the Canton of Uri, a building permit requires checks on requirements, documents, offices, deadlines and objections: work may begin only after the permit has been issued.",
+          "date": "2026-10-11T11:17:28.171Z"
         },
         {
           "title": "B Uri Residence Permit: Requirements and Renewal",
@@ -267,7 +320,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-13T16:35:44.669Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "de": {
       "canton": "UR",
@@ -299,10 +352,34 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Altdorf",
+              "value": "6 °C",
+              "detail": "heute 6 bis 13 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-15T06:51:41.323Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Kantonsspital Uri: Kostenrahmen eingehalten - Neubau ...",
+              "date": "2026-11-13",
+              "url": "https://www.ur.ch/_rte/information/139162"
+            },
+            {
+              "label": "Kantonsspital Uri: Kostenrahmen eingehalten - Neubau ...",
+              "date": "2026-11-13",
+              "url": "https://www.ur.ch/_rte/information/139570"
+            },
             {
               "label": "Änderung der Verordnung über Zulassung, Aufenthalt ...",
               "date": "2026-10-29",
@@ -314,7 +391,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -323,12 +400,6 @@
           "url": "/de/uri-artikel/spiringen-gemeindepraesident-schuler/",
           "excerpt": "Peter Schuler, der amtierende Vizepräsident, wird am 1. Januar die Nachfolge von René Müller antreten; die angegebene Amtsdauer lautet 2026/27.",
           "date": "2026-11-08T05:26:38.176Z"
-        },
-        {
-          "title": "Baubewilligung im Kanton Uri: Anforderungen und Verfahren",
-          "url": "/de/schweiz-artikel/baugesuch-uri-anforderungen/",
-          "excerpt": "Im Kanton Uri erfordert die Baubewilligung die Prüfung von Anforderungen, Unterlagen, Behörden, Fristen und Einsprachen: Die Arbeiten beginnen erst nach der Bewilligung.",
-          "date": "2026-10-11T11:17:28.171Z"
         },
         {
           "title": "B-Bewilligung im Kanton Uri: Voraussetzungen und Erneuerung",
@@ -341,6 +412,12 @@
           "url": "/de/schweiz-artikel/krankenkassenpraemien-uri-reduktion/",
           "excerpt": "Prämienleitfaden der obligatorischen Krankenkasse im Kanton Uri, Zeitabschnitte, Franchisen und Voraussetzungen für die Prämienverbilligung.",
           "date": "2026-08-28T04:09:53.075Z"
+        },
+        {
+          "title": "Baubewilligung im Kanton Uri: Anforderungen und Verfahren",
+          "url": "/de/schweiz-artikel/baugesuch-uri-anforderungen/",
+          "excerpt": "Im Kanton Uri erfordert die Baubewilligung die Prüfung von Anforderungen, Unterlagen, Behörden, Fristen und Einsprachen: Die Arbeiten beginnen erst nach der Bewilligung.",
+          "date": "2026-10-11T11:17:28.171Z"
         },
         {
           "title": "Aufenthaltsbewilligung B Uri: Voraussetzungen und Verlängerung",
@@ -390,7 +467,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-13T16:35:44.669Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "fr": {
       "canton": "UR",
@@ -422,10 +499,34 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Altdorf",
+              "value": "6 °C",
+              "detail": "aujourd’hui de 6 à 13 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-15T06:51:41.323Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Kantonsspital Uri: Kostenrahmen eingehalten - Neubau ...",
+              "date": "2026-11-13",
+              "url": "https://www.ur.ch/_rte/information/139162"
+            },
+            {
+              "label": "Kantonsspital Uri: Kostenrahmen eingehalten - Neubau ...",
+              "date": "2026-11-13",
+              "url": "https://www.ur.ch/_rte/information/139570"
+            },
             {
               "label": "Änderung der Verordnung über Zulassung, Aufenthalt ...",
               "date": "2026-10-29",
@@ -437,7 +538,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -446,12 +547,6 @@
           "url": "/fr/articles-uri/spiringen-president-communal-schuler/",
           "excerpt": "Peter Schuler, vice-président en exercice, succédera à René Müller le 1er janvier ; le mandat indiqué est 2026/27.",
           "date": "2026-11-08T05:26:38.176Z"
-        },
-        {
-          "title": "Autorisation de construire dans le canton d’Uri : exigences et procédure",
-          "url": "/fr/articles-suisse/permis-construire-uri-exigences/",
-          "excerpt": "Dans le canton d’Uri, l’autorisation de construire nécessite des vérifications concernant les exigences, les documents, les services compétents, les délais et les oppositions : les travaux ne commencent qu’après…",
-          "date": "2026-10-11T11:17:28.171Z"
         },
         {
           "title": "Permis B dans le canton d'Uri : exigences et renouvellement",
@@ -464,6 +559,12 @@
           "url": "/fr/articles-suisse/primes-assurance-maladie-uri-reduction/",
           "excerpt": "Guide des primes de la caisse-maladie obligatoire dans le canton d'Uri, des tranches, des franchises et des conditions de réduction des primes.",
           "date": "2026-08-28T04:09:53.075Z"
+        },
+        {
+          "title": "Autorisation de construire dans le canton d’Uri : exigences et procédure",
+          "url": "/fr/articles-suisse/permis-construire-uri-exigences/",
+          "excerpt": "Dans le canton d’Uri, l’autorisation de construire nécessite des vérifications concernant les exigences, les documents, les services compétents, les délais et les oppositions : les travaux ne commencent qu’après…",
+          "date": "2026-10-11T11:17:28.171Z"
         },
         {
           "title": "Permis de séjour B URI : exigences et renouvellement",
@@ -509,7 +610,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-13T16:35:44.669Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "fisco",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "092aaafc70341f7c9b8b75ba162c41589cd304a4ac159488cb7c89394487a536",
+  "updatedAt": "2026-11-15T12:42:19.424Z",
+  "contentHash": "8ffbb45e71e538157b9f630b1232514a44018f3286919672f8f3756cab1eac2a",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-14T21:43:27.949Z",
       "keyFacts": 0
     }
   ],
@@ -109,6 +109,16 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Publication de la statistique fiscale 2024",
+              "date": "2026-11-13T08:12:35.000Z",
+              "url": "https://www.fr.ch/dfin/scc/actualites/publication-de-la-statistique-fiscale-2024"
+            },
+            {
+              "label": "Veröffentlichung der Steuerstatistik 2024",
+              "date": "2026-11-13T08:12:35.000Z",
+              "url": "https://www.fr.ch/de/find/kstv/news/veroeffentlichung-der-steuerstatistik-2024"
+            },
+            {
               "label": "Phishing-Prävention – Kommunikation mit der KSTV",
               "date": "2026-10-06T13:37:38.000Z",
               "url": "https://www.fr.ch/de/steuern/natuerliche-personen/phishing-praevention-kommunikation-mit-der-kstv"
@@ -129,7 +139,7 @@
               "url": "https://www.fr.ch/dfin/scc/actualites/modification-des-codes-qr"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -193,7 +203,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "en": {
       "canton": "FR",
@@ -280,6 +290,16 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Publication de la statistique fiscale 2024",
+              "date": "2026-11-13T08:12:35.000Z",
+              "url": "https://www.fr.ch/dfin/scc/actualites/publication-de-la-statistique-fiscale-2024"
+            },
+            {
+              "label": "Veröffentlichung der Steuerstatistik 2024",
+              "date": "2026-11-13T08:12:35.000Z",
+              "url": "https://www.fr.ch/de/find/kstv/news/veroeffentlichung-der-steuerstatistik-2024"
+            },
+            {
               "label": "Phishing-Prävention – Kommunikation mit der KSTV",
               "date": "2026-10-06T13:37:38.000Z",
               "url": "https://www.fr.ch/de/steuern/natuerliche-personen/phishing-praevention-kommunikation-mit-der-kstv"
@@ -300,7 +320,7 @@
               "url": "https://www.fr.ch/dfin/scc/actualites/modification-des-codes-qr"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -363,7 +383,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "de": {
       "canton": "FR",
@@ -450,6 +470,16 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Publication de la statistique fiscale 2024",
+              "date": "2026-11-13T08:12:35.000Z",
+              "url": "https://www.fr.ch/dfin/scc/actualites/publication-de-la-statistique-fiscale-2024"
+            },
+            {
+              "label": "Veröffentlichung der Steuerstatistik 2024",
+              "date": "2026-11-13T08:12:35.000Z",
+              "url": "https://www.fr.ch/de/find/kstv/news/veroeffentlichung-der-steuerstatistik-2024"
+            },
+            {
               "label": "Phishing-Prävention – Kommunikation mit der KSTV",
               "date": "2026-10-06T13:37:38.000Z",
               "url": "https://www.fr.ch/de/steuern/natuerliche-personen/phishing-praevention-kommunikation-mit-der-kstv"
@@ -470,7 +500,7 @@
               "url": "https://www.fr.ch/dfin/scc/actualites/modification-des-codes-qr"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -533,7 +563,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "fr": {
       "canton": "FR",
@@ -620,6 +650,16 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Publication de la statistique fiscale 2024",
+              "date": "2026-11-13T08:12:35.000Z",
+              "url": "https://www.fr.ch/dfin/scc/actualites/publication-de-la-statistique-fiscale-2024"
+            },
+            {
+              "label": "Veröffentlichung der Steuerstatistik 2024",
+              "date": "2026-11-13T08:12:35.000Z",
+              "url": "https://www.fr.ch/de/find/kstv/news/veroeffentlichung-der-steuerstatistik-2024"
+            },
+            {
               "label": "Phishing-Prävention – Kommunikation mit der KSTV",
               "date": "2026-10-06T13:37:38.000Z",
               "url": "https://www.fr.ch/de/steuern/natuerliche-personen/phishing-praevention-kommunikation-mit-der-kstv"
@@ -640,7 +680,7 @@
               "url": "https://www.fr.ch/dfin/scc/actualites/modification-des-codes-qr"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -704,7 +744,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     }
   }
 }

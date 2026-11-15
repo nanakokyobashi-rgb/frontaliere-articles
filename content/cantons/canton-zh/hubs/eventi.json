@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-11-14T15:15:31.434Z",
-  "contentHash": "d53121f9b6bed84b5f4f8f07b3390ee5aedaec01be16c090b0d649c1cc30164e",
+  "updatedAt": "2026-11-15T12:42:19.424Z",
+  "contentHash": "dc5257e314287a406b7aefec707ed245581b86e2800f09e43ef1e8a5758a0582",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-13T04:23:25.174Z",
+      "updatedAt": "2026-11-15T06:24:39.723Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "339",
+          "value": "335",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Kerzenziehen 2026",
-              "detail": "Kloten",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-2026-1/"
+              "label": "Hochzeitsfestival Zürichsee 2026",
+              "detail": "Stäfa",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hochzeitsfestival-zuerichsee-2026/"
             },
             {
-              "label": "Altdorfer Chilbi",
-              "detail": "Winkel",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/altdorfer-chilbi/"
-            },
-            {
-              "label": "BASAR organisiert vom Frauenverein",
+              "label": "Offene Turnhalle",
               "detail": "Urdorf",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/basar-organisiert-vom-frauenverein/"
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/offene-turnhalle/"
             },
             {
-              "label": "Deutsch, Vorbereitung zur Einbürgerung",
-              "detail": "Dübendorf",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/deutsch-vorbereitung-zur-einbuergerung-4/"
+              "label": "Seniorenmittagstisch 2026",
+              "detail": "Zentrum Breitenhof Rüti",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/rueti-zh/seniorenmittagstisch-2026_AGSb5Q7"
             },
             {
-              "label": "Hier entdeckst du eine Welt, die kaum jemand kennt",
-              "detail": "Züripilz",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/events/nature-man-animal/zuerich/life-is-raging-down-below-the-mushroom-tour-that-shows-zurich-differently_A5ZnKXu"
+              "label": "Kafi VIVA im Generationen-Treff Robenhausen ist offen",
+              "detail": "Generationen-Treff Viva Robenhausen",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/wetzikon-zh/kafi-viva-im-generationen-treff-robenhausen-ist-offen_APypeTS"
             },
             {
-              "label": "Repair-Café Kloten",
-              "detail": "Hegnerhof, Kloten",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kloten/repair-cafe-kloten_AVqtXuX"
+              "label": "Ballo della domenica",
+              "detail": "Schulhaus Wolfrichti",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/evenements/musique/gruet-gossau-zh/danse-du-dimanche_AkZ8hj3"
             },
             {
-              "label": "Expat Expo Zurich 2026",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/expat-expo-zurich-2026/"
+              "label": "Begegnung von Musik und Schriftkunst Suishû T. Klopfenstein-Arii Toshio Hosokawa",
+              "detail": "Festsaal Chipperfield Kunsthaus Zürich, Zürich",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/begegnung-von-musik-und-schriftkunst-suishu-t-klopfensteinarii-toshio-hosokawa/"
             },
             {
-              "label": "Martinimärt Rümlang 14.11.2026",
-              "detail": "Rümlang",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/martinimaert-ruemlang-14112026/"
+              "label": "Familien-Tanzworkshop: Breaking",
+              "detail": "Tanzhaus Zürich, Zürich",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/events/music/zurich/family-dance-workshop-breaking_AnYhSVp"
             },
             {
-              "label": "Graubünden in Zürich – Bündner Manuskripte in der ZB",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/graubuenden-in-zuerich-buendner-manuskripte-in-der-zb/"
+              "label": "Family Dance Workshop: Breaking",
+              "detail": "Tanzhaus Zürich, Zürich",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/familien-tanzworkshop-breaking/"
             },
             {
-              "label": "Preview «Elektra»",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/preview-elektra/"
+              "label": "Spielnachmittag mit Würfeln und Karten",
+              "detail": "Kloten",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spielnachmittag-mit-wuerfeln-und-karten/"
+            },
+            {
+              "label": "«LEIDENSCHAFT & SAMBA»",
+              "detail": "Evang.-ref. Kirche St. Arbogast, Winterthur",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/leidenschaft-und-samba_AZRK56J"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "en": {
       "canton": "ZH",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "339",
+          "value": "335",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Kerzenziehen 2026",
-              "detail": "Kloten",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-2026-1/"
+              "label": "Hochzeitsfestival Zürichsee 2026",
+              "detail": "Stäfa",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hochzeitsfestival-zuerichsee-2026/"
             },
             {
-              "label": "Altdorfer Chilbi",
-              "detail": "Winkel",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/altdorfer-chilbi/"
-            },
-            {
-              "label": "BASAR organisiert vom Frauenverein",
+              "label": "Offene Turnhalle",
               "detail": "Urdorf",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/basar-organisiert-vom-frauenverein/"
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/offene-turnhalle/"
             },
             {
-              "label": "Deutsch, Vorbereitung zur Einbürgerung",
-              "detail": "Dübendorf",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/deutsch-vorbereitung-zur-einbuergerung-4/"
+              "label": "Seniorenmittagstisch 2026",
+              "detail": "Zentrum Breitenhof Rüti",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/rueti-zh/seniorenmittagstisch-2026_AGSb5Q7"
             },
             {
-              "label": "Life is raging down below: The mushroom tour that shows Zurich differently",
-              "detail": "Züripilz",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/events/nature-man-animal/zuerich/life-is-raging-down-below-the-mushroom-tour-that-shows-zurich-differently_A5ZnKXu"
+              "label": "Kafi VIVA in the Robenhausen Intergenerational Centre is open",
+              "detail": "Generationen-Treff Viva Robenhausen",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/wetzikon-zh/kafi-viva-im-generationen-treff-robenhausen-ist-offen_APypeTS"
             },
             {
-              "label": "Repair-Café Kloten",
-              "detail": "Hegnerhof, Kloten",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kloten/repair-cafe-kloten_AVqtXuX"
+              "label": "Sunday dance",
+              "detail": "Schulhaus Wolfrichti",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/evenements/musique/gruet-gossau-zh/danse-du-dimanche_AkZ8hj3"
             },
             {
-              "label": "Expat Expo Zurich 2026",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/expat-expo-zurich-2026/"
+              "label": "Begegnung von Musik und Schriftkunst Suishû T. Klopfenstein-Arii Toshio Hosokawa",
+              "detail": "Festsaal Chipperfield Kunsthaus Zürich, Zürich",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/begegnung-von-musik-und-schriftkunst-suishu-t-klopfensteinarii-toshio-hosokawa/"
             },
             {
-              "label": "Martinimärt Rümlang 14.11.2026",
-              "detail": "Rümlang",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/martinimaert-ruemlang-14112026/"
+              "label": "Family Dance Workshop: Breaking",
+              "detail": "Tanzhaus Zürich, Zürich",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/events/music/zurich/family-dance-workshop-breaking_AnYhSVp"
             },
             {
-              "label": "Graubünden in Zürich – Bündner Manuskripte in der ZB",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/graubuenden-in-zuerich-buendner-manuskripte-in-der-zb/"
+              "label": "Family Dance Workshop: Breaking",
+              "detail": "Tanzhaus Zürich, Zürich",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/familien-tanzworkshop-breaking/"
             },
             {
-              "label": "Preview «Elektra»",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/preview-elektra/"
+              "label": "Spielnachmittag mit Würfeln und Karten",
+              "detail": "Kloten",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spielnachmittag-mit-wuerfeln-und-karten/"
+            },
+            {
+              "label": "«LEIDENSCHAFT & SAMBA»",
+              "detail": "Evang.-ref. Kirche St. Arbogast, Winterthur",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/leidenschaft-und-samba_AZRK56J"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "de": {
       "canton": "ZH",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "339",
+          "value": "335",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Kerzenziehen 2026",
-              "detail": "Kloten",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-2026-1/"
+              "label": "Hochzeitsfestival Zürichsee 2026",
+              "detail": "Stäfa",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hochzeitsfestival-zuerichsee-2026/"
             },
             {
-              "label": "Altdorfer Chilbi",
-              "detail": "Winkel",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/altdorfer-chilbi/"
-            },
-            {
-              "label": "BASAR organisiert vom Frauenverein",
+              "label": "Offene Turnhalle",
               "detail": "Urdorf",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/basar-organisiert-vom-frauenverein/"
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/offene-turnhalle/"
             },
             {
-              "label": "Deutsch, Vorbereitung zur Einbürgerung",
-              "detail": "Dübendorf",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/deutsch-vorbereitung-zur-einbuergerung-4/"
+              "label": "Seniorenmittagstisch 2026",
+              "detail": "Zentrum Breitenhof Rüti",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/rueti-zh/seniorenmittagstisch-2026_AGSb5Q7"
             },
             {
-              "label": "Hier entdeckst du eine Welt, die kaum jemand kennt",
-              "detail": "Züripilz",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/events/nature-man-animal/zuerich/life-is-raging-down-below-the-mushroom-tour-that-shows-zurich-differently_A5ZnKXu"
+              "label": "Kafi VIVA im Generationen-Treff Robenhausen ist geöffnet",
+              "detail": "Generationen-Treff Viva Robenhausen",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/wetzikon-zh/kafi-viva-im-generationen-treff-robenhausen-ist-offen_APypeTS"
             },
             {
-              "label": "Repair-Café Kloten",
-              "detail": "Hegnerhof, Kloten",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kloten/repair-cafe-kloten_AVqtXuX"
+              "label": "Sonntagstanz",
+              "detail": "Schulhaus Wolfrichti",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/evenements/musique/gruet-gossau-zh/danse-du-dimanche_AkZ8hj3"
             },
             {
-              "label": "Expat Expo Zurich 2026",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/expat-expo-zurich-2026/"
+              "label": "Begegnung von Musik und Schriftkunst Suishû T. Klopfenstein-Arii Toshio Hosokawa",
+              "detail": "Festsaal Chipperfield Kunsthaus Zürich, Zürich",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/begegnung-von-musik-und-schriftkunst-suishu-t-klopfensteinarii-toshio-hosokawa/"
             },
             {
-              "label": "Martinimärt Rümlang 14.11.2026",
-              "detail": "Rümlang",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/martinimaert-ruemlang-14112026/"
+              "label": "Familien-Tanzworkshop: Breaking",
+              "detail": "Tanzhaus Zürich, Zürich",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/events/music/zurich/family-dance-workshop-breaking_AnYhSVp"
             },
             {
-              "label": "Graubünden in Zürich – Bündner Manuskripte in der ZB",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/graubuenden-in-zuerich-buendner-manuskripte-in-der-zb/"
+              "label": "Familien-Tanzworkshop: Breaking",
+              "detail": "Tanzhaus Zürich, Zürich",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/familien-tanzworkshop-breaking/"
             },
             {
-              "label": "Preview «Elektra»",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/preview-elektra/"
+              "label": "Spielnachmittag mit Würfeln und Karten",
+              "detail": "Kloten",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spielnachmittag-mit-wuerfeln-und-karten/"
+            },
+            {
+              "label": "«LEIDENSCHAFT & SAMBA»",
+              "detail": "Evang.-ref. Kirche St. Arbogast, Winterthur",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/leidenschaft-und-samba_AZRK56J"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "fr": {
       "canton": "ZH",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "339",
+          "value": "335",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Kerzenziehen 2026",
-              "detail": "Kloten",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-2026-1/"
+              "label": "Hochzeitsfestival Zürichsee 2026",
+              "detail": "Stäfa",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hochzeitsfestival-zuerichsee-2026/"
             },
             {
-              "label": "Altdorfer Chilbi",
-              "detail": "Winkel",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/altdorfer-chilbi/"
-            },
-            {
-              "label": "BASAR organisiert vom Frauenverein",
+              "label": "Offene Turnhalle",
               "detail": "Urdorf",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/basar-organisiert-vom-frauenverein/"
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/offene-turnhalle/"
             },
             {
-              "label": "Deutsch, Vorbereitung zur Einbürgerung",
-              "detail": "Dübendorf",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/deutsch-vorbereitung-zur-einbuergerung-4/"
+              "label": "Seniorenmittagstisch 2026",
+              "detail": "Zentrum Breitenhof Rüti",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/rueti-zh/seniorenmittagstisch-2026_AGSb5Q7"
             },
             {
-              "label": "Hier entdeckst du eine Welt, die kaum jemand kennt",
-              "detail": "Züripilz",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/events/nature-man-animal/zuerich/life-is-raging-down-below-the-mushroom-tour-that-shows-zurich-differently_A5ZnKXu"
+              "label": "Le café VIVA du centre intergénérationnel de Robenhausen est ouvert",
+              "detail": "Generationen-Treff Viva Robenhausen",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/wetzikon-zh/kafi-viva-im-generationen-treff-robenhausen-ist-offen_APypeTS"
             },
             {
-              "label": "Repair-Café Kloten",
-              "detail": "Hegnerhof, Kloten",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kloten/repair-cafe-kloten_AVqtXuX"
+              "label": "Danse du dimanche",
+              "detail": "Schulhaus Wolfrichti",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/evenements/musique/gruet-gossau-zh/danse-du-dimanche_AkZ8hj3"
             },
             {
-              "label": "Expat Expo Zurich 2026",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/expat-expo-zurich-2026/"
+              "label": "Begegnung von Musik und Schriftkunst Suishû T. Klopfenstein-Arii Toshio Hosokawa",
+              "detail": "Festsaal Chipperfield Kunsthaus Zürich, Zürich",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/begegnung-von-musik-und-schriftkunst-suishu-t-klopfensteinarii-toshio-hosokawa/"
             },
             {
-              "label": "Martinimärt Rümlang 14.11.2026",
-              "detail": "Rümlang",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/martinimaert-ruemlang-14112026/"
+              "label": "Familien-Tanzworkshop: Breaking",
+              "detail": "Tanzhaus Zürich, Zürich",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/events/music/zurich/family-dance-workshop-breaking_AnYhSVp"
             },
             {
-              "label": "Graubünden in Zürich – Bündner Manuskripte in der ZB",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/graubuenden-in-zuerich-buendner-manuskripte-in-der-zb/"
+              "label": "Family Dance Workshop: Breaking",
+              "detail": "Tanzhaus Zürich, Zürich",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/familien-tanzworkshop-breaking/"
             },
             {
-              "label": "Preview «Elektra»",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/preview-elektra/"
+              "label": "Spielnachmittag mit Würfeln und Karten",
+              "detail": "Kloten",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spielnachmittag-mit-wuerfeln-und-karten/"
+            },
+            {
+              "label": "«LEIDENSCHAFT & SAMBA»",
+              "detail": "Evang.-ref. Kirche St. Arbogast, Winterthur",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/leidenschaft-und-samba_AZRK56J"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-11-14T15:15:31.434Z",
-  "contentHash": "3242482c1fd9f443f3a971464fde938de00c3301ca50953c7dc7e6eb83138e77",
+  "updatedAt": "2026-11-15T12:42:19.424Z",
+  "contentHash": "d19115306400277393ec470a6ef7675679ac7e7cf155473106c28a9c3957010f",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-13T04:23:25.174Z",
+      "updatedAt": "2026-11-15T06:24:39.723Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T22:54:56.926Z",
+      "updatedAt": "2026-11-14T21:43:27.949Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "61",
+          "value": "72",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Folk in Val",
-              "detail": "Roveredo GR",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/folk-in-val/"
+              "label": "Woche der Religionen - interreligiöse Zugfahrt",
+              "detail": "Evang.-ref. Landeskirche Graubünden, Chur",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/woche-der-religionen-interreligioese-zugfahrt/"
             },
             {
-              "label": "Riparazione Caffè Heinzenberg/Domleschg/Schams",
-              "detail": "Almens, Domleschg",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/riparazione-caffe-heinzenbergdomleschgschams/"
+              "label": "Konzert mit Bandura, einem Saiteninstrument aus der Ukraine",
+              "detail": "Hospizkirche",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muestair/konzert-mit-bandura-einem-saiteninstrument-aus-der-ukraine_A8Ln1Kt"
             },
             {
-              "label": "Lost in Quiet – Langer Samstag",
-              "detail": "Chur",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lost-in-quiet-langer-samstag/"
-            },
-            {
-              "label": "Maiale alpino e manzo Wagyu",
-              "detail": "Zunfthaus zur Rebleuten",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/maiale-alpino-e-manzo-wagyu/"
-            },
-            {
-              "label": "Anderswo, daheim",
-              "detail": "Davos",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/anderswo-daheim/"
-            },
-            {
-              "label": "Sound Healing - eine Klangreise",
-              "detail": "Evang.-ref. Kirche Felsberg, Felsberg",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sound-healing-eine-klangreise/"
+              "label": "Ninas Lieder",
+              "detail": "Kino Rätia Bühne, Thusis",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/thusis/ninas-lieder_AhG1fup"
             },
             {
               "label": "Binary Sunset - Langer Samstag",
-              "detail": "Chur",
-              "date": "2026-11-14",
+              "detail": "Chur — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/binary-sunset-langer-samstag/"
-            },
-            {
-              "label": "Bergflohmarkt Chur",
-              "detail": "Kirchgemeindehaus Titthof, Chur — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bergflohmarkt-chur/"
             },
             {
               "label": "Fitness- und Yogakurse",
               "detail": "Hotel Schweizerhof — in corso, ultimo giorno: 30 novembre 2026",
-              "date": "2026-11-14",
+              "date": "2026-11-15",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
             },
             {
-              "label": "Peduzzis traditionelle Huus-Metzgete 2026",
-              "detail": "Val Surses: Savognin, Surses — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/peduzzis-traditionelle-huus-metzgete-2026/"
+              "label": "Klangschnuppern",
+              "detail": "Nada Brahma, Bever",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/events/this-that/bever/sound-sniffing_AmmHUjP"
+            },
+            {
+              "label": "Kaffee & Gipfeli in der Kirchenstube",
+              "detail": "Evang.-ref. Kirche St. Theodul, Davos",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/davos-dorf/kaffee-und-gipfeli-in-der-kirchenstube_AsLZ7dC"
+            },
+            {
+              "label": "AchtsamkeitsFlow in Versam",
+              "detail": "Haus Signina",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/versam/achtsamkeitsflow-in-versam_AEmq5HV"
+            },
+            {
+              "label": "Sketch - Davos",
+              "detail": "KaffeeKlatsch am Platz, Davos",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/davos-platz/sketch-davos_AstSygC"
+            },
+            {
+              "label": "Geschenke-Bazar und kleiner Flohmarkt des Frauenarbeitskreises",
+              "detail": "Comanderzentrum, Chur",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/geschenke-bazar-und-kleiner-flohmarkt-des-frauenarbeitskreises/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -177,7 +177,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "en": {
       "canton": "GR",
@@ -187,7 +187,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "61",
+          "value": "72",
           "note": "from the site’s events calendar"
         }
       ],
@@ -198,69 +198,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Folk in Val",
-              "detail": "Roveredo GR",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/folk-in-val/"
+              "label": "Woche der Religionen - interreligiöse Zugfahrt",
+              "detail": "Evang.-ref. Landeskirche Graubünden, Chur",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/woche-der-religionen-interreligioese-zugfahrt/"
             },
             {
-              "label": "Repair Café Heinzenberg/Domleschg/Schams",
-              "detail": "Almens, Domleschg",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/riparazione-caffe-heinzenbergdomleschgschams/"
+              "label": "Konzert mit Bandura, einem Saiteninstrument aus der Ukraine",
+              "detail": "Hospizkirche",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muestair/konzert-mit-bandura-einem-saiteninstrument-aus-der-ukraine_A8Ln1Kt"
             },
             {
-              "label": "Lost in Quiet – Langer Samstag",
-              "detail": "Chur",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lost-in-quiet-langer-samstag/"
-            },
-            {
-              "label": "Alpine pork & Wagyu beef",
-              "detail": "Zunfthaus zur Rebleuten",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/maiale-alpino-e-manzo-wagyu/"
-            },
-            {
-              "label": "Anderswo, daheim",
-              "detail": "Davos",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/anderswo-daheim/"
-            },
-            {
-              "label": "Sound Healing - eine Klangreise",
-              "detail": "Evang.-ref. Kirche Felsberg, Felsberg",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sound-healing-eine-klangreise/"
+              "label": "Ninas Lieder",
+              "detail": "Kino Rätia Bühne, Thusis",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/thusis/ninas-lieder_AhG1fup"
             },
             {
               "label": "Binary Sunset - Langer Samstag",
-              "detail": "Chur",
-              "date": "2026-11-14",
+              "detail": "Chur — ongoing, last day: 15 November 2026",
+              "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/binary-sunset-langer-samstag/"
-            },
-            {
-              "label": "Bergflohmarkt Chur",
-              "detail": "Kirchgemeindehaus Titthof, Chur — ongoing, last day: 14 November 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bergflohmarkt-chur/"
             },
             {
               "label": "Fitness and yoga classes",
               "detail": "Hotel Schweizerhof — ongoing, last day: 30 November 2026",
-              "date": "2026-11-14",
+              "date": "2026-11-15",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
             },
             {
-              "label": "Peduzzis traditionelle Huus-Metzgete 2026",
-              "detail": "Val Surses: Savognin, Surses — ongoing, last day: 14 November 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/peduzzis-traditionelle-huus-metzgete-2026/"
+              "label": "Sound sniffing",
+              "detail": "Nada Brahma, Bever",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/events/this-that/bever/sound-sniffing_AmmHUjP"
+            },
+            {
+              "label": "Kaffee & Gipfeli in der Kirchenstube",
+              "detail": "Evang.-ref. Kirche St. Theodul, Davos",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/davos-dorf/kaffee-und-gipfeli-in-der-kirchenstube_AsLZ7dC"
+            },
+            {
+              "label": "AchtsamkeitsFlow in Versam",
+              "detail": "Haus Signina",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/versam/achtsamkeitsflow-in-versam_AEmq5HV"
+            },
+            {
+              "label": "Sketch - Davos",
+              "detail": "KaffeeKlatsch am Platz, Davos",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/davos-platz/sketch-davos_AstSygC"
+            },
+            {
+              "label": "Geschenke-Bazar und kleiner Flohmarkt des Frauenarbeitskreises",
+              "detail": "Comanderzentrum, Chur",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/geschenke-bazar-und-kleiner-flohmarkt-des-frauenarbeitskreises/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -273,7 +273,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -337,7 +337,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "de": {
       "canton": "GR",
@@ -347,7 +347,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "61",
+          "value": "72",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -358,69 +358,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Folk in Val",
-              "detail": "Roveredo GR",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/folk-in-val/"
+              "label": "Woche der Religionen - interreligiöse Zugfahrt",
+              "detail": "Evang.-ref. Landeskirche Graubünden, Chur",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/woche-der-religionen-interreligioese-zugfahrt/"
             },
             {
-              "label": "Repair Café Heinzenberg/Domleschg/Schams",
-              "detail": "Almens, Domleschg",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/riparazione-caffe-heinzenbergdomleschgschams/"
+              "label": "Konzert mit Bandura, einem Saiteninstrument aus der Ukraine",
+              "detail": "Hospizkirche",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muestair/konzert-mit-bandura-einem-saiteninstrument-aus-der-ukraine_A8Ln1Kt"
             },
             {
-              "label": "Lost in Quiet – Langer Samstag",
-              "detail": "Chur",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lost-in-quiet-langer-samstag/"
-            },
-            {
-              "label": "Alpenschwein & Wagyu Beef",
-              "detail": "Zunfthaus zur Rebleuten",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/maiale-alpino-e-manzo-wagyu/"
-            },
-            {
-              "label": "Anderswo, daheim",
-              "detail": "Davos",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/anderswo-daheim/"
-            },
-            {
-              "label": "Sound Healing - eine Klangreise",
-              "detail": "Evang.-ref. Kirche Felsberg, Felsberg",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sound-healing-eine-klangreise/"
+              "label": "Ninas Lieder",
+              "detail": "Kino Rätia Bühne, Thusis",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/thusis/ninas-lieder_AhG1fup"
             },
             {
               "label": "Binary Sunset - Langer Samstag",
-              "detail": "Chur",
-              "date": "2026-11-14",
+              "detail": "Chur — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/binary-sunset-langer-samstag/"
-            },
-            {
-              "label": "Bergflohmarkt Chur",
-              "detail": "Kirchgemeindehaus Titthof, Chur — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bergflohmarkt-chur/"
             },
             {
               "label": "Fitness- und Yogakurse",
               "detail": "Hotel Schweizerhof — läuft, letzter Tag: 30. November 2026",
-              "date": "2026-11-14",
+              "date": "2026-11-15",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
             },
             {
-              "label": "Peduzzis traditionelle Huus-Metzgete 2026",
-              "detail": "Val Surses: Savognin, Surses — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/peduzzis-traditionelle-huus-metzgete-2026/"
+              "label": "Klangschnuppern",
+              "detail": "Nada Brahma, Bever",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/events/this-that/bever/sound-sniffing_AmmHUjP"
+            },
+            {
+              "label": "Kaffee & Gipfeli in der Kirchenstube",
+              "detail": "Evang.-ref. Kirche St. Theodul, Davos",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/davos-dorf/kaffee-und-gipfeli-in-der-kirchenstube_AsLZ7dC"
+            },
+            {
+              "label": "AchtsamkeitsFlow in Versam",
+              "detail": "Haus Signina",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/versam/achtsamkeitsflow-in-versam_AEmq5HV"
+            },
+            {
+              "label": "Sketch - Davos",
+              "detail": "KaffeeKlatsch am Platz, Davos",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/davos-platz/sketch-davos_AstSygC"
+            },
+            {
+              "label": "Geschenke-Bazar und kleiner Flohmarkt des Frauenarbeitskreises",
+              "detail": "Comanderzentrum, Chur",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/geschenke-bazar-und-kleiner-flohmarkt-des-frauenarbeitskreises/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -433,7 +433,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -497,7 +497,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "fr": {
       "canton": "GR",
@@ -507,7 +507,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "61",
+          "value": "72",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -518,69 +518,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Folk in Val",
-              "detail": "Roveredo GR",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/folk-in-val/"
+              "label": "Woche der Religionen - interreligiöse Zugfahrt",
+              "detail": "Evang.-ref. Landeskirche Graubünden, Chur",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/woche-der-religionen-interreligioese-zugfahrt/"
             },
             {
-              "label": "Repair Café Heinzenberg/Domleschg/Schams",
-              "detail": "Almens, Domleschg",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/riparazione-caffe-heinzenbergdomleschgschams/"
+              "label": "Konzert mit Bandura, einem Saiteninstrument aus der Ukraine",
+              "detail": "Hospizkirche",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muestair/konzert-mit-bandura-einem-saiteninstrument-aus-der-ukraine_A8Ln1Kt"
             },
             {
-              "label": "Lost in Quiet – Langer Samstag",
-              "detail": "Chur",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lost-in-quiet-langer-samstag/"
-            },
-            {
-              "label": "Porc des Alpes & Wagyu Beef",
-              "detail": "Zunfthaus zur Rebleuten",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/maiale-alpino-e-manzo-wagyu/"
-            },
-            {
-              "label": "Anderswo, daheim",
-              "detail": "Davos",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/anderswo-daheim/"
-            },
-            {
-              "label": "Sound Healing - eine Klangreise",
-              "detail": "Evang.-ref. Kirche Felsberg, Felsberg",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sound-healing-eine-klangreise/"
+              "label": "Ninas Lieder",
+              "detail": "Kino Rätia Bühne, Thusis",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/thusis/ninas-lieder_AhG1fup"
             },
             {
               "label": "Binary Sunset - Langer Samstag",
-              "detail": "Chur",
-              "date": "2026-11-14",
+              "detail": "Chur — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/binary-sunset-langer-samstag/"
-            },
-            {
-              "label": "Bergflohmarkt Chur",
-              "detail": "Kirchgemeindehaus Titthof, Chur — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bergflohmarkt-chur/"
             },
             {
               "label": "Fitness- und Yogakurse",
               "detail": "Hotel Schweizerhof — en cours, dernier jour : 30 novembre 2026",
-              "date": "2026-11-14",
+              "date": "2026-11-15",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
             },
             {
-              "label": "Peduzzis traditionelle Huus-Metzgete 2026",
-              "detail": "Val Surses: Savognin, Surses — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/peduzzis-traditionelle-huus-metzgete-2026/"
+              "label": "Klangschnuppern",
+              "detail": "Nada Brahma, Bever",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/events/this-that/bever/sound-sniffing_AmmHUjP"
+            },
+            {
+              "label": "Kaffee & Gipfeli in der Kirchenstube",
+              "detail": "Evang.-ref. Kirche St. Theodul, Davos",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/davos-dorf/kaffee-und-gipfeli-in-der-kirchenstube_AsLZ7dC"
+            },
+            {
+              "label": "AchtsamkeitsFlow in Versam",
+              "detail": "Haus Signina",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/versam/achtsamkeitsflow-in-versam_AEmq5HV"
+            },
+            {
+              "label": "Sketch - Davos",
+              "detail": "KaffeeKlatsch am Platz, Davos",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/davos-platz/sketch-davos_AstSygC"
+            },
+            {
+              "label": "Geschenke-Bazar und kleiner Flohmarkt des Frauenarbeitskreises",
+              "detail": "Comanderzentrum, Chur",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/geschenke-bazar-und-kleiner-flohmarkt-des-frauenarbeitskreises/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -593,7 +593,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -657,7 +657,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     }
   }
 }

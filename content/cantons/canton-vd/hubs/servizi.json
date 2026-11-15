@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-11-14T15:15:31.434Z",
-  "contentHash": "e533b6925407c20236ae2cf754e24d046d3449bdeed664f381adb510b53decc1",
+  "updatedAt": "2026-11-15T12:42:19.424Z",
+  "contentHash": "2ef8f343baec697e480a8358a783cf01aa5c67b27de12ca005db073ac7eae16d",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,8 +13,18 @@
       "keyFacts": 1
     },
     {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-15T06:26:36.869Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-11-15T06:51:41.323Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T22:54:56.926Z",
+      "updatedAt": "2026-11-14T21:43:27.949Z",
       "keyFacts": 0
     }
   ],
@@ -30,6 +40,11 @@
           "value": "698 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "15",
+          "note": "offerta mediana 2000 CHF"
         }
       ],
       "dataBlocks": [
@@ -54,10 +69,60 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "VD5505",
+              "value": "3100 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120745"
+            },
+            {
+              "label": "VD1102",
+              "value": "2000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120735"
+            },
+            {
+              "label": "VD2189",
+              "value": "2000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120736"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://www.encheres-vd.ch/fr/",
+          "updatedAt": "2026-11-15T06:26:36.869Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "7 °C",
+              "detail": "oggi da 7 a 12 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-15T06:51:41.323Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Soigne ton futur : une campagne pour la promotion des professions de santé",
+              "date": "2026-11-13T11:51:59.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26790-soigne-ton-futur-une-campagne-pour-la-promotion-des-professions-de-sante"
+            },
             {
               "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
               "date": "2026-11-02T16:26:27.000Z",
@@ -82,14 +147,9 @@
               "label": "Trente ans de politique d’intégration dans le canton de Vaud",
               "date": "2026-10-05T15:03:42.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26679-default-47773e4170"
-            },
-            {
-              "label": "Forum des clubs sportifs lausannois: la santé des jeunes au cœur de la performance",
-              "date": "2026-10-02T16:30:00.000Z",
-              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90490"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -169,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "en": {
       "canton": "VD",
@@ -182,6 +242,11 @@
           "value": "698 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "15",
+          "note": "typical bid 2,000 CHF"
         }
       ],
       "dataBlocks": [
@@ -206,10 +271,60 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "VD5505",
+              "value": "3,100 CHF",
+              "detail": "current bid",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120745"
+            },
+            {
+              "label": "VD1102",
+              "value": "2,000 CHF",
+              "detail": "current bid",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120735"
+            },
+            {
+              "label": "VD2189",
+              "value": "2,000 CHF",
+              "detail": "current bid",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120736"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://www.encheres-vd.ch/fr/",
+          "updatedAt": "2026-11-15T06:26:36.869Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "7 °C",
+              "detail": "today from 7 to 12 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-15T06:51:41.323Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Soigne ton futur : une campagne pour la promotion des professions de santé",
+              "date": "2026-11-13T11:51:59.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26790-soigne-ton-futur-une-campagne-pour-la-promotion-des-professions-de-sante"
+            },
             {
               "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
               "date": "2026-11-02T16:26:27.000Z",
@@ -234,14 +349,9 @@
               "label": "Trente ans de politique d’intégration dans le canton de Vaud",
               "date": "2026-10-05T15:03:42.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26679-default-47773e4170"
-            },
-            {
-              "label": "Forum des clubs sportifs lausannois: la santé des jeunes au cœur de la performance",
-              "date": "2026-10-02T16:30:00.000Z",
-              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90490"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -317,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "de": {
       "canton": "VD",
@@ -330,6 +440,11 @@
           "value": "698 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "15",
+          "note": "mittleres Gebot 2’000 CHF"
         }
       ],
       "dataBlocks": [
@@ -354,10 +469,60 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "VD5505",
+              "value": "3’100 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120745"
+            },
+            {
+              "label": "VD1102",
+              "value": "2’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120735"
+            },
+            {
+              "label": "VD2189",
+              "value": "2’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120736"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://www.encheres-vd.ch/fr/",
+          "updatedAt": "2026-11-15T06:26:36.869Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "7 °C",
+              "detail": "heute 7 bis 12 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-15T06:51:41.323Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Soigne ton futur : une campagne pour la promotion des professions de santé",
+              "date": "2026-11-13T11:51:59.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26790-soigne-ton-futur-une-campagne-pour-la-promotion-des-professions-de-sante"
+            },
             {
               "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
               "date": "2026-11-02T16:26:27.000Z",
@@ -382,14 +547,9 @@
               "label": "Trente ans de politique d’intégration dans le canton de Vaud",
               "date": "2026-10-05T15:03:42.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26679-default-47773e4170"
-            },
-            {
-              "label": "Forum des clubs sportifs lausannois: la santé des jeunes au cœur de la performance",
-              "date": "2026-10-02T16:30:00.000Z",
-              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90490"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "fr": {
       "canton": "VD",
@@ -478,6 +638,11 @@
           "value": "698 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "15",
+          "note": "offre centrale 2 000 CHF"
         }
       ],
       "dataBlocks": [
@@ -502,10 +667,60 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "VD5505",
+              "value": "3 100 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120745"
+            },
+            {
+              "label": "VD1102",
+              "value": "2 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120735"
+            },
+            {
+              "label": "VD2189",
+              "value": "2 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-15T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120736"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://www.encheres-vd.ch/fr/",
+          "updatedAt": "2026-11-15T06:26:36.869Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "7 °C",
+              "detail": "aujourd’hui de 7 à 12 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-15T06:51:41.323Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Soigne ton futur : une campagne pour la promotion des professions de santé",
+              "date": "2026-11-13T11:51:59.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26790-soigne-ton-futur-une-campagne-pour-la-promotion-des-professions-de-sante"
+            },
             {
               "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
               "date": "2026-11-02T16:26:27.000Z",
@@ -530,14 +745,9 @@
               "label": "Trente ans de politique d’intégration dans le canton de Vaud",
               "date": "2026-10-05T15:03:42.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26679-default-47773e4170"
-            },
-            {
-              "label": "Forum des clubs sportifs lausannois: la santé des jeunes au cœur de la performance",
-              "date": "2026-10-02T16:30:00.000Z",
-              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90490"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -609,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     }
   }
 }

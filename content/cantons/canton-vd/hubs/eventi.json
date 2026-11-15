@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-11-14T15:15:31.434Z",
-  "contentHash": "0803e61f7ba81c3429cbeab7b6c92951b1933bfa18d2dc25b5fe35017e2bebdb",
+  "updatedAt": "2026-11-15T12:42:19.424Z",
+  "contentHash": "79644ff0bfeba1d752b61ff4f610858394a90aa402e8150b2541d8a48d13d5fa",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-13T04:23:25.174Z",
+      "updatedAt": "2026-11-15T06:24:39.723Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T22:54:56.926Z",
+      "updatedAt": "2026-11-14T21:43:27.949Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "75",
+          "value": "90",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "KALIKA (FR) + SUPPORT",
-              "detail": "Losanna, Lausanne",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kalika-fr-support/"
+              "label": "Fronda – Cialoma, Geschichten vom Meer und vieles mehr…",
+              "detail": "Théâtre de l'Oxymore",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/cully/fronda-cialoma-geschichten-vom-meer-und-vieles-mehr_AMiLNWe"
             },
             {
-              "label": "KALIKA (FR) + SUPPORT",
-              "detail": "Le Romandie",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/kalika-fr-support_AmABReg"
+              "label": "GIOIA CANTAR Vokal- und Instrumentalensemble",
+              "detail": "Temple évang.-réf. de St-Paul",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/events/music/villeneuve-vd/gioia-cantar-vocal-and-instrumental-ensemble_Ai2GWLZ"
             },
             {
-              "label": "Painting exhibition",
+              "label": "Scheherazade - CSV Choir & ORS OVS Orchestras",
               "detail": "Vevey",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/painting-exhibition-1/"
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/scheherazade-csv-choir-ors-ovs-orchestras/"
             },
             {
-              "label": "Rota Fortunae - Les PCGB",
-              "detail": "Pavillon Naftule",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/rota-fortunae-les-pcgb_AQXS8Aa"
+              "label": "Scheherazade – Chor CSV & Orchester ORS OVS",
+              "detail": "Eglise évang.-réf. Saint-Martin, Vevey",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/evenements/musique/vevey/sheherazade-choeur-csv-und-orchestres-ors-ovs_AGBe1VG"
             },
             {
-              "label": "Noci, edera e cipolle: ricette per inchiostri e tinture",
-              "detail": "Musée national suisse, Prangins",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/noci-edera-e-cipolle-ricette-per-inchiostri-e-tinture/"
+              "label": "Soirée entre copains : KaraOcook + Quizz",
+              "detail": "Captain Cook",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/soiree-entre-copains-karaocook-quizz_A6XGs5K"
             },
             {
-              "label": "Atelier \"Journée mondiale du faux timbre d'artiste\"",
+              "label": "Sonntagsmarkt in Rolle",
+              "detail": "Château de Rolle, Rolle",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/rolle/marche-dominical-de-rolle_AXZ7FHG"
+            },
+            {
+              "label": "En train historique, voyage au cœur de la Belle Époque",
+              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/en-train-historique-voyage-au-coeur-de-la-belle-epoque/"
+            },
+            {
+              "label": "Concert - Aigle Orchestra",
+              "detail": "Eglise cath.-rom. d'Aigle, Aigle",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-aigle-orchestra/"
+            },
+            {
+              "label": "Le Tour d'Écrou - opéra",
+              "detail": "Opéra de Lausanne, Lausanne",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-tour-decrou-opera/"
+            },
+            {
+              "label": "Stand up Comedy in broken English - Victor Patrascan",
               "detail": "Lausanne",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-journee-mondiale-du-faux-timbre-dartiste/"
-            },
-            {
-              "label": "Gala Stand Up - Montreux Comedy 2026",
-              "detail": "Théâtre de Beaulieu, Lausanne — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gala-stand-up-montreux-comedy-2026/"
-            },
-            {
-              "label": "Montreux Art Gallery",
-              "detail": "MAG – Montreux Art Gallery, Montreux — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/evenements/montreux/montreux-art-gallery-mag_AJFLXN1"
-            },
-            {
-              "label": "Montreux Comedy",
-              "detail": "Montreux Comedy Festival, Montreux — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy/"
-            },
-            {
-              "label": "Montreux Comedy Festival",
-              "detail": "Théâtre de Beaulieu, Lausanne — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy-festival/"
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stand-up-comedy-in-broken-english-victor-patrascan-2/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -145,7 +145,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "en": {
       "canton": "VD",
@@ -155,7 +155,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "75",
+          "value": "90",
           "note": "from the site’s events calendar"
         }
       ],
@@ -166,69 +166,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "KALIKA (FR) + FANCY DOLCY (FR)",
-              "detail": "Losanna, Lausanne",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kalika-fr-support/"
+              "label": "Fronda – Cialoma, Tales of the Sea, and more…",
+              "detail": "Théâtre de l'Oxymore",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/cully/fronda-cialoma-geschichten-vom-meer-und-vieles-mehr_AMiLNWe"
             },
             {
-              "label": "KALIKA (FR) + SUPPORT",
-              "detail": "Le Romandie",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/kalika-fr-support_AmABReg"
+              "label": "GIOIA CANTAR Vocal and Instrumental Ensemble",
+              "detail": "Temple évang.-réf. de St-Paul",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/events/music/villeneuve-vd/gioia-cantar-vocal-and-instrumental-ensemble_Ai2GWLZ"
             },
             {
-              "label": "Painting exhibition",
+              "label": "Scheherazade - CSV Choir & ORS OVS Orchestras",
               "detail": "Vevey",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/painting-exhibition-1/"
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/scheherazade-csv-choir-ors-ovs-orchestras/"
             },
             {
-              "label": "Rota Fortunae - Les PCGB",
-              "detail": "Pavillon Naftule",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/rota-fortunae-les-pcgb_AQXS8Aa"
+              "label": "Scheherazade - CSV Choir & ORS OVS Orchestras",
+              "detail": "Eglise évang.-réf. Saint-Martin, Vevey",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/evenements/musique/vevey/sheherazade-choeur-csv-und-orchestres-ors-ovs_AGBe1VG"
             },
             {
-              "label": "Walnuts, ivy and onions: ink and dye recipes",
-              "detail": "Musée national suisse, Prangins",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/noci-edera-e-cipolle-ricette-per-inchiostri-e-tinture/"
+              "label": "Soirée entre copains : KaraOcook + Quizz",
+              "detail": "Captain Cook",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/soiree-entre-copains-karaocook-quizz_A6XGs5K"
             },
             {
-              "label": "Atelier \"Journée mondiale du faux timbre d'artiste\"",
+              "label": "Marché dominical de Rolle",
+              "detail": "Château de Rolle, Rolle",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/rolle/marche-dominical-de-rolle_AXZ7FHG"
+            },
+            {
+              "label": "En train historique, voyage au cœur de la Belle Époque",
+              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/en-train-historique-voyage-au-coeur-de-la-belle-epoque/"
+            },
+            {
+              "label": "Concert - Aigle Orchestra",
+              "detail": "Eglise cath.-rom. d'Aigle, Aigle",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-aigle-orchestra/"
+            },
+            {
+              "label": "Le Tour d'Écrou - opéra",
+              "detail": "Opéra de Lausanne, Lausanne",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-tour-decrou-opera/"
+            },
+            {
+              "label": "Stand up Comedy in broken English - Victor Patrascan",
               "detail": "Lausanne",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-journee-mondiale-du-faux-timbre-dartiste/"
-            },
-            {
-              "label": "Gala Stand Up - Montreux Comedy 2026",
-              "detail": "Théâtre de Beaulieu, Lausanne — ongoing, last day: 15 November 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gala-stand-up-montreux-comedy-2026/"
-            },
-            {
-              "label": "Montreux Art Gallery",
-              "detail": "MAG – Montreux Art Gallery, Montreux — ongoing, last day: 15 November 2026",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/evenements/montreux/montreux-art-gallery-mag_AJFLXN1"
-            },
-            {
-              "label": "Montreux Comedy",
-              "detail": "Montreux Comedy Festival, Montreux — ongoing, last day: 22 November 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy/"
-            },
-            {
-              "label": "Montreux Comedy Festival",
-              "detail": "Théâtre de Beaulieu, Lausanne — ongoing, last day: 22 November 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy-festival/"
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stand-up-comedy-in-broken-english-victor-patrascan-2/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -251,7 +251,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -273,7 +273,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "de": {
       "canton": "VD",
@@ -283,7 +283,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "75",
+          "value": "90",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -294,69 +294,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "KALIKA (FR) + FANCY DOLCY (FR)",
-              "detail": "Losanna, Lausanne",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kalika-fr-support/"
+              "label": "Fronda – Cialoma, Geschichten vom Meer und vieles mehr…",
+              "detail": "Théâtre de l'Oxymore",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/cully/fronda-cialoma-geschichten-vom-meer-und-vieles-mehr_AMiLNWe"
             },
             {
-              "label": "KALIKA (FR) + SUPPORT",
-              "detail": "Le Romandie",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/kalika-fr-support_AmABReg"
+              "label": "GIOIA CANTAR Vokal- und Instrumentalensemble",
+              "detail": "Temple évang.-réf. de St-Paul",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/events/music/villeneuve-vd/gioia-cantar-vocal-and-instrumental-ensemble_Ai2GWLZ"
             },
             {
-              "label": "Ausstellung von Gemälden",
+              "label": "Scheherazade – Chor CSV & Orchester ORS OVS",
               "detail": "Vevey",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/painting-exhibition-1/"
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/scheherazade-csv-choir-ors-ovs-orchestras/"
             },
             {
-              "label": "Rota Fortunae - Les PCGB",
-              "detail": "Pavillon Naftule",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/rota-fortunae-les-pcgb_AQXS8Aa"
+              "label": "Scheherazade – Chor CSV & Orchester ORS OVS",
+              "detail": "Eglise évang.-réf. Saint-Martin, Vevey",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/evenements/musique/vevey/sheherazade-choeur-csv-und-orchestres-ors-ovs_AGBe1VG"
             },
             {
-              "label": "Tinten- und Färberrezepturen mit Nüssen, Efeu und Zwiebeln",
-              "detail": "Musée national suisse, Prangins",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/noci-edera-e-cipolle-ricette-per-inchiostri-e-tinture/"
+              "label": "Soirée entre copains : KaraOcook + Quizz",
+              "detail": "Captain Cook",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/soiree-entre-copains-karaocook-quizz_A6XGs5K"
             },
             {
-              "label": "Atelier \"Journée mondiale du faux timbre d'artiste\"",
+              "label": "Sonntagsmarkt in Rolle",
+              "detail": "Château de Rolle, Rolle",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/rolle/marche-dominical-de-rolle_AXZ7FHG"
+            },
+            {
+              "label": "En train historique, voyage au cœur de la Belle Époque",
+              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/en-train-historique-voyage-au-coeur-de-la-belle-epoque/"
+            },
+            {
+              "label": "Konzert - Orchestre d'Aigle",
+              "detail": "Eglise cath.-rom. d'Aigle, Aigle",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-aigle-orchestra/"
+            },
+            {
+              "label": "Le Tour d'Écrou - opéra",
+              "detail": "Opéra de Lausanne, Lausanne",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-tour-decrou-opera/"
+            },
+            {
+              "label": "Stand up Comedy in broken English - Victor Patrascan",
               "detail": "Lausanne",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-journee-mondiale-du-faux-timbre-dartiste/"
-            },
-            {
-              "label": "Gala Stand Up - Montreux Comedy 2026",
-              "detail": "Théâtre de Beaulieu, Lausanne — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gala-stand-up-montreux-comedy-2026/"
-            },
-            {
-              "label": "Montreux Art Gallery",
-              "detail": "MAG – Montreux Art Gallery, Montreux — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/evenements/montreux/montreux-art-gallery-mag_AJFLXN1"
-            },
-            {
-              "label": "Montreux Comedy",
-              "detail": "Montreux Comedy Festival, Montreux — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy/"
-            },
-            {
-              "label": "Montreux Comedy Festival",
-              "detail": "Théâtre de Beaulieu, Lausanne — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy-festival/"
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stand-up-comedy-in-broken-english-victor-patrascan-2/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -379,7 +379,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -401,7 +401,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "fr": {
       "canton": "VD",
@@ -411,7 +411,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "75",
+          "value": "90",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -422,69 +422,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "KALIKA (FR) + FANCY DOLCY (FR)",
-              "detail": "Losanna, Lausanne",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kalika-fr-support/"
+              "label": "Fronda – Cialoma: Contes de la Mer et plus encore…",
+              "detail": "Théâtre de l'Oxymore",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/cully/fronda-cialoma-geschichten-vom-meer-und-vieles-mehr_AMiLNWe"
             },
             {
-              "label": "KALIKA (FR) + SUPPORT",
-              "detail": "Le Romandie",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/kalika-fr-support_AmABReg"
+              "label": "Gioia Cantar - Ensemble vocal et instrumental",
+              "detail": "Temple évang.-réf. de St-Paul",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/events/music/villeneuve-vd/gioia-cantar-vocal-and-instrumental-ensemble_Ai2GWLZ"
             },
             {
-              "label": "René Blöchlinger, peintures et gravures",
+              "label": "Shéhérazade - Choeur CSV & Orchestres ORS OVS",
               "detail": "Vevey",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/painting-exhibition-1/"
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/scheherazade-csv-choir-ors-ovs-orchestras/"
             },
             {
-              "label": "Rota Fortunae - Les PCGB",
-              "detail": "Pavillon Naftule",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/rota-fortunae-les-pcgb_AQXS8Aa"
+              "label": "Shéhérazade - Choeur CSV & Orchestres ORS OVS",
+              "detail": "Eglise évang.-réf. Saint-Martin, Vevey",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/evenements/musique/vevey/sheherazade-choeur-csv-und-orchestres-ors-ovs_AGBe1VG"
             },
             {
-              "label": "Des noix, du lierre et des oignons: recettes d'encres et de teintures",
-              "detail": "Musée national suisse, Prangins",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/noci-edera-e-cipolle-ricette-per-inchiostri-e-tinture/"
+              "label": "Soirée entre copains : KaraOcook + Quizz",
+              "detail": "Captain Cook",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/soiree-entre-copains-karaocook-quizz_A6XGs5K"
             },
             {
-              "label": "Atelier \"Journée mondiale du faux timbre d'artiste\"",
+              "label": "Marché dominical de Rolle",
+              "detail": "Château de Rolle, Rolle",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/rolle/marche-dominical-de-rolle_AXZ7FHG"
+            },
+            {
+              "label": "En train historique, voyage au cœur de la Belle Époque",
+              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/en-train-historique-voyage-au-coeur-de-la-belle-epoque/"
+            },
+            {
+              "label": "Concert - Orchestre d'Aigle",
+              "detail": "Eglise cath.-rom. d'Aigle, Aigle",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-aigle-orchestra/"
+            },
+            {
+              "label": "Le Tour d'Écrou - opéra",
+              "detail": "Opéra de Lausanne, Lausanne",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-tour-decrou-opera/"
+            },
+            {
+              "label": "Stand up Comedy in broken English - Victor Patrascan",
               "detail": "Lausanne",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-journee-mondiale-du-faux-timbre-dartiste/"
-            },
-            {
-              "label": "Gala Stand Up - Montreux Comedy 2026",
-              "detail": "Théâtre de Beaulieu, Lausanne — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gala-stand-up-montreux-comedy-2026/"
-            },
-            {
-              "label": "Montreux Art Gallery",
-              "detail": "MAG – Montreux Art Gallery, Montreux — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/evenements/montreux/montreux-art-gallery-mag_AJFLXN1"
-            },
-            {
-              "label": "Montreux Comedy",
-              "detail": "Montreux Comedy Festival, Montreux — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy/"
-            },
-            {
-              "label": "Montreux Comedy Festival",
-              "detail": "Théâtre de Beaulieu, Lausanne — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/montreux-comedy-festival/"
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stand-up-comedy-in-broken-english-victor-patrascan-2/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -507,7 +507,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -529,7 +529,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     }
   }
 }

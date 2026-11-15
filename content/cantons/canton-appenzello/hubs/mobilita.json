@@ -4,17 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-11-13T16:35:44.669Z",
-  "contentHash": "485c23dfc8efbd2d6a55d9ca48e6355bf53cfa62a08348f900214ba1dce9b102",
+  "updatedAt": "2026-11-15T12:42:19.424Z",
+  "contentHash": "0a51a5ea44154aedc5ba4584b7b46deb8dd4bcae06187b271c44aecee3e1e4a9",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-13T02:11:53.904Z",
+      "updatedAt": "2026-11-15T07:16:43.252Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T22:54:56.926Z",
+      "updatedAt": "2026-11-14T21:43:27.949Z",
       "keyFacts": 0
     }
   ],
@@ -28,7 +28,7 @@
         {
           "label": "Cantieri attivi o imminenti",
           "value": "1",
-          "note": "segnalazioni aggiornate: 13 novembre 2026"
+          "note": "segnalazioni aggiornate: 15 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -45,7 +45,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-13T02:11:53.904Z"
+          "updatedAt": "2026-11-15T07:16:43.252Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -83,7 +83,7 @@
               "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/15102026-strassensperrung-gemeinde-urnaesch/"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -105,7 +105,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-13T16:35:44.669Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -116,7 +116,7 @@
         {
           "label": "Roadworks active or imminent",
           "value": "1",
-          "note": "reports as of 13 November 2026"
+          "note": "reports as of 15 November 2026"
         }
       ],
       "dataBlocks": [
@@ -133,7 +133,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-13T02:11:53.904Z"
+          "updatedAt": "2026-11-15T07:16:43.252Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -171,7 +171,7 @@
               "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/15102026-strassensperrung-gemeinde-urnaesch/"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -193,7 +193,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-13T16:35:44.669Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -204,7 +204,7 @@
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "1",
-          "note": "Meldungen vom 13. November 2026"
+          "note": "Meldungen vom 15. November 2026"
         }
       ],
       "dataBlocks": [
@@ -221,7 +221,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-13T02:11:53.904Z"
+          "updatedAt": "2026-11-15T07:16:43.252Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -259,7 +259,7 @@
               "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/15102026-strassensperrung-gemeinde-urnaesch/"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -281,7 +281,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-13T16:35:44.669Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -292,7 +292,7 @@
         {
           "label": "Chantiers actifs ou imminents",
           "value": "1",
-          "note": "signalements au 13 novembre 2026"
+          "note": "signalements au 15 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -309,7 +309,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-13T02:11:53.904Z"
+          "updatedAt": "2026-11-15T07:16:43.252Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -347,7 +347,7 @@
               "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/15102026-strassensperrung-gemeinde-urnaesch/"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -369,7 +369,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-13T16:35:44.669Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     }
   }
 }

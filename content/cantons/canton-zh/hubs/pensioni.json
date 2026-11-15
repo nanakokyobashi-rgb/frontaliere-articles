@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "pensioni",
-  "updatedAt": "2026-11-12T21:05:42.386Z",
-  "contentHash": "07a0590313bdfcc3f6ee50374245f25e0b515129a58ec6e9a7635950b62ed7e0",
+  "updatedAt": "2026-11-15T12:42:19.424Z",
+  "contentHash": "0b4eacadd0e6e236ae87e31f707a1cc20fdd20ca5bf8184aeb556ecab89e1ab1",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T14:02:55.343Z",
+      "updatedAt": "2026-11-14T21:43:27.949Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Zukunftstag 2026: Ein Blick hinter die Kulissen",
+              "date": "2026-11-13",
+              "url": "https://svazurich.ch/aktuell/aktuell/news/persoenlich/zukunftstag-2026-blick-hinter-die-kulissen.html"
+            },
+            {
               "label": "Höhere AHV/IV-Renten und EO-Anmeldung am Smartphone",
               "date": "2026-11-11",
               "url": "https://svazurich.ch/aktuell/aktuell/news/neuerungen/hoehere-ahv-iv-renten-und-eo-anmeldung-am-smartphone.html"
@@ -159,14 +164,9 @@
               "label": "BVK steht für Nachhaltigkeit",
               "date": "2026-09-10",
               "url": "https://bvk.ch/de/bvk-aktuell/detail/altes-haus-du-wirst-gebraucht"
-            },
-            {
-              "label": "This-Priis 2027: Eine Nomination, die Engagement sichtbar macht",
-              "date": "2026-08-31",
-              "url": "https://svazurich.ch/aktuell/aktuell/news/anlaesse/eine-nomination-die-engagement-sichtbar-macht.html"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -238,7 +238,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "en": {
       "canton": "ZH",
@@ -347,6 +347,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Zukunftstag 2026: Ein Blick hinter die Kulissen",
+              "date": "2026-11-13",
+              "url": "https://svazurich.ch/aktuell/aktuell/news/persoenlich/zukunftstag-2026-blick-hinter-die-kulissen.html"
+            },
+            {
               "label": "Höhere AHV/IV-Renten und EO-Anmeldung am Smartphone",
               "date": "2026-11-11",
               "url": "https://svazurich.ch/aktuell/aktuell/news/neuerungen/hoehere-ahv-iv-renten-und-eo-anmeldung-am-smartphone.html"
@@ -370,14 +375,9 @@
               "label": "BVK steht für Nachhaltigkeit",
               "date": "2026-09-10",
               "url": "https://bvk.ch/de/bvk-aktuell/detail/altes-haus-du-wirst-gebraucht"
-            },
-            {
-              "label": "This-Priis 2027: Eine Nomination, die Engagement sichtbar macht",
-              "date": "2026-08-31",
-              "url": "https://svazurich.ch/aktuell/aktuell/news/anlaesse/eine-nomination-die-engagement-sichtbar-macht.html"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -449,7 +449,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "de": {
       "canton": "ZH",
@@ -558,6 +558,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Zukunftstag 2026: Ein Blick hinter die Kulissen",
+              "date": "2026-11-13",
+              "url": "https://svazurich.ch/aktuell/aktuell/news/persoenlich/zukunftstag-2026-blick-hinter-die-kulissen.html"
+            },
+            {
               "label": "Höhere AHV/IV-Renten und EO-Anmeldung am Smartphone",
               "date": "2026-11-11",
               "url": "https://svazurich.ch/aktuell/aktuell/news/neuerungen/hoehere-ahv-iv-renten-und-eo-anmeldung-am-smartphone.html"
@@ -581,14 +586,9 @@
               "label": "BVK steht für Nachhaltigkeit",
               "date": "2026-09-10",
               "url": "https://bvk.ch/de/bvk-aktuell/detail/altes-haus-du-wirst-gebraucht"
-            },
-            {
-              "label": "This-Priis 2027: Eine Nomination, die Engagement sichtbar macht",
-              "date": "2026-08-31",
-              "url": "https://svazurich.ch/aktuell/aktuell/news/anlaesse/eine-nomination-die-engagement-sichtbar-macht.html"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -660,7 +660,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "fr": {
       "canton": "ZH",
@@ -769,6 +769,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Zukunftstag 2026: Ein Blick hinter die Kulissen",
+              "date": "2026-11-13",
+              "url": "https://svazurich.ch/aktuell/aktuell/news/persoenlich/zukunftstag-2026-blick-hinter-die-kulissen.html"
+            },
+            {
               "label": "Höhere AHV/IV-Renten und EO-Anmeldung am Smartphone",
               "date": "2026-11-11",
               "url": "https://svazurich.ch/aktuell/aktuell/news/neuerungen/hoehere-ahv-iv-renten-und-eo-anmeldung-am-smartphone.html"
@@ -792,14 +797,9 @@
               "label": "BVK steht für Nachhaltigkeit",
               "date": "2026-09-10",
               "url": "https://bvk.ch/de/bvk-aktuell/detail/altes-haus-du-wirst-gebraucht"
-            },
-            {
-              "label": "This-Priis 2027: Eine Nomination, die Engagement sichtbar macht",
-              "date": "2026-08-31",
-              "url": "https://svazurich.ch/aktuell/aktuell/news/anlaesse/eine-nomination-die-engagement-sichtbar-macht.html"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -871,7 +871,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     }
   }
 }

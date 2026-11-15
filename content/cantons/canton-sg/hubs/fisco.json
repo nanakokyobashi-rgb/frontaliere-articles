@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "fisco",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "499b88d16b390cce9b933c4342096d6ae4f597f11adcf2aaba80c3622b0a8234",
+  "updatedAt": "2026-11-15T12:42:19.424Z",
+  "contentHash": "0252a15c84923159cd11dbe6ba22d01bf072b8b939bb5eb56f0ccd79838b6b6b",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-14T21:43:27.949Z",
       "keyFacts": 0
     }
   ],
@@ -110,6 +110,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Liechtenstein und Zypern paraphieren ein Doppelbesteuerungsabkommen",
+              "date": "2026-11-12",
+              "url": "https://www.regierung.li/medienportal-medium/16182/235080/0/medienmitteilung"
+            },
+            {
               "label": "Die St.Galler Bevölkerung treibt mehr Sport",
               "date": "2026-10-19",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/die-st-galler-bevoelkerung-treibt-mehr-sport.html"
@@ -133,14 +138,9 @@
               "label": "Sportsymposium Bodensee 2026: Ernährung im Nachwuchssport im Fokus",
               "date": "2026-10-02",
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/sportsymposium-bodensee-2026--ernaehrung-im-nachwuchssport-im-fo.html"
-            },
-            {
-              "label": "Der Kanton St.Gallen war Gastgeber der Arge Alp-Sport-Koordinationssitzung",
-              "date": "2026-10-02",
-              "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -220,7 +220,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "en": {
       "canton": "SG",
@@ -308,6 +308,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Liechtenstein und Zypern paraphieren ein Doppelbesteuerungsabkommen",
+              "date": "2026-11-12",
+              "url": "https://www.regierung.li/medienportal-medium/16182/235080/0/medienmitteilung"
+            },
+            {
               "label": "Die St.Galler Bevölkerung treibt mehr Sport",
               "date": "2026-10-19",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/die-st-galler-bevoelkerung-treibt-mehr-sport.html"
@@ -331,14 +336,9 @@
               "label": "Sportsymposium Bodensee 2026: Ernährung im Nachwuchssport im Fokus",
               "date": "2026-10-02",
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/sportsymposium-bodensee-2026--ernaehrung-im-nachwuchssport-im-fo.html"
-            },
-            {
-              "label": "Der Kanton St.Gallen war Gastgeber der Arge Alp-Sport-Koordinationssitzung",
-              "date": "2026-10-02",
-              "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -418,7 +418,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "de": {
       "canton": "SG",
@@ -506,6 +506,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Liechtenstein und Zypern paraphieren ein Doppelbesteuerungsabkommen",
+              "date": "2026-11-12",
+              "url": "https://www.regierung.li/medienportal-medium/16182/235080/0/medienmitteilung"
+            },
+            {
               "label": "Die St.Galler Bevölkerung treibt mehr Sport",
               "date": "2026-10-19",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/die-st-galler-bevoelkerung-treibt-mehr-sport.html"
@@ -529,14 +534,9 @@
               "label": "Sportsymposium Bodensee 2026: Ernährung im Nachwuchssport im Fokus",
               "date": "2026-10-02",
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/sportsymposium-bodensee-2026--ernaehrung-im-nachwuchssport-im-fo.html"
-            },
-            {
-              "label": "Der Kanton St.Gallen war Gastgeber der Arge Alp-Sport-Koordinationssitzung",
-              "date": "2026-10-02",
-              "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -616,7 +616,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "fr": {
       "canton": "SG",
@@ -704,6 +704,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Liechtenstein und Zypern paraphieren ein Doppelbesteuerungsabkommen",
+              "date": "2026-11-12",
+              "url": "https://www.regierung.li/medienportal-medium/16182/235080/0/medienmitteilung"
+            },
+            {
               "label": "Die St.Galler Bevölkerung treibt mehr Sport",
               "date": "2026-10-19",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/die-st-galler-bevoelkerung-treibt-mehr-sport.html"
@@ -727,14 +732,9 @@
               "label": "Sportsymposium Bodensee 2026: Ernährung im Nachwuchssport im Fokus",
               "date": "2026-10-02",
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/sportsymposium-bodensee-2026--ernaehrung-im-nachwuchssport-im-fo.html"
-            },
-            {
-              "label": "Der Kanton St.Gallen war Gastgeber der Arge Alp-Sport-Koordinationssitzung",
-              "date": "2026-10-02",
-              "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -814,7 +814,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     }
   }
 }

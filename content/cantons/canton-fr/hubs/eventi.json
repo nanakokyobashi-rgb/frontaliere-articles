@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-11-14T15:15:31.434Z",
-  "contentHash": "c998159b6dc83f83f6af39238d31934a61e3d6f50f95e39930dbd227ba388345",
+  "updatedAt": "2026-11-15T12:42:19.424Z",
+  "contentHash": "0492ab8ac2f32e5b4b398b49c3be783d4057216ad24d8cbde124d94acfc021f1",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-13T04:23:25.174Z",
+      "updatedAt": "2026-11-15T06:24:39.723Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T22:54:56.926Z",
+      "updatedAt": "2026-11-14T21:43:27.949Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "36",
+          "value": "40",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,39 +38,15 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "3ème concert à l’abonnement : Danish String Quartet",
-              "detail": "Fribourg",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/3eme-concert-a-labonnement-danish-string-quartet/"
-            },
-            {
-              "label": "Berufs-Info-Métiers 2026 : à la découverte de plus de 60 professions !",
-              "detail": "Fribourg",
-              "date": "2026-11-14",
-              "url": "https://www.fr.ch/dfac/evenements/berufs-info-metiers-2026-a-la-decouverte-de-plus-de-60-professions"
-            },
-            {
-              "label": "Journée Portes Ouvertes 2026",
-              "detail": "Fribourg",
-              "date": "2026-11-14",
-              "url": "https://www.fr.ch/eikon/evenements/journee-portes-ouvertes-2026"
-            },
-            {
               "label": "The wedding fair",
-              "detail": "Salle polyvalente, Villaz",
-              "date": "2026-11-14",
+              "detail": "Salle polyvalente, Villaz — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/salon-du-mariage/"
             },
             {
-              "label": "Guided tour of Grangettes Church & tasting",
-              "detail": "Romont, Grangettes",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tour-of-grangettes-church-tasting/"
-            },
-            {
               "label": "Concert Ensemble vocal féminin ELLES en C",
-              "detail": "Elles en C",
-              "date": "2026-11-14",
+              "detail": "Elles en C — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-15",
               "url": "https://www.guidle.com/it/evenements/raiffeisen-memberplus/romont-fr/concert-ensemble-vocal-feminin-elles-en-c_AXP237G"
             },
             {
@@ -96,11 +72,35 @@
               "detail": "MIAM",
               "date": "2026-11-17",
               "url": "https://www.guidle.com/it/evenements/musique/fribourg/aubetoile-sound-bath_AGTkky5"
+            },
+            {
+              "label": "Avant la nuit – L’Oiseau de feu",
+              "detail": "Equilibre, Fribourg",
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/avant-la-nuit-loiseau-de-feu/"
+            },
+            {
+              "label": "Bien vivre dans les limites planétaires. Planifier la sobriété en Suisse",
+              "detail": "Fribourg",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bien-vivre-dans-les-limites-planetaires-planifier-la-sobriete-en-suisse/"
+            },
+            {
+              "label": "Pour qui tu te prends ?",
+              "detail": "Nuithonie, Villars-sur-Glâne",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pour-qui-tu-te-prends/"
+            },
+            {
+              "label": "Sonadores Big Band",
+              "detail": "La Spirale",
+              "date": "2026-11-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/fribourg/sonadores-big-band_AgY9cxR"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -133,7 +133,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +155,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "en": {
       "canton": "FR",
@@ -165,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "36",
+          "value": "40",
           "note": "from the site’s events calendar"
         }
       ],
@@ -176,39 +176,15 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "3ème concert à l’abonnement : Danish String Quartet",
-              "detail": "Fribourg",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/3eme-concert-a-labonnement-danish-string-quartet/"
-            },
-            {
-              "label": "Berufs-Info-Métiers 2026 : à la découverte de plus de 60 professions !",
-              "detail": "Fribourg",
-              "date": "2026-11-14",
-              "url": "https://www.fr.ch/dfac/evenements/berufs-info-metiers-2026-a-la-decouverte-de-plus-de-60-professions"
-            },
-            {
-              "label": "Journée Portes Ouvertes 2026",
-              "detail": "Fribourg",
-              "date": "2026-11-14",
-              "url": "https://www.fr.ch/eikon/evenements/journee-portes-ouvertes-2026"
-            },
-            {
               "label": "The wedding fair",
-              "detail": "Salle polyvalente, Villaz",
-              "date": "2026-11-14",
+              "detail": "Salle polyvalente, Villaz — ongoing, last day: 15 November 2026",
+              "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/salon-du-mariage/"
             },
             {
-              "label": "Guided tour of Grangettes Church & tasting",
-              "detail": "Romont, Grangettes",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tour-of-grangettes-church-tasting/"
-            },
-            {
               "label": "Concert Ensemble vocal féminin ELLES en C",
-              "detail": "Elles en C",
-              "date": "2026-11-14",
+              "detail": "Elles en C — ongoing, last day: 15 November 2026",
+              "date": "2026-11-15",
               "url": "https://www.guidle.com/it/evenements/raiffeisen-memberplus/romont-fr/concert-ensemble-vocal-feminin-elles-en-c_AXP237G"
             },
             {
@@ -234,11 +210,35 @@
               "detail": "MIAM",
               "date": "2026-11-17",
               "url": "https://www.guidle.com/it/evenements/musique/fribourg/aubetoile-sound-bath_AGTkky5"
+            },
+            {
+              "label": "Avant la nuit – L’Oiseau de feu",
+              "detail": "Equilibre, Fribourg",
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/avant-la-nuit-loiseau-de-feu/"
+            },
+            {
+              "label": "Bien vivre dans les limites planétaires. Planifier la sobriété en Suisse",
+              "detail": "Fribourg",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bien-vivre-dans-les-limites-planetaires-planifier-la-sobriete-en-suisse/"
+            },
+            {
+              "label": "Pour qui tu te prends ?",
+              "detail": "Nuithonie, Villars-sur-Glâne",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pour-qui-tu-te-prends/"
+            },
+            {
+              "label": "Sonadores Big Band",
+              "detail": "La Spirale",
+              "date": "2026-11-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/fribourg/sonadores-big-band_AgY9cxR"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -271,7 +271,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -293,7 +293,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "de": {
       "canton": "FR",
@@ -303,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "36",
+          "value": "40",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -314,39 +314,15 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "3ème concert à l’abonnement : Danish String Quartet",
-              "detail": "Fribourg",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/3eme-concert-a-labonnement-danish-string-quartet/"
-            },
-            {
-              "label": "Berufs-Info-Métiers 2026 : à la découverte de plus de 60 professions !",
-              "detail": "Fribourg",
-              "date": "2026-11-14",
-              "url": "https://www.fr.ch/dfac/evenements/berufs-info-metiers-2026-a-la-decouverte-de-plus-de-60-professions"
-            },
-            {
-              "label": "Journée Portes Ouvertes 2026",
-              "detail": "Fribourg",
-              "date": "2026-11-14",
-              "url": "https://www.fr.ch/eikon/evenements/journee-portes-ouvertes-2026"
-            },
-            {
               "label": "Die Hochzeitsmesse",
-              "detail": "Salle polyvalente, Villaz",
-              "date": "2026-11-14",
+              "detail": "Salle polyvalente, Villaz — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/salon-du-mariage/"
             },
             {
-              "label": "Führung durch die Kirche von Grangettes & Verkostung",
-              "detail": "Romont, Grangettes",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tour-of-grangettes-church-tasting/"
-            },
-            {
               "label": "Concert Ensemble vocal féminin ELLES en C",
-              "detail": "Elles en C",
-              "date": "2026-11-14",
+              "detail": "Elles en C — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-15",
               "url": "https://www.guidle.com/it/evenements/raiffeisen-memberplus/romont-fr/concert-ensemble-vocal-feminin-elles-en-c_AXP237G"
             },
             {
@@ -372,11 +348,35 @@
               "detail": "MIAM",
               "date": "2026-11-17",
               "url": "https://www.guidle.com/it/evenements/musique/fribourg/aubetoile-sound-bath_AGTkky5"
+            },
+            {
+              "label": "Avant la nuit – L’Oiseau de feu",
+              "detail": "Equilibre, Fribourg",
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/avant-la-nuit-loiseau-de-feu/"
+            },
+            {
+              "label": "Bien vivre dans les limites planétaires. Planifier la sobriété en Suisse",
+              "detail": "Fribourg",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bien-vivre-dans-les-limites-planetaires-planifier-la-sobriete-en-suisse/"
+            },
+            {
+              "label": "Pour qui tu te prends ?",
+              "detail": "Nuithonie, Villars-sur-Glâne",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pour-qui-tu-te-prends/"
+            },
+            {
+              "label": "Sonadores Big Band",
+              "detail": "La Spirale",
+              "date": "2026-11-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/fribourg/sonadores-big-band_AgY9cxR"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -409,7 +409,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -431,7 +431,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "fr": {
       "canton": "FR",
@@ -441,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "36",
+          "value": "40",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -452,39 +452,15 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "3ème concert à l’abonnement : Danish String Quartet",
-              "detail": "Fribourg",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/3eme-concert-a-labonnement-danish-string-quartet/"
-            },
-            {
-              "label": "Berufs-Info-Métiers 2026 : à la découverte de plus de 60 professions !",
-              "detail": "Fribourg",
-              "date": "2026-11-14",
-              "url": "https://www.fr.ch/dfac/evenements/berufs-info-metiers-2026-a-la-decouverte-de-plus-de-60-professions"
-            },
-            {
-              "label": "Journée Portes Ouvertes 2026",
-              "detail": "Fribourg",
-              "date": "2026-11-14",
-              "url": "https://www.fr.ch/eikon/evenements/journee-portes-ouvertes-2026"
-            },
-            {
               "label": "Salon du mariage",
-              "detail": "Salle polyvalente, Villaz",
-              "date": "2026-11-14",
+              "detail": "Salle polyvalente, Villaz — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/salon-du-mariage/"
             },
             {
-              "label": "Visite guidée de l’église de Grangettes & dégustation",
-              "detail": "Romont, Grangettes",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tour-of-grangettes-church-tasting/"
-            },
-            {
               "label": "Concert Ensemble vocal féminin ELLES en C",
-              "detail": "Elles en C",
-              "date": "2026-11-14",
+              "detail": "Elles en C — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-15",
               "url": "https://www.guidle.com/it/evenements/raiffeisen-memberplus/romont-fr/concert-ensemble-vocal-feminin-elles-en-c_AXP237G"
             },
             {
@@ -510,11 +486,35 @@
               "detail": "MIAM",
               "date": "2026-11-17",
               "url": "https://www.guidle.com/it/evenements/musique/fribourg/aubetoile-sound-bath_AGTkky5"
+            },
+            {
+              "label": "Avant la nuit – L’Oiseau de feu",
+              "detail": "Equilibre, Fribourg",
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/avant-la-nuit-loiseau-de-feu/"
+            },
+            {
+              "label": "Bien vivre dans les limites planétaires. Planifier la sobriété en Suisse",
+              "detail": "Fribourg",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bien-vivre-dans-les-limites-planetaires-planifier-la-sobriete-en-suisse/"
+            },
+            {
+              "label": "Pour qui tu te prends ?",
+              "detail": "Nuithonie, Villars-sur-Glâne",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pour-qui-tu-te-prends/"
+            },
+            {
+              "label": "Sonadores Big Band",
+              "detail": "La Spirale",
+              "date": "2026-11-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/fribourg/sonadores-big-band_AgY9cxR"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -547,7 +547,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -569,7 +569,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     }
   }
 }

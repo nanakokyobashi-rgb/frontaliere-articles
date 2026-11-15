@@ -4,12 +4,12 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "eventi",
-  "updatedAt": "2026-11-14T15:15:31.434Z",
-  "contentHash": "75604a0b647b755457a2af183d2a1f94a80fc262fcd24d6234d3f46e8e0fdb4b",
+  "updatedAt": "2026-11-15T12:42:19.424Z",
+  "contentHash": "12f687d990530c5bddd192f37144d1e17c469acca23e50afa06463fb102396f5",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-13T04:23:25.174Z",
+      "updatedAt": "2026-11-15T06:24:39.723Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "4",
+          "value": "5",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,15 +33,9 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Léopold Lemarchand",
-              "detail": "Vicques",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/leopold-lemarchand/"
-            },
-            {
               "label": "Résistance artistique",
               "detail": "Delémont — in corso, ultimo giorno: 21 novembre 2026",
-              "date": "2026-11-14",
+              "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
             },
             {
@@ -55,11 +49,23 @@
               "detail": "Vicques",
               "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bourvil-en-chanson/"
+            },
+            {
+              "label": "Monsieur Bosseigne chez la BFM",
+              "detail": "Saignelégier",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/monsieur-bosseigne-chez-la-bfm/"
+            },
+            {
+              "label": "STAGE DANSE DU TOURNOIEMENT 28 ET 29 NOVEMBRE",
+              "detail": "Stage de danse, Saignelégier",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/stage-danse-du-tournoiement-28-et-29-novembre/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/giura/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -87,7 +93,7 @@
           "url": "/eventi/giura/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "en": {
       "canton": "JU",
@@ -97,7 +103,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "4",
+          "value": "5",
           "note": "from the site’s events calendar"
         }
       ],
@@ -108,15 +114,9 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Léopold Lemarchand",
-              "detail": "Vicques",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/leopold-lemarchand/"
-            },
-            {
               "label": "Résistance artistique",
               "detail": "Delémont — ongoing, last day: 21 November 2026",
-              "date": "2026-11-14",
+              "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
             },
             {
@@ -130,11 +130,23 @@
               "detail": "Vicques",
               "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bourvil-en-chanson/"
+            },
+            {
+              "label": "Monsieur Bosseigne chez la BFM",
+              "detail": "Saignelégier",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/monsieur-bosseigne-chez-la-bfm/"
+            },
+            {
+              "label": "STAGE DANSE DU TOURNOIEMENT 28 ET 29 NOVEMBRE",
+              "detail": "Stage de danse, Saignelégier",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/stage-danse-du-tournoiement-28-et-29-novembre/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/jura/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -162,7 +174,7 @@
           "url": "/en/events/jura/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "de": {
       "canton": "JU",
@@ -172,7 +184,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "4",
+          "value": "5",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -183,15 +195,9 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Léopold Lemarchand",
-              "detail": "Vicques",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/leopold-lemarchand/"
-            },
-            {
               "label": "Résistance artistique",
               "detail": "Delémont — läuft, letzter Tag: 21. November 2026",
-              "date": "2026-11-14",
+              "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
             },
             {
@@ -205,11 +211,23 @@
               "detail": "Vicques",
               "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bourvil-en-chanson/"
+            },
+            {
+              "label": "Monsieur Bosseigne chez la BFM",
+              "detail": "Saignelégier",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/monsieur-bosseigne-chez-la-bfm/"
+            },
+            {
+              "label": "STAGE DANSE DU TOURNOIEMENT 28 ET 29 NOVEMBRE",
+              "detail": "Stage de danse, Saignelégier",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/stage-danse-du-tournoiement-28-et-29-novembre/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/jura/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -237,7 +255,7 @@
           "url": "/de/veranstaltungen/jura/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "fr": {
       "canton": "JU",
@@ -247,7 +265,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "4",
+          "value": "5",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -258,15 +276,9 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Léopold Lemarchand",
-              "detail": "Vicques",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/leopold-lemarchand/"
-            },
-            {
               "label": "Résistance artistique",
               "detail": "Delémont — en cours, dernier jour : 21 novembre 2026",
-              "date": "2026-11-14",
+              "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/resistance-artistique/"
             },
             {
@@ -280,11 +292,23 @@
               "detail": "Vicques",
               "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bourvil-en-chanson/"
+            },
+            {
+              "label": "Monsieur Bosseigne chez la BFM",
+              "detail": "Saignelégier",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/monsieur-bosseigne-chez-la-bfm/"
+            },
+            {
+              "label": "STAGE DANSE DU TOURNOIEMENT 28 ET 29 NOVEMBRE",
+              "detail": "Stage de danse, Saignelégier",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/stage-danse-du-tournoiement-28-et-29-novembre/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/jura/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -312,7 +336,7 @@
           "url": "/fr/evenements/jura/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     }
   }
 }

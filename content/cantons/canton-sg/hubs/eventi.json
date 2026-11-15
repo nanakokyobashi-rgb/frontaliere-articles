@@ -4,12 +4,12 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-11-14T15:15:31.434Z",
-  "contentHash": "4744ff7abcd0a90654a762892e5aa463147516e4d2eb260b81ab3f035dd76ee4",
+  "updatedAt": "2026-11-15T12:42:19.424Z",
+  "contentHash": "1b4b67f829203b557343dc6d072349827b76d42b0b6cb4637c4b6450a1cdd58f",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-13T04:23:25.174Z",
+      "updatedAt": "2026-11-15T06:24:39.723Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "78",
+          "value": "79",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Naturena: Adventsdekoration mit Schwemmholz",
-              "detail": "Oberschan, Wartau",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturena-adventsdekoration-mit-schwemmholz/"
+              "label": "Zwischen Himmel und Erde - 2 Chöre 50 Stimmen",
+              "detail": "Zuzwil, Zuzwil (SG)",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischen-himmel-und-erde-2-choere-50-stimmen-1/"
             },
             {
-              "label": "Skizzen und Portraits mit Kohle",
-              "detail": "Wil SG, Wil (SG)",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/skizzen-und-portraits-mit-kohle/"
+              "label": "Expedition Steinzeit - von Mammuts, Teenies & Meeresschnecken",
+              "detail": "St. Gallen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/expedition-steinzeit-von-mammuts-teenies-meeresschnecken/"
             },
             {
-              "label": "Adventsmarkt im LinthArt-Atelier mit Kerzen ziehen",
-              "detail": "LinthArt-Atelier, Weesen",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsmarkt-im-linthart-atelier-mit-kerzen-ziehen/"
+              "label": "Grenzgänge – Klangwelten zwischen Klassik, Jazz und Volksmusik",
+              "detail": "Kaffeehaus",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/st-gallen/grenzgaenge-klangwelten-zwischen-klassik-jazz-und-volksmusik_AKA8uCK"
+            },
+            {
+              "label": "Toccatawil",
+              "detail": "Röm.-kath. Stadtkirche St. Nikolaus",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/wil-sg/toccatawil_AHT3bJ5"
+            },
+            {
+              "label": "MANI MATTER Hommage \"Mys nächschte Lied\"",
+              "detail": "Schloss Rapperswil",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/rapperswil-sg/mani-matter-hommage-mys-naechschte-lied_AVQFArx"
+            },
+            {
+              "label": "SILENT NEIGHBOR",
+              "detail": "*ALTEFABRIK, Rapperswil-Jona",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/silent-neighbor/"
+            },
+            {
+              "label": "Two Dogs (CH / UK) Perronnord St.Gallen",
+              "detail": "Restaurant Perronnord",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/two-dogs-ch-uk-perronnord-stgallen_AQjUTVR"
             },
             {
               "label": "Chüeligurt herstellen",
-              "detail": "Alt St. Johann",
-              "date": "2026-11-14",
+              "detail": "Alt St. Johann — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/chueeligurt-herstellen/"
             },
             {
-              "label": "Erlebnis-Braukurs in der Brauerei Schützengarten",
-              "detail": "St. Gallen",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erlebnis-braukurs-in-der-brauerei-schuetzengarten/"
+              "label": "Grosse Führungen im Bergwerk Gonzen Sargans",
+              "detail": "Gonzen Bergwerk, Sargans — in corso, ultimo giorno: 12 dicembre 2026",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/sargans/oeffentliche-grosse-fuehrungen-im-bergwerk-gonzen-sargans_AEYXbgt"
             },
             {
-              "label": "Wild trifft Vegan",
-              "detail": "Wildhaus, Wildhaus-Alt St. Johann",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-trifft-vegan/"
-            },
-            {
-              "label": "Cena tra amici",
-              "detail": "Ristorante La Scala",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/events/music/rapperswil-sg/dinner-with-friends_AwbG1DS"
-            },
-            {
-              "label": "Sundaze",
-              "detail": "Musikbeiz Adler",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/sundaze_AKwYVJr"
-            },
-            {
-              "label": "Tonhallenkonzert",
-              "detail": "Tonhalle",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/tonhallenkonzert_AAQfgmf"
-            },
-            {
-              "label": "OLDIE‘S DISCO",
-              "detail": "Kalberhalle, Lichtensteig",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oldies-disco/"
+              "label": "Naturjodel und Jodellieder",
+              "detail": "Klangwelt Toggenburg — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-und-jodellieder-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/san-gallo/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "en": {
       "canton": "SG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "78",
+          "value": "79",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Naturena: Adventsdekoration mit Schwemmholz",
-              "detail": "Oberschan, Wartau",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturena-adventsdekoration-mit-schwemmholz/"
+              "label": "Zwischen Himmel und Erde - 2 Chöre 50 Stimmen",
+              "detail": "Zuzwil, Zuzwil (SG)",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischen-himmel-und-erde-2-choere-50-stimmen-1/"
             },
             {
-              "label": "Skizzen und Portraits mit Kohle",
-              "detail": "Wil SG, Wil (SG)",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/skizzen-und-portraits-mit-kohle/"
+              "label": "Expedition Steinzeit - von Mammuts, Teenies & Meeresschnecken",
+              "detail": "St. Gallen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/expedition-steinzeit-von-mammuts-teenies-meeresschnecken/"
             },
             {
-              "label": "Adventsmarkt im LinthArt-Atelier mit Kerzen ziehen",
-              "detail": "LinthArt-Atelier, Weesen",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsmarkt-im-linthart-atelier-mit-kerzen-ziehen/"
+              "label": "Grenzgänge – Klangwelten zwischen Klassik, Jazz und Volksmusik",
+              "detail": "Kaffeehaus",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/st-gallen/grenzgaenge-klangwelten-zwischen-klassik-jazz-und-volksmusik_AKA8uCK"
+            },
+            {
+              "label": "Toccatawil",
+              "detail": "Röm.-kath. Stadtkirche St. Nikolaus",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/wil-sg/toccatawil_AHT3bJ5"
+            },
+            {
+              "label": "MANI MATTER Hommage \"Mys nächschte Lied\"",
+              "detail": "Schloss Rapperswil",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/rapperswil-sg/mani-matter-hommage-mys-naechschte-lied_AVQFArx"
+            },
+            {
+              "label": "SILENT NEIGHBOR",
+              "detail": "*ALTEFABRIK, Rapperswil-Jona",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/silent-neighbor/"
+            },
+            {
+              "label": "Two Dogs (CH / UK) Perronnord St.Gallen",
+              "detail": "Restaurant Perronnord",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/two-dogs-ch-uk-perronnord-stgallen_AQjUTVR"
             },
             {
               "label": "Chüeligurt herstellen",
-              "detail": "Alt St. Johann",
-              "date": "2026-11-14",
+              "detail": "Alt St. Johann — ongoing, last day: 15 November 2026",
+              "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/chueeligurt-herstellen/"
             },
             {
-              "label": "Erlebnis-Braukurs in der Brauerei Schützengarten",
-              "detail": "St. Gallen",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erlebnis-braukurs-in-der-brauerei-schuetzengarten/"
+              "label": "Grosse Führungen im Bergwerk Gonzen Sargans",
+              "detail": "Gonzen Bergwerk, Sargans — ongoing, last day: 12 December 2026",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/sargans/oeffentliche-grosse-fuehrungen-im-bergwerk-gonzen-sargans_AEYXbgt"
             },
             {
-              "label": "Wild trifft Vegan",
-              "detail": "Wildhaus, Wildhaus-Alt St. Johann",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-trifft-vegan/"
-            },
-            {
-              "label": "Dinner with Friends",
-              "detail": "Ristorante La Scala",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/events/music/rapperswil-sg/dinner-with-friends_AwbG1DS"
-            },
-            {
-              "label": "Sundaze",
-              "detail": "Musikbeiz Adler",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/sundaze_AKwYVJr"
-            },
-            {
-              "label": "Tonhallenkonzert",
-              "detail": "Tonhalle",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/tonhallenkonzert_AAQfgmf"
-            },
-            {
-              "label": "OLDIE‘S DISCO",
-              "detail": "Kalberhalle, Lichtensteig",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oldies-disco/"
+              "label": "Naturjodel und Jodellieder",
+              "detail": "Klangwelt Toggenburg — ongoing, last day: 15 November 2026",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-und-jodellieder-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/st-gallen/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "de": {
       "canton": "SG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "78",
+          "value": "79",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Naturena: Adventsdekoration mit Schwemmholz",
-              "detail": "Oberschan, Wartau",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturena-adventsdekoration-mit-schwemmholz/"
+              "label": "Zwischen Himmel und Erde - 2 Chöre 50 Stimmen",
+              "detail": "Zuzwil, Zuzwil (SG)",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischen-himmel-und-erde-2-choere-50-stimmen-1/"
             },
             {
-              "label": "Skizzen und Portraits mit Kohle",
-              "detail": "Wil SG, Wil (SG)",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/skizzen-und-portraits-mit-kohle/"
+              "label": "Expedition Steinzeit - von Mammuts, Teenies & Meeresschnecken",
+              "detail": "St. Gallen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/expedition-steinzeit-von-mammuts-teenies-meeresschnecken/"
             },
             {
-              "label": "Adventsmarkt im LinthArt-Atelier mit Kerzen ziehen",
-              "detail": "LinthArt-Atelier, Weesen",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsmarkt-im-linthart-atelier-mit-kerzen-ziehen/"
+              "label": "Grenzgänge – Klangwelten zwischen Klassik, Jazz und Volksmusik",
+              "detail": "Kaffeehaus",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/st-gallen/grenzgaenge-klangwelten-zwischen-klassik-jazz-und-volksmusik_AKA8uCK"
+            },
+            {
+              "label": "Toccatawil",
+              "detail": "Röm.-kath. Stadtkirche St. Nikolaus",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/wil-sg/toccatawil_AHT3bJ5"
+            },
+            {
+              "label": "MANI MATTER Hommage \"Mys nächschte Lied\"",
+              "detail": "Schloss Rapperswil",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/rapperswil-sg/mani-matter-hommage-mys-naechschte-lied_AVQFArx"
+            },
+            {
+              "label": "SILENT NEIGHBOR",
+              "detail": "*ALTEFABRIK, Rapperswil-Jona",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/silent-neighbor/"
+            },
+            {
+              "label": "Two Dogs (CH / UK) Perronnord St.Gallen",
+              "detail": "Restaurant Perronnord",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/two-dogs-ch-uk-perronnord-stgallen_AQjUTVR"
             },
             {
               "label": "Chüeligurt herstellen",
-              "detail": "Alt St. Johann",
-              "date": "2026-11-14",
+              "detail": "Alt St. Johann — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/chueeligurt-herstellen/"
             },
             {
-              "label": "Erlebnis-Braukurs in der Brauerei Schützengarten",
-              "detail": "St. Gallen",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erlebnis-braukurs-in-der-brauerei-schuetzengarten/"
+              "label": "Grosse Führungen im Bergwerk Gonzen Sargans",
+              "detail": "Gonzen Bergwerk, Sargans — läuft, letzter Tag: 12. Dezember 2026",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/sargans/oeffentliche-grosse-fuehrungen-im-bergwerk-gonzen-sargans_AEYXbgt"
             },
             {
-              "label": "Wild trifft Vegan",
-              "detail": "Wildhaus, Wildhaus-Alt St. Johann",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-trifft-vegan/"
-            },
-            {
-              "label": "Dinner for Friends",
-              "detail": "Ristorante La Scala",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/events/music/rapperswil-sg/dinner-with-friends_AwbG1DS"
-            },
-            {
-              "label": "Sundaze",
-              "detail": "Musikbeiz Adler",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/sundaze_AKwYVJr"
-            },
-            {
-              "label": "Tonhallenkonzert",
-              "detail": "Tonhalle",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/tonhallenkonzert_AAQfgmf"
-            },
-            {
-              "label": "OLDIE‘S DISCO",
-              "detail": "Kalberhalle, Lichtensteig",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oldies-disco/"
+              "label": "Naturjodel und Jodellieder",
+              "detail": "Klangwelt Toggenburg — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-und-jodellieder-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/st-gallen/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "fr": {
       "canton": "SG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "78",
+          "value": "79",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Naturena: Adventsdekoration mit Schwemmholz",
-              "detail": "Oberschan, Wartau",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturena-adventsdekoration-mit-schwemmholz/"
+              "label": "Zwischen Himmel und Erde - 2 Chöre 50 Stimmen",
+              "detail": "Zuzwil, Zuzwil (SG)",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischen-himmel-und-erde-2-choere-50-stimmen-1/"
             },
             {
-              "label": "Skizzen et Portraits avec Kohle",
-              "detail": "Wil SG, Wil (SG)",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/skizzen-und-portraits-mit-kohle/"
+              "label": "Expedition Steinzeit - von Mammuts, Teenies & Meeresschnecken",
+              "detail": "St. Gallen",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/expedition-steinzeit-von-mammuts-teenies-meeresschnecken/"
             },
             {
-              "label": "Adventsmarkt im LinthArt-Atelier mit Kerzen ziehen",
-              "detail": "LinthArt-Atelier, Weesen",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsmarkt-im-linthart-atelier-mit-kerzen-ziehen/"
+              "label": "Grenzgänge – Klangwelten zwischen Klassik, Jazz und Volksmusik",
+              "detail": "Kaffeehaus",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/st-gallen/grenzgaenge-klangwelten-zwischen-klassik-jazz-und-volksmusik_AKA8uCK"
+            },
+            {
+              "label": "Toccatawil",
+              "detail": "Röm.-kath. Stadtkirche St. Nikolaus",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/wil-sg/toccatawil_AHT3bJ5"
+            },
+            {
+              "label": "MANI MATTER Hommage \"Mys nächschte Lied\"",
+              "detail": "Schloss Rapperswil",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/rapperswil-sg/mani-matter-hommage-mys-naechschte-lied_AVQFArx"
+            },
+            {
+              "label": "SILENT NEIGHBOR",
+              "detail": "*ALTEFABRIK, Rapperswil-Jona",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/silent-neighbor/"
+            },
+            {
+              "label": "Two Dogs (CH / UK) Perronnord St.Gallen",
+              "detail": "Restaurant Perronnord",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/two-dogs-ch-uk-perronnord-stgallen_AQjUTVR"
             },
             {
               "label": "Chüeligurt herstellen",
-              "detail": "Alt St. Johann",
-              "date": "2026-11-14",
+              "detail": "Alt St. Johann — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/chueeligurt-herstellen/"
             },
             {
-              "label": "Erlebnis-Braukurs in der Brauerei Schützengarten",
-              "detail": "St. Gallen",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erlebnis-braukurs-in-der-brauerei-schuetzengarten/"
+              "label": "Grosse Führungen im Bergwerk Gonzen Sargans",
+              "detail": "Gonzen Bergwerk, Sargans — en cours, dernier jour : 12 décembre 2026",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/sargans/oeffentliche-grosse-fuehrungen-im-bergwerk-gonzen-sargans_AEYXbgt"
             },
             {
-              "label": "Wild trifft Vegan",
-              "detail": "Wildhaus, Wildhaus-Alt St. Johann",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-trifft-vegan/"
-            },
-            {
-              "label": "Dîner entre amis",
-              "detail": "Ristorante La Scala",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/events/music/rapperswil-sg/dinner-with-friends_AwbG1DS"
-            },
-            {
-              "label": "Sundaze",
-              "detail": "Musikbeiz Adler",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/sundaze_AKwYVJr"
-            },
-            {
-              "label": "Tonhallenkonzert",
-              "detail": "Tonhalle",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/tonhallenkonzert_AAQfgmf"
-            },
-            {
-              "label": "OLDIE‘S DISCO",
-              "detail": "Kalberhalle, Lichtensteig",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oldies-disco/"
+              "label": "Naturjodel und Jodellieder",
+              "detail": "Klangwelt Toggenburg — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-und-jodellieder-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/saint-gall/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     }
   }
 }

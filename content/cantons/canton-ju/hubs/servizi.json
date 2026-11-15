@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-11-14T15:15:31.434Z",
-  "contentHash": "7f701f3d02aa7e27603f5dd0fa757af4272ffe56b157268597f70683759a28ea",
+  "updatedAt": "2026-11-15T12:42:19.424Z",
+  "contentHash": "edcf7521dd1e2dfb823c0750c2b0dfaa2ced31a000d905dcf2568d9393fb7166",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-13T02:54:02.035Z",
+      "updatedAt": "2026-11-15T07:57:15.762Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-11-15T06:51:41.323Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T22:54:56.926Z",
+      "updatedAt": "2026-11-14T21:43:27.949Z",
       "keyFacts": 0
     }
   ],
@@ -71,27 +76,41 @@
             {
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-14T17:30:00.000Z"
-            },
-            {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-15T09:00:00.000Z"
-            },
-            {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-15T17:30:00.000Z"
             },
             {
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-11-15T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-16T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-17T17:30:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-13T02:54:02.035Z"
+          "updatedAt": "2026-11-15T07:57:15.762Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Delémont",
+              "value": "7 °C",
+              "detail": "oggi da 6 a 14 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-15T06:51:41.323Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -119,7 +138,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -169,7 +188,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "en": {
       "canton": "JU",
@@ -218,27 +237,41 @@
             {
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-14T17:30:00.000Z"
-            },
-            {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-15T09:00:00.000Z"
-            },
-            {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-15T17:30:00.000Z"
             },
             {
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-11-15T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-16T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-17T17:30:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-13T02:54:02.035Z"
+          "updatedAt": "2026-11-15T07:57:15.762Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Delémont",
+              "value": "7 °C",
+              "detail": "today from 6 to 14 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-15T06:51:41.323Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -266,7 +299,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -312,7 +345,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "de": {
       "canton": "JU",
@@ -361,27 +394,41 @@
             {
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-14T17:30:00.000Z"
-            },
-            {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-15T09:00:00.000Z"
-            },
-            {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-15T17:30:00.000Z"
             },
             {
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-11-15T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-16T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-17T17:30:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-13T02:54:02.035Z"
+          "updatedAt": "2026-11-15T07:57:15.762Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Delémont",
+              "value": "7 °C",
+              "detail": "heute 6 bis 14 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-15T06:51:41.323Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -409,7 +456,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -455,7 +502,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "fr": {
       "canton": "JU",
@@ -504,27 +551,41 @@
             {
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-14T17:30:00.000Z"
-            },
-            {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-15T09:00:00.000Z"
-            },
-            {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
               "date": "2026-11-15T17:30:00.000Z"
             },
             {
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-11-15T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-16T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-17T17:30:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-13T02:54:02.035Z"
+          "updatedAt": "2026-11-15T07:57:15.762Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Delémont",
+              "value": "7 °C",
+              "detail": "aujourd’hui de 6 à 14 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-15T06:51:41.323Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -552,7 +613,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -594,7 +655,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     }
   }
 }

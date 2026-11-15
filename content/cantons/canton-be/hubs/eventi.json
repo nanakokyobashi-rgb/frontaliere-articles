@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-11-14T15:15:31.434Z",
-  "contentHash": "3f91e30838d988864df248c6a880929a836f83e4480a3d341fc7c5e738ef3f89",
+  "updatedAt": "2026-11-15T12:42:19.424Z",
+  "contentHash": "c299f6bafb26b4d6207336c5c6d708a5fdcaa3a4aafe225fc93eb1da35658652",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-13T04:23:25.174Z",
+      "updatedAt": "2026-11-15T06:24:39.723Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "183",
+          "value": "179",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Adventsmarkt Detligen",
-              "detail": "Detligen, Radelfingen",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-detligen/"
+              "label": "Open Take Club - Actake",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/open-take-club-actake/"
             },
             {
-              "label": "Serata Oldies ad Aarwangen Sabato 14 novembre 2026",
-              "detail": "Aarwangen",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/serata-oldies-ad-aarwangen-sabato-14-novembre-2026/"
+              "label": "Prof. Nicola Gess / Dr. Lisz Hirn",
+              "detail": "Farelhaus, Biel/Bienne",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/prof-nicola-gess-dr-lisz-hirn/"
             },
             {
-              "label": "Internationales Flag Football Turnier: Capital Winter Classics",
-              "detail": "Sportplatz Bodenweid",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/internationales-flag-football-turnier-capital-winter-classics/"
+              "label": "Walter und Christine Blatti im Schlosskeller Interlaken",
+              "detail": "Schlosskeller Interlaken, Interlaken",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/interlaken/walter-und-christine-blatti-im-schlosskeller-interlaken_AZBLx6t"
             },
             {
-              "label": "Yodels and Polyphonies of the Baka People – a Workshop with Su Hart",
+              "label": "Prof. Philipp Hübl: „Die Wahrheit und ihre Feinde“",
+              "detail": "Farelhaus, Biel/Bienne",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/prof-philipp-huebl-die-wahrheit-und-ihre-feinde/"
+            },
+            {
+              "label": "Bolschoi Don Kosaken 2026",
+              "detail": "Französische Kirche",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/bolschoi-don-kosaken-2026_AmuAxEj"
+            },
+            {
+              "label": "Der Nussknacker - International Ballet Company Italia",
+              "detail": "Kursaal Bern, Bern",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/der-nussknacker-international-ballet-company-italia_AJSK9wB"
+            },
+            {
+              "label": "Rundgang für Gross und Klein",
+              "detail": "Thun",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rundgang-fuer-gross-und-klein/"
+            },
+            {
+              "label": "Berner Musikkollegium – Orchesterfarben und Klangfülle",
+              "detail": "Gemeindezentrum Lötschberg, Spiez",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/spiez/berner-musikkollegium-herbstkonzert-2026_Aer9FYq"
+            },
+            {
+              "label": "Voilà ce que je peux dire de mieux sur la musique !",
               "detail": "Biel",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/yodels-and-polyphonies-of-the-baka-people-a-workshop-with-su-hart/"
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/voila-ce-que-je-peux-dire-de-mieux-sur-la-musique/"
             },
             {
-              "label": "14. Weihnachtsausstellung",
-              "detail": "Meiringen-Hasliberg, Hasliberg",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/14-weihnachtsausstellung/"
-            },
-            {
-              "label": "«Murten, ausgeschlachtet.» – Panorama-Touren",
-              "detail": "Historisches Museum Bern, Bern",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/murten-ausgeschlachtet-panorama-touren_AjsxJm7"
-            },
-            {
-              "label": "Adventskranz Work-Shop/ Kurs inkl. Prosecco und Tea Time",
-              "detail": "Bern",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-workshop-kurs-inkl-prosecco-und-tea-time/"
-            },
-            {
-              "label": "Sophie Ullrich – Hot Sauce in My Eyes",
-              "detail": "Galerie da Mihi",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/sophie-ullrich-hot-sauce-in-my-eyes_AxYxnJp"
-            },
-            {
-              "label": "Erlebniskurs: Bushcraft · Survival & Permakultur",
-              "detail": "Spiez",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erlebniskurs-bushcraft-survival-permakultur/"
-            },
-            {
-              "label": "BYO-MOVIE-RAFFLE. Die Film-Lotterie mit der KMG",
-              "detail": "Bern",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/byomovieraffle-die-filmlotterie-mit-der-kmg-sa-141126-kellerkino-bern/"
+              "label": "The Two",
+              "detail": "Sportzentrum Frutigen, Frutigen",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/events/music/frutigen/the-two_AFstQNc"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "183",
+          "value": "179",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Adventsmarkt Detligen",
-              "detail": "Detligen, Radelfingen",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-detligen/"
+              "label": "Open Take Club - Actake",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/open-take-club-actake/"
             },
             {
-              "label": "Oldies Night in Aarwangen Saturday, November 14, 2026",
-              "detail": "Aarwangen",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/serata-oldies-ad-aarwangen-sabato-14-novembre-2026/"
+              "label": "Prof. Nicola Gess / Dr. Lisz Hirn",
+              "detail": "Farelhaus, Biel/Bienne",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/prof-nicola-gess-dr-lisz-hirn/"
             },
             {
-              "label": "Internationales Flag Football Turnier: Capital Winter Classics",
-              "detail": "Sportplatz Bodenweid",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/internationales-flag-football-turnier-capital-winter-classics/"
+              "label": "Walter and Christine Blatti at Schlosskeller Interlaken",
+              "detail": "Schlosskeller Interlaken, Interlaken",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/interlaken/walter-und-christine-blatti-im-schlosskeller-interlaken_AZBLx6t"
             },
             {
-              "label": "Yodels and Polyphonies of the Baka People – a Workshop with Su Hart",
+              "label": "Prof. Philipp Hübl: „Die Wahrheit und ihre Feinde“",
+              "detail": "Farelhaus, Biel/Bienne",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/prof-philipp-huebl-die-wahrheit-und-ihre-feinde/"
+            },
+            {
+              "label": "Bolschoi Don Kosaken 2026",
+              "detail": "Französische Kirche",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/bolschoi-don-kosaken-2026_AmuAxEj"
+            },
+            {
+              "label": "Der Nussknacker - International Ballet Company Italy",
+              "detail": "Kursaal Bern, Bern",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/der-nussknacker-international-ballet-company-italia_AJSK9wB"
+            },
+            {
+              "label": "Rundgang für Gross und Klein",
+              "detail": "Thun",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rundgang-fuer-gross-und-klein/"
+            },
+            {
+              "label": "Berner Musikkollegium – Orchesterfarben und Klangfülle",
+              "detail": "Gemeindezentrum Lötschberg, Spiez",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/spiez/berner-musikkollegium-herbstkonzert-2026_Aer9FYq"
+            },
+            {
+              "label": "Voilà ce que je peux dire de mieux sur la musique !",
               "detail": "Biel",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/yodels-and-polyphonies-of-the-baka-people-a-workshop-with-su-hart/"
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/voila-ce-que-je-peux-dire-de-mieux-sur-la-musique/"
             },
             {
-              "label": "14. Weihnachtsausstellung",
-              "detail": "Meiringen-Hasliberg, Hasliberg",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/14-weihnachtsausstellung/"
-            },
-            {
-              "label": "«Murten, ausgeschlachtet.» – Panorama-Touren",
-              "detail": "Historisches Museum Bern, Bern",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/murten-ausgeschlachtet-panorama-touren_AjsxJm7"
-            },
-            {
-              "label": "Adventskranz Work-Shop/ Kurs inkl. Prosecco und Tea Time",
-              "detail": "Bern",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-workshop-kurs-inkl-prosecco-und-tea-time/"
-            },
-            {
-              "label": "Sophie Ullrich – Hot Sauce in My Eyes",
-              "detail": "Galerie da Mihi",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/sophie-ullrich-hot-sauce-in-my-eyes_AxYxnJp"
-            },
-            {
-              "label": "Erlebniskurs: Bushcraft · Survival & Permakultur",
-              "detail": "Spiez",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erlebniskurs-bushcraft-survival-permakultur/"
-            },
-            {
-              "label": "BYO-MOVIE-RAFFLE. Die Film-Lotterie mit der KMG",
-              "detail": "Bern",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/byomovieraffle-die-filmlotterie-mit-der-kmg-sa-141126-kellerkino-bern/"
+              "label": "The Two",
+              "detail": "Sportzentrum Frutigen, Frutigen",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/events/music/frutigen/the-two_AFstQNc"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "183",
+          "value": "179",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,69 +279,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Adventsmarkt Detligen",
-              "detail": "Detligen, Radelfingen",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-detligen/"
+              "label": "Open Take Club - Actake",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/open-take-club-actake/"
             },
             {
-              "label": "Oldies Night Aarwangen Samstag ,14.November 2026",
-              "detail": "Aarwangen",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/serata-oldies-ad-aarwangen-sabato-14-novembre-2026/"
+              "label": "Prof. Nicola Gess / Dr. Lisz Hirn",
+              "detail": "Farelhaus, Biel/Bienne",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/prof-nicola-gess-dr-lisz-hirn/"
             },
             {
-              "label": "Internationales Flag Football Turnier: Capital Winter Classics",
-              "detail": "Sportplatz Bodenweid",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/internationales-flag-football-turnier-capital-winter-classics/"
+              "label": "⑤alter und Christine Blatti im Schlosskeller Interlaken",
+              "detail": "Schlosskeller Interlaken, Interlaken",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/interlaken/walter-und-christine-blatti-im-schlosskeller-interlaken_AZBLx6t"
             },
             {
-              "label": "Yodels and Polyphonies of the Baka People – a Workshop with Su Hart",
+              "label": "Prof. Philipp Hübl: „Die Wahrheit und ihre Feinde“",
+              "detail": "Farelhaus, Biel/Bienne",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/prof-philipp-huebl-die-wahrheit-und-ihre-feinde/"
+            },
+            {
+              "label": "Bolschoi Don Kosaken 2026",
+              "detail": "Französische Kirche",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/bolschoi-don-kosaken-2026_AmuAxEj"
+            },
+            {
+              "label": "Der Nussknacker – Internationale Ballettkompanie Italia",
+              "detail": "Kursaal Bern, Bern",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/der-nussknacker-international-ballet-company-italia_AJSK9wB"
+            },
+            {
+              "label": "Rundgang für Gross und Klein",
+              "detail": "Thun",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rundgang-fuer-gross-und-klein/"
+            },
+            {
+              "label": "Berner Musikkollegium – Orchesterfarben und Klangfülle",
+              "detail": "Gemeindezentrum Lötschberg, Spiez",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/spiez/berner-musikkollegium-herbstkonzert-2026_Aer9FYq"
+            },
+            {
+              "label": "Voilà ce que je peux dire de mieux sur la musique !",
               "detail": "Biel",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/yodels-and-polyphonies-of-the-baka-people-a-workshop-with-su-hart/"
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/voila-ce-que-je-peux-dire-de-mieux-sur-la-musique/"
             },
             {
-              "label": "14. Weihnachtsausstellung",
-              "detail": "Meiringen-Hasliberg, Hasliberg",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/14-weihnachtsausstellung/"
-            },
-            {
-              "label": "«Murten, ausgeschlachtet.» – Panorama-Touren",
-              "detail": "Historisches Museum Bern, Bern",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/murten-ausgeschlachtet-panorama-touren_AjsxJm7"
-            },
-            {
-              "label": "Adventskranz Work-Shop/ Kurs inkl. Prosecco und Tea Time",
-              "detail": "Bern",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-workshop-kurs-inkl-prosecco-und-tea-time/"
-            },
-            {
-              "label": "Sophie Ullrich – Hot Sauce in My Eyes",
-              "detail": "Galerie da Mihi",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/sophie-ullrich-hot-sauce-in-my-eyes_AxYxnJp"
-            },
-            {
-              "label": "Erlebniskurs: Bushcraft · Survival & Permakultur",
-              "detail": "Spiez",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erlebniskurs-bushcraft-survival-permakultur/"
-            },
-            {
-              "label": "BYO-MOVIE-RAFFLE. Die Film-Lotterie mit der KMG",
-              "detail": "Bern",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/byomovieraffle-die-filmlotterie-mit-der-kmg-sa-141126-kellerkino-bern/"
+              "label": "The Two",
+              "detail": "Sportzentrum Frutigen, Frutigen",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/events/music/frutigen/the-two_AFstQNc"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "183",
+          "value": "179",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,69 +402,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Adventsmarkt Detligen",
-              "detail": "Detligen, Radelfingen",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-detligen/"
+              "label": "Open Take Club - Actake",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/open-take-club-actake/"
             },
             {
-              "label": "Soirée Oldies à Aarwangen Samedi 14 novembre 2026",
-              "detail": "Aarwangen",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/serata-oldies-ad-aarwangen-sabato-14-novembre-2026/"
+              "label": "Prof. Nicola Gess / Dr. Lisz Hirn",
+              "detail": "Farelhaus, Biel/Bienne",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/prof-nicola-gess-dr-lisz-hirn/"
             },
             {
-              "label": "Internationales Flag Football Turnier: Capital Winter Classics",
-              "detail": "Sportplatz Bodenweid",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/internationales-flag-football-turnier-capital-winter-classics/"
+              "label": "Walter et Christine Blatti au Schlosskeller Interlaken",
+              "detail": "Schlosskeller Interlaken, Interlaken",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/interlaken/walter-und-christine-blatti-im-schlosskeller-interlaken_AZBLx6t"
             },
             {
-              "label": "Yodels and Polyphonies of the Baka People – a Workshop with Su Hart",
+              "label": "Prof. Philipp Hübl: „Die Wahrheit und ihre Feinde“",
+              "detail": "Farelhaus, Biel/Bienne",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/prof-philipp-huebl-die-wahrheit-und-ihre-feinde/"
+            },
+            {
+              "label": "Bolschoi Don Kosaken 2026",
+              "detail": "Französische Kirche",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/bolschoi-don-kosaken-2026_AmuAxEj"
+            },
+            {
+              "label": "Der Nussknacker - Compagnie internationale de ballet d’Italie",
+              "detail": "Kursaal Bern, Bern",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/der-nussknacker-international-ballet-company-italia_AJSK9wB"
+            },
+            {
+              "label": "Rundgang für Gross und Klein",
+              "detail": "Thun",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rundgang-fuer-gross-und-klein/"
+            },
+            {
+              "label": "Berner Musikkollegium – Orchesterfarben und Klangfülle",
+              "detail": "Gemeindezentrum Lötschberg, Spiez",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/spiez/berner-musikkollegium-herbstkonzert-2026_Aer9FYq"
+            },
+            {
+              "label": "Voilà ce que je peux dire de mieux sur la musique !",
               "detail": "Biel",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/yodels-and-polyphonies-of-the-baka-people-a-workshop-with-su-hart/"
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/voila-ce-que-je-peux-dire-de-mieux-sur-la-musique/"
             },
             {
-              "label": "14. Weihnachtsausstellung",
-              "detail": "Meiringen-Hasliberg, Hasliberg",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/14-weihnachtsausstellung/"
-            },
-            {
-              "label": "«Murten, ausgeschlachtet.» – Panorama-Touren",
-              "detail": "Historisches Museum Bern, Bern",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/murten-ausgeschlachtet-panorama-touren_AjsxJm7"
-            },
-            {
-              "label": "Adventskranz Work-Shop/ Kurs inkl. Prosecco und Tea Time",
-              "detail": "Bern",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-workshop-kurs-inkl-prosecco-und-tea-time/"
-            },
-            {
-              "label": "Sophie Ullrich – Hot Sauce in My Eyes",
-              "detail": "Galerie da Mihi",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bern/sophie-ullrich-hot-sauce-in-my-eyes_AxYxnJp"
-            },
-            {
-              "label": "Erlebniskurs: Bushcraft · Survival & Permakultur",
-              "detail": "Spiez",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erlebniskurs-bushcraft-survival-permakultur/"
-            },
-            {
-              "label": "BYO-MOVIE-RAFFLE. Die Film-Lotterie mit der KMG",
-              "detail": "Bern",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/byomovieraffle-die-filmlotterie-mit-der-kmg-sa-141126-kellerkino-bern/"
+              "label": "The Two",
+              "detail": "Sportzentrum Frutigen, Frutigen",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/events/music/frutigen/the-two_AFstQNc"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     }
   }
 }

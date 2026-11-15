@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "eventi",
-  "updatedAt": "2026-11-14T15:15:31.434Z",
-  "contentHash": "ee3521e000f595995bf700f2be7e4ad34ce502cbc516471e71a73f0196de60ab",
+  "updatedAt": "2026-11-15T12:42:19.424Z",
+  "contentHash": "563085c4f641cb5967fcefb11d7ad13d579ea7ddcc791fdbb2321030ea18c8c0",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-13T04:23:25.174Z",
+      "updatedAt": "2026-11-15T06:24:39.723Z",
       "keyFacts": 1
     }
   ],
@@ -33,18 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Workshop, Räuchern mit Heilpflanzen",
-              "detail": "Haslistrasse 21, Steinen",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-raeuchern-mit-heilpflanzen/"
-            },
-            {
-              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
-              "detail": "Schwyz — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
-            },
-            {
               "label": "Poesiekonzert",
               "detail": "Brunnen",
               "date": "2026-11-16",
@@ -85,11 +73,23 @@
               "detail": "Erlebnisregion Mythen",
               "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsmarkt-am-see-brunnen/"
+            },
+            {
+              "label": "12. Rockabilly/Rock'n'Roll Festival 2026",
+              "detail": "District 28, Wangen (SZ)",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/12-rockabillyrocknroll-festival-2026/"
+            },
+            {
+              "label": "Jahreskonzert Blasorchester FM Bennau",
+              "detail": "Einsiedeln",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jahreskonzert-blasorchester-fm-bennau/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/svitto/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -111,7 +111,7 @@
           "url": "/eventi/svitto/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "en": {
       "canton": "SZ",
@@ -131,18 +131,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Workshop, Räuchern mit Heilpflanzen",
-              "detail": "Haslistrasse 21, Steinen",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-raeuchern-mit-heilpflanzen/"
-            },
-            {
-              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
-              "detail": "Schwyz — ongoing, last day: 14 November 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
-            },
             {
               "label": "Poesiekonzert",
               "detail": "Brunnen",
@@ -184,11 +172,23 @@
               "detail": "Erlebnisregion Mythen",
               "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsmarkt-am-see-brunnen/"
+            },
+            {
+              "label": "12. Rockabilly/Rock'n'Roll Festival 2026",
+              "detail": "District 28, Wangen (SZ)",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/12-rockabillyrocknroll-festival-2026/"
+            },
+            {
+              "label": "Jahreskonzert Blasorchester FM Bennau",
+              "detail": "Einsiedeln",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jahreskonzert-blasorchester-fm-bennau/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schwyz/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -210,7 +210,7 @@
           "url": "/en/events/schwyz/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "de": {
       "canton": "SZ",
@@ -230,18 +230,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Workshop, Räuchern mit Heilpflanzen",
-              "detail": "Haslistrasse 21, Steinen",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-raeuchern-mit-heilpflanzen/"
-            },
-            {
-              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
-              "detail": "Schwyz — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
-            },
             {
               "label": "Poesiekonzert",
               "detail": "Brunnen",
@@ -283,11 +271,23 @@
               "detail": "Erlebnisregion Mythen",
               "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsmarkt-am-see-brunnen/"
+            },
+            {
+              "label": "12. Rockabilly/Rock'n'Roll Festival 2026",
+              "detail": "District 28, Wangen (SZ)",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/12-rockabillyrocknroll-festival-2026/"
+            },
+            {
+              "label": "Jahreskonzert Blasorchester FM Bennau",
+              "detail": "Einsiedeln",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jahreskonzert-blasorchester-fm-bennau/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schwyz/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -309,7 +309,7 @@
           "url": "/de/veranstaltungen/schwyz/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "fr": {
       "canton": "SZ",
@@ -329,18 +329,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Workshop, Räuchern mit Heilpflanzen",
-              "detail": "Haslistrasse 21, Steinen",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-raeuchern-mit-heilpflanzen/"
-            },
-            {
-              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
-              "detail": "Schwyz — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
-            },
             {
               "label": "Poesiekonzert",
               "detail": "Brunnen",
@@ -382,11 +370,23 @@
               "detail": "Erlebnisregion Mythen",
               "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsmarkt-am-see-brunnen/"
+            },
+            {
+              "label": "12. Rockabilly/Rock'n'Roll Festival 2026",
+              "detail": "District 28, Wangen (SZ)",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/12-rockabillyrocknroll-festival-2026/"
+            },
+            {
+              "label": "Jahreskonzert Blasorchester FM Bennau",
+              "detail": "Einsiedeln",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jahreskonzert-blasorchester-fm-bennau/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schwytz/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -408,7 +408,7 @@
           "url": "/fr/evenements/schwytz/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     }
   }
 }

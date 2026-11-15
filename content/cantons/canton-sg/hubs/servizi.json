@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-11-14T15:15:31.434Z",
-  "contentHash": "39ea2cc409e80081f702922cd950c5c4518abb3b5ffccbb24473c5fa5e7142c2",
+  "updatedAt": "2026-11-15T12:42:19.424Z",
+  "contentHash": "34d39430dee860adbdd141206e737ac0f2fa7aab4fc40ddb9973367e8f0755ee",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,8 +13,18 @@
       "keyFacts": 1
     },
     {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-15T06:26:36.869Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-11-15T06:51:41.323Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T22:54:56.926Z",
+      "updatedAt": "2026-11-14T21:43:27.949Z",
       "keyFacts": 0
     }
   ],
@@ -30,6 +40,11 @@
           "value": "577,10 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "10",
+          "note": "offerta mediana 520 CHF"
         }
       ],
       "dataBlocks": [
@@ -59,10 +74,60 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "SG6135",
+              "value": "3050 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6709"
+            },
+            {
+              "label": "SG393333",
+              "value": "800 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6717"
+            },
+            {
+              "label": "SG10906",
+              "value": "700 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6710"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-11-15T06:26:36.869Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "2 °C",
+              "detail": "oggi da 0 a 10 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-15T06:51:41.323Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Freitag, 13.11.2026 Reformpartnerschaft, öffentliche Gesundheit, 1450 und Digitalisierung",
+              "date": "2026-11-13",
+              "url": "https://presse.vorarlberg.at/land/public/Reformpartnerschaft-ffentliche-Gesundheit-1450-und-Digitalisierung"
+            },
             {
               "label": "Donnerstag, 12.11.2026 Frauengesundheitstag 2026: Forschungsergebnisse wirksam in die Praxis bringen",
               "date": "2026-11-12",
@@ -87,14 +152,9 @@
               "label": "Regierung verabschiedet Bericht und Antrag zu einem umfassenden Reformpaket für das Gesundheitswesen",
               "date": "2026-11-03",
               "url": "https://www.regierung.li/medienportal-medium/16182/235059/0/medienmitteilung"
-            },
-            {
-              "label": "Runder Tisch Gesundheitswesen: Kostendämpfung und Versorgungssicherheit im Fokus",
-              "date": "2026-10-23",
-              "url": "https://www.regierung.li/medienportal-medium/16182/235011/0/medienmitteilung"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -129,16 +189,16 @@
           "date": "2026-08-27T05:45:51.936Z"
         },
         {
-          "title": "Costi asili nido e custodia nel Canton San Gallo",
-          "url": "/articoli-svizzera/costi-nidi-servizi-infanzia-canton-sg/",
-          "excerpt": "Guida alle rette per nidi, famiglie diurne e doposcuola nel Cantone di San Gallo: tariffe su reddito, sussidi comunali e sgravi fiscali.",
-          "date": "2026-09-12T02:05:29.896Z"
-        },
-        {
           "title": "Patente estera a San Gallo: conversione ed esami",
           "url": "/articoli-svizzera/patente-guida-san-gallo-conversione/",
           "excerpt": "Come convertire la patente straniera nel canton San Gallo: iter differenziato per paese UE/AELS e paesi terzi, documenti e ufficio competente.",
           "date": "2026-08-30T14:01:40.347Z"
+        },
+        {
+          "title": "Costi asili nido e custodia nel Canton San Gallo",
+          "url": "/articoli-svizzera/costi-nidi-servizi-infanzia-canton-sg/",
+          "excerpt": "Guida alle rette per nidi, famiglie diurne e doposcuola nel Cantone di San Gallo: tariffe su reddito, sussidi comunali e sgravi fiscali.",
+          "date": "2026-09-12T02:05:29.896Z"
         },
         {
           "title": "Permesso L nel Canton San Gallo: validità 12 mesi e regole di proroga",
@@ -174,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "en": {
       "canton": "SG",
@@ -187,6 +247,11 @@
           "value": "577.10 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "10",
+          "note": "typical bid 520 CHF"
         }
       ],
       "dataBlocks": [
@@ -216,10 +281,60 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "SG6135",
+              "value": "3,050 CHF",
+              "detail": "current bid",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6709"
+            },
+            {
+              "label": "SG393333",
+              "value": "800 CHF",
+              "detail": "current bid",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6717"
+            },
+            {
+              "label": "SG10906",
+              "value": "700 CHF",
+              "detail": "current bid",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6710"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-11-15T06:26:36.869Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "2 °C",
+              "detail": "today from 0 to 10 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-15T06:51:41.323Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Freitag, 13.11.2026 Reformpartnerschaft, öffentliche Gesundheit, 1450 und Digitalisierung",
+              "date": "2026-11-13",
+              "url": "https://presse.vorarlberg.at/land/public/Reformpartnerschaft-ffentliche-Gesundheit-1450-und-Digitalisierung"
+            },
             {
               "label": "Donnerstag, 12.11.2026 Frauengesundheitstag 2026: Forschungsergebnisse wirksam in die Praxis bringen",
               "date": "2026-11-12",
@@ -244,14 +359,9 @@
               "label": "Regierung verabschiedet Bericht und Antrag zu einem umfassenden Reformpaket für das Gesundheitswesen",
               "date": "2026-11-03",
               "url": "https://www.regierung.li/medienportal-medium/16182/235059/0/medienmitteilung"
-            },
-            {
-              "label": "Runder Tisch Gesundheitswesen: Kostendämpfung und Versorgungssicherheit im Fokus",
-              "date": "2026-10-23",
-              "url": "https://www.regierung.li/medienportal-medium/16182/235011/0/medienmitteilung"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -286,16 +396,16 @@
           "date": "2026-08-27T05:45:51.936Z"
         },
         {
-          "title": "Childcare and custody costs in the Canton of St. Gallen",
-          "url": "/en/swiss-articles/childcare-costs-daycare-canton-st-gallen/",
-          "excerpt": "Guide to fees for nurseries, day families and after-school in the Canton of St. Gallen: rates on income, municipal subsidies and tax reductions.",
-          "date": "2026-09-12T02:05:29.896Z"
-        },
-        {
           "title": "Foreign license in St. Gallen: conversion and examinations",
           "url": "/en/swiss-articles/driving-license-st-gallen-conversion/",
           "excerpt": "How to convert the foreign driver's license in the canton of St. Gallen: differentiated procedure by EU/EFTA country and third countries, documents and competent office.",
           "date": "2026-08-30T14:01:40.347Z"
+        },
+        {
+          "title": "Childcare and custody costs in the Canton of St. Gallen",
+          "url": "/en/swiss-articles/childcare-costs-daycare-canton-st-gallen/",
+          "excerpt": "Guide to fees for nurseries, day families and after-school in the Canton of St. Gallen: rates on income, municipal subsidies and tax reductions.",
+          "date": "2026-09-12T02:05:29.896Z"
         },
         {
           "title": "Permit L in the Canton of St. Gallen: validity 12 months and extension rules",
@@ -327,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "de": {
       "canton": "SG",
@@ -340,6 +450,11 @@
           "value": "577.10 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "10",
+          "note": "mittleres Gebot 520 CHF"
         }
       ],
       "dataBlocks": [
@@ -369,10 +484,60 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "SG6135",
+              "value": "3’050 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6709"
+            },
+            {
+              "label": "SG393333",
+              "value": "800 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6717"
+            },
+            {
+              "label": "SG10906",
+              "value": "700 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6710"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-11-15T06:26:36.869Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "2 °C",
+              "detail": "heute 0 bis 10 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-15T06:51:41.323Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Freitag, 13.11.2026 Reformpartnerschaft, öffentliche Gesundheit, 1450 und Digitalisierung",
+              "date": "2026-11-13",
+              "url": "https://presse.vorarlberg.at/land/public/Reformpartnerschaft-ffentliche-Gesundheit-1450-und-Digitalisierung"
+            },
             {
               "label": "Donnerstag, 12.11.2026 Frauengesundheitstag 2026: Forschungsergebnisse wirksam in die Praxis bringen",
               "date": "2026-11-12",
@@ -397,14 +562,9 @@
               "label": "Regierung verabschiedet Bericht und Antrag zu einem umfassenden Reformpaket für das Gesundheitswesen",
               "date": "2026-11-03",
               "url": "https://www.regierung.li/medienportal-medium/16182/235059/0/medienmitteilung"
-            },
-            {
-              "label": "Runder Tisch Gesundheitswesen: Kostendämpfung und Versorgungssicherheit im Fokus",
-              "date": "2026-10-23",
-              "url": "https://www.regierung.li/medienportal-medium/16182/235011/0/medienmitteilung"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -439,16 +599,16 @@
           "date": "2026-08-27T05:45:51.936Z"
         },
         {
-          "title": "Kinderkrippen- und Betreuungskosten im Kanton St. Gallen",
-          "url": "/de/schweiz-artikel/kita-kosten-kinderbetreuung-kanton-st-gallen/",
-          "excerpt": "Leitfaden für Kindertages-, Tages- und Nachschulgebühren im Kanton St. Gallen: Einkommenstarife, Gemeindezuschüsse und Steuererleichterungen.",
-          "date": "2026-09-12T02:05:29.896Z"
-        },
-        {
           "title": "Ausländischer Führerschein in St. Gallen: Umschreibung und Prüfungen",
           "url": "/de/schweiz-artikel/fuehrerschein-st-gallen-umschreibung/",
           "excerpt": "So lassen Sie Ihren ausländischen Führerschein im Kanton St. Gallen umschreiben: Unterschiedliche Verfahren für EU-/EFTA-Länder und Drittstaaten, erforderliche Unterlagen und zuständige Behörde.",
           "date": "2026-08-30T14:01:40.347Z"
+        },
+        {
+          "title": "Kinderkrippen- und Betreuungskosten im Kanton St. Gallen",
+          "url": "/de/schweiz-artikel/kita-kosten-kinderbetreuung-kanton-st-gallen/",
+          "excerpt": "Leitfaden für Kindertages-, Tages- und Nachschulgebühren im Kanton St. Gallen: Einkommenstarife, Gemeindezuschüsse und Steuererleichterungen.",
+          "date": "2026-09-12T02:05:29.896Z"
         },
         {
           "title": "Ausweis L im Kanton St. Gallen: Gültigkeit 12 Monate und Verlängerungsregeln",
@@ -480,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "fr": {
       "canton": "SG",
@@ -493,6 +653,11 @@
           "value": "577,10 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "10",
+          "note": "offre centrale 520 CHF"
         }
       ],
       "dataBlocks": [
@@ -522,10 +687,60 @@
           "updatedAt": "2026-11-08T11:18:20.402Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "SG6135",
+              "value": "3 050 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6709"
+            },
+            {
+              "label": "SG393333",
+              "value": "800 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6717"
+            },
+            {
+              "label": "SG10906",
+              "value": "700 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-18T18:30:00.000Z",
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6710"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-11-15T06:26:36.869Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "2 °C",
+              "detail": "aujourd’hui de 0 à 10 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-15T06:51:41.323Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Freitag, 13.11.2026 Reformpartnerschaft, öffentliche Gesundheit, 1450 und Digitalisierung",
+              "date": "2026-11-13",
+              "url": "https://presse.vorarlberg.at/land/public/Reformpartnerschaft-ffentliche-Gesundheit-1450-und-Digitalisierung"
+            },
             {
               "label": "Donnerstag, 12.11.2026 Frauengesundheitstag 2026: Forschungsergebnisse wirksam in die Praxis bringen",
               "date": "2026-11-12",
@@ -550,14 +765,9 @@
               "label": "Regierung verabschiedet Bericht und Antrag zu einem umfassenden Reformpaket für das Gesundheitswesen",
               "date": "2026-11-03",
               "url": "https://www.regierung.li/medienportal-medium/16182/235059/0/medienmitteilung"
-            },
-            {
-              "label": "Runder Tisch Gesundheitswesen: Kostendämpfung und Versorgungssicherheit im Fokus",
-              "date": "2026-10-23",
-              "url": "https://www.regierung.li/medienportal-medium/16182/235011/0/medienmitteilung"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -592,16 +802,16 @@
           "date": "2026-08-27T05:45:51.936Z"
         },
         {
-          "title": "Frais de crèche et de garde dans le canton de Saint-Gall",
-          "url": "/fr/articles-suisse/frais-garde-enfants-creche-canton-saint-gall/",
-          "excerpt": "Guide des frais de scolarité pour les crèches, les familles de jour et après l'école dans le canton de Saint-Gall : tarifs sur les revenus, subventions municipales et allégements fiscaux.",
-          "date": "2026-09-12T02:05:29.896Z"
-        },
-        {
           "title": "Permis étranger à Saint-Gall : conversion et examens",
           "url": "/fr/articles-suisse/permis-conduire-saint-gall-conversion/",
           "excerpt": "Comment faire reconnaître son permis de conduire étranger dans le canton de Saint-Gall : procédure différente selon qu’il s’agit d’un pays de l’UE/AELE ou d’un pays tiers, documents requis et service compétent.",
           "date": "2026-08-30T14:01:40.347Z"
+        },
+        {
+          "title": "Frais de crèche et de garde dans le canton de Saint-Gall",
+          "url": "/fr/articles-suisse/frais-garde-enfants-creche-canton-saint-gall/",
+          "excerpt": "Guide des frais de scolarité pour les crèches, les familles de jour et après l'école dans le canton de Saint-Gall : tarifs sur les revenus, subventions municipales et allégements fiscaux.",
+          "date": "2026-09-12T02:05:29.896Z"
         },
         {
           "title": "Permis L à Saint-Gall : validité et prolongation en 12 mois",
@@ -629,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     }
   }
 }

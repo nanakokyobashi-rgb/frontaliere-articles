@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-11-14T15:15:31.434Z",
-  "contentHash": "140298437e3a29221123e00d16b3c8b1c6ada673b7a692bb35d9bffaf09c56a5",
+  "updatedAt": "2026-11-15T12:42:19.424Z",
+  "contentHash": "0d9534e259d150fca85ea06c19068a68ae782ffd18bd77482c166f7d3d16a9a2",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,22 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-13T02:53:12.870Z",
+      "updatedAt": "2026-11-15T07:56:24.088Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-15T06:26:36.869Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-11-15T06:51:41.323Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T22:54:56.926Z",
+      "updatedAt": "2026-11-14T21:43:27.949Z",
       "keyFacts": 0
     }
   ],
@@ -35,6 +45,11 @@
           "value": "740,20 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "2",
+          "note": "offerta mediana 8550 CHF"
         }
       ],
       "dataBlocks": [
@@ -96,7 +111,65 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-13T02:53:12.870Z"
+          "updatedAt": "2026-11-15T07:56:24.088Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "TI735",
+              "value": "16.200 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1543"
+            },
+            {
+              "label": "TI12396",
+              "value": "900 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1544"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
+          "updatedAt": "2026-11-15T06:26:36.869Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "6 °C",
+              "detail": "oggi da 5 a 10 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "6 °C",
+              "detail": "oggi da 5 a 10 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "7 °C",
+              "detail": "oggi da 8 a 10 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "8 °C",
+              "detail": "oggi da 7 a 10 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "5 °C",
+              "detail": "oggi da 5 a 9 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-15T06:51:41.323Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -134,7 +207,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/Chirurgia-toracica-di-qualit-.html"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "en": {
       "canton": "TI",
@@ -235,6 +308,11 @@
           "value": "740.20 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "2",
+          "note": "typical bid 8,550 CHF"
         }
       ],
       "dataBlocks": [
@@ -296,7 +374,65 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-13T02:53:12.870Z"
+          "updatedAt": "2026-11-15T07:56:24.088Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "TI735",
+              "value": "16,200 CHF",
+              "detail": "current bid",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1543"
+            },
+            {
+              "label": "TI12396",
+              "value": "900 CHF",
+              "detail": "current bid",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1544"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
+          "updatedAt": "2026-11-15T06:26:36.869Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "6 °C",
+              "detail": "today from 5 to 10 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "6 °C",
+              "detail": "today from 5 to 10 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "7 °C",
+              "detail": "today from 8 to 10 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "8 °C",
+              "detail": "today from 7 to 10 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "5 °C",
+              "detail": "today from 5 to 9 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-15T06:51:41.323Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -334,7 +470,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/Chirurgia-toracica-di-qualit-.html"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "de": {
       "canton": "TI",
@@ -430,6 +566,11 @@
           "value": "740.20 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "2",
+          "note": "mittleres Gebot 8’550 CHF"
         }
       ],
       "dataBlocks": [
@@ -491,7 +632,65 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-13T02:53:12.870Z"
+          "updatedAt": "2026-11-15T07:56:24.088Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "TI735",
+              "value": "16’200 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1543"
+            },
+            {
+              "label": "TI12396",
+              "value": "900 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1544"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
+          "updatedAt": "2026-11-15T06:26:36.869Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "6 °C",
+              "detail": "heute 5 bis 10 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "6 °C",
+              "detail": "heute 5 bis 10 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "7 °C",
+              "detail": "heute 8 bis 10 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "8 °C",
+              "detail": "heute 7 bis 10 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "5 °C",
+              "detail": "heute 5 bis 9 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-15T06:51:41.323Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -529,7 +728,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/Chirurgia-toracica-di-qualit-.html"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -612,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "fr": {
       "canton": "TI",
@@ -625,6 +824,11 @@
           "value": "740,20 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "2",
+          "note": "offre centrale 8 550 CHF"
         }
       ],
       "dataBlocks": [
@@ -686,7 +890,65 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-13T02:53:12.870Z"
+          "updatedAt": "2026-11-15T07:56:24.088Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "TI735",
+              "value": "16 200 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1543"
+            },
+            {
+              "label": "TI12396",
+              "value": "900 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-15T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1544"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
+          "updatedAt": "2026-11-15T06:26:36.869Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "6 °C",
+              "detail": "aujourd’hui de 5 à 10 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "6 °C",
+              "detail": "aujourd’hui de 5 à 10 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "7 °C",
+              "detail": "aujourd’hui de 8 à 10 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "8 °C",
+              "detail": "aujourd’hui de 7 à 10 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "5 °C",
+              "detail": "aujourd’hui de 5 à 9 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-15T06:51:41.323Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -724,7 +986,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/Chirurgia-toracica-di-qualit-.html"
             }
           ],
-          "updatedAt": "2026-11-12T22:54:56.926Z"
+          "updatedAt": "2026-11-14T21:43:27.949Z"
         }
       ],
       "curatedArticles": [
@@ -804,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     }
   }
 }

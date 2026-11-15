@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-11-14T15:15:31.434Z",
-  "contentHash": "9156c7653578ed861dce27face6b310c891f7635d946cbb8ae4925782b0b3ce4",
+  "updatedAt": "2026-11-15T12:42:19.424Z",
+  "contentHash": "534d9c50d5e48b180496c8f487c0b0da8596ce34c6c49306a16b02b99f3e0260",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-13T04:23:25.174Z",
+      "updatedAt": "2026-11-15T06:24:39.723Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "12",
+          "value": "17",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,27 +33,27 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Evento di intrattenimento Saumchörli Herisau",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/events/herisau/entertainment-event-saumchoerli-herisau_AtYAVwh"
+              "label": "Visita guidata pubblica al Museo dell'Appenzello",
+              "detail": "Museum Appenzell, Appenzell",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/events/appenzell/public-guided-tour-of-the-appenzell-museum_AaS25tX"
             },
             {
-              "label": "Todisco e Pupato",
-              "detail": "Assel-Keller, Schönengrund",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/events/music/schoenengrund/todisco-und-pupato_A79PrWc"
+              "label": "Evento di intrattenimento Saumchörli Herisau",
+              "detail": "Casino Herisau, Herisau — in corso, ultimo giorno: 22 novembre 2026",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/events/herisau/entertainment-event-saumchoerli-herisau_AtYAVwh"
             },
             {
               "label": "Fiera \"A26",
               "detail": "Appenzello — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-14",
+              "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
             },
             {
               "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
               "detail": "Kloster Maria der Engel — in corso, ultimo giorno: 9 dicembre 2026",
-              "date": "2026-11-14",
+              "date": "2026-11-15",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
@@ -95,7 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "12",
+          "value": "17",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,27 +144,27 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Entertainment event Saumchörli Herisau",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/events/herisau/entertainment-event-saumchoerli-herisau_AtYAVwh"
+              "label": "Public guided tour of the Appenzell Museum",
+              "detail": "Museum Appenzell, Appenzell",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/events/appenzell/public-guided-tour-of-the-appenzell-museum_AaS25tX"
             },
             {
-              "label": "Todisco & Pupato",
-              "detail": "Assel-Keller, Schönengrund",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/events/music/schoenengrund/todisco-und-pupato_A79PrWc"
+              "label": "Entertainment event Saumchörli Herisau",
+              "detail": "Casino Herisau, Herisau — ongoing, last day: 22 November 2026",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/events/herisau/entertainment-event-saumchoerli-herisau_AtYAVwh"
             },
             {
               "label": "Trade fair \"A26\"",
               "detail": "Appenzello — ongoing, last day: 15 November 2026",
-              "date": "2026-11-14",
+              "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
             },
             {
               "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
               "detail": "Kloster Maria der Engel — ongoing, last day: 9 December 2026",
-              "date": "2026-11-14",
+              "date": "2026-11-15",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
@@ -206,7 +206,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "12",
+          "value": "17",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,27 +255,27 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Unterhaltungsanlass Saumchörli Herisau",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/events/herisau/entertainment-event-saumchoerli-herisau_AtYAVwh"
+              "label": "Öffentliche Führung durch das Museum Appenzell",
+              "detail": "Museum Appenzell, Appenzell",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/events/appenzell/public-guided-tour-of-the-appenzell-museum_AaS25tX"
             },
             {
-              "label": "Todisco & Pupato",
-              "detail": "Assel-Keller, Schönengrund",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/events/music/schoenengrund/todisco-und-pupato_A79PrWc"
+              "label": "Unterhaltungsanlass Saumchörli Herisau",
+              "detail": "Casino Herisau, Herisau — läuft, letzter Tag: 22. November 2026",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/events/herisau/entertainment-event-saumchoerli-herisau_AtYAVwh"
             },
             {
               "label": "Gewerbemesse «A26»",
               "detail": "Appenzello — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-14",
+              "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
             },
             {
               "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
               "detail": "Kloster Maria der Engel — läuft, letzter Tag: 9. Dezember 2026",
-              "date": "2026-11-14",
+              "date": "2026-11-15",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
@@ -317,7 +317,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "12",
+          "value": "17",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,27 +366,27 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Manifestation de divertissement Saumchörli Herisau",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/events/herisau/entertainment-event-saumchoerli-herisau_AtYAVwh"
+              "label": "Visite guidée publique du musée d'Appenzell",
+              "detail": "Museum Appenzell, Appenzell",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/events/appenzell/public-guided-tour-of-the-appenzell-museum_AaS25tX"
             },
             {
-              "label": "Todisco & Pupato",
-              "detail": "Assel-Keller, Schönengrund",
-              "date": "2026-11-14",
-              "url": "https://www.guidle.com/it/events/music/schoenengrund/todisco-und-pupato_A79PrWc"
+              "label": "Manifestation de divertissement Saumchörli Herisau",
+              "detail": "Casino Herisau, Herisau — en cours, dernier jour : 22 novembre 2026",
+              "date": "2026-11-15",
+              "url": "https://www.guidle.com/it/events/herisau/entertainment-event-saumchoerli-herisau_AtYAVwh"
             },
             {
               "label": "Foire commerciale \"A26",
               "detail": "Appenzello — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-14",
+              "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
             },
             {
               "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
               "detail": "Kloster Maria der Engel — en cours, dernier jour : 9 décembre 2026",
-              "date": "2026-11-14",
+              "date": "2026-11-15",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
@@ -428,7 +428,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     }
   }
 }

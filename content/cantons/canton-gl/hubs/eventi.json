@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-11-14T15:15:31.434Z",
-  "contentHash": "74c0ea94130874941826155811d01e8853e8ad8b379619a8c2ced9edce57e691",
+  "updatedAt": "2026-11-15T12:42:19.424Z",
+  "contentHash": "f6c1d4fc040d12f24b428896397cdb6fa6efeb1cc65a7771ecd9541550acee89",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-13T04:23:25.174Z",
+      "updatedAt": "2026-11-15T06:24:39.723Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "23",
+          "value": "26",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,52 +33,22 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Glarner Repair Café: Reparieren statt Wegwerfen",
-              "detail": "Glarus",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glarner-repair-cafe-reparieren-statt-wegwerfen/"
-            },
-            {
-              "label": "Chirezer Adventsmarkt",
-              "detail": "Filzbach (Kerenzerberg)",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-seminarhotel-lihn/"
-            },
-            {
-              "label": "Stubete Gäng – Samichlaus Tour 2026 – Näfels, lintharena",
-              "detail": "Hotel Lintharena",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/stubete-gaeng-samichlaus-tour-2026-naefels-lintharena/"
-            },
-            {
-              "label": "Herbstkonzert des Glarner Kammerorchesters",
-              "detail": "Glarona",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/herbstkonzert-des-glarner-kammerorchesters/"
-            },
-            {
-              "label": "Abendkino im Wortreich: \"Springsteen\"",
-              "detail": "Glarus",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abendkino-im-wortreich-springsteen/"
-            },
-            {
-              "label": "Turnrevue Niederurnen 2026",
-              "detail": "Niederurnen, Glarus Nord — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
-            },
-            {
-              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
-              "detail": "Schützenhaus Glarus, Glarus — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
-            },
-            {
               "label": "Jubiläumskonzert Chinderjodelchörli Glarnerland",
               "detail": "Gesellschaftshaus Ennenda",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jubilaeumskonzert-chinderjodelchoerli-glarnerland/"
+            },
+            {
+              "label": "Chirezer Adventsmarkt",
+              "detail": "Filzbach (Kerenzerberg) — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-seminarhotel-lihn/"
+            },
+            {
+              "label": "Turnrevue Niederurnen 2026",
+              "detail": "Niederurnen, Glarus Nord — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
             },
             {
               "label": "Seniorenkino im Wortreich: \"Rebuilding\"",
@@ -91,11 +61,41 @@
               "detail": "ReVier Ennenda, Glarus",
               "date": "2026-11-17",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/kiss-suppenznacht/"
+            },
+            {
+              "label": "Terramation - Eine sanfte Rückkehr zur Erde",
+              "detail": "Glarus",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/terramation-eine-sanfte-rueckkehr-zur-erde/"
+            },
+            {
+              "label": "WEIHNACHTSBASTELN FÜR KINDER",
+              "detail": "St. Josefsheim",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsbasteln-fuer-kinder/"
+            },
+            {
+              "label": "Zentangele im Schulhaus Braunwald, 20. November 2026",
+              "detail": "Braunwald, Glarus Süd",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/zentangele-im-schulhaus-braunwald-20-november-2026/"
+            },
+            {
+              "label": "Chränzli TV Netstal",
+              "detail": "Netstal",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chraenzli-tv-netstal/"
+            },
+            {
+              "label": "Sich mit der Sammlung anlegen",
+              "detail": "Glarus",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sich-mit-der-sammlung-anlegen/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "en": {
       "canton": "GL",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "23",
+          "value": "26",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,52 +138,22 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Glarner Repair Café: Reparieren statt Wegwerfen",
-              "detail": "Glarus",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glarner-repair-cafe-reparieren-statt-wegwerfen/"
-            },
-            {
-              "label": "Chirezer Adventsmarkt",
-              "detail": "Filzbach (Kerenzerberg)",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-seminarhotel-lihn/"
-            },
-            {
-              "label": "Stubete Gäng – Samichlaus Tour 2026 – Näfels, lintharena",
-              "detail": "Hotel Lintharena",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/stubete-gaeng-samichlaus-tour-2026-naefels-lintharena/"
-            },
-            {
-              "label": "Herbstkonzert des Glarner Kammerorchesters",
-              "detail": "Glarona",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/herbstkonzert-des-glarner-kammerorchesters/"
-            },
-            {
-              "label": "\"Springsteen\"by Abendkino imor",
-              "detail": "Glarus",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abendkino-im-wortreich-springsteen/"
-            },
-            {
-              "label": "Turnrevue Niederurnen 2026",
-              "detail": "Niederurnen, Glarus Nord — ongoing, last day: 15 November 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
-            },
-            {
-              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
-              "detail": "Schützenhaus Glarus, Glarus — ongoing, last day: 14 November 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
-            },
-            {
               "label": "Jubiläumskonzert Chinderjodelchörli Glarnerland",
               "detail": "Gesellschaftshaus Ennenda",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jubilaeumskonzert-chinderjodelchoerli-glarnerland/"
+            },
+            {
+              "label": "Chirezer Adventsmarkt",
+              "detail": "Filzbach (Kerenzerberg) — ongoing, last day: 15 November 2026",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-seminarhotel-lihn/"
+            },
+            {
+              "label": "Turnrevue Niederurnen 2026",
+              "detail": "Niederurnen, Glarus Nord — ongoing, last day: 15 November 2026",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
             },
             {
               "label": "Seniorenkino im Wortreich: \"Rebuilding\"",
@@ -196,11 +166,41 @@
               "detail": "ReVier Ennenda, Glarus",
               "date": "2026-11-17",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/kiss-suppenznacht/"
+            },
+            {
+              "label": "Terramation - Eine sanfte Rückkehr zur Erde",
+              "detail": "Glarus",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/terramation-eine-sanfte-rueckkehr-zur-erde/"
+            },
+            {
+              "label": "WEIHNACHTSBASTELN FÜR KINDER",
+              "detail": "St. Josefsheim",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsbasteln-fuer-kinder/"
+            },
+            {
+              "label": "Zentangele im Schulhaus Braunwald, 20. November 2026",
+              "detail": "Braunwald, Glarus Süd",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/zentangele-im-schulhaus-braunwald-20-november-2026/"
+            },
+            {
+              "label": "Chränzli TV Netstal",
+              "detail": "Netstal",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chraenzli-tv-netstal/"
+            },
+            {
+              "label": "Sich mit der Sammlung anlegen",
+              "detail": "Glarus",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sich-mit-der-sammlung-anlegen/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "de": {
       "canton": "GL",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "23",
+          "value": "26",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,52 +243,22 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Glarner Repair Café: Reparieren statt Wegwerfen",
-              "detail": "Glarus",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glarner-repair-cafe-reparieren-statt-wegwerfen/"
-            },
-            {
-              "label": "Chirezer Adventsmarkt",
-              "detail": "Filzbach (Kerenzerberg)",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-seminarhotel-lihn/"
-            },
-            {
-              "label": "Stubete Gäng – Samichlaus Tour 2026 – Näfels, lintharena",
-              "detail": "Hotel Lintharena",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/stubete-gaeng-samichlaus-tour-2026-naefels-lintharena/"
-            },
-            {
-              "label": "Jubiläumskonzert des Glarner Kammerorchesters",
-              "detail": "Glarona",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/herbstkonzert-des-glarner-kammerorchesters/"
-            },
-            {
-              "label": "Abendkino im Wortreich: „Springsteen“",
-              "detail": "Glarus",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abendkino-im-wortreich-springsteen/"
-            },
-            {
-              "label": "Turnrevue Niederurnen 2026",
-              "detail": "Niederurnen, Glarus Nord — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
-            },
-            {
-              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
-              "detail": "Schützenhaus Glarus, Glarus — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
-            },
-            {
               "label": "Jubiläumskonzert Chinderjodelchörli Glarnerland",
               "detail": "Gesellschaftshaus Ennenda",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jubilaeumskonzert-chinderjodelchoerli-glarnerland/"
+            },
+            {
+              "label": "Chirezer Adventsmarkt",
+              "detail": "Filzbach (Kerenzerberg) — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-seminarhotel-lihn/"
+            },
+            {
+              "label": "Turnrevue Niederurnen 2026",
+              "detail": "Niederurnen, Glarus Nord — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
             },
             {
               "label": "Seniorenkino im Wortreich: \"Rebuilding\"",
@@ -301,11 +271,41 @@
               "detail": "ReVier Ennenda, Glarus",
               "date": "2026-11-17",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/kiss-suppenznacht/"
+            },
+            {
+              "label": "Terramation - Eine sanfte Rückkehr zur Erde",
+              "detail": "Glarus",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/terramation-eine-sanfte-rueckkehr-zur-erde/"
+            },
+            {
+              "label": "WEIHNACHTSBASTELN FÜR KINDER",
+              "detail": "St. Josefsheim",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsbasteln-fuer-kinder/"
+            },
+            {
+              "label": "Zentangele im Schulhaus Braunwald, 20. November 2026",
+              "detail": "Braunwald, Glarus Süd",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/zentangele-im-schulhaus-braunwald-20-november-2026/"
+            },
+            {
+              "label": "Chränzli TV Netstal",
+              "detail": "Netstal",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chraenzli-tv-netstal/"
+            },
+            {
+              "label": "Sich mit der Sammlung anlegen",
+              "detail": "Glarus",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sich-mit-der-sammlung-anlegen/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     },
     "fr": {
       "canton": "GL",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "23",
+          "value": "26",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,52 +348,22 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Glarner Repair Café: Reparieren statt Wegwerfen",
-              "detail": "Glarus",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glarner-repair-cafe-reparieren-statt-wegwerfen/"
-            },
-            {
-              "label": "Chirezer Adventsmarkt",
-              "detail": "Filzbach (Kerenzerberg)",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-seminarhotel-lihn/"
-            },
-            {
-              "label": "Stubete Gäng – Samichlaus Tour 2026 – Näfels, lintharena",
-              "detail": "Hotel Lintharena",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/stubete-gaeng-samichlaus-tour-2026-naefels-lintharena/"
-            },
-            {
-              "label": "Herbstkonzert des Glarner Kammerorchesters",
-              "detail": "Glarona",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/herbstkonzert-des-glarner-kammerorchesters/"
-            },
-            {
-              "label": "Abendkino im Wortreich : \"Springsteen\"",
-              "detail": "Glarus",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abendkino-im-wortreich-springsteen/"
-            },
-            {
-              "label": "Turnrevue Niederurnen 2026",
-              "detail": "Niederurnen, Glarus Nord — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
-            },
-            {
-              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
-              "detail": "Schützenhaus Glarus, Glarus — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-14",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
-            },
-            {
               "label": "Jubiläumskonzert Chinderjodelchörli Glarnerland",
               "detail": "Gesellschaftshaus Ennenda",
               "date": "2026-11-15",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jubilaeumskonzert-chinderjodelchoerli-glarnerland/"
+            },
+            {
+              "label": "Chirezer Adventsmarkt",
+              "detail": "Filzbach (Kerenzerberg) — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-seminarhotel-lihn/"
+            },
+            {
+              "label": "Turnrevue Niederurnen 2026",
+              "detail": "Niederurnen, Glarus Nord — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
             },
             {
               "label": "Seniorenkino im Wortreich: \"Rebuilding\"",
@@ -406,11 +376,41 @@
               "detail": "ReVier Ennenda, Glarus",
               "date": "2026-11-17",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/kiss-suppenznacht/"
+            },
+            {
+              "label": "Terramation - Eine sanfte Rückkehr zur Erde",
+              "detail": "Glarus",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/terramation-eine-sanfte-rueckkehr-zur-erde/"
+            },
+            {
+              "label": "WEIHNACHTSBASTELN FÜR KINDER",
+              "detail": "St. Josefsheim",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsbasteln-fuer-kinder/"
+            },
+            {
+              "label": "Zentangele im Schulhaus Braunwald, 20. November 2026",
+              "detail": "Braunwald, Glarus Süd",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/zentangele-im-schulhaus-braunwald-20-november-2026/"
+            },
+            {
+              "label": "Chränzli TV Netstal",
+              "detail": "Netstal",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chraenzli-tv-netstal/"
+            },
+            {
+              "label": "Sich mit der Sammlung anlegen",
+              "detail": "Glarus",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sich-mit-der-sammlung-anlegen/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-11-13T04:23:25.174Z"
+          "updatedAt": "2026-11-15T06:24:39.723Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-14T15:15:31.434Z"
+      "updatedAt": "2026-11-15T12:42:19.424Z"
     }
   }
 }
