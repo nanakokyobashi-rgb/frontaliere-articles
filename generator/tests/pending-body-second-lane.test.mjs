@@ -1566,6 +1566,17 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     'il connettore inglese of non deve cambiare il contratto numerico della data',
   );
 
+  const englishDateWithoutCommaSource = 'La misura vale dal 12 agosto 2026 e resta valida.';
+  const englishDateWithoutCommaTarget = 'The measure applies from August 12 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(englishDateWithoutCommaSource, englishDateWithoutCommaTarget),
+      500,
+    )(englishDateWithoutCommaSource),
+    englishDateWithoutCommaTarget,
+    'una data inglese month-first senza virgola deve separare il giorno dall’anno',
+  );
+
   const italianDiDateSource = 'La misura vale dal 1° di maggio 2026 e resta valida.';
   const italianDiDateTarget = 'The measure applies from May 1, 2026 and remains valid.';
   assert.equal(
@@ -1605,6 +1616,7 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
   for (const [label, localizedRangeTarget] of [
     ['connettore tedesco und', 'Die Maßnahme gilt ab dem 1. und 3. Januar 2026 und bleibt gültig.'],
     ['connettore francese et', 'La mesure s’applique du 1er et 3 janvier 2026 et reste valable.'],
+    ['connettore francese à', 'La mesure s’applique du 1er à 3 janvier 2026 et reste valable.'],
   ]) {
     assert.equal(
       await makeTranslator(

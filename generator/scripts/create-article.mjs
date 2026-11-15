@@ -16379,7 +16379,10 @@ async function translateArticle(data) {
         monthPattern: new RegExp(dateMonthPattern.source, 'giu'),
         dayToMonthGap: /^(?:[\s.,:;/]|(?:of|de|le|del|du|au|di)\b|d['’])*$/iu,
         monthToDayGap: /^(?:[\s.,:;/])*$/u,
-        rangeGap: /^(?:[\s.,]*(?:[-‐‑‒–—−]|(?:to|through|and|e|bis|à|au|al|und|et)\b)[\s.,]*)$/iu,
+        // `\b` is ASCII-biased under Unicode: it cannot terminate the
+        // non-ASCII connector `à` when the next character is whitespace.
+        // Keep it as a separate alternative so `1 à 3` is a date range.
+        rangeGap: /^(?:[\s.,]*(?:[-‐‑‒–—−]|à|(?:to|through|and|e|bis|au|al|und|et)\b)[\s.,]*)$/iu,
       };
       const dateMonths = [...normalizedDateValue.matchAll(dateGrammar.monthPattern)].map((match) => {
         const start = dateMatchStarts[match.index] ?? value.length;
@@ -16399,29 +16402,48 @@ async function translateArticle(data) {
         return match.index === lineStart + indentLength
           && (/[°º]$/u.test(token) || value[match.index + token.length] === '.');
       };
-      const numberCandidates = [...value.matchAll(numberPattern)].map((match) => {
-        const [token] = match;
-        const unit = token.match(/[%°º]$/u)?.[0] || '';
-        const ordinalSuffix = token.match(localizedOrdinalSuffixAtEnd)?.[0] || '';
-        const number = unit
-          ? token.slice(0, -unit.length)
-          : ordinalSuffix
-            ? token.slice(0, -ordinalSuffix.length)
-            : token;
-        const sign = number.match(/^[+\-−]/u)?.[0] || '';
-        const unsigned = sign ? number.slice(sign.length) : number;
-        return {
-          match,
-          token,
-          unit,
-          ordinalSuffix,
-          number,
-          sign,
-          unsigned,
-          start: match.index,
-          end: match.index + token.length,
-        };
-      });
+      const monthFirstDateGap = /^[\s.]*$/u;
+      const numberCandidates = [...value.matchAll(numberPattern)]
+        .flatMap((match) => {
+          const [token] = match;
+          // A month-first date may omit the comma: `August 12 2026`. The
+          // generic grouping branch would otherwise consume `12 2026` as one
+          // number and erase the day/year calendar fact. Split a trailing
+          // four-digit group only in the month-adjacent context; ordinary
+          // grouped measurements keep their existing normalization.
+          const groupedYear = token.search(/[ \u00a0\u202f]\d{4}$/u);
+          const monthBeforeNumber = dateMonths.some(({ end }) => (
+            end <= match.index && monthFirstDateGap.test(value.slice(end, match.index))
+          ));
+          if (groupedYear < 0 || !monthBeforeNumber) return [{ match, token }];
+          const yearStart = groupedYear + 1;
+          return [
+            { match: { index: match.index }, token: token.slice(0, groupedYear) },
+            { match: { index: match.index + yearStart }, token: token.slice(yearStart) },
+          ];
+        })
+        .map(({ match, token }) => {
+          const unit = token.match(/[%°º]$/u)?.[0] || '';
+          const ordinalSuffix = token.match(localizedOrdinalSuffixAtEnd)?.[0] || '';
+          const number = unit
+            ? token.slice(0, -unit.length)
+            : ordinalSuffix
+              ? token.slice(0, -ordinalSuffix.length)
+              : token;
+          const sign = number.match(/^[+\-−]/u)?.[0] || '';
+          const unsigned = sign ? number.slice(sign.length) : number;
+          return {
+            match,
+            token,
+            unit,
+            ordinalSuffix,
+            number,
+            sign,
+            unsigned,
+            start: match.index,
+            end: match.index + token.length,
+          };
+        });
       const monthsBefore = (candidate) => dateMonths.filter(({ end }) =>
         end <= candidate.start && gapMatches(dateGrammar.monthToDayGap, end, candidate.start));
       const monthsAfter = (candidate) => dateMonths.filter(({ start }) =>
