@@ -2,5 +2,5 @@
   "version": 1,
   "note": "SHA-256 of this repo's adapted SiteShellContract scalars, including content-addressed static asset names; the site-side digest is computed separately.",
   "scalarFields": 23,
-  "sha256": "e87ec4c23b494636addea83a470640707fecddb64f980abfe2c3bf281b34e704"
+  "sha256": "a10ef8edff423b06cf69593349ba6012edc357a96e5521645b9903a0d243fd54"
 }
