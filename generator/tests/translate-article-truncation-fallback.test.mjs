@@ -89,6 +89,18 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
 const src = readFileSync(CREATE_ARTICLE, 'utf-8');
 
+// I blocchi ritagliati qui sotto sono chiusure verbatim di create-article.mjs.
+// Da quando il contratto delle tabelle protegge l'identita' delle colonne,
+// quei blocchi usano anche questi helper: includiamo il sorgente di produzione
+// invece di ricopiarne una versione che potrebbe divergere.
+const TABLE_HEADER_MARKER_HELPERS_SRC = (() => {
+  const start = src.indexOf('function tableHeaderColumnMarker(lineIndex, cellIndex) {');
+  assert.notEqual(start, -1, 'helper dei marker per le colonne non trovato');
+  const end = src.indexOf('\n// Thin in-script wrapper: bind the lib field-translator', start);
+  assert.notEqual(end, -1, 'fine degli helper dei marker per le colonne non trovata');
+  return src.slice(start, end);
+})();
+
 /** Ritaglia il loop di truncation-retry di `translateArticle()` VERBATIM. */
 function extractTruncationRetryLoop() {
   const marker = '`${locale}:${field}-truncation-retry`,';
@@ -1420,13 +1432,6 @@ const TRANSLATE_IN_CHUNKS_SRC = (() => {
   ) {`);
   assert.notEqual(a, -1, 'translateInChunks non trovata — aggiornare questo test');
   return src.slice(a, src.indexOf('\n  }\n', a) + 4);
-})();
-const TABLE_HEADER_MARKER_HELPERS_SRC = (() => {
-  const a = src.indexOf('function tableHeaderColumnMarker(lineIndex, cellIndex) {');
-  assert.notEqual(a, -1, 'helper dei marker per le colonne non trovato — aggiornare questo test');
-  const end = src.indexOf('\n// Thin in-script wrapper: bind the lib field-translator', a);
-  assert.notEqual(end, -1, 'fine degli helper dei marker per le colonne non trovata');
-  return src.slice(a, end);
 })();
 const SPLIT_CHUNKS_SRC = extractFunctionSource('function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {');
 const COUNT_WORDS_SRC = extractFunctionSource("function countWords(text = '') {");
