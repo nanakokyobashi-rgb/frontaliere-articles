@@ -1566,6 +1566,28 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     'il connettore inglese of non deve cambiare il contratto numerico della data',
   );
 
+  const italianDiDateSource = 'La misura vale dal 1° di maggio 2026 e resta valida.';
+  const italianDiDateTarget = 'The measure applies from May 1, 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(italianDiDateSource, italianDiDateTarget),
+      500,
+    )(italianDiDateSource),
+    italianDiDateTarget,
+    'il connettore italiano di deve restare nella grammatica giorno-mese',
+  );
+
+  const germanFebruaryDateSource = 'La misura vale dal 1° febbraio 2026 e resta valida.';
+  const germanFebruaryDateTarget = 'Die Maßnahme gilt ab dem 1. Februar 2026 und bleibt gültig.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(germanFebruaryDateSource, germanFebruaryDateTarget),
+      500,
+    )(germanFebruaryDateSource),
+    germanFebruaryDateTarget,
+    'il mese tedesco Februar deve essere riconosciuto senza il refuso februrar',
+  );
+
   const localizedRangeSource = 'La misura vale dal 1° al 3 gennaio 2026 e resta valida.';
   for (const [label, localizedRangeTarget] of [
     ['connettore tedesco und', 'Die Maßnahme gilt ab dem 1. und 3. Januar 2026 und bleibt gültig.'],
@@ -1600,6 +1622,77 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     )(dateRangeSource),
     null,
     'il mese errato deve essere rifiutato anche quando la data è un intervallo',
+  );
+
+  const signedRangeTarget = 'The measure applies from January 1, -3, 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(dateRangeSource, signedRangeTarget),
+      500,
+    )(dateRangeSource),
+    null,
+    'una virgola prima del segno meno non deve trasformare un numero negativo in un intervallo',
+  );
+
+  const crossMonthRangeSource = 'La misura vale dal 31° gennaio - 2° febbraio 2026 e resta valida.';
+  const crossMonthRangeTarget = 'The measure applies from January 31 - February 2, 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(crossMonthRangeSource, crossMonthRangeTarget),
+      500,
+    )(crossMonthRangeSource),
+    crossMonthRangeTarget,
+    'un intervallo cross-month deve associare ogni estremo al proprio mese',
+  );
+  const wrongCrossMonthRangeTarget = 'The measure applies from March 31 - February 2, 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(crossMonthRangeSource, wrongCrossMonthRangeTarget),
+      500,
+    )(crossMonthRangeSource),
+    null,
+    'un mese errato nel primo estremo di un intervallo cross-month deve essere rifiutato',
+  );
+
+  const reorderedCalendarSource = 'Nel 2026, 1° gennaio la misura resta valida.';
+  const reorderedCalendarTarget = 'On January 1, 2026 the measure remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(reorderedCalendarSource, reorderedCalendarTarget),
+      500,
+    )(reorderedCalendarSource),
+    reorderedCalendarTarget,
+    'giorno e anno possono riordinarsi solo quando la prova del mese resta la stessa',
+  );
+  const invariantCalendarAnchorSource = 'In 2026, 1° gennaio la misura resta valida.';
+  const invariantCalendarAnchorTarget = 'In January 1, 2026 the measure remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(invariantCalendarAnchorSource, invariantCalendarAnchorTarget),
+      500,
+    )(invariantCalendarAnchorSource),
+    invariantCalendarAnchorTarget,
+    'un connettore invariato non deve bloccare il riordino dei componenti della data',
+  );
+  const reorderedCalendarTableSource = '| Data | Nel 2026, 1° gennaio |';
+  const reorderedCalendarTableTarget = '| Date | On January 1, 2026 |';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(reorderedCalendarTableSource, reorderedCalendarTableTarget),
+      500,
+    )(reorderedCalendarTableSource),
+    reorderedCalendarTableTarget,
+    'lo stesso riordino calendariale deve funzionare anche nella prova per celle di tabella',
+  );
+  const reorderedNonCalendarSource = 'Nel 2026, 1° gennaio e 2 persone attendono.';
+  const reorderedNonCalendarTarget = 'On January 1, 2 people, 2026 are waiting.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(reorderedNonCalendarSource, reorderedNonCalendarTarget),
+      500,
+    )(reorderedNonCalendarSource),
+    null,
+    'il riordino non deve trascinare numeri non calendariali insieme alla data',
   );
 
   const nonDateSource = 'Marcia 12 miglia lungo il percorso e resta in forma.';
