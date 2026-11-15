@@ -100,7 +100,15 @@ const workflows = fs
  * far atterrare un articolo su main».
  */
 const isProducer = (w) =>
-  (/git add[^\n]*\bcontent\//.test(w.joined) || /git add -A\b/.test(w.joined)) && /git push[^\n]*HEAD:/.test(w.joined);
+  (/git add[^\n]*\bcontent\//.test(w.joined) || /git add -A\b/.test(w.joined)) && /git push[^\n]*HEAD:(?!refs\/heads\/\$\{?BRANCH\b)/.test(w.joined);
+
+// `HEAD:refs/heads/$BRANCH` e' il push di una PR di fix (`BRANCH=fix/issue-N`): lo
+// fa lo step deterministico `Finalize PR HEAD` di `issue-fix.yml` (commit
+// conventional sopra un checkpoint WIP, vedi fixer-wip-head-contract.test.mjs).
+// Non e' un push sul branch su cui il workflow gira ne' su main: e' lo stesso
+// criterio per cui `issue-fix.yml` resta fuori dai produttori, reso esplicito
+// invece di lasciare che una nuova riga `git push ... HEAD:` lo faccia entrare.
+// Un produttore vero (`HEAD:$TARGET`) continua a essere riconosciuto.
 
 const producers = workflows.filter(isProducer);
 
