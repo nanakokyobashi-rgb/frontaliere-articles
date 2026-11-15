@@ -1314,7 +1314,7 @@ jobs:
       # La guardia F7 resta fail-closed per i checkpoint di sessioni morte.
       - name: Finalize redcheck HEAD (never deliver a WIP checkpoint, zero-Claude)
         id: finalize_head
-        if: always() && steps.guard.outputs.proceed == 'true' && steps.precodex.outputs.verified == 'true'
+        if: always() && steps.guard.outputs.proceed == 'true' && steps.precodex.outputs.verified == 'true' && steps.identical_restore.outcome == 'success'
         continue-on-error: true
         env:
           HEAD_REF: ${{ needs.preflight.outputs.head_ref }}
@@ -1330,6 +1330,10 @@ jobs:
           subject=$(git log -1 --format=%s HEAD)
           if ! [[ "$subject" =~ ^wip\( ]]; then
             echo "finalize-head: l'HEAD del round non e' un commit WIP → niente da fare."
+            exit 0
+          fi
+          if [ -n "$(git status --porcelain=v1)" ]; then
+            echo "::warning::finalize-head: working tree non pulito — nessun commit/push per non perdere modifiche residue."
             exit 0
           fi
           echo "::warning::finalize-head: l'HEAD del round e' «$subject»: aggiungo un commit conventional sopra (la guardia F7 chiuderebbe la review)."
