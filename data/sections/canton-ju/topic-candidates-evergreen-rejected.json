@@ -4,17 +4,21 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261111-avant-les-legislatives-l-espagne-en-greve-generale.html": {
-      "section": "canton-ju",
-      "ts": 1794434515003
-    },
-    "canton-ju::https://www.lejdj.ch/articles/ecole-a-journee-continue-neuchatel-trouve-le-bilan-tres-positif-105808": {
-      "section": "canton-ju",
-      "ts": 1794434544078
-    },
     "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261112-chomeurs-frontaliers-couts-supplementaires-pour-berne.html": {
       "section": "canton-ju",
       "ts": 1794605308681
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261113-cinq-vaches-sement-la-zizanie-et-bouchonnent-l-autoroute-a1.html": {
+      "section": "canton-ju",
+      "ts": 1794749246429
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261113-la-panne-mondiale-de-microsoft-perturbe-entreprises-et-services.html": {
+      "section": "canton-ju",
+      "ts": 1794749257127
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261114-des-milliers-de-portugais-manifestent-contre-la-crise-du-logement.html": {
+      "section": "canton-ju",
+      "ts": 1794749267550
     }
   }
 }
