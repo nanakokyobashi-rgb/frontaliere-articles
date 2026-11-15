@@ -1468,8 +1468,8 @@ test('il joiner protegge anche le definizioni dentro prefissi Markdown', async (
 
 test('il joiner protegge la sequenza numerica ma ammette i separatori locali', async () => {
   const realChunker = buildChunker();
-  const splitWithSmallTarget = (bodyText) => realChunker(bodyText, 3);
-  const makeTranslator = (mutate) => {
+  const makeTranslator = (mutate, chunkTarget = 3) => {
+    const splitWithSmallTarget = (bodyText) => realChunker(bodyText, chunkTarget);
     const translateInChunks = new Function(
       'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
       `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
@@ -1522,6 +1522,467 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     null,
     'il punto ordinale non deve allentare il controllo di una misura in gradi',
   );
+
+  for (const degreeMarker of ['°', 'º']) {
+    for (const separator of [' ', ': ']) {
+      const monthBeforeDegreeSource = `A maggio${separator}12${degreeMarker} C dopo altre parole da spezzare ancora oggi.`;
+      const droppedDegree = monthBeforeDegreeSource.replace(`12${degreeMarker}`, '12');
+      assert.equal(
+        await makeTranslator((chunk) => chunk.replace(monthBeforeDegreeSource, droppedDegree), 500)(monthBeforeDegreeSource),
+        null,
+        `una misura ${degreeMarker} dopo un mese non deve diventare un ordinale se la traduzione perde il marker`,
+      );
+    }
+  }
+
+  const inlineDateSource = 'La misura vale dal 1° gennaio 2026 e resta valida.';
+  const inlineDateTarget = 'The measure applies from January 1, 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(inlineDateSource, inlineDateTarget),
+      500,
+    )(inlineDateSource),
+    inlineDateTarget,
+    'un ordinale inline può diventare un giorno senza suffisso quando la data resta riconoscibile',
+  );
+
+  const spaceSeparatedYearSource = 'La misura vale dal 12° agosto 2026 e resta valida.';
+  const spaceSeparatedYearTarget = 'The measure applies from August 12 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(spaceSeparatedYearSource, spaceSeparatedYearTarget),
+      500,
+    )(spaceSeparatedYearSource),
+    spaceSeparatedYearTarget,
+    'un anno di quattro cifre separato da spazio non deve essere consumato come raggruppamento del giorno',
+  );
+
+  const wrongMonthTarget = 'The measure applies from February 1, 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(inlineDateSource, wrongMonthTarget),
+      500,
+    )(inlineDateSource),
+    null,
+    'il mese normalizzato appartiene alla prova numerica della data',
+  );
+
+  const connectorDateTarget = 'The measure applies from 1st of January 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(inlineDateSource, connectorDateTarget),
+      500,
+    )(inlineDateSource),
+    connectorDateTarget,
+    'il connettore inglese of non deve cambiare il contratto numerico della data',
+  );
+
+  const englishDateWithoutCommaSource = 'La misura vale dal 12 agosto 2026 e resta valida.';
+  const englishDateWithoutCommaTarget = 'The measure applies from August 12 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(englishDateWithoutCommaSource, englishDateWithoutCommaTarget),
+      500,
+    )(englishDateWithoutCommaSource),
+    englishDateWithoutCommaTarget,
+    'una data inglese month-first senza virgola deve separare il giorno dall’anno',
+  );
+
+  const italianDiDateSource = 'La misura vale dal 1° di maggio 2026 e resta valida.';
+  const italianDiDateTarget = 'The measure applies from May 1, 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(italianDiDateSource, italianDiDateTarget),
+      500,
+    )(italianDiDateSource),
+    italianDiDateTarget,
+    'il connettore italiano di deve restare nella grammatica giorno-mese',
+  );
+
+  for (const [label, elision] of [['apostrofo ASCII', "d'"], ['apostrofo tipografico', 'd’']]) {
+    const elidedDateSource = `La misura vale dal 1° ${elision}ottobre 2026 e resta valida.`;
+    const elidedDateTarget = 'The measure applies from October 1, 2026 and remains valid.';
+    assert.equal(
+      await makeTranslator(
+        (chunk) => chunk.replace(elidedDateSource, elidedDateTarget),
+        500,
+      )(elidedDateSource),
+      elidedDateTarget,
+      `${label}: l’elisione italiana deve restare nella grammatica giorno-mese`,
+    );
+  }
+
+  const germanFebruaryDateSource = 'La misura vale dal 1° febbraio 2026 e resta valida.';
+  const germanFebruaryDateTarget = 'Die Maßnahme gilt ab dem 1. Februar 2026 und bleibt gültig.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(germanFebruaryDateSource, germanFebruaryDateTarget),
+      500,
+    )(germanFebruaryDateSource),
+    germanFebruaryDateTarget,
+    'il mese tedesco Februar deve essere riconosciuto senza il refuso februrar',
+  );
+
+  const localizedRangeSource = 'La misura vale dal 1° al 3 gennaio 2026 e resta valida.';
+  for (const [label, localizedRangeTarget] of [
+    ['connettore tedesco und', 'Die Maßnahme gilt ab dem 1. und 3. Januar 2026 und bleibt gültig.'],
+    ['connettore francese et', 'La mesure s’applique du 1er et 3 janvier 2026 et reste valable.'],
+    ['connettore francese à', 'La mesure s’applique du 1er à 3 janvier 2026 et reste valable.'],
+  ]) {
+    assert.equal(
+      await makeTranslator(
+        (chunk) => chunk.replace(localizedRangeSource, localizedRangeTarget),
+        500,
+      )(localizedRangeSource),
+      localizedRangeTarget,
+      `${label}: entrambi gli estremi devono restare ordinali di data`,
+    );
+  }
+
+  const dateRangeSource = 'La misura vale dal 1°-3 gennaio 2026 e resta valida.';
+  const dateRangeTarget = 'The measure applies from January 1-3, 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(dateRangeSource, dateRangeTarget),
+      500,
+    )(dateRangeSource),
+    dateRangeTarget,
+    'gli estremi di un intervallo di date devono condividere la normalizzazione ordinale',
+  );
+
+  for (const [label, spacedRangeSource] of [
+    ['spazi attorno al trattino', 'La misura vale dal 1 - 3 gennaio 2026 e resta valida.'],
+    ['segno adiacente al secondo estremo', 'La misura vale dal 1 -3 gennaio 2026 e resta valida.'],
+  ]) {
+    const spacedRangeTarget = 'The measure applies from January 1-3, 2026 and remains valid.';
+    assert.equal(
+      await makeTranslator(
+        (chunk) => chunk.replace(spacedRangeSource, spacedRangeTarget),
+        500,
+      )(spacedRangeSource),
+      spacedRangeTarget,
+      `${label}: il separatore non deve essere letto come segno di un numero negativo`,
+    );
+  }
+
+  const wrongMonthRangeTarget = 'The measure applies from February 1-3, 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(dateRangeSource, wrongMonthRangeTarget),
+      500,
+    )(dateRangeSource),
+    null,
+    'il mese errato deve essere rifiutato anche quando la data è un intervallo',
+  );
+
+  const signedRangeTarget = 'The measure applies from January 1, -3, 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(dateRangeSource, signedRangeTarget),
+      500,
+    )(dateRangeSource),
+    null,
+    'una virgola prima del segno meno non deve trasformare un numero negativo in un intervallo',
+  );
+
+  const crossMonthRangeSource = 'La misura vale dal 31° gennaio - 2° febbraio 2026 e resta valida.';
+  const crossMonthRangeTarget = 'The measure applies from January 31 - February 2, 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(crossMonthRangeSource, crossMonthRangeTarget),
+      500,
+    )(crossMonthRangeSource),
+    crossMonthRangeTarget,
+    'un intervallo cross-month deve associare ogni estremo al proprio mese',
+  );
+  const wrongCrossMonthRangeTarget = 'The measure applies from March 31 - February 2, 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(crossMonthRangeSource, wrongCrossMonthRangeTarget),
+      500,
+    )(crossMonthRangeSource),
+    null,
+    'un mese errato nel primo estremo di un intervallo cross-month deve essere rifiutato',
+  );
+  const crossMonthRangeWithYearSource = 'La misura vale dal 1° gennaio 2026 - 3° febbraio 2026 e resta valida.';
+  const crossMonthRangeWithYearTarget = 'The measure applies from January 1, 2026 - February 3, 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(crossMonthRangeWithYearSource, crossMonthRangeWithYearTarget),
+      500,
+    )(crossMonthRangeWithYearSource),
+    crossMonthRangeWithYearTarget,
+    'un intervallo con un anno per estremo deve associare i due giorni ai rispettivi mesi',
+  );
+  for (const [label, separator] of [['virgola', ','], ['punto e virgola', ';']]) {
+    const dateListSource = `Le scadenze sono il 1 gennaio${separator} 2 febbraio 2026.`;
+    const dateListTarget = `The deadlines are January 1${separator} February 2, 2026.`;
+    assert.equal(
+      await makeTranslator(
+        (chunk) => chunk.replace(dateListSource, dateListTarget),
+        500,
+      )(dateListSource),
+      dateListTarget,
+      `una lista di date separata da ${label} deve associare ogni giorno al proprio mese`,
+    );
+  }
+  for (const [label, sourceRange, targetRange] of [
+    [
+      'separatore Unicode',
+      'La misura vale dal 31° gennaio–2° febbraio 2026 e resta valida.',
+      'The measure applies from January 31–February 2, 2026 and remains valid.',
+    ],
+    [
+      'separatore senza spazi',
+      'La misura vale dal 31° gennaio-2° febbraio 2026 e resta valida.',
+      'The measure applies from January 31-February 2, 2026 and remains valid.',
+    ],
+  ]) {
+    assert.equal(
+      await makeTranslator((chunk) => chunk.replace(sourceRange, targetRange), 500)(sourceRange),
+      targetRange,
+      `${label}: ogni estremo deve conservare il proprio mese`,
+    );
+  }
+
+  const reorderedCalendarSource = 'Nel 2026, 1° gennaio la misura resta valida.';
+  const reorderedCalendarTarget = 'On January 1, 2026 the measure remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(reorderedCalendarSource, reorderedCalendarTarget),
+      500,
+    )(reorderedCalendarSource),
+    reorderedCalendarTarget,
+    'giorno e anno possono riordinarsi solo quando la prova del mese resta la stessa',
+  );
+  const invariantCalendarAnchorSource = 'In 2026, 1° gennaio la misura resta valida.';
+  const invariantCalendarAnchorTarget = 'In January 1, 2026 the measure remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(invariantCalendarAnchorSource, invariantCalendarAnchorTarget),
+      500,
+    )(invariantCalendarAnchorSource),
+    invariantCalendarAnchorTarget,
+    'un connettore invariato non deve bloccare il riordino dei componenti della data',
+  );
+  const yearAfterDateSource = 'La misura vale dal 1° gennaio 2026 e resta valida.';
+  const yearBeforeDateTarget = 'The measure applies from 2026, January 1 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(yearAfterDateSource, yearBeforeDateTarget),
+      500,
+    )(yearAfterDateSource),
+    yearBeforeDateTarget,
+    'l’anno può passare prima del giorno anche quando il mese resta fra giorno e anno nella sorgente',
+  );
+  const reorderedCalendarTableSource = '| Data | Nel 2026, 1° gennaio |';
+  const reorderedCalendarTableTarget = '| Date | On January 1, 2026 |';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(reorderedCalendarTableSource, reorderedCalendarTableTarget),
+      500,
+    )(reorderedCalendarTableSource),
+    reorderedCalendarTableTarget,
+    'lo stesso riordino calendariale deve funzionare anche nella prova per celle di tabella',
+  );
+  for (const [label, separator] of [['virgola', ','], ['punto e virgola', ';']]) {
+    const reassignedCalendarSource = `A 2026${separator} B 1° gennaio la misura resta valida.`;
+    const reassignedCalendarTarget = `A 1 January${separator} B 2026 the measure remains valid.`;
+    assert.equal(
+      await makeTranslator(
+        (chunk) => chunk.replace(reassignedCalendarSource, reassignedCalendarTarget),
+        500,
+      )(reassignedCalendarSource),
+      null,
+      `un anno non deve attraversare una clausola separata da ${label}`,
+    );
+  }
+  const reorderedNonCalendarSource = 'Nel 2026, 1° gennaio e 2 persone attendono.';
+  const reorderedNonCalendarTarget = 'On January 1, 2 people, 2026 are waiting.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(reorderedNonCalendarSource, reorderedNonCalendarTarget),
+      500,
+    )(reorderedNonCalendarSource),
+    null,
+    'il riordino non deve trascinare numeri non calendariali insieme alla data',
+  );
+
+  const nonDateSource = 'Marcia 12 miglia lungo il percorso e resta in forma.';
+  const nonDateTarget = 'March 12 miles along the route and stays fit.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(nonDateSource, nonDateTarget),
+      500,
+    )(nonDateSource),
+    nonDateTarget,
+    'un mese apparso solo nella traduzione non deve trasformare una misura in una data',
+  );
+
+  const frenchDateSource = 'La misura vale dal 1° gennaio 2026 e resta valida.';
+  const frenchDateTarget = 'La mesure s’applique dès le 1er janvier 2026 et reste valable.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(frenchDateSource, frenchDateTarget),
+      500,
+    )(frenchDateSource),
+    frenchDateTarget,
+    'un ordinale inline francese con suffisso er conserva lo stesso giorno',
+  );
+
+  const frenchFeminineDateTarget = 'La mesure s’applique dès le 1ère janvier 2026 et reste valable.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(frenchDateSource, frenchFeminineDateTarget),
+      500,
+    )(frenchDateSource),
+    frenchFeminineDateTarget,
+    'un ordinale inline francese con suffisso ère conserva lo stesso giorno',
+  );
+
+  for (const [label, sourceMonth, targetMonth] of [
+    ['janv.', 'gennaio', 'janv.'],
+    ['févr.', 'febbraio', 'févr.'],
+    ['avr.', 'aprile', 'avr.'],
+    ['juil.', 'luglio', 'juil.'],
+    ['déc.', 'dicembre', 'déc.'],
+  ]) {
+    const abbreviatedSource = `La misura vale dal 1° ${sourceMonth} 2026 e resta valida.`;
+    const abbreviatedTarget = `La mesure s’applique dès le 1er ${targetMonth} 2026 et reste valable.`;
+    assert.equal(
+      await makeTranslator(
+        (chunk) => chunk.replace(abbreviatedSource, abbreviatedTarget),
+        500,
+      )(abbreviatedSource),
+      abbreviatedTarget,
+      `l’abbreviazione francese ${label} deve restare una data locale`,
+    );
+  }
+
+  const decomposedFrenchDateSource = 'La misura vale dal 1° febbraio 2026 e resta valida.';
+  const decomposedFrenchDateTarget = 'La mesure s’applique dès le 1er fe\u0301vrier 2026 et reste valable.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(decomposedFrenchDateSource, decomposedFrenchDateTarget),
+      500,
+    )(decomposedFrenchDateSource),
+    decomposedFrenchDateTarget,
+    'un accento francese scomposto non deve far scartare la data',
+  );
+
+  const typographicFrenchDateTarget = 'La mesure s’applique dès le 1ᵉʳ janvier 2026 et reste valable.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(frenchDateSource, typographicFrenchDateTarget),
+      500,
+    )(frenchDateSource),
+    typographicFrenchDateTarget,
+    'l’ordinale francese tipografico ᵉʳ deve restare una data locale',
+  );
+
+  const germanMarchDateSource = 'La misura vale dal 1° marzo 2026 e resta valida.';
+  for (const germanMonth of ['Mär.', 'Mrz.']) {
+    const germanMarchDateTarget = `Die Maßnahme gilt ab dem 1. ${germanMonth} 2026 und bleibt gültig.`;
+    assert.equal(
+      await makeTranslator(
+        (chunk) => chunk.replace(germanMarchDateSource, germanMarchDateTarget),
+        500,
+      )(germanMarchDateSource),
+      germanMarchDateTarget,
+      `l’abbreviazione tedesca ${germanMonth} deve restare una data locale`,
+    );
+  }
+
+  const inlinePercentDateSource = 'La misura vale 12% a maggio 2026 e resta valida.';
+  const inlinePercentDateTarget = 'The measure is 12% in May 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(inlinePercentDateSource, inlinePercentDateTarget),
+      500,
+    )(inlinePercentDateSource),
+    inlinePercentDateTarget,
+    'una percentuale accanto a un mese resta una misura, non un ordinale di data',
+  );
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(inlinePercentDateSource, inlinePercentDateTarget.replace('12%', '12')),
+      500,
+    )(inlinePercentDateSource),
+    null,
+    'la traduzione non puo\' perdere una percentuale solo perche\' il numero e\' vicino a un mese',
+  );
+
+  const amountSource = 'La voce maggio: 12 CHF resta nel riepilogo e non è una data.';
+  const amountTarget = 'The May: CHF 12 entry remains in the summary and is not a date.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(amountSource, amountTarget),
+      500,
+    )(amountSource),
+    amountTarget,
+    'un importo con valuta vicino a un mese non deve diventare un ordinale di data',
+  );
+  const monthQuantitySource = 'Maggio: 12 dipendenti restano nel riepilogo.';
+  const monthQuantityTarget = 'May: 12 employees remain in the summary.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(monthQuantitySource, monthQuantityTarget),
+      500,
+    )(monthQuantitySource),
+    monthQuantityTarget,
+    'un numero month-first in prosa ordinaria deve restare una quantità, non un fatto calendario',
+  );
+
+  const mixedCalendarAndMeasurementSource = 'Misurazione: 12°; Scadenza: 1° gennaio.';
+  const mixedCalendarAndMeasurementTarget = 'Messung: 1. Januar; Fälligkeit: 12°.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(mixedCalendarAndMeasurementSource, mixedCalendarAndMeasurementTarget),
+      500,
+    )(mixedCalendarAndMeasurementSource),
+    null,
+    'un riordino non dimostrato fra una misura e una data deve essere rifiutato',
+  );
+
+  const repeatedDayCalendarSource = 'SBB Lugano: 2025, 1° gennaio; SBB Bellinzona: 2026, 1° gennaio.';
+  const repeatedDayCalendarTarget = 'SBB Lugano: 2026, 1. Januar; SBB Bellinzona: 2025, 1. Januar.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(repeatedDayCalendarSource, repeatedDayCalendarTarget),
+      500,
+    )(repeatedDayCalendarSource),
+    null,
+    'anni uguali per giorno e mese devono restare associati alla rispettiva data',
+  );
+
+  for (const [label, source, target] of [
+    [
+      'abbreviazione inglese Aug.',
+      'La misura vale dal 1° agosto 2026 e resta valida.',
+      'The measure applies from Aug. 1, 2026 and remains valid.',
+    ],
+    [
+      'abbreviazione tedesca Sept.',
+      'La misura vale dal 1° settembre 2026 e resta valida.',
+      'Die Maßnahme gilt ab dem 1. Sept. 2026 und bleibt gültig.',
+    ],
+    [
+      'abbreviazione italiana mag',
+      'La misura vale dal 1° maggio 2026 e resta valida.',
+      'La misura vale dal 1 mag 2026 e resta valida.',
+    ],
+    [
+      'forma ASCII tedesca marz',
+      'La misura vale dal 1° marzo 2026 e resta valida.',
+      'Die Maßnahme gilt ab dem 1. marz 2026 und bleibt gültig.',
+    ],
+  ]) {
+    assert.equal(
+      await makeTranslator((chunk) => chunk.replace(source, target), 500)(source),
+      target,
+      `${label}: una data inline abbreviata deve conservare il giorno`,
+    );
+  }
 
   const signedGroupedChunks = realChunker('Valore -12 345 dopo', 2);
   assert.ok(
