@@ -568,21 +568,22 @@ jobs:
           REPO: ${{ github.repository }}
         run: |
           set -uo pipefail
+          write_output() { printf '%s\n' "$1" >> "$GITHUB_OUTPUT"; }
           if ! trusted_sha=$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha') \
             || ! printf '%s' "$trusted_sha" | grep -qE '^[a-f0-9]{40}$'; then
             echo "::warning::Helper trusted non leggibile da main: nessun Codex in questo run, retryable."
-            echo "available=false" >> "$GITHUB_OUTPUT"
+            write_output "available=false"
             exit 0
           fi
           if ! git fetch --no-tags origin "$trusted_sha" -q; then
             echo "::warning::Commit main trusted non materializzabile: nessun Codex in questo run, retryable."
-            echo "available=false" >> "$GITHUB_OUTPUT"
+            write_output "available=false"
             exit 0
           fi
           trusted_path="$RUNNER_TEMP/fixer-round-marker.mjs"
           if ! git show "$trusted_sha:scripts/ci/fixer-round-marker.mjs" > "$trusted_path" || [ ! -s "$trusted_path" ]; then
             echo "::warning::Helper trusted assente sul commit main pinned: nessun Codex in questo run, retryable."
-            echo "available=false" >> "$GITHUB_OUTPUT"
+            write_output "available=false"
             exit 0
           fi
           trusted_root="$RUNNER_TEMP/fixer-identical"
@@ -605,16 +606,16 @@ jobs:
           done
           if [ "$identical_available" != 'true' ]; then
             echo "::warning::Set identical trusted non materializzabile da main: nessun fixer automatico in questo run, retryable."
-            echo "available=false" >> "$GITHUB_OUTPUT"
+            write_output "available=false"
             exit 0
           fi
-          echo "path=$trusted_path" >> "$GITHUB_OUTPUT"
-          echo "sha=$trusted_sha" >> "$GITHUB_OUTPUT"
-          echo "identical_manifest=$trusted_root/scripts/ci/loop-sync-manifest.json" >> "$GITHUB_OUTPUT"
-          echo "identical_hook=$trusted_root/scripts/ci/fixer-identical-hook.mjs" >> "$GITHUB_OUTPUT"
-          echo "identical_restore=$trusted_root/scripts/ci/restore-identical-paths.mjs" >> "$GITHUB_OUTPUT"
-          echo "identical_available=true" >> "$GITHUB_OUTPUT"
-          echo "available=true" >> "$GITHUB_OUTPUT"
+          write_output "path=$trusted_path"
+          write_output "sha=$trusted_sha"
+          write_output "identical_manifest=$trusted_root/scripts/ci/loop-sync-manifest.json"
+          write_output "identical_hook=$trusted_root/scripts/ci/fixer-identical-hook.mjs"
+          write_output "identical_restore=$trusted_root/scripts/ci/restore-identical-paths.mjs"
+          write_output "identical_available=true"
+          write_output "available=true"
 
       - name: Fail closed when the trusted identical set is unavailable
         if: always() && steps.trusted_marker.outputs.available != 'true'
@@ -753,6 +754,7 @@ jobs:
           REVIEW_BODY_B64: ${{ needs.preflight.outputs.review_body_b64 }}
         run: |
           set -uo pipefail
+          write_output() { printf '%s\n' "$1" >> "$GITHUB_OUTPUT"; }
           runtime_pat="${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}"
           workflow_pat="${GITHUB_PAT_NANAKO:-}"
           has_push_token=false
@@ -771,20 +773,20 @@ jobs:
           fi
           if [ "$has_push_token" != "true" ]; then
             echo "::warning::Nessun token operativo runtime (App/PAT) → redflag fixer saltato senza consumare un round."
-            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            write_output "proceed=false"
             exit 0
           fi
           if ! REVIEW_BODY=$(printf '%s' "$REVIEW_BODY_B64" | base64 --decode 2>/dev/null); then
             echo "::error::Review body non decodificabile: guard round-cap fail-closed."
-            echo "proceed=false" >> "$GITHUB_OUTPUT"; exit 0
+            write_output "proceed=false"; exit 0
           fi
           export REVIEW_BODY
           MAX_ROUNDS=2
           if [ "${{ steps.trusted_marker.outputs.available }}" != 'true' ]; then
             echo "::error::Helper round-marker trusted non disponibile da main: nessun Codex, stato retryable."
-            echo "proceed=false" >> "$GITHUB_OUTPUT"
-            echo "marker_verified=false" >> "$GITHUB_OUTPUT"
-            echo "retryable=true" >> "$GITHUB_OUTPUT"
+            write_output "proceed=false"
+            write_output "marker_verified=false"
+            write_output "retryable=true"
             exit 1
           fi
 
@@ -793,17 +795,17 @@ jobs:
           if ! comments_json=$(gh api --paginate --slurp \
             "repos/$REPO/issues/$PR_NUMBER/comments?per_page=100" 2>/dev/null); then
             echo "::error::Commenti PR illeggibili prima del marker REDFLAG_FIX_ROUND: cap non verificabile. Nessun Codex: stato retryable, lease rilasciato dal cleanup."
-            echo "proceed=false" >> "$GITHUB_OUTPUT"
-            echo "marker_verified=false" >> "$GITHUB_OUTPUT"
-            echo "retryable=true" >> "$GITHUB_OUTPUT"
+            write_output "proceed=false"
+            write_output "marker_verified=false"
+            write_output "retryable=true"
             exit 1
           fi
           if ! comments=$(printf '%s' "$comments_json" | jq -er \
             'if type == "array" and all(.[]; type == "array") then [flatten[] | (.body // "")] | join("\n") else error("comment pages malformed") end' 2>/dev/null); then
             echo "::error::Risposta commenti PR malformata prima del marker REDFLAG_FIX_ROUND: cap non verificabile. Nessun Codex: stato retryable, lease rilasciato dal cleanup."
-            echo "proceed=false" >> "$GITHUB_OUTPUT"
-            echo "marker_verified=false" >> "$GITHUB_OUTPUT"
-            echo "retryable=true" >> "$GITHUB_OUTPUT"
+            write_output "proceed=false"
+            write_output "marker_verified=false"
+            write_output "retryable=true"
             exit 1
           fi
           INCOMING_FP=$(printf '%s' "$REVIEW_BODY" | node scripts/ci/redflag-findings-fingerprint.mjs 2>/dev/null || echo NULL)
@@ -812,7 +814,7 @@ jobs:
           if [ -n "$INCOMING_FP" ] && [ "$INCOMING_FP" != "NULL" ] \
              && [ -n "$PRIOR_FP" ] && [ "$INCOMING_FP" = "$PRIOR_FP" ]; then
             echo "Finding 🔴 identici a un round già registrato ($INCOMING_FP) → skip duplicate review, nessun round consumato."
-            echo "proceed=false" >> "$GITHUB_OUTPUT"; exit 0
+            write_output "proceed=false"; exit 0
           fi
 
           # Il cap non usa token body-only `REDFLAG_FIX_ROUND: [0-9]+`: conta solo
@@ -822,26 +824,26 @@ jobs:
           trap 'rm -f "$marker_body_file"' EXIT
           if ! gh api "repos/$REPO/pulls/$PR_NUMBER" --jq '(.body // "")' > "$marker_body_file" 2>/dev/null; then
             echo "::error::Body PR illeggibile prima del marker REDFLAG_FIX_ROUND: cap non verificabile. Nessun Codex, stato retryable."
-            echo "proceed=false" >> "$GITHUB_OUTPUT"
-            echo "marker_verified=false" >> "$GITHUB_OUTPUT"
-            echo "retryable=true" >> "$GITHUB_OUTPUT"
+            write_output "proceed=false"
+            write_output "marker_verified=false"
+            write_output "retryable=true"
             exit 1
           fi
           if ! marker_body_revision_before=$(sha256sum "$marker_body_file" | awk '{print $1}') \
             || ! printf '%s\n' "$marker_body_revision_before" | grep -Eq '^[a-f0-9]{64}$'; then
             echo "::error::Body revision PR illeggibile prima del marker REDFLAG_FIX_ROUND: cap non verificabile. Nessun Codex, stato retryable."
-            echo "proceed=false" >> "$GITHUB_OUTPUT"
-            echo "marker_verified=false" >> "$GITHUB_OUTPUT"
-            echo "retryable=true" >> "$GITHUB_OUTPUT"
+            write_output "proceed=false"
+            write_output "marker_verified=false"
+            write_output "retryable=true"
             exit 1
           fi
           if ! round_state=$(node "${{ steps.trusted_marker.outputs.path }}" \
             --current-round --repo "$REPO" --pr "$PR_NUMBER" --marker REDFLAG_FIX_ROUND \
             --expected-author github-actions[bot]); then
             echo "::error::Round REDFLAG_FIX_ROUND non verificabile con il helper trusted: nessun Codex, stato retryable."
-            echo "proceed=false" >> "$GITHUB_OUTPUT"
-            echo "marker_verified=false" >> "$GITHUB_OUTPUT"
-            echo "retryable=true" >> "$GITHUB_OUTPUT"
+            write_output "proceed=false"
+            write_output "marker_verified=false"
+            write_output "retryable=true"
             exit 1
           fi
           if ! round_state_status=$(printf '%s' "$round_state" | jq -er \
@@ -857,17 +859,17 @@ jobs:
              elif .bodyRevision != $expected_body then error("round state body snapshot stale")
              else ("current:" + (.round | tostring)) end'); then
             echo "::error::Round REDFLAG_FIX_ROUND non classificabile: snapshot stale o malformed, nessun Codex, stato retryable."
-            echo "proceed=false" >> "$GITHUB_OUTPUT"
-            echo "marker_verified=false" >> "$GITHUB_OUTPUT"
-            echo "retryable=true" >> "$GITHUB_OUTPUT"
+            write_output "proceed=false"
+            write_output "marker_verified=false"
+            write_output "retryable=true"
             exit 1
           fi
           case "$round_state_status" in
             head-stale)
               echo "::notice::HEAD della review superata dopo il preflight → redflag fixer no-op, nessun round o Codex consumato."
-              echo "proceed=false" >> "$GITHUB_OUTPUT"
-              echo "marker_verified=false" >> "$GITHUB_OUTPUT"
-              echo "retryable=false" >> "$GITHUB_OUTPUT"
+              write_output "proceed=false"
+              write_output "marker_verified=false"
+              write_output "retryable=false"
               exit 0
               ;;
             current:*)
@@ -875,9 +877,9 @@ jobs:
               ;;
             *)
               echo "::error::Round REDFLAG_FIX_ROUND malformato rispetto al cap: nessun Codex, stato retryable."
-              echo "proceed=false" >> "$GITHUB_OUTPUT"
-              echo "marker_verified=false" >> "$GITHUB_OUTPUT"
-              echo "retryable=true" >> "$GITHUB_OUTPUT"
+              write_output "proceed=false"
+              write_output "marker_verified=false"
+              write_output "retryable=true"
               exit 1
               ;;
           esac
@@ -896,7 +898,7 @@ jobs:
               gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- REDFLAG_NEEDS_HUMAN -->\n🛑 **needs-human** (auto): il 🔴-fixer ha già tentato %s round senza chiudere i findings 🔴. STOP automatico (anti-loop, frugalità quota). Serve revisione umana: leggi le review più recenti e applica il fix a mano.' "$ROUND")" \
                 2>/dev/null || true
             fi
-            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            write_output "proceed=false"
             exit 0
           fi
 
@@ -907,7 +909,7 @@ jobs:
             echo "::warning::PR tocca .github/workflows/** ma manca un token runtime con scope workflows → push rifiutato, skip senza bruciare un turno Claude."
             gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '⏭️ 🔴-fixer skip: la PR tocca \x60.github/workflows/**\x60 e non è disponibile un PAT con scope \x60workflows\x60 → il push fallirebbe. Applicare il fix dei 🔴 a mano.')" \
               2>/dev/null || true
-            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            write_output "proceed=false"
             exit 0
           fi
 
@@ -918,11 +920,11 @@ jobs:
           # restano distinti solo per telemetria/prompt.
           crit=$(echo "$files" | grep -E '^(tests/|build-plugins/|scripts/lib/|services/seo)' || true)
           if [ -n "$crit" ]; then
-            echo "tier=high"   >> "$GITHUB_OUTPUT"
-            echo "model=gpt-5.6-luna"   >> "$GITHUB_OUTPUT"
+            write_output "tier=high"
+            write_output "model=gpt-5.6-luna"
           else
-            echo "tier=normal" >> "$GITHUB_OUTPUT"
-            echo "model=gpt-5.6-luna" >> "$GITHUB_OUTPUT"
+            write_output "tier=normal"
+            write_output "model=gpt-5.6-luna"
           fi
 
           # Posta/incrementa il marker round PRIMA di invocare Claude (così se la
@@ -944,26 +946,28 @@ jobs:
             --message "$marker_message" \
             --expected-author github-actions[bot]); then
             echo "::error::Marker REDFLAG_FIX_ROUND:$NEXT non persistito o non verificabile (HEAD/body revision/commenti paginati). Nessun Codex: stato retryable, lease rilasciato dal cleanup."
-            echo "proceed=false" >> "$GITHUB_OUTPUT"
-            echo "marker_verified=false" >> "$GITHUB_OUTPUT"
-            echo "retryable=true" >> "$GITHUB_OUTPUT"
+            write_output "proceed=false"
+            write_output "marker_verified=false"
+            write_output "retryable=true"
             exit 1
           fi
           if ! printf '%s' "$marker_result" | jq -e \
             --arg marker REDFLAG_FIX_ROUND --argjson round "$NEXT" --arg head "${{ needs.preflight.outputs.head_sha }}" \
             'type == "object" and .commentId != null and .postedCommentId == .commentId and (.postedCommentAuthor | type == "string" and length > 0) and .marker == $marker and .round == $round and .headSha == $head and (.bodySha | type == "string" and test("^[a-f0-9]{64}$")) and (.bodyRevision == .bodySha)' >/dev/null 2>&1; then
             echo "::error::Marker REDFLAG_FIX_ROUND:$NEXT restituito senza prova strutturata valida. Nessun Codex: stato retryable, lease rilasciato dal cleanup."
-            echo "proceed=false" >> "$GITHUB_OUTPUT"
-            echo "marker_verified=false" >> "$GITHUB_OUTPUT"
-            echo "retryable=true" >> "$GITHUB_OUTPUT"
+            write_output "proceed=false"
+            write_output "marker_verified=false"
+            write_output "retryable=true"
             exit 1
           fi
-          echo "proceed=true" >> "$GITHUB_OUTPUT"
-          echo "round=$NEXT"  >> "$GITHUB_OUTPUT"
-          echo "marker_body_revision=$(printf '%s' "$marker_result" | jq -r '.bodyRevision')" >> "$GITHUB_OUTPUT"
-          echo "marker_comment_id=$(printf '%s' "$marker_result" | jq -r '.commentId')" >> "$GITHUB_OUTPUT"
-          echo "marker_verified=true" >> "$GITHUB_OUTPUT"
-          echo "retryable=false" >> "$GITHUB_OUTPUT"
+          {
+            echo "proceed=true"
+            echo "round=$NEXT"
+            echo "marker_body_revision=$(printf '%s' "$marker_result" | jq -r '.bodyRevision')"
+            echo "marker_comment_id=$(printf '%s' "$marker_result" | jq -r '.commentId')"
+            echo "marker_verified=true"
+            echo "retryable=false"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Configure git identity
         if: steps.guard.outputs.proceed == 'true'
@@ -1502,7 +1506,7 @@ jobs:
             - Mai abbassare quality gate/test/validation/SEO gate per "far passare" (#1). Mai path home assoluti o email personali (AGENTS.md #7).
             - CODE vs DATA: non scorrere i blob `data/**`/`public/**`; fixa il CODE che li genera.
             - Esegui i test pertinenti: `npm test` (o il subset rilevante) per validare il fix prima di committare.
-            - Commit con messaggio conventional; mantieni il gate PII su diff e messaggio.
+            - Commit con messaggio conventional (`fix(...)`/`chore(...)`); mantieni il gate PII su diff e messaggio. Il subject di un commit del fixer NON inizia MAI con `wip(` (neppure imitando lo stile del branch, es. `wip(issue-N): checkpoint pre-test`): la guardia F7 del review gate (al sito) chiude senza review ogni PR la cui HEAD e' un checkpoint WIP, e il corpus tiene lo stesso contratto. Uno step deterministico aggiunge un commit conventional sopra se lo dimentichi, ma tu non contarci.
             - NON modificare né committare path `mode: identical`: il file si corregge nel sito e il rilievo viene instradato; il pre-commit hook trusted rifiuta comunque il commit.
             - Push sullo stesso branch: `git push origin HEAD:refs/heads/${{ needs.preflight.outputs.head_ref }}`. Il ref completo è richiesto dal bridge Git confinato al branch corrente. Il remote `origin` è autenticato con il token passato a questa action come `github_token` (il PAT, quando disponibile): l'action riscrive `origin` all'avvio, quindi vale QUEL token, non quello configurato dagli step precedenti. Non è il GITHUB_TOKEN → il push ri-attiva la review dentro tests.yml (re-review), e i file sotto `.github/workflows/**` sono pushabili. Se il push fallisce per scope/auth → prima di arrenderti verifica `git remote -v` (deve mostrare `x-access-token:***@github.com`); se dice `without workflows permission`, il PAT non è arrivato: documenta in un commento e TERMINA.
             - Aggiorna il body della PR (`gh pr edit $PR_NUMBER --body`) mantenendo `## Implementato` (aggiungi cosa hai fixato) + `## Non implementato (ancora)`.
@@ -1542,6 +1546,59 @@ jobs:
           fi
           comment=$(printf '%s' "$result" | jq -er '.comment')
           gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$comment"
+
+      # PERCHE' ESISTE (portato dal sito, misurato il 2026-11-15 su #18822 round 1,
+      # run 43705023231; il corpus tiene lo stesso contratto del gemello).
+      # Il fixer ha consegnato la correzione come `wip(issue-18813): checkpoint
+      # pre-test`, messaggio scelto dal modello imitando lo stile del branch. Il
+      # Re-review guard di tests.yml (F7) chiude fail-closed senza modello ogni
+      # HEAD `wip(issue-N): checkpoint ...`, quindi la PR resta senza review.
+      #
+      # Il push lo fa il modello, quindi la rete e' qui, subito dopo di lui e
+      # PRIMA di qualunque step che legga la HEAD (classificatore, avanzamento
+      # del body): se il commit del round (HEAD locale != BASE_SHA, mai un commit
+      # gia' presente nella PR) ha subject `wip(...)`, si aggiunge sopra un
+      # commit conventional vuoto con lo stesso trailer `Fixer:` e lo si pusha
+      # normale. Niente amend ne' rewrite di commit gia' pushati, mai force.
+      # La guardia F7 resta fail-closed per i checkpoint di sessioni morte.
+      - name: Finalize redflag HEAD (never deliver a WIP checkpoint, zero-Claude)
+        id: finalize_head
+        if: always() && steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true' && steps.identical_restore.outcome == 'success'
+        continue-on-error: true
+        env:
+          HEAD_REF: ${{ needs.preflight.outputs.head_ref }}
+          BASE_SHA: ${{ steps.base.outputs.sha }}
+          FIX_ROUND: ${{ steps.guard.outputs.round }}
+        run: |
+          set -uo pipefail
+          head_now=$(git rev-parse HEAD 2>/dev/null || echo "")
+          if [ -z "$head_now" ] || [ -z "${BASE_SHA:-}" ] || [ "$head_now" = "$BASE_SHA" ]; then
+            echo "finalize-head: nessun commit nuovo in questo round → niente da fare."
+            exit 0
+          fi
+          subject=$(git log -1 --format=%s HEAD)
+          if ! [[ "$subject" =~ ^wip\( ]]; then
+            echo "finalize-head: l'HEAD del round non e' un commit WIP → niente da fare."
+            exit 0
+          fi
+          if [ -n "$(git status --porcelain=v1)" ]; then
+            echo "::warning::finalize-head: working tree non pulito — nessun commit/push per non perdere modifiche residue."
+            exit 0
+          fi
+          echo "::warning::finalize-head: l'HEAD del round e' «$subject»: aggiungo un commit conventional sopra (la guardia F7 chiuderebbe la review)."
+          if ! git commit --allow-empty \
+              -m "chore(redflag): consegna il fix del round ${FIX_ROUND:-?}" \
+              -m "Commit finale non-WIP aggiunto dallo step deterministico del fixer: l'HEAD del round era un checkpoint wip(...), che la guardia F7 del review gate chiude fail-closed senza review." \
+              --trailer "Fixer: redflag-round-${FIX_ROUND:-0}"; then
+            echo "::warning::finalize-head: commit rifiutato (hook o gate PII) — l'HEAD resta il checkpoint."
+            exit 0
+          fi
+          if git push origin "HEAD:refs/heads/${HEAD_REF}" 2>&1 | tail -3; then
+            echo "finalize-head: ${HEAD_REF} ora ha HEAD $(git rev-parse --short HEAD) (commit conventional, non WIP)."
+          else
+            echo "::warning::finalize-head: push fallito — l'HEAD resta il checkpoint."
+          fi
+
 
       - name: Cleanup Firebase credentials
         if: always()
