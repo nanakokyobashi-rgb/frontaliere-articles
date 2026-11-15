@@ -262,6 +262,21 @@ test('la guardia dei fatti chiave sta prima del gate e della scrittura atomica',
   assert.ok(gate < filteredWrite && filteredWrite < write, 'la scrittura deve persistere il payload gia\' guardato dopo tutti i gate');
 });
 
+test('il writer storico usa il contratto source-owned delle intestazioni di tabella prima della scrittura', () => {
+  const source = fs.readFileSync(
+    new URL('../scripts/retranslate-blocking-bodies.mjs', import.meta.url),
+    'utf8',
+  );
+  const marker = source.indexOf('const markedBody = tableHeaderColumnMarkers(italianSections[f]);');
+  const translate = source.indexOf('text: markedBody.markedText,', marker);
+  const validate = source.indexOf('tableHeaderColumnMarkersMatch(out, markedBody.markers)', marker);
+  const strip = source.indexOf('stripTableHeaderColumnMarkers(out)', marker);
+  const write = source.indexOf('writeAtomic(trPath, rewritten.src)', marker);
+  assert.ok(marker >= 0, 'il writer deve creare i marker dalla sorgente italiana');
+  assert.ok(marker < translate && translate < validate && validate < strip && strip < write,
+    'il writer deve tradurre, validare e togliere i marker prima di writeAtomic');
+});
+
 // Lotto 1 della bonifica Codex (#2121, 20 coppie de): 6 rifiutate col motivo
 // generico «sezione Fatti chiave riconosciuta» perche' la traduzione diceva
 // `## Eckdaten`, e 8 delle 9 scritte con `## Kurz zusammengefasst` al posto di

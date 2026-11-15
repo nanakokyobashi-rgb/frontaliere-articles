@@ -15006,6 +15006,309 @@ ${enrichmentLine}
 // this script runs main() on import so its internals can't be imported).
 const ARTICLE_TRANSLATE_FREE_MT = String(process.env.ARTICLE_TRANSLATE_FREE_MT ?? '1') !== '0';
 
+/**
+ * A Markdown table header can contain only translatable prose, so its column
+ * identity is otherwise lost as soon as a provider returns two labels in the
+ * opposite order. Keep a source-owned, opaque marker in every header cell
+ * while the text is translated. The marker is a transport contract, never
+ * article content: the validator removes it after proving that each marker
+ * stayed in its source column.
+ */
+const TABLE_HEADER_COLUMN_MARKER_NONCE_KEY = Symbol.for('frontaliere.table-header-column-marker-nonce');
+const TABLE_HEADER_COLUMN_MARKER_NONCE = globalThis[TABLE_HEADER_COLUMN_MARKER_NONCE_KEY]
+  ?? (globalThis[TABLE_HEADER_COLUMN_MARKER_NONCE_KEY] = `${Date.now().toString(36)}${Math.random().toString(36).slice(2)}`.slice(-16));
+
+function tableHeaderColumnMarkerRegExp(currentRunOnly = true) {
+  const markerAttribute = currentRunOnly
+    ? `data-frontaliere-table-marker="v3${TABLE_HEADER_COLUMN_MARKER_NONCE}"`
+    : 'data-frontaliere-table-marker="v3[^"]+"';
+  return new RegExp(
+    `<span data-frontaliere-table-column="h(\\d+)-c(\\d+)" data-frontaliere-table-source="([0-9a-f]{8})" ${markerAttribute}><\\/span>`,
+    'gu',
+  );
+}
+
+function tableHeaderColumnMarker(headerIndex, cellIndex, sourceFingerprint = '00000000') {
+  return `<span data-frontaliere-table-column="h${headerIndex}-c${cellIndex}" data-frontaliere-table-source="${sourceFingerprint}" data-frontaliere-table-marker="v3${TABLE_HEADER_COLUMN_MARKER_NONCE}"></span>`;
+}
+
+function tableHeaderColumnPayloadFingerprint(value) {
+  // FNV-1a is deliberately local and deterministic: the token is an opaque
+  // source-owned identity, not a security boundary. Keeping it here avoids a
+  // crypto dependency in the extracted test harnesses and makes a provider's
+  // «marker stayed in the cell» claim auditable per payload.
+  let hash = 2166136261;
+  for (const codePoint of String(value ?? '').replace(/\s+/gu, ' ').trim()) {
+    hash ^= codePoint.codePointAt(0);
+    hash = Math.imul(hash, 16777619);
+  }
+  return (hash >>> 0).toString(16).padStart(8, '0');
+}
+
+function stripTableHeaderColumnMarkers(value) {
+  return String(value ?? '').replace(
+    new RegExp(`[ \\t]?${tableHeaderColumnMarkerRegExp().source}`, 'gu'),
+    '',
+  );
+}
+
+function tableHeaderColumnPipeLayout(line) {
+  const value = String(line ?? '');
+  const cells = [];
+  let cellStart = 0;
+  let firstRawPipe = -1;
+  let lastRawPipe = -1;
+  for (let cursor = 0; cursor < value.length; cursor += 1) {
+    if (value[cursor] !== '|') continue;
+    let slashCount = 0;
+    for (let previous = cursor - 1; previous >= 0 && value[previous] === '\\'; previous -= 1) {
+      slashCount += 1;
+    }
+    if (slashCount % 2 === 1) continue;
+    if (firstRawPipe === -1) firstRawPipe = cursor;
+    lastRawPipe = cursor;
+    cells.push({ start: cellStart, end: cursor });
+    cellStart = cursor + 1;
+  }
+  if (firstRawPipe === -1) return null;
+  cells.push({ start: cellStart, end: value.length });
+  return { cells, firstRawPipe, lastRawPipe };
+}
+
+function tableHeaderColumnFramePrefix(prefix) {
+  const normalized = String(prefix ?? '').trim();
+  if (!normalized) return '';
+  let remainder = normalized;
+  let consumedFrame = false;
+  while (remainder) {
+    const blockquote = remainder.match(/^>\s*/u);
+    if (blockquote) {
+      consumedFrame = true;
+      remainder = remainder.slice(blockquote[0].length).trimStart();
+      continue;
+    }
+    const listOrHeading = remainder.match(/^(?:#{1,6}|[-+*•]|\d+[.)])(?:\s+|$)/u);
+    if (!listOrHeading) return null;
+    consumedFrame = true;
+    remainder = remainder.slice(listOrHeading[0].length).trimStart();
+  }
+  return consumedFrame ? normalized.replace(/\s+/gu, ' ') : null;
+}
+
+function tableHeaderColumnFrame(line, layout) {
+  if (!layout) return null;
+  const value = String(line ?? '');
+  const prefix = value.slice(0, layout.firstRawPipe).trim();
+  const framePrefix = tableHeaderColumnFramePrefix(prefix);
+  const hasLeadingFrame = framePrefix !== null;
+  const suffix = value.slice(layout.lastRawPipe + 1).trim();
+  const hasTrailingFrame = !suffix;
+  const firstColumn = hasLeadingFrame ? 1 : 0;
+  const lastColumn = layout.cells.length - (hasTrailingFrame ? 2 : 1);
+  if (firstColumn > lastColumn) return null;
+  return {
+    firstColumn,
+    lastColumn,
+    prefix: framePrefix ?? '',
+    hasLeadingFrame,
+    hasTrailingFrame,
+  };
+}
+
+function tableHeaderColumnHeaderInfo(lines, lineIndex) {
+  const line = lines[lineIndex] ?? '';
+  const separatorLine = lines[lineIndex + 1] ?? '';
+  const layout = tableHeaderColumnPipeLayout(line);
+  const separatorLayout = tableHeaderColumnPipeLayout(separatorLine);
+  const frame = tableHeaderColumnFrame(line, layout);
+  const separatorFrame = tableHeaderColumnFrame(separatorLine, separatorLayout);
+  if (!layout || !separatorLayout || !frame || !separatorFrame) return null;
+  if (
+    frame.firstColumn !== separatorFrame.firstColumn
+    || frame.lastColumn !== separatorFrame.lastColumn
+    || frame.prefix !== separatorFrame.prefix
+  ) return null;
+  const separatorCells = separatorLayout.cells
+    .slice(separatorFrame.firstColumn, separatorFrame.lastColumn + 1)
+    .map(({ start, end }) => separatorLine.slice(start, end).trim());
+  if (!separatorCells.some((cell) => /^:?-{3,}:?$/u.test(cell))) return null;
+  if (!separatorCells.every((cell) => /^:?-{3,}:?$/u.test(cell))) return null;
+  return { layout, frame, separatorLayout, separatorFrame };
+}
+
+function tableHeaderColumnHeaderOccurrenceIndex(lines, lineIndex) {
+  let occurrenceIndex = 0;
+  for (let index = 0; index <= lineIndex; index += 1) {
+    if (!tableHeaderColumnHeaderInfo(lines, index)) continue;
+    if (index === lineIndex) return occurrenceIndex;
+    occurrenceIndex += 1;
+  }
+  return -1;
+}
+
+function tableHeaderColumnSourceOwnedTokens(value) {
+  const tokens = [];
+  const text = String(value ?? '');
+  for (const match of text.matchAll(/(?:https?:\/\/[^\s)]+|nav:[^\s)]+|`[^`]+`|\b\d[\d.,:%\/-]*)/gu)) {
+    tokens.push(match[0].replace(/[.,;:!?]+$/u, ''));
+  }
+  return [...new Set(tokens.filter(Boolean))];
+}
+
+function tableHeaderColumnPayloadHasSourceOwnedProof(sourceText, translatedText, expectedMarkers) {
+  const sourceTokens = tableHeaderColumnSourceOwnedTokens(sourceText);
+  if (sourceTokens.length === 0) return false;
+  const translatedTokens = new Set(tableHeaderColumnSourceOwnedTokens(translatedText));
+  if (!sourceTokens.every((token) => translatedTokens.has(token))) return false;
+
+  // A shared token cannot identify a column. Require at least one source-owned
+  // atom that belongs only to this header cell, otherwise two labels can still
+  // be permuted while preserving the same visible proof.
+  return sourceTokens.some((token) => expectedMarkers.filter((other) => (
+    tableHeaderColumnSourceOwnedTokens(other.sourceText).includes(token)
+  )).length === 1);
+}
+
+function tableHeaderColumnMarkers(value) {
+  const raw = String(value ?? '');
+  const generatedMarkersRemoved = raw.replace(
+    tableHeaderColumnMarkerRegExp(),
+    '',
+  );
+  // Never erase an article-owned span merely because it uses the transport's
+  // old/public attribute name. A collision is fail-closed and remains visible
+  // to the caller instead of silently disappearing from every locale.
+  if (/data-frontaliere-table-column\s*=/u.test(generatedMarkersRemoved)) {
+    return { markedText: raw, markers: [], collision: true };
+  }
+  const source = stripTableHeaderColumnMarkers(raw);
+  const lines = source.split('\n');
+  const markers = [];
+  let headerIndex = 0;
+  const markedLines = lines.map((line, lineIndex) => {
+    const info = tableHeaderColumnHeaderInfo(lines, lineIndex);
+    if (!info) return line;
+    const { layout, frame } = info;
+    const currentHeaderIndex = headerIndex;
+    headerIndex += 1;
+
+    let marked = line;
+    for (let cellIndex = frame.lastColumn; cellIndex >= frame.firstColumn; cellIndex -= 1) {
+      const cell = layout.cells[cellIndex];
+      const cellText = line.slice(cell.start, cell.end);
+      const trailingWhitespace = cellText.match(/[ \t]*$/u)?.[0] || '';
+      const insertAt = cell.end - trailingWhitespace.length;
+      const hasCellText = line.slice(cell.start, insertAt).trim() !== '';
+      const sourceFingerprint = tableHeaderColumnPayloadFingerprint(cellText);
+      const marker = tableHeaderColumnMarker(currentHeaderIndex, cellIndex, sourceFingerprint);
+      marked = `${marked.slice(0, insertAt)}${hasCellText ? ' ' : ''}${marker}${marked.slice(insertAt)}`;
+      markers.push({
+        lineIndex,
+        headerIndex: currentHeaderIndex,
+        cellIndex,
+        sourceFingerprint,
+        sourceText: cellText.trim(),
+        marker,
+      });
+    }
+    return marked;
+  });
+  return { markedText: markedLines.join('\n'), markers, collision: false };
+}
+
+function buildBodyTruncationRetryPrompt({
+  chunkText,
+  index,
+  total,
+  langName,
+  field,
+  alreadyMarked = false,
+}) {
+  const partLabel = total > 1 ? `, parte ${index + 1} di ${total}` : '';
+  let markedChunkText = String(chunkText ?? '');
+  if (!alreadyMarked) {
+    const markedChunk = tableHeaderColumnMarkers(markedChunkText);
+    if (markedChunk.collision) throw new Error('collisione del marker di tabella nel body sorgente');
+    markedChunkText = markedChunk.markedText;
+  }
+  return `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. `
+    + `La traduzione deve essere COMPLETA fino all'ultima frase: non troncare, non interrompere a metà periodo. `
+    + `Copia ogni marcatore opaco <span data-frontaliere-table-column="riga-cella"></span> esattamente nella stessa cella della tabella; non tradurlo. `
+    + `Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${field}${partLabel}):\n${markedChunkText}\n\nFormato risposta: {"${field}": "..."}`;
+}
+
+function tableHeaderColumnMarkersMatch(value, expectedMarkers) {
+  const text = String(value ?? '');
+  const lines = text.split('\n');
+  const found = [];
+  const currentRunMarkers = tableHeaderColumnMarkerRegExp();
+  for (const match of text.matchAll(currentRunMarkers)) {
+    const marker = match[0];
+    const position = match.index ?? -1;
+    if (position < 0) return false;
+    const lineIndex = text.slice(0, position).split('\n').length - 1;
+    const lineStart = text.lastIndexOf('\n', position - 1) + 1;
+    const lineEnd = text.indexOf('\n', position);
+    const line = text.slice(lineStart, lineEnd === -1 ? text.length : lineEnd);
+    const info = tableHeaderColumnHeaderInfo(lines, lineIndex);
+    if (!info) return false;
+    const { layout, frame } = info;
+    const outputHeaderIndex = tableHeaderColumnHeaderOccurrenceIndex(lines, lineIndex);
+    if (outputHeaderIndex < 0) return false;
+    const localPosition = position - lineStart;
+    const cellIndex = layout.cells.findIndex(({ start, end }) => localPosition >= start && localPosition < end);
+    if (cellIndex < frame.firstColumn || cellIndex > frame.lastColumn) return false;
+    const cell = layout.cells[cellIndex];
+    const cellText = stripTableHeaderColumnMarkers(line.slice(cell.start, cell.end)).trim();
+    found.push({
+      lineIndex,
+      headerIndex: Number(match[1]),
+      outputHeaderIndex,
+      cellIndex,
+      sourceFingerprint: match[3],
+      sourceText: cellText,
+      marker,
+    });
+  }
+  if (/data-frontaliere-table-column\s*=/u.test(text.replace(tableHeaderColumnMarkerRegExp(), ''))) return false;
+  if (found.length !== expectedMarkers.length) return false;
+  return expectedMarkers.every(({ lineIndex, headerIndex, cellIndex, sourceFingerprint, sourceText, marker }) => {
+    const matches = found.filter((entry) => entry.marker === marker);
+    if (matches.length !== 1) return false;
+    const foundEntry = matches[0];
+    if (
+      foundEntry.lineIndex !== lineIndex
+      || foundEntry.headerIndex !== headerIndex
+      || foundEntry.outputHeaderIndex !== headerIndex
+      || foundEntry.cellIndex !== cellIndex
+      || foundEntry.sourceFingerprint !== sourceFingerprint
+    ) return false;
+    // A provider must not be able to leave the markers in place while
+    // swapping two source-only labels. Exact source-text reuse in another
+    // marked cell is strong evidence of that permutation; translated prose is
+    // allowed, but a copied neighbour is not.
+    const normalizedFound = foundEntry.sourceText.replace(/\s+/gu, ' ').trim();
+    const normalizedExpected = String(sourceText ?? '').replace(/\s+/gu, ' ').trim();
+    if (normalizedFound !== normalizedExpected && expectedMarkers.some((other) => (
+      other.headerIndex === headerIndex
+      && other.cellIndex !== cellIndex
+      && String(other.sourceText ?? '').replace(/\s+/gu, ' ').trim() === normalizedFound
+    ))) return false;
+    // A marker is source-owned, but its fingerprint describes the marker, not
+    // the prose a provider places beside it. Purely translated labels are
+    // therefore ambiguous: a provider can keep the markers in their original
+    // cells while swapping the two visible meanings. Accept changed prose
+    // only when the cell retains a unique source-owned atom (number, URL,
+    // nav/code token); otherwise fail closed.
+    return normalizedFound === normalizedExpected
+      || tableHeaderColumnPayloadHasSourceOwnedProof(
+        sourceText,
+        foundEntry.sourceText,
+        expectedMarkers.filter((other) => other.headerIndex === headerIndex),
+      );
+  });
+}
+
 // Thin in-script wrapper: bind the lib field-translator to the prod MT cascade,
 // markdown repair, and logger. Returns '' on any failure so the caller's
 // per-field recovery takes over (LLM retry → IT fallback for title/excerpt/FAQ,
@@ -15022,8 +15325,14 @@ function freeMtField(
   field = fieldType,
   { preserveMunicipalityNames = false } = {},
 ) {
+  let sourceText = text;
+  if (/^body\d+$/u.test(field)) {
+    const markedBody = tableHeaderColumnMarkers(text);
+    if (markedBody.collision) return '';
+    sourceText = markedBody.markedText;
+  }
   return translateFieldFreeMt({
-    text,
+    text: sourceText,
     sourceLang,
     targetLang,
     fieldType,
@@ -15093,7 +15402,8 @@ async function translateContentFreeMt(
     ),
     ...bodyFields.map(async (field) => {
       const translated = await freeMtField(sourceContent[field], sourceLang, targetLang, 'description', field);
-      if (!translated || typeof validateBody !== 'function') return translated;
+      if (!translated) return translated;
+      if (typeof validateBody !== 'function') return stripTableHeaderColumnMarkers(translated);
       const validated = await validateBody({
         field,
         sourceText: sourceContent[field],
@@ -15167,6 +15477,7 @@ VINCOLI OBBLIGATORI:
 - non riassumere e non omettere frasi o paragrafi;
 - mantieni la stessa struttura Markdown, inclusi heading, elenchi, citazioni e interruzioni di riga;
 - mantieni invariati i nomi propri, i toponimi, le cifre e le destinazioni dei link nav: protette dai marcatori;
+- se compaiono marcatori opachi <span data-frontaliere-table-column="riga-cella"></span>, copiali esattamente nella stessa cella della tabella: identificano la colonna sorgente e non sono testo da tradurre;
 - non aggiungere spiegazioni, prefissi o code fences.
 
 CONTENUTO ITALIANO DA TRADURRE:
@@ -15288,8 +15599,10 @@ async function translatePendingBodyWithCodex(
       });
       const rejected = [];
       let codexModelUnavailable = false;
+      const markedBody = tableHeaderColumnMarkers(itValue);
+      if (markedBody.collision) return null;
       const text = await translateFieldFreeMt({
-        text: itValue,
+        text: markedBody.markedText,
         sourceLang: 'it',
         targetLang: locale,
         fieldType: 'description',
@@ -15342,7 +15655,7 @@ async function translatePendingBodyWithCodex(
           locale,
           { pretranslatedResult: { [field]: text } },
         )
-        : text;
+        : stripTableHeaderColumnMarkers(text);
       if (text && validatedText === null) rejected.push('structure');
       if (!validatedText
         && (codexModelUnavailable || !pendingBodySecondLaneAvailable() || rejected.length > 0)
@@ -15382,8 +15695,10 @@ async function translatePendingBodyWithHistoricalChain(
   }
   const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
   const rejected = [];
+  const markedBody = tableHeaderColumnMarkers(itValue);
+  if (markedBody.collision) return null;
   const text = await translateFieldFreeMt({
-    text: itValue,
+    text: markedBody.markedText,
     sourceLang: 'it',
     targetLang: locale,
     fieldType: 'description',
@@ -15649,9 +15964,15 @@ async function translateArticle(data) {
     targetLang,
     { pretranslatedResult = null, forceLegacy = false } = {},
   ) {
+    // Recovery/free-MT callers may already have carried the transport markers
+    // through a first provider. Normalize them before deriving the next
+    // expected mapping so nested validation remains idempotent.
+    bodyText = stripTableHeaderColumnMarkers(bodyText);
+    const tableHeaderMarkers = tableHeaderColumnMarkers(bodyText);
+    if (tableHeaderMarkers.collision) return null;
     const chunks = pretranslatedResult === null
-      ? splitIntoTranslationChunks(bodyText)
-      : [bodyText];
+      ? splitIntoTranslationChunks(tableHeaderMarkers.markedText)
+      : [tableHeaderMarkers.markedText];
     const translated = pretranslatedResult === null
       ? await Promise.all(
         chunks.map((chunk, i) =>
@@ -15676,10 +15997,12 @@ async function translateArticle(data) {
       parts.push(part);
     }
     const separators = chunks.separators || [];
-    const joined = parts.reduce(
+    const joinedWithTableMarkers = parts.reduce(
       (joined, part, index) => joined + (index === 0 ? '' : separators[index - 1] ?? '') + part,
       '',
     );
+    if (!tableHeaderColumnMarkersMatch(joinedWithTableMarkers, tableHeaderMarkers.markers)) return null;
+    const joined = stripTableHeaderColumnMarkers(joinedWithTableMarkers);
 
     // The structural contracts below cannot see prose silently dropped from a
     // chunk. A response can preserve every marker, link and number and still
@@ -16986,10 +17309,12 @@ async function translateArticle(data) {
     // A table can preserve its pipes and per-cell opaque atoms while still
     // swapping two cells made only of translatable prose. Such cells have no
     // source-owned identity after translation, so accept at most one unresolved
-    // cell per row (all other cells provide a unique association by position/proof).
-    // This is deliberately fail-closed: a table with two or more unresolved
+    // cell per data row (all other cells provide a unique association by position/proof).
+    // This is deliberately fail-closed for data rows: two or more unresolved
     // cells, or duplicate proofs on changed cells, cannot demonstrate that the
-    // provider kept the facts in their original columns.
+    // provider kept the facts in their original columns. A header row directly
+    // followed by a separator may exceed that cap only after the opaque
+    // per-column markers above have round-tripped in their original cells.
     const tableCellProof = (cell, sourceDateOrdinals = null) => {
       const contract = numericContract(cell, [], { sourceDateOrdinals });
       return {
@@ -17016,6 +17341,11 @@ async function translateArticle(data) {
         },
       )
     );
+    const isTableHeaderRow = (lineIndex) => {
+      const separator = pipeSkeleton(sourceStructureLines[lineIndex + 1]);
+      if (!separator?.rawCells || !separator.cells?.some((cell) => cell === 'separator')) return false;
+      return separator.cells.every((cell) => cell === 'empty' || cell === 'separator');
+    };
     for (const [index, sourceLine] of sourceStructureLines.entries()) {
       const joinedLine = joinedStructureLines[index];
       const sourcePipe = pipeSkeleton(sourceLine);
@@ -17052,7 +17382,10 @@ async function translateArticle(data) {
           unresolvedCells += 1;
         }
       }
-      if (unresolvedCells > 1) return null;
+      const hasVerifiedHeaderColumnMapping = isTableHeaderRow(index)
+        && tableHeaderMarkers.markers.some(({ lineIndex }) => lineIndex === index)
+        && tableHeaderColumnMarkersMatch(joinedWithTableMarkers, tableHeaderMarkers.markers);
+      if (unresolvedCells > 1 && !hasVerifiedHeaderColumnMapping) return null;
     }
 
     // `balanceMarkdownMarkers` only repairs/validates bold `**` and separator
@@ -17187,6 +17520,7 @@ async function translateArticle(data) {
 - Traduzione COMPLETA, stessa profondità e lunghezza dell'italiano
 - NON riassumere — traduci tutto il contenuto
 - Mantieni la formattazione: ## per sottotitoli, - per elenchi, > per citazioni, emoji (📊💡⚠️) per box
+- Se compaiono marcatori opachi <span data-frontaliere-table-column="riga-cella"></span>, copiali esattamente nella stessa cella della tabella: identificano la colonna sorgente e non sono testo da tradurre.
 - Mantieni i link interni esattamente come sono: [testo tradotto](nav:azione) — traduci solo il testo visibile, NON l'azione nav:
 - GRASSETTO: max 2-3 parole in grassetto per INTERO campo body. Preferire ZERO grassetto.
 - Usa fraseologia naturale nella lingua target, non traduzione letterale
@@ -17212,8 +17546,11 @@ ${localizedToponymInstruction(targetLang)}`;
 
       if (words <= TRANSLATION_CHUNK_THRESHOLD) {
         // Normal single-call translation
+        const markedBody = tableHeaderColumnMarkers(bodyText);
+        if (markedBody.collision) return {};
+        const markedBodyText = markedBody.markedText;
         const result = await callWithRetry(makePrompt(
-          `CONTENUTO ITALIANO DA TRADURRE:\n- ${bodyKey}: ${bodyText}`,
+          `CONTENUTO ITALIANO DA TRADURRE:\n- ${bodyKey}: ${markedBodyText}`,
           `{"${bodyKey}": "..."}`,
         ), bodyTokens(bodyText), `${lang}:${bodyKey.replace('body', 'b')}`, { translation: true });
         // A model answering {"body1": {...}} / {"body1": [...]} still parses as
@@ -17654,8 +17991,14 @@ ${localizedToponymInstruction(targetLang)}`;
             );
             retried = translatedStringOrNull(chunked, locale);
           } else {
+            let recoverySourceText = itValue;
+            if (isBodyField) {
+              const markedBody = tableHeaderColumnMarkers(itValue);
+              if (markedBody.collision) throw new Error('collisione del marker di tabella nel body sorgente');
+              recoverySourceText = markedBody.markedText;
+            }
             const parsed = await callWithRetry(
-              `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${retryFieldLabel}):\n${itValue}\n\nFormato risposta: ${faqPart ? `{"faq": [{"${faqPart}": "..."}]}` : `{"${field}": "..."}`}`,
+              `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. Rispondi SOLO con JSON (no markdown):\n\n${isBodyField ? '- Copia ogni marcatore opaco <span data-frontaliere-table-column="riga-cella"></span> esattamente nella stessa cella della tabella; non tradurlo.' : ''}\n\nCAMPO ITALIANO (${retryFieldLabel}):\n${recoverySourceText}\n\nFormato risposta: ${faqPart ? `{"faq": [{"${faqPart}": "..."}]}` : `{"${field}": "..."}`}`,
               1500,
               `${locale}:${recoveryField}-missing-retry`,
               { translation: true },
@@ -17772,12 +18115,14 @@ ${localizedToponymInstruction(targetLang)}`;
       const itValue = itContent[field];
       let pendingReason = 'truncation-retry-unusable';
       console.error(`  ⚠️  Traduzione ${field} (${locale}) troncata — retry traduzione mirata...`);
-      const buildRetryPrompt = (chunkText, i, total) => {
-        const partLabel = total > 1 ? `, parte ${i + 1} di ${total}` : '';
-        return `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. `
-          + `La traduzione deve essere COMPLETA fino all'ultima frase: non troncare, non interrompere a metà periodo. `
-          + `Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${field}${partLabel}):\n${chunkText}\n\nFormato risposta: {"${field}": "..."}`;
-      };
+      const buildRetryPrompt = (chunkText, i, total, options = {}) => buildBodyTruncationRetryPrompt({
+        chunkText,
+        index: i,
+        total,
+        langName,
+        field,
+        ...options,
+      });
       try {
         let retried;
         let rawRetried = null;
@@ -17791,7 +18136,7 @@ ${localizedToponymInstruction(targetLang)}`;
           retried = await translateInChunks(
             itValue,
             field,
-            buildRetryPrompt,
+            (chunkText, index, total) => buildRetryPrompt(chunkText, index, total, { alreadyMarked: true }),
             `${locale}:${field}-truncation-retry`,
             locale,
           );
