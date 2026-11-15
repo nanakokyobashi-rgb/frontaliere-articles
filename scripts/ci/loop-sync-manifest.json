@@ -4246,7 +4246,7 @@
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 23,
-        "sha256": "f81ddf246df13827cbc38ad00a6fdcdd21cedd0d499348955dacf806aab858b5"
+        "sha256": "80241ddf3481095f3e62db1a46a4ed27c2b0dcd37a3cfdf0544891e8ee1fabac"
       }
     },
     {
