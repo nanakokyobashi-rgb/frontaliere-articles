@@ -16439,7 +16439,13 @@ async function translateArticle(data) {
         start >= candidate.end && gapMatches(dateGrammar.dayToMonthGap, candidate.end, start));
       const hasMonthBefore = (candidate) => monthsBefore(candidate).length > 0;
       const hasMonthAfter = (candidate) => monthsAfter(candidate).length > 0;
-      const isDateRange = (left, right) => right && (
+      const isCalendarYearCandidate = (candidate) => {
+        const digits = candidate.unsigned.replace(/[.,'’\u00a0\u202f ]/gu, '');
+        const year = Number(digits);
+        return /^\d{4}$/u.test(digits) && year >= 2000 && year <= 2100;
+      };
+      const hasDateMonthEvidence = (candidate) => hasMonthBefore(candidate) || hasMonthAfter(candidate);
+      const isDateRange = (left, right) => right && !isCalendarYearCandidate(left) && !isCalendarYearCandidate(right) && (
         gapMatches(dateGrammar.rangeGap, left.end, right.start)
         // A hyphen immediately before the next number is consumed as that
         // number's sign by `numberPattern` when the left endpoint ends in an
@@ -16451,20 +16457,64 @@ async function translateArticle(data) {
             value.slice(left.end, right.start) === ''
             || (left.unit === '°' || left.unit === 'º' || left.ordinalSuffix)
               && gapMatches(/^[\s]*$/u, left.end, right.start)
+            || gapMatches(/^[\s]*$/u, left.end, right.start)
+              && (hasMonthBefore(left) || hasMonthAfter(right))
           )
       );
-      const hasRangeMonthBefore = (candidateIndex) => candidateIndex > 0
-        && isDateRange(numberCandidates[candidateIndex - 1], numberCandidates[candidateIndex])
-        && hasMonthBefore(numberCandidates[candidateIndex - 1]);
-      const hasRangeMonthAfter = (candidateIndex) => candidateIndex + 1 < numberCandidates.length
-        && isDateRange(numberCandidates[candidateIndex], numberCandidates[candidateIndex + 1])
-        && hasMonthAfter(numberCandidates[candidateIndex + 1]);
-      const hasDateRangeBefore = (candidateIndex) => candidateIndex > 0
-        && isDateRange(numberCandidates[candidateIndex - 1], numberCandidates[candidateIndex])
-        && (hasMonthBefore(numberCandidates[candidateIndex - 1]) || hasMonthAfter(numberCandidates[candidateIndex]));
-      const hasDateRangeAfter = (candidateIndex) => candidateIndex + 1 < numberCandidates.length
-        && isDateRange(numberCandidates[candidateIndex], numberCandidates[candidateIndex + 1])
-        && (hasMonthBefore(numberCandidates[candidateIndex]) || hasMonthAfter(numberCandidates[candidateIndex + 1]));
+      const isDateRangeAcrossYear = (leftIndex, rightIndex) => {
+        if (rightIndex !== leftIndex + 2) return false;
+        const left = numberCandidates[leftIndex];
+        const year = numberCandidates[leftIndex + 1];
+        const right = numberCandidates[rightIndex];
+        if (!left || !year || !right || !isCalendarYearCandidate(year)) return false;
+        if (!hasDateMonthEvidence(left) && !hasDateMonthEvidence(right)) return false;
+        const ranges = [
+          { start: year.start, end: year.end },
+          ...dateMonths
+            .filter(({ start, end }) => start >= left.end && end <= right.start)
+            .map(({ start, end }) => ({ start, end })),
+        ].sort((first, second) => first.start - second.start || second.end - first.end);
+        let cursor = left.end;
+        let maskedGap = '';
+        for (const { start, end } of ranges) {
+          if (start < cursor) continue;
+          maskedGap += value.slice(cursor, start) + ' '.repeat(end - start);
+          cursor = end;
+        }
+        maskedGap += value.slice(cursor, right.start);
+        return dateGrammar.rangeGap.test(maskedGap);
+      };
+      const rangeBeforeEndpointIndex = (candidateIndex) => {
+        if (candidateIndex > 0
+          && isDateRange(numberCandidates[candidateIndex - 1], numberCandidates[candidateIndex])) {
+          return candidateIndex - 1;
+        }
+        if (candidateIndex > 1 && isDateRangeAcrossYear(candidateIndex - 2, candidateIndex)) {
+          return candidateIndex - 2;
+        }
+        return -1;
+      };
+      const rangeAfterEndpointIndex = (candidateIndex) => {
+        if (candidateIndex + 1 < numberCandidates.length
+          && isDateRange(numberCandidates[candidateIndex], numberCandidates[candidateIndex + 1])) {
+          return candidateIndex + 1;
+        }
+        if (candidateIndex + 2 < numberCandidates.length
+          && isDateRangeAcrossYear(candidateIndex, candidateIndex + 2)) {
+          return candidateIndex + 2;
+        }
+        return -1;
+      };
+      const hasRangeMonthBefore = (candidateIndex) => {
+        const endpointIndex = rangeBeforeEndpointIndex(candidateIndex);
+        return endpointIndex >= 0 && hasDateMonthEvidence(numberCandidates[endpointIndex]);
+      };
+      const hasRangeMonthAfter = (candidateIndex) => {
+        const endpointIndex = rangeAfterEndpointIndex(candidateIndex);
+        return endpointIndex >= 0 && hasDateMonthEvidence(numberCandidates[endpointIndex]);
+      };
+      const hasDateRangeBefore = (candidateIndex) => rangeBeforeEndpointIndex(candidateIndex) >= 0;
+      const hasDateRangeAfter = (candidateIndex) => rangeAfterEndpointIndex(candidateIndex) >= 0;
       const dateMonthForCandidate = (candidateIndex) => {
         const candidate = numberCandidates[candidateIndex];
         // In a cross-month range the month adjacent to this endpoint wins
@@ -16472,12 +16522,10 @@ async function translateArticle(data) {
         // endpoint's month can also look like `monthsBefore` evidence for the
         // second endpoint: `31 gennaio - 2 febbraio`.
         const rangeEndpointMonths = [];
-        if (candidateIndex > 0
-          && isDateRange(numberCandidates[candidateIndex - 1], candidate)) {
+        if (rangeBeforeEndpointIndex(candidateIndex) >= 0) {
           rangeEndpointMonths.push(...monthsAfter(candidate));
         }
-        if (candidateIndex + 1 < numberCandidates.length
-          && isDateRange(candidate, numberCandidates[candidateIndex + 1])) {
+        if (rangeAfterEndpointIndex(candidateIndex) >= 0) {
           rangeEndpointMonths.push(...monthsBefore(candidate));
         }
         const localRangeMonths = new Set(
@@ -16510,11 +16558,19 @@ async function translateArticle(data) {
         if (directMonths.size === 1) return [...directMonths][0];
 
         const inheritedMonthCandidates = [];
-        if (hasRangeMonthBefore(candidateIndex)) {
-          inheritedMonthCandidates.push(...monthsBefore(numberCandidates[candidateIndex - 1]));
+        const rangeBeforeIndex = rangeBeforeEndpointIndex(candidateIndex);
+        if (rangeBeforeIndex >= 0) {
+          inheritedMonthCandidates.push(
+            ...monthsBefore(numberCandidates[rangeBeforeIndex]),
+            ...monthsAfter(numberCandidates[rangeBeforeIndex]),
+          );
         }
-        if (hasRangeMonthAfter(candidateIndex)) {
-          inheritedMonthCandidates.push(...monthsAfter(numberCandidates[candidateIndex + 1]));
+        const rangeAfterIndex = rangeAfterEndpointIndex(candidateIndex);
+        if (rangeAfterIndex >= 0) {
+          inheritedMonthCandidates.push(
+            ...monthsBefore(numberCandidates[rangeAfterIndex]),
+            ...monthsAfter(numberCandidates[rangeAfterIndex]),
+          );
         }
         const inheritedMonths = new Set(
           inheritedMonthCandidates
@@ -16631,25 +16687,42 @@ async function translateArticle(data) {
       // ordered numeric sequence, but do not let its local prose anchor look
       // like a reassociation of the date day. Years in unrelated prose remain
       // ordinary source-owned numbers.
+      const calendarYearDateGapMatches = (yearCandidate, dateCandidate) => {
+        const yearBeforeDate = yearCandidate.end < dateCandidate.start;
+        const gapStart = yearBeforeDate ? yearCandidate.end : dateCandidate.end;
+        const gapEnd = yearBeforeDate ? dateCandidate.start : yearCandidate.start;
+        const internalMonths = dateMonths.filter(({ start, end }) => start >= gapStart && end <= gapEnd);
+        if (internalMonths.length > 1) return false;
+        if (internalMonths.length === 1) {
+          const [{ start, end }] = internalMonths;
+          const attachedToDay = yearBeforeDate
+            ? gapMatches(dateGrammar.monthToDayGap, end, dateCandidate.start)
+            : gapMatches(dateGrammar.dayToMonthGap, dateCandidate.end, start);
+          const attachedToYear = /^[\s.,:;/]*$/u.test(
+            yearBeforeDate ? value.slice(yearCandidate.end, start) : value.slice(end, yearCandidate.start),
+          );
+          if (!attachedToDay || !attachedToYear) return false;
+        }
+        let maskedGap = '';
+        let cursor = gapStart;
+        for (const { start, end } of internalMonths) {
+          maskedGap += value.slice(cursor, start) + ' '.repeat(end - start);
+          cursor = end;
+        }
+        maskedGap += value.slice(cursor, gapEnd);
+        return maskedGap.length <= 64 && /^[\s.,:;/]*$/u.test(maskedGap);
+      };
       const calendarYearDateIndexes = (candidateIndex) => {
         const candidate = numberCandidates[candidateIndex];
-        const digits = candidate.unsigned.replace(/[.,'’\u00a0\u202f ]/gu, '');
-        const year = Number(digits);
-        if (!/^\d{4}$/u.test(digits) || year < 2000 || year > 2100) return [];
+        if (!isCalendarYearCandidate(candidate)) return [];
         return numberEntries.flatMap((entry, dateIndex) => {
           if (!entry.dateOrdinal) return [];
           const dateCandidate = numberCandidates[dateIndex];
-          const gapStart = candidate.end < dateCandidate.start
-            ? candidate.end
-            : dateCandidate.end;
-          const gapEnd = candidate.end < dateCandidate.start
-            ? dateCandidate.start
-            : candidate.start;
           // A year may move across the day only inside the same date proof.
-          // Permit the punctuation used between date components, but do not
-          // cross a separate clause/anchor such as `A 2026, B 1° gennaio`.
-          const dateComponentGap = value.slice(gapStart, gapEnd);
-          return dateComponentGap.length <= 64 && /^[\s,]*$/u.test(dateComponentGap)
+          // Permit the month between day and year (`1° gennaio 2026`) as
+          // well as the month between year and day (`2026, January 1`), but
+          // never cross a separate clause/anchor such as `A 2026, B 1° gennaio`.
+          return calendarYearDateGapMatches(candidate, dateCandidate)
             ? [dateIndex]
             : [];
         });
@@ -16670,6 +16743,13 @@ async function translateArticle(data) {
           && numberEntries[candidateIndex + 1].dateFact
           && isDateRange(numberCandidates[candidateIndex], numberCandidates[candidateIndex + 1])) {
           joinCalendarGroups(candidateIndex, candidateIndex + 1);
+        }
+      }
+      for (let candidateIndex = 0; candidateIndex + 2 < numberEntries.length; candidateIndex += 1) {
+        if (numberEntries[candidateIndex].dateFact
+          && numberEntries[candidateIndex + 2].dateFact
+          && isDateRangeAcrossYear(candidateIndex, candidateIndex + 2)) {
+          joinCalendarGroups(candidateIndex, candidateIndex + 2);
         }
       }
       for (const [candidateIndex, entry] of numberEntries.entries()) {

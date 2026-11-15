@@ -1627,6 +1627,21 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     'gli estremi di un intervallo di date devono condividere la normalizzazione ordinale',
   );
 
+  for (const [label, spacedRangeSource] of [
+    ['spazi attorno al trattino', 'La misura vale dal 1 - 3 gennaio 2026 e resta valida.'],
+    ['segno adiacente al secondo estremo', 'La misura vale dal 1 -3 gennaio 2026 e resta valida.'],
+  ]) {
+    const spacedRangeTarget = 'The measure applies from January 1-3, 2026 and remains valid.';
+    assert.equal(
+      await makeTranslator(
+        (chunk) => chunk.replace(spacedRangeSource, spacedRangeTarget),
+        500,
+      )(spacedRangeSource),
+      spacedRangeTarget,
+      `${label}: il separatore non deve essere letto come segno di un numero negativo`,
+    );
+  }
+
   const wrongMonthRangeTarget = 'The measure applies from February 1-3, 2026 and remains valid.';
   assert.equal(
     await makeTranslator(
@@ -1665,6 +1680,16 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     )(crossMonthRangeSource),
     null,
     'un mese errato nel primo estremo di un intervallo cross-month deve essere rifiutato',
+  );
+  const crossMonthRangeWithYearSource = 'La misura vale dal 1° gennaio 2026 - 3° febbraio 2026 e resta valida.';
+  const crossMonthRangeWithYearTarget = 'The measure applies from January 1, 2026 - February 3, 2026 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(crossMonthRangeWithYearSource, crossMonthRangeWithYearTarget),
+      500,
+    )(crossMonthRangeWithYearSource),
+    crossMonthRangeWithYearTarget,
+    'un intervallo con un anno per estremo deve associare i due giorni ai rispettivi mesi',
   );
   for (const [label, separator] of [['virgola', ','], ['punto e virgola', ';']]) {
     const dateListSource = `Le scadenze sono il 1 gennaio${separator} 2 febbraio 2026.`;
@@ -1716,6 +1741,16 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     )(invariantCalendarAnchorSource),
     invariantCalendarAnchorTarget,
     'un connettore invariato non deve bloccare il riordino dei componenti della data',
+  );
+  const yearAfterDateSource = 'La misura vale dal 1° gennaio 2026 e resta valida.';
+  const yearBeforeDateTarget = 'The measure applies from 2026, January 1 and remains valid.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(yearAfterDateSource, yearBeforeDateTarget),
+      500,
+    )(yearAfterDateSource),
+    yearBeforeDateTarget,
+    'l’anno può passare prima del giorno anche quando il mese resta fra giorno e anno nella sorgente',
   );
   const reorderedCalendarTableSource = '| Data | Nel 2026, 1° gennaio |';
   const reorderedCalendarTableTarget = '| Date | On January 1, 2026 |';
