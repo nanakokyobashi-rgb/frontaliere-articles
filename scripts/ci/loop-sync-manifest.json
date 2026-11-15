@@ -4238,10 +4238,10 @@
       "mode": "adapted",
       "reason": "Costanti host adattate dal sito: il fingerprint confronta i 23 scalari autorevoli del SiteShellContract; nomi content-addressed e byte degli asset statici sono verificati separatamente in host/third-party-shell-assets-fingerprint.json e host/third-party-shell-assets.json. Il runtime Firebase mantiene il match sulla chiave esatta e non espone segreti.",
       "baseline": {
-        "site": "8fe5b8129aeed8bc",
-        "corpus": "96de9b18b2130661",
+        "site": "ed98db8c95caaf5d",
+        "corpus": "db013a51c8bfa945",
         "alignedAt": "2026-11-15",
-        "forcedAt": "2026-11-15T17:01:43.000Z"
+        "forcedAt": "2026-11-15T18:15:49.995Z"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
@@ -6927,10 +6927,9 @@
       "mode": "adapted",
       "reason": "adattato al bundle host: il fingerprint byte-exact di site-support, AdSense, Partnerize, Meta Pixel e helper canonici viaggia insieme allo snapshot adattato host/third-party-shell-assets.json e alle versioni asset in host/constants.ts. Non trasportarlo da solo; verificare host/tests/host-shell-assets.test.mjs prima della pubblicazione.",
       "baseline": {
-        "site": "72650d811e83f9ec",
-        "corpus": "72650d811e83f9ec",
-        "alignedAt": "2026-11-15",
-        "forcedAt": "2026-11-15T17:01:43.000Z"
+        "site": "2895cd13ea5cca45",
+        "corpus": "2895cd13ea5cca45",
+        "alignedAt": "2026-11-15"
       },
       "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3078"
     },
@@ -6940,10 +6939,10 @@
       "mode": "adapted",
       "reason": "Snapshot byte-exact di site-support, AdSense, Partnerize, Meta Pixel e guardia inline canonica, generato dall'exporter del sito. hostShellFiles verifica nomi e SHA senza import fra repository; sincronizzarlo nella stessa PR di host/third-party-shell-assets-fingerprint.json e host/constants.ts per conservare i byte e i nomi content-addressed che la pubblicazione usa.",
       "baseline": {
-        "site": "0ec17f044a8422b1",
-        "corpus": "7c3ce283b0e87ae4",
+        "site": "2aa134c3edf47044",
+        "corpus": "08b76eb5e347c938",
         "alignedAt": "2026-11-15",
-        "forcedAt": "2026-11-15T17:01:43.000Z"
+        "forcedAt": "2026-11-15T18:15:55.135Z"
       }
     },
     {
