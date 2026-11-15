@@ -81,10 +81,16 @@ const TABLE_HEADER_MARKER_HELPERS_SRC = (() => {
   assert.notEqual(end, -1, 'fine degli helper dei marker per le colonne non trovata');
   return src.slice(start, end);
 })();
+const BUILD_BODY_TRUNCATION_RETRY_PROMPT_SRC = extractFunctionSource(
+  'function buildBodyTruncationRetryPrompt({',
+);
 const makeTableHeaderMarkers = new Function(
   'lineStructuralSignature',
   `${TABLE_HEADER_MARKER_HELPERS_SRC}\nreturn { tableHeaderColumnMarkers, tableHeaderColumnMarker, tableHeaderColumnMarkersMatch };`,
 )(lineStructuralSignature);
+const buildBodyTruncationRetryPrompt = new Function(
+  `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${BUILD_BODY_TRUNCATION_RETRY_PROMPT_SRC}\nreturn buildBodyTruncationRetryPrompt;`,
+)();
 const TRANSLATE_IN_CHUNKS_SRC = (() => {
   const start = src.indexOf('  async function translateInChunks(\n    bodyText,\n    fieldKey,\n    makeChunkPrompt,\n    labelPrefix,\n    targetLang,\n    { pretranslatedResult = null, forceLegacy = false } = {},\n  ) {');
   assert.notEqual(start, -1, 'translateInChunks non trovata in create-article.mjs');
@@ -1463,6 +1469,64 @@ test('il joiner protegge prefissi Markdown annidati e lo scheletro delle pipe', 
   const collision = makeTableHeaderMarkers.tableHeaderColumnMarkers(articleOwnedMarker);
   assert.equal(collision.collision, true, 'uno span già presente nell’articolo deve fermare il trasporto dei marker');
   assert.equal(collision.markedText, articleOwnedMarker, 'uno span già presente non deve essere cancellato');
+});
+
+test('il retry chunked conserva gli indici globali dei marker delle tabelle', async () => {
+  const realChunker = buildChunker();
+  const source = [
+    'Contesto iniziale con abbastanza parole per separare il primo blocco dal resto.',
+    '| Primo 2024 | A 2025 |',
+    '|---|---|',
+    '| riga uno | valore uno |',
+    '',
+    'Contesto successivo con abbastanza parole per forzare un secondo chunk indipendente.',
+    '| Secondo 2026 | B 2027 |',
+    '|---|---|',
+    '| riga due | valore due |',
+  ].join('\n');
+  const sourceMarkers = makeTableHeaderMarkers.tableHeaderColumnMarkers(source).markers;
+  const secondTableMarker = sourceMarkers.find(({ headerIndex }) => headerIndex === 1)?.marker;
+  assert.ok(secondTableMarker, 'il fixture deve avere una seconda intestazione marcata');
+  const prompts = [];
+  const translateInChunks = new Function(
+    'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+    `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
+  )(
+    (bodyText) => realChunker(bodyText, 20),
+    async (prompt) => {
+      prompts.push(prompt);
+      const match = prompt.match(/\nCAMPO ITALIANO \(body1(?:, parte \d+ di \d+)?\):\n([\s\S]*?)\n\nFormato risposta:/u);
+      assert.ok(match, 'il prompt deve delimitare il chunk marcato');
+      return { body1: match[1] };
+    },
+    (text) => String(text).trim().split(/\s+/u).filter(Boolean).length,
+    translatedStringOrNull,
+    () => false,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+    opaqueSpanSignature,
+  );
+
+  const translated = await translateInChunks(
+    source,
+    'body1',
+    (chunkText, index, total) => buildBodyTruncationRetryPrompt({
+      chunkText,
+      index,
+      total,
+      langName: 'tedesco',
+      field: 'body1',
+      alreadyMarked: true,
+    }),
+    'test-truncation-retry',
+    'de',
+  );
+
+  assert.ok(prompts.length > 1, 'il body deve essere diviso in più chunk');
+  assert.ok(prompts.some((prompt) => prompt.includes(secondTableMarker)), 'il secondo chunk deve conservare il marker con indice globale');
+  assert.equal(translated, source);
 });
 
 test('il joiner rifiuta un link Markdown alterato dopo la ricomposizione', async () => {

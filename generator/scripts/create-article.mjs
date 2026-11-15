@@ -15216,6 +15216,27 @@ function tableHeaderColumnMarkers(value) {
   return { markedText: markedLines.join('\n'), markers, collision: false };
 }
 
+function buildBodyTruncationRetryPrompt({
+  chunkText,
+  index,
+  total,
+  langName,
+  field,
+  alreadyMarked = false,
+}) {
+  const partLabel = total > 1 ? `, parte ${index + 1} di ${total}` : '';
+  let markedChunkText = String(chunkText ?? '');
+  if (!alreadyMarked) {
+    const markedChunk = tableHeaderColumnMarkers(markedChunkText);
+    if (markedChunk.collision) throw new Error('collisione del marker di tabella nel body sorgente');
+    markedChunkText = markedChunk.markedText;
+  }
+  return `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. `
+    + `La traduzione deve essere COMPLETA fino all'ultima frase: non troncare, non interrompere a metà periodo. `
+    + `Copia ogni marcatore opaco <span data-frontaliere-table-column="riga-cella"></span> esattamente nella stessa cella della tabella; non tradurlo. `
+    + `Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${field}${partLabel}):\n${markedChunkText}\n\nFormato risposta: {"${field}": "..."}`;
+}
+
 function tableHeaderColumnMarkersMatch(value, expectedMarkers) {
   const text = String(value ?? '');
   const lines = text.split('\n');
@@ -18094,16 +18115,14 @@ ${localizedToponymInstruction(targetLang)}`;
       const itValue = itContent[field];
       let pendingReason = 'truncation-retry-unusable';
       console.error(`  ⚠️  Traduzione ${field} (${locale}) troncata — retry traduzione mirata...`);
-      const buildRetryPrompt = (chunkText, i, total) => {
-        const partLabel = total > 1 ? `, parte ${i + 1} di ${total}` : '';
-        const markedChunk = tableHeaderColumnMarkers(chunkText);
-        if (markedChunk.collision) throw new Error('collisione del marker di tabella nel body sorgente');
-        const markedChunkText = markedChunk.markedText;
-        return `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. `
-          + `La traduzione deve essere COMPLETA fino all'ultima frase: non troncare, non interrompere a metà periodo. `
-          + `Copia ogni marcatore opaco <span data-frontaliere-table-column="riga-cella"></span> esattamente nella stessa cella della tabella; non tradurlo. `
-          + `Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${field}${partLabel}):\n${markedChunkText}\n\nFormato risposta: {"${field}": "..."}`;
-      };
+      const buildRetryPrompt = (chunkText, i, total, options = {}) => buildBodyTruncationRetryPrompt({
+        chunkText,
+        index: i,
+        total,
+        langName,
+        field,
+        ...options,
+      });
       try {
         let retried;
         let rawRetried = null;
@@ -18117,7 +18136,7 @@ ${localizedToponymInstruction(targetLang)}`;
           retried = await translateInChunks(
             itValue,
             field,
-            buildRetryPrompt,
+            (chunkText, index, total) => buildRetryPrompt(chunkText, index, total, { alreadyMarked: true }),
             `${locale}:${field}-truncation-retry`,
             locale,
           );
