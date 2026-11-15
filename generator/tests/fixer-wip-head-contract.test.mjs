@@ -87,6 +87,24 @@ for (const { file, kind, finalize, after, before } of FIXERS) {
     assert.doesNotMatch(run, /--force|\+HEAD|--amend|git reset|git rebase|git push[^\n]*\s-f(?:\s|$)/u);
     assert.match(run, /git push origin "HEAD:refs\/heads\/\$\{?(?:HEAD_REF|BRANCH)\}?"/u);
   });
+
+  // Review del bot su #3834: il finalizer non deve consegnare un HEAD vuoto sopra
+  // modifiche residue, ne' pushare senza l'identita' di push del corpus, ne'
+  // girare se il restore dei gemelli identical e' fallito.
+  test(`${file}: albero pulito prima del commit; PAT e restore identical come precondizioni`, () => {
+    const run = runOf(step);
+    const clean = run.indexOf('git status --porcelain');
+    const commit = run.search(/git commit (?:-q )?--allow-empty/u);
+    assert.ok(clean > 0 && commit > clean, 'il controllo dell\'albero pulito precede il commit');
+    assert.match(run, /working tree non pulito — nessun commit\/push/u);
+    if (kind === 'issue-fix') {
+      const pat = run.indexOf('if [ -z "${GITHUB_PAT_NANAKO:-}" ]');
+      assert.ok(pat > 0 && pat < commit, 'senza PAT niente commit e niente push, prima del commit');
+      assert.doesNotMatch(run, /if \[ -n "\$\{GITHUB_PAT_NANAKO:-\}" \]; then/u, 'nessun fallback sulle credenziali di checkout');
+    } else {
+      assert.match(step.text, /^ {8}if: .*steps\.identical_restore\.outcome == 'success'/mu);
+    }
+  });
 }
 
 // ---- comportamento reale degli step dei fixer di PR (redflag/redcheck) ----
@@ -94,7 +112,7 @@ for (const { file, kind, finalize } of FIXERS.filter((fixer) => fixer.kind !== '
   const step = stepsOf(load(file)).find((candidate) => candidate.name.startsWith(finalize));
   const run = runOf(step);
 
-  const exec = ({ subject, baseIsHead = false }) => {
+  const exec = ({ subject, baseIsHead = false, dirty = false }) => {
     const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'fixer-finalize-'));
     try {
       const remote = path.join(temp, 'remote.git');
@@ -117,6 +135,7 @@ for (const { file, kind, finalize } of FIXERS.filter((fixer) => fixer.kind !== '
         git(work, 'add', '-A');
         git(work, 'commit', '-q', '-m', subject, '-m', `Fixer: ${kind}-round-1`);
       }
+      if (dirty) fs.writeFileSync(path.join(work, 'residuo.txt'), 'lavoro non committato');
       execFileSync('bash', ['-c', run], {
         cwd: work,
         env: { ...process.env, HEAD_REF: 'fix/x', BASE_SHA: baseSha, FIX_ROUND: '2' },
@@ -142,6 +161,13 @@ for (const { file, kind, finalize } of FIXERS.filter((fixer) => fixer.kind !== '
     assert.equal(result.pushed, true);
   });
 
+  test(`${file}: albero sporco → nessun commit finale e nessun push`, () => {
+    const result = exec({ subject: 'wip(issue-18813): checkpoint pre-test', dirty: true });
+    assert.equal(result.commits, 1, 'solo il commit del round: nessun commit vuoto');
+    assert.equal(result.subject, 'wip(issue-18813): checkpoint pre-test');
+    assert.equal(result.remoteIsBase, true, 'niente push');
+  });
+
   test(`${file}: non tocca un commit conventional ne' un round senza commit nuovi`, () => {
     const conventional = exec({ subject: 'fix(issue-18813): correggi il guard' });
     assert.equal(conventional.commits, 1);
@@ -149,5 +175,70 @@ for (const { file, kind, finalize } of FIXERS.filter((fixer) => fixer.kind !== '
     const none = exec({ subject: 'unused', baseIsHead: true });
     assert.equal(none.commits, 0);
     assert.equal(none.remoteIsBase, true);
+  });
+}
+
+// ---- issue-fix: nessun push senza PAT, nessun commit con l'albero sporco ----
+{
+  const step = stepsOf(load('issue-fix.yml')).find((candidate) => candidate.name.startsWith('Finalize PR HEAD'));
+  const run = runOf(step);
+
+  const execIssueFix = ({ pat, dirty = false }) => {
+    const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'issue-fix-finalize-'));
+    try {
+      const remote = path.join(temp, 'remote.git');
+      const work = path.join(temp, 'work');
+      const bin = path.join(temp, 'bin');
+      fs.mkdirSync(work);
+      fs.mkdirSync(bin);
+      const git = (cwd, ...args) => execFileSync('git', args, { cwd, encoding: 'utf8' }).trim();
+      execFileSync('git', ['init', '-q', '--bare', remote]);
+      git(work, 'init', '-q', '-b', 'main');
+      git(work, 'config', 'user.name', 't');
+      git(work, 'config', 'user.email', 't@example.invalid');
+      git(work, 'remote', 'add', 'origin', remote);
+      fs.writeFileSync(path.join(work, 'a.txt'), 'a');
+      git(work, 'add', '-A');
+      git(work, 'commit', '-q', '-m', 'base');
+      git(work, 'checkout', '-q', '-b', 'fix/issue-77');
+      fs.writeFileSync(path.join(work, 'a.txt'), 'b');
+      git(work, 'add', '-A');
+      git(work, 'commit', '-q', '-m', 'wip(issue-77): checkpoint pre-test');
+      git(work, 'push', '-q', 'origin', 'fix/issue-77');
+      const head = git(work, 'rev-parse', 'HEAD');
+      if (dirty) fs.writeFileSync(path.join(work, 'residuo.txt'), 'lavoro non committato');
+      fs.writeFileSync(path.join(bin, 'gh'), `#!/bin/sh\nprintf '%s\\n' '${head}'\n`);
+      fs.chmodSync(path.join(bin, 'gh'), 0o755);
+      execFileSync('bash', ['-c', run], {
+        cwd: work,
+        env: {
+          ...process.env,
+          PATH: `${bin}:${process.env.PATH}`,
+          REPO: 'o/r',
+          ISSUE: '77',
+          ISSUE_TITLE: 'Titolo della issue',
+          GITHUB_PAT_NANAKO: pat,
+        },
+        stdio: 'pipe',
+      });
+      return {
+        commits: Number(git(work, 'rev-list', '--count', `${head}..HEAD`)),
+        remoteUnchanged: git(remote, 'rev-parse', 'fix/issue-77') === head,
+      };
+    } finally {
+      fs.rmSync(temp, { recursive: true, force: true });
+    }
+  };
+
+  test('issue-fix.yml: senza GITHUB_PAT_NANAKO nessun commit e nessun push (niente fallback su GITHUB_TOKEN)', () => {
+    const result = execIssueFix({ pat: '' });
+    assert.equal(result.commits, 0);
+    assert.equal(result.remoteUnchanged, true);
+  });
+
+  test('issue-fix.yml: con il PAT ma albero sporco nessun commit e nessun push', () => {
+    const result = execIssueFix({ pat: 'token-di-prova', dirty: true });
+    assert.equal(result.commits, 0);
+    assert.equal(result.remoteUnchanged, true);
   });
 }

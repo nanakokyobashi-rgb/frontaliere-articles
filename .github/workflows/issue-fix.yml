@@ -1367,7 +1367,7 @@ jobs:
           fi
           # Titolo su una riga, senza `#` (mai keyword di chiusura adiacente a un
           # numero nel commit message: AGENTS.md) e al massimo 72 caratteri.
-          TITLE=$(printf '%s' "$ISSUE_TITLE" | tr '\r\n' '  ' | tr -d '#' | sed 's/[[:space:]]\{1,\}/ /g; s/^ //; s/ $//' | cut -c1-72)
+          TITLE=$(printf '%s' "$ISSUE_TITLE" | tr '\r\n' '  ' | tr -d '#' | sed 's/[[:space:]]\{1,\}/ /g; s/^ //; s/ $//' | LC_ALL=C.UTF-8 cut -c1-72)
           [ -n "$TITLE" ] || TITLE="deliver reviewed fix"
           git commit -q --allow-empty \
             -m "fix(issue-$ISSUE): $TITLE" \
