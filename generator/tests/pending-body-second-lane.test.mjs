@@ -1799,6 +1799,38 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     amountTarget,
     'un importo con valuta vicino a un mese non deve diventare un ordinale di data',
   );
+  const monthQuantitySource = 'Maggio: 12 dipendenti restano nel riepilogo.';
+  const monthQuantityTarget = 'May: 12 employees remain in the summary.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(monthQuantitySource, monthQuantityTarget),
+      500,
+    )(monthQuantitySource),
+    monthQuantityTarget,
+    'un numero month-first in prosa ordinaria deve restare una quantità, non un fatto calendario',
+  );
+
+  const mixedCalendarAndMeasurementSource = 'Misurazione: 12°; Scadenza: 1° gennaio.';
+  const mixedCalendarAndMeasurementTarget = 'Messung: 1. Januar; Fälligkeit: 12°.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(mixedCalendarAndMeasurementSource, mixedCalendarAndMeasurementTarget),
+      500,
+    )(mixedCalendarAndMeasurementSource),
+    null,
+    'un riordino non dimostrato fra una misura e una data deve essere rifiutato',
+  );
+
+  const repeatedDayCalendarSource = 'SBB Lugano: 2025, 1° gennaio; SBB Bellinzona: 2026, 1° gennaio.';
+  const repeatedDayCalendarTarget = 'SBB Lugano: 2026, 1. Januar; SBB Bellinzona: 2025, 1. Januar.';
+  assert.equal(
+    await makeTranslator(
+      (chunk) => chunk.replace(repeatedDayCalendarSource, repeatedDayCalendarTarget),
+      500,
+    )(repeatedDayCalendarSource),
+    null,
+    'anni uguali per giorno e mese devono restare associati alla rispettiva data',
+  );
 
   for (const [label, source, target] of [
     [

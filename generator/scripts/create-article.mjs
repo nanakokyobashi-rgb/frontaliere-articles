@@ -16484,7 +16484,7 @@ async function translateArticle(data) {
         || measurementAfterPattern.test(value.slice(candidate.end))
       );
       const isDateOrdinal = (candidate, candidateIndex) => {
-        const { unit, unsigned } = candidate;
+        const { unit, ordinalSuffix, unsigned } = candidate;
         // A percentage remains a measurement even when it sits next to a
         // month (`12% a maggio`); only degree/ordinal markers may be
         // reclassified as a localized date ordinal.
@@ -16502,18 +16502,35 @@ async function translateArticle(data) {
         const monthBefore = hasMonthBefore(candidate);
         const monthAfter = hasMonthAfter(candidate);
         const dateMonth = dateMonthForCandidate(candidateIndex);
+        const matchingSourceDate = Array.isArray(sourceDateOrdinals)
+          && sourceDateOrdinals.some((dateFact) => (
+            dateFact
+            && dateFact.day === day
+            && dateFact.month === dateMonth
+          ));
+        // A bare number after a month is not enough to prove a date: in
+        // `Maggio: 12 dipendenti`, the month is ordinary prose and `12` is a
+        // quantity. Require an explicit ordinal/day-first form, or a
+        // source-owned date fact that licenses the month-first target form.
+        const explicitDateForm = unit === '°'
+          || unit === 'º'
+          || Boolean(ordinalSuffix)
+          || monthAfter
+          || rangeMonthAfter
+          || matchingSourceDate;
+        if (!explicitDateForm) return false;
         // A target can only inherit the date interpretation of the same
         // source-owned calendar fact. Match by day and canonical month, not by
         // candidate position: `Nel 2026, 1° gennaio` may become
         // `On January 1, 2026`, while a month introduced only in a translation
         // still cannot manufacture a date.
         if (Array.isArray(sourceDateOrdinals)) {
-          const matchingSourceDate = sourceDateOrdinals.some((dateFact) => (
-            dateFact
-            && dateFact.day === day
-            && dateFact.month === dateMonth
-          ));
-          if (!matchingSourceDate) return false;
+          if (!matchingSourceDate) {
+            // An explicit date-looking target with no matching source fact is
+            // not an ordinary number that can be silently reclassified.
+            candidate.unmatchedDateForm = true;
+            return false;
+          }
         }
         // A degree marker after a month is a measurement (`maggio: 12° C`),
         // not a month-first date. Localized dates place the marker before the
@@ -16552,18 +16569,19 @@ async function translateArticle(data) {
           dateFact,
         };
       });
+      if (numberCandidates.some(({ unmatchedDateForm }) => unmatchedDateForm)) return null;
       // A four-digit year can move across the day inside the same calendar
       // date (`In 2026, 1° gennaio` → `In January 1, 2026`). Keep it in the
       // ordered numeric sequence, but do not let its local prose anchor look
       // like a reassociation of the date day. Years in unrelated prose remain
       // ordinary source-owned numbers.
-      const isCalendarYear = (candidateIndex) => {
+      const calendarYearDateIndexes = (candidateIndex) => {
         const candidate = numberCandidates[candidateIndex];
         const digits = candidate.unsigned.replace(/[.,'’\u00a0\u202f ]/gu, '');
         const year = Number(digits);
-        if (!/^\d{4}$/u.test(digits) || year < 2000 || year > 2100) return false;
-        return numberEntries.some((entry, dateIndex) => {
-          if (!entry.dateOrdinal) return false;
+        if (!/^\d{4}$/u.test(digits) || year < 2000 || year > 2100) return [];
+        return numberEntries.flatMap((entry, dateIndex) => {
+          if (!entry.dateOrdinal) return [];
           const dateCandidate = numberCandidates[dateIndex];
           const gapStart = candidate.end < dateCandidate.start
             ? candidate.end
@@ -16575,13 +16593,83 @@ async function translateArticle(data) {
           // Permit the punctuation used between date components, but do not
           // cross a separate clause/anchor such as `A 2026, B 1° gennaio`.
           const dateComponentGap = value.slice(gapStart, gapEnd);
-          return dateComponentGap.length <= 64 && /^[\s,]*$/u.test(dateComponentGap);
+          return dateComponentGap.length <= 64 && /^[\s,]*$/u.test(dateComponentGap)
+            ? [dateIndex]
+            : [];
         });
       };
-      for (const [candidateIndex, entry] of numberEntries.entries()) {
-        entry.calendarYear = isCalendarYear(candidateIndex);
+      const calendarGroupParent = numberEntries.map((_, index) => index);
+      const findCalendarGroup = (index) => {
+        if (calendarGroupParent[index] === index) return index;
+        calendarGroupParent[index] = findCalendarGroup(calendarGroupParent[index]);
+        return calendarGroupParent[index];
+      };
+      const joinCalendarGroups = (left, right) => {
+        const leftRoot = findCalendarGroup(left);
+        const rightRoot = findCalendarGroup(right);
+        if (leftRoot !== rightRoot) calendarGroupParent[rightRoot] = leftRoot;
+      };
+      for (let candidateIndex = 0; candidateIndex + 1 < numberEntries.length; candidateIndex += 1) {
+        if (numberEntries[candidateIndex].dateFact
+          && numberEntries[candidateIndex + 1].dateFact
+          && isDateRange(numberCandidates[candidateIndex], numberCandidates[candidateIndex + 1])) {
+          joinCalendarGroups(candidateIndex, candidateIndex + 1);
+        }
       }
-      const associations = numberEntries.map(({ value: number, index, dateFact, calendarYear }) => {
+      for (const [candidateIndex, entry] of numberEntries.entries()) {
+        const matchingDateIndexes = calendarYearDateIndexes(candidateIndex);
+        const matchingDateGroups = new Set(
+          matchingDateIndexes.map((dateIndex) => findCalendarGroup(dateIndex)),
+        );
+        // A year belongs to a calendar group only when its nearby date proof
+        // is unambiguous. A year between two independent dates stays an
+        // ordinary number rather than being allowed to bind to either one.
+        if (matchingDateGroups.size === 1) {
+          entry.calendarYear = true;
+          joinCalendarGroups(candidateIndex, matchingDateIndexes[0]);
+        } else {
+          entry.calendarYear = false;
+        }
+      }
+      const calendarGroupMembers = new Map();
+      for (const [candidateIndex, entry] of numberEntries.entries()) {
+        entry.calendarGroup = null;
+        if (!entry.dateFact && !entry.calendarYear) continue;
+        const group = findCalendarGroup(candidateIndex);
+        entry.calendarGroup = group;
+        if (!calendarGroupMembers.has(group)) calendarGroupMembers.set(group, []);
+        calendarGroupMembers.get(group).push(candidateIndex);
+      }
+      for (const members of calendarGroupMembers.values()) {
+        const calendarFact = {
+          dateFacts: members
+            .filter((candidateIndex) => numberEntries[candidateIndex].dateFact)
+            .map((candidateIndex) => numberEntries[candidateIndex].dateFact),
+          years: members
+            .filter((candidateIndex) => numberEntries[candidateIndex].calendarYear)
+            .map((candidateIndex) => numberEntries[candidateIndex].value),
+        };
+        for (const candidateIndex of members) numberEntries[candidateIndex].calendarFact = calendarFact;
+      }
+      const factSequence = [];
+      const emittedCalendarGroups = new Set();
+      for (const entry of numberEntries) {
+        if (entry.calendarGroup !== null) {
+          if (emittedCalendarGroups.has(entry.calendarGroup)) continue;
+          emittedCalendarGroups.add(entry.calendarGroup);
+          factSequence.push({ type: 'calendar', ...entry.calendarFact });
+        } else {
+          factSequence.push({ type: 'number', value: entry.value });
+        }
+      }
+      const associations = numberEntries.map(({
+        value: number,
+        index,
+        dateFact,
+        calendarYear,
+        calendarGroup,
+        calendarFact,
+      }) => {
         let start = index;
         while (start > 0 && !spanBoundary(value[start - 1])) start -= 1;
         let end = index;
@@ -16603,6 +16691,8 @@ async function translateArticle(data) {
           number,
           dateFact,
           calendarYear,
+          calendarGroup,
+          calendarFact,
           exactSpan: withoutNumbers.toLowerCase(),
           anchorSpan: anchorTokens.join('|'),
         };
@@ -16610,6 +16700,8 @@ async function translateArticle(data) {
       return {
         values: numberEntries.map(({ value }) => value),
         dateOrdinals: numberEntries.map(({ dateFact }) => dateFact),
+        entries: numberEntries,
+        factSequence,
         associations,
       };
     };
@@ -16617,14 +16709,21 @@ async function translateArticle(data) {
     const joinedNumericContract = numericContract(joined, joinedLinkContract.codeSpans, {
       sourceDateOrdinals: sourceNumericContract.dateOrdinals,
     });
-    const nonDateNumericValues = (contract) => contract.values.filter((_, index) => !contract.dateOrdinals[index]);
-    const dateFacts = (contract) => contract.dateOrdinals.filter(Boolean);
+    if (!joinedNumericContract) return null;
+    const numericFactSequence = (contract) => contract.factSequence || contract.values.map((value, index) => (
+      contract.dateOrdinals?.[index]
+        ? { type: 'calendar', dateFacts: [contract.dateOrdinals[index]], years: [] }
+        : { type: 'number', value }
+    ));
     const numericContractsMatch = (sourceContract, joinedContract) => {
       const exactNumericMatch = JSON.stringify(sourceContract.values)
         === JSON.stringify(joinedContract.values);
-      const calendarReorderedNumericMatch = JSON.stringify(nonDateNumericValues(sourceContract))
-        === JSON.stringify(nonDateNumericValues(joinedContract))
-        && JSON.stringify(dateFacts(sourceContract)) === JSON.stringify(dateFacts(joinedContract));
+      // Calendar components may reorder inside one proven date, but the
+      // complete fact sequence must keep ordinary numbers and calendar facts
+      // in the same relative slots. Comparing non-calendar values and dates
+      // independently would accept `12°; 1 gennaio` becoming `1 gennaio; 12°`.
+      const calendarReorderedNumericMatch = JSON.stringify(numericFactSequence(sourceContract))
+        === JSON.stringify(numericFactSequence(joinedContract));
       return exactNumericMatch || calendarReorderedNumericMatch;
     };
     if (!numericContractsMatch(sourceNumericContract, joinedNumericContract)) {
@@ -16682,13 +16781,19 @@ async function translateArticle(data) {
       const numericSequenceMatches = (sourceEntries, joinedEntries) => {
         if (JSON.stringify(sourceEntries.map(({ number }) => number))
           === JSON.stringify(joinedEntries.map(({ number }) => number))) return true;
-        const sourceNonCalendar = sourceEntries
-          .filter(({ dateFact, calendarYear }) => !dateFact && !calendarYear)
-          .map(({ number }) => number);
-        const joinedNonCalendar = joinedEntries
-          .filter(({ dateFact, calendarYear }) => !dateFact && !calendarYear)
-          .map(({ number }) => number);
-        return JSON.stringify(sourceNonCalendar) === JSON.stringify(joinedNonCalendar);
+        const semanticSequence = (entries) => {
+          const emittedCalendarGroups = new Set();
+          return entries.flatMap((entry) => {
+            if (entry.calendarGroup !== null && entry.calendarGroup !== undefined && entry.calendarFact) {
+              if (emittedCalendarGroups.has(entry.calendarGroup)) return [];
+              emittedCalendarGroups.add(entry.calendarGroup);
+              return [{ type: 'calendar', ...entry.calendarFact }];
+            }
+            return [{ type: 'number', value: entry.number }];
+          });
+        };
+        return JSON.stringify(semanticSequence(sourceEntries))
+          === JSON.stringify(semanticSequence(joinedEntries));
       };
       return sourceKeys.every((span) => numericSequenceMatches(sourceBySpan.get(span), joinedBySpan.get(span)));
     };
@@ -16731,15 +16836,26 @@ async function translateArticle(data) {
       const contract = numericContract(cell, [], { sourceDateOrdinals });
       return {
         opaque: opaqueSpanSignature(cell),
-        numeric: contract.values,
-        dateOrdinals: contract.dateOrdinals,
+        numeric: contract?.values || null,
+        dateOrdinals: contract?.dateOrdinals || null,
+        factSequence: contract?.factSequence || null,
       };
     };
     const tableProofsMatch = (sourceProof, joinedProof) => (
-      JSON.stringify(sourceProof.opaque) === JSON.stringify(joinedProof.opaque)
+      sourceProof.numeric !== null
+      && joinedProof.numeric !== null
+      && JSON.stringify(sourceProof.opaque) === JSON.stringify(joinedProof.opaque)
       && numericContractsMatch(
-        { values: sourceProof.numeric, dateOrdinals: sourceProof.dateOrdinals },
-        { values: joinedProof.numeric, dateOrdinals: joinedProof.dateOrdinals },
+        {
+          values: sourceProof.numeric,
+          dateOrdinals: sourceProof.dateOrdinals,
+          factSequence: sourceProof.factSequence,
+        },
+        {
+          values: joinedProof.numeric,
+          dateOrdinals: joinedProof.dateOrdinals,
+          factSequence: joinedProof.factSequence,
+        },
       )
     );
     for (const [index, sourceLine] of sourceStructureLines.entries()) {
