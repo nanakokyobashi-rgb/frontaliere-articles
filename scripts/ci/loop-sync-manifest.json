@@ -4929,9 +4929,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-10.yml",
       "mode": "identical",
       "baseline": {
-        "site": "f4e695a80ca297e3",
-        "corpus": "f4e695a80ca297e3",
-        "alignedAt": "2026-11-14"
+        "site": "a93fb4340aae832d",
+        "corpus": "a93fb4340aae832d",
+        "alignedAt": "2026-11-15"
       }
     },
     {
@@ -5029,9 +5029,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-20.yml",
       "mode": "identical",
       "baseline": {
-        "site": "00b9100ffc0f545a",
-        "corpus": "00b9100ffc0f545a",
-        "alignedAt": "2026-11-14"
+        "site": "07939bf59100e038",
+        "corpus": "07939bf59100e038",
+        "alignedAt": "2026-11-15"
       }
     },
     {
@@ -5081,8 +5081,8 @@
       "remoteDigestRequired": true,
       "reason": "La baseline registra lo stesso digest SHA-256 raw sui due lati; `remoteDigestRequired` rende il confronto remoto una precondizione fail-closed prima di accettare o riattestare la baseline e prima del trasporto.",
       "baseline": {
-        "site": "ee2e44d5f4b32f6c",
-        "corpus": "ee2e44d5f4b32f6c",
+        "site": "62867d015256d7ad",
+        "corpus": "62867d015256d7ad",
         "alignedAt": "2026-11-15"
       }
     },
