@@ -4236,18 +4236,17 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti host adattate dal sito: il fingerprint confronta i 23 scalari authoritative di SiteShellContract. Il digest e87ec4c2… include gli URL content-addressed di site-support, AdSense, Partnerize e Meta Pixel; il runtime Firebase mantiene il match sulla chiave esatta e non espone segreti.",
+      "reason": "Costanti host adattate dal sito: il fingerprint confronta i 23 scalari autorevoli del SiteShellContract; nomi content-addressed e byte degli asset statici sono verificati separatamente in host/third-party-shell-assets-fingerprint.json e host/third-party-shell-assets.json. Il runtime Firebase mantiene il match sulla chiave esatta e non espone segreti.",
       "baseline": {
-        "site": "141382885e28264f",
-        "corpus": "6c61c6bf12afc98a",
-        "alignedAt": "2026-11-09",
-        "forcedAt": "2026-11-09T11:05:27.842Z"
+        "site": "ed98db8c95caaf5d",
+        "corpus": "3b7ed3cce6e5027b",
+        "alignedAt": "2026-11-15"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 23,
-        "sha256": "e87ec4c23b494636addea83a470640707fecddb64f980abfe2c3bf281b34e704"
+        "sha256": "f81ddf246df13827cbc38ad00a6fdcdd21cedd0d499348955dacf806aab858b5"
       }
     },
     {
@@ -4461,12 +4460,13 @@
     {
       "path": "host/shell-contract-fingerprint.json",
       "sitePath": "tests/articles-shell-contract-fingerprint.json",
-      "mode": "identical",
-      "reason": "Impronta SHA-256 dei 23 campi scalari di SiteShellContract, prodotta e verificata da host/tests/shell-contract-fingerprint.test.mjs. Il gemello del sito e' tests/articles-shell-contract-fingerprint.json con gli stessi valori, incluso lo snippet Meta Pixel content-addressed e consent-gated; i due artefatti restano identical e il gate runtime impedisce di spedire l'engine senza la sua meta' host/.",
+      "mode": "adapted",
+      "reason": "Impronta SHA-256 dei 23 campi scalari di SiteShellContract, prodotta e verificata da host/tests/shell-contract-fingerprint.test.mjs. Il gemello del sito e' tests/articles-shell-contract-fingerprint.json, ma i digest differiscono intenzionalmente: il sito registra gli URL globali stabili e la shell host include i nomi content-addressed degli asset. La dichiarazione scalarFingerprint su host/constants.ts confronta separatamente entrambi i valori.",
       "baseline": {
-        "site": "cace919981b8a649",
-        "corpus": "cace919981b8a649",
-        "alignedAt": "2026-11-09"
+        "site": "cb29a37dd7c6ce74",
+        "corpus": "f5198cca59c9534a",
+        "alignedAt": "2026-11-15",
+        "forcedAt": "2026-11-15T19:04:16.629Z"
       }
     },
     {
@@ -4929,9 +4929,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-10.yml",
       "mode": "identical",
       "baseline": {
-        "site": "f4e695a80ca297e3",
-        "corpus": "f4e695a80ca297e3",
-        "alignedAt": "2026-11-14"
+        "site": "a93fb4340aae832d",
+        "corpus": "a93fb4340aae832d",
+        "alignedAt": "2026-11-15"
       }
     },
     {
@@ -5029,9 +5029,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-20.yml",
       "mode": "identical",
       "baseline": {
-        "site": "00b9100ffc0f545a",
-        "corpus": "00b9100ffc0f545a",
-        "alignedAt": "2026-11-14"
+        "site": "07939bf59100e038",
+        "corpus": "07939bf59100e038",
+        "alignedAt": "2026-11-15"
       }
     },
     {
@@ -5081,8 +5081,8 @@
       "remoteDigestRequired": true,
       "reason": "La baseline registra lo stesso digest SHA-256 raw sui due lati; `remoteDigestRequired` rende il confronto remoto una precondizione fail-closed prima di accettare o riattestare la baseline e prima del trasporto.",
       "baseline": {
-        "site": "ee2e44d5f4b32f6c",
-        "corpus": "ee2e44d5f4b32f6c",
+        "site": "62867d015256d7ad",
+        "corpus": "62867d015256d7ad",
         "alignedAt": "2026-11-15"
       }
     },
@@ -6927,9 +6927,9 @@
       "mode": "adapted",
       "reason": "adattato al bundle host: il fingerprint byte-exact di site-support, AdSense, Partnerize, Meta Pixel e helper canonici viaggia insieme allo snapshot adattato host/third-party-shell-assets.json e alle versioni asset in host/constants.ts. Non trasportarlo da solo; verificare host/tests/host-shell-assets.test.mjs prima della pubblicazione.",
       "baseline": {
-        "site": "dc236b7de7fa65f7",
-        "corpus": "dc236b7de7fa65f7",
-        "alignedAt": "2026-11-09"
+        "site": "2895cd13ea5cca45",
+        "corpus": "2895cd13ea5cca45",
+        "alignedAt": "2026-11-15"
       },
       "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3078"
     },
@@ -6939,9 +6939,10 @@
       "mode": "adapted",
       "reason": "Snapshot byte-exact di site-support, AdSense, Partnerize, Meta Pixel e guardia inline canonica, generato dall'exporter del sito. hostShellFiles verifica nomi e SHA senza import fra repository; sincronizzarlo nella stessa PR di host/third-party-shell-assets-fingerprint.json e host/constants.ts per conservare i byte e i nomi content-addressed che la pubblicazione usa.",
       "baseline": {
-        "site": "56aaef2cbbea74f8",
-        "corpus": "3876c4b713add420",
-        "alignedAt": "2026-11-05"
+        "site": "2aa134c3edf47044",
+        "corpus": "08b76eb5e347c938",
+        "alignedAt": "2026-11-15",
+        "forcedAt": "2026-11-15T18:15:55.135Z"
       }
     },
     {
