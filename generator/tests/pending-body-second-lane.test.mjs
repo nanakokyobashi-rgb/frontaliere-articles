@@ -1666,6 +1666,18 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     null,
     'un mese errato nel primo estremo di un intervallo cross-month deve essere rifiutato',
   );
+  for (const [label, separator] of [['virgola', ','], ['punto e virgola', ';']]) {
+    const dateListSource = `Le scadenze sono il 1 gennaio${separator} 2 febbraio 2026.`;
+    const dateListTarget = `The deadlines are January 1${separator} February 2, 2026.`;
+    assert.equal(
+      await makeTranslator(
+        (chunk) => chunk.replace(dateListSource, dateListTarget),
+        500,
+      )(dateListSource),
+      dateListTarget,
+      `una lista di date separata da ${label} deve associare ogni giorno al proprio mese`,
+    );
+  }
   for (const [label, sourceRange, targetRange] of [
     [
       'separatore Unicode',

@@ -16390,6 +16390,17 @@ async function translateArticle(data) {
         end <= candidate.start && gapMatches(dateGrammar.monthToDayGap, end, candidate.start));
       const monthsAfter = (candidate) => dateMonths.filter(({ start }) =>
         start >= candidate.end && gapMatches(dateGrammar.dayToMonthGap, candidate.end, start));
+      const dateSegmentMonths = (candidate) => {
+        let segmentStart = candidate.start;
+        while (segmentStart > 0 && !spanBoundary(value[segmentStart - 1])) segmentStart -= 1;
+        let segmentEnd = candidate.end;
+        while (segmentEnd < value.length && !spanBoundary(value[segmentEnd])) segmentEnd += 1;
+        return dateMonths.filter(({ start, end }) => start >= segmentStart && end <= segmentEnd);
+      };
+      const localMonthsBefore = (candidate) => dateSegmentMonths(candidate).filter(({ end }) =>
+        end <= candidate.start && gapMatches(dateGrammar.monthToDayGap, end, candidate.start));
+      const localMonthsAfter = (candidate) => dateSegmentMonths(candidate).filter(({ start }) =>
+        start >= candidate.end && gapMatches(dateGrammar.dayToMonthGap, candidate.end, start));
       const hasMonthBefore = (candidate) => monthsBefore(candidate).length > 0;
       const hasMonthAfter = (candidate) => monthsAfter(candidate).length > 0;
       const isDateRange = (left, right) => right && (
@@ -16440,9 +16451,15 @@ async function translateArticle(data) {
         );
         if (localRangeMonths.size > 1) return null;
         if (localRangeMonths.size === 1) return [...localRangeMonths][0];
+        // A comma/semicolon list contains independent dates: in
+        // `1 gennaio, 2 febbraio`, the second candidate sees January through
+        // the broad gap accepted by monthToDayGap, but its local segment owns
+        // only February. Resolve that local evidence before rejecting a
+        // candidate as ambiguous; ranges keep their dedicated endpoint path
+        // above because they intentionally span the separator.
         const directMonthCandidates = [
-          ...monthsBefore(candidate),
-          ...monthsAfter(candidate),
+          ...localMonthsBefore(candidate),
+          ...localMonthsAfter(candidate),
         ];
         const directMonths = new Set(
           directMonthCandidates
@@ -16450,7 +16467,7 @@ async function translateArticle(data) {
             .filter((month) => Number.isInteger(month)),
         );
         // In a cross-month range each endpoint has its own direct month:
-        // `31 gennaio - 2 febbraio`. Prefer that local evidence before
+        // `31 gennaio - 2 febbraio`. Prefer that endpoint evidence before
         // inheriting the other endpoint's month. If direct evidence is
         // ambiguous, keep the candidate unproven.
         if (directMonths.size > 1) return null;
