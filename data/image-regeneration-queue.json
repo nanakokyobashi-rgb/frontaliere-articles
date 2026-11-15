@@ -5,11 +5,11 @@
       "articleId": "arianna-di-claudio-roma",
       "title": "Arianna di claudio alla festa del cinema di roma",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (image vision fallback deadline exceeded)",
+      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Synthetic-looking commuter scene, but it contains a recognizable foreground person and does not clearly match the stated subject.); ge",
       "status": "failed",
-      "failureCount": 45,
+      "failureCount": 46,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-11-15T00:43:20.515Z"
+      "lastFailureAt": "2026-11-15T07:31:53.490Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
@@ -17,9 +17,9 @@
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
       "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (image vision fallback deadline exceeded)",
       "status": "failed",
-      "failureCount": 40,
+      "failureCount": 41,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-11-15T00:45:20.814Z"
+      "lastFailureAt": "2026-11-15T07:33:53.854Z"
     }
   ]
 }
