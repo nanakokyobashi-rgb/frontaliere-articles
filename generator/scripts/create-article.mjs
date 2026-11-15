@@ -16986,10 +16986,13 @@ async function translateArticle(data) {
     // A table can preserve its pipes and per-cell opaque atoms while still
     // swapping two cells made only of translatable prose. Such cells have no
     // source-owned identity after translation, so accept at most one unresolved
-    // cell per row (all other cells provide a unique association by position/proof).
-    // This is deliberately fail-closed: a table with two or more unresolved
+    // cell per data row (all other cells provide a unique association by position/proof).
+    // This is deliberately fail-closed for data rows: two or more unresolved
     // cells, or duplicate proofs on changed cells, cannot demonstrate that the
-    // provider kept the facts in their original columns.
+    // provider kept the facts in their original columns. A header row directly
+    // followed by a separator has no source-owned facts to associate: its
+    // labels may both be translated, so the unresolved-cell cap must not reject
+    // every valid Markdown table.
     const tableCellProof = (cell, sourceDateOrdinals = null) => {
       const contract = numericContract(cell, [], { sourceDateOrdinals });
       return {
@@ -17016,6 +17019,11 @@ async function translateArticle(data) {
         },
       )
     );
+    const isTableHeaderRow = (lineIndex) => {
+      const separator = pipeSkeleton(sourceStructureLines[lineIndex + 1]);
+      if (!separator?.rawCells || !separator.cells?.some((cell) => cell === 'separator')) return false;
+      return separator.cells.every((cell) => cell === 'empty' || cell === 'separator');
+    };
     for (const [index, sourceLine] of sourceStructureLines.entries()) {
       const joinedLine = joinedStructureLines[index];
       const sourcePipe = pipeSkeleton(sourceLine);
@@ -17052,7 +17060,7 @@ async function translateArticle(data) {
           unresolvedCells += 1;
         }
       }
-      if (unresolvedCells > 1) return null;
+      if (unresolvedCells > 1 && !isTableHeaderRow(index)) return null;
     }
 
     // `balanceMarkdownMarkers` only repairs/validates bold `**` and separator

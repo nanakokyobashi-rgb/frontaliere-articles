@@ -1315,6 +1315,32 @@ test('il joiner protegge prefissi Markdown annidati e lo scheletro delle pipe', 
     '| Region | CHF |',
     'il testo delle celle deve poter essere tradotto quando una prova source-owned dimostra l’ordine delle colonne',
   );
+  const tableWithHeader = [
+    '| Segmento | Variazione riportata |',
+    '|---|---:|',
+    '| Appartamenti | +4,4% |',
+    '| Case unifamiliari | +2,1% |',
+  ].join('\n');
+  const translatedTableWithHeader = [
+    '| Segment | Reported change |',
+    '|---|---:|',
+    '| Condominiums | +4.4% |',
+    '| Single-family homes | +2.1% |',
+  ].join('\n');
+  assert.equal(
+    await makeTranslator(() => translatedTableWithHeader)(tableWithHeader),
+    translatedTableWithHeader,
+    'le etichette di intestazione possono essere localizzate quando la riga separatrice dimostra la struttura della tabella',
+  );
+  const swappedTextDataRow = tableWithHeader.replace(
+    '| Case unifamiliari | +2,1% |',
+    '| +2,1% | Case unifamiliari |',
+  );
+  assert.equal(
+    await makeTranslator(() => swappedTextDataRow)(tableWithHeader),
+    null,
+    'una riga dati con celle non dimostrabili non deve usare l’eccezione riservata all’intestazione',
+  );
   assert.equal(
     await makeTranslator((chunk) => chunk.replace('> - ', '> '))(source),
     null,
