@@ -906,12 +906,14 @@ jobs:
             write_output "retryable=true"
             exit 1
           fi
-          write_output "proceed=true"
-          write_output "round=$NEXT"
-          write_output "marker_body_revision=$(printf '%s' "$marker_result" | jq -r '.bodyRevision')"
-          write_output "marker_comment_id=$(printf '%s' "$marker_result" | jq -r '.commentId')"
-          write_output "marker_verified=true"
-          write_output "retryable=false"
+          {
+            echo "proceed=true"
+            echo "round=$NEXT"
+            echo "marker_body_revision=$(printf '%s' "$marker_result" | jq -r '.bodyRevision')"
+            echo "marker_comment_id=$(printf '%s' "$marker_result" | jq -r '.commentId')"
+            echo "marker_verified=true"
+            echo "retryable=false"
+          } >> "$GITHUB_OUTPUT"
 
       # `actions/checkout` persiste `http.https://github.com/.extraheader`, che
       # PREVALE sullo `x-access-token:` del remote: senza azzerarlo il set-url e'
