@@ -33,7 +33,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { EXIT_MANUAL_NEEDED, manualTransportReason } from '../../scripts/ci/transport-identical-twins.mjs';
+import { EXIT_MANUAL_NEEDED, manualTransportReason, transportVerdict } from '../../scripts/ci/transport-identical-twins.mjs';
 import { TRANSPORT_BULLET_RE, buildTransportPrBody, parseTransportBullets } from '../../scripts/ci/transport-realign-body.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -88,6 +88,22 @@ test('`main()` lo restituisce sui blocchi permanenti, non un 0', () => {
     /verdict\.permanent && verdict\.state === 'site-ahead'/,
     'i no permanenti diretti devono entrare in `manual`, non solo quelli separati dal tetto',
   );
+});
+
+test('il trasporto runtime conserva il ramo `site-ahead`', () => {
+  const baseline = { site: 'base-site', corpus: 'base-corpus' };
+  const siteAheadTransport = transportVerdict(
+    {
+      path: 'generator/data/crawler-cross-repo-contract.json',
+      mode: 'identical',
+      baseline,
+    },
+    { site: 'site-ahead', corpus: baseline.corpus },
+    baseline,
+  );
+
+  assert.equal(siteAheadTransport.state, 'site-ahead');
+  assert.equal(siteAheadTransport.transport, true);
 });
 
 test('fast-publish salta il purge mirato quando la lista URL è vuota', () => {
