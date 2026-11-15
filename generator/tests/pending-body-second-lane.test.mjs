@@ -74,12 +74,23 @@ function buildChunker() {
     `${COUNT_WORDS_SRC}\n${SPLIT_TRANSLATION_CHUNKS_SRC}\nreturn splitIntoTranslationChunks;`,
   )(lineStructuralSignature);
 }
+const TABLE_HEADER_MARKER_HELPERS_SRC = (() => {
+  const start = src.indexOf('function tableHeaderColumnMarker(lineIndex, cellIndex) {');
+  assert.notEqual(start, -1, 'helper dei marker per le colonne non trovato');
+  const end = src.indexOf('\n// Thin in-script wrapper: bind the lib field-translator', start);
+  assert.notEqual(end, -1, 'fine degli helper dei marker per le colonne non trovata');
+  return src.slice(start, end);
+})();
+const makeTableHeaderMarkers = new Function(
+  'lineStructuralSignature',
+  `${TABLE_HEADER_MARKER_HELPERS_SRC}\nreturn { tableHeaderColumnMarkers, tableHeaderColumnMarker };`,
+)(lineStructuralSignature);
 const TRANSLATE_IN_CHUNKS_SRC = (() => {
   const start = src.indexOf('  async function translateInChunks(\n    bodyText,\n    fieldKey,\n    makeChunkPrompt,\n    labelPrefix,\n    targetLang,\n    { pretranslatedResult = null, forceLegacy = false } = {},\n  ) {');
   assert.notEqual(start, -1, 'translateInChunks non trovata in create-article.mjs');
   const end = src.indexOf('\n  }\n', start);
   assert.notEqual(end, -1, 'fine di translateInChunks non trovata in create-article.mjs');
-  return src.slice(start, end + 4);
+  return `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${src.slice(start, end + 4)}`;
 })();
 const MISSING_FIELD_LOOP_SRC = (() => {
   const marker = '`${locale}:${recoveryField}-missing-retry`,';
@@ -504,7 +515,7 @@ function createPendingBodyCodexTranslatorFixture({
     'AI_MODELS', '_pendingBodyCodexDeadlineMs', 'CODEX_TRANSLATE_TRANSPORT_RETRIES',
     'withCodexTranslationLane', 'codexCallDeadlineMs', '_aiCallLLM', 'translateWithCodexEngine', 'isModelAvailable',
     'translateFieldFreeMt', 'balanceMarkdownMarkers', 'translatePendingBodyWithHistoricalChain', 'pendingBodySecondLaneAvailable', 'console',
-    `${src.slice(at, end)}\nreturn translatePendingBodyWithCodex;`,
+    `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${src.slice(at, end)}\nreturn translatePendingBodyWithCodex;`,
   );
   const processDeadlineMs = Date.now() + 300_000;
   let admissionAttempts = 0;
@@ -682,7 +693,7 @@ test('la catena storica riusa il chunker per un body pending sopra soglia', asyn
     'translateFieldFreeMt', 'translatedStringOrNull', 'balanceMarkdownMarkers',
     'buildPendingBodyRetranslationPrompt', 'countWords', 'TRANSLATION_CHUNK_THRESHOLD',
     'console',
-    `${src.slice(at, end)}\nreturn translatePendingBodyWithHistoricalChain;`,
+    `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${src.slice(at, end)}\nreturn translatePendingBodyWithHistoricalChain;`,
   );
   const longIt = Array.from({ length: 701 }, (_, i) => `parola${i}`).join(' ');
   const expected = longIt.replaceAll('parola', 'Wort');
@@ -741,7 +752,7 @@ test('il fallback storico corto applica il contratto strutturale prima del final
     'translateFieldFreeMt', 'translatedStringOrNull', 'balanceMarkdownMarkers',
     'buildPendingBodyRetranslationPrompt', 'countWords', 'TRANSLATION_CHUNK_THRESHOLD',
     'console',
-    `${src.slice(historicalAt, historicalEnd)}\nreturn translatePendingBodyWithHistoricalChain;`,
+    `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${src.slice(historicalAt, historicalEnd)}\nreturn translatePendingBodyWithHistoricalChain;`,
   );
   const makeTranslateInChunks = new Function(
     'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
@@ -1329,8 +1340,25 @@ test('il joiner protegge prefissi Markdown annidati e lo scheletro delle pipe', 
   ].join('\n');
   assert.equal(
     await makeTranslator(() => translatedTableWithHeader)(tableWithHeader),
+    null,
+    'un’intestazione localizzata senza mapping per-colonna deve restare rifiutata',
+  );
+  const markedTranslatedTableWithHeader = makeTableHeaderMarkers
+    .tableHeaderColumnMarkers(translatedTableWithHeader).markedText;
+  assert.equal(
+    await makeTranslator(() => markedTranslatedTableWithHeader)(tableWithHeader),
     translatedTableWithHeader,
     'le etichette di intestazione possono essere localizzate quando la riga separatrice dimostra la struttura della tabella',
+  );
+  const sourceHeaderMarkers = makeTableHeaderMarkers.tableHeaderColumnMarkers(tableWithHeader).markers;
+  const swappedLocalizedHeader = [
+    `| Reported change ${sourceHeaderMarkers.find(({ cellIndex }) => cellIndex === 2).marker} | Segment ${sourceHeaderMarkers.find(({ cellIndex }) => cellIndex === 1).marker} |`,
+    ...markedTranslatedTableWithHeader.split('\n').slice(1),
+  ].join('\n');
+  assert.equal(
+    await makeTranslator(() => swappedLocalizedHeader)(tableWithHeader),
+    null,
+    'due etichette localizzate scambiate devono essere rifiutate anche quando la tabella resta strutturalmente valida',
   );
   const swappedTextDataRow = tableWithHeader.replace(
     '| Case unifamiliari | +2,1% |',
@@ -2374,7 +2402,7 @@ test('se il circuit breaker apre Codex dopo la selezione, la lane passa alla cat
     'AI_MODELS', '_pendingBodyCodexDeadlineMs', 'CODEX_TRANSLATE_TRANSPORT_RETRIES',
     'withCodexTranslationLane', 'codexCallDeadlineMs', '_aiCallLLM', 'translateWithCodexEngine',
     'translateFieldFreeMt', 'balanceMarkdownMarkers', 'translatePendingBodyWithHistoricalChain', 'isModelAvailable', 'console',
-    `${src.slice(at, end)}\nreturn translatePendingBodyWithCodex;`,
+    `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${src.slice(at, end)}\nreturn translatePendingBodyWithCodex;`,
   );
   const processDeadlineMs = Date.now() + 300_000;
   const admission = { deadlineMs: processDeadlineMs, finish() {} };

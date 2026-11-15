@@ -15006,6 +15006,113 @@ ${enrichmentLine}
 // this script runs main() on import so its internals can't be imported).
 const ARTICLE_TRANSLATE_FREE_MT = String(process.env.ARTICLE_TRANSLATE_FREE_MT ?? '1') !== '0';
 
+/**
+ * A Markdown table header can contain only translatable prose, so its column
+ * identity is otherwise lost as soon as a provider returns two labels in the
+ * opposite order. Keep a source-owned, opaque marker in every header cell
+ * while the text is translated. The marker is a transport contract, never
+ * article content: the validator removes it after proving that each marker
+ * stayed in its source column.
+ */
+function tableHeaderColumnMarker(lineIndex, cellIndex) {
+  return `<span data-frontaliere-table-column="${lineIndex}-${cellIndex}"></span>`;
+}
+
+function stripTableHeaderColumnMarkers(value) {
+  return String(value ?? '').replace(
+    /[ \t]?<span data-frontaliere-table-column="\d+-\d+"><\/span>/gu,
+    '',
+  );
+}
+
+function tableHeaderColumnPipeLayout(line) {
+  const value = String(line ?? '');
+  const cells = [];
+  let cellStart = 0;
+  let firstRawPipe = -1;
+  let lastRawPipe = -1;
+  for (let cursor = 0; cursor < value.length; cursor += 1) {
+    if (value[cursor] !== '|') continue;
+    let slashCount = 0;
+    for (let previous = cursor - 1; previous >= 0 && value[previous] === '\\'; previous -= 1) {
+      slashCount += 1;
+    }
+    if (slashCount % 2 === 1) continue;
+    if (firstRawPipe === -1) firstRawPipe = cursor;
+    lastRawPipe = cursor;
+    cells.push({ start: cellStart, end: cursor });
+    cellStart = cursor + 1;
+  }
+  if (firstRawPipe === -1) return null;
+  cells.push({ start: cellStart, end: value.length });
+  return { cells, firstRawPipe, lastRawPipe };
+}
+
+function tableHeaderColumnMarkers(value) {
+  const source = stripTableHeaderColumnMarkers(value);
+  const lines = source.split('\n');
+  const markers = [];
+  const markedLines = lines.map((line, lineIndex) => {
+    const layout = tableHeaderColumnPipeLayout(line);
+    const separatorLine = lines[lineIndex + 1] ?? '';
+    const separatorLayout = tableHeaderColumnPipeLayout(separatorLine);
+    if (!layout || !separatorLayout) return line;
+    const separatorCells = separatorLayout.cells.map(({ start, end }) => separatorLine.slice(start, end).trim());
+    if (!separatorCells.some((cell) => /^:?-{3,}:?$/u.test(cell))) return line;
+    if (!separatorCells.every((cell) => cell === '' || /^:?-{3,}:?$/u.test(cell))) return line;
+
+    // The first/last empty segment is framing when the row has a leading or
+    // trailing pipe. A Markdown prefix (`>`, `-`, `1.`...) before the first
+    // pipe is framing too; it is not a table column.
+    const prefix = line.slice(0, layout.firstRawPipe).trim();
+    const hasLeadingFrame = !prefix || /^(?:#{1,6}|>|[-+*•]|\d+[.)])(?:[ \t]|$)/u.test(prefix);
+    const suffix = line.slice(layout.lastRawPipe + 1).trim();
+    const hasTrailingFrame = !suffix;
+    const firstColumn = hasLeadingFrame ? 1 : 0;
+    const lastColumn = layout.cells.length - (hasTrailingFrame ? 2 : 1);
+    if (firstColumn > lastColumn) return line;
+
+    let marked = line;
+    for (let cellIndex = lastColumn; cellIndex >= firstColumn; cellIndex -= 1) {
+      const cell = layout.cells[cellIndex];
+      const cellText = line.slice(cell.start, cell.end);
+      const trailingWhitespace = cellText.match(/[ \t]*$/u)?.[0] || '';
+      const insertAt = cell.end - trailingWhitespace.length;
+      const hasCellText = line.slice(cell.start, insertAt).trim() !== '';
+      const marker = tableHeaderColumnMarker(lineIndex, cellIndex);
+      marked = `${marked.slice(0, insertAt)}${hasCellText ? ' ' : ''}${marker}${marked.slice(insertAt)}`;
+      markers.push({ lineIndex, cellIndex, marker });
+    }
+    return marked;
+  });
+  return { markedText: markedLines.join('\n'), markers };
+}
+
+function tableHeaderColumnMarkersMatch(value, expectedMarkers) {
+  const text = String(value ?? '');
+  const found = [];
+  for (const match of text.matchAll(/<span data-frontaliere-table-column="\d+-\d+"><\/span>/gu)) {
+    const marker = match[0];
+    const position = match.index ?? -1;
+    if (position < 0) return false;
+    const lineIndex = text.slice(0, position).split('\n').length - 1;
+    const lineStart = text.lastIndexOf('\n', position - 1) + 1;
+    const lineEnd = text.indexOf('\n', position);
+    const line = text.slice(lineStart, lineEnd === -1 ? text.length : lineEnd);
+    const layout = tableHeaderColumnPipeLayout(line);
+    const localPosition = position - lineStart;
+    const cellIndex = layout?.cells.findIndex(({ start, end }) => localPosition >= start && localPosition < end);
+    found.push({ lineIndex, cellIndex, marker });
+  }
+  if (found.length !== expectedMarkers.length) return false;
+  return expectedMarkers.every(({ lineIndex, cellIndex, marker }) => {
+    const matches = found.filter((entry) => entry.marker === marker);
+    return matches.length === 1
+      && matches[0].lineIndex === lineIndex
+      && matches[0].cellIndex === cellIndex;
+  });
+}
+
 // Thin in-script wrapper: bind the lib field-translator to the prod MT cascade,
 // markdown repair, and logger. Returns '' on any failure so the caller's
 // per-field recovery takes over (LLM retry → IT fallback for title/excerpt/FAQ,
@@ -15022,8 +15129,11 @@ function freeMtField(
   field = fieldType,
   { preserveMunicipalityNames = false } = {},
 ) {
+  const sourceText = /^body\d+$/u.test(field)
+    ? tableHeaderColumnMarkers(text).markedText
+    : text;
   return translateFieldFreeMt({
-    text,
+    text: sourceText,
     sourceLang,
     targetLang,
     fieldType,
@@ -15093,7 +15203,8 @@ async function translateContentFreeMt(
     ),
     ...bodyFields.map(async (field) => {
       const translated = await freeMtField(sourceContent[field], sourceLang, targetLang, 'description', field);
-      if (!translated || typeof validateBody !== 'function') return translated;
+      if (!translated) return translated;
+      if (typeof validateBody !== 'function') return stripTableHeaderColumnMarkers(translated);
       const validated = await validateBody({
         field,
         sourceText: sourceContent[field],
@@ -15167,6 +15278,7 @@ VINCOLI OBBLIGATORI:
 - non riassumere e non omettere frasi o paragrafi;
 - mantieni la stessa struttura Markdown, inclusi heading, elenchi, citazioni e interruzioni di riga;
 - mantieni invariati i nomi propri, i toponimi, le cifre e le destinazioni dei link nav: protette dai marcatori;
+- se compaiono marcatori opachi <span data-frontaliere-table-column="riga-cella"></span>, copiali esattamente nella stessa cella della tabella: identificano la colonna sorgente e non sono testo da tradurre;
 - non aggiungere spiegazioni, prefissi o code fences.
 
 CONTENUTO ITALIANO DA TRADURRE:
@@ -15289,7 +15401,7 @@ async function translatePendingBodyWithCodex(
       const rejected = [];
       let codexModelUnavailable = false;
       const text = await translateFieldFreeMt({
-        text: itValue,
+        text: tableHeaderColumnMarkers(itValue).markedText,
         sourceLang: 'it',
         targetLang: locale,
         fieldType: 'description',
@@ -15342,7 +15454,7 @@ async function translatePendingBodyWithCodex(
           locale,
           { pretranslatedResult: { [field]: text } },
         )
-        : text;
+        : stripTableHeaderColumnMarkers(text);
       if (text && validatedText === null) rejected.push('structure');
       if (!validatedText
         && (codexModelUnavailable || !pendingBodySecondLaneAvailable() || rejected.length > 0)
@@ -15383,7 +15495,7 @@ async function translatePendingBodyWithHistoricalChain(
   const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
   const rejected = [];
   const text = await translateFieldFreeMt({
-    text: itValue,
+    text: tableHeaderColumnMarkers(itValue).markedText,
     sourceLang: 'it',
     targetLang: locale,
     fieldType: 'description',
@@ -15649,9 +15761,14 @@ async function translateArticle(data) {
     targetLang,
     { pretranslatedResult = null, forceLegacy = false } = {},
   ) {
+    // Recovery/free-MT callers may already have carried the transport markers
+    // through a first provider. Normalize them before deriving the next
+    // expected mapping so nested validation remains idempotent.
+    bodyText = stripTableHeaderColumnMarkers(bodyText);
+    const tableHeaderMarkers = tableHeaderColumnMarkers(bodyText);
     const chunks = pretranslatedResult === null
-      ? splitIntoTranslationChunks(bodyText)
-      : [bodyText];
+      ? splitIntoTranslationChunks(tableHeaderMarkers.markedText)
+      : [tableHeaderMarkers.markedText];
     const translated = pretranslatedResult === null
       ? await Promise.all(
         chunks.map((chunk, i) =>
@@ -15676,10 +15793,12 @@ async function translateArticle(data) {
       parts.push(part);
     }
     const separators = chunks.separators || [];
-    const joined = parts.reduce(
+    const joinedWithTableMarkers = parts.reduce(
       (joined, part, index) => joined + (index === 0 ? '' : separators[index - 1] ?? '') + part,
       '',
     );
+    if (!tableHeaderColumnMarkersMatch(joinedWithTableMarkers, tableHeaderMarkers.markers)) return null;
+    const joined = stripTableHeaderColumnMarkers(joinedWithTableMarkers);
 
     // The structural contracts below cannot see prose silently dropped from a
     // chunk. A response can preserve every marker, link and number and still
@@ -16990,9 +17109,8 @@ async function translateArticle(data) {
     // This is deliberately fail-closed for data rows: two or more unresolved
     // cells, or duplicate proofs on changed cells, cannot demonstrate that the
     // provider kept the facts in their original columns. A header row directly
-    // followed by a separator has no source-owned facts to associate: its
-    // labels may both be translated, so the unresolved-cell cap must not reject
-    // every valid Markdown table.
+    // followed by a separator may exceed that cap only after the opaque
+    // per-column markers above have round-tripped in their original cells.
     const tableCellProof = (cell, sourceDateOrdinals = null) => {
       const contract = numericContract(cell, [], { sourceDateOrdinals });
       return {
@@ -17060,7 +17178,8 @@ async function translateArticle(data) {
           unresolvedCells += 1;
         }
       }
-      if (unresolvedCells > 1 && !isTableHeaderRow(index)) return null;
+      const hasHeaderColumnMapping = tableHeaderMarkers.markers.some(({ lineIndex }) => lineIndex === index);
+      if (unresolvedCells > 1 && !(isTableHeaderRow(index) && hasHeaderColumnMapping)) return null;
     }
 
     // `balanceMarkdownMarkers` only repairs/validates bold `**` and separator
@@ -17195,6 +17314,7 @@ async function translateArticle(data) {
 - Traduzione COMPLETA, stessa profondità e lunghezza dell'italiano
 - NON riassumere — traduci tutto il contenuto
 - Mantieni la formattazione: ## per sottotitoli, - per elenchi, > per citazioni, emoji (📊💡⚠️) per box
+- Se compaiono marcatori opachi <span data-frontaliere-table-column="riga-cella"></span>, copiali esattamente nella stessa cella della tabella: identificano la colonna sorgente e non sono testo da tradurre.
 - Mantieni i link interni esattamente come sono: [testo tradotto](nav:azione) — traduci solo il testo visibile, NON l'azione nav:
 - GRASSETTO: max 2-3 parole in grassetto per INTERO campo body. Preferire ZERO grassetto.
 - Usa fraseologia naturale nella lingua target, non traduzione letterale
@@ -17220,8 +17340,9 @@ ${localizedToponymInstruction(targetLang)}`;
 
       if (words <= TRANSLATION_CHUNK_THRESHOLD) {
         // Normal single-call translation
+        const markedBodyText = tableHeaderColumnMarkers(bodyText).markedText;
         const result = await callWithRetry(makePrompt(
-          `CONTENUTO ITALIANO DA TRADURRE:\n- ${bodyKey}: ${bodyText}`,
+          `CONTENUTO ITALIANO DA TRADURRE:\n- ${bodyKey}: ${markedBodyText}`,
           `{"${bodyKey}": "..."}`,
         ), bodyTokens(bodyText), `${lang}:${bodyKey.replace('body', 'b')}`, { translation: true });
         // A model answering {"body1": {...}} / {"body1": [...]} still parses as
@@ -17662,8 +17783,11 @@ ${localizedToponymInstruction(targetLang)}`;
             );
             retried = translatedStringOrNull(chunked, locale);
           } else {
+            const recoverySourceText = isBodyField
+              ? tableHeaderColumnMarkers(itValue).markedText
+              : itValue;
             const parsed = await callWithRetry(
-              `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${retryFieldLabel}):\n${itValue}\n\nFormato risposta: ${faqPart ? `{"faq": [{"${faqPart}": "..."}]}` : `{"${field}": "..."}`}`,
+              `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. Rispondi SOLO con JSON (no markdown):\n\n${isBodyField ? '- Copia ogni marcatore opaco <span data-frontaliere-table-column="riga-cella"></span> esattamente nella stessa cella della tabella; non tradurlo.' : ''}\n\nCAMPO ITALIANO (${retryFieldLabel}):\n${recoverySourceText}\n\nFormato risposta: ${faqPart ? `{"faq": [{"${faqPart}": "..."}]}` : `{"${field}": "..."}`}`,
               1500,
               `${locale}:${recoveryField}-missing-retry`,
               { translation: true },
@@ -17782,9 +17906,11 @@ ${localizedToponymInstruction(targetLang)}`;
       console.error(`  ⚠️  Traduzione ${field} (${locale}) troncata — retry traduzione mirata...`);
       const buildRetryPrompt = (chunkText, i, total) => {
         const partLabel = total > 1 ? `, parte ${i + 1} di ${total}` : '';
+        const markedChunkText = tableHeaderColumnMarkers(chunkText).markedText;
         return `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. `
           + `La traduzione deve essere COMPLETA fino all'ultima frase: non troncare, non interrompere a metà periodo. `
-          + `Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${field}${partLabel}):\n${chunkText}\n\nFormato risposta: {"${field}": "..."}`;
+          + `Copia ogni marcatore opaco <span data-frontaliere-table-column="riga-cella"></span> esattamente nella stessa cella della tabella; non tradurlo. `
+          + `Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${field}${partLabel}):\n${markedChunkText}\n\nFormato risposta: {"${field}": "..."}`;
       };
       try {
         let retried;
