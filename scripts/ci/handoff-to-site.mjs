@@ -367,6 +367,7 @@ export function descentBlock(entry, { couplings = [], blockedForever = new Set()
  * I path per cui una consegna automatica non basta: gemelli `identical` che
  * nessun canale porta giu' e artefatti `scalarFingerprint` adattati da gestire
  * insieme al partner dichiarato. Sorgente unica, come `mirrorLockedPaths()`.
+ * `strandedTwinPaths` mantiene il nome storico per compatibilita' con i consumer.
  *
  * Serve a una decisione sola: una consegna che nomina uno di questi non
  * autorizza a chiudere qui. La chiusura dei `blocked-*` poggia sulla frase «la
