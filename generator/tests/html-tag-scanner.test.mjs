@@ -72,6 +72,9 @@ test('table header pipe ambiguity rejects inline code, links, and HTML attribute
   assert.equal(tableHeaderColumnPipeAmbiguity('| <foo|bar@baz> | Valore |'), true);
   assert.equal(tableHeaderColumnPipeAmbiguity('| <mail@example.test> | Valore |'), false);
   assert.equal(tableHeaderColumnPipeAmbiguity('| A ``a```b`|c`` | Valore |'), true);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| [A](url "titolo) | altro") | Valore |'), true);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| [A](url "titolo \\| altro") | Valore |'), false);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| [A](<url) | altro> | Valore |'), true);
   assert.equal(tableHeaderColumnPipeAmbiguity('| \\<a title="x|y"> | Valore |'), false);
   assert.equal(tableHeaderColumnPipeAmbiguity('| \\<!-- x|y --> | Valore |'), false);
   assert.equal(tableHeaderColumnPipeAmbiguity('| \\<https://host/a|b> | Valore |'), false);

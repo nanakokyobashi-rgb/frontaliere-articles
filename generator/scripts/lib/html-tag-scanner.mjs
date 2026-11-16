@@ -51,7 +51,7 @@ function readMarkdownAutolinkEnd(value, start) {
  * reliably distinguishable from a cell delimiter by the line parser.
  *
  * GFM table splitting happens before inline rendering. A pipe in a code span,
- * link label/destination, HTML tag/attribute, or HTML comment can therefore
+ * link label/destination/title, HTML tag/attribute, or HTML comment can therefore
  * either be content or a delimiter depending on the parser that eventually
  * consumes the line. The safe result for a source-owned translation marker is
  * to reject the whole candidate table rather than attach a marker to the
@@ -62,6 +62,9 @@ export function tableHeaderColumnPipeAmbiguity(markdownLine) {
   let codeDelimiter = '';
   let bracketDepth = 0;
   let linkDestinationDepth = 0;
+  let linkDestinationStarted = false;
+  let linkAngleDestination = false;
+  let linkTitleQuote = '';
 
   for (let index = 0; index < value.length; index += 1) {
     if (codeDelimiter) {
@@ -85,7 +88,41 @@ export function tableHeaderColumnPipeAmbiguity(markdownLine) {
       continue;
     }
 
-    if (value[index] === '<' && !isEscapedMarkdownCharacter(value, index)) {
+    const escaped = isEscapedMarkdownCharacter(value, index);
+    if (linkDestinationDepth > 0) {
+      if (linkTitleQuote) {
+        if (value[index] === '|' && !escaped) return true;
+        if (value[index] === linkTitleQuote && !escaped) linkTitleQuote = '';
+        continue;
+      }
+
+      if (linkAngleDestination) {
+        if (value[index] === '|' && !escaped) return true;
+        if (value[index] === '>' && !escaped) linkAngleDestination = false;
+        continue;
+      }
+
+      if (!linkDestinationStarted) {
+        if (/\s/u.test(value[index] || '')) continue;
+        linkDestinationStarted = true;
+        if (value[index] === '<' && !escaped) {
+          linkAngleDestination = true;
+          continue;
+        }
+      }
+
+      if (value[index] === '|' && !escaped) return true;
+      if ((value[index] === '"' || value[index] === "'")
+        && !escaped && /\s/u.test(value[index - 1] || '')) {
+        linkTitleQuote = value[index];
+        continue;
+      }
+      if (value[index] === '(' && !escaped) linkDestinationDepth += 1;
+      if (value[index] === ')' && !escaped) linkDestinationDepth -= 1;
+      continue;
+    }
+
+    if (value[index] === '<' && !escaped) {
       if (value.startsWith('<!--', index)) {
         const commentEnd = value.indexOf('-->', index + 4);
         const contentEnd = commentEnd < 0 ? value.length : commentEnd;
@@ -114,14 +151,6 @@ export function tableHeaderColumnPipeAmbiguity(markdownLine) {
       }
     }
 
-    const escaped = isEscapedMarkdownCharacter(value, index);
-    if (linkDestinationDepth > 0) {
-      if (value[index] === '|' && !escaped) return true;
-      if (value[index] === '(' && !escaped) linkDestinationDepth += 1;
-      if (value[index] === ')' && !escaped) linkDestinationDepth -= 1;
-      continue;
-    }
-
     if (value[index] === '[' && !escaped) {
       bracketDepth += 1;
       continue;
@@ -132,6 +161,9 @@ export function tableHeaderColumnPipeAmbiguity(markdownLine) {
       while (/\s/u.test(value[next] || '')) next += 1;
       if (bracketDepth === 0 && value[next] === '(') {
         linkDestinationDepth = 1;
+        linkDestinationStarted = false;
+        linkAngleDestination = false;
+        linkTitleQuote = '';
         index = next;
       }
       continue;
