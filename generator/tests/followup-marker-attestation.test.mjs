@@ -195,6 +195,18 @@ test('2299: conserva la relazione bucket-item per la riparazione cross-repo', ()
     { buckets: [3837], items: ['FU-2026-11-15-010'] },
     { buckets: [16887], items: ['FU-2026-11-04-009'] },
   ]);
+
+  const inlineIds = [
+    '## Post-merge follow-up triage',
+    '',
+    'Created/updated: 2 item.',
+    '- Corpus #1957 `follow-up(daily:2026-09-28)` — `FU-2026-09-28-009`.',
+    '- Site #10171 `follow-up(daily:2026-09-28)` — `FU-2026-09-28-033`.',
+  ].join('\n');
+  assert.deepEqual(triageMarkerClaims(inlineIds), [
+    { buckets: [1957], items: ['FU-2026-09-28-009'] },
+    { buckets: [10171], items: ['FU-2026-09-28-033'] },
+  ]);
 });
 
 test('2299: aggiunge Sources solo agli item dichiarati ed è idempotente', () => {
