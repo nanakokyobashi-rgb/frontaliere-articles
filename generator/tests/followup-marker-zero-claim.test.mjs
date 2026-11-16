@@ -798,6 +798,11 @@ test('lo step del workflow INVOCA il predicato invece di riscriverlo', () => {
   // che l'altra avrebbe promosso. Questo test difende l'unicità del predicato.
   const yml = readFileSync(path.join(ROOT, '.github/workflows/post-merge-followup.yml'), 'utf8');
   assert.match(yml, /--verify-persistence "\$csv"/, 'lo step deve invocare il predicato unico');
+  const repairIndex = yml.indexOf('- name: Repair marker Sources (zero-provider)');
+  const verifyIndex = yml.indexOf('- name: Verify complete follow-up triage (zero-provider)');
+  assert.ok(repairIndex >= 0, 'lo step deve riparare Sources prima della verifica');
+  assert.ok(repairIndex < verifyIndex, 'la riparazione deve precedere il verifier');
+  assert.match(yml, /--repair-marker-sources "\$BATCH_PRS"/);
   for (const reimplementation of [
     /bucket_persisted_for_pr/,
     /gate_preserved_for_pr/,

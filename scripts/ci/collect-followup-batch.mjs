@@ -72,8 +72,16 @@ import path from 'node:path';
 let dailyBucketInfo;
 let dailyBucketSourcePrNumbers;
 let dailyKeyZurich;
+let parseFollowupItems;
+let mergeDailyItemSources;
 try {
-  ({ dailyBucketInfo, dailyBucketSourcePrNumbers, dailyKeyZurich } = await import('./followup-resolution-match.mjs'));
+  ({
+    dailyBucketInfo,
+    dailyBucketSourcePrNumbers,
+    dailyKeyZurich,
+    parseFollowupItems,
+    mergeDailyItemSources,
+  } = await import('./followup-resolution-match.mjs'));
 } catch {
   dailyKeyZurich = (nowMs = Date.now()) => new Intl.DateTimeFormat('en-CA', {
     timeZone: 'Europe/Zurich', year: 'numeric', month: '2-digit', day: '2-digit',
@@ -83,6 +91,8 @@ try {
     return m ? { dailyKey: m[1], count: Number(m[2]) } : null;
   };
   dailyBucketSourcePrNumbers = () => [];
+  parseFollowupItems = null;
+  mergeDailyItemSources = null;
 }
 
 const TRIAGE_COMMENT_PREFIX = '## Post-merge follow-up triage';
@@ -499,6 +509,7 @@ export function dailyTagBucketReferences(text) {
 
 const TRIAGE_CLAIM_LINE_RE = /^\s*(?:[-*]\s+)?Created(?:\/updated)?:/i;
 const CLAIM_BULLET_LINE_RE = /^\s*[-*+]\s+\S/;
+const FOLLOWUP_ITEM_CLAIM_RE = /^\s*(?:(?:(?:[-*+]|\d+[.)])\s+)?Follow-up\s+item\s*:\s*|[-*+]\s+)(?:`(FU-\d{4}-\d{2}-\d{2}-\d{3})`|(FU-\d{4}-\d{2}-\d{2}-\d{3})\b)/i;
 
 // A few post-merge triage comments have used prose instead of the required
 // zero heading when every residual was already tracked elsewhere. Accept
@@ -523,22 +534,97 @@ const DIRECT_FU_BULLET_RE = /^\s*[-*+]\s+(?:`)?FU-\d{4}-\d{2}-\d{2}-\d{3}\b/i;
  * di bullet che la segue immediatamente, fino alla prima riga che non e' un
  * bullet (riga vuota inclusa). Stessa definizione del gemello del sito.
  */
-function claimLinesWithBullets(lines) {
-  const out = [];
-  let inClaimList = false;
+function claimBlocks(lines) {
+  const blocks = [];
+  let block = null;
   for (const line of lines) {
     if (TRIAGE_CLAIM_LINE_RE.test(line)) {
-      out.push(line);
-      inClaimList = true;
+      block = [line];
+      blocks.push(block);
       continue;
     }
-    if (inClaimList && CLAIM_BULLET_LINE_RE.test(line)) {
-      out.push(line);
+    if (block && CLAIM_BULLET_LINE_RE.test(line)) {
+      block.push(line);
       continue;
     }
-    inClaimList = false;
+    block = null;
+  }
+  return blocks;
+}
+
+function claimLinesWithBullets(lines) {
+  const out = [];
+  for (const block of claimBlocks(lines)) {
+    out.push(...block);
   }
   return out;
+}
+
+function itemIdFromClaimLine(line) {
+  const match = FOLLOWUP_ITEM_CLAIM_RE.exec(String(line || ''));
+  return match ? (match[1] || match[2]).toUpperCase() : null;
+}
+
+function itemIdsFromClaimLine(line) {
+  const direct = itemIdFromClaimLine(line);
+  if (direct) return [direct];
+  // The multi-repository marker form puts the FU id after the repository/tag
+  // (`- Site #N `follow-up(...)` — `FU-...`). It is safe to accept that shape
+  // only inside a claim bullet that also names a bucket; an inline FU mention
+  // in ordinary prose or a dropped-item note must stay context.
+  const text = String(line || '');
+  const hasBucket = bucketReferencesOnLine(text).length > 0 || dailyTagBucketReferences(text).length > 0;
+  if (!CLAIM_BULLET_LINE_RE.test(text) || !hasBucket) return [];
+  return [...text.matchAll(/\bFU-\d{4}-\d{2}-\d{2}-\d{3}\b/gi)]
+    .map((match) => match[0].toUpperCase());
+}
+
+/**
+ * Preserve the marker's one-to-one claim mapping so a repair can update only
+ * the bucket/item the provider named. A flat list of IDs and buckets is not
+ * sufficient when one PR is routed to both repositories.
+ */
+export function triageMarkerClaims(markerBody) {
+  const body = normalizeTriageMarkerBody(markerBody);
+  return claimBlocks(attestationLines(body.split(/\r?\n/)))
+    .map((lines) => {
+      const headerBuckets = [
+        ...bucketReferencesOnLine(lines[0] || ''),
+        ...dailyTagBucketReferences(lines[0] || ''),
+      ];
+      const bulletClaims = lines.slice(1).flatMap((line) => {
+        const buckets = [
+          ...bucketReferencesOnLine(line),
+          ...dailyTagBucketReferences(line),
+        ];
+        return itemIdsFromClaimLine(line).map((id) => ({ id, buckets: [...new Set(buckets)] }));
+      });
+      const items = lines.flatMap(itemIdsFromClaimLine);
+      const perBullet = bulletClaims.length > 0
+        && bulletClaims.every((claim) => claim.buckets.length > 0)
+        && new Set(bulletClaims.map((claim) => claim.id)).size === new Set(items).size;
+      if (perBullet) {
+        return [...new Set(bulletClaims.map((claim) => claim.buckets).flat())]
+          .map((bucket) => ({
+            buckets: [bucket],
+            items: [...new Set(bulletClaims
+              .filter((claim) => claim.buckets.includes(bucket))
+              .map((claim) => claim.id))],
+          }))
+          .filter((claim) => claim.items.length > 0);
+      }
+      const buckets = [
+        ...headerBuckets,
+        ...lines.flatMap(bucketReferencesOnLine),
+        ...dailyTagBucketReferences(lines.join('\n')),
+      ];
+      return [{
+        buckets: [...new Set(buckets)],
+        items: [...new Set(items)],
+      }];
+    })
+    .flat()
+    .filter((claim) => claim.buckets.length > 0 && claim.items.length > 0);
 }
 
 /**
@@ -704,9 +790,8 @@ export function triageMarkerPersistenceExpectation(markerBody) {
   // context and cannot turn a zero marker into an item (issue #2299).
   const items = [...new Set(claimEvidenceLines
     .filter((line) => !nonPersistedZeroLines.has(line))
-    .flatMap((line) => [...line.matchAll(
-      /^\s*(?:(?:(?:[-*+]|\d+[.)])\s+)?Follow-up\s+item\s*:\s*|[-*+]\s+)(?:`(FU-\d{4}-\d{2}-\d{2}-\d{3})`|(FU-\d{4}-\d{2}-\d{2}-\d{3})\b)/gi,
-    )].map((match) => (match[1] || match[2]).toUpperCase())))];
+    .map(itemIdFromClaimLine)
+    .filter(Boolean))];
   const uniqueItems = [...new Set(items)];
   // Il `#N` deve stare accanto a «bucket»: cosi' un `PR concatenata #9050`
   // citato fra i drop non diventa un candidato. Prendiamo il primo numero dopo
@@ -875,6 +960,199 @@ export function readBucketIssue(bucket, run = ghBucketRead, repos = BUCKET_REPOS
       && dailyBucketInfo(issue.title || '')) candidates.push({ ...issue, repo });
   }
   return { candidates, unreadable };
+}
+
+function itemSourceIncludesPr(item, prNumber) {
+  return dailyBucketSourcePrNumbers(item?.raw || item?.text || '')
+    .includes(Number(prNumber));
+}
+
+/**
+ * Add one marker PR to the `Sources` field of the exact stable items claimed
+ * by that marker. This is deliberately separate from the verifier: the
+ * verifier remains fail-closed, while this helper supplies a bounded,
+ * lossless repair for the provider's known "claimed the append, omitted the
+ * source" failure mode.
+ */
+export function repairDailyBucketSources(body, itemIds, prNumber) {
+  const source = String(body || '');
+  const pr = Number(prNumber);
+  const ids = [...new Set((Array.isArray(itemIds) ? itemIds : [])
+    .map((id) => String(id || '').trim().toUpperCase())
+    .filter(Boolean))];
+  if (!Number.isInteger(pr) || pr <= 0) {
+    return { body: source, changed: false, complete: false, reason: 'invalid-pr', missingIds: ids };
+  }
+  if (!ids.length || typeof parseFollowupItems !== 'function'
+      || typeof mergeDailyItemSources !== 'function') {
+    return { body: source, changed: false, complete: false, reason: 'parser-unavailable', missingIds: ids };
+  }
+
+  const initialItems = parseFollowupItems(source);
+  const byId = new Map(initialItems
+    .filter((item) => item?.id)
+    .map((item) => [String(item.id).toUpperCase(), item]));
+  const missingIds = ids.filter((id) => !byId.has(id));
+  if (missingIds.length) {
+    return { body: source, changed: false, complete: false, reason: 'item-not-found', missingIds };
+  }
+
+  let updated = source;
+  let changed = false;
+  for (const id of ids) {
+    const item = parseFollowupItems(updated).find(
+      (candidate) => String(candidate?.id || '').toUpperCase() === id,
+    );
+    if (!item) {
+      return { body: updated, changed, complete: false, reason: 'item-disappeared', missingIds: [id] };
+    }
+    if (itemSourceIncludesPr(item, pr)) continue;
+    const merged = mergeDailyItemSources(item, {
+      text: `- Sources: PR #${pr}\n`,
+      raw: `- Sources: PR #${pr}\n`,
+    });
+    const replacement = typeof merged?.raw === 'string' ? merged.raw : '';
+    if (!replacement || replacement === item.raw) {
+      return { body: updated, changed, complete: false, reason: 'source-merge-noop', missingIds: [id] };
+    }
+    updated = `${updated.slice(0, item.start)}${replacement}${updated.slice(item.end)}`;
+    changed = true;
+  }
+
+  const finalItems = parseFollowupItems(updated);
+  const stillMissing = ids.filter((id) => {
+    const item = finalItems.find(
+      (candidate) => String(candidate?.id || '').toUpperCase() === id,
+    );
+    return !item || !itemSourceIncludesPr(item, pr);
+  });
+  return {
+    body: updated,
+    changed,
+    complete: stillMissing.length === 0,
+    reason: stillMissing.length ? 'source-not-persisted-in-body' : null,
+    missingIds: stillMissing,
+  };
+}
+
+function readIssueSnapshot(repo, number) {
+  const raw = gh(
+    ['issue', 'view', String(number), '--repo', repo, '--json', 'number,title,body'],
+    bucketRepoToken(repo),
+  );
+  if (raw === null) return null;
+  try {
+    const issue = JSON.parse(raw);
+    return issue && Number(issue.number) === Number(number) && typeof issue.body === 'string'
+      ? { ...issue, repo }
+      : null;
+  } catch {
+    return null;
+  }
+}
+
+function writeIssueBody(repo, number, body) {
+  const root = process.env.RUNNER_TEMP || process.cwd();
+  const directory = fs.mkdtempSync(path.join(root, 'followup-marker-source-'));
+  const file = path.join(directory, 'body.md');
+  try {
+    fs.writeFileSync(file, body, 'utf8');
+    return gh(
+      ['issue', 'edit', String(number), '--repo', repo, '--body-file', file],
+      bucketRepoToken(repo),
+    ) !== null;
+  } finally {
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
+}
+
+/**
+ * Repair one bucket with bounded read/append/read-back retries. GitHub issue
+ * edit has no conditional-write flag, so a concurrent append is detected by
+ * the read-back and retried from the fresh body instead of overwriting it.
+ */
+function repairBucketIssueSource(issue, itemIds, prNumber, attempts = 3) {
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    const current = readIssueSnapshot(issue.repo, issue.number);
+    if (!current) return false;
+    if (dailyBucketSourcePrNumbers(current.body).includes(Number(prNumber))) return true;
+    const repaired = repairDailyBucketSources(current.body, itemIds, prNumber);
+    if (!repaired.complete) {
+      console.log(`::warning::Source repair #${issue.number} non provata (${repaired.reason}; item mancanti: ${(repaired.missingIds || []).join(', ') || '-'}).`);
+      return false;
+    }
+    if (!repaired.changed) return true;
+    if (!writeIssueBody(issue.repo, issue.number, repaired.body)) continue;
+    const after = readIssueSnapshot(issue.repo, issue.number);
+    if (after && dailyBucketSourcePrNumbers(after.body).includes(Number(prNumber))) return true;
+  }
+  console.log(`::warning::Source repair #${issue.number} non convergente dopo ${attempts} tentativi.`);
+  return false;
+}
+
+function candidateContainsItems(issue, itemIds) {
+  if (typeof parseFollowupItems !== 'function') return false;
+  const ids = new Set(parseFollowupItems(issue?.body || '')
+    .filter((item) => item?.id)
+    .map((item) => String(item.id).toUpperCase()));
+  return itemIds.every((id) => ids.has(String(id).toUpperCase()));
+}
+
+/**
+ * Reconcile marker claims before the final persistence verifier. The repair is
+ * conservative: it writes only when the marker maps to exactly one bucket
+ * candidate and every claimed stable item is present there. Ambiguous or
+ * legacy claims remain the verifier's fail-closed responsibility.
+ */
+function repairMarkerSourcesForPr(prNumber) {
+  const comments = gh(['pr', 'view', String(prNumber), ...repoArgs, '--json', 'comments']);
+  if (comments === null || !hasTriageComment(comments)) {
+    console.log(`Source repair: PR #${prNumber} senza marker leggibile.`);
+    return false;
+  }
+  const marker = latestTriageCommentBody(comments);
+  const claims = triageMarkerClaims(marker);
+  if (!claims.length) {
+    console.log(`Source repair: PR #${prNumber} senza claim strutturale riparabile; verifier invariato.`);
+    return true;
+  }
+
+  const byBucket = new Map();
+  let ok = true;
+  for (const claim of claims) {
+    if (claim.buckets.length !== 1) {
+      console.log(`::warning::Source repair PR #${prNumber}: claim ambiguo su bucket [${claim.buckets.join(', ')}].`);
+      ok = false;
+      continue;
+    }
+    const bucket = claim.buckets[0];
+    const entry = byBucket.get(bucket) || { items: [] };
+    entry.items = [...new Set([...entry.items, ...claim.items])];
+    byBucket.set(bucket, entry);
+  }
+
+  for (const [bucket, { items }] of byBucket) {
+    const read = readBucketIssue(bucket);
+    const direct = read.candidates.find((candidate) =>
+      dailyBucketSourcePrNumbers(candidate.body).includes(Number(prNumber)));
+    if (direct) {
+      console.log(`Source repair: PR #${prNumber} già presente nel bucket #${bucket} (${direct.repo}).`);
+      continue;
+    }
+    const matching = read.candidates.filter((candidate) => candidateContainsItems(candidate, items));
+    if (matching.length !== 1) {
+      console.log(`::warning::Source repair PR #${prNumber}: bucket #${bucket} non univoco (${matching.length} candidati, lettura${read.unreadable ? ' parzialmente indisponibile' : ''}).`);
+      ok = false;
+      continue;
+    }
+    const issue = matching[0];
+    if (repairBucketIssueSource(issue, items, prNumber)) {
+      console.log(`Source repair: aggiunta/verifica PR #${prNumber} nel bucket #${bucket} (${issue.repo}).`);
+    } else {
+      ok = false;
+    }
+  }
+  return ok;
 }
 
 /**
@@ -1472,6 +1750,26 @@ export function main() {
 // An uncaught collection error emits an explicit failed output and exits nonzero;
 // the workflow verifier then fails the job, so the success watermark cannot advance.
 /**
+ * `--repair-marker-sources <pr>...` — bounded zero-provider reconciliation
+ * between the provider's marker claim and the daily bucket's `Sources` field.
+ * A failed/ambiguous repair returns non-zero; the following verifier remains
+ * authoritative and fail-closed.
+ */
+function repairMarkerSourcesCli(prNumbers) {
+  let ok = true;
+  for (const raw of prNumbers) {
+    const pr = Number(raw);
+    if (!Number.isInteger(pr) || pr <= 0) {
+      console.log(`Source repair: PR '${raw}' non numerica`);
+      ok = false;
+      continue;
+    }
+    if (!repairMarkerSourcesForPr(pr)) ok = false;
+  }
+  return ok;
+}
+
+/**
  * `--verify-persistence <pr>...` — la STESSA verifica usata per l'idempotenza,
  * esposta allo step `Verify complete follow-up triage` del workflow.
  *
@@ -1511,7 +1809,10 @@ function verifyPersistenceCli(prNumbers) {
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  if (process.argv[2] === '--verify-persistence') {
+  if (process.argv[2] === '--repair-marker-sources') {
+    const prs = process.argv.slice(3).flatMap((arg) => arg.split(',')).map((s) => s.trim()).filter(Boolean);
+    process.exitCode = repairMarkerSourcesCli(prs) ? 0 : 1;
+  } else if (process.argv[2] === '--verify-persistence') {
     const prs = process.argv.slice(3).flatMap((arg) => arg.split(',')).map((s) => s.trim()).filter(Boolean);
     process.exitCode = verifyPersistenceCli(prs) ? 0 : 1;
   } else {
