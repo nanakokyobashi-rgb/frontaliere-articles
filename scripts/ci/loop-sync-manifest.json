@@ -2592,9 +2592,9 @@
       "mode": "identical",
       "reason": "Classificatore condiviso dei rifiuti GH013/GH006 usato dal retry helper per distinguere un verdetto permanente da una gara sul ref.",
       "baseline": {
-        "site": "8f98d37c34f04ea0",
-        "corpus": "8f98d37c34f04ea0",
-        "alignedAt": "2026-10-01"
+        "site": "40e44df9e8662f91",
+        "corpus": "40e44df9e8662f91",
+        "alignedAt": "2026-11-16"
       }
     },
     {
@@ -5094,7 +5094,37 @@
         "site": "382670e473ce7f7a",
         "corpus": "382670e473ce7f7a",
         "alignedAt": "2026-11-13"
-      }
+      },
+      "couplingSnapshot": [
+        {
+          "path": "data/jobs/by-crawler/guess-europe.json",
+          "mode": "non registrato"
+        },
+        {
+          "path": "data/jobs/by-crawler/vf-international-the-north-face-timberland.json",
+          "mode": "non registrato"
+        },
+        {
+          "path": "generator/data/crawler-cross-repo-contract.json",
+          "mode": "identical"
+        },
+        {
+          "path": "generator/tests/loop-sync-manifest-scope.test.mjs",
+          "mode": "corpus-only"
+        },
+        {
+          "path": "scripts/ci/close-recovered-failure-issues.mjs",
+          "mode": "adapted"
+        },
+        {
+          "path": "scripts/ci/crawler-generation-observer-selector.mjs",
+          "mode": "non registrato"
+        },
+        {
+          "path": "scripts/ci/loop-sync-manifest.json",
+          "mode": "corpus-only"
+        }
+      ]
     },
     {
       "path": ".github/workflows/crawler-generation-observer-shadow.yml",

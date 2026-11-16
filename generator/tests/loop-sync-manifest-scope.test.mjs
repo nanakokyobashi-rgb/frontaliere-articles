@@ -277,7 +277,40 @@ test('crawler artifact test: il fixture byte-identico resta sorvegliato (#3809)'
   assert.equal('reason' in entry, false);
   assert.equal(closer.mode, 'adapted');
   assert.equal(manifestEntry.mode, 'corpus-only');
-  assert.equal('couplingSnapshot' in entry, false, 'uno snapshot di coupling non governa una voce identical');
+  assert.deepEqual(
+    entry.couplingSnapshot,
+    [
+      {
+        path: 'data/jobs/by-crawler/guess-europe.json',
+        mode: 'non registrato',
+      },
+      {
+        path: 'data/jobs/by-crawler/vf-international-the-north-face-timberland.json',
+        mode: 'non registrato',
+      },
+      {
+        path: 'generator/data/crawler-cross-repo-contract.json',
+        mode: 'identical',
+      },
+      {
+        path: 'generator/tests/loop-sync-manifest-scope.test.mjs',
+        mode: 'corpus-only',
+      },
+      {
+        path: 'scripts/ci/close-recovered-failure-issues.mjs',
+        mode: 'adapted',
+      },
+      {
+        path: 'scripts/ci/crawler-generation-observer-selector.mjs',
+        mode: 'non registrato',
+      },
+      {
+        path: 'scripts/ci/loop-sync-manifest.json',
+        mode: 'corpus-only',
+      },
+    ],
+    'lo snapshot di coupling deve restare allineato al censimento del fixture identical',
+  );
 });
 
 test('topic sources: i gemelli che importano gscOrphans non rientrano nel trasporto isolato (#3504)', () => {
