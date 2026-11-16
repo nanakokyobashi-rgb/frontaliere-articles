@@ -59,7 +59,15 @@ test('table header pipe ambiguity rejects inline code, links, and HTML attribute
   assert.equal(tableHeaderColumnPipeAmbiguity('| Segmento `A|B` | Valore |'), true);
   assert.equal(tableHeaderColumnPipeAmbiguity('| [A|B](nav:calculator) | Valore |'), true);
   assert.equal(tableHeaderColumnPipeAmbiguity('| <span data-label="A|B">Segmento</span> | Valore |'), true);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| <!-- A|B --> | Valore |'), true);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| <https://host/a|b> | Valore |'), true);
   assert.equal(tableHeaderColumnPipeAmbiguity('| Segmento \\| interno | Valore |'), false);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| <!-- A \\| B --> | Valore |'), false);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| <span data-label="A\\|B">Segmento</span> | Valore |'), false);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| <https://host/a\\|b> | Valore |'), false);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| <https://host/a\\\\|b> | Valore |'), true);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| <mailto:a|b@example.test> | Valore |'), true);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| <mail@example.test> | Valore |'), false);
   assert.equal(tableHeaderColumnPipeAmbiguity('| Segmento | Valore |'), false);
 });
 

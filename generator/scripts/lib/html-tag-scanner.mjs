@@ -34,6 +34,16 @@ function isEscapedMarkdownCharacter(value, index) {
   return slashCount % 2 === 1;
 }
 
+function readMarkdownAutolinkEnd(value, start) {
+  if (value[start] !== '<') return null;
+  const end = value.indexOf('>', start + 1);
+  if (end === -1 || /[\r\n]/u.test(value.slice(start + 1, end))) return null;
+  const target = value.slice(start + 1, end);
+  const uri = /^[A-Za-z][A-Za-z0-9+.-]*:[^<>\s]+$/u.test(target);
+  const email = /^[^\s<>@]+@[^\s<>@]+\.[^\s<>@]+$/u.test(target);
+  return uri || email ? end + 1 : null;
+}
+
 /**
  * True when a raw Markdown table pipe is inside syntax whose contents are not
  * reliably distinguishable from a cell delimiter by the line parser.
@@ -65,7 +75,7 @@ export function tableHeaderColumnPipeAmbiguity(markdownLine) {
     if (value.startsWith('<!--', index)) {
       const commentEnd = value.indexOf('-->', index + 4);
       const contentEnd = commentEnd < 0 ? value.length : commentEnd;
-      if (value.slice(index + 4, contentEnd).includes('|')) return true;
+      if (hasRawMarkdownPipe(value, index + 4, contentEnd)) return true;
       if (commentEnd < 0) return false;
       index = commentEnd + 2;
       continue;
@@ -80,6 +90,12 @@ export function tableHeaderColumnPipeAmbiguity(markdownLine) {
     }
 
     if (value[index] === '<') {
+      const autolinkEnd = readMarkdownAutolinkEnd(value, index);
+      if (autolinkEnd !== null) {
+        if (hasRawMarkdownPipe(value, index + 1, autolinkEnd - 1)) return true;
+        index = autolinkEnd - 1;
+        continue;
+      }
       const tag = readHtmlTagAtStatus(value, index);
       if (tag?.malformed) {
         // Once a tag boundary is malformed, the ownership of every later raw
@@ -88,7 +104,7 @@ export function tableHeaderColumnPipeAmbiguity(markdownLine) {
         return hasRawMarkdownPipe(value, index);
       }
       if (tag?.tag) {
-        if (value.slice(tag.tag.start, tag.tag.end).includes('|')) return true;
+        if (hasRawMarkdownPipe(value, tag.tag.start, tag.tag.end)) return true;
         index = tag.tag.end - 1;
         continue;
       }
