@@ -73,7 +73,7 @@ export function tableHeaderColumnPipeAmbiguity(markdownLine) {
         codeDelimiter = '';
         continue;
       }
-      if (value[index] === '|') return true;
+      if (value[index] === '|' && !isEscapedMarkdownCharacter(value, index)) return true;
       continue;
     }
 

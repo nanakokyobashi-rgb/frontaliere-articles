@@ -57,6 +57,8 @@ test('nextHtmlTagStatus distinguishes a valid tag, EOF, and malformed markup', (
 
 test('table header pipe ambiguity rejects inline code, links, and HTML attributes', () => {
   assert.equal(tableHeaderColumnPipeAmbiguity('| Segmento `A|B` | Valore |'), true);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| Segmento `A\\|B` | Valore |'), false);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| Segmento `A\\\\|B` | Valore |'), true);
   assert.equal(tableHeaderColumnPipeAmbiguity('| [A|B](nav:calculator) | Valore |'), true);
   assert.equal(tableHeaderColumnPipeAmbiguity('| <span data-label="A|B">Segmento</span> | Valore |'), true);
   assert.equal(tableHeaderColumnPipeAmbiguity('| <!-- A|B --> | Valore |'), true);
