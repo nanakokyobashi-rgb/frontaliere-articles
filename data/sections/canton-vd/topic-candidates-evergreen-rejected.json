@@ -4,22 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vd::https://latele.ch/articles/chomeurs-frontaliers-couts-supplementaires-pour-berne": {
-      "section": "canton-vd",
-      "ts": 1794523114976
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/contribution-differentielle-hauts-revenus-frontaliers": {
-      "section": "canton-vd",
-      "ts": 1794524854943
-    },
-    "canton-vd::https://latele.ch/articles/vaud-campagne-pour-la-promotion-des-professions-de-la-sante": {
-      "section": "canton-vd",
-      "ts": 1794576506539
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/hebdo-frontalier-13-20-novembre-2026": {
-      "section": "canton-vd",
-      "ts": 1794576508876
-    },
     "canton-vd::https://www.ledauphine.com/sante/2026/11/13/trois-rendez-vous-a-l-hopital-prive-des-pays-de-savoie-pour-prendre-soin-de-sa-sante": {
       "section": "canton-vd",
       "ts": 1794626739829
@@ -27,6 +11,18 @@
     "canton-vd::https://www.ledauphine.com/economie/2026/11/14/nous-ressentons-le-besoin-de-m-engager-davantage-pourquoi-deux-stars-du-trail-xavier-thevenard-et-vincent-bouillard-se-mobilisent-contre-l-a412": {
       "section": "canton-vd",
       "ts": 1794693861146
+    },
+    "canton-vd::https://www.guidedufrontalier.com/actualites/retraite-frontalier-polypensionne": {
+      "section": "canton-vd",
+      "ts": 1794797771201
+    },
+    "canton-vd::https://www.guidedufrontalier.com/actualites/declaration-dris-tou-couple-frontalier": {
+      "section": "canton-vd",
+      "ts": 1794797786096
+    },
+    "canton-vd::https://www.lenordvaudois.ch/vaud/jura-nord-vaudois/5-questions-autour-de-la-nouvelle-loi-sur-lenergie-1521267": {
+      "section": "canton-vd",
+      "ts": 1794798629620
     }
   }
 }
