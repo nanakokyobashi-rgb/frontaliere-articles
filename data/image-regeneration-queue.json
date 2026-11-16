@@ -7,19 +7,19 @@
       "fallbackImage": "/images/places/lugano-view.webp",
       "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (image vision fallback deadline exceeded)",
       "status": "failed",
-      "failureCount": 47,
+      "failureCount": 48,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-11-15T17:31:50.777Z"
+      "lastFailureAt": "2026-11-16T00:43:47.658Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
-      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (image vision fallback deadline exceeded)",
+      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic commuter scene, but it contains a clearly recognizable foreground person viewed from behind.); gemini (Gemin",
       "status": "failed",
-      "failureCount": 42,
+      "failureCount": 43,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-11-15T17:33:51.142Z"
+      "lastFailureAt": "2026-11-16T00:45:30.963Z"
     }
   ]
 }
