@@ -93,7 +93,7 @@ import {
   nextHtmlOpeningTag,
   nextHtmlTag,
   nextHtmlTagStatus,
-  tableHeaderColumnPipeAmbiguity,
+  tableHeaderColumnPipeAmbiguity as sharedTableHeaderColumnPipeAmbiguity,
 } from './lib/html-tag-scanner.mjs';
 
 // ── Il modello preferito per la SOLA generazione del corpo ──────────────────
@@ -15015,6 +15015,10 @@ const ARTICLE_TRANSLATE_FREE_MT = String(process.env.ARTICLE_TRANSLATE_FREE_MT ?
  * article content: the validator removes it after proving that each marker
  * stayed in its source column.
  */
+function tableHeaderColumnPipeAmbiguity(line) {
+  return sharedTableHeaderColumnPipeAmbiguity(line);
+}
+
 const TABLE_HEADER_COLUMN_MARKER_NONCE_KEY = Symbol.for('frontaliere.table-header-column-marker-nonce');
 const TABLE_HEADER_COLUMN_MARKER_NONCE = globalThis[TABLE_HEADER_COLUMN_MARKER_NONCE_KEY]
   ?? (globalThis[TABLE_HEADER_COLUMN_MARKER_NONCE_KEY] = `${Date.now().toString(36)}${Math.random().toString(36).slice(2)}`.slice(-16));
