@@ -18,6 +18,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   latestTriageCommentBody,
+  repairDailyBucketSources,
+  triageMarkerClaims,
   triageMarkerPersistenceExpectation,
   verifyTriageMarkerPersistence,
 } from '../../scripts/ci/collect-followup-batch.mjs';
@@ -174,6 +176,51 @@ test('1721: bucket e item nei claim; i bucket sotto Dropped sono solo contesto',
     return number === 2562 ? persistedBucket : null;
   }), true);
   assert.deepEqual(reads, [2562]);
+});
+
+test('2299: conserva la relazione bucket-item per la riparazione cross-repo', () => {
+  const marker = [
+    '## Post-merge follow-up triage',
+    '',
+    'Created/updated: daily bucket #3837 `follow-up(daily:2026-11-15)` (corpus):',
+    '- Follow-up item: FU-2026-11-15-010 — review gate',
+    '',
+    'Created/updated: daily bucket #16887 `follow-up(daily:2026-11-04)` (sito):',
+    '- Follow-up item: FU-2026-11-04-009 — drift check',
+    '',
+    'Dropped:',
+    '- Il finding storico nel bucket #3601 resta contesto.',
+  ].join('\n');
+  assert.deepEqual(triageMarkerClaims(marker), [
+    { buckets: [3837], items: ['FU-2026-11-15-010'] },
+    { buckets: [16887], items: ['FU-2026-11-04-009'] },
+  ]);
+});
+
+test('2299: aggiunge Sources solo agli item dichiarati ed è idempotente', () => {
+  const original = [
+    '### FU-2026-11-04-009 — drift check',
+    '- State: open',
+    '',
+    '### FU-2026-11-04-010 — altro item',
+    '- State: open',
+    '- Sources: PR #3601',
+  ].join('\n');
+  const repaired = repairDailyBucketSources(original, ['FU-2026-11-04-009'], 3842);
+  assert.equal(repaired.complete, true);
+  assert.equal(repaired.changed, true);
+  assert.match(repaired.body, /FU-2026-11-04-009[\s\S]*- Sources: PR #3842/);
+  assert.doesNotMatch(repaired.body, /FU-2026-11-04-010[\s\S]*PR #3842/);
+
+  const secondPass = repairDailyBucketSources(repaired.body, ['FU-2026-11-04-009'], 3842);
+  assert.equal(secondPass.complete, true);
+  assert.equal(secondPass.changed, false);
+  assert.equal(secondPass.body, repaired.body);
+
+  const missing = repairDailyBucketSources(original, ['FU-2026-11-04-999'], 3842);
+  assert.equal(missing.complete, false);
+  assert.equal(missing.changed, false);
+  assert.equal(missing.body, original);
 });
 
 test('2299: una correzione con gli stessi ID eredita il bucket del marker precedente', () => {

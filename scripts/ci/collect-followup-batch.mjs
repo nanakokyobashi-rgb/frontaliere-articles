@@ -565,6 +565,20 @@ function itemIdFromClaimLine(line) {
   return match ? (match[1] || match[2]).toUpperCase() : null;
 }
 
+function itemIdsFromClaimLine(line) {
+  const direct = itemIdFromClaimLine(line);
+  if (direct) return [direct];
+  // The multi-repository marker form puts the FU id after the repository/tag
+  // (`- Site #N `follow-up(...)` — `FU-...`). It is safe to accept that shape
+  // only inside a claim bullet that also names a bucket; an inline FU mention
+  // in ordinary prose or a dropped-item note must stay context.
+  const text = String(line || '');
+  const hasBucket = bucketReferencesOnLine(text).length > 0 || dailyTagBucketReferences(text).length > 0;
+  if (!CLAIM_BULLET_LINE_RE.test(text) || !hasBucket) return [];
+  return [...text.matchAll(/\bFU-\d{4}-\d{2}-\d{2}-\d{3}\b/gi)]
+    .map((match) => match[0].toUpperCase());
+}
+
 /**
  * Preserve the marker's one-to-one claim mapping so a repair can update only
  * the bucket/item the provider named. A flat list of IDs and buckets is not
@@ -574,18 +588,42 @@ export function triageMarkerClaims(markerBody) {
   const body = normalizeTriageMarkerBody(markerBody);
   return claimBlocks(attestationLines(body.split(/\r?\n/)))
     .map((lines) => {
+      const headerBuckets = [
+        ...bucketReferencesOnLine(lines[0] || ''),
+        ...dailyTagBucketReferences(lines[0] || ''),
+      ];
+      const bulletClaims = lines.slice(1).flatMap((line) => {
+        const buckets = [
+          ...bucketReferencesOnLine(line),
+          ...dailyTagBucketReferences(line),
+        ];
+        return itemIdsFromClaimLine(line).map((id) => ({ id, buckets: [...new Set(buckets)] }));
+      });
+      const items = lines.flatMap(itemIdsFromClaimLine);
+      const perBullet = bulletClaims.length > 0
+        && bulletClaims.every((claim) => claim.buckets.length > 0)
+        && new Set(bulletClaims.map((claim) => claim.id)).size === new Set(items).size;
+      if (perBullet) {
+        return [...new Set(bulletClaims.map((claim) => claim.buckets).flat())]
+          .map((bucket) => ({
+            buckets: [bucket],
+            items: [...new Set(bulletClaims
+              .filter((claim) => claim.buckets.includes(bucket))
+              .map((claim) => claim.id))],
+          }))
+          .filter((claim) => claim.items.length > 0);
+      }
       const buckets = [
+        ...headerBuckets,
         ...lines.flatMap(bucketReferencesOnLine),
         ...dailyTagBucketReferences(lines.join('\n')),
       ];
-      const items = lines
-        .map(itemIdFromClaimLine)
-        .filter(Boolean);
-      return {
+      return [{
         buckets: [...new Set(buckets)],
         items: [...new Set(items)],
-      };
+      }];
     })
+    .flat()
     .filter((claim) => claim.buckets.length > 0 && claim.items.length > 0);
 }
 
