@@ -442,6 +442,28 @@ jobs:
       # `## Post-merge follow-up triage`) salta le PR già processate e riprende le altre.
       # Retry at-least-once by-construction, senza ricorsione né `actions: write`.
 
+      # The provider can truthfully identify the existing FU item and still
+      # omit the current PR from `Sources` while updating the daily issue. That
+      # leaves a durable-looking marker with no provenance and sends the PR to
+      # the six-hour quarantine. Repair only this deterministic metadata gap,
+      # with a bounded read/append/read-back loop, before the verifier below.
+      - name: Repair marker Sources (zero-provider)
+        if: always() && steps.collect.outputs.batch_count != '0' && steps.collect.outputs.batch_count != ''
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          BATCH_PRS: ${{ steps.collect.outputs.batch_prs }}
+          FOLLOWUP_SITE_REPO: valerielinc-ops/frontaliere-si-o-no
+          FOLLOWUP_CORPUS_REPO: nanakokyobashi-rgb/frontaliere-articles
+        run: |
+          set -uo pipefail
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ] && [ -z "${GITHUB_PAT_SITE:-${GITHUB_PAT:-}}" ]; then
+            echo "::warning::Source repair saltato: nessun PAT cross-repo disponibile; il verifier resta fail-closed."
+            exit 1
+          fi
+          node scripts/ci/collect-followup-batch.mjs --repair-marker-sources "$BATCH_PRS"
+
       # Do not infer completion from an action exit code: Codex can stop
       # after one chunk while the batch still contains other PRs.  The gate may
       # seal a collecting bucket only when every PR in the positive batch carries
