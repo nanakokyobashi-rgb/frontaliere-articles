@@ -4,13 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-appenzello::https://appenzell24.ch/news/pu-lanciert-kantonale-gesundheitsinitiative": {
+    "canton-appenzello::https://www.ar.ch/verwaltung/departement-gesundheit-und-soziales": {
       "section": "canton-appenzello",
-      "ts": 1794459378079
-    },
-    "canton-appenzello::https://appenzell24.ch/news/grundlagen-fuer-kuenftige-asylsozialhilfe-erarbeitet": {
-      "section": "canton-appenzello",
-      "ts": 1794602314643
+      "ts": 1794815431011
     }
   }
 }
