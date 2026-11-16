@@ -5616,6 +5616,126 @@
       "firstSeenAt": "2026-11-15T00:23:50.620Z",
       "lastValidatedAt": "2026-11-15T00:23:50.620Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "imposta sui cani canton Berna guida a importi e registrazione",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-16T05:34:28.827Z",
+      "lastValidatedAt": "2026-11-16T05:34:28.827Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "licenza di caccia canton Berna requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-16T05:34:28.842Z",
+      "lastValidatedAt": "2026-11-16T05:34:28.842Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "permesso di pesca canton Berna requisiti e stagioni",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-16T05:34:28.855Z",
+      "lastValidatedAt": "2026-11-16T05:34:28.855Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "targhe e immatricolazione canton Berna guida a procedura e costi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-16T05:34:28.866Z",
+      "lastValidatedAt": "2026-11-16T05:34:28.866Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "collaudo veicoli canton Berna convocazione e requisiti",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-16T05:34:28.877Z",
+      "lastValidatedAt": "2026-11-16T05:34:28.877Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "licenza esercizio pubblico canton Berna requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-16T05:34:28.885Z",
+      "lastValidatedAt": "2026-11-16T05:34:28.885Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "tasse universitarie canton Berna guida a iscrizione e contributi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-16T05:34:28.893Z",
+      "lastValidatedAt": "2026-11-16T05:34:28.893Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "integrazione e corsi di lingua canton Berna contributi e requisiti",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-16T05:34:29.070Z",
+      "lastValidatedAt": "2026-11-16T05:34:29.070Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "imposte cantonali canton Lucerna aliquote e deduzioni",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-16T05:34:29.201Z",
+      "lastValidatedAt": "2026-11-16T05:34:29.201Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "premi cassa malati canton Lucerna e riduzione premi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-16T05:34:29.328Z",
+      "lastValidatedAt": "2026-11-16T05:34:29.328Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -6290,6 +6410,18 @@
       "firstStrikeAt": "2026-11-12T17:54:21.288Z",
       "lastStrikeAt": "2026-11-12T17:54:21.288Z",
       "expiresAt": "2026-12-12T17:54:21.288Z"
+    },
+    {
+      "keyword": "orari di apertura negozi canton Berna guida a domeniche e festivi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-16T05:34:28.809Z",
+      "lastStrikeAt": "2026-11-16T05:34:28.809Z",
+      "expiresAt": "2026-12-16T05:34:28.809Z"
     }
   ],
   "legacy": [
