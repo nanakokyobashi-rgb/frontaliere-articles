@@ -52,9 +52,11 @@ import {
   opaqueSpanSignature,
 } from '../scripts/lib/free-translate.mjs';
 import { sanitizeBodyText } from '../scripts/lib/sanitize-body-braces.mjs';
+import { tableHeaderColumnPipeAmbiguity } from '../scripts/lib/html-tag-scanner.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const src = readFileSync(path.resolve(HERE, '../scripts/create-article.mjs'), 'utf-8');
+globalThis.__frontaliereTableHeaderColumnPipeAmbiguity = tableHeaderColumnPipeAmbiguity;
 
 function extractFunctionSource(startMarker) {
   const start = src.indexOf(startMarker);
@@ -79,7 +81,7 @@ const TABLE_HEADER_MARKER_HELPERS_SRC = (() => {
   assert.notEqual(start, -1, 'helper dei marker per le colonne non trovato');
   const end = src.indexOf('\n// Thin in-script wrapper: bind the lib field-translator', start);
   assert.notEqual(end, -1, 'fine degli helper dei marker per le colonne non trovata');
-  return src.slice(start, end);
+  return `const tableHeaderColumnPipeAmbiguity = globalThis.__frontaliereTableHeaderColumnPipeAmbiguity;\n${src.slice(start, end)}`;
 })();
 const BUILD_BODY_TRUNCATION_RETRY_PROMPT_SRC = extractFunctionSource(
   'function buildBodyTruncationRetryPrompt({',
@@ -1338,6 +1340,27 @@ test('il joiner protegge prefissi Markdown annidati e lo scheletro delle pipe', 
     '| Appartamenti | +4,4% |',
     '| Case unifamiliari | +2,1% |',
   ].join('\n');
+  for (const [label, header] of [
+    ['code span', '| Segmento `A|B` | Valore |'],
+    ['attributo HTML', '| <span data-label="A|B">Segmento</span> | Valore |'],
+    ['link inline', '| [A|B](nav:calculator) | Valore |'],
+  ]) {
+    const ambiguousTable = `${header}\n|---|---|`;
+    assert.equal(tableHeaderColumnPipeAmbiguity(header), true, `${label}: la pipe inline deve essere ambigua`);
+    const markedAmbiguous = makeTableHeaderMarkers.tableHeaderColumnMarkers(ambiguousTable);
+    assert.equal(markedAmbiguous.ambiguous, true, `${label}: la tabella deve essere rifiutata prima dei marker`);
+    assert.deepEqual(markedAmbiguous.markers, [], `${label}: nessun marker deve essere creato`);
+    assert.equal(
+      await makeTranslator((chunk) => chunk)(ambiguousTable),
+      null,
+      `${label}: il contratto di traduzione deve fallire chiuso`,
+    );
+  }
+  assert.equal(
+    tableHeaderColumnPipeAmbiguity('| Segmento \\| interno | Valore |'),
+    false,
+    'una pipe Markdown escapata resta testo di cella non ambiguo',
+  );
   const translatedTableWithHeader = [
     '| Segment | Reported change |',
     '|---|---:|',

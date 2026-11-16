@@ -201,6 +201,7 @@ import { escapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
 import { stripLeakedTitleMarkerLine, diffIsExactlyRemovedLines } from './lib/strip-leaked-title-marker.mjs';
 import { normalizePromptSectionHeadings, applyConvertedHeadings } from './lib/normalize-prompt-section-headings.mjs';
+import { tableHeaderColumnPipeAmbiguity } from './lib/html-tag-scanner.mjs';
 import { detectLanguage, detectLanguageWithConfidence } from './lib/detect-language.mjs';
 import {
   LOCALIZED_TOPONYM_FIELD_SEPARATOR,
@@ -368,23 +369,27 @@ function tableHeaderColumnHeaderInfo(lines, lineIndex) {
   const frame = tableHeaderColumnFrame(line, layout);
   const separatorFrame = tableHeaderColumnFrame(separatorLine, separatorLayout);
   if (!layout || !separatorLayout || !frame || !separatorFrame) return null;
-  if (
-    frame.firstColumn !== separatorFrame.firstColumn
-    || frame.lastColumn !== separatorFrame.lastColumn
-    || frame.prefix !== separatorFrame.prefix
-  ) return null;
   const separatorCells = separatorLayout.cells
     .slice(separatorFrame.firstColumn, separatorFrame.lastColumn + 1)
     .map(({ start, end }) => separatorLine.slice(start, end).trim());
   if (!separatorCells.some((cell) => /^:?-{3,}:?$/u.test(cell))) return null;
   if (!separatorCells.every((cell) => /^:?-{3,}:?$/u.test(cell))) return null;
+  if (tableHeaderColumnPipeAmbiguity(line) || tableHeaderColumnPipeAmbiguity(separatorLine)) {
+    return { ambiguous: true };
+  }
+  if (
+    frame.firstColumn !== separatorFrame.firstColumn
+    || frame.lastColumn !== separatorFrame.lastColumn
+    || frame.prefix !== separatorFrame.prefix
+  ) return null;
   return { layout, frame, separatorLayout, separatorFrame };
 }
 
 function tableHeaderColumnHeaderOccurrenceIndex(lines, lineIndex) {
   let occurrenceIndex = 0;
   for (let index = 0; index <= lineIndex; index += 1) {
-    if (!tableHeaderColumnHeaderInfo(lines, index)) continue;
+    const info = tableHeaderColumnHeaderInfo(lines, index);
+    if (!info || info.ambiguous) continue;
     if (index === lineIndex) return occurrenceIndex;
     occurrenceIndex += 1;
   }
@@ -418,6 +423,11 @@ function tableHeaderColumnMarkers(value) {
   }
   const source = stripTableHeaderColumnMarkers(raw);
   const lines = source.split('\n');
+  for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
+    if (tableHeaderColumnHeaderInfo(lines, lineIndex)?.ambiguous) {
+      return { markedText: raw, markers: [], collision: false, ambiguous: true };
+    }
+  }
   const markers = [];
   let headerIndex = 0;
   const markedLines = lines.map((line, lineIndex) => {
@@ -440,7 +450,7 @@ function tableHeaderColumnMarkers(value) {
     }
     return marked;
   });
-  return { markedText: markedLines.join('\n'), markers, collision: false };
+  return { markedText: markedLines.join('\n'), markers, collision: false, ambiguous: false };
 }
 
 function tableHeaderColumnMarkersMatch(value, expectedMarkers) {
@@ -448,6 +458,9 @@ function tableHeaderColumnMarkersMatch(value, expectedMarkers) {
   const lines = text.split('\n');
   const found = [];
   const currentRunMarkers = tableHeaderColumnMarkerRegExp();
+  for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
+    if (tableHeaderColumnHeaderInfo(lines, lineIndex)?.ambiguous) return false;
+  }
   for (const match of text.matchAll(currentRunMarkers)) {
     const marker = match[0];
     const position = match.index ?? -1;
@@ -457,7 +470,7 @@ function tableHeaderColumnMarkersMatch(value, expectedMarkers) {
     const lineEnd = text.indexOf('\n', position);
     const line = text.slice(lineStart, lineEnd === -1 ? text.length : lineEnd);
     const info = tableHeaderColumnHeaderInfo(lines, lineIndex);
-    if (!info) return false;
+    if (!info || info.ambiguous) return false;
     const { layout, frame } = info;
     const outputHeaderIndex = tableHeaderColumnHeaderOccurrenceIndex(lines, lineIndex);
     if (outputHeaderIndex < 0) return false;
@@ -3176,7 +3189,7 @@ export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeT
     // Ri-traduzione: OGNI carattere qui esce dalla cascata MT, mai da una regex.
     for (const f of Object.keys(italianSections)) {
       const markedBody = tableHeaderColumnMarkers(italianSections[f]);
-      if (markedBody.collision) {
+      if (markedBody.collision || markedBody.ambiguous) {
         missingField ??= f;
         missingFields.push(f);
         translationFailures.push({ field: f, stage: 'table-header-marker-collision' });

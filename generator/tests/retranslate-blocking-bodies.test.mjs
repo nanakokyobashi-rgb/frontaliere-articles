@@ -275,6 +275,10 @@ test('il writer storico usa il contratto source-owned delle intestazioni di tabe
   assert.ok(marker >= 0, 'il writer deve creare i marker dalla sorgente italiana');
   assert.ok(marker < translate && translate < validate && validate < strip && strip < write,
     'il writer deve tradurre, validare e togliere i marker prima di writeAtomic');
+  assert.match(source, /tableHeaderColumnPipeAmbiguity\(line\)/u,
+    'il writer deve riconoscere le pipe ambigue prima di creare marker');
+  assert.match(source, /markedBody\.collision \|\| markedBody\.ambiguous/u,
+    'una tabella ambigua deve restare fuori dalla cascata di scrittura');
 });
 
 // Lotto 1 della bonifica Codex (#2121, 20 coppie de): 6 rifiutate col motivo

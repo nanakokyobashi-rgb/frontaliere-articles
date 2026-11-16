@@ -14,6 +14,114 @@ export function findHtmlTagEndOutsideQuotes(html, start) {
   return -1;
 }
 
+function hasRawMarkdownPipe(value, start = 0, end = value.length) {
+  for (let index = start; index < end; index += 1) {
+    if (value[index] !== '|') continue;
+    let slashCount = 0;
+    for (let previous = index - 1; previous >= start && value[previous] === '\\'; previous -= 1) {
+      slashCount += 1;
+    }
+    if (slashCount % 2 === 0) return true;
+  }
+  return false;
+}
+
+function isEscapedMarkdownCharacter(value, index) {
+  let slashCount = 0;
+  for (let previous = index - 1; previous >= 0 && value[previous] === '\\'; previous -= 1) {
+    slashCount += 1;
+  }
+  return slashCount % 2 === 1;
+}
+
+/**
+ * True when a raw Markdown table pipe is inside syntax whose contents are not
+ * reliably distinguishable from a cell delimiter by the line parser.
+ *
+ * GFM table splitting happens before inline rendering. A pipe in a code span,
+ * link label/destination, HTML tag/attribute, or HTML comment can therefore
+ * either be content or a delimiter depending on the parser that eventually
+ * consumes the line. The safe result for a source-owned translation marker is
+ * to reject the whole candidate table rather than attach a marker to the
+ * wrong column. Escaped pipes remain ordinary cell text and are not ambiguous.
+ */
+export function tableHeaderColumnPipeAmbiguity(markdownLine) {
+  const value = String(markdownLine ?? '');
+  let codeDelimiter = '';
+  let bracketDepth = 0;
+  let linkDestinationDepth = 0;
+
+  for (let index = 0; index < value.length; index += 1) {
+    if (codeDelimiter) {
+      if (value.startsWith(codeDelimiter, index)) {
+        index += codeDelimiter.length - 1;
+        codeDelimiter = '';
+        continue;
+      }
+      if (value[index] === '|') return true;
+      continue;
+    }
+
+    if (value.startsWith('<!--', index)) {
+      const commentEnd = value.indexOf('-->', index + 4);
+      const contentEnd = commentEnd < 0 ? value.length : commentEnd;
+      if (value.slice(index + 4, contentEnd).includes('|')) return true;
+      if (commentEnd < 0) return false;
+      index = commentEnd + 2;
+      continue;
+    }
+
+    if (value[index] === '`' && !isEscapedMarkdownCharacter(value, index)) {
+      let runLength = 1;
+      while (value[index + runLength] === '`') runLength += 1;
+      codeDelimiter = '`'.repeat(runLength);
+      index += runLength - 1;
+      continue;
+    }
+
+    if (value[index] === '<') {
+      const tag = readHtmlTagAtStatus(value, index);
+      if (tag?.malformed) {
+        // Once a tag boundary is malformed, the ownership of every later raw
+        // pipe is unknowable. A pipe-free malformed fragment does not affect
+        // the table layout, so only reject when a pipe is actually present.
+        return hasRawMarkdownPipe(value, index);
+      }
+      if (tag?.tag) {
+        if (value.slice(tag.tag.start, tag.tag.end).includes('|')) return true;
+        index = tag.tag.end - 1;
+        continue;
+      }
+    }
+
+    const escaped = isEscapedMarkdownCharacter(value, index);
+    if (linkDestinationDepth > 0) {
+      if (value[index] === '|' && !escaped) return true;
+      if (value[index] === '(' && !escaped) linkDestinationDepth += 1;
+      if (value[index] === ')' && !escaped) linkDestinationDepth -= 1;
+      continue;
+    }
+
+    if (value[index] === '[' && !escaped) {
+      bracketDepth += 1;
+      continue;
+    }
+    if (value[index] === ']' && !escaped && bracketDepth > 0) {
+      bracketDepth -= 1;
+      let next = index + 1;
+      while (/\s/u.test(value[next] || '')) next += 1;
+      if (bracketDepth === 0 && value[next] === '(') {
+        linkDestinationDepth = 1;
+        index = next;
+      }
+      continue;
+    }
+    if (value[index] === '|' && !escaped && bracketDepth > 0) return true;
+  }
+
+  return false;
+}
+
 // Distinto da null: null significa che da `start` non inizia un tag, mentre
 // questo stato impone al walker di fermarsi invece di riprovare ogni `<`
 // contenuto nel tag aperto e ripetere la scansione fino a EOF.
