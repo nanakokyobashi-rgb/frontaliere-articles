@@ -93,6 +93,7 @@ import {
   nextHtmlOpeningTag,
   nextHtmlTag,
   nextHtmlTagStatus,
+  tableHeaderColumnPipeAmbiguity as sharedTableHeaderColumnPipeAmbiguity,
 } from './lib/html-tag-scanner.mjs';
 
 // ── Il modello preferito per la SOLA generazione del corpo ──────────────────
@@ -15014,6 +15015,10 @@ const ARTICLE_TRANSLATE_FREE_MT = String(process.env.ARTICLE_TRANSLATE_FREE_MT ?
  * article content: the validator removes it after proving that each marker
  * stayed in its source column.
  */
+function tableHeaderColumnPipeAmbiguity(line) {
+  return sharedTableHeaderColumnPipeAmbiguity(line);
+}
+
 const TABLE_HEADER_COLUMN_MARKER_NONCE_KEY = Symbol.for('frontaliere.table-header-column-marker-nonce');
 const TABLE_HEADER_COLUMN_MARKER_NONCE = globalThis[TABLE_HEADER_COLUMN_MARKER_NONCE_KEY]
   ?? (globalThis[TABLE_HEADER_COLUMN_MARKER_NONCE_KEY] = `${Date.now().toString(36)}${Math.random().toString(36).slice(2)}`.slice(-16));
@@ -15123,23 +15128,27 @@ function tableHeaderColumnHeaderInfo(lines, lineIndex) {
   const frame = tableHeaderColumnFrame(line, layout);
   const separatorFrame = tableHeaderColumnFrame(separatorLine, separatorLayout);
   if (!layout || !separatorLayout || !frame || !separatorFrame) return null;
-  if (
-    frame.firstColumn !== separatorFrame.firstColumn
-    || frame.lastColumn !== separatorFrame.lastColumn
-    || frame.prefix !== separatorFrame.prefix
-  ) return null;
   const separatorCells = separatorLayout.cells
     .slice(separatorFrame.firstColumn, separatorFrame.lastColumn + 1)
     .map(({ start, end }) => separatorLine.slice(start, end).trim());
   if (!separatorCells.some((cell) => /^:?-{3,}:?$/u.test(cell))) return null;
   if (!separatorCells.every((cell) => /^:?-{3,}:?$/u.test(cell))) return null;
+  if (tableHeaderColumnPipeAmbiguity(line) || tableHeaderColumnPipeAmbiguity(separatorLine)) {
+    return { ambiguous: true };
+  }
+  if (
+    frame.firstColumn !== separatorFrame.firstColumn
+    || frame.lastColumn !== separatorFrame.lastColumn
+    || frame.prefix !== separatorFrame.prefix
+  ) return null;
   return { layout, frame, separatorLayout, separatorFrame };
 }
 
 function tableHeaderColumnHeaderOccurrenceIndex(lines, lineIndex) {
   let occurrenceIndex = 0;
   for (let index = 0; index <= lineIndex; index += 1) {
-    if (!tableHeaderColumnHeaderInfo(lines, index)) continue;
+    const info = tableHeaderColumnHeaderInfo(lines, index);
+    if (!info || info.ambiguous) continue;
     if (index === lineIndex) return occurrenceIndex;
     occurrenceIndex += 1;
   }
@@ -15183,6 +15192,11 @@ function tableHeaderColumnMarkers(value) {
   }
   const source = stripTableHeaderColumnMarkers(raw);
   const lines = source.split('\n');
+  for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
+    if (tableHeaderColumnHeaderInfo(lines, lineIndex)?.ambiguous) {
+      return { markedText: raw, markers: [], collision: false, ambiguous: true };
+    }
+  }
   const markers = [];
   let headerIndex = 0;
   const markedLines = lines.map((line, lineIndex) => {
@@ -15213,7 +15227,7 @@ function tableHeaderColumnMarkers(value) {
     }
     return marked;
   });
-  return { markedText: markedLines.join('\n'), markers, collision: false };
+  return { markedText: markedLines.join('\n'), markers, collision: false, ambiguous: false };
 }
 
 function buildBodyTruncationRetryPrompt({
@@ -15228,7 +15242,9 @@ function buildBodyTruncationRetryPrompt({
   let markedChunkText = String(chunkText ?? '');
   if (!alreadyMarked) {
     const markedChunk = tableHeaderColumnMarkers(markedChunkText);
-    if (markedChunk.collision) throw new Error('collisione del marker di tabella nel body sorgente');
+    if (markedChunk.collision || markedChunk.ambiguous) {
+      throw new Error('collisione o ambiguità del marker di tabella nel body sorgente');
+    }
     markedChunkText = markedChunk.markedText;
   }
   return `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. `
@@ -15242,6 +15258,9 @@ function tableHeaderColumnMarkersMatch(value, expectedMarkers) {
   const lines = text.split('\n');
   const found = [];
   const currentRunMarkers = tableHeaderColumnMarkerRegExp();
+  for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
+    if (tableHeaderColumnHeaderInfo(lines, lineIndex)?.ambiguous) return false;
+  }
   for (const match of text.matchAll(currentRunMarkers)) {
     const marker = match[0];
     const position = match.index ?? -1;
@@ -15251,7 +15270,7 @@ function tableHeaderColumnMarkersMatch(value, expectedMarkers) {
     const lineEnd = text.indexOf('\n', position);
     const line = text.slice(lineStart, lineEnd === -1 ? text.length : lineEnd);
     const info = tableHeaderColumnHeaderInfo(lines, lineIndex);
-    if (!info) return false;
+    if (!info || info.ambiguous) return false;
     const { layout, frame } = info;
     const outputHeaderIndex = tableHeaderColumnHeaderOccurrenceIndex(lines, lineIndex);
     if (outputHeaderIndex < 0) return false;
@@ -15328,7 +15347,7 @@ function freeMtField(
   let sourceText = text;
   if (/^body\d+$/u.test(field)) {
     const markedBody = tableHeaderColumnMarkers(text);
-    if (markedBody.collision) return '';
+    if (markedBody.collision || markedBody.ambiguous) return '';
     sourceText = markedBody.markedText;
   }
   return translateFieldFreeMt({
@@ -15600,7 +15619,7 @@ async function translatePendingBodyWithCodex(
       const rejected = [];
       let codexModelUnavailable = false;
       const markedBody = tableHeaderColumnMarkers(itValue);
-      if (markedBody.collision) return null;
+      if (markedBody.collision || markedBody.ambiguous) return null;
       const text = await translateFieldFreeMt({
         text: markedBody.markedText,
         sourceLang: 'it',
@@ -15696,7 +15715,7 @@ async function translatePendingBodyWithHistoricalChain(
   const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
   const rejected = [];
   const markedBody = tableHeaderColumnMarkers(itValue);
-  if (markedBody.collision) return null;
+  if (markedBody.collision || markedBody.ambiguous) return null;
   const text = await translateFieldFreeMt({
     text: markedBody.markedText,
     sourceLang: 'it',
@@ -15969,7 +15988,7 @@ async function translateArticle(data) {
     // expected mapping so nested validation remains idempotent.
     bodyText = stripTableHeaderColumnMarkers(bodyText);
     const tableHeaderMarkers = tableHeaderColumnMarkers(bodyText);
-    if (tableHeaderMarkers.collision) return null;
+    if (tableHeaderMarkers.collision || tableHeaderMarkers.ambiguous) return null;
     const chunks = pretranslatedResult === null
       ? splitIntoTranslationChunks(tableHeaderMarkers.markedText)
       : [tableHeaderMarkers.markedText];
@@ -17547,7 +17566,7 @@ ${localizedToponymInstruction(targetLang)}`;
       if (words <= TRANSLATION_CHUNK_THRESHOLD) {
         // Normal single-call translation
         const markedBody = tableHeaderColumnMarkers(bodyText);
-        if (markedBody.collision) return {};
+        if (markedBody.collision || markedBody.ambiguous) return {};
         const markedBodyText = markedBody.markedText;
         const result = await callWithRetry(makePrompt(
           `CONTENUTO ITALIANO DA TRADURRE:\n- ${bodyKey}: ${markedBodyText}`,
@@ -17994,7 +18013,9 @@ ${localizedToponymInstruction(targetLang)}`;
             let recoverySourceText = itValue;
             if (isBodyField) {
               const markedBody = tableHeaderColumnMarkers(itValue);
-              if (markedBody.collision) throw new Error('collisione del marker di tabella nel body sorgente');
+              if (markedBody.collision || markedBody.ambiguous) {
+                throw new Error('collisione o ambiguità del marker di tabella nel body sorgente');
+              }
               recoverySourceText = markedBody.markedText;
             }
             const parsed = await callWithRetry(

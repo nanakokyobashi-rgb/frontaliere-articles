@@ -3,7 +3,12 @@ import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 
-import { nextHtmlTag, nextHtmlTagStatus, readHtmlTagAt } from '../scripts/lib/html-tag-scanner.mjs';
+import {
+  nextHtmlTag,
+  nextHtmlTagStatus,
+  readHtmlTagAt,
+  tableHeaderColumnPipeAmbiguity,
+} from '../scripts/lib/html-tag-scanner.mjs';
 
 function instrumentHtml(value) {
   let characterReads = 0;
@@ -48,6 +53,32 @@ test('nextHtmlTagStatus distinguishes a valid tag, EOF, and malformed markup', (
   assert.equal(valid.tag.start, 7);
   assert.deepEqual(nextHtmlTagStatus('plain text'), { status: 'eof' });
   assert.deepEqual(nextHtmlTagStatus('<article title="unfinished'), { status: 'malformed' });
+});
+
+test('table header pipe ambiguity rejects inline code, links, and HTML attributes', () => {
+  assert.equal(tableHeaderColumnPipeAmbiguity('| Segmento `A|B` | Valore |'), true);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| Segmento `A\\|B` | Valore |'), false);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| Segmento `A\\\\|B` | Valore |'), true);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| [A|B](nav:calculator) | Valore |'), true);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| <span data-label="A|B">Segmento</span> | Valore |'), true);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| <!-- A|B --> | Valore |'), true);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| <https://host/a|b> | Valore |'), true);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| Segmento \\| interno | Valore |'), false);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| <!-- A \\| B --> | Valore |'), false);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| <span data-label="A\\|B">Segmento</span> | Valore |'), false);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| <https://host/a\\|b> | Valore |'), false);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| <https://host/a\\\\|b> | Valore |'), true);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| <mailto:a|b@example.test> | Valore |'), true);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| <foo|bar@baz> | Valore |'), true);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| <mail@example.test> | Valore |'), false);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| A ``a```b`|c`` | Valore |'), true);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| [A](url "titolo) | altro") | Valore |'), true);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| [A](url "titolo \\| altro") | Valore |'), false);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| [A](<url) | altro> | Valore |'), true);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| \\<a title="x|y"> | Valore |'), false);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| \\<!-- x|y --> | Valore |'), false);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| \\<https://host/a|b> | Valore |'), false);
+  assert.equal(tableHeaderColumnPipeAmbiguity('| Segmento | Valore |'), false);
 });
 
 test('nextHtmlTag stops at the first malformed tag within one linear scan', () => {

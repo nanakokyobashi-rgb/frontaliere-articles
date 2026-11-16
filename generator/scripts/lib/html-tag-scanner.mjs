@@ -14,6 +14,166 @@ export function findHtmlTagEndOutsideQuotes(html, start) {
   return -1;
 }
 
+function hasRawMarkdownPipe(value, start = 0, end = value.length) {
+  for (let index = start; index < end; index += 1) {
+    if (value[index] !== '|') continue;
+    let slashCount = 0;
+    for (let previous = index - 1; previous >= start && value[previous] === '\\'; previous -= 1) {
+      slashCount += 1;
+    }
+    if (slashCount % 2 === 0) return true;
+  }
+  return false;
+}
+
+function isEscapedMarkdownCharacter(value, index) {
+  let slashCount = 0;
+  for (let previous = index - 1; previous >= 0 && value[previous] === '\\'; previous -= 1) {
+    slashCount += 1;
+  }
+  return slashCount % 2 === 1;
+}
+
+const MARKDOWN_EMAIL_AUTOLINK_RE = /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/u;
+
+function readMarkdownAutolinkEnd(value, start) {
+  if (value[start] !== '<') return null;
+  const end = value.indexOf('>', start + 1);
+  if (end === -1 || /[\r\n]/u.test(value.slice(start + 1, end))) return null;
+  const target = value.slice(start + 1, end);
+  const uri = /^[A-Za-z][A-Za-z0-9+.-]*:[^<>\s]+$/u.test(target);
+  const email = MARKDOWN_EMAIL_AUTOLINK_RE.test(target);
+  return uri || email ? end + 1 : null;
+}
+
+/**
+ * True when a raw Markdown table pipe is inside syntax whose contents are not
+ * reliably distinguishable from a cell delimiter by the line parser.
+ *
+ * GFM table splitting happens before inline rendering. A pipe in a code span,
+ * link label/destination/title, HTML tag/attribute, or HTML comment can therefore
+ * either be content or a delimiter depending on the parser that eventually
+ * consumes the line. The safe result for a source-owned translation marker is
+ * to reject the whole candidate table rather than attach a marker to the
+ * wrong column. Escaped pipes remain ordinary cell text and are not ambiguous.
+ */
+export function tableHeaderColumnPipeAmbiguity(markdownLine) {
+  const value = String(markdownLine ?? '');
+  let codeDelimiter = '';
+  let bracketDepth = 0;
+  let linkDestinationDepth = 0;
+  let linkDestinationStarted = false;
+  let linkAngleDestination = false;
+  let linkTitleQuote = '';
+
+  for (let index = 0; index < value.length; index += 1) {
+    if (codeDelimiter) {
+      const hasExactClosingRun = value.startsWith(codeDelimiter, index)
+        && value[index - 1] !== '`'
+        && value[index + codeDelimiter.length] !== '`';
+      if (hasExactClosingRun) {
+        index += codeDelimiter.length - 1;
+        codeDelimiter = '';
+        continue;
+      }
+      if (value[index] === '|' && !isEscapedMarkdownCharacter(value, index)) return true;
+      continue;
+    }
+
+    if (value[index] === '`' && !isEscapedMarkdownCharacter(value, index)) {
+      let runLength = 1;
+      while (value[index + runLength] === '`') runLength += 1;
+      codeDelimiter = '`'.repeat(runLength);
+      index += runLength - 1;
+      continue;
+    }
+
+    const escaped = isEscapedMarkdownCharacter(value, index);
+    if (linkDestinationDepth > 0) {
+      if (linkTitleQuote) {
+        if (value[index] === '|' && !escaped) return true;
+        if (value[index] === linkTitleQuote && !escaped) linkTitleQuote = '';
+        continue;
+      }
+
+      if (linkAngleDestination) {
+        if (value[index] === '|' && !escaped) return true;
+        if (value[index] === '>' && !escaped) linkAngleDestination = false;
+        continue;
+      }
+
+      if (!linkDestinationStarted) {
+        if (/\s/u.test(value[index] || '')) continue;
+        linkDestinationStarted = true;
+        if (value[index] === '<' && !escaped) {
+          linkAngleDestination = true;
+          continue;
+        }
+      }
+
+      if (value[index] === '|' && !escaped) return true;
+      if ((value[index] === '"' || value[index] === "'")
+        && !escaped && /\s/u.test(value[index - 1] || '')) {
+        linkTitleQuote = value[index];
+        continue;
+      }
+      if (value[index] === '(' && !escaped) linkDestinationDepth += 1;
+      if (value[index] === ')' && !escaped) linkDestinationDepth -= 1;
+      continue;
+    }
+
+    if (value[index] === '<' && !escaped) {
+      if (value.startsWith('<!--', index)) {
+        const commentEnd = value.indexOf('-->', index + 4);
+        const contentEnd = commentEnd < 0 ? value.length : commentEnd;
+        if (hasRawMarkdownPipe(value, index + 4, contentEnd)) return true;
+        if (commentEnd < 0) return false;
+        index = commentEnd + 2;
+        continue;
+      }
+      const autolinkEnd = readMarkdownAutolinkEnd(value, index);
+      if (autolinkEnd !== null) {
+        if (hasRawMarkdownPipe(value, index + 1, autolinkEnd - 1)) return true;
+        index = autolinkEnd - 1;
+        continue;
+      }
+      const tag = readHtmlTagAtStatus(value, index);
+      if (tag?.malformed) {
+        // Once a tag boundary is malformed, the ownership of every later raw
+        // pipe is unknowable. A pipe-free malformed fragment does not affect
+        // the table layout, so only reject when a pipe is actually present.
+        return hasRawMarkdownPipe(value, index);
+      }
+      if (tag?.tag) {
+        if (hasRawMarkdownPipe(value, tag.tag.start, tag.tag.end)) return true;
+        index = tag.tag.end - 1;
+        continue;
+      }
+    }
+
+    if (value[index] === '[' && !escaped) {
+      bracketDepth += 1;
+      continue;
+    }
+    if (value[index] === ']' && !escaped && bracketDepth > 0) {
+      bracketDepth -= 1;
+      let next = index + 1;
+      while (/\s/u.test(value[next] || '')) next += 1;
+      if (bracketDepth === 0 && value[next] === '(') {
+        linkDestinationDepth = 1;
+        linkDestinationStarted = false;
+        linkAngleDestination = false;
+        linkTitleQuote = '';
+        index = next;
+      }
+      continue;
+    }
+    if (value[index] === '|' && !escaped && bracketDepth > 0) return true;
+  }
+
+  return false;
+}
+
 // Distinto da null: null significa che da `start` non inizia un tag, mentre
 // questo stato impone al walker di fermarsi invece di riprovare ogni `<`
 // contenuto nel tag aperto e ripetere la scansione fino a EOF.
