@@ -34,13 +34,15 @@ function isEscapedMarkdownCharacter(value, index) {
   return slashCount % 2 === 1;
 }
 
+const MARKDOWN_EMAIL_AUTOLINK_RE = /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/u;
+
 function readMarkdownAutolinkEnd(value, start) {
   if (value[start] !== '<') return null;
   const end = value.indexOf('>', start + 1);
   if (end === -1 || /[\r\n]/u.test(value.slice(start + 1, end))) return null;
   const target = value.slice(start + 1, end);
   const uri = /^[A-Za-z][A-Za-z0-9+.-]*:[^<>\s]+$/u.test(target);
-  const email = /^[^\s<>@]+@[^\s<>@]+\.[^\s<>@]+$/u.test(target);
+  const email = MARKDOWN_EMAIL_AUTOLINK_RE.test(target);
   return uri || email ? end + 1 : null;
 }
 
@@ -63,21 +65,15 @@ export function tableHeaderColumnPipeAmbiguity(markdownLine) {
 
   for (let index = 0; index < value.length; index += 1) {
     if (codeDelimiter) {
-      if (value.startsWith(codeDelimiter, index)) {
+      const hasExactClosingRun = value.startsWith(codeDelimiter, index)
+        && value[index - 1] !== '`'
+        && value[index + codeDelimiter.length] !== '`';
+      if (hasExactClosingRun) {
         index += codeDelimiter.length - 1;
         codeDelimiter = '';
         continue;
       }
       if (value[index] === '|') return true;
-      continue;
-    }
-
-    if (value.startsWith('<!--', index)) {
-      const commentEnd = value.indexOf('-->', index + 4);
-      const contentEnd = commentEnd < 0 ? value.length : commentEnd;
-      if (hasRawMarkdownPipe(value, index + 4, contentEnd)) return true;
-      if (commentEnd < 0) return false;
-      index = commentEnd + 2;
       continue;
     }
 
@@ -89,7 +85,15 @@ export function tableHeaderColumnPipeAmbiguity(markdownLine) {
       continue;
     }
 
-    if (value[index] === '<') {
+    if (value[index] === '<' && !isEscapedMarkdownCharacter(value, index)) {
+      if (value.startsWith('<!--', index)) {
+        const commentEnd = value.indexOf('-->', index + 4);
+        const contentEnd = commentEnd < 0 ? value.length : commentEnd;
+        if (hasRawMarkdownPipe(value, index + 4, contentEnd)) return true;
+        if (commentEnd < 0) return false;
+        index = commentEnd + 2;
+        continue;
+      }
       const autolinkEnd = readMarkdownAutolinkEnd(value, index);
       if (autolinkEnd !== null) {
         if (hasRawMarkdownPipe(value, index + 1, autolinkEnd - 1)) return true;
