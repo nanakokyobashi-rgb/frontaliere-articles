@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "8146ccdc5cb87d5e27c8e195607ca0c52313b06abe08a1677ff9039d49402ade",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "45c5ed09a8d9daf5fd2344951ef320ff770728a3382364c480c44517ba596dd4",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T06:24:39.723Z",
+      "updatedAt": "2026-11-15T21:47:09.888Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-14T21:43:27.949Z",
+      "updatedAt": "2026-11-15T22:07:40.362Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "59",
+          "value": "50",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Chinderfiir",
+              "label": "TAB GALA mit Enrico Lenzin",
               "detail": "Weinfelden",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chinderfiir-5/"
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tab-gala-mit-enrico-lenzin/"
             },
             {
-              "label": "Pitwalk, autobau",
-              "detail": "autobau erlebniswelt, Romanshorn",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/romanshorn/pitwalk-autobau_ACbC5Qy"
+              "label": "RedWeek",
+              "detail": "Röm.-kath. Kirche St. Johannes, Weinfelden — in corso, ultimo giorno: 22 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/redweek/"
             },
             {
-              "label": "Advanced nettle fiber course: From stalk to yarn",
-              "detail": "Schuppisried Hütte, Kreuzlingen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/aufbaukurs-brennnesselfaser-vom-staengel-zum-garn/"
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — in corso, ultimo giorno: 24 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
             },
             {
-              "label": "Matinée: Schwesterherz – Bruderseele",
-              "detail": "Museum Rosenegg, Kreuzlingen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/matinee-schwesterherz-bruderseele/"
+              "label": "Schulden- und Budgetberatungen Caritas",
+              "detail": "Kreuzlingen",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schulden-und-budgetberatungen-caritas-17/"
             },
             {
-              "label": "Peter Pan",
-              "detail": "Dreispitz Sport- und Kulturzentrum, Kreuzlingen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/peter-pan-1/"
+              "label": "Kafi Sch(w)atz",
+              "detail": "Weinfelden",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kafi-schwatz-4/"
             },
             {
-              "label": "Basler Streichquartett",
-              "detail": "Kloster Fischingen, Fischingen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/fischingen/basler-streichquartett_AsMcEft"
+              "label": "Worship",
+              "detail": "Evang.-ref. Kirche Weinfelden, Weinfelden",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/worship_AqfvWiW"
             },
             {
-              "label": "Kirchenkonzert",
-              "detail": "Paritätische Kirche St. Albin, Ermatingen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ermatingen/kirchenkonzert_A55pu1m"
+              "label": "Thomas D and The KBCS",
+              "detail": "Kulturzentrum Presswerk, Arbon",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/thomas-d-and-the-kbcs_AUuB1p6"
             },
             {
-              "label": "Southbound Steve",
-              "detail": "Evang.-ref. Kirche Berlingen, Berlingen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/berlingen/southbound-steve_AErF8F2"
+              "label": "Tanzen im Kreis",
+              "detail": "Röm.-kath. Pfarreizentrum Weinfelden, Weinfelden",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzen-im-kreis/"
             },
             {
-              "label": "The Smallest Things",
+              "label": "Öffentliche Führung in der Eisenbibliothek",
+              "detail": "Eisenbibliothek Paradies",
+              "date": "2026-11-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schlatt-tg/oeffentliche-fuehrung-in-der-eisenbibliothek_A2urnHS"
+            },
+            {
+              "label": "Mario und der Zauberer",
               "detail": "Steckborn",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-smallest-things-2/"
-            },
-            {
-              "label": "Mitten im Leben ...",
-              "detail": "Weinfelden",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mitten-im-leben-1/"
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mario-und-der-zauberer-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -151,7 +151,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "TG",
@@ -161,7 +161,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "59",
+          "value": "50",
           "note": "from the site’s events calendar"
         }
       ],
@@ -172,69 +172,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Chinderfiir",
+              "label": "TAB GALA mit Enrico Lenzin",
               "detail": "Weinfelden",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chinderfiir-5/"
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tab-gala-mit-enrico-lenzin/"
             },
             {
-              "label": "Pitwalk, autobau",
-              "detail": "autobau erlebniswelt, Romanshorn",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/romanshorn/pitwalk-autobau_ACbC5Qy"
+              "label": "RedWeek",
+              "detail": "Röm.-kath. Kirche St. Johannes, Weinfelden — ongoing, last day: 22 November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/redweek/"
             },
             {
-              "label": "Advanced nettle fiber course: From stalk to yarn",
-              "detail": "Schuppisried Hütte, Kreuzlingen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/aufbaukurs-brennnesselfaser-vom-staengel-zum-garn/"
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — ongoing, last day: 24 November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
             },
             {
-              "label": "Matinée: Schwesterherz – Bruderseele",
-              "detail": "Museum Rosenegg, Kreuzlingen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/matinee-schwesterherz-bruderseele/"
+              "label": "Schulden- und Budgetberatungen Caritas",
+              "detail": "Kreuzlingen",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schulden-und-budgetberatungen-caritas-17/"
             },
             {
-              "label": "Peter Pan",
-              "detail": "Dreispitz Sport- und Kulturzentrum, Kreuzlingen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/peter-pan-1/"
+              "label": "Kafi Sch(w)atz",
+              "detail": "Weinfelden",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kafi-schwatz-4/"
             },
             {
-              "label": "Basler Streichquartett",
-              "detail": "Kloster Fischingen, Fischingen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/fischingen/basler-streichquartett_AsMcEft"
+              "label": "Worship",
+              "detail": "Evang.-ref. Kirche Weinfelden, Weinfelden",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/worship_AqfvWiW"
             },
             {
-              "label": "Kirchenkonzert",
-              "detail": "Paritätische Kirche St. Albin, Ermatingen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ermatingen/kirchenkonzert_A55pu1m"
+              "label": "Thomas D and The KBCS",
+              "detail": "Kulturzentrum Presswerk, Arbon",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/thomas-d-and-the-kbcs_AUuB1p6"
             },
             {
-              "label": "Southbound Steve",
-              "detail": "Evang.-ref. Kirche Berlingen, Berlingen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/berlingen/southbound-steve_AErF8F2"
+              "label": "Tanzen im Kreis",
+              "detail": "Röm.-kath. Pfarreizentrum Weinfelden, Weinfelden",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzen-im-kreis/"
             },
             {
-              "label": "The Smallest Things",
+              "label": "Öffentliche Führung in der Eisenbibliothek",
+              "detail": "Eisenbibliothek Paradies",
+              "date": "2026-11-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schlatt-tg/oeffentliche-fuehrung-in-der-eisenbibliothek_A2urnHS"
+            },
+            {
+              "label": "Mario und der Zauberer",
               "detail": "Steckborn",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-smallest-things-2/"
-            },
-            {
-              "label": "Mitten im Leben ...",
-              "detail": "Weinfelden",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mitten-im-leben-1/"
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mario-und-der-zauberer-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -257,7 +257,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +285,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "TG",
@@ -295,7 +295,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "59",
+          "value": "50",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -306,69 +306,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Chinderfiir",
+              "label": "TAB GALA mit Enrico Lenzin",
               "detail": "Weinfelden",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chinderfiir-5/"
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tab-gala-mit-enrico-lenzin/"
             },
             {
-              "label": "Pitwalk, autobau",
-              "detail": "autobau erlebniswelt, Romanshorn",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/romanshorn/pitwalk-autobau_ACbC5Qy"
+              "label": "RedWeek",
+              "detail": "Röm.-kath. Kirche St. Johannes, Weinfelden — läuft, letzter Tag: 22. November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/redweek/"
             },
             {
-              "label": "Aufbaukurs Brennnesselfaser: Vom Stängel zum Garn",
-              "detail": "Schuppisried Hütte, Kreuzlingen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/aufbaukurs-brennnesselfaser-vom-staengel-zum-garn/"
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — läuft, letzter Tag: 24. November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
             },
             {
-              "label": "Matinée: Schwesterherz – Bruderseele",
-              "detail": "Museum Rosenegg, Kreuzlingen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/matinee-schwesterherz-bruderseele/"
+              "label": "Schulden- und Budgetberatungen Caritas",
+              "detail": "Kreuzlingen",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schulden-und-budgetberatungen-caritas-17/"
             },
             {
-              "label": "Peter Pan",
-              "detail": "Dreispitz Sport- und Kulturzentrum, Kreuzlingen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/peter-pan-1/"
+              "label": "Kafi Sch(w)atz",
+              "detail": "Weinfelden",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kafi-schwatz-4/"
             },
             {
-              "label": "Basler Streichquartett",
-              "detail": "Kloster Fischingen, Fischingen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/fischingen/basler-streichquartett_AsMcEft"
+              "label": "Worship",
+              "detail": "Evang.-ref. Kirche Weinfelden, Weinfelden",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/worship_AqfvWiW"
             },
             {
-              "label": "Kirchenkonzert",
-              "detail": "Paritätische Kirche St. Albin, Ermatingen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ermatingen/kirchenkonzert_A55pu1m"
+              "label": "Thomas D and The KBCS",
+              "detail": "Kulturzentrum Presswerk, Arbon",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/thomas-d-and-the-kbcs_AUuB1p6"
             },
             {
-              "label": "Southbound Steve",
-              "detail": "Evang.-ref. Kirche Berlingen, Berlingen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/berlingen/southbound-steve_AErF8F2"
+              "label": "Tanzen im Kreis",
+              "detail": "Röm.-kath. Pfarreizentrum Weinfelden, Weinfelden",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzen-im-kreis/"
             },
             {
-              "label": "The Smallest Things",
+              "label": "Öffentliche Führung in der Eisenbibliothek",
+              "detail": "Eisenbibliothek Paradies",
+              "date": "2026-11-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schlatt-tg/oeffentliche-fuehrung-in-der-eisenbibliothek_A2urnHS"
+            },
+            {
+              "label": "Mario und der Zauberer",
               "detail": "Steckborn",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-smallest-things-2/"
-            },
-            {
-              "label": "Mitten im Leben ...",
-              "detail": "Weinfelden",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mitten-im-leben-1/"
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mario-und-der-zauberer-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -391,7 +391,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -419,7 +419,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "TG",
@@ -429,7 +429,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "59",
+          "value": "50",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -440,69 +440,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Chinderfiir",
+              "label": "TAB GALA mit Enrico Lenzin",
               "detail": "Weinfelden",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chinderfiir-5/"
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tab-gala-mit-enrico-lenzin/"
             },
             {
-              "label": "Pitwalk, autobau",
-              "detail": "autobau erlebniswelt, Romanshorn",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/romanshorn/pitwalk-autobau_ACbC5Qy"
+              "label": "RedWeek",
+              "detail": "Röm.-kath. Kirche St. Johannes, Weinfelden — en cours, dernier jour : 22 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/redweek/"
             },
             {
-              "label": "Advanced nettle fiber course: From stalk to yarn",
-              "detail": "Schuppisried Hütte, Kreuzlingen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/aufbaukurs-brennnesselfaser-vom-staengel-zum-garn/"
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — en cours, dernier jour : 24 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
             },
             {
-              "label": "Matinée: Schwesterherz – Bruderseele",
-              "detail": "Museum Rosenegg, Kreuzlingen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/matinee-schwesterherz-bruderseele/"
+              "label": "Schulden- und Budgetberatungen Caritas",
+              "detail": "Kreuzlingen",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schulden-und-budgetberatungen-caritas-17/"
             },
             {
-              "label": "Peter Pan",
-              "detail": "Dreispitz Sport- und Kulturzentrum, Kreuzlingen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/peter-pan-1/"
+              "label": "Kafi Sch(w)atz",
+              "detail": "Weinfelden",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kafi-schwatz-4/"
             },
             {
-              "label": "Basler Streichquartett",
-              "detail": "Kloster Fischingen, Fischingen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/fischingen/basler-streichquartett_AsMcEft"
+              "label": "Worship",
+              "detail": "Evang.-ref. Kirche Weinfelden, Weinfelden",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/worship_AqfvWiW"
             },
             {
-              "label": "Kirchenkonzert",
-              "detail": "Paritätische Kirche St. Albin, Ermatingen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ermatingen/kirchenkonzert_A55pu1m"
+              "label": "Thomas D and The KBCS",
+              "detail": "Kulturzentrum Presswerk, Arbon",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/thomas-d-and-the-kbcs_AUuB1p6"
             },
             {
-              "label": "Southbound Steve",
-              "detail": "Evang.-ref. Kirche Berlingen, Berlingen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/berlingen/southbound-steve_AErF8F2"
+              "label": "Tanzen im Kreis",
+              "detail": "Röm.-kath. Pfarreizentrum Weinfelden, Weinfelden",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzen-im-kreis/"
             },
             {
-              "label": "The Smallest Things",
+              "label": "Öffentliche Führung in der Eisenbibliothek",
+              "detail": "Eisenbibliothek Paradies",
+              "date": "2026-11-19",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schlatt-tg/oeffentliche-fuehrung-in-der-eisenbibliothek_A2urnHS"
+            },
+            {
+              "label": "Mario und der Zauberer",
               "detail": "Steckborn",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-smallest-things-2/"
-            },
-            {
-              "label": "Mitten im Leben ...",
-              "detail": "Weinfelden",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mitten-im-leben-1/"
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mario-und-der-zauberer-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -525,7 +525,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +553,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

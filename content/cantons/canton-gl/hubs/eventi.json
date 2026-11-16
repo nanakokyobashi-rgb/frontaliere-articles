@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "f6c1d4fc040d12f24b428896397cdb6fa6efeb1cc65a7771ecd9541550acee89",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "091ded01d1ad807ee68c4bf56fe80ed04bebcb1beb894481cade8a8e77b9818c",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T06:24:39.723Z",
+      "updatedAt": "2026-11-15T21:47:09.888Z",
       "keyFacts": 1
     }
   ],
@@ -33,24 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Jubiläumskonzert Chinderjodelchörli Glarnerland",
-              "detail": "Gesellschaftshaus Ennenda",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jubilaeumskonzert-chinderjodelchoerli-glarnerland/"
-            },
-            {
-              "label": "Chirezer Adventsmarkt",
-              "detail": "Filzbach (Kerenzerberg) — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-seminarhotel-lihn/"
-            },
-            {
-              "label": "Turnrevue Niederurnen 2026",
-              "detail": "Niederurnen, Glarus Nord — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
-            },
-            {
               "label": "Seniorenkino im Wortreich: \"Rebuilding\"",
               "detail": "Wortreich Buchhandlung & Antiquariat, Glarus",
               "date": "2026-11-16",
@@ -91,11 +73,29 @@
               "detail": "Glarus",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/sich-mit-der-sammlung-anlegen/"
+            },
+            {
+              "label": "Kulturbühne und Trio Anderscht",
+              "detail": "Seminarhotel Lihn",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kulturbuehne-und-trio-anderscht/"
+            },
+            {
+              "label": "Mateo Gudenrath - UNFILTERED",
+              "detail": "Kulturzentrum Holästei",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mateo-gudenrath-unfiltered-4/"
+            },
+            {
+              "label": "Mercado Latino - Salsa Night",
+              "detail": "Glarus",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mercado-latino-salsa-night-3/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "GL",
@@ -137,24 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Jubiläumskonzert Chinderjodelchörli Glarnerland",
-              "detail": "Gesellschaftshaus Ennenda",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jubilaeumskonzert-chinderjodelchoerli-glarnerland/"
-            },
-            {
-              "label": "Chirezer Adventsmarkt",
-              "detail": "Filzbach (Kerenzerberg) — ongoing, last day: 15 November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-seminarhotel-lihn/"
-            },
-            {
-              "label": "Turnrevue Niederurnen 2026",
-              "detail": "Niederurnen, Glarus Nord — ongoing, last day: 15 November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
-            },
             {
               "label": "Seniorenkino im Wortreich: \"Rebuilding\"",
               "detail": "Wortreich Buchhandlung & Antiquariat, Glarus",
@@ -196,11 +178,29 @@
               "detail": "Glarus",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/sich-mit-der-sammlung-anlegen/"
+            },
+            {
+              "label": "Kulturbühne und Trio Anderscht",
+              "detail": "Seminarhotel Lihn",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kulturbuehne-und-trio-anderscht/"
+            },
+            {
+              "label": "Mateo Gudenrath - UNFILTERED",
+              "detail": "Kulturzentrum Holästei",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mateo-gudenrath-unfiltered-4/"
+            },
+            {
+              "label": "Mercado Latino - Salsa Night",
+              "detail": "Glarus",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mercado-latino-salsa-night-3/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "GL",
@@ -242,24 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Jubiläumskonzert Chinderjodelchörli Glarnerland",
-              "detail": "Gesellschaftshaus Ennenda",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jubilaeumskonzert-chinderjodelchoerli-glarnerland/"
-            },
-            {
-              "label": "Chirezer Adventsmarkt",
-              "detail": "Filzbach (Kerenzerberg) — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-seminarhotel-lihn/"
-            },
-            {
-              "label": "Turnrevue Niederurnen 2026",
-              "detail": "Niederurnen, Glarus Nord — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
-            },
             {
               "label": "Seniorenkino im Wortreich: \"Rebuilding\"",
               "detail": "Wortreich Buchhandlung & Antiquariat, Glarus",
@@ -301,11 +283,29 @@
               "detail": "Glarus",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/sich-mit-der-sammlung-anlegen/"
+            },
+            {
+              "label": "Kulturbühne und Trio Anderscht",
+              "detail": "Seminarhotel Lihn",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kulturbuehne-und-trio-anderscht/"
+            },
+            {
+              "label": "Mateo Gudenrath - UNFILTERED",
+              "detail": "Kulturzentrum Holästei",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mateo-gudenrath-unfiltered-4/"
+            },
+            {
+              "label": "Mercado Latino - Salsa Night",
+              "detail": "Glarus",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mercado-latino-salsa-night-3/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "GL",
@@ -347,24 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Jubiläumskonzert Chinderjodelchörli Glarnerland",
-              "detail": "Gesellschaftshaus Ennenda",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jubilaeumskonzert-chinderjodelchoerli-glarnerland/"
-            },
-            {
-              "label": "Chirezer Adventsmarkt",
-              "detail": "Filzbach (Kerenzerberg) — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-seminarhotel-lihn/"
-            },
-            {
-              "label": "Turnrevue Niederurnen 2026",
-              "detail": "Niederurnen, Glarus Nord — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnrevue-niederurnen-2026/"
-            },
             {
               "label": "Seniorenkino im Wortreich: \"Rebuilding\"",
               "detail": "Wortreich Buchhandlung & Antiquariat, Glarus",
@@ -406,11 +388,29 @@
               "detail": "Glarus",
               "date": "2026-11-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/sich-mit-der-sammlung-anlegen/"
+            },
+            {
+              "label": "Kulturbühne und Trio Anderscht",
+              "detail": "Seminarhotel Lihn",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kulturbuehne-und-trio-anderscht/"
+            },
+            {
+              "label": "Mateo Gudenrath - UNFILTERED",
+              "detail": "Kulturzentrum Holästei",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mateo-gudenrath-unfiltered-4/"
+            },
+            {
+              "label": "Mercado Latino - Salsa Night",
+              "detail": "Glarus",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mercado-latino-salsa-night-3/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

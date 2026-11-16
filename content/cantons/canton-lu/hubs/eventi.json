@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "05af6bc372143bb86c861128b1fcc19b039267596d8f8cf8c163f7c55bd6b01a",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "85d6a519fd11a753f46e6513ad9a7250cea4908c3e3fe39d5f8e21d53e9d0cf7",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T06:24:39.723Z",
+      "updatedAt": "2026-11-15T21:47:09.888Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-14T21:43:27.949Z",
+      "updatedAt": "2026-11-15T22:07:40.362Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "58",
+          "value": "54",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,75 +38,79 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Blickpunktführung",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/blickpunktfuehrung-2/"
-            },
-            {
-              "label": "Der Backgammon Chor Luzern präsentiert: Voyage, Voyage",
-              "detail": "Kirche St. Martin, Adligenswil",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/adligenswil/der-backgammon-chor-luzern-praesentiert-voyage-voyage_A7EXvZF"
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-11-16",
+              "url": "https://www.stadtluzern.ch/sitzung/7648417"
             },
             {
               "label": "\"Schau rein\" Vielfalt vor der Haustür",
               "detail": "Sempach — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/schau-rein-vielfalt-vor-der-haustuer-4/"
-            },
-            {
-              "label": "Teddybär Spital Luzern 2026",
-              "detail": "Kantonsspital Luzern, Luzern — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/teddybaer-spital-luzern-2026/"
             },
             {
               "label": "Traditional Farmers' Festival",
               "detail": "Weggis — in corso, ultimo giorno: 17 novembre 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/traditional-farmers-festival/"
-            },
-            {
-              "label": "Advent and Christmas Market at Wyher Castle",
-              "detail": "Ettiswil — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advents-und-weihnachtsmarkt-im-schloss-wyher/"
-            },
-            {
-              "label": "Blues Brunch at the Hotel Schweizerhof Luzern",
-              "detail": "Lucerne, Luzern — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blues-brunch-at-the-hotel-schweizerhof-luzern/"
-            },
-            {
-              "label": "Blues Brunch im Hotel Schweizerhof Luzern",
-              "detail": "Hotel Schweizerhof, Luzern — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/music/lucerne/blues-brunch-at-the-hotel-schweizerhof-luzern_AtcZy1d"
             },
             {
               "label": "360° Milonga",
               "detail": "Bourbaki Panorama — in corso, ultimo giorno: 6 dicembre 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
             },
             {
-              "label": "Schweizer Wohntage: Luzern",
-              "detail": "Luzern — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.stadtluzern.ch/sitzung/7723786"
+              "label": "Einführung für Lehrer:innen",
+              "detail": "Museum Sammlung Rosengart Luzern, Luzern — in corso, ultimo giorno: 25 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
+            },
+            {
+              "label": "Winter Qi Gong Inseli",
+              "detail": "Ebikon",
+              "date": "2026-11-17",
+              "url": "https://www.stadtluzern.ch/sitzung/7694119"
+            },
+            {
+              "label": "Eine Weihnachtsgeschichte",
+              "detail": "Luzerner Theater, Luzern",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/eine-weihnachtsgeschichte/"
+            },
+            {
+              "label": "Lesung mit Joachim B. Schmidt",
+              "detail": "Lucerne",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-mit-joachim-b-schmidt-2/"
+            },
+            {
+              "label": "Intuitives Gestalten & Malen",
+              "detail": "Atelier Yoku",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/events/this-that/lucerne/intuitives-gestalten-und-malen_ApAardw"
+            },
+            {
+              "label": "Kreative Abend-Auszeit",
+              "detail": "Atelier Yoku",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/events/this-that/lucerne/intuitives-gestalten-und-malen_AmnytMr"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-11-15T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648417"
+            },
             {
               "label": "Kinderanlass: Adventskalender aus alten Socken",
               "date": "2026-11-13T23:00:00.000Z",
@@ -131,14 +135,9 @@
               "label": "Salonkonzert",
               "date": "2026-11-12T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463719"
-            },
-            {
-              "label": "Kunstmuseum-Führung mit Gespräch für die Generation 60plus",
-              "date": "2026-11-11T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7287119"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -172,7 +171,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "LU",
@@ -182,7 +181,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "58",
+          "value": "54",
           "note": "from the site’s events calendar"
         }
       ],
@@ -193,75 +192,79 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Blickpunktführung",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/blickpunktfuehrung-2/"
-            },
-            {
-              "label": "Der Backgammon Chor Luzern präsentiert: Voyage, Voyage",
-              "detail": "Kirche St. Martin, Adligenswil",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/adligenswil/der-backgammon-chor-luzern-praesentiert-voyage-voyage_A7EXvZF"
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-11-16",
+              "url": "https://www.stadtluzern.ch/sitzung/7648417"
             },
             {
               "label": "\"Schau rein\" Vielfalt vor der Haustür",
               "detail": "Sempach — ongoing, last day: 22 November 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/schau-rein-vielfalt-vor-der-haustuer-4/"
-            },
-            {
-              "label": "Teddybär Spital Luzern 2026",
-              "detail": "Kantonsspital Luzern, Luzern — ongoing, last day: 15 November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/teddybaer-spital-luzern-2026/"
             },
             {
               "label": "Traditional Farmers' Festival",
               "detail": "Weggis — ongoing, last day: 17 November 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/traditional-farmers-festival/"
-            },
-            {
-              "label": "Advent and Christmas Market at Wyher Castle",
-              "detail": "Ettiswil — ongoing, last day: 15 November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advents-und-weihnachtsmarkt-im-schloss-wyher/"
-            },
-            {
-              "label": "Blues Brunch at the Hotel Schweizerhof Luzern",
-              "detail": "Lucerne, Luzern — ongoing, last day: 15 November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blues-brunch-at-the-hotel-schweizerhof-luzern/"
-            },
-            {
-              "label": "Blues Brunch at the Hotel Schweizerhof Luzern",
-              "detail": "Hotel Schweizerhof, Luzern — ongoing, last day: 15 November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/music/lucerne/blues-brunch-at-the-hotel-schweizerhof-luzern_AtcZy1d"
             },
             {
               "label": "360° Milonga",
               "detail": "Bourbaki Panorama — ongoing, last day: 6 December 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
             },
             {
-              "label": "Schweizer Wohntage: Luzern",
-              "detail": "Luzern — ongoing, last day: 15 November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.stadtluzern.ch/sitzung/7723786"
+              "label": "Einführung für Lehrer:innen",
+              "detail": "Museum Sammlung Rosengart Luzern, Luzern — ongoing, last day: 25 November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
+            },
+            {
+              "label": "Winter Qi Gong Inseli",
+              "detail": "Ebikon",
+              "date": "2026-11-17",
+              "url": "https://www.stadtluzern.ch/sitzung/7694119"
+            },
+            {
+              "label": "Eine Weihnachtsgeschichte",
+              "detail": "Luzerner Theater, Luzern",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/eine-weihnachtsgeschichte/"
+            },
+            {
+              "label": "Lesung mit Joachim B. Schmidt",
+              "detail": "Lucerne",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-mit-joachim-b-schmidt-2/"
+            },
+            {
+              "label": "Intuitives Gestalten & Malen",
+              "detail": "Atelier Yoku",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/events/this-that/lucerne/intuitives-gestalten-und-malen_ApAardw"
+            },
+            {
+              "label": "Intuitives Gestalten & Malen",
+              "detail": "Atelier Yoku",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/events/this-that/lucerne/intuitives-gestalten-und-malen_AmnytMr"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-11-15T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648417"
+            },
             {
               "label": "Kinderanlass: Adventskalender aus alten Socken",
               "date": "2026-11-13T23:00:00.000Z",
@@ -286,14 +289,9 @@
               "label": "Salonkonzert",
               "date": "2026-11-12T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463719"
-            },
-            {
-              "label": "Kunstmuseum-Führung mit Gespräch für die Generation 60plus",
-              "date": "2026-11-11T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7287119"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +325,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "LU",
@@ -337,7 +335,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "58",
+          "value": "54",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -348,75 +346,79 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Blickpunktführung",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/blickpunktfuehrung-2/"
-            },
-            {
-              "label": "Der Backgammon Chor Luzern präsentiert: Voyage, Voyage",
-              "detail": "Kirche St. Martin, Adligenswil",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/adligenswil/der-backgammon-chor-luzern-praesentiert-voyage-voyage_A7EXvZF"
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-11-16",
+              "url": "https://www.stadtluzern.ch/sitzung/7648417"
             },
             {
               "label": "\"Schau rein\" Vielfalt vor der Haustür",
               "detail": "Sempach — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/schau-rein-vielfalt-vor-der-haustuer-4/"
-            },
-            {
-              "label": "Teddybär Spital Luzern 2026",
-              "detail": "Kantonsspital Luzern, Luzern — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/teddybaer-spital-luzern-2026/"
             },
             {
               "label": "Sennenchilbi Weggis",
               "detail": "Weggis — läuft, letzter Tag: 17. November 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/traditional-farmers-festival/"
-            },
-            {
-              "label": "Advents-und Weihnachtsmarkt im Schloss Wyher",
-              "detail": "Ettiswil — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advents-und-weihnachtsmarkt-im-schloss-wyher/"
-            },
-            {
-              "label": "Blues Brunch im Hotel Schweizerhof Luzern",
-              "detail": "Lucerne, Luzern — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blues-brunch-at-the-hotel-schweizerhof-luzern/"
-            },
-            {
-              "label": "Blues Brunch im Hotel Schweizerhof Luzern",
-              "detail": "Hotel Schweizerhof, Luzern — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/music/lucerne/blues-brunch-at-the-hotel-schweizerhof-luzern_AtcZy1d"
             },
             {
               "label": "360° Milonga",
               "detail": "Bourbaki Panorama — läuft, letzter Tag: 6. Dezember 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
             },
             {
-              "label": "Schweizer Wohntage: Luzern",
-              "detail": "Luzern — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.stadtluzern.ch/sitzung/7723786"
+              "label": "Einführung für Lehrer:innen",
+              "detail": "Museum Sammlung Rosengart Luzern, Luzern — läuft, letzter Tag: 25. November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
+            },
+            {
+              "label": "Winter Qi Gong Inseli",
+              "detail": "Ebikon",
+              "date": "2026-11-17",
+              "url": "https://www.stadtluzern.ch/sitzung/7694119"
+            },
+            {
+              "label": "Eine Weihnachtsgeschichte",
+              "detail": "Luzerner Theater, Luzern",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/eine-weihnachtsgeschichte/"
+            },
+            {
+              "label": "Lesung mit Joachim B. Schmidt",
+              "detail": "Lucerne",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-mit-joachim-b-schmidt-2/"
+            },
+            {
+              "label": "Intuitives Gestalten & Malen",
+              "detail": "Atelier Yoku",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/events/this-that/lucerne/intuitives-gestalten-und-malen_ApAardw"
+            },
+            {
+              "label": "Kreative Abend-Auszeit",
+              "detail": "Atelier Yoku",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/events/this-that/lucerne/intuitives-gestalten-und-malen_AmnytMr"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-11-15T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648417"
+            },
             {
               "label": "Kinderanlass: Adventskalender aus alten Socken",
               "date": "2026-11-13T23:00:00.000Z",
@@ -441,14 +443,9 @@
               "label": "Salonkonzert",
               "date": "2026-11-12T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463719"
-            },
-            {
-              "label": "Kunstmuseum-Führung mit Gespräch für die Generation 60plus",
-              "date": "2026-11-11T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7287119"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -482,7 +479,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "LU",
@@ -492,7 +489,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "58",
+          "value": "54",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -503,75 +500,79 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Blickpunktführung",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/blickpunktfuehrung-2/"
-            },
-            {
-              "label": "Der Backgammon Chor Luzern präsentiert: Voyage, Voyage",
-              "detail": "Kirche St. Martin, Adligenswil",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/adligenswil/der-backgammon-chor-luzern-praesentiert-voyage-voyage_A7EXvZF"
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-11-16",
+              "url": "https://www.stadtluzern.ch/sitzung/7648417"
             },
             {
               "label": "« Venir et découvrir » - La diversité à votre porte",
               "detail": "Sempach — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/schau-rein-vielfalt-vor-der-haustuer-4/"
-            },
-            {
-              "label": "Teddybär Spital Luzern 2026",
-              "detail": "Kantonsspital Luzern, Luzern — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/teddybaer-spital-luzern-2026/"
             },
             {
               "label": "Bénichon de Weggis",
               "detail": "Weggis — en cours, dernier jour : 17 novembre 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/traditional-farmers-festival/"
-            },
-            {
-              "label": "Marché de l'Avent et de Noël au château de Wyher",
-              "detail": "Ettiswil — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advents-und-weihnachtsmarkt-im-schloss-wyher/"
-            },
-            {
-              "label": "Blues Brunch at the Hotel Schweizerhof Luzern",
-              "detail": "Lucerne, Luzern — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blues-brunch-at-the-hotel-schweizerhof-luzern/"
-            },
-            {
-              "label": "Blues Brunch im Hotel Schweizerhof Luzern",
-              "detail": "Hotel Schweizerhof, Luzern — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/music/lucerne/blues-brunch-at-the-hotel-schweizerhof-luzern_AtcZy1d"
             },
             {
               "label": "360° Milonga",
               "detail": "Bourbaki Panorama — en cours, dernier jour : 6 décembre 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
             },
             {
-              "label": "Schweizer Wohntage: Luzern",
-              "detail": "Luzern — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.stadtluzern.ch/sitzung/7723786"
+              "label": "Einführung für Lehrer:innen",
+              "detail": "Museum Sammlung Rosengart Luzern, Luzern — en cours, dernier jour : 25 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
+            },
+            {
+              "label": "Winter Qi Gong Inseli",
+              "detail": "Ebikon",
+              "date": "2026-11-17",
+              "url": "https://www.stadtluzern.ch/sitzung/7694119"
+            },
+            {
+              "label": "Eine Weihnachtsgeschichte",
+              "detail": "Luzerner Theater, Luzern",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/eine-weihnachtsgeschichte/"
+            },
+            {
+              "label": "Lesung mit Joachim B. Schmidt",
+              "detail": "Lucerne",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-mit-joachim-b-schmidt-2/"
+            },
+            {
+              "label": "Intuitives Gestalten & Malen",
+              "detail": "Atelier Yoku",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/events/this-that/lucerne/intuitives-gestalten-und-malen_ApAardw"
+            },
+            {
+              "label": "Kreative Abend-Auszeit",
+              "detail": "Atelier Yoku",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/events/this-that/lucerne/intuitives-gestalten-und-malen_AmnytMr"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-11-15T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648417"
+            },
             {
               "label": "Kinderanlass: Adventskalender aus alten Socken",
               "date": "2026-11-13T23:00:00.000Z",
@@ -596,14 +597,9 @@
               "label": "Salonkonzert",
               "date": "2026-11-12T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463719"
-            },
-            {
-              "label": "Kunstmuseum-Führung mit Gespräch für die Generation 60plus",
-              "date": "2026-11-11T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7287119"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -637,7 +633,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

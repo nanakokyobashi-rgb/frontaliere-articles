@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "dc5257e314287a406b7aefec707ed245581b86e2800f09e43ef1e8a5758a0582",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "d195eab793d33c0d27e56ddb35044cf4d6f882ad4714235e2cfb0d28126a06ac",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T06:24:39.723Z",
+      "updatedAt": "2026-11-15T21:47:09.888Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "335",
+          "value": "324",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Hochzeitsfestival Zürichsee 2026",
-              "detail": "Stäfa",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hochzeitsfestival-zuerichsee-2026/"
+              "label": "Metzgete nach Wahl: Im Hotel Sedartis kommt auf den Teller, was schmeckt",
+              "detail": "Thalwil",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-nach-wahl-im-hotel-sedartis-kommt-auf-den-teller-was-schmeckt/"
             },
             {
-              "label": "Offene Turnhalle",
-              "detail": "Urdorf",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/offene-turnhalle/"
+              "label": "Pharmaceutical Automation and Digitalisation Congress 2026",
+              "detail": "Mövenpick Hotel Zürich-Regensdorf, Regensdorf",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/regensdorf/pharmaceutical-automation-and-digitalisation-congress-2026_A39nq1k"
             },
             {
-              "label": "Seniorenmittagstisch 2026",
-              "detail": "Zentrum Breitenhof Rüti",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/rueti-zh/seniorenmittagstisch-2026_AGSb5Q7"
+              "label": "Swiss Payment Forum 2026",
+              "detail": "Zürich Marriott Hotel, Zürich",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/swiss-payment-forum-2026_Ap34E6e"
             },
             {
-              "label": "Kafi VIVA im Generationen-Treff Robenhausen ist offen",
-              "detail": "Generationen-Treff Viva Robenhausen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/wetzikon-zh/kafi-viva-im-generationen-treff-robenhausen-ist-offen_APypeTS"
+              "label": "Swiss AI Summit 2026",
+              "detail": "Kunsthaus Zürich, Zürich",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/swiss-ai-summit-2026_AyKpYFV"
             },
             {
-              "label": "Ballo della domenica",
-              "detail": "Schulhaus Wolfrichti",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/evenements/musique/gruet-gossau-zh/danse-du-dimanche_AkZ8hj3"
+              "label": "Mütter- und Väterberatung in Greifensee",
+              "detail": "Reformiertes Kirchgemeindehaus Greifensee, Greifensee",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/greifensee/muetter-und-vaeterberatung-in-greifensee_A7MCrKM"
             },
             {
-              "label": "Begegnung von Musik und Schriftkunst Suishû T. Klopfenstein-Arii Toshio Hosokawa",
-              "detail": "Festsaal Chipperfield Kunsthaus Zürich, Zürich",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/begegnung-von-musik-und-schriftkunst-suishu-t-klopfensteinarii-toshio-hosokawa/"
+              "label": "Mütter- und Väterberatung in Egg",
+              "detail": "Kinder- und Jugendbüro, Zürich",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/egg-b-zuerich/muetter-und-vaeterberatung-in-egg_AyGCRBZ"
             },
             {
-              "label": "Familien-Tanzworkshop: Breaking",
-              "detail": "Tanzhaus Zürich, Zürich",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/music/zurich/family-dance-workshop-breaking_AnYhSVp"
+              "label": "Schreibdienst / Infopoint",
+              "detail": "Katholische Pfarrei St. Martin, Raum David und Raum Mirjam",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/effretikon/schreibdienst-infopoint_A9UpJPZ"
             },
             {
-              "label": "Family Dance Workshop: Breaking",
-              "detail": "Tanzhaus Zürich, Zürich",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/familien-tanzworkshop-breaking/"
+              "label": "«Mein Klang, meine Reise» von Wael Sami Elkholy",
+              "detail": "sogar theater",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/mein-klang-meine-reise-von-wael-sami-elkholy_AY4tXmX"
             },
             {
-              "label": "Spielnachmittag mit Würfeln und Karten",
-              "detail": "Kloten",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spielnachmittag-mit-wuerfeln-und-karten/"
+              "label": "Fondue a bordo della Doppia freccia rossa «Churchill».",
+              "detail": "Zürich HB, Zürich",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fondue-a-bordo-della-doppia-freccia-rossa-churchill/"
             },
             {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Evang.-ref. Kirche St. Arbogast, Winterthur",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/leidenschaft-und-samba_AZRK56J"
+              "label": "Berlin ist ja so gross",
+              "detail": "Stadtgarten, Winterthur",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/berlin-ist-ja-so-gross/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "ZH",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "335",
+          "value": "324",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Hochzeitsfestival Zürichsee 2026",
-              "detail": "Stäfa",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hochzeitsfestival-zuerichsee-2026/"
+              "label": "Metzgete nach Wahl: Im Hotel Sedartis kommt auf den Teller, was schmeckt",
+              "detail": "Thalwil",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-nach-wahl-im-hotel-sedartis-kommt-auf-den-teller-was-schmeckt/"
             },
             {
-              "label": "Offene Turnhalle",
-              "detail": "Urdorf",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/offene-turnhalle/"
+              "label": "Pharmaceutical Automation and Digitalisation Congress 2026",
+              "detail": "Mövenpick Hotel Zürich-Regensdorf, Regensdorf",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/regensdorf/pharmaceutical-automation-and-digitalisation-congress-2026_A39nq1k"
             },
             {
-              "label": "Seniorenmittagstisch 2026",
-              "detail": "Zentrum Breitenhof Rüti",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/rueti-zh/seniorenmittagstisch-2026_AGSb5Q7"
+              "label": "Swiss Payment Forum 2026",
+              "detail": "Zürich Marriott Hotel, Zürich",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/swiss-payment-forum-2026_Ap34E6e"
             },
             {
-              "label": "Kafi VIVA in the Robenhausen Intergenerational Centre is open",
-              "detail": "Generationen-Treff Viva Robenhausen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/wetzikon-zh/kafi-viva-im-generationen-treff-robenhausen-ist-offen_APypeTS"
+              "label": "Swiss AI Summit 2026",
+              "detail": "Kunsthaus Zürich, Zürich",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/swiss-ai-summit-2026_AyKpYFV"
             },
             {
-              "label": "Sunday dance",
-              "detail": "Schulhaus Wolfrichti",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/evenements/musique/gruet-gossau-zh/danse-du-dimanche_AkZ8hj3"
+              "label": "Mütter- und Väterberatung in Greifensee",
+              "detail": "Reformiertes Kirchgemeindehaus Greifensee, Greifensee",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/greifensee/muetter-und-vaeterberatung-in-greifensee_A7MCrKM"
             },
             {
-              "label": "Begegnung von Musik und Schriftkunst Suishû T. Klopfenstein-Arii Toshio Hosokawa",
-              "detail": "Festsaal Chipperfield Kunsthaus Zürich, Zürich",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/begegnung-von-musik-und-schriftkunst-suishu-t-klopfensteinarii-toshio-hosokawa/"
+              "label": "Mütter- und Väterberatung in Egg",
+              "detail": "Kinder- und Jugendbüro, Zürich",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/egg-b-zuerich/muetter-und-vaeterberatung-in-egg_AyGCRBZ"
             },
             {
-              "label": "Family Dance Workshop: Breaking",
-              "detail": "Tanzhaus Zürich, Zürich",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/music/zurich/family-dance-workshop-breaking_AnYhSVp"
+              "label": "Schreibdienst / Infopoint",
+              "detail": "Katholische Pfarrei St. Martin, Raum David und Raum Mirjam",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/effretikon/schreibdienst-infopoint_A9UpJPZ"
             },
             {
-              "label": "Family Dance Workshop: Breaking",
-              "detail": "Tanzhaus Zürich, Zürich",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/familien-tanzworkshop-breaking/"
+              "label": "«Mein Klang, meine Reise» von Wael Sami Elkholy",
+              "detail": "sogar theater",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/mein-klang-meine-reise-von-wael-sami-elkholy_AY4tXmX"
             },
             {
-              "label": "Spielnachmittag mit Würfeln und Karten",
-              "detail": "Kloten",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spielnachmittag-mit-wuerfeln-und-karten/"
+              "label": "Fondue trip on the “Churchill” Red Arrow.",
+              "detail": "Zürich HB, Zürich",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fondue-a-bordo-della-doppia-freccia-rossa-churchill/"
             },
             {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Evang.-ref. Kirche St. Arbogast, Winterthur",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/leidenschaft-und-samba_AZRK56J"
+              "label": "Berlin ist ja so gross",
+              "detail": "Stadtgarten, Winterthur",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/berlin-ist-ja-so-gross/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "ZH",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "335",
+          "value": "324",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Hochzeitsfestival Zürichsee 2026",
-              "detail": "Stäfa",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hochzeitsfestival-zuerichsee-2026/"
+              "label": "Metzgete nach Wahl: Im Hotel Sedartis kommt auf den Teller, was schmeckt",
+              "detail": "Thalwil",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-nach-wahl-im-hotel-sedartis-kommt-auf-den-teller-was-schmeckt/"
             },
             {
-              "label": "Offene Turnhalle",
-              "detail": "Urdorf",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/offene-turnhalle/"
+              "label": "Pharmaceutical Automation and Digitalisation Congress 2026",
+              "detail": "Mövenpick Hotel Zürich-Regensdorf, Regensdorf",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/regensdorf/pharmaceutical-automation-and-digitalisation-congress-2026_A39nq1k"
             },
             {
-              "label": "Seniorenmittagstisch 2026",
-              "detail": "Zentrum Breitenhof Rüti",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/rueti-zh/seniorenmittagstisch-2026_AGSb5Q7"
+              "label": "Swiss Payment Forum 2026",
+              "detail": "Zürich Marriott Hotel, Zürich",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/swiss-payment-forum-2026_Ap34E6e"
             },
             {
-              "label": "Kafi VIVA im Generationen-Treff Robenhausen ist geöffnet",
-              "detail": "Generationen-Treff Viva Robenhausen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/wetzikon-zh/kafi-viva-im-generationen-treff-robenhausen-ist-offen_APypeTS"
+              "label": "Swiss AI Summit 2026",
+              "detail": "Kunsthaus Zürich, Zürich",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/swiss-ai-summit-2026_AyKpYFV"
             },
             {
-              "label": "Sonntagstanz",
-              "detail": "Schulhaus Wolfrichti",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/evenements/musique/gruet-gossau-zh/danse-du-dimanche_AkZ8hj3"
+              "label": "Mütter- und Väterberatung in Greifensee",
+              "detail": "Reformiertes Kirchgemeindehaus Greifensee, Greifensee",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/greifensee/muetter-und-vaeterberatung-in-greifensee_A7MCrKM"
             },
             {
-              "label": "Begegnung von Musik und Schriftkunst Suishû T. Klopfenstein-Arii Toshio Hosokawa",
-              "detail": "Festsaal Chipperfield Kunsthaus Zürich, Zürich",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/begegnung-von-musik-und-schriftkunst-suishu-t-klopfensteinarii-toshio-hosokawa/"
+              "label": "Mütter- und Väterberatung in Egg",
+              "detail": "Kinder- und Jugendbüro, Zürich",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/egg-b-zuerich/muetter-und-vaeterberatung-in-egg_AyGCRBZ"
             },
             {
-              "label": "Familien-Tanzworkshop: Breaking",
-              "detail": "Tanzhaus Zürich, Zürich",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/music/zurich/family-dance-workshop-breaking_AnYhSVp"
+              "label": "Schreibdienst / Infopoint",
+              "detail": "Katholische Pfarrei St. Martin, Raum David und Raum Mirjam",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/effretikon/schreibdienst-infopoint_A9UpJPZ"
             },
             {
-              "label": "Familien-Tanzworkshop: Breaking",
-              "detail": "Tanzhaus Zürich, Zürich",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/familien-tanzworkshop-breaking/"
+              "label": "«Mein Klang, meine Reise» von Wael Sami Elkholy",
+              "detail": "sogar theater",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/mein-klang-meine-reise-von-wael-sami-elkholy_AY4tXmX"
             },
             {
-              "label": "Spielnachmittag mit Würfeln und Karten",
-              "detail": "Kloten",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spielnachmittag-mit-wuerfeln-und-karten/"
+              "label": "Fonduefahrt im Roten Doppelpfeil «Churchill».",
+              "detail": "Zürich HB, Zürich",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fondue-a-bordo-della-doppia-freccia-rossa-churchill/"
             },
             {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Evang.-ref. Kirche St. Arbogast, Winterthur",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/leidenschaft-und-samba_AZRK56J"
+              "label": "Berlin ist ja so gross",
+              "detail": "Stadtgarten, Winterthur",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/berlin-ist-ja-so-gross/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "ZH",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "335",
+          "value": "324",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Hochzeitsfestival Zürichsee 2026",
-              "detail": "Stäfa",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hochzeitsfestival-zuerichsee-2026/"
+              "label": "Metzgete nach Wahl: Im Hotel Sedartis kommt auf den Teller, was schmeckt",
+              "detail": "Thalwil",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-nach-wahl-im-hotel-sedartis-kommt-auf-den-teller-was-schmeckt/"
             },
             {
-              "label": "Offene Turnhalle",
-              "detail": "Urdorf",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/offene-turnhalle/"
+              "label": "Pharmaceutical Automation and Digitalisation Congress 2026",
+              "detail": "Mövenpick Hotel Zürich-Regensdorf, Regensdorf",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/regensdorf/pharmaceutical-automation-and-digitalisation-congress-2026_A39nq1k"
             },
             {
-              "label": "Seniorenmittagstisch 2026",
-              "detail": "Zentrum Breitenhof Rüti",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/rueti-zh/seniorenmittagstisch-2026_AGSb5Q7"
+              "label": "Swiss Payment Forum 2026",
+              "detail": "Zürich Marriott Hotel, Zürich",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/swiss-payment-forum-2026_Ap34E6e"
             },
             {
-              "label": "Le café VIVA du centre intergénérationnel de Robenhausen est ouvert",
-              "detail": "Generationen-Treff Viva Robenhausen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/wetzikon-zh/kafi-viva-im-generationen-treff-robenhausen-ist-offen_APypeTS"
+              "label": "Swiss AI Summit 2026",
+              "detail": "Kunsthaus Zürich, Zürich",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/swiss-ai-summit-2026_AyKpYFV"
             },
             {
-              "label": "Danse du dimanche",
-              "detail": "Schulhaus Wolfrichti",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/evenements/musique/gruet-gossau-zh/danse-du-dimanche_AkZ8hj3"
+              "label": "Mütter- und Väterberatung in Greifensee",
+              "detail": "Reformiertes Kirchgemeindehaus Greifensee, Greifensee",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/greifensee/muetter-und-vaeterberatung-in-greifensee_A7MCrKM"
             },
             {
-              "label": "Begegnung von Musik und Schriftkunst Suishû T. Klopfenstein-Arii Toshio Hosokawa",
-              "detail": "Festsaal Chipperfield Kunsthaus Zürich, Zürich",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/begegnung-von-musik-und-schriftkunst-suishu-t-klopfensteinarii-toshio-hosokawa/"
+              "label": "Mütter- und Väterberatung in Egg",
+              "detail": "Kinder- und Jugendbüro, Zürich",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/egg-b-zuerich/muetter-und-vaeterberatung-in-egg_AyGCRBZ"
             },
             {
-              "label": "Familien-Tanzworkshop: Breaking",
-              "detail": "Tanzhaus Zürich, Zürich",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/music/zurich/family-dance-workshop-breaking_AnYhSVp"
+              "label": "Schreibdienst / Infopoint",
+              "detail": "Katholische Pfarrei St. Martin, Raum David und Raum Mirjam",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/effretikon/schreibdienst-infopoint_A9UpJPZ"
             },
             {
-              "label": "Family Dance Workshop: Breaking",
-              "detail": "Tanzhaus Zürich, Zürich",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/familien-tanzworkshop-breaking/"
+              "label": "«Mein Klang, meine Reise» von Wael Sami Elkholy",
+              "detail": "sogar theater",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/mein-klang-meine-reise-von-wael-sami-elkholy_AY4tXmX"
             },
             {
-              "label": "Spielnachmittag mit Würfeln und Karten",
-              "detail": "Kloten",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spielnachmittag-mit-wuerfeln-und-karten/"
+              "label": "Voyage fondue à bord de la Flèche Rouge «Churchill».",
+              "detail": "Zürich HB, Zürich",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fondue-a-bordo-della-doppia-freccia-rossa-churchill/"
             },
             {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Evang.-ref. Kirche St. Arbogast, Winterthur",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/leidenschaft-und-samba_AZRK56J"
+              "label": "Berlin ist ja so gross",
+              "detail": "Stadtgarten, Winterthur",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/berlin-ist-ja-so-gross/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

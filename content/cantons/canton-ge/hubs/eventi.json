@@ -4,17 +4,17 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "28ac04c0225cecc6adeaee7b8d0a309863f2fa42bf75050b5f0b8ff421015b52",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "707645641b4cd20aa725fd3db82e0dd9a18f0203001662d470565870d7f77cba",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T06:24:39.723Z",
+      "updatedAt": "2026-11-15T21:47:09.888Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-14T21:43:27.949Z",
+      "updatedAt": "2026-11-15T22:07:40.362Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "365",
+          "value": "363",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Art et IA",
+              "label": "Ari Hoenig Trio",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/art-0"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/hoenig-trio"
             },
             {
-              "label": "ART MARKET! - Marché des créatrices et des créateurs",
+              "label": "COMPLET Formation pour les intervenant.x.es du programme MasculinitéS",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/art-market-marche-creatrices-createurs"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/complet-formation-intervenantxes-programme-masculinites"
             },
             {
-              "label": "Bi-2",
+              "label": "En tant qu'homme, rejoins notre équipe bénévoles MasculinitéS !",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/2"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/tant-quhomme-rejoins-equipe-benevoles-masculinites-0"
             },
             {
-              "label": "Brunch musical du Trio Ernest – Bee Classical",
+              "label": "FILMAR 2026 La chair du mâle est aride – Rubén Barrios Rodríguez",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/brunch-musical-trio-ernest-classical"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/filmar-2026-chair-male-aride-ruben-barrios-rodriguez"
             },
             {
-              "label": "Complet - Visite commentée: Le futur, c'est quoi ?",
+              "label": "MORPHONG",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/visite-commentee-futur-quoi-0"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/morphong"
             },
             {
-              "label": "Des Histoires de la Terre: Archéoptéryx et ses descendants",
+              "label": "PréPro night : MILAN | MACÉO",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/histoires-terre-archeopteryx-descendants"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/prepro-night-milan-maceo"
             },
             {
-              "label": "Des histoires de la Terre: Les minéraux - magie aux mille facettes",
+              "label": "Projection de Manas et table ronde : Rendre visible l'invisible, Ethique et Politique autour de Manas",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/histoires-terre-mineraux-magie-mille-facettes"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/projection-manas-table-ronde-rendre-visible-invisible-ethique-politique-autour-manas"
             },
             {
-              "label": "FILMAR 2026 Projection de Niñas escarlata",
+              "label": "Quatuors de Beethoven",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/filmar-2026-projection-ninas-escarlata"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/quatuors-beethoven"
             },
             {
-              "label": "INITIATION A LA MUSIQUE AFRICAINE AVEC KADER DIABATÉ",
+              "label": "Rencontre avec Anne Bourrassé",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/initiation-musique-africaine-kader-diabate"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/rencontre-anne-bourrasse"
             },
             {
-              "label": "L’Harmonie Nautique, orchestre d’instruments à vent de la Ville de Genève",
+              "label": "VIVRE",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/harmonie-nautique-orchestre-instruments-vent-ville-geneve"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/vivre"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ginevra/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "GE",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "365",
+          "value": "363",
           "note": "from the site’s events calendar"
         }
       ],
@@ -161,69 +161,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Art et IA",
+              "label": "Ari Hoenig Trio",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/art-0"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/hoenig-trio"
             },
             {
-              "label": "ART MARKET! - Marché des créatrices et des créateurs",
+              "label": "COMPLET Formation pour les intervenant.x.es du programme MasculinitéS",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/art-market-marche-creatrices-createurs"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/complet-formation-intervenantxes-programme-masculinites"
             },
             {
-              "label": "Bi-2",
+              "label": "En tant qu'homme, rejoins notre équipe bénévoles MasculinitéS !",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/2"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/tant-quhomme-rejoins-equipe-benevoles-masculinites-0"
             },
             {
-              "label": "Brunch musical du Trio Ernest – Bee Classical",
+              "label": "FILMAR 2026 La chair du mâle est aride – Rubén Barrios Rodríguez",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/brunch-musical-trio-ernest-classical"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/filmar-2026-chair-male-aride-ruben-barrios-rodriguez"
             },
             {
-              "label": "Complet - Visite commentée: Le futur, c'est quoi ?",
+              "label": "MORPHONG",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/visite-commentee-futur-quoi-0"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/morphong"
             },
             {
-              "label": "Des Histoires de la Terre: Archéoptéryx et ses descendants",
+              "label": "PréPro night : MILAN | MACÉO",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/histoires-terre-archeopteryx-descendants"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/prepro-night-milan-maceo"
             },
             {
-              "label": "Des histoires de la Terre: Les minéraux - magie aux mille facettes",
+              "label": "Projection de Manas et table ronde : Rendre visible l'invisible, Ethique et Politique autour de Manas",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/histoires-terre-mineraux-magie-mille-facettes"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/projection-manas-table-ronde-rendre-visible-invisible-ethique-politique-autour-manas"
             },
             {
-              "label": "FILMAR 2026 Projection de Niñas escarlata",
+              "label": "Quatuors de Beethoven",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/filmar-2026-projection-ninas-escarlata"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/quatuors-beethoven"
             },
             {
-              "label": "INITIATION A LA MUSIQUE AFRICAINE AVEC KADER DIABATÉ",
+              "label": "Rencontre avec Anne Bourrassé",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/initiation-musique-africaine-kader-diabate"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/rencontre-anne-bourrasse"
             },
             {
-              "label": "L’Harmonie Nautique, orchestre d’instruments à vent de la Ville de Genève",
+              "label": "VIVRE",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/harmonie-nautique-orchestre-instruments-vent-ville-geneve"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/vivre"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/geneva/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "GE",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "365",
+          "value": "363",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -284,69 +284,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Art et IA",
+              "label": "Ari Hoenig Trio",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/art-0"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/hoenig-trio"
             },
             {
-              "label": "ART MARKET! - Marché des créatrices et des créateurs",
+              "label": "COMPLET Formation pour les intervenant.x.es du programme MasculinitéS",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/art-market-marche-creatrices-createurs"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/complet-formation-intervenantxes-programme-masculinites"
             },
             {
-              "label": "Bi-2",
+              "label": "En tant qu'homme, rejoins notre équipe bénévoles MasculinitéS !",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/2"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/tant-quhomme-rejoins-equipe-benevoles-masculinites-0"
             },
             {
-              "label": "Brunch musical du Trio Ernest – Bee Classical",
+              "label": "FILMAR 2026 La chair du mâle est aride – Rubén Barrios Rodríguez",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/brunch-musical-trio-ernest-classical"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/filmar-2026-chair-male-aride-ruben-barrios-rodriguez"
             },
             {
-              "label": "Complet - Visite commentée: Le futur, c'est quoi ?",
+              "label": "MORPHONG",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/visite-commentee-futur-quoi-0"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/morphong"
             },
             {
-              "label": "Des Histoires de la Terre: Archéoptéryx et ses descendants",
+              "label": "PréPro night : MILAN | MACÉO",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/histoires-terre-archeopteryx-descendants"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/prepro-night-milan-maceo"
             },
             {
-              "label": "Des histoires de la Terre: Les minéraux - magie aux mille facettes",
+              "label": "Projection de Manas et table ronde : Rendre visible l'invisible, Ethique et Politique autour de Manas",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/histoires-terre-mineraux-magie-mille-facettes"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/projection-manas-table-ronde-rendre-visible-invisible-ethique-politique-autour-manas"
             },
             {
-              "label": "FILMAR 2026 Projection de Niñas escarlata",
+              "label": "Quatuors de Beethoven",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/filmar-2026-projection-ninas-escarlata"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/quatuors-beethoven"
             },
             {
-              "label": "INITIATION A LA MUSIQUE AFRICAINE AVEC KADER DIABATÉ",
+              "label": "Rencontre avec Anne Bourrassé",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/initiation-musique-africaine-kader-diabate"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/rencontre-anne-bourrasse"
             },
             {
-              "label": "L’Harmonie Nautique, orchestre d’instruments à vent de la Ville de Genève",
+              "label": "VIVRE",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/harmonie-nautique-orchestre-instruments-vent-ville-geneve"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/vivre"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/genf/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "GE",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "365",
+          "value": "363",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -407,69 +407,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Art et IA",
+              "label": "Ari Hoenig Trio",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/art-0"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/hoenig-trio"
             },
             {
-              "label": "ART MARKET! - Marché des créatrices et des créateurs",
+              "label": "COMPLET Formation pour les intervenant.x.es du programme MasculinitéS",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/art-market-marche-creatrices-createurs"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/complet-formation-intervenantxes-programme-masculinites"
             },
             {
-              "label": "Bi-2",
+              "label": "En tant qu'homme, rejoins notre équipe bénévoles MasculinitéS !",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/2"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/tant-quhomme-rejoins-equipe-benevoles-masculinites-0"
             },
             {
-              "label": "Brunch musical du Trio Ernest – Bee Classical",
+              "label": "FILMAR 2026 La chair du mâle est aride – Rubén Barrios Rodríguez",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/brunch-musical-trio-ernest-classical"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/filmar-2026-chair-male-aride-ruben-barrios-rodriguez"
             },
             {
-              "label": "Complet - Visite commentée: Le futur, c'est quoi ?",
+              "label": "MORPHONG",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/visite-commentee-futur-quoi-0"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/morphong"
             },
             {
-              "label": "Des Histoires de la Terre: Archéoptéryx et ses descendants",
+              "label": "PréPro night : MILAN | MACÉO",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/histoires-terre-archeopteryx-descendants"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/prepro-night-milan-maceo"
             },
             {
-              "label": "Des histoires de la Terre: Les minéraux - magie aux mille facettes",
+              "label": "Projection de Manas et table ronde : Rendre visible l'invisible, Ethique et Politique autour de Manas",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/histoires-terre-mineraux-magie-mille-facettes"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/projection-manas-table-ronde-rendre-visible-invisible-ethique-politique-autour-manas"
             },
             {
-              "label": "FILMAR 2026 Projection de Niñas escarlata",
+              "label": "Quatuors de Beethoven",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/filmar-2026-projection-ninas-escarlata"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/quatuors-beethoven"
             },
             {
-              "label": "INITIATION A LA MUSIQUE AFRICAINE AVEC KADER DIABATÉ",
+              "label": "Rencontre avec Anne Bourrassé",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/initiation-musique-africaine-kader-diabate"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/rencontre-anne-bourrasse"
             },
             {
-              "label": "L’Harmonie Nautique, orchestre d’instruments à vent de la Ville de Genève",
+              "label": "VIVRE",
               "detail": "Genève",
-              "date": "2026-11-15",
-              "url": "https://www.geneve.ch/agenda/harmonie-nautique-orchestre-instruments-vent-ville-geneve"
+              "date": "2026-11-16",
+              "url": "https://www.geneve.ch/agenda/vivre"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/geneve/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

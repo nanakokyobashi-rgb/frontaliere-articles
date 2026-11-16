@@ -4,22 +4,22 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "78e6df4a948fd9f884f502d2dde9cb0139b1aef64459fd88afcbce0b78cf75b2",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "f774078b1e9957bf1c08a634ba9aa8c1b36e302c7f6d504bb54362f417e39449",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-14T23:59:59.000Z",
+      "updatedAt": "2026-11-15T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-15T07:16:43.252Z",
+      "updatedAt": "2026-11-16T07:21:34.368Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-14T21:43:27.949Z",
+      "updatedAt": "2026-11-15T22:07:40.362Z",
       "keyFacts": 0
     }
   ],
@@ -33,19 +33,19 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, settimana conclusa: 14 novembre 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, settimana conclusa: 15 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "2",
-          "note": "segnalazioni aggiornate: 15 novembre 2026"
+          "note": "segnalazioni aggiornate: 16 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 8 novembre 2026 – 14 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 9 novembre 2026 – 15 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -67,20 +67,25 @@
             },
             {
               "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
-              "value": "0,4 min",
+              "value": "0,3 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/konstanz-tagerwilen-gottlieber-strasse/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-14T23:59:59.000Z"
+          "updatedAt": "2026-11-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Chiusure, cantieri e disagi",
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
+            {
+              "label": "Revocato: H14 Frauenfeld -> Romanshorn tra Luogo Bürglen E Luogo Sulgen Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-11-16T06:24:00.000Z"
+            },
             {
               "label": "A7 Kreuzlingen -> Winterthur tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Frauenfeld Ost Situazione: problemi di traffico cantiere, lunghezza [km] 1.1 Limitazione del…",
               "value": "Cantiere",
@@ -95,7 +100,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -133,7 +138,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/neue-werkleitungen-fuer-die-nationalstrasse"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -199,7 +204,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "TG",
@@ -210,19 +215,19 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, week ending 14 November 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, week ending 15 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "2",
-          "note": "reports as of 15 November 2026"
+          "note": "reports as of 16 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 8 November 2026 to 14 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 9 November 2026 to 15 November 2026, fastest first.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -244,20 +249,25 @@
             },
             {
               "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
-              "value": "0.4 min",
+              "value": "0.3 min",
               "detail": "49 readings",
               "url": "/en/border-wait/konstanz-tagerwilen-gottlieber-strasse/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-14T23:59:59.000Z"
+          "updatedAt": "2026-11-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Closures, roadworks and disruptions",
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
+            {
+              "label": "Revocato: H14 Frauenfeld -> Romanshorn tra Luogo Bürglen E Luogo Sulgen Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-11-16T06:24:00.000Z"
+            },
             {
               "label": "A7 Kreuzlingen -> Winterthur tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Frauenfeld Ost Situazione: problemi di traffico cantiere, lunghezza [km] 1.1 Limitazione del…",
               "value": "Roadworks",
@@ -272,7 +282,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -310,7 +320,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/neue-werkleitungen-fuer-die-nationalstrasse"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -376,7 +386,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "TG",
@@ -387,19 +397,19 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Diessenhofen – Gailingen am Hochrhein, Woche bis 14. November 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, Woche bis 15. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "2",
-          "note": "Meldungen vom 15. November 2026"
+          "note": "Meldungen vom 16. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 8. November 2026 bis 14. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 9. November 2026 bis 15. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -421,20 +431,25 @@
             },
             {
               "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
-              "value": "0.4 Min.",
+              "value": "0.3 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/konstanz-tagerwilen-gottlieber-strasse/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-14T23:59:59.000Z"
+          "updatedAt": "2026-11-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Sperrungen, Baustellen und Störungen",
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
+            {
+              "label": "Aufgehoben: H14 Frauenfeld -> Romanshorn zwischen Ortschaft Bürglen und Ortschaft Sulgen Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-11-16T06:24:00.000Z"
+            },
             {
               "label": "A7 Kreuzlingen -> Winterthur zwischen Autobahndreieck Verzweigung Grüneck und Anschluss Frauenfeld-Ost Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.1 Verkehrsführung: Fahrbahnverengung auf…",
               "value": "Baustelle",
@@ -449,7 +464,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +502,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/neue-werkleitungen-fuer-die-nationalstrasse"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +568,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "TG",
@@ -564,19 +579,19 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, semaine jusqu’au 14 novembre 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, semaine jusqu’au 15 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "2",
-          "note": "signalements au 15 novembre 2026"
+          "note": "signalements au 16 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 8 novembre 2026 au 14 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 9 novembre 2026 au 15 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -598,20 +613,25 @@
             },
             {
               "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
-              "value": "0,4 min",
+              "value": "0,3 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/konstanz-tagerwilen-gottlieber-strasse/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-14T23:59:59.000Z"
+          "updatedAt": "2026-11-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Fermetures, chantiers et perturbations",
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
+            {
+              "label": "Révoqué: H14 Frauenfeld -> Romanshorn entre Localité Bürglen et Localité Sulgen Situation: trafic en accordéon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-11-16T06:24:00.000Z"
+            },
             {
               "label": "A7 Kreuzlingen -> Winterthur entre Echangeur Echangeur de Grüneck et Jonction autoroutière Frauenfeld-Est Situation: trafic perturbé travaux, longueur [km] 1.1 Gestion du trafic: rétrécissement des…",
               "value": "Chantier",
@@ -626,7 +646,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -664,7 +684,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/neue-werkleitungen-fuer-die-nationalstrasse"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -730,7 +750,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

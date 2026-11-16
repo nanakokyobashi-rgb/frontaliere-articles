@@ -4,12 +4,12 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "29d6b353c73be8b77a24bda5c32c5ee63ef2641905584397c3236b155e2b7f02",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "47c8ed5107fd9dec3b84fb74b5c829055b7e1ca9835a50411e72d06ce69adf14",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T06:24:39.723Z",
+      "updatedAt": "2026-11-15T21:47:09.888Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "111",
+          "value": "97",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "41. SCHWEIZER TISCHTENNIS SENIOREN-EINZELMEISTERSCHAFTEN",
-              "detail": "Frei- und Hallenbad Isenlauf",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/41-schweizer-tischtennis-senioreneinzelmeisterschaften/"
-            },
-            {
-              "label": "Wiehnachtsmärt Meienberg",
-              "detail": "5643 Meienberg, Sins",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wiehnachtsmaert-meienberg/"
-            },
-            {
-              "label": "Theater-Karussell \"Roulé Boulé\"",
-              "detail": "Familienzentrum Karussell Region Baden, Baden",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/theater-karussell-roule-boule/"
-            },
-            {
-              "label": "1. Familienkonzert – Die Bremer Stadtmusikanten",
-              "detail": "Kultur- und Kongresshaus, Aarau",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/1-familienkonzert-die-bremer-stadtmusikanten_AaSx3wT"
-            },
-            {
-              "label": "Saisonschluss mit Indianertopf à la Rolf",
-              "detail": "Zeihen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/saisonschluss-mit-indianertopf-a-la-rolf/"
-            },
-            {
-              "label": "Sekt Matinee & Lesung – Marcel Huwyler im Weinbaumuseum",
-              "detail": "Tegerfelden",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sekt-matinee-lesung-marcel-huwyler-im-weinbaumuseum/"
-            },
-            {
-              "label": "Der Biber am Hallwilersee",
-              "detail": "Beinwil am See",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-biber-am-hallwilersee/"
-            },
-            {
-              "label": "Öffentliche Führung",
+              "label": "Verslimorgen",
               "detail": "Muri AG",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-27/"
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/verslimorgen-7/"
             },
             {
-              "label": "Wildvögel am Rhein",
-              "detail": "Rathaus, Rheinfelden",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildvoegel-am-rhein/"
+              "label": "Matthieu Mazué «Turn of Events»",
+              "detail": "Stadtbistro Isebähnli, Baden",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/matthieu-mazue-turn-of-events_Au5FaE9"
             },
             {
-              "label": "1. Familienkonzert – Die Bremer Stadtmusikanten",
-              "detail": "Stadtsaal, Zofingen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zofingen/1-familienkonzert-die-bremer-stadtmusikanten_Aq6RueU"
+              "label": "Torneo Spin 2 Win 2026",
+              "detail": "Grand Casino Baden, Baden — in corso, ultimo giorno: 26 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/baden/spin-2-win-tournament-2025_A9QeTT5"
+            },
+            {
+              "label": "Unentgeltliche Rechtsauskunft",
+              "detail": "Gemeindeverwaltung Spreitenbach, Spreitenbach — in corso, ultimo giorno: 7 dicembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/spreitenbach/unentgeltliche-rechtsauskunft_ACqjy2P"
+            },
+            {
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park — in corso, ultimo giorno: 28 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+            },
+            {
+              "label": "Frauenbund Muri | Spieltreff für Seniorinnen und Senioren",
+              "detail": "Matterhaus",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/muri-ag/dies-und-das/frauenbund-muri--frauentreff_A210489746"
+            },
+            {
+              "label": "Kurgast",
+              "detail": "Baden",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurgast-1/"
+            },
+            {
+              "label": "Andrew McCormack Trio feat. Kyle Eastwood",
+              "detail": "Konservi, Seon",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/andrew-mccormack-trio-feat-kyle-eastwood_A1GVPne"
+            },
+            {
+              "label": "Kindernami und Liechterwecke mit Live Konzert der \"HINTERWÄLDLER\"",
+              "detail": "Baden",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindernami-und-liechterwecke-mit-live-konzert-der-hinterwaeldler/"
+            },
+            {
+              "label": "Toto und Gschwellti",
+              "detail": "Muri AG",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/toto-und-gschwellti/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "AG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "111",
+          "value": "97",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "41. SCHWEIZER TISCHTENNIS SENIOREN-EINZELMEISTERSCHAFTEN",
-              "detail": "Frei- und Hallenbad Isenlauf",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/41-schweizer-tischtennis-senioreneinzelmeisterschaften/"
-            },
-            {
-              "label": "Wiehnachtsmärt Meienberg",
-              "detail": "5643 Meienberg, Sins",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wiehnachtsmaert-meienberg/"
-            },
-            {
-              "label": "Theater-Karussell \"Roulé Boulé\"",
-              "detail": "Familienzentrum Karussell Region Baden, Baden",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/theater-karussell-roule-boule/"
-            },
-            {
-              "label": "1. Familienkonzert – Die Bremer Stadtmusikanten",
-              "detail": "Kultur- und Kongresshaus, Aarau",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/1-familienkonzert-die-bremer-stadtmusikanten_AaSx3wT"
-            },
-            {
-              "label": "Saisonschluss mit Indianertopf à la Rolf",
-              "detail": "Zeihen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/saisonschluss-mit-indianertopf-a-la-rolf/"
-            },
-            {
-              "label": "Sekt Matinee & Lesung – Marcel Huwyler im Weinbaumuseum",
-              "detail": "Tegerfelden",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sekt-matinee-lesung-marcel-huwyler-im-weinbaumuseum/"
-            },
-            {
-              "label": "Der Biber am Hallwilersee",
-              "detail": "Beinwil am See",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-biber-am-hallwilersee/"
-            },
-            {
-              "label": "Öffentliche Führung",
+              "label": "Verslimorgen",
               "detail": "Muri AG",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-27/"
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/verslimorgen-7/"
             },
             {
-              "label": "Wildvögel am Rhein",
-              "detail": "Rathaus, Rheinfelden",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildvoegel-am-rhein/"
+              "label": "Matthieu Mazué «Turn of Events»",
+              "detail": "Stadtbistro Isebähnli, Baden",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/matthieu-mazue-turn-of-events_Au5FaE9"
             },
             {
-              "label": "1. Familienkonzert – Die Bremer Stadtmusikanten",
-              "detail": "Stadtsaal, Zofingen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zofingen/1-familienkonzert-die-bremer-stadtmusikanten_Aq6RueU"
+              "label": "Spin 2 Win Tournament 2025",
+              "detail": "Grand Casino Baden, Baden — ongoing, last day: 26 November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/baden/spin-2-win-tournament-2025_A9QeTT5"
+            },
+            {
+              "label": "Unentgeltliche Rechtsauskunft",
+              "detail": "Gemeindeverwaltung Spreitenbach, Spreitenbach — ongoing, last day: 7 December 2026",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/spreitenbach/unentgeltliche-rechtsauskunft_ACqjy2P"
+            },
+            {
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park — ongoing, last day: 28 November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+            },
+            {
+              "label": "Frauenbund Muri | Spieltreff für Seniorinnen und Senioren",
+              "detail": "Matterhaus",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/muri-ag/dies-und-das/frauenbund-muri--frauentreff_A210489746"
+            },
+            {
+              "label": "Kurgast",
+              "detail": "Baden",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurgast-1/"
+            },
+            {
+              "label": "Andrew McCormack Trio feat. Kyle Eastwood",
+              "detail": "Konservi, Seon",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/andrew-mccormack-trio-feat-kyle-eastwood_A1GVPne"
+            },
+            {
+              "label": "Kindernami und Liechterwecke mit Live Konzert der \"HINTERWÄLDLER\"",
+              "detail": "Baden",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindernami-und-liechterwecke-mit-live-konzert-der-hinterwaeldler/"
+            },
+            {
+              "label": "Toto und Gschwellti",
+              "detail": "Muri AG",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/toto-und-gschwellti/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "AG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "111",
+          "value": "97",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "41. SCHWEIZER TISCHTENNIS SENIOREN-EINZELMEISTERSCHAFTEN",
-              "detail": "Frei- und Hallenbad Isenlauf",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/41-schweizer-tischtennis-senioreneinzelmeisterschaften/"
-            },
-            {
-              "label": "Wiehnachtsmärt Meienberg",
-              "detail": "5643 Meienberg, Sins",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wiehnachtsmaert-meienberg/"
-            },
-            {
-              "label": "Theater-Karussell \"Roulé Boulé\"",
-              "detail": "Familienzentrum Karussell Region Baden, Baden",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/theater-karussell-roule-boule/"
-            },
-            {
-              "label": "1. Familienkonzert – Die Bremer Stadtmusikanten",
-              "detail": "Kultur- und Kongresshaus, Aarau",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/1-familienkonzert-die-bremer-stadtmusikanten_AaSx3wT"
-            },
-            {
-              "label": "Saisonschluss des Vogelparks Ambigua mit Indianertopf à la Rolf",
-              "detail": "Zeihen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/saisonschluss-mit-indianertopf-a-la-rolf/"
-            },
-            {
-              "label": "Sekt Matinee & Lesung – Marcel Huwyler im Weinbaumuseum",
-              "detail": "Tegerfelden",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sekt-matinee-lesung-marcel-huwyler-im-weinbaumuseum/"
-            },
-            {
-              "label": "Der Biber am Hallwilersee",
-              "detail": "Beinwil am See",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-biber-am-hallwilersee/"
-            },
-            {
-              "label": "Öffentliche Führung",
+              "label": "Verslimorgen",
               "detail": "Muri AG",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-27/"
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/verslimorgen-7/"
             },
             {
-              "label": "Wildvögel am Rhein",
-              "detail": "Rathaus, Rheinfelden",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildvoegel-am-rhein/"
+              "label": "Matthieu Mazué «Turn of Events»",
+              "detail": "Stadtbistro Isebähnli, Baden",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/matthieu-mazue-turn-of-events_Au5FaE9"
             },
             {
-              "label": "1. Familienkonzert – Die Bremer Stadtmusikanten",
-              "detail": "Stadtsaal, Zofingen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zofingen/1-familienkonzert-die-bremer-stadtmusikanten_Aq6RueU"
+              "label": "Spin 2 Win Tournament 2026",
+              "detail": "Grand Casino Baden, Baden — läuft, letzter Tag: 26. November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/baden/spin-2-win-tournament-2025_A9QeTT5"
+            },
+            {
+              "label": "Unentgeltliche Rechtsauskunft",
+              "detail": "Gemeindeverwaltung Spreitenbach, Spreitenbach — läuft, letzter Tag: 7. Dezember 2026",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/spreitenbach/unentgeltliche-rechtsauskunft_ACqjy2P"
+            },
+            {
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park — läuft, letzter Tag: 28. November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+            },
+            {
+              "label": "Frauenbund Muri | Spieltreff für Seniorinnen und Senioren",
+              "detail": "Matterhaus",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/muri-ag/dies-und-das/frauenbund-muri--frauentreff_A210489746"
+            },
+            {
+              "label": "Kurgast",
+              "detail": "Baden",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurgast-1/"
+            },
+            {
+              "label": "Andrew McCormack Trio feat. Kyle Eastwood",
+              "detail": "Konservi, Seon",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/andrew-mccormack-trio-feat-kyle-eastwood_A1GVPne"
+            },
+            {
+              "label": "Kindernami und Liechterwecke mit Live Konzert der \"HINTERWÄLDLER\"",
+              "detail": "Baden",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindernami-und-liechterwecke-mit-live-konzert-der-hinterwaeldler/"
+            },
+            {
+              "label": "Toto und Gschwellti",
+              "detail": "Muri AG",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/toto-und-gschwellti/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "AG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "111",
+          "value": "97",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "41. SCHWEIZER TISCHTENNIS SENIOREN-EINZELMEISTERSCHAFTEN",
-              "detail": "Frei- und Hallenbad Isenlauf",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/41-schweizer-tischtennis-senioreneinzelmeisterschaften/"
-            },
-            {
-              "label": "Wiehnachtsmärt Meienberg",
-              "detail": "5643 Meienberg, Sins",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wiehnachtsmaert-meienberg/"
-            },
-            {
-              "label": "Theater-Karussell \"Roulé Boulé\"",
-              "detail": "Familienzentrum Karussell Region Baden, Baden",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/theater-karussell-roule-boule/"
-            },
-            {
-              "label": "1. Familienkonzert – Die Bremer Stadtmusikanten",
-              "detail": "Kultur- und Kongresshaus, Aarau",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/1-familienkonzert-die-bremer-stadtmusikanten_AaSx3wT"
-            },
-            {
-              "label": "Saisonschluss mit Indianertopf à la Rolf",
-              "detail": "Zeihen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/saisonschluss-mit-indianertopf-a-la-rolf/"
-            },
-            {
-              "label": "Sekt Matinee & Lesung – Marcel Huwyler im Weinbaumuseum",
-              "detail": "Tegerfelden",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sekt-matinee-lesung-marcel-huwyler-im-weinbaumuseum/"
-            },
-            {
-              "label": "Der Biber am Hallwilersee",
-              "detail": "Beinwil am See",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-biber-am-hallwilersee/"
-            },
-            {
-              "label": "Öffentliche Führung",
+              "label": "Verslimorgen",
               "detail": "Muri AG",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-27/"
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/verslimorgen-7/"
             },
             {
-              "label": "Wildvögel am Rhein",
-              "detail": "Rathaus, Rheinfelden",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildvoegel-am-rhein/"
+              "label": "Matthieu Mazué «Turn of Events»",
+              "detail": "Stadtbistro Isebähnli, Baden",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/matthieu-mazue-turn-of-events_Au5FaE9"
             },
             {
-              "label": "1. Familienkonzert – Die Bremer Stadtmusikanten",
-              "detail": "Stadtsaal, Zofingen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zofingen/1-familienkonzert-die-bremer-stadtmusikanten_Aq6RueU"
+              "label": "Tournoi Spin 2 Win 2026",
+              "detail": "Grand Casino Baden, Baden — en cours, dernier jour : 26 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/baden/spin-2-win-tournament-2025_A9QeTT5"
+            },
+            {
+              "label": "Unentgeltliche Rechtsauskunft",
+              "detail": "Gemeindeverwaltung Spreitenbach, Spreitenbach — en cours, dernier jour : 7 décembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/spreitenbach/unentgeltliche-rechtsauskunft_ACqjy2P"
+            },
+            {
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park — en cours, dernier jour : 28 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+            },
+            {
+              "label": "Frauenbund Muri | Spieltreff für Seniorinnen und Senioren",
+              "detail": "Matterhaus",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/muri-ag/dies-und-das/frauenbund-muri--frauentreff_A210489746"
+            },
+            {
+              "label": "Kurgast",
+              "detail": "Baden",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurgast-1/"
+            },
+            {
+              "label": "Andrew McCormack Trio feat. Kyle Eastwood",
+              "detail": "Konservi, Seon",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/andrew-mccormack-trio-feat-kyle-eastwood_A1GVPne"
+            },
+            {
+              "label": "Kindernami und Liechterwecke mit Live Konzert der \"HINTERWÄLDLER\"",
+              "detail": "Baden",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindernami-und-liechterwecke-mit-live-konzert-der-hinterwaeldler/"
+            },
+            {
+              "label": "Toto und Gschwellti",
+              "detail": "Muri AG",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/toto-und-gschwellti/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

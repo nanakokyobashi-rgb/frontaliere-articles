@@ -4,27 +4,22 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "69b6325dc9504921a0f64063e2ddf72c1e727071a525eb241276e29fe8d07326",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "b6e073c0dbcc6e9dfc395ed6c5537dc2d3e98c440886f6ac801479ddb8da812b",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-11-08T11:18:20.402Z",
-      "keyFacts": 1
-    },
-    {
-      "id": "aste-targhe",
-      "updatedAt": "2026-11-15T06:26:36.869Z",
+      "updatedAt": "2026-11-15T11:58:26.359Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-15T06:51:41.323Z",
+      "updatedAt": "2026-11-16T06:51:00.113Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-14T21:43:27.949Z",
+      "updatedAt": "2026-11-15T22:07:40.362Z",
       "keyFacts": 0
     }
   ],
@@ -40,11 +35,6 @@
           "value": "582,80 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
-        },
-        {
-          "label": "Aste di targhe in corso",
-          "value": "5",
-          "note": "offerta mediana 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -66,38 +56,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-08T11:18:20.402Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Aste delle targhe",
-          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
-          "items": [
-            {
-              "label": "VS406",
-              "value": "5200 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-16T14:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=947&locale=fr_CH"
-            },
-            {
-              "label": "VS89198",
-              "value": "950 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-16T14:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=948&locale=fr_CH"
-            },
-            {
-              "label": "VS601111",
-              "value": "300 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-16T14:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=951&locale=fr_CH"
-            }
-          ],
-          "sourceName": "Ufficio cantonale della circolazione",
-          "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-11-15T06:26:36.869Z"
+          "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
           "id": "meteo",
@@ -107,11 +66,11 @@
             {
               "label": "Sion",
               "value": "6 °C",
-              "detail": "oggi da 6 a 12 °C"
+              "detail": "oggi da 5 a 10 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-15T06:51:41.323Z"
+          "updatedAt": "2026-11-16T06:51:00.113Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -149,7 +108,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51561272"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -229,7 +188,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "VS",
@@ -242,11 +201,6 @@
           "value": "582.80 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
-        },
-        {
-          "label": "Plate auctions running",
-          "value": "5",
-          "note": "typical bid 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -268,38 +222,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-08T11:18:20.402Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Number plate auctions",
-          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
-          "items": [
-            {
-              "label": "VS406",
-              "value": "5,200 CHF",
-              "detail": "current bid",
-              "date": "2026-11-16T14:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=947&locale=fr_CH"
-            },
-            {
-              "label": "VS89198",
-              "value": "950 CHF",
-              "detail": "current bid",
-              "date": "2026-11-16T14:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=948&locale=fr_CH"
-            },
-            {
-              "label": "VS601111",
-              "value": "300 CHF",
-              "detail": "current bid",
-              "date": "2026-11-16T14:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=951&locale=fr_CH"
-            }
-          ],
-          "sourceName": "Cantonal road traffic office",
-          "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-11-15T06:26:36.869Z"
+          "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
           "id": "meteo",
@@ -309,11 +232,11 @@
             {
               "label": "Sion",
               "value": "6 °C",
-              "detail": "today from 6 to 12 °C"
+              "detail": "today from 5 to 10 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-15T06:51:41.323Z"
+          "updatedAt": "2026-11-16T06:51:00.113Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -351,7 +274,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51561272"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -427,7 +350,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "VS",
@@ -440,11 +363,6 @@
           "value": "582.80 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
-        },
-        {
-          "label": "Laufende Kontrollschild-Auktionen",
-          "value": "5",
-          "note": "mittleres Gebot 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -466,38 +384,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-08T11:18:20.402Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Kontrollschild-Auktionen",
-          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
-          "items": [
-            {
-              "label": "VS406",
-              "value": "5’200 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-16T14:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=947&locale=fr_CH"
-            },
-            {
-              "label": "VS89198",
-              "value": "950 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-16T14:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=948&locale=fr_CH"
-            },
-            {
-              "label": "VS601111",
-              "value": "300 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-16T14:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=951&locale=fr_CH"
-            }
-          ],
-          "sourceName": "Kantonales Strassenverkehrsamt",
-          "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-11-15T06:26:36.869Z"
+          "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
           "id": "meteo",
@@ -507,11 +394,11 @@
             {
               "label": "Sion",
               "value": "6 °C",
-              "detail": "heute 6 bis 12 °C"
+              "detail": "heute 5 bis 10 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-15T06:51:41.323Z"
+          "updatedAt": "2026-11-16T06:51:00.113Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -549,7 +436,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51561272"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -625,7 +512,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "VS",
@@ -638,11 +525,6 @@
           "value": "582,80 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
-        },
-        {
-          "label": "Enchères de plaques en cours",
-          "value": "5",
-          "note": "offre centrale 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -664,38 +546,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-08T11:18:20.402Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Enchères de plaques",
-          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
-          "items": [
-            {
-              "label": "VS406",
-              "value": "5 200 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-16T14:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=947&locale=fr_CH"
-            },
-            {
-              "label": "VS89198",
-              "value": "950 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-16T14:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=948&locale=fr_CH"
-            },
-            {
-              "label": "VS601111",
-              "value": "300 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-16T14:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=951&locale=fr_CH"
-            }
-          ],
-          "sourceName": "Office cantonal de la circulation",
-          "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-11-15T06:26:36.869Z"
+          "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
           "id": "meteo",
@@ -705,11 +556,11 @@
             {
               "label": "Sion",
               "value": "6 °C",
-              "detail": "aujourd’hui de 6 à 12 °C"
+              "detail": "aujourd’hui de 5 à 10 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-15T06:51:41.323Z"
+          "updatedAt": "2026-11-16T06:51:00.113Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -747,7 +598,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51561272"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -819,7 +670,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

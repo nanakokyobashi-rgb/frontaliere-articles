@@ -4,12 +4,12 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "eventi",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "51102a64f14c7f3ea6e471cf8ff98614fab21700ec112f9a6213d9d8070bc9c6",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "65b78ba9a3275d0dc669c65abe9fc6271e5548842be44410f5e89d977cd70f97",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T06:24:39.723Z",
+      "updatedAt": "2026-11-15T21:47:09.888Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "22",
+          "value": "21",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,21 +33,9 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "DOROTHEA – Jubiläumsausgabe",
-              "detail": "Pfarr- und Wallfahrtskirche Sachseln, Sachseln, Sachseln",
-              "date": "2026-11-15",
-              "url": "https://www.ow.ch/anlaesseaktuelles/92911"
-            },
-            {
-              "label": "Disco Revival Vol 8",
-              "detail": "freeheit, Hotel Krone, Sarnen, Sarnen — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.ow.ch/anlaesseaktuelles/91177"
-            },
-            {
               "label": "L’autunno benefico dei cuochi della Gilda",
               "detail": "Gesamte Schweiz, Sachseln — in corso, ultimo giorno: 4 dicembre 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/evenements/ceci-cela/suisse-sans-indication-de-lieu/lautomne-caritatif-de-la-guilde_A4bgNcf"
             },
             {
@@ -91,11 +79,23 @@
               "detail": "Sarnen",
               "date": "2026-11-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kulinarik-italianita-der-extraklasse-galadinner/"
+            },
+            {
+              "label": "Kulinarik & Italianità der Extraklasse Gala-Dinner AUSGEBUCHT Warteliste",
+              "detail": "Residenz Am Schärme, Sarnen",
+              "date": "2026-11-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sarnen/kulinarik-und-italianita-der-extraklasse-gala-dinner_AHTDjar"
+            },
+            {
+              "label": "Adventszauber Kollegi-Gärtnerei",
+              "detail": "Kollegi Gärtnerei, Sarnen, Sarnen",
+              "date": "2026-11-21",
+              "url": "https://www.ow.ch/anlaesseaktuelles/94438"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/obvaldo/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/obvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "OW",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "22",
+          "value": "21",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,21 +138,9 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "DOROTHEA – Jubiläumsausgabe",
-              "detail": "Pfarr- und Wallfahrtskirche Sachseln, Sachseln, Sachseln",
-              "date": "2026-11-15",
-              "url": "https://www.ow.ch/anlaesseaktuelles/92911"
-            },
-            {
-              "label": "Disco Revival Vol 8",
-              "detail": "freeheit, Hotel Krone, Sarnen, Sarnen — ongoing, last day: 15 November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.ow.ch/anlaesseaktuelles/91177"
-            },
-            {
               "label": "Gilde Charity Herbst",
               "detail": "Gesamte Schweiz, Sachseln — ongoing, last day: 4 December 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/evenements/ceci-cela/suisse-sans-indication-de-lieu/lautomne-caritatif-de-la-guilde_A4bgNcf"
             },
             {
@@ -196,11 +184,23 @@
               "detail": "Sarnen",
               "date": "2026-11-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kulinarik-italianita-der-extraklasse-galadinner/"
+            },
+            {
+              "label": "Kulinarik & Italianità der Extraklasse Gala-Dinner AUSGEBUCHT Warteliste",
+              "detail": "Residenz Am Schärme, Sarnen",
+              "date": "2026-11-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sarnen/kulinarik-und-italianita-der-extraklasse-gala-dinner_AHTDjar"
+            },
+            {
+              "label": "Adventszauber Kollegi-Gärtnerei",
+              "detail": "Kollegi Gärtnerei, Sarnen, Sarnen",
+              "date": "2026-11-21",
+              "url": "https://www.ow.ch/anlaesseaktuelles/94438"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/obwalden/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/obwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "OW",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "22",
+          "value": "21",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,21 +243,9 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "DOROTHEA – Jubiläumsausgabe",
-              "detail": "Pfarr- und Wallfahrtskirche Sachseln, Sachseln, Sachseln",
-              "date": "2026-11-15",
-              "url": "https://www.ow.ch/anlaesseaktuelles/92911"
-            },
-            {
-              "label": "Disco Revival Vol 8",
-              "detail": "freeheit, Hotel Krone, Sarnen, Sarnen — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.ow.ch/anlaesseaktuelles/91177"
-            },
-            {
               "label": "Gilde Charity Herbst",
               "detail": "Gesamte Schweiz, Sachseln — läuft, letzter Tag: 4. Dezember 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/evenements/ceci-cela/suisse-sans-indication-de-lieu/lautomne-caritatif-de-la-guilde_A4bgNcf"
             },
             {
@@ -301,11 +289,23 @@
               "detail": "Sarnen",
               "date": "2026-11-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kulinarik-italianita-der-extraklasse-galadinner/"
+            },
+            {
+              "label": "Kulinarik & Italianità der Extraklasse Gala-Dinner AUSGEBUCHT Warteliste",
+              "detail": "Residenz Am Schärme, Sarnen",
+              "date": "2026-11-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sarnen/kulinarik-und-italianita-der-extraklasse-gala-dinner_AHTDjar"
+            },
+            {
+              "label": "Adventszauber Kollegi-Gärtnerei",
+              "detail": "Kollegi Gärtnerei, Sarnen, Sarnen",
+              "date": "2026-11-21",
+              "url": "https://www.ow.ch/anlaesseaktuelles/94438"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/obwalden/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/obwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "OW",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "22",
+          "value": "21",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,21 +348,9 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "DOROTHEA – Jubiläumsausgabe",
-              "detail": "Pfarr- und Wallfahrtskirche Sachseln, Sachseln, Sachseln",
-              "date": "2026-11-15",
-              "url": "https://www.ow.ch/anlaesseaktuelles/92911"
-            },
-            {
-              "label": "Disco Revival Vol 8",
-              "detail": "freeheit, Hotel Krone, Sarnen, Sarnen — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.ow.ch/anlaesseaktuelles/91177"
-            },
-            {
               "label": "L’automne caritatif de la Guilde",
               "detail": "Gesamte Schweiz, Sachseln — en cours, dernier jour : 4 décembre 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/evenements/ceci-cela/suisse-sans-indication-de-lieu/lautomne-caritatif-de-la-guilde_A4bgNcf"
             },
             {
@@ -406,11 +394,23 @@
               "detail": "Sarnen",
               "date": "2026-11-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kulinarik-italianita-der-extraklasse-galadinner/"
+            },
+            {
+              "label": "Kulinarik & Italianità der Extraklasse Gala-Dinner AUSGEBUCHT Warteliste",
+              "detail": "Residenz Am Schärme, Sarnen",
+              "date": "2026-11-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sarnen/kulinarik-und-italianita-der-extraklasse-gala-dinner_AHTDjar"
+            },
+            {
+              "label": "Adventszauber Kollegi-Gärtnerei",
+              "detail": "Kollegi Gärtnerei, Sarnen, Sarnen",
+              "date": "2026-11-21",
+              "url": "https://www.ow.ch/anlaesseaktuelles/94438"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/obwald/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/obwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

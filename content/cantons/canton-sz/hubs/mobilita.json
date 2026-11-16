@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "mobilita",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "ffb75f4098c78a95351c0d28268a737dc131889607dd0d4cd3335e958e4d5cd6",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "c8b81dcd07879da39dae12c7c6571df08c33d2aabcca423ae92d3ecb9affbe30",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-15T07:16:43.252Z",
+      "updatedAt": "2026-11-16T07:21:34.368Z",
       "keyFacts": 2
     }
   ],
@@ -23,12 +23,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "3",
-          "note": "segnalazioni aggiornate: 15 novembre 2026"
+          "note": "segnalazioni aggiornate: 16 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "7",
-          "note": "segnalazioni aggiornate: 15 novembre 2026"
+          "value": "5",
+          "note": "segnalazioni aggiornate: 16 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -80,14 +80,14 @@
               "date": "2026-11-11T18:24:00.000Z"
             },
             {
-              "label": "A3 Zürich -> Chur tra Galleria Galleria Altendorf E Raccordo autostradale Diramazione Reichenburg Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Limitazione del traffico: corsie…",
+              "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Reichenburg E Svincolo autostradale Lachen Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Limitazione del traffico: nuova…",
               "value": "Cantiere",
-              "detail": "fine prevista: 16 novembre 2026",
-              "date": "2026-11-13T12:33:00.000Z"
+              "detail": "fine prevista: 17 novembre 2026",
+              "date": "2026-11-13T13:30:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         }
       ],
       "curatedArticles": [
@@ -121,7 +121,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "SZ",
@@ -132,12 +132,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "3",
-          "note": "reports as of 15 November 2026"
+          "note": "reports as of 16 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "7",
-          "note": "reports as of 15 November 2026"
+          "value": "5",
+          "note": "reports as of 16 November 2026"
         }
       ],
       "dataBlocks": [
@@ -189,14 +189,14 @@
               "date": "2026-11-11T18:24:00.000Z"
             },
             {
-              "label": "A3 Zürich -> Chur tra Galleria Galleria Altendorf E Raccordo autostradale Diramazione Reichenburg Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Limitazione del traffico: corsie…",
+              "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Reichenburg E Svincolo autostradale Lachen Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Limitazione del traffico: nuova…",
               "value": "Roadworks",
-              "detail": "until 16 November 2026",
-              "date": "2026-11-13T12:33:00.000Z"
+              "detail": "until 17 November 2026",
+              "date": "2026-11-13T13:30:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         }
       ],
       "curatedArticles": [
@@ -230,7 +230,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "SZ",
@@ -241,12 +241,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "3",
-          "note": "Meldungen vom 15. November 2026"
+          "note": "Meldungen vom 16. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "7",
-          "note": "Meldungen vom 15. November 2026"
+          "value": "5",
+          "note": "Meldungen vom 16. November 2026"
         }
       ],
       "dataBlocks": [
@@ -298,14 +298,14 @@
               "date": "2026-11-11T18:24:00.000Z"
             },
             {
-              "label": "A3 Zürich -> Chur zwischen Tunnel Altendorf-Tunnel und Autobahndreieck Verzweigung Reichenburg Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.5 Verkehrsführung: Fahrbahnverengung auf einen…",
+              "label": "A3 Chur -> Zürich zwischen Autobahndreieck Verzweigung Reichenburg und Anschluss Lachen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.5 Verkehrsführung: veränderte Verkehrsführung auf einen…",
               "value": "Baustelle",
-              "detail": "bis 16. November 2026",
-              "date": "2026-11-13T12:33:00.000Z"
+              "detail": "bis 17. November 2026",
+              "date": "2026-11-13T13:30:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         }
       ],
       "curatedArticles": [
@@ -339,7 +339,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "SZ",
@@ -350,12 +350,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "3",
-          "note": "signalements au 15 novembre 2026"
+          "note": "signalements au 16 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "7",
-          "note": "signalements au 15 novembre 2026"
+          "value": "5",
+          "note": "signalements au 16 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -407,14 +407,14 @@
               "date": "2026-11-11T18:24:00.000Z"
             },
             {
-              "label": "A3 Zurich -> Coire entre Tunnel Tunnel d'Altendorf et Echangeur Echangeur de Reichenburg Situation: trafic perturbé travaux, longueur [km] 0.5 Gestion du trafic: rétrécissement des voies sur une…",
+              "label": "A3 Coire -> Zurich entre Echangeur Echangeur de Reichenburg et Jonction autoroutière Lachen Situation: trafic perturbé travaux, longueur [km] 0.5 Gestion du trafic: nouveau plan de circulation sur…",
               "value": "Chantier",
-              "detail": "jusqu’au 16 novembre 2026",
-              "date": "2026-11-13T12:33:00.000Z"
+              "detail": "jusqu’au 17 novembre 2026",
+              "date": "2026-11-13T13:30:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         }
       ],
       "curatedArticles": [
@@ -448,7 +448,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "534d9c50d5e48b180496c8f487c0b0da8596ce34c6c49306a16b02b99f3e0260",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "f4350020bc69cbc29fa6be1896aafe756c55158da88ba706335b12cdeb98930c",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T06:24:39.723Z",
+      "updatedAt": "2026-11-15T21:47:09.888Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "17",
+          "value": "15",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,27 +33,15 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Visita guidata pubblica al Museo dell'Appenzello",
-              "detail": "Museum Appenzell, Appenzell",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/appenzell/public-guided-tour-of-the-appenzell-museum_AaS25tX"
-            },
-            {
               "label": "Evento di intrattenimento Saumchörli Herisau",
               "detail": "Casino Herisau, Herisau — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/events/herisau/entertainment-event-saumchoerli-herisau_AtYAVwh"
-            },
-            {
-              "label": "Fiera \"A26",
-              "detail": "Appenzello — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
             },
             {
               "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
               "detail": "Kloster Maria der Engel — in corso, ultimo giorno: 9 dicembre 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
@@ -91,11 +79,23 @@
               "detail": "Schulhaus Gringel, Appenzell",
               "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/benfizkonzert-apacella/"
+            },
+            {
+              "label": "Serata appenzellese con il \"Trio Kellerheims im\"",
+              "detail": "Hotel Heiden, Heiden",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/appenzeller-abend-mit-den-kellerheims-im-trio/"
+            },
+            {
+              "label": "Loredana & Kilian - Perché lei/lui è così?",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/herisau/loredana-und-kilian-why-is-shehe-like-that_AKTJwTc"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "17",
+          "value": "15",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,27 +144,15 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Public guided tour of the Appenzell Museum",
-              "detail": "Museum Appenzell, Appenzell",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/appenzell/public-guided-tour-of-the-appenzell-museum_AaS25tX"
-            },
-            {
               "label": "Entertainment event Saumchörli Herisau",
               "detail": "Casino Herisau, Herisau — ongoing, last day: 22 November 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/events/herisau/entertainment-event-saumchoerli-herisau_AtYAVwh"
-            },
-            {
-              "label": "Trade fair \"A26\"",
-              "detail": "Appenzello — ongoing, last day: 15 November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
             },
             {
               "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
               "detail": "Kloster Maria der Engel — ongoing, last day: 9 December 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
@@ -202,11 +190,23 @@
               "detail": "Schulhaus Gringel, Appenzell",
               "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/benfizkonzert-apacella/"
+            },
+            {
+              "label": "Appenzell evening with the \"Kellerheims im Trio\"",
+              "detail": "Hotel Heiden, Heiden",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/appenzeller-abend-mit-den-kellerheims-im-trio/"
+            },
+            {
+              "label": "Loredana & Kilian - Why is SHE/HE like that?",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/herisau/loredana-und-kilian-why-is-shehe-like-that_AKTJwTc"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "17",
+          "value": "15",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,27 +255,15 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Öffentliche Führung durch das Museum Appenzell",
-              "detail": "Museum Appenzell, Appenzell",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/appenzell/public-guided-tour-of-the-appenzell-museum_AaS25tX"
-            },
-            {
               "label": "Unterhaltungsanlass Saumchörli Herisau",
               "detail": "Casino Herisau, Herisau — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/events/herisau/entertainment-event-saumchoerli-herisau_AtYAVwh"
-            },
-            {
-              "label": "Gewerbemesse «A26»",
-              "detail": "Appenzello — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
             },
             {
               "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
               "detail": "Kloster Maria der Engel — läuft, letzter Tag: 9. Dezember 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
@@ -313,11 +301,23 @@
               "detail": "Schulhaus Gringel, Appenzell",
               "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/benfizkonzert-apacella/"
+            },
+            {
+              "label": "Appenzeller Abend mit den \"Kellerheims im Trio\"",
+              "detail": "Hotel Heiden, Heiden",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/appenzeller-abend-mit-den-kellerheims-im-trio/"
+            },
+            {
+              "label": "Loredana & Kilian - Warum ist SIE/ER so?",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/herisau/loredana-und-kilian-why-is-shehe-like-that_AKTJwTc"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "17",
+          "value": "15",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,27 +366,15 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Visite guidée publique du musée d'Appenzell",
-              "detail": "Museum Appenzell, Appenzell",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/appenzell/public-guided-tour-of-the-appenzell-museum_AaS25tX"
-            },
-            {
               "label": "Manifestation de divertissement Saumchörli Herisau",
               "detail": "Casino Herisau, Herisau — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/events/herisau/entertainment-event-saumchoerli-herisau_AtYAVwh"
-            },
-            {
-              "label": "Foire commerciale \"A26",
-              "detail": "Appenzello — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
             },
             {
               "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
               "detail": "Kloster Maria der Engel — en cours, dernier jour : 9 décembre 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
@@ -424,11 +412,23 @@
               "detail": "Schulhaus Gringel, Appenzell",
               "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/benfizkonzert-apacella/"
+            },
+            {
+              "label": "Soirée appenzelloise avec les \"Kellerheims en trio",
+              "detail": "Hotel Heiden, Heiden",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/appenzeller-abend-mit-den-kellerheims-im-trio/"
+            },
+            {
+              "label": "Loredana & Kilian - Pourquoi est-elle/il comme ça ?",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/herisau/loredana-und-kilian-why-is-shehe-like-that_AKTJwTc"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

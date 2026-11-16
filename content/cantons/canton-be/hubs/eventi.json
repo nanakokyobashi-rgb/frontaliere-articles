@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "c299f6bafb26b4d6207336c5c6d708a5fdcaa3a4aafe225fc93eb1da35658652",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "16407416e284bddae7bd73b50a654c4838dcfc4a47799740e01f65b56f098002",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T06:24:39.723Z",
+      "updatedAt": "2026-11-15T21:47:09.888Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "179",
+          "value": "169",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Open Take Club - Actake",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/open-take-club-actake/"
+              "label": "Soirée d'Échecs / Schachabend",
+              "detail": "Multimondo, Biel/Bienne",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/soiree-dechecs-schachabend-2/"
             },
             {
-              "label": "Prof. Nicola Gess / Dr. Lisz Hirn",
-              "detail": "Farelhaus, Biel/Bienne",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/prof-nicola-gess-dr-lisz-hirn/"
+              "label": "Fatoumata Diawara",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/rubigen/fatoumata-diawara_ADGYb7A"
             },
             {
-              "label": "Walter und Christine Blatti im Schlosskeller Interlaken",
-              "detail": "Schlosskeller Interlaken, Interlaken",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/interlaken/walter-und-christine-blatti-im-schlosskeller-interlaken_AZBLx6t"
+              "label": "Jon Cleary",
+              "detail": "Bierhübeli",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/jon-cleary_A1B64wC"
             },
             {
-              "label": "Prof. Philipp Hübl: „Die Wahrheit und ihre Feinde“",
-              "detail": "Farelhaus, Biel/Bienne",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/prof-philipp-huebl-die-wahrheit-und-ihre-feinde/"
+              "label": "Adventskranz Work-Shop/ Kurs inkl. Prosecco und Tea Time",
+              "detail": "Bern — in corso, ultimo giorno: 29 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-workshop-kurs-inkl-prosecco-und-tea-time/"
             },
             {
-              "label": "Bolschoi Don Kosaken 2026",
-              "detail": "Französische Kirche",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/bolschoi-don-kosaken-2026_AmuAxEj"
+              "label": "Sound and Dine",
+              "detail": "3775 Lenk im Simmental, Lenk — in corso, ultimo giorno: 2 dicembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/sound-and-dine/"
             },
             {
-              "label": "Der Nussknacker - International Ballet Company Italia",
-              "detail": "Kursaal Bern, Bern",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/der-nussknacker-international-ballet-company-italia_AJSK9wB"
+              "label": "Jugendtreff Modi*hus Bienzguet",
+              "detail": "Modi*hus Bienzguet — in corso, ultimo giorno: 4 dicembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-modihus-bienzguet_A1S6STm"
             },
             {
-              "label": "Rundgang für Gross und Klein",
-              "detail": "Thun",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rundgang-fuer-gross-und-klein/"
+              "label": "Jugendtreff G23",
+              "detail": "Jugendhaus G23 — in corso, ultimo giorno: 4 dicembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-g23_AjHXNJ3"
             },
             {
-              "label": "Berner Musikkollegium – Orchesterfarben und Klangfülle",
-              "detail": "Gemeindezentrum Lötschberg, Spiez",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/spiez/berner-musikkollegium-herbstkonzert-2026_Aer9FYq"
+              "label": "Zischtig Karaoke in der Gemmi Taverne",
+              "detail": "Kandersteg — in corso, ultimo giorno: 24 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
             },
             {
-              "label": "Voilà ce que je peux dire de mieux sur la musique !",
-              "detail": "Biel",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/voila-ce-que-je-peux-dire-de-mieux-sur-la-musique/"
+              "label": "Saaner Abesitza 2026",
+              "detail": "Saanen — in corso, ultimo giorno: 18 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/saaner-abesitza/"
             },
             {
-              "label": "The Two",
-              "detail": "Sportzentrum Frutigen, Frutigen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/music/frutigen/the-two_AFstQNc"
+              "label": "moving moments",
+              "detail": "Sporthalle Ebnit, Saanen — in corso, ultimo giorno: 29 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "179",
+          "value": "169",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Open Take Club - Actake",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/open-take-club-actake/"
+              "label": "Soirée d'Échecs / Schachabend",
+              "detail": "Multimondo, Biel/Bienne",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/soiree-dechecs-schachabend-2/"
             },
             {
-              "label": "Prof. Nicola Gess / Dr. Lisz Hirn",
-              "detail": "Farelhaus, Biel/Bienne",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/prof-nicola-gess-dr-lisz-hirn/"
+              "label": "Fatoumata Diawara",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/rubigen/fatoumata-diawara_ADGYb7A"
             },
             {
-              "label": "Walter and Christine Blatti at Schlosskeller Interlaken",
-              "detail": "Schlosskeller Interlaken, Interlaken",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/interlaken/walter-und-christine-blatti-im-schlosskeller-interlaken_AZBLx6t"
+              "label": "Jon Cleary",
+              "detail": "Bierhübeli",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/jon-cleary_A1B64wC"
             },
             {
-              "label": "Prof. Philipp Hübl: „Die Wahrheit und ihre Feinde“",
-              "detail": "Farelhaus, Biel/Bienne",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/prof-philipp-huebl-die-wahrheit-und-ihre-feinde/"
+              "label": "Adventskranz Work-Shop/ Kurs inkl. Prosecco und Tea Time",
+              "detail": "Bern — ongoing, last day: 29 November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-workshop-kurs-inkl-prosecco-und-tea-time/"
             },
             {
-              "label": "Bolschoi Don Kosaken 2026",
-              "detail": "Französische Kirche",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/bolschoi-don-kosaken-2026_AmuAxEj"
+              "label": "Sound and Dine",
+              "detail": "3775 Lenk im Simmental, Lenk — ongoing, last day: 2 December 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/sound-and-dine/"
             },
             {
-              "label": "Der Nussknacker - International Ballet Company Italy",
-              "detail": "Kursaal Bern, Bern",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/der-nussknacker-international-ballet-company-italia_AJSK9wB"
+              "label": "Jugendtreff Modi*hus Bienzguet",
+              "detail": "Modi*hus Bienzguet — ongoing, last day: 4 December 2026",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-modihus-bienzguet_A1S6STm"
             },
             {
-              "label": "Rundgang für Gross und Klein",
-              "detail": "Thun",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rundgang-fuer-gross-und-klein/"
+              "label": "Jugendtreff G23",
+              "detail": "Jugendhaus G23 — ongoing, last day: 4 December 2026",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-g23_AjHXNJ3"
             },
             {
-              "label": "Berner Musikkollegium – Orchesterfarben und Klangfülle",
-              "detail": "Gemeindezentrum Lötschberg, Spiez",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/spiez/berner-musikkollegium-herbstkonzert-2026_Aer9FYq"
+              "label": "Zischtig Karaoke in der Gemmi Taverne",
+              "detail": "Kandersteg — ongoing, last day: 24 November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
             },
             {
-              "label": "Voilà ce que je peux dire de mieux sur la musique !",
-              "detail": "Biel",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/voila-ce-que-je-peux-dire-de-mieux-sur-la-musique/"
+              "label": "Saaner Abesitza 2026",
+              "detail": "Saanen — ongoing, last day: 18 November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/saaner-abesitza/"
             },
             {
-              "label": "The Two",
-              "detail": "Sportzentrum Frutigen, Frutigen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/music/frutigen/the-two_AFstQNc"
+              "label": "moving moments",
+              "detail": "Sporthalle Ebnit, Saanen — ongoing, last day: 29 November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "179",
+          "value": "169",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,69 +279,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Open Take Club - Actake",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/open-take-club-actake/"
+              "label": "Soirée d'Échecs / Schachabend",
+              "detail": "Multimondo, Biel/Bienne",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/soiree-dechecs-schachabend-2/"
             },
             {
-              "label": "Prof. Nicola Gess / Dr. Lisz Hirn",
-              "detail": "Farelhaus, Biel/Bienne",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/prof-nicola-gess-dr-lisz-hirn/"
+              "label": "Fatoumata Diawara",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/rubigen/fatoumata-diawara_ADGYb7A"
             },
             {
-              "label": "⑤alter und Christine Blatti im Schlosskeller Interlaken",
-              "detail": "Schlosskeller Interlaken, Interlaken",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/interlaken/walter-und-christine-blatti-im-schlosskeller-interlaken_AZBLx6t"
+              "label": "Jon Cleary",
+              "detail": "Bierhübeli",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/jon-cleary_A1B64wC"
             },
             {
-              "label": "Prof. Philipp Hübl: „Die Wahrheit und ihre Feinde“",
-              "detail": "Farelhaus, Biel/Bienne",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/prof-philipp-huebl-die-wahrheit-und-ihre-feinde/"
+              "label": "Adventskranz Work-Shop/ Kurs inkl. Prosecco und Tea Time",
+              "detail": "Bern — läuft, letzter Tag: 29. November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-workshop-kurs-inkl-prosecco-und-tea-time/"
             },
             {
-              "label": "Bolschoi Don Kosaken 2026",
-              "detail": "Französische Kirche",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/bolschoi-don-kosaken-2026_AmuAxEj"
+              "label": "Sound and Dine",
+              "detail": "3775 Lenk im Simmental, Lenk — läuft, letzter Tag: 2. Dezember 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/sound-and-dine/"
             },
             {
-              "label": "Der Nussknacker – Internationale Ballettkompanie Italia",
-              "detail": "Kursaal Bern, Bern",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/der-nussknacker-international-ballet-company-italia_AJSK9wB"
+              "label": "Jugendtreff Modi*hus Bienzguet",
+              "detail": "Modi*hus Bienzguet — läuft, letzter Tag: 4. Dezember 2026",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-modihus-bienzguet_A1S6STm"
             },
             {
-              "label": "Rundgang für Gross und Klein",
-              "detail": "Thun",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rundgang-fuer-gross-und-klein/"
+              "label": "Jugendtreff G23",
+              "detail": "Jugendhaus G23 — läuft, letzter Tag: 4. Dezember 2026",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-g23_AjHXNJ3"
             },
             {
-              "label": "Berner Musikkollegium – Orchesterfarben und Klangfülle",
-              "detail": "Gemeindezentrum Lötschberg, Spiez",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/spiez/berner-musikkollegium-herbstkonzert-2026_Aer9FYq"
+              "label": "Zischtig Karaoke in der Gemmi Taverne",
+              "detail": "Kandersteg — läuft, letzter Tag: 24. November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
             },
             {
-              "label": "Voilà ce que je peux dire de mieux sur la musique !",
-              "detail": "Biel",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/voila-ce-que-je-peux-dire-de-mieux-sur-la-musique/"
+              "label": "Saaner Abesitza 2026",
+              "detail": "Saanen — läuft, letzter Tag: 18. November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/saaner-abesitza/"
             },
             {
-              "label": "The Two",
-              "detail": "Sportzentrum Frutigen, Frutigen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/music/frutigen/the-two_AFstQNc"
+              "label": "BeMo - Bewegte Momente",
+              "detail": "Sporthalle Ebnit, Saanen — läuft, letzter Tag: 29. November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "179",
+          "value": "169",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,69 +402,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Open Take Club - Actake",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/open-take-club-actake/"
+              "label": "Soirée d'Échecs / Schachabend",
+              "detail": "Multimondo, Biel/Bienne",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/soiree-dechecs-schachabend-2/"
             },
             {
-              "label": "Prof. Nicola Gess / Dr. Lisz Hirn",
-              "detail": "Farelhaus, Biel/Bienne",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/prof-nicola-gess-dr-lisz-hirn/"
+              "label": "Fatoumata Diawara",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/rubigen/fatoumata-diawara_ADGYb7A"
             },
             {
-              "label": "Walter et Christine Blatti au Schlosskeller Interlaken",
-              "detail": "Schlosskeller Interlaken, Interlaken",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/interlaken/walter-und-christine-blatti-im-schlosskeller-interlaken_AZBLx6t"
+              "label": "Jon Cleary",
+              "detail": "Bierhübeli",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/jon-cleary_A1B64wC"
             },
             {
-              "label": "Prof. Philipp Hübl: „Die Wahrheit und ihre Feinde“",
-              "detail": "Farelhaus, Biel/Bienne",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/prof-philipp-huebl-die-wahrheit-und-ihre-feinde/"
+              "label": "Adventskranz Work-Shop/ Kurs inkl. Prosecco und Tea Time",
+              "detail": "Bern — en cours, dernier jour : 29 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-workshop-kurs-inkl-prosecco-und-tea-time/"
             },
             {
-              "label": "Bolschoi Don Kosaken 2026",
-              "detail": "Französische Kirche",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/bolschoi-don-kosaken-2026_AmuAxEj"
+              "label": "Sound and Dine",
+              "detail": "3775 Lenk im Simmental, Lenk — en cours, dernier jour : 2 décembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/sound-and-dine/"
             },
             {
-              "label": "Der Nussknacker - Compagnie internationale de ballet d’Italie",
-              "detail": "Kursaal Bern, Bern",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/der-nussknacker-international-ballet-company-italia_AJSK9wB"
+              "label": "Jugendtreff Modi*hus Bienzguet",
+              "detail": "Modi*hus Bienzguet — en cours, dernier jour : 4 décembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-modihus-bienzguet_A1S6STm"
             },
             {
-              "label": "Rundgang für Gross und Klein",
-              "detail": "Thun",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rundgang-fuer-gross-und-klein/"
+              "label": "Jugendtreff G23",
+              "detail": "Jugendhaus G23 — en cours, dernier jour : 4 décembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-g23_AjHXNJ3"
             },
             {
-              "label": "Berner Musikkollegium – Orchesterfarben und Klangfülle",
-              "detail": "Gemeindezentrum Lötschberg, Spiez",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/spiez/berner-musikkollegium-herbstkonzert-2026_Aer9FYq"
+              "label": "Zischtig Karaoke in der Gemmi Taverne",
+              "detail": "Kandersteg — en cours, dernier jour : 24 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
             },
             {
-              "label": "Voilà ce que je peux dire de mieux sur la musique !",
-              "detail": "Biel",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/voila-ce-que-je-peux-dire-de-mieux-sur-la-musique/"
+              "label": "Saaner Abesitza 2026",
+              "detail": "Saanen — en cours, dernier jour : 18 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/saaner-abesitza/"
             },
             {
-              "label": "The Two",
-              "detail": "Sportzentrum Frutigen, Frutigen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/music/frutigen/the-two_AFstQNc"
+              "label": "des moments mouvementés",
+              "detail": "Sporthalle Ebnit, Saanen — en cours, dernier jour : 29 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

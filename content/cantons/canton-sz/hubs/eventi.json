@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "eventi",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "563085c4f641cb5967fcefb11d7ad13d579ea7ddcc791fdbb2321030ea18c8c0",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "fae70cd9143a5f16481ea89811fa25c4fa4b63490d7e516bcabf474151de41f1",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T06:24:39.723Z",
+      "updatedAt": "2026-11-15T21:47:09.888Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "9",
+          "value": "10",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -85,11 +85,17 @@
               "detail": "Einsiedeln",
               "date": "2026-11-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/jahreskonzert-blasorchester-fm-bennau/"
+            },
+            {
+              "label": "Singing Advent - Advents- und Weihnachtslieder aus aller Welt",
+              "detail": "Schwyz",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/singing-advent-advents-und-weihnachtslieder-aus-aller-welt/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/svitto/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -111,7 +117,7 @@
           "url": "/eventi/svitto/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "SZ",
@@ -121,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "9",
+          "value": "10",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,11 +190,17 @@
               "detail": "Einsiedeln",
               "date": "2026-11-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/jahreskonzert-blasorchester-fm-bennau/"
+            },
+            {
+              "label": "Singing Advent - Advents- und Weihnachtslieder aus aller Welt",
+              "detail": "Schwyz",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/singing-advent-advents-und-weihnachtslieder-aus-aller-welt/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schwyz/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -210,7 +222,7 @@
           "url": "/en/events/schwyz/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "SZ",
@@ -220,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "9",
+          "value": "10",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -283,11 +295,17 @@
               "detail": "Einsiedeln",
               "date": "2026-11-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/jahreskonzert-blasorchester-fm-bennau/"
+            },
+            {
+              "label": "Singing Advent - Advents- und Weihnachtslieder aus aller Welt",
+              "detail": "Schwyz",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/singing-advent-advents-und-weihnachtslieder-aus-aller-welt/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schwyz/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -309,7 +327,7 @@
           "url": "/de/veranstaltungen/schwyz/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "SZ",
@@ -319,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "9",
+          "value": "10",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -382,11 +400,17 @@
               "detail": "Einsiedeln",
               "date": "2026-11-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/jahreskonzert-blasorchester-fm-bennau/"
+            },
+            {
+              "label": "Singing Advent - Advents- und Weihnachtslieder aus aller Welt",
+              "detail": "Schwyz",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/singing-advent-advents-und-weihnachtslieder-aus-aller-welt/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schwytz/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -408,7 +432,7 @@
           "url": "/fr/evenements/schwytz/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

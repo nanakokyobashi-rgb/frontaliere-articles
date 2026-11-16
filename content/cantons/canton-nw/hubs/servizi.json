@@ -4,22 +4,22 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "servizi",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "c91999b0f4c24498301f69147bc2eeca06b218c586085d29923a07885125c87d",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "758a468049f0ac09c7e3ce7879a7b918d0d729dc3da1d9e9317938febda13bfb",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-11-08T11:18:20.402Z",
+      "updatedAt": "2026-11-15T11:58:26.359Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-15T06:51:41.323Z",
+      "updatedAt": "2026-11-16T06:51:00.113Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-14T21:43:27.949Z",
+      "updatedAt": "2026-11-15T22:07:40.362Z",
       "keyFacts": 0
     }
   ],
@@ -51,7 +51,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-08T11:18:20.402Z"
+          "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
           "id": "meteo",
@@ -60,12 +60,12 @@
           "items": [
             {
               "label": "Stans",
-              "value": "7 °C",
-              "detail": "oggi da 5 a 13 °C"
+              "value": "8 °C",
+              "detail": "oggi da 7 a 12 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-15T06:51:41.323Z"
+          "updatedAt": "2026-11-16T06:51:00.113Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -98,7 +98,7 @@
               "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -178,7 +178,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "NW",
@@ -207,7 +207,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-08T11:18:20.402Z"
+          "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
           "id": "meteo",
@@ -216,12 +216,12 @@
           "items": [
             {
               "label": "Stans",
-              "value": "7 °C",
-              "detail": "today from 5 to 13 °C"
+              "value": "8 °C",
+              "detail": "today from 7 to 12 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-15T06:51:41.323Z"
+          "updatedAt": "2026-11-16T06:51:00.113Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -254,7 +254,7 @@
               "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -330,7 +330,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "NW",
@@ -359,7 +359,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-08T11:18:20.402Z"
+          "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
           "id": "meteo",
@@ -368,12 +368,12 @@
           "items": [
             {
               "label": "Stans",
-              "value": "7 °C",
-              "detail": "heute 5 bis 13 °C"
+              "value": "8 °C",
+              "detail": "heute 7 bis 12 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-15T06:51:41.323Z"
+          "updatedAt": "2026-11-16T06:51:00.113Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -406,7 +406,7 @@
               "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -482,7 +482,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "NW",
@@ -511,7 +511,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-08T11:18:20.402Z"
+          "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
           "id": "meteo",
@@ -520,12 +520,12 @@
           "items": [
             {
               "label": "Stans",
-              "value": "7 °C",
-              "detail": "aujourd’hui de 5 à 13 °C"
+              "value": "8 °C",
+              "detail": "aujourd’hui de 7 à 12 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-15T06:51:41.323Z"
+          "updatedAt": "2026-11-16T06:51:00.113Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -558,7 +558,7 @@
               "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -630,7 +630,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

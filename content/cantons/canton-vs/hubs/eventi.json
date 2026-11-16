@@ -4,12 +4,12 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "19449d4d725a91eeed7db43f7f941aeafad671adf59b6327f0e8b123e2d16762",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "9bac24fd6ad66b16c3a2508d0f9bc614a0cec687d6f940f31861eea834fc0d3a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T06:24:39.723Z",
+      "updatedAt": "2026-11-15T21:47:09.888Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "70",
+          "value": "71",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "Tournée Roadmovie 2026",
+              "detail": "St-Martin VS",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tournee-roadmovie-2026-2/"
+            },
+            {
               "label": "Kreativ mit Karton – Dein Einstieg in die Welt des Cartonnage",
-              "detail": "Atelier Baz'art, Leukerbad",
-              "date": "2026-11-15",
+              "detail": "Atelier Baz'art, Leukerbad — in corso, ultimo giorno: 6 dicembre 2026",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/events/this-that/leukerbad/creative-with-cardboard-your-introduction-to-the-world-of-cartonnage_AFTZANG"
-            },
-            {
-              "label": "Chorkonzert: Carmina Burana 2.0",
-              "detail": "Röm.-kath. Pfarrkirche Grächen, Grächen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/music/graechen/chorkonzert-carmina-burana-20_AvkQtaJ"
-            },
-            {
-              "label": "AUTUMN CONCERT",
-              "detail": "Brig",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/autumn-concert-2/"
-            },
-            {
-              "label": "HERBSTKONZERT",
-              "detail": "Stockalperschloss",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/brig/herbstkonzert_A1eaBCa"
-            },
-            {
-              "label": "Siku",
-              "detail": "le Spot → Valère, Sion — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/siku/"
-            },
-            {
-              "label": "Where the funk is my red nose !?",
-              "detail": "Place Maurice-Zermatten, Sion — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/where-the-funk-is-my-red-nose/"
             },
             {
               "label": "Patchwork- Workshop",
               "detail": "Atelier Baz'art, Leukerbad — in corso, ultimo giorno: 5 dicembre 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/leukerbad/patchwork-workshop_AMU6vbQ"
             },
             {
               "label": "RESTORE | Yin Yoga",
               "detail": "Zermatt — in corso, ultimo giorno: 28 novembre 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/restore-yin-yoga/"
             },
             {
               "label": "Helga Zumstein",
               "detail": "Brig, Brig-Glis — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
             },
             {
+              "label": "Tüet hüere guet",
+              "detail": "Bellwald",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/events/this-that/bellwald/tueet-hueere-guet_AcxHeSa"
+            },
+            {
               "label": "Tournée Roadmovie 2026",
-              "detail": "St-Martin VS",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tournee-roadmovie-2026-2/"
+              "detail": "Salle'Vanintse, Salvan",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tournee-roadmovie-2026-3/"
+            },
+            {
+              "label": "Harry Potter Escape Box",
+              "detail": "Visp",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/harry-potter-escape-box/"
+            },
+            {
+              "label": "Yoga in Bellwald",
+              "detail": "Bellwald",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/bellwald/yoga-a-bellwald_AaMuSNk"
+            },
+            {
+              "label": "Lesezirkel",
+              "detail": "Visp",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/visp/lesezirkel_ALrMwnx"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vallese/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "VS",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "70",
+          "value": "71",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "Tournée Roadmovie 2026",
+              "detail": "St-Martin VS",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tournee-roadmovie-2026-2/"
+            },
+            {
               "label": "Creative with cardboard – your introduction to the world of cartonnage",
-              "detail": "Atelier Baz'art, Leukerbad",
-              "date": "2026-11-15",
+              "detail": "Atelier Baz'art, Leukerbad — ongoing, last day: 6 December 2026",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/events/this-that/leukerbad/creative-with-cardboard-your-introduction-to-the-world-of-cartonnage_AFTZANG"
-            },
-            {
-              "label": "Chorkonzert: Carmina Burana 2.0",
-              "detail": "Röm.-kath. Pfarrkirche Grächen, Grächen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/music/graechen/chorkonzert-carmina-burana-20_AvkQtaJ"
-            },
-            {
-              "label": "AUTUMN CONCERT",
-              "detail": "Brig",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/autumn-concert-2/"
-            },
-            {
-              "label": "FALL CONCERT",
-              "detail": "Stockalperschloss",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/brig/herbstkonzert_A1eaBCa"
-            },
-            {
-              "label": "Siku",
-              "detail": "le Spot → Valère, Sion — ongoing, last day: 15 November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/siku/"
-            },
-            {
-              "label": "Where the funk is my red nose !?",
-              "detail": "Place Maurice-Zermatten, Sion — ongoing, last day: 15 November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/where-the-funk-is-my-red-nose/"
             },
             {
               "label": "Patchwork- Workshop",
               "detail": "Atelier Baz'art, Leukerbad — ongoing, last day: 5 December 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/leukerbad/patchwork-workshop_AMU6vbQ"
             },
             {
               "label": "RESTORE | Yin Yoga",
               "detail": "Zermatt — ongoing, last day: 28 November 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/restore-yin-yoga/"
             },
             {
               "label": "Helga Zumstein",
               "detail": "Brig, Brig-Glis — ongoing, last day: 22 November 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
             },
             {
+              "label": "Tüet hüere guet",
+              "detail": "Bellwald",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/events/this-that/bellwald/tueet-hueere-guet_AcxHeSa"
+            },
+            {
               "label": "Tournée Roadmovie 2026",
-              "detail": "St-Martin VS",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tournee-roadmovie-2026-2/"
+              "detail": "Salle'Vanintse, Salvan",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tournee-roadmovie-2026-3/"
+            },
+            {
+              "label": "Harry Potter Escape Box",
+              "detail": "Visp",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/harry-potter-escape-box/"
+            },
+            {
+              "label": "Yoga in Bellwald",
+              "detail": "Bellwald",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/bellwald/yoga-a-bellwald_AaMuSNk"
+            },
+            {
+              "label": "Lesezirkel",
+              "detail": "Visp",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/visp/lesezirkel_ALrMwnx"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/valais/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "VS",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "70",
+          "value": "71",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "Tournée Roadmovie 2026",
+              "detail": "St-Martin VS",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tournee-roadmovie-2026-2/"
+            },
+            {
               "label": "Kreativ mit Karton – Dein Einstieg in die Welt des Cartonnage",
-              "detail": "Atelier Baz'art, Leukerbad",
-              "date": "2026-11-15",
+              "detail": "Atelier Baz'art, Leukerbad — läuft, letzter Tag: 6. Dezember 2026",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/events/this-that/leukerbad/creative-with-cardboard-your-introduction-to-the-world-of-cartonnage_AFTZANG"
-            },
-            {
-              "label": "Chorkonzert: Carmina Burana 2.0",
-              "detail": "Röm.-kath. Pfarrkirche Grächen, Grächen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/music/graechen/chorkonzert-carmina-burana-20_AvkQtaJ"
-            },
-            {
-              "label": "HERBSTKONZERT",
-              "detail": "Brig",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/autumn-concert-2/"
-            },
-            {
-              "label": "HERBSTKONZERT",
-              "detail": "Stockalperschloss",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/brig/herbstkonzert_A1eaBCa"
-            },
-            {
-              "label": "Siku",
-              "detail": "le Spot → Valère, Sion — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/siku/"
-            },
-            {
-              "label": "Where the funk is my red nose !?",
-              "detail": "Place Maurice-Zermatten, Sion — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/where-the-funk-is-my-red-nose/"
             },
             {
               "label": "Patchwork- Workshop",
               "detail": "Atelier Baz'art, Leukerbad — läuft, letzter Tag: 5. Dezember 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/leukerbad/patchwork-workshop_AMU6vbQ"
             },
             {
               "label": "RESTORE | Yin Yoga",
               "detail": "Zermatt — läuft, letzter Tag: 28. November 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/restore-yin-yoga/"
             },
             {
               "label": "Helga Zumstein",
               "detail": "Brig, Brig-Glis — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
             },
             {
+              "label": "Tüet hüere guet",
+              "detail": "Bellwald",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/events/this-that/bellwald/tueet-hueere-guet_AcxHeSa"
+            },
+            {
               "label": "Tournée Roadmovie 2026",
-              "detail": "St-Martin VS",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tournee-roadmovie-2026-2/"
+              "detail": "Salle'Vanintse, Salvan",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tournee-roadmovie-2026-3/"
+            },
+            {
+              "label": "Harry Potter Escape Box",
+              "detail": "Visp",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/harry-potter-escape-box/"
+            },
+            {
+              "label": "Yoga in Bellwald",
+              "detail": "Bellwald",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/bellwald/yoga-a-bellwald_AaMuSNk"
+            },
+            {
+              "label": "Lesezirkel",
+              "detail": "Visp",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/visp/lesezirkel_ALrMwnx"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/wallis/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "VS",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "70",
+          "value": "71",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "Tournée Roadmovie 2026",
+              "detail": "St-Martin VS",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tournee-roadmovie-2026-2/"
+            },
+            {
               "label": "Créatif avec le carton – ton entrée dans l’univers du cartonnage",
-              "detail": "Atelier Baz'art, Leukerbad",
-              "date": "2026-11-15",
+              "detail": "Atelier Baz'art, Leukerbad — en cours, dernier jour : 6 décembre 2026",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/events/this-that/leukerbad/creative-with-cardboard-your-introduction-to-the-world-of-cartonnage_AFTZANG"
-            },
-            {
-              "label": "Chorkonzert: Carmina Burana 2.0",
-              "detail": "Röm.-kath. Pfarrkirche Grächen, Grächen",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/music/graechen/chorkonzert-carmina-burana-20_AvkQtaJ"
-            },
-            {
-              "label": "CONCERT D'AUTOMNE",
-              "detail": "Brig",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/autumn-concert-2/"
-            },
-            {
-              "label": "CONCERT D'AUTOMNE",
-              "detail": "Stockalperschloss",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/brig/herbstkonzert_A1eaBCa"
-            },
-            {
-              "label": "Siku",
-              "detail": "le Spot → Valère, Sion — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/siku/"
-            },
-            {
-              "label": "Where the funk is my red nose !?",
-              "detail": "Place Maurice-Zermatten, Sion — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/where-the-funk-is-my-red-nose/"
             },
             {
               "label": "Patchwork- Workshop",
               "detail": "Atelier Baz'art, Leukerbad — en cours, dernier jour : 5 décembre 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/leukerbad/patchwork-workshop_AMU6vbQ"
             },
             {
               "label": "RESTORE | Yin Yoga",
               "detail": "Zermatt — en cours, dernier jour : 28 novembre 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/restore-yin-yoga/"
             },
             {
               "label": "Helga Zumstein",
               "detail": "Brig, Brig-Glis — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
             },
             {
+              "label": "C'est bien ici",
+              "detail": "Bellwald",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/events/this-that/bellwald/tueet-hueere-guet_AcxHeSa"
+            },
+            {
               "label": "Tournée Roadmovie 2026",
-              "detail": "St-Martin VS",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tournee-roadmovie-2026-2/"
+              "detail": "Salle'Vanintse, Salvan",
+              "date": "2026-11-17",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tournee-roadmovie-2026-3/"
+            },
+            {
+              "label": "Harry Potter Escape Box",
+              "detail": "Visp",
+              "date": "2026-11-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/harry-potter-escape-box/"
+            },
+            {
+              "label": "Yoga à Bellwald",
+              "detail": "Bellwald",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/bellwald/yoga-a-bellwald_AaMuSNk"
+            },
+            {
+              "label": "Lesezirkel",
+              "detail": "Visp",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/visp/lesezirkel_ALrMwnx"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/valais/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

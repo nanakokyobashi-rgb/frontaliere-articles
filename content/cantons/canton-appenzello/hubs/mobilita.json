@@ -4,17 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "0a51a5ea44154aedc5ba4584b7b46deb8dd4bcae06187b271c44aecee3e1e4a9",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "fb4ecd88f701648f28cc83162a98da310fa8a1a694506d32153a9e5d4ce90072",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-15T07:16:43.252Z",
+      "updatedAt": "2026-11-16T07:21:34.368Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-14T21:43:27.949Z",
+      "updatedAt": "2026-11-15T22:07:40.362Z",
       "keyFacts": 0
     }
   ],
@@ -28,7 +28,7 @@
         {
           "label": "Cantieri attivi o imminenti",
           "value": "1",
-          "note": "segnalazioni aggiornate: 15 novembre 2026"
+          "note": "segnalazioni aggiornate: 16 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -38,6 +38,11 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
+              "label": "Revocato: H8 Wattwil -> St. Gallen tra Luogo Waldstatt E Luogo Herisau Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-11-16T06:35:00.000Z"
+            },
+            {
               "label": "H8 Wattwil -> St. Gallen Luogo Herisau Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza Larghezza…",
               "value": "Cantiere",
               "detail": "fine prevista: 15 febbraio 2027",
@@ -45,7 +50,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -83,7 +88,7 @@
               "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/15102026-strassensperrung-gemeinde-urnaesch/"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -105,7 +110,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -116,7 +121,7 @@
         {
           "label": "Roadworks active or imminent",
           "value": "1",
-          "note": "reports as of 15 November 2026"
+          "note": "reports as of 16 November 2026"
         }
       ],
       "dataBlocks": [
@@ -126,6 +131,11 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
+              "label": "Revocato: H8 Wattwil -> St. Gallen tra Luogo Waldstatt E Luogo Herisau Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-11-16T06:35:00.000Z"
+            },
+            {
               "label": "H8 Wattwil -> St. Gallen Luogo Herisau Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza Larghezza…",
               "value": "Roadworks",
               "detail": "until 15 February 2027",
@@ -133,7 +143,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -171,7 +181,7 @@
               "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/15102026-strassensperrung-gemeinde-urnaesch/"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -193,7 +203,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -204,7 +214,7 @@
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "1",
-          "note": "Meldungen vom 15. November 2026"
+          "note": "Meldungen vom 16. November 2026"
         }
       ],
       "dataBlocks": [
@@ -214,6 +224,11 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
+              "label": "Aufgehoben: H8 Wattwil -> St. Gallen zwischen Ortschaft Waldstatt und Ortschaft Herisau Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-11-16T06:35:00.000Z"
+            },
+            {
               "label": "H8 Wattwil -> St. Gallen Ortschaft Herisau Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
               "value": "Baustelle",
               "detail": "bis 15. Februar 2027",
@@ -221,7 +236,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -259,7 +274,7 @@
               "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/15102026-strassensperrung-gemeinde-urnaesch/"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -281,7 +296,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -292,7 +307,7 @@
         {
           "label": "Chantiers actifs ou imminents",
           "value": "1",
-          "note": "signalements au 15 novembre 2026"
+          "note": "signalements au 16 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -302,6 +317,11 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
+              "label": "Révoqué: H8 Wattwil -> St-Gall entre Localité Waldstatt et Localité Herisau Situation: trafic en accordéon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-11-16T06:35:00.000Z"
+            },
+            {
               "label": "H8 Wattwil -> St-Gall Localité Herisau Situation: trafic perturbé travaux, longueur [km] 2.0 Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de largeur largeur de…",
               "value": "Chantier",
               "detail": "jusqu’au 15 février 2027",
@@ -309,7 +329,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -347,7 +367,7 @@
               "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/15102026-strassensperrung-gemeinde-urnaesch/"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -369,7 +389,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

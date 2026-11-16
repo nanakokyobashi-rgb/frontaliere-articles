@@ -4,17 +4,17 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "74c73120d2cc5a5d4d8354c77cd6afbc5681eebf01d7771cd0b103730a5c28cb",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "2028674fa873ba12a8bdee10af1806ce756aac9c1a1bbb7b894a99693fd06ed1",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-15T07:16:43.252Z",
+      "updatedAt": "2026-11-16T07:21:34.368Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-14T21:43:27.949Z",
+      "updatedAt": "2026-11-15T22:07:40.362Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "1",
-          "note": "segnalazioni aggiornate: 15 novembre 2026"
+          "note": "segnalazioni aggiornate: 16 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "19",
-          "note": "segnalazioni aggiornate: 15 novembre 2026"
+          "value": "14",
+          "note": "segnalazioni aggiornate: 16 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -49,34 +49,15 @@
               "date": "2026-10-23T11:20:00.000Z"
             },
             {
-              "label": "A4 Brunnen -> Zürich tra Svincolo autostradale Cham E Raccordo autostradale Diramazione Blegi Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Limitazione del traffico: corsie strette…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 16 novembre 2026",
-              "date": "2026-10-21T07:00:00.000Z"
+              "label": "A14 Diramazione Blegi -> Walterswil tra Svincolo autostradale Zug E Svincolo autostradale Baar Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-11-16T06:41:00.000Z"
             },
             {
               "label": "A14 Diramazione Blegi -> Walterswil tra Svincolo autostradale Zug E Svincolo autostradale Walterswil Situazione: problemi di traffico cantiere, lunghezza [km] 4.0 Limitazione del traffico: corsie…",
               "value": "Cantiere",
               "detail": "fine prevista: 17 novembre 2026",
               "date": "2026-10-21T07:00:00.000Z"
-            },
-            {
-              "label": "A4 Zürich -> Brunnen tra Raccordo autostradale Diramazione Blegi E Svincolo autostradale Cham Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: corsie strette…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 16 novembre 2026",
-              "date": "2026-10-30T06:27:00.000Z"
-            },
-            {
-              "label": "A14 Walterswil -> Diramazione Blegi tra Svincolo autostradale Zug E Raccordo autostradale Diramazione Blegi Situazione: problemi di traffico cantiere, lunghezza [km] 0.8 Limitazione del traffico…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 16 novembre 2026",
-              "date": "2026-10-30T06:30:00.000Z"
-            },
-            {
-              "label": "A4 Zürich -> Brunnen tra Raccordo autostradale Diramazione Blegi E Svincolo autostradale Cham Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Limitazione del traffico: nuova viabilità…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 16 novembre 2026",
-              "date": "2026-10-30T19:30:00.000Z"
             },
             {
               "label": "A14 Walterswil -> Diramazione Blegi tra Svincolo autostradale Zug E Raccordo autostradale Diramazione Blegi Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Aggiunta 1: limite…",
@@ -89,10 +70,28 @@
               "value": "Cantiere",
               "detail": "fine prevista: 11 dicembre 2026",
               "date": "2026-11-02T08:00:00.000Z"
+            },
+            {
+              "label": "A4 Zürich -> Brunnen tra Raccordo autostradale Diramazione Blegi E Svincolo autostradale Cham Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Aggiunta 1: limite temporaneo larghezza…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 8 dicembre 2026",
+              "date": "2026-11-02T08:05:00.000Z"
+            },
+            {
+              "label": "A4 Zürich -> Brunnen tra Raccordo autostradale Diramazione Blegi E Svincolo autostradale Cham Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette Aggiunta 1: limite…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 8 dicembre 2026",
+              "date": "2026-11-02T08:11:00.000Z"
+            },
+            {
+              "label": "A4 Zürich -> Brunnen tra Raccordo autostradale Diramazione Blegi E Svincolo autostradale Cham Situazione: problemi di traffico cantiere, lunghezza [km] 1.2",
+              "value": "Cantiere",
+              "detail": "fine prevista: 10 dicembre 2026",
+              "date": "2026-11-02T08:19:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -115,7 +114,7 @@
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -179,7 +178,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "ZG",
@@ -190,12 +189,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "1",
-          "note": "reports as of 15 November 2026"
+          "note": "reports as of 16 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "19",
-          "note": "reports as of 15 November 2026"
+          "value": "14",
+          "note": "reports as of 16 November 2026"
         }
       ],
       "dataBlocks": [
@@ -211,34 +210,15 @@
               "date": "2026-10-23T11:20:00.000Z"
             },
             {
-              "label": "A4 Brunnen -> Zürich tra Svincolo autostradale Cham E Raccordo autostradale Diramazione Blegi Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Limitazione del traffico: corsie strette…",
-              "value": "Roadworks",
-              "detail": "until 16 November 2026",
-              "date": "2026-10-21T07:00:00.000Z"
+              "label": "A14 Diramazione Blegi -> Walterswil tra Svincolo autostradale Zug E Svincolo autostradale Baar Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-11-16T06:41:00.000Z"
             },
             {
               "label": "A14 Diramazione Blegi -> Walterswil tra Svincolo autostradale Zug E Svincolo autostradale Walterswil Situazione: problemi di traffico cantiere, lunghezza [km] 4.0 Limitazione del traffico: corsie…",
               "value": "Roadworks",
               "detail": "until 17 November 2026",
               "date": "2026-10-21T07:00:00.000Z"
-            },
-            {
-              "label": "A4 Zürich -> Brunnen tra Raccordo autostradale Diramazione Blegi E Svincolo autostradale Cham Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: corsie strette…",
-              "value": "Roadworks",
-              "detail": "until 16 November 2026",
-              "date": "2026-10-30T06:27:00.000Z"
-            },
-            {
-              "label": "A14 Walterswil -> Diramazione Blegi tra Svincolo autostradale Zug E Raccordo autostradale Diramazione Blegi Situazione: problemi di traffico cantiere, lunghezza [km] 0.8 Limitazione del traffico…",
-              "value": "Roadworks",
-              "detail": "until 16 November 2026",
-              "date": "2026-10-30T06:30:00.000Z"
-            },
-            {
-              "label": "A4 Zürich -> Brunnen tra Raccordo autostradale Diramazione Blegi E Svincolo autostradale Cham Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Limitazione del traffico: nuova viabilità…",
-              "value": "Roadworks",
-              "detail": "until 16 November 2026",
-              "date": "2026-10-30T19:30:00.000Z"
             },
             {
               "label": "A14 Walterswil -> Diramazione Blegi tra Svincolo autostradale Zug E Raccordo autostradale Diramazione Blegi Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Aggiunta 1: limite…",
@@ -251,10 +231,28 @@
               "value": "Roadworks",
               "detail": "until 11 December 2026",
               "date": "2026-11-02T08:00:00.000Z"
+            },
+            {
+              "label": "A4 Zürich -> Brunnen tra Raccordo autostradale Diramazione Blegi E Svincolo autostradale Cham Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Aggiunta 1: limite temporaneo larghezza…",
+              "value": "Roadworks",
+              "detail": "until 8 December 2026",
+              "date": "2026-11-02T08:05:00.000Z"
+            },
+            {
+              "label": "A4 Zürich -> Brunnen tra Raccordo autostradale Diramazione Blegi E Svincolo autostradale Cham Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette Aggiunta 1: limite…",
+              "value": "Roadworks",
+              "detail": "until 8 December 2026",
+              "date": "2026-11-02T08:11:00.000Z"
+            },
+            {
+              "label": "A4 Zürich -> Brunnen tra Raccordo autostradale Diramazione Blegi E Svincolo autostradale Cham Situazione: problemi di traffico cantiere, lunghezza [km] 1.2",
+              "value": "Roadworks",
+              "detail": "until 10 December 2026",
+              "date": "2026-11-02T08:19:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -277,7 +275,7 @@
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -341,7 +339,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "ZG",
@@ -352,12 +350,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "1",
-          "note": "Meldungen vom 15. November 2026"
+          "note": "Meldungen vom 16. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "19",
-          "note": "Meldungen vom 15. November 2026"
+          "value": "14",
+          "note": "Meldungen vom 16. November 2026"
         }
       ],
       "dataBlocks": [
@@ -373,34 +371,15 @@
               "date": "2026-10-23T11:20:00.000Z"
             },
             {
-              "label": "A4 Brunnen -> Zürich zwischen Anschluss Cham und Autobahndreieck Verzweigung Blegi Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.5 Verkehrsführung: Fahrbahnverengung auf drei Fahrstreifen…",
-              "value": "Baustelle",
-              "detail": "bis 16. November 2026",
-              "date": "2026-10-21T07:00:00.000Z"
+              "label": "A14 Verzweigung Blegi -> Walterswil zwischen Anschluss Zug und Anschluss Baar Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-11-16T06:41:00.000Z"
             },
             {
               "label": "A14 Verzweigung Blegi -> Walterswil zwischen Anschluss Zug und Anschluss Walterswil Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 4.0 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen…",
               "value": "Baustelle",
               "detail": "bis 17. November 2026",
               "date": "2026-10-21T07:00:00.000Z"
-            },
-            {
-              "label": "A4 Zürich -> Brunnen zwischen Autobahndreieck Verzweigung Blegi und Anschluss Cham Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen…",
-              "value": "Baustelle",
-              "detail": "bis 16. November 2026",
-              "date": "2026-10-30T06:27:00.000Z"
-            },
-            {
-              "label": "A14 Walterswil -> Verzweigung Blegi zwischen Anschluss Zug und Autobahndreieck Verzweigung Blegi Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.8 Verkehrsführung: Fahrbahnverengung auf einen…",
-              "value": "Baustelle",
-              "detail": "bis 16. November 2026",
-              "date": "2026-10-30T06:30:00.000Z"
-            },
-            {
-              "label": "A4 Zürich -> Brunnen zwischen Autobahndreieck Verzweigung Blegi und Anschluss Cham Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.6 Verkehrsführung: veränderte Verkehrsführung Zusatz 1…",
-              "value": "Baustelle",
-              "detail": "bis 16. November 2026",
-              "date": "2026-10-30T19:30:00.000Z"
             },
             {
               "label": "A14 Walterswil -> Verzweigung Blegi zwischen Anschluss Zug und Autobahndreieck Verzweigung Blegi Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.5 Zusatz 1: vorübergehende Begrenzung der…",
@@ -413,10 +392,28 @@
               "value": "Baustelle",
               "detail": "bis 11. Dezember 2026",
               "date": "2026-11-02T08:00:00.000Z"
+            },
+            {
+              "label": "A4 Zürich -> Brunnen zwischen Autobahndreieck Verzweigung Blegi und Anschluss Cham Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Zusatz 1: vorübergehende Begrenzung der Breite…",
+              "value": "Baustelle",
+              "detail": "bis 8. Dezember 2026",
+              "date": "2026-11-02T08:05:00.000Z"
+            },
+            {
+              "label": "A4 Zürich -> Brunnen zwischen Autobahndreieck Verzweigung Blegi und Anschluss Cham Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung Zusatz 1: vorübergehende Begrenzung der…",
+              "value": "Baustelle",
+              "detail": "bis 8. Dezember 2026",
+              "date": "2026-11-02T08:11:00.000Z"
+            },
+            {
+              "label": "A4 Zürich -> Brunnen zwischen Autobahndreieck Verzweigung Blegi und Anschluss Cham Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.2",
+              "value": "Baustelle",
+              "detail": "bis 10. Dezember 2026",
+              "date": "2026-11-02T08:19:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -439,7 +436,7 @@
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -503,7 +500,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "ZG",
@@ -514,12 +511,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "1",
-          "note": "signalements au 15 novembre 2026"
+          "note": "signalements au 16 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "19",
-          "note": "signalements au 15 novembre 2026"
+          "value": "14",
+          "note": "signalements au 16 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -535,34 +532,15 @@
               "date": "2026-10-23T11:20:00.000Z"
             },
             {
-              "label": "A4 Brunnen -> Zurich entre Jonction autoroutière Cham et Echangeur Echangeur de Blegi Situation: trafic perturbé travaux, longueur [km] 0.5 Gestion du trafic: rétrécissement des voies sur trois…",
-              "value": "Chantier",
-              "detail": "jusqu’au 16 novembre 2026",
-              "date": "2026-10-21T07:00:00.000Z"
+              "label": "A14 Echangeur de Blegi -> Walterswil entre Jonction autoroutière Zoug et Jonction autoroutière Baar Situation: trafic en accordéon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-11-16T06:41:00.000Z"
             },
             {
               "label": "A14 Echangeur de Blegi -> Walterswil entre Jonction autoroutière Zoug et Jonction autoroutière Walterswil Situation: trafic perturbé travaux, longueur [km] 4.0 Gestion du trafic: rétrécissement des…",
               "value": "Chantier",
               "detail": "jusqu’au 17 novembre 2026",
               "date": "2026-10-21T07:00:00.000Z"
-            },
-            {
-              "label": "A4 Zurich -> Brunnen entre Echangeur Echangeur de Blegi et Jonction autoroutière Cham Situation: trafic perturbé travaux, longueur [km] 0.1 Gestion du trafic: rétrécissement des voies sur une voie…",
-              "value": "Chantier",
-              "detail": "jusqu’au 16 novembre 2026",
-              "date": "2026-10-30T06:27:00.000Z"
-            },
-            {
-              "label": "A14 Walterswil -> Echangeur de Blegi entre Jonction autoroutière Zoug et Echangeur Echangeur de Blegi Situation: trafic perturbé travaux, longueur [km] 0.8 Gestion du trafic: rétrécissement des…",
-              "value": "Chantier",
-              "detail": "jusqu’au 16 novembre 2026",
-              "date": "2026-10-30T06:30:00.000Z"
-            },
-            {
-              "label": "A4 Zurich -> Brunnen entre Echangeur Echangeur de Blegi et Jonction autoroutière Cham Situation: trafic perturbé travaux, longueur [km] 0.6 Gestion du trafic: nouveau plan de circulation Complément…",
-              "value": "Chantier",
-              "detail": "jusqu’au 16 novembre 2026",
-              "date": "2026-10-30T19:30:00.000Z"
             },
             {
               "label": "A14 Walterswil -> Echangeur de Blegi entre Jonction autoroutière Zoug et Echangeur Echangeur de Blegi Situation: trafic perturbé travaux, longueur [km] 0.5 Complément 1: limitation temporaire de…",
@@ -575,10 +553,28 @@
               "value": "Chantier",
               "detail": "jusqu’au 11 décembre 2026",
               "date": "2026-11-02T08:00:00.000Z"
+            },
+            {
+              "label": "A4 Zurich -> Brunnen entre Echangeur Echangeur de Blegi et Jonction autoroutière Cham Situation: trafic perturbé travaux, longueur [km] 0.2 Complément 1: limitation temporaire de largeur largeur de…",
+              "value": "Chantier",
+              "detail": "jusqu’au 8 décembre 2026",
+              "date": "2026-11-02T08:05:00.000Z"
+            },
+            {
+              "label": "A4 Zurich -> Brunnen entre Echangeur Echangeur de Blegi et Jonction autoroutière Cham Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies Complément 1: limitation…",
+              "value": "Chantier",
+              "detail": "jusqu’au 8 décembre 2026",
+              "date": "2026-11-02T08:11:00.000Z"
+            },
+            {
+              "label": "A4 Zurich -> Brunnen entre Echangeur Echangeur de Blegi et Jonction autoroutière Cham Situation: trafic perturbé travaux, longueur [km] 1.2",
+              "value": "Chantier",
+              "detail": "jusqu’au 10 décembre 2026",
+              "date": "2026-11-02T08:19:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -601,7 +597,7 @@
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -665,7 +661,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

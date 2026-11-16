@@ -4,12 +4,12 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "1b4b67f829203b557343dc6d072349827b76d42b0b6cb4637c4b6450a1cdd58f",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "16b21ea580976244ea5fd7621c194c1f9c28cbc0ef562011a905c9c75486da51",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T06:24:39.723Z",
+      "updatedAt": "2026-11-15T21:47:09.888Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "79",
+          "value": "75",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Zwischen Himmel und Erde - 2 Chöre 50 Stimmen",
-              "detail": "Zuzwil, Zuzwil (SG)",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischen-himmel-und-erde-2-choere-50-stimmen-1/"
-            },
-            {
-              "label": "Expedition Steinzeit - von Mammuts, Teenies & Meeresschnecken",
-              "detail": "St. Gallen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/expedition-steinzeit-von-mammuts-teenies-meeresschnecken/"
-            },
-            {
-              "label": "Grenzgänge – Klangwelten zwischen Klassik, Jazz und Volksmusik",
-              "detail": "Kaffeehaus",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/st-gallen/grenzgaenge-klangwelten-zwischen-klassik-jazz-und-volksmusik_AKA8uCK"
-            },
-            {
-              "label": "Toccatawil",
+              "label": "Interpretationskurs Orgel",
               "detail": "Röm.-kath. Stadtkirche St. Nikolaus",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/wil-sg/toccatawil_AHT3bJ5"
-            },
-            {
-              "label": "MANI MATTER Hommage \"Mys nächschte Lied\"",
-              "detail": "Schloss Rapperswil",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/rapperswil-sg/mani-matter-hommage-mys-naechschte-lied_AVQFArx"
-            },
-            {
-              "label": "SILENT NEIGHBOR",
-              "detail": "*ALTEFABRIK, Rapperswil-Jona",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/silent-neighbor/"
-            },
-            {
-              "label": "Two Dogs (CH / UK) Perronnord St.Gallen",
-              "detail": "Restaurant Perronnord",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/two-dogs-ch-uk-perronnord-stgallen_AQjUTVR"
-            },
-            {
-              "label": "Chüeligurt herstellen",
-              "detail": "Alt St. Johann — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chueeligurt-herstellen/"
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/wil-sg/interpretationskurs-orgel_AdQ51ER"
             },
             {
               "label": "Grosse Führungen im Bergwerk Gonzen Sargans",
               "detail": "Gonzen Bergwerk, Sargans — in corso, ultimo giorno: 12 dicembre 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/veranstaltungen/sargans/oeffentliche-grosse-fuehrungen-im-bergwerk-gonzen-sargans_AEYXbgt"
             },
             {
-              "label": "Naturjodel und Jodellieder",
-              "detail": "Klangwelt Toggenburg — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-und-jodellieder-1/"
+              "label": "Katharina Knie auf dem Chabisplatz",
+              "detail": "Rorschach — in corso, ultimo giorno: 22 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/katharina-knie-auf-dem-chabisplatz/"
+            },
+            {
+              "label": "Wild-Buffet",
+              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann — in corso, ultimo giorno: 21 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-buffet-2/"
+            },
+            {
+              "label": "Gelenke schützen im Alltag - worauf soll ich achten?",
+              "detail": "Rheumaliga SG, GR, AI/AR, Fürstentum Liechtenstein",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/st-gallen/gelenke-schuetzen-im-alltag-worauf-soll-ich-achten_AadPexv"
+            },
+            {
+              "label": "Konzert Quelque chose qui cloche. Vokalmusik Frankreichs im 20. Jahrhundert",
+              "detail": "Lokremise Sankt Gallen",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/konzert-quelque-chose-qui-cloche-vokalmusik-frankreichs-im-20-jahrhundert_A6Zb4aG"
+            },
+            {
+              "label": "Quelque chose qui cloche. Vokalmusik Frankreichs im 20. Jahrhundert",
+              "detail": "Lokremise St.Gallen",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/quelque-chose-qui-cloche-vokalmusik-frankreichs-im-20-jahrhundert_ATxPiM7"
+            },
+            {
+              "label": "Küfa/Vokü",
+              "detail": "Rümpeltum",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/st-gallen/kuefavokue_AEhukpk"
+            },
+            {
+              "label": "Ritschi & Hunzi – Tagebuech - Exklusives Konzert & 4-Gang-Dinner",
+              "detail": "Radio Zürisee Loft",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/ritschi-und-hunzi-tagebuech-exklusives-konzert-und-4-gang-dinner_AJeCThK"
+            },
+            {
+              "label": "CHÄLLER – FALSCH VERBUNDEN",
+              "detail": "Mehrzweckgebäude Allmend, Bad Ragaz",
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/chaeller-falsch-verbunden-3/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/san-gallo/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "SG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "79",
+          "value": "75",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Zwischen Himmel und Erde - 2 Chöre 50 Stimmen",
-              "detail": "Zuzwil, Zuzwil (SG)",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischen-himmel-und-erde-2-choere-50-stimmen-1/"
-            },
-            {
-              "label": "Expedition Steinzeit - von Mammuts, Teenies & Meeresschnecken",
-              "detail": "St. Gallen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/expedition-steinzeit-von-mammuts-teenies-meeresschnecken/"
-            },
-            {
-              "label": "Grenzgänge – Klangwelten zwischen Klassik, Jazz und Volksmusik",
-              "detail": "Kaffeehaus",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/st-gallen/grenzgaenge-klangwelten-zwischen-klassik-jazz-und-volksmusik_AKA8uCK"
-            },
-            {
-              "label": "Toccatawil",
+              "label": "Interpretationskurs Orgel",
               "detail": "Röm.-kath. Stadtkirche St. Nikolaus",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/wil-sg/toccatawil_AHT3bJ5"
-            },
-            {
-              "label": "MANI MATTER Hommage \"Mys nächschte Lied\"",
-              "detail": "Schloss Rapperswil",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/rapperswil-sg/mani-matter-hommage-mys-naechschte-lied_AVQFArx"
-            },
-            {
-              "label": "SILENT NEIGHBOR",
-              "detail": "*ALTEFABRIK, Rapperswil-Jona",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/silent-neighbor/"
-            },
-            {
-              "label": "Two Dogs (CH / UK) Perronnord St.Gallen",
-              "detail": "Restaurant Perronnord",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/two-dogs-ch-uk-perronnord-stgallen_AQjUTVR"
-            },
-            {
-              "label": "Chüeligurt herstellen",
-              "detail": "Alt St. Johann — ongoing, last day: 15 November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chueeligurt-herstellen/"
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/wil-sg/interpretationskurs-orgel_AdQ51ER"
             },
             {
               "label": "Grosse Führungen im Bergwerk Gonzen Sargans",
               "detail": "Gonzen Bergwerk, Sargans — ongoing, last day: 12 December 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/veranstaltungen/sargans/oeffentliche-grosse-fuehrungen-im-bergwerk-gonzen-sargans_AEYXbgt"
             },
             {
-              "label": "Naturjodel und Jodellieder",
-              "detail": "Klangwelt Toggenburg — ongoing, last day: 15 November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-und-jodellieder-1/"
+              "label": "Katharina Knie auf dem Chabisplatz",
+              "detail": "Rorschach — ongoing, last day: 22 November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/katharina-knie-auf-dem-chabisplatz/"
+            },
+            {
+              "label": "Wild-Buffet",
+              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann — ongoing, last day: 21 November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-buffet-2/"
+            },
+            {
+              "label": "Gelenke schützen im Alltag - worauf soll ich achten?",
+              "detail": "Rheumaliga SG, GR, AI/AR, Fürstentum Liechtenstein",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/st-gallen/gelenke-schuetzen-im-alltag-worauf-soll-ich-achten_AadPexv"
+            },
+            {
+              "label": "Konzert Quelque chose qui cloche. Vokalmusik Frankreichs im 20. Jahrhundert",
+              "detail": "Lokremise Sankt Gallen",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/konzert-quelque-chose-qui-cloche-vokalmusik-frankreichs-im-20-jahrhundert_A6Zb4aG"
+            },
+            {
+              "label": "Quelque chose qui cloche. Vokalmusik Frankreichs im 20. Jahrhundert",
+              "detail": "Lokremise St.Gallen",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/quelque-chose-qui-cloche-vokalmusik-frankreichs-im-20-jahrhundert_ATxPiM7"
+            },
+            {
+              "label": "Küfa/Vokü",
+              "detail": "Rümpeltum",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/st-gallen/kuefavokue_AEhukpk"
+            },
+            {
+              "label": "Ritschi & Hunzi – Tagebuech - Exklusives Konzert & 4-Gang-Dinner",
+              "detail": "Radio Zürisee Loft",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/ritschi-und-hunzi-tagebuech-exklusives-konzert-und-4-gang-dinner_AJeCThK"
+            },
+            {
+              "label": "CHÄLLER – FALSCH VERBUNDEN",
+              "detail": "Mehrzweckgebäude Allmend, Bad Ragaz",
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/chaeller-falsch-verbunden-3/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/st-gallen/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "SG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "79",
+          "value": "75",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Zwischen Himmel und Erde - 2 Chöre 50 Stimmen",
-              "detail": "Zuzwil, Zuzwil (SG)",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischen-himmel-und-erde-2-choere-50-stimmen-1/"
-            },
-            {
-              "label": "Expedition Steinzeit - von Mammuts, Teenies & Meeresschnecken",
-              "detail": "St. Gallen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/expedition-steinzeit-von-mammuts-teenies-meeresschnecken/"
-            },
-            {
-              "label": "Grenzgänge – Klangwelten zwischen Klassik, Jazz und Volksmusik",
-              "detail": "Kaffeehaus",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/st-gallen/grenzgaenge-klangwelten-zwischen-klassik-jazz-und-volksmusik_AKA8uCK"
-            },
-            {
-              "label": "Toccatawil",
+              "label": "Interpretationskurs Orgel",
               "detail": "Röm.-kath. Stadtkirche St. Nikolaus",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/wil-sg/toccatawil_AHT3bJ5"
-            },
-            {
-              "label": "MANI MATTER Hommage \"Mys nächschte Lied\"",
-              "detail": "Schloss Rapperswil",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/rapperswil-sg/mani-matter-hommage-mys-naechschte-lied_AVQFArx"
-            },
-            {
-              "label": "SILENT NEIGHBOR",
-              "detail": "*ALTEFABRIK, Rapperswil-Jona",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/silent-neighbor/"
-            },
-            {
-              "label": "Two Dogs (CH / UK) Perronnord St.Gallen",
-              "detail": "Restaurant Perronnord",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/two-dogs-ch-uk-perronnord-stgallen_AQjUTVR"
-            },
-            {
-              "label": "Chüeligurt herstellen",
-              "detail": "Alt St. Johann — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chueeligurt-herstellen/"
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/wil-sg/interpretationskurs-orgel_AdQ51ER"
             },
             {
               "label": "Grosse Führungen im Bergwerk Gonzen Sargans",
               "detail": "Gonzen Bergwerk, Sargans — läuft, letzter Tag: 12. Dezember 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/veranstaltungen/sargans/oeffentliche-grosse-fuehrungen-im-bergwerk-gonzen-sargans_AEYXbgt"
             },
             {
-              "label": "Naturjodel und Jodellieder",
-              "detail": "Klangwelt Toggenburg — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-und-jodellieder-1/"
+              "label": "Katharina Knie auf dem Chabisplatz",
+              "detail": "Rorschach — läuft, letzter Tag: 22. November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/katharina-knie-auf-dem-chabisplatz/"
+            },
+            {
+              "label": "Wild-Buffet",
+              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann — läuft, letzter Tag: 21. November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-buffet-2/"
+            },
+            {
+              "label": "Gelenke schützen im Alltag - worauf soll ich achten?",
+              "detail": "Rheumaliga SG, GR, AI/AR, Fürstentum Liechtenstein",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/st-gallen/gelenke-schuetzen-im-alltag-worauf-soll-ich-achten_AadPexv"
+            },
+            {
+              "label": "Konzert Quelque chose qui cloche. Vokalmusik Frankreichs im 20. Jahrhundert",
+              "detail": "Lokremise Sankt Gallen",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/konzert-quelque-chose-qui-cloche-vokalmusik-frankreichs-im-20-jahrhundert_A6Zb4aG"
+            },
+            {
+              "label": "Quelque chose qui cloche. Vokalmusik Frankreichs im 20. Jahrhundert",
+              "detail": "Lokremise St.Gallen",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/quelque-chose-qui-cloche-vokalmusik-frankreichs-im-20-jahrhundert_ATxPiM7"
+            },
+            {
+              "label": "Küfa/Vokü",
+              "detail": "Rümpeltum",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/st-gallen/kuefavokue_AEhukpk"
+            },
+            {
+              "label": "Ritschi & Hunzi – Tagebuech - Exklusives Konzert & 4-Gang-Dinner",
+              "detail": "Radio Zürisee Loft",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/ritschi-und-hunzi-tagebuech-exklusives-konzert-und-4-gang-dinner_AJeCThK"
+            },
+            {
+              "label": "CHÄLLER – FALSCH VERBUNDEN",
+              "detail": "Mehrzweckgebäude Allmend, Bad Ragaz",
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/chaeller-falsch-verbunden-3/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/st-gallen/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "SG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "79",
+          "value": "75",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Zwischen Himmel und Erde - 2 Chöre 50 Stimmen",
-              "detail": "Zuzwil, Zuzwil (SG)",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischen-himmel-und-erde-2-choere-50-stimmen-1/"
-            },
-            {
-              "label": "Expedition Steinzeit - von Mammuts, Teenies & Meeresschnecken",
-              "detail": "St. Gallen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/expedition-steinzeit-von-mammuts-teenies-meeresschnecken/"
-            },
-            {
-              "label": "Grenzgänge – Klangwelten zwischen Klassik, Jazz und Volksmusik",
-              "detail": "Kaffeehaus",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/st-gallen/grenzgaenge-klangwelten-zwischen-klassik-jazz-und-volksmusik_AKA8uCK"
-            },
-            {
-              "label": "Toccatawil",
+              "label": "Interpretationskurs Orgel",
               "detail": "Röm.-kath. Stadtkirche St. Nikolaus",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/wil-sg/toccatawil_AHT3bJ5"
-            },
-            {
-              "label": "MANI MATTER Hommage \"Mys nächschte Lied\"",
-              "detail": "Schloss Rapperswil",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/rapperswil-sg/mani-matter-hommage-mys-naechschte-lied_AVQFArx"
-            },
-            {
-              "label": "SILENT NEIGHBOR",
-              "detail": "*ALTEFABRIK, Rapperswil-Jona",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/silent-neighbor/"
-            },
-            {
-              "label": "Two Dogs (CH / UK) Perronnord St.Gallen",
-              "detail": "Restaurant Perronnord",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/two-dogs-ch-uk-perronnord-stgallen_AQjUTVR"
-            },
-            {
-              "label": "Chüeligurt herstellen",
-              "detail": "Alt St. Johann — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chueeligurt-herstellen/"
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/wil-sg/interpretationskurs-orgel_AdQ51ER"
             },
             {
               "label": "Grosse Führungen im Bergwerk Gonzen Sargans",
               "detail": "Gonzen Bergwerk, Sargans — en cours, dernier jour : 12 décembre 2026",
-              "date": "2026-11-15",
+              "date": "2026-11-16",
               "url": "https://www.guidle.com/it/veranstaltungen/sargans/oeffentliche-grosse-fuehrungen-im-bergwerk-gonzen-sargans_AEYXbgt"
             },
             {
-              "label": "Naturjodel und Jodellieder",
-              "detail": "Klangwelt Toggenburg — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/naturjodel-und-jodellieder-1/"
+              "label": "Katharina Knie auf dem Chabisplatz",
+              "detail": "Rorschach — en cours, dernier jour : 22 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/katharina-knie-auf-dem-chabisplatz/"
+            },
+            {
+              "label": "Wild-Buffet",
+              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann — en cours, dernier jour : 21 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-buffet-2/"
+            },
+            {
+              "label": "Gelenke schützen im Alltag - worauf soll ich achten?",
+              "detail": "Rheumaliga SG, GR, AI/AR, Fürstentum Liechtenstein",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/st-gallen/gelenke-schuetzen-im-alltag-worauf-soll-ich-achten_AadPexv"
+            },
+            {
+              "label": "Konzert Quelque chose qui cloche. Vokalmusik Frankreichs im 20. Jahrhundert",
+              "detail": "Lokremise Sankt Gallen",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/konzert-quelque-chose-qui-cloche-vokalmusik-frankreichs-im-20-jahrhundert_A6Zb4aG"
+            },
+            {
+              "label": "Quelque chose qui cloche. Vokalmusik Frankreichs im 20. Jahrhundert",
+              "detail": "Lokremise St.Gallen",
+              "date": "2026-11-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/quelque-chose-qui-cloche-vokalmusik-frankreichs-im-20-jahrhundert_ATxPiM7"
+            },
+            {
+              "label": "Küfa/Vokü",
+              "detail": "Rümpeltum",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/st-gallen/kuefavokue_AEhukpk"
+            },
+            {
+              "label": "Ritschi & Hunzi – Tagebuech - Exklusives Konzert & 4-Gang-Dinner",
+              "detail": "Radio Zürisee Loft",
+              "date": "2026-11-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/ritschi-und-hunzi-tagebuech-exklusives-konzert-und-4-gang-dinner_AJeCThK"
+            },
+            {
+              "label": "CHÄLLER – FALSCH VERBUNDEN",
+              "detail": "Mehrzweckgebäude Allmend, Bad Ragaz",
+              "date": "2026-11-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/chaeller-falsch-verbunden-3/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/saint-gall/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

@@ -4,22 +4,22 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "servizi",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "5ca04e16321860e4fe0f8ce77b1617e2d7072b8b108005fa75621c9956b8376a",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "fb2aea925da883f4f89a5c17be2e9525188d537085fb1de0f3cdf7271f915d88",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-11-08T11:18:20.402Z",
+      "updatedAt": "2026-11-15T11:58:26.359Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-15T06:51:41.323Z",
+      "updatedAt": "2026-11-16T06:51:00.113Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-14T21:43:27.949Z",
+      "updatedAt": "2026-11-15T22:07:40.362Z",
       "keyFacts": 0
     }
   ],
@@ -51,7 +51,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-08T11:18:20.402Z"
+          "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
           "id": "meteo",
@@ -60,12 +60,12 @@
           "items": [
             {
               "label": "Neuchâtel",
-              "value": "6 °C",
-              "detail": "oggi da 5 a 12 °C"
+              "value": "9 °C",
+              "detail": "oggi da 9 a 11 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-15T06:51:41.323Z"
+          "updatedAt": "2026-11-16T06:51:00.113Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -98,7 +98,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -160,7 +160,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "NE",
@@ -189,7 +189,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-08T11:18:20.402Z"
+          "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
           "id": "meteo",
@@ -198,12 +198,12 @@
           "items": [
             {
               "label": "Neuchâtel",
-              "value": "6 °C",
-              "detail": "today from 5 to 12 °C"
+              "value": "9 °C",
+              "detail": "today from 9 to 11 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-15T06:51:41.323Z"
+          "updatedAt": "2026-11-16T06:51:00.113Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -236,7 +236,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -294,7 +294,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "NE",
@@ -323,7 +323,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-08T11:18:20.402Z"
+          "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
           "id": "meteo",
@@ -332,12 +332,12 @@
           "items": [
             {
               "label": "Neuchâtel",
-              "value": "6 °C",
-              "detail": "heute 5 bis 12 °C"
+              "value": "9 °C",
+              "detail": "heute 9 bis 11 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-15T06:51:41.323Z"
+          "updatedAt": "2026-11-16T06:51:00.113Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -370,7 +370,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -428,7 +428,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "NE",
@@ -457,7 +457,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-08T11:18:20.402Z"
+          "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
           "id": "meteo",
@@ -466,12 +466,12 @@
           "items": [
             {
               "label": "Neuchâtel",
-              "value": "6 °C",
-              "detail": "aujourd’hui de 5 à 12 °C"
+              "value": "9 °C",
+              "detail": "aujourd’hui de 9 à 11 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-15T06:51:41.323Z"
+          "updatedAt": "2026-11-16T06:51:00.113Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -504,7 +504,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -558,7 +558,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

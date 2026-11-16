@@ -4,22 +4,22 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "mobilita",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "623083fcfbd3152648ff365aebba68a8b7ff0e7da02c3e42bda5a1ca62e47ac6",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "fd3f870b51aa24b45160b1888edc4157c7bc1668bd6b097b64cf88c7807333c9",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-14T23:59:59.000Z",
+      "updatedAt": "2026-11-15T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-15T07:16:43.252Z",
+      "updatedAt": "2026-11-16T07:21:34.368Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-14T21:43:27.949Z",
+      "updatedAt": "2026-11-15T22:07:40.362Z",
       "keyFacts": 0
     }
   ],
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0,1 min",
-          "note": "Riehen – Weil am Rhein, settimana conclusa: 14 novembre 2026"
+          "note": "Riehen – Weil am Rhein, settimana conclusa: 15 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "14",
-          "note": "segnalazioni aggiornate: 15 novembre 2026"
+          "value": "13",
+          "note": "segnalazioni aggiornate: 16 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "19",
-          "note": "segnalazioni aggiornate: 15 novembre 2026"
+          "note": "segnalazioni aggiornate: 16 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 8 novembre 2026 – 14 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 9 novembre 2026 – 15 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Riehen – Weil am Rhein",
@@ -59,45 +59,45 @@
               "url": "/traffico-dogane/riehen-weil-am-rhein/oggi/"
             },
             {
+              "label": "Inzlingen – Riehen",
+              "value": "0,3 min",
+              "detail": "49 rilevazioni",
+              "url": "/traffico-dogane/inzlingen-riehen/oggi/"
+            },
+            {
               "label": "Riehen – Lörrach-Stetten",
               "value": "0,3 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/riehen-lorrach-stetten/oggi/"
             },
             {
-              "label": "Inzlingen – Riehen",
-              "value": "0,4 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/inzlingen-riehen/oggi/"
-            },
-            {
               "label": "Grenzach-Wyhlen – Riehen",
-              "value": "0,5 min",
+              "value": "0,3 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/grenzach-wyhlen-riehen/oggi/"
             },
             {
               "label": "Basel – Weil am Rhein, Hiltalingerstrasse",
-              "value": "0,7 min",
+              "value": "0,6 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/basel-weil-am-rhein-hiltalingerstrasse/oggi/"
             },
             {
               "label": "Basel – Weil am Rhein, Autostrada A2/A5",
-              "value": "0,9 min",
+              "value": "0,8 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/basel-weil-am-rhein-autostrada-a2-a5/oggi/"
             },
             {
               "label": "Basel – Weil am Rhein, Freiburgerstrasse",
-              "value": "0,9 min",
+              "value": "0,8 min",
               "detail": "49 rilevazioni",
               "url": "/traffico-dogane/basel-weil-am-rhein-freiburgerstrasse/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-14T23:59:59.000Z"
+          "updatedAt": "2026-11-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -154,7 +154,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -192,7 +192,7 @@
               "url": "https://www.bvb.ch/de/2026/10/24/aentlig-isch-maess/"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -276,7 +276,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -287,24 +287,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0.1 min",
-          "note": "Riehen – Weil am Rhein, week ending 14 November 2026"
+          "note": "Riehen – Weil am Rhein, week ending 15 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "14",
-          "note": "reports as of 15 November 2026"
+          "value": "13",
+          "note": "reports as of 16 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "19",
-          "note": "reports as of 15 November 2026"
+          "note": "reports as of 16 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 8 November 2026 to 14 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 9 November 2026 to 15 November 2026, fastest first.",
           "items": [
             {
               "label": "Riehen – Weil am Rhein",
@@ -313,45 +313,45 @@
               "url": "/en/border-wait/riehen-weil-am-rhein/today/"
             },
             {
+              "label": "Inzlingen – Riehen",
+              "value": "0.3 min",
+              "detail": "49 readings",
+              "url": "/en/border-wait/inzlingen-riehen/today/"
+            },
+            {
               "label": "Riehen – Lörrach-Stetten",
               "value": "0.3 min",
               "detail": "49 readings",
               "url": "/en/border-wait/riehen-lorrach-stetten/today/"
             },
             {
-              "label": "Inzlingen – Riehen",
-              "value": "0.4 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/inzlingen-riehen/today/"
-            },
-            {
               "label": "Grenzach-Wyhlen – Riehen",
-              "value": "0.5 min",
+              "value": "0.3 min",
               "detail": "49 readings",
               "url": "/en/border-wait/grenzach-wyhlen-riehen/today/"
             },
             {
               "label": "Basel – Weil am Rhein, Hiltalingerstrasse",
-              "value": "0.7 min",
+              "value": "0.6 min",
               "detail": "49 readings",
               "url": "/en/border-wait/basel-weil-am-rhein-hiltalingerstrasse/today/"
             },
             {
               "label": "Basel – Weil am Rhein, Autostrada A2/A5",
-              "value": "0.9 min",
+              "value": "0.8 min",
               "detail": "49 readings",
               "url": "/en/border-wait/basel-weil-am-rhein-autostrada-a2-a5/today/"
             },
             {
               "label": "Basel – Weil am Rhein, Freiburgerstrasse",
-              "value": "0.9 min",
+              "value": "0.8 min",
               "detail": "49 readings",
               "url": "/en/border-wait/basel-weil-am-rhein-freiburgerstrasse/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-14T23:59:59.000Z"
+          "updatedAt": "2026-11-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -408,7 +408,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -446,7 +446,7 @@
               "url": "https://www.bvb.ch/de/2026/10/24/aentlig-isch-maess/"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -530,7 +530,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -541,24 +541,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0.1 Min.",
-          "note": "Riehen – Weil am Rhein, Woche bis 14. November 2026"
+          "note": "Riehen – Weil am Rhein, Woche bis 15. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "14",
-          "note": "Meldungen vom 15. November 2026"
+          "value": "13",
+          "note": "Meldungen vom 16. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "19",
-          "note": "Meldungen vom 15. November 2026"
+          "note": "Meldungen vom 16. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 8. November 2026 bis 14. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 9. November 2026 bis 15. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Riehen – Weil am Rhein",
@@ -567,45 +567,45 @@
               "url": "/de/wartezeit-grenze/riehen-weil-am-rhein/heute/"
             },
             {
+              "label": "Inzlingen – Riehen",
+              "value": "0.3 Min.",
+              "detail": "49 Messungen",
+              "url": "/de/wartezeit-grenze/inzlingen-riehen/heute/"
+            },
+            {
               "label": "Riehen – Lörrach-Stetten",
               "value": "0.3 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/riehen-lorrach-stetten/heute/"
             },
             {
-              "label": "Inzlingen – Riehen",
-              "value": "0.4 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/inzlingen-riehen/heute/"
-            },
-            {
               "label": "Grenzach-Wyhlen – Riehen",
-              "value": "0.5 Min.",
+              "value": "0.3 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/grenzach-wyhlen-riehen/heute/"
             },
             {
               "label": "Basel – Weil am Rhein, Hiltalingerstrasse",
-              "value": "0.7 Min.",
+              "value": "0.6 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/basel-weil-am-rhein-hiltalingerstrasse/heute/"
             },
             {
               "label": "Basel – Weil am Rhein, Autostrada A2/A5",
-              "value": "0.9 Min.",
+              "value": "0.8 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/basel-weil-am-rhein-autostrada-a2-a5/heute/"
             },
             {
               "label": "Basel – Weil am Rhein, Freiburgerstrasse",
-              "value": "0.9 Min.",
+              "value": "0.8 Min.",
               "detail": "49 Messungen",
               "url": "/de/wartezeit-grenze/basel-weil-am-rhein-freiburgerstrasse/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-14T23:59:59.000Z"
+          "updatedAt": "2026-11-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -662,7 +662,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -700,7 +700,7 @@
               "url": "https://www.bvb.ch/de/2026/10/24/aentlig-isch-maess/"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -784,7 +784,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -795,24 +795,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0,1 min",
-          "note": "Riehen – Weil am Rhein, semaine jusqu’au 14 novembre 2026"
+          "note": "Riehen – Weil am Rhein, semaine jusqu’au 15 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "14",
-          "note": "signalements au 15 novembre 2026"
+          "value": "13",
+          "note": "signalements au 16 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "19",
-          "note": "signalements au 15 novembre 2026"
+          "note": "signalements au 16 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 8 novembre 2026 au 14 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 9 novembre 2026 au 15 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Riehen – Weil am Rhein",
@@ -821,45 +821,45 @@
               "url": "/fr/temps-attente-douane/riehen-weil-am-rhein/aujourd-hui/"
             },
             {
+              "label": "Inzlingen – Riehen",
+              "value": "0,3 min",
+              "detail": "49 relevés",
+              "url": "/fr/temps-attente-douane/inzlingen-riehen/aujourd-hui/"
+            },
+            {
               "label": "Riehen – Lörrach-Stetten",
               "value": "0,3 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/riehen-lorrach-stetten/aujourd-hui/"
             },
             {
-              "label": "Inzlingen – Riehen",
-              "value": "0,4 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/inzlingen-riehen/aujourd-hui/"
-            },
-            {
               "label": "Grenzach-Wyhlen – Riehen",
-              "value": "0,5 min",
+              "value": "0,3 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/grenzach-wyhlen-riehen/aujourd-hui/"
             },
             {
               "label": "Basel – Weil am Rhein, Hiltalingerstrasse",
-              "value": "0,7 min",
+              "value": "0,6 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/basel-weil-am-rhein-hiltalingerstrasse/aujourd-hui/"
             },
             {
               "label": "Basel – Weil am Rhein, Autostrada A2/A5",
-              "value": "0,9 min",
+              "value": "0,8 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/basel-weil-am-rhein-autostrada-a2-a5/aujourd-hui/"
             },
             {
               "label": "Basel – Weil am Rhein, Freiburgerstrasse",
-              "value": "0,9 min",
+              "value": "0,8 min",
               "detail": "49 relevés",
               "url": "/fr/temps-attente-douane/basel-weil-am-rhein-freiburgerstrasse/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-14T23:59:59.000Z"
+          "updatedAt": "2026-11-15T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -916,7 +916,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -954,7 +954,7 @@
               "url": "https://www.bvb.ch/de/2026/10/24/aentlig-isch-maess/"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -1038,7 +1038,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

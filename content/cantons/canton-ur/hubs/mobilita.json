@@ -4,17 +4,17 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "7a2a961c792de61dfe96ec303b10e8d94ed56708bf099bbe9b3c21995012e767",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "c162570f1786e7dfdf1497789b55ed2fc2d531aeab47d09b5da7464a3a14a87f",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-15T07:16:43.252Z",
+      "updatedAt": "2026-11-16T07:21:34.368Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-14T21:43:27.949Z",
+      "updatedAt": "2026-11-15T22:07:40.362Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "2",
-          "note": "segnalazioni aggiornate: 15 novembre 2026"
+          "note": "segnalazioni aggiornate: 16 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "7",
-          "note": "segnalazioni aggiornate: 15 novembre 2026"
+          "note": "segnalazioni aggiornate: 16 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +129,7 @@
               "url": "https://www.ur.ch/_rte/information/138850"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -164,16 +164,16 @@
           "date": "2026-10-28T17:45:24.471Z"
         },
         {
-          "title": "Incendio di un veicolo, chiuso il tunnel di Flüelen",
-          "url": "/articoli-uri/incendio-tunnel-fluelen/",
-          "excerpt": "Un incendio di un veicolo ha imposto la chiusura del tunnel di Flüelen per circa un'ora e mezza giovedì 29 ottobre.",
-          "date": "2026-10-31T10:27:30.338Z"
-        },
-        {
           "title": "Axenstrasse chiusa per quattro notti dal 2 al 6 novembre",
           "url": "/articoli-uri/axenstrasse-chiusa-quattro-notti/",
           "excerpt": "La Axenstrasse sarà completamente chiusa dal 2 al 6 novembre, ogni notte dalle 22 alle 5, per lavori di manutenzione.",
           "date": "2026-10-20T09:56:09.960Z"
+        },
+        {
+          "title": "Incendio di un veicolo, chiuso il tunnel di Flüelen",
+          "url": "/articoli-uri/incendio-tunnel-fluelen/",
+          "excerpt": "Un incendio di un veicolo ha imposto la chiusura del tunnel di Flüelen per circa un'ora e mezza giovedì 29 ottobre.",
+          "date": "2026-10-31T10:27:30.338Z"
         },
         {
           "title": "Passhöhe-Urnerboden: chiusura notturna della strada",
@@ -193,7 +193,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "UR",
@@ -204,12 +204,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "2",
-          "note": "reports as of 15 November 2026"
+          "note": "reports as of 16 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "7",
-          "note": "reports as of 15 November 2026"
+          "note": "reports as of 16 November 2026"
         }
       ],
       "dataBlocks": [
@@ -267,7 +267,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -305,7 +305,7 @@
               "url": "https://www.ur.ch/_rte/information/138850"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -340,16 +340,16 @@
           "date": "2026-10-28T17:45:24.471Z"
         },
         {
-          "title": "Vehicle fire, Flüelen tunnel closed",
-          "url": "/en/uri-articles/vehicle-fire-fluelen-tunnel/",
-          "excerpt": "A vehicle fire forced the closure of the Flüelen tunnel for about an hour and a half on Thursday, October 29.",
-          "date": "2026-10-31T10:27:30.338Z"
-        },
-        {
           "title": "Axenstrasse closed for four nights from November 2 to 6",
           "url": "/en/uri-articles/axenstrasse-closed-four-nights/",
           "excerpt": "Axenstrasse will be completely closed from November 2 to 6, every night from 22 to 5, for maintenance work.",
           "date": "2026-10-20T09:56:09.960Z"
+        },
+        {
+          "title": "Vehicle fire, Flüelen tunnel closed",
+          "url": "/en/uri-articles/vehicle-fire-fluelen-tunnel/",
+          "excerpt": "A vehicle fire forced the closure of the Flüelen tunnel for about an hour and a half on Thursday, October 29.",
+          "date": "2026-10-31T10:27:30.338Z"
         },
         {
           "title": "Passhöhe-Urnerboden: nighttime road closure",
@@ -369,7 +369,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "UR",
@@ -380,12 +380,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "2",
-          "note": "Meldungen vom 15. November 2026"
+          "note": "Meldungen vom 16. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "7",
-          "note": "Meldungen vom 15. November 2026"
+          "note": "Meldungen vom 16. November 2026"
         }
       ],
       "dataBlocks": [
@@ -443,7 +443,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -481,7 +481,7 @@
               "url": "https://www.ur.ch/_rte/information/138850"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -516,16 +516,16 @@
           "date": "2026-10-28T17:45:24.471Z"
         },
         {
-          "title": "Brand eines Fahrzeugs, Tunnel von Flüelen geschlossen",
-          "url": "/de/uri-artikel/fahrzeugbrand-fluelen-tunnel/",
-          "excerpt": "Am Donnerstagmorgen, dem 29. Oktober, wurde der Flüeler Tunnel nach einem Fahrzeugbrand etwa eineinhalb Stunden lang gesperrt.",
-          "date": "2026-10-31T10:27:30.338Z"
-        },
-        {
           "title": "Axenstrasse vom 2. bis 6. November vier Nächte lang gesperrt",
           "url": "/de/uri-artikel/axenstrasse-vier-naechte-gesperrt/",
           "excerpt": "Die Axenstrasse wird während vier Nächten im Zeitraum vom 2. bis 6. November vollständig gesperrt.",
           "date": "2026-10-20T09:56:09.960Z"
+        },
+        {
+          "title": "Brand eines Fahrzeugs, Tunnel von Flüelen geschlossen",
+          "url": "/de/uri-artikel/fahrzeugbrand-fluelen-tunnel/",
+          "excerpt": "Am Donnerstagmorgen, dem 29. Oktober, wurde der Flüeler Tunnel nach einem Fahrzeugbrand etwa eineinhalb Stunden lang gesperrt.",
+          "date": "2026-10-31T10:27:30.338Z"
         },
         {
           "title": "Passhöhe-Urnerboden: nächtliche Sperrung der Straße",
@@ -545,7 +545,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "UR",
@@ -556,12 +556,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "2",
-          "note": "signalements au 15 novembre 2026"
+          "note": "signalements au 16 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "7",
-          "note": "signalements au 15 novembre 2026"
+          "note": "signalements au 16 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -619,7 +619,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-15T07:16:43.252Z"
+          "updatedAt": "2026-11-16T07:21:34.368Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -657,7 +657,7 @@
               "url": "https://www.ur.ch/_rte/information/138850"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -692,16 +692,16 @@
           "date": "2026-10-28T17:45:24.471Z"
         },
         {
-          "title": "Incendie d’un véhicule, tunnel de Flüelen fermé",
-          "url": "/fr/articles-uri/incendie-tunnel-fluelen/",
-          "excerpt": "L’incendie d’un véhicule a entraîné la fermeture du tunnel de Flüelen pendant environ une heure et demie jeudi 29 octobre.",
-          "date": "2026-10-31T10:27:30.338Z"
-        },
-        {
           "title": "Axenstrasse fermée pendant quatre nuits du 2 au 6 novembre",
           "url": "/fr/articles-uri/axenstrasse-fermee-quatre-nuits/",
           "excerpt": "L’Axenstrasse sera complètement fermée du 2 au 6 novembre, chaque nuit de 22 à 5, pour des travaux d’entretien.",
           "date": "2026-10-20T09:56:09.960Z"
+        },
+        {
+          "title": "Incendie d’un véhicule, tunnel de Flüelen fermé",
+          "url": "/fr/articles-uri/incendie-tunnel-fluelen/",
+          "excerpt": "L’incendie d’un véhicule a entraîné la fermeture du tunnel de Flüelen pendant environ une heure et demie jeudi 29 octobre.",
+          "date": "2026-10-31T10:27:30.338Z"
         },
         {
           "title": "Passhöhe-Urnerboden : fermeture nocturne de la route",
@@ -721,7 +721,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

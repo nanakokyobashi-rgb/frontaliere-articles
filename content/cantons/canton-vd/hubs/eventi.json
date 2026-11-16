@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "79644ff0bfeba1d752b61ff4f610858394a90aa402e8150b2541d8a48d13d5fa",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "62666548ee10a6f206494c89cbe4e61f9cb34de13512da03ffaa14d0dd6538f6",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T06:24:39.723Z",
+      "updatedAt": "2026-11-15T21:47:09.888Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-14T21:43:27.949Z",
+      "updatedAt": "2026-11-15T22:07:40.362Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "90",
+          "value": "78",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Fronda – Cialoma, Geschichten vom Meer und vieles mehr…",
-              "detail": "Théâtre de l'Oxymore",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/cully/fronda-cialoma-geschichten-vom-meer-und-vieles-mehr_AMiLNWe"
-            },
-            {
-              "label": "GIOIA CANTAR Vokal- und Instrumentalensemble",
-              "detail": "Temple évang.-réf. de St-Paul",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/music/villeneuve-vd/gioia-cantar-vocal-and-instrumental-ensemble_Ai2GWLZ"
-            },
-            {
-              "label": "Scheherazade - CSV Choir & ORS OVS Orchestras",
-              "detail": "Vevey",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/scheherazade-csv-choir-ors-ovs-orchestras/"
-            },
-            {
-              "label": "Scheherazade – Chor CSV & Orchester ORS OVS",
-              "detail": "Eglise évang.-réf. Saint-Martin, Vevey",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/evenements/musique/vevey/sheherazade-choeur-csv-und-orchestres-ors-ovs_AGBe1VG"
-            },
-            {
-              "label": "Soirée entre copains : KaraOcook + Quizz",
+              "label": "Chasse au trésor",
               "detail": "Captain Cook",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/soiree-entre-copains-karaocook-quizz_A6XGs5K"
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/chasse-au-tresor_ApUqyuG"
             },
             {
-              "label": "Sonntagsmarkt in Rolle",
-              "detail": "Château de Rolle, Rolle",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/rolle/marche-dominical-de-rolle_AXZ7FHG"
+              "label": "Water Pong",
+              "detail": "Barberousse",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/events/this-that/lausanne/water-pong_AwneE9V"
             },
             {
-              "label": "En train historique, voyage au cœur de la Belle Époque",
-              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/en-train-historique-voyage-au-coeur-de-la-belle-epoque/"
+              "label": "International Summit on AI Powered Precision Medicine and Genomics (ISAIPMG2026)",
+              "detail": "Budapest, Lausanne",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/international-summit-on-ai-powered-precision-medicine-and-genomics-isaipmg2026/"
             },
             {
-              "label": "Concert - Aigle Orchestra",
-              "detail": "Eglise cath.-rom. d'Aigle, Aigle",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-aigle-orchestra/"
+              "label": "International Summit on AI Powered Precision Medicine and Genomics (ISAIPMG2026)",
+              "detail": "Budapest, Hungary",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/events/knowledge/lausanne/international-summit-on-ai-powered-precision-medicine-and-genomics-isaipmg2026_APmtQXx"
+            },
+            {
+              "label": "Café causette, conversation en français",
+              "detail": "Lausanne",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/cafe-causette-conversation-en-francais_AFFT2YW"
+            },
+            {
+              "label": "Club de lecture de la Bibliothèque La Sallaz",
+              "detail": "Bibliothèques de la Ville de Lausanne – La Sallaz, Lausanne",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/club-de-lecture-de-la-bibliotheque-la-sallaz_AjX8P7g"
+            },
+            {
+              "label": "Livres et dragons - Jeux de rôle (dès 15 ans)",
+              "detail": "Bibliothèques de la Ville de Lausanne – La Sallaz, Lausanne",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/livres-et-dragons-jeux-de-role-des-15-ans_AQxnMCg"
+            },
+            {
+              "label": "Projet Pré-HEM",
+              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/projet-pre-hem_AgSsuEH"
             },
             {
               "label": "Le Tour d'Écrou - opéra",
-              "detail": "Opéra de Lausanne, Lausanne",
-              "date": "2026-11-15",
+              "detail": "Opéra de Lausanne, Lausanne — in corso, ultimo giorno: 22 novembre 2026",
+              "date": "2026-11-16",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-tour-decrou-opera/"
             },
             {
-              "label": "Stand up Comedy in broken English - Victor Patrascan",
-              "detail": "Lausanne",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stand-up-comedy-in-broken-english-victor-patrascan-2/"
+              "label": "Painting exhibition",
+              "detail": "Vevey — in corso, ultimo giorno: 25 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/painting-exhibition-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -145,7 +145,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "VD",
@@ -155,7 +155,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "90",
+          "value": "78",
           "note": "from the site’s events calendar"
         }
       ],
@@ -166,69 +166,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Fronda – Cialoma, Tales of the Sea, and more…",
-              "detail": "Théâtre de l'Oxymore",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/cully/fronda-cialoma-geschichten-vom-meer-und-vieles-mehr_AMiLNWe"
-            },
-            {
-              "label": "GIOIA CANTAR Vocal and Instrumental Ensemble",
-              "detail": "Temple évang.-réf. de St-Paul",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/music/villeneuve-vd/gioia-cantar-vocal-and-instrumental-ensemble_Ai2GWLZ"
-            },
-            {
-              "label": "Scheherazade - CSV Choir & ORS OVS Orchestras",
-              "detail": "Vevey",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/scheherazade-csv-choir-ors-ovs-orchestras/"
-            },
-            {
-              "label": "Scheherazade - CSV Choir & ORS OVS Orchestras",
-              "detail": "Eglise évang.-réf. Saint-Martin, Vevey",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/evenements/musique/vevey/sheherazade-choeur-csv-und-orchestres-ors-ovs_AGBe1VG"
-            },
-            {
-              "label": "Soirée entre copains : KaraOcook + Quizz",
+              "label": "Chasse au trésor",
               "detail": "Captain Cook",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/soiree-entre-copains-karaocook-quizz_A6XGs5K"
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/chasse-au-tresor_ApUqyuG"
             },
             {
-              "label": "Marché dominical de Rolle",
-              "detail": "Château de Rolle, Rolle",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/rolle/marche-dominical-de-rolle_AXZ7FHG"
+              "label": "Pong",
+              "detail": "Barberousse",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/events/this-that/lausanne/water-pong_AwneE9V"
             },
             {
-              "label": "En train historique, voyage au cœur de la Belle Époque",
-              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/en-train-historique-voyage-au-coeur-de-la-belle-epoque/"
+              "label": "International Summit on AI Powered Precision Medicine and Genomics (ISAIPMG2026)",
+              "detail": "Budapest, Lausanne",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/international-summit-on-ai-powered-precision-medicine-and-genomics-isaipmg2026/"
             },
             {
-              "label": "Concert - Aigle Orchestra",
-              "detail": "Eglise cath.-rom. d'Aigle, Aigle",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-aigle-orchestra/"
+              "label": "International Summit on AI Powered Precision Medicine and Genomics (ISAIPMG2026)",
+              "detail": "Budapest, Hungary",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/events/knowledge/lausanne/international-summit-on-ai-powered-precision-medicine-and-genomics-isaipmg2026_APmtQXx"
+            },
+            {
+              "label": "Café causette, conversation en français",
+              "detail": "Lausanne",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/cafe-causette-conversation-en-francais_AFFT2YW"
+            },
+            {
+              "label": "Club de lecture de la Bibliothèque La Sallaz",
+              "detail": "Bibliothèques de la Ville de Lausanne – La Sallaz, Lausanne",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/club-de-lecture-de-la-bibliotheque-la-sallaz_AjX8P7g"
+            },
+            {
+              "label": "Livres et dragons - Jeux de rôle (dès 15 ans)",
+              "detail": "Bibliothèques de la Ville de Lausanne – La Sallaz, Lausanne",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/livres-et-dragons-jeux-de-role-des-15-ans_AQxnMCg"
+            },
+            {
+              "label": "Pré-HEM Project",
+              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/projet-pre-hem_AgSsuEH"
             },
             {
               "label": "Le Tour d'Écrou - opéra",
-              "detail": "Opéra de Lausanne, Lausanne",
-              "date": "2026-11-15",
+              "detail": "Opéra de Lausanne, Lausanne — ongoing, last day: 22 November 2026",
+              "date": "2026-11-16",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-tour-decrou-opera/"
             },
             {
-              "label": "Stand up Comedy in broken English - Victor Patrascan",
-              "detail": "Lausanne",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stand-up-comedy-in-broken-english-victor-patrascan-2/"
+              "label": "Painting exhibition",
+              "detail": "Vevey — ongoing, last day: 25 November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/painting-exhibition-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -251,7 +251,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -273,7 +273,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "VD",
@@ -283,7 +283,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "90",
+          "value": "78",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -294,69 +294,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Fronda – Cialoma, Geschichten vom Meer und vieles mehr…",
-              "detail": "Théâtre de l'Oxymore",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/cully/fronda-cialoma-geschichten-vom-meer-und-vieles-mehr_AMiLNWe"
-            },
-            {
-              "label": "GIOIA CANTAR Vokal- und Instrumentalensemble",
-              "detail": "Temple évang.-réf. de St-Paul",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/music/villeneuve-vd/gioia-cantar-vocal-and-instrumental-ensemble_Ai2GWLZ"
-            },
-            {
-              "label": "Scheherazade – Chor CSV & Orchester ORS OVS",
-              "detail": "Vevey",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/scheherazade-csv-choir-ors-ovs-orchestras/"
-            },
-            {
-              "label": "Scheherazade – Chor CSV & Orchester ORS OVS",
-              "detail": "Eglise évang.-réf. Saint-Martin, Vevey",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/evenements/musique/vevey/sheherazade-choeur-csv-und-orchestres-ors-ovs_AGBe1VG"
-            },
-            {
-              "label": "Soirée entre copains : KaraOcook + Quizz",
+              "label": "Chasse au trésor",
               "detail": "Captain Cook",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/soiree-entre-copains-karaocook-quizz_A6XGs5K"
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/chasse-au-tresor_ApUqyuG"
             },
             {
-              "label": "Sonntagsmarkt in Rolle",
-              "detail": "Château de Rolle, Rolle",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/rolle/marche-dominical-de-rolle_AXZ7FHG"
+              "label": "Wasserpong",
+              "detail": "Barberousse",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/events/this-that/lausanne/water-pong_AwneE9V"
             },
             {
-              "label": "En train historique, voyage au cœur de la Belle Époque",
-              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/en-train-historique-voyage-au-coeur-de-la-belle-epoque/"
+              "label": "International Summit on AI Powered Precision Medicine and Genomics (ISAIPMG2026)",
+              "detail": "Budapest, Lausanne",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/international-summit-on-ai-powered-precision-medicine-and-genomics-isaipmg2026/"
             },
             {
-              "label": "Konzert - Orchestre d'Aigle",
-              "detail": "Eglise cath.-rom. d'Aigle, Aigle",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-aigle-orchestra/"
+              "label": "International Summit on AI Powered Precision Medicine and Genomics (ISAIPMG2026)",
+              "detail": "Budapest, Hungary",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/events/knowledge/lausanne/international-summit-on-ai-powered-precision-medicine-and-genomics-isaipmg2026_APmtQXx"
+            },
+            {
+              "label": "Café causette, conversation en français",
+              "detail": "Lausanne",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/cafe-causette-conversation-en-francais_AFFT2YW"
+            },
+            {
+              "label": "Club de lecture de la Bibliothèque La Sallaz",
+              "detail": "Bibliothèques de la Ville de Lausanne – La Sallaz, Lausanne",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/club-de-lecture-de-la-bibliotheque-la-sallaz_AjX8P7g"
+            },
+            {
+              "label": "Livres et dragons - Jeux de rôle (dès 15 ans)",
+              "detail": "Bibliothèques de la Ville de Lausanne – La Sallaz, Lausanne",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/livres-et-dragons-jeux-de-role-des-15-ans_AQxnMCg"
+            },
+            {
+              "label": "Projekt Pré-HEM",
+              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/projet-pre-hem_AgSsuEH"
             },
             {
               "label": "Le Tour d'Écrou - opéra",
-              "detail": "Opéra de Lausanne, Lausanne",
-              "date": "2026-11-15",
+              "detail": "Opéra de Lausanne, Lausanne — läuft, letzter Tag: 22. November 2026",
+              "date": "2026-11-16",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-tour-decrou-opera/"
             },
             {
-              "label": "Stand up Comedy in broken English - Victor Patrascan",
-              "detail": "Lausanne",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stand-up-comedy-in-broken-english-victor-patrascan-2/"
+              "label": "Ausstellung von Gemälden",
+              "detail": "Vevey — läuft, letzter Tag: 25. November 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/painting-exhibition-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -379,7 +379,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -401,7 +401,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "VD",
@@ -411,7 +411,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "90",
+          "value": "78",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -422,69 +422,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Fronda – Cialoma: Contes de la Mer et plus encore…",
-              "detail": "Théâtre de l'Oxymore",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/cully/fronda-cialoma-geschichten-vom-meer-und-vieles-mehr_AMiLNWe"
-            },
-            {
-              "label": "Gioia Cantar - Ensemble vocal et instrumental",
-              "detail": "Temple évang.-réf. de St-Paul",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/events/music/villeneuve-vd/gioia-cantar-vocal-and-instrumental-ensemble_Ai2GWLZ"
-            },
-            {
-              "label": "Shéhérazade - Choeur CSV & Orchestres ORS OVS",
-              "detail": "Vevey",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/scheherazade-csv-choir-ors-ovs-orchestras/"
-            },
-            {
-              "label": "Shéhérazade - Choeur CSV & Orchestres ORS OVS",
-              "detail": "Eglise évang.-réf. Saint-Martin, Vevey",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/evenements/musique/vevey/sheherazade-choeur-csv-und-orchestres-ors-ovs_AGBe1VG"
-            },
-            {
-              "label": "Soirée entre copains : KaraOcook + Quizz",
+              "label": "Chasse au trésor",
               "detail": "Captain Cook",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/soiree-entre-copains-karaocook-quizz_A6XGs5K"
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/chasse-au-tresor_ApUqyuG"
             },
             {
-              "label": "Marché dominical de Rolle",
-              "detail": "Château de Rolle, Rolle",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/rolle/marche-dominical-de-rolle_AXZ7FHG"
+              "label": "Beer Pong",
+              "detail": "Barberousse",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/events/this-that/lausanne/water-pong_AwneE9V"
             },
             {
-              "label": "En train historique, voyage au cœur de la Belle Époque",
-              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/en-train-historique-voyage-au-coeur-de-la-belle-epoque/"
+              "label": "International Summit on AI Powered Precision Medicine and Genomics (ISAIPMG2026)",
+              "detail": "Budapest, Lausanne",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/international-summit-on-ai-powered-precision-medicine-and-genomics-isaipmg2026/"
             },
             {
-              "label": "Concert - Orchestre d'Aigle",
-              "detail": "Eglise cath.-rom. d'Aigle, Aigle",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-aigle-orchestra/"
+              "label": "International Summit on AI Powered Precision Medicine and Genomics (ISAIPMG2026)",
+              "detail": "Budapest, Hungary",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/events/knowledge/lausanne/international-summit-on-ai-powered-precision-medicine-and-genomics-isaipmg2026_APmtQXx"
+            },
+            {
+              "label": "Café causette, conversation en français",
+              "detail": "Lausanne",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/cafe-causette-conversation-en-francais_AFFT2YW"
+            },
+            {
+              "label": "Club de lecture de la Bibliothèque La Sallaz",
+              "detail": "Bibliothèques de la Ville de Lausanne – La Sallaz, Lausanne",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/club-de-lecture-de-la-bibliotheque-la-sallaz_AjX8P7g"
+            },
+            {
+              "label": "Livres et dragons - Jeux de rôle (dès 15 ans)",
+              "detail": "Bibliothèques de la Ville de Lausanne – La Sallaz, Lausanne",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/livres-et-dragons-jeux-de-role-des-15-ans_AQxnMCg"
+            },
+            {
+              "label": "Pour H",
+              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
+              "date": "2026-11-16",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/projet-pre-hem_AgSsuEH"
             },
             {
               "label": "Le Tour d'Écrou - opéra",
-              "detail": "Opéra de Lausanne, Lausanne",
-              "date": "2026-11-15",
+              "detail": "Opéra de Lausanne, Lausanne — en cours, dernier jour : 22 novembre 2026",
+              "date": "2026-11-16",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-tour-decrou-opera/"
             },
             {
-              "label": "Stand up Comedy in broken English - Victor Patrascan",
-              "detail": "Lausanne",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stand-up-comedy-in-broken-english-victor-patrascan-2/"
+              "label": "René Blöchlinger, peintures et gravures",
+              "detail": "Vevey — en cours, dernier jour : 25 novembre 2026",
+              "date": "2026-11-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/painting-exhibition-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -507,7 +507,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -529,7 +529,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

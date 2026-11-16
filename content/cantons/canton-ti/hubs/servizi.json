@@ -4,32 +4,32 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "0d9534e259d150fca85ea06c19068a68ae782ffd18bd77482c166f7d3d16a9a2",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "4bcfccacb13654b6bde5471773ec23bb239ee10d2b27ee23f7d4af43a46a1173",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-11-08T11:18:20.402Z",
+      "updatedAt": "2026-11-15T11:58:26.359Z",
       "keyFacts": 1
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-15T07:56:24.088Z",
+      "updatedAt": "2026-11-16T06:47:29.912Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-15T06:26:36.869Z",
+      "updatedAt": "2026-11-16T06:25:42.818Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-15T06:51:41.323Z",
+      "updatedAt": "2026-11-16T06:51:00.113Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-14T21:43:27.949Z",
+      "updatedAt": "2026-11-15T22:07:40.362Z",
       "keyFacts": 0
     }
   ],
@@ -49,7 +49,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "2",
-          "note": "offerta mediana 8550 CHF"
+          "note": "offerta mediana 600 CHF"
         }
       ],
       "dataBlocks": [
@@ -71,7 +71,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-08T11:18:20.402Z"
+          "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -82,11 +82,6 @@
               "label": "Pharmantica",
               "detail": "Biasca, Biasca e Valli",
               "date": "2026-11-13T17:00:00.000Z"
-            },
-            {
-              "label": "S. Gottardo",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-11-13T17:30:00.000Z"
             },
             {
               "label": "Montalbano",
@@ -107,11 +102,16 @@
               "label": "Zanini SA",
               "detail": "Stabio, Mendrisiotto",
               "date": "2026-11-17T07:00:00.000Z"
+            },
+            {
+              "label": "Grassi",
+              "detail": "Faido, Biasca e Valli",
+              "date": "2026-11-20T17:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-15T07:56:24.088Z"
+          "updatedAt": "2026-11-16T06:47:29.912Z"
         },
         {
           "id": "aste-targhe",
@@ -119,23 +119,23 @@
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
-              "label": "TI735",
-              "value": "16.200 CHF",
+              "label": "TI92266",
+              "value": "600 CHF",
               "detail": "offerta attuale",
-              "date": "2026-11-15T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1543"
+              "date": "2026-11-25T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1545"
             },
             {
-              "label": "TI12396",
-              "value": "900 CHF",
+              "label": "TI295952",
+              "value": "600 CHF",
               "detail": "offerta attuale",
-              "date": "2026-11-15T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1544"
+              "date": "2026-11-25T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1546"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-15T06:26:36.869Z"
+          "updatedAt": "2026-11-16T06:25:42.818Z"
         },
         {
           "id": "meteo",
@@ -144,32 +144,32 @@
           "items": [
             {
               "label": "Bellinzona",
-              "value": "6 °C",
-              "detail": "oggi da 5 a 10 °C"
+              "value": "5 °C",
+              "detail": "oggi da 5 a 13 °C"
             },
             {
               "label": "Chiasso",
-              "value": "6 °C",
-              "detail": "oggi da 5 a 10 °C"
+              "value": "4 °C",
+              "detail": "oggi da 4 a 11 °C"
             },
             {
               "label": "Locarno",
               "value": "7 °C",
-              "detail": "oggi da 8 a 10 °C"
+              "detail": "oggi da 7 a 13 °C"
             },
             {
               "label": "Lugano",
-              "value": "8 °C",
-              "detail": "oggi da 7 a 10 °C"
+              "value": "6 °C",
+              "detail": "oggi da 6 a 12 °C"
             },
             {
               "label": "Mendrisio",
-              "value": "5 °C",
-              "detail": "oggi da 5 a 9 °C"
+              "value": "3 °C",
+              "detail": "oggi da 4 a 11 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-15T06:51:41.323Z"
+          "updatedAt": "2026-11-16T06:51:00.113Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -207,7 +207,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/Chirurgia-toracica-di-qualit-.html"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -295,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "TI",
@@ -312,7 +312,7 @@
         {
           "label": "Plate auctions running",
           "value": "2",
-          "note": "typical bid 8,550 CHF"
+          "note": "typical bid 600 CHF"
         }
       ],
       "dataBlocks": [
@@ -334,7 +334,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-08T11:18:20.402Z"
+          "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -345,11 +345,6 @@
               "label": "Pharmantica",
               "detail": "Biasca, Biasca e Valli",
               "date": "2026-11-13T17:00:00.000Z"
-            },
-            {
-              "label": "S. Gottardo",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-11-13T17:30:00.000Z"
             },
             {
               "label": "Montalbano",
@@ -370,11 +365,16 @@
               "label": "Zanini SA",
               "detail": "Stabio, Mendrisiotto",
               "date": "2026-11-17T07:00:00.000Z"
+            },
+            {
+              "label": "Grassi",
+              "detail": "Faido, Biasca e Valli",
+              "date": "2026-11-20T17:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-15T07:56:24.088Z"
+          "updatedAt": "2026-11-16T06:47:29.912Z"
         },
         {
           "id": "aste-targhe",
@@ -382,23 +382,23 @@
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
-              "label": "TI735",
-              "value": "16,200 CHF",
+              "label": "TI92266",
+              "value": "600 CHF",
               "detail": "current bid",
-              "date": "2026-11-15T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1543"
+              "date": "2026-11-25T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1545"
             },
             {
-              "label": "TI12396",
-              "value": "900 CHF",
+              "label": "TI295952",
+              "value": "600 CHF",
               "detail": "current bid",
-              "date": "2026-11-15T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1544"
+              "date": "2026-11-25T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1546"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-15T06:26:36.869Z"
+          "updatedAt": "2026-11-16T06:25:42.818Z"
         },
         {
           "id": "meteo",
@@ -407,32 +407,32 @@
           "items": [
             {
               "label": "Bellinzona",
-              "value": "6 °C",
-              "detail": "today from 5 to 10 °C"
+              "value": "5 °C",
+              "detail": "today from 5 to 13 °C"
             },
             {
               "label": "Chiasso",
-              "value": "6 °C",
-              "detail": "today from 5 to 10 °C"
+              "value": "4 °C",
+              "detail": "today from 4 to 11 °C"
             },
             {
               "label": "Locarno",
               "value": "7 °C",
-              "detail": "today from 8 to 10 °C"
+              "detail": "today from 7 to 13 °C"
             },
             {
               "label": "Lugano",
-              "value": "8 °C",
-              "detail": "today from 7 to 10 °C"
+              "value": "6 °C",
+              "detail": "today from 6 to 12 °C"
             },
             {
               "label": "Mendrisio",
-              "value": "5 °C",
-              "detail": "today from 5 to 9 °C"
+              "value": "3 °C",
+              "detail": "today from 4 to 11 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-15T06:51:41.323Z"
+          "updatedAt": "2026-11-16T06:51:00.113Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -470,7 +470,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/Chirurgia-toracica-di-qualit-.html"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "TI",
@@ -570,7 +570,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "2",
-          "note": "mittleres Gebot 8’550 CHF"
+          "note": "mittleres Gebot 600 CHF"
         }
       ],
       "dataBlocks": [
@@ -592,7 +592,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-08T11:18:20.402Z"
+          "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -603,11 +603,6 @@
               "label": "Pharmantica",
               "detail": "Biasca, Biasca e Valli",
               "date": "2026-11-13T17:00:00.000Z"
-            },
-            {
-              "label": "S. Gottardo",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-11-13T17:30:00.000Z"
             },
             {
               "label": "Montalbano",
@@ -628,11 +623,16 @@
               "label": "Zanini SA",
               "detail": "Stabio, Mendrisiotto",
               "date": "2026-11-17T07:00:00.000Z"
+            },
+            {
+              "label": "Grassi",
+              "detail": "Faido, Biasca e Valli",
+              "date": "2026-11-20T17:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-15T07:56:24.088Z"
+          "updatedAt": "2026-11-16T06:47:29.912Z"
         },
         {
           "id": "aste-targhe",
@@ -640,23 +640,23 @@
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
-              "label": "TI735",
-              "value": "16’200 CHF",
+              "label": "TI92266",
+              "value": "600 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-11-15T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1543"
+              "date": "2026-11-25T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1545"
             },
             {
-              "label": "TI12396",
-              "value": "900 CHF",
+              "label": "TI295952",
+              "value": "600 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-11-15T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1544"
+              "date": "2026-11-25T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1546"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-15T06:26:36.869Z"
+          "updatedAt": "2026-11-16T06:25:42.818Z"
         },
         {
           "id": "meteo",
@@ -665,32 +665,32 @@
           "items": [
             {
               "label": "Bellinzona",
-              "value": "6 °C",
-              "detail": "heute 5 bis 10 °C"
+              "value": "5 °C",
+              "detail": "heute 5 bis 13 °C"
             },
             {
               "label": "Chiasso",
-              "value": "6 °C",
-              "detail": "heute 5 bis 10 °C"
+              "value": "4 °C",
+              "detail": "heute 4 bis 11 °C"
             },
             {
               "label": "Locarno",
               "value": "7 °C",
-              "detail": "heute 8 bis 10 °C"
+              "detail": "heute 7 bis 13 °C"
             },
             {
               "label": "Lugano",
-              "value": "8 °C",
-              "detail": "heute 7 bis 10 °C"
+              "value": "6 °C",
+              "detail": "heute 6 bis 12 °C"
             },
             {
               "label": "Mendrisio",
-              "value": "5 °C",
-              "detail": "heute 5 bis 9 °C"
+              "value": "3 °C",
+              "detail": "heute 4 bis 11 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-15T06:51:41.323Z"
+          "updatedAt": "2026-11-16T06:51:00.113Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -728,7 +728,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/Chirurgia-toracica-di-qualit-.html"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -811,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "TI",
@@ -828,7 +828,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "2",
-          "note": "offre centrale 8 550 CHF"
+          "note": "offre centrale 600 CHF"
         }
       ],
       "dataBlocks": [
@@ -850,7 +850,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-11-08T11:18:20.402Z"
+          "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -861,11 +861,6 @@
               "label": "Pharmantica",
               "detail": "Biasca, Biasca e Valli",
               "date": "2026-11-13T17:00:00.000Z"
-            },
-            {
-              "label": "S. Gottardo",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-11-13T17:30:00.000Z"
             },
             {
               "label": "Montalbano",
@@ -886,11 +881,16 @@
               "label": "Zanini SA",
               "detail": "Stabio, Mendrisiotto",
               "date": "2026-11-17T07:00:00.000Z"
+            },
+            {
+              "label": "Grassi",
+              "detail": "Faido, Biasca e Valli",
+              "date": "2026-11-20T17:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-15T07:56:24.088Z"
+          "updatedAt": "2026-11-16T06:47:29.912Z"
         },
         {
           "id": "aste-targhe",
@@ -898,23 +898,23 @@
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
-              "label": "TI735",
-              "value": "16 200 CHF",
+              "label": "TI92266",
+              "value": "600 CHF",
               "detail": "offre actuelle",
-              "date": "2026-11-15T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1543"
+              "date": "2026-11-25T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1545"
             },
             {
-              "label": "TI12396",
-              "value": "900 CHF",
+              "label": "TI295952",
+              "value": "600 CHF",
               "detail": "offre actuelle",
-              "date": "2026-11-15T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1544"
+              "date": "2026-11-25T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1546"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-15T06:26:36.869Z"
+          "updatedAt": "2026-11-16T06:25:42.818Z"
         },
         {
           "id": "meteo",
@@ -923,32 +923,32 @@
           "items": [
             {
               "label": "Bellinzona",
-              "value": "6 °C",
-              "detail": "aujourd’hui de 5 à 10 °C"
+              "value": "5 °C",
+              "detail": "aujourd’hui de 5 à 13 °C"
             },
             {
               "label": "Chiasso",
-              "value": "6 °C",
-              "detail": "aujourd’hui de 5 à 10 °C"
+              "value": "4 °C",
+              "detail": "aujourd’hui de 4 à 11 °C"
             },
             {
               "label": "Locarno",
               "value": "7 °C",
-              "detail": "aujourd’hui de 8 à 10 °C"
+              "detail": "aujourd’hui de 7 à 13 °C"
             },
             {
               "label": "Lugano",
-              "value": "8 °C",
-              "detail": "aujourd’hui de 7 à 10 °C"
+              "value": "6 °C",
+              "detail": "aujourd’hui de 6 à 12 °C"
             },
             {
               "label": "Mendrisio",
-              "value": "5 °C",
-              "detail": "aujourd’hui de 5 à 9 °C"
+              "value": "3 °C",
+              "detail": "aujourd’hui de 4 à 11 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-15T06:51:41.323Z"
+          "updatedAt": "2026-11-16T06:51:00.113Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -986,7 +986,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/Chirurgia-toracica-di-qualit-.html"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -1066,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }

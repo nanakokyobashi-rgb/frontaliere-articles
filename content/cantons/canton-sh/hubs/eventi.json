@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-11-15T12:42:19.424Z",
-  "contentHash": "7d740cae0ebb5ffa12a513ea3ab17571fb56bb7baef215017162caf85265c3bf",
+  "updatedAt": "2026-11-16T18:42:30.844Z",
+  "contentHash": "5797d040a507bd3246e3ced139ba338923aa9fbd591d34a873eaa0dd44686a78",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T06:24:39.723Z",
+      "updatedAt": "2026-11-15T21:47:09.888Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-14T21:43:27.949Z",
+      "updatedAt": "2026-11-15T22:07:40.362Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "30",
+          "value": "23",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,48 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "7th Schaffhausen Vinyl Exchange",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/7th-schaffhausen-vinyl-exchange/"
-            },
-            {
-              "label": "Hanna & Harald",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hanna-harald-6/"
-            },
-            {
-              "label": "Legenden und Sagen aus dem Tessin",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/legenden-und-sagen-aus-dem-tessin/"
-            },
-            {
-              "label": "Murder Mystery Dinner / PIZZA, PASTA, MURDER",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/murder-mystery-dinner-pizza-pasta-murder/"
-            },
-            {
-              "label": "Schaffhausen Klassik Extrakonzert 1: «LUX AETERNA»",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhausen-klassik-extrakonzert-1-lux-aeterna/"
-            },
-            {
-              "label": "5 Jahre Bachturnhalle",
-              "detail": "Theater Bachturnhalle — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/5-jahre-bachturnhalle_Afg9Vtd"
-            },
-            {
-              "label": "5 Years of the Bachturnhalle",
-              "detail": "Theater Bachturnhalle, Schaffhausen — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/5-years-of-the-bachturnhalle/"
-            },
             {
               "label": "Evening sale z'Hallau",
               "detail": "8215 Hallau, Hallau",
@@ -96,11 +54,53 @@
               "detail": "Theater Bachturnhalle",
               "date": "2026-11-20",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/buehne-cipolla-der-untergang-des-hauses-usher-nach-edgar-allan-poe_AkYG35Q"
+            },
+            {
+              "label": "Cipolla Theater - The Fall of the House of Usher (based on Edgar Allan Poe)",
+              "detail": "Schaffhausen",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cipolla-theater-the-fall-of-the-house-of-usher-based-on-edgar-allan-poe/"
+            },
+            {
+              "label": "Mercatino dell'Avvento a Neunkirch",
+              "detail": "Neunkirch",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsmarkt-in-neunkirch/"
+            },
+            {
+              "label": "Autumn tasting Bringolf Weinbau",
+              "detail": "Bringolf Weinbau, Hallau",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/degustation-bringolf-weinbau/"
+            },
+            {
+              "label": "THE RED HOT SERENADERS – Blues, Swing & Ragtime",
+              "detail": "Kunstschür, Stein am Rhein",
+              "date": "2026-11-21",
+              "url": "https://www.guidle.com/it/evenements/musique/stein-am-rhein/the-red-hot-serenaders-blues-swing-et-ragtime_AdYKfgA"
+            },
+            {
+              "label": "Stummfilmklassiker - Die Abenteuer des Prinzen Achmed mit Live-Musik",
+              "detail": "Schwanen Kino & Theater, Stein am Rhein",
+              "date": "2026-11-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/stein-am-rhein/stummfilmklassiker-die-abenteuer-des-prinzen-achmed-mit-live-musik_AJqf3qE"
+            },
+            {
+              "label": "The Adventures of Prince Achmed - 100 years of Cinema Schwanen",
+              "detail": "Stein am Rhein",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-adventures-of-prince-achmed-100-years-of-cinema-schwanen-2/"
+            },
+            {
+              "label": "Troubadours Tour – zwöierlei singen Mani Matter",
+              "detail": "Stadttheater Schaffhausen, Schaffhausen",
+              "date": "2026-11-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/troubadours-tour-zwoeierlei-singen-mani-matter_AUBTu2F"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -138,7 +138,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/konzert+seze+jazzcube"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -160,7 +160,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "en": {
       "canton": "SH",
@@ -170,7 +170,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "30",
+          "value": "23",
           "note": "from the site’s events calendar"
         }
       ],
@@ -180,48 +180,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "7th Schaffhausen Vinyl Exchange",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/7th-schaffhausen-vinyl-exchange/"
-            },
-            {
-              "label": "Hanna & Harald",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hanna-harald-6/"
-            },
-            {
-              "label": "Legenden und Sagen aus dem Tessin",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/legenden-und-sagen-aus-dem-tessin/"
-            },
-            {
-              "label": "Murder Mystery Dinner / PIZZA, PASTA, MURDER",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/murder-mystery-dinner-pizza-pasta-murder/"
-            },
-            {
-              "label": "Schaffhausen Klassik Extrakonzert 1: «LUX AETERNA»",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhausen-klassik-extrakonzert-1-lux-aeterna/"
-            },
-            {
-              "label": "5 Years of the Bachturnhalle",
-              "detail": "Theater Bachturnhalle — ongoing, last day: 15 November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/5-jahre-bachturnhalle_Afg9Vtd"
-            },
-            {
-              "label": "5 Years of the Bachturnhalle",
-              "detail": "Theater Bachturnhalle, Schaffhausen — ongoing, last day: 15 November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/5-years-of-the-bachturnhalle/"
-            },
             {
               "label": "Evening sale z'Hallau",
               "detail": "8215 Hallau, Hallau",
@@ -239,11 +197,53 @@
               "detail": "Theater Bachturnhalle",
               "date": "2026-11-20",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/buehne-cipolla-der-untergang-des-hauses-usher-nach-edgar-allan-poe_AkYG35Q"
+            },
+            {
+              "label": "Cipolla Theater - The Fall of the House of Usher (based on Edgar Allan Poe)",
+              "detail": "Schaffhausen",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cipolla-theater-the-fall-of-the-house-of-usher-based-on-edgar-allan-poe/"
+            },
+            {
+              "label": "Advent market in Neunkirch",
+              "detail": "Neunkirch",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsmarkt-in-neunkirch/"
+            },
+            {
+              "label": "Autumn tasting Bringolf Weinbau",
+              "detail": "Bringolf Weinbau, Hallau",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/degustation-bringolf-weinbau/"
+            },
+            {
+              "label": "THE RED HOT SERENADERS – Blues, Swing & Ragtime",
+              "detail": "Kunstschür, Stein am Rhein",
+              "date": "2026-11-21",
+              "url": "https://www.guidle.com/it/evenements/musique/stein-am-rhein/the-red-hot-serenaders-blues-swing-et-ragtime_AdYKfgA"
+            },
+            {
+              "label": "Stummfilmklassiker - Die Abenteuer des Prinzen Achmed mit Live-Musik",
+              "detail": "Schwanen Kino & Theater, Stein am Rhein",
+              "date": "2026-11-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/stein-am-rhein/stummfilmklassiker-die-abenteuer-des-prinzen-achmed-mit-live-musik_AJqf3qE"
+            },
+            {
+              "label": "The Adventures of Prince Achmed - 100 years of Cinema Schwanen",
+              "detail": "Stein am Rhein",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-adventures-of-prince-achmed-100-years-of-cinema-schwanen-2/"
+            },
+            {
+              "label": "Troubadours Tour – zwöierlei singen Mani Matter",
+              "detail": "Stadttheater Schaffhausen, Schaffhausen",
+              "date": "2026-11-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/troubadours-tour-zwoeierlei-singen-mani-matter_AUBTu2F"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -281,7 +281,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/konzert+seze+jazzcube"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -303,7 +303,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "de": {
       "canton": "SH",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "30",
+          "value": "23",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -323,48 +323,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "7. Schaffhauser Vinylbörse",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/7th-schaffhausen-vinyl-exchange/"
-            },
-            {
-              "label": "Hanna & Harald",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hanna-harald-6/"
-            },
-            {
-              "label": "Legenden und Sagen aus dem Tessin",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/legenden-und-sagen-aus-dem-tessin/"
-            },
-            {
-              "label": "DinnerKrimi / PIZZA, PASTA, MORD",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/murder-mystery-dinner-pizza-pasta-murder/"
-            },
-            {
-              "label": "Schaffhausen Klassik Extrakonzert 1: «LUX AETERNA»",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhausen-klassik-extrakonzert-1-lux-aeterna/"
-            },
-            {
-              "label": "5 Jahre Bachturnhalle",
-              "detail": "Theater Bachturnhalle — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/5-jahre-bachturnhalle_Afg9Vtd"
-            },
-            {
-              "label": "5 Jahre Bachturnhalle",
-              "detail": "Theater Bachturnhalle, Schaffhausen — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/5-years-of-the-bachturnhalle/"
-            },
             {
               "label": "Abendverkauf Hallau",
               "detail": "8215 Hallau, Hallau",
@@ -382,11 +340,53 @@
               "detail": "Theater Bachturnhalle",
               "date": "2026-11-20",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/buehne-cipolla-der-untergang-des-hauses-usher-nach-edgar-allan-poe_AkYG35Q"
+            },
+            {
+              "label": "Bühne Cipolla - Der Untergang des Hauses Usher (nach Edgar Allan Poe)",
+              "detail": "Schaffhausen",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cipolla-theater-the-fall-of-the-house-of-usher-based-on-edgar-allan-poe/"
+            },
+            {
+              "label": "Adventsmarkt in Neunkirch",
+              "detail": "Neunkirch",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsmarkt-in-neunkirch/"
+            },
+            {
+              "label": "Degustation Bringolf Weinbau",
+              "detail": "Bringolf Weinbau, Hallau",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/degustation-bringolf-weinbau/"
+            },
+            {
+              "label": "THE RED HOT SERENADERS – Blues, Swing & Ragtime",
+              "detail": "Kunstschür, Stein am Rhein",
+              "date": "2026-11-21",
+              "url": "https://www.guidle.com/it/evenements/musique/stein-am-rhein/the-red-hot-serenaders-blues-swing-et-ragtime_AdYKfgA"
+            },
+            {
+              "label": "Stummfilmklassiker - Die Abenteuer des Prinzen Achmed mit Live-Musik",
+              "detail": "Schwanen Kino & Theater, Stein am Rhein",
+              "date": "2026-11-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/stein-am-rhein/stummfilmklassiker-die-abenteuer-des-prinzen-achmed-mit-live-musik_AJqf3qE"
+            },
+            {
+              "label": "Die Abenteuer des Prinzen Achmed – 100 Jahre Cinema Schwanen",
+              "detail": "Stein am Rhein",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-adventures-of-prince-achmed-100-years-of-cinema-schwanen-2/"
+            },
+            {
+              "label": "Troubadours Tour – zwöierlei singen Mani Matter",
+              "detail": "Stadttheater Schaffhausen, Schaffhausen",
+              "date": "2026-11-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/troubadours-tour-zwoeierlei-singen-mani-matter_AUBTu2F"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -424,7 +424,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/konzert+seze+jazzcube"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -446,7 +446,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     },
     "fr": {
       "canton": "SH",
@@ -456,7 +456,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "30",
+          "value": "23",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -466,48 +466,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "7e bourse aux vinyles de Schaffhouse",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/7th-schaffhausen-vinyl-exchange/"
-            },
-            {
-              "label": "Hanna & Harald",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hanna-harald-6/"
-            },
-            {
-              "label": "Legenden und Sagen aus dem Tessin",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/legenden-und-sagen-aus-dem-tessin/"
-            },
-            {
-              "label": "Dîner policier / PIZZA, PÂTES, MEURTRE",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/murder-mystery-dinner-pizza-pasta-murder/"
-            },
-            {
-              "label": "Schaffhausen Klassik Extrakonzert 1: «LUX AETERNA»",
-              "detail": "Schaffhausen",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhausen-klassik-extrakonzert-1-lux-aeterna/"
-            },
-            {
-              "label": "Les 5 ans de la salle de sport Bachturnhalle",
-              "detail": "Theater Bachturnhalle — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/5-jahre-bachturnhalle_Afg9Vtd"
-            },
-            {
-              "label": "Les 5 ans de la salle de sport Bachturnhalle",
-              "detail": "Theater Bachturnhalle, Schaffhausen — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-15",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/5-years-of-the-bachturnhalle/"
-            },
             {
               "label": "Vente du soir z'Hallau",
               "detail": "8215 Hallau, Hallau",
@@ -525,11 +483,53 @@
               "detail": "Theater Bachturnhalle",
               "date": "2026-11-20",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/buehne-cipolla-der-untergang-des-hauses-usher-nach-edgar-allan-poe_AkYG35Q"
+            },
+            {
+              "label": "Théâtre Cipolla - La Chute de la maison Usher (d'après Edgar Allan Poe)",
+              "detail": "Schaffhausen",
+              "date": "2026-11-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cipolla-theater-the-fall-of-the-house-of-usher-based-on-edgar-allan-poe/"
+            },
+            {
+              "label": "Marché de l'Avent à Neunkirch",
+              "detail": "Neunkirch",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsmarkt-in-neunkirch/"
+            },
+            {
+              "label": "Dégustation d'automne Bringolf Weinbau",
+              "detail": "Bringolf Weinbau, Hallau",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/degustation-bringolf-weinbau/"
+            },
+            {
+              "label": "THE RED HOT SERENADERS – Blues, swing et ragtime",
+              "detail": "Kunstschür, Stein am Rhein",
+              "date": "2026-11-21",
+              "url": "https://www.guidle.com/it/evenements/musique/stein-am-rhein/the-red-hot-serenaders-blues-swing-et-ragtime_AdYKfgA"
+            },
+            {
+              "label": "Stummfilmklassiker - Die Abenteuer des Prinzen Achmed mit Live-Musik",
+              "detail": "Schwanen Kino & Theater, Stein am Rhein",
+              "date": "2026-11-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/stein-am-rhein/stummfilmklassiker-die-abenteuer-des-prinzen-achmed-mit-live-musik_AJqf3qE"
+            },
+            {
+              "label": "Les aventures du prince Achmed - 100 ans de Cinéma Schwanen",
+              "detail": "Stein am Rhein",
+              "date": "2026-11-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-adventures-of-prince-achmed-100-years-of-cinema-schwanen-2/"
+            },
+            {
+              "label": "Troubadours Tour – zwöierlei singen Mani Matter",
+              "detail": "Stadttheater Schaffhausen, Schaffhausen",
+              "date": "2026-11-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/troubadours-tour-zwoeierlei-singen-mani-matter_AUBTu2F"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-11-15T06:24:39.723Z"
+          "updatedAt": "2026-11-15T21:47:09.888Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -567,7 +567,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/konzert+seze+jazzcube"
             }
           ],
-          "updatedAt": "2026-11-14T21:43:27.949Z"
+          "updatedAt": "2026-11-15T22:07:40.362Z"
         }
       ],
       "curatedArticles": [
@@ -589,7 +589,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-15T12:42:19.424Z"
+      "updatedAt": "2026-11-16T18:42:30.844Z"
     }
   }
 }
