@@ -4,17 +4,25 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/303960/gleichberechtigung-statt-r%c3%bcckschritt-bei-den-steuern": {
-      "section": "canton-fr",
-      "ts": 1794645475530
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/304967/kanton-freiburg-digitalisiert-baubewilligungen": {
-      "section": "canton-fr",
-      "ts": 1794699542098
-    },
     "canton-fr::https://www.freiburger-nachrichten.ch/story/305428/zoff-um-5000-franken-mindestlohn-st%c3%a4rkt-das-die-lehre%c2%a0-oder-gef%c3%a4hrdet-es-jobs": {
       "section": "canton-fr",
       "ts": 1794785674443
+    },
+    "canton-fr::https://www.laliberte.ch/articles/regions/canton/le-ssp-demande-au-conseil-d-etat-de-se-positionner-sur-la-revalorisation-des-salaires-du-personnel-s-1488471": {
+      "section": "canton-fr",
+      "ts": 1794953593898
+    },
+    "canton-fr::https://latele.ch/articles/fribourg-contestation-salariale-dans-le-domaine-de-la-sante": {
+      "section": "canton-fr",
+      "ts": 1794953770415
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/306130/lohnstreit-im-freiburger-gesundheitswesen-geht-vor-die-schlichtungsstelle": {
+      "section": "canton-fr",
+      "ts": 1794953773055
+    },
+    "canton-fr::https://www.frapp.ch/fr/articles/stories/13e-rente-avs-un-soulagement-pour-les-retraites": {
+      "section": "canton-fr",
+      "ts": 1794953959588
     }
   }
 }
