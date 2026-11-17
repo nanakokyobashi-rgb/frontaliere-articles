@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/826644/darbellay-zum-cremor%c3%bcckzug-ein-teil-der-arbeitspl%c3%a4tze-in-siders-ist-sicher-gef%c3%a4hrdet": {
-      "section": "canton-vs",
-      "ts": 1794692731913
-    },
     "canton-vs::https://www.pomona.ch/story/827225/h%c3%b6here-l%c3%b6hne-und-einheitliche-regeln-wie-kann-man-da-dagegen-sein-mathias-witschard": {
       "section": "canton-vs",
       "ts": 1794838391059
@@ -19,6 +15,10 @@
     "canton-vs::https://www.pomona.ch/story/827363/nach-hackerattacke-operativer-betrieb-der-bringhen-group-l%c3%a4uft-weitgehend-wieder-gefahr-noch-nicht-gebannt": {
       "section": "canton-vs",
       "ts": 1794838393651
+    },
+    "canton-vs::https://www.pomona.ch/story/827876/zum-weinen-parlament-will-weinbranche-helfen-doch-branchenverband-kippt-aktion": {
+      "section": "canton-vs",
+      "ts": 1794927257147
     }
   }
 }
