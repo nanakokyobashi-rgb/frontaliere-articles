@@ -14805,29 +14805,13 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/11/ho-41-anni-esperienza-e-voglia-di-lavorare-ma-a-varese-trovare-un-impiego-sembra-impossibile/2738917": {
-      "section": "frontaliere",
-      "ts": 1794671213752
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/mendrisio-parcheggi-gratuiti-negli-autosili-nel-periodo-natalizio-446623": {
-      "section": "frontaliere",
-      "ts": 1794696184287
-    },
-    "frontaliere::https://www.tio.ch/svizzera/economia/1962940/lavoro-giovani-record-disoccupazione-valori": {
-      "section": "frontaliere",
-      "ts": 1794730426537
-    },
-    "frontaliere::https://www.tio.ch/svizzera/economia/1962829/svizzera-disoccupazione-anni-federale-toccato": {
-      "section": "frontaliere",
-      "ts": 1794730467333
-    },
-    "svizzera::https://www.ilgiorno.it/como/cronaca/polizze-sanitarie-alle-stelle-in-f0a74e0f": {
-      "section": "svizzera",
-      "ts": 1794770220394
-    },
     "svizzera::https://www.tio.ch/rubriche/ospite/1963126/malati-cassa-danilo-forini-reti": {
       "section": "svizzera",
       "ts": 1794820288316
+    },
+    "frontaliere::https://www.ocst.ch/il-lavoro/411-professioni/404-sociosanitario/2638-salute-premi-di-cassa-malati-e-responsabilita-una-riflessione-sul-crescente-costo-della-sanita-ticinese": {
+      "section": "frontaliere",
+      "ts": 1794943450836
     }
   }
 }
