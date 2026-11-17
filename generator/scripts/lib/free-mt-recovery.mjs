@@ -264,20 +264,16 @@ export function claimFreeMtLlmFallback(
 // gate lo vede dopo: una copia italiana ha gli stessi numeri della sorgente.
 //
 // Ora il campo resta ASSENTE dal contenuto del locale, e l'assenza e' il
-// marker di «traduzione in attesa»:
-//   - e' deterministica. Su origin/main 85fd0abf nessuna delle 18.558 coppie
-//     articolo×locale di `content/blog-body{,-ch}` manca di un `bodyN` che
-//     l'italiano ha, quindi chi recupera la trova confrontando le chiavi, senza
-//     un rilevatore di lingua;
-//   - il sito la gestisce gia'. La SPA risolve una chiave mancante
-//     sull'italiano (`t()` in services/i18n.ts), il prerender rende solo le
-//     sezioni presenti senza spostare le intestazioni (ogPagesPlugin), i feed
-//     concatenano le parti presenti, e `scripts/build-api.mjs` non legge i body.
+// marker di «traduzione in attesa». E' deterministica: chi recupera il dato
+// la trova confrontando le chiavi con il contenuto italiano, senza un
+// rilevatore di lingua. Il marker e' solo uno stato intermedio: il chiamante
+// lo converte in un rifiuto di qualita' prima di immagini, staging e scrittura;
+// la guardia di completezza resta il backstop fail-closed.
 //
 // Il marker vive anche su `data`, come proprieta' NON enumerabile, perche' i
 // mutatori a valle (CTA in body3, link interni in body2) non ricreino il campo
-// con un moncone di sola CTA: cancellerebbe il marker e, nella SPA, il moncone
-// vincerebbe sull'intero body italiano.
+// con un moncone di sola CTA: cancellerebbe il marker e nasconderebbe il
+// debito di traduzione prima del controllo finale.
 const PENDING_BODY_TRANSLATIONS = '_pendingBodyTranslations';
 
 function pendingList(data, { create = false } = {}) {
@@ -341,6 +337,22 @@ export function pendingBodyTranslations(data) {
 }
 
 /**
+ * Trasforma il debito di traduzione rimasto dopo la recovery in un rifiuto
+ * tipizzato. Il candidato non deve arrivare ai writer con body mancanti.
+ */
+export function assertNoPendingBodyTranslations(data) {
+  const pending = pendingBodyTranslations(data);
+  if (pending.length === 0) return;
+  const fields = pending
+    .map((record) => freeMtFieldKey(record.locale, record.field))
+    .join(', ');
+  const error = new Error(['Traduzioni body pendenti dopo il recupero', fields].join(': '));
+  error.qualityReject = true;
+  error.pendingBodyTranslations = pending;
+  throw error;
+}
+
+/**
  * Toglie il marker di attesa da `locale`/`field` (il body e' stato tradotto da
  * un'altra corsia) e lo sposta, nel report, da `pendingBodyFields` a
  * `pendingBodyRecovered`. Non scrive il contenuto: lo fa il chiamante.
@@ -375,7 +387,8 @@ export function clearBodyTranslationPending(data, { locale, field, report = null
 // La guardia ha ragione (AGENTS.md #1) e resta com'e': prima che l'articolo
 // arrivi li', ogni body in attesa riceve UN tentativo su una seconda corsia,
 // indipendente dalla cascata appena esaurita. Se anche quella non traduce, il
-// body resta in attesa e la guardia continua a fermare l'articolo.
+// chiamante rigetta il candidato prima della scrittura; la guardia continua a
+// essere il backstop fail-closed per ogni percorso che dovesse sfuggire.
 //
 // La funzione e' pura rispetto al trasporto: la corsia (`translate`), il
 // giudizio sul testo (`rejectReason`), la normalizzazione (`finalize`), la

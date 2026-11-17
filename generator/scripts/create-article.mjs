@@ -396,6 +396,7 @@ import {
   markBodyTranslationPending,
   isBodyTranslationPending,
   retryPendingBodyTranslations,
+  assertNoPendingBodyTranslations,
 } from './lib/free-mt-recovery.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import {
@@ -6785,13 +6786,13 @@ function assertTranslationsPassFactualityGates(data) {
       ? data.content[locale]
       : {};
     const sections = collectBodySections(content);
-    // Un body lasciato NON tradotto da `translateArticle()` col marker
-    // `markBodyTranslationPending` e' un'assenza AUTORIZZATA: la SPA ripiega
-    // sull'italiano e il recupero lo ritraduce. Il riferimento italiano per
-    // quel locale lo esclude, cosi' `translation-section-missing` scatta solo
-    // sulle assenze che nessuno ha dichiarato. Per lo stesso motivo un locale
-    // senza alcun body si salta SOLO se ogni body italiano e' in attesa:
-    // altrimenti il buco non dichiarato arriva al gate invece di sparire.
+    // Un body lasciato NON tradotto da `translateArticle()` e' un marker
+    // intermedio: `assertNoPendingBodyTranslations` rigetta il candidato
+    // prima dei writer e dei gate finali. Questo filtro resta difensivo per
+    // i chiamanti che ispezionano uno stato intermedio, cosi' il gate di
+    // fattualita' non duplica il finding gia' rappresentato dal rifiuto.
+    // Un locale senza alcun body si salta SOLO se ogni body italiano e' in
+    // attesa; altrimenti il buco non dichiarato arriva al gate invece di sparire.
     const referenceSections = Object.fromEntries(
       Object.entries(italianSections).filter(([field]) => !isBodyTranslationPending(data, locale, field)),
     );
@@ -18235,9 +18236,10 @@ ${localizedToponymInstruction(targetLang)}`;
   // storica senza Codex: il fallimento della lane primaria non deve trasformare
   // una recovery ancora possibile in un missing-key certo.
   // L'uscita passa da `translateFieldFreeMt` come ogni body free-MT (nav-link,
-  // completezza, passthrough): vedi i due helper di recovery. La guardia resta
-  // invariata: se anche Codex non traduce, il body resta in attesa e
-  // l'articolo resta fuori da main. Vedi `retryPendingBodyTranslations`.
+  // completezza, passthrough): vedi i due helper di recovery. Se anche la
+  // seconda corsia non traduce, `assertNoPendingBodyTranslations` rigetta il
+  // candidato prima di immagini, staging e scrittura; la guardia resta il
+  // backstop fail-closed. Vedi `retryPendingBodyTranslations`.
   // Sopra quel percorso, gli stessi predicati del retry di troncamento: testo
   // usabile nel locale, non l'italiano ricopiato, non troncato a meta' frase.
   const initialPendingBodyLane = pendingBodySecondLaneAvailable()
@@ -18278,6 +18280,8 @@ ${localizedToponymInstruction(targetLang)}`;
     finalize: (text) => sanitizeBodyText(text),
     log: (message) => console.error(message),
   });
+
+  assertNoPendingBodyTranslations(data);
 
   // ── Title length cap on translated locales (Semrush ≤ 60 chars gate) ──
   // German/French translations expand ~30% vs Italian, so a 58-char IT title
