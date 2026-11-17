@@ -11,15 +11,15 @@ import {
 
 const originalFetch = globalThis.fetch;
 const originalEnv = {
-  GEMINI_API_KEY: process.env.GEMINI_API_KEY,
   GH_MODELS_PAT: process.env.GH_MODELS_PAT,
+  GROQ_API_KEY: process.env.GROQ_API_KEY,
 };
 const NOW_MS = Date.parse('2026-10-25T08:00:00Z');
 
 beforeEach(() => {
   resetState();
-  process.env.GEMINI_API_KEY = 'retry-after-gemini-test';
   process.env.GH_MODELS_PAT = 'retry-after-github-test';
+  process.env.GROQ_API_KEY = 'retry-after-groq-test';
 });
 
 afterEach(() => {
@@ -111,10 +111,10 @@ test('il retry OpenAI-compatible interpreta Retry-After come HTTP-date', async (
   );
 });
 
-test('il retry Gemini interpreta Retry-After come HTTP-date', async () => {
+test('il retry Groq interpreta Retry-After come HTTP-date', async () => {
   await assertHttpDateRetryIsHonored(
-    AI_MODELS.GEMINI_FLASH,
-    JSON.stringify({ candidates: [{ content: { parts: [{ text: 'ok' }] } }] }),
-    { model: AI_MODELS.GEMINI_FLASH },
+    AI_MODELS.GROQ_GPT_OSS_120B,
+    JSON.stringify({ choices: [{ message: { content: 'ok' } }] }),
+    { model: AI_MODELS.GROQ_GPT_OSS_120B },
   );
 });
