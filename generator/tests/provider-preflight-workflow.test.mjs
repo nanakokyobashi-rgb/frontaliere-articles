@@ -28,6 +28,16 @@ test('Generate Blog Article esegue il preflight dopo il setup opzionale e prima 
   assert.match(generateBlock, /CODEX_AUTH_BROKER_SOCKET:/);
 });
 
+test('il generate espone la calibrazione Codex di lanes e batching della traduzione', () => {
+  const generate = WORKFLOW.indexOf('- name: Generate the article');
+  const nextStep = WORKFLOW.indexOf('\n      - ', generate + 1);
+  const generateBlock = WORKFLOW.slice(generate, nextStep === -1 ? undefined : nextStep);
+  assert.match(generateBlock, /FREE_TRANSLATE_CODEX_LANES:\s*['"]3['"]/);
+  assert.match(generateBlock, /FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS:\s*['"]10['"]/);
+  assert.match(generateBlock, /FREE_TRANSLATE_CODEX_BATCH_MAX_CHARS:\s*['"]3000['"]/);
+  assert.match(generateBlock, /FREE_TRANSLATE_CODEX_CALL_TIMEOUT_MS:\s*['"]480000['"]/);
+});
+
 test('il dry-run non viene bloccato dal preflight che richiede una lane attiva', () => {
   const start = WORKFLOW.indexOf('id: provider_preflight');
   const end = WORKFLOW.indexOf('# Dry mode stops here', start);
