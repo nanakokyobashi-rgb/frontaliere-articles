@@ -451,13 +451,13 @@ async function runSecondLaneBlock({
   const { block } = extractSecondLaneBlock();
   const AI_MODELS = { CODEX_CLI_PRIMARY: 'codex-cli/test' };
   const fn = new Function(
-    'data', 'RUN_REPORT', 'retryPendingBodyTranslations', 'AI_MODELS', 'pendingBodySecondLaneAvailable', 'pendingBodyRecoveryAvailable', 'pendingBodyLaneShouldStop',
+    'data', 'RUN_REPORT', 'retryPendingBodyTranslations', 'assertNoPendingBodyTranslations', 'AI_MODELS', 'pendingBodySecondLaneAvailable', 'pendingBodyRecoveryAvailable', 'pendingBodyLaneShouldStop',
     'translatePendingBodyWithCodex', 'translatePendingBodyWithHistoricalChain', 'callWithRetry', 'translatedStringOrNull', 'isSourcePassthrough', 'detectTruncation', 'sanitizeBodyText', 'translateInChunks', 'console',
     `${realTruncationSrc()}\nreturn (async () => { ${block} })();`,
   );
   const quiet = { error: () => {}, warn: () => {}, log: () => {} };
   await fn(
-    data, RUN_REPORT, retryPendingBodyTranslations, AI_MODELS, () => codexAvailable,
+    data, RUN_REPORT, retryPendingBodyTranslations, assertNoPendingBodyTranslations, AI_MODELS, () => codexAvailable,
     () => codexAvailable || historicalAvailable, () => false,
     translatePendingBodyWithCodex, translatePendingBodyWithHistoricalChain, async () => ({}),
     translatedStringOrNull, isSourcePassthrough, detectTruncation, sanitizeBodyText, null, quiet,
@@ -483,26 +483,32 @@ test('run 37220516797 riprodotta: de:body1 in attesa arriva alla guardia tradott
   assert.deepEqual(RUN_REPORT.translation.pendingBodyRecovered, { 'de:body1': 'codex-cli/test' });
 });
 
-test('nel cablaggio vero l\'italiano ricopiato e il testo troncato restano in attesa', async () => {
+test('nel cablaggio vero l\'italiano ricopiato e il testo troncato rigettano il candidato', async () => {
   for (const reply of [IT_BODY.body1, 'Der Gesundheitsbeitrag für September ändert sich für Grenzgänger im Tessin und der neue Satz gilt ab']) {
     const RUN_REPORT = { translation: createFreeMtRecoveryReport({ bodyFieldCount: 3 }) };
     const data = articleWithPendingDeBody1(RUN_REPORT.translation);
-    await runSecondLaneBlock({ data, RUN_REPORT, translatePendingBodyWithCodex: async () => reply });
+    await assert.rejects(
+      () => runSecondLaneBlock({ data, RUN_REPORT, translatePendingBodyWithCodex: async () => reply }),
+      (error) => { assert.equal(error.qualityReject, true); return true; },
+    );
     assert.deepEqual(missingKeys(data), ['de:body1'], `risposta accettata per errore: ${reply}`);
     assert.deepEqual(RUN_REPORT.translation.pendingBodyFields, { 'de:body1': 'retry-error' });
   }
 });
 
-test('senza Codex né catena storica disponibile il blocco non chiama nulla e il body resta in attesa', async () => {
+test('senza Codex né catena storica disponibile il blocco non chiama nulla e rigetta il candidato', async () => {
   const RUN_REPORT = { translation: createFreeMtRecoveryReport({ bodyFieldCount: 3 }) };
   const data = articleWithPendingDeBody1(RUN_REPORT.translation);
   let calls = 0;
-  await runSecondLaneBlock({
-    data,
-    RUN_REPORT,
-    codexAvailable: false,
-    translatePendingBodyWithCodex: async () => { calls += 1; return DE_BODY.body1; },
-  });
+  await assert.rejects(
+    () => runSecondLaneBlock({
+      data,
+      RUN_REPORT,
+      codexAvailable: false,
+      translatePendingBodyWithCodex: async () => { calls += 1; return DE_BODY.body1; },
+    }),
+    (error) => { assert.equal(error.qualityReject, true); return true; },
+  );
   assert.equal(calls, 0);
   assert.deepEqual(missingKeys(data), ['de:body1']);
   assert.equal(RUN_REPORT.translation.pendingBodyRetry.stoppedBy, 'lane-unavailable');
