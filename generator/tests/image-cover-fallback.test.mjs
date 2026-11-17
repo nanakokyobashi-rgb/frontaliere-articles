@@ -32,8 +32,10 @@ import {
   GENERATED_IMAGE_PROMPT_VERSION,
   GENERATED_IMAGE_RESTRICTIONS,
   LICENSED_PHOTO_RESTRICTIONS,
+  validateGeneratedImageRecord,
 } from '../../engine/shared/generatedImageRegistry.mjs';
 import {
+  imageVisionRejected,
   imageVisionRejectionError,
   isCompleteArticleHeroVisionVerdict,
 } from '../../engine/shared/generatedImageVision.mjs';
@@ -110,6 +112,7 @@ function generatedCatalogRecord() {
       contains_text: false,
       contains_logo: false,
       contains_recognizable_face: false,
+      contains_recognizable_foreground_person: false,
       looks_like_specific_real_event: false,
       notes: 'generic catalog illustration',
     },
@@ -722,6 +725,14 @@ test('the shared article-hero checker accepts a complete documentary photo and s
     is_photograph: true,
     is_topic_relevant: true,
   });
+});
+
+test('il flag di persona riconoscibile chiude sia il rejection generated sia il record gate', () => {
+  const unsafeVision = { ...safeGeneratedVision, contains_recognizable_foreground_person: true };
+  assert.equal(imageVisionRejected(unsafeVision, { kind: 'generated', scope: 'article-hero' }), true);
+  const validation = validateGeneratedImageRecord(generatedCatalogRecord({ vision: unsafeVision }));
+  assert.equal(validation.valid, false);
+  assert.match(validation.errors.join('; '), /vision gate verdict is missing or rejected/);
 });
 
 test('sostituire una foto licenziata con una cover generata rimuove il ledger obsoleto', () => {

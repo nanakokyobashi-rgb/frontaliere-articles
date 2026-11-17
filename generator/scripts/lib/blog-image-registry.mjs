@@ -74,6 +74,7 @@ const STATIC_FALLBACK_RECORD = Object.freeze({
     contains_text: false,
     contains_logo: false,
     contains_recognizable_face: false,
+    contains_recognizable_foreground_person: false,
     looks_like_specific_real_event: false,
     notes: 'Original generic illustrated landscape; no readable text, logos, signatures, recognizable faces, or specific real event.',
   },

@@ -57,7 +57,7 @@ export function imageVisionRejected(verdict, { kind = GENERATED_IMAGE_KIND, scop
       || (articleHero && verdict.contains_recognizable_foreground_person !== false)
       || (articleHero && verdict.contains_text);
   }
-  return verdict.contains_text !== false || verdict.contains_logo !== false || verdict.contains_recognizable_face !== false || verdict.looks_like_specific_real_event !== false;
+  return verdict.contains_text !== false || verdict.contains_logo !== false || verdict.contains_recognizable_face !== false || verdict.contains_recognizable_foreground_person !== false || verdict.looks_like_specific_real_event !== false;
 }
 
 const VISION_FAILURE_FLAG_NAMES = Object.freeze([
