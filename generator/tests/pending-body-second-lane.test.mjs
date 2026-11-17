@@ -19,7 +19,9 @@
  * IL FIX. Prima della guardia, `translateArticle()` passa ogni body in attesa a
  * `retryPendingBodyTranslations`, preferendo la corsia Codex pinnata e usando
  * la catena storica senza Codex quando la prima e' indisponibile o rifiutata.
- * La guardia resta invariata: se nessuna corsia traduce, il body resta in attesa.
+ * Se nessuna corsia traduce, il marker resta intermedio e `translateArticle()`
+ * rigetta il candidato prima della scrittura; la guardia di completezza resta
+ * invariata come backstop fail-closed.
  *
  * COME GIRA. La funzione di libreria e' importata davvero; il blocco di
  * `translateArticle()` che la chiama e' ritagliato VERBATIM dal sorgente ed
@@ -39,6 +41,7 @@ import {
   isBodyTranslationPending,
   pendingBodyTranslations,
   retryPendingBodyTranslations,
+  assertNoPendingBodyTranslations,
   PENDING_BODY_RETRY_MAX_CONSECUTIVE_FAILURES,
 } from '../scripts/lib/free-mt-recovery.mjs';
 import { translatedStringOrNull, isSourcePassthrough, translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
@@ -187,9 +190,10 @@ test('la seconda corsia traduce il body in attesa: niente piu\' missing-key, mar
   assert.deepEqual(report.pendingBodyRecovered, { 'de:body1': 'codex-cli/test' });
   assert.deepEqual(report.pendingBodyRetry, { lane: 'codex-cli/test', attempted: 1, recovered: 1, stoppedBy: null });
   assert.deepEqual(outcome.recovered, ['de:body1']);
+  assert.doesNotThrow(() => assertNoPendingBodyTranslations(data));
 });
 
-test('un\'uscita rifiutata (italiano ricopiato) lascia il body in attesa: la guardia continua a fermarlo', async () => {
+test('un\'uscita rifiutata (italiano ricopiato) lascia il body in attesa e rigetta il candidato', async () => {
   const report = createFreeMtRecoveryReport({ bodyFieldCount: 3 });
   const data = articleWithPendingDeBody1(report);
   const outcome = await retryPendingBodyTranslations(data, {
@@ -201,6 +205,20 @@ test('un\'uscita rifiutata (italiano ricopiato) lascia il body in attesa: la gua
   assert.equal(isBodyTranslationPending(data, 'de', 'body1'), true);
   assert.deepEqual(report.pendingBodyFields, { 'de:body1': 'retry-error' });
   assert.deepEqual(outcome.stillPending, ['de:body1']);
+  assert.throws(
+    () => assertNoPendingBodyTranslations(data),
+    (error) => {
+      assert.equal(error.qualityReject, true);
+      assert.deepEqual(error.pendingBodyTranslations, [{
+        id: 'contributo-sanitario-settembre',
+        locale: 'de',
+        field: 'body1',
+        reason: 'retry-error',
+      }]);
+      assert.match(error.message, /de:body1/);
+      return true;
+    },
+  );
 });
 
 test('la corsia si ferma dopo fallimenti consecutivi e non viene interrogata se non e\' disponibile', async () => {
@@ -300,7 +318,7 @@ function extractSecondLaneBlock() {
 }
 
 test('translateArticle() chiama la seconda corsia DOPO i due loop che marcano i body in attesa', () => {
-  const { start } = extractSecondLaneBlock();
+  const { start, block } = extractSecondLaneBlock();
   const fnStart = src.indexOf('async function translateArticle(data) {');
   const missingLoop = src.indexOf('`${locale}:${recoveryField}-missing-retry`,');
   const truncationLoop = src.indexOf('`${locale}:${field}-truncation-retry`,');
@@ -308,6 +326,9 @@ test('translateArticle() chiama la seconda corsia DOPO i due loop che marcano i 
   assert.ok(fnStart !== -1 && missingLoop > fnStart && truncationLoop > fnStart, 'loop di recovery non trovati');
   assert.ok(start > missingLoop && start > truncationLoop, 'la seconda corsia deve girare dopo i loop che marcano i body');
   assert.ok(start < assembled, 'la seconda corsia deve girare dentro translateArticle(), prima della fine');
+  const retryAt = block.indexOf('await retryPendingBodyTranslations(data, {');
+  const rejectAt = block.indexOf('assertNoPendingBodyTranslations(data);');
+  assert.ok(retryAt !== -1 && rejectAt > retryAt, 'il rifiuto deve seguire la recovery dei body pending');
 });
 
 test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scadenza dichiarata dal processo', () => {
