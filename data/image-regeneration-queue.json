@@ -5,21 +5,22 @@
       "articleId": "arianna-di-claudio-roma",
       "title": "Arianna di claudio alla festa del cinema di roma",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (image vision fallback deadline exceeded)",
+      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Synthetic photorealistic editorial illustration of a commuter at a train station; the foreground person is recognizable from behind.);",
       "status": "failed",
-      "failureCount": 51,
+      "failureCount": 52,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-11-17T01:31:47.604Z"
+      "lastFailureAt": "2026-11-17T10:05:51.311Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
-      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic commuter scene with no visible text, logo, or face; however, a recognizable foreground person is present fro",
+      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic commuter scene relevant to Ticino cross-border travel, but it includes a visible top-left watermark/logo and",
       "status": "failed",
-      "failureCount": 46,
+      "failureCount": 47,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-11-17T01:33:44.895Z"
+      "lastFailureAt": "2026-11-17T10:07:51.573Z",
+      "retryHint": "no-text"
     }
   ]
 }
