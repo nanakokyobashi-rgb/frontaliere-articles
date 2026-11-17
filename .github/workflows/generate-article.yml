@@ -1349,6 +1349,14 @@ jobs:
           # Il corpo usa la stessa lane Codex della traduzione: il default
           # generale di 180 s tronca le risposte Luna Max prima del fallback.
           # 480 s e' il limite gia' adottato dal workflow translate-pending.
+          # Il percorso generate traduce tre locali in parallelo: rendiamo
+          # esplicita la calibrazione gia' misurata nel workflow pending,
+          # raccogliendo fino a 10 testi per richiesta entro 3000 caratteri.
+          # Cosi' si riducono i round-trip senza cambiare i contratti di
+          # struttura o di recupero del traduttore.
+          FREE_TRANSLATE_CODEX_LANES: '3'
+          FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS: '10'
+          FREE_TRANSLATE_CODEX_BATCH_MAX_CHARS: '3000'
           FREE_TRANSLATE_CODEX_CALL_TIMEOUT_MS: '480000'
         # Note del comando fuori dallo scalar run: mantenere il comando sotto 21.000 caratteri.
         # `set +e` explicitly: GitHub's default shell is `bash -eo pipefail`,
