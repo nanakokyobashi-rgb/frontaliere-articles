@@ -7,6 +7,10 @@
     "canton-ur::http://www.urnerwochenblatt.ch/artikel/brand-in-einfamilienhaus-niemand-verletzt": {
       "section": "canton-ur",
       "ts": 1794834452992
+    },
+    "canton-ur::https://www.nau.ch/news/schweiz/wanderer-17-im-kanton-uri-tot-aufgefunden-67202816": {
+      "section": "canton-ur",
+      "ts": 1794875345838
     }
   }
 }
