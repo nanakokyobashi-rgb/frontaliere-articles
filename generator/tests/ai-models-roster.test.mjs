@@ -15,7 +15,7 @@ import {
 
 const nvidia = DISCOVERY_PROVIDERS.find((provider) => provider.name === 'NVIDIA');
 
-test('providerRosterReady fallisce chiuso e rende osservabile la lane servibile', () => {
+test('providerRosterReady mantiene Gemini ritirato anche con una vecchia chiave', () => {
   const previousGemini = process.env.GEMINI_API_KEY;
   const previousViteGemini = process.env.VITE_GEMINI_API_KEY;
   const previousForceChain = process.env.AI_MODELS_FORCE_CHAIN;
@@ -35,10 +35,10 @@ test('providerRosterReady fallisce chiuso e rende osservabile la lane servibile'
 
     process.env.GEMINI_API_KEY = 'roster-test-key';
     const ready = getProviderRosterStatus({ chain, respectForceChain: false });
-    assert.equal(providerRosterReady({ chain, respectForceChain: false }), true);
-    assert.equal(ready.reason, 'provider-available');
-    assert.deepEqual(ready.availableModels, chain);
-    assert.deepEqual(ready.availableProviders, ['gemini']);
+    assert.equal(providerRosterReady({ chain, respectForceChain: false }), false);
+    assert.equal(ready.reason, 'no-servable-provider');
+    assert.deepEqual(ready.availableModels, []);
+    assert.deepEqual(ready.availableProviders, []);
   } finally {
     if (previousGemini === undefined) delete process.env.GEMINI_API_KEY;
     else process.env.GEMINI_API_KEY = previousGemini;
@@ -57,7 +57,7 @@ test('providerRosterReady non usa il roster di default quando il contratto e\' i
   assert.equal(providerRosterReady({ chain: [null, AI_MODELS.GEMINI_FLASH], respectForceChain: false }), false);
 });
 
-test('il gate segue la catena forzata effettiva, ignorando una override vuota', () => {
+test('il gate non riattiva Gemini tramite una override vuota', () => {
   const previousGemini = process.env.GEMINI_API_KEY;
   const previousForceChain = process.env.AI_MODELS_FORCE_CHAIN;
   process.env.GEMINI_API_KEY = 'roster-test-key';
@@ -65,8 +65,8 @@ test('il gate segue la catena forzata effettiva, ignorando una override vuota', 
   resetState();
   try {
     const status = getProviderRosterStatus({ chain: [AI_MODELS.GEMINI_FLASH], respectForceChain: true });
-    assert.equal(status.ready, true);
-    assert.deepEqual(status.availableModels, [AI_MODELS.GEMINI_FLASH]);
+    assert.equal(status.ready, false);
+    assert.deepEqual(status.availableModels, []);
   } finally {
     if (previousGemini === undefined) delete process.env.GEMINI_API_KEY;
     else process.env.GEMINI_API_KEY = previousGemini;

@@ -39,7 +39,6 @@ const PROVIDER_PROBES = {
   // The runtime chat route is POST-only. Probe the observed catalog instead,
   // so a healthy endpoint cannot be misreported as unavailable on GET 405.
   github: { url: GH_MODELS_CATALOG_URL, mode: 'catalog' },
-  gemini: { url: 'https://generativelanguage.googleapis.com/v1beta/models', mode: 'catalog', auth: 'query' },
   together: { url: 'https://api.together.xyz/v1/models', mode: 'catalog' },
   fireworks: { url: 'https://api.fireworks.ai/inference/v1/models', mode: 'catalog' },
   nvidia: { url: 'https://integrate.api.nvidia.com/v1/models', mode: 'catalog' },

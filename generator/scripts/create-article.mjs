@@ -1101,8 +1101,8 @@ function countTopicalHits(text, national) {
 //
 // This cheap pre-spend gate fires BEFORE the article-gen `Tentativo` loop:
 //
-//  (1) CLASSIFIER (ALWAYS) — every candidate headline goes through a tiny LLM
-//      (gemini-2.5-flash-lite, ~50 output tokens, no schema mode) to answer
+//  (1) CLASSIFIER (ALWAYS) — every candidate headline goes through Codex Luna
+//      Max (~50 output tokens, no schema mode) to answer
 //      "is this directly relevant to frontalieri Ticino-Italia? yes/no".
 //      Off-topic → drop, no expensive article-gen attempt.
 //
@@ -1129,8 +1129,7 @@ function countTopicalHits(text, national) {
 //  - PRESPEND_TOPIC_GATE_CLASSIFIER=0  → legacy anchor-only fast-path
 //    (emergency rollback to pre-2026-05-15 behaviour, accepts on anchor
 //    match without LLM confirmation). Default is "classifier-always".
-//  - PRESPEND_GATE_MODEL=<id>  → override classifier model (default
-//    AI_MODELS.GEMINI_FLASH_LITE)
+//  - PRESPEND_GATE_MODEL=<id>  → override classifier model (default Codex Luna Max)
 
 // Strict frontaliere anchors — high-precision regex set. Headlines that
 // match ANY anchor are accepted without an LLM call. The list is in a
@@ -1245,7 +1244,7 @@ function classifyFrontaliereRelevance(headline, summary, sourceUrl, deadlineMs =
 
 async function _classifyFrontaliereRelevanceUncached(headline, summary, sourceUrl, deadlineMs = null) {
   const sourceHint = classifierSourceHint(sourceUrl);
-  const model = process.env.PRESPEND_GATE_MODEL || AI_MODELS.GEMINI_FLASH_LITE;
+  const model = process.env.PRESPEND_GATE_MODEL || AI_MODELS.CODEX_CLI_PRIMARY;
   const classifierTimeout = IS_CANTON ? CANTON_PRESPEND_CLASSIFIER_TIMEOUT_MS : 30_000;
   const classifierDeadline = deadlineMs ?? (IS_CANTON
     ? Math.min(
@@ -1318,8 +1317,7 @@ relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
         jsonMode: false,
         // deadlineMs (2026-08-18): senza questo UNA classificazione puo'
         // camminare l'intera catena di fallback di ai-models.mjs. Il roster
-        // parte da GEMINI_FLASH_LITE (indice 45): restano 56 modelli x 2 retry
-        // x 30s = ~56 minuti teorici per un verdetto da 80 token, e il gate ne
+        // parte dalla cascata Codex/fallback: il gate ne
         // chiede fino a `maxClassifier` di fila. Qui si chiama `_aiCallLLM`
         // diretto, quindi il default del wrapper locale `callLLM` (che il
         // deadlineMs ce l'ha) non si eredita: va passato a mano.
@@ -2187,7 +2185,7 @@ const CREATE_ARTICLE_MIN_WORDS_RETRIES = Math.max(
 const MIN_WORDS_MODEL_ROTATION = [
   AI_MODELS.GPT_4_1,                 // attempt 1: gpt-4.1 (GitHub Models, different daily limit — leads so attempt 2 uses a genuinely different model if content is short)
   GH_MODEL_HEAVY,                    // attempt 2: gpt-4o (GitHub Models — moved from first: was redundant when the default generation model also uses gpt-4o)
-  'gemini',                          // attempt 3: gemini-2.5-flash (Google, different provider)
+  AI_MODELS.CODEX_CLI_PRIMARY,       // attempt 3: Codex Luna Max via the OAuth broker
   AI_MODELS.GPT_4_1_NANO,             // attempt 4: gpt-4.1-nano (GitHub Models — GPT_5_NANO killed 2026-05-18)
   AI_MODELS.GROQ_GPT_OSS_120B,       // attempt 5: GPT-OSS 120B (Groq — GROQ_KIMI_K2 swapped 2026-06-15: dead HTTP 404 "moonshotai/kimi-k2-instruct does not exist"; a dead model here triggered the full free-tier fallback cascade, ~11min wasted per pick)
   GH_MODEL_LIGHT,                    // attempt 6: gpt-4o-mini (then expansion fallback)
@@ -7331,30 +7329,20 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   // first two entries MUST span two independent providers. Previously both were
   // GitHub Models (GPT_4_1 + GPT4O) — when that free tier is down or emits
   // non-JSON (the common failure, 2026-06), BOTH primary queries fail in lockstep
-  // every attempt, exhausting all FACTCHECK_INFRA_RETRIES before the lone Gemini
+  // every attempt, exhausting all FACTCHECK_INFRA_RETRIES before the independent
   // fallback runs. That inflated per-attempt wall time and was a primary driver of
-  // the frontaliere section stall (#2675/#2672). Interleaving Gemini (Gemini API
-  // free) into the pair makes a GitHub Models outage survivable on the first pass
-  // and also strengthens consensus (two model families, not two OpenAI siblings).
+  // the frontaliere section stall (#2675/#2672). Interleaving OpenRouter/Groq into
+  // the pair makes a Codex outage survivable on the first pass and also strengthens
+  // consensus (independent model families, not two OpenAI siblings).
   // Codex Luna Max is now the first verifier. The second concurrent request
   // explicitly excludes Codex so consensus still gets an independent free
   // opinion instead of spending two subscription calls on the same answer.
-  // The pair used to be gpt-4.1 + gemini-2.5-flash, with gpt-4o as the third.
-  // GitHub Models was retired on 2026-07-30 and the Gemini free quota is spent
-  // most days, so both "verifiers" fell through the same cascade to the same
-  // nemotron-3-super: two votes from one model, and when that model answered
-  // in prose the article was discarded as unverified (run 36096755072). The
-  // NVIDIA ids below are the ones with the best record in the runs of
-  // 2026-09-24/25. Gemini keeps the second slot, so the pair spans two
-  // providers whenever it has quota; when it is exhausted the availability
-  // filter drops it and the pair becomes two NVIDIA models of different
-  // families (Gemma, Nemotron) — still two opinions, not one model twice.
+  // The independent verifier lane uses Codex plus NVIDIA models; no Google
+  // No Google credential or endpoint is needed.
   const verificationCandidates = [
     AI_MODELS.CODEX_CLI_PRIMARY, // primary; broker absence falls through cleanly
-    AI_MODELS.NV_GEMMA_4_31B,     // NVIDIA NIM — Google Gemma 4 31B
-    AI_MODELS.GEMINI_FLASH,       // Gemini API free — second provider, when its daily quota allows
-    AI_MODELS.NV_NEMOTRON_ULTRA,  // NVIDIA NIM — Nemotron 3 Ultra (different family from Gemma)
-    AI_MODELS.NV_NEMOTRON_SUPER,  // NVIDIA NIM — last resort
+    AI_MODELS.OR_NV_NEMOTRON_120B, // OpenRouter — NVIDIA Nemotron 120B
+    AI_MODELS.GROQ_GPT_OSS_120B,  // Groq — GPT-OSS 120B
   ].filter(Boolean);
   const availableVerifiers = verificationCandidates.filter((m) => isModelAvailable(m));
   const verificationModels = availableVerifiers.length >= 2 ? availableVerifiers : verificationCandidates;
@@ -12763,10 +12751,12 @@ Rigenera "id" e "slugs" seguendo ESATTAMENTE lo schema richiesto sopra (valore r
 
   // ── Multi-call generation with automatic model fallback ──
   // Supports model override via sourceContext._forceModel and temperature via sourceContext._temperature
-  const forceModel = sourceContext?._forceModel;
+  const requestedForceModel = sourceContext?._forceModel;
+  const forceModel = /^(?:gemini|gemma)(?:-|$)/i.test(String(requestedForceModel || ''))
+    ? AI_MODELS.CODEX_CLI_PRIMARY
+    : requestedForceModel;
   const temperature = Number(sourceContext?._temperature || 0.7);
-  const useGeminiDirect = forceModel === 'gemini';
-  const effectiveModel = useGeminiDirect ? `Gemini ${AI_MODELS.GEMINI_FLASH}` : (forceModel || GH_MODEL_HEAVY);
+  const effectiveModel = forceModel || GH_MODEL_HEAVY;
 
   // Call 1: Italian content + metadata (id, category, image, slugs, imagePrompt, imageAlt)
   console.error(`🤖 [1/5] Generazione contenuto IT + metadata con ${effectiveModel}...`);
@@ -13268,7 +13258,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       _remediationShort,
     )
     : _buildStep(_shrinkLadder.length - 1);
-  const _promptCallModel = useGeminiDirect ? AI_MODELS.GEMINI_FLASH : (forceModel || GH_MODEL_HEAVY);
+  const _promptCallModel = forceModel || GH_MODEL_HEAVY;
   const _promptCallPrefer = _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined;
   const _promptRoster = typeof getProviderRosterStatus === 'function'
     && typeof generationCallRosterOptions === 'function'
@@ -13405,7 +13395,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // from the provider-agnostic lower bound.
     if (typeof guardProviderInputCapForCall === 'function') {
       guardProviderInputCapForCall(_splitCall1, {
-        model: useGeminiDirect ? AI_MODELS.GEMINI_FLASH : (forceModel || GH_MODEL_HEAVY),
+        model: forceModel || GH_MODEL_HEAVY,
         prefer: _preferPerBodyCall(),
         splitMode: _splitMode,
         phase: 'prompt-built-body-call',
@@ -13421,9 +13411,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // E' per questo che `call=2/2` non e' MAI stato stampato dal #430 (25
     // `call=1/2` e 0 `call=2/2` sulle 4 run del 2026-08-18; `roster_blocked`
     // 12 e 11 volte sulle due del 2026-08-19). Vedi #485.
-    const rawBody = useGeminiDirect
-      ? await callLLM(_splitCall1.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: BODY_ONLY_FIELDS, locale: primaryLocale })
-      : await callLLM(_splitCall1.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: BODY_ONLY_FIELDS, locale: primaryLocale });
+    const rawBody = await callLLM(_splitCall1.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: BODY_ONLY_FIELDS, locale: primaryLocale });
     let bodyData;
     try {
       bodyData = JSON.parse(repairLlmJson(rawBody));
@@ -13668,16 +13656,14 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // prompt), but before callLLM can spend a request or walk a doomed suffix.
     if (typeof guardProviderInputCapForCall === 'function') {
       guardProviderInputCapForCall(_call2, {
-        model: useGeminiDirect ? AI_MODELS.GEMINI_FLASH : (forceModel || GH_MODEL_HEAVY),
+        model: forceModel || GH_MODEL_HEAVY,
         prefer: _metadataPrefer,
         splitMode: _splitMode,
         phase: 'prompt-built-metadata-call',
         promptPart: 'meta',
       });
     }
-    const rawMeta = useGeminiDirect
-      ? await callLLM(_call2.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, expectedFields: META_ONLY_FIELDS, locale: primaryLocale })
-      : await callLLM(_call2.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, expectedFields: META_ONLY_FIELDS, locale: primaryLocale });
+    const rawMeta = await callLLM(_call2.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, expectedFields: META_ONLY_FIELDS, locale: primaryLocale });
     let metaData;
     try {
       metaData = JSON.parse(repairLlmJson(rawMeta));
@@ -13913,7 +13899,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     guardProviderInputCapForCall(
       { msgs: llmMessages, schema: articleSchema, est: _promptEstTokens },
       {
-        model: useGeminiDirect ? AI_MODELS.GEMINI_FLASH : (forceModel || GH_MODEL_HEAVY),
+        model: forceModel || GH_MODEL_HEAVY,
         prefer: _preferPerBodyCall(),
         splitMode: _splitMode,
         phase: 'prompt-built-full-call',
@@ -13923,21 +13909,6 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   }
   if (itRaw != null) {
     // gia' generato in due chiamate
-  } else if (useGeminiDirect) {
-    // La chiamata unica chiede l'articolo INTERO, e lo dichiara come le due
-    // meta' dichiarano il proprio pezzo. Oggi l'euristica arriverebbe alla
-    // stessa lista da sola — il prompt nomina tutti e cinque i campi come
-    // richiesti — ma dedurlo dalla prosa e' esattamente cio' che si e' rotto
-    // sulla meta' body: una riformulazione dell'istruzione non deve poter
-    // cambiare in silenzio COSA viene validato.
-    //
-    // Lo slot `gemini` della rotazione (tentativo 3) e' un modello di
-    // partenza come gli altri, non un'uscita dalla preferenza: dal 2026-09-24
-    // `_preferActiveThisAttempt` vale su ogni tentativo, quindi anche questi
-    // rami passano da Codex e Claude prima di Gemini. Senza `prefer` il
-    // tentativo 3 tornava sulla sola cascata free (review di #1751).
-    itRaw = await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS, locale: primaryLocale });
-    console.error(`  ↪ Completato (slot Gemini ${AI_MODELS.GEMINI_FLASH})`);
   } else {
     const _optsUnica = { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS, locale: primaryLocale };
     try {
@@ -13996,27 +13967,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     const retryTokens = isTruncation ? 16000 : IT_GENERATION_MAX_TOKENS;
     console.error(`  🔄 Retry IT con maxTokens=${retryTokens}${isTruncation ? ' (troncamento rilevato)' : ''}...`);
     try {
-      const itRaw2 = useGeminiDirect
-        ? await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS, locale: primaryLocale })
-        // Stessa preferenza della chiamata che sta ripetendo, e stesso gate
-        // `_preferActiveThisAttempt`, che dal 2026-09-24 vale su ogni
-        // tentativo — vedi il commento su `_preferSenzaCap` sopra. E' anche la
-        // seconda chiamata preferita per tentativo su cui e' dimensionato
-        // DEFAULT_CLAUDE_CLI_MAX_CALLS_PER_RUN (40 = 20 tentativi × 2). Non
-        // e' un upper bound stretto: il ri-bracketing puo' aggiungere 1
-        // chiamata preferita (ramo scala) o 2 (ramo split), e Claude e' il
-        // secondo preferito, chiamato solo quando Codex fallisce. Il tetto
-        // vero lo tiene lo storm breaker di claude-cli, che dopo 3 fallimenti
-        // consecutivi lo spegne per tutta la run — ed e' proprio il caso in cui
-        // il ri-bracketing si arma.
-        //
-        // issue #460: `!_preferDegradataDalRibracket` in piu' rispetto a
-        // prima. Se questo tentativo e' passato dal ri-bracketing,
-        // `llmMessages` puo' essere il gradino piu' aggressivo della scala
-        // (vedi `_msgsUnica` sopra) e non e' garantito che rientri nel
-        // budget: ricontattare il preferito qui rischierebbe di riesaurirlo
-        // una seconda volta per un motivo (dimensione) che non e' il suo.
-        : await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS, locale: primaryLocale });
+      const itRaw2 = await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS, locale: primaryLocale });
       itData = JSON.parse(repairLlmJson(itRaw2));
       console.error(`  ✅ Retry IT riuscito`);
     } catch (retryErr) {
@@ -23003,10 +22954,9 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     // CREATE_ARTICLE_MINWORDS_DEDUP=0 reverts to the plain clamp).
     const modelSlot = selectMinWordsRetryModel(attempt, previousMinWordsModel);
     previousMinWordsModel = modelSlot;
-    const useGeminiDirect = modelSlot === 'gemini';
     // Higher temperature on later attempts to get more varied/longer output
     const tempBoost = attempt >= 7 ? 0.9 : (attempt >= 5 ? 0.8 : 0.7);
-    const modelLabel = useGeminiDirect ? `Gemini ${AI_MODELS.GEMINI_FLASH}` : modelSlot;
+    const modelLabel = modelSlot;
     if (attempt > 1) {
       console.error(`  🔄 Tentativo ${attempt}/${maxAttempts} con ${modelLabel} (temp=${tempBoost})...`);
     }
@@ -23017,7 +22967,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       _generationAttemptMax: maxAttempts,
       _minItalianWords: adaptiveMinWords,
       _previousWordCount: lastWordCount || undefined,
-      _forceModel: useGeminiDirect ? 'gemini' : modelSlot,
+      _forceModel: modelSlot,
       _temperature: tempBoost,
       // A5: surface the headline error from the previous iteration so the
       // refined prompt block in callGemini knows what to ask the model to fix.

@@ -886,28 +886,22 @@ export function discoverArticles(bodyDir) {
 
 // ── FAQ generation via AI ────────────────────────────────────
 
-// FAQ purpose chain: Codex is primary; Gemini remains the first existing
-// fallback family, followed by the shared chain in its established order.
+// FAQ purpose chain: Codex is primary; approved non-Google fallbacks come from
+// the shared chain in its established order.
 const FAQ_MODELS = [
   AI_MODELS.CODEX_CLI_PRIMARY,
-  AI_MODELS.GEMINI_FLASH,
-  // Il vecchio Gemini 2.0 fallback e' stato ritirato da Google il 2026-08-14
-  // (HTTP 404) e rimosso dal roster condiviso: una catena di preferenza deve
-  // nominare solo modelli vivi.
-  AI_MODELS.GEMINI_FLASH_LITE_LATEST,
-  AI_MODELS.GEMINI_FLASH_LITE,
 ];
 const FAQ_CHAIN = [...new Set([...FAQ_MODELS, ...DEFAULT_CHAIN])];
 
-// Rate limiter: space out calls to avoid 503 on Gemini free tier (15 RPM).
+// Rate limiter: keep the FAQ lane bounded when several workers share a broker.
 // Reserve a slot SYNCHRONOUSLY (read + write _nextSlotMs with no await between)
 // so the parallel workers (runWithConcurrency, --concurrency up to 5) each get a
 // distinct minGapMs-spaced slot instead of all reading the same timestamp,
-// waiting the same delta, and bursting → 503 on Gemini's free tier, which would
+// waiting the same delta, and bursting → a provider 503, which would
 // degrade the FAQPage JSON-LD on indexed article pages.
 let _nextSlotMs = 0;
 async function rateLimitedDelay() {
-  const minGapMs = 4500; // ~13 RPM max, safe for Gemini free tier
+  const minGapMs = 4500; // bounded broker/provider rate
   const now = Date.now();
   const slot = Math.max(now, _nextSlotMs);
   _nextSlotMs = slot + minGapMs;
@@ -919,9 +913,7 @@ async function rateLimitedDelay() {
 
 async function callFaqModel(messages, opts = {}) {
   await rateLimitedDelay();
-  // Preserve the FAQ job's existing policy: its Gemini variants are retried
-  // despite a stale persistent exhaustion marker from another run. The Codex
-  // primary remains protected by its dedicated in-run circuit, not this list.
+  // Preserve the FAQ job's model-reset policy while keeping Codex primary.
   for (const model of FAQ_MODELS) resetExhaustedModel(model);
   // One central cascade keeps the broker-unavailable path cheap and makes the
   // same timeout/quota circuit breaker protect subsequent FAQ calls. Codex is
