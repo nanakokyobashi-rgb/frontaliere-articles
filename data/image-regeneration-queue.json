@@ -7,19 +7,19 @@
       "fallbackImage": "/images/places/lugano-view.webp",
       "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (image vision fallback deadline exceeded)",
       "status": "failed",
-      "failureCount": 50,
+      "failureCount": 51,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-11-16T17:52:49.841Z"
+      "lastFailureAt": "2026-11-17T01:31:47.604Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
-      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Synthetic editorial scene relevant to Ticino rail commuting, but it contains a recognizable foreground person viewed from behi",
+      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic commuter scene with no visible text, logo, or face; however, a recognizable foreground person is present fro",
       "status": "failed",
-      "failureCount": 45,
+      "failureCount": 46,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-11-16T17:54:50.199Z"
+      "lastFailureAt": "2026-11-17T01:33:44.895Z"
     }
   ]
 }
