@@ -765,7 +765,7 @@ jobs:
           budget_s="${GENERATE_BUDGET_S:-3000}"
           hard_kill_s="${GENERATE_HARD_KILL_S:-2400}"
 
-          stall_s="${GENERATE_STALL_S:-300}"
+          stall_s="${GENERATE_STALL_S:-540}"
           stall_poll_s="${GENERATE_STALL_POLL_S:-30}"
           stall_grace_s="${GENERATE_STALL_GRACE_S:-10}"
 
