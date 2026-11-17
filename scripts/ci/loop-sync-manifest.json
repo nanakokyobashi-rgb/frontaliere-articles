@@ -4195,9 +4195,9 @@
       "sitePath": "build-plugins/batchWrite.ts",
       "mode": "identical",
       "baseline": {
-        "site": "675c0caf88234a82",
-        "corpus": "675c0caf88234a82",
-        "alignedAt": "2026-10-29"
+        "site": "075bacf6039bf59b",
+        "corpus": "075bacf6039bf59b",
+        "alignedAt": "2026-11-17"
       }
     },
     {
@@ -4452,9 +4452,9 @@
       "sitePath": "build-plugins/sharedWriteRegistry.ts",
       "mode": "identical",
       "baseline": {
-        "site": "2e1bd64843e17a32",
-        "corpus": "2e1bd64843e17a32",
-        "alignedAt": "2026-11-10"
+        "site": "cbc6ddecde147a19",
+        "corpus": "cbc6ddecde147a19",
+        "alignedAt": "2026-11-17"
       }
     },
     {
