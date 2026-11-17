@@ -46,6 +46,7 @@ export function scopeAllowsLicensedPhoto(scope) {
 
 export const GENERATED_IMAGE_PROVIDERS = Object.freeze([
   'openai-codex',
+  'gemini',
   'fal',
   'together',
   'pollinations',
@@ -61,6 +62,7 @@ export const IMAGE_PROVIDERS = Object.freeze([
 ]);
 export const GENERATED_IMAGE_LICENSE_URLS = Object.freeze({
   'openai-codex': 'https://openai.com/policies/terms-of-use/',
+  gemini: 'https://ai.google.dev/gemini-api/terms',
   fal: 'https://fal.ai/terms',
   together: 'https://www.together.ai/terms-of-service',
   pollinations: 'https://pollinations.ai/terms',
