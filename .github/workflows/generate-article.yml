@@ -1346,6 +1346,10 @@ jobs:
           # dentro; senza il socket il provider resta semplicemente «non
           # disponibile». Nessun token Claude: la lane Haiku e' spenta.
           CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
+          # Il corpo usa la stessa lane Codex della traduzione: il default
+          # generale di 180 s tronca le risposte Luna Max prima del fallback.
+          # 480 s e' il limite gia' adottato dal workflow translate-pending.
+          FREE_TRANSLATE_CODEX_CALL_TIMEOUT_MS: '480000'
         # Note del comando fuori dallo scalar run: mantenere il comando sotto 21.000 caratteri.
         # `set +e` explicitly: GitHub's default shell is `bash -eo pipefail`,
         # so without this the step dies the instant create-article.mjs exits
