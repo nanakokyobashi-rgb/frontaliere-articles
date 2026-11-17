@@ -65,7 +65,6 @@ export function instagramInsightsEnvContract() {
 
 export const RC_TO_ENV = {
   // Client-visible keys
-  GEMINI_API_KEY:                 ['GEMINI_API_KEY', 'VITE_GEMINI_API_KEY'],
   BING_API_KEY:                   ['BING_API_KEY'],
   PAGESPEED_API_KEY:              ['PAGESPEED_API_KEY'],
   FB_PAGE_ID:                     ['FB_PAGE_ID'],
@@ -367,7 +366,7 @@ export const RC_TO_ENV = {
   // Feature flags
   ENABLE_JOB_ALERTS:              ['ENABLE_JOB_ALERTS'],
   // Opt-in rollout for the pre-spend topic gate. Missing/0 keeps the current
-  // Gemini classifier; set to 1 only after the Remote Config rollout is ready.
+  // Codex classifier; set to 1 only after the Remote Config rollout is ready.
   DECISION_API_ENABLED:           ['DECISION_API_ENABLED'],
   // Site-owned static employer-profile ad test. Keep this in the workspace
   // loader so `bin/rc-env.sh` can activate the site build from one RC source;

@@ -36,6 +36,7 @@ const ENV_KEYS = [
   'AI_MODELS_PREFER',
   'AI_MODELS_FORCE_CHAIN',
   'AI_MODELS_SCHEMA_MODE',
+  'OPENROUTER_API_KEY',
   'GEMINI_API_KEY',
   'CODEX_AUTH_JSON',
 ];
@@ -107,20 +108,20 @@ const callCodex = (opts = {}) => callLLM(messages, {
 const codexScore = () => getScoreBoard().find((entry) => entry.model === CODEX)?.score ?? 0;
 const logged = () => warnings.join('\n');
 
-test('Codex Luna Max e\' il primo della catena, ma senza broker resta il fallback storico', () => {
+test('Codex Luna Max e\' il primo della catena, ma senza broker Gemini non viene riattivato', () => {
   assert.equal(DEFAULT_CHAIN[0], CODEX);
   process.env.GEMINI_API_KEY = 'gemini-test-key';
   assert.equal(getPreferredModel({ chain: [CODEX, AI_MODELS.GEMINI_FLASH] }), CODEX);
 
   delete process.env.CODEX_AUTH_BROKER_SOCKET;
-  assert.equal(getPreferredModel({ chain: [CODEX, AI_MODELS.GEMINI_FLASH] }), AI_MODELS.GEMINI_FLASH);
+  assert.equal(getPreferredModel({ chain: [CODEX, AI_MODELS.GEMINI_FLASH] }), null);
 });
 
-test('la catena default non promuove Codex senza opt-in esplicito', () => {
+test('una richiesta legacy Gemini non promuove un provider ritirato', () => {
   process.env.GEMINI_API_KEY = 'gemini-test-key';
   assert.equal(
     getPreferredModel({ model: AI_MODELS.GEMINI_FLASH }),
-    AI_MODELS.GEMINI_FLASH,
+    null,
   );
   assert.equal(
     getPreferredModel({ model: AI_MODELS.GEMINI_FLASH, prefer: [CODEX] }),
@@ -135,37 +136,33 @@ test('callLLM non apre il broker per una chiamata default senza opt-in', async (
     candidates: [{ content: { parts: [{ text: 'DEFAULT FALLBACK' }] } }],
   }), { status: 200 });
   try {
-    assert.equal(
-      await callLLM(messages, {
-        maxRetriesPerModel: 1,
-      }),
-      'DEFAULT FALLBACK',
-    );
+    await assert.rejects(() => callLLM(messages, { maxRetriesPerModel: 1 }), /All AI models failed/);
     assert.equal(requests.length, 0, 'la chiamata default non deve consumare la socket Codex');
   } finally {
     globalThis.fetch = realFetch;
   }
 });
 
-test('il kill-switch esistente esclude Codex senza cambiare la catena di ripiego', () => {
+test('il kill-switch esistente esclude Codex senza riattivare Gemini', () => {
   process.env.GEMINI_API_KEY = 'gemini-test-key';
   process.env.ENABLE_CODEX_ARTICLE_FALLBACK = '0';
-  assert.equal(getPreferredModel({ chain: [CODEX, AI_MODELS.GEMINI_FLASH] }), AI_MODELS.GEMINI_FLASH);
+  assert.equal(getPreferredModel({ chain: [CODEX, AI_MODELS.GEMINI_FLASH] }), null);
 });
 
-test('un timeout Codex apre il circuito per run e passa subito a Gemini', async () => {
+test('un timeout Codex apre il circuito per run e passa al fallback OpenRouter', async () => {
   process.env.GEMINI_API_KEY = 'gemini-test-key';
   behavior = (client) => {
     client.end(`${JSON.stringify({ ok: false, error: 'Codex CLI timed out after 15000ms' })}\n`);
   };
   const realFetch = globalThis.fetch;
+  process.env.OPENROUTER_API_KEY = 'openrouter-test-key';
   globalThis.fetch = async () => new Response(JSON.stringify({
-    candidates: [{ content: { parts: [{ text: 'FALLBACK' }] } }],
+    choices: [{ message: { content: 'FALLBACK' } }],
   }), { status: 200 });
   try {
     const result = await callLLM(messages, {
       model: CODEX,
-      chain: [CODEX, AI_MODELS.GEMINI_FLASH],
+      chain: [CODEX, AI_MODELS.OR_GEMMA_3_27B],
       prefer: [CODEX],
       bypassForceChain: true,
       maxRetriesPerModel: 1,

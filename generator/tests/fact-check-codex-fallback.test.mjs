@@ -126,9 +126,9 @@ describe('llmFactCheck wiring', () => {
     assert.ok(failClosed > start, 'il blocco Codex deve precedere il fail-closed');
     const candidates = SRC.indexOf('const verificationCandidates = [');
     const codex = SRC.indexOf('AI_MODELS.CODEX_CLI_PRIMARY', candidates);
-    const firstFree = SRC.indexOf('AI_MODELS.NV_GEMMA_4_31B', candidates);
+    const firstIndependent = SRC.indexOf('AI_MODELS.OR_NV_NEMOTRON_120B', candidates);
     assert.ok(candidates >= 0 && candidates < start, 'candidati Codex non dichiarati prima del fallback');
-    assert.ok(codex >= candidates && codex < firstFree, 'Codex non è il primo verificatore');
+    assert.ok(codex >= candidates && codex < firstIndependent, 'Codex non è il primo verificatore');
     assert.ok(SRC.indexOf('const modelsToQuery = verificationModels.slice(0, 2);') < start);
     // If the primary lane gives no vote, do not publish an article with a
     // single free opinion (review of PR #1871).

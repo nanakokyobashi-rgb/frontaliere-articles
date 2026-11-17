@@ -671,7 +671,9 @@ test('#18 ogni chiamata con campi body2 attesi propaga la locale primaria', () =
   const callSites = src.split('\n').filter((line) =>
     (line.includes('callLLM(') || line.includes('_optsUnica'))
       && /expectedFields:\s*(?:BODY_ONLY_FIELDS|META_ONLY_FIELDS|REQUIRED_IT_BODY_FIELDS)/.test(line));
-  assert.equal(callSites.length, 8, `conteggio dei call-site da ri-verificare: ${callSites.length}`);
+  // The retired Gemini rotation branches used to double this inventory. The
+  // active Codex/OpenAI-compatible paths now have four explicit body2 sites.
+  assert.equal(callSites.length, 4, `conteggio dei call-site da ri-verificare: ${callSites.length}`);
   for (const line of callSites) {
     assert.match(line, /locale:\s*primaryLocale/, `locale mancante: ${line.trim()}`);
   }

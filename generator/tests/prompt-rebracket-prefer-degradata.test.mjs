@@ -12,13 +12,11 @@
  * su un esito gia' noto.
  *
  * Il fix introduce `_preferDegradataDalRibracket` (spento di default, acceso
- * dentro `_eseguiRibracket`) e lo usa per spegnere `prefer` sui QUATTRO
- * call-site del tentativo: la chiamata 1/2 split, la chiamata 2/2 meta
- * (`_call2`, raggiunta dallo stesso ramo `_eseguiRibracket` -> `rb.split` ->
- * `_generateSplit()`, mancante nel primo giro — vedi review PR #616), il
- * fallback scala dentro `_eseguiRibracket` stesso, e il retry per JSON
- * malformato piu' sotto.
- * Questo file prova che i quattro call-site restano coperti, letti come TESTO
+ * dentro `_eseguiRibracket`) e lo usa per spegnere `prefer` sui DUE
+ * call-site del tentativo: la chiamata 1/2 split e il retry per JSON
+ * malformato piu' sotto. La chiamata 2/2 meta resta neutra e il fallback
+ * scala spegne `prefer` incondizionatamente dentro `_eseguiRibracket`.
+ * Questo file prova che i due call-site restano coperti, letti come TESTO
  * per lo stesso motivo di `prompt-floor-early-exit.test.mjs` e
  * `prompt-rebracket-determinism.test.mjs`: `create-article.mjs` non e'
  * importabile da un test (contiene byte che lo fanno classificare BINARIO —
@@ -86,7 +84,7 @@ test('la chiamata 2/2 meta resta neutra: la preferenza e\' riservata al body', (
   assert.doesNotMatch(corpo, /\bprefer\s*:/);
 });
 
-test('i due call-site del body sono coperti dal gate, nessuno resta scoperto', () => {
+test('i call-site del body sono coperti dal gate, nessuno resta scoperto', () => {
   const occorrenze = SRC.match(/!_preferDegradataDalRibracket/g) || [];
   // Una nel commento di dichiarazione del flag non esiste (il commento non usa
   // il letterale con `!`); le occorrenze reali sono: split e retry malformato,
@@ -96,16 +94,15 @@ test('i due call-site del body sono coperti dal gate, nessuno resta scoperto', (
   // `(_preferActiveThisAttempt && !_preferDegradataDalRibracket)`, mentre il
   // fallback scala spegne `prefer` incondizionatamente perche' e' GIA' dentro
   // `_eseguiRibracket` (verificato nel test sopra).
-  // Quattro, non due: split e retry malformato hanno ciascuno il ramo
-  // generico e quello dello slot `gemini` della rotazione, e dal 2026-09-24
-  // (review di #1751) anche il ramo Gemini passa dalla preferenza.
+  // Due: split e retry malformato. Il ramo metadata resta neutro e il
+  // fallback scala spegne `prefer` senza usare questo gate.
   const gateInCodice = SRC.match(
     /prefer: \(_preferActiveThisAttempt && !_preferDegradataDalRibracket\) \? PREFERRED_GENERATION_MODELS : undefined/g,
   ) || [];
   assert.ok(occorrenze.length > 0, 'il flag deve comparire almeno una volta nel file');
   assert.equal(
     gateInCodice.length,
-    4,
-    'split e retry malformato, nei rami generico e Gemini, devono portare il gate letterale sul `prefer`',
+    2,
+    'split e retry malformato devono portare il gate letterale sul `prefer`',
   );
 });

@@ -425,13 +425,12 @@ test('un rifiuto vision interamente non adattabile resta nel ledger come termina
     const failure = new Error('All image providers failed');
     failure.failures = [
       { provider: 'openai-codex', reason: 'vision gate rejected image: recognizable foreground person' },
-      { provider: 'gemini', reason: 'vision gate rejected image: recognizable human face' },
     ];
     failure.imageProviderLedger = {
       schema: 1,
       complete: true,
-      expectedProviders: ['openai-codex', 'gemini'],
-      attemptedProviders: ['openai-codex', 'gemini'],
+      expectedProviders: ['openai-codex'],
+      attemptedProviders: ['openai-codex'],
     };
     data._imageGenerationFailureDisposition = classifyImageRegenerationFailure(failure);
     resolveArticleCoverFallback(data, {
@@ -456,7 +455,7 @@ test('un errore transient o un rifiuto testuale adattabile resta retryable', () 
   const transient = new Error('All image providers failed');
   transient.failures = [
     { provider: 'openai-codex', reason: 'provider unavailable' },
-    { provider: 'gemini', reason: 'vision gate rejected image: recognizable face' },
+    { provider: 'fal', reason: 'provider unavailable' },
   ];
   const adaptable = new Error('All image providers failed');
   adaptable.failures = [
@@ -477,7 +476,7 @@ test('solo un ledger completo e riconosciuto prova la terminalità vision', () =
   partial.imageProviderLedger = {
     schema: 1,
     complete: false,
-    expectedProviders: ['openai-codex', 'gemini'],
+    expectedProviders: ['openai-codex', 'fal'],
     attemptedProviders: ['openai-codex'],
   };
   partial.failures = [
@@ -489,12 +488,12 @@ test('solo un ledger completo e riconosciuto prova la terminalità vision', () =
   malformed.imageProviderLedger = {
     schema: 1,
     complete: true,
-    expectedProviders: ['openai-codex', 'gemini'],
-    attemptedProviders: ['openai-codex', 'gemini'],
+    expectedProviders: ['openai-codex', 'fal'],
+    attemptedProviders: ['openai-codex', 'fal'],
   };
   malformed.failures = [
     { provider: 'openai-codex', reason: 'vision gate rejected image: recognizable foreground person' },
-    { provider: 'gemini', reason: '' },
+    { provider: 'fal', reason: '' },
   ];
   assert.equal(classifyImageRegenerationFailure(malformed).retryable, true, 'reason vuoto: fail-closed');
 
@@ -502,12 +501,12 @@ test('solo un ledger completo e riconosciuto prova la terminalità vision', () =
   flagsWithoutNotes.imageProviderLedger = {
     schema: 1,
     complete: true,
-    expectedProviders: ['openai-codex', 'gemini'],
-    attemptedProviders: ['openai-codex', 'gemini'],
+    expectedProviders: ['openai-codex', 'fal'],
+    attemptedProviders: ['openai-codex', 'fal'],
   };
   flagsWithoutNotes.failures = [
     { provider: 'openai-codex', reason: 'vision gate rejected image: generic synthetic illustration', vision: { contains_text: true } },
-    { provider: 'gemini', reason: 'vision gate rejected image: generic synthetic illustration', vision: { contains_logo: true } },
+    { provider: 'fal', reason: 'vision gate rejected image: generic synthetic illustration', vision: { contains_logo: true } },
   ];
   assert.deepEqual(classifyImageRegenerationFailure(flagsWithoutNotes), {
     retryable: true,

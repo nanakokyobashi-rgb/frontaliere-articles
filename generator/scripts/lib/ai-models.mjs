@@ -41,9 +41,9 @@ import { parseStrictRetryAfterValue as parseSharedRetryAfterValue } from './retr
  *   GPT-4o/4.1/5-nano/5, Llama, Phi, Cohere, DeepSeek, Codestral, o4-mini, etc.
  *   Each model has its own daily limit (UserByModelByDay), so using 20+
  *   models yields 20× the daily capacity with a single PAT.
- * - Google Gemini + Gemma (GEMINI_API_KEY) — Native Gemini API (free tier)
- *   Gemma models (gemma-4-31b-it, gemma-3-27b-it, etc.) use the same API
- *   and key, adding 14,400 req/day each!
+ * - Google Gemini + Gemma — retired after the Banana Pro incident. The
+ *   historical model parser remains only for score/ledger compatibility and
+ *   never accepts or exports a Google credential.
  * - Groq (GROQ_API_KEY) — Ultra-fast inference, OpenAI-compatible
  *   Llama 4 Scout, Llama 3.3 70B, Qwen3 32B, Kimi K2, GPT-OSS (1000 req/day each)
  * - OpenRouter (OPENROUTER_API_KEY) — Free tier with 50 req/day
@@ -71,7 +71,7 @@ import { parseStrictRetryAfterValue as parseSharedRetryAfterValue } from './retr
  *
  * Environment variables:
  * - GH_MODELS_PAT — GitHub Models token (covers GPT, Llama, Phi, Cohere, etc.)
- * - GEMINI_API_KEY or VITE_GEMINI_API_KEY — Google Gemini API key
+ * - Google Gemini credentials are retired and intentionally ignored
  * - GROQ_API_KEY — Groq Cloud API key (optional, for extra capacity)
  * - OPENROUTER_API_KEY — OpenRouter API key (optional, for extra capacity)
  * - CEREBRAS_API_KEY — Cerebras API key (optional, ultra-fast inference)
@@ -414,18 +414,14 @@ export const DEFAULT_CHAIN = [
   AI_MODELS.CODEX_CLI_PRIMARY,  // 0. Codex Luna Max via the OAuth broker
   AI_MODELS.GPT4O,              // 1.  OpenAI flagship        (GitHub Models)
   AI_MODELS.GPT_4_1,            // 2.  GPT 4.1 flagship       (GitHub Models)
-  AI_MODELS.GEMMA_4_31B,        // 2b. Gemma 4 31B            (Gemini API — 14,400/day!)
   // AI_MODELS.GPT_5 removed — GitHub Models HTTP 400 "unavailable_model" (2026-05-18)
   AI_MODELS.LLAMA_4_MAVERICK,   // 4.  Meta Llama 4 flagship  (GitHub Models)
-  AI_MODELS.GEMINI_FLASH,       // 5.  Google fast            (Gemini API free)
-  AI_MODELS.GEMINI_3_FLASH,     // 5c. Gemini 3 Flash preview (Gemini API free)
   // AI_MODELS.O3 removed — GitHub Models HTTP 400 "unavailable_model" (2026-05-18)
   // AI_MODELS.GROK_3 removed — GitHub Models HTTP 400 "unknown_model: grok-3" (2026-05-18)
   // GROQ_KIMI_K2 removed — Groq returns HTTP 413 consistently (payload too large, 2026-03)
   // SN_LLAMA_4_MAVERICK removed — SambaNova returns HTTP 404 "Model not found" (2026-03)
   AI_MODELS.GPT4O_MINI,           // 9.  OpenAI fast             (GitHub Models)
   // AI_MODELS.GPT_5_CHAT removed — GitHub Models HTTP 400 "unavailable_model" (2026-05-18)
-  AI_MODELS.GEMMA_4_26B,          // 9c. Gemma 4 26B MoE        (Gemini API — 14,400/day!)
   AI_MODELS.GROQ_GPT_OSS_120B,  // 10. GPT-OSS 120B          (Groq - ultra fast)
   AI_MODELS.NV_NEMOTRON_SUPER,  // live NVIDIA fallback        (article-sized prompts)
   AI_MODELS.GPT_4_1_MINI,       // 11. GPT 4.1 Mini           (GitHub Models)
@@ -439,7 +435,6 @@ export const DEFAULT_CHAIN = [
   AI_MODELS.GROQ_LLAMA_3_3,     // 17. Llama 3.3 70B          (Groq)
   // AI_MODELS.COHERE_CMD_R_PLUS removed chain — GitHub Models HTTP 400 "unknown_model: Cohere-command-r-plus-08-2024" (2026-07-05, confirmed retired live, 14x in 30-run sample)
   AI_MODELS.COH_CMD_A,          // 18b. Cohere Command A      (Cohere direct - 1000/month)
-  AI_MODELS.GEMINI_31_PRO,      // 18d. Gemini 3.1 Pro preview (Gemini API free)
   AI_MODELS.COH_CMD_R_PLUS,     // 18c. Cohere Command R+     (Cohere direct - 1000/month)
   AI_MODELS.CF_LLAMA_3_3_70B,   // 19. Llama 3.3 70B FP8     (Cloudflare Workers AI)
   // AI_MODELS.LLAMA_3_1_405B removed chain — GitHub Models HTTP 400 "unknown_model: Meta-Llama-3.1-405B-Instruct" (2026-07-05, confirmed retired live, 20x in 30-run sample)
@@ -454,8 +449,7 @@ export const DEFAULT_CHAIN = [
   // AI_MODELS.LLAMA_3_2_90B removed chain — GitHub Models HTTP 400 "unknown_model: Llama-3.2-90B-Vision-Instruct" (2026-07-05, confirmed retired live, 12x in 30-run sample)
   // AI_MODELS.GEMINI_31_FLASH_LITE removed — Gemini API HTTP 404 "models/gemini-3.1-flash-lite-preview is no longer available" (2026-05-27, run 26534353239).
   //                                 The deprecated preview kept winning the fallback selector because 404 didn't mark it exhausted, causing the
-  //                                 entire blog-generator workflow to fail with 50+ retries against the dead endpoint. The GA non-preview model
-  //                                 `gemini-3.1-flash-lite` (AI_MODELS.GEMINI_31_FLASH_LITE_GA) is already in the chain below at the "replacements" block.
+  //                                 entire blog-generator workflow to fail with 50+ retries against the dead endpoint. No Google model remains in the active chain.
   // AI_MODELS.MISTRAL_CODESTRAL removed — Mistral HTTP 402 "Check your subscription" (2026-09-25, smoke-test run 35995800618: 8/8); provider spento, vedi RETIRED_FREE_PROVIDERS
   // AI_MODELS.GPT_5_MINI removed — GitHub Models HTTP 400 "unavailable_model" (2026-05-18)
   // CF_LLAMA_4_SCOUT removed — wrapper crash "text.replace is not a function" (runs 27951273347 / 27957791379)
@@ -467,7 +461,6 @@ export const DEFAULT_CHAIN = [
   AI_MODELS.CF_GPT_OSS_120B,    // 31. GPT-OSS 120B           (Cloudflare Workers AI)
   AI_MODELS.PHI_4,              // 32. Microsoft Phi-4        (GitHub Models)
   AI_MODELS.GPT_4_1_NANO,       // 33. GPT 4.1 Nano           (GitHub Models)
-  AI_MODELS.GEMINI_PRO,         // 34. Google pro             (Gemini API free)
   AI_MODELS.CF_QWQ_32B,         // 35. QwQ 32B reasoning      (Cloudflare Workers AI)
   AI_MODELS.GROQ_GPT_OSS_20B,   // 36. GPT-OSS 20B           (Groq - ultra fast)
   // CB_LLAMA_3_3_70B removed — Cerebras 404 (model deprecated 2026-03)
@@ -489,7 +482,6 @@ export const DEFAULT_CHAIN = [
   // MAI_DS_R1 removed — GitHub Models HTTP 400 "unknown_model" (2026-04)
   // AI_MODELS.O4_MINI removed — GitHub Models HTTP 400 "unavailable_model" (2026-05-18)
   AI_MODELS.CODESTRAL,          // 50. Mistral Codestral      (GitHub Models)
-  AI_MODELS.GEMINI_FLASH_LITE,  // 51. Google flash lite      (Gemini API free)
   AI_MODELS.CF_QWEN3_30B,       // 52. Qwen3 30B              (Cloudflare Workers AI)
   AI_MODELS.OR_QWEN3_CODER,     // 53. Qwen3 Coder            (OpenRouter free)
   // CB_GPT_OSS_120B removed — Cerebras HTTP 404 "Model gpt-oss-120b does not exist" (2026-04)
@@ -589,11 +581,7 @@ export const DEFAULT_CHAIN = [
   // AI_MODELS.CB_GPT_OSS_20B_2 removed — Cerebras HTTP 404 "Model gpt-oss-20b does not exist" (2026-05-18)
 
   // ── Replacements for the 33 models pruned 2026-05-18 (each smoke-tested live) ──
-  // Gemini "always latest stable" aliases — auto-follow Google's promotions.
-  AI_MODELS.GEMINI_FLASH_LATEST,        // alias → today's stable flash
-  AI_MODELS.GEMINI_FLASH_LITE_LATEST,   // alias → today's stable flash-lite
-  AI_MODELS.GEMINI_PRO_LATEST,          // alias → today's stable pro
-  AI_MODELS.GEMINI_31_FLASH_LITE_GA,    // Gemini 3.1 flash lite GA (non-preview)
+  // Gemini "always latest stable" aliases — retired from the active chain.
   // Groq compound full (not just mini)
   AI_MODELS.GROQ_COMPOUND_FULL,
   // OpenRouter free additions
@@ -1710,7 +1698,10 @@ export function getGhModelsPats() {
   }
   return pats;
 }
-function getGeminiApiKey()      { return (process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY || '').trim(); }
+// Google Gemini is retired from the production roster after the Banana Pro
+// incident. Keep the provider parser for historical score records, but never
+// expose a Google credential to the runtime chain.
+function getGeminiApiKey()      { return ''; }
 function getGroqApiKey()        { return (process.env.GROQ_API_KEY || '').trim(); }
 function getOpenRouterApiKey()  { return (process.env.OPENROUTER_API_KEY || '').trim(); }
 function getCerebrasApiKey()    { return (process.env.CEREBRAS_API_KEY || '').trim(); }
@@ -9386,7 +9377,7 @@ export async function callSingleModel(messages, opts = {}) {
  * 4. On success, record success score (+2) and return
  * 5. On failure, record failure score (-3/-10/-50) and move to next model
  *
- * Default chain: GitHub Models, Gemini, Groq, OpenRouter, NVIDIA NIM, Cohere,
+ * Default chain: Codex Luna Max, GitHub Models, Groq, OpenRouter, NVIDIA NIM, Cohere,
  * Cloudflare and Z.AI (the retired providers are listed in RETIRED_FREE_PROVIDERS).
  * Initial order is quality-based (best first), but dynamically adapts as the
  * run progresses based on actual success/failure patterns.
@@ -9446,7 +9437,7 @@ export async function callLLM(messages, opts = {}) {
     chain = chain.filter((m) => m !== AI_MODELS.CODEX_CLI_PRIMARY);
   }
 
-  // Diagnostic override: AI_MODELS_FORCE_CHAIN=local/fallback,gemini-flash-latest
+  // Diagnostic override: AI_MODELS_FORCE_CHAIN=local/fallback,openrouter/google/gemma-3-27b-it:free
   // pins the chain to exactly these models (in order), bypassing DEFAULT_CHAIN,
   // the o.model start-point, and score sorting. Lets ops validate/measure a
   // specific provider (e.g. the local fallback) on demand without waiting for the
