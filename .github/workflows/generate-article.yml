@@ -1346,6 +1346,10 @@ jobs:
           # dentro; senza il socket il provider resta semplicemente «non
           # disponibile». Nessun token Claude: la lane Haiku e' spenta.
           CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
+          # Il corpo usa la stessa lane Codex della traduzione: il default
+          # generale di 180 s tronca le risposte Luna Max prima del fallback.
+          # 480 s e' il limite gia' adottato dal workflow translate-pending.
+          FREE_TRANSLATE_CODEX_CALL_TIMEOUT_MS: '480000'
         # Note del comando fuori dallo scalar run: mantenere il comando sotto 21.000 caratteri.
         # `set +e` explicitly: GitHub's default shell is `bash -eo pipefail`,
         # so without this the step dies the instant create-article.mjs exits
@@ -1442,20 +1446,24 @@ jobs:
         # il punto in cui si incastra, che varia — e a 300s la stessa run
         # sarebbe finita intorno ai 750s.
         #
-        # Il margine che si spende e' quello fra 182s e 300s, e un argomento
-        # strutturale lo rende piu' largo di quanto il rapporto suggerisca:
-        # durante una chiamata a un modello `_callModel` emette un heartbeat
-        # ogni 60s, quindi una run viva non puo' tacere a lungo mentre aspetta
-        # un provider. I silenzi legittimi lunghi stanno FUORI dalle chiamate
-        # (checkout, encode della thumbnail, git), ed e' li' che sono stati
-        # misurati i 182s. Se una run sana venisse uccisa, si vedrebbe come
-        # un kill per stallo con `stalled` non vuoto e uno stack che NON e'
-        # in lavoro sincrono: e' quello il segnale per risalire, non la
-        # durata della run.
+        # La lane Codex usata per i body puo' pero' attendere fino a 480s per
+        # la risposta del broker senza produrre output nel log. La soglia del
+        # watchdog deve quindi stare sopra quel contratto: 540s lascia 60s di
+        # margine, mentre evita di tornare ai 600s che avevano reso costoso
+        # ogni wedge. Il poll da 30s e la grace da 10s restano fuori da questa
+        # soglia e aggiungono solo il tempo di osservazione/terminazione.
+        #
+        # Il margine storico fra 182s e 300s resta un segnale utile per i
+        # silenzi FUORI dalle chiamate (checkout, encode della thumbnail, git),
+        # ma non basta per una chiamata broker volutamente silenziosa. Se una
+        # run sana venisse uccisa, si vedrebbe come un kill per stallo con
+        # `stalled` non vuoto e uno stack che NON e' in lavoro sincrono: e'
+        # quello il segnale per risalire, non la durata della run.
         #
         # Quindi il cap di durata resta dov'e' — e' lui a coprire il caso
         # «lento ma vivo» — e questo watchdog copre il caso «muto». Il wedge
-        # costa 5 minuti invece di 40: ~87% delle 26,6 ore.
+        # costa circa 9 minuti invece di 40, mantenendo il timeout Codex
+        # effettivamente utilizzabile.
         #
         # LA MISURA E' LA CRESCITA DI UN FILE, non un timestamp per riga: lo
         # step produce fino a 5.500 righe e un `date` per riga sarebbe una
@@ -1764,7 +1772,7 @@ jobs:
           budget_s="${GENERATE_BUDGET_S:-3000}"
           hard_kill_s="${GENERATE_HARD_KILL_S:-2400}"
 
-          stall_s="${GENERATE_STALL_S:-300}"
+          stall_s="${GENERATE_STALL_S:-540}"
           stall_poll_s="${GENERATE_STALL_POLL_S:-30}"
           stall_grace_s="${GENERATE_STALL_GRACE_S:-10}"
 

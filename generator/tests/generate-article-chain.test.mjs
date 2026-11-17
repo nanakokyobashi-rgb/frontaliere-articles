@@ -718,17 +718,12 @@ test('i default restano quelli del workflow, non quelli del test', () => {
   const gen = extractRun('Generate the article');
   assert.match(gen, /budget_s="\$\{GENERATE_BUDGET_S:-3000\}"/);
   assert.match(gen, /hard_kill_s="\$\{GENERATE_HARD_KILL_S:-2400\}"/);
-  // 300s = 1,65x il silenzio legittimo piu' lungo mai osservato (182s su cinque
-  // run sane campionate il 2026-08-18), contro i 2337s mediani di una run
-  // incastrata. Era 600s fino al 2026-08-18: la prima cattura in produzione
-  // (run 32130136859, muta dai 402s e chiusa a 1058s) ha mostrato che la
-  // soglia e' il termine dominante del costo di un wedge, e che il margine
-  // sopra i 182s era piu' largo del necessario — durante una chiamata a un
-  // modello l'heartbeat da 60s di `_callModel` esclude i silenzi lunghi,
-  // quindi quei 182s vengono da lavoro FUORI dalle chiamate.
-  // Abbassarlo sotto ~200s rimette in gioco le run sane; alzarlo ricompra i
-  // minuti che questa soglia esiste per non pagare.
-  assert.match(gen, /stall_s="\$\{GENERATE_STALL_S:-300\}"/);
+  // 540s lascia 60s di margine sopra il timeout di 480s della lane Codex per
+  // i body, che puo' restare silenziosa mentre aspetta il broker. La soglia
+  // resta sotto i 600s storici, cosi' un wedge non ricompra inutilmente quei
+  // minuti; i 182s osservati nelle run sane descrivono invece i silenzi fuori
+  // dalle chiamate al modello.
+  assert.match(gen, /stall_s="\$\{GENERATE_STALL_S:-540\}"/);
   assert.match(gen, /stall_poll_s="\$\{GENERATE_STALL_POLL_S:-30\}"/);
   assert.match(gen, /stall_grace_s="\$\{GENERATE_STALL_GRACE_S:-10\}"/);
   assert.match(WF, /timeout-minutes: 60/);

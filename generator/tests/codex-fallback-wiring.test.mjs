@@ -226,6 +226,19 @@ test('il preflight e la generazione non ricevono token ne\' binario Claude', () 
     'generate-article.yml must not wire the disabled Claude lane into any step');
 });
 
+test('la generazione lascia a Codex il tempo della risposta di traduzione', () => {
+  const workflow = read('.github/workflows/generate-article.yml');
+  const lines = workflow.split('\n');
+  const generateIndex = lines.findIndex((line) => line === '      - name: Generate the article');
+  assert.notEqual(generateIndex, -1, 'generate step not found');
+  const generate = stepBlock(lines, generateIndex);
+  assert.match(
+    generate,
+    /FREE_TRANSLATE_CODEX_CALL_TIMEOUT_MS:\s*['"]480000['"]?/,
+    'the article producer must override the 180s generic translation timeout',
+  );
+});
+
 test('Codex primary keeps Luna Max and is reusable across crawler calls', () => {
   const aiModels = read('generator/scripts/lib/ai-models.mjs');
   const createArticle = read('generator/scripts/create-article.mjs');
