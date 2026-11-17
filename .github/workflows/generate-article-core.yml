@@ -711,6 +711,9 @@ jobs:
           PRIMARY_SECTION: ${{ inputs.section }}
           SIBLING_SECTION: ${{ inputs.sibling_section }}
           CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
+          FREE_TRANSLATE_CODEX_LANES: '3'
+          FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS: '10'
+          FREE_TRANSLATE_CODEX_BATCH_MAX_CHARS: '3000'
           FREE_TRANSLATE_CODEX_CALL_TIMEOUT_MS: '480000'
         run: |
           set +e
