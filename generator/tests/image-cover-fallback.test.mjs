@@ -771,6 +771,7 @@ test('appendGeneratedImageRecord conserva il metadato legacyVision dell’envelo
     const next = generatedCatalogRecord();
     next.assetId = 'catalog-fallback-next';
     next.imageUrl = '/images/blog/catalog-fallback-next.webp';
+    next.sha256 = '1'.repeat(64);
     appendGeneratedImageRecord(root, next);
 
     const persisted = JSON.parse(
