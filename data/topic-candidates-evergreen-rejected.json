@@ -14937,10 +14937,6 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.tio.ch/rubriche/ospite/1963126/malati-cassa-danilo-forini-reti": {
-      "section": "svizzera",
-      "ts": 1794820288316
-    },
     "frontaliere::https://www.ocst.ch/il-lavoro/411-professioni/404-sociosanitario/2638-salute-premi-di-cassa-malati-e-responsabilita-una-riflessione-sul-crescente-costo-della-sanita-ticinese": {
       "section": "frontaliere",
       "ts": 1794943450836
@@ -14956,6 +14952,18 @@
     "svizzera::https://www.rsi.ch/s/4249621": {
       "section": "svizzera",
       "ts": 1794990304899
+    },
+    "frontaliere::https://www.malpensa24.it/osservatorio-lavoro-italia-svizzera": {
+      "section": "frontaliere",
+      "ts": 1795002384376
+    },
+    "frontaliere::https://www.rsi.ch/s/4248337": {
+      "section": "frontaliere",
+      "ts": 1795003101242
+    },
+    "svizzera::https://www.swissinfo.ch/ita/finanziamento-dell%27avs-verso-la-bocciatura%2c-nuovi-sondaggi/92397907": {
+      "section": "svizzera",
+      "ts": 1795003528671
     }
   }
 }
