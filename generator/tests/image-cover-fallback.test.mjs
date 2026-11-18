@@ -756,6 +756,33 @@ test('la compatibilità vision legacy richiede il registro esplicitamente versio
   }).valid, false);
 });
 
+test('appendGeneratedImageRecord conserva il metadato legacyVision dell’envelope', () => {
+  const root = tempRoot();
+  try {
+    const legacy = generatedCatalogRecord();
+    delete legacy.vision.contains_recognizable_foreground_person;
+    const legacyVision = { schema: 0, assetIds: [legacy.assetId] };
+    fs.mkdirSync(path.dirname(path.join(root, 'data/generated-image-registry.json')), { recursive: true });
+    fs.writeFileSync(
+      path.join(root, 'data/generated-image-registry.json'),
+      JSON.stringify({ schema: 1, assetCount: 1, legacyVision, assets: [legacy] }),
+    );
+
+    const next = generatedCatalogRecord();
+    next.assetId = 'catalog-fallback-next';
+    next.imageUrl = '/images/blog/catalog-fallback-next.webp';
+    appendGeneratedImageRecord(root, next);
+
+    const persisted = JSON.parse(
+      fs.readFileSync(path.join(root, 'data/generated-image-registry.json'), 'utf8'),
+    );
+    assert.deepEqual(persisted.legacyVision, legacyVision);
+    assert.equal(readGeneratedImageRecords(root).length, 2);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test("il verdetto foto richiede l'assenza di persone riconoscibili anche fuori dagli article hero", () => {
   const incompletePhoto = { ...safeGeneratedVision, is_photograph: true };
   delete incompletePhoto.contains_recognizable_foreground_person;

@@ -102,8 +102,10 @@ function readJson(root, rel, fallback) {
   }
 }
 
-function generatedEnvelope(assets) {
-  return { schema: 1, assetCount: assets.length, assets };
+function generatedEnvelope(assets, { legacyVision } = {}) {
+  const envelope = { schema: 1, assetCount: assets.length, assets };
+  if (legacyVision !== undefined) envelope.legacyVision = legacyVision;
+  return envelope;
 }
 
 function normalizeGeneratedImageRecord(record) {
@@ -262,6 +264,8 @@ export function appendGeneratedImageRecord(root, record) {
   const photoCredit = isLicensedPhotoRecord(normalizedRecord)
     ? imageCreditRecordFromGeneratedImageRecord(normalizedRecord)
     : null;
+  const registryPath = absolute(root, GENERATED_IMAGE_REGISTRY_REL);
+  const existingRegistry = readJson(root, GENERATED_IMAGE_REGISTRY_REL, generatedEnvelope([]));
   const assets = readGeneratedImageRecords(root);
   const replaced = assets.filter((item) => item.assetId === normalizedRecord.assetId || item.imageUrl === normalizedRecord.imageUrl);
   const staleCreditFiles = new Set(
@@ -270,7 +274,9 @@ export function appendGeneratedImageRecord(root, record) {
   const creditFile = photoCredit ? imageCreditFileForGeneratedImageRecord(root, normalizedRecord) : null;
   const next = assets.filter((item) => item.assetId !== normalizedRecord.assetId && item.imageUrl !== normalizedRecord.imageUrl);
   next.push(normalizedRecord);
-  writeJsonAtomic(absolute(root, GENERATED_IMAGE_REGISTRY_REL), generatedEnvelope(next));
+  writeJsonAtomic(registryPath, generatedEnvelope(next, {
+    legacyVision: existingRegistry?.legacyVision,
+  }));
   for (const staleCreditFile of staleCreditFiles) {
     if (staleCreditFile !== creditFile) fs.rmSync(staleCreditFile, { force: true });
   }
