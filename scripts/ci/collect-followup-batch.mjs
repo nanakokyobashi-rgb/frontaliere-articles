@@ -519,7 +519,12 @@ const FOLLOWUP_ITEM_CLAIM_RE = /^\s*(?:(?:(?:[-*+]|\d+[.)])\s+)?Follow-up\s+item
 // variant.
 const NO_NEW_DAILY_BUCKET_RE = /(?:\bnessun(?:o)?\s+(?:nuov[oa]\s+)?(?:bucket\s+(?:daily|giornalier[oa])|daily\s+bucket)\b|\bno\s+(?:new\s+)?daily\s+bucket\b)[^\r\n]*(?:apert\w*|creat\w*|modificat\w*|aggiornat\w*|opened|created|changed|updated)\b/i;
 const TRACKED_RESIDUALS_RE = /(?:\bresidu[io]\b[^\r\n]*(?:già\s+tracciat\w*|non\s+generano\s+un\s+secondo\s+contenitore)|\bresiduals?\b[^\r\n]*(?:already\s+tracked|no\s+second\s+container))/i;
-const POSITIVE_ITEM_CLAIM_RE = /(?:\b(?:aggiunt\w*|creat\w*|apert\w*|updated?|added|created|opened)\b[^\r\n]*\bitems?(?!-level)\b|\bitems?(?!-level)\b[^\r\n]*\b(?:aggiunt\w*|creat\w*|apert\w*|updated?|added|created|opened)\b)/i;
+// A positive claim needs the item and its verb in the same sentence clause.
+// The previous unbounded same-line match treated an unrelated `PR aperta ...`
+// followed later by `un item` as an item creation, invalidating a real zero
+// marker from PR #3855. Stop at sentence punctuation so prose about another
+// object cannot be joined to the item by accident.
+const POSITIVE_ITEM_CLAIM_RE = /(?:\b(?:aggiunt\w*|creat\w*|apert\w*|updated?|added|created|opened)\b[^.!?;\r\n]*\bitems?(?!-level)\b|\bitems?(?!-level)\b[^.!?;\r\n]*\b(?:aggiunt\w*|creat\w*|apert\w*|updated?|added|created|opened)\b)/i;
 const NEGATIVE_ITEM_CLAIM_RE = /\b(?:nessun(?:o)?|no|zero|0)\s+items?\b/i;
 // A canonical zero marker may repeat a stable FU id while explaining why the
 // candidate was dropped by the deterministic follow-up contract. Such a line
