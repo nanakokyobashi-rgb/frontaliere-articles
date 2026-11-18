@@ -5940,6 +5940,54 @@
       "firstSeenAt": "2026-11-18T11:12:32.360Z",
       "lastValidatedAt": "2026-11-18T11:12:32.360Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere trasporti chiasso lugano abbonamenti 2026 errori comuni",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-18T13:50:51.919Z",
+      "lastValidatedAt": "2026-11-18T13:50:51.919Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "patente di guida canton Lucerna conversione ed esami",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-18T14:58:41.799Z",
+      "lastValidatedAt": "2026-11-18T14:58:41.799Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "imposta di successione e donazione canton Lucerna aliquote",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-18T14:58:42.026Z",
+      "lastValidatedAt": "2026-11-18T14:58:42.026Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "giorni festivi canton Lucerna guida a calendario e regole",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-18T14:58:42.284Z",
+      "lastValidatedAt": "2026-11-18T14:58:42.284Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -14964,6 +15012,18 @@
     "svizzera::https://www.swissinfo.ch/ita/finanziamento-dell%27avs-verso-la-bocciatura%2c-nuovi-sondaggi/92397907": {
       "section": "svizzera",
       "ts": 1795003528671
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/comunita-degli-svizzeri-allestero/come-utilizzerete-i-soldi-della-13esima-rendita-avs/92387299": {
+      "section": "frontaliere",
+      "ts": 1795009592414
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/roberta-passardi-guida-le-donne-liberali-radicali-ticinesi-446864": {
+      "section": "frontaliere",
+      "ts": 1795016263497
+    },
+    "frontaliere::https://www.tio.ch/ticino/cronaca/1963614/polizia-coinvolgimento-43enne-autori-legge": {
+      "section": "frontaliere",
+      "ts": 1795016411769
     }
   }
 }
