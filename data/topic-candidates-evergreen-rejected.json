@@ -5916,6 +5916,30 @@
       "firstSeenAt": "2026-11-18T09:47:18.608Z",
       "lastValidatedAt": "2026-11-18T09:47:18.608Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "aprire un'attività canton Lucerna registro di commercio e costi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-18T11:12:32.165Z",
+      "lastValidatedAt": "2026-11-18T11:12:32.165Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "formazione continua canton Lucerna requisiti e contributi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-18T11:12:32.360Z",
+      "lastValidatedAt": "2026-11-18T11:12:32.360Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
