@@ -112,6 +112,13 @@ export const GENERATED_IMAGE_DEFAULT_FORMAT = Object.freeze({
   maxBytes: GENERATED_IMAGE_MAX_BYTES,
 });
 
+/** Return the explicitly versioned legacy records allowed to omit the newer vision flag. */
+export function legacyVisionAssetIdsForRegistry(registry) {
+  const contract = isRecord(registry) ? registry.legacyVision : null;
+  if (!isRecord(contract) || contract.schema !== 0 || !Array.isArray(contract.assetIds)) return [];
+  return [...new Set(contract.assetIds.map((value) => String(value || '').trim()).filter(Boolean))];
+}
+
 export function isLicensedPhotoRecord(record) {
   return isRecord(record)
     && record.kind === LICENSED_PHOTO_KIND
@@ -354,7 +361,7 @@ export function generatedImageAssetIdFromPath(value) {
  * Validate one persisted registry record. The function is intentionally
  * strict: a record is the permission to publish the bytes, not commentary.
  */
-export function validateGeneratedImageRecord(record, { allowLegacyVision = false } = {}) {
+export function validateGeneratedImageRecord(record, { allowLegacyVision = false, legacyVisionAssetIds = [] } = {}) {
   const errors = [];
   if (!isRecord(record)) return { valid: false, errors: ['record must be an object'] };
   if (record.schema !== GENERATED_IMAGE_SCHEMA_VERSION) errors.push('schema must be 1');
@@ -452,6 +459,8 @@ export function validateGeneratedImageRecord(record, { allowLegacyVision = false
     errors.push('restrictions do not contain the mandatory licensed-photo policy');
   }
   const legacyForegroundPersonSafe = allowLegacyVision
+    && Array.isArray(legacyVisionAssetIds)
+    && legacyVisionAssetIds.includes(record.assetId)
     && !isPhoto
     && isRecord(record.vision)
     && !Object.hasOwn(record.vision, 'contains_recognizable_foreground_person')
@@ -498,12 +507,13 @@ export function validateGeneratedImageRegistry(registry, { scope, allowLegacyVis
     if (registry.cdnPrefix !== '/images/events/library/') errors.push('event registry cdnPrefix is invalid');
     if (!nonEmpty(registry.libraryVersion)) errors.push('event registry libraryVersion is required');
   }
+  const legacyVisionAssetIds = allowLegacyVision ? legacyVisionAssetIdsForRegistry(registry) : [];
   const assetIds = new Set();
   const imageUrls = new Set();
   const hashesByScope = new Map();
   const sourcePagesByScope = new Map();
   for (const record of assets) {
-    const validation = validateGeneratedImageRecord(record, { allowLegacyVision });
+    const validation = validateGeneratedImageRecord(record, { allowLegacyVision, legacyVisionAssetIds });
     if (!validation.valid) errors.push(`${record?.assetId || '<unknown>'}: ${validation.errors.join(', ')}`);
     if (assetIds.has(record?.assetId)) errors.push(`${record?.assetId || '<unknown>'}: duplicate assetId`);
     if (imageUrls.has(record?.imageUrl)) errors.push(`${record?.assetId || '<unknown>'}: duplicate imageUrl`);

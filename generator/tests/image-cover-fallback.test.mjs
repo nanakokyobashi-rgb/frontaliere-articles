@@ -33,6 +33,7 @@ import {
   GENERATED_IMAGE_RESTRICTIONS,
   LICENSED_PHOTO_RESTRICTIONS,
   validateGeneratedImageRecord,
+  validateGeneratedImageRegistry,
 } from '../../engine/shared/generatedImageRegistry.mjs';
 import {
   imageVisionRejected,
@@ -734,6 +735,25 @@ test('il flag di persona riconoscibile chiude sia il rejection generated sia il 
   const validation = validateGeneratedImageRecord(generatedCatalogRecord({ vision: unsafeVision }));
   assert.equal(validation.valid, false);
   assert.match(validation.errors.join('; '), /vision gate verdict is missing or rejected/);
+});
+
+test('la compatibilità vision legacy richiede il registro esplicitamente versionato', () => {
+  const legacy = generatedCatalogRecord();
+  delete legacy.vision.contains_recognizable_foreground_person;
+  const registry = {
+    schema: 1,
+    assetCount: 1,
+    legacyVision: { schema: 0, assetIds: [legacy.assetId] },
+    assets: [legacy],
+  };
+
+  assert.equal(validateGeneratedImageRegistry(registry).valid, false);
+  assert.equal(validateGeneratedImageRegistry(registry, { allowLegacyVision: true }).valid, true);
+  assert.equal(validateGeneratedImageRecord(legacy, { allowLegacyVision: true }).valid, false);
+  assert.equal(validateGeneratedImageRecord({ ...legacy, assetId: 'unlisted-new-record' }, {
+    allowLegacyVision: true,
+    legacyVisionAssetIds: [legacy.assetId],
+  }).valid, false);
 });
 
 test("il verdetto foto richiede l'assenza di persone riconoscibili anche fuori dagli article hero", () => {
