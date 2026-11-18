@@ -7345,6 +7345,9 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   const verificationModels = availableVerifiers.length >= 2 ? availableVerifiers : verificationCandidates;
 
   const modelResults = [];
+  // An HTTP success without a verdict can otherwise keep the same fallback
+  // at the head of every retry, even after bypassing the response cache.
+  const invalidVerdictModels = new Set();
 
   // Bounded retry on TRANSIENT checker-infrastructure failure (2026-06-15).
   // Observed waste: when all verifier models momentarily fail to PRODUCE a
@@ -7401,6 +7404,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     const modelsToQuery = verificationModels.slice(0, 2);
     const promises = modelsToQuery.map((model, index) => _runSingleFactCheck(model, prompt, {
       fresh: fcAttempt > 1,
+      invalidVerdictModels,
       isEvergreen: isEvergreenArticle,
       editorialContext,
       // The first verifier owns the Codex primary slot. Keep the parallel
@@ -7444,7 +7448,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
         || verificationModels.find((m) => !voted.includes(m))
         || modelsToQuery[1];
       try {
-        const extra = await _runSingleFactCheck(next, prompt, { isEvergreen: isEvergreenArticle, editorialContext, excludeModels: voted });
+        const extra = await _runSingleFactCheck(next, prompt, { isEvergreen: isEvergreenArticle, editorialContext, excludeModels: voted, invalidVerdictModels });
         const earlier = extra ? addIndependentVote(modelResults, next, extra) : null;
         fcHadNonOutageResult = true;
         if (earlier) console.error(`  ⚠️  LLM fact-check (${next}): servito di nuovo da ${earlier.servedBy} — resta un solo voto`);
@@ -7462,7 +7466,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     // If both primary models failed, try fallback
     if (modelResults.length === 0 && verificationModels.length > 2) {
       try {
-        const fallback = await _runSingleFactCheck(verificationModels[2], prompt, { isEvergreen: isEvergreenArticle, editorialContext, fresh: fcAttempt > 1 });
+        const fallback = await _runSingleFactCheck(verificationModels[2], prompt, { isEvergreen: isEvergreenArticle, editorialContext, fresh: fcAttempt > 1, invalidVerdictModels });
         if (fallback) {
           addIndependentVote(modelResults, verificationModels[2], fallback);
           missingSecondOpinion = fallback.servedBy !== AI_MODELS.CODEX_CLI_PRIMARY;
@@ -7784,6 +7788,7 @@ const _factCheckServedBy = new Map();
 
 async function _runSingleFactCheck(model, prompt, opts = {}) {
   const modelUsedRef = { model: null };
+  const excludeModels = [...new Set([...(opts.excludeModels || []), ...(opts.invalidVerdictModels || [])])];
   const raw = await _aiCallLLM(
     [{ role: 'user', content: prompt }],
     // Fact-check output is a compact JSON issues list (rarely >1500 tokens).
@@ -7814,7 +7819,7 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
     // `prefer` keeps an AI_MODELS_PREFER from prepending another model to it.
     // Codex has its own timeout (_codexFallbackTimeoutMs, bounded by the same
     // deadlineMs); `timeout` here only applies to the HTTP providers.
-    buildFactCheckCallOptions({ model, temperature: 0.0, maxTokens: 4000, timeout: 60_000, bypassForceChain: true, deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS, modelUsedRef, jsonMode: true, excludeModels: opts.excludeModels, ...(opts.codexOnly ? { chain: [model], prefer: [model] } : {}) }, !opts.fresh && isFactCheckCacheEnabled())
+    buildFactCheckCallOptions({ model, temperature: 0.0, maxTokens: 4000, timeout: 60_000, bypassForceChain: true, deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS, modelUsedRef, jsonMode: true, excludeModels, ...(opts.codexOnly ? { chain: [model], prefer: [model] } : {}) }, !opts.fresh && isFactCheckCacheEnabled())
   );
   // The model that really answered. callLLM reports a cache hit as 'cache';
   // the cache key is prompt + requested model + these fixed params, so the
@@ -7853,6 +7858,7 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
   // failure is diagnosable instead of a bare "risposta non JSON".
   const { result, error } = extractFactCheckJson(raw);
   if (!result) {
+    if (servedBy) opts.invalidVerdictModels?.add(servedBy);
     const via = servedBy && servedBy !== model ? ` via ${servedBy}` : '';
     const label = {
       'no-json': 'risposta non JSON',

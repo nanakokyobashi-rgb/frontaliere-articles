@@ -212,10 +212,10 @@ test('the consensus counts one vote per model that answered, and seeks a second 
   const loop = SRC.slice(start, end);
   assert.doesNotMatch(loop, /modelResults\.push\(/, 'un voto aggiunto senza passare da addIndependentVote');
   assert.match(loop, /addIndependentVote\(modelResults, modelsToQuery\[i\], s\.value\)/);
-  assert.match(loop, /_runSingleFactCheck\(next,\s*prompt,\s*\{\s*isEvergreen:\s*isEvergreenArticle,\s*editorialContext,\s*excludeModels:\s*voted\s*\}\)/);
+  assert.match(loop, /_runSingleFactCheck\(next,\s*prompt,\s*\{\s*isEvergreen:\s*isEvergreenArticle,\s*editorialContext,\s*excludeModels:\s*voted,\s*invalidVerdictModels\s*\}\)/);
   assert.match(loop, /addIndependentVote\(modelResults, verificationModels\[2\], fallback\)/);
   const line = SRC.split('\n').find((l) => l.includes('buildFactCheckCallOptions({ model,'));
-  assert.match(line, /excludeModels: opts\.excludeModels/);
+  assert.match(line, /jsonMode: true, excludeModels,/);
 });
 
 test('a lone free vote never decides: collapsed verifiers are retried, and without a second opinion the article fails closed', () => {
@@ -243,6 +243,7 @@ test('a lone free vote never decides: collapsed verifiers are retried, and witho
 
 test('the served model survives a cache hit, and the local guard checks it', () => {
   const fn = SRC.slice(SRC.indexOf('async function _runSingleFactCheck('), SRC.indexOf('// assertNoFabricatedStatistics() REMOVED'));
+  assert.match(fn, /if \(servedBy\) opts\.invalidVerdictModels\?\.add\(servedBy\)/);
   assert.match(fn, /if \(servedBy === 'cache'\) servedBy = _factCheckServedBy\.get\(servedMemoKey\) \|\| null;/);
   assert.match(fn, /if \(servedBy === AI_MODELS\.LOCAL_FALLBACK\) \{/);
   assert.doesNotMatch(fn, /if \(modelUsedRef\.model === AI_MODELS\.LOCAL_FALLBACK\)/, 'una risposta locale in cache sfuggirebbe alla guardia');
@@ -255,4 +256,29 @@ test('the fact-check asks for JSON and reads it with the balanced-object parser'
   assert.match(line, /jsonMode: true/);
   assert.match(SRC, /const \{ result, error \} = extractFactCheckJson\(raw\);/);
   assert.doesNotMatch(SRC, /const jsonMatch = raw\.match\(\/\\\{\[\\s\\S\]\*\\\}\/\);/);
+});
+
+test('verifier retries skip the actual fallback that returned an empty verdict', async () => {
+  const start = SRC.indexOf('async function _runSingleFactCheck(');
+  const end = SRC.indexOf('// assertNoFabricatedStatistics() REMOVED', start);
+  assert.ok(start >= 0 && end > start);
+  const requests = [];
+  const run = new Function('_aiCallLLM', 'buildFactCheckCallOptions', 'isFactCheckCacheEnabled',
+    'RUN_START_MS', 'RUN_WALL_BUDGET_MS', 'createHash', '_factCheckServedBy', 'AI_MODELS',
+    'extractFactCheckJson', 'safeSignalDiagnosticTextForLog', 'factCheckRawSnippet', 'console',
+    SRC.slice(start, end) + '\nreturn _runSingleFactCheck;')(
+    async (_messages, opts) => {
+      requests.push(opts.excludeModels);
+      opts.modelUsedRef.model = 'fallback-with-empty-json';
+      return '{}';
+    },
+    (opts) => opts, () => true, 0, 0,
+    (await import('node:crypto')).createHash, new Map(), {},
+    () => ({ result: null, error: 'no-verdict' }), (value) => value, (value) => value,
+    { error() {} },
+  );
+  const invalidVerdictModels = new Set();
+  assert.equal(await run('primary-a', 'prompt', { invalidVerdictModels }), null);
+  assert.equal(await run('primary-b', 'prompt', { invalidVerdictModels, excludeModels: ['existing-voter'] }), null);
+  assert.deepEqual(requests, [[], ['existing-voter', 'fallback-with-empty-json']]);
 });
