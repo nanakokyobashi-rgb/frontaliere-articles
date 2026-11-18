@@ -55,7 +55,7 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
     guard,
     /gh_api_timeout --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/runs\/\$run_id\/jobs\?per_page=100"/,
   );
-  assert.match(workflow, /workflow_runs \| length/);
+  assert.match(workflow, /jobs \| length/);
   assert.match(guard, /total_count/);
   assert.match(workflow, /validate_workflow_runs\(\)/);
   assert.match(guard, /\.name == "resolve"/);

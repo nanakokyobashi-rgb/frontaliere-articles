@@ -246,6 +246,8 @@ jobs:
             timeout --kill-after="${api_kill_after_seconds}s" "${api_timeout_seconds}s" gh api "$@"
           }
 
+          # gh follows the pagination links for run listings. The Actions
+          # search index total can differ from the returned rows.
           validate_workflow_runs() {
             jq -c --argjson in_flight "$IN_FLIGHT_STATUSES" --arg terminal "$ACTION_TERMINAL_STATUS" '
               . as $pages
@@ -274,8 +276,6 @@ jobs:
                       and (.created_at | length) > 0
                       and ((try (.created_at | fromdateiso8601) catch null) != null)
                     ))
-                  and (($pages | map(.total_count) | unique | length) == 1)
-                  and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
                   and (([$pages[].workflow_runs[].id] | unique | length)
                     == ([$pages[].workflow_runs[]] | length))
                 then
@@ -317,8 +317,6 @@ jobs:
                       and (.created_at | length) > 0
                       and ((try (.created_at | fromdateiso8601) catch null) != null)
                     ))
-                  and (($pages | map(.total_count) | unique | length) == 1)
-                  and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
                   and (([$pages[].workflow_runs[].id] | unique | length)
                     == ([$pages[].workflow_runs[]] | length))
                 then
