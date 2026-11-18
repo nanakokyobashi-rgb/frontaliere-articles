@@ -64,7 +64,6 @@ import '../../host/cantonSectionsBootstrap.mjs';
 
 import { readFileSync, writeFileSync, mkdirSync, statSync, readdirSync, copyFileSync, existsSync, unlinkSync, renameSync, rmSync, realpathSync } from 'node:fs';
 import { execSync } from 'node:child_process';
-import { createHash } from 'node:crypto';
 import { createInterface } from 'node:readline';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -7780,12 +7779,6 @@ function normalizeFactCheckIssues(issues, { isEvergreen = false } = {}) {
   });
 }
 
-// sha256(requested model, prompt) → the model that answered it, for resolving
-// the 'cache' that callLLM reports on a response-cache hit. In-process, like
-// the cache it mirrors; keyed by digest so a long run holds 64 characters per
-// entry, not a copy of every fact-check prompt.
-const _factCheckServedBy = new Map();
-
 async function _runSingleFactCheck(model, prompt, opts = {}) {
   const modelUsedRef = { model: null };
   const excludeModels = [...new Set([...(opts.excludeModels || []), ...(opts.invalidVerdictModels || [])])];
@@ -7821,16 +7814,8 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
     // deadlineMs); `timeout` here only applies to the HTTP providers.
     buildFactCheckCallOptions({ model, temperature: 0.0, maxTokens: 4000, timeout: 60_000, bypassForceChain: true, deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS, modelUsedRef, jsonMode: true, excludeModels, ...(opts.codexOnly ? { chain: [model], prefer: [model] } : {}) }, !opts.fresh && isFactCheckCacheEnabled())
   );
-  // The model that really answered. callLLM reports a cache hit as 'cache';
-  // the cache key is prompt + requested model + these fixed params, so the
-  // model that answered the first time is the one recorded under the same
-  // (model, prompt) here. Needed twice: the consensus counts one vote per
-  // answering model, and a cached local answer must not slip past the
-  // self-verification guard below just because it came back as 'cache'.
-  const servedMemoKey = createHash('sha256').update(`${model}\u0000${prompt}`).digest('hex');
-  let servedBy = modelUsedRef.model;
-  if (servedBy === 'cache') servedBy = _factCheckServedBy.get(servedMemoKey) || null;
-  else if (servedBy) _factCheckServedBy.set(servedMemoKey, servedBy);
+  // A cache hit carries the answering model recorded with the raw response.
+  const servedBy = modelUsedRef.model === 'cache' ? modelUsedRef.cachedServedBy : modelUsedRef.model;
   // Guard: if the full remote cascade is exhausted, callLLM falls through to
   // local/fallback — the same model that may have generated the content.
   // Self-verification (local grading local) produces circular self-consensus

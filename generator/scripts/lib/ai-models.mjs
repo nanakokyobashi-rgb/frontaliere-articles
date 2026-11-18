@@ -9422,8 +9422,11 @@ export async function callLLM(messages, opts = {}) {
     const hit = _responseCache.get(_cacheKey);
     if (hit !== undefined) {
       _stats.cacheHits++;
-      if (o.modelUsedRef && typeof o.modelUsedRef === 'object') o.modelUsedRef.model = 'cache';
-      return hit;
+      if (o.modelUsedRef && typeof o.modelUsedRef === 'object') {
+        o.modelUsedRef.model = 'cache';
+        o.modelUsedRef.cachedServedBy = hit.servedBy;
+      }
+      return hit.result;
     }
   }
 
@@ -9754,7 +9757,7 @@ export async function callLLM(messages, opts = {}) {
         const storageKey = model === (o.model || null)
           ? _cacheKey
           : _responseCacheKey(messages, { ...o, model });
-        _responseCache.set(storageKey, result);
+        _responseCache.set(storageKey, { result, servedBy: servedModel });
       }
       return result;
     } catch (e) {

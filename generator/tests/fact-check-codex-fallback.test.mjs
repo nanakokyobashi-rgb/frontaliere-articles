@@ -42,7 +42,7 @@ function codexOnlyOptions(modelUsedRef) {
 }
 
 describe('the call is pinned to Codex', () => {
-  const ENV_KEYS = ['CODEX_AUTH_BROKER_SOCKET', 'ENABLE_CODEX_ARTICLE_FALLBACK', 'AI_MODELS_PREFER', 'AI_MODELS_SCHEMA_MODE'];
+  const ENV_KEYS = ['CODEX_AUTH_BROKER_SOCKET', 'ENABLE_CODEX_ARTICLE_FALLBACK', 'AI_MODELS_PREFER', 'AI_MODELS_SCHEMA_MODE', 'NVIDIA_API_KEY'];
   const savedEnv = Object.fromEntries(ENV_KEYS.map((key) => [key, process.env[key]]));
   let server;
   let root;
@@ -95,6 +95,25 @@ describe('the call is pinned to Codex', () => {
     const { result, error } = extractFactCheckJson(raw);
     assert.equal(error, null);
     assert.equal(result.verdict, 'FAIL');
+  });
+
+  test('a fallback verdict cached under the answering model retains provenance', async () => {
+    const model = 'nvidia/meta/llama-3.1-8b-instruct';
+    const messages = [{ role: 'user', content: 'Verifica. Rispondi in JSON.' }];
+    process.env.ENABLE_CODEX_ARTICLE_FALLBACK = '0';
+    process.env.NVIDIA_API_KEY = 'dummy-per-test';
+    let requests = 0;
+    globalThis.fetch = async () => {
+      requests += 1;
+      return Response.json({ choices: [{ message: { content: '{}' } }] });
+    };
+    const options = { ...codexOnlyOptions({}), chain: [CODEX, model], cache: true };
+    const raw = await callLLM(messages, options);
+    const modelUsedRef = {};
+    const cached = await callLLM(messages, { ...options, model, modelUsedRef });
+    assert.equal(cached, raw);
+    assert.equal(requests, 1);
+    assert.deepEqual(modelUsedRef, { model: 'cache', cachedServedBy: model });
   });
 
   test('an AI_MODELS_PREFER for another model does not slip in front of Codex', async () => {

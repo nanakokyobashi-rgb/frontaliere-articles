@@ -244,7 +244,7 @@ test('a lone free vote never decides: collapsed verifiers are retried, and witho
 test('the served model survives a cache hit, and the local guard checks it', () => {
   const fn = SRC.slice(SRC.indexOf('async function _runSingleFactCheck('), SRC.indexOf('// assertNoFabricatedStatistics() REMOVED'));
   assert.match(fn, /if \(servedBy\) opts\.invalidVerdictModels\?\.add\(servedBy\)/);
-  assert.match(fn, /if \(servedBy === 'cache'\) servedBy = _factCheckServedBy\.get\(servedMemoKey\) \|\| null;/);
+  assert.match(fn, /modelUsedRef\.model === 'cache' \? modelUsedRef\.cachedServedBy : modelUsedRef\.model/);
   assert.match(fn, /if \(servedBy === AI_MODELS\.LOCAL_FALLBACK\) \{/);
   assert.doesNotMatch(fn, /if \(modelUsedRef\.model === AI_MODELS\.LOCAL_FALLBACK\)/, 'una risposta locale in cache sfuggirebbe alla guardia');
   assert.match(fn, /return \{ verdict, confidence, issues, editorialAssessment, servedBy \};/);
@@ -264,16 +264,16 @@ test('verifier retries skip the actual fallback that returned an empty verdict',
   assert.ok(start >= 0 && end > start);
   const requests = [];
   const run = new Function('_aiCallLLM', 'buildFactCheckCallOptions', 'isFactCheckCacheEnabled',
-    'RUN_START_MS', 'RUN_WALL_BUDGET_MS', 'createHash', '_factCheckServedBy', 'AI_MODELS',
+    'RUN_START_MS', 'RUN_WALL_BUDGET_MS', 'AI_MODELS',
     'extractFactCheckJson', 'safeSignalDiagnosticTextForLog', 'factCheckRawSnippet', 'console',
     SRC.slice(start, end) + '\nreturn _runSingleFactCheck;')(
     async (_messages, opts) => {
       requests.push(opts.excludeModels);
-      opts.modelUsedRef.model = 'fallback-with-empty-json';
+      opts.modelUsedRef.model = 'cache';
+      opts.modelUsedRef.cachedServedBy = 'fallback-with-empty-json';
       return '{}';
     },
-    (opts) => opts, () => true, 0, 0,
-    (await import('node:crypto')).createHash, new Map(), {},
+    (opts) => opts, () => true, 0, 0, {},
     () => ({ result: null, error: 'no-verdict' }), (value) => value, (value) => value,
     { error() {} },
   );
