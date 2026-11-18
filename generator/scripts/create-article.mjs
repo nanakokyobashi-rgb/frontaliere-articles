@@ -15666,10 +15666,8 @@ async function translatePendingBodyWithHistoricalChain(
   }
   const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
   const rejected = [];
-  const markedBody = tableHeaderColumnMarkers(itValue);
-  if (markedBody.collision || markedBody.ambiguous) return null;
   const text = await translateFieldFreeMt({
-    text: markedBody.markedText,
+    text: itValue,
     sourceLang: 'it',
     targetLang: locale,
     fieldType: 'description',
@@ -15694,11 +15692,15 @@ async function translatePendingBodyWithHistoricalChain(
         );
         return chunked;
       }
+      // Free MT separates template headings before invoking this callback.
+      // Derive the markers for this same segment, as the validator does.
+      const markedSegment = tableHeaderColumnMarkers(masked);
+      if (markedSegment.collision || markedSegment.ambiguous) return '';
       const parsed = await callWithRetry(
         buildPendingBodyRetranslationPrompt({
           langName,
           field,
-          itValue: masked,
+          itValue: markedSegment.markedText,
         }),
         Math.max(5000, Math.ceil(countWords(masked || '') * 5)),
         `${locale}:${field}-pending-retry`,
