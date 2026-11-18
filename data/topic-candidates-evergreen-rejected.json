@@ -5988,6 +5988,18 @@
       "firstSeenAt": "2026-11-18T14:58:42.284Z",
       "lastValidatedAt": "2026-11-18T14:58:42.284Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "orari di apertura negozi canton Lucerna guida a domeniche e festivi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-18T17:32:18.066Z",
+      "lastValidatedAt": "2026-11-18T17:32:18.066Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
