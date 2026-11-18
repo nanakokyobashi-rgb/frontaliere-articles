@@ -40,7 +40,7 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
     /actions\/workflows\/\$WF\/runs\?per_page=100"/,
     'il guard non deve paginare la storia completa del workflow',
   );
-  assert.match(validation, /workflow_runs \| length/);
+  assert.doesNotMatch(validation, /map\(\.workflow_runs \| length\)/);
   assert.match(validation, /total_count/);
   assert.match(validation, /\.created_at \| type/);
   assert.match(validation, /try \(\.created_at \| fromdateiso8601\)/);
