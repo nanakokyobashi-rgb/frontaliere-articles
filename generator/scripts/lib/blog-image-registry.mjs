@@ -155,12 +155,12 @@ function hasMaterializedImageRecord(root, imagePath, record) {
 
 export function readGeneratedImageRecords(root, { strict = true } = {}) {
   const raw = readJson(root, GENERATED_IMAGE_REGISTRY_REL, generatedEnvelope([]));
-  const verdict = validateGeneratedImageRegistry(raw, { scope: undefined });
+  const verdict = validateGeneratedImageRegistry(raw, { scope: undefined, allowLegacyVision: true });
   if (!verdict.valid && strict) {
     throw new Error(`generated image registry is invalid: ${verdict.errors.join('; ')}`);
   }
   return (raw.assets || [])
-    .filter((record) => validateGeneratedImageRecord(record).valid)
+    .filter((record) => validateGeneratedImageRecord(record, { allowLegacyVision: true }).valid)
     .map(normalizeGeneratedImageRecord);
 }
 
