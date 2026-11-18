@@ -5,21 +5,21 @@
       "articleId": "arianna-di-claudio-roma",
       "title": "Arianna di claudio alla festa del cinema di roma",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (Codex broker rejected the request: Codex CLI exited with code 1: ERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase mo",
+      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (Codex broker timed out after 119935ms)",
       "status": "failed",
-      "failureCount": 55,
+      "failureCount": 56,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-11-18T10:01:46.307Z"
+      "lastFailureAt": "2026-11-18T19:02:57.769Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
-      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (Codex broker rejected the request: Codex CLI exited with code 1: ERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to pur",
+      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic photorealistic illustration of a commuter at a train station; the foreground person is recognizable despite ",
       "status": "failed",
-      "failureCount": 50,
+      "failureCount": 51,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-11-18T10:01:54.313Z"
+      "lastFailureAt": "2026-11-18T19:04:38.632Z"
     }
   ]
 }
