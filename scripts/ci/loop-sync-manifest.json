@@ -1054,9 +1054,9 @@
       "path": "scripts/lib/pr-body-sections-check.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "2cb7647345b46271",
-        "corpus": "2cb7647345b46271",
-        "alignedAt": "2026-10-07"
+        "site": "8f946d1449c2a2d2",
+        "corpus": "8f946d1449c2a2d2",
+        "alignedAt": "2026-11-18"
       }
     },
     {
@@ -4195,9 +4195,9 @@
       "sitePath": "build-plugins/batchWrite.ts",
       "mode": "identical",
       "baseline": {
-        "site": "075bacf6039bf59b",
-        "corpus": "075bacf6039bf59b",
-        "alignedAt": "2026-11-17"
+        "site": "ddd970403a3738a5",
+        "corpus": "ddd970403a3738a5",
+        "alignedAt": "2026-11-18"
       }
     },
     {
@@ -4452,9 +4452,9 @@
       "sitePath": "build-plugins/sharedWriteRegistry.ts",
       "mode": "identical",
       "baseline": {
-        "site": "cbc6ddecde147a19",
-        "corpus": "cbc6ddecde147a19",
-        "alignedAt": "2026-11-17"
+        "site": "dcac8abe881c0c97",
+        "corpus": "dcac8abe881c0c97",
+        "alignedAt": "2026-11-18"
       }
     },
     {
