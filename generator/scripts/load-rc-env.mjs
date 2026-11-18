@@ -343,6 +343,7 @@ export const RC_TO_ENV = {
   ZAI_API_KEY:                    ['ZAI_API_KEY', 'ZHIPU_API_KEY'],
 
   // Image generation providers
+  GEMINI_API_KEY:                 ['GEMINI_API_KEY'],
   TOGETHER_API_KEY:               ['TOGETHER_API_KEY'],
   FAL_KEY:                        ['FAL_KEY'],
   PEXELS_API_KEY:                 ['PEXELS_API_KEY'],

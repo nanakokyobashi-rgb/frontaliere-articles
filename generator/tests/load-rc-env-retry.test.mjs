@@ -144,6 +144,13 @@ test('i workflow immagini ricevono entrambe le chiavi foto dal loader RC', () =>
   assert.match(source, /SERVER_PIXABAY_API_KEY:\s+\['PIXABAY_API_KEY'\]/);
 });
 
+test('il provider Gemini dell image engine raggiunge il runtime dal loader RC', () => {
+  const key = 'GEMINI_API_KEY';
+  assert.deepEqual(RC_TO_ENV[key], [key]);
+  assert.equal(getRcValue({ parameters: { [key]: { defaultValue: { value: 'gemini-test-key' } } } }, key), 'gemini-test-key');
+  assert.equal(shouldExportRcValue('gemini-test-key', key), true);
+});
+
 test('il loader mantiene attivabile il checkout SumUp senza renderlo il default', () => {
   const sumupKeys = [
     'ASSISTED_APPLICATION_PAYMENT_PROVIDER',
