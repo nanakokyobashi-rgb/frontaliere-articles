@@ -219,6 +219,25 @@ test('il marker reale della PR #3663 non viene quarantinato per FU scartati (#22
   }), true);
 });
 
+test('il marker reale della PR #3855 non confonde una PR aperta con un item (#2299)', () => {
+  const marker = [
+    '## Post-merge follow-up triage: zero outstanding items.',
+    '- `## Non implementato (ancora)`: il bullet è `candidate: true` e resta letteralmente `blocked` sulla revoca della chiave Cloud API nel progetto `banana-pro-484107`, ma il punto realmente modificabile è stato instradato in modo `route-unverified` a `generator/scripts/load-rc-env.mjs`; quel file è già modificato dalla PR aperta #3856. Escluso con il filtro In-flight PR overlap (`in-flight in PR #3856`), senza coniare un item concorrente.',
+    '- `## Adversarial check`: i 3 rischi sul percorso Gemini residuo sono dichiarati rispettivamente operativi, diagnostici e di compatibilità di un provider ritirato; non hanno un’azione verificabile nel funnel. Droppati con `no-acceptance-condition`/non-funnel.',
+    '',
+    'Nessun bucket daily modificato da questa PR.',
+  ].join('\n');
+  const expectation = triageMarkerPersistenceExpectation(marker);
+
+  assert.deepEqual(expectation.items, []);
+  assert.deepEqual(expectation.buckets, []);
+  assert.equal(expectation.explicitZero, true);
+  assert.equal(expectation.requiresBucket, false);
+  assert.equal(verifyTriageMarkerPersistence(marker, 3855, () => {
+    throw new Error('il marker zero di #3855 non deve cercare un bucket');
+  }), true);
+});
+
 test('negazioni e marker misti non trasformano FU outstanding in riferimenti storici (#1721)', () => {
   const heading = '## Post-merge follow-up triage: zero outstanding items.';
   for (const line of [
