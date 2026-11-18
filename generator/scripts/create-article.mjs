@@ -7102,12 +7102,8 @@ export function stripInjectedBriefs(sourceText, briefs = EVERGREEN_FACTS_BRIEFS)
 // cannot enter the remote-consensus path (bypassForceChain is folded into
 // the key), so the "circular self-consensus" hazard ai-models.mjs flags
 // (~1039-1050) for this caller does not apply to the concrete key shape.
-// BENEFIT: dedupes the ~5s outer FACTCHECK_INFRA_RETRIES re-check
-// (triggered when a verifier returns non-JSON, see loop below) — a retry of
-// an unchanged body against the same judge model reuses the deterministic
-// (temperature 0) verdict instead of re-running the full fallback cascade.
-// If a circular-self-consensus problem is ever observed in practice, set
-// CREATE_ARTICLE_FACTCHECK_CACHE=0 to disable without a code change.
+// A retry after an unusable verdict requests a fresh response. The transport
+// cache stores raw responses before the verifier validates them.
 function isFactCheckCacheEnabled() {
   const raw = (process.env.CREATE_ARTICLE_FACTCHECK_CACHE || '').trim();
   if (raw === '') return true; // unset → preserve production default (cache ON)
@@ -7372,12 +7368,8 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   // least one verifier answered; none proves a shared pool outage, even if a
   // sibling lane exhausted transiently. Keep this across all attempts.
   let fcHadNonOutageResult = false;
-  // True when an attempt's two verifiers collapsed into one model and no
-  // independent second opinion came back: that attempt holds one opinion where
-  // the consensus needs two, so it is retried like a verifier outage (review of
-  // #1848). A verifier that plainly failed is not retried here — it already
-  // walked the cascade — but its missing vote is asked of Codex below, and a
-  // single free vote never decides alone (review of #1871).
+  // A single free vote needs an independent second opinion, including when
+  // the other verifier returned an unusable payload.
   let missingSecondOpinion = false;
   for (let fcAttempt = 1; fcAttempt <= FACTCHECK_INFRA_RETRIES && (modelResults.length === 0 || missingSecondOpinion); fcAttempt++) {
     if (fcAttempt > 1) {
@@ -7408,6 +7400,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     // Query up to 2 models in parallel for consensus
     const modelsToQuery = verificationModels.slice(0, 2);
     const promises = modelsToQuery.map((model, index) => _runSingleFactCheck(model, prompt, {
+      fresh: fcAttempt > 1,
       isEvergreen: isEvergreenArticle,
       editorialContext,
       // The first verifier owns the Codex primary slot. Keep the parallel
@@ -7444,11 +7437,8 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
       }
     }
 
-    // Both verifiers fell through to the same model: ask once more with every
-    // model that already voted excluded from the chain, so the consensus still
-    // weighs two opinions. A verifier that plainly failed has already walked
-    // the cascade inside callLLM, so that case is not retried here.
-    if (droppedDuplicate) {
+    // Recover absent and duplicate votes through a different answering model.
+    if (droppedDuplicate || (modelResults.length === 1 && modelResults[0].servedBy !== AI_MODELS.CODEX_CLI_PRIMARY)) {
       const voted = modelResults.map((r) => r.servedBy);
       const next = verificationModels.slice(2).find((m) => !voted.includes(m))
         || verificationModels.find((m) => !voted.includes(m))
@@ -7472,8 +7462,11 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     // If both primary models failed, try fallback
     if (modelResults.length === 0 && verificationModels.length > 2) {
       try {
-        const fallback = await _runSingleFactCheck(verificationModels[2], prompt, { isEvergreen: isEvergreenArticle, editorialContext });
-        if (fallback) addIndependentVote(modelResults, verificationModels[2], fallback);
+        const fallback = await _runSingleFactCheck(verificationModels[2], prompt, { isEvergreen: isEvergreenArticle, editorialContext, fresh: fcAttempt > 1 });
+        if (fallback) {
+          addIndependentVote(modelResults, verificationModels[2], fallback);
+          missingSecondOpinion = fallback.servedBy !== AI_MODELS.CODEX_CLI_PRIMARY;
+        }
         fcHadNonOutageResult = true;
       } catch (err) {
         fcProviderErrors.push(err);
@@ -7821,7 +7814,7 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
     // `prefer` keeps an AI_MODELS_PREFER from prepending another model to it.
     // Codex has its own timeout (_codexFallbackTimeoutMs, bounded by the same
     // deadlineMs); `timeout` here only applies to the HTTP providers.
-    buildFactCheckCallOptions({ model, temperature: 0.0, maxTokens: 4000, timeout: 60_000, bypassForceChain: true, deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS, modelUsedRef, jsonMode: true, excludeModels: opts.excludeModels, ...(opts.codexOnly ? { chain: [model], prefer: [model] } : {}) })
+    buildFactCheckCallOptions({ model, temperature: 0.0, maxTokens: 4000, timeout: 60_000, bypassForceChain: true, deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS, modelUsedRef, jsonMode: true, excludeModels: opts.excludeModels, ...(opts.codexOnly ? { chain: [model], prefer: [model] } : {}) }, !opts.fresh && isFactCheckCacheEnabled())
   );
   // The model that really answered. callLLM reports a cache hit as 'cache';
   // the cache key is prompt + requested model + these fixed params, so the
