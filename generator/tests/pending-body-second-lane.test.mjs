@@ -1,3 +1,4 @@
+import { getKeyFactsHeading } from '../scripts/lib/ai-search-template.mjs';
 /**
  * pending-body-second-lane.test.mjs — un body lasciato in attesa (#1875) non
  * deve arrivare alla guardia di completezza senza un secondo tentativo.
@@ -786,7 +787,7 @@ test('il fallback storico corto applica il contratto strutturale prima del final
   const makeHistoricalTranslator = new Function(
     'translateFieldFreeMt', 'translatedStringOrNull', 'balanceMarkdownMarkers',
     'buildPendingBodyRetranslationPrompt', 'countWords', 'TRANSLATION_CHUNK_THRESHOLD',
-    'console',
+    'console', 'lineStructuralSignature',
     `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${src.slice(historicalAt, historicalEnd)}\nreturn translatePendingBodyWithHistoricalChain;`,
   );
   const makeTranslateInChunks = new Function(
@@ -804,6 +805,7 @@ test('il fallback storico corto applica il contratto strutturale prima del final
     countWords,
     TRANSLATION_CHUNK_THRESHOLD,
     { error() {}, warn() {}, log() {} },
+    lineStructuralSignature,
   );
 
   let successfulProviderCalls = 0;
@@ -834,6 +836,20 @@ test('il fallback storico corto applica il contratto strutturale prima del final
   );
   assert.equal(successfulProviderCalls, 1);
   assert.deepEqual(successfulProviderOptions, { translation: true, forceLegacy: true });
+
+  const table = '| Segmento 2024 | Variazione riportata 2025 |\n|---|---:|\n| Appartamenti | +4,4% |';
+  const bodyWithTwoTables = [table, '## Fatti chiave', table].join('\n\n');
+  const translateTable = (text) => text
+    .replaceAll('Segmento', 'Segment')
+    .replaceAll('Variazione riportata', 'Reported change')
+    .replaceAll('Appartamenti', 'Condominiums').replaceAll('+4,4%', '+4.4%');
+  assert.equal(
+    await historical(bodyWithTwoTables, 'en', 'body1', {
+      callWithRetry: async (prompt) => ({ body1: translateTable(prompt.slice('body body1: '.length)) }),
+      translateInChunks: successfulTranslateInChunks,
+    }),
+    translateTable(bodyWithTwoTables).replace('## Fatti chiave', getKeyFactsHeading('en')),
+  );
 
   for (const [label, mutate] of [
     ['href HTML alterato', (value) => value.replace('https://example.test/html', 'https://evil.example/html')],
