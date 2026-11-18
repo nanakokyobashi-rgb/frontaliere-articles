@@ -736,6 +736,12 @@ test('il flag di persona riconoscibile chiude sia il rejection generated sia il 
   assert.match(validation.errors.join('; '), /vision gate verdict is missing or rejected/);
 });
 
+test("il verdetto foto richiede l'assenza di persone riconoscibili anche fuori dagli article hero", () => {
+  const incompletePhoto = { ...safeGeneratedVision, is_photograph: true };
+  delete incompletePhoto.contains_recognizable_foreground_person;
+  assert.equal(imageVisionRejected(incompletePhoto, { kind: 'photo', scope: 'event-library' }), true);
+});
+
 test('sostituire una foto licenziata con una cover generata rimuove il ledger obsoleto', () => {
   const root = tempRoot();
   try {

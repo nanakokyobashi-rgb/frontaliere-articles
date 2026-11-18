@@ -463,7 +463,7 @@ export function validateGeneratedImageRecord(record, { allowLegacyVision = false
     || record.vision.contains_recognizable_face !== false
     || (!isPhoto && !legacyForegroundPersonSafe && record.vision.contains_recognizable_foreground_person !== false)
     || (isPhoto ? record.vision.is_photograph !== true : false)
-    || (isPhoto && record.scope === 'article-hero' ? record.vision.contains_recognizable_foreground_person !== false : false)
+    || (isPhoto ? record.vision.contains_recognizable_foreground_person !== false : false)
     || (isPhoto && record.scope === 'article-hero' ? record.vision.is_topic_relevant !== true : false)
     || (isPhoto ? typeof record.vision.contains_text !== 'boolean' : record.vision.contains_text !== false)
     || (isPhoto ? typeof record.vision.looks_like_specific_real_event !== 'boolean' : record.vision.looks_like_specific_real_event !== false)
