@@ -229,6 +229,10 @@ test('a lone free vote never decides: collapsed verifiers are retried, and witho
   const region = SRC.slice(start, SRC.indexOf('// ── Drop verdicts the source itself refutes ──', start));
   assert.match(region, /fcAttempt <= FACTCHECK_INFRA_RETRIES && \(modelResults\.length === 0 \|\| missingSecondOpinion\)/);
   assert.match(region, /modelResults\.length = 0;\n\s+missingSecondOpinion = false;/, 'ogni tentativo deve ripartire da zero voti');
+  assert.match(region, /if \(droppedDuplicate \|\| \(modelResults\.length === 1 && modelResults\[0\]\.servedBy !== AI_MODELS\.CODEX_CLI_PRIMARY\)\)/);
+  assert.equal((region.match(/fresh: fcAttempt > 1/g) || []).length, 2);
+  const call = SRC.split('\n').find((line) => line.includes('buildFactCheckCallOptions({ model,'));
+  assert.match(call, /!opts\.fresh && isFactCheckCacheEnabled\(\)/);
   assert.match(region, /if \(modelResults\.length < 2\) \{\n\s+missingSecondOpinion = true;/);
   assert.match(region, /const lacksSecondOpinion = modelResults\.length === 1 && modelResults\[0\]\.servedBy !== AI_MODELS\.CODEX_CLI_PRIMARY;/);
   assert.match(region, /if \(modelResults\.length === 0 \|\| lacksSecondOpinion\) \{/, 'un solo voto free deve chiudere come un guasto dei verificatori');
