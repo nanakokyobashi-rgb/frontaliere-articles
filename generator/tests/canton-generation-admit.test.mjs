@@ -300,14 +300,15 @@ test('le run in volo uniscono tutte le pagine per stato solo se complete e non a
   assert.equal(flattenPaginatedInFlightRuns([{ total_count: 1 }]), null);
   assert.equal(flattenPaginatedInFlightRuns(null), null);
 
-  assert.equal(flattenPaginatedInFlightRuns([
+  assert.deepEqual(flattenPaginatedInFlightRuns([
     { total_count: 101, workflow_runs: firstPageRuns },
     { total_count: 102, workflow_runs: finalPageRuns },
-  ]), null, 'total_count diversi fra pagine rendono la lettura instabile');
-  assert.equal(flattenPaginatedInFlightRuns([
-    { total_count: 101, workflow_runs: firstPageRuns },
-    { total_count: 101, workflow_runs: [] },
-  ]), null, 'un payload con cardinalita\' inferiore a total_count non e\' completo');
+  ]), [...firstPageRuns, ...finalPageRuns]);
+  // Risposta osservata in produzione: 12 indicizzati, 11 restituiti.
+  const visibleRuns = firstPageRuns.slice(0, 11);
+  assert.deepEqual(flattenPaginatedInFlightRuns([
+    { total_count: 12, workflow_runs: visibleRuns },
+  ]), visibleRuns);
   assert.equal(flattenPaginatedInFlightRuns([
     { total_count: 2, workflow_runs: [apiRun(1, 'generate-article-ti.yml', '2026-10-05T10:00:10Z')] },
     { total_count: 2, workflow_runs: [apiRun(1, 'generate-article-ti.yml', '2026-10-05T10:00:10Z')] },

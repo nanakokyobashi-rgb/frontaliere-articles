@@ -128,19 +128,19 @@ export function filterInFlightRuns(runs) {
     .filter((run) => run && IN_FLIGHT_STATUS_SET.has(run.status));
 }
 
-/** Valida e appiattisce le pagine di `gh api --paginate --slurp`. */
+/**
+ * Valida le pagine dopo che gh ha seguito i link di paginazione.
+ * Il totale della ricerca Actions può divergere dalle righe restituite.
+ */
 export function flattenPaginatedInFlightRuns(pages) {
   if (!Array.isArray(pages) || pages.length === 0) return null;
   const runs = [];
   const ids = new Set();
-  let totalCount = null;
   for (const page of pages) {
     if (!page || typeof page !== 'object' || Array.isArray(page)
       || !Array.isArray(page.workflow_runs)
       || !Number.isSafeInteger(page.total_count)
       || page.total_count < 0) return null;
-    if (totalCount === null) totalCount = page.total_count;
-    else if (page.total_count !== totalCount) return null;
 
     for (const run of page.workflow_runs) {
       if (!run || typeof run !== 'object' || Array.isArray(run)
@@ -159,7 +159,7 @@ export function flattenPaginatedInFlightRuns(pages) {
       runs.push(run);
     }
   }
-  return runs.length === totalCount ? runs : null;
+  return runs;
 }
 
 /** Finestra del budget giornaliero. */

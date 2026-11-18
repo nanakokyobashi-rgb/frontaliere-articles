@@ -296,6 +296,8 @@ jobs:
             2>/dev/null)"; then
             fail_closed_admission
           fi
+          # gh segue i link di paginazione. Il totale della ricerca Actions può
+          # divergere dal numero di run restituite.
           if ! runs="$(jq -c --argjson known "$ALL_RUN_STATUSES" --argjson known_conclusions "$KNOWN_RUN_CONCLUSIONS" --arg since "$admission_since" '
             . as $pages
             | if (type == "array" and length > 0)
@@ -326,8 +328,6 @@ jobs:
                       )
                     )
                   ))
-                and (($pages | map(.total_count) | unique | length) == 1)
-                and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
                 and (([$pages[].workflow_runs[].id] | unique | length)
                   == ([$pages[].workflow_runs[]] | length))
               then
