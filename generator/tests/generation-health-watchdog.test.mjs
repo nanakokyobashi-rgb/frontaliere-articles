@@ -198,6 +198,8 @@ const LOG_DRY = [
 
 const LOG_OUTCOMES = [
   'generate\tResolve run mode and section\t2026-08-10T10:00:00.0Z event=schedule chain=false → section=frontaliere dry_run=false',
+  'admit\tCheck generation concurrency\t2026-08-10T10:00:00.0Z \x1b[36;1mecho "GENERATION_OUTCOME kind=skipped reason=$reason section=unknown"\x1b[0m',
+  'admit\tCheck generation concurrency\t2026-08-10T10:00:00.0Z echo "GENERATION_OUTCOME kind=skipped reason=chain-hour-cap section=unknown"',
   'admit\tCheck generation concurrency\t2026-08-10T10:00:00.1Z GENERATION_OUTCOME kind=skipped reason=admit-in-flight section=unknown',
   'generate\tGenerate the article\t2026-08-10T10:01:00.1Z GENERATION_OUTCOME kind=generated reason=article section=frontaliere',
   'generate\tGenerate the article\t2026-08-10T10:02:00.1Z GENERATION_OUTCOME kind=no-article reason=declared section=svizzera',

@@ -740,10 +740,14 @@ const TARGET_SECTION_RE = /TARGET_SECTION:\s*(\w+)/;
  */
 export function parseMarkerRecords(text, marker, required = []) {
   const out = [];
-  const lineRe = new RegExp(`${marker}[ \\t]+([^\\n\\r]*)`, 'g');
-  for (const m of String(text || '').matchAll(lineRe)) {
+  const prefix = /^(?:[^\t]+\t[^\t]+\t)?\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z[ \t]+/u;
+  for (const line of String(text || '').split(/\r?\n/u)) {
+    // Actions also includes the inline script itself. A marker embedded in
+    // a shell command is source code rather than the output of that command.
+    const payload = line.replace(prefix, '').trimStart();
+    if (!payload.startsWith(marker + ' ') && !payload.startsWith(marker + '\t')) continue;
     const fields = {};
-    for (const f of m[1].matchAll(/([A-Za-z_][A-Za-z0-9_]*)=(\S+)/g)) fields[f[1]] = f[2];
+    for (const f of payload.slice(marker.length).matchAll(/([A-Za-z_][A-Za-z0-9_]*)=(\S+)/g)) fields[f[1]] = f[2];
     if (required.every((k) => k in fields)) out.push(fields);
   }
   return out;
