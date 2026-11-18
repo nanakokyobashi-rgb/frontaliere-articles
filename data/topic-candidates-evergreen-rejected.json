@@ -5952,6 +5952,42 @@
       "firstSeenAt": "2026-11-18T13:50:51.919Z",
       "lastValidatedAt": "2026-11-18T13:50:51.919Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "patente di guida canton Lucerna conversione ed esami",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-18T14:58:41.799Z",
+      "lastValidatedAt": "2026-11-18T14:58:41.799Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "imposta di successione e donazione canton Lucerna aliquote",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-18T14:58:42.026Z",
+      "lastValidatedAt": "2026-11-18T14:58:42.026Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "giorni festivi canton Lucerna guida a calendario e regole",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-18T14:58:42.284Z",
+      "lastValidatedAt": "2026-11-18T14:58:42.284Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
