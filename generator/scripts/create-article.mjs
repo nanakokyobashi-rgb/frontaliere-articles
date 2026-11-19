@@ -15506,12 +15506,18 @@ function pendingBodyRecoveryAvailable() {
     || (_pendingBodySecondLaneArmed && legacyTranslationChain().some((model) => isModelAvailable(model)));
 }
 
+function assertChunkTranslator(translateInChunks, context = 'pending body recovery') {
+  if (typeof translateInChunks === 'function') return translateInChunks;
+  throw new TypeError(`${context}: \`translateInChunks\` è richiesto per il contratto strutturale`);
+}
+
 async function translatePendingBodyWithCodex(
   itValue,
   locale,
   field,
   { onCodexCall = null, callWithRetry = null, translateInChunks = null } = {},
 ) {
+  const chunkTranslator = assertChunkTranslator(translateInChunks, 'translatePendingBodyWithCodex');
   const codex = AI_MODELS.CODEX_CLI_PRIMARY;
   const codexDeadlineOptions = (deadlineMs) => ({
     deadlineMs,
@@ -15526,7 +15532,7 @@ async function translatePendingBodyWithCodex(
       // corsia è ferma. Se Codex ha prodotto un output rifiutato, il fallback
       // viene invece scelto sotto: ripetere la stessa corsia non è recovery.
       if (!pendingBodySecondLaneAvailable() && typeof callWithRetry === 'function') {
-        return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry, translateInChunks });
+        return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry, translateInChunks: chunkTranslator });
       }
       throw new Error('lane Codex fermata senza prova di indisponibilità del modello');
     },
@@ -15607,8 +15613,8 @@ async function translatePendingBodyWithCodex(
         onWarn: (msg) => console.error(`  ⚠️  [seconda corsia] ${msg}`),
         onUnusableOutput: (event) => rejected.push(event?.reason || 'unusable'),
       });
-      const validatedText = text && typeof translateInChunks === 'function'
-        ? await translateInChunks(
+      const validatedText = text
+        ? await chunkTranslator(
           itValue,
           field,
           () => '',
@@ -15631,7 +15637,7 @@ async function translatePendingBodyWithCodex(
         // restituisce un campo vuoto. Se Codex ha anche prodotto un output
         // rifiutato, riprovare la stessa corsia ricreerebbe il difetto: la
         // catena storica riceve `forceLegacy` e non torna al Codex disponibile.
-        return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry, translateInChunks });
+        return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry, translateInChunks: chunkTranslator });
       }
       if (!validatedText && rejected.length > 0) {
         console.error(`  ⚠️  [seconda corsia] ${locale}:${field} rifiutato da translateFieldFreeMt (${rejected.join(', ')})`);
@@ -15657,9 +15663,7 @@ async function translatePendingBodyWithHistoricalChain(
   if (typeof callWithRetry !== 'function') {
     throw new TypeError('translatePendingBodyWithHistoricalChain: `callWithRetry` è richiesto');
   }
-  if (typeof translateInChunks !== 'function') {
-    throw new TypeError('translatePendingBodyWithHistoricalChain: `translateInChunks` è richiesto per il contratto strutturale');
-  }
+  const chunkTranslator = assertChunkTranslator(translateInChunks, 'translatePendingBodyWithHistoricalChain');
   const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
   const rejected = [];
   const text = await translateFieldFreeMt({
@@ -15673,7 +15677,7 @@ async function translatePendingBodyWithHistoricalChain(
         // Reuse the same chunker as the legacy translation and truncation
         // paths: the historical fallback must not send an oversized body in
         // one request after Codex has stopped.
-        const chunked = await translateInChunks(
+        const chunked = await chunkTranslator(
           masked,
           field,
           (chunk, i, total) => buildPendingBodyRetranslationPrompt({
@@ -15711,7 +15715,7 @@ async function translatePendingBodyWithHistoricalChain(
       // already translated short body. `pretranslatedResult` avoids a second
       // provider call while still running skeleton, links, numbers, markers
       // and completeness checks before `translateFieldFreeMt` can finalize it.
-      const validated = await translateInChunks(
+      const validated = await chunkTranslator(
         masked,
         field,
         () => '',
