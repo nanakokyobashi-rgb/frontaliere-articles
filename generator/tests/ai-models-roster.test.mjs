@@ -14,6 +14,7 @@ import {
 } from '../scripts/lib/ai-models.mjs';
 
 const nvidia = DISCOVERY_PROVIDERS.find((provider) => provider.name === 'NVIDIA');
+const openRouter = DISCOVERY_PROVIDERS.find((provider) => provider.name === 'OpenRouter');
 
 test('providerRosterReady mantiene Gemini ritirato anche con una vecchia chiave', () => {
   const previousGemini = process.env.GEMINI_API_KEY;
@@ -77,21 +78,28 @@ test('il gate non riattiva Gemini tramite una override vuota', () => {
 });
 
 describe('roster NVIDIA', () => {
-  test('mantiene in catena il modello live usato come fallback affidabile', () => {
+  test('non offre il modello Nemotron Super ritirato nella catena attiva', () => {
     assert.equal(AI_MODELS.NV_NEMOTRON_SUPER, 'nvidia/nvidia/nemotron-3-super-120b-a12b');
-    assert.ok(DEFAULT_CHAIN.includes(AI_MODELS.NV_NEMOTRON_SUPER));
+    assert.equal(DEFAULT_CHAIN.includes(AI_MODELS.NV_NEMOTRON_SUPER), false);
+    assert.equal(DEFAULT_CHAIN.includes(AI_MODELS.OR_NV_NEMOTRON_120B), false);
   });
 
-  test('non reinserisce gli id NVIDIA osservati come HTTP 410', () => {
+  test('non reinserisce i mirror NVIDIA osservati come ritirati', () => {
     assert.ok(nvidia, 'provider NVIDIA non trovato');
+    assert.ok(openRouter, 'provider OpenRouter non trovato');
     for (const id of [
       'meta/llama-3.1-8b-instruct',
       'mistralai/mistral-small-4-119b-2603',
       'nvidia/nemotron-nano-9b-v2',
+      'nvidia/nemotron-3-super-120b-a12b',
     ]) {
       assert.equal(nvidia.pick({ id }), null, `id ritirato accettato: ${id}`);
     }
-    assert.equal(nvidia.pick({ id: 'nemotron-3-super-120b-a12b' }), 'nemotron-3-super-120b-a12b');
+    assert.equal(
+      openRouter.pick({ id: 'nvidia/nemotron-3-super-120b-a12b:free' }),
+      null,
+      'il mirror OpenRouter ritirato non deve rientrare nella catena',
+    );
   });
 });
 

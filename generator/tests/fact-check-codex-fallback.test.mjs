@@ -145,7 +145,7 @@ describe('llmFactCheck wiring', () => {
     assert.ok(failClosed > start, 'il blocco Codex deve precedere il fail-closed');
     const candidates = SRC.indexOf('const verificationCandidates = [');
     const codex = SRC.indexOf('AI_MODELS.CODEX_CLI_PRIMARY', candidates);
-    const firstIndependent = SRC.indexOf('AI_MODELS.OR_NV_NEMOTRON_120B', candidates);
+    const firstIndependent = SRC.indexOf('AI_MODELS.GROQ_GPT_OSS_120B', candidates);
     assert.ok(candidates >= 0 && candidates < start, 'candidati Codex non dichiarati prima del fallback');
     assert.ok(codex >= candidates && codex < firstIndependent, 'Codex non è il primo verificatore');
     assert.ok(SRC.indexOf('const modelsToQuery = verificationModels.slice(0, 2);') < start);
