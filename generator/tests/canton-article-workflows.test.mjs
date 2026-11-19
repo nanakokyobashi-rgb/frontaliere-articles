@@ -359,20 +359,22 @@ exit 0
 }
 
 /** Esegue il gate `admit` con un compare GitHub finto. */
-function runAdmit(workflow, { caller, changed, runs = [] }) {
+function runAdmit(workflow, { caller, changed, runs = [], jobs = [], selfCreated = '2026-01-01T00:00:00Z' }) {
   return withBin((dir) => ({
     timeout: '#!/usr/bin/env bash\nwhile [[ "$1" == --* ]]; do shift; done\nshift\nexec "$@"\n',
     date: '#!/usr/bin/env bash\nprintf "%s\\n" "2026-01-01T00:00:00Z"\n',
 gh: `#!/usr/bin/env bash
 case "$*" in
   *compare*) cat "${dir}/changed" ;;
-  *actions/runs/*) printf '%s\\n' '{"created_at":"2026-01-01T00:00:00Z"}' ;;
+  *actions/runs/*/jobs) cat "${dir}/jobs" ;;
+  *actions/runs/*) printf '%s\\n' '{"created_at":"${selfCreated}"}' ;;
   *) cat "${dir}/runs" ;;
 esac
 `,
   }), (dir, bin) => {
     writeFileSync(path.join(dir, 'changed'), JSON.stringify([{ files: changed.map((filename) => ({ filename })) }]));
     writeFileSync(path.join(dir, 'runs'), JSON.stringify([{ workflow_runs: runs, total_count: runs.length }]));
+    writeFileSync(path.join(dir, 'jobs'), JSON.stringify({ jobs }));
     writeFileSync(path.join(dir, 'out'), '');
     writeFileSync(path.join(dir, 'step.sh'), extractRun(workflow, 'Skip when a generation is already in flight'));
     const res = spawnSync('bash', [path.join(dir, 'step.sh')], {
@@ -435,18 +437,31 @@ test('admit usa una snapshot bounded comune per lock e tetto della catena', () =
   }
 });
 
-test('admit coalesces content pushes before the generation backlog fills', () => {
+test('admit coalesces a content push only behind a fresh pending production writer', () => {
   const changed = ['content/blog-body/it/article.ts'];
-  const pending = Array.from({ length: 20 }, (_, index) => ({
-    id: index + 1, created_at: '2026-01-01T00:00:00Z',
+  const selfCreated = '2026-01-01T00:45:00Z';
+  const pending = {
+    id: 1, created_at: '2026-01-01T00:30:00Z', head_branch: 'main',
     status: 'pending', conclusion: null, display_title: 'Generate Blog Article',
-  }));
-  for (const [workflow, caller] of [[SOURCE, 'generate-article.yml'], [CORE, 'generate-article-ti.yml']]) {
-    const admitted = runAdmit(workflow, { caller, changed, runs: pending.slice(1) });
-    assert.equal(admitted.outputs.proceed, 'true');
-    const coalesced = runAdmit(workflow, { caller, changed, runs: pending });
+  };
+  for (const [workflow, caller, writer] of [
+    [SOURCE, 'generate-article.yml', 'generate'],
+    [CORE, 'generate-article-ti.yml', 'generate / generate'],
+  ]) {
+    const jobs = [{ name: writer + ' production', status: 'pending' }];
+    const run = (options) => runAdmit(workflow, { caller, changed, selfCreated, jobs, runs: [pending], ...options });
+    const coalesced = run();
     assert.equal(coalesced.outputs.proceed, 'false');
     assert.match(coalesced.stdout, /GENERATION_OUTCOME kind=skipped reason=admit-content-backlog/);
+    for (const options of [
+      { jobs: [{ name: writer + ' dry run', status: 'pending' }] },
+      { jobs: [{ name: writer + ' production', status: 'in_progress' }] },
+      { jobs: [{ name: writer, status: 'pending' }] },
+      { runs: [{ ...pending, created_at: '2026-01-01T00:05:00Z' }] },
+      { runs: [{ ...pending, head_branch: 'another-branch' }] },
+    ]) {
+      assert.equal(run(options).outputs.proceed, 'true');
+    }
   }
 });
 
