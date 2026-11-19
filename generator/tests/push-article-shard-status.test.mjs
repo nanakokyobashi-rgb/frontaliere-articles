@@ -209,6 +209,11 @@ test('il rollback mantiene la revisione e pianifica il budget Pages per tutti i 
   assert.match(source, /serialized_batch_deadline_available[\s\S]{0,700}reconciling published batches/u);
   assert.match(source, /planned_batch_count=0/u);
   assert.match(source, /article_push_pages_wait_seconds \* planned_batch_count/u);
+  assert.match(source, /CI_JOB_DEADLINE_EPOCH/u);
+  assert.match(source, /article_push_job_reconciliation_reserve_seconds/u);
+  assert.match(source, /article_push_job_remaining.*planned_batch_wait_seconds/u);
+  assert.match(source, /refusing a partial chain/u);
+  assert.match(source, /rollback_job_deadline/u);
   assert.match(source, /export ARTICLE_PUSH_PAGES_DEADLINE="\$article_push_pages_deadline"/u);
   assert.match(source, /wait_for_pages_build "\$rollback_commit" "\$rollback_deadline"/u);
   assert.doesNotMatch(source, /deadline=\$\(\(SECONDS \+ article_push_pages_wait_seconds\)\)/u);

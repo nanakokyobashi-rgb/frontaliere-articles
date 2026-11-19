@@ -31,6 +31,20 @@ function stepText(name) {
   return workflow.slice(start, end);
 }
 
+test('il publish serializzato conosce la deadline assoluta del job prima del checkout', () => {
+  const publish = workflow.slice(workflow.indexOf('\n  publish:\n'));
+  const timeoutMinutes = Number(/^\s+timeout-minutes:\s*(\d+)\s*$/mu.exec(publish)?.[1]);
+  const exportedTimeoutMinutes = Number(/^\s+JOB_TIMEOUT_MINUTES:\s*(\d+)\s*$/mu.exec(publish)?.[1]);
+  const deadlineStep = publish.indexOf('- name: Export publish job deadline');
+  const checkout = publish.indexOf('uses: actions/checkout@v7');
+
+  assert.equal(timeoutMinutes, 180);
+  assert.equal(exportedTimeoutMinutes, timeoutMinutes, 'la deadline runtime deve usare lo stesso cap del job');
+  assert.ok(deadlineStep >= 0 && deadlineStep < checkout, 'la deadline deve partire prima del checkout');
+  assert.match(publish, /CI_JOB_DEADLINE_EPOCH=/u);
+  assert.match(publish, /date \+%s.*JOB_TIMEOUT_MINUTES \* 60/u);
+});
+
 test('il trigger push conserva tutti gli ID dei body cambiati', () => {
   const resolveStep = stepText('Resolve mode, article ids and section');
   // Le cartelle dei corpi, la sezione, l'ammissione nel registry e lo shard

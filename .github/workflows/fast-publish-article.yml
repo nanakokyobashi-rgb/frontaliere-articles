@@ -602,7 +602,9 @@ jobs:
     # so the previous 120-minute cap still killed a healthy publish before its
     # correctness gates could finish (#3115). Keep the job bounded at three
     # hours: this gives the measured slow path headroom without making a hung
-    # shard publish unbounded.
+    # shard publish unbounded. JOB_TIMEOUT_MINUTES is repeated below because
+    # timeout-minutes cannot read the env context; the workflow test keeps the
+    # two values tied.
     timeout-minutes: 180
     strategy:
       fail-fast: false
@@ -620,10 +622,22 @@ jobs:
     # The pre-purge observation and recovery gate share this hard base budget.
     # The article-shard helper expands it to one absolute window per planned
     # serialized commit; the later origin/recovery gates retain this 600-second
-    # cap so a large push cannot make the job unbounded.
+    # cap so a large push cannot make the job unbounded. The serialized shard
+    # helper also receives the absolute job deadline and refuses a plan that
+    # cannot leave a full reconciliation window before Actions' timeout.
     env:
+      JOB_TIMEOUT_MINUTES: 180
       PAGES_BUILD_WAIT_BUDGET_SECONDS: 600
     steps:
+      - name: Export publish job deadline
+        run: |
+          set -euo pipefail
+          if ! [[ "$JOB_TIMEOUT_MINUTES" =~ ^[1-9][0-9]*$ ]]; then
+            echo "::error::JOB_TIMEOUT_MINUTES must be a positive integer"
+            exit 1
+          fi
+          printf 'CI_JOB_DEADLINE_EPOCH=%s\n' "$(( $(date +%s) + JOB_TIMEOUT_MINUTES * 60 ))" >> "$GITHUB_ENV"
+
       - name: Checkout
         uses: actions/checkout@v7
         with:
