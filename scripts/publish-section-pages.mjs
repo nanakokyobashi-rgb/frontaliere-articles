@@ -1563,7 +1563,7 @@ function sha256(bytes) {
   return createHash('sha256').update(bytes).digest('hex');
 }
 
-async function unchangedHeldAssetKeys({ candidateKeys, uploadByKey, assetProbeImpl }) {
+async function unchangedCantonAssetKeys({ candidateKeys, uploadByKey, assetProbeImpl }) {
   const unchanged = new Set();
   let cursor = 0;
   const workers = Array.from({ length: Math.min(HELD_ASSET_PROBE_CONCURRENCY, candidateKeys.length) }, async () => {
@@ -1575,7 +1575,7 @@ async function unchangedHeldAssetKeys({ candidateKeys, uploadByKey, assetProbeIm
         key,
         CANTON_IMAGE_MIME_BY_EXTENSION[path.extname(key).toLowerCase()],
       )) {
-        console.log(`::notice::[${LOG}] asset trattenuto ${key}: bytes locali assenti o non verificabili`);
+        console.log(`::notice::[${LOG}] asset ${key}: bytes locali assenti o non verificabili`);
         continue;
       }
       const localSha256 = sha256(localBytes);
@@ -1596,11 +1596,11 @@ async function unchangedHeldAssetKeys({ candidateKeys, uploadByKey, assetProbeIm
         || remote.byteLength <= 0
         || remote.byteLength > MAX_HELD_ASSET_BYTES
         || !/^[a-f0-9]{64}$/u.test(remote.sha256 ?? '')) {
-        console.log(`::notice::[${LOG}] asset trattenuto ${key}: confronto CDN non verificabile (${remote?.status ?? 'nessuna risposta'})`);
+        console.log(`::notice::[${LOG}] asset ${key}: confronto CDN non verificabile (${remote?.status ?? 'nessuna risposta'})`);
         continue;
       }
       if (remote.byteLength !== localBytes.length || remote.sha256 !== localSha256) {
-        console.log(`::notice::[${LOG}] asset trattenuto ${key}: bytes CDN diversi dal candidato locale`);
+        console.log(`::notice::[${LOG}] asset ${key}: bytes CDN diversi dal candidato locale`);
         continue;
       }
       unchanged.add(key);
@@ -2268,7 +2268,7 @@ export async function publish({
           if (cantonPageReferencesAsset(body, key)) candidateKeys.add(key);
         }
       }
-      unchangedAssetKeys = await unchangedHeldAssetKeys({
+      unchangedAssetKeys = await unchangedCantonAssetKeys({
         candidateKeys: [...candidateKeys],
         uploadByKey,
         assetProbeImpl,
@@ -2295,6 +2295,17 @@ export async function publish({
       return { failures: 1, uploaded: 0, deleted: 0, status: beforeStatus };
     }
   }
+
+  // A bootstrap can regenerate dozens of thumbnails already on the CDN.
+  // Verify their bytes before requesting the shared blog image write lease.
+  const thumbnailsToVerify = cdnUploads.filter(({ key }) =>
+    key.startsWith('images/blog/thumbnails/') && !heldAssetKeys.has(key) && !unchangedAssetKeys.has(key));
+  const unchangedThumbnails = await unchangedCantonAssetKeys({
+    candidateKeys: thumbnailsToVerify.map(({ key }) => key),
+    uploadByKey: new Map(thumbnailsToVerify.map((upload) => [upload.key, upload])),
+    assetProbeImpl,
+  });
+  for (const key of unchangedThumbnails) unchangedAssetKeys.add(key);
 
   failures += await uploadCantonAssets({
     cdnUploads,
