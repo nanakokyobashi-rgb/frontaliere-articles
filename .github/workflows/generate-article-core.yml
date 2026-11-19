@@ -104,7 +104,7 @@ jobs:
           PARENT_RUN_ID: ${{ inputs.parent_run_id }}
           CHAIN_MAX_RUNS_PER_HOUR: ${{ vars.CHAIN_MAX_RUNS_PER_HOUR }}
           CALLER_WORKFLOW: ${{ inputs.caller_workflow }}
-          BODY_MAINTENANCE_PATH_RE: ${{ inputs.body_path_regex }}
+          BODY_MAINTENANCE_PATH_RE: '^content/blog-body(-[a-z0-9-]+)?/(it|de|en|fr)/[^/]+[.]ts$'
           DRY_RUN: ${{ inputs.dry_run }}
 
         run: |

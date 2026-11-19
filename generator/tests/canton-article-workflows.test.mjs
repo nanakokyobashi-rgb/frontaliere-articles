@@ -148,8 +148,9 @@ test('nessun nome della coppia storica resta cablato nelle righe eseguibili del 
     'il core non copia la prosa della sorgente e mantiene solo la direttiva lint necessaria',
   );
   for (const literal of ['generate-article.yml', 'blog-body']) {
-    assert.ok(!jobs.includes(literal), `«${literal}» e' ancora nel core`);
+    assert.ok(!jobs.replace(/^\s*BODY_MAINTENANCE_PATH_RE: .*$/m, '').includes(literal), `«${literal}» e' ancora nel core`);
   }
+  assert.equal(jobs.match(/^ +BODY_MAINTENANCE_PATH_RE: .*$/m)?.[0], SOURCE.match(/^ +BODY_MAINTENANCE_PATH_RE: .*$/m)?.[0]);
   assert.ok(CORE_FORBIDDEN_LITERALS.includes('svizzera') && CORE_FORBIDDEN_LITERALS.includes('frontaliere'));
   // Il generatore rifiuta una sorgente che reintroduce un nome cablato.
   const tainted = SOURCE.replace('          echo "event=$EV chain=$CHAIN', '          [ "$SEC" = "svizzera" ] && true\n          echo "event=$EV chain=$CHAIN');

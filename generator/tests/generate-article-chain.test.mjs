@@ -1049,6 +1049,9 @@ test('le sole modifiche a body esistenti liberano la coda di generazione', () =>
   };
 
   assert.match(run([{ filename: bodyPath, status: 'modified' }]), /reason=admit-body-maintenance/);
+  const otherCantonBody = { filename: 'content/blog-body-canton-ti/it/another-article.ts', status: 'modified' };
+  assert.match(run([{ filename: bodyPath, status: 'modified' }, otherCantonBody]), /reason=admit-body-maintenance/);
+  assert.match(run([{ filename: bodyPath, status: 'added' }, otherCantonBody]), /continue/);
   assert.match(run([{ filename: bodyPath, status: 'added' }]), /continue/);
   assert.match(run([{ filename: bodyPath, status: 'modified' }, { filename: 'content/blog-meta-fr.ts', status: 'modified' }]), /continue/);
   assert.match(run([]), /continue/);
