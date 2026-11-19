@@ -5069,9 +5069,9 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "40fa4339a768ec8f",
-        "corpus": "40fa4339a768ec8f",
-        "alignedAt": "2026-11-16"
+        "site": "458f534d394d0695",
+        "corpus": "458f534d394d0695",
+        "alignedAt": "2026-11-19"
       }
     },
     {
@@ -5081,9 +5081,9 @@
       "remoteDigestRequired": true,
       "reason": "La baseline registra lo stesso digest SHA-256 raw sui due lati; `remoteDigestRequired` rende il confronto remoto una precondizione fail-closed prima di accettare o riattestare la baseline e prima del trasporto.",
       "baseline": {
-        "site": "11782c3eec3dc194",
-        "corpus": "11782c3eec3dc194",
-        "alignedAt": "2026-11-18"
+        "site": "035139c162b4542e",
+        "corpus": "035139c162b4542e",
+        "alignedAt": "2026-11-19"
       }
     },
     {
@@ -5192,7 +5192,7 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica, legge le risposte JSON solo da stream bounded o da fallback con lunghezza dichiarata ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "f6fc30033c87a237",
+        "corpus": "46d73ab66141dbda",
         "alignedAt": "2026-10-23"
       }
     },
