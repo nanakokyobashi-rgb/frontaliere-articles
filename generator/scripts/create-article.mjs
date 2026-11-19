@@ -17110,6 +17110,15 @@ async function translateArticle(data) {
           factSequence.push({ type: 'number', value: entry.value });
         }
       }
+      // A comma inside a parsed number is a locale-specific separator, not
+      // a clause boundary. Keep the same label span after e.g. 12,50 → 12.50.
+      const numericCommas = new Set();
+      for (const { index, end } of numberEntries) {
+        for (let comma = value.indexOf(',', index); comma !== -1 && comma < end; comma = value.indexOf(',', comma + 1)) {
+          numericCommas.add(comma);
+        }
+      }
+      const isAssociationBoundary = (index) => spanBoundary(value[index]) && !numericCommas.has(index);
       const associations = numberEntries.map(({
         value: number,
         index,
@@ -17119,9 +17128,9 @@ async function translateArticle(data) {
         calendarFact,
       }) => {
         let start = index;
-        while (start > 0 && !spanBoundary(value[start - 1])) start -= 1;
+        while (start > 0 && !isAssociationBoundary(start - 1)) start -= 1;
         let end = index;
-        while (end < value.length && !spanBoundary(value[end])) end += 1;
+        while (end < value.length && !isAssociationBoundary(end)) end += 1;
         const span = value.slice(start, end);
         const numberRanges = numberEntries
           .filter((entry) => entry.index >= start && entry.end <= end)
@@ -19799,11 +19808,23 @@ export const IMAGE_PHASE_BUDGET_MS = Math.max(
 // fresh 120s window after the run budget has already expired.
 let _articleRunDeadlineMs = null;
 
-export function getArticleImageDeadlineAt(now = Date.now()) {
-  const phaseDeadline = now + IMAGE_PHASE_BUDGET_MS;
+export function getArticleImageDeadlineAt(now = Date.now(), budgetMs = IMAGE_PHASE_BUDGET_MS) {
+  const phaseDeadline = now + budgetMs;
   return _articleRunDeadlineMs === null
     ? phaseDeadline
     : Math.min(phaseDeadline, _articleRunDeadlineMs);
+}
+
+export function getArticleImageDeadlines(now = Date.now()) {
+  // Keep the existing generation window. A generated image rejected near its
+  // deadline must still leave time to check the provenance and relevance of
+  // an alternative. Take the reserve from the remaining run budget when late.
+  const catalogBudgetMs = 60_000;
+  const catalogDeadlineAt = getArticleImageDeadlineAt(now, IMAGE_PHASE_BUDGET_MS + catalogBudgetMs);
+  const remainingMs = Math.max(0, catalogDeadlineAt - now);
+  const catalogReserveMs = Math.min(catalogBudgetMs, Math.floor(remainingMs / 3));
+  const generationDeadlineAt = Math.min(now + IMAGE_PHASE_BUDGET_MS, catalogDeadlineAt - catalogReserveMs);
+  return { generationDeadlineAt, catalogDeadlineAt };
 }
 
 function articleImageArea() {
@@ -24236,8 +24257,8 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // Step 3b: Generate article image through the governed engine.
   console.error('🎨 Generazione immagine articolo:');
   const imageArea = articleImageArea();
-  const imageDeadlineAt = getArticleImageDeadlineAt();
-  const imagePath = await generateArticleImage(data, { area: imageArea, deadlineAt: imageDeadlineAt });
+  const { generationDeadlineAt, catalogDeadlineAt } = getArticleImageDeadlines();
+  const imagePath = await generateArticleImage(data, { area: imageArea, deadlineAt: generationDeadlineAt });
   if (imagePath) {
     data._generatedImagePath = imagePath;
     console.error('  ✅ Immagine generata');
@@ -24250,7 +24271,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       root: PROJECT_ROOT,
       findCatalogImages: findBestFallbackImages,
       area: imageArea,
-      deadlineAt: imageDeadlineAt,
+      deadlineAt: catalogDeadlineAt,
       logArticleId: safeSignalTextForLog(data.id, null, '[signal_article_id_redacted]'),
     });
     const fallbackReason = data._imageGenerationFailureReason || 'engine-failed';
