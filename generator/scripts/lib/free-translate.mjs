@@ -2283,6 +2283,7 @@ function codexTranslateCallTimeoutMs() {
 // processo gia' inoltrato e il `timeout` del workflow (cap 657 s) lo ha ucciso
 // con l'articolo IT pronto: `hard-killed after 657s on section frontaliere`.
 let _codexProcessDeadlineMs = null;
+let _codexRecoveryReserveMs = 0;
 
 /**
  * create-article (o un altro processo con un tetto di durata) dichiara qui la
@@ -2290,9 +2291,10 @@ let _codexProcessDeadlineMs = null;
  * almeno CODEX_TRANSLATE_MIN_CALL_MS prima di quella scadenza, e la deadline
  * di ogni chiamata e' limitata a essa. Un valore non finito o <= 0 la toglie.
  */
-export function setCodexTranslateProcessDeadline(deadlineMs) {
+export function setCodexTranslateProcessDeadline(deadlineMs, { recoveryReserveMs = 0 } = {}) {
   const value = Number(deadlineMs);
   _codexProcessDeadlineMs = deadlineMs !== null && Number.isFinite(value) && value > 0 ? value : null;
+  _codexRecoveryReserveMs = _codexProcessDeadlineMs === null ? 0 : recoveryReserveMs;
 }
 
 /**
@@ -2949,7 +2951,12 @@ async function _translateGroupWithCodex(group) {
   }
   // Rivalutata qui, in coda, e non all'ingresso: l'attesa dietro le richieste
   // precedenti consuma proprio la finestra del processo.
-  const callDeadlineMs = codexCallDeadlineMs({ now: Date.now(), budgetRemainingMs: remainingMs });
+  // Preserve part of the shared budget for the explicit article body recovery
+  // lane. Falling back here must not trip its shared circuit breaker.
+  const recoveryReserveMs = Math.min(_codexRecoveryReserveMs, Math.floor(maxMs / 5));
+  const initialRemainingMs = remainingMs - recoveryReserveMs;
+  if (initialRemainingMs < CODEX_TRANSLATE_MIN_CALL_MS) return none();
+  const callDeadlineMs = codexCallDeadlineMs({ now: Date.now(), budgetRemainingMs: initialRemainingMs });
   if (callDeadlineMs === null) {
     // I testi non tradotti restano non tradotti: la cascata scende ai tier
     // successivi e cio' che resta scoperto lo recupera translate-pending.
