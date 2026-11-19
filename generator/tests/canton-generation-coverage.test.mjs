@@ -179,7 +179,7 @@ test('wiring aggrega i gap, rispetta il cap e risolve gli stessi titoli al recup
   const partial = await getVerdicts(commits, twoCantons);
   assert.deepEqual(partial.map(({ available, firing }) => [available, firing]), [[false, false], [false, false]]);
   assert.match(measure(f.root, commits, twoCantons)['locale-gap'].summary,
-    /canton-ag: articolo assente[\s\S]*canton-be: non misurabile \(registro indisponibile\)/);
+    /canton-ag: nessun articolo nella finestra[\s\S]*canton-be: non misurabile \(registro indisponibile\)/);
   const created = [];
   const routed = [];
   const resolved = [];
@@ -193,21 +193,22 @@ test('wiring aggrega i gap, rispetta il cap e risolve gli stessi titoli al recup
   assert.deepEqual({ created, routed, resolved }, { created: [], routed: [], resolved: [] });
 
   const bern = fixture(t, 'canton-be', f.root);
-  bern.registry([]);
-  for (const locale of LOCALES) bern.meta(locale, {});
+  bern.registry([['bern-recent', date(NOW)]]);
+  for (const locale of LOCALES) bern.meta(locale, locale === 'it' ? { 'bern-recent.title': 'Titolo' } : {});
+  bern.body('it', 'bern-recent');
   const verdicts = await getVerdicts(commitHistory(48), twoCantons);
   assert.deepEqual(verdicts.map(({ title, section }) => [title, section]), TITLES.map((title) => [title, null]));
   assert.equal(verdicts[0].firing, true);
   assert.match(verdicts[0].body, /canton-ag: articolo assente[\s\S]*canton-be: articolo assente/);
-  assert.equal(verdicts[1].available, false);
-  assert.equal(verdicts[1].firing, false);
+  assert.equal(verdicts[1].firing, true);
+  assert.match(verdicts[1].body, /canton-ag: nessun articolo nella finestra[\s\S]*canton-be: articolo assente/);
   assert.equal((await reconcile(verdicts, { ...io, maxIssues: 1 })).capped, 1);
   assert.deepEqual(created, TITLES.slice(0, 1));
   created.length = 0;
   routed.length = 0;
   await reconcile(verdicts, io);
-  assert.deepEqual(created, TITLES.slice(0, 1));
-  assert.deepEqual(routed, [[1, TITLES[0]]]);
+  assert.deepEqual(created, TITLES);
+  assert.deepEqual(routed, TITLES.map((title, i) => [i + 1, title]));
 
   f.registry([['recent', date(NOW)]]);
   for (const locale of LOCALES) {
