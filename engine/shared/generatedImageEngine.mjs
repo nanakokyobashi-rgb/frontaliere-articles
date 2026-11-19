@@ -4,7 +4,8 @@
  * lives in the mirrored articles engine so the corpus can use the same API.
  *
  * Public callers provide a normalized specification. This module owns provider
- * order, the Codex OAuth transport, the Gemini fallback, WebP conversion,
+ * order, the Codex OAuth transport, the approved non-Google fallback chain,
+ * WebP conversion,
  * XMP/IPTC marking, and the vision gate. It never returns bytes without the
  * matching registry record.
  */
@@ -38,6 +39,7 @@ import {
   generatedImagePathForScope,
   scopeAllowsLicensedPhoto,
   validateGeneratedImageRecord,
+  validateGeneratedImageRecordWithRegistry,
 } from './generatedImageRegistry.mjs';
 import {
   eventImageLibrarySlots,
@@ -58,15 +60,13 @@ export {
   isCompleteArticleHeroVisionVerdict,
 };
 
-export const CODEX_IMAGE_MODEL = 'gpt-image-2.5';
+export const CODEX_IMAGE_MODEL = 'gpt-image-2';
 export const CODEX_IMAGE_EXECUTOR_MODEL = process.env.CODEX_IMAGE_EXECUTOR_MODEL || 'gpt-5.6-luna';
-export const GEMINI_IMAGE_MODEL = 'gemini-3.1-flash-image';
 export const FAL_IMAGE_MODEL = 'fal-ai/flux/schnell';
 export const TOGETHER_IMAGE_MODEL = 'black-forest-labs/FLUX.1-schnell-Free';
 export const POLLINATIONS_IMAGE_MODEL = 'flux';
 export const DEFAULT_GENERATION_PROVIDER_CHAIN = Object.freeze([
   'openai-codex',
-  'gemini',
   'fal',
   'together',
   'pollinations',
@@ -84,14 +84,12 @@ export const DEFAULT_AUTO_PROVIDER_CHAIN = Object.freeze([
   'pixabay',
 ]);
 export const OPENAI_TERMS_URL = GENERATED_IMAGE_LICENSE_URLS['openai-codex'];
-export const GEMINI_TERMS_URL = GENERATED_IMAGE_LICENSE_URLS.gemini;
 export const FAL_TERMS_URL = GENERATED_IMAGE_LICENSE_URLS.fal;
 export const TOGETHER_TERMS_URL = GENERATED_IMAGE_LICENSE_URLS.together;
 export const POLLINATIONS_TERMS_URL = GENERATED_IMAGE_LICENSE_URLS.pollinations;
 export const DEFAULT_IMAGE_TIMEOUT_MS = 10 * 60 * 1000;
 export const DEFAULT_PROVIDER_TIMEOUTS = Object.freeze({
   'openai-codex': DEFAULT_IMAGE_TIMEOUT_MS,
-  gemini: 120_000,
   fal: 120_000,
   together: 120_000,
   pollinations: 120_000,
@@ -166,21 +164,6 @@ export function formatProviderHttpError(provider, status, body) {
   return `${provider} image request failed with HTTP ${status}${detail ? `: ${detail}` : ''}`;
 }
 
-/** Extract the image block returned by the current Gemini Interactions API. */
-export function extractGeminiImageData(response) {
-  const stepContents = Array.isArray(response?.steps)
-    ? response.steps.flatMap((step) => Array.isArray(step?.content) ? step.content : [])
-    : [];
-  const imageData = [
-    response?.output_image?.data,
-    ...stepContents
-      .filter((content) => content?.type === 'image')
-      .map((content) => content?.data),
-  ].find((data) => typeof data === 'string' && data.trim());
-  if (!imageData) throw new Error('Gemini returned no image data');
-  return String(imageData).replace(/^data:[^;]+;base64,/i, '');
-}
-
 function normalizeProviderList(value) {
   const values = Array.isArray(value) ? value : String(value || '').split(/[,\s]+/);
   return [...new Set(values.map((item) => String(item).trim().toLowerCase()).filter((item) => IMAGE_PROVIDERS.includes(item)))];
@@ -202,7 +185,6 @@ export function imageProviderSequence({ kind = GENERATED_IMAGE_KIND, scope, prov
 
 export function providerConfiguration(provider, env = process.env) {
   const keyByProvider = {
-    gemini: 'GEMINI_API_KEY',
     fal: 'FAL_KEY',
     together: 'TOGETHER_API_KEY',
     pollinations: 'POLLINATIONS_API_KEY',
@@ -399,40 +381,6 @@ async function runCodex({ prompt, imagePath = '', imageOutputPath = '', generate
     return requestCodexBroker({ prompt, imagePath, imageOutputPath, generate, schema, timeoutMs, deadlineAt });
   }
   return runCodexDirect({ prompt, imagePath, imageOutputPath, generate, schema, timeoutMs });
-}
-
-async function runGeminiImage(prompt, destination, { timeoutMs = 120_000 } = {}) {
-  const apiKey = String(process.env.GEMINI_API_KEY || '').trim();
-  if (!apiKey) throw new Error('GEMINI_API_KEY is not configured');
-  // The stable 3.1 Flash Image model is exposed through the Interactions API;
-  // keeping the key in the header also prevents it from entering URL logs.
-  const endpoint = 'https://generativelanguage.googleapis.com/v1beta/interactions';
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), Math.max(1, Math.floor(timeoutMs)));
-  try {
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
-      signal: controller.signal,
-      body: JSON.stringify({
-        model: GEMINI_IMAGE_MODEL,
-        input: prompt,
-        // The current Interactions image response format accepts JPEG here;
-        // PNG remains valid for image input/content blocks, but returns HTTP
-        // 400 when requested as the generated response MIME type.
-        response_format: { type: 'image', mime_type: 'image/jpeg', aspect_ratio: '16:9', image_size: '1K' },
-      }),
-    });
-    if (!response.ok) {
-      throw new Error(formatProviderHttpError('Gemini', response.status, await response.text()));
-    }
-    const json = await response.json();
-    const encoded = extractGeminiImageData(json);
-    fs.writeFileSync(destination, Buffer.from(encoded, 'base64'), { mode: 0o600 });
-    return { imagePath: destination, model: GEMINI_IMAGE_MODEL };
-  } finally {
-    clearTimeout(timer);
-  }
 }
 
 export function extractTogetherImageData(response) {
@@ -1235,79 +1183,6 @@ function sharedVisionProviderUnavailableError(errors) {
   return error;
 }
 
-async function runGeminiVision(filePath, {
-  timeoutMs = 120_000,
-  kind = GENERATED_IMAGE_KIND,
-  scope,
-  subject,
-  topic,
-  place,
-  keywords,
-} = {}) {
-  const apiKey = String(process.env.GEMINI_API_KEY || '').trim();
-  if (!apiKey) throw new Error('GEMINI_API_KEY is not configured for the vision fallback');
-  let image;
-  try {
-    image = fs.readFileSync(filePath).toString('base64');
-  } catch (error) {
-    error.imageCandidateFileFailure = true;
-    throw error;
-  }
-  const prompt = [
-    'Inspect the attached generated image for a publication safety gate.',
-    'Return only one JSON object with the keys ok, contains_text, contains_logo, contains_recognizable_face, contains_recognizable_foreground_person, looks_like_specific_real_event, is_photograph, is_topic_relevant and notes.',
-    kind === LICENSED_PHOTO_KIND
-      ? 'This is a real licensed photo candidate; a real place is allowed, but reject recognizable people in the foreground and logos or brands.'
-      : 'Set ok=true only when the image is an original generic synthetic illustration and has none of the forbidden properties. A photorealistic visual style is allowed; it must not claim to document a specific real event.',
-    kind === LICENSED_PHOTO_KIND
-      ? 'Mark contains_text only when present; it is not by itself a rejection for a licensed photo.'
-      : 'Mark any readable or decorative lettering, signage, watermark or signature as contains_text=true.',
-    'Mark any logo, brand or trademark as contains_logo=true.',
-    'Mark any recognizable human face or public figure as contains_recognizable_face=true.',
-    'Mark any recognizable person in the foreground as contains_recognizable_foreground_person=true, even when the face is not fully visible.',
-    'Mark a documentary/news image of a specific real event as looks_like_specific_real_event=true.',
-    kind === LICENSED_PHOTO_KIND
-      ? 'Set is_photograph=true only when the image is a real camera photograph, not a painting, drawing, map, scan, poster, logo or illustration.'
-      : 'Set is_photograph=false for this synthetic illustration, even when its visual style is photorealistic.',
-    scope === 'article-hero'
-      ? `For an article hero, set is_topic_relevant=true only when the image visibly matches the article topic and place. Subject: ${subject || 'unspecified'}. Topic: ${topic || 'unspecified'}. Place: ${place || 'unspecified'}. Keywords: ${Array.isArray(keywords) ? keywords.join(', ') : keywords || 'unspecified'}. Reject readable text, signage, watermarks and logos.`
-      : '',
-    `Policy: ${kind === LICENSED_PHOTO_KIND ? LICENSED_PHOTO_RESTRICTIONS.join(' ') : GENERATED_IMAGE_POLICY.join(' ')}`,
-  ].join('\n');
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), Math.max(1, Math.floor(timeoutMs)));
-  try {
-    const response = await fetch('https://generativelanguage.googleapis.com/v1beta/interactions', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
-      signal: controller.signal,
-      body: JSON.stringify({
-        model: GEMINI_IMAGE_MODEL,
-        input: [
-          { type: 'image', mime_type: 'image/webp', data: image },
-          { type: 'text', text: prompt },
-        ],
-        response_format: { type: 'text' },
-      }),
-    });
-    if (!response.ok) {
-      const error = new Error(formatProviderHttpError('Gemini vision', response.status, await response.text()));
-      error.status = response.status;
-      throw error;
-    }
-    const json = await response.json();
-    const text = [
-      json.output_text,
-      ...(json.steps || []).flatMap((step) => (step.content || [])
-        .filter((content) => content?.type === 'text')
-        .map((content) => content.text)),
-    ].filter(Boolean).join('\n');
-    return parseVisionResult(text);
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
 function xmpFor({ title, provider, model, kind = GENERATED_IMAGE_KIND, licenseUrl = '', credit = '', author, sourcePageUrl = '' }) {
   const digitalSourceType = 'http://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia';
   const escapeXml = (value) => String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
@@ -1419,26 +1294,8 @@ export async function verifyGeneratedImage(filePath, {
   } catch (codexError) {
     assertBeforeDeadline(deadlineAt, 'image vision fallback');
     const codexUnavailable = isVisionProviderUnavailable(codexError);
-    if (!String(process.env.GEMINI_API_KEY || '').trim()) {
-      if (codexUnavailable) throw sharedVisionProviderUnavailableError([codexError]);
-      throw codexError;
-    }
-    try {
-      verdict = await runGeminiVision(filePath, {
-        timeoutMs: timeoutForDeadline(deadlineAt, 120_000),
-        kind,
-        scope,
-        subject,
-        topic,
-        place,
-        keywords,
-      });
-    } catch (geminiError) {
-      if (codexUnavailable && isVisionProviderUnavailable(geminiError)) {
-        throw sharedVisionProviderUnavailableError([codexError, geminiError]);
-      }
-      throw geminiError;
-    }
+    if (codexUnavailable) throw sharedVisionProviderUnavailableError([codexError]);
+    throw codexError;
   }
   assertBeforeDeadline(deadlineAt, 'image vision result');
   if (scope === 'article-hero' && !isCompleteArticleHeroVisionVerdict(verdict)) {
@@ -1457,7 +1314,6 @@ export async function verifyGeneratedImage(filePath, {
 function providerRecordFields(provider) {
   const generated = {
     'openai-codex': { model: CODEX_IMAGE_MODEL, executorModel: CODEX_IMAGE_EXECUTOR_MODEL, licenseUrl: OPENAI_TERMS_URL },
-    gemini: { model: GEMINI_IMAGE_MODEL, executorModel: GEMINI_IMAGE_MODEL, licenseUrl: GEMINI_TERMS_URL },
     fal: { model: FAL_IMAGE_MODEL, executorModel: FAL_IMAGE_MODEL, licenseUrl: FAL_TERMS_URL },
     together: { model: TOGETHER_IMAGE_MODEL, executorModel: TOGETHER_IMAGE_MODEL, licenseUrl: TOGETHER_TERMS_URL },
     pollinations: { model: POLLINATIONS_IMAGE_MODEL, executorModel: POLLINATIONS_IMAGE_MODEL, licenseUrl: POLLINATIONS_TERMS_URL },
@@ -1536,11 +1392,6 @@ export async function generateImageFromSpec(spec, {
           deadlineAt,
         });
         providerResult = { imagePath: rawPath, model: CODEX_IMAGE_MODEL };
-      } else if (selectedProvider === 'gemini') {
-        await runGeminiImage(prompt, rawPath, {
-          timeoutMs,
-        });
-        providerResult = { imagePath: rawPath, model: GEMINI_IMAGE_MODEL };
       } else if (selectedProvider === 'fal') {
         providerResult = await runFalImage(prompt, rawPath, { timeoutMs });
       } else if (selectedProvider === 'together') {
@@ -1752,18 +1603,29 @@ export async function generateEventImageLibrary({
     if (!entries.includes(diagnostic) && entries.length < 5) entries.push(diagnostic);
   };
   const persist = () => {
-    if (registryPath === null) return;
     const partialAssets = [...assetsById.values()].sort((a, b) => String(a.assetId).localeCompare(String(b.assetId)));
+    const legacyVisionIds = Array.isArray(registry.legacyVision?.assetIds)
+      ? registry.legacyVision.assetIds.filter((assetId) => {
+        const record = assetsById.get(assetId);
+        return record && record.vision?.contains_recognizable_foreground_person !== false;
+      })
+      : [];
     const partial = {
       schema: 1,
       libraryVersion: registry.libraryVersion || new Date().toISOString().slice(0, 10),
       cdnPrefix: '/images/events/library/',
       assetCount: partialAssets.length,
       generatedAt: generated.length > 0 ? new Date().toISOString() : (registry.generatedAt || new Date().toISOString()),
+      ...(legacyVisionIds.length > 0
+        ? { legacyVision: { ...registry.legacyVision, assetIds: legacyVisionIds } }
+        : {}),
       assets: partialAssets,
     };
-    fs.mkdirSync(path.dirname(resolvedRegistryPath), { recursive: true });
-    fs.writeFileSync(resolvedRegistryPath, `${JSON.stringify(partial, null, 2)}\n`, 'utf8');
+    if (registryPath !== null) {
+      fs.mkdirSync(path.dirname(resolvedRegistryPath), { recursive: true });
+      fs.writeFileSync(resolvedRegistryPath, `${JSON.stringify(partial, null, 2)}\n`, 'utf8');
+    }
+    return partial;
   };
   for (const slot of eventImageLibrarySlots({ variants })) {
     if (generated.length >= boundedLimit) break;
@@ -1771,7 +1633,7 @@ export async function generateEventImageLibrary({
     // The registry is the source of truth for already-published slots. CI
     // deliberately starts with an empty local cache, so requiring a local
     // byte here would regenerate the first N assets on every weekly run.
-    if (existing && validateGeneratedImageRecord(existing).valid) continue;
+    if (existing && validateGeneratedImageRecordWithRegistry(existing, registry).valid) continue;
     try {
       const result = await generateImageFromSpec({
         scope: 'event-library',
@@ -1826,15 +1688,6 @@ export async function generateEventImageLibrary({
       if (explicitProviderRequest) break;
     }
   }
-  const assets = [...assetsById.values()].sort((a, b) => String(a.assetId).localeCompare(String(b.assetId)));
-  const output = {
-    schema: 1,
-    libraryVersion: registry.libraryVersion || new Date().toISOString().slice(0, 10),
-    cdnPrefix: '/images/events/library/',
-    assetCount: assets.length,
-    generatedAt: generated.length > 0 ? new Date().toISOString() : (registry.generatedAt || new Date().toISOString()),
-    assets,
-  };
-  persist();
+  const output = persist();
   return { registry: output, generated, generationCalls, providerCounts, providerFailures };
 }

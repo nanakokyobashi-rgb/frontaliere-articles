@@ -46,8 +46,8 @@ export function isCompleteArticleHeroVisionVerdict(verdict) {
 /** The publication verdict applies topic relevance to synthetic heroes too. */
 export function imageVisionRejected(verdict, { kind = GENERATED_IMAGE_KIND, scope } = {}) {
   const articleHero = scope === 'article-hero';
-  // The JSON schema is enforced by the primary verifier, but the Gemini
-  // fallback is parsed from free-form text. Require the same complete verdict
+  // The JSON schema is enforced by the primary verifier, but a reserve
+  // provider may be parsed from free-form text. Require the same complete verdict
   // at this shared policy boundary before any article hero can be published.
   if (articleHero && !isCompleteArticleHeroVisionVerdict(verdict)) return true;
   if (verdict?.ok !== true) return true;
@@ -57,7 +57,8 @@ export function imageVisionRejected(verdict, { kind = GENERATED_IMAGE_KIND, scop
       || verdict.contains_recognizable_foreground_person !== false
       || (articleHero && verdict.contains_text);
   }
-  return verdict.contains_text !== false || verdict.contains_logo !== false || verdict.contains_recognizable_face !== false || verdict.contains_recognizable_foreground_person !== false || verdict.looks_like_specific_real_event !== false;
+  return verdict.contains_text !== false || verdict.contains_logo !== false || verdict.contains_recognizable_face !== false
+    || verdict.contains_recognizable_foreground_person !== false || verdict.looks_like_specific_real_event !== false;
 }
 
 const VISION_FAILURE_FLAG_NAMES = Object.freeze([

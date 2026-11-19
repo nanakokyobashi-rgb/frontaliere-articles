@@ -484,5 +484,15 @@ export function buildImageCreditsIndex({ section, commit, images, reader }) {
  * @param {(message: string) => void} [warn]
  */
 export function corpusCreditReader(root, warn) {
-  return createImageCreditReader(fs, path.join(root, IMAGE_CREDITS_ROOT), warn ? { warn } : {});
+  const options = warn ? { warn } : {};
+  try {
+    options.legacyVisionRegistry = JSON.parse(
+      fs.readFileSync(path.join(root, 'data', 'generated-image-registry.json'), 'utf-8'),
+    );
+  } catch (error) {
+    if (error?.code !== 'ENOENT' && error?.code !== 'ENOTDIR' && warn) {
+      warn(`[image-credits] ${path.join(root, 'data', 'generated-image-registry.json')}: registry unreadable (${error.message})`);
+    }
+  }
+  return createImageCreditReader(fs, path.join(root, IMAGE_CREDITS_ROOT), options);
 }
