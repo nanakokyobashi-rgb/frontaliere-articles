@@ -139,6 +139,6 @@ test('a repeated editorial originality rejection exits the candidate retry loop'
     SOURCE.indexOf('// Step 3a.0c: LLM fact verification'),
     SOURCE.indexOf('// `itWords` / `lastWordCount` sono gia', SOURCE.indexOf('// Step 3a.0c: LLM fact verification')),
   );
-  assert.match(primaryCheck, /if \(factResult\.issues\.some\(\(issue\) => issue\.code === 'editorial_originality'\)\) \{\s*editorialOriginalityRejections \+= 1;\s*if \(editorialOriginalityRejections >= 2\) \{\s*err\.topicGateAbort = true;\s*throw err;/);
-  assert.match(primaryCheck, /catch \(fcErr\) \{[\s\S]*?if \(fcErr\.topicGateAbort === true\) throw fcErr;[\s\S]*?if \(attempt < maxAttempts\)/);
+  assert.match(primaryCheck, /if \(factResult\.issues\.some\(\(issue\) => issue\.code === 'editorial_originality'\)\) \{\s*editorialOriginalityRejections \+= 1;\s*if \(editorialOriginalityRejections >= 2\) \{\s*err\.qualityReject = true;\s*throw err;/);
+  assert.match(primaryCheck, /catch \(fcErr\) \{[\s\S]*?if \(fcErr\.qualityReject === true\) throw fcErr;[\s\S]*?if \(attempt < maxAttempts\)/);
 });

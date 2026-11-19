@@ -23674,7 +23674,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
         if (factResult.issues.some((issue) => issue.code === 'editorial_originality')) {
           editorialOriginalityRejections += 1;
           if (editorialOriginalityRejections >= 2) {
-            err.topicGateAbort = true;
+            err.qualityReject = true;
             throw err;
           }
         }
@@ -23713,7 +23713,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     } catch (fcErr) {
       // Content rejections retry; an unavailable verifier defers the whole
       // run so every headline does not repeat the same failed cascade.
-      if (fcErr.topicGateAbort === true) throw fcErr;
+      if (fcErr.qualityReject === true) throw fcErr;
       if (isFactCheckUnavailableError(fcErr)) throw fcErr;
       if (attempt < maxAttempts) {
         console.error(`  🔄 Rigenero per fact-check: ${safeSignalDiagnosticTextForLog(fcErr.message).slice(0, 120)} (${attempt}/${maxAttempts})...`);
