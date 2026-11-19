@@ -401,8 +401,13 @@ jobs:
                         and (.name | length) > 0
                       )
                     )
-                    and (($pages | map(.total_count) | unique | length) == 1)
-                    and (($pages | map(.jobs | length) | add) == $pages[0].total_count)
+                    # Actions total_count is an eventually consistent search
+                    # index, not a cardinality contract for the rows returned
+                    # by this paginated read. Prove pagination completeness
+                    # independently: every non-final page must be full, while
+                    # the final page may be short when the result set settles.
+                    and all($pages[]; (.jobs | length) <= 100)
+                    and all($pages[0:-1][]; (.jobs | length) == 100)
                     and (([$pages[].jobs[].id] | unique | length)
                       == ([$pages[].jobs[]] | length))
                   then

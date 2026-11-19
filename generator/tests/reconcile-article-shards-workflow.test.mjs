@@ -57,6 +57,10 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   );
   assert.match(workflow, /jobs \| length/);
   assert.match(guard, /total_count/);
+  assert.doesNotMatch(guard, /map\(\.total_count\) \| unique/);
+  assert.doesNotMatch(guard, /map\(\.jobs \| length\) \| add/);
+  assert.match(guard, /all\(\$pages\[\]; \(\.jobs \| length\) <= 100\)/);
+  assert.match(guard, /all\(\$pages\[0:-1\]\[\]; \(\.jobs \| length\) == 100\)/);
   assert.match(workflow, /validate_workflow_runs\(\)/);
   assert.match(guard, /\.name == "resolve"/);
   assert.doesNotMatch(guard, /\.status == "queued" or \.status == "in_progress"/);
@@ -122,6 +126,10 @@ test('i gemelli del guard usano listing completi, stati completi e fail-closed',
   );
   assert.match(republishGuard, /gh_api_timeout --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/runs\/\$run_id\/jobs\?per_page=100"/);
   assert.match(republishWorkflow, /total_count/);
+  assert.doesNotMatch(republishWorkflow, /map\(\.total_count\) \| unique/);
+  assert.doesNotMatch(republishWorkflow, /map\(\.jobs \| length\) \| add/);
+  assert.match(republishWorkflow, /all\(\$pages\[\]; \(\.jobs \| length\) <= 100\)/);
+  assert.match(republishWorkflow, /all\(\$pages\[0:-1\]\[\]; \(\.jobs \| length\) == 100\)/);
   assert.match(republishWorkflow, /validate_workflow_runs/);
   assert.match(republishWorkflow, /\.status == \$expected/);
   assert.match(republishWorkflow, /created_at_epoch/);
