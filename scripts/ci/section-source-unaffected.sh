@@ -24,5 +24,7 @@ git diff --quiet --no-ext-diff --no-textconv --ignore-submodules=none "$expected
   ':(top,exclude,literal)data/discovery-attempt-state.json' \
   ':(top,exclude,literal)data/topic-candidates-evergreen-rejected.json' \
   ':(top,exclude,literal)data/image-regeneration-queue.json' \
+  ':(top,exclude,literal)data/image-regeneration-queue-pending.jsonl' \
+  ':(top,exclude,glob)data/image-regeneration-queue-pending.jsonl.*.pending' \
   ':(top,exclude,literal)generator/tests/canton-generation-coverage.test.mjs' \
   ':(top,exclude,literal)scripts/ci/canton-generation-coverage.mjs'
