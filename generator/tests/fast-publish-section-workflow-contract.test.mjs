@@ -349,6 +349,8 @@ test('reconcile evita un backfill duplicato sulla stessa revisione e conserva la
         ACTIVE_RUNS: JSON.stringify([{ workflow_runs: [
           pending('canton-appenzello', 'pending'),
           pending('canton-ti', 'completed'),
+          { ...pending('canton-ti', 'queued'), display_title: 'cover-publish-section / canton-ti / nonce=manual / dry=false / c=none' },
+          { ...pending('canton-ne', 'queued'), display_title: 'cover-publish-section / canton-ne / nonce=reconcile-42-canton-ne / dry=true / c=reconcile-42-n1' },
           pending('canton-ne', 'in_progress', 'b'.repeat(40)),
         ] }]),
       },

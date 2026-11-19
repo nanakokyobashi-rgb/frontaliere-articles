@@ -255,11 +255,13 @@ jobs:
                 if length == 0 or any(.[]; (.workflow_runs | type) != "array") then
                   error("invalid fast-publish-section run list")
                 else
-                  [.[] | .workflow_runs[] | select(.head_sha == $sha)
+                  "^cover-publish-section / (?<section>canton-[a-z0-9-]+) / nonce=reconcile-[0-9]+-[a-z0-9-]+ / dry=false / c=reconcile-[0-9]+-n[1-9][0-9]*$" as $title_re
+                  | [.[] | .workflow_runs[] | select(.head_sha == $sha)
                     | select(.status == "queued" or .status == "pending" or .status == "in_progress"
                         or .status == "requested" or .status == "waiting")
-                    | .display_title
-                    | capture("^cover-publish-section / (?<section>canton-[a-z0-9-]+) / nonce=reconcile-[0-9]+-[a-z0-9-]+ / dry=false / c=reconcile-[0-9]+-n[1-9][0-9]*$").section]
+                    | (.display_title // "")
+                    | select(test($title_re))
+                    | capture($title_re).section]
                   | unique
                 end
               ')"
