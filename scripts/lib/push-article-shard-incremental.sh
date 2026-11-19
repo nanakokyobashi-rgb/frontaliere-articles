@@ -724,6 +724,11 @@ rollback_serialized_publications() {
   local -a candidate_commits=("$@")
   local remote_head rollback_stage base_tree current_tree rollback_tree rollback_commit
   local rollback_content_revision rollback_deadline rollback_job_deadline rollback_now
+  # The function is extracted and invoked under `set -u` by the rollback
+  # contract test, so do not assume the script-level deadline initializers are
+  # present when this function is called in isolation.
+  local rollback_job_deadline_epoch="${article_push_job_deadline:-}"
+  local rollback_job_tail_seconds="${article_push_job_tail_seconds:-${DEFAULT_ARTICLE_PUSH_JOB_TAIL_SECONDS:-}}"
   local rollback_repo rollback_pat_token candidate_parent expected_parent clone_err
   local candidate
   local -a rollback_git_opts=()
@@ -856,8 +861,12 @@ rollback_serialized_publications() {
     return 1
   fi
   rollback_deadline=$((rollback_deadline + article_push_pages_wait_seconds))
-  if [ -n "$article_push_job_deadline" ]; then
-    rollback_job_deadline=$((article_push_job_deadline - article_push_job_tail_seconds))
+  if [ -n "$rollback_job_deadline_epoch" ]; then
+    if ! [[ "$rollback_job_tail_seconds" =~ ^[1-9][0-9]*$ ]]; then
+      echo "::error::serialized-push rollback has no valid job tail budget" >&2
+      return 1
+    fi
+    rollback_job_deadline=$((rollback_job_deadline_epoch - rollback_job_tail_seconds))
     if [ "$rollback_deadline" -gt "$rollback_job_deadline" ]; then
       rollback_deadline="$rollback_job_deadline"
     fi
