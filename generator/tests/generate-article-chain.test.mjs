@@ -1054,6 +1054,49 @@ test('le sole modifiche a body esistenti liberano la coda di generazione', () =>
   assert.match(run([]), /continue/);
 });
 
+test('uno slot Cloud Scheduler si accoda dietro le run in volo solo con un claim valido', () => {
+  const admit = extractRun('Skip when a generation is already in flight');
+  const olderAt = admit.indexOf('if [ "$older" -gt 0 ]; then');
+  assert.ok(olderAt >= 0);
+  const run = (clock, claimStatus) => {
+    const scratch = mkdtempSync(path.join(tmpdir(), 'generation-slot-admit-'));
+    const ghOutput = path.join(scratch, 'github-output');
+    try {
+      const result = spawnSync('bash', ['-c', [
+        'set -eu',
+        'older=1',
+        'successor_push=false',
+        'EVENT_NAME=workflow_dispatch',
+        'self_created=2026-11-19T08:07:00Z',
+        'RECOVERY_SLOT=generate-article/frontaliere/2026-11-19T08:07Z',
+        `loop_clock_dispatch=${clock}`,
+        `request_generation_claim() { echo "claim=$1"; return ${claimStatus}; }`,
+        'release_generation_claim() { return 0; }',
+        admit.slice(olderAt),
+      ].join('\n')], {
+        encoding: 'utf8',
+        env: { ...process.env, GITHUB_OUTPUT: ghOutput },
+      });
+      assert.equal(result.status, 0, result.stderr);
+      return { log: result.stdout, output: readFileSync(ghOutput, 'utf8') };
+    } finally {
+      rmSync(scratch, { recursive: true, force: true });
+    }
+  };
+
+  const admitted = run('true', 0);
+  assert.match(admitted.log, /claim=admit/);
+  assert.match(admitted.output, /proceed=true/);
+
+  const denied = run('true', 1);
+  assert.match(denied.log, /claim=admit[\s\S]*generation-slot-claim-denied/);
+  assert.match(denied.output, /proceed=false/);
+
+  const redundant = run('false', 0);
+  assert.match(redundant.log, /admit-in-flight/);
+  assert.match(redundant.output, /proceed=false/);
+});
+
 test('un push su content/** non viene scartato se il producer è ancora in volo', () => {
   const admit = extractRun('Skip when a generation is already in flight');
   assert.match(admit, /content_push=false/);

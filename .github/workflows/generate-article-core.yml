@@ -459,6 +459,8 @@ jobs:
           if [ "$older" -gt 0 ]; then
             if [ "$successor_push" = "true" ]; then
               echo "Ci sono $older run più vecchie in volo, ma questo push è un successore: si procede e il job generate attende la concurrency."
+            elif [ "$loop_clock_dispatch" = "true" ]; then
+              echo "Slot Cloud Scheduler accodato dopo la verifica del claim, con $older run più vecchie in volo."
             else
               echo "Ci sono $older run di generate-article già in volo e più vecchie di questa ($self_created)."
               echo "La catena sta già camminando: questo arrivo ($EVENT_NAME) è un riavvio ridondante → skip."
