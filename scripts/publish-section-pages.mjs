@@ -1618,19 +1618,17 @@ async function findIdenticalCantonAssetKeys({ candidateKeys, uploadByKey, assetP
 }
 
 async function uploadCantonAssets({
-  cdnUploads, heldAssetKeys, unchangedAssetKeys, assetProbeImpl, runImpl, assertMainFreshImpl, signal,
+  cdnUploads, heldAssetKeys, unchangedAssetKeys, runImpl, assertMainFreshImpl, signal,
 }) {
+  // The identity decision is made once, while the previous-page snapshot is
+  // still deciding which held assets can safely be released. Assets outside
+  // that set must use the normal uploader: probing them here duplicates CDN
+  // reads and changes the lease path after the snapshot decision.
   const pendingUploads = cdnUploads.filter(({ key }) => !heldAssetKeys.has(key) && !unchangedAssetKeys.has(key));
-  const identicalKeys = await findIdenticalCantonAssetKeys({
-    candidateKeys: pendingUploads.map(({ key }) => key),
-    uploadByKey: new Map(pendingUploads.map((upload) => [upload.key, upload])),
-    assetProbeImpl,
-  });
   let failures = 0;
   await assertMainFreshImpl();
   await publishSignalBoundary(signal);
   for (const { local, key } of pendingUploads) {
-    if (identicalKeys.has(key)) continue;
     await publishSignalBoundary(signal);
     const { code = 1, stdout = '' } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', local, key]);
     if (code !== 0 || !stdout.includes('✅ uploaded')) {
@@ -2314,7 +2312,6 @@ export async function publish({
     cdnUploads,
     heldAssetKeys,
     unchangedAssetKeys,
-    assetProbeImpl,
     runImpl,
     assertMainFreshImpl,
     signal,
