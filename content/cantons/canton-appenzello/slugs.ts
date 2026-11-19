@@ -32,6 +32,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'ulmann-incarico-appenzello': { it: 'ulmann-incarico-appenzello', en: 'ulmann-appenzell-appointment', de: 'ulmann-anstellung-appenzell', fr: 'ulmann-nomination-appenzell' },
  'consiglio-gruppo-caldo-scuola': { it: 'consiglio-gruppo-caldo-scuola', en: 'council-school-heat-group', de: 'gemeinderat-hitzeschutz-schule', fr: 'groupe-conseil-chaleur-ecole' },
  'governo-appenzello-candidati': { it: 'governo-appenzello-candidati', en: 'appenzell-government-candidates', de: 'appenzell-regierungsrat-kandidaten', fr: 'candidats-gouvernement-appenzell' },
+ 'simon-graf-medico-cantonale': { it: 'simon-graf-medico-cantonale', en: 'simon-graf-cantonal-doctor', de: 'simon-graf-kantonsarzt', fr: 'simon-graf-medecin-cantonal' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

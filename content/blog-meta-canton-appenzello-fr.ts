@@ -90,6 +90,9 @@ const blogMetaCantonAppenzelloFr: Record<string, string> = {
     'blog.article.governo-appenzello-candidati.title': 'Gewerbeverband recommande Jung et Ruprecht en 2027',
     'blog.article.governo-appenzello-candidati.excerpt': 'Le Gewerbeverband recommande Karin Jung (FDP) et Balz Ruprecht (EVP) pour le siège laissé vacant lors des élections de fin février 2027.',
     'blog.article.governo-appenzello-candidati.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.simon-graf-medico-cantonale.title': 'Simon Graf choisi comme médecin cantonal des deux Appenzell',
+    'blog.article.simon-graf-medico-cantonale.excerpt': 'Simon Graf succède à Henrik Berthel comme médecin cantonal pour Appenzell Rhodes-Extérieures et Appenzell Rhodes-Intérieures, sur la base d’un accord de prestations.',
+    'blog.article.simon-graf-medico-cantonale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAppenzelloFr;

@@ -90,6 +90,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.governo-appenzello-candidati.title': 'Gewerbeverband empfiehlt Jung und Ruprecht im Jahr 2027',
     'blog.article.governo-appenzello-candidati.excerpt': 'Der Gewerbeverband empfiehlt Karin Jung (FDP) und Balz Ruprecht (EVP) für den bei den Wahlen Ende Februar 2027 frei werdenden Sitz.',
     'blog.article.governo-appenzello-candidati.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.simon-graf-medico-cantonale.title': 'Simon Graf als Kantonsarzt der beiden Appenzell ausgewählt',
+    'blog.article.simon-graf-medico-cantonale.excerpt': 'Simon Graf folgt Henrik Berthel als Kantonsarzt für Appenzell Ausserrhoden und Appenzell Innerrhoden auf der Grundlage einer Leistungsvereinbarung.',
+    'blog.article.simon-graf-medico-cantonale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;

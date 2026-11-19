@@ -326,4 +326,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'simon-graf-medico-cantonale',
+ category: 'novita',
+ date: '2026-11-19T08:14:27.826Z',
+ image: '/images/blog/article-simon-graf-medico-cantonale.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

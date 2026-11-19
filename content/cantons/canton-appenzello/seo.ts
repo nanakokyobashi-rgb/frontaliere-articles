@@ -1133,6 +1133,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-simon-graf-medico-cantonale': {
+    title: 'Simon Graf scelto come medico cantonale dei due Appenzello',
+    description: 'Simon Graf è il nuovo medico cantonale dei due Appenzello: succede a Henrik Berthel nell\'incarico comune, secondo il lead pubblico.',
+    keywords: 'frontalieri, ticino, svizzera, italia, simon, graf, scelto, medico',
+    ogTitle: 'Simon Graf scelto come medico cantonale dei due Appenzello',
+    ogDescription: 'Tra i due Appenzello, un accordo sulle prestazioni assegna la competenza al medico cantonale e al suo sostituto. Simon Graf succede a Henrik Berthel; la fonte gli attribuisce lunga esperienza nel settore sanitario.',
+    canonicalPath: '/articoli-appenzello/simon-graf-medico-cantonale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Simon Graf scelto come medico cantonale dei due Appenzello",
+      "description": "Simon Graf è il nuovo medico cantonale dei due Appenzello: succede a Henrik Berthel nell'incarico comune, secondo il lead pubblico.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-simon-graf-medico-cantonale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-19T08:14:27+00:00",
+      "dateModified": "2026-11-19T08:14:27+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/simon-graf-medico-cantonale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
