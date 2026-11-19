@@ -15611,9 +15611,15 @@ async function translatePendingBodyWithCodex(
           { pretranslatedResult: { [field]: text } },
         )
         : stripTableHeaderColumnMarkers(text);
-      if (text && validatedText === null) rejected.push('structure');
-      if (!validatedText
-        && (codexModelUnavailable || !pendingBodySecondLaneAvailable() || rejected.length > 0)
+      if (validatedText) {
+        const truncation = detectTruncation(validatedText, { locale, referenceText: itValue });
+        if (!isRealTranslationTruncation(truncation)) return validatedText;
+        rejected.push(...truncation.map(({ code, rule }) => rule ? `${code}:${rule}` : code));
+        console.error(`  ⚠️  [seconda corsia] ${locale}:${field} Codex rifiutato (${rejected.join(', ')})`);
+      } else if (text && validatedText === null) {
+        rejected.push('structure');
+      }
+      if ((codexModelUnavailable || !pendingBodySecondLaneAvailable() || rejected.length > 0)
         && typeof callWithRetry === 'function') {
         // `translateFieldFreeMt` cattura lo stop della cascata segmentata e
         // restituisce un campo vuoto. Se Codex ha anche prodotto un output
@@ -15624,7 +15630,7 @@ async function translatePendingBodyWithCodex(
       if (!validatedText && rejected.length > 0) {
         console.error(`  ⚠️  [seconda corsia] ${locale}:${field} rifiutato da translateFieldFreeMt (${rejected.join(', ')})`);
       }
-      return validatedText;
+      return null;
     },
   });
 }

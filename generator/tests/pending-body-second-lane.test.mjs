@@ -343,7 +343,7 @@ test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scaden
   assert.match(body, /prefer: \[codex\]/);
   assert.match(body, /fallback: \(\) => \{[\s\S]*if \(!pendingBodySecondLaneAvailable\(\) && typeof callWithRetry === 'function'\)[\s\S]*translatePendingBodyWithHistoricalChain\(itValue, locale, field, \{ callWithRetry, translateInChunks \}\)/);
   assert.match(body, /const validatedText = text && typeof translateInChunks === 'function'[\s\S]*pretranslatedResult/);
-  assert.match(body, /if \(!validatedText\n\s+&& \(codexModelUnavailable \|\| !pendingBodySecondLaneAvailable\(\) \|\| rejected\.length > 0\)/);
+  assert.match(body, /if \(\(codexModelUnavailable \|\| !pendingBodySecondLaneAvailable\(\) \|\| rejected\.length > 0\)/);
   // Nessun orologio di modulo: i producer che importano translateArticle()
   // (publish-journalist-article.mjs) non hanno CREATE_ARTICLE_MAX_WALL_MS.
   assert.doesNotMatch(body, /RUN_START_MS|RUN_WALL_BUDGET_MS/);
@@ -550,8 +550,8 @@ function createPendingBodyCodexTranslatorFixture({
   const factory = new Function(
     'AI_MODELS', '_pendingBodyCodexDeadlineMs', 'CODEX_TRANSLATE_TRANSPORT_RETRIES',
     'withCodexTranslationLane', 'codexCallDeadlineMs', '_aiCallLLM', 'translateWithCodexEngine', 'isModelAvailable',
-    'translateFieldFreeMt', 'balanceMarkdownMarkers', 'translatePendingBodyWithHistoricalChain', 'pendingBodySecondLaneAvailable', 'console',
-    `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${src.slice(at, end)}\nreturn translatePendingBodyWithCodex;`,
+    'translateFieldFreeMt', 'balanceMarkdownMarkers', 'translatePendingBodyWithHistoricalChain', 'pendingBodySecondLaneAvailable', 'detectTruncation', 'console',
+    `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${realTruncationSrc()}\n${src.slice(at, end)}\nreturn translatePendingBodyWithCodex;`,
   );
   const processDeadlineMs = Date.now() + 300_000;
   let admissionAttempts = 0;
@@ -604,6 +604,7 @@ function createPendingBodyCodexTranslatorFixture({
     (text) => text,
     translatePendingBodyWithHistoricalChain,
     () => !currentLaneStopped && isModelAvailable(),
+    detectTruncation,
     { error() {}, warn() {}, log() {} },
   );
   return {
@@ -719,6 +720,17 @@ test('output non valido o errore non classificato come breaker attiva la catena 
     assert.equal(await fixture.translate(source), fixture.expected);
     assert.deepEqual(fixture.counts(), { admissionAttempts: 1, codexCalls: 1, historicalCalls: 1 });
   }
+});
+
+test('una traduzione Codex formalmente troncata attiva la catena storica', async () => {
+  const source = '## In breve\n\nLa decisione sarà applicata nel mese di dicembre dopo la consultazione con tutte le parti interessate.';
+  const fixture = createPendingBodyCodexTranslatorFixture({
+    isModelAvailable: () => true,
+    admissionDecision: (_attempt, admission) => admission,
+    translateWithCodexEngine: async () => 'Die Entscheidung wird im Dezember nach der Anhörung aller beteiligten Parteien und nach der',
+  });
+  assert.equal(await fixture.translate(source), fixture.expected);
+  assert.deepEqual(fixture.counts(), { admissionAttempts: 1, codexCalls: 1, historicalCalls: 1 });
 });
 
 test('la catena storica riusa il chunker per un body pending sopra soglia', async () => {
