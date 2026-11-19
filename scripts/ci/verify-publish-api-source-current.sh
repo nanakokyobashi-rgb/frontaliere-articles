@@ -21,8 +21,13 @@ if [ -z "$repository" ]; then
   exit 1
 fi
 if ! current_main="$(timeout --kill-after=1s 60s gh api "repos/$repository/git/ref/heads/main" --jq '.object.sha')"; then
-  echo "::error::impossibile verificare la HEAD corrente di main prima di $context"
-  exit 1
+  echo "::warning::verifica REST di main indisponibile prima di $context; provo il riferimento remoto Git"
+  if ! remote_main="$(GIT_TERMINAL_PROMPT=0 timeout --kill-after=1s 60s git ls-remote --exit-code --refs origin refs/heads/main)" ||
+    ! [[ "$remote_main" =~ ^([a-f0-9]{40})$'\t'refs/heads/main$ ]]; then
+    echo "::error::impossibile verificare la HEAD corrente di main prima di $context"
+    exit 1
+  fi
+  current_main="${BASH_REMATCH[1]}"
 fi
 if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]] || ! [[ "$published_source" =~ ^[a-f0-9]{40}$ ]]; then
   echo "::error::identita' della sorgente non verificabile prima di $context (source=$published_source main=$current_main)"
