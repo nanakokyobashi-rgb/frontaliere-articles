@@ -146,6 +146,7 @@ exec "$REAL_GIT" "$@"
     });
 
     assert.match(output, /serializing 2 path\(s\) in batches of 1/u);
+    assert.match(output, /serialized batch plan has 2 batch\(es\); Pages wait window is 1200 seconds/u);
     assert.match(output, /retry found the prior ambiguous push already at the remote tree/u);
     assert.match(output, /Pages build wait skipped for non-GitHub remote/u);
     assert.match(output, /pushed/u);
@@ -190,7 +191,7 @@ test('i batch Pages sono seriali, raggruppati e riconciliabili', () => {
   assert.match(workflow, /without a reconciled tree; refusing the article-only fallback/u);
 });
 
-test('il rollback mantiene la revisione e condivide il budget Pages fra i batch', () => {
+test('il rollback mantiene la revisione e pianifica il budget Pages per tutti i batch', () => {
   const source = readFileSync(PUSHER, 'utf8');
 
   assert.match(source, /rollback_pat_token=.*shard_push_token_for_repo\s+"\$SHARD_REPO"/u);
@@ -205,7 +206,27 @@ test('il rollback mantiene la revisione e condivide il budget Pages fra i batch'
   assert.match(source, /rollback_content_revision[\s\S]{0,700}Content-Rev: \$rollback_content_revision/u);
   assert.match(source, /export ARTICLE_PUSH_PAGES_DEADLINE="\$article_push_pages_deadline"/u);
   assert.match(source, /ARTICLE_PUSH_PAGES_DEADLINE="\$article_push_pages_deadline"[\s\\\n]+ARTICLE_PUSH_STATUS_FILE/u);
-  assert.match(source, /serialized_batch_deadline_available[\s\S]{0,700}reconciling published batches/u);
+  assert.match(source, /ARTICLE_PUSH_BATCH_PAGES_DEADLINE="\$batch_pages_deadline"/u);
+  assert.match(source, /serialized_batch_deadline_available[\s\S]{0,1800}reconciling published batches/u);
+  assert.match(source, /planned_batch_count=0/u);
+  assert.match(source, /article_push_pages_wait_seconds \* planned_batch_count/u);
+  assert.match(source, /article_push_batch_overhead_seconds \* planned_batch_count/u);
+  assert.match(source, /required_batch_budget/u);
+  assert.match(source, /CI_JOB_DEADLINE_EPOCH/u);
+  assert.match(source, /article_push_job_reconciliation_reserve_seconds/u);
+  assert.match(source, /article_push_job_remaining.*planned_batch_budget_seconds/u);
+  assert.match(source, /article_push_post_publish_reserve_seconds/u);
+  assert.match(source, /ARTICLE_PUSH_PUSH_RESERVE_SECONDS/u);
+  assert.match(source, /article_push_push_reserve_seconds/u);
+  assert.match(source, /article_push_attempt_pages_remaining.*article_push_attempt_budget_seconds/u);
+  assert.match(source, /batch_pages_deadline=\$\(\(batch_pages_now \+ article_push_pages_wait_seconds \+ article_push_batch_overhead_seconds \+ article_push_push_reserve_seconds\)/u);
+  assert.match(source, /pages_remaining.*article_push_pages_wait_seconds \+ article_push_push_reserve_seconds/u);
+  assert.match(source, /article_push_push_deadline_available\(\)/u);
+  assert.match(source, /if ! article_push_push_deadline_available; then[\s\S]{0,500}if git \$\{GIT_PAT_OPTS/u);
+  assert.match(source, /absolute publication deadline no longer leaves a safe retry budget/u);
+  assert.match(source, /refusing a partial chain/u);
+  assert.match(source, /rollback_job_deadline/u);
+  assert.match(source, /export ARTICLE_PUSH_PAGES_DEADLINE="\$article_push_pages_deadline"/u);
   assert.match(source, /wait_for_pages_build "\$rollback_commit" "\$rollback_deadline"/u);
   assert.doesNotMatch(source, /deadline=\$\(\(SECONDS \+ article_push_pages_wait_seconds\)\)/u);
 });
