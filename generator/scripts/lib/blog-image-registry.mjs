@@ -16,9 +16,9 @@ import crypto from 'node:crypto';
 import {
   GENERATED_IMAGE_KIND,
   GENERATED_IMAGE_LICENSE,
-  legacyVisionAssetIdsForRegistry,
   isLicensedPhotoRecord,
   validateGeneratedImageRecord,
+  validateGeneratedImageRecordWithRegistry,
   validateGeneratedImageRegistry,
 } from '../../../engine/shared/generatedImageRegistry.mjs';
 import { coverKey, imageCreditRecordFromGeneratedImageRecord } from '../../../engine/shared/imageCredits.mjs';
@@ -158,16 +158,12 @@ function hasMaterializedImageRecord(root, imagePath, record) {
 
 export function readGeneratedImageRecords(root, { strict = true } = {}) {
   const raw = readJson(root, GENERATED_IMAGE_REGISTRY_REL, generatedEnvelope([]));
-  const legacyVisionAssetIds = legacyVisionAssetIdsForRegistry(raw);
   const verdict = validateGeneratedImageRegistry(raw, { scope: undefined, allowLegacyVision: true });
   if (!verdict.valid && strict) {
     throw new Error(`generated image registry is invalid: ${verdict.errors.join('; ')}`);
   }
   return (raw.assets || [])
-    .filter((record) => validateGeneratedImageRecord(record, {
-      allowLegacyVision: true,
-      legacyVisionAssetIds,
-    }).valid)
+    .filter((record) => validateGeneratedImageRecordWithRegistry(record, raw).valid)
     .map(normalizeGeneratedImageRecord);
 }
 
