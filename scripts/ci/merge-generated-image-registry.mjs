@@ -46,7 +46,8 @@ export function mergeImageRegistryDelta(upstream, base, replayed, { key = 'asset
   // Map#set replaces without moving an existing key: upstream order is stable,
   // while genuinely new local records are appended in replay order.
   const assets = [...merged.values()];
-  return { schema: 1, assetCount: assets.length, assets };
+  // Registry-wide metadata comes from the upstream snapshot.
+  return { ...left, assetCount: assets.length, assets };
 }
 
 function main(argv) {
