@@ -70,6 +70,7 @@ on:
       # Section configuration and canonical canton slugs are publisher inputs.
       # A change must rebuild the API before any new section is published.
       - 'generator/data/canton-sections.json'
+      - 'generator/data/article-body-source-quarantine.json'
       - 'generator/scripts/lib/corpus-paths.mjs'
       - 'generator/data/canton-url-slugs.json'
       # Il registro DICHIARATO delle sezioni cantonali (verita' del rollout, D9)
@@ -645,6 +646,7 @@ jobs:
               engine/shared/tsStringEscapes.ts
               generator/data/canton-url-slugs.json
               generator/data/canton-sections.json
+              generator/data/article-body-source-quarantine.json
               generator/scripts/lib/corpus-paths.mjs
               host/cantonSectionsBootstrap.mjs
               scripts/ci/check-blog-body-links.mjs
