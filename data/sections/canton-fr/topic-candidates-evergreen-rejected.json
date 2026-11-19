@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/305428/zoff-um-5000-franken-mindestlohn-st%c3%a4rkt-das-die-lehre%c2%a0-oder-gef%c3%a4hrdet-es-jobs": {
-      "section": "canton-fr",
-      "ts": 1794785674443
-    },
     "canton-fr::https://www.laliberte.ch/articles/regions/canton/le-ssp-demande-au-conseil-d-etat-de-se-positionner-sur-la-revalorisation-des-salaires-du-personnel-s-1488471": {
       "section": "canton-fr",
       "ts": 1794953593898
@@ -23,6 +19,10 @@
     "canton-fr::https://www.frapp.ch/fr/articles/stories/13e-rente-avs-un-soulagement-pour-les-retraites": {
       "section": "canton-fr",
       "ts": 1794953959588
+    },
+    "canton-fr::https://www.frapp.ch/fr/articles/stories/salaires-les-soignants-fribourgeois-veulent-des-reponses": {
+      "section": "canton-fr",
+      "ts": 1795086061676
     }
   }
 }
