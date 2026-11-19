@@ -15432,6 +15432,7 @@ VINCOLI OBBLIGATORI:
 - non riassumere e non omettere frasi o paragrafi;
 - mantieni la stessa struttura Markdown, inclusi heading, elenchi, citazioni e interruzioni di riga;
 - mantieni invariati i nomi propri, i toponimi, le cifre e le destinazioni dei link nav: protette dai marcatori;
+- mantieni ogni cifra nella stessa proposizione del nome o della voce a cui si riferisce. Conserva l’ordine di cifre e nomi e i separatori che distinguono i diversi dati;
 - se compaiono marcatori opachi <span data-frontaliere-table-column="riga-cella"></span>, copiali esattamente nella stessa cella della tabella: identificano la colonna sorgente e non sono testo da tradurre;
 - non aggiungere spiegazioni, prefissi o code fences.
 
@@ -17301,7 +17302,13 @@ async function translateArticle(data) {
         && ((exactAssociation === null && anchorAssociation !== true)
           || JSON.stringify(numericAnchorSlots(sourceAnchoredNumericContract))
             !== JSON.stringify(numericAnchorSlots(joinedAnchoredNumericContract))));
-    if (sourceNumericContract.values.length > 0 && numericAssociationMismatch) return reject('numeric-association');
+    if (sourceNumericContract.values.length > 0 && numericAssociationMismatch) {
+      console.error(
+        `TRANSLATION_NUMBER_ASSOCIATION locale=${targetLang} field=${fieldKey}`
+        + ` exact=${exactAssociation} anchored=${anchorAssociation} invariantAnchors=${invariantAnchorTokens.size}`,
+      );
+      return reject('numeric-association');
+    }
 
     // A table can preserve its pipes and per-cell opaque atoms while still
     // swapping two cells made only of translatable prose. Such cells have no

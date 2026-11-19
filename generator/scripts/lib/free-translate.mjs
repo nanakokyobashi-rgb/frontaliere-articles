@@ -2475,6 +2475,7 @@ function _codexTranslateMessages(text, sourceLang, targetLang, marker) {
         ..._codexTemplateHeadingRules(sourceLang, targetLang),
         '- Localize dates using the target language\'s customary format (including month names, date order and ordinal markers) while preserving the same calendar day, month, year and numeric values.',
         '- Copy unchanged: URLs, email addresses, link targets, non-date numbers, amounts, placeholders such as {name}, {{name}} or %s, and opaque tokens such as ZQX0XQZ, 0M00Q0 or 0NAV0.',
+        '- Keep each figure in the same clause as the company, place or label it describes. Preserve the order of figures and names, and preserve the commas, semicolons and other separators that keep different facts apart.',
         '- Keep the names of people, companies and brands unchanged.',
         `- Reply with the translated text only: no quotes, labels, notes, code fences or ${open}/${close} markers.`,
       ].join('\n'),
