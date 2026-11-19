@@ -348,7 +348,13 @@ test('ripristina solo il titolo mancante di una lista nel formato della bozza', 
   assert.equal(restored, lead + '## Fatti chiave\n' + facts + '\n\n## Dettagli\nProsa.');
   assert.equal(findOrphanedKeyFactsList(restored), null);
   assert.equal(restoreDraftKeyFactsHeading(restored), restored);
-  for (const ambiguous of [lead + '- Testo 1\n- Testo 2\n- Testo 3', lead + '- **Importo**: CHF 12']) {
+  assert.equal(restoreDraftKeyFactsHeading(body.replaceAll('\n', '\r\n')), restored.replaceAll('\n', '\r\n'));
+  for (const ambiguous of [
+    lead + '- Testo 1\n- Testo 2\n- Testo 3',
+    lead + '- **Importo**: CHF 12',
+    lead + '### Sezione editoriale\n\n\n' + facts,
+    lead + 'Un paragrafo editoriale.\n\n\n' + facts,
+  ]) {
     assert.equal(restoreDraftKeyFactsHeading(ambiguous), ambiguous);
   }
 });
