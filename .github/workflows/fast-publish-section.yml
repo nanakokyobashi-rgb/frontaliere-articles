@@ -43,6 +43,7 @@ on:
       - 'scripts/ci/resolve-workflow-run-push-range.mjs'
       - 'scripts/ci/retry-cmd.sh'
       - 'scripts/ci/fetch-push-base-if-missing.sh'
+      - 'scripts/ci/section-source-unaffected.sh'
       - 'scripts/ci/fast-publish-section-resolve.sh'
       - 'scripts/ci/fast-publish-section-edge-candidate.sh'
       - 'scripts/ci/fast-publish-section-preflight.sh'
@@ -566,6 +567,7 @@ jobs:
             scripts/ci/read-main-head.sh
             scripts/ci/fetch-push-base-if-missing.sh
             scripts/ci/fast-publish-section-render.sh
+            scripts/ci/section-source-unaffected.sh
             scripts/ci/record-fast-publish-result.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false
@@ -582,6 +584,7 @@ jobs:
             exit 1
           fi
           install -m 0755 "$render_source" "$render_target"
+          install -m 0755 .replay-dispatcher-source/scripts/ci/section-source-unaffected.sh scripts/ci/section-source-unaffected.sh
           test -f .replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh
           ln -sfn "$PWD/.replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh" scripts/ci/fetch-push-base-if-missing.sh
           if [ -f "$source" ]; then
@@ -655,7 +658,7 @@ jobs:
             exit 1
           fi
           echo "current_main=$current_main" >> "$GITHUB_OUTPUT"
-          if [ "$current_main" != "$pinned_source" ]; then
+          if ! bash scripts/ci/section-source-unaffected.sh "$pinned_source" "$current_main"; then
             echo "::notice::replay pinned saltato: main e' avanzata da $pinned_source a $current_main"
             echo 'fresh=false' >> "$GITHUB_OUTPUT"
             exit 0

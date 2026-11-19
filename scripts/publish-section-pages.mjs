@@ -170,6 +170,15 @@ async function assertExpectedMainHead(expected, readMainHead = publishedMainHead
     throw new Error('revisione corrente di main non valida');
   }
   if (current !== expected) {
+    // Compare exact revisions. A checkout without a provable fast-forward
+    // or with changes outside the operational allowlist still stops.
+    if (readMainHead === publishedMainHead) {
+      const equivalence = spawnSync('bash', [path.join(ROOT_DIR, 'scripts/ci/section-source-unaffected.sh'), expected, current], {
+        cwd: ROOT_DIR,
+        stdio: 'ignore',
+      });
+      if (equivalence.status === 0) return;
+    }
     throw new Error(`main e' avanzato durante il render (${expected} → ${current}); pubblicazione interrotta`);
   }
 }
