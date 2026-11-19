@@ -1821,6 +1821,26 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     'la conversione del separatore numerico non autorizza a scambiare i toponimi',
   );
 
+  const currencyOrderSource = 'Lugano registra CHF 12,50; Bellinzona registra CHF 20,00.';
+  const currencyOrderTarget = 'CHF 12.50 was recorded in Lugano; CHF 20.00 was recorded in Bellinzona.';
+  assert.equal(
+    await makeTranslator(() => currencyOrderTarget, 50)(currencyOrderSource),
+    currencyOrderTarget,
+    'la valuta può cambiare posizione rispetto al toponimo se resta adiacente allo stesso importo',
+  );
+  assert.equal(
+    await makeTranslator(() => 'CHF 12.50 was recorded in Bellinzona; CHF 20.00 was recorded in Lugano.', 50)(currencyOrderSource),
+    null,
+    'il riordino della valuta non consente di spostare i valori tra toponimi',
+  );
+  assert.equal(
+    await makeTranslator(() => 'CHF 12.50 more was paid by Bellinzona than by Lugano.', 50)(
+      'Lugano ha pagato CHF 12,50 più di Bellinzona.',
+    ),
+    null,
+    'l’ordine delle due parti di un confronto monetario deve restare invariato',
+  );
+
   const signedSource = 'Prima -12% dopo altre parole da spezzare ancora oggi.';
   assert.equal(
     await makeTranslator((chunk) => chunk.replace('-12%', '12%'))(signedSource),
