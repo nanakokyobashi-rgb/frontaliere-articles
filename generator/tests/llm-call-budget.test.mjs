@@ -553,7 +553,7 @@ test('④ la fase immagini usa un solo percorso governato e controlla il budget'
 
 test('la verifica della copertina di catalogo conserva tempo entro la deadline del processo', () => {
   const phase = extractBlock('export function getArticleImageDeadlineAt(').text.replace(/^export /, '');
-  const split = extractBlock('function getArticleImageDeadlines(').text;
+  const split = extractBlock('export function getArticleImageDeadlines(').text.replace(/^export /, '');
   const getDeadlines = new Function('IMAGE_PHASE_BUDGET_MS', '_articleRunDeadlineMs',
     `${phase}\n${split}\nreturn getArticleImageDeadlines;`);
   const now = 1_000_000;
