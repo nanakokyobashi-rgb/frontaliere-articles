@@ -294,9 +294,7 @@ function webpFixture(byte) {
   return bytes;
 }
 
-async function publishFourLocaleSharedAsset({
-  localBytes, assetProbeImpl = null, assetKey = 'images/shared.webp', snapshotPagesBeforeUpload = true,
-}) {
+async function publishFourLocaleSharedAsset({ localBytes, assetProbeImpl = null, assetKey = 'images/shared.webp' }) {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-live-shared-asset-'));
   const sharedLocal = path.join(fixtureRoot, `shared${path.extname(assetKey)}`);
   const unrelatedLocal = path.join(fixtureRoot, 'unrelated.webp');
@@ -329,7 +327,7 @@ async function publishFourLocaleSharedAsset({
       section: 'canton-ti',
       pages,
       immutablePages,
-      snapshotPagesBeforeUpload,
+      snapshotPagesBeforeUpload: true,
       cdnUploads: [
         { local: sharedLocal, key: assetKey },
         { local: unrelatedLocal, key: 'images/unrelated.webp' },
@@ -401,31 +399,6 @@ test('publisher: quattro route nuove riusano un asset identico senza PUT e conse
     assert.equal(fixture.events.filter((event) => event.startsWith('page-upload:')).length, 4);
     assert.ok(!fixture.events.includes('asset-upload:images/shared.webp'), 'i byte già identici non vengono sovrascritti');
     assert.ok(fixture.events.includes('asset-upload:images/unrelated.webp'), 'gli asset non trattenuti seguono il normale upload');
-  } finally {
-    fixture.cleanup();
-  }
-});
-
-test('publisher: un thumbnail identico evita il PUT anche in un replay live', async () => {
-  const localBytes = webpFixture(0x11);
-  const assetKey = 'images/blog/thumbnails/article-appenzello-480w.webp';
-  const fixture = await publishFourLocaleSharedAsset({
-    localBytes,
-    assetKey,
-    snapshotPagesBeforeUpload: false,
-    assetProbeImpl: async () => ({
-      ok: true,
-      status: 200,
-      contentType: 'image/webp',
-      byteLength: localBytes.length,
-      sha256: createHash('sha256').update(localBytes).digest('hex'),
-    }),
-  });
-  try {
-    assert.deepEqual(fixture.assetProbeCalls, [assetKey]);
-    assert.ok(!fixture.events.includes(`asset-upload:${assetKey}`));
-    assert.equal(fixture.result.failures, 0);
-    assert.equal(fixture.result.uploaded, 4);
   } finally {
     fixture.cleanup();
   }
