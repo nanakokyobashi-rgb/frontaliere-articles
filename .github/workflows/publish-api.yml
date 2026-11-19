@@ -646,7 +646,6 @@ jobs:
               engine/shared/tsStringEscapes.ts
               generator/data/canton-url-slugs.json
               generator/data/canton-sections.json
-              generator/data/article-body-source-quarantine.json
               generator/scripts/lib/corpus-paths.mjs
               host/cantonSectionsBootstrap.mjs
               scripts/ci/check-blog-body-links.mjs
