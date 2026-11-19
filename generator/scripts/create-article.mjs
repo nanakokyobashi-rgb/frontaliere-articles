@@ -17122,6 +17122,7 @@ async function translateArticle(data) {
       const associations = numberEntries.map(({
         value: number,
         index,
+        end: numberEnd,
         dateFact,
         calendarYear,
         calendarGroup,
@@ -17144,6 +17145,13 @@ async function translateArticle(data) {
           .trim();
         const anchorTokens = [...withoutNumbers.matchAll(/(?<![\p{L}\p{N}_])[\p{Lu}][\p{L}\p{N}_’'-]*/gu)]
           .map(([anchor]) => anchor.toLowerCase())
+        let currencyAnchor = null;
+        if (numberRanges.length === 1) {
+          const before = value.slice(start, index).match(/(?<![\p{L}\p{N}_])(CHF|EUR)\s*$/u)?.[1];
+          const after = value.slice(numberEnd, end).match(/^\s*(CHF|EUR)(?![\p{L}\p{N}_])/u)?.[1];
+          const currency = before && after ? null : (before || after)?.toLowerCase();
+          if (currency && anchorTokens.filter((anchor) => anchor === currency).length === 1) currencyAnchor = currency;
+        }
         return {
           number,
           dateFact,
@@ -17152,6 +17160,7 @@ async function translateArticle(data) {
           calendarFact,
           exactSpan: withoutNumbers.toLowerCase(),
           anchorSpan: anchorTokens.join('|'),
+          currencyAnchor,
         };
       });
       return {
@@ -17200,18 +17209,22 @@ async function translateArticle(data) {
     const invariantAnchorTokens = new Set(
       [...sourceAnchorTokens].filter((anchor) => joinedAnchorTokens.has(anchor)),
     );
-    const withInvariantAnchors = (contract) => ({
+    const withInvariantAnchors = (contract, reference) => ({
       ...contract,
-      associations: contract.associations.map((association) => ({
-        ...association,
-        anchorSpan: association.anchorSpan
-          .split('|')
-          .filter((anchor) => invariantAnchorTokens.has(anchor))
-          .join('|'),
-      })),
+      associations: contract.associations.map((association, index) => {
+        const anchors = association.anchorSpan.split('|').filter((anchor) => invariantAnchorTokens.has(anchor));
+        const { currencyAnchor } = association;
+        // An attached currency may move with its single amount. Keep the
+        // order of the other anchors, including the parties of a comparison.
+        if (currencyAnchor && currencyAnchor === reference.associations[index]?.currencyAnchor) {
+          const position = anchors.indexOf(currencyAnchor);
+          if (position !== -1) anchors.push(...anchors.splice(position, 1));
+        }
+        return { ...association, anchorSpan: anchors.join('|') };
+      }),
     });
-    const sourceAnchoredNumericContract = withInvariantAnchors(sourceNumericContract);
-    const joinedAnchoredNumericContract = withInvariantAnchors(joinedNumericContract);
+    const sourceAnchoredNumericContract = withInvariantAnchors(sourceNumericContract, joinedNumericContract);
+    const joinedAnchoredNumericContract = withInvariantAnchors(joinedNumericContract, sourceNumericContract);
 
     const compareNumericAssociations = (
       key,
