@@ -243,6 +243,22 @@ test('condensa la frase incriminata quando la riparazione non cambia il testo', 
   assert.equal(condenseSourceCopyArticle(article, evaluateSourceCopy(source, article)).changed, true);
 });
 
+test('la condensazione non taglia dentro una parentesi o nel mezzo di un dominio', () => {
+  const source = 'uno due tre quattro cinque sei sette otto nove dieci undici dodici';
+  const prefix = 'Informazioni per il lettore. ';
+  const suffix = 'Resta un approfondimento autonomo utile.';
+  for (const copiedSentence of [
+    `Il comunicato (edizione di novembre. ${source}).`,
+    `Il comunicato su esempio.ch contiene ${source}.`,
+  ]) {
+    const body1 = prefix + copiedSentence + ' ' + suffix;
+    const article = { body1 };
+    const result = condenseSourceCopyArticle(article, evaluateSourceCopy(source, article));
+    assert.equal(result.article.body1, prefix + suffix);
+    assert.equal(evaluateSourceCopy(source, result.article).safe, true);
+  }
+});
+
 test('esenta sequenze brevi composte soprattutto da nomi propri e denominazioni/date/cifre', () => {
   const properSource = 'Lugano Mendrisio Bellinzona Locarno Varese Como Ticino Lombardia Svizzera Italia Zurigo Milano';
   const proper = evaluateSourceCopy(properSource, properSource);

@@ -403,14 +403,25 @@ export function applySourceCopyRepairReplacements(article, replacements) {
 }
 
 function sentenceRange(text, start, end) {
-  const before = String(text).slice(0, start);
-  const punctuation = [...before.matchAll(/[.!?](?:["'»”)]*)?/gu)].at(-1);
-  let sentenceStart = punctuation ? punctuation.index + punctuation[0].length : 0;
-  while (/\s/u.test(text[sentenceStart] || '')) sentenceStart += 1;
-  const tail = String(text).slice(Math.max(start, end));
-  const match = tail.match(/[.!?](?:["'»”)]*)?(?=\s|$)/u);
-  const sentenceEnd = match ? Math.max(start, end) + match.index + match[0].length : String(text).length;
-  return { start: sentenceStart, end: sentenceEnd };
+  let sentenceStart = 0;
+  let parenthesisDepth = 0;
+  for (const { 0: token, index } of text.matchAll(/[()]|[.!?]+["'»”)]*(?=\s|$)/gu)) {
+    if (token === '(') {
+      parenthesisDepth += 1;
+      continue;
+    }
+    // Sentence punctuation can carry a closing parenthesis, as in "(....)".
+    const closingCount = (token.match(/\)/gu) || []).length;
+    parenthesisDepth = Math.max(0, parenthesisDepth - closingCount);
+    if (token === ')' || parenthesisDepth > 0) continue;
+    const boundary = index + token.length;
+    if (boundary <= start) {
+      sentenceStart = boundary;
+    } else if (index >= end) {
+      return { start: sentenceStart, end: boundary };
+    }
+  }
+  return { start: sentenceStart, end: text.length };
 }
 
 /** Deterministic last resort: remove/condense the sentence containing a run. */
