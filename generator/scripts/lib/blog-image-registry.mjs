@@ -17,6 +17,7 @@ import {
   GENERATED_IMAGE_KIND,
   GENERATED_IMAGE_LICENSE,
   isLicensedPhotoRecord,
+  legacyVisionAssetIdsForRegistry,
   validateGeneratedImageRecord,
   validateGeneratedImageRecordWithRegistry,
   validateGeneratedImageRegistry,
@@ -268,10 +269,15 @@ export function appendGeneratedImageRecord(root, record) {
     replaced.map((item) => imageCreditFileForGeneratedImageRecord(root, item)).filter(Boolean),
   );
   const creditFile = photoCredit ? imageCreditFileForGeneratedImageRecord(root, normalizedRecord) : null;
-  const next = assets.filter((item) => item.assetId !== normalizedRecord.assetId && item.imageUrl !== normalizedRecord.imageUrl);
-  next.push(normalizedRecord);
+  const retained = assets.filter((item) => item.assetId !== normalizedRecord.assetId && item.imageUrl !== normalizedRecord.imageUrl);
+  const next = [...retained, normalizedRecord];
+  const retainedLegacyAssetIds = legacyVisionAssetIdsForRegistry(existingRegistry)
+    .filter((assetId) => retained.some((item) => item.assetId === assetId));
+  const legacyVision = retainedLegacyAssetIds.length > 0
+    ? { ...existingRegistry.legacyVision, assetIds: retainedLegacyAssetIds }
+    : undefined;
   writeJsonAtomic(registryPath, generatedEnvelope(next, {
-    legacyVision: existingRegistry?.legacyVision,
+    legacyVision,
   }));
   for (const staleCreditFile of staleCreditFiles) {
     if (staleCreditFile !== creditFile) fs.rmSync(staleCreditFile, { force: true });
