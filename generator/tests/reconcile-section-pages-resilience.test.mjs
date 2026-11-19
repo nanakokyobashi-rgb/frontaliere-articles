@@ -317,13 +317,14 @@ test('reconcile: una landing stale dispatcha il refresh della sezione anche con 
     '  <url><loc>https://frontaliereticino.ch/articoli-ticino/article-one/</loc></url>',
     '</urlset>',
   ].join('');
+  const fetchImpl = fakeFetch({
+    sitemapXml,
+    cantonArticles: rows,
+    cantonSlugs: slugs,
+    landingHtml: '<script type="application/ld+json">{"numberOfItems":0}</script>',
+  });
   const report = await reconcile({
-    fetchImpl: fakeFetch({
-      sitemapXml,
-      cantonArticles: rows,
-      cantonSlugs: slugs,
-      landingHtml: '<script type="application/ld+json">{"numberOfItems":0}</script>',
-    }),
+    fetchImpl,
     retryDelayMs: 0,
     sleepImpl: async () => {},
   });
@@ -340,6 +341,18 @@ test('reconcile: una landing stale dispatcha il refresh della sezione anche con 
   assert.deepEqual(section.missingPagePaths, section.sectionMissing);
   assert.equal(section.landingContent[0].state, 'invalid');
   assert.deepEqual(section.landingContent[0].missingIds, ['article-one']);
+
+  const readiness = await reconcile({ fetchImpl, checkLandingContent: false });
+  assert.deepEqual(readiness.sections[0].expectedMissingPagePaths, []);
+
+  const missingLanding = '/fr/articles-tessin/';
+  const incomplete = await reconcile({
+    checkLandingContent: false,
+    fetchImpl: (url, options) => url.split('?')[0].endsWith(`/edge/sections${missingLanding}index.html`)
+      ? Promise.resolve({ ok: false, status: 404 })
+      : fetchImpl(url, options),
+  });
+  assert.deepEqual(incomplete.sections[0].expectedMissingPagePaths, [missingLanding]);
 });
 
 test('reconcile: una sitemap HTTP non verificabile non fallisce il run e non dispatcha', async () => {

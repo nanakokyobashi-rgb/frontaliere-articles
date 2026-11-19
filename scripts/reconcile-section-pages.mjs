@@ -42,7 +42,7 @@
  * manca solo una pagina di sezione, con `ids: []` (rinfresco di landing,
  * archivio e hub).
  *
- * Uso: node scripts/reconcile-section-pages.mjs --out <report.json> [--cap N] [--landing-limit N] [--budget-ms N]
+ * Uso: node scripts/reconcile-section-pages.mjs --out <report.json> [--cap N] [--landing-limit N] [--budget-ms N] [--physical-pages-only]
  * Solo builtin Node: gira senza npm ci.
  */
 import '../host/cantonSectionsBootstrap.mjs';
@@ -814,6 +814,7 @@ export async function reconcile({
   apiBase = API_BASE_DEFAULT,
   cap = 3,
   landingCardLimit = CANTON_LANDING_CARD_LIMIT,
+  checkLandingContent = true,
   fetchImpl = fetch,
   retryDelayMs = RECONCILE_FETCH_RETRY_DELAY_MS,
   sleepImpl = defaultSleep,
@@ -930,6 +931,12 @@ export async function reconcile({
     const landingChecks = [];
     for (const locale of LOCALES) {
       const landingPath = entry.paths[locale];
+      if (!checkLandingContent) {
+        if (!expected.some((page) => page.path === landingPath)) {
+          expected.push({ kind: 'section', locale, path: landingPath });
+        }
+        continue;
+      }
       const landingUrl = cdnUrlFor(landingPath);
       try {
         const html = await getText(landingUrl, fetchImpl, fetchOptions);
@@ -1016,12 +1023,14 @@ export async function reconcile({
 export async function main(argv = process.argv.slice(2)) {
   const args = {};
   for (let i = 0; i < argv.length; i++) {
-    if (argv[i] === '--out' || argv[i] === '--cap' || argv[i] === '--landing-limit' || argv[i] === '--budget-ms') {
+    if (argv[i] === '--physical-pages-only') {
+      args[argv[i].slice(2)] = true;
+    } else if (argv[i] === '--out' || argv[i] === '--cap' || argv[i] === '--landing-limit' || argv[i] === '--budget-ms') {
       const value = argv[i + 1];
       if (value === undefined || value.startsWith('--')) throw new Error(`${argv[i]} richiede un valore`);
       args[argv[i].slice(2)] = value;
       i++;
-    } else throw new Error(`argomento sconosciuto: ${argv[i]} (uso: --out <report.json> [--cap N] [--landing-limit N] [--budget-ms N])`);
+    } else throw new Error(`argomento sconosciuto: ${argv[i]} (uso: --out <report.json> [--cap N] [--landing-limit N] [--budget-ms N] [--physical-pages-only])`);
   }
   if (!args.out) throw new Error('manca --out <report.json>');
   const cap = Number(args.cap ?? process.env.RECONCILE_SECTION_CAP ?? 3);
@@ -1036,7 +1045,10 @@ export async function main(argv = process.argv.slice(2)) {
       ?? CANTON_LANDING_CARD_LIMIT,
   );
   const apiBase = (process.env.RECONCILE_API_BASE || API_BASE_DEFAULT).replace(/\/+$/, '');
-  const report = await reconcile({ apiBase, cap, landingCardLimit, budgetMs });
+  const report = await reconcile({
+    apiBase, cap, landingCardLimit, budgetMs,
+    checkLandingContent: !args['physical-pages-only'],
+  });
   report.counts = {
     sections: report.sections.length,
     dispatch: report.sections.filter((s) => s.dispatch).length,

@@ -1246,7 +1246,8 @@ jobs:
               exit 1
             fi
             readiness="$RUNNER_TEMP/staged-replay-readiness.json"
-            node scripts/reconcile-section-pages.mjs --out "$readiness" --cap 1
+            # Existing landings keep their previous content until the post-flip replay.
+            node scripts/reconcile-section-pages.mjs --out "$readiness" --cap 1 --physical-pages-only
             if [ "$(jq -r 'if .skipped then "true" else "false" end' "$readiness")" != 'true' ] \
               && [ "$(jq -r '.counts.missingPages' "$readiness")" = '0' ] \
               && [ "$(jq -r '.counts.unknown' "$readiness")" = '0' ] \
