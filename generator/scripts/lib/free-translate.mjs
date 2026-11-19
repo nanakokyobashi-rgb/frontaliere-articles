@@ -2458,6 +2458,9 @@ function _codexMarker(text) {
   return marker;
 }
 
+const CODEX_NUMERIC_ASSOCIATION_RULE =
+  '- Keep each figure in the same clause as the company, place or label it describes. Preserve the order of figures and names, and preserve the commas, semicolons and other separators that keep different facts apart.';
+
 function _codexTranslateMessages(text, sourceLang, targetLang, marker) {
   const from = CODEX_LANGUAGE_NAMES[sourceLang] || sourceLang;
   const to = CODEX_LANGUAGE_NAMES[targetLang] || targetLang;
@@ -2475,7 +2478,7 @@ function _codexTranslateMessages(text, sourceLang, targetLang, marker) {
         ..._codexTemplateHeadingRules(sourceLang, targetLang),
         '- Localize dates using the target language\'s customary format (including month names, date order and ordinal markers) while preserving the same calendar day, month, year and numeric values.',
         '- Copy unchanged: URLs, email addresses, link targets, non-date numbers, amounts, placeholders such as {name}, {{name}} or %s, and opaque tokens such as ZQX0XQZ, 0M00Q0 or 0NAV0.',
-        '- Keep each figure in the same clause as the company, place or label it describes. Preserve the order of figures and names, and preserve the commas, semicolons and other separators that keep different facts apart.',
+        CODEX_NUMERIC_ASSOCIATION_RULE,
         '- Keep the names of people, companies and brands unchanged.',
         `- Reply with the translated text only: no quotes, labels, notes, code fences or ${open}/${close} markers.`,
       ].join('\n'),
@@ -3096,6 +3099,7 @@ function _codexBatchTranslateMessages(texts, sourceLang, targetLang) {
         ..._codexTemplateHeadingRules(sourceLang, targetLang),
         '- Localize dates using the target language\'s customary format (including month names, date order and ordinal markers) while preserving the same calendar day, month, year and numeric values.',
         '- Copy unchanged: URLs, email addresses, link targets, non-date numbers, amounts, placeholders such as {name}, {{name}} or %s, and opaque tokens such as ZQX0XQZ, 0M00Q0 or 0NAV0.',
+        CODEX_NUMERIC_ASSOCIATION_RULE,
         '- Keep the names of people, companies and brands unchanged.',
         '- Reply with JSON only: {"items":[{"id":<the same id>,"text":"<the translation>"}]}, exactly one entry for every input id.',
       ].join('\n'),

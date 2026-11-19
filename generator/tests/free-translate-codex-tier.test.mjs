@@ -1329,6 +1329,7 @@ test('titoli di template: richiesta singola e a gruppi it→en/de/fr portano il 
     const batch = systemOf(promptModule.codexTranslatePromptsForTests.batch(['## In breve\n- uno', '## Fatti chiave\n- x: y'], 'it', target));
     assert.ok(single.includes(templateRule(target)), `singola it→${target}`);
     assert.ok(batch.includes(templateRule(target)), `gruppo it→${target}`);
+    assert.match(batch, /Keep each figure in the same clause as the company, place or label it describes/);
   }
   assert.ok(!systemOf(promptModule.codexTranslatePromptsForTests.single('testo', 'it', 'es')).includes('Template headings'));
 });
