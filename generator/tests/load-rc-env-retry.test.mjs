@@ -13,7 +13,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -334,6 +334,7 @@ for (const [name, optIn, githubActions, githubEnv] of [
     const operatorOnly = optIn === '1' && githubEnv === undefined && githubActions === undefined;
     const env = {
       FRONTALIERE_LOAD_OPERATOR_CONFIG: optIn,
+      FRONTALIERE_OPERATOR_RC_SOURCE: undefined,
       GITHUB_ENV: envFile,
       GITHUB_ACTIONS: githubActions,
       BING_API_KEY: undefined,
@@ -409,6 +410,237 @@ test('il loader CLI non esporta configurazione operatore se le credenziali manca
     assert.equal(stdout, '');
   }
 });
+
+function runRcCli(t, {
+  env, template, sdkFails = false, restStatus = 200, adc = { project_id: 'fixture-project' },
+}) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'rc-cli-'));
+  t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
+  const credentials = path.join(dir, 'credentials.json');
+  const calls = path.join(dir, 'calls');
+  const envFile = path.join(dir, 'env');
+  const preload = path.join(dir, 'preload.mjs');
+  fs.writeFileSync(credentials, JSON.stringify(adc));
+  fs.writeFileSync(calls, '');
+  fs.writeFileSync(envFile, '');
+  fs.writeFileSync(preload, `
+    import { appendFileSync } from 'node:fs';
+    import { registerHooks } from 'node:module';
+
+    const template = ${JSON.stringify(template)};
+    function record(call) {
+      appendFileSync(${JSON.stringify(calls)}, JSON.stringify(call) + '\\n');
+    }
+    function readSdk(source) {
+      record(['sdk', source]);
+      if (${sdkFails}) throw new Error('synthetic provider detail');
+      return template;
+    }
+    globalThis.rcFixture = {
+      initializeApp(options, name) {
+        record(['init', options.projectId ?? null, name ?? null]);
+        return {};
+      },
+      getRemoteConfig() {
+        return {
+          getTemplate: () => readSdk('client'),
+          getServerTemplate: () => {
+            const value = readSdk('server');
+            return { toJSON: () => value };
+          },
+        };
+      },
+      getServiceAccountAccessToken(creds, scope) {
+        record(['oauth', creds.project_id, scope]);
+        return 'fixture-bearer';
+      },
+    };
+    globalThis.fetch = async (url, options) => {
+      record(['fetch', url, options.headers.Authorization]);
+      return Response.json(${restStatus} === 200 ? template : {
+        error: { errors: [{ reason: 'synthetic provider detail' }] },
+      }, { status: ${restStatus} });
+    };
+    registerHooks({
+      resolve(specifier, context, nextResolve) {
+        const mocks = {
+          'firebase-admin/app': [
+            'export const applicationDefault = () => ({}), getApps = () => [];',
+            'export const { initializeApp } = globalThis.rcFixture;',
+          ].join('\\n'),
+          'firebase-admin/remote-config': 'export const { getRemoteConfig } = globalThis.rcFixture;',
+          './lib/google-service-account-token.mjs': 'export const { getServiceAccountAccessToken } = globalThis.rcFixture;',
+        };
+        if (!Object.hasOwn(mocks, specifier)) return nextResolve(specifier, context);
+        record(['import', specifier]);
+        return { shortCircuit: true, url: 'data:text/javascript,' + encodeURIComponent(mocks[specifier]) };
+      },
+    });
+  `);
+  const result = spawnSync(process.execPath, ['--import', preload, path.join(ROOT, 'scripts/load-rc-env.mjs')], {
+    env: { GOOGLE_APPLICATION_CREDENTIALS: credentials, ...env, ...(env.GITHUB_ENV === 'file' && { GITHUB_ENV: envFile }) },
+    encoding: 'utf8',
+    timeout: 5000,
+  });
+  assert.ifError(result.error);
+  assert.equal(result.status, 0, result.stderr);
+  return {
+    stdout: result.stdout,
+    stderr: result.stderr,
+    githubEnv: fs.readFileSync(envFile, 'utf8'),
+    calls: fs.readFileSync(calls, 'utf8').trim().split('\n').filter(Boolean).map((line) => JSON.parse(line)),
+  };
+}
+
+const rcCliTemplate = {
+  parameters: {
+    BING_API_KEY: { defaultValue: { value: 'fixture-public' } },
+    OPERATOR_ENABLED: {
+      defaultValue: { value: false },
+      conditionalValues: { example: { value: true } },
+    },
+    OPERATOR_MAX_EMAIL_PER_DAY: { conditionalValues: { example: { value: 5 } } },
+  },
+  parameterGroups: {
+    example: { parameters: { OPERATOR_MAX_ISSUES_PER_DAY: { defaultValue: { value: 3 } } } },
+  },
+};
+const operatorMarker = "export OPERATOR_RC_ENV_LOADED='1'\n";
+const standardExports = "export RC_ENV_LOADED='1'\nexport BING_API_KEY='fixture-public'\n";
+
+function expectedRcInit(source) {
+  return source === 'server' ? ['init', 'fixture-project', 'operator-rc'] : ['init', null, null];
+}
+
+test('la CLI ordinaria esporta il marker solo dopo la lettura del template client', (t) => {
+  const emptyTemplate = { parameters: {} };
+  const sdkCalls = [expectedRcInit('client'), ['sdk', 'client']];
+
+  const empty = runRcCli(t, { env: {}, template: emptyTemplate });
+  assert.deepEqual(empty.calls.filter(([kind]) => kind !== 'import'), sdkCalls);
+  assert.equal(empty.stdout, "export RC_ENV_LOADED='1'\n");
+
+  const enabled = runRcCli(t, {
+    env: {},
+    template: { parameters: { CANTON_ARTICLE_SECTIONS_KILL: { defaultValue: { value: '1' } } } },
+  });
+  assert.deepEqual(enabled.calls.filter(([kind]) => kind !== 'import'), sdkCalls);
+  assert.equal(enabled.stdout, "export RC_ENV_LOADED='1'\nexport CANTON_ARTICLE_SECTIONS_KILL='1'\n");
+
+  const denied = runRcCli(t, {
+    env: { GITHUB_ENV: 'file' },
+    template: emptyTemplate,
+    sdkFails: true,
+    restStatus: 403,
+  });
+  assert.deepEqual(denied.calls.filter(([kind]) => kind !== 'import'), [
+    ...sdkCalls,
+    ['oauth', 'fixture-project', 'https://www.googleapis.com/auth/firebase.remoteconfig'],
+    ['fetch', 'https://firebaseremoteconfig.googleapis.com/v1/projects/fixture-project/remoteConfig', 'Bearer fixture-bearer'],
+  ]);
+  assert.equal(denied.stdout, '');
+  assert.equal(denied.githubEnv, '');
+});
+
+for (const [label, env, source, operator] of [
+  ['client esplicito', { FRONTALIERE_OPERATOR_RC_SOURCE: 'client' }, 'client', true],
+  ['selector assente', {}, 'client', true],
+  ['selector vuoto', { FRONTALIERE_OPERATOR_RC_SOURCE: '' }, 'client', true],
+  ['server', { FRONTALIERE_OPERATOR_RC_SOURCE: 'server', GITHUB_ACTIONS: 'false' }, 'server', true],
+  ['senza opt-in', { FRONTALIERE_OPERATOR_RC_SOURCE: 'server', FRONTALIERE_LOAD_OPERATOR_CONFIG: undefined }, 'client', false],
+  ['opt-in diverso da 1', { FRONTALIERE_OPERATOR_RC_SOURCE: 'server', FRONTALIERE_LOAD_OPERATOR_CONFIG: 'true' }, 'client', false],
+  ['GitHub Env', { FRONTALIERE_OPERATOR_RC_SOURCE: 'server', GITHUB_ENV: 'file' }, 'client', false],
+  ['GitHub Env vuoto', { FRONTALIERE_OPERATOR_RC_SOURCE: 'server', GITHUB_ENV: '' }, 'client', false],
+  ['GitHub Actions', { FRONTALIERE_OPERATOR_RC_SOURCE: 'server', GITHUB_ACTIONS: 'true' }, 'client', false],
+  ['selector invalido in CI', { FRONTALIERE_OPERATOR_RC_SOURCE: 'invalid', GITHUB_ACTIONS: 'true' }, 'client', false],
+]) {
+  test(`la CLI seleziona il template corretto con ${label}`, (t) => {
+    const result = runRcCli(t, { env: { FRONTALIERE_LOAD_OPERATOR_CONFIG: '1', ...env }, template: rcCliTemplate });
+    assert.deepEqual(result.calls.slice(-2), [expectedRcInit(source), ['sdk', source]]);
+    if (operator) {
+      const conditional = source === 'client' ? "export OPERATOR_MAX_EMAIL_PER_DAY='5'\n" : '';
+      assert.equal(result.stdout, operatorMarker + "export OPERATOR_ENABLED='false'\n" + conditional);
+    } else if (env.GITHUB_ENV === 'file') {
+      assert.equal(result.githubEnv, `RC_ENV_LOADED=1\n${writeGithubEnvBlock('BING_API_KEY', 'fixture-public')}\n`);
+      assert.doesNotMatch(result.stdout, /OPERATOR_/);
+    } else {
+      assert.equal(result.stdout, standardExports);
+    }
+  });
+}
+
+test('la CLI locale client usa la default app anche con ADC senza project_id', (t) => {
+  const result = runRcCli(t, {
+    env: { FRONTALIERE_LOAD_OPERATOR_CONFIG: '1', FRONTALIERE_OPERATOR_RC_SOURCE: 'client' },
+    template: rcCliTemplate,
+    adc: { type: 'authorized_user' },
+  });
+  assert.deepEqual(result.calls.filter(([kind]) => kind !== 'import'), [expectedRcInit('client'), ['sdk', 'client']]);
+  assert.equal(result.stdout, operatorMarker + "export OPERATOR_ENABLED='false'\nexport OPERATOR_MAX_EMAIL_PER_DAY='5'\n");
+});
+
+test('la CLI rifiuta il selector privato invalido prima di caricare SDK, credenziali o REST', (t) => {
+  const result = runRcCli(t, {
+    env: { FRONTALIERE_LOAD_OPERATOR_CONFIG: '1', FRONTALIERE_OPERATOR_RC_SOURCE: 'invalid-fixture' },
+    template: rcCliTemplate,
+  });
+  assert.deepEqual(result.calls, []);
+  assert.equal(result.stdout, '');
+  assert.match(result.stderr, /Invalid operator Remote Config source/);
+  assert.doesNotMatch(result.stderr, /invalid-fixture/);
+});
+
+for (const [source, restStatus] of [['client', 200], ['server', 200], ['server', 403]]) {
+  test(`la CLI conserva il namespace ${source} nel fallback REST con status ${restStatus}`, (t) => {
+    const result = runRcCli(t, {
+      env: { FRONTALIERE_LOAD_OPERATOR_CONFIG: '1', FRONTALIERE_OPERATOR_RC_SOURCE: source },
+      template: rcCliTemplate,
+      sdkFails: true,
+      restStatus,
+    });
+    const namespace = source === 'server' ? '/namespaces/firebase-server' : '';
+    assert.deepEqual(result.calls.filter(([kind]) => kind !== 'import'), [
+      expectedRcInit(source),
+      ['sdk', source],
+      ['oauth', 'fixture-project', 'https://www.googleapis.com/auth/firebase.remoteconfig'],
+      ['fetch', `https://firebaseremoteconfig.googleapis.com/v1/projects/fixture-project${namespace}/remoteConfig`, 'Bearer fixture-bearer'],
+    ]);
+    const conditional = source === 'client' ? "export OPERATOR_MAX_EMAIL_PER_DAY='5'\n" : '';
+    assert.equal(result.stdout, restStatus === 200 ? operatorMarker + "export OPERATOR_ENABLED='false'\n" + conditional : '');
+    assert.doesNotMatch(result.stderr, /synthetic provider detail/);
+  });
+}
+
+for (const [label, template, override, output] of [
+  ['template vuoto', { parameters: {} }, {}, ''],
+  ['contenitori default malformati', {
+    parameters: {
+      OPERATOR_ENABLED: { defaultValue: true },
+      OPERATOR_MAX_EMAIL_PER_DAY: { defaultValue: { unexpected: 5 } },
+      OPERATOR_MAX_ISSUES_PER_DAY: { defaultValue: [{ value: 3 }] },
+    },
+  }, {}, ''],
+  ['valori fuori scope o inidonei', {
+    parameters: {
+      BING_API_KEY: rcCliTemplate.parameters.BING_API_KEY,
+      OPERATOR_ENABLED: { defaultValue: { useInAppDefault: true, value: true } },
+      OPERATOR_GMAIL_CLIENT_SECRET: { defaultValue: { value: '' } },
+      OPERATOR_MAX_EMAIL_PER_DAY: rcCliTemplate.parameters.OPERATOR_MAX_EMAIL_PER_DAY,
+    },
+    parameterGroups: rcCliTemplate.parameterGroups,
+  }, { OPERATOR_ENABLED: 'local-override' }, ''],
+  ['solo override di una chiave risolta', {
+    parameters: { OPERATOR_ENABLED: rcCliTemplate.parameters.OPERATOR_ENABLED },
+  }, { OPERATOR_ENABLED: 'local-override' }, operatorMarker],
+]) {
+  test(`la CLI emette il marker operatore secondo le chiavi risolte con ${label}`, (t) => {
+    const result = runRcCli(t, {
+      env: { FRONTALIERE_LOAD_OPERATOR_CONFIG: '1', FRONTALIERE_OPERATOR_RC_SOURCE: 'server', ...override },
+      template,
+    });
+    assert.equal(result.stdout, output);
+  });
+}
 
 test('writeGithubEnvBlock preserva valori multi-linea senza permettere terminatori nel payload', () => {
   const value = 'winner-one\nvariant-two\nFRONTALIERE_INSTAGRAM_INSIGHTS_WINDOWS_EOF';
