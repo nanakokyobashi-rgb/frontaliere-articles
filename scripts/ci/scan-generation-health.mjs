@@ -38,7 +38,7 @@
  *     `Record rejected topic candidates (<sezione> — no article generated)`.
  *     Una sola chiamata API per 100 commit, e dà sezione + istante. Le
  *     sezioni cantonali (`canton-<codice>`) sono riconosciute e contate a
- *     parte (`perCanton`), ma non alimentano nessuna condizione.
+ *     parte (`perCanton`) per misurare `canton-dry`.
  *  2. **I marker nei log delle run**, machine-readable e già in produzione:
  *       `event=<e> chain=<c> → section=<s> dry_run=<d>`  (generate-article.yml)
  *       `PRESPEND_GATE_OUTCOME emptied=… recovered=… status=… section=…`
@@ -47,7 +47,7 @@
  *       `⚠️  Tutte le keyword evergreen risultano già coperte dal pre-flight.`
  *  3. **Il corpus del checkout** (`content/*-articles-data.ts` +
  *     `content/blog-meta*-it.ts`), per le coppie di articoli sullo stesso
- *     argomento. Zero rete.
+ *     argomento, e per i titoli e i corpi nelle quattro lingue cantonali. Zero rete.
  *  4. **Gli esiti delle copertine** (`[cover] article=… source=… reason=…`)
  *     nei log delle run e la coda versionata `data/image-regeneration-queue.json`.
  *     Il resolver stampa un evento per l'esito scelto; l'errore `source=engine`
@@ -55,8 +55,8 @@
  *
  * ## Il criterio di taratura: anomalo, non normale
  *
- * Ogni soglia qui sotto è MISURATA sullo storico reale, e la misura è scritta
- * accanto alla costante. Il criterio è duplice e va letto insieme:
+ * Le soglie per frontaliere e svizzera sono MISURATE sullo storico reale, con
+ * la misura accanto alla costante. Il criterio è duplice:
  *  - la condizione deve essere FALSA nella normalità osservata (altrimenti è
  *    rumore quotidiano, che si impara a ignorare — e allora tanto vale non
  *    averla);
@@ -79,15 +79,6 @@
  *    causa, la stessa cura e nessuna soglia difendibile — perché quella quota
  *    varia legittimamente con la produttività (misurata: 70% delle invocazioni
  *    il 2026-08-01, 47% nelle ultime 34 ore).
- *
- *  · **Le sezioni cantonali** (`generate-article-<cantone>.yml`). I loro commit
- *    sono riconosciuti e contati a parte (`perCanton`, una riga nel log della
- *    passata), ma nessuna condizione li legge: le soglie qui sotto sono
- *    misurate sullo storico della coppia frontaliere/svizzera, e per un cantone
- *    che pubblica 1-4 articoli al giorno uno storico non esiste ancora. Una
- *    `section-dry` per cantone scritta oggi sarebbe una soglia scelta, non
- *    misurata. Le run rosse dei chiamanti cantonali restano di
- *    `scan-failed-runs.mjs`, che non le distingue dalle altre.
  *
  *  · **Il singolo run senza articolo.** È l'esito normale che il workflow
  *    dichiara esplicitamente. Sorvegliarlo produrrebbe decine di segnali al
@@ -177,6 +168,7 @@ import {
   imageRegenerationActionableAt,
   readImageRegenerationQueue,
 } from '../../generator/scripts/lib/image-regeneration-queue.mjs';
+import { collectCantonGenerationCoverage } from './canton-generation-coverage.mjs';
 import { SECRET_PATTERNS } from './scan-hardcoded-secrets.mjs';
 import { topicCoverageKey } from '../../generator/scripts/lib/topic-coverage-guard.mjs';
 
@@ -2060,7 +2052,7 @@ export const CONDITIONS = [
     id: 'section-dry',
     scope: 'section',
     priority: 2,
-    // Volutamente ULTIMA: è la condizione generale, e viene soppressa quando una
+    // Condizione generale per frontaliere/svizzera, soppressa quando una
     // più specifica sulla stessa sezione sta già spiegando perché. Vedi
     // `evaluateConditions`.
     title: (section) => `Watchdog generazione, sezione ${section}: nessun articolo pubblicato`,
@@ -2109,6 +2101,26 @@ export const CONDITIONS = [
           'quando l\'altra sezione sembra sana.',
         ].join('\n') + footer(REMEASURE.commits),
       };
+    },
+  },
+
+  {
+    id: 'canton-dry',
+    scope: 'global',
+    priority: 2,
+    title: () => 'Generation health: cantoni senza articoli recenti',
+    evaluate(m) {
+      return m.cantonCoverage?.['canton-dry'] ?? { available: false };
+    },
+  },
+
+  {
+    id: 'locale-gap',
+    scope: 'global',
+    priority: 2,
+    title: () => 'Generation health: lacune nelle lingue cantonali',
+    evaluate(m) {
+      return m.cantonCoverage?.['locale-gap'] ?? { available: false };
     },
   },
 ];
@@ -2272,6 +2284,7 @@ export function collectCommits(repo, lookbackHours, {
   now = () => Date.now(),
   fetchPage,
   resolveHead,
+  observedAt,
 } = {}) {
   // `fetchPage` è un seam di test: senza il suo `resolveHead` esplicito non
   // esiste una ref immutabile da passargli. Non fabbricare uno SHA plausibile:
@@ -2280,16 +2293,14 @@ export function collectCommits(repo, lookbackHours, {
     throw new Error(`${COMMIT_COLLECTION_FAILURE_PREFIX} injected fetchPage requires resolveHead`);
   }
   const startedAt = now();
-  const cutoff = startedAt - lookbackHours * 3_600_000;
+  const windowEnd = observedAt ?? startedAt;
+  const cutoff = windowEnd - lookbackHours * 3_600_000;
   const deadline = startedAt + COMMIT_COLLECTION_MAX_MS;
   const perSection = Object.fromEntries(
     SECTIONS.map((s) => [s, { articles: 0, rejected: 0, lastArticleAt: null, timestamps: [] }]),
   );
-  // Le sezioni cantonali si CONTANO a parte e non entrano nelle condizioni:
-  // `generation-idle` e `section-dry` sono tarate sullo storico della coppia
-  // frontaliere/svizzera, e un articolo cantonale non deve ne' accenderle ne'
-  // tenerle spente al posto loro. Una soglia per cantone richiede uno storico
-  // che ancora non esiste (vedi «Il criterio di taratura» in testa al file).
+  // `canton-dry` usa una misura separata. I verdetti di frontaliere e
+  // svizzera continuano a usare la loro storia.
   const perCanton = {};
   let total = 0;
   let rejected = 0;
@@ -2326,7 +2337,7 @@ export function collectCommits(repo, lookbackHours, {
       if (parsed && CANTON_SECTION_RE.test(parsed.section)) {
         const canton = perCanton[parsed.section] ||= { articles: 0, rejected: 0, lastArticleAt: null };
         if (parsed.kind === 'rejected') canton.rejected++;
-        else {
+        else if (ts <= windowEnd) {
           canton.articles++;
           if (canton.lastArticleAt === null || ts > canton.lastArticleAt) canton.lastArticleAt = ts;
         }
@@ -2367,7 +2378,7 @@ export function collectCommits(repo, lookbackHours, {
 
 /**
  * Una riga di log per le sezioni cantonali viste nella finestra, o `null` se
- * non ce ne sono. Solo telemetria: nessuna condizione le legge.
+ * non ce ne sono. Il riepilogo di copertura include anche i cantoni senza commit.
  *
  * @param {Record<string, { articles: number, rejected: number, lastArticleAt: number|null }>} perCanton
  */
@@ -2625,6 +2636,7 @@ function routeToQueue(issue) {
 
 export async function collectMeasurements(repo, {
   commitLookback, maxLogRuns, runLookback, now = Date.now,
+  repoRoot = REPO_ROOT, env = process.env,
   collectCommitsFn = collectCommits, collectRunLogsFn = collectRunLogs, collectCorpusFn = collectCorpus,
   collectCoverQueueFn = collectCoverQueue,
 } = {}) {
@@ -2632,7 +2644,7 @@ export async function collectMeasurements(repo, {
   let commits;
   let commitCollectionError = null;
   try {
-    commits = collectCommitsFn(repo, commitLookback);
+    commits = collectCommitsFn(repo, commitLookback, { observedAt });
   } catch (error) {
     if (!exitCodeForCollectionError(error)) throw error;
     commitCollectionError = error;
@@ -2642,8 +2654,9 @@ export async function collectMeasurements(repo, {
     measurements: {
       now: observedAt, commits,
       runs: await collectRunLogsFn(repo, { maxRuns: maxLogRuns, lookbackHours: runLookback }),
-      corpus: collectCorpusFn(REPO_ROOT),
-      coverQueue: collectCoverQueueFn(REPO_ROOT, observedAt),
+      corpus: collectCorpusFn(repoRoot),
+      coverQueue: collectCoverQueueFn(repoRoot, observedAt),
+      cantonCoverage: collectCantonGenerationCoverage({ now: observedAt, repoRoot, commits, env }),
     },
     commitCollectionError,
   };
@@ -2673,7 +2686,7 @@ async function main() {
     + `${dryRun ? ' (dry-run)' : ''}`,
   );
   const cantonSummary = measurements.commits.available ? formatCantonCommitSummary(measurements.commits.perCanton) : null;
-  if (cantonSummary) console.log(`[generation-health] sezioni cantonali (solo conteggio, nessuna condizione): ${cantonSummary}`);
+  if (cantonSummary) console.log(`[generation-health] commit per sezione cantonale: ${cantonSummary}`);
   if (measurements.runs.available && measurements.runs.outcomes) {
     const o = measurements.runs.outcomes;
     console.log(
@@ -2699,6 +2712,9 @@ async function main() {
     );
   }
 
+  for (const [id, coverage] of Object.entries(measurements.cantonCoverage)) {
+    console.log(`[generation-health] ${id}\n${coverage.summary}`);
+  }
   const verdicts = evaluateConditions(measurements);
   for (const v of verdicts) {
     console.log(`  · ${v.id}${v.section ? `[${v.section}]` : ''} → ${!v.available ? 'non-misurabile' : v.firing ? 'ACCESA' : 'spenta'}`);
