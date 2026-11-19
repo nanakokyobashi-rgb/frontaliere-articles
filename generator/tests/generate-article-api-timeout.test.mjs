@@ -29,8 +29,8 @@ for (const relativePath of WORKFLOWS) {
     assert.doesNotMatch(source, /^\s+gh api\b/m, 'nessuna chiamata deve bypassare il wrapper');
     assert.equal(
       (source.match(/gh_api_timeout(?:\s|\()/g) || []).length,
-      4,
-      'tre chiamate bounded piu\u0300 la definizione devono restare protette',
+      5,
+      'quattro chiamate bounded più la definizione devono restare protette',
     );
     assert.match(
       source,
@@ -41,6 +41,11 @@ for (const relativePath of WORKFLOWS) {
       source,
       /ALL_RUN_STATUSES='\["queued","in_progress","requested","waiting","pending","completed"\]'/,
       'la snapshot deve validare tutti gli stati restituiti dall\'API',
+    );
+    assert.match(
+      source,
+      /gh_api_timeout "repos\/\$REPO\/actions\/runs\/\$pending_writer\/jobs"/,
+      'anche la verifica del writer in coda deve usare la stessa deadline di ammissione',
     );
     const linkGate = source.indexOf('if [ "$is_link" = "true" ]; then');
     const snapshot = source.indexOf('created=%3E%3D$admission_since');
