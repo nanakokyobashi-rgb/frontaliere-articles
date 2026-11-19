@@ -27,3 +27,9 @@ paths:
   .github/workflows/publish-api.yml:
     ignore:
       - 'unexpected key "queue"'
+  .github/workflows/generate-article.yml:
+    ignore:
+      - 'unexpected key "queue" for "concurrency" section'
+  .github/workflows/generate-article-core.yml:
+    ignore:
+      - 'unexpected key "queue" for "concurrency" section'

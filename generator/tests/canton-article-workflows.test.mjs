@@ -849,7 +849,7 @@ test('il core dichiara ogni input che i chiamanti passano, e la catena e\' spent
   // rebase/merge delle superfici condivise.
   assert.match(
     CORE,
-    /\n {4}concurrency:\n {6}group: \$\{\{ \(needs\.admit\.outputs\.run_mode == 'production' \|\| needs\.admit\.outputs\.run_mode == 'unknown'\) && format\('\{0\}-production', inputs\.concurrency_group\) \|\| format\('\{0\}-dry', inputs\.concurrency_group\) \}\}\n {6}cancel-in-progress: false\n/,
+    /\n {4}concurrency:\n {6}group: \$\{\{ \(needs\.admit\.outputs\.run_mode == 'production' \|\| needs\.admit\.outputs\.run_mode == 'unknown'\) && format\('\{0\}-production', inputs\.concurrency_group\) \|\| format\('\{0\}-dry', inputs\.concurrency_group\) \}\}\n {6}queue: max\n {6}cancel-in-progress: false\n/,
   );
   assert.equal((CORE.match(/\n {4}concurrency:/g) || []).length, 1, 'il job cantonale ha un solo gruppo di generazione');
 });
