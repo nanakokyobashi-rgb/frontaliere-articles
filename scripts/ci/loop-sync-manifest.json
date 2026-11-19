@@ -1323,6 +1323,16 @@
       }
     },
     {
+      "path": "scripts/ci/canton-generation-coverage.mjs",
+      "mode": "corpus-only",
+      "reason": "Modulo del watchdog cantonale del pubblicatore per la copertura della generazione e delle lingue.",
+      "baseline": {
+        "site": null,
+        "corpus": "69644de3a154b34a",
+        "alignedAt": "2026-11-19"
+      }
+    },
+    {
       "path": "scripts/ci/ticker-shadow-alert.mjs",
       "mode": "corpus-only",
       "reason": "Alert non-bloccante (issue #302, follow-up a #293/#166) quando manifest.json riporta counts.tickerArticlesShadowed > 0, richiamato da publish-api.yml dopo lo step 'Verify artifact'. Il sito non ha un file omonimo: la detection (scripts/lib/ticker-shadow-check.mjs, gia' corpus-only) esiste solo qui, e questo script ne aggiunge solo il canale di notifica (issue dedup'd sul titolo, apertura/chiusura nella stessa valutazione) — nessun gate, nessuna modifica a news-ticker-live.json.",

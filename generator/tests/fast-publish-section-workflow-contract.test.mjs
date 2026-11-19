@@ -257,6 +257,47 @@ test('una gara stale consegna la sezione al coordinatore senza dichiarare una pu
   assert.match(workflow, /child_coordinated_recovery=true/u);
 });
 
+test('il replay pinned consegna la sezione se main avanza durante il render', () => {
+  const start = render.indexOf('if [ "$normal_dispatch" !=');
+  const end = render.indexOf('\nwhile :; do', start);
+  assert.ok(start >= 0 && end > start);
+  const root = mkdtempSync(path.join(tmpdir(), 'section-late-handoff-'));
+  try {
+    const output = path.join(root, 'output');
+    const source = 'a'.repeat(40);
+    const head = 'b'.repeat(40);
+    const block = render.slice(start, end);
+    const run = (error) => execFileSync('bash', ['-c', [
+      'set -euo pipefail',
+      'normal_dispatch=false',
+      `pinned_replay_main=${source}`,
+      'build_publish_args() { args=(); }',
+      'bash() { case "$1" in',
+      '  *retry-cmd.sh) printf "%s\\n" "$PUBLISH_ERROR"; return 1 ;;',
+      `  *read-main-head.sh) echo "${head}" ;;`,
+      'esac; }',
+      'dispatch_stale_replay() {',
+      `  [ "$1" = "${source}" ] && [ "$2" = "${head}" ] || return 1`,
+      '  stale_handoff_nonce=nonce; stale_handoff_title=title',
+      '}',
+      block,
+    ].join('\n')], {
+      cwd: root,
+      env: { ...process.env, DRY: 'false', RUNNER_TEMP: root, GITHUB_OUTPUT: output, PUBLISH_ERROR: error },
+      encoding: 'utf8',
+      stdio: 'pipe',
+    });
+    assert.throws(() => run('HTML validation failed'), { status: 1 });
+    assert.equal(existsSync(output), false);
+    run(`main e' avanzato durante il render (${source} → ${head}); pubblicazione interrotta`);
+    assert.equal(readFileSync(output, 'utf8'), [
+      'stale_handoff=true', `stale_handoff_head=${head}`, 'stale_handoff_nonce=nonce', 'stale_handoff_title=title', '',
+    ].join('\n'));
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('il replay stale installa il parser prima di risolvere la release API', () => {
   const publish = workflow.slice(workflow.indexOf('\n  publish:'));
   const runtime = publish.indexOf('- name: Setup isolated article source runtime');
@@ -276,6 +317,57 @@ test('il replay stale installa il parser prima di risolvere la release API', () 
     publish.slice(staleDispatch),
     /import \{ resolveStaleReplayApiReleaseCommit \} from "\.\/scripts\/publish-section-pages\.mjs"/u,
   );
+});
+
+test('reconcile evita un backfill duplicato sulla stessa revisione e conserva la coorte del flip', () => {
+  const source = readFileSync(new URL('../../.github/workflows/reconcile-section-pages.yml', import.meta.url), 'utf8');
+  const start = source.indexOf('          set -euo pipefail', source.indexOf('- name: Backfill (dispatch'));
+  const end = source.indexOf('\n      # Il workflow_run di un child', start);
+  assert.ok(start >= 0 && end > start);
+  const root = mkdtempSync(path.join(tmpdir(), 'section-reconcile-active-'));
+  const commit = 'a'.repeat(40);
+  const pending = (section, status, sha = commit) => ({
+    head_sha: sha,
+    status,
+    display_title: `cover-publish-section / ${section} / nonce=reconcile-42-${section} / dry=false / c=reconcile-42-n1`,
+  });
+  try {
+    writeFileSync(path.join(root, 'reconcile-sections.json'), JSON.stringify({
+      sections: ['canton-appenzello', 'canton-ti', 'canton-ne'].map((section) => ({
+        section, dispatch: true, selected: [], missingPagePaths: [], knownMissingPagePaths: [],
+      })),
+    }));
+    const run = (pendingFlip) => execFileSync('bash', ['-c', [
+      'gh() { if [ "$1" = api ]; then printf "%s" "$ACTIVE_RUNS"; else printf "%s\\n" "$@"; fi; }',
+      'date() { echo 2026-11-19T04:00:00Z; }',
+      source.slice(start, end),
+    ].join('\n')], {
+      cwd: root,
+      env: {
+        ...process.env, RUNNER_TEMP: root, GITHUB_PAT_NANAKO: 'test-token', GITHUB_REPOSITORY: 'test/corpus',
+        GITHUB_RUN_ID: '123', PENDING_EDGE_FLIP: pendingFlip, SOURCE_COMMIT: commit, API_RELEASE_COMMIT: commit,
+        ACTIVE_RUNS: JSON.stringify([{ workflow_runs: [
+          pending('canton-appenzello', 'pending'),
+          pending('canton-ti', 'completed'),
+          { ...pending('canton-ti', 'queued'), display_title: 'cover-publish-section / canton-ti / nonce=manual / dry=false / c=none' },
+          { ...pending('canton-ne', 'queued'), display_title: 'cover-publish-section / canton-ne / nonce=reconcile-42-canton-ne / dry=true / c=reconcile-42-n1' },
+          pending('canton-ne', 'in_progress', 'b'.repeat(40)),
+        ] }]),
+      },
+      encoding: 'utf8',
+      stdio: 'pipe',
+    });
+    const ordinary = run('false');
+    assert.doesNotMatch(ordinary, /section=canton-appenzello/);
+    assert.match(ordinary, /section=canton-ti/);
+    assert.match(ordinary, /section=canton-ne/);
+    assert.match(ordinary, /dispatch_cohort=reconcile-123-n2/);
+    const flip = run('true');
+    assert.match(flip, /section=canton-appenzello/);
+    assert.match(flip, /dispatch_cohort=reconcile-123-n3/);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test('un recovery stale dispatcha i child e lascia il barrier al reconcile event-driven', () => {
