@@ -380,6 +380,32 @@ jobs:
                 echo 999
                 return
               fi
+              # A full final page has no local end marker. Fetch the next page
+              # explicitly and require it to be empty before trusting the listing.
+              local jobs_page_count
+              local jobs_sentinel_json
+              if ! jobs_page_count="$(jq -er '
+                if type == "array" and length > 0 then length
+                else error("workflow job pages missing")
+                end
+              ' <<<"$jobs_pages_json")"; then
+                echo 999
+                return
+              fi
+              if ! jobs_sentinel_json="$(gh_api_timeout \
+                "repos/$GITHUB_REPOSITORY/actions/runs/$run_id/jobs?per_page=100&page=$((jobs_page_count + 1))" \
+                2>/dev/null)"; then
+                echo 999
+                return
+              fi
+              if ! jq -e '
+                type == "object"
+                and (.jobs | type) == "array"
+                and (.jobs | length) == 0
+              ' <<<"$jobs_sentinel_json" >/dev/null; then
+                echo 999
+                return
+              fi
               if ! jobs_json="$(jq -c --argjson in_flight "$IN_FLIGHT_STATUSES" --arg terminal "$ACTION_TERMINAL_STATUS" '
                 . as $pages
                 | if (type == "array" and length > 0)

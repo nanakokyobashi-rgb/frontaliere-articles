@@ -55,6 +55,10 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
     guard,
     /gh_api_timeout --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/runs\/\$run_id\/jobs\?per_page=100"/,
   );
+  assert.match(guard, /jobs_page_count/);
+  assert.match(guard, /jobs\?per_page=100&page=\$\(\(jobs_page_count \+ 1\)\)/);
+  assert.match(guard, /jobs_sentinel_json/);
+  assert.match(guard, /\.jobs \| length\) == 0/);
   assert.match(workflow, /jobs \| length/);
   assert.match(guard, /total_count/);
   assert.doesNotMatch(guard, /map\(\.total_count\) \| unique/);
@@ -125,6 +129,10 @@ test('i gemelli del guard usano listing completi, stati completi e fail-closed',
     'il guard republish non deve paginare la storia completa del workflow',
   );
   assert.match(republishGuard, /gh_api_timeout --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/runs\/\$run_id\/jobs\?per_page=100"/);
+  assert.match(republishGuard, /jobs_page_count/);
+  assert.match(republishGuard, /jobs\?per_page=100&page=\$\(\(jobs_page_count \+ 1\)\)/);
+  assert.match(republishGuard, /jobs_sentinel_json/);
+  assert.match(republishGuard, /\.jobs \| length\) == 0/);
   assert.match(republishWorkflow, /total_count/);
   assert.doesNotMatch(republishWorkflow, /map\(\.total_count\) \| unique/);
   assert.doesNotMatch(republishWorkflow, /map\(\.jobs \| length\) \| add/);
