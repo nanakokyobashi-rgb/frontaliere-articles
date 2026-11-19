@@ -307,8 +307,13 @@ jobs:
                       and (.name | length) > 0
                     )
                   )
-                  and (($pages | map(.total_count) | unique | length) == 1)
-                  and (($pages | map(.jobs | length) | add) == $pages[0].total_count)
+                    # Actions total_count is an eventually consistent search
+                    # index, not a cardinality contract for the rows returned
+                    # by this paginated read. Prove pagination completeness
+                    # independently: every non-final page must be full, while
+                    # the final page may be short when the result set settles.
+                    and all($pages[]; (.jobs | length) <= 100)
+                    and all($pages[0:-1][]; (.jobs | length) == 100)
                   and (([$pages[].jobs[].id] | unique | length)
                     == ([$pages[].jobs[]] | length))
                 then
@@ -351,6 +356,32 @@ jobs:
               local jobs_pages_json
               local jobs_json
               if ! jobs_pages_json="$(gh_api_timeout --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/runs/$run_id/jobs?per_page=100")"; then
+                echo 999
+                return
+              fi
+              # A full final page has no local end marker. Fetch the next page
+              # explicitly and require it to be empty before trusting the listing.
+              local jobs_page_count
+              local jobs_sentinel_json
+              if ! jobs_page_count="$(jq -er '
+                if type == "array" and length > 0 then length
+                else error("workflow job pages missing")
+                end
+              ' <<<"$jobs_pages_json")"; then
+                echo 999
+                return
+              fi
+              if ! jobs_sentinel_json="$(gh_api_timeout \
+                "repos/$GITHUB_REPOSITORY/actions/runs/$run_id/jobs?per_page=100&page=$((jobs_page_count + 1))" \
+                2>/dev/null)"; then
+                echo 999
+                return
+              fi
+              if ! jq -e '
+                type == "object"
+                and (.jobs | type) == "array"
+                and (.jobs | length) == 0
+              ' <<<"$jobs_sentinel_json" >/dev/null; then
                 echo 999
                 return
               fi
@@ -510,9 +541,10 @@ jobs:
             conclusion=""
             waited=0
             while [ "$waited" -lt 1500 ] && [ "$(elapsed)" -lt "$HARD_DEADLINE" ]; do
-              status="$(gh_api_timeout "repos/$GITHUB_REPOSITORY/actions/runs/$run_id" | jq -r '.status' || echo '')"
+              run_json="$(gh_api_timeout "repos/$GITHUB_REPOSITORY/actions/runs/$run_id" || true)"
+              status="$(jq -r '.status // empty' <<<"$run_json" 2>/dev/null || true)"
               if [ "$status" = "completed" ]; then
-                conclusion="$(gh_api_timeout "repos/$GITHUB_REPOSITORY/actions/runs/$run_id" | jq -r '.conclusion' || echo '')"
+                conclusion="$(jq -r '.conclusion // empty' <<<"$run_json" 2>/dev/null || true)"
                 break
               fi
               sleep 30; waited=$((waited + 30))
