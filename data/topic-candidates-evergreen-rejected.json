@@ -15021,10 +15021,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.ocst.ch/il-lavoro/411-professioni/404-sociosanitario/2638-salute-premi-di-cassa-malati-e-responsabilita-una-riflessione-sul-crescente-costo-della-sanita-ticinese": {
-      "section": "frontaliere",
-      "ts": 1794943450836
-    },
     "svizzera::https://www.ilgiorno.it/como/cronaca/polizze-sanitarie-alle-stelle-in-f0a74e0f": {
       "section": "svizzera",
       "ts": 1794959811029
@@ -15084,6 +15080,14 @@
     "frontaliere::https://www.rsi.ch/s/4255856": {
       "section": "frontaliere",
       "ts": 1795110538248
+    },
+    "svizzera::https://www.rsi.ch/s/4255856": {
+      "section": "svizzera",
+      "ts": 1795118183401
+    },
+    "svizzera::https://www.rsi.ch/s/4254773": {
+      "section": "svizzera",
+      "ts": 1795118252945
     }
   }
 }
