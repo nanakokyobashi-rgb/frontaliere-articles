@@ -572,19 +572,57 @@ jobs:
             # before). CORRELAZIONE EURISTICA, dichiaratamente: l'API non
             # espone gli input di un workflow_dispatch, quindi si va di
             # finestra temporale. Un dispatch concorrente nella stessa
-            # finestra può far leggere la run sbagliata o far ripartire lo
-            # stesso id a un giro futuro — ed è ACCETTATO perché il backfill
-            # è idempotente per costruzione: il push shard confronta i tree e
-            # un contenuto identico è un clean no-op, il purge in più è solo
-            # una purge. Il costo di un doppio è qualche minuto di runner,
-            # non uno stato sbagliato.
+            # finestra può far leggere la run sbagliata — ed è ACCETTATO perché
+            # il backfill è idempotente per costruzione: il push shard confronta
+            # i tree e un contenuto identico è un clean no-op, il purge in più
+            # è solo una purge. Il lettore conserva l'id scelto e usa lo stesso
+            # call-site protetto anche per il polling, così discovery e stato
+            # terminale non possono divergere né consumare una chiamata duplicata.
+            read_dispatched_run() {
+              local api_path
+              if [ -n "${run_id:-}" ]; then
+                api_path="repos/$GITHUB_REPOSITORY/actions/runs/$run_id"
+              else
+                api_path="repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=10"
+              fi
+              gh_api_timeout "$api_path" \
+                | jq -c --arg t "$before" --arg selected_run "${run_id:-}" '
+                  if $selected_run != "" then
+                    if type == "object" then
+                      {id: .id, status: .status, conclusion: .conclusion}
+                    else
+                      empty
+                    end
+                  else
+                    [.workflow_runs[] | select(.created_at >= $t)]
+                    | sort_by(.created_at)
+                    | last
+                    | if . == null then empty else
+                        {id: .id, status: .status, conclusion: .conclusion}
+                      end
+                  end
+                '
+            }
+
             run_id=""
+            conclusion=""
+            completed=false
+            run_json=""
             for i in $(seq 1 12); do
               echo "dispatch lookup attempt $i/12"
               sleep 10
-              run_id="$(gh_api_timeout "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=10" \
-                | jq -r --arg t "$before" '[.workflow_runs[] | select(.created_at >= $t)] | sort_by(.created_at) | last | .id // empty' || true)"
-              [ -n "$run_id" ] && break
+              if ! run_json="$(read_dispatched_run 2>/dev/null)"; then
+                run_json=""
+              fi
+              [ -n "$run_json" ] || continue
+              run_id="$(jq -r '.id // empty' <<<"$run_json" 2>/dev/null || true)"
+              status="$(jq -r '.status // empty' <<<"$run_json" 2>/dev/null || true)"
+              [ -n "$run_id" ] || continue
+              if [ "$status" = "completed" ]; then
+                conclusion="$(jq -r '.conclusion // empty' <<<"$run_json" 2>/dev/null || true)"
+                completed=true
+              fi
+              break
             done
             if [ -z "$run_id" ]; then
               echo "::warning::dispatch inviato ma la run non compare — la conterà il prossimo giro"
@@ -595,17 +633,17 @@ jobs:
 
             # …e aspettane la conclusione (sequenziale APPOSTA: un solo run
             # nel gruppo di concurrency per volta).
-            conclusion=""
             waited=0
-            while [ "$waited" -lt 1500 ] && [ "$(elapsed)" -lt "$HARD_DEADLINE" ]; do
+            while [ "$completed" = "false" ] && [ "$waited" -lt 1500 ] && [ "$(elapsed)" -lt "$HARD_DEADLINE" ]; do
               run_json=""
-              if run_json="$(gh_api_timeout "repos/$GITHUB_REPOSITORY/actions/runs/$run_id")"; then
-                status="$(jq -r '.status' <<<"$run_json" || echo '')"
+              if run_json="$(read_dispatched_run 2>/dev/null)"; then
+                status="$(jq -r '.status // empty' <<<"$run_json" 2>/dev/null || true)"
               else
                 status=""
               fi
               if [ "$status" = "completed" ]; then
-                conclusion="$(jq -r '.conclusion' <<<"$run_json" || echo '')"
+                conclusion="$(jq -r '.conclusion // empty' <<<"$run_json" 2>/dev/null || true)"
+                completed=true
                 break
               fi
               sleep 30; waited=$((waited + 30))
