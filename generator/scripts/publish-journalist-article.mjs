@@ -77,7 +77,7 @@ import {
   assertNoFabricatedReferences,
   assertNoFabricatedLaborOfficeCrossLocale,
   assertArticlePassesFactualityGates,
-  getArticleImageDeadlineAt,
+  getArticleImageDeadlines,
   generateArticleImage,
   repairGeneratedArticleSourceCopy,
   refreshSourceCopyDerivedMetadata,
@@ -372,8 +372,8 @@ async function resolveHeroImage(data, doc) {
     }
   }
 
-  const imageDeadlineAt = getArticleImageDeadlineAt();
-  const generatedPath = await generateArticleImage(data, { deadlineAt: imageDeadlineAt });
+  const { generationDeadlineAt, catalogDeadlineAt } = getArticleImageDeadlines();
+  const generatedPath = await generateArticleImage(data, { deadlineAt: generationDeadlineAt });
   if (generatedPath) {
     console.error(`[cover] article=${data.id} source=engine reason=generated`);
     delete data._imageGenerationFailureReason;
@@ -384,7 +384,7 @@ async function resolveHeroImage(data, doc) {
   const verifiedCatalogImage = await verifyCatalogFallbackCandidates(data, {
     root: PROJECT_ROOT,
     findCatalogImages: findBestFallbackImages,
-    deadlineAt: imageDeadlineAt,
+    deadlineAt: catalogDeadlineAt,
   });
   const fallback = resolveArticleCoverFallback(data, {
     root: PROJECT_ROOT,

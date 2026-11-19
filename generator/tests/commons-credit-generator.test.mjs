@@ -154,7 +154,7 @@ test('journalist URLs are downloaded only after the four-field upload check', ()
   assert.match(resolver, /imageRecordForPath\(PROJECT_ROOT, rawImage, \{ strict: true \}\)/);
   assert.match(resolver, /if \(isEditorialUpload && upload\)/);
   assert.match(resolver, /appendEditorialImageRecord\(PROJECT_ROOT, record\)/);
-  assert.match(resolver, /generateArticleImage\(data, \{ deadlineAt: imageDeadlineAt \}\)/);
+  assert.match(resolver, /generateArticleImage\(data, \{ deadlineAt: generationDeadlineAt \}\)/);
   assert.match(resolver, /resolveArticleCoverFallback/);
   const downloadIndex = resolver.search(/\b(?:fetch|fetchWithRefTimeout)\(rawImage/);
   assert.ok(downloadIndex >= 0, 'rawImage is downloaded by the documented fetch wrapper');
@@ -164,15 +164,16 @@ test('journalist URLs are downloaded only after the four-field upload check', ()
   );
 });
 
-test('the journalist engine and catalog verifier share one image-phase deadline', () => {
+test('the journalist engine and catalog verifier use reserved image-phase deadlines', () => {
   const resolver = slice(JOURNALIST, 'async function resolveHeroImage(data, doc) {', '\n/**\n * Resolves the byline');
-  assert.match(resolver, /const imageDeadlineAt = getArticleImageDeadlineAt\(\);/);
-  assert.equal((resolver.match(/const imageDeadlineAt = getArticleImageDeadlineAt\(\);/g) ?? []).length, 1);
-  assert.match(resolver, /generateArticleImage\(data, \{ deadlineAt: imageDeadlineAt \}\)/);
-  assert.match(resolver, /verifyCatalogFallbackCandidates\(data, \{[\s\S]*?deadlineAt: imageDeadlineAt,[\s\S]*?\}\)/);
+  assert.match(resolver, /const \{ generationDeadlineAt, catalogDeadlineAt \} = getArticleImageDeadlines\(\);/);
+  assert.equal((resolver.match(/getArticleImageDeadlines\(\)/g) ?? []).length, 1);
+  assert.match(resolver, /generateArticleImage\(data, \{ deadlineAt: generationDeadlineAt \}\)/);
+  assert.match(resolver, /verifyCatalogFallbackCandidates\(data, \{[\s\S]*?deadlineAt: catalogDeadlineAt,[\s\S]*?\}\)/);
+  assert.doesNotMatch(resolver, /deadlineAt: generationDeadlineAt,[\s\S]*?verifyCatalogFallbackCandidates/);
   assert.ok(
-    resolver.indexOf('const imageDeadlineAt =') < resolver.indexOf('generateArticleImage(data'),
-    'the shared budget begins before the governed image generation attempt',
+    resolver.indexOf('const { generationDeadlineAt, catalogDeadlineAt } =') < resolver.indexOf('generateArticleImage(data'),
+    'the reserved deadlines begin before the governed image generation attempt',
   );
 });
 
