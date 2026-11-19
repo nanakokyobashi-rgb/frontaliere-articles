@@ -53,3 +53,45 @@ test('read-main-head resta fail-closed se la ref non e leggibile', () => {
   assert.match(result.stderr, /non risolvibile via git ls-remote/);
   assert.equal(callLog.trim().split('\n').length, 3);
 });
+
+test('canton publisher only accepts fast-forwards limited to bookkeeping', () => {
+  const directory = mkdtempSync(path.join(tmpdir(), 'section-source-freshness-'));
+  const helper = path.join(ROOT, 'scripts/ci/section-source-unaffected.sh');
+  const git = (...args) => {
+    const result = spawnSync('git', args, { cwd: directory, encoding: 'utf8' });
+    assert.equal(result.status, 0, result.stderr);
+    return result.stdout.trim();
+  };
+  const commit = (relativePath, contents) => {
+    mkdirSync(path.dirname(path.join(directory, relativePath)), { recursive: true });
+    writeFileSync(path.join(directory, relativePath), contents);
+    git('add', '--', relativePath);
+    git('commit', '-qm', relativePath);
+    return git('rev-parse', 'HEAD');
+  };
+  const check = (base, head) => spawnSync('bash', [helper, base, head], { cwd: directory }).status;
+
+  try {
+    git('init', '-q');
+    git('config', 'user.email', 'test@example.com');
+    git('config', 'user.name', 'Test');
+    const base = commit('content/article.txt', 'original');
+    const bookkeeping = commit('data/image-regeneration-queue.json', '{}');
+    const pending = commit('data/image-regeneration-queue-pending.jsonl', '{}');
+    const pendingShard = commit('data/image-regeneration-queue-pending.jsonl.12.34.0.pending', '{}');
+    const unrelated = commit('data/image-regeneration-queue-pending.jsonl.12.34.0.pending.bak', '{}');
+    const content = commit('content/article.txt', 'updated');
+    const latest = commit('data/discovery-attempt-state.json', '{}');
+    assert.equal(check(base, base), 0);
+    assert.equal(check(base, bookkeeping), 0);
+    assert.equal(check(bookkeeping, pending), 0);
+    assert.equal(check(bookkeeping, pendingShard), 0);
+    assert.equal(check(pendingShard, unrelated), 1);
+    assert.equal(check(content, latest), 0);
+    assert.equal(check(base, latest), 1, 'a later bookkeeping commit cannot hide an intervening article change');
+    assert.equal(check(latest, base), 1, 'a rewind cannot reuse the snapshot');
+    assert.equal(check('invalid', latest), 1);
+  } finally {
+    rmSync(directory, { recursive: true, force: true });
+  }
+});

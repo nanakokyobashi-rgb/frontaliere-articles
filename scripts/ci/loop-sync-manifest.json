@@ -339,6 +339,16 @@
       }
     },
     {
+      "path": "scripts/ci/section-source-unaffected.sh",
+      "mode": "corpus-only",
+      "reason": "Verifica che due revisioni del corpus differiscano solo per file operativi prima del render e delle scritture del publisher cantonale. Il publisher appartiene al corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-11-19"
+      }
+    },
+    {
       "path": "scripts/ci/dispatch-fast-publish-replay.sh",
       "mode": "corpus-only",
       "reason": "Deduplica e riaccoda i replay stale dei workflow fast-publish di sezione dopo aver verificato lo stato reale della run. Il sito non ha il publisher per-corpus né questo helper di dispatch, quindi il path resta specifico del corpus.",
