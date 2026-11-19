@@ -285,7 +285,7 @@ on:
 #
 # ## Cosa faceva davvero il gruppo a livello di workflow
 #
-# GitHub non ha una coda: un gruppo di concurrency ammette UNA run in esecuzione
+# Con la coda predefinita un gruppo di concurrency ammette UNA run in esecuzione
 # e UNA sola in attesa, e ogni nuovo arrivo CANCELLA quella in attesa. Sotto
 # sovra-sottoscrizione non è una coda, è una politica di SCARTO. Misurato il
 # 2026-08-13 sulle ultime 60 run: 16 `cancelled`, e le tre campionate
@@ -850,7 +850,7 @@ jobs:
                 and (([$pages[].workflow_runs[].id] | unique | length)
                   == ([$pages[].workflow_runs[]] | length))
               then
-                [$pages[].workflow_runs[] | {id, created_at, status, conclusion, display_title}]
+                [$pages[].workflow_runs[] | {id, created_at, status, conclusion, display_title, head_branch}]
               else
                 error("generation run listing incomplete")
               end
@@ -941,6 +941,28 @@ jobs:
           esac
           WEDGE_SECONDS=1800
 
+          if [ "$successor_push" = "true" ]; then
+            # A fresh pending writer on this branch will check out the newest
+            # content. Verify the job name because the run title cannot
+            # distinguish a production push from a dry push self-test.
+            pending_writer=$(jq -r --arg mine "$self_created" --argjson me "$SELF_ID" \
+              --arg branch "${GITHUB_REF_NAME:-main}" --argjson wedge "$WEDGE_SECONDS" '
+                ($mine | fromdateiso8601) as $t
+                | [.[] | select(.status == "pending" and .head_branch == $branch)
+                       | select([.created_at, .id] < [$mine, $me])
+                       | select($t - (.created_at | fromdateiso8601) < $wedge)]
+                | sort_by(.created_at, .id) | last | .id // empty
+              ' <<<"$inflight" 2>/dev/null) || pending_writer=''
+            if [[ "$pending_writer" =~ ^[0-9]+$ ]] \
+              && gh_api_timeout "repos/$REPO/actions/runs/$pending_writer/jobs" 2>/dev/null \
+                | jq -e 'any(.jobs[]?; .status == "pending" and (.name == "generate production" or .name == "generate / generate production"))' >/dev/null; then
+              echo "Il job di produzione $pending_writer è già in coda sullo stesso ramo."
+              echo "proceed=false" >> "$GITHUB_OUTPUT"
+              echo "GENERATION_OUTCOME kind=skipped reason=admit-content-backlog section=unknown"
+              exit 0
+            fi
+          fi
+
           if ! older="$(printf '%s' "$inflight" \
             | jq -r --argjson me "$SELF_ID" --arg mine "$self_created" --argjson dad "$parent_id" \
                    --argjson wedge "$WEDGE_SECONDS" \
@@ -1005,19 +1027,19 @@ jobs:
   generate:
     needs: admit
     if: needs.admit.outputs.proceed == 'true'
+    name: ${{ needs.admit.outputs.run_mode == 'dry' && 'generate dry run' || 'generate production' }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
     # Never cancel: create-article.mjs registers across ~10 files and a cancelled
     # run can leave the corpus half-written. Resta come RETE dietro `admit` —
     # vedi l'intestazione sopra per perché non è più il primo strato.
     concurrency:
-      # GitHub conserva un solo pending per gruppo: il successore content deve
-      # stare separato dai self-test dry, altrimenti un push di workflow può
-      # sostituirlo mentre aspetta il producer. `unknown` resta un modo
-      # osservabile dell'admit, ma condivide il lock legacy `generate-article`
-      # con production:
-      # un compare fallito non può aprire una seconda scrittura.
+      # Dry resta separato dai job che scrivono. Production e unknown
+      # condividono il lock: un compare fallito non apre una seconda scrittura.
+      # La coda conserva i job ammessi. La run Svizzera 44450480989, pur
+      # ammessa, è stata cancellata prima del primo step mentre attendeva.
       group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && 'generate-article' || 'generate-article-dry' }}
+      queue: max
       cancel-in-progress: false
     steps:
       - name: Checkout

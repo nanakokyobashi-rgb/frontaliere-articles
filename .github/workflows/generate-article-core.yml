@@ -329,7 +329,7 @@ jobs:
                 and (([$pages[].workflow_runs[].id] | unique | length)
                   == ([$pages[].workflow_runs[]] | length))
               then
-                [$pages[].workflow_runs[] | {id, created_at, status, conclusion}]
+                [$pages[].workflow_runs[] | {id, created_at, status, conclusion, head_branch}]
               else
                 error("generation run listing incomplete")
               end
@@ -395,6 +395,25 @@ jobs:
             ''|*[!0-9]*) parent_id=0 ;;
           esac
           WEDGE_SECONDS=1800
+
+          if [ "$successor_push" = "true" ]; then
+            pending_writer=$(jq -r --arg mine "$self_created" --argjson me "$SELF_ID" \
+              --arg branch "${GITHUB_REF_NAME:-main}" --argjson wedge "$WEDGE_SECONDS" '
+                ($mine | fromdateiso8601) as $t
+                | [.[] | select(.status == "pending" and .head_branch == $branch)
+                       | select([.created_at, .id] < [$mine, $me])
+                       | select($t - (.created_at | fromdateiso8601) < $wedge)]
+                | sort_by(.created_at, .id) | last | .id // empty
+              ' <<<"$inflight" 2>/dev/null) || pending_writer=''
+            if [[ "$pending_writer" =~ ^[0-9]+$ ]] \
+              && gh_api_timeout "repos/$REPO/actions/runs/$pending_writer/jobs" 2>/dev/null \
+                | jq -e 'any(.jobs[]?; .status == "pending" and (.name == "generate production" or .name == "generate / generate production"))' >/dev/null; then
+              echo "Il job di produzione $pending_writer è già in coda sullo stesso ramo."
+              echo "proceed=false" >> "$GITHUB_OUTPUT"
+              echo "GENERATION_OUTCOME kind=skipped reason=admit-content-backlog section=unknown"
+              exit 0
+            fi
+          fi
 
           if ! older="$(printf '%s' "$inflight" \
             | jq -r --argjson me "$SELF_ID" --arg mine "$self_created" --argjson dad "$parent_id" \
@@ -520,10 +539,12 @@ jobs:
   generate:
     needs: [admit, section_gate]
     if: needs.admit.outputs.proceed == 'true' && needs.section_gate.outputs.proceed == 'true'
+    name: ${{ needs.admit.outputs.run_mode == 'dry' && 'generate dry run' || 'generate production' }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
     concurrency:
       group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && format('{0}-production', inputs.concurrency_group) || format('{0}-dry', inputs.concurrency_group) }}
+      queue: max
       cancel-in-progress: false
     steps:
       - name: Checkout

@@ -285,8 +285,8 @@ export const CORE_REPLACEMENTS = [
   {
     id: 'admit: display_title resta solo nel receiver principale',
     count: 1,
-    find: '                [$pages[].workflow_runs[] | {id, created_at, status, conclusion, display_title}]\n',
-    replace: '                [$pages[].workflow_runs[] | {id, created_at, status, conclusion}]\n',
+    find: '                [$pages[].workflow_runs[] | {id, created_at, status, conclusion, display_title, head_branch}]\n',
+    replace: '                [$pages[].workflow_runs[] | {id, created_at, status, conclusion, head_branch}]\n',
   },
   {
     id: 'admit: la deduplica della source URL resta nel receiver principale',
