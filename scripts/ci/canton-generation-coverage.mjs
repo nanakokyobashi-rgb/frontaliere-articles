@@ -61,6 +61,13 @@ export function measureCantonLocales(section, repoRoot, now) {
     return { status: 'unknown', detail: 'registro indisponibile' };
   }
 
+  // Una sezione senza pubblicazioni recenti non ha ancora un articolo da
+  // confrontare fra i locali. `canton-dry` misura già questo caso; trattarlo
+  // qui come quattro traduzioni mancanti produce un falso `locale-gap`.
+  if (ids.size === 0) {
+    return { status: 'no-article', detail: `nessun articolo nelle ultime ${LOCALE_WINDOW_HOURS}h` };
+  }
+
   const counts = [];
   for (const metaFile of paths.metaFiles) {
     const locale = path.basename(metaFile, '.ts').slice(paths.metaPrefix.length + 1);
@@ -93,6 +100,7 @@ export function measureCantonLocales(section, repoRoot, now) {
 function summarizeCantonCoverage(rows) {
   const labels = {
     inactive: 'inattivo', unknown: 'non misurabile',
+    'no-article': 'nessun articolo nella finestra',
     gap: 'articolo assente nella finestra', covered: 'coperto',
   };
   const lines = rows.map(({ section, status, detail }) => `- ${section}: ${labels[status]} (${detail})`);
