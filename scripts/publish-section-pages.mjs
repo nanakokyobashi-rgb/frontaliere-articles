@@ -91,6 +91,7 @@ import {
 } from './lib/section-page-manifest.mjs';
 import {
   IMAGE_LEASE_CONTEXT_ENV,
+  imageNamespaceForKey,
 } from './lib/r2-image-namespace-lock.mjs';
 import { purgeChunks } from './publish-section-edge.mjs';
 import {
@@ -1563,7 +1564,7 @@ function sha256(bytes) {
   return createHash('sha256').update(bytes).digest('hex');
 }
 
-async function unchangedHeldAssetKeys({ candidateKeys, uploadByKey, assetProbeImpl }) {
+async function findIdenticalCantonAssetKeys({ candidateKeys, uploadByKey, assetProbeImpl }) {
   const unchanged = new Set();
   let cursor = 0;
   const workers = Array.from({ length: Math.min(HELD_ASSET_PROBE_CONCURRENCY, candidateKeys.length) }, async () => {
@@ -1575,7 +1576,7 @@ async function unchangedHeldAssetKeys({ candidateKeys, uploadByKey, assetProbeIm
         key,
         CANTON_IMAGE_MIME_BY_EXTENSION[path.extname(key).toLowerCase()],
       )) {
-        console.log(`::notice::[${LOG}] asset trattenuto ${key}: bytes locali assenti o non verificabili`);
+        console.log(`::notice::[${LOG}] asset ${key}: bytes locali assenti o non verificabili`);
         continue;
       }
       const localSha256 = sha256(localBytes);
@@ -1596,11 +1597,11 @@ async function unchangedHeldAssetKeys({ candidateKeys, uploadByKey, assetProbeIm
         || remote.byteLength <= 0
         || remote.byteLength > MAX_HELD_ASSET_BYTES
         || !/^[a-f0-9]{64}$/u.test(remote.sha256 ?? '')) {
-        console.log(`::notice::[${LOG}] asset trattenuto ${key}: confronto CDN non verificabile (${remote?.status ?? 'nessuna risposta'})`);
+        console.log(`::notice::[${LOG}] asset ${key}: confronto CDN non verificabile (${remote?.status ?? 'nessuna risposta'})`);
         continue;
       }
       if (remote.byteLength !== localBytes.length || remote.sha256 !== localSha256) {
-        console.log(`::notice::[${LOG}] asset trattenuto ${key}: bytes CDN diversi dal candidato locale`);
+        console.log(`::notice::[${LOG}] asset ${key}: bytes CDN diversi dal candidato locale`);
         continue;
       }
       unchanged.add(key);
@@ -1611,12 +1612,20 @@ async function unchangedHeldAssetKeys({ candidateKeys, uploadByKey, assetProbeIm
   return unchanged;
 }
 
-async function uploadCantonAssets({ cdnUploads, heldAssetKeys, unchangedAssetKeys, runImpl, assertMainFreshImpl, signal }) {
+async function uploadCantonAssets({
+  cdnUploads, heldAssetKeys, unchangedAssetKeys, assetProbeImpl, runImpl, assertMainFreshImpl, signal,
+}) {
+  const pendingUploads = cdnUploads.filter(({ key }) => !heldAssetKeys.has(key) && !unchangedAssetKeys.has(key));
+  const identicalKeys = await findIdenticalCantonAssetKeys({
+    candidateKeys: pendingUploads.map(({ key }) => key).filter((key) => imageNamespaceForKey(key)),
+    uploadByKey: new Map(pendingUploads.map((upload) => [upload.key, upload])),
+    assetProbeImpl,
+  });
   let failures = 0;
   await assertMainFreshImpl();
   await publishSignalBoundary(signal);
-  for (const { local, key } of cdnUploads) {
-    if (heldAssetKeys.has(key) || unchangedAssetKeys.has(key)) continue;
+  for (const { local, key } of pendingUploads) {
+    if (identicalKeys.has(key)) continue;
     await publishSignalBoundary(signal);
     const { code = 1, stdout = '' } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', local, key]);
     if (code !== 0 || !stdout.includes('✅ uploaded')) {
@@ -2268,7 +2277,7 @@ export async function publish({
           if (cantonPageReferencesAsset(body, key)) candidateKeys.add(key);
         }
       }
-      unchangedAssetKeys = await unchangedHeldAssetKeys({
+      unchangedAssetKeys = await findIdenticalCantonAssetKeys({
         candidateKeys: [...candidateKeys],
         uploadByKey,
         assetProbeImpl,
@@ -2300,6 +2309,7 @@ export async function publish({
     cdnUploads,
     heldAssetKeys,
     unchangedAssetKeys,
+    assetProbeImpl,
     runImpl,
     assertMainFreshImpl,
     signal,
