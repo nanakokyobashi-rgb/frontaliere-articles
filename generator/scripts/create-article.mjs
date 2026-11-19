@@ -23434,13 +23434,13 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
 
     // Step 3a.0a-bis: fisco, previdenza e tassa salute non escono in automatico
     // senza una fonte ufficiale e senza il controllo dei parametri fiscali
-    // (lib/article-ymyl-gate.mjs). Rigenera finche' ci sono tentativi; poi e' un
-    // rifiuto del topic-gate: l'articolo non esce e il ranker prosegue.
+    // (lib/article-ymyl-gate.mjs). Senza fonte ufficiale, riscrivere con lo
+    // stesso materiale non aggiunge evidenze: il ranker passa al candidato successivo.
     try {
       assertYmylPublishable(data, { sourceUrl: url });
     } catch (ymylErr) {
       console.error(`  ⚠️  ${safeSignalDiagnosticTextForLog(ymylErr?.message || ymylErr, RUN_REPORT)}`);
-      if (attempt < maxAttempts) {
+      if (!ymylErr.missingOfficialSource && attempt < maxAttempts) {
         console.error(`  🔄 Rigenero contenuto IT per il gate YMYL (${attempt}/${maxAttempts})...`);
         continue;
       }

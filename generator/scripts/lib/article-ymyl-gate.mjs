@@ -107,6 +107,8 @@ function articleText(...sources) {
   return texts.join('\n');
 }
 
+const MISSING_OFFICIAL_SOURCE = 'nessun link a una fonte ufficiale';
+
 function linksInValues(...sources) {
   const links = [];
   const visit = (value) => {
@@ -135,7 +137,7 @@ export function checkYmylPublishable(data, { sourceUrl = '' } = {}) {
   const text = articleText(it, data?.seo);
   const problems = findFiscalErrors(text).map((error) => `${error.id} (${error.source}): ${error.sentence.trim().slice(0, 120)}`);
   if (![sourceUrl, ...linksInValues(it, data?.seo)].some(isOfficialSourceUrl)) {
-    problems.unshift('nessun link a una fonte ufficiale');
+    problems.unshift(MISSING_OFFICIAL_SOURCE);
   }
   return { ymyl: true, problems };
 }
@@ -150,6 +152,7 @@ export function assertYmylPublishable(data, options) {
   if (problems.length === 0) return;
   const error = new Error(`topic-gate abort: articolo YMYL non pubblicabile in automatico: ${problems.join('; ')}`);
   error.topicGateAbort = true;
+  error.missingOfficialSource = problems.includes(MISSING_OFFICIAL_SOURCE);
   throw error;
 }
 
