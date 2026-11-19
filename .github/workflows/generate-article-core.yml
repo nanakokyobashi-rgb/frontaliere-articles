@@ -450,7 +450,7 @@ jobs:
             fail_closed_admission
           fi
           if [ -n "${stale:-}" ]; then
-            echo "::warning title=Run in volo oltre la soglia::Run piu' vecchie in volo da oltre ${WEDGE_SECONDS}s, NON piu' bloccanti per l'ammissione: ${stale}. Di norma sono incastrate, ma lo 0,91% delle run sane supera questa soglia: in quel caso il successore aspetta in coda senza disturbarle."
+            echo "::warning title=Run in volo oltre la soglia::Run piu' vecchie in volo da oltre ${WEDGE_SECONDS}s, NON piu' bloccanti per l'ammissione: ${stale}."
           fi
           case "${older:-}" in
             ''|*[!0-9]*) older=0 ;;
