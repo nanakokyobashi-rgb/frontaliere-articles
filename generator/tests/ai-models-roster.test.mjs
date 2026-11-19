@@ -6,6 +6,7 @@ import {
   DEFAULT_CHAIN,
   DISCOVERY_PROVIDERS,
   RETIRED_FREE_PROVIDERS,
+  collectOfferedIds,
   discoverFreeModels,
   getProviderRosterStatus,
   getProviderForModel,
@@ -91,15 +92,35 @@ describe('roster NVIDIA', () => {
       'meta/llama-3.1-8b-instruct',
       'mistralai/mistral-small-4-119b-2603',
       'nvidia/nemotron-nano-9b-v2',
+      'nemotron-3-super',
       'nvidia/nemotron-3-super-120b-a12b',
     ]) {
       assert.equal(nvidia.pick({ id }), null, `id ritirato accettato: ${id}`);
     }
-    assert.equal(
-      openRouter.pick({ id: 'nvidia/nemotron-3-super-120b-a12b:free' }),
-      null,
-      'il mirror OpenRouter ritirato non deve rientrare nella catena',
-    );
+    for (const id of [
+      'nvidia/nemotron-3-super:free',
+      'nvidia/nemotron-3-super-120b-a12b:free',
+    ]) {
+      assert.equal(openRouter.pick({ id }), null, `mirror OpenRouter ritirato accettato: ${id}`);
+    }
+  });
+
+  test('non reintroduce i mirror ritirati tramite aliases[]', () => {
+    const nvidiaOffered = collectOfferedIds(nvidia, [{
+      id: 'llama-3.3-70b-instruct',
+      aliases: ['nemotron-3-super', 'nemotron-3-super-120b-a12b'],
+    }]);
+    assert.deepEqual([...nvidiaOffered], ['llama-3.3-70b-instruct']);
+
+    const openRouterOffered = collectOfferedIds(openRouter, [{
+      id: 'openai/gpt-oss-120b:free',
+      context_length: 100_000,
+      aliases: [
+        'nvidia/nemotron-3-super:free',
+        'nvidia/nemotron-3-super-120b-a12b:free',
+      ],
+    }]);
+    assert.deepEqual([...openRouterOffered], ['openai/gpt-oss-120b:free']);
   });
 });
 
