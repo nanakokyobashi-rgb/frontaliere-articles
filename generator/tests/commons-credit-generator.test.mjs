@@ -82,6 +82,7 @@ function generatedRecord(overrides = {}) {
       contains_text: false,
       contains_logo: false,
       contains_recognizable_face: false,
+      contains_recognizable_foreground_person: false,
       looks_like_specific_real_event: false,
       notes: 'generic editorial illustration',
     },

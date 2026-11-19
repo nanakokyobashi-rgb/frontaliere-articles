@@ -32,8 +32,11 @@ import {
   GENERATED_IMAGE_PROMPT_VERSION,
   GENERATED_IMAGE_RESTRICTIONS,
   LICENSED_PHOTO_RESTRICTIONS,
+  validateGeneratedImageRecord,
+  validateGeneratedImageRegistry,
 } from '../../engine/shared/generatedImageRegistry.mjs';
 import {
+  imageVisionRejected,
   imageVisionRejectionError,
   isCompleteArticleHeroVisionVerdict,
 } from '../../engine/shared/generatedImageVision.mjs';
@@ -83,7 +86,7 @@ test('the fallback consumer loads its pure vision contract without native addons
 function tempRoot() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'cover-fallback-'));
 }
-function generatedCatalogRecord() {
+function generatedCatalogRecord({ vision = {} } = {}) {
   return {
     schema: 1,
     assetId: 'catalog-fallback-test',
@@ -110,8 +113,10 @@ function generatedCatalogRecord() {
       contains_text: false,
       contains_logo: false,
       contains_recognizable_face: false,
+      contains_recognizable_foreground_person: false,
       looks_like_specific_real_event: false,
       notes: 'generic catalog illustration',
+      ...vision,
     },
   };
 }
@@ -722,6 +727,67 @@ test('the shared article-hero checker accepts a complete documentary photo and s
     is_photograph: true,
     is_topic_relevant: true,
   });
+});
+
+test('il flag di persona riconoscibile chiude sia il rejection generated sia il record gate', () => {
+  const unsafeVision = { ...safeGeneratedVision, contains_recognizable_foreground_person: true };
+  assert.equal(imageVisionRejected(unsafeVision, { kind: 'generated', scope: 'article-hero' }), true);
+  const validation = validateGeneratedImageRecord(generatedCatalogRecord({ vision: unsafeVision }));
+  assert.equal(validation.valid, false);
+  assert.match(validation.errors.join('; '), /vision gate verdict is missing or rejected/);
+});
+
+test('la compatibilità vision legacy richiede il registro esplicitamente versionato', () => {
+  const legacy = generatedCatalogRecord();
+  delete legacy.vision.contains_recognizable_foreground_person;
+  const registry = {
+    schema: 1,
+    assetCount: 1,
+    legacyVision: { schema: 0, assetIds: [legacy.assetId] },
+    assets: [legacy],
+  };
+
+  assert.equal(validateGeneratedImageRegistry(registry).valid, false);
+  assert.equal(validateGeneratedImageRegistry(registry, { allowLegacyVision: true }).valid, true);
+  assert.equal(validateGeneratedImageRecord(legacy, { allowLegacyVision: true }).valid, false);
+  assert.equal(validateGeneratedImageRecord({ ...legacy, assetId: 'unlisted-new-record' }, {
+    allowLegacyVision: true,
+    legacyVisionAssetIds: [legacy.assetId],
+  }).valid, false);
+});
+
+test('appendGeneratedImageRecord conserva il metadato legacyVision dell’envelope', () => {
+  const root = tempRoot();
+  try {
+    const legacy = generatedCatalogRecord();
+    delete legacy.vision.contains_recognizable_foreground_person;
+    const legacyVision = { schema: 0, assetIds: [legacy.assetId] };
+    fs.mkdirSync(path.dirname(path.join(root, 'data/generated-image-registry.json')), { recursive: true });
+    fs.writeFileSync(
+      path.join(root, 'data/generated-image-registry.json'),
+      JSON.stringify({ schema: 1, assetCount: 1, legacyVision, assets: [legacy] }),
+    );
+
+    const next = generatedCatalogRecord();
+    next.assetId = 'catalog-fallback-next';
+    next.imageUrl = '/images/blog/catalog-fallback-next.webp';
+    next.sha256 = '1'.repeat(64);
+    appendGeneratedImageRecord(root, next);
+
+    const persisted = JSON.parse(
+      fs.readFileSync(path.join(root, 'data/generated-image-registry.json'), 'utf8'),
+    );
+    assert.deepEqual(persisted.legacyVision, legacyVision);
+    assert.equal(readGeneratedImageRecords(root).length, 2);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test("il verdetto foto richiede l'assenza di persone riconoscibili anche fuori dagli article hero", () => {
+  const incompletePhoto = { ...safeGeneratedVision, is_photograph: true };
+  delete incompletePhoto.contains_recognizable_foreground_person;
+  assert.equal(imageVisionRejected(incompletePhoto, { kind: 'photo', scope: 'event-library' }), true);
 });
 
 test('sostituire una foto licenziata con una cover generata rimuove il ledger obsoleto', () => {

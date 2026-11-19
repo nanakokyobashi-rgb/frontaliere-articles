@@ -16,6 +16,7 @@ import crypto from 'node:crypto';
 import {
   GENERATED_IMAGE_KIND,
   GENERATED_IMAGE_LICENSE,
+  legacyVisionAssetIdsForRegistry,
   isLicensedPhotoRecord,
   validateGeneratedImageRecord,
   validateGeneratedImageRegistry,
@@ -74,6 +75,7 @@ const STATIC_FALLBACK_RECORD = Object.freeze({
     contains_text: false,
     contains_logo: false,
     contains_recognizable_face: false,
+    contains_recognizable_foreground_person: false,
     looks_like_specific_real_event: false,
     notes: 'Original generic illustrated landscape; no readable text, logos, signatures, recognizable faces, or specific real event.',
   },
@@ -100,8 +102,10 @@ function readJson(root, rel, fallback) {
   }
 }
 
-function generatedEnvelope(assets) {
-  return { schema: 1, assetCount: assets.length, assets };
+function generatedEnvelope(assets, { legacyVision } = {}) {
+  const envelope = { schema: 1, assetCount: assets.length, assets };
+  if (legacyVision !== undefined) envelope.legacyVision = legacyVision;
+  return envelope;
 }
 
 function normalizeGeneratedImageRecord(record) {
@@ -154,12 +158,16 @@ function hasMaterializedImageRecord(root, imagePath, record) {
 
 export function readGeneratedImageRecords(root, { strict = true } = {}) {
   const raw = readJson(root, GENERATED_IMAGE_REGISTRY_REL, generatedEnvelope([]));
-  const verdict = validateGeneratedImageRegistry(raw, { scope: undefined });
+  const legacyVisionAssetIds = legacyVisionAssetIdsForRegistry(raw);
+  const verdict = validateGeneratedImageRegistry(raw, { scope: undefined, allowLegacyVision: true });
   if (!verdict.valid && strict) {
     throw new Error(`generated image registry is invalid: ${verdict.errors.join('; ')}`);
   }
   return (raw.assets || [])
-    .filter((record) => validateGeneratedImageRecord(record).valid)
+    .filter((record) => validateGeneratedImageRecord(record, {
+      allowLegacyVision: true,
+      legacyVisionAssetIds,
+    }).valid)
     .map(normalizeGeneratedImageRecord);
 }
 
@@ -256,6 +264,8 @@ export function appendGeneratedImageRecord(root, record) {
   const photoCredit = isLicensedPhotoRecord(normalizedRecord)
     ? imageCreditRecordFromGeneratedImageRecord(normalizedRecord)
     : null;
+  const registryPath = absolute(root, GENERATED_IMAGE_REGISTRY_REL);
+  const existingRegistry = readJson(root, GENERATED_IMAGE_REGISTRY_REL, generatedEnvelope([]));
   const assets = readGeneratedImageRecords(root);
   const replaced = assets.filter((item) => item.assetId === normalizedRecord.assetId || item.imageUrl === normalizedRecord.imageUrl);
   const staleCreditFiles = new Set(
@@ -264,7 +274,9 @@ export function appendGeneratedImageRecord(root, record) {
   const creditFile = photoCredit ? imageCreditFileForGeneratedImageRecord(root, normalizedRecord) : null;
   const next = assets.filter((item) => item.assetId !== normalizedRecord.assetId && item.imageUrl !== normalizedRecord.imageUrl);
   next.push(normalizedRecord);
-  writeJsonAtomic(absolute(root, GENERATED_IMAGE_REGISTRY_REL), generatedEnvelope(next));
+  writeJsonAtomic(registryPath, generatedEnvelope(next, {
+    legacyVision: existingRegistry?.legacyVision,
+  }));
   for (const staleCreditFile of staleCreditFiles) {
     if (staleCreditFile !== creditFile) fs.rmSync(staleCreditFile, { force: true });
   }
