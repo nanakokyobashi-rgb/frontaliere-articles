@@ -183,6 +183,9 @@ export const AI_MODELS = Object.freeze({
   OR_TRINITY:       'openrouter/arcee-ai/trinity-large-preview:free',
   OR_DEEPSEEK_R1Z:  'openrouter/deepseek/deepseek-r1-zero:free',
   OR_MISTRAL_NEMO:  'openrouter/mistralai/mistral-nemo:free',
+  // OR_NV_NEMOTRON_120B retired — the underlying Nemotron 3 Super 120B route
+  // is stale after NVIDIA's 2026-10-03 end-of-life. Keep the historical id in
+  // the catalog for score/ledger compatibility, but never offer it actively.
   OR_NV_NEMOTRON_120B: 'openrouter/nvidia/nemotron-3-super-120b-a12b:free',
   OR_QWEN3_NEXT_80B:   'openrouter/qwen/qwen3-next-80b-a3b-instruct:free',
   OR_STEPFUN_FLASH:    'openrouter/stepfun/step-3.5-flash:free',
@@ -239,9 +242,9 @@ export const AI_MODELS = Object.freeze({
   // NV_NEMOTRON_70B removed — NVIDIA NIM HTTP 404 "Not Found for account" (2026-06-15, run 27544487773). No longer served on this NVIDIA account; was already out of DEFAULT_CHAIN (see "NV_NEMOTRON_70B removed" comment in the chain). The bare-"nemotron" token in NVIDIA_ALLOW_FAMILY_RE was re-injecting it via discovery, so a dead static id here is moot, but removing it keeps the catalog honest.
   // NV_NEMOTRON_49B removed — NVIDIA NIM HTTP 404 "Not Found for account" (2026-06-15, run 27544487773). No longer served on this NVIDIA account. Dropped from DEFAULT_CHAIN in the same change.
   // NV_PHI_3_MINI removed — NVIDIA NIM HTTP 404 "404 page not found" (2026-05-18)
-  // Live fallback observed answering article-sized prompts on 2026-09-10/11.
-  // Keep one static NVIDIA pin: discovery is best-effort and its catalog has no
-  // context field, while the provider-wide pre-flight cap still protects it.
+  // NV_NEMOTRON_SUPER retired — NVIDIA NIM returns HTTP 410: the model reached
+  // end of life on 2026-10-03. Keep the historical pin for score/ledger
+  // compatibility; it must not be part of the active generation chain.
   NV_NEMOTRON_SUPER:    'nvidia/nvidia/nemotron-3-super-120b-a12b',
   // Fact-check verifiers (2026-09-25). The two NVIDIA ids with the best record
   // in the runs of 2026-09-24/25 — nemotron-3-ultra 33 ok / 1 ko on run
@@ -423,7 +426,7 @@ export const DEFAULT_CHAIN = [
   AI_MODELS.GPT4O_MINI,           // 9.  OpenAI fast             (GitHub Models)
   // AI_MODELS.GPT_5_CHAT removed — GitHub Models HTTP 400 "unavailable_model" (2026-05-18)
   AI_MODELS.GROQ_GPT_OSS_120B,  // 10. GPT-OSS 120B          (Groq - ultra fast)
-  AI_MODELS.NV_NEMOTRON_SUPER,  // live NVIDIA fallback        (article-sized prompts)
+  // AI_MODELS.NV_NEMOTRON_SUPER removed — NVIDIA NIM HTTP 410 (EOL 2026-10-03)
   AI_MODELS.GPT_4_1_MINI,       // 11. GPT 4.1 Mini           (GitHub Models)
   AI_MODELS.LLAMA_3_3_70B,      // 12. Meta 70B               (GitHub Models)
   AI_MODELS.LLAMA_4_SCOUT,      // 13. Meta Llama 4 Scout     (GitHub Models)
@@ -526,7 +529,6 @@ export const DEFAULT_CHAIN = [
   // HF_MISTRAL_7B removed — HuggingFace HTTP 400 "not a chat model" (2026-04)
   // HF_ZEPHYR_7B removed — HuggingFace HTTP 400 "not supported by any provider" (2026-04)
   // ── Extended capacity: new OpenRouter free models (200 req/day each) ──
-  AI_MODELS.OR_NV_NEMOTRON_120B, // 74. NVIDIA Nemotron 120B   (OpenRouter free)
   AI_MODELS.OR_QWEN3_NEXT_80B,   // 75. Qwen3 Next 80B         (OpenRouter free)
   AI_MODELS.OR_STEPFUN_FLASH,    // 76. StepFun 3.5 Flash       (OpenRouter free)
   AI_MODELS.OR_NV_NEMOTRON_30B,  // 77. NVIDIA Nemotron 30B    (OpenRouter free)
@@ -3466,11 +3468,19 @@ const NVIDIA_SPECIALISED_RE = /vision|\bcode\b|codegemma|codellama|starcoder/i;
 // allowlist lets them through and discovery re-injects them every run; per-run
 // exhaustion only skips them AFTER the first wasted 404, then they return next
 // run. Deny up-front. Scoped tightly to the observed-dead sizes so live siblings
-// (e.g. nvidia/nemotron-3-super-120b-a12b, nvidia/llama-3.3-nemotron-super-49b-v1,
-// nemotron-3.5-content-safety, and non-nemotron meta/llama-3.1-70b-instruct) keep flowing. If NVIDIA later serves
-// these to the account, drop the relevant alternation (one-liner) — same
-// maintenance pattern as the allowlist above.
-const NVIDIA_DEAD_RE = /nemotron-4-340b|nemotron-nano-3-30b|llama-3\.1-nemotron-(?:ultra-253b|70b|51b)|(?:^|\/)llama-3\.1-8b-instruct$|(?:^|\/)mistral-small-4-119b-2603$|(?:^|\/)nemotron-nano-9b-v2$/i;
+// (e.g. nvidia/llama-3.3-nemotron-super-49b-v1, nemotron-3.5-content-safety,
+// and non-nemotron meta/llama-3.1-70b-instruct) keep flowing. Nemotron Super
+// 120B is denied separately because NVIDIA marked that model EOL on 2026-10-03;
+// both its full id and the shorter `nemotron-3-super` discovery alias are
+// covered. If a denied model becomes available again, drop its alternation
+// (one-liner) — the same maintenance pattern as the allowlist above.
+const NVIDIA_DEAD_RE = /nemotron-4-340b|nemotron-nano-3-30b|(?:^|\/)nemotron-3-super(?:-120b-a12b)?(?::free)?$|llama-3\.1-nemotron-(?:ultra-253b|70b|51b)|(?:^|\/)llama-3\.1-8b-instruct$|(?:^|\/)mistral-small-4-119b-2603$|(?:^|\/)nemotron-nano-9b-v2$/i;
+
+// OpenRouter exposes the same retired Nemotron 3 Super 120B family under
+// separate `:free` routes (the short family alias and the full model id). Deny
+// them before the generic free-model picker can re-inject the stale mirror into
+// DEFAULT_CHAIN.
+const OPENROUTER_DEAD_RE = /(?:^|\/)nvidia\/nemotron-3-super(?:-120b-a12b)?:free$/i;
 
 // Exported for unit testing provider `pick`/alias matching (issue #892).
 // Le voci di Cerebras, Mistral, SambaNova, Together e Fireworks restano (e
@@ -3487,6 +3497,7 @@ export const DISCOVERY_PROVIDERS = Object.freeze([
     pick(m) {
       const id = m?.id;
       if (!id || !id.endsWith(':free')) return null;
+      if (OPENROUTER_DEAD_RE.test(id)) return null;
       // Skip tiny models — not useful for translation/article generation
       if ((m.context_length || 0) < MIN_DISCOVERY_CONTEXT_TOKENS) return null;
       return id;
@@ -3810,13 +3821,16 @@ export function prunedStaleModels() {
  * verbatim. If only `m.id` were collected, the `-latest` chain entries would be
  * absent from offeredIds and the markStale loop would pre-exhaust them for the
  * whole UTC day even though they are live — shortening the chain and degrading
- * generation availability. Collecting aliases keeps the match robust.
+ * generation availability. Collecting aliases keeps the match robust, while
+ * sending each alias through the same `cfg.pick` filter keeps a rejected model
+ * from re-entering through a provider-supplied alias.
  *
  * Groq/Cerebras echo their ids verbatim as `m.id` (no alias layer), so for those
  * the alias pass is a harmless no-op (`m.aliases` undefined).
  *
- * Aliases are only registered for models that already pass `cfg.pick` — an alias
- * never resurrects a model the filter rejected (non-chat, too small, inactive).
+ * Aliases are only registered after the alias itself passes `cfg.pick` — an
+ * alias never resurrects a model the filter rejected (non-chat, too small,
+ * inactive, or explicitly retired).
  * Exported for unit testing the id-match cases.
  */
 export function collectOfferedIds(cfg, list) {
@@ -3827,10 +3841,15 @@ export function collectOfferedIds(cfg, list) {
     offeredIds.add(id);
     // Register aliases (Mistral `-latest` tags) so a live model surfaced only
     // via aliases[] isn't treated as decommissioned by the markStale loop.
+    // Re-run the provider picker with the alias as the model id: otherwise a
+    // dead NVIDIA/OpenRouter id can bypass the deny-list by arriving in
+    // aliases[] on an otherwise accepted model.
     const aliases = m?.aliases;
     if (Array.isArray(aliases)) {
       for (const alias of aliases) {
-        if (typeof alias === 'string' && alias) offeredIds.add(alias);
+        if (typeof alias !== 'string' || !alias) continue;
+        const aliasId = cfg.pick({ ...m, id: alias, name: alias });
+        if (aliasId) offeredIds.add(aliasId);
       }
     }
   }

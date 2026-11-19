@@ -190,13 +190,12 @@ test('the fact-check verifiers are models that answer today: Codex plus independ
   const start = SRC.indexOf('const verificationCandidates = [');
   assert.notEqual(start, -1, 'lista dei verificatori non trovata');
   const list = SRC.slice(start, SRC.indexOf('].filter(Boolean);', start));
-  const order = ['CODEX_CLI_PRIMARY', 'OR_NV_NEMOTRON_120B', 'GROQ_GPT_OSS_120B'];
+  const order = ['CODEX_CLI_PRIMARY', 'GROQ_GPT_OSS_120B'];
   const positions = order.map((key) => list.indexOf(`AI_MODELS.${key}`));
   assert.ok(positions.every((p) => p !== -1), `verificatori attesi: ${order.join(', ')}`);
   assert.deepEqual([...positions].sort((a, b) => a - b), positions, 'ordine dei verificatori cambiato');
   assert.doesNotMatch(list, /GPT_4_1|GPT4O/, 'GitHub Models e\' ritirato: non puo\' essere un verificatore');
   assert.equal(AI_MODELS.CODEX_CLI_PRIMARY, 'codex-cli/gpt-5.6-luna');
-  assert.equal(AI_MODELS.OR_NV_NEMOTRON_120B, 'openrouter/nvidia/nemotron-3-super-120b-a12b:free');
   assert.equal(AI_MODELS.GROQ_GPT_OSS_120B, 'groq/openai/gpt-oss-120b');
   assert.match(SRC, /availableVerifiers\.length >= 2 \? availableVerifiers : verificationCandidates/);
 });

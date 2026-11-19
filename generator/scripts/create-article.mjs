@@ -7337,11 +7337,10 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   // Codex Luna Max is now the first verifier. The second concurrent request
   // explicitly excludes Codex so consensus still gets an independent free
   // opinion instead of spending two subscription calls on the same answer.
-  // The independent verifier lane uses Codex plus NVIDIA models; no Google
-  // No Google credential or endpoint is needed.
+  // The independent verifier lane uses Codex plus the Groq GPT-OSS lane; no
+  // Google credential or endpoint is needed.
   const verificationCandidates = [
     AI_MODELS.CODEX_CLI_PRIMARY, // primary; broker absence falls through cleanly
-    AI_MODELS.OR_NV_NEMOTRON_120B, // OpenRouter — NVIDIA Nemotron 120B
     AI_MODELS.GROQ_GPT_OSS_120B,  // Groq — GPT-OSS 120B
   ].filter(Boolean);
   const availableVerifiers = verificationCandidates.filter((m) => isModelAvailable(m));
