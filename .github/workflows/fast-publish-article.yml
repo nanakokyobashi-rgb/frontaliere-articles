@@ -617,9 +617,10 @@ jobs:
     concurrency:
       group: fast-publish-article-${{ matrix.target.shard }}
       cancel-in-progress: false
-    # One hard budget is shared by the pre-purge observation and the recovery
-    # gate. A repo variable may shorten the first observation, but can never
-    # extend the budget that the recovery path is guaranteed to receive.
+    # The pre-purge observation and recovery gate share this hard base budget.
+    # The article-shard helper expands it to one absolute window per planned
+    # serialized commit; the later origin/recovery gates retain this 600-second
+    # cap so a large push cannot make the job unbounded.
     env:
       PAGES_BUILD_WAIT_BUDGET_SECONDS: 600
     steps:

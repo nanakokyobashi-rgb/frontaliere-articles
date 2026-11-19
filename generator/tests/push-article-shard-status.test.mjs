@@ -146,6 +146,7 @@ exec "$REAL_GIT" "$@"
     });
 
     assert.match(output, /serializing 2 path\(s\) in batches of 1/u);
+    assert.match(output, /serialized batch plan has 2 batch\(es\); Pages wait window is 1200 seconds/u);
     assert.match(output, /retry found the prior ambiguous push already at the remote tree/u);
     assert.match(output, /Pages build wait skipped for non-GitHub remote/u);
     assert.match(output, /pushed/u);
@@ -190,7 +191,7 @@ test('i batch Pages sono seriali, raggruppati e riconciliabili', () => {
   assert.match(workflow, /without a reconciled tree; refusing the article-only fallback/u);
 });
 
-test('il rollback mantiene la revisione e condivide il budget Pages fra i batch', () => {
+test('il rollback mantiene la revisione e pianifica il budget Pages per tutti i batch', () => {
   const source = readFileSync(PUSHER, 'utf8');
 
   assert.match(source, /rollback_pat_token=.*shard_push_token_for_repo\s+"\$SHARD_REPO"/u);
@@ -206,6 +207,9 @@ test('il rollback mantiene la revisione e condivide il budget Pages fra i batch'
   assert.match(source, /export ARTICLE_PUSH_PAGES_DEADLINE="\$article_push_pages_deadline"/u);
   assert.match(source, /ARTICLE_PUSH_PAGES_DEADLINE="\$article_push_pages_deadline"[\s\\\n]+ARTICLE_PUSH_STATUS_FILE/u);
   assert.match(source, /serialized_batch_deadline_available[\s\S]{0,700}reconciling published batches/u);
+  assert.match(source, /planned_batch_count=0/u);
+  assert.match(source, /article_push_pages_wait_seconds \* planned_batch_count/u);
+  assert.match(source, /export ARTICLE_PUSH_PAGES_DEADLINE="\$article_push_pages_deadline"/u);
   assert.match(source, /wait_for_pages_build "\$rollback_commit" "\$rollback_deadline"/u);
   assert.doesNotMatch(source, /deadline=\$\(\(SECONDS \+ article_push_pages_wait_seconds\)\)/u);
 });

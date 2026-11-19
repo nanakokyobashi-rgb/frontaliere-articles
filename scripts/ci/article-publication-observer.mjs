@@ -11,9 +11,9 @@
  * image. The network loop is deliberately sequential and rate-limited because
  * this is a courtesy check, not a crawler. Degraded articles are kept in the
  * observer issue body until a live read is sane; at most three proven image
- * repairs and a bounded set of stale-but-readable page retries are dispatched
- * per run. Stale page repairs use the article-only publisher path and share the
- * same bounded fan-out.
+ * repairs and up to 32 stale-but-readable page retries are dispatched per run.
+ * Stale page repairs use the article-only publisher path and share the same
+ * bounded fan-out.
  * Unpreparable targets with publication metadata are kept as durable coverage
  * blockers in the same stable issue until they can be observed. A body-only
  * legacy residue has no publication intent and is not an observer target.
@@ -61,6 +61,10 @@ export const DEFAULT_FETCH_TIMEOUT_MS = 15_000;
 export const DEFAULT_SCAN_TIMEOUT_MS = 20 * 60 * 1000;
 export const DEFAULT_LEDGER_RETENTION_DAYS = 90;
 export const DEFAULT_TERMINAL_RETENTION_DAYS = 14;
+// Image repairs rebuild aggregate surfaces and retain the smaller cap from the
+// image ledger. Publication retries are article-only and can converge a stale
+// backlog in bounded waves without coupling their throughput to image repair.
+export const DEFAULT_LAG_REPAIR_CAP = 32;
 // The shared issue reporter transports its description through a `gh` argv
 // value. Keep the observer-specific report well below the runner's combined
 // argv/environment budget; the complete report still goes to the step summary.
@@ -1113,7 +1117,7 @@ export async function runObserver({
   fetchDeclaredImageImpl = fetchDeclaredImage,
   githubClient = null,
   repairCap = DEFAULT_REPAIR_CAP,
-  lagRepairCap = repairCap,
+  lagRepairCap = DEFAULT_LAG_REPAIR_CAP,
   maxPages = DEFAULT_MAX_PAGES,
   minIntervalMs = DEFAULT_MIN_INTERVAL_MS,
   fetchTimeoutMs = DEFAULT_FETCH_TIMEOUT_MS,

@@ -88,11 +88,12 @@
 #   ARTICLE_PUSH_SKIPPED_PATHS_FILE — optional file receiving one relative path
 #       per line when the monotonic guard keeps a newer remote publication;
 #       when set, failure to reset or write this metadata fails the push.
-#   ARTICLE_PUSH_PAGES_WAIT_SECONDS — total Pages-wait budget shared by the
-#       serialized batches in this invocation; defaults to
-#       PAGES_BUILD_WAIT_BUDGET_SECONDS, then 600 when run standalone. A
-#       reconciliation gets one bounded wait of its own so the safety rollback
-#       is not prevented by an exhausted publication budget.
+#   ARTICLE_PUSH_PAGES_WAIT_SECONDS — base Pages-wait window for each
+#       serialized commit; the top-level coordinator multiplies it by the
+#       planned batch count. Defaults to PAGES_BUILD_WAIT_BUDGET_SECONDS, then
+#       600 when run standalone. A reconciliation gets one bounded wait of its
+#       own so the safety rollback is not prevented by an exhausted publication
+#       budget.
 #
 # Exit codes:
 #   0 — pushed, or a clean no-op (identical content already live, or the
@@ -135,6 +136,7 @@ if ! [[ "$article_push_pages_wait_seconds" =~ ^[1-9][0-9]*$ ]]; then
   echo "::error::ARTICLE_PUSH_PAGES_WAIT_SECONDS must be a positive integer" >&2
   exit 1
 fi
+article_push_pages_deadline_explicit=0
 article_push_pages_deadline="${ARTICLE_PUSH_PAGES_DEADLINE:-}"
 if [ -z "$article_push_pages_deadline" ]; then
   article_push_pages_now="$(date +%s)" || {
@@ -149,10 +151,13 @@ if [ -z "$article_push_pages_deadline" ]; then
 elif ! [[ "$article_push_pages_deadline" =~ ^[0-9]+$ ]]; then
   echo "::error::ARTICLE_PUSH_PAGES_DEADLINE must be a Unix timestamp" >&2
   exit 1
+else
+  article_push_pages_deadline_explicit=1
 fi
 # Nested bounded invocations are separate Bash processes: exporting an absolute
-# wall-clock deadline, rather than `SECONDS`, keeps every child on the same
-# budget instead of starting a fresh wait window for every batch.
+# wall-clock deadline, rather than `SECONDS`, keeps every child on the deadline
+# planned by the coordinator instead of starting a fresh wait window for every
+# batch.
 export ARTICLE_PUSH_PAGES_DEADLINE="$article_push_pages_deadline"
 article_push_pages_poll_seconds="${ARTICLE_PUSH_PAGES_POLL_SECONDS:-5}"
 if ! [[ "$article_push_pages_poll_seconds" =~ ^[1-9][0-9]*$ ]]; then
@@ -928,6 +933,7 @@ run_serialized_batches() {
   local -a serialized_group_paths=()
   local -a serialized_commits=()
   local serialized_base_commit='' serialized_metadata_ok=1 serialized_chain_ok=1
+  local planned_batch_count=0 planned_batch_path_count=0 planned_batch_wait_seconds
 
   batch_root="$(mktemp -d "$RUNNER_TEMP/article-shard-batches.XXXXXX")" || {
     echo "::error::unable to create the serialized article-push batch directory" >&2
@@ -979,6 +985,56 @@ run_serialized_batches() {
     rm -rf "$batch_root"
     return 1
   }
+
+  # Pages builds are serialized deliberately, so one 600-second window cannot
+  # cover a corpus-sized render split across several commits. Count the exact
+  # dependency-aware batches first, then give the whole chain one absolute
+  # deadline with one base window per planned commit. Nested invocations keep
+  # this deadline unchanged.
+  planned_batch_count=0
+  planned_batch_path_count=0
+  for group_index in "${!serialized_group_paths[@]}"; do
+    group_size=0
+    while IFS= read -r group_path; do
+      [ -n "$group_path" ] || continue
+      group_size=$((group_size + 1))
+    done <<< "${serialized_group_paths[$group_index]}"
+    if [ "$group_size" -gt "$article_push_batch_size" ]; then
+      serialized_batch_failure "dependency group '${serialized_group_keys[$group_index]}' has $group_size path(s), above ARTICLE_PUSH_BATCH_SIZE=$article_push_batch_size"
+      return $?
+    fi
+    if [ "$planned_batch_path_count" -gt 0 ] && [ $((planned_batch_path_count + group_size)) -gt "$article_push_batch_size" ]; then
+      planned_batch_count=$((planned_batch_count + 1))
+      planned_batch_path_count=0
+    fi
+    planned_batch_path_count=$((planned_batch_path_count + group_size))
+    if [ "$planned_batch_path_count" -ge "$article_push_batch_size" ]; then
+      planned_batch_count=$((planned_batch_count + 1))
+      planned_batch_path_count=0
+    fi
+  done
+  if [ "$planned_batch_path_count" -gt 0 ]; then
+    planned_batch_count=$((planned_batch_count + 1))
+  fi
+  if [ "$planned_batch_count" -le 0 ]; then
+    serialized_batch_failure 'serialized article-push batch planning produced no batches'
+    return $?
+  fi
+  planned_batch_wait_seconds="$article_push_pages_wait_seconds"
+  if [ "$article_push_pages_deadline_explicit" != '1' ]; then
+    planned_batch_wait_seconds=$((article_push_pages_wait_seconds * planned_batch_count))
+    article_push_pages_now="$(date +%s)" || {
+      serialized_batch_failure 'cannot establish the serialized Pages-wait deadline'
+      return $?
+    }
+    if ! [[ "$article_push_pages_now" =~ ^[0-9]+$ ]]; then
+      serialized_batch_failure 'the serialized Pages-wait clock is unreadable'
+      return $?
+    fi
+    article_push_pages_deadline=$((article_push_pages_now + planned_batch_wait_seconds))
+    export ARTICLE_PUSH_PAGES_DEADLINE="$article_push_pages_deadline"
+  fi
+  echo "$section-$loc article shard: serialized batch plan has $planned_batch_count batch(es); Pages wait window is ${planned_batch_wait_seconds} seconds"
 
   serialized_batch_deadline_available() {
     local current_epoch remaining
