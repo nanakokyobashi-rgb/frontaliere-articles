@@ -148,8 +148,9 @@ test('nessun nome della coppia storica resta cablato nelle righe eseguibili del 
     'il core non copia la prosa della sorgente e mantiene solo la direttiva lint necessaria',
   );
   for (const literal of ['generate-article.yml', 'blog-body']) {
-    assert.ok(!jobs.includes(literal), `«${literal}» e' ancora nel core`);
+    assert.ok(!jobs.replace(/^\s*BODY_MAINTENANCE_PATH_RE: .*$/m, '').includes(literal), `«${literal}» e' ancora nel core`);
   }
+  assert.equal(jobs.match(/^ +BODY_MAINTENANCE_PATH_RE: .*$/m)?.[0], SOURCE.match(/^ +BODY_MAINTENANCE_PATH_RE: .*$/m)?.[0]);
   assert.ok(CORE_FORBIDDEN_LITERALS.includes('svizzera') && CORE_FORBIDDEN_LITERALS.includes('frontaliere'));
   // Il generatore rifiuta una sorgente che reintroduce un nome cablato.
   const tainted = SOURCE.replace('          echo "event=$EV chain=$CHAIN', '          [ "$SEC" = "svizzera" ] && true\n          echo "event=$EV chain=$CHAIN');
@@ -384,6 +385,7 @@ esac
         REPO: 'owner/repo', SELF_ID: '4242', EVENT_NAME: 'push',
         PUSH_BEFORE: 'before', PUSH_SHA: 'after', CHAIN_DEPTH: '0', PARENT_RUN_ID: '',
         CHAIN_MAX_RUNS_PER_HOUR: '', CALLER_WORKFLOW: caller,
+        BODY_MAINTENANCE_PATH_RE: SOURCE.match(/^\s+BODY_MAINTENANCE_PATH_RE: '([^']+)'$/m)[1],
       },
     });
     return { status: res.status, stdout: res.stdout, outputs: readOutputs(path.join(dir, 'out')) };

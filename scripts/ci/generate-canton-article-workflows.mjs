@@ -251,10 +251,8 @@ export const CORE_REPLACEMENTS = [
   {
     id: 'admit: il nome del chiamante arriva per env',
     count: 1,
-    find: '          CHAIN_MAX_RUNS_PER_HOUR: ${{ vars.CHAIN_MAX_RUNS_PER_HOUR }}\n'
-      + '          CALLER_WORKFLOW: generate-article.yml\n',
-    replace: '          CHAIN_MAX_RUNS_PER_HOUR: ${{ vars.CHAIN_MAX_RUNS_PER_HOUR }}\n'
-      + '          CALLER_WORKFLOW: ${{ inputs.caller_workflow }}\n',
+    find: '          CALLER_WORKFLOW: generate-article.yml\n',
+    replace: '          CALLER_WORKFLOW: ${{ inputs.caller_workflow }}\n',
   },
   {
     id: 'admit: il permesso OIDC resta solo nel workflow principale',
@@ -717,6 +715,8 @@ export function buildCoreWorkflow(source) {
   for (const literal of CORE_FORBIDDEN_LITERALS) {
     // Il job `section_gate` e' testo di questo file, non della sorgente.
     const leftover = jobs.replace(SECTION_GATE_JOB, '').split('\n').filter((l) => l.includes(literal)
+      // La manutenzione va riconosciuta anche quando il push tocca più sezioni.
+      && !(literal === 'blog-body' && /^\s*BODY_MAINTENANCE_PATH_RE: /.test(l))
       // I messaggi di log e di errore nominano le sezioni storiche e il
       // workflow come esempi: sono testo per chi legge, non logica.
       && !/^\s*(echo |\[ -n "\$undeclared_why" \]|stop )/.test(l)

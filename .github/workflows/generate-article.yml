@@ -368,6 +368,10 @@ jobs:
       run_mode: ${{ steps.check.outputs.run_mode }}
     steps:
       # The bounded one-hour run snapshot is the retry deduplication window.
+      # Follow the Actions pagination links because total_count can diverge.
+      # Edits to existing bodies alone cannot feed the generation chain.
+      # Runs beyond the wedge threshold may still be healthy. An admitted
+      # successor waits for the production concurrency group in that case.
       - name: Skip when a generation is already in flight
         id: check
         env:
@@ -383,6 +387,7 @@ jobs:
           PARENT_RUN_ID: ${{ inputs.parent_run_id }}
           CHAIN_MAX_RUNS_PER_HOUR: ${{ vars.CHAIN_MAX_RUNS_PER_HOUR }}
           CALLER_WORKFLOW: generate-article.yml
+          BODY_MAINTENANCE_PATH_RE: '^content/blog-body(-[a-z0-9-]+)?/(it|de|en|fr)/[^/]+[.]ts$'
           DRY_RUN: ${{ inputs.dry_run }}
           SECTION_REQUESTED: ${{ inputs.section }}
           SOURCE_URL: ${{ inputs.url }}
@@ -749,6 +754,16 @@ jobs:
                 echo "::warning title=Confronto push non disponibile::gh api compare non ha restituito tutti i file del push (status $compare_status); il push resta un successore non classificato per non perdere un articolo."
               fi
             else
+              if jq -e --arg body_path_re "$BODY_MAINTENANCE_PATH_RE" '
+                [.[]?.files[]?] | length > 0 and all(.[];
+                  .status == "modified"
+                  and (.filename | test($body_path_re)))
+              ' <<<"$compare_payload" >/dev/null 2>&1; then
+                echo "Push di sola manutenzione dei body esistenti: slot di generazione libero."
+                echo "proceed=false" >> "$GITHUB_OUTPUT"
+                echo "GENERATION_OUTCOME kind=skipped reason=admit-body-maintenance section=unknown"
+                exit 0
+              fi
               content_push=false
               while IFS= read -r changed_path; do
                 case "$changed_path" in
@@ -813,8 +828,6 @@ jobs:
             2>/dev/null)"; then
             fail_closed_admission
           fi
-          # gh segue i link di paginazione. Il totale della ricerca Actions può
-          # divergere dal numero di run restituite.
           if ! runs="$(jq -c --argjson known "$ALL_RUN_STATUSES" --argjson known_conclusions "$KNOWN_RUN_CONCLUSIONS" --arg since "$admission_since" '
             . as $pages
             | if (type == "array" and length > 0)
@@ -987,7 +1000,7 @@ jobs:
             fail_closed_admission
           fi
           if [ -n "${stale:-}" ]; then
-            echo "::warning title=Run in volo oltre la soglia::Run piu' vecchie in volo da oltre ${WEDGE_SECONDS}s, NON piu' bloccanti per l'ammissione: ${stale}. Di norma sono incastrate, ma lo 0,91% delle run sane supera questa soglia: in quel caso il successore aspetta in coda senza disturbarle."
+            echo "::warning title=Run potenzialmente incastrate::Oltre ${WEDGE_SECONDS}s, ammissione consentita: ${stale}"
           fi
           case "${older:-}" in
             ''|*[!0-9]*) older=0 ;;
