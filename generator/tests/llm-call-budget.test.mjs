@@ -539,16 +539,36 @@ test('④ la fase immagini usa un solo percorso governato e controlla il budget'
   assert.match(CODE, /_articleRunDeadlineMs = RUN_START_MS \+ RUN_WALL_BUDGET_MS;/);
   assert.match(img.text, /ARTICLE_COVER_FALLBACK_ERROR_CODES\.VERIFICATION_UNAVAILABLE/);
   assert.match(COVER_ENGINE, /deadlineAt/);
-  const imagePhaseStart = CODE.indexOf('const imageDeadlineAt = getArticleImageDeadlineAt();');
+  const imagePhaseStart = CODE.indexOf('const { generationDeadlineAt, catalogDeadlineAt } = getArticleImageDeadlines();');
   const imagePhaseEnd = CODE.indexOf('delete data._imageGenerationFailureReason;', imagePhaseStart);
   assert.ok(imagePhaseStart >= 0 && imagePhaseEnd > imagePhaseStart, 'il confine della fase immagini non e\' piu\' leggibile');
   const imagePhase = CODE.slice(imagePhaseStart, imagePhaseEnd);
-  assert.match(imagePhase, /generateArticleImage\(data, \{ area: imageArea, deadlineAt: imageDeadlineAt \}\)/);
-  assert.match(imagePhase, /verifyCatalogFallbackCandidates\(data, \{[\s\S]*?area: imageArea,[\s\S]*?deadlineAt: imageDeadlineAt,/);
-  assert.equal((imagePhase.match(/getArticleImageDeadlineAt\(\)/g) || []).length, 1,
-    'il fallback deve riusare la stessa deadline globale dopo il tentativo engine');
+  assert.match(imagePhase, /generateArticleImage\(data, \{ area: imageArea, deadlineAt: generationDeadlineAt \}\)/);
+  assert.match(imagePhase, /verifyCatalogFallbackCandidates\(data, \{[\s\S]*?area: imageArea,[\s\S]*?deadlineAt: catalogDeadlineAt,/);
+  assert.equal((imagePhase.match(/getArticleImageDeadlines\(\)/g) || []).length, 1,
+    'entrambi i limiti si calcolano a inizio fase, senza avviare un secondo timer');
   assert.match(CODE, /const IMAGE_PHASE_BUDGET_MS = Math\.max\(/);
   assert.match(CODE, /Math\.min\(120_000/);
+});
+
+test('la verifica della copertina di catalogo conserva tempo entro la deadline del processo', () => {
+  const phase = extractBlock('export function getArticleImageDeadlineAt(').text.replace(/^export /, '');
+  const split = extractBlock('function getArticleImageDeadlines(').text;
+  const getDeadlines = new Function('IMAGE_PHASE_BUDGET_MS', '_articleRunDeadlineMs',
+    `${phase}\n${split}\nreturn getArticleImageDeadlines;`);
+  const now = 1_000_000;
+  assert.deepEqual(getDeadlines(120_000, now + 240_000)(now), {
+    generationDeadlineAt: now + 120_000,
+    catalogDeadlineAt: now + 180_000,
+  });
+  assert.deepEqual(getDeadlines(120_000, now + 45_000)(now), {
+    generationDeadlineAt: now + 30_000,
+    catalogDeadlineAt: now + 45_000,
+  });
+  assert.deepEqual(getDeadlines(120_000, now - 1)(now), {
+    generationDeadlineAt: now - 1,
+    catalogDeadlineAt: now - 1,
+  });
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
