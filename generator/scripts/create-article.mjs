@@ -17110,6 +17110,15 @@ async function translateArticle(data) {
           factSequence.push({ type: 'number', value: entry.value });
         }
       }
+      // A comma inside a parsed number is a locale-specific separator, not
+      // a clause boundary. Keep the same label span after e.g. 12,50 → 12.50.
+      const numericCommas = new Set();
+      for (const { index, end } of numberEntries) {
+        for (let comma = value.indexOf(',', index); comma !== -1 && comma < end; comma = value.indexOf(',', comma + 1)) {
+          numericCommas.add(comma);
+        }
+      }
+      const isAssociationBoundary = (index) => spanBoundary(value[index]) && !numericCommas.has(index);
       const associations = numberEntries.map(({
         value: number,
         index,
@@ -17119,9 +17128,9 @@ async function translateArticle(data) {
         calendarFact,
       }) => {
         let start = index;
-        while (start > 0 && !spanBoundary(value[start - 1])) start -= 1;
+        while (start > 0 && !isAssociationBoundary(start - 1)) start -= 1;
         let end = index;
-        while (end < value.length && !spanBoundary(value[end])) end += 1;
+        while (end < value.length && !isAssociationBoundary(end)) end += 1;
         const span = value.slice(start, end);
         const numberRanges = numberEntries
           .filter((entry) => entry.index >= start && entry.end <= end)
