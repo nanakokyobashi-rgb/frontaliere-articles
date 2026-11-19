@@ -1371,3 +1371,33 @@ test('titoli di template: la bonifica (`translateWithCodexEngine`) manda la rego
   assert.equal(seen.length, 1);
   assert.ok(systemOf(seen[0]).includes(templateRule('de')));
 });
+
+test('initial translation and its transport retries leave calls for body recovery', async () => {
+  process.env.FREE_TRANSLATE_CODEX_MAX_CALLS = '5';
+  setCodexTranslateProcessDeadline(Date.now() + 200_000, { recoveryReserveCalls: 6 });
+  try {
+    const calls = stubCodex(`CODEX ${EN}`);
+    for (let i = 0; i < 3; i++) {
+      const prior = beginCodexTranslationCall();
+      assert.ok(prior);
+      prior.finish();
+    }
+
+    await it();
+    assert.equal(calls.length, 1);
+    assert.equal(calls[0].opts.onCodexTransportRetry(), false);
+    await it(`${IT} Numero 91.`);
+    assert.equal(calls.length, 1);
+    assert.equal(getCascadeStats().codexTranslation.stopReason, '');
+
+    const recovery = beginCodexTranslationCall();
+    assert.ok(recovery);
+    recovery.finish();
+    assert.equal(getCascadeStats().codexTranslation.calls, 5);
+    assert.equal(beginCodexTranslationCall(), null);
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
+    setCodexTranslateProcessDeadline(null);
+    setCodexTranslateCallForTests(null);
+  }
+});

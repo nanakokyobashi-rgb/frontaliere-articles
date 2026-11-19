@@ -2284,6 +2284,7 @@ function codexTranslateCallTimeoutMs() {
 // con l'articolo IT pronto: `hard-killed after 657s on section frontaliere`.
 let _codexProcessDeadlineMs = null;
 let _codexRecoveryReserveMs = 0;
+let _codexRecoveryReserveCalls = 0;
 
 /**
  * create-article (o un altro processo con un tetto di durata) dichiara qui la
@@ -2291,10 +2292,12 @@ let _codexRecoveryReserveMs = 0;
  * almeno CODEX_TRANSLATE_MIN_CALL_MS prima di quella scadenza, e la deadline
  * di ogni chiamata e' limitata a essa. Un valore non finito o <= 0 la toglie.
  */
-export function setCodexTranslateProcessDeadline(deadlineMs, { recoveryReserveMs = 0 } = {}) {
+export function setCodexTranslateProcessDeadline(deadlineMs, { recoveryReserveMs = 0, recoveryReserveCalls = 0 } = {}) {
   const value = Number(deadlineMs);
   _codexProcessDeadlineMs = deadlineMs !== null && Number.isFinite(value) && value > 0 ? value : null;
   _codexRecoveryReserveMs = _codexProcessDeadlineMs === null ? 0 : recoveryReserveMs;
+  _codexRecoveryReserveCalls = _codexProcessDeadlineMs !== null
+    && Number.isSafeInteger(recoveryReserveCalls) && recoveryReserveCalls > 0 ? recoveryReserveCalls : 0;
 }
 
 /**
@@ -2752,12 +2755,18 @@ export function flushCodexCollectionTimer() {
   return true;
 }
 
+function _codexInitialCallBudgetAvailable(maxCalls = _codexBudget('FREE_TRANSLATE_CODEX_MAX_CALLS', CODEX_TRANSLATE_MAX_CALLS_DEFAULT)) {
+  const reserve = Math.min(_codexRecoveryReserveCalls, Math.floor(maxCalls / 5));
+  return reserve === 0 || _codexCalls < maxCalls - reserve;
+}
+
 /**
  * Riserva un solo retry fisico, senza aprire una seconda corsia temporale.
  * `callDeadlineMs` e' la deadline gia' concessa alla chiamata che ha fallito:
  * un retry non puo' allungarla solo perche' il processo ha ancora margine.
  */
-function _reserveCodexTransportRetry(processDeadlineMs = _codexProcessDeadlineMs, callDeadlineMs = null) {
+function _reserveCodexTransportRetry(processDeadlineMs = _codexProcessDeadlineMs, callDeadlineMs = null, initialLane = false) {
+  if (initialLane && !_codexInitialCallBudgetAvailable()) return false;
   const admission = _admitCodexTranslationCall({
     processDeadlineMs: callDeadlineMs ?? processDeadlineMs,
     trackInFlight: false,
@@ -2953,6 +2962,7 @@ async function _translateGroupWithCodex(group) {
   // precedenti consuma proprio la finestra del processo.
   // Preserve part of the shared budget for the explicit article body recovery
   // lane. Falling back here must not trip its shared circuit breaker.
+  if (!_codexInitialCallBudgetAvailable(maxCalls)) return none();
   const recoveryReserveMs = Math.min(_codexRecoveryReserveMs, Math.floor(maxMs / 5));
   const initialRemainingMs = remainingMs - recoveryReserveMs;
   if (initialRemainingMs < CODEX_TRANSLATE_MIN_CALL_MS) return none();
@@ -2993,7 +3003,7 @@ async function _translateGroupWithCodex(group) {
     // The first attempt is admitted above. ai-models.mjs calls this hook only
     // immediately before a physical transport retry, so every broker attempt
     // consumes the same shared ledger without reserving retries that never run.
-    onCodexTransportRetry: (retryDeadlineMs) => _reserveCodexTransportRetry(_codexProcessDeadlineMs, retryDeadlineMs),
+    onCodexTransportRetry: (retryDeadlineMs) => _reserveCodexTransportRetry(_codexProcessDeadlineMs, retryDeadlineMs, true),
   };
   let byText;
   try {

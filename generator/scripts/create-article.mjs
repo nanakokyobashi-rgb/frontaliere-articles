@@ -20999,6 +20999,7 @@ function installCodexTranslateProcessDeadline() {
   _articleRunDeadlineMs = RUN_START_MS + RUN_WALL_BUDGET_MS;
   setCodexTranslateProcessDeadline(RUN_START_MS + RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS, {
     recoveryReserveMs: 120_000,
+    recoveryReserveCalls: 6,
   });
   // Stessa scadenza per la seconda corsia dei body in attesa, che si arma
   // solo qui: vedi `translatePendingBodyWithCodex`.
