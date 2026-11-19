@@ -1239,6 +1239,29 @@ test('il budget Codex predefinito resta di 15 minuti per i chiamanti generali', 
   }
 });
 
+test('la cascata iniziale lascia spendibile la riserva Codex per il recupero', async () => {
+  process.env.FREE_TRANSLATE_CODEX_MAX_MS = '100000';
+  setCodexTranslateProcessDeadline(Date.now() + 200_000, { recoveryReserveMs: 120_000 });
+  try {
+    const calls = stubCodex(`CODEX ${EN}`);
+    const now = Date.now();
+    const prior = beginCodexTranslationCall({ now: now - 75_000 });
+    assert.ok(prior);
+    prior.finish(now);
+
+    await it();
+    assert.equal(calls.length, 0);
+    assert.equal(getCascadeStats().codexTranslation.stopReason, '');
+    const recovery = beginCodexTranslationCall();
+    assert.ok(recovery, 'la corsia esplicita può usare il tempo riservato');
+    recovery.finish();
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_MAX_MS;
+    setCodexTranslateProcessDeadline(null);
+    setCodexTranslateCallForTests(null);
+  }
+});
+
 test('scadenza del processo lontana: la deadline passata a Codex non la supera', async () => {
   const deadline = Date.now() + 60_000;
   setCodexTranslateProcessDeadline(deadline);
