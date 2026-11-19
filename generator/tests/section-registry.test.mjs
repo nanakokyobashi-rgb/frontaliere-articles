@@ -1721,10 +1721,21 @@ test('load-rc-env: kill-switch mappato, assente per default, marker scritto solo
   const { EXPECTED_ABSENT_RC_KEYS, RC_LOADED_MARKER } = await import('../../generator/scripts/load-rc-env.mjs');
   assert.ok(EXPECTED_ABSENT_RC_KEYS.has('CANTON_ARTICLE_SECTIONS_KILL'));
   assert.equal(RC_LOADED_MARKER, 'RC_ENV_LOADED');
-  const main = src.slice(src.indexOf('async function main()'));
-  const templateAt = main.indexOf('const paramCount');
-  const markerAt = main.indexOf('lines.push(isCI ? `${RC_LOADED_MARKER}=1`');
-  assert.ok(templateAt > 0 && markerAt > templateAt, 'il marker va scritto solo dopo aver letto il template');
+  const main = src.match(/^async function main\(\) \{\n([\s\S]*?)^\}$/m)?.[1];
+  const exporter = src.match(/^export async function exportRcEnvironment\(template\) \{\n([\s\S]*?)^\}$/m)?.[1];
+  assert.ok(main, 'funzione main assente');
+  assert.ok(exporter, 'funzione exportRcEnvironment assente');
+
+  const exportAt = main.search(/^ {2}await exportRcEnvironment\(template\);$/m);
+  const templateRead = /^ +template = (?:admin \? await admin\.remoteConfig\(\)\.getTemplate\(\) : )?await fetchTemplateViaRest\(\);$/gm;
+  const reads = [...main.matchAll(templateRead)];
+  assert.ok(reads.length > 0 && reads.every(({ index }) => index < exportAt),
+    'main deve leggere il template prima di esportarlo');
+
+  const paramCountAt = exporter.search(/^ {2}const paramCount = /m);
+  const markerAt = exporter.indexOf("lines.push(writeToGithubEnv ? `${RC_LOADED_MARKER}=1` : `export ${RC_LOADED_MARKER}='1'`);");
+  assert.ok(paramCountAt >= 0 && markerAt > paramCountAt,
+    'exportRcEnvironment deve contare i parametri prima di aggiungere il marker');
 });
 
 test('publish-api: osserva tutta la chiusura degli import del publisher, e pubblica la release edge DOPO il deploy Pages, per ultima', () => {
