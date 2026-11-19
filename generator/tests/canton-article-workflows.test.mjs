@@ -384,6 +384,7 @@ esac
         REPO: 'owner/repo', SELF_ID: '4242', EVENT_NAME: 'push',
         PUSH_BEFORE: 'before', PUSH_SHA: 'after', CHAIN_DEPTH: '0', PARENT_RUN_ID: '',
         CHAIN_MAX_RUNS_PER_HOUR: '', CALLER_WORKFLOW: caller,
+        BODY_MAINTENANCE_PATH_RE: SOURCE.match(/^\s+BODY_MAINTENANCE_PATH_RE: '([^']+)'$/m)[1],
       },
     });
     return { status: res.status, stdout: res.stdout, outputs: readOutputs(path.join(dir, 'out')) };
