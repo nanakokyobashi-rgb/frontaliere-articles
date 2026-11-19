@@ -1390,11 +1390,40 @@ test('initial translation and its transport retries leave calls for body recover
     assert.equal(calls.length, 1);
     assert.equal(getCascadeStats().codexTranslation.stopReason, '');
 
-    const recovery = beginCodexTranslationCall();
-    assert.ok(recovery);
-    recovery.finish();
+    const general = await withCodexTranslationLane({
+      run: () => 'general',
+      fallback: () => 'historical',
+    });
+    assert.equal(general, 'historical');
+    const recovery = await withCodexTranslationLane({
+      bodyRecovery: true,
+      run: () => 'body',
+    });
+    assert.equal(recovery, 'body');
     assert.equal(getCascadeStats().codexTranslation.calls, 5);
     assert.equal(beginCodexTranslationCall(), null);
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
+    setCodexTranslateProcessDeadline(null);
+    setCodexTranslateCallForTests(null);
+  }
+});
+
+test('non-body queued retries cannot spend calls set aside for body recovery', async () => {
+  process.env.FREE_TRANSLATE_CODEX_MAX_CALLS = '5';
+  setCodexTranslateProcessDeadline(Date.now() + 200_000, { recoveryReserveCalls: 6 });
+  try {
+    stubCodex(`CODEX ${EN}`);
+    for (let i = 0; i < 3; i++) beginCodexTranslationCall().finish();
+    await withCodexTranslationLane({
+      run: ({ admitCall, reserveTransportRetry }) => {
+        assert.ok(admitCall(), 'initial admission is reused');
+        assert.equal(admitCall(), null, 'another general request is refused');
+        assert.equal(reserveTransportRetry(), false);
+      },
+    });
+    assert.equal(getCascadeStats().codexTranslation.calls, 4);
+    assert.equal(getCascadeStats().codexTranslation.stopReason, '');
   } finally {
     delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
     setCodexTranslateProcessDeadline(null);

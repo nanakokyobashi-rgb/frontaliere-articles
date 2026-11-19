@@ -2382,7 +2382,7 @@ let _codexInFlight = 0;
 /** @type {Array<{clean: string, sourceLang: string, targetLang: string, outcome: any, resolve: (value: string) => void, reject: (error: unknown) => void}>} */
 let _codexPending = [];
 let _codexPumpTimer = null;
-/** @type {Array<{run: (args: {deadlineMs: number, admission: object, admitCall: () => object | null, reserveTransportRetry: (callDeadlineMs?: number | null) => boolean}) => Promise<any>, fallback: (() => any) | null, processDeadlineMs: number | null | undefined, resolve: (value: any) => void, reject: (error: unknown) => void}>} */
+/** @type {Array<{run: (args: {deadlineMs: number, admission: object, admitCall: () => object | null, reserveTransportRetry: (callDeadlineMs?: number | null) => boolean}) => Promise<any>, fallback: (() => any) | null, processDeadlineMs: number | null | undefined, bodyRecovery: boolean, resolve: (value: any) => void, reject: (error: unknown) => void}>} */
 let _codexLanePending = [];
 let _codexConsecutiveFailures = 0;
 let _codexStopReason = '';
@@ -2707,6 +2707,7 @@ function _admitCodexTranslationCall({
   now = Date.now(),
   processDeadlineMs = _codexProcessDeadlineMs,
   trackInFlight = true,
+  allowBodyRecoveryReserve = false,
 } = {}) {
   if (_codexStopReason || !_codexSocketPresent()) return null;
   const maxCalls = _codexBudget('FREE_TRANSLATE_CODEX_MAX_CALLS', CODEX_TRANSLATE_MAX_CALLS_DEFAULT);
@@ -2715,6 +2716,7 @@ function _admitCodexTranslationCall({
     _stopCodex(`budget di ${maxCalls} chiamate esaurito (FREE_TRANSLATE_CODEX_MAX_CALLS)`);
     return null;
   }
+  if (!allowBodyRecoveryReserve && !_codexGeneralCallBudgetAvailable(maxCalls)) return null;
   const remainingMs = maxMs - _codexSpentNow();
   if (remainingMs < CODEX_TRANSLATE_MIN_CALL_MS) {
     _stopCodex(`budget di ${Math.round(maxMs / 1000)}s esaurito (FREE_TRANSLATE_CODEX_MAX_MS)`);
@@ -2755,7 +2757,7 @@ export function flushCodexCollectionTimer() {
   return true;
 }
 
-function _codexInitialCallBudgetAvailable(maxCalls = _codexBudget('FREE_TRANSLATE_CODEX_MAX_CALLS', CODEX_TRANSLATE_MAX_CALLS_DEFAULT)) {
+function _codexGeneralCallBudgetAvailable(maxCalls) {
   const reserve = Math.min(_codexRecoveryReserveCalls, Math.floor(maxCalls / 5));
   return reserve === 0 || _codexCalls < maxCalls - reserve;
 }
@@ -2765,11 +2767,11 @@ function _codexInitialCallBudgetAvailable(maxCalls = _codexBudget('FREE_TRANSLAT
  * `callDeadlineMs` e' la deadline gia' concessa alla chiamata che ha fallito:
  * un retry non puo' allungarla solo perche' il processo ha ancora margine.
  */
-function _reserveCodexTransportRetry(processDeadlineMs = _codexProcessDeadlineMs, callDeadlineMs = null, initialLane = false) {
-  if (initialLane && !_codexInitialCallBudgetAvailable()) return false;
+function _reserveCodexTransportRetry(processDeadlineMs, callDeadlineMs, allowBodyRecoveryReserve) {
   const admission = _admitCodexTranslationCall({
     processDeadlineMs: callDeadlineMs ?? processDeadlineMs,
     trackInFlight: false,
+    allowBodyRecoveryReserve,
   });
   if (!admission) return false;
   admission.finish();
@@ -2786,6 +2788,7 @@ export function withCodexTranslationLane({
   run,
   fallback = null,
   processDeadlineMs = _codexProcessDeadlineMs,
+  bodyRecovery = false,
 } = {}) {
   if (typeof run !== 'function') throw new TypeError('withCodexTranslationLane: `run` è richiesto');
   const useFallback = () => (typeof fallback === 'function' ? fallback() : null);
@@ -2798,7 +2801,7 @@ export function withCodexTranslationLane({
   }
   return new Promise((resolve, reject) => {
     flushCodexCollectionTimer();
-    _codexLanePending.push({ run, fallback, processDeadlineMs, resolve, reject });
+    _codexLanePending.push({ run, fallback, processDeadlineMs, bodyRecovery, resolve, reject });
     _pumpCodex();
   });
 }
@@ -2845,6 +2848,7 @@ function _pumpCodex() {
         const admission = beginCodexTranslationCall({
           processDeadlineMs: request.processDeadlineMs,
           trackInFlight: false,
+          allowBodyRecoveryReserve: request.bodyRecovery,
         });
         if (!admission) return typeof request.fallback === 'function' ? request.fallback() : null;
         let firstCall = true;
@@ -2856,6 +2860,7 @@ function _pumpCodex() {
           return beginCodexTranslationCall({
             processDeadlineMs: request.processDeadlineMs,
             trackInFlight: false,
+            allowBodyRecoveryReserve: request.bodyRecovery,
           });
         };
         try {
@@ -2863,7 +2868,7 @@ function _pumpCodex() {
             deadlineMs: admission.deadlineMs,
             admission,
             admitCall,
-            reserveTransportRetry: (callDeadlineMs) => _reserveCodexTransportRetry(request.processDeadlineMs, callDeadlineMs),
+            reserveTransportRetry: (callDeadlineMs) => _reserveCodexTransportRetry(request.processDeadlineMs, callDeadlineMs, request.bodyRecovery),
           });
         } finally {
           // `trackInFlight:false` leaves the shared lane measurement to the
@@ -2962,7 +2967,7 @@ async function _translateGroupWithCodex(group) {
   // precedenti consuma proprio la finestra del processo.
   // Preserve part of the shared budget for the explicit article body recovery
   // lane. Falling back here must not trip its shared circuit breaker.
-  if (!_codexInitialCallBudgetAvailable(maxCalls)) return none();
+  if (!_codexGeneralCallBudgetAvailable(maxCalls)) return none();
   const recoveryReserveMs = Math.min(_codexRecoveryReserveMs, Math.floor(maxMs / 5));
   const initialRemainingMs = remainingMs - recoveryReserveMs;
   if (initialRemainingMs < CODEX_TRANSLATE_MIN_CALL_MS) return none();
@@ -3003,7 +3008,7 @@ async function _translateGroupWithCodex(group) {
     // The first attempt is admitted above. ai-models.mjs calls this hook only
     // immediately before a physical transport retry, so every broker attempt
     // consumes the same shared ledger without reserving retries that never run.
-    onCodexTransportRetry: (retryDeadlineMs) => _reserveCodexTransportRetry(_codexProcessDeadlineMs, retryDeadlineMs, true),
+    onCodexTransportRetry: (retryDeadlineMs) => _reserveCodexTransportRetry(_codexProcessDeadlineMs, retryDeadlineMs, false),
   };
   let byText;
   try {

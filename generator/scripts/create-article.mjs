@@ -15518,6 +15518,7 @@ async function translatePendingBodyWithCodex(
     deadlineMs,
   });
   return withCodexTranslationLane({
+    bodyRecovery: true,
     processDeadlineMs: _pendingBodyCodexDeadlineMs,
     fallback: () => {
       // La disponibilità può cambiare dopo la selezione della corsia: il
