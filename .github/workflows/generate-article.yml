@@ -1000,7 +1000,7 @@ jobs:
             fail_closed_admission
           fi
           if [ -n "${stale:-}" ]; then
-            echo "::warning title=Run in volo oltre la soglia::Run piu' vecchie in volo da oltre ${WEDGE_SECONDS}s, NON piu' bloccanti per l'ammissione: ${stale}."
+            echo "::warning title=Run potenzialmente incastrate::Oltre ${WEDGE_SECONDS}s, ammissione consentita: ${stale}"
           fi
           case "${older:-}" in
             ''|*[!0-9]*) older=0 ;;
