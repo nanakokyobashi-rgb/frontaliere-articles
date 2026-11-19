@@ -252,9 +252,11 @@ export const CORE_REPLACEMENTS = [
     id: 'admit: il nome del chiamante arriva per env',
     count: 1,
     find: '          CHAIN_MAX_RUNS_PER_HOUR: ${{ vars.CHAIN_MAX_RUNS_PER_HOUR }}\n'
-      + '          CALLER_WORKFLOW: generate-article.yml\n',
+      + '          CALLER_WORKFLOW: generate-article.yml\n'
+      + "          BODY_MAINTENANCE_PATH_RE: '^content/blog-body(-[a-z0-9-]+)?/(it|de|en|fr)/[^/]+[.]ts$'\n",
     replace: '          CHAIN_MAX_RUNS_PER_HOUR: ${{ vars.CHAIN_MAX_RUNS_PER_HOUR }}\n'
-      + '          CALLER_WORKFLOW: ${{ inputs.caller_workflow }}\n',
+      + '          CALLER_WORKFLOW: ${{ inputs.caller_workflow }}\n'
+      + '          BODY_MAINTENANCE_PATH_RE: ${{ inputs.body_path_regex }}\n',
   },
   {
     id: 'admit: il permesso OIDC resta solo nel workflow principale',

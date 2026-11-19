@@ -1019,6 +1019,41 @@ test('dispatch origin: input mancanti e combinazioni incoerenti falliscono chius
   assertAccepted({ DISPATCH_ORIGIN: 'editorial_signal' });
 });
 
+test('le sole modifiche a body esistenti liberano la coda di generazione', () => {
+  const admit = extractRun('Skip when a generation is already in flight');
+  const start = admit.indexOf("if jq -e --arg body_path_re");
+  const end = admit.indexOf('content_push=false', start);
+  assert.ok(start >= 0 && end > start);
+  const bodyPath = 'content/blog-body-canton-sg/fr/article.ts';
+  const run = (files) => {
+    const scratch = mkdtempSync(path.join(tmpdir(), 'generation-body-maintenance-'));
+    try {
+      const result = spawnSync('bash', ['-c', [
+        'set -eu',
+        admit.slice(start, end),
+        'echo continue',
+      ].join('\n')], {
+        encoding: 'utf8',
+        env: {
+          ...process.env,
+          GITHUB_OUTPUT: path.join(scratch, 'github-output'),
+          BODY_MAINTENANCE_PATH_RE: '^content/blog-body(-[a-z0-9-]+)?/(it|de|en|fr)/[^/]+[.]ts$',
+          compare_payload: JSON.stringify([{ files }]),
+        },
+      });
+      assert.equal(result.status, 0, result.stderr);
+      return result.stdout;
+    } finally {
+      rmSync(scratch, { recursive: true, force: true });
+    }
+  };
+
+  assert.match(run([{ filename: bodyPath, status: 'modified' }]), /reason=admit-body-maintenance/);
+  assert.match(run([{ filename: bodyPath, status: 'added' }]), /continue/);
+  assert.match(run([{ filename: bodyPath, status: 'modified' }, { filename: 'content/blog-meta-fr.ts', status: 'modified' }]), /continue/);
+  assert.match(run([]), /continue/);
+});
+
 test('un push su content/** non viene scartato se il producer è ancora in volo', () => {
   const admit = extractRun('Skip when a generation is already in flight');
   assert.match(admit, /content_push=false/);
