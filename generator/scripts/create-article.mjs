@@ -6302,12 +6302,16 @@ function sourceCopyInputText(pageContent) {
   return String(pageContent || '');
 }
 
-function appendSourceCitation(data, url) {
-  const citationUrl = String(url || '').startsWith('stats-bfs://')
+function articleSourceCitationUrl(url) {
+  return String(url || '').startsWith('stats-bfs://')
     ? 'https://www.bfs.admin.ch/bfs/it/home/statistiche/industria-servizi.html'
     : String(url || '').startsWith('stats-astra://')
       ? 'https://www.astra.admin.ch/astra/it/home/documentazione/dati-aperti/veicoli.html'
       : url;
+}
+
+function appendSourceCitation(data, url) {
+  const citationUrl = articleSourceCitationUrl(url);
   if (citationUrl && !citationUrl.startsWith('evergreen://')) {
     try {
       const sourceDomain = new URL(citationUrl).hostname.replace(/^www\./, '');
@@ -23437,7 +23441,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     // (lib/article-ymyl-gate.mjs). Senza fonte ufficiale, riscrivere con lo
     // stesso materiale non aggiunge evidenze: il ranker passa al candidato successivo.
     try {
-      assertYmylPublishable(data, { sourceUrl: url });
+      assertYmylPublishable(data, { sourceUrl: articleSourceCitationUrl(url) });
     } catch (ymylErr) {
       console.error(`  ⚠️  ${safeSignalDiagnosticTextForLog(ymylErr?.message || ymylErr, RUN_REPORT)}`);
       if (!ymylErr.missingOfficialSource && attempt < maxAttempts) {
