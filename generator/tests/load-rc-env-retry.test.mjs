@@ -512,6 +512,36 @@ function expectedRcInit(source) {
   return source === 'server' ? ['init', 'fixture-project', 'operator-rc'] : ['init', null, null];
 }
 
+test('la CLI ordinaria esporta il marker solo dopo la lettura del template client', (t) => {
+  const emptyTemplate = { parameters: {} };
+  const sdkCalls = [expectedRcInit('client'), ['sdk', 'client']];
+
+  const empty = runRcCli(t, { env: {}, template: emptyTemplate });
+  assert.deepEqual(empty.calls.filter(([kind]) => kind !== 'import'), sdkCalls);
+  assert.equal(empty.stdout, "export RC_ENV_LOADED='1'\n");
+
+  const enabled = runRcCli(t, {
+    env: {},
+    template: { parameters: { CANTON_ARTICLE_SECTIONS_KILL: { defaultValue: { value: '1' } } } },
+  });
+  assert.deepEqual(enabled.calls.filter(([kind]) => kind !== 'import'), sdkCalls);
+  assert.equal(enabled.stdout, "export RC_ENV_LOADED='1'\nexport CANTON_ARTICLE_SECTIONS_KILL='1'\n");
+
+  const denied = runRcCli(t, {
+    env: { GITHUB_ENV: 'file' },
+    template: emptyTemplate,
+    sdkFails: true,
+    restStatus: 403,
+  });
+  assert.deepEqual(denied.calls.filter(([kind]) => kind !== 'import'), [
+    ...sdkCalls,
+    ['oauth', 'fixture-project', 'https://www.googleapis.com/auth/firebase.remoteconfig'],
+    ['fetch', 'https://firebaseremoteconfig.googleapis.com/v1/projects/fixture-project/remoteConfig', 'Bearer fixture-bearer'],
+  ]);
+  assert.equal(denied.stdout, '');
+  assert.equal(denied.githubEnv, '');
+});
+
 for (const [label, env, source, operator] of [
   ['client esplicito', { FRONTALIERE_OPERATOR_RC_SOURCE: 'client' }, 'client', true],
   ['selector assente', {}, 'client', true],
