@@ -1054,9 +1054,9 @@
       "path": "scripts/lib/pr-body-sections-check.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "8f946d1449c2a2d2",
-        "corpus": "8f946d1449c2a2d2",
-        "alignedAt": "2026-11-18"
+        "site": "0b6fd436ba154a3d",
+        "corpus": "0b6fd436ba154a3d",
+        "alignedAt": "2026-11-19"
       }
     },
     {
@@ -4462,9 +4462,9 @@
       "sitePath": "build-plugins/sharedWriteRegistry.ts",
       "mode": "identical",
       "baseline": {
-        "site": "dcac8abe881c0c97",
-        "corpus": "dcac8abe881c0c97",
-        "alignedAt": "2026-11-18"
+        "site": "a88ec7f3d6e72311",
+        "corpus": "a88ec7f3d6e72311",
+        "alignedAt": "2026-11-19"
       }
     },
     {
