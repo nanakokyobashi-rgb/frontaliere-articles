@@ -1019,6 +1019,33 @@ test('dispatch origin: input mancanti e combinazioni incoerenti falliscono chius
   assertAccepted({ DISPATCH_ORIGIN: 'editorial_signal' });
 });
 
+test('uno slot Cloud Scheduler si accoda dietro le run in volo solo con un claim valido', () => {
+  const admit = extractRun('Skip when a generation is already in flight');
+  const olderAt = admit.indexOf('if [ "$older" -gt 0 ]; then');
+  assert.ok(olderAt >= 0);
+  const run = (clock, claimStatus) => {
+    const result = spawnSync('bash', ['-c', [
+      'set -eu',
+      'GITHUB_OUTPUT=/dev/stdout',
+      'older=1',
+      'successor_push=false',
+      'EVENT_NAME=workflow_dispatch',
+      'self_created=2026-11-19T08:07:00Z',
+      'RECOVERY_SLOT=generate-article/frontaliere/2026-11-19T08:07Z',
+      `loop_clock_dispatch=${clock}`,
+      `request_generation_claim() { echo "claim=$1"; return ${claimStatus}; }`,
+      'release_generation_claim() { return 0; }',
+      admit.slice(olderAt),
+    ].join('\n')], { encoding: 'utf8' });
+    assert.equal(result.status, 0, result.stderr);
+    return result.stdout;
+  };
+
+  assert.match(run('true', 0), /claim=admit[\s\S]*proceed=true/);
+  assert.match(run('true', 1), /claim=admit[\s\S]*proceed=false[\s\S]*generation-slot-claim-denied/);
+  assert.match(run('false', 0), /proceed=false[\s\S]*admit-in-flight/);
+});
+
 test('un push su content/** non viene scartato se il producer è ancora in volo', () => {
   const admit = extractRun('Skip when a generation is already in flight');
   assert.match(admit, /content_push=false/);
