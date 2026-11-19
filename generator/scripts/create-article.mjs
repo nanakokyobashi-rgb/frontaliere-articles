@@ -22886,6 +22886,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // generation so callGemini can feed the exact flagged claims back to the model.
   /** @type {string|null} */
   let lastFactCheckErrors = null;
+  let editorialOriginalityRejections = 0;
   // Carries the previous attempt's id/slug rejection (validate()'s
   // `identityRejected` throw, #330 item 2) into the next generation, mirroring
   // lastHeadlineErrors/lastFactCheckErrors above. Was a dead flag before this:
@@ -23672,6 +23673,15 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
         }
         const issuesSummary = factResult.issues.map(i => `[${i.category || '?'}] "${(i.claim || '').slice(0, 60)}" — ${(i.reason || '').slice(0, 80)}`).join('; ');
         const err = new Error(`Articolo rigettato da fact-check: ${factResult.issues.length} problemi: ${issuesSummary}`);
+        // Give the writer one correction on the same source. A second
+        // grounded originality rejection sends the ranker to another candidate.
+        if (factResult.issues.some((issue) => issue.code === 'editorial_originality')) {
+          editorialOriginalityRejections += 1;
+          if (editorialOriginalityRejections >= 2) {
+            err.qualityReject = true;
+            throw err;
+          }
+        }
         if (attempt < maxAttempts) {
           // Feed the flagged claims into the next attempt's prompt so the model
           // fixes exactly what it invented instead of regenerating blind.
@@ -23707,6 +23717,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     } catch (fcErr) {
       // Content rejections retry; an unavailable verifier defers the whole
       // run so every headline does not repeat the same failed cascade.
+      if (fcErr.qualityReject === true) throw fcErr;
       if (isFactCheckUnavailableError(fcErr)) throw fcErr;
       if (attempt < maxAttempts) {
         console.error(`  🔄 Rigenero per fact-check: ${safeSignalDiagnosticTextForLog(fcErr.message).slice(0, 120)} (${attempt}/${maxAttempts})...`);
