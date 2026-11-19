@@ -390,6 +390,20 @@ jobs:
             exit 0
           fi
 
+          if [ "$successor_push" = "true" ]; then
+            if ! older_active=$(jq -er --arg mine "$self_created" --argjson me "$SELF_ID" '
+              [.[] | select([.created_at, .id] < [$mine, $me])] | length
+            ' <<<"$inflight" 2>/dev/null); then
+              fail_closed_admission
+            fi
+            if [ "$older_active" -ge 20 ]; then
+              echo "Backlog di generazione: $older_active run precedenti attive, unisco il successore agli avvii già in volo."
+              echo "proceed=false" >> "$GITHUB_OUTPUT"
+              echo "GENERATION_OUTCOME kind=skipped reason=admit-content-backlog section=unknown"
+              exit 0
+            fi
+          fi
+
           parent_id="${PARENT_RUN_ID:-}"
           case "$parent_id" in
             ''|*[!0-9]*) parent_id=0 ;;
