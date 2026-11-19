@@ -1537,6 +1537,15 @@ test('i writer concorrenti non possono riscrivere un articolo gia\' registrato',
     'il publisher deve rifiutare l id gia registrato prima di poter scegliere o scrivere una copertina');
 });
 
+test('il replay senza nuovi asset conserva le approvazioni storiche upstream', () => {
+  const assets = [{ assetId: 'article-old' }];
+  const upstream = { schema: 1, assetCount: 1, assets, legacyVision: { schema: 0, assetIds: ['article-old'] } };
+  const base = { schema: 1, assetCount: 1, assets };
+  const replayed = { ...base, legacyVision: { schema: 0, assetIds: ['unapproved'] } };
+  assert.deepEqual(mergeImageRegistryDelta(upstream, base, base), upstream);
+  assert.deepEqual(mergeImageRegistryDelta(upstream, base, replayed), upstream);
+});
+
 test('il merge del registro fa vincere una rigenerazione locale realmente cambiata', () => {
   const upstream = { schema: 1, assets: [{ assetId: 'article-old', version: 'upstream' }] };
   const base = { schema: 1, assets: [{ assetId: 'article-old', version: 'base' }] };
