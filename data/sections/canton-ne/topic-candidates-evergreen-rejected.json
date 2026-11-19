@@ -4,29 +4,17 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ne::https://www.neuchatelville.ch/medias/actualites/detail/nesos-une-nouvelle-porte-dentree-vers-les-droits-sociaux-dans-le-canton-de-neuchatel": {
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261119-les-exportations-horlogeres-se-renforcent-encore-en-octobre.html": {
       "section": "canton-ne",
-      "ts": 1794603903132
+      "ts": 1795087240518
     },
-    "canton-ne::https://www.ne.ch/communiques-de-presse/le-conseil-detat-choisit-une-professionnelle-experimentee-pour-reprendre-la-direction-du-service-des-poursuites-et-faillites": {
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261119-les-exportations-repartent-de-l-avant-en-octobre.html": {
       "section": "canton-ne",
-      "ts": 1794650915673
+      "ts": 1795087714530
     },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261112-relation-avec-l-ue-burnham-se-bat-pour-obtenir-un-bon-accord.html": {
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261118-le-secteur-du-luxe-connait-une-petite-amelioration-en-2026.html": {
       "section": "canton-ne",
-      "ts": 1794650925099
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261113-cinq-vaches-sement-la-zizanie-et-bouchonnent-l-autoroute-a1.html": {
-      "section": "canton-ne",
-      "ts": 1794684834923
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261113-la-panne-mondiale-de-microsoft-perturbe-entreprises-et-services.html": {
-      "section": "canton-ne",
-      "ts": 1794684845169
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261114-des-milliers-de-portugais-manifestent-contre-la-crise-du-logement.html": {
-      "section": "canton-ne",
-      "ts": 1794684855685
+      "ts": 1795088698718
     }
   }
 }
