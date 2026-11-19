@@ -216,9 +216,14 @@ test('il rollback mantiene la revisione e pianifica il budget Pages per tutti i 
   assert.match(source, /article_push_job_reconciliation_reserve_seconds/u);
   assert.match(source, /article_push_job_remaining.*planned_batch_budget_seconds/u);
   assert.match(source, /article_push_post_publish_reserve_seconds/u);
-  assert.match(source, /article_push_attempt_pages_remaining.*article_push_pages_wait_seconds/u);
+  assert.match(source, /ARTICLE_PUSH_PUSH_RESERVE_SECONDS/u);
+  assert.match(source, /article_push_push_reserve_seconds/u);
+  assert.match(source, /article_push_attempt_pages_remaining.*article_push_attempt_budget_seconds/u);
+  assert.match(source, /batch_pages_deadline=\$\(\(batch_pages_now \+ article_push_pages_wait_seconds \+ article_push_batch_overhead_seconds \+ article_push_push_reserve_seconds\)/u);
+  assert.match(source, /pages_remaining.*article_push_pages_wait_seconds \+ article_push_push_reserve_seconds/u);
   assert.match(source, /article_push_push_deadline_available\(\)/u);
   assert.match(source, /if ! article_push_push_deadline_available; then[\s\S]{0,500}if git \$\{GIT_PAT_OPTS/u);
+  assert.match(source, /absolute publication deadline no longer leaves a safe retry budget/u);
   assert.match(source, /refusing a partial chain/u);
   assert.match(source, /rollback_job_deadline/u);
   assert.match(source, /export ARTICLE_PUSH_PAGES_DEADLINE="\$article_push_pages_deadline"/u);
