@@ -16,6 +16,7 @@ import {
   findVacuousFacts,
   factValueOf,
   findOrphanedKeyFactsList,
+  restoreDraftKeyFactsHeading,
   matchesVacuousValue,
   parseAiSearchSections,
   stripVacuousFacts,
@@ -339,6 +340,19 @@ test('lo scanner riproduce la baseline corrente senza fatti vacui', { skip: !fs.
   );
 });
 
+test('ripristina solo il titolo mancante di una lista nel formato della bozza', () => {
+  const lead = '## In breve\n- Primo riepilogo\n- Secondo riepilogo\n\n\n';
+  const facts = '- **Importo**: CHF 12\n- **Comune**: Lugano\n- **Anno**: 2026';
+  const body = lead + facts + '\n\n## Dettagli\nProsa.';
+  const restored = restoreDraftKeyFactsHeading(body);
+  assert.equal(restored, lead + '## Fatti chiave\n' + facts + '\n\n## Dettagli\nProsa.');
+  assert.equal(findOrphanedKeyFactsList(restored), null);
+  assert.equal(restoreDraftKeyFactsHeading(restored), restored);
+  for (const ambiguous of [lead + '- Testo 1\n- Testo 2\n- Testo 3', lead + '- **Importo**: CHF 12']) {
+    assert.equal(restoreDraftKeyFactsHeading(ambiguous), ambiguous);
+  }
+});
+
 test('create-article applica il gate dopo validate e marca il rifiuto come qualita\'', () => {
   const source = fs.readFileSync(CREATE_ARTICLE_PATH, 'utf8');
   assert.match(source, /from ['"]\.\/lib\/key-facts-specificity\.mjs['"]/);
@@ -352,6 +366,8 @@ test('create-article applica il gate dopo validate e marca il rifiuto come quali
   const validated = source.indexOf('data = validate(rawData');
   const gate = source.indexOf('assertGeneratedArticleQuality(data);', validated);
   assert.ok(validated >= 0 && gate > validated, 'il gate non e\' nel percorso post-validate');
+  const headingRepair = source.indexOf('restoreDraftKeyFactsHeading(data.content.it.body1)', validated);
+  assert.ok(headingRepair > validated && headingRepair < gate);
   assert.ok(
     (source.match(/^\s*assertGeneratedArticleQuality\(data(?:,|\);)/gm) || []).length >= 3,
     'il gate non copre il percorso primario e quello di scrittura condiviso',

@@ -11,7 +11,7 @@
  * per rifiutare il payload quando la sezione scende sotto quella soglia.
  */
 
-import { getKeyFactsHeading, getTldrHeading } from './ai-search-template.mjs';
+import { getKeyFactsHeading, getTldrHeading, MAX_KEY_FACTS } from './ai-search-template.mjs';
 
 export const SUPPORTED_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 export const KEY_FACTS_HEADINGS = Object.freeze(
@@ -473,6 +473,19 @@ export function findOrphanedKeyFactsList(body1, locale = 'it') {
   }
 
   return null;
+}
+
+/** Restore a missing template heading only for a clearly formatted AI draft. */
+export function restoreDraftKeyFactsHeading(body1, locale = 'it') {
+  const orphan = findOrphanedKeyFactsList(body1, locale);
+  if (!orphan || orphan.bulletCount < MIN_FACTS_PER_SECTION || orphan.bulletCount > MAX_KEY_FACTS) return body1;
+  const { lineIndex, bulletCount, heading } = orphan;
+  const lines = body1.split('\n');
+  if (!isHeadingLine(lines.find((line) => line.trim()), getTldrHeading(locale))) return body1;
+  const facts = lines.slice(lineIndex, lineIndex + bulletCount);
+  if (!facts.every((line) => /^\s*-\s+\*\*[^*:\n]+\*\*:\s+\S/u.test(line))) return body1;
+  lines.splice(lineIndex, 0, heading);
+  return lines.join('\n');
 }
 
 export default {

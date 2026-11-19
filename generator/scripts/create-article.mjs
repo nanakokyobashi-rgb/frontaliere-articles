@@ -403,7 +403,7 @@ import {
   findArticleIdentityServiceMarkers,
 } from '../../scripts/lib/published-slug-guard.mjs';
 import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
-import { findOrphanedKeyFactsList } from './lib/key-facts-specificity.mjs';
+import { findOrphanedKeyFactsList, restoreDraftKeyFactsHeading } from './lib/key-facts-specificity.mjs';
 import { assertArticleRelevance, isOffTopicHeadline } from './lib/article-relevance-gate.mjs';
 import {
   assertNoFiscalErrorsInLocales,
@@ -23216,6 +23216,9 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     // cross-canton guide before spending translation, image or write budget.
     // The same helper is called again after translations below because this
     // primary path does not enter registerArticleFiles().
+    if (typeof data.content.it.body1 === 'string') {
+      data.content.it.body1 = restoreDraftKeyFactsHeading(data.content.it.body1);
+    }
     assertGeneratedArticleQuality(data);
     // The claim repair above can remove unsupported text from descriptions
     // after the first pass. Restore only excerpts with a complete sentence
