@@ -1398,3 +1398,13 @@ test('i marker [prompt-split] dichiarano il budget VERO, non quello di partenza'
   );
   assert.ok((src.match(/budget=\$\{_splitBudgetLog\}/g) || []).length >= 2, 'i marker non leggono il budget corrente');
 });
+
+test('i confronti testuali non richiedono tabelle nei prompt di tutte le sezioni', () => {
+  for (const section of ['frontaliere', 'svizzera', 'canton-ti']) {
+    for (const { prompt } of [newsPrompt({}, section), evergreenPrompt(section)]) {
+      assert.match(prompt, /Usa prosa o elenchi per confronti testuali/);
+      assert.match(prompt, /tabelle solo con intestazioni invarianti o identificabili da numeri distinti/);
+      assert.doesNotMatch(prompt, /body2 deve avere .*tabella/);
+    }
+  }
+});

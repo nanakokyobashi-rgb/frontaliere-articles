@@ -12527,7 +12527,7 @@ ${_isMeta ? '' : `COME RAGGIUNGERE IL MINIMO DI PAROLE SENZA INVENTARE:
 ${reachMinimumImplicationsLine}
 ${reachMinimumMethodLines}
 - NON includere sezioni FAQ nel body — le FAQ vengono generate nel campo "faq" separato e mostrate come accordion
-- Usa tabelle comparative per rendere i dati della fonte più leggibili
+- Usa prosa o elenchi per confronti testuali. Usa tabelle solo con intestazioni invarianti o identificabili da numeri distinti della fonte.
 ${reachMinimumToolsLine}`}
 ${primaryLocaleBlock}${targetKeywordBlock}${_isBody ? '' : peopleAlsoAskBlock}${_isMeta ? '' : mustCoverLsiBlock}${_isMeta ? '' : AI_SEARCH_PROMPT_BLOCK_IT}
 ${_isMeta ? '' : `═══ REGOLE EDITORIALI ═══
@@ -12539,8 +12539,7 @@ ANTI-AI (CRITICO — il testo DEVE superare l'AI detection):
 - MAI aprire body1 con una frase generica tipo "Il tema dei frontalieri...". Inizia con un FATTO concreto DALLA FONTE (data, numero, nome, luogo).
 - MAI elenchi puntati di >5 elementi (spezzali in paragrafi narrativi)
 - MAX 2 emoji callout (📊/💡/⚠️) per INTERO articolo (body1+body2+body3 combinati). Zero è meglio.
-- Varia la struttura: non TUTTI i body devono avere un elenco puntato. Alterna prosa, tabelle, citazioni.
-- NON usare parallelismi strutturali tra body1/body2/body3 (se body1 ha ## + elenco, body2 deve avere ## + prosa + tabella).
+- Varia la struttura tra body1/body2/body3 con prosa, elenchi brevi e citazioni documentate.
 `}
 ═══ DIVIETI ANTI-ALLUCINAZIONE (BLOCCANTI — RIGETTO AUTOMATICO) ═══
 
@@ -15925,8 +15924,12 @@ async function translateArticle(data) {
     // through a first provider. Normalize them before deriving the next
     // expected mapping so nested validation remains idempotent.
     bodyText = stripTableHeaderColumnMarkers(bodyText);
+    const reject = (reason) => {
+      console.error(`TRANSLATION_BODY_REJECT locale=${targetLang} field=${fieldKey} reason=${reason}`);
+      return null;
+    };
     const tableHeaderMarkers = tableHeaderColumnMarkers(bodyText);
-    if (tableHeaderMarkers.collision || tableHeaderMarkers.ambiguous) return null;
+    if (tableHeaderMarkers.collision || tableHeaderMarkers.ambiguous) return reject('source-table-markers');
     const chunks = pretranslatedResult === null
       ? splitIntoTranslationChunks(tableHeaderMarkers.markedText)
       : [tableHeaderMarkers.markedText];
@@ -15958,7 +15961,7 @@ async function translateArticle(data) {
       (joined, part, index) => joined + (index === 0 ? '' : separators[index - 1] ?? '') + part,
       '',
     );
-    if (!tableHeaderColumnMarkersMatch(joinedWithTableMarkers, tableHeaderMarkers.markers)) return null;
+    if (!tableHeaderColumnMarkersMatch(joinedWithTableMarkers, tableHeaderMarkers.markers)) return reject('table-markers');
     const joined = stripTableHeaderColumnMarkers(joinedWithTableMarkers);
 
     // The structural contracts below cannot see prose silently dropped from a
@@ -15972,14 +15975,14 @@ async function translateArticle(data) {
       locale: targetLang,
       referenceText: bodyText,
     }).some((issue) => issue.code === 'translation-semantic-truncation');
-    if (completenessMiss) return null;
+    if (completenessMiss) return reject('completeness');
 
     // A translated chunk may change visible prose, but it must not add, drop or
     // replace a Markdown block marker. Compare the complete source/joined line
     // skeleton before accepting the recomposed body; otherwise a provider can
     // turn a list, heading or table line into a different structure while all
     // source-owned routes and inline markers still look valid.
-    if (!hasSameLineSkeleton(bodyText, joined)) return null;
+    if (!hasSameLineSkeleton(bodyText, joined)) return reject('line-skeleton');
 
     // `hasSameLineSkeleton` deliberately compares only the first structural
     // marker. That is enough for the shared line guard, but not for a composed
@@ -16078,7 +16081,7 @@ async function translateArticle(data) {
     };
     const sourceStructureLines = normalizeJoinLines(bodyText);
     const joinedStructureLines = normalizeJoinLines(joined);
-    if (sourceStructureLines.length !== joinedStructureLines.length) return null;
+    if (sourceStructureLines.length !== joinedStructureLines.length) return reject('line-count');
     for (const [index, sourceLine] of sourceStructureLines.entries()) {
       const joinedLine = joinedStructureLines[index];
       if (fullStructuralPrefix(sourceLine) !== fullStructuralPrefix(joinedLine)
@@ -16094,7 +16097,7 @@ async function translateArticle(data) {
         ? { pipes: joinedPipe.pipes, cells: joinedPipe.cells }
         : joinedPipe;
       if (JSON.stringify(sourcePipeShape) !== JSON.stringify(joinedPipeShape)) {
-        return null;
+        return reject('table-shape');
       }
     }
 
@@ -16522,13 +16525,13 @@ async function translateArticle(data) {
       return null;
     }
     if (JSON.stringify(sourceLinkContract) !== JSON.stringify(joinedLinkContract)) {
-      return null;
+      return reject('links');
     }
     const opaqueSpanContract = (text) => String(text ?? '')
       .split(/\r\n?|\n/u)
       .flatMap((line) => opaqueSpanSignature(line));
     if (JSON.stringify(opaqueSpanContract(bodyText)) !== JSON.stringify(opaqueSpanContract(joined))) {
-      return null;
+      return reject('opaque-spans');
     }
 
     // Numeric values are source-owned too. Locale-specific grouping and
@@ -17147,7 +17150,7 @@ async function translateArticle(data) {
     const joinedNumericContract = numericContract(joined, joinedLinkContract.codeSpans, {
       sourceDateOrdinals: sourceNumericContract.dateOrdinals,
     });
-    if (!joinedNumericContract) return null;
+    if (!joinedNumericContract) return reject('localized-calendar');
     const numericFactSequence = (contract) => contract.factSequence || contract.values.map((value, index) => (
       contract.dateOrdinals?.[index]
         ? { type: 'calendar', dateFacts: [contract.dateOrdinals[index]], years: [] }
@@ -17165,7 +17168,7 @@ async function translateArticle(data) {
       return exactNumericMatch || calendarReorderedNumericMatch;
     };
     if (!numericContractsMatch(sourceNumericContract, joinedNumericContract)) {
-      return null;
+      return reject('numeric-values');
     }
     // A capitalized token is only a candidate anchor. It becomes evidence of
     // source ownership when the same normalized token survives in both full
@@ -17261,7 +17264,7 @@ async function translateArticle(data) {
       || (exactAssociation === null
         && hasInvariantAnchorEvidence
         && !anchorAssociationCoversEveryFact);
-    if (sourceNumericContract.values.length > 0 && numericAssociationMismatch) return null;
+    if (sourceNumericContract.values.length > 0 && numericAssociationMismatch) return reject('numeric-association');
 
     // A table can preserve its pipes and per-cell opaque atoms while still
     // swapping two cells made only of translatable prose. Such cells have no
@@ -17330,7 +17333,7 @@ async function translateArticle(data) {
       let unresolvedCells = 0;
       for (const { sourceCell, joinedCell, sourceProof, joinedProof } of cellEntries) {
         if (sourceCell === joinedCell) continue;
-        if (!tableProofsMatch(sourceProof, joinedProof)) return null;
+        if (!tableProofsMatch(sourceProof, joinedProof)) return reject('table-cell-values');
         const proofKey = JSON.stringify(sourceProof);
         if (
           (sourceProof.opaque.length === 0 && sourceProof.numeric.length === 0)
@@ -17342,7 +17345,7 @@ async function translateArticle(data) {
       const hasVerifiedHeaderColumnMapping = isTableHeaderRow(index)
         && tableHeaderMarkers.markers.some(({ lineIndex }) => lineIndex === index)
         && tableHeaderColumnMarkersMatch(joinedWithTableMarkers, tableHeaderMarkers.markers);
-      if (unresolvedCells > 1 && !hasVerifiedHeaderColumnMapping) return null;
+      if (unresolvedCells > 1 && !hasVerifiedHeaderColumnMapping) return reject('table-cell-ownership');
     }
 
     // `balanceMarkdownMarkers` only repairs/validates bold `**` and separator
@@ -17400,14 +17403,14 @@ async function translateArticle(data) {
       return candidates.filter((_, index) => matched.has(index));
     };
     if (JSON.stringify(markdownMarkerContract(bodyText)) !== JSON.stringify(markdownMarkerContract(joined))) {
-      return null;
+      return reject('markdown-markers');
     }
 
     // `balanceMarkdownMarkers` is intentionally used as a validator here:
     // changing the joined text would mean the provider returned broken
     // Markdown, not something the separator joiner can safely repair.
     const balanced = balanceMarkdownMarkers(joined, { sourceText: bodyText });
-    if (balanced !== joined) return null;
+    if (balanced !== joined) return reject('markdown-balance');
     return joined;
   }
 
