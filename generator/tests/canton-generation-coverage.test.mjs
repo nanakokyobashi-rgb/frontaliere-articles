@@ -20,9 +20,10 @@ const TITLES = [
 ];
 const date = (time) => new Date(time).toISOString();
 
-function fixture(t) {
-  const root = mkdtempSync(path.join(os.tmpdir(), 'canton-coverage-'));
-  t.after(() => rmSync(root, { recursive: true, force: true }));
+function fixture(t, section = SECTION, sharedRoot) {
+  const root = sharedRoot ?? mkdtempSync(path.join(os.tmpdir(), 'canton-coverage-'));
+  if (!sharedRoot) t.after(() => rmSync(root, { recursive: true, force: true }));
+  const paths = cantonSectionPaths(section);
   function write(rel, text) {
     const file = path.join(root, corpusPath(rel));
     mkdirSync(path.dirname(file), { recursive: true });
@@ -30,14 +31,14 @@ function fixture(t) {
   }
   return {
     root,
-    registry: (rows) => write(PATHS.registryFile, `export const CANTON_ARTICLES = [
+    registry: (rows) => write(paths.registryFile, `export const CANTON_ARTICLES = [
       ${rows.map(([id, time]) => `{ id: '${id}', date: '${time}' }`).join(',\n')}
     ];`),
     meta: (locale, entries) => write(
-      PATHS.metaFiles.find((file) => file.endsWith(`-${locale}.ts`)),
+      paths.metaFiles.find((file) => file.endsWith(`-${locale}.ts`)),
       `const meta = { ${Object.entries(entries).map(([key, value]) => `"blog.article.${key}": ${JSON.stringify(value)}`).join(',\n')} };`,
     ),
-    body: (locale, id) => write(`services/locales/${PATHS.bodyDir}/${locale}/${id}.ts`, 'export default {};'),
+    body: (locale, id) => write(`services/locales/${paths.bodyDir}/${locale}/${id}.ts`, 'export default {};'),
   };
 }
 
@@ -86,8 +87,8 @@ test('dry conserva le prove positive in una finestra corta e richiede misura per
   const incomplete = commitHistory(48);
   incomplete.perCanton['canton-be'] = { articles: 1 };
   const gap = measure(root, incomplete, { ...ENV, CANTON_ARTICLE_SECTIONS_ENABLED: 'AG BE' });
-  assert.equal(gap['canton-dry'].firing, true);
-  assert.match(gap['canton-dry'].body, /canton-ag: articolo assente[\s\S]*canton-be: non misurabile/);
+  assert.equal(gap['canton-dry'].available, false);
+  assert.match(gap['canton-dry'].summary, /canton-ag: articolo assente[\s\S]*canton-be: non misurabile/);
 });
 
 test('RC ignoto, gate spento e kill switch rendono indisponibili entrambi i verdetti', (t) => {
@@ -141,6 +142,10 @@ test('locale-gap richiede titolo e corpo per lo stesso id nelle quattro lingue',
   assert.match(measure(f.root, commits)['locale-gap'].body, /it=1, en=1, de=0, fr=0/);
 
   f.body('de', 'recent');
+  f.meta('fr', { 'recent.title': ' \u00a0blog.article.recent.title\t ' });
+  assert.match(measure(f.root, commits)['locale-gap'].body, /it=1, en=1, de=1, fr=0/);
+  f.meta('fr', { 'recent.title': 'blog.article.recent.title!' });
+  assert.equal(measure(f.root, commits)['locale-gap'].firing, false);
   f.meta('fr', { 'recent.title': "L’article d’aujourd’hui" });
   const recovered = measure(f.root, commits)['locale-gap'];
   assert.equal(recovered.firing, false);
@@ -168,10 +173,12 @@ test('wiring aggrega i gap, rispetta il cap e risolve gli stessi titoli al recup
     return evaluateConditions(measurements).filter(({ title }) => TITLES.includes(title));
   };
   const twoCantons = { ...ENV, CANTON_ARTICLE_SECTIONS_ENABLED: 'AG BE' };
-  const verdicts = await getVerdicts(commitHistory(48), twoCantons);
-  assert.deepEqual(verdicts.map(({ title, section }) => [title, section]), TITLES.map((title) => [title, null]));
-  assert.match(verdicts[0].body, /canton-ag: articolo assente[\s\S]*canton-be: articolo assente/);
-  assert.match(verdicts[1].body, /canton-ag: articolo assente[\s\S]*canton-be: non misurabile/);
+  const commits = commitHistory(48);
+  commits.perCanton['canton-be'] = { articles: 1 };
+  const partial = await getVerdicts(commits, twoCantons);
+  assert.deepEqual(partial.map(({ available, firing }) => [available, firing]), [[false, false], [false, false]]);
+  assert.match(measure(f.root, commits, twoCantons)['locale-gap'].summary,
+    /canton-ag: articolo assente[\s\S]*canton-be: non misurabile \(registro indisponibile\)/);
   const created = [];
   const routed = [];
   const resolved = [];
@@ -181,6 +188,18 @@ test('wiring aggrega i gap, rispetta il cap e risolve gli stessi titoli al recup
     resolveIssue: (title) => resolved.push(title),
     log: () => {},
   };
+  await reconcile(partial, io);
+  assert.deepEqual({ created, routed, resolved }, { created: [], routed: [], resolved: [] });
+
+  const bern = fixture(t, 'canton-be', f.root);
+  bern.registry([]);
+  for (const locale of LOCALES) bern.meta(locale, {});
+  const verdicts = await getVerdicts(commitHistory(48), twoCantons);
+  assert.deepEqual(verdicts.map(({ title, section }) => [title, section]), TITLES.map((title) => [title, null]));
+  for (const verdict of verdicts) {
+    assert.equal(verdict.firing, true);
+    assert.match(verdict.body, /canton-ag: articolo assente[\s\S]*canton-be: articolo assente/);
+  }
   assert.equal((await reconcile(verdicts, { ...io, maxIssues: 1 })).capped, 1);
   assert.deepEqual(created, TITLES.slice(0, 1));
   created.length = 0;

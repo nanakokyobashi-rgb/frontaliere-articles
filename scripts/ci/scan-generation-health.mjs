@@ -2686,7 +2686,7 @@ async function main() {
     + `${dryRun ? ' (dry-run)' : ''}`,
   );
   const cantonSummary = measurements.commits.available ? formatCantonCommitSummary(measurements.commits.perCanton) : null;
-  if (cantonSummary) console.log(`[generation-health] sezioni cantonali (solo conteggio, nessuna condizione): ${cantonSummary}`);
+  if (cantonSummary) console.log(`[generation-health] commit per sezione cantonale: ${cantonSummary}`);
   if (measurements.runs.available && measurements.runs.outcomes) {
     const o = measurements.runs.outcomes;
     console.log(

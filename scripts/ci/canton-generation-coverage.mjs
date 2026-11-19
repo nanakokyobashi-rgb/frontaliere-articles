@@ -73,7 +73,8 @@ export function measureCantonLocales(section, repoRoot, now) {
       const titles = new Set();
       for (const { key, value } of readStaticObjectEntries(source)) {
         const id = /^blog\.article\.([a-z0-9-]+)\.title$/u.exec(key)?.[1];
-        if (ids.has(id) && value.trim()) titles.add(id);
+        const title = value.trim();
+        if (ids.has(id) && title && title !== key) titles.add(id);
       }
       const count = [...titles].filter((id) =>
         hasBody(resolveFile(`services/locales/${paths.bodyDir}/${locale}/${id}.ts`))).length;
@@ -96,10 +97,9 @@ function summarizeCantonCoverage(rows) {
   };
   const lines = rows.map(({ section, status, detail }) => `- ${section}: ${labels[status]} (${detail})`);
   const summary = lines.join('\n');
+  if (rows.some(({ status }) => status === 'unknown')) return { summary, available: false };
   if (rows.some(({ status }) => status === 'gap')) return { summary, firing: true, body: summary };
-  if (!rows.some(({ status }) => status === 'covered') || rows.some(({ status }) => status === 'unknown')) {
-    return { summary, available: false };
-  }
+  if (!rows.some(({ status }) => status === 'covered')) return { summary, available: false };
   return { summary, firing: false };
 }
 
