@@ -19815,7 +19815,7 @@ export function getArticleImageDeadlineAt(now = Date.now(), budgetMs = IMAGE_PHA
     : Math.min(phaseDeadline, _articleRunDeadlineMs);
 }
 
-function getArticleImageDeadlines(now = Date.now()) {
+export function getArticleImageDeadlines(now = Date.now()) {
   // Keep the existing generation window. A generated image rejected near its
   // deadline must still leave time to check the provenance and relevance of
   // an alternative. Take the reserve from the remaining run budget when late.
