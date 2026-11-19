@@ -242,7 +242,38 @@ jobs:
             exit 1
           fi
           export GH_TOKEN="$runtime_pat"
-          dispatch_cohort_size="$(jq '[.sections[] | select(.dispatch)] | length' "$RUNNER_TEMP/reconcile-sections.json")"
+          dispatch_sections="$(jq -c '[.sections[] | select(.dispatch)]' "$RUNNER_TEMP/reconcile-sections.json")"
+          if [ "$PENDING_EDGE_FLIP" != 'true' ]; then
+            # Reconcile runs serialize, but the child publisher outlives its
+            # coordinator. Reuse a recovery already working on this revision.
+            since="$(date -u -d '6 hours ago' +%Y-%m-%dT%H:%M:%SZ)"
+            active_sections="$(gh api --paginate --slurp -X GET \
+              "repos/$GITHUB_REPOSITORY/actions/workflows/fast-publish-section.yml/runs" \
+              -f branch=main -f event=workflow_dispatch -f head_sha="$SOURCE_COMMIT" \
+              -f "created=>=$since" -f per_page=100 \
+              | jq -ce --arg sha "$SOURCE_COMMIT" '
+                if length == 0 or any(.[]; (.workflow_runs | type) != "array") then
+                  error("invalid fast-publish-section run list")
+                else
+                  "^cover-publish-section / (?<section>canton-[a-z0-9-]+) / nonce=reconcile-[0-9]+-[a-z0-9-]+ / dry=false / c=reconcile-[0-9]+-n[1-9][0-9]*$" as $title_re
+                  | [.[] | .workflow_runs[] | select(.head_sha == $sha)
+                    | select(.status == "queued" or .status == "pending" or .status == "in_progress"
+                        or .status == "requested" or .status == "waiting")
+                    | (.display_title // "")
+                    | select(test($title_re))
+                    | capture($title_re).section]
+                  | unique
+                end
+              ')"
+            dispatch_sections="$(jq -c --argjson active "$active_sections" '
+              map(select(.section as $section | ($active | index($section)) == null))
+            ' <<< "$dispatch_sections")"
+            if [ "$dispatch_sections" = '[]' ]; then
+              echo 'Backfill già in coda o in corso sulla stessa revisione.'
+              exit 0
+            fi
+          fi
+          dispatch_cohort_size="$(jq 'length' <<< "$dispatch_sections")"
           if ! [[ "$dispatch_cohort_size" =~ ^[1-9][0-9]*$ ]]; then
             echo "::error::dimensione coorte reconcile non valida: $dispatch_cohort_size"
             exit 1
@@ -277,7 +308,7 @@ jobs:
               echo "::warning::dispatch fallito per $section — riprovera' il prossimo giro"
               fail=1
             fi
-          done < <(jq -r '.sections[] | select(.dispatch) | [.section, (.selected | tojson), (.missingPagePaths | tojson), (.knownMissingPagePaths | tojson)] | @tsv' "$RUNNER_TEMP/reconcile-sections.json")
+          done < <(jq -r '.[] | [.section, (.selected | tojson), (.missingPagePaths | tojson), (.knownMissingPagePaths | tojson)] | @tsv' <<< "$dispatch_sections")
           [ "$fail" = "0" ] || exit 1
 
       # Il workflow_run di un child fast-publish e' il barrier event: questo

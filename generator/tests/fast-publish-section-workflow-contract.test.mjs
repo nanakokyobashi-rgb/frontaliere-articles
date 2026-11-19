@@ -319,6 +319,57 @@ test('il replay stale installa il parser prima di risolvere la release API', () 
   );
 });
 
+test('reconcile evita un backfill duplicato sulla stessa revisione e conserva la coorte del flip', () => {
+  const source = readFileSync(new URL('../../.github/workflows/reconcile-section-pages.yml', import.meta.url), 'utf8');
+  const start = source.indexOf('          set -euo pipefail', source.indexOf('- name: Backfill (dispatch'));
+  const end = source.indexOf('\n      # Il workflow_run di un child', start);
+  assert.ok(start >= 0 && end > start);
+  const root = mkdtempSync(path.join(tmpdir(), 'section-reconcile-active-'));
+  const commit = 'a'.repeat(40);
+  const pending = (section, status, sha = commit) => ({
+    head_sha: sha,
+    status,
+    display_title: `cover-publish-section / ${section} / nonce=reconcile-42-${section} / dry=false / c=reconcile-42-n1`,
+  });
+  try {
+    writeFileSync(path.join(root, 'reconcile-sections.json'), JSON.stringify({
+      sections: ['canton-appenzello', 'canton-ti', 'canton-ne'].map((section) => ({
+        section, dispatch: true, selected: [], missingPagePaths: [], knownMissingPagePaths: [],
+      })),
+    }));
+    const run = (pendingFlip) => execFileSync('bash', ['-c', [
+      'gh() { if [ "$1" = api ]; then printf "%s" "$ACTIVE_RUNS"; else printf "%s\\n" "$@"; fi; }',
+      'date() { echo 2026-11-19T04:00:00Z; }',
+      source.slice(start, end),
+    ].join('\n')], {
+      cwd: root,
+      env: {
+        ...process.env, RUNNER_TEMP: root, GITHUB_PAT_NANAKO: 'test-token', GITHUB_REPOSITORY: 'test/corpus',
+        GITHUB_RUN_ID: '123', PENDING_EDGE_FLIP: pendingFlip, SOURCE_COMMIT: commit, API_RELEASE_COMMIT: commit,
+        ACTIVE_RUNS: JSON.stringify([{ workflow_runs: [
+          pending('canton-appenzello', 'pending'),
+          pending('canton-ti', 'completed'),
+          { ...pending('canton-ti', 'queued'), display_title: 'cover-publish-section / canton-ti / nonce=manual / dry=false / c=none' },
+          { ...pending('canton-ne', 'queued'), display_title: 'cover-publish-section / canton-ne / nonce=reconcile-42-canton-ne / dry=true / c=reconcile-42-n1' },
+          pending('canton-ne', 'in_progress', 'b'.repeat(40)),
+        ] }]),
+      },
+      encoding: 'utf8',
+      stdio: 'pipe',
+    });
+    const ordinary = run('false');
+    assert.doesNotMatch(ordinary, /section=canton-appenzello/);
+    assert.match(ordinary, /section=canton-ti/);
+    assert.match(ordinary, /section=canton-ne/);
+    assert.match(ordinary, /dispatch_cohort=reconcile-123-n2/);
+    const flip = run('true');
+    assert.match(flip, /section=canton-appenzello/);
+    assert.match(flip, /dispatch_cohort=reconcile-123-n3/);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('un recovery stale dispatcha i child e lascia il barrier al reconcile event-driven', () => {
   assert.match(recovery, /dispatch_children_wave[\s\S]*The recovery is a dispatcher, not a coordinator/u);
   assert.doesNotMatch(recovery, /wait_for_dispatched_children/u);
