@@ -17,6 +17,8 @@ function runHelper({
   fetchedMain = CURRENT,
   fetchedAtLeastAuthoritative = true,
   githubEnv = true,
+  restUnavailable = false,
+  remoteRef = CURRENT + "\trefs/heads/main",
 } = {}) {
   const dir = mkdtempSync(resolve(tmpdir(), 'verify-publish-api-source-'));
   const envFile = resolve(dir, 'github-env');
@@ -29,7 +31,7 @@ function runHelper({
   };
   try {
     writeFileSync(envFile, '');
-    writeExecutable('gh', '#!/bin/sh\nprintf "%s\n" "' + CURRENT + '"\n');
+    writeExecutable('gh', '#!/bin/sh\n[ "$FAKE_REST_UNAVAILABLE" != true ] || exit 1\nprintf "%s\n" "' + CURRENT + '"\n');
     writeExecutable('timeout', '#!/bin/sh\nshift 2\nexec "$@"\n');
     writeExecutable(
       'node',
@@ -37,7 +39,7 @@ function runHelper({
     );
     writeExecutable(
       'git',
-      '#!/bin/sh\ncase "$1" in\n  fetch) exit 0 ;;\n  rev-parse) printf "%s\\n" "$FAKE_FETCHED_MAIN" ;;\n  merge-base) if [ "$3" = "$FAKE_AUTHORITATIVE_MAIN" ]; then [ "$FAKE_FETCHED_AT_LEAST" = "true" ] && exit 0 || exit 1; else [ "$FAKE_ANCESTOR" = "true" ] && exit 0 || exit 1; fi ;;\n  *) exit 0 ;;\nesac\n',
+      '#!/bin/sh\ncase "$1" in\n  ls-remote) printf "%s\\n" "$FAKE_REMOTE_REF" ;;\n  fetch) exit 0 ;;\n  rev-parse) printf "%s\\n" "$FAKE_FETCHED_MAIN" ;;\n  merge-base) if [ "$3" = "$FAKE_AUTHORITATIVE_MAIN" ]; then [ "$FAKE_FETCHED_AT_LEAST" = "true" ] && exit 0 || exit 1; else [ "$FAKE_ANCESTOR" = "true" ] && exit 0 || exit 1; fi ;;\n  *) exit 0 ;;\nesac\n',
     );
     const env = {
       ...process.env,
@@ -47,6 +49,8 @@ function runHelper({
       REPOSITORY: 'nanakokyobashi-rgb/frontaliere-articles',
       PUBLISH_API_SOURCE_COMMIT: SOURCE,
       VERIFY_CONTEXT: 'test',
+      FAKE_REST_UNAVAILABLE: String(restUnavailable),
+      FAKE_REMOTE_REF: remoteRef,
       FAKE_API_INPUT: String(apiInputChanged),
       FAKE_ANCESTOR: String(ancestor),
       FAKE_FETCHED_MAIN: fetchedMain,
@@ -114,4 +118,16 @@ test('freshness helper resta fail-closed se la storia non è riconciliabile', ()
   const result = runHelper({ ancestor: false });
   assert.equal(result.status, 1);
   assert.match(result.output, /avanzamento non riconciliabile/u);
+});
+
+test('freshness helper verifies the remote Git ref when REST is unavailable', () => {
+  const result = runHelper({ restUnavailable: true, apiInputChanged: true });
+  assert.equal(result.status, 0);
+  assert.match(result.output, /PUBLISH_API_SKIP=true/u);
+});
+
+test('freshness helper fails closed when neither transport verifies main', () => {
+  const result = runHelper({ restUnavailable: true, remoteRef: SOURCE + '\trefs/heads/other' });
+  assert.equal(result.status, 1);
+  assert.match(result.output, /impossibile verificare la HEAD corrente/u);
 });
