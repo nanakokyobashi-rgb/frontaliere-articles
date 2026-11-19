@@ -1808,6 +1808,19 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     'anche due date identiche devono restare nei rispettivi slot',
   );
 
+  const decimalAmountSource = 'Il prezzo è CHF 12,50 a Lugano; Lugano: 80 richieste e Bellinzona: 17 richieste.';
+  const decimalAmountTarget = 'The price is CHF 12.50 in Lugano; Lugano: 80 applications and Bellinzona: 17 applications.';
+  assert.equal(
+    await makeTranslator(() => decimalAmountTarget, 50)(decimalAmountSource),
+    decimalAmountTarget,
+    'una virgola decimale non separa il valore dal toponimo che lo segue',
+  );
+  assert.equal(
+    await makeTranslator(() => 'The price is CHF 12.50 in Bellinzona; Lugano: 80 applications and Bellinzona: 17 applications.', 50)(decimalAmountSource),
+    null,
+    'la conversione del separatore numerico non autorizza a scambiare i toponimi',
+  );
+
   const signedSource = 'Prima -12% dopo altre parole da spezzare ancora oggi.';
   assert.equal(
     await makeTranslator((chunk) => chunk.replace('-12%', '12%'))(signedSource),
