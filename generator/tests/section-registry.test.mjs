@@ -253,6 +253,7 @@ test('kill-switch: codici di gruppo, id, all; token ignoti riportati', () => {
 test('kill-switch: verificato solo col marker del loader; spegne live, non tocca retired', () => {
   assert.equal(resolveKillSwitch({}).state, 'unverified');
   assert.equal(resolveKillSwitch({ RC_ENV_LOADED: 'true' }).state, 'unverified');
+  assert.equal(resolveKillSwitch({ OPERATOR_RC_ENV_LOADED: '1' }).state, 'unverified');
   const ks = resolveKillSwitch({ RC_ENV_LOADED: '1', CANTON_ARTICLE_SECTIONS_KILL: 'TI GR' });
   assert.equal(ks.state, 'verified');
   const doc = committed();
@@ -1733,7 +1734,7 @@ test('load-rc-env: kill-switch mappato, assente per default, marker scritto solo
     'main deve leggere il template prima di esportarlo');
 
   const paramCountAt = exporter.search(/^ {2}const paramCount = /m);
-  const markerAt = exporter.indexOf("lines.push(writeToGithubEnv ? `${RC_LOADED_MARKER}=1` : `export ${RC_LOADED_MARKER}='1'`);");
+  const markerAt = exporter.indexOf("lines.push(writeToGithubEnv ? `${marker}=1` : `export ${marker}='1'`);");
   assert.ok(paramCountAt >= 0 && markerAt > paramCountAt,
     'exportRcEnvironment deve contare i parametri prima di aggiungere il marker');
 });

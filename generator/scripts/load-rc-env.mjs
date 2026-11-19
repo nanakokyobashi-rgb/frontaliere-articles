@@ -19,7 +19,8 @@
  *     eval "$(GOOGLE_APPLICATION_CREDENTIALS=/path/to/sa.json node scripts/load-rc-env.mjs)"
  *
  *   FRONTALIERE_LOAD_OPERATOR_CONFIG=1 selects the private operator parameters
- *   outside GitHub Actions. Consume the exports without printing stdout.
+ *   outside GitHub Actions and reports success with OPERATOR_RC_ENV_LOADED=1.
+ *   Consume the exports without printing stdout.
  *
  * ─── Behaviour ───────────────────────────────────────────────────────────
  *   • If a variable is ALREADY set in the environment, the RC value is SKIPPED.
@@ -496,10 +497,12 @@ export const RC_TO_ENV = {
  * risposto». Per i parametri la cui assenza e' il default sicuro di un
  * override (CANTON_ARTICLE_SECTIONS_KILL) o per i gate che devono provare la
  * disponibilita' del template (generazione cantonale) la differenza conta: il
- * marker viene scritto SOLO dopo aver letto il template, e sempre (anche se
- * gia' presente nell'ambiente: descrive questa esecuzione).
+ * marker ordinario viene scritto SOLO dopo aver letto il template e anche se
+ * gia' presente nell'ambiente: descrive questa esecuzione. L'export locale dei
+ * soli parametri operatore usa un marker dedicato.
  */
 export const RC_LOADED_MARKER = 'RC_ENV_LOADED';
+const OPERATOR_RC_LOADED_MARKER = 'OPERATOR_RC_ENV_LOADED';
 
 /**
  * RC keys whose EMPTY value is a real signal, not a missing setting.
@@ -1075,9 +1078,9 @@ export async function exportRcEnvironment(template) {
   const missingKeys = [];
   const lines = []; // For GITHUB_ENV or stdout
   const queuedEnvKeys = new Set();
-  // Il template e' stato letto: da qui in poi l'assenza di un parametro e' un
-  // dato di Remote Config, non un fallimento del caricamento.
-  lines.push(writeToGithubEnv ? `${RC_LOADED_MARKER}=1` : `export ${RC_LOADED_MARKER}='1'`);
+  // Il marker attesta il caricamento dei parametri della modalità selezionata.
+  const marker = operatorOnly ? OPERATOR_RC_LOADED_MARKER : RC_LOADED_MARKER;
+  lines.push(writeToGithubEnv ? `${marker}=1` : `export ${marker}='1'`);
 
   for (const [rcKey, envKeys] of Object.entries(RC_TO_ENV)) {
     if (rcKey.startsWith('OPERATOR_') !== operatorOnly) continue;

@@ -379,7 +379,7 @@ for (const [name, optIn, githubActions, githubEnv] of [
     const output = envFile ? fs.readFileSync(envFile, 'utf8') : stdout;
     if (operatorOnly) {
       assert.deepEqual(stdout.split('\n'), [
-        "export RC_ENV_LOADED='1'",
+        "export OPERATOR_RC_ENV_LOADED='1'",
         "export OPERATOR_ENABLED='1'",
         "export OPERATOR_TELEGRAM_BOT_TOKEN='fake'\\''private-token'",
       ]);
