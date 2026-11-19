@@ -294,7 +294,7 @@ function webpFixture(byte) {
   return bytes;
 }
 
-async function publishFourLocaleSharedAsset({ localBytes, assetProbeImpl = null, assetKey = 'images/shared.webp' }) {
+async function publishFourLocaleSharedAsset({ localBytes, assetProbeImpl = null, assetKey = 'images/shared.webp', unrelatedKey = 'images/unrelated.webp' }) {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-live-shared-asset-'));
   const sharedLocal = path.join(fixtureRoot, `shared${path.extname(assetKey)}`);
   const unrelatedLocal = path.join(fixtureRoot, 'unrelated.webp');
@@ -330,7 +330,7 @@ async function publishFourLocaleSharedAsset({ localBytes, assetProbeImpl = null,
       snapshotPagesBeforeUpload: true,
       cdnUploads: [
         { local: sharedLocal, key: assetKey },
-        { local: unrelatedLocal, key: 'images/unrelated.webp' },
+        { local: unrelatedLocal, key: unrelatedKey },
       ],
       obsoletePages: [],
       distDir: fixtureRoot,
@@ -628,5 +628,31 @@ test('publisher: un 404 richiesto resta differito se un asset condiviso non è v
     assert.ok(!events.includes('page-upload'));
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('publisher: un cover identico nei namespace leased resta nel percorso protetto', async (t) => {
+  for (const namespace of ['blog', 'places']) {
+    await t.test(namespace, async () => {
+      const localBytes = webpFixture(0x11);
+      const coverBytes = webpFixture(0x33);
+      const unrelatedKey = `images/${namespace}/existing-cover.webp`;
+      const fixture = await publishFourLocaleSharedAsset({
+        localBytes,
+        unrelatedKey,
+        assetProbeImpl: async (key) => {
+          const bytes = key === unrelatedKey ? coverBytes : localBytes;
+          return { ok: true, status: 200, contentType: 'image/webp', byteLength: bytes.length, sha256: sha256(bytes) };
+        },
+      });
+      try {
+        assert.equal(fixture.result.failures, 0);
+        assert.equal(fixture.result.uploaded, 4);
+        assert.ok(!fixture.assetProbeCalls.includes(unrelatedKey), 'la probe fuori lease non decide per un asset leased');
+        assert.ok(fixture.events.includes(`asset-upload:${unrelatedKey}`), 'l’asset leased segue l’uploader che prende il lease');
+      } finally {
+        fixture.cleanup();
+      }
+    });
   }
 });
