@@ -7344,7 +7344,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   const verificationModels = availableVerifiers.length >= 2 ? availableVerifiers : verificationCandidates;
 
   const modelResults = [];
-  // An HTTP success without a verdict can otherwise keep the same fallback
+  // An HTTP success without a verifiable vote can otherwise keep the same fallback
   // at the head of every retry, even after bypassing the response cache.
   const invalidVerdictModels = new Set();
 
@@ -7859,6 +7859,7 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
   const issues = normalizeFactCheckIssues(result.issues, opts);
   const editorialAssessment = validateEditorialAssessment(result.editorialAssessment, opts.editorialContext);
   if (!editorialAssessment.verifiable) {
+    if (servedBy) opts.invalidVerdictModels?.add(servedBy);
     console.error(`  ⚠️  LLM fact-check (${model}${servedBy && servedBy !== model ? ` via ${servedBy}` : ''}): `
       + `valutazione editoriale senza prove leggibili (${safeSignalDiagnosticTextForLog(editorialAssessment.reason)}) — voto scartato`);
     return null;
@@ -17246,24 +17247,32 @@ async function translateArticle(data) {
         joinedAnchoredNumericContract,
       )
       : null;
-    const anchorAssociationCoversEveryFact = sourceNumericContract.associations.length > 0
-      && sourceAnchoredNumericContract.associations.every(({ anchorSpan, dateFact, calendarYear }) => (
-        Boolean(anchorSpan) || Boolean(dateFact) || calendarYear
-      ))
-      && joinedAnchoredNumericContract.associations.every(({ anchorSpan, dateFact, calendarYear }) => (
-        Boolean(anchorSpan) || Boolean(dateFact) || calendarYear
-      ))
-      && anchorAssociation === true;
-    // The ordered non-calendar sequence plus verified date facts is enough
-    // when no source-owned anchor survives; there is no association evidence
-    // left to contradict those source-owned facts.
-    // When invariant anchors remain, they must cover every fact so a possible
-    // reassociation cannot be published.
+    // A number in fully localized prose can coexist with an anchored fact.
+    // Keep empty slots and one slot per calendar group, so even identical
+    // facts cannot trade anchors while components within a date may reorder.
+    const numericAnchorSlots = ({ associations }) => {
+      const slots = [];
+      const calendarSlots = new Map();
+      for (const { anchorSpan, calendarGroup } of associations) {
+        if (calendarGroup === null) {
+          slots.push(new Set(anchorSpan ? [anchorSpan] : []));
+          continue;
+        }
+        if (!calendarSlots.has(calendarGroup)) {
+          const slot = new Set();
+          calendarSlots.set(calendarGroup, slot);
+          slots.push(slot);
+        }
+        if (anchorSpan) calendarSlots.get(calendarGroup).add(anchorSpan);
+      }
+      return slots.map((slot) => [...slot].sort());
+    };
     const hasInvariantAnchorEvidence = invariantAnchorTokens.size > 0;
     const numericAssociationMismatch = exactAssociation === false
-      || (exactAssociation === null
-        && hasInvariantAnchorEvidence
-        && !anchorAssociationCoversEveryFact);
+      || (hasInvariantAnchorEvidence
+        && ((exactAssociation === null && anchorAssociation !== true)
+          || JSON.stringify(numericAnchorSlots(sourceAnchoredNumericContract))
+            !== JSON.stringify(numericAnchorSlots(joinedAnchoredNumericContract))));
     if (sourceNumericContract.values.length > 0 && numericAssociationMismatch) return reject('numeric-association');
 
     // A table can preserve its pipes and per-cell opaque atoms while still
