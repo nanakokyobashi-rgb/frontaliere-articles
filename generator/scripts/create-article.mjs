@@ -17246,24 +17246,18 @@ async function translateArticle(data) {
         joinedAnchoredNumericContract,
       )
       : null;
-    const anchorAssociationCoversEveryFact = sourceNumericContract.associations.length > 0
-      && sourceAnchoredNumericContract.associations.every(({ anchorSpan, dateFact, calendarYear }) => (
-        Boolean(anchorSpan) || Boolean(dateFact) || calendarYear
-      ))
-      && joinedAnchoredNumericContract.associations.every(({ anchorSpan, dateFact, calendarYear }) => (
-        Boolean(anchorSpan) || Boolean(dateFact) || calendarYear
-      ))
-      && anchorAssociation === true;
-    // The ordered non-calendar sequence plus verified date facts is enough
-    // when no source-owned anchor survives; there is no association evidence
-    // left to contradict those source-owned facts.
-    // When invariant anchors remain, they must cover every fact so a possible
-    // reassociation cannot be published.
-    const hasInvariantAnchorEvidence = invariantAnchorTokens.size > 0;
+    // Preserve empty slots as well: a number in fully localized prose can
+    // coexist with an anchored fact, but an anchor cannot move to its slot,
+    // even when the two numbers are identical. Calendar bindings are checked
+    // by compareNumericAssociations because components can reorder locally.
+    const nonCalendarAnchorSlots = ({ associations }) => associations
+      .filter(({ calendarGroup }) => calendarGroup === null)
+      .map(({ anchorSpan }) => anchorSpan);
+    const anchorSlotsMatch = JSON.stringify(nonCalendarAnchorSlots(sourceAnchoredNumericContract))
+      === JSON.stringify(nonCalendarAnchorSlots(joinedAnchoredNumericContract));
     const numericAssociationMismatch = exactAssociation === false
-      || (exactAssociation === null
-        && hasInvariantAnchorEvidence
-        && !anchorAssociationCoversEveryFact);
+      || (exactAssociation === null && invariantAnchorTokens.size > 0
+        && (anchorAssociation !== true || !anchorSlotsMatch));
     if (sourceNumericContract.values.length > 0 && numericAssociationMismatch) return reject('numeric-association');
 
     // A table can preserve its pipes and per-cell opaque atoms while still
