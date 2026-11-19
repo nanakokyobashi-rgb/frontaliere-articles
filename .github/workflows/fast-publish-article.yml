@@ -620,14 +620,18 @@ jobs:
       group: fast-publish-article-${{ matrix.target.shard }}
       cancel-in-progress: false
     # The pre-purge observation and recovery gate share this hard base budget.
-    # The article-shard helper expands it to one absolute window per planned
-    # serialized commit; the later origin/recovery gates retain this 600-second
-    # cap so a large push cannot make the job unbounded. The serialized shard
-    # helper also receives the absolute job deadline and refuses a plan that
-    # cannot leave a full reconciliation window before Actions' timeout.
+    # The article-shard helper expands it to one absolute Pages window plus an
+    # operational reserve per planned serialized commit. The later origin and
+    # recovery gates retain this 600-second cap; the explicit post-publish
+    # reserve also covers CDN upload, both purges and their bounded overhead so
+    # shard pushes cannot consume the budget needed to make the whole surface
+    # live. The helper receives the absolute job deadline and refuses a plan
+    # that cannot leave reconciliation and these downstream gates before
+    # Actions' timeout.
     env:
       JOB_TIMEOUT_MINUTES: 180
       PAGES_BUILD_WAIT_BUDGET_SECONDS: 600
+      ARTICLE_PUSH_POST_PUBLISH_RESERVE_SECONDS: 1800
     steps:
       - name: Export publish job deadline
         run: |

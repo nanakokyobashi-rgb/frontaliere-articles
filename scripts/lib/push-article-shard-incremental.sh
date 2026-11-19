@@ -94,10 +94,18 @@
 #       600 when run standalone. A reconciliation gets one bounded wait of its
 #       own so the safety rollback is not prevented by an exhausted publication
 #       budget.
+#   ARTICLE_PUSH_BATCH_OVERHEAD_SECONDS — operational reserve for one batch's
+#       clone/history work, commit and push. Defaults to 300. It is included
+#       before every Pages window and in the reconciliation reserve.
+#   ARTICLE_PUSH_POST_PUBLISH_RESERVE_SECONDS — reserve for the workflow gates
+#       that run after this helper (CDN upload, purge, origin/recovery and
+#       re-purge). The fast-publish workflow supplies this; standalone callers
+#       default to 0 because they have no downstream gates here.
 #   CI_JOB_DEADLINE_EPOCH — optional absolute job deadline in Unix seconds,
 #       exported before checkout by the publish workflow. When present, the
-#       coordinator refuses a serialized plan that cannot fit its Pages windows
-#       plus one reconciliation window before the runner timeout.
+#       coordinator refuses a serialized plan that cannot fit its Pages windows,
+#       per-batch overhead, one reconciliation window and all downstream gates
+#       before the runner timeout.
 #
 # Exit codes:
 #   0 — pushed, or a clean no-op (identical content already live, or the
@@ -141,9 +149,10 @@ if ! [[ "$article_push_pages_wait_seconds" =~ ^[1-9][0-9]*$ ]]; then
   exit 1
 fi
 # Keep a small tail after the reconciliation Pages window so the workflow can
-# write its outcome before Actions kills the job. The base window is reserved
-# in full because a failed serialized chain must be able to publish and observe
-# its rollback, not merely push the rollback commit to GitHub.
+# write its outcome before Actions kills the job. The base window and one
+# operational reserve are both kept in full because a failed serialized chain
+# must be able to publish and observe its rollback, not merely push the rollback
+# commit to GitHub.
 DEFAULT_ARTICLE_PUSH_JOB_TAIL_SECONDS=60
 article_push_job_tail_seconds="$DEFAULT_ARTICLE_PUSH_JOB_TAIL_SECONDS"
 article_push_job_deadline="${CI_JOB_DEADLINE_EPOCH:-}"
@@ -151,9 +160,23 @@ if [ -n "$article_push_job_deadline" ] && ! [[ "$article_push_job_deadline" =~ ^
   echo "::error::CI_JOB_DEADLINE_EPOCH must be a positive Unix timestamp" >&2
   exit 1
 fi
-article_push_job_reconciliation_reserve_seconds=$((article_push_pages_wait_seconds + article_push_job_tail_seconds))
+DEFAULT_ARTICLE_PUSH_BATCH_OVERHEAD_SECONDS=300
+article_push_batch_overhead_seconds="${ARTICLE_PUSH_BATCH_OVERHEAD_SECONDS:-$DEFAULT_ARTICLE_PUSH_BATCH_OVERHEAD_SECONDS}"
+if ! [[ "$article_push_batch_overhead_seconds" =~ ^[1-9][0-9]*$ ]]; then
+  echo "::error::ARTICLE_PUSH_BATCH_OVERHEAD_SECONDS must be a positive integer" >&2
+  exit 1
+fi
+article_push_post_publish_reserve_seconds="${ARTICLE_PUSH_POST_PUBLISH_RESERVE_SECONDS:-0}"
+if ! [[ "$article_push_post_publish_reserve_seconds" =~ ^[0-9]+$ ]]; then
+  echo "::error::ARTICLE_PUSH_POST_PUBLISH_RESERVE_SECONDS must be a non-negative integer" >&2
+  exit 1
+fi
+# A failed Pages-gated push needs one complete rollback operation: its own
+# clone/commit/push reserve, one Pages window, and the final Actions tail.
+article_push_job_reconciliation_reserve_seconds=$((article_push_pages_wait_seconds + article_push_batch_overhead_seconds + article_push_job_tail_seconds))
 article_push_pages_deadline_explicit=0
 article_push_pages_deadline="${ARTICLE_PUSH_PAGES_DEADLINE:-}"
+article_push_batch_pages_deadline="${ARTICLE_PUSH_BATCH_PAGES_DEADLINE:-}"
 if [ -z "$article_push_pages_deadline" ]; then
   article_push_pages_now="$(date +%s)" || {
     echo "::error::cannot establish the shared Pages-wait deadline" >&2
@@ -163,17 +186,22 @@ if [ -z "$article_push_pages_deadline" ]; then
     echo "::error::the shared Pages-wait clock is unreadable" >&2
     exit 1
   fi
-  article_push_pages_deadline=$((article_push_pages_now + article_push_pages_wait_seconds))
+  article_push_pages_deadline=$((article_push_pages_now + article_push_pages_wait_seconds + article_push_batch_overhead_seconds))
 elif ! [[ "$article_push_pages_deadline" =~ ^[0-9]+$ ]]; then
   echo "::error::ARTICLE_PUSH_PAGES_DEADLINE must be a Unix timestamp" >&2
   exit 1
 else
   article_push_pages_deadline_explicit=1
 fi
-# Nested bounded invocations are separate Bash processes: exporting an absolute
-# wall-clock deadline, rather than `SECONDS`, keeps every child on the deadline
-# planned by the coordinator instead of starting a fresh wait window for every
-# batch.
+if [ -n "$article_push_batch_pages_deadline" ] && ! [[ "$article_push_batch_pages_deadline" =~ ^[0-9]+$ ]]; then
+  echo "::error::ARTICLE_PUSH_BATCH_PAGES_DEADLINE must be a Unix timestamp" >&2
+  exit 1
+fi
+# Nested bounded invocations are separate Bash processes: exporting the absolute
+# wall-clock plan deadline, rather than `SECONDS`, keeps the coordinator's
+# remaining-batch budget intact. Each child also receives an absolute deadline
+# for its own Pages window, including its operation reserve, so no child starts
+# a fresh unbounded wait window.
 export ARTICLE_PUSH_PAGES_DEADLINE="$article_push_pages_deadline"
 article_push_pages_poll_seconds="${ARTICLE_PUSH_PAGES_POLL_SECONDS:-5}"
 if ! [[ "$article_push_pages_poll_seconds" =~ ^[1-9][0-9]*$ ]]; then
@@ -349,7 +377,7 @@ pages_build_commit_matches() {
 # have no Pages API and deliberately skip this external wait; production shard
 # remotes are GitHub URLs and fail closed when their build cannot be observed.
 wait_for_pages_build() {
-  local pushed_commit="$1" requested_deadline="${2:-$article_push_pages_deadline}"
+  local pushed_commit="$1" requested_deadline="${2:-${article_push_batch_pages_deadline:-$article_push_pages_deadline}}"
   local pages_url pages_repo token body pages_status pages_commit
   local deadline remaining current_epoch request_timeout
 
@@ -729,6 +757,9 @@ rollback_serialized_publications() {
   # present when this function is called in isolation.
   local rollback_job_deadline_epoch="${article_push_job_deadline:-}"
   local rollback_job_tail_seconds="${article_push_job_tail_seconds:-${DEFAULT_ARTICLE_PUSH_JOB_TAIL_SECONDS:-}}"
+  local rollback_batch_overhead_seconds="${article_push_batch_overhead_seconds:-${ARTICLE_PUSH_BATCH_OVERHEAD_SECONDS:-${article_push_pages_wait_seconds:-}}}"
+  local rollback_post_publish_reserve_seconds="${article_push_post_publish_reserve_seconds:-${ARTICLE_PUSH_POST_PUBLISH_RESERVE_SECONDS:-0}}"
+  local rollback_push_reserve_seconds rollback_push_remaining
   local rollback_repo rollback_pat_token candidate_parent expected_parent clone_err
   local candidate
   local -a rollback_git_opts=()
@@ -847,6 +878,31 @@ rollback_serialized_publications() {
       -m "$section-$loc article shard publication reconciliation" \
       -m "Restore the pre-push tree after the Pages gate for a published commit failed.")" || return 1
   fi
+  if [ -n "$rollback_job_deadline_epoch" ]; then
+    if ! [[ "$rollback_job_tail_seconds" =~ ^[1-9][0-9]*$ ]]; then
+      echo "::error::serialized-push rollback has no valid job tail budget" >&2
+      return 1
+    fi
+    if ! [[ "$rollback_batch_overhead_seconds" =~ ^[1-9][0-9]*$ ]]; then
+      echo "::error::serialized-push rollback has no valid operational reserve" >&2
+      return 1
+    fi
+    if ! [[ "$rollback_post_publish_reserve_seconds" =~ ^[0-9]+$ ]]; then
+      echo "::error::serialized-push rollback has no valid post-publish reserve" >&2
+      return 1
+    fi
+    rollback_now="$(date +%s)" || return 1
+    if ! [[ "$rollback_now" =~ ^[0-9]+$ ]]; then
+      echo "::error::the reconciliation Pages-wait clock is unreadable" >&2
+      return 1
+    fi
+    rollback_push_reserve_seconds=$((rollback_batch_overhead_seconds + article_push_pages_wait_seconds + rollback_job_tail_seconds + rollback_post_publish_reserve_seconds))
+    rollback_push_remaining=$((rollback_job_deadline_epoch - rollback_now))
+    if [ "$rollback_push_remaining" -lt "$rollback_push_reserve_seconds" ]; then
+      echo "::error::serialized-push rollback has ${rollback_push_remaining}s left, but needs ${rollback_push_reserve_seconds}s for the rollback push, Pages wait, downstream gates and Actions tail" >&2
+      return 1
+    fi
+  fi
   if ! git ${rollback_git_opts[@]+"${rollback_git_opts[@]}"} -C "$rollback_stage" push "$rollback_repo" "$rollback_commit":main; then
     echo "::error::serialized-push rollback push failed; the shard may need manual reconciliation" >&2
     return 1
@@ -866,7 +922,11 @@ rollback_serialized_publications() {
       echo "::error::serialized-push rollback has no valid job tail budget" >&2
       return 1
     fi
-    rollback_job_deadline=$((rollback_job_deadline_epoch - rollback_job_tail_seconds))
+    if ! [[ "$rollback_post_publish_reserve_seconds" =~ ^[0-9]+$ ]]; then
+      echo "::error::serialized-push rollback has no valid post-publish reserve" >&2
+      return 1
+    fi
+    rollback_job_deadline=$((rollback_job_deadline_epoch - rollback_job_tail_seconds - rollback_post_publish_reserve_seconds))
     if [ "$rollback_deadline" -gt "$rollback_job_deadline" ]; then
       rollback_deadline="$rollback_job_deadline"
     fi
@@ -973,7 +1033,8 @@ run_serialized_batches() {
   local -a serialized_group_paths=()
   local -a serialized_commits=()
   local serialized_base_commit='' serialized_metadata_ok=1 serialized_chain_ok=1
-  local planned_batch_count=0 planned_batch_path_count=0 planned_batch_wait_seconds
+  local planned_batch_count=0 planned_batch_path_count=0
+  local planned_batch_wait_seconds planned_batch_overhead_seconds planned_batch_budget_seconds
   local article_push_job_usable_deadline article_push_job_remaining
 
   batch_root="$(mktemp -d "$RUNNER_TEMP/article-shard-batches.XXXXXX")" || {
@@ -1030,8 +1091,10 @@ run_serialized_batches() {
   # Pages builds are serialized deliberately, so one 600-second window cannot
   # cover a corpus-sized render split across several commits. Count the exact
   # dependency-aware batches first, then give the whole chain one absolute
-  # deadline with one base window per planned commit. Nested invocations keep
-  # this deadline unchanged.
+  # deadline with one Pages window and one operational reserve per planned
+  # commit. Nested invocations keep this plan deadline unchanged, while each
+  # child receives its own absolute batch deadline so a full Pages window is
+  # still available after that batch's clone/commit/push work.
   planned_batch_count=0
   planned_batch_path_count=0
   for group_index in "${!serialized_group_paths[@]}"; do
@@ -1061,38 +1124,42 @@ run_serialized_batches() {
     serialized_batch_failure 'serialized article-push batch planning produced no batches'
     return $?
   fi
-  planned_batch_wait_seconds="$article_push_pages_wait_seconds"
+  planned_batch_wait_seconds=$((article_push_pages_wait_seconds * planned_batch_count))
+  planned_batch_overhead_seconds=$((article_push_batch_overhead_seconds * planned_batch_count))
+  planned_batch_budget_seconds=$((planned_batch_wait_seconds + planned_batch_overhead_seconds))
+  article_push_pages_now="$(date +%s)" || {
+    serialized_batch_failure 'cannot establish the serialized Pages-wait deadline'
+    return $?
+  }
+  if ! [[ "$article_push_pages_now" =~ ^[0-9]+$ ]]; then
+    serialized_batch_failure 'the serialized Pages-wait clock is unreadable'
+    return $?
+  fi
   if [ "$article_push_pages_deadline_explicit" != '1' ]; then
-    planned_batch_wait_seconds=$((article_push_pages_wait_seconds * planned_batch_count))
-    article_push_pages_now="$(date +%s)" || {
-      serialized_batch_failure 'cannot establish the serialized Pages-wait deadline'
-      return $?
-    }
-    if ! [[ "$article_push_pages_now" =~ ^[0-9]+$ ]]; then
-      serialized_batch_failure 'the serialized Pages-wait clock is unreadable'
-      return $?
-    fi
-    if [ -n "$article_push_job_deadline" ]; then
-      article_push_job_usable_deadline=$((article_push_job_deadline - article_push_job_reconciliation_reserve_seconds))
-      article_push_job_remaining=$((article_push_job_usable_deadline - article_push_pages_now))
-      if [ "$article_push_job_remaining" -lt "$planned_batch_wait_seconds" ]; then
-        serialized_batch_failure "serialized article-push plan needs ${planned_batch_wait_seconds}s of Pages windows plus ${article_push_job_reconciliation_reserve_seconds}s for reconciliation, but only ${article_push_job_remaining}s remain before the job deadline; refusing a partial chain"
-        return $?
-      fi
-    fi
-    article_push_pages_deadline=$((article_push_pages_now + planned_batch_wait_seconds))
+    article_push_pages_deadline=$((article_push_pages_now + planned_batch_budget_seconds))
     export ARTICLE_PUSH_PAGES_DEADLINE="$article_push_pages_deadline"
-  elif [ -n "$article_push_job_deadline" ]; then
-    article_push_job_usable_deadline=$((article_push_job_deadline - article_push_job_reconciliation_reserve_seconds))
+  fi
+  article_push_pages_remaining=$((article_push_pages_deadline - article_push_pages_now))
+  if [ "$article_push_pages_remaining" -lt "$planned_batch_budget_seconds" ]; then
+    serialized_batch_failure "serialized article-push plan needs ${planned_batch_wait_seconds}s of Pages windows plus ${planned_batch_overhead_seconds}s of per-batch operational reserve, but only ${article_push_pages_remaining}s remain; refusing a partial chain"
+    return $?
+  fi
+  if [ -n "$article_push_job_deadline" ]; then
+    article_push_job_usable_deadline=$((article_push_job_deadline - article_push_job_reconciliation_reserve_seconds - article_push_post_publish_reserve_seconds))
+    article_push_job_remaining=$((article_push_job_usable_deadline - article_push_pages_now))
+    if [ "$article_push_job_remaining" -lt "$planned_batch_budget_seconds" ]; then
+      serialized_batch_failure "serialized article-push plan needs ${planned_batch_wait_seconds}s of Pages windows plus ${planned_batch_overhead_seconds}s of per-batch operational reserve and ${article_push_job_reconciliation_reserve_seconds}s for reconciliation plus ${article_push_post_publish_reserve_seconds}s for downstream gates, but only ${article_push_job_remaining}s remain before the job deadline; refusing a partial chain"
+      return $?
+    fi
     if [ "$article_push_pages_deadline" -gt "$article_push_job_usable_deadline" ]; then
-      serialized_batch_failure "explicit serialized Pages deadline exceeds the safe job budget; refusing a partial chain"
+      serialized_batch_failure "explicit serialized Pages deadline exceeds the safe job budget after reconciliation and downstream-gate reserves; refusing a partial chain"
       return $?
     fi
   fi
-  echo "$section-$loc article shard: serialized batch plan has $planned_batch_count batch(es); Pages wait window is ${planned_batch_wait_seconds} seconds"
+  echo "$section-$loc article shard: serialized batch plan has $planned_batch_count batch(es); Pages wait window is ${planned_batch_wait_seconds} seconds; per-batch operational reserve is ${planned_batch_overhead_seconds} seconds; reconciliation reserve is ${article_push_job_reconciliation_reserve_seconds} seconds; post-publish reserve is ${article_push_post_publish_reserve_seconds} seconds"
 
   serialized_batch_deadline_available() {
-    local current_epoch remaining
+    local current_epoch remaining remaining_batches required_pages required_overhead required_batch_budget required_job_budget
     current_epoch="$(date +%s)" || {
       serialized_batch_failure "cannot read the shared Pages-wait clock before serialized batch $((batch_number + 1))"
       return $?
@@ -1101,7 +1168,27 @@ run_serialized_batches() {
       serialized_batch_failure "the shared Pages-wait clock is unreadable before serialized batch $((batch_number + 1))"
       return $?
     fi
+    remaining_batches=$((planned_batch_count - batch_number))
+    if [ "$remaining_batches" -le 0 ]; then
+      serialized_batch_failure "serialized article-push batch accounting exhausted before batch $((batch_number + 1)); reconciling published batches"
+      return $?
+    fi
+    required_pages=$((article_push_pages_wait_seconds * remaining_batches))
+    required_overhead=$((article_push_batch_overhead_seconds * remaining_batches))
+    required_batch_budget=$((required_pages + required_overhead))
     remaining=$((article_push_pages_deadline - current_epoch))
+    if [ "$remaining" -lt "$required_batch_budget" ]; then
+      serialized_batch_failure "shared serialized Pages deadline has only ${remaining}s for ${remaining_batches} remaining batch(es), but needs ${required_pages}s of Pages windows plus ${required_overhead}s of operational reserve; reconciling published batches"
+      return $?
+    fi
+    if [ -n "$article_push_job_deadline" ]; then
+      required_job_budget=$((required_batch_budget + article_push_job_reconciliation_reserve_seconds + article_push_post_publish_reserve_seconds))
+      article_push_job_remaining=$((article_push_job_deadline - current_epoch))
+      if [ "$article_push_job_remaining" -lt "$required_job_budget" ]; then
+        serialized_batch_failure "job deadline leaves ${article_push_job_remaining}s for ${remaining_batches} remaining batch(es), but needs ${required_job_budget}s including operational, reconciliation and downstream-gate reserves; reconciling published batches"
+        return $?
+      fi
+    fi
     if [ "$remaining" -le 0 ]; then
       serialized_batch_failure "shared Pages-wait deadline exhausted before serialized batch $((batch_number + 1)); reconciling published batches"
       return $?
@@ -1111,13 +1198,19 @@ run_serialized_batches() {
 
   run_one_serialized_batch() {
     local batch_status_file batch_skipped_file batch_summary_file batch_commit_file
-    local batch_status_value batch_warning_value
+    local batch_status_value batch_warning_value batch_pages_now batch_pages_deadline
     local -a batch_paths=("$@")
     batch_status_file="$batch_root/status-$batch_number"
     batch_skipped_file="$batch_root/skipped-$batch_number"
     batch_summary_file="$batch_root/summary-$batch_number"
     batch_commit_file="$batch_root/commit-$batch_number"
     rm -f "$batch_status_file" "$batch_skipped_file" "$batch_summary_file" "$batch_commit_file"
+    batch_pages_now="$(date +%s)" || return 1
+    if ! [[ "$batch_pages_now" =~ ^[0-9]+$ ]]; then
+      echo "::error::the serialized batch Pages clock is unreadable" >&2
+      return 1
+    fi
+    batch_pages_deadline=$((batch_pages_now + article_push_pages_wait_seconds + article_push_batch_overhead_seconds))
 
     if ! ARTICLE_PUSH_BATCHED=1 \
       ARTICLE_PUSH_PAGES_DEADLINE="$article_push_pages_deadline" \
@@ -1125,6 +1218,7 @@ run_serialized_batches() {
       ARTICLE_PUSH_SKIPPED_PATHS_FILE="$batch_skipped_file" \
       ARTICLE_PUSH_SUMMARY_FILE="$batch_summary_file" \
       ARTICLE_PUSH_COMMIT_FILE="$batch_commit_file" \
+      ARTICLE_PUSH_BATCH_PAGES_DEADLINE="$batch_pages_deadline" \
       bash "$0" "$section" "$loc" "$scratch_dist_dir" "${batch_paths[@]}"; then
       record_serialized_commit "$batch_commit_file" || true
       return 1
@@ -1281,30 +1375,86 @@ fi
 
 # A non-serialized invocation has one Pages window, but it can still publish a
 # commit and need the same reconciliation window if Pages rejects it. Refuse
-# before cloning or pushing when the absolute deadline cannot leave both parts
-# inside the job budget. Nested invocations inherit the coordinator's already
-# bounded deadline and pass through this same guard.
+# before cloning or pushing when the absolute deadline cannot leave a full
+# Pages window, the operation reserve and the reconciliation/downstream gates.
+# Nested invocations inherit the coordinator's plan deadline and receive a
+# separate per-batch deadline through the same guard.
+article_push_pages_now="$(date +%s)" || {
+  echo "::error::cannot establish the article-push deadline" >&2
+  write_push_status 'failed'
+  write_push_summary
+  exit 1
+}
+if ! [[ "$article_push_pages_now" =~ ^[0-9]+$ ]]; then
+  echo "::error::the article-push deadline clock is unreadable" >&2
+  write_push_status 'failed'
+  write_push_summary
+  exit 1
+fi
+article_push_attempt_budget_seconds=$((article_push_pages_wait_seconds + article_push_batch_overhead_seconds))
+# The initial standalone deadline is created before argument validation and
+# helper setup. Refresh it immediately before the attempt so that the reserve
+# covers the actual clone/commit/push work and still leaves a complete Pages
+# window afterwards. A coordinator or caller-supplied absolute deadline is
+# never refreshed.
+if [ "${ARTICLE_PUSH_BATCHED:-0}" != '1' ] \
+  && [ -z "$article_push_batch_pages_deadline" ] \
+  && [ "$article_push_pages_deadline_explicit" != '1' ]; then
+  article_push_pages_deadline=$((article_push_pages_now + article_push_attempt_budget_seconds))
+  export ARTICLE_PUSH_PAGES_DEADLINE="$article_push_pages_deadline"
+fi
+article_push_attempt_pages_deadline="${article_push_batch_pages_deadline:-$article_push_pages_deadline}"
+article_push_attempt_pages_remaining=$((article_push_attempt_pages_deadline - article_push_pages_now))
+if [ "$article_push_attempt_pages_remaining" -lt "$article_push_pages_wait_seconds" ]; then
+  echo "::error::article-push Pages deadline leaves only ${article_push_attempt_pages_remaining}s; a full ${article_push_pages_wait_seconds}s Pages window is required before publishing" >&2
+  write_push_status 'failed'
+  write_push_summary
+  exit 1
+fi
 if [ -n "$article_push_job_deadline" ]; then
-  article_push_job_usable_deadline=$((article_push_job_deadline - article_push_job_reconciliation_reserve_seconds))
-  if [ "$article_push_pages_deadline" -gt "$article_push_job_usable_deadline" ]; then
-    echo "::error::article-push Pages deadline exceeds the safe job budget; refusing to publish a partial tree" >&2
+  article_push_job_usable_deadline=$((article_push_job_deadline - article_push_job_reconciliation_reserve_seconds - article_push_post_publish_reserve_seconds))
+  article_push_job_remaining=$((article_push_job_deadline - article_push_pages_now))
+  article_push_required_job_seconds=$((article_push_attempt_budget_seconds + article_push_job_reconciliation_reserve_seconds + article_push_post_publish_reserve_seconds))
+  if [ "$article_push_job_remaining" -lt "$article_push_required_job_seconds" ]; then
+    echo "::error::article-push job leaves ${article_push_job_remaining}s, but this push needs ${article_push_attempt_budget_seconds}s for operation plus ${article_push_job_reconciliation_reserve_seconds}s for reconciliation and ${article_push_post_publish_reserve_seconds}s for downstream gates; refusing a partial tree" >&2
     write_push_status 'failed'
     write_push_summary
     exit 1
   fi
-  article_push_pages_now="$(date +%s)" || {
-    echo "::error::cannot establish the article-push job budget" >&2
-    write_push_status 'failed'
-    write_push_summary
-    exit 1
-  }
-  if ! [[ "$article_push_pages_now" =~ ^[0-9]+$ ]] || [ "$article_push_pages_deadline" -le "$article_push_pages_now" ]; then
-    echo "::error::article-push Pages deadline is already exhausted; refusing to publish a partial tree" >&2
+  if [ "$article_push_pages_deadline" -gt "$article_push_job_usable_deadline" ] \
+    || [ "$article_push_attempt_pages_deadline" -gt "$article_push_job_usable_deadline" ]; then
+    echo "::error::article-push Pages deadline exceeds the safe job budget after reconciliation and downstream-gate reserves; refusing to publish a partial tree" >&2
     write_push_status 'failed'
     write_push_summary
     exit 1
   fi
 fi
+
+article_push_push_deadline_available() {
+  local current_epoch effective_deadline pages_remaining job_remaining required_after_push
+  current_epoch="$(date +%s)" || {
+    echo "::error::cannot read the article-push clock before the shard push" >&2
+    return 1
+  }
+  if ! [[ "$current_epoch" =~ ^[0-9]+$ ]]; then
+    echo "::error::the article-push clock is unreadable before the shard push" >&2
+    return 1
+  fi
+  effective_deadline="${article_push_batch_pages_deadline:-$article_push_pages_deadline}"
+  pages_remaining=$((effective_deadline - current_epoch))
+  if [ "$pages_remaining" -lt "$article_push_pages_wait_seconds" ]; then
+    echo "::error::shard push has only ${pages_remaining}s before its Pages deadline; refusing to publish without a full ${article_push_pages_wait_seconds}s Pages window" >&2
+    return 1
+  fi
+  if [ -n "$article_push_job_deadline" ]; then
+    required_after_push=$((article_push_pages_wait_seconds + article_push_job_reconciliation_reserve_seconds + article_push_post_publish_reserve_seconds))
+    job_remaining=$((article_push_job_deadline - current_epoch))
+    if [ "$job_remaining" -lt "$required_after_push" ]; then
+      echo "::error::shard push has ${job_remaining}s left, but needs ${required_after_push}s for the Pages window, reconciliation and downstream gates" >&2
+      return 1
+    fi
+  fi
+}
 
 _attempt() {
   rm -rf "$stage"
@@ -1479,6 +1629,11 @@ _attempt() {
     permanent_fail=1
     return 1
   fi
+  if ! article_push_push_deadline_available; then
+    # No push happened, so the caller may still use its article-only fallback.
+    write_fallback_state safe || true
+    return 1
+  fi
 
   # Never `push -f`: a non-fast-forward here means someone else (the periodic
   # full deploy's push-section-shard.sh, or another fast-path publish) pushed
@@ -1522,7 +1677,9 @@ if [ "$ok" != 1 ] && [ "$permanent_fail" != 1 ] && [ -n "$last_commit" ]; then
   # that misses the fast path waits for the next full deploy. force=0 — a
   # non-fast-forward here still has to FAIL (a concurrent full deploy moved the
   # tip; the tree must be rebuilt on it, never overwritten).
-  if restore_last_commit_skipped_newer_paths && write_fallback_state unsafe && \
+  if ! article_push_push_deadline_available; then
+    echo "::error::$section-$loc article shard: refusing the PAT fallback without a complete Pages/reconciliation budget" >&2
+  elif restore_last_commit_skipped_newer_paths && write_fallback_state unsafe && \
      shard_pat_push "$stage" "$SHARD_REPO" "$last_commit":main "$section-$loc article shard" 0; then
     if wait_for_pages_build "$last_commit"; then
       ok=1

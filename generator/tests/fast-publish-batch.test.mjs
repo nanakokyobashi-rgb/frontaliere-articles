@@ -35,6 +35,8 @@ test('il publish serializzato conosce la deadline assoluta del job prima del che
   const publish = workflow.slice(workflow.indexOf('\n  publish:\n'));
   const timeoutMinutes = Number(/^\s+timeout-minutes:\s*(\d+)\s*$/mu.exec(publish)?.[1]);
   const exportedTimeoutMinutes = Number(/^\s+JOB_TIMEOUT_MINUTES:\s*(\d+)\s*$/mu.exec(publish)?.[1]);
+  const pagesWaitSeconds = Number(/^\s+PAGES_BUILD_WAIT_BUDGET_SECONDS:\s*(\d+)\s*$/mu.exec(publish)?.[1]);
+  const postPublishReserveSeconds = Number(/^\s+ARTICLE_PUSH_POST_PUBLISH_RESERVE_SECONDS:\s*(\d+)\s*$/mu.exec(publish)?.[1]);
   const deadlineStep = publish.indexOf('- name: Export publish job deadline');
   const checkout = publish.indexOf('uses: actions/checkout@v7');
 
@@ -43,6 +45,8 @@ test('il publish serializzato conosce la deadline assoluta del job prima del che
   assert.ok(deadlineStep >= 0 && deadlineStep < checkout, 'la deadline deve partire prima del checkout');
   assert.match(publish, /CI_JOB_DEADLINE_EPOCH=/u);
   assert.match(publish, /date \+%s.*JOB_TIMEOUT_MINUTES \* 60/u);
+  assert.ok(Number.isSafeInteger(postPublishReserveSeconds));
+  assert.ok(postPublishReserveSeconds >= pagesWaitSeconds * 3, 'la riserva deve coprire i tre blocchi post-publish bounded');
 });
 
 test('il trigger push conserva tutti gli ID dei body cambiati', () => {
