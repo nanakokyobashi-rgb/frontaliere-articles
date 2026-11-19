@@ -12527,7 +12527,7 @@ ${_isMeta ? '' : `COME RAGGIUNGERE IL MINIMO DI PAROLE SENZA INVENTARE:
 ${reachMinimumImplicationsLine}
 ${reachMinimumMethodLines}
 - NON includere sezioni FAQ nel body — le FAQ vengono generate nel campo "faq" separato e mostrate come accordion
-- Usa tabelle comparative per rendere i dati della fonte più leggibili
+- Usa prosa o elenchi per confronti testuali. Usa tabelle solo con intestazioni invarianti o identificabili da numeri distinti della fonte.
 ${reachMinimumToolsLine}`}
 ${primaryLocaleBlock}${targetKeywordBlock}${_isBody ? '' : peopleAlsoAskBlock}${_isMeta ? '' : mustCoverLsiBlock}${_isMeta ? '' : AI_SEARCH_PROMPT_BLOCK_IT}
 ${_isMeta ? '' : `═══ REGOLE EDITORIALI ═══
@@ -12539,8 +12539,7 @@ ANTI-AI (CRITICO — il testo DEVE superare l'AI detection):
 - MAI aprire body1 con una frase generica tipo "Il tema dei frontalieri...". Inizia con un FATTO concreto DALLA FONTE (data, numero, nome, luogo).
 - MAI elenchi puntati di >5 elementi (spezzali in paragrafi narrativi)
 - MAX 2 emoji callout (📊/💡/⚠️) per INTERO articolo (body1+body2+body3 combinati). Zero è meglio.
-- Varia la struttura: non TUTTI i body devono avere un elenco puntato. Alterna prosa, tabelle, citazioni.
-- NON usare parallelismi strutturali tra body1/body2/body3 (se body1 ha ## + elenco, body2 deve avere ## + prosa + tabella).
+- Varia la struttura tra body1/body2/body3 con prosa, elenchi brevi e citazioni documentate.
 `}
 ═══ DIVIETI ANTI-ALLUCINAZIONE (BLOCCANTI — RIGETTO AUTOMATICO) ═══
 
