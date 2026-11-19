@@ -38,6 +38,15 @@ function triggerBlock(name) {
   return next < 0 ? rest : rest.slice(0, next);
 }
 
+test('un replay pinned superato usa un nuovo nonce per la revisione di destinazione', () => {
+  const step = workflow.split('      - name: Dispatch bounded replay with current corpus checkout\n')[1]
+    .split('\n      - name:')[0];
+  assert.doesNotMatch(step, /DISPATCH_NONCE|inputs\.dispatch_nonce/u);
+  assert.match(step, /nonce_hash=.*"\$GITHUB_RUN_ID" "\$CURRENT_MAIN" "\$SECTION"/u);
+  assert.match(step, /dispatch_nonce="stale-late-\$\{CURRENT_MAIN:0:12\}-\$\{SECTION\}-\$\{nonce_hash\}"/u);
+  assert.match(step, /-f dispatch_nonce="\$dispatch_nonce"/u);
+});
+
 test('fast-publish-section non crea run push sui branch di PR', () => {
   const push = triggerBlock('push');
   assert.match(push, /\n    branches: \[main\]/u);
