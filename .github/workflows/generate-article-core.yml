@@ -524,6 +524,7 @@ jobs:
     timeout-minutes: 60
     concurrency:
       group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && format('{0}-production', inputs.concurrency_group) || format('{0}-dry', inputs.concurrency_group) }}
+      queue: max
       cancel-in-progress: false
     steps:
       - name: Checkout

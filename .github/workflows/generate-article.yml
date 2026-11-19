@@ -285,7 +285,7 @@ on:
 #
 # ## Cosa faceva davvero il gruppo a livello di workflow
 #
-# GitHub non ha una coda: un gruppo di concurrency ammette UNA run in esecuzione
+# Con la coda predefinita un gruppo di concurrency ammette UNA run in esecuzione
 # e UNA sola in attesa, e ogni nuovo arrivo CANCELLA quella in attesa. Sotto
 # sovra-sottoscrizione non è una coda, è una politica di SCARTO. Misurato il
 # 2026-08-13 sulle ultime 60 run: 16 `cancelled`, e le tre campionate
@@ -1011,13 +1011,12 @@ jobs:
     # run can leave the corpus half-written. Resta come RETE dietro `admit` —
     # vedi l'intestazione sopra per perché non è più il primo strato.
     concurrency:
-      # GitHub conserva un solo pending per gruppo: il successore content deve
-      # stare separato dai self-test dry, altrimenti un push di workflow può
-      # sostituirlo mentre aspetta il producer. `unknown` resta un modo
-      # osservabile dell'admit, ma condivide il lock legacy `generate-article`
-      # con production:
-      # un compare fallito non può aprire una seconda scrittura.
+      # Dry resta separato dai job che scrivono. Production e unknown
+      # condividono il lock: un compare fallito non apre una seconda scrittura.
+      # La coda conserva i job ammessi. La run Svizzera 44450480989, pur
+      # ammessa, è stata cancellata prima del primo step mentre attendeva.
       group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && 'generate-article' || 'generate-article-dry' }}
+      queue: max
       cancel-in-progress: false
     steps:
       - name: Checkout
