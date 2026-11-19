@@ -1763,6 +1763,39 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     'una cifra modificata non deve arrivare al sanitizer finale',
   );
 
+  const mixedAnchorsSource = 'Lugano: 100 richieste; la risposta arriva dopo 12 giorni.';
+  const mixedAnchorsTarget = 'Lugano: 100 applications; the response arrives after 12 days.';
+  assert.equal(
+    await makeTranslator(() => mixedAnchorsTarget, 50)(mixedAnchorsSource),
+    mixedAnchorsTarget,
+    'un numero in prosa localizzata può mantenere la posizione accanto a un fatto con anchor',
+  );
+  assert.equal(
+    await makeTranslator(() => 'The response arrives after 100 days; Lugano: 12 applications.', 50)(mixedAnchorsSource),
+    null,
+    'la stessa sequenza numerica non consente di spostare un valore verso un altro anchor',
+  );
+  assert.equal(
+    await makeTranslator(() => 'The response arrives after 100 days; Lugano: 100 applications.', 50)(
+      mixedAnchorsSource.replace('12 giorni', '100 giorni'),
+    ),
+    null,
+    'due valori identici non consentono di spostare l’anchor a un altro fatto',
+  );
+
+  assert.equal(
+    await makeTranslator(() => 'Beta 10; Alpha 10', 50)('Alpha 10; Beta 10'),
+    null,
+    'due fatti con testo e valore identici per anchor non possono scambiarsi posizione',
+  );
+  assert.equal(
+    await makeTranslator(() => 'Beta 1. Januar; Alpha 1. Januar.', 50)(
+      'Alpha 1 gennaio; Beta 1 gennaio.',
+    ),
+    null,
+    'anche due date identiche devono restare nei rispettivi slot',
+  );
+
   const signedSource = 'Prima -12% dopo altre parole da spezzare ancora oggi.';
   assert.equal(
     await makeTranslator((chunk) => chunk.replace('-12%', '12%'))(signedSource),
