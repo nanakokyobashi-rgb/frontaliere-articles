@@ -635,6 +635,7 @@ function healthy() {
   }
   return {
     now: NOW,
+    cantonCoverage: { 'canton-dry': { firing: false }, 'locale-gap': { firing: false } },
     commits: {
       available: true,
       lookbackHours: 48,
@@ -1699,6 +1700,7 @@ describe('ogni condizione che si apre si può chiudere — il test del precedent
     m.commits = { available: false, lookbackHours: 48 };
     m.corpus = { available: false };
     m.coverQueue = { available: false };
+    delete m.cantonCoverage;
 
     const created = [];
     const resolved = [];
