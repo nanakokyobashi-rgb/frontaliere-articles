@@ -1565,11 +1565,16 @@ function sha256(bytes) {
 }
 
 async function findIdenticalCantonAssetKeys({ candidateKeys, uploadByKey, assetProbeImpl }) {
+  // A CDN probe is only an observation. For an image namespace, it cannot
+  // authorize skipping the uploader's lease: another publisher may replace
+  // the object between this probe and the dependent page upload. Keep leased
+  // image keys on the normal held/upload path instead.
+  const comparableKeys = candidateKeys.filter((key) => !imageNamespaceForKey(key));
   const unchanged = new Set();
   let cursor = 0;
-  const workers = Array.from({ length: Math.min(HELD_ASSET_PROBE_CONCURRENCY, candidateKeys.length) }, async () => {
-    while (cursor < candidateKeys.length) {
-      const key = candidateKeys[cursor++];
+  const workers = Array.from({ length: Math.min(HELD_ASSET_PROBE_CONCURRENCY, comparableKeys.length) }, async () => {
+    while (cursor < comparableKeys.length) {
+      const key = comparableKeys[cursor++];
       const localBytes = localCantonAssetBytes(uploadByKey.get(key)?.local);
       if (!localBytes || !imageBytesMatchAssetKey(
         localBytes,
@@ -1617,7 +1622,7 @@ async function uploadCantonAssets({
 }) {
   const pendingUploads = cdnUploads.filter(({ key }) => !heldAssetKeys.has(key) && !unchangedAssetKeys.has(key));
   const identicalKeys = await findIdenticalCantonAssetKeys({
-    candidateKeys: pendingUploads.map(({ key }) => key).filter((key) => imageNamespaceForKey(key)),
+    candidateKeys: pendingUploads.map(({ key }) => key),
     uploadByKey: new Map(pendingUploads.map((upload) => [upload.key, upload])),
     assetProbeImpl,
   });

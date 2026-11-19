@@ -631,24 +631,28 @@ test('publisher: un 404 richiesto resta differito se un asset condiviso non è v
   }
 });
 
-test('publisher: an identical unheld blog cover requires no lease or upload', async () => {
-  const localBytes = webpFixture(0x11);
-  const coverBytes = webpFixture(0x33);
-  const unrelatedKey = 'images/blog/existing-cover.webp';
-  const fixture = await publishFourLocaleSharedAsset({
-    localBytes,
-    unrelatedKey,
-    assetProbeImpl: async (key) => {
-      const bytes = key === unrelatedKey ? coverBytes : localBytes;
-      return { ok: true, status: 200, contentType: 'image/webp', byteLength: bytes.length, sha256: sha256(bytes) };
-    },
-  });
-  try {
-    assert.equal(fixture.result.failures, 0);
-    assert.equal(fixture.result.uploaded, 4);
-    assert.ok(fixture.assetProbeCalls.includes(unrelatedKey));
-    assert.ok(!fixture.events.includes(`asset-upload:${unrelatedKey}`));
-  } finally {
-    fixture.cleanup();
+test('publisher: un cover identico nei namespace leased resta nel percorso protetto', async (t) => {
+  for (const namespace of ['blog', 'places']) {
+    await t.test(namespace, async () => {
+      const localBytes = webpFixture(0x11);
+      const coverBytes = webpFixture(0x33);
+      const unrelatedKey = `images/${namespace}/existing-cover.webp`;
+      const fixture = await publishFourLocaleSharedAsset({
+        localBytes,
+        unrelatedKey,
+        assetProbeImpl: async (key) => {
+          const bytes = key === unrelatedKey ? coverBytes : localBytes;
+          return { ok: true, status: 200, contentType: 'image/webp', byteLength: bytes.length, sha256: sha256(bytes) };
+        },
+      });
+      try {
+        assert.equal(fixture.result.failures, 0);
+        assert.equal(fixture.result.uploaded, 4);
+        assert.ok(!fixture.assetProbeCalls.includes(unrelatedKey), 'la probe fuori lease non decide per un asset leased');
+        assert.ok(fixture.events.includes(`asset-upload:${unrelatedKey}`), 'l’asset leased segue l’uploader che prende il lease');
+      } finally {
+        fixture.cleanup();
+      }
+    });
   }
 });
