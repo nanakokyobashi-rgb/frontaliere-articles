@@ -117,7 +117,8 @@ test('locale-gap richiede titolo e corpo per lo stesso id nelle quattro lingue',
   for (const locale of LOCALES) f.meta(locale, {});
   const empty = measure(f.root, commits);
   assert.equal(empty['canton-dry'].firing, true);
-  assert.match(empty['locale-gap'].body, /it=0, en=0, de=0, fr=0/);
+  assert.equal(empty['locale-gap'].available, false);
+  assert.match(empty['locale-gap'].summary, /canton-ag: nessun articolo nella finestra/);
 
   f.registry([
     ['recent', date(NOW - 48 * HOUR)],
@@ -196,17 +197,17 @@ test('wiring aggrega i gap, rispetta il cap e risolve gli stessi titoli al recup
   for (const locale of LOCALES) bern.meta(locale, {});
   const verdicts = await getVerdicts(commitHistory(48), twoCantons);
   assert.deepEqual(verdicts.map(({ title, section }) => [title, section]), TITLES.map((title) => [title, null]));
-  for (const verdict of verdicts) {
-    assert.equal(verdict.firing, true);
-    assert.match(verdict.body, /canton-ag: articolo assente[\s\S]*canton-be: articolo assente/);
-  }
+  assert.equal(verdicts[0].firing, true);
+  assert.match(verdicts[0].body, /canton-ag: articolo assente[\s\S]*canton-be: articolo assente/);
+  assert.equal(verdicts[1].available, false);
+  assert.equal(verdicts[1].firing, false);
   assert.equal((await reconcile(verdicts, { ...io, maxIssues: 1 })).capped, 1);
   assert.deepEqual(created, TITLES.slice(0, 1));
   created.length = 0;
   routed.length = 0;
   await reconcile(verdicts, io);
-  assert.deepEqual(created, TITLES);
-  assert.deepEqual(routed, TITLES.map((title, i) => [i + 1, title]));
+  assert.deepEqual(created, TITLES.slice(0, 1));
+  assert.deepEqual(routed, [[1, TITLES[0]]]);
 
   f.registry([['recent', date(NOW)]]);
   for (const locale of LOCALES) {
