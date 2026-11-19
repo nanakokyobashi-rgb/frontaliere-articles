@@ -7344,7 +7344,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   const verificationModels = availableVerifiers.length >= 2 ? availableVerifiers : verificationCandidates;
 
   const modelResults = [];
-  // An HTTP success without a verdict can otherwise keep the same fallback
+  // An HTTP success without a verifiable vote can otherwise keep the same fallback
   // at the head of every retry, even after bypassing the response cache.
   const invalidVerdictModels = new Set();
 
@@ -7859,6 +7859,7 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
   const issues = normalizeFactCheckIssues(result.issues, opts);
   const editorialAssessment = validateEditorialAssessment(result.editorialAssessment, opts.editorialContext);
   if (!editorialAssessment.verifiable) {
+    if (servedBy) opts.invalidVerdictModels?.add(servedBy);
     console.error(`  ⚠️  LLM fact-check (${model}${servedBy && servedBy !== model ? ` via ${servedBy}` : ''}): `
       + `valutazione editoriale senza prove leggibili (${safeSignalDiagnosticTextForLog(editorialAssessment.reason)}) — voto scartato`);
     return null;

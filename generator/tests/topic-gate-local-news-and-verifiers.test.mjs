@@ -30,6 +30,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { validateEditorialAssessment } from '../scripts/lib/editorial-originality.mjs';
+import { extractFactCheckJson } from '../scripts/lib/fact-check-response.mjs';
 import { AI_MODELS } from '../scripts/lib/ai-models.mjs';
 import { isBodyTranslationPending } from '../scripts/lib/free-mt-recovery.mjs';
 
@@ -258,27 +260,41 @@ test('the fact-check asks for JSON and reads it with the balanced-object parser'
   assert.doesNotMatch(SRC, /const jsonMatch = raw\.match\(\/\\\{\[\\s\\S\]\*\\\}\/\);/);
 });
 
-test('verifier retries skip the actual fallback that returned an empty verdict', async () => {
+test('verifier retries skip the actual fallback that returned an unusable vote', async () => {
   const start = SRC.indexOf('async function _runSingleFactCheck(');
   const end = SRC.indexOf('// assertNoFabricatedStatistics() REMOVED', start);
   assert.ok(start >= 0 && end > start);
+  let rawResponse;
   const requests = [];
   const run = new Function('_aiCallLLM', 'buildFactCheckCallOptions', 'isFactCheckCacheEnabled',
     'RUN_START_MS', 'RUN_WALL_BUDGET_MS', 'AI_MODELS',
-    'extractFactCheckJson', 'safeSignalDiagnosticTextForLog', 'factCheckRawSnippet', 'console',
+    'extractFactCheckJson', 'safeSignalDiagnosticTextForLog', 'factCheckRawSnippet',
+    'normalizeFactCheckIssues', 'validateEditorialAssessment', 'console',
     SRC.slice(start, end) + '\nreturn _runSingleFactCheck;')(
     async (_messages, opts) => {
       requests.push(opts.excludeModels);
       opts.modelUsedRef.model = 'cache';
-      opts.modelUsedRef.cachedServedBy = 'fallback-with-empty-json';
-      return '{}';
+      opts.modelUsedRef.cachedServedBy = 'fallback-model';
+      return rawResponse;
     },
     (opts) => opts, () => true, 0, 0, {},
-    () => ({ result: null, error: 'no-verdict' }), (value) => value, (value) => value,
-    { error() {} },
+    extractFactCheckJson, (value) => value, (value) => value,
+    (issues) => issues, validateEditorialAssessment, { error() {} },
   );
-  const invalidVerdictModels = new Set();
-  assert.equal(await run('primary-a', 'prompt', { invalidVerdictModels }), null);
-  assert.equal(await run('primary-b', 'prompt', { invalidVerdictModels, excludeModels: ['existing-voter'] }), null);
-  assert.deepEqual(requests, [[], ['existing-voter', 'fallback-with-empty-json']]);
+  for (const response of [
+    '{}',
+    JSON.stringify({
+      verdict: 'PASS',
+      confidence: 0.98,
+      issues: [],
+      editorialAssessment: { classification: 'grounded_analysis', articleQuote: '' },
+    }),
+  ]) {
+    rawResponse = response;
+    requests.length = 0;
+    const invalidVerdictModels = new Set();
+    assert.equal(await run('primary-a', 'prompt', { invalidVerdictModels }), null);
+    assert.equal(await run('primary-b', 'prompt', { invalidVerdictModels, excludeModels: ['existing-voter'] }), null);
+    assert.deepEqual(requests, [[], ['existing-voter', 'fallback-model']]);
+  }
 });
