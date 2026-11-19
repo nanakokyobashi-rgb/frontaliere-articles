@@ -17246,18 +17246,32 @@ async function translateArticle(data) {
         joinedAnchoredNumericContract,
       )
       : null;
-    // Preserve empty slots as well: a number in fully localized prose can
-    // coexist with an anchored fact, but an anchor cannot move to its slot,
-    // even when the two numbers are identical. Calendar bindings are checked
-    // by compareNumericAssociations because components can reorder locally.
-    const nonCalendarAnchorSlots = ({ associations }) => associations
-      .filter(({ calendarGroup }) => calendarGroup === null)
-      .map(({ anchorSpan }) => anchorSpan);
-    const anchorSlotsMatch = JSON.stringify(nonCalendarAnchorSlots(sourceAnchoredNumericContract))
-      === JSON.stringify(nonCalendarAnchorSlots(joinedAnchoredNumericContract));
+    // A number in fully localized prose can coexist with an anchored fact.
+    // Keep empty slots and one slot per calendar group, so even identical
+    // facts cannot trade anchors while components within a date may reorder.
+    const numericAnchorSlots = ({ associations }) => {
+      const slots = [];
+      const calendarSlots = new Map();
+      for (const { anchorSpan, calendarGroup } of associations) {
+        if (calendarGroup === null) {
+          slots.push(new Set(anchorSpan ? [anchorSpan] : []));
+          continue;
+        }
+        if (!calendarSlots.has(calendarGroup)) {
+          const slot = new Set();
+          calendarSlots.set(calendarGroup, slot);
+          slots.push(slot);
+        }
+        if (anchorSpan) calendarSlots.get(calendarGroup).add(anchorSpan);
+      }
+      return slots.map((slot) => [...slot].sort());
+    };
+    const hasInvariantAnchorEvidence = invariantAnchorTokens.size > 0;
     const numericAssociationMismatch = exactAssociation === false
-      || (exactAssociation === null && invariantAnchorTokens.size > 0
-        && (anchorAssociation !== true || !anchorSlotsMatch));
+      || (hasInvariantAnchorEvidence
+        && ((exactAssociation === null && anchorAssociation !== true)
+          || JSON.stringify(numericAnchorSlots(sourceAnchoredNumericContract))
+            !== JSON.stringify(numericAnchorSlots(joinedAnchoredNumericContract))));
     if (sourceNumericContract.values.length > 0 && numericAssociationMismatch) return reject('numeric-association');
 
     // A table can preserve its pipes and per-cell opaque atoms while still

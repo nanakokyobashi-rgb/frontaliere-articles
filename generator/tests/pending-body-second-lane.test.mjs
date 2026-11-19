@@ -1783,6 +1783,19 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     'due valori identici non consentono di spostare l’anchor a un altro fatto',
   );
 
+  assert.equal(
+    await makeTranslator(() => 'Beta 10; Alpha 10', 50)('Alpha 10; Beta 10'),
+    null,
+    'due fatti con testo e valore identici per anchor non possono scambiarsi posizione',
+  );
+  assert.equal(
+    await makeTranslator(() => 'Beta 1. Januar; Alpha 1. Januar.', 50)(
+      'Alpha 1 gennaio; Beta 1 gennaio.',
+    ),
+    null,
+    'anche due date identiche devono restare nei rispettivi slot',
+  );
+
   const signedSource = 'Prima -12% dopo altre parole da spezzare ancora oggi.';
   assert.equal(
     await makeTranslator((chunk) => chunk.replace('-12%', '12%'))(signedSource),
