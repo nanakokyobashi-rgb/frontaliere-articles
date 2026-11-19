@@ -133,3 +133,12 @@ test('every checker verdict carries evidence to both retry consumers without cha
   assert.match(SOURCE, /expandFactIssues = expandFactResult\.issues \|\| \[\];\s*expandFactSourceText = expandFactResult\.remediationSourceText;/);
   assert.match(SOURCE, /formatRemediation\(expandFactIssues, \{\s*cap: EXPAND_FACTCHECK_FEEDBACK_CAP,\s*sourceText: expandFactSourceText/);
 });
+
+test('a repeated editorial originality rejection exits the candidate retry loop', () => {
+  const primaryCheck = SOURCE.slice(
+    SOURCE.indexOf('// Step 3a.0c: LLM fact verification'),
+    SOURCE.indexOf('// `itWords` / `lastWordCount` sono gia', SOURCE.indexOf('// Step 3a.0c: LLM fact verification')),
+  );
+  assert.match(primaryCheck, /if \(factResult\.issues\.some\(\(issue\) => issue\.code === 'editorial_originality'\)\) \{\s*editorialOriginalityRejections \+= 1;\s*if \(editorialOriginalityRejections >= 2\) \{\s*err\.topicGateAbort = true;\s*throw err;/);
+  assert.match(primaryCheck, /catch \(fcErr\) \{[\s\S]*?if \(fcErr\.topicGateAbort === true\) throw fcErr;[\s\S]*?if \(attempt < maxAttempts\)/);
+});
