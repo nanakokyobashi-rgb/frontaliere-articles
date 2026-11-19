@@ -74,6 +74,7 @@ const COUNT_WORDS_SRC = extractFunctionSource("function countWords(text = '') {"
 const SPLIT_TRANSLATION_CHUNKS_SRC = extractFunctionSource(
   'function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {',
 );
+const ASSERT_CHUNK_TRANSLATOR_SRC = extractFunctionSource('function assertChunkTranslator(');
 function buildChunker() {
   return new Function(
     'lineStructuralSignature',
@@ -341,8 +342,9 @@ test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scaden
   assert.match(body, /fieldName: field,/);
   assert.match(body, /chain: \[codex\]/);
   assert.match(body, /prefer: \[codex\]/);
-  assert.match(body, /fallback: \(\) => \{[\s\S]*if \(!pendingBodySecondLaneAvailable\(\) && typeof callWithRetry === 'function'\)[\s\S]*translatePendingBodyWithHistoricalChain\(itValue, locale, field, \{ callWithRetry, translateInChunks \}\)/);
-  assert.match(body, /const validatedText = text && typeof translateInChunks === 'function'[\s\S]*pretranslatedResult/);
+  assert.match(body, /const chunkTranslator = assertChunkTranslator\(translateInChunks, 'translatePendingBodyWithCodex'\)/);
+  assert.match(body, /fallback: \(\) => \{[\s\S]*if \(!pendingBodySecondLaneAvailable\(\) && typeof callWithRetry === 'function'\)[\s\S]*translatePendingBodyWithHistoricalChain\(itValue, locale, field, \{ callWithRetry, translateInChunks: chunkTranslator \}\)/);
+  assert.match(body, /const validatedText = text\n\s+\? await chunkTranslator\([\s\S]*pretranslatedResult/);
   assert.match(body, /if \(\(codexModelUnavailable \|\| !pendingBodySecondLaneAvailable\(\) \|\| rejected\.length > 0\)/);
   // Nessun orologio di modulo: i producer che importano translateArticle()
   // (publish-journalist-article.mjs) non hanno CREATE_ARTICLE_MAX_WALL_MS.
@@ -543,6 +545,8 @@ function createPendingBodyCodexTranslatorFixture({
   translateWithCodexEngine,
   laneStopsBeforeRun = false,
   laneStopped = false,
+  translateInChunks = async (bodyText, field, _makeChunkPrompt, _labelPrefix, _targetLang, options = {}) =>
+    options.pretranslatedResult?.[field] ?? bodyText,
 }) {
   const at = src.indexOf('async function translatePendingBodyWithCodex(');
   assert.notEqual(at, -1, 'translatePendingBodyWithCodex non trovata');
@@ -551,7 +555,7 @@ function createPendingBodyCodexTranslatorFixture({
     'AI_MODELS', '_pendingBodyCodexDeadlineMs', 'CODEX_TRANSLATE_TRANSPORT_RETRIES',
     'withCodexTranslationLane', 'codexCallDeadlineMs', '_aiCallLLM', 'translateWithCodexEngine', 'isModelAvailable',
     'translateFieldFreeMt', 'balanceMarkdownMarkers', 'translatePendingBodyWithHistoricalChain', 'pendingBodySecondLaneAvailable', 'detectTruncation', 'console',
-    `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${realTruncationSrc()}\n${src.slice(at, end)}\nreturn translatePendingBodyWithCodex;`,
+    `${ASSERT_CHUNK_TRANSLATOR_SRC}\n${TABLE_HEADER_MARKER_HELPERS_SRC}\n${realTruncationSrc()}\n${src.slice(at, end)}\nreturn translatePendingBodyWithCodex;`,
   );
   const processDeadlineMs = Date.now() + 300_000;
   let admissionAttempts = 0;
@@ -610,9 +614,33 @@ function createPendingBodyCodexTranslatorFixture({
   return {
     expected,
     counts: () => ({ admissionAttempts, codexCalls, historicalCalls }),
-    translate: (text) => translatePendingBodyWithCodex(text, 'de', 'body1', { callWithRetry: async () => ({}) }),
+    translate: (text) => translatePendingBodyWithCodex(text, 'de', 'body1', {
+      callWithRetry: async () => ({}),
+      translateInChunks,
+    }),
   };
 }
+
+test('la corsia Codex rifiuta subito un caller senza il traduttore chunked', async () => {
+  const fixture = createPendingBodyCodexTranslatorFixture({
+    isModelAvailable: () => true,
+    admissionDecision: (_attempt, admission) => admission,
+    translateWithCodexEngine: async () => {
+      throw new Error('il provider non deve essere chiamato');
+    },
+    translateInChunks: null,
+  });
+
+  await assert.rejects(
+    () => fixture.translate('Un body pending di prova.'),
+    (error) => {
+      assert.equal(error.name, 'TypeError');
+      assert.match(error.message, /translatePendingBodyWithCodex: `translateInChunks` è richiesto/);
+      return true;
+    },
+  );
+  assert.deepEqual(fixture.counts(), { admissionAttempts: 0, codexCalls: 0, historicalCalls: 0 });
+});
 
 test('il body ricade sulla catena storica solo quando il breaker prova indisponibilità tra segmenti', async () => {
   const source = [
@@ -741,7 +769,7 @@ test('la catena storica riusa il chunker per un body pending sopra soglia', asyn
     'translateFieldFreeMt', 'translatedStringOrNull', 'balanceMarkdownMarkers',
     'buildPendingBodyRetranslationPrompt', 'countWords', 'TRANSLATION_CHUNK_THRESHOLD',
     'console',
-    `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${src.slice(at, end)}\nreturn translatePendingBodyWithHistoricalChain;`,
+    `${ASSERT_CHUNK_TRANSLATOR_SRC}\n${TABLE_HEADER_MARKER_HELPERS_SRC}\n${src.slice(at, end)}\nreturn translatePendingBodyWithHistoricalChain;`,
   );
   const longIt = Array.from({ length: 701 }, (_, i) => `parola${i}`).join(' ');
   const expected = longIt.replaceAll('parola', 'Wort');
@@ -792,6 +820,29 @@ test('la catena storica riusa il chunker per un body pending sopra soglia', asyn
   assert.deepEqual(chunkOptions, { forceLegacy: true });
 });
 
+test('la catena storica rifiuta il caller senza il traduttore chunked prima di tradurre', async () => {
+  const at = src.indexOf('async function translatePendingBodyWithHistoricalChain(');
+  assert.notEqual(at, -1, 'translatePendingBodyWithHistoricalChain non trovata');
+  const end = src.indexOf('\n}\n', at) + 2;
+  const translatePendingBodyWithHistoricalChain = new Function(
+    `${ASSERT_CHUNK_TRANSLATOR_SRC}\n${src.slice(at, end)}\nreturn translatePendingBodyWithHistoricalChain;`,
+  )();
+
+  await assert.rejects(
+    () => translatePendingBodyWithHistoricalChain(
+      'Un body pending di prova.',
+      'de',
+      'body1',
+      { callWithRetry: async () => ({}) },
+    ),
+    (error) => {
+      assert.equal(error.name, 'TypeError');
+      assert.match(error.message, /translatePendingBodyWithHistoricalChain: `translateInChunks` è richiesto/);
+      return true;
+    },
+  );
+});
+
 test('il fallback storico corto applica il contratto strutturale prima del finalize', async () => {
   const historicalAt = src.indexOf('async function translatePendingBodyWithHistoricalChain(');
   assert.notEqual(historicalAt, -1, 'translatePendingBodyWithHistoricalChain non trovata');
@@ -800,7 +851,7 @@ test('il fallback storico corto applica il contratto strutturale prima del final
     'translateFieldFreeMt', 'translatedStringOrNull', 'balanceMarkdownMarkers',
     'buildPendingBodyRetranslationPrompt', 'countWords', 'TRANSLATION_CHUNK_THRESHOLD',
     'console', 'lineStructuralSignature',
-    `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${src.slice(historicalAt, historicalEnd)}\nreturn translatePendingBodyWithHistoricalChain;`,
+    `${ASSERT_CHUNK_TRANSLATOR_SRC}\n${TABLE_HEADER_MARKER_HELPERS_SRC}\n${src.slice(historicalAt, historicalEnd)}\nreturn translatePendingBodyWithHistoricalChain;`,
   );
   const makeTranslateInChunks = new Function(
     'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
@@ -2689,7 +2740,7 @@ test('se il circuit breaker apre Codex dopo la selezione, la lane passa alla cat
     'AI_MODELS', '_pendingBodyCodexDeadlineMs', 'CODEX_TRANSLATE_TRANSPORT_RETRIES',
     'withCodexTranslationLane', 'codexCallDeadlineMs', '_aiCallLLM', 'translateWithCodexEngine',
     'translateFieldFreeMt', 'balanceMarkdownMarkers', 'translatePendingBodyWithHistoricalChain', 'isModelAvailable', 'console',
-    `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${src.slice(at, end)}\nreturn translatePendingBodyWithCodex;`,
+    `${ASSERT_CHUNK_TRANSLATOR_SRC}\n${TABLE_HEADER_MARKER_HELPERS_SRC}\n${src.slice(at, end)}\nreturn translatePendingBodyWithCodex;`,
   );
   const processDeadlineMs = Date.now() + 300_000;
   const admission = { deadlineMs: processDeadlineMs, finish() {} };
@@ -2739,7 +2790,11 @@ test('se il circuit breaker apre Codex dopo la selezione, la lane passa alla cat
     'Il breaker rende Codex indisponibile prima della chiamata fisica.',
   ].join('\n');
 
-  const translated = await translatePendingBodyWithCodex(source, 'de', 'body1', { callWithRetry: async () => ({}) });
+  const translated = await translatePendingBodyWithCodex(source, 'de', 'body1', {
+    callWithRetry: async () => ({}),
+    translateInChunks: async (bodyText, field, _makeChunkPrompt, _labelPrefix, _targetLang, options = {}) =>
+      options.pretranslatedResult?.[field] ?? bodyText,
+  });
 
   assert.equal(translated, expected);
   assert.equal(admissionAttempts, 0);
