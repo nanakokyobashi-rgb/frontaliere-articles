@@ -257,6 +257,47 @@ test('una gara stale consegna la sezione al coordinatore senza dichiarare una pu
   assert.match(workflow, /child_coordinated_recovery=true/u);
 });
 
+test('il replay pinned consegna la sezione se main avanza durante il render', () => {
+  const start = render.indexOf('if [ "$normal_dispatch" !=');
+  const end = render.indexOf('\nwhile :; do', start);
+  assert.ok(start >= 0 && end > start);
+  const root = mkdtempSync(path.join(tmpdir(), 'section-late-handoff-'));
+  try {
+    const output = path.join(root, 'output');
+    const source = 'a'.repeat(40);
+    const head = 'b'.repeat(40);
+    const block = render.slice(start, end);
+    const run = (error) => execFileSync('bash', ['-c', [
+      'set -euo pipefail',
+      'normal_dispatch=false',
+      `pinned_replay_main=${source}`,
+      'build_publish_args() { args=(); }',
+      'bash() { case "$1" in',
+      '  *retry-cmd.sh) printf "%s\\n" "$PUBLISH_ERROR"; return 1 ;;',
+      `  *read-main-head.sh) echo "${head}" ;;`,
+      'esac; }',
+      'dispatch_stale_replay() {',
+      `  [ "$1" = "${source}" ] && [ "$2" = "${head}" ] || return 1`,
+      '  stale_handoff_nonce=nonce; stale_handoff_title=title',
+      '}',
+      block,
+    ].join('\n')], {
+      cwd: root,
+      env: { ...process.env, DRY: 'false', RUNNER_TEMP: root, GITHUB_OUTPUT: output, PUBLISH_ERROR: error },
+      encoding: 'utf8',
+      stdio: 'pipe',
+    });
+    assert.throws(() => run('HTML validation failed'), { status: 1 });
+    assert.equal(existsSync(output), false);
+    run(`main e' avanzato durante il render (${source} → ${head}); pubblicazione interrotta`);
+    assert.equal(readFileSync(output, 'utf8'), [
+      'stale_handoff=true', `stale_handoff_head=${head}`, 'stale_handoff_nonce=nonce', 'stale_handoff_title=title', '',
+    ].join('\n'));
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('il replay stale installa il parser prima di risolvere la release API', () => {
   const publish = workflow.slice(workflow.indexOf('\n  publish:'));
   const runtime = publish.indexOf('- name: Setup isolated article source runtime');

@@ -307,7 +307,25 @@ if [ "$normal_dispatch" != 'true' ]; then
     fi
   fi
   build_publish_args "$attempt_dry"
-  bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"
+  render_log="$RUNNER_TEMP/fast-section-pinned-render.log"
+  if ! bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}" | tee "$render_log"; then
+    # The publisher's freshness guard has already aborted the stale upload.
+    # Keep ordinary render failures visible even if main advanced concurrently.
+    if [ "$attempt_dry" = 'true' ] || [ -z "$pinned_replay_main" ] \
+      || ! grep -Fq "main e' avanzato durante il render (${pinned_replay_main} → " "$render_log"; then
+      exit 1
+    fi
+    current_main="$(bash scripts/ci/read-main-head.sh)"
+    [ "$current_main" != "$pinned_replay_main" ] || exit 1
+    dispatch_stale_replay "$pinned_replay_main" "$current_main"
+    {
+      echo 'stale_handoff=true'
+      echo "stale_handoff_head=$current_main"
+      echo "stale_handoff_nonce=$stale_handoff_nonce"
+      echo "stale_handoff_title=$stale_handoff_title"
+    } >> "$GITHUB_OUTPUT"
+    exit 0
+  fi
   if [ "$attempt_dry" != 'true' ]; then
     echo "rendered_head=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
   else
