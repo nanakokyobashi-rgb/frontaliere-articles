@@ -13,7 +13,9 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
@@ -21,6 +23,7 @@ import {
   claimEnvKey,
   coerceRemoteConfigValue,
   EXPECTED_ABSENT_RC_KEYS,
+  exportRcEnvironment,
   extractGoogleErrorReason,
   formatMissingRcKeys,
   getRcValue,
@@ -289,6 +292,121 @@ test('il contratto Instagram Insights mantiene identici i nomi RC e GITHUB_ENV',
   assert.ok(Object.keys(contract).length >= 14);
   for (const [rcKey, envKey] of Object.entries(contract)) {
     assert.deepEqual(RC_TO_ENV[rcKey], [envKey], `${rcKey} deve essere esportata con il nome concordato`);
+  }
+});
+
+const operatorKeys = [
+  'OPERATOR_ENABLED',
+  'OPERATOR_DOMAINS_DISABLED',
+  'OPERATOR_AI_DISCLOSURE',
+  'OPERATOR_TELEGRAM_BOT_TOKEN',
+  'OPERATOR_TELEGRAM_OWNER_CHAT_ID',
+  'OPERATOR_GMAIL_CLIENT_ID',
+  'OPERATOR_GMAIL_CLIENT_SECRET',
+  'OPERATOR_GMAIL_REFRESH_TOKEN',
+  'OPERATOR_INBOX_ARCHIVE',
+  'OPERATOR_MAX_LLM_SESSIONS_PER_DAY',
+  'OPERATOR_MAX_LLM_CONCURRENT',
+  'OPERATOR_MAX_EMAIL_PER_HOUR',
+  'OPERATOR_MAX_EMAIL_PER_DAY',
+  'OPERATOR_MAX_ISSUES_PER_DAY',
+  'OPERATOR_MAX_PRS_IN_FLIGHT',
+  'OPERATOR_MAX_NEW_SPEND_CHF',
+];
+
+test('le chiavi operatore sono mappate una a una', () => {
+  const entries = Object.entries(RC_TO_ENV).filter(([key]) => key.startsWith('OPERATOR_'));
+  assert.deepEqual(Object.fromEntries(entries), Object.fromEntries(operatorKeys.map((key) => [key, [key]])));
+});
+
+for (const [name, optIn, githubActions, githubEnv] of [
+  ['normale', undefined, undefined, undefined],
+  ['locale con opt-in esatto', '1', undefined, undefined],
+  ['locale con opt-in diverso da 1', 'true', undefined, undefined],
+  ['CI con file GITHUB_ENV', '1', undefined, 'file'],
+  ['CI con GITHUB_ENV vuoto', '1', undefined, ''],
+  ['CI con il solo GITHUB_ACTIONS', '1', 'true', undefined],
+]) {
+  test(`il loader isola i parametri operatore in modalità ${name}`, async (t) => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'rc-env-'));
+    t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
+    const envFile = githubEnv === 'file' ? path.join(dir, 'env') : githubEnv;
+    const operatorOnly = optIn === '1' && githubEnv === undefined && githubActions === undefined;
+    const env = {
+      FRONTALIERE_LOAD_OPERATOR_CONFIG: optIn,
+      GITHUB_ENV: envFile,
+      GITHUB_ACTIONS: githubActions,
+      BING_API_KEY: undefined,
+      OPERATOR_ENABLED: undefined,
+      OPERATOR_TELEGRAM_BOT_TOKEN: undefined,
+      OPERATOR_GMAIL_CLIENT_SECRET: 'local-override',
+    };
+    for (const [key, value] of Object.entries(env)) {
+      const previous = process.env[key];
+      t.after(() => {
+        if (previous === undefined) delete process.env[key];
+        else process.env[key] = previous;
+      });
+      if (value === undefined) delete process.env[key];
+      else process.env[key] = value;
+    }
+
+    const logs = t.mock.method(console, 'log', () => {});
+    const errors = t.mock.method(console, 'error', () => {});
+    const writes = t.mock.method(process.stdout, 'write', () => true);
+    const values = {
+      BING_API_KEY: 'fake-public-value',
+      OPERATOR_ENABLED: '1',
+      OPERATOR_TELEGRAM_BOT_TOKEN: "fake'private-token",
+      OPERATOR_GMAIL_CLIENT_SECRET: 'fake-private-secret',
+      OPERATOR_UNLISTED: 'fake-unlisted-value',
+    };
+    const parameters = new Proxy(Object.fromEntries(
+      Object.entries(values).map(([key, value]) => [key, { defaultValue: { value } }]),
+    ), {
+      get(target, key) {
+        assert.notEqual(key, 'OPERATOR_UNLISTED');
+        assert.equal(key.startsWith('OPERATOR_'), operatorOnly, `lettura fuori modalità: ${key}`);
+        return target[key];
+      },
+    });
+
+    await exportRcEnvironment({ parameters });
+
+    const stdout = logs.mock.calls.map(({ arguments: args }) => args[0]).join('\n');
+    const stderr = errors.mock.calls.map(({ arguments: args }) => args[0]).join('\n');
+    const masks = writes.mock.calls.map(({ arguments: args }) => args[0]).join('');
+    const output = envFile ? fs.readFileSync(envFile, 'utf8') : stdout;
+    if (operatorOnly) {
+      assert.deepEqual(stdout.split('\n'), [
+        "export OPERATOR_RC_ENV_LOADED='1'",
+        "export OPERATOR_ENABLED='1'",
+        "export OPERATOR_TELEGRAM_BOT_TOKEN='fake'\\''private-token'",
+      ]);
+      assert.doesNotMatch(stderr, /BING_API_KEY|fake-public-value|OPERATOR_UNLISTED/);
+    } else {
+      assert.doesNotMatch([stdout, stderr, masks, output].join('\n'), /OPERATOR_|fake['-]private|fake-unlisted/);
+      if (envFile) {
+        assert.equal(output, `RC_ENV_LOADED=1\n${writeGithubEnvBlock('BING_API_KEY', values.BING_API_KEY)}\n`);
+        assert.equal(masks, '::add-mask::fake-public-value\n');
+      } else {
+        assert.equal(output, "export RC_ENV_LOADED='1'\nexport BING_API_KEY='fake-public-value'");
+      }
+    }
+    if (!envFile) assert.equal(masks, '');
+  });
+}
+
+test('il loader CLI non esporta configurazione operatore se le credenziali mancano o sono illeggibili', (t) => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'rc-no-credentials-'));
+  t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
+  for (const credentialEnv of [{}, { GOOGLE_APPLICATION_CREDENTIALS: path.join(dir, 'missing.json') }]) {
+    const stdout = execFileSync(process.execPath, [path.join(ROOT, 'scripts/load-rc-env.mjs')], {
+      env: { FRONTALIERE_LOAD_OPERATOR_CONFIG: '1', ...credentialEnv },
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+    assert.equal(stdout, '');
   }
 });
 

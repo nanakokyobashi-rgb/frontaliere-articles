@@ -18,6 +18,10 @@
  *
  *     eval "$(GOOGLE_APPLICATION_CREDENTIALS=/path/to/sa.json node scripts/load-rc-env.mjs)"
  *
+ *   FRONTALIERE_LOAD_OPERATOR_CONFIG=1 selects the private operator parameters
+ *   outside GitHub Actions and reports success with OPERATOR_RC_ENV_LOADED=1.
+ *   Consume the exports without printing stdout.
+ *
  * ─── Behaviour ───────────────────────────────────────────────────────────
  *   • If a variable is ALREADY set in the environment, the RC value is SKIPPED.
  *     This allows workflow env blocks to override RC values when needed.
@@ -64,6 +68,24 @@ export function instagramInsightsEnvContract() {
 // that scripts expect.  One RC param may map to multiple env vars.
 
 export const RC_TO_ENV = {
+  // Private operator configuration for explicit local use.
+  OPERATOR_ENABLED: ['OPERATOR_ENABLED'],
+  OPERATOR_DOMAINS_DISABLED: ['OPERATOR_DOMAINS_DISABLED'],
+  OPERATOR_AI_DISCLOSURE: ['OPERATOR_AI_DISCLOSURE'],
+  OPERATOR_TELEGRAM_BOT_TOKEN: ['OPERATOR_TELEGRAM_BOT_TOKEN'],
+  OPERATOR_TELEGRAM_OWNER_CHAT_ID: ['OPERATOR_TELEGRAM_OWNER_CHAT_ID'],
+  OPERATOR_GMAIL_CLIENT_ID: ['OPERATOR_GMAIL_CLIENT_ID'],
+  OPERATOR_GMAIL_CLIENT_SECRET: ['OPERATOR_GMAIL_CLIENT_SECRET'],
+  OPERATOR_GMAIL_REFRESH_TOKEN: ['OPERATOR_GMAIL_REFRESH_TOKEN'],
+  OPERATOR_INBOX_ARCHIVE: ['OPERATOR_INBOX_ARCHIVE'],
+  OPERATOR_MAX_LLM_SESSIONS_PER_DAY: ['OPERATOR_MAX_LLM_SESSIONS_PER_DAY'],
+  OPERATOR_MAX_LLM_CONCURRENT: ['OPERATOR_MAX_LLM_CONCURRENT'],
+  OPERATOR_MAX_EMAIL_PER_HOUR: ['OPERATOR_MAX_EMAIL_PER_HOUR'],
+  OPERATOR_MAX_EMAIL_PER_DAY: ['OPERATOR_MAX_EMAIL_PER_DAY'],
+  OPERATOR_MAX_ISSUES_PER_DAY: ['OPERATOR_MAX_ISSUES_PER_DAY'],
+  OPERATOR_MAX_PRS_IN_FLIGHT: ['OPERATOR_MAX_PRS_IN_FLIGHT'],
+  OPERATOR_MAX_NEW_SPEND_CHF: ['OPERATOR_MAX_NEW_SPEND_CHF'],
+
   // Client-visible keys
   BING_API_KEY:                   ['BING_API_KEY'],
   PAGESPEED_API_KEY:              ['PAGESPEED_API_KEY'],
@@ -475,10 +497,12 @@ export const RC_TO_ENV = {
  * risposto». Per i parametri la cui assenza e' il default sicuro di un
  * override (CANTON_ARTICLE_SECTIONS_KILL) o per i gate che devono provare la
  * disponibilita' del template (generazione cantonale) la differenza conta: il
- * marker viene scritto SOLO dopo aver letto il template, e sempre (anche se
- * gia' presente nell'ambiente: descrive questa esecuzione).
+ * marker ordinario viene scritto SOLO dopo aver letto il template e anche se
+ * gia' presente nell'ambiente: descrive questa esecuzione. L'export locale dei
+ * soli parametri operatore usa un marker dedicato.
  */
 export const RC_LOADED_MARKER = 'RC_ENV_LOADED';
+const OPERATOR_RC_LOADED_MARKER = 'OPERATOR_RC_ENV_LOADED';
 
 /**
  * RC keys whose EMPTY value is a real signal, not a missing setting.
@@ -988,8 +1012,6 @@ async function fetchTemplateViaRest() {
 // ─── Main ────────────────────────────────────────────────────────────────
 
 async function main() {
-  const isCI = !!process.env.GITHUB_ENV;
-
   // 1. Check for GOOGLE_APPLICATION_CREDENTIALS
   if (!process.env.GOOGLE_APPLICATION_CREDENTIALS) {
     console.warn('⚠️  GOOGLE_APPLICATION_CREDENTIALS not set — skipping RC secret loading.');
@@ -1037,8 +1059,15 @@ async function main() {
     }
   }
 
+  await exportRcEnvironment(template);
+}
+
+export async function exportRcEnvironment(template) {
+  const writeToGithubEnv = Boolean(process.env.GITHUB_ENV);
+  const inGitHubActions = process.env.GITHUB_ENV !== undefined || process.env.GITHUB_ACTIONS === 'true';
+  const operatorOnly = !inGitHubActions && process.env.FRONTALIERE_LOAD_OPERATOR_CONFIG === '1';
   const paramCount = Object.keys(template.parameters || {}).length;
-  const statusLog = isCI ? console.log : console.error;
+  const statusLog = writeToGithubEnv ? console.log : console.error;
   statusLog(`📦 Remote Config: ${paramCount} params available`);
 
   // 4. Map RC values → env vars
@@ -1049,11 +1078,12 @@ async function main() {
   const missingKeys = [];
   const lines = []; // For GITHUB_ENV or stdout
   const queuedEnvKeys = new Set();
-  // Il template e' stato letto: da qui in poi l'assenza di un parametro e' un
-  // dato di Remote Config, non un fallimento del caricamento.
-  lines.push(isCI ? `${RC_LOADED_MARKER}=1` : `export ${RC_LOADED_MARKER}='1'`);
+  // Il marker attesta il caricamento dei parametri della modalità selezionata.
+  const marker = operatorOnly ? OPERATOR_RC_LOADED_MARKER : RC_LOADED_MARKER;
+  lines.push(writeToGithubEnv ? `${marker}=1` : `export ${marker}='1'`);
 
   for (const [rcKey, envKeys] of Object.entries(RC_TO_ENV)) {
+    if (rcKey.startsWith('OPERATOR_') !== operatorOnly) continue;
     const value = getRcValue(template, rcKey);
 
     // See shouldExportRcValue: getRcValue() already distinguishes "absent" (null)
@@ -1078,7 +1108,7 @@ async function main() {
 
       // For CI: write to $GITHUB_ENV
       // For local: output as export statement
-      if (isCI) {
+      if (writeToGithubEnv) {
         // Mask the value so GitHub Actions redacts it from all logs, but skip
         // trivial values that would poison unrelated output (see isTrivialSecret).
         if (!isTrivialSecret(value)) {
@@ -1097,11 +1127,11 @@ async function main() {
   }
 
   // 5. Write output
-  if (isCI && lines.length > 0) {
+  if (writeToGithubEnv && lines.length > 0) {
     const { appendFileSync } = await import('node:fs');
     const envFile = process.env.GITHUB_ENV;
     appendFileSync(envFile, lines.join('\n') + '\n');
-  } else if (!isCI) {
+  } else if (!writeToGithubEnv) {
     // Print to stdout for eval
     for (const line of lines) {
       console.log(line);
