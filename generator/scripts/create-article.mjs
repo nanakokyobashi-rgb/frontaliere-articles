@@ -6302,12 +6302,16 @@ function sourceCopyInputText(pageContent) {
   return String(pageContent || '');
 }
 
-function appendSourceCitation(data, url) {
-  const citationUrl = String(url || '').startsWith('stats-bfs://')
+function articleSourceCitationUrl(url) {
+  return String(url || '').startsWith('stats-bfs://')
     ? 'https://www.bfs.admin.ch/bfs/it/home/statistiche/industria-servizi.html'
     : String(url || '').startsWith('stats-astra://')
       ? 'https://www.astra.admin.ch/astra/it/home/documentazione/dati-aperti/veicoli.html'
       : url;
+}
+
+function appendSourceCitation(data, url) {
+  const citationUrl = articleSourceCitationUrl(url);
   if (citationUrl && !citationUrl.startsWith('evergreen://')) {
     try {
       const sourceDomain = new URL(citationUrl).hostname.replace(/^www\./, '');
@@ -23434,13 +23438,13 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
 
     // Step 3a.0a-bis: fisco, previdenza e tassa salute non escono in automatico
     // senza una fonte ufficiale e senza il controllo dei parametri fiscali
-    // (lib/article-ymyl-gate.mjs). Rigenera finche' ci sono tentativi; poi e' un
-    // rifiuto del topic-gate: l'articolo non esce e il ranker prosegue.
+    // (lib/article-ymyl-gate.mjs). Senza fonte ufficiale, riscrivere con lo
+    // stesso materiale non aggiunge evidenze: il ranker passa al candidato successivo.
     try {
-      assertYmylPublishable(data, { sourceUrl: url });
+      assertYmylPublishable(data, { sourceUrl: articleSourceCitationUrl(url) });
     } catch (ymylErr) {
       console.error(`  ⚠️  ${safeSignalDiagnosticTextForLog(ymylErr?.message || ymylErr, RUN_REPORT)}`);
-      if (attempt < maxAttempts) {
+      if (!ymylErr.missingOfficialSource && attempt < maxAttempts) {
         console.error(`  🔄 Rigenero contenuto IT per il gate YMYL (${attempt}/${maxAttempts})...`);
         continue;
       }

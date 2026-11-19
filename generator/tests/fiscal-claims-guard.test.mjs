@@ -278,7 +278,7 @@ test('i brief del prompt riportano le stesse fonti del gate', () => {
 test('YMYL: fonte ufficiale obbligatoria, nel testo o come fonte dell\'articolo', () => {
   const data = { id: 'franchigia-frontalieri-2026', content: { it: { title: 'Franchigia IRPEF per i frontalieri', excerpt: '', body1: 'La franchigia vale 10.000 euro dal 2024.' } } };
   assert.deepEqual(checkYmylPublishable(data).problems, ['nessun link a una fonte ufficiale']);
-  assert.throws(() => assertYmylPublishable(data), (error) => error.topicGateAbort === true);
+  assert.throws(() => assertYmylPublishable(data), (error) => error.topicGateAbort === true && error.missingOfficialSource === true);
 
   assert.deepEqual(checkYmylPublishable(data, { sourceUrl: 'https://www.news.admin.ch/it/nsb' }).problems, []);
   const linked = structuredClone(data);
