@@ -56,7 +56,7 @@ test('#2 la scadenza si installa solo nel ramo CLI', () => {
     assert.ok(at > cli.start && at < cli.end, 'installCodexTranslateProcessDeadline() chiamata fuori da `if (invokedDirectly)`');
   }
   const installer = blockFrom('function installCodexTranslateProcessDeadline(');
-  assert.match(installer.text, /setCodexTranslateProcessDeadline\(RUN_START_MS \+ RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS\)/);
+  assert.match(installer.text, /setCodexTranslateProcessDeadline\(RUN_START_MS \+ RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS,\s*\{\s*recoveryReserveMs: 120_000,\s*\}\)/);
 });
 
 test('#3 setCodexTranslateProcessDeadline solo nell\'installer e nella fermata cooperativa', () => {
