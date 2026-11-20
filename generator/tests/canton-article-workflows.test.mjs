@@ -38,6 +38,7 @@ import {
   CORE_REPLACEMENTS,
   CORE_WORKFLOW,
   SOURCE_WORKFLOW,
+  SLOT_SCHEDULE_REL,
   WORKFLOWS_DIR,
   buildAll,
   buildCoreWorkflow,
@@ -106,17 +107,20 @@ test('un file generato che il generatore non prevede piu\' e\' segnalato come or
     writeFileSync(path.join(dir, WORKFLOWS_DIR, SOURCE_WORKFLOW), SOURCE);
     writeFileSync(path.join(dir, 'generator/data/canton-sections.json'), JSON.stringify(PROFILES));
     for (const [file, content] of buildFromRepo(ROOT)) writeFileSync(path.join(dir, WORKFLOWS_DIR, file), content);
+    writeFileSync(path.join(dir, SLOT_SCHEDULE_REL), readFileSync(path.join(ROOT, SLOT_SCHEDULE_REL)));
     assert.deepEqual(checkGenerated(dir), []);
 
     writeFileSync(path.join(dir, WORKFLOWS_DIR, 'generate-article-xx.yml'), `${AUTO_GENERATED_MARKER}\nname: x\n`);
     writeFileSync(path.join(dir, WORKFLOWS_DIR, 'generate-article-xx-self-test.yml'), `${AUTO_GENERATED_MARKER}\nname: x\n`);
     writeFileSync(path.join(dir, WORKFLOWS_DIR, 'generate-article-ti.yml'), `${readWorkflow('generate-article-ti.yml')}# a mano\n`);
     rmSync(path.join(dir, WORKFLOWS_DIR, 'generate-article-gr.yml'));
+    writeFileSync(path.join(dir, SLOT_SCHEDULE_REL), '{}');
     assert.deepEqual(checkGenerated(dir).sort(), [
       'generate-article-gr.yml: manca',
       'generate-article-ti.yml: diverge dal generato',
       'generate-article-xx-self-test.yml: generato ma non piu\' previsto (orfano)',
       'generate-article-xx.yml: generato ma non piu\' previsto (orfano)',
+      `${SLOT_SCHEDULE_REL}: diverge dal generato`,
     ]);
   } finally {
     rmSync(dir, { recursive: true, force: true });
