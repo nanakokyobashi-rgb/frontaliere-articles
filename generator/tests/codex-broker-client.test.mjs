@@ -282,6 +282,9 @@ test('dopo il segnale di avvio lo scadere del budget e\' un timeout del socket, 
   await assert.rejects(() => callCodex({ deadlineMs: Date.now() + 1500 }), /Codex auth broker socket timed out/);
   assert.match(logged(), /guasto di trasporto/);
   assert.equal(codexScore(), 0);
+  assert.equal(isModelAvailable(CODEX), true);
+  behavior = (client) => { client.end(JSON.stringify({ ok: true, result: 'PONG' }) + '\n'); };
+  assert.equal(await callCodex(), 'PONG');
 });
 
 test('un broker sparito spegne la lane per il processo al primo ENOENT', async () => {
@@ -312,6 +315,7 @@ test('ogni guasto del canale broker vota transitorio nel tally di esaurimento', 
   await callCodex({ deadlineMs: Date.now() + 1200 }).catch((error) => rows.push(String(error.message)));
   behavior = (client) => { client.end(); };
   await callCodex().catch((error) => rows.push(String(error.message)));
+  resetState(); // Exercise an absent broker in a new run, after testing remote EOF.
   for (const socket of sockets) socket.destroy();
   await new Promise((resolve) => server.close(resolve));
   fs.rmSync(socketPath, { force: true });
