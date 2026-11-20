@@ -158,7 +158,8 @@ describe('llmFactCheck wiring', () => {
     // If the primary lane gives no vote, do not publish an article with a
     // single free opinion (review of PR #1871).
     assert.match(block, /if \(modelResults\.length < 2 && !codexAlreadyVoted && isModelAvailable\(AI_MODELS\.CODEX_CLI_PRIMARY\)\) \{/);
-    assert.match(block, /await _runSingleFactCheck\(codex, prompt, \{ isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true, deadlineMs: factCheckDeadlineMs \}\)/);
+    assert.match(block, /editorialProofFailures\.size/);
+    assert.match(block, /await _runSingleFactCheck\(codex, retryPrompt, \{ isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true, deadlineMs: factCheckDeadlineMs \}\)/);
   });
 
   test('its verdict is one vote like any other', () => {

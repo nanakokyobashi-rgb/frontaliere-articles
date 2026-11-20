@@ -7382,6 +7382,7 @@ ${proofSuffix}`
   // An HTTP success without a verifiable vote can otherwise keep the same fallback
   // at the head of every retry, even after bypassing the response cache.
   const invalidVerdictModels = new Set();
+  const editorialProofFailures = new Set();
 
   // Bounded retry on TRANSIENT checker-infrastructure failure (2026-06-15).
   // Observed waste: when all verifier models momentarily fail to PRODUCE a
@@ -7460,6 +7461,7 @@ ${proofSuffix}`
       fresh: fcAttempt > 1,
       deadlineMs,
       invalidVerdictModels,
+      editorialProofFailures,
       isEvergreen: isEvergreenArticle,
       editorialContext,
       excludeModels: [
@@ -7503,7 +7505,7 @@ ${proofSuffix}`
         || verificationModels.find((m) => !voted.includes(m))
         || modelsToQuery[1];
       try {
-        const extra = await _runSingleFactCheck(next, activePrompt, { isEvergreen: isEvergreenArticle, editorialContext, excludeModels: voted, invalidVerdictModels, deadlineMs });
+        const extra = await _runSingleFactCheck(next, activePrompt, { isEvergreen: isEvergreenArticle, editorialContext, excludeModels: voted, invalidVerdictModels, editorialProofFailures, deadlineMs });
         const earlier = extra ? addIndependentVote(modelResults, next, extra) : null;
         fcHadNonOutageResult = true;
         if (earlier) console.error(`  ⚠️  LLM fact-check (${next}): servito di nuovo da ${earlier.servedBy} — resta un solo voto`);
@@ -7521,7 +7523,7 @@ ${proofSuffix}`
     // If both primary models failed, try fallback
     if (modelResults.length === 0 && verificationModels.length > 2) {
       try {
-        const fallback = await _runSingleFactCheck(verificationModels[2], activePrompt, { isEvergreen: isEvergreenArticle, editorialContext, fresh: fcAttempt > 1, invalidVerdictModels, deadlineMs });
+        const fallback = await _runSingleFactCheck(verificationModels[2], activePrompt, { isEvergreen: isEvergreenArticle, editorialContext, fresh: fcAttempt > 1, invalidVerdictModels, editorialProofFailures, deadlineMs });
         if (fallback) {
           addIndependentVote(modelResults, verificationModels[2], fallback);
           missingSecondOpinion = fallback.servedBy !== AI_MODELS.CODEX_CLI_PRIMARY;
@@ -7579,7 +7581,12 @@ ${proofSuffix}`
     const selfCheck = _codexWroteThisHeadline ? ' — ha scritto anche questo articolo: si verifica da solo (decisione del proprietario)' : '';
     console.error(`  🛟 LLM fact-check: ${why}, verifico con ${codex}${selfCheck}`);
     try {
-      const vote = await _runSingleFactCheck(codex, prompt, { isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true, deadlineMs: factCheckDeadlineMs });
+      const retryPrompt = editorialProofFailures.size
+        ? `${prompt}\n\nCONTROLLO DELLE PROVE PRIMA DI INVIARE IL JSON:\n`
+          + `I verdetti precedenti sono stati scartati per questi requisiti: ${[...editorialProofFailures].join(' | ')}.\n`
+          + 'Prima scegli e copia i passaggi esatti dai blocchi forniti, poi formula il giudizio in base a quei passaggi.'
+        : prompt;
+      const vote = await _runSingleFactCheck(codex, retryPrompt, { isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true, deadlineMs: factCheckDeadlineMs });
       if (vote) addIndependentVote(modelResults, codex, vote);
       fcHadNonOutageResult = true;
     } catch (err) {
@@ -7928,6 +7935,7 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
   const issues = normalizeFactCheckIssues(result.issues, opts);
   const editorialAssessment = validateEditorialAssessment(result.editorialAssessment, opts.editorialContext);
   if (!editorialAssessment.verifiable) {
+    opts.editorialProofFailures?.add(editorialAssessment.reason);
     if (servedBy) opts.invalidVerdictModels?.add(servedBy);
     console.error(`  ⚠️  LLM fact-check (${model}${servedBy && servedBy !== model ? ` via ${servedBy}` : ''}): `
       + `valutazione editoriale senza prove leggibili (${safeSignalDiagnosticTextForLog(editorialAssessment.reason)}) — voto scartato`);
