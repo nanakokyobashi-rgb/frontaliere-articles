@@ -4343,6 +4343,22 @@
             "items7d": 18,
             "verifiedAt": "2026-10-08",
             "notes": "Feed podcast ufficiale del Regionaljournal Zentralschweiz: 100 item, 18 in 7 giorni, con itunes:summary di 2-3 frasi per ogni servizio. E' l'unica superficie SRF regionale ancora viva: srf.ch/news/regional/zentralschweiz e /news/regional rispondono 404. Copre LU+UR+SZ+OW+NW+ZG (filtrare LU). D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
+          },
+          {
+            "url": "https://www.stadtluzern.ch/aktuelles/news.rss",
+            "format": "rss",
+            "parser": "rss",
+            "publisher": "Stadt Luzern",
+            "language": "de",
+            "kind": "istituzionale",
+            "topics": ["servizi", "mobilita", "lavoro", "eventi"],
+            "quirks": {
+              "feedContentOnly": true,
+              "maxRequestsPerRun": 1
+            },
+            "items7d": 10,
+            "verifiedAt": "2026-11-20",
+            "notes": "RSS ufficiale per lettori e integrazioni web. GET 200 con il crawler dichiarato, robots consente il percorso, 10/10 item negli ultimi 7 giorni con link HTTPS della stessa origine e descrizione. Solo fatti dal feed con attribuzione e link. Feed: https://www.stadtluzern.ch/index.php/aktuelles/rssfeed. Diritti: https://www.stadtluzern.ch/impressum."
           }
       ],
       "categoryDataSources": {
@@ -4359,7 +4375,7 @@
             "quirks": {},
             "items7d": 10,
             "verifiedAt": "2026-10-05",
-            "notes": "10 item, tutti con pubDate recente/futura (eventi dal 03 al 09.10.2026). Agenda ufficiale della citta' di Luzern. Il feed gemello /aktuelles/news.rss e' rifiutato (quasi solo necrologi).",
+            "notes": "10 item, tutti con pubDate recente/futura (eventi dal 03 al 09.10.2026). Agenda ufficiale della citta' di Luzern.",
             "dataShape": "agenda"
           },
           {

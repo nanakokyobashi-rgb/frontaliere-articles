@@ -3454,7 +3454,6 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
     'scripts/lib/section-page-manifest.mjs',
     'scripts/publish-section-pages.mjs',
     'scripts/lib/assert-hub-locale-slug.mjs',
-    'scripts/publish-section-edge.mjs',
     'scripts/lib/engine-corpus-view.mjs',
     'scripts/lib/upload-cdn-file.sh',
     'scripts/lib/r2-image-lease-process.sh',
@@ -3474,6 +3473,16 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
     assert.deepEqual(r2PublishPlan([rel], WITH_TI), [{ section: 'canton-ti', ids: [], bootstrap: true }], rel);
   }
   assert.deepEqual(r2PublishPlan(['content/cantons/canton-gr/registry.ts', 'content/blog-meta-canton-tipo-it.ts'], WITH_TI), []);
+});
+
+test('piano push R2: il CLI del puntatore edge non amplia il rendering', () => {
+  const core = [...WITH_TI, { ...TI, section: 'canton-gr' }];
+  const edgeChange = 'M\tscripts/publish-section-edge.mjs';
+  assert.deepEqual(r2PublishPlan([edgeChange], core), []);
+  assert.deepEqual(
+    r2PublishPlan([edgeChange, 'M\tcontent/blog-body-canton-ti/it/a.ts'], core),
+    [{ section: 'canton-ti', ids: ['a'], bootstrap: false }],
+  );
 });
 
 test('piano API push: aggiorna tutte le superfici cantonali live senza ampliare gli articoli', () => {
@@ -4072,7 +4081,6 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     'generator/scripts/lib/corpus-paths.mjs',
     'generator/scripts/lib/control-char-write-report.mjs',
     'scripts/publish-section-pages.mjs',
-    'scripts/publish-section-edge.mjs',
     'scripts/lib/section-bootstrap-lock.mjs',
     'scripts/ci/section-bootstrap-lock.mjs',
     'scripts/lib/conditional-cdn-put.sh',
@@ -4103,6 +4111,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     'scripts/lib/is-invoked-directly.mjs',
     'generator/scripts/load-rc-env.mjs',
   ]) assert.ok(wf.includes(`      - '${p}'\n`), p);
+  const pushPaths = (workflow) => workflow.match(/^  push:\n(?:^    [^\n]*\n)*?^    paths:\n((?:^      [^\n]*\n)+)/m)?.[1];
+  const edgePath = "      - 'scripts/publish-section-edge.mjs'\n";
+  assert.ok(pushPaths(wf));
+  assert.ok(!pushPaths(wf).includes(edgePath));
+  assert.ok(pushPaths(read('.github/workflows/publish-api.yml'))?.includes(edgePath));
   assert.ok(wf.includes("      - 'engine/**'\n"));
   assert.ok(wf.includes("      - 'host/**'\n"));
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'scripts/lib/article-render-pipeline.mjs'\n"));

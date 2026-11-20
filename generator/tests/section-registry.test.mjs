@@ -102,7 +102,6 @@ import {
   main as edgeMain,
   planRelease,
   publishRelease,
-  purgeChunks,
   releaseBootstrapLocks,
   readPreviousRelease,
   releaseSnapshotCommit,
@@ -111,6 +110,7 @@ import {
   sitemapPaths,
   releaseDiffers,
 } from '../../scripts/publish-section-edge.mjs';
+import { purgeChunks } from '../../scripts/lib/cf-purge-variants.mjs';
 import {
   SECTION_EDGE_PUBLISHER_LOCK_TTL_MS,
   SECTION_BOOTSTRAP_LOCK_TTL_MS,

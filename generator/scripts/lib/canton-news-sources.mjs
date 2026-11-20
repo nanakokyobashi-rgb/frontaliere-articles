@@ -47,6 +47,7 @@
  *   - `http1Only`          → `fetch` di Node (undici) parla HTTP/1.1 se non gli
  *                            si chiede `allowH2`, e questo modulo non lo fa mai:
  *                            il quirk e' rispettato per costruzione
+ *   - `feedContentOnly`   → RSS pubblico: una richiesta al feed, lead e link HTTPS della stessa origine
  *   - `paywall: title+lead`→ della fonte si leggono solo titolo e attacco: il
  *                            lead del feed viaggia con la headline (`lead`) e fa
  *                            da sommario al classifier
@@ -1616,7 +1617,7 @@ export function feedItemDocuments(xml, feedUrl = null) {
 
 /**
  * Il lead (`<description>`) di ogni item RSS, per link. Serve alle fonti
- * `paywall: title+lead`, dove l'attacco del feed e' tutto cio' che si legge.
+ * `paywall: title+lead` e `feedContentOnly`, che usano l'attacco del feed.
  *
  * @param {string} xml
  * @param {string} feedUrl
@@ -1809,11 +1810,12 @@ function agPressHeadline(html, candidateUrl) {
 // ── Cortesia verso l'host ────────────────────────────────────────────────────
 
 /**
- * Parte da `maxRequestsPerRun` e applica il cap dei comunicati AG. Con un
- * crawl-delay troppo lungo il budget effettivo è una sola richiesta.
+ * Parte da `maxRequestsPerRun` e applica il cap dei comunicati AG. Con
+ * `feedContentOnly` su RSS o con un crawl-delay troppo lungo, il budget è una richiesta.
  */
 export function sourceRequestBudget(source) {
   const q = source?.quirks || {};
+  if (source?.parser === 'rss' && q.feedContentOnly === true) return 1;
   let budget = Number.isInteger(q.maxRequestsPerRun) && q.maxRequestsPerRun >= 1 ? q.maxRequestsPerRun : Infinity;
   if (Number(q.crawlDelaySeconds) > MAX_INLINE_CRAWL_DELAY_SECONDS) budget = Math.min(budget, 1);
   return source && isAgPressDetail(source) ? Math.min(budget, AG_PRESS_MAX_REQUESTS) : budget;
@@ -1889,8 +1891,9 @@ export async function scanCantonSource(source, ctx) {
   const now = ctx.now || new Date();
   const quirks = source.quirks || {};
   const agPressDetail = isAgPressDetail(source);
+  const feedContentOnly = source.parser === 'rss' && quirks.feedContentOnly === true;
   const budget = sourceRequestBudget(source);
-  const host = new URL(source.url).hostname;
+  const { hostname: host, origin } = new URL(source.url);
   const notes = [];
   let requests = 0;
 
@@ -1912,7 +1915,7 @@ export async function scanCantonSource(source, ctx) {
           try {
             res = await fetchWithRefTimeout(url, {
               headers: { 'User-Agent': CANTON_SOURCE_USER_AGENT, Accept: accept, 'Accept-Language': acceptLanguageFor(source) },
-              redirect: agPressDetail ? 'error' : 'follow',
+              redirect: agPressDetail || feedContentOnly ? 'error' : 'follow',
             }, CANTON_SOURCE_TIMEOUT_MS, fetchImpl);
           } catch (error) {
             // Classify the transport error in the outer catch. Do not mark an
@@ -1969,9 +1972,14 @@ export async function scanCantonSource(source, ctx) {
           const items = quirks.urlReusedForDifferentStories && source.parser === 'atom'
             ? extracted.map((item) => ({ ...item, url: decodeHtmlEntities(item.url) }))
             : extracted;
-          if (!quirks.paywall) return items;
+          if (!quirks.paywall && !feedContentOnly) return items;
           const leads = rssItemLeads(doc, url);
-          return items.map((h) => (leads.has(h.url) ? { ...h, lead: leads.get(h.url) } : h));
+          const withLeads = items.map((h) => (leads.has(h.url) ? { ...h, lead: leads.get(h.url) } : h));
+          if (!feedContentOnly) return withLeads;
+          return withLeads.filter((item) => {
+            const link = URL.parse(item.url);
+            return link?.protocol === 'https:' && link.origin === origin;
+          }).map((item) => ({ ...item, _feedContentOnly: true }));
         });
       }
       case 'html-links': {
@@ -2005,7 +2013,7 @@ export async function scanCantonSource(source, ctx) {
   // dei comunicati dell'anno) e' un ESEMPIO: si leggono il periodo corrente e
   // il precedente, o il solo piu' utile se il budget e' 1. `weekly-sitemap`
   // senza `urlPeriod` e' settimanale ISO per definizione.
-  const period = agPressDetail ? null : quirks.urlPeriod || (source.parser === 'weekly-sitemap' ? 'iso-week' : null);
+  const period = agPressDetail || feedContentOnly ? null : quirks.urlPeriod || (source.parser === 'weekly-sitemap' ? 'iso-week' : null);
   const urls = period ? periodSitemapUrls(source.url, period, { now, budget: Math.min(budget, 2) }) : [source.url];
   let headlines = [];
   const failures = [];

@@ -10100,6 +10100,19 @@ async function fetchPageContent(url, sourceContext = null) {
       'Il corpo completo non è accessibile pubblicamente e non viene usato.',
     ].filter(Boolean).join('\n');
   }
+  if (sourceContext?._cantonSourceFeedOnly === true) {
+    lastSourcePublishedAt = suppliedCantonSourcePublishedAt;
+    lastSourcePageTitle = suppliedCantonSourceTitle;
+    const lead = suppliedCantonSourceLead.trim();
+    return [
+      '[FONTE PUBBLICA — FEED]',
+      `Link alla fonte: ${url}`,
+      suppliedCantonSourceTitle ? `Titolo: ${suppliedCantonSourceTitle}` : '',
+      suppliedCantonSourcePublishedAt ? `Data: ${suppliedCantonSourcePublishedAt}` : '',
+      lead ? `Estratto del feed: ${lead}` : '',
+      'Riporta solo fatti verificabili nel feed, con attribuzione e link alla fonte. Evita di riprodurre il titolo e la prosa dell’estratto.',
+    ].filter(Boolean).join('\n');
+  }
   // Orphan-query candidates carry a site-relative path (GSC topLandingPage
   // is stored path-only by design, see gscFetcher.mjs:231) — fetch() has no
   // implicit base URL and throws "Failed to parse URL from /..." on these,
@@ -11335,6 +11348,7 @@ async function fetchCantonSourceHeadlines(source, domain) {
     ...(h.sourceContent ? { _cantonSourceContent: h.sourceContent } : {}),
     ...(h.lead ? { _cantonSourceLead: h.lead } : {}),
     ...(h._paywall ? { _cantonSourcePaywall: h._paywall } : {}),
+    ...(h._feedContentOnly === true ? { _cantonSourceFeedOnly: true } : {}),
   }));
 }
 

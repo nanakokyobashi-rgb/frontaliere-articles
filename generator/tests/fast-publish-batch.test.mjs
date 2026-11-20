@@ -519,6 +519,8 @@ test('il replay staged puo aggiornare solo origin/main da un checkout shallow', 
     writeFileSync(join(source, 'history.txt'), 'base\n');
     git(source, 'add', 'history.txt');
     git(source, 'commit', '-m', 'base');
+    writeFileSync(join(source, 'history.txt'), 'middle\n');
+    git(source, 'commit', '-am', 'middle');
     writeFileSync(join(source, 'history.txt'), 'head\n');
     git(source, 'commit', '-am', 'head');
     const head = git(source, 'rev-parse', 'HEAD');
@@ -543,6 +545,51 @@ test('il replay staged puo aggiornare solo origin/main da un checkout shallow', 
 
     assert.equal(git(shallow, 'rev-parse', '--is-shallow-repository'), 'true');
     assert.equal(git(shallow, 'rev-parse', 'refs/remotes/origin/main'), head);
+
+    const full = join(root, 'full');
+    git(root, 'clone', `file://${origin}`, full);
+    execFileSync('bash', [pushBaseGuardPath], {
+      cwd: full,
+      env: {
+        ...process.env,
+        PUSH_BEFORE: '',
+        FETCH_MAIN: 'true',
+        FETCH_MAIN_DEPTH: '2',
+        REQUIRE_FULL_HISTORY: 'false',
+      },
+      stdio: 'pipe',
+    });
+    assert.equal(git(full, 'rev-parse', '--is-shallow-repository'), 'false');
+    assert.equal(git(full, 'rev-list', '--count', 'refs/remotes/origin/main'), '3');
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il guard rifiuta profondità invalide o incompatibili prima del fetch', () => {
+  const root = mkdtempSync(join(tmpdir(), 'frontaliere-invalid-depth-'));
+  try {
+    for (const overrides of [
+      ...['1', '02', '129', '2.5', '999999999999999999999'].map((depth) => ({ FETCH_MAIN_DEPTH: depth })),
+      { FETCH_MAIN: 'false' },
+      { REQUIRE_FULL_HISTORY: 'true' },
+    ]) {
+      assert.throws(
+        () => execFileSync('bash', [pushBaseGuardPath], {
+          cwd: root,
+          env: {
+            ...process.env,
+            FETCH_MAIN: 'true',
+            FETCH_MAIN_DEPTH: '32',
+            REQUIRE_FULL_HISTORY: 'false',
+            ...overrides,
+          },
+          encoding: 'utf8',
+          stdio: 'pipe',
+        }),
+        (error) => error?.status === 1 && /::error::FETCH_MAIN_DEPTH/u.test(error.stdout),
+      );
+    }
   } finally {
     rmSync(root, { recursive: true, force: true });
   }

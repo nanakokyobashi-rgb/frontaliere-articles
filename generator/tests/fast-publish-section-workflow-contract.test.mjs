@@ -1,9 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 const workflow = readFileSync(
   new URL('../../.github/workflows/fast-publish-section.yml', import.meta.url),
@@ -297,7 +298,7 @@ test('il replay pinned consegna la sezione se main avanza durante il render', ()
       'set -euo pipefail',
       'normal_dispatch=false',
       `pinned_replay_main=${source}`,
-      'build_publish_args() { args=(); }',
+      'build_publish_args() { args=(--section canton-ti); }',
       'bash() { case "$1" in',
       '  *retry-cmd.sh) printf "%s\\n" "$PUBLISH_ERROR"; return 1 ;;',
       `  *read-main-head.sh) echo "${head}" ;;`,
@@ -430,4 +431,114 @@ test('il recovery verifica l ancestry della base prima di ricostruire la matrice
     recovery.lastIndexOf('if ! validate_recovery_base_ancestry; then', mixedPlan) >= 0,
     'il mixed recovery deve validare la base prima del r2-plan',
   );
+});
+
+test('il recovery shallow verifica la finestra breve prima del fallback storico', async (t) => {
+  const root = mkdtempSync(path.join(tmpdir(), 'section-recovery-history-'));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const git = (cwd, ...args) => execFileSync('git', args, { cwd, encoding: 'utf8', stdio: 'pipe' }).trim();
+  const origin = path.join(root, 'origin');
+  git(root, 'init', '--initial-branch=main', origin);
+  git(origin, 'config', 'user.name', 'Test');
+  git(origin, 'config', 'user.email', 'test@example.invalid');
+  git(origin, 'commit', '--allow-empty', '-m', 'base');
+  const oldBase = git(origin, 'rev-parse', 'HEAD');
+  git(origin, 'switch', '-c', 'other');
+  git(origin, 'commit', '--allow-empty', '-m', 'divergent base');
+  const divergentBase = git(origin, 'rev-parse', 'HEAD');
+  git(origin, 'switch', 'main');
+  for (let index = 1; index <= 38; index += 1) {
+    git(origin, 'commit', '--allow-empty', '-m', `main ${index}`);
+  }
+  const pin = git(origin, 'rev-parse', 'HEAD');
+  const shortBase = git(origin, 'rev-parse', 'HEAD~6');
+  const start = recovery.indexOf('ensure_recovery_history() {');
+  const end = recovery.indexOf('\nif [ "${MIXED_MATRIX:-false}"', start);
+  assert.ok(start >= 0 && end > start);
+  const historyBlock = recovery.slice(start, end);
+  const guardPath = new URL('../../scripts/ci/fetch-push-base-if-missing.sh', import.meta.url);
+  const bin = path.join(root, 'bin');
+  mkdirSync(bin);
+  writeFileSync(path.join(bin, 'git'), `#!/usr/bin/env bash
+if [ "$1" = fetch ]; then
+  printf '%s\\n' "$*" >> "$FETCH_LOG"
+  for arg in "$@"; do
+    if [ "$arg" = --unshallow ] && [ "$REJECT_UNSHALLOW" = true ]; then
+      exit 1
+    fi
+    if [ "$arg" = --depth=32 ] && [ "$REJECT_SHORT_FETCH" = true ]; then
+      exit 1
+    fi
+  done
+fi
+exec "$REAL_GIT" "$@"
+`, { mode: 0o755 });
+  const realGit = execFileSync('which', ['git'], { encoding: 'utf8' }).trim();
+  const refspec = 'origin main:refs/remotes/origin/main';
+  const shortFetch = `fetch --no-tags --depth=32 ${refspec}`;
+  const fullFetch = `fetch --no-tags --unshallow ${refspec}`;
+  const cases = [
+    { name: 'sei commit di ancestry', base: shortBase, shallow: true, fetches: [shortFetch] },
+    { name: 'mixed con scope esplicito', base: '0'.repeat(40), mixed: true, shallow: true, fetches: [shortFetch] },
+    { name: 'stale con primo parent', base: '', shallow: true, fetches: [shortFetch] },
+    { name: 'tip diverso dal pin', base: oldBase, expectedPin: shortBase, shallow: true,
+      fetches: [shortFetch], error: /main e' avanzata durante il fetch breve/u },
+    { name: 'base fuori finestra', base: oldBase, shallow: false, fetches: [shortFetch, fullFetch] },
+    { name: 'fetch breve fallito', base: shortBase, rejectShort: true, shallow: false,
+      fetches: [shortFetch, fullFetch] },
+    { name: 'fallback esaurito', base: oldBase, shallow: true,
+      fetches: [shortFetch, fullFetch, fullFetch, fullFetch],
+      error: /storia Git non verificabile prima del recovery staged/u },
+    { name: 'base divergente anche dopo il fallback', base: divergentBase, shallow: false,
+      fetches: [shortFetch, fullFetch, `fetch --no-tags origin ${divergentBase}`],
+      error: /base della push non antenata di CURRENT_MAIN/u },
+  ];
+
+  for (const [index, scenario] of cases.entries()) {
+    await t.test(scenario.name, () => {
+      const checkout = path.join(root, `checkout-${index}`);
+      const fetchLog = path.join(checkout, 'fetch.log');
+      git(root, 'clone', '--depth=1', pathToFileURL(origin).href, checkout);
+      assert.equal(git(checkout, 'rev-parse', '--is-shallow-repository'), 'true');
+      mkdirSync(path.join(checkout, 'scripts/ci'), { recursive: true });
+      writeFileSync(path.join(checkout, 'scripts/ci/fetch-push-base-if-missing.sh'), readFileSync(guardPath));
+
+      const result = spawnSync('bash', ['-c', `set -euo pipefail
+${historyBlock}
+ensure_recovery_history || exit 1
+validate_recovery_base_ancestry || exit 1
+printf 'history verified\\n'
+`], {
+        cwd: checkout,
+        encoding: 'utf8',
+        env: {
+          ...process.env,
+          PATH: `${bin}${path.delimiter}${process.env.PATH}`,
+          REAL_GIT: realGit,
+          FETCH_LOG: fetchLog,
+          REJECT_UNSHALLOW: String(scenario.shallow),
+          REJECT_SHORT_FETCH: String(scenario.rejectShort ?? false),
+          CURRENT_MAIN: scenario.expectedPin ?? pin,
+          ORIGINAL_PUSH_BEFORE: scenario.base,
+          MIXED_MATRIX: String(scenario.mixed ?? false),
+          HISTORY_FETCH_ATTEMPTS: '3',
+          HISTORY_FETCH_DELAY_S: '0',
+          HISTORY_FETCH_TIMEOUT_S: '30',
+        },
+      });
+      assert.ifError(result.error);
+      assert.equal(result.status, scenario.error ? 1 : 0, result.stdout + result.stderr);
+      if (scenario.error) {
+        assert.match(result.stdout, scenario.error);
+        assert.doesNotMatch(result.stdout, /history verified/u);
+      } else {
+        assert.match(result.stdout, /history verified/u);
+      }
+      assert.deepEqual(readFileSync(fetchLog, 'utf8').trim().split('\n'), scenario.fetches);
+      assert.equal(git(checkout, 'rev-parse', '--is-shallow-repository'), String(scenario.shallow));
+      if (scenario.base === shortBase) {
+        git(checkout, 'merge-base', '--is-ancestor', shortBase, pin);
+      }
+    });
+  }
 });

@@ -282,6 +282,10 @@ test('Codex locale classifica timeout, uscita, segnale, quota, auth e output', a
   assert.equal(exit.reason, 'exit-1');
   assert.equal(exit.retryable, false);
 
+  const streamDisconnect = await run({ code: 1, stderr: 'ERROR: stream disconnected before completion' });
+  assert.equal(streamDisconnect.reason, 'exit-1');
+  assert.equal(streamDisconnect.retryable, true);
+
   const signal = await run({ code: null, signal: 'SIGTERM', stderr: 'processo terminato' });
   assert.equal(signal.reason, 'signal-SIGTERM');
   assert.equal(signal.retryable, false);

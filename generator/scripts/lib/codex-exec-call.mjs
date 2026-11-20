@@ -72,7 +72,7 @@ const CODEX_AUTH_RE = /\b(?:401|403|auth(?:entication|orization)?|credential|log
 const CODEX_QUOTA_RE = /\b(?:quota|usage[-_ ]+limit(?:[-_ ]+(?:reached|exceeded))?|daily[-_ ]+limit(?:[-_ ]+(?:reached|exceeded))?|monthly[-_ ]+limit(?:[-_ ]+(?:reached|exceeded))?|resource[-_]exhausted)\b/iu;
 const CODEX_RATE_LIMIT_RE = /\b(?:at[-_ ]+capacity|rate[-_ ]+limit(?:ed|[-_ ]+(?:reached|exceeded))?|too[-_ ]+many[-_ ]+requests|429|overloaded)\b/iu;
 const CODEX_TIMEOUT_RE = /\b(?:timeout|timed\s+out|time\s+out|deadline)\b/iu;
-const CODEX_TRANSIENT_RE = /\b(?:temporar(?:y|ily)|try[-_ ]+again|service[-_ ]+unavailable|connection[-_ ]+reset|econnreset|eai_again|etimedout|network[-_ ]+error|internal[-_ ]+server[-_ ]+error|5\d\d)\b/iu;
+const CODEX_TRANSIENT_RE = /\b(?:temporar(?:y|ily)|try[-_ ]+again|service[-_ ]+unavailable|connection[-_ ]+reset|econnreset|eai_again|etimedout|network[-_ ]+error|stream disconnected before completion|internal[-_ ]+server[-_ ]+error|5\d\d)\b/iu;
 const CODEX_PROMPT_RE = /(?:System instructions:|You are a professional translator|BEGIN_TEXT_[A-Z0-9]+|END_TEXT_[A-Z0-9]+)/u;
 
 /** A diagnostic may be shown in a report: keep it one line and secret-free. */

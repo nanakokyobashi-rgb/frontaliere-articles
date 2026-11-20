@@ -13742,6 +13742,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.a2-rodi-lavori-finiti.title': 'A2 at Rodi: works completed, route clear',
     'blog.article.a2-rodi-lavori-finiti.excerpt': 'The Federal Roads Office USTRA announces the completion of works on the A2 at Rodi.',
     'blog.article.a2-rodi-lavori-finiti.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.mendrisio-feste-pista-ghiaccio.title': 'Mendrisio brings festivities and an ice rink to the square',
+    'blog.article.mendrisio-feste-pista-ghiaccio.excerpt': 'From late November to January, Mendrisio brings squares and neighborhoods to life with an ice rink, an exchange of greetings and a calendar of events.',
+    'blog.article.mendrisio-feste-pista-ghiaccio.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;
