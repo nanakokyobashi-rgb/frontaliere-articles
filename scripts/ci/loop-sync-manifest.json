@@ -4086,7 +4086,8 @@
     {
       "path": "generator/scripts/lib/scoring/semanticDedup.mjs",
       "sitePath": "scripts/lib/scoring/semanticDedup.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Il corpus estende il gate semantico con `ignoreNeighbor` e, quando il filtro e' attivo, cerca l'intero store: `generate-daily-brief-article.mjs` abilita `allowRecurringDailyEdition` e `create-article.mjs` esclude con `isDailyBriefArticleId` le edizioni ricorrenti della stessa famiglia prima di scegliere il duplicato reale. Il sito non possiede il producer daily brief ne' quel contratto di chiamata, quindi copiare il file corpus sul sito aggiungerebbe una superficie senza consumer e copiare il sito qui cancellerebbe la protezione delle edizioni giornaliere. Le parti comuni restano da riconciliare manualmente sopra questi adattamenti.",
       "baseline": {
         "site": "8b5da48c9029113f",
         "corpus": "8b5da48c9029113f",
