@@ -1029,6 +1029,7 @@ function resolveRcMode() {
   const source = operatorOnly ? process.env.FRONTALIERE_OPERATOR_RC_SOURCE || 'client' : 'client';
   if (source !== 'client' && source !== 'server') {
     console.warn('⚠️  Invalid operator Remote Config source.');
+    process.exitCode = 1;
     return null;
   }
   return { operatorOnly, source };
