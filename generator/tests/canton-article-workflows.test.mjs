@@ -360,7 +360,7 @@ exit 0
 }
 
 /** Esegue il gate `admit` con un compare GitHub finto. */
-function runAdmit(workflow, { caller, changed, runs = [], jobs = [], selfCreated = '2026-01-01T00:00:00Z' }) {
+function runAdmit(workflow, { caller, changed, runs = [], jobs = [], selfCreated = '2026-01-01T00:00:00Z', env = {} }) {
   return withBin((dir) => ({
     timeout: '#!/usr/bin/env bash\nwhile [[ "$1" == --* ]]; do shift; done\nshift\nexec "$@"\n',
     date: '#!/usr/bin/env bash\nprintf "%s\\n" "2026-01-01T00:00:00Z"\n',
@@ -385,12 +385,28 @@ esac
         REPO: 'owner/repo', SELF_ID: '4242', EVENT_NAME: 'push',
         PUSH_BEFORE: 'before', PUSH_SHA: 'after', CHAIN_DEPTH: '0', PARENT_RUN_ID: '',
         CHAIN_MAX_RUNS_PER_HOUR: '', CALLER_WORKFLOW: caller,
+        ...env,
         BODY_MAINTENANCE_PATH_RE: SOURCE.match(/^\s+BODY_MAINTENANCE_PATH_RE: '([^']+)'$/m)[1],
       },
     });
     return { status: res.status, stdout: res.stdout, outputs: readOutputs(path.join(dir, 'out')) };
   });
 }
+
+test('admit cantonale respinge un dispatch scheduler senza claim o per un altro cantone', () => {
+  const env = { EVENT_NAME: 'workflow_dispatch', DISPATCH_ORIGIN: 'cloud_scheduler', SECTION_REQUESTED: 'canton-ow' };
+  const run = (fields) => runAdmit(CORE, { caller: 'generate-article-ow.yml', changed: [], env: { ...env, ...fields } });
+  const missing = run({});
+  assert.equal(missing.outputs.proceed, 'false');
+  assert.match(missing.stdout, /generation-slot-input-invalid/);
+  const wrongSection = run({
+    LOOP_CLOCK: 'corpus-generation-slot-canton-ti@2026-01-01T00:00Z',
+    RECOVERY_SLOT: 'generate-article/canton-ti/2026-01-01T00:00Z',
+    RECOVERY_CLAIM: '00000000-0000-0000-0000-000000000000',
+  });
+  assert.equal(wrongSection.outputs.proceed, 'false');
+  assert.match(wrongSection.stdout, /generation-slot-key-invalid/);
+});
 
 test('admit elegge un solo self-test dry quando un commit cambia piu\' caller', () => {
   const batch = [
@@ -829,7 +845,7 @@ test('ogni chiamante passa al core la propria sezione, il proprio file e il prop
   for (const { canton, file, name, dispatchInputs, with: w } of CALLERS) {
     const { section } = canton;
     assert.equal(name, `Generate Blog Article (${section})`);
-    assert.deepEqual(Object.keys(w), ['section', 'caller_workflow', 'concurrency_group', 'body_path_regex', 'section_gate', 'chain_dispatch', 'url', 'dry_run']);
+    assert.deepEqual(Object.keys(w), ['section', 'caller_workflow', 'concurrency_group', 'body_path_regex', 'section_gate', 'chain_dispatch', 'url', 'dispatch_origin', 'loop_clock', 'recovery_slot', 'recovery_claim', 'dry_run']);
     assert.equal(w.section, section);
     assert.equal(w.caller_workflow, file, 'ammissione e dispatch guardano le run di QUESTO file');
     assert.equal(w.concurrency_group, `generate-article-${section}`);
@@ -837,7 +853,7 @@ test('ogni chiamante passa al core la propria sezione, il proprio file e il prop
     assert.equal(w.chain_dispatch, 'false', 'catena via dispatch spenta al lancio (D15)');
     assert.equal(w.url, '${{ inputs.url }}');
     assert.equal(w.dry_run, '${{ inputs.dry_run == true }}');
-    assert.deepEqual(dispatchInputs, ['url', 'dry_run'], `${file}: un dispatch non sceglie un'altra sezione ne' si finge un anello`);
+    assert.deepEqual(dispatchInputs, ['section', 'dispatch_origin', 'loop_clock', 'recovery_slot', 'recovery_claim', 'url', 'dry_run'], `${file}: dispatch manuale e slot autenticati`);
     assert.ok(!groups.has(w.concurrency_group));
     groups.add(w.concurrency_group);
 
@@ -859,12 +875,12 @@ test('i chiamanti non hanno concurrency a livello di workflow e concedono al cor
     assert.match(text, /^permissions:\n {2}contents: read\n/m, file);
     // Un job del riusabile non puo' chiedere piu' di quanto il chiamante concede:
     // senza queste righe la run muore all'avvio, prima di qualunque step.
-    const granted = new Set([...text.slice(text.indexOf('\n  generate:\n')).matchAll(/^ {6}([a-z-]+): read$/gm)].map((m) => m[1]));
+    const granted = new Set([...text.slice(text.indexOf('\n  generate:\n')).matchAll(/^ {6}([a-z-]+): (read|write)$/gm)].map((m) => `${m[1]}:${m[2]}`));
     const requested = new Set([...CORE.matchAll(/^ {6}([a-z-]+): (read|write)(?: #.*)?$/gm)].map((m) => `${m[1]}:${m[2]}`));
     for (const r of requested) {
       const [scope, level] = r.split(':');
-      assert.equal(level, 'read', `il core chiede ${r}: i chiamanti concedono solo letture`);
-      assert.ok(granted.has(scope), `${file}: il core chiede ${scope}: read e il chiamante non lo concede`);
+      assert.ok(level === 'read' || scope === 'id-token', `il core chiede una scrittura estranea a OIDC: ${r}`);
+      assert.ok(granted.has(r), `${file}: il core chiede ${r} e il chiamante non lo concede`);
     }
     assert.ok(requested.size >= 2);
   }
@@ -881,8 +897,8 @@ test('il core dichiara ogni input che i chiamanti passano, e la catena e\' spent
   }
   assert.match(inputsBlock, /chain_dispatch:\n(?: {8}.*\n)*? {8}default: false\n {8}type: boolean/);
   assert.match(inputsBlock, /section_gate:\n(?: {8}.*\n)*? {8}default: 'none'/);
-  assert.doesNotMatch(CORE, /get_generation_oidc_token|request_generation_claim|ACTIONS_ID_TOKEN_REQUEST_URL|ACTIONS_ID_TOKEN_REQUEST_TOKEN/);
-  assert.doesNotMatch(CORE, /DISPATCH_ORIGIN|inputs\.dispatch_origin/);
+  assert.match(CORE, /if ! request_generation_claim admit; then/);
+  assert.match(CORE, /DISPATCH_ORIGIN: \$\{\{ inputs\.dispatch_origin \}\}/);
   assert.match(CORE, /^on:\n {2}workflow_call:\n/m);
   assert.doesNotMatch(CORE, /^ {2}(schedule|push|workflow_dispatch):/m, 'il core non ha trigger suoi');
   // Il gate decide senza entrare nella coda del writer. La generazione di ogni
