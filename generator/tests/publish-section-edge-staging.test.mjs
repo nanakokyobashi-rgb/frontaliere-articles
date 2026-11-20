@@ -17,6 +17,7 @@ import {
   releaseBase,
   waitForBootstrapLocks,
 } from '../../scripts/publish-section-edge.mjs';
+import { apiInputChangedInRange } from '../../scripts/lib/publish-api-input-range.mjs';
 import { EDGE_SECTION_REGISTRY_FILE } from '../../scripts/lib/section-registry.mjs';
 import { makeSectionBootstrapLock } from '../../scripts/lib/section-bootstrap-lock.mjs';
 import { CORPUS_ROUTE_OWNER_META_TAG } from '../../engine/shared/corpusRouteOwner.mjs';
@@ -314,36 +315,55 @@ test('publishRelease verifica la HEAD subito prima del flip edge', async () => {
 test('il guard edge consente un avanzamento di main solo bookkeeping e conserva il commit dell artifact', async () => {
   const source = 'a'.repeat(40);
   const current = 'b'.repeat(40);
+  const gitCalls = [];
   assert.equal(
     await assertExpectedMainHead(
       source,
       async () => current,
-      { isAncestor: () => true, apiInputChanged: () => false },
+      {
+        isAncestor: () => true,
+        apiInputChanged: (range) => apiInputChangedInRange(range, {
+          triggerPathsImpl: () => ['content/**'],
+          execFileSyncImpl: (command, args) => {
+            gitCalls.push([command, ...args.slice(2)]);
+            return '';
+          },
+        }),
+      },
     ),
     current,
   );
+  assert.deepEqual(gitCalls, [['git', 'rev-list', '--max-count=1', current, '^' + source, '--', 'content/**']]);
 });
 
 test('il guard edge classifica la HEAD appena acquisita dopo il controllo iniziale', async () => {
   const source = 'a'.repeat(40);
   const initiallyRead = 'b'.repeat(40);
   const fetched = 'c'.repeat(40);
-  let classifiedHead = null;
+  let classifiedRange;
+  const gitCalls = [];
   await assert.rejects(
     () => assertExpectedMainHead(
       source,
       async () => initiallyRead,
       {
         isAncestor: () => ({ ancestor: true, current: fetched }),
-        apiInputChanged: (_before, after) => {
-          classifiedHead = after;
-          return true;
+        apiInputChanged: (range) => {
+          classifiedRange = range;
+          return apiInputChangedInRange(range, {
+            triggerPathsImpl: () => ['content/**'],
+            execFileSyncImpl: (command, args) => {
+              gitCalls.push([command, ...args.slice(2)]);
+              return fetched + '\n';
+            },
+          });
         },
       },
     ),
     new RegExp('→ ' + fetched + '.*input API nuovi'),
   );
-  assert.equal(classifiedHead, fetched);
+  assert.deepEqual(classifiedRange, { before: source, after: fetched });
+  assert.deepEqual(gitCalls, [['git', 'rev-list', '--max-count=1', fetched, '^' + source, '--', 'content/**']]);
 });
 
 test('il guard edge rifiuta una snapshot fetchata piu vecchia di quella autorevole', async () => {
