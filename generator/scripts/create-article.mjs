@@ -8097,21 +8097,59 @@ function idToSlugKey(id) {
 // refresh-bfs-stats workflow whenever a new BFS quarter (e.g. 2026-Q1) goes
 // live, so the editorial team automatically publishes a Ticino frontalieri
 // trend article every ~3 months in the same voice as the rest of the blog.
-async function buildStatsBfsPromptContent(quarter) {
-  const { applicationDefault, getApps, initializeApp } = await import('firebase-admin/app');
+let syntheticStatsFirestoreAppSequence = 0;
+
+/**
+ * Read one synthetic dataset through an app dedicated to that read.
+ *
+ * A timeout cleanup may terminate its Firestore client. Sharing the default
+ * app here would leave `getApps().length` true and make the next candidate
+ * reuse a client that has already been terminated, so every invocation owns a
+ * uniquely named app and deletes it in `finally`.
+ */
+async function readSyntheticStatsDocument(collectionName, documentId, label) {
+  const { applicationDefault, deleteApp, initializeApp } = await import('firebase-admin/app');
   const { getFirestore } = await import('firebase-admin/firestore');
-  if (!getApps().length) {
-    initializeApp({
-      credential: applicationDefault(),
-      projectId: process.env.GCLOUD_PROJECT || 'frontaliere-ticino',
-    });
+  const app = initializeApp({
+    credential: applicationDefault(),
+    projectId: process.env.GCLOUD_PROJECT || 'frontaliere-ticino',
+  }, `create-article-stats-${process.pid}-${++syntheticStatsFirestoreAppSequence}`);
+  let cleanupStarted = false;
+  const cleanup = () => {
+    if (cleanupStarted) return undefined;
+    cleanupStarted = true;
+    try {
+      return deleteApp(app);
+    } catch {
+      return undefined;
+    }
+  };
+  try {
+    const db = getFirestore(app);
+    return await withFirestoreReadTimeout(
+      () => db.collection(collectionName).doc(documentId).get(),
+      { label, onTimeout: () => db.terminate?.() },
+    );
+  } finally {
+    try {
+      // Do not make the bounded read wait for app deletion. The app name is
+      // never reused, and the cleanup promise is observed to avoid a second
+      // unhandled rejection after a timed-out RPC.
+      Promise.resolve(cleanup()).catch(() => {});
+    } catch {
+      // A failed cleanup must not replace the bounded read result. The
+      // timeout helper has already observed the late RPC promise.
+    }
   }
-  const db = getFirestore();
+}
+
+async function buildStatsBfsPromptContent(quarter) {
   let snap;
   try {
-    snap = await withFirestoreReadTimeout(
-      () => db.collection('config').doc('bfs_stats').get(),
-      { label: 'BFS stats Firestore read', onTimeout: () => db.terminate?.() },
+    snap = await readSyntheticStatsDocument(
+      'config',
+      'bfs_stats',
+      'BFS stats Firestore read',
     );
   } catch (error) {
     if (error?.code === 'FIRESTORE_READ_TIMEOUT') {
@@ -8295,20 +8333,12 @@ function formatStatsBfsPrompt(quarter, data) {
 // the national canton comparison plus the Ticino view. Daily STNR is an
 // internal signal only and deliberately never reaches this article path.
 async function buildStatsAstraPromptContent(token) {
-  const { applicationDefault, getApps, initializeApp } = await import('firebase-admin/app');
-  const { getFirestore } = await import('firebase-admin/firestore');
-  if (!getApps().length) {
-    initializeApp({
-      credential: applicationDefault(),
-      projectId: process.env.GCLOUD_PROJECT || 'frontaliere-ticino',
-    });
-  }
-  const db = getFirestore();
   let snap;
   try {
-    snap = await withFirestoreReadTimeout(
-      () => db.collection('config').doc('astra_vehicle_stats').get(),
-      { label: 'ASTRA stats Firestore read', onTimeout: () => db.terminate?.() },
+    snap = await readSyntheticStatsDocument(
+      'config',
+      'astra_vehicle_stats',
+      'ASTRA stats Firestore read',
     );
   } catch (error) {
     if (error?.code === 'FIRESTORE_READ_TIMEOUT') {

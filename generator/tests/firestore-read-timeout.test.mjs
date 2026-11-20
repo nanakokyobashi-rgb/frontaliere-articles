@@ -8,6 +8,10 @@ import {
   FirestoreReadTimeoutError,
   withFirestoreReadTimeout,
 } from '../scripts/lib/firestore-read-timeout.mjs';
+import {
+  JournalistRequeueError,
+  requeuePublishedDocuments,
+} from '../scripts/lib/journalist-publish-recovery.mjs';
 
 const ROOT = join(fileURLToPath(new URL('..', import.meta.url)));
 
@@ -47,8 +51,8 @@ test('withFirestoreReadTimeout bounds a hung read and observes late rejection', 
 
 test('all producer and recovery Firestore reads use the shared deadline helper', () => {
   const targets = [
-    ['scripts/create-article.mjs', "doc('bfs_stats').get()"],
-    ['scripts/create-article.mjs', "doc('astra_vehicle_stats').get()"],
+    ['scripts/create-article.mjs', "'bfs_stats',\n      'BFS stats Firestore read'"],
+    ['scripts/create-article.mjs', "'astra_vehicle_stats',\n      'ASTRA stats Firestore read'"],
     ['scripts/publish-journalist-article.mjs', "where('status', '==', 'queued').get()"],
     ['scripts/lib/journalist-publish-recovery.mjs', 'doc.docRef.get()'],
   ];
@@ -63,4 +67,77 @@ test('all producer and recovery Firestore reads use the shared deadline helper',
       `${relative} must bound ${readExpression}`,
     );
   }
+});
+
+test('journalist reconciliation is concurrent, globally bounded, and reports every unresolved ID', async () => {
+  const documents = Array.from({ length: 10 }, (_, index) => ({
+    id: `doc-${index}`,
+    docRef: {
+      get() {
+        return new Promise((resolve) => {
+          const lateTimer = setTimeout(() => resolve({ exists: true, get: () => 'published' }), 100);
+          lateTimer.unref?.();
+        });
+      },
+    },
+  }));
+  let commits = 0;
+  let inFlight = 0;
+  let maxInFlight = 0;
+  for (const { docRef } of documents) {
+    const get = docRef.get;
+    docRef.get = () => {
+      inFlight += 1;
+      maxInFlight = Math.max(maxInFlight, inFlight);
+      const result = get();
+      result.finally(() => { inFlight -= 1; });
+      return result;
+    };
+  }
+  const db = {
+    batch() {
+      return {
+        update() {},
+        async commit() {
+          commits += 1;
+          throw new Error('ack perso');
+        },
+      };
+    },
+  };
+  const requeuedIds = [];
+  const started = Date.now();
+
+  await assert.rejects(
+    () => requeuePublishedDocuments({
+      db,
+      FieldValue: { delete: () => ({}) },
+      publishedDocs: documents,
+      requeuedIds,
+      reconciliationConcurrency: 2,
+      reconciliationDeadlineMs: 30,
+      reconciliationReadTimeoutMs: 1000,
+    }),
+    (error) => error instanceof JournalistRequeueError
+      && error.unresolvedIds.length === documents.length
+      && error.unresolvedIds[0] === 'doc-0'
+      && error.unresolvedIds.at(-1) === 'doc-9',
+  );
+
+  assert.equal(commits, 1, 'la deadline globale deve chiudere prima del retry');
+  assert.equal(maxInFlight, 2, 'la riconciliazione deve rispettare il cap di concorrenza');
+  assert.ok(Date.now() - started < 250, 'la riconciliazione non deve moltiplicare il timeout per documento');
+});
+
+test('le letture sintetiche usano app nominate usa-e-getta e non il client default', () => {
+  const source = readFileSync(join(ROOT, 'scripts/create-article.mjs'), 'utf8');
+  const helperStart = source.indexOf('async function readSyntheticStatsDocument');
+  const helperEnd = source.indexOf('async function buildStatsBfsPromptContent', helperStart);
+  assert.ok(helperStart >= 0 && helperEnd > helperStart, 'helper Firestore sintetico mancante');
+  const helper = source.slice(helperStart, helperEnd);
+  assert.match(helper, /deleteApp\(app\)/u);
+  assert.match(helper, /initializeApp\([\s\S]*, `create-article-stats-/u);
+  assert.match(helper, /getFirestore\(app\)/u);
+  assert.match(helper, /finally/u);
+  assert.doesNotMatch(helper, /getApps\(\)/u);
 });
