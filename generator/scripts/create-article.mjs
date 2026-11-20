@@ -11151,11 +11151,19 @@ async function fetchCantonSourceHeadlines(source, domain) {
   if (!RUN_REPORT.sources.canton) RUN_REPORT.sources.canton = [];
   const entry = { url: source.url, parser: source.parser, reserve: source.reserve === true, requests: 0, items: 0, recent: 0, status: 'failed' };
   RUN_REPORT.sources.canton.push(entry);
-  const scanned = await scanCantonSource(source, {
-    throttle: _cantonHostThrottle,
-    extractRssItems,
-    extractHeadlines,
-  });
+  let scanned;
+  try {
+    scanned = await scanCantonSource(source, {
+      throttle: _cantonHostThrottle,
+      extractRssItems,
+      extractHeadlines,
+      onRequestAttempt: (requests) => { entry.requests = requests; },
+    });
+  } catch (error) {
+    const status = error?.status;
+    if (Number.isInteger(status) && status >= 300 && status <= 599) entry.httpStatus = status;
+    throw error;
+  }
   let { headlines: raw, requests, notes } = scanned;
   entry.requests = requests;
   entry.items = raw.length;
