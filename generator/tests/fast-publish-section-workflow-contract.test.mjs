@@ -38,6 +38,21 @@ function triggerBlock(name) {
   return next < 0 ? rest : rest.slice(0, next);
 }
 
+test('il job publish accoda le richieste per sezione e limita il parallelismo della matrice', () => {
+  const publish = workflow.match(/\n  publish:\n[\s\S]*?(?=\n\S|\n  \S|$)/u)?.[0];
+  assert.ok(publish, 'manca il job publish');
+
+  const strategy = publish.match(/^    strategy:\n(?: {6}[^\n]*\n)*/mu)?.[0];
+  assert.ok(strategy, 'manca la strategia del job publish');
+  assert.match(strategy, /^      max-parallel: 4$/mu);
+
+  const concurrency = publish.match(/^    concurrency:\n(?: {6}[^\n]*\n)*/mu)?.[0];
+  assert.ok(concurrency, 'manca il blocco concurrency del job publish');
+  assert.match(concurrency, /^      group: fast-publish-\$\{\{ matrix\.target\.section \}\}$/mu);
+  assert.match(concurrency, /^      cancel-in-progress: false$/mu);
+  assert.match(concurrency, /^      queue: max$/mu);
+});
+
 test('un replay pinned superato usa un nuovo nonce per la revisione di destinazione', () => {
   const step = workflow.split('      - name: Dispatch bounded replay with current corpus checkout\n')[1]
     .split('\n      - name:')[0];

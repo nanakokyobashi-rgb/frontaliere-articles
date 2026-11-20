@@ -18,13 +18,14 @@ if ! git cat-file -e "$current^{commit}" 2>/dev/null; then
 fi
 git merge-base --is-ancestor "$expected" "$current" || exit 1
 
-# These files record generator attempts, failed image work and watchdog status,
+# These files record generator attempts, image work and watchdog status,
 # or change how future articles are generated without rendering existing pages.
 # Keep this list explicit: any other change may alter the rendered release.
 git diff --quiet --no-ext-diff --no-textconv --ignore-submodules=none "$expected" "$current" -- . \
   ':(top,exclude,literal)data/discovery-attempt-state.json' \
   ':(top,exclude,literal)data/topic-candidates-evergreen-rejected.json' \
   ':(top,exclude,glob)data/sections/*/topic-candidates-evergreen-rejected.json' \
+  ':(top,exclude,literal)data/blog-cover-cdn-sync-queue.json' \
   ':(top,exclude,literal)data/image-regeneration-queue.json' \
   ':(top,exclude,literal)data/image-regeneration-queue-pending.jsonl' \
   ':(top,exclude,glob)data/image-regeneration-queue-pending.jsonl.*.pending' \
