@@ -162,6 +162,40 @@ describe('llmFactCheck wiring', () => {
     assert.match(block, /await _runSingleFactCheck\(codex, retryPrompt, \{ isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true, deadlineMs: factCheckDeadlineMs \}\)/);
   });
 
+  test('the last verifier receives the failed proof requirement only when recorded', async () => {
+    const reason = 'manca una citazione esatta della fonte';
+    const prompt = 'Testo da verificare';
+    const editorialContext = { articleBody: 'Corpo', evidenceText: 'Fonte' };
+    for (const failures of [[], [reason]]) {
+      const calls = [];
+      await runInNewContext(`(async () => { ${block} })()`, {
+        AI_MODELS: { CODEX_CLI_PRIMARY: 'codex' },
+        isModelAvailable: () => true,
+        _codexWroteThisHeadline: false,
+        isEvergreenArticle: false,
+        factCheckDeadlineMs: 1000,
+        modelResults: [],
+        console: { error: () => {} },
+        editorialProofFailures: new Set(failures),
+        prompt,
+        editorialContext,
+        _runSingleFactCheck: (...args) => { calls.push(args); return null; },
+      });
+      assert.equal(calls.length, 1);
+      const [model, retryPrompt, options] = calls[0];
+      assert.equal(model, 'codex');
+      assert.equal(options.editorialContext, editorialContext);
+      assert.equal(options.deadlineMs, 1000);
+      assert.equal(options.codexOnly, true);
+      if (failures.length) {
+        assert.ok(retryPrompt.startsWith(prompt));
+        assert.ok(retryPrompt.includes(reason));
+      } else {
+        assert.equal(retryPrompt, prompt);
+      }
+    }
+  });
+
   test('its verdict is one vote like any other', () => {
     assert.doesNotMatch(block, /modelResults\.push\(/, 'il voto di Codex deve passare da addIndependentVote');
     assert.match(block, /if \(vote\) addIndependentVote\(modelResults, codex, vote\);/);
