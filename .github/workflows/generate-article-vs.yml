@@ -4,10 +4,10 @@
 # Rigenera: node scripts/ci/generate-canton-article-workflows.mjs
 # Verifica: node scripts/ci/generate-canton-article-workflows.mjs --check
 name: Generate Blog Article (canton-vs)
+run-name: ${{ inputs.loop_clock != '' && format('Generate Blog Article (canton-vs) [loop-clock {0}] [generation-slot {1}]', inputs.loop_clock, inputs.recovery_slot) || 'Generate Blog Article (canton-vs)' }}
+# generation-cloud-clock-contract: v1
 
 on:
-  schedule:
-    - cron: '34 5,11,17,23 * * *'
   push:
     branches: [main]
     paths:
@@ -19,6 +19,23 @@ on:
       - 'content/cantons/canton-vs/**'
   workflow_dispatch:
     inputs:
+      section:
+        type: choice
+        default: canton-vs
+        options:
+          - canton-vs
+      dispatch_origin:
+        type: choice
+        default: manual
+        options:
+          - manual
+          - cloud_scheduler
+      loop_clock:
+        type: string
+      recovery_slot:
+        type: string
+      recovery_claim:
+        type: string
       url:
         description: 'Optional: specific source URL (empty = auto-scan)'
         required: false
@@ -39,6 +56,7 @@ jobs:
       contents: read
       issues: read
       pull-requests: read
+      id-token: write
     uses: ./.github/workflows/generate-article-core.yml
     secrets: inherit
     with:
@@ -49,4 +67,8 @@ jobs:
       section_gate: canton
       chain_dispatch: false
       url: ${{ inputs.url }}
+      dispatch_origin: ${{ inputs.dispatch_origin || 'manual' }}
+      loop_clock: ${{ inputs.loop_clock }}
+      recovery_slot: ${{ inputs.recovery_slot }}
+      recovery_claim: ${{ inputs.recovery_claim }}
       dry_run: ${{ inputs.dry_run == true }}

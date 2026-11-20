@@ -213,7 +213,7 @@ test('the consensus counts one vote per model that answered, and seeks a second 
   const loop = SRC.slice(start, end);
   assert.doesNotMatch(loop, /modelResults\.push\(/, 'un voto aggiunto senza passare da addIndependentVote');
   assert.match(loop, /addIndependentVote\(modelResults, modelsToQuery\[i\], s\.value\)/);
-  assert.match(loop, /_runSingleFactCheck\(next,\s*prompt,\s*\{\s*isEvergreen:\s*isEvergreenArticle,\s*editorialContext,\s*excludeModels:\s*voted,\s*invalidVerdictModels,\s*deadlineMs\s*\}\)/);
+  assert.match(loop, /_runSingleFactCheck\(next,\s*activePrompt,\s*\{\s*isEvergreen:\s*isEvergreenArticle,\s*editorialContext,\s*excludeModels:\s*voted,\s*invalidVerdictModels,\s*deadlineMs\s*\}\)/);
   assert.match(loop, /addIndependentVote\(modelResults, verificationModels\[2\], fallback\)/);
   const line = SRC.split('\n').find((l) => l.includes('buildFactCheckCallOptions({ model,'));
   assert.match(line, /jsonMode: true, excludeModels,/);
@@ -228,6 +228,10 @@ test('a lone free vote never decides: collapsed verifiers are retried, and witho
   const start = SRC.indexOf('let missingSecondOpinion = false;');
   assert.notEqual(start, -1, 'stato del secondo parere mancante sparito');
   const region = SRC.slice(start, SRC.indexOf('// ── Drop verdicts the source itself refutes ──', start));
+  assert.match(region, /let activePrompt = prompt;/);
+  assert.match(region, /if \(compactRetry\)\s*\{\s*activePrompt = compactPrompt;/);
+  assert.match(region, /if \(fullEstimate > cap && compactEstimate <= cap\) compactRetry = \{ fullEstimate, compactEstimate, cap \};/);
+  assert.match(region, /_runSingleFactCheck\(codex,\s*prompt,\s*\{\s*isEvergreen:\s*isEvergreenArticle,\s*editorialContext,\s*codexOnly: true,\s*deadlineMs: factCheckDeadlineMs\s*\}\)/);
   assert.match(region, /fcAttempt <= FACTCHECK_INFRA_RETRIES && \(modelResults\.length === 0 \|\| missingSecondOpinion\)/);
   assert.doesNotMatch(region, /modelResults\.length\s*=\s*0;/, 'un parere valido sullo stesso testo sopravvive al retry');
   assert.match(region, /const priorVoters = modelResults\.map\(\(result\) => result\.servedBy\);/);

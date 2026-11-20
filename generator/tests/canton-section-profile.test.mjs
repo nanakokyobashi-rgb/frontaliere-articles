@@ -448,7 +448,9 @@ test('create-article: i rami cantonali leggono il profilo, e le storiche restano
     /if \(IS_CANTON\) \{\n\s+return cantonHeadlineSelectionPrompt\(SECTION_PROFILE,/,
     /const topicalRelevanceGate = IS_CANTON\n\s+\? CANTON_LINES\.topicalRelevanceGate/,
     /const systemRoleLine = IS_CANTON\n\s+\? CANTON_LINES\.systemRoleLine/,
-    /\$\{IS_CANTON \? CANTON_LINES\.factCheckRelevance\(isEvergreenArticle\) : IS_FRONTALIERE \?/,
+    /const relevanceInstructions\s*=\s*IS_CANTON\s*\?\s*CANTON_LINES\.factCheckRelevance\(isEvergreenArticle\)\s*:\s*IS_FRONTALIERE\s*\?/,
+    /const prompt = `\$\{evidencePrefix\}\\n\\n\$\{verificationInstructions\}\\n\\n\$\{relevanceInstructions\}\\n\\n\$\{proofSuffix\}`/,
+    /const compactPrompt = [^\n]+\n\s*\? `\$\{evidencePrefix\}\n\nVERIFICA SISTEMATICA[^`]*\n\n\$\{relevanceInstructions\}\n\n\$\{proofSuffix\}`/,
   ]) {
     assert.match(CREATE_ARTICLE, site);
   }

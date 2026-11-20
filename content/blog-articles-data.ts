@@ -48215,6 +48215,16 @@ const RAW_ARTICLES = [
  authorSlug: 'samuele-valente',
  authorName: 'Samuele Valente',
  },
+ {
+ id: 'a2-rodi-lavori-finiti',
+ category: 'novita',
+ date: '2026-11-20T14:32:05.948Z',
+ image: '/images/blog/article-a2-rodi-lavori-finiti.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

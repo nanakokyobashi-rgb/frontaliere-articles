@@ -72,6 +72,9 @@ const blogMetaCantonUrEn: Record<string, string> = {
     'blog.article.janett-protezione-uri.title': 'Uri: Jürg Janett new head of civil protection and military affairs',
     'blog.article.janett-protezione-uri.excerpt': 'The Council of State of Uri has chosen Colonel Jürg Janett for the Office of Population and Military Protection and the Cantonal Staff.',
     'blog.article.janett-protezione-uri.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.blocco-roccia-meiental.title': 'Rockfall damages road in Meiental',
+    'blog.article.blocco-roccia-meiental.excerpt': 'A rockfall damaged the cantonal road and power line in Meiental.',
+    'blog.article.blocco-roccia-meiental.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonUrEn;

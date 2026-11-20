@@ -345,7 +345,7 @@ test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scaden
   assert.match(body, /const chunkTranslator = assertChunkTranslator\(translateInChunks, 'translatePendingBodyWithCodex'\)/);
   assert.match(body, /fallback: \(\) => \{[\s\S]*if \(canFallback && \(!pendingBodySecondLaneAvailable\(\) \|\| deadlineTooClose\)\)[\s\S]*translatePendingBodyWithHistoricalChain\(itValue, locale, field, \{ callWithRetry, translateInChunks: chunkTranslator \}\)/);
   assert.match(body, /const validatedText = text\n\s+\? await chunkTranslator\([\s\S]*pretranslatedResult/);
-  assert.match(body, /if \(canFallback && \(codexModelUnavailable \|\| codexBudgetUnavailable \|\| codexDeadlineReached\s+\|\| !pendingBodySecondLaneAvailable\(\) \|\| rejected\.length > 0\)/);
+  assert.match(body, /if \(canFallback && \(codexModelUnavailable \|\| codexBudgetUnavailable \|\| codexDeadlineReached\s+\|\| !pendingBodySecondLaneAvailable\(\) \|\| rejected\.length > 0 \|\| !validatedText\)/);
   // Nessun orologio di modulo: i producer che importano translateArticle()
   // (publish-journalist-article.mjs) non hanno CREATE_ARTICLE_MAX_WALL_MS.
   assert.doesNotMatch(body, /RUN_START_MS|RUN_WALL_BUDGET_MS/);
@@ -548,6 +548,7 @@ function createPendingBodyCodexTranslatorFixture({
   translateInChunks = async (bodyText, field, _makeChunkPrompt, _labelPrefix, _targetLang, options = {}) =>
     options.pretranslatedResult?.[field] ?? bodyText,
   processBudgetMs = 300_000,
+  translateField = translateFieldFreeMt,
 }) {
   const at = src.indexOf('async function translatePendingBodyWithCodex(');
   assert.notEqual(at, -1, 'translatePendingBodyWithCodex non trovata');
@@ -605,7 +606,7 @@ function createPendingBodyCodexTranslatorFixture({
       return translateWithCodexEngine(args);
     },
     isModelAvailable,
-    translateFieldFreeMt,
+    translateField,
     (text) => text,
     translatePendingBodyWithHistoricalChain,
     () => !currentLaneStopped && isModelAvailable(),
@@ -759,6 +760,18 @@ test('output non valido o errore non classificato come breaker attiva la catena 
     assert.equal(await fixture.translate(source), fixture.expected);
     assert.deepEqual(fixture.counts(), { admissionAttempts: 1, codexCalls: 1, historicalCalls: 1 });
   }
+});
+
+test('un campo vuoto senza diagnostica attiva comunque la catena storica', async () => {
+  const fixture = createPendingBodyCodexTranslatorFixture({
+    isModelAvailable: () => true,
+    admissionDecision: (_attempt, admission) => admission,
+    translateWithCodexEngine: async () => '',
+    translateField: async () => '',
+  });
+  const source = '## In breve\n\nLa decisione sarà applicata dopo la consultazione.';
+  assert.equal(await fixture.translate(source), fixture.expected);
+  assert.deepEqual(fixture.counts(), { admissionAttempts: 0, codexCalls: 0, historicalCalls: 1 });
 });
 
 test('una traduzione Codex formalmente troncata attiva la catena storica', async () => {

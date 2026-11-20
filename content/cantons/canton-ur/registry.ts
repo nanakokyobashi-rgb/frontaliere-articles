@@ -259,4 +259,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'blocco-roccia-meiental',
+ category: 'pratico',
+ date: '2026-11-20T16:58:49.042Z',
+ image: '/images/blog/article-blocco-roccia-meiental.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['UR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

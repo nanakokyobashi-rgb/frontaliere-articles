@@ -6718,10 +6718,10 @@
       "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-19T18:19:43.421Z",
-      "lastStrikeAt": "2026-11-19T18:19:43.421Z",
-      "expiresAt": "2026-12-19T18:19:43.421Z"
+      "lastStrikeAt": "2026-11-20T16:36:39.355Z",
+      "expiresAt": "2026-12-20T16:36:39.355Z"
     }
   ],
   "legacy": [
@@ -15021,18 +15021,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.swissinfo.ch/ita/comunita-degli-svizzeri-allestero/come-utilizzerete-i-soldi-della-13esima-rendita-avs/92387299": {
-      "section": "frontaliere",
-      "ts": 1795009592414
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/roberta-passardi-guida-le-donne-liberali-radicali-ticinesi-446864": {
-      "section": "frontaliere",
-      "ts": 1795016263497
-    },
-    "frontaliere::https://www.tio.ch/ticino/cronaca/1963614/polizia-coinvolgimento-43enne-autori-legge": {
-      "section": "frontaliere",
-      "ts": 1795016411769
-    },
     "frontaliere::https://www.malpensa24.it/ristorni-frontalieri-risorse-varesotto": {
       "section": "frontaliere",
       "ts": 1795054632192
@@ -15084,6 +15072,14 @@
     "frontaliere::https://www.rsi.ch/s/4248337": {
       "section": "frontaliere",
       "ts": 1795181961861
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/bl%3a-hackerati-i-dati-dei-permessi-di-lavoro-di-97%27000-frontalieri/92414003": {
+      "section": "frontaliere",
+      "ts": 1795188137576
+    },
+    "svizzera::https://www.ilgiorno.it/como/cronaca/polizze-sanitarie-alle-stelle-in-f0a74e0f": {
+      "section": "svizzera",
+      "ts": 1795191154682
     }
   }
 }

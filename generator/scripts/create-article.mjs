@@ -74,6 +74,7 @@ import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, get
 import { classifyWithDecisionsApi } from './lib/decisions-api.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './lib/fetch-with-ref-timeout.mjs';
+import { withFirestoreReadTimeout } from './lib/firestore-read-timeout.mjs';
 import {
   BLOG_IMAGE_TARGET_MAX_BYTES,
   BLOG_IMAGE_HARD_MAX_BYTES,
@@ -7154,6 +7155,13 @@ export function buildFactCheckCallOptions(baseOpts, cacheEnabled = isFactCheckCa
 // run over the WHOLE text regardless of this cap.
 const MAX_FACTCHECK_ARTICLE_CHARS = 24000;
 
+// Composizione ufficiale: https://www.admin.ch/en/members-federal-council
+const FACT_CHECK_FEDERAL_COUNCILLORS = `Baume-Schneider, Parmelin, Cassis, Keller-Sutter, Pfister, Jans, Rösti`;
+const FACT_CHECK_INVENTED_INSTITUTIONS = `"Codice federale del lavoro", "CFL", "UFOL", "UWL", "Commissione federale per i frontalieri", "Ufficio federale dell'integrazione sanitaria (UFIS)"`;
+const FACT_CHECK_INVENTED_LAWS = `"LProtInfo del 2023" (inesistente — è art. 321a CO), "LPAP del 2000" (è LPers, non LPAP)`;
+const FACT_CHECK_FINMA_SCOPE = `FINMA è autorità per mercati finanziari/banche, NON per ospedali/sanità`;
+const FACT_CHECK_INVENTED_ACRONYMS = `DEMAS, LCFL, CFL`;
+
 function verifiedCantonFactsBlock(referenceText = '') {
   if (typeof referenceText !== 'string' || !referenceText.trim()) return '';
   return `\nFATTI ANNUALI VERIFICATI DEL CANTONE (riferimento canonico separato dalla fonte originale; confronta qui aliquote e valori annuali, senza attribuirli alla fonte):\n"""\n${referenceText.trim()}\n"""\n`;
@@ -7217,7 +7225,7 @@ async function llmFactCheck(contentIt, sourceContent = '', sourceUrl = '', verif
     ? 'NOTA: Articolo evergreen senza fonte specifica. Verifica basandoti sulle tue conoscenze del dominio e sui fatti di riferimento sotto. Per evergreen, NON segnalare come issue un fatto solo perché non compare in una fonte originale: segnala solo se è falso, contraddetto dai fatti verificati, troppo specifico senza attribuzione, o presentato come caso reale non verificato.'
     : `FONTE ORIGINALE (l'articolo doveva basarsi su questo testo):\n"""\n${sourceEvidenceContent.slice(0, 6000)}\n"""`;
 
-  const prompt = `${IS_CANTON
+  const evidencePrefix = `${IS_CANTON
     ? CANTON_LINES.factCheckPersona
     : IS_FRONTALIERE
     ? 'Sei un fact-checker senior specializzato in diritto fiscale svizzero e italiano, con focus specifico su frontalieri e Canton Ticino.'
@@ -7237,13 +7245,13 @@ ${sourceFraming}
 ${syntheticReferenceBlock}
 
 ${VERIFIED_DOMAIN_FACTS}
-${verifiedCantonFactsBlock(verifiedReferenceText)}
+${verifiedCantonFactsBlock(verifiedReferenceText)}`;
 
-VERIFICA SISTEMATICA — controlla OGNI categoria:
+  const verificationInstructions = `VERIFICA SISTEMATICA — controlla OGNI categoria:
 
 1. **LEGGI E DECRETI**: Ogni riferimento normativo (D.Lgs, DL, DPR, L.) deve esistere realmente con numero e anno corretti. Verifica che il contenuto attribuito alla legge sia corretto. Confronta con i fatti verificati sopra. ${isEvergreenArticle ? '' : isStatsAstra ? 'Il dataset ASTRA è fonte primaria solo per conteggi e periodi, non per norme: verifica leggi, accordi e date normative nei fatti di dominio verificati sopra. Non segnalare una norma come sospetta solo perché è assente dal dataset ASTRA.' : isStatsBfs ? 'Il dataset BFS è fonte primaria solo per totali e periodi, non per norme: verifica le norme con i fatti di dominio riportati sopra.' : 'Se il riferimento NON è presente nella fonte originale, segnalalo come sospetto.'}
 
-2. **ISTITUZIONI E ENTI**: Ogni istituzione menzionata deve esistere realmente. Confronta con la lista di istituzioni reali nei fatti verificati. Segnala qualsiasi acronimo NON presente in quella lista come sospetto. NON esiste: "Codice federale del lavoro", "CFL", "UFOL", "UWL", "Commissione federale per i frontalieri", "Ufficio federale dell'integrazione sanitaria (UFIS)".
+2. **ISTITUZIONI E ENTI**: Ogni istituzione menzionata deve esistere realmente. Confronta con la lista di istituzioni reali nei fatti verificati. Segnala qualsiasi acronimo NON presente in quella lista come sospetto. NON esiste: ${FACT_CHECK_INVENTED_INSTITUTIONS}.
 
 3. **ALIQUOTE E CIFRE FISCALI**: Confronta OGNI aliquota con i valori nei fatti verificati. AVS=5.3%, AC=1.1%, IRPEF ${irpefAliquoteBreve(IRPEF_ANNO_CORRENTE)} (2024-${IRPEF_ANNO_PRECEDENTE}: ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)}). Se un'aliquota non corrisponde = critical.
 
@@ -7263,24 +7271,24 @@ VERIFICA SISTEMATICA — controlla OGNI categoria:
 
    REGOLA: qualunque bullet o paragrafo che combini (a) [Città CH o nome ospedale/azienda] + (b) [ruolo professionale: infermiere/medico/operaio/impiegato/chirurgo] + (c) [verbo specifico: ha segnalato/denunciato/ottenuto/recuperato] + (d) [esito o cifra specifica: CHF nnn, indagine, risarcimento, recupero], SENZA che il caso compaia nella fonte originale → CRITICAL: fatti_inventati. Onere della prova: l'articolo deve PROVARE che il caso esiste nella fonte; altrimenti è inventato per gonfiare la rilevanza frontaliere.
 
-   Anche istituzioni applicate al dominio sbagliato sono CRITICAL: FINMA è autorità per mercati finanziari/banche, NON per ospedali/sanità. Citarla in contesti sanitari = fabbricazione di istituzione → critical:istituzioni.
+   Anche istituzioni applicate al dominio sbagliato sono CRITICAL: ${FACT_CHECK_FINMA_SCOPE}. Citarla in contesti sanitari = fabbricazione di istituzione → critical:istituzioni.
 
-   Leggi/sigle che sembrano plausibili ma non esistono = critical:leggi. Esempi shipped: "LProtInfo del 2023" (inesistente — è art. 321a CO), "LPAP del 2000" (è LPers, non LPAP). Se non puoi verificare la SIGLA UFFICIALE della legge, è critical.
+   Leggi/sigle che sembrano plausibili ma non esistono = critical:leggi. Esempi shipped: ${FACT_CHECK_INVENTED_LAWS}. Se non puoi verificare la SIGLA UFFICIALE della legge, è critical.
 
-8. **NOMI DI PERSONE E CITAZIONI**: Verifica che ogni persona citata (politici, consiglieri federali, funzionari) esista realmente con il ruolo indicato. Consiglieri federali attuali (2024-2027): Baume-Schneider, Parmelin, Cassis, Keller-Sutter, Amherd, Jans, Rösti. Citazioni dirette ("ha dichiarato:") di persone non verificabili sono quasi sempre inventate dall'IA.
+8. **NOMI DI PERSONE E CITAZIONI**: Verifica che ogni persona citata (politici, consiglieri federali, funzionari) esista realmente con il ruolo indicato. Consiglieri federali attuali (2024-2027): ${FACT_CHECK_FEDERAL_COUNCILLORS}. Citazioni dirette ("ha dichiarato:") di persone non verificabili sono quasi sempre inventate dall'IA.
 
 9. **SVIZZERA ≠ UE**: La Svizzera NON è membro dell'Unione Europea né dello Spazio Economico Europeo (SEE/EEA). Frasi come "accordo EU-Svizzera", "normativa UE applicabile in Svizzera" o "la Svizzera come membro" sono ERRORI. I rapporti sono regolati da Accordi Bilaterali I (1999) e II (2004).
 
 10. **PATTERN COMUNI DI HALLUCINATION IA**: Segnala come "critical" se trovi:
-   - Decreti/leggi con acronimi inventati (DEMAS, LCFL, CFL, ecc.)
+   - Decreti/leggi con acronimi inventati (${FACT_CHECK_INVENTED_ACRONYMS}, ecc.)
    - "Commissione" o "Osservatorio" con nomi troppo specifici e mai sentiti
    - Percentuali precise con decimali senza attribuzione a fonte reale
    - Leggi "entrate in vigore nel 20XX" senza numero di legge verificabile
    - "Tassa sulla salute" come imposta separata (non esiste — la LAMal è un'assicurazione)
    - Ministri o funzionari con nomi plausibili ma non verificabili
-   - Accordi/protocolli bilaterali mai firmati (controllare attentamente)
+   - Accordi/protocolli bilaterali mai firmati (controllare attentamente)`;
 
-${IS_CANTON ? CANTON_LINES.factCheckRelevance(isEvergreenArticle) : IS_FRONTALIERE ? `11. **RILEVANZA TOPICA AL FRONTALIERE TICINO-ITALIA (CRITICO)**: L'articolo deve avere un nesso REALE, SPECIFICO e VERIFICABILE con la vita del frontaliere Ticino-Italia. Sono nessi reali: norme/sentenze su Permesso G o B, fiscalità CH-IT (imposta alla fonte, nuovo accordo, ristorni, doppia imposizione), AVS/LPP/LAMal/CMI, busta paga svizzera, dogane/valichi (Chiasso, Brogeda, Gaggiolo, Ponte Tresa), pendolarismo CH-IT e viabilità del tragitto casa-lavoro (chiusure, cantieri, deviazioni su A2/A9, strade ticinesi e delle province di Varese, Como e VCO, treni TILO/FFS), mercato del lavoro ticinese anche quando la fonte non nomina i frontalieri (licenziamenti, riorganizzazioni, appalti, salari, dumping), politica e finanze del Canton Ticino (preventivo, imposte cantonali, servizi), cronaca locale in Ticino e nelle province di Varese, Como e VCO anche senza nesso con i frontalieri (cronaca nera, incidenti stradali, sport, cultura ed eventi), telelavoro frontaliere, accordi bilaterali CH-IT/UE, banche e cambio CHF-EUR per frontalieri.
+  const relevanceInstructions = IS_CANTON ? CANTON_LINES.factCheckRelevance(isEvergreenArticle) : IS_FRONTALIERE ? `11. **RILEVANZA TOPICA AL FRONTALIERE TICINO-ITALIA (CRITICO)**: L'articolo deve avere un nesso REALE, SPECIFICO e VERIFICABILE con la vita del frontaliere Ticino-Italia. Sono nessi reali: norme/sentenze su Permesso G o B, fiscalità CH-IT (imposta alla fonte, nuovo accordo, ristorni, doppia imposizione), AVS/LPP/LAMal/CMI, busta paga svizzera, dogane/valichi (Chiasso, Brogeda, Gaggiolo, Ponte Tresa), pendolarismo CH-IT e viabilità del tragitto casa-lavoro (chiusure, cantieri, deviazioni su A2/A9, strade ticinesi e delle province di Varese, Como e VCO, treni TILO/FFS), mercato del lavoro ticinese anche quando la fonte non nomina i frontalieri (licenziamenti, riorganizzazioni, appalti, salari, dumping), politica e finanze del Canton Ticino (preventivo, imposte cantonali, servizi), cronaca locale in Ticino e nelle province di Varese, Como e VCO anche senza nesso con i frontalieri (cronaca nera, incidenti stradali, sport, cultura ed eventi), telelavoro frontaliere, accordi bilaterali CH-IT/UE, banche e cambio CHF-EUR per frontalieri.
 
    ${isEvergreenArticle ? '' : 'NON sono nessi reali (segnala "critical" come "rilevanza_topica"): cronaca, sport e cultura fuori dal Ticino e dalle province di Varese, Como e VCO (es. arresti a Milano, eventi USA, criminalità urbana a Roma/Napoli/Palermo), gossip, infrastruttura italiana lontana dal confine, eventi a Malpensa SENZA impatto sui voli o trasporti frontalieri.'}
 
@@ -7292,9 +7300,9 @@ ${IS_CANTON ? CANTON_LINES.factCheckRelevance(isEvergreenArticle) : IS_FRONTALIE
 
    SEGNALE D'ALLARME (= "critical: rilevanza_topica"): forzare "implicazioni nazionali" su un evento che non ne ha, o riempire con consigli generici ("consulta un avvocato", "verifica la copertura assicurativa", "informati sui tuoi diritti") un argomento senza reale rilevanza nazionale, sono indicatori di forzatura.
 
-   ${isEvergreenArticle ? '' : "Se l'articolo è un commento generico attaccato a una notizia di cronaca SENZA alcun nesso di policy/economia/vita in Svizzera, il verdetto è FAIL — l'articolo non doveva essere generato."}`}
+   ${isEvergreenArticle ? '' : "Se l'articolo è un commento generico attaccato a una notizia di cronaca SENZA alcun nesso di policy/economia/vita in Svizzera, il verdetto è FAIL — l'articolo non doveva essere generato."}`;
 
-═══ VALUTAZIONE EDITORIALE E PROVE (OBBLIGATORIA) ═══
+  const proofSuffix = `═══ VALUTAZIONE EDITORIALE E PROVE (OBBLIGATORIA) ═══
 Valuta body1–body3 nel loro insieme. Un articolo non supera questo controllo se si limita a riassumere o parafrasare la fonte: deve offrire almeno una relazione, spiegazione o confronto concreto e utile, dimostrabile con fatti e periodi esatti. Un calcolo ricavato da valori espliciti può essere un contributo valido; non serve inventare un cambiamento o una conseguenza che la fonte non documenta. Un confronto deve usare periodi, unità e basi coerenti. Non aggiungere un angolo sul lavoro o sui frontalieri a una notizia non pertinente.
 Attribuisci le notizie alla fonte. Non ritenere supportati reportage sul posto, interviste, fonti proprie o verifiche umane non documentati; ometti cause, effetti, previsioni e consigli fiscali o finanziari senza prove.
 Per articleQuote copia dal blocco CORPO DELL’ARTICOLO un unico passaggio contiguo di almeno 40 caratteri e 7 parole. Per evidenceQuotes copia almeno 16 caratteri consecutivi dalla fonte o da un riferimento verificato, mantenendo lingua originale, punteggiatura e cifre. Prima di rispondere verifica che ciascuna citazione si ritrovi nel suo blocco. Evita titolo, sommario, traduzioni, parafrasi e puntini di sospensione aggiunti. Scrivi in italiano un finding specifico (almeno 35 caratteri e 6 parole) sul dato o sulla relazione dimostrata.
@@ -7334,6 +7342,23 @@ Rispondi SOLO in JSON valido:
 }
 
 Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
+
+  const prompt = `${evidencePrefix}\n\n${verificationInstructions}\n\n${relevanceInstructions}\n\n${proofSuffix}`;
+  const compactPrompt = !isEvergreenArticle && !isSyntheticDataset && /^https?:\/\//i.test(sourceUrl)
+    ? `${evidencePrefix}
+
+VERIFICA SISTEMATICA — controlla tutte le categorie:
+- Leggi: verifica esistenza, sigla, numero, anno e attribuzione. Riferimenti assenti dalla fonte: sospetti. Critical: sigle inventate (${FACT_CHECK_INVENTED_ACRONYMS}), ${FACT_CHECK_INVENTED_LAWS}, anno di entrata in vigore senza legge verificabile, falsa tassa sanitaria, accordo non firmato.
+- Istituzioni e persone: verifica esistenza, ambito, ruoli, acronimi e citazioni dirette. Critical: autorità inventate o fuori ambito, ministro inesistente, commissioni o osservatori inventati. NON esistono: ${FACT_CHECK_INVENTED_INSTITUTIONS}. Consiglieri federali attuali: ${FACT_CHECK_FEDERAL_COUNCILLORS}. Abuso critical:istituzioni: ${FACT_CHECK_FINMA_SCOPE}.
+- Dati: verifica aliquote, soglie e date normative sui fatti verificati. Statistiche decimali: richiedi studio e istituto citati. Accetta arrotondamenti interi attribuiti e valori canonici corretti.
+- Fonte: verifica date, luoghi, partecipanti, dichiarazioni e misure. Date assenti: molto sospette. Contesto verificato: minor. Fatti inventati o contraddetti: critical.
+- Casi con luogo o ente, ruolo, azione ed esito specifico senza riscontro nella fonte: critical:fatti_inventati. Esempi: infermiera segnala carenze igieniche a Lugano; medico denuncia pratiche non etiche a Chiasso; infermiere ORL ottiene un risarcimento; medico del Civico di Lugano denuncia frode con indagine FINMA.
+- Svizzera fuori da UE e SEE; valgono gli accordi bilaterali.
+
+${relevanceInstructions}
+
+${proofSuffix}`
+    : null;
 
   // ── Multi-model consensus: query 2 models, require agreement ──
   // Order matters: the consensus pair is `verificationModels.slice(0, 2)`, so the
@@ -7392,6 +7417,8 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   // A single free vote needs an independent second opinion, including when
   // the other verifier returned an unusable payload.
   let missingSecondOpinion = false;
+  let activePrompt = prompt;
+  let compactRetry = null;
   for (let fcAttempt = 1; fcAttempt <= FACTCHECK_INFRA_RETRIES && (modelResults.length === 0 || missingSecondOpinion); fcAttempt++) {
     if (fcAttempt > 1) {
       const why = missingSecondOpinion ? 'un solo parere indipendente' : 'nessun verdetto';
@@ -7413,8 +7440,15 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
       if (Date.now() + backoffMs >= factCheckDeadlineMs) break;
       await new Promise(r => setTimeout(r, backoffMs));
     }
+    if (compactRetry) {
+      activePrompt = compactPrompt;
+      const { fullEstimate, compactEstimate, cap } = compactRetry;
+      compactRetry = null;
+      console.error(`  🔁 Fact-check: istruzioni compatte, input stimato ${fullEstimate} → ${compactEstimate} token (tetto ${cap})`);
+    }
+    const roundErrorStart = fcProviderErrors.length;
     fcLastRejectMsgs = [];
-    // The prompt and article are unchanged across infrastructure retries.
+    // The evidence stays unchanged across infrastructure retries.
     // Keep a validated vote and exclude its actual serving model when asking
     // for the missing opinion. addIndependentVote also checks the response.
     const priorVoters = modelResults.map((result) => result.servedBy);
@@ -7426,7 +7460,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     const remainingRounds = FACTCHECK_INFRA_RETRIES - fcAttempt + 2;
     const deadlineMs = now + Math.floor((factCheckDeadlineMs - now) / remainingRounds);
     const modelsToQuery = verificationModels.slice(0, 2);
-    const promises = modelsToQuery.slice(0, priorVoters.length ? 1 : 2).map((model, index) => _runSingleFactCheck(model, prompt, {
+    const promises = modelsToQuery.slice(0, priorVoters.length ? 1 : 2).map((model, index) => _runSingleFactCheck(model, activePrompt, {
       fresh: fcAttempt > 1,
       deadlineMs,
       invalidVerdictModels,
@@ -7473,7 +7507,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
         || verificationModels.find((m) => !voted.includes(m))
         || modelsToQuery[1];
       try {
-        const extra = await _runSingleFactCheck(next, prompt, { isEvergreen: isEvergreenArticle, editorialContext, excludeModels: voted, invalidVerdictModels, deadlineMs });
+        const extra = await _runSingleFactCheck(next, activePrompt, { isEvergreen: isEvergreenArticle, editorialContext, excludeModels: voted, invalidVerdictModels, deadlineMs });
         const earlier = extra ? addIndependentVote(modelResults, next, extra) : null;
         fcHadNonOutageResult = true;
         if (earlier) console.error(`  ⚠️  LLM fact-check (${next}): servito di nuovo da ${earlier.servedBy} — resta un solo voto`);
@@ -7491,7 +7525,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     // If both primary models failed, try fallback
     if (modelResults.length === 0 && verificationModels.length > 2) {
       try {
-        const fallback = await _runSingleFactCheck(verificationModels[2], prompt, { isEvergreen: isEvergreenArticle, editorialContext, fresh: fcAttempt > 1, invalidVerdictModels, deadlineMs });
+        const fallback = await _runSingleFactCheck(verificationModels[2], activePrompt, { isEvergreen: isEvergreenArticle, editorialContext, fresh: fcAttempt > 1, invalidVerdictModels, deadlineMs });
         if (fallback) {
           addIndependentVote(modelResults, verificationModels[2], fallback);
           missingSecondOpinion = fallback.servedBy !== AI_MODELS.CODEX_CLI_PRIMARY;
@@ -7501,6 +7535,19 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
         fcProviderErrors.push(err);
         fcLastRejectMsgs.push(err.message || '');
         console.error(`  ⚠️  LLM fact-check fallback (${verificationModels[2]}): ${safeSignalDiagnosticTextForLog(err.message)}`);
+      }
+    }
+
+    if (compactPrompt && activePrompt === prompt && fcAttempt < FACTCHECK_INFRA_RETRIES && (modelResults.length === 0 || missingSecondOpinion)) {
+      let cap = 0;
+      for (const error of fcProviderErrors.slice(roundErrorStart)) {
+        const budget = error?.retryRequestTokenBudget;
+        if (error?.code === 'ALL_MODELS_EXHAUSTED' && Number.isInteger(budget) && budget > cap) cap = budget;
+      }
+      if (cap > 0) {
+        const fullEstimate = estimateRequestTokens([{ role: 'user', content: prompt }]);
+        const compactEstimate = estimateRequestTokens([{ role: 'user', content: compactPrompt }]);
+        if (fullEstimate > cap && compactEstimate <= cap) compactRetry = { fullEstimate, compactEstimate, cap };
       }
     }
   }
@@ -8117,17 +8164,66 @@ function idToSlugKey(id) {
 // refresh-bfs-stats workflow whenever a new BFS quarter (e.g. 2026-Q1) goes
 // live, so the editorial team automatically publishes a Ticino frontalieri
 // trend article every ~3 months in the same voice as the rest of the blog.
-async function buildStatsBfsPromptContent(quarter) {
-  const { applicationDefault, getApps, initializeApp } = await import('firebase-admin/app');
+let syntheticStatsFirestoreAppSequence = 0;
+
+/**
+ * Read one synthetic dataset through an app dedicated to that read.
+ *
+ * A timeout cleanup may terminate its Firestore client. Sharing the default
+ * app here would leave `getApps().length` true and make the next candidate
+ * reuse a client that has already been terminated, so every invocation owns a
+ * uniquely named app and deletes it in `finally`.
+ */
+async function readSyntheticStatsDocument(collectionName, documentId, label) {
+  const { applicationDefault, deleteApp, initializeApp } = await import('firebase-admin/app');
   const { getFirestore } = await import('firebase-admin/firestore');
-  if (!getApps().length) {
-    initializeApp({
-      credential: applicationDefault(),
-      projectId: process.env.GCLOUD_PROJECT || 'frontaliere-ticino',
-    });
+  const app = initializeApp({
+    credential: applicationDefault(),
+    projectId: process.env.GCLOUD_PROJECT || 'frontaliere-ticino',
+  }, `create-article-stats-${process.pid}-${++syntheticStatsFirestoreAppSequence}`);
+  let cleanupStarted = false;
+  const cleanup = () => {
+    if (cleanupStarted) return undefined;
+    cleanupStarted = true;
+    try {
+      return deleteApp(app);
+    } catch {
+      return undefined;
+    }
+  };
+  try {
+    const db = getFirestore(app);
+    return await withFirestoreReadTimeout(
+      () => db.collection(collectionName).doc(documentId).get(),
+      { label, onTimeout: () => db.terminate?.() },
+    );
+  } finally {
+    try {
+      // Do not make the bounded read wait for app deletion. The app name is
+      // never reused, and the cleanup promise is observed to avoid a second
+      // unhandled rejection after a timed-out RPC.
+      Promise.resolve(cleanup()).catch(() => {});
+    } catch {
+      // A failed cleanup must not replace the bounded read result. The
+      // timeout helper has already observed the late RPC promise.
+    }
   }
-  const db = getFirestore();
-  const snap = await db.collection('config').doc('bfs_stats').get();
+}
+
+async function buildStatsBfsPromptContent(quarter) {
+  let snap;
+  try {
+    snap = await readSyntheticStatsDocument(
+      'config',
+      'bfs_stats',
+      'BFS stats Firestore read',
+    );
+  } catch (error) {
+    if (error?.code === 'FIRESTORE_READ_TIMEOUT') {
+      throw markSyntheticSourceValidation(error, 'BFS');
+    }
+    throw error;
+  }
   if (!snap.exists) {
     throw new Error('config/bfs_stats Firestore doc missing — refresh-bfs-stats has not run yet.');
   }
@@ -8304,16 +8400,19 @@ function formatStatsBfsPrompt(quarter, data) {
 // the national canton comparison plus the Ticino view. Daily STNR is an
 // internal signal only and deliberately never reaches this article path.
 async function buildStatsAstraPromptContent(token) {
-  const { applicationDefault, getApps, initializeApp } = await import('firebase-admin/app');
-  const { getFirestore } = await import('firebase-admin/firestore');
-  if (!getApps().length) {
-    initializeApp({
-      credential: applicationDefault(),
-      projectId: process.env.GCLOUD_PROJECT || 'frontaliere-ticino',
-    });
+  let snap;
+  try {
+    snap = await readSyntheticStatsDocument(
+      'config',
+      'astra_vehicle_stats',
+      'ASTRA stats Firestore read',
+    );
+  } catch (error) {
+    if (error?.code === 'FIRESTORE_READ_TIMEOUT') {
+      throw markSyntheticSourceValidation(error, 'ASTRA');
+    }
+    throw error;
   }
-  const db = getFirestore();
-  const snap = await db.collection('config').doc('astra_vehicle_stats').get();
   const parts = String(token || '').split('/').map((part) => decodeSyntheticSourceToken(part, 'ASTRA'));
   const cadence = parts[0] || 'monthly';
   const period = parts[1] || '';
@@ -15681,7 +15780,7 @@ async function translatePendingBodyWithCodex(
       }
       const codexDeadlineReached = fallbackReserveMs > 0 && Date.now() >= codexRecoveryDeadlineMs;
       if (canFallback && (codexModelUnavailable || codexBudgetUnavailable || codexDeadlineReached
-        || !pendingBodySecondLaneAvailable() || rejected.length > 0)) {
+        || !pendingBodySecondLaneAvailable() || rejected.length > 0 || !validatedText)) {
         // `translateFieldFreeMt` cattura lo stop della cascata segmentata e
         // restituisce un campo vuoto. Se Codex ha anche prodotto un output
         // rifiutato, riprovare la stessa corsia ricreerebbe il difetto: la
