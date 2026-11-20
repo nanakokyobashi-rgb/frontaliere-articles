@@ -4008,7 +4008,7 @@
       "reason": "Helper condiviso dal generatore per delimitare le letture Firestore non cancellabili e osservare i rifiuti tardivi. E' consumato dai producer e dal recovery giornalista del corpus; il sito non possiede questi entry point Firestore ne' un gemello di questo modulo.",
       "baseline": {
         "site": null,
-        "corpus": "24647f5d2d2f357f",
+        "corpus": "2538c069cad2588b",
         "alignedAt": "2026-11-20"
       }
     },
