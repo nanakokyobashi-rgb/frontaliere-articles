@@ -947,6 +947,31 @@ function scalarFingerprintVerdict(entry, { site, corpus }) {
   if (siteParsed.error || corpusParsed.error) return { checked: true, valid: false, matches: false, detail: siteParsed.error || corpusParsed.error };
   const siteValue = siteParsed.value;
   const corpusValue = corpusParsed.value;
+  const hasSplitDigests = spec.siteSha256 !== undefined || spec.corpusSha256 !== undefined;
+  if (hasSplitDigests) {
+    if (
+      typeof spec.siteSha256 !== 'string'
+      || !/^[a-f0-9]{64}$/.test(spec.siteSha256)
+      || typeof spec.corpusSha256 !== 'string'
+      || !/^[a-f0-9]{64}$/.test(spec.corpusSha256)
+      || (spec.sha256 !== undefined && spec.sha256 !== spec.corpusSha256)
+    ) {
+      return { checked: true, valid: false, matches: false, detail: 'digest per-repository della fingerprint scalare malformati' };
+    }
+    if (siteValue.scalarFields !== spec.scalarFields || corpusValue.scalarFields !== spec.scalarFields) {
+      return { checked: true, valid: false, matches: false, detail: 'fingerprint scalare incoerente con il numero di campi dichiarato nel manifest' };
+    }
+    const matches = siteValue.sha256 === spec.siteSha256 && corpusValue.sha256 === spec.corpusSha256;
+    return {
+      checked: true,
+      valid: true,
+      matches,
+      ...(matches ? {} : { detail: 'fingerprint scalare diversa dai digest per-repository dichiarati' }),
+    };
+  }
+  // Legacy lockstep declaration: both repositories are expected to expose the
+  // same digest. Adapted contracts can instead declare the two owned digests
+  // explicitly above, without weakening either repository-local fingerprint.
   if (siteValue.scalarFields !== corpusValue.scalarFields || siteValue.sha256 !== corpusValue.sha256) {
     return { checked: true, valid: true, matches: false, detail: 'fingerprint scalare diversa fra sito e corpus' };
   }
