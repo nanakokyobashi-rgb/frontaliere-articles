@@ -815,21 +815,7 @@ jobs:
           attempt_pipe=""
           cdp_client="${RUNNER_TEMP:-/tmp}/cdp-stack.mjs"
 
-          proc_tree() {
-            local root="$1" kid
-            for kid in $(ps -A -o pid= -o ppid= | awk -v p="$root" '$2 == p { print $1 }'); do
-              proc_tree "$kid"
-            done
-            printf '%s\n' "$root"
-          }
-
-          kill_tree() {
-            local sig="$1" root="$2" p
-            case "$root" in ''|0|*[!0-9]*) return 0 ;; esac
-            for p in $(proc_tree "$root"); do
-              kill "-$sig" "$p" 2>/dev/null || true
-            done
-          }
+          source scripts/ci/generation-watchdog-process.sh
 
           cat > "$cdp_client" <<'CDP_CLIENT'
           const fs = await import('node:fs');
@@ -870,30 +856,15 @@ jobs:
           });
           CDP_CLIENT
 
-          create_article_pids() {
-            local root="$1" p args out=""
-            for p in $(proc_tree "$root"); do
-              args="$(ps -o args= -p "$p" 2>/dev/null || true)"
-              case "$args" in
-                *create-article.mjs*) out="$out $p" ;;
-              esac
-            done
-            printf '%s' "$out"
-          }
-
           stall_watchdog() {
-            local root="$1" last=-1 quiet=0 size p node_pids
-            while kill -0 "$root" 2>/dev/null; do
+            local root="$1" identity="$2" last=-1 quiet=0 size p node_pids stack_file="$diag_dir/stack-${sec}-${tried}.txt"
+            while same_process_identity "$root" "$identity"; do
               sleep "$stall_poll_s"
+              same_process_identity "$root" "$identity" || return 0
               size="$(wc -c < "$stall_log" 2>/dev/null | tr -d ' ')"
               [ -n "$size" ] || size=0
 
-              [ -s "$diag_dir/resources.log" ] || \
-                echo "# ts elapsed log_bytes | pid rss_kb cpu% state" > "$diag_dir/resources.log"
-              for p in $(create_article_pids "$root"); do
-                echo "$(date -u +%H:%M:%SZ) ${SECONDS}s ${size} | $(ps -o pid=,rss=,%cpu=,state= -p "$p" 2>/dev/null | tr -s ' ')" \
-                  >> "$diag_dir/resources.log" 2>/dev/null || true
-              done
+              sample_generation_resources "$root" "$size" "$diag_dir/resources.log"
 
               if [ "$size" != "$last" ]; then
                 last="$size"
@@ -906,15 +877,28 @@ jobs:
               : > "$stall_flag"
               echo "::warning::watchdog: nessun output per ${quiet}s (soglia ${stall_s}s) sulla sezione ${sec} — l'event loop e' bloccato, non e' lentezza. Prendo lo stack e uccido."
 
+              generation_capture_root_alive "$root" "$identity" "$stack_file" || return 0
               node_pids="$(create_article_pids "$root")"
-              for p in $node_pids; do kill -USR2 "$p" 2>/dev/null || true; done
-              for p in $node_pids; do kill -USR1 "$p" 2>/dev/null || true; done
-              sleep 2
-              node "$cdp_client" "$diag_dir/stack-${sec}-${tried}.txt" \
-                >> "$diag_dir/cdp-client.log" 2>&1 || true
+              generation_capture_root_alive "$root" "$identity" "$stack_file" || return 0
+              if [ -n "$node_pids" ]; then
+                printf 'stack non catturato: avviata la diagnostica Node per PID%s, in attesa del client CDP\n' "$node_pids" > "$stack_file"
+                for p in $node_pids; do
+                  generation_capture_root_alive "$root" "$identity" "$stack_file" || return 0
+                  kill -USR2 "$p" 2>/dev/null || true
+                done
+                for p in $node_pids; do
+                  generation_capture_root_alive "$root" "$identity" "$stack_file" || return 0
+                  kill -USR1 "$p" 2>/dev/null || true
+                done
+                sleep 2
+                generation_capture_root_alive "$root" "$identity" "$stack_file" || return 0
+                node "$cdp_client" "$stack_file" >> "$diag_dir/cdp-client.log" 2>&1 || true
+              else
+                printf 'stack non catturato: processo Node di create-article.mjs assente nel sottoalbero del timeout\n' > "$stack_file"
+              fi
 
               sleep "$stall_grace_s"
-              kill_tree KILL "$root"
+              kill_tree KILL "$root" "$identity"
               return 0
             done
           }
@@ -1020,10 +1004,13 @@ jobs:
                 > "$attempt_pipe" 2>&1 &
             fi
             attempt_pid=$!
-            stall_watchdog "$attempt_pid" &
+            attempt_identity="$(process_start_identity "$attempt_pid")" || attempt_identity=""
+            stall_watchdog "$attempt_pid" "$attempt_identity" &
             watch_pid=$!
             if wait "$attempt_pid"; then rc=0; else rc=$?; fi
-            kill_tree KILL "$watch_pid"
+            if [ ! -f "$stall_flag" ]; then
+              kill_tree KILL "$watch_pid"
+            fi
             wait "$watch_pid" 2>/dev/null || true
             watch_pid=""
             if wait "$tee_pid"; then tee_rc=0; else tee_rc=$?; fi
