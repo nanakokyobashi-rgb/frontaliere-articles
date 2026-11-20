@@ -343,17 +343,17 @@ test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scaden
   assert.match(body, /chain: \[codex\]/);
   assert.match(body, /prefer: \[codex\]/);
   assert.match(body, /const chunkTranslator = assertChunkTranslator\(translateInChunks, 'translatePendingBodyWithCodex'\)/);
-  assert.match(body, /fallback: \(\) => \{[\s\S]*if \(!pendingBodySecondLaneAvailable\(\) && typeof callWithRetry === 'function'\)[\s\S]*translatePendingBodyWithHistoricalChain\(itValue, locale, field, \{ callWithRetry, translateInChunks: chunkTranslator \}\)/);
+  assert.match(body, /fallback: \(\) => \{[\s\S]*if \(canFallback && \(!pendingBodySecondLaneAvailable\(\) \|\| deadlineTooClose\)\)[\s\S]*translatePendingBodyWithHistoricalChain\(itValue, locale, field, \{ callWithRetry, translateInChunks: chunkTranslator \}\)/);
   assert.match(body, /const validatedText = text\n\s+\? await chunkTranslator\([\s\S]*pretranslatedResult/);
-  assert.match(body, /if \(\(codexModelUnavailable \|\| !pendingBodySecondLaneAvailable\(\) \|\| rejected\.length > 0\)/);
+  assert.match(body, /if \(canFallback && \(codexModelUnavailable \|\| codexBudgetUnavailable \|\| codexDeadlineReached\s+\|\| !pendingBodySecondLaneAvailable\(\) \|\| rejected\.length > 0\)/);
   // Nessun orologio di modulo: i producer che importano translateArticle()
   // (publish-journalist-article.mjs) non hanno CREATE_ARTICLE_MAX_WALL_MS.
   assert.doesNotMatch(body, /RUN_START_MS|RUN_WALL_BUDGET_MS/);
   // Finestra per chiamata del tier Codex (180 s, coda compresa), limitata
   // dalla scadenza dichiarata: non i 600 s della lane del corpo articolo.
   assert.match(body, /const deadlineMs = codexCallDeadlineMs\(\{/);
-  assert.match(body, /processDeadlineMs: _pendingBodyCodexDeadlineMs,/);
-  assert.match(body, /if \(deadlineMs === null\) \{\n\s+throw /);
+  assert.match(body, /processDeadlineMs: codexRecoveryDeadlineMs,/);
+  assert.match(body, /if \(deadlineMs === null\) \{\n\s+if \(canFallback\) return translatePendingBodyWithHistoricalChain/);
   assert.match(body, /\n    deadlineMs,\n/);
   const install = src.slice(src.indexOf('function installCodexTranslateProcessDeadline() {'));
   assert.match(install.slice(0, install.indexOf('\n}\n')), /_pendingBodyCodexDeadlineMs = RUN_START_MS \+ RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS;/);
@@ -547,6 +547,7 @@ function createPendingBodyCodexTranslatorFixture({
   laneStopped = false,
   translateInChunks = async (bodyText, field, _makeChunkPrompt, _labelPrefix, _targetLang, options = {}) =>
     options.pretranslatedResult?.[field] ?? bodyText,
+  processBudgetMs = 300_000,
 }) {
   const at = src.indexOf('async function translatePendingBodyWithCodex(');
   assert.notEqual(at, -1, 'translatePendingBodyWithCodex non trovata');
@@ -557,7 +558,7 @@ function createPendingBodyCodexTranslatorFixture({
     'translateFieldFreeMt', 'balanceMarkdownMarkers', 'translatePendingBodyWithHistoricalChain', 'pendingBodySecondLaneAvailable', 'detectTruncation', 'console',
     `${ASSERT_CHUNK_TRANSLATOR_SRC}\n${TABLE_HEADER_MARKER_HELPERS_SRC}\n${realTruncationSrc()}\n${src.slice(at, end)}\nreturn translatePendingBodyWithCodex;`,
   );
-  const processDeadlineMs = Date.now() + 300_000;
+  const processDeadlineMs = Date.now() + processBudgetMs;
   let admissionAttempts = 0;
   let codexCalls = 0;
   let historicalCalls = 0;
@@ -707,6 +708,16 @@ test('il callback di fallback della lane usa la catena storica quando il breaker
   });
   await assert.rejects(stoppedWithoutBreaker.translate(source), /lane Codex fermata senza prova di indisponibilità/);
   assert.deepEqual(stoppedWithoutBreaker.counts(), { admissionAttempts: 0, codexCalls: 0, historicalCalls: 0 });
+
+  const shortCodexWindow = createPendingBodyCodexTranslatorFixture({
+    isModelAvailable: () => true,
+    admissionDecision: (_attempt, admission) => admission,
+    translateWithCodexEngine: async () => '',
+    laneStopsBeforeRun: true,
+    processBudgetMs: 20_000,
+  });
+  assert.equal(await shortCodexWindow.translate(source), shortCodexWindow.expected);
+  assert.deepEqual(shortCodexWindow.counts(), { admissionAttempts: 0, codexCalls: 0, historicalCalls: 1 });
 
   const stoppedByBudget = createPendingBodyCodexTranslatorFixture({
     isModelAvailable: () => true,
