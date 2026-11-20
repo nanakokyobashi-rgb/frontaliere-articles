@@ -322,9 +322,23 @@ test('il reporter diagnostico usa identita e workflow standalone corpus richiudi
     assert.match(text, /github-token: \$\{\{ github\.token \}\}/);
     assert.match(text, /repo: \$\{\{ github\.repository \}\}/);
     assert.match(text, new RegExp(`workflow-name: ${escapedName}`));
-    assert.match(
-      text,
-      /if: failure\(\) && \(steps\.site_checkout_primary\.outcome == 'success' \|\| steps\.site_checkout_retry\.outcome == 'success'\)/,
+    const legacyReporterFailureCondition = [
+      "if: failure() && (steps.site_checkout_primary.outcome == 'success'",
+      " || steps.site_checkout_retry.outcome == 'success')",
+    ].join('');
+    const currentReporterFailureCondition = [
+      "if: always() && (failure() || steps.repair_stale_descriptions.outcome == 'failure')",
+      " && (steps.site_checkout_primary.outcome == 'success'",
+      " || steps.site_checkout_retry.outcome == 'success')",
+      " && (github.run_attempt == 1 || steps.recovery_guard.outcome == 'success')",
+    ].join('');
+    const hasStaleDescriptionRepairStep = text.includes('id: repair_stale_descriptions');
+    const reporterFailureCondition = hasStaleDescriptionRepairStep
+      ? currentReporterFailureCondition
+      : legacyReporterFailureCondition;
+    assert.ok(
+      text.includes(reporterFailureCondition),
+      `${artifact.file}: reporter failure condition changed`,
     );
     assert.match(text, new RegExp(`workflow-file: \\.github/corpus-workflows/${artifact.file.replace('.', '\\.')}\\b`));
     assert.doesNotMatch(text, /workflow-file: .*logic\.yml/);
