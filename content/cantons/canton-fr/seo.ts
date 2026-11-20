@@ -972,6 +972,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-gruyere-studio-mobilita-profondo': {
+    title: 'Studio mobilità Gruyère: 25 comuni invitati a analisi approfondita',
+    description: 'Venticinque comuni della Gruyère partecipano a un\'analisi approfondita sulla mobilità.',
+    keywords: 'frontalieri, ticino, svizzera, italia, studio, mobilità, gruyère, comuni',
+    ogTitle: 'Studio mobilità Gruyère: 25 comuni invitati a analisi approfondita',
+    ogDescription: 'Venticinque comuni della Gruyère partecipano a un\'analisi approfondita sulla mobilità. Prima diagnosi a dicembre, conclusioni attese nell\'autunno 2027.',
+    canonicalPath: '/articoli-friburgo/gruyere-studio-mobilita-profondo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Studio mobilità Gruyère: 25 comuni invitati a analisi approfondita",
+      "description": "Venticinque comuni della Gruyère partecipano a un'analisi approfondita sulla mobilità.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-aadorf-spese-sociali-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-20T10:27:53+00:00",
+      "dateModified": "2026-11-20T10:27:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-friburgo/gruyere-studio-mobilita-profondo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
