@@ -7150,6 +7150,13 @@ export function buildFactCheckCallOptions(baseOpts, cacheEnabled = isFactCheckCa
 // run over the WHOLE text regardless of this cap.
 const MAX_FACTCHECK_ARTICLE_CHARS = 24000;
 
+// Composizione ufficiale: https://www.admin.ch/en/members-federal-council
+const FACT_CHECK_FEDERAL_COUNCILLORS = `Baume-Schneider, Parmelin, Cassis, Keller-Sutter, Pfister, Jans, Rösti`;
+const FACT_CHECK_INVENTED_INSTITUTIONS = `"Codice federale del lavoro", "CFL", "UFOL", "UWL", "Commissione federale per i frontalieri", "Ufficio federale dell'integrazione sanitaria (UFIS)"`;
+const FACT_CHECK_INVENTED_LAWS = `"LProtInfo del 2023" (inesistente — è art. 321a CO), "LPAP del 2000" (è LPers, non LPAP)`;
+const FACT_CHECK_FINMA_SCOPE = `FINMA è autorità per mercati finanziari/banche, NON per ospedali/sanità`;
+const FACT_CHECK_INVENTED_ACRONYMS = `DEMAS, LCFL, CFL`;
+
 function verifiedCantonFactsBlock(referenceText = '') {
   if (typeof referenceText !== 'string' || !referenceText.trim()) return '';
   return `\nFATTI ANNUALI VERIFICATI DEL CANTONE (riferimento canonico separato dalla fonte originale; confronta qui aliquote e valori annuali, senza attribuirli alla fonte):\n"""\n${referenceText.trim()}\n"""\n`;
@@ -7239,7 +7246,7 @@ ${verifiedCantonFactsBlock(verifiedReferenceText)}`;
 
 1. **LEGGI E DECRETI**: Ogni riferimento normativo (D.Lgs, DL, DPR, L.) deve esistere realmente con numero e anno corretti. Verifica che il contenuto attribuito alla legge sia corretto. Confronta con i fatti verificati sopra. ${isEvergreenArticle ? '' : isStatsAstra ? 'Il dataset ASTRA è fonte primaria solo per conteggi e periodi, non per norme: verifica leggi, accordi e date normative nei fatti di dominio verificati sopra. Non segnalare una norma come sospetta solo perché è assente dal dataset ASTRA.' : isStatsBfs ? 'Il dataset BFS è fonte primaria solo per totali e periodi, non per norme: verifica le norme con i fatti di dominio riportati sopra.' : 'Se il riferimento NON è presente nella fonte originale, segnalalo come sospetto.'}
 
-2. **ISTITUZIONI E ENTI**: Ogni istituzione menzionata deve esistere realmente. Confronta con la lista di istituzioni reali nei fatti verificati. Segnala qualsiasi acronimo NON presente in quella lista come sospetto. NON esiste: "Codice federale del lavoro", "CFL", "UFOL", "UWL", "Commissione federale per i frontalieri", "Ufficio federale dell'integrazione sanitaria (UFIS)".
+2. **ISTITUZIONI E ENTI**: Ogni istituzione menzionata deve esistere realmente. Confronta con la lista di istituzioni reali nei fatti verificati. Segnala qualsiasi acronimo NON presente in quella lista come sospetto. NON esiste: ${FACT_CHECK_INVENTED_INSTITUTIONS}.
 
 3. **ALIQUOTE E CIFRE FISCALI**: Confronta OGNI aliquota con i valori nei fatti verificati. AVS=5.3%, AC=1.1%, IRPEF ${irpefAliquoteBreve(IRPEF_ANNO_CORRENTE)} (2024-${IRPEF_ANNO_PRECEDENTE}: ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)}). Se un'aliquota non corrisponde = critical.
 
@@ -7259,16 +7266,16 @@ ${verifiedCantonFactsBlock(verifiedReferenceText)}`;
 
    REGOLA: qualunque bullet o paragrafo che combini (a) [Città CH o nome ospedale/azienda] + (b) [ruolo professionale: infermiere/medico/operaio/impiegato/chirurgo] + (c) [verbo specifico: ha segnalato/denunciato/ottenuto/recuperato] + (d) [esito o cifra specifica: CHF nnn, indagine, risarcimento, recupero], SENZA che il caso compaia nella fonte originale → CRITICAL: fatti_inventati. Onere della prova: l'articolo deve PROVARE che il caso esiste nella fonte; altrimenti è inventato per gonfiare la rilevanza frontaliere.
 
-   Anche istituzioni applicate al dominio sbagliato sono CRITICAL: FINMA è autorità per mercati finanziari/banche, NON per ospedali/sanità. Citarla in contesti sanitari = fabbricazione di istituzione → critical:istituzioni.
+   Anche istituzioni applicate al dominio sbagliato sono CRITICAL: ${FACT_CHECK_FINMA_SCOPE}. Citarla in contesti sanitari = fabbricazione di istituzione → critical:istituzioni.
 
-   Leggi/sigle che sembrano plausibili ma non esistono = critical:leggi. Esempi shipped: "LProtInfo del 2023" (inesistente — è art. 321a CO), "LPAP del 2000" (è LPers, non LPAP). Se non puoi verificare la SIGLA UFFICIALE della legge, è critical.
+   Leggi/sigle che sembrano plausibili ma non esistono = critical:leggi. Esempi shipped: ${FACT_CHECK_INVENTED_LAWS}. Se non puoi verificare la SIGLA UFFICIALE della legge, è critical.
 
-8. **NOMI DI PERSONE E CITAZIONI**: Verifica che ogni persona citata (politici, consiglieri federali, funzionari) esista realmente con il ruolo indicato. Consiglieri federali attuali (2024-2027): Baume-Schneider, Parmelin, Cassis, Keller-Sutter, Amherd, Jans, Rösti. Citazioni dirette ("ha dichiarato:") di persone non verificabili sono quasi sempre inventate dall'IA.
+8. **NOMI DI PERSONE E CITAZIONI**: Verifica che ogni persona citata (politici, consiglieri federali, funzionari) esista realmente con il ruolo indicato. Consiglieri federali attuali (2024-2027): ${FACT_CHECK_FEDERAL_COUNCILLORS}. Citazioni dirette ("ha dichiarato:") di persone non verificabili sono quasi sempre inventate dall'IA.
 
 9. **SVIZZERA ≠ UE**: La Svizzera NON è membro dell'Unione Europea né dello Spazio Economico Europeo (SEE/EEA). Frasi come "accordo EU-Svizzera", "normativa UE applicabile in Svizzera" o "la Svizzera come membro" sono ERRORI. I rapporti sono regolati da Accordi Bilaterali I (1999) e II (2004).
 
 10. **PATTERN COMUNI DI HALLUCINATION IA**: Segnala come "critical" se trovi:
-   - Decreti/leggi con acronimi inventati (DEMAS, LCFL, CFL, ecc.)
+   - Decreti/leggi con acronimi inventati (${FACT_CHECK_INVENTED_ACRONYMS}, ecc.)
    - "Commissione" o "Osservatorio" con nomi troppo specifici e mai sentiti
    - Percentuali precise con decimali senza attribuzione a fonte reale
    - Leggi "entrate in vigore nel 20XX" senza numero di legge verificabile
@@ -7336,12 +7343,12 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     ? `${evidencePrefix}
 
 VERIFICA SISTEMATICA — controlla tutte le categorie:
-- Leggi e decreti: controlla esistenza, sigla, numero, anno e attribuzione. Segnala come sospetti i riferimenti assenti dalla fonte. Sigle o norme inventate sono critical.
-- Istituzioni e persone: verifica esistenza, acronimi, ruoli, ambito e citazioni dirette. Un'autorità inventata o applicata al dominio sbagliato è critical.
-- Aliquote e dati: confronta aliquote, soglie e date normative con i fatti verificati. Un valore contraddetto è critical. Ogni statistica decimale richiede studio e istituto citati. Accetta arrotondamenti interi attribuiti e valori canonici corretti.
-- Date, eventi e fonte: verifica date, luoghi, partecipanti, dichiarazioni e misure. Le date assenti dalla fonte sono molto sospette. Contesto verificato e corretto può essere minor. Fatti specifici inventati o in contrasto con fonte o fatti verificati sono critical.
-- Fatti inventati: è critical un caso presentato come reale con luogo o ente, ruolo professionale, azione ed esito specifico senza riscontro nella fonte. Verifica anche eventi plausibili ma non provati, autorità inesistenti e accordi mai firmati.
-- La Svizzera non fa parte di UE o SEE. I rapporti si basano sugli accordi bilaterali.
+- Leggi: verifica esistenza, sigla, numero, anno e attribuzione. Riferimenti assenti dalla fonte: sospetti. Critical: sigle inventate (${FACT_CHECK_INVENTED_ACRONYMS}), ${FACT_CHECK_INVENTED_LAWS}, anno di entrata in vigore senza legge verificabile, falsa tassa sanitaria, accordo non firmato.
+- Istituzioni e persone: verifica esistenza, ambito, ruoli, acronimi e citazioni dirette. Critical: autorità inventate o fuori ambito, ministro inesistente, commissioni o osservatori inventati. NON esistono: ${FACT_CHECK_INVENTED_INSTITUTIONS}. Consiglieri federali attuali: ${FACT_CHECK_FEDERAL_COUNCILLORS}. Abuso critical:istituzioni: ${FACT_CHECK_FINMA_SCOPE}.
+- Dati: verifica aliquote, soglie e date normative sui fatti verificati. Statistiche decimali: richiedi studio e istituto citati. Accetta arrotondamenti interi attribuiti e valori canonici corretti.
+- Fonte: verifica date, luoghi, partecipanti, dichiarazioni e misure. Date assenti: molto sospette. Contesto verificato: minor. Fatti inventati o contraddetti: critical.
+- Casi con luogo o ente, ruolo, azione ed esito specifico senza riscontro nella fonte: critical:fatti_inventati. Esempi: infermiera segnala carenze igieniche a Lugano; medico denuncia pratiche non etiche a Chiasso; infermiere ORL ottiene un risarcimento; medico del Civico di Lugano denuncia frode con indagine FINMA.
+- Svizzera fuori da UE e SEE; valgono gli accordi bilaterali.
 
 ${relevanceInstructions}
 

@@ -347,6 +347,18 @@ describe('fact-check retries under a reported input cap', () => {
       assert.ok(evidence.includes('LAMAL non è "tassa sulla salute"'));
       assert.ok(evidence.includes(domainFacts));
       assert.ok(evidence.includes(cantonFacts));
+      const instructions = compactPrompt.slice(evidenceEnd(compactPrompt), proofStart(compactPrompt));
+      assert.match(instructions, /Consiglieri federali attuali: Baume-Schneider, Parmelin, Cassis, Keller-Sutter, Pfister, Jans, Rösti\./);
+      assert.doesNotMatch(instructions, /\bAmherd\b/);
+      assert.match(instructions, /critical:istituzioni: FINMA è autorità per mercati finanziari\/banche, NON per ospedali\/sanità/);
+      assert.match(instructions, /senza riscontro nella fonte: critical:fatti_inventati/);
+      assert.match(instructions, /infermiera segnala carenze igieniche a Lugano/);
+      assert.match(instructions, /medico denuncia pratiche non etiche a Chiasso/);
+      assert.match(instructions, /infermiere ORL ottiene un risarcimento/);
+      assert.match(instructions, /medico del Civico di Lugano denuncia frode con indagine FINMA/);
+      assert.match(instructions, /sigle inventate \(DEMAS, LCFL, CFL\)/);
+      assert.match(instructions, /"LProtInfo del 2023" \(inesistente — è art\. 321a CO\)/);
+      assert.match(instructions, /"LPAP del 2000" \(è LPers, non LPAP\)/);
       const suffix = compactPrompt.slice(proofStart(compactPrompt));
       assert.equal(suffix, prompt.slice(proofStart(prompt)));
       assert.match(suffix, /"articleQuote".*"citazione esatta/);
