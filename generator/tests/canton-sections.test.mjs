@@ -348,3 +348,20 @@ test('viola: articleDateFromDetail senza budget finito di pagine dettaglio', () 
   delete source.quirks.maxRequestsPerRun;
   expectViolation(doc, /SH: newsSources .*articleDateFromDetail html-meta richiede maxRequestsPerRun intero >= 2/);
 });
+
+test('viola: dateFromCardLabel con valore diverso o su RSS', () => {
+  const find = (doc, parser) => doc.cantons.flatMap((c) => c.newsSources).find((s) => s.parser === parser);
+  let doc = clone();
+  find(doc, 'html-links').quirks.dateFromCardLabel = 'dxp-typo-label-extra';
+  expectViolation(doc, /quirk dateFromCardLabel="dxp-typo-label-extra" non valido/);
+  doc = clone();
+  find(doc, 'rss').quirks.dateFromCardLabel = 'dxp-typo-label';
+  expectViolation(doc, /quirk dateFromCardLabel non si applica al parser "rss"/);
+});
+
+test('viola: dateFromCardLabel senza articlePathPattern', () => {
+  const doc = clone();
+  const source = canton(doc, 'ZG').newsSources.find((s) => s.quirks?.dateFromCardLabel === 'dxp-typo-label');
+  delete source.quirks.articlePathPattern;
+  expectViolation(doc, /ZG: newsSources .*dateFromCardLabel dxp-typo-label richiede articlePathPattern valido/);
+});
