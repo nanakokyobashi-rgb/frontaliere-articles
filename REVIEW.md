@@ -96,7 +96,7 @@ Il body della PR DEVE avere:
 - Cosa fa la PR.
 
 ## Non implementato (ancora)
-- Piano di completamento: scope ancora dovuto + stato/next-step (in questa PR / PR concatenata #N / blocked: <causa>). «Nessuno» = task completo.
+- Piano di completamento: ogni voce dichiara uno stato riconosciuto (`in questa PR`, `PR concatenata #N`, `blocked: <causa esterna reale>`, `per scelta`, `by construction`, `falso positivo` / `false positive` o `blocked: decisione del proprietario` / `blocked: owner decision`). Gli stati decisionali richiedono `Motivo` e `Prossimo passo` nello stesso bullet. «Nessuno» = task completo.
 ```
 
 ### Identita' di un finding, e i 🔴 su righe non cambiate
@@ -121,7 +121,9 @@ Una regola del body che il contratto non copre va AGGIUNTA al contratto, non app
 ### Comportamento del reviewer
 
 1. **Voce `Implementato`** → pensiero critico: il diff la implementa davvero? Edge case? Logica su boundary, null, ordinamento, async? C'è un modo più semplice? Un buco visibile? Code-smell con debito → 🟡.
-2. **Voce `Non implementato`** → è un **piano di completamento**, non uno scope chiuso. Ogni voce è lavoro ancora dovuto: verifica che dichiari uno stato concreto (`in questa PR` / `PR concatenata #N` / `blocked: <causa esterna reale>`), non una scappatoia (`out of scope`, `posposto`). Scope dovuto senza piano né esecuzione → **🔴 Important**. Una PR PUÒ mergiare con la sezione non vuota se ogni voce porta un next-step credibile, ma in quel caso **il task non è chiuso**.
+2. **Voce `Non implementato`** → è un **piano di completamento**, non uno scope chiuso. Ogni voce deve dichiarare uno stato riconosciuto: `in questa PR`, `PR concatenata #N`, `blocked: <causa esterna reale>`, `per scelta`, `by construction`, `falso positivo` (`false positive`) o `blocked: decisione del proprietario` (`blocked: owner decision`; anche `blocked: scelta del proprietario`). `PR concatenata` senza `#N` non è tracciabile; `out of scope` e `posposto` non sono stati validi.
+   - Gli stati decisionali (`per scelta`, `by construction`, `falso positivo` / `false positive` e owner decision) richiedono `**Motivo:** <causa concreta>. **Prossimo passo:** <azione concreta>.` nello stesso bullet. `non è un falso positivo` resta lavoro dovuto.
+   - Scope dovuto senza piano né esecuzione → **🔴 Important**. Una PR PUÒ mergiare con un `blocked:` tecnico se ogni voce porta un next-step credibile, ma in quel caso **il task non è chiuso**.
 3. **Il diff fa cose non dichiarate** → 🟡 scope drift. **Inverso** — il body dichiara X ma il diff non lo mostra → 🟡: "`## Implementato` afferma X ma il diff non lo riflette".
 4. **Sezioni mancanti** → 🔴 process: "manca `## Implementato` / `## Non implementato` nel body".
    - **Tier normal**: termina qui.
