@@ -9623,6 +9623,7 @@ export async function callLLM(messages, opts = {}) {
   // classifyExhaustionCause) because it is the one failure class a caller can
   // actually act on: see the err.retryRequestTokenBudget block at the throw.
   const inputCapSkips = [];
+  let deadlineExpiredBeforeCascade = false;
 
   for (let i = 0; i < chain.length; i++) {
     const model = chain[i];
@@ -9637,6 +9638,7 @@ export async function callLLM(messages, opts = {}) {
     // before any between-call check got a chance to run. No-op unless the
     // caller opts in via opts.deadlineMs.
     if (deadlineMs !== undefined && Date.now() > deadlineMs) {
+      deadlineExpiredBeforeCascade = i === 0;
       // Wording matters: classifyExhaustionCause()'s transientRe (below) keys off
       // "timeout"/"aborted" to bucket a cascade's errors as transient (recoverable
       // next run) vs persistent (needs intervention). A budget-exhaustion skip is
@@ -10352,6 +10354,7 @@ export async function callLLM(messages, opts = {}) {
 
   const err = new Error(message);
   err.code = 'ALL_MODELS_EXHAUSTED';
+  err.deadlineExpiredBeforeCascade = deadlineExpiredBeforeCascade;
   // Always defined (null when no model refused on size), so a caller can branch
   // on presence without probing for undefined properties.
   err.inputCapReport = capReport;

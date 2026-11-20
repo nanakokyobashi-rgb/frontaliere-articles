@@ -26039,6 +26039,14 @@ if (invokedDirectly) {
     );
     await exitAfterFlush(1);
   }
+  // A cascade that never started cannot establish shared provider exhaustion.
+  if (e?.deadlineExpiredBeforeCascade && wallBudgetExceeded()) {
+    finalizeRunReport('deferred', {
+      notes: [...RUN_REPORT.notes, 'Deferred (article run deadline reached before model cascade)'],
+    });
+    console.error('⚠️ Differito: budget wall-clock della sezione esaurito prima della chiamata ai modelli.');
+    await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
+  }
   // ISSUE #313 / #348 — «tutti i modelli sono temporaneamente esauriti» va
   // DIMOSTRATO, non asserito. La condizione ha due meta' ora: il ramo di
   // differimento resta quello di prima (`isQuotaExhaustedError`, il voto di
