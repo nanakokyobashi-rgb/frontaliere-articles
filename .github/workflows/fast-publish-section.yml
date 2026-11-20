@@ -33,7 +33,6 @@ on:
       - 'engine/**'
       - 'host/**'
       - 'scripts/publish-section-pages.mjs'
-      - 'scripts/publish-section-edge.mjs'
       - 'scripts/lib/section-bootstrap-lock.mjs'
       - 'scripts/ci/section-bootstrap-lock.mjs'
       - 'scripts/lib/conditional-cdn-put.sh'

@@ -65,3 +65,14 @@ export function purgeBodiesForUrls(urls) {
     })),
   ];
 }
+
+const PURGE_CHUNK = 30;
+
+/** Le URL da purgare, a blocchi da `size`, senza duplicati. */
+export function purgeChunks(urls, size = PURGE_CHUNK) {
+  if (!Number.isInteger(size) || size <= 0) throw new Error(`purgeChunks: size non valido (${size})`);
+  const unique = [...new Set(urls)];
+  const chunks = [];
+  for (let i = 0; i < unique.length; i += size) chunks.push(unique.slice(i, i + size));
+  return chunks;
+}

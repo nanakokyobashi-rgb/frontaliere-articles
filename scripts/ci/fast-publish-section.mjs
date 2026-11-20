@@ -75,6 +75,7 @@ const SHARED_RENDER_REFRESH_PATHS = new Set([
 // Cambiare uno di questi moduli cambia il risultato di ogni publisher R2,
 // non una sola sezione: il workflow deve quindi rifare il bootstrap di tutte
 // le sezioni cantonali R2 attive, invece di produrre una matrice vuota.
+// Il CLI del puntatore edge passa dal publisher API e dal reconcile post-publish.
 const SHARED_R2_REFRESH_PATHS = new Set([
   'generator/scripts/lib/canton-hubs/paths.mjs',
   'generator/scripts/lib/corpus-paths.mjs',
@@ -106,7 +107,6 @@ const SHARED_R2_REFRESH_PATHS = new Set([
   'scripts/lib/section-page-manifest.mjs',
   'generator/scripts/load-rc-env.mjs',
   'scripts/offload-generated-images-cdn.mjs',
-  'scripts/publish-section-edge.mjs',
   'scripts/publish-section-pages.mjs',
 ]);
 const SHARED_R2_REFRESH_PREFIXES = Object.freeze(['engine/', 'host/']);
