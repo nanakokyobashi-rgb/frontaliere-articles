@@ -4086,11 +4086,12 @@
     {
       "path": "generator/scripts/lib/scoring/semanticDedup.mjs",
       "sitePath": "scripts/lib/scoring/semanticDedup.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Il corpus estende il gate semantico con `ignoreNeighbor` e, quando il filtro e' attivo, cerca l'intero store: `generate-daily-brief-article.mjs` abilita `allowRecurringDailyEdition` e `create-article.mjs` esclude con `isDailyBriefArticleId` le edizioni ricorrenti della stessa famiglia prima di scegliere il duplicato reale. Il sito non possiede il producer daily brief ne' quel contratto di chiamata, quindi copiare il file corpus sul sito aggiungerebbe una superficie senza consumer e copiare il sito qui cancellerebbe la protezione delle edizioni giornaliere. Le parti comuni restano da riconciliare manualmente sopra questi adattamenti.",
       "baseline": {
         "site": "8b5da48c9029113f",
-        "corpus": "8b5da48c9029113f",
-        "alignedAt": "2026-08-09"
+        "corpus": "13574dc0b9f93490",
+        "alignedAt": "2026-11-20"
       }
     },
     {
@@ -4279,15 +4280,18 @@
       "mode": "adapted",
       "reason": "Costanti host adattate dal sito: il fingerprint confronta i 23 scalari autorevoli del SiteShellContract; nomi content-addressed e byte degli asset statici sono verificati separatamente in host/third-party-shell-assets-fingerprint.json e host/third-party-shell-assets.json. Il runtime Firebase mantiene il match sulla chiave esatta e non espone segreti.",
       "baseline": {
-        "site": "ed98db8c95caaf5d",
-        "corpus": "3b7ed3cce6e5027b",
-        "alignedAt": "2026-11-15"
+        "site": "6475e07a5dfb1900",
+        "corpus": "0ce9860d77e1dab9",
+        "alignedAt": "2026-11-20",
+        "forcedAt": "2026-11-20T21:09:12.628Z"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 23,
-        "sha256": "80241ddf3481095f3e62db1a46a4ed27c2b0dcd37a3cfdf0544891e8ee1fabac"
+        "siteSha256": "d4e9462f0d7c36c4a40f9227100b801f771403fc1223b7ab74a520ae4ad49dfc",
+        "corpusSha256": "038caa0a6ed799ada3e7c192c8c31aa5a0a04ee9fbd7ebffca1dc7f9caa1343f",
+        "sha256": "038caa0a6ed799ada3e7c192c8c31aa5a0a04ee9fbd7ebffca1dc7f9caa1343f"
       }
     },
     {
@@ -4504,10 +4508,10 @@
       "mode": "adapted",
       "reason": "Impronta SHA-256 dei 23 campi scalari di SiteShellContract, prodotta e verificata da host/tests/shell-contract-fingerprint.test.mjs. Il gemello del sito e' tests/articles-shell-contract-fingerprint.json, ma i digest differiscono intenzionalmente: il sito registra gli URL globali stabili e la shell host include i nomi content-addressed degli asset. La dichiarazione scalarFingerprint su host/constants.ts confronta separatamente entrambi i valori.",
       "baseline": {
-        "site": "cb29a37dd7c6ce74",
-        "corpus": "f5198cca59c9534a",
-        "alignedAt": "2026-11-15",
-        "forcedAt": "2026-11-15T19:04:16.629Z"
+        "site": "ce82a9d59f48dc49",
+        "corpus": "02f0817eb92eca34",
+        "alignedAt": "2026-11-20",
+        "forcedAt": "2026-11-20T21:09:12.867Z"
       }
     },
     {
@@ -6996,9 +7000,9 @@
       "mode": "adapted",
       "reason": "adattato al bundle host: il fingerprint byte-exact di site-support, AdSense, Partnerize, Meta Pixel e helper canonici viaggia insieme allo snapshot adattato host/third-party-shell-assets.json e alle versioni asset in host/constants.ts. Non trasportarlo da solo; verificare host/tests/host-shell-assets.test.mjs prima della pubblicazione.",
       "baseline": {
-        "site": "2895cd13ea5cca45",
-        "corpus": "2895cd13ea5cca45",
-        "alignedAt": "2026-11-15"
+        "site": "07ce7fdd280ebf30",
+        "corpus": "07ce7fdd280ebf30",
+        "alignedAt": "2026-11-20"
       },
       "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3078"
     },
@@ -7009,9 +7013,8 @@
       "reason": "Snapshot byte-exact di site-support, AdSense, Partnerize, Meta Pixel e guardia inline canonica, generato dall'exporter del sito. hostShellFiles verifica nomi e SHA senza import fra repository; sincronizzarlo nella stessa PR di host/third-party-shell-assets-fingerprint.json e host/constants.ts per conservare i byte e i nomi content-addressed che la pubblicazione usa.",
       "baseline": {
         "site": "2aa134c3edf47044",
-        "corpus": "08b76eb5e347c938",
-        "alignedAt": "2026-11-15",
-        "forcedAt": "2026-11-15T18:15:55.135Z"
+        "corpus": "c47d30d67f05fecb",
+        "alignedAt": "2026-11-20"
       }
     },
     {

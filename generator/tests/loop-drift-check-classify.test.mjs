@@ -148,7 +148,7 @@ const FINGERPRINT_ENTRY = {
 
 test('fingerprint scalare invariata assolve un sorgente adapted cambiato fuori contratto', () => {
   const verdict = scalarFingerprintVerdict(FINGERPRINT_ENTRY, { site: JSON.stringify(FINGERPRINT), corpus: JSON.stringify(FINGERPRINT) });
-  assert.deepEqual(verdict, { checked: true, valid: true, matches: true });
+  assert.deepEqual(verdict, { checked: true, valid: true, matches: true, drift: null });
 });
 
 test('fingerprint scalare diversa resta site-ahead, mai stable', () => {
@@ -164,7 +164,7 @@ test('fingerprint mancante, malformata o incoerente fallisce chiuso', () => {
   for (const [site, corpus] of [
     [null, JSON.stringify(FINGERPRINT)],
     ['{}', JSON.stringify(FINGERPRINT)],
-    [JSON.stringify({ ...FINGERPRINT, sha256: 'b'.repeat(64) }), JSON.stringify({ ...FINGERPRINT, sha256: 'b'.repeat(64) })],
+    [JSON.stringify({ ...FINGERPRINT, sha256: 'not-a-sha256' }), JSON.stringify(FINGERPRINT)],
   ]) {
     const verdict = scalarFingerprintVerdict(FINGERPRINT_ENTRY, { site, corpus });
     assert.equal(verdict.valid, false);
