@@ -1,9 +1,4 @@
 {
-  "https://www.fiscoetasse.com/new-rassegna-stampa/4538-eta-pensione-2027-un-mese-in-piu-per-tutti-o-quasi-dice-la-ragioneria.html": {
-    "articleId": "eta-pensione-2030-ragioneria",
-    "ts": "2026-09-25T12:01:41.356Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/attualita/1952482/giornata-sbarrata-neggia-fosano-lavori": {
     "articleId": "chiusura-cantonale-neggia-fosano",
     "ts": "2026-09-25T12:46:46.881Z",
@@ -2497,6 +2492,11 @@
   "https://www.ticinonews.ch/ticino/a2-a-rodi-finiti-i-lavori-la-tratta-e-libera-446952": {
     "articleId": "a2-rodi-lavori-finiti",
     "ts": "2026-11-20T14:32:08.969Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/auguri-pista-e-quartieri-mendrisio-porta-le-feste-in-piazza-447003": {
+    "articleId": "mendrisio-feste-pista-ghiaccio",
+    "ts": "2026-11-20T22:27:45.231Z",
     "keyForm": 2
   }
 }

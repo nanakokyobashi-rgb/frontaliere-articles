@@ -13741,6 +13741,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.a2-rodi-lavori-finiti.title': 'A2 bei Rodi: Arbeiten abgeschlossen, Strecke frei',
     'blog.article.a2-rodi-lavori-finiti.excerpt': 'Das Bundesamt für Strassen USTRA gibt das Ende der Arbeiten an der A2 bei Rodi bekannt.',
     'blog.article.a2-rodi-lavori-finiti.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.mendrisio-feste-pista-ghiaccio.title': 'Mendrisio bringt Feste und eine Eisbahn auf den Platz',
+    'blog.article.mendrisio-feste-pista-ghiaccio.excerpt': 'Von Ende November bis Januar belebt Mendrisio Plätze und Quartiere mit einer Eisbahn, dem Austausch von guten Wünschen und einem Veranstaltungskalender.',
+    'blog.article.mendrisio-feste-pista-ghiaccio.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;

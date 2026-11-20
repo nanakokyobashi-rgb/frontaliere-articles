@@ -115005,6 +115005,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-mendrisio-feste-pista-ghiaccio': {
+    title: 'Mendrisio porta feste e pista di ghiaccio in piazza',
+    description: 'Da fine novembre a gennaio Mendrisio anima piazze e quartieri con pista di ghiaccio, scambio degli auguri e un calendario di appuntamenti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, mendrisio, porta, feste, pista',
+    ogTitle: 'Mendrisio porta feste e pista di ghiaccio in piazza',
+    ogDescription: 'Da fine novembre a gennaio la Città di Mendrisio anima piazze e quartieri. La fonte indica una pista di ghiaccio, lo scambio degli auguri e un calendario di appuntamenti, ma non riporta date precise, orari o sedi dettagliate.',
+    canonicalPath: '/articoli-frontaliere/mendrisio-feste-pista-ghiaccio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mendrisio porta feste e pista di ghiaccio in piazza",
+      "description": "Da fine novembre a gennaio Mendrisio anima piazze e quartieri con pista di ghiaccio, scambio degli auguri e un calendario di appuntamenti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-mendrisio-feste-pista-ghiaccio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-20T22:27:43+00:00",
+      "dateModified": "2026-11-20T22:27:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/mendrisio-feste-pista-ghiaccio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

@@ -839,6 +839,103 @@ test('paywall title+lead: il lead del feed viaggia con la headline', async () =>
   assert.equal(out.headlines[0]._paywall, 'title+lead');
 });
 
+test('Lucerna: una sola richiesta RSS, lead limitato e solo link HTTPS della stessa origine', async () => {
+  const source = sourceOf('LU', 'https://www.stadtluzern.ch/aktuelles/news.rss');
+  const longLead = 'Eine fiktive Meldung zum Busbetrieb. '.repeat(25);
+  const item = (link, description = '') => `<item>
+    <title><![CDATA[Testmeldung zum fiktiven Busbetrieb]]></title>
+    <link><![CDATA[${link}]]></link>
+    <pubDate>Fri, 20 Nov 2026 08:00:00 +0100</pubDate>
+    ${description ? `<description><![CDATA[<p>${description}</p>]]></description>` : ''}
+  </item>`;
+  const rss = `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel>
+    ${item('https://www.stadtluzern.ch/aktuelles/test-1', longLead)}
+    ${item('https://www.stadtluzern.ch/aktuelles/test-2')}
+    ${item('https://example.test/fremde-meldung', 'Externer Eintrag.')}
+    ${item('http://www.stadtluzern.ch/aktuelles/test-3', 'Unverschlüsselter Link.')}
+    ${item('https://www.stadtluzern.ch:8443/aktuelles/test-4', 'Anderer Port.')}
+  </channel></rss>`;
+  const { impl, calls } = fakeFetch({ [source.url]: { body: rss, contentType: 'application/rss+xml' } });
+  const now = new Date('2026-11-20T12:00:00Z');
+  const scan = (profile, options) => scanCantonSource(profile, ctx(impl, { ...options, now }));
+  const start = SRC.indexOf('async function fetchCantonSourceHeadlines(');
+  const end = SRC.indexOf('async function scanNewsSources(', start);
+  assert.ok(start !== -1 && end > start);
+  const report = { sources: {} };
+  const fetchCantonSourceHeadlines = new Function(
+    'scanCantonSource', 'createHostThrottle', 'RUN_REPORT', 'extractRssItems',
+    'extractHeadlines', 'isWithinDays', 'MAX_ARTICLE_AGE_DAYS', 'sourceRequestBudget',
+    `let _cantonHostThrottle;
+    ${SRC.slice(start, end)}
+    return fetchCantonSourceHeadlines;`,
+  )(scan, createHostThrottle, report, extractRssItems, extractHeadlines,
+    (date, days) => now - date <= days * 86_400_000, 3, sourceRequestBudget);
+
+  const headlines = await fetchCantonSourceHeadlines(source, 'stadtluzern.ch');
+  assert.deepEqual(calls.map(({ url }) => url), [source.url]);
+  assert.equal(calls[0].init.redirect, 'error');
+  assert.equal(report.sources.canton[0].requests, 1);
+  assert.deepEqual(headlines.map(({ url }) => url), [
+    'https://www.stadtluzern.ch/aktuelles/test-1',
+    'https://www.stadtluzern.ch/aktuelles/test-2',
+  ]);
+  assert.equal(headlines[0].lead, longLead.slice(0, 600));
+  assert.equal(headlines[0]._cantonSourceLead, headlines[0].lead);
+  assert.equal(headlines[1].lead, undefined);
+  for (const headline of headlines) {
+    assert.equal(headline._feedContentOnly, true);
+    assert.equal(headline._cantonSourceFeedOnly, true);
+    assert.equal(headline._paywall, undefined);
+  }
+});
+
+test('fetchPageContent usa solo il feed pubblico anche senza descrizione', async () => {
+  const start = SRC.indexOf('async function fetchPageContent(');
+  const end = SRC.indexOf('// ── Date filtering:', start);
+  const setupStart = SRC.indexOf('  pendingCantonSourceContent = typeof sourceContext?');
+  const setupEnd = SRC.indexOf('  const pageContent = await fetchPageContent', setupStart);
+  assert.ok(start !== -1 && end > start && setupStart !== -1 && setupEnd > setupStart);
+
+  let networkCalls = 0;
+  const fetchPage = new Function('fetchWithRefTimeout', 'sourcePageFetchHeaders', 'safeSignalSourceUrlForLog', `
+    let lastSourcePublishedAt, lastSourcePageTitle;
+    let pendingCantonSourceContent, pendingCantonSourcePublishedAt, pendingCantonSourceTitle;
+    let pendingCantonSourceLead, pendingCantonSourcePaywall;
+    ${SRC.slice(start, end)}
+    return async (url, sourceContext) => {
+      ${SRC.slice(setupStart, setupEnd)}
+      const content = await fetchPageContent(url, sourceContext);
+      return { content, publishedAt: lastSourcePublishedAt, title: lastSourcePageTitle,
+        pending: [pendingCantonSourceContent, pendingCantonSourcePublishedAt, pendingCantonSourceTitle,
+          pendingCantonSourceLead, pendingCantonSourcePaywall] };
+    };
+  `)(() => {
+    networkCalls += 1;
+    assert.fail('fetch inatteso della pagina articolo');
+  }, () => ({}), (url) => url);
+
+  const url = 'https://www.stadtluzern.ch/aktuelles/test-1';
+  const headline = 'Testmeldung zum fiktiven Busbetrieb';
+  const date = new Date('2026-11-20T07:00:00Z');
+  const result = await fetchPage(url, {
+    _cantonSourceFeedOnly: true, _cantonSourceLead: 'Ein fiktiver Auszug.', headline, date,
+  });
+  assert.equal(result.title, headline);
+  assert.equal(result.publishedAt, date.toISOString());
+  assert.deepEqual(result.pending, ['', '', '', '', '']);
+  assert.match(result.content, /^\[FONTE PUBBLICA — FEED\]/);
+  assert.ok(result.content.includes(url));
+  assert.ok(result.content.includes(headline));
+  assert.ok(result.content.includes(date.toISOString()));
+  assert.match(result.content, /Estratto del feed: Ein fiktiver Auszug\./);
+  assert.match(result.content, /fatti verificabili nel feed, con attribuzione e link/);
+
+  const withoutLead = await fetchPage(url, { _cantonSourceFeedOnly: true, headline, date });
+  assert.match(withoutLead.content, /^\[FONTE PUBBLICA — FEED\]/);
+  assert.doesNotMatch(withoutLead.content, /Estratto del feed:|Ein fiktiver Auszug/);
+  assert.equal(networkCalls, 0);
+});
+
 // ── Cortesia verso l'host ───────────────────────────────────────────────────
 
 test('crawl-delay: due richieste allo stesso host distanziate, host diversi no', async () => {
