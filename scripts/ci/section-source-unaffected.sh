@@ -23,6 +23,7 @@ git merge-base --is-ancestor "$expected" "$current" || exit 1
 git diff --quiet --no-ext-diff --no-textconv --ignore-submodules=none "$expected" "$current" -- . \
   ':(top,exclude,literal)data/discovery-attempt-state.json' \
   ':(top,exclude,literal)data/topic-candidates-evergreen-rejected.json' \
+  ':(top,exclude,glob)data/sections/*/topic-candidates-evergreen-rejected.json' \
   ':(top,exclude,literal)data/image-regeneration-queue.json' \
   ':(top,exclude,literal)data/image-regeneration-queue-pending.jsonl' \
   ':(top,exclude,glob)data/image-regeneration-queue-pending.jsonl.*.pending' \
