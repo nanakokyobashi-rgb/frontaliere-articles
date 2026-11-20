@@ -1062,12 +1062,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          # Il replay deve usare esattamente la revisione dalla quale il
-          # publisher ha renderizzato e caricato le pagine. `main` puo' essere
-          # avanzata durante il render; il guard sotto in quel caso lascia il
-          # lavoro al run generato dal nuovo push.
-          # Stale and mixed-matrix recovery computes the previous corpus
-          # high-water from history, so the staged checkout must be complete.
+          # Pin the staged revision with full history for stale recovery.
           ref: ${{ needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
           fetch-depth: 0
           persist-credentials: false
