@@ -1,7 +1,7 @@
 /**
- * Bound a Firestore Admin read even though DocumentReference and Query do not
- * accept a common AbortSignal. The late promise remains observed after the
- * deadline, so a rejected RPC cannot become an unhandled rejection.
+ * Bound a Firestore Admin operation even though DocumentReference, Query, and
+ * batch commits do not accept a common AbortSignal. The late promise remains
+ * observed after the deadline, so a rejected RPC cannot become unhandled.
  */
 
 export const DEFAULT_FIRESTORE_READ_TIMEOUT_MS = 15_000;
@@ -16,7 +16,7 @@ export class FirestoreReadTimeoutError extends Error {
 }
 
 /**
- * Run one Firestore read with a referenced timeout.
+ * Run one Firestore operation with a referenced timeout.
  *
  * The second argument may be a timeout in milliseconds or an options object:
  * `{ timeoutMs, label, onTimeout }`. `onTimeout` is deliberately best-effort

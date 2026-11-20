@@ -46,6 +46,38 @@ function reconciliationDeadlineError() {
   return error;
 }
 
+function firestoreClientTerminatedError() {
+  const error = new Error('journalist rollback Firestore client terminated after a timeout');
+  error.code = 'JOURNALIST_REQUEUE_CLIENT_TERMINATED';
+  return error;
+}
+
+/**
+ * Close the client once after a timeout. Marking the cleanup as started before
+ * calling Firestore prevents another worker from launching a new RPC while
+ * the first timed-out RPC is being torn down. The returned cleanup promise is
+ * observed by withFirestoreReadTimeout, but never extends its deadline.
+ */
+function createFirestoreClientCleanup(db) {
+  let terminated = false;
+  let cleanupPromise = null;
+
+  return {
+    isTerminated: () => terminated,
+    terminate: () => {
+      if (terminated) return cleanupPromise;
+      terminated = true;
+      if (typeof db?.terminate !== 'function') return null;
+      try {
+        cleanupPromise = Promise.resolve(db.terminate()).catch(() => {});
+      } catch {
+        // The bounded operation result remains authoritative if cleanup fails.
+      }
+      return cleanupPromise;
+    },
+  };
+}
+
 /**
  * Reconcile one uncertain batch without serially multiplying the per-read
  * timeout. Every worker claims a fixed slot, and each read receives only the
@@ -54,7 +86,7 @@ function reconciliationDeadlineError() {
  */
 async function reconcilePendingDocuments(
   pending,
-  { deadlineAt, concurrency, readTimeoutMs, markRequeued },
+  { deadlineAt, concurrency, readTimeoutMs, markRequeued, clientCleanup },
 ) {
   const outcomes = new Array(pending.length);
   let nextIndex = 0;
@@ -63,6 +95,11 @@ async function reconcilePendingDocuments(
       const index = nextIndex;
       nextIndex += 1;
       if (index >= pending.length) return;
+
+      if (clientCleanup.isTerminated()) {
+        outcomes[index] = { pending: true, error: firestoreClientTerminatedError() };
+        continue;
+      }
 
       const remainingMs = deadlineAt - Date.now();
       if (remainingMs <= 0) {
@@ -77,6 +114,7 @@ async function reconcilePendingDocuments(
           {
             timeoutMs: Math.min(readTimeoutMs, Math.max(1, remainingMs)),
             label: `journalist rollback read ${doc.id}`,
+            onTimeout: clientCleanup.terminate,
           },
         );
         if (wasRequeued(snapshot)) {
@@ -99,6 +137,7 @@ async function reconcilePendingDocuments(
     stillPublished: pending.filter((_, index) => outcomes[index]?.requeued !== true),
     errors: outcomes.map((outcome) => outcome?.error).filter(Boolean),
     deadlineExceeded: Date.now() >= deadlineAt,
+    clientTerminated: clientCleanup.isTerminated(),
   };
 }
 
@@ -156,6 +195,7 @@ export async function requeuePublishedDocuments({
   }
 
   const knownRequeued = new Set(requeuedIds);
+  const clientCleanup = createFirestoreClientCleanup(db);
   const deadlineAt = Date.now() + reconciliationDeadlineMs;
   const unresolvedIds = () => {
     const seen = new Set();
@@ -182,6 +222,22 @@ export async function requeuePublishedDocuments({
       },
     );
   };
+  const throwClientTerminatedError = (errors = []) => {
+    if (!clientCleanup.isTerminated()) return;
+    const unresolved = unresolvedIds();
+    if (unresolved.length === 0) return;
+    const lastError = errors.at(-1) || firestoreClientTerminatedError();
+    throw new JournalistRequeueError(
+      `journalist rollback Firestore client terminated after a timeout; `
+        + `${unresolved.length} document(s) remain unresolved `
+        + `(${unresolved.join(', ')}) (${errorText(lastError)})`,
+      {
+        requeuedIds: [...requeuedIds],
+        unresolvedIds: unresolved,
+        cause: lastError,
+      },
+    );
+  };
   const markRequeued = (docs) => {
     for (const { id } of docs) {
       if (knownRequeued.has(id)) continue;
@@ -192,11 +248,13 @@ export async function requeuePublishedDocuments({
 
   for (let offset = 0; offset < publishedDocs.length; offset += JOURNALIST_REQUEUE_BATCH_LIMIT) {
     throwDeadlineError();
+    throwClientTerminatedError();
     let pending = publishedDocs.slice(offset, offset + JOURNALIST_REQUEUE_BATCH_LIMIT);
     const errors = [];
 
     for (let attempt = 1; attempt <= maxAttempts && pending.length > 0; attempt += 1) {
       throwDeadlineError(errors);
+      throwClientTerminatedError(errors);
       const batch = db.batch();
       for (const { docRef } of pending) {
         batch.update(docRef, {
@@ -209,8 +267,17 @@ export async function requeuePublishedDocuments({
         });
       }
 
+      const remainingMs = deadlineAt - Date.now();
+      if (remainingMs <= 0) throwDeadlineError(errors);
       try {
-        await batch.commit();
+        await withFirestoreReadTimeout(
+          () => batch.commit(),
+          {
+            timeoutMs: Math.max(1, remainingMs),
+            label: `journalist rollback commit batch ${Math.floor(offset / JOURNALIST_REQUEUE_BATCH_LIMIT) + 1}`,
+            onTimeout: clientCleanup.terminate,
+          },
+        );
         markRequeued(pending);
         pending = [];
       } catch (commitError) {
@@ -225,22 +292,25 @@ export async function requeuePublishedDocuments({
           concurrency: reconciliationConcurrency,
           readTimeoutMs: reconciliationReadTimeoutMs,
           markRequeued,
+          clientCleanup,
         });
         errors.push(...reconciliation.errors);
         pending = reconciliation.stillPublished;
+        throwClientTerminatedError(errors);
         if (reconciliation.deadlineExceeded) throwDeadlineError(errors);
       }
     }
 
     if (pending.length > 0) {
       const lastError = errors.at(-1);
+      const unresolved = unresolvedIds();
       throw new JournalistRequeueError(
-        `journalist rollback left ${pending.length} document(s) unresolved in batch `
+        `journalist rollback left ${unresolved.length} document(s) unresolved in batch `
           + `${Math.floor(offset / JOURNALIST_REQUEUE_BATCH_LIMIT) + 1}: `
-          + `${pending.map(({ id }) => id).join(', ')} (${lastError ? errorText(lastError) : 'unknown error'})`,
+          + `${unresolved.join(', ')} (${lastError ? errorText(lastError) : 'unknown error'})`,
         {
           requeuedIds: [...requeuedIds],
-          unresolvedIds: pending.map(({ id }) => id),
+          unresolvedIds: unresolved,
           cause: lastError,
         },
       );

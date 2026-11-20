@@ -406,7 +406,11 @@ test('publish-journalist rimette in coda i completati prima di un fatal successi
   assert.match(fatalCatch, /discardRequeuedFromPublishedIds\(\)/);
   assert.match(fatalCatch, /unresolvedIds/);
   assert.match(recovery, /status: 'queued'/);
-  assert.match(recovery, /await batch\.commit\(\)/);
+  assert.match(
+    recovery,
+    /await withFirestoreReadTimeout\([\s\S]*?\(\) => batch\.commit\(\),[\s\S]*?timeoutMs: Math\.max\(1, remainingMs\),[\s\S]*?onTimeout: clientCleanup\.terminate,/u,
+    'il commit del rollback deve restare bounded sulla stessa deadline e chiudere il client al timeout',
+  );
   assert.match(
     recovery,
     /const snapshot = await withFirestoreReadTimeout\([\s\S]*?\(\) => doc\.docRef\.get\(\),/,

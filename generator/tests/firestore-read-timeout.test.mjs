@@ -84,6 +84,7 @@ test('journalist reconciliation is concurrent, globally bounded, and reports eve
   let commits = 0;
   let inFlight = 0;
   let maxInFlight = 0;
+  let terminateCalls = 0;
   for (const { docRef } of documents) {
     const get = docRef.get;
     docRef.get = () => {
@@ -103,6 +104,9 @@ test('journalist reconciliation is concurrent, globally bounded, and reports eve
           throw new Error('ack perso');
         },
       };
+    },
+    terminate() {
+      terminateCalls += 1;
     },
   };
   const requeuedIds = [];
@@ -125,8 +129,125 @@ test('journalist reconciliation is concurrent, globally bounded, and reports eve
   );
 
   assert.equal(commits, 1, 'la deadline globale deve chiudere prima del retry');
+  assert.equal(terminateCalls, 1, 'un timeout deve chiudere il client Firestore una sola volta');
   assert.equal(maxInFlight, 2, 'la riconciliazione deve rispettare il cap di concorrenza');
   assert.ok(Date.now() - started < 250, 'la riconciliazione non deve moltiplicare il timeout per documento');
+});
+
+test('un timeout di lettura chiude il client e non avvia nuovi RPC oltre il cap', async () => {
+  let inFlight = 0;
+  let maxInFlight = 0;
+  let terminateCalls = 0;
+  const documents = Array.from({ length: 5 }, (_, index) => ({
+    id: `hung-${index}`,
+    docRef: {
+      get() {
+        inFlight += 1;
+        maxInFlight = Math.max(maxInFlight, inFlight);
+        return new Promise(() => {});
+      },
+    },
+  }));
+  const db = {
+    batch() {
+      return {
+        update() {},
+        async commit() {
+          throw new Error('ack perso');
+        },
+      };
+    },
+    terminate() {
+      terminateCalls += 1;
+    },
+  };
+
+  await assert.rejects(
+    () => requeuePublishedDocuments({
+      db,
+      FieldValue: { delete: () => ({}) },
+      publishedDocs: documents,
+      reconciliationConcurrency: 2,
+      reconciliationDeadlineMs: 100,
+      reconciliationReadTimeoutMs: 10,
+    }),
+    (error) => error instanceof JournalistRequeueError
+      && error.unresolvedIds.length === documents.length,
+  );
+
+  assert.equal(terminateCalls, 1, 'il cleanup del client deve essere idempotente');
+  assert.equal(maxInFlight, 2, 'un timeout non deve far partire nuovi RPC oltre il cap');
+});
+
+test('un commit bloccato rispetta la deadline globale e chiude il client', async () => {
+  let terminateCalls = 0;
+  const db = {
+    batch() {
+      return {
+        update() {},
+        commit() {
+          return new Promise(() => {});
+        },
+      };
+    },
+    terminate() {
+      terminateCalls += 1;
+    },
+  };
+  const started = Date.now();
+
+  await assert.rejects(
+    () => requeuePublishedDocuments({
+      db,
+      FieldValue: { delete: () => ({}) },
+      publishedDocs: [{ id: 'commit-hung', docRef: { get: async () => ({ exists: true }) } }],
+      reconciliationDeadlineMs: 20,
+      reconciliationReadTimeoutMs: 1000,
+    }),
+    (error) => error instanceof JournalistRequeueError
+      && error.unresolvedIds.length === 1
+      && error.unresolvedIds[0] === 'commit-hung',
+  );
+
+  assert.equal(terminateCalls, 1, 'il timeout del commit deve chiudere il client una sola volta');
+  assert.ok(Date.now() - started < 250, 'un commit Firestore bloccato non deve tenere vivo il recovery');
+});
+
+test("l'errore finale include anche i chunk non ancora avviati", async () => {
+  const documents = Array.from({ length: 501 }, (_, index) => ({
+    id: `unstarted-${index}`,
+    docRef: {
+      async get() {
+        return { exists: true, get: () => 'published' };
+      },
+    },
+  }));
+  const db = {
+    batch() {
+      return {
+        update() {},
+        async commit() {
+          throw new Error('Firestore indisponibile');
+        },
+      };
+    },
+  };
+
+  await assert.rejects(
+    () => requeuePublishedDocuments({
+      db,
+      FieldValue: { delete: () => ({}) },
+      publishedDocs: documents,
+      maxAttempts: 1,
+      reconciliationConcurrency: 8,
+      reconciliationDeadlineMs: 1000,
+      reconciliationReadTimeoutMs: 50,
+    }),
+    (error) => error instanceof JournalistRequeueError
+      && error.unresolvedIds.length === documents.length
+      && error.unresolvedIds[0] === 'unstarted-0'
+      && error.unresolvedIds.at(-1) === 'unstarted-500',
+  );
 });
 
 test('le letture sintetiche usano app nominate usa-e-getta e non il client default', () => {
