@@ -93,6 +93,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.simon-graf-medico-cantonale.title': 'Simon Graf als Kantonsarzt der beiden Appenzell ausgewählt',
     'blog.article.simon-graf-medico-cantonale.excerpt': 'Simon Graf folgt Henrik Berthel als Kantonsarzt für Appenzell Ausserrhoden und Appenzell Innerrhoden auf der Grundlage einer Leistungsvereinbarung.',
     'blog.article.simon-graf-medico-cantonale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.herisau-chiude-confezione-tende.title': 'Herisau: Werkstatt für Vorhangkonfektion schliesst, 15 betroffen',
+    'blog.article.herisau-chiude-confezione-tende.excerpt': 'Filtex schliesst in Herisau die Werkstatt für Vorhangkonfektion: Das Unternehmen verweist auf den Schweizer Markt für Heimtextilien und 15 betroffene Mitarbeitende.',
+    'blog.article.herisau-chiude-confezione-tende.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;

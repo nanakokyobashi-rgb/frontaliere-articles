@@ -337,4 +337,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'herisau-chiude-confezione-tende',
+ category: 'novita',
+ date: '2026-11-20T19:03:28.168Z',
+ image: '/images/blog/article-herisau-chiude-confezione-tende.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
