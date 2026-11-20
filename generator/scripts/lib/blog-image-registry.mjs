@@ -203,7 +203,7 @@ export function validateEditorialImageRecord(record) {
   return { valid: errors.length === 0, errors };
 }
 
-export function imageRecordForPath(root, imagePath, { strict = false } = {}) {
+function findImageRecord(root, imagePath, { strict = false, generatedByPath, editorialByPath, legacyReader } = {}) {
   const normalized = normalizePath(imagePath);
   if (!normalized) return null;
   if (normalized === STATIC_FALLBACK_IMAGE) {
@@ -219,8 +219,10 @@ export function imageRecordForPath(root, imagePath, { strict = false } = {}) {
     }
     return { kind: 'generated', record: normalizeGeneratedImageRecord(STATIC_FALLBACK_RECORD) };
   }
-  const generated = readGeneratedImageRecords(root, { strict })
-    .find((record) => (record.scope === 'article-hero' || record.scope === 'place') && record.imageUrl === normalized);
+  const generated = generatedByPath
+    ? generatedByPath().get(normalized)
+    : readGeneratedImageRecords(root, { strict })
+      .find((record) => (record.scope === 'article-hero' || record.scope === 'place') && record.imageUrl === normalized);
   if (generated) {
     // Place records point at the site's static asset tree. Article-hero records
     // must still prove the materialized corpus bytes before publication.
@@ -228,12 +230,14 @@ export function imageRecordForPath(root, imagePath, { strict = false } = {}) {
       ? { kind: imageProvenanceKind(generated), record: generated }
       : null;
   }
-  const editorial = readEditorialImageRecords(root, { strict }).find((record) => record.cover === normalized);
+  const editorial = editorialByPath
+    ? editorialByPath().get(normalized)
+    : readEditorialImageRecords(root, { strict }).find((record) => record.cover === normalized);
   if (editorial) return hasMaterializedImageRecord(root, normalized, editorial)
     ? { kind: 'editorial-upload', record: editorial }
     : null;
   try {
-    const legacy = corpusCreditReader(root).get(normalized);
+    const legacy = (legacyReader ? legacyReader() : corpusCreditReader(root)).get(normalized);
     if (legacy && hasMaterializedImageRecord(root, normalized, legacy)) {
       return { kind: 'wikimedia-commons', record: legacy };
     }
@@ -241,6 +245,37 @@ export function imageRecordForPath(root, imagePath, { strict = false } = {}) {
     if (strict) throw error;
   }
   return null;
+}
+
+export function imageRecordForPath(root, imagePath, options) {
+  return findImageRecord(root, imagePath, options);
+}
+
+function indexFirstRecord(records, keyOf) {
+  const index = new Map();
+  for (const record of records) {
+    const key = keyOf(record);
+    if (key && !index.has(key)) index.set(key, record);
+  }
+  return index;
+}
+
+/** One registry snapshot per read-only catalog scan. Image bytes are still checked per lookup. */
+export function createBlogImageRecordValidator(root) {
+  let generated;
+  let editorial;
+  let legacy;
+  return (imagePath) => Boolean(findImageRecord(root, imagePath, {
+    legacyReader: () => legacy ??= corpusCreditReader(root),
+    generatedByPath: () => generated ??= indexFirstRecord(
+      readGeneratedImageRecords(root, { strict: false }),
+      (record) => record.scope === 'article-hero' || record.scope === 'place' ? record.imageUrl : null,
+    ),
+    editorialByPath: () => editorial ??= indexFirstRecord(
+      readEditorialImageRecords(root, { strict: false }),
+      (record) => record.cover,
+    ),
+  }));
 }
 
 export function hasValidBlogImageRecord(root, imagePath) {

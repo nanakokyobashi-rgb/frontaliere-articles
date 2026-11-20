@@ -4,25 +4,21 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-fr::https://www.laliberte.ch/articles/regions/canton/le-ssp-demande-au-conseil-d-etat-de-se-positionner-sur-la-revalorisation-des-salaires-du-personnel-s-1488471": {
-      "section": "canton-fr",
-      "ts": 1794953593898
-    },
-    "canton-fr::https://latele.ch/articles/fribourg-contestation-salariale-dans-le-domaine-de-la-sante": {
-      "section": "canton-fr",
-      "ts": 1794953770415
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/306130/lohnstreit-im-freiburger-gesundheitswesen-geht-vor-die-schlichtungsstelle": {
-      "section": "canton-fr",
-      "ts": 1794953773055
-    },
-    "canton-fr::https://www.frapp.ch/fr/articles/stories/13e-rente-avs-un-soulagement-pour-les-retraites": {
-      "section": "canton-fr",
-      "ts": 1794953959588
-    },
     "canton-fr::https://www.frapp.ch/fr/articles/stories/salaires-les-soignants-fribourgeois-veulent-des-reponses": {
       "section": "canton-fr",
       "ts": 1795086061676
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/306764/freiburger-arbeitgeberverband-kritisiert-forderung-nach-5000-franken-mindestlohn": {
+      "section": "canton-fr",
+      "ts": 1795168672802
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/306803/zwei-monate-krankenkasse-gratis-sp-lanciert-milliardenplan-gegen-pr%c3%a4mienhammer": {
+      "section": "canton-fr",
+      "ts": 1795168674300
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/306130/lohnstreit-im-freiburger-gesundheitswesen-geht-vor-die-schlichtungsstelle": {
+      "section": "canton-fr",
+      "ts": 1795169513621
     }
   }
 }

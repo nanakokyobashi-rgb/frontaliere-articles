@@ -385,7 +385,7 @@ test('④ il fact-check porta un deadlineMs: bypassa il wrapper callLLM che ce l
   assert.ok(line, 'la call di _runSingleFactCheck e sparita');
   assert.match(
     line,
-    /deadlineMs: RUN_START_MS \+ RUN_WALL_BUDGET_MS/,
+    /deadlineMs: opts\.deadlineMs \?\? RUN_START_MS \+ RUN_WALL_BUDGET_MS/,
     'REGRESSIONE: _runSingleFactCheck chiama _aiCallLLM diretto e senza deadlineMs — e la chiamata piu costosa del run',
   );
 });
@@ -414,7 +414,7 @@ test('④ la recovery Codex non riapre una chiamata senza deadline quando il res
   );
   assert.match(
     CODE,
-    /function legacyTranslationOptions\(\) \{[\s\S]*?const processDeadlineMs = _pendingBodyCodexDeadlineMs;[\s\S]*?\.\.\.\(processDeadlineMs === null \? \{\} : \{ deadlineMs: processDeadlineMs \}\)/,
+    /function legacyTranslationOptions\(\) \{[\s\S]*?const processDeadlineMs = pendingBodyRecoveryStarted\s*\? _pendingBodyCodexDeadlineMs\s*:\s*initialTranslationDeadlineMs\(_pendingBodyCodexDeadlineMs\);[\s\S]*?\.\.\.\(processDeadlineMs === null \? \{\} : \{ deadlineMs: processDeadlineMs \}\)/,
     'un producer importato non deve ereditare il wall-clock della CLI',
   );
 });

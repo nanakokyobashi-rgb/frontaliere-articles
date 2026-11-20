@@ -15021,22 +15021,6 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.ilgiorno.it/como/cronaca/polizze-sanitarie-alle-stelle-in-f0a74e0f": {
-      "section": "svizzera",
-      "ts": 1794959811029
-    },
-    "svizzera::https://www.rsi.ch/s/4248337": {
-      "section": "svizzera",
-      "ts": 1794989176379
-    },
-    "svizzera::https://www.rsi.ch/s/4249621": {
-      "section": "svizzera",
-      "ts": 1794990304899
-    },
-    "frontaliere::https://www.malpensa24.it/osservatorio-lavoro-italia-svizzera": {
-      "section": "frontaliere",
-      "ts": 1795002384376
-    },
     "frontaliere::https://www.rsi.ch/s/4248337": {
       "section": "frontaliere",
       "ts": 1795003101242
@@ -15088,6 +15072,22 @@
     "svizzera::https://www.rsi.ch/s/4254773": {
       "section": "svizzera",
       "ts": 1795118252945
+    },
+    "frontaliere::https://www.varesenews.it/2026/11/ristorni-dei-frontalieri-in-commissione-bilancio-e-scontro-sul-chi-aveva-ragione/2744194": {
+      "section": "frontaliere",
+      "ts": 1795163039722
+    },
+    "svizzera::https://www.rsi.ch/s/4249621": {
+      "section": "svizzera",
+      "ts": 1795170479884
+    },
+    "svizzera::https://www.rsi.ch/s/4252579": {
+      "section": "svizzera",
+      "ts": 1795170554557
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/lappello-dei-metalcostruttori-servono-apprendisti-a-rischio-il-futuro-delle-aziende-446967": {
+      "section": "frontaliere",
+      "ts": 1795175700251
     }
   }
 }

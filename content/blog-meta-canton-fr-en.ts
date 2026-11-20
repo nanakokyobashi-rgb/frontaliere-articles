@@ -78,6 +78,9 @@ const blogMetaCantonFrEn: Record<string, string> = {
     'blog.article.friburgo-destra-tre-seggi.title': 'Elections in Fribourg: right wins three seats in the first round',
     'blog.article.friburgo-destra-tre-seggi.excerpt': 'The title brings together three verifiable coordinates: the territory of Fribourg, the State Council body, and the outcome of three seats assigned to the right in the first round.',
     'blog.article.friburgo-destra-tre-seggi.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.gruyere-studio-mobilita-profondo.title': 'Gruyère mobility study: 25 municipalities invited to in-depth analysis',
+    'blog.article.gruyere-studio-mobilita-profondo.excerpt': 'Twenty-five municipalities in Gruyère are invited to an in-depth analysis of mobility, with an initial assessment planned for December and conclusions expected in autumn 2027.',
+    'blog.article.gruyere-studio-mobilita-profondo.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonFrEn;

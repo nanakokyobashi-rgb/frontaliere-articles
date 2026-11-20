@@ -429,6 +429,16 @@
       }
     },
     {
+      "path": "scripts/ci/generation-watchdog-process.sh",
+      "mode": "corpus-only",
+      "reason": "Funzioni di gestione dei processi per il watchdog dei workflow di generazione del corpus. Il sito non esegue questi workflow.",
+      "baseline": {
+        "site": null,
+        "corpus": "943bd14fd7065239",
+        "alignedAt": "2026-11-20"
+      }
+    },
+    {
       "path": "scripts/ci/rebase-section-args.mjs",
       "mode": "corpus-only",
       "reason": "Argomenti per sezione di rebase-onto-remote.sh (--section-surfaces) derivati da SECTIONS di article-surfaces.mjs, cioe' da ARTICLE_SECTION_CORE. Esiste solo qui perche' il push con rebase degli articoli generati vive solo nel corpus.",

@@ -28,6 +28,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'berra-2030-progetto-canton': { it: 'berra-2030-progetto-canton', en: 'berra-2030-canton-project', de: 'berra-2030-kanton-projekt', fr: 'berra-2030-projet-canton' },
  'neyruz-strada-cantonale-valtraloc': { it: 'neyruz-strada-cantonale-valtraloc', en: 'neyruz-cantonal-road-valtraloc', de: 'neyruz-kantonstrasse-valtraloc', fr: 'neyruz-route-cantonale-valtraloc' },
  'friburgo-destra-tre-seggi': { it: 'friburgo-destra-tre-seggi', en: 'fribourg-right-three-seats', de: 'freiburg-rechte-drei-sitze', fr: 'fribourg-droite-trois-sieges' },
+ 'gruyere-studio-mobilita-profondo': { it: 'gruyere-studio-mobilita-profondo', en: 'gruyere-mobility-study-deep', de: 'gruyere-mobilitatsstudie-tief', fr: 'gruyere-etude-mobilite-approfondie' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

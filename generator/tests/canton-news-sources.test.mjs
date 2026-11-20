@@ -798,6 +798,23 @@ test('retry transitorio: maxRequestsPerRun=1 resta fail-closed e non raddoppia l
   assert.equal(calls, 1);
 });
 
+test('due HTTP 503 consumano entrambi i tentativi del budget', async () => {
+  const source = { url: 'https://retry.example/news', parser: 'html-links', quirks: { maxRequestsPerRun: 2 } };
+  const attempts = [];
+  let calls = 0;
+  const impl = async () => {
+    calls += 1;
+    assert.equal(attempts.at(-1), calls);
+    return new Response(null, { status: 503 });
+  };
+  await assert.rejects(
+    scanCantonSource(source, ctx(impl, { onRequestAttempt: (requests) => attempts.push(requests) })),
+    { status: 503 },
+  );
+  assert.equal(calls, 2);
+  assert.deepEqual(attempts, [1, 2]);
+});
+
 test('User-Agent dichiarato (D10) e niente HTTP/2 chiesto a undici (http1Only per costruzione)', async () => {
   const { impl, calls } = fakeFetch({ 'https://www.zh.ch/api.json': { body: '{"news":[]}', contentType: 'application/json' } });
   await scanCantonSource({ url: 'https://www.zh.ch/api.json', parser: 'json-api', quirks: { http1Only: true } }, ctx(impl));
@@ -837,6 +854,7 @@ test('D10: la pagina usa la stessa sorgente UA cantonale, lo storico resta invar
 
 test('D10: un 403 della fonte cantonale e\' un fallimento dichiarato, senza bypass', async () => {
   const calls = [];
+  const attempts = [];
   const impl = async (url, init) => {
     calls.push({ url, init });
     return {
@@ -847,16 +865,58 @@ test('D10: un 403 della fonte cantonale e\' un fallimento dichiarato, senza bypa
     };
   };
   await assert.rejects(
-    scanCantonSource({ url: 'https://blocked.example/news', parser: 'html-links', quirks: {} }, ctx(impl)),
+    scanCantonSource({ url: 'https://blocked.example/news', parser: 'html-links', quirks: {} },
+      ctx(impl, { onRequestAttempt: (requests) => attempts.push(requests) })),
     /HTTP 403/,
   );
   assert.equal(calls.length, 1);
+  assert.deepEqual(attempts, [1]);
   assert.equal(calls[0].init.headers['User-Agent'], CANTON_SOURCE_USER_AGENT);
 });
 
 test('un parser fuori elenco e\' un errore, non una fonte vuota', async () => {
-  const { impl } = fakeFetch({});
-  await assert.rejects(scanCantonSource({ url: 'https://x.ch/a.csv', parser: 'csv', quirks: {} }, ctx(impl)), /non supportato/);
+  const { impl, calls } = fakeFetch({});
+  const attempts = [];
+  await assert.rejects(
+    scanCantonSource({ url: 'https://x.ch/a.csv', parser: 'csv', quirks: {} },
+      ctx(impl, { onRequestAttempt: (requests) => attempts.push(requests) })),
+    /non supportato/,
+  );
+  assert.equal(calls.length, 0);
+  assert.deepEqual(attempts, []);
+});
+
+test('il report cantonale distingue un HTTP 403 da un errore prima della richiesta', async () => {
+  const startAt = SRC.indexOf('async function fetchCantonSourceHeadlines(source, domain) {');
+  const endAt = SRC.indexOf('\n// ── Step 1c: Scan all news sources', startAt);
+  assert.ok(startAt !== -1 && endAt > startAt, 'delimitatori di fetchCantonSourceHeadlines non trovati');
+  const report = { sources: {} };
+  let scannerError;
+  const scanWithFakeFetch = async (source, context) => {
+    const fetchImpl = async () => new Response(null, { status: 403 });
+    try {
+      return await scanCantonSource(source, ctx(fetchImpl, { ...context, now: NOW }));
+    } catch (error) {
+      scannerError = error;
+      throw error;
+    }
+  };
+  const fetchHeadlines = new Function(
+    'RUN_REPORT', 'createHostThrottle', 'scanCantonSource', 'extractRssItems', 'extractHeadlines',
+    `let _cantonHostThrottle = null;\n${SRC.slice(startAt, endAt)}\nreturn fetchCantonSourceHeadlines;`,
+  )(report, createHostThrottle, scanWithFakeFetch, extractRssItems, extractHeadlines);
+  const url = 'https://blocked.example/news';
+  await assert.rejects(fetchHeadlines({ url, parser: 'html-links' }, 'blocked.example'), (error) => {
+    assert.strictEqual(error, scannerError);
+    assert.match(error.message, /HTTP 403/);
+    return true;
+  });
+  assert.deepEqual(report.sources.canton, [
+    { url, parser: 'html-links', reserve: false, requests: 1, items: 0, recent: 0, status: 'failed', httpStatus: 403 },
+  ]);
+  await assert.rejects(fetchHeadlines({ url, parser: 'csv' }, 'blocked.example'), /non supportato/);
+  assert.deepEqual(report.sources.canton[1],
+    { url, parser: 'csv', reserve: false, requests: 0, items: 0, recent: 0, status: 'failed' });
 });
 
 function legacyHeadlineCount(html, baseUrl) {

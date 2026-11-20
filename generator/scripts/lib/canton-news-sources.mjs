@@ -1822,6 +1822,7 @@ export function createHostThrottle({ sleep = (ms) => new Promise((r) => setTimeo
  * @param {{
  *   fetchImpl?: typeof fetch,
  *   throttle?: ReturnType<typeof createHostThrottle>,
+ *   onRequestAttempt?: (requests: number) => void,
  *   extractRssItems: (xml: string, url: string) => Array<{url: string, headline: string, date: Date | null}>,
  *   extractHeadlines: (html: string, url: string, source?: object, metadataHtml?: string) => Array<{url: string, headline: string, date: Date | null}>,
  *   now?: Date,
@@ -1849,6 +1850,7 @@ export async function scanCantonSource(source, ctx) {
         throw lastError || new Error(`budget di ${budget} richieste per run esaurito`);
       }
       requests += 1;
+      ctx.onRequestAttempt?.(requests);
       try {
         return await throttle.run(host, quirks.crawlDelaySeconds || 0, async () => {
           let res;
@@ -1948,6 +1950,7 @@ export async function scanCantonSource(source, ctx) {
   const urls = period ? periodSitemapUrls(source.url, period, { now, budget: Math.min(budget, 2) }) : [source.url];
   let headlines = [];
   const failures = [];
+  const failureStatuses = new Set();
   for (const url of urls) {
     try {
       headlines.push(...extract(await get(url, accept), url));
@@ -1956,9 +1959,16 @@ export async function scanCantonSource(source, ctx) {
       // settimana o dell'anno): e' una nota, non una fonte fallita, se un
       // altro periodo ha risposto.
       failures.push(`${url}: ${err?.message || err}`);
+      failureStatuses.add(err?.status);
     }
   }
-  if (failures.length === urls.length) throw new Error(failures.join('; '));
+  if (failures.length === urls.length) {
+    const error = new Error(failures.join('; '));
+    // Uno status rappresenta l'intera fonte solo se tutti i fallimenti concordano.
+    const [status] = failureStatuses;
+    if (failureStatuses.size === 1 && status !== undefined) error.status = status;
+    throw error;
+  }
   notes.push(...failures);
   if (period) notes.push(`periodi: ${urls.map((u) => u.split('/').pop()).join(', ')}`);
   // L'identita' dell'item PRIMA del dedup: su una fonte che riusa gli URL due

@@ -19,6 +19,7 @@ import {
   appendGeneratedImageRecord,
   buildBlogImageCreditsAggregate,
   buildPublishedBlogImageRegistry,
+  createBlogImageRecordValidator,
   hasValidBlogImageRecord,
   imageRecordForPath,
   STATIC_FALLBACK_IMAGE,
@@ -271,6 +272,29 @@ test('generated and editorial records are reader-facing and discoverable by cove
     fs.unlinkSync(generatedFile);
     assert.equal(imageRecordForPath(root, generated.imageUrl, { strict: true }), null);
     assert.equal(buildPublishedBlogImageRegistry(root).generated[generated.imageUrl], undefined);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('catalog scans reuse provenance while checking the current cover bytes', () => {
+  const root = tempRoot();
+  try {
+    const generated = generatedRecord({ imageUrl: governedArticleCoverPath() });
+    const file = path.join(root, 'public', generated.imageUrl.slice(1));
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, Buffer.alloc(generated.bytes, 0x47));
+    generated.sha256 = sha256File(file);
+    appendGeneratedImageRecord(root, generated);
+
+    const hasValidImage = createBlogImageRecordValidator(root);
+    assert.equal(hasValidImage(generated.imageUrl), true);
+    fs.unlinkSync(path.join(root, 'data', 'generated-image-registry.json'));
+    assert.equal(hasValidImage('/images/blog/unregistered.webp'), false);
+    assert.equal(hasValidImage(generated.imageUrl), true);
+    assert.equal(createBlogImageRecordValidator(root)(generated.imageUrl), false);
+    fs.writeFileSync(file, Buffer.alloc(generated.bytes, 0x48));
+    assert.equal(hasValidImage(generated.imageUrl), false);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

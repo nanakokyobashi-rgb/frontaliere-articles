@@ -78,6 +78,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.friburgo-destra-tre-seggi.title': 'Wahlen in Freiburg: Die Rechte erhält im ersten Wahlgang drei Sitze',
     'blog.article.friburgo-destra-tre-seggi.excerpt': 'Der Titel führt drei überprüfbare Eckdaten zusammen: das Gebiet Freiburgs, den Staatsrat als Organ und das Ergebnis von drei der Rechten im ersten Wahlgang zugewiesenen Sitzen.',
     'blog.article.friburgo-destra-tre-seggi.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.gruyere-studio-mobilita-profondo.title': 'Mobilitätsstudie Gruyère: 25 Gemeinden zu einer eingehenden Analyse eingeladen',
+    'blog.article.gruyere-studio-mobilita-profondo.excerpt': 'Fünfundzwanzig Gemeinden der Gruyère sind zu einer eingehenden Analyse der Mobilität eingeladen, wobei eine erste Diagnose im Dezember vorgesehen ist und Schlussfolgerungen im Herbst 2027 erwartet werden.',
+    'blog.article.gruyere-studio-mobilita-profondo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonFrDe;

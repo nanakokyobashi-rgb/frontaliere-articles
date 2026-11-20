@@ -4,9 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ge::https://statistique.ge.ch/rss/affiche_article.asp?url=https://statistique.ge.ch/actualites/welcome.asp?actu=6082": {
+    "canton-ge::https://statistique.ge.ch/rss/affiche_article.asp?url=https://statistique.ge.ch/tel/publications/2026/analyses/communications/an-cs-2026-80.pdf": {
       "section": "canton-ge",
-      "ts": 1794670666928
+      "ts": 1795165182373
+    },
+    "canton-ge::https://statistique.ge.ch/rss/affiche_article.asp?url=https://statistique.ge.ch/tel/publications/2026/informations_statistiques/services_immo/is_ti_11_2026.pdf": {
+      "section": "canton-ge",
+      "ts": 1795165498538
     }
   }
 }

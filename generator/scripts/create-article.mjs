@@ -375,6 +375,7 @@ import {
   translateWithCodexEngine,
   withCodexTranslationLane,
   codexCallDeadlineMs,
+  initialTranslationDeadlineMs,
   CODEX_TRANSLATE_TRANSPORT_RETRIES,
   getCascadeStats,
 } from './lib/free-translate.mjs';
@@ -532,7 +533,7 @@ import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFrom
 import { loadEmbeddingStore, loadEmbeddingMeta } from './lib/scoring/embeddingMatcher.mjs';
 import {
   appendGeneratedImageRecord,
-  hasValidBlogImageRecord,
+  createBlogImageRecordValidator,
   imageRecordForPath,
 } from './lib/blog-image-registry.mjs';
 import { imageCreditRecordFromGeneratedImageRecord } from '../../engine/shared/imageCredits.mjs';
@@ -1885,9 +1886,10 @@ const PLACES_IMAGES = [
 // topical pool and are reserved for the final governed default fallback.
 const BLOG_IMAGES = (() => {
   try {
+    const hasValidImage = createBlogImageRecordValidator(PROJECT_ROOT);
     return readdirSync(resolve('public/images/blog'))
       .filter((file) => file.endsWith('.webp'))
-      .filter((file) => hasValidBlogImageRecord(PROJECT_ROOT, `/images/blog/${file}`))
+      .filter((file) => hasValidImage(`/images/blog/${file}`))
       .filter((file) => {
         try {
           return statSync(resolve(`public/images/blog/${file}`)).size <= BLOG_IMAGE_HARD_MAX_BYTES;
@@ -7217,9 +7219,14 @@ async function llmFactCheck(contentIt, sourceContent = '', sourceUrl = '', verif
     ? 'Sei un fact-checker senior specializzato in diritto fiscale svizzero e italiano, con focus specifico su frontalieri e Canton Ticino.'
     : 'Sei un fact-checker senior specializzato in affari svizzeri a livello nazionale (economia, fiscalità federale e cantonale, mercato del lavoro, diritto), per un pubblico di residenti in Svizzera.'}
 
-ARTICOLO DA VERIFICARE:
+TITOLO E SOMMARIO DA VERIFICARE:
 """
-${checkerArticleText}
+${checkerArticleText.slice(0, articleBodyStart).trimEnd()}
+"""
+
+CORPO DELL’ARTICOLO DA VERIFICARE (body1–body3):
+"""
+${editorialContext.articleBody}
 """
 
 ${sourceFraming}
@@ -7286,7 +7293,7 @@ ${IS_CANTON ? CANTON_LINES.factCheckRelevance(isEvergreenArticle) : IS_FRONTALIE
 ═══ VALUTAZIONE EDITORIALE E PROVE (OBBLIGATORIA) ═══
 Valuta body1–body3 nel loro insieme. Un articolo non supera questo controllo se si limita a riassumere o parafrasare la fonte: deve offrire almeno una relazione, spiegazione o confronto concreto e utile, dimostrabile con fatti e periodi esatti. Un calcolo ricavato da valori espliciti può essere un contributo valido; non serve inventare un cambiamento o una conseguenza che la fonte non documenta. Un confronto deve usare periodi, unità e basi coerenti. Non aggiungere un angolo sul lavoro o sui frontalieri a una notizia non pertinente.
 Attribuisci le notizie alla fonte. Non ritenere supportati reportage sul posto, interviste, fonti proprie o verifiche umane non documentati; ometti cause, effetti, previsioni e consigli fiscali o finanziari senza prove.
-Cita esattamente almeno 40 caratteri e 7 parole dal corpo dell'articolo e almeno 16 dalla fonte o da un riferimento verificato; non ricostruire citazioni a memoria né usare titolo, excerpt o schema. Scrivi in italiano un finding specifico (almeno 35 caratteri e 6 parole) sul dato o sulla relazione dimostrata.
+Per articleQuote copia dal blocco CORPO DELL’ARTICOLO un unico passaggio contiguo di almeno 40 caratteri e 7 parole. Per evidenceQuotes copia almeno 16 caratteri consecutivi dalla fonte o da un riferimento verificato, mantenendo lingua originale, punteggiatura e cifre. Prima di rispondere verifica che ciascuna citazione si ritrovi nel suo blocco. Evita titolo, sommario, traduzioni, parafrasi e puntini di sospensione aggiunti. Scrivi in italiano un finding specifico (almeno 35 caratteri e 6 parole) sul dato o sulla relazione dimostrata.
 Usa grounded_analysis solo per un contributo concreto, tracciabile e non già contenuto nella fonte. Usa source_restatement per un riassunto/parafrasi senza contributo aggiunto; unsupported_inference per affermazioni non provate o reportage/interviste/verifiche inventate; insufficient_evidence quando le prove non permettono una valutazione positiva. Una valutazione vaga o dichiarativa non basta.
 
 CRITERI DI GIUDIZIO:
@@ -7362,6 +7369,11 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   // must defer the run rather than regenerate the whole article: the article
   // is still never published without a verifier verdict.
   const FACTCHECK_INFRA_RETRIES = 3;
+  const runDeadlineMs = RUN_START_MS + RUN_WALL_BUDGET_MS;
+  // Leave time for translation and the remaining article checks after a
+  // verdict, while allowing verification to start even late in the run.
+  const postFactCheckReserveMs = Math.min(120_000, Math.floor(Math.max(0, runDeadlineMs - Date.now()) / 4));
+  const factCheckDeadlineMs = runDeadlineMs - postFactCheckReserveMs;
   // Cap on retry-after-derived backoff between outer fact-check attempts.
   // The per-model retry inside ai-models.mjs already honours the retry-after
   // header during its own loop; this cap guards the outer loop that fires when
@@ -7394,27 +7406,34 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
         backoffMs = Math.min(retryAfterMs, FACTCHECK_429_BACKOFF_CAP_MS);
         console.error(`  ⏱️  Fact-check: 429 rate-limit rilevato — backoff ${backoffMs}ms (cap ${FACTCHECK_429_BACKOFF_CAP_MS}ms)`);
       }
+      if (Date.now() + backoffMs >= factCheckDeadlineMs) break;
       await new Promise(r => setTimeout(r, backoffMs));
     }
     fcLastRejectMsgs = [];
-    // Each attempt starts from zero votes: a lone opinion kept from the
-    // previous one could be counted again next to a fresh copy of itself.
-    modelResults.length = 0;
+    // The prompt and article are unchanged across infrastructure retries.
+    // Keep a validated vote and exclude its actual serving model when asking
+    // for the missing opinion. addIndependentVote also checks the response.
+    const priorVoters = modelResults.map((result) => result.servedBy);
     missingSecondOpinion = false;
 
-    // Query up to 2 models in parallel for consensus
+    // The model cascade may use its entire deadline. Leave each remaining
+    // round and the final Codex-only fallback a share of the run budget.
+    const now = Date.now();
+    const remainingRounds = FACTCHECK_INFRA_RETRIES - fcAttempt + 2;
+    const deadlineMs = now + Math.floor((factCheckDeadlineMs - now) / remainingRounds);
     const modelsToQuery = verificationModels.slice(0, 2);
-    const promises = modelsToQuery.map((model, index) => _runSingleFactCheck(model, prompt, {
+    const promises = modelsToQuery.slice(0, priorVoters.length ? 1 : 2).map((model, index) => _runSingleFactCheck(model, prompt, {
       fresh: fcAttempt > 1,
+      deadlineMs,
       invalidVerdictModels,
       isEvergreen: isEvergreenArticle,
       editorialContext,
-      // The first verifier owns the Codex primary slot. Keep the parallel
-      // second opinion independent without changing its existing fallback
-      // family/order.
-      ...(index > 0 && modelsToQuery[0] === AI_MODELS.CODEX_CLI_PRIMARY
-        ? { excludeModels: [AI_MODELS.CODEX_CLI_PRIMARY] }
-        : {}),
+      excludeModels: [
+        ...priorVoters,
+        ...(index > 0 && modelsToQuery[0] === AI_MODELS.CODEX_CLI_PRIMARY
+          ? [AI_MODELS.CODEX_CLI_PRIMARY]
+          : []),
+      ],
     }));
     const settled = await Promise.allSettled(promises);
 
@@ -7444,13 +7463,13 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     }
 
     // Recover absent and duplicate votes through a different answering model.
-    if (droppedDuplicate || (modelResults.length === 1 && modelResults[0].servedBy !== AI_MODELS.CODEX_CLI_PRIMARY)) {
+    if (modelResults.length === 1 && (droppedDuplicate || modelResults[0].servedBy !== AI_MODELS.CODEX_CLI_PRIMARY)) {
       const voted = modelResults.map((r) => r.servedBy);
       const next = verificationModels.slice(2).find((m) => !voted.includes(m))
         || verificationModels.find((m) => !voted.includes(m))
         || modelsToQuery[1];
       try {
-        const extra = await _runSingleFactCheck(next, prompt, { isEvergreen: isEvergreenArticle, editorialContext, excludeModels: voted, invalidVerdictModels });
+        const extra = await _runSingleFactCheck(next, prompt, { isEvergreen: isEvergreenArticle, editorialContext, excludeModels: voted, invalidVerdictModels, deadlineMs });
         const earlier = extra ? addIndependentVote(modelResults, next, extra) : null;
         fcHadNonOutageResult = true;
         if (earlier) console.error(`  ⚠️  LLM fact-check (${next}): servito di nuovo da ${earlier.servedBy} — resta un solo voto`);
@@ -7468,7 +7487,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     // If both primary models failed, try fallback
     if (modelResults.length === 0 && verificationModels.length > 2) {
       try {
-        const fallback = await _runSingleFactCheck(verificationModels[2], prompt, { isEvergreen: isEvergreenArticle, editorialContext, fresh: fcAttempt > 1, invalidVerdictModels });
+        const fallback = await _runSingleFactCheck(verificationModels[2], prompt, { isEvergreen: isEvergreenArticle, editorialContext, fresh: fcAttempt > 1, invalidVerdictModels, deadlineMs });
         if (fallback) {
           addIndependentVote(modelResults, verificationModels[2], fallback);
           missingSecondOpinion = fallback.servedBy !== AI_MODELS.CODEX_CLI_PRIMARY;
@@ -7513,7 +7532,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     const selfCheck = _codexWroteThisHeadline ? ' — ha scritto anche questo articolo: si verifica da solo (decisione del proprietario)' : '';
     console.error(`  🛟 LLM fact-check: ${why}, verifico con ${codex}${selfCheck}`);
     try {
-      const vote = await _runSingleFactCheck(codex, prompt, { isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true });
+      const vote = await _runSingleFactCheck(codex, prompt, { isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true, deadlineMs: factCheckDeadlineMs });
       if (vote) addIndependentVote(modelResults, codex, vote);
       fcHadNonOutageResult = true;
     } catch (err) {
@@ -7815,7 +7834,7 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
     // `prefer` keeps an AI_MODELS_PREFER from prepending another model to it.
     // Codex has its own timeout (_codexFallbackTimeoutMs, bounded by the same
     // deadlineMs); `timeout` here only applies to the HTTP providers.
-    buildFactCheckCallOptions({ model, temperature: 0.0, maxTokens: 4000, timeout: 60_000, bypassForceChain: true, deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS, modelUsedRef, jsonMode: true, excludeModels, ...(opts.codexOnly ? { chain: [model], prefer: [model] } : {}) }, !opts.fresh && isFactCheckCacheEnabled())
+    buildFactCheckCallOptions({ model, temperature: 0.0, maxTokens: 4000, timeout: 60_000, bypassForceChain: true, deadlineMs: opts.deadlineMs ?? RUN_START_MS + RUN_WALL_BUDGET_MS, modelUsedRef, jsonMode: true, excludeModels, ...(opts.codexOnly ? { chain: [model], prefer: [model] } : {}) }, !opts.fresh && isFactCheckCacheEnabled())
   );
   // A cache hit carries the answering model recorded with the raw response.
   const servedBy = modelUsedRef.model === 'cache' ? modelUsedRef.cachedServedBy : modelUsedRef.model;
@@ -11137,11 +11156,19 @@ async function fetchCantonSourceHeadlines(source, domain) {
   if (!RUN_REPORT.sources.canton) RUN_REPORT.sources.canton = [];
   const entry = { url: source.url, parser: source.parser, reserve: source.reserve === true, requests: 0, items: 0, recent: 0, status: 'failed' };
   RUN_REPORT.sources.canton.push(entry);
-  const scanned = await scanCantonSource(source, {
-    throttle: _cantonHostThrottle,
-    extractRssItems,
-    extractHeadlines,
-  });
+  let scanned;
+  try {
+    scanned = await scanCantonSource(source, {
+      throttle: _cantonHostThrottle,
+      extractRssItems,
+      extractHeadlines,
+      onRequestAttempt: (requests) => { entry.requests = requests; },
+    });
+  } catch (error) {
+    const status = error?.status;
+    if (Number.isInteger(status) && status >= 300 && status <= 599) entry.httpStatus = status;
+    throw error;
+  }
   let { headlines: raw, requests, notes } = scanned;
   entry.requests = requests;
   entry.items = raw.length;
@@ -15297,7 +15324,10 @@ function freeMtField(
     fieldType,
     fieldName: field,
     preserveMunicipalityNames,
-    translate: freeTranslateWithRetry,
+    translate: (request) => freeTranslateWithRetry({
+      ...request,
+      deadlineMs: initialTranslationDeadlineMs(),
+    }),
     balanceMarkdown: balanceMarkdownMarkers,
     onWarn: (msg) => console.error(`  ⚠️  ${msg} — recupero per-campo`),
     onUnusableOutput: (event) => recordFreeMtUnusableOutput(RUN_REPORT.translation, { ...event, field }),
@@ -15522,16 +15552,27 @@ async function translatePendingBodyWithCodex(
   const codexDeadlineOptions = (deadlineMs) => ({
     deadlineMs,
   });
+  const canFallback = typeof callWithRetry === 'function';
+  const remainingMs = Math.max(0, _pendingBodyCodexDeadlineMs - Date.now());
+  const fallbackReserveMs = canFallback ? Math.min(60_000, Math.floor(remainingMs / 3)) : 0;
+  const codexRecoveryDeadlineMs = _pendingBodyCodexDeadlineMs === null
+    ? null
+    : _pendingBodyCodexDeadlineMs - fallbackReserveMs;
   return withCodexTranslationLane({
     bodyRecovery: true,
-    processDeadlineMs: _pendingBodyCodexDeadlineMs,
+    processDeadlineMs: codexRecoveryDeadlineMs,
     fallback: () => {
       // La disponibilità può cambiare dopo la selezione della corsia: il
       // circuit-breaker può fermare Codex mentre la richiesta aspetta in coda.
       // Il fallback storico è ammesso se il predicato condiviso prova che la
       // corsia è ferma. Se Codex ha prodotto un output rifiutato, il fallback
       // viene invece scelto sotto: ripetere la stessa corsia non è recovery.
-      if (!pendingBodySecondLaneAvailable() && typeof callWithRetry === 'function') {
+      const deadlineTooClose = fallbackReserveMs > 0 && codexCallDeadlineMs({
+        now: Date.now(),
+        budgetRemainingMs: Infinity,
+        processDeadlineMs: codexRecoveryDeadlineMs,
+      }) === null;
+      if (canFallback && (!pendingBodySecondLaneAvailable() || deadlineTooClose)) {
         return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry, translateInChunks: chunkTranslator });
       }
       throw new Error('lane Codex fermata senza prova di indisponibilità del modello');
@@ -15543,9 +15584,10 @@ async function translatePendingBodyWithCodex(
       const deadlineMs = codexCallDeadlineMs({
         now: Date.now(),
         budgetRemainingMs: Math.max(0, laneDeadlineMs - Date.now()),
-        processDeadlineMs: _pendingBodyCodexDeadlineMs,
+        processDeadlineMs: codexRecoveryDeadlineMs,
       });
       if (deadlineMs === null) {
+        if (canFallback) return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry, translateInChunks: chunkTranslator });
         throw new Error('finestra residua troppo corta per una chiamata Codex');
       }
       const codexCallOptions = {
@@ -15566,6 +15608,7 @@ async function translatePendingBodyWithCodex(
       });
       const rejected = [];
       let codexModelUnavailable = false;
+      let codexBudgetUnavailable = false;
       const markedBody = tableHeaderColumnMarkers(itValue);
       if (markedBody.collision || markedBody.ambiguous) return null;
       const text = await translateFieldFreeMt({
@@ -15581,6 +15624,7 @@ async function translatePendingBodyWithCodex(
           }
           const callAdmission = admitCall();
           if (!callAdmission) {
+            codexBudgetUnavailable = true;
             throw new Error('budget Codex esaurito prima della chiamata fisica');
           }
           // La prima admission e' quella gia' concessa dalla lane. Le
@@ -15631,8 +15675,9 @@ async function translatePendingBodyWithCodex(
       } else if (text && validatedText === null) {
         rejected.push('structure');
       }
-      if ((codexModelUnavailable || !pendingBodySecondLaneAvailable() || rejected.length > 0)
-        && typeof callWithRetry === 'function') {
+      const codexDeadlineReached = fallbackReserveMs > 0 && Date.now() >= codexRecoveryDeadlineMs;
+      if (canFallback && (codexModelUnavailable || codexBudgetUnavailable || codexDeadlineReached
+        || !pendingBodySecondLaneAvailable() || rejected.length > 0)) {
         // `translateFieldFreeMt` cattura lo stop della cascata segmentata e
         // restituisce un campo vuoto. Se Codex ha anche prodotto un output
         // rifiutato, riprovare la stessa corsia ricreerebbe il difetto: la
@@ -15795,11 +15840,14 @@ async function translateArticle(data) {
   resetBodyTranslationPending(data);
   const cascadeStatsBeforeTranslation = getCascadeStats();
   let translationRecoveryCodexCalls = 0;
+  let pendingBodyRecoveryStarted = false;
 
   function legacyTranslationOptions() {
     // I producer importati non dichiarano una scadenza di processo: non
     // inventare il wall-clock della CLI, che esiste solo dopo l'installer.
-    const processDeadlineMs = _pendingBodyCodexDeadlineMs;
+    const processDeadlineMs = pendingBodyRecoveryStarted
+      ? _pendingBodyCodexDeadlineMs
+      : initialTranslationDeadlineMs(_pendingBodyCodexDeadlineMs);
     return {
       chain: legacyTranslationChain(),
       bypassForceChain: true,
@@ -18287,6 +18335,7 @@ ${localizedToponymInstruction(targetLang)}`;
   const initialPendingBodyLane = pendingBodySecondLaneAvailable()
     ? AI_MODELS.CODEX_CLI_PRIMARY
     : 'historical-translation-chain';
+  pendingBodyRecoveryStarted = true;
   await retryPendingBodyTranslations(data, {
     report: RUN_REPORT.translation,
     lane: initialPendingBodyLane,
