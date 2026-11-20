@@ -1644,8 +1644,9 @@ async function uploadCantonAssets({
   };
   await assertMainFreshImpl();
   await publishSignalBoundary(signal);
-  for (const asset of pendingUploads) {
+  for (const { local, key } of pendingUploads) {
     await publishSignalBoundary(signal);
+    const asset = { local, key };
     const result = upload(asset);
     if (succeeded(result)) continue;
     const namespace = imageNamespaceForKey(asset.key);
