@@ -37,9 +37,20 @@
 ## Non implementato (ancora)
 
 <!--
-  Ogni voce e' lavoro ancora DOVUTO, quindi ognuna vuole uno stato concreto:
+  Ogni bullet non vuoto in `## Non implementato (ancora)` deve dichiarare uno
+  stato riconosciuto:
 
-      **Stato:** `in questa PR` | `PR concatenata #N` | `blocked: <causa esterna reale>`
+      **Stato:** `in questa PR` | `PR concatenata #N` | `per scelta` |
+      `by construction` | `falso positivo` (`false positive` e' sinonimo) |
+      `blocked: <causa esterna reale>` | `blocked: decisione del proprietario`
+      (`blocked: owner decision` e `blocked: scelta del proprietario` sono sinonimi)
+
+  `PR concatenata` senza `#N` non e' tracciabile. `blocked:` tecnico mantiene
+  il lavoro aperto; gli stati decisionali (`per scelta`, `by construction`,
+  `falso positivo` / `false positive` e owner decision) richiedono nello stesso
+  bullet `**Motivo:** <causa concreta>. **Prossimo passo:** <azione concreta>.`
+  La negazione di `falso positivo` non chiude il bullet: «non e' un falso
+  positivo» resta lavoro dovuto.
 
   Non valgono come stato: «out of scope», «posposto», «vale un giro dedicato»,
   «separatamente», «prima o poi». Sono le scappatoie che REVIEW.md §98 esclude,
