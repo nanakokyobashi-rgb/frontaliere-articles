@@ -15021,10 +15021,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.malpensa24.it/osservatorio-lavoro-italia-svizzera": {
-      "section": "frontaliere",
-      "ts": 1795002384376
-    },
     "frontaliere::https://www.rsi.ch/s/4248337": {
       "section": "frontaliere",
       "ts": 1795003101242
@@ -15088,6 +15084,10 @@
     "svizzera::https://www.rsi.ch/s/4252579": {
       "section": "svizzera",
       "ts": 1795170554557
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/lappello-dei-metalcostruttori-servono-apprendisti-a-rischio-il-futuro-delle-aziende-446967": {
+      "section": "frontaliere",
+      "ts": 1795175700251
     }
   }
 }
