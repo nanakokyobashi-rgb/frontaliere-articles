@@ -7340,7 +7340,7 @@ Rispondi SOLO in JSON valido:
 Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
 
   const prompt = `${evidencePrefix}\n\n${verificationInstructions}\n\n${relevanceInstructions}\n\n${proofSuffix}`;
-  const compactPrompt = IS_CANTON && !isEvergreenArticle && !isSyntheticDataset && /^https?:\/\//i.test(sourceUrl)
+  const compactPrompt = !isEvergreenArticle && !isSyntheticDataset && /^https?:\/\//i.test(sourceUrl)
     ? `${evidencePrefix}
 
 VERIFICA SISTEMATICA — controlla tutte le categorie:

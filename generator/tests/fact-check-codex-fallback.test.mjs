@@ -254,7 +254,7 @@ describe('fact-check retries under a reported input cap', () => {
   const estimate = (content) => estimateRequestTokens([{ role: 'user', content }]);
 
   async function runRounds({
-    canton = 'San Gallo', section = 'san-gallo', isCanton = true,
+    canton = 'San Gallo', section = 'san-gallo', isCanton = true, isFrontaliere = false,
     sourceUrl = 'HTTPS://example.test/news', sourceText = source, padding = '', replies,
   }) {
     const calls = [];
@@ -280,7 +280,7 @@ describe('fact-check retries under a reported input cap', () => {
       safeSignalDiagnosticTextForLog: String,
       CANTON_LINES: cantonLines,
       IS_CANTON: isCanton,
-      IS_FRONTALIERE: false,
+      IS_FRONTALIERE: isFrontaliere,
       SECTION_NAME: section,
       CANTON_FACTS_BRIEF: '',
       evergreenFactsBriefFor: () => '',
@@ -413,8 +413,25 @@ describe('fact-check retries under a reported input cap', () => {
     assert.ok(logs.every((line) => !line.includes('istruzioni compatte')));
   });
 
+  for (const [section, isFrontaliere] of [['svizzera', false], ['frontaliere', true]]) {
+    test(`recupera il consenso nella sezione ${section} sotto il tetto di 8000 token`, async () => {
+      const scope = { section, isCanton: false, isFrontaliere };
+      const padding = await loadFor(8803, scope);
+      const { calls, modelResults, prompt, compactPrompt } = await runRounds({
+        ...scope,
+        padding,
+        replies: [firstVote, capError(8000), capError(8000), secondVote],
+      });
+      assert.ok(estimate(prompt) > 8000);
+      assert.ok(estimate(compactPrompt) <= 8000);
+      assert.ok(compactPrompt.includes(bodyEnd));
+      assert.ok(compactPrompt.includes(isFrontaliere ? 'RILEVANZA TOPICA AL FRONTALIERE' : 'RILEVANZA'));
+      assert.deepEqual(calls.map((call) => call.prompt), [prompt, prompt, prompt, compactPrompt]);
+      assert.equal(modelResults.length, 2);
+    });
+  }
+
   for (const [label, scope] of [
-    ['sezione nazionale', { isCanton: false }],
     ['fonte non HTTP', { sourceUrl: 'file:///fixture' }],
     ['evergreen', { sourceText: 'Riferimento breve.' }],
     ['dataset BFS', { sourceUrl: 'stats-bfs://fixture' }],
