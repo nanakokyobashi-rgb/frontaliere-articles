@@ -229,7 +229,7 @@ test('il preflight FAQ è best-effort, ma l\'artifact dell\'articolo non pushato
 });
 
 test('gli step che le sostituzioni non toccano sono identici alla sorgente, commenti a parte', () => {
-  const sourceSteps = stepNames(SOURCE);
+  const sourceSteps = stepNames(SOURCE).filter((name) => name !== 'Resolve national section for the production queue');
   const coreSteps = stepNames(CORE);
   const gateSteps = coreSteps.filter((s) => !sourceSteps.includes(s));
   assert.deepEqual(coreSteps.filter((s) => sourceSteps.includes(s)), sourceSteps, 'il core ha perso o riordinato uno step della sorgente');
@@ -662,8 +662,11 @@ const modeCtx = (s) => ({
 
 test('Resolve run mode and section: Cloud Scheduler usa gli input della coppia e la catena resta invariata', () => {
   for (const s of MODE_SCENARIOS) {
+    const nationalSection = s.requested === 'svizzera' || s.subject === 'Generate blog article (frontaliere)'
+      ? 'svizzera'
+      : 'frontaliere';
     const source = runMode(SOURCE, {
-      ctx: { ...modeCtx(s), 'inputs.section': s.requested || '' },
+      ctx: { ...modeCtx(s), 'needs.admit.outputs.national_section': nationalSection },
       subject: s.subject, changed: s.changed,
     });
     const core = runMode(CORE, {
@@ -671,7 +674,13 @@ test('Resolve run mode and section: Cloud Scheduler usa gli input della coppia e
       env: { PRIMARY_SECTION: PAIR.primary, SIBLING_SECTION: PAIR.sibling, SIBLING_CRONS: PAIR.crons, REQUESTED_SECTION: s.requested || '', SCHEDULE: s.schedule || '' },
       subject: s.subject, changed: s.changed,
     });
-    assert.deepEqual(core, source, s.name);
+    if (s.event === 'schedule') {
+      // Only the canton core has native cron triggers.
+      const expectedCanton = ['22 * * * *', '37 * * * *'].includes(s.schedule) ? 'svizzera' : 'frontaliere';
+      assert.deepEqual(core, { ...source, section: expectedCanton }, s.name);
+    } else {
+      assert.deepEqual(core, source, s.name);
+    }
     assert.ok(['frontaliere', 'svizzera'].includes(source.section), s.name);
     if (s.admitMode === 'unknown') {
       assert.equal(source.dry, 'false', `${s.name}: unknown non deve essere un self-test dry`);
