@@ -10031,7 +10031,10 @@ export async function callLLM(messages, opts = {}) {
       // Same PROVIDER.LOCAL exemption as the 429 branch above — _callLocal
       // intentionally raises the timeout floor for slow CPU inference, so a
       // timeout there is expected load, not a dead provider.
-      const isTimeoutFailure = e.name === 'AbortError' || e.name === 'TimeoutError' || /timeout|aborted/i.test(msg);
+      // A caller deadline is transient transport evidence, but it says
+      // nothing about the model's availability for a later call.
+      const isTimeoutFailure = !e.codexCallerDeadline
+        && (e.name === 'AbortError' || e.name === 'TimeoutError' || /timeout|aborted/i.test(msg));
       let markedExhausted = false;
       // A timeout served under a ceiling THIS module narrowed below what the
       // caller asked for is not yet evidence about the model: it is evidence
