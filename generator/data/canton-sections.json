@@ -7,6 +7,7 @@
     {
       "code": "AG",
       "section": "canton-ag",
+      "cloudScheduler": true,
       "members": ["AG"],
       "languages": ["de"],
       "enabled": true,
@@ -506,6 +507,7 @@
     {
       "code": "APPENZELLO",
       "section": "canton-appenzello",
+      "cloudScheduler": true,
       "members": ["AI", "AR"],
       "languages": ["de"],
       "enabled": true,
@@ -882,6 +884,7 @@
     {
       "code": "BE",
       "section": "canton-be",
+      "cloudScheduler": true,
       "members": ["BE"],
       "languages": ["de", "fr"],
       "enabled": true,
@@ -1152,6 +1155,7 @@
     {
       "code": "BASILEA",
       "section": "canton-basilea",
+      "cloudScheduler": true,
       "members": ["BL", "BS"],
       "languages": ["de", "fr"],
       "enabled": true,
@@ -1616,6 +1620,7 @@
     {
       "code": "FR",
       "section": "canton-fr",
+      "cloudScheduler": true,
       "members": ["FR"],
       "languages": ["fr", "de"],
       "enabled": true,
@@ -2191,6 +2196,7 @@
     {
       "code": "GE",
       "section": "canton-ge",
+      "cloudScheduler": true,
       "members": ["GE"],
       "languages": ["fr"],
       "enabled": true,
@@ -2783,6 +2789,7 @@
     {
       "code": "GL",
       "section": "canton-gl",
+      "cloudScheduler": true,
       "members": ["GL"],
       "languages": ["de"],
       "enabled": true,
@@ -3105,6 +3112,7 @@
     {
       "code": "GR",
       "section": "canton-gr",
+      "cloudScheduler": true,
       "members": ["GR"],
       "languages": ["de", "it", "rm"],
       "enabled": true,
@@ -3612,6 +3620,7 @@
     {
       "code": "JU",
       "section": "canton-ju",
+      "cloudScheduler": true,
       "members": ["JU"],
       "languages": ["fr"],
       "enabled": true,
@@ -4044,6 +4053,7 @@
     {
       "code": "LU",
       "section": "canton-lu",
+      "cloudScheduler": true,
       "members": ["LU"],
       "languages": ["de"],
       "enabled": true,
@@ -4545,6 +4555,7 @@
     {
       "code": "NE",
       "section": "canton-ne",
+      "cloudScheduler": true,
       "members": ["NE"],
       "languages": ["fr"],
       "enabled": true,
@@ -5028,6 +5039,7 @@
     {
       "code": "NW",
       "section": "canton-nw",
+      "cloudScheduler": true,
       "members": ["NW"],
       "languages": ["de"],
       "enabled": true,
@@ -5474,6 +5486,7 @@
     {
       "code": "SG",
       "section": "canton-sg",
+      "cloudScheduler": true,
       "members": ["SG"],
       "languages": ["de"],
       "enabled": true,
@@ -5952,6 +5965,7 @@
     {
       "code": "SH",
       "section": "canton-sh",
+      "cloudScheduler": true,
       "members": ["SH"],
       "languages": ["de"],
       "enabled": true,
@@ -6488,6 +6502,7 @@
     {
       "code": "SO",
       "section": "canton-so",
+      "cloudScheduler": true,
       "members": ["SO"],
       "languages": ["de"],
       "enabled": true,
@@ -6900,6 +6915,7 @@
     {
       "code": "SZ",
       "section": "canton-sz",
+      "cloudScheduler": true,
       "members": ["SZ"],
       "languages": ["de"],
       "enabled": true,
@@ -7205,6 +7221,7 @@
     {
       "code": "TG",
       "section": "canton-tg",
+      "cloudScheduler": true,
       "members": ["TG"],
       "languages": ["de"],
       "enabled": true,
@@ -7704,6 +7721,7 @@
     {
       "code": "TI",
       "section": "canton-ti",
+      "cloudScheduler": true,
       "members": ["TI"],
       "languages": ["it"],
       "enabled": true,
@@ -8149,6 +8167,7 @@
     {
       "code": "UR",
       "section": "canton-ur",
+      "cloudScheduler": true,
       "members": ["UR"],
       "languages": ["de"],
       "enabled": true,
@@ -8341,6 +8360,7 @@
     {
       "code": "VD",
       "section": "canton-vd",
+      "cloudScheduler": true,
       "members": ["VD"],
       "languages": ["fr"],
       "enabled": true,
@@ -8727,6 +8747,7 @@
     {
       "code": "VS",
       "section": "canton-vs",
+      "cloudScheduler": true,
       "members": ["VS"],
       "languages": ["fr", "de"],
       "enabled": true,
@@ -9232,6 +9253,7 @@
     {
       "code": "ZG",
       "section": "canton-zg",
+      "cloudScheduler": true,
       "members": ["ZG"],
       "languages": ["de", "en"],
       "enabled": true,
@@ -9635,6 +9657,7 @@
     {
       "code": "ZH",
       "section": "canton-zh",
+      "cloudScheduler": true,
       "members": ["ZH"],
       "languages": ["de"],
       "enabled": true,
