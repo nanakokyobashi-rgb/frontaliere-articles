@@ -4,21 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vd::https://www.guidedufrontalier.com/actualites/retraite-frontalier-polypensionne": {
+    "canton-vd::https://www.ledauphine.com/social/2026/11/20/grace-a-geneve-la-haute-savoie-est-un-repaire-de-travailleurs-a-hauts-revenus": {
       "section": "canton-vd",
-      "ts": 1794797771201
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/declaration-dris-tou-couple-frontalier": {
-      "section": "canton-vd",
-      "ts": 1794797786096
-    },
-    "canton-vd::https://www.lenordvaudois.ch/vaud/jura-nord-vaudois/5-questions-autour-de-la-nouvelle-loi-sur-lenergie-1521267": {
-      "section": "canton-vd",
-      "ts": 1794798629620
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/pret-immobilier-chf-tournant-juridique": {
-      "section": "canton-vd",
-      "ts": 1794927407030
+      "ts": 1795196122206
     }
   }
 }
