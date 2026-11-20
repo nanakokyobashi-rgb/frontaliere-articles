@@ -66,6 +66,7 @@
  */
 
 import { createHash } from 'node:crypto';
+import { firstHtmlAttributeValue } from './html-tag-scanner.mjs';
 
 // ── La CHIAVE del ledger ─────────────────────────────────────────────────────
 //
@@ -903,9 +904,12 @@ export function pageTitleEvidence(html, opts = {}) {
   const out = [];
   for (const m of metadataSrc.matchAll(/<meta\b[^>]*>/gi)) {
     const tag = m[0];
-    if (!/\b(?:property|name)\s*=\s*["']?(?:og:title|twitter:title)["'\s>]/i.test(tag)) continue;
-    const content = /\bcontent\s*=\s*(?:"([^"]*)"|'([^']*)')/i.exec(tag);
-    if (content) out.push(content[1] ?? content[2] ?? '');
+    const marker = [
+      firstHtmlAttributeValue(tag, 'property'),
+      firstHtmlAttributeValue(tag, 'name'),
+    ].find((value) => /^(?:og:title|twitter:title)$/i.test(value));
+    if (!marker) continue;
+    out.push(firstHtmlAttributeValue(tag, 'content'));
   }
   for (const m of titleSrc.matchAll(/<(title|h1)\b[^>]*>([\s\S]*?)<\/\1\s*>/gi)) out.push(m[2].replace(/<[^>]+>/g, ' '));
   return out.map((t) => t.replace(/\s+/g, ' ').trim()).filter(Boolean).join('\n');
