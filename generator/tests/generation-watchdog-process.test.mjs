@@ -37,16 +37,40 @@ test('il Bash del watchdog seleziona Node e completa la cattura solo dopo uno st
         ps -A -o pid= -o ppid= >/dev/null
         bash -c '"$0" "$1" & wait "$!"' "$1" "$2" &
         root=$!
-        trap 'kill_tree KILL "$root"' EXIT
+        identity=""
+        trap 'kill_tree KILL "$root" "$identity"; wait "$root" 2>/dev/null || true' EXIT
+        identity="$(process_start_identity "$root")"
         while [ ! -s node.pid ] && kill -0 "$root" 2>/dev/null; do sleep 0.01; done
         node_pid="$(cat node.pid)"
         create_article_pids "$root"
         kill "$node_pid"
         wait "$root" 2>/dev/null || true
-        if kill -0 "$node_pid" 2>/dev/null || kill -0 "$root" 2>/dev/null; then exit 1; fi
         trap - EXIT
+        if kill -0 "$node_pid" 2>/dev/null || kill -0 "$root" 2>/dev/null; then exit 1; fi
       `, script);
       assert.equal(selected, readFileSync(join(dir, 'node.pid'), 'utf8'));
+    });
+
+    await t.test('il kill protetto richiede il token reale del processo', () => {
+      runBash(`
+        sleep 3 &
+        root=$!
+        identity=""
+        trap 'kill_tree KILL "$root" "$identity"; wait "$root" 2>/dev/null || true' EXIT
+        identity="$(process_start_identity "$root")"
+        same_process_identity "$root" "$identity"
+        kill_tree KILL "$root" "wrong-$identity"
+        sleep 0.05
+        same_process_identity "$root" "$identity"
+        kill_tree KILL "$root" ""
+        sleep 0.05
+        same_process_identity "$root" "$identity"
+        kill_tree KILL "$root" "$identity"
+        rc=0
+        wait "$root" 2>/dev/null || rc=$?
+        trap - EXIT
+        [ "$rc" -eq 137 ]
+      `);
     });
 
     await t.test('attende la cattura nello stallo e cancella il watcher nel percorso ordinario', () => {
@@ -75,12 +99,12 @@ test('il Bash del watchdog seleziona Node e completa la cattura solo dopo uno st
           (exit 0) &
           tee_pid=$!
           ${cleanup}
+          trap - EXIT
           [ "$rc" -eq 124 ]
           [ "$tee_rc" -eq 0 ]
           [ -z "$watch_pid$tee_pid$attempt_pipe" ]
           [ ! -e "$2.pipe" ]
           if kill -0 "$fixture_watch_pid" 2>/dev/null; then exit 1; fi
-          trap - EXIT
         `, mode);
       }
       assert.equal(readFileSync(join(dir, 'stalled.captured'), 'utf8'), '');
