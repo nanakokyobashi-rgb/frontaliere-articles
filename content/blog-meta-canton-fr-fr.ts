@@ -78,6 +78,9 @@ const blogMetaCantonFrFr: Record<string, string> = {
     'blog.article.friburgo-destra-tre-seggi.title': 'Élections à Fribourg : la droite obtient trois sièges au premier tour',
     'blog.article.friburgo-destra-tre-seggi.excerpt': 'Le titre réunit trois éléments vérifiables : le territoire de Fribourg, l’organe Conseil d’État et le résultat de trois sièges attribués à la droite au premier tour.',
     'blog.article.friburgo-destra-tre-seggi.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.gruyere-studio-mobilita-profondo.title': 'Étude de la mobilité en Gruyère : 25 communes invitées à une analyse approfondie',
+    'blog.article.gruyere-studio-mobilita-profondo.excerpt': 'Vingt-cinq communes de la Gruyère sont invitées à une analyse approfondie de la mobilité, avec un premier diagnostic prévu en décembre et des conclusions attendues à l’automne 2027.',
+    'blog.article.gruyere-studio-mobilita-profondo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonFrFr;
