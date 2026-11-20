@@ -30,6 +30,9 @@ const blogMetaCantonNwIt: Record<string, string> = {
     'blog.article.tassa-circolazione-veicoli-categoria-a.title': 'Esente tassa circolazione veicoli categoria A nel Canton Nidvaldo per 36 mesi',
     'blog.article.tassa-circolazione-veicoli-categoria-a.excerpt': 'Nel Canton Nidvaldo, i veicoli inseriti nella categoria di efficienza A sono oggi esenti dalla tassa di circolazione per i primi 36 mesi dalla loro prima messa in circolazione.',
     'blog.article.tassa-circolazione-veicoli-categoria-a.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.stansstad-finanze-servizi-sociali.title': 'Stansstad cerca addetto/a per finanze e servizi sociali',
+    'blog.article.stansstad-finanze-servizi-sociali.excerpt': 'Il Comune di Stansstad cerca una figura all\'80-100% per contabilità, aiuto sociale, anticipi alimentari e custodia dei bambini.',
+    'blog.article.stansstad-finanze-servizi-sociali.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonNwIt;

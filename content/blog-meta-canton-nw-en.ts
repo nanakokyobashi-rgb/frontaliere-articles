@@ -30,6 +30,9 @@ const blogMetaCantonNwEn: Record<string, string> = {
     'blog.article.tassa-circolazione-veicoli-categoria-a.title': 'Category A vehicle tax exemption in Nidwalden for 36 mo',
     'blog.article.tassa-circolazione-veicoli-categoria-a.excerpt': 'The proposed revision provides that this exemption will be abolished in future and that newly registered vehicles will be taxed under the ordinary rules from the outset.',
     'blog.article.tassa-circolazione-veicoli-categoria-a.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.stansstad-finanze-servizi-sociali.title': 'Stansstad is looking for a finance and social services officer',
+    'blog.article.stansstad-finanze-servizi-sociali.excerpt': 'The Municipality of Stansstad is looking for a person at 80-100% for accounting, social assistance, child support advances and childcare.',
+    'blog.article.stansstad-finanze-servizi-sociali.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonNwEn;

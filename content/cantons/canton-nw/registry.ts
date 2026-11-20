@@ -105,4 +105,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'stansstad-finanze-servizi-sociali',
+ category: 'pratico',
+ date: '2026-11-20T20:31:43.805Z',
+ image: '/images/blog/article-stansstad-finanze-servizi-sociali.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NW'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

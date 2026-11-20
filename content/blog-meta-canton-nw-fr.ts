@@ -30,6 +30,9 @@ const blogMetaCantonNwFr: Record<string, string> = {
     'blog.article.tassa-circolazione-veicoli-categoria-a.title': 'Véhicules A: taxe de circulation exonérée à Nidwald, 36 mois',
     'blog.article.tassa-circolazione-veicoli-categoria-a.excerpt': 'Dans le canton de Nidwald, les véhicules classés dans la catégorie d’efficacité A sont aujourd’hui exemptés de la taxe de circulation pendant les 36 premiers mois suivant leur première mise en circulation.',
     'blog.article.tassa-circolazione-veicoli-categoria-a.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.stansstad-finanze-servizi-sociali.title': 'Stansstad recrute pour les finances et services sociaux',
+    'blog.article.stansstad-finanze-servizi-sociali.excerpt': 'La commune de Stansstad recherche une personne à 80-100% pour la comptabilité, l’aide sociale, les avances sur pensions alimentaires et la garde des enfants.',
+    'blog.article.stansstad-finanze-servizi-sociali.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonNwFr;
