@@ -366,7 +366,30 @@ jobs:
       chain_link: ${{ steps.check.outputs.chain_link }}
       content_push: ${{ steps.check.outputs.content_push }}
       run_mode: ${{ steps.check.outputs.run_mode }}
+      national_section: ${{ steps.national_section.outputs.section }}
     steps:
+      - name: Resolve national section for the production queue
+        id: national_section
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PUSH_MESSAGE: ${{ github.event.head_commit.message }}
+          REQUESTED_SECTION: ${{ inputs.section }}
+        run: |
+          set -euo pipefail
+          section=frontaliere
+          case "$EVENT_NAME" in
+            push)
+              subject="${PUSH_MESSAGE%%$'\n'*}"
+              if [[ "$subject" != *'(svizzera)'* && "$subject" == *'(frontaliere)'* ]]; then
+                section=svizzera
+              fi
+              ;;
+            workflow_dispatch)
+              if [ "$REQUESTED_SECTION" = svizzera ]; then section=svizzera; fi
+              ;;
+          esac
+          echo "section=$section" >> "$GITHUB_OUTPUT"
+
       # The bounded one-hour run snapshot is the retry deduplication window.
       # Follow the Actions pagination links because total_count can diverge.
       # Edits to existing bodies alone cannot feed the generation chain.
@@ -1051,11 +1074,11 @@ jobs:
     # run can leave the corpus half-written. Resta come RETE dietro `admit` —
     # vedi l'intestazione sopra per perché non è più il primo strato.
     concurrency:
-      # Dry resta separato dai job che scrivono. Production e unknown
-      # condividono il lock: un compare fallito non apre una seconda scrittura.
+      # Una sola generazione per sezione. Il checkout e il controllo post-rebase
+      # proteggono il push quando le due sezioni lavorano in parallelo.
       # La coda conserva i job ammessi. La run Svizzera 44450480989, pur
       # ammessa, è stata cancellata prima del primo step mentre attendeva.
-      group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && 'generate-article' || 'generate-article-dry' }}
+      group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && format('generate-article-{0}', needs.admit.outputs.national_section) || 'generate-article-dry' }}
       queue: max
       cancel-in-progress: false
     steps:
@@ -1140,31 +1163,7 @@ jobs:
             DRY=false
           fi
 
-          # The main workflow no longer declares a native schedule trigger.
-          # Keep this schedule branch as the source template for the generated
-          # canton core, whose caller workflows still have their own cron slots.
-          if [ "$EV" = "schedule" ]; then
-            case "${{ github.event.schedule }}" in
-              '22 * * * *'|'37 * * * *') SEC=svizzera ;;
-              *)                         SEC=frontaliere ;;
-            esac
-          elif [ "$CHAIN" = "true" ]; then
-            # ALTERNATE, the way the site repo's chain did. The previous link's
-            # own commit subject records which section it wrote, so flipping it
-            # keeps the two sections growing at the same rate however long the
-            # chain runs. Anything unrecognised (another producer's push, e.g.
-            # the border-wait digest) starts a frontaliere run. The subject is
-            # the EVENT's, read by name: HEAD is the branch tip (see Checkout)
-            # and may already be the article of the run this one waited for.
-            case "$(git log -1 --format=%s "${{ github.sha }}")" in
-              *'(svizzera)'*) SEC=frontaliere ;;
-              *'(frontaliere)'*) SEC=svizzera ;;
-              *) SEC=frontaliere ;;
-            esac
-          else
-            SEC="${{ inputs.section }}"
-          fi
-          [ "$SEC" = "svizzera" ] || SEC=frontaliere
+          SEC="${{ needs.admit.outputs.national_section }}"
 
           {
             echo "dry=$DRY"

@@ -181,6 +181,18 @@ const SECTION_GATE_JOB = `  section_gate:
  */
 export const CORE_REPLACEMENTS = [
   {
+    id: 'admit: il core cantonale risolve la propria sezione',
+    count: 1,
+    find: "      national_section: ${{ steps.national_section.outputs.section }}\n",
+    replace: '',
+  },
+  {
+    id: 'admit: il core cantonale non risolve la coda nazionale',
+    count: 1,
+    find: "      - name: Resolve national section for the production queue\n        id: national_section\n        env:\n          EVENT_NAME: ${{ github.event_name }}\n          PUSH_MESSAGE: ${{ github.event.head_commit.message }}\n          REQUESTED_SECTION: ${{ inputs.section }}\n        run: |\n          set -euo pipefail\n          section=frontaliere\n          case \"$EVENT_NAME\" in\n            push)\n              subject=\"${PUSH_MESSAGE%%$'\\n'*}\"\n              if [[ \"$subject\" != *'(svizzera)'* && \"$subject\" == *'(frontaliere)'* ]]; then\n                section=svizzera\n              fi\n              ;;\n            workflow_dispatch)\n              if [ \"$REQUESTED_SECTION\" = svizzera ]; then section=svizzera; fi\n              ;;\n          esac\n          echo \"section=$section\" >> \"$GITHUB_OUTPUT\"\n\n",
+    replace: '',
+  },
+  {
     id: 'admit: il core non riceve claim Cloud Scheduler',
     count: 1,
     find: '          generation_claim_endpoint="${GENERATION_CLAIM_ENDPOINT:-}"\n'
@@ -432,7 +444,7 @@ export const CORE_REPLACEMENTS = [
   {
     id: 'generate: gruppo di concurrency per sezione',
     count: 1,
-    find: "      group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && 'generate-article' || 'generate-article-dry' }}\n",
+    find: "      group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && format('generate-article-{0}', needs.admit.outputs.national_section) || 'generate-article-dry' }}\n",
     replace: "      group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && format('{0}-production', inputs.concurrency_group) || format('{0}-dry', inputs.concurrency_group) }}\n",
   },
   {
@@ -451,24 +463,7 @@ export const CORE_REPLACEMENTS = [
   {
     id: 'mode: scelta della sezione senza nomi cablati',
     count: 1,
-    find: [
-      '          if [ "$EV" = "schedule" ]; then',
-      '            case "${{ github.event.schedule }}" in',
-      '              \'22 * * * *\'|\'37 * * * *\') SEC=svizzera ;;',
-      '              *)                         SEC=frontaliere ;;',
-      '            esac',
-      '          elif [ "$CHAIN" = "true" ]; then',
-      '            case "$(git log -1 --format=%s "${{ github.sha }}")" in',
-      '              *\'(svizzera)\'*) SEC=frontaliere ;;',
-      '              *\'(frontaliere)\'*) SEC=svizzera ;;',
-      '              *) SEC=frontaliere ;;',
-      '            esac',
-      '          else',
-      '            SEC="${{ inputs.section }}"',
-      '          fi',
-      '          [ "$SEC" = "svizzera" ] || SEC=frontaliere',
-      '',
-    ].join('\n'),
+    find: '          SEC="${{ needs.admit.outputs.national_section }}"\n',
     replace: [
       '          SEC="$PRIMARY_SECTION"',
       '          if [ "$EV" = "schedule" ]; then',
