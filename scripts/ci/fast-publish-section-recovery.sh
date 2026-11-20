@@ -16,6 +16,7 @@ preserve_explicit_scope="${PRESERVE_EXPLICIT_SCOPE:-false}"
 
 ensure_recovery_history() {
   local recovery_base="${ORIGINAL_PUSH_BEFORE:-}"
+  local observed_main
   if [ -n "$recovery_base" ] && ! [[ "$recovery_base" =~ ^[a-f0-9]{40}$ ]]; then
     echo "::error::base della push non valida prima del recovery storico: $recovery_base"
     return 1
@@ -24,7 +25,25 @@ ensure_recovery_history() {
     echo "::error::guard condiviso della storia Git non presente nel recovery"
     return 1
   fi
-  if ! PUSH_BEFORE="$recovery_base" FETCH_MAIN=true \
+  if [ "$(git rev-parse --is-shallow-repository)" = 'true' ] &&
+    PUSH_BEFORE='' FETCH_MAIN=true FETCH_MAIN_DEPTH=32 REQUIRE_FULL_HISTORY=false HISTORY_FETCH_ATTEMPTS=1 \
+      bash scripts/ci/fetch-push-base-if-missing.sh &&
+    observed_main="$(git rev-parse --verify refs/remotes/origin/main)"; then
+    if [ "$observed_main" != "$CURRENT_MAIN" ]; then
+      echo "::error::main e' avanzata durante il fetch breve ($CURRENT_MAIN -> $observed_main); annullo il recovery"
+      return 1
+    fi
+    if [ -z "$recovery_base" ] || [[ "$recovery_base" =~ ^0+$ ]]; then
+      if [ "${MIXED_MATRIX:-false}" = 'true' ] || git rev-parse --verify "${CURRENT_MAIN}^" >/dev/null 2>&1; then
+        return 0
+      fi
+    elif git merge-base --is-ancestor "$recovery_base" "$CURRENT_MAIN" 2>/dev/null; then
+      return 0
+    fi
+  fi
+  # A missing commit or a negative ancestry result in a shallow checkout
+  # can be caused by the shallow boundary. Recheck after restoring history.
+  if ! PUSH_BEFORE="$recovery_base" FETCH_MAIN=true FETCH_MAIN_DEPTH='' REQUIRE_FULL_HISTORY=true \
     bash scripts/ci/fetch-push-base-if-missing.sh; then
     echo "::error::storia Git non verificabile prima del recovery staged"
     return 1

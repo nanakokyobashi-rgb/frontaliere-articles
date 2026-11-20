@@ -56,6 +56,19 @@ case "$require_full_history" in
     ;;
 esac
 
+fetch_main_depth="${FETCH_MAIN_DEPTH:-}"
+if [ -n "$fetch_main_depth" ]; then
+  if ! [[ "$fetch_main_depth" =~ ^[1-9][0-9]{0,2}$ ]] ||
+    [ "$fetch_main_depth" -lt 2 ] || [ "$fetch_main_depth" -gt 128 ]; then
+    echo "::error::FETCH_MAIN_DEPTH deve essere un intero da 2 a 128: $fetch_main_depth"
+    exit 1
+  fi
+  if [ "$fetch_main" != 'true' ] || [ "$require_full_history" != 'false' ]; then
+    echo '::error::FETCH_MAIN_DEPTH richiede FETCH_MAIN=true e REQUIRE_FULL_HISTORY=false'
+    exit 1
+  fi
+fi
+
 if ! command -v timeout >/dev/null 2>&1 && ! command -v perl >/dev/null 2>&1; then
   echo "::error::nessun runner per il timeout bounded dei fetch Git (servono timeout o perl)"
   exit 1
@@ -118,14 +131,16 @@ if [ "$shallow_state" = 'true' ] && [ "$require_full_history" = 'true' ]; then
     exit 1
   fi
 elif [ "$shallow_state" = 'true' ]; then
-  # Some release handoffs only need the exact remote main ref. Requiring the
-  # entire corpus history in that path turns a small bounded fetch into an
-  # unbounded transfer and can strand the staged release before the API replay.
-  echo '::notice::checkout Git shallow mantenuto: il chiamante richiede solo la punta remota, non la storia completa'
+  # Release handoffs can request just the main tip or a bounded history window.
+  echo '::notice::checkout Git shallow: il chiamante non richiede la storia completa'
 fi
 
 if [ "$fetch_main" = 'true' ]; then
-  if [ "$main_ref_fetched" != 'true' ] && ! fetch_ref_with_retries 'refs/remotes/origin/main' --no-tags origin "$origin_main_refspec"; then
+  main_fetch_options=(--no-tags)
+  if [ "$shallow_state" = 'true' ] && [ -n "$fetch_main_depth" ]; then
+    main_fetch_options+=("--depth=$fetch_main_depth")
+  fi
+  if [ "$main_ref_fetched" != 'true' ] && ! fetch_ref_with_retries 'refs/remotes/origin/main' "${main_fetch_options[@]}" origin "$origin_main_refspec"; then
     exit 1
   fi
   fetched_main="$(git rev-parse refs/remotes/origin/main 2>/dev/null || true)"
