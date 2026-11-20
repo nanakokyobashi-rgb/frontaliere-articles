@@ -947,10 +947,24 @@ function scalarFingerprintVerdict(entry, { site, corpus }) {
   if (siteParsed.error || corpusParsed.error) return { checked: true, valid: false, matches: false, detail: siteParsed.error || corpusParsed.error };
   const siteValue = siteParsed.value;
   const corpusValue = corpusParsed.value;
+  const directionalVerdict = ({ siteMatches, corpusMatches }) => {
+    const matches = siteMatches && corpusMatches;
+    const drift = matches ? null : siteMatches ? 'corpus' : corpusMatches ? 'site' : 'both';
+    const detail = drift === 'site'
+      ? 'fingerprint scalare del sito diversa dal digest dichiarato'
+      : drift === 'corpus'
+        ? 'fingerprint scalare del corpus diversa dal digest dichiarato'
+        : drift === 'both'
+          ? 'fingerprint scalare del sito e del corpus diverse dai rispettivi digest dichiarati'
+          : undefined;
+    return { checked: true, valid: true, matches, drift, ...(detail ? { detail } : {}) };
+  };
   const hasSplitDigests = spec.siteSha256 !== undefined || spec.corpusSha256 !== undefined;
   if (hasSplitDigests) {
     if (
-      typeof spec.siteSha256 !== 'string'
+      !Number.isInteger(spec.scalarFields)
+      || spec.scalarFields <= 0
+      || typeof spec.siteSha256 !== 'string'
       || !/^[a-f0-9]{64}$/.test(spec.siteSha256)
       || typeof spec.corpusSha256 !== 'string'
       || !/^[a-f0-9]{64}$/.test(spec.corpusSha256)
@@ -958,27 +972,36 @@ function scalarFingerprintVerdict(entry, { site, corpus }) {
     ) {
       return { checked: true, valid: false, matches: false, detail: 'digest per-repository della fingerprint scalare malformati' };
     }
-    if (siteValue.scalarFields !== spec.scalarFields || corpusValue.scalarFields !== spec.scalarFields) {
-      return { checked: true, valid: false, matches: false, detail: 'fingerprint scalare incoerente con il numero di campi dichiarato nel manifest' };
-    }
-    const matches = siteValue.sha256 === spec.siteSha256 && corpusValue.sha256 === spec.corpusSha256;
-    return {
-      checked: true,
-      valid: true,
-      matches,
-      ...(matches ? {} : { detail: 'fingerprint scalare diversa dai digest per-repository dichiarati' }),
-    };
+    return directionalVerdict({
+      siteMatches: siteValue.scalarFields === spec.scalarFields && siteValue.sha256 === spec.siteSha256,
+      corpusMatches: corpusValue.scalarFields === spec.scalarFields && corpusValue.sha256 === spec.corpusSha256,
+    });
   }
   // Legacy lockstep declaration: both repositories are expected to expose the
   // same digest. Adapted contracts can instead declare the two owned digests
   // explicitly above, without weakening either repository-local fingerprint.
-  if (siteValue.scalarFields !== corpusValue.scalarFields || siteValue.sha256 !== corpusValue.sha256) {
-    return { checked: true, valid: true, matches: false, detail: 'fingerprint scalare diversa fra sito e corpus' };
-  }
-  if (siteValue.scalarFields !== spec.scalarFields || siteValue.sha256 !== spec.sha256) {
+  if (!Number.isInteger(spec.scalarFields) || spec.scalarFields <= 0 || typeof spec.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(spec.sha256)) {
     return { checked: true, valid: false, matches: false, detail: 'fingerprint scalare incoerente con il digest dichiarato nel manifest' };
   }
-  return { checked: true, valid: true, matches: true };
+  return directionalVerdict({
+    siteMatches: siteValue.scalarFields === spec.scalarFields && siteValue.sha256 === spec.sha256,
+    corpusMatches: corpusValue.scalarFields === spec.scalarFields && corpusValue.sha256 === spec.sha256,
+  });
+}
+
+function scalarFingerprintClassification(entry, fingerprint) {
+  if (!fingerprint.valid) {
+    return { state: 'check-failed', actionable: true, headline: 'confronto fingerprint scalare non verificabile', detail: fingerprint.detail };
+  }
+  if (fingerprint.matches) {
+    return { state: 'stable', actionable: false, headline: 'allineato sul contratto scalare', detail: entry.reason || '' };
+  }
+  const directional = fingerprint.drift === 'corpus'
+    ? { state: 'corpus-ahead', headline: 'il contratto scalare del corpus e andato avanti, il sito no' }
+    : fingerprint.drift === 'both'
+      ? { state: 'both-moved', headline: 'il contratto scalare e cambiato su entrambi i lati' }
+      : { state: 'site-ahead', headline: 'il contratto scalare del sito e andato avanti, qui no' };
+  return { ...directional, actionable: true, detail: fingerprint.detail + implicitPinnersTail(entry) };
 }
 
 /**
@@ -2375,21 +2398,10 @@ async function main() {
       } catch (e) {
         fingerprint = { checked: true, valid: false, matches: false, detail: `lettura fingerprint fallita: ${String(e.message || e).slice(0, 120)}` };
       }
-      if (!fingerprint.valid) {
-        verdict = { state: 'check-failed', actionable: true, headline: 'confronto fingerprint scalare non verificabile', detail: fingerprint.detail };
-      } else if (fingerprint.matches) {
-        verdict = { state: 'stable', actionable: false, headline: 'allineato sul contratto scalare', detail: entry.reason || '' };
-      } else {
-        // Il `detail` e' costruito da zero, quindi la coda dell'avviso va
-        // riappesa a mano: senza, un `identical` con dipendenze implicite
-        // perde l'avviso proprio dove la copia sta per essere fatta.
-        verdict = {
-          state: 'site-ahead',
-          actionable: true,
-          headline: 'il contratto scalare del sito e andato avanti, qui no',
-          detail: fingerprint.detail + implicitPinnersTail(entry),
-        };
-      }
+      // Il `detail` e' costruito da zero, quindi la coda dell'avviso viene
+      // riappesa dal classificatore: senza, un `identical` con dipendenze
+      // implicite perde l'avviso proprio dove la copia sta per essere fatta.
+      verdict = scalarFingerprintClassification(entry, fingerprint);
     }
 
     // Ortogonale al verdetto sul file intero, e DOPO di lui: un `adapted`
@@ -2761,5 +2773,5 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // baseline con LA STESSA regola con cui la pesa il cron, altrimenti una voce
 // accettata in PR verrebbe dichiarata fantasma il mattino dopo — o peggio, il
 // contrario. Una seconda copia della regola lo renderebbe inevitabile.
-export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, remoteDigestPrecondition, initAttestVerdict, sitePathBlobInventory, initInventoryVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, provenanceRateLimitVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, crawlerContractIsActive, resetPinnerIndex, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, resolveRelativeImport, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch, checkBaselineProvenance, siteReusablePins, reusablePinVerdict, reusablePinResults, localWorkflowSources, REUSABLE_PIN_STATE, identicalSectionsVerdict, withIdenticalSections, SECTION_DRIFT_STATE, mapWithConcurrency };
+export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, remoteDigestPrecondition, initAttestVerdict, sitePathBlobInventory, initInventoryVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, provenanceRateLimitVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, crawlerContractIsActive, resetPinnerIndex, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, resolveRelativeImport, gitBlobSha, scalarFingerprintVerdict, scalarFingerprintClassification, siteFile, sha256, repoHistoryMatch, checkBaselineProvenance, siteReusablePins, reusablePinVerdict, reusablePinResults, localWorkflowSources, REUSABLE_PIN_STATE, identicalSectionsVerdict, withIdenticalSections, SECTION_DRIFT_STATE, mapWithConcurrency };
 export { countCheckFailedPins, noActionableSummary };
