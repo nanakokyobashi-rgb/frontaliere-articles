@@ -100,6 +100,7 @@ import { fileURLToPath } from 'node:url';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../generator/scripts/lib/fetch-with-ref-timeout.mjs';
 
 import { CORPUS_ROUTE_OWNER_META_TAG } from '../engine/shared/corpusRouteOwner.mjs';
+import { purgeChunks } from './lib/cf-purge-variants.mjs';
 import { familySectionPages } from './lib/build-sitemap.mjs';
 import {
   parseSectionBootstrapLock,
@@ -116,7 +117,6 @@ import { apiInputChangedInRange } from './lib/publish-api-input-range.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const APEX = 'https://frontaliereticino.ch';
 export const CDN = 'https://cdn.frontaliereticino.ch';
-export const PURGE_CHUNK = 30;
 export const RELEASES_PREFIX = 'edge/sections/_releases';
 /** Payload runtime degli hub, servito dalla stessa release immutabile del registry. */
 export const CANTON_HUBS_API = 'canton-hubs.json';
@@ -450,15 +450,6 @@ export function releaseDiffers(release, previous) {
   if (prev === null) return true;
   const sorted = (files) => JSON.stringify(Object.entries(files).sort(([a], [b]) => a.localeCompare(b)));
   return sorted(next) !== sorted(prev);
-}
-
-/** Le URL da purgare, a blocchi da `size`, senza duplicati. */
-export function purgeChunks(urls, size = PURGE_CHUNK) {
-  if (!Number.isInteger(size) || size <= 0) throw new Error(`purgeChunks: size non valido (${size})`);
-  const unique = [...new Set(urls)];
-  const chunks = [];
-  for (let i = 0; i < unique.length; i += size) chunks.push(unique.slice(i, i + size));
-  return chunks;
 }
 
 function run(cmd, args) {

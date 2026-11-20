@@ -1113,7 +1113,7 @@ function _codexSafeDiagnostic(value) {
   return safe;
 }
 function _tripCodexPrimaryCircuit(error) {
-  if (_codexPrimaryCircuitOpen || error?.codexCallerDeadline || error?.codexChildTimeout) return;
+  if (_codexPrimaryCircuitOpen || error?.codexCallerDeadline || error?.codexChildTimeout || error?.codexChildStreamDisconnected) return;
   const reason = _codexPrimaryFailureReason(error);
   if (!reason) return;
   _codexPrimaryCircuitOpen = true;
@@ -8198,7 +8198,9 @@ function _requestCodexExecution({ prompt, timeoutMs, schema, deadlineMs }) {
         // decisioni nostre, non giudizi sul modello: stessa regola del ramo
         // claude-cli in callLLM (guasto di trasporto).
         error.codexChildTimeout = /^Codex CLI timed out after \d+ms$/.test(brokerError);
-        if (error.codexChildTimeout || /^request limit exhausted/.test(brokerError)) {
+        // An upstream stream broke, but the child reported back through a working broker.
+        error.codexChildStreamDisconnected = /^Codex CLI exited with code 1: ERROR: stream disconnected before completion: Transport error:/i.test(brokerError);
+        if (error.codexChildTimeout || error.codexChildStreamDisconnected || /^request limit exhausted/.test(brokerError)) {
           error.transportFault = true;
         }
         finish(error);
