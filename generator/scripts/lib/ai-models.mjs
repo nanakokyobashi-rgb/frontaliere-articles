@@ -1112,7 +1112,7 @@ function _codexSafeDiagnostic(value) {
   return safe;
 }
 function _tripCodexPrimaryCircuit(error) {
-  if (_codexPrimaryCircuitOpen) return;
+  if (_codexPrimaryCircuitOpen || error?.codexCallerDeadline) return;
   const reason = _codexPrimaryFailureReason(error);
   if (!reason) return;
   _codexPrimaryCircuitOpen = true;
@@ -8137,16 +8137,22 @@ function _requestCodexExecution({ prompt, timeoutMs, schema, deadlineMs }) {
     };
     let started = false;
     const initialTimeoutMs = boundedByDeadline(queueWaitMs + executionSocketTimeoutMs);
-    const timeoutError = () => finish(started
-      ? _codexTransportError('Codex auth broker socket timed out')
-      : _codexTransportError(`Codex auth broker queue wait timed out after ${Math.round(initialTimeoutMs / 1000)}s before Codex started`));
+    const timeoutError = (callerDeadline = false) => {
+      const error = started
+        ? _codexTransportError('Codex auth broker socket timed out')
+        : _codexTransportError(`Codex auth broker queue wait timed out after ${Math.round(initialTimeoutMs / 1000)}s before Codex started`);
+      // A short caller budget can expire against a healthy broker. Later
+      // requests with time left must still be able to use the lane.
+      if (callerDeadline === true || Date.now() >= deadlineAt) error.codexCallerDeadline = true;
+      finish(error);
+    };
     client.setTimeout(initialTimeoutMs, timeoutError);
     // A socket timeout measures inactivity and can be re-armed by the broker's
     // control byte. The caller deadline is absolute: keep a separate watchdog
     // so a queued request or a started request cannot be handed to the generic
     // _hardCallCapMs race when the socket has seen activity but never answers.
     if (Number.isFinite(remaining)) {
-      deadlineTimer = setTimeout(timeoutError, Math.max(1, Math.floor(remaining)));
+      deadlineTimer = setTimeout(() => timeoutError(true), Math.max(1, Math.floor(remaining)));
       deadlineTimer.unref?.();
     }
     client.on('error', (error) => {
