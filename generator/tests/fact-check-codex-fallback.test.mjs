@@ -187,22 +187,28 @@ test('an infrastructure retry keeps a validated vote and seeks a different servi
     { verdict: 'FAIL', confidence: 0.9, issues: [], servedBy: 'second-serving-model' },
   ];
   const calls = [];
+  let now = 160_000;
   const result = await runInNewContext(`(async () => {
     ${SRC.slice(start, end)}
     return modelResults;
   })()`, {
     AI_MODELS,
+    Date: { now: () => now },
+    RUN_START_MS: 0,
+    RUN_WALL_BUDGET_MS: 240_000,
     addIndependentVote,
     console: { error() {} },
     editorialContext: {},
     isEvergreenArticle: false,
     prompt: 'same article',
     safeSignalDiagnosticTextForLog: String,
-    setTimeout: (callback) => callback(),
+    setTimeout: (callback, delay) => { now += delay; callback(); },
     verificationModels: [CODEX, AI_MODELS.GROQ_GPT_OSS_120B],
     async _runSingleFactCheck(model, prompt, options) {
-      calls.push({ model, prompt, options });
-      return votes.shift() ?? null;
+      calls.push({ model, prompt, options, now });
+      const vote = votes.shift() ?? null;
+      if (!vote) now = options.deadlineMs;
+      return vote;
     },
   });
   assert.deepEqual(Array.from(result, ({ verdict, servedBy }) => [verdict, servedBy]), [
@@ -212,5 +218,9 @@ test('an infrastructure retry keeps a validated vote and seeks a different servi
   assert.equal(calls.length, 4);
   assert.equal(calls[3].prompt, 'same article');
   assert.equal(calls[3].options.fresh, true);
+  assert.equal(calls[0].options.deadlineMs, 180_000);
+  assert.equal(calls[2].options.deadlineMs, 180_000);
+  assert.ok(calls[3].options.deadlineMs > calls[3].now);
+  assert.ok(calls[3].options.deadlineMs < 240_000);
   assert.ok(calls[3].options.excludeModels.includes('first-serving-model'));
 });
