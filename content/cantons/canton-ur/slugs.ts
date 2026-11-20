@@ -26,6 +26,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'rene-schuler-unterschachen': { it: 'rene-schuler-unterschachen', en: 'rene-schuler-will-assume-the-presidency-of-unterschachen', de: 'rene-schuler-wird-das-gemeindeprasidium-von-unterschachen-ubernehmen', fr: 'rene-schuler-assumera-la-presidence-d-unterschachen' },
  'presidenza-spiringen-schuler': { it: 'presidenza-spiringen-schuler', en: 'spiringen-municipal-president-schuler', de: 'spiringen-gemeindepraesident-schuler', fr: 'spiringen-president-communal-schuler' },
  'janett-protezione-uri': { it: 'janett-protezione-uri', en: 'janett-population-protection-uri', de: 'janett-bevoelkerungsschutz-uri', fr: 'janett-protection-population-uri' },
+ 'blocco-roccia-meiental': { it: 'blocco-roccia-meiental', en: 'rockfall-road-meiental', de: 'felsblock-strasse-meiental', fr: 'bloc-roche-route-meiental' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

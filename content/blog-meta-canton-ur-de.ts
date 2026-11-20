@@ -72,6 +72,9 @@ const blogMetaCantonUrDe: Record<string, string> = {
     'blog.article.janett-protezione-uri.title': 'Uri: Jürg Janett neuer Chef für Schutz und Militär',
     'blog.article.janett-protezione-uri.excerpt': 'Der Regierungsrat von Uri hat Oberst Jürg Janett für das Amt für Bevölkerungsschutz und Militär sowie für den Kantonsstab gewählt.',
     'blog.article.janett-protezione-uri.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.blocco-roccia-meiental.title': 'Felsblock beschädigt Straße im Meiental',
+    'blog.article.blocco-roccia-meiental.excerpt': 'Ein Felsblock hat die Kantonsstraße und die Stromleitung im Meiental beschädigt.',
+    'blog.article.blocco-roccia-meiental.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonUrDe;
