@@ -3306,7 +3306,9 @@ const _pendingCounterDeltas = new Map();
  */
 const _runOutcomes = new Map();
 
-let _firestoreDb = null;     // Firestore instance (null until initScoreStore)
+const SCORE_STORE_APP_NAME = 'score-store';
+
+let _firestoreDb = null;     // Dedicated score-store Firestore instance (null until initScoreStore)
 let _firestoreFieldValue = null; // firebase-admin/firestore FieldValue (atomic increments)
 let _storeInitialized = false;
 let _persistTimer = null;    // Debounce timer
@@ -4094,13 +4096,74 @@ export async function discoverOpenRouterFreeModels(opts = {}) {
 // ── Firestore init & load ────────────────────────────────────
 
 /**
+ * Limite per ciascuna lettura remota dello score ledger.
+ *
+ * Il ledger e' un acceleratore di routing, non una precondizione per generare:
+ * se Firestore non risponde, `initScoreStore()` deve continuare con i punteggi
+ * in memoria. Senza un tetto una `DocumentReference.get()` puo' lasciare il
+ * generatore appeso prima della discovery e della scansione delle fonti.
+ */
+export const SCORE_STORE_READ_TIMEOUT_MS = 15_000;
+
+/**
+ * Esegue una lettura Firestore con un fallback temporale esplicito.
+ *
+ * Firestore Admin non espone un AbortSignal comune a DocumentReference e Query
+ * per queste due letture. Al timeout si chiude quindi il client Firestore
+ * dedicato al ledger — la sua API pubblica `terminate()` chiude anche gli
+ * stream aperti — prima di lasciare il fallback in memoria. L'app nominata che
+ * lo possiede e' distinta dall'app default usata dai producer per le fonti,
+ * quindi il cleanup non puo' abbattere le loro operazioni. La continuazione
+ * della promise resta agganciata per assorbire un eventuale rifiuto tardivo
+ * senza creare un `unhandledRejection`.
+ */
+function _terminateScoreStoreClient() {
+  const db = _firestoreDb;
+  _firestoreDb = null;
+  if (typeof db?.terminate !== 'function') return;
+  try {
+    // Do not make the bounded read wait on cleanup, but always observe a
+    // rejected terminate() promise so the timeout cannot create a second
+    // unhandled rejection.
+    Promise.resolve(db.terminate()).catch(() => {});
+  } catch {
+    // The read timeout is still the fallback boundary if cleanup itself fails.
+  }
+}
+
+export function withScoreStoreReadTimeout(read, timeoutMs = SCORE_STORE_READ_TIMEOUT_MS) {
+  if (typeof read !== 'function') throw new TypeError('withScoreStoreReadTimeout: read deve essere una funzione');
+  const limit = Number.isFinite(timeoutMs) && timeoutMs > 0
+    ? timeoutMs
+    : SCORE_STORE_READ_TIMEOUT_MS;
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => {
+      _terminateScoreStoreClient();
+      reject(new Error(`ScoreStore Firestore read timed out after ${limit}ms`));
+    }, limit);
+    Promise.resolve()
+      .then(read)
+      .then(
+        (value) => {
+          clearTimeout(timer);
+          resolve(value);
+        },
+        (error) => {
+          clearTimeout(timer);
+          reject(error);
+        },
+      );
+  });
+}
+
+/**
  * Initialize the persistent score store from Firestore.
  * Call this once at the start of a workflow BEFORE any callLLM().
  *
  * - Loads all model scores from Firestore with time-decay
  * - Restores exhausted models whose daily limit hasn't reset yet
  * - Registers process exit hooks for final flush
- * - Falls back gracefully to in-memory if Firestore is unavailable
+ * - Falls back gracefully to in-memory if Firestore is unavailable or too slow
  *
  * Safe to call multiple times (idempotent).
  */
@@ -4298,16 +4361,31 @@ export async function initScoreStore() {
 
   try {
     // Lazy-import Firebase Admin (same pattern as load-rc-env.mjs)
-    const { applicationDefault, getApps, initializeApp } = await import('firebase-admin/app');
+    const { applicationDefault, getApp, initializeApp } = await import('firebase-admin/app');
     const { FieldValue, getFirestore } = await import('firebase-admin/firestore');
-    if (!getApps().length) {
+
+    // Keep the default app available: create-article.mjs and the journalist
+    // publisher use it for their own Firestore reads/writes. The ledger gets a
+    // separate named app so a bounded-read cleanup cannot terminate that
+    // producer client.
+    let defaultApp;
+    try {
+      defaultApp = getApp();
+    } catch {
       if (!process.env.GOOGLE_APPLICATION_CREDENTIALS) {
         console.warn('⚠️  [ScoreStore] No GOOGLE_APPLICATION_CREDENTIALS — using in-memory scores only');
         return;
       }
-      initializeApp({ credential: applicationDefault() });
+      defaultApp = initializeApp({ credential: applicationDefault() });
     }
-    _firestoreDb = getFirestore();
+
+    let scoreStoreApp;
+    try {
+      scoreStoreApp = getApp(SCORE_STORE_APP_NAME);
+    } catch {
+      scoreStoreApp = initializeApp(defaultApp.options, SCORE_STORE_APP_NAME);
+    }
+    _firestoreDb = getFirestore(scoreStoreApp);
     // Atomic counter increments (see _pendingCounterDeltas). Captured here and
     // not re-imported at write time because this is the only place that already
     // holds the Firestore module. There is no REST fallback to worry about: unlike
@@ -4327,7 +4405,7 @@ export async function initScoreStore() {
     const aggregateRef = _firestoreDb
       .collection(FIRESTORE_COLLECTION)
       .doc(FIRESTORE_AGGREGATE_DOC);
-    const aggregateSnap = await aggregateRef.get();
+    const aggregateSnap = await withScoreStoreReadTimeout(() => aggregateRef.get());
     const aggregateData = aggregateSnap.exists ? aggregateSnap.data() : null;
     const aggregateModels = aggregateData?.models;
 
@@ -4340,7 +4418,9 @@ export async function initScoreStore() {
     } else {
       // One-time migration path: read the legacy per-model docs.
       source = 'legacy-collection';
-      const snapshot = await _firestoreDb.collection(FIRESTORE_COLLECTION).get();
+      const snapshot = await withScoreStoreReadTimeout(
+        () => _firestoreDb.collection(FIRESTORE_COLLECTION).get(),
+      );
       for (const doc of snapshot.docs) {
         if (doc.id === FIRESTORE_AGGREGATE_DOC) continue;
         const data = doc.data();

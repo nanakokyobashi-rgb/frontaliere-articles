@@ -103,7 +103,7 @@ function mergeInto(target, patch) {
  */
 function makeFakeFirestore({ delayMs = 0, failTimes = 0 } = {}) {
   const store = new Map(); // "collection/doc" → data
-  const state = { writes: 0, failuresLeft: failTimes, lastPayloads: [] };
+  const state = { writes: 0, failuresLeft: failTimes, lastPayloads: [], terminated: false };
   const api = {
     collection: (c) => ({
       doc: (d) => {
@@ -127,6 +127,10 @@ function makeFakeFirestore({ delayMs = 0, failTimes = 0 } = {}) {
         };
       },
     }),
+    terminate() {
+      state.terminated = true;
+      return Promise.resolve();
+    },
     _state: state,
     _seed(key, data) { store.set(key, data); },
     _model(id = ENC_HAIKU) { return store.get('ai_model_scores/_all')?.models?.[id]; },
@@ -308,6 +312,40 @@ test('flushScoresBeforeExit non appende un\'uscita quando Firestore non risponde
   assert.ok(elapsed < 250, `l'uscita non puo' restare appesa al ledger (attesa ${elapsed}ms)`);
 
   run.resetState();
+});
+
+test('una lettura iniziale dello score ledger che non risponde chiude il client e non appende il generatore', async () => {
+  const run = await freshInstance();
+  const db = makeFakeFirestore();
+  run.__installScoreStoreForTests(db);
+  const started = Date.now();
+
+  await assert.rejects(
+    () => run.withScoreStoreReadTimeout(() => new Promise(() => {}), 25),
+    /ScoreStore Firestore read timed out after 25ms/,
+  );
+
+  const elapsed = Date.now() - started;
+  assert.ok(elapsed < 250, `il fallback dello score ledger deve essere bounded (attesa ${elapsed}ms)`);
+  assert.equal(db._state.terminated, true,
+    'un timeout di lettura deve terminare il client Firestore, non solo scartare la promise');
+  run.resetState();
+});
+
+test('initScoreStore applica il limite a entrambe le letture Firestore di startup', () => {
+  const src = readFileSync(AI_MODELS, 'utf8');
+  const initBody = src.slice(src.indexOf('export async function initScoreStore'));
+  assert.match(src, /const SCORE_STORE_APP_NAME = 'score-store';/u);
+  assert.match(initBody, /getApp\(SCORE_STORE_APP_NAME\)/u);
+  assert.match(initBody, /initializeApp\(defaultApp\.options, SCORE_STORE_APP_NAME\)/u);
+  assert.match(initBody, /getFirestore\(scoreStoreApp\)/u);
+  assert.doesNotMatch(initBody, /_firestoreDb = getFirestore\(\)/u,
+    'il ledger non deve condividere il client Firestore default terminabile');
+  assert.match(initBody, /withScoreStoreReadTimeout\(\(\) => aggregateRef\.get\(\)\)/u);
+  assert.match(
+    initBody,
+    /withScoreStoreReadTimeout\(\s*\(\) => _firestoreDb\.collection\(FIRESTORE_COLLECTION\)\.get\(\),/su,
+  );
 });
 
 test('il riepilogo di fine run nomina i modelli chiamati in QUESTA run', async () => {
