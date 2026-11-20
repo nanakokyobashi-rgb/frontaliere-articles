@@ -7365,6 +7365,11 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   // must defer the run rather than regenerate the whole article: the article
   // is still never published without a verifier verdict.
   const FACTCHECK_INFRA_RETRIES = 3;
+  const runDeadlineMs = RUN_START_MS + RUN_WALL_BUDGET_MS;
+  // Leave time for translation and the remaining article checks after a
+  // verdict, while allowing verification to start even late in the run.
+  const postFactCheckReserveMs = Math.min(120_000, Math.floor(Math.max(0, runDeadlineMs - Date.now()) / 4));
+  const factCheckDeadlineMs = runDeadlineMs - postFactCheckReserveMs;
   // Cap on retry-after-derived backoff between outer fact-check attempts.
   // The per-model retry inside ai-models.mjs already honours the retry-after
   // header during its own loop; this cap guards the outer loop that fires when
@@ -7397,6 +7402,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
         backoffMs = Math.min(retryAfterMs, FACTCHECK_429_BACKOFF_CAP_MS);
         console.error(`  ⏱️  Fact-check: 429 rate-limit rilevato — backoff ${backoffMs}ms (cap ${FACTCHECK_429_BACKOFF_CAP_MS}ms)`);
       }
+      if (Date.now() + backoffMs >= factCheckDeadlineMs) break;
       await new Promise(r => setTimeout(r, backoffMs));
     }
     fcLastRejectMsgs = [];
@@ -7406,9 +7412,15 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     const priorVoters = modelResults.map((result) => result.servedBy);
     missingSecondOpinion = false;
 
+    // The model cascade may use its entire deadline. Leave each remaining
+    // round and the final Codex-only fallback a share of the run budget.
+    const now = Date.now();
+    const remainingRounds = FACTCHECK_INFRA_RETRIES - fcAttempt + 2;
+    const deadlineMs = now + Math.floor((factCheckDeadlineMs - now) / remainingRounds);
     const modelsToQuery = verificationModels.slice(0, 2);
     const promises = modelsToQuery.slice(0, priorVoters.length ? 1 : 2).map((model, index) => _runSingleFactCheck(model, prompt, {
       fresh: fcAttempt > 1,
+      deadlineMs,
       invalidVerdictModels,
       isEvergreen: isEvergreenArticle,
       editorialContext,
@@ -7453,7 +7465,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
         || verificationModels.find((m) => !voted.includes(m))
         || modelsToQuery[1];
       try {
-        const extra = await _runSingleFactCheck(next, prompt, { isEvergreen: isEvergreenArticle, editorialContext, excludeModels: voted, invalidVerdictModels });
+        const extra = await _runSingleFactCheck(next, prompt, { isEvergreen: isEvergreenArticle, editorialContext, excludeModels: voted, invalidVerdictModels, deadlineMs });
         const earlier = extra ? addIndependentVote(modelResults, next, extra) : null;
         fcHadNonOutageResult = true;
         if (earlier) console.error(`  ⚠️  LLM fact-check (${next}): servito di nuovo da ${earlier.servedBy} — resta un solo voto`);
@@ -7471,7 +7483,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     // If both primary models failed, try fallback
     if (modelResults.length === 0 && verificationModels.length > 2) {
       try {
-        const fallback = await _runSingleFactCheck(verificationModels[2], prompt, { isEvergreen: isEvergreenArticle, editorialContext, fresh: fcAttempt > 1, invalidVerdictModels });
+        const fallback = await _runSingleFactCheck(verificationModels[2], prompt, { isEvergreen: isEvergreenArticle, editorialContext, fresh: fcAttempt > 1, invalidVerdictModels, deadlineMs });
         if (fallback) {
           addIndependentVote(modelResults, verificationModels[2], fallback);
           missingSecondOpinion = fallback.servedBy !== AI_MODELS.CODEX_CLI_PRIMARY;
@@ -7516,7 +7528,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     const selfCheck = _codexWroteThisHeadline ? ' — ha scritto anche questo articolo: si verifica da solo (decisione del proprietario)' : '';
     console.error(`  🛟 LLM fact-check: ${why}, verifico con ${codex}${selfCheck}`);
     try {
-      const vote = await _runSingleFactCheck(codex, prompt, { isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true });
+      const vote = await _runSingleFactCheck(codex, prompt, { isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true, deadlineMs: factCheckDeadlineMs });
       if (vote) addIndependentVote(modelResults, codex, vote);
       fcHadNonOutageResult = true;
     } catch (err) {
@@ -7818,7 +7830,7 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
     // `prefer` keeps an AI_MODELS_PREFER from prepending another model to it.
     // Codex has its own timeout (_codexFallbackTimeoutMs, bounded by the same
     // deadlineMs); `timeout` here only applies to the HTTP providers.
-    buildFactCheckCallOptions({ model, temperature: 0.0, maxTokens: 4000, timeout: 60_000, bypassForceChain: true, deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS, modelUsedRef, jsonMode: true, excludeModels, ...(opts.codexOnly ? { chain: [model], prefer: [model] } : {}) }, !opts.fresh && isFactCheckCacheEnabled())
+    buildFactCheckCallOptions({ model, temperature: 0.0, maxTokens: 4000, timeout: 60_000, bypassForceChain: true, deadlineMs: opts.deadlineMs ?? RUN_START_MS + RUN_WALL_BUDGET_MS, modelUsedRef, jsonMode: true, excludeModels, ...(opts.codexOnly ? { chain: [model], prefer: [model] } : {}) }, !opts.fresh && isFactCheckCacheEnabled())
   );
   // A cache hit carries the answering model recorded with the raw response.
   const servedBy = modelUsedRef.model === 'cache' ? modelUsedRef.cachedServedBy : modelUsedRef.model;
