@@ -30,6 +30,8 @@ git diff --quiet --no-ext-diff --no-textconv --ignore-submodules=none "$expected
   ':(top,exclude,literal)data/image-regeneration-queue-pending.jsonl' \
   ':(top,exclude,glob)data/image-regeneration-queue-pending.jsonl.*.pending' \
   ':(top,exclude,literal)generator/scripts/create-article.mjs' \
+  ':(top,exclude,literal)generator/scripts/lib/ai-models.mjs' \
+  ':(top,exclude,literal)generator/tests/codex-broker-client.test.mjs' \
   ':(top,exclude,literal)generator/scripts/lib/canton-news-sources.mjs' \
   ':(top,exclude,literal)generator/tests/canton-news-sources.test.mjs' \
   ':(top,exclude,literal)generator/tests/pending-body-second-lane.test.mjs' \
