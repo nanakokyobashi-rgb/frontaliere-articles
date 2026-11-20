@@ -4,25 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261113-cinq-vaches-sement-la-zizanie-et-bouchonnent-l-autoroute-a1.html": {
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261119-ligne-directe-neuchatel-la-chaux-de-fonds-trace-definitif-connu.html": {
       "section": "canton-ju",
-      "ts": 1794749246429
+      "ts": 1795171080316
     },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261113-la-panne-mondiale-de-microsoft-perturbe-entreprises-et-services.html": {
+    "canton-ju::https://www.h-ju.ch/fr/a-propos/medias-presse/communiques-de-presse/la-sante-mentale-au-coeur-de-la-27eme-journee-scientifique-interjurassienne-de-la-sante.html": {
       "section": "canton-ju",
-      "ts": 1794749257127
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261114-des-milliers-de-portugais-manifestent-contre-la-crise-du-logement.html": {
-      "section": "canton-ju",
-      "ts": 1794749267550
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261115-l-estonie-va-fermer-sa-frontiere-avec-la-russie.html": {
-      "section": "canton-ju",
-      "ts": 1794775272134
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261116-vin-les-encheres-de-beaune-sans-record-apres-de-maigres-vendanges.html": {
-      "section": "canton-ju",
-      "ts": 1794873159855
+      "ts": 1795172684939
     }
   }
 }
