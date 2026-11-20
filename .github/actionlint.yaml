@@ -33,3 +33,6 @@ paths:
   .github/workflows/generate-article-core.yml:
     ignore:
       - 'unexpected key "queue" for "concurrency" section'
+  .github/workflows/fast-publish-section.yml:
+    ignore:
+      - 'unexpected key "queue" for "concurrency" section'
