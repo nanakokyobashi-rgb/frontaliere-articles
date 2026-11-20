@@ -412,7 +412,7 @@ test('il loader CLI non esporta configurazione operatore se le credenziali manca
 });
 
 function runRcCli(t, {
-  env, template, sdkFails = false, restStatus = 200, adc = { project_id: 'fixture-project' },
+  env, template, sdkFails = false, restStatus = 200, adc = { project_id: 'fixture-project' }, expectedStatus = 0,
 }) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'rc-cli-'));
   t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
@@ -483,7 +483,7 @@ function runRcCli(t, {
     timeout: 5000,
   });
   assert.ifError(result.error);
-  assert.equal(result.status, 0, result.stderr);
+  assert.equal(result.status, expectedStatus, result.stderr);
   return {
     stdout: result.stdout,
     stderr: result.stderr,
@@ -583,6 +583,7 @@ test('la CLI rifiuta il selector privato invalido prima di caricare SDK, credenz
   const result = runRcCli(t, {
     env: { FRONTALIERE_LOAD_OPERATOR_CONFIG: '1', FRONTALIERE_OPERATOR_RC_SOURCE: 'invalid-fixture' },
     template: rcCliTemplate,
+    expectedStatus: 1,
   });
   assert.deepEqual(result.calls, []);
   assert.equal(result.stdout, '');
