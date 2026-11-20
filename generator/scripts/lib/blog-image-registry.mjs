@@ -275,25 +275,33 @@ function indexFirstRecord(records, keyOf) {
  * catalog at process startup. Its fallback selector then uses the default
  * (`verifyHash: true`) while filling the candidate budget, and the publication
  * fallback path calls `imageRecordForPath` with the same strict default before
- * reusing the selected candidate. This option never weakens the final
- * provenance gate.
+ * reusing the selected candidate. An optional `recordFilter` narrows the
+ * strict result after the configured materialized-file/byte/hash checks,
+ * without making callers re-read the registries. This option never weakens
+ * the final provenance gate.
  */
-export function createBlogImageRecordValidator(root, { verifyHash = true } = {}) {
+export function createBlogImageRecordValidator(root, { verifyHash = true, recordFilter } = {}) {
+  if (recordFilter !== undefined && typeof recordFilter !== 'function') {
+    throw new TypeError('recordFilter must be a function');
+  }
   let generated;
   let editorial;
   let legacy;
-  return (imagePath) => Boolean(findImageRecord(root, imagePath, {
-    verifyHash,
-    legacyReader: () => legacy ??= corpusCreditReader(root),
-    generatedByPath: () => generated ??= indexFirstRecord(
-      readGeneratedImageRecords(root, { strict: false }),
-      (record) => record.scope === 'article-hero' || record.scope === 'place' ? record.imageUrl : null,
-    ),
-    editorialByPath: () => editorial ??= indexFirstRecord(
-      readEditorialImageRecords(root, { strict: false }),
-      (record) => record.cover,
-    ),
-  }));
+  return (imagePath) => {
+    const provenance = findImageRecord(root, imagePath, {
+      verifyHash,
+      legacyReader: () => legacy ??= corpusCreditReader(root),
+      generatedByPath: () => generated ??= indexFirstRecord(
+        readGeneratedImageRecords(root, { strict: false }),
+        (record) => record.scope === 'article-hero' || record.scope === 'place' ? record.imageUrl : null,
+      ),
+      editorialByPath: () => editorial ??= indexFirstRecord(
+        readEditorialImageRecords(root, { strict: false }),
+        (record) => record.cover,
+      ),
+    });
+    return Boolean(provenance && (!recordFilter || recordFilter(provenance)));
+  };
 }
 
 export function hasValidBlogImageRecord(root, imagePath) {

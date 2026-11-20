@@ -138,8 +138,20 @@ test('a failed generation falls back without a quality rejection', () => {
 
 test('the governed fallback selector keeps the reserve pool when every image is recent', () => {
   const fallbackSelector = slice(CREATE, 'function findBestFallbackImages(data) {', '\nfunction findBestFallbackImage(data) {');
+  const strictReusableValidator = slice(CREATE, 'const hasStrictReusableBlogImage =', '// Keep the legacy field');
   assert.match(fallbackSelector, /const rankedImages = FALLBACK_IMAGES\s*\.map/);
-  assert.match(fallbackSelector, /if \(!hasStrictBlogImage\(imagePath\)\) continue;/);
+  assert.match(fallbackSelector, /if \(!hasStrictReusableBlogImage\(imagePath\)\) continue;/);
+  assert.match(strictReusableValidator, /recordFilter: \(\{ kind, record \}\)/);
+  assert.match(strictReusableValidator, /record\?\.scope === 'article-hero'/);
+  assert.match(strictReusableValidator, /\['generated', 'licensed-photo'\]\.includes\(kind\)/);
+  assert.match(strictReusableValidator, /kind !== DETERMINISTIC_CARD_KIND/);
+  assert.match(strictReusableValidator, /record\?\.sha256/);
+  assert.match(strictReusableValidator, /\^\[a-f0-9\]\{64\}\$\/i\.test/);
+  assert.ok(
+    fallbackSelector.indexOf('if (!hasStrictReusableBlogImage(imagePath)) continue;')
+      < fallbackSelector.indexOf('selected.push(imagePath)'),
+    'the reusable-provenance gate must run before a candidate consumes the budget',
+  );
   assert.match(fallbackSelector, /selected\.length >= MAX_CATALOG_FALLBACK_CANDIDATES/);
   assert.doesNotMatch(fallbackSelector, /\.slice\(0,\s*5\)/);
   assert.doesNotMatch(fallbackSelector, /recentImages|\.filter\(/);
@@ -292,14 +304,19 @@ test('catalog scans reuse provenance while checking the current cover bytes', ()
 
     const hasValidImage = createBlogImageRecordValidator(root);
     const hasCatalogImage = createBlogImageRecordValidator(root, { verifyHash: false });
+    const hasReusableImage = createBlogImageRecordValidator(root, {
+      recordFilter: ({ kind, record }) => kind === 'generated' && record?.scope === 'article-hero',
+    });
     assert.equal(hasValidImage(generated.imageUrl), true);
     assert.equal(hasCatalogImage(generated.imageUrl), true);
+    assert.equal(hasReusableImage(generated.imageUrl), true);
     fs.unlinkSync(path.join(root, 'data', 'generated-image-registry.json'));
     assert.equal(hasValidImage('/images/blog/unregistered.webp'), false);
     assert.equal(hasValidImage(generated.imageUrl), true);
     assert.equal(createBlogImageRecordValidator(root)(generated.imageUrl), false);
     fs.writeFileSync(file, Buffer.alloc(generated.bytes, 0x48));
     assert.equal(hasValidImage(generated.imageUrl), false);
+    assert.equal(hasReusableImage(generated.imageUrl), false);
     assert.equal(hasCatalogImage(generated.imageUrl), true);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });

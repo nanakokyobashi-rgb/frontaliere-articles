@@ -1932,7 +1932,17 @@ function _buildFallbackPool() {
 }
 
 const FALLBACK_IMAGES = _buildFallbackPool();
-const hasStrictBlogImage = createBlogImageRecordValidator(PROJECT_ROOT);
+const hasStrictReusableBlogImage = createBlogImageRecordValidator(PROJECT_ROOT, {
+  // The shared fallback verifier accepts only reusable article heroes. Apply
+  // that same class and scope before a candidate consumes the five-item
+  // budget; the strict validator also checks current bytes against this SHA.
+  // Legacy records without a verifiable SHA therefore cannot hide a valid
+  // generated/licensed candidate later in the ranked pool.
+  recordFilter: ({ kind, record }) => record?.scope === 'article-hero'
+    && ['generated', 'licensed-photo'].includes(kind)
+    && kind !== DETERMINISTIC_CARD_KIND
+    && /^[a-f0-9]{64}$/i.test(String(record?.sha256 || '')),
+});
 
 // Keep the legacy field in the model contract. It is a placeholder only:
 // validation never uses an unrecorded place image as a publication fallback.
@@ -1952,9 +1962,10 @@ function findBestFallbackImages(data) {
   const selected = [];
   for (const { imagePath } of rankedImages) {
     // The startup index is intentionally byte-only. Fill the verifier budget
-    // only with candidates whose current bytes still match their record, so
-    // stale same-size files cannot consume the five candidate slots.
-    if (!hasStrictBlogImage(imagePath)) continue;
+    // only with reusable candidates whose current bytes still match their
+    // record, so stale same-size files or non-reusable provenance cannot
+    // consume the five candidate slots.
+    if (!hasStrictReusableBlogImage(imagePath)) continue;
     selected.push(imagePath);
     if (selected.length >= MAX_CATALOG_FALLBACK_CANDIDATES) break;
   }
