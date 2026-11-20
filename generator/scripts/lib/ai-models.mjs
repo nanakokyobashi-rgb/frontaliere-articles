@@ -1113,7 +1113,7 @@ function _codexSafeDiagnostic(value) {
   return safe;
 }
 function _tripCodexPrimaryCircuit(error) {
-  if (_codexPrimaryCircuitOpen || error?.codexCallerDeadline) return;
+  if (_codexPrimaryCircuitOpen || error?.codexCallerDeadline || error?.codexChildTimeout) return;
   const reason = _codexPrimaryFailureReason(error);
   if (!reason) return;
   _codexPrimaryCircuitOpen = true;
@@ -8197,7 +8197,8 @@ function _requestCodexExecution({ prompt, timeoutMs, schema, deadlineMs }) {
         // Il SIGKILL a scadenza di budget e il tetto di richieste del job sono
         // decisioni nostre, non giudizi sul modello: stessa regola del ramo
         // claude-cli in callLLM (guasto di trasporto).
-        if (/^Codex CLI timed out after \d+ms|^request limit exhausted/.test(brokerError)) {
+        error.codexChildTimeout = /^Codex CLI timed out after \d+ms$/.test(brokerError);
+        if (error.codexChildTimeout || /^request limit exhausted/.test(brokerError)) {
           error.transportFault = true;
         }
         finish(error);
@@ -10036,7 +10037,7 @@ export async function callLLM(messages, opts = {}) {
       // timeout there is expected load, not a dead provider.
       // A caller deadline is transient transport evidence, but it says
       // nothing about the model's availability for a later call.
-      const isTimeoutFailure = !e.codexCallerDeadline
+      const isTimeoutFailure = !e.codexCallerDeadline && !e.codexChildTimeout
         && (e.name === 'AbortError' || e.name === 'TimeoutError' || /timeout|aborted/i.test(msg));
       let markedExhausted = false;
       // A timeout served under a ceiling THIS module narrowed below what the

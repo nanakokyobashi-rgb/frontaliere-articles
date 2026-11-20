@@ -149,7 +149,7 @@ test('il kill-switch esistente esclude Codex senza riattivare Gemini', () => {
   assert.equal(getPreferredModel({ chain: [CODEX, AI_MODELS.GEMINI_FLASH] }), null);
 });
 
-test('un timeout Codex apre il circuito per run e passa al fallback OpenRouter', async () => {
+test('un timeout del processo Codex passa al fallback e consente una richiesta successiva', async () => {
   process.env.GEMINI_API_KEY = 'gemini-test-key';
   behavior = (client) => {
     client.end(`${JSON.stringify({ ok: false, error: 'Codex CLI timed out after 15000ms' })}\n`);
@@ -171,8 +171,9 @@ test('un timeout Codex apre il circuito per run e passa al fallback OpenRouter',
     });
     assert.equal(result, 'FALLBACK');
     assert.ok(requests[0].timeoutMs <= 60_001, 'almeno un terzo del tempo è riservato al ripiego');
-    assert.equal(isModelAvailable(CODEX), false);
-    assert.match(logged(), /primary lane disabled for the rest of this run \(timeout\)/);
+    assert.equal(isModelAvailable(CODEX), true);
+    behavior = (client) => { client.end(`${JSON.stringify({ ok: true, result: 'VERDICT' })}\n`); };
+    assert.equal(await callCodex(), 'VERDICT');
   } finally {
     globalThis.fetch = realFetch;
   }
@@ -180,18 +181,18 @@ test('un timeout Codex apre il circuito per run e passa al fallback OpenRouter',
 
 test('una chiamata diretta Codex successiva al circuito non riapre il broker', async () => {
   behavior = (client) => {
-    client.end(`${JSON.stringify({ ok: false, error: 'Codex CLI timed out after 15000ms' })}\n`);
+    client.end(`${JSON.stringify({ ok: false, error: 'broker unavailable' })}\n`);
   };
   await assert.rejects(() => callSingleModel(messages, {
     model: CODEX,
     maxRetriesPerModel: 1,
-  }), /timed out/);
+  }), /broker unavailable/);
   const requestsAfterFailure = requests.length;
 
   await assert.rejects(() => callSingleModel(messages, {
     model: CODEX,
     maxRetriesPerModel: 1,
-  }), /primary circuit open for this run \(timeout\)/);
+  }), /primary circuit open for this run \(broker transport\/auth unavailable\)/);
   assert.equal(requests.length, requestsAfterFailure, 'il circuito deve saltare _callModel e la socket');
 });
 
