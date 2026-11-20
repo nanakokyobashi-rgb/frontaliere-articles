@@ -14,6 +14,48 @@ export function findHtmlTagEndOutsideQuotes(html, start) {
   return -1;
 }
 
+/** Itera gli attributi di un tag d'apertura o della sua porzione attrs. */
+export function* htmlAttributes(markup) {
+  let attrs = String(markup ?? '');
+  if (attrs.startsWith('<')) {
+    const tag = readHtmlTagAt(attrs, 0);
+    if (!tag || tag.closing || tag.status === 'malformed') return;
+    attrs = tag.attrs;
+  }
+
+  const namePattern = /[^\s"'<>/=`]+/y;
+  const valuePattern = /"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)/y;
+  let index = 0;
+  while (index < attrs.length) {
+    while (isHtmlWhitespace(attrs[index])) index += 1;
+    namePattern.lastIndex = index;
+    const name = namePattern.exec(attrs);
+    if (!name) return;
+    index = namePattern.lastIndex;
+    while (isHtmlWhitespace(attrs[index])) index += 1;
+    let value = '';
+    if (attrs[index] === '=') {
+      index += 1;
+      while (isHtmlWhitespace(attrs[index])) index += 1;
+      valuePattern.lastIndex = index;
+      const match = valuePattern.exec(attrs);
+      if (!match) return;
+      value = match[1] ?? match[2] ?? match[3];
+      index = valuePattern.lastIndex;
+    }
+    yield [name[0].toLowerCase(), value];
+  }
+}
+
+/** Restituisce il primo valore grezzo, oppure stringa vuota se assente. */
+export function firstHtmlAttributeValue(markup, name) {
+  const wanted = name.toLowerCase();
+  for (const [attribute, value] of htmlAttributes(markup)) {
+    if (attribute === wanted) return value;
+  }
+  return '';
+}
+
 function hasRawMarkdownPipe(value, start = 0, end = value.length) {
   for (let index = start; index < end; index += 1) {
     if (value[index] !== '|') continue;

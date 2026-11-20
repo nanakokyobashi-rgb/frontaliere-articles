@@ -88,6 +88,8 @@ import { writeFileSnapshotAtomically } from '../../scripts/lib/write-file-pair-a
 import {
   findHtmlRawTextClosingTag,
   findHtmlTagEndOutsideQuotes,
+  firstHtmlAttributeValue,
+  htmlAttributes,
   nextHtmlElement,
   nextHtmlElementWhere,
   nextHtmlOpeningTag,
@@ -10709,12 +10711,7 @@ const HEADLINE_VOID_ELEMENTS = new Set([
 ]);
 
 function headlineAttributeValue(attrs, name) {
-  const re = new RegExp(
-    "(?:^|\\s)" + name + "\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s\"'=<>]+))",
-    'i',
-  );
-  const match = re.exec(attrs || '');
-  return match ? (match[1] ?? match[2] ?? match[3] ?? '') : '';
+  return firstHtmlAttributeValue(attrs, name);
 }
 
 function headlineHrefValue(attrs) {
@@ -10918,7 +10915,8 @@ function headlineStackHasPremiumMarker(stack, inlineMarkup = '') {
     const compactClass = classTokens.join('');
     const classMarker = classTokens.some((token) => token === 'paywall' || token === 'premium')
       || /^(?:subscribers?only|membersonly|exclusive(?:content)?|paidcontent|abopflichtig)$/.test(compactClass);
-    const attributeMarker = /\bdata-(?:paywall|premium|subscriber-only|members-only|subscription-required)(?:-[\w-]+)?(?![\w-])/i.test(attrs);
+    const attributeMarker = Array.from(htmlAttributes(attrs)).some(([name]) =>
+      /^data-(?:paywall|premium|subscriber-only|members-only|subscription-required)(?:-[\w-]+)?$/.test(name));
     const access = headlineAttributeValue(attrs, 'data-access')
       || headlineAttributeValue(attrs, 'data-content-access')
       || headlineAttributeValue(attrs, 'data-subscription');
@@ -11297,6 +11295,8 @@ async function fetchCantonSourceHeadlines(source, domain) {
       onRequestAttempt: (requests) => { entry.requests = requests; },
     });
   } catch (error) {
+    const requests = error?.requests;
+    if (Number.isInteger(requests) && requests > 0) entry.requests = requests;
     const status = error?.status;
     if (Number.isInteger(status) && status >= 300 && status <= 599) entry.httpStatus = status;
     throw error;
