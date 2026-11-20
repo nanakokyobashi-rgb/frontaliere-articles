@@ -547,6 +547,7 @@ import {
 import { DETERMINISTIC_CARD_KIND, DETERMINISTIC_CARD_LICENSE_URL } from './lib/deterministic-card-provenance.mjs';
 import {
   ARTICLE_COVER_FALLBACK_ERROR_CODES,
+  MAX_CATALOG_FALLBACK_CANDIDATES,
   catalogFallbackSharedWordCount,
   classifyImageRegenerationFailure,
   applyGeneratedHeroAlt,
@@ -1888,9 +1889,9 @@ const PLACES_IMAGES = [
 const BLOG_IMAGES = (() => {
   try {
     // This is only the startup candidate index. The fallback resolver repeats
-    // the strict hash check for the few candidates it may actually reuse;
-    // hashing the entire catalog here made module startup scale with every
-    // published image and could trip the generation stall watchdog.
+    // the strict hash check for the ranked candidates it may actually reuse;
+    // the startup index only needs the record schema, materialized file and
+    // recorded byte size.
     const hasValidImage = createBlogImageRecordValidator(PROJECT_ROOT, { verifyHash: false });
     return readdirSync(resolve('public/images/blog'))
       .filter((file) => file.endsWith('.webp'))
@@ -1931,6 +1932,7 @@ function _buildFallbackPool() {
 }
 
 const FALLBACK_IMAGES = _buildFallbackPool();
+const hasStrictBlogImage = createBlogImageRecordValidator(PROJECT_ROOT);
 
 // Keep the legacy field in the model contract. It is a placeholder only:
 // validation never uses an unrecorded place image as a publication fallback.
@@ -1944,11 +1946,19 @@ const AVAILABLE_IMAGES = PLACES_IMAGES;
  * chooses the static place cover instead of borrowing an unrelated story.
  */
 function findBestFallbackImages(data) {
-  return FALLBACK_IMAGES
+  const rankedImages = FALLBACK_IMAGES
     .map(imagePath => ({ imagePath, score: catalogFallbackSharedWordCount(data, imagePath) }))
-    .sort((a, b) => b.score - a.score || a.imagePath.localeCompare(b.imagePath))
-    .slice(0, 5)
-    .map(({ imagePath }) => imagePath);
+    .sort((a, b) => b.score - a.score || a.imagePath.localeCompare(b.imagePath));
+  const selected = [];
+  for (const { imagePath } of rankedImages) {
+    // The startup index is intentionally byte-only. Fill the verifier budget
+    // only with candidates whose current bytes still match their record, so
+    // stale same-size files cannot consume the five candidate slots.
+    if (!hasStrictBlogImage(imagePath)) continue;
+    selected.push(imagePath);
+    if (selected.length >= MAX_CATALOG_FALLBACK_CANDIDATES) break;
+  }
+  return selected;
 }
 
 function findBestFallbackImage(data) {

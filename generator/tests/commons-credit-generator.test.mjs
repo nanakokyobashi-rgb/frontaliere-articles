@@ -138,7 +138,10 @@ test('a failed generation falls back without a quality rejection', () => {
 
 test('the governed fallback selector keeps the reserve pool when every image is recent', () => {
   const fallbackSelector = slice(CREATE, 'function findBestFallbackImages(data) {', '\nfunction findBestFallbackImage(data) {');
-  assert.match(fallbackSelector, /return FALLBACK_IMAGES\s*\.map/);
+  assert.match(fallbackSelector, /const rankedImages = FALLBACK_IMAGES\s*\.map/);
+  assert.match(fallbackSelector, /if \(!hasStrictBlogImage\(imagePath\)\) continue;/);
+  assert.match(fallbackSelector, /selected\.length >= MAX_CATALOG_FALLBACK_CANDIDATES/);
+  assert.doesNotMatch(fallbackSelector, /\.slice\(0,\s*5\)/);
   assert.doesNotMatch(fallbackSelector, /recentImages|\.filter\(/);
 });
 

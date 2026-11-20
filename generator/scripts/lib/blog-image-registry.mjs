@@ -269,12 +269,14 @@ function indexFirstRecord(records, keyOf) {
 /**
  * One registry snapshot per read-only catalog scan.
  *
- * The generator uses `{ verifyHash: false }` while building its candidate
- * list: checking the record schema, materialized file and recorded byte size
- * is enough to index candidates without hashing every image in the catalog at
- * process startup. The publication fallback path calls `imageRecordForPath`
- * with its default (`verifyHash: true`) before reusing any candidate, so this
- * option never weakens the final provenance gate.
+ * The generator uses `{ verifyHash: false }` while building its startup
+ * candidate list: checking the record schema, materialized file and recorded
+ * byte size is enough to index candidates without hashing every image in the
+ * catalog at process startup. Its fallback selector then uses the default
+ * (`verifyHash: true`) while filling the candidate budget, and the publication
+ * fallback path calls `imageRecordForPath` with the same strict default before
+ * reusing the selected candidate. This option never weakens the final
+ * provenance gate.
  */
 export function createBlogImageRecordValidator(root, { verifyHash = true } = {}) {
   let generated;
