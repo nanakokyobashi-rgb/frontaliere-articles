@@ -174,6 +174,11 @@ if ! [[ "$article_push_push_reserve_seconds" =~ ^[1-9][0-9]*$ ]]; then
   echo "::error::ARTICLE_PUSH_PUSH_RESERVE_SECONDS must be a positive integer" >&2
   exit 1
 fi
+# The coordinator stamps each child's absolute Pages deadline before starting
+# its shell. Reserve a bounded handoff window for process startup and the
+# whole-second clock boundary, and charge it to every serialized batch.
+DEFAULT_ARTICLE_PUSH_BATCH_HANDOFF_RESERVE_SECONDS=5
+article_push_batch_handoff_reserve_seconds="$DEFAULT_ARTICLE_PUSH_BATCH_HANDOFF_RESERVE_SECONDS"
 article_push_post_publish_reserve_seconds="${ARTICLE_PUSH_POST_PUBLISH_RESERVE_SECONDS:-0}"
 if ! [[ "$article_push_post_publish_reserve_seconds" =~ ^[0-9]+$ ]]; then
   echo "::error::ARTICLE_PUSH_POST_PUBLISH_RESERVE_SECONDS must be a non-negative integer" >&2
@@ -1048,7 +1053,7 @@ run_serialized_batches() {
   local -a serialized_commits=()
   local serialized_base_commit='' serialized_metadata_ok=1 serialized_chain_ok=1
   local planned_batch_count=0 planned_batch_path_count=0
-  local planned_batch_wait_seconds planned_batch_overhead_seconds planned_batch_push_reserve_seconds planned_batch_budget_seconds
+  local planned_batch_wait_seconds planned_batch_overhead_seconds planned_batch_push_reserve_seconds planned_batch_handoff_reserve_seconds planned_batch_coordinator_reserve_seconds planned_batch_budget_seconds
   local article_push_job_usable_deadline article_push_job_remaining
 
   batch_root="$(mktemp -d "$RUNNER_TEMP/article-shard-batches.XXXXXX")" || {
@@ -1142,7 +1147,9 @@ run_serialized_batches() {
   planned_batch_wait_seconds=$((article_push_pages_wait_seconds * planned_batch_count))
   planned_batch_overhead_seconds=$((article_push_batch_overhead_seconds * planned_batch_count))
   planned_batch_push_reserve_seconds=$((article_push_push_reserve_seconds * planned_batch_count))
-  planned_batch_budget_seconds=$((planned_batch_wait_seconds + planned_batch_overhead_seconds + planned_batch_push_reserve_seconds))
+  planned_batch_handoff_reserve_seconds=$((article_push_batch_handoff_reserve_seconds * planned_batch_count))
+  planned_batch_coordinator_reserve_seconds="$article_push_batch_handoff_reserve_seconds"
+  planned_batch_budget_seconds=$((planned_batch_wait_seconds + planned_batch_overhead_seconds + planned_batch_push_reserve_seconds + planned_batch_handoff_reserve_seconds + planned_batch_coordinator_reserve_seconds))
   article_push_pages_now="$(date +%s)" || {
     serialized_batch_failure 'cannot establish the serialized Pages-wait deadline'
     return $?
@@ -1157,14 +1164,14 @@ run_serialized_batches() {
   fi
   article_push_pages_remaining=$((article_push_pages_deadline - article_push_pages_now))
   if [ "$article_push_pages_remaining" -lt "$planned_batch_budget_seconds" ]; then
-    serialized_batch_failure "serialized article-push plan needs ${planned_batch_wait_seconds}s of Pages windows plus ${planned_batch_overhead_seconds}s of pre-push operational reserve and ${planned_batch_push_reserve_seconds}s of push reserve, but only ${article_push_pages_remaining}s remain; refusing a partial chain"
+    serialized_batch_failure "serialized article-push plan needs ${planned_batch_wait_seconds}s of Pages windows, ${planned_batch_overhead_seconds}s of pre-push operational reserve, ${planned_batch_push_reserve_seconds}s of push reserve, ${planned_batch_handoff_reserve_seconds}s of child handoff reserves and ${planned_batch_coordinator_reserve_seconds}s of coordinator reserve, but only ${article_push_pages_remaining}s remain; refusing a partial chain"
     return $?
   fi
   if [ -n "$article_push_job_deadline" ]; then
     article_push_job_usable_deadline=$((article_push_job_deadline - article_push_job_reconciliation_reserve_seconds - article_push_post_publish_reserve_seconds))
     article_push_job_remaining=$((article_push_job_usable_deadline - article_push_pages_now))
     if [ "$article_push_job_remaining" -lt "$planned_batch_budget_seconds" ]; then
-      serialized_batch_failure "serialized article-push plan needs ${planned_batch_wait_seconds}s of Pages windows plus ${planned_batch_overhead_seconds}s of pre-push operational reserve and ${planned_batch_push_reserve_seconds}s of push reserve and ${article_push_job_reconciliation_reserve_seconds}s for reconciliation plus ${article_push_post_publish_reserve_seconds}s for downstream gates, but only ${article_push_job_remaining}s remain before the job deadline; refusing a partial chain"
+      serialized_batch_failure "serialized article-push plan needs ${planned_batch_wait_seconds}s of Pages windows, ${planned_batch_overhead_seconds}s of pre-push operational reserve, ${planned_batch_push_reserve_seconds}s of push reserve, ${planned_batch_handoff_reserve_seconds}s of child handoff reserves, ${planned_batch_coordinator_reserve_seconds}s of coordinator reserve, ${article_push_job_reconciliation_reserve_seconds}s for reconciliation and ${article_push_post_publish_reserve_seconds}s for downstream gates, but only ${article_push_job_remaining}s remain before the job deadline; refusing a partial chain"
       return $?
     fi
     if [ "$article_push_pages_deadline" -gt "$article_push_job_usable_deadline" ]; then
@@ -1172,10 +1179,10 @@ run_serialized_batches() {
       return $?
     fi
   fi
-  echo "$section-$loc article shard: serialized batch plan has $planned_batch_count batch(es); Pages wait window is ${planned_batch_wait_seconds} seconds; pre-push operational reserve is ${planned_batch_overhead_seconds} seconds; push reserve is ${planned_batch_push_reserve_seconds} seconds; reconciliation reserve is ${article_push_job_reconciliation_reserve_seconds} seconds; post-publish reserve is ${article_push_post_publish_reserve_seconds} seconds"
+  echo "$section-$loc article shard: serialized batch plan has $planned_batch_count batch(es); Pages wait window is ${planned_batch_wait_seconds} seconds; pre-push operational reserve is ${planned_batch_overhead_seconds} seconds; push reserve is ${planned_batch_push_reserve_seconds} seconds; child handoff reserve is ${planned_batch_handoff_reserve_seconds} seconds; coordinator reserve is ${planned_batch_coordinator_reserve_seconds} seconds; reconciliation reserve is ${article_push_job_reconciliation_reserve_seconds} seconds; post-publish reserve is ${article_push_post_publish_reserve_seconds} seconds"
 
   serialized_batch_deadline_available() {
-    local current_epoch remaining remaining_batches required_pages required_overhead required_push_reserve required_batch_budget required_job_budget
+    local current_epoch remaining remaining_batches required_pages required_overhead required_push_reserve required_handoff_reserve required_batch_budget required_job_budget
     current_epoch="$(date +%s)" || {
       serialized_batch_failure "cannot read the shared Pages-wait clock before serialized batch $((batch_number + 1))"
       return $?
@@ -1192,10 +1199,11 @@ run_serialized_batches() {
     required_pages=$((article_push_pages_wait_seconds * remaining_batches))
     required_overhead=$((article_push_batch_overhead_seconds * remaining_batches))
     required_push_reserve=$((article_push_push_reserve_seconds * remaining_batches))
-    required_batch_budget=$((required_pages + required_overhead + required_push_reserve))
+    required_handoff_reserve=$((article_push_batch_handoff_reserve_seconds * remaining_batches))
+    required_batch_budget=$((required_pages + required_overhead + required_push_reserve + required_handoff_reserve))
     remaining=$((article_push_pages_deadline - current_epoch))
     if [ "$remaining" -lt "$required_batch_budget" ]; then
-      serialized_batch_failure "shared serialized Pages deadline has only ${remaining}s for ${remaining_batches} remaining batch(es), but needs ${required_pages}s of Pages windows plus ${required_overhead}s of pre-push operational reserve and ${required_push_reserve}s of push reserve; reconciling published batches"
+      serialized_batch_failure "shared serialized Pages deadline has only ${remaining}s for ${remaining_batches} remaining batch(es), but needs ${required_pages}s of Pages windows, ${required_overhead}s of pre-push operational reserve, ${required_push_reserve}s of push reserve and ${required_handoff_reserve}s of child handoff reserve; reconciling published batches"
       return $?
     fi
     if [ -n "$article_push_job_deadline" ]; then
@@ -1228,6 +1236,10 @@ run_serialized_batches() {
       return 1
     fi
     batch_pages_deadline=$((batch_pages_now + article_push_pages_wait_seconds + article_push_batch_overhead_seconds + article_push_push_reserve_seconds))
+    batch_pages_deadline=$((batch_pages_deadline + article_push_batch_handoff_reserve_seconds))
+    if [ "$batch_pages_deadline" -gt "$article_push_pages_deadline" ]; then
+      batch_pages_deadline="$article_push_pages_deadline"
+    fi
 
     if ! ARTICLE_PUSH_BATCHED=1 \
       ARTICLE_PUSH_PAGES_DEADLINE="$article_push_pages_deadline" \
