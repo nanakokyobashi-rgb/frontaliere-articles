@@ -15539,16 +15539,27 @@ async function translatePendingBodyWithCodex(
   const codexDeadlineOptions = (deadlineMs) => ({
     deadlineMs,
   });
+  const canFallback = typeof callWithRetry === 'function';
+  const remainingMs = Math.max(0, _pendingBodyCodexDeadlineMs - Date.now());
+  const fallbackReserveMs = canFallback ? Math.min(60_000, Math.floor(remainingMs / 3)) : 0;
+  const codexRecoveryDeadlineMs = _pendingBodyCodexDeadlineMs === null
+    ? null
+    : _pendingBodyCodexDeadlineMs - fallbackReserveMs;
   return withCodexTranslationLane({
     bodyRecovery: true,
-    processDeadlineMs: _pendingBodyCodexDeadlineMs,
+    processDeadlineMs: codexRecoveryDeadlineMs,
     fallback: () => {
       // La disponibilità può cambiare dopo la selezione della corsia: il
       // circuit-breaker può fermare Codex mentre la richiesta aspetta in coda.
       // Il fallback storico è ammesso se il predicato condiviso prova che la
       // corsia è ferma. Se Codex ha prodotto un output rifiutato, il fallback
       // viene invece scelto sotto: ripetere la stessa corsia non è recovery.
-      if (!pendingBodySecondLaneAvailable() && typeof callWithRetry === 'function') {
+      const deadlineTooClose = fallbackReserveMs > 0 && codexCallDeadlineMs({
+        now: Date.now(),
+        budgetRemainingMs: Infinity,
+        processDeadlineMs: codexRecoveryDeadlineMs,
+      }) === null;
+      if (canFallback && (!pendingBodySecondLaneAvailable() || deadlineTooClose)) {
         return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry, translateInChunks: chunkTranslator });
       }
       throw new Error('lane Codex fermata senza prova di indisponibilità del modello');
@@ -15560,9 +15571,10 @@ async function translatePendingBodyWithCodex(
       const deadlineMs = codexCallDeadlineMs({
         now: Date.now(),
         budgetRemainingMs: Math.max(0, laneDeadlineMs - Date.now()),
-        processDeadlineMs: _pendingBodyCodexDeadlineMs,
+        processDeadlineMs: codexRecoveryDeadlineMs,
       });
       if (deadlineMs === null) {
+        if (canFallback) return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry, translateInChunks: chunkTranslator });
         throw new Error('finestra residua troppo corta per una chiamata Codex');
       }
       const codexCallOptions = {
@@ -15583,6 +15595,7 @@ async function translatePendingBodyWithCodex(
       });
       const rejected = [];
       let codexModelUnavailable = false;
+      let codexBudgetUnavailable = false;
       const markedBody = tableHeaderColumnMarkers(itValue);
       if (markedBody.collision || markedBody.ambiguous) return null;
       const text = await translateFieldFreeMt({
@@ -15598,6 +15611,7 @@ async function translatePendingBodyWithCodex(
           }
           const callAdmission = admitCall();
           if (!callAdmission) {
+            codexBudgetUnavailable = true;
             throw new Error('budget Codex esaurito prima della chiamata fisica');
           }
           // La prima admission e' quella gia' concessa dalla lane. Le
@@ -15648,8 +15662,9 @@ async function translatePendingBodyWithCodex(
       } else if (text && validatedText === null) {
         rejected.push('structure');
       }
-      if ((codexModelUnavailable || !pendingBodySecondLaneAvailable() || rejected.length > 0)
-        && typeof callWithRetry === 'function') {
+      const codexDeadlineReached = fallbackReserveMs > 0 && Date.now() >= codexRecoveryDeadlineMs;
+      if (canFallback && (codexModelUnavailable || codexBudgetUnavailable || codexDeadlineReached
+        || !pendingBodySecondLaneAvailable() || rejected.length > 0)) {
         // `translateFieldFreeMt` cattura lo stop della cascata segmentata e
         // restituisce un campo vuoto. Se Codex ha anche prodotto un output
         // rifiutato, riprovare la stessa corsia ricreerebbe il difetto: la
