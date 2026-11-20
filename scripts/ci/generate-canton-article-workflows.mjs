@@ -114,8 +114,9 @@ const SECTION_GATE_JOB = `  section_gate:
       contents: read
       issues: read
       pull-requests: read
+      id-token: write
     outputs:
-      proceed: \${{ steps.none.outputs.proceed || steps.canton.outputs.proceed }}
+      proceed: \${{ inputs.dispatch_origin != 'cloud_scheduler' && (steps.none.outputs.proceed || steps.canton.outputs.proceed) || steps.claim.outputs.proceed }}
     steps:
       - name: Section gate — sezione senza gate
         id: none
@@ -167,11 +168,36 @@ const SECTION_GATE_JOB = `  section_gate:
           SECTION: \${{ inputs.section }}
           SELF_ID: \${{ github.run_id }}
           EVENT_NAME: \${{ github.event_name }}
+          DISPATCH_ORIGIN: \${{ inputs.dispatch_origin }}
           TARGET_REF: \${{ github.ref_name }}
           CANTON_GENERATION_MAX_PARALLEL: \${{ vars.CANTON_GENERATION_MAX_PARALLEL }}
           CANTON_DAILY_BUDGET_CAP: \${{ vars.CANTON_DAILY_BUDGET_CAP }}
           QUOTA_BEACON_PEER_REPO: ${QUOTA_BEACON_PEER_REPO}
         run: node scripts/ci/canton-generation-admit.mjs
+
+      - name: Section gate — conferma dello slot ammesso
+        id: claim
+        if: inputs.dispatch_origin == 'cloud_scheduler' && steps.canton.outputs.proceed == 'true'
+        env:
+          SECTION: \${{ inputs.section }}
+          SELF_ID: \${{ github.run_id }}
+          RECOVERY_SLOT: \${{ inputs.recovery_slot }}
+          RECOVERY_CLAIM: \${{ inputs.recovery_claim }}
+          GENERATION_CLAIM_ENDPOINT: __CLAIM_ENDPOINT__
+        run: |
+          set -euo pipefail
+          generation_claim_endpoint="$GENERATION_CLAIM_ENDPOINT"
+          generation_oidc_token=''
+          echo "::add-mask::$RECOVERY_CLAIM"
+__CLAIM_FUNCTIONS__
+          if request_generation_claim admit; then
+            echo "Slot Cloud Scheduler ammesso dal registro Firestore: $RECOVERY_SLOT."
+            echo 'proceed=true' >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::ammissione Firestore dello slot non confermata; il generatore resta chiuso."
+            echo "GENERATION_OUTCOME kind=skipped reason=generation-slot-claim-denied section=$SECTION"
+            echo 'proceed=false' >> "$GITHUB_OUTPUT"
+          fi
 
 `;
 
@@ -194,87 +220,13 @@ export const CORE_REPLACEMENTS = [
     replace: '',
   },
   {
-    id: 'admit: il core non riceve claim Cloud Scheduler',
-    count: 1,
-    find: '          generation_claim_endpoint="${GENERATION_CLAIM_ENDPOINT:-}"\n'
-      + "          generation_oidc_token=''\n"
-      + '          has_generation_claim=false\n'
-      + '          loop_clock_dispatch=false\n'
-      + '          if [ -n "${RECOVERY_SLOT:-}" ] && [ -n "${RECOVERY_CLAIM:-}" ]; then\n'
-      + '            has_generation_claim=true\n'
-      + '          fi\n',
-    replace: '          loop_clock_dispatch=false\n',
-  },
-  {
-    id: 'admit: il core non include helper OIDC per richiedere il token',
-    count: 1,
-    find: '          get_generation_oidc_token() {\n'
-      + '            if [ -n "$generation_oidc_token" ]; then return 0; fi\n'
-      + '            if [ -z "${ACTIONS_ID_TOKEN_REQUEST_URL:-}" ] \\\n'
-      + '              || [ -z "${ACTIONS_ID_TOKEN_REQUEST_TOKEN:-}" ] \\\n'
-      + '              || [ -z "$generation_claim_endpoint" ]; then\n'
-      + '              return 1\n'
-      + '            fi\n'
-      + '            local encoded_audience token_url token_response\n'
-      + '            encoded_audience="$(jq -rn --arg value "$generation_claim_endpoint" \'$value | @uri\')" || return 1\n'
-      + '            token_url="${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${encoded_audience}"\n'
-      + '            token_response="$(curl -sS --fail --max-time 10 \\\n'
-      + '              -H "Authorization: Bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \\\n'
-      + '              "$token_url" 2>/dev/null)" || return 1\n'
-      + '            generation_oidc_token="$(jq -er \'.value | select(type == "string" and length > 0)\' \\\n'
-      + '              <<<"$token_response" 2>/dev/null)" || return 1\n'
-      + '            echo "::add-mask::$generation_oidc_token"\n'
-      + '          }\n',
-    replace: '',
-  },
-  {
-    id: 'admit: il core non include helper OIDC per richiedere claim',
-    count: 1,
-    find: '          request_generation_claim() {\n'
-      + '            local action payload response status body\n'
-      + '            action="$1"\n'
-      + '            get_generation_oidc_token || return 1\n'
-      + '            payload="$(jq -cn --arg action "$action" --arg slotKey "$RECOVERY_SLOT" \\\n'
-      + '              --arg claimToken "$RECOVERY_CLAIM" --arg runId "$SELF_ID" \\\n'
-      + '              \'{action:$action,slotKey:$slotKey,claimToken:$claimToken,runId:$runId}\')" || return 1\n'
-      + '            response="$(curl -sS --max-time 10 -X POST \\\n'
-      + '              -H "Authorization: Bearer ${generation_oidc_token}" \\\n'
-      + '              -H \'Content-Type: application/json\' -d "$payload" \\\n'
-      + '              -w $\'\\n%{http_code}\' "$generation_claim_endpoint" 2>/dev/null)" || return 1\n'
-      + '            status="${response##*$\'\\n\'}"\n'
-      + '            body="${response%$\'\\n\'*}"\n'
-      + '            [ "$status" = "200" ] || return 1\n'
-      + '            if [ "$action" = "admit" ]; then\n'
-      + '              jq -e \'.ok == true and .admitted == true\' <<<"$body" >/dev/null 2>&1\n'
-      + '            else\n'
-      + '              jq -e \'.ok == true and .released == true\' <<<"$body" >/dev/null 2>&1\n'
-      + '            fi\n'
-      + '          }\n',
-    replace: '',
-  },
-  {
-    id: 'admit: il core non esegue operazioni OIDC di rilascio',
-    count: 1,
-    find: '          release_generation_claim() {\n'
-      + '            [ "$has_generation_claim" = "true" ] || return 0\n'
-      + '            request_generation_claim release\n'
-      + '          }\n',
-    replace: '          release_generation_claim() { return 0; }\n',
-  },
-  {
     id: 'admit: il nome del chiamante arriva per env',
     count: 1,
     find: '          CALLER_WORKFLOW: generate-article.yml\n',
     replace: '          CALLER_WORKFLOW: ${{ inputs.caller_workflow }}\n',
   },
   {
-    id: 'admit: il permesso OIDC resta solo nel workflow principale',
-    count: 1,
-    find: '      id-token: write # OIDC autenticato per ammettere/rilasciare lo slot Firestore\n',
-    replace: '',
-  },
-  {
-    id: 'admit: gli input del cloud clock restano solo nel workflow principale',
+    id: 'admit: vincola il claim alla sezione del chiamante',
     count: 1,
     find: '          SECTION_REQUESTED: ${{ inputs.section }}\n'
       + '          SOURCE_URL: ${{ inputs.url }}\n'
@@ -284,7 +236,12 @@ export const CORE_REPLACEMENTS = [
       + '          RECOVERY_SLOT: ${{ inputs.recovery_slot }}\n'
       + '          RECOVERY_CLAIM: ${{ inputs.recovery_claim }}\n'
       + '          GENERATION_CLAIM_ENDPOINT: https://europe-west6-frontaliere-ticino.cloudfunctions.net/claimGenerationSlot\n',
-    replace: '',
+    replace: '          SECTION_REQUESTED: ${{ inputs.section }}\n'
+      + '          DISPATCH_ORIGIN: ${{ inputs.dispatch_origin }}\n'
+      + '          LOOP_CLOCK: ${{ inputs.loop_clock }}\n'
+      + '          RECOVERY_SLOT: ${{ inputs.recovery_slot }}\n'
+      + '          RECOVERY_CLAIM: ${{ inputs.recovery_claim }}\n'
+      + '          GENERATION_CLAIM_ENDPOINT: https://europe-west6-frontaliere-ticino.cloudfunctions.net/claimGenerationSlot\n',
   },
   {
     id: 'admit: la completezza di display_title resta nel receiver principale',
@@ -386,32 +343,16 @@ export const CORE_REPLACEMENTS = [
       + '            && { [ "$dispatch_origin" = "manual" ] || [ "$dispatch_origin" = "editorial_signal" ]; }; then\n'
       + '            explicit_dispatch=true\n'
       + '          fi\n',
-    replace: '          explicit_dispatch=false\n'
+    replace: '          if [ "${DISPATCH_ORIGIN:-manual}" = "cloud_scheduler" ] && [ "$loop_clock_dispatch" != "true" ]; then\n'
+      + '            skip_generation_slot generation-slot-input-invalid\n'
+      + '          fi\n'
+      + '          explicit_dispatch=false\n'
       + '          if [ "$EVENT_NAME" = "workflow_dispatch" ] \\\n'
       + '            && [ "$is_link" != "true" ] \\\n'
       + '            && [ "$loop_clock_dispatch" != "true" ]; then\n'
       + '            echo "Dispatch manuale cantonale (chain_depth=$chain_depth) → si procede sempre."\n'
       + '            echo "proceed=true" >> "$GITHUB_OUTPUT"\n'
       + '            exit 0\n'
-      + '          fi\n',
-  },
-  {
-    id: 'admit: il core non ammette claim OIDC Cloud Scheduler',
-    count: 1,
-    find: '          if [ "$loop_clock_dispatch" = "true" ]; then\n'
-      + '            if ! request_generation_claim admit; then\n'
-      + '              echo "::warning::ammissione Firestore dello slot non confermata; il generatore resta chiuso."\n'
-      + '              if ! release_generation_claim; then\n'
-      + '                echo "::warning::claim non rilasciato esplicitamente; lease e retry Cloud Scheduler restano il fallback."\n'
-      + '              fi\n'
-      + '              echo "proceed=false" >> "$GITHUB_OUTPUT"\n'
-      + '              echo "GENERATION_OUTCOME kind=skipped reason=generation-slot-claim-denied section=unknown"\n'
-      + '              exit 0\n'
-      + '            fi\n'
-      + '            echo "Slot Cloud Scheduler ammesso dal registro Firestore: $RECOVERY_SLOT."\n'
-      + '          fi\n',
-    replace: '          if [ "$loop_clock_dispatch" = "true" ]; then\n'
-      + '            skip_generation_slot generation-slot-unavailable-in-canton-core\n'
       + '          fi\n',
   },
   {
@@ -427,13 +368,19 @@ export const CORE_REPLACEMENTS = [
     id: 'admit: la validazione slot non cabla le sezioni nel core',
     count: 1,
     find: '              frontaliere|svizzera) ;;\n',
-    replace: '              "$SECTION_REQUESTED") ;;\n',
+    replace: '              canton-*) [ "${DISPATCH_ORIGIN:-manual}" = "cloud_scheduler" ] || skip_generation_slot generation-dispatch-origin-mismatch ;;\n',
   },
   {
     id: 'admit: la snapshot bounded legge le run del chiamante',
     count: 1,
     find: '"repos/$REPO/actions/workflows/generate-article.yml/runs?per_page=100&created=%3E%3D$admission_since"',
     replace: '"repos/$REPO/actions/workflows/$CALLER_WORKFLOW/runs?per_page=100&created=%3E%3D$admission_since"',
+  },
+  {
+    id: 'admit: conferma lo slot solo dopo il gate cantonale',
+    count: 1,
+    find: "          if [ \"$loop_clock_dispatch\" = \"true\" ]; then\n            if ! request_generation_claim admit; then\n              echo \"::warning::ammissione Firestore dello slot non confermata; il generatore resta chiuso.\"\n              if ! release_generation_claim; then\n                echo \"::warning::claim non rilasciato esplicitamente; lease e retry Cloud Scheduler restano il fallback.\"\n              fi\n              echo \"proceed=false\" >> \"$GITHUB_OUTPUT\"\n              echo \"GENERATION_OUTCOME kind=skipped reason=generation-slot-claim-denied section=unknown\"\n              exit 0\n            fi\n            echo \"Slot Cloud Scheduler ammesso dal registro Firestore: $RECOVERY_SLOT.\"\n          fi\n",
+    replace: '',
   },
   {
     id: 'generate: dipende anche dal gate di sezione',
@@ -591,7 +538,7 @@ export const CORE_REPLACEMENTS = [
 ];
 
 /** Nomi che il core non deve piu' avere cablati nelle righe eseguibili. */
-export const CORE_FORBIDDEN_LITERALS = ['generate-article.yml', 'svizzera', 'frontaliere', 'blog-body', 'claimGenerationSlot'];
+export const CORE_FORBIDDEN_LITERALS = ['generate-article.yml', 'svizzera', 'frontaliere', 'blog-body'];
 
 const CORE_HEADER = `${AUTO_GENERATED_MARKER}
 # Sorgente: ${WORKFLOWS_DIR}/${SOURCE_WORKFLOW} (job admit e generate, senza i commenti)
@@ -653,6 +600,18 @@ on:
         required: false
         default: false
         type: boolean
+      dispatch_origin:
+        type: string
+        default: manual
+      loop_clock:
+        type: string
+        default: ''
+      recovery_slot:
+        type: string
+        default: ''
+      recovery_claim:
+        type: string
+        default: ''
       chain_depth:
         required: false
         default: '0'
@@ -713,6 +672,7 @@ export function buildCoreWorkflow(source) {
     const leftover = jobs.replace(SECTION_GATE_JOB, '').split('\n').filter((l) => l.includes(literal)
       // La manutenzione va riconosciuta anche quando il push tocca più sezioni.
       && !(literal === 'blog-body' && /^\s*BODY_MAINTENANCE_PATH_RE: /.test(l))
+      && !(literal === 'frontaliere' && l.trim() === 'GENERATION_CLAIM_ENDPOINT: https://europe-west6-frontaliere-ticino.cloudfunctions.net/claimGenerationSlot')
       // I messaggi di log e di errore nominano le sezioni storiche e il
       // workflow come esempi: sono testo per chi legge, non logica.
       && !/^\s*(echo |\[ -n "\$undeclared_why" \]|stop )/.test(l)
@@ -724,6 +684,11 @@ export function buildCoreWorkflow(source) {
       );
     }
   }
+  const claimFunctions = jobs.match(/^ {10}get_generation_oidc_token\(\) \{[\s\S]*?(?=^ {10}release_generation_claim\(\))/m)?.[0].trimEnd();
+  const claimEndpoint = jobs.match(/^ {10}GENERATION_CLAIM_ENDPOINT: (https:\/\/\S+)$/m)?.[1];
+  if (!claimFunctions || !claimEndpoint) throw new Error('Helper del claim OIDC non trovato nella sorgente');
+  jobs = jobs.replace('__CLAIM_FUNCTIONS__', () => claimFunctions)
+    .replace('__CLAIM_ENDPOINT__', () => claimEndpoint);
   return `${CORE_HEADER}${jobs.replace(/\n*$/, '')}\n`;
 }
 
@@ -806,6 +771,10 @@ export function buildCallerWorkflow(canton, offset) {
     throw new Error(`profilo ${code}: "${section}" non e' la sua sezione cantonale nel core`);
   }
   const file = callerWorkflowFile(code);
+  if (canton.cloudScheduler !== undefined && typeof canton.cloudScheduler !== 'boolean') {
+    throw new Error(`profilo ${code}: cloudScheduler deve essere booleano`);
+  }
+  const nativeSchedule = canton.cloudScheduler ? '' : `  schedule:\n    - cron: '${cronExpression(canton, offset)}'\n`;
   const { pushPaths, bodyPathRegex } = sectionCorpusPaths(section);
   return `${AUTO_GENERATED_MARKER}
 # Sorgente: ${PROFILE_REL} (cronMinute, cadenceHours) + engine/shared/articleSectionCore.mjs (path della sezione).
@@ -813,16 +782,33 @@ export function buildCallerWorkflow(canton, offset) {
 # Rigenera: node ${GENERATOR_REL}
 # Verifica: node ${GENERATOR_REL} --check
 name: Generate Blog Article (${section})
+run-name: \${{ inputs.loop_clock != '' && format('Generate Blog Article (${section}) [loop-clock {0}] [generation-slot {1}]', inputs.loop_clock, inputs.recovery_slot) || 'Generate Blog Article (${section})' }}
+# generation-cloud-clock-contract: v1
 
 on:
-  schedule:
-    - cron: '${cronExpression(canton, offset)}'
-  push:
+${nativeSchedule}  push:
     branches: [main]
     paths:
 ${pushPaths.map((p) => `      - '${p}'`).join('\n')}
   workflow_dispatch:
     inputs:
+      section:
+        type: choice
+        default: ${section}
+        options:
+          - ${section}
+      dispatch_origin:
+        type: choice
+        default: manual
+        options:
+          - manual
+          - cloud_scheduler
+      loop_clock:
+        type: string
+      recovery_slot:
+        type: string
+      recovery_claim:
+        type: string
       url:
         description: 'Optional: specific source URL (empty = auto-scan)'
         required: false
@@ -843,6 +829,7 @@ jobs:
       contents: read
       issues: read
       pull-requests: read
+      id-token: write
     uses: ./${WORKFLOWS_DIR}/${CORE_WORKFLOW}
     secrets: inherit
     with:
@@ -853,6 +840,10 @@ jobs:
       section_gate: canton
       chain_dispatch: false
       url: \${{ inputs.url }}
+      dispatch_origin: \${{ inputs.dispatch_origin || 'manual' }}
+      loop_clock: \${{ inputs.loop_clock }}
+      recovery_slot: \${{ inputs.recovery_slot }}
+      recovery_claim: \${{ inputs.recovery_claim }}
       dry_run: \${{ inputs.dry_run == true }}
 `;
 }
@@ -900,6 +891,7 @@ jobs:
       contents: read
       issues: read
       pull-requests: read
+      id-token: write
     uses: ./${WORKFLOWS_DIR}/${CORE_WORKFLOW}
     secrets: inherit
     with:
