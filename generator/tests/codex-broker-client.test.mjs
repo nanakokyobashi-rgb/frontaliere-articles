@@ -149,49 +149,55 @@ test('il kill-switch esistente esclude Codex senza riattivare Gemini', () => {
   assert.equal(getPreferredModel({ chain: [CODEX, AI_MODELS.GEMINI_FLASH] }), null);
 });
 
-test('un timeout Codex apre il circuito per run e passa al fallback OpenRouter', async () => {
-  process.env.GEMINI_API_KEY = 'gemini-test-key';
-  behavior = (client) => {
-    client.end(`${JSON.stringify({ ok: false, error: 'Codex CLI timed out after 15000ms' })}\n`);
-  };
-  process.env.CODEX_CLI_TIMEOUT_MS = '90000';
-  const realFetch = globalThis.fetch;
-  process.env.OPENROUTER_API_KEY = 'openrouter-test-key';
-  globalThis.fetch = async () => new Response(JSON.stringify({
-    choices: [{ message: { content: 'FALLBACK' } }],
-  }), { status: 200 });
-  try {
-    const result = await callLLM(messages, {
-      model: CODEX,
-      chain: [CODEX, AI_MODELS.OR_GEMMA_3_27B],
-      prefer: [CODEX],
-      bypassForceChain: true,
-      maxRetriesPerModel: 1,
-      deadlineMs: Date.now() + 90_000,
-    });
-    assert.equal(result, 'FALLBACK');
-    assert.ok(requests[0].timeoutMs <= 60_001, 'almeno un terzo del tempo è riservato al ripiego');
-    assert.equal(isModelAvailable(CODEX), false);
-    assert.match(logged(), /primary lane disabled for the rest of this run \(timeout\)/);
-  } finally {
-    globalThis.fetch = realFetch;
-  }
-});
+for (const [failure, brokerError] of [
+  ['un timeout del processo', 'Codex CLI timed out after 15000ms'],
+  ['uno stream interrotto', 'Codex CLI exited with code 1: ERROR: stream disconnected before completion: Transport error: network error: error decoding response body'],
+]) {
+  test(`Codex passa al fallback dopo ${failure} e consente una richiesta successiva`, async () => {
+    process.env.GEMINI_API_KEY = 'gemini-test-key';
+    behavior = (client) => {
+      client.end(`${JSON.stringify({ ok: false, error: brokerError })}\n`);
+    };
+    process.env.CODEX_CLI_TIMEOUT_MS = '90000';
+    const realFetch = globalThis.fetch;
+    process.env.OPENROUTER_API_KEY = 'openrouter-test-key';
+    globalThis.fetch = async () => new Response(JSON.stringify({
+      choices: [{ message: { content: 'FALLBACK' } }],
+    }), { status: 200 });
+    try {
+      const result = await callLLM(messages, {
+        model: CODEX,
+        chain: [CODEX, AI_MODELS.OR_GEMMA_3_27B],
+        prefer: [CODEX],
+        bypassForceChain: true,
+        maxRetriesPerModel: 1,
+        deadlineMs: Date.now() + 90_000,
+      });
+      assert.equal(result, 'FALLBACK');
+      assert.ok(requests[0].timeoutMs <= 60_001, 'almeno un terzo del tempo è riservato al ripiego');
+      assert.equal(isModelAvailable(CODEX), true);
+      behavior = (client) => { client.end(`${JSON.stringify({ ok: true, result: 'VERDICT' })}\n`); };
+      assert.equal(await callCodex(), 'VERDICT');
+    } finally {
+      globalThis.fetch = realFetch;
+    }
+  });
+}
 
 test('una chiamata diretta Codex successiva al circuito non riapre il broker', async () => {
   behavior = (client) => {
-    client.end(`${JSON.stringify({ ok: false, error: 'Codex CLI timed out after 15000ms' })}\n`);
+    client.end(`${JSON.stringify({ ok: false, error: 'broker unavailable' })}\n`);
   };
   await assert.rejects(() => callSingleModel(messages, {
     model: CODEX,
     maxRetriesPerModel: 1,
-  }), /timed out/);
+  }), /broker unavailable/);
   const requestsAfterFailure = requests.length;
 
   await assert.rejects(() => callSingleModel(messages, {
     model: CODEX,
     maxRetriesPerModel: 1,
-  }), /primary circuit open for this run \(timeout\)/);
+  }), /primary circuit open for this run \(broker transport\/auth unavailable\)/);
   assert.equal(requests.length, requestsAfterFailure, 'il circuito deve saltare _callModel e la socket');
 });
 

@@ -93,7 +93,7 @@ import {
   IMAGE_LEASE_CONTEXT_ENV,
   imageNamespaceForKey,
 } from './lib/r2-image-namespace-lock.mjs';
-import { purgeChunks } from './publish-section-edge.mjs';
+import { purgeChunks } from './lib/cf-purge-variants.mjs';
 import {
   apiInputChangedInRange,
   latestApiInputCommit,

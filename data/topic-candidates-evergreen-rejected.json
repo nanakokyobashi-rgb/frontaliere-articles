@@ -6718,10 +6718,10 @@
       "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-19T18:19:43.421Z",
-      "lastStrikeAt": "2026-11-20T16:36:39.355Z",
-      "expiresAt": "2026-12-20T16:36:39.355Z"
+      "lastStrikeAt": "2026-11-20T20:41:38.432Z",
+      "expiresAt": "2026-12-20T20:41:38.432Z"
     }
   ],
   "legacy": [
@@ -15096,6 +15096,10 @@
     "frontaliere::https://www.ticinonews.ch/ticino/terrani-e-di-lella-uniscono-le-forze-447020": {
       "section": "frontaliere",
       "ts": 1795202326679
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/la-polizia-auspica-un-cambio-al-vertice-del-dipartimento-speriamo-di-non-aver-toccato-il-fondo-447055": {
+      "section": "frontaliere",
+      "ts": 1795209332591
     }
   }
 }
