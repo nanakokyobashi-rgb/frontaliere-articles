@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-stansstad-finanze-servizi-sociali.webp",
+      "sha256": "da8483862f77d7d178b229bf9921bcb7e72d22afad5860bb009a03ed42a4794d"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-stansstad-finanze-servizi-sociali-480w.webp",
+      "sha256": "150004335a07a0cd05f2e5a80619a0699ba103bc66c1e9708b3d5c6e99fa36f9"
+    }
+  ]
 }
