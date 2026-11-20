@@ -532,7 +532,7 @@ import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFrom
 import { loadEmbeddingStore, loadEmbeddingMeta } from './lib/scoring/embeddingMatcher.mjs';
 import {
   appendGeneratedImageRecord,
-  hasValidBlogImageRecord,
+  createBlogImageRecordValidator,
   imageRecordForPath,
 } from './lib/blog-image-registry.mjs';
 import { imageCreditRecordFromGeneratedImageRecord } from '../../engine/shared/imageCredits.mjs';
@@ -1885,9 +1885,10 @@ const PLACES_IMAGES = [
 // topical pool and are reserved for the final governed default fallback.
 const BLOG_IMAGES = (() => {
   try {
+    const hasValidImage = createBlogImageRecordValidator(PROJECT_ROOT);
     return readdirSync(resolve('public/images/blog'))
       .filter((file) => file.endsWith('.webp'))
-      .filter((file) => hasValidBlogImageRecord(PROJECT_ROOT, `/images/blog/${file}`))
+      .filter((file) => hasValidImage(`/images/blog/${file}`))
       .filter((file) => {
         try {
           return statSync(resolve(`public/images/blog/${file}`)).size <= BLOG_IMAGE_HARD_MAX_BYTES;
