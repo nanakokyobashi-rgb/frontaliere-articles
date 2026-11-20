@@ -4094,13 +4094,56 @@ export async function discoverOpenRouterFreeModels(opts = {}) {
 // ── Firestore init & load ────────────────────────────────────
 
 /**
+ * Limite per ciascuna lettura remota dello score ledger.
+ *
+ * Il ledger e' un acceleratore di routing, non una precondizione per generare:
+ * se Firestore non risponde, `initScoreStore()` deve continuare con i punteggi
+ * in memoria. Senza un tetto una `DocumentReference.get()` puo' lasciare il
+ * generatore appeso prima della discovery e della scansione delle fonti.
+ */
+export const SCORE_STORE_READ_TIMEOUT_MS = 15_000;
+
+/**
+ * Esegue una lettura Firestore con un fallback temporale esplicito.
+ *
+ * Firestore Admin non espone un AbortSignal comune a DocumentReference e Query
+ * per queste due letture; il timeout quindi non cancella la richiesta in volo,
+ * ma impedisce che il suo risultato continui a governare l'avvio del processo.
+ * La continuazione della promise resta agganciata per assorbire un eventuale
+ * rifiuto tardivo senza creare un `unhandledRejection`.
+ */
+export function withScoreStoreReadTimeout(read, timeoutMs = SCORE_STORE_READ_TIMEOUT_MS) {
+  if (typeof read !== 'function') throw new TypeError('withScoreStoreReadTimeout: read deve essere una funzione');
+  const limit = Number.isFinite(timeoutMs) && timeoutMs > 0
+    ? timeoutMs
+    : SCORE_STORE_READ_TIMEOUT_MS;
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => {
+      reject(new Error(`ScoreStore Firestore read timed out after ${limit}ms`));
+    }, limit);
+    Promise.resolve()
+      .then(read)
+      .then(
+        (value) => {
+          clearTimeout(timer);
+          resolve(value);
+        },
+        (error) => {
+          clearTimeout(timer);
+          reject(error);
+        },
+      );
+  });
+}
+
+/**
  * Initialize the persistent score store from Firestore.
  * Call this once at the start of a workflow BEFORE any callLLM().
  *
  * - Loads all model scores from Firestore with time-decay
  * - Restores exhausted models whose daily limit hasn't reset yet
  * - Registers process exit hooks for final flush
- * - Falls back gracefully to in-memory if Firestore is unavailable
+ * - Falls back gracefully to in-memory if Firestore is unavailable or too slow
  *
  * Safe to call multiple times (idempotent).
  */
@@ -4327,7 +4370,7 @@ export async function initScoreStore() {
     const aggregateRef = _firestoreDb
       .collection(FIRESTORE_COLLECTION)
       .doc(FIRESTORE_AGGREGATE_DOC);
-    const aggregateSnap = await aggregateRef.get();
+    const aggregateSnap = await withScoreStoreReadTimeout(() => aggregateRef.get());
     const aggregateData = aggregateSnap.exists ? aggregateSnap.data() : null;
     const aggregateModels = aggregateData?.models;
 
@@ -4340,7 +4383,9 @@ export async function initScoreStore() {
     } else {
       // One-time migration path: read the legacy per-model docs.
       source = 'legacy-collection';
-      const snapshot = await _firestoreDb.collection(FIRESTORE_COLLECTION).get();
+      const snapshot = await withScoreStoreReadTimeout(
+        () => _firestoreDb.collection(FIRESTORE_COLLECTION).get(),
+      );
       for (const doc of snapshot.docs) {
         if (doc.id === FIRESTORE_AGGREGATE_DOC) continue;
         const data = doc.data();

@@ -310,6 +310,30 @@ test('flushScoresBeforeExit non appende un\'uscita quando Firestore non risponde
   run.resetState();
 });
 
+test('una lettura iniziale dello score ledger che non risponde non può appendere il generatore', async () => {
+  const run = await freshInstance();
+  const started = Date.now();
+
+  await assert.rejects(
+    () => run.withScoreStoreReadTimeout(() => new Promise(() => {}), 25),
+    /ScoreStore Firestore read timed out after 25ms/,
+  );
+
+  const elapsed = Date.now() - started;
+  assert.ok(elapsed < 250, `il fallback dello score ledger deve essere bounded (attesa ${elapsed}ms)`);
+  run.resetState();
+});
+
+test('initScoreStore applica il limite a entrambe le letture Firestore di startup', () => {
+  const src = readFileSync(AI_MODELS, 'utf8');
+  const initBody = src.slice(src.indexOf('export async function initScoreStore'));
+  assert.match(initBody, /withScoreStoreReadTimeout\(\(\) => aggregateRef\.get\(\)\)/u);
+  assert.match(
+    initBody,
+    /withScoreStoreReadTimeout\(\s*\(\) => _firestoreDb\.collection\(FIRESTORE_COLLECTION\)\.get\(\),/su,
+  );
+});
+
 test('il riepilogo di fine run nomina i modelli chiamati in QUESTA run', async () => {
   const run = await freshInstance();
   run.resetState();
