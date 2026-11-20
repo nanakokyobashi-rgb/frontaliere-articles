@@ -15776,7 +15776,7 @@ async function translatePendingBodyWithCodex(
       }
       const codexDeadlineReached = fallbackReserveMs > 0 && Date.now() >= codexRecoveryDeadlineMs;
       if (canFallback && (codexModelUnavailable || codexBudgetUnavailable || codexDeadlineReached
-        || !pendingBodySecondLaneAvailable() || rejected.length > 0)) {
+        || !pendingBodySecondLaneAvailable() || rejected.length > 0 || !validatedText)) {
         // `translateFieldFreeMt` cattura lo stop della cascata segmentata e
         // restituisce un campo vuoto. Se Codex ha anche prodotto un output
         // rifiutato, riprovare la stessa corsia ricreerebbe il difetto: la
