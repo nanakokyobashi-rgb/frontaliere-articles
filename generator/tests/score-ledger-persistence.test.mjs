@@ -103,7 +103,7 @@ function mergeInto(target, patch) {
  */
 function makeFakeFirestore({ delayMs = 0, failTimes = 0 } = {}) {
   const store = new Map(); // "collection/doc" → data
-  const state = { writes: 0, failuresLeft: failTimes, lastPayloads: [] };
+  const state = { writes: 0, failuresLeft: failTimes, lastPayloads: [], terminated: false };
   const api = {
     collection: (c) => ({
       doc: (d) => {
@@ -127,6 +127,10 @@ function makeFakeFirestore({ delayMs = 0, failTimes = 0 } = {}) {
         };
       },
     }),
+    terminate() {
+      state.terminated = true;
+      return Promise.resolve();
+    },
     _state: state,
     _seed(key, data) { store.set(key, data); },
     _model(id = ENC_HAIKU) { return store.get('ai_model_scores/_all')?.models?.[id]; },
@@ -310,8 +314,10 @@ test('flushScoresBeforeExit non appende un\'uscita quando Firestore non risponde
   run.resetState();
 });
 
-test('una lettura iniziale dello score ledger che non risponde non può appendere il generatore', async () => {
+test('una lettura iniziale dello score ledger che non risponde chiude il client e non appende il generatore', async () => {
   const run = await freshInstance();
+  const db = makeFakeFirestore();
+  run.__installScoreStoreForTests(db);
   const started = Date.now();
 
   await assert.rejects(
@@ -321,6 +327,8 @@ test('una lettura iniziale dello score ledger che non risponde non può appender
 
   const elapsed = Date.now() - started;
   assert.ok(elapsed < 250, `il fallback dello score ledger deve essere bounded (attesa ${elapsed}ms)`);
+  assert.equal(db._state.terminated, true,
+    'un timeout di lettura deve terminare il client Firestore, non solo scartare la promise');
   run.resetState();
 });
 

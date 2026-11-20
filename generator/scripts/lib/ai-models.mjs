@@ -4107,11 +4107,26 @@ export const SCORE_STORE_READ_TIMEOUT_MS = 15_000;
  * Esegue una lettura Firestore con un fallback temporale esplicito.
  *
  * Firestore Admin non espone un AbortSignal comune a DocumentReference e Query
- * per queste due letture; il timeout quindi non cancella la richiesta in volo,
- * ma impedisce che il suo risultato continui a governare l'avvio del processo.
- * La continuazione della promise resta agganciata per assorbire un eventuale
- * rifiuto tardivo senza creare un `unhandledRejection`.
+ * per queste due letture. Al timeout si chiude quindi il client Firestore — la
+ * sua API pubblica `terminate()` chiude anche gli stream aperti — prima di
+ * lasciare il fallback in memoria. La continuazione della promise resta
+ * agganciata per assorbire un eventuale rifiuto tardivo senza creare un
+ * `unhandledRejection`.
  */
+function _terminateScoreStoreClient() {
+  const db = _firestoreDb;
+  _firestoreDb = null;
+  if (typeof db?.terminate !== 'function') return;
+  try {
+    // Do not make the bounded read wait on cleanup, but always observe a
+    // rejected terminate() promise so the timeout cannot create a second
+    // unhandled rejection.
+    Promise.resolve(db.terminate()).catch(() => {});
+  } catch {
+    // The read timeout is still the fallback boundary if cleanup itself fails.
+  }
+}
+
 export function withScoreStoreReadTimeout(read, timeoutMs = SCORE_STORE_READ_TIMEOUT_MS) {
   if (typeof read !== 'function') throw new TypeError('withScoreStoreReadTimeout: read deve essere una funzione');
   const limit = Number.isFinite(timeoutMs) && timeoutMs > 0
@@ -4119,6 +4134,7 @@ export function withScoreStoreReadTimeout(read, timeoutMs = SCORE_STORE_READ_TIM
     : SCORE_STORE_READ_TIMEOUT_MS;
   return new Promise((resolve, reject) => {
     const timer = setTimeout(() => {
+      _terminateScoreStoreClient();
       reject(new Error(`ScoreStore Firestore read timed out after ${limit}ms`));
     }, limit);
     Promise.resolve()
