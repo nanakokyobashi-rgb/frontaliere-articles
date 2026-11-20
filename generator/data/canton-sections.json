@@ -5266,6 +5266,7 @@
     {
       "code": "OW",
       "section": "canton-ow",
+      "cloudScheduler": true,
       "members": ["OW"],
       "languages": ["de"],
       "enabled": true,

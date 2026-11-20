@@ -750,26 +750,32 @@ const CALLERS = CANTONS.map((c) => ({ canton: c, file: callerWorkflowFile(c.code
 test('cron: minuto e cadenza vengono dal profilo, e gli slot non si ammassano', () => {
   const reserved = parseReservedCronMinutes(SOURCE);
   assert.deepEqual([...reserved].sort((a, b) => a - b), [7, 37], 'gli slot Cloud Scheduler restano riservati anche senza cron nativo');
+  const schedule = JSON.parse(readFileSync(path.join(ROOT, SLOT_SCHEDULE_REL), 'utf8'));
+  const calendar = new Map(schedule.entries.map((entry) => [entry.section, entry]));
+  assert.equal(calendar.size, CALLERS.length);
   const seen = new Set();
   for (const { canton, crons, file } of CALLERS) {
-    assert.equal(crons.length, 1, file);
-    const m = /^(\d+) (\*|[\d,]+) \* \* \*$/.exec(crons[0]);
-    assert.ok(m, `${file}: cron inatteso ${crons[0]}`);
+    const entry = calendar.get(canton.section);
+    assert.equal(entry.workflow, file);
+    const cron = entry.cron;
+    assert.deepEqual(crons, canton.cloudScheduler ? [] : [cron], file);
+    const m = /^(\d+) (\*|[\d,]+) \* \* \*$/.exec(cron);
+    assert.ok(m, `${file}: cron inatteso ${cron}`);
     assert.equal(Number(m[1]), canton.cronMinute, `${file}: minuto`);
     assert.ok(!reserved.has(canton.cronMinute), `${file}: minuto ${canton.cronMinute} riservato a generate-article.yml`);
     const hours = m[2] === '*' ? Array.from({ length: 24 }, (_, h) => h) : m[2].split(',').map(Number);
     assert.equal(hours.length, 24 / canton.cadenceHours, `${file}: ${hours.length} slot al giorno per una cadenza di ${canton.cadenceHours}h`);
     hours.forEach((h, i) => assert.equal(h, hours[0] + i * canton.cadenceHours, `${file}: ore non equidistanti`));
     assert.ok(hours[0] < canton.cadenceHours);
-    assert.equal(crons[0], cronExpression(canton, OFFSETS.get(canton.section)));
-    assert.ok(!seen.has(crons[0]), `${file}: cron duplicato ${crons[0]}`);
-    seen.add(crons[0]);
+    assert.equal(cron, cronExpression(canton, OFFSETS.get(canton.section)));
+    assert.ok(!seen.has(cron), `${file}: cron duplicato ${cron}`);
+    seen.add(cron);
   }
   // Per ogni ora del giorno, quanti cantoni hanno uno slot: senza sfasamento
   // sarebbero tutti e 24 all'ora 0, contro un tetto globale di 3.
   const perHour = Array.from({ length: 24 }, () => 0);
-  for (const { crons } of CALLERS) {
-    const hoursField = crons[0].split(' ')[1];
+  for (const { cron } of calendar.values()) {
+    const hoursField = cron.split(' ')[1];
     for (const h of hoursField === '*' ? perHour.keys() : hoursField.split(',').map(Number)) perHour[h] += 1;
   }
   assert.ok(Math.max(...perHour) <= 8, `troppi cantoni nella stessa ora: ${perHour.join(',')}`);
