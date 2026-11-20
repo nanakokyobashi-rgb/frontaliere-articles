@@ -128,6 +128,12 @@ test('il dispatcher riconosce il run-name con coorte dopo dry-run', () => {
   assert.match(replayDispatcher, /test\(" \/ dry=true\(\?: \/ c=\[\^\/\]\+\)\?\$"\)/u);
 });
 
+test('il recupero staged ha la storia completa della revisione renderizzata', () => {
+  const replay = workflow.slice(workflow.indexOf('\n  replay-api-after-staged-release:'));
+  const checkout = replay.slice(0, replay.indexOf('- name: Checkout replay dispatcher from workflow revision'));
+  assert.match(checkout, /ref: .*needs\.publish_release_head\.outputs\.rendered_head[^\n]*\n\s+fetch-depth: 0/u);
+});
+
 test('il replay checkout mantiene tutti gli helper nel profilo sparse', () => {
   const replay = workflow.slice(workflow.indexOf('\n  replay-api-after-staged-release:'));
   const checkout = replay.slice(

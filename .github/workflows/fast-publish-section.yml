@@ -1066,8 +1066,10 @@ jobs:
           # publisher ha renderizzato e caricato le pagine. `main` puo' essere
           # avanzata durante il render; il guard sotto in quel caso lascia il
           # lavoro al run generato dal nuovo push.
+          # Stale and mixed-matrix recovery computes the previous corpus
+          # high-water from history, so the staged checkout must be complete.
           ref: ${{ needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
-          fetch-depth: 1
+          fetch-depth: 0
           persist-credentials: false
 
       - name: Checkout replay dispatcher from workflow revision
