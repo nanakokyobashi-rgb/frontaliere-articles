@@ -13744,6 +13744,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.a2-rodi-lavori-finiti.title': 'A2 à Rodi : travaux terminés, tronçon libre',
     'blog.article.a2-rodi-lavori-finiti.excerpt': 'L’Office fédéral des routes OFROU annonce la fin des travaux sur l’A2 à Rodi.',
     'blog.article.a2-rodi-lavori-finiti.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.mendrisio-feste-pista-ghiaccio.title': 'Mendrisio apporte fêtes et patinoire sur la place',
+    'blog.article.mendrisio-feste-pista-ghiaccio.excerpt': 'De fin novembre à janvier, Mendrisio anime ses places et ses quartiers avec une patinoire, un échange de vœux et un calendrier de rendez-vous.',
+    'blog.article.mendrisio-feste-pista-ghiaccio.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaFr;

@@ -13743,6 +13743,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.a2-rodi-lavori-finiti.title': 'A2 a Rodi: lavori finiti, tratta libera',
     'blog.article.a2-rodi-lavori-finiti.excerpt': 'L\'Ufficio federale delle strade USTRA comunica la fine dei lavori sull\'A2 a Rodi.',
     'blog.article.a2-rodi-lavori-finiti.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.mendrisio-feste-pista-ghiaccio.title': 'Mendrisio porta feste e pista di ghiaccio in piazza',
+    'blog.article.mendrisio-feste-pista-ghiaccio.excerpt': 'Da fine novembre a gennaio Mendrisio anima piazze e quartieri con pista di ghiaccio, scambio degli auguri e un calendario di appuntamenti.',
+    'blog.article.mendrisio-feste-pista-ghiaccio.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;
