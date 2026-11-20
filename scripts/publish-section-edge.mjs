@@ -238,7 +238,7 @@ export async function assertExpectedMainHead(
     }
     let apiInputChangedInDelta;
     try {
-      apiInputChangedInDelta = await apiInputChanged(expected, refreshedCurrent);
+      apiInputChangedInDelta = await apiInputChanged({ before: expected, after: refreshedCurrent });
     } catch (error) {
       throw new Error(
         "main e' avanzato durante lo staging edge (" + expected + " → " + refreshedCurrent + "); input API non classificabili",
