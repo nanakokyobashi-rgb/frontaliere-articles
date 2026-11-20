@@ -5100,8 +5100,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-23.yml",
       "mode": "identical",
       "baseline": {
-        "site": "96777827cd6ecd2e",
-        "corpus": "96777827cd6ecd2e",
+        "site": "4e3b6c34f045a554",
+        "corpus": "4e3b6c34f045a554",
         "alignedAt": "2026-11-20"
       }
     },
@@ -5122,8 +5122,8 @@
       "remoteDigestRequired": true,
       "reason": "La baseline registra lo stesso digest SHA-256 raw sui due lati; `remoteDigestRequired` rende il confronto remoto una precondizione fail-closed prima di accettare o riattestare la baseline e prima del trasporto.",
       "baseline": {
-        "site": "ac381d94e49532b5",
-        "corpus": "ac381d94e49532b5",
+        "site": "9e22d3fd47ca9f49",
+        "corpus": "9e22d3fd47ca9f49",
         "alignedAt": "2026-11-20"
       }
     },
