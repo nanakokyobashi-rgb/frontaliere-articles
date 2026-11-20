@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-a2-rodi-lavori-finiti.webp",
+      "sha256": "722b2b19882e8519b71bb5245f104847f018cc595853e3c4e8e7b9ecb9c1ff62"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-a2-rodi-lavori-finiti-480w.webp",
+      "sha256": "dc1757e233453175f4fdb3fae911a6dac3055264087ad860d83147ff3cf32a11"
+    }
+  ]
 }
