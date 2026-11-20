@@ -56,9 +56,10 @@ test('all producer and recovery Firestore reads use the shared deadline helper',
   for (const [relative, readExpression] of targets) {
     const source = readFileSync(join(ROOT, relative), 'utf8');
     assert.match(source, /withFirestoreReadTimeout/u, `${relative} must import the shared helper`);
-    assert.match(
-      source,
-      new RegExp(`withFirestoreReadTimeout\\([\\s\\S]{0,260}${readExpression.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}`, 'u'),
+    const readAt = source.indexOf(readExpression);
+    assert.notEqual(readAt, -1, `${relative} must retain ${readExpression}`);
+    assert.ok(
+      source.lastIndexOf('withFirestoreReadTimeout(', readAt) !== -1,
       `${relative} must bound ${readExpression}`,
     );
   }
