@@ -4,29 +4,25 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sz::https://www.bote.ch/nachrichten/ratgeber/wohnung-als-renditeobjekt-bei-der-finanzierung-gibt-es-besonderes-zu-beachten-art-1732412": {
+    "canton-sz::https://www.nau.ch/ort/schwyz/schwyz-steuerfuss-bleibt-bei-140-prozent-budget-2027-steht-67203688": {
       "section": "canton-sz",
-      "ts": 1794832250008
+      "ts": 1795191993358
     },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/erstfelds-budget-2027-bleibt-praktisch-ausgeglichen-trotz-grossprojekten-art-1732381": {
+    "canton-sz::https://www.einsiedleranzeiger.ch/2026/11/20/oberiberg-will-die-steuern-deutlich-senken": {
       "section": "canton-sz",
-      "ts": 1794832453973
+      "ts": 1795192022101
     },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/cyber-betrug-ukb-und-kantonspolizei-uri-warnen-in-altdorf-art-1732237": {
+    "canton-sz::https://www.bote.ch/nachrichten/schwyz/jaehrliche-mehrkosten-von-bis-zu-15-millionen-rollen-auf-den-kanton-schwyz-zu-art-1732892": {
       "section": "canton-sz",
-      "ts": 1794832467827
+      "ts": 1795192627590
     },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/kantonsspital-uri-um-und-neubau-fast-abgeschlossen-art-1732076": {
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/uri-passt-steuergesetz-an-eigenmietwert-faellt-ab-2029-weg-art-1732861": {
       "section": "canton-sz",
-      "ts": 1794832482256
+      "ts": 1795192728805
     },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/luzerner-gemeinden-die-mitte-fordert-neue-finanzkennzahlen-art-1732368": {
+    "canton-sz::https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/8756-8757-8803-10391-10392/news/26482": {
       "section": "canton-sz",
-      "ts": 1794832491246
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/schwyz/gemeinde-senkt-die-steuern-kraeftig-art-1732642": {
-      "section": "canton-sz",
-      "ts": 1794958173645
+      "ts": 1795192908926
     }
   }
 }
