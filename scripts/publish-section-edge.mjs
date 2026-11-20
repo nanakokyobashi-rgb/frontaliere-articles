@@ -598,6 +598,9 @@ export function requiredPageKeys(section, { sitemapXml, previousSitemapXml = nul
 export const BOOTSTRAP_WAIT_MS = 100 * 60 * 1000;
 export const BOOTSTRAP_LOCK_ACQUIRE_WAIT_MS = 45 * 60 * 1000;
 export const BOOTSTRAP_RETRY_MS = 20 * 1000;
+const BOOTSTRAP_FRESHNESS_INTERVAL_MS = 120_000;
+
+class StagingFreshnessError extends Error {}
 /** Un tombstone transitorio non deve lasciare un lease attivo fino al TTL. */
 export const BOOTSTRAP_RELEASE_ATTEMPTS = 3;
 
@@ -619,7 +622,6 @@ export async function waitForBootstrapLocks(
     sleep,
     now = Date.now,
     deadline: deadlineAt,
-    commit,
     log = () => {},
   } = {},
 ) {
@@ -643,36 +645,17 @@ export async function waitForBootstrapLocks(
       }
       const state = parseSectionBootstrapLock(responseBytes(got), { section, now: now() });
       if (state.state === 'active') {
-        // Un runner puo' terminare prima di riuscire a scrivere il tombstone
-        // (timeout CDN, processo ucciso, teardown del runner). Il TTL lungo
-        // protegge dalla collisione, ma non deve trasformare un owner gia'
-        // terminato in un blocco cieco del publisher. L'acquire condizionale
-        // del CLI fa il takeover solo dopo avere verificato l'attempt GitHub;
-        // un owner attivo o non verificabile resta invece fail-closed.
-        if (
-          commit
-          && typeof io?.readBootstrapLockOwnerRun === 'function'
-          && typeof io?.acquireBootstrapLock === 'function'
-        ) {
+        // Un owner terminale lascia passare la readiness. Solo l'handshake
+        // finale puo' sostituire il suo lease con un PUT condizionale.
+        if (typeof io.readBootstrapLockOwnerRun === 'function') {
           let ownerRun;
           try {
             ownerRun = await io.readBootstrapLockOwnerRun(state.doc.owner);
-          } catch (error) {
-            ownerRun = { state: 'unknown', reason: error?.message ?? String(error) };
+          } catch {
+            // Una verifica fallita mantiene il blocco.
           }
           if (ownerRun?.state === 'terminal') {
-            let takeover;
-            try {
-              takeover = await io.acquireBootstrapLock(section, commit);
-            } catch (error) {
-              takeover = 'error';
-              log(`::warning::[section-edge] takeover del bootstrap lock di ${section} non verificato: ${error?.message ?? error}`);
-            }
-            if (takeover === 'acquired') {
-              log(`::notice::[section-edge] recuperato bootstrap lock di ${section}: owner ${state.doc.owner} terminato (${ownerRun.conclusion || 'completed'})`);
-              continue;
-            }
-            pending.push(`${section} (${state.doc.owner}; takeover non confermato: ${takeover ?? 'nessun risultato'})`);
+            log(`::notice::[section-edge] bootstrap lock di ${section}: owner ${state.doc.owner} terminato (${ownerRun.conclusion || 'completed'})`);
             continue;
           }
         }
@@ -818,7 +801,7 @@ export async function missingBootstrapPages(
   release,
   previous,
   io,
-  { waitMs = BOOTSTRAP_WAIT_MS, retryMs = BOOTSTRAP_RETRY_MS, sleep, deadline: deadlineAt } = {},
+  { waitMs = BOOTSTRAP_WAIT_MS, retryMs = BOOTSTRAP_RETRY_MS, sleep, now = Date.now, deadline: deadlineAt } = {},
 ) {
   const pause = sleep ?? ((ms) => new Promise((resolve) => setTimeout(resolve, ms)));
   const wasLive = (id) => previous.state === 'ok' && previous.doc.sections?.[id]?.status === 'live';
@@ -837,11 +820,11 @@ export async function missingBootstrapPages(
     const got = await io.fetchBytes(`${CDN}/${key}`);
     return got.status === 200 && hasResponseBody(got) && responseBytes(got).toString('utf8').includes(CORPUS_ROUTE_OWNER_META_TAG);
   };
-  const deadline = deadlineAt ?? Date.now() + waitMs;
+  const deadline = deadlineAt ?? now() + waitMs;
   for (;;) {
     const ok = await mapLimit(pending, 8, present);
     pending = pending.filter((_, i) => !ok[i]);
-    if (pending.length === 0 || Date.now() + retryMs > deadline) return pending;
+    if (pending.length === 0 || now() + retryMs > deadline) return pending;
     await pause(retryMs);
   }
 }
@@ -1018,61 +1001,86 @@ export async function publishRelease(
     }
   }
 
-  const bootstrapDeadline = now() + Math.max(0, bootstrapWaitMs);
-  const lockedBeforeBootstrap = await waitForBootstrapLocks(release.live, io, {
-    retryMs: bootstrapRetryMs,
-    sleep,
-    now,
-    deadline: bootstrapDeadline,
-    commit: release.commit,
-    log,
-  });
-  if (lockedBeforeBootstrap.length) {
-    return stopBeforeFlip('bootstrap-lock', `bootstrap live ancora in corso (${lockedBeforeBootstrap.join(', ')})`);
-  }
+  const pause = sleep ?? ((ms) => new Promise((resolve) => setTimeout(resolve, ms)));
+  let lastFreshnessCheckAt = null;
+  const verifyStagedSource = async () => {
+    if (typeof verifySourceCurrent !== 'function') return;
+    lastFreshnessCheckAt = now();
+    try {
+      await verifySourceCurrent();
+    } catch (error) {
+      throw new StagingFreshnessError(error?.message ?? String(error), { cause: error });
+    }
+  };
+  const sleepBeforeRetry = (deadline) => async (ms) => {
+    await pause(ms);
+    const current = now();
+    if (lastFreshnessCheckAt !== null && current < deadline && current - lastFreshnessCheckAt >= BOOTSTRAP_FRESHNESS_INTERVAL_MS) {
+      await verifyStagedSource();
+    }
+  };
 
-  // 1b. Bootstrap: le pagine delle sezioni che il puntatore dichiarera' live.
-  const missingPages = await missingBootstrapPages(release, previous, io, {
-    sleep,
-    deadline: bootstrapDeadline,
-  });
-  if (missingPages.length) {
-    return stopBeforeFlip(
-      'bootstrap',
-      `${missingPages.length} pagine annunciate dalle sitemap delle sezioni live non sono su R2 ` +
-        `(es. ${missingPages.slice(0, 3).join(', ')}): prima le pagine (fast-publish-section), poi il flip`,
-    );
-  }
+  try {
+    const bootstrapDeadline = now() + Math.max(0, bootstrapWaitMs);
+    await verifyStagedSource();
+    const lockedBeforeBootstrap = await waitForBootstrapLocks(release.live, io, {
+      retryMs: bootstrapRetryMs,
+      sleep: sleepBeforeRetry(bootstrapDeadline),
+      now,
+      deadline: bootstrapDeadline,
+      log,
+    });
+    if (lockedBeforeBootstrap.length) {
+      return stopBeforeFlip('bootstrap-lock', `bootstrap live ancora in corso (${lockedBeforeBootstrap.join(', ')})`);
+    }
 
-  // Il GET precedente non e' sufficiente: un bootstrap puo' partire subito
-  // dopo aver visto il lock assente. L'acquisizione condizionale R2 chiude la
-  // finestra: se vince il publisher, il bootstrap non puo' sovrascrivere le
-  // pagine; se vince il bootstrap, il publisher aspetta senza fare il flip.
-  // La prima attesa puo' consumare tutto il budget di readiness/pagine. Il
-  // lease condizionale riceve una finestra bounded propria, cosi' il controllo
-  // finale di sicurezza non eredita una deadline quasi scaduta.
-  const lockAcquireDeadline = now() + Math.max(0, bootstrapLockAcquireWaitMs);
-  const acquired = await acquireBootstrapLocks(release.live, release.commit, io, {
-    waitMs: bootstrapLockAcquireWaitMs,
-    retryMs: bootstrapRetryMs,
-    releaseAttempts: bootstrapReleaseAttempts,
-    sleep,
-    now,
-    deadline: lockAcquireDeadline,
-    log,
-  });
-  if (acquired.error) {
-    return stopBeforeFlip('bootstrap-lock', acquired.error);
+    // 1b. Bootstrap: le pagine delle sezioni che il puntatore dichiarera' live.
+    const missingPages = await missingBootstrapPages(release, previous, io, {
+      sleep: sleepBeforeRetry(bootstrapDeadline),
+      now,
+      deadline: bootstrapDeadline,
+    });
+    if (missingPages.length) {
+      return stopBeforeFlip(
+        'bootstrap',
+        `${missingPages.length} pagine annunciate dalle sitemap delle sezioni live non sono su R2 ` +
+          `(es. ${missingPages.slice(0, 3).join(', ')}): prima le pagine (fast-publish-section), poi il flip`,
+      );
+    }
+
+    // Il GET precedente non e' sufficiente: un bootstrap puo' partire subito
+    // dopo aver visto il lock assente. L'acquisizione condizionale R2 chiude la
+    // finestra: se vince il publisher, il bootstrap non puo' sovrascrivere le
+    // pagine; se vince il bootstrap, il publisher aspetta senza fare il flip.
+    // La prima attesa puo' consumare tutto il budget di readiness/pagine. Il
+    // lease condizionale riceve una finestra bounded propria, cosi' il controllo
+    // finale di sicurezza non eredita una deadline quasi scaduta.
+    const lockAcquireDeadline = now() + Math.max(0, bootstrapLockAcquireWaitMs);
+    const acquired = await acquireBootstrapLocks(release.live, release.commit, io, {
+      waitMs: bootstrapLockAcquireWaitMs,
+      retryMs: bootstrapRetryMs,
+      releaseAttempts: bootstrapReleaseAttempts,
+      sleep: sleepBeforeRetry(lockAcquireDeadline),
+      now,
+      deadline: lockAcquireDeadline,
+      log,
+    });
+    if (acquired.error) {
+      return stopBeforeFlip('bootstrap-lock', acquired.error);
+    }
+    heldBootstrapLocks = acquired.held;
+  } catch (error) {
+    if (!(error instanceof StagingFreshnessError)) throw error;
+    return stopBeforeFlip('freshness', error.message);
   }
-  heldBootstrapLocks = acquired.held;
 
   // Il controllo finale e' deliberatamente dopo l'handshake, quando il
   // publisher possiede i lease di tutte le sezioni: non puo' piu' arrivare un
   // HTML nuovo a competere con il set che il registry sta per annunciare.
   const missingAfterLock = await missingBootstrapPages(release, previous, io, {
     waitMs: 0,
-    retryMs: 0,
     sleep,
+    now,
     deadline: now(),
   });
   if (missingAfterLock.length) {

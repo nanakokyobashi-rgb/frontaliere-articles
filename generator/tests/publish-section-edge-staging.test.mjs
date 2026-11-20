@@ -74,7 +74,7 @@ test('i consumer bootstrap e registry trattano un 200 senza body come non verifi
   }
 });
 
-test('il publisher recupera un lease il cui attempt GitHub e\' gia\' terminato', async () => {
+test('la readiness distingue producer terminali, attivi e non verificabili', async () => {
   const commit = 'a'.repeat(40);
   const owner = 'nanakokyobashi-rgb/frontaliere-articles:40594085901:1';
   const lock = makeSectionBootstrapLock({
@@ -86,22 +86,22 @@ test('il publisher recupera un lease il cui attempt GitHub e\' gia\' terminato',
   });
   const takeovers = [];
   const logs = [];
-  const recovered = await waitForBootstrapLocks(['canton-ow'], {
-    fetchBytes: async () => ({ status: 200, body: Buffer.from(JSON.stringify(lock)) }),
-    readBootstrapLockOwnerRun: async () => ({ state: 'terminal', status: 'completed', conclusion: 'failure' }),
-    acquireBootstrapLock: async (section, requestedCommit) => {
-      takeovers.push([section, requestedCommit]);
-      return 'acquired';
-    },
-  }, {
-    commit,
-    deadline: 0,
-    retryMs: 0,
-    log: (line) => logs.push(line),
-  });
-
-  assert.deepEqual(recovered, []);
-  assert.deepEqual(takeovers, [['canton-ow', commit]]);
+  for (const state of ['terminal', 'active', 'unknown', 'unavailable']) {
+    const pending = await waitForBootstrapLocks(['canton-ow'], {
+      fetchBytes: async () => ({ status: 200, body: Buffer.from(JSON.stringify(lock)) }),
+      readBootstrapLockOwnerRun: async () => {
+        if (state === 'unavailable') throw new Error('GitHub non disponibile');
+        return { state };
+      },
+      acquireBootstrapLock: async () => { takeovers.push(state); },
+    }, {
+      deadline: 0,
+      retryMs: 0,
+      log: (line) => logs.push(line),
+    });
+    assert.deepEqual(pending, state === 'terminal' ? [] : [`canton-ow (${owner})`]);
+  }
+  assert.deepEqual(takeovers, []);
   assert.match(logs.join('\n'), /owner .* terminato/);
 });
 
@@ -162,7 +162,7 @@ test('publishRelease resta fail-closed quando un adapter CDN restituisce 200 sen
   assert.equal(requests.length, 2);
 });
 
-test('il publisher concede un budget bounded separato all handshake finale dopo la readiness', async (t) => {
+async function runBootstrapScenario(t, { staleDuring, initialCheckMs = 0, releaseFails = false } = {}) {
   const commit = 'e'.repeat(40);
   const base = releaseBase(commit);
   const sitemapName = 'sitemap-articles-canton-ti.xml';
@@ -190,12 +190,22 @@ test('il publisher concede un budget bounded separato all handshake finale dopo 
   let lockReads = 0;
   let acquireAttempts = 0;
   let flips = 0;
+  const checks = [];
+  const sleeps = [];
+  const removed = [];
+  const logs = [];
+  const held = new Set();
+  const live = staleDuring === 'acquire' ? ['canton-ti', 'canton-ow'] : ['canton-ti'];
+  const files = live.map((section) => {
+    const name = `sitemap-articles-${section}.xml`;
+    return { ...sitemapFile, name, key: `${base}${name}` };
+  });
   const result = await publishRelease({
     commit,
     base,
     registry: { schema: 1, commit, sections: { 'canton-ti': { status: 'live' } } },
-    live: ['canton-ti'],
-    files: [sitemapFile],
+    live,
+    files,
     pointer: {
       schema: 1,
       commit,
@@ -203,7 +213,7 @@ test('il publisher concede un budget bounded separato all handshake finale dopo 
       release: {
         commit,
         base,
-        files: { [sitemapName]: { sha256: sitemapFile.sha256, bytes: sitemapFile.bytes } },
+        files: Object.fromEntries(files.map(({ name, sha256, bytes }) => [name, { sha256, bytes }])),
         previous: null,
       },
     },
@@ -218,42 +228,102 @@ test('il publisher concede un budget bounded separato all handshake finale dopo 
     io: {
       fetchBytes: async (url) => {
         if (url === `${CDN}/${EDGE_SECTION_REGISTRY_FILE}`) return { status: 404 };
-        if (url === `${CDN}/${sitemapFile.key}`) return { status: 200, body: sitemapBytes };
+        if (files.some(({ key }) => url === `${CDN}/${key}`)) return { status: 200, body: sitemapBytes };
         if (url === `${CDN}/edge/sections/_bootstrap-locks/canton-ti.json`) {
           lockReads += 1;
-          return now < start + 100 ? { status: 200, body: Buffer.from(JSON.stringify(lock)) } : { status: 404 };
+          return (staleDuring === 'readiness' || (!staleDuring && now < start + 100)) ? { status: 200, body: Buffer.from(JSON.stringify(lock)) } : { status: 404 };
         }
-        if (url.startsWith(`${CDN}/edge/sections/`)) {
+        if (url.startsWith(`${CDN}/edge/sections/_bootstrap-locks/`)) return { status: 404 };
+        if (url.startsWith(`${CDN}/edge/sections/`) && staleDuring !== 'pages') {
           return { status: 200, body: Buffer.from(CORPUS_ROUTE_OWNER_META_TAG) };
         }
         return { status: 404 };
       },
       upload: (_local, key) => {
-        if (key === EDGE_SECTION_REGISTRY_FILE) flips += 1;
+        if (key === EDGE_SECTION_REGISTRY_FILE) {
+          flips += 1;
+          checks.push('flip');
+        }
         return true;
       },
-      remove: () => true,
+      remove: (key) => { removed.push(key); return true; },
       readBootstrapLockOwnerRun: async () => ({ state: 'active', status: 'in_progress' }),
-      acquireBootstrapLock: async () => {
+      acquireBootstrapLock: async (section) => {
         acquireAttempts += 1;
+        if (staleDuring === 'acquire') {
+          if (section === 'canton-ti') return 'busy';
+          held.add(section);
+          return 'acquired';
+        }
         return acquireAttempts <= 2 ? 'busy' : 'acquired';
       },
-      releaseBootstrapLock: async () => true,
+      releaseBootstrapLock: async (section) => {
+        if (releaseFails) return false;
+        held.delete(section);
+        return true;
+      },
       purge: () => true,
     },
-    bootstrapWaitMs: 100,
-    bootstrapLockAcquireWaitMs: 100,
-    bootstrapRetryMs: 20,
+    bootstrapWaitMs: staleDuring ? 300_000 : 100,
+    bootstrapLockAcquireWaitMs: staleDuring ? 300_000 : 100,
+    bootstrapRetryMs: staleDuring ? 20_000 : 20,
     stagingVerifyAttempts: 1,
     now: () => now,
-    sleep: async (ms) => { now += ms; },
-    log: () => {},
+    sleep: async (ms) => {
+      sleeps.push(ms);
+      now += ms;
+    },
+    verifySourceCurrent: async () => {
+      checks.push(now - start);
+      assert.equal(held.size, 0);
+      if (staleDuring && now - start >= 60_000) throw new Error('input API nuovo');
+      if (checks.length === 1) now += initialCheckMs;
+    },
+    log: (line) => logs.push(line),
   });
 
+  return { result, lockReads, acquireAttempts, flips, checks, sleeps, removed, stagedKeys: files.map(({ key }) => key), logs };
+}
+
+test('il primo controllo di freschezza consuma il budget di readiness con un producer attivo', async (t) => {
+  const { result, lockReads, acquireAttempts, checks, sleeps } = await runBootstrapScenario(t, {
+    staleDuring: 'readiness',
+    initialCheckMs: 300_001,
+  });
+  assert.equal(lockReads, 1);
+  assert.deepEqual(sleeps, []);
+  assert.deepEqual(checks, [0]);
+  assert.equal(acquireAttempts, 0);
+  assert.deepEqual(result, { code: 1, phase: 'bootstrap-lock', flipped: false });
+});
+
+test('il publisher concede un budget bounded separato all handshake finale dopo la readiness', async (t) => {
+  const { result, lockReads, acquireAttempts, flips, checks } = await runBootstrapScenario(t);
+  assert.deepEqual(checks, [0, 140, 'flip']);
   assert.deepEqual(result, { code: 0, phase: 'done', flipped: true });
   assert.equal(lockReads, 6, 'la readiness usa tutto il proprio budget prima dell handshake');
   assert.equal(acquireAttempts, 3, 'il lock viene ritentato nel budget indipendente');
   assert.equal(flips, 1, 'il puntatore viene flippato solo dopo il lease');
+});
+
+for (const staleDuring of ['readiness', 'pages', 'acquire']) {
+  test(`il publisher abbandona lo staging superato durante ${staleDuring}`, async (t) => {
+    const { result, flips, checks, removed, stagedKeys, logs, acquireAttempts } = await runBootstrapScenario(t, { staleDuring });
+    assert.deepEqual(result, { code: 1, phase: 'freshness', flipped: false });
+    assert.deepEqual(checks, [0, 120_000]);
+    assert.equal(acquireAttempts, staleDuring === 'acquire' ? 12 : 0);
+    assert.deepEqual(removed, stagedKeys);
+    assert.equal(flips, 0);
+    assert.match(logs.join('\n'), /input API nuovo/);
+  });
+}
+
+test('un rilascio parziale fallito conserva l’errore di lock', async (t) => {
+  const { result, flips, checks, logs } = await runBootstrapScenario(t, { staleDuring: 'acquire', releaseFails: true });
+  assert.deepEqual(result, { code: 1, phase: 'bootstrap-lock', flipped: false });
+  assert.deepEqual(checks, [0]);
+  assert.equal(flips, 0);
+  assert.match(logs.join('\n'), /release lock non confermato/);
 });
 
 test('publishRelease verifica la HEAD subito prima del flip edge', async () => {
@@ -293,14 +363,14 @@ test('publishRelease verifica la HEAD subito prima del flip edge', async () => {
       purge: () => true,
     },
     verifySourceCurrent: async () => {
-      freshnessChecks.push('before-flip');
-      throw new Error('main avanzata durante il test');
+      freshnessChecks.push('check');
+      if (freshnessChecks.length === 2) throw new Error('main avanzata durante il test');
     },
     log: () => {},
   });
 
   assert.deepEqual(result, { code: 1, phase: 'freshness', flipped: false });
-  assert.deepEqual(freshnessChecks, ['before-flip']);
+  assert.deepEqual(freshnessChecks, ['check', 'check']);
   assert.deepEqual(uploads, [], 'il puntatore non viene scritto dopo una freshness failure');
   await assert.rejects(
     () => assertExpectedMainHead(
