@@ -233,7 +233,7 @@ test('gli step che le sostituzioni non toccano sono identici alla sorgente, comm
   const coreSteps = stepNames(CORE);
   const gateSteps = coreSteps.filter((s) => !sourceSteps.includes(s));
   assert.deepEqual(coreSteps.filter((s) => sourceSteps.includes(s)), sourceSteps, 'il core ha perso o riordinato uno step della sorgente');
-  assert.equal(gateSteps.length, 6, `gli step in piu' sono quelli del gate di sezione: ${gateSteps.join(' | ')}`);
+  assert.equal(gateSteps.length, 7, `gli step in piu' sono quelli del gate di sezione: ${gateSteps.join(' | ')}`);
   assert.ok(gateSteps.every((s) => s.startsWith('Section gate — ')), 'gli step del gate hanno nomi propri: un omonimo di uno step della sorgente renderebbe ambiguo ogni test che estrae per nome');
   assert.equal(new Set(coreSteps).size, coreSteps.length, 'nomi di step duplicati nel core');
 
@@ -897,7 +897,10 @@ test('il core dichiara ogni input che i chiamanti passano, e la catena e\' spent
   }
   assert.match(inputsBlock, /chain_dispatch:\n(?: {8}.*\n)*? {8}default: false\n {8}type: boolean/);
   assert.match(inputsBlock, /section_gate:\n(?: {8}.*\n)*? {8}default: 'none'/);
-  assert.match(CORE, /if ! request_generation_claim admit; then/);
+  const sectionGate = CORE.indexOf('\n  section_gate:\n');
+  assert.doesNotMatch(CORE.slice(0, sectionGate), /request_generation_claim admit/);
+  assert.match(CORE.slice(sectionGate), /id: claim\n {8}if: inputs\.dispatch_origin == 'cloud_scheduler' && steps\.canton\.outputs\.proceed == 'true'/);
+  assert.match(CORE.slice(sectionGate), /if request_generation_claim admit; then/);
   assert.match(CORE, /DISPATCH_ORIGIN: \$\{\{ inputs\.dispatch_origin \}\}/);
   assert.match(CORE, /^on:\n {2}workflow_call:\n/m);
   assert.doesNotMatch(CORE, /^ {2}(schedule|push|workflow_dispatch):/m, 'il core non ha trigger suoi');

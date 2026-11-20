@@ -113,8 +113,9 @@ const SECTION_GATE_JOB = `  section_gate:
       contents: read
       issues: read
       pull-requests: read
+      id-token: write
     outputs:
-      proceed: \${{ steps.none.outputs.proceed || steps.canton.outputs.proceed }}
+      proceed: \${{ inputs.dispatch_origin != 'cloud_scheduler' && (steps.none.outputs.proceed || steps.canton.outputs.proceed) || steps.claim.outputs.proceed }}
     steps:
       - name: Section gate — sezione senza gate
         id: none
@@ -166,11 +167,36 @@ const SECTION_GATE_JOB = `  section_gate:
           SECTION: \${{ inputs.section }}
           SELF_ID: \${{ github.run_id }}
           EVENT_NAME: \${{ github.event_name }}
+          DISPATCH_ORIGIN: \${{ inputs.dispatch_origin }}
           TARGET_REF: \${{ github.ref_name }}
           CANTON_GENERATION_MAX_PARALLEL: \${{ vars.CANTON_GENERATION_MAX_PARALLEL }}
           CANTON_DAILY_BUDGET_CAP: \${{ vars.CANTON_DAILY_BUDGET_CAP }}
           QUOTA_BEACON_PEER_REPO: ${QUOTA_BEACON_PEER_REPO}
         run: node scripts/ci/canton-generation-admit.mjs
+
+      - name: Section gate — conferma dello slot ammesso
+        id: claim
+        if: inputs.dispatch_origin == 'cloud_scheduler' && steps.canton.outputs.proceed == 'true'
+        env:
+          SECTION: \${{ inputs.section }}
+          SELF_ID: \${{ github.run_id }}
+          RECOVERY_SLOT: \${{ inputs.recovery_slot }}
+          RECOVERY_CLAIM: \${{ inputs.recovery_claim }}
+          GENERATION_CLAIM_ENDPOINT: __CLAIM_ENDPOINT__
+        run: |
+          set -euo pipefail
+          generation_claim_endpoint="$GENERATION_CLAIM_ENDPOINT"
+          generation_oidc_token=''
+          echo "::add-mask::$RECOVERY_CLAIM"
+__CLAIM_FUNCTIONS__
+          if request_generation_claim admit; then
+            echo "Slot Cloud Scheduler ammesso dal registro Firestore: $RECOVERY_SLOT."
+            echo 'proceed=true' >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::ammissione Firestore dello slot non confermata; il generatore resta chiuso."
+            echo "GENERATION_OUTCOME kind=skipped reason=generation-slot-claim-denied section=$SECTION"
+            echo 'proceed=false' >> "$GITHUB_OUTPUT"
+          fi
 
 `;
 
@@ -348,6 +374,12 @@ export const CORE_REPLACEMENTS = [
     count: 1,
     find: '"repos/$REPO/actions/workflows/generate-article.yml/runs?per_page=100&created=%3E%3D$admission_since"',
     replace: '"repos/$REPO/actions/workflows/$CALLER_WORKFLOW/runs?per_page=100&created=%3E%3D$admission_since"',
+  },
+  {
+    id: 'admit: conferma lo slot solo dopo il gate cantonale',
+    count: 1,
+    find: "          if [ \"$loop_clock_dispatch\" = \"true\" ]; then\n            if ! request_generation_claim admit; then\n              echo \"::warning::ammissione Firestore dello slot non confermata; il generatore resta chiuso.\"\n              if ! release_generation_claim; then\n                echo \"::warning::claim non rilasciato esplicitamente; lease e retry Cloud Scheduler restano il fallback.\"\n              fi\n              echo \"proceed=false\" >> \"$GITHUB_OUTPUT\"\n              echo \"GENERATION_OUTCOME kind=skipped reason=generation-slot-claim-denied section=unknown\"\n              exit 0\n            fi\n            echo \"Slot Cloud Scheduler ammesso dal registro Firestore: $RECOVERY_SLOT.\"\n          fi\n",
+    replace: '',
   },
   {
     id: 'generate: dipende anche dal gate di sezione',
@@ -651,6 +683,11 @@ export function buildCoreWorkflow(source) {
       );
     }
   }
+  const claimFunctions = jobs.match(/^ {10}get_generation_oidc_token\(\) \{[\s\S]*?(?=^ {10}release_generation_claim\(\))/m)?.[0].trimEnd();
+  const claimEndpoint = jobs.match(/^ {10}GENERATION_CLAIM_ENDPOINT: (https:\/\/\S+)$/m)?.[1];
+  if (!claimFunctions || !claimEndpoint) throw new Error('Helper del claim OIDC non trovato nella sorgente');
+  jobs = jobs.replace('__CLAIM_FUNCTIONS__', () => claimFunctions)
+    .replace('__CLAIM_ENDPOINT__', () => claimEndpoint);
   return `${CORE_HEADER}${jobs.replace(/\n*$/, '')}\n`;
 }
 

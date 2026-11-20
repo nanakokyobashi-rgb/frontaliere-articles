@@ -242,6 +242,7 @@ export function olderCantonRuns(runs, selfId) {
  *   section: string,
  *   env?: Record<string, string | undefined>,
  *   eventName?: string,
+ *   dispatchOrigin?: string,
  *   activeSections?: Record<string, unknown>,
  *   profiles?: any,
  *   readArticleSubjects: () => string[] | null,
@@ -255,6 +256,7 @@ export function decideCantonAdmission({
   section,
   env = process.env,
   eventName = '',
+  dispatchOrigin = 'manual',
   activeSections = activeCorpusCoreMap(),
   profiles,
   readArticleSubjects,
@@ -291,7 +293,7 @@ export function decideCantonAdmission({
       unknown: gate.unknown,
     };
   }
-  if (eventName === 'workflow_dispatch') {
+  if (eventName === 'workflow_dispatch' && dispatchOrigin === 'manual') {
     return {
       proceed: true,
       reason: 'manual-dispatch',
@@ -446,6 +448,7 @@ if (isMain()) {
     verdict = decideCantonAdmission({
       section,
       eventName: process.env.EVENT_NAME || '',
+      dispatchOrigin: process.env.DISPATCH_ORIGIN || 'manual',
       selfId: process.env.SELF_ID || 0,
       readArticleSubjects: () => (repo ? readArticleSubjectsFromGitHub(repo, ref) : null),
       readInFlightRuns: () => (repo ? readInFlightRunsFromGitHub(repo) : null),

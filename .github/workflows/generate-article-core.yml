@@ -543,18 +543,6 @@ jobs:
             echo "Nessuna generazione più vecchia in volo → si procede."
           fi
 
-          if [ "$loop_clock_dispatch" = "true" ]; then
-            if ! request_generation_claim admit; then
-              echo "::warning::ammissione Firestore dello slot non confermata; il generatore resta chiuso."
-              if ! release_generation_claim; then
-                echo "::warning::claim non rilasciato esplicitamente; lease e retry Cloud Scheduler restano il fallback."
-              fi
-              echo "proceed=false" >> "$GITHUB_OUTPUT"
-              echo "GENERATION_OUTCOME kind=skipped reason=generation-slot-claim-denied section=unknown"
-              exit 0
-            fi
-            echo "Slot Cloud Scheduler ammesso dal registro Firestore: $RECOVERY_SLOT."
-          fi
           echo "proceed=true" >> "$GITHUB_OUTPUT"
 
   section_gate:
@@ -567,8 +555,9 @@ jobs:
       contents: read
       issues: read
       pull-requests: read
+      id-token: write
     outputs:
-      proceed: ${{ steps.none.outputs.proceed || steps.canton.outputs.proceed }}
+      proceed: ${{ inputs.dispatch_origin != 'cloud_scheduler' && (steps.none.outputs.proceed || steps.canton.outputs.proceed) || steps.claim.outputs.proceed }}
     steps:
       - name: Section gate — sezione senza gate
         id: none
@@ -620,11 +609,73 @@ jobs:
           SECTION: ${{ inputs.section }}
           SELF_ID: ${{ github.run_id }}
           EVENT_NAME: ${{ github.event_name }}
+          DISPATCH_ORIGIN: ${{ inputs.dispatch_origin }}
           TARGET_REF: ${{ github.ref_name }}
           CANTON_GENERATION_MAX_PARALLEL: ${{ vars.CANTON_GENERATION_MAX_PARALLEL }}
           CANTON_DAILY_BUDGET_CAP: ${{ vars.CANTON_DAILY_BUDGET_CAP }}
           QUOTA_BEACON_PEER_REPO: valerielinc-ops/frontaliere-si-o-no
         run: node scripts/ci/canton-generation-admit.mjs
+
+      - name: Section gate — conferma dello slot ammesso
+        id: claim
+        if: inputs.dispatch_origin == 'cloud_scheduler' && steps.canton.outputs.proceed == 'true'
+        env:
+          SECTION: ${{ inputs.section }}
+          SELF_ID: ${{ github.run_id }}
+          RECOVERY_SLOT: ${{ inputs.recovery_slot }}
+          RECOVERY_CLAIM: ${{ inputs.recovery_claim }}
+          GENERATION_CLAIM_ENDPOINT: https://europe-west6-frontaliere-ticino.cloudfunctions.net/claimGenerationSlot
+        run: |
+          set -euo pipefail
+          generation_claim_endpoint="$GENERATION_CLAIM_ENDPOINT"
+          generation_oidc_token=''
+          echo "::add-mask::$RECOVERY_CLAIM"
+          get_generation_oidc_token() {
+            if [ -n "$generation_oidc_token" ]; then return 0; fi
+            if [ -z "${ACTIONS_ID_TOKEN_REQUEST_URL:-}" ] \
+              || [ -z "${ACTIONS_ID_TOKEN_REQUEST_TOKEN:-}" ] \
+              || [ -z "$generation_claim_endpoint" ]; then
+              return 1
+            fi
+            local encoded_audience token_url token_response
+            encoded_audience="$(jq -rn --arg value "$generation_claim_endpoint" '$value | @uri')" || return 1
+            token_url="${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${encoded_audience}"
+            token_response="$(curl -sS --fail --max-time 10 \
+              -H "Authorization: Bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \
+              "$token_url" 2>/dev/null)" || return 1
+            generation_oidc_token="$(jq -er '.value | select(type == "string" and length > 0)' \
+              <<<"$token_response" 2>/dev/null)" || return 1
+            echo "::add-mask::$generation_oidc_token"
+          }
+
+          request_generation_claim() {
+            local action payload response status body
+            action="$1"
+            get_generation_oidc_token || return 1
+            payload="$(jq -cn --arg action "$action" --arg slotKey "$RECOVERY_SLOT" \
+              --arg claimToken "$RECOVERY_CLAIM" --arg runId "$SELF_ID" \
+              '{action:$action,slotKey:$slotKey,claimToken:$claimToken,runId:$runId}')" || return 1
+            response="$(curl -sS --max-time 10 -X POST \
+              -H "Authorization: Bearer ${generation_oidc_token}" \
+              -H 'Content-Type: application/json' -d "$payload" \
+              -w $'\n%{http_code}' "$generation_claim_endpoint" 2>/dev/null)" || return 1
+            status="${response##*$'\n'}"
+            body="${response%$'\n'*}"
+            [ "$status" = "200" ] || return 1
+            if [ "$action" = "admit" ]; then
+              jq -e '.ok == true and .admitted == true' <<<"$body" >/dev/null 2>&1
+            else
+              jq -e '.ok == true and .released == true' <<<"$body" >/dev/null 2>&1
+            fi
+          }
+          if request_generation_claim admit; then
+            echo "Slot Cloud Scheduler ammesso dal registro Firestore: $RECOVERY_SLOT."
+            echo 'proceed=true' >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::ammissione Firestore dello slot non confermata; il generatore resta chiuso."
+            echo "GENERATION_OUTCOME kind=skipped reason=generation-slot-claim-denied section=$SECTION"
+            echo 'proceed=false' >> "$GITHUB_OUTPUT"
+          fi
 
   generate:
     needs: [admit, section_gate]

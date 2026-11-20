@@ -422,6 +422,16 @@ test('un dispatch manuale salta budget, tetto e beacon — mai il flag', () => {
   assert.equal(off.reason, 'canton-disabled');
 });
 
+test('un dispatch Cloud Scheduler rispetta budget e beacon del cantone', () => {
+  const scheduled = { eventName: 'workflow_dispatch', dispatchOrigin: 'cloud_scheduler' };
+  const subjects = Array.from({ length: TI_BUDGET }, () => articleCommitSubject(SECTION));
+  assert.equal(decide(scheduled, readers({ subjects })).reason, 'daily-budget');
+  assert.equal(decide(scheduled, readers({ beacon: { active: true, resetsAt: 1 } })).reason, 'quota-beacon');
+  const healthy = readers();
+  assert.equal(decide(scheduled, healthy).reason, 'admitted');
+  assert.deepEqual(healthy.calls, { subjects: 1, runs: 1, beacon: 1 });
+});
+
 // ── La CLI: marcatori e output ───────────────────────────────────────────────
 
 function runCli(env) {
@@ -491,7 +501,7 @@ test('il gate gira DOPO load-rc-env e PRIMA che il job generate esista', () => {
     /\n {4}concurrency:\n {6}group: \$\{\{ \(needs\.admit\.outputs\.run_mode == 'production' \|\| needs\.admit\.outputs\.run_mode == 'unknown'\) && format\('\{0\}-production', inputs\.concurrency_group\) \|\| format\('\{0\}-dry', inputs\.concurrency_group\) \}\}\n {6}queue: max\n {6}cancel-in-progress: false\n/,
     'il job writer usa un gruppo per sezione e lascia il dry separato',
   );
-  assert.match(gate, /proceed: \$\{\{ steps\.none\.outputs\.proceed \|\| steps\.canton\.outputs\.proceed \}\}/);
+  assert.match(gate, /proceed: \$\{\{ inputs\.dispatch_origin != 'cloud_scheduler' && \(steps\.none\.outputs\.proceed \|\| steps\.canton\.outputs\.proceed\) \|\| steps\.claim\.outputs\.proceed \}\}/);
 });
 
 test('il gate legge il token del runner, non un PAT interpolato dal contesto env', () => {
