@@ -2300,6 +2300,12 @@ export function setCodexTranslateProcessDeadline(deadlineMs, { recoveryReserveMs
     && Number.isSafeInteger(recoveryReserveCalls) && recoveryReserveCalls > 0 ? recoveryReserveCalls : 0;
 }
 
+// Keep part of the configured recovery reserve on the process clock too.
+export function initialTranslationDeadlineMs(processDeadlineMs = _codexProcessDeadlineMs) {
+  if (processDeadlineMs == null) return processDeadlineMs;
+  return processDeadlineMs - Math.floor(_codexRecoveryReserveMs / 2);
+}
+
 /**
  * Deadline assoluta della prossima chiamata Codex, oppure `null` se la
  * chiamata non va avviata: il minimo fra il tetto della singola chiamata, il
@@ -2722,9 +2728,12 @@ function _admitCodexTranslationCall({
     _stopCodex(`budget di ${Math.round(maxMs / 1000)}s esaurito (FREE_TRANSLATE_CODEX_MAX_MS)`);
     return null;
   }
-  const deadlineMs = codexCallDeadlineMs({ now, budgetRemainingMs: remainingMs, processDeadlineMs });
+  const initialDeadlineMs = allowBodyRecoveryReserve ? processDeadlineMs : initialTranslationDeadlineMs(processDeadlineMs);
+  const deadlineMs = codexCallDeadlineMs({ now, budgetRemainingMs: remainingMs, processDeadlineMs: initialDeadlineMs });
   if (deadlineMs === null) {
-    _stopCodex('scadenza del processo troppo vicina per una nuova chiamata');
+    if (processDeadlineMs != null && processDeadlineMs - now < CODEX_TRANSLATE_MIN_CALL_MS) {
+      _stopCodex('scadenza del processo troppo vicina per una nuova chiamata');
+    }
     return null;
   }
   _codexCalls += 1;
@@ -2971,11 +2980,16 @@ async function _translateGroupWithCodex(group) {
   const recoveryReserveMs = Math.min(_codexRecoveryReserveMs, Math.floor(maxMs / 5));
   const initialRemainingMs = remainingMs - recoveryReserveMs;
   if (initialRemainingMs < CODEX_TRANSLATE_MIN_CALL_MS) return none();
-  const callDeadlineMs = codexCallDeadlineMs({ now: Date.now(), budgetRemainingMs: initialRemainingMs });
+  const now = Date.now();
+  const callDeadlineMs = codexCallDeadlineMs({
+    now,
+    budgetRemainingMs: initialRemainingMs,
+    processDeadlineMs: initialTranslationDeadlineMs(),
+  });
   if (callDeadlineMs === null) {
-    // I testi non tradotti restano non tradotti: la cascata scende ai tier
-    // successivi e cio' che resta scoperto lo recupera translate-pending.
-    _stopCodex('scadenza del processo troppo vicina per una nuova chiamata');
+    if (_codexProcessDeadlineMs !== null && _codexProcessDeadlineMs - now < CODEX_TRANSLATE_MIN_CALL_MS) {
+      _stopCodex('scadenza del processo troppo vicina per una nuova chiamata');
+    }
     return none();
   }
   if (!_codexEngagedLogged) {

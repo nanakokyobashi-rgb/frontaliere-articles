@@ -1262,6 +1262,27 @@ test('la cascata iniziale lascia spendibile la riserva Codex per il recupero', a
   }
 });
 
+test('la scadenza della fase iniziale lascia attiva la corsia body recovery', async () => {
+  const now = Date.now();
+  const deadline = now + 55_000;
+  setCodexTranslateProcessDeadline(deadline, { recoveryReserveMs: 120_000 });
+  try {
+    const calls = stubCodex(`CODEX ${EN}`);
+    assert.equal(beginCodexTranslationCall({ now }), null);
+    await it();
+    assert.equal(calls.length, 0);
+    assert.equal(getCascadeStats().codexTranslation.stopReason, '');
+
+    const recovery = beginCodexTranslationCall({ now, allowBodyRecoveryReserve: true });
+    assert.ok(recovery);
+    assert.equal(recovery.deadlineMs, deadline);
+    recovery.finish(now);
+  } finally {
+    setCodexTranslateProcessDeadline(null);
+    setCodexTranslateCallForTests(null);
+  }
+});
+
 test('scadenza del processo lontana: la deadline passata a Codex non la supera', async () => {
   const deadline = Date.now() + 60_000;
   setCodexTranslateProcessDeadline(deadline);
