@@ -72,6 +72,9 @@ const blogMetaCantonUrFr: Record<string, string> = {
     'blog.article.janett-protezione-uri.title': 'Uri : Jürg Janett, nouveau chef de la protection et des affaires militaires',
     'blog.article.janett-protezione-uri.excerpt': 'Le Conseil d\'État d\'Uri a choisi le colonel Jürg Janett pour diriger l\'Office de la protection de la population et des affaires militaires ainsi que l\'état-major cantonal.',
     'blog.article.janett-protezione-uri.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.blocco-roccia-meiental.title': 'Un bloc rocheux endommage une route dans le Meiental',
+    'blog.article.blocco-roccia-meiental.excerpt': 'Un bloc rocheux a endommagé une route cantonale et une ligne électrique dans le Meiental.',
+    'blog.article.blocco-roccia-meiental.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonUrFr;
