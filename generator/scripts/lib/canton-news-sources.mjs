@@ -100,6 +100,8 @@ import {
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
 import {
   findHtmlTagEndOutsideQuotes,
+  firstHtmlAttributeValue,
+  htmlAttributes,
   findHtmlRawTextClosingTag as rawTextClosingTag,
   nextHtmlTag,
   nextHtmlTagOutsideRawText,
@@ -571,13 +573,15 @@ function validDate(raw) {
 }
 
 function htmlAttributeValue(attrs, name) {
-  const re = new RegExp(`(?:^|\\s)${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s"'=<>]+))`, 'i');
-  const found = re.exec(attrs || '');
-  return found ? decodeHtmlEntities(found[1] ?? found[2] ?? found[3] ?? '') : '';
+  return decodeHtmlEntities(firstHtmlAttributeValue(attrs, name));
+}
+
+function hasHtmlClass(attrs, token) {
+  return htmlAttributeValue(attrs, 'class').split(/[\t\n\f\r ]+/).includes(token);
 }
 
 /** Seleziona solo `<time>` con semantica esplicita di data di pubblicazione. */
-export function selectPublishedTime(html) {
+export function selectPublishedTime(html, classToken) {
   const input = String(html || '');
   const publicationDates = [];
   let tag = nextHtmlTagOutsideRawText(input);
@@ -587,6 +591,15 @@ export function selectPublishedTime(html) {
       continue;
     }
     const attrs = tag.attrs || '';
+    if (classToken) {
+      if (hasHtmlClass(attrs, classToken)) {
+        const date = validDate(htmlAttributeValue(attrs, 'datetime'));
+        if (!date) return null;
+        publicationDates.push(date);
+      }
+      tag = nextHtmlTagOutsideRawText(input, tag.end);
+      continue;
+    }
     const itemprop = htmlAttributeValue(attrs, 'itemprop');
     const property = htmlAttributeValue(attrs, 'property');
     const className = htmlAttributeValue(attrs, 'class');
@@ -605,7 +618,8 @@ export function selectPublishedTime(html) {
       .filter(Boolean);
     const classMarker = classTokens.some((token) => /^(?:published|pubdate|datepublished|publicationdate|publicationdatetime|publisheddate|publishedtime)$/.test(token))
       || /^(?:(?:article|news|post))?(?:datepublished|publicationdate|publicationdatetime|publisheddate|publishedtime)$/.test(compactClass);
-    const dataMarker = /(?:^|\s)data-(?:published|date-published)(?:\s|=|$)/i.test(attrs);
+    const dataMarker = Array.from(htmlAttributes(attrs)).some(([name]) =>
+      name === 'data-published' || name === 'data-date-published');
     if (!semanticMarker && !classMarker && !dataMarker) {
       tag = nextHtmlTagOutsideRawText(input, tag.end);
       continue;
@@ -732,12 +746,7 @@ const CHROME_ROLES = new Set(['navigation', 'banner', 'contentinfo']);
  * un altro attributo: cercarla nel testo grezzo toglierebbe `<main>`.
  */
 function roleTokens(attrs) {
-  const attrRe = /([^\s"'<>/=]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/g;
-  let m;
-  while ((m = attrRe.exec(String(attrs || ''))) !== null) {
-    if (m[1].toLowerCase() === 'role') return (m[2] ?? m[3] ?? m[4] ?? '').toLowerCase().split(/\s+/).filter(Boolean);
-  }
-  return [];
+  return firstHtmlAttributeValue(attrs, 'role').toLowerCase().split(/\s+/).filter(Boolean);
 }
 
 /**
@@ -1263,12 +1272,13 @@ export function headlineFromUrlSlug(url) {
  *
  * @param {string} xml
  * @param {string} sitemapUrl
- * @param {{ dedup?: boolean }} [opts] `dedup: false` per le fonti che riusano
+ * @param {{ dedup?: boolean, useLastmod?: boolean }} [opts] `dedup: false` per le fonti che riusano
  *   gli URL: li' due voci con lo stesso `<loc>` sono due notizie, e il dedup
  *   si fa dopo l'identita' dell'item (vedi `applyItemIdentity`)
- * @returns {Array<{url: string, headline: string, date: Date | null, language?: string, titleFromSlug?: boolean}>}
+ *   Con `useLastmod` restituisce solo URL, lastmod e lingua per i dettagli.
+ * @returns {Array<{url: string, headline?: string, date: Date | null, language?: string, titleFromSlug?: boolean}>}
  */
-export function extractSitemapNewsItems(xml, sitemapUrl, { dedup = true } = {}) {
+export function extractSitemapNewsItems(xml, sitemapUrl, { dedup = true, useLastmod = false } = {}) {
   const out = [];
   // Anche con prefisso di namespace (`<sm:url>`, `<sm:loc>`): una forma non
   // riconosciuta ridurrebbe a zero la fonte in silenzio.
@@ -1279,10 +1289,18 @@ export function extractSitemapNewsItems(xml, sitemapUrl, { dedup = true } = {}) 
     const loc = /<(?:[\w-]+:)?loc>\s*(?:<!\[CDATA\[)?\s*([^<\]]+?)\s*(?:\]\]>)?\s*<\/(?:[\w-]+:)?loc>/i.exec(block);
     const url = absoluteUrl(decodeHtmlEntities(loc?.[1] || ''), sitemapUrl);
     if (!url) continue;
-    const title = /<news:title>([\s\S]*?)<\/news:title>/i.exec(block);
-    const pub = /<news:publication_date>([\s\S]*?)<\/news:publication_date>/i.exec(block)
+    const pub = (!useLastmod && /<news:publication_date>([\s\S]*?)<\/news:publication_date>/i.exec(block))
       || /<(?:[\w-]+:)?lastmod>([\s\S]*?)<\/(?:[\w-]+:)?lastmod>/i.exec(block);
     const lang = /<news:language>([\s\S]*?)<\/news:language>/i.exec(block);
+    if (useLastmod) {
+      out.push({
+        url,
+        date: validDate(stripTags(pub?.[1] || '')),
+        ...(lang ? { language: stripTags(lang[1]) } : {}),
+      });
+      continue;
+    }
+    const title = /<news:title>([\s\S]*?)<\/news:title>/i.exec(block);
     let headline = stripTags(title?.[1] || '');
     let titleFromSlug = false;
     if (!headline) {
@@ -1752,17 +1770,53 @@ export function applyItemIdentity(headlines, scope = true) {
   return { headlines: out, identified, dropped: headlines.length - out.length };
 }
 
+// ── Comunicati ufficiali di Argovia ──────────────────────────────────────────
+
+export const AG_PRESS_DETAIL = 'ag-press-release';
+export const AG_PRESS_MAX_REQUESTS = 4;
+
+function isAgPressDetail(source) {
+  return source.parser === 'sitemap' && source.quirks?.sitemapDetail === AG_PRESS_DETAIL;
+}
+
+function isAgPressUrl(url, origin) {
+  const detail = new URL(url);
+  const params = [...detail.searchParams];
+  return detail.protocol === 'https:' && detail.origin === origin
+    && !detail.username && !detail.password && !detail.href.includes('#')
+    && detail.pathname === '/de/medien/medienmitteilungen'
+    && params.length === 1 && params[0][0] === 'mm' && Boolean(params[0][1].trim());
+}
+
+function agPressHeadline(html, candidateUrl) {
+  let inHead = false;
+  const titles = [];
+  const urls = [];
+  for (let tag = nextHtmlTagOutsideRawText(html); tag; tag = nextHtmlTagOutsideRawText(html, tag.end)) {
+    if (tag.name === 'body' || (tag.name === 'head' && tag.closing)) break;
+    if (tag.name === 'head' && !tag.selfClosing) inHead = true;
+    if (!inHead || tag.name !== 'meta' || tag.closing) continue;
+    const property = htmlAttributeValue(tag.attrs, 'property');
+    if (property === 'og:title') titles.push(htmlAttributeValue(tag.attrs, 'content'));
+    if (property === 'og:url') urls.push(htmlAttributeValue(tag.attrs, 'content'));
+  }
+  if (titles.length !== 1 || urls.length !== 1 || absoluteUrl(urls[0]) !== candidateUrl) return '';
+  const suffix = ' - Kanton Aargau';
+  const title = titles[0].trimEnd();
+  return (title.endsWith(suffix) ? title.slice(0, -suffix.length) : title).trim();
+}
+
 // ── Cortesia verso l'host ────────────────────────────────────────────────────
 
 /**
- * Quante richieste puo' fare la fonte in questo run: `maxRequestsPerRun`, e 1
- * se il crawl-delay non si puo' attendere dentro il run.
+ * Parte da `maxRequestsPerRun` e applica il cap dei comunicati AG. Con un
+ * crawl-delay troppo lungo il budget effettivo è una sola richiesta.
  */
 export function sourceRequestBudget(source) {
   const q = source?.quirks || {};
   let budget = Number.isInteger(q.maxRequestsPerRun) && q.maxRequestsPerRun >= 1 ? q.maxRequestsPerRun : Infinity;
   if (Number(q.crawlDelaySeconds) > MAX_INLINE_CRAWL_DELAY_SECONDS) budget = Math.min(budget, 1);
-  return budget;
+  return source && isAgPressDetail(source) ? Math.min(budget, AG_PRESS_MAX_REQUESTS) : budget;
 }
 
 /**
@@ -1834,6 +1888,7 @@ export async function scanCantonSource(source, ctx) {
   const throttle = ctx.throttle || createHostThrottle();
   const now = ctx.now || new Date();
   const quirks = source.quirks || {};
+  const agPressDetail = isAgPressDetail(source);
   const budget = sourceRequestBudget(source);
   const host = new URL(source.url).hostname;
   const notes = [];
@@ -1857,7 +1912,7 @@ export async function scanCantonSource(source, ctx) {
           try {
             res = await fetchWithRefTimeout(url, {
               headers: { 'User-Agent': CANTON_SOURCE_USER_AGENT, Accept: accept, 'Accept-Language': acceptLanguageFor(source) },
-              redirect: 'follow',
+              redirect: agPressDetail ? 'error' : 'follow',
             }, CANTON_SOURCE_TIMEOUT_MS, fetchImpl);
           } catch (error) {
             // Classify the transport error in the outer catch. Do not mark an
@@ -1890,7 +1945,8 @@ export async function scanCantonSource(source, ctx) {
         const budgetAllowsRetry = budget === Infinity || requests < budget;
         const canRetry = attempt < CANTON_SOURCE_MAX_ATTEMPTS && budgetAllowsRetry && isRetryableSourceError(error);
         if (!canRetry) throw error;
-        notes.push(`retry fonte ${attempt + 1}/${CANTON_SOURCE_MAX_ATTEMPTS} dopo ${error?.message || String(error)}`);
+        const retryNote = `retry fonte ${attempt + 1}/${CANTON_SOURCE_MAX_ATTEMPTS}`;
+        notes.push(agPressDetail ? retryNote : `${retryNote} dopo ${error?.message || String(error)}`);
       }
     }
     throw lastError || new Error('errore fonte non riconosciuto');
@@ -1935,7 +1991,10 @@ export async function scanCantonSource(source, ctx) {
         return extractJsonApiItems(text, url, { notes });
       default:
         // news-sitemap, sitemap, weekly-sitemap
-        return extractSitemapNewsItems(text, url, { dedup: !quirks.urlReusedForDifferentStories });
+        return extractSitemapNewsItems(text, url, {
+          dedup: !agPressDetail && !quirks.urlReusedForDifferentStories,
+          useLastmod: agPressDetail,
+        });
     }
   };
   const accept = ['html-links', 'json-entities'].includes(source.parser)
@@ -1946,7 +2005,7 @@ export async function scanCantonSource(source, ctx) {
   // dei comunicati dell'anno) e' un ESEMPIO: si leggono il periodo corrente e
   // il precedente, o il solo piu' utile se il budget e' 1. `weekly-sitemap`
   // senza `urlPeriod` e' settimanale ISO per definizione.
-  const period = quirks.urlPeriod || (source.parser === 'weekly-sitemap' ? 'iso-week' : null);
+  const period = agPressDetail ? null : quirks.urlPeriod || (source.parser === 'weekly-sitemap' ? 'iso-week' : null);
   const urls = period ? periodSitemapUrls(source.url, period, { now, budget: Math.min(budget, 2) }) : [source.url];
   let headlines = [];
   const failures = [];
@@ -1968,6 +2027,44 @@ export async function scanCantonSource(source, ctx) {
     const [status] = failureStatuses;
     if (failureStatuses.size === 1 && status !== undefined) error.status = status;
     throw error;
+  }
+  if (agPressDetail) {
+    const origin = new URL(source.url).origin;
+    const oldest = now.getTime() - 7 * 86_400_000;
+    const fresh = (date) => date && date.getTime() >= oldest && date.getTime() <= now.getTime();
+    const eligible = headlines
+      .filter(({ url, date }) => fresh(date) && isAgPressUrl(url, origin))
+      .sort((a, b) => b.date - a.date);
+    const candidates = dedupByUrl(eligible);
+    const duplicates = eligible.length - candidates.length;
+    if (duplicates > 0) notes.push(`comunicati Argovia: duplicati rimossi: ${duplicates}`);
+    headlines = [];
+    let attemptedDetails = 0;
+    let unverifiedDetails = 0;
+    for (const { url, language } of candidates) {
+      if (requests >= budget) break;
+      attemptedDetails += 1;
+      try {
+        const html = maskLedgerInactiveMarkup(await get(url, HTML_ACCEPT));
+        const headline = agPressHeadline(html, url);
+        const date = selectPublishedTime(html, 'publishdate__date');
+        if (headline.length >= 10 && fresh(date)) {
+          headlines.push({ url, headline, date, ...(language === undefined ? {} : { language }) });
+        } else {
+          unverifiedDetails += 1;
+          notes.push('comunicato Argovia: titolo o data editoriale assente, non valida o fuori intervallo');
+        }
+      } catch {
+        unverifiedDetails += 1;
+        notes.push('comunicato Argovia: dettaglio non disponibile');
+      }
+    }
+    if (attemptedDetails > 0 && unverifiedDetails === attemptedDetails) {
+      const error = new Error(`comunicati Argovia: nessun dettaglio verificato (${unverifiedDetails}/${attemptedDetails}, ${requests} richieste)`);
+      error.requests = requests;
+      throw error;
+    }
+    return { headlines, requests, notes };
   }
   notes.push(...failures);
   if (period) notes.push(`periodi: ${urls.map((u) => u.split('/').pop()).join(', ')}`);

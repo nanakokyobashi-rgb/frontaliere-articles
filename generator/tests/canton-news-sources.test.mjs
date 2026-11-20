@@ -77,7 +77,7 @@ assert.ok(startAt !== -1 && endAt !== -1, 'delimitatori degli estrattori non tro
 const { extractRssItems, extractHeadlines } = new Function(
   'decodeHtmlEntities',
   'htmlTagScanner',
-  `const { findHtmlRawTextClosingTag, findHtmlTagEndOutsideQuotes, nextHtmlElement, nextHtmlElementWhere, nextHtmlOpeningTag, nextHtmlTag, nextHtmlTagStatus } = htmlTagScanner;\n${SRC.slice(startAt, endAt).replace(/^export /gm, '')}\nreturn { extractRssItems, extractHeadlines };`,
+  `const { findHtmlRawTextClosingTag, findHtmlTagEndOutsideQuotes, firstHtmlAttributeValue, htmlAttributes, nextHtmlElement, nextHtmlElementWhere, nextHtmlOpeningTag, nextHtmlTag, nextHtmlTagStatus } = htmlTagScanner;\n${SRC.slice(startAt, endAt).replace(/^export /gm, '')}\nreturn { extractRssItems, extractHeadlines };`,
 )(decodeHtmlEntities, htmlTagScanner);
 
 const fixture = (name) => fs.readFileSync(path.join(FIX, name));
@@ -360,6 +360,14 @@ test('date dettaglio: selectPublishedTime ignora eventi generici e rifiuta due p
 
 test('date dettaglio: i tag con > negli attributi passano dallo scanner quote-aware', () => {
   assert.equal(
+    selectPublishedTime(`<time data-note="a > b data-published='true'" datetime="2026-10-05">evento</time>`),
+    null,
+  );
+  assert.equal(
+    selectPublishedTime('<time DATA-PUBLISHED datetime="2026-10-05">pubblicazione</time>')?.toISOString(),
+    '2026-10-05T00:00:00.000Z',
+  );
+  assert.equal(
     selectPublishedTime('<time data-note="a > b" itemprop="datePublished" datetime="2026-10-05T14:00:00Z">pubblicazione</time>')?.toISOString(),
     '2026-10-05T14:00:00.000Z',
   );
@@ -520,6 +528,163 @@ test('sitemap con prefisso di namespace (<sm:url>): letta, non sterile', () => {
   const [item] = extractSitemapNewsItems(xml, 'https://www.example.ch/sitemap.xml');
   assert.equal(item.url, 'https://www.example.ch/news/kantonsstrasse-wegen-bauarbeiten-gesperrt');
   assert.equal(item.date.toISOString().slice(0, 10), '2026-10-05');
+});
+
+const AG_DETAIL_ORIGIN = 'https://press.example.ch';
+const AG_DETAIL_PATH = '/de/medien/medienmitteilungen';
+const AG_PRESS_SOURCE = {
+  url: `${AG_DETAIL_ORIGIN}/sitemap.xml`,
+  parser: 'sitemap',
+  quirks: { sitemapDetail: 'ag-press-release', maxRequestsPerRun: 4 },
+};
+const agDetailUrl = (mm) => `${AG_DETAIL_ORIGIN}${AG_DETAIL_PATH}?mm=${mm}`;
+const agSitemapEntry = (url, lastmod) => `<url><loc>${url.replaceAll('&', '&amp;')}</loc><lastmod>${lastmod}</lastmod><news:publication_date>2020-01-01</news:publication_date></url>`;
+const agDetailTime = (date) => `<TIME CLASS="other publishdate__date" datetime="${date}"></TIME>`;
+const agDetailMeta = (title, url) =>
+  `<META PROPERTY="og:title" CONTENT="${title} - Kanton Aargau"><meta content='${url}' property='og:url'>`;
+const agDetailPage = (title, url, date, extraBody = '') =>
+  `<html><head>${agDetailMeta(title, url)}</head><body>
+    <noscript><h1 class="notice__header">JavaScript deaktiviert</h1></noscript>
+    ${agDetailTime(date)}${extraBody}</body></html>`;
+
+test('sitemap comunicati AG: candidati per lastmod, metadati dal dettaglio e cap di quattro richieste', async () => {
+  const first = agDetailUrl('synthetic-a');
+  const second = agDetailUrl('synthetic-b');
+  const third = agDetailUrl('synthetic-c');
+  const boundary = agDetailUrl('synthetic-boundary');
+  const xml = `<urlset>${[
+    agSitemapEntry(boundary, '2026-09-28T16:00:00Z'),
+    agSitemapEntry(third, '2026-10-03'),
+    agSitemapEntry(first, '2026-10-02'),
+    agSitemapEntry(second, '2026-10-04'),
+    agSitemapEntry(first, '2026-10-05T16:00:00Z'),
+    agSitemapEntry(first, '2026-09-01'),
+    agSitemapEntry(agDetailUrl('future'), '2026-10-05T16:00:01Z'),
+    agSitemapEntry(agDetailUrl('old'), '2026-09-28T15:59:59Z'),
+    agSitemapEntry(agDetailUrl('invalid-date'), 'invalid'),
+    ...[
+      `https://outside.example.ch${AG_DETAIL_PATH}?mm=outside`,
+      agDetailUrl('repeat') + '&mm=other',
+      agDetailUrl('extra') + '&other=1',
+      agDetailUrl('%20'),
+      agDetailUrl('fragment') + '#',
+      agDetailUrl('credentials').replace('https://', 'https://user@'),
+      agDetailUrl('http').replace('https:', 'http:'),
+      `${AG_DETAIL_ORIGIN}${AG_DETAIL_PATH}/?mm=path`,
+    ].map((url) => agSitemapEntry(url, '2026-10-05T16:00:00Z')),
+  ].join('')}</urlset>`;
+  const { impl, calls } = fakeFetch({
+    [AG_PRESS_SOURCE.url]: { body: xml, contentType: 'application/xml' },
+    [first]: { body: agDetailPage('Meldung &amp; Test eins', first.replace(AG_DETAIL_ORIGIN, 'https://PRESS.EXAMPLE.CH:443'), '2026-10-02T10:00:00Z',
+      '<time itemprop="datePublished" datetime="2000-01-01"></time>') },
+    [second]: { body: agDetailPage('Synthetische Meldung zwei', second, '2026-09-28T16:00:00Z') },
+    [third]: { body: agDetailPage('Synthetische Meldung drei', third, '2026-10-03T12:00:00Z') },
+  });
+  const source = { ...AG_PRESS_SOURCE, quirks: { ...AG_PRESS_SOURCE.quirks, maxRequestsPerRun: 99 } };
+  const out = await scanCantonSource(source, ctx(impl));
+  assert.equal(out.requests, 4);
+  assert.deepEqual(out.notes, ['comunicati Argovia: duplicati rimossi: 1']);
+  assert.deepEqual(calls.map(({ url }) => url), [source.url, first, second, third]);
+  assert.ok(calls.every(({ init }) => init.redirect === 'error'));
+  assert.deepEqual(out.headlines, [
+    { url: first, headline: 'Meldung & Test eins', date: new Date('2026-10-02T10:00:00Z') },
+    { url: second, headline: 'Synthetische Meldung zwei', date: new Date('2026-09-28T16:00:00Z') },
+    { url: third, headline: 'Synthetische Meldung drei', date: new Date('2026-10-03T12:00:00Z') },
+  ]);
+});
+
+test('sitemap comunicati AG: scarta dettagli mancanti o non conformi senza esporre i dati', async () => {
+  const valid = '2026-10-05T12:00:00Z';
+  const rejected = agDetailUrl('discard-id');
+  const accepted = agDetailUrl('keep-id');
+  const title = 'Synthetische Meldung';
+  const meta = agDetailMeta(title, rejected);
+  const ignoredHead = `<!--${meta}--><script>${meta}</script><template>${meta}</template>
+    <meta data-note="<meta property='og:title' content='Meldung aus Attribut'>">`;
+  const pages = [
+    agDetailPage(title, rejected, '2026-09-28T15:59:59Z'),
+    agDetailPage(title, rejected, 'invalid'),
+    agDetailPage(title, rejected, valid).replace('publishdate__date', 'publishdate__date--other'),
+    agDetailPage(title, rejected, valid, agDetailTime('2026-10-04T12:00:00Z')),
+    agDetailPage(title, rejected.split('?')[0], valid),
+    agDetailPage(title, accepted, valid),
+    agDetailPage('', rejected, valid),
+    agDetailPage(title, rejected, valid).replace(meta, '').replace('</body>', meta + '</body>'),
+    agDetailPage(title, rejected, valid).replace('</head>', '<meta property="og:title" content=""></head>'),
+    agDetailPage(title, rejected, valid).replace('</head>', `<meta property="og:url" content="${rejected}"></head>`),
+    agDetailPage(title, rejected, valid).replace(meta, ignoredHead),
+    undefined,
+  ];
+  for (const page of pages) {
+    const { impl, calls } = fakeFetch({
+      [AG_PRESS_SOURCE.url]: { body: `<urlset>${agSitemapEntry(rejected, valid)}${agSitemapEntry(accepted, '2026-09-28T16:00:00Z')}</urlset>` },
+      ...(page === undefined ? {} : { [rejected]: { body: page } }),
+      [accepted]: { body: agDetailPage('Synthetische Meldung gültig', accepted, valid, meta)
+        .replace('</head>', ignoredHead + '</head>') },
+    });
+    const out = await scanCantonSource(AG_PRESS_SOURCE, ctx(impl));
+    assert.deepEqual(calls.map(({ url }) => url), [AG_PRESS_SOURCE.url, rejected, accepted]);
+    assert.deepEqual(out.headlines.map(({ url }) => url), [accepted]);
+    assert.equal(out.notes.length, 1);
+    assert.doesNotMatch(out.notes[0], /discard-id|Synthetische Meldung/);
+  }
+});
+
+test('sitemap comunicati AG: nessun dettaglio verificato è un errore senza identificativi', async () => {
+  const date = '2026-10-05';
+  const candidates = [agDetailUrl('synthetic-private-a'), agDetailUrl('synthetic-private-b')];
+  const xml = `<urlset>${candidates.map((url) => agSitemapEntry(url, date)).join('')}</urlset>`;
+  for (const pages of [
+    [],
+    [
+      { body: agDetailPage('Titolo sintetico privato', candidates[0], 'invalid') },
+      { body: '<head><meta content="markup sintetico troncato' },
+    ],
+  ]) {
+    const { impl, calls } = fakeFetch({
+      [AG_PRESS_SOURCE.url]: { body: xml },
+      ...Object.fromEntries(pages.map((page, index) => [candidates[index], page])),
+    });
+    await assert.rejects(scanCantonSource(AG_PRESS_SOURCE, ctx(impl)), (error) => {
+      assert.equal(error.requests, 3);
+      assert.equal(error.message, 'comunicati Argovia: nessun dettaglio verificato (2/2, 3 richieste)');
+      return true;
+    });
+    assert.deepEqual(calls.map(({ url }) => url), [AG_PRESS_SOURCE.url, ...candidates]);
+  }
+});
+
+test('sitemap comunicati AG: sorgente vecchia e crawl-delay alto non leggono il dettaglio', async () => {
+  for (const [lastmod, crawlDelaySeconds] of [['2026-09-01', 1], ['2026-10-05', 61]]) {
+    const source = { ...AG_PRESS_SOURCE, quirks: { ...AG_PRESS_SOURCE.quirks, crawlDelaySeconds } };
+    const { impl, calls } = fakeFetch({
+      [source.url]: { body: `<urlset>${agSitemapEntry(agDetailUrl('synthetic'), lastmod)}</urlset>` },
+    });
+    const out = await scanCantonSource(source, ctx(impl));
+    assert.deepEqual(calls.map(({ url }) => url), [source.url]);
+    assert.equal(out.requests, 1);
+    assert.deepEqual(out.headlines, []);
+  }
+});
+
+test('sitemap comunicati AG: i retry consumano il budget dei dettagli', async () => {
+  const date = '2026-10-05';
+  const first = agDetailUrl('retry-id');
+  const rest = [agDetailUrl('next'), agDetailUrl('last')];
+  const { impl } = fakeFetch({
+    [AG_PRESS_SOURCE.url]: { body: `<urlset>${[first, ...rest].map((url) => agSitemapEntry(url, date)).join('')}</urlset>` },
+    ...Object.fromEntries(rest.map((url) => [url, { body: agDetailPage('Synthetische Meldung', url, date) }])),
+  });
+  const calls = [];
+  const out = await scanCantonSource(AG_PRESS_SOURCE, ctx((url, init) => {
+    calls.push(url);
+    return url === first && calls.length === 2 ? { ok: false, status: 503 } : impl(url, init);
+  }));
+  assert.deepEqual(calls, [AG_PRESS_SOURCE.url, first, first, rest[0]]);
+  assert.equal(out.requests, 4);
+  assert.deepEqual(out.headlines.map(({ url }) => url), [rest[0]]);
+  assert.ok(out.notes.some((note) => note.startsWith('retry fonte')));
+  assert.doesNotMatch(out.notes.join(' '), /retry-id/);
 });
 
 test('weekly-sitemap: periodo ISO corrente e precedente; budget 1 sceglie il piu\' utile', () => {
@@ -892,7 +1057,12 @@ test('il report cantonale distingue un HTTP 403 da un errore prima della richies
   assert.ok(startAt !== -1 && endAt > startAt, 'delimitatori di fetchCantonSourceHeadlines non trovati');
   const report = { sources: {} };
   let scannerError;
+  let reportedError;
   const scanWithFakeFetch = async (source, context) => {
+    if (reportedError) {
+      context.onRequestAttempt(1);
+      throw reportedError;
+    }
     const fetchImpl = async () => new Response(null, { status: 403 });
     try {
       return await scanCantonSource(source, ctx(fetchImpl, { ...context, now: NOW }));
@@ -917,6 +1087,14 @@ test('il report cantonale distingue un HTTP 403 da un errore prima della richies
   await assert.rejects(fetchHeadlines({ url, parser: 'csv' }, 'blocked.example'), /non supportato/);
   assert.deepEqual(report.sources.canton[1],
     { url, parser: 'csv', reserve: false, requests: 0, items: 0, recent: 0, status: 'failed' });
+
+  for (const [requests, expected] of [[3, 3], [0, 1], [-2, 1], [2.5, 1], ['3', 1]]) {
+    reportedError = Object.assign(new Error('nessun dettaglio verificato'), { requests });
+    await assert.rejects(fetchHeadlines({ url, parser: 'sitemap' }, 'blocked.example'),
+      (error) => error === reportedError);
+    assert.deepEqual(report.sources.canton.at(-1),
+      { url, parser: 'sitemap', reserve: false, requests: expected, items: 0, recent: 0, status: 'failed' });
+  }
 });
 
 function legacyHeadlineCount(html, baseUrl) {
