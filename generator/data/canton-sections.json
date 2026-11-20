@@ -17,6 +17,22 @@
       "frontalieriContext": "Aargau (Argovia) confina a nord con il Landkreis Waldshut (Baden-Wuerttemberg) lungo il Reno (Rheinfelden, Laufenburg, Koblenz/Zurzach). Il canton Aargau e' la meta principale dei Grenzgaenger del Kreis Waldshut (circa 15'000 pendolari G al 4Q 2022, 8'652 dal solo Kreis Waldshut) e in generale dalla Germania; i flussi sono tedeschi, non italiani: temi forti sono Hochrheinbahn/cantieri A98, imposta alla fonte 4,5% e DBA CH-DE, prezzi carburante CH vs DE (Tanktourismus), AHV/Pensionskasse e assicurazione malattia (Optionsrecht). Il bacino in lingua tedesca rende inutili le liste globali (tutte in italiano/Ticino).",
       "newsSources": [
         {
+          "url": "https://www.ag.ch/content/export/api/v1/xml/medienmitteilungen",
+          "format": "sitemap",
+          "parser": "sitemap",
+          "publisher": "Cantone di Argovia (comunicati)",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": ["cronaca", "mobilita", "servizi", "lavoro"],
+          "quirks": {
+            "sitemapDetail": "ag-press-release",
+            "maxRequestsPerRun": 4
+          },
+          "items7d": 3,
+          "verifiedAt": "2026-11-20",
+          "notes": "Sitemap ufficiale indicata nell'indice cantonale. Le date lastmod selezionano i candidati. Titolo e data di pubblicazione provengono dal dettaglio HTML ufficiale."
+        },
+        {
           "url": "https://www.fricktal.info/?format=feed&type=rss",
           "format": "rss",
           "parser": "rss",
@@ -493,12 +509,12 @@
       },
       "ownerDecisionPending": [],
       "gaps": [
-        "Comunicati del Cantone (ag.ch/medien) e Kantonspolizei: nessun RSS e lista JS senza link; coperti solo indirettamente da AZ/nau.ch/fricktal.info. Se serve la fonte primaria occorre un parser dedicato o l'API non pubblica (non usata)",
+        "Comunicati del Cantone: la sitemap ufficiale rende leggibili gli avvisi cantonali della lista JS. Kantonspolizei: nessun RSS e lista JS senza link, copertura indiretta da AZ/nau.ch/fricktal.info",
         "Fisco: l'Amt per le imposte non ha un feed novita'; la fonte ag.ch e' una pagina evergreen, non una lista datata. Novita' fiscali solo tramite AZ wirtschaft / SRF",
         "Pensioni: SVA Aargau pubblica ~1 news al mese (ultima 02.07.2026); Aargauische Pensionskasse (apk.ch) senza lista leggibile; AHV nazionale (ahv-iv.ch) senza feed",
         "Carburanti: nessuna fonte TCS leggibile (tcs.ch errore HTTP/2 o 404) e nessun prezzo carburante CH per Aargau in forma di feed; i prezzi lato DE sono pagine dati (tankpreise.de/MTS-K), non articoli. Le notizie sui prezzi arrivano via AZ/Avenergy/Suedkurier",
         "Servizi: ospedali KSA/Hirslanden senza lista leggibile (solo KSB); sindacati Unia/Syna AG poco attivi (Syna ultima data 31.03.2026; Unia AG 404)",
-        "Mobilita': nessuna fonte ufficiale cantonale su cantieri/traffico (ag.ch/verkehr, ASTRA, viasuisse senza lista); Hochrheinbahn/A98 coperti lato DE da Suedkurier/Landkreis Waldshut. Zoll (BAZG) e FFS (news.sbb.ch) SPA",
+        "Mobilita': i comunicati cantonali includono avvisi su progetti stradali e ferroviari. Liste dedicate a cantieri e traffico non leggibili (ag.ch/verkehr, ASTRA, viasuisse); Hochrheinbahn/A98 coperti lato DE da Suedkurier/Landkreis Waldshut. Zoll (BAZG) e FFS (news.sbb.ch) SPA",
         "Radio Argovia e Tele M1 non utilizzabili; nessuna fonte TV/radio locale AG verificata. SRF regionale AG-SO non ha RSS",
         "I feed Aargauer Zeitung sono paywall parziale e robots.txt vieta bot AI nominati: il crawler deve identificarsi con il proprio UA frontaliere, non con ClaudeBot/anthropic",
         "Dominio e lingua: tutte le fonti sono in tedesco; non esistono fonti it/fr/en per AG (gli articoli vanno tradotti in pipeline). Il Grenzgaenger verso AG e' tedesco, quindi i temi Italia (INPS, Agenzia Entrate, ocst) delle liste globali sono irrilevanti"

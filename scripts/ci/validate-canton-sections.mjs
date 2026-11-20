@@ -43,6 +43,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { AG_PRESS_DETAIL, AG_PRESS_MAX_REQUESTS, sourceRequestBudget } from '../../generator/scripts/lib/canton-news-sources.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -101,6 +102,7 @@ const QUIRKS = {
   excludePaywalledCards: (v) => v === true,
   extractCardLead: (v) => v === 'text' || v === 'media-title',
   articleDateFromDetail: (v) => v === 'html-meta',
+  sitemapDetail: (v) => v === AG_PRESS_DETAIL,
   titleAttributeTemplate: (v) => v === 'beitrag-lesen',
   embeddedDateField: (v) => v === 'publishDate',
   articleContent: (v) => v === 'html-text',
@@ -118,6 +120,7 @@ const QUIRK_PARSERS = {
   excludePaywalledCards: new Set(['html-links']),
   extractCardLead: new Set(['html-links']),
   articleDateFromDetail: new Set(['html-links']),
+  sitemapDetail: new Set(['sitemap']),
   titleAttributeTemplate: new Set(['html-links']),
   embeddedDateField: new Set(['html-links']),
   articleContent: new Set(['html-links']),
@@ -408,6 +411,13 @@ export function validateCantonSections(doc, ctx) {
         if (!(Number.isInteger(s?.quirks?.maxRequestsPerRun) && s.quirks.maxRequestsPerRun >= 2)
           || !(Number.isInteger(effectiveBudget) && effectiveBudget >= 2)) {
           err(where, `${lbl}: articleDateFromDetail html-meta richiede maxRequestsPerRun intero >= 2 e budget effettivo >= 2`);
+        }
+      }
+      if (s?.quirks?.sitemapDetail === AG_PRESS_DETAIL) {
+        const declaredBudget = s.quirks.maxRequestsPerRun;
+        if (!Number.isInteger(declaredBudget) || declaredBudget < 2 || declaredBudget > AG_PRESS_MAX_REQUESTS
+          || sourceRequestBudget(s) < 2) {
+          err(where, `${lbl}: sitemapDetail ${AG_PRESS_DETAIL} richiede maxRequestsPerRun intero da 2 a ${AG_PRESS_MAX_REQUESTS} e budget effettivo >= 2`);
         }
       }
       try {
