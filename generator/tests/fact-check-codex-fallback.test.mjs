@@ -291,10 +291,11 @@ describe('fact-check retries under a reported input cap', () => {
   async function runRounds({
     canton = 'San Gallo', section = 'san-gallo', isCanton = true, isFrontaliere = false,
     sourceUrl = 'HTTPS://example.test/news', sourceText = source, padding = '', replies,
+    initialTime = 160_000,
   }) {
     const calls = [];
     const logs = [];
-    let now = 160_000;
+    let now = initialTime;
     const cantonLines = cantonPromptLines({ cantonName: canton, section });
     const result = await runInNewContext(`
       ${SRC.slice(start, end)}
@@ -338,6 +339,18 @@ describe('fact-check retries under a reported input cap', () => {
     });
     return { ...result, calls, logs, cantonLines };
   }
+
+  test('keeps a usable verification window when a 429 arrives late', async () => {
+    const rateLimit = new Error('HTTP 429');
+    const { calls, modelResults, logs } = await runRounds({
+      initialTime: 214_000,
+      replies: [rateLimit, rateLimit, rateLimit],
+    });
+    assert.equal(modelResults.length, 0);
+    assert.ok(calls.length >= 2);
+    assert.ok(calls.every(({ options }) => options.deadlineMs === 233_500));
+    assert.ok(!logs.some((message) => message.includes('tentativo 2')));
+  });
 
   async function loadFor(target, locale = {}) {
     const { prompt } = await runRounds({ ...locale, replies: [firstVote, secondVote] });
