@@ -3306,7 +3306,9 @@ const _pendingCounterDeltas = new Map();
  */
 const _runOutcomes = new Map();
 
-let _firestoreDb = null;     // Firestore instance (null until initScoreStore)
+const SCORE_STORE_APP_NAME = 'score-store';
+
+let _firestoreDb = null;     // Dedicated score-store Firestore instance (null until initScoreStore)
 let _firestoreFieldValue = null; // firebase-admin/firestore FieldValue (atomic increments)
 let _storeInitialized = false;
 let _persistTimer = null;    // Debounce timer
@@ -4107,11 +4109,13 @@ export const SCORE_STORE_READ_TIMEOUT_MS = 15_000;
  * Esegue una lettura Firestore con un fallback temporale esplicito.
  *
  * Firestore Admin non espone un AbortSignal comune a DocumentReference e Query
- * per queste due letture. Al timeout si chiude quindi il client Firestore — la
- * sua API pubblica `terminate()` chiude anche gli stream aperti — prima di
- * lasciare il fallback in memoria. La continuazione della promise resta
- * agganciata per assorbire un eventuale rifiuto tardivo senza creare un
- * `unhandledRejection`.
+ * per queste due letture. Al timeout si chiude quindi il client Firestore
+ * dedicato al ledger — la sua API pubblica `terminate()` chiude anche gli
+ * stream aperti — prima di lasciare il fallback in memoria. L'app nominata che
+ * lo possiede e' distinta dall'app default usata dai producer per le fonti,
+ * quindi il cleanup non puo' abbattere le loro operazioni. La continuazione
+ * della promise resta agganciata per assorbire un eventuale rifiuto tardivo
+ * senza creare un `unhandledRejection`.
  */
 function _terminateScoreStoreClient() {
   const db = _firestoreDb;
@@ -4357,16 +4361,31 @@ export async function initScoreStore() {
 
   try {
     // Lazy-import Firebase Admin (same pattern as load-rc-env.mjs)
-    const { applicationDefault, getApps, initializeApp } = await import('firebase-admin/app');
+    const { applicationDefault, getApp, initializeApp } = await import('firebase-admin/app');
     const { FieldValue, getFirestore } = await import('firebase-admin/firestore');
-    if (!getApps().length) {
+
+    // Keep the default app available: create-article.mjs and the journalist
+    // publisher use it for their own Firestore reads/writes. The ledger gets a
+    // separate named app so a bounded-read cleanup cannot terminate that
+    // producer client.
+    let defaultApp;
+    try {
+      defaultApp = getApp();
+    } catch {
       if (!process.env.GOOGLE_APPLICATION_CREDENTIALS) {
         console.warn('⚠️  [ScoreStore] No GOOGLE_APPLICATION_CREDENTIALS — using in-memory scores only');
         return;
       }
-      initializeApp({ credential: applicationDefault() });
+      defaultApp = initializeApp({ credential: applicationDefault() });
     }
-    _firestoreDb = getFirestore();
+
+    let scoreStoreApp;
+    try {
+      scoreStoreApp = getApp(SCORE_STORE_APP_NAME);
+    } catch {
+      scoreStoreApp = initializeApp(defaultApp.options, SCORE_STORE_APP_NAME);
+    }
+    _firestoreDb = getFirestore(scoreStoreApp);
     // Atomic counter increments (see _pendingCounterDeltas). Captured here and
     // not re-imported at write time because this is the only place that already
     // holds the Firestore module. There is no REST fallback to worry about: unlike

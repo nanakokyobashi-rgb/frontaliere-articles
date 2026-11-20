@@ -335,6 +335,12 @@ test('una lettura iniziale dello score ledger che non risponde chiude il client 
 test('initScoreStore applica il limite a entrambe le letture Firestore di startup', () => {
   const src = readFileSync(AI_MODELS, 'utf8');
   const initBody = src.slice(src.indexOf('export async function initScoreStore'));
+  assert.match(src, /const SCORE_STORE_APP_NAME = 'score-store';/u);
+  assert.match(initBody, /getApp\(SCORE_STORE_APP_NAME\)/u);
+  assert.match(initBody, /initializeApp\(defaultApp\.options, SCORE_STORE_APP_NAME\)/u);
+  assert.match(initBody, /getFirestore\(scoreStoreApp\)/u);
+  assert.doesNotMatch(initBody, /_firestoreDb = getFirestore\(\)/u,
+    'il ledger non deve condividere il client Firestore default terminabile');
   assert.match(initBody, /withScoreStoreReadTimeout\(\(\) => aggregateRef\.get\(\)\)/u);
   assert.match(
     initBody,
