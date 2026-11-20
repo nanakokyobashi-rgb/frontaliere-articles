@@ -90,6 +90,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.referendum-budget-2027-frauenfeld.title': 'Referendums-Publikation Budget 2027 Frauenfeld',
     'blog.article.referendum-budget-2027-frauenfeld.excerpt': 'Das Dokument ist als PDF mit einer Größe von 87 KB verfügbar; es enthält weder Zahlen noch spezifische Ausgabenposten.',
     'blog.article.referendum-budget-2027-frauenfeld.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.turgovia-rav-assunzioni-permessi.title': 'Thurgau: Drei RAV helfen Arbeitgebern, Personal zu finden',
+    'blog.article.turgovia-rav-assunzioni-permessi.excerpt': 'Die RAV-Standorte in Amriswil, Frauenfeld und Kreuzlingen helfen Arbeitgebern; auf arbeit.swiss werden offene Stellen kostenlos veröffentlicht.',
+    'blog.article.turgovia-rav-assunzioni-permessi.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTgDe;

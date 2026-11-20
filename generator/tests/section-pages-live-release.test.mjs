@@ -213,6 +213,32 @@ test('publisher: una pagina live omessa dal render parziale non blocca la stagin
   }
 });
 
+test('publisher: ritenta solo la miniatura che non ha ottenuto il lease', async () => {
+  const first = 'images/blog/thumbnails/article-first-480w.webp';
+  const second = 'images/blog/thumbnails/article-second-480w.webp';
+  for (const retrySucceeds of [true, false]) {
+    const uploads = [];
+    const result = await publish({
+      section: 'canton-ti',
+      pages: [],
+      cdnUploads: [first, second].map((key) => ({ key, local: key })),
+      obsoletePages: [],
+      publishedStatusImpl: async () => 'live',
+      runImpl: (_command, args) => {
+        assert.equal(args[0], 'scripts/lib/upload-cdn-file.sh');
+        const key = args[2];
+        uploads.push(key);
+        if (key === first && (uploads.length === 1 || !retrySucceeds)) {
+          return { code: 0, stderr: '[r2-image-namespace-lock] timed out waiting for namespace blog' };
+        }
+        return { code: 0, stdout: '✅ uploaded' };
+      },
+    });
+    assert.deepEqual(uploads, [first, second, first]);
+    assert.equal(result.failures, retrySucceeds ? 0 : 1);
+  }
+});
+
 test('publisher: lo staging snapshotta prima degli asset e trattiene quelli delle pagine immutabili', async () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-live-assets-'));
   const immutable = pageEntry('canton-ti', 'articoli-ticino/existing/index.html', 'article');
