@@ -1657,19 +1657,26 @@ test('national queue resolves the section before starting the production job', (
     ['push', 'Generate blog article (svizzera)', '', 'frontaliere'],
     ['push', 'Other content\n\nMention (frontaliere) in body', '', 'frontaliere'],
   ];
-  for (const [event, message, requested, expected] of cases) {
-    const result = spawnSync('bash', ['-c', script], {
-      env: {
-        ...process.env,
-        EVENT_NAME: event,
-        PUSH_MESSAGE: message,
-        REQUESTED_SECTION: requested,
-        GITHUB_OUTPUT: '/dev/stdout',
-      },
-      encoding: 'utf8',
-    });
-    assert.equal(result.status, 0, result.stderr);
-    assert.equal(result.stdout.trim(), `section=${expected}`);
+  const root = mkdtempSync(path.join(tmpdir(), 'national-queue-'));
+  const output = path.join(root, 'github-output');
+  try {
+    for (const [event, message, requested, expected] of cases) {
+      writeFileSync(output, '');
+      const result = spawnSync('bash', ['-c', script], {
+        env: {
+          ...process.env,
+          EVENT_NAME: event,
+          PUSH_MESSAGE: message,
+          REQUESTED_SECTION: requested,
+          GITHUB_OUTPUT: output,
+        },
+        encoding: 'utf8',
+      });
+      assert.equal(result.status, 0, result.stderr);
+      assert.equal(readFileSync(output, 'utf8').trim(), `section=${expected}`);
+    }
+  } finally {
+    rmSync(root, { recursive: true, force: true });
   }
   assert.match(WF, /SEC="\$\{\{ needs\.admit\.outputs\.national_section \}\}"/);
 });
