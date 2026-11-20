@@ -5289,6 +5289,24 @@
           "notes": "Elenco ufficiale comunicati/novita' del Cantone (Regierungsrat, Departemente, Aemter, Polizia, Vernehmlassungen). ATTENZIONE: la tabella e' riempita via JS ma i dati sono gia' nell'HTML come JSON con entita' (name = <a href=/_rte/information/138766>titolo</a>, datum dd.mm.yyyy, _kategorieId news|politik_info|vernehmlassung|mitteilungenaemter|mitteilungendepartemente): zero tag <a> reali, quindi l'estrattore HTML standard NON li vede; serve un parser dedicato (URL articolo = https://www.ow.ch/_rte/information/<id>, pagina dettaglio 200). Volume basso: ~3 negli ultimi 7 giorni, ~31 in 30. robots.txt vuoto. Nessun RSS (/rss e /medienmitteilungen 404)."
         },
         {
+          "url": "https://www.sarnen.ch/aktuellesinformationen",
+          "format": "html",
+          "parser": "json-entities",
+          "publisher": "Einwohnergemeinde Sarnen",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": [
+            "mobilita",
+            "eventi",
+            "servizi",
+            "cronaca"
+          ],
+          "quirks": {},
+          "items7d": 2,
+          "verifiedAt": "2026-11-20",
+          "notes": "Avvisi e comunicati ufficiali del capoluogo. Lo scanner legge date e link dal data-entities iCMS. Il 20.11.2026 ha estratto 16 voci, 2 negli ultimi 7 giorni. Entrambi i dettagli rispondono HTTP 200 dopo il redirect iCMS."
+        },
+        {
           "url": "https://www.unterwalden24.ch/feed/",
           "format": "rss",
           "parser": "rss",
