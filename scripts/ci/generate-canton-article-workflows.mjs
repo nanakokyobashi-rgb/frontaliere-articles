@@ -771,6 +771,10 @@ export function buildCallerWorkflow(canton, offset) {
     throw new Error(`profilo ${code}: "${section}" non e' la sua sezione cantonale nel core`);
   }
   const file = callerWorkflowFile(code);
+  if (canton.cloudScheduler !== undefined && typeof canton.cloudScheduler !== 'boolean') {
+    throw new Error(`profilo ${code}: cloudScheduler deve essere booleano`);
+  }
+  const nativeSchedule = canton.cloudScheduler ? '' : `  schedule:\n    - cron: '${cronExpression(canton, offset)}'\n`;
   const { pushPaths, bodyPathRegex } = sectionCorpusPaths(section);
   return `${AUTO_GENERATED_MARKER}
 # Sorgente: ${PROFILE_REL} (cronMinute, cadenceHours) + engine/shared/articleSectionCore.mjs (path della sezione).
@@ -782,9 +786,7 @@ run-name: \${{ inputs.loop_clock != '' && format('Generate Blog Article (${secti
 # generation-cloud-clock-contract: v1
 
 on:
-  schedule:
-    - cron: '${cronExpression(canton, offset)}'
-  push:
+${nativeSchedule}  push:
     branches: [main]
     paths:
 ${pushPaths.map((p) => `      - '${p}'`).join('\n')}
