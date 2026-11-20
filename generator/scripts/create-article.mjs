@@ -375,6 +375,7 @@ import {
   translateWithCodexEngine,
   withCodexTranslationLane,
   codexCallDeadlineMs,
+  initialTranslationDeadlineMs,
   CODEX_TRANSLATE_TRANSPORT_RETRIES,
   getCascadeStats,
 } from './lib/free-translate.mjs';
@@ -15298,7 +15299,10 @@ function freeMtField(
     fieldType,
     fieldName: field,
     preserveMunicipalityNames,
-    translate: freeTranslateWithRetry,
+    translate: (request) => freeTranslateWithRetry({
+      ...request,
+      deadlineMs: initialTranslationDeadlineMs(),
+    }),
     balanceMarkdown: balanceMarkdownMarkers,
     onWarn: (msg) => console.error(`  ⚠️  ${msg} — recupero per-campo`),
     onUnusableOutput: (event) => recordFreeMtUnusableOutput(RUN_REPORT.translation, { ...event, field }),
@@ -15796,11 +15800,14 @@ async function translateArticle(data) {
   resetBodyTranslationPending(data);
   const cascadeStatsBeforeTranslation = getCascadeStats();
   let translationRecoveryCodexCalls = 0;
+  let pendingBodyRecoveryStarted = false;
 
   function legacyTranslationOptions() {
     // I producer importati non dichiarano una scadenza di processo: non
     // inventare il wall-clock della CLI, che esiste solo dopo l'installer.
-    const processDeadlineMs = _pendingBodyCodexDeadlineMs;
+    const processDeadlineMs = pendingBodyRecoveryStarted
+      ? _pendingBodyCodexDeadlineMs
+      : initialTranslationDeadlineMs(_pendingBodyCodexDeadlineMs);
     return {
       chain: legacyTranslationChain(),
       bypassForceChain: true,
@@ -18288,6 +18295,7 @@ ${localizedToponymInstruction(targetLang)}`;
   const initialPendingBodyLane = pendingBodySecondLaneAvailable()
     ? AI_MODELS.CODEX_CLI_PRIMARY
     : 'historical-translation-chain';
+  pendingBodyRecoveryStarted = true;
   await retryPendingBodyTranslations(data, {
     report: RUN_REPORT.translation,
     lane: initialPendingBodyLane,

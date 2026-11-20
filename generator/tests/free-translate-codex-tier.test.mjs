@@ -53,6 +53,7 @@ process.env.VITEST = '1';
 
 const {
   freeTranslate,
+  freeTranslateWithRetry,
   getCascadeStats,
   getTranslationCascadeConfigurationKey,
   logCascadeSummary,
@@ -1262,6 +1263,27 @@ test('la cascata iniziale lascia spendibile la riserva Codex per il recupero', a
   }
 });
 
+test('la scadenza della fase iniziale lascia attiva la corsia body recovery', async () => {
+  const now = Date.now();
+  const deadline = now + 55_000;
+  setCodexTranslateProcessDeadline(deadline, { recoveryReserveMs: 120_000 });
+  try {
+    const calls = stubCodex(`CODEX ${EN}`);
+    assert.equal(beginCodexTranslationCall({ now }), null);
+    await it();
+    assert.equal(calls.length, 0);
+    assert.equal(getCascadeStats().codexTranslation.stopReason, '');
+
+    const recovery = beginCodexTranslationCall({ now, allowBodyRecoveryReserve: true });
+    assert.ok(recovery);
+    assert.equal(recovery.deadlineMs, deadline);
+    recovery.finish(now);
+  } finally {
+    setCodexTranslateProcessDeadline(null);
+    setCodexTranslateCallForTests(null);
+  }
+});
+
 test('scadenza del processo lontana: la deadline passata a Codex non la supera', async () => {
   const deadline = Date.now() + 60_000;
   setCodexTranslateProcessDeadline(deadline);
@@ -1428,5 +1450,45 @@ test('non-body queued retries cannot spend calls set aside for body recovery', a
     delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
     setCodexTranslateProcessDeadline(null);
     setCodexTranslateCallForTests(null);
+  }
+});
+
+test('a transport retry keeps the already admitted deadline inside the initial phase', async () => {
+  setCodexTranslateProcessDeadline(Date.now() + 100_000, { recoveryReserveMs: 120_000 });
+  try {
+    stubCodex(`CODEX ${EN}`);
+    await withCodexTranslationLane({
+      run: ({ deadlineMs, reserveTransportRetry }) => {
+        assert.equal(reserveTransportRetry(deadlineMs), true);
+        assert.equal(getCascadeStats().codexTranslation.calls, 2);
+      },
+    });
+  } finally {
+    setCodexTranslateProcessDeadline(null);
+    setCodexTranslateCallForTests(null);
+  }
+});
+
+test('the initial phase stops waiting for a slow legacy provider and starts no retry', async () => {
+  const originalFetch = globalThis.fetch;
+  const originalSocket = process.env.CODEX_AUTH_BROKER_SOCKET;
+  const calls = [];
+  delete process.env.CODEX_AUTH_BROKER_SOCKET;
+  globalThis.fetch = (url) => {
+    calls.push(String(url));
+    return new Promise(() => {});
+  };
+  try {
+    const result = await freeTranslateWithRetry({
+      text: IT,
+      sourceLang: 'it',
+      targetLang: 'en',
+      deadlineMs: Date.now() + 40,
+    });
+    assert.equal(result, '');
+    assert.equal(calls.length, 1);
+  } finally {
+    globalThis.fetch = originalFetch;
+    process.env.CODEX_AUTH_BROKER_SOCKET = originalSocket;
   }
 });
