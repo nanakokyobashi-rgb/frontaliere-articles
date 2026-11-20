@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-blocco-roccia-meiental.webp",
+      "sha256": "6cd51217cf760d14726652450518d8d97c8c48126553aacc35e31813223cc471"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-blocco-roccia-meiental-480w.webp",
+      "sha256": "7695edd03b1267aefbf0664a075c9318ee0a9e98cc058b4675a3abe7e01af438"
+    }
+  ]
 }
