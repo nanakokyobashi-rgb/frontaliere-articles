@@ -213,7 +213,7 @@ test('the consensus counts one vote per model that answered, and seeks a second 
   const loop = SRC.slice(start, end);
   assert.doesNotMatch(loop, /modelResults\.push\(/, 'un voto aggiunto senza passare da addIndependentVote');
   assert.match(loop, /addIndependentVote\(modelResults, modelsToQuery\[i\], s\.value\)/);
-  assert.match(loop, /_runSingleFactCheck\(next,\s*prompt,\s*\{\s*isEvergreen:\s*isEvergreenArticle,\s*editorialContext,\s*excludeModels:\s*voted,\s*invalidVerdictModels\s*\}\)/);
+  assert.match(loop, /_runSingleFactCheck\(next,\s*prompt,\s*\{\s*isEvergreen:\s*isEvergreenArticle,\s*editorialContext,\s*excludeModels:\s*voted,\s*invalidVerdictModels,\s*deadlineMs\s*\}\)/);
   assert.match(loop, /addIndependentVote\(modelResults, verificationModels\[2\], fallback\)/);
   const line = SRC.split('\n').find((l) => l.includes('buildFactCheckCallOptions({ model,'));
   assert.match(line, /jsonMode: true, excludeModels,/);
