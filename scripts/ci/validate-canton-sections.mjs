@@ -72,6 +72,7 @@ export const REQUIRED_AI_AGENTS = Object.freeze(['ClaudeBot', 'anthropic-ai', 'C
 
 /** quirk → validatore del valore. Un quirk sconosciuto e' un errore: e' un hint che nessuno leggera'. */
 const QUIRKS = {
+  feedContentOnly: (v) => v === true,
   paywall: (v) => v === 'title+lead',
   emptyPubDate: (v) => v === true,
   datesInList: (v) => v === false,
@@ -99,6 +100,7 @@ const QUIRKS = {
   // ancorata al path (`^/`), cosi' non puo' degradare a «contiene», e
   // compilabile, perche' lo scanner la compila a ogni run.
   articlePathPattern: isPathRegex,
+  dateFromCardLabel: (value) => value === 'dxp-typo-label',
   excludePaywalledCards: (v) => v === true,
   extractCardLead: (v) => v === 'text' || v === 'media-title',
   articleDateFromDetail: (v) => v === 'html-meta',
@@ -116,7 +118,9 @@ const QUIRKS = {
 
 /** quirk → parser su cui ha senso. Dichiarato altrove sarebbe un hint che nessuno legge. */
 const QUIRK_PARSERS = {
+  feedContentOnly: new Set(['rss']),
   articlePathPattern: new Set(['html-links']),
+  dateFromCardLabel: new Set(['html-links']),
   excludePaywalledCards: new Set(['html-links']),
   extractCardLead: new Set(['html-links']),
   articleDateFromDetail: new Set(['html-links']),
@@ -412,6 +416,9 @@ export function validateCantonSections(doc, ctx) {
           || !(Number.isInteger(effectiveBudget) && effectiveBudget >= 2)) {
           err(where, `${lbl}: articleDateFromDetail html-meta richiede maxRequestsPerRun intero >= 2 e budget effettivo >= 2`);
         }
+      }
+      if (s?.quirks?.dateFromCardLabel === 'dxp-typo-label' && !isPathRegex(s.quirks.articlePathPattern)) {
+        err(where, `${lbl}: dateFromCardLabel dxp-typo-label richiede articlePathPattern valido`);
       }
       if (s?.quirks?.sitemapDetail === AG_PRESS_DETAIL) {
         const declaredBudget = s.quirks.maxRequestsPerRun;

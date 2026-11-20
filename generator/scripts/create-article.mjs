@@ -10100,6 +10100,19 @@ async function fetchPageContent(url, sourceContext = null) {
       'Il corpo completo non è accessibile pubblicamente e non viene usato.',
     ].filter(Boolean).join('\n');
   }
+  if (sourceContext?._cantonSourceFeedOnly === true) {
+    lastSourcePublishedAt = suppliedCantonSourcePublishedAt;
+    lastSourcePageTitle = suppliedCantonSourceTitle;
+    const lead = suppliedCantonSourceLead.trim();
+    return [
+      '[FONTE PUBBLICA — FEED]',
+      `Link alla fonte: ${url}`,
+      suppliedCantonSourceTitle ? `Titolo: ${suppliedCantonSourceTitle}` : '',
+      suppliedCantonSourcePublishedAt ? `Data: ${suppliedCantonSourcePublishedAt}` : '',
+      lead ? `Estratto del feed: ${lead}` : '',
+      'Riporta solo fatti verificabili nel feed, con attribuzione e link alla fonte. Evita di riprodurre il titolo e la prosa dell’estratto.',
+    ].filter(Boolean).join('\n');
+  }
   // Orphan-query candidates carry a site-relative path (GSC topLandingPage
   // is stored path-only by design, see gscFetcher.mjs:231) — fetch() has no
   // implicit base URL and throws "Failed to parse URL from /..." on these,
@@ -11052,19 +11065,51 @@ function structuralHeadlineForLink(html, linkStart, anchorTag) {
   return null;
 }
 
+function publicationDateFromCardLabel(html, card, labelClass) {
+  const range = headlineElementEnd(html, card);
+  if (range.start === html.length) return null;
+  const inner = html.slice(card.openEnd, range.start);
+  const isLabel = (tag) => tag.name === 'p' && !tag.selfClosing
+    && headlineAttributeValue(tag.attrs, 'class').split(/\s+/u).includes(labelClass);
+  let date = null;
+  for (let label = nextHeadlineElementForOpening(inner, isLabel); label;
+    label = nextHeadlineElementForOpening(inner, isLabel, label.openEnd)) {
+    const stack = headlineAncestorStack(inner, label.openEnd);
+    if (stack.some((node) => node.name === 'li') || headlineStackHasNavigation(stack)) continue;
+    if (headlineElementEnd(inner, label).start !== label.closeStart) continue;
+    const text = headlineTextFromMarkup(label.inner).trim();
+    if (!/^\d{2}\.\d{2}\.\d{4}$/u.test(text)) continue;
+    const candidate = parseHeadlineDate(text)?.date;
+    if (!candidate) continue;
+    if (date && date.getTime() !== candidate.getTime()) return null;
+    date = candidate;
+  }
+  return date;
+}
+
 // ── Step 1b: Extract links and headlines from an HTML page ──
 function extractHeadlines(html, baseUrl) {
   const source = arguments[2] || {};
   const metadataHtml = arguments[3] || html;
   const results = [];
-  const htmlDateMap = extractDatesFromHtml(html, baseUrl, source?.quirks);
-  const embeddedDateMap = extractEmbeddedHeadlineDates(metadataHtml, source?.quirks?.embeddedDateField);
+  const labelClass = source?.quirks?.dateFromCardLabel;
+  const useCardLabel = labelClass === 'dxp-typo-label';
+  const useCardPathPattern = useCardLabel && source.quirks.articlePathPattern;
+  const sourceOrigin = useCardLabel ? new URL(baseUrl).origin : null;
+  const htmlDateMap = useCardLabel ? null : extractDatesFromHtml(html, baseUrl, source?.quirks);
+  const embeddedDateMap = useCardLabel ? null : extractEmbeddedHeadlineDates(metadataHtml, source?.quirks?.embeddedDateField);
   // Match <a href="...">text</a> with the same quote-aware walker used by
   // the ancestor/date scanners; an attribute value may contain `>`.
   let anchor = nextHeadlineAnchor(html);
   while (anchor) {
     const nextAnchor = nextHeadlineAnchor(html, anchor.end);
     const ancestors = headlineAncestorStack(html, anchor.start);
+    const card = useCardLabel ? ancestors.findLast((node) => node.name === 'li') : null;
+    if (useCardLabel && (!card || headlineStackHasNavigation([...ancestors, anchor])
+      || !headlineAttributeValue(anchor.attrs, 'class').split(/\s+/u).includes('stretched-link'))) {
+      anchor = nextAnchor;
+      continue;
+    }
     const anchorTag = html.slice(anchor.start, anchor.openEnd);
     const markup = html.slice(anchor.start, anchor.end);
     if (source?.quirks?.excludePaywalledCards
@@ -11102,7 +11147,12 @@ function extractHeadlines(html, baseUrl) {
     }
     // Resolve relative URLs
     try {
-      href = new URL(href, baseUrl).href;
+      const resolved = new URL(href, baseUrl);
+      if (useCardLabel && (resolved.protocol !== 'https:' || resolved.origin !== sourceOrigin)) {
+        anchor = nextAnchor;
+        continue;
+      }
+      href = resolved.href;
     } catch {
       anchor = nextAnchor;
       continue;
@@ -11112,16 +11162,19 @@ function extractHeadlines(html, baseUrl) {
       anchor = nextAnchor;
       continue;
     }
-    // Skip non-article links (categories, tags, pagination, login, etc.)
-    if (/\/(tag|categor|page|login|registr|cookie|privacy|contatt|archiv|abonn)/i.test(href)) {
+    // This CMS can use navigation-like prefixes in article slugs.
+    // For configured card lists, filterArticleLinks checks the full path and query.
+    if (!useCardPathPattern && /\/(tag|categor|page|login|registr|cookie|privacy|contatt|archiv|abonn)/i.test(href)) {
       anchor = nextAnchor;
       continue;
     }
-    // Extract date from URL path or from nearby <time> elements
-    const date = extractDateFromUrl(href)
-      || htmlDateMap.get(href)
-      || embeddedDateMap.get(embeddedHeadlineDateKey(text))
-      || null;
+    // Configured card labels are the only publication date source for this CMS.
+    const date = useCardLabel
+      ? publicationDateFromCardLabel(html, card, labelClass)
+      : extractDateFromUrl(href)
+        || htmlDateMap.get(href)
+        || embeddedDateMap.get(embeddedHeadlineDateKey(text))
+        || null;
     const lead = publicCardLead(html, anchor.start, source?.quirks);
     results.push({ url: href, headline: text, date, ...(lead ? { lead } : {}) });
     anchor = nextAnchor;
@@ -11335,6 +11388,7 @@ async function fetchCantonSourceHeadlines(source, domain) {
     ...(h.sourceContent ? { _cantonSourceContent: h.sourceContent } : {}),
     ...(h.lead ? { _cantonSourceLead: h.lead } : {}),
     ...(h._paywall ? { _cantonSourcePaywall: h._paywall } : {}),
+    ...(h._feedContentOnly === true ? { _cantonSourceFeedOnly: true } : {}),
   }));
 }
 

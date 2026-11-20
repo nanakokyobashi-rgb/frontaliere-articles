@@ -315,6 +315,19 @@ test('viola: esclusione definitiva senza motivo o data di decisione', () => {
   expectViolation(doc, /SH: rejectedSources .*: origin deve essere rejected/);
 });
 
+test('viola: feedContentOnly con parser Atom o valore diverso da true', () => {
+  const doc = clone();
+  const source = canton(doc, 'LU').newsSources.find((item) => item.quirks.feedContentOnly);
+  source.parser = 'atom';
+  source.format = 'atom';
+  expectViolation(doc, /LU: newsSources .*: quirk feedContentOnly non si applica al parser "atom"/);
+
+  source.parser = 'rss';
+  source.format = 'rss';
+  source.quirks.feedContentOnly = false;
+  expectViolation(doc, /LU: newsSources .*: quirk feedContentOnly=false non valido/);
+});
+
 test('viola: articleContent senza un budget finito di pagine dettaglio', () => {
   const doc = clone();
   const source = canton(doc, 'SH').newsSources.find((item) => item.url === 'https://www.radiomunot.ch/');
@@ -334,4 +347,21 @@ test('viola: articleDateFromDetail senza budget finito di pagine dettaglio', () 
   const source = canton(doc, 'SH').newsSources.find((item) => item.url === 'https://www.schaffhausen24.ch/alle-news');
   delete source.quirks.maxRequestsPerRun;
   expectViolation(doc, /SH: newsSources .*articleDateFromDetail html-meta richiede maxRequestsPerRun intero >= 2/);
+});
+
+test('viola: dateFromCardLabel con valore diverso o su RSS', () => {
+  const find = (doc, parser) => doc.cantons.flatMap((c) => c.newsSources).find((s) => s.parser === parser);
+  let doc = clone();
+  find(doc, 'html-links').quirks.dateFromCardLabel = 'dxp-typo-label-extra';
+  expectViolation(doc, /quirk dateFromCardLabel="dxp-typo-label-extra" non valido/);
+  doc = clone();
+  find(doc, 'rss').quirks.dateFromCardLabel = 'dxp-typo-label';
+  expectViolation(doc, /quirk dateFromCardLabel non si applica al parser "rss"/);
+});
+
+test('viola: dateFromCardLabel senza articlePathPattern', () => {
+  const doc = clone();
+  const source = canton(doc, 'ZG').newsSources.find((s) => s.quirks?.dateFromCardLabel === 'dxp-typo-label');
+  delete source.quirks.articlePathPattern;
+  expectViolation(doc, /ZG: newsSources .*dateFromCardLabel dxp-typo-label richiede articlePathPattern valido/);
 });

@@ -839,6 +839,103 @@ test('paywall title+lead: il lead del feed viaggia con la headline', async () =>
   assert.equal(out.headlines[0]._paywall, 'title+lead');
 });
 
+test('Lucerna: una sola richiesta RSS, lead limitato e solo link HTTPS della stessa origine', async () => {
+  const source = sourceOf('LU', 'https://www.stadtluzern.ch/aktuelles/news.rss');
+  const longLead = 'Eine fiktive Meldung zum Busbetrieb. '.repeat(25);
+  const item = (link, description = '') => `<item>
+    <title><![CDATA[Testmeldung zum fiktiven Busbetrieb]]></title>
+    <link><![CDATA[${link}]]></link>
+    <pubDate>Fri, 20 Nov 2026 08:00:00 +0100</pubDate>
+    ${description ? `<description><![CDATA[<p>${description}</p>]]></description>` : ''}
+  </item>`;
+  const rss = `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel>
+    ${item('https://www.stadtluzern.ch/aktuelles/test-1', longLead)}
+    ${item('https://www.stadtluzern.ch/aktuelles/test-2')}
+    ${item('https://example.test/fremde-meldung', 'Externer Eintrag.')}
+    ${item('http://www.stadtluzern.ch/aktuelles/test-3', 'Unverschlüsselter Link.')}
+    ${item('https://www.stadtluzern.ch:8443/aktuelles/test-4', 'Anderer Port.')}
+  </channel></rss>`;
+  const { impl, calls } = fakeFetch({ [source.url]: { body: rss, contentType: 'application/rss+xml' } });
+  const now = new Date('2026-11-20T12:00:00Z');
+  const scan = (profile, options) => scanCantonSource(profile, ctx(impl, { ...options, now }));
+  const start = SRC.indexOf('async function fetchCantonSourceHeadlines(');
+  const end = SRC.indexOf('async function scanNewsSources(', start);
+  assert.ok(start !== -1 && end > start);
+  const report = { sources: {} };
+  const fetchCantonSourceHeadlines = new Function(
+    'scanCantonSource', 'createHostThrottle', 'RUN_REPORT', 'extractRssItems',
+    'extractHeadlines', 'isWithinDays', 'MAX_ARTICLE_AGE_DAYS', 'sourceRequestBudget',
+    `let _cantonHostThrottle;
+    ${SRC.slice(start, end)}
+    return fetchCantonSourceHeadlines;`,
+  )(scan, createHostThrottle, report, extractRssItems, extractHeadlines,
+    (date, days) => now - date <= days * 86_400_000, 3, sourceRequestBudget);
+
+  const headlines = await fetchCantonSourceHeadlines(source, 'stadtluzern.ch');
+  assert.deepEqual(calls.map(({ url }) => url), [source.url]);
+  assert.equal(calls[0].init.redirect, 'error');
+  assert.equal(report.sources.canton[0].requests, 1);
+  assert.deepEqual(headlines.map(({ url }) => url), [
+    'https://www.stadtluzern.ch/aktuelles/test-1',
+    'https://www.stadtluzern.ch/aktuelles/test-2',
+  ]);
+  assert.equal(headlines[0].lead, longLead.slice(0, 600));
+  assert.equal(headlines[0]._cantonSourceLead, headlines[0].lead);
+  assert.equal(headlines[1].lead, undefined);
+  for (const headline of headlines) {
+    assert.equal(headline._feedContentOnly, true);
+    assert.equal(headline._cantonSourceFeedOnly, true);
+    assert.equal(headline._paywall, undefined);
+  }
+});
+
+test('fetchPageContent usa solo il feed pubblico anche senza descrizione', async () => {
+  const start = SRC.indexOf('async function fetchPageContent(');
+  const end = SRC.indexOf('// ── Date filtering:', start);
+  const setupStart = SRC.indexOf('  pendingCantonSourceContent = typeof sourceContext?');
+  const setupEnd = SRC.indexOf('  const pageContent = await fetchPageContent', setupStart);
+  assert.ok(start !== -1 && end > start && setupStart !== -1 && setupEnd > setupStart);
+
+  let networkCalls = 0;
+  const fetchPage = new Function('fetchWithRefTimeout', 'sourcePageFetchHeaders', 'safeSignalSourceUrlForLog', `
+    let lastSourcePublishedAt, lastSourcePageTitle;
+    let pendingCantonSourceContent, pendingCantonSourcePublishedAt, pendingCantonSourceTitle;
+    let pendingCantonSourceLead, pendingCantonSourcePaywall;
+    ${SRC.slice(start, end)}
+    return async (url, sourceContext) => {
+      ${SRC.slice(setupStart, setupEnd)}
+      const content = await fetchPageContent(url, sourceContext);
+      return { content, publishedAt: lastSourcePublishedAt, title: lastSourcePageTitle,
+        pending: [pendingCantonSourceContent, pendingCantonSourcePublishedAt, pendingCantonSourceTitle,
+          pendingCantonSourceLead, pendingCantonSourcePaywall] };
+    };
+  `)(() => {
+    networkCalls += 1;
+    assert.fail('fetch inatteso della pagina articolo');
+  }, () => ({}), (url) => url);
+
+  const url = 'https://www.stadtluzern.ch/aktuelles/test-1';
+  const headline = 'Testmeldung zum fiktiven Busbetrieb';
+  const date = new Date('2026-11-20T07:00:00Z');
+  const result = await fetchPage(url, {
+    _cantonSourceFeedOnly: true, _cantonSourceLead: 'Ein fiktiver Auszug.', headline, date,
+  });
+  assert.equal(result.title, headline);
+  assert.equal(result.publishedAt, date.toISOString());
+  assert.deepEqual(result.pending, ['', '', '', '', '']);
+  assert.match(result.content, /^\[FONTE PUBBLICA — FEED\]/);
+  assert.ok(result.content.includes(url));
+  assert.ok(result.content.includes(headline));
+  assert.ok(result.content.includes(date.toISOString()));
+  assert.match(result.content, /Estratto del feed: Ein fiktiver Auszug\./);
+  assert.match(result.content, /fatti verificabili nel feed, con attribuzione e link/);
+
+  const withoutLead = await fetchPage(url, { _cantonSourceFeedOnly: true, headline, date });
+  assert.match(withoutLead.content, /^\[FONTE PUBBLICA — FEED\]/);
+  assert.doesNotMatch(withoutLead.content, /Estratto del feed:|Ein fiktiver Auszug/);
+  assert.equal(networkCalls, 0);
+});
+
 // ── Cortesia verso l'host ───────────────────────────────────────────────────
 
 test('crawl-delay: due richieste allo stesso host distanziate, host diversi no', async () => {
@@ -1870,4 +1967,74 @@ test('FU-014: Atom malformato conserva la URL del periodo e non impedisce il pre
   assert.deepEqual(calls.map(({ url }) => url), [currentUrl, previousUrl]);
   assert.deepEqual(out.headlines.map((item) => item.headline), ['Notizia del periodo precedente']);
   assert.ok(out.notes.some((note) => note.startsWith(`${currentUrl}: Atom XML non valido:`)), out.notes.join(' | '));
+});
+
+test('dateFromCardLabel: configurato solo nei sette profili ufficiali di Zugo', () => {
+  const configured = [];
+  for (const canton of PROFILE.cantons) {
+    for (const source of canton.newsSources) {
+      const url = new URL(source.url);
+      const isOfficialList = canton.code === 'ZG' && (
+        (url.origin === 'https://zg.ch' && ['/de/news', '/de/zuger-polizei-news'].includes(url.pathname))
+        || source.url === 'https://stadtzug.ch/de/news'
+      );
+      assert.equal(Object.hasOwn(source.quirks ?? {}, 'dateFromCardLabel'), isOfficialList, source.url);
+      if (!isOfficialList) continue;
+      configured.push(source.url);
+      assert.equal(source.parser, 'html-links');
+      assert.equal(source.quirks.dateFromCardLabel, 'dxp-typo-label');
+      assert.equal(source.quirks.articlePathPattern, '^/de/(?:news|zuger-polizei-news)/20[0-9]{2}/[^/?#]+/[^/?#]+/?$');
+    }
+  }
+  assert.equal(configured.length, 7);
+});
+
+test('dateFromCardLabel: date editoriali locali alla scheda con una sola richiesta', async () => {
+  const source = sourceOf('ZG', 'https://zg.ch/de/news');
+  const pathFor = (slug) => '/de/news/2026/10/' + slug;
+  const label = (text, className = 'dxp-typo-label') => `<p class="${className}">${text}</p>`;
+  const link = (href, className = 'stretched-link') =>
+    `<a title="Wert > Beispiel" class="${className}" href="${href}">Synthetische Meldung für den Test</a>`;
+  const card = (slug, labels) => `<li>${link(pathFor(slug), 'card-link stretched-link')}${labels}</li>`;
+  const archiveSlug = 'archiv-fuer-mitteilungen';
+  const archiveCard = card(archiveSlug, label('04.10.2026', 'desktop dxp-typo-label') + label('<span>04.10.2026</span>', 'dxp-typo-label mobile'));
+  const archiveList = '<main><ul>' + archiveCard + '</ul></main>';
+  assert.equal(extractHeadlines(archiveList, source.url).length, 0);
+  assert.equal(extractHeadlines(archiveList, source.url, {
+    quirks: { dateFromCardLabel: source.quirks.dateFromCardLabel },
+  }).length, 0);
+  const html = '<main><ul>'
+    + archiveCard
+    + card('seconda', '<ul><li>' + label('01.10.2026') + '</li></ul>'
+      + '<div role="navigation">' + label('02.10.2026') + '</div>' + label('&nbsp;<span>05.10.2026</span>&nbsp;'))
+    + card('impossibile', label('31.09.2026') + label('01/10/2026') + label('Stand 01.10.2026'))
+    + card('ambigua', label('04.10.2026') + label('01.01.2026'))
+    + card('scaduta', label('01.01.2026'))
+    + card('mancante', label('04.10.2026', 'dxp-typo-label-extra') + '<time datetime="2026-10-03">03.10.2026</time>')
+    + card('paragrafo-aperto', '<p class="dxp-typo-label">04.10.2026')
+    + '<li>' + link('/de/profile/beispiel') + link('/de/news?search=beispiel')
+    + link(pathFor('query') + '?search=beispiel')
+    + link('https://other.example' + pathFor('host-esterno'))
+    + link('http://zg.ch' + pathFor('http'))
+    + link(pathFor('classe-parziale'), 'stretched-link-extra')
+    + '<div role="navigation">' + link(pathFor('navigazione')) + '</div>' + label('04.10.2026') + '</li>'
+    + '</ul>' + link(pathFor('fuori-lista'))
+    + '<ul><li>' + link(pathFor('scheda-aperta')) + label('04.10.2026') + '</ul></main>';
+  const { impl, calls } = fakeFetch({ [source.url]: { body: html } });
+  const result = await scanCantonSource(source, ctx(impl));
+  assert.equal(result.requests, 1);
+  assert.deepEqual(calls.map(({ url }) => url), [source.url]);
+  assert.deepEqual(result.headlines.map(({ url, date }) => [
+    new URL(url).pathname,
+    date && [date.getFullYear(), date.getMonth() + 1, date.getDate()],
+  ]), [
+    [pathFor(archiveSlug), [2026, 10, 4]],
+    [pathFor('seconda'), [2026, 10, 5]],
+    [pathFor('impossibile'), null],
+    [pathFor('ambigua'), null],
+    [pathFor('scaduta'), [2026, 1, 1]],
+    [pathFor('mancante'), null],
+    [pathFor('paragrafo-aperto'), null],
+    [pathFor('scheda-aperta'), null],
+  ]);
 });
