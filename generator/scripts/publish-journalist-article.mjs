@@ -52,6 +52,7 @@ import path from 'node:path';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './lib/fetch-with-ref-timeout.mjs';
+import { withFirestoreReadTimeout } from './lib/firestore-read-timeout.mjs';
 import { applicationDefault, getApps, initializeApp } from 'firebase-admin/app';
 import { FieldValue, getFirestore } from 'firebase-admin/firestore';
 import {
@@ -644,7 +645,10 @@ async function main() {
 
   const { db, FieldValue } = await initDb();
 
-  const snap = await db.collection('journalist_articles').where('status', '==', 'queued').get();
+  const snap = await withFirestoreReadTimeout(
+    () => db.collection('journalist_articles').where('status', '==', 'queued').get(),
+    { label: 'journalist queue Firestore read', onTimeout: () => db.terminate?.() },
+  );
   console.log(`[publish-journalist-article] ${snap.size} queued article(s) to process.`);
 
   let published = 0;

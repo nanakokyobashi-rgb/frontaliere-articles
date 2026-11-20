@@ -9,6 +9,8 @@
  * chunk remains unresolved and the recovery must rethrow.
  */
 
+import { withFirestoreReadTimeout } from './firestore-read-timeout.mjs';
+
 export const JOURNALIST_REQUEUE_BATCH_LIMIT = 500;
 export const JOURNALIST_REQUEUE_MAX_ATTEMPTS = 3;
 
@@ -98,7 +100,10 @@ export async function requeuePublishedDocuments({
         const stillPublished = [];
         for (const doc of pending) {
           try {
-            const snapshot = await doc.docRef.get();
+            const snapshot = await withFirestoreReadTimeout(
+              () => doc.docRef.get(),
+              { label: `journalist rollback read ${doc.id}` },
+            );
             if (wasRequeued(snapshot)) markRequeued([doc]);
             else stillPublished.push(doc);
           } catch (reconcileError) {

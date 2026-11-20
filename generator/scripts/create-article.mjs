@@ -74,6 +74,7 @@ import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, get
 import { classifyWithDecisionsApi } from './lib/decisions-api.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './lib/fetch-with-ref-timeout.mjs';
+import { withFirestoreReadTimeout } from './lib/firestore-read-timeout.mjs';
 import {
   BLOG_IMAGE_TARGET_MAX_BYTES,
   BLOG_IMAGE_HARD_MAX_BYTES,
@@ -8105,7 +8106,18 @@ async function buildStatsBfsPromptContent(quarter) {
     });
   }
   const db = getFirestore();
-  const snap = await db.collection('config').doc('bfs_stats').get();
+  let snap;
+  try {
+    snap = await withFirestoreReadTimeout(
+      () => db.collection('config').doc('bfs_stats').get(),
+      { label: 'BFS stats Firestore read', onTimeout: () => db.terminate?.() },
+    );
+  } catch (error) {
+    if (error?.code === 'FIRESTORE_READ_TIMEOUT') {
+      throw markSyntheticSourceValidation(error, 'BFS');
+    }
+    throw error;
+  }
   if (!snap.exists) {
     throw new Error('config/bfs_stats Firestore doc missing — refresh-bfs-stats has not run yet.');
   }
@@ -8291,7 +8303,18 @@ async function buildStatsAstraPromptContent(token) {
     });
   }
   const db = getFirestore();
-  const snap = await db.collection('config').doc('astra_vehicle_stats').get();
+  let snap;
+  try {
+    snap = await withFirestoreReadTimeout(
+      () => db.collection('config').doc('astra_vehicle_stats').get(),
+      { label: 'ASTRA stats Firestore read', onTimeout: () => db.terminate?.() },
+    );
+  } catch (error) {
+    if (error?.code === 'FIRESTORE_READ_TIMEOUT') {
+      throw markSyntheticSourceValidation(error, 'ASTRA');
+    }
+    throw error;
+  }
   const parts = String(token || '').split('/').map((part) => decodeSyntheticSourceToken(part, 'ASTRA'));
   const cadence = parts[0] || 'monthly';
   const period = parts[1] || '';

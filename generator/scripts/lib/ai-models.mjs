@@ -6,6 +6,7 @@ import { CODEX_FALLBACK_MODEL } from '../../../scripts/ci/claude-codex-fallback.
 import { exitAfterDrain } from './drain-stdio.mjs';
 import { GH_MODELS_URL } from './gh-models-endpoint.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
+import { DEFAULT_FIRESTORE_READ_TIMEOUT_MS, withFirestoreReadTimeout } from './firestore-read-timeout.mjs';
 import { parseStrictRetryAfterValue as parseSharedRetryAfterValue } from './retry-after.mjs';
 
 /**
@@ -4103,7 +4104,7 @@ export async function discoverOpenRouterFreeModels(opts = {}) {
  * in memoria. Senza un tetto una `DocumentReference.get()` puo' lasciare il
  * generatore appeso prima della discovery e della scansione delle fonti.
  */
-export const SCORE_STORE_READ_TIMEOUT_MS = 15_000;
+export const SCORE_STORE_READ_TIMEOUT_MS = DEFAULT_FIRESTORE_READ_TIMEOUT_MS;
 
 /**
  * Esegue una lettura Firestore con un fallback temporale esplicito.
@@ -4133,26 +4134,9 @@ function _terminateScoreStoreClient() {
 
 export function withScoreStoreReadTimeout(read, timeoutMs = SCORE_STORE_READ_TIMEOUT_MS) {
   if (typeof read !== 'function') throw new TypeError('withScoreStoreReadTimeout: read deve essere una funzione');
-  const limit = Number.isFinite(timeoutMs) && timeoutMs > 0
-    ? timeoutMs
-    : SCORE_STORE_READ_TIMEOUT_MS;
-  return new Promise((resolve, reject) => {
-    const timer = setTimeout(() => {
-      _terminateScoreStoreClient();
-      reject(new Error(`ScoreStore Firestore read timed out after ${limit}ms`));
-    }, limit);
-    Promise.resolve()
-      .then(read)
-      .then(
-        (value) => {
-          clearTimeout(timer);
-          resolve(value);
-        },
-        (error) => {
-          clearTimeout(timer);
-          reject(error);
-        },
-      );
+  return withFirestoreReadTimeout(read, timeoutMs, {
+    label: 'ScoreStore Firestore read',
+    onTimeout: _terminateScoreStoreClient,
   });
 }
 
