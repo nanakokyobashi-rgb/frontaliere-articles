@@ -42,7 +42,33 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
+      - name: Check whether automatic promotion has work
+        id: preflight
+        if: github.event_name != 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          UPSTREAM_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+        run: |
+          set -euo pipefail
+          if [ "$GITHUB_EVENT_NAME" = workflow_run ] && [ "$UPSTREAM_CONCLUSION" != success ]; then
+            echo 'skip=true' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # A failed read or unknown registry shape leaves the full planner in charge.
+          if gh api -H 'Accept: application/vnd.github.raw+json' \
+              "repos/$GITHUB_REPOSITORY/contents/sections/registry.json?ref=main" |
+              jq -e '
+                .schema == 1 and
+                (.sections | type == "object" and length > 0 and
+                  all(.[]; .status == "live" or .status == "retired"))
+              ' >/dev/null; then
+            echo 'skip=true' >> "$GITHUB_OUTPUT"
+            echo 'Nessuna sezione cantonale in bozza su main.'
+          fi
+
       - name: Checkout main
+        if: steps.preflight.outputs.skip != 'true'
         uses: actions/checkout@v7
         with:
           ref: main
@@ -50,6 +76,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup Node.js
+        if: steps.preflight.outputs.skip != 'true'
         uses: actions/setup-node@v7
         with:
           node-version: '22'
@@ -58,9 +85,11 @@ jobs:
       # Questo workflow non modifica Remote Config, repository variables o
       # repository secrets.
       - name: Setup isolated article source runtime
+        if: steps.preflight.outputs.skip != 'true'
         uses: ./.github/actions/setup-article-source-runtime
 
       - name: Prepare Firebase credentials
+        if: steps.preflight.outputs.skip != 'true'
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
@@ -73,9 +102,11 @@ jobs:
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/auto-live-sa.json" >> "$GITHUB_ENV"
 
       - name: Load operational token from Remote Config
+        if: steps.preflight.outputs.skip != 'true'
         run: node generator/scripts/load-rc-env.mjs
 
       - name: Resolve trigger
+        if: steps.preflight.outputs.skip != 'true'
         id: trigger
         env:
           EVENT_NAME: ${{ github.event_name }}
