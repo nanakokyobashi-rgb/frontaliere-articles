@@ -153,7 +153,7 @@ describe('llmFactCheck wiring', () => {
     // If the primary lane gives no vote, do not publish an article with a
     // single free opinion (review of PR #1871).
     assert.match(block, /if \(modelResults\.length < 2 && !codexAlreadyVoted && isModelAvailable\(AI_MODELS\.CODEX_CLI_PRIMARY\)\) \{/);
-    assert.match(block, /await _runSingleFactCheck\(codex, prompt, \{ isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true \}\)/);
+    assert.match(block, /await _runSingleFactCheck\(codex, prompt, \{ isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true, deadlineMs: factCheckDeadlineMs \}\)/);
   });
 
   test('its verdict is one vote like any other', () => {
@@ -218,9 +218,9 @@ test('an infrastructure retry keeps a validated vote and seeks a different servi
   assert.equal(calls.length, 4);
   assert.equal(calls[3].prompt, 'same article');
   assert.equal(calls[3].options.fresh, true);
-  assert.equal(calls[0].options.deadlineMs, 180_000);
-  assert.equal(calls[2].options.deadlineMs, 180_000);
+  assert.equal(calls[0].options.deadlineMs, 175_000);
+  assert.equal(calls[2].options.deadlineMs, 175_000);
   assert.ok(calls[3].options.deadlineMs > calls[3].now);
-  assert.ok(calls[3].options.deadlineMs < 240_000);
+  assert.ok(calls[3].options.deadlineMs < 220_000);
   assert.ok(calls[3].options.excludeModels.includes('first-serving-model'));
 });
