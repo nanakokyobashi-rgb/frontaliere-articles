@@ -140,7 +140,7 @@ function materializedImagePath(root, imagePath) {
   return absolute(root, path.join('public', imagePath.slice(1)));
 }
 
-function hasMaterializedImageRecord(root, imagePath, record) {
+function hasMaterializedImageRecord(root, imagePath, record, { verifyHash = true } = {}) {
   const file = materializedImagePath(root, imagePath);
   if (!file) return false;
   let stat;
@@ -153,7 +153,7 @@ function hasMaterializedImageRecord(root, imagePath, record) {
   }
   if (!stat.isFile()) return false;
   if (Number.isInteger(record?.bytes) && stat.size !== record.bytes) return false;
-  if (typeof record?.sha256 === 'string' && sha256File(file) !== record.sha256.toLowerCase()) return false;
+  if (verifyHash && typeof record?.sha256 === 'string' && sha256File(file) !== record.sha256.toLowerCase()) return false;
   return true;
 }
 
@@ -203,7 +203,13 @@ export function validateEditorialImageRecord(record) {
   return { valid: errors.length === 0, errors };
 }
 
-function findImageRecord(root, imagePath, { strict = false, generatedByPath, editorialByPath, legacyReader } = {}) {
+function findImageRecord(root, imagePath, {
+  strict = false,
+  generatedByPath,
+  editorialByPath,
+  legacyReader,
+  verifyHash = true,
+} = {}) {
   const normalized = normalizePath(imagePath);
   if (!normalized) return null;
   if (normalized === STATIC_FALLBACK_IMAGE) {
@@ -226,19 +232,19 @@ function findImageRecord(root, imagePath, { strict = false, generatedByPath, edi
   if (generated) {
     // Place records point at the site's static asset tree. Article-hero records
     // must still prove the materialized corpus bytes before publication.
-    return generated.scope === 'place' || hasMaterializedImageRecord(root, normalized, generated)
+    return generated.scope === 'place' || hasMaterializedImageRecord(root, normalized, generated, { verifyHash })
       ? { kind: imageProvenanceKind(generated), record: generated }
       : null;
   }
   const editorial = editorialByPath
     ? editorialByPath().get(normalized)
     : readEditorialImageRecords(root, { strict }).find((record) => record.cover === normalized);
-  if (editorial) return hasMaterializedImageRecord(root, normalized, editorial)
+  if (editorial) return hasMaterializedImageRecord(root, normalized, editorial, { verifyHash })
     ? { kind: 'editorial-upload', record: editorial }
     : null;
   try {
     const legacy = (legacyReader ? legacyReader() : corpusCreditReader(root)).get(normalized);
-    if (legacy && hasMaterializedImageRecord(root, normalized, legacy)) {
+    if (legacy && hasMaterializedImageRecord(root, normalized, legacy, { verifyHash })) {
       return { kind: 'wikimedia-commons', record: legacy };
     }
   } catch (error) {
@@ -260,22 +266,42 @@ function indexFirstRecord(records, keyOf) {
   return index;
 }
 
-/** One registry snapshot per read-only catalog scan. Image bytes are still checked per lookup. */
-export function createBlogImageRecordValidator(root) {
+/**
+ * One registry snapshot per read-only catalog scan.
+ *
+ * The generator uses `{ verifyHash: false }` while building its startup
+ * candidate list: checking the record schema, materialized file and recorded
+ * byte size is enough to index candidates without hashing every image in the
+ * catalog at process startup. Its fallback selector then uses the default
+ * (`verifyHash: true`) while filling the candidate budget, and the publication
+ * fallback path calls `imageRecordForPath` with the same strict default before
+ * reusing the selected candidate. An optional `recordFilter` narrows the
+ * strict result after the configured materialized-file/byte/hash checks,
+ * without making callers re-read the registries. This option never weakens
+ * the final provenance gate.
+ */
+export function createBlogImageRecordValidator(root, { verifyHash = true, recordFilter } = {}) {
+  if (recordFilter !== undefined && typeof recordFilter !== 'function') {
+    throw new TypeError('recordFilter must be a function');
+  }
   let generated;
   let editorial;
   let legacy;
-  return (imagePath) => Boolean(findImageRecord(root, imagePath, {
-    legacyReader: () => legacy ??= corpusCreditReader(root),
-    generatedByPath: () => generated ??= indexFirstRecord(
-      readGeneratedImageRecords(root, { strict: false }),
-      (record) => record.scope === 'article-hero' || record.scope === 'place' ? record.imageUrl : null,
-    ),
-    editorialByPath: () => editorial ??= indexFirstRecord(
-      readEditorialImageRecords(root, { strict: false }),
-      (record) => record.cover,
-    ),
-  }));
+  return (imagePath) => {
+    const provenance = findImageRecord(root, imagePath, {
+      verifyHash,
+      legacyReader: () => legacy ??= corpusCreditReader(root),
+      generatedByPath: () => generated ??= indexFirstRecord(
+        readGeneratedImageRecords(root, { strict: false }),
+        (record) => record.scope === 'article-hero' || record.scope === 'place' ? record.imageUrl : null,
+      ),
+      editorialByPath: () => editorial ??= indexFirstRecord(
+        readEditorialImageRecords(root, { strict: false }),
+        (record) => record.cover,
+      ),
+    });
+    return Boolean(provenance && (!recordFilter || recordFilter(provenance)));
+  };
 }
 
 export function hasValidBlogImageRecord(root, imagePath) {

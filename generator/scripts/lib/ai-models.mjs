@@ -9800,6 +9800,25 @@ export async function callLLM(messages, opts = {}) {
       // callers that inspect the serving model after a scored fallback.
       const callModelRef = { model, provider };
       const callOpts = { ...o, modelUsedRef: callModelRef };
+      if (provider === PROVIDER.CODEX_CLI && deadlineMs !== undefined) {
+        const remainingMs = deadlineMs - Date.now();
+        const reserveMs = Math.min(60_000, Math.floor(remainingMs / 3));
+        if (reserveMs >= CODEX_CLI_MIN_TIMEOUT_MS) {
+          const tail = chain.slice(i + 1).filter((candidate) => getProvider(candidate) !== PROVIDER.CODEX_CLI);
+          const { availableModels } = getProviderRosterStatus({ chain: tail, respectForceChain: false });
+          const hasFallback = availableModels.some((candidate) => {
+            const nextProvider = getProvider(candidate);
+            const apiModelId = getApiModelId(candidate);
+            const outputLimit = MODEL_MAX_OUTPUT_TOKENS[nextProvider === PROVIDER.GITHUB ? githubModelIdForLookup(apiModelId) : apiModelId];
+            const inputLimit = getDeclaredRequestTokenLimit(candidate);
+            return (!outputLimit || o.maxTokens <= outputLimit)
+              && (!inputLimit || estimateRequestTokens(messages, o, nextProvider, candidate) <= inputLimit);
+          });
+          // Bound the broker queue and transport retries as well as execution.
+          // The outer cascade retains its original deadline for the next model.
+          if (hasFallback) callOpts.deadlineMs = deadlineMs - reserveMs;
+        }
+      }
       const result = await _callModelWithCodexTransportRetry(model, messages, callOpts);
       const servedModel = callModelRef.model || model;
 

@@ -547,6 +547,7 @@ import {
 import { DETERMINISTIC_CARD_KIND, DETERMINISTIC_CARD_LICENSE_URL } from './lib/deterministic-card-provenance.mjs';
 import {
   ARTICLE_COVER_FALLBACK_ERROR_CODES,
+  MAX_CATALOG_FALLBACK_CANDIDATES,
   catalogFallbackSharedWordCount,
   classifyImageRegenerationFailure,
   applyGeneratedHeroAlt,
@@ -1887,7 +1888,11 @@ const PLACES_IMAGES = [
 // topical pool and are reserved for the final governed default fallback.
 const BLOG_IMAGES = (() => {
   try {
-    const hasValidImage = createBlogImageRecordValidator(PROJECT_ROOT);
+    // This is only the startup candidate index. The fallback resolver repeats
+    // the strict hash check for the ranked candidates it may actually reuse;
+    // the startup index only needs the record schema, materialized file and
+    // recorded byte size.
+    const hasValidImage = createBlogImageRecordValidator(PROJECT_ROOT, { verifyHash: false });
     return readdirSync(resolve('public/images/blog'))
       .filter((file) => file.endsWith('.webp'))
       .filter((file) => hasValidImage(`/images/blog/${file}`))
@@ -1927,6 +1932,17 @@ function _buildFallbackPool() {
 }
 
 const FALLBACK_IMAGES = _buildFallbackPool();
+const hasStrictReusableBlogImage = createBlogImageRecordValidator(PROJECT_ROOT, {
+  // The shared fallback verifier accepts only reusable article heroes. Apply
+  // that same class and scope before a candidate consumes the five-item
+  // budget; the strict validator also checks current bytes against this SHA.
+  // Legacy records without a verifiable SHA therefore cannot hide a valid
+  // generated/licensed candidate later in the ranked pool.
+  recordFilter: ({ kind, record }) => record?.scope === 'article-hero'
+    && ['generated', 'licensed-photo'].includes(kind)
+    && kind !== DETERMINISTIC_CARD_KIND
+    && /^[a-f0-9]{64}$/i.test(String(record?.sha256 || '')),
+});
 
 // Keep the legacy field in the model contract. It is a placeholder only:
 // validation never uses an unrecorded place image as a publication fallback.
@@ -1940,11 +1956,20 @@ const AVAILABLE_IMAGES = PLACES_IMAGES;
  * chooses the static place cover instead of borrowing an unrelated story.
  */
 function findBestFallbackImages(data) {
-  return FALLBACK_IMAGES
+  const rankedImages = FALLBACK_IMAGES
     .map(imagePath => ({ imagePath, score: catalogFallbackSharedWordCount(data, imagePath) }))
-    .sort((a, b) => b.score - a.score || a.imagePath.localeCompare(b.imagePath))
-    .slice(0, 5)
-    .map(({ imagePath }) => imagePath);
+    .sort((a, b) => b.score - a.score || a.imagePath.localeCompare(b.imagePath));
+  const selected = [];
+  for (const { imagePath } of rankedImages) {
+    // The startup index is intentionally byte-only. Fill the verifier budget
+    // only with reusable candidates whose current bytes still match their
+    // record, so stale same-size files or non-reusable provenance cannot
+    // consume the five candidate slots.
+    if (!hasStrictReusableBlogImage(imagePath)) continue;
+    selected.push(imagePath);
+    if (selected.length >= MAX_CATALOG_FALLBACK_CANDIDATES) break;
+  }
+  return selected;
 }
 
 function findBestFallbackImage(data) {
@@ -7382,6 +7407,7 @@ ${proofSuffix}`
   // An HTTP success without a verifiable vote can otherwise keep the same fallback
   // at the head of every retry, even after bypassing the response cache.
   const invalidVerdictModels = new Set();
+  const editorialProofFailures = new Set();
 
   // Bounded retry on TRANSIENT checker-infrastructure failure (2026-06-15).
   // Observed waste: when all verifier models momentarily fail to PRODUCE a
@@ -7460,6 +7486,7 @@ ${proofSuffix}`
       fresh: fcAttempt > 1,
       deadlineMs,
       invalidVerdictModels,
+      editorialProofFailures,
       isEvergreen: isEvergreenArticle,
       editorialContext,
       excludeModels: [
@@ -7503,7 +7530,7 @@ ${proofSuffix}`
         || verificationModels.find((m) => !voted.includes(m))
         || modelsToQuery[1];
       try {
-        const extra = await _runSingleFactCheck(next, activePrompt, { isEvergreen: isEvergreenArticle, editorialContext, excludeModels: voted, invalidVerdictModels, deadlineMs });
+        const extra = await _runSingleFactCheck(next, activePrompt, { isEvergreen: isEvergreenArticle, editorialContext, excludeModels: voted, invalidVerdictModels, editorialProofFailures, deadlineMs });
         const earlier = extra ? addIndependentVote(modelResults, next, extra) : null;
         fcHadNonOutageResult = true;
         if (earlier) console.error(`  ⚠️  LLM fact-check (${next}): servito di nuovo da ${earlier.servedBy} — resta un solo voto`);
@@ -7521,7 +7548,7 @@ ${proofSuffix}`
     // If both primary models failed, try fallback
     if (modelResults.length === 0 && verificationModels.length > 2) {
       try {
-        const fallback = await _runSingleFactCheck(verificationModels[2], activePrompt, { isEvergreen: isEvergreenArticle, editorialContext, fresh: fcAttempt > 1, invalidVerdictModels, deadlineMs });
+        const fallback = await _runSingleFactCheck(verificationModels[2], activePrompt, { isEvergreen: isEvergreenArticle, editorialContext, fresh: fcAttempt > 1, invalidVerdictModels, editorialProofFailures, deadlineMs });
         if (fallback) {
           addIndependentVote(modelResults, verificationModels[2], fallback);
           missingSecondOpinion = fallback.servedBy !== AI_MODELS.CODEX_CLI_PRIMARY;
@@ -7579,7 +7606,12 @@ ${proofSuffix}`
     const selfCheck = _codexWroteThisHeadline ? ' — ha scritto anche questo articolo: si verifica da solo (decisione del proprietario)' : '';
     console.error(`  🛟 LLM fact-check: ${why}, verifico con ${codex}${selfCheck}`);
     try {
-      const vote = await _runSingleFactCheck(codex, prompt, { isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true, deadlineMs: factCheckDeadlineMs });
+      const retryPrompt = editorialProofFailures.size
+        ? `${prompt}\n\nCONTROLLO DELLE PROVE PRIMA DI INVIARE IL JSON:\n`
+          + `I verdetti precedenti sono stati scartati per questi requisiti: ${[...editorialProofFailures].join(' | ')}.\n`
+          + 'Prima scegli e copia i passaggi esatti dai blocchi forniti, poi formula il giudizio in base a quei passaggi.'
+        : prompt;
+      const vote = await _runSingleFactCheck(codex, retryPrompt, { isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true, deadlineMs: factCheckDeadlineMs });
       if (vote) addIndependentVote(modelResults, codex, vote);
       fcHadNonOutageResult = true;
     } catch (err) {
@@ -7928,6 +7960,7 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
   const issues = normalizeFactCheckIssues(result.issues, opts);
   const editorialAssessment = validateEditorialAssessment(result.editorialAssessment, opts.editorialContext);
   if (!editorialAssessment.verifiable) {
+    opts.editorialProofFailures?.add(editorialAssessment.reason);
     if (servedBy) opts.invalidVerdictModels?.add(servedBy);
     console.error(`  ⚠️  LLM fact-check (${model}${servedBy && servedBy !== model ? ` via ${servedBy}` : ''}): `
       + `valutazione editoriale senza prove leggibili (${safeSignalDiagnosticTextForLog(editorialAssessment.reason)}) — voto scartato`);
