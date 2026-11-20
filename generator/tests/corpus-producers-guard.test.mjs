@@ -407,7 +407,11 @@ test('publish-journalist rimette in coda i completati prima di un fatal successi
   assert.match(fatalCatch, /unresolvedIds/);
   assert.match(recovery, /status: 'queued'/);
   assert.match(recovery, /await batch\.commit\(\)/);
-  assert.match(recovery, /await doc\.docRef\.get\(\)/);
+  assert.match(
+    recovery,
+    /const snapshot = await withFirestoreReadTimeout\(\s*\(\) => doc\.docRef\.get\(\),\s*\{\s*label: `journalist rollback read \$\{doc\.id\}`\s*\},\s*\);/,
+    'la riconciliazione deve mantenere doc.docRef.get() dentro il timeout condiviso',
+  );
   assert.match(recovery, /JOURNALIST_REQUEUE_MAX_ATTEMPTS/);
   assert.match(source, /requeued_ids=\$\{JSON\.stringify\(requeuedIds\)\}/);
 });

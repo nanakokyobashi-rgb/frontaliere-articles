@@ -4003,6 +4003,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/firestore-read-timeout.mjs",
+      "mode": "corpus-only",
+      "reason": "Helper condiviso dal generatore per delimitare le letture Firestore non cancellabili e osservare i rifiuti tardivi. E' consumato dai producer e dal recovery giornalista del corpus; il sito non possiede questi entry point Firestore ne' un gemello di questo modulo.",
+      "baseline": {
+        "site": null,
+        "corpus": "24647f5d2d2f357f",
+        "alignedAt": "2026-11-20"
+      }
+    },
+    {
       "path": "generator/scripts/lib/profession-taxonomy.mjs",
       "sitePath": "scripts/lib/profession-taxonomy.mjs",
       "mode": "identical",
