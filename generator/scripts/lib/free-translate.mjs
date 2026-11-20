@@ -3879,14 +3879,24 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
 
   // Legacy providers already bound their transport. Stop waiting here so an
   // in-flight provider cannot spend the time set aside for article recovery.
-  const expired = () => deadlineMs !== null && Date.now() >= deadlineMs;
+  // A setTimeout scheduled for an absolute deadline may fire one tick early.
+  // Remember that the guard won its race so that an early timer cannot let the
+  // cascade start another legacy provider before Date.now() reaches the same
+  // deadline.
+  let deadlineTimerFired = false;
+  const expired = () => deadlineTimerFired || (deadlineMs !== null && Date.now() >= deadlineMs);
   const callBeforeDeadline = async (fn, requestText) => {
     if (deadlineMs === null) return fn(requestText);
     if (expired()) return '';
     let timer;
     try {
       return await Promise.race([
-        new Promise((resolve) => { timer = setTimeout(() => resolve(''), Math.max(0, deadlineMs - Date.now())); }),
+        new Promise((resolve) => {
+          timer = setTimeout(() => {
+            deadlineTimerFired = true;
+            resolve('');
+          }, Math.max(0, deadlineMs - Date.now()));
+        }),
         fn(requestText),
       ]);
     } finally {
