@@ -327,4 +327,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'turgovia-rav-assunzioni-permessi',
+ category: 'pratico',
+ date: '2026-11-20T17:41:44.230Z',
+ image: '/images/blog/article-turgovia-rav-assunzioni-permessi.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -90,6 +90,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.referendum-budget-2027-frauenfeld.title': 'Publication du référendum budget 2027 Frauenfeld',
     'blog.article.referendum-budget-2027-frauenfeld.excerpt': 'Le document est disponible au format PDF et sa taille est de 87 KB ; il ne contient ni chiffres ni postes de dépenses spécifiques.',
     'blog.article.referendum-budget-2027-frauenfeld.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.turgovia-rav-assunzioni-permessi.title': 'Thurgovie : trois ORP aident les employeurs à trouver du personnel',
+    'blog.article.turgovia-rav-assunzioni-permessi.excerpt': 'Les ORP d’Amriswil, Frauenfeld et Kreuzlingen aident les employeurs ; sur arbeit.swiss, les postes vacants sont publiés gratuitement.',
+    'blog.article.turgovia-rav-assunzioni-permessi.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTgFr;
