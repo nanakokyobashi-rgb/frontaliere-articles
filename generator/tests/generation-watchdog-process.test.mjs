@@ -7,8 +7,7 @@ import { test } from 'node:test';
 import { sliceBetween } from './lib/anchored-slice.mjs';
 
 const workflow = readFileSync(new URL('../../.github/workflows/generate-article.yml', import.meta.url), 'utf8');
-const tree = sliceBetween(workflow, '          proc_tree() {', '          cat > "$cdp_client"');
-const selector = sliceBetween(workflow, '          create_article_pids() {', '          stall_watchdog() {');
+const processHelpers = readFileSync(new URL('../../scripts/ci/generation-watchdog-process.sh', import.meta.url), 'utf8');
 const cleanup = sliceBetween(workflow, '            if wait "$attempt_pid";', '            if [ "$tee_rc" -ne 0 ];');
 
 test('il Bash del watchdog seleziona Node e completa la cattura solo dopo uno stallo', async (t) => {
@@ -23,7 +22,7 @@ test('il Bash del watchdog seleziona Node e completa la cattura solo dopo uno st
     `);
 
     function runBash(body, ...args) {
-      const result = spawnSync('bash', ['--noprofile', '--norc', '-e', '-c', tree + body, 'fixture', process.execPath, ...args], {
+      const result = spawnSync('bash', ['--noprofile', '--norc', '-e', '-c', processHelpers + body, 'fixture', process.execPath, ...args], {
         cwd: dir,
         encoding: 'utf8',
         timeout: 4500,
@@ -34,7 +33,7 @@ test('il Bash del watchdog seleziona Node e completa la cattura solo dopo uno st
     }
 
     await t.test('seleziona il solo figlio Node nel sottoalbero del wrapper', () => {
-      const selected = runBash(selector + `
+      const selected = runBash(`
         ps -A -o pid= -o ppid= >/dev/null
         bash -c '"$0" "$1" & wait "$!"' "$1" "$2" &
         root=$!
