@@ -72,6 +72,7 @@ export const REQUIRED_AI_AGENTS = Object.freeze(['ClaudeBot', 'anthropic-ai', 'C
 
 /** quirk → validatore del valore. Un quirk sconosciuto e' un errore: e' un hint che nessuno leggera'. */
 const QUIRKS = {
+  feedContentOnly: (v) => v === true,
   paywall: (v) => v === 'title+lead',
   emptyPubDate: (v) => v === true,
   datesInList: (v) => v === false,
@@ -116,6 +117,7 @@ const QUIRKS = {
 
 /** quirk → parser su cui ha senso. Dichiarato altrove sarebbe un hint che nessuno legge. */
 const QUIRK_PARSERS = {
+  feedContentOnly: new Set(['rss']),
   articlePathPattern: new Set(['html-links']),
   excludePaywalledCards: new Set(['html-links']),
   extractCardLead: new Set(['html-links']),

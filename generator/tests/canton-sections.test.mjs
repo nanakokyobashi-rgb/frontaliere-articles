@@ -315,6 +315,19 @@ test('viola: esclusione definitiva senza motivo o data di decisione', () => {
   expectViolation(doc, /SH: rejectedSources .*: origin deve essere rejected/);
 });
 
+test('viola: feedContentOnly con parser Atom o valore diverso da true', () => {
+  const doc = clone();
+  const source = canton(doc, 'LU').newsSources.find((item) => item.quirks.feedContentOnly);
+  source.parser = 'atom';
+  source.format = 'atom';
+  expectViolation(doc, /LU: newsSources .*: quirk feedContentOnly non si applica al parser "atom"/);
+
+  source.parser = 'rss';
+  source.format = 'rss';
+  source.quirks.feedContentOnly = false;
+  expectViolation(doc, /LU: newsSources .*: quirk feedContentOnly=false non valido/);
+});
+
 test('viola: articleContent senza un budget finito di pagine dettaglio', () => {
   const doc = clone();
   const source = canton(doc, 'SH').newsSources.find((item) => item.url === 'https://www.radiomunot.ch/');
