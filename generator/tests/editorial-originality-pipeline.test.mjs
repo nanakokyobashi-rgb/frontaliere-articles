@@ -21,6 +21,7 @@ test('one existing fact-check request carries exact article and source evidence'
   assert.match(verification, /editorialContext = \{/);
   assert.match(verification, /articleBody: checkerArticleText\.slice\(articleBodyStart\)/);
   assert.match(verification, /evidenceText: \[/);
+  assert.match(verification, /TITOLO E SOMMARIO DA VERIFICARE:[\s\S]*CORPO DELL’ARTICOLO DA VERIFICARE \(body1–body3\):\n"""\n\$\{editorialContext\.articleBody\}/);
   assert.match(verification, /DATASET PRIMARIO BFS: fonte strutturata/);
   assert.match(verification, /BRIEF DI FATTI VERIFICATI PER EVERGREEN/);
   assert.match(verification, /const isEvergreenArticle = sourceUrl\.startsWith\('evergreen:\/\/'\)/);
