@@ -79,6 +79,8 @@ test('canton publisher only accepts fast-forwards limited to bookkeeping', () =>
     const bookkeeping = commit('data/image-regeneration-queue.json', '{}');
     const pending = commit('data/image-regeneration-queue-pending.jsonl', '{}');
     const pendingShard = commit('data/image-regeneration-queue-pending.jsonl.12.34.0.pending', '{}');
+    const cantonRejected = commit('data/sections/canton-ju/topic-candidates-evergreen-rejected.json', '{}');
+    const cantonArticle = commit('data/sections/canton-ju/articles/jura.json', '{}');
     const unrelated = commit('data/image-regeneration-queue-pending.jsonl.12.34.0.pending.bak', '{}');
     const content = commit('content/article.txt', 'updated');
     const latest = commit('data/discovery-attempt-state.json', '{}');
@@ -86,7 +88,9 @@ test('canton publisher only accepts fast-forwards limited to bookkeeping', () =>
     assert.equal(check(base, bookkeeping), 0);
     assert.equal(check(bookkeeping, pending), 0);
     assert.equal(check(bookkeeping, pendingShard), 0);
-    assert.equal(check(pendingShard, unrelated), 1);
+    assert.equal(check(pendingShard, cantonRejected), 0);
+    assert.equal(check(cantonRejected, cantonArticle), 1);
+    assert.equal(check(cantonArticle, unrelated), 1);
     assert.equal(check(content, latest), 0);
     assert.equal(check(base, latest), 1, 'a later bookkeeping commit cannot hide an intervening article change');
     assert.equal(check(latest, base), 1, 'a rewind cannot reuse the snapshot');
