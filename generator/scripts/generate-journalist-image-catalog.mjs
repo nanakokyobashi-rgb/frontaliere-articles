@@ -21,7 +21,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { writeJsonAtomic } from './lib/atomic-write-json.mjs';
-import { hasValidBlogImageRecord } from './lib/blog-image-registry.mjs';
+import { createBlogImageRecordValidator, hasValidBlogImageRecord } from './lib/blog-image-registry.mjs';
 
 // `../..`: the transport moved this from `scripts/` to `generator/scripts/`,
 // so one level up is now the generator directory, not the repo root.
@@ -40,6 +40,7 @@ export function wordsFromFilename(file) {
 
 /** Full rescan of public/images/blog — used for the initial/manual seed. */
 export function buildCatalog() {
+  const hasValidImage = createBlogImageRecordValidator(PROJECT_ROOT);
   const files = fs.existsSync(BLOG_DIR)
     ? fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith('.webp'))
     : [];
@@ -49,7 +50,7 @@ export function buildCatalog() {
     // when the cover has a valid Commons, generated, or editorial-upload
     // record; unrecorded historical photos remain on disk but cannot be
     // selected for a new article.
-    .filter((entry) => entry.words.length > 0 && hasValidBlogImageRecord(PROJECT_ROOT, entry.path));
+    .filter((entry) => entry.words.length > 0 && hasValidImage(entry.path));
 }
 
 function readExistingCatalog() {
@@ -118,8 +119,9 @@ if (invokedDirectly) {
   // has no valid reader-facing record. Compare the shrink guard with the
   // record-bearing subset, not with the old ungoverned catalog size: otherwise
   // the first policy rollout is indistinguishable from a truncated checkout.
+  const hasValidImage = createBlogImageRecordValidator(PROJECT_ROOT);
   const existingRecordBearing = existing.filter((entry) => (
-    typeof entry?.path === 'string' && hasValidBlogImageRecord(PROJECT_ROOT, entry.path)
+    typeof entry?.path === 'string' && hasValidImage(entry.path)
   ));
   if (existingRecordBearing.length > 0 && catalog.length < existingRecordBearing.length / 2) {
     console.error(

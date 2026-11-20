@@ -33,7 +33,7 @@ test('create-article usa solo il motore governato per nuove copertine', () => {
   assert.match(imageAdapter, /deadlineAt:\s*imageDeadline/);
   assert.doesNotMatch(imageAdapter, new RegExp(`fetch\\(|${RETIRED_FLASH_IMAGE_MODEL}|Pollinations|Together|Fal\\.ai|Pixabay|Pexels|Picsum`));
   assert.doesNotMatch(source, new RegExp(RETIRED_FLASH_IMAGE_MODEL));
-  assert.match(source, /hasValidBlogImageRecord/);
+  assert.match(source, /createBlogImageRecordValidator\(PROJECT_ROOT\)/);
   assert.match(source, /resolveArticleCoverFallback/);
   assert.doesNotMatch(COVER_ENGINE, /maxAttempts:\s*1/);
   assert.match(COVER_ENGINE, /topic: articleImageTopic/);
