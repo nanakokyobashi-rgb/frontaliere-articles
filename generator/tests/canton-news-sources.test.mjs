@@ -77,7 +77,7 @@ assert.ok(startAt !== -1 && endAt !== -1, 'delimitatori degli estrattori non tro
 const { extractRssItems, extractHeadlines } = new Function(
   'decodeHtmlEntities',
   'htmlTagScanner',
-  `const { findHtmlRawTextClosingTag, findHtmlTagEndOutsideQuotes, nextHtmlElement, nextHtmlElementWhere, nextHtmlOpeningTag, nextHtmlTag, nextHtmlTagStatus } = htmlTagScanner;\n${SRC.slice(startAt, endAt).replace(/^export /gm, '')}\nreturn { extractRssItems, extractHeadlines };`,
+  `const { findHtmlRawTextClosingTag, findHtmlTagEndOutsideQuotes, firstHtmlAttributeValue, htmlAttributes, nextHtmlElement, nextHtmlElementWhere, nextHtmlOpeningTag, nextHtmlTag, nextHtmlTagStatus } = htmlTagScanner;\n${SRC.slice(startAt, endAt).replace(/^export /gm, '')}\nreturn { extractRssItems, extractHeadlines };`,
 )(decodeHtmlEntities, htmlTagScanner);
 
 const fixture = (name) => fs.readFileSync(path.join(FIX, name));
@@ -360,6 +360,14 @@ test('date dettaglio: selectPublishedTime ignora eventi generici e rifiuta due p
 
 test('date dettaglio: i tag con > negli attributi passano dallo scanner quote-aware', () => {
   assert.equal(
+    selectPublishedTime(`<time data-note="a > b data-published='true'" datetime="2026-10-05">evento</time>`),
+    null,
+  );
+  assert.equal(
+    selectPublishedTime('<time DATA-PUBLISHED datetime="2026-10-05">pubblicazione</time>')?.toISOString(),
+    '2026-10-05T00:00:00.000Z',
+  );
+  assert.equal(
     selectPublishedTime('<time data-note="a > b" itemprop="datePublished" datetime="2026-10-05T14:00:00Z">pubblicazione</time>')?.toISOString(),
     '2026-10-05T14:00:00.000Z',
   );
@@ -547,8 +555,10 @@ test('sitemap comunicati AG: candidati per lastmod, metadati dal dettaglio e cap
   const xml = `<urlset>${[
     agSitemapEntry(boundary, '2026-09-28T16:00:00Z'),
     agSitemapEntry(third, '2026-10-03'),
+    agSitemapEntry(first, '2026-10-02'),
     agSitemapEntry(second, '2026-10-04'),
     agSitemapEntry(first, '2026-10-05T16:00:00Z'),
+    agSitemapEntry(first, '2026-09-01'),
     agSitemapEntry(agDetailUrl('future'), '2026-10-05T16:00:01Z'),
     agSitemapEntry(agDetailUrl('old'), '2026-09-28T15:59:59Z'),
     agSitemapEntry(agDetailUrl('invalid-date'), 'invalid'),
@@ -573,6 +583,7 @@ test('sitemap comunicati AG: candidati per lastmod, metadati dal dettaglio e cap
   const source = { ...AG_PRESS_SOURCE, quirks: { ...AG_PRESS_SOURCE.quirks, maxRequestsPerRun: 99 } };
   const out = await scanCantonSource(source, ctx(impl));
   assert.equal(out.requests, 4);
+  assert.deepEqual(out.notes, ['comunicati Argovia: duplicati rimossi: 1']);
   assert.deepEqual(calls.map(({ url }) => url), [source.url, first, second, third]);
   assert.ok(calls.every(({ init }) => init.redirect === 'error'));
   assert.deepEqual(out.headlines, [
@@ -616,6 +627,30 @@ test('sitemap comunicati AG: scarta dettagli mancanti o non conformi senza espor
     assert.deepEqual(out.headlines.map(({ url }) => url), [accepted]);
     assert.equal(out.notes.length, 1);
     assert.doesNotMatch(out.notes[0], /discard-id|Synthetische Meldung/);
+  }
+});
+
+test('sitemap comunicati AG: nessun dettaglio verificato è un errore senza identificativi', async () => {
+  const date = '2026-10-05';
+  const candidates = [agDetailUrl('synthetic-private-a'), agDetailUrl('synthetic-private-b')];
+  const xml = `<urlset>${candidates.map((url) => agSitemapEntry(url, date)).join('')}</urlset>`;
+  for (const pages of [
+    [],
+    [
+      { body: agDetailPage('Titolo sintetico privato', candidates[0], 'invalid') },
+      { body: '<head><meta content="markup sintetico troncato' },
+    ],
+  ]) {
+    const { impl, calls } = fakeFetch({
+      [AG_PRESS_SOURCE.url]: { body: xml },
+      ...Object.fromEntries(pages.map((page, index) => [candidates[index], page])),
+    });
+    await assert.rejects(scanCantonSource(AG_PRESS_SOURCE, ctx(impl)), (error) => {
+      assert.equal(error.requests, 3);
+      assert.equal(error.message, 'comunicati Argovia: nessun dettaglio verificato (2/2, 3 richieste)');
+      return true;
+    });
+    assert.deepEqual(calls.map(({ url }) => url), [AG_PRESS_SOURCE.url, ...candidates]);
   }
 });
 
@@ -1022,7 +1057,12 @@ test('il report cantonale distingue un HTTP 403 da un errore prima della richies
   assert.ok(startAt !== -1 && endAt > startAt, 'delimitatori di fetchCantonSourceHeadlines non trovati');
   const report = { sources: {} };
   let scannerError;
+  let reportedError;
   const scanWithFakeFetch = async (source, context) => {
+    if (reportedError) {
+      context.onRequestAttempt(1);
+      throw reportedError;
+    }
     const fetchImpl = async () => new Response(null, { status: 403 });
     try {
       return await scanCantonSource(source, ctx(fetchImpl, { ...context, now: NOW }));
@@ -1047,6 +1087,14 @@ test('il report cantonale distingue un HTTP 403 da un errore prima della richies
   await assert.rejects(fetchHeadlines({ url, parser: 'csv' }, 'blocked.example'), /non supportato/);
   assert.deepEqual(report.sources.canton[1],
     { url, parser: 'csv', reserve: false, requests: 0, items: 0, recent: 0, status: 'failed' });
+
+  for (const [requests, expected] of [[3, 3], [0, 1], [-2, 1], [2.5, 1], ['3', 1]]) {
+    reportedError = Object.assign(new Error('nessun dettaglio verificato'), { requests });
+    await assert.rejects(fetchHeadlines({ url, parser: 'sitemap' }, 'blocked.example'),
+      (error) => error === reportedError);
+    assert.deepEqual(report.sources.canton.at(-1),
+      { url, parser: 'sitemap', reserve: false, requests: expected, items: 0, recent: 0, status: 'failed' });
+  }
 });
 
 function legacyHeadlineCount(html, baseUrl) {

@@ -100,6 +100,8 @@ import {
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
 import {
   findHtmlTagEndOutsideQuotes,
+  firstHtmlAttributeValue,
+  htmlAttributes,
   findHtmlRawTextClosingTag as rawTextClosingTag,
   nextHtmlTag,
   nextHtmlTagOutsideRawText,
@@ -570,17 +572,8 @@ function validDate(raw) {
   return Number.isNaN(d.getTime()) ? null : d;
 }
 
-function rawHtmlAttributeValue(attrs, name) {
-  const attrRe = /([^\s"'<>/=]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/g;
-  let m;
-  while ((m = attrRe.exec(String(attrs || ''))) !== null) {
-    if (m[1].toLowerCase() === name) return m[2] ?? m[3] ?? m[4] ?? '';
-  }
-  return '';
-}
-
 function htmlAttributeValue(attrs, name) {
-  return decodeHtmlEntities(rawHtmlAttributeValue(attrs, name));
+  return decodeHtmlEntities(firstHtmlAttributeValue(attrs, name));
 }
 
 function hasHtmlClass(attrs, token) {
@@ -625,7 +618,8 @@ export function selectPublishedTime(html, classToken) {
       .filter(Boolean);
     const classMarker = classTokens.some((token) => /^(?:published|pubdate|datepublished|publicationdate|publicationdatetime|publisheddate|publishedtime)$/.test(token))
       || /^(?:(?:article|news|post))?(?:datepublished|publicationdate|publicationdatetime|publisheddate|publishedtime)$/.test(compactClass);
-    const dataMarker = /(?:^|\s)data-(?:published|date-published)(?:\s|=|$)/i.test(attrs);
+    const dataMarker = Array.from(htmlAttributes(attrs)).some(([name]) =>
+      name === 'data-published' || name === 'data-date-published');
     if (!semanticMarker && !classMarker && !dataMarker) {
       tag = nextHtmlTagOutsideRawText(input, tag.end);
       continue;
@@ -752,7 +746,7 @@ const CHROME_ROLES = new Set(['navigation', 'banner', 'contentinfo']);
  * un altro attributo: cercarla nel testo grezzo toglierebbe `<main>`.
  */
 function roleTokens(attrs) {
-  return rawHtmlAttributeValue(attrs, 'role').toLowerCase().split(/\s+/).filter(Boolean);
+  return firstHtmlAttributeValue(attrs, 'role').toLowerCase().split(/\s+/).filter(Boolean);
 }
 
 /**
@@ -2038,12 +2032,18 @@ export async function scanCantonSource(source, ctx) {
     const origin = new URL(source.url).origin;
     const oldest = now.getTime() - 7 * 86_400_000;
     const fresh = (date) => date && date.getTime() >= oldest && date.getTime() <= now.getTime();
-    const candidates = dedupByUrl(headlines
+    const eligible = headlines
       .filter(({ url, date }) => fresh(date) && isAgPressUrl(url, origin))
-      .sort((a, b) => b.date - a.date));
+      .sort((a, b) => b.date - a.date);
+    const candidates = dedupByUrl(eligible);
+    const duplicates = eligible.length - candidates.length;
+    if (duplicates > 0) notes.push(`comunicati Argovia: duplicati rimossi: ${duplicates}`);
     headlines = [];
+    let attemptedDetails = 0;
+    let unverifiedDetails = 0;
     for (const { url, language } of candidates) {
       if (requests >= budget) break;
+      attemptedDetails += 1;
       try {
         const html = maskLedgerInactiveMarkup(await get(url, HTML_ACCEPT));
         const headline = agPressHeadline(html, url);
@@ -2051,11 +2051,18 @@ export async function scanCantonSource(source, ctx) {
         if (headline.length >= 10 && fresh(date)) {
           headlines.push({ url, headline, date, ...(language === undefined ? {} : { language }) });
         } else {
+          unverifiedDetails += 1;
           notes.push('comunicato Argovia: titolo o data editoriale assente, non valida o fuori intervallo');
         }
       } catch {
+        unverifiedDetails += 1;
         notes.push('comunicato Argovia: dettaglio non disponibile');
       }
+    }
+    if (attemptedDetails > 0 && unverifiedDetails === attemptedDetails) {
+      const error = new Error(`comunicati Argovia: nessun dettaglio verificato (${unverifiedDetails}/${attemptedDetails}, ${requests} richieste)`);
+      error.requests = requests;
+      throw error;
     }
     return { headlines, requests, notes };
   }

@@ -38,7 +38,7 @@ function slice(startMarker, endMarker) {
 }
 
 // The slice includes the quote-aware walker and the date/embedded scanners
-// used by extractHeadlines; no module-scope names need injecting.
+// used by extractHeadlines. The shared scanner exports are injected below.
 // `.replace(/^export /gm, '')`: dal 2026-08-13 il blocco contiene anche
 // `parseHeadlineDate` e il suo registro di formati (issue #190 punto 2), che
 // sono esportati per essere provati altrove. `new Function` non accetta
@@ -52,7 +52,7 @@ assert.match(BLOCK, /function extractDatesFromHtml\(html, baseUrl\) \{/, 'il blo
 const { extractHeadlines, extractDatesFromHtml, extractEmbeddedHeadlineDates } = new Function(
   'decodeHtmlEntities',
   'htmlTagScanner',
-  `const { findHtmlRawTextClosingTag, findHtmlTagEndOutsideQuotes, nextHtmlElement, nextHtmlElementWhere, nextHtmlOpeningTag, nextHtmlTag, nextHtmlTagStatus } = htmlTagScanner;\n${BLOCK}\nreturn { extractHeadlines, extractDatesFromHtml, extractEmbeddedHeadlineDates, extractDateFromUrl };`,
+  `const { findHtmlRawTextClosingTag, findHtmlTagEndOutsideQuotes, firstHtmlAttributeValue, htmlAttributes, nextHtmlElement, nextHtmlElementWhere, nextHtmlOpeningTag, nextHtmlTag, nextHtmlTagStatus } = htmlTagScanner;\n${BLOCK}\nreturn { extractHeadlines, extractDatesFromHtml, extractEmbeddedHeadlineDates, extractDateFromUrl };`,
 )(decodeHtmlEntities, htmlTagScanner);
 
 const BASE_URL = 'https://www.admin.ch/it/newnsb';
@@ -212,4 +212,22 @@ test('quote-aware media lead reader preserves an image title', () => {
   const [item] = extractHeadlines(html, BASE_URL, { quirks: { extractCardLead: 'media-title' } });
 
   assert.equal(item.lead, 'Il Consiglio federale presenta una nuova misura importante');
+});
+
+test('la navigazione si riconosce dagli attributi del div, anche con valori quotati contenenti >', () => {
+  const title = 'Avviso importante per la mobilità locale';
+  const makeCard = (attrs) => `<div class="news-card" ${attrs}><h2>${title}</h2><a href="/news/mobilita">Mehr</a></div>`;
+  const fakeRole = makeCard(`data-note="a > b role='navigation'"`);
+  assert.deepEqual(extractHeadlines(fakeRole, BASE_URL).map(({ headline }) => headline), [title]);
+  assert.deepEqual(extractHeadlines(makeCard(`ROLE='navigation' role="main"`), BASE_URL), []);
+  assert.deepEqual(extractHeadlines(makeCard(`role="main" ROLE='navigation'`), BASE_URL).map(({ headline }) => headline), [title]);
+});
+
+test('il filtro paywall riconosce gli attributi senza valore e ignora i nomi dentro valori quotati', () => {
+  const title = 'Avviso importante per la mobilità locale';
+  const makeCard = (attrs) => `<div ${attrs}><a href="/news/mobilita">${title}</a></div>`;
+  const source = { quirks: { excludePaywalledCards: true } };
+  assert.deepEqual(extractHeadlines(makeCard(`data-note='a > b data-paywall="true"'`), BASE_URL, source)
+    .map(({ headline }) => headline), [title]);
+  assert.deepEqual(extractHeadlines(makeCard('DATA-PAYWALL'), BASE_URL, source), []);
 });
