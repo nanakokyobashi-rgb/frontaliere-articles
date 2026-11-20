@@ -288,13 +288,16 @@ test('catalog scans reuse provenance while checking the current cover bytes', ()
     appendGeneratedImageRecord(root, generated);
 
     const hasValidImage = createBlogImageRecordValidator(root);
+    const hasCatalogImage = createBlogImageRecordValidator(root, { verifyHash: false });
     assert.equal(hasValidImage(generated.imageUrl), true);
+    assert.equal(hasCatalogImage(generated.imageUrl), true);
     fs.unlinkSync(path.join(root, 'data', 'generated-image-registry.json'));
     assert.equal(hasValidImage('/images/blog/unregistered.webp'), false);
     assert.equal(hasValidImage(generated.imageUrl), true);
     assert.equal(createBlogImageRecordValidator(root)(generated.imageUrl), false);
     fs.writeFileSync(file, Buffer.alloc(generated.bytes, 0x48));
     assert.equal(hasValidImage(generated.imageUrl), false);
+    assert.equal(hasCatalogImage(generated.imageUrl), true);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

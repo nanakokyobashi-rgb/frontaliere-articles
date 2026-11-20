@@ -1886,7 +1886,11 @@ const PLACES_IMAGES = [
 // topical pool and are reserved for the final governed default fallback.
 const BLOG_IMAGES = (() => {
   try {
-    const hasValidImage = createBlogImageRecordValidator(PROJECT_ROOT);
+    // This is only the startup candidate index. The fallback resolver repeats
+    // the strict hash check for the few candidates it may actually reuse;
+    // hashing the entire catalog here made module startup scale with every
+    // published image and could trip the generation stall watchdog.
+    const hasValidImage = createBlogImageRecordValidator(PROJECT_ROOT, { verifyHash: false });
     return readdirSync(resolve('public/images/blog'))
       .filter((file) => file.endsWith('.webp'))
       .filter((file) => hasValidImage(`/images/blog/${file}`))
