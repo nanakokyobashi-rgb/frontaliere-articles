@@ -543,6 +543,9 @@ jobs:
     concurrency:
       group: fast-publish-${{ matrix.target.section }}
       cancel-in-progress: false
+      # Con tre richieste per sezione, la terza attende il suo turno
+      # senza sostituire la seconda già in coda.
+      queue: max
     steps:
       - name: Checkout
         uses: actions/checkout@v7
