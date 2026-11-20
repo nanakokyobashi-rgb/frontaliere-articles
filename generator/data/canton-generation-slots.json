@@ -1,0 +1,125 @@
+{
+  "schema": 1,
+  "entries": [
+    {
+      "section": "canton-ag",
+      "workflow": "generate-article-ag.yml",
+      "cron": "21 0,6,12,18 * * *"
+    },
+    {
+      "section": "canton-appenzello",
+      "workflow": "generate-article-appenzello.yml",
+      "cron": "43 0,6,12,18 * * *"
+    },
+    {
+      "section": "canton-basilea",
+      "workflow": "generate-article-basilea.yml",
+      "cron": "16 0,6,12,18 * * *"
+    },
+    {
+      "section": "canton-be",
+      "workflow": "generate-article-be.yml",
+      "cron": "13 0,6,12,18 * * *"
+    },
+    {
+      "section": "canton-fr",
+      "workflow": "generate-article-fr.yml",
+      "cron": "32 1,7,13,19 * * *"
+    },
+    {
+      "section": "canton-ge",
+      "workflow": "generate-article-ge.yml",
+      "cron": "4 1,7,13,19 * * *"
+    },
+    {
+      "section": "canton-gl",
+      "workflow": "generate-article-gl.yml",
+      "cron": "3 1,7,13,19 * * *"
+    },
+    {
+      "section": "canton-gr",
+      "workflow": "generate-article-gr.yml",
+      "cron": "42 1,7,13,19 * * *"
+    },
+    {
+      "section": "canton-ju",
+      "workflow": "generate-article-ju.yml",
+      "cron": "49 2,8,14,20 * * *"
+    },
+    {
+      "section": "canton-lu",
+      "workflow": "generate-article-lu.yml",
+      "cron": "24 2,8,14,20 * * *"
+    },
+    {
+      "section": "canton-ne",
+      "workflow": "generate-article-ne.yml",
+      "cron": "46 2,8,14,20 * * *"
+    },
+    {
+      "section": "canton-nw",
+      "workflow": "generate-article-nw.yml",
+      "cron": "12 2,8,14,20 * * *"
+    },
+    {
+      "section": "canton-ow",
+      "workflow": "generate-article-ow.yml",
+      "cron": "14 3,9,15,21 * * *"
+    },
+    {
+      "section": "canton-sg",
+      "workflow": "generate-article-sg.yml",
+      "cron": "28 3,9,15,21 * * *"
+    },
+    {
+      "section": "canton-sh",
+      "workflow": "generate-article-sh.yml",
+      "cron": "59 3,9,15,21 * * *"
+    },
+    {
+      "section": "canton-so",
+      "workflow": "generate-article-so.yml",
+      "cron": "51 3,9,15,21 * * *"
+    },
+    {
+      "section": "canton-sz",
+      "workflow": "generate-article-sz.yml",
+      "cron": "1 4,10,16,22 * * *"
+    },
+    {
+      "section": "canton-tg",
+      "workflow": "generate-article-tg.yml",
+      "cron": "54 4,10,16,22 * * *"
+    },
+    {
+      "section": "canton-ti",
+      "workflow": "generate-article-ti.yml",
+      "cron": "19 4,10,16,22 * * *"
+    },
+    {
+      "section": "canton-ur",
+      "workflow": "generate-article-ur.yml",
+      "cron": "29 4,10,16,22 * * *"
+    },
+    {
+      "section": "canton-vd",
+      "workflow": "generate-article-vd.yml",
+      "cron": "11 5,11,17,23 * * *"
+    },
+    {
+      "section": "canton-vs",
+      "workflow": "generate-article-vs.yml",
+      "cron": "34 5,11,17,23 * * *"
+    },
+    {
+      "section": "canton-zg",
+      "workflow": "generate-article-zg.yml",
+      "cron": "57 5,11,17,23 * * *"
+    },
+    {
+      "section": "canton-zh",
+      "workflow": "generate-article-zh.yml",
+      "cron": "2 5,11,17,23 * * *"
+    }
+  ]
+}

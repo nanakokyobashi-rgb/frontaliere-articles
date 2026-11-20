@@ -25,11 +25,11 @@
       "articleId": "gruyere-studio-mobilita-profondo",
       "title": "Studio mobilità Gruyère: 25 comuni invitati a analisi approfondita",
       "fallbackImage": "/images/blog/article-aadorf-spese-sociali-2027.webp",
-      "reason": "All image providers failed for article-gruyere-studio-mobilita-profondo: openai-codex (vision gate rejected image: Synthetic photorealistic editorial illustration relevant to Gruyè",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-gruyere-studio-mobilita-profondo: openai-codex (image vision fallback deadline exceeded)",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-11-20T10:27:53.659Z",
-      "lastFailureAt": "2026-11-20T10:27:53.659Z"
+      "lastFailureAt": "2026-11-20T13:52:03.109Z"
     }
   ]
 }

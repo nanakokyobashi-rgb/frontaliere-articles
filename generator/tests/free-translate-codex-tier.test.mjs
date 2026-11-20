@@ -1469,7 +1469,10 @@ test('a transport retry keeps the already admitted deadline inside the initial p
   }
 });
 
-test('the initial phase stops waiting for a slow legacy provider and starts no retry', async () => {
+test('the initial phase stops waiting for a slow legacy provider and starts no retry', async (t) => {
+  // Reproduce a timer firing before the wall clock observes the deadline.
+  const now = Date.now();
+  t.mock.method(Date, 'now', () => now);
   const originalFetch = globalThis.fetch;
   const originalSocket = process.env.CODEX_AUTH_BROKER_SOCKET;
   const calls = [];

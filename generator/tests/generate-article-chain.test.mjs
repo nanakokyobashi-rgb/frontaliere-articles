@@ -1135,8 +1135,8 @@ test('un push su content/** non viene scartato se il producer è ancora in volo'
   assert.ok(skipAt > allowAt, 'lo skip resta per schedule/dispatch ma non può precedere l eccezione content push');
   assert.match(
     WF,
-    /concurrency:\n(?:      #.*\n)*      group: \$\{\{ \(needs\.admit\.outputs\.run_mode == 'production' \|\| needs\.admit\.outputs\.run_mode == 'unknown'\) && 'generate-article' \|\| 'generate-article-dry' \}\}\n      queue: max\n      cancel-in-progress: false/,
-    'production e compare unknown condividono il lock legacy; il self-test dry resta separato',
+    /concurrency:\n(?:      #.*\n)*      group: \$\{\{ \(needs\.admit\.outputs\.run_mode == 'production' \|\| needs\.admit\.outputs\.run_mode == 'unknown'\) && format\('generate-article-\{0\}', needs\.admit\.outputs\.national_section\) \|\| 'generate-article-dry' \}\}\n      queue: max\n      cancel-in-progress: false/,
+    'production e compare unknown condividono il lock della sezione; il self-test dry resta separato',
   );
 });
 
@@ -1644,4 +1644,39 @@ test('lo step di generazione espone i blocchi noti separatamente dalla dichiaraz
   assert.match(CHAIN_RUN, /ROSTER_BLOCKED/);
   assert.match(CHAIN_RUN, /PROVIDER_BLOCKED/);
   assert.match(CHAIN_RUN, /COOPERATIVE_STOP/);
+});
+
+test('national queue resolves the section before starting the production job', () => {
+  const step = WF.match(/id: national_section\n[\s\S]*?\n        run: \|\n((?: {10}[^\n]*\n)+)/);
+  assert.ok(step, 'national section resolver is missing');
+  const script = step[1].replace(/^ {10}/gm, '');
+  const cases = [
+    ['workflow_dispatch', '', 'svizzera', 'svizzera'],
+    ['workflow_dispatch', '', 'frontaliere', 'frontaliere'],
+    ['push', 'Generate blog article (frontaliere)', '', 'svizzera'],
+    ['push', 'Generate blog article (svizzera)', '', 'frontaliere'],
+    ['push', 'Other content\n\nMention (frontaliere) in body', '', 'frontaliere'],
+  ];
+  const root = mkdtempSync(path.join(tmpdir(), 'national-queue-'));
+  const output = path.join(root, 'github-output');
+  try {
+    for (const [event, message, requested, expected] of cases) {
+      writeFileSync(output, '');
+      const result = spawnSync('bash', ['-c', script], {
+        env: {
+          ...process.env,
+          EVENT_NAME: event,
+          PUSH_MESSAGE: message,
+          REQUESTED_SECTION: requested,
+          GITHUB_OUTPUT: output,
+        },
+        encoding: 'utf8',
+      });
+      assert.equal(result.status, 0, result.stderr);
+      assert.equal(readFileSync(output, 'utf8').trim(), `section=${expected}`);
+    }
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+  assert.match(WF, /SEC="\$\{\{ needs\.admit\.outputs\.national_section \}\}"/);
 });

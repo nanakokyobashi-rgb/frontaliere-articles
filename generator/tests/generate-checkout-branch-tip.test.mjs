@@ -118,8 +118,26 @@ function repositoryAheadOfEvent(root, { eventSubject, tipSubject, tipPath }) {
 }
 
 function resolve(rel, repo, values, env = {}) {
-  const script = expand(runScriptOf(stepOf(generateJob(rel), RESOLVE_STEP, rel), rel), values, rel);
   const outputFile = path.join(path.dirname(repo), 'github-output');
+  if (rel === MAIN_WORKFLOW) {
+    const workflow = readFileSync(path.join(ROOT, rel), 'utf8');
+    const admission = stepOf(workflow, 'Resolve national section for the production queue', rel);
+    writeFileSync(outputFile, '');
+    execFileSync('bash', ['-c', runScriptOf(admission, rel)], {
+      cwd: repo,
+      env: {
+        ...GIT_ENV,
+        EVENT_NAME: values['github.event_name'],
+        PUSH_MESSAGE: git(repo, 'show', '-s', '--format=%B', values['github.sha']),
+        REQUESTED_SECTION: values['inputs.section'],
+        GITHUB_OUTPUT: outputFile,
+      },
+    });
+    const section = readFileSync(outputFile, 'utf8').trim().match(/^section=(frontaliere|svizzera)$/);
+    assert.ok(section, 'national admission must emit a valid section');
+    values = { ...values, 'needs.admit.outputs.national_section': section[1] };
+  }
+  const script = expand(runScriptOf(stepOf(generateJob(rel), RESOLVE_STEP, rel), rel), values, rel);
   writeFileSync(outputFile, '');
   const stdout = execFileSync('bash', ['-c', script], {
     cwd: repo,
