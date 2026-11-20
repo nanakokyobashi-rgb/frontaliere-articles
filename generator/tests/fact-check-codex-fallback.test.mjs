@@ -18,8 +18,13 @@ import { fileURLToPath } from 'node:url';
 import { runInNewContext } from 'node:vm';
 import { afterEach, beforeEach, describe, test } from 'node:test';
 
-import { AI_MODELS, callLLM, resetState } from '../scripts/lib/ai-models.mjs';
+import { AI_MODELS, callLLM, estimateRequestTokens, resetState } from '../scripts/lib/ai-models.mjs';
 import { addIndependentVote, extractFactCheckJson } from '../scripts/lib/fact-check-response.mjs';
+import { FACT_CHECK_CATEGORIES } from '../scripts/lib/article-factuality-gates.mjs';
+import { cantonPromptLines } from '../scripts/lib/canton-section-profile.mjs';
+import { extractSyntheticReferenceEvidence } from '../scripts/lib/editorial-originality.mjs';
+import * as taxRates from '../scripts/lib/irpef-scaglioni.mjs';
+import { JSON_QUOTE_SAFETY_RULE_IT } from '../scripts/lib/llm-json-repair.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SRC = fs.readFileSync(path.join(HERE, '..', 'scripts', 'create-article.mjs'), 'utf8');
@@ -201,6 +206,8 @@ test('an infrastructure retry keeps a validated vote and seeks a different servi
     editorialContext: {},
     isEvergreenArticle: false,
     prompt: 'same article',
+    compactPrompt: null,
+    estimateRequestTokens,
     safeSignalDiagnosticTextForLog: String,
     setTimeout: (callback, delay) => { now += delay; callback(); },
     verificationModels: [CODEX, AI_MODELS.GROQ_GPT_OSS_120B],
@@ -223,4 +230,203 @@ test('an infrastructure retry keeps a validated vote and seeks a different servi
   assert.ok(calls[3].options.deadlineMs > calls[3].now);
   assert.ok(calls[3].options.deadlineMs < 220_000);
   assert.ok(calls[3].options.excludeModels.includes('first-serving-model'));
+});
+
+describe('fact-check retries under a reported input cap', () => {
+  const start = SRC.indexOf('const MAX_FACTCHECK_ARTICLE_CHARS =');
+  const end = SRC.indexOf('  // ── Codex Luna Max safety fallback', start);
+  const factsStart = SRC.indexOf('const VERIFIED_DOMAIN_FACTS =');
+  const factsEnd = SRC.indexOf('\n`;', factsStart) + '\n`;'.length;
+  const domainFacts = runInNewContext(
+    `${SRC.slice(factsStart, factsEnd)}\nVERIFIED_DOMAIN_FACTS`,
+    { ...taxRates },
+  );
+  const sourceEnd = 'La serie della fonte termina a settembre.';
+  const source = 'Il Comune ha pubblicato i conteggi trimestrali delle domande di rinnovo. '.repeat(78) + sourceEnd;
+  const cantonFacts = 'Il riferimento annuale cantonale riporta le soglie del 2026.';
+  const bodyEnd = 'Il confronto del corpo termina con il terzo trimestre.';
+  const firstVote = { verdict: 'PASS', servedBy: 'first-serving-model' };
+  const secondVote = { verdict: 'PASS', servedBy: 'second-serving-model' };
+  const capError = (cap) => Object.assign(new Error('verificatori esauriti'), {
+    code: 'ALL_MODELS_EXHAUSTED',
+    retryRequestTokenBudget: cap,
+  });
+  const estimate = (content) => estimateRequestTokens([{ role: 'user', content }]);
+
+  async function runRounds({
+    canton = 'San Gallo', section = 'san-gallo', isCanton = true,
+    sourceUrl = 'HTTPS://example.test/news', sourceText = source, padding = '', replies,
+  }) {
+    const calls = [];
+    const logs = [];
+    let now = 160_000;
+    const cantonLines = cantonPromptLines({ cantonName: canton, section });
+    const result = await runInNewContext(`
+      ${SRC.slice(start, end)}
+        return { modelResults, prompt, compactPrompt, editorialContext };
+      }
+      llmFactCheck({ body1: padding, body3: bodyEnd }, sourceText, sourceUrl, cantonFacts);
+    `, {
+      ...taxRates,
+      Date: { now: () => now },
+      RUN_START_MS: 0,
+      RUN_WALL_BUDGET_MS: 240_000,
+      console: { error: (message) => logs.push(message) },
+      setTimeout: (callback, delay) => { now += delay; callback(); },
+      AI_MODELS,
+      addIndependentVote,
+      estimateRequestTokens,
+      isModelAvailable: () => true,
+      safeSignalDiagnosticTextForLog: String,
+      CANTON_LINES: cantonLines,
+      IS_CANTON: isCanton,
+      IS_FRONTALIERE: false,
+      SECTION_NAME: section,
+      CANTON_FACTS_BRIEF: '',
+      evergreenFactsBriefFor: () => '',
+      extractSyntheticReferenceEvidence,
+      VERIFIED_DOMAIN_FACTS: domainFacts,
+      JSON_QUOTE_SAFETY_RULE_IT,
+      FACT_CHECK_CATEGORIES,
+      bodyEnd,
+      cantonFacts,
+      padding,
+      sourceText,
+      sourceUrl,
+      async _runSingleFactCheck(model, prompt, options) {
+        assert.ok(calls.length < replies.length, 'chiamata di verifica inattesa');
+        const reply = replies[calls.length];
+        calls.push({ model, prompt, options });
+        if (reply instanceof Error) throw reply;
+        return reply;
+      },
+    });
+    return { ...result, calls, logs, cantonLines };
+  }
+
+  async function loadFor(target, locale = {}) {
+    const { prompt } = await runRounds({ ...locale, replies: [firstVote, secondVote] });
+    const filler = 'Il registro mensile contiene una riga per ogni domanda. '.repeat(300);
+    let chars = 0;
+    while (chars < filler.length && estimate(prompt + filler.slice(0, chars)) < target) chars += 7;
+    assert.ok(chars > 0 && chars <= filler.length);
+    return filler.slice(0, chars);
+  }
+
+  for (const { target, cap, canton, section } of [
+    { target: 7874, cap: 7000, canton: 'San Gallo', section: 'san-gallo' },
+    { target: 8318, cap: 8000, canton: 'Lucerna', section: 'lucerna' },
+  ]) {
+    test(`recupera il secondo voto con carico ${target} e tetto ${cap}`, async () => {
+      const locale = { canton, section };
+      const padding = await loadFor(target, locale);
+      const { calls, logs, modelResults, prompt, compactPrompt, editorialContext, cantonLines } = await runRounds({
+        ...locale,
+        padding,
+        replies: [firstVote, capError(cap), capError(cap - 1000), secondVote],
+      });
+      const fullEstimate = estimate(prompt);
+      const compactEstimate = estimate(compactPrompt);
+      assert.ok(Math.abs(fullEstimate - target) <= 3);
+      assert.ok(fullEstimate > cap);
+      assert.ok(fullEstimate - compactEstimate >= 874);
+      assert.ok(compactEstimate <= cap);
+
+      assert.deepEqual(calls.map((call) => call.prompt), [prompt, prompt, prompt, compactPrompt]);
+      assert.equal(calls[3].options.editorialContext, editorialContext);
+      assert.ok(calls[3].options.excludeModels.includes(firstVote.servedBy));
+      assert.deepEqual(Array.from(modelResults, ({ servedBy }) => servedBy), [firstVote.servedBy, secondVote.servedBy]);
+
+      const evidenceEnd = (text) => text.indexOf('VERIFICA SISTEMATICA');
+      const proofStart = (text) => text.indexOf('═══ VALUTAZIONE EDITORIALE E PROVE (OBBLIGATORIA) ═══');
+      const evidence = compactPrompt.slice(0, evidenceEnd(compactPrompt));
+      assert.equal(evidence, prompt.slice(0, evidenceEnd(prompt)));
+      assert.ok(evidence.includes(bodyEnd));
+      assert.ok(evidence.includes(source));
+      assert.ok(evidence.includes(`${sourceEnd}\n"""`));
+      assert.ok(evidence.includes('LAMAL non è "tassa sulla salute"'));
+      assert.ok(evidence.includes(domainFacts));
+      assert.ok(evidence.includes(cantonFacts));
+      const instructions = compactPrompt.slice(evidenceEnd(compactPrompt), proofStart(compactPrompt));
+      assert.match(instructions, /Consiglieri federali attuali: Baume-Schneider, Parmelin, Cassis, Keller-Sutter, Pfister, Jans, Rösti\./);
+      assert.doesNotMatch(instructions, /\bAmherd\b/);
+      assert.match(instructions, /critical:istituzioni: FINMA è autorità per mercati finanziari\/banche, NON per ospedali\/sanità/);
+      assert.match(instructions, /senza riscontro nella fonte: critical:fatti_inventati/);
+      assert.match(instructions, /infermiera segnala carenze igieniche a Lugano/);
+      assert.match(instructions, /medico denuncia pratiche non etiche a Chiasso/);
+      assert.match(instructions, /infermiere ORL ottiene un risarcimento/);
+      assert.match(instructions, /medico del Civico di Lugano denuncia frode con indagine FINMA/);
+      assert.match(instructions, /sigle inventate \(DEMAS, LCFL, CFL\)/);
+      assert.match(instructions, /"LProtInfo del 2023" \(inesistente — è art\. 321a CO\)/);
+      assert.match(instructions, /"LPAP del 2000" \(è LPers, non LPAP\)/);
+      const suffix = compactPrompt.slice(proofStart(compactPrompt));
+      assert.equal(suffix, prompt.slice(proofStart(prompt)));
+      assert.match(suffix, /"articleQuote".*"citazione esatta/);
+      assert.match(suffix, /"evidenceQuotes"/);
+      assert.match(suffix, /"sourceQuote"/);
+      const relevance = cantonLines.factCheckRelevance(false);
+      assert.ok(prompt.includes(`\n\n${relevance}\n\n${suffix}`));
+      assert.ok(compactPrompt.includes(`\n\n${relevance}\n\n${suffix}`));
+      assert.deepEqual(logs.filter((line) => line.includes('istruzioni compatte')), [
+        `  🔁 Fact-check: istruzioni compatte, input stimato ${fullEstimate} → ${compactEstimate} token (tetto ${cap})`,
+      ]);
+    });
+  }
+
+  for (const [label, error] of [
+    ['outage senza tetto strutturato', Object.assign(new Error('verificatori indisponibili (429)'), { code: 'ALL_MODELS_EXHAUSTED' })],
+    ['tetto insufficiente', capError(5000)],
+    ['tetto testuale', capError('7000')],
+    ['tetto frazionario', capError(7000.5)],
+  ]) {
+    test(`mantiene il prompt pieno con ${label}`, async () => {
+      const padding = await loadFor(7874);
+      const { calls, logs, prompt, compactPrompt } = await runRounds({
+        padding,
+        replies: [error, error, firstVote, secondVote],
+      });
+      assert.ok(estimate(compactPrompt) > 5000);
+      assert.deepEqual(calls.map((call) => call.prompt), Array(4).fill(prompt));
+      assert.ok(logs.every((line) => !line.includes('istruzioni compatte')));
+    });
+  }
+
+  test('mantiene la forma compatta nei round successivi e annuncia una sola volta', async () => {
+    const padding = await loadFor(7874);
+    const outage = new Error('verificatori indisponibili');
+    const { calls, logs, prompt, compactPrompt } = await runRounds({
+      padding,
+      replies: [capError(7000), outage, outage, outage, firstVote, secondVote],
+    });
+    assert.deepEqual(calls.map((call) => call.prompt), [prompt, prompt, ...Array(4).fill(compactPrompt)]);
+    assert.equal(logs.filter((line) => line.includes('istruzioni compatte')).length, 1);
+  });
+
+  test('un tetto rilevato solo all’ultimo round non produce un altro tentativo', async () => {
+    const padding = await loadFor(7874);
+    const outage = new Error('verificatori indisponibili');
+    const { calls, logs, prompt } = await runRounds({
+      padding,
+      replies: [outage, outage, outage, outage, capError(7000), capError(7000)],
+    });
+    assert.deepEqual(calls.map((call) => call.prompt), Array(6).fill(prompt));
+    assert.ok(logs.every((line) => !line.includes('istruzioni compatte')));
+  });
+
+  for (const [label, scope] of [
+    ['sezione nazionale', { isCanton: false }],
+    ['fonte non HTTP', { sourceUrl: 'file:///fixture' }],
+    ['evergreen', { sourceText: 'Riferimento breve.' }],
+    ['dataset BFS', { sourceUrl: 'stats-bfs://fixture' }],
+    ['dataset ASTRA', { sourceUrl: 'stats-astra://fixture' }],
+  ]) {
+    test(`la forma compatta è assente per ${label}`, async () => {
+      const { calls, prompt, compactPrompt } = await runRounds({
+        ...scope,
+        replies: [capError(1000), capError(1000), firstVote, secondVote],
+      });
+      assert.equal(compactPrompt, null);
+      assert.deepEqual(calls.map((call) => call.prompt), Array(4).fill(prompt));
+    });
+  }
 });
