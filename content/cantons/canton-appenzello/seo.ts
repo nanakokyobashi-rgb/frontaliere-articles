@@ -1172,6 +1172,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-herisau-chiude-confezione-tende': {
+    title: 'Herisau: chiude il laboratorio di tende, 15 coinvolti',
+    description: 'A Herisau Filtex chiude il laboratorio di confezione di tende: la società cita il mercato svizzero dei tessili per la casa e 15 dipendenti coinvolti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, herisau, chiude, laboratorio, tende',
+    ogTitle: 'Filtex chiude la confezione di tende a Herisau',
+    ogDescription: 'A Herisau chiude il laboratorio di confezione di tende di Filtex. La società sangallese cita il cambiamento del mercato svizzero dei tessili per la casa, la domanda in calo per soluzioni confezionate e 15 dipendenti coinvolti.',
+    canonicalPath: '/articoli-appenzello/herisau-chiude-confezione-tende/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Herisau: chiude il laboratorio di tende, 15 coinvolti",
+      "description": "A Herisau Filtex chiude il laboratorio di confezione di tende: la società cita il mercato svizzero dei tessili per la casa e 15 dipendenti coinvolti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-herisau-chiude-confezione-tende.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-20T19:03:28+00:00",
+      "dateModified": "2026-11-20T19:03:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/herisau-chiude-confezione-tende/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

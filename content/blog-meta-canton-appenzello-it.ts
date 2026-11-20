@@ -93,6 +93,9 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.simon-graf-medico-cantonale.title': 'Simon Graf scelto come medico cantonale dei due Appenzello',
     'blog.article.simon-graf-medico-cantonale.excerpt': 'Simon Graf succede a Henrik Berthel come medico cantonale per Appenzello Esterno e Appenzello Interno, sulla base di un accordo sulle prestazioni.',
     'blog.article.simon-graf-medico-cantonale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.herisau-chiude-confezione-tende.title': 'Herisau: chiude il laboratorio di tende, 15 coinvolti',
+    'blog.article.herisau-chiude-confezione-tende.excerpt': 'Filtex chiude a Herisau il laboratorio di confezione di tende: la società cita il mercato svizzero dei tessili per la casa e 15 dipendenti coinvolti.',
+    'blog.article.herisau-chiude-confezione-tende.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAppenzelloIt;

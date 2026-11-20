@@ -93,6 +93,9 @@ const blogMetaCantonAppenzelloFr: Record<string, string> = {
     'blog.article.simon-graf-medico-cantonale.title': 'Simon Graf choisi comme médecin cantonal des deux Appenzell',
     'blog.article.simon-graf-medico-cantonale.excerpt': 'Simon Graf succède à Henrik Berthel comme médecin cantonal pour Appenzell Rhodes-Extérieures et Appenzell Rhodes-Intérieures, sur la base d’un accord de prestations.',
     'blog.article.simon-graf-medico-cantonale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.herisau-chiude-confezione-tende.title': 'Herisau : l’atelier de confection de rideaux ferme, 15 personnes concernées',
+    'blog.article.herisau-chiude-confezione-tende.excerpt': 'Filtex ferme à Herisau son atelier de confection de rideaux : la société cite le marché suisse du textile de maison et 15 employés concernés.',
+    'blog.article.herisau-chiude-confezione-tende.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAppenzelloFr;

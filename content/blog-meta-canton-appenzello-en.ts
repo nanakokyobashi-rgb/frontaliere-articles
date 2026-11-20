@@ -93,6 +93,9 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.simon-graf-medico-cantonale.title': 'Simon Graf chosen as cantonal physician for the two Appenzell cantons',
     'blog.article.simon-graf-medico-cantonale.excerpt': 'Simon Graf succeeds Henrik Berthel as cantonal physician for Appenzell Ausserrhoden and Appenzell Innerrhoden, based on a performance agreement.',
     'blog.article.simon-graf-medico-cantonale.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.herisau-chiude-confezione-tende.title': 'Herisau: curtain workshop closes, 15 affected',
+    'blog.article.herisau-chiude-confezione-tende.excerpt': 'Filtex is closing its curtain-making workshop in Herisau: the company cites the Swiss home textiles market and 15 employees affected.',
+    'blog.article.herisau-chiude-confezione-tende.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAppenzelloEn;
