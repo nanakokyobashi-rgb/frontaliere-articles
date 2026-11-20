@@ -8,8 +8,6 @@ run-name: ${{ inputs.loop_clock != '' && format('Generate Blog Article (canton-n
 # generation-cloud-clock-contract: v1
 
 on:
-  schedule:
-    - cron: '46 2,8,14,20 * * *'
   push:
     branches: [main]
     paths:
