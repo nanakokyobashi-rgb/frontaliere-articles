@@ -944,7 +944,7 @@ function run(cmd, args, { env = process.env } = {}) {
   const res = spawnSync(cmd, args, { cwd: ROOT_DIR, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], env });
   process.stdout.write(res.stdout ?? '');
   process.stderr.write(res.stderr ?? '');
-  return { code: res.status ?? 1, stdout: res.stdout ?? '' };
+  return { code: res.status ?? 1, stdout: res.stdout ?? '', stderr: res.stderr ?? '' };
 }
 
 /** Scrive un checkpoint o la release solo nel punto deciso dal chiamante. */
@@ -1635,14 +1635,34 @@ async function uploadCantonAssets({
   // reads and changes the lease path after the snapshot decision.
   const pendingUploads = cdnUploads.filter(({ key }) => !heldAssetKeys.has(key) && !unchangedAssetKeys.has(key));
   let failures = 0;
+  const contendedUploads = [];
+  const upload = ({ local, key }) => runImpl('bash', ['scripts/lib/upload-cdn-file.sh', local, key]);
+  const succeeded = ({ code, stdout }) => code === 0 && stdout?.includes('✅ uploaded');
+  const recordFailure = ({ key }) => {
+    failures++;
+    console.log(`::warning::[${LOG}] immagine non caricata: ${key}`);
+  };
   await assertMainFreshImpl();
   await publishSignalBoundary(signal);
   for (const { local, key } of pendingUploads) {
     await publishSignalBoundary(signal);
-    const { code = 1, stdout = '' } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', local, key]);
-    if (code !== 0 || !stdout.includes('✅ uploaded')) {
-      failures++;
-      console.log(`::warning::[${LOG}] immagine non caricata: ${key}`);
+    const asset = { local, key };
+    const result = upload(asset);
+    if (succeeded(result)) continue;
+    const namespace = imageNamespaceForKey(asset.key);
+    if (namespace && result.stderr?.includes(`timed out waiting for namespace ${namespace}`)) {
+      contendedUploads.push(asset);
+    } else {
+      recordFailure(asset);
+    }
+  }
+  // A later asset can acquire the same lease once the contention clears.
+  // Retry only the affected uploads so those completed above stay committed.
+  if (contendedUploads.length && !failures) {
+    await assertMainFreshImpl();
+    for (const asset of contendedUploads) {
+      await publishSignalBoundary(signal);
+      if (!succeeded(upload(asset))) recordFailure(asset);
     }
   }
   return failures;
