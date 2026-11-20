@@ -15299,7 +15299,10 @@ function freeMtField(
     fieldType,
     fieldName: field,
     preserveMunicipalityNames,
-    translate: freeTranslateWithRetry,
+    translate: (request) => freeTranslateWithRetry({
+      ...request,
+      deadlineMs: initialTranslationDeadlineMs(),
+    }),
     balanceMarkdown: balanceMarkdownMarkers,
     onWarn: (msg) => console.error(`  ⚠️  ${msg} — recupero per-campo`),
     onUnusableOutput: (event) => recordFreeMtUnusableOutput(RUN_REPORT.translation, { ...event, field }),
