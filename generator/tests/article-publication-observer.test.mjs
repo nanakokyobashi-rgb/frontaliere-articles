@@ -6,6 +6,7 @@ import path from 'node:path';
 import {
   OBSERVER_USER_AGENT,
   MAX_ISSUE_DESCRIPTION_BYTES,
+  DEFAULT_LAG_REPAIR_CAP,
   buildGhCommandArgs,
   buildObserverTargets,
   compactIssueDescription,
@@ -758,6 +759,47 @@ test('un ritardo stale già osservato ridispatcha la pagina leggibile al fast pu
     });
     assert.deepEqual(second.dispatched, []);
     assert.equal(github.calls.filter((call) => call.type === 'dispatch').length, 1);
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
+});
+
+test('i retry stale usano un onda bounded separata dal cap delle immagini', async () => {
+  const rootDir = observerRoot();
+  const ids = Array.from({ length: 40 }, (_, index) => `lag-${String(index).padStart(2, '0')}`);
+  fs.appendFileSync(
+    path.join(rootDir, 'content/blog-articles-data.ts'),
+    `\n${ids.map((id) => `{ id: '${id}', date: '2026-09-01', image: '/images/blog/${id}.webp' },`).join('\n')}\n`,
+  );
+  fs.appendFileSync(
+    path.join(rootDir, 'content/routerBlogData.ts'),
+    `\n${ids.map((id) => `'${id}': { it: '${id}' },`).join('\n')}\n`,
+  );
+  const github = issueClient();
+  const changedAt = Math.floor(Date.parse('2026-10-07T00:00:00Z') / 1000);
+  const log = `commit ${sha} ${changedAt}\n${ids.map((id) => `content/blog-body/it/${id}.ts`).join('\n')}\n`;
+  try {
+    const result = await runObserver({
+      rootDir,
+      nowMs: Date.parse('2026-10-08T00:00:00Z'),
+      gitLogImpl: () => log,
+      githubClient: github.client,
+      minIntervalMs: 0,
+      fetchImpl: async (url) => {
+        const id = url.split('/').at(-2);
+        return {
+          ok: true,
+          status: 200,
+          text: async () => ownPage(`/images/blog/${id}.webp`),
+        };
+      },
+    });
+    assert.equal(DEFAULT_LAG_REPAIR_CAP, 32);
+    assert.equal(result.lagging.length, 40);
+    assert.equal(result.dispatched.length, 1);
+    assert.equal(result.dispatched[0].ids.length, DEFAULT_LAG_REPAIR_CAP);
+    assert.equal(result.publicationRetries.length, 40);
+    assert.equal(result.publicationRetries.filter((item) => item.status === 'in-flight').length, DEFAULT_LAG_REPAIR_CAP);
   } finally {
     fs.rmSync(rootDir, { recursive: true, force: true });
   }

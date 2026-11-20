@@ -1716,27 +1716,12 @@ test('delete-cdn-file.sh: solo chiavi delle sezioni cantonali', () => {
 
 // ── 7. Cablaggio ─────────────────────────────────────────────────────────────
 
-test('load-rc-env: kill-switch mappato, assente per default, marker scritto solo dopo il template', async () => {
-  const src = readFileSync(path.join(ROOT, 'generator/scripts/load-rc-env.mjs'), 'utf8');
-  assert.match(src, /^ {2}CANTON_ARTICLE_SECTIONS_KILL: +\['CANTON_ARTICLE_SECTIONS_KILL'\],$/m);
-  const { EXPECTED_ABSENT_RC_KEYS, RC_LOADED_MARKER } = await import('../../generator/scripts/load-rc-env.mjs');
+// L'emissione del marker è verificata dalla CLI in load-rc-env-retry.test.mjs.
+test('load-rc-env: kill-switch mappato e assente per default', async () => {
+  const { EXPECTED_ABSENT_RC_KEYS, RC_LOADED_MARKER, RC_TO_ENV } = await import('../../generator/scripts/load-rc-env.mjs');
+  assert.deepEqual(RC_TO_ENV.CANTON_ARTICLE_SECTIONS_KILL, ['CANTON_ARTICLE_SECTIONS_KILL']);
   assert.ok(EXPECTED_ABSENT_RC_KEYS.has('CANTON_ARTICLE_SECTIONS_KILL'));
   assert.equal(RC_LOADED_MARKER, 'RC_ENV_LOADED');
-  const main = src.match(/^async function main\(\) \{\n([\s\S]*?)^\}$/m)?.[1];
-  const exporter = src.match(/^export async function exportRcEnvironment\(template\) \{\n([\s\S]*?)^\}$/m)?.[1];
-  assert.ok(main, 'funzione main assente');
-  assert.ok(exporter, 'funzione exportRcEnvironment assente');
-
-  const exportAt = main.search(/^ {2}await exportRcEnvironment\(template\);$/m);
-  const templateRead = /^ +template = (?:admin \? await admin\.remoteConfig\(\)\.getTemplate\(\) : )?await fetchTemplateViaRest\(\);$/gm;
-  const reads = [...main.matchAll(templateRead)];
-  assert.ok(reads.length > 0 && reads.every(({ index }) => index < exportAt),
-    'main deve leggere il template prima di esportarlo');
-
-  const paramCountAt = exporter.search(/^ {2}const paramCount = /m);
-  const markerAt = exporter.indexOf("lines.push(writeToGithubEnv ? `${marker}=1` : `export ${marker}='1'`);");
-  assert.ok(paramCountAt >= 0 && markerAt > paramCountAt,
-    'exportRcEnvironment deve contare i parametri prima di aggiungere il marker');
 });
 
 test('publish-api: osserva tutta la chiusura degli import del publisher, e pubblica la release edge DOPO il deploy Pages, per ultima', () => {

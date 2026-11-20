@@ -19,7 +19,9 @@
  *     eval "$(GOOGLE_APPLICATION_CREDENTIALS=/path/to/sa.json node scripts/load-rc-env.mjs)"
  *
  *   FRONTALIERE_LOAD_OPERATOR_CONFIG=1 selects the private operator parameters
- *   outside GitHub Actions and reports success with OPERATOR_RC_ENV_LOADED=1.
+ *   outside GitHub Actions. FRONTALIERE_OPERATOR_RC_SOURCE selects client
+ *   (default) or server. OPERATOR_RC_ENV_LOADED=1 attests that at least one
+ *   mapped operator parameter was resolved.
  *   Consume the exports without printing stdout.
  *
  * ─── Behaviour ───────────────────────────────────────────────────────────
@@ -30,7 +32,7 @@
  *     so workflows that don't have Firebase configured still work.
  */
 
-import { realpathSync } from 'node:fs';
+import { readFileSync, realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { ARTICLE_SOURCE_COPY_MODE_ENV } from './lib/source-copy-guard.mjs';
 import { fetchWithRefTimeout } from './lib/fetch-with-ref-timeout.mjs';
@@ -499,7 +501,8 @@ export const RC_TO_ENV = {
  * disponibilita' del template (generazione cantonale) la differenza conta: il
  * marker ordinario viene scritto SOLO dopo aver letto il template e anche se
  * gia' presente nell'ambiente: descrive questa esecuzione. L'export locale dei
- * soli parametri operatore usa un marker dedicato.
+ * soli parametri operatore usa un marker dedicato quando almeno una chiave
+ * mappata è risolta.
  */
 export const RC_LOADED_MARKER = 'RC_ENV_LOADED';
 const OPERATOR_RC_LOADED_MARKER = 'OPERATOR_RC_ENV_LOADED';
@@ -807,16 +810,23 @@ function conditionName(condition) {
 
 /**
  * Resolve one parameter for the loader's context-free environment bridge.
- * Explicit defaults win; when a parameter has only conditional values, use the
- * highest-priority condition from the template and then a stable lexical
- * fallback for condition entries not listed in the template metadata.
+ * Server templates supply only explicit defaults. Client templates may also
+ * supply the highest-priority conditional value, with a stable lexical
+ * fallback for condition entries absent from the template metadata.
  */
-export function getRcValue(template, key) {
+export function getRcValue(template, key, source = 'client') {
   const parameter = template?.parameters?.[key];
   if (!parameter || typeof parameter !== 'object') return null;
 
-  const defaultValue = readRemoteConfigParameterValue(parameter.defaultValue);
-  if (defaultValue !== null) return defaultValue;
+  const { defaultValue } = parameter;
+  if (source === 'server') {
+    if (!defaultValue || typeof defaultValue !== 'object' || Array.isArray(defaultValue)
+      || !Object.hasOwn(defaultValue, 'value')) return null;
+    return readRemoteConfigParameterValue(defaultValue);
+  }
+
+  const resolvedDefault = readRemoteConfigParameterValue(defaultValue);
+  if (resolvedDefault !== null) return resolvedDefault;
 
   const conditionalValues = parameter.conditionalValues;
   if (!conditionalValues || typeof conditionalValues !== 'object' || Array.isArray(conditionalValues)) {
@@ -949,11 +959,10 @@ export const RC_FETCH_TIMEOUT_MS = 30_000;
  * the next full deploy.
  *
  * Returns a template shaped like the admin SDK's ({ parameters }), so
- * getRcValue() works unchanged. Returns null on any failure — callers fall
- * back to plain env vars, exactly as before.
+ * getRcValue() can read it. Throws on failure so the caller can fall back to
+ * plain env vars.
  */
-async function fetchTemplateViaRest() {
-  const { readFileSync } = await import('node:fs');
+async function fetchTemplateViaRest(source) {
   const { getServiceAccountAccessToken } = await import('./lib/google-service-account-token.mjs');
 
   const creds = JSON.parse(readFileSync(process.env.GOOGLE_APPLICATION_CREDENTIALS, 'utf8'));
@@ -964,12 +973,14 @@ async function fetchTemplateViaRest() {
     'https://www.googleapis.com/auth/firebase.remoteconfig',
   );
 
+  const namespace = source === 'server' ? '/namespaces/firebase-server' : '';
+  const url = `https://firebaseremoteconfig.googleapis.com/v1/projects/${encodeURIComponent(creds.project_id)}${namespace}/remoteConfig`;
   let lastErr;
   for (let attempt = 1; attempt <= RC_FETCH_ATTEMPTS; attempt++) {
     let rcRes;
     try {
       rcRes = await fetchWithRefTimeout(
-        `https://firebaseremoteconfig.googleapis.com/v1/projects/${encodeURIComponent(creds.project_id)}/remoteConfig`,
+        url,
         {
           headers: { Authorization: `Bearer ${accessToken}`, 'Accept-Encoding': 'gzip' },
         },
@@ -1011,7 +1022,19 @@ async function fetchTemplateViaRest() {
 
 // ─── Main ────────────────────────────────────────────────────────────────
 
-async function main() {
+function resolveRcMode() {
+  const operatorOnly = process.env.FRONTALIERE_LOAD_OPERATOR_CONFIG === '1'
+    && process.env.GITHUB_ENV === undefined
+    && process.env.GITHUB_ACTIONS !== 'true';
+  const source = operatorOnly ? process.env.FRONTALIERE_OPERATOR_RC_SOURCE || 'client' : 'client';
+  if (source !== 'client' && source !== 'server') {
+    console.warn('⚠️  Invalid operator Remote Config source.');
+    return null;
+  }
+  return { operatorOnly, source };
+}
+
+async function main({ operatorOnly, source }) {
   // 1. Check for GOOGLE_APPLICATION_CREDENTIALS
   if (!process.env.GOOGLE_APPLICATION_CREDENTIALS) {
     console.warn('⚠️  GOOGLE_APPLICATION_CREDENTIALS not set — skipping RC secret loading.');
@@ -1024,12 +1047,20 @@ async function main() {
   try {
     const { applicationDefault, getApps, initializeApp } = await import('firebase-admin/app');
     const { getRemoteConfig } = await import('firebase-admin/remote-config');
-    if (!getApps().length) {
-      initializeApp({ credential: applicationDefault() });
+    if (source === 'server') {
+      const creds = JSON.parse(readFileSync(process.env.GOOGLE_APPLICATION_CREDENTIALS, 'utf8'));
+      if (!creds.project_id) throw new Error('service account JSON missing project_id');
+      const app = initializeApp({ credential: applicationDefault(), projectId: creds.project_id }, 'operator-rc');
+      admin = { remoteConfig: () => getRemoteConfig(app) };
+    } else {
+      if (!getApps().length) {
+        initializeApp({ credential: applicationDefault() });
+      }
+      admin = { remoteConfig: getRemoteConfig };
     }
-    admin = { remoteConfig: getRemoteConfig };
   } catch (err) {
-    console.warn(`ℹ️  Firebase Admin unavailable (${err.message}) — using the dependency-free REST path.`);
+    const details = operatorOnly ? '' : ` (${err.message})`;
+    console.warn(`ℹ️  Firebase Admin unavailable${details} — using the dependency-free REST path.`);
     admin = null;
   }
 
@@ -1039,17 +1070,26 @@ async function main() {
   //    zero secrets there.
   let template;
   try {
-    template = admin ? await admin.remoteConfig().getTemplate() : await fetchTemplateViaRest();
+    if (!admin) {
+      template = await fetchTemplateViaRest(source);
+    } else {
+      const remoteConfig = admin.remoteConfig();
+      template = source === 'server'
+        ? (await remoteConfig.getServerTemplate()).toJSON()
+        : await remoteConfig.getTemplate();
+    }
   } catch (err) {
-    console.warn(`⚠️  Failed to fetch Remote Config via ${admin ? 'admin SDK' : 'REST'}: ${err.message}`);
+    const details = operatorOnly ? '' : `: ${err.message}`;
+    console.warn(`⚠️  Failed to fetch Remote Config via ${admin ? 'admin SDK' : 'REST'}${details}`);
     if (admin) {
       // Admin was installed but failed (expired ADC, transient 5xx). REST uses a
       // freshly-signed JWT and a different code path, so it is worth one try.
       try {
-        template = await fetchTemplateViaRest();
+        template = await fetchTemplateViaRest(source);
         console.warn('   Recovered via the REST fallback.');
       } catch (restErr) {
-        console.warn(`   REST fallback also failed: ${restErr.message}`);
+        const details = operatorOnly ? '' : `: ${restErr.message}`;
+        console.warn(`   REST fallback also failed${details}`);
         console.warn('   Falling back to environment variables / GH Secrets.');
         process.exit(0);
       }
@@ -1059,13 +1099,16 @@ async function main() {
     }
   }
 
-  await exportRcEnvironment(template);
+  await writeRcEnvironment(template, { operatorOnly, source });
 }
 
 export async function exportRcEnvironment(template) {
+  const mode = resolveRcMode();
+  if (mode) await writeRcEnvironment(template, mode);
+}
+
+async function writeRcEnvironment(template, { operatorOnly, source }) {
   const writeToGithubEnv = Boolean(process.env.GITHUB_ENV);
-  const inGitHubActions = process.env.GITHUB_ENV !== undefined || process.env.GITHUB_ACTIONS === 'true';
-  const operatorOnly = !inGitHubActions && process.env.FRONTALIERE_LOAD_OPERATOR_CONFIG === '1';
   const paramCount = Object.keys(template.parameters || {}).length;
   const statusLog = writeToGithubEnv ? console.log : console.error;
   statusLog(`📦 Remote Config: ${paramCount} params available`);
@@ -1078,13 +1121,14 @@ export async function exportRcEnvironment(template) {
   const missingKeys = [];
   const lines = []; // For GITHUB_ENV or stdout
   const queuedEnvKeys = new Set();
-  // Il marker attesta il caricamento dei parametri della modalità selezionata.
-  const marker = operatorOnly ? OPERATOR_RC_LOADED_MARKER : RC_LOADED_MARKER;
-  lines.push(writeToGithubEnv ? `${marker}=1` : `export ${marker}='1'`);
+  let operatorResolved = false;
+  if (!operatorOnly) {
+    lines.push(writeToGithubEnv ? `${RC_LOADED_MARKER}=1` : `export ${RC_LOADED_MARKER}='1'`);
+  }
 
   for (const [rcKey, envKeys] of Object.entries(RC_TO_ENV)) {
     if (rcKey.startsWith('OPERATOR_') !== operatorOnly) continue;
-    const value = getRcValue(template, rcKey);
+    const value = getRcValue(template, rcKey, source);
 
     // See shouldExportRcValue: getRcValue() already distinguishes "absent" (null)
     // from "present but empty" (''), and collapsing the two hid an RC key whose
@@ -1100,6 +1144,7 @@ export async function exportRcEnvironment(template) {
       continue;
     }
 
+    if (operatorOnly) operatorResolved = true;
     for (const envKey of envKeys) {
       if (process.env[envKey] || !claimEnvKey(queuedEnvKeys, envKey)) {
         skipped++;
@@ -1127,6 +1172,7 @@ export async function exportRcEnvironment(template) {
   }
 
   // 5. Write output
+  if (operatorResolved) lines.unshift(`export ${OPERATOR_RC_LOADED_MARKER}='1'`);
   if (writeToGithubEnv && lines.length > 0) {
     const { appendFileSync } = await import('node:fs');
     const envFile = process.env.GITHUB_ENV;
@@ -1155,8 +1201,10 @@ const invokedDirectly = (() => {
 })();
 
 if (invokedDirectly) {
-  main().catch((err) => {
-    console.warn(`⚠️  load-rc-env failed: ${err?.message || 'Unknown error'}`);
+  const mode = resolveRcMode();
+  if (mode) main(mode).catch((err) => {
+    const details = mode.operatorOnly ? '' : `: ${err?.message || 'Unknown error'}`;
+    console.warn(`⚠️  load-rc-env failed${details}`);
     console.warn('   Falling back to environment variables / GH Secrets.');
     process.exit(0); // Non-blocking — never break the workflow
   });
