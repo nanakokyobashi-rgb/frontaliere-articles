@@ -2300,6 +2300,12 @@ export function setCodexTranslateProcessDeadline(deadlineMs, { recoveryReserveMs
     && Number.isSafeInteger(recoveryReserveCalls) && recoveryReserveCalls > 0 ? recoveryReserveCalls : 0;
 }
 
+// Keep part of the configured recovery reserve on the process clock too.
+export function initialTranslationDeadlineMs(processDeadlineMs = _codexProcessDeadlineMs) {
+  if (processDeadlineMs == null) return processDeadlineMs;
+  return processDeadlineMs - Math.floor(_codexRecoveryReserveMs / 2);
+}
+
 /**
  * Deadline assoluta della prossima chiamata Codex, oppure `null` se la
  * chiamata non va avviata: il minimo fra il tetto della singola chiamata, il
@@ -2708,6 +2714,7 @@ function _admitCodexTranslationCall({
   processDeadlineMs = _codexProcessDeadlineMs,
   trackInFlight = true,
   allowBodyRecoveryReserve = false,
+  callDeadlineMs = null,
 } = {}) {
   if (_codexStopReason || !_codexSocketPresent()) return null;
   const maxCalls = _codexBudget('FREE_TRANSLATE_CODEX_MAX_CALLS', CODEX_TRANSLATE_MAX_CALLS_DEFAULT);
@@ -2722,9 +2729,18 @@ function _admitCodexTranslationCall({
     _stopCodex(`budget di ${Math.round(maxMs / 1000)}s esaurito (FREE_TRANSLATE_CODEX_MAX_MS)`);
     return null;
   }
-  const deadlineMs = codexCallDeadlineMs({ now, budgetRemainingMs: remainingMs, processDeadlineMs });
+  const initialDeadlineMs = allowBodyRecoveryReserve ? processDeadlineMs : initialTranslationDeadlineMs(processDeadlineMs);
+  const deadlineMs = codexCallDeadlineMs({
+    now,
+    budgetRemainingMs: remainingMs,
+    processDeadlineMs: callDeadlineMs === null
+      ? initialDeadlineMs
+      : Math.min(callDeadlineMs, initialDeadlineMs ?? Infinity),
+  });
   if (deadlineMs === null) {
-    _stopCodex('scadenza del processo troppo vicina per una nuova chiamata');
+    if (processDeadlineMs != null && processDeadlineMs - now < CODEX_TRANSLATE_MIN_CALL_MS) {
+      _stopCodex('scadenza del processo troppo vicina per una nuova chiamata');
+    }
     return null;
   }
   _codexCalls += 1;
@@ -2769,7 +2785,8 @@ function _codexGeneralCallBudgetAvailable(maxCalls) {
  */
 function _reserveCodexTransportRetry(processDeadlineMs, callDeadlineMs, allowBodyRecoveryReserve) {
   const admission = _admitCodexTranslationCall({
-    processDeadlineMs: callDeadlineMs ?? processDeadlineMs,
+    processDeadlineMs,
+    callDeadlineMs: callDeadlineMs ?? null,
     trackInFlight: false,
     allowBodyRecoveryReserve,
   });
@@ -2971,11 +2988,16 @@ async function _translateGroupWithCodex(group) {
   const recoveryReserveMs = Math.min(_codexRecoveryReserveMs, Math.floor(maxMs / 5));
   const initialRemainingMs = remainingMs - recoveryReserveMs;
   if (initialRemainingMs < CODEX_TRANSLATE_MIN_CALL_MS) return none();
-  const callDeadlineMs = codexCallDeadlineMs({ now: Date.now(), budgetRemainingMs: initialRemainingMs });
+  const now = Date.now();
+  const callDeadlineMs = codexCallDeadlineMs({
+    now,
+    budgetRemainingMs: initialRemainingMs,
+    processDeadlineMs: initialTranslationDeadlineMs(),
+  });
   if (callDeadlineMs === null) {
-    // I testi non tradotti restano non tradotti: la cascata scende ai tier
-    // successivi e cio' che resta scoperto lo recupera translate-pending.
-    _stopCodex('scadenza del processo troppo vicina per una nuova chiamata');
+    if (_codexProcessDeadlineMs !== null && _codexProcessDeadlineMs - now < CODEX_TRANSLATE_MIN_CALL_MS) {
+      _stopCodex('scadenza del processo troppo vicina per una nuova chiamata');
+    }
     return none();
   }
   if (!_codexEngagedLogged) {
@@ -3834,7 +3856,7 @@ function _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome }
   return finalized;
 }
 
-export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 'title', _outcome = null }) {
+export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 'title', _outcome = null, deadlineMs = null }) {
   const prepared = _prepareEngineSource(text, sourceLang, fieldType);
   if (!prepared) return '';
   const { rawSourceClean, sourceClean, structureSource, clean } = prepared;
@@ -3855,12 +3877,32 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
 
   const finalize = (out) => _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome: _outcome });
 
+  // Legacy providers already bound their transport. Stop waiting here so an
+  // in-flight provider cannot spend the time set aside for article recovery.
+  const expired = () => deadlineMs !== null && Date.now() >= deadlineMs;
+  const callBeforeDeadline = async (fn, requestText) => {
+    if (deadlineMs === null) return fn(requestText);
+    if (expired()) return '';
+    let timer;
+    try {
+      return await Promise.race([
+        new Promise((resolve) => { timer = setTimeout(() => resolve(''), Math.max(0, deadlineMs - Date.now())); }),
+        fn(requestText),
+      ]);
+    } finally {
+      clearTimeout(timer);
+    }
+  };
+
   /** Try a tier: track success/error/passthrough, return result or '' */
   async function tryTier(tierName, fn, reportProvider = tierName) {
+    if (expired()) return '';
+    const boundedCall = (requestText) => callBeforeDeadline(fn, requestText);
     const outcomeBefore = snapshotTranslationOutcome(_outcome);
     let attemptStatus = 'failed';
     try {
-      let result = await fn(clean);
+      let result = await boundedCall(clean);
+      if (expired()) return '';
       // Un tier che rimanda indietro `clean` non ha tradotto: non e' un hit, ed
       // e' l'UNICO posto in cui questa cascata puo' accorgersene — a valle il
       // passthrough e' testo valido e nessun predicato lo scarta (vedi
@@ -3882,7 +3924,7 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
         const recovered = await recoverStructuredTier({
           tierName,
           sourceText: clean,
-          fn,
+          fn: boundedCall,
           outcome: _outcome,
         });
         if (!recovered.ok) {
@@ -4015,6 +4057,7 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
     const translatableChunks = [];
     const passthroughChunks = [];
     for (const chunk of chunks) {
+      if (expired()) return '';
       if (chunk.protectedOversize || !hasTranslatableLineText(chunk.text)) {
         parts.push(chunk.text);
         continue;
@@ -4154,15 +4197,16 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
  * @param {number} [options.maxRetries=2] - Max retry attempts after first failure
  * @returns {Promise<string>} Translated text or ''
  */
-export async function freeTranslateWithRetry({ text, sourceLang, targetLang, fieldType = 'title', maxRetries = 2, _outcome = null }) {
+export async function freeTranslateWithRetry({ text, sourceLang, targetLang, fieldType = 'title', maxRetries = 2, _outcome = null, deadlineMs = null }) {
   if (_outcome) _outcome.attempt = 1;
-  const result = await freeTranslate({ text, sourceLang, targetLang, fieldType, _outcome });
+  const result = await freeTranslate({ text, sourceLang, targetLang, fieldType, _outcome, deadlineMs });
   if (result) return result;
 
   for (let i = 1; i <= maxRetries; i++) {
+    if (deadlineMs !== null && Date.now() + i * 1000 >= deadlineMs) break;
     await delay(i * 1000);
     if (_outcome) _outcome.attempt = i + 1;
-    const retry = await freeTranslate({ text, sourceLang, targetLang, fieldType, _outcome });
+    const retry = await freeTranslate({ text, sourceLang, targetLang, fieldType, _outcome, deadlineMs });
     if (retry) return retry;
   }
 

@@ -414,7 +414,7 @@ test('④ la recovery Codex non riapre una chiamata senza deadline quando il res
   );
   assert.match(
     CODE,
-    /function legacyTranslationOptions\(\) \{[\s\S]*?const processDeadlineMs = _pendingBodyCodexDeadlineMs;[\s\S]*?\.\.\.\(processDeadlineMs === null \? \{\} : \{ deadlineMs: processDeadlineMs \}\)/,
+    /function legacyTranslationOptions\(\) \{[\s\S]*?const processDeadlineMs = pendingBodyRecoveryStarted\s*\? _pendingBodyCodexDeadlineMs\s*:\s*initialTranslationDeadlineMs\(_pendingBodyCodexDeadlineMs\);[\s\S]*?\.\.\.\(processDeadlineMs === null \? \{\} : \{ deadlineMs: processDeadlineMs \}\)/,
     'un producer importato non deve ereditare il wall-clock della CLI',
   );
 });

@@ -376,6 +376,7 @@ import {
   translateWithCodexEngine,
   withCodexTranslationLane,
   codexCallDeadlineMs,
+  initialTranslationDeadlineMs,
   CODEX_TRANSLATE_TRANSPORT_RETRIES,
   getCascadeStats,
 } from './lib/free-translate.mjs';
@@ -7399,24 +7400,24 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
       await new Promise(r => setTimeout(r, backoffMs));
     }
     fcLastRejectMsgs = [];
-    // Each attempt starts from zero votes: a lone opinion kept from the
-    // previous one could be counted again next to a fresh copy of itself.
-    modelResults.length = 0;
+    // The prompt and article are unchanged across infrastructure retries.
+    // Keep a validated vote and exclude its actual serving model when asking
+    // for the missing opinion. addIndependentVote also checks the response.
+    const priorVoters = modelResults.map((result) => result.servedBy);
     missingSecondOpinion = false;
 
-    // Query up to 2 models in parallel for consensus
     const modelsToQuery = verificationModels.slice(0, 2);
-    const promises = modelsToQuery.map((model, index) => _runSingleFactCheck(model, prompt, {
+    const promises = modelsToQuery.slice(0, priorVoters.length ? 1 : 2).map((model, index) => _runSingleFactCheck(model, prompt, {
       fresh: fcAttempt > 1,
       invalidVerdictModels,
       isEvergreen: isEvergreenArticle,
       editorialContext,
-      // The first verifier owns the Codex primary slot. Keep the parallel
-      // second opinion independent without changing its existing fallback
-      // family/order.
-      ...(index > 0 && modelsToQuery[0] === AI_MODELS.CODEX_CLI_PRIMARY
-        ? { excludeModels: [AI_MODELS.CODEX_CLI_PRIMARY] }
-        : {}),
+      excludeModels: [
+        ...priorVoters,
+        ...(index > 0 && modelsToQuery[0] === AI_MODELS.CODEX_CLI_PRIMARY
+          ? [AI_MODELS.CODEX_CLI_PRIMARY]
+          : []),
+      ],
     }));
     const settled = await Promise.allSettled(promises);
 
@@ -7446,7 +7447,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     }
 
     // Recover absent and duplicate votes through a different answering model.
-    if (droppedDuplicate || (modelResults.length === 1 && modelResults[0].servedBy !== AI_MODELS.CODEX_CLI_PRIMARY)) {
+    if (modelResults.length === 1 && (droppedDuplicate || modelResults[0].servedBy !== AI_MODELS.CODEX_CLI_PRIMARY)) {
       const voted = modelResults.map((r) => r.servedBy);
       const next = verificationModels.slice(2).find((m) => !voted.includes(m))
         || verificationModels.find((m) => !voted.includes(m))
@@ -15321,7 +15322,10 @@ function freeMtField(
     fieldType,
     fieldName: field,
     preserveMunicipalityNames,
-    translate: freeTranslateWithRetry,
+    translate: (request) => freeTranslateWithRetry({
+      ...request,
+      deadlineMs: initialTranslationDeadlineMs(),
+    }),
     balanceMarkdown: balanceMarkdownMarkers,
     onWarn: (msg) => console.error(`  ⚠️  ${msg} — recupero per-campo`),
     onUnusableOutput: (event) => recordFreeMtUnusableOutput(RUN_REPORT.translation, { ...event, field }),
@@ -15819,11 +15823,14 @@ async function translateArticle(data) {
   resetBodyTranslationPending(data);
   const cascadeStatsBeforeTranslation = getCascadeStats();
   let translationRecoveryCodexCalls = 0;
+  let pendingBodyRecoveryStarted = false;
 
   function legacyTranslationOptions() {
     // I producer importati non dichiarano una scadenza di processo: non
     // inventare il wall-clock della CLI, che esiste solo dopo l'installer.
-    const processDeadlineMs = _pendingBodyCodexDeadlineMs;
+    const processDeadlineMs = pendingBodyRecoveryStarted
+      ? _pendingBodyCodexDeadlineMs
+      : initialTranslationDeadlineMs(_pendingBodyCodexDeadlineMs);
     return {
       chain: legacyTranslationChain(),
       bypassForceChain: true,
@@ -18311,6 +18318,7 @@ ${localizedToponymInstruction(targetLang)}`;
   const initialPendingBodyLane = pendingBodySecondLaneAvailable()
     ? AI_MODELS.CODEX_CLI_PRIMARY
     : 'historical-translation-chain';
+  pendingBodyRecoveryStarted = true;
   await retryPendingBodyTranslations(data, {
     report: RUN_REPORT.translation,
     lane: initialPendingBodyLane,
