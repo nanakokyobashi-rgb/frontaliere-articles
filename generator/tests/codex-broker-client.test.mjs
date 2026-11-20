@@ -154,6 +154,7 @@ test('un timeout Codex apre il circuito per run e passa al fallback OpenRouter',
   behavior = (client) => {
     client.end(`${JSON.stringify({ ok: false, error: 'Codex CLI timed out after 15000ms' })}\n`);
   };
+  process.env.CODEX_CLI_TIMEOUT_MS = '90000';
   const realFetch = globalThis.fetch;
   process.env.OPENROUTER_API_KEY = 'openrouter-test-key';
   globalThis.fetch = async () => new Response(JSON.stringify({
@@ -166,8 +167,10 @@ test('un timeout Codex apre il circuito per run e passa al fallback OpenRouter',
       prefer: [CODEX],
       bypassForceChain: true,
       maxRetriesPerModel: 1,
+      deadlineMs: Date.now() + 90_000,
     });
     assert.equal(result, 'FALLBACK');
+    assert.ok(requests[0].timeoutMs <= 60_001, 'almeno un terzo del tempo è riservato al ripiego');
     assert.equal(isModelAvailable(CODEX), false);
     assert.match(logged(), /primary lane disabled for the rest of this run \(timeout\)/);
   } finally {
