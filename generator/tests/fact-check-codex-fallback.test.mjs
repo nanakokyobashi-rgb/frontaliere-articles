@@ -15,10 +15,11 @@ import net from 'node:net';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { runInNewContext } from 'node:vm';
 import { afterEach, beforeEach, describe, test } from 'node:test';
 
 import { AI_MODELS, callLLM, resetState } from '../scripts/lib/ai-models.mjs';
-import { extractFactCheckJson } from '../scripts/lib/fact-check-response.mjs';
+import { addIndependentVote, extractFactCheckJson } from '../scripts/lib/fact-check-response.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SRC = fs.readFileSync(path.join(HERE, '..', 'scripts', 'create-article.mjs'), 'utf8');
@@ -172,4 +173,44 @@ describe('llmFactCheck wiring', () => {
     assert.match(SRC, /if \(modelUsedRef\.model === AI_MODELS\.CODEX_CLI_PRIMARY\) _codexWroteThisHeadline = true;/);
     assert.match(SRC, /_localFallbackUsedThisHeadline = false;\n\s+_codexWroteThisHeadline = false;/);
   });
+});
+
+
+test('an infrastructure retry keeps a validated vote and seeks a different serving model', async () => {
+  const start = SRC.indexOf('  const modelResults = [];', SRC.indexOf('const verificationCandidates = ['));
+  const end = SRC.indexOf('  // ── Codex Luna Max safety fallback', start);
+  assert.ok(start >= 0 && end > start);
+  const votes = [
+    { verdict: 'PASS', confidence: 0.9, issues: [], servedBy: 'first-serving-model' },
+    null,
+    null,
+    { verdict: 'FAIL', confidence: 0.9, issues: [], servedBy: 'second-serving-model' },
+  ];
+  const calls = [];
+  const result = await runInNewContext(`(async () => {
+    ${SRC.slice(start, end)}
+    return modelResults;
+  })()`, {
+    AI_MODELS,
+    addIndependentVote,
+    console: { error() {} },
+    editorialContext: {},
+    isEvergreenArticle: false,
+    prompt: 'same article',
+    safeSignalDiagnosticTextForLog: String,
+    setTimeout: (callback) => callback(),
+    verificationModels: [CODEX, AI_MODELS.GROQ_GPT_OSS_120B],
+    async _runSingleFactCheck(model, prompt, options) {
+      calls.push({ model, prompt, options });
+      return votes.shift() ?? null;
+    },
+  });
+  assert.deepEqual(Array.from(result, ({ verdict, servedBy }) => [verdict, servedBy]), [
+    ['PASS', 'first-serving-model'],
+    ['FAIL', 'second-serving-model'],
+  ]);
+  assert.equal(calls.length, 4);
+  assert.equal(calls[3].prompt, 'same article');
+  assert.equal(calls[3].options.fresh, true);
+  assert.ok(calls[3].options.excludeModels.includes('first-serving-model'));
 });
