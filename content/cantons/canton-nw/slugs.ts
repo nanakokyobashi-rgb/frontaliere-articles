@@ -12,6 +12,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'hergiswil-bergstrasse-gru': { it: 'hergiswil-bergstrasse-gru', en: 'hergiswil-bergstrasse-crane', de: 'hergiswil-bergstrasse-kran', fr: 'hergiswil-bergstrasse-grue' },
  'chiusura-imbocco-dorfstrasse': { it: 'chiusura-imbocco-dorfstrasse', en: 'dorfstrasse-junction-closure', de: 'sperrung-dorfstrasse-einmuendung', fr: 'fermeture-acces-dorfstrasse' },
  'tassa-circolazione-veicoli-categoria-a': { it: 'tassa-circolazione-veicoli-categoria-a', en: 'vehicle-category-a-circulation-tax', de: 'verkehrssteuer-kategorie-a-fahrzeuge', fr: 'taxe-circulation-vehicules-categorie-a' },
+ 'stansstad-finanze-servizi-sociali': { it: 'stansstad-finanze-servizi-sociali', en: 'stansstad-finance-social-office', de: 'stansstad-finanzverwaltung-sozialamt', fr: 'stansstad-finances-affaires-sociales' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -30,6 +30,9 @@ const blogMetaCantonNwDe: Record<string, string> = {
     'blog.article.tassa-circolazione-veicoli-categoria-a.title': 'Nidwalden: Kat.-A-Fahrzeuge 36 Monate ohne Verkehrssteuer',
     'blog.article.tassa-circolazione-veicoli-categoria-a.excerpt': 'Im Kanton Nidwalden sind Fahrzeuge der Effizienzkategorie A heute während der ersten 36 Monate ab ihrer ersten Inverkehrsetzung von der Verkehrssteuer befreit.',
     'blog.article.tassa-circolazione-veicoli-categoria-a.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.stansstad-finanze-servizi-sociali.title': 'Stansstad sucht Mitarbeiter/in für Finanzen und Sozialdienste',
+    'blog.article.stansstad-finanze-servizi-sociali.excerpt': 'Die Gemeinde Stansstad sucht eine Person mit einem Pensum von 80-100% für Buchhaltung, Sozialhilfe, Alimentenvorschüsse und Kinderbetreuung.',
+    'blog.article.stansstad-finanze-servizi-sociali.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonNwDe;
