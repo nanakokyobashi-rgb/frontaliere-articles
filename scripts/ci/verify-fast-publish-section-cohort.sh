@@ -52,13 +52,20 @@ if [ "$mode" = 'event' ] && ! [[ "$child_run_id" =~ ^[0-9]+$ ]]; then
 fi
 compatible_sources='[]'
 if [ "$mode" = 'schedule' ] || [[ "$child_cohort" =~ ^stale-late-[0-9]+-[^/]+-n1$ ]]; then
-  # The workflow checks out main shallowly. Fetch the pinned revision with a
-  # bounded history so compatible older proofs can be recovered without guessing.
-  if git fetch --quiet --no-tags --depth=64 --no-write-fetch-head origin "$expected_source"; then
-    if revisions="$(bash scripts/ci/section-source-unaffected.sh --bookkeeping-revisions "$expected_source")"; then
-      compatible_sources="$(jq -Rsc 'split("\n") | map(select(length > 0))' <<< "$revisions")"
+  # A shallow root looks like a substantive change to git log. Deepen only
+  # while that boundary hides the last change to publication inputs.
+  depth=64
+  shallow_file="$(git rev-parse --git-path shallow)"
+  while timeout 60 git fetch --quiet --no-tags --depth="$depth" --no-write-fetch-head origin "$expected_source"; do
+    revisions="$(bash scripts/ci/section-source-unaffected.sh --bookkeeping-revisions "$expected_source")" || break
+    base="${revisions##*$'\n'}"
+    if [ -f "$shallow_file" ] && grep -Fxq -- "$base" "$shallow_file"; then
+      depth=$((depth * 2))
+      continue
     fi
-  fi
+    compatible_sources="$(jq -Rsc 'split("\n") | map(select(length > 0))' <<< "$revisions")"
+    break
+  done
 fi
 cohort_source="$expected_source"
 if [ "$mode" = 'event' ]; then

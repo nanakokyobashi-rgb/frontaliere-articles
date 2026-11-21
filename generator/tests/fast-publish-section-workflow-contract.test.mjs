@@ -705,7 +705,6 @@ test('il verificatore riusa solo prove stale-late di revisioni equivalenti', () 
     writeFileSync(path.join(fixture, 'scripts/ci/section-source-unaffected.sh'), readFileSync(freshness));
     const git = (...args) => execFileSync('git', args, { cwd: fixture, encoding: 'utf8' }).trim();
     git('init', '-q');
-    git('remote', 'add', 'origin', `file://${fixture}`);
     const commit = (file, content) => {
       writeFileSync(path.join(fixture, file), content);
       git('add', file);
@@ -714,8 +713,14 @@ test('il verificatore riusa solo prove stale-late di revisioni equivalenti', () 
     };
     const source = commit('article.txt', 'Original article\n');
     const bookkeeping = commit('data/discovery-attempt-state.json', '{}\n');
+    for (let index = 0; index < 70; index += 1) {
+      commit('data/discovery-attempt-state.json', `${JSON.stringify({ index })}\n`);
+    }
     const current = commit('data/blog-cover-cdn-sync-queue.json', '[]\n');
     const changed = commit('article.txt', 'Changed article\n');
+    const origin = path.join(root, 'origin.git');
+    git('clone', '--quiet', '--bare', fixture, origin);
+    git('remote', 'add', 'origin', `file://${origin}`);
     const cohort = 'stale-late-42-canton-ur-n1';
     const nonce = 'stale-late-fixture';
     const fakeGh = path.join(root, 'gh');
