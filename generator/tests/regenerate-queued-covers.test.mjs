@@ -1735,10 +1735,15 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(articlePublisher, /actual_shard="\$\(node scripts\/ci\/fast-publish-section\.mjs shard-of "\$SECTION"\)"/u);
   assert.match(articlePublisher, /actual_shard" != "\$EXPECTED_SHARD"/u);
   assert.match(articlePublisher, /shard="\$FAST_PUBLISH_SHARD"/u);
-  assert.equal(
-    articlePublisher.match(/ref: \$\{\{ github\.event_name == 'workflow_dispatch' && github\.ref \|\| github\.sha \}\}/gu)?.length,
-    2,
-    'i due checkout del publisher articolo devono seguire il ref live nei dispatch espliciti',
+  assert.match(
+    articlePublisher,
+    /^          ref: \$\{\{ steps\.source_pin\.outputs\.source_commit \|\| \(github\.event_name == 'workflow_dispatch' && github\.ref \|\| github\.sha\) \}\}$/mu,
+    'il checkout resolve deve preferire il commit validato e mantenere il fallback live',
+  );
+  assert.match(
+    articlePublisher,
+    /^          ref: \$\{\{ needs\.resolve\.outputs\.source_commit \|\| \(github\.event_name == 'workflow_dispatch' && github\.ref \|\| github\.sha\) \}\}$/mu,
+    'il checkout publish deve preferire il commit di resolve e mantenere il fallback live',
   );
 
   const sectionPublisher = fs.readFileSync(new URL('../../.github/workflows/fast-publish-section.yml', import.meta.url), 'utf8');
