@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-radweg-altdorf-seedorf-lavori.webp",
-      "sha256": "a0217387253236b5495e066db32dc4b21214519c89d53307b33834ae73e23747"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-radweg-altdorf-seedorf-lavori-480w.webp",
-      "sha256": "fcc8888a13b7e1eeff997b0eb512c8c0cdba5187f4ac857be8999246a8326c31"
-    }
-  ]
+  "items": []
 }
