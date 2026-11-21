@@ -48240,7 +48240,7 @@ const RAW_ARTICLES = [
  id: 'festival-ai-lugano-aree',
  category: 'novita',
  date: '2026-11-21T08:36:27.600Z',
- image: '/images/blog/article-film-festival-diritti-umani-lugano-2026.webp',
+ image: '/images/blog/article-festival-ai-lugano-aree.webp',
  hasCalculator: false,
  articleType: 'news',
  canton: ['TI'],

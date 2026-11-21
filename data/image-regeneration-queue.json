@@ -5,41 +5,21 @@
       "articleId": "arianna-di-claudio-roma",
       "title": "Arianna di claudio alla festa del cinema di roma",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Synthetic train-station illustration with a recognizable foreground commuter; no visible text, logo, or face. It does not clearly matc",
+      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (image vision fallback deadline exceeded)",
       "status": "failed",
-      "failureCount": 61,
+      "failureCount": 62,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-11-20T22:26:32.247Z"
+      "lastFailureAt": "2026-11-21T12:07:26.595Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
-      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (Codex broker rejected the request: Codex CLI timed out after 119795ms)",
+      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (image vision fallback deadline exceeded)",
       "status": "failed",
-      "failureCount": 56,
+      "failureCount": 57,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-11-20T22:28:32.661Z"
-    },
-    {
-      "articleId": "gruyere-studio-mobilita-profondo",
-      "title": "Studio mobilità Gruyère: 25 comuni invitati a analisi approfondita",
-      "fallbackImage": "/images/blog/article-aadorf-spese-sociali-2027.webp",
-      "reason": "All image providers failed for article-gruyere-studio-mobilita-profondo: openai-codex (Codex broker rejected the request: Codex CLI timed out after 119793ms)",
-      "status": "failed",
-      "failureCount": 2,
-      "requestedAt": "2026-11-20T10:27:53.659Z",
-      "lastFailureAt": "2026-11-20T22:30:33.103Z"
-    },
-    {
-      "articleId": "festival-ai-lugano-aree",
-      "title": "Festival AI a Lugano: 13 aree e oltre 60 relatori",
-      "fallbackImage": "/images/blog/article-film-festival-diritti-umani-lugano-2026.webp",
-      "reason": "All image providers failed for article-festival-ai-lugano-aree: openai-codex (image vision fallback deadline exceeded)",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-11-21T08:36:31.011Z",
-      "lastFailureAt": "2026-11-21T08:36:31.011Z"
+      "lastFailureAt": "2026-11-21T12:09:27.292Z"
     }
   ]
 }

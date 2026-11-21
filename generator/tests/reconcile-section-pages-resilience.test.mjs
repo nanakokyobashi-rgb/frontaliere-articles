@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 
 import {
   headState,
@@ -10,6 +11,7 @@ import {
   RECONCILE_FETCH_MAX_RETRY_AFTER_MS,
   landingArticleCoverage,
   countRenderableCantonLandingRows,
+  cdnUrlFor,
 } from '../../scripts/reconcile-section-pages.mjs';
 import {
   parseCantonLandingCardLimitExport,
@@ -152,19 +154,23 @@ function fakeFetch({
   cantonArticles = [],
   cantonSlugs = {},
   landingHtml = '<script type="application/ld+json">{"numberOfItems":0}</script>',
+  candidateCommit = 'abc1234',
+  servedCommit = candidateCommit,
+  pageStatuses = {},
 } = {}) {
   const docs = {
-    'manifest.json': { commit: 'abc1234' },
-    'sections.json': { commit: 'abc1234', sections: [CATALOG] },
-    'slugs.json': { commit: 'abc1234', cantons: { 'canton-ti': cantonSlugs } },
+    'manifest.json': { commit: candidateCommit },
+    'sections.json': { commit: candidateCommit, sections: [CATALOG] },
+    'slugs.json': { commit: candidateCommit, cantons: { 'canton-ti': cantonSlugs } },
     'canton-articles.json': cantonArticles,
   };
-  const edgeRegistry = { schema: 1, commit: 'abc1234', sections: { 'canton-ti': { status: 'live' } } };
+  const edgeRegistry = { schema: 1, sections: { 'canton-ti': { status: 'live' } } };
 
   return async (url) => {
     const clean = url.replace(/\?.*$/, '');
     if (clean.endsWith('/edge/sections/registry.json')) {
-      return { ok: true, status: 200, json: async () => edgeRegistry };
+      const commit = clean.startsWith(`${API_BASE}/`) ? candidateCommit : servedCommit;
+      return { ok: true, status: 200, json: async () => ({ ...edgeRegistry, commit }) };
     }
     if (clean.endsWith(CATALOG.sitemap)) {
       if (sitemapXml !== undefined) {
@@ -173,6 +179,8 @@ function fakeFetch({
       if (sitemap instanceof Error) throw sitemap;
       return { ok: false, status: Number(sitemap), text: async () => '' };
     }
+    const status = pageStatuses[clean];
+    if (status !== undefined) return { ok: status === 200, status };
     if (Object.values(CATALOG.paths).some((sectionPath) => clean.endsWith(`/edge/sections${sectionPath}index.html`))) {
       return { ok: true, status: 200, text: async () => landingHtml };
     }
@@ -308,7 +316,7 @@ test('landingArticleCoverage: un numero dichiarato mancante rende la landing non
   assert.deepEqual(coverage.problems, ['numberOfItems:missing/1']);
 });
 
-test('reconcile: una landing stale dispatcha il refresh della sezione anche con dettagli presenti', async () => {
+test('reconcile: diagnosi e backfill delle landing prima e dopo il flip', async (t) => {
   const rows = [{ id: 'article-one', section: 'canton-ti', date: '2026-10-28T10:00:00Z' }];
   const slugs = { 'article-one': { it: 'article-one', en: 'article-one-en', de: 'article-one-de', fr: 'article-one-fr' } };
   const sitemapXml = [
@@ -317,42 +325,88 @@ test('reconcile: una landing stale dispatcha il refresh della sezione anche con 
     '  <url><loc>https://frontaliereticino.ch/articoli-ticino/article-one/</loc></url>',
     '</urlset>',
   ].join('');
-  const fetchImpl = fakeFetch({
+  const fixture = {
     sitemapXml,
     cantonArticles: rows,
     cantonSlugs: slugs,
     landingHtml: '<script type="application/ld+json">{"numberOfItems":0}</script>',
-  });
-  const report = await reconcile({
-    fetchImpl,
-    retryDelayMs: 0,
-    sleepImpl: async () => {},
-  });
+  };
+  const fetchImpl = fakeFetch(fixture);
+  const probe = (options) => reconcile({ apiBase: API_BASE, retryDelayMs: 0, ...options });
+  const servedCommit = 'def5678';
+  const pendingFetch = fakeFetch({ ...fixture, servedCommit });
+  for (const [name, pendingEdgeFlip, options] of [
+    ['registri allineati con opt-in', false, { fetchImpl, deferExistingLandingsUntilFlip: true }],
+    ['flip pendente senza opt-in', true, { fetchImpl: pendingFetch }],
+  ]) {
+    await t.test(name, async () => {
+      const report = await probe(options);
+      const section = report.sections[0];
+      assert.equal(report.pendingEdgeFlip, pendingEdgeFlip);
+      assert.equal(Object.hasOwn(report, 'landingContentDeferred'), false);
+      assert.equal(section.dispatch, true);
+      assert.deepEqual(section.selected, []);
+      assert.deepEqual(section.sectionMissing, Object.values(CATALOG.paths));
+      assert.deepEqual(section.missingPagePaths, section.sectionMissing);
+      assert.equal(section.landingContent[0].state, 'invalid');
+      assert.deepEqual(section.landingContent[0].missingIds, ['article-one']);
+    });
+  }
 
-  const section = report.sections[0];
-  assert.equal(section.dispatch, true);
-  assert.deepEqual(section.selected, []);
-  assert.deepEqual(section.sectionMissing, [
-    '/articoli-ticino/',
-    '/en/ticino-articles/',
-    '/de/tessin-artikel/',
-    '/fr/articles-tessin/',
-  ]);
-  assert.deepEqual(section.missingPagePaths, section.sectionMissing);
-  assert.equal(section.landingContent[0].state, 'invalid');
-  assert.deepEqual(section.landingContent[0].missingIds, ['article-one']);
-
-  const readiness = await reconcile({ fetchImpl, checkLandingContent: false });
+  const readiness = await probe({
+    fetchImpl: pendingFetch, checkLandingContent: false, deferExistingLandingsUntilFlip: true,
+  });
+  assert.equal(Object.hasOwn(readiness, 'landingContentDeferred'), false);
   assert.deepEqual(readiness.sections[0].expectedMissingPagePaths, []);
 
-  const missingLanding = '/fr/articles-tessin/';
-  const incomplete = await reconcile({
+  const missingLanding = CATALOG.paths.fr;
+  const incomplete = await probe({
     checkLandingContent: false,
-    fetchImpl: (url, options) => url.split('?')[0].endsWith(`/edge/sections${missingLanding}index.html`)
-      ? Promise.resolve({ ok: false, status: 404 })
-      : fetchImpl(url, options),
+    fetchImpl: fakeFetch({ ...fixture, pageStatuses: { [cdnUrlFor(missingLanding)]: 404 } }),
   });
   assert.deepEqual(incomplete.sections[0].expectedMissingPagePaths, [missingLanding]);
+
+  await t.test('flip pendente con opt-in e tutte le pagine presenti', async () => {
+    const report = await probe({ fetchImpl: pendingFetch, deferExistingLandingsUntilFlip: true });
+    assert.equal(report.pendingEdgeFlip, true);
+    assert.equal(report.landingContentDeferred, true);
+    assert.equal(report.sections[0].dispatch, false);
+    assert.deepEqual(report.sections[0].landingContent, []);
+    assert.deepEqual(report.sections[0].expectedMissingPagePaths, []);
+  });
+
+  await t.test('flip pendente con opt-in, 404 e verifiche inconcludenti', async () => {
+    const missingArticle = '/articoli-ticino/article-one/';
+    const unknownLanding = CATALOG.paths.de;
+    const report = await probe({
+      deferExistingLandingsUntilFlip: true,
+      fetchImpl: fakeFetch({
+        ...fixture,
+        servedCommit,
+        pageStatuses: {
+          [cdnUrlFor(missingLanding)]: 404,
+          [cdnUrlFor(missingArticle)]: 404,
+          [cdnUrlFor(unknownLanding)]: 503,
+        },
+      }),
+    });
+    const section = report.sections[0];
+    assert.equal(report.landingContentDeferred, true);
+    assert.equal(section.dispatch, true);
+    assert.deepEqual(section.sectionMissing, [missingLanding]);
+    assert.deepEqual(section.selected, ['article-one']);
+    assert.deepEqual(section.expectedMissingPagePaths.toSorted(), [missingArticle, missingLanding].toSorted());
+    assert.deepEqual(section.unknown, [unknownLanding]);
+    assert.equal(section.pageManifest, 'unknown');
+  });
+});
+
+test('il workflow rinvia la verifica del contenuto in detection e nella prova post-backfill', () => {
+  const workflow = readFileSync(new URL('../../.github/workflows/reconcile-section-pages.yml', import.meta.url), 'utf8');
+  const commands = workflow.replace(/\\\n\s*/g, ' ').match(/^\s*node scripts\/reconcile-section-pages\.mjs .*$/gm) ?? [];
+  assert.equal(commands.length, 2);
+  assert.match(commands[0], /--out "\$RUNNER_TEMP\/reconcile-sections\.json".* --defer-existing-landings-until-flip(?:\s|$)/);
+  assert.match(commands[1], /--out "\$verified".* --defer-existing-landings-until-flip(?:\s|$)/);
 });
 
 test('reconcile: una sitemap HTTP non verificabile non fallisce il run e non dispatcha', async () => {

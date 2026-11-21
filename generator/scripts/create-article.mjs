@@ -7401,15 +7401,20 @@ Rispondi SOLO in JSON valido:
 Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
 
   const prompt = `${evidencePrefix}\n\n${verificationInstructions}\n\n${relevanceInstructions}\n\n${proofSuffix}`;
-  const compactPrompt = !isEvergreenArticle && !isSyntheticDataset && /^https?:\/\//i.test(sourceUrl)
+  const canCompact = sourceUrl.startsWith('evergreen://')
+    || (!isEvergreenArticle && !isSyntheticDataset && /^https?:\/\//i.test(sourceUrl));
+  const compactSourceInstructions = isEvergreenArticle
+    ? '- Riferimenti: confronta date, luoghi, persone, citazioni e misure con i fatti verificati. Segnala affermazioni false, contraddette o troppo specifiche senza attribuzione. Un caso presentato come reale che combina luogo o ente, ruolo, azione ed esito (anche una cifra) senza riferimento verificato è critical:fatti_inventati. La stessa gravità vale per interviste e verifiche inventate.'
+    : `- Fonte: controlla date, luoghi, persone, citazioni e misure. Date assenti: sospette. Contesto verificato: minor. Invenzioni e contraddizioni: critical.
+- Casi specifici (luogo/ente, ruolo, azione, esito) senza riscontro nella fonte: critical:fatti_inventati. Esempi: infermiera segnala carenze igieniche a Lugano; medico denuncia pratiche non etiche a Chiasso; infermiere ORL ottiene un risarcimento; medico del Civico di Lugano denuncia frode con indagine FINMA.`;
+  const compactPrompt = canCompact
     ? `${evidencePrefix}
 
 VERIFICA SISTEMATICA — controlla tutte le categorie:
 - Leggi: verifica sigla, numero, anno, attribuzione e fonte. Critical: sigle inventate (${FACT_CHECK_INVENTED_ACRONYMS}), ${FACT_CHECK_INVENTED_LAWS}, vigenza senza legge, falsa tassa sanitaria, accordo non firmato.
 - Istituzioni e persone: verifica enti, competenze, ruoli e citazioni. Critical: enti inventati o incompetenti. NON esistono: ${FACT_CHECK_INVENTED_INSTITUTIONS}. Consiglieri federali attuali: ${FACT_CHECK_FEDERAL_COUNCILLORS}. Abuso critical:istituzioni: ${FACT_CHECK_FINMA_SCOPE}.
 - Dati: confronta aliquote, soglie e date. Decimali: cita studio e istituto. Accetta arrotondamenti attribuiti e valori canonici.
-- Fonte: controlla date, luoghi, persone, citazioni e misure. Date assenti: sospette. Contesto verificato: minor. Invenzioni e contraddizioni: critical.
-- Casi specifici (luogo/ente, ruolo, azione, esito) senza riscontro nella fonte: critical:fatti_inventati. Esempi: infermiera segnala carenze igieniche a Lugano; medico denuncia pratiche non etiche a Chiasso; infermiere ORL ottiene un risarcimento; medico del Civico di Lugano denuncia frode con indagine FINMA.
+${compactSourceInstructions}
 - Svizzera: accordi bilaterali, fuori da UE e SEE.
 
 ${relevanceInstructions}
@@ -12830,7 +12835,7 @@ ${_isMeta ? '' : topicalRelevanceGate}
 ${!_isMeta && sourceContract ? `\n${sourceContract}\n` : ''}
 ═══ REGOLA #1 — FEDELTÀ ALLA FONTE (PRIORITÀ MASSIMA) ═══
 
-${_isMeta ? '' : `Se le prove lo consentono, collega due fatti documentati con un passaggio verificabile, come una differenza fra valori comparabili. Mostra la base del confronto. Se mancano i presupposti, resta ai fatti e ai limiti documentati.\n`}
+${_isMeta ? '' : `Prima di scrivere, cerca un contributo che aggiunga qualcosa al riassunto: un calcolo riproducibile o una relazione fra fatti documentati. Sviluppalo nel corpo, mostrando le prove. Se mancano i presupposti, esplicita i limiti documentati.\n`}
 - Usa solo SOURCE CONTENT e riferimenti verificati; attribuisci le notizie alle fonti e separa fatti, calcoli e deduzioni.
 - Per ogni confronto mostra dati, unità e periodi comparabili; non trasformarlo in previsione.
 - Ometti cause, conseguenze, sviluppi o azioni non documentati. Non inventare reportage, interviste, fonti proprie, testimonianze, verifiche umane o citazioni.
@@ -13083,7 +13088,9 @@ Rigenera "id" e "slugs" seguendo ESATTAMENTE lo schema richiesto sopra (valore r
   const buildMessages = (promptText, remediation, part = 'full') => [
     { role: 'system', content: `${systemStem} ${systemRoleQualifier} che RISCRIVE articoli basandosi FEDELMENTE sulla fonte originale.
 
-REGOLA FONDAMENTALE: Ogni fatto, dato, legge, data, cifra e istituzione nel tuo articolo DEVE provenire dal testo SOURCE CONTENT fornito. Se un'informazione NON è nella fonte, NON includerla. Mai inventare, dedurre o "completare" dati mancanti.
+REGOLA FONDAMENTALE: Ogni fatto, dato, legge, data, cifra e istituzione nel tuo articolo DEVE provenire dal testo SOURCE CONTENT fornito. ${part === 'meta'
+      ? 'Riprendi solo i valori già presenti nel corpo. Non aggiungere calcoli, relazioni o dati.'
+      : 'Puoi spiegare relazioni o calcoli ricavabili dai fatti della fonte, indicando le basi. Ometti ogni altro dato non documentato.'}
 
 DATI ASSENTI NELLA FONTE: omettili; niente placeholder (es. "non specificato") e niente dettagli inventati.
 
