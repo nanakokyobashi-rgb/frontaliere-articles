@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-uri-parere-trasporti-eccezionali.webp",
-      "sha256": "0cb49336cc3cbc57d18280eb5d00ae2c994505909de4ca106db484babb3aeb93"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-uri-parere-trasporti-eccezionali-480w.webp",
-      "sha256": "cdbaec36bb470fabd439ca197d55e55cf5cc22ef8d2c6e80bcad0b1d3398c297"
-    }
-  ]
+  "items": []
 }
