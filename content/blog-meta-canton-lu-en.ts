@@ -90,6 +90,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.cambio-orari-bus-lucerna.title': 'Lucerne: the bus network changes on December 13, 2026',
     'blog.article.cambio-orari-bus-lucerna.excerpt': 'On December 13, the biggest schedule change in a long time arrives: the 4 becomes 5, the 12 becomes 3, and the 19 is integrated into lines 8 and 9.',
     'blog.article.cambio-orari-bus-lucerna.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.spazi-scolastici-wurzenbach.title': 'Würzenbach: new school spaces and a sports hall under consideration',
+    'blog.article.spazi-scolastici-wurzenbach.excerpt': 'Lucerne: insufficient space in Würzenbach and Büttenen; expansions and a triple sports hall under consideration, construction work possible from 2031.',
+    'blog.article.spazi-scolastici-wurzenbach.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;
