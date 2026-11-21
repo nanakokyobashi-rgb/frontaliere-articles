@@ -232,7 +232,7 @@ test('a lone free vote never decides: collapsed verifiers are retried, and witho
   assert.match(region, /if \(compactRetry\)\s*\{\s*activePrompt = compactPrompt;/);
   assert.match(region, /if \(fullEstimate > cap && compactEstimate <= cap\) compactRetry = \{ fullEstimate, compactEstimate, cap \};/);
   assert.match(region, /_runSingleFactCheck\(codex,\s*retryPrompt,\s*\{\s*isEvergreen:\s*isEvergreenArticle,\s*editorialContext,\s*codexOnly: true,\s*deadlineMs: factCheckDeadlineMs\s*\}\)/);
-  assert.match(region, /fcAttempt <= FACTCHECK_INFRA_RETRIES && \(modelResults\.length === 0 \|\| missingSecondOpinion\)/);
+  assert.match(region, /fcAttempt <= maxPrimaryRounds && \(modelResults\.length === 0 \|\| missingSecondOpinion\)/);
   assert.doesNotMatch(region, /modelResults\.length\s*=\s*0;/, 'un parere valido sullo stesso testo sopravvive al retry');
   assert.match(region, /const priorVoters = modelResults\.map\(\(result\) => result\.servedBy\);/);
   assert.match(region, /excludeModels: \[\s*\.\.\.priorVoters,/);
