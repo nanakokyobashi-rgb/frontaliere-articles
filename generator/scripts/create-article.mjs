@@ -16019,7 +16019,7 @@ async function translatePendingBodyWithHistoricalChain(
         }),
         Math.max(5000, Math.ceil(countWords(masked || '') * 5)),
         `${locale}:${field}-pending-retry`,
-        { translation: true, forceLegacy: true },
+        { translation: true, forceLegacy: true, expectedBodyField: field, targetLang: locale },
       );
       const translated = translatedStringOrNull(parsed?.[field], locale);
       if (translated === null) {
@@ -16148,7 +16148,12 @@ async function translateArticle(data) {
     };
   }
 
-  async function callWithRetry(prompt, maxTokens, label, { translation = false, forceLegacy = false } = {}) {
+  async function callWithRetry(
+    prompt,
+    maxTokens,
+    label,
+    { translation = false, forceLegacy = false, expectedBodyField = null, targetLang } = {},
+  ) {
     const safePrompt = `${prompt}\n\n${JSON_QUOTE_SAFETY_RULE_IT}`;
     // Niente try/catch attorno a callLLM qui, a differenza del gemello
     // requestHeadlineSelection (#391) — verificato in review su PR #604
@@ -16198,45 +16203,47 @@ async function translateArticle(data) {
         },
       });
     };
-    const raw = await call(maxTokens);
-    const repaired = repairLlmJson(raw);
-    try {
-      return JSON.parse(repaired);
-    } catch (parseErr) {
-      console.error(`  ⚠️  JSON parse error (${label}): ${safeSignalDiagnosticTextForLog(parseErr.message, RUN_REPORT)}`);
-      console.error(`     ${safeSignalDiagnosticTextForLog(describeJsonParseError(repaired, parseErr), RUN_REPORT)}`);
-      console.error(`     ${safeSignalDiagnosticTextForLog(describeRawForDiagnostics(raw), RUN_REPORT)}`);
-      // Detect truncation (model hit output cap): use 3× tokens on retry
-      const isTruncation = parseErr.message.includes('Unterminated') || parseErr.message.includes('Unexpected end');
-      const retry1Tokens = isTruncation ? Math.max(maxTokens * 3, 12000) : maxTokens + 4000;
-      console.error(`  🔄 Retry ${label} con maxTokens=${retry1Tokens}${isTruncation ? ' (troncamento rilevato)' : ''}...`);
-      const raw2 = await call(retry1Tokens);
+    let tokens = maxTokens;
+    for (let retry = 0; ; retry += 1) {
+      const raw = await call(tokens, retry === 2 ? 0.3 : 0.5);
+      const repaired = repairLlmJson(raw);
+      let result;
       try {
-        const result = JSON.parse(repairLlmJson(raw2));
-        console.error(`  ✅ Retry riuscito per ${label}`);
-        return result;
-      } catch (retryErr) {
-        console.error(`  ⚠️  Retry 1 fallito (${label}): ${safeSignalDiagnosticTextForLog(retryErr.message, RUN_REPORT)} — tentativo 2...`);
-        // Third attempt with maximum tokens
-        const retry2Tokens = 16000;
-        const raw3 = await call(retry2Tokens, 0.3);
-        try {
-          const result3 = JSON.parse(repairLlmJson(raw3));
-          console.error(`  ✅ Retry 2 riuscito per ${label}`);
-          return result3;
-        } catch (retry2Err) {
-          console.error(`  ❌ Retry 2 fallito (${label}): ${safeSignalDiagnosticTextForLog(retry2Err.message, RUN_REPORT)}`);
-          // qualityReject=true: same content-quality class as the IT-generation
-          // JSON-parse-exhausted throw above — malformed translation output,
-          // not infrastructure. This propagates straight out of
-          // generateAndValidateArticle (no local catch around translateArticle),
-          // so an untagged message here crashes the whole run instead of
-          // skipping to the next headline.
-          const err = new Error(`JSON non valido dalla traduzione ${label}: ${safeSignalDiagnosticTextForLog(retry2Err.message, RUN_REPORT)}`);
-          err.qualityReject = true;
-          throw err;
+        result = JSON.parse(repaired);
+      } catch (parseErr) {
+        const message = safeSignalDiagnosticTextForLog(parseErr.message, RUN_REPORT);
+        if (retry === 2) {
+          console.error(`  ❌ Retry 2 fallito (${label}): ${message}`);
+          throw qualityRejectError(`JSON non valido dalla traduzione ${label}: ${message}`);
         }
+        if (retry === 1) {
+          console.error(`  ⚠️  Retry 1 fallito (${label}): ${message} — tentativo 2...`);
+          tokens = 16000;
+          continue;
+        }
+        console.error(`  ⚠️  JSON parse error (${label}): ${message}`);
+        console.error(`     ${safeSignalDiagnosticTextForLog(describeJsonParseError(repaired, parseErr), RUN_REPORT)}`);
+        console.error(`     ${safeSignalDiagnosticTextForLog(describeRawForDiagnostics(raw), RUN_REPORT)}`);
+        // Detect truncation (model hit output cap): use 3× tokens on retry
+        const isTruncation = parseErr.message.includes('Unterminated') || parseErr.message.includes('Unexpected end');
+        tokens = isTruncation ? Math.max(maxTokens * 3, 12000) : maxTokens + 4000;
+        console.error(`  🔄 Retry ${label} con maxTokens=${tokens}${isTruncation ? ' (troncamento rilevato)' : ''}...`);
+        continue;
       }
+      if (expectedBodyField !== null && translatedStringOrNull(result?.[expectedBodyField], targetLang) === null) {
+        const reason = 'unusable-body-field';
+        console.error(`TRANSLATION_BODY_REJECT label=${label} reason=${reason}`);
+        if (retry === 2) {
+          const error = qualityRejectError(`Traduzione rifiutata (${label}): ${reason}`);
+          error.code = reason;
+          throw error;
+        }
+        continue;
+      }
+      if (retry > 0) {
+        console.error(`  ✅ Retry${retry === 2 ? ' 2' : ''} riuscito per ${label}`);
+      }
+      return result;
     }
   }
 
@@ -16275,7 +16282,10 @@ async function translateArticle(data) {
             makeChunkPrompt(chunk, i, chunks.length),
             Math.max(5000, Math.ceil(countWords(chunk) * 5)),
             `${labelPrefix}-p${i + 1}`,
-            { translation: true, ...(forceLegacy ? { forceLegacy: true } : {}) },
+            {
+              translation: true,
+              ...(forceLegacy ? { forceLegacy: true, expectedBodyField: fieldKey, targetLang } : {}),
+            },
           ),
         ),
       )
