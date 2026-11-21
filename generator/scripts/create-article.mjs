@@ -22650,6 +22650,10 @@ async function main() {
               } catch { /* la memoria e' un risparmio, non un gate */ }
             }
             const isQualityReject = isQualityRejectError(e);
+            if (isQualityReject) {
+              const reason = safeSignalDiagnosticTextForLog(e.message, RUN_REPORT);
+              console.error(`  🚫 Motivo del rigetto: ${reason}`);
+            }
             if (isQualityReject && attempt < MAX_DUPLICATE_RETRIES) {
               const tag = isTopicGateAbort ? 'topic-gate (REGOLA #0)' : 'qualità';
               console.error(`\n⚠️  Articolo rigettato per ${tag} — provo un altro headline... (${attempt}/${MAX_DUPLICATE_RETRIES})\n`);
