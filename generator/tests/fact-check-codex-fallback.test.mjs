@@ -520,7 +520,7 @@ describe('fact-check retries under a reported input cap', () => {
     return filler.slice(0, chars);
   }
 
-  test('the independent verifier fits the declared 8000-token cap on the first attempt', async () => {
+  test('either verifier can fall through below the declared 8000-token cap on the first attempt', async () => {
     const section = { section: 'frontaliere', isFrontaliere: true, isCanton: false };
     const padding = await loadFor(9131, section);
     const { calls, prompt, compactPrompt } = await runRounds({
@@ -531,7 +531,21 @@ describe('fact-check retries under a reported input cap', () => {
     });
     assert.ok(estimate(prompt) > 8000);
     assert.ok(estimate(compactPrompt) <= 8000, `compact estimate: ${estimate(compactPrompt)}`);
-    assert.deepEqual(calls.map((call) => call.prompt), [prompt, compactPrompt]);
+    assert.deepEqual(calls.map((call) => call.prompt), [compactPrompt, compactPrompt]);
+  });
+
+  test('the declared cap keeps proof feedback on the compact retry when it fits', async () => {
+    const padding = await loadFor(8318);
+    const { calls, prompt, compactPrompt, modelResults } = await runRounds({
+      padding,
+      declaredInputCap: 8000,
+      replies: [structuredReply(false), structuredReply(false), structuredReply(true), structuredReply(true)],
+    });
+    const annotated = buildFactCheckProofRetryPrompt(compactPrompt, new Set([missingSourceQuote]));
+    assert.ok(estimate(prompt) > 8000);
+    assert.ok(estimate(annotated) <= 8000);
+    assert.deepEqual(calls.map((call) => call.prompt), [compactPrompt, compactPrompt, annotated, annotated]);
+    assert.equal(modelResults.length, 2);
   });
 
   for (const { target, cap, canton, section } of [

@@ -7472,6 +7472,18 @@ ${proofSuffix}`
   let activePrompt = prompt;
   let compactRetry = null;
   let observedInputCap = 0;
+  if (compactPrompt) {
+    const independentVerifier = verificationModels.find((model) => model !== AI_MODELS.CODEX_CLI_PRIMARY);
+    const limit = independentVerifier && getDeclaredRequestTokenLimit(independentVerifier);
+    const fullEstimate = estimateRequestTokens([{ role: 'user', content: prompt }]);
+    const compactEstimate = estimateRequestTokens([{ role: 'user', content: compactPrompt }]);
+    if (limit && fullEstimate > limit && compactEstimate <= limit) {
+      // Either primary request can fall through to the independent cascade.
+      // Use one base prompt so the normal proof-retry path can annotate it.
+      compactRetry = { fullEstimate, compactEstimate, cap: limit };
+      observedInputCap = limit;
+    }
+  }
   for (let fcAttempt = 1; fcAttempt <= maxPrimaryRounds && (modelResults.length === 0 || missingSecondOpinion); fcAttempt++) {
     if (fcAttempt > 1) {
       const why = missingSecondOpinion ? 'un solo parere indipendente' : 'nessun verdetto';
@@ -7537,19 +7549,7 @@ ${proofSuffix}`
       const excludeCodex = priorVoters.length
         ? model !== AI_MODELS.CODEX_CLI_PRIMARY && !priorVoters.includes(AI_MODELS.CODEX_CLI_PRIMARY)
         : index > 0 && modelsToQuery[0] === AI_MODELS.CODEX_CLI_PRIMARY;
-      let requestPrompt = verificationPrompt;
-      if (compactPrompt && verificationPrompt !== compactPrompt && model !== AI_MODELS.CODEX_CLI_PRIMARY) {
-        const limit = getDeclaredRequestTokenLimit(model);
-        if (limit !== undefined) {
-          const requestTokens = estimateRequestTokens([{ role: 'user', content: verificationPrompt }]);
-          const compactTokens = estimateRequestTokens([{ role: 'user', content: compactPrompt }]);
-          if (requestTokens > limit && compactTokens <= limit) {
-            requestPrompt = compactPrompt;
-            console.error(`  🔁 Fact-check (${model}): input compatto ${requestTokens} → ${compactTokens} token (tetto ${limit})`);
-          }
-        }
-      }
-      return _runSingleFactCheck(model, requestPrompt, {
+      return _runSingleFactCheck(model, verificationPrompt, {
         fresh: fcAttempt > 1,
         deadlineMs,
         invalidVerdictModels,
