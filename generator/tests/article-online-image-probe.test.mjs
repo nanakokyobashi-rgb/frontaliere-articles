@@ -78,6 +78,21 @@ test('un 200 che non è la pagina richiesta non prova nulla: shell del 404, altr
   assert.equal(classifyOnlinePage({ status: 200, html: articlePage(''), url: URL_IT }).state, ONLINE_IMAGE.UNKNOWN);
 });
 
+test('il probe considera solo tag e attributi reali, non pseudo-metadata dentro un attributo quotato', () => {
+  const fake = `<div data-note='<meta property="og:url" content="${URL_IT}"><link rel="canonical" href="${URL_IT}">'>${GENERIC}</div>`;
+  assert.equal(
+    classifyOnlinePage({ status: 200, html: fake, url: URL_IT }).state,
+    ONLINE_IMAGE.UNKNOWN,
+  );
+
+  const real = `<div data-note='</meta><link rel="canonical" href="/altra-route/">'>`
+    + `<meta CONTENT="${URL_IT}" PROPERTY="OG:URL">${GENERIC}</div>`;
+  assert.equal(
+    classifyOnlinePage({ status: 200, html: real, url: URL_IT }).state,
+    ONLINE_IMAGE.GENERIC,
+  );
+});
+
 test('assente vale solo se letto due volte, con una chiave anti-cache diversa a ogni richiesta', async () => {
   const { fetchImpl, calls } = scriptedFetch([response(404), response(404)]);
   const result = await probeOnlineImage(URL_IT, { fetchImpl, sleep: noSleep });

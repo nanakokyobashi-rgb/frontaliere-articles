@@ -2330,6 +2330,20 @@ test('publisher: una pagina con noindex, senza meta di proprieta\', con asset sa
   assert.deepEqual(pageDefects(article, articleNoindex), [], 'un articolo ritirato puo\' restare noindex,follow');
 });
 
+test('publisher: pageDefects ignora pseudo-metadata dentro attributi quotati con >', () => {
+  const page = pageEntry('canton-ti', 'articoli-ticino/carburanti/index.html', 'hub');
+  const html =
+    '<!doctype html><html><head><meta charset="utf-8">' +
+    CORPUS_ROUTE_OWNER_META_TAG +
+    '<meta name="robots" content="index, follow">' +
+    '<link rel="canonical" href="' + page.apexUrl + '">' +
+    '</head><body><div data-note=\'<meta name="robots" content="noindex">' +
+    '<link rel="canonical" href="https://frontaliereticino.ch/altra-route/">' +
+    '<meta name="ft-route-owner" content="corpus"> href="/assets/falso.js"\'>'
+    + '<main>' + 'contenuto '.repeat(40) + '</main></body></html>';
+  assert.deepEqual(pageDefects(page, html), []);
+});
+
 test('publisher: le landing live annunciano il feed edge della propria locale', () => {
   const page = pageEntry('canton-ti', 'articoli-ticino/index.html', 'landing');
   const feedUrl = cantonRssFeedUrlForLocale('canton-ti', 'it');
@@ -2344,6 +2358,13 @@ test('publisher: le landing live annunciano il feed edge della propria locale', 
   assert.match(pageDefects(page, html, { requiredRssUrl: feedUrl }).join('|'), /link RSS/);
   assert.match(cantonRssFeedUrlForLocale('canton-ti', 'en'), /rss-canton-ti-en\.xml$/);
   assert.throws(() => addCantonRssFeedLink(html, 'https://example.test/feed.xml'), /fuori dalla superficie edge/);
+  const fakeLinks = html.replace(
+    '</body>',
+    '<div data-note=\'<link data-canton-rss-feed rel="alternate" type="application/rss+xml" href="' +
+      feedUrl + '"><a data-canton-rss-feed rel="alternate" type="application/rss+xml" href="' +
+      feedUrl + '">RSS</a>\'>fake</div></body>',
+  );
+  assert.match(pageDefects(page, fakeLinks, { requiredRssUrl: feedUrl }).join('|'), /link RSS/);
 });
 
 test('publisher: la verifica CDN/apex richiede anche i link RSS della landing', async () => {
