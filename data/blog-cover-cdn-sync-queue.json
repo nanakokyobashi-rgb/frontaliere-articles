@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-hospitale-jura-bwk-esercitazione.webp",
+      "sha256": "4e0cdb1cd77076169c7b60612c3a49110732bb689cedf07bea5ea777165d19ce"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-hospitale-jura-bwk-esercitazione-480w.webp",
+      "sha256": "db8dc0846719c3e0406ec96dd7bc99be40fa7408dbdaf31fdcd8b0ada2990b55"
+    }
+  ]
 }
