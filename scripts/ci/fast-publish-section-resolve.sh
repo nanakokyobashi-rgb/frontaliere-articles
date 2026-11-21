@@ -135,7 +135,10 @@ if [ -n "$pinned_source" ]; then
     echo "::error::revisione corrente di main non valida prima del piano"
     exit 1
   fi
-  if [ "$current_main" != "$pinned_source" ]; then
+  # Use the same publication-input check as the publish job. Cover queue
+  # bookkeeping and generator-only commits must not force a new edge plan.
+  if [ "$current_main" != "$pinned_source" ] \
+    && ! bash scripts/ci/section-source-unaffected.sh "$pinned_source" "$current_main"; then
     echo "::notice::replay stantio saltato nel resolve: main e' avanzata da $pinned_source a $current_main"
     # A stale resolve is replanned in this run below. It must not redispatch a
     # child and then return matrix=[], because the coordinator waits for the
