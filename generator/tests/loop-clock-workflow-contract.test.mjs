@@ -1,13 +1,20 @@
 import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
+import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const RECONCILIATION_WORKFLOWS = [
+  { relative: '.github/workflows/reconcile-section-pages.yml', entryId: 'corpus-section-page-reconcile' },
+  { relative: '.github/workflows/reconcile-article-shards.yml', entryId: 'corpus-article-shard-reconcile' },
+];
 const WORKFLOWS = [
   '.github/workflows/issue-triage.yml',
   '.github/workflows/close-recovered-failure-issues.yml',
+  ...RECONCILIATION_WORKFLOWS.map(({ relative }) => relative),
 ];
 
 function workflowDispatchBlock(source) {
@@ -117,3 +124,63 @@ test('il controllo del marcatore riconosce un workflow che non lo porta', () => 
     `input ${LOOP_CLOCK_INPUT} non di tipo string`,
   ]);
 });
+
+for (const { relative, entryId } of RECONCILIATION_WORKFLOWS) {
+  const otherWorkflow = RECONCILIATION_WORKFLOWS.find((workflow) => workflow.entryId !== entryId);
+
+  test(`${path.basename(relative)}: seleziona il ref prima del checkout`, (t) => {
+    const workflow = fs.readFileSync(path.join(ROOT, relative), 'utf8');
+    const resolve = workflow.match(/^      - name: Resolve checkout ref\n(?:(?!^      - ).*\n)*/m)?.[0] ?? '';
+    assert.match(resolve, /^        id: checkout_ref$/m);
+    assert.match(resolve, /^        shell: bash$/m);
+    const env = resolve.match(/^        env:\n(?:^ {10}.*\n)*/m)?.[0];
+    assert.equal(env, [
+      '        env:',
+      '          EVENT_NAME: ${{ github.event_name }}',
+      '          EVENT_REF: ${{ github.ref }}',
+      '          EVENT_SHA: ${{ github.sha }}',
+      '          LOOP_CLOCK: ${{ inputs.loop_clock }}',
+      '',
+    ].join('\n'));
+    assert.ok(workflow.includes(resolve + '      - name: Checkout\n'));
+    const script = resolve.split('        run: |\n')[1]?.replace(/^ {10}/gm, '');
+    assert.ok(script);
+    assert.doesNotMatch(script, /\$\{\{/);
+
+    const dir = fs.mkdtempSync(path.join(tmpdir(), 'loop-clock-checkout-ref-'));
+    t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
+    const output = path.join(dir, 'output');
+    const sha = 'a'.repeat(40);
+    const mainRef = 'refs/heads/main';
+    const slot = '2026-11-21T08:09Z';
+    const marker = `${entryId}@${slot}`;
+    const otherMarker = `${otherWorkflow.entryId}@${slot}`;
+    const cases = [
+      ['schedule', 'refs/heads/other', '', mainRef],
+      ['workflow_run', 'refs/heads/other', '', mainRef],
+      ['workflow_dispatch', mainRef, '', sha],
+      ['workflow_dispatch', mainRef, marker, mainRef],
+      ['workflow_dispatch', 'refs/heads/other', marker, sha],
+      ['workflow_dispatch', 'refs/heads/MAIN', marker, sha],
+      ['workflow_dispatch', mainRef, otherMarker, sha],
+      ['workflow_dispatch', mainRef, `corpus-shard-reconcile@${slot}`, sha],
+      ['workflow_dispatch', mainRef, marker + ' ', sha],
+      ['workflow_dispatch', mainRef, marker + '\n', sha],
+      ['workflow_dispatch', mainRef, marker.replace('08:09', '8:09'), sha],
+      ['workflow_dispatch', mainRef, marker.replace('T08', 't08'), sha],
+    ];
+    for (const [event, ref, clock, expected] of cases) {
+      fs.writeFileSync(output, '');
+      execFileSync('bash', ['-e', '-c', script], {
+        env: {
+          EVENT_NAME: event,
+          EVENT_REF: ref,
+          EVENT_SHA: sha,
+          LOOP_CLOCK: clock,
+          GITHUB_OUTPUT: output,
+        },
+      });
+      assert.equal(fs.readFileSync(output, 'utf8'), `ref=${expected}\n`, JSON.stringify([event, ref, clock]));
+    }
+  });
+}
