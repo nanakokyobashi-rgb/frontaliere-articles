@@ -291,7 +291,7 @@ describe('fact-check retries under a reported input cap', () => {
   async function runRounds({
     canton = 'San Gallo', section = 'san-gallo', isCanton = true, isFrontaliere = false,
     sourceUrl = 'HTTPS://example.test/news', sourceText = source, padding = '', replies,
-    initialTime = 160_000,
+    initialTime = 160_000, consumeWindow = false,
   }) {
     const calls = [];
     const logs = [];
@@ -333,6 +333,7 @@ describe('fact-check retries under a reported input cap', () => {
         assert.ok(calls.length < replies.length, 'chiamata di verifica inattesa');
         const reply = replies[calls.length];
         calls.push({ model, prompt, options });
+        if (consumeWindow) now = Math.max(now, options.deadlineMs);
         if (reply instanceof Error) throw reply;
         return reply;
       },
@@ -350,6 +351,17 @@ describe('fact-check retries under a reported input cap', () => {
     assert.ok(calls.length >= 2);
     assert.ok(calls.every(({ options }) => options.deadlineMs === 233_500));
     assert.ok(!logs.some((message) => message.includes('tentativo 2')));
+  });
+
+  test("a late 429 leaves time for the final verifier", async () => {
+    const rateLimit = new Error("HTTP 429");
+    const { calls } = await runRounds({
+      initialTime: 180_000,
+      consumeWindow: true,
+      replies: [rateLimit, rateLimit, rateLimit],
+    });
+    assert.ok(calls.length >= 2);
+    assert.ok(calls.every(({ options }) => options.deadlineMs === 195_000));
   });
 
   async function loadFor(target, locale = {}) {

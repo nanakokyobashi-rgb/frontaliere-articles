@@ -7433,6 +7433,15 @@ ${proofSuffix}`
   // ALL models have exhausted their per-model retries.
   const FACTCHECK_429_BACKOFF_CAP_MS = 30_000;
   const FACTCHECK_MIN_ROUND_MS = 15_000;
+  const initialFactCheckMs = factCheckDeadlineMs - Date.now();
+  // When two useful windows fit, keep one for the final verifier. Otherwise
+  // make one primary attempt and leave any unused time to the final verifier.
+  const finalReserveMs = initialFactCheckMs >= 2 * FACTCHECK_MIN_ROUND_MS ? FACTCHECK_MIN_ROUND_MS : 0;
+  const retryDeadlineMs = factCheckDeadlineMs - finalReserveMs;
+  const maxPrimaryRounds = Math.min(
+    FACTCHECK_INFRA_RETRIES,
+    Math.max(1, Math.floor((initialFactCheckMs - finalReserveMs) / FACTCHECK_MIN_ROUND_MS)),
+  );
   let fcLastRejectMsgs = [];
   const fcProviderErrors = [];
   // A usable vote, an empty fulfilled response, or a duplicate vote means at
@@ -7444,7 +7453,7 @@ ${proofSuffix}`
   let missingSecondOpinion = false;
   let activePrompt = prompt;
   let compactRetry = null;
-  for (let fcAttempt = 1; fcAttempt <= FACTCHECK_INFRA_RETRIES && (modelResults.length === 0 || missingSecondOpinion); fcAttempt++) {
+  for (let fcAttempt = 1; fcAttempt <= maxPrimaryRounds && (modelResults.length === 0 || missingSecondOpinion); fcAttempt++) {
     if (fcAttempt > 1) {
       const why = missingSecondOpinion ? 'un solo parere indipendente' : 'nessun verdetto';
       console.error(`  🔁 Fact-check: ${why} al tentativo ${fcAttempt - 1} (checker giù/JSON invalido/stesso modello) — ri-eseguo solo la verifica (${fcAttempt}/${FACTCHECK_INFRA_RETRIES})...`);
@@ -7462,7 +7471,7 @@ ${proofSuffix}`
         backoffMs = Math.min(retryAfterMs, FACTCHECK_429_BACKOFF_CAP_MS);
         console.error(`  ⏱️  Fact-check: 429 rate-limit rilevato — backoff ${backoffMs}ms (cap ${FACTCHECK_429_BACKOFF_CAP_MS}ms)`);
       }
-      if (factCheckDeadlineMs - Date.now() - backoffMs < FACTCHECK_MIN_ROUND_MS) break;
+      if (retryDeadlineMs - Date.now() - backoffMs < FACTCHECK_MIN_ROUND_MS) break;
       await new Promise(r => setTimeout(r, backoffMs));
     }
     if (compactRetry) {
@@ -7482,10 +7491,10 @@ ${proofSuffix}`
     // The model cascade may use its entire deadline. Leave each remaining
     // round and the final Codex-only fallback a share of the run budget.
     const now = Date.now();
-    const remainingMs = factCheckDeadlineMs - now;
-    if (remainingMs <= 0) break;
+    const remainingMs = retryDeadlineMs - now;
+    if (remainingMs <= 0 || (fcAttempt > 1 && remainingMs < FACTCHECK_MIN_ROUND_MS)) break;
     const remainingRounds = Math.min(
-      FACTCHECK_INFRA_RETRIES - fcAttempt + 2,
+      maxPrimaryRounds - fcAttempt + 1,
       Math.max(1, Math.floor(remainingMs / FACTCHECK_MIN_ROUND_MS)),
     );
     const deadlineMs = now + Math.floor(remainingMs / remainingRounds);
