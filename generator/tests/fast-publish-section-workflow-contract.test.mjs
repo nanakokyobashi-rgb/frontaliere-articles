@@ -4,7 +4,7 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const workflow = readFileSync(
   new URL('../../.github/workflows/fast-publish-section.yml', import.meta.url),
@@ -217,6 +217,56 @@ test('il restore stale ripristina i target tracciati e rimuove quelli assenti da
     assert.equal(existsSync(path.join(root, absent)), false, 'il target runtime assente dalla HEAD deve sparire');
   } finally {
     rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('la guardia di sezione distingue gli input di pubblicazione dagli entrypoint dei test', (t) => {
+  const root = mkdtempSync(path.join(tmpdir(), 'section-source-unaffected-'));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: 'pipe' }).trim();
+  const guard = fileURLToPath(new URL('../../scripts/ci/section-source-unaffected.sh', import.meta.url));
+  git('init', '--quiet', '--object-format=sha1');
+  git('config', 'user.name', 'Test');
+  git('config', 'user.email', 'test@example.invalid');
+  git('commit', '--quiet', '--allow-empty', '-m', 'base');
+  const base = git('rev-parse', 'HEAD');
+
+  const check = (expected, current, status, label) => {
+    const result = spawnSync('bash', [guard, expected, current], { cwd: root, encoding: 'utf8' });
+    assert.ifError(result.error);
+    assert.equal(result.status, status, `${label}\n${result.stderr}`);
+  };
+
+  const commitFiles = (label, ...files) => {
+    for (const file of files) {
+      const target = path.join(root, file);
+      mkdirSync(path.dirname(target), { recursive: true });
+      writeFileSync(target, `${label}\n`);
+    }
+    git('add', '.');
+    git('commit', '--quiet', '-m', label);
+    return git('rev-parse', 'HEAD');
+  };
+
+  const generationHead = commitFiles('translator e test alla radice',
+    'generator/scripts/lib/free-translate.mjs', 'generator/tests/translation.test.mjs');
+  check(base, generationHead, 0, 'translator e test alla radice');
+  const nestedTestHead = commitFiles('test annidato', 'generator/tests/translation/recovery.test.mjs');
+  check(generationHead, nestedTestHead, 0, 'test annidato');
+  check(nestedTestHead, base, 1, 'intervallo senza fast-forward con sole modifiche escluse');
+  check('HEAD', nestedTestHead, 1, 'SHA malformata');
+
+  const cases = [
+    ['contenuto di sezione e test', 'content/blog-body-canton-ti/it/article.ts', 'generator/tests/content.test.mjs'],
+    ['script di pubblicazione e test', 'scripts/publish-section-pages.mjs', 'generator/tests/publisher.test.mjs'],
+    ['fixture', 'generator/tests/translation/fixture.json'],
+    ['libreria sconosciuta', 'generator/scripts/lib/unknown.mjs'],
+  ];
+  let previous = nestedTestHead;
+  for (const [label, ...files] of cases) {
+    const current = commitFiles(label, ...files);
+    check(previous, current, 1, label);
+    previous = current;
   }
 });
 
