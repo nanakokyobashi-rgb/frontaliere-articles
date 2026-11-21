@@ -29,6 +29,30 @@ const generationCoreWorkflow = readFileSync(
   'utf8',
 );
 
+test('il reconcile automatico usa la HEAD corrente e non arma backfill stantii', () => {
+  const checkout = workflow.match(/^      - name: Checkout\n(?:(?!^      - ).*\n)*/m)?.[0] ?? '';
+  assert.match(checkout, /^        with:\n/m);
+  assert.match(
+    checkout,
+    /^          ref: \$\{\{ \(github\.event_name == 'schedule' \|\| github\.event_name == 'workflow_run'\) && 'refs\/heads\/main' \|\| github\.sha \}\}$/m,
+  );
+  assert.match(checkout, /^          fetch-depth: 1$/m);
+  assert.match(checkout, /^          persist-credentials: false$/m);
+
+  const detect = workflow.match(/^      - name: Detect ghosts \(slug annunciati senza pagina sullo shard\)\n(?:(?!^      - ).*\n)*/m)?.[0] ?? '';
+  assert.match(
+    detect,
+    /node scripts\/reconcile-article-shards\.mjs [^\n]*\n[^\n]*\n\s+source_commit="\$\(git rev-parse HEAD\)"\n\s+current_main="\$\(bash scripts\/ci\/read-main-head\.sh\)"[\s\S]*?if \[ "\$source_commit" != "\$current_main" \]; then/,
+  );
+  assert.match(
+    detect,
+    /if \[ "\$source_commit" != "\$current_main" \]; then[\s\S]*?echo 'head_guard=false' >> "\$GITHUB_OUTPUT"[\s\S]*?exit 0[\s\S]*?echo 'head_guard=true'/,
+  );
+
+  const guardedSideEffects = workflow.match(/if:[^\n]*steps\.detect\.outputs\.head_guard == 'true'/g) ?? [];
+  assert.equal(guardedSideEffects.length, 5, 'ogni side effect del report deve richiedere HEAD == main');
+});
+
 test('il backfill aspetta solo il gruppo dello shard target', () => {
   const start = workflow.indexOf('          active_runs_for_shard() {');
   const end = workflow.indexOf('\n\n          # Tetto assoluto', start);
