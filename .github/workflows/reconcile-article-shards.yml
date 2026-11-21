@@ -152,7 +152,15 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          SOURCE_COMMIT: ${{ steps.detect.outputs.source_commit }}
         run: |
+          set -euo pipefail
+          if ! [[ "${SOURCE_COMMIT:-}" =~ ^[a-f0-9]{40}$ ]] ||
+            ! current_main="$(bash scripts/ci/read-main-head.sh)" ||
+            [ "$current_main" != "$SOURCE_COMMIT" ]; then
+            echo "::notice::main non verificabile o avanzata; issue fantasma lasciata aperta"
+            exit 0
+          fi
           node scripts/ci/resolve-issue-verified.mjs \
             --title "Articoli fantasma: annunciati senza pagina sugli shard" \
             --workflow "reconcile-article-shards" \
@@ -607,6 +615,7 @@ jobs:
             fi
             if ! gh_api_timeout -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/dispatches" \
               -f ref=main \
+              -f "inputs[source_commit]=${SOURCE_COMMIT}" \
               -f "inputs[article_id]=$id" \
               -f "inputs[section]=$section" \
               -f "inputs[dry_run]=false"; then
