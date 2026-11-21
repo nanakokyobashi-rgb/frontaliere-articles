@@ -128,5 +128,11 @@
     "articleId": "cantonsrat-respinge-puk-soh",
     "ts": "2026-11-13T12:05:22.436Z",
     "keyForm": 2
+  },
+  "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/finanzkommission-genehmigt-das-budget-2027": {
+    "articleId": "soletta-preventivo-approvato",
+    "ts": "2026-11-21T16:12:13.951Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "b31402b7c2c002e46aa6b1fdb5f159fe08814ef516f1c6fe67ad7a2e66b36882"
   }
 }

@@ -93,6 +93,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.cantonsrat-respinge-puk-soh.title': 'Solothurn: Cantonsrat rejects PUK over SOH',
     'blog.article.cantonsrat-respinge-puk-soh.excerpt': 'The cantonal parliament of Solothurn voted on Wednesday against establishing a parliamentary commission of inquiry into irregularities in personnel law at Solothurner Spitäler AG, referred to in the source by the acronym SOH.',
     'blog.article.cantonsrat-respinge-puk-soh.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.soletta-preventivo-approvato.title': 'Solothurn: the commission approves the 2027 budget',
+    'blog.article.soletta-preventivo-approvato.excerpt': 'The 2027 budget projects a deficit of approximately CHF 42 million, an improvement of CHF 33,4 million compared with the initial proposal.',
+    'blog.article.soletta-preventivo-approvato.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;

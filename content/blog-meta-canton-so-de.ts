@@ -93,6 +93,9 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.cantonsrat-respinge-puk-soh.title': 'Solothurn: Kantonsrat lehnt PUK zur SOH ab',
     'blog.article.cantonsrat-respinge-puk-soh.excerpt': 'Das Kantonsparlament von Solothurn hat am Mittwoch gegen die Einsetzung einer parlamentarischen Untersuchungskommission zu den Unregelmässigkeiten im Personalrecht bei der Solothurner Spitäler AG gestimmt, die in der Quelle mit dem Akronym SOH bezeichnet wird.',
     'blog.article.cantonsrat-respinge-puk-soh.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.soletta-preventivo-approvato.title': 'Solothurn: Die Kommission genehmigt den Voranschlag 2027',
+    'blog.article.soletta-preventivo-approvato.excerpt': 'Der Voranschlag 2027 sieht ein Defizit von etwa CHF 42 Millionen vor, das sich gegenüber dem ursprünglichen Vorschlag um CHF 33,4 Millionen verbessert hat.',
+    'blog.article.soletta-preventivo-approvato.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSoDe;
