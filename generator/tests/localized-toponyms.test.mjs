@@ -56,6 +56,25 @@ test('ripara gli esonimi copiati nei campi tradotti senza cambiare numeri o URL'
   assert.deepEqual(findArticleLocalizedToponymMismatches(data), []);
 });
 
+test('ripara gli esonimi copiati anche negli slug localizzati', () => {
+  const data = {
+    id: 'guida-basilea-campagna',
+    slugs: {
+      it: 'guida-basilea-campagna',
+      en: 'guide-basilea-campagna',
+    },
+    content: {
+      it: { title: 'Guida a Basilea Campagna' },
+      en: { title: 'Guide to Basilea Campagna' },
+    },
+  };
+
+  repairGeneratedArticleToponyms(data);
+
+  assert.equal(data.slugs.en, 'guide-basel-landschaft');
+  assert.deepEqual(findArticleLocalizedToponymMismatches(data), []);
+});
+
 test('la tabella copre 26 cantoni, capoluoghi e tutte le quattro lingue', () => {
   assert.deepEqual(LOCALIZED_TOPONYM_LOCALES, ['it', 'en', 'de', 'fr']);
   assert.equal(LOCALIZED_TOPONYMS.length, 26);
@@ -919,6 +938,12 @@ test('il gate bounded invoca il controllo prima della scrittura e mantiene attiv
   const source = readFileSync(path.join(ROOT, 'generator/scripts/create-article.mjs'), 'utf8');
   assert.match(source, /await translateArticle\(data\);\s*repairGeneratedArticleToponyms\(data\);/);
   assert.ok(source.indexOf('repairGeneratedArticleToponyms(data);') < source.indexOf('const slugI18n = relocalizeSlugsAfterTranslation(data,', source.indexOf('await translateArticle(data);')));
+  const deriveStart = source.indexOf('export function deriveAndSanitizeArticleSlugs(data) {');
+  const deriveRepair = source.indexOf('repairGeneratedArticleToponyms(data);', deriveStart);
+  const deriveItalianSlug = source.indexOf('data.slugs.it = data.id;', deriveStart);
+  const deriveRelocalize = source.indexOf('const slugI18n = relocalizeSlugsAfterTranslation(data,', deriveStart);
+  assert.ok(deriveStart >= 0 && deriveRepair > deriveItalianSlug && deriveRepair < deriveRelocalize,
+    'il boundary condiviso deve riparare i toponimi prima della derivazione degli slug');
   assert.match(source, /findArticleLocalizedToponymMismatches/);
   assert.match(source, /assertArticlePassesFactualityGates\(data, options = \{\}\)/);
   assert.match(source, /assertLocalizedToponyms\(data\)/);

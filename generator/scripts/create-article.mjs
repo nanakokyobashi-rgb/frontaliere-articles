@@ -25533,6 +25533,10 @@ export function deriveAndSanitizeArticleSlugs(data) {
   }
 
   data.slugs.it = data.id;
+  // This is the shared pre-write boundary for secondary producers. Repair the
+  // translated fields and any already-present localized slugs before deriving
+  // missing values or running the collision/factuality gates.
+  repairGeneratedArticleToponyms(data);
   for (const locale of ['en', 'de', 'fr']) {
     if (!data.slugs[locale]) {
       // Il titolo ITALIANO non e' piu' una sorgente accettabile per uno slug
