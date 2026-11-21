@@ -15935,6 +15935,7 @@ async function translatePendingBodyWithHistoricalChain(
   }
   const chunkTranslator = assertChunkTranslator(translateInChunks, 'translatePendingBodyWithHistoricalChain');
   const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
+  const recoveryChunkWords = 240;
   const rejected = [];
   const text = await translateFieldFreeMt({
     text: itValue,
@@ -15943,10 +15944,10 @@ async function translatePendingBodyWithHistoricalChain(
     fieldType: 'description',
     fieldName: field,
     translate: async ({ text: masked }) => {
-      if (countWords(masked || '') > TRANSLATION_CHUNK_THRESHOLD) {
+      if (countWords(masked || '') > recoveryChunkWords) {
         // Reuse the same chunker as the legacy translation and truncation
-        // paths: the historical fallback must not send an oversized body in
-        // one request after Codex has stopped.
+        // paths. Shorter segments reduce omissions after a full-body
+        // translation failed. Validate the reconstructed body as usual.
         const chunked = await chunkTranslator(
           masked,
           field,
@@ -15958,7 +15959,7 @@ async function translatePendingBodyWithHistoricalChain(
           }),
           `${locale}:${field}-pending-retry`,
           locale,
-          { forceLegacy: true },
+          { forceLegacy: true, chunkWords: recoveryChunkWords },
         );
         return chunked;
       }
@@ -16208,7 +16209,7 @@ async function translateArticle(data) {
     makeChunkPrompt,
     labelPrefix,
     targetLang,
-    { pretranslatedResult = null, forceLegacy = false } = {},
+    { pretranslatedResult = null, forceLegacy = false, chunkWords } = {},
   ) {
     // Recovery/free-MT callers may already have carried the transport markers
     // through a first provider. Normalize them before deriving the next
@@ -16221,7 +16222,7 @@ async function translateArticle(data) {
     const tableHeaderMarkers = tableHeaderColumnMarkers(bodyText);
     if (tableHeaderMarkers.collision || tableHeaderMarkers.ambiguous) return reject('source-table-markers');
     const chunks = pretranslatedResult === null
-      ? splitIntoTranslationChunks(tableHeaderMarkers.markedText)
+      ? splitIntoTranslationChunks(tableHeaderMarkers.markedText, chunkWords)
       : [tableHeaderMarkers.markedText];
     const translated = pretranslatedResult === null
       ? await Promise.all(

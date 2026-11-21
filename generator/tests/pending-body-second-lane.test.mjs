@@ -99,7 +99,7 @@ const buildBodyTruncationRetryPrompt = new Function(
   `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${BUILD_BODY_TRUNCATION_RETRY_PROMPT_SRC}\nreturn buildBodyTruncationRetryPrompt;`,
 )();
 const TRANSLATE_IN_CHUNKS_SRC = (() => {
-  const start = src.indexOf('  async function translateInChunks(\n    bodyText,\n    fieldKey,\n    makeChunkPrompt,\n    labelPrefix,\n    targetLang,\n    { pretranslatedResult = null, forceLegacy = false } = {},\n  ) {');
+  const start = src.indexOf('  async function translateInChunks(\n    bodyText,\n    fieldKey,\n    makeChunkPrompt,\n    labelPrefix,\n    targetLang,\n    { pretranslatedResult = null, forceLegacy = false, chunkWords } = {},\n  ) {');
   assert.notEqual(start, -1, 'translateInChunks non trovata in create-article.mjs');
   const end = src.indexOf('\n  }\n', start);
   assert.notEqual(end, -1, 'fine di translateInChunks non trovata in create-article.mjs');
@@ -795,7 +795,7 @@ test('la catena storica riusa il chunker per un body pending sopra soglia', asyn
     'console',
     `${ASSERT_CHUNK_TRANSLATOR_SRC}\n${TABLE_HEADER_MARKER_HELPERS_SRC}\n${src.slice(at, end)}\nreturn translatePendingBodyWithHistoricalChain;`,
   );
-  const longIt = Array.from({ length: 701 }, (_, i) => `parola${i}`).join(' ');
+  const longIt = Array.from({ length: 360 }, (_, i) => `parola${i}`).join(' ');
   const expected = longIt.replaceAll('parola', 'Wort');
   let chunkCall = null;
   let chunkOptions = null;
@@ -841,7 +841,7 @@ test('la catena storica riusa il chunker per un body pending sopra soglia', asyn
   });
   assert.equal(wholeBodyCalls, 0);
   assert.equal(translated, expected);
-  assert.deepEqual(chunkOptions, { forceLegacy: true });
+  assert.deepEqual(chunkOptions, { forceLegacy: true, chunkWords: 240 });
 });
 
 test('la catena storica rifiuta il caller senza il traduttore chunked prima di tradurre', async () => {

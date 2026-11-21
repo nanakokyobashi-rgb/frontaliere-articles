@@ -1428,7 +1428,7 @@ const TRANSLATE_IN_CHUNKS_SRC = (() => {
     makeChunkPrompt,
     labelPrefix,
     targetLang,
-    { pretranslatedResult = null, forceLegacy = false } = {},
+    { pretranslatedResult = null, forceLegacy = false, chunkWords } = {},
   ) {`);
   assert.notEqual(a, -1, 'translateInChunks non trovata — aggiornare questo test');
   return src.slice(a, src.indexOf('\n  }\n', a) + 4);
