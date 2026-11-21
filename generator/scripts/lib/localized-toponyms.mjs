@@ -1270,6 +1270,34 @@ function articleLocaleProjection(data, locale) {
   };
 }
 
+function repairPairedArticleToponyms(source, target, locale) {
+  if (typeof source === 'string' && typeof target === 'string') {
+    return replaceLocalizedToponymMismatches({ sourceText: source, targetText: target, locale }).text;
+  }
+  if (Array.isArray(source) && Array.isArray(target) && source.length === target.length) {
+    return target.map((value, index) => repairPairedArticleToponyms(source[index], value, locale));
+  }
+  if (source && target && typeof source === 'object' && typeof target === 'object'
+      && !Array.isArray(source) && !Array.isArray(target)) {
+    for (const key of Object.keys(target)) {
+      if (Object.hasOwn(source, key)) {
+        target[key] = repairPairedArticleToponyms(source[key], target[key], locale);
+      }
+    }
+  }
+  return target;
+}
+
+/** Repairs only fields with a corresponding Italian source before slug derivation. */
+export function repairGeneratedArticleToponyms(data) {
+  for (const locale of LOCALIZED_TOPONYM_LOCALES.filter((item) => item !== 'it')) {
+    repairPairedArticleToponyms(data.content.it, data.content[locale], locale);
+    if (typeof data.imageAlt?.it === 'string' && typeof data.imageAlt[locale] === 'string') {
+      data.imageAlt[locale] = repairPairedArticleToponyms(data.imageAlt.it, data.imageAlt[locale], locale);
+    }
+  }
+}
+
 function omitEventsDigestBody2(projection) {
   const content = projection?.content;
   if (!content || typeof content !== 'object' || Array.isArray(content)) return projection;

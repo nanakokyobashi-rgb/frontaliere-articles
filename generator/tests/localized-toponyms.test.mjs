@@ -18,6 +18,7 @@ import {
   findLocalizedToponymMismatches,
   localizedToponymInstruction,
   normalizeLocalizedToponymText,
+  repairGeneratedArticleToponyms,
   replaceLocalizedToponymMismatches,
   validateLocalizedToponymTable,
 } from '../scripts/lib/localized-toponyms.mjs';
@@ -29,6 +30,31 @@ import {
 } from '../scripts/lib/static-article-field-scanner.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+
+test('ripara gli esonimi copiati nei campi tradotti senza cambiare numeri o URL', () => {
+  const data = {
+    content: {
+      it: {
+        title: 'Basilea Campagna: rubati dati di 97.000 permessi G',
+        faq: [{ q: 'Chi vive a Basilea Campagna?', a: 'Consulta https://example.com/Basilea-Campagna' }],
+      },
+      en: {
+        title: 'Data from 97,000 G permits stolen in Basilea Campagna',
+        faq: [{ q: 'Who lives in Basilea Campagna?', a: 'See https://example.com/Basilea-Campagna' }],
+        body2: 'Unpaired reference: Basilea Campagna',
+      },
+    },
+  };
+  assert.ok(findArticleLocalizedToponymMismatches(data).length > 0);
+  repairGeneratedArticleToponyms(data);
+  assert.equal(data.content.en.title, 'Data from 97,000 G permits stolen in Basel-Landschaft');
+  assert.equal(data.content.en.faq[0].q, 'Who lives in Basel-Landschaft?');
+  assert.equal(data.content.en.faq[0].a, 'See https://example.com/Basilea-Campagna');
+  assert.equal(data.content.en.body2, 'Unpaired reference: Basilea Campagna');
+  assert.equal(findArticleLocalizedToponymMismatches(data).length, 1);
+  delete data.content.en.body2;
+  assert.deepEqual(findArticleLocalizedToponymMismatches(data), []);
+});
 
 test('la tabella copre 26 cantoni, capoluoghi e tutte le quattro lingue', () => {
   assert.deepEqual(LOCALIZED_TOPONYM_LOCALES, ['it', 'en', 'de', 'fr']);
@@ -891,6 +917,8 @@ test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue
 
 test('il gate bounded invoca il controllo prima della scrittura e mantiene attivo l audit globale', () => {
   const source = readFileSync(path.join(ROOT, 'generator/scripts/create-article.mjs'), 'utf8');
+  assert.match(source, /await translateArticle\(data\);\s*repairGeneratedArticleToponyms\(data\);/);
+  assert.ok(source.indexOf('repairGeneratedArticleToponyms(data);') < source.indexOf('const slugI18n = relocalizeSlugsAfterTranslation(data,', source.indexOf('await translateArticle(data);')));
   assert.match(source, /findArticleLocalizedToponymMismatches/);
   assert.match(source, /assertArticlePassesFactualityGates\(data, options = \{\}\)/);
   assert.match(source, /assertLocalizedToponyms\(data\)/);

@@ -421,6 +421,7 @@ import {
   findArticleLocalizedToponymMismatches,
   localizedToponymInstruction,
   normalizeLocalizedToponymText,
+  repairGeneratedArticleToponyms,
 } from './lib/localized-toponyms.mjs';
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord } from './lib/it-text-similarity.mjs';
 import { countLocalNewsHits, isLocalNews } from './lib/local-news.mjs';
@@ -24431,6 +24432,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
 
   // Step 3b: Translate to EN/DE/FR (only runs if not a duplicate)
   await translateArticle(data);
+  repairGeneratedArticleToponyms(data);
 
   // Step 3b.0: Rilocalizza gli slug en/de/fr (issue #191). Questo e' il primo
   // istante della pipeline in cui i titoli tradotti esistono, quindi e' il
