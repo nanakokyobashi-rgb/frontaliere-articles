@@ -13747,6 +13747,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.mendrisio-feste-pista-ghiaccio.title': 'Mendrisio apporte fêtes et patinoire sur la place',
     'blog.article.mendrisio-feste-pista-ghiaccio.excerpt': 'De fin novembre à janvier, Mendrisio anime ses places et ses quartiers avec une patinoire, un échange de vœux et un calendrier de rendez-vous.',
     'blog.article.mendrisio-feste-pista-ghiaccio.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.festival-ai-lugano-aree.title': 'Festival AI à Lugano : 13 domaines et plus de 60 intervenants',
+    'blog.article.festival-ai-lugano-aree.excerpt': 'Au Palais des congrès de Lugano, le Festival AI réunit plus de 60 intervenants internationaux dans 13 domaines, avec un espace d’exposition gratuit ouvert à tous.',
+    'blog.article.festival-ai-lugano-aree.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaFr;

@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1952482/giornata-sbarrata-neggia-fosano-lavori": {
-    "articleId": "chiusura-cantonale-neggia-fosano",
-    "ts": "2026-09-25T12:46:46.881Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/cantone/ticino/1952440/gehri-finanze-cantonali-cara-politica-sveglia-il-tempo-e-gia-scaduto": {
     "articleId": "gehri-finanze-preventivo-27",
     "ts": "2026-09-25T13:54:56.623Z",
@@ -2498,5 +2493,11 @@
     "articleId": "mendrisio-feste-pista-ghiaccio",
     "ts": "2026-11-20T22:27:45.231Z",
     "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/festival-ai-a-lugano-un-grande-successo-a-livello-di-pubblico-446977": {
+    "articleId": "festival-ai-lugano-aree",
+    "ts": "2026-11-21T08:36:31.014Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "e3bae71dd51d095526fa54453ff88e8624077ed7c3b7d77a9cf92ae66378f290"
   }
 }

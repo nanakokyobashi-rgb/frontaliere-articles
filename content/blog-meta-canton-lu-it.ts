@@ -90,6 +90,9 @@ const blogMetaCantonLuIt: Record<string, string> = {
     'blog.article.cambio-orari-bus-lucerna.title': 'Lucerna: il 13 dicembre 2026 cambia la rete bus',
     'blog.article.cambio-orari-bus-lucerna.excerpt': 'Il 13 dicembre arriva il più grande cambio d\'orario da tempo: la 4 diventa 5, la 12 diventa 3 e la 19 viene integrata nelle linee 8 e 9.',
     'blog.article.cambio-orari-bus-lucerna.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.spazi-scolastici-wurzenbach.title': 'Würzenbach: nuovi spazi scolastici e palestra allo studio',
+    'blog.article.spazi-scolastici-wurzenbach.excerpt': 'Lucerna: spazi insufficienti a Würzenbach e Büttenen; ampliamenti e palestra tripla allo studio, lavori possibili dal 2031.',
+    'blog.article.spazi-scolastici-wurzenbach.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonLuIt;

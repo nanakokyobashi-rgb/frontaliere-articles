@@ -326,4 +326,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'spazi-scolastici-wurzenbach',
+ category: 'novita',
+ date: '2026-11-21T08:48:22.358Z',
+ image: '/images/blog/article-spazi-scolastici-wurzenbach.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['LU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

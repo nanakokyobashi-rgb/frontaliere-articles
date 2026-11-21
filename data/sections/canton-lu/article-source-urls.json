@@ -143,5 +143,11 @@
     "articleId": "cambio-orari-bus-lucerna",
     "ts": "2026-11-11T07:24:28.723Z",
     "keyForm": 2
+  },
+  "https://www.stadtluzern.ch/_rte/information/3054895": {
+    "articleId": "spazi-scolastici-wurzenbach",
+    "ts": "2026-11-21T08:48:22.682Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "bcfe77b1a30664be592f0d6c62ff4e1cda775e097f7561fec3013f08ce69963b"
   }
 }

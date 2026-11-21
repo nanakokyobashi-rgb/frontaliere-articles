@@ -13746,6 +13746,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.mendrisio-feste-pista-ghiaccio.title': 'Mendrisio porta feste e pista di ghiaccio in piazza',
     'blog.article.mendrisio-feste-pista-ghiaccio.excerpt': 'Da fine novembre a gennaio Mendrisio anima piazze e quartieri con pista di ghiaccio, scambio degli auguri e un calendario di appuntamenti.',
     'blog.article.mendrisio-feste-pista-ghiaccio.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.festival-ai-lugano-aree.title': 'Festival AI a Lugano: 13 aree e oltre 60 relatori',
+    'blog.article.festival-ai-lugano-aree.excerpt': 'Al Palazzo dei Congressi di Lugano, il Festival AI riunisce oltre 60 relatori internazionali in 13 aree, con un\'area espositiva gratuita aperta a tutti.',
+    'blog.article.festival-ai-lugano-aree.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;

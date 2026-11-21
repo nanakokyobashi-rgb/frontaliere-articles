@@ -30,6 +30,16 @@
       "failureCount": 2,
       "requestedAt": "2026-11-20T10:27:53.659Z",
       "lastFailureAt": "2026-11-20T22:30:33.103Z"
+    },
+    {
+      "articleId": "festival-ai-lugano-aree",
+      "title": "Festival AI a Lugano: 13 aree e oltre 60 relatori",
+      "fallbackImage": "/images/blog/article-film-festival-diritti-umani-lugano-2026.webp",
+      "reason": "All image providers failed for article-festival-ai-lugano-aree: openai-codex (image vision fallback deadline exceeded)",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-11-21T08:36:31.011Z",
+      "lastFailureAt": "2026-11-21T08:36:31.011Z"
     }
   ]
 }
