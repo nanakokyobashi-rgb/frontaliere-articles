@@ -710,8 +710,8 @@ export function assertLocalizedToponymPair({
 
 /**
  * Deterministically repairs only the foreign exonyms established by the
- * source-language article. URLs are opaque: slugs and source links are never
- * rewritten by this function.
+ * source-language article. URLs embedded in prose remain opaque; plain article
+ * slugs are handled separately by the article-level repair with `slug: true`.
  */
 export function replaceLocalizedToponymMismatches({
   sourceText = '',
@@ -1268,6 +1268,44 @@ function articleLocaleProjection(data, locale) {
     // live in content[locale] and are already collected above.
     seo: locale === 'it' ? data?.seo : undefined,
   };
+}
+
+function repairPairedArticleToponyms(source, target, locale) {
+  if (typeof source === 'string' && typeof target === 'string') {
+    return replaceLocalizedToponymMismatches({ sourceText: source, targetText: target, locale }).text;
+  }
+  if (Array.isArray(source) && Array.isArray(target) && source.length === target.length) {
+    return target.map((value, index) => repairPairedArticleToponyms(source[index], value, locale));
+  }
+  if (source && target && typeof source === 'object' && typeof target === 'object'
+      && !Array.isArray(source) && !Array.isArray(target)) {
+    for (const key of Object.keys(target)) {
+      if (Object.hasOwn(source, key)) {
+        target[key] = repairPairedArticleToponyms(source[key], target[key], locale);
+      }
+    }
+  }
+  return target;
+}
+
+/** Repairs paired translations and explicit slug candidates before article registration. */
+export function repairGeneratedArticleToponyms(data) {
+  const sourceText = collectStrings(articleLocaleProjection(data, 'it')).join(LOCALIZED_TOPONYM_FIELD_SEPARATOR);
+  const sourceProfile = createLocalizedToponymSourceProfile(sourceText);
+  const provisionalSlugs = new Set(Array.isArray(data._slugsProvisionalFromIt) ? data._slugsProvisionalFromIt : []);
+  for (const locale of LOCALIZED_TOPONYM_LOCALES.filter((item) => item !== 'it')) {
+    repairPairedArticleToponyms(data.content?.it, data.content?.[locale], locale);
+    if (typeof data.imageAlt?.it === 'string' && typeof data.imageAlt[locale] === 'string') {
+      data.imageAlt[locale] = repairPairedArticleToponyms(data.imageAlt.it, data.imageAlt[locale], locale);
+    }
+    const targetText = data.slugs?.[locale];
+    // Let slug derivation handle Italian fallbacks and validate the localized title.
+    if (typeof targetText === 'string' && targetText && targetText !== data.slugs.it && !provisionalSlugs.has(locale)) {
+      data.slugs[locale] = replaceLocalizedToponymMismatches({
+        sourceText, sourceProfile, targetText, locale, slug: true,
+      }).text;
+    }
+  }
 }
 
 function omitEventsDigestBody2(projection) {

@@ -421,6 +421,7 @@ import {
   findArticleLocalizedToponymMismatches,
   localizedToponymInstruction,
   normalizeLocalizedToponymText,
+  repairGeneratedArticleToponyms,
 } from './lib/localized-toponyms.mjs';
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord } from './lib/it-text-similarity.mjs';
 import { countLocalNewsHits, isLocalNews } from './lib/local-news.mjs';
@@ -18762,6 +18763,13 @@ ${localizedToponymInstruction(targetLang)}`;
         console.warn(`  ⚠️ [title-cap] Retry titolo ${locale} fallito: ${safeSignalDiagnosticTextForLog(retryErr.message)} — applico hard cap`);
       }
     }
+  }
+
+  repairGeneratedArticleToponyms(data);
+
+  for (const locale of ['en', 'de', 'fr']) {
+    const localeContent = data.content[locale];
+    if (!localeContent?.title) continue;
     const finalCap = capBlogTitle(localeContent.title);
     if (finalCap.truncated) {
       console.warn(`  ✂️ [title-cap] ${locale.toUpperCase()} title truncato: ${finalCap.originalLength} → ${finalCap.value.length} chars`);
@@ -25531,6 +25539,10 @@ export function deriveAndSanitizeArticleSlugs(data) {
   }
 
   data.slugs.it = data.id;
+  // This is the shared pre-write boundary for secondary producers. Repair the
+  // translated fields and any already-present localized slugs before deriving
+  // missing values or running the collision/factuality gates.
+  repairGeneratedArticleToponyms(data);
   for (const locale of ['en', 'de', 'fr']) {
     if (!data.slugs[locale]) {
       // Il titolo ITALIANO non e' piu' una sorgente accettabile per uno slug

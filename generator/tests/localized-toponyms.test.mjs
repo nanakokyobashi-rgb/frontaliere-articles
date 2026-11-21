@@ -18,6 +18,7 @@ import {
   findLocalizedToponymMismatches,
   localizedToponymInstruction,
   normalizeLocalizedToponymText,
+  repairGeneratedArticleToponyms,
   replaceLocalizedToponymMismatches,
   validateLocalizedToponymTable,
 } from '../scripts/lib/localized-toponyms.mjs';
@@ -29,6 +30,54 @@ import {
 } from '../scripts/lib/static-article-field-scanner.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+
+test('ripara gli esonimi copiati nei campi tradotti senza cambiare numeri o URL', () => {
+  const data = {
+    slugs: { it: 'furto-dati-permessi-g', en: 'basilea-campagna-stolen-data', fr: 'basilea-campagna' },
+    _slugsProvisionalFromIt: ['fr'],
+    content: {
+      it: {
+        title: 'Basilea Campagna: rubati dati di 97.000 permessi G',
+        faq: [{ q: 'Chi vive a Basilea Campagna?', a: 'Consulta https://example.com/Basilea-Campagna' }],
+      },
+      en: {
+        title: 'Data from 97,000 G permits stolen in Basilea Campagna',
+        faq: [{ q: 'Who lives in Basilea Campagna?', a: 'See https://example.com/Basilea-Campagna' }],
+        body2: 'Unpaired reference: Basilea Campagna',
+      },
+    },
+  };
+  assert.ok(findArticleLocalizedToponymMismatches(data).length > 0);
+  repairGeneratedArticleToponyms(data);
+  assert.equal(data.content.en.title, 'Data from 97,000 G permits stolen in Basel-Landschaft');
+  assert.equal(data.content.en.faq[0].q, 'Who lives in Basel-Landschaft?');
+  assert.equal(data.content.en.faq[0].a, 'See https://example.com/Basilea-Campagna');
+  assert.equal(data.slugs.en, 'basel-landschaft-stolen-data');
+  assert.equal(data.slugs.fr, 'basilea-campagna');
+  assert.equal(data.content.en.body2, 'Unpaired reference: Basilea Campagna');
+  assert.equal(findArticleLocalizedToponymMismatches(data).length, 1);
+  delete data.content.en.body2;
+  assert.deepEqual(findArticleLocalizedToponymMismatches(data), []);
+});
+
+test('ripara gli esonimi copiati anche negli slug localizzati', () => {
+  const data = {
+    id: 'guida-basilea-campagna',
+    slugs: {
+      it: 'guida-basilea-campagna',
+      en: 'guide-basilea-campagna',
+    },
+    content: {
+      it: { title: 'Guida a Basilea Campagna' },
+      en: { title: 'Guide to Basilea Campagna' },
+    },
+  };
+
+  repairGeneratedArticleToponyms(data);
+
+  assert.equal(data.slugs.en, 'guide-basel-landschaft');
+  assert.deepEqual(findArticleLocalizedToponymMismatches(data), []);
+});
 
 test('la tabella copre 26 cantoni, capoluoghi e tutte le quattro lingue', () => {
   assert.deepEqual(LOCALIZED_TOPONYM_LOCALES, ['it', 'en', 'de', 'fr']);
@@ -891,6 +940,17 @@ test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue
 
 test('il gate bounded invoca il controllo prima della scrittura e mantiene attivo l audit globale', () => {
   const source = readFileSync(path.join(ROOT, 'generator/scripts/create-article.mjs'), 'utf8');
+  const translation = source.slice(source.indexOf('async function translateArticle(data)'), source.indexOf('function validateTitle(title)'));
+  assert.match(translation, /assertNoPendingBodyTranslations\(data\);[\s\S]*repairGeneratedArticleToponyms\(data\);[\s\S]*const finalCap = capBlogTitle/);
+  assert.match(source, /await translateArticle\(data\);[\s\S]*const slugI18n = relocalizeSlugsAfterTranslation\(data,/);
+  const journalist = readFileSync(path.join(ROOT, 'generator/scripts/publish-journalist-article.mjs'), 'utf8');
+  assert.match(journalist, /await translateArticle\(data\);[\s\S]*deriveAndSanitizeArticleSlugs\(data\);[\s\S]*checkTranslatedSlugCollisions\(data\);/);
+  const deriveStart = source.indexOf('export function deriveAndSanitizeArticleSlugs(data) {');
+  const deriveRepair = source.indexOf('repairGeneratedArticleToponyms(data);', deriveStart);
+  const deriveItalianSlug = source.indexOf('data.slugs.it = data.id;', deriveStart);
+  const deriveRelocalize = source.indexOf('const slugI18n = relocalizeSlugsAfterTranslation(data,', deriveStart);
+  assert.ok(deriveStart >= 0 && deriveRepair > deriveItalianSlug && deriveRepair < deriveRelocalize,
+    'il boundary condiviso deve riparare i toponimi prima della derivazione degli slug');
   assert.match(source, /findArticleLocalizedToponymMismatches/);
   assert.match(source, /assertArticlePassesFactualityGates\(data, options = \{\}\)/);
   assert.match(source, /assertLocalizedToponyms\(data\)/);
