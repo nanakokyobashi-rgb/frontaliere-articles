@@ -1288,12 +1288,21 @@ function repairPairedArticleToponyms(source, target, locale) {
   return target;
 }
 
-/** Repairs only fields with a corresponding Italian source before slug derivation. */
+/** Repairs paired translations and explicit slug candidates before article registration. */
 export function repairGeneratedArticleToponyms(data) {
+  const sourceText = collectStrings(articleLocaleProjection(data, 'it')).join(LOCALIZED_TOPONYM_FIELD_SEPARATOR);
+  const sourceProfile = createLocalizedToponymSourceProfile(sourceText);
+  const provisionalSlugs = new Set(Array.isArray(data._slugsProvisionalFromIt) ? data._slugsProvisionalFromIt : []);
   for (const locale of LOCALIZED_TOPONYM_LOCALES.filter((item) => item !== 'it')) {
     repairPairedArticleToponyms(data.content.it, data.content[locale], locale);
     if (typeof data.imageAlt?.it === 'string' && typeof data.imageAlt[locale] === 'string') {
       data.imageAlt[locale] = repairPairedArticleToponyms(data.imageAlt.it, data.imageAlt[locale], locale);
+    }
+    const targetText = data.slugs?.[locale];
+    if (typeof targetText === 'string' && targetText && !provisionalSlugs.has(locale)) {
+      data.slugs[locale] = replaceLocalizedToponymMismatches({
+        sourceText, sourceProfile, targetText, locale, slug: true,
+      }).text;
     }
   }
 }
