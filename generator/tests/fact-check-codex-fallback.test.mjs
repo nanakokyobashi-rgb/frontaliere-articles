@@ -358,7 +358,7 @@ describe('fact-check retries under a reported input cap', () => {
   async function runRounds({
     canton = 'San Gallo', section = 'san-gallo', isCanton = true, isFrontaliere = false,
     sourceUrl = 'HTTPS://example.test/news', sourceText = source, padding = '', replies,
-    initialTime = 160_000, consumeWindow = false,
+    initialTime = 160_000, consumeWindow = false, declaredInputCap,
   }) {
     const calls = [];
     const logs = [];
@@ -379,6 +379,7 @@ describe('fact-check retries under a reported input cap', () => {
       AI_MODELS,
       addIndependentVote,
       estimateRequestTokens,
+      getDeclaredRequestTokenLimit: (model) => model === AI_MODELS.GROQ_GPT_OSS_120B ? declaredInputCap : undefined,
       isModelAvailable: () => true,
       safeSignalDiagnosticTextForLog: String,
       CANTON_LINES: cantonLines,
@@ -518,6 +519,34 @@ describe('fact-check retries under a reported input cap', () => {
     assert.ok(chars > 0 && chars <= filler.length);
     return filler.slice(0, chars);
   }
+
+  test('either verifier can fall through below the declared 8000-token cap on the first attempt', async () => {
+    const section = { section: 'frontaliere', isFrontaliere: true, isCanton: false };
+    const padding = await loadFor(9131, section);
+    const { calls, prompt, compactPrompt } = await runRounds({
+      ...section,
+      padding,
+      declaredInputCap: 8000,
+      replies: [firstVote, secondVote],
+    });
+    assert.ok(estimate(prompt) > 8000);
+    assert.ok(estimate(compactPrompt) <= 8000, `compact estimate: ${estimate(compactPrompt)}`);
+    assert.deepEqual(calls.map((call) => call.prompt), [compactPrompt, compactPrompt]);
+  });
+
+  test('the declared cap keeps proof feedback on the compact retry when it fits', async () => {
+    const padding = await loadFor(8318);
+    const { calls, prompt, compactPrompt, modelResults } = await runRounds({
+      padding,
+      declaredInputCap: 8000,
+      replies: [structuredReply(false), structuredReply(false), structuredReply(true), structuredReply(true)],
+    });
+    const annotated = buildFactCheckProofRetryPrompt(compactPrompt, new Set([missingSourceQuote]));
+    assert.ok(estimate(prompt) > 8000);
+    assert.ok(estimate(annotated) <= 8000);
+    assert.deepEqual(calls.map((call) => call.prompt), [compactPrompt, compactPrompt, annotated, annotated]);
+    assert.equal(modelResults.length, 2);
+  });
 
   for (const { target, cap, canton, section } of [
     { target: 7874, cap: 7000, canton: 'San Gallo', section: 'san-gallo' },

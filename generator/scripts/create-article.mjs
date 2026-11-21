@@ -7405,12 +7405,12 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     ? `${evidencePrefix}
 
 VERIFICA SISTEMATICA — controlla tutte le categorie:
-- Leggi: verifica esistenza, sigla, numero, anno e attribuzione. Riferimenti assenti dalla fonte: sospetti. Critical: sigle inventate (${FACT_CHECK_INVENTED_ACRONYMS}), ${FACT_CHECK_INVENTED_LAWS}, anno di entrata in vigore senza legge verificabile, falsa tassa sanitaria, accordo non firmato.
-- Istituzioni e persone: verifica esistenza, ambito, ruoli, acronimi e citazioni dirette. Critical: autorità inventate o fuori ambito, ministro inesistente, commissioni o osservatori inventati. NON esistono: ${FACT_CHECK_INVENTED_INSTITUTIONS}. Consiglieri federali attuali: ${FACT_CHECK_FEDERAL_COUNCILLORS}. Abuso critical:istituzioni: ${FACT_CHECK_FINMA_SCOPE}.
-- Dati: verifica aliquote, soglie e date normative sui fatti verificati. Statistiche decimali: richiedi studio e istituto citati. Accetta arrotondamenti interi attribuiti e valori canonici corretti.
-- Fonte: verifica date, luoghi, partecipanti, dichiarazioni e misure. Date assenti: molto sospette. Contesto verificato: minor. Fatti inventati o contraddetti: critical.
-- Casi con luogo o ente, ruolo, azione ed esito specifico senza riscontro nella fonte: critical:fatti_inventati. Esempi: infermiera segnala carenze igieniche a Lugano; medico denuncia pratiche non etiche a Chiasso; infermiere ORL ottiene un risarcimento; medico del Civico di Lugano denuncia frode con indagine FINMA.
-- Svizzera fuori da UE e SEE; valgono gli accordi bilaterali.
+- Leggi: verifica sigla, numero, anno, attribuzione e fonte. Critical: sigle inventate (${FACT_CHECK_INVENTED_ACRONYMS}), ${FACT_CHECK_INVENTED_LAWS}, vigenza senza legge, falsa tassa sanitaria, accordo non firmato.
+- Istituzioni e persone: verifica enti, competenze, ruoli e citazioni. Critical: enti inventati o incompetenti. NON esistono: ${FACT_CHECK_INVENTED_INSTITUTIONS}. Consiglieri federali attuali: ${FACT_CHECK_FEDERAL_COUNCILLORS}. Abuso critical:istituzioni: ${FACT_CHECK_FINMA_SCOPE}.
+- Dati: confronta aliquote, soglie e date. Decimali: cita studio e istituto. Accetta arrotondamenti attribuiti e valori canonici.
+- Fonte: controlla date, luoghi, persone, citazioni e misure. Date assenti: sospette. Contesto verificato: minor. Invenzioni e contraddizioni: critical.
+- Casi specifici (luogo/ente, ruolo, azione, esito) senza riscontro nella fonte: critical:fatti_inventati. Esempi: infermiera segnala carenze igieniche a Lugano; medico denuncia pratiche non etiche a Chiasso; infermiere ORL ottiene un risarcimento; medico del Civico di Lugano denuncia frode con indagine FINMA.
+- Svizzera: accordi bilaterali, fuori da UE e SEE.
 
 ${relevanceInstructions}
 
@@ -7488,6 +7488,18 @@ ${proofSuffix}`
   let activePrompt = prompt;
   let compactRetry = null;
   let observedInputCap = 0;
+  if (compactPrompt) {
+    const independentVerifier = verificationModels.find((model) => model !== AI_MODELS.CODEX_CLI_PRIMARY);
+    const limit = independentVerifier && getDeclaredRequestTokenLimit(independentVerifier);
+    const fullEstimate = estimateRequestTokens([{ role: 'user', content: prompt }]);
+    const compactEstimate = estimateRequestTokens([{ role: 'user', content: compactPrompt }]);
+    if (limit && fullEstimate > limit && compactEstimate <= limit) {
+      // Either primary request can fall through to the independent cascade.
+      // Use one base prompt so the normal proof-retry path can annotate it.
+      compactRetry = { fullEstimate, compactEstimate, cap: limit };
+      observedInputCap = limit;
+    }
+  }
   for (let fcAttempt = 1; fcAttempt <= maxPrimaryRounds && (modelResults.length === 0 || missingSecondOpinion); fcAttempt++) {
     if (fcAttempt > 1) {
       const why = missingSecondOpinion ? 'un solo parere indipendente' : 'nessun verdetto';
