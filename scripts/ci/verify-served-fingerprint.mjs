@@ -90,6 +90,24 @@ export function stripCloudflareBotFightScript(html) {
   return `${beforeBody.slice(0, scriptStart)}${trailingWhitespace}${html.slice(bodyClose)}`;
 }
 
+// Restore the exact address so a change in its value still fails verification.
+export function restoreCloudflareEmails(html) {
+  let restored = false;
+  const result = html.replace(
+    /<a href="\/cdn-cgi\/l\/email-protection" class="__cf_email__" data-cfemail="((?:[0-9a-f]{2}){2,})">\[email&#160;protected\]<\/a>/gu,
+    (original, encoded) => {
+      const bytes = Buffer.from(encoded, 'hex');
+      const email = Buffer.from(bytes.subarray(1).map((byte) => byte ^ bytes[0])).toString('utf8');
+      if (!/^[\w.+-]+@[\w.-]+\.[a-z]{2,}$/iu.test(email)) return original;
+      restored = true;
+      return email;
+    },
+  );
+  return restored
+    ? result.replace(/<script data-cfasync="false" src="\/cdn-cgi\/scripts\/[a-f0-9]{8}\/cloudflare-static\/email-decode\.min\.js"><\/script>/gu, '')
+    : result;
+}
+
 export function fingerprintHtml(html) {
   return crypto.createHash('sha256').update(normalizeHtml(html), 'utf8').digest('hex');
 }
@@ -539,7 +557,7 @@ async function fetchFingerprint(record, {
     const cfCacheStatus = optionalHeader(response, 'cf-cache-status');
     return {
       status: Number(response.status) || 0,
-      sha: fingerprintHtml(stripCloudflareBotFightScript(body)),
+      sha: fingerprintHtml(restoreCloudflareEmails(stripCloudflareBotFightScript(body))),
       cfCacheStatus: cfCacheStatus || 'unknown',
       hasCfCacheStatus: cfCacheStatus !== null,
       age: header(response, 'age'),
