@@ -463,7 +463,7 @@ import {
 // vincolo di mirror, ed e' condiviso dai due scrittori di body del corpus.
 import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
 import { addIndependentVote, extractFactCheckJson, factCheckRawSnippet } from './lib/fact-check-response.mjs';
-import { editorialOriginalityIssue, extractSyntheticReferenceEvidence, validateEditorialAssessment } from './lib/editorial-originality.mjs';
+import { MIN_EDITORIAL_ARTICLE_ANCHORS, editorialOriginalityIssue, extractSyntheticReferenceEvidence, validateEditorialAssessment } from './lib/editorial-originality.mjs';
 import { decodeHtmlEntities } from './lib/decode-html-entities.mjs';
 import {
   PERFORMANCE_PATH as ARTICLE_PERF_PATH,
@@ -4406,7 +4406,7 @@ function normalizeSourceDomain(domain) {
 // L'import sta qui e non nel blocco in testa al file perche' e' l'unico punto
 // che lo usa e la sezione sotto e' l'unica che ne parla; e' una dichiarazione
 // top-level a tutti gli effetti, quindi resta issata come le altre.
-import { ledgerViewsForLookup, makeLedgerEntry, newsUrlKey, legacyNewsUrlKey, itemIdentityOf, stripItemIdentity, checkItemOnPage, pageTitleEvidence } from './lib/source-url-ledger.mjs';
+import { ledgerViewsForLookup, makeLedgerEntry, hasSameLedgerSourceContent, newsUrlKey, legacyNewsUrlKey, itemIdentityOf, stripItemIdentity, checkItemOnPage, pageTitleEvidence } from './lib/source-url-ledger.mjs';
 
 // ── Source URL tracking: prevent re-using the same news source URL ─────
 function loadSourceUrls() {
@@ -4712,7 +4712,7 @@ function isSourceUrlAlreadyUsed(headlineUrl) {
 }
 
 /** Record a source URL after successful article generation */
-function recordSourceUrl(sourceUrl, articleId) {
+function recordSourceUrl(sourceUrl, articleId, sourceText) {
   if (!sourceUrl || sourceUrl.startsWith('evergreen://')) return;
   const map = loadSourceUrls();
   const normalized = normalizeNewsUrl(sourceUrl);
@@ -4720,7 +4720,7 @@ function recordSourceUrl(sourceUrl, articleId) {
   // il ledger non ha modo di dire quali voci sono ancora attuali, ed e' cio'
   // che lo aveva reso un cricchetto. Le voci storiche restano stringhe e
   // restano permanenti — vedi `source-url-ledger.mjs`.
-  map[normalized] = makeLedgerEntry(articleId);
+  map[normalized] = makeLedgerEntry(articleId, Date.now(), sourceText);
   saveSourceUrls(map);
     console.error(
       `  📎 Source URL registrata: ${safeSignalSourceUrlForLog(normalized, null)} → `
@@ -7178,6 +7178,13 @@ export function buildFactCheckCallOptions(baseOpts, cacheEnabled = isFactCheckCa
 // run over the WHOLE text regardless of this cap.
 const MAX_FACTCHECK_ARTICLE_CHARS = 24000;
 
+function buildFactCheckProofRetryPrompt(basePrompt, proofFailures) {
+  if (proofFailures.size === 0) return basePrompt;
+  return `${basePrompt}\n\nCONTROLLO DELLE PROVE PRIMA DI INVIARE IL JSON:\n`
+    + `I verdetti precedenti sono stati scartati per questi requisiti: ${[...proofFailures].join(' | ')}.\n`
+    + 'Prima scegli e copia i passaggi esatti dai blocchi forniti, poi formula il giudizio in base a quei passaggi.';
+}
+
 // Composizione ufficiale: https://www.admin.ch/en/members-federal-council
 const FACT_CHECK_FEDERAL_COUNCILLORS = `Baume-Schneider, Parmelin, Cassis, Keller-Sutter, Pfister, Jans, Rösti`;
 const FACT_CHECK_INVENTED_INSTITUTIONS = `"Codice federale del lavoro", "CFL", "UFOL", "UWL", "Commissione federale per i frontalieri", "Ufficio federale dell'integrazione sanitaria (UFIS)"`;
@@ -7329,6 +7336,7 @@ ${verifiedCantonFactsBlock(verifiedReferenceText)}`;
 Valuta body1–body3 nel loro insieme. Un articolo non supera questo controllo se si limita a riassumere o parafrasare la fonte: deve offrire almeno una relazione, spiegazione o confronto concreto e utile, dimostrabile con fatti e periodi esatti. Un calcolo ricavato da valori espliciti può essere un contributo valido; non serve inventare un cambiamento o una conseguenza che la fonte non documenta. Un confronto deve usare periodi, unità e basi coerenti. Non aggiungere un angolo sul lavoro o sui frontalieri a una notizia non pertinente.
 Attribuisci le notizie alla fonte. Non ritenere supportati reportage sul posto, interviste, fonti proprie o verifiche umane non documentati; ometti cause, effetti, previsioni e consigli fiscali o finanziari senza prove.
 Per articleQuote copia dal blocco CORPO DELL’ARTICOLO un unico passaggio contiguo di almeno 40 caratteri e 7 parole. Per evidenceQuotes copia almeno 16 caratteri consecutivi dalla fonte o da un riferimento verificato, mantenendo lingua originale, punteggiatura e cifre. Prima di rispondere verifica che ciascuna citazione si ritrovi nel suo blocco. Evita titolo, sommario, traduzioni, parafrasi e puntini di sospensione aggiunti. Scrivi in italiano un finding specifico (almeno 35 caratteri e 6 parole) sul dato o sulla relazione dimostrata.
+Per grounded_analysis, riprendi nel finding almeno ${MIN_EDITORIAL_ARTICLE_ANCHORS} termini distinti da articleQuote, con la stessa forma: nomi o parole specifiche di almeno cinque caratteri, oppure cifre. Usali per spiegare il contributo concreto della citazione.
 Usa grounded_analysis solo per un contributo concreto, tracciabile e non già contenuto nella fonte. Usa source_restatement per un riassunto/parafrasi senza contributo aggiunto; unsupported_inference per affermazioni non provate o reportage/interviste/verifiche inventate; insufficient_evidence quando le prove non permettono una valutazione positiva. Una valutazione vaga o dichiarativa non basta.
 
 CRITERI DI GIUDIZIO:
@@ -7432,6 +7440,16 @@ ${proofSuffix}`
   // header during its own loop; this cap guards the outer loop that fires when
   // ALL models have exhausted their per-model retries.
   const FACTCHECK_429_BACKOFF_CAP_MS = 30_000;
+  const FACTCHECK_MIN_ROUND_MS = 15_000;
+  const initialFactCheckMs = factCheckDeadlineMs - Date.now();
+  // When two useful windows fit, keep one for the final verifier. Otherwise
+  // make one primary attempt and leave any unused time to the final verifier.
+  const finalReserveMs = initialFactCheckMs >= 2 * FACTCHECK_MIN_ROUND_MS ? FACTCHECK_MIN_ROUND_MS : 0;
+  const retryDeadlineMs = factCheckDeadlineMs - finalReserveMs;
+  const maxPrimaryRounds = Math.min(
+    FACTCHECK_INFRA_RETRIES,
+    Math.max(1, Math.floor((initialFactCheckMs - finalReserveMs) / FACTCHECK_MIN_ROUND_MS)),
+  );
   let fcLastRejectMsgs = [];
   const fcProviderErrors = [];
   // A usable vote, an empty fulfilled response, or a duplicate vote means at
@@ -7443,7 +7461,8 @@ ${proofSuffix}`
   let missingSecondOpinion = false;
   let activePrompt = prompt;
   let compactRetry = null;
-  for (let fcAttempt = 1; fcAttempt <= FACTCHECK_INFRA_RETRIES && (modelResults.length === 0 || missingSecondOpinion); fcAttempt++) {
+  let observedInputCap = 0;
+  for (let fcAttempt = 1; fcAttempt <= maxPrimaryRounds && (modelResults.length === 0 || missingSecondOpinion); fcAttempt++) {
     if (fcAttempt > 1) {
       const why = missingSecondOpinion ? 'un solo parere indipendente' : 'nessun verdetto';
       console.error(`  🔁 Fact-check: ${why} al tentativo ${fcAttempt - 1} (checker giù/JSON invalido/stesso modello) — ri-eseguo solo la verifica (${fcAttempt}/${FACTCHECK_INFRA_RETRIES})...`);
@@ -7461,7 +7480,7 @@ ${proofSuffix}`
         backoffMs = Math.min(retryAfterMs, FACTCHECK_429_BACKOFF_CAP_MS);
         console.error(`  ⏱️  Fact-check: 429 rate-limit rilevato — backoff ${backoffMs}ms (cap ${FACTCHECK_429_BACKOFF_CAP_MS}ms)`);
       }
-      if (Date.now() + backoffMs >= factCheckDeadlineMs) break;
+      if (retryDeadlineMs - Date.now() - backoffMs < FACTCHECK_MIN_ROUND_MS) break;
       await new Promise(r => setTimeout(r, backoffMs));
     }
     if (compactRetry) {
@@ -7469,6 +7488,13 @@ ${proofSuffix}`
       const { fullEstimate, compactEstimate, cap } = compactRetry;
       compactRetry = null;
       console.error(`  🔁 Fact-check: istruzioni compatte, input stimato ${fullEstimate} → ${compactEstimate} token (tetto ${cap})`);
+    }
+    let verificationPrompt = activePrompt;
+    if (fcAttempt > 1 && editorialProofFailures.size > 0) {
+      const annotatedPrompt = buildFactCheckProofRetryPrompt(activePrompt, editorialProofFailures);
+      if (observedInputCap === 0 || estimateRequestTokens([{ role: 'user', content: annotatedPrompt }]) <= observedInputCap) {
+        verificationPrompt = annotatedPrompt;
+      }
     }
     const roundErrorStart = fcProviderErrors.length;
     fcLastRejectMsgs = [];
@@ -7481,23 +7507,39 @@ ${proofSuffix}`
     // The model cascade may use its entire deadline. Leave each remaining
     // round and the final Codex-only fallback a share of the run budget.
     const now = Date.now();
-    const remainingRounds = FACTCHECK_INFRA_RETRIES - fcAttempt + 2;
-    const deadlineMs = now + Math.floor((factCheckDeadlineMs - now) / remainingRounds);
-    const modelsToQuery = verificationModels.slice(0, 2);
-    const promises = modelsToQuery.slice(0, priorVoters.length ? 1 : 2).map((model, index) => _runSingleFactCheck(model, activePrompt, {
-      fresh: fcAttempt > 1,
-      deadlineMs,
-      invalidVerdictModels,
-      editorialProofFailures,
-      isEvergreen: isEvergreenArticle,
-      editorialContext,
-      excludeModels: [
-        ...priorVoters,
-        ...(index > 0 && modelsToQuery[0] === AI_MODELS.CODEX_CLI_PRIMARY
-          ? [AI_MODELS.CODEX_CLI_PRIMARY]
-          : []),
-      ],
-    }));
+    const remainingMs = retryDeadlineMs - now;
+    if (remainingMs <= 0 || (fcAttempt > 1 && remainingMs < FACTCHECK_MIN_ROUND_MS)) break;
+    const remainingRounds = Math.min(
+      maxPrimaryRounds - fcAttempt + 1,
+      Math.max(1, Math.floor(remainingMs / FACTCHECK_MIN_ROUND_MS)),
+    );
+    const deadlineMs = now + Math.floor(remainingMs / remainingRounds);
+    const primaryModels = verificationModels.slice(0, 2);
+    let modelsToQuery = primaryModels;
+    if (priorVoters.length) {
+      // Prefer the independent lane for the outstanding vote and leave Codex
+      // available for immediate recovery if that lane fails.
+      const eligible = primaryModels.filter((model) => !priorVoters.includes(model));
+      const preferred = eligible.find((model) => model !== AI_MODELS.CODEX_CLI_PRIMARY) ?? eligible[0];
+      modelsToQuery = eligible.length ? [preferred] : [];
+    }
+    const promises = modelsToQuery.map((model, index) => {
+      const excludeCodex = priorVoters.length
+        ? model !== AI_MODELS.CODEX_CLI_PRIMARY && !priorVoters.includes(AI_MODELS.CODEX_CLI_PRIMARY)
+        : index > 0 && modelsToQuery[0] === AI_MODELS.CODEX_CLI_PRIMARY;
+      return _runSingleFactCheck(model, verificationPrompt, {
+        fresh: fcAttempt > 1,
+        deadlineMs,
+        invalidVerdictModels,
+        editorialProofFailures,
+        isEvergreen: isEvergreenArticle,
+        editorialContext,
+        excludeModels: [
+          ...priorVoters,
+          ...(excludeCodex ? [AI_MODELS.CODEX_CLI_PRIMARY] : []),
+        ],
+      });
+    });
     const settled = await Promise.allSettled(promises);
 
     // One vote per model that ANSWERED, not per model asked: callLLM re-sorts
@@ -7528,14 +7570,26 @@ ${proofSuffix}`
     // Recover absent and duplicate votes through a different answering model.
     if (modelResults.length === 1 && (droppedDuplicate || modelResults[0].servedBy !== AI_MODELS.CODEX_CLI_PRIMARY)) {
       const voted = modelResults.map((r) => r.servedBy);
-      const next = verificationModels.slice(2).find((m) => !voted.includes(m))
-        || verificationModels.find((m) => !voted.includes(m))
-        || modelsToQuery[1];
+      const next = priorVoters.length
+        ? verificationModels.find((model) => !voted.includes(model) && !modelsToQuery.includes(model))
+        : verificationModels.slice(2).find((m) => !voted.includes(m))
+          || verificationModels.find((m) => !voted.includes(m))
+          || modelsToQuery[1];
       try {
-        const extra = await _runSingleFactCheck(next, activePrompt, { isEvergreen: isEvergreenArticle, editorialContext, excludeModels: voted, invalidVerdictModels, editorialProofFailures, deadlineMs });
-        const earlier = extra ? addIndependentVote(modelResults, next, extra) : null;
-        fcHadNonOutageResult = true;
-        if (earlier) console.error(`  ⚠️  LLM fact-check (${next}): servito di nuovo da ${earlier.servedBy} — resta un solo voto`);
+        if (next || !priorVoters.length) {
+          const extra = await _runSingleFactCheck(next, verificationPrompt, {
+            isEvergreen: isEvergreenArticle,
+            editorialContext,
+            excludeModels: voted,
+            invalidVerdictModels,
+            editorialProofFailures,
+            deadlineMs,
+            ...(priorVoters.length ? { fresh: true } : {}),
+          });
+          const earlier = extra ? addIndependentVote(modelResults, next, extra) : null;
+          fcHadNonOutageResult = true;
+          if (earlier) console.error(`  ⚠️  LLM fact-check (${next}): servito di nuovo da ${earlier.servedBy} — resta un solo voto`);
+        }
       } catch (err) {
         fcProviderErrors.push(err);
         fcLastRejectMsgs.push(err.message || '');
@@ -7550,7 +7604,7 @@ ${proofSuffix}`
     // If both primary models failed, try fallback
     if (modelResults.length === 0 && verificationModels.length > 2) {
       try {
-        const fallback = await _runSingleFactCheck(verificationModels[2], activePrompt, { isEvergreen: isEvergreenArticle, editorialContext, fresh: fcAttempt > 1, invalidVerdictModels, editorialProofFailures, deadlineMs });
+        const fallback = await _runSingleFactCheck(verificationModels[2], verificationPrompt, { isEvergreen: isEvergreenArticle, editorialContext, fresh: fcAttempt > 1, invalidVerdictModels, editorialProofFailures, deadlineMs });
         if (fallback) {
           addIndependentVote(modelResults, verificationModels[2], fallback);
           missingSecondOpinion = fallback.servedBy !== AI_MODELS.CODEX_CLI_PRIMARY;
@@ -7563,13 +7617,14 @@ ${proofSuffix}`
       }
     }
 
-    if (compactPrompt && activePrompt === prompt && fcAttempt < FACTCHECK_INFRA_RETRIES && (modelResults.length === 0 || missingSecondOpinion)) {
+    if (fcAttempt < FACTCHECK_INFRA_RETRIES && (modelResults.length === 0 || missingSecondOpinion)) {
       let cap = 0;
       for (const error of fcProviderErrors.slice(roundErrorStart)) {
         const budget = error?.retryRequestTokenBudget;
         if (error?.code === 'ALL_MODELS_EXHAUSTED' && Number.isInteger(budget) && budget > cap) cap = budget;
       }
-      if (cap > 0) {
+      if (cap > 0) observedInputCap = observedInputCap === 0 ? cap : Math.min(observedInputCap, cap);
+      if (cap > 0 && compactPrompt && activePrompt === prompt) {
         const fullEstimate = estimateRequestTokens([{ role: 'user', content: prompt }]);
         const compactEstimate = estimateRequestTokens([{ role: 'user', content: compactPrompt }]);
         if (fullEstimate > cap && compactEstimate <= cap) compactRetry = { fullEstimate, compactEstimate, cap };
@@ -7608,11 +7663,7 @@ ${proofSuffix}`
     const selfCheck = _codexWroteThisHeadline ? ' — ha scritto anche questo articolo: si verifica da solo (decisione del proprietario)' : '';
     console.error(`  🛟 LLM fact-check: ${why}, verifico con ${codex}${selfCheck}`);
     try {
-      const retryPrompt = editorialProofFailures.size
-        ? `${prompt}\n\nCONTROLLO DELLE PROVE PRIMA DI INVIARE IL JSON:\n`
-          + `I verdetti precedenti sono stati scartati per questi requisiti: ${[...editorialProofFailures].join(' | ')}.\n`
-          + 'Prima scegli e copia i passaggi esatti dai blocchi forniti, poi formula il giudizio in base a quei passaggi.'
-        : prompt;
+      const retryPrompt = buildFactCheckProofRetryPrompt(prompt, editorialProofFailures);
       const vote = await _runSingleFactCheck(codex, retryPrompt, { isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true, deadlineMs: factCheckDeadlineMs });
       if (vote) addIndependentVote(modelResults, codex, vote);
       fcHadNonOutageResult = true;
@@ -11065,19 +11116,51 @@ function structuralHeadlineForLink(html, linkStart, anchorTag) {
   return null;
 }
 
+function publicationDateFromCardLabel(html, card, labelClass) {
+  const range = headlineElementEnd(html, card);
+  if (range.start === html.length) return null;
+  const inner = html.slice(card.openEnd, range.start);
+  const isLabel = (tag) => tag.name === 'p' && !tag.selfClosing
+    && headlineAttributeValue(tag.attrs, 'class').split(/\s+/u).includes(labelClass);
+  let date = null;
+  for (let label = nextHeadlineElementForOpening(inner, isLabel); label;
+    label = nextHeadlineElementForOpening(inner, isLabel, label.openEnd)) {
+    const stack = headlineAncestorStack(inner, label.openEnd);
+    if (stack.some((node) => node.name === 'li') || headlineStackHasNavigation(stack)) continue;
+    if (headlineElementEnd(inner, label).start !== label.closeStart) continue;
+    const text = headlineTextFromMarkup(label.inner).trim();
+    if (!/^\d{2}\.\d{2}\.\d{4}$/u.test(text)) continue;
+    const candidate = parseHeadlineDate(text)?.date;
+    if (!candidate) continue;
+    if (date && date.getTime() !== candidate.getTime()) return null;
+    date = candidate;
+  }
+  return date;
+}
+
 // ── Step 1b: Extract links and headlines from an HTML page ──
 function extractHeadlines(html, baseUrl) {
   const source = arguments[2] || {};
   const metadataHtml = arguments[3] || html;
   const results = [];
-  const htmlDateMap = extractDatesFromHtml(html, baseUrl, source?.quirks);
-  const embeddedDateMap = extractEmbeddedHeadlineDates(metadataHtml, source?.quirks?.embeddedDateField);
+  const labelClass = source?.quirks?.dateFromCardLabel;
+  const useCardLabel = labelClass === 'dxp-typo-label';
+  const useCardPathPattern = useCardLabel && source.quirks.articlePathPattern;
+  const sourceOrigin = useCardLabel ? new URL(baseUrl).origin : null;
+  const htmlDateMap = useCardLabel ? null : extractDatesFromHtml(html, baseUrl, source?.quirks);
+  const embeddedDateMap = useCardLabel ? null : extractEmbeddedHeadlineDates(metadataHtml, source?.quirks?.embeddedDateField);
   // Match <a href="...">text</a> with the same quote-aware walker used by
   // the ancestor/date scanners; an attribute value may contain `>`.
   let anchor = nextHeadlineAnchor(html);
   while (anchor) {
     const nextAnchor = nextHeadlineAnchor(html, anchor.end);
     const ancestors = headlineAncestorStack(html, anchor.start);
+    const card = useCardLabel ? ancestors.findLast((node) => node.name === 'li') : null;
+    if (useCardLabel && (!card || headlineStackHasNavigation([...ancestors, anchor])
+      || !headlineAttributeValue(anchor.attrs, 'class').split(/\s+/u).includes('stretched-link'))) {
+      anchor = nextAnchor;
+      continue;
+    }
     const anchorTag = html.slice(anchor.start, anchor.openEnd);
     const markup = html.slice(anchor.start, anchor.end);
     if (source?.quirks?.excludePaywalledCards
@@ -11115,7 +11198,12 @@ function extractHeadlines(html, baseUrl) {
     }
     // Resolve relative URLs
     try {
-      href = new URL(href, baseUrl).href;
+      const resolved = new URL(href, baseUrl);
+      if (useCardLabel && (resolved.protocol !== 'https:' || resolved.origin !== sourceOrigin)) {
+        anchor = nextAnchor;
+        continue;
+      }
+      href = resolved.href;
     } catch {
       anchor = nextAnchor;
       continue;
@@ -11125,16 +11213,19 @@ function extractHeadlines(html, baseUrl) {
       anchor = nextAnchor;
       continue;
     }
-    // Skip non-article links (categories, tags, pagination, login, etc.)
-    if (/\/(tag|categor|page|login|registr|cookie|privacy|contatt|archiv|abonn)/i.test(href)) {
+    // This CMS can use navigation-like prefixes in article slugs.
+    // For configured card lists, filterArticleLinks checks the full path and query.
+    if (!useCardPathPattern && /\/(tag|categor|page|login|registr|cookie|privacy|contatt|archiv|abonn)/i.test(href)) {
       anchor = nextAnchor;
       continue;
     }
-    // Extract date from URL path or from nearby <time> elements
-    const date = extractDateFromUrl(href)
-      || htmlDateMap.get(href)
-      || embeddedDateMap.get(embeddedHeadlineDateKey(text))
-      || null;
+    // Configured card labels are the only publication date source for this CMS.
+    const date = useCardLabel
+      ? publicationDateFromCardLabel(html, card, labelClass)
+      : extractDateFromUrl(href)
+        || htmlDateMap.get(href)
+        || embeddedDateMap.get(embeddedHeadlineDateKey(text))
+        || null;
     const lead = publicCardLead(html, anchor.start, source?.quirks);
     results.push({ url: href, headline: text, date, ...(lead ? { lead } : {}) });
     anchor = nextAnchor;
@@ -12694,7 +12785,7 @@ ${_isMeta ? '' : topicalRelevanceGate}
 ${!_isMeta && sourceContract ? `\n${sourceContract}\n` : ''}
 ═══ REGOLA #1 — FEDELTÀ ALLA FONTE (PRIORITÀ MASSIMA) ═══
 
-Offri una spiegazione, un confronto o una relazione concreta e verificabile oltre la parafrasi; non forzare cambiamenti o impatti che le prove non mostrano.
+${_isMeta ? '' : `Se le prove lo consentono, collega due fatti documentati con un passaggio verificabile, come una differenza fra valori comparabili. Mostra la base del confronto. Se mancano i presupposti, resta ai fatti e ai limiti documentati.\n`}
 - Usa solo SOURCE CONTENT e riferimenti verificati; attribuisci le notizie alle fonti e separa fatti, calcoli e deduzioni.
 - Per ogni confronto mostra dati, unità e periodi comparabili; non trasformarlo in previsione.
 - Ometti cause, conseguenze, sviluppi o azioni non documentati. Non inventare reportage, interviste, fonti proprie, testimonianze, verifiche umane o citazioni.
@@ -14387,7 +14478,10 @@ const TRANSLATION_CHUNK_THRESHOLD = 700;
 // fit is rejected before any provider call rather than being sent over the cap
 // with a structural split. This is shared by the initial translation and both
 // retry paths, so every route keeps the same per-call output-cap safety net.
-function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
+function splitIntoTranslationChunks(bodyText, chunkTarget, keepDefaultProtectedCap = false) {
+  const defaultChunkWords = 500;
+  chunkTarget ??= defaultChunkWords;
+  const protectedWordCap = keepDefaultProtectedCap ? Math.max(chunkTarget, defaultChunkWords) : chunkTarget;
   const chunks = [];
   const separators = [];
   const source = String(bodyText || '');
@@ -14870,9 +14964,9 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
     if (index <= atomStart) index = atomStart + 1;
     const atomText = source.slice(atomStart, index);
     const atomWords = countWords(atomText);
-    if (protectedEnd !== null && atomWords > chunkTarget) {
+    if (protectedEnd !== null && atomWords > protectedWordCap) {
       throw new Error(
-        `protected translation atom exceeds translation chunk cap (${atomWords} > ${chunkTarget} words)`,
+        `protected translation atom exceeds translation chunk cap (${atomWords} > ${protectedWordCap} words)`,
       );
     }
     const atomParts = !structuredEnd
@@ -15856,6 +15950,7 @@ async function translatePendingBodyWithHistoricalChain(
   }
   const chunkTranslator = assertChunkTranslator(translateInChunks, 'translatePendingBodyWithHistoricalChain');
   const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
+  const recoveryChunkWords = 240;
   const rejected = [];
   const text = await translateFieldFreeMt({
     text: itValue,
@@ -15864,10 +15959,10 @@ async function translatePendingBodyWithHistoricalChain(
     fieldType: 'description',
     fieldName: field,
     translate: async ({ text: masked }) => {
-      if (countWords(masked || '') > TRANSLATION_CHUNK_THRESHOLD) {
+      if (countWords(masked || '') > recoveryChunkWords) {
         // Reuse the same chunker as the legacy translation and truncation
-        // paths: the historical fallback must not send an oversized body in
-        // one request after Codex has stopped.
+        // paths. Shorter segments reduce omissions after a full-body
+        // translation failed. Validate the reconstructed body as usual.
         const chunked = await chunkTranslator(
           masked,
           field,
@@ -15879,7 +15974,7 @@ async function translatePendingBodyWithHistoricalChain(
           }),
           `${locale}:${field}-pending-retry`,
           locale,
-          { forceLegacy: true },
+          { forceLegacy: true, chunkWords: recoveryChunkWords },
         );
         return chunked;
       }
@@ -16129,7 +16224,7 @@ async function translateArticle(data) {
     makeChunkPrompt,
     labelPrefix,
     targetLang,
-    { pretranslatedResult = null, forceLegacy = false } = {},
+    { pretranslatedResult = null, forceLegacy = false, chunkWords } = {},
   ) {
     // Recovery/free-MT callers may already have carried the transport markers
     // through a first provider. Normalize them before deriving the next
@@ -16142,7 +16237,7 @@ async function translateArticle(data) {
     const tableHeaderMarkers = tableHeaderColumnMarkers(bodyText);
     if (tableHeaderMarkers.collision || tableHeaderMarkers.ambiguous) return reject('source-table-markers');
     const chunks = pretranslatedResult === null
-      ? splitIntoTranslationChunks(tableHeaderMarkers.markedText)
+      ? splitIntoTranslationChunks(tableHeaderMarkers.markedText, chunkWords, chunkWords !== undefined)
       : [tableHeaderMarkers.markedText];
     const translated = pretranslatedResult === null
       ? await Promise.all(
@@ -22512,6 +22607,13 @@ async function main() {
             return; // Success — exit main
           } catch (e) {
             const isDuplicate = isDuplicateError(e);
+            if (isDuplicate && e.duplicateSourceContent) {
+              RUN_REPORT.preFilterDrops.urlAlreadyUsed += 1;
+              console.error('   🔗 Testo fonte già usato — provo un’altra headline (non conta come tentativo)');
+              url = null;
+              attempt--;
+              continue;
+            }
             if (isDuplicate) captureDuplicateReasons(e.message);
             if (isDuplicate && attempt < MAX_DUPLICATE_RETRIES) {
               const safeDuplicateDetail = safeSignalDiagnosticTextForLog(duplicateCandidateDetail(e.message), chosen);
@@ -22548,6 +22650,10 @@ async function main() {
               } catch { /* la memoria e' un risparmio, non un gate */ }
             }
             const isQualityReject = isQualityRejectError(e);
+            if (isQualityReject) {
+              const reason = safeSignalDiagnosticTextForLog(e.message, RUN_REPORT);
+              console.error(`  🚫 Motivo del rigetto: ${reason}`);
+            }
             if (isQualityReject && attempt < MAX_DUPLICATE_RETRIES) {
               const tag = isTopicGateAbort ? 'topic-gate (REGOLA #0)' : 'qualità';
               console.error(`\n⚠️  Articolo rigettato per ${tag} — provo un altro headline... (${attempt}/${MAX_DUPLICATE_RETRIES})\n`);
@@ -23007,6 +23113,12 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     ? sourceContext._cantonSourcePaywall
     : '';
   const pageContent = await fetchPageContent(url, sourceContext);
+  const priorSource = loadSourceUrls()[normalizeNewsUrl(sourceUrl)];
+  if (hasSameLedgerSourceContent(priorSource, pageContent)) {
+    const err = new Error('DUPLICATO: testo della fonte già usato sullo stesso URL');
+    err.duplicateSourceContent = true;
+    throw err;
+  }
 
   // Step 1a: su un URL riusato la pagina deve essere ancora QUESTO item.
   // L'indirizzo porta la notizia del momento: se nel frattempo e' passata a
@@ -24587,7 +24699,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   }
 
   // Track source URL for future duplicate prevention
-  recordSourceUrl(sourceUrl, data.id);
+  recordSourceUrl(sourceUrl, data.id, pageContent);
 
   // Step 5: Git add
   console.error('\n📦 Staging file:');
@@ -25998,6 +26110,14 @@ if (invokedDirectly) {
       + ` unclassified_echoes=${unclassifiedEchoes}`,
     );
     await exitAfterFlush(1);
+  }
+  // A cascade that never started cannot establish shared provider exhaustion.
+  if (e?.deadlineExpiredBeforeCascade && wallBudgetExceeded()) {
+    finalizeRunReport('deferred', {
+      notes: [...RUN_REPORT.notes, 'Deferred (article run deadline reached before model cascade)'],
+    });
+    console.error('⚠️ Differito: budget wall-clock della sezione esaurito prima della chiamata ai modelli.');
+    await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   // ISSUE #313 / #348 — «tutti i modelli sono temporaneamente esauriti» va
   // DIMOSTRATO, non asserito. La condizione ha due meta' ora: il ramo di

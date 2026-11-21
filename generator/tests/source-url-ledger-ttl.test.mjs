@@ -42,6 +42,7 @@ import {
   ledgerArticleIds,
   ledgerViewsForLookup,
   makeLedgerEntry,
+  hasSameLedgerSourceContent,
   readLedgerEntry,
 } from '../scripts/lib/source-url-ledger.mjs';
 import { findCrossSectionSourceDuplicate, SIGNAL_CROSS_SECTION } from '../scripts/lib/cross-section-dedup.mjs';
@@ -254,8 +255,8 @@ test('isSourceUrlAlreadyUsed passa dalle viste, non dai ledger grezzi', () => {
 });
 
 test('recordSourceUrl scrive la voce datata, non la stringa nuda', () => {
-  const fn = cutDecl('function recordSourceUrl(sourceUrl, articleId) {');
-  assert.match(fn, /makeLedgerEntry\(articleId\)/, 'senza ts la voce nasce permanente e la finestra non morde mai');
+  const fn = cutDecl('function recordSourceUrl(sourceUrl, articleId, sourceText) {');
+  assert.match(fn, /makeLedgerEntry\(articleId, Date\.now\(\), sourceText\)/, 'senza ts la voce nasce permanente e la finestra non morde mai');
   assert.ok(
     !/map\[normalized\]\s*=\s*articleId\s*;/.test(fn),
     'recordSourceUrl è tornato a scrivere la stringa nuda',
@@ -280,4 +281,14 @@ test('cross-section-dedup.mjs resta ignaro della finestra', () => {
     !/source-url-ledger|SOURCE_URL_TTL_DAYS|\bts\b\s*[:.]/.test(dedup),
     'cross-section-dedup.mjs ha imparato la forma datata: è `mode: identical`, va replicato sul sito',
   );
+});
+
+test('un URL scaduto distingue il testo già pubblicato da un nuovo documento', () => {
+  const text = 'Comunicato ufficiale con informazioni verificabili. '.repeat(5);
+  const entry = makeLedgerEntry('comunicato', Date.UTC(2026, 10, 12), text);
+  assert.equal(isLedgerEntryExpired(entry, { now: Date.UTC(2026, 10, 21) }), true);
+  assert.equal(hasSameLedgerSourceContent(entry, text.replaceAll('. ', '.\n')), true);
+  assert.equal(hasSameLedgerSourceContent(entry, text.replace('ufficiale', 'aggiornato')), false);
+  assert.equal(hasSameLedgerSourceContent('comunicato', text), false);
+  assert.equal(hasSameLedgerSourceContent(makeLedgerEntry('breve', Date.now(), 'Titolo'), 'Titolo'), false);
 });

@@ -1,3 +1,5 @@
+export const MIN_EDITORIAL_ARTICLE_ANCHORS = 2;
+
 const CLASSIFICATIONS = new Set([
   'grounded_analysis',
   'source_restatement',
@@ -112,7 +114,7 @@ export function validateEditorialAssessment(assessment, { articleBody = '', evid
   // be an exact quote, but can be German/French while the reported analysis is
   // translated; a second lexical overlap there would reject grounded work.
   const articleAnchors = countSharedAnchors(finding, articleQuote);
-  if (articleAnchors < 2) {
+  if (articleAnchors < MIN_EDITORIAL_ARTICLE_ANCHORS) {
     return { passed: false, verifiable: true, classification, articleQuote, evidenceQuotes: supportedQuotes,
       reason: 'la spiegazione non collega il contributo a dettagli specifici e rintracciabili nel testo dell’articolo' };
   }
@@ -135,6 +137,6 @@ export function editorialOriginalityIssue(result) {
     reason: `Originalità editoriale: ${result?.reason || 'la valutazione non è verificabile'}`,
     severity: 'critical',
     category: 'coerenza',
-    fix: 'Rivedi body1–body3: vai oltre la riformulazione della fonte con una spiegazione, un confronto o una relazione concreta verificabile nei fatti citati. Riporta la base e il periodo del confronto. Non inventare cause, conseguenze, consigli fiscali, reportage sul posto, interviste o verifiche umane; attribuisci alla fonte le sue notizie. Se le prove non bastano, restringi il testo ai fatti documentati e non aggiungere un angolo artificiale.',
+    fix: 'Se le prove lo consentono, rielabora il passaggio citato mostrando il rapporto tra fatti documentati. Per un calcolo riporta valori, unità e periodi comparabili. Cambiare solo le parole del passaggio lascia irrisolto il problema. Non inventare cause, conseguenze, consigli fiscali, reportage sul posto, interviste o verifiche umane; attribuisci alla fonte le sue notizie. Se le prove non bastano, restringi il testo ai fatti documentati e non aggiungere un angolo artificiale.',
   };
 }
