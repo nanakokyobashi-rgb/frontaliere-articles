@@ -543,7 +543,7 @@ test('la generazione lavora sull\'indirizzo senza identita\' e registra nel ledg
   const end = SRC.indexOf('\n}\n', start);
   const fn = SRC.slice(start, end);
   assert.match(fn, /const url = stripItemIdentity\(sourceUrl\);/, 'la pagina da scaricare e la citazione devono usare l\'indirizzo del sito');
-  assert.match(fn, /recordSourceUrl\(sourceUrl, data\.id\);/, 'il ledger deve ricevere l\'URL CON l\'identita\' dell\'item');
+  assert.match(fn, /recordSourceUrl\(sourceUrl, data\.id, pageContent\);/, 'il ledger deve ricevere l\'URL CON l\'identita\' dell\'item');
   assert.doesNotMatch(fn, /recordSourceUrl\(url,/, 'registrare l\'URL nudo rimetterebbe in piedi il collasso');
   assert.doesNotMatch(fn, /fetchPageContent\(sourceUrl\)|citationUrl[^;]*sourceUrl/, 'l\'identita\' non deve arrivare ne\' alla fetch ne\' alla citazione');
 });

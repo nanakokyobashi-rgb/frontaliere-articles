@@ -4406,7 +4406,7 @@ function normalizeSourceDomain(domain) {
 // L'import sta qui e non nel blocco in testa al file perche' e' l'unico punto
 // che lo usa e la sezione sotto e' l'unica che ne parla; e' una dichiarazione
 // top-level a tutti gli effetti, quindi resta issata come le altre.
-import { ledgerViewsForLookup, makeLedgerEntry, newsUrlKey, legacyNewsUrlKey, itemIdentityOf, stripItemIdentity, checkItemOnPage, pageTitleEvidence } from './lib/source-url-ledger.mjs';
+import { ledgerViewsForLookup, makeLedgerEntry, hasSameLedgerSourceContent, newsUrlKey, legacyNewsUrlKey, itemIdentityOf, stripItemIdentity, checkItemOnPage, pageTitleEvidence } from './lib/source-url-ledger.mjs';
 
 // ── Source URL tracking: prevent re-using the same news source URL ─────
 function loadSourceUrls() {
@@ -4712,7 +4712,7 @@ function isSourceUrlAlreadyUsed(headlineUrl) {
 }
 
 /** Record a source URL after successful article generation */
-function recordSourceUrl(sourceUrl, articleId) {
+function recordSourceUrl(sourceUrl, articleId, sourceText) {
   if (!sourceUrl || sourceUrl.startsWith('evergreen://')) return;
   const map = loadSourceUrls();
   const normalized = normalizeNewsUrl(sourceUrl);
@@ -4720,7 +4720,7 @@ function recordSourceUrl(sourceUrl, articleId) {
   // il ledger non ha modo di dire quali voci sono ancora attuali, ed e' cio'
   // che lo aveva reso un cricchetto. Le voci storiche restano stringhe e
   // restano permanenti — vedi `source-url-ledger.mjs`.
-  map[normalized] = makeLedgerEntry(articleId);
+  map[normalized] = makeLedgerEntry(articleId, Date.now(), sourceText);
   saveSourceUrls(map);
     console.error(
       `  📎 Source URL registrata: ${safeSignalSourceUrlForLog(normalized, null)} → `
@@ -7178,6 +7178,13 @@ export function buildFactCheckCallOptions(baseOpts, cacheEnabled = isFactCheckCa
 // run over the WHOLE text regardless of this cap.
 const MAX_FACTCHECK_ARTICLE_CHARS = 24000;
 
+function buildFactCheckProofRetryPrompt(basePrompt, proofFailures) {
+  if (proofFailures.size === 0) return basePrompt;
+  return `${basePrompt}\n\nCONTROLLO DELLE PROVE PRIMA DI INVIARE IL JSON:\n`
+    + `I verdetti precedenti sono stati scartati per questi requisiti: ${[...proofFailures].join(' | ')}.\n`
+    + 'Prima scegli e copia i passaggi esatti dai blocchi forniti, poi formula il giudizio in base a quei passaggi.';
+}
+
 // Composizione ufficiale: https://www.admin.ch/en/members-federal-council
 const FACT_CHECK_FEDERAL_COUNCILLORS = `Baume-Schneider, Parmelin, Cassis, Keller-Sutter, Pfister, Jans, Rösti`;
 const FACT_CHECK_INVENTED_INSTITUTIONS = `"Codice federale del lavoro", "CFL", "UFOL", "UWL", "Commissione federale per i frontalieri", "Ufficio federale dell'integrazione sanitaria (UFIS)"`;
@@ -7454,6 +7461,7 @@ ${proofSuffix}`
   let missingSecondOpinion = false;
   let activePrompt = prompt;
   let compactRetry = null;
+  let observedInputCap = 0;
   for (let fcAttempt = 1; fcAttempt <= maxPrimaryRounds && (modelResults.length === 0 || missingSecondOpinion); fcAttempt++) {
     if (fcAttempt > 1) {
       const why = missingSecondOpinion ? 'un solo parere indipendente' : 'nessun verdetto';
@@ -7480,6 +7488,13 @@ ${proofSuffix}`
       const { fullEstimate, compactEstimate, cap } = compactRetry;
       compactRetry = null;
       console.error(`  🔁 Fact-check: istruzioni compatte, input stimato ${fullEstimate} → ${compactEstimate} token (tetto ${cap})`);
+    }
+    let verificationPrompt = activePrompt;
+    if (fcAttempt > 1 && editorialProofFailures.size > 0) {
+      const annotatedPrompt = buildFactCheckProofRetryPrompt(activePrompt, editorialProofFailures);
+      if (observedInputCap === 0 || estimateRequestTokens([{ role: 'user', content: annotatedPrompt }]) <= observedInputCap) {
+        verificationPrompt = annotatedPrompt;
+      }
     }
     const roundErrorStart = fcProviderErrors.length;
     fcLastRejectMsgs = [];
@@ -7512,7 +7527,7 @@ ${proofSuffix}`
       const excludeCodex = priorVoters.length
         ? model !== AI_MODELS.CODEX_CLI_PRIMARY && !priorVoters.includes(AI_MODELS.CODEX_CLI_PRIMARY)
         : index > 0 && modelsToQuery[0] === AI_MODELS.CODEX_CLI_PRIMARY;
-      return _runSingleFactCheck(model, activePrompt, {
+      return _runSingleFactCheck(model, verificationPrompt, {
         fresh: fcAttempt > 1,
         deadlineMs,
         invalidVerdictModels,
@@ -7562,7 +7577,7 @@ ${proofSuffix}`
           || modelsToQuery[1];
       try {
         if (next || !priorVoters.length) {
-          const extra = await _runSingleFactCheck(next, activePrompt, {
+          const extra = await _runSingleFactCheck(next, verificationPrompt, {
             isEvergreen: isEvergreenArticle,
             editorialContext,
             excludeModels: voted,
@@ -7589,7 +7604,7 @@ ${proofSuffix}`
     // If both primary models failed, try fallback
     if (modelResults.length === 0 && verificationModels.length > 2) {
       try {
-        const fallback = await _runSingleFactCheck(verificationModels[2], activePrompt, { isEvergreen: isEvergreenArticle, editorialContext, fresh: fcAttempt > 1, invalidVerdictModels, editorialProofFailures, deadlineMs });
+        const fallback = await _runSingleFactCheck(verificationModels[2], verificationPrompt, { isEvergreen: isEvergreenArticle, editorialContext, fresh: fcAttempt > 1, invalidVerdictModels, editorialProofFailures, deadlineMs });
         if (fallback) {
           addIndependentVote(modelResults, verificationModels[2], fallback);
           missingSecondOpinion = fallback.servedBy !== AI_MODELS.CODEX_CLI_PRIMARY;
@@ -7602,13 +7617,14 @@ ${proofSuffix}`
       }
     }
 
-    if (compactPrompt && activePrompt === prompt && fcAttempt < FACTCHECK_INFRA_RETRIES && (modelResults.length === 0 || missingSecondOpinion)) {
+    if (fcAttempt < FACTCHECK_INFRA_RETRIES && (modelResults.length === 0 || missingSecondOpinion)) {
       let cap = 0;
       for (const error of fcProviderErrors.slice(roundErrorStart)) {
         const budget = error?.retryRequestTokenBudget;
         if (error?.code === 'ALL_MODELS_EXHAUSTED' && Number.isInteger(budget) && budget > cap) cap = budget;
       }
-      if (cap > 0) {
+      if (cap > 0) observedInputCap = observedInputCap === 0 ? cap : Math.min(observedInputCap, cap);
+      if (cap > 0 && compactPrompt && activePrompt === prompt) {
         const fullEstimate = estimateRequestTokens([{ role: 'user', content: prompt }]);
         const compactEstimate = estimateRequestTokens([{ role: 'user', content: compactPrompt }]);
         if (fullEstimate > cap && compactEstimate <= cap) compactRetry = { fullEstimate, compactEstimate, cap };
@@ -7647,11 +7663,7 @@ ${proofSuffix}`
     const selfCheck = _codexWroteThisHeadline ? ' — ha scritto anche questo articolo: si verifica da solo (decisione del proprietario)' : '';
     console.error(`  🛟 LLM fact-check: ${why}, verifico con ${codex}${selfCheck}`);
     try {
-      const retryPrompt = editorialProofFailures.size
-        ? `${prompt}\n\nCONTROLLO DELLE PROVE PRIMA DI INVIARE IL JSON:\n`
-          + `I verdetti precedenti sono stati scartati per questi requisiti: ${[...editorialProofFailures].join(' | ')}.\n`
-          + 'Prima scegli e copia i passaggi esatti dai blocchi forniti, poi formula il giudizio in base a quei passaggi.'
-        : prompt;
+      const retryPrompt = buildFactCheckProofRetryPrompt(prompt, editorialProofFailures);
       const vote = await _runSingleFactCheck(codex, retryPrompt, { isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true, deadlineMs: factCheckDeadlineMs });
       if (vote) addIndependentVote(modelResults, codex, vote);
       fcHadNonOutageResult = true;
@@ -12773,7 +12785,7 @@ ${_isMeta ? '' : topicalRelevanceGate}
 ${!_isMeta && sourceContract ? `\n${sourceContract}\n` : ''}
 ═══ REGOLA #1 — FEDELTÀ ALLA FONTE (PRIORITÀ MASSIMA) ═══
 
-Offri una spiegazione, un confronto o una relazione concreta e verificabile oltre la parafrasi; non forzare cambiamenti o impatti che le prove non mostrano.
+${_isMeta ? '' : `Se le prove lo consentono, collega due fatti documentati con un passaggio verificabile, come una differenza fra valori comparabili. Mostra la base del confronto. Se mancano i presupposti, resta ai fatti e ai limiti documentati.\n`}
 - Usa solo SOURCE CONTENT e riferimenti verificati; attribuisci le notizie alle fonti e separa fatti, calcoli e deduzioni.
 - Per ogni confronto mostra dati, unità e periodi comparabili; non trasformarlo in previsione.
 - Ometti cause, conseguenze, sviluppi o azioni non documentati. Non inventare reportage, interviste, fonti proprie, testimonianze, verifiche umane o citazioni.
@@ -22591,6 +22603,13 @@ async function main() {
             return; // Success — exit main
           } catch (e) {
             const isDuplicate = isDuplicateError(e);
+            if (isDuplicate && e.duplicateSourceContent) {
+              RUN_REPORT.preFilterDrops.urlAlreadyUsed += 1;
+              console.error('   🔗 Testo fonte già usato — provo un’altra headline (non conta come tentativo)');
+              url = null;
+              attempt--;
+              continue;
+            }
             if (isDuplicate) captureDuplicateReasons(e.message);
             if (isDuplicate && attempt < MAX_DUPLICATE_RETRIES) {
               const safeDuplicateDetail = safeSignalDiagnosticTextForLog(duplicateCandidateDetail(e.message), chosen);
@@ -23086,6 +23105,12 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     ? sourceContext._cantonSourcePaywall
     : '';
   const pageContent = await fetchPageContent(url, sourceContext);
+  const priorSource = loadSourceUrls()[normalizeNewsUrl(sourceUrl)];
+  if (hasSameLedgerSourceContent(priorSource, pageContent)) {
+    const err = new Error('DUPLICATO: testo della fonte già usato sullo stesso URL');
+    err.duplicateSourceContent = true;
+    throw err;
+  }
 
   // Step 1a: su un URL riusato la pagina deve essere ancora QUESTO item.
   // L'indirizzo porta la notizia del momento: se nel frattempo e' passata a
@@ -24666,7 +24691,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   }
 
   // Track source URL for future duplicate prevention
-  recordSourceUrl(sourceUrl, data.id);
+  recordSourceUrl(sourceUrl, data.id, pageContent);
 
   // Step 5: Git add
   console.error('\n📦 Staging file:');
