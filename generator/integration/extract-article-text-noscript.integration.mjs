@@ -24,6 +24,26 @@ test('extracts a German iCMS detail date at UTC midnight and preserves the body'
     + 'Visitors can borrow books and attend workshops at the new public facility.');
 });
 
+test('extracts an iCMS detail date from the active article root', () => {
+  const body = '<p>The municipality will open a reading room for local residents this spring.</p>'
+    + '<p>Visitors can borrow books and attend workshops at the new public facility.</p>';
+  const result = extractArticleText(`<article>${icmsDate('7. März 2024')}${body}</article>`, {
+    scriptingDisabled: true,
+  });
+
+  assert.equal(result.publishedAt, '2024-03-07T00:00:00.000Z');
+  assert.equal(result.method, 'article-tag');
+});
+
+test('preserves the iCMS date when the noscript-safe fallback is selected', () => {
+  const result = extractArticleText(`<main>${icmsDate('7. März 2024')}
+    <noscript><div>Fallback content remains available when scripts are disabled.</div></noscript>
+  </main>`, { scriptingDisabled: true });
+
+  assert.equal(result.method, 'naive-fallback');
+  assert.equal(result.publishedAt, '2024-03-07T00:00:00.000Z');
+});
+
 test('keeps JSON-LD, publication meta and explicit time ahead of the iCMS date', () => {
   const detail = icmsDate('7. März 2024');
   const time = '<time itemprop="datePublished" datetime="2024-02-03"></time>';

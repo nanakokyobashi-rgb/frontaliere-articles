@@ -151,8 +151,14 @@ export function extractPublishedDate(document) {
   const timeRaw = timeEl ? (timeEl.getAttribute('datetime') || '').trim() : '';
   if (timeRaw && !Number.isNaN(new Date(timeRaw).getTime())) return new Date(timeRaw).toISOString();
 
+  // The caller's editorial root is article-first, then main. Keep the date
+  // lookup inside that same root so a visible date in an unrelated shell does
+  // not establish publication for the article being extracted.
+  const inactiveRootSelector = 'nav, aside, footer, template, noscript, [hidden], [aria-hidden="true"]';
+  const editorialRoot = [document.querySelector('article'), document.querySelector('main')]
+    .find(root => root && !root.closest(inactiveRootSelector)) || document;
   // Only a single visible iCMS detail date can establish publication.
-  const detailDates = [...document.querySelectorAll('main div.icms-lead-container > div.icms-information-date')]
+  const detailDates = [...editorialRoot.querySelectorAll('div.icms-lead-container > div.icms-information-date')]
     .filter(el => !el.closest('nav, aside, footer, template, noscript, [hidden], [aria-hidden="true"]'));
   if (detailDates.length !== 1) return '';
 
@@ -660,7 +666,7 @@ function selectNoscriptJsonLdPrecedence(document, fallbacks) {
   return bodies.reduce((best, body) => (!best || body.length > best.length ? body : best), null);
 }
 
-function safeNoscriptNaiveFallback(document, fallbacks, maxChars) {
+function safeNoscriptNaiveFallback(document, fallbacks, maxChars, publishedAt = '') {
   const sourceNoscripts = topLevelNoscripts(document.body);
   const clone = document.body.cloneNode(true);
   const clonedNoscripts = topLevelNoscripts(clone);
@@ -677,7 +683,7 @@ function safeNoscriptNaiveFallback(document, fallbacks, maxChars) {
 
   for (const node of clone.querySelectorAll('script, style')) node.remove();
   const text = capExtractedText(cleanText(clone.textContent || ''), maxChars);
-  return { text, method: 'naive-fallback', paragraphCount: 0 };
+  return { text, method: 'naive-fallback', paragraphCount: 0, publishedAt };
 }
 
 function prepareNoscriptSource(html) {
@@ -872,16 +878,16 @@ export function extractArticleText(html, opts = {}) {
   }
 
   // 6. Last resort: legacy naive strip — preserves prior behaviour.
-  if (noscriptFallbacks) return safeNoscriptNaiveFallback(document, noscriptFallbacks, maxChars);
-  return naiveFallback(html, maxChars);
+  if (noscriptFallbacks) return safeNoscriptNaiveFallback(document, noscriptFallbacks, maxChars, publishedAt);
+  return naiveFallback(html, maxChars, publishedAt);
 }
 
-function naiveFallback(html, maxChars) {
+function naiveFallback(html, maxChars, publishedAt = '') {
   const text = capExtractedText(html
     .replace(/<script[\s\S]*?<\/script>/gi, '')
     .replace(/<style[\s\S]*?<\/style>/gi, '')
     .replace(/<[^>]+>/g, ' ')
     .replace(/\s+/g, ' ')
     .trim(), maxChars);
-  return { text, method: 'naive-fallback', paragraphCount: 0 };
+  return { text, method: 'naive-fallback', paragraphCount: 0, publishedAt };
 }
