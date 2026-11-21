@@ -31,6 +31,34 @@
     "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/kantonsspital-uri-erhoeht-die-lohnsumme-naechstes-jahr-um-12-prozent-art-1733353": {
       "section": "canton-sz",
       "ts": 1795218780368
+    },
+    "canton-sz::https://www.einsiedeln.ch/verwaltung/mitteilungen/aktuelle-mitteilungen?m=4581": {
+      "section": "canton-sz",
+      "ts": 1795256018720
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/engelberg-erweitert-tempo-30-zone-art-1733329": {
+      "section": "canton-sz",
+      "ts": 1795256033661
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/schweizer-firmen-testen-4-tage-woche-bei-gleichem-lohn-art-1733072": {
+      "section": "canton-sz",
+      "ts": 1795256053229
+    },
+    "canton-sz::https://www.nau.ch/ort/schwyz/kanton-schwyz-einheitliche-gesundheitsfinanzierung-soll-2028-starten-67203386": {
+      "section": "canton-sz",
+      "ts": 1795256991581
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/dallenwil-investiert-in-schule-turnhalle-und-verwaltung-art-1733455": {
+      "section": "canton-sz",
+      "ts": 1795257005252
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/mitte-sagt-ja-zum-budget-2027-und-zur-sanierung-der-guberstrasse-art-1733349": {
+      "section": "canton-sz",
+      "ts": 1795257014430
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/wintersperre-auf-der-panoramastrasse-art-1733130": {
+      "section": "canton-sz",
+      "ts": 1795257024254
     }
   }
 }
