@@ -15057,10 +15057,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.rsi.ch/s/4255856": {
-      "section": "frontaliere",
-      "ts": 1795110538248
-    },
     "svizzera::https://www.rsi.ch/s/4255856": {
       "section": "svizzera",
       "ts": 1795118183401
@@ -15156,6 +15152,10 @@
     "svizzera::https://www.swissinfo.ch/ita/gr%3a-pi%c3%b9-deduzioni-premi-cassa-malati%2c-lanciata-iniziativa-popolare/92416959": {
       "section": "svizzera",
       "ts": 1795280275763
+    },
+    "frontaliere::https://www.rsi.ch/s/4255856": {
+      "section": "frontaliere",
+      "ts": 1795283869913
     }
   }
 }
