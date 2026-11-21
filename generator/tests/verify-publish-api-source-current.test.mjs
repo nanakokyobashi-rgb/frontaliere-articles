@@ -81,7 +81,7 @@ function runHelper({
 test('freshness helper autorizza un avanzamento non-API senza mutare il commit dell artifact', () => {
   const result = runHelper({ apiInputChanged: false });
   assert.equal(result.status, 0);
-  assert.match(result.output, /solo con bookkeeping/u);
+  assert.match(result.output, /con gli input API invariati/u);
   assert.match(result.output, new RegExp('source=' + SOURCE));
   assert.doesNotMatch(result.output, new RegExp('PUBLISH_API_SOURCE_COMMIT=' + CURRENT));
 });
@@ -91,7 +91,7 @@ test('freshness helper classifica la snapshot di main restituita dal fetch', () 
   const result = runHelper({ apiInputChanged: false, fetchedMain });
   assert.equal(result.status, 0);
   assert.match(result.output, new RegExp('main=' + fetchedMain));
-  assert.match(result.output, /solo con bookkeeping/u);
+  assert.match(result.output, /con gli input API invariati/u);
 });
 
 test('freshness helper rifiuta un fetch piu vecchio della HEAD autorevole', () => {
