@@ -6,6 +6,8 @@
  * HTML. The replacement is deliberately stale-value guarded: a later full
  * site build or an editorial update remains authoritative.
  */
+import { htmlAttributes } from '../../generator/scripts/lib/html-tag-scanner.mjs';
+
 export const SWISS_HUB_ROOT_SEO_IT = Object.freeze({
   title: 'Articoli sulla Svizzera 2026 | Frontaliere Ticino',
   description: 'Notizie, analisi e guide sulla Svizzera per frontalieri: tasse, lavoro, costo della vita e aggiornamenti cantonali.',
@@ -256,21 +258,59 @@ const HEAD_META_PATCHES = Object.freeze([
   },
 ]);
 
+function attributeValueSpan(markup, wantedName) {
+  const source = String(markup);
+  const tag = readTag(source, 0);
+  if (!tag || tag.malformed || tag.closing) return null;
+  const end = tag.end;
+  let index = 1 + tag.name.length;
+  while (index < end) {
+    while (index < end && isHtmlWhitespace(source[index])) index++;
+    if (index >= end || source[index] === '/') break;
+    const nameStart = index;
+    while (
+      index < end
+      && !isHtmlWhitespace(source[index])
+      && source[index] !== '"'
+      && source[index] !== "'"
+      && source[index] !== '<'
+      && source[index] !== '>'
+      && source[index] !== '/'
+      && source[index] !== '='
+      && source[index] !== '\x60'
+    ) index++;
+    if (index === nameStart) return null;
+    const name = source.slice(nameStart, index).toLowerCase();
+    while (index < end && isHtmlWhitespace(source[index])) index++;
+    if (source[index] !== '=') continue;
+    index++;
+    while (index < end && isHtmlWhitespace(source[index])) index++;
+    if (index >= end) return null;
+    const quote = source[index];
+    let valueStart = index;
+    let valueEnd = index;
+    if (quote === '"' || quote === "'") {
+      valueStart = ++index;
+      while (index < end && source[index] !== quote) index++;
+      if (index >= end) return null;
+      valueEnd = index++;
+    } else {
+      while (index < end && !isHtmlWhitespace(source[index]) && source[index] !== '>') index++;
+      valueEnd = index;
+    }
+    if (name === String(wantedName).toLowerCase()) return { start: valueStart, end: valueEnd };
+  }
+  return null;
+}
+
 function patchMetaTag(tag) {
-  // Attribute names must start at the tag boundary or after whitespace:
-  // `data-name`/`data-content` are unrelated attributes and must not satisfy
-  // the stale metadata guard by word-boundary coincidence.
-  const content = /(?:^|\s)content\s*=\s*(['"])(.*?)\1/i;
+  const attrs = Object.fromEntries(htmlAttributes(tag));
   for (const patch of HEAD_META_PATCHES) {
-    const identity = new RegExp(
-      `(?:^|\\s)${escapeRegExp(patch.attribute)}\\s*=\\s*(["'])${escapeRegExp(patch.attributeValue)}\\1`,
-      'i',
-    );
-    if (!identity.test(tag)) continue;
-    const match = content.exec(tag);
-    if (!match || match[2] !== patch.staleValue) return tag;
-    const valueOffset = match[0].indexOf(match[2]);
-    return `${tag.slice(0, match.index)}${match[0].slice(0, valueOffset)}${patch.nextValue}${match[1]}${tag.slice(match.index + match[0].length)}`;
+    if (String(attrs[patch.attribute] || '').toLowerCase() !== patch.attributeValue.toLowerCase()) continue;
+    if (attrs.content !== patch.staleValue) return tag;
+    const span = attributeValueSpan(tag, 'content');
+    if (!span || tag.slice(span.start, span.end) !== patch.staleValue) return tag;
+    return tag.slice(0, span.start) + patch.nextValue + tag.slice(span.end);
   }
   return tag;
 }

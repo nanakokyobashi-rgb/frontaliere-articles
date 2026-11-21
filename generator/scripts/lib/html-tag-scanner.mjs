@@ -329,13 +329,45 @@ export function nextHtmlTag(html, from = 0, skipComments = true) {
 }
 
 export function findHtmlClosingTag(html, from, name) {
+  const target = String(name ?? '').toLowerCase();
+  if (isHtmlRawTextTag(target)) return findHtmlRawTextClosingTag(html, from, target);
+
+  let depth = 1;
   let cursor = from;
-  let tag;
-  while ((tag = nextHtmlTag(html, cursor, true)) !== null) {
-    if (tag.closing && tag.name === name) return tag;
+  while (true) {
+    const result = nextHtmlTagStatus(html, cursor, true);
+    if (result.status !== 'tag') return null;
+    const tag = result.tag;
+
+    if (tag.closing && tag.name === target) {
+      depth -= 1;
+      if (depth === 0) return tag;
+      cursor = tag.end;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && tag.name === target) {
+      depth += 1;
+      cursor = tag.end;
+      continue;
+    }
+
+    // A literal closing tag in raw text or an inactive template must not
+    // close the active element being searched. Skip the whole inactive node.
+    if (!tag.closing && isHtmlRawTextTag(tag.name)) {
+      const close = findHtmlRawTextClosingTag(html, tag.end, tag.name);
+      if (!close) return null;
+      cursor = close.end;
+      continue;
+    }
+    if (!tag.closing && tag.name === 'template') {
+      const close = findHtmlClosingTag(html, tag.end, 'template');
+      if (!close) return null;
+      cursor = close.end;
+      continue;
+    }
+
     cursor = tag.end;
   }
-  return null;
 }
 
 export function nextHtmlElementWhere(html, predicate, from = 0) {
@@ -383,17 +415,53 @@ const HTML_RAW_TEXT_TAGS = new Set([
   'noembed', 'noframes',
 ]);
 
+export function isHtmlRawTextTag(name) {
+  return HTML_RAW_TEXT_TAGS.has(String(name ?? '').toLowerCase());
+}
+
 /** Cerca markup visibile saltando commenti e i contenuti raw di script/style. */
+export function nextHtmlTagOutsideRawTextStatus(html, from = 0) {
+  let result = nextHtmlTagStatus(html, from, true);
+  while (result.status === 'tag') {
+    const { tag } = result;
+    // HTML treats a slash on a non-void raw-text opening tag as data: the
+    // element remains open until its matching closing tag. Do not let the
+    // scanner's syntactic selfClosing flag expose pseudo-tags in its body.
+    if (!tag.closing && isHtmlRawTextTag(tag.name)) {
+      const close = findHtmlRawTextClosingTag(html, tag.end, tag.name);
+      if (!close) return MALFORMED_HTML_TAG;
+      result = nextHtmlTagStatus(html, close.end, true);
+      continue;
+    }
+    return result;
+  }
+  return result;
+}
+
 export function nextHtmlTagOutsideRawText(html, from = 0) {
-  let tag = nextHtmlTag(html, from, true);
-  while (tag) {
-    if (!tag.closing && !tag.selfClosing && HTML_RAW_TEXT_TAGS.has(tag.name)) {
+  const result = nextHtmlTagOutsideRawTextStatus(html, from);
+  return result.status === 'tag' ? result.tag : null;
+}
+
+/** Itera i tag attivi ignorando commenti, raw-text e template inattivi. */
+export function nextHtmlTagOutsideInactive(html, from = 0) {
+  let cursor = from;
+  while (true) {
+    const result = nextHtmlTagStatus(html, cursor, true);
+    if (result.status !== 'tag') return null;
+    const tag = result.tag;
+    if (!tag.closing && isHtmlRawTextTag(tag.name)) {
       const close = findHtmlRawTextClosingTag(html, tag.end, tag.name);
       if (!close) return null;
-      tag = nextHtmlTag(html, close.end, true);
+      cursor = close.end;
+      continue;
+    }
+    if (!tag.closing && tag.name === 'template') {
+      const close = findHtmlClosingTag(html, tag.end, 'template');
+      if (!close) return null;
+      cursor = close.end;
       continue;
     }
     return tag;
   }
-  return null;
 }
