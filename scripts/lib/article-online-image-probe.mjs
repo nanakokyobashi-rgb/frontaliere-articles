@@ -15,7 +15,11 @@
  * that there is nothing to protect.
  */
 import { GENERIC_IMAGE_PATH, normalizeImagePath } from './article-image-postcondition.mjs';
-import { htmlAttributes, nextHtmlTagOutsideRawTextStatus } from '../../generator/scripts/lib/html-tag-scanner.mjs';
+import {
+  findHtmlClosingTag,
+  htmlAttributes,
+  nextHtmlTagOutsideRawTextStatus,
+} from '../../generator/scripts/lib/html-tag-scanner.mjs';
 
 export const ONLINE_IMAGE = Object.freeze({
   ABSENT: 'absent',
@@ -53,6 +57,11 @@ function realHtmlTags(html) {
       ...tag,
       attrs: Object.fromEntries(htmlAttributes(source.slice(tag.start, tag.end))),
     });
+    if (tag.name === 'template') {
+      const close = findHtmlClosingTag(source, tag.end, 'template');
+      if (!close) return { tags, malformed: true };
+      cursor = close.end;
+    }
   }
 }
 

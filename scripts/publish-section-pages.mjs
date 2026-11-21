@@ -66,8 +66,10 @@ import {
 } from '../generator/scripts/lib/fetch-with-ref-timeout.mjs';
 import {
   findHtmlClosingTag,
+  findHtmlRawTextClosingTag,
   htmlAttributes,
-  nextHtmlTagOutsideRawTextStatus,
+  isHtmlRawTextTag,
+  nextHtmlTagStatus,
 } from '../generator/scripts/lib/html-tag-scanner.mjs';
 
 import { IMAGE_FETCH_TIMEOUT_MS, MAX_DECLARED_IMAGE_BYTES } from './lib/declared-image-fetch.mjs';
@@ -829,7 +831,7 @@ function scanRealHtmlTags(html) {
   const tags = [];
   let cursor = 0;
   while (true) {
-    const result = nextHtmlTagOutsideRawTextStatus(source, cursor);
+    const result = nextHtmlTagStatus(source, cursor);
     if (result.status === 'eof') return { tags, malformed: false };
     if (result.status === 'malformed') return { tags, malformed: true };
     const { tag } = result;
@@ -839,11 +841,23 @@ function scanRealHtmlTags(html) {
       ...tag,
       attrs: Object.fromEntries(htmlAttributes(source.slice(tag.start, tag.end))),
     });
+    if (isHtmlRawTextTag(tag.name)) {
+      const close = findHtmlRawTextClosingTag(source, tag.end, tag.name);
+      if (!close) return { tags, malformed: true };
+      cursor = close.end;
+      continue;
+    }
+    if (tag.name === 'template') {
+      const close = findHtmlClosingTag(source, tag.end, 'template');
+      if (!close) return { tags, malformed: true };
+      cursor = close.end;
+    }
   }
 }
 
 function hasRouteOwnerMeta(html) {
-  return realHtmlTags(html).some((tag) => tag.name === 'meta'
+  const scan = scanRealHtmlTags(html);
+  return !scan.malformed && scan.tags.some((tag) => tag.name === 'meta'
     && String(tag.attrs.name || '').toLowerCase() === 'ft-route-owner'
     && String(tag.attrs.content || '').toLowerCase() === 'corpus');
 }
@@ -851,7 +865,8 @@ function hasRouteOwnerMeta(html) {
 function cantonRssFeedLinkDefects(html, requiredRssUrl) {
   const escapedUrl = escapeHtmlAttribute(requiredRssUrl);
   const source = String(html ?? '');
-  const tags = realHtmlTags(source);
+  const scan = scanRealHtmlTags(source);
+  const tags = scan.tags;
   const isRssLink = (tag) => tag.name === 'link'
     && Object.hasOwn(tag.attrs, 'data-canton-rss-feed')
     && String(tag.attrs.rel || '').toLowerCase() === 'alternate'
@@ -866,7 +881,7 @@ function cantonRssFeedLinkDefects(html, requiredRssUrl) {
     const close = findHtmlClosingTag(source, tag.end, 'a');
     return Boolean(close && source.slice(tag.end, close.start) === 'RSS');
   })?.attrs.href;
-  const defects = [];
+  const defects = scan.malformed ? ['markup HTML malformato'] : [];
   if (rssHead !== escapedUrl) defects.push(`link RSS autodiscovery ${rssHead ?? 'assente'} diverso da ${requiredRssUrl}`);
   if (rssAnchor !== escapedUrl) defects.push(`link RSS visibile ${rssAnchor ?? 'assente'} diverso da ${requiredRssUrl}`);
   return defects;
@@ -884,8 +899,7 @@ export function pageDefects(page, html, { requiredRssUrl = null } = {}) {
   const linkTags = tags.filter((tag) => tag.name === 'link');
   const defects = [];
   if (!source || source.length < 200) defects.push('vuota o troncata');
-  if (scan.malformed) defects.push('HTML malformato o troncato');
-  if (scan.malformed) return defects;
+  if (scan.malformed) defects.push('markup HTML malformato');
   // Il router della SPA resta in staticOverlay solo su un documento che porta
   // questo meta: senza, sopra la pagina comparirebbe NotFoundSuggestions.
   if (!tags.some((tag) => tag.name === 'meta'
@@ -906,7 +920,7 @@ export function pageDefects(page, html, { requiredRssUrl = null } = {}) {
   if (page.kind === 'landing' && requiredRssUrl) {
     defects.push(...cantonRssFeedLinkDefects(html, requiredRssUrl));
   }
-  return defects;
+  return [...new Set(defects)];
 }
 
 /**
@@ -944,7 +958,9 @@ export function createRenderRoot(rootDir, tmpBase = os.tmpdir()) {
 export function ensureRouteOwnerMeta(html) {
   const source = String(html);
   if (hasRouteOwnerMeta(source)) return source;
-  const tags = realHtmlTags(source);
+  const scan = scanRealHtmlTags(source);
+  if (scan.malformed) throw new Error('pagina HTML malformata: impossibile dichiarare ft-route-owner');
+  const tags = scan.tags;
   const charset = tags.find((tag) => tag.name === 'meta' && Object.hasOwn(tag.attrs, 'charset'));
   if (charset) {
     return source.slice(0, charset.end) + '\n' + CORPUS_ROUTE_OWNER_META_TAG + source.slice(charset.end);

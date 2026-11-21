@@ -78,6 +78,14 @@ test('un 200 che non è la pagina richiesta non prova nulla: shell del 404, altr
   assert.equal(classifyOnlinePage({ status: 200, html: articlePage(''), url: URL_IT }).state, ONLINE_IMAGE.UNKNOWN);
 });
 
+test('pseudo og:image dentro raw-text o template non diventa l’immagine della pagina', () => {
+  const html = `<meta property="og:url" content="${URL_IT}">`
+    + '<script>const fake = \'<meta property="og:image" content="/images/blog/fake.webp">\';</script>'
+    + '<template><meta property="og:image" content="/images/blog/template.webp"></template>'
+    + GENERIC;
+  assert.equal(classifyOnlinePage({ status: 200, html, url: URL_IT }).state, ONLINE_IMAGE.GENERIC);
+});
+
 test('il probe considera solo tag e attributi reali, non pseudo-metadata dentro un attributo quotato', () => {
   const fake = `<div data-note='<meta property="og:url" content="${URL_IT}"><link rel="canonical" href="${URL_IT}">'>${GENERIC}</div>`;
   assert.equal(

@@ -2567,9 +2567,10 @@ test('publisher: pageDefects rifiuta markup HTML malformato dopo i metadata vali
   const html =
     '<!doctype html><html><head><meta charset="utf-8">' +
     CORPUS_ROUTE_OWNER_META_TAG +
-    `<link rel="canonical" href="${page.apexUrl}"></head><body><main>` +
-    'contenuto '.repeat(40) + '</main></body></html><div data-note="unfinished>';
-  assert.match(pageDefects(page, html).join('|'), /HTML malformato o troncato/);
+    '<link rel="canonical" href="' + page.apexUrl + '"></head>' +
+    '<body><main>' + 'contenuto '.repeat(40) + '</main>' +
+    '<script data-broken="unfinished></body></html>';
+  assert.match(pageDefects(page, html).join('|'), /markup HTML malformato/);
 });
 
 test('publisher: le landing live annunciano il feed edge della propria locale', () => {

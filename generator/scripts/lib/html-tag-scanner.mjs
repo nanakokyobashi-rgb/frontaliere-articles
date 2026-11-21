@@ -329,13 +329,45 @@ export function nextHtmlTag(html, from = 0, skipComments = true) {
 }
 
 export function findHtmlClosingTag(html, from, name) {
+  const target = String(name ?? '').toLowerCase();
+  if (isHtmlRawTextTag(target)) return findHtmlRawTextClosingTag(html, from, target);
+
+  let depth = 1;
   let cursor = from;
-  let tag;
-  while ((tag = nextHtmlTag(html, cursor, true)) !== null) {
-    if (tag.closing && tag.name === name) return tag;
+  while (true) {
+    const result = nextHtmlTagStatus(html, cursor, true);
+    if (result.status !== 'tag') return null;
+    const tag = result.tag;
+
+    if (tag.closing && tag.name === target) {
+      depth -= 1;
+      if (depth === 0) return tag;
+      cursor = tag.end;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && tag.name === target) {
+      depth += 1;
+      cursor = tag.end;
+      continue;
+    }
+
+    // A literal closing tag in raw text or an inactive template must not
+    // close the active element being searched. Skip the whole inactive node.
+    if (!tag.closing && isHtmlRawTextTag(tag.name)) {
+      const close = findHtmlRawTextClosingTag(html, tag.end, tag.name);
+      if (!close) return null;
+      cursor = close.end;
+      continue;
+    }
+    if (!tag.closing && tag.name === 'template') {
+      const close = findHtmlClosingTag(html, tag.end, 'template');
+      if (!close) return null;
+      cursor = close.end;
+      continue;
+    }
+
     cursor = tag.end;
   }
-  return null;
 }
 
 export function nextHtmlElementWhere(html, predicate, from = 0) {
@@ -409,4 +441,27 @@ export function nextHtmlTagOutsideRawTextStatus(html, from = 0) {
 export function nextHtmlTagOutsideRawText(html, from = 0) {
   const result = nextHtmlTagOutsideRawTextStatus(html, from);
   return result.status === 'tag' ? result.tag : null;
+}
+
+/** Itera i tag attivi ignorando commenti, raw-text e template inattivi. */
+export function nextHtmlTagOutsideInactive(html, from = 0) {
+  let cursor = from;
+  while (true) {
+    const result = nextHtmlTagStatus(html, cursor, true);
+    if (result.status !== 'tag') return null;
+    const tag = result.tag;
+    if (!tag.closing && isHtmlRawTextTag(tag.name)) {
+      const close = findHtmlRawTextClosingTag(html, tag.end, tag.name);
+      if (!close) return null;
+      cursor = close.end;
+      continue;
+    }
+    if (!tag.closing && tag.name === 'template') {
+      const close = findHtmlClosingTag(html, tag.end, 'template');
+      if (!close) return null;
+      cursor = close.end;
+      continue;
+    }
+    return tag;
+  }
 }

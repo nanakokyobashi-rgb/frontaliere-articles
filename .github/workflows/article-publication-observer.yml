@@ -59,6 +59,7 @@ jobs:
             /generator/scripts/lib/fetch-with-ref-timeout.mjs
             /generator/scripts/lib/google-service-account-token.mjs
             /generator/scripts/lib/source-copy-guard.mjs
+            /generator/scripts/lib/html-tag-scanner.mjs
             /scripts/ci/article-publication-observer.mjs
             /scripts/lib/article-registry-reader.mjs
             /scripts/lib/content-updated-at.mjs

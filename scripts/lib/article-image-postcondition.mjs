@@ -1,13 +1,9 @@
 export const GENERIC_IMAGE_PATH = '/og-image.png';
 const SITE_ORIGIN = 'https://frontaliereticino.ch';
-
-function attrsFromTag(tag) {
-  const attrs = {};
-  for (const match of String(tag).matchAll(/([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g)) {
-    attrs[String(match[1]).toLowerCase()] = match[2] ?? match[3] ?? '';
-  }
-  return attrs;
-}
+import {
+  htmlAttributes,
+  nextHtmlTagOutsideInactive,
+} from '../../generator/scripts/lib/html-tag-scanner.mjs';
 export function normalizeImagePath(value) {
   const raw = String(value ?? '').trim();
   if (!raw) return null;
@@ -26,11 +22,16 @@ export function declaredImageIsOwn(value) {
 }
 
 export function extractOgImage(html) {
-  for (const match of String(html ?? '').matchAll(/<meta\b[^>]*>/gi)) {
-    const attrs = attrsFromTag(match[0]);
+  const source = String(html ?? '');
+  let cursor = 0;
+  while (true) {
+    const tag = nextHtmlTagOutsideInactive(source, cursor);
+    if (!tag) return null;
+    cursor = tag.end;
+    if (tag.closing || tag.name !== 'meta') continue;
+    const attrs = Object.fromEntries(htmlAttributes(source.slice(tag.start, tag.end)));
     if (String(attrs.property || '').toLowerCase() === 'og:image') return attrs.content || null;
   }
-  return null;
 }
 
 export function isGenericOgImage(html) {
