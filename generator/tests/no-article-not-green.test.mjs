@@ -303,8 +303,13 @@ test('le ragioni locali alla sezione e quelle del pool condiviso usano codici di
   // verifier e quota usano il codice 5 quando il servizio condiviso non regge.
   const declared = src.match(/(?:process\.exit|await exitAfterFlush)\(EXIT_NO_ARTICLE_DECLARED\)/g) || [];
   assert.equal(
-    declared.length, 9,
-    'le nove ragioni locali alla sezione devono mantenere il codice 4',
+    declared.length, 10,
+    'le dieci ragioni locali alla sezione devono mantenere il codice 4',
+  );
+  assert.match(
+    src,
+    /if \(e\?\.deadlineExpiredBeforeCascade && wallBudgetExceeded\(\)\) \{[\s\S]{0,450}await exitAfterFlush\(EXIT_NO_ARTICLE_DECLARED\)/u,
+    'la scadenza prima della cascata deve dichiarare un rinvio locale',
   );
   const providerUnavailable = src.match(/await exitAfterFlush\(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE\)/g) || [];
   assert.equal(providerUnavailable.length, 3, 'fact-check, cover verifier e quota devono dichiarare il blocco condiviso col codice 5');

@@ -49,3 +49,8 @@ test('the initial Pages wait stays inside the shared recovery budget', () => {
   assert.match(workflow, /PAGES_BUILD_WAIT_WINDOW_SECONDS=300/u);
   assert.doesNotMatch(workflow, /PAGES_BUILD_WAIT_BUDGET_SECONDS=600/u);
 });
+
+test('fast-publish-article retains pending plans while serializing each shard', () => {
+  const publish = jobBlock('publish');
+  assert.match(publish, /concurrency:\n +group: fast-publish-article-\$\{\{ matrix\.target\.shard \}\}[\s\S]*?\n +queue: max\n +cancel-in-progress: false/u);
+});
