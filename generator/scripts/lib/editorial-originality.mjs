@@ -137,6 +137,6 @@ export function editorialOriginalityIssue(result) {
     reason: `Originalità editoriale: ${result?.reason || 'la valutazione non è verificabile'}`,
     severity: 'critical',
     category: 'coerenza',
-    fix: 'Riscrivi il passaggio citato collegando due fatti documentati nel corpo. Mostra il calcolo oppure spiega il rapporto concreto tra i fatti, citando i dati e i periodi usati. Cambiare solo le parole del passaggio lascia irrisolto il problema. Non inventare cause, conseguenze, consigli fiscali, reportage sul posto, interviste o verifiche umane; attribuisci alla fonte le sue notizie. Se le prove non bastano, restringi il testo ai fatti documentati e non aggiungere un angolo artificiale.',
+    fix: 'Se le prove lo consentono, rielabora il passaggio citato mostrando il rapporto tra fatti documentati. Per un calcolo riporta valori, unità e periodi comparabili. Cambiare solo le parole del passaggio lascia irrisolto il problema. Non inventare cause, conseguenze, consigli fiscali, reportage sul posto, interviste o verifiche umane; attribuisci alla fonte le sue notizie. Se le prove non bastano, restringi il testo ai fatti documentati e non aggiungere un angolo artificiale.',
   };
 }
