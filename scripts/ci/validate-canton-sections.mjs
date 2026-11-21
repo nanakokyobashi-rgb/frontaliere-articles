@@ -105,7 +105,7 @@ const QUIRKS = {
   extractCardLead: (v) => v === 'text' || v === 'media-title',
   articleDateFromDetail: (v) => v === 'html-meta',
   sitemapDetail: (v) => v === AG_PRESS_DETAIL,
-  titleAttributeTemplate: (v) => v === 'beitrag-lesen',
+  titleAttributeTemplate: (v) => v === 'beitrag-lesen' || v === 'mehr-erfahren',
   embeddedDateField: (v) => v === 'publishDate',
   articleContent: (v) => v === 'html-text',
   urlDateFormat: (v) => v === 'YYMMDD',

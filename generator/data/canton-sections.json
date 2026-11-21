@@ -8302,6 +8302,22 @@
           "notes": "HTML server-rendered: 20 link /ort/altdorf-ur/... con <time dateTime> ISO. 46 <time> in pagina ma solo 5 negli ultimi 7 giorni (include correlati di altre regioni; filtrare per prefisso /ort/altdorf-ur/). Nessun RSS (/rss, /feed 404). Molti pezzi rielaborano comunicati Kapo Uri. robots.txt: User-agent * senza Disallow rilevanti."
         },
         {
+          "url": "https://altdorf.ch/aktuelles/neuigkeiten",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Gemeinde Altdorf",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": ["servizi", "mobilita", "fisco"],
+          "quirks": {
+            "titleAttributeTemplate": "mehr-erfahren",
+            "articlePathPattern": "^/aktuelles/neuigkeiten/[^/?#]+/?(?:\\?from=\\d+)?$"
+          },
+          "items7d": 4,
+          "verifiedAt": "2026-11-21",
+          "notes": "Comunicati comunali con date DD.MM.YYYY e titolo nel link accessibile Mehr erfahren. Include bilancio, pianificazione e servizi."
+        },
+        {
           "url": "https://www.ur.ch/mmdirektionen",
           "format": "html",
           "parser": "html-links",

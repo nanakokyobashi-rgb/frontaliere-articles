@@ -10897,6 +10897,11 @@ function headlineCandidateIsUsable(text) {
 }
 
 function configuredHeadlineFromAnchor(anchorTag, quirks) {
+  if (quirks?.titleAttributeTemplate === 'mehr-erfahren') {
+    const label = headlineAttributeValue(anchorTag, 'aria-label');
+    const match = label.match(/^\s*Mehr erfahren:\s*(.+?)\s*$/iu);
+    return match ? headlineCandidateIsUsable(match[1]) : null;
+  }
   if (quirks?.titleAttributeTemplate !== 'beitrag-lesen') return null;
   const title = headlineAttributeValue(anchorTag, 'title');
   const match = title.match(/^\s*Beitrag\s+['"]([\s\S]+)['"]\s+lesen\.\s*$/iu);
