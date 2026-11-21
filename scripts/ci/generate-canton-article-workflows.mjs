@@ -45,6 +45,8 @@
  *     della sezione, cosi' l'articolo di un cantone non sveglia gli altri 23;
  *     se un commit rigenera piu' chiamanti, l'admit elegge un solo self-test
  *     dry dal batch e gli altri escono senza consumare uno slot runner;
+ *     il job del chiamante scarta poi il commit canonico prodotto dalla
+ *     propria sezione, che altrimenti riaccenderebbe lo stesso caller;
  *   - concurrency per sezione sul job completo di produzione, cosi' un arrivo
  *     di un cantone non sostituisce il pending di un altro durante i ~60 minuti
  *     di generazione; il push resta protetto dal rebase/merge delle superfici
@@ -776,6 +778,7 @@ export function buildCallerWorkflow(canton, offset) {
   }
   const nativeSchedule = canton.cloudScheduler ? '' : `  schedule:\n    - cron: '${cronExpression(canton, offset)}'\n`;
   const { pushPaths, bodyPathRegex } = sectionCorpusPaths(section);
+  const producerCommitMessage = `Generate blog article (${section})`;
   return `${AUTO_GENERATED_MARKER}
 # Sorgente: ${PROFILE_REL} (cronMinute, cadenceHours) + engine/shared/articleSectionCore.mjs (path della sezione).
 # La logica sta in ${WORKFLOWS_DIR}/${CORE_WORKFLOW}; il self-test comune in ${WORKFLOWS_DIR}/${CANTON_SELF_TEST_WORKFLOW}; l'ammissione in scripts/ci/canton-generation-admit.mjs.
@@ -824,6 +827,9 @@ permissions:
 
 jobs:
   generate:
+    # Il commit prodotto da questo caller entra nei suoi push.paths; non deve
+    # consumare un altro slot Cloud Scheduler come successore di se stesso.
+    if: \${{ github.event_name != 'push' || github.event.head_commit.message != '${producerCommitMessage}' }}
     permissions:
       actions: read
       contents: read
