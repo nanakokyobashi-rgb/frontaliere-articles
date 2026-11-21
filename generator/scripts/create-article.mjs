@@ -1258,10 +1258,7 @@ async function _classifyFrontaliereRelevanceUncached(headline, summary, sourceUr
     )
     : RUN_START_MS + RUN_WALL_BUDGET_MS);
   const remainingClassifierMs = classifierDeadline - Date.now();
-  if (remainingClassifierMs <= 0) {
-    return { relevant: true, reason: 'classifier-deadline-exceeded', fromError: true };
-  }
-  const classifierCallTimeout = Math.min(classifierTimeout, Math.floor(remainingClassifierMs));
+  let classifierCallTimeout = Math.min(classifierTimeout, Math.floor(remainingClassifierMs));
   if (classifierCallTimeout <= 0) {
     return { relevant: true, reason: 'classifier-deadline-exceeded', fromError: true };
   }
@@ -1298,57 +1295,70 @@ ${sourceHint ? `FONTE: ${sourceHint}\n` : ''}${summary ? `SOMMARIO: ${String(sum
 Rispondi ESATTAMENTE in questo formato (una riga):
 relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
 
-  // Decisions API e' solo il nuovo primo tentativo. Se manca la chiave o la
-  // chiamata fallisce, il wrapper restituisce null e si prosegue nel percorso
-  // LLM storico qui sotto: questa integrazione non sceglie un provider
-  // fallback separato.
+  // Per un no cantonale, 0,5 è la soglia operativa: se la confidenza è
+  // pari o inferiore, oppure non valida, si richiede una conferma testuale.
+  let uncertainNegative = null;
   if (process.env.DECISION_API_ENABLED === '1') {
     const decision = await tryDecisionsApiClassifier(prompt, classifierCallTimeout, SECTION_NAME);
-    if (decision) return decision;
+    if (decision) {
+      const { confidence } = decision;
+      if (!IS_CANTON || decision.relevant
+        || (Number.isFinite(confidence) && confidence > 0.5 && confidence <= 1)) {
+        return decision;
+      }
+      uncertainNegative = decision;
+      console.error(`PRESPEND_DECISION_API_FALLBACK section=${SECTION_NAME || 'unknown'} code=DECISIONS_API_UNCERTAIN_NEGATIVE`);
+    }
   }
 
+  classifierCallTimeout = Math.min(classifierCallTimeout, Math.floor(classifierDeadline - Date.now()));
+  if (classifierCallTimeout <= 0) {
+    return uncertainNegative ?? { relevant: true, reason: 'classifier-deadline-exceeded', fromError: true };
+  }
   let text = '';
   try {
     text = await _aiCallLLM(
       [{ role: 'user', content: prompt }],
       {
+        // Il timeout HTTP limita la richiesta in volo al tempo residuo.
+        // La deadline assoluta limita anche i fallback interni del broker.
+        timeout: classifierCallTimeout,
+        deadlineMs: classifierDeadline,
         model,
         temperature: 0,
         maxTokens: 80,
-        // Il timeout HTTP non puo' superare il residuo della deadline assoluta:
-        // ai-models controlla la deadline fra i fallback, ma una richiesta gia'
-        // partita puo' restare in volo fino al suo timeout.
-        timeout: classifierCallTimeout,
         jsonMode: false,
-        // deadlineMs (2026-08-18): senza questo UNA classificazione puo'
-        // camminare l'intera catena di fallback di ai-models.mjs. Il roster
-        // parte dalla cascata Codex/fallback: il gate ne
-        // chiede fino a `maxClassifier` di fila. Qui si chiama `_aiCallLLM`
-        // diretto, quindi il default del wrapper locale `callLLM` (che il
-        // deadlineMs ce l'ha) non si eredita: va passato a mano.
-        // deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS resta il termine per
-        // le sezioni storiche; la cantonale usa una finestra piu' stretta.
-        deadlineMs: classifierDeadline,
       },
     );
   } catch (err) {
-    // Classifier failed — fail-open. REGOLA #0 will catch anything bad.
+    // Senza un verdetto precedente il fallback resta fail-open.
     // La cache la scrive il wrapper `classifyFrontaliereRelevance`.
-    return { relevant: true, reason: `classifier-error: ${err?.message || 'unknown'}`, fromError: true };
+    return uncertainNegative ?? { relevant: true, reason: `classifier-error: ${err?.message || 'unknown'}`, fromError: true };
   }
 
-  const verdict = /relevant\s*=\s*(yes|no|s[ìi]|si|true|false)/i.exec(text);
-  const reasonMatch = /reason\s*=\s*([^\n\r]+)/i.exec(text);
-  const verdictRaw = verdict ? verdict[1].toLowerCase() : '';
-  // Drop only on explicit "no" / "false". Anything else (yes/sì/si/true OR
-  // unparseable output) is fail-open: REGOLA #0 stays as defense-in-depth,
-  // we'd rather spend one article-gen attempt than silently drop a legit
-  // headline because of a small parser surprise.
-  const explicitNo = verdictRaw === 'no' || verdictRaw === 'false';
+  let verdict;
+  let reason;
+  if (uncertainNegative) {
+    if (typeof text !== 'string') return uncertainNegative;
+    text = text.trim();
+    if (/[\r\n\u2028\u2029]/.test(text)) return uncertainNegative;
+    verdict = /^relevant\s*=\s*(yes|no|s[ìi]|true|false)(?:\s*;\s*reason\s*=\s*(.+))?$/i.exec(text);
+    if (!verdict) return uncertainNegative;
+    reason = verdict[2];
+    // Una motivazione non può contenere un secondo campo di verdetto.
+    if (reason && /(?:^|[;\s])relevant\s*=/i.test(reason)) return uncertainNegative;
+  } else {
+    verdict = /relevant\s*=\s*(yes|no|s[ìi]|si|true|false)/i.exec(text);
+    reason = /reason\s*=\s*([^\n\r]+)/i.exec(text)?.[1];
+  }
   const parsed = Boolean(verdict);
+  const verdictRaw = verdict ? verdict[1].toLowerCase() : '';
+  // Senza un verdetto precedente, il testo irriconoscibile resta fail-open
+  // e la REGOLA #0 continua a fare da backstop.
+  const explicitNo = verdictRaw === 'no' || verdictRaw === 'false';
   const result = {
     relevant: !explicitNo,
-    reason: (reasonMatch ? reasonMatch[1] : text).trim().slice(0, 200),
+    reason: (reason ?? text).trim().slice(0, 200),
     parsed,
   };
   return result;
