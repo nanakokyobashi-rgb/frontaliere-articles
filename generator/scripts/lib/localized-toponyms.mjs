@@ -1294,12 +1294,13 @@ export function repairGeneratedArticleToponyms(data) {
   const sourceProfile = createLocalizedToponymSourceProfile(sourceText);
   const provisionalSlugs = new Set(Array.isArray(data._slugsProvisionalFromIt) ? data._slugsProvisionalFromIt : []);
   for (const locale of LOCALIZED_TOPONYM_LOCALES.filter((item) => item !== 'it')) {
-    repairPairedArticleToponyms(data.content.it, data.content[locale], locale);
+    repairPairedArticleToponyms(data.content?.it, data.content?.[locale], locale);
     if (typeof data.imageAlt?.it === 'string' && typeof data.imageAlt[locale] === 'string') {
       data.imageAlt[locale] = repairPairedArticleToponyms(data.imageAlt.it, data.imageAlt[locale], locale);
     }
     const targetText = data.slugs?.[locale];
-    if (typeof targetText === 'string' && targetText && !provisionalSlugs.has(locale)) {
+    // Let slug derivation handle Italian fallbacks and validate the localized title.
+    if (typeof targetText === 'string' && targetText && targetText !== data.slugs.it && !provisionalSlugs.has(locale)) {
       data.slugs[locale] = replaceLocalizedToponymMismatches({
         sourceText, sourceProfile, targetText, locale, slug: true,
       }).text;
