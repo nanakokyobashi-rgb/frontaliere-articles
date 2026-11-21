@@ -96,7 +96,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          # Automatic runs can wait in the queue, so resolve main at checkout before scanning.
+          ref: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_run') && 'refs/heads/main' || github.sha }}
           fetch-depth: 1
+          persist-credentials: false
 
       - name: Set up Node
         uses: actions/setup-node@v7
@@ -117,10 +120,23 @@ jobs:
           cap="${{ inputs.cap || '3' }}"
           node scripts/reconcile-article-shards.mjs \
             --out "$RUNNER_TEMP/reconcile.json" --cap "$cap"
+          source_commit="$(git rev-parse HEAD)"
+          current_main="$(bash scripts/ci/read-main-head.sh)"
+          if ! [[ "$source_commit" =~ ^[a-f0-9]{40}$ ]] || ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::HEAD del reconcile o HEAD corrente di main non valida"
+            exit 1
+          fi
+          if [ "$source_commit" != "$current_main" ]; then
+            echo "::notice::reconcile stantio: checkout $source_commit, main $current_main; nessun backfill armato"
+            echo 'head_guard=false' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           {
             echo "missing=$(jq -r '.counts.missing' "$RUNNER_TEMP/reconcile.json")"
             echo "selected=$(jq -r '.counts.selected' "$RUNNER_TEMP/reconcile.json")"
             echo "leftover=$(jq -r '.counts.leftover' "$RUNNER_TEMP/reconcile.json")"
+            echo "source_commit=$source_commit"
+            echo 'head_guard=true'
           } >> "$GITHUB_OUTPUT"
 
       # La coda si drena da sola (vedi intestazione), ma niente la richiudeva:
@@ -132,11 +148,19 @@ jobs:
       # rifiuto non deve più risultare verde in silenzio.
       - name: Close ghost-articles issue (coda drenata)
         continue-on-error: true
-        if: steps.detect.outcome == 'success' && steps.detect.outputs.missing == '0'
+        if: steps.detect.outcome == 'success' && steps.detect.outputs.head_guard == 'true' && steps.detect.outputs.missing == '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          SOURCE_COMMIT: ${{ steps.detect.outputs.source_commit }}
         run: |
+          set -euo pipefail
+          if ! [[ "${SOURCE_COMMIT:-}" =~ ^[a-f0-9]{40}$ ]] ||
+            ! current_main="$(bash scripts/ci/read-main-head.sh)" ||
+            [ "$current_main" != "$SOURCE_COMMIT" ]; then
+            echo "::notice::main non verificabile o avanzata; issue fantasma lasciata aperta"
+            exit 0
+          fi
           node scripts/ci/resolve-issue-verified.mjs \
             --title "Articoli fantasma: annunciati senza pagina sugli shard" \
             --workflow "reconcile-article-shards" \
@@ -177,11 +201,12 @@ jobs:
 
       - name: Backfill (dispatch fast-publish-article per gli id selezionati)
         id: backfill
-        if: steps.mode.outputs.allow == 'true' && steps.arm.outputs.allow == 'true' && steps.detect.outputs.selected != '0'
+        if: steps.mode.outputs.allow == 'true' && steps.arm.outputs.allow == 'true' && steps.detect.outputs.head_guard == 'true' && steps.detect.outputs.selected != '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WF: fast-publish-article.yml
           GH_API_TIMEOUT_SECONDS: ${{ vars.GH_API_TIMEOUT_SECONDS }}
+          SOURCE_COMMIT: ${{ steps.detect.outputs.source_commit }}
         run: |
           set -euo pipefail
           results="$RUNNER_TEMP/backfill-results.tsv"
@@ -200,6 +225,26 @@ jobs:
           SOFT_BUDGET=2100   # niente item nuovi oltre i 35 min
           HARD_DEADLINE=2700 # niente attese oltre i 45 min (timeout job: 50)
           elapsed() { echo $(( $(date +%s) - START_TS )); }
+
+          verifyMainHeadAtDispatch() {
+            local current_main=''
+            if ! [[ "${SOURCE_COMMIT:-}" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::warning::source_commit non valida per il backfill; interrompo il batch"
+              return 1
+            fi
+            if ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
+              echo "::warning::impossibile verificare main immediatamente prima del dispatch; interrompo il batch"
+              return 1
+            fi
+            if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::warning::HEAD di main non valida immediatamente prima del dispatch: $current_main; interrompo il batch"
+              return 1
+            fi
+            if [ "$current_main" != "$SOURCE_COMMIT" ]; then
+              echo "::notice::main e' avanzata dopo la detection ($SOURCE_COMMIT -> $current_main); interrompo il batch"
+              return 2
+            fi
+          }
 
           # Ogni lettura dell'API tollera il transitorio degradando verso la
           # scelta PRUDENTE (occupato/tetto raggiunto → rimandare): un blip di
@@ -557,8 +602,20 @@ jobs:
 
             before="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
             echo "── dispatch backfill: $section/$id"
+            if verifyMainHeadAtDispatch; then
+              :
+            else
+              verify_status=$?
+              if [ "$verify_status" -eq 2 ]; then
+                echo "::notice::nessun dispatch stantio; il resto viene ripreso dal prossimo giro"
+              else
+                echo "::warning::nessun dispatch: impossibile dimostrare che main sia ancora la revisione del report"
+              fi
+              break
+            fi
             if ! gh_api_timeout -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/dispatches" \
               -f ref=main \
+              -f "inputs[source_commit]=${SOURCE_COMMIT}" \
               -f "inputs[article_id]=$id" \
               -f "inputs[section]=$section" \
               -f "inputs[dry_run]=false"; then
@@ -677,7 +734,7 @@ jobs:
       # e la raccoglie lo sweep — stesso degrado morbido di
       # workflow-failure-issues.yml.
       - name: Prepare Firebase credentials
-        if: always() && steps.detect.outcome == 'success' && (steps.backfill.outputs.failed > 0 || steps.backfill.outputs.unprocessed > 0 || steps.detect.outputs.leftover != '0')
+        if: always() && steps.detect.outcome == 'success' && steps.detect.outputs.head_guard == 'true' && (steps.backfill.outputs.failed > 0 || steps.backfill.outputs.unprocessed > 0 || steps.detect.outputs.leftover != '0')
         continue-on-error: true
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
@@ -688,12 +745,12 @@ jobs:
           fi
 
       - name: Load secrets from Remote Config
-        if: always() && steps.detect.outcome == 'success' && (steps.backfill.outputs.failed > 0 || steps.backfill.outputs.unprocessed > 0 || steps.detect.outputs.leftover != '0')
+        if: always() && steps.detect.outcome == 'success' && steps.detect.outputs.head_guard == 'true' && (steps.backfill.outputs.failed > 0 || steps.backfill.outputs.unprocessed > 0 || steps.detect.outputs.leftover != '0')
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
       - name: Open/update the canonical issue (backfill falliti o coda oltre il cap)
-        if: always() && steps.detect.outcome == 'success' && (steps.backfill.outputs.failed > 0 || steps.backfill.outputs.unprocessed > 0 || steps.detect.outputs.leftover != '0')
+        if: always() && steps.detect.outcome == 'success' && steps.detect.outputs.head_guard == 'true' && (steps.backfill.outputs.failed > 0 || steps.backfill.outputs.unprocessed > 0 || steps.detect.outputs.leftover != '0')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
