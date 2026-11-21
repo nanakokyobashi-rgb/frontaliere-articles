@@ -109,14 +109,43 @@ read_run_list() {
 }
 
 list_matching_runs() {
-  local runs
+  local runs matches active_state page
   runs="$(read_run_list)" || return 1
-  jq -c --arg title "$display_title" --arg current "$current_run_id" '
+  matches="$(jq -c --arg title "$display_title" --arg current "$current_run_id" '
     [.[] | select(
       ((.displayTitle // "") == $title or ((.displayTitle // "") | startswith($title + " / dry=")))
       and ((.databaseId | tostring) != $current)
     )]
-  ' <<< "$runs"
+  ' <<< "$runs")" || return 1
+  if [[ "$display_title" != *" / nonce=stale-late-"* ]] ||
+    { [ "$matches" != '[]' ] && jq -e 'any(.[]; .status != "completed")' <<< "$matches" >/dev/null; } ||
+    ! jq -e 'length >= 100' <<< "$runs" >/dev/null; then
+    printf '%s\n' "$matches"
+    return
+  fi
+
+  # Old queued runs can fall out of the recent history before they get a runner.
+  # Check the active states independently of the checkout SHA: main can advance
+  # between choosing the replay source and submitting the dispatch.
+  for active_state in requested waiting pending queued in_progress; do
+    page="$(gh api --paginate \
+      "repos/$repository/actions/workflows/fast-publish-section.yml/runs?branch=main&event=workflow_dispatch&status=$active_state&per_page=100" |
+      jq -sc --arg title "$display_title" --arg current "$current_run_id" '
+        if length == 0 or any(.[]; (.workflow_runs | type) != "array") then
+          error("risposta non valida durante la ricerca dei replay attivi")
+        else
+          [.[].workflow_runs[] | select(
+             ((.display_title // "") == $title or ((.display_title // "") | startswith($title + " / dry=")))
+             and ((.id | tostring) != $current)
+          ) | {databaseId: .id, displayTitle: .display_title, status, conclusion}]
+        end
+      ')" || return 1
+    if [ "$page" != '[]' ]; then
+      jq -cn --argjson recent "$matches" --argjson active "$page" '$recent + $active'
+      return
+    fi
+  done
+  printf '%s\n' "$matches"
 }
 
 query_state() {
