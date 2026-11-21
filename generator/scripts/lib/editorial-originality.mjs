@@ -1,3 +1,5 @@
+export const MIN_EDITORIAL_ARTICLE_ANCHORS = 2;
+
 const CLASSIFICATIONS = new Set([
   'grounded_analysis',
   'source_restatement',
@@ -112,7 +114,7 @@ export function validateEditorialAssessment(assessment, { articleBody = '', evid
   // be an exact quote, but can be German/French while the reported analysis is
   // translated; a second lexical overlap there would reject grounded work.
   const articleAnchors = countSharedAnchors(finding, articleQuote);
-  if (articleAnchors < 2) {
+  if (articleAnchors < MIN_EDITORIAL_ARTICLE_ANCHORS) {
     return { passed: false, verifiable: true, classification, articleQuote, evidenceQuotes: supportedQuotes,
       reason: 'la spiegazione non collega il contributo a dettagli specifici e rintracciabili nel testo dell’articolo' };
   }
