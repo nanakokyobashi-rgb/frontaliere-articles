@@ -42,3 +42,6 @@ paths:
   .github/workflows/reconcile-section-pages.yml:
     ignore:
       - 'unexpected key "queue" for "concurrency" section'
+  .github/workflows/reconcile-article-shards.yml:
+    ignore:
+      - 'unexpected key "queue" for "concurrency" section'
