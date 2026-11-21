@@ -7499,21 +7499,32 @@ ${proofSuffix}`
       Math.max(1, Math.floor(remainingMs / FACTCHECK_MIN_ROUND_MS)),
     );
     const deadlineMs = now + Math.floor(remainingMs / remainingRounds);
-    const modelsToQuery = verificationModels.slice(0, 2);
-    const promises = modelsToQuery.slice(0, priorVoters.length ? 1 : 2).map((model, index) => _runSingleFactCheck(model, activePrompt, {
-      fresh: fcAttempt > 1,
-      deadlineMs,
-      invalidVerdictModels,
-      editorialProofFailures,
-      isEvergreen: isEvergreenArticle,
-      editorialContext,
-      excludeModels: [
-        ...priorVoters,
-        ...(index > 0 && modelsToQuery[0] === AI_MODELS.CODEX_CLI_PRIMARY
-          ? [AI_MODELS.CODEX_CLI_PRIMARY]
-          : []),
-      ],
-    }));
+    const primaryModels = verificationModels.slice(0, 2);
+    let modelsToQuery = primaryModels;
+    if (priorVoters.length) {
+      // Prefer the independent lane for the outstanding vote and leave Codex
+      // available for immediate recovery if that lane fails.
+      const eligible = primaryModels.filter((model) => !priorVoters.includes(model));
+      const preferred = eligible.find((model) => model !== AI_MODELS.CODEX_CLI_PRIMARY) ?? eligible[0];
+      modelsToQuery = eligible.length ? [preferred] : [];
+    }
+    const promises = modelsToQuery.map((model, index) => {
+      const excludeCodex = priorVoters.length
+        ? model !== AI_MODELS.CODEX_CLI_PRIMARY && !priorVoters.includes(AI_MODELS.CODEX_CLI_PRIMARY)
+        : index > 0 && modelsToQuery[0] === AI_MODELS.CODEX_CLI_PRIMARY;
+      return _runSingleFactCheck(model, activePrompt, {
+        fresh: fcAttempt > 1,
+        deadlineMs,
+        invalidVerdictModels,
+        editorialProofFailures,
+        isEvergreen: isEvergreenArticle,
+        editorialContext,
+        excludeModels: [
+          ...priorVoters,
+          ...(excludeCodex ? [AI_MODELS.CODEX_CLI_PRIMARY] : []),
+        ],
+      });
+    });
     const settled = await Promise.allSettled(promises);
 
     // One vote per model that ANSWERED, not per model asked: callLLM re-sorts
@@ -7544,14 +7555,26 @@ ${proofSuffix}`
     // Recover absent and duplicate votes through a different answering model.
     if (modelResults.length === 1 && (droppedDuplicate || modelResults[0].servedBy !== AI_MODELS.CODEX_CLI_PRIMARY)) {
       const voted = modelResults.map((r) => r.servedBy);
-      const next = verificationModels.slice(2).find((m) => !voted.includes(m))
-        || verificationModels.find((m) => !voted.includes(m))
-        || modelsToQuery[1];
+      const next = priorVoters.length
+        ? verificationModels.find((model) => !voted.includes(model) && !modelsToQuery.includes(model))
+        : verificationModels.slice(2).find((m) => !voted.includes(m))
+          || verificationModels.find((m) => !voted.includes(m))
+          || modelsToQuery[1];
       try {
-        const extra = await _runSingleFactCheck(next, activePrompt, { isEvergreen: isEvergreenArticle, editorialContext, excludeModels: voted, invalidVerdictModels, editorialProofFailures, deadlineMs });
-        const earlier = extra ? addIndependentVote(modelResults, next, extra) : null;
-        fcHadNonOutageResult = true;
-        if (earlier) console.error(`  ⚠️  LLM fact-check (${next}): servito di nuovo da ${earlier.servedBy} — resta un solo voto`);
+        if (next || !priorVoters.length) {
+          const extra = await _runSingleFactCheck(next, activePrompt, {
+            isEvergreen: isEvergreenArticle,
+            editorialContext,
+            excludeModels: voted,
+            invalidVerdictModels,
+            editorialProofFailures,
+            deadlineMs,
+            ...(priorVoters.length ? { fresh: true } : {}),
+          });
+          const earlier = extra ? addIndependentVote(modelResults, next, extra) : null;
+          fcHadNonOutageResult = true;
+          if (earlier) console.error(`  ⚠️  LLM fact-check (${next}): servito di nuovo da ${earlier.servedBy} — resta un solo voto`);
+        }
       } catch (err) {
         fcProviderErrors.push(err);
         fcLastRejectMsgs.push(err.message || '');
@@ -26054,6 +26077,14 @@ if (invokedDirectly) {
       + ` unclassified_echoes=${unclassifiedEchoes}`,
     );
     await exitAfterFlush(1);
+  }
+  // A cascade that never started cannot establish shared provider exhaustion.
+  if (e?.deadlineExpiredBeforeCascade && wallBudgetExceeded()) {
+    finalizeRunReport('deferred', {
+      notes: [...RUN_REPORT.notes, 'Deferred (article run deadline reached before model cascade)'],
+    });
+    console.error('⚠️ Differito: budget wall-clock della sezione esaurito prima della chiamata ai modelli.');
+    await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   // ISSUE #313 / #348 — «tutti i modelli sono temporaneamente esauriti» va
   // DIMOSTRATO, non asserito. La condizione ha due meta' ora: il ramo di
