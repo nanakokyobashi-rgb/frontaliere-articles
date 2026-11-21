@@ -6483,30 +6483,46 @@ export async function repairGeneratedArticleSourceCopy(article, sourceText, {
  * which do not pass through the primary generation loop.
  */
 export function assertArticlePassesFactualityGates(data, options = {}) {
-  // Direct producers may call this gate without the broader generation-quality
-  // pass (for example during a metadata-only refresh), so keep the deterministic
-  // editorial repair at this shared boundary as well.
-  repairArticleEditorialClaims(data);
-  assertItalianArticlePassesFactualityGates(data, options);
-  assertTranslationsPassFactualityGates(data);
-  assertNoFiscalErrorsInLocales(data?.content || {});
-  assertNoCorpusFabricatedInstitutionNames(data);
-  assertLocalizedToponyms(data);
-  if (options.writer !== 'journalist') {
-    const sectionName = options.sectionName
-      || (typeof SECTION_NAME === 'string' ? SECTION_NAME : 'frontaliere');
-    assertArticleRelevance(data, sectionName, {
-      isInCantonArea: cantonRelevanceMatcher(sectionName),
-    });
-    assertYmylPublishable(data, {
-      sourceUrl: options.sourceUrl ?? data?._sourceUrl ?? data?.sourceUrl ?? '',
-    });
+  let stage = 'editorial-repair';
+  try {
+    // Direct producers may call this gate without the broader generation-quality
+    // pass (for example during a metadata-only refresh), so keep the deterministic
+    // editorial repair at this shared boundary as well.
+    repairArticleEditorialClaims(data);
+    stage = 'italian-factuality';
+    assertItalianArticlePassesFactualityGates(data, options);
+    stage = 'translated-factuality';
+    assertTranslationsPassFactualityGates(data);
+    stage = 'locale-fiscal';
+    assertNoFiscalErrorsInLocales(data?.content || {});
+    stage = 'fabricated-institutions';
+    assertNoCorpusFabricatedInstitutionNames(data);
+    stage = 'localized-toponyms';
+    assertLocalizedToponyms(data);
+    stage = 'editorial-relevance';
+    if (options.writer !== 'journalist') {
+      const sectionName = options.sectionName
+        || (typeof SECTION_NAME === 'string' ? SECTION_NAME : 'frontaliere');
+      assertArticleRelevance(data, sectionName, {
+        isInCantonArea: cantonRelevanceMatcher(sectionName),
+      });
+      stage = 'ymyl-publishability';
+      assertYmylPublishable(data, {
+        sourceUrl: options.sourceUrl ?? data?._sourceUrl ?? data?.sourceUrl ?? '',
+      });
+    }
+    stage = 'editorial-claims';
+    // Run after all repairs and translation mutations, immediately before the
+    // common registrar/writer boundary, so a prohibited claim cannot reach
+    // content/** or content/seo/** even when a direct producer skips the main
+    // generation loop.
+    assertPublishedEditorialClaims(data);
+  } catch (error) {
+    if (error?.qualityReject === true || error?.topicGateAbort === true) {
+      console.error(`FINAL_ARTICLE_GATE_REJECT stage=${stage}`);
+    }
+    throw error;
   }
-  // Run after all repairs and translation mutations, immediately before the
-  // common registrar/writer boundary, so a prohibited claim cannot reach
-  // content/** or content/seo/** even when a direct producer skips the main
-  // generation loop.
-  assertPublishedEditorialClaims(data);
 }
 
 function collectPublishedTextValuesIterative(value, path = [], seen = new Set()) {
