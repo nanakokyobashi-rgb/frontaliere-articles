@@ -15707,6 +15707,8 @@ VINCOLI OBBLIGATORI:
 - mantieni la stessa struttura Markdown, inclusi heading, elenchi, citazioni e interruzioni di riga;
 - mantieni invariati i nomi propri, i toponimi, le cifre e le destinazioni dei link nav: protette dai marcatori;
 - mantieni ogni cifra nella stessa proposizione del nome o della voce a cui si riferisce. Conserva l’ordine di cifre e nomi e i separatori che distinguono i diversi dati;
+- traduci una frase alla volta, mantenendo i confini delle proposizioni numeriche: conserva la punteggiatura che le separa e ripeti ogni nome proprio o etichetta invariata dove compare nella fonte, anche se nella lingua di destinazione sarebbe naturale usare un pronome o sottintenderla;
+- per esempio, «Zurigo conta 12 posti; Zugo ne conta 8» deve restare composto da due proposizioni con gli stessi dati e separati dal punto e virgola; non accorparle in una frase con due nomi seguiti dai due numeri;
 - se compaiono marcatori opachi <span data-frontaliere-table-column="riga-cella"></span>, copiali esattamente nella stessa cella della tabella: identificano la colonna sorgente e non sono testo da tradurre;
 - non aggiungere spiegazioni, prefissi o code fences.
 
