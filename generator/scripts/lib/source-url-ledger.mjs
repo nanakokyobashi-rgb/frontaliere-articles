@@ -66,7 +66,11 @@
  */
 
 import { createHash } from 'node:crypto';
-import { firstHtmlAttributeValue } from './html-tag-scanner.mjs';
+import {
+  firstHtmlAttributeValue,
+  nextHtmlElement,
+  nextHtmlTagStatus,
+} from './html-tag-scanner.mjs';
 
 // ── La CHIAVE del ledger ─────────────────────────────────────────────────────
 //
@@ -902,16 +906,40 @@ export function pageTitleEvidence(html, opts = {}) {
   const titleSrc = maskNonDocumentTitleMarkup(src);
   const metadataSrc = maskRcdataContentForMetadata(titleSrc);
   const out = [];
-  for (const m of metadataSrc.matchAll(/<meta\b[^>]*>/gi)) {
-    const tag = m[0];
-    const marker = [
-      firstHtmlAttributeValue(tag, 'property'),
-      firstHtmlAttributeValue(tag, 'name'),
-    ].find((value) => /^(?:og:title|twitter:title)$/i.test(value));
-    if (!marker) continue;
-    out.push(firstHtmlAttributeValue(tag, 'content'));
+
+  // `metadataSrc` ha gia' il contenuto RCDATA di title/textarea mascherato.
+  // Il walker vede quindi solo tag reali: una stringa `<meta ...>` dentro un
+  // attributo quotato non puo' diventare evidenza, ne' puo' essere troncata da
+  // un `>` presente nello stesso attributo.
+  let tagScan = nextHtmlTagStatus(metadataSrc);
+  while (tagScan.status === 'tag') {
+    const { tag } = tagScan;
+    if (!tag.closing && tag.name === 'meta') {
+      const marker = [
+        firstHtmlAttributeValue(tag.attrs, 'property'),
+        firstHtmlAttributeValue(tag.attrs, 'name'),
+      ].find((value) => /^(?:og:title|twitter:title)$/i.test(value));
+      if (marker) out.push(firstHtmlAttributeValue(tag.attrs, 'content'));
+    }
+    tagScan = nextHtmlTagStatus(metadataSrc, tag.end);
   }
-  for (const m of titleSrc.matchAll(/<(title|h1)\b[^>]*>([\s\S]*?)<\/\1\s*>/gi)) out.push(m[2].replace(/<[^>]+>/g, ' '));
+
+  // Cerca title/h1 sullo stesso albero di tag reali. Il contenuto del title e'
+  // mascherato in `metadataSrc` solo per impedire che un `<h1>` letterale nella
+  // sua RCDATA venga scambiato per un elemento; per il testo del title si usa
+  // la sorgente non mascherata, a parita' di indici.
+  const titleElements = [];
+  for (const name of ['title', 'h1']) {
+    let element = nextHtmlElement(metadataSrc, name);
+    while (element) {
+      titleElements.push({ element, source: name === 'title' ? titleSrc : metadataSrc });
+      element = nextHtmlElement(metadataSrc, name, element.end);
+    }
+  }
+  titleElements.sort((a, b) => a.element.start - b.element.start);
+  for (const { element, source } of titleElements) {
+    out.push(source.slice(element.openEnd, element.closeStart).replace(/<[^>]+>/g, ' '));
+  }
   return out.map((t) => t.replace(/\s+/g, ' ').trim()).filter(Boolean).join('\n');
 }
 

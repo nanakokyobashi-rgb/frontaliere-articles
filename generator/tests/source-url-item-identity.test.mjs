@@ -385,9 +385,11 @@ test('pageTitleEvidence: og:title, twitter:title, <title> e <h1>; niente da una 
 });
 
 test('pageTitleEvidence ignora i marcatori metadata scritti nel valore di un attributo', () => {
-  const html = '<meta data-note=\'property="og:title" content="titolo falso"\'>\n'
-    + '<meta name="twitter:title" content="titolo reale">';
-  assert.equal(pageTitleEvidence(html), 'titolo reale');
+  const html = '<div data-note=\'<meta property="og:title" content="titolo falso">\n'
+    + '<h1>h1 falso</h1><title>title falso</title> >\'>\n'
+    + '<meta name="twitter:title" content="titolo reale">'
+    + '<title>title reale</title><h1>h1 reale</h1>';
+  assert.equal(pageTitleEvidence(html), 'titolo reale\ntitle reale\nh1 reale');
 });
 
 test('pageTitleEvidence non legge i meta letterali dentro il testo di <title>', () => {
