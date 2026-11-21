@@ -18763,6 +18763,13 @@ ${localizedToponymInstruction(targetLang)}`;
         console.warn(`  ⚠️ [title-cap] Retry titolo ${locale} fallito: ${safeSignalDiagnosticTextForLog(retryErr.message)} — applico hard cap`);
       }
     }
+  }
+
+  repairGeneratedArticleToponyms(data);
+
+  for (const locale of ['en', 'de', 'fr']) {
+    const localeContent = data.content[locale];
+    if (!localeContent?.title) continue;
     const finalCap = capBlogTitle(localeContent.title);
     if (finalCap.truncated) {
       console.warn(`  ✂️ [title-cap] ${locale.toUpperCase()} title truncato: ${finalCap.originalLength} → ${finalCap.value.length} chars`);
@@ -24432,7 +24439,6 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
 
   // Step 3b: Translate to EN/DE/FR (only runs if not a duplicate)
   await translateArticle(data);
-  repairGeneratedArticleToponyms(data);
 
   // Step 3b.0: Rilocalizza gli slug en/de/fr (issue #191). Questo e' il primo
   // istante della pipeline in cui i titoli tradotti esistono, quindi e' il

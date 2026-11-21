@@ -33,6 +33,8 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 
 test('ripara gli esonimi copiati nei campi tradotti senza cambiare numeri o URL', () => {
   const data = {
+    slugs: { it: 'furto-dati-permessi-g', en: 'basilea-campagna-stolen-data', fr: 'basilea-campagna' },
+    _slugsProvisionalFromIt: ['fr'],
     content: {
       it: {
         title: 'Basilea Campagna: rubati dati di 97.000 permessi G',
@@ -50,6 +52,8 @@ test('ripara gli esonimi copiati nei campi tradotti senza cambiare numeri o URL'
   assert.equal(data.content.en.title, 'Data from 97,000 G permits stolen in Basel-Landschaft');
   assert.equal(data.content.en.faq[0].q, 'Who lives in Basel-Landschaft?');
   assert.equal(data.content.en.faq[0].a, 'See https://example.com/Basilea-Campagna');
+  assert.equal(data.slugs.en, 'basel-landschaft-stolen-data');
+  assert.equal(data.slugs.fr, 'basilea-campagna');
   assert.equal(data.content.en.body2, 'Unpaired reference: Basilea Campagna');
   assert.equal(findArticleLocalizedToponymMismatches(data).length, 1);
   delete data.content.en.body2;
@@ -936,8 +940,11 @@ test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue
 
 test('il gate bounded invoca il controllo prima della scrittura e mantiene attivo l audit globale', () => {
   const source = readFileSync(path.join(ROOT, 'generator/scripts/create-article.mjs'), 'utf8');
-  assert.match(source, /await translateArticle\(data\);\s*repairGeneratedArticleToponyms\(data\);/);
-  assert.ok(source.indexOf('repairGeneratedArticleToponyms(data);') < source.indexOf('const slugI18n = relocalizeSlugsAfterTranslation(data,', source.indexOf('await translateArticle(data);')));
+  const translation = source.slice(source.indexOf('async function translateArticle(data)'), source.indexOf('function validateTitle(title)'));
+  assert.match(translation, /assertNoPendingBodyTranslations\(data\);[\s\S]*repairGeneratedArticleToponyms\(data\);[\s\S]*const finalCap = capBlogTitle/);
+  assert.match(source, /await translateArticle\(data\);[\s\S]*const slugI18n = relocalizeSlugsAfterTranslation\(data,/);
+  const journalist = readFileSync(path.join(ROOT, 'generator/scripts/publish-journalist-article.mjs'), 'utf8');
+  assert.match(journalist, /await translateArticle\(data\);[\s\S]*deriveAndSanitizeArticleSlugs\(data\);[\s\S]*checkTranslatedSlugCollisions\(data\);/);
   const deriveStart = source.indexOf('export function deriveAndSanitizeArticleSlugs(data) {');
   const deriveRepair = source.indexOf('repairGeneratedArticleToponyms(data);', deriveStart);
   const deriveItalianSlug = source.indexOf('data.slugs.it = data.id;', deriveStart);
