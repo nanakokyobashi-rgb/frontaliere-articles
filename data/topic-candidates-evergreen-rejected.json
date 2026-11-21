@@ -15045,14 +15045,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.malpensa24.it/ristorni-frontalieri-risorse-varesotto": {
-      "section": "frontaliere",
-      "ts": 1795054632192
-    },
-    "frontaliere::https://www.tio.ch/svizzera/economia/1963696/unia-zenith-accordo-piano-raggiunto-posti-lavoro": {
-      "section": "frontaliere",
-      "ts": 1795057336807
-    },
     "frontaliere::https://www.tio.ch/svizzera/politica/1963847/premi-iniziativa-malattia-svizzera-sinistra": {
       "section": "frontaliere",
       "ts": 1795093166285
@@ -15128,6 +15120,10 @@
     "frontaliere::https://www.ticinonews.ch/ticino/la-polizia-auspica-un-cambio-al-vertice-del-dipartimento-speriamo-di-aver-toccato-il-fondo-447055": {
       "section": "frontaliere",
       "ts": 1795212705947
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/il-sindacato-di-polizia-auspica-un-cambio-al-vertice-del-dipartimento-447055": {
+      "section": "frontaliere",
+      "ts": 1795252414144
     }
   }
 }
