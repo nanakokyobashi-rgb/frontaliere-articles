@@ -463,7 +463,7 @@ import {
 // vincolo di mirror, ed e' condiviso dai due scrittori di body del corpus.
 import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
 import { addIndependentVote, extractFactCheckJson, factCheckRawSnippet } from './lib/fact-check-response.mjs';
-import { editorialOriginalityIssue, extractSyntheticReferenceEvidence, validateEditorialAssessment } from './lib/editorial-originality.mjs';
+import { MIN_EDITORIAL_ARTICLE_ANCHORS, editorialOriginalityIssue, extractSyntheticReferenceEvidence, validateEditorialAssessment } from './lib/editorial-originality.mjs';
 import { decodeHtmlEntities } from './lib/decode-html-entities.mjs';
 import {
   PERFORMANCE_PATH as ARTICLE_PERF_PATH,
@@ -7329,6 +7329,7 @@ ${verifiedCantonFactsBlock(verifiedReferenceText)}`;
 Valuta body1–body3 nel loro insieme. Un articolo non supera questo controllo se si limita a riassumere o parafrasare la fonte: deve offrire almeno una relazione, spiegazione o confronto concreto e utile, dimostrabile con fatti e periodi esatti. Un calcolo ricavato da valori espliciti può essere un contributo valido; non serve inventare un cambiamento o una conseguenza che la fonte non documenta. Un confronto deve usare periodi, unità e basi coerenti. Non aggiungere un angolo sul lavoro o sui frontalieri a una notizia non pertinente.
 Attribuisci le notizie alla fonte. Non ritenere supportati reportage sul posto, interviste, fonti proprie o verifiche umane non documentati; ometti cause, effetti, previsioni e consigli fiscali o finanziari senza prove.
 Per articleQuote copia dal blocco CORPO DELL’ARTICOLO un unico passaggio contiguo di almeno 40 caratteri e 7 parole. Per evidenceQuotes copia almeno 16 caratteri consecutivi dalla fonte o da un riferimento verificato, mantenendo lingua originale, punteggiatura e cifre. Prima di rispondere verifica che ciascuna citazione si ritrovi nel suo blocco. Evita titolo, sommario, traduzioni, parafrasi e puntini di sospensione aggiunti. Scrivi in italiano un finding specifico (almeno 35 caratteri e 6 parole) sul dato o sulla relazione dimostrata.
+Per grounded_analysis, riprendi nel finding almeno ${MIN_EDITORIAL_ARTICLE_ANCHORS} termini distinti da articleQuote, con la stessa forma: nomi o parole specifiche di almeno cinque caratteri, oppure cifre. Usali per spiegare il contributo concreto della citazione.
 Usa grounded_analysis solo per un contributo concreto, tracciabile e non già contenuto nella fonte. Usa source_restatement per un riassunto/parafrasi senza contributo aggiunto; unsupported_inference per affermazioni non provate o reportage/interviste/verifiche inventate; insufficient_evidence quando le prove non permettono una valutazione positiva. Una valutazione vaga o dichiarativa non basta.
 
 CRITERI DI GIUDIZIO:
@@ -7432,6 +7433,16 @@ ${proofSuffix}`
   // header during its own loop; this cap guards the outer loop that fires when
   // ALL models have exhausted their per-model retries.
   const FACTCHECK_429_BACKOFF_CAP_MS = 30_000;
+  const FACTCHECK_MIN_ROUND_MS = 15_000;
+  const initialFactCheckMs = factCheckDeadlineMs - Date.now();
+  // When two useful windows fit, keep one for the final verifier. Otherwise
+  // make one primary attempt and leave any unused time to the final verifier.
+  const finalReserveMs = initialFactCheckMs >= 2 * FACTCHECK_MIN_ROUND_MS ? FACTCHECK_MIN_ROUND_MS : 0;
+  const retryDeadlineMs = factCheckDeadlineMs - finalReserveMs;
+  const maxPrimaryRounds = Math.min(
+    FACTCHECK_INFRA_RETRIES,
+    Math.max(1, Math.floor((initialFactCheckMs - finalReserveMs) / FACTCHECK_MIN_ROUND_MS)),
+  );
   let fcLastRejectMsgs = [];
   const fcProviderErrors = [];
   // A usable vote, an empty fulfilled response, or a duplicate vote means at
@@ -7443,7 +7454,7 @@ ${proofSuffix}`
   let missingSecondOpinion = false;
   let activePrompt = prompt;
   let compactRetry = null;
-  for (let fcAttempt = 1; fcAttempt <= FACTCHECK_INFRA_RETRIES && (modelResults.length === 0 || missingSecondOpinion); fcAttempt++) {
+  for (let fcAttempt = 1; fcAttempt <= maxPrimaryRounds && (modelResults.length === 0 || missingSecondOpinion); fcAttempt++) {
     if (fcAttempt > 1) {
       const why = missingSecondOpinion ? 'un solo parere indipendente' : 'nessun verdetto';
       console.error(`  🔁 Fact-check: ${why} al tentativo ${fcAttempt - 1} (checker giù/JSON invalido/stesso modello) — ri-eseguo solo la verifica (${fcAttempt}/${FACTCHECK_INFRA_RETRIES})...`);
@@ -7461,7 +7472,7 @@ ${proofSuffix}`
         backoffMs = Math.min(retryAfterMs, FACTCHECK_429_BACKOFF_CAP_MS);
         console.error(`  ⏱️  Fact-check: 429 rate-limit rilevato — backoff ${backoffMs}ms (cap ${FACTCHECK_429_BACKOFF_CAP_MS}ms)`);
       }
-      if (Date.now() + backoffMs >= factCheckDeadlineMs) break;
+      if (retryDeadlineMs - Date.now() - backoffMs < FACTCHECK_MIN_ROUND_MS) break;
       await new Promise(r => setTimeout(r, backoffMs));
     }
     if (compactRetry) {
@@ -7481,8 +7492,13 @@ ${proofSuffix}`
     // The model cascade may use its entire deadline. Leave each remaining
     // round and the final Codex-only fallback a share of the run budget.
     const now = Date.now();
-    const remainingRounds = FACTCHECK_INFRA_RETRIES - fcAttempt + 2;
-    const deadlineMs = now + Math.floor((factCheckDeadlineMs - now) / remainingRounds);
+    const remainingMs = retryDeadlineMs - now;
+    if (remainingMs <= 0 || (fcAttempt > 1 && remainingMs < FACTCHECK_MIN_ROUND_MS)) break;
+    const remainingRounds = Math.min(
+      maxPrimaryRounds - fcAttempt + 1,
+      Math.max(1, Math.floor(remainingMs / FACTCHECK_MIN_ROUND_MS)),
+    );
+    const deadlineMs = now + Math.floor(remainingMs / remainingRounds);
     const modelsToQuery = verificationModels.slice(0, 2);
     const promises = modelsToQuery.slice(0, priorVoters.length ? 1 : 2).map((model, index) => _runSingleFactCheck(model, activePrompt, {
       fresh: fcAttempt > 1,

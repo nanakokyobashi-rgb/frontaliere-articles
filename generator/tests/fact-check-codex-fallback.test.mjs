@@ -22,7 +22,7 @@ import { AI_MODELS, callLLM, estimateRequestTokens, resetState } from '../script
 import { addIndependentVote, extractFactCheckJson } from '../scripts/lib/fact-check-response.mjs';
 import { FACT_CHECK_CATEGORIES } from '../scripts/lib/article-factuality-gates.mjs';
 import { cantonPromptLines } from '../scripts/lib/canton-section-profile.mjs';
-import { extractSyntheticReferenceEvidence } from '../scripts/lib/editorial-originality.mjs';
+import { MIN_EDITORIAL_ARTICLE_ANCHORS, extractSyntheticReferenceEvidence } from '../scripts/lib/editorial-originality.mjs';
 import * as taxRates from '../scripts/lib/irpef-scaglioni.mjs';
 import { JSON_QUOTE_SAFETY_RULE_IT } from '../scripts/lib/llm-json-repair.mjs';
 
@@ -291,10 +291,11 @@ describe('fact-check retries under a reported input cap', () => {
   async function runRounds({
     canton = 'San Gallo', section = 'san-gallo', isCanton = true, isFrontaliere = false,
     sourceUrl = 'HTTPS://example.test/news', sourceText = source, padding = '', replies,
+    initialTime = 160_000, consumeWindow = false,
   }) {
     const calls = [];
     const logs = [];
-    let now = 160_000;
+    let now = initialTime;
     const cantonLines = cantonPromptLines({ cantonName: canton, section });
     const result = await runInNewContext(`
       ${SRC.slice(start, end)}
@@ -319,6 +320,7 @@ describe('fact-check retries under a reported input cap', () => {
       SECTION_NAME: section,
       CANTON_FACTS_BRIEF: '',
       evergreenFactsBriefFor: () => '',
+      MIN_EDITORIAL_ARTICLE_ANCHORS,
       extractSyntheticReferenceEvidence,
       VERIFIED_DOMAIN_FACTS: domainFacts,
       JSON_QUOTE_SAFETY_RULE_IT,
@@ -332,12 +334,36 @@ describe('fact-check retries under a reported input cap', () => {
         assert.ok(calls.length < replies.length, 'chiamata di verifica inattesa');
         const reply = replies[calls.length];
         calls.push({ model, prompt, options });
+        if (consumeWindow) now = Math.max(now, options.deadlineMs);
         if (reply instanceof Error) throw reply;
         return reply;
       },
     });
     return { ...result, calls, logs, cantonLines };
   }
+
+  test('keeps a usable verification window when a 429 arrives late', async () => {
+    const rateLimit = new Error('HTTP 429');
+    const { calls, modelResults, logs } = await runRounds({
+      initialTime: 214_000,
+      replies: [rateLimit, rateLimit, rateLimit],
+    });
+    assert.equal(modelResults.length, 0);
+    assert.ok(calls.length >= 2);
+    assert.ok(calls.every(({ options }) => options.deadlineMs === 233_500));
+    assert.ok(!logs.some((message) => message.includes('tentativo 2')));
+  });
+
+  test("a late 429 leaves time for the final verifier", async () => {
+    const rateLimit = new Error("HTTP 429");
+    const { calls } = await runRounds({
+      initialTime: 180_000,
+      consumeWindow: true,
+      replies: [rateLimit, rateLimit, rateLimit],
+    });
+    assert.ok(calls.length >= 2);
+    assert.ok(calls.every(({ options }) => options.deadlineMs === 195_000));
+  });
 
   async function loadFor(target, locale = {}) {
     const { prompt } = await runRounds({ ...locale, replies: [firstVote, secondVote] });

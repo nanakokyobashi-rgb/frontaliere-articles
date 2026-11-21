@@ -24,6 +24,7 @@ import {
   readPushStateFile,
   recordsFromSummary,
   stripCloudflareBotFightScript,
+  restoreCloudflareEmails,
   verifyApex,
   verifyAfterPurge,
   waitForOrigin,
@@ -853,4 +854,16 @@ test('un mismatch apex persistente resta warning e lascia eseguire il gate origi
   );
   assert.match(apexHelper, /handle_apex_failure "before retry" "\$verify_rc"/);
   assert.match(helper, /refusing to downgrade it to a warning/);
+});
+
+test('Cloudflare email rewriting preserves the actual address in the fingerprint', () => {
+  const address = 'example@example.test';
+  const key = 0x42;
+  const encoded = Buffer.from([key, ...Buffer.from(address).map((byte) => byte ^ key)]).toString('hex');
+  const wrapper = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="'
+    + encoded + '">[email&#160;protected]</a>';
+  const decoder = '<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>';
+  assert.equal(restoreCloudflareEmails('<p>' + wrapper + '</p>' + decoder), '<p>' + address + '</p>');
+  assert.equal(restoreCloudflareEmails(decoder), decoder);
+  assert.equal(restoreCloudflareEmails(wrapper.replace('protected', 'unknown')), wrapper.replace('protected', 'unknown'));
 });
