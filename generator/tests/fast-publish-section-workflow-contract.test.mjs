@@ -262,16 +262,24 @@ test('la guardia di sezione distingue gli input di pubblicazione dai file di con
   const lintHead = commitFiles('aggiornamento della configurazione lint', lintConfig);
   check(controlHead, lintHead, 0, 'solo aggiornamento della configurazione lint');
 
+  const admissionGate = 'scripts/ci/canton-generation-admit.mjs';
+  const syncManifest = 'scripts/ci/loop-sync-manifest.json';
+  const admissionHead = commitFiles('gate di ammissione, test e manifest',
+    admissionGate, 'generator/tests/canton-generation-admit.test.mjs', syncManifest);
+  check(lintHead, admissionHead, 0, 'gate di ammissione, test e manifest');
+
   const article = 'content/blog-body-canton-ti/it/article.ts';
   const cases = [
     ['contenuto di sezione e test', article, 'generator/tests/content.test.mjs'],
     ['aggiornamento del contenuto di sezione e configurazione lint', article, lintConfig],
     ['workflow di pubblicazione', '.github/workflows/fast-publish-section.yml'],
     ['script di pubblicazione e test', 'scripts/publish-section-pages.mjs', 'generator/tests/publisher.test.mjs'],
+    ['script di riconciliazione con gate di ammissione e manifest',
+      'scripts/reconcile-section-pages.mjs', admissionGate, syncManifest],
     ['fixture', 'generator/tests/translation/fixture.json'],
     ['libreria sconosciuta', 'generator/scripts/lib/unknown.mjs'],
   ];
-  let previous = lintHead;
+  let previous = admissionHead;
   for (const [label, ...files] of cases) {
     const current = commitFiles(label, ...files);
     check(previous, current, 1, label);
