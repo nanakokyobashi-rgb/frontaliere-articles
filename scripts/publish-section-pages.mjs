@@ -174,7 +174,8 @@ async function assertExpectedMainHead(expected, readMainHead = publishedMainHead
     // Compare exact revisions. A checkout without a provable fast-forward
     // or with changes outside the operational allowlist still stops.
     if (readMainHead === publishedMainHead) {
-      const equivalence = spawnSync('bash', [path.join(ROOT_DIR, 'scripts/ci/section-source-unaffected.sh'), expected, current], {
+      const helper = process.env.SECTION_SOURCE_UNAFFECTED_HELPER || 'scripts/ci/section-source-unaffected.sh';
+      const equivalence = spawnSync('bash', [path.resolve(ROOT_DIR, helper), expected, current], {
         cwd: ROOT_DIR,
         stdio: 'ignore',
       });

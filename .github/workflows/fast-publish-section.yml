@@ -581,13 +581,10 @@ jobs:
           source='.replay-dispatcher-source/scripts/ci/read-main-head.sh'
           target='scripts/ci/read-main-head.sh'
           render_source='.replay-dispatcher-source/scripts/ci/fast-publish-section-render.sh'
-          render_target='scripts/ci/fast-publish-section-render.sh'
           if [ ! -f "$render_source" ]; then
             echo "::error::helper di render non presente nel checkout della revisione del workflow"
             exit 1
           fi
-          install -m 0755 "$render_source" "$render_target"
-          install -m 0755 .replay-dispatcher-source/scripts/ci/section-source-unaffected.sh scripts/ci/section-source-unaffected.sh
           test -f .replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh
           ln -sfn "$PWD/.replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh" scripts/ci/fetch-push-base-if-missing.sh
           if [ -f "$source" ]; then
@@ -661,7 +658,7 @@ jobs:
             exit 1
           fi
           echo "current_main=$current_main" >> "$GITHUB_OUTPUT"
-          if ! bash scripts/ci/section-source-unaffected.sh "$pinned_source" "$current_main"; then
+          if ! bash .replay-dispatcher-source/scripts/ci/section-source-unaffected.sh "$pinned_source" "$current_main"; then
             echo "::notice::replay pinned saltato: main e' avanzata da $pinned_source a $current_main"
             echo 'fresh=false' >> "$GITHUB_OUTPUT"
             exit 0
@@ -918,7 +915,8 @@ jobs:
           EXPECTED_MAIN_HEAD: ${{ needs.resolve.outputs.source_commit || github.event.workflow_run.head_sha || inputs.source_main_commit || github.event.after || github.sha }}
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
-        run: bash scripts/ci/fast-publish-section-render.sh
+          SECTION_SOURCE_UNAFFECTED_HELPER: .replay-dispatcher-source/scripts/ci/section-source-unaffected.sh
+        run: bash .replay-dispatcher-source/scripts/ci/fast-publish-section-render.sh
 
       - name: Release bootstrap R2 gate
         # GITHUB_ENV aggiorna l'ambiente dei passi successivi, ma non è una

@@ -291,7 +291,8 @@ test('fast-publish-section delega i blocchi shell grandi a script senza espressi
     'recovery',
   ]) {
     const path = `scripts/ci/fast-publish-section-${name}.sh`;
-    assert.match(workflow, new RegExp(`run: bash ${path.replaceAll('/', '\\/')}`));
+    const checkout = name === "render" ? ".replay-dispatcher-source/" : "";
+    assert.ok(workflow.includes(`run: bash ${checkout}${path}\n`), `workflow must run ${checkout}${path}`);
     const source = readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
     assert.match(source, /^#!\/usr\/bin\/env bash/u);
     assert.match(source, /^set -euo pipefail$/mu);
