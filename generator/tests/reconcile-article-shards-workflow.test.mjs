@@ -32,6 +32,28 @@ const generationCoreWorkflow = readFileSync(
   'utf8',
 );
 
+test('il workflow separa le code per trigger e serializza il job di reconcile', () => {
+  const workflowConcurrency = workflow.match(/^concurrency:\n(?:^ {2}[^\n]+\n)*/m)?.[0];
+  assert.equal(workflowConcurrency, [
+    'concurrency:',
+    "  group: reconcile-article-shards-${{ github.event_name == 'workflow_run' && format('workflow_run-{0}', github.event.workflow_run.event) || github.event_name }}",
+    '  queue: single',
+    '  cancel-in-progress: false',
+    '',
+  ].join('\n'));
+
+  const jobConcurrency = workflow.match(/^jobs:\n  reconcile:\n    concurrency:\n(?:^ {6}[^\n]+\n)*/m)?.[0];
+  assert.equal(jobConcurrency, [
+    'jobs:',
+    '  reconcile:',
+    '    concurrency:',
+    '      group: reconcile-article-shards',
+    '      queue: max',
+    '      cancel-in-progress: false',
+    '',
+  ].join('\n'));
+});
+
 test('il reconcile automatico usa la HEAD corrente e non arma backfill stantii', () => {
   const checkout = workflow.match(/^      - name: Checkout\n(?:(?!^      - ).*\n)*/m)?.[0] ?? '';
   assert.match(checkout, /^        with:\n/m);
