@@ -13749,6 +13749,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.festival-ai-lugano-aree.title': 'Festival AI a Lugano: 13 aree e oltre 60 relatori',
     'blog.article.festival-ai-lugano-aree.excerpt': 'Al Palazzo dei Congressi di Lugano, il Festival AI riunisce oltre 60 relatori internazionali in 13 aree, con un\'area espositiva gratuita aperta a tutti.',
     'blog.article.festival-ai-lugano-aree.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.controlli-mendrisiotto-settembre-novembre.title': 'Controlli congiunti nel Mendrisiotto tra settembre e novembre',
+    'blog.article.controlli-mendrisiotto-settembre-novembre.excerpt': 'L’operazione puntava a seguire i flussi di transito, a rilevare eventuali situazioni sospette e a contrastare condotte potenzialmente illecite.',
+    'blog.article.controlli-mendrisiotto-settembre-novembre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;
