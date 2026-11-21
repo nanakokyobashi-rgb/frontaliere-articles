@@ -5173,9 +5173,9 @@
       "sitePath": ".github/corpus-workflows/observers/workflows/crawler-generation-observer-shadow.yml",
       "mode": "identical",
       "baseline": {
-        "site": "7562c9a19761a745",
-        "corpus": "7562c9a19761a745",
-        "alignedAt": "2026-11-06"
+        "site": "25a5a49e4ca92925",
+        "corpus": "25a5a49e4ca92925",
+        "alignedAt": "2026-11-21"
       }
     },
     {
