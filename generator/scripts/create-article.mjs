@@ -6580,7 +6580,7 @@ function assertLocalizedToponyms(data) {
  * budget delle traduzioni. Il gate completo resta comunque dopo tutte le
  * mutazioni del testo, prima della scrittura.
  */
-function assertItalianArticlePassesFactualityGates(data, { sourceUrl = '', sourceText = '' } = {}) {
+function assertItalianArticlePassesFactualityGates(data, { sourceUrl = '', sourceText = '', sourceDate } = {}) {
   coerceContentBodyFields(data?.content);
   const it = data?.content?.it;
   if (it) {
@@ -6589,7 +6589,7 @@ function assertItalianArticlePassesFactualityGates(data, { sourceUrl = '', sourc
       sections: collectBodySections(it),
       locale: 'it',
       sourceText: factualityGateSourceText(gateSourceUrl, sourceText || data?._sourceText || ''),
-      sourceDate: data?._sourceDate,
+      sourceDate: sourceDate ?? data?._sourceDate,
       publishedAt: new Date().toISOString(),
       memory: defectMemory(),
       deterministicBodySections: data?._deterministicBodySections,
@@ -24323,6 +24323,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   assertItalianArticlePassesFactualityGates(data, {
     sourceUrl: url,
     sourceText: factualityGateSourceText(url, pageContent),
+    sourceDate: lastSourcePublishedAt,
   });
 
   // Step 3b: Translate to EN/DE/FR (only runs if not a duplicate)
@@ -24587,12 +24588,14 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   Object.defineProperties(data, {
     _sourceUrl: { value: url, configurable: true },
     _sourceText: { value: factualityGateSourceText(url, pageContent), configurable: true },
+    _sourceDate: { value: lastSourcePublishedAt, configurable: true, enumerable: false },
   });
   try {
     assertArticlePassesFactualityGates(data);
   } finally {
     delete data._sourceUrl;
     delete data._sourceText;
+    delete data._sourceDate;
   }
 
   // The ordinary blocking fact-check runs before translation/CTA/citation and

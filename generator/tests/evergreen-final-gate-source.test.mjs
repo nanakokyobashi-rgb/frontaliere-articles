@@ -102,6 +102,7 @@ const GATE_SRC = [
 
 function makeGate() {
   const translationCalls = [];
+  const diagnostics = [];
   const factory = new Function(
     'runFactualityGates',
     'formatIssues',
@@ -124,12 +125,15 @@ function makeGate() {
     'safeSignalTextForLog',
     'safeSignalDiagnosticTextForLog',
     'RUN_REPORT',
-    `${GATE_SRC}\nreturn assertArticlePassesFactualityGates;`,
+    `${GATE_SRC}\nreturn {
+      gate: assertArticlePassesFactualityGates,
+      italianGate: assertItalianArticlePassesFactualityGates,
+    };`,
   );
-  const gate = factory(
+  const gates = factory(
     runFactualityGates,
     formatIssues,
-    { error: () => {} },
+    { error: (message) => { diagnostics.push(message); } },
     ['body1', 'body2', 'body3'],
     () => ({}),
     () => ({ passed: true }),
@@ -149,7 +153,7 @@ function makeGate() {
     ARTICLE_SIGNAL_LOG_HELPERS.safeSignalDiagnosticTextForLog,
     {},
   );
-  return { gate, translationCalls };
+  return { ...gates, translationCalls, diagnostics };
 }
 
 // Un brief evergreen denso di fatti verificabili (numeri, date, percentuali)
@@ -275,9 +279,68 @@ test('#6 wiring: gate IT prima della traduzione, gate completo dopo, testo di fo
 
   const earlyCall = corpo.slice(early, corpo.indexOf(');', early));
   assert.match(earlyCall, /sourceText: factualityGateSourceText\(url, pageContent\)/);
+  assert.match(earlyCall, /sourceDate: lastSourcePublishedAt\b/);
   assert.match(corpo, /_sourceText: \{ value: factualityGateSourceText\(url, pageContent\)/);
   assert.doesNotMatch(src, /url\.startsWith\('evergreen:\/\/'\) \? '' : pageContent/,
     'copia inline del ternario evergreen: usa factualityGateSourceText, altrimenti i gate tornano a divergere');
+});
+
+const OLD_SOURCE_DATE = '2000-01-01';
+
+test('il gate italiano dà precedenza alla data esplicita e usa quella del payload se omessa', () => {
+  const recent = new Date().toISOString();
+  const { italianGate, diagnostics } = makeGate();
+  const data = { ...article(), _sourceDate: OLD_SOURCE_DATE };
+
+  assert.doesNotThrow(() => italianGate(data, { sourceDate: recent }));
+  assert.doesNotMatch(diagnostics.join('\n'), /missing-source-date|stale-source/);
+  assert.throws(() => italianGate(data), { qualityReject: true, message: /stale-source/ });
+  assert.throws(
+    () => italianGate({ ...article(), _sourceDate: recent }, { sourceDate: OLD_SOURCE_DATE }),
+    { qualityReject: true, message: /stale-source/ },
+  );
+
+  diagnostics.length = 0;
+  assert.doesNotThrow(() => italianGate(data, { sourceDate: '' }));
+  assert.match(diagnostics.join('\n'), /missing-source-date/);
+  assert.equal(data._sourceDate, OLD_SOURCE_DATE);
+});
+
+test('il gate finale legge la data scratch e ripulisce il payload anche se rigetta', () => {
+  const block = src.match(
+    /  Object\.defineProperties\(data, \{\n(?:    [^\n]*\n)+  \}\);\n  try \{\n    assertArticlePassesFactualityGates\(data\);\n  \} finally \{\n(?:    [^\n]*\n)+  \}/g,
+  );
+  assert.equal(block?.length, 1);
+  const runFinalBlock = new Function(
+    'data', 'url', 'pageContent', 'lastSourcePublishedAt', 'assertArticlePassesFactualityGates',
+    `${cutFunction('factualityGateSourceText')}\n${block[0]}`,
+  );
+  const { gate } = makeGate();
+  const scratchKeys = ['_sourceUrl', '_sourceText', '_sourceDate'];
+
+  const recent = new Date().toISOString();
+  for (const [sourceDate, data] of [
+    [recent, article()],
+    [OLD_SOURCE_DATE, article()],
+    [recent, { ...article(), _sourceDate: OLD_SOURCE_DATE }],
+    [OLD_SOURCE_DATE, { ...article(), _sourceDate: recent }],
+  ]) {
+    const run = () => runFinalBlock(data, 'https://www.fr.ch/', '', sourceDate, (payload) => {
+      assert.equal(payload._sourceDate, sourceDate);
+      for (const key of scratchKeys) {
+        assert.equal(Object.getOwnPropertyDescriptor(payload, key)?.enumerable, false, key);
+      }
+      gate(payload);
+    });
+    if (sourceDate === OLD_SOURCE_DATE) {
+      assert.throws(run, { qualityReject: true, message: /stale-source/ });
+    } else {
+      assert.doesNotThrow(run);
+    }
+    for (const key of scratchKeys) {
+      assert.equal(Object.hasOwn(data, key), false, key);
+    }
+  }
 });
 
 test('#7 il brief cantonale è un riferimento verificato separato dalla fonte, anche al gate finale', () => {
