@@ -12,7 +12,7 @@ import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, readlinkSync, rmSync, writeFileSync } from 'node:fs';
+import { chmodSync, existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, readlinkSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -20,7 +20,7 @@ import { fileURLToPath } from 'node:url';
 import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL, ARTICLE_SECTION_CORE_LIST } from '../../engine/shared/articleSectionCore.mjs';
 import { cantonTopicHubPath } from '../../engine/shared/cantonSectionCopy.mjs';
 import { CORPUS_ROUTE_OWNER_META_TAG } from '../../engine/shared/corpusRouteOwner.mjs';
-import { publishApiFreshnessPaths } from '../../scripts/lib/publish-api-input-range.mjs';
+import { apiTriggerInputsDifferBetween, publishApiFreshnessPaths } from '../../scripts/lib/publish-api-input-range.mjs';
 import {
   API_BASE,
   APEX,
@@ -1125,6 +1125,210 @@ test('publisher: legge la struttura reale di on.push.paths e cerca l\'ultimo inp
     '--',
     'content/**',
   ]);
+});
+
+test('publisher freshness distingue le sole fonti cantonali dagli input API fra alberi e nella storia', (t) => {
+  const repo = mkdtempSync(path.join(tmpdir(), 'publish-api-freshness-'));
+  t.after(() => rmSync(repo, { recursive: true, force: true }));
+  const git = (args) => execFileSync('git', ['-C', repo, ...args], { encoding: 'utf8' }).trim();
+  git(['init', '-q']);
+  const registry = 'generator/data/canton-sections.json';
+  const article = 'content/article.mjs';
+  mkdirSync(path.join(repo, 'generator/data'), { recursive: true });
+  mkdirSync(path.join(repo, 'content'));
+  const saveRegistry = (document) => writeFileSync(path.join(repo, registry), JSON.stringify(document));
+  const commit = () => {
+    git(['add', '.']);
+    git([
+      '-c', 'user.name=Publisher Test', '-c', 'user.email=publisher@example.invalid',
+      '-c', 'commit.gpgSign=false', 'commit', '-qm', 'Fixture input',
+    ]);
+    return git(['rev-parse', 'HEAD']);
+  };
+  const options = {
+    execFileSyncImpl: (command, args, settings) => execFileSync(command, ['-C', repo, ...args.slice(2)], settings),
+    triggerPathsImpl: () => [registry, 'content/**'],
+  };
+  const treesDiffer = (before, after) => apiTriggerInputsDifferBetween({ before, after }, options);
+  const rangeChanged = (before, after) => apiInputChangedInRange({ before, after }, options);
+  const document = {
+    cantons: [{ code: 'AG', section: 'canton-ag', enabled: true, members: ['AG'], newsSources: [] }],
+    extra: { newsSources: ['preserved'] },
+  };
+  saveRegistry(document);
+  const root = commit();
+  const emptyOptions = { ...options, triggerPathsImpl: () => ['data/blog-cover-cdn-sync-queue.json'] };
+  assert.throws(() => apiTriggerInputsDifferBetween({ before: root, after: root }, emptyOptions), /nessun path/);
+  assert.equal(latestApiInputCommit(root, emptyOptions), null);
+  assert.equal(apiInputChangedInRange({ before: root, after: root }, emptyOptions), false);
+  assert.equal(latestApiInputCommit(root, options), root);
+  assert.equal(treesDiffer(root, root), false);
+  assert.throws(() => treesDiffer(root, 'a'.repeat(40)), /lettura Git non verificabile/);
+  writeFileSync(path.join(repo, article), 'article');
+  const apiInput = commit();
+  for (const source of ['one', 'two']) {
+    document.cantons[0].newsSources.push({ url: 'https://example.invalid/' + source });
+    saveRegistry(document);
+    commit();
+  }
+  const sourceOnly = git(['rev-parse', 'HEAD']);
+  assert.equal(treesDiffer(apiInput, sourceOnly), false);
+  assert.throws(() => treesDiffer(sourceOnly, apiInput), /merge-base/);
+  assert.equal(treesDiffer(root, sourceOnly), true);
+  assert.equal(latestApiInputCommit(sourceOnly, options), apiInput);
+  assert.equal(rangeChanged(apiInput, sourceOnly), false);
+  assert.equal(rangeChanged(root, sourceOnly), true);
+
+  document.cantons[0].enabled = false;
+  saveRegistry(document);
+  const disabled = commit();
+  assert.equal(treesDiffer(sourceOnly, disabled), true);
+  document.cantons[0].enabled = true;
+  saveRegistry(document);
+  const restored = commit();
+  assert.equal(treesDiffer(sourceOnly, restored), false);
+  assert.equal(rangeChanged(sourceOnly, restored), true);
+
+  document.extra.newsSources.push('new top-level metadata');
+  saveRegistry(document);
+  const metadata = commit();
+  assert.equal(treesDiffer(restored, metadata), true);
+  document.cantons[0].newsSources.push({ url: 'https://example.invalid/three' });
+  saveRegistry(document);
+  writeFileSync(path.join(repo, article), 'updated article');
+  const concurrent = commit();
+  assert.equal(treesDiffer(metadata, concurrent), true);
+  assert.equal(latestApiInputCommit(concurrent, options), concurrent);
+
+  writeFileSync(path.join(repo, registry), '{');
+  const malformed = commit();
+  assert.equal(treesDiffer(concurrent, malformed), true);
+  assert.equal(rangeChanged(concurrent, malformed), true);
+  document.cantons[0].newsSources = [{ url: ' ' }];
+  saveRegistry(document);
+  const invalidSource = commit();
+  assert.equal(treesDiffer(concurrent, invalidSource), true);
+  const valid = git(['show', `${concurrent}:${registry}`]);
+  writeFileSync(path.join(repo, registry), valid
+    .replace('"enabled":true', '"enabled":false,"enabled":true')
+    .replace('/three', '/four'));
+  const duplicateKey = commit();
+  assert.equal(treesDiffer(concurrent, duplicateKey), true);
+
+  const updatedSource = valid.replace('/three', '/four');
+  writeFileSync(path.join(repo, registry), '\uFEFF' + updatedSource);
+  const withBom = commit();
+  assert.equal(treesDiffer(concurrent, withBom), true);
+  assert.equal(latestApiInputCommit(withBom, options), withBom);
+
+  writeFileSync(path.join(repo, registry), updatedSource
+    .replace('"enabled":true,"members":["AG"]', '"members":["AG"],"enabled":true'));
+  const reordered = commit();
+  assert.equal(treesDiffer(concurrent, reordered), true);
+
+  writeFileSync(path.join(repo, registry), updatedSource);
+  chmodSync(path.join(repo, registry), 0o755);
+  const executable = commit();
+  assert.equal(treesDiffer(concurrent, executable), true);
+  rmSync(path.join(repo, registry));
+  const deleted = commit();
+  assert.equal(treesDiffer(concurrent, deleted), true);
+  assert.throws(() => treesDiffer(deleted, concurrent), /merge-base/);
+});
+
+test('publisher freshness rileva il merge che ripristina un articolo prima di un cambio di sole fonti', (t) => {
+  const repo = mkdtempSync(path.join(tmpdir(), 'publish-api-merge-'));
+  t.after(() => rmSync(repo, { recursive: true, force: true }));
+  const git = (...args) => execFileSync('git', ['-C', repo, ...args], { encoding: 'utf8' }).trim();
+  git('init', '-q', '-b', 'main');
+  git('config', 'user.name', 'Publisher Test');
+  git('config', 'user.email', 'publisher@example.invalid');
+  git('config', 'commit.gpgSign', 'false');
+  const registry = 'generator/data/canton-sections.json';
+  const article = 'content/article.mjs';
+  mkdirSync(path.join(repo, 'generator/data'), { recursive: true });
+  mkdirSync(path.join(repo, 'content'));
+  const write = (file, value) => writeFileSync(path.join(repo, file), value);
+  const saveRegistry = (newsSources) => write(registry, JSON.stringify({
+    cantons: [{ code: 'AG', section: 'canton-ag', enabled: true, newsSources }],
+  }));
+  const commit = (message) => {
+    git('add', '.');
+    git('commit', '-qm', message);
+    return git('rev-parse', 'HEAD');
+  };
+
+  saveRegistry([]);
+  write(article, 'original article');
+  commit('Original input');
+  git('switch', '-qc', 'side');
+  write('notes.txt', 'Outside API inputs');
+  commit('Side branch notes');
+  git('switch', '-q', 'main');
+  write(article, 'updated article');
+  const before = commit('Update article on main');
+  git('merge', '-q', '--no-ff', '--no-commit', 'side');
+  git('checkout', 'side', '--', article);
+  const merge = commit('Merge side and restore original article');
+  saveRegistry([{ url: 'https://example.invalid/source' }]);
+  const after = commit('Update only news sources');
+
+  const options = {
+    execFileSyncImpl: (command, args, settings) => execFileSync(command, ['-C', repo, ...args.slice(2)], settings),
+    triggerPathsImpl: () => [registry, 'content/**'],
+  };
+  const range = { before, after };
+  assert.equal(apiTriggerInputsDifferBetween(range, options), true);
+  assert.deepEqual(
+    [apiInputChangedInRange(range, options), latestApiInputCommit(after, options)],
+    [true, merge],
+  );
+});
+
+test('publisher freshness confronta il pin sul secondo genitore con il contenuto effettivo di main', (t) => {
+  const repo = mkdtempSync(path.join(tmpdir(), 'publish-api-side-pin-'));
+  t.after(() => rmSync(repo, { recursive: true, force: true }));
+  const git = (...args) => execFileSync('git', ['-C', repo, ...args], { encoding: 'utf8' }).trim();
+  git('init', '-q', '-b', 'main');
+  git('config', 'user.name', 'Publisher Test');
+  git('config', 'user.email', 'publisher@example.invalid');
+  git('config', 'commit.gpgSign', 'false');
+  const registry = 'generator/data/canton-sections.json';
+  const article = 'content/article.mjs';
+  mkdirSync(path.join(repo, 'generator/data'), { recursive: true });
+  mkdirSync(path.join(repo, 'content'));
+  const write = (file, value) => writeFileSync(path.join(repo, file), value);
+  const saveRegistry = (newsSources) => write(registry, JSON.stringify({
+    cantons: [{ code: 'AG', section: 'canton-ag', enabled: true, newsSources }],
+  }));
+  const commit = (message) => {
+    git('add', '.');
+    git('commit', '-qm', message);
+    return git('rev-parse', 'HEAD');
+  };
+
+  saveRegistry([]);
+  write(article, 'main article');
+  commit('Original input');
+  git('switch', '-qc', 'published-side');
+  write(article, 'published side article');
+  const before = commit('Published artifact');
+  git('switch', '-q', 'main');
+  write('notes.txt', 'Outside API inputs');
+  commit('Main branch notes');
+  git('merge', '-q', '--no-ff', '-s', 'ours', 'published-side');
+  assert.equal(git('rev-parse', 'HEAD^2'), before);
+  assert.equal(git('rev-parse', 'HEAD^{tree}'), git('rev-parse', 'HEAD^1^{tree}'));
+  saveRegistry([{ url: 'https://example.invalid/source' }]);
+  const after = commit('Update only news sources');
+
+  const options = {
+    execFileSyncImpl: (command, args, settings) => execFileSync(command, ['-C', repo, ...args.slice(2)], settings),
+    triggerPathsImpl: () => [registry, 'content/**'],
+  };
+  const range = { before, after };
+  assert.equal(apiTriggerInputsDifferBetween(range, options), true);
+  assert.equal(apiInputChangedInRange(range, options), true);
 });
 
 test('publisher freshness ignora il commit bookkeeping skip-ci ma include gli input runtime triggeranti', () => {
