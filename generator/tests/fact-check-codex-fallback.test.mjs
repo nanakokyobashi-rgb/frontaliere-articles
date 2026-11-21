@@ -675,9 +675,24 @@ describe('fact-check retries under a reported input cap', () => {
     });
   }
 
+  test('un evergreen nazionale sopra il tetto conserva corpo e riferimenti nel fact-check compatto', async () => {
+    const scope = { section: 'svizzera', isCanton: false, sourceUrl: 'evergreen://fixture' };
+    const padding = await loadFor(8250, scope);
+    const { calls, prompt, compactPrompt, modelResults } = await runRounds({
+      ...scope, padding, declaredInputCap: 8000, replies: [firstVote, secondVote],
+    });
+    assert.ok(estimate(prompt) > 8000);
+    assert.ok(estimate(compactPrompt) <= 8000);
+    for (const marker of [bodyEnd, 'NOTA: Articolo evergreen', 'Riferimenti: confronta', 'articleQuote', 'evidenceQuotes']) {
+      assert.ok(compactPrompt.includes(marker), marker);
+    }
+    assert.deepEqual(calls.map((call) => call.prompt), [compactPrompt, compactPrompt]);
+    assert.equal(modelResults.length, 2);
+  });
+
   for (const [label, scope] of [
     ['fonte non HTTP', { sourceUrl: 'file:///fixture' }],
-    ['evergreen', { sourceText: 'Riferimento breve.' }],
+    ['fonte HTTP troppo breve', { sourceText: 'Riferimento breve.' }],
     ['dataset BFS', { sourceUrl: 'stats-bfs://fixture' }],
     ['dataset ASTRA', { sourceUrl: 'stats-astra://fixture' }],
   ]) {

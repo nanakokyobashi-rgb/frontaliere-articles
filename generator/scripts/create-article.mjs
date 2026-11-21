@@ -7401,15 +7401,18 @@ Rispondi SOLO in JSON valido:
 Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
 
   const prompt = `${evidencePrefix}\n\n${verificationInstructions}\n\n${relevanceInstructions}\n\n${proofSuffix}`;
-  const compactPrompt = !isEvergreenArticle && !isSyntheticDataset && /^https?:\/\//i.test(sourceUrl)
+  const compactPrompt = sourceUrl.startsWith('evergreen://')
+    || (!isEvergreenArticle && !isSyntheticDataset && /^https?:\/\//i.test(sourceUrl))
     ? `${evidencePrefix}
 
 VERIFICA SISTEMATICA — controlla tutte le categorie:
 - Leggi: verifica sigla, numero, anno, attribuzione e fonte. Critical: sigle inventate (${FACT_CHECK_INVENTED_ACRONYMS}), ${FACT_CHECK_INVENTED_LAWS}, vigenza senza legge, falsa tassa sanitaria, accordo non firmato.
 - Istituzioni e persone: verifica enti, competenze, ruoli e citazioni. Critical: enti inventati o incompetenti. NON esistono: ${FACT_CHECK_INVENTED_INSTITUTIONS}. Consiglieri federali attuali: ${FACT_CHECK_FEDERAL_COUNCILLORS}. Abuso critical:istituzioni: ${FACT_CHECK_FINMA_SCOPE}.
 - Dati: confronta aliquote, soglie e date. Decimali: cita studio e istituto. Accetta arrotondamenti attribuiti e valori canonici.
-- Fonte: controlla date, luoghi, persone, citazioni e misure. Date assenti: sospette. Contesto verificato: minor. Invenzioni e contraddizioni: critical.
-- Casi specifici (luogo/ente, ruolo, azione, esito) senza riscontro nella fonte: critical:fatti_inventati. Esempi: infermiera segnala carenze igieniche a Lugano; medico denuncia pratiche non etiche a Chiasso; infermiere ORL ottiene un risarcimento; medico del Civico di Lugano denuncia frode con indagine FINMA.
+${isEvergreenArticle
+    ? '- Riferimenti: confronta date, luoghi, persone, citazioni e misure con i fatti verificati. Segnala affermazioni false, contraddette o troppo specifiche senza attribuzione. Casi reali, interviste e verifiche inventati: critical:fatti_inventati.'
+    : `- Fonte: controlla date, luoghi, persone, citazioni e misure. Date assenti: sospette. Contesto verificato: minor. Invenzioni e contraddizioni: critical.
+- Casi specifici (luogo/ente, ruolo, azione, esito) senza riscontro nella fonte: critical:fatti_inventati. Esempi: infermiera segnala carenze igieniche a Lugano; medico denuncia pratiche non etiche a Chiasso; infermiere ORL ottiene un risarcimento; medico del Civico di Lugano denuncia frode con indagine FINMA.`}
 - Svizzera: accordi bilaterali, fuori da UE e SEE.
 
 ${relevanceInstructions}
