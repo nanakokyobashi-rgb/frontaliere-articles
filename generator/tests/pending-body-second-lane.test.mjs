@@ -978,7 +978,7 @@ test('il fallback storico corto applica il contratto strutturale prima del final
   const makeHistoricalTranslator = new Function(
     'translateFieldFreeMt', 'translatedStringOrNull', 'balanceMarkdownMarkers',
     'buildPendingBodyRetranslationPrompt', 'countWords', 'TRANSLATION_CHUNK_THRESHOLD',
-    'console', 'lineStructuralSignature',
+    'console', 'lineStructuralSignature', 'pendingBodyLaneShouldStop',
     `${ASSERT_CHUNK_TRANSLATOR_SRC}\n${TABLE_HEADER_MARKER_HELPERS_SRC}\n${src.slice(historicalAt, historicalEnd)}\nreturn translatePendingBodyWithHistoricalChain;`,
   );
   const makeTranslateInChunks = new Function(
@@ -997,6 +997,7 @@ test('il fallback storico corto applica il contratto strutturale prima del final
     TRANSLATION_CHUNK_THRESHOLD,
     { error() {}, warn() {}, log() {} },
     lineStructuralSignature,
+    () => false,
   );
 
   let successfulProviderCalls = 0;
@@ -1055,25 +1056,37 @@ test('il fallback storico corto applica il contratto strutturale prima del final
   );
   assert.deepEqual(chunkOptions, [HISTORICAL_BODY_OPTIONS, HISTORICAL_BODY_OPTIONS]);
 
-  const mediumBody = Array.from({ length: 165 }, (_, i) => i === 40 ? '40' : `parola${i}`).join(' ');
-  const mediumCalls = [];
-  const mediumCallWithRetry = async (prompt) => {
-    const part = prompt.slice('body body1: '.length);
-    mediumCalls.push(countWords(part));
-    const translated = part.replaceAll('parola', 'Wort');
-    return { body1: countWords(part) > 120 ? translated.replace(' 40 ', ' 999 ') : translated };
+  const unusableBodyField = () => {
+    throw Object.assign(new Error('unusable body'), { code: 'unusable-body-field' });
   };
-  const mediumTranslator = makeTranslateInChunks(
-    splitIntoTranslationChunks, mediumCallWithRetry, countWords, translatedStringOrNull,
-    isSourcePassthrough, balanceMarkdownMarkers, hasSameLineSkeleton, lineStructuralSignature,
-    detectTruncation, opaqueSpanSignature,
-  );
-  assert.equal(await historical(mediumBody, 'de', 'body1', {
-    callWithRetry: mediumCallWithRetry,
-    translateInChunks: mediumTranslator,
-  }), mediumBody.replaceAll('parola', 'Wort'));
-  assert.equal(mediumCalls[0], 165);
-  assert.ok(mediumCalls.slice(1).length >= 2 && mediumCalls.slice(1).every((size) => size <= 120));
+  for (const [wordCount, rejectedResponse] of [
+    [165, (translated) => ({ body1: translated.replace(' 40 ', ' 999 ') })],
+    [165, () => ({})],
+    [165, unusableBodyField],
+    [360, unusableBodyField],
+  ]) {
+    const mediumBody = Array.from({ length: wordCount }, (_, i) => i === 40 ? '40' : `parola${i}`).join(' ');
+    const mediumCalls = [];
+    const mediumCallWithRetry = async (prompt) => {
+      const part = prompt.slice('body body1: '.length);
+      mediumCalls.push(countWords(part));
+      const translated = part.replaceAll('parola', 'Wort');
+      return countWords(part) > 120 ? rejectedResponse(translated) : { body1: translated };
+    };
+    const mediumTranslator = makeTranslateInChunks(
+      splitIntoTranslationChunks, mediumCallWithRetry, countWords, translatedStringOrNull,
+      isSourcePassthrough, balanceMarkdownMarkers, hasSameLineSkeleton, lineStructuralSignature,
+      detectTruncation, opaqueSpanSignature,
+    );
+    assert.equal(await historical(mediumBody, 'de', 'body1', {
+      callWithRetry: mediumCallWithRetry,
+      translateInChunks: mediumTranslator,
+    }), mediumBody.replaceAll('parola', 'Wort'));
+    const firstBatchSize = Math.ceil(wordCount / 240);
+    assert.equal(mediumCalls.slice(0, firstBatchSize).reduce((sum, size) => sum + size, 0), wordCount);
+    const shorterCalls = mediumCalls.slice(firstBatchSize);
+    assert.ok(shorterCalls.length >= 2 && shorterCalls.every((size) => size <= 120));
+  }
 
   const table = '| Segmento 2024 | Variazione riportata 2025 |\n|---|---:|\n| Appartamenti | +4,4% |';
   const bodyWithTwoTables = [table, '## Fatti chiave', table].join('\n\n');

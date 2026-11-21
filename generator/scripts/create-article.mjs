@@ -15994,6 +15994,7 @@ async function translatePendingBodyWithHistoricalChain(
   const chunkTranslator = assertChunkTranslator(translateInChunks, 'translatePendingBodyWithHistoricalChain');
   const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
   const recoveryChunkWords = 240;
+  const shorterChunkWords = recoveryChunkWords / 2;
   const rejected = [];
   const text = await translateFieldFreeMt({
     text: itValue,
@@ -16016,44 +16017,56 @@ async function translatePendingBodyWithHistoricalChain(
         locale,
         { forceLegacy: true, chunkWords },
       );
-      if (wordCount > recoveryChunkWords) return translateSegments(recoveryChunkWords);
-      // Free MT separates template headings before invoking this callback.
-      // Derive the markers for this same segment, as the validator does.
-      const markedSegment = tableHeaderColumnMarkers(masked);
-      if (markedSegment.collision || markedSegment.ambiguous) return '';
-      const parsed = await callWithRetry(
-        buildPendingBodyRetranslationPrompt({
-          langName,
-          field,
-          itValue: markedSegment.markedText,
-        }),
-        Math.max(5000, Math.ceil(countWords(masked || '') * 5)),
-        `${locale}:${field}-pending-retry`,
-        { translation: true, forceLegacy: true, expectedBodyField: field, targetLang: locale },
-      );
-      const translated = translatedStringOrNull(parsed?.[field], locale);
-      if (translated === null) {
-        rejected.push('non-string');
-        return '';
+      const retryShorter = () => wordCount > shorterChunkWords && !pendingBodyLaneShouldStop()
+        ? translateSegments(shorterChunkWords)
+        : '';
+      let validated;
+      try {
+        if (wordCount > recoveryChunkWords) {
+          validated = await translateSegments(recoveryChunkWords);
+        } else {
+          // Free MT separates template headings before invoking this callback.
+          // Derive the markers for this same segment, as the validator does.
+          const markedSegment = tableHeaderColumnMarkers(masked);
+          if (markedSegment.collision || markedSegment.ambiguous) return '';
+          const parsed = await callWithRetry(
+            buildPendingBodyRetranslationPrompt({
+              langName,
+              field,
+              itValue: markedSegment.markedText,
+            }),
+            Math.max(5000, Math.ceil(countWords(masked || '') * 5)),
+            `${locale}:${field}-pending-retry`,
+            { translation: true, forceLegacy: true, expectedBodyField: field, targetLang: locale },
+          );
+          const translated = translatedStringOrNull(parsed?.[field], locale);
+          if (translated === null) {
+            rejected.push('non-string');
+            return retryShorter();
+          }
+          // Reuse the exact same source-owned contract as the chunked path on the
+          // already translated short body. `pretranslatedResult` avoids a second
+          // provider call while still running skeleton, links, numbers, markers
+          // and completeness checks before `translateFieldFreeMt` can finalize it.
+          validated = await chunkTranslator(
+            masked,
+            field,
+            () => '',
+            `${locale}:${field}-pending-retry-validation`,
+            locale,
+            { pretranslatedResult: { [field]: translated } },
+          );
+        }
+      } catch (error) {
+        if (error?.code !== 'unusable-body-field') throw error;
+        rejected.push(error.code);
+        return retryShorter();
       }
-      // Reuse the exact same source-owned contract as the chunked path on the
-      // already translated short body. `pretranslatedResult` avoids a second
-      // provider call while still running skeleton, links, numbers, markers
-      // and completeness checks before `translateFieldFreeMt` can finalize it.
-      const validated = await chunkTranslator(
-        masked,
-        field,
-        () => '',
-        `${locale}:${field}-pending-retry-validation`,
-        locale,
-        { pretranslatedResult: { [field]: translated } },
-      );
       if (validated === null) {
         rejected.push('structure');
         // An additional unsplit retry would ask the provider to repeat the
         // same task. Give the existing validator one segmented candidate.
-        const shorterChunkWords = recoveryChunkWords / 2;
-        return wordCount > shorterChunkWords ? translateSegments(shorterChunkWords) : '';
+        return retryShorter();
       }
       return validated;
     },
@@ -16288,21 +16301,25 @@ async function translateArticle(data) {
     const chunks = pretranslatedResult === null
       ? splitIntoTranslationChunks(tableHeaderMarkers.markedText, chunkWords, chunkWords !== undefined)
       : [tableHeaderMarkers.markedText];
-    const translated = pretranslatedResult === null
-      ? await Promise.all(
-        chunks.map((chunk, i) =>
-          callWithRetry(
-            makeChunkPrompt(chunk, i, chunks.length),
-            Math.max(5000, Math.ceil(countWords(chunk) * 5)),
-            `${labelPrefix}-p${i + 1}`,
-            {
-              translation: true,
-              ...(forceLegacy ? { forceLegacy: true, expectedBodyField: fieldKey, targetLang } : {}),
-            },
-          ),
-        ),
-      )
-      : [pretranslatedResult];
+    let translated = [pretranslatedResult];
+    if (pretranslatedResult === null) {
+      const requests = chunks.map((chunk, i) => callWithRetry(
+        makeChunkPrompt(chunk, i, chunks.length),
+        Math.max(5000, Math.ceil(countWords(chunk) * 5)),
+        `${labelPrefix}-p${i + 1}`,
+        { translation: true, ...(forceLegacy ? { forceLegacy: true, expectedBodyField: fieldKey, targetLang } : {}) },
+      ));
+      if (forceLegacy && chunkWords !== undefined) {
+        // Let this batch finish before a pending-body retry uses finer chunks.
+        const results = await Promise.allSettled(requests);
+        const failures = results.filter((result) => result.status === 'rejected');
+        const failure = failures.find(({ reason }) => reason?.code !== 'unusable-body-field') ?? failures[0];
+        if (failure) throw failure.reason;
+        translated = results.map(({ value }) => value);
+      } else {
+        translated = await Promise.all(requests);
+      }
+    }
     // `chunks` passati al join: un chunk tornato identico al suo italiano
     // rende nullo l'intero campo (`isSourcePassthrough`, #1875), come un chunk
     // non-stringa. I confini sono quelli della sorgente: una divisione dentro
