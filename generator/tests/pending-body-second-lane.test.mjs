@@ -1055,6 +1055,26 @@ test('il fallback storico corto applica il contratto strutturale prima del final
   );
   assert.deepEqual(chunkOptions, [HISTORICAL_BODY_OPTIONS, HISTORICAL_BODY_OPTIONS]);
 
+  const mediumBody = Array.from({ length: 165 }, (_, i) => i === 40 ? '40' : `parola${i}`).join(' ');
+  const mediumCalls = [];
+  const mediumCallWithRetry = async (prompt) => {
+    const part = prompt.slice('body body1: '.length);
+    mediumCalls.push(countWords(part));
+    const translated = part.replaceAll('parola', 'Wort');
+    return { body1: countWords(part) > 120 ? translated.replace(' 40 ', ' 999 ') : translated };
+  };
+  const mediumTranslator = makeTranslateInChunks(
+    splitIntoTranslationChunks, mediumCallWithRetry, countWords, translatedStringOrNull,
+    isSourcePassthrough, balanceMarkdownMarkers, hasSameLineSkeleton, lineStructuralSignature,
+    detectTruncation, opaqueSpanSignature,
+  );
+  assert.equal(await historical(mediumBody, 'de', 'body1', {
+    callWithRetry: mediumCallWithRetry,
+    translateInChunks: mediumTranslator,
+  }), mediumBody.replaceAll('parola', 'Wort'));
+  assert.equal(mediumCalls[0], 165);
+  assert.ok(mediumCalls.slice(1).length >= 2 && mediumCalls.slice(1).every((size) => size <= 120));
+
   const table = '| Segmento 2024 | Variazione riportata 2025 |\n|---|---:|\n| Appartamenti | +4,4% |';
   const bodyWithTwoTables = [table, '## Fatti chiave', table].join('\n\n');
   const translateTable = (text) => text

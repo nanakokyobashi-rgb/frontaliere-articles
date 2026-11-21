@@ -16000,25 +16000,21 @@ async function translatePendingBodyWithHistoricalChain(
     fieldType: 'description',
     fieldName: field,
     translate: async ({ text: masked }) => {
-      if (countWords(masked || '') > recoveryChunkWords) {
-        // Reuse the same chunker as the legacy translation and truncation
-        // paths. Shorter segments reduce omissions after a full-body
-        // translation failed. Validate the reconstructed body as usual.
-        const chunked = await chunkTranslator(
-          masked,
+      const wordCount = countWords(masked || '');
+      const translateSegments = (chunkWords) => chunkTranslator(
+        masked,
+        field,
+        (chunk, i, total) => buildPendingBodyRetranslationPrompt({
+          langName,
           field,
-          (chunk, i, total) => buildPendingBodyRetranslationPrompt({
-            langName,
-            field,
-            itValue: chunk,
-            partLabel: total > 1 ? `, parte ${i + 1} di ${total}` : '',
-          }),
-          `${locale}:${field}-pending-retry`,
-          locale,
-          { forceLegacy: true, chunkWords: recoveryChunkWords },
-        );
-        return chunked;
-      }
+          itValue: chunk,
+          partLabel: total > 1 ? `, parte ${i + 1} di ${total}` : '',
+        }),
+        `${locale}:${field}-pending-retry`,
+        locale,
+        { forceLegacy: true, chunkWords },
+      );
+      if (wordCount > recoveryChunkWords) return translateSegments(recoveryChunkWords);
       // Free MT separates template headings before invoking this callback.
       // Derive the markers for this same segment, as the validator does.
       const markedSegment = tableHeaderColumnMarkers(masked);
@@ -16052,7 +16048,10 @@ async function translatePendingBodyWithHistoricalChain(
       );
       if (validated === null) {
         rejected.push('structure');
-        return '';
+        // An additional unsplit retry would ask the provider to repeat the
+        // same task. Give the existing validator one segmented candidate.
+        const shorterChunkWords = recoveryChunkWords / 2;
+        return wordCount > shorterChunkWords ? translateSegments(shorterChunkWords) : '';
       }
       return validated;
     },
