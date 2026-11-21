@@ -1422,8 +1422,11 @@ jobs:
 
       # ListArtifacts can lag behind a successful upload. Check visibility
       # before the freshness gate and the single deployment request.
+      # The upload step is already gated by PUBLISH_API_SKIP; requiring its
+      # successful outcome carries that skip through and avoids querying the
+      # API when no Pages artifact was created.
       - name: Wait for the uploaded Pages artifact to be listed
-        if: env.PUBLISH_API_SKIP != 'true'
+        if: steps.upload_pages.outcome == 'success'
         timeout-minutes: 2
         env:
           GH_TOKEN: ${{ github.token }}
