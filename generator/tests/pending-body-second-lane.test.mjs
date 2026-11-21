@@ -55,6 +55,12 @@ import {
   lineStructuralSignature,
   opaqueSpanSignature,
 } from '../scripts/lib/free-translate.mjs';
+import {
+  JSON_QUOTE_SAFETY_RULE_IT,
+  describeJsonParseError,
+  describeRawForDiagnostics,
+  repairLlmJson,
+} from '../scripts/lib/llm-json-repair.mjs';
 import { sanitizeBodyText } from '../scripts/lib/sanitize-body-braces.mjs';
 import { tableHeaderColumnPipeAmbiguity } from '../scripts/lib/html-tag-scanner.mjs';
 
@@ -98,6 +104,35 @@ const makeTableHeaderMarkers = new Function(
 const buildBodyTruncationRetryPrompt = new Function(
   `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${BUILD_BODY_TRUNCATION_RETRY_PROMPT_SRC}\n${extractFunctionSource('function buildPendingBodyRetranslationPrompt(')}\nreturn buildBodyTruncationRetryPrompt;`,
 )();
+function buildCallWithRetry(replies) {
+  const start = src.indexOf('  async function callWithRetry(');
+  const end = src.indexOf('\n  }\n', start);
+  assert.ok(start >= 0 && end > start, 'callWithRetry non trovata');
+  const calls = [];
+  const diagnostics = [];
+  const bindings = {
+    JSON_QUOTE_SAFETY_RULE_IT,
+    callLLM: async (_messages, options) => {
+      assert.ok(calls.length < replies.length, 'chiamata oltre le risposte previste');
+      calls.push(options);
+      return replies[calls.length - 1];
+    },
+    legacyTranslationOptions: () => ({ deadlineMs: 123456, chain: ['legacy-test'] }),
+    repairLlmJson,
+    describeJsonParseError,
+    describeRawForDiagnostics,
+    translatedStringOrNull,
+    safeSignalDiagnosticTextForLog: (message) => message,
+    RUN_REPORT: {},
+    console: { error: (message) => diagnostics.push(message) },
+  };
+  const callWithRetry = new Function(
+    ...Object.keys(bindings),
+    `${extractFunctionSource('function qualityRejectError(')}\n${src.slice(start, end + 4)}\nreturn callWithRetry;`,
+  )(...Object.values(bindings));
+  return { callWithRetry, calls, diagnostics };
+}
+
 const TRANSLATE_IN_CHUNKS_SRC = (() => {
   const start = src.indexOf('  async function translateInChunks(\n    bodyText,\n    fieldKey,\n    makeChunkPrompt,\n    labelPrefix,\n    targetLang,\n    { pretranslatedResult = null, forceLegacy = false, chunkWords } = {},\n  ) {');
   assert.notEqual(start, -1, 'translateInChunks non trovata in create-article.mjs');
@@ -136,6 +171,75 @@ const DE_BODY = {
   body2: 'Die Grenzregionen wenden den Beitrag nach unterschiedlichen Kriterien an. Wer in Como wohnt, zahlt nach den Tabellen der eigenen Region.',
   body3: 'Für Einzelheiten wendet man sich am besten an eine Beratungsstelle. Die Schalter antworten unter der Woche auch telefonisch.',
 };
+
+const HISTORICAL_BODY_OPTIONS = {
+  translation: true,
+  forceLegacy: true,
+  expectedBodyField: 'body1',
+  targetLang: 'de',
+};
+
+test('callWithRetry riprova un body inutilizzabile con lo stesso tetto e la stessa deadline', async () => {
+  const expected = { body1: DE_BODY.body1 };
+  const label = 'de:body1-pending-retry';
+  for (const invalid of [{}, { body1: null }, { body1: 'null' }, { body1: { text: 'payload privato' } }]) {
+    const { callWithRetry, calls, diagnostics } = buildCallWithRetry([
+      JSON.stringify(invalid),
+      `\`\`\`json\n${JSON.stringify(expected)}\n\`\`\``,
+    ]);
+    assert.deepEqual(await callWithRetry('prompt', 5000, label, HISTORICAL_BODY_OPTIONS), expected);
+    assert.deepEqual(calls.map(({ maxTokens, deadlineMs, chain }) => [maxTokens, deadlineMs, chain]), [
+      [5000, 123456, ['legacy-test']],
+      [5000, 123456, ['legacy-test']],
+    ]);
+    assert.equal(diagnostics[0], `TRANSLATION_BODY_REJECT label=${label} reason=unusable-body-field`);
+    assert.equal(diagnostics.length, 2);
+  }
+});
+
+test('callWithRetry esaurisce tre scarti di forma con un errore qualità tipizzato', async () => {
+  const label = 'de:body1-pending-retry';
+  const { callWithRetry, calls, diagnostics } = buildCallWithRetry([
+    '{"body1":{"text":"payload privato"}}', '{"body1":"null"}', '{}',
+  ]);
+  await assert.rejects(
+    callWithRetry('prompt', 5000, label, HISTORICAL_BODY_OPTIONS),
+    { qualityReject: true, code: 'unusable-body-field' },
+  );
+  assert.deepEqual(calls.map(({ maxTokens }) => maxTokens), [5000, 5000, 5000]);
+  assert.deepEqual(diagnostics, Array(3).fill(`TRANSLATION_BODY_REJECT label=${label} reason=unusable-body-field`));
+});
+
+test('callWithRetry conserva il comportamento senza campo atteso e il retry di sintassi', async () => {
+  const unvalidated = buildCallWithRetry(['{}']);
+  assert.deepEqual(await unvalidated.callWithRetry('prompt', 5000, 'generico'), {});
+  assert.equal(unvalidated.calls.length, 1);
+  assert.deepEqual(unvalidated.diagnostics, []);
+
+  const malformed = '{ nope }';
+  const expected = { body1: DE_BODY.body1 };
+  const syntax = buildCallWithRetry([malformed, malformed, JSON.stringify(expected)]);
+  assert.deepEqual(await syntax.callWithRetry('prompt', 5000, 'generico'), expected);
+  assert.deepEqual(
+    syntax.calls.map(({ maxTokens, temperature }) => [maxTokens, temperature]),
+    [[5000, 0.5], [9000, 0.5], [16000, 0.3]],
+  );
+  assert.match(syntax.diagnostics[0], /JSON parse error/);
+
+  const mixed = buildCallWithRetry(['{"body1":"unfinished', '{}', JSON.stringify(expected)]);
+  assert.deepEqual(await mixed.callWithRetry('prompt', 5000, 'storico', HISTORICAL_BODY_OPTIONS), expected);
+  assert.deepEqual(mixed.calls.map(({ maxTokens }) => maxTokens), [5000, 15000, 15000]);
+
+  const missingThenMalformed = buildCallWithRetry(['{}', malformed, JSON.stringify(expected)]);
+  assert.deepEqual(
+    await missingThenMalformed.callWithRetry('prompt', 5000, 'storico', HISTORICAL_BODY_OPTIONS),
+    expected,
+  );
+  assert.deepEqual(
+    missingThenMalformed.calls.map(({ maxTokens, deadlineMs }) => [maxTokens, deadlineMs]),
+    [[5000, 123456], [5000, 123456], [16000, 123456]],
+  );
+});
 
 /** Lo stato di `data` all'uscita dei due loop di recovery nella run 37220516797. */
 function articleWithPendingDeBody1(report) {
@@ -922,7 +1026,34 @@ test('il fallback storico corto applica il contratto strutturale prima del final
     source.replace('Prima', 'Zuerst'),
   );
   assert.equal(successfulProviderCalls, 1);
-  assert.deepEqual(successfulProviderOptions, { translation: true, forceLegacy: true });
+  assert.deepEqual(successfulProviderOptions, HISTORICAL_BODY_OPTIONS);
+
+  const chunkedSource = Array.from({ length: 360 }, (_, i) => `parola${i}`).join(' ');
+  const chunkOptions = [];
+  const chunkCallWithRetry = async (prompt, _maxTokens, _label, options) => {
+    chunkOptions.push(options);
+    return { body1: prompt.slice('body body1: '.length).replaceAll('parola', 'Wort') };
+  };
+  const chunkTranslator = makeTranslateInChunks(
+    splitIntoTranslationChunks,
+    chunkCallWithRetry,
+    countWords,
+    translatedStringOrNull,
+    isSourcePassthrough,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+    opaqueSpanSignature,
+  );
+  assert.equal(
+    await historical(chunkedSource, 'de', 'body1', {
+      callWithRetry: chunkCallWithRetry,
+      translateInChunks: chunkTranslator,
+    }),
+    chunkedSource.replaceAll('parola', 'Wort'),
+  );
+  assert.deepEqual(chunkOptions, [HISTORICAL_BODY_OPTIONS, HISTORICAL_BODY_OPTIONS]);
 
   const table = '| Segmento 2024 | Variazione riportata 2025 |\n|---|---:|\n| Appartamenti | +4,4% |';
   const bodyWithTwoTables = [table, '## Fatti chiave', table].join('\n\n');
