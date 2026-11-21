@@ -3794,7 +3794,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   const render = read('scripts/ci/fast-publish-section-render.sh');
   const recovery = read('scripts/ci/fast-publish-section-recovery.sh');
   const historyGuard = read('scripts/ci/fetch-push-base-if-missing.sh');
-  const sectionContract = `${wf}\n${resolver}\n${render}\n${recovery}`;
+  const boundedReplay = read('scripts/ci/dispatch-bounded-section-replay.sh');
+  const sectionContract = `${wf}\n${resolver}\n${render}\n${recovery}\n${boundedReplay}`;
   const edgeCandidate = read('scripts/ci/fast-publish-section-edge-candidate.sh');
   const publisher = read('scripts/publish-section-pages.mjs');
   assert.match(wf, /workflow_run:\n\s+workflows: \['Publish article data API'\]\n\s+types: \[completed\]\n\s+branches: \[main\]/);
@@ -3892,8 +3893,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /COORDINATED_RECOVERY: \$\{\{ inputs\.coordinated_recovery \}\}/);
   assert.doesNotMatch(staleResolve, /-f coordinated_recovery=/);
   assert.match(render, /-f coordinated_recovery="\$child_coordinated_recovery"/);
-  assert.match(wf, /-f coordinated_recovery="\$child_coordinated_recovery"/);
-  assert.match(wf, /-f source_commit="\$CURRENT_MAIN"/);
+  assert.match(boundedReplay, /-f coordinated_recovery="\$child_coordinated_recovery"/);
+  assert.match(boundedReplay, /-f source_commit="\$CURRENT_MAIN"/);
   assert.match(sectionContract, /-f source_commit="\$current_main"/);
   assert.equal(
     (sectionContract.match(/-f dispatch_nonce="\$dispatch_nonce"/g) ?? []).length,
@@ -3960,14 +3961,14 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.doesNotMatch(render, /args\+=\(--ids "\$\(printf '%s' "\$ARTICLE_IDS_JSON"/);
   assert.match(wf, /ALLOW_DEFERRED_LIVE_RELEASE: \$\{\{ needs\.resolve\.outputs\.allow_deferred_live_release \}\}/);
   assert.match(wf, /EXPECTED_MAIN_HEAD: \$\{\{ needs\.resolve\.outputs\.source_commit \|\| github\.event\.workflow_run\.head_sha \|\| inputs\.source_main_commit \|\| github\.event\.after \|\| github\.sha \}\}/);
-  assert.match(wf, /-f source_main_commit="\$CURRENT_MAIN"/);
+  assert.match(boundedReplay, /-f source_main_commit="\$CURRENT_MAIN"/);
   assert.match(sectionContract, /-f source_main_commit="\$current_main"/);
-  assert.match(wf, /replay_before="\$\{ORIGINAL_PUSH_BEFORE:-\$STALE_HEAD\}"/);
-  assert.doesNotMatch(wf, /replay_after="\$\{ORIGINAL_PUSH_AFTER:-\$STALE_HEAD\}"/);
-  assert.match(wf, /replay_after="\$CURRENT_MAIN"/);
+  assert.match(boundedReplay, /replay_before="\$\{ORIGINAL_PUSH_BEFORE:-\$STALE_HEAD\}"/);
+  assert.doesNotMatch(boundedReplay, /replay_after="\$\{ORIGINAL_PUSH_AFTER:-\$STALE_HEAD\}"/);
+  assert.match(boundedReplay, /replay_after="\$CURRENT_MAIN"/);
   assert.match(sectionContract, /replay_after="\$current_main"/);
-  assert.match(wf, /-f push_before="\$replay_before"/);
-  assert.match(wf, /-f push_after="\$replay_after"/);
+  assert.match(boundedReplay, /-f push_before="\$replay_before"/);
+  assert.match(boundedReplay, /-f push_after="\$replay_after"/);
   assert.equal((sectionContract.match(/-f api_release_commit="\$api_release_commit"/g) ?? []).length, 2);
   assert.match(sectionContract, /resolveStaleReplayApiReleaseCommit/);
   assert.equal(
@@ -3978,7 +3979,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /Prepare Firebase credentials for stale replay recovery\n\s+if: steps\.replay_freshness\.outputs\.fresh == 'false'/);
   assert.match(wf, /Load dispatch token for stale replay recovery\n\s+if: steps\.replay_freshness\.outputs\.fresh == 'false'/);
   assert.match(wf, /REPLAY_API_AFTER_PUBLISH: \$\{\{ inputs\.replay_api_after_publish \}\}/);
-  assert.match(wf, /-f replay_api_after_publish="\$child_replay_api_after_publish"/);
+  assert.match(boundedReplay, /-f replay_api_after_publish="\$child_replay_api_after_publish"/);
   assert.match(wf, /REPLAY_API_AFTER_PUBLISH: \$\{\{ needs\.resolve\.outputs\.replay_api_after_publish \}\}/);
   assert.equal(
     (sectionContract.match(/-f replay_api_after_publish="\$child_replay_api_after_publish"/g) ?? []).length,
@@ -4077,11 +4078,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(sectionPublisher, /removeStaleCantonRssFeeds: true,\s*cleanupInactiveSurface: true,/);
   assert.match(sectionPublisher, /assertKnownCantonSection/);
   assert.match(sectionPublisher, /manifest pagine edge assente o non verificabile; nessuna pagina viene cancellata/);
-  assert.match(wf, /replay bounded stantio: ricalcolo la release API sulla HEAD/);
-  assert.match(wf, /PUSH_BEFORE="\$\{ORIGINAL_PUSH_BEFORE:-\}" FETCH_MAIN=true[\s\\]*bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
+  assert.match(boundedReplay, /replay bounded stantio: ricalcolo la release API sulla HEAD/);
+  assert.match(boundedReplay, /PUSH_BEFORE="\$\{ORIGINAL_PUSH_BEFORE:-\}" FETCH_MAIN=true[\s\\]*bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
   assert.match(wf, /remove_stale_canton_rss_feeds/);
   assert.match(wf, /API_RELEASE_COMMIT: \$\{\{ needs\.resolve\.outputs\.api_release_commit \}\}/);
-  assert.match(wf, /GITHUB_PAT_NANAKO assente/);
+  assert.match(boundedReplay, /GITHUB_PAT_NANAKO assente/);
   assert.match(wf, /Verify staged release revision is still main/);
   // Il replay staged deve usare la revisione realmente renderizzata dalla
   // barriera che confronta tutte le leg della matrix; il fallback all'input
