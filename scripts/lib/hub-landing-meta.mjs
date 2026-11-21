@@ -262,7 +262,7 @@ function attributeValueSpan(markup, wantedName) {
   const source = String(markup);
   const tag = readTag(source, 0);
   if (!tag || tag.malformed || tag.closing) return null;
-  const end = tag.end - 1;
+  const end = tag.end;
   let index = 1 + tag.name.length;
   while (index < end) {
     while (index < end && isHtmlWhitespace(source[index])) index++;
