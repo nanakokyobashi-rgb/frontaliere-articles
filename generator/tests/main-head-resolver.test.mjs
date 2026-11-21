@@ -86,6 +86,8 @@ test('canton publisher only accepts fast-forwards limited to bookkeeping and gen
     const generatorFix = commit('generator/tests/pending-body-second-lane.test.mjs', '// translation tests');
     commit('generator/scripts/lib/ai-models.mjs', '// model deadline');
     const modelFix = commit('generator/tests/codex-broker-client.test.mjs', '// model deadline tests');
+    const finalGate = commit('generator/tests/evergreen-final-gate-source.test.mjs', '// final gate diagnostics');
+    const factCheck = commit('generator/tests/fact-check-codex-fallback.test.mjs', '// fact-check input cap');
     const coverQueue = commit('data/blog-cover-cdn-sync-queue.json', '{}');
     const cantonArticle = commit('data/sections/canton-ju/articles/jura.json', '{}');
     const unrelated = commit('data/image-regeneration-queue-pending.jsonl.12.34.0.pending.bak', '{}');
@@ -98,7 +100,9 @@ test('canton publisher only accepts fast-forwards limited to bookkeeping and gen
     assert.equal(check(pendingShard, cantonRejected), 0);
     assert.equal(check(cantonRejected, generatorFix), 0);
     assert.equal(check(generatorFix, modelFix), 0);
-    assert.equal(check(modelFix, coverQueue), 0);
+    assert.equal(check(modelFix, finalGate), 0);
+    assert.equal(check(finalGate, factCheck), 0);
+    assert.equal(check(factCheck, coverQueue), 0);
     assert.equal(check(generatorFix, cantonArticle), 1);
     assert.equal(check(cantonArticle, unrelated), 1);
     assert.equal(check(content, latest), 0);

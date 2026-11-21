@@ -20,7 +20,8 @@ git merge-base --is-ancestor "$expected" "$current" || exit 1
 
 # These files record generator attempts, image work and watchdog status,
 # or change how future articles are generated without rendering existing pages.
-# Keep this list explicit: any other change may alter the rendered release.
+# Test entrypoints are not read by the publisher. Other changes may alter
+# the rendered release.
 git diff --quiet --no-ext-diff --no-textconv --ignore-submodules=none "$expected" "$current" -- . \
   ':(top,exclude,literal)data/discovery-attempt-state.json' \
   ':(top,exclude,literal)data/topic-candidates-evergreen-rejected.json' \
@@ -29,11 +30,8 @@ git diff --quiet --no-ext-diff --no-textconv --ignore-submodules=none "$expected
   ':(top,exclude,literal)data/image-regeneration-queue.json' \
   ':(top,exclude,literal)data/image-regeneration-queue-pending.jsonl' \
   ':(top,exclude,glob)data/image-regeneration-queue-pending.jsonl.*.pending' \
+  ':(top,exclude,glob)generator/tests/**/*.test.mjs' \
   ':(top,exclude,literal)generator/scripts/create-article.mjs' \
   ':(top,exclude,literal)generator/scripts/lib/ai-models.mjs' \
-  ':(top,exclude,literal)generator/tests/codex-broker-client.test.mjs' \
   ':(top,exclude,literal)generator/scripts/lib/canton-news-sources.mjs' \
-  ':(top,exclude,literal)generator/tests/canton-news-sources.test.mjs' \
-  ':(top,exclude,literal)generator/tests/pending-body-second-lane.test.mjs' \
-  ':(top,exclude,literal)generator/tests/canton-generation-coverage.test.mjs' \
   ':(top,exclude,literal)scripts/ci/canton-generation-coverage.mjs'
