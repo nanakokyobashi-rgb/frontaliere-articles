@@ -7178,6 +7178,13 @@ export function buildFactCheckCallOptions(baseOpts, cacheEnabled = isFactCheckCa
 // run over the WHOLE text regardless of this cap.
 const MAX_FACTCHECK_ARTICLE_CHARS = 24000;
 
+function buildFactCheckProofRetryPrompt(basePrompt, proofFailures) {
+  if (proofFailures.size === 0) return basePrompt;
+  return `${basePrompt}\n\nCONTROLLO DELLE PROVE PRIMA DI INVIARE IL JSON:\n`
+    + `I verdetti precedenti sono stati scartati per questi requisiti: ${[...proofFailures].join(' | ')}.\n`
+    + 'Prima scegli e copia i passaggi esatti dai blocchi forniti, poi formula il giudizio in base a quei passaggi.';
+}
+
 // Composizione ufficiale: https://www.admin.ch/en/members-federal-council
 const FACT_CHECK_FEDERAL_COUNCILLORS = `Baume-Schneider, Parmelin, Cassis, Keller-Sutter, Pfister, Jans, Rösti`;
 const FACT_CHECK_INVENTED_INSTITUTIONS = `"Codice federale del lavoro", "CFL", "UFOL", "UWL", "Commissione federale per i frontalieri", "Ufficio federale dell'integrazione sanitaria (UFIS)"`;
@@ -7454,6 +7461,7 @@ ${proofSuffix}`
   let missingSecondOpinion = false;
   let activePrompt = prompt;
   let compactRetry = null;
+  let observedInputCap = 0;
   for (let fcAttempt = 1; fcAttempt <= maxPrimaryRounds && (modelResults.length === 0 || missingSecondOpinion); fcAttempt++) {
     if (fcAttempt > 1) {
       const why = missingSecondOpinion ? 'un solo parere indipendente' : 'nessun verdetto';
@@ -7480,6 +7488,13 @@ ${proofSuffix}`
       const { fullEstimate, compactEstimate, cap } = compactRetry;
       compactRetry = null;
       console.error(`  🔁 Fact-check: istruzioni compatte, input stimato ${fullEstimate} → ${compactEstimate} token (tetto ${cap})`);
+    }
+    let verificationPrompt = activePrompt;
+    if (fcAttempt > 1 && editorialProofFailures.size > 0) {
+      const annotatedPrompt = buildFactCheckProofRetryPrompt(activePrompt, editorialProofFailures);
+      if (observedInputCap === 0 || estimateRequestTokens([{ role: 'user', content: annotatedPrompt }]) <= observedInputCap) {
+        verificationPrompt = annotatedPrompt;
+      }
     }
     const roundErrorStart = fcProviderErrors.length;
     fcLastRejectMsgs = [];
@@ -7512,7 +7527,7 @@ ${proofSuffix}`
       const excludeCodex = priorVoters.length
         ? model !== AI_MODELS.CODEX_CLI_PRIMARY && !priorVoters.includes(AI_MODELS.CODEX_CLI_PRIMARY)
         : index > 0 && modelsToQuery[0] === AI_MODELS.CODEX_CLI_PRIMARY;
-      return _runSingleFactCheck(model, activePrompt, {
+      return _runSingleFactCheck(model, verificationPrompt, {
         fresh: fcAttempt > 1,
         deadlineMs,
         invalidVerdictModels,
@@ -7562,7 +7577,7 @@ ${proofSuffix}`
           || modelsToQuery[1];
       try {
         if (next || !priorVoters.length) {
-          const extra = await _runSingleFactCheck(next, activePrompt, {
+          const extra = await _runSingleFactCheck(next, verificationPrompt, {
             isEvergreen: isEvergreenArticle,
             editorialContext,
             excludeModels: voted,
@@ -7589,7 +7604,7 @@ ${proofSuffix}`
     // If both primary models failed, try fallback
     if (modelResults.length === 0 && verificationModels.length > 2) {
       try {
-        const fallback = await _runSingleFactCheck(verificationModels[2], activePrompt, { isEvergreen: isEvergreenArticle, editorialContext, fresh: fcAttempt > 1, invalidVerdictModels, editorialProofFailures, deadlineMs });
+        const fallback = await _runSingleFactCheck(verificationModels[2], verificationPrompt, { isEvergreen: isEvergreenArticle, editorialContext, fresh: fcAttempt > 1, invalidVerdictModels, editorialProofFailures, deadlineMs });
         if (fallback) {
           addIndependentVote(modelResults, verificationModels[2], fallback);
           missingSecondOpinion = fallback.servedBy !== AI_MODELS.CODEX_CLI_PRIMARY;
@@ -7602,13 +7617,14 @@ ${proofSuffix}`
       }
     }
 
-    if (compactPrompt && activePrompt === prompt && fcAttempt < FACTCHECK_INFRA_RETRIES && (modelResults.length === 0 || missingSecondOpinion)) {
+    if (fcAttempt < FACTCHECK_INFRA_RETRIES && (modelResults.length === 0 || missingSecondOpinion)) {
       let cap = 0;
       for (const error of fcProviderErrors.slice(roundErrorStart)) {
         const budget = error?.retryRequestTokenBudget;
         if (error?.code === 'ALL_MODELS_EXHAUSTED' && Number.isInteger(budget) && budget > cap) cap = budget;
       }
-      if (cap > 0) {
+      if (cap > 0) observedInputCap = observedInputCap === 0 ? cap : Math.min(observedInputCap, cap);
+      if (cap > 0 && compactPrompt && activePrompt === prompt) {
         const fullEstimate = estimateRequestTokens([{ role: 'user', content: prompt }]);
         const compactEstimate = estimateRequestTokens([{ role: 'user', content: compactPrompt }]);
         if (fullEstimate > cap && compactEstimate <= cap) compactRetry = { fullEstimate, compactEstimate, cap };
@@ -7647,11 +7663,7 @@ ${proofSuffix}`
     const selfCheck = _codexWroteThisHeadline ? ' — ha scritto anche questo articolo: si verifica da solo (decisione del proprietario)' : '';
     console.error(`  🛟 LLM fact-check: ${why}, verifico con ${codex}${selfCheck}`);
     try {
-      const retryPrompt = editorialProofFailures.size
-        ? `${prompt}\n\nCONTROLLO DELLE PROVE PRIMA DI INVIARE IL JSON:\n`
-          + `I verdetti precedenti sono stati scartati per questi requisiti: ${[...editorialProofFailures].join(' | ')}.\n`
-          + 'Prima scegli e copia i passaggi esatti dai blocchi forniti, poi formula il giudizio in base a quei passaggi.'
-        : prompt;
+      const retryPrompt = buildFactCheckProofRetryPrompt(prompt, editorialProofFailures);
       const vote = await _runSingleFactCheck(codex, retryPrompt, { isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true, deadlineMs: factCheckDeadlineMs });
       if (vote) addIndependentVote(modelResults, codex, vote);
       fcHadNonOutageResult = true;
