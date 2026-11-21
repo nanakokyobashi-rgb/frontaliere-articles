@@ -14,6 +14,7 @@ const QUEUE_ALLOWLISTED_WORKFLOWS = [
   '.github/workflows/publish-api.yml',
   '.github/workflows/generate-article.yml',
   '.github/workflows/generate-article-core.yml',
+  '.github/workflows/fast-publish-article.yml',
   '.github/workflows/fast-publish-section.yml',
 ];
 
