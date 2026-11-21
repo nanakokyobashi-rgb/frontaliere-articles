@@ -2470,7 +2470,7 @@ function _codexMarker(text) {
 }
 
 const CODEX_NUMERIC_ASSOCIATION_RULE =
-  '- Keep each figure in the same clause as the company, place or label it describes. Preserve the order of figures and names, and preserve the commas, semicolons and other separators that keep different facts apart.';
+  '- Keep each figure in the same clause as the company, place or label it describes. Preserve the order of figures and names, and preserve the commas, semicolons and other separators that keep different facts apart. Translate one sentence at a time without merging or splitting clauses that contain figures. Repeat each proper name or unchanged label where it occurs in the source, even if a pronoun or omission would sound natural. For example, translate “Zurigo conta 12 posti; Zugo ne conta 8” as two clauses separated by a semicolon, with each place next to its own figure.';
 
 function _codexTranslateMessages(text, sourceLang, targetLang, marker) {
   const from = CODEX_LANGUAGE_NAMES[sourceLang] || sourceLang;
