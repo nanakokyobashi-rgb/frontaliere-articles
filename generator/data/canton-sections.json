@@ -9441,7 +9441,10 @@
           "language": "de",
           "kind": "istituzionale",
           "topics": ["servizi", "fisco", "mobilita", "economia", "cronaca"],
-          "quirks": {},
+          "quirks": {
+            "dateFromCardLabel": "dxp-typo-label",
+            "articlePathPattern": "^/de/(?:news|zuger-polizei-news)/20[0-9]{2}/[^/?#]+/[^/?#]+/?$"
+          },
           "items7d": 6,
           "verifiedAt": "2026-10-05",
           "notes": "Comunicati ufficiali del Cantone: nessun RSS/Atom (rss, .rss, ?format=rss restituiscono HTML o 404), ma 10 link /de/news/<anno>/<mese>/<slug> server-rendered con data dd.mm.yyyy (~6 negli ultimi 7gg). robots.txt consente (solo /.magnolia vietato). Pagina in 'infos des Regierungsrats' settimanali."
@@ -9454,7 +9457,10 @@
           "language": "de",
           "kind": "istituzionale",
           "topics": ["mobilita"],
-          "quirks": {},
+          "quirks": {
+            "dateFromCardLabel": "dxp-typo-label",
+            "articlePathPattern": "^/de/(?:news|zuger-polizei-news)/20[0-9]{2}/[^/?#]+/[^/?#]+/?$"
+          },
           "items7d": 3,
           "verifiedAt": "2026-10-05",
           "notes": "Filtro Tiefbauamt: cantieri e chiusure stradali del Cantone, 10 item, 3 negli ultimi 7gg (28.09, 30.09, 02.10)."
@@ -9467,7 +9473,10 @@
           "language": "de",
           "kind": "istituzionale",
           "topics": ["economia", "lavoro", "servizi"],
-          "quirks": {},
+          "quirks": {
+            "dateFromCardLabel": "dxp-typo-label",
+            "articlePathPattern": "^/de/(?:news|zuger-polizei-news)/20[0-9]{2}/[^/?#]+/[^/?#]+/?$"
+          },
           "items7d": 0,
           "verifiedAt": "2026-10-05",
           "notes": "Filtro economia/lavoro, ultimo 08.07.2026: volume molto basso (0 negli ultimi 7gg)."
@@ -9480,7 +9489,10 @@
           "language": "de",
           "kind": "istituzionale",
           "topics": ["servizi"],
-          "quirks": {},
+          "quirks": {
+            "dateFromCardLabel": "dxp-typo-label",
+            "articlePathPattern": "^/de/(?:news|zuger-polizei-news)/20[0-9]{2}/[^/?#]+/[^/?#]+/?$"
+          },
           "items7d": 0,
           "verifiedAt": "2026-10-05",
           "notes": "Filtro sanita'/salute, ultimo 16.09.2026, 0 negli ultimi 7gg."
@@ -9493,7 +9505,10 @@
           "language": "de",
           "kind": "istituzionale",
           "topics": ["servizi", "frontalieri"],
-          "quirks": {},
+          "quirks": {
+            "dateFromCardLabel": "dxp-typo-label",
+            "articlePathPattern": "^/de/(?:news|zuger-polizei-news)/20[0-9]{2}/[^/?#]+/[^/?#]+/?$"
+          },
           "items7d": 0,
           "verifiedAt": "2026-10-05",
           "notes": "Filtro migrazione/asilo: ultimo 19.02.2026 (4+ mesi), 0 negli ultimi 7gg. Solo per hub servizi/permessi, volume molto basso."
@@ -9506,7 +9521,10 @@
           "language": "de",
           "kind": "polizia",
           "topics": ["mobilita", "cronaca"],
-          "quirks": {},
+          "quirks": {
+            "dateFromCardLabel": "dxp-typo-label",
+            "articlePathPattern": "^/de/(?:news|zuger-polizei-news)/20[0-9]{2}/[^/?#]+/[^/?#]+/?$"
+          },
           "items7d": 4,
           "verifiedAt": "2026-10-05",
           "notes": "Comunicati polizia: 10 link /de/zuger-polizei-news/<anno>/<mese>/<slug> con data, ~4 negli ultimi 7gg. Rilevante per traffico/incidenti A4/A14; il resto e' cronaca nera (filtrare)."
@@ -9519,7 +9537,10 @@
           "language": "de",
           "kind": "istituzionale",
           "topics": ["servizi", "fisco", "mobilita", "eventi"],
-          "quirks": {},
+          "quirks": {
+            "dateFromCardLabel": "dxp-typo-label",
+            "articlePathPattern": "^/de/(?:news|zuger-polizei-news)/20[0-9]{2}/[^/?#]+/[^/?#]+/?$"
+          },
           "items7d": 6,
           "verifiedAt": "2026-10-05",
           "notes": "Comunicati del capoluogo (circa 130k abitanti nel cantone, ~31k in citta'): 10 link /de/news/<anno>/<mese>/<slug> con data, ~6 negli ultimi 7gg. Include Steuerfuss/budget, scuola, traffico, Baugesuche (rumore: filtrare le liste Baugesuche/GGR)."

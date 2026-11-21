@@ -23,6 +23,14 @@
     "canton-sz::https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/8756-8757-8803-10391-10392/news/26482": {
       "section": "canton-sz",
       "ts": 1795192908926
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/stau-rund-um-luzern-sorgt-fuer-diskussionen-art-1733306": {
+      "section": "canton-sz",
+      "ts": 1795217412860
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/kantonsspital-uri-erhoeht-die-lohnsumme-naechstes-jahr-um-12-prozent-art-1733353": {
+      "section": "canton-sz",
+      "ts": 1795218780368
     }
   }
 }
