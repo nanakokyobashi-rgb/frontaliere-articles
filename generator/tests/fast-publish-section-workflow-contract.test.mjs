@@ -780,7 +780,6 @@ test('il verificatore riusa solo prove stale-late di revisioni equivalenti', () 
     const origin = path.join(root, 'origin.git');
     git('clone', '--quiet', '--bare', fixture, origin);
     git('remote', 'add', 'origin', `file://${origin}`);
-    const cohort = 'stale-late-42-canton-ur-n1';
     const nonce = 'stale-late-fixture';
     const fakeGh = path.join(root, 'gh');
     writeFileSync(fakeGh, `#!/usr/bin/env bash
@@ -795,6 +794,7 @@ esac
       artifactSource = source,
       renderedHead = artifactSource,
       runHead = source,
+      cohort = 'stale-late-42-canton-ur-n1',
     } = {}) => {
       const output = path.join(root, 'output');
       writeFileSync(output, '');
@@ -823,6 +823,9 @@ esac
       'event validates the pinned source separately from the event HEAD',
     );
     for (const mode of ['event', 'schedule']) {
+      const reconcile = { cohort: 'reconcile-42-n1', artifactSource: source, runHead: bookkeeping };
+      assert.equal(check(mode, current, reconcile), 'verified=true', `${mode} accepts reconciled bookkeeping drift`);
+      assert.equal(check(mode, changed, reconcile), 'verified=false', `${mode} rejects changed publication inputs`);
       assert.equal(
         check(mode, current, { artifactSource: source, runHead: bookkeeping }),
         'verified=true',

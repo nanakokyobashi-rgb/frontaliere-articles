@@ -119,7 +119,7 @@ jobs:
             echo "::error::HEAD del reconcile o HEAD corrente di main non valida"
             exit 1
           fi
-          if [ "$source_commit" != "$current_main" ]; then
+          if ! bash scripts/ci/section-source-unaffected.sh --bookkeeping-only "$source_commit" "$current_main"; then
             echo "::notice::reconcile stantio: checkout $source_commit, main $current_main; nessun backfill o replay armato"
             {
               echo 'dispatch=0'
@@ -132,7 +132,7 @@ jobs:
             echo "dispatch=$(jq -r '.counts.dispatch // 0' "$RUNNER_TEMP/reconcile-sections.json")"
             echo "pending_edge_flip=$(jq -r '.pendingEdgeFlip // false' "$RUNNER_TEMP/reconcile-sections.json")"
             echo "api_release_commit=$(jq -r '.apiCommit // empty' "$RUNNER_TEMP/reconcile-sections.json")"
-            echo "source_commit=$source_commit"
+            echo "source_commit=$current_main"
             echo "skip=$(jq -r 'if .skip then \"true\" else \"false\" end' "$RUNNER_TEMP/reconcile-sections.json")"
             echo "leftover=$(jq -r '.counts.leftover // 0' "$RUNNER_TEMP/reconcile-sections.json")"
             echo "unknown=$(jq -r '.counts.unknown // 0' "$RUNNER_TEMP/reconcile-sections.json")"
@@ -384,7 +384,7 @@ jobs:
             echo "::error::HEAD corrente di main non valida per il replay API bounded"
             exit 1
           fi
-          if [ "$current_main" != "$SOURCE_COMMIT" ]; then
+          if ! bash scripts/ci/section-source-unaffected.sh --bookkeeping-only "$SOURCE_COMMIT" "$current_main"; then
             echo "::notice::main e' avanzata dopo la detection ($SOURCE_COMMIT -> $current_main); nessun replay API stantio"
             exit 0
           fi
@@ -412,14 +412,15 @@ jobs:
               echo "::error::HEAD di main non valida immediatamente prima del dispatch publish-api: $current_main"
               return 1
             fi
-            if [ "$current_main" != "$SOURCE_COMMIT" ]; then
+            if ! bash scripts/ci/section-source-unaffected.sh --bookkeeping-only "$SOURCE_COMMIT" "$current_main"; then
               echo "::notice::main e' avanzata dopo la verifica post-backfill ($SOURCE_COMMIT -> $current_main); replay API interrotto"
               return 2
             fi
+            dispatch_source="$current_main"
           }
           if verifyMainHeadAtDispatch; then
-            echo "::notice::backfill globalmente verificato: replay API bounded sulla HEAD $SOURCE_COMMIT"
-            gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main -f source_commit="$SOURCE_COMMIT"
+            echo "::notice::backfill globalmente verificato: replay API bounded sulla HEAD $dispatch_source"
+            gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main -f source_commit="$dispatch_source"
           else
             verify_status=$?
             if [ "$verify_status" -eq 2 ]; then

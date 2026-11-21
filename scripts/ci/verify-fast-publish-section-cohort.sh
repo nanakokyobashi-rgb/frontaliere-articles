@@ -51,7 +51,8 @@ if [ "$mode" = 'event' ] && ! [[ "$child_run_id" =~ ^[0-9]+$ ]]; then
   not_ready "run child non valida: $child_run_id"
 fi
 compatible_sources='[]'
-if [ "$mode" = 'schedule' ] || [[ "$child_cohort" =~ ^stale-late-[0-9]+-[^/]+-n1$ ]]; then
+compatible_cohort_pattern='^reconcile-[0-9]+-n[1-9][0-9]*$|^stale-late-[0-9]+-[^/]+-n1$'
+if [ "$mode" = 'schedule' ] || [[ "$child_cohort" =~ $compatible_cohort_pattern ]]; then
   # A shallow root looks like a substantive change to git log. Deepen only
   # while that boundary hides the last change to publication inputs.
   depth=64
@@ -73,7 +74,7 @@ if [ "$mode" = 'event' ]; then
     not_ready "HEAD della run child non valida: $child_head_sha"
   fi
   if [ "$child_head_sha" != "$expected_source" ]; then
-    if ! [[ "$child_cohort" =~ ^stale-late-[0-9]+-[^/]+-n1$ ]] || \
+    if ! [[ "$child_cohort" =~ $compatible_cohort_pattern ]] || \
       ! jq -e --arg child "$child_head_sha" 'index($child) != null' <<< "$compatible_sources" >/dev/null; then
       not_ready "run child sulla HEAD $child_head_sha, attesa $expected_source"
     fi
@@ -137,15 +138,15 @@ if [ "$mode" = 'event' ]; then
   [ -n "$candidate_json" ] || not_ready 'run child non correlata a nonce, coorte e dimensione attesi'
 else
   # Il cron non ha un workflow_run da cui leggere la coorte. Sceglie l'ultima
-  # coorte emessa su HEAD o su una revisione equivalente per stale-late; se e' ancora incompleta resta bloccata e
+  # coorte emessa su HEAD o su una revisione equivalente; se e' ancora incompleta resta bloccata e
   # il cron successivo la rivaluta, senza inventare una nuova wave.
-  candidate_json="$(jq -c --arg source "$expected_source" --argjson compatible "$compatible_sources" --arg re "$parse_title" '
+  candidate_json="$(jq -c --arg source "$expected_source" --argjson compatible "$compatible_sources" --arg re "$parse_title" --arg compatible_cohort "$compatible_cohort_pattern" '
     [
       .[]
       | . as $run
       | (try ($run.displayTitle | capture($re)) catch null) as $parts
       | select($run.headSha == $source
-          or (($parts.cohort // "") | startswith("stale-late-"))
+          or (($parts.cohort // "") | test($compatible_cohort))
             and ($compatible | index($run.headSha) != null))
       | select($parts != null
           and ($parts.cohort | test("^(reconcile|stale-staged)-[0-9]+-n[1-9][0-9]*$|^stale-late-[0-9]+-[^/]+-n1$")))
@@ -199,6 +200,7 @@ artifact_root="$RUNNER_TEMP/fast-publish-section-cohort-${cohort//[^A-Za-z0-9._-
 rm -rf -- "$artifact_root"
 mkdir -p "$artifact_root"
 
+verified_pin=''
 while IFS=$'\t' read -r run_id nonce section; do
   [ -n "$run_id" ] || not_ready "run senza id nella coorte $cohort"
   run_dir="$artifact_root/$run_id"
@@ -226,7 +228,7 @@ while IFS=$'\t' read -r run_id nonce section; do
     not_ready "artifact fast-publish-result non univoco per il child $run_id"
   fi
   artifact_source="$cohort_source"
-  if [[ "$cohort" =~ ^stale-late-[0-9]+-[^/]+-n1$ ]]; then
+  if [[ "$cohort" =~ $compatible_cohort_pattern ]]; then
     # The dispatch event can point at a newer main than the pinned checkout.
     # Keep both revisions within the proven range and check the artifact's
     # source and rendered revision against its actual pin.
@@ -241,6 +243,10 @@ while IFS=$'\t' read -r run_id nonce section; do
       not_ready "source commit $artifact_source non compatibile con la HEAD del child $cohort_source"
     fi
   fi
+  if [ -n "$verified_pin" ] && [ "$verified_pin" != "$artifact_source" ]; then
+    not_ready "source commit non uniforme nella coorte $cohort"
+  fi
+  verified_pin="$artifact_source"
   if ! jq -e \
     --arg nonce "$nonce" \
     --arg section "$section" \

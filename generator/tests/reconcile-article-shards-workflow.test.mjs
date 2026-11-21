@@ -4,7 +4,7 @@
  * backfill per articolisvizzera. La prova runtime arriva da Actions; questo
  * gate impedisce che il filtro torni accidentalmente globale.
  */
-import { spawnSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -67,21 +67,21 @@ test('il reconcile automatico usa la HEAD corrente e non arma backfill stantii',
   const detect = workflow.match(/^      - name: Detect ghosts \(slug annunciati senza pagina sullo shard\)\n(?:(?!^      - ).*\n)*/m)?.[0] ?? '';
   assert.match(
     detect,
-    /node scripts\/reconcile-article-shards\.mjs [^\n]*\n[^\n]*\n\s+source_commit="\$\(git rev-parse HEAD\)"\n\s+current_main="\$\(bash scripts\/ci\/read-main-head\.sh\)"[\s\S]*?if \[ "\$source_commit" != "\$current_main" \]; then/,
+    /node scripts\/reconcile-article-shards\.mjs [^\n]*\n[^\n]*\n\s+source_commit="\$\(git rev-parse HEAD\)"\n\s+current_main="\$\(bash scripts\/ci\/read-main-head\.sh\)"[\s\S]*?if ! bash scripts\/ci\/section-source-unaffected\.sh --bookkeeping-only "\$source_commit" "\$current_main"; then/,
   );
   assert.match(
     detect,
-    /if \[ "\$source_commit" != "\$current_main" \]; then[\s\S]*?echo 'head_guard=false' >> "\$GITHUB_OUTPUT"[\s\S]*?exit 0[\s\S]*?echo 'head_guard=true'/,
+    /if ! bash scripts\/ci\/section-source-unaffected\.sh --bookkeeping-only "\$source_commit" "\$current_main"; then[\s\S]*?echo 'head_guard=false' >> "\$GITHUB_OUTPUT"[\s\S]*?exit 0[\s\S]*?echo 'head_guard=true'/,
   );
 
   const guardedSideEffects = workflow.match(/if:[^\n]*steps\.detect\.outputs\.head_guard == 'true'/g) ?? [];
-  assert.equal(guardedSideEffects.length, 5, 'ogni side effect del report deve richiedere HEAD == main');
+  assert.equal(guardedSideEffects.length, 5, 'ogni side effect del report deve richiedere una revisione verificata di main');
 
   const backfill = workflow.match(/^      - name: Backfill \(dispatch fast-publish-article per gli id selezionati\)\n(?:(?!^      - ).*\n)*/m)?.[0] ?? '';
   assert.match(backfill, /^          SOURCE_COMMIT: \$\{\{ steps\.detect\.outputs\.source_commit \}\}$/m);
   assert.match(
     backfill,
-    /verifyMainHeadAtDispatch\(\) \{[\s\S]*?bash scripts\/ci\/read-main-head\.sh[\s\S]*?if \[ "\$current_main" != "\$SOURCE_COMMIT" \]; then[\s\S]*?return 2/,
+    /verifyMainHeadAtDispatch\(\) \{[\s\S]*?bash scripts\/ci\/read-main-head\.sh[\s\S]*?if ! bash scripts\/ci\/section-source-unaffected\.sh --bookkeeping-only "\$SOURCE_COMMIT" "\$current_main"; then[\s\S]*?return 2/,
   );
   assert.match(
     backfill,
@@ -126,9 +126,9 @@ const shaA = 'a'.repeat(40);
 const shaB = 'b'.repeat(40);
 const validation = workflowStep(publisherWorkflow, 'Validate source commit pin');
 
-test('il dispatch su main passa lo SHA della detection a entrambi i checkout', () => {
+test('il dispatch su main passa lo SHA verificato al dispatch a entrambi i checkout', () => {
   const backfill = workflowStep(workflow, 'Backfill (dispatch fast-publish-article per gli id selezionati)');
-  assert.match(backfill, /-f ref=main \\\n +-f "inputs\[source_commit\]=\$\{SOURCE_COMMIT\}"/);
+  assert.match(backfill, /-f ref=main \\\n +-f "inputs\[source_commit\]=\$\{dispatch_source\}"/);
   assert.match(publisherWorkflow, /\n      source_commit:\n        description: [^\n]+\n        required: false\n        default: ''\n        type: string\n/);
   assert.match(validation, /id: source_pin\n *env:\n *SOURCE_COMMIT: \$\{\{ inputs\.source_commit \}\}/);
   assert.match(publisherWorkflow, /    outputs:\n      source_commit: \$\{\{ steps\.source_pin\.outputs\.source_commit \}\}/);
@@ -189,7 +189,7 @@ test('la validazione shell accetta solo un pin lowercase su dispatch main', () =
   }
 });
 
-test('la chiusura issue richiede che main coincida ancora con la detection', () => {
+test('la chiusura issue ammette solo una main compatibile con la detection', () => {
   const close = workflowStep(workflow, 'Close ghost-articles issue (coda drenata)');
   assert.match(close, /continue-on-error: true/);
   assert.match(close, /if: steps\.detect\.outcome == 'success' && steps\.detect\.outputs\.head_guard == 'true' && steps\.detect\.outputs\.missing == '0'/);
@@ -199,14 +199,30 @@ test('la chiusura issue richiede che main coincida ancora con la detection', () 
   const cwd = mkdtempSync(join(tmpdir(), 'shard-close-'));
   try {
     mkdirSync(join(cwd, 'scripts/ci'), { recursive: true });
+    mkdirSync(join(cwd, 'data/sections/canton-fr'), { recursive: true });
+    writeFileSync(join(cwd, 'scripts/ci/section-source-unaffected.sh'),
+      readFileSync(new URL('../../scripts/ci/section-source-unaffected.sh', import.meta.url)));
     writeFileSync(join(cwd, 'scripts/ci/read-main-head.sh'),
       '[ -n "$FAKE_MAIN" ] || exit 1\nprintf "%s\\n" "$FAKE_MAIN"\n');
     writeFileSync(join(cwd, 'scripts/ci/resolve-issue-verified.mjs'),
       'import { appendFileSync } from "node:fs";\nappendFileSync("calls", "close\\n");\n');
+    const git = (...args) => execFileSync('git', args, { cwd, encoding: 'utf8' }).trim();
+    const commit = (file, text) => {
+      writeFileSync(join(cwd, file), text);
+      git('add', file);
+      git('-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.test', 'commit', '-qm', file);
+      return git('rev-parse', 'HEAD');
+    };
+    git('init', '-q');
+    const detected = commit('article.txt', 'article content\n');
+    const ledger = commit('data/sections/canton-fr/topic-candidates-evergreen-rejected.json', '{}\n');
+    const newArticle = commit('article.txt', 'changed article\n');
     for (const [pin, main, calls] of [
-      [shaA, shaA, 'close\n'],
-      [shaA, shaB, ''],
-      [shaA, '', ''],
+      [detected, detected, 'close\n'],
+      [detected, ledger, 'close\n'],
+      [detected, newArticle, ''],
+      [ledger, detected, ''],
+      [detected, '', ''],
       ['bad', 'bad', ''],
     ]) {
       writeFileSync(join(cwd, 'calls'), '');
