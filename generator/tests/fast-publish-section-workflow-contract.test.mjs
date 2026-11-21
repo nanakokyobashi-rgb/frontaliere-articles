@@ -364,6 +364,65 @@ jobs:
   const modeHead = git('rev-parse', 'HEAD');
   check(schedulingHead, modeHead, 1, 'modifica al solo mode dopo la migrazione');
   check(schedulingBase, modeHead, 1, 'migrazione con modifica al mode');
+
+  const shardPath = '.github/workflows/reconcile-article-shards.yml';
+  const readWorkflow = (file) => readFileSync(new URL(`../../${file}`, import.meta.url), 'utf8');
+  const writeShard = (source) => writeFileSync(path.join(root, shardPath), source);
+  const laneSuffix = "-${{ github.event_name == 'workflow_run' && format('workflow_run-{0}', github.event.workflow_run.event) || github.event_name }}";
+  const sectionLanes = readWorkflow(reconcilePath);
+  const shardLanes = readWorkflow(shardPath);
+  const sectionBeforeLanes = sectionLanes
+    .replace('# Keep one pending run per trigger, splitting workflow_run by parent event.\n# The shared job group serializes reconciliation across triggers.',
+      '# Coalesce runs of the same event while reserving a pending slot for each trigger.')
+    .replace(laneSuffix, '-${{ github.event_name }}');
+  const shardBeforeLanes = shardLanes
+    .replace('# Uno slot in attesa per trigger, con workflow_run distinto per evento padre.\n# Il gruppo condiviso del job serializza le riconciliazioni.',
+      '# Una riconciliazione alla volta; mai cancellarne una a metà dei dispatch.')
+    .replace(`${laneSuffix}\n  queue: single`, '')
+    .replace('    concurrency:\n      group: reconcile-article-shards\n      queue: max\n      cancel-in-progress: false\n', '');
+
+  git('checkout', '--quiet', '--force', '--detach', schedulingHead);
+  writeReconcile(sectionBeforeLanes);
+  writeShard(shardBeforeLanes);
+  const laneBase = commitReconcile('workflow prima delle code per trigger');
+
+  writeReconcile(sectionLanes);
+  const sectionLaneHead = commitReconcile('delta della sezione');
+  check(laneBase, sectionLaneHead, 0, 'solo delta della sezione');
+
+  writeShard(shardLanes);
+  const bothLaneHead = commitReconcile('delta degli shard');
+  check(sectionLaneHead, bothLaneHead, 0, 'solo delta degli shard');
+  check(laneBase, bothLaneHead, 0, 'entrambi i delta approvati');
+  check(bothLaneHead, laneBase, 1, 'intervallo inverso');
+
+  writeReconcile(sectionBeforeLanes);
+  writeShard(shardBeforeLanes);
+  check(bothLaneHead, commitReconcile('ripristino delle code precedenti'), 1, 'delta inversi in fast-forward');
+
+  git('checkout', '--quiet', '--detach', laneBase);
+  writeShard(shardLanes);
+  const shardLaneHead = commitReconcile('delta degli shard sul ramo parallelo');
+  check(laneBase, shardLaneHead, 0, 'delta degli shard con sezione invariata');
+  check(sectionLaneHead, shardLaneHead, 1, 'rami divergenti');
+
+  for (const [label, section, shard] of [
+    ['sezione con modifica ai permessi', sectionLanes.replace('contents: read', 'contents: write'), shardLanes],
+    ['shard con policy di coda diversa', sectionLanes, shardLanes.replace('queue: single', 'queue: max')],
+  ]) {
+    git('checkout', '--quiet', '--detach', laneBase);
+    writeReconcile(section);
+    writeShard(shard);
+    check(laneBase, commitReconcile(label), 1, label);
+  }
+
+  for (const [label, file] of [
+    ['delta approvati con modifica al contenuto', article],
+    ['delta approvati con modifica alla guardia', 'scripts/ci/section-source-unaffected.sh'],
+  ]) {
+    git('checkout', '--quiet', '--detach', bothLaneHead);
+    check(laneBase, commitFiles(label, file), 1, label);
+  }
 });
 
 test('fast-publish-section conserva la guardia di freschezza anche con checkout pinned precedente', () => {

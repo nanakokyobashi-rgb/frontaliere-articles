@@ -50,9 +50,10 @@ on:
         default: false
         type: boolean
 
-# Coalesce runs of the same event while reserving a pending slot for each trigger.
+# Keep one pending run per trigger, splitting workflow_run by parent event.
+# The shared job group serializes reconciliation across triggers.
 concurrency:
-  group: reconcile-section-pages-${{ github.event_name }}
+  group: reconcile-section-pages-${{ github.event_name == 'workflow_run' && format('workflow_run-{0}', github.event.workflow_run.event) || github.event_name }}
   queue: single
   cancel-in-progress: false
 

@@ -21,11 +21,13 @@ git merge-base --is-ancestor "$expected" "$current" || exit 1
 # These files record generator attempts, image work and watchdog status,
 # or change how future articles are generated without rendering existing pages.
 # Test entrypoints and the actionlint config are not read by the publisher.
-# Check the reconcile workflow separately before accepting the revision.
-workflow=.github/workflows/reconcile-section-pages.yml
+# Check both reconcile workflows separately before accepting the revision.
+section_workflow=.github/workflows/reconcile-section-pages.yml
+shard_workflow=.github/workflows/reconcile-article-shards.yml
 git diff --quiet --no-ext-diff --no-textconv --ignore-submodules=none "$expected" "$current" -- . \
   ':(top,exclude,literal).github/actionlint.yaml' \
-  ":(top,exclude,literal)$workflow" \
+  ":(top,exclude,literal)$section_workflow" \
+  ":(top,exclude,literal)$shard_workflow" \
   ':(top,exclude,literal)data/discovery-attempt-state.json' \
   ':(top,exclude,literal)data/topic-candidates-evergreen-rejected.json' \
   ':(top,exclude,glob)data/sections/*/topic-candidates-evergreen-rejected.json' \
@@ -42,17 +44,17 @@ git diff --quiet --no-ext-diff --no-textconv --ignore-submodules=none "$expected
   ':(top,exclude,literal)scripts/ci/canton-generation-coverage.mjs' \
   ':(top,exclude,literal)scripts/ci/loop-sync-manifest.json' || exit 1
 
-patch=$(git diff --no-ext-diff --no-textconv --ignore-submodules=none --no-renames \
-  --no-color --no-indent-heuristic --diff-algorithm=myers --unified=3 --full-index \
-  --src-prefix=a/ --dst-prefix=b/ "$expected" "$current" -- "$workflow") || exit 1
-if [ -z "$patch" ]; then
-  exit 0
-fi
+# Match approved scheduling deltas in one direction, including every context line.
+normalized_workflow_diff() {
+  local patch
+  patch=$(git diff --no-ext-diff --no-textconv --ignore-submodules=none --no-renames \
+    --no-color --no-indent-heuristic --diff-algorithm=myers --unified=3 --full-index \
+    --src-prefix=a/ --dst-prefix=b/ "$expected" "$current" -- ":(top,literal)$1") || return 1
+  printf '%s\n' "$patch" | sed -E \
+    's/^index [0-9a-f]{40}[.][.][0-9a-f]{40} 100644$/index 100644/;s/^@@ -[0-9]+(,[0-9]+)? [+][0-9]+(,[0-9]+)? @@.*$/@@/;s/^ $/<empty-context-line>/'
+}
 
-# Match the approved scheduling delta in one direction, including every context line.
-normalized=$(printf '%s\n' "$patch" | sed -E \
-  's/^index [0-9a-f]{40}[.][.][0-9a-f]{40} 100644$/index 100644/;s/^@@ -[0-9]+(,[0-9]+)? [+][0-9]+(,[0-9]+)? @@.*$/@@/;s/^ $/<empty-context-line>/') || exit 1
-approved=$(cat <<'APPROVED_SCHEDULING_DELTA'
+approved_section_history=$(cat <<'APPROVED_SCHEDULING_DELTA'
 diff --git a/.github/workflows/reconcile-section-pages.yml b/.github/workflows/reconcile-section-pages.yml
 index 100644
 --- a/.github/workflows/reconcile-section-pages.yml
@@ -82,4 +84,62 @@ index 100644
      steps:
 APPROVED_SCHEDULING_DELTA
 ) || exit 1
-[ "$normalized" = "$approved" ]
+approved_section_lanes=$(cat <<'APPROVED_SECTION_LANE_DELTA'
+diff --git a/.github/workflows/reconcile-section-pages.yml b/.github/workflows/reconcile-section-pages.yml
+index 100644
+--- a/.github/workflows/reconcile-section-pages.yml
++++ b/.github/workflows/reconcile-section-pages.yml
+@@
+         default: false
+         type: boolean
+<empty-context-line>
+-# Coalesce runs of the same event while reserving a pending slot for each trigger.
++# Keep one pending run per trigger, splitting workflow_run by parent event.
++# The shared job group serializes reconciliation across triggers.
+ concurrency:
+-  group: reconcile-section-pages-${{ github.event_name }}
++  group: reconcile-section-pages-${{ github.event_name == 'workflow_run' && format('workflow_run-{0}', github.event.workflow_run.event) || github.event_name }}
+   queue: single
+   cancel-in-progress: false
+<empty-context-line>
+APPROVED_SECTION_LANE_DELTA
+) || exit 1
+
+approved_shard_lanes=$(cat <<'APPROVED_SHARD_LANE_DELTA'
+diff --git a/.github/workflows/reconcile-article-shards.yml b/.github/workflows/reconcile-article-shards.yml
+index 100644
+--- a/.github/workflows/reconcile-article-shards.yml
++++ b/.github/workflows/reconcile-article-shards.yml
+@@
+         required: false
+         default: '3'
+<empty-context-line>
+-# Una riconciliazione alla volta; mai cancellarne una a metà dei dispatch.
++# Uno slot in attesa per trigger, con workflow_run distinto per evento padre.
++# Il gruppo condiviso del job serializza le riconciliazioni.
+ concurrency:
+-  group: reconcile-article-shards
++  group: reconcile-article-shards-${{ github.event_name == 'workflow_run' && format('workflow_run-{0}', github.event.workflow_run.event) || github.event_name }}
++  queue: single
+   cancel-in-progress: false
+<empty-context-line>
+ permissions:
+@@
+<empty-context-line>
+ jobs:
+   reconcile:
++    concurrency:
++      group: reconcile-article-shards
++      queue: max
++      cancel-in-progress: false
+     runs-on: ubuntu-latest
+     # Fino a 3 backfill sequenziali da ~7-10 min l'uno, più le attese di
+     # coda: 50 copre il caso peggiore senza lasciar vivere uno zombie.
+APPROVED_SHARD_LANE_DELTA
+) || exit 1
+
+section_delta=$(normalized_workflow_diff "$section_workflow") || exit 1
+[[ -z "$section_delta" || "$section_delta" = "$approved_section_history" || "$section_delta" = "$approved_section_lanes" ]] || exit 1
+
+shard_delta=$(normalized_workflow_diff "$shard_workflow") || exit 1
+[[ -z "$shard_delta" || "$shard_delta" = "$approved_shard_lanes" ]]
