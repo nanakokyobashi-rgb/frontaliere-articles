@@ -37,6 +37,7 @@ import {
   olderCantonRuns,
   parseQuotaBeaconOutput,
   positiveInt,
+  readInFlightRunsFromGitHub,
   remoteConfigLoaded,
 } from '../../scripts/ci/canton-generation-admit.mjs';
 import { callerWorkflowFile } from '../../scripts/ci/generate-canton-article-workflows.mjs';
@@ -330,8 +331,73 @@ test('il lettore GitHub delle run cantonali pagina e appiattisce il payload comp
   const end = source.indexOf('\nfunction readQuotaBeaconFromScript', start);
   assert.ok(start >= 0 && end > start, 'lettore delle run non trovato');
   const reader = source.slice(start, end);
-  assert.match(reader, /gh\(\['api', '--paginate', '--slurp',/);
-  assert.match(reader, /flattenPaginatedInFlightRuns\(JSON\.parse\(raw\)\)/);
+  assert.match(reader, /readGh\(\['api', '--paginate', '--slurp',/);
+  assert.match(reader, /flattenPaginatedInFlightRuns\(JSON\.parse\(raw\),/);
+});
+
+const admissionPage = (...runs) => ({ total_count: runs.length, workflow_runs: runs });
+const firstSnapshotRun = apiRun(41, 'generate-article-ti.yml', '2026-10-05T10:00:10Z');
+const repeatSnapshotRun = apiRun(42, 'generate-article-nw.yml', '2026-10-05T10:00:20Z');
+const ambiguousSnapshot = JSON.stringify([admissionPage(firstSnapshotRun), admissionPage(firstSnapshotRun)]);
+const cleanSnapshot = JSON.stringify([admissionPage(repeatSnapshotRun)]);
+const emptySnapshot = JSON.stringify([admissionPage()]);
+const [firstStatus, secondStatus, thirdStatus] = IN_FLIGHT_STATUSES;
+
+function readAdmissionSnapshots(requests, expectedRows, retriedStatus) {
+  const repo = 'owner/corpus';
+  const calls = [];
+  const warnings = [];
+  const rows = readInFlightRunsFromGitHub(repo, {
+    readGh: (args) => {
+      const response = requests[calls.length]?.[1];
+      calls.push(args);
+      if (response instanceof Error) throw response;
+      return response;
+    },
+    warn: (warning) => warnings.push(warning),
+  });
+  assert.deepEqual(calls, requests.map(([status]) => [
+    'api', '--paginate', '--slurp',
+    `repos/${repo}/actions/runs?status=${status}&per_page=${RUNS_PER_PAGE}`,
+  ]));
+  assert.deepEqual(rows, expectedRows);
+  assert.deepEqual(warnings, retriedStatus
+    ? [`::warning::canton-admit: duplicate run ID, retrying status=${retriedStatus}`]
+    : []);
+}
+
+test('il lettore scarta tutte le pagine ambigue e conserva la deduplicazione fra stati', () => {
+  const laterStatusSnapshot = JSON.stringify([admissionPage({ ...repeatSnapshotRun, status: 'in_progress' })]);
+  readAdmissionSnapshots([
+    [firstStatus, emptySnapshot],
+    [secondStatus, ambiguousSnapshot],
+    [secondStatus, cleanSnapshot],
+    [thirdStatus, laterStatusSnapshot],
+    ...IN_FLIGHT_STATUSES.slice(3).map((status) => [status, emptySnapshot]),
+  ], [repeatSnapshotRun], secondStatus);
+});
+
+test('il lettore chiude l’ammissione se il secondo tentativo fallisce', () => {
+  for (const response of [ambiguousSnapshot, 'invalid JSON', null, new Error('transport failed')]) {
+    readAdmissionSnapshots([
+      [firstStatus, ambiguousSnapshot],
+      [firstStatus, response],
+    ], null, firstStatus);
+  }
+});
+
+test('il lettore non riprova dopo un errore di parsing, schema o trasporto', () => {
+  for (const response of ['invalid JSON', JSON.stringify([{ total_count: 1 }]), null, new Error('transport failed')]) {
+    readAdmissionSnapshots([[firstStatus, response]], null);
+  }
+});
+
+test('il lettore condivide un solo tentativo aggiuntivo fra tutti gli stati', () => {
+  readAdmissionSnapshots([
+    [firstStatus, ambiguousSnapshot],
+    [firstStatus, cleanSnapshot],
+    [secondStatus, ambiguousSnapshot],
+  ], null, firstStatus);
 });
 
 test('il gate e il core condividono stati, conclusioni e dimensione pagina', () => {
