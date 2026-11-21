@@ -220,7 +220,7 @@ test('il restore stale ripristina i target tracciati e rimuove quelli assenti da
   }
 });
 
-test('la guardia di sezione distingue gli input di pubblicazione dagli entrypoint dei test', (t) => {
+test('la guardia di sezione distingue gli input di pubblicazione dai file di controllo e dai test', (t) => {
   const root = mkdtempSync(path.join(tmpdir(), 'section-source-unaffected-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
   const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: 'pipe' }).trim();
@@ -256,13 +256,21 @@ test('la guardia di sezione distingue gli input di pubblicazione dagli entrypoin
   check(nestedTestHead, base, 1, 'intervallo senza fast-forward con sole modifiche escluse');
   check('HEAD', nestedTestHead, 1, 'SHA malformata');
 
+  const lintConfig = '.github/actionlint.yaml';
+  const controlHead = commitFiles('configurazione lint e workflow di riconciliazione',
+    lintConfig, '.github/workflows/reconcile-section-pages.yml');
+  check(nestedTestHead, controlHead, 0, 'soli file di controllo');
+
+  const article = 'content/blog-body-canton-ti/it/article.ts';
   const cases = [
-    ['contenuto di sezione e test', 'content/blog-body-canton-ti/it/article.ts', 'generator/tests/content.test.mjs'],
+    ['contenuto di sezione e test', article, 'generator/tests/content.test.mjs'],
+    ['aggiornamento del contenuto di sezione e configurazione lint', article, lintConfig],
+    ['workflow di pubblicazione', '.github/workflows/fast-publish-section.yml'],
     ['script di pubblicazione e test', 'scripts/publish-section-pages.mjs', 'generator/tests/publisher.test.mjs'],
     ['fixture', 'generator/tests/translation/fixture.json'],
     ['libreria sconosciuta', 'generator/scripts/lib/unknown.mjs'],
   ];
-  let previous = nestedTestHead;
+  let previous = controlHead;
   for (const [label, ...files] of cases) {
     const current = commitFiles(label, ...files);
     check(previous, current, 1, label);

@@ -20,9 +20,12 @@ git merge-base --is-ancestor "$expected" "$current" || exit 1
 
 # These files record generator attempts, image work and watchdog status,
 # or change how future articles are generated without rendering existing pages.
-# Test entrypoints are not read by the publisher. Other changes may alter
-# the rendered release.
+# Test entrypoints are not read by the publisher. The two fixed control files
+# for lint and reconciliation do not affect already planned renders.
+# Other changes may alter the rendered release.
 git diff --quiet --no-ext-diff --no-textconv --ignore-submodules=none "$expected" "$current" -- . \
+  ':(top,exclude,literal).github/actionlint.yaml' \
+  ':(top,exclude,literal).github/workflows/reconcile-section-pages.yml' \
   ':(top,exclude,literal)data/discovery-attempt-state.json' \
   ':(top,exclude,literal)data/topic-candidates-evergreen-rejected.json' \
   ':(top,exclude,glob)data/sections/*/topic-candidates-evergreen-rejected.json' \
