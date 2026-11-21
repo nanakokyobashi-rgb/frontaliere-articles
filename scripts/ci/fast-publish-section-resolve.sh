@@ -271,6 +271,19 @@ if [ -n "$pinned_source" ]; then
       echo '::error::checkout stale replan non coincide con la HEAD corrente'
       exit 1
     fi
+    # Reuse the push planner when the original range is still provable.
+    # The edge matrix alone requests a full render for every live canton.
+    # The verified range preserves real bootstrap changes and article IDs,
+    # while the edge matrix still governs the refreshes and cleanup.
+    if [ "$EVENT_NAME" = 'workflow_run' ] && [ "$WORKFLOW_RUN_EVENT" = 'push' ] \
+      && [[ "$replay_before" =~ ^[a-f0-9]{40}$ ]] \
+      && git merge-base --is-ancestor "$replay_before" "$pinned_source" \
+      && git merge-base --is-ancestor "$pinned_source" "$current_main"; then
+      replay_diff="$(git diff --name-status "$replay_before" "$current_main" \
+        | PUSH_BEFORE="$replay_before" node scripts/ci/fast-publish-section.mjs r2-plan)"
+      replay_matrix="$(printf '%s\n%s\n' "$replay_diff" "$replay_matrix" \
+        | node scripts/ci/fast-publish-section.mjs r2-api-push-plan)"
+    fi
     any=false
     [ "$(printf '%s' "$replay_matrix" | jq 'length')" -gt 0 ] && any=true
     bootstrap=false

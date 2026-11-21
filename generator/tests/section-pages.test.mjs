@@ -3637,6 +3637,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(staleResolve, /tar -x -C "\$current_main_source"/);
   assert.match(staleResolve, /replay_matrix="\$\(reconcile_edge_matrix "\$pinned_source" "\$current_main" "\$current_main_source"\)"/);
   assert.match(staleResolve, /git checkout --detach "\$current_main"/);
+  assert.match(staleResolve, /\[ "\$WORKFLOW_RUN_EVENT" = 'push' \][\s\S]*git merge-base --is-ancestor "\$replay_before" "\$pinned_source"[\s\S]*git merge-base --is-ancestor "\$pinned_source" "\$current_main"/);
+  assert.match(staleResolve, /git diff --name-status "\$replay_before" "\$current_main"[\s\S]*r2-plan[\s\S]*r2-api-push-plan/);
   assert.match(staleResolve, /echo "source_commit=\$current_main"/);
   assert.match(staleResolve, /echo 'api_release_commit='/);
   assert.match(staleResolve, /echo "matrix=\$replay_matrix"/);
