@@ -580,18 +580,42 @@ jobs:
           console.log(`Translation run clock initialized at ${startMs}.`);
           NODE
       - name: "Phase 2 pre: Repair stale source-copy descriptions (bounded)"
+        id: repair_stale_descriptions
         if: inputs.skip_translate != true && inputs.dry_run != true && (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && env.TRANSLATION_MANUAL_OVERRIDE != 'true'))
         continue-on-error: true
         env:
           UNTRANSLATED_DESCRIPTION_FIX_STALE_ONLY: "1"
           UNTRANSLATED_DESCRIPTION_FIX_DEADLINE_MS: "900000"
-          UNTRANSLATED_DESCRIPTION_FIX_MAX: ${{ vars.UNTRANSLATED_DESCRIPTION_FIX_PREPASS_MAX || '100' }}
-        run: node scripts/fix-untranslated-descriptions.mjs --stale-only --max "$UNTRANSLATED_DESCRIPTION_FIX_MAX"
+          UNTRANSLATED_DESCRIPTION_FIX_PREPASS_MAX_RAW: ${{ vars.UNTRANSLATED_DESCRIPTION_FIX_PREPASS_MAX }}
+        run: |-
+          parseBoundedPrepassMax() {
+            local value="${1:-}"
+            local fallback=100
+            local ceiling=250
+            if [[ ! "$value" =~ ^([1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|250)$ ]]; then
+              echo "::warning title=Translation stale-description prepass limit normalized::UNTRANSLATED_DESCRIPTION_FIX_PREPASS_MAX is invalid or exceeds ${ceiling}; using bounded fallback ${fallback}." >&2
+              printf '%s\n' "$fallback"
+              return
+            fi
+            printf '%s\n' "$value"
+          }
+          prepass_max="$(parseBoundedPrepassMax "$UNTRANSLATED_DESCRIPTION_FIX_PREPASS_MAX_RAW")"
+          printf 'max=%s\n' "$prepass_max" >> "$GITHUB_OUTPUT"
+          node scripts/fix-untranslated-descriptions.mjs --stale-only --max "$prepass_max"
+      - name: Report stale-description prepass outcome
+        if: always() && steps.repair_stale_descriptions.outcome != 'skipped' && (github.run_attempt == 1 || steps.recovery_guard.outcome == 'success')
+        env:
+          PREPASS_OUTCOME: ${{ steps.repair_stale_descriptions.outcome }}
+          PREPASS_MAX: ${{ steps.repair_stale_descriptions.outputs.max }}
+        run: |-
+          # shellcheck disable=SC2016 # Markdown backticks are literal in this summary format.
+          printf '### Stale-description prepass\n\n- outcome: `%s`\n- bounded max: `%s`\n' "$PREPASS_OUTCOME" "${PREPASS_MAX:-unavailable}" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$PREPASS_OUTCOME" = 'failure' ]; then
+            echo "::warning title=Translation stale-description prepass failed::The bounded prepass failed (max=${PREPASS_MAX:-unavailable}); the later description-repair lane remains available and this outcome is recorded in the run summary."
+          fi
       - name: Assemble dataset
         if: inputs.skip_translate != true
-        env:
-          JOBS_SKIP_RECONCILIATION: ${{ vars.LOCAL_MT_DISABLE != '1' && vars.TRANSLATE_ARGOS_FIRST_DISABLE != '1' && '1' || '0' }}
-        run: node scripts/assemble-jobs-dataset.mjs
+        run: node scripts/assemble-jobs-dataset.mjs --projection-only
       - name: Record translation rollout context
         env:
           ROLLOUT_REPOSITORY: ${{ github.repository }}
@@ -645,9 +669,7 @@ jobs:
         run: node scripts/fix-untranslated-titles.mjs
       - name: Re-assemble dataset after Argos bulk
         if: inputs.skip_translate != true && vars.LOCAL_MT_DISABLE != '1' && vars.TRANSLATE_ARGOS_FIRST_DISABLE != '1'
-        env:
-          JOBS_SKIP_RECONCILIATION: "1"
-        run: node scripts/assemble-jobs-dataset.mjs
+        run: node scripts/assemble-jobs-dataset.mjs --projection-only
       - name: Commit Argos translations before cascade
         id: commit_argos_translations
         if: always() && steps.checkout.outcome == 'success' && inputs.skip_translate != true && inputs.dry_run != true && vars.LOCAL_MT_DISABLE != '1' && vars.TRANSLATE_ARGOS_FIRST_DISABLE != '1' && (github.run_attempt == 1 || steps.recovery_guard.outcome == 'success')
@@ -655,7 +677,7 @@ jobs:
           SKIP_AI_TRANSLATION: "1"
         run: |
           before="$(git rev-parse HEAD)"
-          bash scripts/lib/git-commit-data.sh --slice-only "🌐 Auto-translate pending jobs (Argos bulk)" data/jobs/by-crawler/ data/translation-cache/ data/local-mt-negative-cache.json data/translation-title-fix-attempts.json
+          bash scripts/lib/git-commit-data.sh --extra-only "🌐 Auto-translate pending jobs (Argos bulk)" data/jobs/by-crawler/ data/translation-cache/ data/local-mt-negative-cache.json data/translation-title-fix-attempts.json
           after="$(git rev-parse HEAD)"
           if [ "$before" != "$after" ]; then echo "final_commit=$after" >> "$GITHUB_OUTPUT"; fi
       - name: "Phase 2 pre: Flag locale-mismatched job descriptions"
@@ -767,9 +789,7 @@ jobs:
         run: node scripts/local-mt-mopup.mjs --max-jobs "$INPUT_MOPUP_MAX_JOBS"
       - name: Re-assemble dataset after Phase 2c mop-up
         if: always() && steps.checkout.outcome == 'success' && inputs.skip_translate != true && (github.run_attempt == 1 || steps.recovery_guard.outcome == 'success')
-        env:
-          JOBS_SKIP_RECONCILIATION: "1"
-        run: node scripts/assemble-jobs-dataset.mjs
+        run: node scripts/assemble-jobs-dataset.mjs --projection-only
       - name: Commit translations
         id: commit_translations
         if: always() && steps.checkout.outcome == 'success' && inputs.skip_translate != true && inputs.dry_run != true && (github.run_attempt == 1 || steps.recovery_guard.outcome == 'success')
@@ -777,7 +797,7 @@ jobs:
           SKIP_AI_TRANSLATION: "1"
         run: |
           before="$(git rev-parse HEAD)"
-          bash scripts/lib/git-commit-data.sh --slice-only "🌐 Auto-translate pending jobs" data/jobs/by-crawler/ data/translation-cache/ data/local-mt-negative-cache.json data/jobs-crawler-config.json data/slug-registry.json data/translation-stats-history.json data/cascade-company-skip.json
+          bash scripts/lib/git-commit-data.sh --extra-only "🌐 Auto-translate pending jobs" data/jobs/by-crawler/ data/translation-cache/ data/local-mt-negative-cache.json data/jobs-crawler-config.json data/slug-registry.json data/translation-stats-history.json data/cascade-company-skip.json
           after="$(git rev-parse HEAD)"
           if [ "$before" != "$after" ]; then echo "final_commit=$after" >> "$GITHUB_OUTPUT"; fi
       - name: Gate Phase 2d/2e repair lanes on remaining run budget
@@ -806,7 +826,7 @@ jobs:
           SKIP_AI_TRANSLATION: "1"
         run: |
           before="$(git rev-parse HEAD)"
-          bash scripts/lib/git-commit-data.sh --slice-only "🔤 Fix untranslated titles (free cascade)" data/jobs/by-crawler/ data/translation-cache/ data/translation-title-fix-attempts.json
+          bash scripts/lib/git-commit-data.sh --extra-only "🔤 Fix untranslated titles (free cascade)" data/jobs/by-crawler/ data/translation-cache/ data/translation-title-fix-attempts.json
           after="$(git rev-parse HEAD)"
           if [ "$before" != "$after" ]; then echo "final_commit=$after" >> "$GITHUB_OUTPUT"; fi
       - name: "Phase 2e: Fix untranslated descriptions (free cascade)"
@@ -831,7 +851,7 @@ jobs:
           SKIP_AI_TRANSLATION: "1"
         run: |
           before="$(git rev-parse HEAD)"
-          bash scripts/lib/git-commit-data.sh --slice-only "📝 Fix untranslated descriptions (free cascade)"
+          bash scripts/lib/git-commit-data.sh --extra-only "📝 Fix untranslated descriptions (free cascade)" data/jobs/by-crawler/
           after="$(git rev-parse HEAD)"
           if [ "$before" != "$after" ]; then echo "final_commit=$after" >> "$GITHUB_OUTPUT"; fi
       - name: Cleanup Codex auth broker
@@ -855,9 +875,7 @@ jobs:
             --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
       - name: Re-assemble true-final translation dataset
         if: always() && steps.checkout.outcome == 'success' && inputs.skip_translate != true && (github.run_attempt == 1 || steps.recovery_guard.outcome == 'success')
-        env:
-          JOBS_SKIP_RECONCILIATION: "1"
-        run: node scripts/assemble-jobs-dataset.mjs
+        run: node scripts/assemble-jobs-dataset.mjs --projection-only
       - name: Log translation stats (after)
         if: always() && steps.checkout.outcome == 'success' && inputs.skip_translate != true && (github.run_attempt == 1 || steps.recovery_guard.outcome == 'success')
         env:
@@ -866,7 +884,7 @@ jobs:
           if [ "${{ inputs.dry_run }}" = "true" ]; then
             node scripts/log-translation-stats.mjs after
           else
-            SKIP_AI_TRANSLATION=1 TRANSLATION_STATS_AFTER_TREE=1 bash scripts/lib/git-commit-data.sh --slice-only "📊 Translation stats (after)" data/translation-stats-history.json
+            SKIP_AI_TRANSLATION=1 TRANSLATION_STATS_AFTER_TREE=1 bash scripts/lib/git-commit-data.sh --extra-only "📊 Translation stats (after)" data/translation-stats-history.json
           fi
       - name: Capture final translation observability (shadow)
         if: always() && steps.translation_observability_before.outputs.ready == 'true' && (github.run_attempt == 1 || steps.recovery_guard.outcome == 'success')
@@ -987,7 +1005,7 @@ jobs:
           if [ -f data/translation-observability-state.json ]; then
             telemetry_paths+=(data/translation-observability-state.json)
           fi
-          bash scripts/lib/git-commit-data.sh --slice-only "📊 Roll up translation observability" "${telemetry_paths[@]}"
+          bash scripts/lib/git-commit-data.sh --extra-only "📊 Roll up translation observability" "${telemetry_paths[@]}"
       - name: Upload translation observability report
         if: always() && steps.translation_observability_before.outputs.ready == 'true' && (github.run_attempt == 1 || steps.recovery_guard.outcome == 'success')
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
@@ -1018,7 +1036,7 @@ jobs:
         if: always() && steps.slug_regeneration.outcome == 'success' && steps.slug_regeneration_proof.outcome == 'success' && steps.checkout.outcome == 'success' && inputs.dry_run != true && (github.run_attempt == 1 || steps.recovery_guard.outcome == 'success')
         env:
           SKIP_AI_TRANSLATION: "1"
-        run: bash scripts/lib/git-commit-data.sh --slice-only "🔗 Regenerate locale slugs (post-translation)"
+        run: bash scripts/lib/git-commit-data.sh --extra-only "🔗 Regenerate locale slugs (post-translation)" data/jobs/by-crawler/
       - name: Save per-company translation cache
         if: always() && steps.slug_regeneration.outcome == 'success' && steps.slug_regeneration_proof.outcome == 'success' && steps.checkout.outcome == 'success' && inputs.dry_run != true && (github.run_attempt == 1 || steps.recovery_guard.outcome == 'success')
         continue-on-error: true
@@ -1039,11 +1057,11 @@ jobs:
         run: |
           if node scripts/validate-translation-completeness.mjs 2>/dev/null; then
             TRANSLATION_DEPLOY_HANDOFF_STATE=complete \
-              bash scripts/lib/git-commit-data.sh --slice-only "✅ Complete translation deploy handoff" data/translation-deploy-handoff.json
+              bash scripts/lib/git-commit-data.sh --extra-only "✅ Complete translation deploy handoff" data/translation-deploy-handoff.json
             echo "✅ All translations complete — the marker commit is now eligible for the site schedule"
           else
             TRANSLATION_DEPLOY_HANDOFF_STATE=fallback \
-              bash scripts/lib/git-commit-data.sh --slice-only "⚠️ Release translation deploy fallback" data/translation-deploy-handoff.json
+              bash scripts/lib/git-commit-data.sh --extra-only "⚠️ Release translation deploy fallback" data/translation-deploy-handoff.json
             echo "⚠️ Some translations remain incomplete — deploy continues with the existing locale fallback"
             exit 0
           fi
@@ -1053,9 +1071,9 @@ jobs:
         env:
           TRANSLATION_DEPLOY_HANDOFF_STATE: fallback
           SKIP_AI_TRANSLATION: "1"
-        run: bash scripts/lib/git-commit-data.sh --slice-only "⚠️ Release translation deploy fallback after failed phase" data/translation-deploy-handoff.json
+        run: bash scripts/lib/git-commit-data.sh --extra-only "⚠️ Release translation deploy fallback after failed phase" data/translation-deploy-handoff.json
       - name: Report failure to GitHub Issues
-        if: failure() && (steps.site_checkout_primary.outcome == 'success' || steps.site_checkout_retry.outcome == 'success')
+        if: always() && (failure() || steps.repair_stale_descriptions.outcome == 'failure') && (steps.site_checkout_primary.outcome == 'success' || steps.site_checkout_retry.outcome == 'success') && (github.run_attempt == 1 || steps.recovery_guard.outcome == 'success')
         uses: ./.github/actions/report-failure
         with:
           title: "Workflow Failure: Translate Pending Jobs (sparse cross-repo execution)"
@@ -1066,7 +1084,7 @@ jobs:
           workflow-file: .github/corpus-workflows/translate-pending.yml
           priority: "2"
           labels: Bug
-          context: "La pipeline di traduzione è a fasi (fetch → translate → verify → commit): lo step fallito qui sopra dice a quale fase si è fermata, e i job non tradotti restano in coda per il prossimo cron."
+          context: "La pipeline di traduzione è a fasi (fetch → translate → verify → commit): lo step fallito qui sopra dice a quale fase si è fermata, e i job non tradotti restano in coda per il prossimo cron. Prepass descrizioni stale: ${{ steps.repair_stale_descriptions.outcome }} (max bounded: ${{ steps.repair_stale_descriptions.outputs.max }})."
     outputs:
       recovery_guard: ${{ github.run_attempt == 1 && 'success' || steps.recovery_guard.outcome }}
     needs: translate_queue_guard
@@ -1141,4 +1159,4 @@ jobs:
           TRANSLATION_DEPLOY_HANDOFF_EXPECTED_RUN_ID: ${{ github.run_id }}
           TRANSLATION_DEPLOY_HANDOFF_EXPECTED_RUN_ATTEMPT: ${{ github.run_attempt }}
           SKIP_AI_TRANSLATION: "1"
-        run: bash scripts/lib/git-commit-data.sh --slice-only "⚠️ Release translation deploy fallback after job timeout" data/translation-deploy-handoff.json
+        run: bash scripts/lib/git-commit-data.sh --extra-only "⚠️ Release translation deploy fallback after job timeout" data/translation-deploy-handoff.json
