@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-tagli-lavoro-piano-sociale.webp",
-      "sha256": "31cdfe3dce1d0c410b33c660947a0ab5bfb30e47b8d5d428da7dfed9c247a04c"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-tagli-lavoro-piano-sociale-480w.webp",
-      "sha256": "bf85b3265dc73d34148461617a07fcadeb6feb8ec28c28c32a9d4caff604c537"
-    }
-  ]
+  "items": []
 }
