@@ -307,6 +307,7 @@ const renderers = readdirSync(path.join(ROOT, 'scripts'))
 const renderEntrypoints = [
   ...renderers,
   'scripts/ci/fast-publish-section-render.sh',
+  '.replay-dispatcher-source/scripts/ci/fast-publish-section-render.sh',
 ];
 const renders = invocationOf(renderEntrypoints);
 const ensures = invocationOf([ENSURE_SCRIPT]);
