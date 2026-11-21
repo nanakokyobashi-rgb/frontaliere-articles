@@ -86,8 +86,10 @@ test('generation asks for a traceable contribution without forced implications',
   const antiHallucination = SOURCE.indexOf('═══ DIVIETI ANTI-ALLUCINAZIONE', ruleStart);
   const rule = SOURCE.slice(ruleStart, antiHallucination);
   assert.doesNotMatch(rule, /RISCRITTURA EDITORIALE della fonte/);
-  assert.match(rule, /\$\{_isMeta \? '' : `Se le prove lo consentono, collega due fatti documentati con un passaggio verificabile/);
-  assert.match(rule, /Se mancano i presupposti, resta ai fatti e ai limiti documentati/);
+  assert.match(rule, /\$\{_isMeta \? '' : `Prima di scrivere, cerca un contributo che aggiunga qualcosa al riassunto/);
+  assert.match(rule, /Se mancano i presupposti, esplicita i limiti documentati/);
+  assert.match(rule, /un calcolo riproducibile o una relazione fra fatti documentati/);
+  assert.match(SOURCE, /\$\{part === 'meta'\s*\? 'Riprendi solo i valori già presenti nel corpo\. Non aggiungere calcoli, relazioni o dati\.'\s*:\s*'Puoi spiegare relazioni o calcoli ricavabili dai fatti della fonte, indicando le basi/);
   assert.match(rule, /Ometti cause, conseguenze, sviluppi o azioni non documentati/);
   assert.match(rule, /Non inventare reportage, interviste, fonti proprie/);
   assert.doesNotMatch(SOURCE, /ALMENO il 50% del testo dei campi body1, body2, body3/);
