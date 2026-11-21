@@ -78,6 +78,43 @@ test('un 200 che non è la pagina richiesta non prova nulla: shell del 404, altr
   assert.equal(classifyOnlinePage({ status: 200, html: articlePage(''), url: URL_IT }).state, ONLINE_IMAGE.UNKNOWN);
 });
 
+test('pseudo og:image dentro raw-text o template non diventa l’immagine della pagina', () => {
+  const html = `<meta property="og:url" content="${URL_IT}">`
+    + '<script>const fake = \'<meta property="og:image" content="/images/blog/fake.webp">\';</script>'
+    + '<template><meta property="og:image" content="/images/blog/template.webp"></template>'
+    + GENERIC;
+  assert.equal(classifyOnlinePage({ status: 200, html, url: URL_IT }).state, ONLINE_IMAGE.GENERIC);
+});
+
+test('il probe considera solo tag e attributi reali, non pseudo-metadata dentro un attributo quotato', () => {
+  const fake = `<div data-note='<meta property="og:url" content="${URL_IT}"><link rel="canonical" href="${URL_IT}">'>${GENERIC}</div>`;
+  assert.equal(
+    classifyOnlinePage({ status: 200, html: fake, url: URL_IT }).state,
+    ONLINE_IMAGE.UNKNOWN,
+  );
+
+  const real = `<div data-note='</meta><link rel="canonical" href="/altra-route/">'>`
+    + `<meta CONTENT="${URL_IT}" PROPERTY="OG:URL">${GENERIC}</div>`;
+  assert.equal(
+    classifyOnlinePage({ status: 200, html: real, url: URL_IT }).state,
+    ONLINE_IMAGE.GENERIC,
+  );
+});
+
+test('il probe legge og:image dal tag reale e mantiene aperto un raw text con / >', () => {
+  const html = `<meta property="og:url" content="${URL_IT}">`
+    + '<script type="application/ld+json"/>'
+    + '<meta property="og:image" content="/og-image.png">'
+    + '</script>'
+    + OWN;
+  assert.equal(classifyOnlinePage({ status: 200, html, url: URL_IT }).state, ONLINE_IMAGE.OWN);
+});
+
+test('il probe rifiuta una risposta HTML malformata anche con metadata precedenti validi', () => {
+  const html = articlePage(OWN) + '<div data-note="unfinished>';
+  assert.equal(classifyOnlinePage({ status: 200, html, url: URL_IT }).state, ONLINE_IMAGE.UNKNOWN);
+});
+
 test('assente vale solo se letto due volte, con una chiave anti-cache diversa a ogni richiesta', async () => {
   const { fetchImpl, calls } = scriptedFetch([response(404), response(404)]);
   const result = await probeOnlineImage(URL_IT, { fetchImpl, sleep: noSleep });

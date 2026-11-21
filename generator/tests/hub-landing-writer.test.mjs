@@ -216,6 +216,7 @@ test('the metadata patch scans one real head and leaves inactive/body metadata a
     + '<meta name="description" content="' + staleDescription + '">'
     + '<meta property="og:title" content="' + staleTitle + '">'
     + '<meta property="og:description" content="' + staleOgDescription + '">'
+    + '<meta data-note=\' property="og:title" content="' + staleTitle + '">\' content="keep-me">'
     + '<meta data-name="description" data-content="' + staleDescription + '"></head>'
     + '<body><meta name="description" content="' + staleDescription + '"></body>';
   const patched = patchHubLandingMetadata(stale, 'svizzera', 'it');
@@ -223,6 +224,7 @@ test('the metadata patch scans one real head and leaves inactive/body metadata a
   assert.ok(patched.includes('<meta name="description" content="' + SWISS_HUB_ROOT_SEO_IT.description + '">'));
   assert.ok(patched.includes('<meta property="og:title" content="' + SWISS_HUB_ROOT_SEO_IT.title + '">'));
   assert.ok(patched.includes('<meta property="og:description" content="' + SWISS_HUB_ROOT_SEO_IT.ogDescription + '">'));
+  assert.ok(patched.includes('<meta data-note=\' property="og:title" content="' + staleTitle + '">\' content="keep-me">'));
   assert.ok(patched.includes('<meta data-name="description" data-content="' + staleDescription + '">'));
   assert.ok(patched.includes('<body><meta name="description" content="' + staleDescription + '"></body>'));
 });

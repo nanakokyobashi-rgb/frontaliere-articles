@@ -4,7 +4,9 @@ import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 
 import {
+  findHtmlClosingTag,
   nextHtmlTag,
+  nextHtmlTagOutsideInactive,
   nextHtmlTagStatus,
   readHtmlTagAt,
   tableHeaderColumnPipeAmbiguity,
@@ -53,6 +55,17 @@ test('nextHtmlTagStatus distinguishes a valid tag, EOF, and malformed markup', (
   assert.equal(valid.tag.start, 7);
   assert.deepEqual(nextHtmlTagStatus('plain text'), { status: 'eof' });
   assert.deepEqual(nextHtmlTagStatus('<article title="unfinished'), { status: 'malformed' });
+});
+
+test('closing-tag lookup skips raw-text and inactive template content', () => {
+  const html = '<head><script>const fake = "</head>";</script>'
+    + '<template><head></head></template><meta name="ok"></head>';
+  const opening = html.indexOf('<head>') + '<head>'.length;
+  const close = findHtmlClosingTag(html, opening, 'head');
+
+  assert.equal(html.slice(close.start, close.end), '</head>');
+  assert.equal(nextHtmlTagOutsideInactive('<script><meta property="og:image"></script><meta data-live>', 0).name, 'meta');
+  assert.equal(nextHtmlTagOutsideInactive('<template><meta data-fake></template><meta data-live>', 0).name, 'meta');
 });
 
 test('table header pipe ambiguity rejects inline code, links, and HTML attributes', () => {
