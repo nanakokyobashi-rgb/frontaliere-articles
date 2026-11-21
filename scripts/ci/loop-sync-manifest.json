@@ -341,7 +341,7 @@
     {
       "path": "scripts/ci/section-source-unaffected.sh",
       "mode": "corpus-only",
-      "reason": "Verifica che due revisioni del corpus differiscano solo per file operativi prima del render e delle scritture del publisher cantonale. Il publisher appartiene al corpus.",
+      "reason": "Prima del render e delle scritture del publisher cantonale, verifica che le differenze tra due revisioni del corpus siano limitate ai file operativi, agli entrypoint dei test e agli input noti usati soltanto dalla generazione. Il publisher appartiene al corpus.",
       "baseline": {
         "site": null,
         "corpus": null,

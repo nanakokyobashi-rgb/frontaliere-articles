@@ -33,5 +33,6 @@ git diff --quiet --no-ext-diff --no-textconv --ignore-submodules=none "$expected
   ':(top,exclude,glob)generator/tests/**/*.test.mjs' \
   ':(top,exclude,literal)generator/scripts/create-article.mjs' \
   ':(top,exclude,literal)generator/scripts/lib/ai-models.mjs' \
+  ':(top,exclude,literal)generator/scripts/lib/free-translate.mjs' \
   ':(top,exclude,literal)generator/scripts/lib/canton-news-sources.mjs' \
   ':(top,exclude,literal)scripts/ci/canton-generation-coverage.mjs'
