@@ -117,7 +117,7 @@ function extractFromJsonLd(root, include = () => true) {
  * Creation, modification, generic date metadata and unlabelled time elements do not establish when
  * the source was published; leave the date unknown instead of making it fresh.
  */
-export function extractPublishedDate(document) {
+export function extractPublishedDate(document, editorialRoot = null) {
   const scripts = document.querySelectorAll('script[type="application/ld+json"]');
   for (const script of scripts) {
     let parsed;
@@ -155,10 +155,10 @@ export function extractPublishedDate(document) {
   // lookup inside that same root so a visible date in an unrelated shell does
   // not establish publication for the article being extracted.
   const inactiveRootSelector = 'nav, aside, footer, template, noscript, [hidden], [aria-hidden="true"]';
-  const editorialRoot = [document.querySelector('article'), document.querySelector('main')]
-    .find(root => root && !root.closest(inactiveRootSelector)) || document;
+  const root = editorialRoot || selectEditorialRoot(document);
+  if (!root || root.closest(inactiveRootSelector)) return '';
   // Only a single visible iCMS detail date can establish publication.
-  const detailDates = [...editorialRoot.querySelectorAll('div.icms-lead-container > div.icms-information-date')]
+  const detailDates = [...root.querySelectorAll('div.icms-lead-container > div.icms-information-date')]
     .filter(el => !el.closest('nav, aside, footer, template, noscript, [hidden], [aria-hidden="true"]'));
   if (detailDates.length !== 1) return '';
 
@@ -786,6 +786,16 @@ function extractParagraphs(root, maxChars = Number.POSITIVE_INFINITY, fallbacks 
   return out;
 }
 
+function selectEditorialRoot(document, fallbacks = null) {
+  const article = document.querySelector('article');
+  if (extractParagraphs(article, Number.POSITIVE_INFINITY, fallbacks).length >= 2) return article;
+
+  const main = document.querySelector('main');
+  if (main) return main;
+
+  return article;
+}
+
 /**
  * Extract clean article text from raw HTML.
  *
@@ -819,7 +829,6 @@ export function extractArticleText(html, opts = {}) {
     return naiveFallback(html, maxChars);
   }
   const document = dom.window.document;
-  const publishedAt = extractPublishedDate(document);
   const noscriptSourceMarkup = new WeakMap();
 
   if (opts.scriptingDisabled === true) {
@@ -837,6 +846,14 @@ export function extractArticleText(html, opts = {}) {
     ? mergeNoscriptFallbackBlocks(document, maxChars, noscriptSourceMarkup)
     : null;
 
+  const articleRoot = document.querySelector('article');
+  const articleParagraphs = extractParagraphs(articleRoot, maxChars, noscriptFallbacks);
+  const mainRoot = document.querySelector('main');
+  const mainParagraphs = extractParagraphs(mainRoot, maxChars, noscriptFallbacks);
+  const editorialRoot = articleParagraphs.length >= 2
+    ? articleRoot : mainRoot || articleRoot;
+  const publishedAt = extractPublishedDate(document, editorialRoot);
+
   // 1. JSON-LD articleBody (most reliable)
   const jsonLdBody = noscriptFallbacks
     ? selectNoscriptJsonLdPrecedence(document, noscriptFallbacks)
@@ -847,14 +864,12 @@ export function extractArticleText(html, opts = {}) {
   }
 
   // 2/3. Article-tag with paragraph extraction
-  const articleParagraphs = extractParagraphs(document.querySelector('article'), maxChars, noscriptFallbacks);
   if (articleParagraphs.length >= 2) {
     const text = capExtractedText(articleParagraphs.join('\n\n'), maxChars);
     return { text, method: 'article-tag', paragraphCount: articleParagraphs.length, publishedAt };
   }
 
   // 4. Main-tag with paragraph extraction
-  const mainParagraphs = extractParagraphs(document.querySelector('main'), maxChars, noscriptFallbacks);
   if (mainParagraphs.length >= 2) {
     const text = capExtractedText(mainParagraphs.join('\n\n'), maxChars);
     return { text, method: 'main-tag', paragraphCount: mainParagraphs.length, publishedAt };

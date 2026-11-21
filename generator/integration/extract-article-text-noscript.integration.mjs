@@ -35,6 +35,30 @@ test('extracts an iCMS detail date from the active article root', () => {
   assert.equal(result.method, 'article-tag');
 });
 
+test('uses the same editorial root selected for the body extraction', () => {
+  const shortArticle = `<article>${icmsDate('7. März 2024')}
+    <p>This teaser is not the article body.</p>
+  </article>`;
+  const main = `<main>${icmsDate('8. März 2024')}
+    <p>The municipality will open a reading room for local residents this spring.</p>
+    <p>Visitors can borrow books and attend workshops at the new public facility.</p>
+  </main>`;
+
+  const result = extractArticleText(shortArticle + main, { scriptingDisabled: true });
+
+  assert.equal(result.publishedAt, '2024-03-08T00:00:00.000Z');
+  assert.equal(result.method, 'main-tag');
+});
+
+test('does not accept an iCMS date from the document shell without an editorial root', () => {
+  const result = extractArticleText(`${icmsDate('7. März 2024')}
+    <p>Only one paragraph is available outside an article or main root.</p>`, {
+    scriptingDisabled: true,
+  });
+
+  assert.equal(result.publishedAt, '');
+});
+
 test('preserves the iCMS date when the noscript-safe fallback is selected', () => {
   const result = extractArticleText(`<main>${icmsDate('7. März 2024')}
     <noscript><div>Fallback content remains available when scripts are disabled.</div></noscript>
