@@ -4677,7 +4677,15 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /^concurrency:\n  group: reconcile-section-pages-\$\{\{ github\.event_name \}\}\n  queue: single\n  cancel-in-progress: false$/m);
   assert.match(wf, /^jobs:\n  reconcile:\n    concurrency:\n      group: reconcile-section-pages\n      queue: max\n      cancel-in-progress: false$/m);
   assert.match(wf, /workflows: \[fast-publish-section\]/);
-  assert.match(wf, /node scripts\/reconcile-section-pages\.mjs/);
+  const checkout = wf.match(/^      - name: Checkout\n(?:(?!^      - ).*\n)*/m)?.[0] ?? '';
+  assert.match(checkout, /^        with:$/m);
+  assert.match(checkout, /^          ref: \$\{\{ \(github\.event_name == 'schedule' \|\| github\.event_name == 'workflow_run'\) && 'refs\/heads\/main' \|\| github\.sha \}\}$/m);
+  assert.match(checkout, /^          fetch-depth: 1$/m);
+  assert.match(checkout, /^          persist-credentials: false$/m);
+
+  const detect = wf.match(/^      - name: Detect announced pages missing on R2\n(?:(?!^      - ).*\n)*/m)?.[0] ?? '';
+  assert.match(detect, /node scripts\/reconcile-section-pages\.mjs [^\n]*\n[^\n]*\n\s+source_commit="\$\(git rev-parse HEAD\)"\n\s+current_main="\$\(bash scripts\/ci\/read-main-head\.sh\)"[\s\S]*?if \[ "\$source_commit" != "\$current_main" \]; then/);
+  assert.match(detect, /if \[ "\$source_commit" != "\$current_main" \]; then\n[^\n]*\n\s+\{\n\s+echo 'dispatch=0'\n\s+echo 'pending_edge_flip=false'\n\s+echo 'head_guard=false'\n\s+\} >> "\$GITHUB_OUTPUT"\n\s+exit 0\n\s+fi[\s\S]*?echo "source_commit=\$source_commit"[\s\S]*?echo 'head_guard=true'/);
   assert.match(wf, /args=\([\s\S]*-f "section=\$section"[\s\S]*-f "article_ids=\$ids"[\s\S]*'bootstrap=false'[\s\S]*'dry_run=false'/);
   assert.match(wf, /-f "missing_page_paths=\$missing_page_paths"/);
   assert.match(wf, /-f "known_missing_page_paths=\$known_missing_page_paths"/);
