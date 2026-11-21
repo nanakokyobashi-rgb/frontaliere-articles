@@ -303,6 +303,15 @@ describe('infrastructure retries with a retained vote', () => {
     ]);
   });
 
+  test('a long verification budget reserves extra time for the last Codex call', async () => {
+    const { calls } = await runRounds(groq, () => null, 0);
+    // 240s total, 60s for post-check work, 30s for final verification and
+    // three primary windows of 50s each.
+    assert.equal(calls[0].options.deadlineMs, 50_000);
+    assert.equal(calls.at(-1).options.codexOnly, true);
+    assert.equal(calls.at(-1).options.deadlineMs, 180_000);
+  });
+
   test('a serving Groq vote leaves no unused preference for immediate recovery', async () => {
     const { result, calls } = await runRounds(groq, () => null, 150_000);
     const retries = calls.slice(3, -1);
@@ -666,9 +675,25 @@ describe('fact-check retries under a reported input cap', () => {
     });
   }
 
+  test('un evergreen nazionale sopra il tetto conserva corpo e riferimenti nel fact-check compatto', async () => {
+    const scope = { section: 'svizzera', isCanton: false, sourceUrl: 'evergreen://fixture' };
+    const padding = await loadFor(8250, scope);
+    const { calls, prompt, compactPrompt, modelResults } = await runRounds({
+      ...scope, padding, declaredInputCap: 8000, replies: [firstVote, secondVote],
+    });
+    assert.ok(estimate(prompt) > 8000);
+    assert.ok(estimate(compactPrompt) <= 8000);
+    for (const marker of [bodyEnd, 'NOTA: Articolo evergreen', 'Riferimenti: confronta', 'articleQuote', 'evidenceQuotes']) {
+      assert.ok(compactPrompt.includes(marker), marker);
+    }
+    assert.match(compactPrompt, /luogo o ente, ruolo, azione ed esito.*senza riferimento verificato è critical:fatti_inventati/);
+    assert.deepEqual(calls.map((call) => call.prompt), [compactPrompt, compactPrompt]);
+    assert.equal(modelResults.length, 2);
+  });
+
   for (const [label, scope] of [
     ['fonte non HTTP', { sourceUrl: 'file:///fixture' }],
-    ['evergreen', { sourceText: 'Riferimento breve.' }],
+    ['fonte HTTP troppo breve', { sourceText: 'Riferimento breve.' }],
     ['dataset BFS', { sourceUrl: 'stats-bfs://fixture' }],
     ['dataset ASTRA', { sourceUrl: 'stats-astra://fixture' }],
   ]) {

@@ -78,6 +78,9 @@ const blogMetaCantonUrIt: Record<string, string> = {
     'blog.article.uri-parere-trasporti-eccezionali.title': 'Uri presenta un parere sui trasporti eccezionali',
     'blog.article.uri-parere-trasporti-eccezionali.excerpt': 'Il Canton Uri ha inviato all\'UVEK un parere su due ordinanze e sull\'accompagnamento privato dei trasporti eccezionali nell\'ambito della consultazione.',
     'blog.article.uri-parere-trasporti-eccezionali.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.radweg-altdorf-seedorf-lavori.title': 'Radweg Altdorf-Seedorf: Nessun servizio invernale su Byfangweg',
+    'blog.article.radweg-altdorf-seedorf-lavori.excerpt': 'La Baudirektion Uri ha comunicato regole speciali per il percorso ciclabile e pedonale tra Altdorf e Seedorf, ancora interessato da lavori.',
+    'blog.article.radweg-altdorf-seedorf-lavori.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonUrIt;

@@ -4123,12 +4123,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(sectionContract, /replay workflow_run redispatchato prima degli upload/);
   assert.match(sectionContract, /elif \[ "\$EVENT_NAME" = 'workflow_dispatch' \] && \[ -n "\$\{SOURCE_COMMIT:-\}" \]; then\n\s+pinned_replay_main="\$SOURCE_MAIN_COMMIT"/);
   assert.match(sectionContract, /replay bounded redispatchato prima degli upload/);
-  // Il workflow ha due guard con lo stesso assegnamento locale; questa
-  // asserzione riguarda quello finale, che costruisce il nonce `stale-late`.
-  const lateGuardNonceStart = render.lastIndexOf('dispatch_nonce="${DISPATCH_NONCE:-}"');
+  // Il nonce del recupero riflette esattamente gli argomenti del dispatch.
+  const lateGuardNonceStart = render.indexOf('local replay_args=(');
   const lateGuardTitleStart = render.indexOf('dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"', lateGuardNonceStart);
   const lateGuardNonce = render.slice(lateGuardNonceStart, lateGuardTitleStart);
-  assert.match(lateGuardNonce, /nonce_hash="\$\(printf '%s\\0%s\\0%s\\0%s' "\$nonce_seed" "\$current_main" "\$SECTION" "\$coordinated_recovery" \| sha256sum \| cut -c1-16\)"/);
+  assert.match(lateGuardNonce, /nonce_hash="\$\(printf '%s\\0' "\$\{replay_args\[@\]\}" \| sha256sum \| cut -c1-16\)"/);
   assert.match(lateGuardNonce, /dispatch_nonce="stale-late-\$\{current_main:0:12\}-\$\{SECTION\}-\$\{nonce_hash\}"/);
   assert.match(lateGuardNonce, /dispatch_cohort="stale-late-\$\{GITHUB_RUN_ID\}-\$\{SECTION\}-n1"/);
   assert.match(wf, /id: push_range[\s\S]*resolve-workflow-run-push-range\.mjs/);
@@ -4678,7 +4677,16 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /^concurrency:\n  group: reconcile-section-pages-\$\{\{ github\.event_name \}\}\n  queue: single\n  cancel-in-progress: false$/m);
   assert.match(wf, /^jobs:\n  reconcile:\n    concurrency:\n      group: reconcile-section-pages\n      queue: max\n      cancel-in-progress: false$/m);
   assert.match(wf, /workflows: \[fast-publish-section\]/);
-  assert.match(wf, /node scripts\/reconcile-section-pages\.mjs/);
+  assert.match(wf, /^      dry_run:\n        description: [^\n]+\n        required: false\n        default: true\n        type: boolean$/m);
+  const checkout = wf.match(/^      - name: Checkout\n(?:(?!^      - ).*\n)*/m)?.[0] ?? '';
+  assert.match(checkout, /^        with:$/m);
+  assert.match(checkout, /^          ref: \$\{\{ steps\.checkout_ref\.outputs\.ref \}\}$/m);
+  assert.match(checkout, /^          fetch-depth: 1$/m);
+  assert.match(checkout, /^          persist-credentials: false$/m);
+
+  const detect = wf.match(/^      - name: Detect announced pages missing on R2\n(?:(?!^      - ).*\n)*/m)?.[0] ?? '';
+  assert.match(detect, /node scripts\/reconcile-section-pages\.mjs [^\n]*\n[^\n]*\n\s+source_commit="\$\(git rev-parse HEAD\)"\n\s+current_main="\$\(bash scripts\/ci\/read-main-head\.sh\)"[\s\S]*?if \[ "\$source_commit" != "\$current_main" \]; then/);
+  assert.match(detect, /if \[ "\$source_commit" != "\$current_main" \]; then\n[^\n]*\n\s+\{\n\s+echo 'dispatch=0'\n\s+echo 'pending_edge_flip=false'\n\s+echo 'head_guard=false'\n\s+\} >> "\$GITHUB_OUTPUT"\n\s+exit 0\n\s+fi[\s\S]*?echo "source_commit=\$source_commit"[\s\S]*?echo 'head_guard=true'/);
   assert.match(wf, /args=\([\s\S]*-f "section=\$section"[\s\S]*-f "article_ids=\$ids"[\s\S]*'bootstrap=false'[\s\S]*'dry_run=false'/);
   assert.match(wf, /-f "missing_page_paths=\$missing_page_paths"/);
   assert.match(wf, /-f "known_missing_page_paths=\$known_missing_page_paths"/);

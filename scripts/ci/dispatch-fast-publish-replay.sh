@@ -109,14 +109,53 @@ read_run_list() {
 }
 
 list_matching_runs() {
-  local runs
+  local runs matches active_state page
   runs="$(read_run_list)" || return 1
-  jq -c --arg title "$display_title" --arg current "$current_run_id" '
+  matches="$(jq -c --arg title "$display_title" --arg current "$current_run_id" '
     [.[] | select(
       ((.displayTitle // "") == $title or ((.displayTitle // "") | startswith($title + " / dry=")))
       and ((.databaseId | tostring) != $current)
     )]
-  ' <<< "$runs"
+  ' <<< "$runs")" || return 1
+  if [[ "$display_title" != *" / nonce=stale-late-"* ]] ||
+    { [ "$matches" != '[]' ] && jq -e 'any(.[]; .status != "completed")' <<< "$matches" >/dev/null; } ||
+    ! jq -e 'length >= 100' <<< "$runs" >/dev/null; then
+    printf '%s\n' "$matches"
+    return
+  fi
+
+  # Old queued runs can fall out of the recent history before they get a runner.
+  # Check the active states independently of the checkout SHA: main can advance
+  # between choosing the replay source and submitting the dispatch.
+  for active_state in requested waiting pending queued in_progress; do
+    page="$(gh api --paginate \
+      "repos/$repository/actions/workflows/fast-publish-section.yml/runs?branch=main&event=workflow_dispatch&status=$active_state&per_page=100" |
+      jq -sc --arg title "$display_title" --arg current "$current_run_id" '
+        if length == 0 or any(.[]; (.workflow_runs | type) != "array") then
+          error("risposta non valida durante la ricerca dei replay attivi")
+        else
+          [.[].workflow_runs[] | select(
+             ((.display_title // "") == $title or ((.display_title // "") | startswith($title + " / dry=")))
+             and ((.id | tostring) != $current)
+          ) | {databaseId: .id, displayTitle: .display_title, status, conclusion, activeLookup: true}]
+        end
+      ')" || return 1
+    if [ "$page" != '[]' ]; then
+      jq -cn --argjson recent "$matches" --argjson active "$page" '$recent + $active'
+      return
+    fi
+  done
+  printf '%s\n' "$matches"
+}
+
+read_pending_run() {
+  local run_id="$1"
+  gh api "repos/$repository/actions/runs/$run_id" |
+    jq -ce --arg id "$run_id" --arg title "$display_title" '
+      select((.id | tostring) == $id and (.status | type) == "string")
+      | select(.display_title == $title or ((.display_title // "") | startswith($title + " / dry=")))
+      | [{databaseId: .id, displayTitle: .display_title, status, conclusion}]
+    '
 }
 
 query_state() {
@@ -162,6 +201,9 @@ for attempt in 1 2; do
   if [ "$state" = 'pending' ]; then
     pending_run_id="$(earliest_pending_run_id "$existing_runs")"
     pending_after_id=$((pending_run_id - 1))
+    pending_active_lookup="$(jq -r --arg id "$pending_run_id" '
+      any(.[]; ((.databaseId | tostring) == $id and .activeLookup == true))
+    ' <<< "$existing_runs")"
     echo "::notice::replay ancora in corso; verifico l'esito prima di inviare un altro dispatch: $display_title"
     pending_read_ok=false
     for ((poll = 1; poll <= pending_poll_limit; poll += 1)); do
@@ -171,8 +213,17 @@ for attempt in 1 2; do
         echo "::warning::esito del replay in corso temporaneamente non leggibile (verifica $poll/$pending_poll_limit)"
         continue
       fi
-      pending_read_ok=true
       state="$(query_state "$existing_runs" "$pending_after_id")"
+      # A run found outside recent history disappears from the active listing
+      # on completion. Follow its ID before interpreting that as missing.
+      if [ "$state" = 'missing' ] && [ "$pending_active_lookup" = true ]; then
+        if ! existing_runs="$(read_pending_run "$pending_run_id")"; then
+          echo "::warning::esito del replay $pending_run_id non leggibile (verifica $poll/$pending_poll_limit)"
+          continue
+        fi
+        state="$(query_state "$existing_runs" "$pending_after_id")"
+      fi
+      pending_read_ok=true
       if [ "$state" = 'accepted' ]; then
         echo "::notice::replay visibile e completato con successo: $display_title"
         exit 0
