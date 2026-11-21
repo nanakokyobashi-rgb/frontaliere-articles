@@ -22,13 +22,21 @@ import { AI_MODELS, callLLM, estimateRequestTokens, resetState } from '../script
 import { addIndependentVote, extractFactCheckJson } from '../scripts/lib/fact-check-response.mjs';
 import { FACT_CHECK_CATEGORIES } from '../scripts/lib/article-factuality-gates.mjs';
 import { cantonPromptLines } from '../scripts/lib/canton-section-profile.mjs';
-import { MIN_EDITORIAL_ARTICLE_ANCHORS, extractSyntheticReferenceEvidence } from '../scripts/lib/editorial-originality.mjs';
+import { MIN_EDITORIAL_ARTICLE_ANCHORS, extractSyntheticReferenceEvidence, validateEditorialAssessment } from '../scripts/lib/editorial-originality.mjs';
 import * as taxRates from '../scripts/lib/irpef-scaglioni.mjs';
 import { JSON_QUOTE_SAFETY_RULE_IT } from '../scripts/lib/llm-json-repair.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SRC = fs.readFileSync(path.join(HERE, '..', 'scripts', 'create-article.mjs'), 'utf8');
 const CODEX = AI_MODELS.CODEX_CLI_PRIMARY;
+const proofRetryStart = SRC.indexOf('function buildFactCheckProofRetryPrompt(');
+const proofRetryEnd = SRC.indexOf('\n}', proofRetryStart);
+assert.ok(proofRetryStart >= 0 && proofRetryEnd > proofRetryStart);
+const buildFactCheckProofRetryPrompt = runInNewContext(
+  '(' + SRC.slice(proofRetryStart, proofRetryEnd + 2) + ')',
+);
+const missingSourceQuote = 'manca una citazione esatta della fonte o di un riferimento verificato che sostenga l’analisi';
+
 
 // The options _runSingleFactCheck builds for the Codex fallback, minus the
 // run clock (deadlineMs) and the cache flag, which do not change the route.
@@ -159,15 +167,15 @@ describe('llmFactCheck wiring', () => {
     // If the primary lane gives no vote, do not publish an article with a
     // single free opinion (review of PR #1871).
     assert.match(block, /if \(modelResults\.length < 2 && !codexAlreadyVoted && isModelAvailable\(AI_MODELS\.CODEX_CLI_PRIMARY\)\) \{/);
-    assert.match(block, /editorialProofFailures\.size/);
+    assert.match(block, /const retryPrompt = buildFactCheckProofRetryPrompt\(prompt, editorialProofFailures\);/);
     assert.match(block, /await _runSingleFactCheck\(codex, retryPrompt, \{ isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true, deadlineMs: factCheckDeadlineMs \}\)/);
   });
 
   test('the last verifier receives the failed proof requirement only when recorded', async () => {
-    const reason = 'manca una citazione esatta della fonte';
+    const secondReason = 'la valutazione editoriale non usa una classificazione ammessa';
     const prompt = 'Testo da verificare';
     const editorialContext = { articleBody: 'Corpo', evidenceText: 'Fonte' };
-    for (const failures of [[], [reason]]) {
+    for (const failures of [[], [missingSourceQuote, secondReason]]) {
       const calls = [];
       await runInNewContext(`(async () => { ${block} })()`, {
         AI_MODELS: { CODEX_CLI_PRIMARY: 'codex' },
@@ -177,6 +185,7 @@ describe('llmFactCheck wiring', () => {
         factCheckDeadlineMs: 1000,
         modelResults: [],
         console: { error: () => {} },
+        buildFactCheckProofRetryPrompt,
         editorialProofFailures: new Set(failures),
         prompt,
         editorialContext,
@@ -189,8 +198,9 @@ describe('llmFactCheck wiring', () => {
       assert.equal(options.deadlineMs, 1000);
       assert.equal(options.codexOnly, true);
       if (failures.length) {
-        assert.ok(retryPrompt.startsWith(prompt));
-        assert.ok(retryPrompt.includes(reason));
+        assert.equal(retryPrompt, prompt + '\n\nCONTROLLO DELLE PROVE PRIMA DI INVIARE IL JSON:\n'
+          + `I verdetti precedenti sono stati scartati per questi requisiti: ${missingSourceQuote} | ${secondReason}.\n`
+          + 'Prima scegli e copia i passaggi esatti dai blocchi forniti, poi formula il giudizio in base a quei passaggi.');
       } else {
         assert.equal(retryPrompt, prompt);
       }
@@ -247,6 +257,7 @@ describe('infrastructure retries with a retained vote', () => {
       isSharedTransientFactCheckRosterOutage: () => false,
       prompt,
       compactPrompt: null,
+      buildFactCheckProofRetryPrompt,
       estimateRequestTokens,
       safeSignalDiagnosticTextForLog: String,
       setTimeout: (callback, delay) => { now += delay; callback(); },
@@ -392,11 +403,89 @@ describe('fact-check retries under a reported input cap', () => {
         calls.push({ model, prompt, options });
         if (consumeWindow) now = Math.max(now, options.deadlineMs);
         if (reply instanceof Error) throw reply;
-        return reply;
+        return typeof reply === 'function' ? reply(model, prompt, options) : reply;
       },
     });
     return { ...result, calls, logs, cantonLines };
   }
+
+  const structuredReply = (hasSourceQuote) => (model, _prompt, options) => {
+    const editorialAssessment = validateEditorialAssessment({
+      classification: 'grounded_analysis',
+      articleQuote: bodyEnd,
+      finding: 'Il confronto del terzo trimestre collega la fine della serie ai conteggi comunali delle domande.',
+      evidenceQuotes: hasSourceQuote ? [sourceEnd] : [],
+    }, options.editorialContext);
+    if (!hasSourceQuote) {
+      assert.equal(editorialAssessment.verifiable, false);
+      assert.equal(editorialAssessment.reason, missingSourceQuote);
+      options.editorialProofFailures.add(editorialAssessment.reason);
+      options.invalidVerdictModels.add(model);
+      return null;
+    }
+    assert.equal(editorialAssessment.passed, true);
+    return { verdict: 'PASS', confidence: 0.9, issues: [], servedBy: model, editorialAssessment };
+  };
+
+  test('two invalid proofs recover through independent votes in the ordinary retry', async () => {
+    const reject = structuredReply(false);
+    const answerWithEvidence = (model, request, options) => {
+      if (!request.includes(missingSourceQuote)) return reject(model, request, options);
+      return structuredReply(true)(model, request, options);
+    };
+    const { calls, modelResults, prompt } = await runRounds({
+      replies: [reject, reject, answerWithEvidence, answerWithEvidence],
+    });
+    assert.equal(calls.length, 4);
+    assert.deepEqual(calls.slice(0, 2).map((call) => call.prompt), [prompt, prompt]);
+    const annotated = buildFactCheckProofRetryPrompt(prompt, new Set([missingSourceQuote]));
+    assert.deepEqual(calls.slice(2).map((call) => call.prompt), [annotated, annotated]);
+    assert.deepEqual(Array.from(modelResults, ({ verdict, servedBy, editorialAssessment }) =>
+      [verdict, servedBy, editorialAssessment.evidenceQuotes]), [
+      ['PASS', CODEX, [sourceEnd]],
+      ['PASS', AI_MODELS.GROQ_GPT_OSS_120B, [sourceEnd]],
+    ]);
+  });
+
+  test('a compact retry preserves its evidence when the proof feedback would exceed the input cap', async () => {
+    const baseline = await runRounds({ replies: [firstVote, secondVote] });
+    const cap = estimate(baseline.compactPrompt);
+    assert.ok(estimate(baseline.prompt) > cap);
+    assert.ok(estimate(buildFactCheckProofRetryPrompt(baseline.compactPrompt, new Set([missingSourceQuote]))) > cap);
+
+    const answer = structuredReply(true);
+    const { calls, modelResults, editorialContext } = await runRounds({
+      replies: [structuredReply(false), capError(cap), answer, answer],
+    });
+    assert.deepEqual(calls.map((call) => call.prompt), [
+      baseline.prompt, baseline.prompt, baseline.compactPrompt, baseline.compactPrompt,
+    ]);
+    assert.deepEqual({ ...editorialContext }, { ...baseline.editorialContext });
+    assert.ok(calls.every(({ options }) => options.editorialContext === editorialContext));
+    assert.deepEqual(Array.from(modelResults, ({ servedBy }) => servedBy), [CODEX, AI_MODELS.GROQ_GPT_OSS_120B]);
+    for (const vote of modelResults) {
+      assert.equal(vote.editorialAssessment.articleQuote, bodyEnd);
+      assert.deepEqual(vote.editorialAssessment.evidenceQuotes, [sourceEnd]);
+    }
+  });
+
+  test('a tighter cap reported by a compact round suppresses feedback on the next retry', async () => {
+    const baseline = await runRounds({ replies: [firstVote, secondVote] });
+    const annotated = buildFactCheckProofRetryPrompt(baseline.compactPrompt, new Set([missingSourceQuote]));
+    const initialCap = estimate(annotated);
+    const tighterCap = estimate(baseline.compactPrompt);
+    assert.ok(estimate(baseline.prompt) > initialCap);
+    assert.ok(initialCap > tighterCap);
+
+    const answer = structuredReply(true);
+    const { calls, modelResults } = await runRounds({
+      replies: [structuredReply(false), capError(initialCap), capError(tighterCap), capError(tighterCap), answer, answer],
+    });
+    assert.deepEqual(calls.map((call) => call.prompt), [
+      baseline.prompt, baseline.prompt, annotated, annotated, baseline.compactPrompt, baseline.compactPrompt,
+    ]);
+    assert.deepEqual(Array.from(modelResults, ({ servedBy }) => servedBy), [CODEX, AI_MODELS.GROQ_GPT_OSS_120B]);
+  });
 
   test('keeps a usable verification window when a 429 arrives late', async () => {
     const rateLimit = new Error('HTTP 429');
