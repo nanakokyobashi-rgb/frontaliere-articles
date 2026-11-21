@@ -17434,10 +17434,21 @@ async function translateArticle(data) {
       // follows it. Preserve that place as evidence even when the source
       // has no comma. Other commas still separate independent facts.
       const locativeCommas = new Set();
-      for (const match of value.matchAll(/(?:^|[\n;!?|])[^\S\n]*(?:[AaÀà]|[Ii]n|[Aa]t|[Aa]u|[Aa]ux|[Zz]u)[^\S\n]+[\p{Lu}][\p{L}\p{M}’'-]*[^\S\n]*,/gu)) {
+      const startsAssociation = (index) => spanBoundary(value[index])
+        || (value[index] === '.' && /\s/u.test(value[index + 1] ?? ''));
+      const placeWord = /[\p{Lu}][\p{L}\p{M}’'-]*/.source;
+      const locativePrefix = /(?:^|[\n,;!?|]|\.(?=\s))[^\S\n]*(?:>[ \t]*)*(?:(?:[-+*]|\d+[.)])[ \t]+)?/.source;
+      const locativePreposition = /(?:[AaÀà]|[Ii]n|[Aa]t|[Aa]u|[Aa]ux|[Zz]u)[ \t]+/.source;
+      const placeArticle = /(?:(?:di|del|della|de|du|des|la|le|der|den|dem|the)[ \t]+)?/.source;
+      const placeContinuation = /(?:di|de|del|della|la|le|am|im)[ \t]+/.source;
+      const leadingLocative = new RegExp(
+        `${locativePrefix}${locativePreposition}${placeArticle}${placeWord}(?:[ \t]+(?:${placeContinuation})?${placeWord})*[ \t]*,`,
+        'gu',
+      );
+      for (const match of value.matchAll(leadingLocative)) {
         locativeCommas.add(match.index + match[0].length - 1);
       }
-      const isAssociationBoundary = (index) => spanBoundary(value[index])
+      const isAssociationBoundary = (index) => startsAssociation(index)
         && !numericCommas.has(index)
         && !locativeCommas.has(index);
       const associations = numberEntries.map(({

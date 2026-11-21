@@ -1859,6 +1859,37 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
   const swappedPlaces = 'In Baar, the contribution is 12 francs; in Zugo, the contribution is 18 francs.';
   assert.equal(await makeTranslator(() => swappedPlaces, 50)(twoPlacesSource), null);
 
+  for (const [source, target, swapped] of [
+    [
+      '- A Zugo ci sono 12 richieste.\n- A Baar ci sono 18 richieste.',
+      '- In Zugo, there are 12 applications.\n- In Baar, there are 18 applications.',
+      '- In Baar, there are 12 applications.\n- In Zugo, there are 18 applications.',
+    ],
+    [
+      '> 1. A Bronx ci sono 12 richieste.\n> 2. A Hague ci sono 18 richieste.',
+      '> 1. In the Bronx, there are 12 applications.\n> 2. In the Hague, there are 18 applications.',
+      '> 1. In the Hague, there are 12 applications.\n> 2. In the Bronx, there are 18 applications.',
+    ],
+    [
+      'A Riva San Vitale ci sono 12 richieste; a Castel San Pietro ci sono 18 richieste.',
+      'In Riva San Vitale, there are 12 applications; in Castel San Pietro, there are 18 applications.',
+      'In Castel San Pietro, there are 12 applications; in Riva San Vitale, there are 18 applications.',
+    ],
+    [
+      'A Zugo ci sono 12 richieste. A Baar ci sono 18 richieste.',
+      'In Zugo, there are 12 applications. In Baar, there are 18 applications.',
+      'In Baar, there are 12 applications. In Zugo, there are 18 applications.',
+    ],
+    [
+      'A Zugo ci sono 12 richieste, a Baar ci sono 18 richieste.',
+      'In Zugo, there are 12 applications, in Baar, there are 18 applications.',
+      'In Baar, there are 12 applications, in Zugo, there are 18 applications.',
+    ],
+  ]) {
+    assert.equal(await makeTranslator(() => target, 80)(source), target);
+    assert.equal(await makeTranslator(() => swapped, 80)(source), null);
+  }
+
   const mixedAnchorsTarget = 'Lugano: 100 applications; the response arrives after 12 days.';
   assert.equal(
     await makeTranslator(() => mixedAnchorsTarget, 50)(mixedAnchorsSource),
