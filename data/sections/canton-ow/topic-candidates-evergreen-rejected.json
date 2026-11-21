@@ -7,6 +7,10 @@
     "canton-ow::https://www.ow.ch/_rte/information/139690": {
       "section": "canton-ow",
       "ts": 1795175667187
+    },
+    "canton-ow::https://www.lungern.ch/_rte/information/3055525": {
+      "section": "canton-ow",
+      "ts": 1795231592320
     }
   }
 }
