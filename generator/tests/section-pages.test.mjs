@@ -4699,13 +4699,13 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /-f "missing_page_paths=\$missing_page_paths"/);
   assert.match(wf, /-f "known_missing_page_paths=\$known_missing_page_paths"/);
   assert.match(wf, /-f "dispatch_cohort=\$dispatch_cohort"/);
-  assert.match(wf, /-f 'coordinated_recovery=true'[\s\S]*-f "source_commit=\$SOURCE_COMMIT"[\s\S]*-f "source_main_commit=\$SOURCE_COMMIT"[\s\S]*-f "dispatch_nonce=/);
+  assert.match(wf, /-f 'coordinated_recovery=true'[\s\S]*-f "source_commit=\$dispatch_source"[\s\S]*-f "source_main_commit=\$dispatch_source"[\s\S]*-f "dispatch_nonce=/);
   assert.match(wf, /-f 'replay_api_after_publish=false'/);
   assert.match(wf, /-f 'coordinated_recovery=true'/);
   assert.match(wf, /-f 'allow_deferred_live_release=true'/);
   assert.doesNotMatch(wf, /-f 'replay_api_after_publish=true'/);
   assert.match(wf, /-f "api_release_commit=\$API_RELEASE_COMMIT"/);
-  assert.match(wf, /-f "source_commit=\$SOURCE_COMMIT"/);
+  assert.match(wf, /-f "source_commit=\$dispatch_source"/);
   assert.doesNotMatch(wf, /Wait for all staged backfills before the API replay/);
   assert.match(wf, /Replay API after event-driven backfill readiness/);
   assert.match(wf, /event_replay=true/);

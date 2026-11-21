@@ -314,6 +314,11 @@ jobs:
             exit 1
           fi
           dispatch_cohort="reconcile-${GITHUB_RUN_ID}-n${dispatch_cohort_size}"
+          dispatch_source="$(bash scripts/ci/read-main-head.sh)"
+          if ! bash scripts/ci/section-source-unaffected.sh --bookkeeping-only "$SOURCE_COMMIT" "$dispatch_source"; then
+            echo "::notice::main non verificabile o cambiata dopo la detection ($SOURCE_COMMIT -> $dispatch_source); nessun backfill armato"
+            exit 0
+          fi
           fail=0
           while IFS=$'\t' read -r section ids missing_page_paths known_missing_page_paths; do
             [ -n "$section" ] || continue
@@ -328,8 +333,8 @@ jobs:
               -f 'dry_run=false'
               -f 'replay_api_after_publish=false'
               -f 'coordinated_recovery=true'
-              -f "source_commit=$SOURCE_COMMIT"
-              -f "source_main_commit=$SOURCE_COMMIT"
+              -f "source_commit=$dispatch_source"
+              -f "source_main_commit=$dispatch_source"
               -f "dispatch_nonce=$dispatch_nonce"
               -f "dispatch_cohort=$dispatch_cohort"
             )
