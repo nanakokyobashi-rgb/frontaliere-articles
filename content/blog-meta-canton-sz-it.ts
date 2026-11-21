@@ -48,6 +48,9 @@ const blogMetaCantonSzIt: Record<string, string> = {
     'blog.article.piani-rete-ciclabile-svitto.title': 'Emanati i piani ciclabili cantonali del Canton Svitto',
     'blog.article.piani-rete-ciclabile-svitto.excerpt': 'La rete prevista ammonta a 1.152 km, di cui 280 km per spostamenti quotidiani e 872 km per tempo libero.',
     'blog.article.piani-rete-ciclabile-svitto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.gov-svitto-respinge-autorizzazione.title': 'Governo Svitto respinge procedura di autorizzazione per funzionari',
+    'blog.article.gov-svitto-respinge-autorizzazione.excerpt': 'Le denunce contro funzionari in Svitto sono aumentate dal 2021, raggiungendo un massimo nel 2025; il Governo respinge la mozione M 7/26.',
+    'blog.article.gov-svitto-respinge-autorizzazione.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSzIt;

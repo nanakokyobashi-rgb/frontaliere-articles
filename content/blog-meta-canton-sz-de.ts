@@ -48,6 +48,9 @@ const blogMetaCantonSzDe: Record<string, string> = {
     'blog.article.piani-rete-ciclabile-svitto.title': 'Kantonale Velonetzpläne des Kantons Schwyz erlassen',
     'blog.article.piani-rete-ciclabile-svitto.excerpt': 'Das vorgesehene Netz umfasst 1.152 km, davon 280 km für Alltagswege und 872 km für die Freizeit.',
     'blog.article.piani-rete-ciclabile-svitto.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.gov-svitto-respinge-autorizzazione.title': 'Schwyzer Regierung lehnt Genehmigungsverfahren für Amtsträger ab',
+    'blog.article.gov-svitto-respinge-autorizzazione.excerpt': 'Die Anzeigen gegen Amtsträger in Schwyz sind seit 2021 gestiegen und erreichten 2025 einen Höchststand; die Regierung lehnt die Motion M 7/26 ab.',
+    'blog.article.gov-svitto-respinge-autorizzazione.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSzDe;
