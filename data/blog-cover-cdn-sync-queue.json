@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-piani-rete-ciclabile-svitto.webp",
-      "sha256": "1a76672d639d51b7c87595c89b69dcf918be4053e4b1b1226f4a6dcddf7eff1f"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-piani-rete-ciclabile-svitto-480w.webp",
-      "sha256": "d7d7b25f3b3c839a04577a35a12a6e1928895cc38e4188cd2dd6c125e2a7c846"
-    }
-  ]
+  "items": []
 }
