@@ -81,6 +81,9 @@ const blogMetaCantonNeEn: Record<string, string> = {
     'blog.article.imprese-neuchateloise-rischio-supply-chain.title': 'Over 71% of industrial companies see vulnerabilities in the supply chain',
     'blog.article.imprese-neuchateloise-rischio-supply-chain.excerpt': 'The CNCI survey of November 12, 2026 shows that over 71% of Neo-Castilian industrial companies perceive dependence on certain suppliers as a vulnerability.',
     'blog.article.imprese-neuchateloise-rischio-supply-chain.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.tagli-lavoro-piano-sociale.title': 'Layoffs in Le Locle: 90 positions and social plan',
+    'blog.article.tagli-lavoro-piano-sociale.excerpt': '90 positions eliminated in Le Locle, 10 fewer than the 100 announced in October.',
+    'blog.article.tagli-lavoro-piano-sociale.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonNeEn;

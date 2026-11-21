@@ -294,4 +294,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'tagli-lavoro-piano-sociale',
+ category: 'novita',
+ date: '2026-11-21T15:10:34.819Z',
+ image: '/images/blog/article-tagli-lavoro-piano-sociale.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

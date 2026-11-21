@@ -336,4 +336,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'soletta-preventivo-approvato',
+ category: 'novita',
+ date: '2026-11-21T16:12:13.224Z',
+ image: '/images/blog/article-soletta-preventivo-approvato.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

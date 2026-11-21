@@ -81,6 +81,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.imprese-neuchateloise-rischio-supply-chain.title': 'Mehr als 71% der Industrieunternehmen sehen eine Anfälligkeit in der Lieferkette',
     'blog.article.imprese-neuchateloise-rischio-supply-chain.excerpt': 'Die Erhebung der CNCI vom 12. November 2026 zeigt, dass mehr als 71% der neuenburgischen Industrieunternehmen die Abhängigkeit von bestimmten Lieferanten als eine Anfälligkeit wahrnehmen.',
     'blog.article.imprese-neuchateloise-rischio-supply-chain.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.tagli-lavoro-piano-sociale.title': 'Entlassungen in Locle: 90 Stellen und Sozialplan',
+    'blog.article.tagli-lavoro-piano-sociale.excerpt': '90 Stellen in Locle gestrichen, 10 weniger als die im Oktober angekündigten 100.',
+    'blog.article.tagli-lavoro-piano-sociale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonNeDe;

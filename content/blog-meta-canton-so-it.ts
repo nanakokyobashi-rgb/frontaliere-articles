@@ -93,6 +93,9 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.cantonsrat-respinge-puk-soh.title': 'Soletta: il Cantonsrat respinge la PUK sulla SOH',
     'blog.article.cantonsrat-respinge-puk-soh.excerpt': 'Il Parlamento cantonale di Soletta ha votato mercoledì contro l\'istituzione di una commissione parlamentare d\'inchiesta sulle irregolarità in materia di diritto del personale presso la Solothurner Spitäler AG, indicata nella fonte con l\'acronimo SOH.',
     'blog.article.cantonsrat-respinge-puk-soh.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.soletta-preventivo-approvato.title': 'Soletta: la commissione approva il preventivo 2027',
+    'blog.article.soletta-preventivo-approvato.excerpt': 'Il preventivo 2027 prevede un disavanzo di circa CHF 42 milioni, migliorato di CHF 33,4 milioni rispetto alla proposta iniziale.',
+    'blog.article.soletta-preventivo-approvato.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSoIt;

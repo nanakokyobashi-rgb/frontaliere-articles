@@ -33,6 +33,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'polizia-cantonale-comunicazione-media': { it: 'polizia-cantonale-comunicazione-media', en: 'cantonal-police-communication-media', de: 'polizei-kantonal-kommunikation-media', fr: 'police-cantonale-communication-media' },
  'juko-supporto-aumento-corpo-polizia': { it: 'juko-supporto-aumento-corpo-polizia', en: 'juko-police-force-increase-support', de: 'juko-polizeikraefteerhoehung-unterstuetzung', fr: 'juko-soutien-augmentation-corps-police' },
  'cantonsrat-respinge-puk-soh': { it: 'cantonsrat-respinge-puk-soh', en: 'solothurn-cantonal-council-rejects-puk', de: 'solothurn-kantonsrat-lehnt-puk-ab', fr: 'soleure-conseil-cantonal-refuse-puk' },
+ 'soletta-preventivo-approvato': { it: 'soletta-preventivo-approvato', en: 'solothurn-2027-budget-commission', de: 'solothurn-budget-2027-finanzkommission', fr: 'soleure-budget-2027-commission-finances' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

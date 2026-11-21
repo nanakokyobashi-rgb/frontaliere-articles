@@ -115083,6 +115083,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-controlli-mendrisiotto-settembre-novembre': {
+    title: 'Controlli congiunti nel Mendrisiotto tra settembre e novembre',
+    description: 'Tra settembre e novembre, Polizia cantonale e Udsc hanno effettuato 43 posti di controllo nel Mendrisiotto, riscontrando 26 violazioni e 17 infrazioni doganali.',
+    keywords: 'Mendrisiotto, controlli confine, Polizia cantonale, Udsc, infrazioni doganali, cocaina sequestrata, transito',
+    ogTitle: 'Controlli congiunti Mendrisiotto settembre novembre',
+    ogDescription: 'Polizia cantonale e Udsc hanno intensificato i controlli nelle zone di confine del Mendrisiotto tra settembre e novembre. Sono stati verificati 461 veicoli e 699 persone.',
+    canonicalPath: '/articoli-frontaliere/controlli-mendrisiotto-settembre-novembre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Controlli congiunti nel Mendrisiotto tra settembre e novembre",
+      "description": "Tra settembre e novembre, Polizia cantonale e Udsc hanno effettuato 43 posti di controllo nel Mendrisiotto, riscontrando 26 violazioni e 17 infrazioni doganali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-controlli-mendrisiotto-settembre-novembre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-21T16:11:41+00:00",
+      "dateModified": "2026-11-21T16:11:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/controlli-mendrisiotto-settembre-novembre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

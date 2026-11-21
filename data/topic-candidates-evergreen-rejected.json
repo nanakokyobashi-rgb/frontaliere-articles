@@ -6012,6 +6012,18 @@
       "firstSeenAt": "2026-11-19T05:03:31.559Z",
       "lastValidatedAt": "2026-11-19T05:03:31.559Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "permesso di pesca canton Lucerna requisiti e stagioni",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-21T15:21:37.928Z",
+      "lastValidatedAt": "2026-11-21T15:21:37.928Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -15045,14 +15057,6 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.rsi.ch/s/4254599": {
-      "section": "svizzera",
-      "ts": 1795100893844
-    },
-    "svizzera::https://www.swissinfo.ch/ita/lanciata-iniziativa-per-premi-malattia-pi%c3%b9-bassi/92409183": {
-      "section": "svizzera",
-      "ts": 1795103349073
-    },
     "frontaliere::https://www.rsi.ch/s/4255856": {
       "section": "frontaliere",
       "ts": 1795110538248
@@ -15144,6 +15148,10 @@
     "frontaliere::https://www.laregione.ch/svizzera/svizzera/1964263/corrieri-dei-pasti-in-pochi-controllano-le-condizioni-di-lavoro": {
       "section": "frontaliere",
       "ts": 1795269335854
+    },
+    "svizzera::https://www.rsi.ch/s/4254599": {
+      "section": "svizzera",
+      "ts": 1795276269372
     }
   }
 }
