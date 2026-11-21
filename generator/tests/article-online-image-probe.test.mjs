@@ -93,6 +93,20 @@ test('il probe considera solo tag e attributi reali, non pseudo-metadata dentro 
   );
 });
 
+test('il probe legge og:image dal tag reale e mantiene aperto un raw text con / >', () => {
+  const html = `<meta property="og:url" content="${URL_IT}">`
+    + '<script type="application/ld+json"/>'
+    + '<meta property="og:image" content="/og-image.png">'
+    + '</script>'
+    + OWN;
+  assert.equal(classifyOnlinePage({ status: 200, html, url: URL_IT }).state, ONLINE_IMAGE.OWN);
+});
+
+test('il probe rifiuta una risposta HTML malformata anche con metadata precedenti validi', () => {
+  const html = articlePage(OWN) + '<div data-note="unfinished>';
+  assert.equal(classifyOnlinePage({ status: 200, html, url: URL_IT }).state, ONLINE_IMAGE.UNKNOWN);
+});
+
 test('assente vale solo se letto due volte, con una chiave anti-cache diversa a ogni richiesta', async () => {
   const { fetchImpl, calls } = scriptedFetch([response(404), response(404)]);
   const result = await probeOnlineImage(URL_IT, { fetchImpl, sleep: noSleep });

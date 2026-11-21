@@ -14,8 +14,8 @@
  * its own, or when the answer could not be read: a failed read is not a proof
  * that there is nothing to protect.
  */
-import { extractOgImage, isGenericOgImage, normalizeImagePath } from './article-image-postcondition.mjs';
-import { htmlAttributes, nextHtmlTagOutsideRawText } from '../../generator/scripts/lib/html-tag-scanner.mjs';
+import { GENERIC_IMAGE_PATH, normalizeImagePath } from './article-image-postcondition.mjs';
+import { htmlAttributes, nextHtmlTagOutsideRawTextStatus } from '../../generator/scripts/lib/html-tag-scanner.mjs';
 
 export const ONLINE_IMAGE = Object.freeze({
   ABSENT: 'absent',
@@ -42,8 +42,11 @@ function realHtmlTags(html) {
   const source = String(html ?? '');
   const tags = [];
   let cursor = 0;
-  let tag;
-  while ((tag = nextHtmlTagOutsideRawText(source, cursor)) !== null) {
+  while (true) {
+    const result = nextHtmlTagOutsideRawTextStatus(source, cursor);
+    if (result.status === 'eof') return { tags, malformed: false };
+    if (result.status === 'malformed') return { tags, malformed: true };
+    const { tag } = result;
     cursor = tag.end;
     if (tag.closing) continue;
     tags.push({
@@ -51,7 +54,6 @@ function realHtmlTags(html) {
       attrs: Object.fromEntries(htmlAttributes(source.slice(tag.start, tag.end))),
     });
   }
-  return tags;
 }
 
 function pagePath(value) {
@@ -65,15 +67,26 @@ function pagePath(value) {
 }
 
 /** The paths a page declares as its own: `og:url` and the canonical link. */
-function declaredPagePaths(html) {
+function declaredPagePaths(tags) {
   const paths = [];
-  for (const tag of realHtmlTags(html)) {
+  for (const tag of tags) {
     if (tag.name !== 'meta' && tag.name !== 'link') continue;
     const attrs = tag.attrs;
     if (String(attrs.property || '').toLowerCase() === 'og:url') paths.push(pagePath(attrs.content));
     if (String(attrs.rel || '').toLowerCase() === 'canonical') paths.push(pagePath(attrs.href));
   }
   return paths.filter(Boolean);
+}
+
+function extractOgImageFromTags(tags) {
+  const imageTag = tags.find((tag) => tag.name === 'meta'
+    && String(tag.attrs.property || '').toLowerCase() === 'og:image');
+  return imageTag?.attrs.content || null;
+}
+
+function isGenericOgImageValue(value) {
+  const normalized = normalizeImagePath(value);
+  return Boolean(normalized && normalized.split(/[?#]/, 1)[0] === GENERIC_IMAGE_PATH);
 }
 
 /**
@@ -85,12 +98,15 @@ export function classifyOnlinePage({ status, html = '', url }) {
   if (status === 404 || status === 410) return { state: ONLINE_IMAGE.ABSENT, reason: `HTTP ${status}` };
   if (status !== 200) return { state: ONLINE_IMAGE.UNKNOWN, reason: `HTTP ${status}` };
   const expected = pagePath(url);
-  if (!expected || !declaredPagePaths(html).includes(expected)) {
+  const scan = realHtmlTags(html);
+  if (scan.malformed) return { state: ONLINE_IMAGE.UNKNOWN, reason: 'HTML malformato o troncato' };
+  const { tags } = scan;
+  if (!expected || !declaredPagePaths(tags).includes(expected)) {
     return { state: ONLINE_IMAGE.UNKNOWN, reason: 'la risposta non è la pagina richiesta' };
   }
-  const image = extractOgImage(html);
+  const image = extractOgImageFromTags(tags);
   if (!image) return { state: ONLINE_IMAGE.UNKNOWN, reason: 'pagina senza og:image' };
-  if (isGenericOgImage(html)) return { state: ONLINE_IMAGE.GENERIC, reason: 'og:image generico' };
+  if (isGenericOgImageValue(image)) return { state: ONLINE_IMAGE.GENERIC, reason: 'og:image generico' };
   return { state: ONLINE_IMAGE.OWN, reason: `og:image ${normalizeImagePath(image)}` };
 }
 

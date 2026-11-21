@@ -66,10 +66,8 @@ import {
 } from '../generator/scripts/lib/fetch-with-ref-timeout.mjs';
 import {
   findHtmlClosingTag,
-  findHtmlRawTextClosingTag,
   htmlAttributes,
-  isHtmlRawTextTag,
-  nextHtmlTag,
+  nextHtmlTagOutsideRawTextStatus,
 } from '../generator/scripts/lib/html-tag-scanner.mjs';
 
 import { IMAGE_FETCH_TIMEOUT_MS, MAX_DECLARED_IMAGE_BYTES } from './lib/declared-image-fetch.mjs';
@@ -821,24 +819,27 @@ function previousArchiveReleasePages(rootDir, section, requestedRevision) {
  * lista dei difetti (vuota = ok).
  */
 function realHtmlTags(html) {
+  const result = scanRealHtmlTags(html);
+  if (result.malformed) throw new Error('HTML malformato o troncato');
+  return result.tags;
+}
+
+function scanRealHtmlTags(html) {
   const source = String(html ?? '');
   const tags = [];
   let cursor = 0;
-  let tag;
-  while ((tag = nextHtmlTag(source, cursor)) !== null) {
+  while (true) {
+    const result = nextHtmlTagOutsideRawTextStatus(source, cursor);
+    if (result.status === 'eof') return { tags, malformed: false };
+    if (result.status === 'malformed') return { tags, malformed: true };
+    const { tag } = result;
     cursor = tag.end;
     if (tag.closing) continue;
     tags.push({
       ...tag,
       attrs: Object.fromEntries(htmlAttributes(source.slice(tag.start, tag.end))),
     });
-    if (!tag.selfClosing && isHtmlRawTextTag(tag.name)) {
-      const close = findHtmlRawTextClosingTag(source, tag.end, tag.name);
-      if (!close) break;
-      cursor = close.end;
-    }
   }
-  return tags;
 }
 
 function hasRouteOwnerMeta(html) {
@@ -877,14 +878,21 @@ function hasExpectedCantonRssFeedLinks(html, requiredRssUrl) {
 
 export function pageDefects(page, html, { requiredRssUrl = null } = {}) {
   const source = String(html ?? '');
-  const tags = realHtmlTags(source);
+  const scan = scanRealHtmlTags(source);
+  const tags = scan.tags;
   const metaTags = tags.filter((tag) => tag.name === 'meta');
   const linkTags = tags.filter((tag) => tag.name === 'link');
   const defects = [];
   if (!source || source.length < 200) defects.push('vuota o troncata');
+  if (scan.malformed) defects.push('HTML malformato o troncato');
+  if (scan.malformed) return defects;
   // Il router della SPA resta in staticOverlay solo su un documento che porta
   // questo meta: senza, sopra la pagina comparirebbe NotFoundSuggestions.
-  if (!hasRouteOwnerMeta(source)) defects.push('manca il meta ft-route-owner');
+  if (!tags.some((tag) => tag.name === 'meta'
+    && String(tag.attrs.name || '').toLowerCase() === 'ft-route-owner'
+    && String(tag.attrs.content || '').toLowerCase() === 'corpus')) {
+    defects.push('manca il meta ft-route-owner');
+  }
   const hasNoindex = metaTags.some((tag) => String(tag.attrs.name || '').toLowerCase() === 'robots'
     && String(tag.attrs.content || '').toLowerCase().includes('noindex'));
   if (page.kind !== 'article' && hasNoindex) {

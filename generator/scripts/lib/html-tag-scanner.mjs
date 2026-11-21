@@ -388,16 +388,25 @@ export function isHtmlRawTextTag(name) {
 }
 
 /** Cerca markup visibile saltando commenti e i contenuti raw di script/style. */
-export function nextHtmlTagOutsideRawText(html, from = 0) {
-  let tag = nextHtmlTag(html, from, true);
-  while (tag) {
-    if (!tag.closing && !tag.selfClosing && isHtmlRawTextTag(tag.name)) {
+export function nextHtmlTagOutsideRawTextStatus(html, from = 0) {
+  let result = nextHtmlTagStatus(html, from, true);
+  while (result.status === 'tag') {
+    const { tag } = result;
+    // HTML treats a slash on a non-void raw-text opening tag as data: the
+    // element remains open until its matching closing tag. Do not let the
+    // scanner's syntactic selfClosing flag expose pseudo-tags in its body.
+    if (!tag.closing && isHtmlRawTextTag(tag.name)) {
       const close = findHtmlRawTextClosingTag(html, tag.end, tag.name);
-      if (!close) return null;
-      tag = nextHtmlTag(html, close.end, true);
+      if (!close) return MALFORMED_HTML_TAG;
+      result = nextHtmlTagStatus(html, close.end, true);
       continue;
     }
-    return tag;
+    return result;
   }
-  return null;
+  return result;
+}
+
+export function nextHtmlTagOutsideRawText(html, from = 0) {
+  const result = nextHtmlTagOutsideRawTextStatus(html, from);
+  return result.status === 'tag' ? result.tag : null;
 }

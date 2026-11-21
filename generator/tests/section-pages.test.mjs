@@ -2548,6 +2548,30 @@ test('publisher: pageDefects ignora pseudo-metadata dentro attributi quotati con
   assert.deepEqual(pageDefects(page, html), []);
 });
 
+test('publisher: pageDefects ignora pseudo-metadata dentro raw text anche con / >', () => {
+  const page = pageEntry('canton-ti', 'articoli-ticino/carburanti/index.html', 'hub');
+  const html =
+    '<!doctype html><html><head><meta charset="utf-8">' +
+    CORPUS_ROUTE_OWNER_META_TAG +
+    '<meta name="robots" content="index, follow">' +
+    `<link rel="canonical" href="${page.apexUrl}">` +
+    '<script data-note="literal"/>' +
+    '<meta name="robots" content="noindex">' +
+    '<link rel="canonical" href="https://frontaliereticino.ch/altra-route/">' +
+    '</script></head><body><main>' + 'contenuto '.repeat(40) + '</main></body></html>';
+  assert.deepEqual(pageDefects(page, html), []);
+});
+
+test('publisher: pageDefects rifiuta markup HTML malformato dopo i metadata validi', () => {
+  const page = pageEntry('canton-ti', 'articoli-ticino/carburanti/index.html', 'hub');
+  const html =
+    '<!doctype html><html><head><meta charset="utf-8">' +
+    CORPUS_ROUTE_OWNER_META_TAG +
+    `<link rel="canonical" href="${page.apexUrl}"></head><body><main>` +
+    'contenuto '.repeat(40) + '</main></body></html><div data-note="unfinished>';
+  assert.match(pageDefects(page, html).join('|'), /HTML malformato o troncato/);
+});
+
 test('publisher: le landing live annunciano il feed edge della propria locale', () => {
   const page = pageEntry('canton-ti', 'articoli-ticino/index.html', 'landing');
   const feedUrl = cantonRssFeedUrlForLocale('canton-ti', 'it');
