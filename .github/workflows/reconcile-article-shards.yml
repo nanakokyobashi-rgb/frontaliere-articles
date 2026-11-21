@@ -82,9 +82,11 @@ on:
         required: false
         default: '3'
 
-# Una riconciliazione alla volta; mai cancellarne una a metà dei dispatch.
+# Uno slot in attesa per trigger, con workflow_run distinto per evento padre.
+# Il gruppo condiviso del job serializza le riconciliazioni.
 concurrency:
-  group: reconcile-article-shards
+  group: reconcile-article-shards-${{ github.event_name == 'workflow_run' && format('workflow_run-{0}', github.event.workflow_run.event) || github.event_name }}
+  queue: single
   cancel-in-progress: false
 
 permissions:
@@ -94,6 +96,10 @@ permissions:
 
 jobs:
   reconcile:
+    concurrency:
+      group: reconcile-article-shards
+      queue: max
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     # Fino a 3 backfill sequenziali da ~7-10 min l'uno, più le attese di
     # coda: 50 copre il caso peggiore senza lasciar vivere uno zombie.

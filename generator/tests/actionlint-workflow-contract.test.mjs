@@ -17,6 +17,7 @@ const QUEUE_ALLOWLISTED_WORKFLOWS = [
   '.github/workflows/fast-publish-article.yml',
   '.github/workflows/fast-publish-section.yml',
   '.github/workflows/reconcile-section-pages.yml',
+  '.github/workflows/reconcile-article-shards.yml',
 ];
 
 test('required PR check validates every workflow and ShellChecks changed workflow scripts', () => {
