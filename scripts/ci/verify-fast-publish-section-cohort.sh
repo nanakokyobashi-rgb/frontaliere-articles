@@ -51,7 +51,7 @@ if [ "$mode" = 'event' ] && ! [[ "$child_run_id" =~ ^[0-9]+$ ]]; then
   not_ready "run child non valida: $child_run_id"
 fi
 compatible_sources='[]'
-if [ "$mode" = 'schedule' ] || [ "$child_head_sha" != "$expected_source" ]; then
+if [ "$mode" = 'schedule' ] || [[ "$child_cohort" =~ ^stale-late-[0-9]+-[^/]+-n1$ ]]; then
   # The workflow checks out main shallowly. Fetch the pinned revision with a
   # bounded history so compatible older proofs can be recovered without guessing.
   if git fetch --quiet --no-tags --depth=64 --no-write-fetch-head origin "$expected_source"; then
@@ -61,7 +61,6 @@ if [ "$mode" = 'schedule' ] || [ "$child_head_sha" != "$expected_source" ]; then
   fi
 fi
 cohort_source="$expected_source"
-cohort_run_head="$expected_source"
 if [ "$mode" = 'event' ]; then
   if ! [[ "$child_head_sha" =~ ^[a-f0-9]{40}$ ]]; then
     not_ready "HEAD della run child non valida: $child_head_sha"
@@ -71,10 +70,7 @@ if [ "$mode" = 'event' ]; then
       ! jq -e --arg child "$child_head_sha" 'index($child) != null' <<< "$compatible_sources" >/dev/null; then
       not_ready "run child sulla HEAD $child_head_sha, attesa $expected_source"
     fi
-    # A stale-late child can run on a compatible bookkeeping HEAD after its
-    # pinned source was dispatched. Correlate the event by its observed HEAD,
-    # but keep the pinned source for artifact identity validation.
-    cohort_run_head="$child_head_sha"
+    cohort_source="$child_head_sha"
   fi
 fi
 
@@ -104,11 +100,11 @@ parse_title=" / (?<section>[^/]+) / nonce=(?<nonce>[^ ]+) / dry=(?<dry>[^ ]+) / 
 candidate_json=''
 
 if [ "$mode" = 'event' ]; then
-  candidate_json="$(jq -c --arg id "$child_run_id" --arg nonce "$child_nonce" --arg cohort "$child_cohort" --arg run_head "$cohort_run_head" '
+  candidate_json="$(jq -c --arg id "$child_run_id" --arg nonce "$child_nonce" --arg cohort "$child_cohort" --arg source "$cohort_source" '
     [
       .[]
       | . as $run
-      | select($run.headSha == $run_head)
+      | select($run.headSha == $source)
       | (try ($run.displayTitle | capture(" / (?<section>[^/]+) / nonce=(?<nonce>[^ ]+) / dry=(?<dry>[^ ]+) / (?:c|cohort)=(?<cohort>[^ ]+)$")) catch null) as $parts
       | select($parts != null)
       | (try ($parts.cohort | capture("^(?<kind>reconcile|stale-staged)-[0-9]+-n(?<size>[1-9][0-9]*)$|^(?<late>stale-late)-[0-9]+-[^/]+-n(?<late_size>1)$")) catch null) as $cohort_parts
@@ -168,7 +164,6 @@ else
   ' <<< "$runs_json")"
   [ -n "$candidate_json" ] || not_ready 'nessuna coorte recente sulla HEAD corrente'
   cohort_source="$(jq -r '.runs[0].headSha' <<< "$candidate_json")"
-  cohort_run_head="$cohort_source"
 fi
 
 expected_size="$(jq -r '.expectedSize' <<< "$candidate_json")"
@@ -180,7 +175,7 @@ fi
 if [ "$observed_size" -ne "$expected_size" ]; then
   not_ready "child osservati $observed_size, attesi $expected_size per $cohort"
 fi
-if ! jq -e --arg source "$cohort_run_head" --argjson expected "$expected_size" '
+if ! jq -e --arg source "$cohort_source" --argjson expected "$expected_size" '
   (.runs | length) == $expected
   and ([.runs[].nonce] | length) == ([.runs[].nonce] | unique | length)
   and ([.runs[].section] | length) == ([.runs[].section] | unique | length)
@@ -223,11 +218,27 @@ while IFS=$'\t' read -r run_id nonce section; do
     reopen_reconcile
     not_ready "artifact fast-publish-result non univoco per il child $run_id"
   fi
+  artifact_source="$cohort_source"
+  if [[ "$cohort" =~ ^stale-late-[0-9]+-[^/]+-n1$ ]]; then
+    # The dispatch event can point at a newer main than the pinned checkout.
+    # Keep both revisions within the proven range and check the artifact's
+    # source and rendered revision against its actual pin.
+    if ! artifact_source="$(jq -er '.source_commit | select(type == "string" and test("^[a-f0-9]{40}$"))' "${result_files[0]}")"; then
+      not_ready "source commit assente o invalida nell'artifact child $run_id"
+    fi
+    if [ "$artifact_source" != "$cohort_source" ] && \
+      ! jq -e --arg source "$artifact_source" --arg run "$cohort_source" '
+        index($source) as $source_index | index($run) as $run_index
+        | $source_index != null and $run_index != null and $source_index >= $run_index
+      ' <<< "$compatible_sources" >/dev/null; then
+      not_ready "source commit $artifact_source non compatibile con la HEAD del child $cohort_source"
+    fi
+  fi
   if ! jq -e \
     --arg nonce "$nonce" \
     --arg section "$section" \
     --arg cohort "$cohort" \
-    --arg source "$cohort_source" \
+    --arg source "$artifact_source" \
     'type == "object"
      and .dispatch_nonce == $nonce
      and .section == $section
@@ -247,4 +258,4 @@ write_output 'verified=true'
 write_output "cohort=$cohort"
 write_output "expected_size=$expected_size"
 write_output "observed_size=$observed_size"
-echo "::notice::coorte child verificata: $cohort ($observed_size/$expected_size), HEAD=$cohort_run_head, source=$cohort_source"
+echo "::notice::coorte child verificata: $cohort ($observed_size/$expected_size), HEAD=$cohort_source"

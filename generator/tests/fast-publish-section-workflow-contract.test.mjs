@@ -714,6 +714,7 @@ test('il verificatore riusa solo prove stale-late di revisioni equivalenti', () 
     };
     const source = commit('article.txt', 'Original article\n');
     const bookkeeping = commit('data/discovery-attempt-state.json', '{}\n');
+    const current = commit('data/blog-cover-cdn-sync-queue.json', '[]\n');
     const changed = commit('article.txt', 'Changed article\n');
     const cohort = 'stale-late-42-canton-ur-n1';
     const nonce = 'stale-late-fixture';
@@ -726,7 +727,11 @@ case "$1" in
   *) exit 1 ;;
 esac
 `, { mode: 0o755 });
-    const check = (mode, expected, { artifactSource = source, renderedHead = artifactSource } = {}) => {
+    const check = (mode, expected, {
+      artifactSource = source,
+      renderedHead = artifactSource,
+      runHead = source,
+    } = {}) => {
       const output = path.join(root, 'output');
       writeFileSync(output, '');
       execFileSync('bash', [verifier], {
@@ -734,10 +739,10 @@ esac
         env: {
           ...process.env, PATH: `${root}:${process.env.PATH}`, RUNNER_TEMP: root, GITHUB_OUTPUT: output,
           REPOSITORY: 'fixture/corpus', MODE: mode, EXPECTED_SOURCE_COMMIT: expected,
-          WORKFLOW_RUN_ID: '42', WORKFLOW_RUN_HEAD_SHA: source, CHILD_NONCE: nonce, CHILD_COHORT: cohort,
+          WORKFLOW_RUN_ID: '42', WORKFLOW_RUN_HEAD_SHA: runHead, CHILD_NONCE: nonce, CHILD_COHORT: cohort,
           FIXTURE_RUN: JSON.stringify({
             databaseId: 42, displayTitle: `cover-publish-section / canton-ur / nonce=${nonce} / dry=false / c=${cohort}`,
-            status: 'completed', conclusion: 'success', headSha: source, createdAt: '2026-11-21T10:00:00Z',
+            status: 'completed', conclusion: 'success', headSha: runHead, createdAt: '2026-11-21T10:00:00Z',
           }),
           FIXTURE_ARTIFACT: JSON.stringify({
             section: 'canton-ur', dispatch_nonce: nonce, dispatch_cohort: cohort,
@@ -749,27 +754,31 @@ esac
       return readFileSync(output, 'utf8').split('\n')[0];
     };
     assert.equal(
-      check('event', bookkeeping, { artifactSource: bookkeeping }),
+      check('event', current, { artifactSource: source, runHead: bookkeeping }),
       'verified=true',
-      'event keeps pinned source for artifact validation',
-    );
-    assert.equal(
-      check('schedule', bookkeeping),
-      'verified=true',
-      'schedule keeps the selected run source',
+      'event validates the pinned source separately from the event HEAD',
     );
     for (const mode of ['event', 'schedule']) {
-      assert.equal(check(mode, changed), 'verified=false', mode);
+      assert.equal(
+        check(mode, current, { artifactSource: source, runHead: bookkeeping }),
+        'verified=true',
+        `${mode} accepts an equivalent run HEAD`,
+      );
+      assert.equal(
+        check(mode, changed, { artifactSource: source, runHead: changed }),
+        'verified=false',
+        `${mode} rejects a changed publication source`,
+      );
     }
     assert.equal(
-      check('event', bookkeeping, { artifactSource: bookkeeping, renderedHead: source }),
+      check('event', current, { artifactSource: source, renderedHead: bookkeeping, runHead: bookkeeping }),
       'verified=false',
-      'event artifact rendered HEAD must match pinned source',
+      'event artifact rendered HEAD must match its pinned source',
     );
     assert.equal(
-      check('schedule', bookkeeping, { renderedHead: bookkeeping }),
+      check('schedule', current, { artifactSource: source, renderedHead: bookkeeping, runHead: bookkeeping }),
       'verified=false',
-      'schedule artifact rendered HEAD must match selected source',
+      'schedule artifact rendered HEAD must match its pinned source',
     );
   } finally {
     rmSync(root, { recursive: true, force: true });
