@@ -285,7 +285,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'gruyere-studio-mobilita-profondo',
  category: 'novita',
  date: '2026-11-20T10:27:53.106Z',
- image: '/images/blog/article-aadorf-spese-sociali-2027.webp',
+ image: '/images/blog/article-gruyere-studio-mobilita-profondo.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['FR'],
