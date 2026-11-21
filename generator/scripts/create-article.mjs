@@ -17430,7 +17430,16 @@ async function translateArticle(data) {
           numericCommas.add(comma);
         }
       }
-      const isAssociationBoundary = (index) => spanBoundary(value[index]) && !numericCommas.has(index);
+      // A leading locative such as "In Zugo," belongs to the fact that
+      // follows it. Preserve that place as evidence even when the source
+      // has no comma. Other commas still separate independent facts.
+      const locativeCommas = new Set();
+      for (const match of value.matchAll(/(?:^|[\n;!?|])[^\S\n]*(?:[AaÀà]|[Ii]n|[Aa]t|[Aa]u|[Aa]ux|[Zz]u)[^\S\n]+[\p{Lu}][\p{L}\p{M}’'-]*[^\S\n]*,/gu)) {
+        locativeCommas.add(match.index + match[0].length - 1);
+      }
+      const isAssociationBoundary = (index) => spanBoundary(value[index])
+        && !numericCommas.has(index)
+        && !locativeCommas.has(index);
       const associations = numberEntries.map(({
         value: number,
         index,

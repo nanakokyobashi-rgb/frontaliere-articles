@@ -1851,6 +1851,14 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
   );
 
   const mixedAnchorsSource = 'Lugano: 100 richieste; la risposta arriva dopo 12 giorni.';
+  const locativeSource = 'A Zugo il contributo è di 12 franchi; Zugo rimborsa anche 18 franchi.';
+  const locativeTarget = 'In Zugo, the contribution is 12 francs; Zugo also reimburses 18 francs.';
+  assert.equal(await makeTranslator(() => locativeTarget, 50)(locativeSource), locativeTarget);
+
+  const twoPlacesSource = 'A Zugo il contributo è di 12 franchi; a Baar il contributo è di 18 franchi.';
+  const swappedPlaces = 'In Baar, the contribution is 12 francs; in Zugo, the contribution is 18 francs.';
+  assert.equal(await makeTranslator(() => swappedPlaces, 50)(twoPlacesSource), null);
+
   const mixedAnchorsTarget = 'Lugano: 100 applications; the response arrives after 12 days.';
   assert.equal(
     await makeTranslator(() => mixedAnchorsTarget, 50)(mixedAnchorsSource),
