@@ -17437,10 +17437,10 @@ async function translateArticle(data) {
       const startsAssociation = (index) => spanBoundary(value[index])
         || (value[index] === '.' && /\s/u.test(value[index + 1] ?? ''));
       const placeWord = /[\p{Lu}][\p{L}\p{M}’'-]*/.source;
-      const placeAbbreviation = /(?:St|Ste|S)\.[\p{Zs}\t]+/.source;
+      const placeAbbreviation = /(?:St|Ste|S|Mt|Mte)\.[\p{Zs}\t]+/.source;
       const placePart = `(?:${placeAbbreviation})?${placeWord}`;
-      const locativePrefix = /(?:^|[\n,:;!?|]|\.(?=\s))[^\S\n]*(?:>[^\S\n]*)*(?:(?:[-+*]|\d+[.)])[^\S\n]+)?/.source;
-      const locativePreposition = /(?:[AaÀà]|[Ii]n|[Aa]t|[Aa]u|[Aa]ux|[Zz]u|[Nn]el(?:l[aeio])?|[Nn]ei|[Nn]egli|[Ii]m|[Aa]m|[Ee]n)[\p{Zs}\t]+/.source;
+      const locativePrefix = /(?:^|(?<=[\n,:;!?|])|(?<=\.)(?=\s))[^\S\n]*(?:>[^\S\n]*)*(?:(?:[-+*]|\d+[.)])[^\S\n]+)?(?:[("\[“‘«‹][^\S\n]*)*/.source;
+      const locativePreposition = /(?:[AaÀà]|[Ii]n|[Aa]t|[Aa]u|[Aa]ux|[Zz]u|[Nn]el(?:l[aeio])?|[Nn]ei|[Nn]egli|[Ii]m|[Aa]m|[Ee]n|[Aa]l(?:l[aeio])?|[Aa]gli|[Oo]n|[Dd]ans|[Ss]ur|[Aa]n)[\p{Zs}\t]+/.source;
       const placeArticle = /(?:(?:di|del|della|de|du|des|la|le|der|den|dem|the)[\p{Zs}\t]+)?/.source;
       const placeContinuation = /(?:di|de|del|della|la|le|am|im)[\p{Zs}\t]+/.source;
       const leadingLocative = new RegExp(
