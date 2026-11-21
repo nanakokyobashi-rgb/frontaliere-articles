@@ -726,7 +726,7 @@ case "$1" in
   *) exit 1 ;;
 esac
 `, { mode: 0o755 });
-    const check = (mode, expected, renderedHead = source) => {
+    const check = (mode, expected, { artifactSource = source, renderedHead = artifactSource } = {}) => {
       const output = path.join(root, 'output');
       writeFileSync(output, '');
       execFileSync('bash', [verifier], {
@@ -741,18 +741,36 @@ esac
           }),
           FIXTURE_ARTIFACT: JSON.stringify({
             section: 'canton-ur', dispatch_nonce: nonce, dispatch_cohort: cohort,
-            source_commit: source, source_main_commit: source, rendered_head: renderedHead,
+            source_commit: artifactSource, source_main_commit: artifactSource, rendered_head: renderedHead,
             fresh: 'true', coordinated_recovery: 'true',
           }),
         },
       });
       return readFileSync(output, 'utf8').split('\n')[0];
     };
+    assert.equal(
+      check('event', bookkeeping, { artifactSource: bookkeeping }),
+      'verified=true',
+      'event keeps pinned source for artifact validation',
+    );
+    assert.equal(
+      check('schedule', bookkeeping),
+      'verified=true',
+      'schedule keeps the selected run source',
+    );
     for (const mode of ['event', 'schedule']) {
-      assert.equal(check(mode, bookkeeping), 'verified=true', mode);
       assert.equal(check(mode, changed), 'verified=false', mode);
-      assert.equal(check(mode, bookkeeping, bookkeeping), 'verified=false', mode);
     }
+    assert.equal(
+      check('event', bookkeeping, { artifactSource: bookkeeping, renderedHead: source }),
+      'verified=false',
+      'event artifact rendered HEAD must match pinned source',
+    );
+    assert.equal(
+      check('schedule', bookkeeping, { renderedHead: bookkeeping }),
+      'verified=false',
+      'schedule artifact rendered HEAD must match selected source',
+    );
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
