@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-soletta-preventivo-approvato.webp",
-      "sha256": "88208239e394cd53923138d0d39916a06fa7db1244e59a85059327092d573f57"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-soletta-preventivo-approvato-480w.webp",
-      "sha256": "821d2153514da2a7dd9e3b2e5f754983f5dd92966e2663e7f26d368fa5ca5b11"
-    }
-  ]
+  "items": []
 }
