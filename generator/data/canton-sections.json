@@ -5365,6 +5365,19 @@
           "notes": "Elenco ufficiale iCMS con titolo, link e data nel data-entities. Verificati HTTP 200 e robots.txt senza direttive il 20.11.2026."
         },
         {
+          "url": "https://www.gde-engelberg.ch/aktuellesinformationen",
+          "format": "html",
+          "parser": "json-entities",
+          "publisher": "Einwohnergemeinde Engelberg",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": ["fisco", "mobilita", "servizi", "eventi"],
+          "quirks": {},
+          "items7d": 1,
+          "verifiedAt": "2026-11-21",
+          "notes": "Avvisi ufficiali iCMS. Il parser legge titolo, data e link da data-entities. Verificati l'elenco e il dettaglio del bollettino comunale del 19.11.2026 sulla zona a 30 km/h."
+        },
+        {
           "url": "https://www.giswil.ch/aktuellesinformationen",
           "format": "html",
           "parser": "json-entities",
