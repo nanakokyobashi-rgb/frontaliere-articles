@@ -270,4 +270,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'uri-parere-trasporti-eccezionali',
+ category: 'novita',
+ date: '2026-11-21T04:34:25.602Z',
+ image: '/images/blog/article-uri-parere-trasporti-eccezionali.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['UR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

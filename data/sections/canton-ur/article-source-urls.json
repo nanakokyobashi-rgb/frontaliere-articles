@@ -108,5 +108,11 @@
     "articleId": "blocco-roccia-meiental",
     "ts": "2026-11-20T16:58:49.593Z",
     "keyForm": 2
+  },
+  "https://www.ur.ch/_rte/information/139405": {
+    "articleId": "uri-parere-trasporti-eccezionali",
+    "ts": "2026-11-21T04:34:26.159Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "4688eaf8551f3bdf81e96e25ca73f0cbdd4f885da55794832034cc35058ef9a4"
   }
 }
