@@ -27,6 +27,14 @@
     "canton-fr::https://www.freiburger-nachrichten.ch/story/306108/der-sensebezirk-hat-neu-ein-gesundheitszentrum": {
       "section": "canton-fr",
       "ts": 1795264475364
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/307068/freiburger-wirtschaft-legt-wieder-zu": {
+      "section": "canton-fr",
+      "ts": 1795269344235
+    },
+    "canton-fr::https://www.laliberte.ch/articles/regions/broye/le-budget-revu-a-la-hausse-est-valide-1491087": {
+      "section": "canton-fr",
+      "ts": 1795270449592
     }
   }
 }
