@@ -124,7 +124,7 @@ test('la matrix ha un solo job completo per sezione/shard', () => {
     /strategy:\s+fail-fast: false\s+#[^\n]*\n(?:\s+#.*\n)*\s+matrix:[\s\S]*?target: \$\{\{ fromJSON\(needs\.resolve\.outputs\.matrix\) \}\}/u,
   );
   assert.match(workflow, /del\(\.ids\)/u);
-  assert.doesNotMatch(workflow, /queue: max/u);
+  assert.match(workflow, /queue: max/u);
   assert.doesNotMatch(workflow, /max-parallel:/u);
 });
 

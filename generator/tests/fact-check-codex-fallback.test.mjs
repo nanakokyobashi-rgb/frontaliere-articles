@@ -22,7 +22,7 @@ import { AI_MODELS, callLLM, estimateRequestTokens, resetState } from '../script
 import { addIndependentVote, extractFactCheckJson } from '../scripts/lib/fact-check-response.mjs';
 import { FACT_CHECK_CATEGORIES } from '../scripts/lib/article-factuality-gates.mjs';
 import { cantonPromptLines } from '../scripts/lib/canton-section-profile.mjs';
-import { extractSyntheticReferenceEvidence } from '../scripts/lib/editorial-originality.mjs';
+import { MIN_EDITORIAL_ARTICLE_ANCHORS, extractSyntheticReferenceEvidence } from '../scripts/lib/editorial-originality.mjs';
 import * as taxRates from '../scripts/lib/irpef-scaglioni.mjs';
 import { JSON_QUOTE_SAFETY_RULE_IT } from '../scripts/lib/llm-json-repair.mjs';
 
@@ -154,7 +154,8 @@ describe('llmFactCheck wiring', () => {
     const firstIndependent = SRC.indexOf('AI_MODELS.GROQ_GPT_OSS_120B', candidates);
     assert.ok(candidates >= 0 && candidates < start, 'candidati Codex non dichiarati prima del fallback');
     assert.ok(codex >= candidates && codex < firstIndependent, 'Codex non è il primo verificatore');
-    assert.ok(SRC.indexOf('const modelsToQuery = verificationModels.slice(0, 2);') < start);
+    const primaryPair = SRC.indexOf('const primaryModels = verificationModels.slice(0, 2);', candidates);
+    assert.ok(primaryPair > firstIndependent && primaryPair < start, 'le due preferenze primarie devono precedere il fallback');
     // If the primary lane gives no vote, do not publish an article with a
     // single free opinion (review of PR #1871).
     assert.match(block, /if \(modelResults\.length < 2 && !codexAlreadyVoted && isModelAvailable\(AI_MODELS\.CODEX_CLI_PRIMARY\)\) \{/);
@@ -216,55 +217,110 @@ describe('llmFactCheck wiring', () => {
 });
 
 
-test('an infrastructure retry keeps a validated vote and seeks a different serving model', async () => {
+describe('infrastructure retries with a retained vote', () => {
   const start = SRC.indexOf('  const modelResults = [];', SRC.indexOf('const verificationCandidates = ['));
-  const end = SRC.indexOf('  // ── Codex Luna Max safety fallback', start);
-  assert.ok(start >= 0 && end > start);
-  const votes = [
-    { verdict: 'PASS', confidence: 0.9, issues: [], servedBy: 'first-serving-model' },
-    null,
-    null,
-    { verdict: 'FAIL', confidence: 0.9, issues: [], servedBy: 'second-serving-model' },
-  ];
-  const calls = [];
-  let now = 160_000;
-  const result = await runInNewContext(`(async () => {
-    ${SRC.slice(start, end)}
-    return modelResults;
-  })()`, {
-    AI_MODELS,
-    Date: { now: () => now },
-    RUN_START_MS: 0,
-    RUN_WALL_BUDGET_MS: 240_000,
-    addIndependentVote,
-    console: { error() {} },
-    editorialContext: {},
-    isEvergreenArticle: false,
-    prompt: 'same article',
-    compactPrompt: null,
-    estimateRequestTokens,
-    safeSignalDiagnosticTextForLog: String,
-    setTimeout: (callback, delay) => { now += delay; callback(); },
-    verificationModels: [CODEX, AI_MODELS.GROQ_GPT_OSS_120B],
-    async _runSingleFactCheck(model, prompt, options) {
-      calls.push({ model, prompt, options, now });
-      const vote = votes.shift() ?? null;
-      if (!vote) now = options.deadlineMs;
-      return vote;
-    },
+  const end = SRC.indexOf('  // An original editorial contribution', start);
+  const groq = AI_MODELS.GROQ_GPT_OSS_120B;
+  const editorialContext = { articleBody: 'Corpo sintetico', evidenceText: 'Fonte sintetica' };
+  const prompt = 'same article';
+
+  async function runRounds(firstServingModel, respond, initialTime = 160_000) {
+    assert.ok(start >= 0 && end > start);
+    const calls = [];
+    const logs = [];
+    let now = initialTime;
+    const result = await runInNewContext(`(async () => {
+      ${SRC.slice(start, end)}
+      return { votes: modelResults };
+    })()`, {
+      AI_MODELS,
+      Date: { now: () => now },
+      RUN_START_MS: 0,
+      RUN_WALL_BUDGET_MS: 240_000,
+      addIndependentVote,
+      console: { error: (message) => logs.push(message) },
+      editorialContext,
+      isEvergreenArticle: false,
+      isModelAvailable: () => true,
+      _codexWroteThisHeadline: false,
+      remediationSourceText: '',
+      isSharedTransientFactCheckRosterOutage: () => false,
+      prompt,
+      compactPrompt: null,
+      estimateRequestTokens,
+      safeSignalDiagnosticTextForLog: String,
+      setTimeout: (callback, delay) => { now += delay; callback(); },
+      verificationModels: [CODEX, groq],
+      async _runSingleFactCheck(model, prompt, options) {
+        calls.push({ model, prompt, options, now });
+        if (calls.length === 2 && model === groq) {
+          return { verdict: 'PASS', confidence: 0.9, issues: [], servedBy: firstServingModel };
+        }
+        const servedBy = respond(model, options, now);
+        if (servedBy) return { verdict: 'FAIL', confidence: 0.9, issues: [], servedBy };
+        // The parallel Codex call and first recovery consume the round's budget.
+        if (calls.length <= 3 || options.codexOnly) now = options.deadlineMs;
+        throw new Error('synthetic broker timeout');
+      },
+    });
+    for (const call of calls) {
+      assert.equal(call.prompt, prompt);
+      assert.equal(call.options.editorialContext, editorialContext);
+    }
+    assert.ok(logs.some((line) => line.includes('synthetic broker timeout')));
+    assert.ok(logs.some((line) => line.includes('un solo parere indipendente')));
+    return { result, calls };
+  }
+
+  test('the retained vote gets a fresh Groq-first retry after Codex times out', async () => {
+    const first = 'first-serving-model';
+    const second = 'second-serving-model';
+    const { result, calls } = await runRounds(first, (model, options, now) => (
+      model === groq && options.fresh && now < options.deadlineMs
+        && options.excludeModels.includes(first) && options.excludeModels.includes(CODEX) ? second : null
+    ));
+    assert.deepEqual(calls.map(({ model }) => model), [CODEX, groq, CODEX, groq]);
+    assert.deepEqual(calls.map(({ options }) => options.fresh), [false, false, undefined, true]);
+    assert.deepEqual(calls.slice(0, 3).map(({ options }) => options.deadlineMs), [175_000, 175_000, 175_000]);
+    assert.deepEqual(Array.from(calls[3].options.excludeModels), [first, CODEX]);
+    assert.equal(calls[3].options.invalidVerdictModels, calls[0].options.invalidVerdictModels);
+    assert.ok(calls[3].options.deadlineMs > calls[3].now);
+    assert.ok(calls[3].options.deadlineMs < 220_000);
+    assert.deepEqual(Array.from(result.votes, ({ verdict, servedBy }) => [verdict, servedBy]), [
+      ['PASS', first],
+      ['FAIL', second],
+    ]);
   });
-  assert.deepEqual(Array.from(result, ({ verdict, servedBy }) => [verdict, servedBy]), [
-    ['PASS', 'first-serving-model'],
-    ['FAIL', 'second-serving-model'],
-  ]);
-  assert.equal(calls.length, 4);
-  assert.equal(calls[3].prompt, 'same article');
-  assert.equal(calls[3].options.fresh, true);
-  assert.equal(calls[0].options.deadlineMs, 175_000);
-  assert.equal(calls[2].options.deadlineMs, 175_000);
-  assert.ok(calls[3].options.deadlineMs > calls[3].now);
-  assert.ok(calls[3].options.deadlineMs < 220_000);
-  assert.ok(calls[3].options.excludeModels.includes('first-serving-model'));
+
+  test('a serving Groq vote leaves no unused preference for immediate recovery', async () => {
+    const { result, calls } = await runRounds(groq, () => null, 150_000);
+    const retries = calls.slice(3, -1);
+    assert.ok(retries.length > 0);
+    assert.equal(new Set(retries.map(({ options }) => options.deadlineMs)).size, retries.length);
+    for (const { model, options } of retries) {
+      assert.equal(model, CODEX);
+      assert.equal(options.fresh, true);
+      assert.deepEqual(Array.from(options.excludeModels), [groq]);
+    }
+    assert.equal(calls.at(-1).model, CODEX);
+    assert.equal(calls.at(-1).options.codexOnly, true);
+    assert.equal(result.passed, false);
+    assert.equal(result.unverified, true);
+    assert.match(result.issues[0].reason, /Un solo verificatore/);
+  });
+
+  test('failed Groq-first retry recovers once through fresh Codex on the same deadline', async () => {
+    const first = 'first-serving-model';
+    const { result, calls } = await runRounds(first, (model, options, now) => (
+      model === CODEX && options.fresh && now < options.deadlineMs ? CODEX : null
+    ));
+    assert.deepEqual(calls.map(({ model }) => model), [CODEX, groq, CODEX, groq, CODEX]);
+    assert.equal(calls[3].options.fresh, true);
+    assert.equal(calls[4].options.fresh, true);
+    assert.equal(calls[4].options.deadlineMs, calls[3].options.deadlineMs);
+    assert.deepEqual(Array.from(calls[4].options.excludeModels), [first]);
+    assert.deepEqual(Array.from(result.votes, ({ servedBy }) => servedBy), [first, CODEX]);
+  });
 });
 
 describe('fact-check retries under a reported input cap', () => {
@@ -291,10 +347,11 @@ describe('fact-check retries under a reported input cap', () => {
   async function runRounds({
     canton = 'San Gallo', section = 'san-gallo', isCanton = true, isFrontaliere = false,
     sourceUrl = 'HTTPS://example.test/news', sourceText = source, padding = '', replies,
+    initialTime = 160_000, consumeWindow = false,
   }) {
     const calls = [];
     const logs = [];
-    let now = 160_000;
+    let now = initialTime;
     const cantonLines = cantonPromptLines({ cantonName: canton, section });
     const result = await runInNewContext(`
       ${SRC.slice(start, end)}
@@ -319,6 +376,7 @@ describe('fact-check retries under a reported input cap', () => {
       SECTION_NAME: section,
       CANTON_FACTS_BRIEF: '',
       evergreenFactsBriefFor: () => '',
+      MIN_EDITORIAL_ARTICLE_ANCHORS,
       extractSyntheticReferenceEvidence,
       VERIFIED_DOMAIN_FACTS: domainFacts,
       JSON_QUOTE_SAFETY_RULE_IT,
@@ -332,12 +390,36 @@ describe('fact-check retries under a reported input cap', () => {
         assert.ok(calls.length < replies.length, 'chiamata di verifica inattesa');
         const reply = replies[calls.length];
         calls.push({ model, prompt, options });
+        if (consumeWindow) now = Math.max(now, options.deadlineMs);
         if (reply instanceof Error) throw reply;
         return reply;
       },
     });
     return { ...result, calls, logs, cantonLines };
   }
+
+  test('keeps a usable verification window when a 429 arrives late', async () => {
+    const rateLimit = new Error('HTTP 429');
+    const { calls, modelResults, logs } = await runRounds({
+      initialTime: 214_000,
+      replies: [rateLimit, rateLimit, rateLimit],
+    });
+    assert.equal(modelResults.length, 0);
+    assert.ok(calls.length >= 2);
+    assert.ok(calls.every(({ options }) => options.deadlineMs === 233_500));
+    assert.ok(!logs.some((message) => message.includes('tentativo 2')));
+  });
+
+  test("a late 429 leaves time for the final verifier", async () => {
+    const rateLimit = new Error("HTTP 429");
+    const { calls } = await runRounds({
+      initialTime: 180_000,
+      consumeWindow: true,
+      replies: [rateLimit, rateLimit, rateLimit],
+    });
+    assert.ok(calls.length >= 2);
+    assert.ok(calls.every(({ options }) => options.deadlineMs === 195_000));
+  });
 
   async function loadFor(target, locale = {}) {
     const { prompt } = await runRounds({ ...locale, replies: [firstVote, secondVote] });

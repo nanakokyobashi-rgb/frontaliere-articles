@@ -9623,6 +9623,8 @@ export async function callLLM(messages, opts = {}) {
   // classifyExhaustionCause) because it is the one failure class a caller can
   // actually act on: see the err.retryRequestTokenBudget block at the throw.
   const inputCapSkips = [];
+  let deadlineExpiredBeforeCascade = false;
+  let providerCallStarted = false;
 
   for (let i = 0; i < chain.length; i++) {
     const model = chain[i];
@@ -9637,12 +9639,13 @@ export async function callLLM(messages, opts = {}) {
     // before any between-call check got a chance to run. No-op unless the
     // caller opts in via opts.deadlineMs.
     if (deadlineMs !== undefined && Date.now() > deadlineMs) {
+      deadlineExpiredBeforeCascade = !providerCallStarted;
       // Wording matters: classifyExhaustionCause()'s transientRe (below) keys off
       // "timeout"/"aborted" to bucket a cascade's errors as transient (recoverable
       // next run) vs persistent (needs intervention). A budget-exhaustion skip is
       // transient by nature, but the original "aborting" (present tense) matched
       // neither regex — when this is the *only* error (deadline already past at
-      // i===0, exactly the case this fix targets), that left the cascade
+      // any provider call, exactly the case this fix targets), that left the cascade
       // unclassified, so create-article.mjs's catch-all treated it as a hard
       // failure (exit 1) instead of a graceful defer. Fixed per PR #3307 review.
       pushError(`${model}: skipped — wall-clock deadline exceeded (timeout), aborted remaining chain (${chain.length - i} models left)`);
@@ -9822,6 +9825,7 @@ export async function callLLM(messages, opts = {}) {
           if (hasFallback) callOpts.deadlineMs = deadlineMs - reserveMs;
         }
       }
+      providerCallStarted = true;
       const result = await _callModelWithCodexTransportRetry(model, messages, callOpts);
       const servedModel = callModelRef.model || model;
 
@@ -10352,6 +10356,7 @@ export async function callLLM(messages, opts = {}) {
 
   const err = new Error(message);
   err.code = 'ALL_MODELS_EXHAUSTED';
+  err.deadlineExpiredBeforeCascade = deadlineExpiredBeforeCascade;
   // Always defined (null when no model refused on size), so a caller can branch
   // on presence without probing for undefined properties.
   err.inputCapReport = capReport;

@@ -618,6 +618,8 @@ jobs:
     # not write the same shard while this run is publishing it.
     concurrency:
       group: fast-publish-article-${{ matrix.target.shard }}
+      # Each pending plan may contain article IDs absent from later pushes.
+      queue: max
       cancel-in-progress: false
     # The pre-purge observation and recovery gate share this hard base budget.
     # The article-shard helper expands it to one absolute Pages window plus an
