@@ -491,6 +491,15 @@ test('pageTitleEvidence chiude il percorso su un tag non terminato', () => {
   const malformed = '<meta data="<title>Titolo falso</title>';
   assert.equal(pageTitleEvidence(malformed), '', 'un titolo dopo il tag malformato non e\' evidenza attiva');
 
+  const partial = '<meta property="og:title" content="META_REALE">'
+    + '<title>TITLE_REALE</title><h1>H1_REALE</h1>'
+    + '<div data="pagina troncata';
+  assert.equal(
+    pageTitleEvidence(partial),
+    '',
+    'un tag malformato dopo evidenza valida invalida tutta l\'estrazione',
+  );
+
   // Ogni apertura apparente lascia la ricerca di `>` senza una chiusura: il
   // vecchio caller riprovava dall\'apertura successiva e diventava quadratico.
   const repeated = '<meta data=' + '<x '.repeat(16000) + '"';
