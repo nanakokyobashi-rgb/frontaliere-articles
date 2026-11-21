@@ -161,4 +161,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'hospitale-jura-bwk-esercitazione',
+ category: 'pratico',
+ date: '2026-11-21T06:26:15.732Z',
+ image: '/images/blog/article-hospitale-jura-bwk-esercitazione.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['JU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

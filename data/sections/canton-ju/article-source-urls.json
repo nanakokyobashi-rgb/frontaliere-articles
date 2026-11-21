@@ -68,5 +68,11 @@
     "articleId": "ospedale-giura-solidita-finanziaria",
     "ts": "2026-11-12T04:54:59.755Z",
     "keyForm": 2
+  },
+  "https://www.h-ju.ch/fr/a-propos/medias-presse/communiques-de-presse/l-hopital-du-jura-et-bkw-s-entrainent-ensemble-pour-renforcer-la-securite-des-interventions-d-urgence.html": {
+    "articleId": "hospitale-jura-bwk-esercitazione",
+    "ts": "2026-11-21T06:26:16.104Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "dd4e31e0c139c2f777f5be827762577db02a3edd759efce5b4d75cd208d766c6"
   }
 }

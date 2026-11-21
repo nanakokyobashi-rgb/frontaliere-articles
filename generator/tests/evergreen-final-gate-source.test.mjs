@@ -368,3 +368,73 @@ test('#7 il brief cantonale è un riferimento verificato separato dalla fonte, a
     'il controllo annuale cantonale deve essere l’ultimo gate fattuale prima della generazione immagine/scrittura');
   assert.match(pipeline, /IS_CANTON && CANTON_FACTS_BRIEF && url\.startsWith\('evergreen:\/\/'\)/);
 });
+
+const FINAL_GATE_STEPS = [
+  ['repairArticleEditorialClaims', 'editorial-repair'],
+  ['assertItalianArticlePassesFactualityGates', 'italian-factuality'],
+  ['assertTranslationsPassFactualityGates', 'translated-factuality'],
+  ['assertNoFiscalErrorsInLocales', 'locale-fiscal'],
+  ['assertNoCorpusFabricatedInstitutionNames', 'fabricated-institutions'],
+  ['assertLocalizedToponyms', 'localized-toponyms'],
+  ['cantonRelevanceMatcher', 'editorial-relevance'],
+  ['assertArticleRelevance', 'editorial-relevance'],
+  ['assertYmylPublishable', 'ymyl-publishability'],
+  ['assertPublishedEditorialClaims', 'editorial-claims'],
+];
+
+function makeStubbedFinalGate(failure) {
+  const calls = [];
+  const diagnostics = [];
+  const factory = new Function(
+    'console',
+    ...FINAL_GATE_STEPS.map(([name]) => name),
+    `${cutFunction('assertArticlePassesFactualityGates')}\nreturn assertArticlePassesFactualityGates;`,
+  );
+  const gate = factory(
+    { error: (...args) => diagnostics.push(args) },
+    ...FINAL_GATE_STEPS.map(([name]) => () => {
+      calls.push(name);
+      if (name === failure?.step) throw failure.error;
+    }),
+  );
+  return { gate, calls, diagnostics };
+}
+
+test('il gate finale registra una sola fase per ogni rigetto tipizzato e rilancia lo stesso errore', () => {
+  const sentinel = 'testo-sentinella-da-oscurare';
+  for (const [step, stage] of FINAL_GATE_STEPS) {
+    for (const flag of ['qualityReject', 'topicGateAbort']) {
+      const error = Object.assign(new Error(sentinel), { [flag]: true });
+      const { gate, diagnostics } = makeStubbedFinalGate({ step, error });
+
+      assert.throws(() => gate({ id: sentinel }, { sectionName: sentinel }), (caught) => caught === error);
+      assert.deepEqual(diagnostics, [[`FINAL_ARTICLE_GATE_REJECT stage=${stage}`]], step);
+    }
+  }
+});
+
+test('il gate finale rilancia gli errori ordinari senza emettere il marker', () => {
+  const error = Object.assign(new Error('testo-sentinella-da-oscurare'), {
+    qualityReject: 'true',
+    topicGateAbort: 1,
+  });
+  const { gate, diagnostics } = makeStubbedFinalGate({ step: 'assertYmylPublishable', error });
+
+  assert.throws(() => gate({}), (caught) => caught === error);
+  assert.deepEqual(diagnostics, []);
+});
+
+test('il gate finale conserva l’ordine e il salto journalist senza emettere marker a successo', () => {
+  for (const writer of [undefined, 'journalist']) {
+    const { gate, calls, diagnostics } = makeStubbedFinalGate();
+    const expected = FINAL_GATE_STEPS
+      .filter(([, stage]) => writer !== 'journalist' || (
+        stage !== 'editorial-relevance' && stage !== 'ymyl-publishability'
+      ))
+      .map(([name]) => name);
+
+    gate({}, { writer });
+    assert.deepEqual(calls, expected);
+    assert.deepEqual(diagnostics, []);
+  }
+});

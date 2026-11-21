@@ -45,6 +45,9 @@ const blogMetaCantonSzIt: Record<string, string> = {
     'blog.article.svitto-seminario-wohnraum-rickenbach.title': 'Governo Svitto valuta ex seminario Rickenbach per abitazioni',
     'blog.article.svitto-seminario-wohnraum-rickenbach.excerpt': 'L\'ex seminario per insegnanti di Rickenbach è valutato per uso abitativo; il trasferimento degli uffici cantonali è previsto non prima del primo semestre 2030.',
     'blog.article.svitto-seminario-wohnraum-rickenbach.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.piani-rete-ciclabile-svitto.title': 'Emanati i piani ciclabili cantonali del Canton Svitto',
+    'blog.article.piani-rete-ciclabile-svitto.excerpt': 'La rete prevista ammonta a 1.152 km, di cui 280 km per spostamenti quotidiani e 872 km per tempo libero.',
+    'blog.article.piani-rete-ciclabile-svitto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSzIt;

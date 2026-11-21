@@ -22,6 +22,7 @@
  */
 
 import { JSDOM, VirtualConsole } from 'jsdom';
+import { LOCALE_LEXICON } from './article-locale-lexicon.mjs';
 
 // Lazy reference avoids breaking older jsdom that doesn't export VirtualConsole.
 function require_virtual_console_lazy() {
@@ -112,11 +113,11 @@ function extractFromJsonLd(root, include = () => true) {
  * Added 2026-07-28: a 25 January 2026 source was republished as fresh news on
  * 28 July 2026, in the future tense, because nothing in the pipeline ever
  * looked at when the source was written. Reads JSON-LD `datePublished` first
- * then metadata explicitly labelled as publication. Creation, modification,
- * generic date metadata and unlabelled time elements do not establish when
+ * then metadata explicitly labelled as publication and the iCMS detail date.
+ * Creation, modification, generic date metadata and unlabelled time elements do not establish when
  * the source was published; leave the date unknown instead of making it fresh.
  */
-export function extractPublishedDate(document) {
+export function extractPublishedDate(document, editorialRoot = null) {
   const scripts = document.querySelectorAll('script[type="application/ld+json"]');
   for (const script of scripts) {
     let parsed;
@@ -150,7 +151,32 @@ export function extractPublishedDate(document) {
   const timeRaw = timeEl ? (timeEl.getAttribute('datetime') || '').trim() : '';
   if (timeRaw && !Number.isNaN(new Date(timeRaw).getTime())) return new Date(timeRaw).toISOString();
 
-  return '';
+  // The caller's editorial root is article-first, then main. Keep the date
+  // lookup inside that same root so a visible date in an unrelated shell does
+  // not establish publication for the article being extracted.
+  const inactiveRootSelector = 'nav, aside, footer, template, noscript, [hidden], [aria-hidden="true"]';
+  const root = editorialRoot || selectEditorialRoot(document);
+  if (!root || root.closest(inactiveRootSelector)) return '';
+  // Only a single visible iCMS detail date can establish publication.
+  const detailDates = [...root.querySelectorAll('div.icms-lead-container > div.icms-information-date')]
+    .filter(el => !el.closest(inactiveRootSelector));
+  if (detailDates.length !== 1) return '';
+
+  const match = /^(\d{1,2})\.\s+(\p{L}+)\s+(\d{4})$/u.exec(detailDates[0].textContent.trim());
+  if (!match) return '';
+  const [, dayText, monthName, yearText] = match;
+  const day = Number(dayText);
+  const year = Number(yearText);
+  const months = LOCALE_LEXICON.de.months;
+  const monthKey = monthName.toLowerCase();
+  if (!Object.hasOwn(months, monthKey)) return '';
+  const month = months[monthKey];
+  const date = new Date(0);
+  date.setUTCFullYear(year, month - 1, day);
+  if (date.getUTCFullYear() !== year
+    || date.getUTCMonth() !== month - 1
+    || date.getUTCDate() !== day) return '';
+  return date.toISOString();
 }
 
 function extractFromMeta(document, selector) {
@@ -760,6 +786,16 @@ function extractParagraphs(root, maxChars = Number.POSITIVE_INFINITY, fallbacks 
   return out;
 }
 
+function selectEditorialRoot(document, fallbacks = null) {
+  const article = document.querySelector('article');
+  if (extractParagraphs(article, Number.POSITIVE_INFINITY, fallbacks).length >= 2) return article;
+
+  const main = document.querySelector('main');
+  if (main) return main;
+
+  return article;
+}
+
 /**
  * Extract clean article text from raw HTML.
  *
@@ -793,7 +829,6 @@ export function extractArticleText(html, opts = {}) {
     return naiveFallback(html, maxChars);
   }
   const document = dom.window.document;
-  const publishedAt = extractPublishedDate(document);
   const noscriptSourceMarkup = new WeakMap();
 
   if (opts.scriptingDisabled === true) {
@@ -811,6 +846,14 @@ export function extractArticleText(html, opts = {}) {
     ? mergeNoscriptFallbackBlocks(document, maxChars, noscriptSourceMarkup)
     : null;
 
+  const articleRoot = document.querySelector('article');
+  const articleParagraphs = extractParagraphs(articleRoot, maxChars, noscriptFallbacks);
+  const mainRoot = document.querySelector('main');
+  const mainParagraphs = extractParagraphs(mainRoot, maxChars, noscriptFallbacks);
+  const editorialRoot = articleParagraphs.length >= 2
+    ? articleRoot : mainRoot || articleRoot;
+  const publishedAt = extractPublishedDate(document, editorialRoot);
+
   // 1. JSON-LD articleBody (most reliable)
   const jsonLdBody = noscriptFallbacks
     ? selectNoscriptJsonLdPrecedence(document, noscriptFallbacks)
@@ -821,14 +864,12 @@ export function extractArticleText(html, opts = {}) {
   }
 
   // 2/3. Article-tag with paragraph extraction
-  const articleParagraphs = extractParagraphs(document.querySelector('article'), maxChars, noscriptFallbacks);
   if (articleParagraphs.length >= 2) {
     const text = capExtractedText(articleParagraphs.join('\n\n'), maxChars);
     return { text, method: 'article-tag', paragraphCount: articleParagraphs.length, publishedAt };
   }
 
   // 4. Main-tag with paragraph extraction
-  const mainParagraphs = extractParagraphs(document.querySelector('main'), maxChars, noscriptFallbacks);
   if (mainParagraphs.length >= 2) {
     const text = capExtractedText(mainParagraphs.join('\n\n'), maxChars);
     return { text, method: 'main-tag', paragraphCount: mainParagraphs.length, publishedAt };
@@ -852,8 +893,11 @@ export function extractArticleText(html, opts = {}) {
   }
 
   // 6. Last resort: legacy naive strip — preserves prior behaviour.
-  if (noscriptFallbacks) return safeNoscriptNaiveFallback(document, noscriptFallbacks, maxChars);
-  return naiveFallback(html, maxChars);
+  const fallback = noscriptFallbacks
+    ? safeNoscriptNaiveFallback(document, noscriptFallbacks, maxChars)
+    : naiveFallback(html, maxChars);
+  if (publishedAt) fallback.publishedAt = publishedAt;
+  return fallback;
 }
 
 function naiveFallback(html, maxChars) {

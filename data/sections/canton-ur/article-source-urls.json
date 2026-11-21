@@ -108,5 +108,17 @@
     "articleId": "blocco-roccia-meiental",
     "ts": "2026-11-20T16:58:49.593Z",
     "keyForm": 2
+  },
+  "https://www.ur.ch/_rte/information/139405": {
+    "articleId": "uri-parere-trasporti-eccezionali",
+    "ts": "2026-11-21T04:34:26.159Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "4688eaf8551f3bdf81e96e25ca73f0cbdd4f885da55794832034cc35058ef9a4"
+  },
+  "https://www.ur.ch/_rte/information/139678": {
+    "articleId": "radweg-altdorf-seedorf-lavori",
+    "ts": "2026-11-21T11:01:18.281Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "58c243bd995ca69a460d9a96f966bc23fd8a93b2d9e6bfaab8922b781a972a86"
   }
 }

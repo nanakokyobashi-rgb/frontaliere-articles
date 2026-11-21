@@ -11,6 +11,7 @@ import {
 import { fetchNewsRssDiscoveryCandidates } from '../scripts/lib/discovery/sources/googleNewsRssSource.mjs';
 import { fetchSuggestDiscoveryCandidates } from '../scripts/lib/discovery/sources/googleSuggestSource.mjs';
 import { fetchTrendsDiscoveryCandidates } from '../scripts/lib/discovery/sources/googleTrendsSource.mjs';
+import { sliceBetween } from './lib/anchored-slice.mjs';
 import { ARTICLE_SIGNAL_LOG_HELPERS } from './lib/article-signal-log-harness.mjs';
 
 const SENTINEL = 'private-trends-topic-sentinel';
@@ -133,7 +134,13 @@ test('model parse, retry, rebracket, and translation snippets fail closed for si
   assert.doesNotMatch(CREATE_ARTICLE, /console\.error\(`  🧪 rigetto: \$\{describePayloadRejection/);
   assert.match(CREATE_ARTICLE, /safeSignalDiagnosticTextForLog\(e2\.message, sourceContext\)/);
   assert.match(CREATE_ARTICLE, /safeSignalDiagnosticTextForLog\(retryErr\.message, sourceContext\)/);
-  assert.match(CREATE_ARTICLE, /safeSignalDiagnosticTextForLog\(retry2Err\.message, RUN_REPORT\)/);
+  const callWithRetry = sliceBetween(CREATE_ARTICLE,
+    '  async function callWithRetry(', '\n  // Sub-chunk an oversized field');
+  assert.match(callWithRetry, /catch \(parseErr\) \{\s+const message = safeSignalDiagnosticTextForLog\(parseErr\.message, RUN_REPORT\);/);
+  assert.match(callWithRetry, /console\.error\(`  ⚠️  JSON parse error \(\$\{label\}\): \$\{message\}`\);/);
+  assert.match(callWithRetry, /console\.error\(`  ⚠️  Retry 1 fallito \(\$\{label\}\): \$\{message\} — tentativo 2\.\.\.`\);/);
+  assert.match(callWithRetry, /console\.error\(`  ❌ Retry 2 fallito \(\$\{label\}\): \$\{message\}`\);/);
+  assert.match(callWithRetry, /throw qualityRejectError\(`JSON non valido dalla traduzione \$\{label\}: \$\{message\}`\);/);
   assert.doesNotMatch(CREATE_ARTICLE, /console\.error\([^\n]*\$\{(?:parseErr|retryErr|retry2Err|e2)\.message\s*\}/);
 });
 

@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4108261": {
-    "articleId": "svizzera-difesa-bilancio-iva",
-    "ts": "2026-09-25T20:31:43.992Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/rubriche/ospite/1952768/la-sanita-ha-bisogno-di-incentivi": {
     "articleId": "costi-sanita-incentivi",
     "ts": "2026-09-25T21:17:42.608Z",
@@ -2498,5 +2493,11 @@
     "articleId": "iniziativa-congedo-parentale-riuscita",
     "ts": "2026-11-13T06:03:41.029Z",
     "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4253588": {
+    "articleId": "commissioni-divise-preventivo",
+    "ts": "2026-11-21T05:20:08.826Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "8953bf8b2b513e2180fedeb163a64204de5d2fdf825b5dce9270ccbeae1e413f"
   }
 }

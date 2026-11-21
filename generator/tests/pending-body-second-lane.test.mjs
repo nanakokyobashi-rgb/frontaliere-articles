@@ -55,6 +55,12 @@ import {
   lineStructuralSignature,
   opaqueSpanSignature,
 } from '../scripts/lib/free-translate.mjs';
+import {
+  JSON_QUOTE_SAFETY_RULE_IT,
+  describeJsonParseError,
+  describeRawForDiagnostics,
+  repairLlmJson,
+} from '../scripts/lib/llm-json-repair.mjs';
 import { sanitizeBodyText } from '../scripts/lib/sanitize-body-braces.mjs';
 import { tableHeaderColumnPipeAmbiguity } from '../scripts/lib/html-tag-scanner.mjs';
 
@@ -98,6 +104,35 @@ const makeTableHeaderMarkers = new Function(
 const buildBodyTruncationRetryPrompt = new Function(
   `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${BUILD_BODY_TRUNCATION_RETRY_PROMPT_SRC}\n${extractFunctionSource('function buildPendingBodyRetranslationPrompt(')}\nreturn buildBodyTruncationRetryPrompt;`,
 )();
+function buildCallWithRetry(replies) {
+  const start = src.indexOf('  async function callWithRetry(');
+  const end = src.indexOf('\n  }\n', start);
+  assert.ok(start >= 0 && end > start, 'callWithRetry non trovata');
+  const calls = [];
+  const diagnostics = [];
+  const bindings = {
+    JSON_QUOTE_SAFETY_RULE_IT,
+    callLLM: async (_messages, options) => {
+      assert.ok(calls.length < replies.length, 'chiamata oltre le risposte previste');
+      calls.push(options);
+      return replies[calls.length - 1];
+    },
+    legacyTranslationOptions: () => ({ deadlineMs: 123456, chain: ['legacy-test'] }),
+    repairLlmJson,
+    describeJsonParseError,
+    describeRawForDiagnostics,
+    translatedStringOrNull,
+    safeSignalDiagnosticTextForLog: (message) => message,
+    RUN_REPORT: {},
+    console: { error: (message) => diagnostics.push(message) },
+  };
+  const callWithRetry = new Function(
+    ...Object.keys(bindings),
+    `${extractFunctionSource('function qualityRejectError(')}\n${src.slice(start, end + 4)}\nreturn callWithRetry;`,
+  )(...Object.values(bindings));
+  return { callWithRetry, calls, diagnostics };
+}
+
 const TRANSLATE_IN_CHUNKS_SRC = (() => {
   const start = src.indexOf('  async function translateInChunks(\n    bodyText,\n    fieldKey,\n    makeChunkPrompt,\n    labelPrefix,\n    targetLang,\n    { pretranslatedResult = null, forceLegacy = false, chunkWords } = {},\n  ) {');
   assert.notEqual(start, -1, 'translateInChunks non trovata in create-article.mjs');
@@ -136,6 +171,75 @@ const DE_BODY = {
   body2: 'Die Grenzregionen wenden den Beitrag nach unterschiedlichen Kriterien an. Wer in Como wohnt, zahlt nach den Tabellen der eigenen Region.',
   body3: 'Für Einzelheiten wendet man sich am besten an eine Beratungsstelle. Die Schalter antworten unter der Woche auch telefonisch.',
 };
+
+const HISTORICAL_BODY_OPTIONS = {
+  translation: true,
+  forceLegacy: true,
+  expectedBodyField: 'body1',
+  targetLang: 'de',
+};
+
+test('callWithRetry riprova un body inutilizzabile con lo stesso tetto e la stessa deadline', async () => {
+  const expected = { body1: DE_BODY.body1 };
+  const label = 'de:body1-pending-retry';
+  for (const invalid of [{}, { body1: null }, { body1: 'null' }, { body1: { text: 'payload privato' } }]) {
+    const { callWithRetry, calls, diagnostics } = buildCallWithRetry([
+      JSON.stringify(invalid),
+      `\`\`\`json\n${JSON.stringify(expected)}\n\`\`\``,
+    ]);
+    assert.deepEqual(await callWithRetry('prompt', 5000, label, HISTORICAL_BODY_OPTIONS), expected);
+    assert.deepEqual(calls.map(({ maxTokens, deadlineMs, chain }) => [maxTokens, deadlineMs, chain]), [
+      [5000, 123456, ['legacy-test']],
+      [5000, 123456, ['legacy-test']],
+    ]);
+    assert.equal(diagnostics[0], `TRANSLATION_BODY_REJECT label=${label} reason=unusable-body-field`);
+    assert.equal(diagnostics.length, 2);
+  }
+});
+
+test('callWithRetry esaurisce tre scarti di forma con un errore qualità tipizzato', async () => {
+  const label = 'de:body1-pending-retry';
+  const { callWithRetry, calls, diagnostics } = buildCallWithRetry([
+    '{"body1":{"text":"payload privato"}}', '{"body1":"null"}', '{}',
+  ]);
+  await assert.rejects(
+    callWithRetry('prompt', 5000, label, HISTORICAL_BODY_OPTIONS),
+    { qualityReject: true, code: 'unusable-body-field' },
+  );
+  assert.deepEqual(calls.map(({ maxTokens }) => maxTokens), [5000, 5000, 5000]);
+  assert.deepEqual(diagnostics, Array(3).fill(`TRANSLATION_BODY_REJECT label=${label} reason=unusable-body-field`));
+});
+
+test('callWithRetry conserva il comportamento senza campo atteso e il retry di sintassi', async () => {
+  const unvalidated = buildCallWithRetry(['{}']);
+  assert.deepEqual(await unvalidated.callWithRetry('prompt', 5000, 'generico'), {});
+  assert.equal(unvalidated.calls.length, 1);
+  assert.deepEqual(unvalidated.diagnostics, []);
+
+  const malformed = '{ nope }';
+  const expected = { body1: DE_BODY.body1 };
+  const syntax = buildCallWithRetry([malformed, malformed, JSON.stringify(expected)]);
+  assert.deepEqual(await syntax.callWithRetry('prompt', 5000, 'generico'), expected);
+  assert.deepEqual(
+    syntax.calls.map(({ maxTokens, temperature }) => [maxTokens, temperature]),
+    [[5000, 0.5], [9000, 0.5], [16000, 0.3]],
+  );
+  assert.match(syntax.diagnostics[0], /JSON parse error/);
+
+  const mixed = buildCallWithRetry(['{"body1":"unfinished', '{}', JSON.stringify(expected)]);
+  assert.deepEqual(await mixed.callWithRetry('prompt', 5000, 'storico', HISTORICAL_BODY_OPTIONS), expected);
+  assert.deepEqual(mixed.calls.map(({ maxTokens }) => maxTokens), [5000, 15000, 15000]);
+
+  const missingThenMalformed = buildCallWithRetry(['{}', malformed, JSON.stringify(expected)]);
+  assert.deepEqual(
+    await missingThenMalformed.callWithRetry('prompt', 5000, 'storico', HISTORICAL_BODY_OPTIONS),
+    expected,
+  );
+  assert.deepEqual(
+    missingThenMalformed.calls.map(({ maxTokens, deadlineMs }) => [maxTokens, deadlineMs]),
+    [[5000, 123456], [5000, 123456], [16000, 123456]],
+  );
+});
 
 /** Lo stato di `data` all'uscita dei due loop di recovery nella run 37220516797. */
 function articleWithPendingDeBody1(report) {
@@ -874,7 +978,7 @@ test('il fallback storico corto applica il contratto strutturale prima del final
   const makeHistoricalTranslator = new Function(
     'translateFieldFreeMt', 'translatedStringOrNull', 'balanceMarkdownMarkers',
     'buildPendingBodyRetranslationPrompt', 'countWords', 'TRANSLATION_CHUNK_THRESHOLD',
-    'console', 'lineStructuralSignature',
+    'console', 'lineStructuralSignature', 'pendingBodyLaneShouldStop',
     `${ASSERT_CHUNK_TRANSLATOR_SRC}\n${TABLE_HEADER_MARKER_HELPERS_SRC}\n${src.slice(historicalAt, historicalEnd)}\nreturn translatePendingBodyWithHistoricalChain;`,
   );
   const makeTranslateInChunks = new Function(
@@ -893,6 +997,7 @@ test('il fallback storico corto applica il contratto strutturale prima del final
     TRANSLATION_CHUNK_THRESHOLD,
     { error() {}, warn() {}, log() {} },
     lineStructuralSignature,
+    () => false,
   );
 
   let successfulProviderCalls = 0;
@@ -922,7 +1027,66 @@ test('il fallback storico corto applica il contratto strutturale prima del final
     source.replace('Prima', 'Zuerst'),
   );
   assert.equal(successfulProviderCalls, 1);
-  assert.deepEqual(successfulProviderOptions, { translation: true, forceLegacy: true });
+  assert.deepEqual(successfulProviderOptions, HISTORICAL_BODY_OPTIONS);
+
+  const chunkedSource = Array.from({ length: 360 }, (_, i) => `parola${i}`).join(' ');
+  const chunkOptions = [];
+  const chunkCallWithRetry = async (prompt, _maxTokens, _label, options) => {
+    chunkOptions.push(options);
+    return { body1: prompt.slice('body body1: '.length).replaceAll('parola', 'Wort') };
+  };
+  const chunkTranslator = makeTranslateInChunks(
+    splitIntoTranslationChunks,
+    chunkCallWithRetry,
+    countWords,
+    translatedStringOrNull,
+    isSourcePassthrough,
+    balanceMarkdownMarkers,
+    hasSameLineSkeleton,
+    lineStructuralSignature,
+    detectTruncation,
+    opaqueSpanSignature,
+  );
+  assert.equal(
+    await historical(chunkedSource, 'de', 'body1', {
+      callWithRetry: chunkCallWithRetry,
+      translateInChunks: chunkTranslator,
+    }),
+    chunkedSource.replaceAll('parola', 'Wort'),
+  );
+  assert.deepEqual(chunkOptions, [HISTORICAL_BODY_OPTIONS, HISTORICAL_BODY_OPTIONS]);
+
+  const unusableBodyField = () => {
+    throw Object.assign(new Error('unusable body'), { code: 'unusable-body-field' });
+  };
+  for (const [wordCount, rejectedResponse] of [
+    [165, (translated) => ({ body1: translated.replace(' 40 ', ' 999 ') })],
+    [165, () => ({})],
+    [165, unusableBodyField],
+    [360, unusableBodyField],
+  ]) {
+    const mediumBody = Array.from({ length: wordCount }, (_, i) => i === 40 ? '40' : `parola${i}`).join(' ');
+    const mediumCalls = [];
+    const mediumCallWithRetry = async (prompt) => {
+      const part = prompt.slice('body body1: '.length);
+      mediumCalls.push(countWords(part));
+      const translated = part.replaceAll('parola', 'Wort');
+      return countWords(part) > 120 ? rejectedResponse(translated) : { body1: translated };
+    };
+    const mediumTranslator = makeTranslateInChunks(
+      splitIntoTranslationChunks, mediumCallWithRetry, countWords, translatedStringOrNull,
+      isSourcePassthrough, balanceMarkdownMarkers, hasSameLineSkeleton, lineStructuralSignature,
+      detectTruncation, opaqueSpanSignature,
+    );
+    assert.equal(await historical(mediumBody, 'de', 'body1', {
+      callWithRetry: mediumCallWithRetry,
+      translateInChunks: mediumTranslator,
+    }), mediumBody.replaceAll('parola', 'Wort'));
+    const firstBatchSize = Math.ceil(wordCount / 240);
+    assert.equal(mediumCalls.slice(0, firstBatchSize).reduce((sum, size) => sum + size, 0), wordCount);
+    const shorterCalls = mediumCalls.slice(firstBatchSize);
+    assert.ok(shorterCalls.length >= 2 && shorterCalls.every((size) => size <= 120));
+  }
 
   const table = '| Segmento 2024 | Variazione riportata 2025 |\n|---|---:|\n| Appartamenti | +4,4% |';
   const bodyWithTwoTables = [table, '## Fatti chiave', table].join('\n\n');
@@ -1851,6 +2015,105 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
   );
 
   const mixedAnchorsSource = 'Lugano: 100 richieste; la risposta arriva dopo 12 giorni.';
+  const locativeSource = 'A Zugo il contributo è di 12 franchi; Zugo rimborsa anche 18 franchi.';
+  const locativeTarget = 'In Zugo, the contribution is 12 francs; Zugo also reimburses 18 francs.';
+  assert.equal(await makeTranslator(() => locativeTarget, 50)(locativeSource), locativeTarget);
+
+  const twoPlacesSource = 'A Zugo il contributo è di 12 franchi; a Baar il contributo è di 18 franchi.';
+  const swappedPlaces = 'In Baar, the contribution is 12 francs; in Zugo, the contribution is 18 francs.';
+  assert.equal(await makeTranslator(() => swappedPlaces, 50)(twoPlacesSource), null);
+
+  for (const [source, target, swapped] of [
+    [
+      '- A Zugo ci sono 12 richieste.\n- A Baar ci sono 18 richieste.',
+      '- In Zugo, there are 12 applications.\n- In Baar, there are 18 applications.',
+      '- In Baar, there are 12 applications.\n- In Zugo, there are 18 applications.',
+    ],
+    [
+      '> 1. A Bronx ci sono 12 richieste.\n> 2. A Hague ci sono 18 richieste.',
+      '> 1. In the Bronx, there are 12 applications.\n> 2. In the Hague, there are 18 applications.',
+      '> 1. In the Hague, there are 12 applications.\n> 2. In the Bronx, there are 18 applications.',
+    ],
+    [
+      'A Riva San Vitale ci sono 12 richieste; a Castel San Pietro ci sono 18 richieste.',
+      'In Riva San Vitale, there are 12 applications; in Castel San Pietro, there are 18 applications.',
+      'In Castel San Pietro, there are 12 applications; in Riva San Vitale, there are 18 applications.',
+    ],
+    [
+      'A Zugo ci sono 12 richieste. A Baar ci sono 18 richieste.',
+      'In Zugo, there are 12 applications. In Baar, there are 18 applications.',
+      'In Baar, there are 12 applications. In Zugo, there are 18 applications.',
+    ],
+    [
+      'Nel Ticino ci sono 12 richieste; nella Svizzera ci sono 18 richieste.',
+      'Nel\u202fTicino, ci sono 12 richieste; nella Svizzera, ci sono 18 richieste.',
+      'Nella Svizzera, ci sono 12 richieste; nel Ticino, ci sono 18 richieste.',
+    ],
+    [
+      'In Tessin ci sono 12 richieste; a Bodensee ci sono 18 richieste.',
+      'Im Tessin, gibt es 12 Anträge; am Bodensee, gibt es 18 Anträge.',
+      'Am Bodensee, gibt es 12 Anträge; im Tessin, gibt es 18 Anträge.',
+    ],
+    [
+      'In Suisse ci sono 12 richieste; a Genève ci sono 18 richieste.',
+      'En Suisse, il y a 12 demandes; à Genève, il y a 18 demandes.',
+      'À Genève, il y a 12 demandes; en Suisse, il y a 18 demandes.',
+    ],
+    [
+      'Luogo: In St. Gallen ci sono 12 richieste; Luogo: in St. Moritz ci sono 18 richieste.',
+      'Luogo: In St. Gallen, there are 12 applications; Luogo: in St. Moritz, there are 18 applications.',
+      'Luogo: In St. Moritz, there are 12 applications; Luogo: in St. Gallen, there are 18 applications.',
+    ],
+    [
+      'Al Lake Como ci sono 12 richieste; al Lake Zurich ci sono 18 richieste.',
+      'On Lake Como, there are 12 applications; on Lake Zurich, there are 18 applications.',
+      'On Lake Zurich, there are 12 applications; on Lake Como, there are 18 applications.',
+    ],
+    [
+      '(A Zugo ci sono 12 richieste); «A Baar ci sono 18 richieste».',
+      '(In Zugo, there are 12 applications); «In Baar, there are 18 applications».',
+      '(In Baar, there are 12 applications); «In Zugo, there are 18 applications».',
+    ],
+    [
+      'A Mt. Blanc ci sono 12 richieste; a Mt. Rosa ci sono 18 richieste.',
+      'At Mt. Blanc, there are 12 applications; at Mt. Rosa, there are 18 applications.',
+      'At Mt. Rosa, there are 12 applications; at Mt. Blanc, there are 18 applications.',
+    ],
+    [
+      "'In Zugo ci sono 12 richieste'; *In Baar ci sono 18 richieste*.",
+      "'In Zugo, there are 12 applications'; *In Baar, there are 18 applications*.",
+      "'In Baar, there are 12 applications'; *In Zugo, there are 18 applications*.",
+    ],
+    [
+      '*A Zugo*, ci sono 12 richieste; _a Baar_, ci sono 18 richieste.',
+      '*In Zugo*, there are 12 applications; _In Baar_, there are 18 applications.',
+      '*In Baar*, there are 12 applications; _In Zugo_, there are 18 applications.',
+    ],
+    [
+      'A Zugo ci sono 12 richieste; a Baar ci sono 18 richieste.',
+      '“In Zugo”, there are 12 applications; «In Baar», there are 18 applications.',
+      '“In Baar”, there are 12 applications; «In Zugo», there are 18 applications.',
+    ],
+    [
+      'A Zugo ci sono 12 richieste; a Baar ci sono 18 richieste.',
+      "'In Zugo', there are 12 applications; 'In Baar', there are 18 applications.",
+      "'In Baar', there are 12 applications; 'In Zugo', there are 18 applications.",
+    ],
+    [
+      "All'Aquila ci sono 12 richieste; all'Elba ci sono 18 richieste.",
+      'Nell’Aquila, ci sono 12 richieste; sull’Elba, ci sono 18 richieste.',
+      'Sull’Elba, ci sono 12 richieste; nell’Aquila, ci sono 18 richieste.',
+    ],
+    [
+      'A Zugo ci sono 12 richieste, a Baar ci sono 18 richieste.',
+      'In Zugo, there are 12 applications, in Baar, there are 18 applications.',
+      'In Baar, there are 12 applications, in Zugo, there are 18 applications.',
+    ],
+  ]) {
+    assert.equal(await makeTranslator(() => target, 80)(source), target);
+    assert.equal(await makeTranslator(() => swapped, 80)(source), null);
+  }
+
   const mixedAnchorsTarget = 'Lugano: 100 applications; the response arrives after 12 days.';
   assert.equal(
     await makeTranslator(() => mixedAnchorsTarget, 50)(mixedAnchorsSource),

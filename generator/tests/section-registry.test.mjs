@@ -1742,16 +1742,17 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
     25,
     'dopo la freshness guard ogni step deve rispettare lo skip deciso in corsa',
   );
-  assert.equal(
-    (wf.match(/publishApiFreshnessPaths\(\)/g) || []).length,
-    2,
-    'preflight e freshness barrier devono usare gli stessi path del trigger publish-api',
-  );
-  assert.equal(
-    (wf.match(/"\$\{publish_api_trigger_path_list\[@\]\}"/g) || []).length,
-    2,
-    'le due freshness guard devono confrontare l’intera lista di trigger',
-  );
+  const preflight = wf.slice(wf.indexOf('name: Classify publish source freshness'),
+    wf.indexOf('name: Verify publish source is current main'));
+  const barrier = wf.slice(wf.indexOf('name: Verify publish source is current main'));
+  for (const guard of [preflight, barrier]) {
+    assert.match(guard, /import \{ apiTriggerInputsDifferBetween \} from "\.\/scripts\/lib\/publish-api-input-range\.mjs"/);
+    assert.match(guard, /const \[before, after\] = process\.argv\.slice\(1\)/);
+    assert.match(guard, /apiTriggerInputsDifferBetween\(\{ before, after \}\)/);
+    assert.match(guard, /\$trigger_inputs_differ" = true/);
+  }
+  assert.match(preflight, /' "\$WORKFLOW_COMMIT" "\$current_main"\)"; then/);
+  assert.match(barrier, /' "\$GITHUB_SHA" "\$current_main"\)"; then/);
   assert.doesNotMatch(wf, /engine host scripts generator\/scripts generator\/data/);
   assert.match(wf, /ref: \$\{\{ needs\.source_preflight\.outputs\.source_commit \}\}/);
   assert.match(wf, /Verify publish source is current main/);

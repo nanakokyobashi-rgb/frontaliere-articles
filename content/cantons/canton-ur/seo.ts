@@ -933,6 +933,84 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-uri-parere-trasporti-eccezionali': {
+    title: 'Uri presenta un parere sui trasporti eccezionali',
+    description: 'Il Canton Uri ha inviato all\'UVEK un parere su due ordinanze e sull\'accompagnamento privato dei trasporti eccezionali nell\'ambito della consultazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, presenta, parere, trasporti, eccezionali',
+    ogTitle: 'Uri presenta un parere sui trasporti eccezionali',
+    ogDescription: 'Il Canton Uri ha inviato all\'UVEK un parere su due ordinanze di circolazione e sull\'emanazione di una disciplina uniforme per l\'accompagnamento privato dei trasporti eccezionali. La fonte non indica date o dettagli tecnici.',
+    canonicalPath: '/articoli-uri/uri-parere-trasporti-eccezionali/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Uri presenta un parere sui trasporti eccezionali",
+      "description": "Il Canton Uri ha inviato all'UVEK un parere su due ordinanze e sull'accompagnamento privato dei trasporti eccezionali nell'ambito della consultazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-uri-parere-trasporti-eccezionali.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-21T04:34:25+00:00",
+      "dateModified": "2026-11-21T04:34:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-uri/uri-parere-trasporti-eccezionali/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-radweg-altdorf-seedorf-lavori': {
+    title: 'Radweg Altdorf-Seedorf: Nessun servizio invernale su Byfangweg',
+    description: 'La Baudirektion Uri comunica restrizioni sul percorso ciclabile e pedonale Altdorf-Seedorf. Accesso pedonale provvisorio e scadenze 2026/2027.',
+    keywords: 'frontalieri, ticino, svizzera, italia, radweg, altdorf-seedorf, nessun, servizio',
+    ogTitle: 'Radweg Altdorf-Seedorf: Nessun servizio invernale su Byfangweg',
+    ogDescription: 'La Baudirektion Uri ha definito regole speciali per il percorso ciclabile e pedonale Altdorf-Seedorf. L\'accesso è provvisorio ai pedoni, con completamento ponte entro fine 2026.',
+    canonicalPath: '/articoli-uri/radweg-altdorf-seedorf-lavori/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Radweg Altdorf-Seedorf: Nessun servizio invernale su Byfangweg",
+      "description": "La Baudirektion Uri comunica restrizioni sul percorso ciclabile e pedonale Altdorf-Seedorf. Accesso pedonale provvisorio e scadenze 2026/2027.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-radweg-altdorf-seedorf-lavori.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-21T11:01:18+00:00",
+      "dateModified": "2026-11-21T11:01:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-uri/radweg-altdorf-seedorf-lavori/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

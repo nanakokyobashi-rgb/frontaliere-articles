@@ -44,8 +44,10 @@ on:
         default: false
         type: boolean
 
+# Coalesce runs of the same event while reserving a pending slot for each trigger.
 concurrency:
-  group: reconcile-section-pages
+  group: reconcile-section-pages-${{ github.event_name }}
+  queue: single
   cancel-in-progress: false
 
 permissions:
@@ -54,12 +56,18 @@ permissions:
 
 jobs:
   reconcile:
+    concurrency:
+      group: reconcile-section-pages
+      queue: max
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          # Automatic runs can wait in the queue, so resolve main at checkout before scanning.
+          ref: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_run') && 'refs/heads/main' || github.sha }}
           fetch-depth: 1
           persist-credentials: false
 

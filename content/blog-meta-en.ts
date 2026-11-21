@@ -13745,6 +13745,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.mendrisio-feste-pista-ghiaccio.title': 'Mendrisio brings festivities and an ice rink to the square',
     'blog.article.mendrisio-feste-pista-ghiaccio.excerpt': 'From late November to January, Mendrisio brings squares and neighborhoods to life with an ice rink, an exchange of greetings and a calendar of events.',
     'blog.article.mendrisio-feste-pista-ghiaccio.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.festival-ai-lugano-aree.title': 'Festival AI in Lugano: 13 areas and over 60 speakers',
+    'blog.article.festival-ai-lugano-aree.excerpt': 'At the Palazzo dei Congressi di Lugano, Festival AI brings together over 60 international speakers across 13 areas, with a free exhibition area open to everyone.',
+    'blog.article.festival-ai-lugano-aree.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;

@@ -6483,30 +6483,46 @@ export async function repairGeneratedArticleSourceCopy(article, sourceText, {
  * which do not pass through the primary generation loop.
  */
 export function assertArticlePassesFactualityGates(data, options = {}) {
-  // Direct producers may call this gate without the broader generation-quality
-  // pass (for example during a metadata-only refresh), so keep the deterministic
-  // editorial repair at this shared boundary as well.
-  repairArticleEditorialClaims(data);
-  assertItalianArticlePassesFactualityGates(data, options);
-  assertTranslationsPassFactualityGates(data);
-  assertNoFiscalErrorsInLocales(data?.content || {});
-  assertNoCorpusFabricatedInstitutionNames(data);
-  assertLocalizedToponyms(data);
-  if (options.writer !== 'journalist') {
-    const sectionName = options.sectionName
-      || (typeof SECTION_NAME === 'string' ? SECTION_NAME : 'frontaliere');
-    assertArticleRelevance(data, sectionName, {
-      isInCantonArea: cantonRelevanceMatcher(sectionName),
-    });
-    assertYmylPublishable(data, {
-      sourceUrl: options.sourceUrl ?? data?._sourceUrl ?? data?.sourceUrl ?? '',
-    });
+  let stage = 'editorial-repair';
+  try {
+    // Direct producers may call this gate without the broader generation-quality
+    // pass (for example during a metadata-only refresh), so keep the deterministic
+    // editorial repair at this shared boundary as well.
+    repairArticleEditorialClaims(data);
+    stage = 'italian-factuality';
+    assertItalianArticlePassesFactualityGates(data, options);
+    stage = 'translated-factuality';
+    assertTranslationsPassFactualityGates(data);
+    stage = 'locale-fiscal';
+    assertNoFiscalErrorsInLocales(data?.content || {});
+    stage = 'fabricated-institutions';
+    assertNoCorpusFabricatedInstitutionNames(data);
+    stage = 'localized-toponyms';
+    assertLocalizedToponyms(data);
+    stage = 'editorial-relevance';
+    if (options.writer !== 'journalist') {
+      const sectionName = options.sectionName
+        || (typeof SECTION_NAME === 'string' ? SECTION_NAME : 'frontaliere');
+      assertArticleRelevance(data, sectionName, {
+        isInCantonArea: cantonRelevanceMatcher(sectionName),
+      });
+      stage = 'ymyl-publishability';
+      assertYmylPublishable(data, {
+        sourceUrl: options.sourceUrl ?? data?._sourceUrl ?? data?.sourceUrl ?? '',
+      });
+    }
+    stage = 'editorial-claims';
+    // Run after all repairs and translation mutations, immediately before the
+    // common registrar/writer boundary, so a prohibited claim cannot reach
+    // content/** or content/seo/** even when a direct producer skips the main
+    // generation loop.
+    assertPublishedEditorialClaims(data);
+  } catch (error) {
+    if (error?.qualityReject === true || error?.topicGateAbort === true) {
+      console.error(`FINAL_ARTICLE_GATE_REJECT stage=${stage}`);
+    }
+    throw error;
   }
-  // Run after all repairs and translation mutations, immediately before the
-  // common registrar/writer boundary, so a prohibited claim cannot reach
-  // content/** or content/seo/** even when a direct producer skips the main
-  // generation loop.
-  assertPublishedEditorialClaims(data);
 }
 
 function collectPublishedTextValuesIterative(value, path = [], seen = new Set()) {
@@ -7389,12 +7405,12 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     ? `${evidencePrefix}
 
 VERIFICA SISTEMATICA — controlla tutte le categorie:
-- Leggi: verifica esistenza, sigla, numero, anno e attribuzione. Riferimenti assenti dalla fonte: sospetti. Critical: sigle inventate (${FACT_CHECK_INVENTED_ACRONYMS}), ${FACT_CHECK_INVENTED_LAWS}, anno di entrata in vigore senza legge verificabile, falsa tassa sanitaria, accordo non firmato.
-- Istituzioni e persone: verifica esistenza, ambito, ruoli, acronimi e citazioni dirette. Critical: autorità inventate o fuori ambito, ministro inesistente, commissioni o osservatori inventati. NON esistono: ${FACT_CHECK_INVENTED_INSTITUTIONS}. Consiglieri federali attuali: ${FACT_CHECK_FEDERAL_COUNCILLORS}. Abuso critical:istituzioni: ${FACT_CHECK_FINMA_SCOPE}.
-- Dati: verifica aliquote, soglie e date normative sui fatti verificati. Statistiche decimali: richiedi studio e istituto citati. Accetta arrotondamenti interi attribuiti e valori canonici corretti.
-- Fonte: verifica date, luoghi, partecipanti, dichiarazioni e misure. Date assenti: molto sospette. Contesto verificato: minor. Fatti inventati o contraddetti: critical.
-- Casi con luogo o ente, ruolo, azione ed esito specifico senza riscontro nella fonte: critical:fatti_inventati. Esempi: infermiera segnala carenze igieniche a Lugano; medico denuncia pratiche non etiche a Chiasso; infermiere ORL ottiene un risarcimento; medico del Civico di Lugano denuncia frode con indagine FINMA.
-- Svizzera fuori da UE e SEE; valgono gli accordi bilaterali.
+- Leggi: verifica sigla, numero, anno, attribuzione e fonte. Critical: sigle inventate (${FACT_CHECK_INVENTED_ACRONYMS}), ${FACT_CHECK_INVENTED_LAWS}, vigenza senza legge, falsa tassa sanitaria, accordo non firmato.
+- Istituzioni e persone: verifica enti, competenze, ruoli e citazioni. Critical: enti inventati o incompetenti. NON esistono: ${FACT_CHECK_INVENTED_INSTITUTIONS}. Consiglieri federali attuali: ${FACT_CHECK_FEDERAL_COUNCILLORS}. Abuso critical:istituzioni: ${FACT_CHECK_FINMA_SCOPE}.
+- Dati: confronta aliquote, soglie e date. Decimali: cita studio e istituto. Accetta arrotondamenti attribuiti e valori canonici.
+- Fonte: controlla date, luoghi, persone, citazioni e misure. Date assenti: sospette. Contesto verificato: minor. Invenzioni e contraddizioni: critical.
+- Casi specifici (luogo/ente, ruolo, azione, esito) senza riscontro nella fonte: critical:fatti_inventati. Esempi: infermiera segnala carenze igieniche a Lugano; medico denuncia pratiche non etiche a Chiasso; infermiere ORL ottiene un risarcimento; medico del Civico di Lugano denuncia frode con indagine FINMA.
+- Svizzera: accordi bilaterali, fuori da UE e SEE.
 
 ${relevanceInstructions}
 
@@ -7452,9 +7468,11 @@ ${proofSuffix}`
   const FACTCHECK_429_BACKOFF_CAP_MS = 30_000;
   const FACTCHECK_MIN_ROUND_MS = 15_000;
   const initialFactCheckMs = factCheckDeadlineMs - Date.now();
-  // When two useful windows fit, keep one for the final verifier. Otherwise
-  // make one primary attempt and leave any unused time to the final verifier.
-  const finalReserveMs = initialFactCheckMs >= 2 * FACTCHECK_MIN_ROUND_MS ? FACTCHECK_MIN_ROUND_MS : 0;
+  // Reserve at most a quarter of the budget above one minute for the final
+  // Codex call. Keep the original short window when the budget is tight.
+  const finalReserveMs = initialFactCheckMs >= 2 * FACTCHECK_MIN_ROUND_MS
+    ? Math.min(45_000, Math.max(FACTCHECK_MIN_ROUND_MS, Math.floor((initialFactCheckMs - 60_000) / 4)))
+    : 0;
   const retryDeadlineMs = factCheckDeadlineMs - finalReserveMs;
   const maxPrimaryRounds = Math.min(
     FACTCHECK_INFRA_RETRIES,
@@ -7472,6 +7490,18 @@ ${proofSuffix}`
   let activePrompt = prompt;
   let compactRetry = null;
   let observedInputCap = 0;
+  if (compactPrompt) {
+    const independentVerifier = verificationModels.find((model) => model !== AI_MODELS.CODEX_CLI_PRIMARY);
+    const limit = independentVerifier && getDeclaredRequestTokenLimit(independentVerifier);
+    const fullEstimate = estimateRequestTokens([{ role: 'user', content: prompt }]);
+    const compactEstimate = estimateRequestTokens([{ role: 'user', content: compactPrompt }]);
+    if (limit && fullEstimate > limit && compactEstimate <= limit) {
+      // Either primary request can fall through to the independent cascade.
+      // Use one base prompt so the normal proof-retry path can annotate it.
+      compactRetry = { fullEstimate, compactEstimate, cap: limit };
+      observedInputCap = limit;
+    }
+  }
   for (let fcAttempt = 1; fcAttempt <= maxPrimaryRounds && (modelResults.length === 0 || missingSecondOpinion); fcAttempt++) {
     if (fcAttempt > 1) {
       const why = missingSecondOpinion ? 'un solo parere indipendente' : 'nessun verdetto';
@@ -10897,6 +10927,11 @@ function headlineCandidateIsUsable(text) {
 }
 
 function configuredHeadlineFromAnchor(anchorTag, quirks) {
+  if (quirks?.titleAttributeTemplate === 'mehr-erfahren') {
+    const label = headlineAttributeValue(anchorTag, 'aria-label');
+    const match = label.match(/^\s*Mehr erfahren:\s*(.+?)\s*$/iu);
+    return match ? headlineCandidateIsUsable(match[1]) : null;
+  }
   if (quirks?.titleAttributeTemplate !== 'beitrag-lesen') return null;
   const title = headlineAttributeValue(anchorTag, 'title');
   const match = title.match(/^\s*Beitrag\s+['"]([\s\S]+)['"]\s+lesen\.\s*$/iu);
@@ -15959,6 +15994,7 @@ async function translatePendingBodyWithHistoricalChain(
   const chunkTranslator = assertChunkTranslator(translateInChunks, 'translatePendingBodyWithHistoricalChain');
   const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
   const recoveryChunkWords = 240;
+  const shorterChunkWords = recoveryChunkWords / 2;
   const rejected = [];
   const text = await translateFieldFreeMt({
     text: itValue,
@@ -15967,59 +16003,70 @@ async function translatePendingBodyWithHistoricalChain(
     fieldType: 'description',
     fieldName: field,
     translate: async ({ text: masked }) => {
-      if (countWords(masked || '') > recoveryChunkWords) {
-        // Reuse the same chunker as the legacy translation and truncation
-        // paths. Shorter segments reduce omissions after a full-body
-        // translation failed. Validate the reconstructed body as usual.
-        const chunked = await chunkTranslator(
-          masked,
-          field,
-          (chunk, i, total) => buildPendingBodyRetranslationPrompt({
-            langName,
-            field,
-            itValue: chunk,
-            partLabel: total > 1 ? `, parte ${i + 1} di ${total}` : '',
-          }),
-          `${locale}:${field}-pending-retry`,
-          locale,
-          { forceLegacy: true, chunkWords: recoveryChunkWords },
-        );
-        return chunked;
-      }
-      // Free MT separates template headings before invoking this callback.
-      // Derive the markers for this same segment, as the validator does.
-      const markedSegment = tableHeaderColumnMarkers(masked);
-      if (markedSegment.collision || markedSegment.ambiguous) return '';
-      const parsed = await callWithRetry(
-        buildPendingBodyRetranslationPrompt({
-          langName,
-          field,
-          itValue: markedSegment.markedText,
-        }),
-        Math.max(5000, Math.ceil(countWords(masked || '') * 5)),
-        `${locale}:${field}-pending-retry`,
-        { translation: true, forceLegacy: true },
-      );
-      const translated = translatedStringOrNull(parsed?.[field], locale);
-      if (translated === null) {
-        rejected.push('non-string');
-        return '';
-      }
-      // Reuse the exact same source-owned contract as the chunked path on the
-      // already translated short body. `pretranslatedResult` avoids a second
-      // provider call while still running skeleton, links, numbers, markers
-      // and completeness checks before `translateFieldFreeMt` can finalize it.
-      const validated = await chunkTranslator(
+      const wordCount = countWords(masked || '');
+      const translateSegments = (chunkWords) => chunkTranslator(
         masked,
         field,
-        () => '',
-        `${locale}:${field}-pending-retry-validation`,
+        (chunk, i, total) => buildPendingBodyRetranslationPrompt({
+          langName,
+          field,
+          itValue: chunk,
+          partLabel: total > 1 ? `, parte ${i + 1} di ${total}` : '',
+        }),
+        `${locale}:${field}-pending-retry`,
         locale,
-        { pretranslatedResult: { [field]: translated } },
+        { forceLegacy: true, chunkWords },
       );
+      const retryShorter = () => wordCount > shorterChunkWords && !pendingBodyLaneShouldStop()
+        ? translateSegments(shorterChunkWords)
+        : '';
+      let validated;
+      try {
+        if (wordCount > recoveryChunkWords) {
+          validated = await translateSegments(recoveryChunkWords);
+        } else {
+          // Free MT separates template headings before invoking this callback.
+          // Derive the markers for this same segment, as the validator does.
+          const markedSegment = tableHeaderColumnMarkers(masked);
+          if (markedSegment.collision || markedSegment.ambiguous) return '';
+          const parsed = await callWithRetry(
+            buildPendingBodyRetranslationPrompt({
+              langName,
+              field,
+              itValue: markedSegment.markedText,
+            }),
+            Math.max(5000, Math.ceil(countWords(masked || '') * 5)),
+            `${locale}:${field}-pending-retry`,
+            { translation: true, forceLegacy: true, expectedBodyField: field, targetLang: locale },
+          );
+          const translated = translatedStringOrNull(parsed?.[field], locale);
+          if (translated === null) {
+            rejected.push('non-string');
+            return retryShorter();
+          }
+          // Reuse the exact same source-owned contract as the chunked path on the
+          // already translated short body. `pretranslatedResult` avoids a second
+          // provider call while still running skeleton, links, numbers, markers
+          // and completeness checks before `translateFieldFreeMt` can finalize it.
+          validated = await chunkTranslator(
+            masked,
+            field,
+            () => '',
+            `${locale}:${field}-pending-retry-validation`,
+            locale,
+            { pretranslatedResult: { [field]: translated } },
+          );
+        }
+      } catch (error) {
+        if (error?.code !== 'unusable-body-field') throw error;
+        rejected.push(error.code);
+        return retryShorter();
+      }
       if (validated === null) {
         rejected.push('structure');
-        return '';
+        // An additional unsplit retry would ask the provider to repeat the
+        // same task. Give the existing validator one segmented candidate.
+        return retryShorter();
       }
       return validated;
     },
@@ -16127,7 +16174,12 @@ async function translateArticle(data) {
     };
   }
 
-  async function callWithRetry(prompt, maxTokens, label, { translation = false, forceLegacy = false } = {}) {
+  async function callWithRetry(
+    prompt,
+    maxTokens,
+    label,
+    { translation = false, forceLegacy = false, expectedBodyField = null, targetLang } = {},
+  ) {
     const safePrompt = `${prompt}\n\n${JSON_QUOTE_SAFETY_RULE_IT}`;
     // Niente try/catch attorno a callLLM qui, a differenza del gemello
     // requestHeadlineSelection (#391) — verificato in review su PR #604
@@ -16177,45 +16229,47 @@ async function translateArticle(data) {
         },
       });
     };
-    const raw = await call(maxTokens);
-    const repaired = repairLlmJson(raw);
-    try {
-      return JSON.parse(repaired);
-    } catch (parseErr) {
-      console.error(`  ⚠️  JSON parse error (${label}): ${safeSignalDiagnosticTextForLog(parseErr.message, RUN_REPORT)}`);
-      console.error(`     ${safeSignalDiagnosticTextForLog(describeJsonParseError(repaired, parseErr), RUN_REPORT)}`);
-      console.error(`     ${safeSignalDiagnosticTextForLog(describeRawForDiagnostics(raw), RUN_REPORT)}`);
-      // Detect truncation (model hit output cap): use 3× tokens on retry
-      const isTruncation = parseErr.message.includes('Unterminated') || parseErr.message.includes('Unexpected end');
-      const retry1Tokens = isTruncation ? Math.max(maxTokens * 3, 12000) : maxTokens + 4000;
-      console.error(`  🔄 Retry ${label} con maxTokens=${retry1Tokens}${isTruncation ? ' (troncamento rilevato)' : ''}...`);
-      const raw2 = await call(retry1Tokens);
+    let tokens = maxTokens;
+    for (let retry = 0; ; retry += 1) {
+      const raw = await call(tokens, retry === 2 ? 0.3 : 0.5);
+      const repaired = repairLlmJson(raw);
+      let result;
       try {
-        const result = JSON.parse(repairLlmJson(raw2));
-        console.error(`  ✅ Retry riuscito per ${label}`);
-        return result;
-      } catch (retryErr) {
-        console.error(`  ⚠️  Retry 1 fallito (${label}): ${safeSignalDiagnosticTextForLog(retryErr.message, RUN_REPORT)} — tentativo 2...`);
-        // Third attempt with maximum tokens
-        const retry2Tokens = 16000;
-        const raw3 = await call(retry2Tokens, 0.3);
-        try {
-          const result3 = JSON.parse(repairLlmJson(raw3));
-          console.error(`  ✅ Retry 2 riuscito per ${label}`);
-          return result3;
-        } catch (retry2Err) {
-          console.error(`  ❌ Retry 2 fallito (${label}): ${safeSignalDiagnosticTextForLog(retry2Err.message, RUN_REPORT)}`);
-          // qualityReject=true: same content-quality class as the IT-generation
-          // JSON-parse-exhausted throw above — malformed translation output,
-          // not infrastructure. This propagates straight out of
-          // generateAndValidateArticle (no local catch around translateArticle),
-          // so an untagged message here crashes the whole run instead of
-          // skipping to the next headline.
-          const err = new Error(`JSON non valido dalla traduzione ${label}: ${safeSignalDiagnosticTextForLog(retry2Err.message, RUN_REPORT)}`);
-          err.qualityReject = true;
-          throw err;
+        result = JSON.parse(repaired);
+      } catch (parseErr) {
+        const message = safeSignalDiagnosticTextForLog(parseErr.message, RUN_REPORT);
+        if (retry === 2) {
+          console.error(`  ❌ Retry 2 fallito (${label}): ${message}`);
+          throw qualityRejectError(`JSON non valido dalla traduzione ${label}: ${message}`);
         }
+        if (retry === 1) {
+          console.error(`  ⚠️  Retry 1 fallito (${label}): ${message} — tentativo 2...`);
+          tokens = 16000;
+          continue;
+        }
+        console.error(`  ⚠️  JSON parse error (${label}): ${message}`);
+        console.error(`     ${safeSignalDiagnosticTextForLog(describeJsonParseError(repaired, parseErr), RUN_REPORT)}`);
+        console.error(`     ${safeSignalDiagnosticTextForLog(describeRawForDiagnostics(raw), RUN_REPORT)}`);
+        // Detect truncation (model hit output cap): use 3× tokens on retry
+        const isTruncation = parseErr.message.includes('Unterminated') || parseErr.message.includes('Unexpected end');
+        tokens = isTruncation ? Math.max(maxTokens * 3, 12000) : maxTokens + 4000;
+        console.error(`  🔄 Retry ${label} con maxTokens=${tokens}${isTruncation ? ' (troncamento rilevato)' : ''}...`);
+        continue;
       }
+      if (expectedBodyField !== null && translatedStringOrNull(result?.[expectedBodyField], targetLang) === null) {
+        const reason = 'unusable-body-field';
+        console.error(`TRANSLATION_BODY_REJECT label=${label} reason=${reason}`);
+        if (retry === 2) {
+          const error = qualityRejectError(`Traduzione rifiutata (${label}): ${reason}`);
+          error.code = reason;
+          throw error;
+        }
+        continue;
+      }
+      if (retry > 0) {
+        console.error(`  ✅ Retry${retry === 2 ? ' 2' : ''} riuscito per ${label}`);
+      }
+      return result;
     }
   }
 
@@ -16247,18 +16301,25 @@ async function translateArticle(data) {
     const chunks = pretranslatedResult === null
       ? splitIntoTranslationChunks(tableHeaderMarkers.markedText, chunkWords, chunkWords !== undefined)
       : [tableHeaderMarkers.markedText];
-    const translated = pretranslatedResult === null
-      ? await Promise.all(
-        chunks.map((chunk, i) =>
-          callWithRetry(
-            makeChunkPrompt(chunk, i, chunks.length),
-            Math.max(5000, Math.ceil(countWords(chunk) * 5)),
-            `${labelPrefix}-p${i + 1}`,
-            { translation: true, ...(forceLegacy ? { forceLegacy: true } : {}) },
-          ),
-        ),
-      )
-      : [pretranslatedResult];
+    let translated = [pretranslatedResult];
+    if (pretranslatedResult === null) {
+      const requests = chunks.map((chunk, i) => callWithRetry(
+        makeChunkPrompt(chunk, i, chunks.length),
+        Math.max(5000, Math.ceil(countWords(chunk) * 5)),
+        `${labelPrefix}-p${i + 1}`,
+        { translation: true, ...(forceLegacy ? { forceLegacy: true, expectedBodyField: fieldKey, targetLang } : {}) },
+      ));
+      if (forceLegacy && chunkWords !== undefined) {
+        // Let this batch finish before a pending-body retry uses finer chunks.
+        const results = await Promise.allSettled(requests);
+        const failures = results.filter((result) => result.status === 'rejected');
+        const failure = failures.find(({ reason }) => reason?.code !== 'unusable-body-field') ?? failures[0];
+        if (failure) throw failure.reason;
+        translated = results.map(({ value }) => value);
+      } else {
+        translated = await Promise.all(requests);
+      }
+    }
     // `chunks` passati al join: un chunk tornato identico al suo italiano
     // rende nullo l'intero campo (`isSourcePassthrough`, #1875), come un chunk
     // non-stringa. I confini sono quelli della sorgente: una divisione dentro
@@ -17425,7 +17486,41 @@ async function translateArticle(data) {
           numericCommas.add(comma);
         }
       }
-      const isAssociationBoundary = (index) => spanBoundary(value[index]) && !numericCommas.has(index);
+      // A leading locative such as "In Zugo," belongs to the fact that
+      // follows it. Preserve that place as evidence even when the source
+      // has no comma. Other commas still separate independent facts.
+      const locativePunctuation = new Set();
+      const startsAssociation = (index) => spanBoundary(value[index])
+        || (value[index] === '.' && /\s/u.test(value[index + 1] ?? ''));
+      const placeWord = /[\p{Lu}](?:[\p{L}\p{M}]|[’'-](?=[\p{L}\p{M}]))*/.source;
+      const placeAbbreviation = /(?:St|Ste|S|Mt|Mte)\.[\p{Zs}\t]+/.source;
+      const placePart = `(?:${placeAbbreviation})?${placeWord}`;
+      const locativePrefix = /(?:^|(?<=[\n,:;!?|])|(?<=\.)(?=\s))[^\S\n]*(?:>[^\S\n]*)*(?:(?:[-+*]|\d+[.)])[^\S\n]+)?(?<openers>(?:[("'\[“‘«‹*_][^\S\n]*)*)/.source;
+      const locativePreposition = /(?:(?:[AaÀà]|[Ii]n|[Aa]t|[Aa]u|[Aa]ux|[Zz]u|[Nn]el(?:l[aeio])?|[Nn]ei|[Nn]egli|[Ii]m|[Aa]m|[Ee]n|[Aa]l(?:l[aeio])?|[Aa]gli|[Oo]n|[Dd]ans|[Ss]ur|[Aa]n|[Ss]u(?:l(?:l[aeio])?|i|gli)?)[\p{Zs}\t]+|(?:[Aa]ll|[Nn]ell|[Ss]ull)[’\x27])/.source;
+      const placeArticle = /(?:(?:di|del|della|de|du|des|la|le|der|den|dem|the)[\p{Zs}\t]+)?/.source;
+      const placeContinuation = /(?:di|de|del|della|la|le|am|im)[\p{Zs}\t]+/.source;
+      const leadingLocative = new RegExp(
+        `${locativePrefix}${locativePreposition}${placeArticle}(?<place>${placePart}(?:[\\p{Zs}\\t]+(?:${placeContinuation})?${placePart})*)(?:[\\p{Zs}\\t]*(?<closers>[)\\]"\x27”’»›*_]*)(?<comma>,))?`,
+        'dgu',
+      );
+      const closingDelimiter = new Map([
+        ['(', ')'], ['[', ']'], ['“', '”'], ['‘', '’'], ['«', '»'], ['‹', '›'],
+      ]);
+      for (const match of value.matchAll(leadingLocative)) {
+        const { place: [start, end], comma } = match.indices.groups;
+        // Preserve the dot in a place abbreviation even in the source
+        // without a final comma. Sentence-ending dots still separate facts.
+        for (let dot = value.indexOf('.', start); dot !== -1 && dot < end; dot = value.indexOf('.', dot + 1)) {
+          locativePunctuation.add(dot);
+        }
+        const { openers, closers } = match.groups;
+        const expectedClosers = [...openers.replace(/\s/gu, '')].reverse()
+          .map((opener) => closingDelimiter.get(opener) ?? opener).join('');
+        if (comma && expectedClosers.startsWith(closers)) locativePunctuation.add(comma[0]);
+      }
+      const isAssociationBoundary = (index) => startsAssociation(index)
+        && !numericCommas.has(index)
+        && !locativePunctuation.has(index);
       const associations = numberEntries.map(({
         value: number,
         index,
@@ -17450,7 +17545,8 @@ async function translateArticle(data) {
         }, span)
           .replace(/\s+/gu, ' ')
           .trim();
-        const anchorTokens = [...withoutNumbers.matchAll(/(?<![\p{L}\p{N}_])[\p{Lu}][\p{L}\p{N}_’'-]*/gu)]
+        const anchorText = withoutNumbers.replace(/(?<![\p{L}\p{N}_])(?:all|nell|sull)[’']/giu, '');
+        const anchorTokens = [...anchorText.matchAll(/(?<![\p{L}\p{N}_])[\p{Lu}](?:[\p{L}\p{N}]|[_’'-](?=[\p{L}\p{N}]))*/gu)]
           .map(([anchor]) => anchor.toLowerCase())
         let currencyAnchor = null;
         if (numberRanges.length === 1) {

@@ -160,4 +160,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'piani-rete-ciclabile-svitto',
+ category: 'pratico',
+ date: '2026-11-21T04:23:12.030Z',
+ image: '/images/blog/article-piani-rete-ciclabile-svitto.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SZ'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

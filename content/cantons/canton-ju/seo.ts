@@ -543,6 +543,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-hospitale-jura-bwk-esercitazione': {
+    title: 'Hôpital du Jura e BKW si esercitano per sicurezza emergenze',
+    description: 'Tre mattinate di formazione tra Hôpital du Jura e BKW alla sottostazione di Bassecourt per migliorare la sicurezza negli interventi d\'urgenza.',
+    keywords: 'frontalieri, ticino, svizzera, italia, pital, jura, esercitano, sicurezza',
+    ogTitle: 'Hôpital du Jura e BKW si esercitano per sicurezza emergenze',
+    ogDescription: 'Personale ambulanze Hôpital du Jura e collaboratori BKW hanno partecipato a tre mattinate di formazione presso la sottostazione di Bassecourt per coordinare interventi in caso di pericolo elettrico.',
+    canonicalPath: '/articoli-giura/hospitale-jura-bwk-esercitazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Hôpital du Jura e BKW si esercitano per sicurezza emergenze",
+      "description": "Tre mattinate di formazione tra Hôpital du Jura e BKW alla sottostazione di Bassecourt per migliorare la sicurezza negli interventi d'urgenza.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-hospitale-jura-bwk-esercitazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-21T06:26:15+00:00",
+      "dateModified": "2026-11-21T06:26:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-giura/hospitale-jura-bwk-esercitazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

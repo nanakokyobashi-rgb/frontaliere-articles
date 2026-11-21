@@ -45,7 +45,6 @@ dispatch_stale_replay() {
   local current_main="$2"
   local api_release_commit="${3:-}"
   local runtime_pat="${GITHUB_PAT_NANAKO:-}"
-  local nonce_seed=''
   local nonce_hash=''
   local dispatch_nonce=''
   local dispatch_cohort=''
@@ -64,14 +63,6 @@ dispatch_stale_replay() {
     return 1
   fi
   export GH_TOKEN="$runtime_pat"
-  dispatch_nonce="${DISPATCH_NONCE:-}"
-  if [ -z "$dispatch_nonce" ]; then
-    dispatch_nonce="stale-late-${GITHUB_RUN_ID}-${SECTION}"
-  fi
-  nonce_seed="$dispatch_nonce"
-  nonce_hash="$(printf '%s\0%s\0%s\0%s' "$nonce_seed" "$current_main" "$SECTION" "$coordinated_recovery" | sha256sum | cut -c1-16)"
-  dispatch_nonce="stale-late-${current_main:0:12}-${SECTION}-${nonce_hash}"
-  dispatch_cohort="stale-late-${GITHUB_RUN_ID}-${SECTION}-n1"
   # Ogni stale-late handoff entra nella barriera event-driven: il reconcile
   # deve essere l'unico proprietario del replay API, anche se l'handoff nasce
   # da un workflow_run API non gia' marcato come recovery coordinata.
@@ -89,26 +80,31 @@ dispatch_stale_replay() {
     # release selection as its new checkout is already the high-water mark.
     replay_after="$current_main"
   fi
+  local replay_args=(
+    -f section="$SECTION"
+    -f article_ids="$ARTICLE_IDS_JSON"
+    -f missing_page_paths="$MISSING_PAGE_PATHS_JSON"
+    -f known_missing_page_paths="$KNOWN_MISSING_PAGE_PATHS_JSON"
+    -f bootstrap="$BOOTSTRAP"
+    -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS"
+    -f cleanup_inactive_surface="$CLEANUP_INACTIVE_SURFACE"
+    -f replay_api_after_publish="$child_replay_api_after_publish"
+    -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE"
+    -f api_release_commit="$api_release_commit"
+    -f source_commit="$current_main"
+    -f source_main_commit="$current_main"
+    -f dry_run="$DRY"
+    -f push_before="$replay_before"
+    -f push_after="$replay_after"
+    -f coordinated_recovery="$child_coordinated_recovery"
+  )
+  # Hash the dispatched inputs so equivalent recoveries can share a run.
+  nonce_hash="$(printf '%s\0' "${replay_args[@]}" | sha256sum | cut -c1-16)"
+  dispatch_nonce="stale-late-${current_main:0:12}-${SECTION}-${nonce_hash}"
+  dispatch_cohort="stale-late-${GITHUB_RUN_ID}-${SECTION}-n1"
   dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"
   if ! bash .replay-dispatcher-source/scripts/ci/dispatch-fast-publish-replay.sh "$REPO" "$dispatch_title" --ref main \
-    -f section="$SECTION" \
-    -f article_ids="$ARTICLE_IDS_JSON" \
-    -f missing_page_paths="$MISSING_PAGE_PATHS_JSON" \
-    -f known_missing_page_paths="$KNOWN_MISSING_PAGE_PATHS_JSON" \
-    -f bootstrap="$BOOTSTRAP" \
-    -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
-    -f cleanup_inactive_surface="$CLEANUP_INACTIVE_SURFACE" \
-    -f replay_api_after_publish="$child_replay_api_after_publish" \
-    -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE" \
-    -f api_release_commit="$api_release_commit" \
-    -f source_commit="$current_main" \
-    -f source_main_commit="$current_main" \
-    -f dry_run="$DRY" \
-    -f push_before="$replay_before" \
-    -f push_after="$replay_after" \
-    -f dispatch_nonce="$dispatch_nonce" \
-    -f dispatch_cohort="$dispatch_cohort" \
-    -f coordinated_recovery="$child_coordinated_recovery"; then
+    "${replay_args[@]}" -f dispatch_nonce="$dispatch_nonce" -f dispatch_cohort="$dispatch_cohort"; then
     return 1
   fi
   stale_handoff_nonce="$dispatch_nonce"
@@ -124,7 +120,7 @@ if [ -n "$pinned_replay_main" ]; then
     echo "::error::revisione corrente di main non valida prima degli upload"
     exit 1
   fi
-  if ! bash scripts/ci/section-source-unaffected.sh "$pinned_replay_main" "$current_main"; then
+  if ! bash .replay-dispatcher-source/scripts/ci/section-source-unaffected.sh "$pinned_replay_main" "$current_main"; then
     api_release_commit=''
     if [ "$EVENT_NAME" = 'workflow_run' ]; then
       PUSH_BEFORE="${PUSH_BEFORE:-}" FETCH_MAIN=true \

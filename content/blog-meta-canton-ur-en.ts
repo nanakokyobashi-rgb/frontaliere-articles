@@ -75,6 +75,12 @@ const blogMetaCantonUrEn: Record<string, string> = {
     'blog.article.blocco-roccia-meiental.title': 'Rockfall damages road in Meiental',
     'blog.article.blocco-roccia-meiental.excerpt': 'A rockfall damaged the cantonal road and power line in Meiental.',
     'blog.article.blocco-roccia-meiental.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.uri-parere-trasporti-eccezionali.title': 'Uri presents an opinion on exceptional transports',
+    'blog.article.uri-parere-trasporti-eccezionali.excerpt': 'Canton Uri has sent the UVEK an opinion on two ordinances and on the private escorting of exceptional transports as part of the consultation.',
+    'blog.article.uri-parere-trasporti-eccezionali.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.radweg-altdorf-seedorf-lavori.title': 'Altdorf-Seedorf cycle path: No winter service on Byfangweg',
+    'blog.article.radweg-altdorf-seedorf-lavori.excerpt': 'Baudirektion Uri has announced special rules for the cycle and pedestrian path between Altdorf and Seedorf, which is still affected by construction work.',
+    'blog.article.radweg-altdorf-seedorf-lavori.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonUrEn;

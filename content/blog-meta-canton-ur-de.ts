@@ -75,6 +75,12 @@ const blogMetaCantonUrDe: Record<string, string> = {
     'blog.article.blocco-roccia-meiental.title': 'Felsblock beschädigt Straße im Meiental',
     'blog.article.blocco-roccia-meiental.excerpt': 'Ein Felsblock hat die Kantonsstraße und die Stromleitung im Meiental beschädigt.',
     'blog.article.blocco-roccia-meiental.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.uri-parere-trasporti-eccezionali.title': 'Uri legt eine Stellungnahme zu Ausnahmetransporten vor',
+    'blog.article.uri-parere-trasporti-eccezionali.excerpt': 'Der Kanton Uri hat dem UVEK im Rahmen der Vernehmlassung eine Stellungnahme zu zwei Verordnungen und zur privaten Begleitung von Ausnahmetransporten übermittelt.',
+    'blog.article.uri-parere-trasporti-eccezionali.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.radweg-altdorf-seedorf-lavori.title': 'Radweg Altdorf-Seedorf: Kein Winterdienst auf dem Byfangweg',
+    'blog.article.radweg-altdorf-seedorf-lavori.excerpt': 'Die Baudirektion Uri hat besondere Regeln für den Rad- und Fussweg zwischen Altdorf und Seedorf bekannt gegeben, an dem weiterhin gearbeitet wird.',
+    'blog.article.radweg-altdorf-seedorf-lavori.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonUrDe;

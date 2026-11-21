@@ -5365,6 +5365,19 @@
           "notes": "Elenco ufficiale iCMS con titolo, link e data nel data-entities. Verificati HTTP 200 e robots.txt senza direttive il 20.11.2026."
         },
         {
+          "url": "https://www.gde-engelberg.ch/aktuellesinformationen",
+          "format": "html",
+          "parser": "json-entities",
+          "publisher": "Einwohnergemeinde Engelberg",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": ["fisco", "mobilita", "servizi", "eventi"],
+          "quirks": {},
+          "items7d": 1,
+          "verifiedAt": "2026-11-21",
+          "notes": "Avvisi ufficiali iCMS. Il parser legge titolo, data e link da data-entities. Verificati l'elenco e il dettaglio del bollettino comunale del 19.11.2026 sulla zona a 30 km/h."
+        },
+        {
           "url": "https://www.giswil.ch/aktuellesinformationen",
           "format": "html",
           "parser": "json-entities",
@@ -8300,6 +8313,22 @@
           "items7d": 5,
           "verifiedAt": "2026-10-05",
           "notes": "HTML server-rendered: 20 link /ort/altdorf-ur/... con <time dateTime> ISO. 46 <time> in pagina ma solo 5 negli ultimi 7 giorni (include correlati di altre regioni; filtrare per prefisso /ort/altdorf-ur/). Nessun RSS (/rss, /feed 404). Molti pezzi rielaborano comunicati Kapo Uri. robots.txt: User-agent * senza Disallow rilevanti."
+        },
+        {
+          "url": "https://altdorf.ch/aktuelles/neuigkeiten",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Gemeinde Altdorf",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": ["servizi", "mobilita", "fisco"],
+          "quirks": {
+            "titleAttributeTemplate": "mehr-erfahren",
+            "articlePathPattern": "^/aktuelles/neuigkeiten/[^/?#]+/?(?:\\?from=\\d+)?$"
+          },
+          "items7d": 4,
+          "verifiedAt": "2026-11-21",
+          "notes": "Comunicati comunali con date DD.MM.YYYY e titolo nel link accessibile Mehr erfahren. Include bilancio, pianificazione e servizi."
         },
         {
           "url": "https://www.ur.ch/mmdirektionen",

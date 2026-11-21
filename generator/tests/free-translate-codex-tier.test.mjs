@@ -1265,7 +1265,8 @@ test('la cascata iniziale lascia spendibile la riserva Codex per il recupero', a
 
 test('la scadenza della fase iniziale lascia attiva la corsia body recovery', async () => {
   const now = Date.now();
-  const deadline = now + 55_000;
+  // With 90 seconds left the old half-reserve still admitted initial calls.
+  const deadline = now + 90_000;
   setCodexTranslateProcessDeadline(deadline, { recoveryReserveMs: 120_000 });
   try {
     const calls = stubCodex(`CODEX ${EN}`);

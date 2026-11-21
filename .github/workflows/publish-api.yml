@@ -301,28 +301,19 @@ jobs:
           # Use the exact paths that trigger this workflow. If one advanced
           # after this run started, its newer push run is guaranteed to be in
           # the FIFO queue; unrelated commits must not suppress the only publish.
-          if ! publish_api_trigger_paths="$(node --input-type=module -e '
-            import { publishApiFreshnessPaths } from "./scripts/lib/publish-api-input-range.mjs";
-            process.stdout.write(publishApiFreshnessPaths().join("\n"));
-          ')"; then
-            echo "::error::impossibile leggere gli input del trigger publish-api"
-            exit 1
-          fi
-          mapfile -t publish_api_trigger_path_list <<< "$publish_api_trigger_paths"
-          if [ "${#publish_api_trigger_path_list[@]}" -eq 0 ]; then
-            echo "::error::il trigger publish-api non dichiara path da confrontare"
-            exit 1
-          fi
-          if git diff --quiet "$WORKFLOW_COMMIT" "$current_main" -- "${publish_api_trigger_path_list[@]}"; then
-            trigger_diff_status=0
-          else
-            trigger_diff_status=$?
-          fi
-          if [ "$trigger_diff_status" -gt 1 ]; then
+          if ! trigger_inputs_differ="$(node --input-type=module -e '
+            import { apiTriggerInputsDifferBetween } from "./scripts/lib/publish-api-input-range.mjs";
+            const [before, after] = process.argv.slice(1);
+            process.stdout.write(String(apiTriggerInputsDifferBetween({ before, after })));
+          ' "$WORKFLOW_COMMIT" "$current_main")"; then
             echo "::error::impossibile confrontare gli input trigger di publish-api con current main"
             exit 1
           fi
-          if [ "$trigger_diff_status" -eq 1 ]; then
+          if [ "$trigger_inputs_differ" != true ] && [ "$trigger_inputs_differ" != false ]; then
+            echo "::error::esito non valido dal confronto degli input trigger di publish-api"
+            exit 1
+          fi
+          if [ "$trigger_inputs_differ" = true ]; then
             {
               echo "publish=false"
               echo "source_commit=$current_main"
@@ -496,28 +487,19 @@ jobs:
             echo "::error::publish non riconciliabile: checkout=$checked_out non e' antenato di main=$current_main"
             exit 1
           fi
-          if ! publish_api_trigger_paths="$(node --input-type=module -e '
-            import { publishApiFreshnessPaths } from "./scripts/lib/publish-api-input-range.mjs";
-            process.stdout.write(publishApiFreshnessPaths().join("\n"));
-          ')"; then
-            echo "::error::impossibile leggere gli input del trigger publish-api"
-            exit 1
-          fi
-          mapfile -t publish_api_trigger_path_list <<< "$publish_api_trigger_paths"
-          if [ "${#publish_api_trigger_path_list[@]}" -eq 0 ]; then
-            echo "::error::il trigger publish-api non dichiara path da confrontare"
-            exit 1
-          fi
-          if git diff --quiet "$GITHUB_SHA" "$current_main" -- "${publish_api_trigger_path_list[@]}"; then
-            trigger_diff_status=0
-          else
-            trigger_diff_status=$?
-          fi
-          if [ "$trigger_diff_status" -gt 1 ]; then
+          if ! trigger_inputs_differ="$(node --input-type=module -e '
+            import { apiTriggerInputsDifferBetween } from "./scripts/lib/publish-api-input-range.mjs";
+            const [before, after] = process.argv.slice(1);
+            process.stdout.write(String(apiTriggerInputsDifferBetween({ before, after })));
+          ' "$GITHUB_SHA" "$current_main")"; then
             echo "::error::impossibile confrontare gli input trigger di publish-api con current main"
             exit 1
           fi
-          if [ "$trigger_diff_status" -eq 1 ]; then
+          if [ "$trigger_inputs_differ" != true ] && [ "$trigger_inputs_differ" != false ]; then
+            echo "::error::esito non valido dal confronto degli input trigger di publish-api"
+            exit 1
+          fi
+          if [ "$trigger_inputs_differ" = true ]; then
             echo "PUBLISH_API_SKIP=true" >> "$GITHUB_ENV"
             echo "::notice::publish-api saltato: gli input trigger di main=$current_main sono avanzati dopo il preflight; il nuovo run e' preservato nella coda FIFO e tutte le fasi restano disattivate"
             exit 0

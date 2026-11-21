@@ -2300,10 +2300,10 @@ export function setCodexTranslateProcessDeadline(deadlineMs, { recoveryReserveMs
     && Number.isSafeInteger(recoveryReserveCalls) && recoveryReserveCalls > 0 ? recoveryReserveCalls : 0;
 }
 
-// Keep part of the configured recovery reserve on the process clock too.
+// Keep the configured recovery window available on the process clock too.
 export function initialTranslationDeadlineMs(processDeadlineMs = _codexProcessDeadlineMs) {
   if (processDeadlineMs == null) return processDeadlineMs;
-  return processDeadlineMs - Math.floor(_codexRecoveryReserveMs / 2);
+  return processDeadlineMs - _codexRecoveryReserveMs;
 }
 
 /**

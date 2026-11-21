@@ -4,9 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ti::https://www.laprovinciadicomo.it/stories/premium/como-citta/como-aumentano-i-frontalieri-superata-quota-79mila-o_3924430_11": {
+    "canton-ti::https://www.mattinonline.ch/it/article/60682/i-salari-ristagnano-ma-affitti-e-energia-sono-sempre-pi-cari-e-i-pensionati-fanno-pi-fatica-di-tutti": {
       "section": "canton-ti",
-      "ts": 1795062206685
+      "ts": 1795237533739
+    },
+    "canton-ti::https://www.laprovinciadicomo.it/stories/premium/economia/creare-una-zes-anche-in-lombardia-il-ticino-pero-resta-attrattivo-o_3998706_11": {
+      "section": "canton-ti",
+      "ts": 1795237534905
     }
   }
 }

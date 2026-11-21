@@ -90,6 +90,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.cambio-orari-bus-lucerna.title': 'Luzern: Am 13. Dezember 2026 ändert sich das Busnetz',
     'blog.article.cambio-orari-bus-lucerna.excerpt': 'Am 13. Dezember kommt der größte Fahrplanwechsel seit Langem: Die 4 wird zur 5, die 12 zur 3, und die 19 wird in die Linien 8 und 9 integriert.',
     'blog.article.cambio-orari-bus-lucerna.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.spazi-scolastici-wurzenbach.title': 'Würzenbach: neue Schulräume und eine Sporthalle werden geprüft',
+    'blog.article.spazi-scolastici-wurzenbach.excerpt': 'Luzern: unzureichende Räume in Würzenbach und Büttenen; Erweiterungen und eine Dreifachturnhalle werden geprüft, Arbeiten ab 2031 möglich.',
+    'blog.article.spazi-scolastici-wurzenbach.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;

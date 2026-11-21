@@ -4,7 +4,7 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const workflow = readFileSync(
   new URL('../../.github/workflows/fast-publish-section.yml', import.meta.url),
@@ -58,7 +58,10 @@ test('un replay pinned superato usa un nuovo nonce per la revisione di destinazi
   const step = workflow.split('      - name: Dispatch bounded replay with current corpus checkout\n')[1]
     .split('\n      - name:')[0];
   assert.doesNotMatch(step, /DISPATCH_NONCE|DISPATCH_COHORT|inputs\.dispatch_(nonce|cohort)/u);
-  assert.match(step, /nonce_hash=.*"\$GITHUB_RUN_ID" "\$CURRENT_MAIN" "\$SECTION"/u);
+  for (const caller of [step, render]) {
+    assert.match(caller, /nonce_hash=.*"\$\{replay_args\[@\]\}"/u);
+    assert.match(caller, /"\$\{replay_args\[@\]\}" -f dispatch_nonce=/u);
+  }
   assert.match(step, /dispatch_nonce="stale-late-\$\{CURRENT_MAIN:0:12\}-\$\{SECTION\}-\$\{nonce_hash\}"/u);
   assert.match(step, /-f dispatch_nonce="\$dispatch_nonce"/u);
   assert.match(step, /dispatch_cohort="stale-late-\$\{GITHUB_RUN_ID\}-\$\{SECTION\}-n1"/u);
@@ -220,6 +223,149 @@ test('il restore stale ripristina i target tracciati e rimuove quelli assenti da
   }
 });
 
+test('la guardia di sezione distingue gli input di pubblicazione dai file di controllo e dai test', (t) => {
+  const root = mkdtempSync(path.join(tmpdir(), 'section-source-unaffected-'));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: 'pipe' }).trim();
+  const guard = fileURLToPath(new URL('../../scripts/ci/section-source-unaffected.sh', import.meta.url));
+  git('init', '--quiet', '--object-format=sha1');
+  git('config', 'user.name', 'Test');
+  git('config', 'user.email', 'test@example.invalid');
+  git('commit', '--quiet', '--allow-empty', '-m', 'base');
+  const base = git('rev-parse', 'HEAD');
+
+  const check = (expected, current, status, label) => {
+    const result = spawnSync('bash', [guard, expected, current], { cwd: root, encoding: 'utf8' });
+    assert.ifError(result.error);
+    assert.equal(result.status, status, `${label}\n${result.stderr}`);
+  };
+
+  const commitFiles = (label, ...files) => {
+    for (const file of files) {
+      const target = path.join(root, file);
+      mkdirSync(path.dirname(target), { recursive: true });
+      writeFileSync(target, `${label}\n`);
+    }
+    git('add', '.');
+    git('commit', '--quiet', '-m', label);
+    return git('rev-parse', 'HEAD');
+  };
+
+  const generationHead = commitFiles('translator e test alla radice',
+    'generator/scripts/lib/free-translate.mjs', 'generator/tests/translation.test.mjs');
+  check(base, generationHead, 0, 'translator e test alla radice');
+  const nestedTestHead = commitFiles('test annidato', 'generator/tests/translation/recovery.test.mjs');
+  check(generationHead, nestedTestHead, 0, 'test annidato');
+  check(nestedTestHead, base, 1, 'intervallo senza fast-forward con sole modifiche escluse');
+  check('HEAD', nestedTestHead, 1, 'SHA malformata');
+
+  const lintConfig = '.github/actionlint.yaml';
+  const controlHead = commitFiles('configurazione lint', lintConfig);
+  check(nestedTestHead, controlHead, 0, 'sola aggiunta della configurazione lint');
+  const lintHead = commitFiles('aggiornamento della configurazione lint', lintConfig);
+  check(controlHead, lintHead, 0, 'solo aggiornamento della configurazione lint');
+
+  const admissionGate = 'scripts/ci/canton-generation-admit.mjs';
+  const syncManifest = 'scripts/ci/loop-sync-manifest.json';
+  const admissionHead = commitFiles('gate di ammissione, test e manifest',
+    admissionGate, 'generator/tests/canton-generation-admit.test.mjs', syncManifest);
+  check(lintHead, admissionHead, 0, 'gate di ammissione, test e manifest');
+
+  const article = 'content/blog-body-canton-ti/it/article.ts';
+  const cases = [
+    ['contenuto di sezione e test', article, 'generator/tests/content.test.mjs'],
+    ['aggiornamento del contenuto di sezione e configurazione lint', article, lintConfig],
+    ['workflow di pubblicazione', '.github/workflows/fast-publish-section.yml'],
+    ['script di pubblicazione e test', 'scripts/publish-section-pages.mjs', 'generator/tests/publisher.test.mjs'],
+    ['script di riconciliazione con gate di ammissione e manifest',
+      'scripts/reconcile-section-pages.mjs', admissionGate, syncManifest],
+    ['fixture', 'generator/tests/translation/fixture.json'],
+    ['libreria sconosciuta', 'generator/scripts/lib/unknown.mjs'],
+  ];
+  let previous = admissionHead;
+  for (const [label, ...files] of cases) {
+    const current = commitFiles(label, ...files);
+    check(previous, current, 1, label);
+    previous = current;
+  }
+
+  const reconcilePath = '.github/workflows/reconcile-section-pages.yml';
+  const beforeScheduling = `name: Reconcile section pages
+on:
+  workflow_dispatch:
+    inputs:
+      cap:
+        default: '3'
+      retry_pending:
+        default: false
+        type: boolean
+
+concurrency:
+  group: reconcile-section-pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - run: node scripts/reconcile-section-pages.mjs
+`;
+  const afterScheduling = beforeScheduling
+    .replace('concurrency:\n  group: reconcile-section-pages\n', [
+      '# Coalesce runs of the same event while reserving a pending slot for each trigger.',
+      'concurrency:',
+      '  group: reconcile-section-pages-${{ github.event_name }}',
+      '  queue: single',
+      '',
+    ].join('\n'))
+    .replace('  reconcile:\n', [
+      '  reconcile:',
+      '    concurrency:',
+      '      group: reconcile-section-pages',
+      '      queue: max',
+      '      cancel-in-progress: false',
+      '',
+    ].join('\n'));
+  const writeReconcile = (source) => writeFileSync(path.join(root, reconcilePath), source);
+  const commitReconcile = (label) => {
+    git('add', '.');
+    git('commit', '--quiet', '-m', label);
+    return git('rev-parse', 'HEAD');
+  };
+  mkdirSync(path.join(root, '.github/workflows'), { recursive: true });
+  writeReconcile(beforeScheduling);
+  const schedulingBase = commitReconcile('workflow iniziale');
+  writeReconcile(afterScheduling);
+  const schedulingHead = commitReconcile('migrazione di scheduling approvata');
+  check(schedulingBase, schedulingHead, 0, 'solo delta approvato');
+
+  for (const [label, source] of [
+    ['migrazione con modifica al cap di detection/backfill', afterScheduling.replace("default: '3'", "default: '4'")],
+    ['migrazione con queue diversa', afterScheduling.replace('queue: single', 'queue: max')],
+  ]) {
+    git('checkout', '--quiet', '--detach', schedulingBase);
+    writeReconcile(source);
+    check(schedulingBase, commitReconcile(label), 1, label);
+  }
+
+  git('checkout', '--quiet', '--detach', schedulingHead);
+  writeReconcile(afterScheduling.replace('contents: read', 'contents: write'));
+  const bodyHead = commitReconcile('modifica al body del workflow');
+  check(schedulingHead, bodyHead, 1, 'modifica al body dopo la migrazione');
+  check(schedulingBase, bodyHead, 1, 'migrazione con modifica al body');
+  git('checkout', '--quiet', '--detach', schedulingHead);
+  git('update-index', '--chmod=+x', reconcilePath);
+  git('commit', '--quiet', '-m', 'modifica al solo mode');
+  const modeHead = git('rev-parse', 'HEAD');
+  check(schedulingHead, modeHead, 1, 'modifica al solo mode dopo la migrazione');
+  check(schedulingBase, modeHead, 1, 'migrazione con modifica al mode');
+});
+
 test('fast-publish-section conserva la guardia di freschezza anche con checkout pinned precedente', () => {
   const materializers = [...workflow.matchAll(/- name: Materialize (?:resolver|freshness helper) from workflow revision[\s\S]*?(?=\n      - name:|\n  [A-Za-z_][A-Za-z0-9_-]*:|$)/gu)]
     .map((match) => match[0]);
@@ -241,7 +387,8 @@ test('fast-publish-section delega i blocchi shell grandi a script senza espressi
     'recovery',
   ]) {
     const path = `scripts/ci/fast-publish-section-${name}.sh`;
-    assert.match(workflow, new RegExp(`run: bash ${path.replaceAll('/', '\\/')}`));
+    const checkout = name === "render" ? ".replay-dispatcher-source/" : "";
+    assert.ok(workflow.includes(`run: bash ${checkout}${path}\n`), `workflow must run ${checkout}${path}`);
     const source = readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
     assert.match(source, /^#!\/usr\/bin\/env bash/u);
     assert.match(source, /^set -euo pipefail$/mu);

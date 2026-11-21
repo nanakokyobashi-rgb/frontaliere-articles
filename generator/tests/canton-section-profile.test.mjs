@@ -256,6 +256,9 @@ test('profilo canton-gr: ammissione multilingue, cronaca solo con impatto pratic
   assert.equal(p.discoveryPool, false);
   assert.equal(p.demandRanker, false);
   assert.equal(p.hasAdmission('Kanton Graubünden senkt die Steuern'), true);
+  assert.equal(p.hasAdmission('Öffentliche Auflage zur Teilrevision Nutzungsplanung Stoffelmatte'), true);
+  assert.equal(p.hasAdmission('Mise à l’enquête du plan d’affectation communal'), true);
+  assert.equal(p.hasAdmission('Auf Panoramastrasse wird Wintersperre signalisiert'), true);
   assert.equal(p.hasAdmission('Chur: Einbruch in Wohnung, Täter flüchtig'), false);
   assert.equal(p.hasAdmission('Chur: Kantonsstrasse nach Unfall gesperrt'), true, 'cronaca nel cantone con impatto pratico');
   assert.equal(p.hasAdmission('Zürich: Strasse nach Unfall gesperrt'), true, 'premessa: «gesperrt» e\' anche lessico di mobilita\'');

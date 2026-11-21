@@ -12,7 +12,7 @@ import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, readlinkSync, rmSync, writeFileSync } from 'node:fs';
+import { chmodSync, existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, readlinkSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -20,7 +20,7 @@ import { fileURLToPath } from 'node:url';
 import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL, ARTICLE_SECTION_CORE_LIST } from '../../engine/shared/articleSectionCore.mjs';
 import { cantonTopicHubPath } from '../../engine/shared/cantonSectionCopy.mjs';
 import { CORPUS_ROUTE_OWNER_META_TAG } from '../../engine/shared/corpusRouteOwner.mjs';
-import { publishApiFreshnessPaths } from '../../scripts/lib/publish-api-input-range.mjs';
+import { apiTriggerInputsDifferBetween, publishApiFreshnessPaths } from '../../scripts/lib/publish-api-input-range.mjs';
 import {
   API_BASE,
   APEX,
@@ -1125,6 +1125,210 @@ test('publisher: legge la struttura reale di on.push.paths e cerca l\'ultimo inp
     '--',
     'content/**',
   ]);
+});
+
+test('publisher freshness distingue le sole fonti cantonali dagli input API fra alberi e nella storia', (t) => {
+  const repo = mkdtempSync(path.join(tmpdir(), 'publish-api-freshness-'));
+  t.after(() => rmSync(repo, { recursive: true, force: true }));
+  const git = (args) => execFileSync('git', ['-C', repo, ...args], { encoding: 'utf8' }).trim();
+  git(['init', '-q']);
+  const registry = 'generator/data/canton-sections.json';
+  const article = 'content/article.mjs';
+  mkdirSync(path.join(repo, 'generator/data'), { recursive: true });
+  mkdirSync(path.join(repo, 'content'));
+  const saveRegistry = (document) => writeFileSync(path.join(repo, registry), JSON.stringify(document));
+  const commit = () => {
+    git(['add', '.']);
+    git([
+      '-c', 'user.name=Publisher Test', '-c', 'user.email=publisher@example.invalid',
+      '-c', 'commit.gpgSign=false', 'commit', '-qm', 'Fixture input',
+    ]);
+    return git(['rev-parse', 'HEAD']);
+  };
+  const options = {
+    execFileSyncImpl: (command, args, settings) => execFileSync(command, ['-C', repo, ...args.slice(2)], settings),
+    triggerPathsImpl: () => [registry, 'content/**'],
+  };
+  const treesDiffer = (before, after) => apiTriggerInputsDifferBetween({ before, after }, options);
+  const rangeChanged = (before, after) => apiInputChangedInRange({ before, after }, options);
+  const document = {
+    cantons: [{ code: 'AG', section: 'canton-ag', enabled: true, members: ['AG'], newsSources: [] }],
+    extra: { newsSources: ['preserved'] },
+  };
+  saveRegistry(document);
+  const root = commit();
+  const emptyOptions = { ...options, triggerPathsImpl: () => ['data/blog-cover-cdn-sync-queue.json'] };
+  assert.throws(() => apiTriggerInputsDifferBetween({ before: root, after: root }, emptyOptions), /nessun path/);
+  assert.equal(latestApiInputCommit(root, emptyOptions), null);
+  assert.equal(apiInputChangedInRange({ before: root, after: root }, emptyOptions), false);
+  assert.equal(latestApiInputCommit(root, options), root);
+  assert.equal(treesDiffer(root, root), false);
+  assert.throws(() => treesDiffer(root, 'a'.repeat(40)), /lettura Git non verificabile/);
+  writeFileSync(path.join(repo, article), 'article');
+  const apiInput = commit();
+  for (const source of ['one', 'two']) {
+    document.cantons[0].newsSources.push({ url: 'https://example.invalid/' + source });
+    saveRegistry(document);
+    commit();
+  }
+  const sourceOnly = git(['rev-parse', 'HEAD']);
+  assert.equal(treesDiffer(apiInput, sourceOnly), false);
+  assert.throws(() => treesDiffer(sourceOnly, apiInput), /merge-base/);
+  assert.equal(treesDiffer(root, sourceOnly), true);
+  assert.equal(latestApiInputCommit(sourceOnly, options), apiInput);
+  assert.equal(rangeChanged(apiInput, sourceOnly), false);
+  assert.equal(rangeChanged(root, sourceOnly), true);
+
+  document.cantons[0].enabled = false;
+  saveRegistry(document);
+  const disabled = commit();
+  assert.equal(treesDiffer(sourceOnly, disabled), true);
+  document.cantons[0].enabled = true;
+  saveRegistry(document);
+  const restored = commit();
+  assert.equal(treesDiffer(sourceOnly, restored), false);
+  assert.equal(rangeChanged(sourceOnly, restored), true);
+
+  document.extra.newsSources.push('new top-level metadata');
+  saveRegistry(document);
+  const metadata = commit();
+  assert.equal(treesDiffer(restored, metadata), true);
+  document.cantons[0].newsSources.push({ url: 'https://example.invalid/three' });
+  saveRegistry(document);
+  writeFileSync(path.join(repo, article), 'updated article');
+  const concurrent = commit();
+  assert.equal(treesDiffer(metadata, concurrent), true);
+  assert.equal(latestApiInputCommit(concurrent, options), concurrent);
+
+  writeFileSync(path.join(repo, registry), '{');
+  const malformed = commit();
+  assert.equal(treesDiffer(concurrent, malformed), true);
+  assert.equal(rangeChanged(concurrent, malformed), true);
+  document.cantons[0].newsSources = [{ url: ' ' }];
+  saveRegistry(document);
+  const invalidSource = commit();
+  assert.equal(treesDiffer(concurrent, invalidSource), true);
+  const valid = git(['show', `${concurrent}:${registry}`]);
+  writeFileSync(path.join(repo, registry), valid
+    .replace('"enabled":true', '"enabled":false,"enabled":true')
+    .replace('/three', '/four'));
+  const duplicateKey = commit();
+  assert.equal(treesDiffer(concurrent, duplicateKey), true);
+
+  const updatedSource = valid.replace('/three', '/four');
+  writeFileSync(path.join(repo, registry), '\uFEFF' + updatedSource);
+  const withBom = commit();
+  assert.equal(treesDiffer(concurrent, withBom), true);
+  assert.equal(latestApiInputCommit(withBom, options), withBom);
+
+  writeFileSync(path.join(repo, registry), updatedSource
+    .replace('"enabled":true,"members":["AG"]', '"members":["AG"],"enabled":true'));
+  const reordered = commit();
+  assert.equal(treesDiffer(concurrent, reordered), true);
+
+  writeFileSync(path.join(repo, registry), updatedSource);
+  chmodSync(path.join(repo, registry), 0o755);
+  const executable = commit();
+  assert.equal(treesDiffer(concurrent, executable), true);
+  rmSync(path.join(repo, registry));
+  const deleted = commit();
+  assert.equal(treesDiffer(concurrent, deleted), true);
+  assert.throws(() => treesDiffer(deleted, concurrent), /merge-base/);
+});
+
+test('publisher freshness rileva il merge che ripristina un articolo prima di un cambio di sole fonti', (t) => {
+  const repo = mkdtempSync(path.join(tmpdir(), 'publish-api-merge-'));
+  t.after(() => rmSync(repo, { recursive: true, force: true }));
+  const git = (...args) => execFileSync('git', ['-C', repo, ...args], { encoding: 'utf8' }).trim();
+  git('init', '-q', '-b', 'main');
+  git('config', 'user.name', 'Publisher Test');
+  git('config', 'user.email', 'publisher@example.invalid');
+  git('config', 'commit.gpgSign', 'false');
+  const registry = 'generator/data/canton-sections.json';
+  const article = 'content/article.mjs';
+  mkdirSync(path.join(repo, 'generator/data'), { recursive: true });
+  mkdirSync(path.join(repo, 'content'));
+  const write = (file, value) => writeFileSync(path.join(repo, file), value);
+  const saveRegistry = (newsSources) => write(registry, JSON.stringify({
+    cantons: [{ code: 'AG', section: 'canton-ag', enabled: true, newsSources }],
+  }));
+  const commit = (message) => {
+    git('add', '.');
+    git('commit', '-qm', message);
+    return git('rev-parse', 'HEAD');
+  };
+
+  saveRegistry([]);
+  write(article, 'original article');
+  commit('Original input');
+  git('switch', '-qc', 'side');
+  write('notes.txt', 'Outside API inputs');
+  commit('Side branch notes');
+  git('switch', '-q', 'main');
+  write(article, 'updated article');
+  const before = commit('Update article on main');
+  git('merge', '-q', '--no-ff', '--no-commit', 'side');
+  git('checkout', 'side', '--', article);
+  const merge = commit('Merge side and restore original article');
+  saveRegistry([{ url: 'https://example.invalid/source' }]);
+  const after = commit('Update only news sources');
+
+  const options = {
+    execFileSyncImpl: (command, args, settings) => execFileSync(command, ['-C', repo, ...args.slice(2)], settings),
+    triggerPathsImpl: () => [registry, 'content/**'],
+  };
+  const range = { before, after };
+  assert.equal(apiTriggerInputsDifferBetween(range, options), true);
+  assert.deepEqual(
+    [apiInputChangedInRange(range, options), latestApiInputCommit(after, options)],
+    [true, merge],
+  );
+});
+
+test('publisher freshness confronta il pin sul secondo genitore con il contenuto effettivo di main', (t) => {
+  const repo = mkdtempSync(path.join(tmpdir(), 'publish-api-side-pin-'));
+  t.after(() => rmSync(repo, { recursive: true, force: true }));
+  const git = (...args) => execFileSync('git', ['-C', repo, ...args], { encoding: 'utf8' }).trim();
+  git('init', '-q', '-b', 'main');
+  git('config', 'user.name', 'Publisher Test');
+  git('config', 'user.email', 'publisher@example.invalid');
+  git('config', 'commit.gpgSign', 'false');
+  const registry = 'generator/data/canton-sections.json';
+  const article = 'content/article.mjs';
+  mkdirSync(path.join(repo, 'generator/data'), { recursive: true });
+  mkdirSync(path.join(repo, 'content'));
+  const write = (file, value) => writeFileSync(path.join(repo, file), value);
+  const saveRegistry = (newsSources) => write(registry, JSON.stringify({
+    cantons: [{ code: 'AG', section: 'canton-ag', enabled: true, newsSources }],
+  }));
+  const commit = (message) => {
+    git('add', '.');
+    git('commit', '-qm', message);
+    return git('rev-parse', 'HEAD');
+  };
+
+  saveRegistry([]);
+  write(article, 'main article');
+  commit('Original input');
+  git('switch', '-qc', 'published-side');
+  write(article, 'published side article');
+  const before = commit('Published artifact');
+  git('switch', '-q', 'main');
+  write('notes.txt', 'Outside API inputs');
+  commit('Main branch notes');
+  git('merge', '-q', '--no-ff', '-s', 'ours', 'published-side');
+  assert.equal(git('rev-parse', 'HEAD^2'), before);
+  assert.equal(git('rev-parse', 'HEAD^{tree}'), git('rev-parse', 'HEAD^1^{tree}'));
+  saveRegistry([{ url: 'https://example.invalid/source' }]);
+  const after = commit('Update only news sources');
+
+  const options = {
+    execFileSyncImpl: (command, args, settings) => execFileSync(command, ['-C', repo, ...args.slice(2)], settings),
+    triggerPathsImpl: () => [registry, 'content/**'],
+  };
+  const range = { before, after };
+  assert.equal(apiTriggerInputsDifferBetween(range, options), true);
+  assert.equal(apiInputChangedInRange(range, options), true);
 });
 
 test('publisher freshness ignora il commit bookkeeping skip-ci ma include gli input runtime triggeranti', () => {
@@ -3646,6 +3850,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     staleResolveStart,
     resolver.indexOf('\nbefore="${PUSH_BEFORE:-}"', staleResolveStart),
   );
+  const resolverCheckout = wf.slice(wf.indexOf('- name: Checkout replay dispatcher from workflow revision'), wf.indexOf('- name: Materialize resolver from workflow revision'));
+  assert.match(resolverCheckout, /scripts\/ci\/section-source-unaffected\.sh/);
+  assert.match(staleResolve, /&& ! bash \.replay-dispatcher-source\/scripts\/ci\/section-source-unaffected\.sh "\$pinned_source" "\$current_main"; then/);
   assert.doesNotMatch(staleResolve, /FIREBASE_SERVICE_ACCOUNT_JSON assente/);
   assert.doesNotMatch(staleResolve, /dispatch-fast-publish-replay\.sh/);
   assert.doesNotMatch(staleResolve, /echo 'matrix=\[\]'/);
@@ -3657,10 +3864,18 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(staleResolve, /tar -x -C "\$current_main_source"/);
   assert.match(staleResolve, /replay_matrix="\$\(reconcile_edge_matrix "\$pinned_source" "\$current_main" "\$current_main_source"\)"/);
   assert.match(staleResolve, /git checkout --detach "\$current_main"/);
+  assert.match(staleResolve, /\[ "\$WORKFLOW_RUN_EVENT" = 'push' \][\s\S]*git merge-base --is-ancestor "\$replay_before" "\$pinned_source"[\s\S]*git merge-base --is-ancestor "\$pinned_source" "\$current_main"/);
+  assert.match(staleResolve, /git diff --name-status "\$replay_before" "\$current_main"[\s\S]*r2-plan[\s\S]*r2-api-push-plan/);
   assert.match(staleResolve, /echo "source_commit=\$current_main"/);
   assert.match(staleResolve, /echo 'api_release_commit='/);
   assert.match(staleResolve, /echo "matrix=\$replay_matrix"/);
   assert.match(staleResolve, /fast-publish-result artifact/);
+  assert.doesNotMatch(wf, /install[^\n]*(?:section-source-unaffected\.sh|render_source)/);
+  assert.match(wf, /SECTION_SOURCE_UNAFFECTED_HELPER: \.replay-dispatcher-source\/scripts\/ci\/section-source-unaffected\.sh/);
+  assert.match(wf, /run: bash \.replay-dispatcher-source\/scripts\/ci\/fast-publish-section-render\.sh/);
+  assert.match(publisher, /const helper = process\.env\.SECTION_SOURCE_UNAFFECTED_HELPER \|\| 'scripts\/ci\/section-source-unaffected\.sh';[\s\S]*?spawnSync\('bash', \[path\.resolve\(ROOT_DIR, helper\), expected, current\]/);
+  assert.match(wf, /bash \.replay-dispatcher-source\/scripts\/ci\/section-source-unaffected\.sh "\$pinned_source" "\$current_main"/);
+  assert.match(render, /bash \.replay-dispatcher-source\/scripts\/ci\/section-source-unaffected\.sh "\$pinned_replay_main" "\$current_main"/);
   assert.match(wf, /- name: Guard pinned replay freshness/);
   assert.match(wf, /PINNED_SOURCE_COMMIT: \$\{\{ inputs\.source_commit \}\}/);
   assert.match(wf, /PINNED_SOURCE_MAIN: \$\{\{ inputs\.source_main_commit \}\}/);
@@ -3929,12 +4144,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(sectionContract, /replay workflow_run redispatchato prima degli upload/);
   assert.match(sectionContract, /elif \[ "\$EVENT_NAME" = 'workflow_dispatch' \] && \[ -n "\$\{SOURCE_COMMIT:-\}" \]; then\n\s+pinned_replay_main="\$SOURCE_MAIN_COMMIT"/);
   assert.match(sectionContract, /replay bounded redispatchato prima degli upload/);
-  // Il workflow ha due guard con lo stesso assegnamento locale; questa
-  // asserzione riguarda quello finale, che costruisce il nonce `stale-late`.
-  const lateGuardNonceStart = render.lastIndexOf('dispatch_nonce="${DISPATCH_NONCE:-}"');
+  // Il nonce del recupero riflette esattamente gli argomenti del dispatch.
+  const lateGuardNonceStart = render.indexOf('local replay_args=(');
   const lateGuardTitleStart = render.indexOf('dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"', lateGuardNonceStart);
   const lateGuardNonce = render.slice(lateGuardNonceStart, lateGuardTitleStart);
-  assert.match(lateGuardNonce, /nonce_hash="\$\(printf '%s\\0%s\\0%s\\0%s' "\$nonce_seed" "\$current_main" "\$SECTION" "\$coordinated_recovery" \| sha256sum \| cut -c1-16\)"/);
+  assert.match(lateGuardNonce, /nonce_hash="\$\(printf '%s\\0' "\$\{replay_args\[@\]\}" \| sha256sum \| cut -c1-16\)"/);
   assert.match(lateGuardNonce, /dispatch_nonce="stale-late-\$\{current_main:0:12\}-\$\{SECTION\}-\$\{nonce_hash\}"/);
   assert.match(lateGuardNonce, /dispatch_cohort="stale-late-\$\{GITHUB_RUN_ID\}-\$\{SECTION\}-n1"/);
   assert.match(wf, /id: push_range[\s\S]*resolve-workflow-run-push-range\.mjs/);
@@ -4481,8 +4695,18 @@ test('reconcile: le pagine articolo ritirate presenti entrano nel cleanup e quel
 test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta', () => {
   const wf = read('.github/workflows/reconcile-section-pages.yml');
   const articleWf = read('.github/workflows/reconcile-article-shards.yml');
+  assert.match(wf, /^concurrency:\n  group: reconcile-section-pages-\$\{\{ github\.event_name \}\}\n  queue: single\n  cancel-in-progress: false$/m);
+  assert.match(wf, /^jobs:\n  reconcile:\n    concurrency:\n      group: reconcile-section-pages\n      queue: max\n      cancel-in-progress: false$/m);
   assert.match(wf, /workflows: \[fast-publish-section\]/);
-  assert.match(wf, /node scripts\/reconcile-section-pages\.mjs/);
+  const checkout = wf.match(/^      - name: Checkout\n(?:(?!^      - ).*\n)*/m)?.[0] ?? '';
+  assert.match(checkout, /^        with:$/m);
+  assert.match(checkout, /^          ref: \$\{\{ \(github\.event_name == 'schedule' \|\| github\.event_name == 'workflow_run'\) && 'refs\/heads\/main' \|\| github\.sha \}\}$/m);
+  assert.match(checkout, /^          fetch-depth: 1$/m);
+  assert.match(checkout, /^          persist-credentials: false$/m);
+
+  const detect = wf.match(/^      - name: Detect announced pages missing on R2\n(?:(?!^      - ).*\n)*/m)?.[0] ?? '';
+  assert.match(detect, /node scripts\/reconcile-section-pages\.mjs [^\n]*\n[^\n]*\n\s+source_commit="\$\(git rev-parse HEAD\)"\n\s+current_main="\$\(bash scripts\/ci\/read-main-head\.sh\)"[\s\S]*?if \[ "\$source_commit" != "\$current_main" \]; then/);
+  assert.match(detect, /if \[ "\$source_commit" != "\$current_main" \]; then\n[^\n]*\n\s+\{\n\s+echo 'dispatch=0'\n\s+echo 'pending_edge_flip=false'\n\s+echo 'head_guard=false'\n\s+\} >> "\$GITHUB_OUTPUT"\n\s+exit 0\n\s+fi[\s\S]*?echo "source_commit=\$source_commit"[\s\S]*?echo 'head_guard=true'/);
   assert.match(wf, /args=\([\s\S]*-f "section=\$section"[\s\S]*-f "article_ids=\$ids"[\s\S]*'bootstrap=false'[\s\S]*'dry_run=false'/);
   assert.match(wf, /-f "missing_page_paths=\$missing_page_paths"/);
   assert.match(wf, /-f "known_missing_page_paths=\$known_missing_page_paths"/);

@@ -77,7 +77,7 @@ if [ "$current_main" != "$published_source" ]; then
     echo "::error::publish stantio prima di $context: main=$current_main contiene input API piu' recenti di source=$published_source; il run della nuova push deve pubblicare quella release"
     exit 1
   fi
-  echo "::notice::publish autorizzato prima di $context: main=$current_main e' avanzato da source=$published_source solo con bookkeeping; il commit dell'artifact resta $published_source"
+  echo "::notice::publish autorizzato prima di $context: main=$current_main e' avanzato da source=$published_source con gli input API invariati; il commit dell'artifact resta $published_source"
   exit 0
 fi
 echo "sorgente ancora corrente prima di $context: $published_source"

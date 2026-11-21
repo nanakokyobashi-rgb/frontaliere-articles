@@ -251,6 +251,7 @@ jobs:
             scripts/ci/read-main-head.sh
             scripts/ci/fetch-push-base-if-missing.sh
             scripts/ci/fast-publish-section-resolve.sh
+            scripts/ci/section-source-unaffected.sh
             scripts/ci/fast-publish-section-edge-candidate.sh
             scripts/ci/fast-publish-section-preflight.sh
           sparse-checkout-cone-mode: false
@@ -580,13 +581,10 @@ jobs:
           source='.replay-dispatcher-source/scripts/ci/read-main-head.sh'
           target='scripts/ci/read-main-head.sh'
           render_source='.replay-dispatcher-source/scripts/ci/fast-publish-section-render.sh'
-          render_target='scripts/ci/fast-publish-section-render.sh'
           if [ ! -f "$render_source" ]; then
             echo "::error::helper di render non presente nel checkout della revisione del workflow"
             exit 1
           fi
-          install -m 0755 "$render_source" "$render_target"
-          install -m 0755 .replay-dispatcher-source/scripts/ci/section-source-unaffected.sh scripts/ci/section-source-unaffected.sh
           test -f .replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh
           ln -sfn "$PWD/.replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh" scripts/ci/fetch-push-base-if-missing.sh
           if [ -f "$source" ]; then
@@ -660,7 +658,7 @@ jobs:
             exit 1
           fi
           echo "current_main=$current_main" >> "$GITHUB_OUTPUT"
-          if ! bash scripts/ci/section-source-unaffected.sh "$pinned_source" "$current_main"; then
+          if ! bash .replay-dispatcher-source/scripts/ci/section-source-unaffected.sh "$pinned_source" "$current_main"; then
             echo "::notice::replay pinned saltato: main e' avanzata da $pinned_source a $current_main"
             echo 'fresh=false' >> "$GITHUB_OUTPUT"
             exit 0
@@ -729,13 +727,8 @@ jobs:
             exit 1
           fi
           export GH_TOKEN="$runtime_pat"
-          # A completed replay on the previous source cannot satisfy this handoff.
-          nonce_hash="$(printf '%s\0%s\0%s' "$GITHUB_RUN_ID" "$CURRENT_MAIN" "$SECTION" | sha256sum | cut -c1-16)"
-          dispatch_nonce="stale-late-${CURRENT_MAIN:0:12}-${SECTION}-${nonce_hash}"
-          dispatch_cohort="stale-late-${GITHUB_RUN_ID}-${SECTION}-n1"
           child_replay_api_after_publish=false
           child_coordinated_recovery=true
-          dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"
           replay_before="${ORIGINAL_PUSH_BEFORE:-$STALE_HEAD}"
           replay_after=''
           if [ -n "$replay_before" ]; then
@@ -776,25 +769,31 @@ jobs:
             # il publisher ricalcola quella compatibile con la HEAD corrente.
             echo "::notice::replay bounded stantio: ricalcolo la release API sulla HEAD $CURRENT_MAIN"
           fi
-          bash .replay-dispatcher-source/scripts/ci/dispatch-fast-publish-replay.sh "$REPO" "$dispatch_title" --ref main \
-            -f section="$SECTION" \
-            -f article_ids="$ARTICLE_IDS_JSON" \
-            -f missing_page_paths="$MISSING_PAGE_PATHS_JSON" \
-            -f known_missing_page_paths="$KNOWN_MISSING_PAGE_PATHS_JSON" \
-            -f bootstrap="$BOOTSTRAP" \
-            -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
-            -f cleanup_inactive_surface="$CLEANUP_INACTIVE_SURFACE" \
-            -f replay_api_after_publish="$child_replay_api_after_publish" \
-            -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE" \
-            -f api_release_commit="$api_release_commit" \
-            -f source_commit="$CURRENT_MAIN" \
-            -f source_main_commit="$CURRENT_MAIN" \
-            -f dry_run="$DRY" \
-            -f push_before="$replay_before" \
-            -f push_after="$replay_after" \
-            -f dispatch_nonce="$dispatch_nonce" \
-            -f dispatch_cohort="$dispatch_cohort" \
+          replay_args=(
+            -f section="$SECTION"
+            -f article_ids="$ARTICLE_IDS_JSON"
+            -f missing_page_paths="$MISSING_PAGE_PATHS_JSON"
+            -f known_missing_page_paths="$KNOWN_MISSING_PAGE_PATHS_JSON"
+            -f bootstrap="$BOOTSTRAP"
+            -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS"
+            -f cleanup_inactive_surface="$CLEANUP_INACTIVE_SURFACE"
+            -f replay_api_after_publish="$child_replay_api_after_publish"
+            -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE"
+            -f api_release_commit="$api_release_commit"
+            -f source_commit="$CURRENT_MAIN"
+            -f source_main_commit="$CURRENT_MAIN"
+            -f dry_run="$DRY"
+            -f push_before="$replay_before"
+            -f push_after="$replay_after"
             -f coordinated_recovery="$child_coordinated_recovery"
+          )
+          # Hash the dispatched inputs so equivalent recoveries can share a run.
+          nonce_hash="$(printf '%s\0' "${replay_args[@]}" | sha256sum | cut -c1-16)"
+          dispatch_nonce="stale-late-${CURRENT_MAIN:0:12}-${SECTION}-${nonce_hash}"
+          dispatch_cohort="stale-late-${GITHUB_RUN_ID}-${SECTION}-n1"
+          dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"
+          bash .replay-dispatcher-source/scripts/ci/dispatch-fast-publish-replay.sh "$REPO" "$dispatch_title" --ref main \
+            "${replay_args[@]}" -f dispatch_nonce="$dispatch_nonce" -f dispatch_cohort="$dispatch_cohort"
 
       - name: Fetch fallback corpus revision for manifest migration
         if: steps.replay_freshness.outputs.fresh == 'true'
@@ -917,7 +916,8 @@ jobs:
           EXPECTED_MAIN_HEAD: ${{ needs.resolve.outputs.source_commit || github.event.workflow_run.head_sha || inputs.source_main_commit || github.event.after || github.sha }}
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
-        run: bash scripts/ci/fast-publish-section-render.sh
+          SECTION_SOURCE_UNAFFECTED_HELPER: .replay-dispatcher-source/scripts/ci/section-source-unaffected.sh
+        run: bash .replay-dispatcher-source/scripts/ci/fast-publish-section-render.sh
 
       - name: Release bootstrap R2 gate
         # GITHUB_ENV aggiorna l'ambiente dei passi successivi, ma non è una
