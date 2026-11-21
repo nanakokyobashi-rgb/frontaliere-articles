@@ -1,4 +1,21 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-festival-ai-lugano-aree.webp",
+      "sha256": "9fa989cbfc9d93b63d6563ed9b13b55a5bd29d83caa5c7d9a9b7610222867e6c"
+    },
+    {
+      "path": "public/images/blog/article-gruyere-studio-mobilita-profondo.webp",
+      "sha256": "5aa636e4bd4c7849c92956a0f112844088a509e86e26c546c9fe64a83d0f517e"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-festival-ai-lugano-aree-480w.webp",
+      "sha256": "c121380a0e2eee01d674afa20cd005b52219c28ad4c4054b7e82e3690357a44a"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-gruyere-studio-mobilita-profondo-480w.webp",
+      "sha256": "2ce0c844bf9c0b42eee70caef938b6fcab826938530f0841e0e7a227d13c397c"
+    }
+  ]
 }
