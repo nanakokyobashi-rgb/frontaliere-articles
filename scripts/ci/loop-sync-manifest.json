@@ -341,7 +341,7 @@
     {
       "path": "scripts/ci/section-source-unaffected.sh",
       "mode": "corpus-only",
-      "reason": "Prima del render e delle scritture del publisher cantonale, verifica che le differenze tra due revisioni del corpus siano limitate ai file operativi, agli entrypoint dei test e agli input noti usati soltanto dalla generazione. Esclude puntualmente `.github/actionlint.yaml` e `.github/workflows/reconcile-section-pages.yml` perché configurano il lint e la pianificazione della riconciliazione senza incidere sui render già pianificati. Il publisher appartiene al corpus.",
+      "reason": "Prima del render e delle scritture del publisher cantonale, verifica che le differenze tra due revisioni del corpus siano limitate ai file operativi, agli entrypoint dei test e agli input noti usati soltanto dalla generazione. Esclude puntualmente `.github/actionlint.yaml`. Per `.github/workflows/reconcile-section-pages.yml` accetta soltanto il delta approvato di scheduling, nella direzione prevista e con il contesto completo della patch. Ogni altra variazione del workflow invalida il piano di sezione. Il publisher appartiene al corpus.",
       "baseline": {
         "site": null,
         "corpus": null,

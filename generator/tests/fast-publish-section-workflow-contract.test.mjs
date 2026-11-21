@@ -257,9 +257,10 @@ test('la guardia di sezione distingue gli input di pubblicazione dai file di con
   check('HEAD', nestedTestHead, 1, 'SHA malformata');
 
   const lintConfig = '.github/actionlint.yaml';
-  const controlHead = commitFiles('configurazione lint e workflow di riconciliazione',
-    lintConfig, '.github/workflows/reconcile-section-pages.yml');
-  check(nestedTestHead, controlHead, 0, 'soli file di controllo');
+  const controlHead = commitFiles('configurazione lint', lintConfig);
+  check(nestedTestHead, controlHead, 0, 'sola aggiunta della configurazione lint');
+  const lintHead = commitFiles('aggiornamento della configurazione lint', lintConfig);
+  check(controlHead, lintHead, 0, 'solo aggiornamento della configurazione lint');
 
   const article = 'content/blog-body-canton-ti/it/article.ts';
   const cases = [
@@ -270,12 +271,88 @@ test('la guardia di sezione distingue gli input di pubblicazione dai file di con
     ['fixture', 'generator/tests/translation/fixture.json'],
     ['libreria sconosciuta', 'generator/scripts/lib/unknown.mjs'],
   ];
-  let previous = controlHead;
+  let previous = lintHead;
   for (const [label, ...files] of cases) {
     const current = commitFiles(label, ...files);
     check(previous, current, 1, label);
     previous = current;
   }
+
+  const reconcilePath = '.github/workflows/reconcile-section-pages.yml';
+  const beforeScheduling = `name: Reconcile section pages
+on:
+  workflow_dispatch:
+    inputs:
+      cap:
+        default: '3'
+      retry_pending:
+        default: false
+        type: boolean
+
+concurrency:
+  group: reconcile-section-pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - run: node scripts/reconcile-section-pages.mjs
+`;
+  const afterScheduling = beforeScheduling
+    .replace('concurrency:\n  group: reconcile-section-pages\n', [
+      '# Coalesce runs of the same event while reserving a pending slot for each trigger.',
+      'concurrency:',
+      '  group: reconcile-section-pages-${{ github.event_name }}',
+      '  queue: single',
+      '',
+    ].join('\n'))
+    .replace('  reconcile:\n', [
+      '  reconcile:',
+      '    concurrency:',
+      '      group: reconcile-section-pages',
+      '      queue: max',
+      '      cancel-in-progress: false',
+      '',
+    ].join('\n'));
+  const writeReconcile = (source) => writeFileSync(path.join(root, reconcilePath), source);
+  const commitReconcile = (label) => {
+    git('add', '.');
+    git('commit', '--quiet', '-m', label);
+    return git('rev-parse', 'HEAD');
+  };
+  mkdirSync(path.join(root, '.github/workflows'), { recursive: true });
+  writeReconcile(beforeScheduling);
+  const schedulingBase = commitReconcile('workflow iniziale');
+  writeReconcile(afterScheduling);
+  const schedulingHead = commitReconcile('migrazione di scheduling approvata');
+  check(schedulingBase, schedulingHead, 0, 'solo delta approvato');
+
+  for (const [label, source] of [
+    ['migrazione con modifica al cap di detection/backfill', afterScheduling.replace("default: '3'", "default: '4'")],
+    ['migrazione con queue diversa', afterScheduling.replace('queue: single', 'queue: max')],
+  ]) {
+    git('checkout', '--quiet', '--detach', schedulingBase);
+    writeReconcile(source);
+    check(schedulingBase, commitReconcile(label), 1, label);
+  }
+
+  git('checkout', '--quiet', '--detach', schedulingHead);
+  writeReconcile(afterScheduling.replace('contents: read', 'contents: write'));
+  const bodyHead = commitReconcile('modifica al body del workflow');
+  check(schedulingHead, bodyHead, 1, 'modifica al body dopo la migrazione');
+  check(schedulingBase, bodyHead, 1, 'migrazione con modifica al body');
+  git('checkout', '--quiet', '--detach', schedulingHead);
+  git('update-index', '--chmod=+x', reconcilePath);
+  git('commit', '--quiet', '-m', 'modifica al solo mode');
+  const modeHead = git('rev-parse', 'HEAD');
+  check(schedulingHead, modeHead, 1, 'modifica al solo mode dopo la migrazione');
+  check(schedulingBase, modeHead, 1, 'migrazione con modifica al mode');
 });
 
 test('fast-publish-section conserva la guardia di freschezza anche con checkout pinned precedente', () => {
