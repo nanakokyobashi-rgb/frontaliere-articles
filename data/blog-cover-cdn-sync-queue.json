@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-gov-svitto-respinge-autorizzazione.webp",
+      "sha256": "c2eba1e95c35b65c6b2d1ba6f588518b16310fc2bbd92471f23a5176ca806ba1"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-gov-svitto-respinge-autorizzazione-480w.webp",
+      "sha256": "c2133dcb9ce3439fea513ce42ae3b1aa67bc67b3c31a55b2329c96699492af1b"
+    }
+  ]
 }
