@@ -244,7 +244,7 @@ async function runTruncationRetryLoop({ data, itContent, detectTruncation, callW
     'TRANSLATION_CHUNK_THRESHOLD', 'translatedStringOrNull', 'sanitizeBodyText', 'countWords', 'console',
     'markBodyTranslationPending', 'RUN_REPORT', 'isSourcePassthrough', 'validatePretranslatedBody',
     'safeSignalDiagnosticTextForLog',
-    `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${REAL_TRUNCATION_SRC}\nreturn (async () => { ${LOOP_SRC} })();`,
+    `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${BUILD_PENDING_BODY_PROMPT_SRC}\n${REAL_TRUNCATION_SRC}\nreturn (async () => { ${LOOP_SRC} })();`,
   );
   await fn(
     data, itContent, detectTruncation, callWithRetry, chunkTranslator,

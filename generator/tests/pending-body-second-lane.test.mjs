@@ -96,7 +96,7 @@ const makeTableHeaderMarkers = new Function(
   `${TABLE_HEADER_MARKER_HELPERS_SRC}\nreturn { tableHeaderColumnMarkers, tableHeaderColumnMarker, tableHeaderColumnMarkersMatch };`,
 )(lineStructuralSignature);
 const buildBodyTruncationRetryPrompt = new Function(
-  `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${BUILD_BODY_TRUNCATION_RETRY_PROMPT_SRC}\nreturn buildBodyTruncationRetryPrompt;`,
+  `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${BUILD_BODY_TRUNCATION_RETRY_PROMPT_SRC}\n${extractFunctionSource('function buildPendingBodyRetranslationPrompt(')}\nreturn buildBodyTruncationRetryPrompt;`,
 )();
 const TRANSLATE_IN_CHUNKS_SRC = (() => {
   const start = src.indexOf('  async function translateInChunks(\n    bodyText,\n    fieldKey,\n    makeChunkPrompt,\n    labelPrefix,\n    targetLang,\n    { pretranslatedResult = null, forceLegacy = false, chunkWords } = {},\n  ) {');
@@ -1648,7 +1648,7 @@ test('il retry chunked conserva gli indici globali dei marker delle tabelle', as
     (bodyText) => realChunker(bodyText, 20),
     async (prompt) => {
       prompts.push(prompt);
-      const match = prompt.match(/\nCAMPO ITALIANO \(body1(?:, parte \d+ di \d+)?\):\n([\s\S]*?)\n\nFormato risposta:/u);
+      const match = prompt.match(/\nCONTENUTO ITALIANO DA TRADURRE:\n- body1(?:, parte \d+ di \d+)?: ([\s\S]*?)\n\nRispondi con un JSON object/u);
       assert.ok(match, 'il prompt deve delimitare il chunk marcato');
       return { body1: match[1] };
     },

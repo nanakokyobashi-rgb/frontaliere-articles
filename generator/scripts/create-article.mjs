@@ -15453,11 +15453,7 @@ function buildBodyTruncationRetryPrompt({
     }
     markedChunkText = markedChunk.markedText;
   }
-  return `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. `
-    + `La traduzione deve essere COMPLETA fino all'ultima frase: non troncare, non interrompere a metà periodo. `
-    + `Mantieni ogni cifra nella stessa proposizione del nome o della voce a cui si riferisce. Conserva l’ordine di cifre e nomi e i separatori che distinguono i diversi dati. `
-    + `Copia ogni marcatore opaco <span data-frontaliere-table-column="riga-cella"></span> esattamente nella stessa cella della tabella; non tradurlo. `
-    + `Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${field}${partLabel}):\n${markedChunkText}\n\nFormato risposta: {"${field}": "..."}`;
+  return buildPendingBodyRetranslationPrompt({ langName, field, itValue: markedChunkText, partLabel });
 }
 
 function tableHeaderColumnMarkersMatch(value, expectedMarkers) {
@@ -15703,7 +15699,7 @@ function buildPendingBodyRetranslationPrompt({ langName, field, itValue, partLab
   return `Traduci COMPLETAMENTE in ${langName} il seguente corpo dell'articolo per il sito Frontaliere Ticino.
 
 VINCOLI OBBLIGATORI:
-- non riassumere e non omettere frasi o paragrafi;
+- traduci fino all'ultima frase, senza riassumere, troncare od omettere frasi o paragrafi;
 - mantieni la stessa struttura Markdown, inclusi heading, elenchi, citazioni e interruzioni di riga;
 - mantieni invariati i nomi propri, i toponimi, le cifre e le destinazioni dei link nav: protette dai marcatori;
 - mantieni ogni cifra nella stessa proposizione del nome o della voce a cui si riferisce. Conserva l’ordine di cifre e nomi e i separatori che distinguono i diversi dati;
@@ -18304,7 +18300,9 @@ ${localizedToponymInstruction(targetLang)}`;
               recoverySourceText = markedBody.markedText;
             }
             const parsed = await callWithRetry(
-              `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. Rispondi SOLO con JSON (no markdown):\n\n${isBodyField ? '- Copia ogni marcatore opaco <span data-frontaliere-table-column="riga-cella"></span> esattamente nella stessa cella della tabella; non tradurlo. Mantieni ogni cifra nella stessa proposizione del nome o della voce a cui si riferisce. Conserva l’ordine di cifre e nomi e i separatori che distinguono i diversi dati.' : ''}\n\nCAMPO ITALIANO (${retryFieldLabel}):\n${recoverySourceText}\n\nFormato risposta: ${faqPart ? `{"faq": [{"${faqPart}": "..."}]}` : `{"${field}": "..."}`}`,
+              isBodyField
+                ? buildPendingBodyRetranslationPrompt({ langName, field, itValue: recoverySourceText })
+                : `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${retryFieldLabel}):\n${recoverySourceText}\n\nFormato risposta: ${faqPart ? `{"faq": [{"${faqPart}": "..."}]}` : `{"${field}": "..."}`}`,
               1500,
               `${locale}:${recoveryField}-missing-retry`,
               { translation: true },
