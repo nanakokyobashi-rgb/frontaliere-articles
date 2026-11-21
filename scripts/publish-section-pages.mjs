@@ -64,6 +64,13 @@ import {
   releaseFetchWithRefTimeout,
   removeAbortListenerSafely,
 } from '../generator/scripts/lib/fetch-with-ref-timeout.mjs';
+import {
+  findHtmlClosingTag,
+  findHtmlRawTextClosingTag,
+  htmlAttributes,
+  isHtmlRawTextTag,
+  nextHtmlTag,
+} from '../generator/scripts/lib/html-tag-scanner.mjs';
 
 import { IMAGE_FETCH_TIMEOUT_MS, MAX_DECLARED_IMAGE_BYTES } from './lib/declared-image-fetch.mjs';
 import { ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
@@ -438,6 +445,23 @@ function escapeHtmlAttribute(value) {
 }
 
 /** Aggiunge link autodiscovery e un link visibile alla landing; l'operazione è idempotente. */
+function isCantonRssTag(tag, name) {
+  return tag.name === name && Object.hasOwn(tag.attrs, 'data-canton-rss-feed');
+}
+
+function htmlElementRange(source, tag) {
+  if (tag.name === 'link') return { start: tag.start, end: tag.end };
+  const close = findHtmlClosingTag(source, tag.end, tag.name);
+  return close ? { start: tag.start, end: close.end } : null;
+}
+
+function insertBeforeActiveClosingTag(source, name, replacement, label) {
+  const opening = realHtmlTags(source).find((tag) => tag.name === name);
+  const close = opening && findHtmlClosingTag(source, opening.end, name);
+  if (!close) throw new Error('landing senza chiusura ' + label + ' per il link RSS');
+  return source.slice(0, close.start) + replacement + '\n' + source.slice(close.start);
+}
+
 export function addCantonRssFeedLink(html, feedUrl) {
   if (typeof html !== 'string' || !html) throw new Error('landing RSS senza HTML');
   const url = new URL(feedUrl);
@@ -445,27 +469,43 @@ export function addCantonRssFeedLink(html, feedUrl) {
     throw new Error(`URL RSS cantonale fuori dalla superficie edge: ${feedUrl}`);
   }
   const href = escapeHtmlAttribute(url.href);
-  const headLink = `<link data-canton-rss-feed rel="alternate" type="application/rss+xml" title="RSS" href="${href}">`;
-  const bodyLink = `<a data-canton-rss-feed rel="alternate" type="application/rss+xml" href="${href}">RSS</a>`;
+  const headLink = '<link data-canton-rss-feed rel="alternate" type="application/rss+xml" title="RSS" href="' + href + '">';
+  const bodyLink = '<a data-canton-rss-feed rel="alternate" type="application/rss+xml" href="' + href + '">RSS</a>';
   let output = html;
-  const replaceOrInsert = (source, marker, replacement, closingTag, label) => {
-    const existing = [...source.matchAll(marker)];
-    if (existing.length > 1) throw new Error(`landing con link RSS ${label} duplicato`);
-    if (existing.length === 1) return source.replace(existing[0][0], replacement);
-    if (!closingTag.test(source)) throw new Error(`landing senza chiusura ${label} per il link RSS`);
-    return source.replace(closingTag, `${replacement}\n$&`);
+  const replaceOrInsert = (source, name, replacement, closingName, label) => {
+    const existing = realHtmlTags(source)
+      .filter((tag) => isCantonRssTag(tag, name))
+      .map((tag) => htmlElementRange(source, tag))
+      .filter(Boolean);
+    if (existing.length > 1) throw new Error('landing con link RSS ' + label + ' duplicato');
+    if (existing.length === 1) {
+      const range = existing[0];
+      return source.slice(0, range.start) + replacement + source.slice(range.end);
+    }
+    return insertBeforeActiveClosingTag(source, closingName, replacement, label);
   };
-  output = replaceOrInsert(output, /<link\b[^>]*data-canton-rss-feed[^>]*>/giu, headLink, /<\/head\s*>/iu, '</head>');
-  output = replaceOrInsert(output, /<a\b[^>]*data-canton-rss-feed[^>]*>[\s\S]*?<\/a\s*>/giu, bodyLink, /<\/body\s*>/iu, '</body>');
+  output = replaceOrInsert(output, 'link', headLink, 'head', '</head>');
+  output = replaceOrInsert(output, 'a', bodyLink, 'body', '</body>');
   return output;
 }
 
 /** Rimuove entrambi i link RSS quando la release API non emette alcun feed. */
 export function removeCantonRssFeedLinks(html) {
   if (typeof html !== 'string') throw new Error('landing RSS senza HTML');
-  return html
-    .replace(/\s*<link\b[^>]*data-canton-rss-feed[^>]*>\s*/giu, '')
-    .replace(/\s*<a\b[^>]*data-canton-rss-feed[^>]*>[\s\S]*?<\/a\s*>\s*/giu, '');
+  const ranges = realHtmlTags(html)
+    .filter((tag) => isCantonRssTag(tag, 'link') || isCantonRssTag(tag, 'a'))
+    .map((tag) => htmlElementRange(html, tag))
+    .filter(Boolean)
+    .sort((a, b) => b.start - a.start);
+  let output = html;
+  for (const range of ranges) {
+    let start = range.start;
+    let end = range.end;
+    while (start > 0 && /\s/u.test(output[start - 1])) start--;
+    while (end < output.length && /\s/u.test(output[end])) end++;
+    output = output.slice(0, start) + output.slice(end);
+  }
+  return output;
 }
 
 /** Trasforma le righe del manifest in page entry verificati dalla stessa allowlist del publisher. */
@@ -780,10 +820,51 @@ function previousArchiveReleasePages(rootDir, section, requestedRevision) {
  * Cio' che una pagina cantonale deve avere per essere pubblicata; ritorna la
  * lista dei difetti (vuota = ok).
  */
+function realHtmlTags(html) {
+  const source = String(html ?? '');
+  const tags = [];
+  let cursor = 0;
+  let tag;
+  while ((tag = nextHtmlTag(source, cursor)) !== null) {
+    cursor = tag.end;
+    if (tag.closing) continue;
+    tags.push({
+      ...tag,
+      attrs: Object.fromEntries(htmlAttributes(source.slice(tag.start, tag.end))),
+    });
+    if (!tag.selfClosing && isHtmlRawTextTag(tag.name)) {
+      const close = findHtmlRawTextClosingTag(source, tag.end, tag.name);
+      if (!close) break;
+      cursor = close.end;
+    }
+  }
+  return tags;
+}
+
+function hasRouteOwnerMeta(html) {
+  return realHtmlTags(html).some((tag) => tag.name === 'meta'
+    && String(tag.attrs.name || '').toLowerCase() === 'ft-route-owner'
+    && String(tag.attrs.content || '').toLowerCase() === 'corpus');
+}
+
 function cantonRssFeedLinkDefects(html, requiredRssUrl) {
   const escapedUrl = escapeHtmlAttribute(requiredRssUrl);
-  const rssHead = /<link\b(?=[^>]*data-canton-rss-feed)(?=[^>]*rel="alternate")(?=[^>]*type="application\/rss\+xml")(?=[^>]*href="([^"]+)")[^>]*>/i.exec(String(html ?? ''))?.[1];
-  const rssAnchor = /<a\b(?=[^>]*data-canton-rss-feed)(?=[^>]*rel="alternate")(?=[^>]*type="application\/rss\+xml")(?=[^>]*href="([^"]+)")[^>]*>RSS<\/a\s*>/i.exec(String(html ?? ''))?.[1];
+  const source = String(html ?? '');
+  const tags = realHtmlTags(source);
+  const isRssLink = (tag) => tag.name === 'link'
+    && Object.hasOwn(tag.attrs, 'data-canton-rss-feed')
+    && String(tag.attrs.rel || '').toLowerCase() === 'alternate'
+    && String(tag.attrs.type || '').toLowerCase() === 'application/rss+xml';
+  const isRssAnchor = (tag) => tag.name === 'a'
+    && Object.hasOwn(tag.attrs, 'data-canton-rss-feed')
+    && String(tag.attrs.rel || '').toLowerCase() === 'alternate'
+    && String(tag.attrs.type || '').toLowerCase() === 'application/rss+xml';
+  const rssHead = tags.find(isRssLink)?.attrs.href;
+  const rssAnchor = tags.find((tag) => {
+    if (!isRssAnchor(tag)) return false;
+    const close = findHtmlClosingTag(source, tag.end, 'a');
+    return Boolean(close && source.slice(tag.end, close.start) === 'RSS');
+  })?.attrs.href;
   const defects = [];
   if (rssHead !== escapedUrl) defects.push(`link RSS autodiscovery ${rssHead ?? 'assente'} diverso da ${requiredRssUrl}`);
   if (rssAnchor !== escapedUrl) defects.push(`link RSS visibile ${rssAnchor ?? 'assente'} diverso da ${requiredRssUrl}`);
@@ -795,16 +876,24 @@ function hasExpectedCantonRssFeedLinks(html, requiredRssUrl) {
 }
 
 export function pageDefects(page, html, { requiredRssUrl = null } = {}) {
+  const source = String(html ?? '');
+  const tags = realHtmlTags(source);
+  const metaTags = tags.filter((tag) => tag.name === 'meta');
+  const linkTags = tags.filter((tag) => tag.name === 'link');
   const defects = [];
-  if (!html || html.length < 200) defects.push('vuota o troncata');
+  if (!source || source.length < 200) defects.push('vuota o troncata');
   // Il router della SPA resta in staticOverlay solo su un documento che porta
   // questo meta: senza, sopra la pagina comparirebbe NotFoundSuggestions.
-  if (!html.includes(CORPUS_ROUTE_OWNER_META_TAG)) defects.push('manca il meta ft-route-owner');
-  if (page.kind !== 'article' && (/<meta[^>]+name="robots"[^>]+content="[^"]*noindex/i.test(html) || /<meta[^>]+content="[^"]*noindex[^"]*"[^>]+name="robots"/i.test(html))) {
+  if (!hasRouteOwnerMeta(source)) defects.push('manca il meta ft-route-owner');
+  const hasNoindex = metaTags.some((tag) => String(tag.attrs.name || '').toLowerCase() === 'robots'
+    && String(tag.attrs.content || '').toLowerCase().includes('noindex'));
+  if (page.kind !== 'article' && hasNoindex) {
     defects.push('porta un robots noindex (nessuna pagina aggregate cantonale e\' noindex)');
   }
-  if (/(?:src|href)="\/assets\//.test(html)) defects.push('riferimenti /assets/ same-origin (404 in produzione, #5270)');
-  const canonical = /<link[^>]+rel="canonical"[^>]+href="([^"]+)"/i.exec(html)?.[1];
+  const hasSameOriginAsset = tags.some((tag) => ['src', 'href'].some((attribute) =>
+    String(tag.attrs[attribute] || '').startsWith('/assets/')));
+  if (hasSameOriginAsset) defects.push('riferimenti /assets/ same-origin (404 in produzione, #5270)');
+  const canonical = linkTags.find((tag) => String(tag.attrs.rel || '').toLowerCase() === 'canonical')?.attrs.href;
   if (canonical !== page.apexUrl) defects.push(`canonical ${canonical ?? 'assente'} diverso da ${page.apexUrl}`);
   if (page.kind === 'landing' && requiredRssUrl) {
     defects.push(...cantonRssFeedLinkDefects(html, requiredRssUrl));
@@ -845,12 +934,16 @@ export function createRenderRoot(rootDir, tmpBase = os.tmpdir()) {
  * rifiuta. Idempotente — quando l'engine lo emettera' da se', non fa niente.
  */
 export function ensureRouteOwnerMeta(html) {
-  if (html.includes(CORPUS_ROUTE_OWNER_META_TAG)) return html;
-  const anchored = html.replace(/(<meta charset="[^"]*"\s*\/?>)/i, `$1\n${CORPUS_ROUTE_OWNER_META_TAG}`);
-  if (anchored !== html) return anchored;
-  const headed = html.replace(/(<head[^>]*>)/i, `$1\n${CORPUS_ROUTE_OWNER_META_TAG}`);
-  if (headed === html) throw new Error('pagina senza <head>: impossibile dichiarare ft-route-owner');
-  return headed;
+  const source = String(html);
+  if (hasRouteOwnerMeta(source)) return source;
+  const tags = realHtmlTags(source);
+  const charset = tags.find((tag) => tag.name === 'meta' && Object.hasOwn(tag.attrs, 'charset'));
+  if (charset) {
+    return source.slice(0, charset.end) + '\n' + CORPUS_ROUTE_OWNER_META_TAG + source.slice(charset.end);
+  }
+  const head = tags.find((tag) => tag.name === 'head');
+  if (!head) throw new Error('pagina senza <head>: impossibile dichiarare ft-route-owner');
+  return source.slice(0, head.end) + '\n' + CORPUS_ROUTE_OWNER_META_TAG + source.slice(head.end);
 }
 
 /** Le pagine nell'ordine di upload (`UPLOAD_ORDER`), stabile dentro ogni tipo. */
@@ -2461,7 +2554,7 @@ export async function publish({
     const rollbackFailures = await rollbackTransaction();
     return { failures: failures + 1 + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: 0, status };
   }
-  const hasMeta = (body) => String(body ?? '').includes(CORPUS_ROUTE_OWNER_META_TAG);
+  const hasMeta = (body) => hasRouteOwnerMeta(String(body ?? ''));
   for (const page of uploaded) {
     const expectedRssUrl = page.kind === 'landing' ? cantonRssFeedUrlForLocale(section, page.locale) : null;
     const requiredRssUrl = expectedRssUrl && verifiedRssFeeds.some((feed) => feed?.url === expectedRssUrl)

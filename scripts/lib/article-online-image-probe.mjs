@@ -15,6 +15,7 @@
  * that there is nothing to protect.
  */
 import { extractOgImage, isGenericOgImage, normalizeImagePath } from './article-image-postcondition.mjs';
+import { htmlAttributes, nextHtmlTagOutsideRawText } from '../../generator/scripts/lib/html-tag-scanner.mjs';
 
 export const ONLINE_IMAGE = Object.freeze({
   ABSENT: 'absent',
@@ -37,12 +38,20 @@ const CACHE_BUST_PARAM = '_fpcb';
 // publisher (publish-section-pages.mjs).
 const PROBE_USER_AGENT = 'frontaliere-corpus-publisher/1 (+https://frontaliereticino.ch)';
 
-function tagAttributes(tag) {
-  const attrs = {};
-  for (const match of String(tag).matchAll(/([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g)) {
-    attrs[String(match[1]).toLowerCase()] = match[2] ?? match[3] ?? '';
+function realHtmlTags(html) {
+  const source = String(html ?? '');
+  const tags = [];
+  let cursor = 0;
+  let tag;
+  while ((tag = nextHtmlTagOutsideRawText(source, cursor)) !== null) {
+    cursor = tag.end;
+    if (tag.closing) continue;
+    tags.push({
+      ...tag,
+      attrs: Object.fromEntries(htmlAttributes(source.slice(tag.start, tag.end))),
+    });
   }
-  return attrs;
+  return tags;
 }
 
 function pagePath(value) {
@@ -58,8 +67,9 @@ function pagePath(value) {
 /** The paths a page declares as its own: `og:url` and the canonical link. */
 function declaredPagePaths(html) {
   const paths = [];
-  for (const match of String(html ?? '').matchAll(/<(?:meta|link)\b[^>]*>/gi)) {
-    const attrs = tagAttributes(match[0]);
+  for (const tag of realHtmlTags(html)) {
+    if (tag.name !== 'meta' && tag.name !== 'link') continue;
+    const attrs = tag.attrs;
     if (String(attrs.property || '').toLowerCase() === 'og:url') paths.push(pagePath(attrs.content));
     if (String(attrs.rel || '').toLowerCase() === 'canonical') paths.push(pagePath(attrs.href));
   }

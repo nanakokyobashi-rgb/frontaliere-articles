@@ -383,11 +383,15 @@ const HTML_RAW_TEXT_TAGS = new Set([
   'noembed', 'noframes',
 ]);
 
+export function isHtmlRawTextTag(name) {
+  return HTML_RAW_TEXT_TAGS.has(String(name ?? '').toLowerCase());
+}
+
 /** Cerca markup visibile saltando commenti e i contenuti raw di script/style. */
 export function nextHtmlTagOutsideRawText(html, from = 0) {
   let tag = nextHtmlTag(html, from, true);
   while (tag) {
-    if (!tag.closing && !tag.selfClosing && HTML_RAW_TEXT_TAGS.has(tag.name)) {
+    if (!tag.closing && !tag.selfClosing && isHtmlRawTextTag(tag.name)) {
       const close = findHtmlRawTextClosingTag(html, tag.end, tag.name);
       if (!close) return null;
       tag = nextHtmlTag(html, close.end, true);
