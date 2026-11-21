@@ -48236,6 +48236,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'festival-ai-lugano-aree',
+ category: 'novita',
+ date: '2026-11-21T08:36:27.600Z',
+ image: '/images/blog/article-film-festival-diritti-umani-lugano-2026.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

@@ -115044,6 +115044,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-festival-ai-lugano-aree': {
+    title: 'Festival AI a Lugano: 13 aree e oltre 60 relatori',
+    description: 'Festival AI a Lugano: al Palazzo dei Congressi, oltre 60 relatori internazionali, 13 aree e un\'area espositiva gratuita aperta a tutti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, festival, lugano, aree, oltre',
+    ogTitle: 'Festival AI a Lugano: 13 aree e oltre 60 relatori',
+    ogDescription: 'Al Palazzo dei Congressi di Lugano, il Festival AI è descritto come un grande successo di pubblico. La notizia indica oltre 60 relatori internazionali, 13 aree tematiche e un\'area espositiva gratuita aperta a tutti.',
+    canonicalPath: '/articoli-frontaliere/festival-ai-lugano-aree/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Festival AI a Lugano: 13 aree e oltre 60 relatori",
+      "description": "Festival AI a Lugano: al Palazzo dei Congressi, oltre 60 relatori internazionali, 13 aree e un'area espositiva gratuita aperta a tutti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-film-festival-diritti-umani-lugano-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-21T08:36:29+00:00",
+      "dateModified": "2026-11-21T08:36:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/festival-ai-lugano-aree/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
