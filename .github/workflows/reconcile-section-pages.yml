@@ -84,8 +84,9 @@ jobs:
           REPOSITORY: ${{ github.repository }}
         run: |
           set -euo pipefail
+          # Prima del flip serve la presenza fisica delle landing. Dopo il flip riprendono i controlli del contenuto.
           node scripts/reconcile-section-pages.mjs \
-            --out "$RUNNER_TEMP/reconcile-sections.json" --cap "${CAP_INPUT:-3}"
+            --out "$RUNNER_TEMP/reconcile-sections.json" --cap "${CAP_INPUT:-3}" --defer-existing-landings-until-flip
           source_commit="$(git rev-parse HEAD)"
           current_main="$(bash scripts/ci/read-main-head.sh)"
           if ! [[ "$source_commit" =~ ^[a-f0-9]{40}$ ]] || ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
@@ -362,7 +363,7 @@ jobs:
             exit 0
           fi
           verified="$RUNNER_TEMP/reconcile-sections-after-backfill.json"
-          node scripts/reconcile-section-pages.mjs --out "$verified" --cap "${CAP_INPUT:-3}"
+          node scripts/reconcile-section-pages.mjs --out "$verified" --cap "${CAP_INPUT:-3}" --defer-existing-landings-until-flip
           if [ "$(jq -r 'if .skip then "true" else "false" end' "$verified")" = 'true' ] \
             || [ "$(jq -r '.counts.missingPages // 0' "$verified")" != '0' ] \
             || [ "$(jq -r '.counts.landingContentStale // 0' "$verified")" != '0' ] \
