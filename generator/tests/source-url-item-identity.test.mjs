@@ -473,8 +473,12 @@ test('pageTitleEvidence esclude i metadata e i title dei head annidati nel body'
   assert.deepEqual(pageTitleEvidence(html).split('\n'), ['META_REALE', 'TITLE_REALE', 'H1_REALE']);
 });
 
-test('pageTitleEvidence ignora DOCTYPE e prologo XML prima dell’head documentale', () => {
-  const declarations = ['<!doctype html>', '<?xml version="1.0"?>'];
+test('pageTitleEvidence ignora dichiarazioni e markup dentro le dichiarazioni prima dell’head documentale', () => {
+  const declarations = [
+    '<!doctype html>',
+    '<?xml version="1.0"?>',
+    '<!doctype html [<!ENTITY fake \'<meta property="og:title" content="FAKE_META">\'><h1>FAKE_H1</h1>]>',
+  ];
   for (const declaration of declarations) {
     const html = declaration + '<html><head>'
       + '<meta property="og:title" content="TITLE_DOCUMENTALE">'

@@ -671,6 +671,10 @@ function maskNonDocumentTitleMarkup(html) {
         blank(start, source.length);
         break;
       }
+      // A declaration can contain markup-looking text in its internal subset
+      // or quoted values. It is not active HTML, so hide the whole span before
+      // the metadata and title walkers inspect the same-index source.
+      blank(start, declarationEnd);
       cursor = declarationEnd;
       continue;
     }
