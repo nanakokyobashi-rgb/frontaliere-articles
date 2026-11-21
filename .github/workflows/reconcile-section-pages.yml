@@ -277,6 +277,36 @@ jobs:
             exit 1
           fi
           export GH_TOKEN="$runtime_pat"
+          verifyMainHeadAtDispatch() {
+            local current_main=''
+            if ! [[ "${SOURCE_COMMIT:-}" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::warning::source_commit non valida per il backfill; interrompo il batch"
+              return 1
+            fi
+            if ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
+              echo "::warning::impossibile verificare main immediatamente prima del dispatch; interrompo il batch"
+              return 1
+            fi
+            if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::warning::HEAD di main non valida immediatamente prima del dispatch: $current_main; interrompo il batch"
+              return 1
+            fi
+            if ! bash scripts/ci/section-source-unaffected.sh --bookkeeping-only "$SOURCE_COMMIT" "$current_main"; then
+              echo "::notice::main e' avanzata dopo la detection ($SOURCE_COMMIT -> $current_main); interrompo il batch"
+              return 2
+            fi
+            dispatch_source="$current_main"
+          }
+          if verifyMainHeadAtDispatch; then
+            :
+          else
+            verify_status=$?
+            if [ "$verify_status" -eq 2 ]; then
+              echo "::notice::nessun dispatch stantio; il batch verra' ripreso dal prossimo giro"
+              exit 0
+            fi
+            exit "$verify_status"
+          fi
           dispatch_sections="$(jq -c '[.sections[] | select(.dispatch)]' "$RUNNER_TEMP/reconcile-sections.json")"
           if [ "$PENDING_EDGE_FLIP" != 'true' ]; then
             # Reconcile runs serialize, but the child publisher outlives its
@@ -284,9 +314,9 @@ jobs:
             since="$(date -u -d '6 hours ago' +%Y-%m-%dT%H:%M:%SZ)"
             active_sections="$(gh api --paginate --slurp -X GET \
               "repos/$GITHUB_REPOSITORY/actions/workflows/fast-publish-section.yml/runs" \
-              -f branch=main -f event=workflow_dispatch -f head_sha="$SOURCE_COMMIT" \
+              -f branch=main -f event=workflow_dispatch -f head_sha="$dispatch_source" \
               -f "created=>=$since" -f per_page=100 \
-              | jq -ce --arg sha "$SOURCE_COMMIT" '
+              | jq -ce --arg sha "$dispatch_source" '
                 if length == 0 or any(.[]; (.workflow_runs | type) != "array") then
                   error("invalid fast-publish-section run list")
                 else
@@ -319,6 +349,16 @@ jobs:
             [ -n "$section" ] || continue
             echo "── backfill $section ids=$ids"
             dispatch_nonce="reconcile-${GITHUB_RUN_ID}-${section}"
+            if verifyMainHeadAtDispatch; then
+              :
+            else
+              verify_status=$?
+              if [ "$verify_status" -eq 2 ]; then
+                echo "::notice::nessun dispatch stantio; il resto viene ripreso dal prossimo giro"
+                exit 0
+              fi
+              exit "$verify_status"
+            fi
             args=(
               -f "section=$section"
               -f "article_ids=$ids"
@@ -328,8 +368,8 @@ jobs:
               -f 'dry_run=false'
               -f 'replay_api_after_publish=false'
               -f 'coordinated_recovery=true'
-              -f "source_commit=$SOURCE_COMMIT"
-              -f "source_main_commit=$SOURCE_COMMIT"
+              -f "source_commit=$dispatch_source"
+              -f "source_main_commit=$dispatch_source"
               -f "dispatch_nonce=$dispatch_nonce"
               -f "dispatch_cohort=$dispatch_cohort"
             )
