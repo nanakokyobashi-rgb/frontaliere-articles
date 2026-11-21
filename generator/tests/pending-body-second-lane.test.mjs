@@ -72,7 +72,7 @@ function extractFunctionSource(startMarker) {
 
 const COUNT_WORDS_SRC = extractFunctionSource("function countWords(text = '') {");
 const SPLIT_TRANSLATION_CHUNKS_SRC = extractFunctionSource(
-  'function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {',
+  'function splitIntoTranslationChunks(bodyText, chunkTarget, keepDefaultProtectedCap = false) {',
 );
 const ASSERT_CHUNK_TRANSLATOR_SRC = extractFunctionSource('function assertChunkTranslator(');
 function buildChunker() {
@@ -99,7 +99,7 @@ const buildBodyTruncationRetryPrompt = new Function(
   `${TABLE_HEADER_MARKER_HELPERS_SRC}\n${BUILD_BODY_TRUNCATION_RETRY_PROMPT_SRC}\nreturn buildBodyTruncationRetryPrompt;`,
 )();
 const TRANSLATE_IN_CHUNKS_SRC = (() => {
-  const start = src.indexOf('  async function translateInChunks(\n    bodyText,\n    fieldKey,\n    makeChunkPrompt,\n    labelPrefix,\n    targetLang,\n    { pretranslatedResult = null, forceLegacy = false } = {},\n  ) {');
+  const start = src.indexOf('  async function translateInChunks(\n    bodyText,\n    fieldKey,\n    makeChunkPrompt,\n    labelPrefix,\n    targetLang,\n    { pretranslatedResult = null, forceLegacy = false, chunkWords } = {},\n  ) {');
   assert.notEqual(start, -1, 'translateInChunks non trovata in create-article.mjs');
   const end = src.indexOf('\n  }\n', start);
   assert.notEqual(end, -1, 'fine di translateInChunks non trovata in create-article.mjs');
@@ -795,7 +795,7 @@ test('la catena storica riusa il chunker per un body pending sopra soglia', asyn
     'console',
     `${ASSERT_CHUNK_TRANSLATOR_SRC}\n${TABLE_HEADER_MARKER_HELPERS_SRC}\n${src.slice(at, end)}\nreturn translatePendingBodyWithHistoricalChain;`,
   );
-  const longIt = Array.from({ length: 701 }, (_, i) => `parola${i}`).join(' ');
+  const longIt = Array.from({ length: 360 }, (_, i) => `parola${i}`).join(' ');
   const expected = longIt.replaceAll('parola', 'Wort');
   let chunkCall = null;
   let chunkOptions = null;
@@ -841,7 +841,7 @@ test('la catena storica riusa il chunker per un body pending sopra soglia', asyn
   });
   assert.equal(wholeBodyCalls, 0);
   assert.equal(translated, expected);
-  assert.deepEqual(chunkOptions, { forceLegacy: true });
+  assert.deepEqual(chunkOptions, { forceLegacy: true, chunkWords: 240 });
 });
 
 test('la catena storica rifiuta il caller senza il traduttore chunked prima di tradurre', async () => {
@@ -2824,4 +2824,13 @@ test('se il circuit breaker apre Codex dopo la selezione, la lane passa alla cat
   assert.equal(admissionAttempts, 0);
   assert.equal(codexCalls, 0);
   assert.equal(historicalCalls, 1);
+});
+
+test('il recupero conserva in un chunk dedicato un atomo oltre il target ma entro il limite normale', () => {
+  const chunker = buildChunker();
+  const atom = `[ ${'parola '.repeat(241).trim()}](https://example.test)`;
+  assert.deepEqual(chunker(`Prima ${atom} dopo`, 240, true), ['Prima', atom, 'dopo']);
+  assert.throws(() => chunker(atom, 240), /protected translation atom exceeds/);
+  const tooLong = `[ ${'parola '.repeat(501).trim()}](https://example.test)`;
+  assert.throws(() => chunker(tooLong, 240, true), /protected translation atom exceeds/);
 });
