@@ -22,8 +22,8 @@
  *   presente  HEAD sulla chiave che il Worker legge, per le pagine annunciate
  *             e per le pagine articolo candidate come orfane dal manifest,
  *             `https://cdn.frontaliereticino.ch/edge/sections/<path>/index.html`
- *             e contenuto delle quattro landing confrontato con gli articoli
- *             annunciati dall'API (un HTML 200 da solo non basta)
+ *             e, quando il controllo del contenuto e' attivo, HTML delle
+ *             quattro landing confrontato con gli articoli annunciati dall'API.
  *
  * Il registro R2 puo' essere ancora sul commit precedente: e' precisamente il
  * caso di recovery in cui publish-api ha gia' pubblicato Pages ma ha rifiutato
@@ -31,8 +31,9 @@
  * registro generato su Pages; il registro R2 deve comunque essere valido,
  * perche' publish-section-pages lo usa per proteggere la release servita.
  *
- * Solo un 404 conta come «mancante». Ogni altra risposta (5xx, timeout) e'
- * «non verificabile»: non si ripubblica su un dubbio, lo si riporta.
+ * Con l'opt-in, durante il flip pendente si verifica solo la presenza fisica
+ * delle landing. Nelle verifiche fisiche, solo un 404 conta come «mancante».
+ * Un 5xx o un timeout resta «non verificabile».
  *
  * CAP PER SEZIONE (D8): al massimo N articoli per sezione per giro (default
  * 3, `--cap` o RECONCILE_SECTION_CAP), i piu' recenti prima. Il workflow
@@ -42,7 +43,7 @@
  * manca solo una pagina di sezione, con `ids: []` (rinfresco di landing,
  * archivio e hub).
  *
- * Uso: node scripts/reconcile-section-pages.mjs --out <report.json> [--cap N] [--landing-limit N] [--budget-ms N] [--physical-pages-only]
+ * Uso: node scripts/reconcile-section-pages.mjs --out <report.json> [--cap N] [--landing-limit N] [--budget-ms N] [--physical-pages-only] [--defer-existing-landings-until-flip]
  * Solo builtin Node: gira senza npm ci.
  */
 import '../host/cantonSectionsBootstrap.mjs';
@@ -808,13 +809,14 @@ async function mapLimit(items, limit, fn) {
 }
 
 /**
- * @returns {Promise<{ skipped: string | null, apiCommit: string | null, edgeCommit?: string | null, pendingEdgeFlip?: boolean, sections: ReturnType<typeof planSectionBackfill>[] }>}
+ * @returns {Promise<{ skipped: string | null, apiCommit: string | null, edgeCommit?: string | null, pendingEdgeFlip?: boolean, landingContentDeferred?: true, sections: ReturnType<typeof planSectionBackfill>[] }>}
  */
 export async function reconcile({
   apiBase = API_BASE_DEFAULT,
   cap = 3,
   landingCardLimit = CANTON_LANDING_CARD_LIMIT,
   checkLandingContent = true,
+  deferExistingLandingsUntilFlip = false,
   fetchImpl = fetch,
   retryDelayMs = RECONCILE_FETCH_RETRY_DELAY_MS,
   sleepImpl = defaultSleep,
@@ -888,6 +890,7 @@ export async function reconcile({
     });
   }
   const pendingEdgeFlip = edgeRegistry.commit !== manifest.commit;
+  const probeLandingsPhysically = !checkLandingContent || (deferExistingLandingsUntilFlip && pendingEdgeFlip);
   const catalogById = new Map((catalog.sections ?? []).map((entry) => [entry.id, entry]));
   const live = Object.entries(candidateRegistry.sections ?? {})
     .filter(([, state]) => state.status === 'live')
@@ -905,6 +908,7 @@ export async function reconcile({
   const rows = await getJson(`${apiBase}/canton-articles.json`, fetchImpl, fetchOptions);
   const dateById = new Map(rows.map((row) => [row.id, row.updatedAt || row.date || '']));
   const sections = [];
+  let landingContentDeferred = false;
   for (const entry of live) {
     const sitemapUrl = `${apiBase}${entry.sitemap}`;
     let sitemapXml;
@@ -931,7 +935,8 @@ export async function reconcile({
     const landingChecks = [];
     for (const locale of LOCALES) {
       const landingPath = entry.paths[locale];
-      if (!checkLandingContent) {
+      if (probeLandingsPhysically) {
+        landingContentDeferred = checkLandingContent;
         if (!expected.some((page) => page.path === landingPath)) {
           expected.push({ kind: 'section', locale, path: landingPath });
         }
@@ -1017,20 +1022,27 @@ export async function reconcile({
     }
     sections.push(plan);
   }
-  return { skipped: null, apiCommit: manifest.commit, edgeCommit: edgeRegistry.commit, pendingEdgeFlip, sections };
+  return {
+    skipped: null,
+    apiCommit: manifest.commit,
+    edgeCommit: edgeRegistry.commit,
+    pendingEdgeFlip,
+    ...(landingContentDeferred ? { landingContentDeferred: true } : {}),
+    sections,
+  };
 }
 
 export async function main(argv = process.argv.slice(2)) {
   const args = {};
   for (let i = 0; i < argv.length; i++) {
-    if (argv[i] === '--physical-pages-only') {
+    if (argv[i] === '--physical-pages-only' || argv[i] === '--defer-existing-landings-until-flip') {
       args[argv[i].slice(2)] = true;
     } else if (argv[i] === '--out' || argv[i] === '--cap' || argv[i] === '--landing-limit' || argv[i] === '--budget-ms') {
       const value = argv[i + 1];
       if (value === undefined || value.startsWith('--')) throw new Error(`${argv[i]} richiede un valore`);
       args[argv[i].slice(2)] = value;
       i++;
-    } else throw new Error(`argomento sconosciuto: ${argv[i]} (uso: --out <report.json> [--cap N] [--landing-limit N] [--budget-ms N] [--physical-pages-only])`);
+    } else throw new Error(`argomento sconosciuto: ${argv[i]} (uso: --out <report.json> [--cap N] [--landing-limit N] [--budget-ms N] [--physical-pages-only] [--defer-existing-landings-until-flip])`);
   }
   if (!args.out) throw new Error('manca --out <report.json>');
   const cap = Number(args.cap ?? process.env.RECONCILE_SECTION_CAP ?? 3);
@@ -1048,6 +1060,7 @@ export async function main(argv = process.argv.slice(2)) {
   const report = await reconcile({
     apiBase, cap, landingCardLimit, budgetMs,
     checkLandingContent: !args['physical-pages-only'],
+    deferExistingLandingsUntilFlip: args['defer-existing-landings-until-flip'],
   });
   report.counts = {
     sections: report.sections.length,
@@ -1063,6 +1076,9 @@ export async function main(argv = process.argv.slice(2)) {
   fs.mkdirSync(path.dirname(path.resolve(args.out)), { recursive: true });
   fs.writeFileSync(path.resolve(args.out), `${JSON.stringify(report, null, 2)}\n`);
   if (report.skipped) console.log(`[reconcile-sections] rimandato: ${report.skipped}`);
+  if (report.landingContentDeferred) {
+    console.log('[reconcile-sections] flip edge pendente: verifica del contenuto delle landing rinviata');
+  }
   console.log(
     `[reconcile-sections] corpus @${String(report.apiCommit).slice(0, 8)} — sezioni live ${report.counts.sections}, ` +
       `da ripubblicare ${report.counts.dispatch}, landing non sincronizzate ${report.counts.landingContentStale}, pagine mancanti ${report.counts.missingPages}, articoli mancanti ${report.counts.missing} (oltre il cap ${report.counts.leftover}), ` +
