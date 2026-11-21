@@ -55,6 +55,7 @@
 # con il dettaglio: la coda resta visibile invece di affidarsi alla memoria.
 
 name: reconcile-article-shards
+run-name: ${{ github.event_name == 'workflow_dispatch' && inputs.loop_clock != '' && format('reconcile-article-shards [loop-clock {0}]', inputs.loop_clock) || 'reconcile-article-shards' }}
 
 on:
   workflow_run:
@@ -66,6 +67,11 @@ on:
     - cron: '53 */2 * * *'
   workflow_dispatch:
     inputs:
+      loop_clock:
+        description: 'Marcatore del ciclo esterno'
+        required: false
+        default: ''
+        type: string
       dry_run:
         description: 'Rileva e riporta, non dispatcha backfill'
         required: false
@@ -93,11 +99,30 @@ jobs:
     # coda: 50 copre il caso peggiore senza lasciar vivere uno zombie.
     timeout-minutes: 50
     steps:
+      # Schedule, workflow_run and marked dispatches on main can wait in the
+      # queue, so resolve current main at checkout before scanning.
+      - name: Resolve checkout ref
+        id: checkout_ref
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_REF: ${{ github.ref }}
+          EVENT_SHA: ${{ github.sha }}
+          LOOP_CLOCK: ${{ inputs.loop_clock }}
+        run: |
+          checkout_ref="$EVENT_SHA"
+          clock_pattern='^corpus-article-shard-reconcile@[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}Z$'
+          if [[ "$EVENT_NAME" == schedule || "$EVENT_NAME" == workflow_run ]]; then
+            checkout_ref='refs/heads/main'
+          elif [[ "$EVENT_NAME" == workflow_dispatch && "$EVENT_REF" == refs/heads/main && "$LOOP_CLOCK" =~ $clock_pattern ]]; then
+            checkout_ref='refs/heads/main'
+          fi
+          printf 'ref=%s\n' "$checkout_ref" >> "$GITHUB_OUTPUT"
+
       - name: Checkout
         uses: actions/checkout@v7
         with:
-          # Automatic runs can wait in the queue, so resolve main at checkout before scanning.
-          ref: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_run') && 'refs/heads/main' || github.sha }}
+          ref: ${{ steps.checkout_ref.outputs.ref }}
           fetch-depth: 1
           persist-credentials: false
 

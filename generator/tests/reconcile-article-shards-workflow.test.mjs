@@ -37,7 +37,7 @@ test('il reconcile automatico usa la HEAD corrente e non arma backfill stantii',
   assert.match(checkout, /^        with:\n/m);
   assert.match(
     checkout,
-    /^          ref: \$\{\{ \(github\.event_name == 'schedule' \|\| github\.event_name == 'workflow_run'\) && 'refs\/heads\/main' \|\| github\.sha \}\}$/m,
+    /^          ref: \$\{\{ steps\.checkout_ref\.outputs\.ref \}\}$/m,
   );
   assert.match(checkout, /^          fetch-depth: 1$/m);
   assert.match(checkout, /^          persist-credentials: false$/m);
@@ -80,6 +80,25 @@ function stepScript(step) {
   assert.ok(run, 'blocco shell mancante');
   return run[1].replace(/^ {10}/gm, '');
 }
+
+test('il backfill manuale richiede dry_run=false esplicito', () => {
+  const dispatch = workflow.match(/^  workflow_dispatch:\n    inputs:\n(?:^ {6}.*\n)*/m)?.[0] ?? '';
+  assert.match(dispatch, /^      dry_run:\n        description: [^\n]+\n        required: false\n        default: true\n        type: boolean$/m);
+
+  const mode = workflowStep(workflow, 'Resolve backfill mode');
+  assert.match(mode, /^        id: mode$/m);
+  assert.match(
+    stepScript(mode),
+    /^if \[ "\$\{\{ github\.event_name \}\}" = "workflow_dispatch" \] && \[ "\$\{\{ inputs\.dry_run \}\}" != "false" \]; then\n  allow=false;/m,
+  );
+  assert.match(stepScript(mode), /^echo "allow=\$allow" >> "\$GITHUB_OUTPUT"$/m);
+
+  const backfill = workflowStep(workflow, 'Backfill (dispatch fast-publish-article per gli id selezionati)');
+  assert.match(
+    backfill,
+    /^        if: steps\.mode\.outputs\.allow == 'true' && steps\.arm\.outputs\.allow == 'true' && steps\.detect\.outputs\.head_guard == 'true' && steps\.detect\.outputs\.selected != '0'$/m,
+  );
+});
 
 const shaA = 'a'.repeat(40);
 const shaB = 'b'.repeat(40);
