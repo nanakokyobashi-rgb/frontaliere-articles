@@ -4698,9 +4698,10 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /^concurrency:\n  group: reconcile-section-pages-\$\{\{ github\.event_name \}\}\n  queue: single\n  cancel-in-progress: false$/m);
   assert.match(wf, /^jobs:\n  reconcile:\n    concurrency:\n      group: reconcile-section-pages\n      queue: max\n      cancel-in-progress: false$/m);
   assert.match(wf, /workflows: \[fast-publish-section\]/);
+  assert.match(wf, /^      dry_run:\n        description: [^\n]+\n        required: false\n        default: true\n        type: boolean$/m);
   const checkout = wf.match(/^      - name: Checkout\n(?:(?!^      - ).*\n)*/m)?.[0] ?? '';
   assert.match(checkout, /^        with:$/m);
-  assert.match(checkout, /^          ref: \$\{\{ \(github\.event_name == 'schedule' \|\| github\.event_name == 'workflow_run'\) && 'refs\/heads\/main' \|\| github\.sha \}\}$/m);
+  assert.match(checkout, /^          ref: \$\{\{ steps\.checkout_ref\.outputs\.ref \}\}$/m);
   assert.match(checkout, /^          fetch-depth: 1$/m);
   assert.match(checkout, /^          persist-credentials: false$/m);
 

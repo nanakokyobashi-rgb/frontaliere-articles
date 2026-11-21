@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-fr::https://www.frapp.ch/fr/articles/stories/salaires-les-soignants-fribourgeois-veulent-des-reponses": {
-      "section": "canton-fr",
-      "ts": 1795086061676
-    },
     "canton-fr::https://www.freiburger-nachrichten.ch/story/306764/freiburger-arbeitgeberverband-kritisiert-forderung-nach-5000-franken-mindestlohn": {
       "section": "canton-fr",
       "ts": 1795168672802
@@ -23,6 +19,14 @@
     "canton-fr::https://www.laliberte.ch/articles/regions/ville-de-fribourg/une-hausse-dimpots-est-envisagee-a-fribourg-1490935": {
       "section": "canton-fr",
       "ts": 1795204576170
+    },
+    "canton-fr::https://www.h-fr.ch/newsroom/communiques-de-presse/inauguration-du-centre-de-sante-de-la-singine-lhfr-tafers": {
+      "section": "canton-fr",
+      "ts": 1795264473375
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/306108/der-sensebezirk-hat-neu-ein-gesundheitszentrum": {
+      "section": "canton-fr",
+      "ts": 1795264475364
     }
   }
 }
