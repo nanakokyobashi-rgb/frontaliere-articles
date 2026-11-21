@@ -59,10 +59,11 @@ test('un replay pinned superato usa un nuovo nonce per la revisione di destinazi
     .split('\n      - name:')[0];
   assert.doesNotMatch(step, /DISPATCH_NONCE|DISPATCH_COHORT|inputs\.dispatch_(nonce|cohort)/u);
   for (const caller of [step, render]) {
-    assert.match(caller, /nonce_hash=.*"\$\{replay_args\[@\]\}"/u);
     assert.match(caller, /"\$\{replay_args\[@\]\}" -f dispatch_nonce=/u);
   }
-  assert.match(step, /dispatch_nonce="stale-late-\$\{CURRENT_MAIN:0:12\}-\$\{SECTION\}-\$\{nonce_hash\}"/u);
+  assert.match(render, /nonce_hash=.*"\$\{replay_args\[@\]\}"/u);
+  assert.match(step, /nonce_hash=.*"\$\{replay_identity_args\[@\]\}"/u);
+  assert.match(step, /dispatch_nonce="stale-late-\$\{replay_identity_head:0:12\}-\$\{SECTION\}-\$\{nonce_hash\}"/u);
   assert.match(step, /-f dispatch_nonce="\$dispatch_nonce"/u);
   assert.match(step, /dispatch_cohort="stale-late-\$\{GITHUB_RUN_ID\}-\$\{SECTION\}-n1"/u);
   assert.match(step, /-f dispatch_cohort="\$dispatch_cohort"/u);

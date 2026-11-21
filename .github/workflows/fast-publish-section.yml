@@ -787,9 +787,25 @@ jobs:
             -f push_after="$replay_after"
             -f coordinated_recovery="$child_coordinated_recovery"
           )
-          # Hash the dispatched inputs so equivalent recoveries can share a run.
-          nonce_hash="$(printf '%s\0' "${replay_args[@]}" | sha256sum | cut -c1-16)"
-          dispatch_nonce="stale-late-${CURRENT_MAIN:0:12}-${SECTION}-${nonce_hash}"
+          # The freshness guard permits the cover queue to advance independently.
+          # Use the last substantive revision for identity, and still dispatch the
+          # exact current revision for checkout and API release resolution.
+          replay_identity_head="$(git log -1 --first-parent --full-history --format=%H "$CURRENT_MAIN" -- . \
+            ':(top,exclude,literal)data/blog-cover-cdn-sync-queue.json')"
+          if ! [[ "$replay_identity_head" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::revisione degli input di pubblicazione non verificabile"
+            exit 1
+          fi
+          replay_identity_args=("${replay_args[@]}")
+          for index in "${!replay_identity_args[@]}"; do
+            case "${replay_identity_args[index]}" in
+              "source_commit=$CURRENT_MAIN") replay_identity_args[index]="source_commit=$replay_identity_head" ;;
+              "source_main_commit=$CURRENT_MAIN") replay_identity_args[index]="source_main_commit=$replay_identity_head" ;;
+              "push_after=$CURRENT_MAIN") replay_identity_args[index]="push_after=$replay_identity_head" ;;
+            esac
+          done
+          nonce_hash="$(printf '%s\0' "${replay_identity_args[@]}" | sha256sum | cut -c1-16)"
+          dispatch_nonce="stale-late-${replay_identity_head:0:12}-${SECTION}-${nonce_hash}"
           dispatch_cohort="stale-late-${GITHUB_RUN_ID}-${SECTION}-n1"
           dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"
           bash .replay-dispatcher-source/scripts/ci/dispatch-fast-publish-replay.sh "$REPO" "$dispatch_title" --ref main \
