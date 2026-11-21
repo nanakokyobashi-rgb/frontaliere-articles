@@ -175,6 +175,7 @@ export const CANTON_TOPICAL_TERMS_DE_FR = Object.freeze([
   // casa e costo della vita
   'miete', 'mieten', 'wohnungsmarkt', 'wohnungsnot', 'teuerung', 'inflation', 'strompreis', 'energiepreis',
   'loyer', 'logement', 'coût de la vie', 'cout de la vie', 'prix de l\'électricité',
+  'nutzungsplanung', 'bebauungsplan', "plan d'affectation", 'plan de zones',
   // mobilita' e servizi
   'verkehr', 'baustelle', 'sperrung', 'gesperrt', 'umleitung', 'stau', 'autobahn', 'fahrplan', 'postauto',
   'sbb', 'öv', 'fussweg', 'veloweg', 'radweg', 'veloroute', 'verkehrssicherheit', 'verkehrsunfall',
