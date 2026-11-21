@@ -3625,7 +3625,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     staleResolveStart,
     resolver.indexOf('\nbefore="${PUSH_BEFORE:-}"', staleResolveStart),
   );
-  assert.match(staleResolve, /&& ! bash scripts\/ci\/section-source-unaffected\.sh "\$pinned_source" "\$current_main"; then/);
+  const resolverCheckout = wf.slice(wf.indexOf('- name: Checkout replay dispatcher from workflow revision'), wf.indexOf('- name: Materialize resolver from workflow revision'));
+  assert.match(resolverCheckout, /scripts\/ci\/section-source-unaffected\.sh/);
+  assert.match(staleResolve, /&& ! bash \.replay-dispatcher-source\/scripts\/ci\/section-source-unaffected\.sh "\$pinned_source" "\$current_main"; then/);
   assert.doesNotMatch(staleResolve, /FIREBASE_SERVICE_ACCOUNT_JSON assente/);
   assert.doesNotMatch(staleResolve, /dispatch-fast-publish-replay\.sh/);
   assert.doesNotMatch(staleResolve, /echo 'matrix=\[\]'/);
