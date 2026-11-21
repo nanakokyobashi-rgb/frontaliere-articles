@@ -45,6 +45,9 @@ const blogMetaCantonSzEn: Record<string, string> = {
     'blog.article.svitto-seminario-wohnraum-rickenbach.title': 'Schwyz government considers former Rickenbach seminary for housing',
     'blog.article.svitto-seminario-wohnraum-rickenbach.excerpt': 'The former teachers’ seminary in Rickenbach is being considered for residential use; the relocation of the cantonal offices is not expected before the first half of 2030.',
     'blog.article.svitto-seminario-wohnraum-rickenbach.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.piani-rete-ciclabile-svitto.title': 'Canton Schwyz\'s cantonal cycling plans issued',
+    'blog.article.piani-rete-ciclabile-svitto.excerpt': 'The planned network amounts to 1.152 km, of which 280 km are for daily travel and 872 km for leisure.',
+    'blog.article.piani-rete-ciclabile-svitto.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSzEn;

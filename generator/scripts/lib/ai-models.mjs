@@ -1152,6 +1152,9 @@ const CODEX_BROKER_QUEUE_WAIT_DEFAULT_MS = 20 * 60_000;
 const CODEX_BROKER_QUEUE_WAIT_MAX_MS = 30 * 60_000;
 const CODEX_BROKER_START_SIGNAL = '\x01';
 const CODEX_BROKER_GONE_CODES = new Set(['ENOENT', 'ECONNREFUSED', 'ENOTSOCK']);
+// Broker versions may append child diagnostics after the stable timeout
+// prefix. Keep the classification tied to that prefix, not to the full text.
+const CODEX_CHILD_TIMEOUT_RE = /^Codex CLI timed out after \d+ms\b/;
 // Errori del socket che si riparano da soli (broker finito in questo job,
 // connessione caduta): vocabolario transitorio. Tutti gli altri — EACCES,
 // EPERM, ENAMETOOLONG, EINVAL… — dicono che il broker e' configurato male e
@@ -8197,7 +8200,7 @@ function _requestCodexExecution({ prompt, timeoutMs, schema, deadlineMs }) {
         // Il SIGKILL a scadenza di budget e il tetto di richieste del job sono
         // decisioni nostre, non giudizi sul modello: stessa regola del ramo
         // claude-cli in callLLM (guasto di trasporto).
-        error.codexChildTimeout = /^Codex CLI timed out after \d+ms$/.test(brokerError);
+        error.codexChildTimeout = CODEX_CHILD_TIMEOUT_RE.test(brokerError);
         // An upstream stream broke, but the child reported back through a working broker.
         error.codexChildStreamDisconnected = /^Codex CLI exited with code 1: ERROR: stream disconnected before completion: Transport error:/i.test(brokerError);
         if (error.codexChildTimeout || error.codexChildStreamDisconnected || /^request limit exhausted/.test(brokerError)) {

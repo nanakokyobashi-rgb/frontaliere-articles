@@ -6722,6 +6722,30 @@
       "firstStrikeAt": "2026-11-19T18:19:43.421Z",
       "lastStrikeAt": "2026-11-20T20:41:38.432Z",
       "expiresAt": "2026-12-20T20:41:38.432Z"
+    },
+    {
+      "keyword": "permesso di pesca canton Lucerna requisiti e stagioni",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-21T04:07:58.415Z",
+      "lastStrikeAt": "2026-11-21T04:07:58.415Z",
+      "expiresAt": "2026-12-21T04:07:58.415Z"
+    },
+    {
+      "keyword": "targhe e immatricolazione canton Lucerna guida a procedura e costi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-21T04:21:29.636Z",
+      "lastStrikeAt": "2026-11-21T04:21:29.636Z",
+      "expiresAt": "2026-12-21T04:21:29.636Z"
     }
   ],
   "legacy": [

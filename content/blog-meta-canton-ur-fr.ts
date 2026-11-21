@@ -75,6 +75,9 @@ const blogMetaCantonUrFr: Record<string, string> = {
     'blog.article.blocco-roccia-meiental.title': 'Un bloc rocheux endommage une route dans le Meiental',
     'blog.article.blocco-roccia-meiental.excerpt': 'Un bloc rocheux a endommagé une route cantonale et une ligne électrique dans le Meiental.',
     'blog.article.blocco-roccia-meiental.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.uri-parere-trasporti-eccezionali.title': 'Uri présente un avis sur les transports exceptionnels',
+    'blog.article.uri-parere-trasporti-eccezionali.excerpt': 'Le canton d\'Uri a envoyé à l\'UVEK un avis sur deux ordonnances et sur l\'accompagnement privé des transports exceptionnels dans le cadre de la consultation.',
+    'blog.article.uri-parere-trasporti-eccezionali.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonUrFr;

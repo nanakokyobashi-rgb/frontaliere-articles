@@ -17,6 +17,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'ricerca-fisco-aziende-svitto': { it: 'ricerca-fisco-aziende-svitto', en: 'schwyz-research-company-tax', de: 'schwyzer-firmen-forschung-steuern', fr: 'recherche-entreprises-fiscalite-schwyz' },
  'martinimarkt-principale-strada-chiusa': { it: 'martinimarkt-principale-strada-chiusa', en: 'martinimarkt-hauptstrasse-closed', de: 'martinimarkt-hauptstrasse-gesperrt', fr: 'martinimarkt-hauptstrasse-fermee' },
  'svitto-seminario-wohnraum-rickenbach': { it: 'svitto-seminario-wohnraum-rickenbach', en: 'schwyz-seminary-housing-rickenbach', de: 'schwyz-seminar-wohnraum-rickenbach', fr: 'schwyz-seminaire-logement-rickenbach' },
+ 'piani-rete-ciclabile-svitto': { it: 'piani-rete-ciclabile-svitto', en: 'schwyz-cycling-network-plans', de: 'schwyz-radwegenetzplane', fr: 'plans-reseau-cyclable-schwyz' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

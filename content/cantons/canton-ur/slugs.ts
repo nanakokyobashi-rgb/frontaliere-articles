@@ -27,6 +27,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'presidenza-spiringen-schuler': { it: 'presidenza-spiringen-schuler', en: 'spiringen-municipal-president-schuler', de: 'spiringen-gemeindepraesident-schuler', fr: 'spiringen-president-communal-schuler' },
  'janett-protezione-uri': { it: 'janett-protezione-uri', en: 'janett-population-protection-uri', de: 'janett-bevoelkerungsschutz-uri', fr: 'janett-protection-population-uri' },
  'blocco-roccia-meiental': { it: 'blocco-roccia-meiental', en: 'rockfall-road-meiental', de: 'felsblock-strasse-meiental', fr: 'bloc-roche-route-meiental' },
+ 'uri-parere-trasporti-eccezionali': { it: 'uri-parere-trasporti-eccezionali', en: 'uri-transport-rules-consultation', de: 'uri-verkehrsregeln-vernehmlassung', fr: 'uri-regles-transport-consultation' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

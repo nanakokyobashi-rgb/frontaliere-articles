@@ -151,6 +151,7 @@ test('il kill-switch esistente esclude Codex senza riattivare Gemini', () => {
 
 for (const [failure, brokerError] of [
   ['un timeout del processo', 'Codex CLI timed out after 15000ms'],
+  ['un timeout del processo con diagnostica aggiuntiva', 'Codex CLI timed out after 15000ms (child exit: SIGKILL)'],
   ['uno stream interrotto', 'Codex CLI exited with code 1: ERROR: stream disconnected before completion: Transport error: network error: error decoding response body'],
 ]) {
   test(`Codex passa al fallback dopo ${failure} e consente una richiesta successiva`, async () => {
