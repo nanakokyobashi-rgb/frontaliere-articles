@@ -281,4 +281,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'radweg-altdorf-seedorf-lavori',
+ category: 'pratico',
+ date: '2026-11-21T11:01:17.886Z',
+ image: '/images/blog/article-radweg-altdorf-seedorf-lavori.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['UR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
