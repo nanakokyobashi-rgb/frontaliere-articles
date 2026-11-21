@@ -58,7 +58,10 @@ test('un replay pinned superato usa un nuovo nonce per la revisione di destinazi
   const step = workflow.split('      - name: Dispatch bounded replay with current corpus checkout\n')[1]
     .split('\n      - name:')[0];
   assert.doesNotMatch(step, /DISPATCH_NONCE|DISPATCH_COHORT|inputs\.dispatch_(nonce|cohort)/u);
-  assert.match(step, /nonce_hash=.*"\$GITHUB_RUN_ID" "\$CURRENT_MAIN" "\$SECTION"/u);
+  for (const caller of [step, render]) {
+    assert.match(caller, /nonce_hash=.*"\$\{replay_args\[@\]\}"/u);
+    assert.match(caller, /"\$\{replay_args\[@\]\}" -f dispatch_nonce=/u);
+  }
   assert.match(step, /dispatch_nonce="stale-late-\$\{CURRENT_MAIN:0:12\}-\$\{SECTION\}-\$\{nonce_hash\}"/u);
   assert.match(step, /-f dispatch_nonce="\$dispatch_nonce"/u);
   assert.match(step, /dispatch_cohort="stale-late-\$\{GITHUB_RUN_ID\}-\$\{SECTION\}-n1"/u);
