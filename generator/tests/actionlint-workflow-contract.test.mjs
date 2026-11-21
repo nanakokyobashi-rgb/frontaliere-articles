@@ -16,6 +16,7 @@ const QUEUE_ALLOWLISTED_WORKFLOWS = [
   '.github/workflows/generate-article-core.yml',
   '.github/workflows/fast-publish-article.yml',
   '.github/workflows/fast-publish-section.yml',
+  '.github/workflows/reconcile-section-pages.yml',
 ];
 
 test('required PR check validates every workflow and ShellChecks changed workflow scripts', () => {
