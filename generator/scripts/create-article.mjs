@@ -14478,7 +14478,10 @@ const TRANSLATION_CHUNK_THRESHOLD = 700;
 // fit is rejected before any provider call rather than being sent over the cap
 // with a structural split. This is shared by the initial translation and both
 // retry paths, so every route keeps the same per-call output-cap safety net.
-function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
+function splitIntoTranslationChunks(bodyText, chunkTarget, keepDefaultProtectedCap = false) {
+  const defaultChunkWords = 500;
+  chunkTarget ??= defaultChunkWords;
+  const protectedWordCap = keepDefaultProtectedCap ? Math.max(chunkTarget, defaultChunkWords) : chunkTarget;
   const chunks = [];
   const separators = [];
   const source = String(bodyText || '');
@@ -14961,9 +14964,9 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
     if (index <= atomStart) index = atomStart + 1;
     const atomText = source.slice(atomStart, index);
     const atomWords = countWords(atomText);
-    if (protectedEnd !== null && atomWords > chunkTarget) {
+    if (protectedEnd !== null && atomWords > protectedWordCap) {
       throw new Error(
-        `protected translation atom exceeds translation chunk cap (${atomWords} > ${chunkTarget} words)`,
+        `protected translation atom exceeds translation chunk cap (${atomWords} > ${protectedWordCap} words)`,
       );
     }
     const atomParts = !structuredEnd
@@ -15947,6 +15950,7 @@ async function translatePendingBodyWithHistoricalChain(
   }
   const chunkTranslator = assertChunkTranslator(translateInChunks, 'translatePendingBodyWithHistoricalChain');
   const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
+  const recoveryChunkWords = 240;
   const rejected = [];
   const text = await translateFieldFreeMt({
     text: itValue,
@@ -15955,10 +15959,10 @@ async function translatePendingBodyWithHistoricalChain(
     fieldType: 'description',
     fieldName: field,
     translate: async ({ text: masked }) => {
-      if (countWords(masked || '') > TRANSLATION_CHUNK_THRESHOLD) {
+      if (countWords(masked || '') > recoveryChunkWords) {
         // Reuse the same chunker as the legacy translation and truncation
-        // paths: the historical fallback must not send an oversized body in
-        // one request after Codex has stopped.
+        // paths. Shorter segments reduce omissions after a full-body
+        // translation failed. Validate the reconstructed body as usual.
         const chunked = await chunkTranslator(
           masked,
           field,
@@ -15970,7 +15974,7 @@ async function translatePendingBodyWithHistoricalChain(
           }),
           `${locale}:${field}-pending-retry`,
           locale,
-          { forceLegacy: true },
+          { forceLegacy: true, chunkWords: recoveryChunkWords },
         );
         return chunked;
       }
@@ -16220,7 +16224,7 @@ async function translateArticle(data) {
     makeChunkPrompt,
     labelPrefix,
     targetLang,
-    { pretranslatedResult = null, forceLegacy = false } = {},
+    { pretranslatedResult = null, forceLegacy = false, chunkWords } = {},
   ) {
     // Recovery/free-MT callers may already have carried the transport markers
     // through a first provider. Normalize them before deriving the next
@@ -16233,7 +16237,7 @@ async function translateArticle(data) {
     const tableHeaderMarkers = tableHeaderColumnMarkers(bodyText);
     if (tableHeaderMarkers.collision || tableHeaderMarkers.ambiguous) return reject('source-table-markers');
     const chunks = pretranslatedResult === null
-      ? splitIntoTranslationChunks(tableHeaderMarkers.markedText)
+      ? splitIntoTranslationChunks(tableHeaderMarkers.markedText, chunkWords, chunkWords !== undefined)
       : [tableHeaderMarkers.markedText];
     const translated = pretranslatedResult === null
       ? await Promise.all(
