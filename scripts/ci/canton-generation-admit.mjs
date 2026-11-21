@@ -132,7 +132,7 @@ export function filterInFlightRuns(runs) {
  * Valida le pagine dopo che gh ha seguito i link di paginazione.
  * Il totale della ricerca Actions può divergere dalle righe restituite.
  */
-export function flattenPaginatedInFlightRuns(pages) {
+export function flattenPaginatedInFlightRuns(pages, { onDuplicate } = {}) {
   if (!Array.isArray(pages) || pages.length === 0) return null;
   const runs = [];
   const ids = new Set();
@@ -154,7 +154,10 @@ export function flattenPaginatedInFlightRuns(pages) {
         if (typeof run.conclusion !== 'string' || !KNOWN_RUN_CONCLUSION_SET.has(run.conclusion)) return null;
       } else if (run.conclusion !== null) return null;
 
-      if (ids.has(run.id)) return null;
+      if (ids.has(run.id)) {
+        onDuplicate?.();
+        return null;
+      }
       ids.add(run.id);
       runs.push(run);
     }
@@ -392,20 +395,33 @@ function readArticleSubjectsFromGitHub(repo, ref) {
   return raw === null ? null : raw.split('\n').filter(Boolean);
 }
 
-function readInFlightRunsFromGitHub(repo) {
-  const byId = new Map();
-  for (const status of IN_FLIGHT_STATUSES) {
-    const raw = gh(['api', '--paginate', '--slurp',
-      `repos/${repo}/actions/runs?status=${status}&per_page=${RUNS_PER_PAGE}`]);
-    if (raw === null) return null;
+export function readInFlightRunsFromGitHub(repo, { readGh = gh, warn = console.warn } = {}) {
+  function readStatus(status) {
+    let duplicate = false;
     try {
-      const parsed = flattenPaginatedInFlightRuns(JSON.parse(raw));
-      if (!parsed) return null;
-      for (const run of filterInFlightRuns(parsed)) {
-        if (!byId.has(run.id)) byId.set(run.id, run);
-      }
+      const raw = readGh(['api', '--paginate', '--slurp',
+        `repos/${repo}/actions/runs?status=${status}&per_page=${RUNS_PER_PAGE}`]);
+      const rows = flattenPaginatedInFlightRuns(JSON.parse(raw), {
+        onDuplicate: () => { duplicate = true; },
+      });
+      return { rows, duplicate };
     } catch {
-      return null;
+      return { rows: null, duplicate: false };
+    }
+  }
+
+  const byId = new Map();
+  let retried = false;
+  for (const status of IN_FLIGHT_STATUSES) {
+    let result = readStatus(status);
+    if (result.duplicate && !retried) {
+      retried = true;
+      warn(`::warning::canton-admit: duplicate run ID, retrying status=${status}`);
+      result = readStatus(status);
+    }
+    if (!result.rows) return null;
+    for (const run of filterInFlightRuns(result.rows)) {
+      if (!byId.has(run.id)) byId.set(run.id, run);
     }
   }
   return [...byId.values()];

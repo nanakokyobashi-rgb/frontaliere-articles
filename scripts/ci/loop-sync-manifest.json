@@ -231,7 +231,7 @@
     {
       "path": "scripts/ci/canton-generation-admit.mjs",
       "mode": "corpus-only",
-      "reason": "Ammissione di una sezione cantonale alla generazione (P8 del piano sezioni cantonali, D15/D16/D19): gate Remote Config con controllo esplicito del caricamento, sezione attiva nel core, budget giornaliero sui commit delle ultime 24h, tetto globale sulle run non terminali dei chiamanti cantonali letto paginando ogni stato e seguendo i link di paginazione e validando in modo fail-closed gli id univoci e la forma delle run (inclusi stato/conclusione e timestamp ISO) prima di deduplicarle, cessione al beacon di quota. Lo esegue il job section_gate di generate-article-core.yml. Esiste solo qui perche' la generazione degli articoli vive solo nel corpus: il sito non ha ne' i chiamanti ne' il profilo canton-sections.json.",
+      "reason": "Ammissione di una sezione cantonale alla generazione (P8 del piano sezioni cantonali, D15/D16/D19): gate Remote Config con controllo esplicito del caricamento, sezione attiva nel core, budget giornaliero sui commit delle ultime 24h, tetto globale sulle run non terminali dei chiamanti cantonali letto paginando ogni stato e seguendo i link di paginazione e validando in modo fail-closed gli id univoci e la forma delle run (inclusi stato/conclusione e timestamp ISO) prima di deduplicarle fra stati, cessione al beacon di quota. Se un id si ripete nella paginazione, l'intera osservazione ambigua viene scartata e si rilegge lo stesso stato con un solo tentativo aggiuntivo in totale per ammissione. Se l'ambiguita' persiste, l'ammissione resta chiusa. Lo esegue il job section_gate di generate-article-core.yml. Esiste solo qui perche' la generazione degli articoli vive solo nel corpus: il sito non ha ne' i chiamanti ne' il profilo canton-sections.json.",
       "baseline": {
         "site": null,
         "corpus": "6c122bb4827e9470",
@@ -341,7 +341,7 @@
     {
       "path": "scripts/ci/section-source-unaffected.sh",
       "mode": "corpus-only",
-      "reason": "Prima del render e delle scritture del publisher cantonale, verifica che le differenze tra due revisioni del corpus siano limitate ai file operativi, agli entrypoint dei test e agli input noti usati soltanto dalla generazione. Esclude puntualmente `.github/actionlint.yaml`. Per `.github/workflows/reconcile-section-pages.yml` accetta soltanto il delta approvato di scheduling, nella direzione prevista e con il contesto completo della patch. Ogni altra variazione del workflow invalida il piano di sezione. Il publisher appartiene al corpus.",
+      "reason": "Prima del render e delle scritture del publisher cantonale, verifica che le differenze tra due revisioni del corpus siano limitate ai file operativi, agli entrypoint dei test e agli input noti usati soltanto dalla generazione. Esclude puntualmente `.github/actionlint.yaml`, `scripts/ci/canton-generation-admit.mjs` (ammissione dei nuovi slot di generazione in section_gate) e `scripts/ci/loop-sync-manifest.json` (metadati di allineamento per CI e mirror). Per `.github/workflows/reconcile-section-pages.yml` accetta soltanto il delta approvato di scheduling, nella direzione prevista e con il contesto completo della patch. Ogni altra variazione del workflow invalida il piano di sezione. Il publisher appartiene al corpus.",
       "baseline": {
         "site": null,
         "corpus": null,
