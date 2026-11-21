@@ -12750,7 +12750,7 @@ ${_isMeta ? '' : topicalRelevanceGate}
 ${!_isMeta && sourceContract ? `\n${sourceContract}\n` : ''}
 ═══ REGOLA #1 — FEDELTÀ ALLA FONTE (PRIORITÀ MASSIMA) ═══
 
-Offri una spiegazione, un confronto o una relazione concreta e verificabile oltre la parafrasi; non forzare cambiamenti o impatti che le prove non mostrano.
+Collega nel corpo due fatti documentati con un passaggio verificabile: per esempio calcola una differenza fra valori comparabili o spiega come si concatenano due passaggi di una procedura. Mostra i fatti da cui ricavi il collegamento.
 - Usa solo SOURCE CONTENT e riferimenti verificati; attribuisci le notizie alle fonti e separa fatti, calcoli e deduzioni.
 - Per ogni confronto mostra dati, unità e periodi comparabili; non trasformarlo in previsione.
 - Ometti cause, conseguenze, sviluppi o azioni non documentati. Non inventare reportage, interviste, fonti proprie, testimonianze, verifiche umane o citazioni.

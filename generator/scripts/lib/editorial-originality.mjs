@@ -137,6 +137,6 @@ export function editorialOriginalityIssue(result) {
     reason: `Originalità editoriale: ${result?.reason || 'la valutazione non è verificabile'}`,
     severity: 'critical',
     category: 'coerenza',
-    fix: 'Rivedi body1–body3: vai oltre la riformulazione della fonte con una spiegazione, un confronto o una relazione concreta verificabile nei fatti citati. Riporta la base e il periodo del confronto. Non inventare cause, conseguenze, consigli fiscali, reportage sul posto, interviste o verifiche umane; attribuisci alla fonte le sue notizie. Se le prove non bastano, restringi il testo ai fatti documentati e non aggiungere un angolo artificiale.',
+    fix: 'Riscrivi il passaggio citato collegando due fatti documentati nel corpo. Mostra il calcolo oppure spiega il rapporto concreto tra i fatti, citando i dati e i periodi usati. Cambiare solo le parole del passaggio lascia irrisolto il problema. Non inventare cause, conseguenze, consigli fiscali, reportage sul posto, interviste o verifiche umane; attribuisci alla fonte le sue notizie. Se le prove non bastano, restringi il testo ai fatti documentati e non aggiungere un angolo artificiale.',
   };
 }

@@ -86,7 +86,7 @@ test('generation asks for a traceable contribution without forced implications',
   const antiHallucination = SOURCE.indexOf('═══ DIVIETI ANTI-ALLUCINAZIONE', ruleStart);
   const rule = SOURCE.slice(ruleStart, antiHallucination);
   assert.doesNotMatch(rule, /RISCRITTURA EDITORIALE della fonte/);
-  assert.match(rule, /spiegazione, un confronto o una relazione concreta e verificabile oltre la parafrasi/);
+  assert.match(rule, /due fatti documentati con un passaggio verificabile/);
   assert.match(rule, /Ometti cause, conseguenze, sviluppi o azioni non documentati/);
   assert.match(rule, /Non inventare reportage, interviste, fonti proprie/);
   assert.doesNotMatch(SOURCE, /ALMENO il 50% del testo dei campi body1, body2, body3/);
