@@ -5123,8 +5123,8 @@
       "remoteDigestRequired": true,
       "reason": "La baseline registra lo stesso digest SHA-256 raw sui due lati; `remoteDigestRequired` rende il confronto remoto una precondizione fail-closed prima di accettare o riattestare la baseline e prima del trasporto.",
       "baseline": {
-        "site": "6b7d68503c109395",
-        "corpus": "6b7d68503c109395",
+        "site": "8349da7318978264",
+        "corpus": "8349da7318978264",
         "alignedAt": "2026-11-21"
       }
     },
