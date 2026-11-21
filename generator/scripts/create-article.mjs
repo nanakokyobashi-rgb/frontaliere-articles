@@ -7404,7 +7404,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   const canCompact = sourceUrl.startsWith('evergreen://')
     || (!isEvergreenArticle && !isSyntheticDataset && /^https?:\/\//i.test(sourceUrl));
   const compactSourceInstructions = isEvergreenArticle
-    ? '- Riferimenti: confronta date, luoghi, persone, citazioni e misure con i fatti verificati. Segnala affermazioni false, contraddette o troppo specifiche senza attribuzione. Casi reali, interviste e verifiche inventati: critical:fatti_inventati.'
+    ? '- Riferimenti: confronta date, luoghi, persone, citazioni e misure con i fatti verificati. Segnala affermazioni false, contraddette o troppo specifiche senza attribuzione. Un caso presentato come reale che combina luogo o ente, ruolo, azione ed esito (anche una cifra) senza riferimento verificato è critical:fatti_inventati. La stessa gravità vale per interviste e verifiche inventate.'
     : `- Fonte: controlla date, luoghi, persone, citazioni e misure. Date assenti: sospette. Contesto verificato: minor. Invenzioni e contraddizioni: critical.
 - Casi specifici (luogo/ente, ruolo, azione, esito) senza riscontro nella fonte: critical:fatti_inventati. Esempi: infermiera segnala carenze igieniche a Lugano; medico denuncia pratiche non etiche a Chiasso; infermiere ORL ottiene un risarcimento; medico del Civico di Lugano denuncia frode con indagine FINMA.`;
   const compactPrompt = canCompact

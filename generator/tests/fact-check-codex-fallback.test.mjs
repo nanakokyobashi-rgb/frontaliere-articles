@@ -686,6 +686,7 @@ describe('fact-check retries under a reported input cap', () => {
     for (const marker of [bodyEnd, 'NOTA: Articolo evergreen', 'Riferimenti: confronta', 'articleQuote', 'evidenceQuotes']) {
       assert.ok(compactPrompt.includes(marker), marker);
     }
+    assert.match(compactPrompt, /luogo o ente, ruolo, azione ed esito.*senza riferimento verificato è critical:fatti_inventati/);
     assert.deepEqual(calls.map((call) => call.prompt), [compactPrompt, compactPrompt]);
     assert.equal(modelResults.length, 2);
   });
