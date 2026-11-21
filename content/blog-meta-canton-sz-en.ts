@@ -48,6 +48,9 @@ const blogMetaCantonSzEn: Record<string, string> = {
     'blog.article.piani-rete-ciclabile-svitto.title': 'Canton Schwyz\'s cantonal cycling plans issued',
     'blog.article.piani-rete-ciclabile-svitto.excerpt': 'The planned network amounts to 1.152 km, of which 280 km are for daily travel and 872 km for leisure.',
     'blog.article.piani-rete-ciclabile-svitto.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.gov-svitto-respinge-autorizzazione.title': 'Schwyz Government rejects authorization procedure for officials',
+    'blog.article.gov-svitto-respinge-autorizzazione.excerpt': 'Complaints against officials in Schwyz have increased since 2021, reaching a peak in 2025; the Government rejects motion M 7/26.',
+    'blog.article.gov-svitto-respinge-autorizzazione.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSzEn;

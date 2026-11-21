@@ -48,6 +48,9 @@ const blogMetaCantonSzFr: Record<string, string> = {
     'blog.article.piani-rete-ciclabile-svitto.title': 'Les plans cyclables cantonaux du canton de Schwytz ont été édictés',
     'blog.article.piani-rete-ciclabile-svitto.excerpt': 'Le réseau prévu s’élève à 1.152 km, dont 280 km pour les déplacements quotidiens et 872 km pour les loisirs.',
     'blog.article.piani-rete-ciclabile-svitto.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.gov-svitto-respinge-autorizzazione.title': 'Schwytz rejette l’autorisation pour les fonctionnaires',
+    'blog.article.gov-svitto-respinge-autorizzazione.excerpt': 'Les plaintes contre des fonctionnaires à Schwytz ont augmenté depuis 2021, atteignant un maximum en 2025; le Gouvernement rejette la motion M 7/26.',
+    'blog.article.gov-svitto-respinge-autorizzazione.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSzFr;

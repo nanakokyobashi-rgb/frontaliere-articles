@@ -171,4 +171,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'gov-svitto-respinge-autorizzazione',
+ category: 'novita',
+ date: '2026-11-21T16:32:04.766Z',
+ image: '/images/blog/article-gov-svitto-respinge-autorizzazione.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SZ'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

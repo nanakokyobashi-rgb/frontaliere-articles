@@ -669,7 +669,7 @@ test('il recovery verifica l ancestry della base prima di ricostruire la matrice
   );
 });
 
-test('il recovery shallow verifica la finestra breve prima del fallback storico', async (t) => {
+test('il recovery shallow verifica le finestre bounded prima del fallback storico', async (t) => {
   const root = mkdtempSync(path.join(tmpdir(), 'section-recovery-history-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
   const git = (cwd, ...args) => execFileSync('git', args, { cwd, encoding: 'utf8', stdio: 'pipe' }).trim();
@@ -683,11 +683,15 @@ test('il recovery shallow verifica la finestra breve prima del fallback storico'
   git(origin, 'commit', '--allow-empty', '-m', 'divergent base');
   const divergentBase = git(origin, 'rev-parse', 'HEAD');
   git(origin, 'switch', 'main');
-  for (let index = 1; index <= 38; index += 1) {
+  for (let index = 1; index <= 130; index += 1) {
     git(origin, 'commit', '--allow-empty', '-m', `main ${index}`);
   }
   const pin = git(origin, 'rev-parse', 'HEAD');
   const shortBase = git(origin, 'rev-parse', 'HEAD~6');
+  const deeperBase = git(origin, 'rev-parse', 'HEAD~35');
+  git(origin, 'switch', '-c', 'advanced-main');
+  git(origin, 'commit', '--allow-empty', '-m', 'advanced main');
+  git(origin, 'switch', 'main');
   const start = recovery.indexOf('ensure_recovery_history() {');
   const end = recovery.indexOf('\nif [ "${MIXED_MATRIX:-false}"', start);
   assert.ok(start >= 0 && end > start);
@@ -705,6 +709,9 @@ if [ "$1" = fetch ]; then
     if [ "$arg" = --depth=32 ] && [ "$REJECT_SHORT_FETCH" = true ]; then
       exit 1
     fi
+    if [ "$arg" = --depth=128 ] && [ "$MOVE_SECOND_TIP" = true ]; then
+      exec "$REAL_GIT" fetch --no-tags "$arg" origin advanced-main:refs/remotes/origin/main
+    fi
   done
 fi
 exec "$REAL_GIT" "$@"
@@ -712,21 +719,25 @@ exec "$REAL_GIT" "$@"
   const realGit = execFileSync('which', ['git'], { encoding: 'utf8' }).trim();
   const refspec = 'origin main:refs/remotes/origin/main';
   const shortFetch = `fetch --no-tags --depth=32 ${refspec}`;
+  const deeperFetch = `fetch --no-tags --depth=128 ${refspec}`;
   const fullFetch = `fetch --no-tags --unshallow ${refspec}`;
   const cases = [
     { name: 'sei commit di ancestry', base: shortBase, shallow: true, fetches: [shortFetch] },
+    { name: '35 commit di ancestry', base: deeperBase, shallow: true, fetches: [shortFetch, deeperFetch] },
     { name: 'mixed con scope esplicito', base: '0'.repeat(40), mixed: true, shallow: true, fetches: [shortFetch] },
     { name: 'stale con primo parent', base: '', shallow: true, fetches: [shortFetch] },
     { name: 'tip diverso dal pin', base: oldBase, expectedPin: shortBase, shallow: true,
       fetches: [shortFetch], error: /main e' avanzata durante il fetch breve/u },
-    { name: 'base fuori finestra', base: oldBase, shallow: false, fetches: [shortFetch, fullFetch] },
+    { name: 'tip diverso dal pin al secondo fetch', base: deeperBase, moveSecondTip: true, shallow: true,
+      fetches: [shortFetch, deeperFetch], error: /main e' avanzata durante il fetch breve/u },
+    { name: 'base fuori finestra', base: oldBase, shallow: false, fetches: [shortFetch, deeperFetch, fullFetch] },
     { name: 'fetch breve fallito', base: shortBase, rejectShort: true, shallow: false,
       fetches: [shortFetch, fullFetch] },
     { name: 'fallback esaurito', base: oldBase, shallow: true,
-      fetches: [shortFetch, fullFetch, fullFetch, fullFetch],
+      fetches: [shortFetch, deeperFetch, fullFetch, fullFetch, fullFetch],
       error: /storia Git non verificabile prima del recovery staged/u },
     { name: 'base divergente anche dopo il fallback', base: divergentBase, shallow: false,
-      fetches: [shortFetch, fullFetch, `fetch --no-tags origin ${divergentBase}`],
+      fetches: [shortFetch, deeperFetch, fullFetch, `fetch --no-tags origin ${divergentBase}`],
       error: /base della push non antenata di CURRENT_MAIN/u },
   ];
 
@@ -754,6 +765,7 @@ printf 'history verified\\n'
           FETCH_LOG: fetchLog,
           REJECT_UNSHALLOW: String(scenario.shallow),
           REJECT_SHORT_FETCH: String(scenario.rejectShort ?? false),
+          MOVE_SECOND_TIP: String(scenario.moveSecondTip ?? false),
           CURRENT_MAIN: scenario.expectedPin ?? pin,
           ORIGINAL_PUSH_BEFORE: scenario.base,
           MIXED_MATRIX: String(scenario.mixed ?? false),

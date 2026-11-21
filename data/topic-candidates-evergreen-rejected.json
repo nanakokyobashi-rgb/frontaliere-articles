@@ -15057,18 +15057,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.rsi.ch/s/4255856": {
-      "section": "frontaliere",
-      "ts": 1795110538248
-    },
-    "svizzera::https://www.rsi.ch/s/4255856": {
-      "section": "svizzera",
-      "ts": 1795118183401
-    },
-    "svizzera::https://www.rsi.ch/s/4254773": {
-      "section": "svizzera",
-      "ts": 1795118252945
-    },
     "frontaliere::https://www.varesenews.it/2026/11/ristorni-dei-frontalieri-in-commissione-bilancio-e-scontro-sul-chi-aveva-ragione/2744194": {
       "section": "frontaliere",
       "ts": 1795163039722
@@ -15152,6 +15140,26 @@
     "svizzera::https://www.rsi.ch/s/4254599": {
       "section": "svizzera",
       "ts": 1795276269372
+    },
+    "svizzera::https://www.swissinfo.ch/ita/gr%3a-pi%c3%b9-deduzioni-premi-cassa-malati%2c-lanciata-iniziativa-popolare/92416959": {
+      "section": "svizzera",
+      "ts": 1795280275763
+    },
+    "frontaliere::https://www.rsi.ch/s/4255856": {
+      "section": "frontaliere",
+      "ts": 1795283869913
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/gr%3a-pi%c3%b9-deduzioni-premi-cassa-malati%2c-lanciata-iniziativa-popolare/92418179": {
+      "section": "frontaliere",
+      "ts": 1795286594914
+    },
+    "svizzera::https://www.rsi.ch/s/4255856": {
+      "section": "svizzera",
+      "ts": 1795293424906
+    },
+    "svizzera::https://www.swissinfo.ch/ita/gr%3a-pi%c3%b9-deduzioni-premi-cassa-malati%2c-lanciata-iniziativa-popolare/92418179": {
+      "section": "svizzera",
+      "ts": 1795293710415
     }
   }
 }
