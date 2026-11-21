@@ -179,7 +179,7 @@ export const CANTON_TOPICAL_TERMS_DE_FR = Object.freeze([
   // mobilita' e servizi
   'verkehr', 'baustelle', 'sperrung', 'gesperrt', 'umleitung', 'stau', 'autobahn', 'fahrplan', 'postauto',
   'sbb', 'öv', 'fussweg', 'veloweg', 'radweg', 'veloroute', 'verkehrssicherheit', 'verkehrsunfall',
-  'wildunfall', 'strassenverkehr', 'strassensperrung', 'vollsperrung', 'umfahrungsbetrieb', 'umfahrung',
+  'wildunfall', 'strassenverkehr', 'strassensperrung', 'wintersperr', 'vollsperrung', 'umfahrungsbetrieb', 'umfahrung',
   'kantonsstr', 'fahrbahn', 'schulweg', 'sicherheitsmassnahmen', 'verkehrsführung',
   'trafic', 'chantier', 'fermeture', 'fermeture complète', 'fermeture complete', 'déviation', 'deviation',
   'bouchon', 'autoroute', 'voie cyclable', 'piste cyclable', 'sécurité routière', 'securite routiere',
