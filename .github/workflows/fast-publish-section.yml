@@ -587,7 +587,6 @@ jobs:
             exit 1
           fi
           install -m 0755 "$render_source" "$render_target"
-          install -m 0755 .replay-dispatcher-source/scripts/ci/section-source-unaffected.sh scripts/ci/section-source-unaffected.sh
           test -f .replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh
           ln -sfn "$PWD/.replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh" scripts/ci/fetch-push-base-if-missing.sh
           if [ -f "$source" ]; then
@@ -661,7 +660,7 @@ jobs:
             exit 1
           fi
           echo "current_main=$current_main" >> "$GITHUB_OUTPUT"
-          if ! bash scripts/ci/section-source-unaffected.sh "$pinned_source" "$current_main"; then
+          if ! bash .replay-dispatcher-source/scripts/ci/section-source-unaffected.sh "$pinned_source" "$current_main"; then
             echo "::notice::replay pinned saltato: main e' avanzata da $pinned_source a $current_main"
             echo 'fresh=false' >> "$GITHUB_OUTPUT"
             exit 0
