@@ -2002,6 +2002,105 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
   );
 
   const mixedAnchorsSource = 'Lugano: 100 richieste; la risposta arriva dopo 12 giorni.';
+  const locativeSource = 'A Zugo il contributo è di 12 franchi; Zugo rimborsa anche 18 franchi.';
+  const locativeTarget = 'In Zugo, the contribution is 12 francs; Zugo also reimburses 18 francs.';
+  assert.equal(await makeTranslator(() => locativeTarget, 50)(locativeSource), locativeTarget);
+
+  const twoPlacesSource = 'A Zugo il contributo è di 12 franchi; a Baar il contributo è di 18 franchi.';
+  const swappedPlaces = 'In Baar, the contribution is 12 francs; in Zugo, the contribution is 18 francs.';
+  assert.equal(await makeTranslator(() => swappedPlaces, 50)(twoPlacesSource), null);
+
+  for (const [source, target, swapped] of [
+    [
+      '- A Zugo ci sono 12 richieste.\n- A Baar ci sono 18 richieste.',
+      '- In Zugo, there are 12 applications.\n- In Baar, there are 18 applications.',
+      '- In Baar, there are 12 applications.\n- In Zugo, there are 18 applications.',
+    ],
+    [
+      '> 1. A Bronx ci sono 12 richieste.\n> 2. A Hague ci sono 18 richieste.',
+      '> 1. In the Bronx, there are 12 applications.\n> 2. In the Hague, there are 18 applications.',
+      '> 1. In the Hague, there are 12 applications.\n> 2. In the Bronx, there are 18 applications.',
+    ],
+    [
+      'A Riva San Vitale ci sono 12 richieste; a Castel San Pietro ci sono 18 richieste.',
+      'In Riva San Vitale, there are 12 applications; in Castel San Pietro, there are 18 applications.',
+      'In Castel San Pietro, there are 12 applications; in Riva San Vitale, there are 18 applications.',
+    ],
+    [
+      'A Zugo ci sono 12 richieste. A Baar ci sono 18 richieste.',
+      'In Zugo, there are 12 applications. In Baar, there are 18 applications.',
+      'In Baar, there are 12 applications. In Zugo, there are 18 applications.',
+    ],
+    [
+      'Nel Ticino ci sono 12 richieste; nella Svizzera ci sono 18 richieste.',
+      'Nel\u202fTicino, ci sono 12 richieste; nella Svizzera, ci sono 18 richieste.',
+      'Nella Svizzera, ci sono 12 richieste; nel Ticino, ci sono 18 richieste.',
+    ],
+    [
+      'In Tessin ci sono 12 richieste; a Bodensee ci sono 18 richieste.',
+      'Im Tessin, gibt es 12 Anträge; am Bodensee, gibt es 18 Anträge.',
+      'Am Bodensee, gibt es 12 Anträge; im Tessin, gibt es 18 Anträge.',
+    ],
+    [
+      'In Suisse ci sono 12 richieste; a Genève ci sono 18 richieste.',
+      'En Suisse, il y a 12 demandes; à Genève, il y a 18 demandes.',
+      'À Genève, il y a 12 demandes; en Suisse, il y a 18 demandes.',
+    ],
+    [
+      'Luogo: In St. Gallen ci sono 12 richieste; Luogo: in St. Moritz ci sono 18 richieste.',
+      'Luogo: In St. Gallen, there are 12 applications; Luogo: in St. Moritz, there are 18 applications.',
+      'Luogo: In St. Moritz, there are 12 applications; Luogo: in St. Gallen, there are 18 applications.',
+    ],
+    [
+      'Al Lake Como ci sono 12 richieste; al Lake Zurich ci sono 18 richieste.',
+      'On Lake Como, there are 12 applications; on Lake Zurich, there are 18 applications.',
+      'On Lake Zurich, there are 12 applications; on Lake Como, there are 18 applications.',
+    ],
+    [
+      '(A Zugo ci sono 12 richieste); «A Baar ci sono 18 richieste».',
+      '(In Zugo, there are 12 applications); «In Baar, there are 18 applications».',
+      '(In Baar, there are 12 applications); «In Zugo, there are 18 applications».',
+    ],
+    [
+      'A Mt. Blanc ci sono 12 richieste; a Mt. Rosa ci sono 18 richieste.',
+      'At Mt. Blanc, there are 12 applications; at Mt. Rosa, there are 18 applications.',
+      'At Mt. Rosa, there are 12 applications; at Mt. Blanc, there are 18 applications.',
+    ],
+    [
+      "'In Zugo ci sono 12 richieste'; *In Baar ci sono 18 richieste*.",
+      "'In Zugo, there are 12 applications'; *In Baar, there are 18 applications*.",
+      "'In Baar, there are 12 applications'; *In Zugo, there are 18 applications*.",
+    ],
+    [
+      '*A Zugo*, ci sono 12 richieste; _a Baar_, ci sono 18 richieste.',
+      '*In Zugo*, there are 12 applications; _In Baar_, there are 18 applications.',
+      '*In Baar*, there are 12 applications; _In Zugo_, there are 18 applications.',
+    ],
+    [
+      'A Zugo ci sono 12 richieste; a Baar ci sono 18 richieste.',
+      '“In Zugo”, there are 12 applications; «In Baar», there are 18 applications.',
+      '“In Baar”, there are 12 applications; «In Zugo», there are 18 applications.',
+    ],
+    [
+      'A Zugo ci sono 12 richieste; a Baar ci sono 18 richieste.',
+      "'In Zugo', there are 12 applications; 'In Baar', there are 18 applications.",
+      "'In Baar', there are 12 applications; 'In Zugo', there are 18 applications.",
+    ],
+    [
+      "All'Aquila ci sono 12 richieste; all'Elba ci sono 18 richieste.",
+      'Nell’Aquila, ci sono 12 richieste; sull’Elba, ci sono 18 richieste.',
+      'Sull’Elba, ci sono 12 richieste; nell’Aquila, ci sono 18 richieste.',
+    ],
+    [
+      'A Zugo ci sono 12 richieste, a Baar ci sono 18 richieste.',
+      'In Zugo, there are 12 applications, in Baar, there are 18 applications.',
+      'In Baar, there are 12 applications, in Zugo, there are 18 applications.',
+    ],
+  ]) {
+    assert.equal(await makeTranslator(() => target, 80)(source), target);
+    assert.equal(await makeTranslator(() => swapped, 80)(source), null);
+  }
+
   const mixedAnchorsTarget = 'Lugano: 100 applications; the response arrives after 12 days.';
   assert.equal(
     await makeTranslator(() => mixedAnchorsTarget, 50)(mixedAnchorsSource),
