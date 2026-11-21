@@ -1116,8 +1116,24 @@ export function ledgerArticleId(value) {
  * anche per le voci nuove, e rimetterebbe in piedi il collasso che la forma 2
  * toglie.
  */
-export function makeLedgerEntry(articleId, now = Date.now()) {
-  return { articleId: String(articleId), ts: new Date(now).toISOString(), keyForm: SOURCE_URL_KEY_FORM };
+export function makeLedgerEntry(articleId, now = Date.now(), sourceText = '') {
+  const fingerprint = sourceContentFingerprint(sourceText);
+  return {
+    articleId: String(articleId),
+    ts: new Date(now).toISOString(),
+    keyForm: SOURCE_URL_KEY_FORM,
+    ...(fingerprint ? { sourceContentFingerprint: fingerprint } : {}),
+  };
+}
+
+function sourceContentFingerprint(text) {
+  const normalized = typeof text === 'string' ? text.replace(/\s+/gu, ' ').trim() : '';
+  return normalized.length >= 200 ? createHash('sha256').update(normalized).digest('hex') : '';
+}
+
+export function hasSameLedgerSourceContent(entry, sourceText) {
+  const fingerprint = sourceContentFingerprint(sourceText);
+  return Boolean(fingerprint && entry?.sourceContentFingerprint === fingerprint);
 }
 
 /**
