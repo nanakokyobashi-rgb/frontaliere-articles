@@ -4406,7 +4406,7 @@ function normalizeSourceDomain(domain) {
 // L'import sta qui e non nel blocco in testa al file perche' e' l'unico punto
 // che lo usa e la sezione sotto e' l'unica che ne parla; e' una dichiarazione
 // top-level a tutti gli effetti, quindi resta issata come le altre.
-import { ledgerViewsForLookup, makeLedgerEntry, newsUrlKey, legacyNewsUrlKey, itemIdentityOf, stripItemIdentity, checkItemOnPage, pageTitleEvidence } from './lib/source-url-ledger.mjs';
+import { ledgerViewsForLookup, makeLedgerEntry, hasSameLedgerSourceContent, newsUrlKey, legacyNewsUrlKey, itemIdentityOf, stripItemIdentity, checkItemOnPage, pageTitleEvidence } from './lib/source-url-ledger.mjs';
 
 // ── Source URL tracking: prevent re-using the same news source URL ─────
 function loadSourceUrls() {
@@ -4712,7 +4712,7 @@ function isSourceUrlAlreadyUsed(headlineUrl) {
 }
 
 /** Record a source URL after successful article generation */
-function recordSourceUrl(sourceUrl, articleId) {
+function recordSourceUrl(sourceUrl, articleId, sourceText) {
   if (!sourceUrl || sourceUrl.startsWith('evergreen://')) return;
   const map = loadSourceUrls();
   const normalized = normalizeNewsUrl(sourceUrl);
@@ -4720,7 +4720,7 @@ function recordSourceUrl(sourceUrl, articleId) {
   // il ledger non ha modo di dire quali voci sono ancora attuali, ed e' cio'
   // che lo aveva reso un cricchetto. Le voci storiche restano stringhe e
   // restano permanenti — vedi `source-url-ledger.mjs`.
-  map[normalized] = makeLedgerEntry(articleId);
+  map[normalized] = makeLedgerEntry(articleId, Date.now(), sourceText);
   saveSourceUrls(map);
     console.error(
       `  📎 Source URL registrata: ${safeSignalSourceUrlForLog(normalized, null)} → `
@@ -22552,6 +22552,13 @@ async function main() {
             return; // Success — exit main
           } catch (e) {
             const isDuplicate = isDuplicateError(e);
+            if (isDuplicate && e.duplicateSourceContent) {
+              RUN_REPORT.preFilterDrops.urlAlreadyUsed += 1;
+              console.error('   🔗 Testo fonte già usato — provo un’altra headline (non conta come tentativo)');
+              url = null;
+              attempt--;
+              continue;
+            }
             if (isDuplicate) captureDuplicateReasons(e.message);
             if (isDuplicate && attempt < MAX_DUPLICATE_RETRIES) {
               const safeDuplicateDetail = safeSignalDiagnosticTextForLog(duplicateCandidateDetail(e.message), chosen);
@@ -23047,6 +23054,12 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     ? sourceContext._cantonSourcePaywall
     : '';
   const pageContent = await fetchPageContent(url, sourceContext);
+  const priorSource = loadSourceUrls()[normalizeNewsUrl(sourceUrl)];
+  if (hasSameLedgerSourceContent(priorSource, pageContent)) {
+    const err = new Error('DUPLICATO: testo della fonte già usato sullo stesso URL');
+    err.duplicateSourceContent = true;
+    throw err;
+  }
 
   // Step 1a: su un URL riusato la pagina deve essere ancora QUESTO item.
   // L'indirizzo porta la notizia del momento: se nel frattempo e' passata a
@@ -24627,7 +24640,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   }
 
   // Track source URL for future duplicate prevention
-  recordSourceUrl(sourceUrl, data.id);
+  recordSourceUrl(sourceUrl, data.id, pageContent);
 
   // Step 5: Git add
   console.error('\n📦 Staging file:');
