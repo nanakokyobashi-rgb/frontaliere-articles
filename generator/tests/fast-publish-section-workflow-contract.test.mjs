@@ -581,7 +581,8 @@ test('reconcile evita un backfill duplicato sulla stessa revisione e conserva la
   });
   try {
     mkdirSync(path.join(root, 'scripts/ci'), { recursive: true });
-    writeFileSync(path.join(root, 'scripts/ci/read-main-head.sh'), 'printf "%s\\n" "$FAKE_MAIN"\n');
+    writeFileSync(path.join(root, 'scripts/ci/read-main-head.sh'),
+      'if [ -f main-after-dispatch ]; then cat main-after-dispatch; else printf "%s\\n" "$FAKE_MAIN"; fi\n');
     writeFileSync(path.join(root, 'scripts/ci/section-source-unaffected.sh'),
       readFileSync(new URL('../../scripts/ci/section-source-unaffected.sh', import.meta.url)));
     writeFileSync(path.join(root, 'reconcile-sections.json'), JSON.stringify({
@@ -589,8 +590,10 @@ test('reconcile evita un backfill duplicato sulla stessa revisione e conserva la
         section, dispatch: true, selected: [], missingPagePaths: [], knownMissingPagePaths: [],
       })),
     }));
-    const run = (pendingFlip, main = commit) => execFileSync('bash', ['-c', [
-      'gh() { if [ "$1" = api ]; then printf "%s" "$ACTIVE_RUNS"; else printf "%s\\n" "$@"; fi; }',
+    const run = (pendingFlip, main = commit, afterDispatch = '') => execFileSync('bash', ['-c', [
+      'rm -f main-after-dispatch',
+      'gh() { if [ "$1" = api ]; then printf "%s" "$ACTIVE_RUNS"; else printf "%s\\n" "$@"; '
+        + 'if [ -n "$MAIN_AFTER_DISPATCH" ]; then printf "%s\\n" "$MAIN_AFTER_DISPATCH" > main-after-dispatch; fi; fi; }',
       'date() { echo 2026-11-19T04:00:00Z; }',
       source.slice(start, end),
     ].join('\n')], {
@@ -598,7 +601,7 @@ test('reconcile evita un backfill duplicato sulla stessa revisione e conserva la
       env: {
         ...process.env, RUNNER_TEMP: root, GITHUB_PAT_NANAKO: 'test-token', GITHUB_REPOSITORY: 'test/corpus',
         GITHUB_RUN_ID: '123', PENDING_EDGE_FLIP: pendingFlip, SOURCE_COMMIT: commit, API_RELEASE_COMMIT: commit,
-        FAKE_MAIN: main,
+        FAKE_MAIN: main, MAIN_AFTER_DISPATCH: afterDispatch,
         ACTIVE_RUNS: JSON.stringify([{ workflow_runs: [
           pending('canton-appenzello', 'pending'),
           pending('canton-ti', 'completed'),
@@ -621,6 +624,9 @@ test('reconcile evita un backfill duplicato sulla stessa revisione e conserva la
     const repinned = run('true', ledger);
     assert.equal(repinned.match(new RegExp(`^source_commit=${ledger}$`, 'gm'))?.length, 3);
     assert.equal(repinned.match(new RegExp(`^source_main_commit=${ledger}$`, 'gm'))?.length, 3);
+    const advancing = run('true', commit, ledger);
+    assert.equal(advancing.match(new RegExp(`^source_commit=${commit}$`, 'gm'))?.length, 3);
+    assert.equal(advancing.match(new RegExp(`^source_main_commit=${commit}$`, 'gm'))?.length, 3);
     assert.doesNotMatch(run('true', changed), /dispatch_nonce=/);
   } finally {
     rmSync(root, { recursive: true, force: true });

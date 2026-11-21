@@ -4748,7 +4748,9 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(backfill, /verifyMainHeadAtDispatch\(\) \{[\s\S]*?bash scripts\/ci\/read-main-head\.sh[\s\S]*?section-source-unaffected\.sh --bookkeeping-only "\$SOURCE_COMMIT" "\$current_main"[\s\S]*?dispatch_source="\$current_main"/);
   const dispatchIndex = backfill.indexOf('if ! gh workflow run fast-publish-section.yml');
   const finalBackfillGuard = backfill.lastIndexOf('if verifyMainHeadAtDispatch; then');
-  assert.ok(finalBackfillGuard >= 0 && finalBackfillGuard < dispatchIndex, 'ogni wave di dispatch deve rileggere main');
+  const dispatchLoop = backfill.indexOf('while IFS=');
+  assert.ok(finalBackfillGuard >= 0 && finalBackfillGuard < dispatchLoop && dispatchLoop < dispatchIndex,
+    'la coorte deve rileggere main prima del ciclo e mantenere una sola revisione');
   assert.match(wf, /args=\([\s\S]*-f "section=\$section"[\s\S]*-f "article_ids=\$ids"[\s\S]*'bootstrap=false'[\s\S]*'dry_run=false'/);
   assert.match(wf, /-f "missing_page_paths=\$missing_page_paths"/);
   assert.match(wf, /-f "known_missing_page_paths=\$known_missing_page_paths"/);

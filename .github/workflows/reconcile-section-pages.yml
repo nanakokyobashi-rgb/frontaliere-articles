@@ -344,21 +344,22 @@ jobs:
             exit 1
           fi
           dispatch_cohort="reconcile-${GITHUB_RUN_ID}-n${dispatch_cohort_size}"
+          # All children in this cohort must attest to the same source.
+          if verifyMainHeadAtDispatch; then
+            :
+          else
+            verify_status=$?
+            if [ "$verify_status" -eq 2 ]; then
+              echo "::notice::nessun dispatch stantio; il batch verra' ripreso dal prossimo giro"
+              exit 0
+            fi
+            exit "$verify_status"
+          fi
           fail=0
           while IFS=$'\t' read -r section ids missing_page_paths known_missing_page_paths; do
             [ -n "$section" ] || continue
             echo "── backfill $section ids=$ids"
             dispatch_nonce="reconcile-${GITHUB_RUN_ID}-${section}"
-            if verifyMainHeadAtDispatch; then
-              :
-            else
-              verify_status=$?
-              if [ "$verify_status" -eq 2 ]; then
-                echo "::notice::nessun dispatch stantio; il resto viene ripreso dal prossimo giro"
-                exit 0
-              fi
-              exit "$verify_status"
-            fi
             args=(
               -f "section=$section"
               -f "article_ids=$ids"
