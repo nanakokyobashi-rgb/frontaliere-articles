@@ -51,6 +51,9 @@ permissions:
 
 jobs:
   generate:
+    # Il commit prodotto da questo caller entra nei suoi push.paths; non deve
+    # consumare un altro slot Cloud Scheduler come successore di se stesso.
+    if: ${{ github.event_name != 'push' || github.event.head_commit.message != 'Generate blog article (canton-tg)' }}
     permissions:
       actions: read
       contents: read

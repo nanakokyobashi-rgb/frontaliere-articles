@@ -737,6 +737,7 @@ function parseCaller(text) {
     crons: [...text.matchAll(/^ {4}- cron: '([^']+)'$/gm)].map((m) => m[1]),
     pushBranches: (/^ {4}branches: \[(.+)\]$/m.exec(pushBlock) || [])[1],
     pushPaths: [...pushBlock.matchAll(/^ {6}- '([^']+)'$/gm)].map((m) => m[1]),
+    jobIf: (/^ {4}if: (.+)$/m.exec(text) || [])[1],
     dispatchInputs: [...text.slice(text.indexOf('\n  workflow_dispatch:\n'), text.indexOf('\npermissions:\n')).matchAll(/^ {6}([a-z_]+):$/gm)].map((m) => m[1]),
     with: withMap,
   };
@@ -813,6 +814,13 @@ test('push.paths: solo i path del corpus della propria sezione', () => {
     for (const state of [paths.sourceUrlsFile, paths.evergreenRejectedFile, paths.quotaStateFile, `${paths.sidecarDir}/x.json`]) {
       assert.ok(!pushPaths.some((p) => pathMatches(p, state)), `${file}: lo stato ${state} farebbe ripartire un run secco`);
     }
+  }
+});
+
+test('un caller non reingressa sul commit prodotto dalla propria sezione', () => {
+  for (const { canton, file, jobIf } of CALLERS) {
+    const expected = `\${{ github.event_name != 'push' || github.event.head_commit.message != 'Generate blog article (${canton.section})' }}`;
+    assert.equal(jobIf, expected, `${file}: il commit prodotto deve essere escluso prima del core riusabile`);
   }
 });
 
