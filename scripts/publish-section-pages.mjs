@@ -66,8 +66,10 @@ import {
 } from '../generator/scripts/lib/fetch-with-ref-timeout.mjs';
 import {
   findHtmlClosingTag,
+  findHtmlRawTextClosingTag,
   htmlAttributes,
-  nextHtmlTagOutsideRawText,
+  isHtmlRawTextTag,
+  nextHtmlTag,
 } from '../generator/scripts/lib/html-tag-scanner.mjs';
 
 import { IMAGE_FETCH_TIMEOUT_MS, MAX_DECLARED_IMAGE_BYTES } from './lib/declared-image-fetch.mjs';
@@ -823,13 +825,18 @@ function realHtmlTags(html) {
   const tags = [];
   let cursor = 0;
   let tag;
-  while ((tag = nextHtmlTagOutsideRawText(source, cursor)) !== null) {
+  while ((tag = nextHtmlTag(source, cursor)) !== null) {
     cursor = tag.end;
     if (tag.closing) continue;
     tags.push({
       ...tag,
       attrs: Object.fromEntries(htmlAttributes(source.slice(tag.start, tag.end))),
     });
+    if (!tag.selfClosing && isHtmlRawTextTag(tag.name)) {
+      const close = findHtmlRawTextClosingTag(source, tag.end, tag.name);
+      if (!close) break;
+      cursor = close.end;
+    }
   }
   return tags;
 }
