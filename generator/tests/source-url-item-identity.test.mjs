@@ -458,6 +458,18 @@ test('pageTitleEvidence esclude title SVG e markup letterale nel textarea', () =
   assert.equal(pageTitleEvidence('<plaintext><h1>PLAINTEXT_H1</h1>'), '');
 });
 
+test('pageTitleEvidence scarta evidenza precedente se una regione attiva e troncata', () => {
+  const prefix = '<meta property="og:title" content="META_REALE">'
+    + '<title>TITLE_REALE</title><h1>H1_REALE</h1>';
+  for (const suffix of [
+    '<svg><h1>SVG_TRONCATO',
+    '<math><h1>MATH_TRONCATO',
+    '<textarea><h1>TEXTAREA_TRONCATO',
+  ]) {
+    assert.equal(pageTitleEvidence(prefix + suffix), '', `${suffix} deve fallire chiuso`);
+  }
+});
+
 test('pageTitleEvidence non riapre l’head dopo la chiusura del documento', () => {
   const html = '<html><title>TITLE_DOCUMENTALE</title></html>'
     + '<head><title>TITLE_STALE</title><meta property="og:title" content="META_STALE"></head>';
@@ -478,6 +490,10 @@ test('pageTitleEvidence ignora dichiarazioni e markup dentro le dichiarazioni pr
     '<!doctype html>',
     '<?xml version="1.0"?>',
     '<!doctype html [<!ENTITY fake \'<meta property="og:title" content="FAKE_META">\'><h1>FAKE_H1</h1>]>',
+    '<?xml-stylesheet href="?> <meta property=\'og:title\' content=\'FAKE_META\'><h1>FAKE_H1</h1>"?>',
+    '<?xml-stylesheet href="<meta property=\'og:title\' content=\'FAKE_META\'><h1>FAKE_H1</h1>"?>',
+    '<![CDATA[<h1>FAKE_H1</h1>]]>',
+    '<!bogus "<h1>FAKE_H1</h1>">',
   ];
   for (const declaration of declarations) {
     const html = declaration + '<html><head>'

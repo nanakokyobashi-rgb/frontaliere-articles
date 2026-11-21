@@ -475,6 +475,21 @@ function maskSkipComment(html, start) {
   return end < 0 ? -1 : end + 3;
 }
 
+function maskFindDeclarationEnd(html, start, terminator) {
+  let quote = '';
+  for (let index = start; index < html.length; index += 1) {
+    const char = html[index];
+    if (quote) {
+      if (char === quote) quote = '';
+    } else if (char === '"' || char === "'") {
+      quote = char;
+    } else if (html.startsWith(terminator, index)) {
+      return index + terminator.length;
+    }
+  }
+  return -1;
+}
+
 function maskSkipDocumentDeclaration(html, start) {
   if (/^<!doctype(?:\s|>)/iu.test(html.slice(start))) {
     let quote = '';
@@ -495,9 +510,18 @@ function maskSkipDocumentDeclaration(html, start) {
     }
     return -1;
   }
-  if (/^<\?xml(?:\s|\?|>)/iu.test(html.slice(start))) {
-    const end = html.indexOf('?>', start + 5);
-    return end < 0 ? -1 : end + 2;
+  if (/^<!\[cdata\[/iu.test(html.slice(start))) {
+    const end = html.indexOf(']]>', start + 9);
+    return end < 0 ? -1 : end + 3;
+  }
+  // Processing instructions and bogus declarations are not HTML elements.
+  // Their delimiters must be found outside quoted values: a `?>` or `>` in a
+  // value must not expose the markup-looking text that follows it.
+  if (html.startsWith('<?', start)) {
+    return maskFindDeclarationEnd(html, start + 2, '?>');
+  }
+  if (html.startsWith('<!', start)) {
+    return maskFindDeclarationEnd(html, start + 2, '>');
   }
   return null;
 }
@@ -603,22 +627,22 @@ function maskSkipForeignElement(html, start, startTag, name) {
   let cursor = startTag.end + 1;
   while (cursor < html.length) {
     const tagStart = html.indexOf('<', cursor);
-    if (tagStart < 0) return html.length;
+    if (tagStart < 0) return -1;
     if (html.startsWith('<!--', tagStart)) {
       const afterComment = maskSkipComment(html, tagStart);
-      if (afterComment < 0) return html.length;
+      if (afterComment < 0) return -1;
       cursor = afterComment;
       continue;
     }
     const tag = maskReadTag(html, tagStart);
-    if (tag?.malformed) return html.length;
+    if (tag?.malformed) return -1;
     if (!tag) {
       cursor = tagStart + 1;
       continue;
     }
     if (!tag.closing && !tag.selfClosing && tag.name === 'template') {
       const afterTemplate = maskSkipTemplate(html, tag.end + 1);
-      if (afterTemplate < 0) return html.length;
+      if (afterTemplate < 0) return -1;
       cursor = afterTemplate;
       continue;
     }
@@ -629,7 +653,7 @@ function maskSkipForeignElement(html, start, startTag, name) {
         || (INACTIVE_RAW_TEXT_TAGS.has(tag.name) && tag.name !== 'noscript'))
     ) {
       const afterRawText = maskSkipRawText(html, tag.end + 1, tag.name);
-      if (afterRawText < 0) return html.length;
+      if (afterRawText < 0) return -1;
       cursor = afterRawText;
       continue;
     }
@@ -643,12 +667,13 @@ function maskSkipForeignElement(html, start, startTag, name) {
     }
     cursor = tag.end + 1;
   }
-  return html.length;
+  return -1;
 }
 
 function maskNonDocumentTitleMarkup(html) {
   const source = String(html || '');
   const output = source.split('');
+  let malformed = false;
   const blank = (start, end) => {
     for (let i = start; i < end; i++) output[i] = ' ';
   };
@@ -660,6 +685,7 @@ function maskNonDocumentTitleMarkup(html) {
       const afterComment = maskSkipComment(source, start);
       if (afterComment < 0) {
         blank(start, source.length);
+        malformed = true;
         break;
       }
       cursor = afterComment;
@@ -669,6 +695,7 @@ function maskNonDocumentTitleMarkup(html) {
     if (declarationEnd !== null) {
       if (declarationEnd < 0) {
         blank(start, source.length);
+        malformed = true;
         break;
       }
       // A declaration can contain markup-looking text in its internal subset
@@ -681,6 +708,7 @@ function maskNonDocumentTitleMarkup(html) {
     const tag = maskReadTag(source, start);
     if (tag?.malformed) {
       blank(start, source.length);
+      malformed = true;
       break;
     }
     if (!tag) {
@@ -689,7 +717,11 @@ function maskNonDocumentTitleMarkup(html) {
     }
     if (!tag.closing && (tag.name === 'svg' || tag.name === 'math')) {
       const end = maskSkipForeignElement(source, start, tag, tag.name);
-      blank(start, end);
+      blank(start, end < 0 ? source.length : end);
+      if (end < 0) {
+        malformed = true;
+        break;
+      }
       cursor = end;
       continue;
     }
@@ -700,7 +732,10 @@ function maskNonDocumentTitleMarkup(html) {
     if (!tag.closing && !tag.selfClosing && tag.name === 'textarea') {
       const end = maskSkipRawText(source, tag.end + 1, tag.name);
       blank(start, end < 0 ? source.length : end);
-      if (end < 0) break;
+      if (end < 0) {
+        malformed = true;
+        break;
+      }
       cursor = end;
       continue;
     }
@@ -708,6 +743,7 @@ function maskNonDocumentTitleMarkup(html) {
       const end = maskSkipRawText(source, tag.end + 1, tag.name);
       if (end < 0) {
         blank(start, source.length);
+        malformed = true;
         break;
       }
       cursor = end;
@@ -715,7 +751,7 @@ function maskNonDocumentTitleMarkup(html) {
     }
     cursor = tag.end + 1;
   }
-  return output.join('');
+  return { html: output.join(''), malformed };
 }
 
 function maskSkipTemplate(html, afterOpening) {
@@ -931,7 +967,9 @@ export function pageTitleEvidence(html, opts = {}) {
   const masked = maskInactiveMarkupWithStatus(html, opts);
   if (masked.malformed) return '';
   const src = masked.html;
-  const titleSrc = maskNonDocumentTitleMarkup(src);
+  const titleMasked = maskNonDocumentTitleMarkup(src);
+  if (titleMasked.malformed) return '';
+  const titleSrc = titleMasked.html;
   const metadataSrc = maskRcdataContentForMetadata(titleSrc);
   const out = [];
 
