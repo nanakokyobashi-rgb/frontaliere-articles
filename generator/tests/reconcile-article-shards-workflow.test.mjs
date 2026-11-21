@@ -51,6 +51,18 @@ test('il reconcile automatico usa la HEAD corrente e non arma backfill stantii',
 
   const guardedSideEffects = workflow.match(/if:[^\n]*steps\.detect\.outputs\.head_guard == 'true'/g) ?? [];
   assert.equal(guardedSideEffects.length, 5, 'ogni side effect del report deve richiedere HEAD == main');
+
+  const backfill = workflow.match(/^      - name: Backfill \(dispatch fast-publish-article per gli id selezionati\)\n(?:(?!^      - ).*\n)*/m)?.[0] ?? '';
+  assert.match(backfill, /^          SOURCE_COMMIT: \$\{\{ steps\.detect\.outputs\.source_commit \}\}$/m);
+  assert.match(
+    backfill,
+    /verifyMainHeadAtDispatch\(\) \{[\s\S]*?bash scripts\/ci\/read-main-head\.sh[\s\S]*?if \[ "\$current_main" != "\$SOURCE_COMMIT" \]; then[\s\S]*?return 2/,
+  );
+  assert.match(
+    backfill,
+    /if verifyMainHeadAtDispatch; then\n\s+:\n\s+else[\s\S]*?\n\s+break\n\s+fi\n\s+if ! gh_api_timeout -X POST "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/\$WF\/dispatches"/,
+    'ogni dispatch deve essere preceduto dalla verifica della HEAD corrente',
+  );
 });
 
 test('il backfill aspetta solo il gruppo dello shard target', () => {

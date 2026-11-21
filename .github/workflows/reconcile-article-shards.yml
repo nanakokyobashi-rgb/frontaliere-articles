@@ -198,6 +198,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WF: fast-publish-article.yml
           GH_API_TIMEOUT_SECONDS: ${{ vars.GH_API_TIMEOUT_SECONDS }}
+          SOURCE_COMMIT: ${{ steps.detect.outputs.source_commit }}
         run: |
           set -euo pipefail
           results="$RUNNER_TEMP/backfill-results.tsv"
@@ -216,6 +217,26 @@ jobs:
           SOFT_BUDGET=2100   # niente item nuovi oltre i 35 min
           HARD_DEADLINE=2700 # niente attese oltre i 45 min (timeout job: 50)
           elapsed() { echo $(( $(date +%s) - START_TS )); }
+
+          verifyMainHeadAtDispatch() {
+            local current_main=''
+            if ! [[ "${SOURCE_COMMIT:-}" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::warning::source_commit non valida per il backfill; interrompo il batch"
+              return 1
+            fi
+            if ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
+              echo "::warning::impossibile verificare main immediatamente prima del dispatch; interrompo il batch"
+              return 1
+            fi
+            if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::warning::HEAD di main non valida immediatamente prima del dispatch: $current_main; interrompo il batch"
+              return 1
+            fi
+            if [ "$current_main" != "$SOURCE_COMMIT" ]; then
+              echo "::notice::main e' avanzata dopo la detection ($SOURCE_COMMIT -> $current_main); interrompo il batch"
+              return 2
+            fi
+          }
 
           # Ogni lettura dell'API tollera il transitorio degradando verso la
           # scelta PRUDENTE (occupato/tetto raggiunto → rimandare): un blip di
@@ -573,6 +594,17 @@ jobs:
 
             before="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
             echo "── dispatch backfill: $section/$id"
+            if verifyMainHeadAtDispatch; then
+              :
+            else
+              verify_status=$?
+              if [ "$verify_status" -eq 2 ]; then
+                echo "::notice::nessun dispatch stantio; il resto viene ripreso dal prossimo giro"
+              else
+                echo "::warning::nessun dispatch: impossibile dimostrare che main sia ancora la revisione del report"
+              fi
+              break
+            fi
             if ! gh_api_timeout -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/dispatches" \
               -f ref=main \
               -f "inputs[article_id]=$id" \
