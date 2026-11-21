@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-spazi-scolastici-wurzenbach.webp",
+      "sha256": "76f583d85d5ee149f1b3b8a48c47ea4ad01a86a2a525cac97f844fde6d36162d"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-spazi-scolastici-wurzenbach-480w.webp",
+      "sha256": "4aa1ea07e3de236e21a03f65d8d0c4b82392875786d8ed811ea0235afdffecaa"
+    }
+  ]
 }
