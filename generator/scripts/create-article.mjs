@@ -17439,8 +17439,8 @@ async function translateArticle(data) {
       const placeWord = /[\p{Lu}][\p{L}\p{M}’'-]*/.source;
       const placeAbbreviation = /(?:St|Ste|S|Mt|Mte)\.[\p{Zs}\t]+/.source;
       const placePart = `(?:${placeAbbreviation})?${placeWord}`;
-      const locativePrefix = /(?:^|(?<=[\n,:;!?|])|(?<=\.)(?=\s))[^\S\n]*(?:>[^\S\n]*)*(?:(?:[-+*]|\d+[.)])[^\S\n]+)?(?:[("\[“‘«‹][^\S\n]*)*/.source;
-      const locativePreposition = /(?:[AaÀà]|[Ii]n|[Aa]t|[Aa]u|[Aa]ux|[Zz]u|[Nn]el(?:l[aeio])?|[Nn]ei|[Nn]egli|[Ii]m|[Aa]m|[Ee]n|[Aa]l(?:l[aeio])?|[Aa]gli|[Oo]n|[Dd]ans|[Ss]ur|[Aa]n)[\p{Zs}\t]+/.source;
+      const locativePrefix = /(?:^|(?<=[\n,:;!?|])|(?<=\.)(?=\s))[^\S\n]*(?:>[^\S\n]*)*(?:(?:[-+*]|\d+[.)])[^\S\n]+)?(?:[("'\[“‘«‹*_][^\S\n]*)*/.source;
+      const locativePreposition = /(?:(?:[AaÀà]|[Ii]n|[Aa]t|[Aa]u|[Aa]ux|[Zz]u|[Nn]el(?:l[aeio])?|[Nn]ei|[Nn]egli|[Ii]m|[Aa]m|[Ee]n|[Aa]l(?:l[aeio])?|[Aa]gli|[Oo]n|[Dd]ans|[Ss]ur|[Aa]n|[Ss]u(?:l(?:l[aeio])?|i|gli)?)[\p{Zs}\t]+|(?:[Aa]ll|[Nn]ell|[Ss]ull)[’\x27])/.source;
       const placeArticle = /(?:(?:di|del|della|de|du|des|la|le|der|den|dem|the)[\p{Zs}\t]+)?/.source;
       const placeContinuation = /(?:di|de|del|della|la|le|am|im)[\p{Zs}\t]+/.source;
       const leadingLocative = new RegExp(
@@ -17483,7 +17483,8 @@ async function translateArticle(data) {
         }, span)
           .replace(/\s+/gu, ' ')
           .trim();
-        const anchorTokens = [...withoutNumbers.matchAll(/(?<![\p{L}\p{N}_])[\p{Lu}][\p{L}\p{N}_’'-]*/gu)]
+        const anchorText = withoutNumbers.replace(/(?<![\p{L}\p{N}_])(?:all|nell|sull)[’']/giu, '');
+        const anchorTokens = [...anchorText.matchAll(/(?<![\p{L}\p{N}_])[\p{Lu}][\p{L}\p{N}_’'-]*/gu)]
           .map(([anchor]) => anchor.toLowerCase())
         let currencyAnchor = null;
         if (numberRanges.length === 1) {

@@ -1916,6 +1916,16 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
       'At Mt. Rosa, there are 12 applications; at Mt. Blanc, there are 18 applications.',
     ],
     [
+      "'In Zugo ci sono 12 richieste'; *In Baar ci sono 18 richieste*.",
+      "'In Zugo, there are 12 applications'; *In Baar, there are 18 applications*.",
+      "'In Baar, there are 12 applications'; *In Zugo, there are 18 applications*.",
+    ],
+    [
+      "All'Aquila ci sono 12 richieste; all'Elba ci sono 18 richieste.",
+      'Nell’Aquila, ci sono 12 richieste; sull’Elba, ci sono 18 richieste.',
+      'Sull’Elba, ci sono 12 richieste; nell’Aquila, ci sono 18 richieste.',
+    ],
+    [
       'A Zugo ci sono 12 richieste, a Baar ci sono 18 richieste.',
       'In Zugo, there are 12 applications, in Baar, there are 18 applications.',
       'In Baar, there are 12 applications, in Zugo, there are 18 applications.',
