@@ -66,6 +66,11 @@
  */
 
 import { createHash } from 'node:crypto';
+import {
+  firstHtmlAttributeValue,
+  nextHtmlElement,
+  nextHtmlTagStatus,
+} from './html-tag-scanner.mjs';
 
 // ── La CHIAVE del ledger ─────────────────────────────────────────────────────
 //
@@ -470,6 +475,21 @@ function maskSkipComment(html, start) {
   return end < 0 ? -1 : end + 3;
 }
 
+function maskFindDeclarationEnd(html, start, terminator) {
+  let quote = '';
+  for (let index = start; index < html.length; index += 1) {
+    const char = html[index];
+    if (quote) {
+      if (char === quote) quote = '';
+    } else if (char === '"' || char === "'") {
+      quote = char;
+    } else if (html.startsWith(terminator, index)) {
+      return index + terminator.length;
+    }
+  }
+  return -1;
+}
+
 function maskSkipDocumentDeclaration(html, start) {
   if (/^<!doctype(?:\s|>)/iu.test(html.slice(start))) {
     let quote = '';
@@ -490,9 +510,18 @@ function maskSkipDocumentDeclaration(html, start) {
     }
     return -1;
   }
-  if (/^<\?xml(?:\s|\?|>)/iu.test(html.slice(start))) {
-    const end = html.indexOf('?>', start + 5);
-    return end < 0 ? -1 : end + 2;
+  if (/^<!\[cdata\[/iu.test(html.slice(start))) {
+    const end = html.indexOf(']]>', start + 9);
+    return end < 0 ? -1 : end + 3;
+  }
+  // Processing instructions and bogus declarations are not HTML elements.
+  // Their delimiters must be found outside quoted values: a `?>` or `>` in a
+  // value must not expose the markup-looking text that follows it.
+  if (html.startsWith('<?', start)) {
+    return maskFindDeclarationEnd(html, start + 2, '?>');
+  }
+  if (html.startsWith('<!', start)) {
+    return maskFindDeclarationEnd(html, start + 2, '>');
   }
   return null;
 }
@@ -598,22 +627,22 @@ function maskSkipForeignElement(html, start, startTag, name) {
   let cursor = startTag.end + 1;
   while (cursor < html.length) {
     const tagStart = html.indexOf('<', cursor);
-    if (tagStart < 0) return html.length;
+    if (tagStart < 0) return -1;
     if (html.startsWith('<!--', tagStart)) {
       const afterComment = maskSkipComment(html, tagStart);
-      if (afterComment < 0) return html.length;
+      if (afterComment < 0) return -1;
       cursor = afterComment;
       continue;
     }
     const tag = maskReadTag(html, tagStart);
-    if (tag?.malformed) return html.length;
+    if (tag?.malformed) return -1;
     if (!tag) {
       cursor = tagStart + 1;
       continue;
     }
     if (!tag.closing && !tag.selfClosing && tag.name === 'template') {
       const afterTemplate = maskSkipTemplate(html, tag.end + 1);
-      if (afterTemplate < 0) return html.length;
+      if (afterTemplate < 0) return -1;
       cursor = afterTemplate;
       continue;
     }
@@ -624,7 +653,7 @@ function maskSkipForeignElement(html, start, startTag, name) {
         || (INACTIVE_RAW_TEXT_TAGS.has(tag.name) && tag.name !== 'noscript'))
     ) {
       const afterRawText = maskSkipRawText(html, tag.end + 1, tag.name);
-      if (afterRawText < 0) return html.length;
+      if (afterRawText < 0) return -1;
       cursor = afterRawText;
       continue;
     }
@@ -638,12 +667,13 @@ function maskSkipForeignElement(html, start, startTag, name) {
     }
     cursor = tag.end + 1;
   }
-  return html.length;
+  return -1;
 }
 
 function maskNonDocumentTitleMarkup(html) {
   const source = String(html || '');
   const output = source.split('');
+  let malformed = false;
   const blank = (start, end) => {
     for (let i = start; i < end; i++) output[i] = ' ';
   };
@@ -655,6 +685,7 @@ function maskNonDocumentTitleMarkup(html) {
       const afterComment = maskSkipComment(source, start);
       if (afterComment < 0) {
         blank(start, source.length);
+        malformed = true;
         break;
       }
       cursor = afterComment;
@@ -664,14 +695,20 @@ function maskNonDocumentTitleMarkup(html) {
     if (declarationEnd !== null) {
       if (declarationEnd < 0) {
         blank(start, source.length);
+        malformed = true;
         break;
       }
+      // A declaration can contain markup-looking text in its internal subset
+      // or quoted values. It is not active HTML, so hide the whole span before
+      // the metadata and title walkers inspect the same-index source.
+      blank(start, declarationEnd);
       cursor = declarationEnd;
       continue;
     }
     const tag = maskReadTag(source, start);
     if (tag?.malformed) {
       blank(start, source.length);
+      malformed = true;
       break;
     }
     if (!tag) {
@@ -680,7 +717,11 @@ function maskNonDocumentTitleMarkup(html) {
     }
     if (!tag.closing && (tag.name === 'svg' || tag.name === 'math')) {
       const end = maskSkipForeignElement(source, start, tag, tag.name);
-      blank(start, end);
+      blank(start, end < 0 ? source.length : end);
+      if (end < 0) {
+        malformed = true;
+        break;
+      }
       cursor = end;
       continue;
     }
@@ -691,7 +732,10 @@ function maskNonDocumentTitleMarkup(html) {
     if (!tag.closing && !tag.selfClosing && tag.name === 'textarea') {
       const end = maskSkipRawText(source, tag.end + 1, tag.name);
       blank(start, end < 0 ? source.length : end);
-      if (end < 0) break;
+      if (end < 0) {
+        malformed = true;
+        break;
+      }
       cursor = end;
       continue;
     }
@@ -699,6 +743,7 @@ function maskNonDocumentTitleMarkup(html) {
       const end = maskSkipRawText(source, tag.end + 1, tag.name);
       if (end < 0) {
         blank(start, source.length);
+        malformed = true;
         break;
       }
       cursor = end;
@@ -706,7 +751,7 @@ function maskNonDocumentTitleMarkup(html) {
     }
     cursor = tag.end + 1;
   }
-  return output.join('');
+  return { html: output.join(''), malformed };
 }
 
 function maskSkipTemplate(html, afterOpening) {
@@ -759,9 +804,9 @@ function maskSkipTemplate(html, afterOpening) {
  * @param {string} html
  * @param {{ scriptingDisabled?: boolean }} [opts] Treat body `<noscript>`
  *   fallback as active when scripting is disabled; head and template stay inert.
- * @returns {string}
+ * @returns {{ html: string, malformed: boolean }}
  */
-export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
+function maskInactiveMarkupWithStatus(html, { scriptingDisabled = false } = {}) {
   const source = String(html || '');
   const output = source.split('');
   const blank = (start, end) => {
@@ -773,6 +818,7 @@ export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
   let sawDocumentHead = false;
   let documentBodyStarted = false;
   let documentClosed = false;
+  let malformed = false;
   let cursor = 0;
   while (cursor < source.length) {
     const start = source.indexOf('<', cursor);
@@ -792,7 +838,10 @@ export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
     if (source.startsWith('<!--', start)) {
       const afterComment = maskSkipComment(source, start);
       blank(start, afterComment < 0 ? source.length : afterComment);
-      if (afterComment < 0) break;
+      if (afterComment < 0) {
+        malformed = true;
+        break;
+      }
       cursor = afterComment;
       continue;
     }
@@ -800,6 +849,7 @@ export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
     if (declarationEnd !== null) {
       if (declarationEnd < 0) {
         blank(start, source.length);
+        malformed = true;
         break;
       }
       cursor = declarationEnd;
@@ -808,6 +858,7 @@ export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
     const tag = maskReadTag(source, start);
     if (tag?.malformed) {
       blank(start, source.length);
+      malformed = true;
       break;
     }
     if (!tag) {
@@ -825,7 +876,10 @@ export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
       if (!isDocumentHead) {
         const afterHead = maskSkipHead(source, tag.end + 1);
         blank(start, afterHead < 0 ? source.length : afterHead);
-        if (afterHead < 0) break;
+        if (afterHead < 0) {
+          malformed = true;
+          break;
+        }
         cursor = afterHead;
         continue;
       }
@@ -858,7 +912,10 @@ export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
       // Keep title text available to pageTitleEvidence, but do not parse it as
       // markup or mistake it for body text that closes an open head.
       const afterTitle = maskSkipRawText(source, tag.end + 1, tag.name);
-      if (afterTitle < 0) break;
+      if (afterTitle < 0) {
+        malformed = true;
+        break;
+      }
       cursor = afterTitle;
       continue;
     }
@@ -867,20 +924,30 @@ export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
     if (!tag.closing && !tag.selfClosing && isInactiveRawText) {
       const afterRawText = maskSkipRawText(source, tag.end + 1, tag.name);
       blank(start, afterRawText < 0 ? source.length : afterRawText);
-      if (afterRawText < 0) break;
+      if (afterRawText < 0) {
+        malformed = true;
+        break;
+      }
       cursor = afterRawText;
       continue;
     }
     if (tag.name === 'template' && !tag.closing && !tag.selfClosing) {
       const afterTemplate = maskSkipTemplate(source, tag.end + 1);
       blank(start, afterTemplate < 0 ? source.length : afterTemplate);
-      if (afterTemplate < 0) break;
+      if (afterTemplate < 0) {
+        malformed = true;
+        break;
+      }
       cursor = afterTemplate;
       continue;
     }
     cursor = tag.end + 1;
   }
-  return output.join('');
+  return { html: output.join(''), malformed };
+}
+
+export function maskInactiveMarkup(html, opts = {}) {
+  return maskInactiveMarkupWithStatus(html, opts).html;
 }
 
 /**
@@ -897,17 +964,52 @@ export function maskInactiveMarkup(html, { scriptingDisabled = false } = {}) {
 export function pageTitleEvidence(html, opts = {}) {
   // Solo markup attivo: un `<h1>` o un `<title>` dentro un commento, uno
   // script o un template puo' essere il titolo di un'altra notizia.
-  const src = maskInactiveMarkup(html, opts);
-  const titleSrc = maskNonDocumentTitleMarkup(src);
+  const masked = maskInactiveMarkupWithStatus(html, opts);
+  if (masked.malformed) return '';
+  const src = masked.html;
+  const titleMasked = maskNonDocumentTitleMarkup(src);
+  if (titleMasked.malformed) return '';
+  const titleSrc = titleMasked.html;
   const metadataSrc = maskRcdataContentForMetadata(titleSrc);
   const out = [];
-  for (const m of metadataSrc.matchAll(/<meta\b[^>]*>/gi)) {
-    const tag = m[0];
-    if (!/\b(?:property|name)\s*=\s*["']?(?:og:title|twitter:title)["'\s>]/i.test(tag)) continue;
-    const content = /\bcontent\s*=\s*(?:"([^"]*)"|'([^']*)')/i.exec(tag);
-    if (content) out.push(content[1] ?? content[2] ?? '');
+
+  // `metadataSrc` ha gia' il contenuto RCDATA di title/textarea mascherato.
+  // Il walker vede quindi solo tag reali: una stringa `<meta ...>` dentro un
+  // attributo quotato non puo' diventare evidenza, ne' puo' essere troncata da
+  // un `>` presente nello stesso attributo. Deve pero' arrivare fino a EOF:
+  // `nextHtmlElement` distingue solo un elemento trovato da nessun elemento e
+  // nasconde un eventuale `malformed`, quindi non va avviato su una scansione
+  // che ha gia' perso una pagina troncata.
+  let tagScan = nextHtmlTagStatus(metadataSrc);
+  while (tagScan.status !== 'eof') {
+    if (tagScan.status === 'malformed') return '';
+    const { tag } = tagScan;
+    if (!tag.closing && tag.name === 'meta') {
+      const marker = [
+        firstHtmlAttributeValue(tag.attrs, 'property'),
+        firstHtmlAttributeValue(tag.attrs, 'name'),
+      ].find((value) => /^(?:og:title|twitter:title)$/i.test(value));
+      if (marker) out.push(firstHtmlAttributeValue(tag.attrs, 'content'));
+    }
+    tagScan = nextHtmlTagStatus(metadataSrc, tag.end);
   }
-  for (const m of titleSrc.matchAll(/<(title|h1)\b[^>]*>([\s\S]*?)<\/\1\s*>/gi)) out.push(m[2].replace(/<[^>]+>/g, ' '));
+
+  // Cerca title/h1 sullo stesso albero di tag reali. Il contenuto del title e'
+  // mascherato in `metadataSrc` solo per impedire che un `<h1>` letterale nella
+  // sua RCDATA venga scambiato per un elemento; per il testo del title si usa
+  // la sorgente non mascherata, a parita' di indici.
+  const titleElements = [];
+  for (const name of ['title', 'h1']) {
+    let element = nextHtmlElement(metadataSrc, name);
+    while (element) {
+      titleElements.push({ element, source: name === 'title' ? titleSrc : metadataSrc });
+      element = nextHtmlElement(metadataSrc, name, element.end);
+    }
+  }
+  titleElements.sort((a, b) => a.element.start - b.element.start);
+  for (const { element, source } of titleElements) {
+    out.push(source.slice(element.openEnd, element.closeStart).replace(/<[^>]+>/g, ' '));
+  }
   return out.map((t) => t.replace(/\s+/g, ' ').trim()).filter(Boolean).join('\n');
 }
 

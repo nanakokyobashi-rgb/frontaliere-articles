@@ -384,6 +384,14 @@ test('pageTitleEvidence: og:title, twitter:title, <title> e <h1>; niente da una 
   assert.equal(pageTitleEvidence(''), '');
 });
 
+test('pageTitleEvidence ignora i marcatori metadata scritti nel valore di un attributo', () => {
+  const html = '<div data-note=\'<meta property="og:title" content="titolo falso">\n'
+    + '<h1>h1 falso</h1><title>title falso</title> >\'>\n'
+    + '<meta name="twitter:title" content="titolo reale">'
+    + '<title>title reale</title><h1>h1 reale</h1>';
+  assert.equal(pageTitleEvidence(html), 'titolo reale\ntitle reale\nh1 reale');
+});
+
 test('pageTitleEvidence non legge i meta letterali dentro il testo di <title>', () => {
   const html = '<html><head><title><meta property="og:title" content="FALSO_META_TITLE">Titolo vero</title>'
     + '</head><body><p>corpo</p></body></html>';
@@ -450,6 +458,18 @@ test('pageTitleEvidence esclude title SVG e markup letterale nel textarea', () =
   assert.equal(pageTitleEvidence('<plaintext><h1>PLAINTEXT_H1</h1>'), '');
 });
 
+test('pageTitleEvidence scarta evidenza precedente se una regione attiva e troncata', () => {
+  const prefix = '<meta property="og:title" content="META_REALE">'
+    + '<title>TITLE_REALE</title><h1>H1_REALE</h1>';
+  for (const suffix of [
+    '<svg><h1>SVG_TRONCATO',
+    '<math><h1>MATH_TRONCATO',
+    '<textarea><h1>TEXTAREA_TRONCATO',
+  ]) {
+    assert.equal(pageTitleEvidence(prefix + suffix), '', `${suffix} deve fallire chiuso`);
+  }
+});
+
 test('pageTitleEvidence non riapre l’head dopo la chiusura del documento', () => {
   const html = '<html><title>TITLE_DOCUMENTALE</title></html>'
     + '<head><title>TITLE_STALE</title><meta property="og:title" content="META_STALE"></head>';
@@ -465,8 +485,16 @@ test('pageTitleEvidence esclude i metadata e i title dei head annidati nel body'
   assert.deepEqual(pageTitleEvidence(html).split('\n'), ['META_REALE', 'TITLE_REALE', 'H1_REALE']);
 });
 
-test('pageTitleEvidence ignora DOCTYPE e prologo XML prima dell’head documentale', () => {
-  const declarations = ['<!doctype html>', '<?xml version="1.0"?>'];
+test('pageTitleEvidence ignora dichiarazioni e markup dentro le dichiarazioni prima dell’head documentale', () => {
+  const declarations = [
+    '<!doctype html>',
+    '<?xml version="1.0"?>',
+    '<!doctype html [<!ENTITY fake \'<meta property="og:title" content="FAKE_META">\'><h1>FAKE_H1</h1>]>',
+    '<?xml-stylesheet href="?> <meta property=\'og:title\' content=\'FAKE_META\'><h1>FAKE_H1</h1>"?>',
+    '<?xml-stylesheet href="<meta property=\'og:title\' content=\'FAKE_META\'><h1>FAKE_H1</h1>"?>',
+    '<![CDATA[<h1>FAKE_H1</h1>]]>',
+    '<!bogus "<h1>FAKE_H1</h1>">',
+  ];
   for (const declaration of declarations) {
     const html = declaration + '<html><head>'
       + '<meta property="og:title" content="TITLE_DOCUMENTALE">'
@@ -482,6 +510,15 @@ test('pageTitleEvidence ignora DOCTYPE e prologo XML prima dell’head documenta
 test('pageTitleEvidence chiude il percorso su un tag non terminato', () => {
   const malformed = '<meta data="<title>Titolo falso</title>';
   assert.equal(pageTitleEvidence(malformed), '', 'un titolo dopo il tag malformato non e\' evidenza attiva');
+
+  const partial = '<meta property="og:title" content="META_REALE">'
+    + '<title>TITLE_REALE</title><h1>H1_REALE</h1>'
+    + '<div data="pagina troncata';
+  assert.equal(
+    pageTitleEvidence(partial),
+    '',
+    'un tag malformato dopo evidenza valida invalida tutta l\'estrazione',
+  );
 
   // Ogni apertura apparente lascia la ricerca di `>` senza una chiusura: il
   // vecchio caller riprovava dall\'apertura successiva e diventava quadratico.
