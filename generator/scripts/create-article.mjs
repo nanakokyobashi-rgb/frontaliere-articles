@@ -13083,7 +13083,9 @@ Rigenera "id" e "slugs" seguendo ESATTAMENTE lo schema richiesto sopra (valore r
   const buildMessages = (promptText, remediation, part = 'full') => [
     { role: 'system', content: `${systemStem} ${systemRoleQualifier} che RISCRIVE articoli basandosi FEDELMENTE sulla fonte originale.
 
-REGOLA FONDAMENTALE: Ogni fatto, dato, legge, data, cifra e istituzione nel tuo articolo DEVE provenire dal testo SOURCE CONTENT fornito. Puoi spiegare relazioni o calcoli ricavabili dai fatti della fonte, indicando le basi. Ometti ogni altro dato non documentato.
+REGOLA FONDAMENTALE: Ogni fatto, dato, legge, data, cifra e istituzione nel tuo articolo DEVE provenire dal testo SOURCE CONTENT fornito. ${part === 'meta'
+      ? 'Riprendi solo i valori già presenti nel corpo. Non aggiungere calcoli, relazioni o dati.'
+      : 'Puoi spiegare relazioni o calcoli ricavabili dai fatti della fonte, indicando le basi. Ometti ogni altro dato non documentato.'}
 
 DATI ASSENTI NELLA FONTE: omettili; niente placeholder (es. "non specificato") e niente dettagli inventati.
 
