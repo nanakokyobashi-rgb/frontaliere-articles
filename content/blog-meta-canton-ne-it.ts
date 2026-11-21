@@ -81,6 +81,9 @@ const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.imprese-neuchateloise-rischio-supply-chain.title': 'Oltre il 71% delle imprese industriali vede vulnerabilità nella supply chain',
     'blog.article.imprese-neuchateloise-rischio-supply-chain.excerpt': 'L\'indagine della CNCI del 12 novembre 2026 mostra che oltre il 71% delle imprese industriali neocastellanesi percepisce la dipendenza da alcuni fornitori come una vulnerabilità.',
     'blog.article.imprese-neuchateloise-rischio-supply-chain.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.tagli-lavoro-piano-sociale.title': 'Licenziamenti al Locle: 90 posti e piano sociale',
+    'blog.article.tagli-lavoro-piano-sociale.excerpt': '90 posti soppressi al Locle, 10 meno dei 100 annunciati in ottobre.',
+    'blog.article.tagli-lavoro-piano-sociale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonNeIt;

@@ -1006,6 +1006,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tagli-lavoro-piano-sociale': {
+    title: 'Licenziamenti al Locle: 90 posti e piano sociale',
+    description: 'Zenith sopprime 90 posti al Locle, 10 meno dei 100 annunciati in ottobre. Il piano con Unia prevede indennità fino a due anni per alcuni anziani.',
+    keywords: 'frontalieri, ticino, svizzera, italia, licenziamenti, locle, posti, piano',
+    ogTitle: 'Accordo sociale per i 90 posti al Locle',
+    ogDescription: 'Al Locle, dopo l\'annuncio di 100 posti, il dato finale è 90. Il piano sociale con Unia prevede per alcuni dipendenti più anziani indennità tra uno e due anni di salario; il riposizionamento verso l\'alta orologeria è previsto dal 2029.',
+    canonicalPath: '/articoli-neuchatel/tagli-lavoro-piano-sociale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Licenziamenti al Locle: 90 posti e piano sociale",
+      "description": "Zenith sopprime 90 posti al Locle, 10 meno dei 100 annunciati in ottobre. Il piano con Unia prevede indennità fino a due anni per alcuni anziani.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tagli-lavoro-piano-sociale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-21T15:10:35+00:00",
+      "dateModified": "2026-11-21T15:10:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-neuchatel/tagli-lavoro-piano-sociale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

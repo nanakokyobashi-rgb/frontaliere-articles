@@ -6012,6 +6012,18 @@
       "firstSeenAt": "2026-11-19T05:03:31.559Z",
       "lastValidatedAt": "2026-11-19T05:03:31.559Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "permesso di pesca canton Lucerna requisiti e stagioni",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-21T15:21:37.928Z",
+      "lastValidatedAt": "2026-11-21T15:21:37.928Z",
+      "expiresAt": null
     }
   ],
   "strikes": [

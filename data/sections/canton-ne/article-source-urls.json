@@ -123,5 +123,11 @@
     "articleId": "imprese-neuchateloise-rischio-supply-chain",
     "ts": "2026-11-12T10:41:49.262Z",
     "keyForm": 2
+  },
+  "https://www.rts.ch/info/economie/2026/article/zenith-la-marque-horlogere-supprime-90-emplois-au-locle-29420467.html": {
+    "articleId": "tagli-lavoro-piano-sociale",
+    "ts": "2026-11-21T15:10:35.372Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "b501d8905773ce8e3b3d0a249dafaed260b3a860d262b25926545dc94ee36eb7"
   }
 }
