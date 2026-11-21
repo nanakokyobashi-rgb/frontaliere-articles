@@ -56,7 +56,35 @@ test('does not accept an iCMS date from the document shell without an editorial 
     scriptingDisabled: true,
   });
 
-  assert.equal(result.publishedAt, '');
+  assert.equal(result.method, 'naive-fallback');
+  assert.equal(Object.hasOwn(result, 'publishedAt'), false);
+});
+
+test('preserves the iCMS date in the naive fallback for a page without noscript', () => {
+  const result = extractArticleText(`<main>${icmsDate('7. März 2024')}<p>Short notice.</p></main>`);
+
+  assert.equal(result.method, 'naive-fallback');
+  assert.equal(result.publishedAt, '2024-03-07T00:00:00.000Z');
+});
+
+test('preserves the JSON-LD publication date when the text is too short for structured extraction', () => {
+  const html = '<script type="application/ld+json">{"datePublished":"2024-02-01","articleBody":"Short notice."}</script>'
+    + '<main><p>Short notice.</p></main>';
+
+  for (const scriptingDisabled of [false, true]) {
+    const result = extractArticleText(html, { scriptingDisabled });
+    assert.equal(result.method, 'naive-fallback');
+    assert.equal(result.publishedAt, '2024-02-01T00:00:00.000Z');
+  }
+});
+
+test('keeps the historical result shape for both naive fallbacks without a publication date', () => {
+  const html = '<main><p>Short notice.</p></main>';
+
+  for (const scriptingDisabled of [false, true]) {
+    const result = extractArticleText(html, { scriptingDisabled });
+    assert.deepEqual(result, { text: 'Short notice.', method: 'naive-fallback', paragraphCount: 0 });
+  }
 });
 
 test('preserves the iCMS date when the noscript-safe fallback is selected', () => {

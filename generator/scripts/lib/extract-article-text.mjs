@@ -159,7 +159,7 @@ export function extractPublishedDate(document, editorialRoot = null) {
   if (!root || root.closest(inactiveRootSelector)) return '';
   // Only a single visible iCMS detail date can establish publication.
   const detailDates = [...root.querySelectorAll('div.icms-lead-container > div.icms-information-date')]
-    .filter(el => !el.closest('nav, aside, footer, template, noscript, [hidden], [aria-hidden="true"]'));
+    .filter(el => !el.closest(inactiveRootSelector));
   if (detailDates.length !== 1) return '';
 
   const match = /^(\d{1,2})\.\s+(\p{L}+)\s+(\d{4})$/u.exec(detailDates[0].textContent.trim());
@@ -666,7 +666,7 @@ function selectNoscriptJsonLdPrecedence(document, fallbacks) {
   return bodies.reduce((best, body) => (!best || body.length > best.length ? body : best), null);
 }
 
-function safeNoscriptNaiveFallback(document, fallbacks, maxChars, publishedAt = '') {
+function safeNoscriptNaiveFallback(document, fallbacks, maxChars) {
   const sourceNoscripts = topLevelNoscripts(document.body);
   const clone = document.body.cloneNode(true);
   const clonedNoscripts = topLevelNoscripts(clone);
@@ -683,7 +683,7 @@ function safeNoscriptNaiveFallback(document, fallbacks, maxChars, publishedAt = 
 
   for (const node of clone.querySelectorAll('script, style')) node.remove();
   const text = capExtractedText(cleanText(clone.textContent || ''), maxChars);
-  return { text, method: 'naive-fallback', paragraphCount: 0, publishedAt };
+  return { text, method: 'naive-fallback', paragraphCount: 0 };
 }
 
 function prepareNoscriptSource(html) {
@@ -893,16 +893,19 @@ export function extractArticleText(html, opts = {}) {
   }
 
   // 6. Last resort: legacy naive strip — preserves prior behaviour.
-  if (noscriptFallbacks) return safeNoscriptNaiveFallback(document, noscriptFallbacks, maxChars, publishedAt);
-  return naiveFallback(html, maxChars, publishedAt);
+  const fallback = noscriptFallbacks
+    ? safeNoscriptNaiveFallback(document, noscriptFallbacks, maxChars)
+    : naiveFallback(html, maxChars);
+  if (publishedAt) fallback.publishedAt = publishedAt;
+  return fallback;
 }
 
-function naiveFallback(html, maxChars, publishedAt = '') {
+function naiveFallback(html, maxChars) {
   const text = capExtractedText(html
     .replace(/<script[\s\S]*?<\/script>/gi, '')
     .replace(/<style[\s\S]*?<\/style>/gi, '')
     .replace(/<[^>]+>/g, ' ')
     .replace(/\s+/g, ' ')
     .trim(), maxChars);
-  return { text, method: 'naive-fallback', paragraphCount: 0, publishedAt };
+  return { text, method: 'naive-fallback', paragraphCount: 0 };
 }
