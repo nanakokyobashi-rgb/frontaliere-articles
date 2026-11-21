@@ -13748,6 +13748,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.festival-ai-lugano-aree.title': 'Festival AI in Lugano: 13 areas and over 60 speakers',
     'blog.article.festival-ai-lugano-aree.excerpt': 'At the Palazzo dei Congressi di Lugano, Festival AI brings together over 60 international speakers across 13 areas, with a free exhibition area open to everyone.',
     'blog.article.festival-ai-lugano-aree.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.controlli-mendrisiotto-settembre-novembre.title': 'Joint checks in Mendrisiotto between September and November',
+    'blog.article.controlli-mendrisiotto-settembre-novembre.excerpt': 'The operation aimed to monitor transit flows, detect any suspicious situations and counter potentially unlawful conduct.',
+    'blog.article.controlli-mendrisiotto-settembre-novembre.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;

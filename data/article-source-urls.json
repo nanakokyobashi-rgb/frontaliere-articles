@@ -1,9 +1,4 @@
 {
-  "https://www.laregione.ch/cantone/ticino/1952440/gehri-finanze-cantonali-cara-politica-sveglia-il-tempo-e-gia-scaduto": {
-    "articleId": "gehri-finanze-preventivo-27",
-    "ts": "2026-09-25T13:54:56.623Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/superstrada-gazzada-varese-giovedi-chiusura-in-direzione-del-capoluogo/2687161": {
     "articleId": "chiusura-gazzada-varese-ss707",
     "ts": "2026-09-25T14:53:02.879Z",
@@ -2499,5 +2494,11 @@
     "ts": "2026-11-21T08:36:31.014Z",
     "keyForm": 2,
     "sourceContentFingerprint": "e3bae71dd51d095526fa54453ff88e8624077ed7c3b7d77a9cf92ae66378f290"
+  },
+  "https://www.varesenews.it/2026/11/operazione-congiunta-nel-mendrisiotto-polizia-cantonale-e-usc-intensificano-i-controlli-nelle-zone-di-confine/2745514": {
+    "articleId": "controlli-mendrisiotto-settembre-novembre",
+    "ts": "2026-11-21T16:11:43.374Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "81b2588fd193699dfbc29db3fbda1b52f1a721e24780c74967f831b71cc0f0bb"
   }
 }

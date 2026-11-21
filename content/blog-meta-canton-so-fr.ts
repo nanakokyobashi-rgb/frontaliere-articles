@@ -93,6 +93,9 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.cantonsrat-respinge-puk-soh.title': 'Soleure : le Cantonsrat rejette la PUK sur la SOH',
     'blog.article.cantonsrat-respinge-puk-soh.excerpt': 'Le Parlement cantonal de Soleure a voté mercredi contre l’institution d’une commission parlementaire d’enquête sur les irrégularités en matière de droit du personnel au sein de la Solothurner Spitäler AG, désignée dans la source par l’acronyme SOH.',
     'blog.article.cantonsrat-respinge-puk-soh.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.soletta-preventivo-approvato.title': 'Soleure : la commission approuve le budget 2027',
+    'blog.article.soletta-preventivo-approvato.excerpt': 'Le budget 2027 prévoit un déficit d’environ CHF 42 millions, en amélioration de CHF 33,4 millions par rapport à la proposition initiale.',
+    'blog.article.soletta-preventivo-approvato.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSoFr;

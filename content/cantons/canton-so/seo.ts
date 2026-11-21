@@ -1167,6 +1167,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-soletta-preventivo-approvato': {
+    title: 'Soletta: la commissione approva il preventivo 2027',
+    description: 'La Commissione delle finanze di Soletta approva il preventivo 2027: disavanzo di circa CHF 42 milioni e voto in dicembre.',
+    keywords: 'frontalieri, ticino, svizzera, italia, soletta, commissione, approva, preventivo',
+    ogTitle: 'Soletta, approvato il preventivo 2027',
+    ogDescription: 'Dopo due giorni di esame, la FIKO approva il preventivo 2027. Il quadro migliora di CHF 33,4 milioni rispetto alla proposta iniziale, ma resta un disavanzo di circa CHF 42 milioni. Il Consiglio cantonale deciderà in dicembre.',
+    canonicalPath: '/articoli-soletta/soletta-preventivo-approvato/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Soletta: la commissione approva il preventivo 2027",
+      "description": "La Commissione delle finanze di Soletta approva il preventivo 2027: disavanzo di circa CHF 42 milioni e voto in dicembre.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-soletta-preventivo-approvato.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-21T16:12:13+00:00",
+      "dateModified": "2026-11-21T16:12:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/soletta-preventivo-approvato/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

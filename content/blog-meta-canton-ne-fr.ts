@@ -81,6 +81,9 @@ const blogMetaCantonNeFr: Record<string, string> = {
     'blog.article.imprese-neuchateloise-rischio-supply-chain.title': 'Plus de 71 % des industriels jugent la supply chain fragile',
     'blog.article.imprese-neuchateloise-rischio-supply-chain.excerpt': 'L’enquête de la CNCI du 12 novembre 2026 montre que plus de 71 % des entreprises industrielles neuchâteloises considèrent la dépendance à certains fournisseurs comme une vulnérabilité.',
     'blog.article.imprese-neuchateloise-rischio-supply-chain.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.tagli-lavoro-piano-sociale.title': 'Licenciements au Locle : 90 postes et plan social',
+    'blog.article.tagli-lavoro-piano-sociale.excerpt': '90 postes supprimés au Locle, 10 de moins que les 100 annoncés en octobre.',
+    'blog.article.tagli-lavoro-piano-sociale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonNeFr;
