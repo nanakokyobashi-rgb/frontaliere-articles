@@ -45,6 +45,9 @@ const blogMetaCantonSzDe: Record<string, string> = {
     'blog.article.svitto-seminario-wohnraum-rickenbach.title': 'Schwyzer Regierung prüft ehemaliges Seminar in Rickenbach für Wohnzwecke',
     'blog.article.svitto-seminario-wohnraum-rickenbach.excerpt': 'Das ehemalige Lehrerseminar in Rickenbach wird für Wohnzwecke geprüft; die Verlegung der kantonalen Büros ist frühestens im ersten Halbjahr 2030 vorgesehen.',
     'blog.article.svitto-seminario-wohnraum-rickenbach.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.piani-rete-ciclabile-svitto.title': 'Kantonale Velonetzpläne des Kantons Schwyz erlassen',
+    'blog.article.piani-rete-ciclabile-svitto.excerpt': 'Das vorgesehene Netz umfasst 1.152 km, davon 280 km für Alltagswege und 872 km für die Freizeit.',
+    'blog.article.piani-rete-ciclabile-svitto.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSzDe;

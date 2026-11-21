@@ -548,6 +548,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-piani-rete-ciclabile-svitto': {
+    title: 'Emanati i piani ciclabili cantonali del Canton Svitto',
+    description: 'Il Governo cantonale di Schwyz ha emanato i piani ciclabili: 1.152 km totali, 280 km quotidiani e 872 km per tempo libero.',
+    keywords: 'frontalieri, ticino, svizzera, italia, emanati, piani, ciclabili, cantonali',
+    ogTitle: 'Piani rete ciclabile Canton Svitto 1.152 km',
+    ogDescription: 'Il Governo cantonale di Schwyz ha emanato i piani ciclabili: 1.152 km totali, 280 km quotidiani e 872 km per tempo libero. Legge in vigore da febbraio 2024.',
+    canonicalPath: '/articoli-svitto/piani-rete-ciclabile-svitto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Emanati i piani ciclabili cantonali del Canton Svitto",
+      "description": "Il Governo cantonale di Schwyz ha emanato i piani ciclabili: 1.152 km totali, 280 km quotidiani e 872 km per tempo libero.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-piani-rete-ciclabile-svitto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-21T04:23:12+00:00",
+      "dateModified": "2026-11-21T04:23:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svitto/piani-rete-ciclabile-svitto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

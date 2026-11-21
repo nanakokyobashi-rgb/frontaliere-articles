@@ -45,6 +45,9 @@ const blogMetaCantonSzFr: Record<string, string> = {
     'blog.article.svitto-seminario-wohnraum-rickenbach.title': 'Schwyz évalue l’ex-séminaire de Rickenbach pour loger',
     'blog.article.svitto-seminario-wohnraum-rickenbach.excerpt': 'L\'ancien séminaire d\'enseignants de Rickenbach est évalué en vue d\'un usage résidentiel ; le déménagement des offices cantonaux n\'est pas prévu avant le premier semestre 2030.',
     'blog.article.svitto-seminario-wohnraum-rickenbach.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.piani-rete-ciclabile-svitto.title': 'Les plans cyclables cantonaux du canton de Schwytz ont été édictés',
+    'blog.article.piani-rete-ciclabile-svitto.excerpt': 'Le réseau prévu s’élève à 1.152 km, dont 280 km pour les déplacements quotidiens et 872 km pour les loisirs.',
+    'blog.article.piani-rete-ciclabile-svitto.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSzFr;
