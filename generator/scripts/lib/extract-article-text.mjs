@@ -22,6 +22,7 @@
  */
 
 import { JSDOM, VirtualConsole } from 'jsdom';
+import { LOCALE_LEXICON } from './article-locale-lexicon.mjs';
 
 // Lazy reference avoids breaking older jsdom that doesn't export VirtualConsole.
 function require_virtual_console_lazy() {
@@ -112,8 +113,8 @@ function extractFromJsonLd(root, include = () => true) {
  * Added 2026-07-28: a 25 January 2026 source was republished as fresh news on
  * 28 July 2026, in the future tense, because nothing in the pipeline ever
  * looked at when the source was written. Reads JSON-LD `datePublished` first
- * then metadata explicitly labelled as publication. Creation, modification,
- * generic date metadata and unlabelled time elements do not establish when
+ * then metadata explicitly labelled as publication and the iCMS detail date.
+ * Creation, modification, generic date metadata and unlabelled time elements do not establish when
  * the source was published; leave the date unknown instead of making it fresh.
  */
 export function extractPublishedDate(document) {
@@ -150,7 +151,26 @@ export function extractPublishedDate(document) {
   const timeRaw = timeEl ? (timeEl.getAttribute('datetime') || '').trim() : '';
   if (timeRaw && !Number.isNaN(new Date(timeRaw).getTime())) return new Date(timeRaw).toISOString();
 
-  return '';
+  // Only a single visible iCMS detail date can establish publication.
+  const detailDates = [...document.querySelectorAll('main div.icms-lead-container > div.icms-information-date')]
+    .filter(el => !el.closest('nav, aside, footer, template, noscript, [hidden], [aria-hidden="true"]'));
+  if (detailDates.length !== 1) return '';
+
+  const match = /^(\d{1,2})\.\s+(\p{L}+)\s+(\d{4})$/u.exec(detailDates[0].textContent.trim());
+  if (!match) return '';
+  const [, dayText, monthName, yearText] = match;
+  const day = Number(dayText);
+  const year = Number(yearText);
+  const months = LOCALE_LEXICON.de.months;
+  const monthKey = monthName.toLowerCase();
+  if (!Object.hasOwn(months, monthKey)) return '';
+  const month = months[monthKey];
+  const date = new Date(0);
+  date.setUTCFullYear(year, month - 1, day);
+  if (date.getUTCFullYear() !== year
+    || date.getUTCMonth() !== month - 1
+    || date.getUTCDate() !== day) return '';
+  return date.toISOString();
 }
 
 function extractFromMeta(document, selector) {
