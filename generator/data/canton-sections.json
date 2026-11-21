@@ -9546,6 +9546,32 @@
           "notes": "Comunicati del capoluogo (circa 130k abitanti nel cantone, ~31k in citta'): 10 link /de/news/<anno>/<mese>/<slug> con data, ~6 negli ultimi 7gg. Include Steuerfuss/budget, scuola, traffico, Baugesuche (rumore: filtrare le liste Baugesuche/GGR)."
         },
         {
+          "url": "https://www.cham.ch/aktuellesinformationen",
+          "format": "json",
+          "parser": "json-entities",
+          "publisher": "Einwohnergemeinde Cham",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": ["mobilita", "servizi"],
+          "quirks": {},
+          "items7d": 3,
+          "verifiedAt": "2026-11-21",
+          "notes": "Notizie comunali iCMS con date e link agli avvisi. Include limitazioni al traffico, orari dei servizi e pianificazione."
+        },
+        {
+          "url": "https://www.baar.ch/aktuellesinformationen",
+          "format": "json",
+          "parser": "json-entities",
+          "publisher": "Einwohnergemeinde Baar",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": ["mobilita", "servizi"],
+          "quirks": {},
+          "items7d": 4,
+          "verifiedAt": "2026-11-21",
+          "notes": "Notizie comunali iCMS con date e link agli avvisi. Include cantieri, trasporto locale e servizi comunali."
+        },
+        {
           "url": "https://www.zgks.ch/ueber-uns/news",
           "format": "html",
           "parser": "html-links",
