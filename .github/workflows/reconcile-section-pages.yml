@@ -44,8 +44,10 @@ on:
         default: false
         type: boolean
 
+# Coalesce runs of the same event while reserving a pending slot for each trigger.
 concurrency:
-  group: reconcile-section-pages
+  group: reconcile-section-pages-${{ github.event_name }}
+  queue: single
   cancel-in-progress: false
 
 permissions:
@@ -54,6 +56,10 @@ permissions:
 
 jobs:
   reconcile:
+    concurrency:
+      group: reconcile-section-pages
+      queue: max
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:

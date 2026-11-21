@@ -4669,6 +4669,8 @@ test('reconcile: le pagine articolo ritirate presenti entrano nel cleanup e quel
 test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta', () => {
   const wf = read('.github/workflows/reconcile-section-pages.yml');
   const articleWf = read('.github/workflows/reconcile-article-shards.yml');
+  assert.match(wf, /^concurrency:\n  group: reconcile-section-pages-\$\{\{ github\.event_name \}\}\n  queue: single\n  cancel-in-progress: false$/m);
+  assert.match(wf, /^jobs:\n  reconcile:\n    concurrency:\n      group: reconcile-section-pages\n      queue: max\n      cancel-in-progress: false$/m);
   assert.match(wf, /workflows: \[fast-publish-section\]/);
   assert.match(wf, /node scripts\/reconcile-section-pages\.mjs/);
   assert.match(wf, /args=\([\s\S]*-f "section=\$section"[\s\S]*-f "article_ids=\$ids"[\s\S]*'bootstrap=false'[\s\S]*'dry_run=false'/);
