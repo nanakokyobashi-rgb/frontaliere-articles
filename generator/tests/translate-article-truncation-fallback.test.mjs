@@ -1433,7 +1433,7 @@ const TRANSLATE_IN_CHUNKS_SRC = (() => {
   assert.notEqual(a, -1, 'translateInChunks non trovata — aggiornare questo test');
   return src.slice(a, src.indexOf('\n  }\n', a) + 4);
 })();
-const SPLIT_CHUNKS_SRC = extractFunctionSource('function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {');
+const SPLIT_CHUNKS_SRC = extractFunctionSource('function splitIntoTranslationChunks(bodyText, chunkTarget, keepDefaultProtectedCap = false) {');
 const COUNT_WORDS_SRC = extractFunctionSource("function countWords(text = '') {");
 const BUILD_PENDING_BODY_PROMPT_SRC = extractFunctionSource("function buildPendingBodyRetranslationPrompt({ langName, field, itValue, partLabel = '' }) {");
 const REAL_COUNT_WORDS = new Function(`${COUNT_WORDS_SRC}\nreturn countWords;`)();

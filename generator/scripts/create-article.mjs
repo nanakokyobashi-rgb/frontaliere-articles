@@ -14466,7 +14466,10 @@ const TRANSLATION_CHUNK_THRESHOLD = 700;
 // fit is rejected before any provider call rather than being sent over the cap
 // with a structural split. This is shared by the initial translation and both
 // retry paths, so every route keeps the same per-call output-cap safety net.
-function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
+function splitIntoTranslationChunks(bodyText, chunkTarget, keepDefaultProtectedCap = false) {
+  const defaultChunkWords = 500;
+  chunkTarget ??= defaultChunkWords;
+  const protectedWordCap = keepDefaultProtectedCap ? Math.max(chunkTarget, defaultChunkWords) : chunkTarget;
   const chunks = [];
   const separators = [];
   const source = String(bodyText || '');
@@ -14949,9 +14952,9 @@ function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
     if (index <= atomStart) index = atomStart + 1;
     const atomText = source.slice(atomStart, index);
     const atomWords = countWords(atomText);
-    if (protectedEnd !== null && atomWords > chunkTarget) {
+    if (protectedEnd !== null && atomWords > protectedWordCap) {
       throw new Error(
-        `protected translation atom exceeds translation chunk cap (${atomWords} > ${chunkTarget} words)`,
+        `protected translation atom exceeds translation chunk cap (${atomWords} > ${protectedWordCap} words)`,
       );
     }
     const atomParts = !structuredEnd
@@ -16222,7 +16225,7 @@ async function translateArticle(data) {
     const tableHeaderMarkers = tableHeaderColumnMarkers(bodyText);
     if (tableHeaderMarkers.collision || tableHeaderMarkers.ambiguous) return reject('source-table-markers');
     const chunks = pretranslatedResult === null
-      ? splitIntoTranslationChunks(tableHeaderMarkers.markedText, chunkWords)
+      ? splitIntoTranslationChunks(tableHeaderMarkers.markedText, chunkWords, chunkWords !== undefined)
       : [tableHeaderMarkers.markedText];
     const translated = pretranslatedResult === null
       ? await Promise.all(

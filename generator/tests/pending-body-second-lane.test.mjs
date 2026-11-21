@@ -72,7 +72,7 @@ function extractFunctionSource(startMarker) {
 
 const COUNT_WORDS_SRC = extractFunctionSource("function countWords(text = '') {");
 const SPLIT_TRANSLATION_CHUNKS_SRC = extractFunctionSource(
-  'function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {',
+  'function splitIntoTranslationChunks(bodyText, chunkTarget, keepDefaultProtectedCap = false) {',
 );
 const ASSERT_CHUNK_TRANSLATOR_SRC = extractFunctionSource('function assertChunkTranslator(');
 function buildChunker() {
@@ -2824,4 +2824,13 @@ test('se il circuit breaker apre Codex dopo la selezione, la lane passa alla cat
   assert.equal(admissionAttempts, 0);
   assert.equal(codexCalls, 0);
   assert.equal(historicalCalls, 1);
+});
+
+test('il recupero conserva in un chunk dedicato un atomo oltre il target ma entro il limite normale', () => {
+  const chunker = buildChunker();
+  const atom = `[ ${'parola '.repeat(241).trim()}](https://example.test)`;
+  assert.deepEqual(chunker(`Prima ${atom} dopo`, 240, true), ['Prima', atom, 'dopo']);
+  assert.throws(() => chunker(atom, 240), /protected translation atom exceeds/);
+  const tooLong = `[ ${'parola '.repeat(501).trim()}](https://example.test)`;
+  assert.throws(() => chunker(tooLong, 240, true), /protected translation atom exceeds/);
 });
