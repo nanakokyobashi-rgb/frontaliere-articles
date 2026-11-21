@@ -349,6 +349,16 @@
       }
     },
     {
+      "path": "scripts/ci/dispatch-bounded-section-replay.sh",
+      "mode": "corpus-only",
+      "reason": "Prepara il rilancio del publisher delle sezioni del corpus. Estratto dal workflow fast-publish-section per rispettare il limite del parser GitHub Actions.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-11-21"
+      }
+    },
+    {
       "path": "scripts/ci/dispatch-fast-publish-replay.sh",
       "mode": "corpus-only",
       "reason": "Deduplica e riaccoda i replay stale dei workflow fast-publish di sezione dopo aver verificato lo stato reale della run. Il sito non ha il publisher per-corpus né questo helper di dispatch, quindi il path resta specifico del corpus.",
