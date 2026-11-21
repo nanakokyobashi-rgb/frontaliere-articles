@@ -4,7 +4,10 @@
  * backfill per articolisvizzera. La prova runtime arriva da Actions; questo
  * gate impedisce che il filtro torni accidentalmente globale.
  */
-import { readFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
@@ -28,6 +31,157 @@ const generationCoreWorkflow = readFileSync(
   new URL('../../.github/workflows/generate-article-core.yml', import.meta.url),
   'utf8',
 );
+
+test('il reconcile automatico usa la HEAD corrente e non arma backfill stantii', () => {
+  const checkout = workflow.match(/^      - name: Checkout\n(?:(?!^      - ).*\n)*/m)?.[0] ?? '';
+  assert.match(checkout, /^        with:\n/m);
+  assert.match(
+    checkout,
+    /^          ref: \$\{\{ \(github\.event_name == 'schedule' \|\| github\.event_name == 'workflow_run'\) && 'refs\/heads\/main' \|\| github\.sha \}\}$/m,
+  );
+  assert.match(checkout, /^          fetch-depth: 1$/m);
+  assert.match(checkout, /^          persist-credentials: false$/m);
+
+  const detect = workflow.match(/^      - name: Detect ghosts \(slug annunciati senza pagina sullo shard\)\n(?:(?!^      - ).*\n)*/m)?.[0] ?? '';
+  assert.match(
+    detect,
+    /node scripts\/reconcile-article-shards\.mjs [^\n]*\n[^\n]*\n\s+source_commit="\$\(git rev-parse HEAD\)"\n\s+current_main="\$\(bash scripts\/ci\/read-main-head\.sh\)"[\s\S]*?if \[ "\$source_commit" != "\$current_main" \]; then/,
+  );
+  assert.match(
+    detect,
+    /if \[ "\$source_commit" != "\$current_main" \]; then[\s\S]*?echo 'head_guard=false' >> "\$GITHUB_OUTPUT"[\s\S]*?exit 0[\s\S]*?echo 'head_guard=true'/,
+  );
+
+  const guardedSideEffects = workflow.match(/if:[^\n]*steps\.detect\.outputs\.head_guard == 'true'/g) ?? [];
+  assert.equal(guardedSideEffects.length, 5, 'ogni side effect del report deve richiedere HEAD == main');
+
+  const backfill = workflow.match(/^      - name: Backfill \(dispatch fast-publish-article per gli id selezionati\)\n(?:(?!^      - ).*\n)*/m)?.[0] ?? '';
+  assert.match(backfill, /^          SOURCE_COMMIT: \$\{\{ steps\.detect\.outputs\.source_commit \}\}$/m);
+  assert.match(
+    backfill,
+    /verifyMainHeadAtDispatch\(\) \{[\s\S]*?bash scripts\/ci\/read-main-head\.sh[\s\S]*?if \[ "\$current_main" != "\$SOURCE_COMMIT" \]; then[\s\S]*?return 2/,
+  );
+  assert.match(
+    backfill,
+    /if verifyMainHeadAtDispatch; then\n\s+:\n\s+else[\s\S]*?\n\s+break\n\s+fi\n\s+if ! gh_api_timeout -X POST "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/\$WF\/dispatches"/,
+    'ogni dispatch deve essere preceduto dalla verifica della HEAD corrente',
+  );
+});
+
+function workflowStep(source, name) {
+  const start = source.indexOf(`      - name: ${name}\n`);
+  assert.ok(start >= 0, name);
+  const end = source.indexOf('\n      - name: ', start);
+  return source.slice(start, end < 0 ? undefined : end);
+}
+
+function stepScript(step) {
+  const run = step.match(/^        run: \|\n((?:^ {10}.*\n?)+)/m);
+  assert.ok(run, 'blocco shell mancante');
+  return run[1].replace(/^ {10}/gm, '');
+}
+
+const shaA = 'a'.repeat(40);
+const shaB = 'b'.repeat(40);
+const validation = workflowStep(publisherWorkflow, 'Validate source commit pin');
+
+test('il dispatch su main passa lo SHA della detection a entrambi i checkout', () => {
+  const backfill = workflowStep(workflow, 'Backfill (dispatch fast-publish-article per gli id selezionati)');
+  assert.match(backfill, /-f ref=main \\\n +-f "inputs\[source_commit\]=\$\{SOURCE_COMMIT\}"/);
+  assert.match(publisherWorkflow, /\n      source_commit:\n        description: [^\n]+\n        required: false\n        default: ''\n        type: string\n/);
+  assert.match(validation, /id: source_pin\n *env:\n *SOURCE_COMMIT: \$\{\{ inputs\.source_commit \}\}/);
+  assert.match(publisherWorkflow, /    outputs:\n      source_commit: \$\{\{ steps\.source_pin\.outputs\.source_commit \}\}/);
+  for (const [name, pin] of [
+    ['Checkout (resolve)', 'steps.source_pin.outputs.source_commit'],
+    ['Checkout', 'needs.resolve.outputs.source_commit'],
+  ]) {
+    const checkout = workflowStep(publisherWorkflow, name);
+    assert.ok(checkout.includes(`\n          ref: \${{ ${pin} || (github.event_name == 'workflow_dispatch' && github.ref || github.sha) }}\n`));
+    assert.match(checkout, /^          fetch-depth: 0$/m);
+  }
+  assert.ok(publisherWorkflow.indexOf(validation) < publisherWorkflow.indexOf('      - name: Checkout (resolve)'));
+});
+
+test('resolve e publish verificano lo stesso pin prima di proseguire', () => {
+  const resolve = workflowStep(publisherWorkflow, 'Verify source commit pin (resolve)');
+  const publish = workflowStep(publisherWorkflow, 'Verify source commit pin (publish)');
+  for (const [guard, output, next] of [
+    [resolve, 'steps.source_pin.outputs.source_commit', 'Resolve mode, article ids and section'],
+    [publish, 'needs.resolve.outputs.source_commit', 'Install dependencies'],
+  ]) {
+    assert.ok(guard.includes(`if: ${output} != ''`));
+    assert.ok(guard.includes(`SOURCE_COMMIT: \${{ ${output} }}`));
+    assert.ok(publisherWorkflow.indexOf(guard) < publisherWorkflow.indexOf(`      - name: ${next}`));
+  }
+  assert.equal(stepScript(resolve), stepScript(publish));
+  assert.match(publisherWorkflow, /if: always\(\).*needs\.resolve\.outputs\.source_commit == '' \|\| steps\.verify_source_pin\.outcome == 'success'/);
+});
+
+test('la validazione shell accetta solo un pin lowercase su dispatch main', () => {
+  const cwd = mkdtempSync(join(tmpdir(), 'shard-pin-'));
+  try {
+    const output = join(cwd, 'output');
+    for (const [pin, event, ref, status] of [
+      ['', 'push', 'refs/heads/main', 0],
+      ['', 'workflow_dispatch', 'refs/heads/side', 0],
+      [shaA, 'workflow_dispatch', 'refs/heads/main', 0],
+      [shaA, 'workflow_dispatch', 'refs/tags/main', 1],
+      [shaA, 'workflow_dispatch', 'refs/heads/side', 1],
+      [shaA, 'push', 'refs/heads/main', 1],
+      ['bad', 'workflow_dispatch', 'refs/heads/main', 1],
+      [shaA.toUpperCase(), 'workflow_dispatch', 'refs/heads/main', 1],
+    ]) {
+      writeFileSync(output, '');
+      const result = spawnSync('bash', ['-c', stepScript(validation)], {
+        cwd,
+        env: {
+          PATH: process.env.PATH, SOURCE_COMMIT: pin, GITHUB_EVENT_NAME: event,
+          GITHUB_REF: ref, GITHUB_OUTPUT: output,
+        },
+        encoding: 'utf8',
+      });
+      assert.equal(result.status, status, JSON.stringify({ pin, event, ref, result }));
+      assert.equal(readFileSync(output, 'utf8'), status === 0 ? `source_commit=${pin}\n` : '');
+    }
+  } finally {
+    rmSync(cwd, { recursive: true, force: true });
+  }
+});
+
+test('la chiusura issue richiede che main coincida ancora con la detection', () => {
+  const close = workflowStep(workflow, 'Close ghost-articles issue (coda drenata)');
+  assert.match(close, /continue-on-error: true/);
+  assert.match(close, /if: steps\.detect\.outcome == 'success' && steps\.detect\.outputs\.head_guard == 'true' && steps\.detect\.outputs\.missing == '0'/);
+  assert.match(close, /SOURCE_COMMIT: \$\{\{ steps\.detect\.outputs\.source_commit \}\}/);
+  const script = stepScript(close).replace(/\$\{\{ github\.(?:server_url|repository|run_id) \}\}/g, 'synthetic');
+  assert.doesNotMatch(script, /\$\{\{/);
+  const cwd = mkdtempSync(join(tmpdir(), 'shard-close-'));
+  try {
+    mkdirSync(join(cwd, 'scripts/ci'), { recursive: true });
+    writeFileSync(join(cwd, 'scripts/ci/read-main-head.sh'),
+      '[ -n "$FAKE_MAIN" ] || exit 1\nprintf "%s\\n" "$FAKE_MAIN"\n');
+    writeFileSync(join(cwd, 'scripts/ci/resolve-issue-verified.mjs'),
+      'import { appendFileSync } from "node:fs";\nappendFileSync("calls", "close\\n");\n');
+    for (const [pin, main, calls] of [
+      [shaA, shaA, 'close\n'],
+      [shaA, shaB, ''],
+      [shaA, '', ''],
+      ['bad', 'bad', ''],
+    ]) {
+      writeFileSync(join(cwd, 'calls'), '');
+      const result = spawnSync('bash', ['-c', script], {
+        cwd,
+        env: { PATH: process.env.PATH, SOURCE_COMMIT: pin, FAKE_MAIN: main },
+        encoding: 'utf8',
+      });
+      assert.equal(result.status, 0, result.stderr);
+      assert.equal(readFileSync(join(cwd, 'calls'), 'utf8'), calls);
+      if (!calls) assert.match(result.stdout, /^::notice::main non verificabile o avanzata; issue fantasma lasciata aperta$/m);
+    }
+  } finally {
+    rmSync(cwd, { recursive: true, force: true });
+  }
+});
 
 test('il backfill aspetta solo il gruppo dello shard target', () => {
   const start = workflow.indexOf('          active_runs_for_shard() {');
