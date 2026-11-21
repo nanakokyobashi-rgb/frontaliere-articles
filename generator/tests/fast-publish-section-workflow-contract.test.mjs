@@ -31,6 +31,8 @@ const replayDispatcher = readFileSync(
   'utf8',
 );
 
+const boundedDispatch = readFileSync(new URL('../../scripts/ci/dispatch-bounded-section-replay.sh', import.meta.url), 'utf8');
+
 function triggerBlock(name) {
   const start = workflow.indexOf(`\n  ${name}:`);
   assert.ok(start >= 0, `trigger ${name} missing`);
@@ -57,16 +59,17 @@ test('il job publish accoda le richieste per sezione e limita il parallelismo de
 test('un replay pinned superato usa un nuovo nonce per la revisione di destinazione', () => {
   const step = workflow.split('      - name: Dispatch bounded replay with current corpus checkout\n')[1]
     .split('\n      - name:')[0];
-  assert.doesNotMatch(step, /DISPATCH_NONCE|DISPATCH_COHORT|inputs\.dispatch_(nonce|cohort)/u);
-  for (const caller of [step, render]) {
+  assert.match(step, /run: bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-bounded-section-replay\.sh/u);
+  assert.doesNotMatch(boundedDispatch, /DISPATCH_NONCE|DISPATCH_COHORT|inputs\.dispatch_(nonce|cohort)/u);
+  for (const caller of [boundedDispatch, render]) {
     assert.match(caller, /"\$\{replay_args\[@\]\}" -f dispatch_nonce=/u);
   }
   assert.match(render, /nonce_hash=.*"\$\{replay_args\[@\]\}"/u);
-  assert.match(step, /nonce_hash=.*"\$\{replay_identity_args\[@\]\}"/u);
-  assert.match(step, /dispatch_nonce="stale-late-\$\{replay_identity_head:0:12\}-\$\{SECTION\}-\$\{nonce_hash\}"/u);
-  assert.match(step, /-f dispatch_nonce="\$dispatch_nonce"/u);
-  assert.match(step, /dispatch_cohort="stale-late-\$\{GITHUB_RUN_ID\}-\$\{SECTION\}-n1"/u);
-  assert.match(step, /-f dispatch_cohort="\$dispatch_cohort"/u);
+  assert.match(boundedDispatch, /nonce_hash=.*"\$\{replay_identity_args\[@\]\}"/u);
+  assert.match(boundedDispatch, /dispatch_nonce="stale-late-\$\{replay_identity_head:0:12\}-\$\{SECTION\}-\$\{nonce_hash\}"/u);
+  assert.match(boundedDispatch, /-f dispatch_nonce="\$dispatch_nonce"/u);
+  assert.match(boundedDispatch, /dispatch_cohort="stale-late-\$\{GITHUB_RUN_ID\}-\$\{SECTION\}-n1"/u);
+  assert.match(boundedDispatch, /-f dispatch_cohort="\$dispatch_cohort"/u);
 });
 
 test('fast-publish-section non crea run push sui branch di PR', () => {
@@ -428,8 +431,8 @@ test('una gara stale consegna la sezione al coordinatore senza dichiarare una pu
   assert.match(render, /child_replay_api_after_publish=false/u);
   assert.match(render, /child_coordinated_recovery=true/u);
   assert.match(render, /-f coordinated_recovery="\$child_coordinated_recovery"/u);
-  assert.match(workflow, /child_replay_api_after_publish=false/u);
-  assert.match(workflow, /child_coordinated_recovery=true/u);
+  assert.match(boundedDispatch, /child_replay_api_after_publish=false/u);
+  assert.match(boundedDispatch, /child_coordinated_recovery=true/u);
 });
 
 test('il replay pinned consegna la sezione se main avanza durante il render', () => {
@@ -489,7 +492,7 @@ test('il replay stale installa il parser prima di risolvere la release API', () 
     /uses: \.\/\.replay-dispatcher-source\/\.github\/actions\/setup-article-source-runtime/u,
   );
   assert.match(
-    publish.slice(staleDispatch),
+    boundedDispatch,
     /import \{ resolveStaleReplayApiReleaseCommit \} from "\.\/scripts\/publish-section-pages\.mjs"/u,
   );
 });
