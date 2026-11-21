@@ -69,11 +69,8 @@ replay_args=(
 # The freshness guard permits cover and generation bookkeeping to advance.
 # Use the last substantive revision for identity, and still dispatch the
 # exact current revision for checkout and API release resolution.
-replay_identity_head="$(git log -1 --first-parent --full-history --format=%H "$CURRENT_MAIN" -- . \
-  ':(top,exclude,literal)data/blog-cover-cdn-sync-queue.json' \
-  ':(top,exclude,literal)data/discovery-attempt-state.json' \
-  ':(top,exclude,literal)data/topic-candidates-evergreen-rejected.json' \
-  ':(top,exclude,glob)data/sections/*/topic-candidates-evergreen-rejected.json')"
+bookkeeping_revisions="$(bash .replay-dispatcher-source/scripts/ci/section-source-unaffected.sh --bookkeeping-revisions "$CURRENT_MAIN")"
+replay_identity_head="${bookkeeping_revisions##*$'\n'}"
 if ! [[ "$replay_identity_head" =~ ^[a-f0-9]{40}$ ]]; then
   echo "::error::revisione degli input di pubblicazione non verificabile"
   exit 1

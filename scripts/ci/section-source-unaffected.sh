@@ -2,6 +2,22 @@
 # True only for a verified fast-forward with no changes to publication inputs.
 set -euo pipefail
 
+# Revisions on the first-parent chain since the last change to publication inputs
+# used for replay identity. A shallow boundary is a conservative lower bound.
+if [ "${1:-}" = '--bookkeeping-revisions' ]; then
+  revision="${2:-}"
+  [[ "$#" -eq 2 && "$revision" =~ ^[a-f0-9]{40}$ ]] || exit 1
+  base="$(git log -1 --first-parent --full-history --format=%H "$revision" -- . \
+    ':(top,exclude,literal)data/blog-cover-cdn-sync-queue.json' \
+    ':(top,exclude,literal)data/discovery-attempt-state.json' \
+    ':(top,exclude,literal)data/topic-candidates-evergreen-rejected.json' \
+    ':(top,exclude,glob)data/sections/*/topic-candidates-evergreen-rejected.json')"
+  [[ "$base" =~ ^[a-f0-9]{40}$ ]] || exit 1
+  git rev-list --first-parent "$base..$revision"
+  printf '%s\n' "$base"
+  exit 0
+fi
+
 expected="${1:-}"
 current="${2:-}"
 if [[ "$#" -ne 2 || ! "$expected" =~ ^[a-f0-9]{40}$ || ! "$current" =~ ^[a-f0-9]{40}$ ]]; then

@@ -693,3 +693,67 @@ printf 'history verified\\n'
     });
   }
 });
+
+test('il verificatore riusa solo prove stale-late di revisioni equivalenti', () => {
+  const root = mkdtempSync(path.join(tmpdir(), 'section-cohort-bookkeeping-'));
+  const fixture = path.join(root, 'corpus');
+  const verifier = fileURLToPath(new URL('../../scripts/ci/verify-fast-publish-section-cohort.sh', import.meta.url));
+  const freshness = new URL('../../scripts/ci/section-source-unaffected.sh', import.meta.url);
+  try {
+    mkdirSync(path.join(fixture, 'scripts/ci'), { recursive: true });
+    mkdirSync(path.join(fixture, 'data'));
+    writeFileSync(path.join(fixture, 'scripts/ci/section-source-unaffected.sh'), readFileSync(freshness));
+    const git = (...args) => execFileSync('git', args, { cwd: fixture, encoding: 'utf8' }).trim();
+    git('init', '-q');
+    git('remote', 'add', 'origin', `file://${fixture}`);
+    const commit = (file, content) => {
+      writeFileSync(path.join(fixture, file), content);
+      git('add', file);
+      git('-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.test', 'commit', '-qm', file);
+      return git('rev-parse', 'HEAD');
+    };
+    const source = commit('article.txt', 'Original article\n');
+    const bookkeeping = commit('data/discovery-attempt-state.json', '{}\n');
+    const changed = commit('article.txt', 'Changed article\n');
+    const cohort = 'stale-late-42-canton-ur-n1';
+    const nonce = 'stale-late-fixture';
+    const fakeGh = path.join(root, 'gh');
+    writeFileSync(fakeGh, `#!/usr/bin/env bash
+set -euo pipefail
+case "$1" in
+  api) printf '%s\\n' "$FIXTURE_RUN" ;;
+  run) printf '%s\\n' "$FIXTURE_ARTIFACT" > "${'${!#}'}/fast-publish-result.json" ;;
+  *) exit 1 ;;
+esac
+`, { mode: 0o755 });
+    const check = (mode, expected, renderedHead = source) => {
+      const output = path.join(root, 'output');
+      writeFileSync(output, '');
+      execFileSync('bash', [verifier], {
+        cwd: fixture,
+        env: {
+          ...process.env, PATH: `${root}:${process.env.PATH}`, RUNNER_TEMP: root, GITHUB_OUTPUT: output,
+          REPOSITORY: 'fixture/corpus', MODE: mode, EXPECTED_SOURCE_COMMIT: expected,
+          WORKFLOW_RUN_ID: '42', WORKFLOW_RUN_HEAD_SHA: source, CHILD_NONCE: nonce, CHILD_COHORT: cohort,
+          FIXTURE_RUN: JSON.stringify({
+            databaseId: 42, displayTitle: `cover-publish-section / canton-ur / nonce=${nonce} / dry=false / c=${cohort}`,
+            status: 'completed', conclusion: 'success', headSha: source, createdAt: '2026-11-21T10:00:00Z',
+          }),
+          FIXTURE_ARTIFACT: JSON.stringify({
+            section: 'canton-ur', dispatch_nonce: nonce, dispatch_cohort: cohort,
+            source_commit: source, source_main_commit: source, rendered_head: renderedHead,
+            fresh: 'true', coordinated_recovery: 'true',
+          }),
+        },
+      });
+      return readFileSync(output, 'utf8').split('\n')[0];
+    };
+    for (const mode of ['event', 'schedule']) {
+      assert.equal(check(mode, bookkeeping), 'verified=true', mode);
+      assert.equal(check(mode, changed), 'verified=false', mode);
+      assert.equal(check(mode, bookkeeping, bookkeeping), 'verified=false', mode);
+    }
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
