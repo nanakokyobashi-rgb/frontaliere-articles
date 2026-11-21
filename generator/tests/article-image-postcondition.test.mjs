@@ -1,6 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { filterEntriesByImagePostcondition } from '../../scripts/lib/article-image-postcondition.mjs';
+import {
+  extractOgImage,
+  filterEntriesByImagePostcondition,
+  isGenericOgImage,
+} from '../../scripts/lib/article-image-postcondition.mjs';
 
 test('I2 esclude indice e bridge quando l’immagine dichiarata ricade sul fallback generico', () => {
   const result = filterEntriesByImagePostcondition({
@@ -25,4 +29,20 @@ test('I2 esclude indice e bridge quando l’immagine dichiarata ricade sul fallb
   });
   assert.deepEqual(result.entries.map((entry) => entry.articleId), ['healthy', 'resolved']);
   assert.equal(result.excludedPages, result.excludedArticles[0].paths.length);
+});
+
+test('I2 legge og:image solo da tag reali fuori da raw-text e template inattivi', () => {
+  const html = '<script data-note="literal/">'
+    + '<meta property="og:image" content="/og-image.png">'
+    + '</script><template><meta property="og:image" content="/og-image.png"></template>'
+    + '<meta property="og:image" content="/images/blog/real.webp">';
+  assert.equal(extractOgImage(html), '/images/blog/real.webp');
+  assert.equal(isGenericOgImage(html), false);
+});
+
+test('I2 chiude fail-closed su markup troncato dopo un og:image valido', () => {
+  assert.equal(
+    extractOgImage('<meta property="og:image" content="/images/blog/real.webp"><div data-broken="unfinished>'),
+    null,
+  );
 });
