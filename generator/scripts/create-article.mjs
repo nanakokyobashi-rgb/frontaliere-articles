@@ -7468,9 +7468,11 @@ ${proofSuffix}`
   const FACTCHECK_429_BACKOFF_CAP_MS = 30_000;
   const FACTCHECK_MIN_ROUND_MS = 15_000;
   const initialFactCheckMs = factCheckDeadlineMs - Date.now();
-  // When two useful windows fit, keep one for the final verifier. Otherwise
-  // make one primary attempt and leave any unused time to the final verifier.
-  const finalReserveMs = initialFactCheckMs >= 2 * FACTCHECK_MIN_ROUND_MS ? FACTCHECK_MIN_ROUND_MS : 0;
+  // Reserve at most a quarter of the budget above one minute for the final
+  // Codex call. Keep the original short window when the budget is tight.
+  const finalReserveMs = initialFactCheckMs >= 2 * FACTCHECK_MIN_ROUND_MS
+    ? Math.min(45_000, Math.max(FACTCHECK_MIN_ROUND_MS, Math.floor((initialFactCheckMs - 60_000) / 4)))
+    : 0;
   const retryDeadlineMs = factCheckDeadlineMs - finalReserveMs;
   const maxPrimaryRounds = Math.min(
     FACTCHECK_INFRA_RETRIES,
