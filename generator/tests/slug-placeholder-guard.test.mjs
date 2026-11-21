@@ -92,6 +92,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { truncateSlugAtWordBoundary } from '../scripts/lib/slug-truncate.mjs';
+import { repairGeneratedArticleToponyms } from '../scripts/lib/localized-toponyms.mjs';
 import { metaFieldPlausibilityMiss } from '../scripts/lib/body2-payload-verdict.mjs';
 import { ARTICLE_SIGNAL_LOG_HELPERS } from './lib/article-signal-log-harness.mjs';
 import {
@@ -165,6 +166,7 @@ function loadGuard() {
     'reportSlugI18nEvent',
     'RUN_REPORT',
     'safeSignalTextForLog',
+    'repairGeneratedArticleToponyms',
     `${block}\nreturn { inspectSlugForPromptPlaceholder, deriveAndSanitizeArticleSlugs, slugifySlugPart,` +
       ' findSlugPromptLeak, stripSlugPromptLeak, assertNoSlugPromptLeak,' +
       ' PROMPT_SLUG_PREFIX_RX, NON_SLUG_REMAINDER_RX, SCHEMA_HINT_SHAPE_RX };',
@@ -196,6 +198,7 @@ function freshGuard() {
     () => {},
     { slugs: { localizedFromTitle: 0, relocalized: 0, itFallback: 0, itFallbackDetail: [] } },
     ARTICLE_SIGNAL_LOG_HELPERS.safeSignalTextForLog,
+    repairGeneratedArticleToponyms,
   );
   return { ...sandbox, logged };
 }

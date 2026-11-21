@@ -15045,10 +15045,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/svizzera/politica/1963847/premi-iniziativa-malattia-svizzera-sinistra": {
-      "section": "frontaliere",
-      "ts": 1795093166285
-    },
     "svizzera::https://www.rsi.ch/s/4254599": {
       "section": "svizzera",
       "ts": 1795100893844
@@ -15136,6 +15132,18 @@
     "frontaliere::https://www.rsi.ch/s/4258631": {
       "section": "frontaliere",
       "ts": 1795264922724
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1964266/macchinari-ostacoli-ue-svizzera-gennaio": {
+      "section": "frontaliere",
+      "ts": 1795268054778
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1964264/cantoni-corrieri-fattorini-lavoro-condizioni": {
+      "section": "frontaliere",
+      "ts": 1795268175003
+    },
+    "frontaliere::https://www.laregione.ch/svizzera/svizzera/1964263/corrieri-dei-pasti-in-pochi-controllano-le-condizioni-di-lavoro": {
+      "section": "frontaliere",
+      "ts": 1795269335854
     }
   }
 }

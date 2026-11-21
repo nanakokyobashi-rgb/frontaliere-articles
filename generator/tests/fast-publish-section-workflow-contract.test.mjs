@@ -31,6 +31,8 @@ const replayDispatcher = readFileSync(
   'utf8',
 );
 
+const boundedDispatch = readFileSync(new URL('../../scripts/ci/dispatch-bounded-section-replay.sh', import.meta.url), 'utf8');
+
 function triggerBlock(name) {
   const start = workflow.indexOf(`\n  ${name}:`);
   assert.ok(start >= 0, `trigger ${name} missing`);
@@ -57,15 +59,17 @@ test('il job publish accoda le richieste per sezione e limita il parallelismo de
 test('un replay pinned superato usa un nuovo nonce per la revisione di destinazione', () => {
   const step = workflow.split('      - name: Dispatch bounded replay with current corpus checkout\n')[1]
     .split('\n      - name:')[0];
-  assert.doesNotMatch(step, /DISPATCH_NONCE|DISPATCH_COHORT|inputs\.dispatch_(nonce|cohort)/u);
-  for (const caller of [step, render]) {
-    assert.match(caller, /nonce_hash=.*"\$\{replay_args\[@\]\}"/u);
+  assert.match(step, /run: bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-bounded-section-replay\.sh/u);
+  assert.doesNotMatch(boundedDispatch, /DISPATCH_NONCE|DISPATCH_COHORT|inputs\.dispatch_(nonce|cohort)/u);
+  for (const caller of [boundedDispatch, render]) {
     assert.match(caller, /"\$\{replay_args\[@\]\}" -f dispatch_nonce=/u);
   }
-  assert.match(step, /dispatch_nonce="stale-late-\$\{CURRENT_MAIN:0:12\}-\$\{SECTION\}-\$\{nonce_hash\}"/u);
-  assert.match(step, /-f dispatch_nonce="\$dispatch_nonce"/u);
-  assert.match(step, /dispatch_cohort="stale-late-\$\{GITHUB_RUN_ID\}-\$\{SECTION\}-n1"/u);
-  assert.match(step, /-f dispatch_cohort="\$dispatch_cohort"/u);
+  assert.match(render, /nonce_hash=.*"\$\{replay_args\[@\]\}"/u);
+  assert.match(boundedDispatch, /nonce_hash=.*"\$\{replay_identity_args\[@\]\}"/u);
+  assert.match(boundedDispatch, /dispatch_nonce="stale-late-\$\{replay_identity_head:0:12\}-\$\{SECTION\}-\$\{nonce_hash\}"/u);
+  assert.match(boundedDispatch, /-f dispatch_nonce="\$dispatch_nonce"/u);
+  assert.match(boundedDispatch, /dispatch_cohort="stale-late-\$\{GITHUB_RUN_ID\}-\$\{SECTION\}-n1"/u);
+  assert.match(boundedDispatch, /-f dispatch_cohort="\$dispatch_cohort"/u);
 });
 
 test('fast-publish-section non crea run push sui branch di PR', () => {
@@ -486,8 +490,8 @@ test('una gara stale consegna la sezione al coordinatore senza dichiarare una pu
   assert.match(render, /child_replay_api_after_publish=false/u);
   assert.match(render, /child_coordinated_recovery=true/u);
   assert.match(render, /-f coordinated_recovery="\$child_coordinated_recovery"/u);
-  assert.match(workflow, /child_replay_api_after_publish=false/u);
-  assert.match(workflow, /child_coordinated_recovery=true/u);
+  assert.match(boundedDispatch, /child_replay_api_after_publish=false/u);
+  assert.match(boundedDispatch, /child_coordinated_recovery=true/u);
 });
 
 test('il replay pinned consegna la sezione se main avanza durante il render', () => {
@@ -547,7 +551,7 @@ test('il replay stale installa il parser prima di risolvere la release API', () 
     /uses: \.\/\.replay-dispatcher-source\/\.github\/actions\/setup-article-source-runtime/u,
   );
   assert.match(
-    publish.slice(staleDispatch),
+    boundedDispatch,
     /import \{ resolveStaleReplayApiReleaseCommit \} from "\.\/scripts\/publish-section-pages\.mjs"/u,
   );
 });
@@ -746,5 +750,101 @@ printf 'history verified\\n'
         git(checkout, 'merge-base', '--is-ancestor', shortBase, pin);
       }
     });
+  }
+});
+
+test('il verificatore riusa solo prove stale-late di revisioni equivalenti', () => {
+  const root = mkdtempSync(path.join(tmpdir(), 'section-cohort-bookkeeping-'));
+  const fixture = path.join(root, 'corpus');
+  const verifier = fileURLToPath(new URL('../../scripts/ci/verify-fast-publish-section-cohort.sh', import.meta.url));
+  const freshness = new URL('../../scripts/ci/section-source-unaffected.sh', import.meta.url);
+  try {
+    mkdirSync(path.join(fixture, 'scripts/ci'), { recursive: true });
+    mkdirSync(path.join(fixture, 'data'));
+    writeFileSync(path.join(fixture, 'scripts/ci/section-source-unaffected.sh'), readFileSync(freshness));
+    const git = (...args) => execFileSync('git', args, { cwd: fixture, encoding: 'utf8' }).trim();
+    git('init', '-q');
+    const commit = (file, content) => {
+      writeFileSync(path.join(fixture, file), content);
+      git('add', file);
+      git('-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.test', 'commit', '-qm', file);
+      return git('rev-parse', 'HEAD');
+    };
+    const source = commit('article.txt', 'Original article\n');
+    const bookkeeping = commit('data/discovery-attempt-state.json', '{}\n');
+    for (let index = 0; index < 70; index += 1) {
+      commit('data/discovery-attempt-state.json', `${JSON.stringify({ index })}\n`);
+    }
+    const current = commit('data/blog-cover-cdn-sync-queue.json', '[]\n');
+    const changed = commit('article.txt', 'Changed article\n');
+    const origin = path.join(root, 'origin.git');
+    git('clone', '--quiet', '--bare', fixture, origin);
+    git('remote', 'add', 'origin', `file://${origin}`);
+    const cohort = 'stale-late-42-canton-ur-n1';
+    const nonce = 'stale-late-fixture';
+    const fakeGh = path.join(root, 'gh');
+    writeFileSync(fakeGh, `#!/usr/bin/env bash
+set -euo pipefail
+case "$1" in
+  api) printf '%s\\n' "$FIXTURE_RUN" ;;
+  run) printf '%s\\n' "$FIXTURE_ARTIFACT" > "${'${!#}'}/fast-publish-result.json" ;;
+  *) exit 1 ;;
+esac
+`, { mode: 0o755 });
+    const check = (mode, expected, {
+      artifactSource = source,
+      renderedHead = artifactSource,
+      runHead = source,
+    } = {}) => {
+      const output = path.join(root, 'output');
+      writeFileSync(output, '');
+      execFileSync('bash', [verifier], {
+        cwd: fixture,
+        env: {
+          ...process.env, PATH: `${root}:${process.env.PATH}`, RUNNER_TEMP: root, GITHUB_OUTPUT: output,
+          REPOSITORY: 'fixture/corpus', MODE: mode, EXPECTED_SOURCE_COMMIT: expected,
+          WORKFLOW_RUN_ID: '42', WORKFLOW_RUN_HEAD_SHA: runHead, CHILD_NONCE: nonce, CHILD_COHORT: cohort,
+          FIXTURE_RUN: JSON.stringify({
+            databaseId: 42, displayTitle: `cover-publish-section / canton-ur / nonce=${nonce} / dry=false / c=${cohort}`,
+            status: 'completed', conclusion: 'success', headSha: runHead, createdAt: '2026-11-21T10:00:00Z',
+          }),
+          FIXTURE_ARTIFACT: JSON.stringify({
+            section: 'canton-ur', dispatch_nonce: nonce, dispatch_cohort: cohort,
+            source_commit: artifactSource, source_main_commit: artifactSource, rendered_head: renderedHead,
+            fresh: 'true', coordinated_recovery: 'true',
+          }),
+        },
+      });
+      return readFileSync(output, 'utf8').split('\n')[0];
+    };
+    assert.equal(
+      check('event', current, { artifactSource: source, runHead: bookkeeping }),
+      'verified=true',
+      'event validates the pinned source separately from the event HEAD',
+    );
+    for (const mode of ['event', 'schedule']) {
+      assert.equal(
+        check(mode, current, { artifactSource: source, runHead: bookkeeping }),
+        'verified=true',
+        `${mode} accepts an equivalent run HEAD`,
+      );
+      assert.equal(
+        check(mode, changed, { artifactSource: source, runHead: changed }),
+        'verified=false',
+        `${mode} rejects a changed publication source`,
+      );
+    }
+    assert.equal(
+      check('event', current, { artifactSource: source, renderedHead: bookkeeping, runHead: bookkeeping }),
+      'verified=false',
+      'event artifact rendered HEAD must match its pinned source',
+    );
+    assert.equal(
+      check('schedule', current, { artifactSource: source, renderedHead: bookkeeping, runHead: bookkeeping }),
+      'verified=false',
+      'schedule artifact rendered HEAD must match its pinned source',
+    );
+  } finally {
+    rmSync(root, { recursive: true, force: true });
   }
 });
