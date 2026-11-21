@@ -231,3 +231,17 @@ test('il filtro paywall riconosce gli attributi senza valore e ignora i nomi den
     .map(({ headline }) => headline), [title]);
   assert.deepEqual(extractHeadlines(makeCard('DATA-PAYWALL'), BASE_URL, source), []);
 });
+
+test('reads the configured Altdorf detail link label and its attached date', () => {
+  const url = 'https://altdorf.ch/aktuelles/neuigkeiten';
+  const href = url + '/nutzungsplanung?from=2843';
+  const html = `<a href="${href}" aria-label="Mehr erfahren: Öffentliche Auflage zur Nutzungsplanung"><svg></svg></a>
+    <p class="small"><b>20.11.2026</b></p>`;
+  assert.deepEqual(extractHeadlines(html, url), []);
+  const [headline] = extractHeadlines(html, url, {
+    quirks: { titleAttributeTemplate: 'mehr-erfahren' },
+  });
+  assert.equal(headline.headline, 'Öffentliche Auflage zur Nutzungsplanung');
+  assert.equal(headline.url, href);
+  assert.equal(headline.date.getDate(), 20);
+});
