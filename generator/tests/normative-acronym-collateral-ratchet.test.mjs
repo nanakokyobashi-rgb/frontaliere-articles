@@ -83,7 +83,10 @@ const MASSIMALE_FILE = {
   // questa PR (#1277) conserva la ragione storica ma esclude `JSON-LD` dal
   // conteggio. Restano contate le due occorrenze di `L-LD`, che e' una
   // citazione normativa.
-  LD: 10,
+  // 2026-11-21: 10 -> 14. I quattro body del Mendrisiotto citano LD
+  // nel senso attestato dal comunicato della Polizia cantonale e da Fedlex:
+  // legge sulle dogane (RS 631.0).
+  LD: 14,
   LSS: 26,
   BWG: 3,
 };
