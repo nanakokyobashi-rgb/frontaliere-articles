@@ -251,6 +251,7 @@ jobs:
             scripts/ci/read-main-head.sh
             scripts/ci/fetch-push-base-if-missing.sh
             scripts/ci/fast-publish-section-resolve.sh
+            scripts/ci/section-source-unaffected.sh
             scripts/ci/fast-publish-section-edge-candidate.sh
             scripts/ci/fast-publish-section-preflight.sh
           sparse-checkout-cone-mode: false
