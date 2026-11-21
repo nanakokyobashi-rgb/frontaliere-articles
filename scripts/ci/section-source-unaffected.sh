@@ -38,7 +38,9 @@ git diff --quiet --no-ext-diff --no-textconv --ignore-submodules=none "$expected
   ':(top,exclude,literal)generator/scripts/lib/ai-models.mjs' \
   ':(top,exclude,literal)generator/scripts/lib/free-translate.mjs' \
   ':(top,exclude,literal)generator/scripts/lib/canton-news-sources.mjs' \
-  ':(top,exclude,literal)scripts/ci/canton-generation-coverage.mjs' || exit 1
+  ':(top,exclude,literal)scripts/ci/canton-generation-admit.mjs' \
+  ':(top,exclude,literal)scripts/ci/canton-generation-coverage.mjs' \
+  ':(top,exclude,literal)scripts/ci/loop-sync-manifest.json' || exit 1
 
 patch=$(git diff --no-ext-diff --no-textconv --ignore-submodules=none --no-renames \
   --no-color --no-indent-heuristic --diff-algorithm=myers --unified=3 --full-index \
