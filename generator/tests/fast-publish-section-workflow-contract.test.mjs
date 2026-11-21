@@ -726,7 +726,7 @@ case "$1" in
   *) exit 1 ;;
 esac
 `, { mode: 0o755 });
-    const check = (mode, expected, renderedHead = source) => {
+    const check = (mode, expected, renderedHead = source, runHead = source) => {
       const output = path.join(root, 'output');
       writeFileSync(output, '');
       execFileSync('bash', [verifier], {
@@ -734,10 +734,10 @@ esac
         env: {
           ...process.env, PATH: `${root}:${process.env.PATH}`, RUNNER_TEMP: root, GITHUB_OUTPUT: output,
           REPOSITORY: 'fixture/corpus', MODE: mode, EXPECTED_SOURCE_COMMIT: expected,
-          WORKFLOW_RUN_ID: '42', WORKFLOW_RUN_HEAD_SHA: source, CHILD_NONCE: nonce, CHILD_COHORT: cohort,
+          WORKFLOW_RUN_ID: '42', WORKFLOW_RUN_HEAD_SHA: runHead, CHILD_NONCE: nonce, CHILD_COHORT: cohort,
           FIXTURE_RUN: JSON.stringify({
             databaseId: 42, displayTitle: `cover-publish-section / canton-ur / nonce=${nonce} / dry=false / c=${cohort}`,
-            status: 'completed', conclusion: 'success', headSha: source, createdAt: '2026-11-21T10:00:00Z',
+            status: 'completed', conclusion: 'success', headSha: runHead, createdAt: '2026-11-21T10:00:00Z',
           }),
           FIXTURE_ARTIFACT: JSON.stringify({
             section: 'canton-ur', dispatch_nonce: nonce, dispatch_cohort: cohort,
@@ -750,6 +750,8 @@ esac
     };
     for (const mode of ['event', 'schedule']) {
       assert.equal(check(mode, bookkeeping), 'verified=true', mode);
+      assert.equal(check(mode, bookkeeping, source, bookkeeping), 'verified=true', mode);
+      assert.equal(check(mode, changed, source, changed), 'verified=false', mode);
       assert.equal(check(mode, changed), 'verified=false', mode);
       assert.equal(check(mode, bookkeeping, bookkeeping), 'verified=false', mode);
     }

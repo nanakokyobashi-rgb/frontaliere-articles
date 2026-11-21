@@ -51,7 +51,7 @@ if [ "$mode" = 'event' ] && ! [[ "$child_run_id" =~ ^[0-9]+$ ]]; then
   not_ready "run child non valida: $child_run_id"
 fi
 compatible_sources='[]'
-if [ "$mode" = 'schedule' ] || [ "$child_head_sha" != "$expected_source" ]; then
+if [ "$mode" = 'schedule' ] || [[ "$child_cohort" =~ ^stale-late-[0-9]+-[^/]+-n1$ ]]; then
   # The workflow checks out main shallowly. Fetch the pinned revision with a
   # bounded history so compatible older proofs can be recovered without guessing.
   if git fetch --quiet --no-tags --depth=64 --no-write-fetch-head origin "$expected_source"; then
@@ -218,11 +218,27 @@ while IFS=$'\t' read -r run_id nonce section; do
     reopen_reconcile
     not_ready "artifact fast-publish-result non univoco per il child $run_id"
   fi
+  artifact_source="$cohort_source"
+  if [[ "$cohort" =~ ^stale-late-[0-9]+-[^/]+-n1$ ]]; then
+    # The dispatch event can point at a newer main than the pinned checkout.
+    # Keep both revisions within the proven range and check the artifact's
+    # source and rendered revision against its actual pin.
+    if ! artifact_source="$(jq -er '.source_commit | select(type == "string" and test("^[a-f0-9]{40}$"))' "${result_files[0]}")"; then
+      not_ready "source commit assente o invalida nell'artifact child $run_id"
+    fi
+    if [ "$artifact_source" != "$cohort_source" ] && \
+      ! jq -e --arg source "$artifact_source" --arg run "$cohort_source" '
+        index($source) as $source_index | index($run) as $run_index
+        | $source_index != null and $run_index != null and $source_index >= $run_index
+      ' <<< "$compatible_sources" >/dev/null; then
+      not_ready "source commit $artifact_source non compatibile con la HEAD del child $cohort_source"
+    fi
+  fi
   if ! jq -e \
     --arg nonce "$nonce" \
     --arg section "$section" \
     --arg cohort "$cohort" \
-    --arg source "$cohort_source" \
+    --arg source "$artifact_source" \
     'type == "object"
      and .dispatch_nonce == $nonce
      and .section == $section
