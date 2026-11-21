@@ -22,7 +22,7 @@ import { AI_MODELS, callLLM, estimateRequestTokens, resetState } from '../script
 import { addIndependentVote, extractFactCheckJson } from '../scripts/lib/fact-check-response.mjs';
 import { FACT_CHECK_CATEGORIES } from '../scripts/lib/article-factuality-gates.mjs';
 import { cantonPromptLines } from '../scripts/lib/canton-section-profile.mjs';
-import { extractSyntheticReferenceEvidence } from '../scripts/lib/editorial-originality.mjs';
+import { MIN_EDITORIAL_ARTICLE_ANCHORS, extractSyntheticReferenceEvidence } from '../scripts/lib/editorial-originality.mjs';
 import * as taxRates from '../scripts/lib/irpef-scaglioni.mjs';
 import { JSON_QUOTE_SAFETY_RULE_IT } from '../scripts/lib/llm-json-repair.mjs';
 
@@ -320,6 +320,7 @@ describe('fact-check retries under a reported input cap', () => {
       SECTION_NAME: section,
       CANTON_FACTS_BRIEF: '',
       evergreenFactsBriefFor: () => '',
+      MIN_EDITORIAL_ARTICLE_ANCHORS,
       extractSyntheticReferenceEvidence,
       VERIFIED_DOMAIN_FACTS: domainFacts,
       JSON_QUOTE_SAFETY_RULE_IT,

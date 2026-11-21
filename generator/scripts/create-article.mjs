@@ -463,7 +463,7 @@ import {
 // vincolo di mirror, ed e' condiviso dai due scrittori di body del corpus.
 import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
 import { addIndependentVote, extractFactCheckJson, factCheckRawSnippet } from './lib/fact-check-response.mjs';
-import { editorialOriginalityIssue, extractSyntheticReferenceEvidence, validateEditorialAssessment } from './lib/editorial-originality.mjs';
+import { MIN_EDITORIAL_ARTICLE_ANCHORS, editorialOriginalityIssue, extractSyntheticReferenceEvidence, validateEditorialAssessment } from './lib/editorial-originality.mjs';
 import { decodeHtmlEntities } from './lib/decode-html-entities.mjs';
 import {
   PERFORMANCE_PATH as ARTICLE_PERF_PATH,
@@ -7329,6 +7329,7 @@ ${verifiedCantonFactsBlock(verifiedReferenceText)}`;
 Valuta body1–body3 nel loro insieme. Un articolo non supera questo controllo se si limita a riassumere o parafrasare la fonte: deve offrire almeno una relazione, spiegazione o confronto concreto e utile, dimostrabile con fatti e periodi esatti. Un calcolo ricavato da valori espliciti può essere un contributo valido; non serve inventare un cambiamento o una conseguenza che la fonte non documenta. Un confronto deve usare periodi, unità e basi coerenti. Non aggiungere un angolo sul lavoro o sui frontalieri a una notizia non pertinente.
 Attribuisci le notizie alla fonte. Non ritenere supportati reportage sul posto, interviste, fonti proprie o verifiche umane non documentati; ometti cause, effetti, previsioni e consigli fiscali o finanziari senza prove.
 Per articleQuote copia dal blocco CORPO DELL’ARTICOLO un unico passaggio contiguo di almeno 40 caratteri e 7 parole. Per evidenceQuotes copia almeno 16 caratteri consecutivi dalla fonte o da un riferimento verificato, mantenendo lingua originale, punteggiatura e cifre. Prima di rispondere verifica che ciascuna citazione si ritrovi nel suo blocco. Evita titolo, sommario, traduzioni, parafrasi e puntini di sospensione aggiunti. Scrivi in italiano un finding specifico (almeno 35 caratteri e 6 parole) sul dato o sulla relazione dimostrata.
+Per grounded_analysis, riprendi nel finding almeno ${MIN_EDITORIAL_ARTICLE_ANCHORS} termini distinti da articleQuote, con la stessa forma: nomi o parole specifiche di almeno cinque caratteri, oppure cifre. Usali per spiegare il contributo concreto della citazione.
 Usa grounded_analysis solo per un contributo concreto, tracciabile e non già contenuto nella fonte. Usa source_restatement per un riassunto/parafrasi senza contributo aggiunto; unsupported_inference per affermazioni non provate o reportage/interviste/verifiche inventate; insufficient_evidence quando le prove non permettono una valutazione positiva. Una valutazione vaga o dichiarativa non basta.
 
 CRITERI DI GIUDIZIO:
