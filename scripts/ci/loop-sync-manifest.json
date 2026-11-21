@@ -5133,8 +5133,8 @@
       "remoteDigestRequired": true,
       "reason": "La baseline registra lo stesso digest SHA-256 raw sui due lati; `remoteDigestRequired` rende il confronto remoto una precondizione fail-closed prima di accettare o riattestare la baseline e prima del trasporto.",
       "baseline": {
-        "site": "8349da7318978264",
-        "corpus": "8349da7318978264",
+        "site": "23905c66022d8ee2",
+        "corpus": "23905c66022d8ee2",
         "alignedAt": "2026-11-21"
       }
     },
@@ -5143,9 +5143,9 @@
       "sitePath": ".github/corpus-workflows/observers/generator/tests/crawler-cross-repo-artifacts.test.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "382670e473ce7f7a",
-        "corpus": "382670e473ce7f7a",
-        "alignedAt": "2026-11-13"
+        "site": "4fcaaff61c827baa",
+        "corpus": "4fcaaff61c827baa",
+        "alignedAt": "2026-11-21"
       },
       "couplingSnapshot": [
         {
