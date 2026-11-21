@@ -1881,6 +1881,26 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
       'In Baar, there are 12 applications. In Zugo, there are 18 applications.',
     ],
     [
+      'Nel Ticino ci sono 12 richieste; nella Svizzera ci sono 18 richieste.',
+      'Nel\u202fTicino, ci sono 12 richieste; nella Svizzera, ci sono 18 richieste.',
+      'Nella Svizzera, ci sono 12 richieste; nel Ticino, ci sono 18 richieste.',
+    ],
+    [
+      'In Tessin ci sono 12 richieste; a Bodensee ci sono 18 richieste.',
+      'Im Tessin, gibt es 12 Anträge; am Bodensee, gibt es 18 Anträge.',
+      'Am Bodensee, gibt es 12 Anträge; im Tessin, gibt es 18 Anträge.',
+    ],
+    [
+      'In Suisse ci sono 12 richieste; a Genève ci sono 18 richieste.',
+      'En Suisse, il y a 12 demandes; à Genève, il y a 18 demandes.',
+      'À Genève, il y a 12 demandes; en Suisse, il y a 18 demandes.',
+    ],
+    [
+      'Luogo: In St. Gallen ci sono 12 richieste; Luogo: in St. Moritz ci sono 18 richieste.',
+      'Luogo: In St. Gallen, there are 12 applications; Luogo: in St. Moritz, there are 18 applications.',
+      'Luogo: In St. Moritz, there are 12 applications; Luogo: in St. Gallen, there are 18 applications.',
+    ],
+    [
       'A Zugo ci sono 12 richieste, a Baar ci sono 18 richieste.',
       'In Zugo, there are 12 applications, in Baar, there are 18 applications.',
       'In Baar, there are 12 applications, in Zugo, there are 18 applications.',

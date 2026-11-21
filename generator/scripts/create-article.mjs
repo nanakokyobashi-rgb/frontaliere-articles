@@ -17433,24 +17433,32 @@ async function translateArticle(data) {
       // A leading locative such as "In Zugo," belongs to the fact that
       // follows it. Preserve that place as evidence even when the source
       // has no comma. Other commas still separate independent facts.
-      const locativeCommas = new Set();
+      const locativePunctuation = new Set();
       const startsAssociation = (index) => spanBoundary(value[index])
         || (value[index] === '.' && /\s/u.test(value[index + 1] ?? ''));
       const placeWord = /[\p{Lu}][\p{L}\p{M}’'-]*/.source;
-      const locativePrefix = /(?:^|[\n,;!?|]|\.(?=\s))[^\S\n]*(?:>[ \t]*)*(?:(?:[-+*]|\d+[.)])[ \t]+)?/.source;
-      const locativePreposition = /(?:[AaÀà]|[Ii]n|[Aa]t|[Aa]u|[Aa]ux|[Zz]u)[ \t]+/.source;
-      const placeArticle = /(?:(?:di|del|della|de|du|des|la|le|der|den|dem|the)[ \t]+)?/.source;
-      const placeContinuation = /(?:di|de|del|della|la|le|am|im)[ \t]+/.source;
+      const placeAbbreviation = /(?:St|Ste|S)\.[\p{Zs}\t]+/.source;
+      const placePart = `(?:${placeAbbreviation})?${placeWord}`;
+      const locativePrefix = /(?:^|[\n,:;!?|]|\.(?=\s))[^\S\n]*(?:>[^\S\n]*)*(?:(?:[-+*]|\d+[.)])[^\S\n]+)?/.source;
+      const locativePreposition = /(?:[AaÀà]|[Ii]n|[Aa]t|[Aa]u|[Aa]ux|[Zz]u|[Nn]el(?:l[aeio])?|[Nn]ei|[Nn]egli|[Ii]m|[Aa]m|[Ee]n)[\p{Zs}\t]+/.source;
+      const placeArticle = /(?:(?:di|del|della|de|du|des|la|le|der|den|dem|the)[\p{Zs}\t]+)?/.source;
+      const placeContinuation = /(?:di|de|del|della|la|le|am|im)[\p{Zs}\t]+/.source;
       const leadingLocative = new RegExp(
-        `${locativePrefix}${locativePreposition}${placeArticle}${placeWord}(?:[ \t]+(?:${placeContinuation})?${placeWord})*[ \t]*,`,
-        'gu',
+        `${locativePrefix}${locativePreposition}${placeArticle}(?<place>${placePart}(?:[\\p{Zs}\\t]+(?:${placeContinuation})?${placePart})*)(?:[\\p{Zs}\\t]*(?<comma>,))?`,
+        'dgu',
       );
       for (const match of value.matchAll(leadingLocative)) {
-        locativeCommas.add(match.index + match[0].length - 1);
+        const { place: [start, end], comma } = match.indices.groups;
+        // Preserve the dot in a place abbreviation even in the source
+        // without a final comma. Sentence-ending dots still separate facts.
+        for (let dot = value.indexOf('.', start); dot !== -1 && dot < end; dot = value.indexOf('.', dot + 1)) {
+          locativePunctuation.add(dot);
+        }
+        if (comma) locativePunctuation.add(comma[0]);
       }
       const isAssociationBoundary = (index) => startsAssociation(index)
         && !numericCommas.has(index)
-        && !locativeCommas.has(index);
+        && !locativePunctuation.has(index);
       const associations = numberEntries.map(({
         value: number,
         index,
