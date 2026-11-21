@@ -45,6 +45,9 @@ const blogMetaCantonJuDe: Record<string, string> = {
     'blog.article.ospedale-giura-solidita-finanziaria.title': 'Hôpital du Jura bestätigt finanzielle Solidität und zentrale Rolle',
     'blog.article.ospedale-giura-solidita-finanziaria.excerpt': 'Das Hôpital du Jura hat das Geschäftsjahr 2025 mit einem Gewinn von CHF 100\'000.– abgeschlossen.',
     'blog.article.ospedale-giura-solidita-finanziaria.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.hospitale-jura-bwk-esercitazione.title': 'Hôpital du Jura und BKW üben für die Sicherheit bei Notfällen',
+    'blog.article.hospitale-jura-bwk-esercitazione.excerpt': 'Drei Schulungsvormittage brachten das Ambulanzpersonal des Hôpital du Jura und die Mitarbeitenden von BKW zusammen.',
+    'blog.article.hospitale-jura-bwk-esercitazione.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonJuDe;
