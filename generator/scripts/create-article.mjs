@@ -15994,6 +15994,7 @@ async function translatePendingBodyWithHistoricalChain(
   const chunkTranslator = assertChunkTranslator(translateInChunks, 'translatePendingBodyWithHistoricalChain');
   const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
   const recoveryChunkWords = 240;
+  const shorterChunkWords = recoveryChunkWords / 2;
   const rejected = [];
   const text = await translateFieldFreeMt({
     text: itValue,
@@ -16034,7 +16035,7 @@ async function translatePendingBodyWithHistoricalChain(
       const translated = translatedStringOrNull(parsed?.[field], locale);
       if (translated === null) {
         rejected.push('non-string');
-        return '';
+        return wordCount > shorterChunkWords ? translateSegments(shorterChunkWords) : '';
       }
       // Reuse the exact same source-owned contract as the chunked path on the
       // already translated short body. `pretranslatedResult` avoids a second
@@ -16052,7 +16053,6 @@ async function translatePendingBodyWithHistoricalChain(
         rejected.push('structure');
         // An additional unsplit retry would ask the provider to repeat the
         // same task. Give the existing validator one segmented candidate.
-        const shorterChunkWords = recoveryChunkWords / 2;
         return wordCount > shorterChunkWords ? translateSegments(shorterChunkWords) : '';
       }
       return validated;
