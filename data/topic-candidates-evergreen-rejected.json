@@ -15141,10 +15141,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.ticinonews.ch/ticino/la-polizia-auspica-un-cambio-al-vertice-del-dipartimento-speriamo-di-non-aver-toccato-il-fondo-447055": {
-      "section": "frontaliere",
-      "ts": 1795209332591
-    },
     "frontaliere::https://www.ticinonews.ch/ticino/la-polizia-auspica-un-cambio-al-vertice-del-dipartimento-speriamo-di-aver-toccato-il-fondo-447055": {
       "section": "frontaliere",
       "ts": 1795212705947
@@ -15244,6 +15240,14 @@
     "svizzera::https://www.rsi.ch/s/4257428": {
       "section": "svizzera",
       "ts": 1795376682974
+    },
+    "frontaliere::https://www.varesenoi.it/2026/11/20/leggi-notizia/argomenti/politica-20/articolo/bordonaro-lega-per-varese-altri-cinque-milioni-di-euro-dai-ristorni-dei-frontalieri.html": {
+      "section": "frontaliere",
+      "ts": 1795382477474
+    },
+    "frontaliere::https://comozero.it/politica/como-la-denuncia-la-solita-disparita-fiscale-che-favorisce-la-svizzera-e-il-sud-qui-invece-promesse-lettera-morta": {
+      "section": "frontaliere",
+      "ts": 1795382517920
     }
   }
 }
