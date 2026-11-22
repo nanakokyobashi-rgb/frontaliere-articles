@@ -59,6 +59,10 @@
     "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/wintersperre-auf-der-panoramastrasse-art-1733130": {
       "section": "canton-sz",
       "ts": 1795257024254
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/ahv-vorlage-vor-dem-nein-staendemehr-als-huerde-art-1733439": {
+      "section": "canton-sz",
+      "ts": 1795299685682
     }
   }
 }
