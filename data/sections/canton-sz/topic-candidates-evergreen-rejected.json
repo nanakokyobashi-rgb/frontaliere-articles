@@ -63,6 +63,14 @@
     "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/ahv-vorlage-vor-dem-nein-staendemehr-als-huerde-art-1733439": {
       "section": "canton-sz",
       "ts": 1795299685682
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/ennetmoos-genehmigt-budget-2027-und-wasserversorgung-art-1733467": {
+      "section": "canton-sz",
+      "ts": 1795320556657
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/lungern-budget-2026-mit-knappem-minus-und-stabilen-reserven-art-1733352": {
+      "section": "canton-sz",
+      "ts": 1795320690637
     }
   }
 }
