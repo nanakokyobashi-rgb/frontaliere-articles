@@ -15164,6 +15164,10 @@
     "svizzera::https://www.rsi.ch/s/4254773": {
       "section": "svizzera",
       "ts": 1795304300636
+    },
+    "frontaliere::https://www.malpensa24.it/ristorni-frontalieri-varese-lega": {
+      "section": "frontaliere",
+      "ts": 1795320112456
     }
   }
 }
