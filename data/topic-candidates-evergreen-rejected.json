@@ -15141,10 +15141,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.ticinonews.ch/ticino/la-polizia-auspica-un-cambio-al-vertice-del-dipartimento-speriamo-di-aver-toccato-il-fondo-447055": {
-      "section": "frontaliere",
-      "ts": 1795212705947
-    },
     "frontaliere::https://www.ticinonews.ch/ticino/il-sindacato-di-polizia-auspica-un-cambio-al-vertice-del-dipartimento-447055": {
       "section": "frontaliere",
       "ts": 1795252414144
@@ -15248,6 +15244,10 @@
     "frontaliere::https://comozero.it/politica/como-la-denuncia-la-solita-disparita-fiscale-che-favorisce-la-svizzera-e-il-sud-qui-invece-promesse-lettera-morta": {
       "section": "frontaliere",
       "ts": 1795382517920
+    },
+    "frontaliere::https://www.tio.ch/ticino/cronaca/1964377/auto-sbanda-e-si-ribalta-poco-prima-della-dogana": {
+      "section": "frontaliere",
+      "ts": 1795388114796
     }
   }
 }
