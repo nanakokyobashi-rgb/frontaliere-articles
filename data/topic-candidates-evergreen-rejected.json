@@ -6024,6 +6024,78 @@
       "firstSeenAt": "2026-11-21T15:21:37.928Z",
       "lastValidatedAt": "2026-11-21T15:21:37.928Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "targhe e immatricolazione canton Lucerna guida a procedura e costi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-22T06:18:57.826Z",
+      "lastValidatedAt": "2026-11-22T06:18:57.826Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "collaudo veicoli canton Lucerna convocazione e requisiti",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-22T06:19:06.664Z",
+      "lastValidatedAt": "2026-11-22T06:19:06.664Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "licenza esercizio pubblico canton Lucerna requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-22T06:19:22.728Z",
+      "lastValidatedAt": "2026-11-22T06:19:22.728Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "tasse universitarie canton Lucerna guida a iscrizione e contributi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-22T06:19:35.352Z",
+      "lastValidatedAt": "2026-11-22T06:19:35.352Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "integrazione e corsi di lingua canton Lucerna contributi e requisiti",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-22T06:19:50.305Z",
+      "lastValidatedAt": "2026-11-22T06:19:50.305Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "imposte cantonali canton Uri aliquote e deduzioni",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-22T06:20:05.850Z",
+      "lastValidatedAt": "2026-11-22T06:20:05.850Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
