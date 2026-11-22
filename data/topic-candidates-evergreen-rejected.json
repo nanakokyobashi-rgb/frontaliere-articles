@@ -15141,26 +15141,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/11/ristorni-dei-frontalieri-in-commissione-bilancio-e-scontro-sul-chi-aveva-ragione/2744194": {
-      "section": "frontaliere",
-      "ts": 1795163039722
-    },
-    "svizzera::https://www.rsi.ch/s/4249621": {
-      "section": "svizzera",
-      "ts": 1795170479884
-    },
-    "svizzera::https://www.rsi.ch/s/4252579": {
-      "section": "svizzera",
-      "ts": 1795170554557
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/lappello-dei-metalcostruttori-servono-apprendisti-a-rischio-il-futuro-delle-aziende-446967": {
-      "section": "frontaliere",
-      "ts": 1795175700251
-    },
-    "frontaliere::https://www.rsi.ch/s/4248337": {
-      "section": "frontaliere",
-      "ts": 1795181961861
-    },
     "frontaliere::https://www.swissinfo.ch/ita/bl%3a-hackerati-i-dati-dei-permessi-di-lavoro-di-97%27000-frontalieri/92414003": {
       "section": "frontaliere",
       "ts": 1795188137576
@@ -15264,6 +15244,10 @@
     "frontaliere::https://www.tio.ch/rubriche/ospite/1964320/neutralita-industria-difesa-quadri-lorenzo-pilastro": {
       "section": "frontaliere",
       "ts": 1795335723354
+    },
+    "frontaliere::https://www.tio.ch/ticino/attualita/1963423/la-tassa-che-fa-litigare-il-cantone-e-l-italia": {
+      "section": "frontaliere",
+      "ts": 1795357827322
     }
   }
 }
