@@ -5,21 +5,21 @@
       "articleId": "arianna-di-claudio-roma",
       "title": "Arianna di claudio alla festa del cinema di roma",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (image vision fallback deadline exceeded)",
+      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (Codex broker rejected the request: Codex CLI exited with code 1: ERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase mo",
       "status": "failed",
-      "failureCount": 62,
+      "failureCount": 63,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-11-21T12:07:26.595Z"
+      "lastFailureAt": "2026-11-22T13:10:31.686Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
-      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (image vision fallback deadline exceeded)",
+      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (Codex broker rejected the request: Codex CLI exited with code 1: ERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to pur",
       "status": "failed",
-      "failureCount": 57,
+      "failureCount": 58,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-11-21T12:09:27.292Z"
+      "lastFailureAt": "2026-11-22T13:10:41.135Z"
     }
   ]
 }

@@ -4,18 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/306764/freiburger-arbeitgeberverband-kritisiert-forderung-nach-5000-franken-mindestlohn": {
-      "section": "canton-fr",
-      "ts": 1795168672802
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/306803/zwei-monate-krankenkasse-gratis-sp-lanciert-milliardenplan-gegen-pr%c3%a4mienhammer": {
-      "section": "canton-fr",
-      "ts": 1795168674300
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/306130/lohnstreit-im-freiburger-gesundheitswesen-geht-vor-die-schlichtungsstelle": {
-      "section": "canton-fr",
-      "ts": 1795169513621
-    },
     "canton-fr::https://www.laliberte.ch/articles/regions/ville-de-fribourg/une-hausse-dimpots-est-envisagee-a-fribourg-1490935": {
       "section": "canton-fr",
       "ts": 1795204576170
@@ -39,6 +27,14 @@
     "canton-fr::https://www.laliberte.ch/articles/le-master-de-medecine-humaine-de-fribourg-etendu-au-valais-1490880": {
       "section": "canton-fr",
       "ts": 1795290173698
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/306764/freiburger-arbeitgeberverband-kritisiert-forderung-nach-5000-franken-mindestlohn": {
+      "section": "canton-fr",
+      "ts": 1795354732596
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/306803/zwei-monate-krankenkasse-gratis-sp-lanciert-milliardenplan-gegen-pr%c3%a4mienhammer": {
+      "section": "canton-fr",
+      "ts": 1795354734210
     }
   }
 }
