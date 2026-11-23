@@ -15249,18 +15249,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.swissinfo.ch/ita/gr%3a-pi%c3%b9-deduzioni-premi-cassa-malati%2c-lanciata-iniziativa-popolare/92418179": {
-      "section": "frontaliere",
-      "ts": 1795286594914
-    },
-    "svizzera::https://www.rsi.ch/s/4255856": {
-      "section": "svizzera",
-      "ts": 1795293424906
-    },
-    "svizzera::https://www.swissinfo.ch/ita/gr%3a-pi%c3%b9-deduzioni-premi-cassa-malati%2c-lanciata-iniziativa-popolare/92418179": {
-      "section": "svizzera",
-      "ts": 1795293710415
-    },
     "svizzera::https://www.rsi.ch/s/4254773": {
       "section": "svizzera",
       "ts": 1795304300636
@@ -15384,6 +15372,10 @@
     "svizzera::https://www.admin.ch/it/newnsb/yjjukxlqqhyn": {
       "section": "svizzera",
       "ts": 1795457154984
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/le-pmi-affondano-nella-burocrazia-ci-sono-situazioni-assurde-e-inaccettabili-447204": {
+      "section": "frontaliere",
+      "ts": 1795471489767
     }
   }
 }
