@@ -4,13 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ju::https://www.rfj.ch/rfj/actualite/region/20261120-la-grogne-de-syna-jura-face-aux-salaires-2027-du-personnel-soignant-jurassien.html": {
-      "section": "canton-ju",
-      "ts": 1795231236024
-    },
     "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261121-ue-les-frugaux-fustigent-un-projet-de-budget-revu-a-la-baisse.html": {
       "section": "canton-ju",
       "ts": 1795403122843
+    },
+    "canton-ju::https://www.h-ju.ch/fr/a-propos/medias-presse/communiques-de-presse/la-sante-mentale-au-coeur-de-la-27eme-journee-scientifique-interjurassienne-de-la-sante.html": {
+      "section": "canton-ju",
+      "ts": 1795424406418
     }
   }
 }
