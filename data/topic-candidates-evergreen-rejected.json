@@ -15141,10 +15141,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.ticinonews.ch/ticino/il-sindacato-di-polizia-auspica-un-cambio-al-vertice-del-dipartimento-447055": {
-      "section": "frontaliere",
-      "ts": 1795252414144
-    },
     "svizzera::https://www3.ti.ch/dfe/dr/ustat/allegati/digitale/mercato_lavoro/notiziario/2026q1": {
       "section": "svizzera",
       "ts": 1795258787910
@@ -15272,6 +15268,14 @@
     "frontaliere::https://www.tio.ch/newsblog/valute-e-frontiere/1891645/frontalieri-e-smart-working-nel-2026-la-soglia-fiscale-del-25-e-confermata": {
       "section": "frontaliere",
       "ts": 1795418612092
+    },
+    "svizzera::https://www.swissinfo.ch/ita/gr%3a-dal-2027%2c-nuovo-calcolo-della-tassa-di-circolazione/92422646": {
+      "section": "svizzera",
+      "ts": 1795429244477
+    },
+    "frontaliere::https://www.tio.ch/newsblog/valute-e-frontiere/1758248/smart-working-le-normative-per-i-frontalieri": {
+      "section": "frontaliere",
+      "ts": 1795429866445
     }
   }
 }
