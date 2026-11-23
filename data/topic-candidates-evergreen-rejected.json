@@ -15141,22 +15141,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/svizzera/economia/1964266/macchinari-ostacoli-ue-svizzera-gennaio": {
-      "section": "frontaliere",
-      "ts": 1795268054778
-    },
-    "frontaliere::https://www.tio.ch/svizzera/economia/1964264/cantoni-corrieri-fattorini-lavoro-condizioni": {
-      "section": "frontaliere",
-      "ts": 1795268175003
-    },
-    "frontaliere::https://www.laregione.ch/svizzera/svizzera/1964263/corrieri-dei-pasti-in-pochi-controllano-le-condizioni-di-lavoro": {
-      "section": "frontaliere",
-      "ts": 1795269335854
-    },
-    "svizzera::https://www.rsi.ch/s/4254599": {
-      "section": "svizzera",
-      "ts": 1795276269372
-    },
     "svizzera::https://www.swissinfo.ch/ita/gr%3a-pi%c3%b9-deduzioni-premi-cassa-malati%2c-lanciata-iniziativa-popolare/92416959": {
       "section": "svizzera",
       "ts": 1795280275763
@@ -15276,6 +15260,14 @@
     "frontaliere::https://www.varesenews.it/2026/11/badanti-nellalto-verbano-corsi-gratuiti-di-formazione-e-aiuto-per-ottenere-contratti-di-lavoro-regolari/2747056": {
       "section": "frontaliere",
       "ts": 1795439791867
+    },
+    "frontaliere::https://www.tio.ch/ticino/economia/1964538/aziende-sepolte-dalla-burocrazia-perso-piu-di-un-giorno-a-settimana-di-lavoro": {
+      "section": "frontaliere",
+      "ts": 1795450532462
+    },
+    "frontaliere::https://www.rsi.ch/s/4257428": {
+      "section": "frontaliere",
+      "ts": 1795450595043
     }
   }
 }
