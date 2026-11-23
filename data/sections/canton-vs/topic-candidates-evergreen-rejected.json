@@ -4,18 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/828775/gamsentunnel-war-am-mittwochmittag-f%c3%bcr-rund-zwei-stunden-gesperrt-hund-brachte-verkehr-zum-erliegen": {
-      "section": "canton-vs",
-      "ts": 1795184813163
-    },
-    "canton-vs::https://www.pomona.ch/story/828457/neuer-gesamtarbeitsvertrag-f%c3%bcr-die-elektrobranche-was-sich-%c3%a4ndert": {
-      "section": "canton-vs",
-      "ts": 1795184839669
-    },
-    "canton-vs::https://www.pomona.ch/story/828881/gr%c3%bcnes-licht-f%c3%bcr-rosswaldsolar": {
-      "section": "canton-vs",
-      "ts": 1795184841531
-    },
     "canton-vs::https://www.pomona.ch/story/829080/spital-wallis-muss-%c3%a4rztin-eine-entsch%c3%a4digung-von-150000-franken-zahlen": {
       "section": "canton-vs",
       "ts": 1795241694932
@@ -39,6 +27,10 @@
     "canton-vs::https://www.pomona.ch/story/829444/zwei-monate-krankenkasse-gratis-sp-lanciert-milliardenplan-gegen-pr%c3%a4mienhammer": {
       "section": "canton-vs",
       "ts": 1795347788662
+    },
+    "canton-vs::https://vework-public.vs.ch/app/publication/fr/08-03-2026/3": {
+      "section": "canton-vs",
+      "ts": 1795412604365
     }
   }
 }

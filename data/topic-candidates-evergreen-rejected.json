@@ -15141,18 +15141,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.ticinonews.ch/ticino/il-sindacato-di-polizia-auspica-un-cambio-al-vertice-del-dipartimento-447055": {
-      "section": "frontaliere",
-      "ts": 1795252414144
-    },
-    "svizzera::https://www3.ti.ch/dfe/dr/ustat/allegati/digitale/mercato_lavoro/notiziario/2026q1": {
-      "section": "svizzera",
-      "ts": 1795258787910
-    },
-    "frontaliere::https://www.swissinfo.ch/ita/gr%3a-pi%c3%b9-deduzioni-premi-cassa-malati%2c-lanciata-iniziativa-popolare/92416959": {
-      "section": "frontaliere",
-      "ts": 1795262344618
-    },
     "frontaliere::https://www.rsi.ch/s/4258631": {
       "section": "frontaliere",
       "ts": 1795264922724
@@ -15264,6 +15252,26 @@
     "svizzera::https://www.rsi.ch/s/4256945": {
       "section": "svizzera",
       "ts": 1795395325445
+    },
+    "svizzera::https://www.ilgiorno.it/como/cronaca/polizze-sanitarie-alle-stelle-in-f0a74e0f": {
+      "section": "svizzera",
+      "ts": 1795403176999
+    },
+    "frontaliere::https://www.tio.ch/newsblog/valute-e-frontiere/1891645/frontalieri-e-smart-working-nel-2026-la-soglia-fiscale-del-25-e-confermata": {
+      "section": "frontaliere",
+      "ts": 1795418612092
+    },
+    "svizzera::https://www.swissinfo.ch/ita/gr%3a-dal-2027%2c-nuovo-calcolo-della-tassa-di-circolazione/92422646": {
+      "section": "svizzera",
+      "ts": 1795429244477
+    },
+    "frontaliere::https://www.tio.ch/newsblog/valute-e-frontiere/1758248/smart-working-le-normative-per-i-frontalieri": {
+      "section": "frontaliere",
+      "ts": 1795429866445
+    },
+    "frontaliere::https://www4.ti.ch/di/spop/stranieri/richiesta-nuovo-g": {
+      "section": "frontaliere",
+      "ts": 1795436784474
     }
   }
 }

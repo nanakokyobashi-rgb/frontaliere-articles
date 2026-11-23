@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-fr::https://www.laliberte.ch/articles/regions/ville-de-fribourg/une-hausse-dimpots-est-envisagee-a-fribourg-1490935": {
-      "section": "canton-fr",
-      "ts": 1795204576170
-    },
     "canton-fr::https://www.h-fr.ch/newsroom/communiques-de-presse/inauguration-du-centre-de-sante-de-la-singine-lhfr-tafers": {
       "section": "canton-fr",
       "ts": 1795264473375
@@ -35,6 +31,10 @@
     "canton-fr::https://www.freiburger-nachrichten.ch/story/306803/zwei-monate-krankenkasse-gratis-sp-lanciert-milliardenplan-gegen-pr%c3%a4mienhammer": {
       "section": "canton-fr",
       "ts": 1795354734210
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/307533/was-kostet-uns-der-ahvausbau-2-rappen-15-franken-oder-doch-milliarden": {
+      "section": "canton-fr",
+      "ts": 1795419522717
     }
   }
 }
