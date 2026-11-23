@@ -7,9 +7,9 @@
       "fallbackImage": "/images/places/lugano-view.webp",
       "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (Codex broker rejected the request: Codex CLI exited with code 1: ERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase mo",
       "status": "failed",
-      "failureCount": 66,
+      "failureCount": 67,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-11-23T10:12:38.560Z"
+      "lastFailureAt": "2026-11-23T22:27:00.528Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
@@ -17,9 +17,9 @@
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
       "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (Codex broker rejected the request: Codex CLI exited with code 1: ERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to pur",
       "status": "failed",
-      "failureCount": 61,
+      "failureCount": 62,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-11-23T10:12:45.334Z"
+      "lastFailureAt": "2026-11-23T22:27:09.925Z"
     }
   ]
 }
