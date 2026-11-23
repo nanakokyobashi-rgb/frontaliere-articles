@@ -15141,10 +15141,6 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.swissinfo.ch/ita/gr%3a-pi%c3%b9-deduzioni-premi-cassa-malati%2c-lanciata-iniziativa-popolare/92416959": {
-      "section": "svizzera",
-      "ts": 1795280275763
-    },
     "frontaliere::https://www.rsi.ch/s/4255856": {
       "section": "frontaliere",
       "ts": 1795283869913
@@ -15268,6 +15264,18 @@
     "frontaliere::https://www.rsi.ch/s/4257428": {
       "section": "frontaliere",
       "ts": 1795450595043
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/dramma-di-sonvico-il-18enne-alla-guida-aveva-solo-il-patentino-447134": {
+      "section": "frontaliere",
+      "ts": 1795454196996
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/l%27industria-svizzera-registra-una-nuova-crescita/92423160": {
+      "section": "frontaliere",
+      "ts": 1795454244540
+    },
+    "frontaliere::https://www.tio.ch/ticino/cronaca/1964513/piu-residenti-nelle-assunzioni-ecco-il-piano": {
+      "section": "frontaliere",
+      "ts": 1795454361322
     }
   }
 }
