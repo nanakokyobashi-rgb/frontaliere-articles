@@ -4,53 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/707515/mobiles-zahnarztzimmer-rollt-an-die-berner-schulen": {
-      "section": "canton-be",
-      "ts": 1795072087868
-    },
-    "canton-be::https://ajour.ch/story/707609/zu-heiss-im-klassenzimmer-mobile-klimaanlagen-f%c3%bcr-grenchner-schulen": {
-      "section": "canton-be",
-      "ts": 1795072089229
-    },
-    "canton-be::https://ajour.ch/story/707537/cabinet-dentaire-mobile-pour-les-coles-de-la-ville-de-berne": {
-      "section": "canton-be",
-      "ts": 1795072090586
-    },
-    "canton-be::https://ajour.ch/story/707901/sbbbahndamm-bei-pieterlen-sanierungsarbeiten-f%c3%bchren-zu-totalsperre": {
-      "section": "canton-be",
-      "ts": 1795072091815
-    },
-    "canton-be::https://www.api.news.apps.be.ch/api/atom/news/92647cc7-164b-4068-8e44-5933b1fd1d6c": {
-      "section": "canton-be",
-      "ts": 1795073368081
-    },
-    "canton-be::https://ajour.ch/story/707734/reaktionen-auf-bieler-verkehrsvorschlag-begeisterung-von-rechts-gegenwind-von-links": {
-      "section": "canton-be",
-      "ts": 1795073867323
-    },
-    "canton-be::https://ajour.ch/story/708348/le-centre-de-sant-de-la-singine-inaugur-tavel-fr": {
-      "section": "canton-be",
-      "ts": 1795223006449
-    },
-    "canton-be::https://ajour.ch/story/708125/quatre-entreprises-ont-test-la-semaine-de-quatre-jours-et-sont-parvenues-un-rsultat-surprenant": {
-      "section": "canton-be",
-      "ts": 1795223007995
-    },
-    "canton-be::https://ajour.ch/story/708283/immobilienr%c3%a4tsel-jetzt-gel%c3%b6st-so-ist-der-eigenheimtraum-dem-mittelstand-entglitten": {
-      "section": "canton-be",
-      "ts": 1795223009313
-    },
     "canton-be::https://ajour.ch/story/708298/der-stau-in-nidau-bremst-auch-die-bieler-busse-und-das-postauto": {
       "section": "canton-be",
-      "ts": 1795223010815
+      "ts": 1795436321581
     },
-    "canton-be::https://ajour.ch/story/708193/stadt-bern-rechnet-mit-verz%c3%b6gerung-bei-einf%c3%bchrung-von-nffssoftware": {
+    "canton-be::https://ajour.ch/story/708485/sbb-schieben-dem-schwarzfahren-einen-riegel-mit-neuer-technik": {
       "section": "canton-be",
-      "ts": 1795223012104
-    },
-    "canton-be::https://ajour.ch/story/708188/zwei-monate-krankenkasse-gratis-sp-lanciert-milliardenplan-gegen-pr%c3%a4mienhammer": {
-      "section": "canton-be",
-      "ts": 1795223013590
+      "ts": 1795436322927
     }
   }
 }
