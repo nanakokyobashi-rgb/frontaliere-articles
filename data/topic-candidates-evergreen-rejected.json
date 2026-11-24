@@ -15420,6 +15420,10 @@
     "frontaliere::https://www.tio.ch/rubriche/ospite/1964733/berna-avs-iva-partiti-pensione": {
       "section": "frontaliere",
       "ts": 1795515790598
+    },
+    "svizzera::https://www.tio.ch/rubriche/ospite/1964733/berna-avs-iva-partiti-pensione": {
+      "section": "svizzera",
+      "ts": 1795521643331
     }
   }
 }
