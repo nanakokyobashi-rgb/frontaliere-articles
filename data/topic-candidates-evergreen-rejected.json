@@ -15261,10 +15261,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/rubriche/ospite/1964320/neutralita-industria-difesa-quadri-lorenzo-pilastro": {
-      "section": "frontaliere",
-      "ts": 1795335723354
-    },
     "frontaliere::https://www.tio.ch/ticino/attualita/1963423/la-tassa-che-fa-litigare-il-cantone-e-l-italia": {
       "section": "frontaliere",
       "ts": 1795357827322
@@ -15404,6 +15400,10 @@
     "frontaliere::https://www.tio.ch/ticino/attualita/1960693/raiffeisen-tiotalk": {
       "section": "frontaliere",
       "ts": 1795508264729
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1964706/franchi-pilastro-capitale-ricevuto-donne-raddoppiati-dieci-anni": {
+      "section": "frontaliere",
+      "ts": 1795509786950
     }
   }
 }
