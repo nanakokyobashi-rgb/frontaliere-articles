@@ -15261,26 +15261,6 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.rsi.ch/s/4254773": {
-      "section": "svizzera",
-      "ts": 1795304300636
-    },
-    "frontaliere::https://www.malpensa24.it/ristorni-frontalieri-varese-lega": {
-      "section": "frontaliere",
-      "ts": 1795320112456
-    },
-    "frontaliere::https://cambiavalute.ch/guide/permessi/permesso-g-per-frontalieri-guida-2026-al-rilascio-rinnovo-e-telelavoro": {
-      "section": "frontaliere",
-      "ts": 1795321145115
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1963423/la-tassa-che-fa-litigare-il-cantone-e-italia": {
-      "section": "frontaliere",
-      "ts": 1795333204139
-    },
-    "frontaliere::https://www.tio.ch/rubriche/ospite/1964320/neutralita-industria-difesa-quadri-lorenzo-pilastro": {
-      "section": "frontaliere",
-      "ts": 1795335723354
-    },
     "frontaliere::https://www.tio.ch/ticino/attualita/1963423/la-tassa-che-fa-litigare-il-cantone-e-l-italia": {
       "section": "frontaliere",
       "ts": 1795357827322
@@ -15388,6 +15368,58 @@
     "frontaliere::https://www.ticinonews.ch/ticino/le-pmi-affondano-nella-burocrazia-ci-sono-situazioni-assurde-e-inaccettabili-447204": {
       "section": "frontaliere",
       "ts": 1795471489767
+    },
+    "frontaliere::https://www.tio.ch/newsblog/valute-e-frontiere/1952451/frontalieri-e-smart-working-quante-giornate-si-possono-lavorare-dall-italia-senza-problemi-fiscali": {
+      "section": "frontaliere",
+      "ts": 1795483124909
+    },
+    "frontaliere::https://www.tio.ch/newsblog/valute-e-frontiere/1884886/stipendio-dei-frontalieri-come-leggere-la-busta-paga-svizzera-se-vivi-e-spendi-in-italia": {
+      "section": "frontaliere",
+      "ts": 1795483186549
+    },
+    "frontaliere::https://www.tvsvizzera.it/tvs/relazioni-italo-svizzere/f/89646477": {
+      "section": "frontaliere",
+      "ts": 1795488953749
+    },
+    "frontaliere::https://www.malpensa24.it/ristorni-frontalieri-varese-lega": {
+      "section": "frontaliere",
+      "ts": 1795494477866
+    },
+    "frontaliere::https://www.tio.ch/ticino/attualita/1964528/tassa-sul-sacco-piu-autonomia-ai-comuni": {
+      "section": "frontaliere",
+      "ts": 1795497222478
+    },
+    "svizzera::https://www.filodiritto.com/firmato-il-nuovo-pacchetto-di-accordi-destinato-rilanciare-e-stabilizzare-le-relazioni-bilaterali": {
+      "section": "svizzera",
+      "ts": 1795497916634
+    },
+    "frontaliere::https://www.ticino-politica.ch/sosteniamo-la-politica/frontalieri-disoccupati-nuova-regola-ue-costi-svizzera": {
+      "section": "frontaliere",
+      "ts": 1795501987445
+    },
+    "frontaliere::https://www.tio.ch/ticino/attualita/1960693/raiffeisen-tiotalk": {
+      "section": "frontaliere",
+      "ts": 1795508264729
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1964706/franchi-pilastro-capitale-ricevuto-donne-raddoppiati-dieci-anni": {
+      "section": "frontaliere",
+      "ts": 1795509786950
+    },
+    "svizzera::https://www.tio.ch/svizzera/economia/1964706/franchi-pilastro-capitale-ricevuto-donne-raddoppiati-dieci-anni": {
+      "section": "svizzera",
+      "ts": 1795513173301
+    },
+    "svizzera::https://www.swissinfo.ch/ita/secondo-pilastro%3a-in-dieci-anni-raddoppiati-i-capitali-ritirati/92427743": {
+      "section": "svizzera",
+      "ts": 1795513246866
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/secondo-pilastro%3a-in-dieci-anni-raddoppiati-i-capitali-ritirati/92427743": {
+      "section": "frontaliere",
+      "ts": 1795513658792
+    },
+    "frontaliere::https://www.tio.ch/rubriche/ospite/1964733/berna-avs-iva-partiti-pensione": {
+      "section": "frontaliere",
+      "ts": 1795515790598
     }
   }
 }
