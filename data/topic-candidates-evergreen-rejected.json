@@ -6240,6 +6240,18 @@
       "firstSeenAt": "2026-11-24T19:51:34.850Z",
       "lastValidatedAt": "2026-11-24T19:51:34.850Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "avs e prestazioni complementari canton Uri cassa di compensazione",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-24T22:06:44.654Z",
+      "lastValidatedAt": "2026-11-24T22:06:44.654Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -6974,6 +6986,18 @@
       "firstStrikeAt": "2026-11-21T04:21:29.636Z",
       "lastStrikeAt": "2026-11-21T04:21:29.636Z",
       "expiresAt": "2026-12-21T04:21:29.636Z"
+    },
+    {
+      "keyword": "protezione civile canton Uri requisiti e indennità",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-24T22:05:43.475Z",
+      "lastStrikeAt": "2026-11-24T22:05:43.475Z",
+      "expiresAt": "2026-12-24T22:05:43.475Z"
     }
   ],
   "legacy": [
