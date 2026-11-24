@@ -4,46 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sz::https://www.einsiedeln.ch/verwaltung/mitteilungen/aktuelle-mitteilungen?m=4581": {
-      "section": "canton-sz",
-      "ts": 1795256018720
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/engelberg-erweitert-tempo-30-zone-art-1733329": {
-      "section": "canton-sz",
-      "ts": 1795256033661
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/schweizer-firmen-testen-4-tage-woche-bei-gleichem-lohn-art-1733072": {
-      "section": "canton-sz",
-      "ts": 1795256053229
-    },
-    "canton-sz::https://www.nau.ch/ort/schwyz/kanton-schwyz-einheitliche-gesundheitsfinanzierung-soll-2028-starten-67203386": {
-      "section": "canton-sz",
-      "ts": 1795256991581
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/dallenwil-investiert-in-schule-turnhalle-und-verwaltung-art-1733455": {
-      "section": "canton-sz",
-      "ts": 1795257005252
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/mitte-sagt-ja-zum-budget-2027-und-zur-sanierung-der-guberstrasse-art-1733349": {
-      "section": "canton-sz",
-      "ts": 1795257014430
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/wintersperre-auf-der-panoramastrasse-art-1733130": {
-      "section": "canton-sz",
-      "ts": 1795257024254
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/ahv-vorlage-vor-dem-nein-staendemehr-als-huerde-art-1733439": {
-      "section": "canton-sz",
-      "ts": 1795299685682
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/ennetmoos-genehmigt-budget-2027-und-wasserversorgung-art-1733467": {
-      "section": "canton-sz",
-      "ts": 1795320556657
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/lungern-budget-2026-mit-knappem-minus-und-stabilen-reserven-art-1733352": {
-      "section": "canton-sz",
-      "ts": 1795320690637
-    },
     "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/silenen-genehmigt-budget-2027-mit-ueberschuss-art-1733344": {
       "section": "canton-sz",
       "ts": 1795342786676
@@ -67,6 +27,10 @@
     "canton-sz::https://www.nau.ch/ort/schwyz/kanton-schwyz-regierungsrat-lehnt-weitere-steuersenkung-fur-firmen-ab-67205591": {
       "section": "canton-sz",
       "ts": 1795428582758
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/schwyz/35000-zusaetzliche-steuererklaerungen-im-kanton-art-1733692": {
+      "section": "canton-sz",
+      "ts": 1795514910611
     }
   }
 }
