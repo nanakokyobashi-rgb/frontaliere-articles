@@ -15261,10 +15261,6 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.rsi.ch/s/4254773": {
-      "section": "svizzera",
-      "ts": 1795304300636
-    },
     "frontaliere::https://www.malpensa24.it/ristorni-frontalieri-varese-lega": {
       "section": "frontaliere",
       "ts": 1795320112456
@@ -15388,6 +15384,14 @@
     "frontaliere::https://www.ticinonews.ch/ticino/le-pmi-affondano-nella-burocrazia-ci-sono-situazioni-assurde-e-inaccettabili-447204": {
       "section": "frontaliere",
       "ts": 1795471489767
+    },
+    "frontaliere::https://www.tio.ch/newsblog/valute-e-frontiere/1952451/frontalieri-e-smart-working-quante-giornate-si-possono-lavorare-dall-italia-senza-problemi-fiscali": {
+      "section": "frontaliere",
+      "ts": 1795483124909
+    },
+    "frontaliere::https://www.tio.ch/newsblog/valute-e-frontiere/1884886/stipendio-dei-frontalieri-come-leggere-la-busta-paga-svizzera-se-vivi-e-spendi-in-italia": {
+      "section": "frontaliere",
+      "ts": 1795483186549
     }
   }
 }
