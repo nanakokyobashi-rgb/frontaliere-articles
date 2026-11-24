@@ -6228,6 +6228,18 @@
       "firstSeenAt": "2026-11-23T22:29:52.433Z",
       "lastValidatedAt": "2026-11-23T22:29:52.433Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "elezioni cantonali canton Uri guida a calendario e voto",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-24T19:51:34.850Z",
+      "lastValidatedAt": "2026-11-24T19:51:34.850Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -15261,26 +15273,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/ticino/attualita/1963423/la-tassa-che-fa-litigare-il-cantone-e-l-italia": {
-      "section": "frontaliere",
-      "ts": 1795357827322
-    },
-    "frontaliere::https://www.quotidianopiu.it/dettaglio/10781781/accordo-italia-svizzera-telelavoro-fino-al-25-percento-dal-2024": {
-      "section": "frontaliere",
-      "ts": 1795358449158
-    },
-    "frontaliere::https://www.biancolavoro.it/lavorare-in-svizzera-guida-aggiornata-a-permessi-stipendi-e-frontalieri": {
-      "section": "frontaliere",
-      "ts": 1795358686509
-    },
-    "frontaliere::https://www.tio.ch/ticino/politica/1964356/tassa-base-sui-rifiuti-la-richiesta-criteri-legati-alle-dimensioni-dell-utenza": {
-      "section": "frontaliere",
-      "ts": 1795360450299
-    },
-    "svizzera::https://www.rsi.ch/info/dialogo/la-corsa-contro-il-tempo-della-crittografia--4254578.html": {
-      "section": "svizzera",
-      "ts": 1795370480514
-    },
     "svizzera::https://www.rsi.ch/s/4257428": {
       "section": "svizzera",
       "ts": 1795376682974
@@ -15420,6 +15412,14 @@
     "frontaliere::https://www.tio.ch/rubriche/ospite/1964733/berna-avs-iva-partiti-pensione": {
       "section": "frontaliere",
       "ts": 1795515790598
+    },
+    "svizzera::https://www.tio.ch/rubriche/ospite/1964733/berna-avs-iva-partiti-pensione": {
+      "section": "svizzera",
+      "ts": 1795521643331
+    },
+    "frontaliere::https://comozero.it/attualita/80mila-frontalieri-in-svizzera-daniela-fumarola-a-como-non-possiamo-lasciarli-senza-tutele": {
+      "section": "frontaliere",
+      "ts": 1795548853369
     }
   }
 }
