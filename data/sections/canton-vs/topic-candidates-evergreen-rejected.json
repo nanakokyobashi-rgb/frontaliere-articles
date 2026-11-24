@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/829444/zwei-monate-krankenkasse-gratis-sp-lanciert-milliardenplan-gegen-pr%c3%a4mienhammer": {
-      "section": "canton-vs",
-      "ts": 1795347788662
-    },
     "canton-vs::https://vework-public.vs.ch/app/publication/fr/08-03-2026/3": {
       "section": "canton-vs",
       "ts": 1795412604365
@@ -23,6 +19,18 @@
     "canton-vs::https://www.pomona.ch/story/829350/viel-arbeit-f%c3%bcr-migrationsamt-kanton-wallis-rechnet-mit-deutlich-mehr-gesuchen-von-ukrainern": {
       "section": "canton-vs",
       "ts": 1795456478173
+    },
+    "canton-vs::https://www.pomona.ch/story/830157/der-herbst-der-langen-messer-wilde-wahl-oder-gar-parlamentsstreik-wie-das-svpticket-gesprengt-werden-k%c3%b6nnte": {
+      "section": "canton-vs",
+      "ts": 1795520624841
+    },
+    "canton-vs::https://www.pomona.ch/story/830214/der-b%c3%bcezer-soll-fr%c3%bcher-in-rente-als-der-b%c3%bcrogummi-eine-bestechende-idee-mit-haken": {
+      "section": "canton-vs",
+      "ts": 1795520626564
+    },
+    "canton-vs::https://www.pomona.ch/story/830154/hunderte-demonstrieren-in-bern-gegen-entlassungen-in-der-medienbranche": {
+      "section": "canton-vs",
+      "ts": 1795520628155
     }
   }
 }
