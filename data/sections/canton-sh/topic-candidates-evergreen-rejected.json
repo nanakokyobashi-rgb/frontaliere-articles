@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sh::https://www.radiomunot.ch/p/transparenzinitiative-aus-dem-jahr-2020-wird-umgesetzt-0infag6zttebrztlsksbpg": {
-      "section": "canton-sh",
-      "ts": 1795299944734
-    },
     "canton-sh::https://www.shn.ch/region/stadt/2026-11-19/personal-gewinnen-mit-steuergeld-sind-die-werbepraemien-von-stadt-und": {
       "section": "canton-sh",
       "ts": 1795428892901
@@ -15,6 +11,10 @@
     "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-27/sig-erzielt-gutes-ergebnis-im-dritten-quartal-und-will-fuer": {
       "section": "canton-sh",
       "ts": 1795428894025
+    },
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-02/bei-der-wefa-in-thayngen-kommt-es-zu-einem-wechsel": {
+      "section": "canton-sh",
+      "ts": 1795558089683
     }
   }
 }
