@@ -15404,6 +15404,18 @@
     "frontaliere::https://www.tio.ch/svizzera/economia/1964706/franchi-pilastro-capitale-ricevuto-donne-raddoppiati-dieci-anni": {
       "section": "frontaliere",
       "ts": 1795509786950
+    },
+    "svizzera::https://www.tio.ch/svizzera/economia/1964706/franchi-pilastro-capitale-ricevuto-donne-raddoppiati-dieci-anni": {
+      "section": "svizzera",
+      "ts": 1795513173301
+    },
+    "svizzera::https://www.swissinfo.ch/ita/secondo-pilastro%3a-in-dieci-anni-raddoppiati-i-capitali-ritirati/92427743": {
+      "section": "svizzera",
+      "ts": 1795513246866
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/secondo-pilastro%3a-in-dieci-anni-raddoppiati-i-capitali-ritirati/92427743": {
+      "section": "frontaliere",
+      "ts": 1795513658792
     }
   }
 }
