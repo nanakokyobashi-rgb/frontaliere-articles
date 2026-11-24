@@ -4,26 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/829080/spital-wallis-muss-%c3%a4rztin-eine-entsch%c3%a4digung-von-150000-franken-zahlen": {
-      "section": "canton-vs",
-      "ts": 1795241694932
-    },
-    "canton-vs::https://www.pomona.ch/story/829350/viel-arbeit-f%c3%bcr-migrationsamt-kanton-wallis-rechnet-mit-deutlich-mehr-gesuchen-von-ukrainern": {
-      "section": "canton-vs",
-      "ts": 1795261519896
-    },
-    "canton-vs::https://www.pomona.ch/story/830013/wegen-st%c3%a4ndemehr-und-feuerwerk-ahvvorlage-steht-vor-dem-absturz": {
-      "section": "canton-vs",
-      "ts": 1795283020795
-    },
-    "canton-vs::https://www.pomona.ch/story/830154/tausende-demonstrieren-in-bern-gegen-entlassungen-in-der-medienbranche": {
-      "section": "canton-vs",
-      "ts": 1795283022276
-    },
-    "canton-vs::https://www.pomona.ch/story/828688/raphael-wicky-nach-seiner-entlassung-ich-bin-nicht-schockiert-aber-sehr-entt%c3%a4uscht": {
-      "section": "canton-vs",
-      "ts": 1795283023824
-    },
     "canton-vs::https://www.pomona.ch/story/829444/zwei-monate-krankenkasse-gratis-sp-lanciert-milliardenplan-gegen-pr%c3%a4mienhammer": {
       "section": "canton-vs",
       "ts": 1795347788662
@@ -31,6 +11,18 @@
     "canton-vs::https://vework-public.vs.ch/app/publication/fr/08-03-2026/3": {
       "section": "canton-vs",
       "ts": 1795412604365
+    },
+    "canton-vs::https://www.vs.ch/web/communication/w/financement-uniforme-des-prestations-de-l-assurance-maladie-efas-mise-en-consultation-de-l-avant-projet-de-modification-de-la-l%c3%a9gislation-cantonale-d-application": {
+      "section": "canton-vs",
+      "ts": 1795455962990
+    },
+    "canton-vs::https://www.rhonefm.ch/valais/sante--le-valais-met-en-consultation-deux-modifications-legislatives-1875024": {
+      "section": "canton-vs",
+      "ts": 1795456475653
+    },
+    "canton-vs::https://www.pomona.ch/story/829350/viel-arbeit-f%c3%bcr-migrationsamt-kanton-wallis-rechnet-mit-deutlich-mehr-gesuchen-von-ukrainern": {
+      "section": "canton-vs",
+      "ts": 1795456478173
     }
   }
 }

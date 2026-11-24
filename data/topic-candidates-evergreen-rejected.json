@@ -6108,6 +6108,126 @@
       "firstSeenAt": "2026-11-22T07:51:39.399Z",
       "lastValidatedAt": "2026-11-22T07:51:39.399Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "permesso di dimora B canton Uri requisiti e rinnovo",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-23T21:09:09.773Z",
+      "lastValidatedAt": "2026-11-23T21:09:09.773Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "salario minimo canton Uri requisiti e applicazione",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-23T21:09:09.981Z",
+      "lastValidatedAt": "2026-11-23T21:09:09.981Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "assistenza sociale canton Uri requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-23T21:09:10.002Z",
+      "lastValidatedAt": "2026-11-23T21:09:10.002Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "indennità di disoccupazione canton Uri iscrizione URC",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-23T21:09:10.183Z",
+      "lastValidatedAt": "2026-11-23T21:09:10.183Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "assegni familiari canton Uri importi e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-23T21:09:10.382Z",
+      "lastValidatedAt": "2026-11-23T21:09:10.382Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "imposta sugli autoveicoli canton Uri calcolo e pagamento",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-23T21:09:10.396Z",
+      "lastValidatedAt": "2026-11-23T21:09:10.396Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "apprendistato e formazione professionale canton Uri",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-23T21:09:10.635Z",
+      "lastValidatedAt": "2026-11-23T21:09:10.635Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "incentivi energetici canton Uri requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-23T21:09:10.653Z",
+      "lastValidatedAt": "2026-11-23T21:09:10.653Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "autorizzazione edilizia canton Uri requisiti e procedura",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-23T21:09:10.667Z",
+      "lastValidatedAt": "2026-11-23T21:09:10.667Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "voto cantonale canton Uri guida a iniziative e referendum",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-23T22:29:52.433Z",
+      "lastValidatedAt": "2026-11-23T22:29:52.433Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -15141,46 +15261,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.rsi.ch/s/4258631": {
-      "section": "frontaliere",
-      "ts": 1795264922724
-    },
-    "frontaliere::https://www.tio.ch/svizzera/economia/1964266/macchinari-ostacoli-ue-svizzera-gennaio": {
-      "section": "frontaliere",
-      "ts": 1795268054778
-    },
-    "frontaliere::https://www.tio.ch/svizzera/economia/1964264/cantoni-corrieri-fattorini-lavoro-condizioni": {
-      "section": "frontaliere",
-      "ts": 1795268175003
-    },
-    "frontaliere::https://www.laregione.ch/svizzera/svizzera/1964263/corrieri-dei-pasti-in-pochi-controllano-le-condizioni-di-lavoro": {
-      "section": "frontaliere",
-      "ts": 1795269335854
-    },
-    "svizzera::https://www.rsi.ch/s/4254599": {
-      "section": "svizzera",
-      "ts": 1795276269372
-    },
-    "svizzera::https://www.swissinfo.ch/ita/gr%3a-pi%c3%b9-deduzioni-premi-cassa-malati%2c-lanciata-iniziativa-popolare/92416959": {
-      "section": "svizzera",
-      "ts": 1795280275763
-    },
-    "frontaliere::https://www.rsi.ch/s/4255856": {
-      "section": "frontaliere",
-      "ts": 1795283869913
-    },
-    "frontaliere::https://www.swissinfo.ch/ita/gr%3a-pi%c3%b9-deduzioni-premi-cassa-malati%2c-lanciata-iniziativa-popolare/92418179": {
-      "section": "frontaliere",
-      "ts": 1795286594914
-    },
-    "svizzera::https://www.rsi.ch/s/4255856": {
-      "section": "svizzera",
-      "ts": 1795293424906
-    },
-    "svizzera::https://www.swissinfo.ch/ita/gr%3a-pi%c3%b9-deduzioni-premi-cassa-malati%2c-lanciata-iniziativa-popolare/92418179": {
-      "section": "svizzera",
-      "ts": 1795293710415
-    },
     "svizzera::https://www.rsi.ch/s/4254773": {
       "section": "svizzera",
       "ts": 1795304300636
@@ -15272,6 +15352,42 @@
     "frontaliere::https://www4.ti.ch/di/spop/stranieri/richiesta-nuovo-g": {
       "section": "frontaliere",
       "ts": 1795436784474
+    },
+    "frontaliere::https://www.tio.ch/rubriche/ospite/1964508/iva-avs-priorita-frasa-luca": {
+      "section": "frontaliere",
+      "ts": 1795439670435
+    },
+    "frontaliere::https://www.varesenews.it/2026/11/badanti-nellalto-verbano-corsi-gratuiti-di-formazione-e-aiuto-per-ottenere-contratti-di-lavoro-regolari/2747056": {
+      "section": "frontaliere",
+      "ts": 1795439791867
+    },
+    "frontaliere::https://www.tio.ch/ticino/economia/1964538/aziende-sepolte-dalla-burocrazia-perso-piu-di-un-giorno-a-settimana-di-lavoro": {
+      "section": "frontaliere",
+      "ts": 1795450532462
+    },
+    "frontaliere::https://www.rsi.ch/s/4257428": {
+      "section": "frontaliere",
+      "ts": 1795450595043
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/dramma-di-sonvico-il-18enne-alla-guida-aveva-solo-il-patentino-447134": {
+      "section": "frontaliere",
+      "ts": 1795454196996
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/l%27industria-svizzera-registra-una-nuova-crescita/92423160": {
+      "section": "frontaliere",
+      "ts": 1795454244540
+    },
+    "frontaliere::https://www.tio.ch/ticino/cronaca/1964513/piu-residenti-nelle-assunzioni-ecco-il-piano": {
+      "section": "frontaliere",
+      "ts": 1795454361322
+    },
+    "svizzera::https://www.admin.ch/it/newnsb/yjjukxlqqhyn": {
+      "section": "svizzera",
+      "ts": 1795457154984
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/le-pmi-affondano-nella-burocrazia-ci-sono-situazioni-assurde-e-inaccettabili-447204": {
+      "section": "frontaliere",
+      "ts": 1795471489767
     }
   }
 }

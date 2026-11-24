@@ -4,21 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261119-les-exportations-horlogeres-se-renforcent-encore-en-octobre.html": {
+    "canton-ne::https://www.rtn.ch/rtn/actualite/region/20261123-le-canton-repercutera-la-hausse-des-primes-maladie-sur-les-subsides.html": {
       "section": "canton-ne",
-      "ts": 1795087240518
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261119-les-exportations-repartent-de-l-avant-en-octobre.html": {
-      "section": "canton-ne",
-      "ts": 1795087714530
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261118-le-secteur-du-luxe-connait-une-petite-amelioration-en-2026.html": {
-      "section": "canton-ne",
-      "ts": 1795088698718
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261120-en-suisse-les-immigres-accedent-rapidement-au-marche-du-travail.html": {
-      "section": "canton-ne",
-      "ts": 1795172507865
+      "ts": 1795445686988
     }
   }
 }
