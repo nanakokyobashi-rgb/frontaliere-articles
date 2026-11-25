@@ -239,7 +239,7 @@ test('viola: filterByCanton deve essere un gruppo reale e proprietario della fon
   expectViolation(doc, /NW: newsSources .*filterByCanton="OW" non coincide col profilo proprietario NW/);
 });
 
-test('viola: articlePathPattern non ancorato, non compilabile o fuori da html-links (P5b)', () => {
+test('viola: articlePathPattern non ancorato, non compilabile o su un parser incompatibile (P5b)', () => {
   const htmlSource = (doc) => doc.cantons.flatMap((c) => c.newsSources.map((s) => [c, s])).find(([, s]) => s.parser === 'html-links');
   const rssSource = (doc) => doc.cantons.flatMap((c) => c.newsSources.map((s) => [c, s])).find(([, s]) => s.parser === 'rss');
   let doc = clone();

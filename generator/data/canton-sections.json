@@ -7210,10 +7210,10 @@
           "language": "de",
           "kind": "media",
           "topics": ["cronaca", "servizi", "mobilita", "eventi"],
-          "quirks": {},
+          "quirks": { "articlePathPattern": "^/nachrichten/schwyz/" },
           "items7d": 10,
           "verifiedAt": "2026-10-08",
-          "notes": "Google News sitemap con publication_date: 159 URL negli ultimi 4 giorni (2-5.10), di cui 10 sotto /nachrichten/schwyz/, il resto Zentralschweiz/Schweiz/sport/ratgeber. Alternativa datata alla pagina HTML; filtrare per path /nachrichten/schwyz/ e /nachrichten/zentralschweiz/. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
+          "notes": "Google News sitemap con publication_date: 159 URL negli ultimi 4 giorni (2-5.10), di cui 10 sotto /nachrichten/schwyz/, il resto Zentralschweiz/Schweiz/sport/ratgeber. Alternativa datata alla pagina HTML; limitare ai link esplicitamente classificati dalla testata sotto /nachrichten/schwyz/. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
         },
         {
           "url": "https://www.einsiedleranzeiger.ch/feed/",
