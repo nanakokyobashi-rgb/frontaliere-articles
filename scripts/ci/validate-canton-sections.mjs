@@ -101,6 +101,7 @@ const QUIRKS = {
   // compilabile, perche' lo scanner la compila a ogni run.
   articlePathPattern: isPathRegex,
   dateFromCardLabel: (value) => value === 'dxp-typo-label',
+  dateFromEasyBlogCard: (value) => value === true,
   excludePaywalledCards: (v) => v === true,
   extractCardLead: (v) => v === 'text' || v === 'media-title',
   articleDateFromDetail: (v) => v === 'html-meta',
@@ -121,6 +122,7 @@ const QUIRK_PARSERS = {
   feedContentOnly: new Set(['rss']),
   articlePathPattern: new Set(['html-links']),
   dateFromCardLabel: new Set(['html-links']),
+  dateFromEasyBlogCard: new Set(['html-links']),
   excludePaywalledCards: new Set(['html-links']),
   extractCardLead: new Set(['html-links']),
   articleDateFromDetail: new Set(['html-links']),

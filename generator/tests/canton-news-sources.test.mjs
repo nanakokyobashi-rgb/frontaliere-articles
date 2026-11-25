@@ -1989,6 +1989,29 @@ test('dateFromCardLabel: configurato solo nei sette profili ufficiali di Zugo', 
   assert.equal(configured.length, 7);
 });
 
+test('Syna Argovia legge la data della propria scheda senza scaricare il dettaglio', async () => {
+  const source = sourceOf('AG', 'https://syna.ch/aargau/ag-aktuell');
+  const card = (slug, dates) => `<article typeof="Article" data-blog-posts-item>
+    <a class="uk-link-reset" href="/aargau/ag-aktuell/${slug}">Eine Meldung aus dem Kanton Aargau</a>
+    ${dates}</article>`;
+  const html = '<main>'
+    + card('lohngleichheit-im-kanton-aargau-jetzt', '<time content="07.07.2023">7.7.2023</time>')
+    + card('pendler-mitteilung', '<time content="25.11.2026">25.11.2026</time>')
+    + card('ohne-datum', '<aside><time content="25.11.2026">25.11.2026</time></aside>')
+    + '</main>';
+  const { impl, calls } = fakeFetch({ [source.url]: { body: html } });
+  const result = await scanCantonSource(source, ctx(impl));
+  assert.deepEqual(calls.map(({ url }) => url), [source.url]);
+  assert.deepEqual(result.headlines.map(({ url, date }) => [
+    new URL(url).pathname.split('/').at(-1),
+    date && [date.getFullYear(), date.getMonth() + 1, date.getDate()],
+  ]), [
+    ['lohngleichheit-im-kanton-aargau-jetzt', [2023, 7, 7]],
+    ['pendler-mitteilung', [2026, 11, 25]],
+    ['ohne-datum', null],
+  ]);
+});
+
 test('dateFromCardLabel: date editoriali locali alla scheda con una sola richiesta', async () => {
   const source = sourceOf('ZG', 'https://zg.ch/de/news');
   const pathFor = (slug) => '/de/news/2026/10/' + slug;

@@ -11189,6 +11189,26 @@ function publicationDateFromCardLabel(html, card, labelClass) {
   return date;
 }
 
+function publicationDateFromEasyBlogCard(html, card) {
+  const end = headlineElementEnd(html, card).start;
+  if (end === html.length) return null;
+  const inner = html.slice(card.openEnd, end);
+  const isTime = (tag) => tag.name === 'time' && !tag.selfClosing;
+  let date = null;
+  for (let time = nextHeadlineElementForOpening(inner, isTime); time;
+    time = nextHeadlineElementForOpening(inner, isTime, time.openEnd)) {
+    const stack = headlineAncestorStack(inner, time.openEnd);
+    if (stack.some((node) => node.name === 'article' || node.name === 'aside') || headlineStackHasNavigation(stack)) continue;
+    const value = headlineAttributeValue(time.attrs, 'content').trim();
+    if (!/^\d{2}\.\d{2}\.\d{4}$/u.test(value)) continue;
+    const candidate = parseHeadlineDate(value)?.date;
+    if (!candidate) continue;
+    if (date && date.getTime() !== candidate.getTime()) return null;
+    date = candidate;
+  }
+  return date;
+}
+
 // ── Step 1b: Extract links and headlines from an HTML page ──
 function extractHeadlines(html, baseUrl) {
   const source = arguments[2] || {};
@@ -11196,10 +11216,12 @@ function extractHeadlines(html, baseUrl) {
   const results = [];
   const labelClass = source?.quirks?.dateFromCardLabel;
   const useCardLabel = labelClass === 'dxp-typo-label';
+  const useEasyBlogCard = source?.quirks?.dateFromEasyBlogCard === true;
+  const useScopedCard = useCardLabel || useEasyBlogCard;
   const useCardPathPattern = useCardLabel && source.quirks.articlePathPattern;
-  const sourceOrigin = useCardLabel ? new URL(baseUrl).origin : null;
-  const htmlDateMap = useCardLabel ? null : extractDatesFromHtml(html, baseUrl, source?.quirks);
-  const embeddedDateMap = useCardLabel ? null : extractEmbeddedHeadlineDates(metadataHtml, source?.quirks?.embeddedDateField);
+  const sourceOrigin = useScopedCard ? new URL(baseUrl).origin : null;
+  const htmlDateMap = useScopedCard ? null : extractDatesFromHtml(html, baseUrl, source?.quirks);
+  const embeddedDateMap = useScopedCard ? null : extractEmbeddedHeadlineDates(metadataHtml, source?.quirks?.embeddedDateField);
   // Match <a href="...">text</a> with the same quote-aware walker used by
   // the ancestor/date scanners; an attribute value may contain `>`.
   let anchor = nextHeadlineAnchor(html);
@@ -11209,6 +11231,15 @@ function extractHeadlines(html, baseUrl) {
     const card = useCardLabel ? ancestors.findLast((node) => node.name === 'li') : null;
     if (useCardLabel && (!card || headlineStackHasNavigation([...ancestors, anchor])
       || !headlineAttributeValue(anchor.attrs, 'class').split(/\s+/u).includes('stretched-link'))) {
+      anchor = nextAnchor;
+      continue;
+    }
+    const easyBlogCard = useEasyBlogCard
+      ? ancestors.findLast((node) => node.name === 'article')
+      : null;
+    if (useEasyBlogCard && (!easyBlogCard || headlineAttributeValue(easyBlogCard.attrs, 'typeof') !== 'Article'
+      || headlineStackHasNavigation([...ancestors, anchor])
+      || !headlineAttributeValue(anchor.attrs, 'class').split(/\s+/u).includes('uk-link-reset'))) {
       anchor = nextAnchor;
       continue;
     }
@@ -11250,7 +11281,7 @@ function extractHeadlines(html, baseUrl) {
     // Resolve relative URLs
     try {
       const resolved = new URL(href, baseUrl);
-      if (useCardLabel && (resolved.protocol !== 'https:' || resolved.origin !== sourceOrigin)) {
+      if (useScopedCard && (resolved.protocol !== 'https:' || resolved.origin !== sourceOrigin)) {
         anchor = nextAnchor;
         continue;
       }
@@ -11273,10 +11304,12 @@ function extractHeadlines(html, baseUrl) {
     // Configured card labels are the only publication date source for this CMS.
     const date = useCardLabel
       ? publicationDateFromCardLabel(html, card, labelClass)
-      : extractDateFromUrl(href)
-        || htmlDateMap.get(href)
-        || embeddedDateMap.get(embeddedHeadlineDateKey(text))
-        || null;
+      : useEasyBlogCard
+        ? publicationDateFromEasyBlogCard(html, easyBlogCard)
+        : extractDateFromUrl(href)
+          || htmlDateMap.get(href)
+          || embeddedDateMap.get(embeddedHeadlineDateKey(text))
+          || null;
     const lead = publicCardLead(html, anchor.start, source?.quirks);
     results.push({ url: href, headline: text, date, ...(lead ? { lead } : {}) });
     anchor = nextAnchor;
