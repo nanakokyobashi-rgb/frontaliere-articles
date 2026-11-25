@@ -7559,7 +7559,13 @@ ${proofSuffix}`
       maxPrimaryRounds - fcAttempt + 1,
       Math.max(1, Math.floor(remainingMs / FACTCHECK_MIN_ROUND_MS)),
     );
-    const deadlineMs = now + Math.floor(remainingMs / remainingRounds);
+    const roundBudgetMs = Math.floor(remainingMs / remainingRounds);
+    const deadlineMs = now + roundBudgetMs;
+    // Leave a full minimum window for an independent recovery when the round
+    // can give the initially requested models at least twice that time.
+    const initialDeadlineMs = roundBudgetMs >= 3 * FACTCHECK_MIN_ROUND_MS
+      ? deadlineMs - FACTCHECK_MIN_ROUND_MS
+      : deadlineMs;
     const primaryModels = verificationModels.slice(0, 2);
     let modelsToQuery = primaryModels;
     if (priorVoters.length) {
@@ -7575,7 +7581,7 @@ ${proofSuffix}`
         : index > 0 && modelsToQuery[0] === AI_MODELS.CODEX_CLI_PRIMARY;
       return _runSingleFactCheck(model, verificationPrompt, {
         fresh: fcAttempt > 1,
-        deadlineMs,
+        deadlineMs: initialDeadlineMs,
         invalidVerdictModels,
         editorialProofFailures,
         isEvergreen: isEvergreenArticle,
