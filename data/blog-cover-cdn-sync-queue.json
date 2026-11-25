@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-lkw-unfall-chlaggi-strada.webp",
-      "sha256": "c4a4d9c05f181ecbe25706e0633c6332596bd4f922ece1d59899ff2a16396d91"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-lkw-unfall-chlaggi-strada-480w.webp",
-      "sha256": "a8a012dc0cbc7f2393695a5878c346c5b8ae91d7cf43c7ed918aec23cc14aecc"
-    }
-  ]
+  "items": []
 }
