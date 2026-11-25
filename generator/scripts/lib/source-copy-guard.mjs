@@ -505,6 +505,7 @@ export async function repairSourceCopyArticle({
       break;
     }
     if (next == null || articleBodySignature(next) === articleBodySignature(current)) break;
+    const previousVerdict = verdict;
     current = next;
     passes = pass;
     verdict = evaluateSourceCopy(sourceText, current, { locale, threshold });
@@ -520,9 +521,25 @@ export async function repairSourceCopyArticle({
         changed: articleBodySignature(current) !== initialSignature,
       };
     }
+    // A rewrite that keeps both overlap measures has not reduced copying.
+    // Try the existing local fallback before paying for another model pass.
+    if (pass >= 2 && pass < passLimit && condense === condenseSourceCopyArticle
+      && verdict.maxWords >= previousVerdict.maxWords
+      && verdict.coverageWords >= previousVerdict.coverageWords) {
+      const candidate = condense(current, verdict, { locale, threshold });
+      if (candidate.changed) {
+        const candidateVerdict = evaluateSourceCopy(sourceText, candidate.article, { locale, threshold });
+        if (candidateVerdict.safe && !candidateVerdict.structural) {
+          current = candidate.article;
+          verdict = candidateVerdict;
+          logSourceCopyVerdict(articleId, verdict, logger, sourceCopyMode, 'condense-stalled-repair');
+          break;
+        }
+      }
+    }
   }
 
-  const condensed = typeof condense === 'function'
+  const condensed = !verdict.safe && typeof condense === 'function'
     ? await condense(cloneArticleForRepair(current), verdict, { locale, threshold })
     : { article: current, changed: false };
   if (condensed?.changed && condensed.article != null) {

@@ -279,6 +279,56 @@ test('esenta sequenze brevi composte soprattutto da nomi propri e denominazioni/
   assert.equal(figures.sequences[0].exemptionReason, 'date-cifre');
 });
 
+test('condensa prima della terza passata se due riscritture non riducono la copia', async () => {
+  const source = 'uno due tre quattro cinque sei sette otto nove dieci undici dodici';
+  const article = {
+    body1: `Apertura autonoma. ${source}. Chiusura con informazioni aggiuntive utili al lettore.`,
+    body2: 'Contesto separato con abbastanza parole per evitare una copertura strutturale.',
+    body3: 'Conclusione separata.',
+  };
+  const calls = [];
+  const result = await repairSourceCopyArticle({
+    sourceText: source,
+    article,
+    mode: 'repair',
+    logger: () => {},
+    repair: async ({ pass }) => {
+      calls.push(pass);
+      return { ...article, body1: `Apertura riscritta ${pass}. ${source}. Chiusura autonoma.` };
+    },
+  });
+  assert.deepEqual(calls, [1, 2]);
+  assert.equal(result.outcome, 'repaired');
+  assert.equal(result.verdict.safe, true);
+  assert.equal(result.article.body1, 'Apertura riscritta 2. Chiusura autonoma.');
+  assert.equal(result.article.body2, article.body2);
+  assert.equal(result.article.body3, article.body3);
+});
+
+test('mantiene la terza passata se la condensazione lascia una copia sopra soglia', async () => {
+  const first = 'uno due tre quattro cinque sei sette otto nove dieci undici dodici';
+  const second = 'alfa beta gamma delta epsilon zeta eta theta iota kappa lambda mu';
+  const source = `${first}. ${second}.`;
+  const article = { body1: source, body2: 'Contesto autonomo.', body3: 'Conclusione autonoma.' };
+  const calls = [];
+  const result = await repairSourceCopyArticle({
+    sourceText: source,
+    article,
+    mode: 'repair',
+    logger: () => {},
+    repair: async ({ pass }) => {
+      calls.push(pass);
+      return {
+        ...article,
+        body1: pass === 3 ? 'Sintesi riformulata con riscontri documentati.' : `${first}. Passaggio autonomo ${pass}. ${second}.`,
+      };
+    },
+  });
+  assert.deepEqual(calls, [1, 2, 3]);
+  assert.equal(result.outcome, 'repaired');
+  assert.equal(result.article.body1, 'Sintesi riformulata con riscontri documentati.');
+});
+
 test('rigetta solo una copia strutturale che nessuna delle tre passate riesce a riparare', async () => {
   const source = Array.from({ length: 45 }, (_, index) => `parola${index}`).join(' ');
   const article = {
