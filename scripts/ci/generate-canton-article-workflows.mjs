@@ -216,8 +216,9 @@ export const CORE_REPLACEMENTS = [
       + "            [.[]?.files[]?] as $files\n"
       + "            | [$files[] | select(.filename | startswith(\"content/\"))] as $content\n"
       + "            | ($content | length) > 0\n"
-      + "              and all($files[]; (.filename | startswith(\".github/workflows/\") | not)\n"
-      + "                and (.previous_filename // \"\" | startswith(\"content/\") | not))\n"
+      + "              and all($files[];\n"
+      + "                (.filename | test(\"^([.]github/workflows/|generator/scripts/create-article[.]mjs$)\") | not)\n"
+      + "                and (.previous_filename // \"\" | test(\"^(content/|[.]github/workflows/|generator/scripts/create-article[.]mjs$)\") | not))\n"
       + "              and all($content[];\n"
       + "                (.status == \"added\" or .status == \"modified\")\n"
       + "                and (.filename | test(\"^content/(blog-body-canton-[a-z0-9-]+/(it|de|en|fr)/[^/]+[.]ts|blog-meta-canton-[a-z0-9-]+-(it|de|en|fr)[.]ts|cantons/canton-[a-z0-9-]+/(registry|seo|slugs)[.]ts)$\")))\n",
