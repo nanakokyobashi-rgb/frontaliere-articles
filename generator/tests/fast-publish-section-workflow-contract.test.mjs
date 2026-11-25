@@ -824,7 +824,12 @@ test('il verificatore riusa solo prove stale-late di revisioni equivalenti', () 
 set -euo pipefail
 case "$1" in
   api) printf '%s\\n' "$FIXTURE_RUN" ;;
-  run) printf '%s\\n' "$FIXTURE_ARTIFACT" > "${'${!#}'}/fast-publish-result.json" ;;
+  run)
+    if [[ "$2" == download && "$3" == 43 ]]; then
+      printf '%s\\n' "$FIXTURE_ARTIFACT_SIBLING" > "${'${!#}'}/fast-publish-result.json"
+    else
+      printf '%s\\n' "$FIXTURE_ARTIFACT" > "${'${!#}'}/fast-publish-result.json"
+    fi ;;
   *) exit 1 ;;
 esac
 `, { mode: 0o755 });
@@ -832,6 +837,8 @@ esac
       artifactSource = source,
       renderedHead = artifactSource,
       runHead = source,
+      siblingHead,
+      siblingPin = artifactSource,
       cohort = 'stale-late-42-canton-ur-n1',
     } = {}) => {
       const output = path.join(root, 'output');
@@ -842,13 +849,24 @@ esac
           ...process.env, PATH: `${root}:${process.env.PATH}`, RUNNER_TEMP: root, GITHUB_OUTPUT: output,
           REPOSITORY: 'fixture/corpus', MODE: mode, EXPECTED_SOURCE_COMMIT: expected,
           WORKFLOW_RUN_ID: '42', WORKFLOW_RUN_HEAD_SHA: runHead, CHILD_NONCE: nonce, CHILD_COHORT: cohort,
-          FIXTURE_RUN: JSON.stringify({
-            databaseId: 42, displayTitle: `cover-publish-section / canton-ur / nonce=${nonce} / dry=false / c=${cohort}`,
-            status: 'completed', conclusion: 'success', headSha: runHead, createdAt: '2026-11-21T10:00:00Z',
-          }),
+          FIXTURE_RUN: [
+            {
+              databaseId: 42, displayTitle: `cover-publish-section / canton-ur / nonce=${nonce} / dry=false / c=${cohort}`,
+              status: 'completed', conclusion: 'success', headSha: runHead, createdAt: '2026-11-21T10:00:00Z',
+            },
+            ...(siblingHead ? [{
+              databaseId: 43, displayTitle: `cover-publish-section / canton-ti / nonce=sibling / dry=false / c=${cohort}`,
+              status: 'completed', conclusion: 'success', headSha: siblingHead, createdAt: '2026-11-21T10:01:00Z',
+            }] : []),
+          ].map((run) => JSON.stringify(run)).join('\n'),
           FIXTURE_ARTIFACT: JSON.stringify({
             section: 'canton-ur', dispatch_nonce: nonce, dispatch_cohort: cohort,
             source_commit: artifactSource, source_main_commit: artifactSource, rendered_head: renderedHead,
+            fresh: 'true', coordinated_recovery: 'true',
+          }),
+          FIXTURE_ARTIFACT_SIBLING: JSON.stringify({
+            section: 'canton-ti', dispatch_nonce: 'sibling', dispatch_cohort: cohort,
+            source_commit: siblingPin, source_main_commit: siblingPin, rendered_head: siblingPin,
             fresh: 'true', coordinated_recovery: 'true',
           }),
         },
@@ -863,6 +881,13 @@ esac
     for (const mode of ['event', 'schedule']) {
       const reconcile = { cohort: 'reconcile-42-n1', artifactSource: source, runHead: bookkeeping };
       assert.equal(check(mode, current, reconcile), 'verified=true', `${mode} accepts reconciled bookkeeping drift`);
+      const siblings = { ...reconcile, cohort: 'reconcile-42-n2', siblingHead: current };
+      assert.equal(check(mode, current, siblings), 'verified=true', `${mode} accepts sibling runs with equivalent heads`);
+      assert.equal(
+        check(mode, current, { ...siblings, siblingPin: bookkeeping }),
+        'verified=false',
+        `${mode} requires one pinned source for the entire cohort`,
+      );
       assert.equal(check(mode, changed, reconcile), 'verified=false', `${mode} rejects changed publication inputs`);
       assert.equal(
         check(mode, current, { artifactSource: source, runHead: bookkeeping }),

@@ -237,10 +237,20 @@ jobs:
           set -euo pipefail
           if ! checkout_head="$(git rev-parse HEAD)" ||
             [ "$checkout_head" != "$SOURCE_COMMIT" ] ||
-            ! current_main="$(bash scripts/ci/read-main-head.sh)" ||
-            [ "$current_main" != "$SOURCE_COMMIT" ]; then
-            echo "::error::checkout and current main must both match source_commit"
+            ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
+            echo "::error::checkout must match source_commit and current main must be readable"
             exit 1
+          fi
+          if [ "$current_main" != "$SOURCE_COMMIT" ]; then
+            if ! git cat-file -e "$current_main^{commit}" &&
+              ! timeout 60 git fetch --quiet --no-tags origin "$current_main"; then
+              echo "::error::cannot read current main for source_commit verification"
+              exit 1
+            fi
+            if ! bash scripts/ci/section-source-unaffected.sh --bookkeeping-only "$SOURCE_COMMIT" "$current_main"; then
+              echo "::error::current main changed publication inputs after source_commit"
+              exit 1
+            fi
           fi
 
       - name: Set up Node (resolve)
@@ -703,10 +713,20 @@ jobs:
           set -euo pipefail
           if ! checkout_head="$(git rev-parse HEAD)" ||
             [ "$checkout_head" != "$SOURCE_COMMIT" ] ||
-            ! current_main="$(bash scripts/ci/read-main-head.sh)" ||
-            [ "$current_main" != "$SOURCE_COMMIT" ]; then
-            echo "::error::checkout and current main must both match source_commit"
+            ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
+            echo "::error::checkout must match source_commit and current main must be readable"
             exit 1
+          fi
+          if [ "$current_main" != "$SOURCE_COMMIT" ]; then
+            if ! git cat-file -e "$current_main^{commit}" &&
+              ! timeout 60 git fetch --quiet --no-tags origin "$current_main"; then
+              echo "::error::cannot read current main for source_commit verification"
+              exit 1
+            fi
+            if ! bash scripts/ci/section-source-unaffected.sh --bookkeeping-only "$SOURCE_COMMIT" "$current_main"; then
+              echo "::error::current main changed publication inputs after source_commit"
+              exit 1
+            fi
           fi
 
       # The render step emits redirects for a renamed slug by reading the

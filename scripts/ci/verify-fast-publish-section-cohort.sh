@@ -68,7 +68,6 @@ if [ "$mode" = 'schedule' ] || [[ "$child_cohort" =~ $compatible_cohort_pattern 
     break
   done
 fi
-cohort_source="$expected_source"
 if [ "$mode" = 'event' ]; then
   if ! [[ "$child_head_sha" =~ ^[a-f0-9]{40}$ ]]; then
     not_ready "HEAD della run child non valida: $child_head_sha"
@@ -78,7 +77,6 @@ if [ "$mode" = 'event' ]; then
       ! jq -e --arg child "$child_head_sha" 'index($child) != null' <<< "$compatible_sources" >/dev/null; then
       not_ready "run child sulla HEAD $child_head_sha, attesa $expected_source"
     fi
-    cohort_source="$child_head_sha"
   fi
 fi
 
@@ -108,11 +106,11 @@ parse_title=" / (?<section>[^/]+) / nonce=(?<nonce>[^ ]+) / dry=(?<dry>[^ ]+) / 
 candidate_json=''
 
 if [ "$mode" = 'event' ]; then
-  candidate_json="$(jq -c --arg id "$child_run_id" --arg nonce "$child_nonce" --arg cohort "$child_cohort" --arg source "$cohort_source" '
+  candidate_json="$(jq -c --arg id "$child_run_id" --arg nonce "$child_nonce" --arg cohort "$child_cohort" --arg source "$expected_source" --arg child_head "$child_head_sha" --argjson compatible "$compatible_sources" '
     [
       .[]
       | . as $run
-      | select($run.headSha == $source)
+      | select($run.headSha == $source or ($compatible | index($run.headSha) != null))
       | (try ($run.displayTitle | capture(" / (?<section>[^/]+) / nonce=(?<nonce>[^ ]+) / dry=(?<dry>[^ ]+) / (?:c|cohort)=(?<cohort>[^ ]+)$")) catch null) as $parts
       | select($parts != null)
       | (try ($parts.cohort | capture("^(?<kind>reconcile|stale-staged)-[0-9]+-n(?<size>[1-9][0-9]*)$|^(?<late>stale-late)-[0-9]+-[^/]+-n(?<late_size>1)$")) catch null) as $cohort_parts
@@ -127,7 +125,7 @@ if [ "$mode" = 'event' ]; then
        | group_by([.run.section, .run.nonce])
        | map(last)) as $deduplicated
     | if (any($same[]; (.run.databaseId | tostring) == $id
-              and .run.nonce == $nonce))
+              and .run.nonce == $nonce and .run.headSha == $child_head))
          and ($deduplicated | length > 0)
       then {cohort: $cohort,
             expectedSize: (($deduplicated | map(.expectedSize) | unique | if length == 1 then .[0] else 0 end)),
@@ -171,7 +169,6 @@ else
     | del(.latest)
   ' <<< "$runs_json")"
   [ -n "$candidate_json" ] || not_ready 'nessuna coorte recente sulla HEAD corrente'
-  cohort_source="$(jq -r '.runs[0].headSha' <<< "$candidate_json")"
 fi
 
 expected_size="$(jq -r '.expectedSize' <<< "$candidate_json")"
@@ -183,12 +180,16 @@ fi
 if [ "$observed_size" -ne "$expected_size" ]; then
   not_ready "child osservati $observed_size, attesi $expected_size per $cohort"
 fi
-if ! jq -e --arg source "$cohort_source" --argjson expected "$expected_size" '
+allowed_heads="$(jq -cn --arg expected "$expected_source" '[$expected]')"
+if [[ "$cohort" =~ $compatible_cohort_pattern ]]; then
+  allowed_heads="$(jq -c --arg expected "$expected_source" '. + [$expected] | unique' <<< "$compatible_sources")"
+fi
+if ! jq -e --argjson heads "$allowed_heads" --argjson expected "$expected_size" '
   (.runs | length) == $expected
   and ([.runs[].nonce] | length) == ([.runs[].nonce] | unique | length)
   and ([.runs[].section] | length) == ([.runs[].section] | unique | length)
   and all(.runs[];
-    .headSha == $source
+    (.headSha as $head | $heads | index($head) != null)
     and ((.status // "") | ascii_downcase) == "completed"
     and ((.conclusion // "") | ascii_downcase) == "success"
   )
@@ -201,7 +202,7 @@ rm -rf -- "$artifact_root"
 mkdir -p "$artifact_root"
 
 verified_pin=''
-while IFS=$'\t' read -r run_id nonce section; do
+while IFS=$'\t' read -r run_id nonce section run_head; do
   [ -n "$run_id" ] || not_ready "run senza id nella coorte $cohort"
   run_dir="$artifact_root/$run_id"
   download_ok=false
@@ -227,7 +228,7 @@ while IFS=$'\t' read -r run_id nonce section; do
     reopen_reconcile
     not_ready "artifact fast-publish-result non univoco per il child $run_id"
   fi
-  artifact_source="$cohort_source"
+  artifact_source="$run_head"
   if [[ "$cohort" =~ $compatible_cohort_pattern ]]; then
     # The dispatch event can point at a newer main than the pinned checkout.
     # Keep both revisions within the proven range and check the artifact's
@@ -235,12 +236,12 @@ while IFS=$'\t' read -r run_id nonce section; do
     if ! artifact_source="$(jq -er '.source_commit | select(type == "string" and test("^[a-f0-9]{40}$"))' "${result_files[0]}")"; then
       not_ready "source commit assente o invalida nell'artifact child $run_id"
     fi
-    if [ "$artifact_source" != "$cohort_source" ] && \
-      ! jq -e --arg source "$artifact_source" --arg run "$cohort_source" '
+    if [ "$artifact_source" != "$run_head" ] && \
+      ! jq -e --arg source "$artifact_source" --arg run "$run_head" '
         index($source) as $source_index | index($run) as $run_index
         | $source_index != null and $run_index != null and $source_index >= $run_index
       ' <<< "$compatible_sources" >/dev/null; then
-      not_ready "source commit $artifact_source non compatibile con la HEAD del child $cohort_source"
+      not_ready "source commit $artifact_source non compatibile con la HEAD del child $run_head"
     fi
   fi
   if [ -n "$verified_pin" ] && [ "$verified_pin" != "$artifact_source" ]; then
@@ -265,10 +266,10 @@ while IFS=$'\t' read -r run_id nonce section; do
     "${result_files[0]}" >/dev/null; then
     not_ready "artifact child $run_id non coerente con $cohort/$nonce"
   fi
-done < <(jq -r '.runs[] | [.databaseId, .nonce, .section] | @tsv' <<< "$candidate_json")
+done < <(jq -r '.runs[] | [.databaseId, .nonce, .section, .headSha] | @tsv' <<< "$candidate_json")
 
 write_output 'verified=true'
 write_output "cohort=$cohort"
 write_output "expected_size=$expected_size"
 write_output "observed_size=$observed_size"
-echo "::notice::coorte child verificata: $cohort ($observed_size/$expected_size), HEAD=$cohort_source"
+echo "::notice::coorte child verificata: $cohort ($observed_size/$expected_size), source_commit=$verified_pin"
