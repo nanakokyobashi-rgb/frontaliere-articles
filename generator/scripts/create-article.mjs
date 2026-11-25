@@ -7380,9 +7380,9 @@ Quindi, PRIMA di scrivere una issue del tipo "non presente / non menzionato nell
 2. Se lo trovi, NON segnalarlo. Un fatto ripreso dalla fonte, anche alla lettera, è corretto per definizione.
 3. Se non lo trovi, compila "sourceQuote" con la porzione ESATTA di fonte più vicina al claim (o "" se la fonte non tratta affatto l'argomento). Le issue di questo tipo vengono verificate automaticamente contro il testo della fonte e SCARTATE se il claim risulta invece presente.
 
-Resta vero il contrario: un fatto specifico che nella fonte NON c'è e che non è nei fatti verificati (istituzioni, statistiche precise, dichiarazioni, importi, date) va segnalato come "critical" senza esitazione. La severità si misura sull'evidenza, non sul dubbio.
+Resta vero il contrario: un fatto specifico che nella fonte NON c'è e che non è nei fatti verificati (istituzioni, statistiche precise, dichiarazioni, importi, date) va segnalato come "critical" senza esitazione. La severità si misura sull'evidenza, non sul dubbio.`;
 
-${JSON_QUOTE_SAFETY_RULE_IT}
+  const proofResponseFormat = `${JSON_QUOTE_SAFETY_RULE_IT}
 
 Rispondi SOLO in JSON valido:
 {
@@ -7401,7 +7401,15 @@ Rispondi SOLO in JSON valido:
 
 Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
 
-  const prompt = `${evidencePrefix}\n\n${verificationInstructions}\n\n${relevanceInstructions}\n\n${proofSuffix}`;
+  const prompt = `${evidencePrefix}\n\n${verificationInstructions}\n\n${relevanceInstructions}\n\n${proofSuffix}\n\n${proofResponseFormat}`;
+  const compactProofInstructions = `═══ VALUTAZIONE EDITORIALE E PROVE (OBBLIGATORIA) ═══
+Valuta body1–body3 insieme. Un riassunto o una parafrasi non basta: cerca un confronto, calcolo o nesso concreto assente dalla fonte e dimostrabile con periodi, unità e basi coerenti. Attribuisci i fatti alla fonte. Segnala angoli frontalieri forzati, reportage, interviste o verifiche proprie non documentati e cause, effetti, previsioni o consigli fiscali/finanziari privi di prove.
+Classificazioni: grounded_analysis (contributo tracciabile), source_restatement (riassunto/parafrasi), unsupported_inference (affermazione non provata), insufficient_evidence (prove insufficienti).
+articleQuote: unico passaggio contiguo di body1–body3, almeno 40 caratteri e 7 parole. evidenceQuotes: copia almeno 16 caratteri consecutivi dalla fonte o da un riferimento verificato. Conserva lingua, cifre e punteggiatura. Escludi titolo, sommario, traduzioni, parafrasi e puntini aggiunti. Verifica ogni citazione nel blocco originale.
+finding: in italiano, almeno 35 caratteri e 6 parole. Per grounded_analysis, spiega il contributo usando almeno ${MIN_EDITORIAL_ARTICLE_ANCHORS} termini distinti identici a quelli di articleQuote (nomi, parole di almeno cinque caratteri o cifre).
+critical: falsità, contraddizione o fatto specifico inventato. major: sospetto concreto non confermabile (per evergreen l’assenza dalla fonte non basta). minor: imprecisione non fuorviante o contesto corretto. FAIL con almeno 1 critical o 3 major, altrimenti PASS.
+Prima di segnalare un fatto assente, rileggi la fonte cercando anche parafrasi. Se presente, lascia il fatto. Se assente, copia in sourceQuote il passaggio esatto più vicino o usa una stringa vuota se la fonte non tratta l’argomento. Le issue guidano la riscrittura e sono confrontate con la fonte.`;
+
   const canCompact = sourceUrl.startsWith('evergreen://')
     || (!isEvergreenArticle && !isSyntheticDataset && /^https?:\/\//i.test(sourceUrl));
   const compactSourceInstructions = isEvergreenArticle
@@ -7420,7 +7428,9 @@ ${compactSourceInstructions}
 
 ${relevanceInstructions}
 
-${proofSuffix}`
+${compactProofInstructions}
+
+${proofResponseFormat}`
     : null;
 
   // ── Multi-model consensus: query 2 models, require agreement ──

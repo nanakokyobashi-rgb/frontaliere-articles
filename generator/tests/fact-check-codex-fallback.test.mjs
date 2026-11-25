@@ -560,6 +560,7 @@ describe('fact-check retries under a reported input cap', () => {
   for (const { target, cap, canton, section } of [
     { target: 7874, cap: 7000, canton: 'San Gallo', section: 'san-gallo' },
     { target: 8318, cap: 8000, canton: 'Lucerna', section: 'lucerna' },
+    { target: 9439, cap: 8000, canton: 'Ginevra', section: 'canton-ge' },
   ]) {
     test(`recupera il secondo voto con carico ${target} e tetto ${cap}`, async () => {
       const locale = { canton, section };
@@ -604,12 +605,17 @@ describe('fact-check retries under a reported input cap', () => {
       assert.match(instructions, /"LProtInfo del 2023" \(inesistente — è art\. 321a CO\)/);
       assert.match(instructions, /"LPAP del 2000" \(è LPers, non LPAP\)/);
       const suffix = compactPrompt.slice(proofStart(compactPrompt));
-      assert.equal(suffix, prompt.slice(proofStart(prompt)));
+      const responseFormat = (text) => text.slice(text.indexOf('Rispondi SOLO in JSON valido:'));
+      assert.equal(responseFormat(compactPrompt), responseFormat(prompt));
+      assert.match(suffix, /almeno 40 caratteri e 7 parole/);
+      assert.match(suffix, /almeno 16 caratteri consecutivi dalla fonte o da un riferimento verificato/);
+      assert.match(suffix, /almeno 35 caratteri e 6 parole/);
+      assert.match(suffix, /FAIL con almeno 1 critical o 3 major/);
       assert.match(suffix, /"articleQuote".*"citazione esatta/);
       assert.match(suffix, /"evidenceQuotes"/);
       assert.match(suffix, /"sourceQuote"/);
       const relevance = cantonLines.factCheckRelevance(false);
-      assert.ok(prompt.includes(`\n\n${relevance}\n\n${suffix}`));
+      assert.ok(prompt.includes(`\n\n${relevance}\n\n${prompt.slice(proofStart(prompt))}`));
       assert.ok(compactPrompt.includes(`\n\n${relevance}\n\n${suffix}`));
       assert.deepEqual(logs.filter((line) => line.includes('istruzioni compatte')), [
         `  🔁 Fact-check: istruzioni compatte, input stimato ${fullEstimate} → ${compactEstimate} token (tetto ${cap})`,
