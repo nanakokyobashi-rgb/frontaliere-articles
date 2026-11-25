@@ -1062,13 +1062,15 @@ test('le sole modifiche a body esistenti liberano la coda di generazione', () =>
     ...['registry', 'seo', 'slugs'].map((name) => ({
       filename: `content/cantons/canton-vd/${name}.ts`, status: 'modified',
     })),
-    { filename: 'data/sections/canton-vd/quota-state.json', status: 'modified' },
   ];
   assert.match(run(vaud), /reason=admit-canton-only-content/);
+  assert.match(run([...vaud, { filename: 'scripts/build-api.mjs', status: 'modified' }]), /continue/);
+  assert.match(run([...vaud, { filename: 'data/sections/canton-vd/quota-state.json', status: 'modified' }]), /continue/);
   assert.match(run([...vaud, { filename: 'content/blog-body/it/national.ts', status: 'added' }]), /continue/);
   assert.match(run([...vaud, { filename: '.github/workflows/generate-article.yml', status: 'modified' }]), /continue/);
   assert.match(run([...vaud, { filename: 'generator/scripts/create-article.mjs', status: 'modified' }]), /continue/);
   assert.match(run([...vaud, { filename: 'generator/scripts/old.mjs', previous_filename: 'generator/scripts/create-article.mjs', status: 'renamed' }]), /continue/);
+  assert.match(run([...vaud, { filename: 'content/blog-body-canton-vd/fr/new.ts', previous_filename: 'content/blog-body-canton-vd/fr/old.ts', status: 'renamed' }]), /reason=admit-canton-only-content/);
   assert.match(run([...vaud, { status: 'modified' }]), /continue/);
   assert.match(run([{ filename: bodyPath, previous_filename: 'content/blog-body/fr/national.ts', status: 'renamed' }]), /continue/);
   assert.match(run([{ filename: bodyPath, status: 'modified' }, { filename: 'content/blog-meta-fr.ts', status: 'modified' }]), /continue/);

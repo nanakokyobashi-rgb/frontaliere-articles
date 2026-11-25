@@ -213,15 +213,15 @@ export const CORE_REPLACEMENTS = [
     id: 'admit: il filtro dei push cantonali serve solo alla coda nazionale',
     count: 1,
     find: "          CANTON_ONLY: |-\n"
-      + "            [.[]?.files[]?] as $files\n"
+      + "            \"^content/(blog-body-canton-[a-z0-9-]+/(it|de|en|fr)/[^/]+[.]ts|blog-meta-canton-[a-z0-9-]+-(it|de|en|fr)[.]ts|cantons/canton-[a-z0-9-]+/(registry|seo|slugs)[.]ts)$\" as $canton_path_re\n"
+      + "            | [.[]?.files[]?] as $files\n"
       + "            | [$files[] | select(.filename | startswith(\"content/\"))] as $content\n"
       + "            | ($content | length) > 0\n"
       + "              and all($files[];\n"
-      + "                (.filename | test(\"^([.]github/workflows/|generator/scripts/create-article[.]mjs$)\") | not)\n"
-      + "                and (.previous_filename // \"\" | test(\"^(content/|[.]github/workflows/|generator/scripts/create-article[.]mjs$)\") | not))\n"
-      + "              and all($content[];\n"
-      + "                (.status == \"added\" or .status == \"modified\")\n"
-      + "                and (.filename | test(\"^content/(blog-body-canton-[a-z0-9-]+/(it|de|en|fr)/[^/]+[.]ts|blog-meta-canton-[a-z0-9-]+-(it|de|en|fr)[.]ts|cantons/canton-[a-z0-9-]+/(registry|seo|slugs)[.]ts)$\")))\n",
+      + "                (.status == \"added\" or .status == \"modified\" or .status == \"renamed\")\n"
+      + "                and (.filename | test($canton_path_re))\n"
+      + "                and (.status != \"renamed\"\n"
+      + "                  or ((.previous_filename // \"\") | test($canton_path_re))))\n",
     replace: '',
   },
   {

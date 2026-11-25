@@ -412,15 +412,15 @@ jobs:
           CALLER_WORKFLOW: generate-article.yml
           BODY_MAINTENANCE_PATH_RE: '^content/blog-body(-[a-z0-9-]+)?/(it|de|en|fr)/[^/]+[.]ts$'
           CANTON_ONLY: |-
-            [.[]?.files[]?] as $files
+            "^content/(blog-body-canton-[a-z0-9-]+/(it|de|en|fr)/[^/]+[.]ts|blog-meta-canton-[a-z0-9-]+-(it|de|en|fr)[.]ts|cantons/canton-[a-z0-9-]+/(registry|seo|slugs)[.]ts)$" as $canton_path_re
+            | [.[]?.files[]?] as $files
             | [$files[] | select(.filename | startswith("content/"))] as $content
             | ($content | length) > 0
               and all($files[];
-                (.filename | test("^([.]github/workflows/|generator/scripts/create-article[.]mjs$)") | not)
-                and (.previous_filename // "" | test("^(content/|[.]github/workflows/|generator/scripts/create-article[.]mjs$)") | not))
-              and all($content[];
-                (.status == "added" or .status == "modified")
-                and (.filename | test("^content/(blog-body-canton-[a-z0-9-]+/(it|de|en|fr)/[^/]+[.]ts|blog-meta-canton-[a-z0-9-]+-(it|de|en|fr)[.]ts|cantons/canton-[a-z0-9-]+/(registry|seo|slugs)[.]ts)$")))
+                (.status == "added" or .status == "modified" or .status == "renamed")
+                and (.filename | test($canton_path_re))
+                and (.status != "renamed"
+                  or ((.previous_filename // "") | test($canton_path_re))))
           DRY_RUN: ${{ inputs.dry_run }}
           SECTION_REQUESTED: ${{ inputs.section }}
           SOURCE_URL: ${{ inputs.url }}
