@@ -684,13 +684,16 @@ test('publisher: un cover identico nei namespace leased resta nel percorso prote
 });
 
 test('publisher: copertina condivisa identica sblocca le quattro route mentre il lease è attivo', async (t) => {
-  for (const identical of [true, false]) {
-    await t.test(identical ? 'bytes identici' : 'bytes diversi', async () => {
+  for (const mode of ['bytes identici', 'bytes diversi', 'lease perso prima del PUT']) {
+    await t.test(mode, async () => {
+      const identical = mode !== 'bytes diversi';
+      const leaseLost = mode === 'lease perso prima del PUT';
       const assetKey = 'images/blog/shared.webp';
       const localBytes = webpFixture(0x11);
       const remoteBytes = identical ? localBytes : webpFixture(0x22);
       const events = [];
       let held = false;
+      let verifications = 0;
       const fixture = await publishFourLocaleSharedAsset({
         localBytes, assetKey, events,
         imageLeaseOps: {
@@ -707,6 +710,7 @@ test('publisher: copertina condivisa identica sblocca le quattro route mentre il
             assert.equal(namespace, 'blog');
             assert.equal(held, true);
             events.push('lease-verified');
+            if (++verifications === 2 && leaseLost) throw new Error('lease non più posseduto');
           },
           release: async () => {
             assert.equal(held, true);
@@ -723,9 +727,9 @@ test('publisher: copertina condivisa identica sblocca le quattro route mentre il
         },
       });
       try {
-        assert.equal(fixture.result.failures, 0);
-        assert.equal(fixture.result.uploaded, identical ? 4 : 0);
-        assert.equal(fixture.result.deferredAssetPages, identical ? 0 : 4);
+        assert.equal(fixture.result.failures, leaseLost ? 1 : 0);
+        assert.equal(fixture.result.uploaded, identical && !leaseLost ? 4 : 0);
+        if (!leaseLost) assert.equal(fixture.result.deferredAssetPages, identical ? 0 : 4);
         assert.equal(held, false);
         assert.ok(!events.includes(`asset-upload:${assetKey}`));
         assert.ok(events.indexOf('asset-upload:images/unrelated.webp') < events.indexOf('lease-acquired'));

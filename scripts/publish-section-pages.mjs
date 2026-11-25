@@ -2298,6 +2298,7 @@ export async function publish({
   let verifiedRssFeeds = cantonRssFeeds;
   let rollbackRssPublication = null;
   let pageSnapshots = null;
+  const attemptedHtmlPuts = [];
   let pagesForUpload = pages;
   const requiredPagePathSet = new Set(requiredPagePaths);
   const rollbackRss = async ({ neutralize = false } = {}) => {
@@ -2330,7 +2331,7 @@ export async function publish({
     pageSnapshots = null;
     try {
       const result = await rollbackCantonPages({
-        pages: pagesForUpload,
+        pages: snapshotPagesBeforeUpload && !rollbackRssPublication ? attemptedHtmlPuts : pagesForUpload,
         snapshots,
         distDir,
         runImpl,
@@ -2570,6 +2571,8 @@ export async function publish({
     for (const namespace of namespacesByPage.get(page.edgeKey) ?? []) {
       await imageLeaseOps.verify(sharedCoverContext, namespace);
     }
+    // Even a failed PUT may already have changed the object remotely.
+    attemptedHtmlPuts.push(page);
     const { code = 1, stdout = '' } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', path.join(distDir, page.rel), page.edgeKey, PAGE_CACHE_CONTROL]);
     if (code === 0 && stdout.includes('✅ uploaded')) uploaded.push(page);
     else {
