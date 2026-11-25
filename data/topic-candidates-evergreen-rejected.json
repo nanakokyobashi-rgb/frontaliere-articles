@@ -7006,10 +7006,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-09T02:17:55.278Z",
-      "lastStrikeAt": "2026-11-25T01:20:37.303Z",
-      "expiresAt": "2026-12-25T01:20:37.303Z"
+      "lastStrikeAt": "2026-11-25T10:51:09.570Z",
+      "expiresAt": "2026-12-25T10:51:09.570Z"
     },
     {
       "keyword": "vivere a Erba e lavorare in Ticino da frontaliere",
@@ -7018,10 +7018,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-09T02:18:15.072Z",
-      "lastStrikeAt": "2026-11-25T01:22:25.094Z",
-      "expiresAt": "2026-12-25T01:22:25.094Z"
+      "lastStrikeAt": "2026-11-25T10:52:19.740Z",
+      "expiresAt": "2026-12-25T10:52:19.740Z"
     },
     {
       "keyword": "vivere a Plesio e lavorare in Ticino da frontaliere",
@@ -7030,10 +7030,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-09T02:18:38.569Z",
-      "lastStrikeAt": "2026-11-25T01:23:53.426Z",
-      "expiresAt": "2026-12-25T01:23:53.426Z"
+      "lastStrikeAt": "2026-11-25T10:53:06.767Z",
+      "expiresAt": "2026-12-25T10:53:06.767Z"
     },
     {
       "keyword": "vivere a Mandello del Lario e lavorare in Ticino da frontaliere",
@@ -7042,10 +7042,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-09T02:18:46.183Z",
-      "lastStrikeAt": "2026-11-25T01:24:47.837Z",
-      "expiresAt": "2026-12-25T01:24:47.837Z"
+      "lastStrikeAt": "2026-11-25T10:55:01.119Z",
+      "expiresAt": "2026-12-25T10:55:01.119Z"
     },
     {
       "keyword": "vivere a Lentate sul Seveso e lavorare in Ticino da frontaliere",
@@ -7054,10 +7054,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-09T02:18:54.517Z",
-      "lastStrikeAt": "2026-11-25T01:26:57.047Z",
-      "expiresAt": "2026-12-25T01:26:57.047Z"
+      "lastStrikeAt": "2026-11-25T10:55:50.373Z",
+      "expiresAt": "2026-12-25T10:55:50.373Z"
     },
     {
       "keyword": "imposte cantonali canton Berna aliquote e deduzioni",
@@ -7150,10 +7150,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-25T01:28:19.300Z",
-      "lastStrikeAt": "2026-11-25T01:28:19.300Z",
-      "expiresAt": "2026-12-25T01:28:19.300Z"
+      "lastStrikeAt": "2026-11-25T10:57:39.246Z",
+      "expiresAt": "2026-12-25T10:57:39.246Z"
     },
     {
       "keyword": "vivere a Biandronno e lavorare in Ticino da frontaliere",
@@ -7162,10 +7162,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-25T01:30:24.787Z",
-      "lastStrikeAt": "2026-11-25T01:30:24.787Z",
-      "expiresAt": "2026-12-25T01:30:24.787Z"
+      "lastStrikeAt": "2026-11-25T10:58:32.704Z",
+      "expiresAt": "2026-12-25T10:58:32.704Z"
     },
     {
       "keyword": "vivere a Carnago e lavorare in Ticino da frontaliere",
@@ -7174,10 +7174,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-25T01:32:11.787Z",
-      "lastStrikeAt": "2026-11-25T01:32:11.787Z",
-      "expiresAt": "2026-12-25T01:32:11.787Z"
+      "lastStrikeAt": "2026-11-25T10:59:26.916Z",
+      "expiresAt": "2026-12-25T10:59:26.916Z"
     },
     {
       "keyword": "vivere a Tradate e lavorare in Ticino da frontaliere",
@@ -7186,10 +7186,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-25T01:33:43.693Z",
-      "lastStrikeAt": "2026-11-25T01:33:43.693Z",
-      "expiresAt": "2026-12-25T01:33:43.693Z"
+      "lastStrikeAt": "2026-11-25T11:00:13.902Z",
+      "expiresAt": "2026-12-25T11:00:13.902Z"
     },
     {
       "keyword": "vivere a Toceno e lavorare in Ticino da frontaliere",
@@ -7198,10 +7198,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-25T01:34:32.986Z",
-      "lastStrikeAt": "2026-11-25T01:34:32.986Z",
-      "expiresAt": "2026-12-25T01:34:32.986Z"
+      "lastStrikeAt": "2026-11-25T11:02:10.420Z",
+      "expiresAt": "2026-12-25T11:02:10.420Z"
     },
     {
       "keyword": "vivere a Briosco e lavorare in Ticino da frontaliere",
@@ -7210,10 +7210,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-25T01:37:24.391Z",
-      "lastStrikeAt": "2026-11-25T01:37:24.391Z",
-      "expiresAt": "2026-12-25T01:37:24.391Z"
+      "lastStrikeAt": "2026-11-25T11:03:45.900Z",
+      "expiresAt": "2026-12-25T11:03:45.900Z"
     },
     {
       "keyword": "vivere a Cabiate e lavorare in Ticino da frontaliere",
@@ -15621,14 +15621,6 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.swissinfo.ch/ita/gr%3a-dal-2027%2c-nuovo-calcolo-della-tassa-di-circolazione/92422646": {
-      "section": "svizzera",
-      "ts": 1795429244477
-    },
-    "frontaliere::https://www.tio.ch/newsblog/valute-e-frontiere/1758248/smart-working-le-normative-per-i-frontalieri": {
-      "section": "frontaliere",
-      "ts": 1795429866445
-    },
     "frontaliere::https://www4.ti.ch/di/spop/stranieri/richiesta-nuovo-g": {
       "section": "frontaliere",
       "ts": 1795436784474
@@ -15756,6 +15748,10 @@
     "svizzera::https://www.rsi.ch/s/4257428": {
       "section": "svizzera",
       "ts": 1795596455762
+    },
+    "frontaliere::https://www.ocst.ch/il-lavoro/411-professioni/404-sociosanitario/2638-salute-premi-di-cassa-malati-e-responsabilita-una-riflessione-sul-crescente-costo-della-sanita-ticinese": {
+      "section": "frontaliere",
+      "ts": 1795603807220
     }
   }
 }
