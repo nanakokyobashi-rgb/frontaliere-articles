@@ -96,6 +96,9 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.soletta-preventivo-approvato.title': 'Soleure : la commission approuve le budget 2027',
     'blog.article.soletta-preventivo-approvato.excerpt': 'Le budget 2027 prévoit un déficit d’environ CHF 42 millions, en amélioration de CHF 33,4 millions par rapport à la proposition initiale.',
     'blog.article.soletta-preventivo-approvato.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.soletta-voto-puk-soh.title': 'Soleure : le Kantonsrat rejette la PUK sur la SOH',
+    'blog.article.soletta-voto-puk-soh.excerpt': 'Le Kantonsrat de Soleure rejette la PUK sur la SOH : 26 favorables, 65 défavorables et 4 abstentions après le rapport sur la gestion du personnel.',
+    'blog.article.soletta-voto-puk-soh.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSoFr;

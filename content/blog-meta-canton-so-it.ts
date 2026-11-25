@@ -96,6 +96,9 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.soletta-preventivo-approvato.title': 'Soletta: la commissione approva il preventivo 2027',
     'blog.article.soletta-preventivo-approvato.excerpt': 'Il preventivo 2027 prevede un disavanzo di circa CHF 42 milioni, migliorato di CHF 33,4 milioni rispetto alla proposta iniziale.',
     'blog.article.soletta-preventivo-approvato.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.soletta-voto-puk-soh.title': 'Soletta: il Kantonsrat respinge la PUK sulla SOH',
+    'blog.article.soletta-voto-puk-soh.excerpt': 'Il Kantonsrat di Soletta respinge la PUK sulla SOH: 26 favorevoli, 65 contrari e 4 astensioni dopo il rapporto sulla gestione del personale.',
+    'blog.article.soletta-voto-puk-soh.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSoIt;
