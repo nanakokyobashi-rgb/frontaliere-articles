@@ -15,6 +15,10 @@
     "canton-ag::https://www.watson.ch/schweiz/aargau/195042127-aargauer-parlament-senkt-kantonssteuer-nach-einem-jahr-erneut": {
       "section": "canton-ag",
       "ts": 1795544913769
+    },
+    "canton-ag::https://www.reussbote.ch/remetschwil-sagt-ja-zur-gesamtrevision-seiner-nutzungsplanung": {
+      "section": "canton-ag",
+      "ts": 1795588167782
     }
   }
 }
