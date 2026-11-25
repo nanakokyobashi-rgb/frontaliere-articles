@@ -114,6 +114,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.gpk-risparmi-bilancio-2027.title': 'GPK schlägt Einsparungen für das kantonale Budget 2027 vor',
     'blog.article.gpk-risparmi-bilancio-2027.excerpt': 'Das kantonale Budget 2027 sieht ein Defizit von rund CHF 62,8 Millionen vor; die kantonalen Löhne werden um 1 Prozent steigen.',
     'blog.article.gpk-risparmi-bilancio-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.lkw-unfall-chlaggi-strada.title': 'Umgekippter Lastwagen zwischen Guntmadingen und Neunkirch: H13 gesperrt',
+    'blog.article.lkw-unfall-chlaggi-strada.excerpt': 'Am 25. November 2026 ist ein Lastwagen auf der Hauptstraße zwischen Guntmadingen und Neunkirch umgekippt, wodurch die H13 mehrere Stunden lang gesperrt wurde.',
+    'blog.article.lkw-unfall-chlaggi-strada.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;

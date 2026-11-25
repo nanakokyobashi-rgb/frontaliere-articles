@@ -7380,9 +7380,9 @@ Quindi, PRIMA di scrivere una issue del tipo "non presente / non menzionato nell
 2. Se lo trovi, NON segnalarlo. Un fatto ripreso dalla fonte, anche alla lettera, è corretto per definizione.
 3. Se non lo trovi, compila "sourceQuote" con la porzione ESATTA di fonte più vicina al claim (o "" se la fonte non tratta affatto l'argomento). Le issue di questo tipo vengono verificate automaticamente contro il testo della fonte e SCARTATE se il claim risulta invece presente.
 
-Resta vero il contrario: un fatto specifico che nella fonte NON c'è e che non è nei fatti verificati (istituzioni, statistiche precise, dichiarazioni, importi, date) va segnalato come "critical" senza esitazione. La severità si misura sull'evidenza, non sul dubbio.
+Resta vero il contrario: un fatto specifico che nella fonte NON c'è e che non è nei fatti verificati (istituzioni, statistiche precise, dichiarazioni, importi, date) va segnalato come "critical" senza esitazione. La severità si misura sull'evidenza, non sul dubbio.`;
 
-${JSON_QUOTE_SAFETY_RULE_IT}
+  const proofResponseFormat = `${JSON_QUOTE_SAFETY_RULE_IT}
 
 Rispondi SOLO in JSON valido:
 {
@@ -7401,7 +7401,15 @@ Rispondi SOLO in JSON valido:
 
 Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
 
-  const prompt = `${evidencePrefix}\n\n${verificationInstructions}\n\n${relevanceInstructions}\n\n${proofSuffix}`;
+  const prompt = `${evidencePrefix}\n\n${verificationInstructions}\n\n${relevanceInstructions}\n\n${proofSuffix}\n\n${proofResponseFormat}`;
+  const compactProofInstructions = `═══ VALUTAZIONE EDITORIALE E PROVE (OBBLIGATORIA) ═══
+Valuta body1–body3 insieme. Un riassunto o una parafrasi non basta: cerca un confronto, calcolo o nesso concreto assente dalla fonte e dimostrabile con periodi, unità e basi coerenti. Attribuisci i fatti alla fonte. Segnala angoli frontalieri forzati, reportage, interviste o verifiche proprie non documentati e cause, effetti, previsioni o consigli fiscali/finanziari privi di prove.
+Classificazioni: grounded_analysis (contributo tracciabile), source_restatement (riassunto/parafrasi), unsupported_inference (affermazione non provata), insufficient_evidence (prove insufficienti).
+articleQuote: unico passaggio contiguo di body1–body3, almeno 40 caratteri e 7 parole. evidenceQuotes: copia almeno 16 caratteri consecutivi dalla fonte o da un riferimento verificato. Conserva lingua, cifre e punteggiatura. Escludi titolo, sommario, traduzioni, parafrasi e puntini aggiunti. Verifica ogni citazione nel blocco originale.
+finding: in italiano, almeno 35 caratteri e 6 parole. Per grounded_analysis, spiega il contributo usando almeno ${MIN_EDITORIAL_ARTICLE_ANCHORS} termini distinti identici a quelli di articleQuote (nomi, parole di almeno cinque caratteri o cifre).
+critical: falsità, contraddizione o fatto specifico assente sia dalla fonte sia dai fatti verificati (es. ente, percentuale precisa, dichiarazione, importo o data). Per evergreen la sola assenza dalla fonte non basta: verifica i riferimenti e segnala una falsità o un sospetto concreto. major: sospetto concreto non confermabile. minor: imprecisione non fuorviante o contesto corretto. FAIL con almeno 1 critical o 3 major, altrimenti PASS.
+Prima di segnalare un fatto assente, rileggi la fonte cercando anche parafrasi. Se presente, lascia il fatto. Se assente, copia in sourceQuote il passaggio esatto più vicino o usa una stringa vuota se la fonte non tratta l’argomento. Le issue guidano la riscrittura e sono confrontate con la fonte.`;
+
   const canCompact = sourceUrl.startsWith('evergreen://')
     || (!isEvergreenArticle && !isSyntheticDataset && /^https?:\/\//i.test(sourceUrl));
   const compactSourceInstructions = isEvergreenArticle
@@ -7420,7 +7428,9 @@ ${compactSourceInstructions}
 
 ${relevanceInstructions}
 
-${proofSuffix}`
+${compactProofInstructions}
+
+${proofResponseFormat}`
     : null;
 
   // ── Multi-model consensus: query 2 models, require agreement ──
@@ -7559,7 +7569,13 @@ ${proofSuffix}`
       maxPrimaryRounds - fcAttempt + 1,
       Math.max(1, Math.floor(remainingMs / FACTCHECK_MIN_ROUND_MS)),
     );
-    const deadlineMs = now + Math.floor(remainingMs / remainingRounds);
+    const roundBudgetMs = Math.floor(remainingMs / remainingRounds);
+    const deadlineMs = now + roundBudgetMs;
+    // Leave a full minimum window for an independent recovery when the round
+    // can give the initially requested models at least twice that time.
+    const initialDeadlineMs = roundBudgetMs >= 3 * FACTCHECK_MIN_ROUND_MS
+      ? deadlineMs - FACTCHECK_MIN_ROUND_MS
+      : deadlineMs;
     const primaryModels = verificationModels.slice(0, 2);
     let modelsToQuery = primaryModels;
     if (priorVoters.length) {
@@ -7575,7 +7591,7 @@ ${proofSuffix}`
         : index > 0 && modelsToQuery[0] === AI_MODELS.CODEX_CLI_PRIMARY;
       return _runSingleFactCheck(model, verificationPrompt, {
         fresh: fcAttempt > 1,
-        deadlineMs,
+        deadlineMs: initialDeadlineMs,
         invalidVerdictModels,
         editorialProofFailures,
         isEvergreen: isEvergreenArticle,
@@ -15748,7 +15764,13 @@ Rispondi con un JSON object (no markdown, no code fences):
 {"${field}": "..."}`;
 }
 
-function buildPendingBodyRetranslationPrompt({ langName, field, itValue, partLabel = '' }) {
+function buildPendingBodyRetranslationPrompt({ langName, field, itValue, partLabel = '', rejectionReason = '' }) {
+  const correction = {
+    'numeric-association': 'Controlla ogni coppia dato-etichetta separatamente. Mantieni nella stessa proposizione ogni valore e il suo nome, anche se il nome è ripetuto.',
+    'numeric-values': 'Confronta tutte le cifre con la fonte prima di rispondere. Riproduci ogni valore, segno, unità e percentuale nell’ordine originale.',
+    'line-skeleton': 'Confronta il Markdown riga per riga. Conserva le righe vuote e la posizione di ciascun titolo, punto elenco e citazione.',
+    completeness: 'Verifica che ogni frase originale compaia nella traduzione, compresi gli incisi e le frasi finali.',
+  }[rejectionReason];
   return `Traduci COMPLETAMENTE in ${langName} il seguente corpo dell'articolo per il sito Frontaliere Ticino.
 
 VINCOLI OBBLIGATORI:
@@ -15761,7 +15783,7 @@ VINCOLI OBBLIGATORI:
 - se compaiono marcatori opachi <span data-frontaliere-table-column="riga-cella"></span>, copiali esattamente nella stessa cella della tabella: identificano la colonna sorgente e non sono testo da tradurre;
 - non aggiungere spiegazioni, prefissi o code fences.
 
-CONTENUTO ITALIANO DA TRADURRE:
+${correction ? `CORREZIONE RICHIESTA DOPO LA VALIDAZIONE: ${correction}\n\n` : ''}CONTENUTO ITALIANO DA TRADURRE:
 - ${field}${partLabel}: ${itValue}
 
 Rispondi con un JSON object (no markdown, no code fences):
@@ -16012,6 +16034,8 @@ async function translatePendingBodyWithHistoricalChain(
     fieldName: field,
     translate: async ({ text: masked }) => {
       const wordCount = countWords(masked || '');
+      let rejectionReason = '';
+      const onReject = (reason) => { rejectionReason = reason; };
       const translateSegments = (chunkWords) => chunkTranslator(
         masked,
         field,
@@ -16020,10 +16044,11 @@ async function translatePendingBodyWithHistoricalChain(
           field,
           itValue: chunk,
           partLabel: total > 1 ? `, parte ${i + 1} di ${total}` : '',
+          rejectionReason,
         }),
         `${locale}:${field}-pending-retry`,
         locale,
-        { forceLegacy: true, chunkWords },
+        { forceLegacy: true, chunkWords, onReject },
       );
       const retryShorter = () => wordCount > shorterChunkWords && !pendingBodyLaneShouldStop()
         ? translateSegments(shorterChunkWords)
@@ -16062,7 +16087,7 @@ async function translatePendingBodyWithHistoricalChain(
             () => '',
             `${locale}:${field}-pending-retry-validation`,
             locale,
-            { pretranslatedResult: { [field]: translated } },
+            { pretranslatedResult: { [field]: translated }, onReject },
           );
         }
       } catch (error) {
@@ -16294,13 +16319,14 @@ async function translateArticle(data) {
     makeChunkPrompt,
     labelPrefix,
     targetLang,
-    { pretranslatedResult = null, forceLegacy = false, chunkWords } = {},
+    { pretranslatedResult = null, forceLegacy = false, chunkWords, onReject } = {},
   ) {
     // Recovery/free-MT callers may already have carried the transport markers
     // through a first provider. Normalize them before deriving the next
     // expected mapping so nested validation remains idempotent.
     bodyText = stripTableHeaderColumnMarkers(bodyText);
     const reject = (reason) => {
+      onReject?.(reason);
       console.error(`TRANSLATION_BODY_REJECT locale=${targetLang} field=${fieldKey} reason=${reason}`);
       return null;
     };
@@ -17505,7 +17531,7 @@ async function translateArticle(data) {
       const placePart = `(?:${placeAbbreviation})?${placeWord}`;
       const locativePrefix = /(?:^|(?<=[\n,:;!?|])|(?<=\.)(?=\s))[^\S\n]*(?:>[^\S\n]*)*(?:(?:[-+*]|\d+[.)])[^\S\n]+)?(?<openers>(?:[("'\[“‘«‹*_][^\S\n]*)*)/.source;
       const locativePreposition = /(?:(?:[AaÀà]|[Ii]n|[Aa]t|[Aa]u|[Aa]ux|[Zz]u|[Nn]el(?:l[aeio])?|[Nn]ei|[Nn]egli|[Ii]m|[Aa]m|[Ee]n|[Aa]l(?:l[aeio])?|[Aa]gli|[Oo]n|[Dd]ans|[Ss]ur|[Aa]n|[Ss]u(?:l(?:l[aeio])?|i|gli)?)[\p{Zs}\t]+|(?:[Aa]ll|[Nn]ell|[Ss]ull)[’\x27])/.source;
-      const placeArticle = /(?:(?:di|del|della|de|du|des|la|le|der|den|dem|the)[\p{Zs}\t]+)?/.source;
+      const placeArticle = /(?:(?:di|del|della|de|du|des|la|le|der|den|dem|the)[\p{Zs}\t]+|[lL][’\x27])?/.source;
       const placeContinuation = /(?:di|de|del|della|la|le|am|im)[\p{Zs}\t]+/.source;
       const leadingLocative = new RegExp(
         `${locativePrefix}${locativePreposition}${placeArticle}(?<place>${placePart}(?:[\\p{Zs}\\t]+(?:${placeContinuation})?${placePart})*)(?:[\\p{Zs}\\t]*(?<closers>[)\\]"\x27”’»›*_]*)(?<comma>,))?`,

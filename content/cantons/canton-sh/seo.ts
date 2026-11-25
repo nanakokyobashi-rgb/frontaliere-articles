@@ -1450,6 +1450,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lkw-unfall-chlaggi-strada': {
+    title: 'Camion ribaltato tra Guntmadingen e Neunkirch: H13 chiusa',
+    description: 'Il 25 novembre 2026 un camion si è ribaltato tra Guntmadingen e Neunkirch, causando la chiusura della H13 per diverse ore.',
+    keywords: 'frontalieri, ticino, svizzera, italia, camion, ribaltato, guntmadingen, neunkirch',
+    ogTitle: 'Camion ribaltato tra Guntmadingen e Neunkirch H13 chiusa',
+    ogDescription: 'Il 25 novembre 2026 un camion si è ribaltato sulla strada principale tra Guntmadingen e Neunkirch. La H13 è stata chiusa per diverse ore. Intervento di Schaffhauser Polizei e soccorso.',
+    canonicalPath: '/articoli-sciaffusa/lkw-unfall-chlaggi-strada/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Camion ribaltato tra Guntmadingen e Neunkirch: H13 chiusa",
+      "description": "Il 25 novembre 2026 un camion si è ribaltato tra Guntmadingen e Neunkirch, causando la chiusura della H13 per diverse ore.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lkw-unfall-chlaggi-strada.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-25T22:36:55+00:00",
+      "dateModified": "2026-11-25T22:36:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/lkw-unfall-chlaggi-strada/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

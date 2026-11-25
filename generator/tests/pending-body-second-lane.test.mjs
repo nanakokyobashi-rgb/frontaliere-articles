@@ -134,7 +134,7 @@ function buildCallWithRetry(replies) {
 }
 
 const TRANSLATE_IN_CHUNKS_SRC = (() => {
-  const start = src.indexOf('  async function translateInChunks(\n    bodyText,\n    fieldKey,\n    makeChunkPrompt,\n    labelPrefix,\n    targetLang,\n    { pretranslatedResult = null, forceLegacy = false, chunkWords } = {},\n  ) {');
+  const start = src.indexOf('  async function translateInChunks(\n    bodyText,\n    fieldKey,\n    makeChunkPrompt,\n    labelPrefix,\n    targetLang,\n    { pretranslatedResult = null, forceLegacy = false, chunkWords, onReject } = {},\n  ) {');
   assert.notEqual(start, -1, 'translateInChunks non trovata in create-article.mjs');
   const end = src.indexOf('\n  }\n', start);
   assert.notEqual(end, -1, 'fine di translateInChunks non trovata in create-article.mjs');
@@ -945,7 +945,9 @@ test('la catena storica riusa il chunker per un body pending sopra soglia', asyn
   });
   assert.equal(wholeBodyCalls, 0);
   assert.equal(translated, expected);
-  assert.deepEqual(chunkOptions, { forceLegacy: true, chunkWords: 240 });
+  const { onReject, ...options } = chunkOptions;
+  assert.equal(typeof onReject, 'function');
+  assert.deepEqual(options, { forceLegacy: true, chunkWords: 240 });
 });
 
 test('la catena storica rifiuta il caller senza il traduttore chunked prima di tradurre', async () => {
@@ -988,11 +990,15 @@ test('il fallback storico corto applica il contratto strutturale prima del final
   const splitIntoTranslationChunks = buildChunker();
   const countWords = (text) => String(text).trim().split(/\s+/u).filter(Boolean).length;
   const source = 'Prima <a href="https://example.test/html">anchor</a> dopo altre parole.';
+  const reasons = [];
   const historical = makeHistoricalTranslator(
     translateFieldFreeMt,
     translatedStringOrNull,
     balanceMarkdownMarkers,
-    ({ field, itValue }) => `body ${field}: ${itValue}`,
+    ({ field, itValue, rejectionReason }) => {
+      reasons.push(rejectionReason);
+      return `body ${field}: ${itValue}`;
+    },
     countWords,
     TRANSLATION_CHUNK_THRESHOLD,
     { error() {}, warn() {}, log() {} },
@@ -1059,14 +1065,15 @@ test('il fallback storico corto applica il contratto strutturale prima del final
   const unusableBodyField = () => {
     throw Object.assign(new Error('unusable body'), { code: 'unusable-body-field' });
   };
-  for (const [wordCount, rejectedResponse] of [
-    [165, (translated) => ({ body1: translated.replace(' 40 ', ' 999 ') })],
+  for (const [wordCount, rejectedResponse, expectedReason = ''] of [
+    [165, (translated) => ({ body1: translated.replace(' 40 ', ' 999 ') }), 'numeric-values'],
     [165, () => ({})],
     [165, unusableBodyField],
     [360, unusableBodyField],
   ]) {
     const mediumBody = Array.from({ length: wordCount }, (_, i) => i === 40 ? '40' : `parola${i}`).join(' ');
     const mediumCalls = [];
+    reasons.length = 0;
     const mediumCallWithRetry = async (prompt) => {
       const part = prompt.slice('body body1: '.length);
       mediumCalls.push(countWords(part));
@@ -1085,6 +1092,7 @@ test('il fallback storico corto applica il contratto strutturale prima del final
     const firstBatchSize = Math.ceil(wordCount / 240);
     assert.equal(mediumCalls.slice(0, firstBatchSize).reduce((sum, size) => sum + size, 0), wordCount);
     const shorterCalls = mediumCalls.slice(firstBatchSize);
+    assert.deepEqual(reasons.slice(firstBatchSize), shorterCalls.map(() => expectedReason));
     assert.ok(shorterCalls.length >= 2 && shorterCalls.every((size) => size <= 120));
   }
 
@@ -2018,6 +2026,21 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
   const locativeSource = 'A Zugo il contributo è di 12 franchi; Zugo rimborsa anche 18 franchi.';
   const locativeTarget = 'In Zugo, the contribution is 12 francs; Zugo also reimburses 18 francs.';
   assert.equal(await makeTranslator(() => locativeTarget, 50)(locativeSource), locativeTarget);
+
+  const frenchLocativeSource = "All'Université de Genève si contano 12 richieste; all'Université de Lausanne si contano 18 richieste.";
+  for (const apostrophe of ['’', "'"]) {
+    const target = `À l${apostrophe}Université de Genève, on compte 12 demandes; à l${apostrophe}Université de Lausanne, on compte 18 demandes.`;
+    const swapped = `À l${apostrophe}Université de Lausanne, on compte 12 demandes; à l${apostrophe}Université de Genève, on compte 18 demandes.`;
+    assert.equal(await makeTranslator(() => target, 80)(frenchLocativeSource), target);
+    assert.equal(await makeTranslator(() => swapped, 80)(frenchLocativeSource), null);
+  }
+
+  const repeatedFrenchLocativeSource = "All'Université de Genève si contano 12 richieste; l’Université de Genève ne ha esaminate 18.";
+  const repeatedFrenchLocativeTarget = 'À l’Université de Genève, on compte 12 demandes; l’Université de Genève en a examiné 18.';
+  assert.equal(
+    await makeTranslator(() => repeatedFrenchLocativeTarget, 80)(repeatedFrenchLocativeSource),
+    repeatedFrenchLocativeTarget,
+  );
 
   const twoPlacesSource = 'A Zugo il contributo è di 12 franchi; a Baar il contributo è di 18 franchi.';
   const swappedPlaces = 'In Baar, the contribution is 12 francs; in Zugo, the contribution is 18 francs.';
