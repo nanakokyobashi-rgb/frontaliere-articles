@@ -114,6 +114,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.gpk-risparmi-bilancio-2027.title': 'GPK propone risparmi per il budget cantonale 2027',
     'blog.article.gpk-risparmi-bilancio-2027.excerpt': 'Il preventivo cantonale 2027 prevede un disavanzo di circa CHF 62,8 milioni; gli stipendi cantonali aumenteranno dell\'1 per cento.',
     'blog.article.gpk-risparmi-bilancio-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.lkw-unfall-chlaggi-strada.title': 'Camion ribaltato tra Guntmadingen e Neunkirch: H13 chiusa',
+    'blog.article.lkw-unfall-chlaggi-strada.excerpt': 'Il 25 novembre 2026 un camion si è ribaltato sulla strada principale tra Guntmadingen e Neunkirch, causando la chiusura della H13 per diverse ore.',
+    'blog.article.lkw-unfall-chlaggi-strada.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;
