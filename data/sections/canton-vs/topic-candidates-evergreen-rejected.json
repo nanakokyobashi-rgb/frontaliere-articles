@@ -4,22 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://vework-public.vs.ch/app/publication/fr/08-03-2026/3": {
-      "section": "canton-vs",
-      "ts": 1795412604365
-    },
-    "canton-vs::https://www.vs.ch/web/communication/w/financement-uniforme-des-prestations-de-l-assurance-maladie-efas-mise-en-consultation-de-l-avant-projet-de-modification-de-la-l%c3%a9gislation-cantonale-d-application": {
-      "section": "canton-vs",
-      "ts": 1795455962990
-    },
-    "canton-vs::https://www.rhonefm.ch/valais/sante--le-valais-met-en-consultation-deux-modifications-legislatives-1875024": {
-      "section": "canton-vs",
-      "ts": 1795456475653
-    },
-    "canton-vs::https://www.pomona.ch/story/829350/viel-arbeit-f%c3%bcr-migrationsamt-kanton-wallis-rechnet-mit-deutlich-mehr-gesuchen-von-ukrainern": {
-      "section": "canton-vs",
-      "ts": 1795456478173
-    },
     "canton-vs::https://www.pomona.ch/story/830157/der-herbst-der-langen-messer-wilde-wahl-oder-gar-parlamentsstreik-wie-das-svpticket-gesprengt-werden-k%c3%b6nnte": {
       "section": "canton-vs",
       "ts": 1795520624841
@@ -47,6 +31,38 @@
     "canton-vs::https://www.pomona.ch/story/830565/gastrowallis-b%c3%bcndelt-digitale-angebote-f%c3%bcr-das-gastgewerbe": {
       "section": "canton-vs",
       "ts": 1795564156651
+    },
+    "canton-vs::https://www.ossolanews.it/2026/11/25/leggi-notizia/argomenti/attualita-26/articolo/per-il-frontalierato-e-finito-il-tempo-delle-vacche-grasse.html": {
+      "section": "canton-vs",
+      "ts": 1795630226372
+    },
+    "canton-vs::https://www.pomona.ch/story/831143/gemeinde-naters-erh%c3%b6ht-trinkwassergeb%c3%bchren": {
+      "section": "canton-vs",
+      "ts": 1795630228326
+    },
+    "canton-vs::https://www.pomona.ch/story/829630/besser-geplant-durch-den-schnee-im-oberwallis-gepr%c3%bcfte-winterwanderwege-sind-neu-mit-infos-digital-abrufbar": {
+      "section": "canton-vs",
+      "ts": 1795630230061
+    },
+    "canton-vs::https://www.pomona.ch/story/830602/verbotene-werbung-gesundheitstipp-gewinnt-vor-gericht": {
+      "section": "canton-vs",
+      "ts": 1795630231338
+    },
+    "canton-vs::https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/11/25/ceremonie-des-records-en-dialyse": {
+      "section": "canton-vs",
+      "ts": 1795630247378
+    },
+    "canton-vs::https://www.pomona.ch/story/830603/bombendrohungen-an-deutschen-schulen": {
+      "section": "canton-vs",
+      "ts": 1795630249292
+    },
+    "canton-vs::https://www.pomona.ch/story/823923/durch-fr%c3%bchzeitige-weichenstellung-zur-finanziellen-freiheit": {
+      "section": "canton-vs",
+      "ts": 1795630250719
+    },
+    "canton-vs::https://www.pomona.ch/story/830417/vor-der-akwabstimmung-so-k%c3%b6nnte-die-kernkraft-der-zukunft-aussehen": {
+      "section": "canton-vs",
+      "ts": 1795630252059
     }
   }
 }
