@@ -15621,18 +15621,6 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.swissinfo.ch/ita/domenica-votazioni-anche-in-nove-cantoni/92419436": {
-      "section": "svizzera",
-      "ts": 1795395304762
-    },
-    "svizzera::https://www.rsi.ch/s/4256945": {
-      "section": "svizzera",
-      "ts": 1795395325445
-    },
-    "svizzera::https://www.ilgiorno.it/como/cronaca/polizze-sanitarie-alle-stelle-in-f0a74e0f": {
-      "section": "svizzera",
-      "ts": 1795403176999
-    },
     "frontaliere::https://www.tio.ch/newsblog/valute-e-frontiere/1891645/frontalieri-e-smart-working-nel-2026-la-soglia-fiscale-del-25-e-confermata": {
       "section": "frontaliere",
       "ts": 1795418612092
@@ -15756,6 +15744,14 @@
     "frontaliere::https://www.varesenews.it/2026/11/fumarola-cisl-a-como-servono-salari-giusti-e-regole-certe-per-i-frontalieri/2749213": {
       "section": "frontaliere",
       "ts": 1795567297719
+    },
+    "frontaliere::https://cambiavalute.ch/guide/permessi/permesso-g-per-frontalieri-guida-2026-al-rilascio-rinnovo-e-telelavoro": {
+      "section": "frontaliere",
+      "ts": 1795582506324
+    },
+    "frontaliere::https://www.biancolavoro.it/lavorare-in-svizzera-guida-aggiornata-a-permessi-stipendi-e-frontalieri": {
+      "section": "frontaliere",
+      "ts": 1795582633707
     }
   }
 }
