@@ -4739,19 +4739,29 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(checkout, /^          persist-credentials: false$/m);
 
   const detect = wf.match(/^      - name: Detect announced pages missing on R2\n(?:(?!^      - ).*\n)*/m)?.[0] ?? '';
-  assert.match(detect, /node scripts\/reconcile-section-pages\.mjs [^\n]*\n[^\n]*\n\s+source_commit="\$\(git rev-parse HEAD\)"\n\s+current_main="\$\(bash scripts\/ci\/read-main-head\.sh\)"[\s\S]*?if \[ "\$source_commit" != "\$current_main" \]; then/);
-  assert.match(detect, /if \[ "\$source_commit" != "\$current_main" \]; then\n[^\n]*\n\s+\{\n\s+echo 'dispatch=0'\n\s+echo 'pending_edge_flip=false'\n\s+echo 'head_guard=false'\n\s+\} >> "\$GITHUB_OUTPUT"\n\s+exit 0\n\s+fi[\s\S]*?echo "source_commit=\$source_commit"[\s\S]*?echo 'head_guard=true'/);
+  assert.match(detect, /node scripts\/reconcile-section-pages\.mjs [^\n]*\n[^\n]*\n\s+source_commit="\$\(git rev-parse HEAD\)"\n\s+current_main="\$\(bash scripts\/ci\/read-main-head\.sh\)"[\s\S]*?if ! bash scripts\/ci\/section-source-unaffected\.sh --bookkeeping-only "\$source_commit" "\$current_main"; then/);
+  assert.match(detect, /if ! bash scripts\/ci\/section-source-unaffected\.sh --bookkeeping-only "\$source_commit" "\$current_main"; then\n[^\n]*\n\s+\{\n\s+echo 'dispatch=0'\n\s+echo 'pending_edge_flip=false'\n\s+echo 'head_guard=false'\n\s+\} >> "\$GITHUB_OUTPUT"\n\s+exit 0\n\s+fi[\s\S]*?echo "source_commit=\$current_main"[\s\S]*?echo 'head_guard=true'/);
+  const backfillStart = wf.indexOf('- name: Backfill (dispatch fast-publish-section per sezione)');
+  const backfillEnd = wf.indexOf('\n      # Il workflow_run di un child', backfillStart);
+  assert.ok(backfillStart >= 0 && backfillEnd > backfillStart, 'backfill di sezione non riconoscibile');
+  const backfill = wf.slice(backfillStart, backfillEnd);
+  assert.match(backfill, /verifyMainHeadAtDispatch\(\) \{[\s\S]*?bash scripts\/ci\/read-main-head\.sh[\s\S]*?section-source-unaffected\.sh --bookkeeping-only "\$SOURCE_COMMIT" "\$current_main"[\s\S]*?dispatch_source="\$current_main"/);
+  const dispatchIndex = backfill.indexOf('if ! gh workflow run fast-publish-section.yml');
+  const finalBackfillGuard = backfill.lastIndexOf('if verifyMainHeadAtDispatch; then');
+  const dispatchLoop = backfill.indexOf('while IFS=');
+  assert.ok(finalBackfillGuard >= 0 && finalBackfillGuard < dispatchLoop && dispatchLoop < dispatchIndex,
+    'la coorte deve rileggere main prima del ciclo e mantenere una sola revisione');
   assert.match(wf, /args=\([\s\S]*-f "section=\$section"[\s\S]*-f "article_ids=\$ids"[\s\S]*'bootstrap=false'[\s\S]*'dry_run=false'/);
   assert.match(wf, /-f "missing_page_paths=\$missing_page_paths"/);
   assert.match(wf, /-f "known_missing_page_paths=\$known_missing_page_paths"/);
   assert.match(wf, /-f "dispatch_cohort=\$dispatch_cohort"/);
-  assert.match(wf, /-f 'coordinated_recovery=true'[\s\S]*-f "source_commit=\$SOURCE_COMMIT"[\s\S]*-f "source_main_commit=\$SOURCE_COMMIT"[\s\S]*-f "dispatch_nonce=/);
+  assert.match(wf, /-f 'coordinated_recovery=true'[\s\S]*-f "source_commit=\$dispatch_source"[\s\S]*-f "source_main_commit=\$dispatch_source"[\s\S]*-f "dispatch_nonce=/);
   assert.match(wf, /-f 'replay_api_after_publish=false'/);
   assert.match(wf, /-f 'coordinated_recovery=true'/);
   assert.match(wf, /-f 'allow_deferred_live_release=true'/);
   assert.doesNotMatch(wf, /-f 'replay_api_after_publish=true'/);
   assert.match(wf, /-f "api_release_commit=\$API_RELEASE_COMMIT"/);
-  assert.match(wf, /-f "source_commit=\$SOURCE_COMMIT"/);
+  assert.match(wf, /-f "source_commit=\$dispatch_source"/);
   assert.doesNotMatch(wf, /Wait for all staged backfills before the API replay/);
   assert.match(wf, /Replay API after event-driven backfill readiness/);
   assert.match(wf, /event_replay=true/);
@@ -4770,7 +4780,7 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   const postBackfillProbe = globalReplay.indexOf('reconcile-sections-after-backfill.json');
   const postBackfillMissingGuard = globalReplay.indexOf('.counts.missingPages // 0');
   const finalHeadGuard = globalReplay.indexOf('verifyMainHeadAtDispatch() {');
-  const finalHeadComparison = globalReplay.indexOf('if [ "$current_main" != "$SOURCE_COMMIT" ]', finalHeadGuard);
+  const finalHeadComparison = globalReplay.indexOf('--bookkeeping-only "$SOURCE_COMMIT" "$current_main"', finalHeadGuard);
   const globalApiDispatch = globalReplay.indexOf('gh workflow run publish-api.yml');
   assert.ok(
     postBackfillProbe >= 0
@@ -4786,7 +4796,7 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /main e' avanzata dopo la detection \(\$SOURCE_COMMIT -> \$current_main\)/);
   assert.match(globalReplay, /main e' avanzata dopo la verifica post-backfill \(\$SOURCE_COMMIT -> \$current_main\)/);
   assert.match(globalReplay, /if verifyMainHeadAtDispatch; then/);
-  assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$SOURCE_COMMIT"/);
+  assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$dispatch_source"/);
   assert.match(wf, /pending_edge_flip=\$\(jq -r '\.pendingEdgeFlip \/\/ false'/);
   assert.match(wf, /skip=\$\(jq -r 'if \.skip then \\"true\\" else \\"false\\" end'/);
   assert.match(wf, /\(steps\.mode\.outputs\.event_replay == 'true' \|\| steps\.mode\.outputs\.schedule_retry == 'true'\)[\s\S]*steps\.child_artifact\.outputs\.verified == 'true'[\s\S]*steps\.detect\.outputs\.pending_edge_flip == 'true'[\s\S]*steps\.detect\.outputs\.skip == 'false'[\s\S]*steps\.detect\.outputs\.dispatch == '0'[\s\S]*steps\.detect\.outputs\.leftover == '0'/);

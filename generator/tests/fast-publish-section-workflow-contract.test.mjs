@@ -562,20 +562,38 @@ test('reconcile evita un backfill duplicato sulla stessa revisione e conserva la
   const end = source.indexOf('\n      # Il workflow_run di un child', start);
   assert.ok(start >= 0 && end > start);
   const root = mkdtempSync(path.join(tmpdir(), 'section-reconcile-active-'));
-  const commit = 'a'.repeat(40);
+  const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8' }).trim();
+  const commitFile = (file, content) => {
+    writeFileSync(path.join(root, file), content);
+    git('add', file);
+    git('-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.test', 'commit', '-qm', file);
+    return git('rev-parse', 'HEAD');
+  };
+  git('init', '-q');
+  mkdirSync(path.join(root, 'data'), { recursive: true });
+  const commit = commitFile('article.txt', 'article\n');
+  const ledger = commitFile('data/discovery-attempt-state.json', '{}\n');
+  const changed = commitFile('article.txt', 'changed article\n');
   const pending = (section, status, sha = commit) => ({
     head_sha: sha,
     status,
     display_title: `cover-publish-section / ${section} / nonce=reconcile-42-${section} / dry=false / c=reconcile-42-n1`,
   });
   try {
+    mkdirSync(path.join(root, 'scripts/ci'), { recursive: true });
+    writeFileSync(path.join(root, 'scripts/ci/read-main-head.sh'),
+      'if [ -f main-after-dispatch ]; then cat main-after-dispatch; else printf "%s\\n" "$FAKE_MAIN"; fi\n');
+    writeFileSync(path.join(root, 'scripts/ci/section-source-unaffected.sh'),
+      readFileSync(new URL('../../scripts/ci/section-source-unaffected.sh', import.meta.url)));
     writeFileSync(path.join(root, 'reconcile-sections.json'), JSON.stringify({
       sections: ['canton-appenzello', 'canton-ti', 'canton-ne'].map((section) => ({
         section, dispatch: true, selected: [], missingPagePaths: [], knownMissingPagePaths: [],
       })),
     }));
-    const run = (pendingFlip) => execFileSync('bash', ['-c', [
-      'gh() { if [ "$1" = api ]; then printf "%s" "$ACTIVE_RUNS"; else printf "%s\\n" "$@"; fi; }',
+    const run = (pendingFlip, main = commit, afterDispatch = '') => execFileSync('bash', ['-c', [
+      'rm -f main-after-dispatch',
+      'gh() { if [ "$1" = api ]; then printf "%s" "$ACTIVE_RUNS"; else printf "%s\\n" "$@"; '
+        + 'if [ -n "$MAIN_AFTER_DISPATCH" ]; then printf "%s\\n" "$MAIN_AFTER_DISPATCH" > main-after-dispatch; fi; fi; }',
       'date() { echo 2026-11-19T04:00:00Z; }',
       source.slice(start, end),
     ].join('\n')], {
@@ -583,6 +601,7 @@ test('reconcile evita un backfill duplicato sulla stessa revisione e conserva la
       env: {
         ...process.env, RUNNER_TEMP: root, GITHUB_PAT_NANAKO: 'test-token', GITHUB_REPOSITORY: 'test/corpus',
         GITHUB_RUN_ID: '123', PENDING_EDGE_FLIP: pendingFlip, SOURCE_COMMIT: commit, API_RELEASE_COMMIT: commit,
+        FAKE_MAIN: main, MAIN_AFTER_DISPATCH: afterDispatch,
         ACTIVE_RUNS: JSON.stringify([{ workflow_runs: [
           pending('canton-appenzello', 'pending'),
           pending('canton-ti', 'completed'),
@@ -602,6 +621,13 @@ test('reconcile evita un backfill duplicato sulla stessa revisione e conserva la
     const flip = run('true');
     assert.match(flip, /section=canton-appenzello/);
     assert.match(flip, /dispatch_cohort=reconcile-123-n3/);
+    const repinned = run('true', ledger);
+    assert.equal(repinned.match(new RegExp(`^source_commit=${ledger}$`, 'gm'))?.length, 3);
+    assert.equal(repinned.match(new RegExp(`^source_main_commit=${ledger}$`, 'gm'))?.length, 3);
+    const advancing = run('true', commit, ledger);
+    assert.equal(advancing.match(new RegExp(`^source_commit=${commit}$`, 'gm'))?.length, 3);
+    assert.equal(advancing.match(new RegExp(`^source_main_commit=${commit}$`, 'gm'))?.length, 3);
+    assert.doesNotMatch(run('true', changed), /dispatch_nonce=/);
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
@@ -792,14 +818,18 @@ test('il verificatore riusa solo prove stale-late di revisioni equivalenti', () 
     const origin = path.join(root, 'origin.git');
     git('clone', '--quiet', '--bare', fixture, origin);
     git('remote', 'add', 'origin', `file://${origin}`);
-    const cohort = 'stale-late-42-canton-ur-n1';
     const nonce = 'stale-late-fixture';
     const fakeGh = path.join(root, 'gh');
     writeFileSync(fakeGh, `#!/usr/bin/env bash
 set -euo pipefail
 case "$1" in
   api) printf '%s\\n' "$FIXTURE_RUN" ;;
-  run) printf '%s\\n' "$FIXTURE_ARTIFACT" > "${'${!#}'}/fast-publish-result.json" ;;
+  run)
+    if [[ "$2" == download && "$3" == 43 ]]; then
+      printf '%s\\n' "$FIXTURE_ARTIFACT_SIBLING" > "${'${!#}'}/fast-publish-result.json"
+    else
+      printf '%s\\n' "$FIXTURE_ARTIFACT" > "${'${!#}'}/fast-publish-result.json"
+    fi ;;
   *) exit 1 ;;
 esac
 `, { mode: 0o755 });
@@ -807,6 +837,9 @@ esac
       artifactSource = source,
       renderedHead = artifactSource,
       runHead = source,
+      siblingHead,
+      siblingPin = artifactSource,
+      cohort = 'stale-late-42-canton-ur-n1',
     } = {}) => {
       const output = path.join(root, 'output');
       writeFileSync(output, '');
@@ -816,13 +849,24 @@ esac
           ...process.env, PATH: `${root}:${process.env.PATH}`, RUNNER_TEMP: root, GITHUB_OUTPUT: output,
           REPOSITORY: 'fixture/corpus', MODE: mode, EXPECTED_SOURCE_COMMIT: expected,
           WORKFLOW_RUN_ID: '42', WORKFLOW_RUN_HEAD_SHA: runHead, CHILD_NONCE: nonce, CHILD_COHORT: cohort,
-          FIXTURE_RUN: JSON.stringify({
-            databaseId: 42, displayTitle: `cover-publish-section / canton-ur / nonce=${nonce} / dry=false / c=${cohort}`,
-            status: 'completed', conclusion: 'success', headSha: runHead, createdAt: '2026-11-21T10:00:00Z',
-          }),
+          FIXTURE_RUN: [
+            {
+              databaseId: 42, displayTitle: `cover-publish-section / canton-ur / nonce=${nonce} / dry=false / c=${cohort}`,
+              status: 'completed', conclusion: 'success', headSha: runHead, createdAt: '2026-11-21T10:00:00Z',
+            },
+            ...(siblingHead ? [{
+              databaseId: 43, displayTitle: `cover-publish-section / canton-ti / nonce=sibling / dry=false / c=${cohort}`,
+              status: 'completed', conclusion: 'success', headSha: siblingHead, createdAt: '2026-11-21T10:01:00Z',
+            }] : []),
+          ].map((run) => JSON.stringify(run)).join('\n'),
           FIXTURE_ARTIFACT: JSON.stringify({
             section: 'canton-ur', dispatch_nonce: nonce, dispatch_cohort: cohort,
             source_commit: artifactSource, source_main_commit: artifactSource, rendered_head: renderedHead,
+            fresh: 'true', coordinated_recovery: 'true',
+          }),
+          FIXTURE_ARTIFACT_SIBLING: JSON.stringify({
+            section: 'canton-ti', dispatch_nonce: 'sibling', dispatch_cohort: cohort,
+            source_commit: siblingPin, source_main_commit: siblingPin, rendered_head: siblingPin,
             fresh: 'true', coordinated_recovery: 'true',
           }),
         },
@@ -835,6 +879,16 @@ esac
       'event validates the pinned source separately from the event HEAD',
     );
     for (const mode of ['event', 'schedule']) {
+      const reconcile = { cohort: 'reconcile-42-n1', artifactSource: source, runHead: bookkeeping };
+      assert.equal(check(mode, current, reconcile), 'verified=true', `${mode} accepts reconciled bookkeeping drift`);
+      const siblings = { ...reconcile, cohort: 'reconcile-42-n2', siblingHead: current };
+      assert.equal(check(mode, current, siblings), 'verified=true', `${mode} accepts sibling runs with equivalent heads`);
+      assert.equal(
+        check(mode, current, { ...siblings, siblingPin: bookkeeping }),
+        'verified=false',
+        `${mode} requires one pinned source for the entire cohort`,
+      );
+      assert.equal(check(mode, changed, reconcile), 'verified=false', `${mode} rejects changed publication inputs`);
       assert.equal(
         check(mode, current, { artifactSource: source, runHead: bookkeeping }),
         'verified=true',
