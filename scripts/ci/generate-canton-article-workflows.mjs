@@ -213,15 +213,14 @@ export const CORE_REPLACEMENTS = [
     id: 'admit: il filtro dei push cantonali serve solo alla coda nazionale',
     count: 1,
     find: "          CANTON_ONLY: |-\n"
-      + "            \"^content/(blog-body-canton-[a-z0-9-]+/(it|de|en|fr)/[^/]+[.]ts|blog-meta-canton-[a-z0-9-]+-(it|de|en|fr)[.]ts|cantons/canton-[a-z0-9-]+/(registry|seo|slugs)[.]ts)$\" as $canton_path_re\n"
-      + "            | [.[]?.files[]?] as $files\n"
-      + "            | [$files[] | select(.filename | startswith(\"content/\"))] as $content\n"
-      + "            | ($content | length) > 0\n"
-      + "              and all($files[];\n"
-      + "                (.status == \"added\" or .status == \"modified\" or .status == \"renamed\")\n"
-      + "                and (.filename | test($canton_path_re))\n"
-      + "                and (.status != \"renamed\"\n"
-      + "                  or ((.previous_filename // \"\") | test($canton_path_re))))\n",
+      + "            def canton_content: test(\"^content/(blog-body-canton-[a-z0-9-]+/(it|de|en|fr)/[^/]+[.]ts|blog-meta-canton-[a-z0-9-]+-(it|de|en|fr)[.]ts|cantons/canton-[a-z0-9-]+/(registry|seo|slugs)[.]ts)$\");\n"
+      + "            def canton_data: test(\"^data/sections/canton-[a-z0-9-]+/(article-source-urls|quota-state|topic-candidates-(evergreen-(counter|rejected)|experimental-counter)|articles/[^/]+)[.]json$\");\n"
+      + "            def canton_surface($path; $covers; $files): (($path | canton_content) or ($path | canton_data) or (($covers | index($path)) != null) or ($path == \"data/generated-image-registry.json\" and any($files[]; (.filename // \"\") as $file | ($covers | index($file)) != null)));\n"
+      + "            [.[]?.files[]?] as $files\n"
+      + "            | [$files[] | (.filename // \"\") | select(test(\"^content/blog-body-canton-[a-z0-9-]+/it/[^/]+[.]ts$\")) | capture(\"^content/blog-body-canton-[a-z0-9-]+/it/(?<id>[^/]+)[.]ts$\").id] as $ids\n"
+      + "            | [$ids[] | \"public/images/blog/article-\\(.)\" + \".webp\", \"public/images/blog/thumbnails/article-\\(.)-480w.webp\"] as $covers\n"
+      + "            | any($files[]; (.filename // \"\") | canton_content)\n"
+      + "              and all($files[]; ((.status == \"added\" or .status == \"modified\" or .status == \"renamed\") and ((.filename // \"\") as $path | canton_surface($path; $covers; $files)) and (.status != \"renamed\" or ((.previous_filename // \"\") as $previous | canton_surface($previous; $covers; $files)))))\n",
     replace: '',
   },
   {

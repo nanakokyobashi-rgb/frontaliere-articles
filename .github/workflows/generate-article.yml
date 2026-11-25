@@ -412,15 +412,14 @@ jobs:
           CALLER_WORKFLOW: generate-article.yml
           BODY_MAINTENANCE_PATH_RE: '^content/blog-body(-[a-z0-9-]+)?/(it|de|en|fr)/[^/]+[.]ts$'
           CANTON_ONLY: |-
-            "^content/(blog-body-canton-[a-z0-9-]+/(it|de|en|fr)/[^/]+[.]ts|blog-meta-canton-[a-z0-9-]+-(it|de|en|fr)[.]ts|cantons/canton-[a-z0-9-]+/(registry|seo|slugs)[.]ts)$" as $canton_path_re
-            | [.[]?.files[]?] as $files
-            | [$files[] | select(.filename | startswith("content/"))] as $content
-            | ($content | length) > 0
-              and all($files[];
-                (.status == "added" or .status == "modified" or .status == "renamed")
-                and (.filename | test($canton_path_re))
-                and (.status != "renamed"
-                  or ((.previous_filename // "") | test($canton_path_re))))
+            def canton_content: test("^content/(blog-body-canton-[a-z0-9-]+/(it|de|en|fr)/[^/]+[.]ts|blog-meta-canton-[a-z0-9-]+-(it|de|en|fr)[.]ts|cantons/canton-[a-z0-9-]+/(registry|seo|slugs)[.]ts)$");
+            def canton_data: test("^data/sections/canton-[a-z0-9-]+/(article-source-urls|quota-state|topic-candidates-(evergreen-(counter|rejected)|experimental-counter)|articles/[^/]+)[.]json$");
+            def canton_surface($path; $covers; $files): (($path | canton_content) or ($path | canton_data) or (($covers | index($path)) != null) or ($path == "data/generated-image-registry.json" and any($files[]; (.filename // "") as $file | ($covers | index($file)) != null)));
+            [.[]?.files[]?] as $files
+            | [$files[] | (.filename // "") | select(test("^content/blog-body-canton-[a-z0-9-]+/it/[^/]+[.]ts$")) | capture("^content/blog-body-canton-[a-z0-9-]+/it/(?<id>[^/]+)[.]ts$").id] as $ids
+            | [$ids[] | "public/images/blog/article-\(.)" + ".webp", "public/images/blog/thumbnails/article-\(.)-480w.webp"] as $covers
+            | any($files[]; (.filename // "") | canton_content)
+              and all($files[]; ((.status == "added" or .status == "modified" or .status == "renamed") and ((.filename // "") as $path | canton_surface($path; $covers; $files)) and (.status != "renamed" or ((.previous_filename // "") as $previous | canton_surface($previous; $covers; $files)))))
           DRY_RUN: ${{ inputs.dry_run }}
           SECTION_REQUESTED: ${{ inputs.section }}
           SOURCE_URL: ${{ inputs.url }}
