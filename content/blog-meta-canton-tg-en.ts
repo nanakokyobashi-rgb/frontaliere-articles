@@ -96,6 +96,9 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.disoccupazione-rav-thurgau.title': 'Unemployment in Thurgau: RAV Thurgau guide',
     'blog.article.disoccupazione-rav-thurgau.excerpt': 'RAV Thurgau: first steps, registration, rights, a video on unemployment benefit and BIZplus advice in Frauenfeld and Kreuzlingen for job seekers.',
     'blog.article.disoccupazione-rav-thurgau.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.rav-sedi-pubblicazione-vakanze.title': 'RAV offices and platforms for employers in Thurgau',
+    'blog.article.rav-sedi-pubblicazione-vakanze.excerpt': 'The RAV offices are in Amriswil, Frauenfeld and Kreuzlingen; vacancies can be published free of charge on arbeit.swiss.',
+    'blog.article.rav-sedi-pubblicazione-vakanze.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTgEn;

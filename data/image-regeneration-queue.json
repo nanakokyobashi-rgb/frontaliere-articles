@@ -20,6 +20,16 @@
       "failureCount": 67,
       "requestedAt": "2026-10-24T19:06:53.846Z",
       "lastFailureAt": "2026-11-25T22:22:40.969Z"
+    },
+    {
+      "articleId": "rav-sedi-pubblicazione-vakanze",
+      "title": "Sedi RAV e piattaforme per datori di lavoro in Turgovia",
+      "fallbackImage": "/images/blog/article-supporto-datori-lavoro-turgovia.webp",
+      "reason": "All image providers failed for article-rav-sedi-pubblicazione-vakanze: openai-codex (vision gate rejected image: Generic synthetic photorealistic office scene relevant to professio",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-11-25T23:29:49.059Z",
+      "lastFailureAt": "2026-11-25T23:29:49.059Z"
     }
   ]
 }
