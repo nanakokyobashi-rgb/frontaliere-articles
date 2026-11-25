@@ -15621,10 +15621,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/newsblog/valute-e-frontiere/1891645/frontalieri-e-smart-working-nel-2026-la-soglia-fiscale-del-25-e-confermata": {
-      "section": "frontaliere",
-      "ts": 1795418612092
-    },
     "svizzera::https://www.swissinfo.ch/ita/gr%3a-dal-2027%2c-nuovo-calcolo-della-tassa-di-circolazione/92422646": {
       "section": "svizzera",
       "ts": 1795429244477
@@ -15756,6 +15752,10 @@
     "svizzera::https://www.ilgiorno.it/como/cronaca/polizze-sanitarie-alle-stelle-in-f0a74e0f": {
       "section": "svizzera",
       "ts": 1795585418531
+    },
+    "svizzera::https://www.rsi.ch/s/4257428": {
+      "section": "svizzera",
+      "ts": 1795596455762
     }
   }
 }
