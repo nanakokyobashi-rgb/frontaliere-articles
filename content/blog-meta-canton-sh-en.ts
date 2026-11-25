@@ -114,6 +114,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.gpk-risparmi-bilancio-2027.title': 'GPK proposes savings for the 2027 cantonal budget',
     'blog.article.gpk-risparmi-bilancio-2027.excerpt': 'The 2027 cantonal budget forecasts a deficit of approximately CHF 62.8 million; cantonal salaries will increase by 1 percent.',
     'blog.article.gpk-risparmi-bilancio-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.lkw-unfall-chlaggi-strada.title': 'Truck overturned between Guntmadingen and Neunkirch: H13 closed',
+    'blog.article.lkw-unfall-chlaggi-strada.excerpt': 'On 25 November 2026, a truck overturned on the main road between Guntmadingen and Neunkirch, causing H13 to be closed for several hours.',
+    'blog.article.lkw-unfall-chlaggi-strada.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

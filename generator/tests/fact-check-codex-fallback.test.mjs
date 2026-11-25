@@ -279,8 +279,7 @@ describe('infrastructure retries with a retained vote', () => {
       assert.equal(call.options.editorialContext, editorialContext);
     }
     assert.ok(logs.some((line) => line.includes('synthetic broker timeout')));
-    assert.ok(logs.some((line) => line.includes('un solo parere indipendente')));
-    return { result, calls };
+    return { result, calls, logs };
   }
 
   test('the retained vote gets a fresh Groq-first retry after Codex times out', async () => {
@@ -303,11 +302,27 @@ describe('infrastructure retries with a retained vote', () => {
     ]);
   });
 
+  test('an initially timed-out verifier can recover a distinct vote within the same round', async () => {
+    const first = 'first-serving-model';
+    const second = 'second-serving-model';
+    const { result, calls, logs } = await runRounds(first, (model, options, now) => (
+      model === CODEX && options.excludeModels.includes(first) && now < options.deadlineMs
+        ? second : null
+    ), 0);
+    assert.deepEqual(calls.map(({ model }) => model), [CODEX, groq, CODEX]);
+    assert.equal(calls[2].now, 35_000);
+    assert.equal(calls[2].options.deadlineMs, 50_000);
+    assert.deepEqual(Array.from(result.votes, ({ servedBy }) => servedBy), [first, second]);
+    assert.ok(!logs.some((line) => line.includes('un solo parere indipendente')));
+  });
+
   test('a long verification budget reserves extra time for the last Codex call', async () => {
     const { calls } = await runRounds(groq, () => null, 0);
     // 240s total, 60s for post-check work, 30s for final verification and
-    // three primary windows of 50s each.
-    assert.equal(calls[0].options.deadlineMs, 50_000);
+    // three 50s rounds, each with a 15s recovery window.
+    assert.equal(calls[0].options.deadlineMs, 35_000);
+    assert.equal(calls[2].now, 35_000);
+    assert.equal(calls[2].options.deadlineMs, 50_000);
     assert.equal(calls.at(-1).options.codexOnly, true);
     assert.equal(calls.at(-1).options.deadlineMs, 180_000);
   });

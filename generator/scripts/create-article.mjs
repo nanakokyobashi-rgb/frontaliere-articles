@@ -7559,7 +7559,13 @@ ${proofSuffix}`
       maxPrimaryRounds - fcAttempt + 1,
       Math.max(1, Math.floor(remainingMs / FACTCHECK_MIN_ROUND_MS)),
     );
-    const deadlineMs = now + Math.floor(remainingMs / remainingRounds);
+    const roundBudgetMs = Math.floor(remainingMs / remainingRounds);
+    const deadlineMs = now + roundBudgetMs;
+    // Leave a full minimum window for an independent recovery when the round
+    // can give the initially requested models at least twice that time.
+    const initialDeadlineMs = roundBudgetMs >= 3 * FACTCHECK_MIN_ROUND_MS
+      ? deadlineMs - FACTCHECK_MIN_ROUND_MS
+      : deadlineMs;
     const primaryModels = verificationModels.slice(0, 2);
     let modelsToQuery = primaryModels;
     if (priorVoters.length) {
@@ -7575,7 +7581,7 @@ ${proofSuffix}`
         : index > 0 && modelsToQuery[0] === AI_MODELS.CODEX_CLI_PRIMARY;
       return _runSingleFactCheck(model, verificationPrompt, {
         fresh: fcAttempt > 1,
-        deadlineMs,
+        deadlineMs: initialDeadlineMs,
         invalidVerdictModels,
         editorialProofFailures,
         isEvergreen: isEvergreenArticle,
@@ -15748,7 +15754,13 @@ Rispondi con un JSON object (no markdown, no code fences):
 {"${field}": "..."}`;
 }
 
-function buildPendingBodyRetranslationPrompt({ langName, field, itValue, partLabel = '' }) {
+function buildPendingBodyRetranslationPrompt({ langName, field, itValue, partLabel = '', rejectionReason = '' }) {
+  const correction = {
+    'numeric-association': 'Controlla ogni coppia dato-etichetta separatamente. Mantieni nella stessa proposizione ogni valore e il suo nome, anche se il nome è ripetuto.',
+    'numeric-values': 'Confronta tutte le cifre con la fonte prima di rispondere. Riproduci ogni valore, segno, unità e percentuale nell’ordine originale.',
+    'line-skeleton': 'Confronta il Markdown riga per riga. Conserva le righe vuote e la posizione di ciascun titolo, punto elenco e citazione.',
+    completeness: 'Verifica che ogni frase originale compaia nella traduzione, compresi gli incisi e le frasi finali.',
+  }[rejectionReason];
   return `Traduci COMPLETAMENTE in ${langName} il seguente corpo dell'articolo per il sito Frontaliere Ticino.
 
 VINCOLI OBBLIGATORI:
@@ -15761,7 +15773,7 @@ VINCOLI OBBLIGATORI:
 - se compaiono marcatori opachi <span data-frontaliere-table-column="riga-cella"></span>, copiali esattamente nella stessa cella della tabella: identificano la colonna sorgente e non sono testo da tradurre;
 - non aggiungere spiegazioni, prefissi o code fences.
 
-CONTENUTO ITALIANO DA TRADURRE:
+${correction ? `CORREZIONE RICHIESTA DOPO LA VALIDAZIONE: ${correction}\n\n` : ''}CONTENUTO ITALIANO DA TRADURRE:
 - ${field}${partLabel}: ${itValue}
 
 Rispondi con un JSON object (no markdown, no code fences):
@@ -16012,6 +16024,8 @@ async function translatePendingBodyWithHistoricalChain(
     fieldName: field,
     translate: async ({ text: masked }) => {
       const wordCount = countWords(masked || '');
+      let rejectionReason = '';
+      const onReject = (reason) => { rejectionReason = reason; };
       const translateSegments = (chunkWords) => chunkTranslator(
         masked,
         field,
@@ -16020,10 +16034,11 @@ async function translatePendingBodyWithHistoricalChain(
           field,
           itValue: chunk,
           partLabel: total > 1 ? `, parte ${i + 1} di ${total}` : '',
+          rejectionReason,
         }),
         `${locale}:${field}-pending-retry`,
         locale,
-        { forceLegacy: true, chunkWords },
+        { forceLegacy: true, chunkWords, onReject },
       );
       const retryShorter = () => wordCount > shorterChunkWords && !pendingBodyLaneShouldStop()
         ? translateSegments(shorterChunkWords)
@@ -16062,7 +16077,7 @@ async function translatePendingBodyWithHistoricalChain(
             () => '',
             `${locale}:${field}-pending-retry-validation`,
             locale,
-            { pretranslatedResult: { [field]: translated } },
+            { pretranslatedResult: { [field]: translated }, onReject },
           );
         }
       } catch (error) {
@@ -16294,13 +16309,14 @@ async function translateArticle(data) {
     makeChunkPrompt,
     labelPrefix,
     targetLang,
-    { pretranslatedResult = null, forceLegacy = false, chunkWords } = {},
+    { pretranslatedResult = null, forceLegacy = false, chunkWords, onReject } = {},
   ) {
     // Recovery/free-MT callers may already have carried the transport markers
     // through a first provider. Normalize them before deriving the next
     // expected mapping so nested validation remains idempotent.
     bodyText = stripTableHeaderColumnMarkers(bodyText);
     const reject = (reason) => {
+      onReject?.(reason);
       console.error(`TRANSLATION_BODY_REJECT locale=${targetLang} field=${fieldKey} reason=${reason}`);
       return null;
     };

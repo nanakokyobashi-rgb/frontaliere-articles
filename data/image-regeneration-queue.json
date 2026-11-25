@@ -5,31 +5,21 @@
       "articleId": "arianna-di-claudio-roma",
       "title": "Arianna di claudio alla festa del cinema di roma",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (image vision fallback deadline exceeded)",
+      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (Codex broker rejected the request: Codex CLI timed out after 119800ms)",
       "status": "failed",
       "failureCount": 72,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-11-25T22:07:15.228Z"
+      "lastFailureAt": "2026-11-25T22:20:40.579Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
-      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic editorial scene of a commuter at a train station in a Ticino-like setting; the foreground person is shown fr",
+      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic commuter-train illustration relevant to Ticino cross-border commuting, but it includes a recognizable foregr",
       "status": "failed",
       "failureCount": 67,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-11-25T22:08:44.370Z"
-    },
-    {
-      "articleId": "euro-sotto-091-sollievo",
-      "title": "Euro sotto 0,91: sollievo ai frontalieri",
-      "fallbackImage": "/images/blog/article-adesione-ocst-servizi-frontalieri.webp",
-      "reason": "All image providers failed for article-euro-sotto-091-sollievo: openai-codex (image vision fallback deadline exceeded)",
-      "status": "failed",
-      "failureCount": 1,
-      "requestedAt": "2026-11-25T16:05:58.760Z",
-      "lastFailureAt": "2026-11-25T22:10:44.950Z"
+      "lastFailureAt": "2026-11-25T22:22:40.969Z"
     }
   ]
 }
