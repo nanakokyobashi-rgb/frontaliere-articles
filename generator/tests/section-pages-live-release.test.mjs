@@ -320,7 +320,7 @@ function webpFixture(byte) {
   return bytes;
 }
 
-async function publishFourLocaleSharedAsset({ localBytes, assetProbeImpl = null, assetKey = 'images/shared.webp', unrelatedKey = 'images/unrelated.webp' }) {
+async function publishFourLocaleSharedAsset({ localBytes, assetProbeImpl = null, assetKey = 'images/shared.webp', unrelatedKey = 'images/unrelated.webp', imageLeaseOps, events = [] }) {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-live-shared-asset-'));
   const sharedLocal = path.join(fixtureRoot, `shared${path.extname(assetKey)}`);
   const unrelatedLocal = path.join(fixtureRoot, 'unrelated.webp');
@@ -340,7 +340,6 @@ async function publishFourLocaleSharedAsset({ localBytes, assetProbeImpl = null,
   const oldHtml = `<!doctype html><html><body><img src="https://cdn.frontaliereticino.ch/${assetKey}"></body></html>`;
   const stagedHtml = `${oldHtml}${CORPUS_ROUTE_OWNER_META_TAG}`;
   const uploadedPageKeys = new Set();
-  const events = [];
   const assetProbeCalls = [];
   for (const page of pages) {
     const localPage = path.join(fixtureRoot, page.rel);
@@ -354,6 +353,7 @@ async function publishFourLocaleSharedAsset({ localBytes, assetProbeImpl = null,
       pages,
       immutablePages,
       snapshotPagesBeforeUpload: true,
+      imageLeaseOps,
       cdnUploads: [
         { local: sharedLocal, key: assetKey },
         { local: unrelatedLocal, key: unrelatedKey },
@@ -676,6 +676,64 @@ test('publisher: un cover identico nei namespace leased resta nel percorso prote
         assert.equal(fixture.result.uploaded, 4);
         assert.ok(!fixture.assetProbeCalls.includes(unrelatedKey), 'la probe fuori lease non decide per un asset leased');
         assert.ok(fixture.events.includes(`asset-upload:${unrelatedKey}`), 'l’asset leased segue l’uploader che prende il lease');
+      } finally {
+        fixture.cleanup();
+      }
+    });
+  }
+});
+
+test('publisher: copertina condivisa identica sblocca le quattro route mentre il lease è attivo', async (t) => {
+  for (const identical of [true, false]) {
+    await t.test(identical ? 'bytes identici' : 'bytes diversi', async () => {
+      const assetKey = 'images/blog/shared.webp';
+      const localBytes = webpFixture(0x11);
+      const remoteBytes = identical ? localBytes : webpFixture(0x22);
+      const events = [];
+      let held = false;
+      const fixture = await publishFourLocaleSharedAsset({
+        localBytes, assetKey, events,
+        imageLeaseOps: {
+          acquire: async (namespaces) => {
+            assert.deepEqual(namespaces, ['blog']);
+            events.push('lease-acquired');
+            held = true;
+            return [{
+              namespace: 'blog', owner: 'fixture', leaseId: 'fixture',
+              acquiredAt: 1, expiresAt: Date.now() + 60_000,
+            }];
+          },
+          verify: async (_context, namespace) => {
+            assert.equal(namespace, 'blog');
+            assert.equal(held, true);
+            events.push('lease-verified');
+          },
+          release: async () => {
+            assert.equal(held, true);
+            events.push('lease-released');
+            held = false;
+            return { status: 'released' };
+          },
+        },
+        assetProbeImpl: async (key) => {
+          assert.equal(key, assetKey);
+          assert.equal(held, true);
+          events.push('asset-verified');
+          return { ok: true, status: 200, contentType: 'image/webp', byteLength: remoteBytes.length, sha256: sha256(remoteBytes) };
+        },
+      });
+      try {
+        assert.equal(fixture.result.failures, 0);
+        assert.equal(fixture.result.uploaded, identical ? 4 : 0);
+        assert.equal(fixture.result.deferredAssetPages, identical ? 0 : 4);
+        assert.equal(held, false);
+        assert.ok(!events.includes(`asset-upload:${assetKey}`));
+        assert.ok(events.indexOf('asset-upload:images/unrelated.webp') < events.indexOf('lease-acquired'));
+        for (const event of events.filter((value) => value.startsWith('page-upload:'))) {
+          const at = events.indexOf(event);
+          assert.equal(events[at - 1], 'lease-verified');
+          assert.ok(at < events.indexOf('lease-released'));
+        }
       } finally {
         fixture.cleanup();
       }
