@@ -93,6 +93,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.turgovia-rav-assunzioni-permessi.title': 'Thurgau: Drei RAV helfen Arbeitgebern, Personal zu finden',
     'blog.article.turgovia-rav-assunzioni-permessi.excerpt': 'Die RAV-Standorte in Amriswil, Frauenfeld und Kreuzlingen helfen Arbeitgebern; auf arbeit.swiss werden offene Stellen kostenlos veröffentlicht.',
     'blog.article.turgovia-rav-assunzioni-permessi.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.disoccupazione-rav-thurgau.title': 'Arbeitslosigkeit im Thurgau: Leitfaden des RAV Thurgau',
+    'blog.article.disoccupazione-rav-thurgau.excerpt': 'RAV Thurgau: erste Schritte, Anmeldung, Rechte, Video zur Arbeitslosenentschädigung und Beratung von BIZplus in Frauenfeld und Kreuzlingen für Arbeitsuchende.',
+    'blog.article.disoccupazione-rav-thurgau.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTgDe;

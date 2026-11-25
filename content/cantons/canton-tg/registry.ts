@@ -338,4 +338,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'disoccupazione-rav-thurgau',
+ category: 'pratico',
+ date: '2026-11-25T17:16:39.833Z',
+ image: '/images/blog/article-disoccupazione-rav-thurgau.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
