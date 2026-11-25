@@ -11238,6 +11238,7 @@ function extractHeadlines(html, baseUrl) {
       ? ancestors.findLast((node) => node.name === 'article')
       : null;
     if (useEasyBlogCard && (!easyBlogCard || headlineAttributeValue(easyBlogCard.attrs, 'typeof') !== 'Article'
+      || ancestors.some((node) => node.name === 'aside')
       || headlineStackHasNavigation([...ancestors, anchor])
       || !headlineAttributeValue(anchor.attrs, 'class').split(/\s+/u).includes('uk-link-reset'))) {
       anchor = nextAnchor;

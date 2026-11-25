@@ -1998,6 +1998,7 @@ test('Syna Argovia legge la data della propria scheda senza scaricare il dettagl
     + card('lohngleichheit-im-kanton-aargau-jetzt', '<time content="07.07.2023">7.7.2023</time>')
     + card('pendler-mitteilung', '<time content="25.11.2026">25.11.2026</time>')
     + card('ohne-datum', '<aside><time content="25.11.2026">25.11.2026</time></aside>')
+    + '<aside>' + card('sidebar-ohne-datum', '') + '</aside>'
     + '</main>';
   const { impl, calls } = fakeFetch({ [source.url]: { body: html } });
   const result = await scanCantonSource(source, ctx(impl));
