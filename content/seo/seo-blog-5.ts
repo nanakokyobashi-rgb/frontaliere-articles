@@ -115122,6 +115122,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-euro-sotto-091-sollievo': {
+    title: 'Euro sotto 0,91: sollievo ai frontalieri | Frontaliere Ticino',
+    description: 'Il franco svizzero tocca 0,9076 contro l\'euro: il cambio scende sotto 0,91 e rafforza il potere d\'acquisto degli stipendi in franchi.',
+    keywords: 'cambio euro-franco, franco svizzero, euro sotto 0,91, stipendi frontalieri, potere d\'acquisto, mercato valutario, UBP, fascia di confine',
+    ogTitle: 'Euro sotto 0,91: effetti sugli stipendi frontalieri',
+    ogDescription: 'Alle 13:45 l\'euro ha toccato 0,9076, minimo dallo scorso maggio e distante dai quasi 0,95 di inizio ottobre. Il franco forte sostiene il potere d\'acquisto di chi incassa franchi e spende euro, senza ritocchi contrattuali.',
+    canonicalPath: '/articoli-frontaliere/euro-sotto-091-sollievo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Euro sotto 0,91: sollievo ai frontalieri",
+      "description": "Il franco svizzero tocca 0,9076 contro l'euro: il cambio scende sotto 0,91 e rafforza il potere d'acquisto degli stipendi in franchi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-adesione-ocst-servizi-frontalieri.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-25T16:05:56+00:00",
+      "dateModified": "2026-11-25T16:05:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/euro-sotto-091-sollievo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

@@ -125,9 +125,10 @@
     "keyForm": 2
   },
   "https://www.nau.ch/politik/regional/auch-kantonsrat-will-keine-puk-wegen-solothurner-spitaler-67200527": {
-    "articleId": "cantonsrat-respinge-puk-soh",
-    "ts": "2026-11-13T12:05:22.436Z",
-    "keyForm": 2
+    "articleId": "soletta-voto-puk-soh",
+    "ts": "2026-11-25T16:08:52.233Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "19d902055cecdb34c1d38cfb0fcb9fddeb0153f1b75fb0cea6944d48f03f9735"
   },
   "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/finanzkommission-genehmigt-das-budget-2027": {
     "articleId": "soletta-preventivo-approvato",

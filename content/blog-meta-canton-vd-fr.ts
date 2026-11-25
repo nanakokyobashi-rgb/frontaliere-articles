@@ -96,6 +96,9 @@ const blogMetaCantonVdFr: Record<string, string> = {
     'blog.article.decisioni-grand-conseil-10-novembre.title': 'Décisions du Grand Conseil : séance du 10 novembre 2026',
     'blog.article.decisioni-grand-conseil-10-novembre.excerpt': 'Le procès-verbal de la séance du Grand Conseil du 10 novembre 2026 consigne douze points numérotés de 2.1 à 2.12, suivis de l\'heure des questions du mois de novembre.',
     'blog.article.decisioni-grand-conseil-10-novembre.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.manifestazione-losanna-tagli-bilancio.title': 'Vaud : cortège à Lausanne contre l’austérité et les coupes budgétaires',
+    'blog.article.manifestazione-losanna-tagli-bilancio.excerpt': 'À Lausanne, un nouveau rassemblement a contesté mardi l\'austérité et les coupes budgétaires touchant les services publics vaudois.',
+    'blog.article.manifestazione-losanna-tagli-bilancio.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonVdFr;

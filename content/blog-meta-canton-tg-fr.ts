@@ -93,6 +93,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.turgovia-rav-assunzioni-permessi.title': 'Thurgovie : trois ORP aident les employeurs à trouver du personnel',
     'blog.article.turgovia-rav-assunzioni-permessi.excerpt': 'Les ORP d’Amriswil, Frauenfeld et Kreuzlingen aident les employeurs ; sur arbeit.swiss, les postes vacants sont publiés gratuitement.',
     'blog.article.turgovia-rav-assunzioni-permessi.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.disoccupazione-rav-thurgau.title': 'Chômage en Thurgovie : guide du RAV Thurgovie',
+    'blog.article.disoccupazione-rav-thurgau.excerpt': 'RAV Thurgovie : premiers pas, inscription, droits, vidéo sur l’indemnité et conseil BIZplus à Frauenfeld et Kreuzlingen pour les personnes à la recherche d’un emploi.',
+    'blog.article.disoccupazione-rav-thurgau.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTgFr;

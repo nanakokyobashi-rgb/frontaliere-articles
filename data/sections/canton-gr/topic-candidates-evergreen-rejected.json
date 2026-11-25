@@ -4,13 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-gr::https://www.laregione.ch/cantone/grigioni/1964509/imposta-circolazione-veicoli-potenza-grigioni": {
-      "section": "canton-gr",
-      "ts": 1795441778869
-    },
     "canton-gr::https://ilmoesano.ch/notizie/politica/dal-2027-nuovo-calcolo-della-tassa-di-circolazione": {
       "section": "canton-gr",
       "ts": 1795463790712
+    },
+    "canton-gr::https://www.laregione.ch/cantone/grigioni/1964509/imposta-circolazione-veicoli-potenza-grigioni": {
+      "section": "canton-gr",
+      "ts": 1795636459973
     }
   }
 }

@@ -4,33 +4,25 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/silenen-genehmigt-budget-2027-mit-ueberschuss-art-1733344": {
-      "section": "canton-sz",
-      "ts": 1795342786676
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/lebensarbeitszeit-als-loesung-fuer-die-ahv-finanzierung-art-1733483": {
-      "section": "canton-sz",
-      "ts": 1795363728583
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/schwyz/kirchgemeinde-heisst-defizit-budget-einstimmig-gut-art-1733311": {
-      "section": "canton-sz",
-      "ts": 1795363760571
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/tausende-demonstrieren-in-bern-gegen-entlassungen-in-der-medienbranche-art-1733475": {
-      "section": "canton-sz",
-      "ts": 1795363871963
-    },
-    "canton-sz::https://www.nau.ch/ort/schwyz/schwyz-steuerfuss-bleibt-bei-140-prozent-budget-2027-steht-67203688": {
-      "section": "canton-sz",
-      "ts": 1795385368162
-    },
-    "canton-sz::https://www.nau.ch/ort/schwyz/kanton-schwyz-regierungsrat-lehnt-weitere-steuersenkung-fur-firmen-ab-67205591": {
-      "section": "canton-sz",
-      "ts": 1795428582758
-    },
     "canton-sz::https://www.bote.ch/nachrichten/schwyz/35000-zusaetzliche-steuererklaerungen-im-kanton-art-1733692": {
       "section": "canton-sz",
       "ts": 1795514910611
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/schwyz/bezirksgemeinde-im-eilzugstempo-steuerfuss-bleibt-wie-er-ist-art-1734000": {
+      "section": "canton-sz",
+      "ts": 1795624579395
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/falschfahrer-auf-der-a14-richtung-zug-unterwegs-art-1733698": {
+      "section": "canton-sz",
+      "ts": 1795624593982
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/sanierung-des-strandbads-bachegg-verbessert-betrieb-und-zugang-art-1733740": {
+      "section": "canton-sz",
+      "ts": 1795624607940
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/rosenburg-in-stans-kredit-haengt-nun-an-der-gemeinde-art-1734114": {
+      "section": "canton-sz",
+      "ts": 1795624619900
     }
   }
 }

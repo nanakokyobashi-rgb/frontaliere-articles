@@ -1167,6 +1167,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-disoccupazione-rav-thurgau': {
+    title: 'Disoccupazione in Turgovia: guida del RAV Thurgau',
+    description: 'RAV Thurgau: primi passi, iscrizione, diritti, video sull\'indennità e consulenza BIZplus a Frauenfeld e Kreuzlingen per chi cerca lavoro.',
+    keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, turgovia, thurgau, primi',
+    ogTitle: 'RAV Thurgau e disoccupazione: primi passi',
+    ogDescription: 'Chi perde il lavoro, è stato licenziato o si è dimesso trova nella guida del RAV Thurgau le indicazioni su iscrizione, diritti e obblighi, video sull\'indennità e contatti BIZplus per formazione, lavoro e candidature.',
+    canonicalPath: '/articoli-turgovia/disoccupazione-rav-thurgau/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Disoccupazione in Turgovia: guida del RAV Thurgau",
+      "description": "RAV Thurgau: primi passi, iscrizione, diritti, video sull'indennità e consulenza BIZplus a Frauenfeld e Kreuzlingen per chi cerca lavoro.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-disoccupazione-rav-thurgau.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-25T17:16:40+00:00",
+      "dateModified": "2026-11-25T17:16:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/disoccupazione-rav-thurgau/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

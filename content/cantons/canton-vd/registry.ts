@@ -348,4 +348,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'manifestazione-losanna-tagli-bilancio',
+ category: 'novita',
+ date: '2026-11-25T17:54:03.955Z',
+ image: '/images/blog/article-manifestazione-losanna-tagli-bilancio.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

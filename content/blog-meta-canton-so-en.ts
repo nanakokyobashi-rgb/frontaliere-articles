@@ -96,6 +96,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.soletta-preventivo-approvato.title': 'Solothurn: the commission approves the 2027 budget',
     'blog.article.soletta-preventivo-approvato.excerpt': 'The 2027 budget projects a deficit of approximately CHF 42 million, an improvement of CHF 33,4 million compared with the initial proposal.',
     'blog.article.soletta-preventivo-approvato.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.soletta-voto-puk-soh.title': 'Solothurn: the Cantonal Council rejects the PUK on SOH',
+    'blog.article.soletta-voto-puk-soh.excerpt': 'The Solothurn Cantonal Council rejects a PUK on SOH: 26 in favor, 65 against and 4 abstentions following the report on personnel management.',
+    'blog.article.soletta-voto-puk-soh.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;

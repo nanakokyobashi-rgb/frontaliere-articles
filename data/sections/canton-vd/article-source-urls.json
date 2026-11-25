@@ -138,5 +138,11 @@
     "articleId": "decisioni-grand-conseil-10-novembre",
     "ts": "2026-11-13T05:02:37.990Z",
     "keyForm": 2
+  },
+  "https://latele.ch/articles/vaud-nouvelle-manifestation-contre-les-coupes-budgetaires": {
+    "articleId": "manifestazione-losanna-tagli-bilancio",
+    "ts": "2026-11-25T17:54:04.456Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "6eca5d36901f9668ab3b9d6a83fb8edfa61619d7650fc124e5857fc7eb4cedbb"
   }
 }

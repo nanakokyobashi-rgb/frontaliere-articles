@@ -347,4 +347,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'soletta-voto-puk-soh',
+ category: 'novita',
+ date: '2026-11-25T16:08:51.641Z',
+ image: '/images/blog/article-soletta-voto-puk-soh.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

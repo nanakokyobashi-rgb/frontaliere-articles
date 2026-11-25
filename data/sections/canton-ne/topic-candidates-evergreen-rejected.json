@@ -4,13 +4,17 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ne::https://www.rtn.ch/rtn/actualite/region/20261123-le-canton-repercutera-la-hausse-des-primes-maladie-sur-les-subsides.html": {
-      "section": "canton-ne",
-      "ts": 1795445686988
-    },
     "canton-ne::https://www.letemps.ch/economie/horlogerie-joaillerie/le-pointage-aux-toilettes-juge-discriminatoire-envers-les-femmes-par-la-justice-neuchateloise": {
       "section": "canton-ne",
       "ts": 1795532017011
+    },
+    "canton-ne::https://www.estrepublicain.fr/economie/2026/11/25/nouveaux-accords-entre-l-europe-et-la-suisse-ce-que-les-frontaliers-peuvent-en-attendre": {
+      "section": "canton-ne",
+      "ts": 1795640757274
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261125-nouvelle-deduction-forfaitaire-possible-pour-les-salaries-suisses.html": {
+      "section": "canton-ne",
+      "ts": 1795642369688
     }
   }
 }

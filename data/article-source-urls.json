@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/superstrada-gazzada-varese-giovedi-chiusura-in-direzione-del-capoluogo/2687161": {
-    "articleId": "chiusura-gazzada-varese-ss707",
-    "ts": "2026-09-25T14:53:02.879Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/roberto-gatti-a-figli-di-un-gol-minore-da-chiasso-alla-solbiatese-le-undici-gioie-di-mister-promozione/2686915": {
     "articleId": "roberto-gatti-11-promozioni-podcast",
     "ts": "2026-09-25T15:46:26.991Z",
@@ -2500,5 +2495,11 @@
     "ts": "2026-11-21T16:11:43.374Z",
     "keyForm": 2,
     "sourceContentFingerprint": "81b2588fd193699dfbc29db3fbda1b52f1a721e24780c74967f831b71cc0f0bb"
+  },
+  "https://comozero.it/attualita/super-franco-leuro-scivola-sotto-quota-091-boccata-dossigeno-per-gli-stipendi-dei-frontalieri": {
+    "articleId": "euro-sotto-091-sollievo",
+    "ts": "2026-11-25T16:05:58.762Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "2b2be80a99dca56a46465bec474c6a20dee3739302b3d0d7f14438293bd8301f"
   }
 }
