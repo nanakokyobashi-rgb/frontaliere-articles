@@ -210,6 +210,28 @@ __CLAIM_FUNCTIONS__
  */
 export const CORE_REPLACEMENTS = [
   {
+    id: 'admit: il filtro dei push cantonali serve solo alla coda nazionale',
+    count: 1,
+    find: "          CANTON_ONLY: |-\n"
+      + "            [.[]?.files[]?] as $files\n"
+      + "            | [$files[] | select(.filename | startswith(\"content/\"))] as $content\n"
+      + "            | ($content | length) > 0\n"
+      + "              and all($files[]; (.filename | startswith(\".github/workflows/\") | not)\n"
+      + "                and (.previous_filename // \"\" | startswith(\"content/\") | not))\n"
+      + "              and all($content[];\n"
+      + "                (.status == \"added\" or .status == \"modified\")\n"
+      + "                and (.filename | test(\"^content/(blog-body-canton-[a-z0-9-]+/(it|de|en|fr)/[^/]+[.]ts|blog-meta-canton-[a-z0-9-]+-(it|de|en|fr)[.]ts|cantons/canton-[a-z0-9-]+/(registry|seo|slugs)[.]ts)$\")))\n",
+    replace: '',
+  },
+  {
+    id: 'admit: i soli push cantonali non entrano nella coda nazionale',
+    count: 1,
+    find: "              if jq -e \"$CANTON_ONLY\" <<<\"$compare_payload\" &>/dev/null; then\n"
+      + "                skip_generation_slot admit-canton-only-content\n"
+      + "              fi\n",
+    replace: '',
+  },
+  {
     id: 'admit: il core cantonale risolve la propria sezione',
     count: 1,
     find: "      national_section: ${{ steps.national_section.outputs.section }}\n",

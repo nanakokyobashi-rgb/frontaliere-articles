@@ -1030,6 +1030,7 @@ test('le sole modifiche a body esistenti liberano la coda di generazione', () =>
     try {
       const result = spawnSync('bash', ['-c', [
         'set -eu',
+        'skip_generation_slot() { echo "reason=$1"; exit 0; }',
         admit.slice(start, end),
         'echo continue',
       ].join('\n')], {
@@ -1037,6 +1038,7 @@ test('le sole modifiche a body esistenti liberano la coda di generazione', () =>
         env: {
           ...process.env,
           GITHUB_OUTPUT: path.join(scratch, 'github-output'),
+          CANTON_ONLY: WF.match(/CANTON_ONLY: \|-\n((?: {12}[^\n]*\n)+)/)[1],
           BODY_MAINTENANCE_PATH_RE: '^content/blog-body(-[a-z0-9-]+)?/(it|de|en|fr)/[^/]+[.]ts$',
           compare_payload: JSON.stringify([{ files }]),
         },
