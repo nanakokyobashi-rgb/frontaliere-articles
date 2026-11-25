@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-manifestazione-losanna-tagli-bilancio.webp",
-      "sha256": "2052ee0477767edd5917f025281797c142babb6f7f5388ba80a7bb299a7298b2"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-manifestazione-losanna-tagli-bilancio-480w.webp",
-      "sha256": "e3c3485272b21f4f054f6be252244fc302ce3189be4aaad555041a15ee404b64"
-    }
-  ]
+  "items": []
 }
