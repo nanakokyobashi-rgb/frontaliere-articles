@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-soletta-voto-puk-soh.webp",
-      "sha256": "912ece8df070dc27757e07a498229c5d375133fae4510dbe1e981c65aeb16049"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-soletta-voto-puk-soh-480w.webp",
-      "sha256": "d5acce26ffc4344dd61b4caa581a64d240fb6f66b12fc7a4bb3e69669c28070a"
-    }
-  ]
+  "items": []
 }
