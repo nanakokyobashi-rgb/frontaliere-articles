@@ -213,15 +213,20 @@ export const CORE_REPLACEMENTS = [
     id: 'admit: il filtro dei push cantonali serve solo alla coda nazionale',
     count: 1,
     find: "          CANTON_ONLY: |-\n"
+      + "            def canton_content:\n"
+      + "              test(\"^content/(blog-body-canton-[a-z0-9-]+/(it|de|en|fr)/[^/]+[.]ts|blog-meta-canton-[a-z0-9-]+-(it|de|en|fr)[.]ts|cantons/canton-[a-z0-9-]+/(registry|seo|slugs)[.]ts)$\");\n"
+      + "            def canton_data:\n"
+      + "              test(\"^data/sections/canton-[a-z0-9-]+/(article-source-urls|quota-state|topic-candidates-(evergreen-(counter|rejected)|experimental-counter)|articles/[^/]+)[.]json$\");\n"
       + "            [.[]?.files[]?] as $files\n"
-      + "            | [$files[] | select(.filename | startswith(\"content/\"))] as $content\n"
-      + "            | ($content | length) > 0\n"
+      + "            | [$files[].filename | capture(\"^content/blog-body-canton-[a-z0-9-]+/it/(?<id>[^/]+)[.]ts$\") | .id] as $ids\n"
+      + "            | [$ids[] | \"public/images/blog/article-\\(.)\" + \".webp\", \"public/images/blog/thumbnails/article-\\(.)-480w.webp\"] as $covers\n"
+      + "            | any($files[]; .filename | canton_content)\n"
       + "              and all($files[];\n"
-      + "                (.filename | test(\"^([.]github/workflows/|generator/scripts/create-article[.]mjs$)\") | not)\n"
-      + "                and (.previous_filename // \"\" | test(\"^(content/|[.]github/workflows/|generator/scripts/create-article[.]mjs$)\") | not))\n"
-      + "              and all($content[];\n"
       + "                (.status == \"added\" or .status == \"modified\")\n"
-      + "                and (.filename | test(\"^content/(blog-body-canton-[a-z0-9-]+/(it|de|en|fr)/[^/]+[.]ts|blog-meta-canton-[a-z0-9-]+-(it|de|en|fr)[.]ts|cantons/canton-[a-z0-9-]+/(registry|seo|slugs)[.]ts)$\")))\n",
+      + "                and (.previous_filename == null)\n"
+      + "                and (.filename as $path | ($path | canton_content or canton_data)\n"
+      + "                  or ($covers | index($path)) != null\n"
+      + "                  or ($path == \"data/generated-image-registry.json\" and any($files[]; .filename as $file | ($covers | index($file)) != null))))\n",
     replace: '',
   },
   {

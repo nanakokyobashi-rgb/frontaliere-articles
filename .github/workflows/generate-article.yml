@@ -412,15 +412,20 @@ jobs:
           CALLER_WORKFLOW: generate-article.yml
           BODY_MAINTENANCE_PATH_RE: '^content/blog-body(-[a-z0-9-]+)?/(it|de|en|fr)/[^/]+[.]ts$'
           CANTON_ONLY: |-
+            def canton_content:
+              test("^content/(blog-body-canton-[a-z0-9-]+/(it|de|en|fr)/[^/]+[.]ts|blog-meta-canton-[a-z0-9-]+-(it|de|en|fr)[.]ts|cantons/canton-[a-z0-9-]+/(registry|seo|slugs)[.]ts)$");
+            def canton_data:
+              test("^data/sections/canton-[a-z0-9-]+/(article-source-urls|quota-state|topic-candidates-(evergreen-(counter|rejected)|experimental-counter)|articles/[^/]+)[.]json$");
             [.[]?.files[]?] as $files
-            | [$files[] | select(.filename | startswith("content/"))] as $content
-            | ($content | length) > 0
+            | [$files[].filename | capture("^content/blog-body-canton-[a-z0-9-]+/it/(?<id>[^/]+)[.]ts$") | .id] as $ids
+            | [$ids[] | "public/images/blog/article-\(.)" + ".webp", "public/images/blog/thumbnails/article-\(.)-480w.webp"] as $covers
+            | any($files[]; .filename | canton_content)
               and all($files[];
-                (.filename | test("^([.]github/workflows/|generator/scripts/create-article[.]mjs$)") | not)
-                and (.previous_filename // "" | test("^(content/|[.]github/workflows/|generator/scripts/create-article[.]mjs$)") | not))
-              and all($content[];
                 (.status == "added" or .status == "modified")
-                and (.filename | test("^content/(blog-body-canton-[a-z0-9-]+/(it|de|en|fr)/[^/]+[.]ts|blog-meta-canton-[a-z0-9-]+-(it|de|en|fr)[.]ts|cantons/canton-[a-z0-9-]+/(registry|seo|slugs)[.]ts)$")))
+                and (.previous_filename == null)
+                and (.filename as $path | ($path | canton_content or canton_data)
+                  or ($covers | index($path)) != null
+                  or ($path == "data/generated-image-registry.json" and any($files[]; .filename as $file | ($covers | index($file)) != null))))
           DRY_RUN: ${{ inputs.dry_run }}
           SECTION_REQUESTED: ${{ inputs.section }}
           SOURCE_URL: ${{ inputs.url }}

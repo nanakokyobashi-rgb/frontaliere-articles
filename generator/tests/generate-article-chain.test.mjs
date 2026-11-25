@@ -1065,6 +1065,12 @@ test('le sole modifiche a body esistenti liberano la coda di generazione', () =>
     { filename: 'data/sections/canton-vd/quota-state.json', status: 'modified' },
   ];
   assert.match(run(vaud), /reason=admit-canton-only-content/);
+  const vaudCover = { filename: 'public/images/blog/article-manifestazione-losanna-tagli-bilancio.webp', status: 'added' };
+  const imageRegistry = { filename: 'data/generated-image-registry.json', status: 'modified' };
+  assert.match(run([...vaud, vaudCover, imageRegistry]), /reason=admit-canton-only-content/);
+  assert.match(run([...vaud, imageRegistry]), /continue/);
+  assert.match(run([...vaud, { filename: 'scripts/build-api.mjs', status: 'modified' }]), /continue/);
+  assert.match(run([...vaud, { filename: 'public/images/blog/article-national.webp', status: 'added' }]), /continue/);
   assert.match(run([...vaud, { filename: 'content/blog-body/it/national.ts', status: 'added' }]), /continue/);
   assert.match(run([...vaud, { filename: '.github/workflows/generate-article.yml', status: 'modified' }]), /continue/);
   assert.match(run([...vaud, { filename: 'generator/scripts/create-article.mjs', status: 'modified' }]), /continue/);
