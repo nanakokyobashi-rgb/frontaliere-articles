@@ -787,6 +787,24 @@ jobs:
                 echo "GENERATION_OUTCOME kind=skipped reason=admit-body-maintenance section=unknown"
                 exit 0
               fi
+              # Canton-only changes already have their own generation schedule.
+              # A national body, shared content, or a workflow edit keeps the
+              # existing admission path.
+              if jq -e '
+                [.[]?.files[]?] as $files
+                | [$files[] | select(.filename | startswith("content/"))] as $content
+                | ($content | length) > 0
+                  and all($files[]; (.filename | startswith(".github/workflows/") | not)
+                    and (.previous_filename // "" | startswith("content/") | not))
+                  and all($content[];
+                    (.status == "added" or .status == "modified")
+                    and (.filename | test("^content/(blog-body-canton-[a-z0-9-]+/(it|de|en|fr)/[^/]+[.]ts|blog-meta-canton-[a-z0-9-]+-(it|de|en|fr)[.]ts|cantons/canton-[a-z0-9-]+/(registry|seo|slugs)[.]ts)$")))
+              ' <<<"$compare_payload" >/dev/null 2>&1; then
+                echo "Push di solo contenuto cantonale: generazione nazionale non accodata."
+                echo "proceed=false" >> "$GITHUB_OUTPUT"
+                echo "GENERATION_OUTCOME kind=skipped reason=admit-canton-only-content section=unknown"
+                exit 0
+              fi
               content_push=false
               while IFS= read -r changed_path; do
                 case "$changed_path" in
