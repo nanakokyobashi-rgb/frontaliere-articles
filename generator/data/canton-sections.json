@@ -189,7 +189,7 @@
           "language": "de",
           "kind": "sindacato",
           "topics": ["lavoro", "servizi", "frontalieri"],
-          "quirks": {},
+          "quirks": { "dateFromEasyBlogCard": true },
           "items7d": 0,
           "verifiedAt": "2026-10-05",
           "notes": "15 link /aargau/ag-aktuell/*; ultima data visibile 31.03.2026 -> quasi inattivo. Solo come riferimento servizi/lavoro; non per cadenza news."
