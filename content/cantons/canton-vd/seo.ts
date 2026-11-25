@@ -1206,6 +1206,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-manifestazione-losanna-tagli-bilancio': {
+    title: 'Vaud: corteo a Losanna contro austerità e tagli di bilancio',
+    description: 'Corteo a Losanna martedì contro austerità e tagli di bilancio dei servizi pubblici vodesi. Stime partecipanti tra 4000 e 8000.',
+    keywords: 'Vaud, Losanna, corteo, tagli bilancio, austerità, SSP, SUD',
+    ogTitle: 'Corteo Losanna contro tagli bilancio Vaud',
+    ogDescription: 'Martedì a Losanna, SSP e SUD hanno organizzato un corteo contro l\'austerità e i tagli ai servizi pubblici vodesi. Le stime di partecipanti sono diverse, da 4000 a 8000.',
+    canonicalPath: '/articoli-vaud/manifestazione-losanna-tagli-bilancio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vaud: corteo a Losanna contro austerità e tagli di bilancio",
+      "description": "Corteo a Losanna martedì contro austerità e tagli di bilancio dei servizi pubblici vodesi. Stime partecipanti tra 4000 e 8000.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-manifestazione-losanna-tagli-bilancio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-25T17:54:04+00:00",
+      "dateModified": "2026-11-25T17:54:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/manifestazione-losanna-tagli-bilancio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

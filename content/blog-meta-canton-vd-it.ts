@@ -96,6 +96,9 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.decisioni-grand-conseil-10-novembre.title': 'Decisioni del Grand Conseil: seduta del 10 novembre 2026',
     'blog.article.decisioni-grand-conseil-10-novembre.excerpt': 'Il verbale della seduta del Grand Conseil del 10 novembre 2026 registra dodici punti numerati da 2.1 a 2.12, seguiti dall\'ora delle domande del mese di novembre.',
     'blog.article.decisioni-grand-conseil-10-novembre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.manifestazione-losanna-tagli-bilancio.title': 'Vaud: corteo a Losanna contro austerità e tagli di bilancio',
+    'blog.article.manifestazione-losanna-tagli-bilancio.excerpt': 'Martedì sera Losanna ha ospitato una nuova manifestazione contro l\'austerità e i tagli di bilancio nei servizi pubblici vodesi.',
+    'blog.article.manifestazione-losanna-tagli-bilancio.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVdIt;

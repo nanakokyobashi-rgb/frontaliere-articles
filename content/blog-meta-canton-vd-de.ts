@@ -96,6 +96,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.decisioni-grand-conseil-10-novembre.title': 'Entscheidungen des Grand Conseil: Sitzung vom 10. November 2026',
     'blog.article.decisioni-grand-conseil-10-novembre.excerpt': 'Das Protokoll der Sitzung des Grand Conseil vom 10. November 2026 hält zwölf nummerierte Punkte von 2.1 bis 2.12 fest, gefolgt von der Fragestunde des Monats November.',
     'blog.article.decisioni-grand-conseil-10-novembre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.manifestazione-losanna-tagli-bilancio.title': 'Waadt: Demonstrationszug in Lausanne gegen Austerität und Haushaltskürzungen',
+    'blog.article.manifestazione-losanna-tagli-bilancio.excerpt': 'Am Dienstagabend fand in Lausanne eine neue Demonstration gegen die Sparmaßnahmen und Haushaltskürzungen im öffentlichen Dienst des Kantons Waadt statt.',
+    'blog.article.manifestazione-losanna-tagli-bilancio.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVdDe;

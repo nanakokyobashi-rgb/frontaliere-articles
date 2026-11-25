@@ -96,6 +96,9 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.decisioni-grand-conseil-10-novembre.title': 'Decisions of the Grand Council: session of November 10, 2026',
     'blog.article.decisioni-grand-conseil-10-novembre.excerpt': 'The minutes of the Grand Conseil session of November 10, 2026, record twelve numbered items from 2.1 to 2.12, followed by the November question period.',
     'blog.article.decisioni-grand-conseil-10-novembre.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.manifestazione-losanna-tagli-bilancio.title': 'Vaud: march in Lausanne against austerity and budget cuts',
+    'blog.article.manifestazione-losanna-tagli-bilancio.excerpt': 'On Tuesday evening, Lausanne hosted a new demonstration against austerity and budget cuts in Vaud\'s public services.',
+    'blog.article.manifestazione-losanna-tagli-bilancio.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVdEn;
