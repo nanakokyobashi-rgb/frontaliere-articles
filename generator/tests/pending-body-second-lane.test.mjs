@@ -2019,6 +2019,21 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
   const locativeTarget = 'In Zugo, the contribution is 12 francs; Zugo also reimburses 18 francs.';
   assert.equal(await makeTranslator(() => locativeTarget, 50)(locativeSource), locativeTarget);
 
+  const frenchLocativeSource = "All'Université de Genève si contano 12 richieste; all'Université de Lausanne si contano 18 richieste.";
+  for (const apostrophe of ['’', "'"]) {
+    const target = `À l${apostrophe}Université de Genève, on compte 12 demandes; à l${apostrophe}Université de Lausanne, on compte 18 demandes.`;
+    const swapped = `À l${apostrophe}Université de Lausanne, on compte 12 demandes; à l${apostrophe}Université de Genève, on compte 18 demandes.`;
+    assert.equal(await makeTranslator(() => target, 80)(frenchLocativeSource), target);
+    assert.equal(await makeTranslator(() => swapped, 80)(frenchLocativeSource), null);
+  }
+
+  const repeatedFrenchLocativeSource = "All'Université de Genève si contano 12 richieste; l’Université de Genève ne ha esaminate 18.";
+  const repeatedFrenchLocativeTarget = 'À l’Université de Genève, on compte 12 demandes; l’Université de Genève en a examiné 18.';
+  assert.equal(
+    await makeTranslator(() => repeatedFrenchLocativeTarget, 80)(repeatedFrenchLocativeSource),
+    repeatedFrenchLocativeTarget,
+  );
+
   const twoPlacesSource = 'A Zugo il contributo è di 12 franchi; a Baar il contributo è di 18 franchi.';
   const swappedPlaces = 'In Baar, the contribution is 12 francs; in Zugo, the contribution is 18 francs.';
   assert.equal(await makeTranslator(() => swappedPlaces, 50)(twoPlacesSource), null);
