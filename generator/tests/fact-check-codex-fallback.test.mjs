@@ -611,6 +611,8 @@ describe('fact-check retries under a reported input cap', () => {
       assert.match(suffix, /almeno 16 caratteri consecutivi dalla fonte o da un riferimento verificato/);
       assert.match(suffix, /almeno 35 caratteri e 6 parole/);
       assert.match(suffix, /FAIL con almeno 1 critical o 3 major/);
+      assert.match(suffix, /critical:.*fatto specifico assente sia dalla fonte sia dai fatti verificati/);
+      assert.match(suffix, /Per evergreen la sola assenza dalla fonte non basta/);
       assert.match(suffix, /"articleQuote".*"citazione esatta/);
       assert.match(suffix, /"evidenceQuotes"/);
       assert.match(suffix, /"sourceQuote"/);
