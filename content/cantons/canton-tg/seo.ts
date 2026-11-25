@@ -1206,6 +1206,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-rav-sedi-pubblicazione-vakanze': {
+    title: 'Sedi RAV e piattaforme per datori di lavoro in Turgovia',
+    description: 'Informazioni sulle sedi RAV (Amriswil, Frauenfeld, Kreuzlingen), la pubblicazione gratuita su arbeit.swiss e il supporto su permessi e indennità.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sedi, piattaforme, datori, lavoro',
+    ogTitle: 'Supporto datori di lavoro Turgovia RAV e arbeit.swiss',
+    ogDescription: 'Scopri le tre sedi RAV (Amriswil, Frauenfeld, Kreuzlingen) e come pubblicare vakanze gratuitamente su arbeit.swiss. Supporto su permessi, lavoro ridotto e intemperie in Canton Turgovia.',
+    canonicalPath: '/articoli-turgovia/rav-sedi-pubblicazione-vakanze/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sedi RAV e piattaforme per datori di lavoro in Turgovia",
+      "description": "Informazioni sulle sedi RAV (Amriswil, Frauenfeld, Kreuzlingen), la pubblicazione gratuita su arbeit.swiss e il supporto su permessi e indennità.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-supporto-datori-lavoro-turgovia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-25T23:29:48+00:00",
+      "dateModified": "2026-11-25T23:29:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/rav-sedi-pubblicazione-vakanze/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

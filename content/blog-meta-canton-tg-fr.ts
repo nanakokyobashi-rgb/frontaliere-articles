@@ -96,6 +96,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.disoccupazione-rav-thurgau.title': 'Chômage en Thurgovie : guide du RAV Thurgovie',
     'blog.article.disoccupazione-rav-thurgau.excerpt': 'RAV Thurgovie : premiers pas, inscription, droits, vidéo sur l’indemnité et conseil BIZplus à Frauenfeld et Kreuzlingen pour les personnes à la recherche d’un emploi.',
     'blog.article.disoccupazione-rav-thurgau.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.rav-sedi-pubblicazione-vakanze.title': 'Offices ORP et plateformes pour employeurs en Thurgovie',
+    'blog.article.rav-sedi-pubblicazione-vakanze.excerpt': 'Les offices ORP se trouvent à Amriswil, Frauenfeld et Kreuzlingen ; les postes vacants peuvent être publiés gratuitement sur arbeit.swiss.',
+    'blog.article.rav-sedi-pubblicazione-vakanze.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTgFr;

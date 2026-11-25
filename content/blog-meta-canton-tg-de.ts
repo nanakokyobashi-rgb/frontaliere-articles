@@ -96,6 +96,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.disoccupazione-rav-thurgau.title': 'Arbeitslosigkeit im Thurgau: Leitfaden des RAV Thurgau',
     'blog.article.disoccupazione-rav-thurgau.excerpt': 'RAV Thurgau: erste Schritte, Anmeldung, Rechte, Video zur Arbeitslosenentschädigung und Beratung von BIZplus in Frauenfeld und Kreuzlingen für Arbeitsuchende.',
     'blog.article.disoccupazione-rav-thurgau.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.rav-sedi-pubblicazione-vakanze.title': 'RAV-Standorte und Plattformen für Arbeitgeber im Thurgau',
+    'blog.article.rav-sedi-pubblicazione-vakanze.excerpt': 'Die RAV-Standorte befinden sich in Amriswil, Frauenfeld und Kreuzlingen; offene Stellen können kostenlos auf arbeit.swiss veröffentlicht werden.',
+    'blog.article.rav-sedi-pubblicazione-vakanze.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTgDe;
