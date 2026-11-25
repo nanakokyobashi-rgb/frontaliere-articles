@@ -2693,8 +2693,10 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
   );
 
   const associationSource = 'A: 100, B: 200';
+  const associationDiagnostics = [];
   const associationTranslator = new Function(
     'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+    'console',
     `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
   )(
     (bodyText) => realChunker(bodyText, 50),
@@ -2707,12 +2709,18 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     lineStructuralSignature,
     detectTruncation,
     opaqueSpanSignature,
+    { error: (message) => associationDiagnostics.push(message) },
   );
   assert.equal(
     await associationTranslator(associationSource, 'body1', (chunk) => chunk, 'test', 'de'),
     null,
     'un numero riassociato al soggetto sbagliato deve essere rifiutato anche con la stessa sequenza globale',
   );
+  const associationLogs = associationDiagnostics.filter((message) => message.startsWith('TRANSLATION_NUMBER_ASSOCIATION '));
+  assert.equal(associationLogs.length, 1);
+  assert.match(associationLogs[0], /\bexactReason=value-order-mismatch\b/);
+  assert.match(associationLogs[0], /\banchoredReason=not-evaluated\b/);
+  assert.doesNotMatch(associationLogs[0], /100|200|\b[AB]\b/i);
 
   const lowercaseAssociationSource = 'a: 100, b: 200';
   const lowercaseAssociationTranslator = new Function(
