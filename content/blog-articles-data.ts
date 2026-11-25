@@ -48262,7 +48262,7 @@ const RAW_ARTICLES = [
  id: 'euro-sotto-091-sollievo',
  category: 'novita',
  date: '2026-11-25T16:05:55.034Z',
- image: '/images/blog/article-adesione-ocst-servizi-frontalieri.webp',
+ image: '/images/blog/article-euro-sotto-091-sollievo.webp',
  hasCalculator: true,
  articleType: 'news',
  authorSlug: 'redazione',
