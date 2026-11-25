@@ -17521,7 +17521,7 @@ async function translateArticle(data) {
       const placePart = `(?:${placeAbbreviation})?${placeWord}`;
       const locativePrefix = /(?:^|(?<=[\n,:;!?|])|(?<=\.)(?=\s))[^\S\n]*(?:>[^\S\n]*)*(?:(?:[-+*]|\d+[.)])[^\S\n]+)?(?<openers>(?:[("'\[“‘«‹*_][^\S\n]*)*)/.source;
       const locativePreposition = /(?:(?:[AaÀà]|[Ii]n|[Aa]t|[Aa]u|[Aa]ux|[Zz]u|[Nn]el(?:l[aeio])?|[Nn]ei|[Nn]egli|[Ii]m|[Aa]m|[Ee]n|[Aa]l(?:l[aeio])?|[Aa]gli|[Oo]n|[Dd]ans|[Ss]ur|[Aa]n|[Ss]u(?:l(?:l[aeio])?|i|gli)?)[\p{Zs}\t]+|(?:[Aa]ll|[Nn]ell|[Ss]ull)[’\x27])/.source;
-      const placeArticle = /(?:(?:di|del|della|de|du|des|la|le|der|den|dem|the)[\p{Zs}\t]+)?/.source;
+      const placeArticle = /(?:(?:di|del|della|de|du|des|la|le|der|den|dem|the)[\p{Zs}\t]+|[lL][’\x27])?/.source;
       const placeContinuation = /(?:di|de|del|della|la|le|am|im)[\p{Zs}\t]+/.source;
       const leadingLocative = new RegExp(
         `${locativePrefix}${locativePreposition}${placeArticle}(?<place>${placePart}(?:[\\p{Zs}\\t]+(?:${placeContinuation})?${placePart})*)(?:[\\p{Zs}\\t]*(?<closers>[)\\]"\x27”’»›*_]*)(?<comma>,))?`,
