@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-disoccupazione-rav-thurgau.webp",
+      "sha256": "6e768795c7239904d1c127faac8b9aaa224459045e459adb786854227cf27f0d"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-disoccupazione-rav-thurgau-480w.webp",
+      "sha256": "6738095eb0a0cad978dd438b3eb69e26a5e59368ac03c15df28b89fa0f1e3b51"
+    }
+  ]
 }
