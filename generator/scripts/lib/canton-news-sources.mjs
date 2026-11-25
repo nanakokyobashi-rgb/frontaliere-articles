@@ -61,9 +61,8 @@
  *                            entro `maxRequestsPerRun`, senza estrarne il corpo
  *   - `datetimeYearOffset` → `<time datetime>` con l'anno sbagliato (ur.ch:
  *                            2626): le date oltre domani si correggono dell'offset
- *   - `articlePathPattern` → fonti `html-links`: regex su path + query dei link
- *                            che sono articoli; gli altri sono navigazione
- *                            (vedi `filterArticleLinks`)
+ *   - `articlePathPattern` → regex su path + query dei link ammessi da HTML e
+ *                            sitemap (vedi `filterArticleLinks`)
  *   - `urlDateFormat: YYMMDD` → fonti `html-links` che codificano la data nel
  *                            nome del file (per esempio Spitäler SH)
  *   - `dateFromSectionHeading: h4` → liste HTML in cui la data di pubblicazione
@@ -281,6 +280,10 @@ export function acceptLanguageFor(source) {
 /** I parser che questo modulo sa eseguire. */
 export const SUPPORTED_CANTON_PARSERS = Object.freeze([
   'rss', 'atom', 'html-links', 'json-entities', 'json-api', 'news-sitemap', 'sitemap', 'weekly-sitemap',
+]);
+
+export const ARTICLE_PATH_PATTERN_PARSERS = Object.freeze([
+  'html-links', 'news-sitemap', 'sitemap', 'weekly-sitemap',
 ]);
 
 // ── Decodifica ───────────────────────────────────────────────────────────────
@@ -1997,12 +2000,14 @@ export async function scanCantonSource(source, ctx) {
         return extractJsonEntitiesItems(text, url);
       case 'json-api':
         return extractJsonApiItems(text, url, { notes });
-      default:
+      default: {
         // news-sitemap, sitemap, weekly-sitemap
-        return extractSitemapNewsItems(text, url, {
+        const items = extractSitemapNewsItems(text, url, {
           dedup: !agPressDetail && !quirks.urlReusedForDifferentStories,
           useLastmod: agPressDetail,
         });
+        return quirks.articlePathPattern ? filterArticleLinks(items, url, source).headlines : items;
+      }
     }
   };
   const accept = ['html-links', 'json-entities'].includes(source.parser)
