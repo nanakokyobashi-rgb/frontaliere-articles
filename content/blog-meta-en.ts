@@ -13751,6 +13751,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.controlli-mendrisiotto-settembre-novembre.title': 'Joint checks in Mendrisiotto between September and November',
     'blog.article.controlli-mendrisiotto-settembre-novembre.excerpt': 'The operation aimed to monitor transit flows, detect any suspicious situations and counter potentially unlawful conduct.',
     'blog.article.controlli-mendrisiotto-settembre-novembre.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.euro-sotto-091-sollievo.title': 'Euro below 0,91: relief for cross-border commuters',
+    'blog.article.euro-sotto-091-sollievo.excerpt': 'At 13:45 the euro reached 0,9076, falling below the psychological threshold of 91 cents.',
+    'blog.article.euro-sotto-091-sollievo.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;

@@ -13752,6 +13752,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.controlli-mendrisiotto-settembre-novembre.title': 'Controlli congiunti nel Mendrisiotto tra settembre e novembre',
     'blog.article.controlli-mendrisiotto-settembre-novembre.excerpt': 'L’operazione puntava a seguire i flussi di transito, a rilevare eventuali situazioni sospette e a contrastare condotte potenzialmente illecite.',
     'blog.article.controlli-mendrisiotto-settembre-novembre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.euro-sotto-091-sollievo.title': 'Euro sotto 0,91: sollievo ai frontalieri',
+    'blog.article.euro-sotto-091-sollievo.excerpt': 'Alle 13:45 l\'euro ha toccato 0,9076, scendendo sotto la soglia psicologica dei 91 centesimi.',
+    'blog.article.euro-sotto-091-sollievo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;

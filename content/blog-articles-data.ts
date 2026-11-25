@@ -48258,6 +48258,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'euro-sotto-091-sollievo',
+ category: 'novita',
+ date: '2026-11-25T16:05:55.034Z',
+ image: '/images/blog/article-adesione-ocst-servizi-frontalieri.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

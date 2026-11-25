@@ -20,6 +20,16 @@
       "failureCount": 66,
       "requestedAt": "2026-10-24T19:06:53.846Z",
       "lastFailureAt": "2026-11-25T11:49:59.550Z"
+    },
+    {
+      "articleId": "euro-sotto-091-sollievo",
+      "title": "Euro sotto 0,91: sollievo ai frontalieri",
+      "fallbackImage": "/images/blog/article-adesione-ocst-servizi-frontalieri.webp",
+      "reason": "All image providers failed for article-euro-sotto-091-sollievo: openai-codex (image vision fallback deadline exceeded)",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-11-25T16:05:58.760Z",
+      "lastFailureAt": "2026-11-25T16:05:58.760Z"
     }
   ]
 }

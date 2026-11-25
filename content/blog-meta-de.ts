@@ -13750,6 +13750,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.controlli-mendrisiotto-settembre-novembre.title': 'Gemeinsame Kontrollen im Mendrisiotto zwischen September und November',
     'blog.article.controlli-mendrisiotto-settembre-novembre.excerpt': 'Die Operation zielte darauf ab, die Transitströme zu verfolgen, allfällige verdächtige Situationen festzustellen und potenziell rechtswidriges Verhalten zu bekämpfen.',
     'blog.article.controlli-mendrisiotto-settembre-novembre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.euro-sotto-091-sollievo.title': 'Euro unter 0,91: Erleichterung für Grenzgänger',
+    'blog.article.euro-sotto-091-sollievo.excerpt': 'Um 13:45 Uhr erreichte der Euro 0,9076 und fiel damit unter die psychologische Schwelle von 91 Rappen.',
+    'blog.article.euro-sotto-091-sollievo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;
