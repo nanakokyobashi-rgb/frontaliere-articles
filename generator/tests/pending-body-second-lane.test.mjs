@@ -134,7 +134,7 @@ function buildCallWithRetry(replies) {
 }
 
 const TRANSLATE_IN_CHUNKS_SRC = (() => {
-  const start = src.indexOf('  async function translateInChunks(\n    bodyText,\n    fieldKey,\n    makeChunkPrompt,\n    labelPrefix,\n    targetLang,\n    { pretranslatedResult = null, forceLegacy = false, chunkWords } = {},\n  ) {');
+  const start = src.indexOf('  async function translateInChunks(\n    bodyText,\n    fieldKey,\n    makeChunkPrompt,\n    labelPrefix,\n    targetLang,\n    { pretranslatedResult = null, forceLegacy = false, chunkWords, onReject } = {},\n  ) {');
   assert.notEqual(start, -1, 'translateInChunks non trovata in create-article.mjs');
   const end = src.indexOf('\n  }\n', start);
   assert.notEqual(end, -1, 'fine di translateInChunks non trovata in create-article.mjs');
@@ -945,7 +945,9 @@ test('la catena storica riusa il chunker per un body pending sopra soglia', asyn
   });
   assert.equal(wholeBodyCalls, 0);
   assert.equal(translated, expected);
-  assert.deepEqual(chunkOptions, { forceLegacy: true, chunkWords: 240 });
+  const { onReject, ...options } = chunkOptions;
+  assert.equal(typeof onReject, 'function');
+  assert.deepEqual(options, { forceLegacy: true, chunkWords: 240 });
 });
 
 test('la catena storica rifiuta il caller senza il traduttore chunked prima di tradurre', async () => {
@@ -988,11 +990,15 @@ test('il fallback storico corto applica il contratto strutturale prima del final
   const splitIntoTranslationChunks = buildChunker();
   const countWords = (text) => String(text).trim().split(/\s+/u).filter(Boolean).length;
   const source = 'Prima <a href="https://example.test/html">anchor</a> dopo altre parole.';
+  const reasons = [];
   const historical = makeHistoricalTranslator(
     translateFieldFreeMt,
     translatedStringOrNull,
     balanceMarkdownMarkers,
-    ({ field, itValue }) => `body ${field}: ${itValue}`,
+    ({ field, itValue, rejectionReason }) => {
+      reasons.push(rejectionReason);
+      return `body ${field}: ${itValue}`;
+    },
     countWords,
     TRANSLATION_CHUNK_THRESHOLD,
     { error() {}, warn() {}, log() {} },
@@ -1059,14 +1065,15 @@ test('il fallback storico corto applica il contratto strutturale prima del final
   const unusableBodyField = () => {
     throw Object.assign(new Error('unusable body'), { code: 'unusable-body-field' });
   };
-  for (const [wordCount, rejectedResponse] of [
-    [165, (translated) => ({ body1: translated.replace(' 40 ', ' 999 ') })],
+  for (const [wordCount, rejectedResponse, expectedReason = ''] of [
+    [165, (translated) => ({ body1: translated.replace(' 40 ', ' 999 ') }), 'numeric-values'],
     [165, () => ({})],
     [165, unusableBodyField],
     [360, unusableBodyField],
   ]) {
     const mediumBody = Array.from({ length: wordCount }, (_, i) => i === 40 ? '40' : `parola${i}`).join(' ');
     const mediumCalls = [];
+    reasons.length = 0;
     const mediumCallWithRetry = async (prompt) => {
       const part = prompt.slice('body body1: '.length);
       mediumCalls.push(countWords(part));
@@ -1085,6 +1092,7 @@ test('il fallback storico corto applica il contratto strutturale prima del final
     const firstBatchSize = Math.ceil(wordCount / 240);
     assert.equal(mediumCalls.slice(0, firstBatchSize).reduce((sum, size) => sum + size, 0), wordCount);
     const shorterCalls = mediumCalls.slice(firstBatchSize);
+    assert.deepEqual(reasons.slice(firstBatchSize), shorterCalls.map(() => expectedReason));
     assert.ok(shorterCalls.length >= 2 && shorterCalls.every((size) => size <= 120));
   }
 
