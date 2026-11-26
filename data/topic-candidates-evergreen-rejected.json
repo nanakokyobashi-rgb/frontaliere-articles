@@ -15621,10 +15621,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://comozero.it/attualita/como-giardini-a-lago-100mila-euro-per-i-nuovissimi-lampioni-lanterna-pagano-i-ristorni-dei-frontalieri": {
-      "section": "frontaliere",
-      "ts": 1795561236866
-    },
     "frontaliere::https://www.tio.ch/newsblog/valute-e-frontiere/1735685/imposte-alla-fonte-in-svizzera-ecco-le-novita-introdotte-del-2024": {
       "section": "frontaliere",
       "ts": 1795566157396
@@ -15668,6 +15664,10 @@
     "frontaliere::https://www.tvsvizzera.it/tvs/relazioni-italo-svizzere/frontalieri-il-nodo-del-secondo-pilastro-stop-ai-rimborsi-dellimposta-svizzera/92226430": {
       "section": "frontaliere",
       "ts": 1795734004155
+    },
+    "frontaliere::https://www.tvsvizzera.it/tvs/relazioni-italo-svizzere/scontro-tra-svizzera-e-italia-sugli-assegni-familiari-ai-frontalieri/91396507": {
+      "section": "frontaliere",
+      "ts": 1795735816647
     }
   }
 }
