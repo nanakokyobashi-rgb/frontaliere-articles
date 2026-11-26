@@ -524,11 +524,12 @@ test('canton-be: il gate di ancora vuole il cantone, non il lessico Ticino/confi
   BE.runReport.headlines = {};
   const kept = BE.filterByAnchor([
     beHeadline('Thun: Strasse wegen Bauarbeiten gesperrt', 'https://www.example-news.ch/a'),
-    beHeadline('Regierungsrat erhöht den Steuerfuss nicht', 'https://www.bern.ch/mediencenter/b'),
+    beHeadline('Kanton Bern: Regierungsrat erhöht den Steuerfuss nicht', 'https://www.bern.ch/mediencenter/b'),
     beHeadline('Zürich: neue Tramlinie gesperrt wegen Bauarbeiten', 'https://www.example-news.ch/c'),
+    beHeadline('Regierungsrat erhöht den Steuerfuss nicht', 'https://www.bern.ch/mediencenter/d'),
   ]);
   assert.deepEqual(kept.map((k) => k.url), ['https://www.example-news.ch/a', 'https://www.bern.ch/mediencenter/b']);
-  assert.ok(BE.logs.some((l) => /Anchor-gate: 1 headline scartate \(nessun luogo del Canton Berna/.test(l)), BE.logs.join('\n'));
+  assert.ok(BE.logs.some((l) => /Anchor-gate: 2 headline scartate \(nessun luogo del Canton Berna/.test(l)), BE.logs.join('\n'));
 });
 
 test('canton-be: i rami nazionale e frontaliere NON cambiano con la sezione cantonale nello stesso file', () => {
