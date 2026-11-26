@@ -4,17 +4,17 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "407fb42fb3ad68703bd2d90099b0be82a4a5a3efdbfe197b889f87a76a36c670",
+  "updatedAt": "2026-11-26T10:34:02.735Z",
+  "contentHash": "053746033074020437d41692da6375c00a833c53a9e52d21246b586f930a5df1",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-25T19:39:26.365Z",
+      "updatedAt": "2026-11-26T03:50:03.880Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-25T16:08:35.229Z",
+      "updatedAt": "2026-11-26T01:13:56.099Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "3",
-          "note": "segnalazioni aggiornate: 25 novembre 2026"
+          "note": "segnalazioni aggiornate: 26 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "16",
-          "note": "segnalazioni aggiornate: 25 novembre 2026"
+          "note": "segnalazioni aggiornate: 26 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-25T19:39:26.365Z"
+          "updatedAt": "2026-11-26T03:50:03.880Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -120,7 +120,7 @@
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -184,7 +184,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T10:34:02.735Z"
     },
     "en": {
       "canton": "ZG",
@@ -195,12 +195,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "3",
-          "note": "reports as of 25 November 2026"
+          "note": "reports as of 26 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "16",
-          "note": "reports as of 25 November 2026"
+          "note": "reports as of 26 November 2026"
         }
       ],
       "dataBlocks": [
@@ -259,7 +259,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-25T19:39:26.365Z"
+          "updatedAt": "2026-11-26T03:50:03.880Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -287,7 +287,7 @@
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -351,7 +351,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T10:34:02.735Z"
     },
     "de": {
       "canton": "ZG",
@@ -362,12 +362,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "3",
-          "note": "Meldungen vom 25. November 2026"
+          "note": "Meldungen vom 26. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "16",
-          "note": "Meldungen vom 25. November 2026"
+          "note": "Meldungen vom 26. November 2026"
         }
       ],
       "dataBlocks": [
@@ -426,7 +426,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-25T19:39:26.365Z"
+          "updatedAt": "2026-11-26T03:50:03.880Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -454,7 +454,7 @@
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -518,7 +518,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T10:34:02.735Z"
     },
     "fr": {
       "canton": "ZG",
@@ -529,12 +529,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "3",
-          "note": "signalements au 25 novembre 2026"
+          "note": "signalements au 26 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "16",
-          "note": "signalements au 25 novembre 2026"
+          "note": "signalements au 26 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -593,7 +593,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-25T19:39:26.365Z"
+          "updatedAt": "2026-11-26T03:50:03.880Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -621,7 +621,7 @@
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -685,7 +685,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T10:34:02.735Z"
     }
   }
 }

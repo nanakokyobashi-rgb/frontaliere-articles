@@ -560,7 +560,7 @@ async function runSecondLaneBlock({
   const AI_MODELS = { CODEX_CLI_PRIMARY: 'codex-cli/test' };
   const fn = new Function(
     'data', 'RUN_REPORT', 'retryPendingBodyTranslations', 'assertNoPendingBodyTranslations', 'AI_MODELS', 'pendingBodySecondLaneAvailable', 'pendingBodyRecoveryAvailable', 'pendingBodyLaneShouldStop',
-    'translatePendingBodyWithCodex', 'translatePendingBodyWithHistoricalChain', 'callWithRetry', 'translatedStringOrNull', 'isSourcePassthrough', 'detectTruncation', 'sanitizeBodyText', 'translateInChunks', 'console',
+    'translatePendingBodyWithCodex', 'translatePendingBodyWithHistoricalChain', 'callWithRetry', 'translatedStringOrNull', 'isSourcePassthrough', 'detectTruncation', 'sanitizeBodyText', 'translateInChunks', 'freeMtFieldKey', 'console',
     `${realTruncationSrc()}\nreturn (async () => { ${block} })();`,
   );
   const quiet = { error: () => {}, warn: () => {}, log: () => {} };
@@ -568,7 +568,7 @@ async function runSecondLaneBlock({
     data, RUN_REPORT, retryPendingBodyTranslations, assertNoPendingBodyTranslations, AI_MODELS, () => codexAvailable,
     () => codexAvailable || historicalAvailable, () => false,
     translatePendingBodyWithCodex, translatePendingBodyWithHistoricalChain, async () => ({}),
-    translatedStringOrNull, isSourcePassthrough, detectTruncation, sanitizeBodyText, null, quiet,
+    translatedStringOrNull, isSourcePassthrough, detectTruncation, sanitizeBodyText, null, freeMtFieldKey, quiet,
   );
 }
 
@@ -999,7 +999,7 @@ test('il fallback storico corto applica il contratto strutturale prima del final
     translatedStringOrNull,
     balanceMarkdownMarkers,
     ({ field, itValue, rejectionReason }) => {
-      reasons.push(rejectionReason);
+      reasons.push([].concat(rejectionReason).filter(Boolean));
       return `body ${field}: ${itValue}`;
     },
     countWords,
@@ -1095,7 +1095,7 @@ test('il fallback storico corto applica il contratto strutturale prima del final
     const firstBatchSize = Math.ceil(wordCount / 240);
     assert.equal(mediumCalls.slice(0, firstBatchSize).reduce((sum, size) => sum + size, 0), wordCount);
     const shorterCalls = mediumCalls.slice(firstBatchSize);
-    assert.deepEqual(reasons.slice(firstBatchSize), shorterCalls.map(() => expectedReason));
+    assert.deepEqual(reasons.slice(firstBatchSize), shorterCalls.map(() => expectedReason ? [expectedReason] : []));
     assert.ok(shorterCalls.length >= 2 && shorterCalls.every((size) => size <= 120));
   }
 

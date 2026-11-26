@@ -386,6 +386,7 @@ test('il generatore usa la stessa sorgente di riparazione per entrambi i campi',
   const source = fs.readFileSync(path.join(ROOT, 'generator', 'scripts', 'create-article.mjs'), 'utf8');
   assert.match(source, /import \{ repairSeoTitleFields \} from '\.\/lib\/seo-title-repair\.mjs';/);
   assert.match(source, /repairSeoTitleFields\(data\.seo, seoTitleCore\)/);
+  assert.match(source, /function modifySeoService\(data\) \{\s+decodeSeoEntities\(data\);[\s\S]{0,250}repairSeoTitleFields\(data\.seo, data\.content\.it\.title\);/u);
   assert.match(source, /data\.seo\.ogTitle = data\.seo\.ogTitle \? String\(data\.seo\.ogTitle\)\.trim\(\) : seoTitleCore/);
   assert.match(source, /data\.seo\.headline = data\.seo\.headline \? String\(data\.seo\.headline\)\.trim\(\) : seoTitleCore/);
 });

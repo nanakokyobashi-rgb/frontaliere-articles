@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/rubriche/ospite/1952768/la-sanita-ha-bisogno-di-incentivi": {
-    "articleId": "costi-sanita-incentivi",
-    "ts": "2026-09-25T21:17:42.608Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4111351": {
     "articleId": "cembra-vontobel-sede-baden-baar",
     "ts": "2026-09-25T22:08:30.741Z",
@@ -2499,5 +2494,11 @@
     "ts": "2026-11-21T05:20:08.826Z",
     "keyForm": 2,
     "sourceContentFingerprint": "8953bf8b2b513e2180fedeb163a64204de5d2fdf825b5dce9270ccbeae1e413f"
+  },
+  "https://www.admin.ch/it/newnsb/muhcy7l7lpy1": {
+    "articleId": "consultazione-modifiche-oosg",
+    "ts": "2026-11-26T10:15:56.664Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "836645c0db302b4813aa9843b5e93f1b0807f721e27c874a777391d441c812ce"
   }
 }

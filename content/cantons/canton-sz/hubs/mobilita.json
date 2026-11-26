@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "20e3e464d22449bebf3618ee937439fb43b40434cc9a59d762b37a645910706a",
+  "updatedAt": "2026-11-26T10:34:02.735Z",
+  "contentHash": "fcdbc4177b2ca495451ce83a904e8a17b7971bc0e848c9da9b82a0170bccf59f",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-25T19:39:26.365Z",
+      "updatedAt": "2026-11-26T03:50:03.880Z",
       "keyFacts": 2
     }
   ],
@@ -23,12 +23,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "2",
-          "note": "segnalazioni aggiornate: 25 novembre 2026"
+          "note": "segnalazioni aggiornate: 26 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "4",
-          "note": "segnalazioni aggiornate: 25 novembre 2026"
+          "note": "segnalazioni aggiornate: 26 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -75,7 +75,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-25T19:39:26.365Z"
+          "updatedAt": "2026-11-26T03:50:03.880Z"
         }
       ],
       "curatedArticles": [
@@ -115,7 +115,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T10:34:02.735Z"
     },
     "en": {
       "canton": "SZ",
@@ -126,12 +126,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "2",
-          "note": "reports as of 25 November 2026"
+          "note": "reports as of 26 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "4",
-          "note": "reports as of 25 November 2026"
+          "note": "reports as of 26 November 2026"
         }
       ],
       "dataBlocks": [
@@ -178,7 +178,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-25T19:39:26.365Z"
+          "updatedAt": "2026-11-26T03:50:03.880Z"
         }
       ],
       "curatedArticles": [
@@ -218,7 +218,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T10:34:02.735Z"
     },
     "de": {
       "canton": "SZ",
@@ -229,12 +229,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "2",
-          "note": "Meldungen vom 25. November 2026"
+          "note": "Meldungen vom 26. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "4",
-          "note": "Meldungen vom 25. November 2026"
+          "note": "Meldungen vom 26. November 2026"
         }
       ],
       "dataBlocks": [
@@ -281,7 +281,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-25T19:39:26.365Z"
+          "updatedAt": "2026-11-26T03:50:03.880Z"
         }
       ],
       "curatedArticles": [
@@ -321,7 +321,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T10:34:02.735Z"
     },
     "fr": {
       "canton": "SZ",
@@ -332,12 +332,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "2",
-          "note": "signalements au 25 novembre 2026"
+          "note": "signalements au 26 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "4",
-          "note": "signalements au 25 novembre 2026"
+          "note": "signalements au 26 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -384,7 +384,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-25T19:39:26.365Z"
+          "updatedAt": "2026-11-26T03:50:03.880Z"
         }
       ],
       "curatedArticles": [
@@ -424,7 +424,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T10:34:02.735Z"
     }
   }
 }

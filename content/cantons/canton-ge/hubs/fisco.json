@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "fisco",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "a55982b6ce3e4a5054550e5cc7aa0d436d5b8c2b1982d08c848c4bd74d61d278",
+  "updatedAt": "2026-11-26T10:34:02.735Z",
+  "contentHash": "d832540a5152f9246ea5c52ae2de552e9c5eeb1dcf4903e93fa7002350622885",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-25T16:08:35.229Z",
+      "updatedAt": "2026-11-26T01:13:56.099Z",
       "keyFacts": 0
     }
   ],
@@ -110,6 +110,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Réductions et crédits d'impôt : vous avez jusqu’au 10 décembre pour modifier votre avance",
+              "date": "2026-11-25",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17881"
+            },
+            {
               "label": "Barème ICC de l'impôt à la source sur les prestations en capital 2027",
               "date": "2026-11-25",
               "url": "https://www.ge.ch/node/45605"
@@ -133,14 +138,9 @@
               "label": "Barème IFD de l'impôt à la source sur les prestations en capital 2027",
               "date": "2026-11-25",
               "url": "https://www.ge.ch/node/45606"
-            },
-            {
-              "label": "Barèmes 2027 de perception de l'impôt à la source",
-              "date": "2026-11-25",
-              "url": "https://www.ge.ch/node/45603"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -190,7 +190,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T10:34:02.735Z"
     },
     "en": {
       "canton": "GE",
@@ -278,6 +278,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Réductions et crédits d'impôt : vous avez jusqu’au 10 décembre pour modifier votre avance",
+              "date": "2026-11-25",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17881"
+            },
+            {
               "label": "Barème ICC de l'impôt à la source sur les prestations en capital 2027",
               "date": "2026-11-25",
               "url": "https://www.ge.ch/node/45605"
@@ -301,14 +306,9 @@
               "label": "Barème IFD de l'impôt à la source sur les prestations en capital 2027",
               "date": "2026-11-25",
               "url": "https://www.ge.ch/node/45606"
-            },
-            {
-              "label": "Barèmes 2027 de perception de l'impôt à la source",
-              "date": "2026-11-25",
-              "url": "https://www.ge.ch/node/45603"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -358,7 +358,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T10:34:02.735Z"
     },
     "de": {
       "canton": "GE",
@@ -446,6 +446,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Réductions et crédits d'impôt : vous avez jusqu’au 10 décembre pour modifier votre avance",
+              "date": "2026-11-25",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17881"
+            },
+            {
               "label": "Barème ICC de l'impôt à la source sur les prestations en capital 2027",
               "date": "2026-11-25",
               "url": "https://www.ge.ch/node/45605"
@@ -469,14 +474,9 @@
               "label": "Barème IFD de l'impôt à la source sur les prestations en capital 2027",
               "date": "2026-11-25",
               "url": "https://www.ge.ch/node/45606"
-            },
-            {
-              "label": "Barèmes 2027 de perception de l'impôt à la source",
-              "date": "2026-11-25",
-              "url": "https://www.ge.ch/node/45603"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -526,7 +526,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T10:34:02.735Z"
     },
     "fr": {
       "canton": "GE",
@@ -614,6 +614,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Réductions et crédits d'impôt : vous avez jusqu’au 10 décembre pour modifier votre avance",
+              "date": "2026-11-25",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17881"
+            },
+            {
               "label": "Barème ICC de l'impôt à la source sur les prestations en capital 2027",
               "date": "2026-11-25",
               "url": "https://www.ge.ch/node/45605"
@@ -637,14 +642,9 @@
               "label": "Barème IFD de l'impôt à la source sur les prestations en capital 2027",
               "date": "2026-11-25",
               "url": "https://www.ge.ch/node/45606"
-            },
-            {
-              "label": "Barèmes 2027 de perception de l'impôt à la source",
-              "date": "2026-11-25",
-              "url": "https://www.ge.ch/node/45603"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -694,7 +694,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T10:34:02.735Z"
     }
   }
 }

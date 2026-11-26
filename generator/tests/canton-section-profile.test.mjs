@@ -390,6 +390,15 @@ test("lessico cantonale: composti tedeschi/francesi di mobilita' e sicurezza ent
   }
 });
 
+test('canton topical gate admits public social assistance in German and French', () => {
+  const nw = buildCantonProfile('canton-nw');
+  const fr = buildCantonProfile('canton-fr');
+
+  assert.equal(nw.hasAdmission('Zahl der Nidwaldner Sozialhilfebeziehenden stabil'), true);
+  assert.equal(fr.hasAdmission('Le nombre de bénéficiaires de l’aide sociale reste stable'), true);
+  assert.equal(nw.hasAdmission('Gesellschaftlicher Anlass in Stans'), false);
+});
+
 test('prompt cantonali: stesso formato di risposta delle storiche, cantone e contesto frontalieri dentro', () => {
   const p = buildCantonProfile('canton-ti', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
   const prompt = cantonClassifierPrompt(p, { headline: 'Chiasso: chiusa la dogana di Brogeda', sourceHint: 'www.ti.ch/x', summary: '' });
