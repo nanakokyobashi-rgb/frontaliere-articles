@@ -30,6 +30,16 @@
       "failureCount": 0,
       "requestedAt": "2026-11-26T08:46:31.297Z",
       "lastFailureAt": "2026-11-26T08:46:31.297Z"
+    },
+    {
+      "articleId": "netstal-via-secondaria",
+      "title": "Netstal: il Cantone apre un'altra via secondaria",
+      "fallbackImage": "/images/blog/article-arresti-auto-como-minacce.webp",
+      "reason": "All image providers failed for article-netstal-via-secondaria: openai-codex (image vision fallback deadline exceeded)",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-11-26T13:23:22.611Z",
+      "lastFailureAt": "2026-11-26T13:23:22.611Z"
     }
   ]
 }

@@ -45,6 +45,9 @@ const blogMetaCantonGlFr: Record<string, string> = {
     'blog.article.glarona-detrazioni-energia-2029.title': 'Glaris : Gouvernement opposé aux déductions pour les économies d’énergie',
     'blog.article.glarona-detrazioni-energia-2029.excerpt': 'Le Gouvernement glaronais recommande au Landrat de rejeter le postulat qui demande de maintenir les déductions fiscales pour les mesures d’économie d’énergie dans les logements en propriété.',
     'blog.article.glarona-detrazioni-energia-2029.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.netstal-via-secondaria.title': 'Netstal : le canton ouvre une autre voie secondaire',
+    'blog.article.netstal-via-secondaria.excerpt': 'À Netstal, environ 100 voitures de moins au giratoire Wiggispark pourraient alléger la file sur la Querspange à l\'heure de pointe du soir.',
+    'blog.article.netstal-via-secondaria.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonGlFr;

@@ -160,4 +160,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'netstal-via-secondaria',
+ category: 'novita',
+ date: '2026-11-26T13:23:22.205Z',
+ image: '/images/blog/article-arresti-auto-como-minacce.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GL'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

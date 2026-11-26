@@ -45,6 +45,9 @@ const blogMetaCantonGlEn: Record<string, string> = {
     'blog.article.glarona-detrazioni-energia-2029.title': 'Glarus: Government opposes energy-saving tax deductions',
     'blog.article.glarona-detrazioni-energia-2029.excerpt': 'The Glarus Government recommends that the Landrat reject the postulate calling for tax deductions for energy-saving measures in owner-occupied homes to be maintained.',
     'blog.article.glarona-detrazioni-energia-2029.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.netstal-via-secondaria.title': 'Netstal: the canton opens another side road',
+    'blog.article.netstal-via-secondaria.excerpt': 'In Netstal, around 100 fewer cars at the Wiggispark roundabout could ease the queue on the Querspange during the evening rush hour.',
+    'blog.article.netstal-via-secondaria.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGlEn;

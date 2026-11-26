@@ -45,6 +45,9 @@ const blogMetaCantonGlDe: Record<string, string> = {
     'blog.article.glarona-detrazioni-energia-2029.title': 'Glarus: Regierung gegen Abzüge für Energiesparmassnahmen',
     'blog.article.glarona-detrazioni-energia-2029.excerpt': 'Die Glarner Regierung empfiehlt dem Landrat, das Postulat abzulehnen, das verlangt, die Steuerabzüge für Energiesparmassnahmen bei selbstgenutztem Wohneigentum beizubehalten. Der Vorschlag wurde von Markus Schnyder (SVP) eingereicht.',
     'blog.article.glarona-detrazioni-energia-2029.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.netstal-via-secondaria.title': 'Netstal: Der Kanton eröffnet eine weitere Nebenstraße',
+    'blog.article.netstal-via-secondaria.excerpt': 'In Netstal könnten rund 100 Autos weniger am Kreisverkehr Wiggispark den Rückstau auf der Querspange während der abendlichen Hauptverkehrszeit verringern.',
+    'blog.article.netstal-via-secondaria.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGlDe;
