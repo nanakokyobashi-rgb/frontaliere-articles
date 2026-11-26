@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ag::https://www.fricktal.info/news/gemeinden/rheinfelden/rheinfelden-aargauischen-volksinitiative-fuer-berufsfachschulen-gesundheit-und-soziales-in-allen-regionen-des-kantons-lanciert.html": {
-      "section": "canton-ag",
-      "ts": 1795458488158
-    },
     "canton-ag::https://www.reussbote.ch/der-steuerfuss-soll-erhoeht-werden": {
       "section": "canton-ag",
       "ts": 1795501773334
@@ -19,6 +15,10 @@
     "canton-ag::https://www.reussbote.ch/remetschwil-sagt-ja-zur-gesamtrevision-seiner-nutzungsplanung": {
       "section": "canton-ag",
       "ts": 1795588167782
+    },
+    "canton-ag::https://www.fricktal.info/news/gemeinden/rheinfelden/rheinfelden-aargauischen-volksinitiative-fuer-berufsfachschulen-gesundheit-und-soziales-in-allen-regionen-des-kantons-lanciert.html": {
+      "section": "canton-ag",
+      "ts": 1795653263826
     }
   }
 }
