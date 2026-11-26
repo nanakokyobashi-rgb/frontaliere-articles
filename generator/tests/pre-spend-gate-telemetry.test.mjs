@@ -71,6 +71,7 @@ function extractFunctionSource(signature) {
 }
 
 const GATE_SRC = extractFunctionSource('async function applyPreSpendTopicGate(headlines, opts = {}) {');
+const HEADLINE_SUMMARY_SRC = extractFunctionSource('function headlineSourceSummary(headline) {');
 const RECOVERY_SRC = extractFunctionSource('function resolveRunRecovery() {');
 const SIGNAL_CANDIDATE_SRC = extractFunctionSource('function isSignalDrivenTopicCandidate(candidate) {');
 const isSignalDrivenTopicCandidate = new Function(
@@ -194,7 +195,7 @@ function makeGate({
     'DEFAULT_MAX_CLASSIFIER_CALLS',
     'PRESPEND_GATE_CONCURRENCY',
     'resolvePositiveIntEnv',
-    `${GATE_SRC}\nreturn applyPreSpendTopicGate;`,
+    `${HEADLINE_SUMMARY_SRC}\n${GATE_SRC}\nreturn applyPreSpendTopicGate;`,
   )(
     isFrontaliere,
     isCanton,
