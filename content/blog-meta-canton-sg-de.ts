@@ -105,6 +105,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.votazione-fondo-rete-gas-wil.title': 'Referendum über den Fonds für die Stilllegung des Gasnetzes der TBW in Wil',
     'blog.article.votazione-fondo-rete-gas-wil.excerpt': 'Am 29. November 2026 findet die Volksabstimmung über das Reglement statt, mit dem der Fonds für die Stilllegung und den Rückbau des Gasnetzes der Technischen Betriebe Wil (TBW) eingerichtet wird.',
     'blog.article.votazione-fondo-rete-gas-wil.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.inverno-sgallen-controlli-strade.title': 'Winter in St.Gallen: Straßenkontrollen zwischen Ende Oktober und Mitte April',
+    'blog.article.inverno-sgallen-controlli-strade.excerpt': 'Schnee und Temperaturen unter null Grad erwartet; die Räumung folgt festgelegten Prioritäten, mit bis zu 200 Personen.',
+    'blog.article.inverno-sgallen-controlli-strade.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSgDe;
