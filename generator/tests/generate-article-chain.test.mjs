@@ -944,11 +944,13 @@ test('un retry del dispatch con la stessa URL viene deduplicato dal ricevitore',
   assert.match(WF, /SOURCE_URL: \$\{\{ inputs\.url \}\}/);
   assert.match(WF, /SOURCE_KEY: \$\{\{ inputs\.source_key \}\}/);
   assert.match(admit, /--argjson known_conclusions "\$KNOWN_RUN_CONCLUSIONS"/);
-  assert.match(admit, /and has\("conclusion"\)/);
-  assert.match(admit, /\.status == "completed"\s+and \(\.conclusion \| type\) == "string"/);
-  assert.match(admit, /\{id, created_at, status, conclusion, display_title, head_branch\}/);
-  assert.match(admit, /and \(\.display_title \| type\) == "string"\s+and \(\.display_title \| length\) > 0/);
-  assert.doesNotMatch(admit, /display_title: \(\.display_title \/\/ ""\)/);
+  assert.match(admit, /"\$ADMISSION_RUN_SNAPSHOT"/);
+  const snapshot = WF.match(/ADMISSION_RUN_SNAPSHOT: \|-\n((?: {12}[^\n]*\n)+)/)[1];
+  assert.match(snapshot, /and has\("conclusion"\)/);
+  assert.match(snapshot, /\.status == "completed"\s+and \(\.conclusion \| type\) == "string"/);
+  assert.match(snapshot, /\{id, created_at, status, conclusion, display_title, head_branch\}/);
+  assert.match(snapshot, /and \(\.display_title \| type\) == "string"\s+and \(\.display_title \| length\) > 0/);
+  assert.doesNotMatch(snapshot, /display_title: \(\.display_title \/\/ ""\)/);
   assert.match(admit, /if \[ "\$EVENT_NAME" = "workflow_dispatch" \] && \[ "\$\{DRY_RUN:-false\}" != "true" \] && \[ -n "\$\{SOURCE_URL:-\}" \]/);
   assert.match(admit, /\^\[a-f0-9\]\{32\}\$/);
   assert.match(admit, /sha256sum \| cut -d' ' -f1/);
@@ -1046,6 +1048,7 @@ test('le sole modifiche a body esistenti liberano la coda di generazione', () =>
           REGISTRY_BEFORE: beforeFile, REGISTRY_AFTER: afterFile,
           GITHUB_OUTPUT: path.join(scratch, 'github-output'),
           CANTON_ONLY: WF.match(/CANTON_ONLY: \|-\n((?: {12}[^\n]*\n)+)/)[1],
+          CANTON_REGISTRY_DELTA: WF.match(/CANTON_REGISTRY_DELTA: \|-\n((?: {12}[^\n]*\n)+)/)[1],
           BODY_MAINTENANCE_PATH_RE: '^content/blog-body(-[a-z0-9-]+)?/(it|de|en|fr)/[^/]+[.]ts$',
           compare_payload: JSON.stringify([{ files }]),
         },
