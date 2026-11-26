@@ -15830,13 +15830,17 @@ Rispondi con un JSON object (no markdown, no code fences):
 }
 
 function buildPendingBodyRetranslationPrompt({ langName, field, itValue, partLabel = '', rejectionReason = '' }) {
-  const correction = {
+  const correctionsByReason = {
     'numeric-association': 'Controlla ogni coppia dato-etichetta separatamente. Mantieni nella stessa proposizione ogni valore e il suo nome, anche se il nome è ripetuto.',
     'numeric-values': 'Confronta tutte le cifre con la fonte prima di rispondere. Riproduci ogni valore, segno, unità e percentuale nell’ordine originale.',
     'localized-calendar': 'Controlla tutte le date. Localizza il nome del mese e l’ordine per la lingua di arrivo, conservando giorno, mese, anno ed estremi di ogni intervallo.',
     'line-skeleton': 'Confronta il Markdown riga per riga. Conserva le righe vuote e la posizione di ciascun titolo, punto elenco e citazione.',
     completeness: 'Verifica che ogni frase originale compaia nella traduzione, compresi gli incisi e le frasi finali.',
-  }[rejectionReason];
+  };
+  const correction = [...new Set([].concat(rejectionReason))]
+    .map((reason) => Object.hasOwn(correctionsByReason, reason) ? correctionsByReason[reason] : '')
+    .filter(Boolean)
+    .join('\n');
   return `Traduci COMPLETAMENTE in ${langName} il seguente corpo dell'articolo per il sito Frontaliere Ticino.
 
 VINCOLI OBBLIGATORI:
@@ -16043,7 +16047,7 @@ async function translatePendingBodyWithCodex(
           () => '',
           `${locale}:${field}-pending-codex-validation`,
           locale,
-          { pretranslatedResult: { [field]: text }, onReject: (reason) => { rejectionReason = reason; } },
+          { pretranslatedResult: { [field]: text }, onReject: (reason) => { rejectionReason = [reason].concat(rejectionReason); } },
         )
         : stripTableHeaderColumnMarkers(text);
       if (validatedText) {
@@ -16101,7 +16105,7 @@ async function translatePendingBodyWithHistoricalChain(
     translate: async ({ text: masked }) => {
       const wordCount = countWords(masked || '');
       let rejectionReason = previousRejectionReason;
-      const onReject = (reason) => { rejectionReason = reason; };
+      const onReject = (reason) => { rejectionReason = [reason].concat(rejectionReason); };
       const translateSegments = (chunkWords) => chunkTranslator(
         masked,
         field,
@@ -18491,6 +18495,10 @@ ${localizedToponymInstruction(targetLang)}`;
           const rejectionReason = bodyKey ? RUN_REPORT.translation.bodyValidationRejections?.[bodyKey] : undefined;
           const onReject = (reason) => {
             const rejections = RUN_REPORT.translation.bodyValidationRejections ??= {};
+            if (rejectionReason && rejectionReason !== reason) {
+              const previous = RUN_REPORT.translation.bodyValidationPreviousRejections ??= {};
+              previous[bodyKey] = rejectionReason;
+            }
             rejections[bodyKey] = reason;
           };
           let retried;
@@ -18809,7 +18817,11 @@ ${localizedToponymInstruction(targetLang)}`;
     isLaneAvailable: () => pendingBodyRecoveryAvailable(),
     shouldStop: () => pendingBodyLaneShouldStop(),
     translate: ({ locale, field, itValue }) => {
-      const rejectionReason = RUN_REPORT.translation.bodyValidationRejections?.[freeMtFieldKey(locale, field)];
+      const bodyKey = freeMtFieldKey(locale, field);
+      const rejectionReason = [
+        RUN_REPORT.translation.bodyValidationRejections?.[bodyKey],
+        RUN_REPORT.translation.bodyValidationPreviousRejections?.[bodyKey],
+      ];
       const options = { callWithRetry, translateInChunks, rejectionReason };
       return pendingBodySecondLaneAvailable()
         ? translatePendingBodyWithCodex(itValue, locale, field, {

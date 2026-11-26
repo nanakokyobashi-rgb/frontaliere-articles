@@ -583,6 +583,15 @@ test('primo retry mirato: conserva il motivo più recente per la corsia di riser
     },
   });
   assert.equal(report.translation.bodyValidationRejections['en:body1'], 'localized-calendar');
+  assert.equal(report.translation.bodyValidationPreviousRejections['en:body1'], 'numeric-values');
+  const prompt = REAL_BUILD_PENDING_BODY_RETRANSLATION_PROMPT({
+    langName: 'tedesco',
+    field: 'body1',
+    itValue: itContent.body1,
+    rejectionReason: ['line-skeleton', 'numeric-values', 'numeric-values'],
+  });
+  assert.match(prompt, /Confronta il Markdown riga per riga/);
+  assert.equal([...prompt.matchAll(/Confronta tutte le cifre/g)].length, 1);
   assert.equal(isBodyTranslationPending(data, 'en', 'body1'), true);
 });
 
