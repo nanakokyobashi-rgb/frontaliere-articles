@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "39567a56bc7172f3c115177237acc5fc8226d68b6cde7ed20b7da164c4a6735a",
+  "updatedAt": "2026-11-26T13:29:46.197Z",
+  "contentHash": "7808992a0d7f123173bd701da144def5dacc392b07cacc7ba9fcdbd24a25a47d",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Governo Appenzello Esterno verifica ulteriori risparmi",
+          "url": "/articoli-appenzello/appenzello-esterno-risparmio-verifica/",
+          "excerpt": "Misure precedenti hanno già generato CHF 9,5 milioni di risparmio annuo; l'obiettivo è bilancio in pareggio e indebitamento stabilizzato.",
+          "date": "2026-11-26T13:26:08.407Z"
+        },
+        {
           "title": "Teufen: tunnel e opere finanziabili fino a 120 milioni",
           "url": "/articoli-appenzello/teufen-finanziamento-tunnel/",
           "excerpt": "Il comitato «Teufen mit Zukunft» riferisce che un finanziamento fino a 120 milioni di franchi potrebbe coprire il tunnel ferroviario e altre opere.",
@@ -94,12 +100,6 @@
           "url": "/articoli-appenzello/governo-appenzello-candidati/",
           "excerpt": "Il Gewerbeverband raccomanda Karin Jung (FDP) e Balz Ruprecht (EVP) per il seggio lasciato libero alle elezioni di fine febbraio 2027.",
           "date": "2026-11-10T11:50:35.348Z"
-        },
-        {
-          "title": "Consiglio comunale istituisce gruppo per il caldo a scuola",
-          "url": "/articoli-appenzello/consiglio-gruppo-caldo-scuola/",
-          "excerpt": "Il Consiglio comunale ha istituito la Arbeitsgruppe «Hitzeschutz und Begrünung»: aule e spazi esterni, con misure rapide per la protezione dal sole.",
-          "date": "2026-11-10T02:51:13.479Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T13:29:46.197Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell Ausserrhoden Government examines further savings",
+          "url": "/en/appenzell-articles/appenzell-ausserrhoden-saving-check/",
+          "excerpt": "Previous measures have already generated CHF 9,5 million in annual savings; the objective is a balanced budget and stabilized debt.",
+          "date": "2026-11-26T13:26:08.407Z"
+        },
+        {
           "title": "Teufen: tunnel and projects fundable up to 120 million",
           "url": "/en/appenzell-articles/teufen-tunnel-investment-financing/",
           "excerpt": "The «Teufen mit Zukunft» committee reports that financing of up to 120 million francs could cover the railway tunnel and other projects.",
@@ -193,12 +199,6 @@
           "url": "/en/appenzell-articles/appenzell-government-candidates/",
           "excerpt": "The Gewerbeverband recommends Karin Jung (FDP) and Balz Ruprecht (EVP) for the seat left vacant in the elections at the end of February 2027.",
           "date": "2026-11-10T11:50:35.348Z"
-        },
-        {
-          "title": "City council establishes group to address heat at school",
-          "url": "/en/appenzell-articles/council-school-heat-group/",
-          "excerpt": "The City Council established the Arbeitsgruppe «Hitzeschutz und Begrünung»: classrooms and outdoor spaces, with rapid measures for protection from the sun.",
-          "date": "2026-11-10T02:51:13.479Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T13:29:46.197Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Regierung von Appenzell Ausserrhoden prüft weitere Einsparungen",
+          "url": "/de/appenzell-artikel/appenzell-ausserrhoden-ersparnis-pruefung/",
+          "excerpt": "Frühere Maßnahmen haben bereits jährliche Einsparungen von CHF 9,5 Millionen erbracht; Ziel ist ein ausgeglichener Haushalt und eine stabilisierte Verschuldung.",
+          "date": "2026-11-26T13:26:08.407Z"
+        },
+        {
           "title": "Teufen: Tunnel und weitere Bauvorhaben bis zu 120 Millionen finanzierbar",
           "url": "/de/appenzell-artikel/teufen-tunnel-investitionen/",
           "excerpt": "Das Komitee «Teufen mit Zukunft» berichtet, dass eine Finanzierung von bis zu 120 Millionen Franken den Eisenbahntunnel und weitere Bauvorhaben abdecken könnte.",
@@ -292,12 +298,6 @@
           "url": "/de/appenzell-artikel/appenzell-regierungsrat-kandidaten/",
           "excerpt": "Der Gewerbeverband empfiehlt Karin Jung (FDP) und Balz Ruprecht (EVP) für den bei den Wahlen Ende Februar 2027 frei werdenden Sitz.",
           "date": "2026-11-10T11:50:35.348Z"
-        },
-        {
-          "title": "Gemeinderat richtet Arbeitsgruppe gegen Hitze an Schulen ein",
-          "url": "/de/appenzell-artikel/gemeinderat-hitzeschutz-schule/",
-          "excerpt": "Der Gemeinderat hat die Arbeitsgruppe «Hitzeschutz und Begrünung» eingerichtet: Klassenräume und Außenbereiche, mit schnellen Maßnahmen zum Sonnenschutz.",
-          "date": "2026-11-10T02:51:13.479Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T13:29:46.197Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Gouvernement d’Appenzell étudie d’autres économies",
+          "url": "/fr/articles-appenzell/appenzell-estern-verification-economique/",
+          "excerpt": "Les mesures précédentes ont déjà généré CHF 9,5 millions d'économies annuelles ; l'objectif est un budget équilibré et un endettement stabilisé.",
+          "date": "2026-11-26T13:26:08.407Z"
+        },
+        {
           "title": "Teufen : tunnel et ouvrages finançables jusqu’à 120 millions",
           "url": "/fr/articles-appenzell/teufen-tunnel-investissements/",
           "excerpt": "Le comité « Teufen mit Zukunft » indique qu’un financement pouvant atteindre 120 millions de francs pourrait couvrir le tunnel ferroviaire et d’autres ouvrages.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-appenzell/candidats-gouvernement-appenzell/",
           "excerpt": "Le Gewerbeverband recommande Karin Jung (FDP) et Balz Ruprecht (EVP) pour le siège laissé vacant lors des élections de fin février 2027.",
           "date": "2026-11-10T11:50:35.348Z"
-        },
-        {
-          "title": "Conseil municipal crée un groupe contre la chaleur à l’école",
-          "url": "/fr/articles-appenzell/groupe-conseil-chaleur-ecole/",
-          "excerpt": "Le conseil municipal a créé le groupe de travail « Hitzeschutz und Begrünung » : salles de classe et espaces extérieurs, avec des mesures rapides de protection contre le soleil.",
-          "date": "2026-11-10T02:51:13.479Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T13:29:46.197Z"
     }
   }
 }
