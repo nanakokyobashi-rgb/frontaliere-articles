@@ -43,8 +43,13 @@ on:
         required: false
         default: false
 
+# `pr-autorebase.mjs` e il riconciliatore degli hand-off nel followup-drainer
+# scrivono la stessa risorsa remota (issue di hand-off + routing). Una chiave
+# repo-wide comune chiude la finestra read/create/reread fra processi distinti;
+# non cancellare il writer attivo, altrimenti puo' lasciare una issue creata ma
+# non ancora instradata.
 concurrency:
-  group: pr-autorebase
+  group: conflict-handoff-writer-${{ github.repository }}
   cancel-in-progress: false
 
 permissions:

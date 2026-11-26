@@ -1520,7 +1520,7 @@
     {
       "path": ".github/workflows/followup-drainer.yml",
       "mode": "adapted",
-      "reason": "Niente npm ci; ponte RC del corpus; promozione via GITHUB_PAT_NANAKO; cadenza sfasata dal sito.",
+      "reason": "Niente npm ci; ponte RC del corpus; promozione via GITHUB_PAT_NANAKO; cadenza sfasata dal sito. Il riconciliatore degli hand-off vive in un job separato, prima del drain: condivide il mutex repo-wide non cancellante conflict-handoff-writer con il workflow corpus-only pr-autorebase, mentre il drain conserva il distinto mutex followup-daily dei writer dei bucket.",
       "baseline": {
         "site": "608e5abb5b5fd017",
         "corpus": "a75e04aa122f57f3",
@@ -1632,7 +1632,7 @@
     {
       "path": ".github/workflows/pr-autorebase.yml",
       "mode": "corpus-only",
-      "reason": "Rimosso sul sito in PR #6584 'ci: richiedi LGTM prima dell'auto-merge nativo' (2026-08-26): il sito e' passato dall'autorebase custom alla merge queue nativa di GitHub. Qui resta necessario: identita' di push/dispatch GITHUB_PAT_NANAKO; sparse-checkout sui path pesanti di QUESTO repo (content/ con 14.888 file, dist/, public/) invece di public/images del sito — il job fa solo merge e push e non li legge mai; niente npm ci; cadenza sfasata (22,52); e nessuna GitHub App per usare la merge queue nativa con l'identita' corretta.",
+      "reason": "Rimosso sul sito in PR #6584 'ci: richiedi LGTM prima dell'auto-merge nativo' (2026-08-26): il sito e' passato dall'autorebase custom alla merge queue nativa di GitHub. Qui resta necessario: identita' di push/dispatch GITHUB_PAT_NANAKO; sparse-checkout sui path pesanti di QUESTO repo (content/ con 14.888 file, dist/, public/) invece di public/images del sito — il job fa solo merge e push, non li legge mai; niente npm ci; cadenza sfasata (22,52); e nessuna GitHub App per usare la merge queue nativa con l'identita' corretta. Il writer condivide conflict-handoff-writer, repo-wide e non cancellante, con il job di riconciliazione del followup-drainer per serializzare create, routing e chiusura degli hand-off.",
       "baseline": {
         "site": null,
         "corpus": "ef98da20f76c33d0",

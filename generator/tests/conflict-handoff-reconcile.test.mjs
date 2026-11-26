@@ -338,15 +338,19 @@ describe('originContentOnMain: applicazione hunk per hunk, non presenza di righe
 });
 
 describe('wiring nel followup-drainer di questo repo', () => {
-  it('riconcilia prima del drain, con GITHUB_TOKEN, senza bloccarlo, e può leggere le PR', () => {
+  it('riconcilia in un job separato prima del drain, con GITHUB_TOKEN, e può leggere le PR', () => {
     const workflow = readFileSync(new URL('../../.github/workflows/followup-drainer.yml', import.meta.url), 'utf8');
     const step = workflow.indexOf('run: node scripts/ci/reconcile-conflict-handoffs.mjs');
-    const drain = workflow.indexOf('- name: Drain follow-up queue');
+    const drainJob = workflow.indexOf('\n  drain:\n');
+    const drainStep = workflow.indexOf('- name: Drain follow-up queue');
     expect(step).toBeGreaterThan(-1);
-    expect(drain).toBeGreaterThan(step);
+    expect(drainJob).toBeGreaterThan(step);
+    expect(drainStep).toBeGreaterThan(drainJob);
     const block = workflow.slice(workflow.lastIndexOf('- name: Reconcile conflict hand-offs', step), step);
     expect(block).toContain('continue-on-error: true');
     expect(block).toContain('GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}');
+    expect(workflow.slice(drainJob, drainStep)).toContain('needs: reconcile_conflict_handoffs');
+    expect(workflow.slice(drainJob)).not.toContain('run: node scripts/ci/reconcile-conflict-handoffs.mjs');
     expect(workflow).toContain('pull-requests: read');
   });
 });
