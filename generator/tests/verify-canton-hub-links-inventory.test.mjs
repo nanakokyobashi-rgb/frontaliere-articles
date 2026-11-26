@@ -21,9 +21,12 @@ const locs = (urls) => urls.map((url) => `<loc>${origin}${url}</loc>`).join('');
 function verify(missingJob = null) {
   // Exercise the real CLI with a sitemap inventory shaped like the producer:
   // the four TI job roots live only in sitemap-jobs.xml. No network is used.
+  const blogPath = paths.find((path) => !jobs.includes(path));
+  assert.ok(blogPath);
   const documents = {
     [`${origin}/sitemap.xml`]: `<sitemapindex>${locs(['/sitemap-pages.xml', '/sitemap-jobs.xml'])}</sitemapindex>`,
-    [`${origin}/sitemap-pages.xml`]: `<urlset>${locs(paths.filter((path) => !jobs.includes(path)))}</urlset>`,
+    [`${origin}/sitemap-pages.xml`]: `<urlset>${locs(paths.filter((path) => path !== blogPath && !jobs.includes(path)))}</urlset>`,
+    [`${origin}/sitemap-blog.xml`]: `<urlset>${locs([blogPath])}</urlset>`,
     [`${origin}/sitemap-jobs.xml`]: `<urlset>${locs(jobs.filter((path) => path !== missingJob))}</urlset>`,
   };
   const script = `
