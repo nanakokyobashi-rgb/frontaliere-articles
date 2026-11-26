@@ -37,6 +37,41 @@ const buildFactCheckProofRetryPrompt = runInNewContext(
 );
 const missingSourceQuote = 'manca una citazione esatta della fonte o di un riferimento verificato che sostenga l’analisi';
 
+test('independent fact-check retries a missing verdict inside its original window', async () => {
+  const start = SRC.indexOf('async function _runSingleFactCheck(');
+  const end = SRC.indexOf('\n}', start);
+  assert.ok(start >= 0 && end > start);
+  const calls = [];
+  const check = runInNewContext(`(${SRC.slice(start, end + 2)})`, {
+    AI_MODELS,
+    Date: { now: () => 1_000 },
+    console: { error() {} },
+    extractFactCheckJson,
+    isFactCheckCacheEnabled: () => true,
+    buildFactCheckCallOptions: (options, cache) => ({ ...options, cache }),
+    factCheckRawSnippet: (raw) => raw,
+    safeSignalDiagnosticTextForLog: (value) => value,
+    normalizeFactCheckIssues: (issues) => issues,
+    validateEditorialAssessment: () => ({ verifiable: true }),
+    async _aiCallLLM(_messages, options) {
+      calls.push(options);
+      options.modelUsedRef.model = calls.length === 1 ? 'first-free' : 'second-free';
+      return calls.length === 1 ? '{}' : '{"verdict":"PASS","issues":[]}';
+    },
+  });
+  const result = await check('free-primary', 'verify', {
+    deadlineMs: 17_000,
+    excludeModels: [CODEX],
+    invalidVerdictModels: new Set(),
+    retryInvalidVerdict: true,
+  });
+  assert.equal(result.servedBy, 'second-free');
+  assert.equal(calls.length, 2);
+  assert.deepEqual(Array.from(calls[1].excludeModels), [CODEX, 'first-free']);
+  assert.equal(calls[1].deadlineMs, calls[0].deadlineMs);
+  assert.equal(calls[1].cache, false);
+});
+
 
 // The options _runSingleFactCheck builds for the Codex fallback, minus the
 // run clock (deadlineMs) and the cache flag, which do not change the route.
