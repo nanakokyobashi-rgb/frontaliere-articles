@@ -349,4 +349,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'rav-sedi-pubblicazione-vakanze',
+ category: 'pratico',
+ date: '2026-11-25T23:29:48.666Z',
+ image: '/images/blog/article-supporto-datori-lavoro-turgovia.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

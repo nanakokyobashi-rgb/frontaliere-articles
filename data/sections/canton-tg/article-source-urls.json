@@ -30,9 +30,10 @@
     "keyForm": 2
   },
   "https://awa.tg.ch/arbeitgebende.html/2821": {
-    "articleId": "turgovia-rav-assunzioni-permessi",
-    "ts": "2026-11-20T17:41:44.795Z",
-    "keyForm": 2
+    "articleId": "rav-sedi-pubblicazione-vakanze",
+    "ts": "2026-11-25T23:29:49.060Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "837748f17031da1148500e5f518bc2ceb5cbf5025ddf3a29830199812845f8ce"
   },
   "https://schalter.tg.ch": {
     "articleId": "sportello-digitale-turgovia",

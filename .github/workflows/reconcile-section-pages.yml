@@ -119,7 +119,7 @@ jobs:
             echo "::error::HEAD del reconcile o HEAD corrente di main non valida"
             exit 1
           fi
-          if [ "$source_commit" != "$current_main" ]; then
+          if ! bash scripts/ci/section-source-unaffected.sh --bookkeeping-only "$source_commit" "$current_main"; then
             echo "::notice::reconcile stantio: checkout $source_commit, main $current_main; nessun backfill o replay armato"
             {
               echo 'dispatch=0'
@@ -132,7 +132,7 @@ jobs:
             echo "dispatch=$(jq -r '.counts.dispatch // 0' "$RUNNER_TEMP/reconcile-sections.json")"
             echo "pending_edge_flip=$(jq -r '.pendingEdgeFlip // false' "$RUNNER_TEMP/reconcile-sections.json")"
             echo "api_release_commit=$(jq -r '.apiCommit // empty' "$RUNNER_TEMP/reconcile-sections.json")"
-            echo "source_commit=$source_commit"
+            echo "source_commit=$current_main"
             echo "skip=$(jq -r 'if .skip then \"true\" else \"false\" end' "$RUNNER_TEMP/reconcile-sections.json")"
             echo "leftover=$(jq -r '.counts.leftover // 0' "$RUNNER_TEMP/reconcile-sections.json")"
             echo "unknown=$(jq -r '.counts.unknown // 0' "$RUNNER_TEMP/reconcile-sections.json")"
@@ -277,6 +277,36 @@ jobs:
             exit 1
           fi
           export GH_TOKEN="$runtime_pat"
+          verifyMainHeadAtDispatch() {
+            local current_main=''
+            if ! [[ "${SOURCE_COMMIT:-}" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::warning::source_commit non valida per il backfill; interrompo il batch"
+              return 1
+            fi
+            if ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
+              echo "::warning::impossibile verificare main immediatamente prima del dispatch; interrompo il batch"
+              return 1
+            fi
+            if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::warning::HEAD di main non valida immediatamente prima del dispatch: $current_main; interrompo il batch"
+              return 1
+            fi
+            if ! bash scripts/ci/section-source-unaffected.sh --bookkeeping-only "$SOURCE_COMMIT" "$current_main"; then
+              echo "::notice::main e' avanzata dopo la detection ($SOURCE_COMMIT -> $current_main); interrompo il batch"
+              return 2
+            fi
+            dispatch_source="$current_main"
+          }
+          if verifyMainHeadAtDispatch; then
+            :
+          else
+            verify_status=$?
+            if [ "$verify_status" -eq 2 ]; then
+              echo "::notice::nessun dispatch stantio; il batch verra' ripreso dal prossimo giro"
+              exit 0
+            fi
+            exit "$verify_status"
+          fi
           dispatch_sections="$(jq -c '[.sections[] | select(.dispatch)]' "$RUNNER_TEMP/reconcile-sections.json")"
           if [ "$PENDING_EDGE_FLIP" != 'true' ]; then
             # Reconcile runs serialize, but the child publisher outlives its
@@ -284,9 +314,9 @@ jobs:
             since="$(date -u -d '6 hours ago' +%Y-%m-%dT%H:%M:%SZ)"
             active_sections="$(gh api --paginate --slurp -X GET \
               "repos/$GITHUB_REPOSITORY/actions/workflows/fast-publish-section.yml/runs" \
-              -f branch=main -f event=workflow_dispatch -f head_sha="$SOURCE_COMMIT" \
+              -f branch=main -f event=workflow_dispatch -f head_sha="$dispatch_source" \
               -f "created=>=$since" -f per_page=100 \
-              | jq -ce --arg sha "$SOURCE_COMMIT" '
+              | jq -ce --arg sha "$dispatch_source" '
                 if length == 0 or any(.[]; (.workflow_runs | type) != "array") then
                   error("invalid fast-publish-section run list")
                 else
@@ -314,6 +344,17 @@ jobs:
             exit 1
           fi
           dispatch_cohort="reconcile-${GITHUB_RUN_ID}-n${dispatch_cohort_size}"
+          # All children in this cohort must attest to the same source.
+          if verifyMainHeadAtDispatch; then
+            :
+          else
+            verify_status=$?
+            if [ "$verify_status" -eq 2 ]; then
+              echo "::notice::nessun dispatch stantio; il batch verra' ripreso dal prossimo giro"
+              exit 0
+            fi
+            exit "$verify_status"
+          fi
           fail=0
           while IFS=$'\t' read -r section ids missing_page_paths known_missing_page_paths; do
             [ -n "$section" ] || continue
@@ -328,8 +369,8 @@ jobs:
               -f 'dry_run=false'
               -f 'replay_api_after_publish=false'
               -f 'coordinated_recovery=true'
-              -f "source_commit=$SOURCE_COMMIT"
-              -f "source_main_commit=$SOURCE_COMMIT"
+              -f "source_commit=$dispatch_source"
+              -f "source_main_commit=$dispatch_source"
               -f "dispatch_nonce=$dispatch_nonce"
               -f "dispatch_cohort=$dispatch_cohort"
             )
@@ -384,7 +425,7 @@ jobs:
             echo "::error::HEAD corrente di main non valida per il replay API bounded"
             exit 1
           fi
-          if [ "$current_main" != "$SOURCE_COMMIT" ]; then
+          if ! bash scripts/ci/section-source-unaffected.sh --bookkeeping-only "$SOURCE_COMMIT" "$current_main"; then
             echo "::notice::main e' avanzata dopo la detection ($SOURCE_COMMIT -> $current_main); nessun replay API stantio"
             exit 0
           fi
@@ -412,14 +453,15 @@ jobs:
               echo "::error::HEAD di main non valida immediatamente prima del dispatch publish-api: $current_main"
               return 1
             fi
-            if [ "$current_main" != "$SOURCE_COMMIT" ]; then
+            if ! bash scripts/ci/section-source-unaffected.sh --bookkeeping-only "$SOURCE_COMMIT" "$current_main"; then
               echo "::notice::main e' avanzata dopo la verifica post-backfill ($SOURCE_COMMIT -> $current_main); replay API interrotto"
               return 2
             fi
+            dispatch_source="$current_main"
           }
           if verifyMainHeadAtDispatch; then
-            echo "::notice::backfill globalmente verificato: replay API bounded sulla HEAD $SOURCE_COMMIT"
-            gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main -f source_commit="$SOURCE_COMMIT"
+            echo "::notice::backfill globalmente verificato: replay API bounded sulla HEAD $dispatch_source"
+            gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main -f source_commit="$dispatch_source"
           else
             verify_status=$?
             if [ "$verify_status" -eq 2 ]; then

@@ -157,7 +157,7 @@ jobs:
             echo "::error::HEAD del reconcile o HEAD corrente di main non valida"
             exit 1
           fi
-          if [ "$source_commit" != "$current_main" ]; then
+          if ! bash scripts/ci/section-source-unaffected.sh --bookkeeping-only "$source_commit" "$current_main"; then
             echo "::notice::reconcile stantio: checkout $source_commit, main $current_main; nessun backfill armato"
             echo 'head_guard=false' >> "$GITHUB_OUTPUT"
             exit 0
@@ -166,7 +166,7 @@ jobs:
             echo "missing=$(jq -r '.counts.missing' "$RUNNER_TEMP/reconcile.json")"
             echo "selected=$(jq -r '.counts.selected' "$RUNNER_TEMP/reconcile.json")"
             echo "leftover=$(jq -r '.counts.leftover' "$RUNNER_TEMP/reconcile.json")"
-            echo "source_commit=$source_commit"
+            echo "source_commit=$current_main"
             echo 'head_guard=true'
           } >> "$GITHUB_OUTPUT"
 
@@ -188,7 +188,7 @@ jobs:
           set -euo pipefail
           if ! [[ "${SOURCE_COMMIT:-}" =~ ^[a-f0-9]{40}$ ]] ||
             ! current_main="$(bash scripts/ci/read-main-head.sh)" ||
-            [ "$current_main" != "$SOURCE_COMMIT" ]; then
+            ! bash scripts/ci/section-source-unaffected.sh --bookkeeping-only "$SOURCE_COMMIT" "$current_main"; then
             echo "::notice::main non verificabile o avanzata; issue fantasma lasciata aperta"
             exit 0
           fi
@@ -271,10 +271,11 @@ jobs:
               echo "::warning::HEAD di main non valida immediatamente prima del dispatch: $current_main; interrompo il batch"
               return 1
             fi
-            if [ "$current_main" != "$SOURCE_COMMIT" ]; then
+            if ! bash scripts/ci/section-source-unaffected.sh --bookkeeping-only "$SOURCE_COMMIT" "$current_main"; then
               echo "::notice::main e' avanzata dopo la detection ($SOURCE_COMMIT -> $current_main); interrompo il batch"
               return 2
             fi
+            dispatch_source="$current_main"
           }
 
           # Ogni lettura dell'API tollera il transitorio degradando verso la
@@ -646,7 +647,7 @@ jobs:
             fi
             if ! gh_api_timeout -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/dispatches" \
               -f ref=main \
-              -f "inputs[source_commit]=${SOURCE_COMMIT}" \
+              -f "inputs[source_commit]=${dispatch_source}" \
               -f "inputs[article_id]=$id" \
               -f "inputs[section]=$section" \
               -f "inputs[dry_run]=false"; then

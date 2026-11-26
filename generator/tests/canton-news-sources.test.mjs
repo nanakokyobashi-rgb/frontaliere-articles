@@ -28,6 +28,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import {
+  ARTICLE_PATH_PATTERN_PARSERS,
   CANTON_SOURCE_USER_AGENT,
   CANTON_SOURCE_MAX_ATTEMPTS,
   MAX_INLINE_CRAWL_DELAY_SECONDS,
@@ -1767,11 +1768,11 @@ test('FU-010: markup letterale in title e textarea non altera bilanciamento né 
   assert.deepEqual(out.headlines.map((item) => item.url), ['https://sources.example/news/raw-text']);
 });
 
-test('articlePathPattern: ogni dichiarazione del profilo e\' su una fonte html-links e compila', () => {
+test('articlePathPattern: ogni dichiarazione del profilo usa un parser supportato e compila', () => {
   const declared = PROFILE.cantons.flatMap((c) => c.newsSources.filter((s) => s.quirks?.articlePathPattern).map((s) => ({ code: c.code, ...s })));
   assert.ok(declared.length >= 20, `attese almeno 20 fonti con articlePathPattern, trovate ${declared.length}`);
   for (const s of declared) {
-    assert.equal(s.parser, 'html-links', `${s.code} ${s.url}`);
+    assert.ok(ARTICLE_PATH_PATTERN_PARSERS.includes(s.parser), `${s.code} ${s.url}`);
     assert.doesNotThrow(() => new RegExp(s.quirks.articlePathPattern), `${s.code} ${s.url}`);
     // Il pattern non deve tenere la pagina-elenco stessa.
     assert.equal(filterArticleLinks([{ url: s.url, headline: 'x', date: null }], s.url, s).headlines.length, 0, `${s.url}: l'elenco non e' un articolo`);
@@ -1883,6 +1884,20 @@ test('URL riusati: due voci con lo stesso link nello STESSO feed restano due not
   assert.equal(dup.headlines.length, 5);
 });
 
+test('Bote: la scansione della sitemap conserva solo i candidati classificati come Svitto', async () => {
+  const url = 'https://www.bote.ch/googlenews.sitemap.xml';
+  const entry = (path, title) => `<url><loc>https://www.bote.ch/nachrichten/${path}</loc><news:news><news:publication_date>2026-10-05T12:49:15+02:00</news:publication_date><news:title>${title}</news:title></news:news></url>`;
+  const xml = `<urlset xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">${[
+    entry('zentralschweiz/landrat-nidwalden-genehmigt-budget-2027-trotz-minus-art-1734251', 'Landrat Nidwalden genehmigt Budget'),
+    entry('schwyz/gemeinde-schwyz-praesentiert-budget-art-1734250', 'Gemeinde Schwyz präsentiert Budget'),
+    entry('schweizundwelt/sbb-fahrplan-art-1734249', 'SBB veröffentlicht Fahrplan'),
+  ].join('')}</urlset>`;
+  const { impl } = fakeFetch({ [url]: { body: xml, contentType: 'application/xml' } });
+  const out = await scanCantonSource(sourceOf('SZ', url), ctx(impl));
+  assert.deepEqual(out.headlines.map(({ headline }) => headline), ['Gemeinde Schwyz präsentiert Budget']);
+  assert.equal(out.headlines[0].date.toISOString(), '2026-10-05T10:49:15.000Z');
+});
+
 test('URL riusati in una sitemap: stesso <loc> in due voci, due notizie; senza il quirk resta il dedup', async () => {
   const url = 'https://www.suedostschweiz.ch/news-sitemap.xml';
   const entry = (title, at) => `<url><loc>${TICKER_URL}</loc><news:news><news:publication_date>${at}</news:publication_date><news:title>${title}</news:title></news:news></url>`;
@@ -1987,6 +2002,30 @@ test('dateFromCardLabel: configurato solo nei sette profili ufficiali di Zugo', 
     }
   }
   assert.equal(configured.length, 7);
+});
+
+test('Syna Argovia legge la data della propria scheda senza scaricare il dettaglio', async () => {
+  const source = sourceOf('AG', 'https://syna.ch/aargau/ag-aktuell');
+  const card = (slug, dates) => `<article typeof="Article" data-blog-posts-item>
+    <a class="uk-link-reset" href="/aargau/ag-aktuell/${slug}">Eine Meldung aus dem Kanton Aargau</a>
+    ${dates}</article>`;
+  const html = '<main>'
+    + card('lohngleichheit-im-kanton-aargau-jetzt', '<time content="07.07.2023">7.7.2023</time>')
+    + card('pendler-mitteilung', '<time content="25.11.2026">25.11.2026</time>')
+    + card('ohne-datum', '<aside><time content="25.11.2026">25.11.2026</time></aside>')
+    + '<aside>' + card('sidebar-ohne-datum', '') + '</aside>'
+    + '</main>';
+  const { impl, calls } = fakeFetch({ [source.url]: { body: html } });
+  const result = await scanCantonSource(source, ctx(impl));
+  assert.deepEqual(calls.map(({ url }) => url), [source.url]);
+  assert.deepEqual(result.headlines.map(({ url, date }) => [
+    new URL(url).pathname.split('/').at(-1),
+    date && [date.getFullYear(), date.getMonth() + 1, date.getDate()],
+  ]), [
+    ['lohngleichheit-im-kanton-aargau-jetzt', [2023, 7, 7]],
+    ['pendler-mitteilung', [2026, 11, 25]],
+    ['ohne-datum', null],
+  ]);
 });
 
 test('dateFromCardLabel: date editoriali locali alla scheda con una sola richiesta', async () => {

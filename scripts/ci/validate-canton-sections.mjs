@@ -43,7 +43,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { AG_PRESS_DETAIL, AG_PRESS_MAX_REQUESTS, sourceRequestBudget } from '../../generator/scripts/lib/canton-news-sources.mjs';
+import { AG_PRESS_DETAIL, AG_PRESS_MAX_REQUESTS, ARTICLE_PATH_PATTERN_PARSERS, sourceRequestBudget } from '../../generator/scripts/lib/canton-news-sources.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -96,11 +96,12 @@ const QUIRKS = {
   // divieto per FrontaliereTicinoBot.
   contentSignal: (v) => typeof v === 'string' && Boolean(v.trim()),
   trainingCrawlersBlocked: (v) => Array.isArray(v) && v.length > 0 && v.every((x) => typeof x === 'string'),
-  // P5b. Regex su path + query dei link-articolo di una pagina `html-links`:
+  // P5b. Regex su path + query dei link-articolo da HTML o sitemap:
   // ancorata al path (`^/`), cosi' non puo' degradare a «contiene», e
   // compilabile, perche' lo scanner la compila a ogni run.
   articlePathPattern: isPathRegex,
   dateFromCardLabel: (value) => value === 'dxp-typo-label',
+  dateFromEasyBlogCard: (value) => value === true,
   excludePaywalledCards: (v) => v === true,
   extractCardLead: (v) => v === 'text' || v === 'media-title',
   articleDateFromDetail: (v) => v === 'html-meta',
@@ -119,8 +120,9 @@ const QUIRKS = {
 /** quirk → parser su cui ha senso. Dichiarato altrove sarebbe un hint che nessuno legge. */
 const QUIRK_PARSERS = {
   feedContentOnly: new Set(['rss']),
-  articlePathPattern: new Set(['html-links']),
+  articlePathPattern: new Set(ARTICLE_PATH_PATTERN_PARSERS),
   dateFromCardLabel: new Set(['html-links']),
+  dateFromEasyBlogCard: new Set(['html-links']),
   excludePaywalledCards: new Set(['html-links']),
   extractCardLead: new Set(['html-links']),
   articleDateFromDetail: new Set(['html-links']),
