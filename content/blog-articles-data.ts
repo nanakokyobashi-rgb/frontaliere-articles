@@ -48279,6 +48279,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'protocollo-lavoro-remoto-2024',
+ category: 'novita',
+ date: '2026-11-26T13:37:38.190Z',
+ image: '/images/blog/article-frontalieri-telelavoro-protocollo-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

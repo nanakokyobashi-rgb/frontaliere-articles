@@ -1,9 +1,4 @@
 {
-  "https://www.varesenoi.it/2026/09/25/leggi-notizia/argomenti/politica-20/articolo/trenord-ha-abbandonato-una-trentina-di-passeggeri-a-gallarate-la-regione-chieda-conto-allazien-1.html": {
-    "articleId": "trenord-abbandono-passeggeri-gallarate",
-    "ts": "2026-09-25T17:01:17.243Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/a8-e-diramazione-gallarate-gattico-tre-notti-di-chiusure-e-deviazioni-nel-varesotto/2690233": {
     "articleId": "lavori-verde-a8-d08",
     "ts": "2026-09-25T17:54:10.734Z",
@@ -2502,5 +2497,11 @@
     "ts": "2026-11-26T08:46:31.298Z",
     "keyForm": 2,
     "sourceContentFingerprint": "12ad81415d93fdc42a999500a93815c472d115c7f6edf73fe4aebe10f16ac8ed"
+  },
+  "https://www.mef.gov.it/inevidenza/frontalieri-accordo-italia-svizzera-telelavoro-fino-al-25-dal-1-gennaio-2024": {
+    "articleId": "protocollo-lavoro-remoto-2024",
+    "ts": "2026-11-26T13:37:40.315Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "923a23671ce428afea3c55936fad4ae29751aba501a2dd3938b75fd71d4c642f"
   }
 }
