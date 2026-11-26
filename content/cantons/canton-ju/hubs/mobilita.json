@@ -4,17 +4,17 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "d667d0dd1f649986da7c98e60dc127221f796d7d3359a6222bbdfe6e2ee7c3b4",
+  "updatedAt": "2026-11-26T17:26:42.969Z",
+  "contentHash": "00f3792254a4c6b0fd9bd209d331471f2559c1864d7695c267168111dd17f5d5",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-24T23:59:59.000Z",
+      "updatedAt": "2026-11-25T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-25T16:08:35.229Z",
+      "updatedAt": "2026-11-26T01:13:56.099Z",
       "keyFacts": 0
     }
   ],
@@ -28,37 +28,37 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Boncourt-Delle (A16), settimana conclusa: 24 novembre 2026"
+          "note": "Boncourt-Delle (A16), settimana conclusa: 25 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 18 novembre 2026 – 24 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 19 novembre 2026 – 25 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/boncourt-delle/oggi/"
             },
             {
               "label": "Fahy-Abbévillers",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/fahy-abbevillers/oggi/"
             },
             {
               "label": "Goumois",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/goumois/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-24T23:59:59.000Z"
+          "updatedAt": "2026-11-25T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -81,7 +81,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -129,7 +129,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "en": {
       "canton": "JU",
@@ -140,37 +140,37 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Boncourt-Delle (A16), week ending 24 November 2026"
+          "note": "Boncourt-Delle (A16), week ending 25 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 18 November 2026 to 24 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 19 November 2026 to 25 November 2026, fastest first.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/boncourt-delle/today/"
             },
             {
               "label": "Fahy-Abbévillers",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/fahy-abbevillers/today/"
             },
             {
               "label": "Goumois",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/goumois/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-24T23:59:59.000Z"
+          "updatedAt": "2026-11-25T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -193,7 +193,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -241,7 +241,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "de": {
       "canton": "JU",
@@ -252,37 +252,37 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Boncourt-Delle (A16), Woche bis 24. November 2026"
+          "note": "Boncourt-Delle (A16), Woche bis 25. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 18. November 2026 bis 24. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 19. November 2026 bis 25. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/boncourt-delle/heute/"
             },
             {
               "label": "Fahy-Abbévillers",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/fahy-abbevillers/heute/"
             },
             {
               "label": "Goumois",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/goumois/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-24T23:59:59.000Z"
+          "updatedAt": "2026-11-25T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -305,7 +305,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -353,7 +353,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "fr": {
       "canton": "JU",
@@ -364,37 +364,37 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Boncourt-Delle (A16), semaine jusqu’au 24 novembre 2026"
+          "note": "Boncourt-Delle (A16), semaine jusqu’au 25 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 18 novembre 2026 au 24 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 19 novembre 2026 au 25 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/boncourt-delle/aujourd-hui/"
             },
             {
               "label": "Fahy-Abbévillers",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/fahy-abbevillers/aujourd-hui/"
             },
             {
               "label": "Goumois",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/goumois/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-24T23:59:59.000Z"
+          "updatedAt": "2026-11-25T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -417,7 +417,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     }
   }
 }

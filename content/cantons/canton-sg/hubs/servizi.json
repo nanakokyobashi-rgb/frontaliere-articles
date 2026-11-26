@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-11-26T13:02:36.485Z",
-  "contentHash": "6d30e0acc7aeb78f3c7f139831baf177d9063afcd6c1e528b846d096b29ecbf1",
+  "updatedAt": "2026-11-26T17:26:42.969Z",
+  "contentHash": "b7dbbce80ef2b1b1ecfc906a5737282b3469704a91a18eaa960311cec6fe405a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-25T21:43:23.986Z",
+      "updatedAt": "2026-11-26T08:20:20.334Z",
       "keyFacts": 1
     },
     {
@@ -75,29 +75,29 @@
           "items": [
             {
               "label": "SG8023",
-              "value": "1500 CHF",
+              "value": "2100 CHF",
               "detail": "offerta attuale",
               "date": "2026-12-02T18:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6738"
             },
             {
               "label": "SG12073",
-              "value": "500 CHF",
+              "value": "700 CHF",
               "detail": "offerta attuale",
               "date": "2026-12-02T18:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6739"
             },
             {
-              "label": "SG31456",
-              "value": "500 CHF",
+              "label": "SG40089",
+              "value": "620 CHF",
               "detail": "offerta attuale",
               "date": "2026-12-02T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6740"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6742"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-26T08:20:20.334Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -215,7 +215,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "en": {
       "canton": "SG",
@@ -268,29 +268,29 @@
           "items": [
             {
               "label": "SG8023",
-              "value": "1,500 CHF",
+              "value": "2,100 CHF",
               "detail": "current bid",
               "date": "2026-12-02T18:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6738"
             },
             {
               "label": "SG12073",
-              "value": "500 CHF",
+              "value": "700 CHF",
               "detail": "current bid",
               "date": "2026-12-02T18:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6739"
             },
             {
-              "label": "SG31456",
-              "value": "500 CHF",
+              "label": "SG40089",
+              "value": "620 CHF",
               "detail": "current bid",
               "date": "2026-12-02T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6740"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6742"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-26T08:20:20.334Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -404,7 +404,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "de": {
       "canton": "SG",
@@ -457,29 +457,29 @@
           "items": [
             {
               "label": "SG8023",
-              "value": "1’500 CHF",
+              "value": "2’100 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-12-02T18:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6738"
             },
             {
               "label": "SG12073",
-              "value": "500 CHF",
+              "value": "700 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-12-02T18:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6739"
             },
             {
-              "label": "SG31456",
-              "value": "500 CHF",
+              "label": "SG40089",
+              "value": "620 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-12-02T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6740"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6742"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-26T08:20:20.334Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -593,7 +593,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "fr": {
       "canton": "SG",
@@ -646,29 +646,29 @@
           "items": [
             {
               "label": "SG8023",
-              "value": "1 500 CHF",
+              "value": "2 100 CHF",
               "detail": "offre actuelle",
               "date": "2026-12-02T18:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6738"
             },
             {
               "label": "SG12073",
-              "value": "500 CHF",
+              "value": "700 CHF",
               "detail": "offre actuelle",
               "date": "2026-12-02T18:30:00.000Z",
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6739"
             },
             {
-              "label": "SG31456",
-              "value": "500 CHF",
+              "label": "SG40089",
+              "value": "620 CHF",
               "detail": "offre actuelle",
               "date": "2026-12-02T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6740"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6742"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-26T08:20:20.334Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -778,7 +778,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     }
   }
 }

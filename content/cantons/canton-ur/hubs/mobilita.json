@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T10:34:02.735Z",
-  "contentHash": "742b1c758b52723a9ba518ad88892ddf7a42ad99d9b86dfd17e42e50ff444445",
+  "updatedAt": "2026-11-26T17:26:42.969Z",
+  "contentHash": "6d0e325864b4b4dd844fc66d67d74a643e07fc61ed01f41f259fc440b277813c",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "5",
+          "value": "4",
           "note": "segnalazioni aggiornate: 26 novembre 2026"
         }
       ],
@@ -63,12 +63,6 @@
               "value": "Cantiere",
               "detail": "fine prevista: 4 dicembre 2026",
               "date": "2026-10-06T11:16:00.000Z"
-            },
-            {
-              "label": "A2 S. Gottardo <-> Luzern tra Svincolo autostradale Amsteg E Galleria Galleria Naxberg Situazione: problemi di traffico cantiere, lunghezza [km] 1.0 Limitazione del traffico: corsie strette ridotta…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 26 novembre 2026",
-              "date": "2026-11-02T05:11:00.000Z"
             },
             {
               "label": "A4 Brunnen -> Altdorf tra Luogo Sisikon E Galleria Galleria Flüelen Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.3",
@@ -186,7 +180,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "en": {
       "canton": "UR",
@@ -201,7 +195,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "5",
+          "value": "4",
           "note": "reports as of 26 November 2026"
         }
       ],
@@ -232,12 +226,6 @@
               "value": "Roadworks",
               "detail": "until 4 December 2026",
               "date": "2026-10-06T11:16:00.000Z"
-            },
-            {
-              "label": "A2 S. Gottardo <-> Luzern tra Svincolo autostradale Amsteg E Galleria Galleria Naxberg Situazione: problemi di traffico cantiere, lunghezza [km] 1.0 Limitazione del traffico: corsie strette ridotta…",
-              "value": "Roadworks",
-              "detail": "until 26 November 2026",
-              "date": "2026-11-02T05:11:00.000Z"
             },
             {
               "label": "A4 Brunnen -> Altdorf tra Luogo Sisikon E Galleria Galleria Flüelen Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.3",
@@ -355,7 +343,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "de": {
       "canton": "UR",
@@ -370,7 +358,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "5",
+          "value": "4",
           "note": "Meldungen vom 26. November 2026"
         }
       ],
@@ -401,12 +389,6 @@
               "value": "Baustelle",
               "detail": "bis 4. Dezember 2026",
               "date": "2026-10-06T11:16:00.000Z"
-            },
-            {
-              "label": "A2 Gotthard <-> Luzern zwischen Anschluss Amsteg und Tunnel Naxberg-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.0 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt…",
-              "value": "Baustelle",
-              "detail": "bis 26. November 2026",
-              "date": "2026-11-02T05:11:00.000Z"
             },
             {
               "label": "A4 Brunnen -> Altdorf zwischen Ortschaft Sisikon und Tunnel Flüelen-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.3",
@@ -524,7 +506,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "fr": {
       "canton": "UR",
@@ -539,7 +521,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "5",
+          "value": "4",
           "note": "signalements au 26 novembre 2026"
         }
       ],
@@ -570,12 +552,6 @@
               "value": "Chantier",
               "detail": "jusqu’au 4 décembre 2026",
               "date": "2026-10-06T11:16:00.000Z"
-            },
-            {
-              "label": "A2 St-Gothard <-> Lucerne entre Jonction autoroutière Amsteg et Tunnel Tunnel Naxberg Situation: trafic perturbé travaux, longueur [km] 1.0 Gestion du trafic: rétrécissement des voies sur une voie…",
-              "value": "Chantier",
-              "detail": "jusqu’au 26 novembre 2026",
-              "date": "2026-11-02T05:11:00.000Z"
             },
             {
               "label": "A4 Brunnen -> Altdorf entre Localité Sisikon et Tunnel Tunnel de Flüelen Situation: trafic perturbé travaux, longueur [km] 0.2 Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.3",
@@ -693,7 +669,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     }
   }
 }

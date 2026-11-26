@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-11-26T13:02:36.485Z",
-  "contentHash": "0f80aa88ad5a4c79aeec6cf8b13071baae743a25a5a6a1d7c5fb19f781a35cee",
+  "updatedAt": "2026-11-26T17:26:42.969Z",
+  "contentHash": "23c2802357dafa18e3b1f185cdb016ec98cf32d44ddf76abe158e5e2d13f9021",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -16,6 +16,11 @@
       "id": "farmacie-di-turno",
       "updatedAt": "2026-11-26T03:40:24.789Z",
       "keyFacts": 0
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-26T08:20:20.334Z",
+      "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
@@ -35,6 +40,11 @@
           "value": "740,20 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "2",
+          "note": "offerta mediana 3700 CHF"
         }
       ],
       "dataBlocks": [
@@ -97,6 +107,30 @@
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
           "updatedAt": "2026-11-26T03:40:24.789Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "TI976",
+              "value": "6500 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-12-06T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1548"
+            },
+            {
+              "label": "TI10825",
+              "value": "900 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-12-06T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1547"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
+          "updatedAt": "2026-11-26T08:20:20.334Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -222,7 +256,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "en": {
       "canton": "TI",
@@ -235,6 +269,11 @@
           "value": "740.20 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "2",
+          "note": "typical bid 3,700 CHF"
         }
       ],
       "dataBlocks": [
@@ -297,6 +336,30 @@
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
           "updatedAt": "2026-11-26T03:40:24.789Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "TI976",
+              "value": "6,500 CHF",
+              "detail": "current bid",
+              "date": "2026-12-06T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1548"
+            },
+            {
+              "label": "TI10825",
+              "value": "900 CHF",
+              "detail": "current bid",
+              "date": "2026-12-06T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1547"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
+          "updatedAt": "2026-11-26T08:20:20.334Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -417,7 +480,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "de": {
       "canton": "TI",
@@ -430,6 +493,11 @@
           "value": "740.20 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "2",
+          "note": "mittleres Gebot 3’700 CHF"
         }
       ],
       "dataBlocks": [
@@ -492,6 +560,30 @@
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
           "updatedAt": "2026-11-26T03:40:24.789Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "TI976",
+              "value": "6’500 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-12-06T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1548"
+            },
+            {
+              "label": "TI10825",
+              "value": "900 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-12-06T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1547"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
+          "updatedAt": "2026-11-26T08:20:20.334Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -612,7 +704,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "fr": {
       "canton": "TI",
@@ -625,6 +717,11 @@
           "value": "740,20 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "2",
+          "note": "offre centrale 3 700 CHF"
         }
       ],
       "dataBlocks": [
@@ -687,6 +784,30 @@
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
           "updatedAt": "2026-11-26T03:40:24.789Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "TI976",
+              "value": "6 500 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-12-06T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1548"
+            },
+            {
+              "label": "TI10825",
+              "value": "900 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-12-06T19:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1547"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
+          "updatedAt": "2026-11-26T08:20:20.334Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -804,7 +925,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     }
   }
 }

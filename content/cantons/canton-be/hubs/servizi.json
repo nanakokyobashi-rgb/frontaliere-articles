@@ -4,12 +4,17 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "servizi",
-  "updatedAt": "2026-11-26T13:02:36.485Z",
-  "contentHash": "ef035628e70fcaf77343a12a4c52e0a86676944f1413543393aa35c165940a70",
+  "updatedAt": "2026-11-26T17:26:42.969Z",
+  "contentHash": "8c27c6c34025e1ccbc5b765644e89a8c60b05b61363f6682ce7100c7bbdf0434",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-11-15T11:58:26.359Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-26T08:20:20.334Z",
       "keyFacts": 1
     },
     {
@@ -30,6 +35,11 @@
           "value": "681,50 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "9",
+          "note": "offerta mediana 490 CHF"
         }
       ],
       "dataBlocks": [
@@ -57,6 +67,37 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-11-15T11:58:26.359Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "BE226",
+              "value": "23.100 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-12-02T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231757"
+            },
+            {
+              "label": "BE9522",
+              "value": "3900 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-12-02T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231758"
+            },
+            {
+              "label": "BE90209",
+              "value": "790 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-12-02T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231759"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://auktion-be.ch/de/",
+          "updatedAt": "2026-11-26T08:20:20.334Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -154,7 +195,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "en": {
       "canton": "BE",
@@ -167,6 +208,11 @@
           "value": "681.50 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "9",
+          "note": "typical bid 490 CHF"
         }
       ],
       "dataBlocks": [
@@ -194,6 +240,37 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-11-15T11:58:26.359Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "BE226",
+              "value": "23,100 CHF",
+              "detail": "current bid",
+              "date": "2026-12-02T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231757"
+            },
+            {
+              "label": "BE9522",
+              "value": "3,900 CHF",
+              "detail": "current bid",
+              "date": "2026-12-02T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231758"
+            },
+            {
+              "label": "BE90209",
+              "value": "790 CHF",
+              "detail": "current bid",
+              "date": "2026-12-02T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231759"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://auktion-be.ch/de/",
+          "updatedAt": "2026-11-26T08:20:20.334Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -287,7 +364,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "de": {
       "canton": "BE",
@@ -300,6 +377,11 @@
           "value": "681.50 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "9",
+          "note": "mittleres Gebot 490 CHF"
         }
       ],
       "dataBlocks": [
@@ -327,6 +409,37 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-11-15T11:58:26.359Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "BE226",
+              "value": "23’100 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-12-02T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231757"
+            },
+            {
+              "label": "BE9522",
+              "value": "3’900 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-12-02T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231758"
+            },
+            {
+              "label": "BE90209",
+              "value": "790 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-12-02T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231759"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://auktion-be.ch/de/",
+          "updatedAt": "2026-11-26T08:20:20.334Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -420,7 +533,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "fr": {
       "canton": "BE",
@@ -433,6 +546,11 @@
           "value": "681,50 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "9",
+          "note": "offre centrale 490 CHF"
         }
       ],
       "dataBlocks": [
@@ -460,6 +578,37 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-11-15T11:58:26.359Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "BE226",
+              "value": "23 100 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-12-02T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231757"
+            },
+            {
+              "label": "BE9522",
+              "value": "3 900 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-12-02T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231758"
+            },
+            {
+              "label": "BE90209",
+              "value": "790 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-12-02T20:00:00.000Z",
+              "url": "https://auktion-be.ch/de/auction/231759"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://auktion-be.ch/de/",
+          "updatedAt": "2026-11-26T08:20:20.334Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -549,7 +698,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     }
   }
 }

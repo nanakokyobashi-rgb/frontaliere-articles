@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "servizi",
-  "updatedAt": "2026-11-26T13:02:36.485Z",
-  "contentHash": "5b924485bd8074c780a1bc70c8628dc2a7b627e3150c941cc111e169e0f5bc86",
+  "updatedAt": "2026-11-26T17:26:42.969Z",
+  "contentHash": "894e981827592e5e06f4c658c0a3c92add7fe8cf21b7acd5ddf80ea437385879",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-25T21:43:23.986Z",
+      "updatedAt": "2026-11-26T08:20:20.334Z",
       "keyFacts": 1
     },
     {
@@ -39,7 +39,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "11",
-          "note": "offerta mediana 200 CHF"
+          "note": "offerta mediana 220 CHF"
         }
       ],
       "dataBlocks": [
@@ -65,29 +65,29 @@
           "items": [
             {
               "label": "SZ3281",
-              "value": "2000 CHF",
+              "value": "3000 CHF",
               "detail": "offerta attuale",
               "date": "2026-12-08T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1626"
             },
             {
               "label": "SZ8483",
-              "value": "1510 CHF",
+              "value": "3000 CHF",
               "detail": "offerta attuale",
               "date": "2026-12-08T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1627"
             },
             {
-              "label": "SZ10487",
-              "value": "200 CHF",
+              "label": "SZ14525",
+              "value": "400 CHF",
               "detail": "offerta attuale",
               "date": "2026-12-08T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1628"
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1631"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-26T08:20:20.334Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -195,7 +195,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "en": {
       "canton": "SZ",
@@ -212,7 +212,7 @@
         {
           "label": "Plate auctions running",
           "value": "11",
-          "note": "typical bid 200 CHF"
+          "note": "typical bid 220 CHF"
         }
       ],
       "dataBlocks": [
@@ -238,29 +238,29 @@
           "items": [
             {
               "label": "SZ3281",
-              "value": "2,000 CHF",
+              "value": "3,000 CHF",
               "detail": "current bid",
               "date": "2026-12-08T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1626"
             },
             {
               "label": "SZ8483",
-              "value": "1,510 CHF",
+              "value": "3,000 CHF",
               "detail": "current bid",
               "date": "2026-12-08T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1627"
             },
             {
-              "label": "SZ10487",
-              "value": "200 CHF",
+              "label": "SZ14525",
+              "value": "400 CHF",
               "detail": "current bid",
               "date": "2026-12-08T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1628"
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1631"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-26T08:20:20.334Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "de": {
       "canton": "SZ",
@@ -381,7 +381,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "11",
-          "note": "mittleres Gebot 200 CHF"
+          "note": "mittleres Gebot 220 CHF"
         }
       ],
       "dataBlocks": [
@@ -407,29 +407,29 @@
           "items": [
             {
               "label": "SZ3281",
-              "value": "2’000 CHF",
+              "value": "3’000 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-12-08T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1626"
             },
             {
               "label": "SZ8483",
-              "value": "1’510 CHF",
+              "value": "3’000 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-12-08T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1627"
             },
             {
-              "label": "SZ10487",
-              "value": "200 CHF",
+              "label": "SZ14525",
+              "value": "400 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-12-08T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1628"
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1631"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-26T08:20:20.334Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -533,7 +533,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "fr": {
       "canton": "SZ",
@@ -550,7 +550,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "11",
-          "note": "offre centrale 200 CHF"
+          "note": "offre centrale 220 CHF"
         }
       ],
       "dataBlocks": [
@@ -576,29 +576,29 @@
           "items": [
             {
               "label": "SZ3281",
-              "value": "2 000 CHF",
+              "value": "3 000 CHF",
               "detail": "offre actuelle",
               "date": "2026-12-08T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1626"
             },
             {
               "label": "SZ8483",
-              "value": "1 510 CHF",
+              "value": "3 000 CHF",
               "detail": "offre actuelle",
               "date": "2026-12-08T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1627"
             },
             {
-              "label": "SZ10487",
-              "value": "200 CHF",
+              "label": "SZ14525",
+              "value": "400 CHF",
               "detail": "offre actuelle",
               "date": "2026-12-08T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1628"
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1631"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-26T08:20:20.334Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -698,7 +698,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     }
   }
 }

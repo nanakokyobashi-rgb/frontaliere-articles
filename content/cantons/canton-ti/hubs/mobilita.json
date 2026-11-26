@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T10:34:02.735Z",
-  "contentHash": "2a4ad681dd082803e6e0e40868a1dc52d49c8ce1d2752912bdaffa03146fc783",
+  "updatedAt": "2026-11-26T17:26:42.969Z",
+  "contentHash": "63bd342757113a7d0851aa1fc134c4a8fc647437240fa0b2b02756eb206e24c2",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-24T23:59:59.000Z",
+      "updatedAt": "2026-11-25T23:59:59.000Z",
       "keyFacts": 1
     },
     {
@@ -33,7 +33,7 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Biegno-Indemini, settimana conclusa: 24 novembre 2026"
+          "note": "Biegno-Indemini, settimana conclusa: 25 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
@@ -50,60 +50,60 @@
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 18 novembre 2026 – 24 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 19 novembre 2026 – 25 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Biegno-Indemini",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/biegno-indemini/oggi/"
             },
             {
               "label": "Bizzarone-Novazzano",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/bizzarone-novazzano/oggi/"
             },
             {
               "label": "Camedo (Re-Centovalli)",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/camedo/oggi/"
             },
             {
               "label": "Campione d'Italia-Bissone",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/campione-d-italia-bissone/oggi/"
             },
             {
               "label": "Clivio-Ligornetto",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/clivio-ligornetto/oggi/"
             },
             {
               "label": "Cremenaga-Ponte Cremenaga",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/cremenaga-ponte-cremenaga/oggi/"
             },
             {
               "label": "Crociale dei Mulini",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/crociale-dei-mulini/oggi/"
             },
             {
               "label": "Drezzo-Pedrinate",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/drezzo-pedrinate/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-24T23:59:59.000Z"
+          "updatedAt": "2026-11-25T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -292,7 +292,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "en": {
       "canton": "TI",
@@ -303,7 +303,7 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Biegno-Indemini, week ending 24 November 2026"
+          "note": "Biegno-Indemini, week ending 25 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
@@ -320,60 +320,60 @@
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 18 November 2026 to 24 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 19 November 2026 to 25 November 2026, fastest first.",
           "items": [
             {
               "label": "Biegno-Indemini",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/biegno-indemini/today/"
             },
             {
               "label": "Bizzarone-Novazzano",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/bizzarone-novazzano/today/"
             },
             {
               "label": "Camedo (Re-Centovalli)",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/camedo/today/"
             },
             {
               "label": "Campione d'Italia-Bissone",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/campione-d-italia-bissone/today/"
             },
             {
               "label": "Clivio-Ligornetto",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/clivio-ligornetto/today/"
             },
             {
               "label": "Cremenaga-Ponte Cremenaga",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/cremenaga-ponte-cremenaga/today/"
             },
             {
               "label": "Crociale dei Mulini",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/crociale-dei-mulini/today/"
             },
             {
               "label": "Drezzo-Pedrinate",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/drezzo-pedrinate/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-24T23:59:59.000Z"
+          "updatedAt": "2026-11-25T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -561,7 +561,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "de": {
       "canton": "TI",
@@ -572,7 +572,7 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Biegno-Indemini, Woche bis 24. November 2026"
+          "note": "Biegno-Indemini, Woche bis 25. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
@@ -589,60 +589,60 @@
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 18. November 2026 bis 24. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 19. November 2026 bis 25. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Biegno-Indemini",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/biegno-indemini/heute/"
             },
             {
               "label": "Bizzarone-Novazzano",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/bizzarone-novazzano/heute/"
             },
             {
               "label": "Camedo (Re-Centovalli)",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/camedo/heute/"
             },
             {
               "label": "Campione d'Italia-Bissone",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/campione-d-italia-bissone/heute/"
             },
             {
               "label": "Clivio-Ligornetto",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/clivio-ligornetto/heute/"
             },
             {
               "label": "Cremenaga-Ponte Cremenaga",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/cremenaga-ponte-cremenaga/heute/"
             },
             {
               "label": "Crociale dei Mulini",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/crociale-dei-mulini/heute/"
             },
             {
               "label": "Drezzo-Pedrinate",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/drezzo-pedrinate/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-24T23:59:59.000Z"
+          "updatedAt": "2026-11-25T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -830,7 +830,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "fr": {
       "canton": "TI",
@@ -841,7 +841,7 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Biegno-Indemini, semaine jusqu’au 24 novembre 2026"
+          "note": "Biegno-Indemini, semaine jusqu’au 25 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
@@ -858,60 +858,60 @@
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 18 novembre 2026 au 24 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 19 novembre 2026 au 25 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Biegno-Indemini",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/biegno-indemini/aujourd-hui/"
             },
             {
               "label": "Bizzarone-Novazzano",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/bizzarone-novazzano/aujourd-hui/"
             },
             {
               "label": "Camedo (Re-Centovalli)",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/camedo/aujourd-hui/"
             },
             {
               "label": "Campione d'Italia-Bissone",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/campione-d-italia-bissone/aujourd-hui/"
             },
             {
               "label": "Clivio-Ligornetto",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/clivio-ligornetto/aujourd-hui/"
             },
             {
               "label": "Cremenaga-Ponte Cremenaga",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/cremenaga-ponte-cremenaga/aujourd-hui/"
             },
             {
               "label": "Crociale dei Mulini",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/crociale-dei-mulini/aujourd-hui/"
             },
             {
               "label": "Drezzo-Pedrinate",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/drezzo-pedrinate/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-24T23:59:59.000Z"
+          "updatedAt": "2026-11-25T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -1100,7 +1100,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T10:34:02.735Z",
-  "contentHash": "cd7f3be02b903b2951dbab89ebed0ab1d0524a681b422e65b0a8918543246ac1",
+  "updatedAt": "2026-11-26T17:26:42.969Z",
+  "contentHash": "d89c07caffae709d3b213c96aab315b418036cd0a1bc48b4a5fd6e51558de4f2",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-24T23:59:59.000Z",
+      "updatedAt": "2026-11-25T23:59:59.000Z",
       "keyFacts": 1
     },
     {
@@ -33,11 +33,11 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Chavannes-de-Bogis-Divonne, settimana conclusa: 24 novembre 2026"
+          "note": "Chavannes-de-Bogis-Divonne, settimana conclusa: 25 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "17",
+          "value": "16",
           "note": "segnalazioni aggiornate: 26 novembre 2026"
         },
         {
@@ -50,48 +50,48 @@
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 18 novembre 2026 – 24 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 19 novembre 2026 – 25 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Chavannes-de-Bogis-Divonne",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/chavannes-de-bogis-divonne/oggi/"
             },
             {
               "label": "Crassier-Divonne",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/crassier-divonne/oggi/"
             },
             {
               "label": "L'Auberson-Les Fourgs",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/l-auberson-les-fourgs/oggi/"
             },
             {
               "label": "La Cure-Les Rousses",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/la-cure-les-rousses/oggi/"
             },
             {
               "label": "Le Brassus-Bois-d'Amont",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/le-brassus-bois-d-amont/oggi/"
             },
             {
               "label": "Vallorbe-Jougne (La Ferrière)",
               "value": "0 min",
-              "detail": "48 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/vallorbe-jougne/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-24T23:59:59.000Z"
+          "updatedAt": "2026-11-25T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -135,16 +135,16 @@
               "date": "2026-09-16T12:09:00.000Z"
             },
             {
-              "label": "A9 Vevey <-> Sion tra Svincolo autostradale Bex Nord E Parcheggio Indivis Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsia d'emergenza chiusa",
-              "value": "Chiusura",
-              "detail": "fine prevista: 26 novembre 2026",
-              "date": "2026-11-06T08:10:00.000Z"
-            },
-            {
               "label": "A1 Genève <-> Lausanne tra Svincolo autostradale Nyon E Svincolo autostradale Gland Situazione: problemi di traffico cantiere, lunghezza [km] 0.7 Limitazione del traffico: corsia d'emergenza chiusa",
               "value": "Chiusura",
               "detail": "fine prevista: 4 dicembre 2026",
               "date": "2026-11-10T04:00:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne <-> Morat tra Svincolo autostradale Yverdon Sud E Svincolo autostradale Payerne Situazione: chiusa cantiere, lunghezza [km] 22.0 Aggiunta 1: limite temporaneo larghezza Larghezza…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 1 dicembre 2026",
+              "date": "2026-11-12T09:46:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -270,7 +270,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "en": {
       "canton": "VD",
@@ -281,11 +281,11 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Chavannes-de-Bogis-Divonne, week ending 24 November 2026"
+          "note": "Chavannes-de-Bogis-Divonne, week ending 25 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "17",
+          "value": "16",
           "note": "reports as of 26 November 2026"
         },
         {
@@ -298,48 +298,48 @@
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 18 November 2026 to 24 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 19 November 2026 to 25 November 2026, fastest first.",
           "items": [
             {
               "label": "Chavannes-de-Bogis-Divonne",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/chavannes-de-bogis-divonne/today/"
             },
             {
               "label": "Crassier-Divonne",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/crassier-divonne/today/"
             },
             {
               "label": "L'Auberson-Les Fourgs",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/l-auberson-les-fourgs/today/"
             },
             {
               "label": "La Cure-Les Rousses",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/la-cure-les-rousses/today/"
             },
             {
               "label": "Le Brassus-Bois-d'Amont",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/le-brassus-bois-d-amont/today/"
             },
             {
               "label": "Vallorbe-Jougne (La Ferrière)",
               "value": "0 min",
-              "detail": "48 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/vallorbe-jougne/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-24T23:59:59.000Z"
+          "updatedAt": "2026-11-25T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -383,16 +383,16 @@
               "date": "2026-09-16T12:09:00.000Z"
             },
             {
-              "label": "A9 Vevey <-> Sion tra Svincolo autostradale Bex Nord E Parcheggio Indivis Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsia d'emergenza chiusa",
-              "value": "Closure",
-              "detail": "until 26 November 2026",
-              "date": "2026-11-06T08:10:00.000Z"
-            },
-            {
               "label": "A1 Genève <-> Lausanne tra Svincolo autostradale Nyon E Svincolo autostradale Gland Situazione: problemi di traffico cantiere, lunghezza [km] 0.7 Limitazione del traffico: corsia d'emergenza chiusa",
               "value": "Closure",
               "detail": "until 4 December 2026",
               "date": "2026-11-10T04:00:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne <-> Morat tra Svincolo autostradale Yverdon Sud E Svincolo autostradale Payerne Situazione: chiusa cantiere, lunghezza [km] 22.0 Aggiunta 1: limite temporaneo larghezza Larghezza…",
+              "value": "Closure",
+              "detail": "until 1 December 2026",
+              "date": "2026-11-12T09:46:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -517,7 +517,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "de": {
       "canton": "VD",
@@ -528,11 +528,11 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Chavannes-de-Bogis-Divonne, Woche bis 24. November 2026"
+          "note": "Chavannes-de-Bogis-Divonne, Woche bis 25. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "17",
+          "value": "16",
           "note": "Meldungen vom 26. November 2026"
         },
         {
@@ -545,48 +545,48 @@
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 18. November 2026 bis 24. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 19. November 2026 bis 25. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Chavannes-de-Bogis-Divonne",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/chavannes-de-bogis-divonne/heute/"
             },
             {
               "label": "Crassier-Divonne",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/crassier-divonne/heute/"
             },
             {
               "label": "L'Auberson-Les Fourgs",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/l-auberson-les-fourgs/heute/"
             },
             {
               "label": "La Cure-Les Rousses",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/la-cure-les-rousses/heute/"
             },
             {
               "label": "Le Brassus-Bois-d'Amont",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/le-brassus-bois-d-amont/heute/"
             },
             {
               "label": "Vallorbe-Jougne (La Ferrière)",
               "value": "0 Min.",
-              "detail": "48 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/vallorbe-jougne/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-24T23:59:59.000Z"
+          "updatedAt": "2026-11-25T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -630,16 +630,16 @@
               "date": "2026-09-16T12:09:00.000Z"
             },
             {
-              "label": "A9 Vevey <-> Sion zwischen Anschluss Bex-Nord und Parkplatz Indivis Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: Pannenstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 26. November 2026",
-              "date": "2026-11-06T08:10:00.000Z"
-            },
-            {
               "label": "A1 Genf <-> Lausanne zwischen Anschluss Nyon und Anschluss Gland Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.7 Verkehrsführung: Pannenstreifen gesperrt",
               "value": "Sperrung",
               "detail": "bis 4. Dezember 2026",
               "date": "2026-11-10T04:00:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne <-> Murten zwischen Anschluss Yverdon-Süd und Anschluss Payerne Sachlage: Strecke gesperrt Baustelle, Länge [km] 22.0 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.5",
+              "value": "Sperrung",
+              "detail": "bis 1. Dezember 2026",
+              "date": "2026-11-12T09:46:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -764,7 +764,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     },
     "fr": {
       "canton": "VD",
@@ -775,11 +775,11 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Chavannes-de-Bogis-Divonne, semaine jusqu’au 24 novembre 2026"
+          "note": "Chavannes-de-Bogis-Divonne, semaine jusqu’au 25 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "17",
+          "value": "16",
           "note": "signalements au 26 novembre 2026"
         },
         {
@@ -792,48 +792,48 @@
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 18 novembre 2026 au 24 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 19 novembre 2026 au 25 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Chavannes-de-Bogis-Divonne",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/chavannes-de-bogis-divonne/aujourd-hui/"
             },
             {
               "label": "Crassier-Divonne",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/crassier-divonne/aujourd-hui/"
             },
             {
               "label": "L'Auberson-Les Fourgs",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/l-auberson-les-fourgs/aujourd-hui/"
             },
             {
               "label": "La Cure-Les Rousses",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/la-cure-les-rousses/aujourd-hui/"
             },
             {
               "label": "Le Brassus-Bois-d'Amont",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/le-brassus-bois-d-amont/aujourd-hui/"
             },
             {
               "label": "Vallorbe-Jougne (La Ferrière)",
               "value": "0 min",
-              "detail": "48 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/vallorbe-jougne/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-24T23:59:59.000Z"
+          "updatedAt": "2026-11-25T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -877,16 +877,16 @@
               "date": "2026-09-16T12:09:00.000Z"
             },
             {
-              "label": "A9 Vevey <-> Sion entre Jonction autoroutière Bex-Nord et Parking Indivis Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: bande d'arrêt d'urgence fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 26 novembre 2026",
-              "date": "2026-11-06T08:10:00.000Z"
-            },
-            {
               "label": "A1 Genève <-> Lausanne entre Jonction autoroutière Nyon et Jonction autoroutière Gland Situation: trafic perturbé travaux, longueur [km] 0.7 Gestion du trafic: bande d'arrêt d'urgence fermée",
               "value": "Fermeture",
               "detail": "jusqu’au 4 décembre 2026",
               "date": "2026-11-10T04:00:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne <-> Morat entre Jonction autoroutière Yverdon-Sud et Jonction autoroutière Payerne Situation: fermé travaux, longueur [km] 22.0 Complément 1: limitation temporaire de largeur largeur de…",
+              "value": "Fermeture",
+              "detail": "jusqu’au 1er décembre 2026",
+              "date": "2026-11-12T09:46:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -1012,7 +1012,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-26T17:26:42.969Z"
     }
   }
 }
