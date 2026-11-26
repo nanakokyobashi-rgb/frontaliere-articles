@@ -43,13 +43,13 @@ on:
         required: false
         default: false
 
-# `pr-autorebase.mjs` e il workflow autonomo conflict-handoff-reconcile.yml
-# scrivono la stessa risorsa remota (issue di hand-off + routing). Una chiave
-# repo-wide comune chiude la finestra read/create/reread fra processi distinti;
+# `pr-autorebase.mjs`, il reconciler degli hand-off e il drainer scrivono risorse
+# di routing sovrapposte. Il mutex repo-scoped `followup-daily` è comune anche ai
+# writer dei bucket e chiude la finestra read/create/reread fra processi distinti;
 # non cancellare il writer attivo, altrimenti puo' lasciare una issue creata ma
 # non ancora instradata.
 concurrency:
-  group: conflict-handoff-writer-${{ github.repository }}
+  group: followup-daily-${{ github.repository }}
   cancel-in-progress: false
 
 permissions:

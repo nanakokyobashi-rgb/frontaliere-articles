@@ -1,9 +1,11 @@
 name: Reconcile conflict hand-offs (no-Claude)
 
 # Chiude gli hand-off di conflitto il cui lavoro e' gia' stato completato. Il
-# workflow e' autonomo perche' il mutex repo-wide dei writer non puo' vivere in
-# followup-drainer.yml: quel workflow riceve eventi `issues`, e ogni evento
-# irrilevante occuperebbe o sostituirebbe la sola pending del gruppo globale.
+# workflow e' autonomo perche' il riconciliatore non deve ricevere gli eventi
+# `issues` del drainer. Il job usa comunque lo stesso mutex repo-scoped
+# `followup-daily` del drainer, dei writer dei bucket e dell'autorebase: gli
+# eventi irrilevanti restano fuori dal gruppo perche' il filtro e' sul job del
+# drainer, prima del suo ingresso nel mutex.
 #
 # La cadenza precede nominalmente di tre minuti il followup-drainer; non e' un
 # vincolo di ordinamento (i cron GitHub possono slittare), percio' lo script
@@ -14,10 +16,11 @@ on:
     - cron: '2,27,52 * * * *'
   workflow_dispatch:
 
-# Stessa chiave del workflow pr-autorebase: create/routing e reconcile degli
-# hand-off sono un unico writer repo-wide, non cancellante.
+# Stessa chiave del drainer e dei writer daily: create/routing e reconcile degli
+# hand-off restano serializzati con ogni altra mutazione della coda, senza
+# cancellare la run attiva.
 concurrency:
-  group: conflict-handoff-writer-${{ github.repository }}
+  group: followup-daily-${{ github.repository }}
   cancel-in-progress: false
 
 permissions:
@@ -29,7 +32,16 @@ jobs:
   reconcile:
     runs-on: ubuntu-latest
     timeout-minutes: 6
+    # Deve restare uguale a timeout-minutes sopra: il valore viene ripetuto
+    # per costruire una deadline assoluta disponibile allo script.
+    env:
+      JOB_TIMEOUT_MINUTES: 6
     steps:
+      # La deadline parte prima del checkout: runBudgetFromEnv deve poter
+      # riservare margine anche quando il setup consuma quasi tutto il job.
+      - name: Export job deadline
+        run: echo "CI_JOB_DEADLINE_EPOCH=$(( $(date +%s) + ${{ env.JOB_TIMEOUT_MINUTES }} * 60 ))" >> "$GITHUB_ENV"
+
       - name: Checkout
         timeout-minutes: 5
         uses: actions/checkout@v7

@@ -350,6 +350,13 @@ describe('wiring nel workflow autonomo di questo repo', () => {
     expect(triggers).toContain('workflow_dispatch:');
     expect(triggers).not.toContain('issues:');
     expect(workflow).toContain('pull-requests: read');
+    expect(workflow).toContain('group: followup-daily-${{ github.repository }}');
+    expect(workflow).toContain('JOB_TIMEOUT_MINUTES: 6');
+    const deadline = workflow.indexOf('- name: Export job deadline');
+    const checkout = workflow.indexOf('- name: Checkout');
+    expect(deadline).toBeGreaterThan(-1);
+    expect(deadline).toBeLessThan(checkout);
+    expect(workflow).toContain('CI_JOB_DEADLINE_EPOCH=$(( $(date +%s) + ${{ env.JOB_TIMEOUT_MINUTES }} * 60 ))');
 
     const drainer = readFileSync(new URL('../../.github/workflows/followup-drainer.yml', import.meta.url), 'utf8');
     expect(drainer).not.toContain('run: node scripts/ci/reconcile-conflict-handoffs.mjs');

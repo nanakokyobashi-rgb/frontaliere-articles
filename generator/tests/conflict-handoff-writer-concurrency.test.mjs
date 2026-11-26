@@ -5,6 +5,7 @@ import test from 'node:test';
 const AUTOREBASE = readFileSync(new URL('../../.github/workflows/pr-autorebase.yml', import.meta.url), 'utf8');
 const RECONCILER = readFileSync(new URL('../../.github/workflows/conflict-handoff-reconcile.yml', import.meta.url), 'utf8');
 const DRAINER = readFileSync(new URL('../../.github/workflows/followup-drainer.yml', import.meta.url), 'utf8');
+const SHARED_GROUP = 'followup-daily-${{ github.repository }}';
 
 function jobBlock(source, name) {
   const start = source.indexOf(`\n  ${name}:\n`);
@@ -98,12 +99,14 @@ function runToCompletion(task) {
   }
 }
 
-test('autorebase e reconciler condividono il mutex repo-wide non cancellante', () => {
+test('autorebase, reconciler e drainer condividono il mutex repo-wide non cancellante', () => {
   const autorebase = concurrencyPolicy(AUTOREBASE);
   const reconcile = concurrencyPolicy(RECONCILER);
+  const drain = concurrencyPolicy(jobBlock(DRAINER, 'drain'));
 
-  assert.equal(autorebase.group, 'conflict-handoff-writer-${{ github.repository }}');
+  assert.equal(autorebase.group, SHARED_GROUP);
   assert.deepEqual(reconcile, autorebase);
+  assert.deepEqual(drain, autorebase);
   assert.equal(autorebase.cancelInProgress, false);
   assert.match(RECONCILER, /\n  schedule:\n/);
   assert.match(RECONCILER, /\n  workflow_dispatch:\n/);
@@ -163,13 +166,12 @@ test('due writer sulla stessa origine+HEAD creano e instradano un solo hand-off'
   assert.deepEqual(racedStore.counts(), { create: 2, route: 2 });
 });
 
-test('il drain resta indipendente dal reconciler e conserva il mutex daily preesistente', () => {
+test('il drain resta un job separato e conserva il mutex daily condiviso', () => {
   const drain = jobBlock(DRAINER, 'drain');
   assert.doesNotMatch(drain, /\n    needs:/);
   assert.deepEqual(concurrencyPolicy(drain), {
-    group: 'followup-daily-${{ github.repository }}',
+    group: SHARED_GROUP,
     cancelInProgress: false,
   });
   assert.doesNotMatch(DRAINER, /run: node scripts\/ci\/reconcile-conflict-handoffs\.mjs/);
-  assert.doesNotMatch(DRAINER, /conflict-handoff-writer-/);
 });
