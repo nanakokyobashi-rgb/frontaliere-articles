@@ -30372,6 +30372,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'rimborso-imposta-secondo-pilastro-svizzero',
+    category: 'fiscale',
+    date: '2026-11-26T12:10:16.144Z',
+    image: '/images/blog/article-rimborso-imposta-secondo-pilastro-svizzero.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
