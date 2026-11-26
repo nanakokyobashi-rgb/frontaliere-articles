@@ -234,7 +234,7 @@ describe('infrastructure retries with a retained vote', () => {
   const editorialContext = { articleBody: 'Corpo sintetico', evidenceText: 'Fonte sintetica' };
   const prompt = 'same article';
 
-  async function runRounds(firstServingModel, respond, initialTime = 160_000) {
+  async function runRounds(firstServingModel, respond, initialTime = 130_000) {
     assert.ok(start >= 0 && end > start);
     const calls = [];
     const logs = [];
@@ -291,7 +291,7 @@ describe('infrastructure retries with a retained vote', () => {
     ));
     assert.deepEqual(calls.map(({ model }) => model), [CODEX, groq, CODEX, groq]);
     assert.deepEqual(calls.map(({ options }) => options.fresh), [false, false, undefined, true]);
-    assert.deepEqual(calls.slice(0, 3).map(({ options }) => options.deadlineMs), [175_000, 175_000, 175_000]);
+    assert.deepEqual(calls.slice(0, 3).map(({ options }) => options.deadlineMs), [147_500, 147_500, 147_500]);
     assert.deepEqual(Array.from(calls[3].options.excludeModels), [first, CODEX]);
     assert.equal(calls[3].options.invalidVerdictModels, calls[0].options.invalidVerdictModels);
     assert.ok(calls[3].options.deadlineMs > calls[3].now);
@@ -325,6 +325,26 @@ describe('infrastructure retries with a retained vote', () => {
     assert.equal(calls[2].options.deadlineMs, 50_000);
     assert.equal(calls.at(-1).options.codexOnly, true);
     assert.equal(calls.at(-1).options.deadlineMs, 180_000);
+  });
+
+  test('a retained vote leaves thirty seconds for final Codex verification when time is tight', async () => {
+    const { calls } = await runRounds('groq/openai/gpt-oss-20b', () => null, 160_000);
+    const final = calls.at(-1);
+    assert.equal(final.options.codexOnly, true);
+    assert.equal(final.options.deadlineMs, 220_000);
+    assert.ok(final.options.deadlineMs - final.now >= 30_000);
+  });
+
+  test('requires the full 45-second initial window before reserving final Codex time', async () => {
+    const atThreshold = await runRounds('groq/openai/gpt-oss-20b', () => null, 180_000);
+    const thresholdFinal = atThreshold.calls.at(-1);
+    assert.equal(thresholdFinal.options.codexOnly, true);
+    assert.equal(thresholdFinal.options.deadlineMs - thresholdFinal.now, 30_000);
+
+    const belowThreshold = await runRounds('groq/openai/gpt-oss-20b', () => null, 181_000);
+    const belowFinal = belowThreshold.calls.at(-1);
+    assert.equal(belowFinal.options.codexOnly, true);
+    assert.ok(belowFinal.options.deadlineMs - belowFinal.now < 30_000);
   });
 
   test('a serving Groq vote leaves no unused preference for immediate recovery', async () => {
@@ -382,7 +402,7 @@ describe('fact-check retries under a reported input cap', () => {
   async function runRounds({
     canton = 'San Gallo', section = 'san-gallo', isCanton = true, isFrontaliere = false,
     sourceUrl = 'HTTPS://example.test/news', sourceText = source, padding = '', replies,
-    initialTime = 160_000, consumeWindow = false, declaredInputCap,
+    initialTime = 130_000, consumeWindow = false, declaredInputCap,
   }) {
     const calls = [];
     const logs = [];
