@@ -1645,7 +1645,7 @@
       "reason": "Workflow autonomo schedule/workflow_dispatch e consumer unico degli hand-off di conflitto del corpus: riconcilia quelli risolti e promuove gli altri solo dopo una prova merge-tree fresca sulla stessa HEAD. Condivide il mutex repo-wide non cancellante conflict-handoff-writer con pr-autorebase, ma resta separato dal followup-drainer issue-triggered: cosi' gli eventi issues irrilevanti non occupano o sostituiscono la sola pending globale prima del filtro del job. Esporta CI_JOB_DEADLINE_EPOCH coerente col timeout reale per lasciare la riserva di runBudgetFromEnv. Il checkout è full-history (`fetch-depth: 0`) ma blobless/sparse sui tre alberi pesanti: merge-tree vede la base comune senza materializzare il corpus. Il sito non ha l'autorebase custom corpus né questa coppia di writer.",
       "baseline": {
         "site": null,
-        "corpus": "cb89836928a3e8e1",
+        "corpus": "a56ea6c2d671096e",
         "alignedAt": "2026-11-26"
       }
     },
