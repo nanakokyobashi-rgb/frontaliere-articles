@@ -16,7 +16,9 @@ on:
       - 'content/blog-meta-canton-ne-en.ts'
       - 'content/blog-meta-canton-ne-de.ts'
       - 'content/blog-meta-canton-ne-fr.ts'
-      - 'content/cantons/canton-ne/**'
+      - 'content/cantons/canton-ne/registry.ts'
+      - 'content/cantons/canton-ne/slugs.ts'
+      - 'content/cantons/canton-ne/seo.ts'
   workflow_dispatch:
     inputs:
       section:

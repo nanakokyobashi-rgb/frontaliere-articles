@@ -16,7 +16,9 @@ on:
       - 'content/blog-meta-canton-basilea-en.ts'
       - 'content/blog-meta-canton-basilea-de.ts'
       - 'content/blog-meta-canton-basilea-fr.ts'
-      - 'content/cantons/canton-basilea/**'
+      - 'content/cantons/canton-basilea/registry.ts'
+      - 'content/cantons/canton-basilea/slugs.ts'
+      - 'content/cantons/canton-basilea/seo.ts'
   workflow_dispatch:
     inputs:
       section:
