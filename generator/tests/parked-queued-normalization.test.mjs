@@ -71,7 +71,7 @@ test('#10677: la coda in conflitto resta parked fino al cooldown e poi si normal
   assert.match(retry, /remove: \[LBL_PARKED, LBL_AUTOMATION_DEFERRED/);
   assert.match(
     SOURCE.slice(drainStart),
-    /const pool = listIssues\(LBL_QUEUED\)\.filter\(\(i\) => !has\(i, LBL_PARKED\)\);[\s\S]*?let queued = pool\s*\.filter\(isDrainPromotable\)/,
+    /const pool = listIssues\(LBL_QUEUED\)[\s\S]*?\.filter\(\(i\) => !has\(i, LBL_PARKED\)\)[\s\S]*?\.filter\(\(i\) => conflictHandoffOriginPr\(i\.title\) === null\);[\s\S]*?let queued = pool\s*\.filter\(isDrainPromotable\)/,
   );
 });
 

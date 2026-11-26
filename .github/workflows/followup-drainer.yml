@@ -2,11 +2,11 @@ name: Follow-up drainer (queue → agent:fix, no-Claude)
 
 # Drena la coda `agent:fix-queued` fino a 15 issue diverse in parallelo,
 # promuovendo a `agent:fix` solo entro il cap e serializzando la scansione
-# della coda con il mutex repo-scoped `followup-daily-` dei writer daily e degli
-# hand-off di conflitto. La riconciliazione degli hand-off gira nel workflow
-# autonomo `conflict-handoff-reconcile.yml`: qui resta soltanto il drain, che
-# riceve anche eventi `issues`, ma il filtro sul job impedisce agli eventi
-# irrilevanti di entrare nel mutex.
+# della coda con il mutex repo-scoped `followup-daily-` dei writer daily. La
+# riconciliazione degli hand-off di conflitto gira nel workflow autonomo
+# `conflict-handoff-reconcile.yml`, unico consumer che può chiuderli o
+# promuoverli: qui resta soltanto il drain generico, che riceve anche eventi
+# `issues` e deve quindi evitare qualunque mutex repo-wide.
 #
 # Il mutex globale evita che issue diverse leggano lo stesso snapshot e
 # riservino due volte il medesimo candidato; il cap e il lease Codex-primary
@@ -66,9 +66,8 @@ jobs:
       (github.event_name != 'workflow_run' ||
        github.event.workflow_run.conclusion != 'skipped')
     # Il gruppo è il mutex repo-scoped condiviso con i writer daily
-    # (post-merge-followup.yml, followup-reconcile.yml) e con i writer degli
-    # hand-off (pr-autorebase.yml, conflict-handoff-reconcile.yml): nessun
-    # wake-up può leggere o promuovere mentre una di queste transizioni scrive.
+    # (post-merge-followup.yml, followup-reconcile.yml, a livello di workflow):
+    # nessun wake-up può leggere lo stesso bucket mentre viene appeso o sigillato.
     # Sta sul JOB, non sulla run: un job saltato dal suo `if:` non entra nel
     # gruppo. È una questione di correttezza, non di costo: a livello di run
     # ogni `issues: labeled` irrilevante e ogni `workflow_run` di un issue-fix

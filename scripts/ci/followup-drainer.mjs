@@ -798,13 +798,15 @@ export function isDecomposedParent(iss) {
 
 /**
  * Il DRAIN può promuovere questa issue a `agent:fix`? Una issue già attiva,
- * nello stadio decompose, un defer tecnico o un padre decomposto è lavoro
- * assegnato altrove/non ancora rivalutabile, non un candidato del fixer. Il
- * predicato resta puro per poter difendere l'invariante nei test e nei call-site
- * del DRAIN.
- * @param {{labels?: Array<{name:string}>}} iss
+ * nello stadio decompose, un defer tecnico, un padre decomposto o un hand-off
+ * di conflitto è lavoro assegnato altrove/non ancora rivalutabile. Gli hand-off
+ * hanno un consumer unico (`conflict-handoff-reconcile.yml`), che ricalcola il
+ * merge-tree prima di promuovere. Il predicato resta puro per poter difendere
+ * l'invariante nei test e nei call-site del DRAIN.
+ * @param {{title?:string, labels?: Array<{name:string}>}} iss
  */
 export function isDrainPromotable(iss) {
+  if (conflictHandoffOriginPr(iss?.title) !== null) return false;
   if (has(iss, LBL_PARKED)) return false;
   // Fail-closed contro scritture parziali e producer vecchi: il defer tecnico
   // deve restare assorbente finché lo sweep non cambia il contesto e rimuove
@@ -6311,7 +6313,13 @@ export function runDrain() {
   // stampato al momento della decisione, qui si onora e basta.
   if (fairnessHold) return;
 
-  const pool = listIssues(LBL_QUEUED).filter((i) => !has(i, LBL_PARKED));
+  // Gli hand-off di conflitto non entrano nemmeno nella snapshot del DRAIN:
+  // non vanno promossi, dequeued o mutati qui. Il workflow autonomo e'
+  // l'unico consumer e conserva la prova merge-tree immediatamente prima del
+  // routing a `agent:fix`.
+  const pool = listIssues(LBL_QUEUED)
+    .filter((i) => !has(i, LBL_PARKED))
+    .filter((i) => conflictHandoffOriginPr(i.title) === null);
 
   // Pre-flight zero-Claude: gli stati non promuovibili vanno tolti dalla coda,
   // salvo un conflitto di routing fresco: la sua `agent:fix-queued` va lasciata

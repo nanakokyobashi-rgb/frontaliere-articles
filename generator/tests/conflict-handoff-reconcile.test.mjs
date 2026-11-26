@@ -23,9 +23,11 @@ import {
   declaresClosing,
   declaresSupersede,
   groupHandoffs,
+  handoffRouteDecision,
   originContentOnMain,
   reapplyInFlight,
   RECONCILE_MARKER,
+  shouldAttemptHandoffRoute,
   stillClosable,
 } from '../../scripts/ci/reconcile-conflict-handoffs.mjs';
 
@@ -110,6 +112,64 @@ describe('handoffResolution', () => {
       expect(handoffResolution(openOrigin({ headRefOid: NEW_HEAD, ...over }), { expectedHead: HEAD.slice(0, 12), conflictClearedAfterOpen: true }))
         .toEqual({ resolved: false, reason });
     }
+  });
+});
+
+describe('promozione dal consumer unico', () => {
+  it('promuove solo la stessa HEAD con conflitto merge-tree fresco', () => {
+    const issue = handoff(20001, 19422, { labels: ['agent:fix-queued'] });
+    expect(handoffRouteDecision({
+      issue,
+      origin: openOrigin({ mergeable: 'CONFLICTING' }),
+      verifiedHead: HEAD,
+      mergeTreeState: 'conflicted',
+      fetchOk: true,
+    })).toEqual({ action: 'route', reason: 'same-head-conflict' });
+
+    for (const over of [
+      { mergeTreeState: 'clean', fetchOk: true, reason: 'conflict-clean-await-reconcile' },
+      { mergeTreeState: 'unknown', fetchOk: true, reason: 'conflict-unverified' },
+      { mergeTreeState: 'conflicted', fetchOk: false, reason: 'conflict-unverified' },
+    ]) {
+      expect(handoffRouteDecision({
+        issue,
+        origin: openOrigin({ mergeable: 'CONFLICTING' }),
+        verifiedHead: HEAD,
+        mergeTreeState: over.mergeTreeState,
+        fetchOk: over.fetchOk,
+      })).toEqual({ action: 'keep', reason: over.reason });
+    }
+  });
+
+  it('HEAD cambiata, claim o routing già presente restano fail-closed', () => {
+    const queued = handoff(20001, 19422, { labels: ['agent:fix-queued'] });
+    expect(handoffRouteDecision({
+      issue: queued,
+      origin: openOrigin({ headRefOid: NEW_HEAD }),
+      verifiedHead: NEW_HEAD,
+      mergeTreeState: 'conflicted',
+      fetchOk: true,
+    })).toEqual({ action: 'keep', reason: 'origin-head-changed' });
+    expect(handoffRouteDecision({
+      issue: handoff(20001, 19422, { labels: ['agent:in-progress'] }),
+      origin: openOrigin(),
+      verifiedHead: HEAD,
+      mergeTreeState: 'conflicted',
+      fetchOk: true,
+    })).toEqual({ action: 'keep', reason: 'claim-active' });
+    expect(handoffRouteDecision({
+      issue: handoff(20001, 19422, { labels: ['agent:fix'] }),
+      origin: openOrigin(),
+      verifiedHead: HEAD,
+      mergeTreeState: 'conflicted',
+      fetchOk: true,
+    })).toEqual({ action: 'keep', reason: 'already-routed' });
+  });
+
+  it('tenta la prova git solo per keep legati al conflitto', () => {
+    expect(shouldAttemptHandoffRoute({ action: 'keep', reason: 'origin-open' })).toBe(true);
+    expect(shouldAttemptHandoffRoute({ action: 'keep', reason: 'reapply-in-flight' })).toBe(false);
+    expect(shouldAttemptHandoffRoute({ action: 'close', reason: 'origin-merged' })).toBe(false);
   });
 });
 
@@ -350,13 +410,18 @@ describe('wiring nel workflow autonomo di questo repo', () => {
     expect(triggers).toContain('workflow_dispatch:');
     expect(triggers).not.toContain('issues:');
     expect(workflow).toContain('pull-requests: read');
-    expect(workflow).toContain('group: followup-daily-${{ github.repository }}');
     expect(workflow).toContain('JOB_TIMEOUT_MINUTES: 6');
     const deadline = workflow.indexOf('- name: Export job deadline');
     const checkout = workflow.indexOf('- name: Checkout');
+    const setupNode = workflow.indexOf('- name: Setup Node.js');
     expect(deadline).toBeGreaterThan(-1);
-    expect(deadline).toBeLessThan(checkout);
-    expect(workflow).toContain('CI_JOB_DEADLINE_EPOCH=$(( $(date +%s) + ${{ env.JOB_TIMEOUT_MINUTES }} * 60 ))');
+    expect(checkout).toBeGreaterThan(deadline);
+    expect(workflow.slice(deadline, checkout)).toContain('CI_JOB_DEADLINE_EPOCH=');
+    const checkoutBlock = workflow.slice(checkout, setupNode);
+    expect(checkoutBlock).toContain('fetch-depth: 0');
+    expect(checkoutBlock).not.toContain('fetch-depth: 1');
+    expect(checkoutBlock).toContain('filter: blob:none');
+    expect(checkoutBlock).toContain('!/content');
 
     const drainer = readFileSync(new URL('../../.github/workflows/followup-drainer.yml', import.meta.url), 'utf8');
     expect(drainer).not.toContain('run: node scripts/ci/reconcile-conflict-handoffs.mjs');

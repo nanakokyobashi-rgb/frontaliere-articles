@@ -1,11 +1,14 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
+import { isDrainPromotable } from '../../scripts/ci/followup-drainer.mjs';
 
 const AUTOREBASE = readFileSync(new URL('../../.github/workflows/pr-autorebase.yml', import.meta.url), 'utf8');
 const RECONCILER = readFileSync(new URL('../../.github/workflows/conflict-handoff-reconcile.yml', import.meta.url), 'utf8');
 const DRAINER = readFileSync(new URL('../../.github/workflows/followup-drainer.yml', import.meta.url), 'utf8');
-const SHARED_GROUP = 'followup-daily-${{ github.repository }}';
+const DRAINER_SCRIPT = readFileSync(new URL('../../scripts/ci/followup-drainer.mjs', import.meta.url), 'utf8');
+const RECONCILE_SCRIPT = readFileSync(new URL('../../scripts/ci/reconcile-conflict-handoffs.mjs', import.meta.url), 'utf8');
+const AUTOREBASE_SCRIPT = readFileSync(new URL('../../scripts/ci/pr-autorebase.mjs', import.meta.url), 'utf8');
 
 function jobBlock(source, name) {
   const start = source.indexOf(`\n  ${name}:\n`);
@@ -83,14 +86,20 @@ function githubHandoffStore() {
   };
 }
 
-function* conflictHandoffWriter(store, origin, head) {
+function* conflictHandoffProducer(store, origin, head) {
   // Il primo yield rende esplicita la finestra TOCTOU: senza mutex due writer
-  // possono osservare entrambi l'assenza prima che uno dei due crei la issue.
+  // possono osservare stati diversi della stessa issue.
   const existing = store.find(origin, head);
   yield 'read';
-  const issue = existing ?? store.create(origin, head);
+  existing ?? store.create(origin, head);
   yield 'create-or-reuse';
-  if (!issue.labels.has('agent:fix')) store.route(issue);
+}
+
+function* conflictHandoffConsumer(store, origin, head) {
+  const existing = store.find(origin, head);
+  yield 'read';
+  if (existing && !existing.labels.has('agent:fix')) store.route(existing);
+  yield 'route-or-keep';
 }
 
 function runToCompletion(task) {
@@ -99,14 +108,12 @@ function runToCompletion(task) {
   }
 }
 
-test('autorebase, reconciler e drainer condividono il mutex repo-wide non cancellante', () => {
+test('autorebase e reconciler condividono il mutex repo-wide non cancellante', () => {
   const autorebase = concurrencyPolicy(AUTOREBASE);
   const reconcile = concurrencyPolicy(RECONCILER);
-  const drain = concurrencyPolicy(jobBlock(DRAINER, 'drain'));
 
-  assert.equal(autorebase.group, SHARED_GROUP);
+  assert.equal(autorebase.group, 'conflict-handoff-writer-${{ github.repository }}');
   assert.deepEqual(reconcile, autorebase);
-  assert.deepEqual(drain, autorebase);
   assert.equal(autorebase.cancelInProgress, false);
   assert.match(RECONCILER, /\n  schedule:\n/);
   assert.match(RECONCILER, /\n  workflow_dispatch:\n/);
@@ -143,8 +150,8 @@ test('due writer sulla stessa origine+HEAD creano e instradano un solo hand-off'
   const head = 'a'.repeat(40);
   const store = githubHandoffStore();
   const queue = writerQueue([
-    { name: 'autorebase-run-a', ...policy, task: conflictHandoffWriter(store, origin, head) },
-    { name: 'autorebase-run-b', ...policy, task: conflictHandoffWriter(store, origin, head) },
+    { name: 'pr-autorebase-create', ...policy, task: conflictHandoffProducer(store, origin, head) },
+    { name: 'reconcile-route', ...policy, task: conflictHandoffConsumer(store, origin, head) },
   ]);
 
   while (queue.active.size > 0) {
@@ -154,24 +161,46 @@ test('due writer sulla stessa origine+HEAD creano e instradano un solo hand-off'
   }
   assert.deepEqual(store.counts(), { create: 1, route: 1 });
 
-  // Controprova della fixture: senza il single-flight entrambi leggono
-  // l'assenza prima della create e producono due issue, entrambe instradate.
+  // Controprova della fixture: senza il single-flight il consumer legge
+  // l'assenza prima della create e perde il routing fino a un tick successivo.
   const racedStore = githubHandoffStore();
-  const raced = [
-    conflictHandoffWriter(racedStore, origin, head),
-    conflictHandoffWriter(racedStore, origin, head),
-  ];
-  raced.forEach((writer) => assert.equal(writer.next().value, 'read'));
-  raced.forEach(runToCompletion);
-  assert.deepEqual(racedStore.counts(), { create: 2, route: 2 });
+  const racedConsumer = conflictHandoffConsumer(racedStore, origin, head);
+  const racedProducer = conflictHandoffProducer(racedStore, origin, head);
+  assert.equal(racedConsumer.next().value, 'read');
+  assert.equal(racedProducer.next().value, 'read');
+  runToCompletion(racedProducer);
+  runToCompletion(racedConsumer);
+  assert.deepEqual(racedStore.counts(), { create: 1, route: 0 });
 });
 
-test('il drain resta un job separato e conserva il mutex daily condiviso', () => {
+test('il drain resta indipendente dal reconciler e conserva il mutex daily preesistente', () => {
   const drain = jobBlock(DRAINER, 'drain');
   assert.doesNotMatch(drain, /\n    needs:/);
   assert.deepEqual(concurrencyPolicy(drain), {
-    group: SHARED_GROUP,
+    group: 'followup-daily-${{ github.repository }}',
     cancelInProgress: false,
   });
   assert.doesNotMatch(DRAINER, /run: node scripts\/ci\/reconcile-conflict-handoffs\.mjs/);
+  assert.doesNotMatch(DRAINER, /conflict-handoff-writer-/);
+});
+
+test('il workflow autonomo è l’unico consumer che promuove gli hand-off di conflitto', () => {
+  const handoff = {
+    title: 'Conflitto con main dopo LGTM: riapplicare la PR #19422 su main',
+    labels: [{ name: 'agent:fix-queued' }],
+  };
+  assert.equal(isDrainPromotable(handoff), false);
+  assert.equal(isDrainPromotable({ title: 'follow-up ordinaria', labels: handoff.labels }), true);
+  assert.match(
+    DRAINER_SCRIPT,
+    /const pool = listIssues\(LBL_QUEUED\)[\s\S]*?\.filter\(\(i\) => conflictHandoffOriginPr\(i\.title\) === null\);/,
+  );
+  assert.doesNotMatch(DRAINER_SCRIPT, /function routeHandoff\(/);
+  const producer = AUTOREBASE_SCRIPT.slice(
+    AUTOREBASE_SCRIPT.indexOf('function handOffConflictToFixer('),
+    AUTOREBASE_SCRIPT.indexOf('function commentConflictOnce('),
+  );
+  assert.doesNotMatch(producer, /'--add-label', 'agent:fix'/);
+  assert.match(RECONCILE_SCRIPT, /function routeHandoff\(/);
+  assert.match(RECONCILE_SCRIPT, /'--add-label', 'agent:fix'/);
 });

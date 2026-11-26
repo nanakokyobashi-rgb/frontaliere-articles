@@ -1167,8 +1167,10 @@ _Segnale deterministico da pr-autorebase.yml (zero-Claude). La label sparisce da
 // il contesto della PR, e il ciclo ne avvia uno solo da una issue `agent:fix`:
 // (corpus: stesso blocco del sito, #9293; qui GH_TOKEN e' il PAT nanako, che
 // il sender gate di issue-fix ammette).
-// la issue qui sotto lo avvia subito, con la PR, la HEAD e i file in
-// conflitto gia' scritti, invece di attendere che qualcuno legga la label.
+// La issue qui sotto conserva PR, HEAD e file; il consumer schedulato
+// `conflict-handoff-reconcile.yml` la promuove entro il tick successivo solo
+// dopo aver ricalcolato merge-tree. Autorebase resta il producer e non applica
+// direttamente `agent:fix`.
 //
 // Solo con LGTM: senza, la PR non e' pronta al merge e il conflitto resta un
 // dettaglio del lavoro in corso del suo autore. One-shot per HEAD (marker nel
@@ -1242,41 +1244,6 @@ export function shouldHandOffConflict({ lgtm, alreadyHandedOff, conflictLockStat
   return Boolean(lgtm) && !alreadyHandedOff && !lockBlocks;
 }
 
-/**
- * Ultimo gate prima di promuovere una issue di hand-off ad `agent:fix`.
- *
- * La prova usata per creare la issue puo' essere diventata stantia mentre GitHub
- * eseguiva create/list/edit. Solo la stessa HEAD ancora aperta e un merge-tree
- * appena ricalcolato possono spendere un fixer. Una origine gia' mergeata o la
- * stessa HEAD tornata clean chiudono invece l'hand-off; ogni lettura ambigua,
- * una HEAD nuova o una chiusura senza merge restano in coda fail-closed.
- */
-export function decideConflictHandoffRevalidation({
-  origin,
-  expectedHead,
-  mergeTreeState,
-  fetchOk = true,
-}) {
-  const state = String(origin?.state || '').toUpperCase();
-  if (state === 'MERGED') return { action: 'close', reason: 'origin-merged' };
-  if (state !== 'OPEN') {
-    return { action: 'queue', reason: state === 'CLOSED' ? 'origin-closed' : 'origin-state-unreadable' };
-  }
-
-  const expected = String(expectedHead || '').toLowerCase();
-  const current = String(origin?.headRefOid || '').toLowerCase();
-  if (!PR_HEAD_SHA_RE.test(expected) || !PR_HEAD_SHA_RE.test(current)) {
-    return { action: 'queue', reason: 'origin-head-unreadable' };
-  }
-  if (current !== expected) return { action: 'queue', reason: 'origin-head-changed' };
-  if (!fetchOk || mergeTreeState === 'unknown') {
-    return { action: 'queue', reason: 'conflict-unverified' };
-  }
-  if (mergeTreeState === 'clean') return { action: 'close', reason: 'conflict-resolved' };
-  if (mergeTreeState === 'conflicted') return { action: 'route', reason: 'same-head-conflict' };
-  return { action: 'queue', reason: 'conflict-unverified' };
-}
-
 /** Titolo stabile e body della issue di hand-off. Puro: niente rete. */
 export function buildConflictHandoffIssue({ num, branch, head, files }) {
   const list = (files || []).slice(0, 30).map((f) => `- \`${f}\``).join('\n') || '- (elenco non disponibile: ricalcolalo con il comando sotto)';
@@ -1301,39 +1268,6 @@ export function buildConflictHandoffIssue({ num, branch, head, files }) {
   return { title, body };
 }
 
-/** `gh` con esito binario: true solo se il comando e' uscito 0. */
-function ghOk(args) {
-  try {
-    execFileSync('gh', args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-function readConflictHandoffOrigin(num) {
-  const origin = gh(['pr', 'view', String(num), '--repo', REPO,
-    '--json', 'state,headRefOid'], { allowFail: true });
-  return origin && typeof origin === 'object' ? origin : null;
-}
-
-/** Ricalcola la prova subito prima del routing; nessun risultato viene memoizzato. */
-function revalidateConflictHandoffRoute(num, branch, head) {
-  const fetched = git(['fetch', 'origin', branch, 'main'], { allowFail: true });
-  const verdict = fetched === null
-    ? { state: 'unknown', conflicted: false, files: [] }
-    : mergeTreeVerdict(head);
-  // La lettura GitHub viene per ultima: stato e HEAD sono il fatto piu' fresco
-  // disponibile quando la chiamata successiva applichera' `agent:fix`.
-  const origin = readConflictHandoffOrigin(num);
-  return decideConflictHandoffRevalidation({
-    origin,
-    expectedHead: head,
-    mergeTreeState: verdict.state,
-    fetchOk: fetched !== null,
-  });
-}
-
 export function manifestPinnedCloseDecision(issue, repo, lookup = manifestPinLookup) {
   const pin = lookup === manifestPinLookup
     ? manifestPinLookup(issue, repo)
@@ -1341,28 +1275,6 @@ export function manifestPinnedCloseDecision(issue, repo, lookup = manifestPinLoo
   if (!pin?.ok) return { close: false, reason: 'manifest-unreadable' };
   if (pin.path) return { close: false, reason: 'manifest-pinned', path: pin.path };
   return { close: true, reason: 'not-pinned' };
-}
-
-function closeResolvedConflictHandoff(issue, num, head, decision) {
-  const pinDecision = manifestPinnedCloseDecision(issue, REPO);
-  if (!pinDecision.close && pinDecision.reason === 'manifest-unreadable') {
-    console.log(`::warning::issue #${issue}: manifest pin lookup non disponibile — chiusura sospesa fail-closed.`);
-    return false;
-  }
-  if (!pinDecision.close) {
-    console.log(`issue #${issue}: tenuta aperta dal manifest (${pinDecision.path}).`);
-    return false;
-  }
-  const proof = decision.reason === 'origin-merged'
-    ? `la PR di origine #${num} risulta MERGED`
-    : `git merge-tree --write-tree origin/main ${String(head).slice(0, 12)} risulta clean sulla stessa HEAD`;
-  if (!ghOk(['issue', 'close', String(issue), '--repo', REPO, '--reason', 'completed', '--comment',
-    `Hand-off chiuso prima del routing: ${proof}. Nessun fixer avviato. _Prova zero-agent da pr-autorebase._`])) {
-    console.log(`::warning::issue #${issue}: origine risolta (${decision.reason}) ma chiusura fallita — agent:fix NON applicata.`);
-    return false;
-  }
-  console.log(`issue #${issue}: hand-off chiuso prima del routing (${decision.reason}).`);
-  return true;
 }
 
 function parseConflictResolutionLockEvents(raw) {
@@ -1441,9 +1353,9 @@ function handOffConflictToFixer(num, branch, head, lgtm) {
     return;
   }
   const { title, body } = buildConflictHandoffIssue({ num, branch, head, files: verdict.files });
-  if (DRY) { console.log(`[dry] #${num} conflitto dopo LGTM → issue agent:fix «${title}»`); return; }
-  // Il titolo e' stabile: una issue gia' aperta da un tick precedente (routing
-  // fallito, marker non scritto) viene riusata invece di duplicata.
+  if (DRY) { console.log(`[dry] #${num} conflitto dopo LGTM → issue per il reconciler «${title}»`); return; }
+  // Il titolo e' stabile: una issue gia' aperta da un tick precedente viene
+  // riusata invece di duplicata.
   const existing = gh(['issue', 'list', '--repo', REPO, '--state', 'open', '--search', `"${title}" in:title`,
     '--json', 'number,title'], { allowFail: true });
   if (existing === null) {
@@ -1452,10 +1364,9 @@ function handOffConflictToFixer(num, branch, head, lgtm) {
   }
   let issue = String((existing || []).find((i) => i.title === title)?.number || '');
   if (!issue) {
-    // `agent:triaged` alla creazione: il triage la manderebbe comunque in coda
-    // (`agent:fix-queued`), cioe' ore invece di minuti. `agent:fix` arriva con
-    // un edit separato, perche' e' l'evento `labeled` a far partire issue-fix,
-    // e l'identita' di GH_TOKEN e' quella ammessa dal suo sender gate.
+    // `agent:triaged` alla creazione: il triage puo' aggiungere la coda, ma il
+    // drainer generico esclude questa famiglia. Solo il reconciler schedulato
+    // puo' chiuderla o promuoverla dopo una prova merge-tree fresca.
     const url = String(gh(['issue', 'create', '--repo', REPO, '--title', title, '--body', body,
       '--label', 'agent:triaged'], { json: false, allowFail: true }) || '').trim();
     issue = /\/issues\/(\d+)/.exec(url)?.[1] || '';
@@ -1464,29 +1375,13 @@ function handOffConflictToFixer(num, branch, head, lgtm) {
     console.log(`::warning::PR #${num}: issue di hand-off del conflitto non creata — resta la label stale-review.`);
     return;
   }
-  // CAS finale: create/list possono aver impiegato abbastanza da rendere
-  // stantie HEAD e prova del conflitto. Non promuovere mai quell'evidenza a un
-  // run Codex. Clean/merged chiudono l'hand-off, ogni ambiguita' lo lascia
-  // aperto per il riconciliatore/triage senza applicare `agent:fix`.
-  const fresh = revalidateConflictHandoffRoute(num, branch, head);
-  if (fresh.action === 'close') {
-    closeResolvedConflictHandoff(issue, num, head, fresh);
-    return;
-  }
-  if (fresh.action !== 'route') {
-    console.log(`PR #${num}: hand-off #${issue} non instradato (${fresh.reason}) — resta in coda fail-closed.`);
-    return;
-  }
-  // Esito dall'exit status, non dallo stdout: senza routing confermato il
-  // marker NON si scrive, cosi' il prossimo tick riprova sulla stessa issue.
-  if (!ghOk(['issue', 'edit', issue, '--repo', REPO, '--add-label', 'agent:fix'])) {
-    console.log(`::warning::issue #${issue}: agent:fix non applicata — marker non scritto, ritento al prossimo tick.`);
-    return;
-  }
+  // Il marker certifica solo la create/reuse. Routing e chiusura appartengono
+  // al consumer unico schedulato, serializzato con questo writer dalla stessa
+  // concurrency group repo-wide.
   gh(['pr', 'comment', String(num), '--repo', REPO, '--body',
-    `${marker}\n♻️ **autorebase / conflitto dopo LGTM**: affidato a issue-fix con #${issue}, che riapplica il contributo approvato su \`main\` in una PR nuova. _Segnale deterministico da pr-autorebase (zero-Claude)._`],
+    `${marker}\n♻️ **autorebase / conflitto dopo LGTM**: creato l'hand-off #${issue}. Il workflow \`conflict-handoff-reconcile\` ricalcola \`merge-tree\` sulla stessa HEAD e poi lo chiude o lo promuove a \`agent:fix\`. _Segnale deterministico da pr-autorebase (zero-Claude)._`],
   { json: false, allowFail: true });
-  console.log(`PR #${num}: conflitto dopo LGTM → hand-off a issue-fix con #${issue}.`);
+  console.log(`PR #${num}: conflitto dopo LGTM → hand-off #${issue} al consumer schedulato.`);
 }
 
 function commentConflictOnce(num, branch) {

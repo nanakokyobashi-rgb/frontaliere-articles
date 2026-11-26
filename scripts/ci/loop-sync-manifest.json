@@ -908,7 +908,7 @@
     {
       "path": "scripts/ci/pr-autorebase.mjs",
       "mode": "adapted",
-      "reason": "La discovery paginata e la decisione tri-state di conflitto sono comuni e fail-closed, ma i call-site restano adattati ai due contratti esterni: il sito invoca `tests.yml` con `workflow_dispatch -f pr_number=...` per risolvere la PR e avviare test+review sulla head, mentre il corpus conserva il dispatch `--ref` test-only del ramo needs-human/carry-forward. Il corpus inoltre fissa la revisione body con `currentReviewInputContext`/`reviewInputContextStillCurrent` e `review-test-policy.mjs`, e il suo `tests.yml` mantiene input `pr_number`/`head_sha`, guard body+review ed eventi lifecycle; il sito usa il proprio body-edit retry e i check names locali in constants. Dal 2026-09-23 (#606) il corpus risolve anche hunk diff3 dimostrabilmente additivi: il base deve restare sottosequenza esatta su entrambi i lati e le sole aggiunte ammesse sono entry monoriga terminate da virgola, senza collisioni di chiave; ogni altra forma conserva abort e handoff. La baseline corpus e' riattestata su questa modifica; quella site resta deliberatamente al riferimento gia' revisionato, cosi' il movimento site successivo resta visibile. Non copiare il file byte-per-byte: ogni lato conserva il proprio percorso PR/body/review e il nome del check richiesto.",
+      "reason": "La discovery paginata e la decisione tri-state di conflitto sono comuni e fail-closed, ma i call-site restano adattati ai due contratti esterni: il sito invoca `tests.yml` con `workflow_dispatch -f pr_number=...` per risolvere la PR e avviare test+review sulla head, mentre il corpus conserva il dispatch `--ref` test-only del ramo needs-human/carry-forward. Il corpus inoltre fissa la revisione body con `currentReviewInputContext`/`reviewInputContextStillCurrent` e `review-test-policy.mjs`, e il suo `tests.yml` mantiene input `pr_number`/`head_sha`, guard body+review ed eventi lifecycle; il sito usa il proprio body-edit retry e i check names locali in constants. Dal 2026-09-23 (#606) il corpus risolve anche hunk diff3 dimostrabilmente additivi: il base deve restare sottosequenza esatta su entrambi i lati e le sole aggiunte ammesse sono entry monoriga terminate da virgola, senza collisioni di chiave; ogni altra forma conserva abort e handoff. Per gli hand-off corpus, pr-autorebase è ora solo producer: crea/riusa la issue sotto il mutex condiviso, mentre il workflow corpus-only conflict-handoff-reconcile.yml è l'unico consumer che chiude o promuove dopo una prova merge-tree fresca. La baseline corpus e' riattestata su questa modifica; quella site resta deliberatamente al riferimento gia' revisionato, cosi' il movimento site successivo resta visibile. Non copiare il file byte-per-byte: ogni lato conserva il proprio percorso PR/body/review e il nome del check richiesto.",
       "baseline": {
         "site": "e3cb4fb86fe8ff01",
         "corpus": "d6c917f49d00c64e",
@@ -1520,7 +1520,7 @@
     {
       "path": ".github/workflows/followup-drainer.yml",
       "mode": "adapted",
-      "reason": "Niente npm ci; ponte RC del corpus; promozione via GITHUB_PAT_NANAKO; cadenza sfasata dal sito. Il drain condivide il mutex repo-scoped followup-daily con i writer dei bucket e con pr-autorebase/conflict-handoff-reconcile, così nessuna scansione o promozione legge un hand-off mentre un altro writer lo chiude o lo instrada. Il filtro resta sul job (prima del mutex), quindi gli eventi issues irrilevanti non sostituiscono la pending utile. La riconciliazione degli hand-off vive nel workflow corpus-only conflict-handoff-reconcile.yml.",
+      "reason": "Niente npm ci; ponte RC del corpus; promozione via GITHUB_PAT_NANAKO; cadenza sfasata dal sito. Il drain conserva il mutex followup-daily dei writer dei bucket e non ospita il mutex repo-wide conflict-handoff-writer: questo workflow riceve eventi issues, che altrimenti entrerebbero tutti nella pending globale prima del filtro del job. Gli hand-off di conflitto sono esclusi dalla snapshot del drain (nessuna promozione, dequeue o rilascio qui): il workflow corpus-only conflict-handoff-reconcile.yml è il loro unico consumer e ricalcola merge-tree prima del routing.",
       "baseline": {
         "site": "608e5abb5b5fd017",
         "corpus": "a75e04aa122f57f3",
@@ -1632,7 +1632,7 @@
     {
       "path": ".github/workflows/pr-autorebase.yml",
       "mode": "corpus-only",
-      "reason": "Rimosso sul sito in PR #6584 'ci: richiedi LGTM prima dell'auto-merge nativo' (2026-08-26): il sito e' passato dall'autorebase custom alla merge queue nativa di GitHub. Qui resta necessario: identita' di push/dispatch GITHUB_PAT_NANAKO; sparse-checkout sui path pesanti di QUESTO repo (content/ con 14.888 file, dist/, public/) invece di public/images del sito — il job fa solo merge e push, non li legge mai; niente npm ci; cadenza sfasata (22,52); e nessuna GitHub App per usare la merge queue nativa con l'identita' corretta. Il writer condivide il mutex repo-scoped followup-daily, non cancellante, con il drainer, i writer dei bucket e il workflow autonomo conflict-handoff-reconcile.yml: create, routing e chiusura degli hand-off non possono interleavarsi.",
+      "reason": "Rimosso sul sito in PR #6584 'ci: richiedi LGTM prima dell'auto-merge nativo' (2026-08-26): il sito e' passato dall'autorebase custom alla merge queue nativa di GitHub. Qui resta necessario: identita' di push/dispatch GITHUB_PAT_NANAKO; sparse-checkout sui path pesanti di QUESTO repo (content/ con 14.888 file, dist/, public/) invece di public/images del sito — il job fa solo merge e push, non li legge mai; niente npm ci; cadenza sfasata (22,52); e nessuna GitHub App per usare la merge queue nativa con l'identita' corretta. Il writer condivide conflict-handoff-writer, repo-wide e non cancellante, con il workflow autonomo conflict-handoff-reconcile.yml per serializzare create, routing e chiusura degli hand-off.",
       "baseline": {
         "site": null,
         "corpus": "ef98da20f76c33d0",
@@ -1642,10 +1642,10 @@
     {
       "path": ".github/workflows/conflict-handoff-reconcile.yml",
       "mode": "corpus-only",
-      "reason": "Workflow autonomo schedule/workflow_dispatch per il riconciliatore degli hand-off di conflitto del corpus. Condivide il mutex repo-scoped followup-daily, non cancellante, con pr-autorebase, followup-drainer e i writer dei bucket: la chiusura non può interleavarsi con create/routing/promozione. Resta separato dal trigger issues del followup-drainer; il filtro del drainer è sul job, prima dell'ingresso nel mutex, così gli eventi irrilevanti non occupano o sostituiscono la pending utile. Il sito non ha l'autorebase custom corpus né questa coppia di writer.",
+      "reason": "Workflow autonomo schedule/workflow_dispatch e consumer unico degli hand-off di conflitto del corpus: riconcilia quelli risolti e promuove gli altri solo dopo una prova merge-tree fresca sulla stessa HEAD. Condivide il mutex repo-wide non cancellante conflict-handoff-writer con pr-autorebase, ma resta separato dal followup-drainer issue-triggered: cosi' gli eventi issues irrilevanti non occupano o sostituiscono la sola pending globale prima del filtro del job. Esporta CI_JOB_DEADLINE_EPOCH coerente col timeout reale per lasciare la riserva di runBudgetFromEnv. Il checkout è full-history (`fetch-depth: 0`) ma blobless/sparse sui tre alberi pesanti: merge-tree vede la base comune senza materializzare il corpus. Il sito non ha l'autorebase custom corpus né questa coppia di writer.",
       "baseline": {
         "site": null,
-        "corpus": "f5d7dd7410db71eb",
+        "corpus": "cb89836928a3e8e1",
         "alignedAt": "2026-11-26"
       }
     },
@@ -2060,7 +2060,7 @@
       "path": "generator/tests/pr-autorebase-conflict-handoff.test.mjs",
       "sitePath": "tests/pr-autorebase-conflict-handoff.test.ts",
       "mode": "adapted",
-      "reason": "Gemello node:test del test Vitest del sito sull'hand-off a issue-fix di un conflitto dopo LGTM: stessi casi (decisione pura, marker per HEAD, contenuto della issue senza keyword di chiusura, pin dei tre rami di abort). Cambia solo il runner e l'esempio (#1597 invece di #9260).",
+      "reason": "Gemello node:test del test Vitest del sito sull'hand-off di un conflitto dopo LGTM: conserva marker per HEAD, contenuto della issue senza keyword di chiusura e pin dei tre rami di abort. Il corpus verifica inoltre la propria topologia producer/consumer: pr-autorebase crea o riusa l'hand-off ma non applica agent:fix; il workflow schedulato conflict-handoff-reconcile lo promuove solo dopo una prova merge-tree fresca. Cambiano runner, wiring e l'esempio (#1597 invece di #9260).",
       "baseline": {
         "site": "bf07932f2eb0a3e1",
         "corpus": "3222f4bf740aa007",
@@ -5485,7 +5485,7 @@
       "path": "scripts/ci/reconcile-conflict-handoffs.mjs",
       "mode": "adapted",
       "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3686",
-      "reason": "Il riconciliatore importa `scripts/ci/followup-resolution-match.mjs`, che nel corpus è `adapted` per il contratto locale dei follow-up. Anche se questo file oggi coincide byte per byte col sito, il trasporto isolato non può copiarlo senza la sua dipendenza adattata; resta quindi `adapted` finché quel confine non viene riconciliato.",
+      "reason": "Il riconciliatore importa `scripts/ci/followup-resolution-match.mjs`, che nel corpus è `adapted` per il contratto locale dei follow-up: il trasporto isolato non può copiarlo senza la sua dipendenza adattata. In più, qui è il consumer unico degli hand-off prodotti dall'autorebase corpus-only: oltre a chiudere quelli risolti, ricalcola merge-tree sulla stessa HEAD e promuove a agent:fix quelli ancora conflittuali; il followup-drainer li esclude completamente. Importa classifyMergeTreeStatus dal pr-autorebase corpus-only per non duplicare il verdetto plumbing. Il sito non ha questa topologia e conserva il proprio riconciliatore senza routing.",
       "baseline": {
         "site": "17932eee1a74ef92",
         "corpus": "17932eee1a74ef92",
