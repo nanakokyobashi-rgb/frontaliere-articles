@@ -1,3 +1,5 @@
+import { recordLlmProviderRequest } from './llm-call-metrics.mjs';
+
 /**
  * Minimal server-side client for OpenAI's Decisions API.
  *
@@ -176,6 +178,7 @@ export async function classifyWithDecisionsApi({
 
   try {
     try {
+      recordLlmProviderRequest();
       const fetchPromise = fetchImpl(DECISIONS_API_URL, {
         method: 'POST',
         headers: {

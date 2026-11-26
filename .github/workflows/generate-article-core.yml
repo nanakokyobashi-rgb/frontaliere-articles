@@ -1082,8 +1082,8 @@ jobs:
             [ "$remaining" -lt "$cap" ] && cap="$remaining"
             tried=$(( tried + 1 ))
             echo "── attempt $tried: section=$sec cap=${cap}s"
-
             export CREATE_ARTICLE_MAX_WALL_MS=$(( (cap - 60) * 1000 ))
+            export CREATE_ARTICLE_GENERATION_ATTEMPT="$tried"
 
             attempt_report="$diag_dir/create-article-run-report-$tried.json"
             attempt_post_rebase_handoff="${RUNNER_TEMP:-/tmp}/create-article-post-rebase-run-report-$tried.json"

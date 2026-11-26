@@ -33,6 +33,12 @@ const CLOSED_SET_HELPERS = new Set([
   // Questo test importa un tag owner stabile per i fixture del publisher edge;
   // non è un entrypoint runtime che renderizza pagine.
   'generator/tests/publish-section-edge-staging.test.mjs',
+  // The cadence collector reads the engine's static section map to validate
+  // historic run and article evidence; it does not render a corpus page.
+  'scripts/ci/measure-section-cadence.mjs',
+  // These tests use the static section map to build measurement fixtures; they
+  // do not exercise the engine's active-section runtime.
+  'generator/tests/measure-section-cadence.test.mjs',
   'scripts/lib/ts-literals.mjs',
   'scripts/lib/corpus-sections.mjs',
 ]);

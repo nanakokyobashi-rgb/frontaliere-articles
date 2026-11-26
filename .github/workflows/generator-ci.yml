@@ -20,6 +20,7 @@ on:
       - '.github/actions/setup-article-source-runtime/**'
       - 'scripts/ci/article-source-runtime/**'
       - 'scripts/ci/check-article-source-runtime.mjs'
+      - 'scripts/ci/measure-section-cadence*.mjs'
       - 'scripts/lib/npm-ci-retry.sh'
       - 'scripts/ci/loop-sync-manifest.json'
       - '.github/workflows/generator-ci.yml'
@@ -45,6 +46,7 @@ on:
       - '.github/actions/setup-article-source-runtime/**'
       - 'scripts/ci/article-source-runtime/**'
       - 'scripts/ci/check-article-source-runtime.mjs'
+      - 'scripts/ci/measure-section-cadence*.mjs'
       - 'scripts/lib/npm-ci-retry.sh'
       - 'scripts/ci/loop-sync-manifest.json'
       - '.github/workflows/generator-ci.yml'
@@ -56,6 +58,17 @@ on:
       - 'engine/**'
       - 'host/**'
   workflow_dispatch:
+    inputs:
+      m6_end_date:
+        description: 'Data finale Zurich del report generation (YYYY-MM-DD)'
+        required: false
+        type: string
+        default: ''
+      m6_generation_report:
+        description: 'Percorso nel branch dispatchato del report generation con marker runtime M6'
+        required: false
+        type: string
+        default: ''
 
 permissions:
   contents: read
@@ -280,3 +293,46 @@ jobs:
 
       - name: Load every generator entry point (writes disabled)
         run: npm run test:dry-run
+
+  measure-section-cadence-m6:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.m6_end_date != '' && inputs.m6_generation_report != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Setup isolated article source runtime
+        uses: ./.github/actions/setup-article-source-runtime
+
+      - name: Install locked generator dependencies
+        run: bash scripts/lib/npm-ci-retry.sh --no-audit --no-fund
+
+      - name: Cache the production-equivalent embedding model
+        uses: actions/cache@v4
+        with:
+          path: .cache/transformers
+          key: section-cadence-${{ runner.os }}-multilingual-e5-small-fp32-${{ hashFiles('package-lock.json') }}
+
+      - name: Measure M6 using post-window runtime evidence
+        env:
+          M6_END_DATE: ${{ inputs.m6_end_date }}
+          M6_GENERATION_REPORT: ${{ inputs.m6_generation_report }}
+        run: >-
+          node scripts/ci/measure-section-cadence-m6.mjs
+          --to "$M6_END_DATE"
+          --generation-report "$M6_GENERATION_REPORT"
+          --output reports/section-cadence/m6-supplement.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: section-cadence-m6-supplement
+          path: reports/section-cadence/m6-supplement.json
+          if-no-files-found: error
+          retention-days: 30

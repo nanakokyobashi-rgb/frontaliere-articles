@@ -19,9 +19,60 @@
 // embedding store is absent or the embedding API call fails, so a transient
 // outage never blocks the pipeline.
 
+import { EMBEDDING_DIM, EMBEDDING_MODEL } from '../evidence/constants.mjs';
 import { embedOne, lastUsedEmbeddingModel } from '../evidence/embeddingClient.mjs';
 import { findTopK, loadEmbeddingStore, loadEmbeddingMeta } from './embeddingMatcher.mjs';
-import { EMBEDDING_TOP_K, computeAdaptiveNearDupCosine } from './constants.mjs';
+import {
+  EMBEDDING_NEAR_DUP_CORPUS_BASELINE,
+  EMBEDDING_NEAR_DUP_CORPUS_SCALE_K,
+  EMBEDDING_NEAR_DUP_COSINE,
+  EMBEDDING_NEAR_DUP_COSINE_CEILING,
+  EMBEDDING_TOP_K,
+  computeAdaptiveNearDupCosine,
+} from './constants.mjs';
+
+function emitStoreObservation(log, data, opts, store, meta, status, {
+  queryModel = null,
+  gateApplied = false,
+  policyThreshold = null,
+  effectiveThreshold = null,
+  thresholdSource = null,
+} = {}) {
+  const attemptValue = Number.parseInt(
+    opts.generationAttempt ?? process.env.CREATE_ARTICLE_GENERATION_ATTEMPT ?? '',
+    10,
+  );
+  log(`GENERATION_DEDUP_STORE ${JSON.stringify({
+    schemaVersion: 1,
+    observedAt: new Date().toISOString(),
+    section: opts.section || 'unknown',
+    generationAttempt: Number.isInteger(attemptValue) && attemptValue > 0 ? attemptValue : null,
+    candidateId: typeof data?.id === 'string' ? data.id : null,
+    status,
+    storePresent: !!store,
+    storeCount: Number.isInteger(store?.count) && store.count >= 0 ? store.count : null,
+    storeDimension: Number.isInteger(store?.dim) && store.dim > 0 ? store.dim : null,
+    metaPresent: !!meta,
+    metaCount: Number.isInteger(meta?.count) && meta.count >= 0 ? meta.count : null,
+    metaDimension: Number.isInteger(meta?.dim) && meta.dim > 0 ? meta.dim : null,
+    metaMappedCount: meta?.perArticle && typeof meta.perArticle === 'object'
+      ? Object.keys(meta.perArticle).length : null,
+    metaModel: typeof meta?.model === 'string' ? meta.model : null,
+    expectedModel: EMBEDDING_MODEL,
+    expectedDimension: EMBEDDING_DIM,
+    queryModel,
+    gateApplied,
+    policyThreshold,
+    policyParameters: {
+      baseThreshold: EMBEDDING_NEAR_DUP_COSINE,
+      ceiling: EMBEDDING_NEAR_DUP_COSINE_CEILING,
+      corpusBaseline: EMBEDDING_NEAR_DUP_CORPUS_BASELINE,
+      corpusScaleK: EMBEDDING_NEAR_DUP_CORPUS_SCALE_K,
+    },
+    effectiveThreshold,
+    thresholdSource,
+  })}`);
+}
 
 /**
  * Build the corpus-comparable embedding text for an article. Must stay in
@@ -62,7 +113,9 @@ export async function checkSemanticNearDuplicate(data, opts = {}) {
   const k = typeof opts.k === 'number' ? opts.k : EMBEDDING_TOP_K;
 
   const store = opts.store !== undefined ? opts.store : loadEmbeddingStore();
+  const meta = opts.meta !== undefined ? opts.meta : loadEmbeddingMeta();
   if (!store) {
+    emitStoreObservation(log, data, opts, null, meta, 'store_missing');
     log('  ⏭️  Dedup semantico saltato (store embedding assente)');
     return data;
   }
@@ -72,30 +125,62 @@ export async function checkSemanticNearDuplicate(data, opts = {}) {
   const threshold = typeof opts.threshold === 'number'
     ? opts.threshold
     : computeAdaptiveNearDupCosine(store.count);
+  const thresholdSource = typeof opts.threshold === 'number' ? 'explicit_override' : 'runtime_store_count';
 
   const title = data?.content?.it?.title || '';
   const excerpt = data?.content?.it?.excerpt || '';
   const text = buildDedupText(title, excerpt);
-  if (!text.trim()) return data;
+  if (!text.trim()) {
+    emitStoreObservation(log, data, opts, store, meta, 'empty_input', {
+      policyThreshold: threshold,
+      thresholdSource,
+    });
+    return data;
+  }
 
   const embedFn = opts.embedFn || embedOne;
   let vec;
   try {
     vec = await embedFn(text);
   } catch (err) {
+    emitStoreObservation(log, data, opts, store, meta, 'embedding_failed', {
+      policyThreshold: threshold,
+      thresholdSource,
+    });
     log(`  ⏭️  Dedup semantico saltato (embed fallito: ${err.message})`);
     return data;
   }
   if (!(vec instanceof Float32Array) || vec.length === 0) {
+    emitStoreObservation(log, data, opts, store, meta, 'embedding_empty', {
+      policyThreshold: threshold,
+      thresholdSource,
+    });
     log('  ⏭️  Dedup semantico saltato (embedding vuoto)');
     return data;
   }
 
-  const meta = opts.meta !== undefined ? opts.meta : loadEmbeddingMeta();
   // Gate cross-provider cosine: the query was embedded by whichever provider
   // actually answered (Mistral or its Cohere fallback). If that model differs
   // from the model the store was built with, findTopK degrades to a clean skip.
   const queryModel = opts.queryModel !== undefined ? opts.queryModel : lastUsedEmbeddingModel();
+  if (store.dim !== vec.length) {
+    emitStoreObservation(log, data, opts, store, meta, 'dimension_mismatch', {
+      queryModel,
+      policyThreshold: threshold,
+      thresholdSource,
+    });
+    log(`  ⏭️  Dedup semantico saltato (dimensione query ${vec.length} ≠ store ${store.dim})`);
+    return data;
+  }
+  if (typeof meta?.model === 'string' && queryModel && meta.model !== queryModel) {
+    emitStoreObservation(log, data, opts, store, meta, 'model_mismatch', {
+      queryModel,
+      policyThreshold: threshold,
+      thresholdSource,
+    });
+    log(`  ⏭️  Dedup semantico saltato (store model '${meta.model}' ≠ provider attivo '${queryModel}' — cosine cross-provider non valida)`);
+    return data;
+  }
   const ignoreNeighbor = typeof opts.ignoreNeighbor === 'function'
     ? opts.ignoreNeighbor
     : null;
@@ -106,10 +191,6 @@ export async function checkSemanticNearDuplicate(data, opts = {}) {
     ? Math.max(k, store.count)
     : k;
   const topK = findTopK(vec, { store, meta, k: searchK, queryModel });
-  if (topK.length === 0 && meta && typeof meta.model === 'string' && queryModel && meta.model !== queryModel) {
-    log(`  ⏭️  Dedup semantico saltato (store model '${meta.model}' ≠ provider attivo '${queryModel}' — cosine cross-provider non valida)`);
-    return data;
-  }
 
   // The new article isn't in the store yet, but a re-publish could match
   // itself — exclude any neighbour that resolves to this same article.
@@ -122,6 +203,13 @@ export async function checkSemanticNearDuplicate(data, opts = {}) {
   ));
 
   if (nearest && nearest.cosine >= threshold) {
+    emitStoreObservation(log, data, opts, store, meta, 'duplicate_rejected', {
+      queryModel,
+      gateApplied: true,
+      policyThreshold: threshold,
+      effectiveThreshold: threshold,
+      thresholdSource,
+    });
     throw new Error(
       `❌ DUPLICATO SEMANTICO RILEVATO:\n`
       + `   Nuovo:     "${title}" [${data?.id}]\n`
@@ -131,6 +219,14 @@ export async function checkSemanticNearDuplicate(data, opts = {}) {
     );
   }
 
+  emitStoreObservation(log, data, opts, store, meta,
+    typeof meta?.model === 'string' && queryModel ? 'compared' : 'compared_model_unverified', {
+      queryModel,
+      gateApplied: true,
+      policyThreshold: threshold,
+      effectiveThreshold: threshold,
+      thresholdSource,
+    });
   log(
     '  ✅ Nessun duplicato semantico'
     + (nearest ? ` (vicino più simile: ${nearest.slug} @ ${nearest.cosine.toFixed(3)})` : ''),
