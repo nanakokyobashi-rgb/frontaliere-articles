@@ -11,6 +11,7 @@ import {
   extractCanonical,
   extractDatePublished,
   countPushFiveAttemptExhaustions,
+  collectM6Supplement,
   createM6InputSnapshot,
   generationJobWasAdmitted,
   hasCompleteM5Coverage,
@@ -33,6 +34,7 @@ import {
   verifyM6InputSnapshot,
 } from '../../scripts/ci/measure-section-cadence.mjs';
 import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
+import { setEmbedderForTests } from '../scripts/lib/evidence/embeddingClient.mjs';
 
 test('date windows use inclusive Zurich calendar dates across the CET offset', () => {
   const window = makeDateWindow('2026-11-25', '2026-11-25');
@@ -473,6 +475,50 @@ test('M6 availability requires observed production gate evidence unless zero is 
     dateIndependentZero: true,
     productionGateUnmeasuredSections: [],
   }), true);
+});
+
+test('M6 embeds all candidates and compares them with production cosine without claiming an unobserved gate', async () => {
+  const endDate = '2026-11-26';
+  const sections = Object.keys(ARTICLE_SECTION_CORE_ALL);
+  const counts = Object.fromEntries(sections.map((section) => [section, 0]));
+  counts.frontaliere = 2;
+  const snapshot = createM6InputSnapshot({
+    articles: [
+      {
+        id: 'synthetic-m6-a', section: 'frontaliere', kind: ARTICLE_SECTION_CORE_ALL.frontaliere.kind,
+        publishedDate: '2026-11-25', title: 'Synthetic fixture A', excerpt: 'Synthetic excerpt for an isolated M6 test.',
+      },
+      {
+        id: 'synthetic-m6-b', section: 'frontaliere', kind: ARTICLE_SECTION_CORE_ALL.frontaliere.kind,
+        publishedDate: '2026-11-26', title: 'Synthetic fixture B', excerpt: 'Another synthetic excerpt for an isolated M6 test.',
+      },
+    ],
+    dateUncertainArticles: [],
+    indexRowCount: 2,
+    candidateRecordCount: 2,
+    countsBySection: counts,
+    coverageComplete: true,
+    upperBoundCoverageComplete: true,
+  }, 'ffffffffffffffffffffffffffffffffffffffff', counts, {
+    cutoffDate: '2026-08-29',
+    untilDate: endDate,
+    skippedCandidateRecords: 0,
+    skippedByReason: {},
+    recordsWithUnknownDate: 0,
+  });
+
+  setEmbedderForTests(async (inputs) => inputs.map(() => [1, ...Array(383).fill(0)]));
+  try {
+    const { metric } = await collectM6Supplement(endDate, { candidateSnapshot: snapshot });
+    assert.equal(metric.embeddedArticles, 2);
+    assert.equal(metric.comparedPairs, 1);
+    assert.equal(metric.policyThresholdProxyPairCount, 1);
+    assert.equal(metric.available, false);
+    assert.equal(metric.nearDuplicatePairCount, null);
+    assert.equal(metric.productionGateMeasured, false);
+  } finally {
+    setEmbedderForTests(null);
+  }
 });
 
 test('M3 touched-section mapping follows canonical article write surfaces', () => {

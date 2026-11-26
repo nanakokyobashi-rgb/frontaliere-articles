@@ -15,6 +15,7 @@ import {
   EMBEDDING_NEAR_DUP_COSINE_CEILING,
   computeAdaptiveNearDupCosine,
 } from '../../generator/scripts/lib/scoring/constants.mjs';
+import { cosineSimilarity } from '../../generator/scripts/lib/scoring/embeddingMatcher.mjs';
 import { buildDedupText } from '../../generator/scripts/lib/scoring/semanticDedup.mjs';
 import { EMBEDDING_DIM, EMBEDDING_MODEL } from '../../generator/scripts/lib/evidence/constants.mjs';
 import { cantonSectionPaths } from '../../generator/scripts/lib/canton-section-profile.mjs';

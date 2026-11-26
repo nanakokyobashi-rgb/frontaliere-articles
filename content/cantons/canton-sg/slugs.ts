@@ -37,6 +37,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'corsa-frauenfeld-wil-2026': { it: 'corsa-frauenfeld-wil-2026', en: 'frauenfeld-wil-race-2026', de: 'lauf-frauenfeld-wil-2026', fr: 'course-frauenfeld-wil-2026' },
  'incidenti-a1-goldach-san-gallo': { it: 'incidenti-a1-goldach-san-gallo', en: 'a1-crashes-goldach-st-gallen', de: 'unfaelle-a1-goldach-st-gallen', fr: 'accidents-a1-goldach-saint-gall' },
  'votazione-fondo-rete-gas-wil': { it: 'votazione-fondo-rete-gas-wil', en: 'wil-gas-network-fund-vote', de: 'abstimmung-fonds-gasnetz-wil', fr: 'vote-fonds-reseau-gaz-wil' },
+ 'inverno-sgallen-controlli-strade': { it: 'inverno-sgallen-controlli-strade', en: 'sgallen-winter-road-controls', de: 'winter-sgallen-strassenkontrollen', fr: 'hiver-sgallen-controles-routes' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

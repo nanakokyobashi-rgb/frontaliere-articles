@@ -117,6 +117,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.lkw-unfall-chlaggi-strada.title': 'Umgekippter Lastwagen zwischen Guntmadingen und Neunkirch: H13 gesperrt',
     'blog.article.lkw-unfall-chlaggi-strada.excerpt': 'Am 25. November 2026 ist ein Lastwagen auf der Hauptstraße zwischen Guntmadingen und Neunkirch umgekippt, wodurch die H13 mehrere Stunden lang gesperrt wurde.',
     'blog.article.lkw-unfall-chlaggi-strada.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.neuhausen-soppressione-strisce-pedonali.title': 'Neuhausen hebt zwölf Fußgängerstreifen im Zentrum auf',
+    'blog.article.neuhausen-soppressione-strisce-pedonali.excerpt': 'Der Gemeinderat von Neuhausen am Rheinfall hat beschlossen, 12 von 18 bestehenden Fußgängerstreifen aufzuheben, wobei die Umsetzung im ersten Halbjahr 2027 vorgesehen ist.',
+    'blog.article.neuhausen-soppressione-strisce-pedonali.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;

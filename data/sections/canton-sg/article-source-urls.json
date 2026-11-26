@@ -148,5 +148,11 @@
     "articleId": "incidenti-a1-goldach-san-gallo",
     "ts": "2026-11-13T11:54:52.437Z",
     "keyForm": 2
+  },
+  "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/beginn-der-wintersaison-im-strassenverkehr.html": {
+    "articleId": "inverno-sgallen-controlli-strade",
+    "ts": "2026-11-26T22:22:33.056Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "233c440542153e0b9501939e8b66effe54e8376b5854965df2b5780831ad92b1"
   }
 }
