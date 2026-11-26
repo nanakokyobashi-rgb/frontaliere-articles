@@ -4,13 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-gr::https://ilmoesano.ch/notizie/politica/dal-2027-nuovo-calcolo-della-tassa-di-circolazione": {
-      "section": "canton-gr",
-      "ts": 1795463790712
-    },
     "canton-gr::https://www.laregione.ch/cantone/grigioni/1964509/imposta-circolazione-veicoli-potenza-grigioni": {
       "section": "canton-gr",
       "ts": 1795636459973
+    },
+    "canton-gr::https://www.suedostschweiz.ch/graubuenden/eine-buendner-region-auf-dem-pruefstand-ist-die-surselva-bereit-fuer-das-gesundheitsnetz-2243122#ft-item=1656292a107a": {
+      "section": "canton-gr",
+      "ts": 1795681800785
     }
   }
 }
