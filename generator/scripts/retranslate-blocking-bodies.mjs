@@ -93,7 +93,7 @@
  * vietato, il report nominativo rende il rifiuto diagnosticabile.
  *
  * Eccezione dichiarata: `--engine codex` NON e' a quota zero. Ogni campo body
- * e' una chiamata `codex exec` (gpt-5.6-luna, effort max) sulla subscription
+ * e' una chiamata `codex exec` (gpt-6-luna, effort max) sulla subscription
  * dell'operatore, la stessa dell'uso interattivo. Pilota del 2026-10-04: da 64
  * a 994 s per coppia (tre campi in fila), 5 coppie in 24 minuti con
  * `--concurrency 2`. Si lancia a lotti, mai sull'intero stock in un colpo.
@@ -151,7 +151,7 @@
  *                      di `freeTranslateWithRetry`, poi Codex locale solo sul
  *                      vuoto completo) oppure `codex`
  *                      (solo in locale: il tier Codex della cascata da solo,
- *                      eseguito con `codex exec`, gpt-5.6-luna a effort max;
+ *                      eseguito con `codex exec`, gpt-6-luna a effort max;
  *                      decisione del proprietario 2026-10-04, #1084 item 2).
  *                      Cambia SOLO chi traduce: l'uscita passa dalle stesse
  *                      guardie (`translateFieldFreeMt`, `sanitizeBodyText`,

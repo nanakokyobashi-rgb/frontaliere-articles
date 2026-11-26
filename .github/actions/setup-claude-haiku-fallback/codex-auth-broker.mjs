@@ -49,7 +49,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { spawn, spawnSync } from 'node:child_process';
 
-const CODEX_MODEL = 'gpt-5.6-luna';
+const CODEX_MODEL = 'gpt-6-luna';
 const CODEX_EFFORT = 'max';
 const CODEX_CLI_VERSION = '0.153.4';
 const CODEX_PROFILE = 'claude-haiku-fallback';

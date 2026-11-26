@@ -915,16 +915,16 @@ jobs:
 
           # Tier (mirror della review in tests.yml e di issue-fix): high se la PR
           # tocca CODE funnel-critical (tests/, build-plugins/, scripts/lib/,
-          # services/seo*), normal altrimenti. Modello UNIFICATO gpt-5.6-luna
+          # services/seo*), normal altrimenti. Modello UNIFICATO gpt-6-luna
           # su entrambi i tier (Codex Luna Max, effort max); i tier
           # restano distinti solo per telemetria/prompt.
           crit=$(echo "$files" | grep -E '^(tests/|build-plugins/|scripts/lib/|services/seo)' || true)
           if [ -n "$crit" ]; then
             write_output "tier=high"
-            write_output "model=gpt-5.6-luna"
+            write_output "model=gpt-6-luna"
           else
             write_output "tier=normal"
-            write_output "model=gpt-5.6-luna"
+            write_output "model=gpt-6-luna"
           fi
 
           # Posta/incrementa il marker round PRIMA di invocare Claude (così se la

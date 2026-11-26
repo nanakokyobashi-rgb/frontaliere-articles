@@ -856,7 +856,7 @@ jobs:
             publish|engine) echo "tier=high"   >> "$GITHUB_OUTPUT"; echo "max_turns=60" >> "$GITHUB_OUTPUT" ;;
             *)              echo "tier=normal" >> "$GITHUB_OUTPUT"; echo "max_turns=45" >> "$GITHUB_OUTPUT" ;;
           esac
-          echo "model=gpt-5.6-luna" >> "$GITHUB_OUTPUT"
+          echo "model=gpt-6-luna" >> "$GITHUB_OUTPUT"
           echo "category=$cat" >> "$GITHUB_OUTPUT"
           # A daily bucket is an aggregate even when it currently contains one
           # item. Select exactly the first stable open item for this run.

@@ -878,7 +878,7 @@ jobs:
           else
             write_output "tier=normal"
           fi
-          write_output "model=gpt-5.6-luna"
+          write_output "model=gpt-6-luna"
 
           # Il marker del round si posta PRIMA di invocare Claude: se la run
           # muore, il round e' comunque contato e l'anti-loop tiene.
