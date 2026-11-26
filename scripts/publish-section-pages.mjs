@@ -173,7 +173,7 @@ function publishedMainHead() {
   return current;
 }
 
-async function assertExpectedMainHead(expected, readMainHead = publishedMainHead) {
+async function assertExpectedMainHead(expected, section, readMainHead = publishedMainHead) {
   if (!FULL_GIT_SHA_RE.test(String(expected ?? ''))) {
     throw new Error('EXPECTED_MAIN_HEAD non contiene una SHA completa');
   }
@@ -186,7 +186,8 @@ async function assertExpectedMainHead(expected, readMainHead = publishedMainHead
     // or with changes outside the operational allowlist still stops.
     if (readMainHead === publishedMainHead) {
       const helper = process.env.SECTION_SOURCE_UNAFFECTED_HELPER || 'scripts/ci/section-source-unaffected.sh';
-      const equivalence = spawnSync('bash', [path.resolve(ROOT_DIR, helper), expected, current], {
+      const scope = section.startsWith('canton-') ? ['--section', section] : [];
+      const equivalence = spawnSync('bash', [path.resolve(ROOT_DIR, helper), ...scope, expected, current], {
         cwd: ROOT_DIR,
         stdio: 'ignore',
       });
@@ -2774,7 +2775,7 @@ export async function main(
   const expectedMainHead = process.env.EXPECTED_MAIN_HEAD || publisherCommit;
   const assertMainFreshImpl = async () => {
     if (!publishing) return;
-    await assertExpectedMainHead(expectedMainHead, currentMainHeadImpl);
+    await assertExpectedMainHead(expectedMainHead, section, currentMainHeadImpl);
   };
   let releaseCommit = publisherCommit;
   let publishedManifest = { state: 'absent' };
