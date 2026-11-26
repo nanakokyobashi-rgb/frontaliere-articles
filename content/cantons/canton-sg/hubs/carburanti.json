@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "4044662ce93f543b48a0a4d67dedb0120f73e72ad75809eac4b9b82700096ebc",
+  "updatedAt": "2026-11-26T22:26:01.478Z",
+  "contentHash": "5518fb000b4dfe712051b982b4f8c24dd2d001670acda22f7f776b9a399372a2",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Inverno a St.Gallen: controlli stradali tra fine ottobre e metà aprile",
+          "url": "/articoli-san-gallo/inverno-sgallen-controlli-strade/",
+          "excerpt": "Neve e temperature sotto zero previste; lo sgombero segue priorità definite, con personale fino a 200 persone.",
+          "date": "2026-11-26T22:22:32.477Z"
+        },
+        {
           "title": "Referendum sul fondo per dismissione rete gas TBW a Wil",
           "url": "/articoli-san-gallo/votazione-fondo-rete-gas-wil/",
           "excerpt": "Il 29 novembre 2026 si terrà la votazione popolare sul regolamento che istituisce il fondo per la dismissione e lo smantellamento della rete del gas delle aziende tecniche di Wil, le TBW.",
@@ -106,12 +112,6 @@
           "url": "/articoli-san-gallo/voto-wil-29-novembre-2026/",
           "excerpt": "Domenica 29 novembre 2026, a Wil saranno sottoposte al voto due proposte comunali.",
           "date": "2026-11-07T09:39:57.626Z"
-        },
-        {
-          "title": "Voto 29 novembre 2026: Regolamento fondo dismissione rete gas TBW",
-          "url": "/articoli-san-gallo/voto-regolamento-fondo-gas-wil/",
-          "excerpt": "La votazione riguarda il regolamento per il fondo destinato alla dismissione della rete gas TBW, che misura circa 570 km.",
-          "date": "2026-11-07T08:11:06.917Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T22:26:01.478Z"
     },
     "en": {
       "canton": "SG",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Winter in St.Gallen: road checks between late October and mid-April",
+          "url": "/en/st-gallen-articles/sgallen-winter-road-controls/",
+          "excerpt": "Snow and below-zero temperatures are expected; snow clearance follows defined priorities, with staff of up to 200 people.",
+          "date": "2026-11-26T22:22:32.477Z"
+        },
+        {
           "title": "Referendum on the fund for decommissioning the TBW gas network in Wil",
           "url": "/en/st-gallen-articles/wil-gas-network-fund-vote/",
           "excerpt": "On November 29, 2026, a popular vote will be held on the regulation establishing the fund for the decommissioning and dismantling of the gas network of Wil’s technical services, TBW.",
@@ -217,12 +223,6 @@
           "url": "/en/st-gallen-articles/wil-vote-november-29-2026/",
           "excerpt": "On Sunday, November 29, 2026, two municipal proposals will be put to a vote in Wil.",
           "date": "2026-11-07T09:39:57.626Z"
-        },
-        {
-          "title": "Vote November 29, 2026: Regulation for the TBW gas network decommissioning fund",
-          "url": "/en/st-gallen-articles/vote-regulation-gas-fund-wil/",
-          "excerpt": "The vote concerns the regulations for the fund intended for the decommissioning of the TBW gas network, which measures approximately 570 km.",
-          "date": "2026-11-07T08:11:06.917Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T22:26:01.478Z"
     },
     "de": {
       "canton": "SG",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Winter in St.Gallen: Straßenkontrollen zwischen Ende Oktober und Mitte April",
+          "url": "/de/st-gallen-artikel/winter-sgallen-strassenkontrollen/",
+          "excerpt": "Schnee und Temperaturen unter null Grad erwartet; die Räumung folgt festgelegten Prioritäten, mit bis zu 200 Personen.",
+          "date": "2026-11-26T22:22:32.477Z"
+        },
+        {
           "title": "Referendum über den Fonds für die Stilllegung des Gasnetzes der TBW in Wil",
           "url": "/de/st-gallen-artikel/abstimmung-fonds-gasnetz-wil/",
           "excerpt": "Am 29. November 2026 findet die Volksabstimmung über das Reglement statt, mit dem der Fonds für die Stilllegung und den Rückbau des Gasnetzes der Technischen Betriebe Wil (TBW) eingerichtet wird.",
@@ -328,12 +334,6 @@
           "url": "/de/st-gallen-artikel/wil-wahl-29-november-2026/",
           "excerpt": "Am Sonntag, 29. November 2026, werden in Wil zwei kommunale Vorlagen zur Abstimmung vorgelegt.",
           "date": "2026-11-07T09:39:57.626Z"
-        },
-        {
-          "title": "Abstimmung 29.11.2026: Reglement zum TBW-Gasnetzfonds",
-          "url": "/de/st-gallen-artikel/abstimmung-reglement-fonds-gas-wil/",
-          "excerpt": "Bei der Abstimmung geht es um das Reglement für den Fonds zur Stilllegung des TBW-Gasnetzes, das rund 570 km lang ist.",
-          "date": "2026-11-07T08:11:06.917Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T22:26:01.478Z"
     },
     "fr": {
       "canton": "SG",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Hiver à St.Gallen : contrôles routiers entre fin octobre et mi-avril",
+          "url": "/fr/articles-saint-gall/hiver-sgallen-controles-routes/",
+          "excerpt": "Neige et températures inférieures à zéro prévues ; le déneigement suit des priorités définies, avec un effectif pouvant atteindre 200 personnes.",
+          "date": "2026-11-26T22:22:32.477Z"
+        },
+        {
           "title": "Référendum sur le fonds pour le démantèlement du réseau de gaz TBW à Wil",
           "url": "/fr/articles-saint-gall/vote-fonds-reseau-gaz-wil/",
           "excerpt": "Le 29 novembre 2026 aura lieu la votation populaire sur le règlement instituant le fonds pour la mise hors service et le démantèlement du réseau de gaz des entreprises techniques de Wil, les TBW.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-saint-gall/vote-wil-29-novembre-2026/",
           "excerpt": "Le dimanche 29 novembre 2026, deux propositions communales seront soumises au vote à Wil.",
           "date": "2026-11-07T09:39:57.626Z"
-        },
-        {
-          "title": "Vote du 29 novembre 2026 : fonds de démantèlement TBW",
-          "url": "/fr/articles-saint-gall/vote-reglement-fonds-gaz-wil/",
-          "excerpt": "Le vote porte sur le règlement du fonds destiné au démantèlement du réseau de gaz TBW, qui mesure environ 570 km.",
-          "date": "2026-11-07T08:11:06.917Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T22:26:01.478Z"
     }
   }
 }
