@@ -707,16 +707,19 @@ describe('fact-check retries under a reported input cap', () => {
     });
   }
 
-  test('il fact-check Svizzera con il carico osservato rientra nel limite Groq Qwen', async () => {
+  test('il fact-check Svizzera con il carico osservato rientra nel limite Groq Qwen', async (testContext) => {
     const scope = { section: 'svizzera', isCanton: false };
     const padding = await loadFor(9200, scope);
     const { calls, prompt, compactPrompt, modelResults } = await runRounds({
       ...scope, padding, declaredInputCap: 8000, replies: [firstVote, secondVote],
     });
     assert.ok(Math.abs(estimate(prompt) - 9200) <= 3);
+    testContext.diagnostic(`Stima token: completo ${estimate(prompt)}, compatto ${estimate(compactPrompt)}, limite 7000`);
     assert.ok(estimate(compactPrompt) <= 7000, `stima: ${estimate(compactPrompt)}`);
     assert.ok(compactPrompt.includes(bodyEnd));
     assert.ok(compactPrompt.includes(sourceEnd));
+    assert.match(compactPrompt, /periodi, unità e basi coerenti/);
+    assert.match(compactPrompt, /cause, effetti, previsioni e consigli senza prove/);
     assert.match(compactPrompt, /grounded_analysis = contributo concreto, dimostrato e assente dalla fonte/);
     assert.deepEqual(calls.map((call) => call.prompt), [compactPrompt, compactPrompt]);
     assert.equal(modelResults.length, 2);
