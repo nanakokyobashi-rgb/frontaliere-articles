@@ -41,6 +41,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'sciaffusa-case-unifamiliari': { it: 'sciaffusa-case-unifamiliari', en: 'schaffhausen-detached-houses', de: 'schaffhausen-einfamilienhaeuser', fr: 'schaffhouse-maisons-individuelles' },
  'gpk-risparmi-bilancio-2027': { it: 'gpk-risparmi-bilancio-2027', en: 'gpk-savings-2027-budget', de: 'gpk-einsparungen-budget-2027', fr: 'gpk-economies-budget-2027' },
  'lkw-unfall-chlaggi-strada': { it: 'lkw-unfall-chlaggi-strada', en: 'lkw-chlaggi-road-closure', de: 'lkw-chlaggi-strassensperrung', fr: 'accident-chlaggi-route-fermeture' },
+ 'neuhausen-soppressione-strisce-pedonali': { it: 'neuhausen-soppressione-strisce-pedonali', en: 'neuhausen-pedestrian-stripe-removal', de: 'neuhausen-fussgaengerstreifen-aufhebung', fr: 'neuhausen-suppression-passages-pietons' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -117,6 +117,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.lkw-unfall-chlaggi-strada.title': 'Camion ribaltato tra Guntmadingen e Neunkirch: H13 chiusa',
     'blog.article.lkw-unfall-chlaggi-strada.excerpt': 'Il 25 novembre 2026 un camion si è ribaltato sulla strada principale tra Guntmadingen e Neunkirch, causando la chiusura della H13 per diverse ore.',
     'blog.article.lkw-unfall-chlaggi-strada.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.neuhausen-soppressione-strisce-pedonali.title': 'Neuhausen sopprime dodici strisce pedonali nel centro',
+    'blog.article.neuhausen-soppressione-strisce-pedonali.excerpt': 'Il Consiglio comunale di Neuhausen am Rheinfall ha deciso di sopprimere 12 su 18 strisce pedonali esistenti, con attuazione prevista nel primo semestre 2027.',
+    'blog.article.neuhausen-soppressione-strisce-pedonali.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;
