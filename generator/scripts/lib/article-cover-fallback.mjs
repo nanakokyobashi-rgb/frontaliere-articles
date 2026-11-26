@@ -149,6 +149,13 @@ async function defaultVerifyImage(filePath, options) {
   return verifyGeneratedImage(filePath, options);
 }
 
+function assertCatalogVerificationDeadline(deadlineAt) {
+  if (!Number.isFinite(deadlineAt) || Date.now() < deadlineAt) return;
+  const error = new Error('catalog cover verification deadline exceeded');
+  error.code = 'ETIMEDOUT';
+  throw error;
+}
+
 async function verifyCandidateImage(filePath, sha256, provenance, context, {
   verifyImage = defaultVerifyImage,
   deadlineAt,
@@ -158,6 +165,7 @@ async function verifyCandidateImage(filePath, sha256, provenance, context, {
   // Injected verifiers are test seams and may have different trust guarantees.
   // They never read from or write to the production-verifier cache.
   const cacheable = verifyImage === defaultVerifyImage;
+  assertCatalogVerificationDeadline(deadlineAt);
   const cached = cacheable ? verificationCache.get(cacheKey) : null;
   if (cached) return cached;
 
