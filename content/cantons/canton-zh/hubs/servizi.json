@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-11-26T17:26:42.969Z",
-  "contentHash": "0c063e194158639331283001d4234f1d3a45bc47ffc010432398f7da7a4b0e45",
+  "updatedAt": "2026-11-26T23:51:27.867Z",
+  "contentHash": "da0197c345b165364a0b597587d305acbcfab2be9a2c9d96a6ecf25b704e69c0",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-26T03:41:13.403Z",
+      "updatedAt": "2026-11-26T14:14:42.930Z",
       "keyFacts": 0
     },
     {
@@ -23,8 +23,13 @@
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-26T14:21:21.348Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-26T15:51:00.529Z",
       "keyFacts": 0
     }
   ],
@@ -81,11 +86,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-25T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-11-26T23:00:00.000Z"
             },
             {
@@ -107,11 +107,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-30T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-12-01T23:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-26T03:41:13.403Z"
+          "updatedAt": "2026-11-26T14:14:42.930Z"
         },
         {
           "id": "aste-targhe",
@@ -143,6 +148,20 @@
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
           "updatedAt": "2026-11-26T08:20:20.334Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "1 °C",
+              "detail": "oggi da -1 a 2 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-26T14:21:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -180,7 +199,7 @@
               "url": "https://www.usz.ch/50-jahre-stammzelltransplantation-am-usz/"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -260,7 +279,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-26T23:51:27.867Z"
     },
     "en": {
       "canton": "ZH",
@@ -314,11 +333,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-25T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-11-26T23:00:00.000Z"
             },
             {
@@ -340,11 +354,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-30T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-12-01T23:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-26T03:41:13.403Z"
+          "updatedAt": "2026-11-26T14:14:42.930Z"
         },
         {
           "id": "aste-targhe",
@@ -376,6 +395,20 @@
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
           "updatedAt": "2026-11-26T08:20:20.334Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "1 °C",
+              "detail": "today from -1 to 2 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-26T14:21:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -413,7 +446,7 @@
               "url": "https://www.usz.ch/50-jahre-stammzelltransplantation-am-usz/"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +522,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-26T23:51:27.867Z"
     },
     "de": {
       "canton": "ZH",
@@ -543,11 +576,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-25T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-11-26T23:00:00.000Z"
             },
             {
@@ -569,11 +597,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-30T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-12-01T23:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-26T03:41:13.403Z"
+          "updatedAt": "2026-11-26T14:14:42.930Z"
         },
         {
           "id": "aste-targhe",
@@ -605,6 +638,20 @@
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
           "updatedAt": "2026-11-26T08:20:20.334Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "1 °C",
+              "detail": "heute -1 bis 2 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-26T14:21:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -642,7 +689,7 @@
               "url": "https://www.usz.ch/50-jahre-stammzelltransplantation-am-usz/"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -718,7 +765,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-26T23:51:27.867Z"
     },
     "fr": {
       "canton": "ZH",
@@ -772,11 +819,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-25T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-11-26T23:00:00.000Z"
             },
             {
@@ -798,11 +840,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-30T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-12-01T23:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-26T03:41:13.403Z"
+          "updatedAt": "2026-11-26T14:14:42.930Z"
         },
         {
           "id": "aste-targhe",
@@ -834,6 +881,20 @@
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
           "updatedAt": "2026-11-26T08:20:20.334Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "1 °C",
+              "detail": "aujourd’hui de -1 à 2 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-26T14:21:21.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -871,7 +932,7 @@
               "url": "https://www.usz.ch/50-jahre-stammzelltransplantation-am-usz/"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -943,7 +1004,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-26T23:51:27.867Z"
     }
   }
 }

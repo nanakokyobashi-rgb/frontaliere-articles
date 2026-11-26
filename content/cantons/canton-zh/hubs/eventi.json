@@ -4,17 +4,17 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "7c25ea24fc7d6faa2fb8a9d858768e49f4fc02b63f0acf00e9e3f80f3040f4d5",
+  "updatedAt": "2026-11-26T23:51:27.867Z",
+  "contentHash": "90888df0a970786c580b8fa1eeceb9990f7c898ae147b25b985205bdcf8c27e5",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T00:32:00.223Z",
+      "updatedAt": "2026-11-26T16:33:33.919Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-25T16:08:35.229Z",
+      "updatedAt": "2026-11-26T15:51:00.529Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "314",
+          "value": "315",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -100,7 +100,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/11/erhoehung-staedtische-beitraege-zurich-film-festival.html"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -141,7 +141,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T23:51:27.867Z"
     },
     "en": {
       "canton": "ZH",
@@ -151,7 +151,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "314",
+          "value": "315",
           "note": "from the site’s events calendar"
         }
       ],
@@ -224,7 +224,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -237,7 +237,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/11/erhoehung-staedtische-beitraege-zurich-film-festival.html"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -265,7 +265,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T23:51:27.867Z"
     },
     "de": {
       "canton": "ZH",
@@ -275,7 +275,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "314",
+          "value": "315",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -348,7 +348,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -361,7 +361,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/11/erhoehung-staedtische-beitraege-zurich-film-festival.html"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -389,7 +389,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T23:51:27.867Z"
     },
     "fr": {
       "canton": "ZH",
@@ -399,7 +399,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "314",
+          "value": "315",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -472,7 +472,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -485,7 +485,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/11/erhoehung-staedtische-beitraege-zurich-film-festival.html"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -513,7 +513,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T23:51:27.867Z"
     }
   }
 }
