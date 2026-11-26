@@ -99,6 +99,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.incendio-sins-linea-s26.title': 'Incendie à Sins AG : ligne S26 interrompue',
     'blog.article.incendio-sins-linea-s26.excerpt': 'Un incendie dans une grange à Sins AG a interrompu la liaison entre Rotkreuz et Lenzburg : des bus de remplacement circulent sur la S26 jusqu’à environ 16 heures.',
     'blog.article.incendio-sins-linea-s26.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.muelimaert-lenzburg-gas-evacuazione.title': 'Évacuation de Mülimärt Lenzburg en raison d’une fuite de dioxyde de carbone',
+    'blog.article.muelimaert-lenzburg-gas-evacuazione.excerpt': 'Alerte au dioxyde de carbone mardi peu après 11.30; 30 personnes ont signalé un malaise et des vertiges; fin de l’alerte vers 13.30.',
+    'blog.article.muelimaert-lenzburg-gas-evacuazione.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAgFr;

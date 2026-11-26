@@ -99,6 +99,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.incendio-sins-linea-s26.title': 'Brand in Sins AG: Linie S26 unterbrochen',
     'blog.article.incendio-sins-linea-s26.excerpt': 'Ein Brand in einer Scheune in Sins AG hat die Strecke zwischen Rotkreuz und Lenzburg unterbrochen: Auf der S26 verkehren bis etwa 16 Uhr Ersatzbusse.',
     'blog.article.incendio-sins-linea-s26.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.muelimaert-lenzburg-gas-evacuazione.title': 'Evakuierung von Mülimärt Lenzburg wegen eines Austritts von Kohlendioxid',
+    'blog.article.muelimaert-lenzburg-gas-evacuazione.excerpt': 'Alarm wegen Kohlendioxid am Dienstag kurz nach 11.30 Uhr; 30 Personen berichteten über Unwohlsein und Schwindel; Freigabe gegen 13.30 Uhr.',
+    'blog.article.muelimaert-lenzburg-gas-evacuazione.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAgDe;

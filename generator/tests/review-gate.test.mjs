@@ -17,7 +17,7 @@
  * `gh` stubbato: un test a regex sul sorgente («c'e' un `includes('## LGTM')`»)
  * passerebbe anche su un ramo irraggiungibile.
  */
-import { formatCodexFallbackEvidence } from '../../scripts/ci/claude-codex-fallback.mjs';
+import { CODEX_FALLBACK_MODEL, formatCodexFallbackEvidence } from '../../scripts/ci/claude-codex-fallback.mjs';
 import { codeContributionFingerprint } from '../../scripts/ci/auto-merge-eval.mjs';
 import { classifyAndMintReview } from '../../scripts/ci/review-scope.mjs';
 import { test } from 'node:test';
@@ -954,7 +954,7 @@ test('un marker Codex senza evidenza e senza check precedente non sblocca il gat
 test('invalid or failed Codex evidence cannot reuse an approving Claude review', () => {
   for (const evidence of ['invalid',
     formatCodexFallbackEvidence({ trigger: 'runtime-429', status: 'failure' }),
-    codexEvidence.replace('gpt-5.6-luna', 'wrong-model')]) {
+    codexEvidence.replace(CODEX_FALLBACK_MODEL, 'wrong-model')]) {
     const result = runGate({ reviews: [botReview(HEAD, '## LGTM'), codexReview()], codexEvidence: evidence });
     assert.equal(result.status, 1, result.stdout);
   }
