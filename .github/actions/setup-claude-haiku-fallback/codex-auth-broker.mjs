@@ -51,7 +51,7 @@ import { spawn, spawnSync } from 'node:child_process';
 
 const CODEX_MODEL = 'gpt-6-luna';
 const CODEX_EFFORT = 'max';
-const CODEX_CLI_VERSION = '0.153.4';
+const CODEX_CLI_VERSION = '0.172.0';
 const CODEX_PROFILE = 'claude-haiku-fallback';
 const MAX_REQUEST_BYTES = 1024 * 1024;
 const MAX_RESPONSE_BYTES = 2 * 1024 * 1024;
@@ -71,7 +71,7 @@ const MAX_TIMEOUT_MS = 600_000;
 const LOGIN_REFRESH_SAFE_AGE_MS = 7 * 24 * 60 * 60 * 1000;
 const LOGIN_ACCESS_TOKEN_MIN_REMAINING_MS = MAX_TIMEOUT_MS + 30 * 60 * 1000;
 // `function` profile: Codex answers as a text function. The disabled features
-// are the agent's tools; all exist in the pinned 0.153.4, and `--strict-config`
+// are the agent's tools; all exist in the pinned 0.172.0, and `--strict-config`
 // rejects an unknown feature or key.
 const FUNCTION_PROFILE_INSTRUCTIONS = 'You are a stateless text-processing function called by a batch job. Read the request, produce the requested output directly, and never use tools, run commands or ask questions.\n';
 const FUNCTION_PROFILE_DISABLED_FEATURES = Object.freeze([
@@ -157,7 +157,7 @@ function validateSocketParent() {
 // could not mount TMPDIR on the read-only /tmp, so every request died before
 // the model was called ("Codex CLI exited with code 1" on every call of runs
 // 34792206007, 35298825794, 36001495484). ":root" = "deny" already hides the
-// rest of /tmp: measured with `codex sandbox` 0.153.4, the workspace stays
+// rest of /tmp: measured with `codex sandbox` 0.172.0, the workspace stays
 // readable while auth.json, config.toml and other /tmp files are not found
 // and TMPDIR is denied.
 function permissionConfig() {

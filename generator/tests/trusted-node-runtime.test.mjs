@@ -90,7 +90,7 @@ test('l\'action non installa ne\' pubblica la CLI Claude: la lane CLI e\' solo C
   assert.doesNotMatch(body, /CLAUDE_CLI_BIN=|CLAUDE_CLI_SHA256=/);
   assert.doesNotMatch(body, /ENABLE_HAIKU_ARTICLE_FALLBACK=1/);
   assert.doesNotMatch(body, /\/opt\/runner\/claude-haiku-cli/);
-  assert.match(body, /@openai\/codex@0\.153\.4/);
+  assert.match(body, /@openai\/codex@0\.172\.0/);
   assert.match(body, /id: start_codex_auth_broker/);
 });
 
@@ -101,20 +101,20 @@ test('le probe CLI tollerano il suffisso di --version senza allentare il pin sem
   assert.equal(codexPatterns.length, 2, 'le due probe semver del Codex devono restare allineate');
   for (const pattern of codexPatterns) {
     const codexVersion = new RegExp(pattern);
-    assert.match('codex-cli 0.153.4 (Codex CLI)', codexVersion);
-    assert.match('codex-cli v0.153.4 (Codex CLI)', codexVersion);
-    assert.doesNotMatch('codex-cli 0.153.40', codexVersion);
-    assert.doesNotMatch('codex-cli 0.153.4.1', codexVersion);
-    assert.doesNotMatch('codex-cli 0.153.4-beta', codexVersion);
+    assert.match('codex-cli 0.172.0 (Codex CLI)', codexVersion);
+    assert.match('codex-cli v0.172.0 (Codex CLI)', codexVersion);
+    assert.doesNotMatch('codex-cli 0.172.00', codexVersion);
+    assert.doesNotMatch('codex-cli 0.172.0.1', codexVersion);
+    assert.doesNotMatch('codex-cli 0.172.0-beta', codexVersion);
   }
   const setupCodexPattern = ACTION.match(
     /printf '%s\\n' "\$codex_version" \| grep -Eq '([^']+)'/,
   )?.[1];
   assert.ok(setupCodexPattern, 'probe semver del Codex nella setup action non trovata');
   const setupCodexVersion = new RegExp(setupCodexPattern);
-  assert.match('codex-cli v0.153.4 (Codex CLI)', setupCodexVersion);
-  assert.doesNotMatch('codex-cli 0.153.4.1', setupCodexVersion);
-  assert.doesNotMatch('codex-cli 0.153.4-beta', setupCodexVersion);
+  assert.match('codex-cli v0.172.0 (Codex CLI)', setupCodexVersion);
+  assert.doesNotMatch('codex-cli 0.172.0.1', setupCodexVersion);
+  assert.doesNotMatch('codex-cli 0.172.0-beta', setupCodexVersion);
   assert.match(
     BROKER,
     /versionOutput\.match\(\/\(\?:\^\|\[\^0-9A-Za-z\._-\]\)v\?\(\\d\+\\\.\\d\+\\\.\\d\+\)\(\?:\[\^0-9A-Za-z\._-\]\|\$\)\//,

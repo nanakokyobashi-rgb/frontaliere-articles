@@ -438,7 +438,7 @@ runs:
           npm_config_prefix="$codex_prefix" \
           "$codex_cli_install_timeout_bin" --signal=TERM --kill-after=10s \
           "${codex_cli_install_timeout_seconds}s" "$trusted_node" "$trusted_npm" install \
-            --global --no-fund --no-audit @openai/codex@0.153.4 >/dev/null
+            --global --no-fund --no-audit @openai/codex@0.172.0 >/dev/null
         install_status=$?
         set -e
         if [ "$install_status" -ne 0 ]; then
@@ -459,7 +459,7 @@ runs:
           exit 1
         fi
         codex_version="$("$codex_path" --version 2>/dev/null || true)"
-        if ! printf '%s\n' "$codex_version" | /usr/bin/grep -Eq '(^|[^0-9A-Za-z._-])v?0\.153\.4([^0-9A-Za-z._-]|$)'; then
+        if ! printf '%s\n' "$codex_version" | /usr/bin/grep -Eq '(^|[^0-9A-Za-z._-])v?0\.172\.0([^0-9A-Za-z._-]|$)'; then
           echo "::error::Unexpected Codex CLI version: $codex_version"
           exit 1
         fi
@@ -589,7 +589,7 @@ runs:
         codex_runtime_root="${CODEX_RUNTIME_ROOT:?Codex runtime directory unavailable}"
         [ -x "$codex_realpath" ] || { echo '::error::Pinned Codex CLI realpath is not executable.'; exit 1; }
         codex_version="$("$codex_bin" --version 2>/dev/null || true)"
-        printf '%s\n' "$codex_version" | /usr/bin/grep -Eq '(^|[^0-9A-Za-z._-])v?0\.153\.4([^0-9A-Za-z._-]|$)' || { echo "::error::Codex CLI version changed: $codex_version"; exit 1; }
+        printf '%s\n' "$codex_version" | /usr/bin/grep -Eq '(^|[^0-9A-Za-z._-])v?0\.172\.0([^0-9A-Za-z._-]|$)' || { echo "::error::Codex CLI version changed: $codex_version"; exit 1; }
 
         # `shell_environment_policy.ignore_default_excludes=false` deliberately
         # strips GH_TOKEN/GITHUB_TOKEN from model-generated subprocesses. Keep
@@ -1003,7 +1003,7 @@ runs:
         fi
         chmod 600 "$config_file"
 
-        # 0.153.4 strict mode also validates the checked-out project config;
+        # 0.172.0 strict mode also validates the checked-out project config;
         # this repository still carries legacy MCP keys that that CLI rejects.
         # Keep the generated file as the profile source/smoke target, then pass
         # the same policy as explicit CLI TOML while ignoring project config.

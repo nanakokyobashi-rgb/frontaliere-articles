@@ -107,7 +107,7 @@ test('il broker Codex serializza più richieste senza consumare una slot globale
   const fakeCli = `#!/usr/bin/env node
 import fs from 'node:fs';
 const args = process.argv.slice(2);
-if (args.includes('--version')) { console.log('codex 0.153.4'); process.exit(0); }
+if (args.includes('--version')) { console.log('codex 0.172.0'); process.exit(0); }
 const output = args[args.indexOf('--output-last-message') + 1];
 if (!output) process.exit(2);
 let prompt = '';
@@ -173,7 +173,7 @@ test('il TTL del broker è idle e non scade mentre la coda riceve richieste', as
   const fakeCli = `#!/usr/bin/env node
 import fs from 'node:fs';
 const args = process.argv.slice(2);
-if (args.includes('--version')) { console.log('codex 0.153.4'); process.exit(0); }
+if (args.includes('--version')) { console.log('codex 0.172.0'); process.exit(0); }
 const output = args[args.indexOf('--output-last-message') + 1];
 if (!output) process.exit(2);
 let prompt = '';
@@ -233,7 +233,7 @@ test('una richiesta cancellata prima dell esecuzione non consuma la quota', asyn
   const fakeCli = `#!/usr/bin/env node
 import fs from 'node:fs';
 const args = process.argv.slice(2);
-if (args.includes('--version')) { console.log('codex 0.153.4'); process.exit(0); }
+if (args.includes('--version')) { console.log('codex 0.172.0'); process.exit(0); }
 const output = args[args.indexOf('--output-last-message') + 1];
 if (!output) process.exit(2);
 await new Promise((resolve) => setTimeout(resolve, 400));
@@ -319,7 +319,7 @@ test('il profilo sandbox del broker non nega il workspace in cui lancia Codex', 
 import fs from 'node:fs';
 import path from 'node:path';
 const args = process.argv.slice(2);
-if (args.includes('--version')) { console.log('codex 0.153.4'); process.exit(0); }
+if (args.includes('--version')) { console.log('codex 0.172.0'); process.exit(0); }
 const output = args[args.indexOf('--output-last-message') + 1];
 if (!output) process.exit(2);
 process.stdin.resume();
@@ -417,7 +417,7 @@ test('un Codex che esce con errore restituisce la causa, senza token', async () 
   const token = `eyJ${'a'.repeat(40)}.${'b'.repeat(40)}.${'c'.repeat(40)}`;
   const fakeCli = `#!/usr/bin/env node
 const args = process.argv.slice(2);
-if (args.includes('--version')) { console.log('codex 0.153.4'); process.exit(0); }
+if (args.includes('--version')) { console.log('codex 0.172.0'); process.exit(0); }
 process.stdin.resume();
 process.stdin.on('end', () => {
   process.stderr.write('\\x1b[31m2026-09-24T13:59:26Z ERROR codex_models_manager: 401 with ${token}\\x1b[0m\\n');
@@ -481,7 +481,7 @@ test('una sola CODEX_HOME per job: il login rinnovato dalla chiamata N serve la 
 import fs from 'node:fs';
 import path from 'node:path';
 const args = process.argv.slice(2);
-if (args.includes('--version')) { console.log('codex 0.153.4'); process.exit(0); }
+if (args.includes('--version')) { console.log('codex 0.172.0'); process.exit(0); }
 const output = args[args.indexOf('--output-last-message') + 1];
 const workspace = args[args.indexOf('--cd') + 1];
 let prompt = '';
@@ -569,7 +569,7 @@ test('un errore API stampato come JSON restituisce anche il suo "message"', asyn
   const cliPath = path.join(cliPrefix, 'codex');
   const fakeCli = `#!/usr/bin/env node
 const args = process.argv.slice(2);
-if (args.includes('--version')) { console.log('codex 0.153.4'); process.exit(0); }
+if (args.includes('--version')) { console.log('codex 0.172.0'); process.exit(0); }
 process.stdin.resume();
 process.stdin.on('end', () => {
   process.stderr.write('ERROR: unexpected status 400 Bad Request: {\\n  "error": {\\n    "message": "Invalid schema for response_format: \\'additionalProperties\\' is required to be supplied and to be false.",\\n    "type": "invalid_request_error",\\n    "param": "text.format.schema",\\n    "code": "invalid_json_schema"\\n  }\\n}\\n');
@@ -626,7 +626,7 @@ test('il socket compare solo quando il broker accetta gia\' connessioni', async 
   const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
   const socketPath = path.join(brokerDir, 'auth.sock');
   const cliPath = path.join(cliPrefix, 'codex');
-  fs.writeFileSync(cliPath, "#!/usr/bin/env node\nif (process.argv.includes('--version')) { console.log('codex 0.153.4'); process.exit(0); }\n", { mode: 0o700 });
+  fs.writeFileSync(cliPath, "#!/usr/bin/env node\nif (process.argv.includes('--version')) { console.log('codex 0.172.0'); process.exit(0); }\n", { mode: 0o700 });
   fs.chmodSync(cliPath, 0o700);
   const cliSha256 = crypto.createHash('sha256').update(fs.readFileSync(cliPath)).digest('hex');
   const broker = spawn(process.execPath, [
@@ -668,7 +668,7 @@ test('il socket compare solo quando il broker accetta gia\' connessioni', async 
 const SLEEPING_CLI = `#!/usr/bin/env node
 import fs from 'node:fs';
 const args = process.argv.slice(2);
-if (args.includes('--version')) { console.log('codex 0.153.4'); process.exit(0); }
+if (args.includes('--version')) { console.log('codex 0.172.0'); process.exit(0); }
 const output = args[args.indexOf('--output-last-message') + 1];
 if (!output) process.exit(2);
 let prompt = '';
