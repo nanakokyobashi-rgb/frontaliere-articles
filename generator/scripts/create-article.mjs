@@ -1297,14 +1297,14 @@ ${sourceHint ? `FONTE: ${sourceHint}\n` : ''}${summary ? `SOMMARIO: ${String(sum
 Rispondi ESATTAMENTE in questo formato (una riga):
 relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
 
-  // Per un no cantonale, 0,5 è la soglia operativa: se la confidenza è
+  // Per un no cantonale o nazionale, 0,5 è la soglia operativa: se la confidenza è
   // pari o inferiore, oppure non valida, si richiede una conferma testuale.
   let uncertainNegative = null;
   if (process.env.DECISION_API_ENABLED === '1') {
     const decision = await tryDecisionsApiClassifier(prompt, classifierCallTimeout, SECTION_NAME);
     if (decision) {
       const { confidence } = decision;
-      if (!IS_CANTON || decision.relevant
+      if ((!IS_CANTON && SECTION_NAME !== 'svizzera') || decision.relevant
         || (Number.isFinite(confidence) && confidence > 0.5 && confidence <= 1)) {
         return decision;
       }
