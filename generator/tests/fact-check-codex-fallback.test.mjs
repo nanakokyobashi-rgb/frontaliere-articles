@@ -778,10 +778,10 @@ describe('fact-check retries under a reported input cap', () => {
     assert.match(compactPrompt, /grounded_analysis = contributo concreto, dimostrato e assente dalla fonte/);
     assert.match(compactPrompt, /luogo\/ente \+ ruolo \+ azione \+ esito\/cifra.*Esempi concreti.*Casi pratici.*Casi reali.*Per esempio.*Caso 1.*Caso 2/);
     assert.match(compactPrompt, /cronaca locale senza policy\/economia\/lavoro/);
-    assert.match(compactPrompt, /singoli episodi di cronaca/);
-    assert.match(compactPrompt, /eventi culturali\/festival\/gastronomia, sport\/gossip\/intrattenimento/);
-    assert.match(compactPrompt, /eventi esteri senza impatto svizzero/);
-    assert.match(compactPrompt, /FAIL: commento generico su cronaca senza nesso nazionale/);
+    assert.match(compactPrompt, /episodi isolati/);
+    assert.match(compactPrompt, /cultura\/festival\/gastronomia, sport\/gossip\/intrattenimento/);
+    assert.match(compactPrompt, /fatti esteri senza impatto svizzero/);
+    assert.match(compactPrompt, /nesso reale, specifico e verificabile; FAIL se implicazioni nazionali forzate/);
     assert.deepEqual(calls.map((call) => call.prompt), [compactPrompt, compactPrompt]);
     assert.equal(modelResults.length, 2);
   });
@@ -798,6 +798,8 @@ describe('fact-check retries under a reported input cap', () => {
       assert.ok(compactPrompt.includes(marker), marker);
     }
     assert.match(compactPrompt, /luogo o ente, ruolo, azione ed esito.*senza riferimento verificato è critical:fatti_inventati/);
+    assert.match(compactPrompt, /nesso reale, specifico e verificabile; FAIL se implicazioni nazionali forzate/);
+    assert.match(compactPrompt, /Escludi cronaca locale senza policy\/economia\/lavoro, episodi isolati/);
     assert.deepEqual(calls.map((call) => call.prompt), [compactPrompt, compactPrompt]);
     assert.equal(modelResults.length, 2);
   });
