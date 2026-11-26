@@ -7410,30 +7410,32 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
 
   const prompt = `${evidencePrefix}\n\n${verificationInstructions}\n\n${relevanceInstructions}\n\n${proofSuffix}\n\n${proofResponseFormat}`;
   const compactProofInstructions = `═══ VALUTAZIONE EDITORIALE E PROVE (OBBLIGATORIA) ═══
-Valuta body1–body3 insieme. Un riassunto o una parafrasi non basta: cerca un confronto, calcolo o nesso concreto assente dalla fonte e dimostrabile con periodi, unità e basi coerenti. Attribuisci i fatti alla fonte. Segnala angoli frontalieri forzati, reportage, interviste o verifiche proprie non documentati e cause, effetti, previsioni o consigli fiscali/finanziari privi di prove.
-Classificazioni: grounded_analysis (contributo tracciabile), source_restatement (riassunto/parafrasi), unsupported_inference (affermazione non provata), insufficient_evidence (prove insufficienti).
+Valuta body1–body3: grounded_analysis = contributo concreto, dimostrato e assente dalla fonte; source_restatement = riassunto o parafrasi; unsupported_inference = deduzione senza prova; insufficient_evidence = prove insufficienti. Usa periodi, unità e basi coerenti nei confronti e calcoli. Attribuisci i fatti; segnala angoli forzati, reportage, interviste, verifiche, cause, effetti, previsioni e consigli senza prove.
 articleQuote: unico passaggio contiguo di body1–body3, almeno 40 caratteri e 7 parole. evidenceQuotes: copia almeno 16 caratteri consecutivi dalla fonte o da un riferimento verificato. Conserva lingua, cifre e punteggiatura. Escludi titolo, sommario, traduzioni, parafrasi e puntini aggiunti. Verifica ogni citazione nel blocco originale.
 finding: in italiano, almeno 35 caratteri e 6 parole. Per grounded_analysis, spiega il contributo usando almeno ${MIN_EDITORIAL_ARTICLE_ANCHORS} termini distinti identici a quelli di articleQuote (nomi, parole di almeno cinque caratteri o cifre).
 critical: falsità, contraddizione o fatto specifico assente sia dalla fonte sia dai fatti verificati (es. ente, percentuale precisa, dichiarazione, importo o data). Per evergreen la sola assenza dalla fonte non basta: verifica i riferimenti e segnala una falsità o un sospetto concreto. major: sospetto concreto non confermabile. minor: imprecisione non fuorviante o contesto corretto. FAIL con almeno 1 critical o 3 major, altrimenti PASS.
-Prima di segnalare un fatto assente, rileggi la fonte cercando anche parafrasi. Se presente, lascia il fatto. Se assente, copia in sourceQuote il passaggio esatto più vicino o usa una stringa vuota se la fonte non tratta l’argomento. Le issue guidano la riscrittura e sono confrontate con la fonte.`;
+Prima di segnalare un fatto assente, rileggi la fonte cercando anche parafrasi. Se presente, lascia il fatto. Se assente, copia in sourceQuote il passaggio esatto più vicino o usa una stringa vuota se la fonte non tratta l’argomento. `;
 
   const canCompact = sourceUrl.startsWith('evergreen://')
     || (!isEvergreenArticle && !isSyntheticDataset && /^https?:\/\//i.test(sourceUrl));
   const compactSourceInstructions = isEvergreenArticle
     ? '- Riferimenti: confronta date, luoghi, persone, citazioni e misure con i fatti verificati. Segnala affermazioni false, contraddette o troppo specifiche senza attribuzione. Un caso presentato come reale che combina luogo o ente, ruolo, azione ed esito (anche una cifra) senza riferimento verificato è critical:fatti_inventati. La stessa gravità vale per interviste e verifiche inventate.'
     : `- Fonte: controlla date, luoghi, persone, citazioni e misure. Date assenti: sospette. Contesto verificato: minor. Invenzioni e contraddizioni: critical.
-- Casi specifici (luogo/ente, ruolo, azione, esito) senza riscontro nella fonte: critical:fatti_inventati. Esempi: infermiera segnala carenze igieniche a Lugano; medico denuncia pratiche non etiche a Chiasso; infermiere ORL ottiene un risarcimento; medico del Civico di Lugano denuncia frode con indagine FINMA.`;
+- Caso fabbricato = luogo/ente + ruolo + azione + esito/cifra senza riscontro nella fonte: critical:fatti_inventati.${IS_CANTON || IS_FRONTALIERE ? ' Esempi: infermiera segnala carenze igieniche a Lugano; medico denuncia pratiche non etiche a Chiasso; infermiere ORL ottiene un risarcimento; medico del Civico di Lugano denuncia frode con indagine FINMA.' : ' Verifica anche «Esempi concreti», «Casi pratici», «Casi reali», «Per esempio», «Caso 1» e «Caso 2».'}`;
+  const compactRelevanceInstructions = !IS_CANTON && !IS_FRONTALIERE
+    ? `RILEVANZA SVIZZERA (critical:rilevanza_topica): nesso reale, specifico e verificabile; FAIL se implicazioni nazionali forzate. Escludi cronaca locale senza policy/economia/lavoro, episodi isolati, cultura/festival/gastronomia, sport/gossip/intrattenimento e fatti esteri senza impatto svizzero. FAIL: commento generico su cronaca senza nesso nazionale.`
+    : relevanceInstructions;
   const compactPrompt = canCompact
     ? `${evidencePrefix}
 
-VERIFICA SISTEMATICA — controlla tutte le categorie:
+VERIFICA SISTEMATICA:
 - Leggi: verifica sigla, numero, anno, attribuzione e fonte. Critical: sigle inventate (${FACT_CHECK_INVENTED_ACRONYMS}), ${FACT_CHECK_INVENTED_LAWS}, vigenza senza legge, falsa tassa sanitaria, accordo non firmato.
 - Istituzioni e persone: verifica enti, competenze, ruoli e citazioni. Critical: enti inventati o incompetenti. NON esistono: ${FACT_CHECK_INVENTED_INSTITUTIONS}. Consiglieri federali attuali: ${FACT_CHECK_FEDERAL_COUNCILLORS}. Abuso critical:istituzioni: ${FACT_CHECK_FINMA_SCOPE}.
 - Dati: confronta aliquote, soglie e date. Decimali: cita studio e istituto. Accetta arrotondamenti attribuiti e valori canonici.
 ${compactSourceInstructions}
 - Svizzera: accordi bilaterali, fuori da UE e SEE.
 
-${relevanceInstructions}
+${compactRelevanceInstructions}
 
 ${compactProofInstructions}
 

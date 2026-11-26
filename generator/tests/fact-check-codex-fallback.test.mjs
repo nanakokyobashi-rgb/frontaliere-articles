@@ -776,6 +776,31 @@ describe('fact-check retries under a reported input cap', () => {
     });
   }
 
+  test('il fact-check Svizzera con il carico osservato rientra nel limite Groq Qwen', async (testContext) => {
+    const scope = { section: 'svizzera', isCanton: false };
+    const padding = await loadFor(9200, scope);
+    const { calls, prompt, compactPrompt, modelResults } = await runRounds({
+      ...scope, padding, declaredInputCap: 8000, replies: [firstVote, secondVote],
+    });
+    assert.ok(Math.abs(estimate(prompt) - 9200) <= 3);
+    testContext.diagnostic(`Stima token: completo ${estimate(prompt)}, compatto ${estimate(compactPrompt)}, limite 7000`);
+    assert.ok(estimate(compactPrompt) <= 7000, `stima: ${estimate(compactPrompt)}`);
+    assert.ok(compactPrompt.includes(bodyEnd));
+    assert.ok(compactPrompt.includes(sourceEnd));
+    assert.match(compactPrompt, /periodi, unità e basi coerenti/);
+    assert.match(compactPrompt, /cause, effetti, previsioni e consigli senza prove/);
+    assert.match(compactPrompt, /grounded_analysis = contributo concreto, dimostrato e assente dalla fonte/);
+    assert.match(compactPrompt, /luogo\/ente \+ ruolo \+ azione \+ esito\/cifra.*Esempi concreti.*Casi pratici.*Casi reali.*Per esempio.*Caso 1.*Caso 2/);
+    assert.match(compactPrompt, /cronaca locale senza policy\/economia\/lavoro/);
+    assert.match(compactPrompt, /episodi isolati/);
+    assert.match(compactPrompt, /cultura\/festival\/gastronomia, sport\/gossip\/intrattenimento/);
+    assert.match(compactPrompt, /fatti esteri senza impatto svizzero/);
+    assert.match(compactPrompt, /nesso reale, specifico e verificabile; FAIL se implicazioni nazionali forzate/);
+    assert.match(compactPrompt, /FAIL: commento generico su cronaca senza nesso nazionale/);
+    assert.deepEqual(calls.map((call) => call.prompt), [compactPrompt, compactPrompt]);
+    assert.equal(modelResults.length, 2);
+  });
+
   test('un evergreen nazionale sopra il tetto conserva corpo e riferimenti nel fact-check compatto', async () => {
     const scope = { section: 'svizzera', isCanton: false, sourceUrl: 'evergreen://fixture' };
     const padding = await loadFor(8250, scope);
@@ -788,6 +813,9 @@ describe('fact-check retries under a reported input cap', () => {
       assert.ok(compactPrompt.includes(marker), marker);
     }
     assert.match(compactPrompt, /luogo o ente, ruolo, azione ed esito.*senza riferimento verificato è critical:fatti_inventati/);
+    assert.match(compactPrompt, /nesso reale, specifico e verificabile; FAIL se implicazioni nazionali forzate/);
+    assert.match(compactPrompt, /FAIL: commento generico su cronaca senza nesso nazionale/);
+    assert.match(compactPrompt, /Escludi cronaca locale senza policy\/economia\/lavoro, episodi isolati/);
     assert.deepEqual(calls.map((call) => call.prompt), [compactPrompt, compactPrompt]);
     assert.equal(modelResults.length, 2);
   });
