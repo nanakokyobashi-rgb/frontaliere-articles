@@ -13,7 +13,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -21,6 +21,7 @@ import { fileURLToPath } from 'node:url';
 import {
   BUDGET_WINDOW_HOURS,
   CANTON_WORKFLOW_PATH_RE,
+  CANTON_GATE_RECEIPT_FILENAME,
   CORE_WORKFLOW_PATH,
   DEFAULT_MAX_PARALLEL,
   ALL_RUN_STATUSES,
@@ -37,6 +38,7 @@ import {
   olderCantonRuns,
   parseQuotaBeaconOutput,
   positiveInt,
+  projectCantonGateReceipt,
   readInFlightRunsFromGitHub,
   remoteConfigLoaded,
 } from '../../scripts/ci/canton-generation-admit.mjs';
@@ -500,14 +502,63 @@ test('un dispatch Cloud Scheduler rispetta budget e beacon del cantone', () => {
 
 // ── La CLI: marcatori e output ───────────────────────────────────────────────
 
-function runCli(env) {
+test('la ricevuta espone solo lo stato del gate cantonale', () => {
+  for (const rcLoaded of [false, true]) {
+    for (const profileEnabled of [false, true]) {
+      for (const allowlist of [undefined, '', 'GR', 'gR;\u00a0CANTON-TI, sconosciuto']) {
+        const profiles = profileEnabled ? PROFILES : DISABLED_PROFILES;
+        const env = {
+          [RC_SENTINEL_ENV]: rcLoaded ? '1' : undefined,
+          [CANTON_SECTIONS_ENABLED_ENV]: allowlist,
+        };
+        const allowed = allowlist?.includes('CANTON-TI') === true;
+        const gateEnabled = rcLoaded && profileEnabled && allowed;
+        const verdict = decide({ env, profiles, eventName: 'workflow_dispatch' });
+        assert.equal(verdict.proceed, gateEnabled);
+        assert.deepEqual(projectCantonGateReceipt({ section: SECTION, runAttempt: '2', env, profiles }), {
+          schemaVersion: 1,
+          section: SECTION,
+          runAttempt: 2,
+          rcLoaded,
+          profileEnabled,
+          rcAllowsSection: rcLoaded ? allowed : null,
+          gateEnabled,
+        });
+      }
+    }
+  }
+  assert.equal(decide({}, readers({ beacon: { active: true } })).reason, 'quota-beacon');
+  assert.equal(projectCantonGateReceipt({
+    section: SECTION, runAttempt: 1, env: ENV_ON, profiles: PROFILES,
+  }).gateEnabled, true);
+});
+
+test('la ricevuta richiede una sezione canonica e un tentativo intero positivo', () => {
+  for (const section of ['frontaliere', 'canton-xx', 'CANTON-TI', [SECTION]]) {
+    assert.equal(projectCantonGateReceipt({ section, runAttempt: 1 }), null);
+  }
+  for (const runAttempt of [undefined, '', 0, -1, '1.5', '2e1', '9007199254740992', [1]]) {
+    assert.equal(projectCantonGateReceipt({ section: SECTION, runAttempt }), null);
+  }
+});
+
+function runCli(env, { receipt = false, blocked = false, wrongPath = false } = {}) {
   const dir = mkdtempSync(path.join(tmpdir(), 'canton-admit-'));
   const out = path.join(dir, 'output');
   writeFileSync(out, '');
+  const receiptPath = path.join(dir, CANTON_GATE_RECEIPT_FILENAME);
+  const configuredPath = wrongPath ? path.join(dir, 'other.json') : receiptPath;
+  if (blocked) mkdirSync(receiptPath);
   try {
     const clean = { PATH: process.env.PATH, HOME: dir, GITHUB_OUTPUT: out, ...env };
+    if (receipt) Object.assign(clean, {
+      RUNNER_TEMP: dir, CANTON_GATE_RECEIPT_PATH: configuredPath, GITHUB_RUN_ATTEMPT: '2',
+    });
     const res = spawnSync(process.execPath, [SCRIPT], { encoding: 'utf8', env: clean });
-    return { status: res.status, stdout: res.stdout, stderr: res.stderr, output: readFileSync(out, 'utf8') };
+    return {
+      status: res.status, stdout: res.stdout, stderr: res.stderr, output: readFileSync(out, 'utf8'),
+      receipt: !blocked && existsSync(configuredPath) ? JSON.parse(readFileSync(configuredPath, 'utf8')) : null,
+    };
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
@@ -534,9 +585,26 @@ test('CLI: sezione spenta esce 0 con lo stesso marcatore di create-article.mjs',
 });
 
 test('CLI: una sezione non cantonale esce 2 e non scrive proceed', () => {
-  const res = runCli({ SECTION: 'frontaliere', [RC_SENTINEL_ENV]: 'pat' });
+  const res = runCli({ SECTION: 'frontaliere', [RC_SENTINEL_ENV]: 'pat' }, { receipt: true });
   assert.equal(res.status, 2);
   assert.equal(res.output, '');
+  assert.equal(res.receipt, null);
+});
+
+test('CLI: anche la decisione disabilitata produce una ricevuta facoltativa', () => {
+  const env = { SECTION, [RC_SENTINEL_ENV]: '1' };
+  const normal = runCli(env);
+  assert.equal(normal.output, 'proceed=false\nreason=canton-disabled\n');
+  const observed = runCli(env, { receipt: true });
+  assert.deepEqual(observed, {
+    ...normal,
+    receipt: {
+      schemaVersion: 1, section: SECTION, runAttempt: 2, rcLoaded: true,
+      profileEnabled: true, rcAllowsSection: false, gateEnabled: false,
+    },
+  });
+  assert.deepEqual(runCli(env, { receipt: true, blocked: true }), normal);
+  assert.deepEqual(runCli(env, { receipt: true, wrongPath: true }), normal);
 });
 
 // ── Il legame col workflow ───────────────────────────────────────────────────
@@ -576,6 +644,27 @@ test('il gate legge il token del runner, non un PAT interpolato dal contesto env
   assert.match(gate, /\n {6}actions: read\n/, 'senza actions: read le run in volo non si leggono');
   assert.match(gate, /CANTON_GENERATION_MAX_PARALLEL: \$\{\{ vars\.CANTON_GENERATION_MAX_PARALLEL \}\}/);
   assert.match(gate, /CANTON_DAILY_BUDGET_CAP: \$\{\{ vars\.CANTON_DAILY_BUDGET_CAP \}\}/);
+});
+
+test('il gate carica solo la ricevuta cantonale subito dopo l’ammissione', () => {
+  const gate = jobBlock('section_gate');
+  const receiptPath = '${{ runner.temp }}/' + CANTON_GATE_RECEIPT_FILENAME;
+  assert.ok(gate.includes([
+    `          CANTON_GATE_RECEIPT_PATH: ${receiptPath}`,
+    '        run: node scripts/ci/canton-generation-admit.mjs',
+    '',
+    '      - name: Upload canton section gate receipt',
+    "        if: steps.canton.outcome == 'success'",
+    '        continue-on-error: true',
+    '        uses: actions/upload-artifact@v7',
+    '        with:',
+    '          name: canton-section-gate-${{ github.run_id }}-${{ github.run_attempt }}',
+    `          path: ${receiptPath}`,
+    '          retention-days: 3',
+    '          if-no-files-found: ignore',
+    '',
+  ].join('\n')));
+  assert.match(gate, /id: canton\n +if: inputs\.section_gate == 'canton'/);
 });
 
 /** Chiusura degli import relativi (statici e dinamici) a partire da un file. */
