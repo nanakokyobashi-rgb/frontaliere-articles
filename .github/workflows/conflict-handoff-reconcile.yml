@@ -58,9 +58,39 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
+          else
+            echo "⚠️ Nessuna Firebase SA — GITHUB_PAT_NANAKO non caricato; reconciler inerte per evitare un routing agent:fix senza evento al fixer."
+          fi
+
+      - name: Load secrets from Remote Config
+        id: load_rc_env
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
       - name: Reconcile conflict hand-offs (zero-Claude)
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-        run: node scripts/ci/reconcile-conflict-handoffs.mjs
+        run: |
+          set -uo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$runtime_pat" ]; then
+            echo "::warning::Nessun GITHUB_PAT_NANAKO runtime → reconciler inerte (agent:fix via GITHUB_TOKEN non riattiverebbe issue-fix)."
+            exit 0
+          fi
+          GH_TOKEN="$runtime_pat" node scripts/ci/reconcile-conflict-handoffs.mjs
+          rc=$?
+          unset runtime_pat
+          exit "$rc"
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f /tmp/firebase-sa.json

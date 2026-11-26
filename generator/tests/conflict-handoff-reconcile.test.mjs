@@ -398,13 +398,20 @@ describe('originContentOnMain: applicazione hunk per hunk, non presenza di righe
 });
 
 describe('wiring nel workflow autonomo di questo repo', () => {
-  it('riconcilia solo su schedule/dispatch, con GITHUB_TOKEN, e può leggere le PR', () => {
+  it('carica il PAT runtime e resta inerte senza di esso', () => {
     const workflow = readFileSync(new URL('../../.github/workflows/conflict-handoff-reconcile.yml', import.meta.url), 'utf8');
-    const step = workflow.indexOf('run: node scripts/ci/reconcile-conflict-handoffs.mjs');
+    const step = workflow.indexOf('node scripts/ci/reconcile-conflict-handoffs.mjs');
     expect(step).toBeGreaterThan(-1);
-    const block = workflow.slice(workflow.lastIndexOf('- name: Reconcile conflict hand-offs', step), step);
+    const block = workflow.slice(
+      workflow.lastIndexOf('- name: Reconcile conflict hand-offs', step),
+      workflow.indexOf('\n', step),
+    );
     expect(block).toContain('continue-on-error: true');
     expect(block).toContain('GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}');
+    expect(block).toContain('runtime_pat="${GITHUB_PAT_NANAKO:-}"');
+    expect(block).toContain('if [ -z "$runtime_pat" ]; then');
+    expect(block).toContain('GH_TOKEN="$runtime_pat" node scripts/ci/reconcile-conflict-handoffs.mjs');
+    expect(workflow.indexOf('run: node generator/scripts/load-rc-env.mjs')).toBeLessThan(step);
     const triggers = workflow.slice(workflow.indexOf('\non:'), workflow.indexOf('\n# Stessa chiave'));
     expect(triggers).toContain('schedule:');
     expect(triggers).toContain('workflow_dispatch:');
