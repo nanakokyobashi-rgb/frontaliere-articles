@@ -383,8 +383,10 @@ test('solo un arresto cooperativo provato può differire senza run report', () =
   assert.ok(commitStart >= 0, 'step Commit and push non trovato');
   const commit = workflow.slice(commitStart);
   const missingReport = commit.indexOf('has_run_report=false');
-  const patGuard = commit.indexOf('\n          if [ -z "${GITHUB_PAT:-}" ]', missingReport);
+  const patGuard = commit.indexOf('\n          if [ -z "${GITHUB_PAT_NANAKO:-}" ]', missingReport);
   assert.ok(missingReport >= 0 && patGuard > missingReport, 'guard del report mancante non trovato');
+  assert.match(commit, /REMOTE="https:\/\/x-access-token:\$\{GITHUB_PAT_NANAKO\}@github\.com\//);
+  assert.doesNotMatch(commit, /\$\{GITHUB_PAT:-\}/, 'il push non deve ripiegare sul PAT non owner');
   const branch = commit.slice(missingReport, patGuard);
   assert.match(branch, /steps\.generate\.outputs\.article/);
   assert.match(branch, /steps\.generate\.outputs\.cooperative_stop/);

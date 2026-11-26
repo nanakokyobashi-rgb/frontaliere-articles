@@ -1531,8 +1531,8 @@ jobs:
             echo "::error::create-article run report is missing before the push/rebase loop"
             exit 1
           fi
-          if [ -z "${GITHUB_PAT:-}" ]; then
-            echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push fires no workflow at all (anti-recursion), so the article would never reach the site via publish-api.yml AND the self-trigger chain would stop dead. Both depend on this push being PAT-authenticated."
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "::error::GITHUB_PAT_NANAKO missing — a GITHUB_TOKEN push fires no workflow at all (anti-recursion), so the article would never reach the site via publish-api.yml AND the self-trigger chain would stop dead. Both depend on this push being PAT-authenticated."
             exit 1
           fi
           if [ "$discovery_recovery_only" = "true" ]; then
@@ -1561,7 +1561,7 @@ jobs:
           fi
 
           TARGET="${{ github.ref_name }}"
-          REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
+          REMOTE="https://x-access-token:${GITHUB_PAT_NANAKO}@github.com/${{ github.repository }}.git"
           source scripts/lib/rebase-onto-remote-status.sh
           push_target() {
             if [ "$TARGET" = 'main' ]; then
@@ -1809,10 +1809,6 @@ jobs:
 
           token="${GITHUB_PAT_NANAKO:-}"
           token_name=GITHUB_PAT_NANAKO
-          if [ -z "$token" ]; then
-            token="${GITHUB_PAT:-}"
-            token_name=GITHUB_PAT
-          fi
           [ -n "$token" ] || stop "nessun PAT in ambiente (Remote Config non caricato?)"
 
           wait_s="$delay_s"
@@ -1838,12 +1834,6 @@ jobs:
           }
 
           code=$(dispatch "$token")
-          if [ "$code" != "204" ] && [ "$token_name" = "GITHUB_PAT_NANAKO" ] && [ -n "${GITHUB_PAT:-}" ]; then
-            echo "::warning::dispatch con GITHUB_PAT_NANAKO → HTTP $code, riprovo con GITHUB_PAT"
-            token_name=GITHUB_PAT
-            code=$(dispatch "${GITHUB_PAT}")
-          fi
-
           if [ "$code" = "204" ]; then
             echo "$kind dispatchato con $token_name: sezione $next_section, depth $next_depth, streak $next_streak, soccorso $next_rescue"
             exit 0
