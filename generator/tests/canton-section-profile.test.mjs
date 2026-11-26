@@ -437,19 +437,16 @@ test('selettore cantonale: il sommario già visto dal classifier arriva nella li
   const ju = buildCantonProfile('canton-ju');
   const headline = 'La pénurie de main-d’œuvre qualifiée a poursuivi son repli en 2026';
   const summary = 'Nel Canton Giura il calo della carenza di personale modifica concretamente le assunzioni locali.';
-  cantonClassifierPrompt(ju, {
-    headline,
-    sourceHint: 'www.rfj.ch/actualites/jura',
-    summary,
-  });
   const selection = cantonHeadlineSelectionPrompt(ju, {
-    headlineList: `H1 » (www.rfj.ch) ${headline}`,
+    headlineList: `H1 » (www.rfj.ch ⏳UNDATED) ${headline}\nH2 » (www.rfj.ch) ${headline}`,
+    summaries: [summary, 'Secondo sommario della stessa testata.'],
     recentArticles: '',
     jsonQuoteSafetyRule: '',
   });
   const candidateLine = selection.split('\n').find((line) => line.startsWith('H1 »'));
   assert.ok(candidateLine, 'la candidata resta selezionabile');
   assert.match(candidateLine, /SOMMARIO: Nel Canton Giura/);
+  assert.match(selection.split('\n').find((line) => line.startsWith('H2 »')), /SOMMARIO: Secondo sommario/);
   assert.ok(candidateLine.length <= CANTON_PROMPT_CANDIDATE_LINE_MAX_CHARS);
   assert.ok(summary.length <= CANTON_PROMPT_SUMMARY_MAX_CHARS);
 });

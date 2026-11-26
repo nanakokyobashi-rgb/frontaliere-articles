@@ -1569,9 +1569,7 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
     // `lead`: l'attacco che alcune fonti cantonali danno insieme al titolo
     // (feed a pagamento title+lead, API json): e' l'unico sommario che hanno.
     // Le headline delle sezioni storiche non lo portano mai.
-    const summary = Array.isArray(h?.relatedHeadlines) && h.relatedHeadlines.length > 0
-      ? h.relatedHeadlines.slice(0, 2).join(' · ')
-      : (h?.lead ? String(h.lead) : '');
+    const summary = headlineSourceSummary(h);
     plan.push({ h, headlineText, urlText, summary, kind: 'classify' });
   }
 
@@ -4220,12 +4218,19 @@ if (!IS_FRONTALIERE) {
 // articolo del corpus (run 31402084443). Le due liste NON devono tornare a
 // condividere un marcatore: le costruisce headline-selection-protocol.mjs e le
 // asserisce generator/tests/headline-selection-protocol.test.mjs.
-function HEADLINE_SELECTION_PROMPT(headlineList, recentArticles) {
+function headlineSourceSummary(headline) {
+  return Array.isArray(headline?.relatedHeadlines) && headline.relatedHeadlines.length > 0
+    ? headline.relatedHeadlines.slice(0, 2).join(' · ')
+    : String(headline?.lead || '');
+}
+
+function HEADLINE_SELECTION_PROMPT(headlineList, recentArticles, candidates = []) {
   // Sezione cantonale: stesso protocollo H<n>, criteri del cantone (profilo).
   if (IS_CANTON) {
     return cantonHeadlineSelectionPrompt(SECTION_PROFILE, {
       headlineList,
       recentArticles,
+      summaries: candidates.map(headlineSourceSummary),
       jsonQuoteSafetyRule: JSON_QUOTE_SAFETY_RULE_IT,
     });
   }
@@ -12224,7 +12229,7 @@ async function selectArticle(headlines) {
     // Run LLM selection for each batch
     for (const [batchIdx, batch] of batches.entries()) {
       const headlineList = formatCandidateList(batch);
-      const prompt = HEADLINE_SELECTION_PROMPT(headlineList, recentArticles);
+      const prompt = HEADLINE_SELECTION_PROMPT(headlineList, recentArticles, batch);
       console.error(`🤖 Selezione batch ${batchIdx + 1}/${batches.length} (${batch.length} headline)...`);
       const picked = await requestHeadlineSelection(
         prompt,
@@ -12255,7 +12260,7 @@ async function selectArticle(headlines) {
     throw err;
   }
   const headlineList = formatCandidateList(trimmed);
-  const prompt = HEADLINE_SELECTION_PROMPT(headlineList, recentArticles);
+  const prompt = HEADLINE_SELECTION_PROMPT(headlineList, recentArticles, trimmed);
   console.error(`🤖 Selezione articolo finale tra ${trimmed.length} headline...`);
   const picked = await requestHeadlineSelection(
     prompt,

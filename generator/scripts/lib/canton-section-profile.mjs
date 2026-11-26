@@ -520,71 +520,6 @@ let _sourceUrlMap = null;
 let _sharedFeedOwnersByKey = null;
 const LOCAL_SOURCE_KINDS = new Set(['media', 'istituzionale', 'polizia']);
 
-// Il pre-spend classifier vede headline + lead, mentre il protocollo di
-// selezione riceve ancora la lista compatta H<n> del chiamante storico. Questa
-// cache di passaggio conserva solo il sommario della stessa coppia fonte/titolo
-// durante il run: la selezione può quindi vedere l'evidenza che ha già visto il
-// classifier senza cambiare il formato H<n> o il budget del prompt.
-const CANTON_SELECTION_SUMMARY_CACHE_MAX = 512;
-const _cantonSelectionSummaries = new Map();
-
-function selectionSourceHost(value) {
-  const raw = String(value || '').trim();
-  if (!raw) return '';
-  try {
-    const parsed = new URL(/^[a-z][a-z\d+.-]*:\/\//iu.test(raw) ? raw : `https://${raw}`);
-    return parsed.hostname.toLowerCase().replace(/^www\d?\./u, '');
-  } catch {
-    return raw.split('/')[0].toLowerCase().replace(/^www\d?\./u, '');
-  }
-}
-
-function selectionHeadlineKey(headline) {
-  return foldForMatch(headline).replace(/\s+/gu, ' ').trim();
-}
-
-function selectionSummaryKey(canton, source, headline) {
-  return `${String(canton || '').trim().toUpperCase()}\u0000${selectionSourceHost(source)}\u0000${selectionHeadlineKey(headline)}`;
-}
-
-function rememberCantonSelectionSummary(canton, headline, source, summary) {
-  const compact = String(summary || '').replace(/\s+/gu, ' ').trim();
-  if (!compact || !String(headline || '').trim()) return;
-  const key = selectionSummaryKey(canton, source, headline);
-  _cantonSelectionSummaries.delete(key);
-  _cantonSelectionSummaries.set(key, compact.slice(0, CANTON_PROMPT_SUMMARY_MAX_CHARS));
-  while (_cantonSelectionSummaries.size > CANTON_SELECTION_SUMMARY_CACHE_MAX) {
-    _cantonSelectionSummaries.delete(_cantonSelectionSummaries.keys().next().value);
-  }
-}
-
-function cantonSelectionSummary(canton, headline, source) {
-  const sourceHost = selectionSourceHost(source);
-  const titleKey = selectionHeadlineKey(headline);
-  const cantonKey = String(canton || '').trim().toUpperCase();
-  if (!titleKey) return '';
-  const exact = _cantonSelectionSummaries.get(`${cantonKey}\u0000${sourceHost}\u0000${titleKey}`);
-  if (exact) return exact;
-  // A candidate line may have been compacted by a caller before it reaches the
-  // prompt. Prefer the unique full-title prefix from the same source rather
-  // than guessing across publishers.
-  const matches = [..._cantonSelectionSummaries.entries()]
-    .filter(([key]) => {
-      const firstSeparator = key.indexOf('\u0000');
-      const secondSeparator = key.indexOf('\u0000', firstSeparator + 1);
-      if (
-        firstSeparator < 0
-        || secondSeparator < 0
-        || key.slice(0, firstSeparator) !== cantonKey
-        || key.slice(firstSeparator + 1, secondSeparator) !== sourceHost
-      ) return false;
-      const storedTitle = key.slice(secondSeparator + 1);
-      return storedTitle.startsWith(titleKey) || titleKey.startsWith(storedTitle);
-    })
-    .map(([, summary]) => summary);
-  return matches.length === 1 ? matches[0] : '';
-}
-
 /**
  * Alias espliciti per il solo feed condiviso Ob-/Nidvaldo. Non entrano nel
  * gate geografico generale: qui servono a separare un feed regionale che usa
@@ -955,12 +890,12 @@ function compactPromptPart(value, maxChars) {
   return `${text.slice(0, maxChars - 1).trimEnd()}…`;
 }
 
-function compactCantonCandidateLine(canton, line) {
+function compactCantonCandidateLine(line, summaries) {
   const text = String(line || '').trimEnd();
-  const match = /^(H\d+\s»\s+\(([^)]*)\)\s+)(.+)$/u.exec(text);
+  const match = /^(H(\d+)\s»\s+\([^)]*\)\s+)(.+)$/u.exec(text);
   if (!match) return compactPromptList(text, CANTON_PROMPT_CANDIDATE_LINE_MAX_CHARS);
-  const [, prefix, source, headline] = match;
-  const summary = cantonSelectionSummary(canton, headline, source);
+  const [, prefix, candidateIndex, headline] = match;
+  const summary = String(summaries[Number(candidateIndex) - 1] || '').replace(/\s+/gu, ' ').trim().slice(0, CANTON_PROMPT_SUMMARY_MAX_CHARS);
   if (!summary) return compactPromptList(text, CANTON_PROMPT_CANDIDATE_LINE_MAX_CHARS);
 
   const marker = ' — SOMMARIO: ';
@@ -978,8 +913,8 @@ function compactCantonCandidateLine(canton, line) {
   return `${prefix}${compactPromptPart(headline, titleBudget)}${marker}${compactPromptPart(summary, summaryBudget)}`;
 }
 
-function compactCantonCandidateList(canton, value) {
-  return String(value || '').split('\n').map((line) => compactCantonCandidateLine(canton, line)).join('\n');
+function compactCantonCandidateList(value, summaries) {
+  return String(value || '').split('\n').map((line) => compactCantonCandidateLine(line, summaries)).join('\n');
 }
 
 function cantonSourceGroundingRule(name) {
@@ -1000,7 +935,6 @@ function compactPublishedDigest(value, maxExcerptChars) {
 
 /** Il prompt del classifier pre-spend (stessa forma di risposta delle storiche). */
 export function cantonClassifierPrompt(p, { headline, sourceHint, summary }) {
-  rememberCantonSelectionSummary(p.canton, headline, sourceHint, summary);
   return `Sei un editor del sito frontaliereticino.ch, sezione del Canton ${p.cantonName}: informa chi VIVE o LAVORA nel Canton ${p.cantonName}, frontalieri compresi.
 ${contextLine(p)}
 È RILEVANTE: lavoro e salari nel cantone (assunzioni, licenziamenti, chiusure, contratti), fisco cantonale e imposta alla fonte, AVS/LPP, premi cassa malati e sussidi, permessi (B, G), decisioni del governo e del parlamento cantonale, preventivo e servizi pubblici, casa e affitti, mobilità e trasporti nel cantone (strade, cantieri, chiusure, treni e bus, valichi), economia e imprese del cantone, temi dei frontalieri che lavorano nel cantone. Cronaca locale SOLO se avviene nel Canton ${p.cantonName} E ha un impatto pratico (strada chiusa, deviazione, servizio interrotto, evacuazione).
@@ -1022,8 +956,8 @@ relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
 }
 
 /** Il prompt di selezione della headline (stesso protocollo H<n> delle storiche). */
-export function cantonHeadlineSelectionPrompt(p, { headlineList, recentArticles, jsonQuoteSafetyRule }) {
-  const compactHeadlineList = compactCantonCandidateList(p.canton, headlineList);
+export function cantonHeadlineSelectionPrompt(p, { headlineList, recentArticles, jsonQuoteSafetyRule, summaries = [] }) {
+  const compactHeadlineList = compactCantonCandidateList(headlineList, summaries);
   const compactRecentArticles = compactPublishedDigest(recentArticles, CANTON_PROMPT_PUBLISHED_EXCERPT_MAX_CHARS);
   return `Sei un editor del sito frontaliereticino.ch, sezione del Canton ${p.cantonName}.
 Devi scegliere UN articolo da queste headline di fonti del cantone per scrivere un pezzo utile a chi vive o lavora nel Canton ${p.cantonName}, frontalieri compresi.
