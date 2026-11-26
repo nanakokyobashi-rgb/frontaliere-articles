@@ -131,11 +131,13 @@ try {
 } catch (err) {
   networkFailure(err);
 }
-const children = [...index.matchAll(LOC_RE)].map((m) => m[1]).filter(isRelevantCantonHubSitemap);
-if (children.length === 0) {
+const children = new Set([...index.matchAll(LOC_RE)].map((m) => m[1]).filter(isRelevantCantonHubSitemap));
+if (children.size === 0) {
   console.error('::error::[verify-canton-hub-links] nessuna sitemap pertinente nell\'indice: il controllo sarebbe vuoto');
   process.exit(1);
 }
+// The edge serves this legacy blog sitemap independently of the main index.
+children.add(`${ORIGIN}/sitemap-blog.xml`);
 const published = new Set();
 for (const url of children) {
   let xml;
@@ -202,7 +204,7 @@ for (const section of sections) {
   }
 }
 
-console.log(`[verify-canton-hub-links] ${checked} link di ${sections.length} sezioni (di cui ${evergreenLinks} articoli evergreen, nelle 4 locali) controllati su ${children.length} sitemap (${published.size} URL pubblicati), ${missing.length} mancanti`);
+console.log(`[verify-canton-hub-links] ${checked} link di ${sections.length} sezioni (di cui ${evergreenLinks} articoli evergreen, nelle 4 locali) controllati su ${children.size} sitemap (${published.size} URL pubblicati), ${missing.length} mancanti`);
 if (missing.length) {
   for (const m of [...new Set(missing)]) console.log(`${warnOnly ? '::warning::' : '::error::'}[verify-canton-hub-links] non in sitemap: ${m}`);
   process.exit(warnOnly ? 0 : 1);
