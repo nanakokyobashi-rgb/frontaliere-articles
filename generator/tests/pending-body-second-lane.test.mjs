@@ -38,6 +38,7 @@ import { fileURLToPath } from 'node:url';
 
 import {
   createFreeMtRecoveryReport,
+  freeMtFieldKey,
   markBodyTranslationPending,
   isBodyTranslationPending,
   pendingBodyTranslations,
@@ -447,7 +448,7 @@ test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scaden
   assert.match(body, /chain: \[codex\]/);
   assert.match(body, /prefer: \[codex\]/);
   assert.match(body, /const chunkTranslator = assertChunkTranslator\(translateInChunks, 'translatePendingBodyWithCodex'\)/);
-  assert.match(body, /fallback: \(\) => \{[\s\S]*if \(canFallback && \(!pendingBodySecondLaneAvailable\(\) \|\| deadlineTooClose\)\)[\s\S]*translatePendingBodyWithHistoricalChain\(itValue, locale, field, \{ callWithRetry, translateInChunks: chunkTranslator \}\)/);
+  assert.match(body, /fallback: \(\) => \{[\s\S]*if \(canFallback && \(!pendingBodySecondLaneAvailable\(\) \|\| deadlineTooClose\)\)[\s\S]*translatePendingBodyWithHistoricalChain\(itValue, locale, field, \{ callWithRetry, translateInChunks: chunkTranslator, rejectionReason \}\)/);
   assert.match(body, /const validatedText = text\n\s+\? await chunkTranslator\([\s\S]*pretranslatedResult/);
   assert.match(body, /if \(canFallback && \(codexModelUnavailable \|\| codexBudgetUnavailable \|\| codexDeadlineReached\s+\|\| !pendingBodySecondLaneAvailable\(\) \|\| rejected\.length > 0 \|\| !validatedText\)/);
   // Nessun orologio di modulo: i producer che importano translateArticle()
@@ -923,7 +924,8 @@ test('la catena storica riusa il chunker per un body pending sopra soglia', asyn
     translateFieldFreeMt,
     translatedStringOrNull,
     (value) => value,
-    ({ field, itValue, partLabel = '' }) => `body ${field}${partLabel}: ${itValue}`,
+    new Function(`${BUILD_PENDING_BODY_PROMPT_SRC}
+return buildPendingBodyRetranslationPrompt;`)(),
     (text) => String(text).trim().split(/\s+/).filter(Boolean).length,
     700,
     { error() {}, warn() {}, log() {} },
@@ -933,13 +935,14 @@ test('la catena storica riusa il chunker per un body pending sopra soglia', asyn
     longIt,
     'de',
     'body1',
-    { callWithRetry, translateInChunks },
+    { callWithRetry, translateInChunks, rejectionReason: 'localized-calendar' },
   );
 
-  assert.deepEqual(chunkCall, {
+  assert.match(chunkCall.prompt, /Controlla tutte le date/);
+  const { prompt: _prompt, ...chunkDetails } = chunkCall;
+  assert.deepEqual(chunkDetails, {
     bodyText: longIt,
     field: 'body1',
-    prompt: 'body body1, parte 1 di 2: primo chunk',
     labelPrefix: 'de:body1-pending-retry',
     targetLang: 'de',
   });
@@ -2693,8 +2696,10 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
   );
 
   const associationSource = 'A: 100, B: 200';
+  const associationDiagnostics = [];
   const associationTranslator = new Function(
     'splitIntoTranslationChunks', 'callWithRetry', 'countWords', 'translatedStringOrNull', 'isSourcePassthrough', 'balanceMarkdownMarkers', 'hasSameLineSkeleton', 'lineStructuralSignature', 'detectTruncation', 'opaqueSpanSignature',
+    'console',
     `${TRANSLATE_IN_CHUNKS_SRC}\nreturn translateInChunks;`,
   )(
     (bodyText) => realChunker(bodyText, 50),
@@ -2707,12 +2712,18 @@ test('il joiner protegge la sequenza numerica ma ammette i separatori locali', a
     lineStructuralSignature,
     detectTruncation,
     opaqueSpanSignature,
+    { error: (message) => associationDiagnostics.push(message) },
   );
   assert.equal(
     await associationTranslator(associationSource, 'body1', (chunk) => chunk, 'test', 'de'),
     null,
     'un numero riassociato al soggetto sbagliato deve essere rifiutato anche con la stessa sequenza globale',
   );
+  const associationLogs = associationDiagnostics.filter((message) => message.startsWith('TRANSLATION_NUMBER_ASSOCIATION '));
+  assert.equal(associationLogs.length, 1);
+  assert.match(associationLogs[0], /\bexactReason=value-order-mismatch\b/);
+  assert.match(associationLogs[0], /\banchoredReason=not-evaluated\b/);
+  assert.doesNotMatch(associationLogs[0], /100|200|\b[AB]\b/i);
 
   const lowercaseAssociationSource = 'a: 100, b: 200';
   const lowercaseAssociationTranslator = new Function(
@@ -3001,6 +3012,7 @@ test('il recovery missing-field usa il chunker per un body oversized', async () 
     'markBodyTranslationPending', 'isSourcePassthrough', 'rejectRawFaqControlEscape',
     'normalizeLocalizedToponymText', 'safeSignalDiagnosticTextForLog', 'translateInChunks',
     'countWords', 'TRANSLATION_CHUNK_THRESHOLD', 'buildPendingBodyRetranslationPrompt',
+    'freeMtFieldKey',
     `return (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
   );
   await fn(
@@ -3028,6 +3040,7 @@ test('il recovery missing-field usa il chunker per un body oversized', async () 
     countWords,
     TRANSLATION_CHUNK_THRESHOLD,
     buildPendingBodyRetranslationPrompt,
+    freeMtFieldKey,
   );
 
   assert.equal(calls.length, 2, 'un body appena sopra soglia deve usare piu richieste');

@@ -320,7 +320,7 @@ function webpFixture(byte) {
   return bytes;
 }
 
-async function publishFourLocaleSharedAsset({ localBytes, assetProbeImpl = null, assetKey = 'images/shared.webp', unrelatedKey = 'images/unrelated.webp' }) {
+async function publishFourLocaleSharedAsset({ localBytes, assetProbeImpl = null, assetKey = 'images/shared.webp', unrelatedKey = 'images/unrelated.webp', imageLeaseOps, events = [] }) {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-live-shared-asset-'));
   const sharedLocal = path.join(fixtureRoot, `shared${path.extname(assetKey)}`);
   const unrelatedLocal = path.join(fixtureRoot, 'unrelated.webp');
@@ -340,7 +340,6 @@ async function publishFourLocaleSharedAsset({ localBytes, assetProbeImpl = null,
   const oldHtml = `<!doctype html><html><body><img src="https://cdn.frontaliereticino.ch/${assetKey}"></body></html>`;
   const stagedHtml = `${oldHtml}${CORPUS_ROUTE_OWNER_META_TAG}`;
   const uploadedPageKeys = new Set();
-  const events = [];
   const assetProbeCalls = [];
   for (const page of pages) {
     const localPage = path.join(fixtureRoot, page.rel);
@@ -354,6 +353,7 @@ async function publishFourLocaleSharedAsset({ localBytes, assetProbeImpl = null,
       pages,
       immutablePages,
       snapshotPagesBeforeUpload: true,
+      imageLeaseOps,
       cdnUploads: [
         { local: sharedLocal, key: assetKey },
         { local: unrelatedLocal, key: unrelatedKey },
@@ -676,6 +676,75 @@ test('publisher: un cover identico nei namespace leased resta nel percorso prote
         assert.equal(fixture.result.uploaded, 4);
         assert.ok(!fixture.assetProbeCalls.includes(unrelatedKey), 'la probe fuori lease non decide per un asset leased');
         assert.ok(fixture.events.includes(`asset-upload:${unrelatedKey}`), 'l’asset leased segue l’uploader che prende il lease');
+      } finally {
+        fixture.cleanup();
+      }
+    });
+  }
+});
+
+test('publisher: copertina condivisa identica sblocca le quattro route mentre il lease è attivo', async (t) => {
+  for (const mode of ['bytes identici', 'bytes diversi', 'lease perso prima del PUT', 'lease occupato']) {
+    await t.test(mode, async () => {
+      const identical = mode !== 'bytes diversi';
+      const leaseLost = mode === 'lease perso prima del PUT';
+      const contended = mode === 'lease occupato';
+      const assetKey = 'images/blog/shared.webp';
+      const localBytes = webpFixture(0x11);
+      const remoteBytes = identical ? localBytes : webpFixture(0x22);
+      const events = [];
+      let held = false;
+      let verifications = 0;
+      const fixture = await publishFourLocaleSharedAsset({
+        localBytes, assetKey, events,
+        imageLeaseOps: {
+          acquire: async (namespaces, options) => {
+            assert.deepEqual(namespaces, ['blog']);
+            assert.equal(options.timeoutMs, undefined, 'usa il budget condiviso del lock');
+            if (contended) {
+              events.push('lease-contended');
+              throw new Error('[r2-image-namespace-lock] timed out waiting for namespace blog');
+            }
+            events.push('lease-acquired');
+            held = true;
+            return [{
+              namespace: 'blog', owner: 'fixture', leaseId: 'fixture',
+              acquiredAt: 1, expiresAt: Date.now() + 60_000,
+            }];
+          },
+          verify: async (_context, namespace) => {
+            assert.equal(namespace, 'blog');
+            assert.equal(held, true);
+            events.push('lease-verified');
+            if (++verifications === 2 && leaseLost) throw new Error('lease non più posseduto');
+          },
+          release: async () => {
+            assert.equal(held, true);
+            events.push('lease-released');
+            held = false;
+            return { status: 'released' };
+          },
+        },
+        assetProbeImpl: async (key) => {
+          assert.equal(key, assetKey);
+          assert.equal(held, true);
+          events.push('asset-verified');
+          return { ok: true, status: 200, contentType: 'image/webp', byteLength: remoteBytes.length, sha256: sha256(remoteBytes) };
+        },
+      });
+      try {
+        assert.equal(fixture.result.failures, leaseLost ? 1 : 0);
+        assert.equal(fixture.result.uploaded, identical && !leaseLost && !contended ? 4 : 0);
+        if (!leaseLost) assert.equal(fixture.result.deferredAssetPages, identical && !contended ? 0 : 4);
+        assert.equal(held, false);
+        assert.ok(!events.includes(`asset-upload:${assetKey}`));
+        assert.ok(events.indexOf('asset-upload:images/unrelated.webp') < events.indexOf(contended ? 'lease-contended' : 'lease-acquired'));
+        if (contended) assert.deepEqual(fixture.assetProbeCalls, []);
+        for (const event of events.filter((value) => value.startsWith('page-upload:'))) {
+          const at = events.indexOf(event);
+          assert.equal(events[at - 1], 'lease-verified');
+          assert.ok(at < events.indexOf('lease-released'));
+        }
       } finally {
         fixture.cleanup();
       }

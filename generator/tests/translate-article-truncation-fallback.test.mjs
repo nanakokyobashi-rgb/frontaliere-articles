@@ -56,6 +56,7 @@ import { hasUsableContentText, hasUsableTranslatedText, metaFieldPlausibilityMis
 import { rejectRawFaqControlEscape } from '../../scripts/lib/faq-control-contract.mjs';
 import {
   createFreeMtRecoveryReport,
+  freeMtFieldKey,
   claimFreeMtLlmFallback,
   recordFreeMtUnusableOutput,
   wasFreeMtUnusable,
@@ -159,7 +160,7 @@ async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTrunc
     throw new Error('translateInChunks chiamato senza mock — il test non lo aspettava per un body oversized');
   };
   const chunkTranslator = translateInChunks || noopTranslateInChunks;
-  const validatePretranslatedBody = async (bodyText, fieldKey, translated, targetLang, labelPrefix) => {
+  const validatePretranslatedBody = async (bodyText, fieldKey, translated, targetLang, labelPrefix, onReject) => {
     const text = translatedStringOrNull(translated, targetLang);
     if (text === null) return null;
     return chunkTranslator(
@@ -168,7 +169,7 @@ async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTrunc
       () => '',
       labelPrefix,
       targetLang,
-      { pretranslatedResult: { [fieldKey]: text } },
+      { pretranslatedResult: { [fieldKey]: text }, onReject },
     );
   };
   // `markBodyTranslationPending` e' quello VERO (#1875): e' lui a decidere che
@@ -180,12 +181,13 @@ async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTrunc
     'markBodyTranslationPending', 'isSourcePassthrough', 'rejectRawFaqControlEscape', 'normalizeLocalizedToponymText',
     'translateInChunks', 'validatePretranslatedBody',
     'safeSignalDiagnosticTextForLog', 'countWords', 'TRANSLATION_CHUNK_THRESHOLD', 'buildPendingBodyRetranslationPrompt',
+    'freeMtFieldKey',
     `${TABLE_HEADER_MARKER_HELPERS_SRC}\nreturn (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
   );
   // `metaFieldPlausibilityMiss` e' il floor VERO (#798), non un mock: il ramo
   // floor-miss del loop tiene il valore tradotto invece di cadere sul fallback
   // IT, e un mock qui non proverebbe quel comportamento.
-  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, freeMt, claimFreeMtLlmFallback, wasFreeMtUnusable, maxFreeMtLlmFallbacksPerLocale, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE, markBodyTranslationPending, isSourcePassthrough, rejectRawFaqControlEscape, normalizeLocalizedToponymText, chunkTranslator, validatePretranslatedBody, ARTICLE_SIGNAL_LOG_HELPERS.safeSignalDiagnosticTextForLog, REAL_COUNT_WORDS, TRANSLATION_CHUNK_THRESHOLD, REAL_BUILD_PENDING_BODY_RETRANSLATION_PROMPT);
+  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, freeMt, claimFreeMtLlmFallback, wasFreeMtUnusable, maxFreeMtLlmFallbacksPerLocale, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE, markBodyTranslationPending, isSourcePassthrough, rejectRawFaqControlEscape, normalizeLocalizedToponymText, chunkTranslator, validatePretranslatedBody, ARTICLE_SIGNAL_LOG_HELPERS.safeSignalDiagnosticTextForLog, REAL_COUNT_WORDS, TRANSLATION_CHUNK_THRESHOLD, REAL_BUILD_PENDING_BODY_RETRANSLATION_PROMPT, freeMtFieldKey);
   return RUN_REPORT;
 }
 
@@ -539,6 +541,49 @@ test('ramo missing-field: body1 tradotto = "null" viene letto come MANCANTE e ri
 
   assert.deepEqual(calls, ['de:body1-missing-retry'], 'il retry mirato deve partire proprio su de:body1');
   assert.equal(data.content.de.body1, 'Echter deutscher Text.');
+});
+
+test('primo retry mirato: usa il motivo del rifiuto free-MT soltanto per il body e la lingua interessati', async () => {
+  const itContent = { ...META_PLAUSIBILI, body1: 'Corpo italiano con dati.' };
+  const data = { content: { en: { ...META_PLAUSIBILI }, de: { ...META_PLAUSIBILI }, fr: { ...META_PLAUSIBILI } } };
+  const translationReport = {
+    ...createFreeMtRecoveryReport(),
+    bodyValidationRejections: { 'en:body1': 'numeric-values', 'fr:body1': 'line-skeleton' },
+  };
+  const prompts = new Map();
+  await runMissingFieldLoop({
+    data, itContent, translationReport,
+    callWithRetry: async (prompt, _tokens, label) => {
+      prompts.set(label, prompt);
+      return { body1: 'A translated body containing data.' };
+    },
+  });
+  assert.match(prompts.get('en:body1-missing-retry'), /Confronta tutte le cifre/);
+  assert.match(prompts.get('fr:body1-missing-retry'), /Confronta il Markdown riga per riga/);
+  assert.doesNotMatch(prompts.get('de:body1-missing-retry'), /CORREZIONE RICHIESTA/);
+});
+
+test('primo retry mirato: conserva il motivo più recente per la corsia di riserva', async () => {
+  const itContent = { ...META_PLAUSIBILI, body1: 'La scadenza è il 18 novembre 2026.' };
+  const data = { content: {
+    en: { ...META_PLAUSIBILI },
+    de: { ...META_PLAUSIBILI, body1: 'Gültiger deutscher Text.' },
+    fr: { ...META_PLAUSIBILI, body1: 'Texte français valide.' },
+  } };
+  const report = await runMissingFieldLoop({
+    data, itContent,
+    translationReport: {
+      ...createFreeMtRecoveryReport(),
+      bodyValidationRejections: { 'en:body1': 'numeric-values' },
+    },
+    callWithRetry: async () => ({ body1: 'The deadline is November 18, 2025.' }),
+    translateInChunks: async (_source, _field, _prompt, _label, _locale, { onReject }) => {
+      onReject('localized-calendar');
+      return null;
+    },
+  });
+  assert.equal(report.translation.bodyValidationRejections['en:body1'], 'localized-calendar');
+  assert.equal(isBodyTranslationPending(data, 'en', 'body1'), true);
 });
 
 test('ramo missing-field: "null" doppiamente serializzato — excerpt sul fallback IT, body NON tradotto quando il retry non produce nulla (#799, #1875)', async () => {

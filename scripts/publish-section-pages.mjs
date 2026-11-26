@@ -98,7 +98,11 @@ import {
 } from './lib/section-page-manifest.mjs';
 import {
   IMAGE_LEASE_CONTEXT_ENV,
+  acquireImageNamespaceLeases,
   imageNamespaceForKey,
+  releaseImageNamespaceLeasesWithDeadline,
+  serializeImageLeaseContext,
+  verifyImageNamespaceLease,
 } from './lib/r2-image-namespace-lock.mjs';
 import { purgeChunks } from './lib/cf-purge-variants.mjs';
 import {
@@ -1692,16 +1696,11 @@ function sha256(bytes) {
 }
 
 async function findIdenticalCantonAssetKeys({ candidateKeys, uploadByKey, assetProbeImpl }) {
-  // A CDN probe is only an observation. For an image namespace, it cannot
-  // authorize skipping the uploader's lease: another publisher may replace
-  // the object between this probe and the dependent page upload. Keep leased
-  // image keys on the normal held/upload path instead.
-  const comparableKeys = candidateKeys.filter((key) => !imageNamespaceForKey(key));
   const unchanged = new Set();
   let cursor = 0;
-  const workers = Array.from({ length: Math.min(HELD_ASSET_PROBE_CONCURRENCY, comparableKeys.length) }, async () => {
-    while (cursor < comparableKeys.length) {
-      const key = comparableKeys[cursor++];
+  const workers = Array.from({ length: Math.min(HELD_ASSET_PROBE_CONCURRENCY, candidateKeys.length) }, async () => {
+    while (cursor < candidateKeys.length) {
+      const key = candidateKeys[cursor++];
       const localBytes = localCantonAssetBytes(uploadByKey.get(key)?.local);
       if (!localBytes || !imageBytesMatchAssetKey(
         localBytes,
@@ -2282,6 +2281,11 @@ export async function publish({
   requiredPagePaths = [],
   assertMainFreshImpl = async () => {},
   imageLeaseContext = null,
+  imageLeaseOps = {
+    acquire: acquireImageNamespaceLeases,
+    verify: verifyImageNamespaceLease,
+    release: releaseImageNamespaceLeasesWithDeadline,
+  },
   signal,
 }) {
   if (imageLeaseContext) {
@@ -2294,6 +2298,7 @@ export async function publish({
   let verifiedRssFeeds = cantonRssFeeds;
   let rollbackRssPublication = null;
   let pageSnapshots = null;
+  const attemptedHtmlPuts = [];
   let pagesForUpload = pages;
   const requiredPagePathSet = new Set(requiredPagePaths);
   const rollbackRss = async ({ neutralize = false } = {}) => {
@@ -2326,7 +2331,7 @@ export async function publish({
     pageSnapshots = null;
     try {
       const result = await rollbackCantonPages({
-        pages: pagesForUpload,
+        pages: snapshotPagesBeforeUpload && !rollbackRssPublication ? attemptedHtmlPuts : pagesForUpload,
         snapshots,
         distDir,
         runImpl,
@@ -2377,8 +2382,21 @@ export async function publish({
   const immutableMismatches = [];
   let status = beforeStatus;
   console.log(`[${LOG}] preflight: sezione ${section} nel registro pubblicato = ${beforeStatus}`);
+  const heldKeysByPage = new Map();
+  const namespacesByPage = new Map();
   let heldAssetKeys = new Set();
   let unchangedAssetKeys = new Set();
+  let candidateKeys = [];
+  let uploadByKey = new Map();
+  let stagingSnapshots = null;
+  let imageLeases = [];
+  let sharedCoverContext = imageLeaseContext;
+  const releaseSharedCoverLeases = async () => {
+    if (imageLeases.length === 0) return;
+    const result = await imageLeaseOps.release(imageLeases, { perLease: true });
+    if (result.status !== 'released') throw result.error ?? new Error('rilascio lease delle copertine non confermato');
+    imageLeases = [];
+  };
   if (snapshotPagesBeforeUpload && !pageSnapshots) {
     await assertMainFreshImpl();
     try {
@@ -2417,38 +2435,23 @@ export async function publish({
           .filter(({ key }) => immutableBodies.some((body) => cantonPageReferencesAsset(body, key)))
           .map(({ key }) => key),
       );
-      const uploadByKey = new Map(cdnUploads.map((upload) => [upload.key, upload]));
-      const candidateKeys = new Set();
-      for (const page of pages) {
-        const local = path.join(distDir, page.rel);
-        if (!fs.existsSync(local)) continue;
-        const body = fs.readFileSync(local, 'utf8');
-        for (const key of heldAssetKeys) {
-          if (cantonPageReferencesAsset(body, key)) candidateKeys.add(key);
-        }
-      }
-      unchangedAssetKeys = await findIdenticalCantonAssetKeys({
-        candidateKeys: [...candidateKeys],
-        uploadByKey,
-        assetProbeImpl,
-      });
-      await publishSignalBoundary(signal);
-      for (const key of unchangedAssetKeys) heldAssetKeys.delete(key);
-      const heldPageKeys = new Set();
+      uploadByKey = new Map(cdnUploads.map((upload) => [upload.key, upload]));
       for (const page of pages) {
         const local = path.join(distDir, page.rel);
         if (!fs.existsSync(local) || heldAssetKeys.size === 0) continue;
         const body = fs.readFileSync(local, 'utf8');
-        if ([...heldAssetKeys].some((key) => cantonPageReferencesAsset(body, key))) {
-          heldPageKeys.add(page.edgeKey);
-          const reason = requiredPagePathSet.has(page.canonicalPath)
-            ? 'il target mancante resta differito finché ogni asset condiviso non è verificato sul CDN'
-            : 'il render nuovo riusa un asset trattenuto dalla superficie precedente';
-          console.log(`::notice::[${LOG}] release live differita: differisco anche ${page.edgeKey}; ${reason}`);
-        }
+        const references = [...heldAssetKeys].filter((key) => cantonPageReferencesAsset(body, key));
+        if (references.length > 0) heldKeysByPage.set(page.edgeKey, references);
       }
-      pagesForUpload = pages.filter((page) => !heldPageKeys.has(page.edgeKey));
-      pageSnapshots = new Map(uniqueCantonPages(pagesForUpload).map((page) => [page.edgeKey, snapshots.get(page.edgeKey)]));
+      candidateKeys = [...new Set([...heldKeysByPage.values()].flat())];
+      unchangedAssetKeys = await findIdenticalCantonAssetKeys({
+        candidateKeys: candidateKeys.filter((key) => !imageNamespaceForKey(key)),
+        uploadByKey,
+        assetProbeImpl,
+      });
+      // Keep the snapshots until the lease-protected comparison selects the
+      // exact set of pages whose shared assets can safely be reused.
+      stagingSnapshots = snapshots;
     } catch (error) {
       console.error(`::error::[${LOG}] snapshot della release HTML precedente fallito: ${error?.message ?? String(error)}`);
       return { failures: 1, uploaded: 0, deleted: 0, status: beforeStatus };
@@ -2474,6 +2477,46 @@ export async function publish({
     return { failures, uploaded: 0, deleted: 0, status: beforeStatus };
   }
   try {
+  // Take the lease after the regular image PUTs, which acquire it themselves.
+  // Hold it through the dependent HTML PUTs and release it before purge.
+  const leasedCandidates = candidateKeys.filter(imageNamespaceForKey);
+  const sharedNamespaces = [...new Set(leasedCandidates.map(imageNamespaceForKey))];
+  if (sharedNamespaces.length > 0 && !sharedCoverContext) {
+    try {
+      imageLeases = await imageLeaseOps.acquire(sharedNamespaces, { signal });
+      sharedCoverContext = serializeImageLeaseContext(imageLeases);
+    } catch (error) {
+      const contention = sharedNamespaces.some((namespace) =>
+        error?.message === `[r2-image-namespace-lock] timed out waiting for namespace ${namespace}`);
+      if (!contention) throw error;
+      console.log(`::notice::[${LOG}] lease delle copertine occupato: le pagine dipendenti restano differite`);
+    }
+  }
+  if (sharedNamespaces.length > 0 && sharedCoverContext) {
+    for (const namespace of sharedNamespaces) await imageLeaseOps.verify(sharedCoverContext, namespace);
+    const identical = await findIdenticalCantonAssetKeys({
+      candidateKeys: leasedCandidates, uploadByKey, assetProbeImpl,
+    });
+    for (const key of identical) unchangedAssetKeys.add(key);
+  }
+  if (heldKeysByPage.size > 0) {
+    pagesForUpload = pages.filter((page) => {
+      const references = heldKeysByPage.get(page.edgeKey) ?? [];
+      if (references.every((key) => unchangedAssetKeys.has(key))) {
+        const namespaces = [...new Set(references.map(imageNamespaceForKey).filter(Boolean))];
+        if (namespaces.length > 0) namespacesByPage.set(page.edgeKey, namespaces);
+        return true;
+      }
+      const reason = requiredPagePathSet.has(page.canonicalPath)
+        ? 'il target mancante resta differito finché ogni asset condiviso non è verificato sul CDN'
+        : 'il render nuovo riusa un asset trattenuto dalla superficie precedente';
+      console.log(`::notice::[${LOG}] release live differita: differisco anche ${page.edgeKey}; ${reason}`);
+      return false;
+    });
+  }
+  if (stagingSnapshots) {
+    pageSnapshots = new Map(pagesForUpload.map(({ edgeKey }) => [edgeKey, stagingSnapshots.get(edgeKey)]));
+  }
   if (cantonRssFeeds.length > 0 || removeStaleCantonRssFeeds) {
     const rssStatus = await publishedStatusImpl(section);
     if (rssStatus !== 'live' && !removeStaleCantonRssFeeds) {
@@ -2532,6 +2575,11 @@ export async function publish({
   for (const page of inUploadOrder(pagesForUpload)) {
     await assertMainFreshImpl();
     await publishSignalBoundary(signal);
+    for (const namespace of namespacesByPage.get(page.edgeKey) ?? []) {
+      await imageLeaseOps.verify(sharedCoverContext, namespace);
+    }
+    // Even a failed PUT may already have changed the object remotely.
+    attemptedHtmlPuts.push(page);
     const { code = 1, stdout = '' } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', path.join(distDir, page.rel), page.edgeKey, PAGE_CACHE_CONTROL]);
     if (code === 0 && stdout.includes('✅ uploaded')) uploaded.push(page);
     else {
@@ -2539,6 +2587,7 @@ export async function publish({
       console.log(`::error::[${LOG}] pagina non caricata: ${page.edgeKey}`);
     }
   }
+  await releaseSharedCoverLeases();
 
   // Non cancellare URL della release precedente finche' la nuova release non
   // e' stata caricata, purgata e letta. Durante il normale interleaving con
@@ -2684,6 +2733,8 @@ export async function publish({
     console.error(`::error::[${LOG}] pubblicazione ${section} fallita: ${error?.message ?? String(error)}`);
     const rollbackFailures = await rollbackRssAfterObsoleteMutation();
     return { failures: 1 + rollbackFailures, rollbackFailures, uploaded: uploaded.length, deleted: 0, status };
+  } finally {
+    await releaseSharedCoverLeases();
   }
 }
 
