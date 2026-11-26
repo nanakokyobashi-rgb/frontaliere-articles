@@ -391,6 +391,8 @@ esac
         CHAIN_MAX_RUNS_PER_HOUR: '', CALLER_WORKFLOW: caller,
         ...env,
         CANTON_ONLY: workflow.match(/^ +CANTON_ONLY: \|-\n((?: {12}[^\n]*\n)+)/m)?.[1] ?? '',
+        CANTON_REGISTRY_DELTA: workflow.match(/^ +CANTON_REGISTRY_DELTA: \|-\n((?: {12}[^\n]*\n)+)/m)?.[1] ?? '',
+        ADMISSION_RUN_SNAPSHOT: workflow.match(/^ +ADMISSION_RUN_SNAPSHOT: \|-\n((?: {12}[^\n]*\n)+)/m)[1],
         BODY_MAINTENANCE_PATH_RE: SOURCE.match(/^\s+BODY_MAINTENANCE_PATH_RE: '([^']+)'$/m)[1],
       },
     });
