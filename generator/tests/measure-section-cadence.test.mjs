@@ -4,12 +4,14 @@ import {
   aggregateM1BySection,
   buildArticleRecords,
   buildM6ArticleRecords,
+  buildM6RuntimeLogCoverage,
   countCorpusArticlesBySection,
   commitTouchedSections,
   countCronOccurrences,
   extractCanonical,
   extractDatePublished,
   countPushFiveAttemptExhaustions,
+  createM6InputSnapshot,
   generationJobWasAdmitted,
   hasCompleteM5Coverage,
   m6ZeroIsDateIndependent,
@@ -28,7 +30,9 @@ import {
   summarizeDedupRuntimeEvidence,
   computePolicyThresholdFromParameters,
   summarizeM1IndexCoverage,
+  verifyM6InputSnapshot,
 } from '../../scripts/ci/measure-section-cadence.mjs';
+import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 
 test('date windows use inclusive Zurich calendar dates across the CET offset', () => {
   const window = makeDateWindow('2026-11-25', '2026-11-25');
@@ -390,6 +394,67 @@ test('M4 historical gaps and unassigned run evidence cannot become available zer
     missingCounters: 0, structuredMarkers: 2, historicalWindow: false, missingLogs: 0, unassignedRuns: 1, observedRuns: 4,
   }), 'partial_unassigned_generation_runs');
   assert.equal(hasCompleteM5Coverage({ missingLogs: 0, unassignedStartedRuns: 1 }), false);
+});
+
+test('M6 runner coverage is complete only when every admitted run log is assigned and readable', () => {
+  const report = {
+    unassigned: { m4EligibleRuns: 0 },
+    metrics: {
+      frontaliere: { llmExpectedAttempts: 2, m4RunsWithReadableLogs: 2, m4RunsWithoutLogs: 0 },
+    },
+  };
+  const coverage = buildM6RuntimeLogCoverage(report);
+  assert.deepEqual(coverage.frontaliere, {
+    expectedGenerationAttempts: 2,
+    readableRuns: 2,
+    missingLogs: 0,
+    unassignedEligibleRuns: 0,
+    complete: true,
+  });
+  assert.deepEqual(buildM6RuntimeLogCoverage({ generationEvidence: report }).frontaliere, coverage.frontaliere);
+  assert.equal(coverage.svizzera.complete, false);
+  assert.equal(buildM6RuntimeLogCoverage({
+    ...report,
+    unassigned: { m4EligibleRuns: 1 },
+  }).frontaliere.complete, false);
+  assert.equal(buildM6RuntimeLogCoverage({
+    ...report,
+    metrics: { frontaliere: { llmExpectedAttempts: 1, m4RunsWithReadableLogs: 0, m4RunsWithoutLogs: 0 } },
+  }).frontaliere.complete, false);
+  assert.equal(buildM6RuntimeLogCoverage({
+    ...report,
+    metrics: { frontaliere: { llmExpectedAttempts: 1, m4RunsWithReadableLogs: -1, m4RunsWithoutLogs: 0 } },
+  }).frontaliere.complete, false);
+});
+
+test('M6 input snapshot binds candidate text and counts to a checksum-validated manifest window', () => {
+  const sectionArticleCounts = Object.fromEntries(Object.keys(ARTICLE_SECTION_CORE_ALL).map((section) => [section, 0]));
+  const candidateCountsBySection = { ...sectionArticleCounts, frontaliere: 1 };
+  const snapshot = createM6InputSnapshot({
+    articles: [{
+      id: 'candidate-1', section: 'frontaliere', kind: ARTICLE_SECTION_CORE_ALL.frontaliere.kind,
+      publishedDate: '2026-11-25', title: 'Public title', excerpt: 'Public excerpt',
+    }],
+    dateUncertainArticles: [{
+      id: 'candidate-2', section: 'frontaliere', kind: ARTICLE_SECTION_CORE_ALL.frontaliere.kind,
+      publishedDate: null, dateStatus: 'unknown_in_published_index', title: 'Undated title', excerpt: 'Undated excerpt',
+    }],
+    indexRowCount: 2,
+    candidateRecordCount: 2,
+    countsBySection: candidateCountsBySection,
+    coverageComplete: false,
+    upperBoundCoverageComplete: true,
+  }, '86a364f1d224d8002e2df83d9dcdb3e61609f364', sectionArticleCounts, {
+    cutoffDate: '2026-08-28',
+    untilDate: '2026-11-25',
+    skippedCandidateRecords: 0,
+    skippedByReason: {},
+    recordsWithUnknownDate: 1,
+  });
+  assert.equal(verifyM6InputSnapshot(snapshot, '2026-11-25').records.length, 2);
+  assert.equal(snapshot.upperBoundCoverageComplete, true);
+  assert.throws(() => verifyM6InputSnapshot({ ...snapshot, records: snapshot.records.slice(0, 1) }, '2026-11-25'), /checksum mismatch/);
+  assert.throws(() => verifyM6InputSnapshot(snapshot, '2026-11-24'), /checksum mismatch|metadata/);
 });
 
 test('M6 availability requires observed production gate evidence unless zero is date-independent', () => {

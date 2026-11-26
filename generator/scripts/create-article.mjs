@@ -7241,16 +7241,6 @@ function verifiedCantonFactsBlock(referenceText = '') {
 }
 
 async function llmFactCheck(contentIt, sourceContent = '', sourceUrl = '', verifiedReferenceText = '', { preTranslationDeadlineMs = Infinity } = {}) {
-  return withLlmCallStage('factCheck', () => llmFactCheckInStage(
-    contentIt,
-    sourceContent,
-    sourceUrl,
-    verifiedReferenceText,
-    { preTranslationDeadlineMs },
-  ));
-}
-
-async function llmFactCheckInStage(contentIt, sourceContent = '', sourceUrl = '', verifiedReferenceText = '', { preTranslationDeadlineMs = Infinity } = {}) {
   const articleText = [
     contentIt?.title || '',
     contentIt?.excerpt || '',
@@ -16273,10 +16263,6 @@ function removeFaqPairsWithRejectedControls(content, locale) {
 }
 
 async function translateArticle(data) {
-  return withLlmCallStage('translation', () => translateArticleInStage(data));
-}
-
-async function translateArticleInStage(data) {
   // Il report di recovery è una quota PER ARTICOLO. RUN_REPORT vive più a
   // lungo del funnel: senza reset, un secondo articolo erediterebbe i campi
   // rifiutati e i claim già spesi dal primo (issue #1244).
@@ -23363,10 +23349,6 @@ async function main() {
 
 /** Core article pipeline: fetch → generate IT → validate → duplicates → translate → sanitize → image → modify files → git */
 async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
-  return withLlmCallStage('generation', () => generateAndValidateArticleInStage(sourceUrl, sourceContext));
-}
-
-async function generateAndValidateArticleInStage(sourceUrl, sourceContext = null) {
   const translationDeadlineMs = initialTranslationDeadlineMs();
   // The shared cutoff leaves the minimum Codex call window plus the same
   // amount for preparing the translations. The helper already accounts for
@@ -26173,6 +26155,19 @@ const invokedDirectly = (() => {
   }
 })();
 
+// Keep the original source bodies and call sites stable for the source-level
+// safety contracts. Replace only their runtime bindings after declarations.
+const classifyFrontaliereRelevanceWithoutStage = classifyFrontaliereRelevance;
+classifyFrontaliereRelevance = (...args) => withLlmCallStage('selection', () => classifyFrontaliereRelevanceWithoutStage(...args));
+const requestHeadlineSelectionWithoutStage = requestHeadlineSelection;
+requestHeadlineSelection = (...args) => withLlmCallStage('selection', () => requestHeadlineSelectionWithoutStage(...args));
+const llmFactCheckWithoutStage = llmFactCheck;
+llmFactCheck = (...args) => withLlmCallStage('factCheck', () => llmFactCheckWithoutStage(...args));
+const translateArticleWithoutStage = translateArticle;
+translateArticle = (...args) => withLlmCallStage('translation', () => translateArticleWithoutStage(...args));
+const generateAndValidateArticleWithoutStage = generateAndValidateArticle;
+generateAndValidateArticle = (...args) => withLlmCallStage('generation', () => generateAndValidateArticleWithoutStage(...args));
+
 if (invokedDirectly) {
   // Registered as the FIRST thing inside the CLI guard, i.e. BEFORE ai-models.mjs
   // arms its own SIGTERM hook on first use (lazy, at first score persistence
@@ -26224,7 +26219,11 @@ if (invokedDirectly) {
   // esito: exit 1, con la ragione. Non copre il caso «articolo prodotto» perche'
   // li' lo status e' `generated` e si esce 0, come sempre.
   resetLlmProviderRequests();
-  withLlmCallStage('selection', () => main()).then(async () => {
+  const generationAttempt = Number(process.env.CREATE_ARTICLE_GENERATION_ATTEMPT);
+  if (Number.isInteger(generationAttempt) && generationAttempt > 0) {
+    console.error(`GENERATION_ATTEMPT attempt=${generationAttempt} section=${SECTION_NAME || 'unknown'}`);
+  }
+  main().then(async () => {
     if (RUN_REPORT?.status === 'generated') return;
     console.error(
       `\n❌ Uscita non dichiarata: main() e' ritornato con status='${RUN_REPORT?.status ?? '(mai finalizzato)'}'`

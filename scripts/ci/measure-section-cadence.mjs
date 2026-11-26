@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { execFile, execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -696,6 +697,131 @@ export function buildM6ArticleRecords(api, cutoffDate, endDate) {
   };
 }
 
+function sha256Json(value) {
+  return createHash('sha256').update(JSON.stringify(value)).digest('hex');
+}
+
+export function createM6InputSnapshot(corpus, manifestCommit, sectionArticleCounts, indexCoverage) {
+  if (!/^[a-f0-9]{40}$/i.test(manifestCommit || '')) throw new Error('M6 snapshot requires a validated manifest commit');
+  const sections = Object.keys(ARTICLE_SECTION_CORE_ALL).sort();
+  const countMaps = [sectionArticleCounts, corpus.countsBySection];
+  for (const counts of countMaps) {
+    if (!counts || Object.keys(counts).sort().join('\0') !== sections.join('\0')
+      || Object.values(counts).some((count) => !Number.isInteger(count) || count < 0)) {
+      throw new Error('M6 snapshot requires complete nonnegative per-section counts');
+    }
+  }
+  if (!Number.isInteger(corpus.indexRowCount) || corpus.indexRowCount < 0
+    || !Number.isInteger(corpus.candidateRecordCount) || corpus.candidateRecordCount < 0
+    || !Number.isInteger(indexCoverage.skippedCandidateRecords) || indexCoverage.skippedCandidateRecords < 0
+    || !Number.isInteger(indexCoverage.recordsWithUnknownDate) || indexCoverage.recordsWithUnknownDate < 0) {
+    throw new Error('M6 snapshot requires complete nonnegative index coverage counts');
+  }
+  const records = [...corpus.articles, ...corpus.dateUncertainArticles]
+    .map((article) => ({
+      id: article.id,
+      section: article.section,
+      kind: article.kind,
+      publishedDate: article.publishedDate || null,
+      dateStatus: article.dateStatus || 'known',
+      title: article.title,
+      excerpt: article.excerpt,
+    }))
+    .sort((left, right) => left.section.localeCompare(right.section) || left.id.localeCompare(right.id));
+  const payload = {
+    schemaVersion: 1,
+    manifestCommit: manifestCommit.toLowerCase(),
+    sectionArticleCounts,
+    cutoffDate: indexCoverage.cutoffDate,
+    untilDate: indexCoverage.untilDate,
+    indexRows: corpus.indexRowCount,
+    candidateRecords: corpus.candidateRecordCount,
+    mappedCandidateRecords: records.length,
+    skippedCandidateRecords: indexCoverage.skippedCandidateRecords,
+    skippedByReason: indexCoverage.skippedByReason,
+    recordsWithUnknownDate: indexCoverage.recordsWithUnknownDate,
+    coverageComplete: corpus.coverageComplete,
+    upperBoundCoverageComplete: corpus.upperBoundCoverageComplete,
+    candidateCountsBySection: corpus.countsBySection,
+    records,
+  };
+  return { ...payload, checksum: sha256Json(payload) };
+}
+
+export function verifyM6InputSnapshot(snapshot, endDate) {
+  if (!snapshot || snapshot.schemaVersion !== 1 || !Array.isArray(snapshot.records)) {
+    throw new Error('M6 input snapshot has an unsupported or incomplete schema');
+  }
+  const { checksum, ...payload } = snapshot;
+  if (!/^[a-f0-9]{64}$/i.test(checksum || '') || sha256Json(payload) !== checksum) {
+    throw new Error('M6 input snapshot checksum mismatch');
+  }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(endDate || '')
+    || new Date(`${endDate}T00:00:00Z`).toISOString().slice(0, 10) !== endDate) {
+    throw new Error('M6 input snapshot requires a valid end date');
+  }
+  const [year, month, day] = endDate.split('-').map(Number);
+  const expectedCutoff = new Date(Date.UTC(year, month - 1, day - 89));
+  const cutoffDate = expectedCutoff.toISOString().slice(0, 10);
+  const expectedSections = Object.keys(ARTICLE_SECTION_CORE_ALL).sort();
+  const manifestCounts = snapshot.sectionArticleCounts || {};
+  const candidateCounts = snapshot.candidateCountsBySection || {};
+  const hasExactSectionCounts = [manifestCounts, candidateCounts].every((counts) => (
+    Object.keys(counts).sort().join('\0') === expectedSections.join('\0')
+      && Object.values(counts).every((count) => Number.isInteger(count) && count >= 0)
+  ));
+  if (snapshot.untilDate !== endDate || snapshot.cutoffDate !== cutoffDate
+    || !/^[a-f0-9]{40}$/i.test(snapshot.manifestCommit || '')
+    || !Number.isInteger(snapshot.indexRows) || snapshot.indexRows < 0
+    || !Number.isInteger(snapshot.candidateRecords) || snapshot.candidateRecords < 0
+    || snapshot.mappedCandidateRecords !== snapshot.records.length
+    || !Number.isInteger(snapshot.skippedCandidateRecords) || snapshot.skippedCandidateRecords < 0
+    || !Number.isInteger(snapshot.recordsWithUnknownDate) || snapshot.recordsWithUnknownDate < 0
+    || snapshot.candidateRecords !== snapshot.mappedCandidateRecords + snapshot.skippedCandidateRecords
+    || typeof snapshot.coverageComplete !== 'boolean'
+    || typeof snapshot.upperBoundCoverageComplete !== 'boolean'
+    || !hasExactSectionCounts
+    || !snapshot.skippedByReason || typeof snapshot.skippedByReason !== 'object' || Array.isArray(snapshot.skippedByReason)
+    || Object.values(snapshot.skippedByReason).some((count) => !Number.isInteger(count) || count < 0)) {
+    throw new Error('M6 input snapshot metadata does not match the requested window or counts');
+  }
+  const seen = new Set();
+  const knownCandidatesBySection = Object.fromEntries(expectedSections.map((section) => [section, 0]));
+  let includedUnknownDateRecords = 0;
+  for (const record of snapshot.records) {
+    if (!record || typeof record.id !== 'string' || !record.id.trim()
+      || !ARTICLE_SECTION_CORE_ALL[record.section]
+      || record.kind !== ARTICLE_SECTION_CORE_ALL[record.section].kind
+      || typeof record.title !== 'string' || !record.title.trim()
+      || typeof record.excerpt !== 'string' || !record.excerpt.trim()) {
+      throw new Error('M6 input snapshot contains an incomplete candidate record');
+    }
+    const key = `${record.section}:${record.id}`;
+    if (seen.has(key)) throw new Error(`M6 input snapshot contains duplicate candidate ${key}`);
+    seen.add(key);
+    if (record.dateStatus === 'unknown_in_published_index') {
+      if (record.publishedDate !== null) throw new Error(`unknown-date candidate ${key} unexpectedly has a date`);
+      includedUnknownDateRecords += 1;
+    } else if (record.dateStatus === 'known') {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(record.publishedDate || '')
+        || new Date(`${record.publishedDate}T00:00:00Z`).toISOString().slice(0, 10) !== record.publishedDate
+        || record.publishedDate < snapshot.cutoffDate || record.publishedDate > snapshot.untilDate) {
+        throw new Error(`M6 input snapshot candidate ${key} is outside the requested date window`);
+      }
+      knownCandidatesBySection[record.section] += 1;
+    } else throw new Error(`M6 input snapshot candidate ${key} has an unknown date status`);
+  }
+  if (includedUnknownDateRecords > snapshot.recordsWithUnknownDate
+    || expectedSections.some((section) => candidateCounts[section] !== knownCandidatesBySection[section])
+    || snapshot.indexRows < snapshot.candidateRecords
+    || snapshot.coverageComplete !== (snapshot.skippedCandidateRecords === 0 && snapshot.recordsWithUnknownDate === 0)
+    || snapshot.upperBoundCoverageComplete !== (snapshot.skippedCandidateRecords === 0
+      && includedUnknownDateRecords === snapshot.recordsWithUnknownDate)) {
+    throw new Error('M6 input snapshot candidate records do not match its coverage counts');
+  }
+  return snapshot;
+}
+
 export function countCorpusArticlesBySection(articles, sections = Object.keys(ARTICLE_SECTION_CORE_ALL)) {
   const counts = Object.fromEntries(sections.map((section) => [section, 0]));
   for (const article of articles) {
@@ -949,6 +1075,31 @@ export function m4MetricsAvailability({ missingCounters, structuredMarkers, hist
 
 export function hasCompleteM5Coverage({ missingLogs, unassignedStartedRuns }) {
   return missingLogs === 0 && unassignedStartedRuns === 0;
+}
+
+export function buildM6RuntimeLogCoverage(generationReport) {
+  const evidence = generationReport?.generationEvidence || generationReport;
+  const metrics = evidence?.metrics;
+  const unassignedEligibleRuns = evidence?.unassigned?.m4EligibleRuns;
+  if (!metrics || typeof metrics !== 'object' || !Number.isInteger(unassignedEligibleRuns) || unassignedEligibleRuns < 0) {
+    throw new Error('generation report must include metrics and unassigned.m4EligibleRuns');
+  }
+  return Object.fromEntries(Object.keys(ARTICLE_SECTION_CORE_ALL).map((section) => {
+    const metric = metrics[section];
+    const expectedGenerationAttempts = metric?.llmExpectedAttempts;
+    const readableRuns = metric?.m4RunsWithReadableLogs;
+    const missingLogs = metric?.m4RunsWithoutLogs;
+    const validCounts = [expectedGenerationAttempts, readableRuns, missingLogs]
+      .every((count) => Number.isInteger(count) && count >= 0);
+    return [section, {
+      expectedGenerationAttempts: Number.isInteger(expectedGenerationAttempts) && expectedGenerationAttempts >= 0 ? expectedGenerationAttempts : 0,
+      readableRuns: Number.isInteger(readableRuns) && readableRuns >= 0 ? readableRuns : 0,
+      missingLogs: Number.isInteger(missingLogs) && missingLogs >= 0 ? missingLogs : 0,
+      unassignedEligibleRuns,
+      complete: validCounts && expectedGenerationAttempts > 0 && readableRuns > 0
+        && missingLogs === 0 && unassignedEligibleRuns === 0,
+    }];
+  }));
 }
 
 function normalizedJobStatus(job) {
@@ -1799,38 +1950,87 @@ async function collectNearDuplicates(articles, endDate, {
 
 export async function collectM6Supplement(endDate, {
   api: apiOverride = null,
+  candidateSnapshot = null,
   runtimeDedupEvidenceBySection = {},
   runtimeLogCoverageBySection = {},
 } = {}) {
-  const api = apiOverride || await readPublishedApi();
+  const api = candidateSnapshot ? null : (apiOverride || await readPublishedApi());
   const [year, month, day] = endDate.split('-').map(Number);
   const cutoffDate = new Date(Date.UTC(year, month - 1, day - 89)).toISOString().slice(0, 10);
-  const corpus = buildM6ArticleRecords(api, cutoffDate, endDate);
-  const indexCoverage = {
-    cutoffDate,
-    untilDate: endDate,
-    indexRows: corpus.indexRowCount,
-    candidateRecords: corpus.candidateRecordCount,
-    mappedCandidateRecords: corpus.articles.length + corpus.dateUncertainArticles.length,
-    skippedCandidateRecords: corpus.skippedRecords.length
-      + corpus.unknownDateRecords.length - corpus.dateUncertainArticles.length,
-    skippedByReason: corpus.skippedByReason,
-    recordsWithUnknownDate: corpus.unknownDateRecords.length,
-    dateUnknownCandidatesIncludedInUpperBound: corpus.dateUncertainArticles.map(({ section, id }) => ({ section, id })),
-    upperBoundComplete: corpus.upperBoundCoverageComplete,
-    candidateCountsBySection: corpus.countsBySection,
-    complete: corpus.coverageComplete,
-  };
+  let corpus;
+  let indexCoverage;
+  let source;
+  if (candidateSnapshot) {
+    const snapshot = verifyM6InputSnapshot(candidateSnapshot, endDate);
+    corpus = {
+      articles: snapshot.records.filter((record) => record.dateStatus === 'known'),
+      dateUncertainArticles: snapshot.records.filter((record) => record.dateStatus === 'unknown_in_published_index'),
+      indexRowCount: snapshot.indexRows,
+      candidateRecordCount: snapshot.candidateRecords,
+      skippedCandidateRecords: snapshot.skippedCandidateRecords,
+      skippedByReason: snapshot.skippedByReason,
+      unknownDateRecordCount: snapshot.recordsWithUnknownDate,
+      countsBySection: snapshot.candidateCountsBySection,
+      upperBoundCoverageComplete: snapshot.upperBoundCoverageComplete,
+      coverageComplete: snapshot.coverageComplete,
+      sectionArticleCounts: snapshot.sectionArticleCounts,
+    };
+    indexCoverage = {
+      cutoffDate: snapshot.cutoffDate,
+      untilDate: snapshot.untilDate,
+      indexRows: snapshot.indexRows,
+      candidateRecords: snapshot.candidateRecords,
+      mappedCandidateRecords: snapshot.mappedCandidateRecords,
+      skippedCandidateRecords: snapshot.skippedCandidateRecords,
+      skippedByReason: snapshot.skippedByReason,
+      recordsWithUnknownDate: snapshot.recordsWithUnknownDate,
+      dateUnknownCandidatesIncludedInUpperBound: corpus.dateUncertainArticles.map(({ section, id }) => ({ section, id })),
+      upperBoundComplete: snapshot.upperBoundCoverageComplete,
+      candidateCountsBySection: snapshot.candidateCountsBySection,
+      complete: snapshot.coverageComplete,
+    };
+    source = {
+      manifestCommit: snapshot.manifestCommit,
+      sectionArticleCounts: snapshot.sectionArticleCounts,
+      indexRows: snapshot.indexRows,
+      m6InputSnapshotChecksum: snapshot.checksum,
+    };
+  } else {
+    corpus = buildM6ArticleRecords(api, cutoffDate, endDate);
+    indexCoverage = {
+      cutoffDate,
+      untilDate: endDate,
+      indexRows: corpus.indexRowCount,
+      candidateRecords: corpus.candidateRecordCount,
+      mappedCandidateRecords: corpus.articles.length + corpus.dateUncertainArticles.length,
+      skippedCandidateRecords: corpus.skippedRecords.length
+        + corpus.unknownDateRecords.length - corpus.dateUncertainArticles.length,
+      skippedByReason: corpus.skippedByReason,
+      recordsWithUnknownDate: corpus.unknownDateRecords.length,
+      dateUnknownCandidatesIncludedInUpperBound: corpus.dateUncertainArticles.map(({ section, id }) => ({ section, id })),
+      upperBoundComplete: corpus.upperBoundCoverageComplete,
+      candidateCountsBySection: corpus.countsBySection,
+      complete: corpus.coverageComplete,
+    };
+    source = {
+      manifestCommit: api.manifest.commit,
+      manifestGeneratedAt: api.manifest.generatedAt,
+      sectionArticleCounts: api.sectionArticleCounts,
+      indexRows: corpus.indexRowCount,
+    };
+  }
+  const dateUncertainArticles = corpus.dateUncertainArticles;
+  const unmappedIndexRecords = indexCoverage.skippedCandidateRecords + corpus.unknownDateRecordCount;
   let metric;
   try {
     metric = await collectNearDuplicates(corpus.articles, endDate, {
       indexCoverageComplete: corpus.coverageComplete,
       upperBoundCoverageComplete: corpus.upperBoundCoverageComplete,
-      dateUncertainArticles: corpus.dateUncertainArticles,
-      unmappedIndexRecords: corpus.skippedRecords.length + corpus.unknownDateRecords.length,
+      dateUncertainArticles,
+      unmappedIndexRecords,
       indexCoverage,
-      sectionCorpusCounts: api.sectionArticleCounts,
-      manifestSectionCounts: api.sectionArticleCounts,
+      sectionCorpusCounts: corpus.sectionArticleCounts || api.sectionArticleCounts,
+      manifestSectionCounts: corpus.sectionArticleCounts || api.sectionArticleCounts,
       runtimeDedupEvidenceBySection,
       runtimeLogCoverageBySection,
     });
@@ -1841,20 +2041,15 @@ export async function collectM6Supplement(endDate, {
       reason: `local embedding unavailable: ${error.code || error.name || 'Error'}`,
       cutoffDate,
       untilDate: endDate,
-      indexedArticles: corpus.articles.length + corpus.dateUncertainArticles.length,
+      indexedArticles: corpus.articles.length + dateUncertainArticles.length,
       embeddedArticles: 0,
-      unmappedIndexRecords: corpus.skippedRecords.length + corpus.unknownDateRecords.length,
+      unmappedIndexRecords,
       indexCoverage,
       embeddingFailureCode: error.code || error.name || 'Error',
     };
   }
   return {
-    source: {
-      manifestCommit: api.manifest.commit,
-      manifestGeneratedAt: api.manifest.generatedAt,
-      sectionArticleCounts: api.sectionArticleCounts,
-      indexRows: corpus.indexRowCount,
-    },
+    source,
     metric,
   };
 }
@@ -1966,6 +2161,27 @@ async function collectBaseline(args) {
   const [m6Year, m6Month, m6Day] = args.to.split('-').map(Number);
   const m6CutoffDate = new Date(Date.UTC(m6Year, m6Month - 1, m6Day - 89)).toISOString().slice(0, 10);
   const m6Corpus = buildM6ArticleRecords(api, m6CutoffDate, args.to);
+  const m6CandidateIndexCoverage = {
+    cutoffDate: m6CutoffDate,
+    untilDate: args.to,
+    indexRows: m6Corpus.indexRowCount,
+    candidateRecords: m6Corpus.candidateRecordCount,
+    mappedCandidateRecords: m6Corpus.articles.length + m6Corpus.dateUncertainArticles.length,
+    skippedCandidateRecords: m6Corpus.skippedRecords.length
+      + m6Corpus.unknownDateRecords.length - m6Corpus.dateUncertainArticles.length,
+    skippedByReason: m6Corpus.skippedByReason,
+    recordsWithUnknownDate: m6Corpus.unknownDateRecords.length,
+    dateUnknownCandidatesIncludedInUpperBound: m6Corpus.dateUncertainArticles.map(({ section, id }) => ({ section, id })),
+    upperBoundComplete: m6Corpus.upperBoundCoverageComplete,
+    candidateCountsBySection: m6Corpus.countsBySection,
+    complete: m6Corpus.coverageComplete,
+  };
+  const m6InputSnapshot = createM6InputSnapshot(
+    m6Corpus,
+    api.manifest.commit,
+    api.sectionArticleCounts,
+    m6CandidateIndexCoverage,
+  );
   const m6RuntimeLogCoverageBySection = Object.fromEntries(sections.map((section) => {
     const metrics = generation.metrics[section];
     return [section, {
@@ -1984,22 +2200,8 @@ async function collectBaseline(args) {
       indexCoverageComplete: m6Corpus.coverageComplete,
       upperBoundCoverageComplete: m6Corpus.upperBoundCoverageComplete,
       dateUncertainArticles: m6Corpus.dateUncertainArticles,
-      unmappedIndexRecords: m6Corpus.skippedRecords.length + m6Corpus.unknownDateRecords.length,
-      indexCoverage: {
-        cutoffDate: m6CutoffDate,
-        untilDate: args.to,
-        indexRows: m6Corpus.indexRowCount,
-        candidateRecords: m6Corpus.candidateRecordCount,
-        mappedCandidateRecords: m6Corpus.articles.length + m6Corpus.dateUncertainArticles.length,
-        skippedCandidateRecords: m6Corpus.skippedRecords.length
-          + m6Corpus.unknownDateRecords.length - m6Corpus.dateUncertainArticles.length,
-        skippedByReason: m6Corpus.skippedByReason,
-        recordsWithUnknownDate: m6Corpus.unknownDateRecords.length,
-        dateUnknownCandidatesIncludedInUpperBound: m6Corpus.dateUncertainArticles.map(({ section, id }) => ({ section, id })),
-        upperBoundComplete: m6Corpus.upperBoundCoverageComplete,
-        candidateCountsBySection: m6Corpus.countsBySection,
-        complete: m6Corpus.coverageComplete,
-      },
+      unmappedIndexRecords: m6CandidateIndexCoverage.skippedCandidateRecords + m6Corpus.dateUncertainArticles.length,
+      indexCoverage: m6CandidateIndexCoverage,
       sectionCorpusCounts: api.sectionArticleCounts,
       manifestSectionCounts: api.sectionArticleCounts,
       runtimeDedupEvidenceBySection: generation.dedupRuntimeEvidenceBySection,
@@ -2014,21 +2216,7 @@ async function collectBaseline(args) {
       untilDate: args.to,
       indexedArticles: null,
       embeddedArticles: null,
-      indexCoverage: {
-        cutoffDate: m6CutoffDate,
-        untilDate: args.to,
-        indexRows: m6Corpus.indexRowCount,
-        candidateRecords: m6Corpus.candidateRecordCount,
-        mappedCandidateRecords: m6Corpus.articles.length + m6Corpus.dateUncertainArticles.length,
-        skippedCandidateRecords: m6Corpus.skippedRecords.length
-          + m6Corpus.unknownDateRecords.length - m6Corpus.dateUncertainArticles.length,
-        skippedByReason: m6Corpus.skippedByReason,
-        recordsWithUnknownDate: m6Corpus.unknownDateRecords.length,
-        dateUnknownCandidatesIncludedInUpperBound: m6Corpus.dateUncertainArticles.map(({ section, id }) => ({ section, id })),
-        upperBoundComplete: m6Corpus.upperBoundCoverageComplete,
-        candidateCountsBySection: m6Corpus.countsBySection,
-        complete: m6Corpus.coverageComplete,
-      },
+      indexCoverage: m6CandidateIndexCoverage,
     };
   }
   const historicalWindow = args.to < formatDatePartsInZurich(new Date());
@@ -2204,19 +2392,9 @@ async function collectBaseline(args) {
         sections: m1IndexCoverage.sections,
       },
       m6CandidateIndexCoverage: {
-        cutoffDate: m6CutoffDate,
-        untilDate: args.to,
-        indexRows: m6Corpus.indexRowCount,
-        candidateRecords: m6Corpus.candidateRecordCount,
-        mappedCandidateRecords: m6Corpus.articles.length + m6Corpus.dateUncertainArticles.length,
-        skippedCandidateRecords: m6Corpus.skippedRecords.length
-          + m6Corpus.unknownDateRecords.length - m6Corpus.dateUncertainArticles.length,
-        skippedByReason: m6Corpus.skippedByReason,
-        recordsWithUnknownDate: m6Corpus.unknownDateRecords.length,
-        dateUnknownCandidatesIncludedInUpperBound: m6Corpus.dateUncertainArticles.map(({ section, id }) => ({ section, id })),
-        upperBoundComplete: m6Corpus.upperBoundCoverageComplete,
-        complete: m6Corpus.coverageComplete,
+        ...m6CandidateIndexCoverage,
       },
+      m6InputSnapshotChecksum: m6InputSnapshot.checksum,
       m6DedupRuntimeLogCoverage: m6RuntimeLogCoverageBySection,
       pageVerificationFailures: topFailures(pageResults),
     },
@@ -2241,6 +2419,27 @@ async function collectBaseline(args) {
       latencyMethod: publish.latencyMethod,
     },
     M6Summary: duplicates,
+    m6InputSnapshot,
+    generationEvidence: {
+      workflowScope: generation.workflowScope,
+      workflowCoverage: generation.workflowCoverage,
+      metrics: generation.metrics,
+      unassigned: {
+        runsInWindow: Object.values(generation.workflowCoverage).reduce((sum, workflow) => sum + workflow.unassignedRunsInWindow, 0),
+        runCountIncludingLiveOutsideWindow: generation.unknownRunCount,
+        terminalRunsWithoutOutcome: generation.unknownTerminalRunsWithoutOutcome,
+        outcomeCounts: generation.unknownOutcomeCounts,
+        m4EligibleRuns: generation.unassignedM4EligibleRuns,
+        m5StartedRuns: generation.unassignedM5StartedRuns,
+        m5MissingLogs: generation.unassignedM5RunsWithoutLogs,
+        m5Exhaustions: generation.unassignedM5Exhaustions,
+      },
+      llmRequestMarkers: {
+        observedCount: generation.structuredMetricMarkerCount,
+        dedupStoreMarkers: generation.dedupStoreMarkerCount,
+        dedupEvidenceBySection: generation.dedupRuntimeEvidenceBySection,
+      },
+    },
     sections: sectionsReport,
   };
   return report;
