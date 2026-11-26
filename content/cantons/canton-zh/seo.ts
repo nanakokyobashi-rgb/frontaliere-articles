@@ -1128,6 +1128,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-case-unifamiliari-zurigo': {
+    title: 'Nel Canton Zurigo aggiunte solo 170 case in cinque anni',
+    description: 'Nel Canton Zurigo sono state aggiunte solo 170 case unifamiliari in cinque anni; un acquirente su tre sceglie un cantone vicino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, canton, zurigo, aggiunte, solo',
+    ogTitle: 'Canton Zurigo: solo 170 case unifamiliari in 5 anni',
+    ogDescription: 'Il titolo di NZZ segnala 170 case unifamiliari aggiunte nel Canton Zurigo in cinque anni. Il sommario riferisce che un acquirente su tre realizza il progetto abitativo in un cantone vicino, dove gli immobili scarseggiano.',
+    canonicalPath: '/articoli-zurigo/case-unifamiliari-zurigo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nel Canton Zurigo aggiunte solo 170 case in cinque anni",
+      "description": "Nel Canton Zurigo sono state aggiunte solo 170 case unifamiliari in cinque anni; un acquirente su tre sceglie un cantone vicino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-case-unifamiliari-zurigo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-26T23:46:50+00:00",
+      "dateModified": "2026-11-26T23:46:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/case-unifamiliari-zurigo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

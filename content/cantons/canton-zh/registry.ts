@@ -325,4 +325,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'case-unifamiliari-zurigo',
+ category: 'novita',
+ date: '2026-11-26T23:46:49.914Z',
+ image: '/images/blog/article-case-unifamiliari-zurigo.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

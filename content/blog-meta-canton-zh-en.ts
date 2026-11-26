@@ -90,6 +90,9 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.zurigo-fondo-abitativo.title': 'Zurich, 2,5 billion more: wants a housing fund',
     'blog.article.zurigo-fondo-abitativo.excerpt': 'Zurich is reported to be CHF 2,5 billion richer and wants a housing fund worth hundreds of millions, but the lead doubts that will be enough.',
     'blog.article.zurigo-fondo-abitativo.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.case-unifamiliari-zurigo.title': 'Only 170 houses added in the Canton of Zurich in five years',
+    'blog.article.case-unifamiliari-zurigo.excerpt': 'Only 170 single-family homes were added in the Canton of Zurich in five years; one in three buyers chooses a neighboring canton.',
+    'blog.article.case-unifamiliari-zurigo.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZhEn;

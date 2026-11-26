@@ -143,5 +143,11 @@
     "articleId": "zurigo-fondo-abitativo",
     "ts": "2026-11-08T12:03:31.436Z",
     "keyForm": 2
+  },
+  "https://www.nzz.ch/zuerich/in-fuenf-jahren-nur-170-dazugekommen-das-einfamilienhaus-ist-im-kanton-zuerich-so-gut-wie-tot-ld.10073211": {
+    "articleId": "case-unifamiliari-zurigo",
+    "ts": "2026-11-26T23:46:50.539Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "757bacc3bd800a20888efc5e2685e5ff49eeb5524feaebdb1f24b3e475c4f918"
   }
 }

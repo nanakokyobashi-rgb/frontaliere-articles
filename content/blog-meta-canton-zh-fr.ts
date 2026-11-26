@@ -90,6 +90,9 @@ const blogMetaCantonZhFr: Record<string, string> = {
     'blog.article.zurigo-fondo-abitativo.title': 'Zurich, 2,5 milliards de plus : elle veut un fonds pour le logement',
     'blog.article.zurigo-fondo-abitativo.excerpt': 'Zurich est décrite comme plus riche de CHF 2,5 milliards et veut un fonds pour le logement de plusieurs centaines de millions, mais le lead doute que cela suffise.',
     'blog.article.zurigo-fondo-abitativo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.case-unifamiliari-zurigo.title': 'Dans le canton de Zurich, seulement 170 maisons ont été ajoutées en cinq ans',
+    'blog.article.case-unifamiliari-zurigo.excerpt': 'Dans le canton de Zurich, seulement 170 maisons individuelles ont été ajoutées en cinq ans ; un acheteur sur trois choisit un canton voisin.',
+    'blog.article.case-unifamiliari-zurigo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZhFr;

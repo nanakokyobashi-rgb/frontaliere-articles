@@ -90,6 +90,9 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.zurigo-fondo-abitativo.title': 'Zürich, 2,5 Milliarden mehr: Er will einen Hausfonds',
     'blog.article.zurigo-fondo-abitativo.excerpt': 'Zürich gilt als reicher als CHF 2,5 Milliarden und will einen Eigenheimfonds von Hunderten Millionen, aber der Lead bezweifelt, dass das reicht.',
     'blog.article.zurigo-fondo-abitativo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.case-unifamiliari-zurigo.title': 'Im Kanton Zürich wurden in fünf Jahren nur 170 Häuser hinzugefügt',
+    'blog.article.case-unifamiliari-zurigo.excerpt': 'Im Kanton Zürich wurden in fünf Jahren nur 170 Einfamilienhäuser hinzugefügt; einer von drei Käufern entscheidet sich für einen benachbarten Kanton.',
+    'blog.article.case-unifamiliari-zurigo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZhDe;

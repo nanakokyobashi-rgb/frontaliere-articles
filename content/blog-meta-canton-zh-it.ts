@@ -90,6 +90,9 @@ const blogMetaCantonZhIt: Record<string, string> = {
     'blog.article.zurigo-fondo-abitativo.title': 'Zurigo, 2,5 miliardi in più: vuole un fondo casa',
     'blog.article.zurigo-fondo-abitativo.excerpt': 'Zurigo è indicata come più ricca di CHF 2,5 miliardi e vuole un fondo casa da centinaia di milioni, ma il lead dubita che basti.',
     'blog.article.zurigo-fondo-abitativo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.case-unifamiliari-zurigo.title': 'Nel Canton Zurigo aggiunte solo 170 case in cinque anni',
+    'blog.article.case-unifamiliari-zurigo.excerpt': 'Nel Canton Zurigo sono state aggiunte solo 170 case unifamiliari in cinque anni; un acquirente su tre sceglie un cantone vicino.',
+    'blog.article.case-unifamiliari-zurigo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZhIt;
