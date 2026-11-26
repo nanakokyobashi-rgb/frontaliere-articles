@@ -257,6 +257,12 @@ const resolveToken = (token) => (token.includes('/') ? token : `${WORKFLOW_DIR}/
  *                    sul sito» sarebbe un'istruzione falsa. Citazione descrittiva.
  */
 const DECLARED_ABSENT = {
+  'scripts/ci/pr-collision-detector.mjs :: scripts/mine-all-job-slugs.mjs': {
+    kind: 'site-only',
+    reason:
+      'Il detector condiviso elenca il miner degli slug del sito fra i percorsi da osservare. ' +
+      'Confronta i nomi dei file nelle PR e non importa né esegue il miner sul corpus.',
+  },
   'scripts/ci/ensure-host-shell-assets.mjs :: scripts/ci/export-third-party-shell-assets.ts': {
     kind: 'site-only',
     reason:
