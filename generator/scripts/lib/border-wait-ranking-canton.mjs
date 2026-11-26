@@ -11,12 +11,11 @@
 import { rankingFromStats, trendFromStats, computeFunFacts, computeWeekWindow, computeMovers } from './border-wait-ranking.mjs';
 import { BORDER_RANKING_CANTONS } from './border-wait-ranking-content.mjs';
 import { isTicinoCrossing } from '../../build-plugins/borderWaitData.ts';
-import { STATIC_FALLBACK_IMAGE } from './blog-image-registry.mjs';
 
 // Evergreen metadata — registered once, NEVER refreshed (no date/count inside).
 export const STATIC_META = {
   category: 'novita',
-  image: 'mendrisio.webp', // → /images/places/mendrisio.webp (exists in catalog, dogana/confine keywords)
+  image: '/images/blog/article-dosso-gaggiolo-disagi-frontalieri.webp',
   hasCalculator: false,
   author: { slug: 'redazione', name: 'Redazione Frontaliere Ticino' },
   seo: {
@@ -35,16 +34,13 @@ export const STATIC_META = {
 
 /**
  * RANKING_IMAGE is deliberately an allowlist of existing, credited catalog
- * covers. Ticino uses the governed site-owned place fallback, while a
- * non-Ticino ranking uses `_generatedImagePath` for the selected governed
- * image path, including future place fallbacks; `image` remains the public
- * registry field and carries the same path for deterministic producers.
+ * covers. An explicit path reaches the governed registrar and refresh path
+ * for both the registry and the article metadata.
  * Missing provenance stays null: the generator's first-publication guard then
  * refuses the ranking instead of inheriting an unrelated cover.
  *
  * Every selected path is present in `public/data/journalist-image-catalog.json`
- * and has a matching `content/image-credits/blog/*.json` record with
- * `status: "ok"`; JU has no matching legal catalog cover yet.
+ * with a matching provenance record. JU has no suitable approved cover.
  */
 export const RANKING_IMAGE = Object.freeze({
   TI: STATIC_META.image,
@@ -73,14 +69,13 @@ export function rankingImageFields(image) {
 }
 
 /**
- * Evergreen metadata of a canton's ranking. Ticino keeps STATIC_META and pins
- * the governed site-owned fallback needed by the shared registrar (the
- * article is registered once and never rewritten); the others are derived
+ * Evergreen metadata of a canton's ranking. Ticino keeps STATIC_META;
+ * the other cantons are derived
  * from the same place phrases the article body uses.
  */
 export function staticMetaFor(canton = 'TI') {
   const normalizedCanton = String(canton).trim().toUpperCase();
-  if (normalizedCanton === 'TI') return { ...STATIC_META, _generatedImagePath: STATIC_FALLBACK_IMAGE };
+  if (normalizedCanton === 'TI') return { ...STATIC_META, ...rankingImageFields(RANKING_IMAGE.TI) };
   const profile = BORDER_RANKING_CANTONS[normalizedCanton];
   if (!profile) throw new Error(`no border-wait ranking for canton ${normalizedCanton}`);
   const it = profile.it;
