@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-turgovia-insediamento-imprese.webp",
+      "sha256": "175dc9f29101f49db63fe5f86d05d0ba7efc78ed20a03eddc970406c0e230e40"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-turgovia-insediamento-imprese-480w.webp",
+      "sha256": "4c4a7cc72e01a614cf4b45316541a55497ff5933d291700f4d3c6cf96538e2fc"
+    }
+  ]
 }
