@@ -15621,34 +15621,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/ticino/attualita/1960693/raiffeisen-tiotalk": {
-      "section": "frontaliere",
-      "ts": 1795508264729
-    },
-    "frontaliere::https://www.tio.ch/svizzera/economia/1964706/franchi-pilastro-capitale-ricevuto-donne-raddoppiati-dieci-anni": {
-      "section": "frontaliere",
-      "ts": 1795509786950
-    },
-    "svizzera::https://www.tio.ch/svizzera/economia/1964706/franchi-pilastro-capitale-ricevuto-donne-raddoppiati-dieci-anni": {
-      "section": "svizzera",
-      "ts": 1795513173301
-    },
-    "svizzera::https://www.swissinfo.ch/ita/secondo-pilastro%3a-in-dieci-anni-raddoppiati-i-capitali-ritirati/92427743": {
-      "section": "svizzera",
-      "ts": 1795513246866
-    },
-    "frontaliere::https://www.swissinfo.ch/ita/secondo-pilastro%3a-in-dieci-anni-raddoppiati-i-capitali-ritirati/92427743": {
-      "section": "frontaliere",
-      "ts": 1795513658792
-    },
-    "frontaliere::https://www.tio.ch/rubriche/ospite/1964733/berna-avs-iva-partiti-pensione": {
-      "section": "frontaliere",
-      "ts": 1795515790598
-    },
-    "svizzera::https://www.tio.ch/rubriche/ospite/1964733/berna-avs-iva-partiti-pensione": {
-      "section": "svizzera",
-      "ts": 1795521643331
-    },
     "frontaliere::https://comozero.it/attualita/80mila-frontalieri-in-svizzera-daniela-fumarola-a-como-non-possiamo-lasciarli-senza-tutele": {
       "section": "frontaliere",
       "ts": 1795548853369
@@ -15688,6 +15660,10 @@
     "frontaliere::https://www.varesenoi.it/2026/11/26/leggi-notizia/articolo/centrosinistra-scontro-su-tassa-super-ricchi-scintille-tra-conte-e-i-leader-avs.html": {
       "section": "frontaliere",
       "ts": 1795676737556
+    },
+    "svizzera::https://www.filodiritto.com/firmato-il-nuovo-pacchetto-di-accordi-destinato-rilanciare-e-stabilizzare-le-relazioni-bilaterali": {
+      "section": "svizzera",
+      "ts": 1795697362416
     }
   }
 }
