@@ -944,11 +944,13 @@ test('un retry del dispatch con la stessa URL viene deduplicato dal ricevitore',
   assert.match(WF, /SOURCE_URL: \$\{\{ inputs\.url \}\}/);
   assert.match(WF, /SOURCE_KEY: \$\{\{ inputs\.source_key \}\}/);
   assert.match(admit, /--argjson known_conclusions "\$KNOWN_RUN_CONCLUSIONS"/);
-  assert.match(admit, /and has\("conclusion"\)/);
-  assert.match(admit, /\.status == "completed"\s+and \(\.conclusion \| type\) == "string"/);
-  assert.match(admit, /\{id, created_at, status, conclusion, display_title, head_branch\}/);
-  assert.match(admit, /and \(\.display_title \| type\) == "string"\s+and \(\.display_title \| length\) > 0/);
-  assert.doesNotMatch(admit, /display_title: \(\.display_title \/\/ ""\)/);
+  assert.match(admit, /"\$ADMISSION_RUN_SNAPSHOT"/);
+  const snapshot = WF.match(/ADMISSION_RUN_SNAPSHOT: \|-\n((?: {12}[^\n]*\n)+)/)[1];
+  assert.match(snapshot, /and has\("conclusion"\)/);
+  assert.match(snapshot, /\.status == "completed"\s+and \(\.conclusion \| type\) == "string"/);
+  assert.match(snapshot, /\{id, created_at, status, conclusion, display_title, head_branch\}/);
+  assert.match(snapshot, /and \(\.display_title \| type\) == "string"\s+and \(\.display_title \| length\) > 0/);
+  assert.doesNotMatch(snapshot, /display_title: \(\.display_title \/\/ ""\)/);
   assert.match(admit, /if \[ "\$EVENT_NAME" = "workflow_dispatch" \] && \[ "\$\{DRY_RUN:-false\}" != "true" \] && \[ -n "\$\{SOURCE_URL:-\}" \]/);
   assert.match(admit, /\^\[a-f0-9\]\{32\}\$/);
   assert.match(admit, /sha256sum \| cut -d' ' -f1/);
@@ -1025,18 +1027,28 @@ test('le sole modifiche a body esistenti liberano la coda di generazione', () =>
   const end = admit.indexOf('content_push=false', start);
   assert.ok(start >= 0 && end > start);
   const bodyPath = 'content/blog-body-canton-sg/fr/article.ts';
-  const run = (files) => {
+  const run = (files, { before = null, after = null } = {}) => {
     const scratch = mkdtempSync(path.join(tmpdir(), 'generation-body-maintenance-'));
     try {
+      const beforeFile = path.join(scratch, 'before.json');
+      const afterFile = path.join(scratch, 'after.json');
+      if (before) writeFileSync(beforeFile, JSON.stringify(before));
+      if (after) writeFileSync(afterFile, JSON.stringify(after));
       const result = spawnSync('bash', ['-c', [
         'set -eu',
+        'skip_generation_slot() { echo "reason=$1"; exit 0; }',
+        'gh_api_timeout() { case "$3" in *ref=before) cat "$REGISTRY_BEFORE";; *ref=after) cat "$REGISTRY_AFTER";; *) return 1;; esac; }',
         admit.slice(start, end),
         'echo continue',
       ].join('\n')], {
         encoding: 'utf8',
         env: {
           ...process.env,
+          REPO: 'fixture/corpus', PUSH_BEFORE: 'before', PUSH_SHA: 'after',
+          REGISTRY_BEFORE: beforeFile, REGISTRY_AFTER: afterFile,
           GITHUB_OUTPUT: path.join(scratch, 'github-output'),
+          CANTON_ONLY: WF.match(/CANTON_ONLY: \|-\n((?: {12}[^\n]*\n)+)/)[1],
+          CANTON_REGISTRY_DELTA: WF.match(/CANTON_REGISTRY_DELTA: \|-\n((?: {12}[^\n]*\n)+)/)[1],
           BODY_MAINTENANCE_PATH_RE: '^content/blog-body(-[a-z0-9-]+)?/(it|de|en|fr)/[^/]+[.]ts$',
           compare_payload: JSON.stringify([{ files }]),
         },
@@ -1051,8 +1063,46 @@ test('le sole modifiche a body esistenti liberano la coda di generazione', () =>
   assert.match(run([{ filename: bodyPath, status: 'modified' }]), /reason=admit-body-maintenance/);
   const otherCantonBody = { filename: 'content/blog-body-canton-ti/it/another-article.ts', status: 'modified' };
   assert.match(run([{ filename: bodyPath, status: 'modified' }, otherCantonBody]), /reason=admit-body-maintenance/);
-  assert.match(run([{ filename: bodyPath, status: 'added' }, otherCantonBody]), /continue/);
-  assert.match(run([{ filename: bodyPath, status: 'added' }]), /continue/);
+  assert.match(run([{ filename: bodyPath, status: 'added' }, otherCantonBody]), /reason=admit-canton-only-content/);
+  const vaud = [
+    ...['de', 'en', 'fr', 'it'].flatMap((lang) => [
+      { filename: `content/blog-body-canton-vd/${lang}/manifestazione-losanna-tagli-bilancio.ts`, status: 'added' },
+      { filename: `content/blog-meta-canton-vd-${lang}.ts`, status: 'modified' },
+    ]),
+    ...['registry', 'seo', 'slugs'].map((name) => ({
+      filename: `content/cantons/canton-vd/${name}.ts`, status: 'modified',
+    })),
+    ...['quota-state', 'article-quotas', 'article-source-quotas', 'topic-candidates-consumed', 'topic-candidates-today-picks'].map((name) => ({
+      filename: `data/sections/canton-vd/${name}.json`, status: 'modified',
+    })),
+    { filename: 'content/cantons/canton-vd/hubs/mobilita.json', status: 'modified' },
+  ];
+  assert.match(run(vaud), /reason=admit-canton-only-content/);
+  const vaudCover = { filename: 'public/images/blog/article-manifestazione-losanna-tagli-bilancio.webp', status: 'added' };
+  const imageRegistry = { filename: 'data/generated-image-registry.json', status: 'modified' };
+  const credit = { filename: 'content/image-credits/blog/article-manifestazione-losanna-tagli-bilancio.json', status: 'added' };
+  const registry = (...assets) => ({ schema: 1, assetCount: assets.length, assets });
+  const existing = { imageUrl: '/images/blog/article-national.webp', label: 'unchanged' };
+  const added = { imageUrl: '/images/blog/article-manifestazione-losanna-tagli-bilancio.webp' };
+  const before = registry(existing);
+  assert.match(run([...vaud, credit]), /reason=admit-canton-only-content/);
+  assert.match(run([...vaud, vaudCover, credit, imageRegistry], { before, after: registry(existing, added) }), /reason=admit-canton-only-content/);
+  assert.match(run([...vaud, vaudCover, imageRegistry], { before, after: registry({ ...existing, label: 'changed' }, added) }), /continue/);
+  assert.match(run([...vaud, vaudCover, imageRegistry], { before, after: registry(existing, added, added) }), /continue/);
+  assert.match(run([...vaud, vaudCover, imageRegistry]), /continue/);
+  assert.match(run([...vaud, { ...credit, filename: 'content/image-credits/blog/article-national.json' }]), /continue/);
+  assert.match(run([...vaud, { filename: 'data/topic-candidates-today-picks.json', status: 'modified' }]), /continue/);
+  assert.match(run([...vaud, { filename: 'content/cantons/canton-vd/hubs/runtime.ts', status: 'modified' }]), /continue/);
+  assert.match(run([...vaud, imageRegistry]), /continue/);
+  assert.match(run([...vaud, { filename: 'scripts/build-api.mjs', status: 'modified' }]), /continue/);
+  assert.match(run([...vaud, { filename: 'public/images/blog/article-national.webp', status: 'added' }]), /continue/);
+  assert.match(run([...vaud, { filename: 'content/blog-body/it/national.ts', status: 'added' }]), /continue/);
+  assert.match(run([...vaud, { filename: '.github/workflows/generate-article.yml', status: 'modified' }]), /continue/);
+  assert.match(run([...vaud, { filename: 'generator/scripts/create-article.mjs', status: 'modified' }]), /continue/);
+  assert.match(run([...vaud, { filename: 'generator/scripts/old.mjs', previous_filename: 'generator/scripts/create-article.mjs', status: 'renamed' }]), /continue/);
+  assert.match(run([...vaud, { filename: 'content/blog-body-canton-vd/fr/new.ts', previous_filename: 'content/blog-body-canton-vd/fr/old.ts', status: 'renamed' }]), /reason=admit-canton-only-content/);
+  assert.match(run([...vaud, { status: 'modified' }]), /continue/);
+  assert.match(run([{ filename: bodyPath, previous_filename: 'content/blog-body/fr/national.ts', status: 'renamed' }]), /continue/);
   assert.match(run([{ filename: bodyPath, status: 'modified' }, { filename: 'content/blog-meta-fr.ts', status: 'modified' }]), /continue/);
   assert.match(run([]), /continue/);
 });

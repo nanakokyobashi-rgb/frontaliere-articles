@@ -27,10 +27,11 @@ for (const relativePath of WORKFLOWS) {
       'il confronto push deve usare il wrapper dopo la sua definizione',
     );
     assert.doesNotMatch(source, /^\s+gh api\b/m, 'nessuna chiamata deve bypassare il wrapper');
+    const registryChecks = relativePath.endsWith('/generate-article.yml') ? 2 : 0;
     assert.equal(
       (source.match(/gh_api_timeout(?:\s|\()/g) || []).length,
-      5,
-      'quattro chiamate bounded più la definizione devono restare protette',
+      5 + registryChecks,
+      'le chiamate alla GitHub API devono usare il wrapper condiviso',
     );
     assert.match(
       source,
