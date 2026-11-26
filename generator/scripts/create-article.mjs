@@ -17939,7 +17939,7 @@ async function translateArticle(data) {
   // line/opaque guard, but it cannot prove numeric associations or table-cell
   // ownership; pretranslatedResult lets this validator run without a second
   // provider call.
-  async function validatePretranslatedBody(bodyText, fieldKey, translated, targetLang, labelPrefix) {
+  async function validatePretranslatedBody(bodyText, fieldKey, translated, targetLang, labelPrefix, onReject) {
     const text = translatedStringOrNull(translated, targetLang);
     if (text === null) return null;
     return translateInChunks(
@@ -17948,7 +17948,7 @@ async function translateArticle(data) {
       () => '',
       labelPrefix,
       targetLang,
-      { pretranslatedResult: { [fieldKey]: text } },
+      { pretranslatedResult: { [fieldKey]: text }, onReject },
     );
   }
 
@@ -17966,6 +17966,10 @@ async function translateArticle(data) {
           translated,
           targetLang,
           `${targetLang}:${field.replace('body', 'b')}-free-mt-validation`,
+          (reason) => {
+            const rejections = RUN_REPORT.translation.freeMtBodyValidationRejections ??= {};
+            rejections[`${targetLang}:${field}`] = reason;
+          },
         ),
       });
     }
@@ -18450,6 +18454,9 @@ ${localizedToponymInstruction(targetLang)}`;
           const oversizedBody = isBodyField
             && typeof translateInChunks === 'function'
             && countWords(itValue) > TRANSLATION_CHUNK_THRESHOLD;
+          const rejectionReason = isBodyField
+            ? RUN_REPORT.translation.freeMtBodyValidationRejections?.[`${locale}:${field}`]
+            : undefined;
           let retried;
           if (oversizedBody) {
             // Keep the missing-field recovery under the same per-request cap
@@ -18465,6 +18472,7 @@ ${localizedToponymInstruction(targetLang)}`;
                 field,
                 itValue: chunk,
                 partLabel: total > 1 ? `, parte ${i + 1} di ${total}` : '',
+                rejectionReason,
               }),
               `${locale}:${recoveryField}-missing-retry`,
               locale,
@@ -18481,7 +18489,7 @@ ${localizedToponymInstruction(targetLang)}`;
             }
             const parsed = await callWithRetry(
               isBodyField
-                ? buildPendingBodyRetranslationPrompt({ langName, field, itValue: recoverySourceText })
+                ? buildPendingBodyRetranslationPrompt({ langName, field, itValue: recoverySourceText, rejectionReason })
                 : `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${retryFieldLabel}):\n${recoverySourceText}\n\nFormato risposta: ${faqPart ? `{"faq": [{"${faqPart}": "..."}]}` : `{"${field}": "..."}`}`,
               1500,
               `${locale}:${recoveryField}-missing-retry`,

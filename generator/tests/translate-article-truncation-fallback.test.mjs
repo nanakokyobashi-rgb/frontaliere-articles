@@ -541,6 +541,26 @@ test('ramo missing-field: body1 tradotto = "null" viene letto come MANCANTE e ri
   assert.equal(data.content.de.body1, 'Echter deutscher Text.');
 });
 
+test('primo retry mirato: usa il motivo del rifiuto free-MT soltanto per il body e la lingua interessati', async () => {
+  const itContent = { ...META_PLAUSIBILI, body1: 'Corpo italiano con dati.' };
+  const data = { content: { en: { ...META_PLAUSIBILI }, de: { ...META_PLAUSIBILI }, fr: { ...META_PLAUSIBILI } } };
+  const translationReport = {
+    ...createFreeMtRecoveryReport(),
+    freeMtBodyValidationRejections: { 'en:body1': 'numeric-values', 'fr:body1': 'line-skeleton' },
+  };
+  const prompts = new Map();
+  await runMissingFieldLoop({
+    data, itContent, translationReport,
+    callWithRetry: async (prompt, _tokens, label) => {
+      prompts.set(label, prompt);
+      return { body1: 'A translated body containing data.' };
+    },
+  });
+  assert.match(prompts.get('en:body1-missing-retry'), /Confronta tutte le cifre/);
+  assert.match(prompts.get('fr:body1-missing-retry'), /Confronta il Markdown riga per riga/);
+  assert.doesNotMatch(prompts.get('de:body1-missing-retry'), /CORREZIONE RICHIESTA/);
+});
+
 test('ramo missing-field: "null" doppiamente serializzato — excerpt sul fallback IT, body NON tradotto quando il retry non produce nulla (#799, #1875)', async () => {
   const complete = { ...META_PLAUSIBILI, body1: 'B1', body2: 'B2', body3: 'B3' };
   const data = { content: { en: { ...complete, excerpt: '"null"' }, de: { ...complete, body3: 'null' }, fr: { ...complete } } };
