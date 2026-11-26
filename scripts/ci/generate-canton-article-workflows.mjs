@@ -213,8 +213,8 @@ export const CORE_REPLACEMENTS = [
     id: 'admit: il filtro dei push cantonali serve solo alla coda nazionale',
     count: 1,
     find: "          CANTON_ONLY: |-\n"
-      + "            def canton_content: test(\"^content/(blog-body-canton-[a-z0-9-]+/(it|de|en|fr)/[^/]+[.]ts|blog-meta-canton-[a-z0-9-]+-(it|de|en|fr)[.]ts|cantons/canton-[a-z0-9-]+/(registry|seo|slugs)[.]ts)$\");\n"
-      + "            def canton_data: test(\"^data/sections/canton-[a-z0-9-]+/(article-source-urls|quota-state|topic-candidates-(evergreen-(counter|rejected)|experimental-counter)|articles/[^/]+)[.]json$\");\n"
+      + "            def canton_content: test(\"^content/(blog-body-canton-[a-z0-9-]+/(it|de|en|fr)/[^/]+[.]ts|blog-meta-canton-[a-z0-9-]+-(it|de|en|fr)[.]ts|cantons/canton-[a-z0-9-]+/(registry|seo|slugs)[.]ts|cantons/canton-[a-z0-9-]+/hubs/[^/]+[.]json)$\");\n"
+      + "            def canton_data: test(\"^data/sections/canton-[a-z0-9-]+/(article-source-urls|article-quotas|quota-state|topic-candidates-(consumed|today-picks|evergreen-(counter|rejected)|experimental-counter)|articles/[^/]+)[.]json$\");\n"
       + "            def canton_surface($path; $covers; $files): (($path | canton_content) or ($path | canton_data) or (($covers | index($path)) != null) or ($path == \"data/generated-image-registry.json\" and any($files[]; (.filename // \"\") as $file | ($covers | index($file)) != null)));\n"
       + "            [.[]?.files[]?] as $files\n"
       + "            | [$files[] | (.filename // \"\") | select(test(\"^content/blog-body-canton-[a-z0-9-]+/it/[^/]+[.]ts$\")) | capture(\"^content/blog-body-canton-[a-z0-9-]+/it/(?<id>[^/]+)[.]ts$\").id] as $ids\n"

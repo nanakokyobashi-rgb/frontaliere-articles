@@ -1062,7 +1062,11 @@ test('le sole modifiche a body esistenti liberano la coda di generazione', () =>
     ...['registry', 'seo', 'slugs'].map((name) => ({
       filename: `content/cantons/canton-vd/${name}.ts`, status: 'modified',
     })),
+    { filename: 'content/cantons/canton-vd/hubs/fisco.json', status: 'modified' },
+    { filename: 'data/sections/canton-vd/article-quotas.json', status: 'modified' },
     { filename: 'data/sections/canton-vd/quota-state.json', status: 'modified' },
+    { filename: 'data/sections/canton-vd/topic-candidates-consumed.json', status: 'modified' },
+    { filename: 'data/sections/canton-vd/topic-candidates-today-picks.json', status: 'modified' },
   ];
   assert.match(run(vaud), /reason=admit-canton-only-content/);
   const vaudCover = { filename: 'public/images/blog/article-manifestazione-losanna-tagli-bilancio.webp', status: 'added' };
