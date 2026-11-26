@@ -9646,7 +9646,7 @@ export async function callLLM(messages, opts = {}) {
     // 28611052353: a single such walk alone consumed most of a 109min run
     // before any between-call check got a chance to run. No-op unless the
     // caller opts in via opts.deadlineMs.
-    if (deadlineMs !== undefined && Date.now() > deadlineMs) {
+    if (deadlineMs !== undefined && deadlineMs <= Date.now()) {
       deadlineExpiredBeforeCascade = !providerCallStarted;
       // Wording matters: classifyExhaustionCause()'s transientRe (below) keys off
       // "timeout"/"aborted" to bucket a cascade's errors as transient (recoverable
