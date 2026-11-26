@@ -9,6 +9,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   CATALOG_FALLBACK_MIN_SHARED_WORDS,
+  ARTICLE_COVER_FALLBACK_ERROR_CODES,
   applyGeneratedHeroAlt,
   catalogFallbackSharedWordCount,
   classifyImageRegenerationFailure,
@@ -390,6 +391,16 @@ test('injected verdicts do not poison the production cache, which is keyed by by
       findCatalogImages: () => [record.imageUrl],
     });
     assert.equal(providerCalls, 1, 'the same verified bytes and context may reuse the production result');
+
+    await assert.rejects(verifyCatalogFallbackCandidates(data, {
+      root,
+      findCatalogImages: () => [record.imageUrl],
+      deadlineAt: Date.now() - 1,
+    }), (error) => error.code === ARTICLE_COVER_FALLBACK_ERROR_CODES.VERIFICATION_UNAVAILABLE
+      && error.retryable === true
+      && error.cause?.code === 'ETIMEDOUT',
+    'a cached verdict must not bypass an expired catalog deadline');
+    assert.equal(providerCalls, 1, 'an expired cache hit must fail before invoking the verifier');
 
     data.content.it.title = 'Swiss pharmacy opening hours';
     await assert.rejects(verifyCatalogFallbackCandidates(data, {
