@@ -71,6 +71,7 @@ import { readArticleRegistry } from '../../scripts/lib/registry-image-reader.mjs
 import { readCanonicalPath } from '../../scripts/lib/seo-canonical-path.mjs';
 import { VALID_NAV_ACTIONS, sanitizeArticleMarkdownLinks } from '../../scripts/lib/article-link-contract.mjs';
 import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, getProviderRosterStatus, providerRosterReady, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, getProviderForModel, applyModelsPrefer, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
+import { getLlmProviderRequestsByStage, resetLlmProviderRequests, withLlmCallStage } from './lib/llm-call-metrics.mjs';
 import { classifyWithDecisionsApi } from './lib/decisions-api.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './lib/fetch-with-ref-timeout.mjs';
@@ -2798,6 +2799,14 @@ function finalizeRunReport(status, extra = {}) {
   RUN_REPORT.status = status || 'unknown';
   RUN_REPORT.endedAt = new Date().toISOString();
   Object.assign(RUN_REPORT, extra || {});
+  RUN_REPORT.llmProviderRequestsByStage = getLlmProviderRequestsByStage();
+  const generationAttempt = Number(process.env.CREATE_ARTICLE_GENERATION_ATTEMPT);
+  console.error(`GENERATION_LLM_CALLS ${JSON.stringify({
+    schemaVersion: 1,
+    generationAttempt: Number.isInteger(generationAttempt) && generationAttempt > 0 ? generationAttempt : null,
+    section: RUN_REPORT.section || SECTION_NAME || null,
+    providerRequestsByStage: RUN_REPORT.llmProviderRequestsByStage,
+  })}`);
   try {
     persistDiscoveryAttemptOutcome(RUN_REPORT.status);
   } catch (err) {
@@ -7232,6 +7241,16 @@ function verifiedCantonFactsBlock(referenceText = '') {
 }
 
 async function llmFactCheck(contentIt, sourceContent = '', sourceUrl = '', verifiedReferenceText = '', { preTranslationDeadlineMs = Infinity } = {}) {
+  return withLlmCallStage('factCheck', () => llmFactCheckInStage(
+    contentIt,
+    sourceContent,
+    sourceUrl,
+    verifiedReferenceText,
+    { preTranslationDeadlineMs },
+  ));
+}
+
+async function llmFactCheckInStage(contentIt, sourceContent = '', sourceUrl = '', verifiedReferenceText = '', { preTranslationDeadlineMs = Infinity } = {}) {
   const articleText = [
     contentIt?.title || '',
     contentIt?.excerpt || '',
@@ -16254,6 +16273,10 @@ function removeFaqPairsWithRejectedControls(content, locale) {
 }
 
 async function translateArticle(data) {
+  return withLlmCallStage('translation', () => translateArticleInStage(data));
+}
+
+async function translateArticleInStage(data) {
   // Il report di recovery è una quota PER ARTICOLO. RUN_REPORT vive più a
   // lungo del funnel: senza reset, un secondo articolo erediterebbe i campi
   // rifiutati e i claim già spesi dal primo (issue #1244).
@@ -23340,6 +23363,10 @@ async function main() {
 
 /** Core article pipeline: fetch → generate IT → validate → duplicates → translate → sanitize → image → modify files → git */
 async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
+  return withLlmCallStage('generation', () => generateAndValidateArticleInStage(sourceUrl, sourceContext));
+}
+
+async function generateAndValidateArticleInStage(sourceUrl, sourceContext = null) {
   const translationDeadlineMs = initialTranslationDeadlineMs();
   // The shared cutoff leaves the minimum Codex call window plus the same
   // amount for preparing the translations. The helper already accounts for
@@ -24551,6 +24578,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // defaults → behavior is unchanged. Store/meta absent (e.g. svizzera not yet
   // built) → the gate degrades to a no-op (fail-open).
   await checkSemanticNearDuplicate(data, {
+    section: SECTION_NAME,
     store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
     meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
   });
@@ -24831,6 +24859,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     console.error('🔍 Verifica duplicati post-riparazione:');
     checkForDuplicates(data);
     await checkSemanticNearDuplicate(data, {
+      section: SECTION_NAME,
       store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
       meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
     });
@@ -26034,6 +26063,7 @@ export async function registerArticleFiles(data, opts = {}) {
   console.error('🔍 Verifica duplicati post-riparazione nel writer condiviso:');
   checkForDuplicates(data, { allowRecurringDailyEdition });
   await checkSemanticNearDuplicate(data, {
+    section: SECTION_NAME,
     store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
     meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
     ignoreNeighbor: allowRecurringDailyEdition ? isDailyBriefArticleId : undefined,
@@ -26193,7 +26223,8 @@ if (invokedDirectly) {
   // ne aggiunge un altro senza che niente lo segnali. Qui la mutezza diventa un
   // esito: exit 1, con la ragione. Non copre il caso «articolo prodotto» perche'
   // li' lo status e' `generated` e si esce 0, come sempre.
-  main().then(async () => {
+  resetLlmProviderRequests();
+  withLlmCallStage('selection', () => main()).then(async () => {
     if (RUN_REPORT?.status === 'generated') return;
     console.error(
       `\n❌ Uscita non dichiarata: main() e' ritornato con status='${RUN_REPORT?.status ?? '(mai finalizzato)'}'`

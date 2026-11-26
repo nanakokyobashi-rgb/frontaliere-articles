@@ -8,6 +8,7 @@ import { GH_MODELS_URL } from './gh-models-endpoint.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
 import { DEFAULT_FIRESTORE_READ_TIMEOUT_MS, withFirestoreReadTimeout } from './firestore-read-timeout.mjs';
 import { parseStrictRetryAfterValue as parseSharedRetryAfterValue } from './retry-after.mjs';
+import { recordLlmProviderRequest } from './llm-call-metrics.mjs';
 
 /**
  * Centralized AI Model Service — v15 (free-only, 115+ models, 14 providers)
@@ -7311,6 +7312,7 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
 
   for (let attempt = 1; attempt <= opts.maxRetriesPerModel; attempt++) {
     _stats.calls++;
+    recordLlmProviderRequest();
     let responseReceived = false;
     try {
       const res = await fetchWithRefTimeout(endpoint, {
@@ -8175,6 +8177,7 @@ function _requestCodexExecution({ prompt, timeoutMs, schema, deadlineMs }) {
           data = data.slice(1);
           if (!started) {
             started = true;
+            recordLlmProviderRequest();
             client.setTimeout(boundedByDeadline(executionSocketTimeoutMs));
           }
         } else {
@@ -8868,6 +8871,7 @@ async function _runClaudeCliProcess(args, timeoutMs) {
     let child;
     try {
       child = spawn(CLAUDE_CLI_BIN, args, { stdio: ['ignore', 'pipe', 'pipe'], env: claudeCliChildEnv() });
+      child.once('spawn', recordLlmProviderRequest);
     } catch (err) {
       reject(err);
       return;
@@ -8987,6 +8991,7 @@ async function _callGeminiRaw(model, messages, opts) {
 
   for (let attempt = 1; attempt <= opts.maxRetriesPerModel; attempt++) {
     _stats.calls++;
+    recordLlmProviderRequest();
     let responseReceived = false;
     try {
       const res = await fetchWithRefTimeout(endpoint, {

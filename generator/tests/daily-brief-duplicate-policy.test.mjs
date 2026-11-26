@@ -10,6 +10,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { checkSemanticNearDuplicate } from '../scripts/lib/scoring/semanticDedup.mjs';
+import { EMBEDDING_MODEL } from '../scripts/lib/evidence/constants.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -78,6 +79,72 @@ test('semantic dedup does not block a new daily edition when only prior daily ed
       log: () => {},
     }),
   );
+});
+
+test('semantic dedup emits runtime store, model, threshold and fail-open evidence', async () => {
+  const logs = [];
+  const rowVector = new Float32Array(384);
+  rowVector[0] = 1;
+  const queryVector = new Float32Array(384);
+  queryVector[1] = 1;
+  const rowHash = 'e'.repeat(64);
+  const store = { dim: 384, count: 1, vectors: [rowVector], hashes: [rowHash] };
+  const meta = {
+    model: EMBEDDING_MODEL,
+    dim: 384,
+    count: 1,
+    perArticle: { 'existing-article': { hash: rowHash } },
+  };
+
+  await checkSemanticNearDuplicate(CANDIDATE, {
+    section: 'canton-ti',
+    generationAttempt: 2,
+    store,
+    meta,
+    embedFn: async () => queryVector,
+    queryModel: EMBEDDING_MODEL,
+    log: (message) => logs.push(message),
+  });
+  const activePayload = JSON.parse(logs.find((message) => message.startsWith('GENERATION_DEDUP_STORE ')).slice('GENERATION_DEDUP_STORE '.length));
+  assert.equal(activePayload.section, 'canton-ti');
+  assert.equal(activePayload.generationAttempt, 2);
+  assert.equal(activePayload.storePresent, true);
+  assert.equal(activePayload.storeCount, 1);
+  assert.equal(activePayload.metaModel, EMBEDDING_MODEL);
+  assert.equal(activePayload.queryModel, EMBEDDING_MODEL);
+  assert.equal(activePayload.policyThreshold, 0.86);
+  assert.equal(activePayload.effectiveThreshold, activePayload.policyThreshold);
+  assert.equal(activePayload.thresholdSource, 'runtime_store_count');
+  assert.equal(activePayload.gateApplied, true);
+
+  const missingLogs = [];
+  await checkSemanticNearDuplicate(CANDIDATE, {
+    section: 'canton-ti',
+    store: null,
+    meta: null,
+    log: (message) => missingLogs.push(message),
+  });
+  const missingPayload = JSON.parse(missingLogs.find((message) => message.startsWith('GENERATION_DEDUP_STORE ')).slice('GENERATION_DEDUP_STORE '.length));
+  assert.equal(missingPayload.status, 'store_missing');
+  assert.equal(missingPayload.storePresent, false);
+  assert.equal(missingPayload.policyThreshold, null);
+  assert.equal(missingPayload.effectiveThreshold, null);
+  assert.equal(missingPayload.gateApplied, false);
+
+  const mismatchLogs = [];
+  await checkSemanticNearDuplicate(CANDIDATE, {
+    section: 'canton-ti',
+    store,
+    meta,
+    embedFn: async () => queryVector,
+    queryModel: 'different-model',
+    log: (message) => mismatchLogs.push(message),
+  });
+  const mismatchPayload = JSON.parse(mismatchLogs.find((message) => message.startsWith('GENERATION_DEDUP_STORE ')).slice('GENERATION_DEDUP_STORE '.length));
+  assert.equal(mismatchPayload.status, 'model_mismatch');
+  assert.equal(mismatchPayload.policyThreshold, 0.86);
+  assert.equal(mismatchPayload.effectiveThreshold, null);
+  assert.equal(mismatchPayload.gateApplied, false);
 });
 
 test('the shared writer exposes the recurring policy only to the daily producer', () => {

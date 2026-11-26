@@ -1,0 +1,4864 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-26T18:02:48.249Z",
+  "timeZone": "Europe/Zurich",
+  "window": {
+    "fromDateInclusive": "2026-11-25",
+    "toDateInclusive": "2026-11-25",
+    "startUtc": "2026-11-24T23:00:00.000Z",
+    "endExclusiveUtc": "2026-11-25T23:00:00.000Z",
+    "hours": 24
+  },
+  "source": {
+    "repository": "nanakokyobashi-rgb/frontaliere-articles",
+    "manifestCommit": "86a364f1d224d8002e2df83d9dcdb3e61609f364",
+    "manifestGeneratedAt": "2026-11-26T16:33:01.251Z",
+    "sectionArticleCounts": {
+      "frontaliere": 4535,
+      "svizzera": 2910,
+      "canton-ag": 32,
+      "canton-appenzello": 33,
+      "canton-basilea": 24,
+      "canton-be": 29,
+      "canton-fr": 26,
+      "canton-ge": 16,
+      "canton-gl": 15,
+      "canton-gr": 21,
+      "canton-ju": 15,
+      "canton-lu": 30,
+      "canton-ne": 28,
+      "canton-nw": 10,
+      "canton-ow": 3,
+      "canton-sg": 34,
+      "canton-sh": 38,
+      "canton-so": 32,
+      "canton-sz": 16,
+      "canton-tg": 33,
+      "canton-ti": 28,
+      "canton-ur": 26,
+      "canton-vd": 32,
+      "canton-vs": 22,
+      "canton-zg": 22,
+      "canton-zh": 29
+    },
+    "indexSource": "https://nanakokyobashi-rgb.github.io/frontaliere-articles",
+    "indexRecords": 8039,
+    "indexMappingsSkipped": 596,
+    "duplicateSlugRecordsSkippedBySection": {},
+    "indexMappingCoverageComplete": false,
+    "indexMappingSkipsBySection": {
+      "frontaliere": 2,
+      "canton-ag": 32,
+      "canton-appenzello": 33,
+      "canton-basilea": 24,
+      "canton-be": 29,
+      "canton-fr": 26,
+      "canton-ge": 16,
+      "canton-gl": 15,
+      "canton-gr": 21,
+      "canton-ju": 15,
+      "canton-lu": 30,
+      "canton-ne": 28,
+      "canton-nw": 10,
+      "canton-ow": 3,
+      "canton-sg": 34,
+      "canton-sh": 38,
+      "canton-so": 32,
+      "canton-sz": 16,
+      "canton-tg": 33,
+      "canton-ti": 28,
+      "canton-ur": 26,
+      "canton-vd": 32,
+      "canton-vs": 22,
+      "canton-zg": 22,
+      "canton-zh": 29
+    },
+    "indexMappingSkipsUnknownSection": 0,
+    "m6CandidateIndexCoverage": {
+      "cutoffDate": "2026-08-28",
+      "untilDate": "2026-11-25",
+      "indexRows": 8039,
+      "candidateRecords": 2905,
+      "mappedCandidateRecords": 2903,
+      "skippedCandidateRecords": 2,
+      "skippedByReason": {
+        "date": 2
+      },
+      "complete": false
+    },
+    "pageVerificationFailures": {}
+  },
+  "pilots": [
+    {
+      "section": "canton-basilea",
+      "items7d": 606,
+      "sources": 21,
+      "sourcesMissingItems7d": 1
+    },
+    {
+      "section": "canton-be",
+      "items7d": 594,
+      "sources": 8,
+      "sourcesMissingItems7d": 1
+    },
+    {
+      "section": "canton-vs",
+      "items7d": 585,
+      "sources": 20,
+      "sourcesMissingItems7d": 0
+    }
+  ],
+  "actionsCapacity": {
+    "accountActionsJobLimit": null,
+    "accountActionsJobLimitSource": "not readable through the configured GitHub coordinator identity",
+    "observedMaxConcurrentGenerateJobs": 3,
+    "generationWorkflowsSampled": 217,
+    "generationWorkflowCoverage": {
+      "generate-article.yml": {
+        "section": null,
+        "expectedSlots": 48,
+        "listedRunsInWindow": 118,
+        "liveRunsOutsideWindow": 4,
+        "assignedRunsInWindow": 48,
+        "assignedRunsBySection": {
+          "svizzera": 24,
+          "frontaliere": 24
+        },
+        "unassignedRunsInWindow": 70,
+        "unassignedTerminalRunsWithoutOutcome": 70,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 118
+        },
+        "conclusions": {
+          "success": 118
+        },
+        "unassignedSamples": [
+          {
+            "displayTitle": "[dispatch-source-key=auto-scan] [dispatch-mode=production] [loop-clock manual] [generation-slot none] Generate Blog Article",
+            "event": "push",
+            "status": "completed",
+            "conclusion": "success",
+            "createdAt": "2026-11-25T22:54:32Z",
+            "generationJob": {
+              "status": "completed",
+              "conclusion": "success",
+              "startedAt": "2026-11-25T23:55:57Z"
+            },
+            "outcome": null
+          },
+          {
+            "displayTitle": "[dispatch-source-key=auto-scan] [dispatch-mode=production] [loop-clock manual] [generation-slot none] Generate Blog Article",
+            "event": "push",
+            "status": "completed",
+            "conclusion": "success",
+            "createdAt": "2026-11-25T22:50:42Z",
+            "generationJob": {
+              "status": "completed",
+              "conclusion": "success",
+              "startedAt": "2026-11-25T22:58:33Z"
+            },
+            "outcome": null
+          },
+          {
+            "displayTitle": "[dispatch-source-key=auto-scan] [dispatch-mode=production] [loop-clock manual] [generation-slot none] Generate Blog Article",
+            "event": "push",
+            "status": "completed",
+            "conclusion": "success",
+            "createdAt": "2026-11-25T22:48:19Z",
+            "generationJob": {
+              "status": "completed",
+              "conclusion": "success",
+              "startedAt": "2026-11-25T22:50:53Z"
+            },
+            "outcome": null
+          },
+          {
+            "displayTitle": "[dispatch-source-key=auto-scan] [dispatch-mode=production] [loop-clock manual] [generation-slot none] Generate Blog Article",
+            "event": "push",
+            "status": "completed",
+            "conclusion": "success",
+            "createdAt": "2026-11-25T22:37:41Z",
+            "generationJob": null,
+            "outcome": null
+          }
+        ]
+      },
+      "generate-article-ag.yml": {
+        "section": "canton-ag",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 4,
+        "liveRunsOutsideWindow": 0,
+        "assignedRunsInWindow": 4,
+        "assignedRunsBySection": {
+          "canton-ag": 4
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 4
+        },
+        "conclusions": {
+          "success": 4
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-appenzello.yml": {
+        "section": "canton-appenzello",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 4,
+        "liveRunsOutsideWindow": 0,
+        "assignedRunsInWindow": 4,
+        "assignedRunsBySection": {
+          "canton-appenzello": 4
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 4
+        },
+        "conclusions": {
+          "success": 4
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-basilea.yml": {
+        "section": "canton-basilea",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 4,
+        "liveRunsOutsideWindow": 0,
+        "assignedRunsInWindow": 4,
+        "assignedRunsBySection": {
+          "canton-basilea": 4
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 4
+        },
+        "conclusions": {
+          "success": 4
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-be.yml": {
+        "section": "canton-be",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 4,
+        "liveRunsOutsideWindow": 0,
+        "assignedRunsInWindow": 4,
+        "assignedRunsBySection": {
+          "canton-be": 4
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 4
+        },
+        "conclusions": {
+          "success": 4
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-fr.yml": {
+        "section": "canton-fr",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 4,
+        "liveRunsOutsideWindow": 0,
+        "assignedRunsInWindow": 4,
+        "assignedRunsBySection": {
+          "canton-fr": 4
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 4
+        },
+        "conclusions": {
+          "success": 4
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-ge.yml": {
+        "section": "canton-ge",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 4,
+        "liveRunsOutsideWindow": 0,
+        "assignedRunsInWindow": 4,
+        "assignedRunsBySection": {
+          "canton-ge": 4
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 4
+        },
+        "conclusions": {
+          "success": 4
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-gl.yml": {
+        "section": "canton-gl",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 4,
+        "liveRunsOutsideWindow": 0,
+        "assignedRunsInWindow": 4,
+        "assignedRunsBySection": {
+          "canton-gl": 4
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 4
+        },
+        "conclusions": {
+          "success": 4
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-gr.yml": {
+        "section": "canton-gr",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 4,
+        "liveRunsOutsideWindow": 1,
+        "assignedRunsInWindow": 4,
+        "assignedRunsBySection": {
+          "canton-gr": 4
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 4
+        },
+        "conclusions": {
+          "success": 4
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-ju.yml": {
+        "section": "canton-ju",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 4,
+        "liveRunsOutsideWindow": 0,
+        "assignedRunsInWindow": 4,
+        "assignedRunsBySection": {
+          "canton-ju": 4
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 4
+        },
+        "conclusions": {
+          "success": 4
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-lu.yml": {
+        "section": "canton-lu",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 4,
+        "liveRunsOutsideWindow": 0,
+        "assignedRunsInWindow": 4,
+        "assignedRunsBySection": {
+          "canton-lu": 4
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 4
+        },
+        "conclusions": {
+          "success": 4
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-ne.yml": {
+        "section": "canton-ne",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 4,
+        "liveRunsOutsideWindow": 0,
+        "assignedRunsInWindow": 4,
+        "assignedRunsBySection": {
+          "canton-ne": 4
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 4
+        },
+        "conclusions": {
+          "success": 4
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-nw.yml": {
+        "section": "canton-nw",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 4,
+        "liveRunsOutsideWindow": 0,
+        "assignedRunsInWindow": 4,
+        "assignedRunsBySection": {
+          "canton-nw": 4
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 4
+        },
+        "conclusions": {
+          "success": 4
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-ow.yml": {
+        "section": "canton-ow",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 4,
+        "liveRunsOutsideWindow": 0,
+        "assignedRunsInWindow": 4,
+        "assignedRunsBySection": {
+          "canton-ow": 4
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 4
+        },
+        "conclusions": {
+          "success": 4
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-sg.yml": {
+        "section": "canton-sg",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 4,
+        "liveRunsOutsideWindow": 0,
+        "assignedRunsInWindow": 4,
+        "assignedRunsBySection": {
+          "canton-sg": 4
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 4
+        },
+        "conclusions": {
+          "success": 4
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-sh.yml": {
+        "section": "canton-sh",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 4,
+        "liveRunsOutsideWindow": 0,
+        "assignedRunsInWindow": 4,
+        "assignedRunsBySection": {
+          "canton-sh": 4
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 4
+        },
+        "conclusions": {
+          "skipped": 1,
+          "success": 3
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-so.yml": {
+        "section": "canton-so",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 5,
+        "liveRunsOutsideWindow": 0,
+        "assignedRunsInWindow": 5,
+        "assignedRunsBySection": {
+          "canton-so": 5
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 5
+        },
+        "conclusions": {
+          "success": 4,
+          "skipped": 1
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-sz.yml": {
+        "section": "canton-sz",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 4,
+        "liveRunsOutsideWindow": 0,
+        "assignedRunsInWindow": 4,
+        "assignedRunsBySection": {
+          "canton-sz": 4
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 4
+        },
+        "conclusions": {
+          "success": 4
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-tg.yml": {
+        "section": "canton-tg",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 5,
+        "liveRunsOutsideWindow": 0,
+        "assignedRunsInWindow": 5,
+        "assignedRunsBySection": {
+          "canton-tg": 5
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 5
+        },
+        "conclusions": {
+          "skipped": 1,
+          "success": 4
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-ti.yml": {
+        "section": "canton-ti",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 4,
+        "liveRunsOutsideWindow": 0,
+        "assignedRunsInWindow": 4,
+        "assignedRunsBySection": {
+          "canton-ti": 4
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 4
+        },
+        "conclusions": {
+          "success": 4
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-ur.yml": {
+        "section": "canton-ur",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 4,
+        "liveRunsOutsideWindow": 0,
+        "assignedRunsInWindow": 4,
+        "assignedRunsBySection": {
+          "canton-ur": 4
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 4
+        },
+        "conclusions": {
+          "success": 4
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-vd.yml": {
+        "section": "canton-vd",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 5,
+        "liveRunsOutsideWindow": 1,
+        "assignedRunsInWindow": 5,
+        "assignedRunsBySection": {
+          "canton-vd": 5
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 5
+        },
+        "conclusions": {
+          "skipped": 1,
+          "success": 4
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-vs.yml": {
+        "section": "canton-vs",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 4,
+        "liveRunsOutsideWindow": 1,
+        "assignedRunsInWindow": 4,
+        "assignedRunsBySection": {
+          "canton-vs": 4
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 4
+        },
+        "conclusions": {
+          "success": 4
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-zg.yml": {
+        "section": "canton-zg",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 4,
+        "liveRunsOutsideWindow": 0,
+        "assignedRunsInWindow": 4,
+        "assignedRunsBySection": {
+          "canton-zg": 4
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 4
+        },
+        "conclusions": {
+          "success": 4
+        },
+        "unassignedSamples": []
+      },
+      "generate-article-zh.yml": {
+        "section": "canton-zh",
+        "expectedSlots": 4,
+        "listedRunsInWindow": 4,
+        "liveRunsOutsideWindow": 0,
+        "assignedRunsInWindow": 4,
+        "assignedRunsBySection": {
+          "canton-zh": 4
+        },
+        "unassignedRunsInWindow": 0,
+        "unassignedTerminalRunsWithoutOutcome": 0,
+        "unassignedOutcomeCounts": {},
+        "statuses": {
+          "completed": 4
+        },
+        "conclusions": {
+          "success": 4
+        },
+        "unassignedSamples": []
+      }
+    },
+    "currentQueuedGenerateJobs": 0,
+    "unscopedGenerationRuns": 72,
+    "unscopedTerminalRunsWithoutOutcome": 70,
+    "unscopedGenerationOutcomeCounts": {},
+    "oldestCurrentGenerateQueueWaitMinutes": 0,
+    "maximumObservedGenerateQueueWaitMinutes": 105.16666666666667,
+    "configuredCantonGlobalAdmissionLimit": 8,
+    "configuredFastPublishMatrixMaxParallel": 4
+  },
+  "M3Summary": {
+    "fastPublishRunsCreated": 15,
+    "liveUnscopedFastPublishRuns": 30,
+    "maxRunsPerMainCommit": 3,
+    "commitRunFanout": {
+      "count": 113,
+      "p50": 0,
+      "p90": 0,
+      "max": 3
+    },
+    "mainCommitsInWindow": 113,
+    "mainCommitsWithFastPublishRuns": 11,
+    "contentCommitsVerified": 0,
+    "contentCommitsMissingPage": 4,
+    "commitRunFanoutViolations": 6,
+    "commitRunFanoutByCommit": [
+      {
+        "sha": "dd66b1adffe57c8f5ee67c78fbb0e9b238e872ac",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "a7515a7d41b8350565795f156c293bddf24a1be9",
+        "touchedSections": [
+          "canton-sz"
+        ],
+        "publishRuns": 1,
+        "violation": false
+      },
+      {
+        "sha": "de10a97d8856d29b9683026c952c89a703c45fb7",
+        "touchedSections": [
+          "frontaliere"
+        ],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "355856bb7f87a6eb32c4d1d14ec01991d0df912a",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "d85e910501ee25fe12ce741d1209e303e17de4b9",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "4c336d450ae35ae4e406c81d9eab5b33db70fc2b",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "16f01797c56d026cd6f9b272c651c84ca28951a2",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "72e098d10d333fafc678b5732013cebe2651e50b",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "25487104e080a40c5c0a0e8c572f06de9dbb6853",
+        "touchedSections": [
+          "canton-sh"
+        ],
+        "publishRuns": 2,
+        "violation": true
+      },
+      {
+        "sha": "09e180fdcab9df4768c09db3b833c977ac5027bb",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "a11ca46a17c01f4c8f8d9872113d7a6d5f68cdeb",
+        "touchedSections": [
+          "frontaliere"
+        ],
+        "publishRuns": 1,
+        "violation": false
+      },
+      {
+        "sha": "d6d1c124831e726109c8128bb168b23d2698b264",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "7a4ca3ed3b61669324f57601e16d67cc110b6827",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "c16db9c7c71cffda6d57a2114bb8f08f7ce40e8c",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "7fed8ff81437cc0fe7d1a644c42dba003663c091",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "4b6652b4bd37b4670a8460754b0d9b3704407bd1",
+        "touchedSections": [
+          "canton-ne"
+        ],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "ff2f3458198efabe41e01cc9d1d9640fb9c9ff67",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "20264fced4e8fbeba228d8b93e55b59aa218156a",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "b035ca09d0b4e3534bb9239189abbe16f92c2b17",
+        "touchedSections": [
+          "canton-gr"
+        ],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "2513bc80aca6f28e1a84ece96441d467f22bc66f",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "ae2c1b23bc2beffff8e5193ced420029bd0e3689",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "603129cbd076b86982475d192c9981b1c627aaf3",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "59eef33549a12035419b36707cf1a9e9333fb171",
+        "touchedSections": [],
+        "publishRuns": 1,
+        "violation": true
+      },
+      {
+        "sha": "38cf6d8ea8a0534ae7ac84f2b7e920d75968e7ed",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "135437bde5d4a7fd121f7d1f505585253bb64ce6",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "439703d54516c12bd557d40e82da767d6747539f",
+        "touchedSections": [
+          "canton-vs"
+        ],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "abafbcceacbbfae7836522c9fad9e81687b41554",
+        "touchedSections": [
+          "canton-zg"
+        ],
+        "publishRuns": 1,
+        "violation": false
+      },
+      {
+        "sha": "556747b98b51e2b7ecbfcadf9c973f41c39b9aee",
+        "touchedSections": [],
+        "publishRuns": 1,
+        "violation": true
+      },
+      {
+        "sha": "75e5bd08ec13ac433ee3f99c250cbcd5fbda81e3",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "8a0b179baafc9d571d82644d88906de0bb096d15",
+        "touchedSections": [
+          "canton-vd"
+        ],
+        "publishRuns": 2,
+        "violation": true
+      },
+      {
+        "sha": "18623ff945f59c622beff0425cc6a3493828ed5f",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "ce353db56e7cf90c57d7f2a113a059b830e66c22",
+        "touchedSections": [],
+        "publishRuns": 3,
+        "violation": true
+      },
+      {
+        "sha": "bc0007161004504f7fe6bdd9557537bc802e9a66",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "35d9898ceaa0b725daf8381c6260438674af66a4",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "23ed666265c88a4cc01468f9a8acb22f95011afd",
+        "touchedSections": [
+          "canton-tg"
+        ],
+        "publishRuns": 1,
+        "violation": false
+      },
+      {
+        "sha": "c500adf89be36a58791100ac1c1bac23fe92b8d6",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "2a5103a33dbaeb049f420159f3d4801ea9ca4377",
+        "touchedSections": [
+          "canton-sz"
+        ],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "eb352004c5a3b2bdbb50ccb56378fbe5a5d1a4a7",
+        "touchedSections": [
+          "canton-ur"
+        ],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "28ffc25d787e0178965d99418a093576d023f0fa",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "428fcd3144fddc2b773bd6aa5f6f329a0022d3bc",
+        "touchedSections": [],
+        "publishRuns": 1,
+        "violation": true
+      },
+      {
+        "sha": "a20864a1503d06bbaf174d56bb94fcda7a377049",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "e4d368598c084e3e30eaf1f1bd4b272bf90f8b2e",
+        "touchedSections": [
+          "canton-so"
+        ],
+        "publishRuns": 1,
+        "violation": false
+      },
+      {
+        "sha": "7ad3c051f9f0fed368ca508f99fc344017982d00",
+        "touchedSections": [
+          "frontaliere"
+        ],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "5d17e74b792ac4f11320711cb880d7cef57048f8",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "19dfc12b4d90f4a8cd43b64865bda36d7bbdc4c5",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "267be0def5751fc05b3bdb0a024d5a868aa11ae7",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "6a6767d39428f1a71c424c5090a8911e682d1938",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "442adab678320b663aae820b44fe5d1476e6ea0b",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "70ae247d78d9b965d32244a93102c031c52846eb",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "062e348f5604a873fb382f57ff294e36aec92352",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "99564d75d225e6d4b4c7112a1fd832904aa27bca",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "a1e23bb347e543bfe37e9aee048c5d55cbf797f0",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "a1d26b0028e6f704b347e321849288269c36f269",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "dcfd338275c1a18f291e205259e91c1adcd20e33",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "f339a799a5407bf7cb9ecb11e911cfbf5b4f19cf",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "7b13d5f767d8b4911aaac46b03806d677ff107f8",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "48a292cfa7d105d180bd8a96a018aae9d807a743",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "6c9c01ecbbf172250a8d18a9be2497ecb61fd564",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "3e20497d969632d59dbffe09c083327ddb3f2362",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "541d9f85b539ccb8e7644f9aaf92bfbb2e42908e",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "643abc17069e77b2352540559e8a3c0749e261cb",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "a79502467bf0b30980766498a53112467c33b817",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "71bfdeaa2da4a8e8c09bc88441b52626033a6348",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "ff5f957650a28ed9284cf1bb5ded8a838668b875",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "fd2e1d3d5f5bb378f71382f2824e53ed8c3578cf",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "5e786b2dcfb77e69b9e04589a4637a2120e8caed",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "6e20ea12d4ae3d507b0d94a853ad4d0370d045eb",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "c0e3112b32f232b0392be87cfeb46170d4f54198",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "c04349ee5c804c2ec69ca2bc87c368adf6a0828c",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "5b117144caab8a1cdc746f23977e5d71b990c3ad",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "6135a4b516cdf85bf47efbd829250b0b0287962f",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "397ffe9608c15a61bd7077d53e0bd8ab10d7b5bd",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "e910c8dfa4eae73da1ded52f03a5076c27843555",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "39367bbcd0083ad7a2521c4c21fc68bf243671ca",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "91927f4bd6ee2e1cef51b1588c50cc54ed3d4657",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "fa92ede97092acaaa4b44f5ae53c10813f493698",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "c5584020cc7bd883cd45f8c49851929731dfee08",
+        "touchedSections": [
+          "canton-ag"
+        ],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "55bece831be38faba0bbcf5bb83d50130730be82",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "c453dede17291d504b726192770ae78676ef706c",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "1fbf07abd07b13965d543bc70e509395a0a60912",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "2524beea70f0c9044a6daeca41861dd3fcda9b57",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "7349f354f60c07247d68a75bfc8a98d063d3053d",
+        "touchedSections": [
+          "canton-vd"
+        ],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "38bed6e2783547bf8094581b7eb76df75a15f8e0",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "fc77c71d69b48582b28dfa80177016506da7cc29",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "9c0a2b71a79194d2f374a6386da3cb2007d9f5eb",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "712fa88040db0f7176f6f0b4bb89a71312840e44",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "1a5772532e006a48916de64cec4b0c9062bbb8a8",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "94fddf3f4974fd8be3be84558f39997931149de2",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "1d694e072e004ed00b2e4c054244b94f0033b0ab",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "272ae9113f915517f61eb0f76e68f87637a8f302",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "af666eb3f1980b6a4ca735717cc1036d30bb9338",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "04ad95e1cde214020dc845598b6fdb3cc8976749",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "987d1b44694ad144ddd5821390ee21dabab22cd8",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "1f6c1c0aecd79b687ec736775bcea3092b3b70fe",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "2bb15edfd1ea2039caebf4da4ccd5a9696861178",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "e117d25b90b86b5b44fbe7c475995965b952b040",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "9836a3a60ba7acd6f504bfd528549c61e3fecc24",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "da5dc973e2a299a53b54dc3df50c50843a211037",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "50156ea21a45d05ba285f5591c953c2f5196093b",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "59242f2385826b66324686aef55e90dc030f2144",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "ded674186a227060e2d498aedc9186c21a9f861e",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "326545bd56a88d1ba2cc7b782c3b9cdeda0c924c",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "4892add1089486ec718902352d7d693b1857287b",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "90903f361882c40f549437592cd12ac9a73ddc91",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "dea823f1ebd9167fc71baa4e424bbdce29a8d8f9",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "a8b1808a251e46beebac838c287ea027e99fcb28",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "5630613b9c8a345ed2b1980251d0eb1ee4e5d65c",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "4351552f06d6a58027df8a89b3dee50e0b01ca1a",
+        "touchedSections": [
+          "canton-vs"
+        ],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "6993896e7491ea29f2091d0f9d8cbbc2fb696733",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "0792377fc54e517ee89073b89d0e487c9a3055f7",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "82df22ad015096d8099b6e1f031ae126c789fccf",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "4f836bc5278feed8390bac7100f76dbd401679ef",
+        "touchedSections": [],
+        "publishRuns": 0,
+        "violation": false
+      },
+      {
+        "sha": "7ce421bb8f272fa9dd5fe1c9537c9ef7ea2e281c",
+        "touchedSections": [
+          "canton-tg"
+        ],
+        "publishRuns": 0,
+        "violation": false
+      }
+    ],
+    "commitToObservedPage200Minutes": {
+      "count": 0,
+      "p50": null,
+      "p90": null,
+      "max": null
+    },
+    "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+      "count": 0,
+      "p50": null,
+      "p90": null,
+      "max": null
+    },
+    "pageObservationProvenance": {
+      "source": "direct HTTP verification of the public article URL during this report run",
+      "observedAt": "2026-11-26T17:51:37.717Z",
+      "limitation": "single observation time is an upper-bound proxy, not the historical first-HTTP-200 instant"
+    },
+    "historicalFirstHttp200LatencyAvailable": false,
+    "firstHttp200GateRequiresPostChangeObservation": true,
+    "latencyMethod": "commit-to-page200-observation is an upper bound from the commit timestamp to the report-run HTTP check; commit-to-successful-publish-run-completion is separately labeled proxy"
+  },
+  "M6Summary": {
+    "available": false,
+    "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+    "cutoffDate": "2026-08-28",
+    "untilDate": "2026-11-25",
+    "indexedArticles": 2903,
+    "embeddedArticles": 0,
+    "unmappedIndexRecords": 2,
+    "indexCoverage": {
+      "cutoffDate": "2026-08-28",
+      "untilDate": "2026-11-25",
+      "indexRows": 8039,
+      "candidateRecords": 2905,
+      "mappedCandidateRecords": 2903,
+      "skippedCandidateRecords": 2,
+      "skippedByReason": {
+        "date": 2
+      },
+      "candidateCountsBySection": {
+        "frontaliere": 921,
+        "svizzera": 1396,
+        "canton-ag": 32,
+        "canton-appenzello": 31,
+        "canton-basilea": 23,
+        "canton-be": 28,
+        "canton-fr": 26,
+        "canton-ge": 16,
+        "canton-gl": 14,
+        "canton-gr": 21,
+        "canton-ju": 15,
+        "canton-lu": 30,
+        "canton-ne": 27,
+        "canton-nw": 10,
+        "canton-ow": 3,
+        "canton-sg": 34,
+        "canton-sh": 38,
+        "canton-so": 32,
+        "canton-sz": 16,
+        "canton-tg": 31,
+        "canton-ti": 28,
+        "canton-ur": 26,
+        "canton-vd": 32,
+        "canton-vs": 22,
+        "canton-zg": 22,
+        "canton-zh": 29
+      },
+      "complete": false
+    }
+  },
+  "sections": {
+    "frontaliere": {
+      "M1": {
+        "indexedCandidates": 1,
+        "verifiedArticles": 1,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 1,
+            "verifiedArticles": 1,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 2,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 24,
+        "runsCreated": 24,
+        "admitted": 24,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 24
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 24,
+        "generateQueueWait": {
+          "count": 24,
+          "p50": 0.23333333333333334,
+          "p90": 78,
+          "max": 105.16666666666667
+        },
+        "generateDuration": {
+          "count": 25,
+          "p50": 10.6,
+          "p90": 43.15,
+          "max": 44
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 0,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 24,
+          "observedCounters": 0,
+          "missingCounters": 24,
+          "readableLogs": 24,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 24,
+        "verifiedPublishedArticles": 1,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 24,
+          "readableLogs": 24,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "svizzera": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 0,
+          "coverageComplete": true,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 24,
+        "runsCreated": 24,
+        "admitted": 24,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 24
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 24,
+        "generateQueueWait": {
+          "count": 24,
+          "p50": 0.21666666666666667,
+          "p90": 5.566666666666666,
+          "max": 20.883333333333333
+        },
+        "generateDuration": {
+          "count": 24,
+          "p50": 11.383333333333333,
+          "p90": 43.45,
+          "max": 43.9
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 0,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 24,
+          "observedCounters": 0,
+          "missingCounters": 24,
+          "readableLogs": 24,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 24,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 24,
+          "readableLogs": 24,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-ag": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 32,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 4,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 4
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 4,
+        "generateQueueWait": {
+          "count": 4,
+          "p50": 0.06666666666666667,
+          "p90": 0.1,
+          "max": 0.1
+        },
+        "generateDuration": {
+          "count": 4,
+          "p50": 0.06666666666666667,
+          "p90": 0.08333333333333333,
+          "max": 0.08333333333333333
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 21,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-appenzello": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 33,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 4,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 4
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 4,
+        "generateQueueWait": {
+          "count": 4,
+          "p50": 0.06666666666666667,
+          "p90": 0.08333333333333333,
+          "max": 0.08333333333333333
+        },
+        "generateDuration": {
+          "count": 4,
+          "p50": 0.05,
+          "p90": 0.06666666666666667,
+          "max": 0.06666666666666667
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 31,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-basilea": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 24,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 4,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 4
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 4,
+        "generateQueueWait": {
+          "count": 4,
+          "p50": 0.08333333333333333,
+          "p90": 0.1,
+          "max": 0.1
+        },
+        "generateDuration": {
+          "count": 4,
+          "p50": 0.05,
+          "p90": 0.06666666666666667,
+          "max": 0.06666666666666667
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 23,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-be": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 29,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 4,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 4
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 4,
+        "generateQueueWait": {
+          "count": 4,
+          "p50": 0.06666666666666667,
+          "p90": 0.08333333333333333,
+          "max": 0.08333333333333333
+        },
+        "generateDuration": {
+          "count": 4,
+          "p50": 0.08333333333333333,
+          "p90": 0.08333333333333333,
+          "max": 0.08333333333333333
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 27,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-fr": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 26,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 4,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 4
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 4,
+        "generateQueueWait": {
+          "count": 4,
+          "p50": 0.06666666666666667,
+          "p90": 0.08333333333333333,
+          "max": 0.08333333333333333
+        },
+        "generateDuration": {
+          "count": 4,
+          "p50": 0.06666666666666667,
+          "p90": 0.08333333333333333,
+          "max": 0.08333333333333333
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 15,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-ge": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 16,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 4,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 4
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 4,
+        "generateQueueWait": {
+          "count": 4,
+          "p50": 0.06666666666666667,
+          "p90": 0.08333333333333333,
+          "max": 0.08333333333333333
+        },
+        "generateDuration": {
+          "count": 4,
+          "p50": 0.06666666666666667,
+          "p90": 0.06666666666666667,
+          "max": 0.06666666666666667
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 17,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-gl": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 15,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 4,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 4
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 4,
+        "generateQueueWait": {
+          "count": 4,
+          "p50": 0.06666666666666667,
+          "p90": 0.06666666666666667,
+          "max": 0.06666666666666667
+        },
+        "generateDuration": {
+          "count": 4,
+          "p50": 0.08333333333333333,
+          "p90": 0.13333333333333333,
+          "max": 0.13333333333333333
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 15,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-gr": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 21,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 4,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 4
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 4,
+        "generateQueueWait": {
+          "count": 4,
+          "p50": 0.06666666666666667,
+          "p90": 0.08333333333333333,
+          "max": 0.08333333333333333
+        },
+        "generateDuration": {
+          "count": 4,
+          "p50": 0.05,
+          "p90": 0.08333333333333333,
+          "max": 0.08333333333333333
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 13,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-ju": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 15,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 4,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 4
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 4,
+        "generateQueueWait": {
+          "count": 4,
+          "p50": 0.06666666666666667,
+          "p90": 0.11666666666666667,
+          "max": 0.11666666666666667
+        },
+        "generateDuration": {
+          "count": 4,
+          "p50": 0.05,
+          "p90": 0.06666666666666667,
+          "max": 0.06666666666666667
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 14,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-lu": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 30,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 4,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 4
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 4,
+        "generateQueueWait": {
+          "count": 4,
+          "p50": 0.08333333333333333,
+          "p90": 0.11666666666666667,
+          "max": 0.11666666666666667
+        },
+        "generateDuration": {
+          "count": 4,
+          "p50": 0.06666666666666667,
+          "p90": 0.06666666666666667,
+          "max": 0.06666666666666667
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 9,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-ne": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 28,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 4,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 4
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 4,
+        "generateQueueWait": {
+          "count": 4,
+          "p50": 0.06666666666666667,
+          "p90": 0.08333333333333333,
+          "max": 0.08333333333333333
+        },
+        "generateDuration": {
+          "count": 4,
+          "p50": 0.08333333333333333,
+          "p90": 0.08333333333333333,
+          "max": 0.08333333333333333
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 14,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-nw": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 10,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 4,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 4
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 4,
+        "generateQueueWait": {
+          "count": 4,
+          "p50": 0.06666666666666667,
+          "p90": 0.1,
+          "max": 0.1
+        },
+        "generateDuration": {
+          "count": 4,
+          "p50": 0.1,
+          "p90": 0.15,
+          "max": 0.15
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 2,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-ow": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 3,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 4,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 4
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 4,
+        "generateQueueWait": {
+          "count": 4,
+          "p50": 0.08333333333333333,
+          "p90": 10.266666666666667,
+          "max": 10.266666666666667
+        },
+        "generateDuration": {
+          "count": 4,
+          "p50": 0.05,
+          "p90": 0.08333333333333333,
+          "max": 0.08333333333333333
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 1,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-sg": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 34,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 4,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 4
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 4,
+        "generateQueueWait": {
+          "count": 4,
+          "p50": 0.1,
+          "p90": 11.583333333333334,
+          "max": 11.583333333333334
+        },
+        "generateDuration": {
+          "count": 4,
+          "p50": 0.05,
+          "p90": 0.06666666666666667,
+          "max": 0.06666666666666667
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 8,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-sh": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 38,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 4,
+        "admitted": 3,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 4
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 4,
+        "generateQueueWait": {
+          "count": 4,
+          "p50": 0.08333333333333333,
+          "p90": 3.183333333333333,
+          "max": 3.183333333333333
+        },
+        "generateDuration": {
+          "count": 4,
+          "p50": 0.05,
+          "p90": 0.08333333333333333,
+          "max": 0.08333333333333333
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 14,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 3,
+          "observedCounters": 0,
+          "missingCounters": 3,
+          "readableLogs": 3,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 3,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 3,
+          "readableLogs": 3,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-so": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 32,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 5,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 5
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 5,
+        "generateQueueWait": {
+          "count": 5,
+          "p50": 0.15,
+          "p90": 3.4,
+          "max": 3.4
+        },
+        "generateDuration": {
+          "count": 5,
+          "p50": 0.06666666666666667,
+          "p90": 0.1,
+          "max": 0.1
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 2,
+        "liveRuns": 7,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-sz": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 16,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 4,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 4
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 4,
+        "generateQueueWait": {
+          "count": 4,
+          "p50": 0.08333333333333333,
+          "p90": 3.3333333333333335,
+          "max": 3.3333333333333335
+        },
+        "generateDuration": {
+          "count": 4,
+          "p50": 0.06666666666666667,
+          "p90": 0.1,
+          "max": 0.1
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 4,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-tg": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 33,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 5,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 5
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 5,
+        "generateQueueWait": {
+          "count": 5,
+          "p50": 0.08333333333333333,
+          "p90": 0.1,
+          "max": 0.1
+        },
+        "generateDuration": {
+          "count": 5,
+          "p50": 0.06666666666666667,
+          "p90": 0.08333333333333333,
+          "max": 0.08333333333333333
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 1,
+        "liveRuns": 17,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-ti": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 28,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 4,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 4
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 4,
+        "generateQueueWait": {
+          "count": 4,
+          "p50": 0.06666666666666667,
+          "p90": 12.65,
+          "max": 12.65
+        },
+        "generateDuration": {
+          "count": 4,
+          "p50": 0.08333333333333333,
+          "p90": 0.13333333333333333,
+          "max": 0.13333333333333333
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 1,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-ur": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 26,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 4,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 4
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 4,
+        "generateQueueWait": {
+          "count": 4,
+          "p50": 0.06666666666666667,
+          "p90": 6.25,
+          "max": 6.25
+        },
+        "generateDuration": {
+          "count": 4,
+          "p50": 0.06666666666666667,
+          "p90": 0.08333333333333333,
+          "max": 0.08333333333333333
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 6,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-vd": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 32,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 5,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 5
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 5,
+        "generateQueueWait": {
+          "count": 5,
+          "p50": 0.06666666666666667,
+          "p90": 0.08333333333333333,
+          "max": 0.08333333333333333
+        },
+        "generateDuration": {
+          "count": 6,
+          "p50": 0.06666666666666667,
+          "p90": 0.06666666666666667,
+          "max": 0.06666666666666667
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 2,
+        "liveRuns": 11,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-vs": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 22,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 4,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 4
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 4,
+        "generateQueueWait": {
+          "count": 4,
+          "p50": 0.06666666666666667,
+          "p90": 0.08333333333333333,
+          "max": 0.08333333333333333
+        },
+        "generateDuration": {
+          "count": 5,
+          "p50": 0.06666666666666667,
+          "p90": 0.06666666666666667,
+          "max": 0.06666666666666667
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 2,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-zg": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 22,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 4,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 4
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 4,
+        "generateQueueWait": {
+          "count": 4,
+          "p50": 0.08333333333333333,
+          "p90": 0.11666666666666667,
+          "max": 0.11666666666666667
+        },
+        "generateDuration": {
+          "count": 4,
+          "p50": 0.08333333333333333,
+          "p90": 0.08333333333333333,
+          "max": 0.08333333333333333
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 2,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    },
+    "canton-zh": {
+      "M1": {
+        "indexedCandidates": 0,
+        "verifiedArticles": 0,
+        "unverifiedCandidates": 0,
+        "byZurichDate": {
+          "2026-11-25": {
+            "indexedCandidates": 0,
+            "verifiedArticles": 0,
+            "unverifiedCandidates": 0
+          }
+        },
+        "indexCoverage": {
+          "apiRecords": 8039,
+          "mappedRecords": 7443,
+          "skippedMappingsForSection": 29,
+          "coverageComplete": false,
+          "skippedUnknownSectionRecords": 0,
+          "duplicateSlugRecordsSkipped": 0
+        }
+      },
+      "M2": {
+        "expectedSlots": 4,
+        "runsCreated": 4,
+        "admitted": 4,
+        "admissionSkipped": {},
+        "outcomes": {
+          "unobservable-terminal": 4
+        },
+        "unresolvedRunOutcomes": 0,
+        "terminalRunsWithoutOutcome": 4,
+        "generateQueueWait": {
+          "count": 4,
+          "p50": 0.08333333333333333,
+          "p90": 0.08333333333333333,
+          "max": 0.08333333333333333
+        },
+        "generateDuration": {
+          "count": 4,
+          "p50": 0.06666666666666667,
+          "p90": 0.08333333333333333,
+          "max": 0.08333333333333333
+        },
+        "currentQueuedJobs": 0,
+        "oldestCurrentQueueWaitMinutes": null
+      },
+      "M3": {
+        "fastPublishRunsCreated": 0,
+        "liveRuns": 5,
+        "articleCommitRunFanout": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToVerifiedPageObservationMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        },
+        "commitToSuccessfulPublishRunCompletionProxyMinutes": {
+          "count": 0,
+          "p50": null,
+          "p90": null,
+          "max": null
+        }
+      },
+      "M4": {
+        "available": false,
+        "availability": "unavailable_pre_instrumentation_historical_window",
+        "unavailabilityReason": "historical workflow logs predate merged request instrumentation; no zero is imputed and the post-merge window must be measured separately",
+        "providerRequestsByStage": null,
+        "observedProviderRequestsByStage": {
+          "selection": 0,
+          "generation": 0,
+          "factCheck": 0,
+          "translation": 0,
+          "unclassified": 0
+        },
+        "coverage": {
+          "expectedAttempts": 4,
+          "observedCounters": 0,
+          "missingCounters": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 40
+        },
+        "runsWithCounters": 0,
+        "runsWithoutCounters": 4,
+        "verifiedPublishedArticles": 0,
+        "callsPerVerifiedArticleByStage": null
+      },
+      "M5": {
+        "available": false,
+        "pushFiveAttemptExhaustions": null,
+        "observedCountFromReadableLogs": 0,
+        "logCoverage": {
+          "eligibleStartedRuns": 4,
+          "readableLogs": 4,
+          "missingLogs": 0,
+          "unassignedStartedRuns": 40,
+          "unassignedMissingLogs": 0,
+          "unassignedExhaustions": 0
+        }
+      },
+      "M6": {
+        "available": false,
+        "reason": "a candidate-window index record lacks a usable ID, date or section, or duplicates a section ID; pair count would be incomplete",
+        "nearDuplicatePairs": null,
+        "threshold": null,
+        "thresholdRule": null,
+        "thresholdSource": null,
+        "thresholdCountSource": null,
+        "storeStatus": null,
+        "runtimeEvidence": {
+          "observationCount": 0,
+          "failOpenObservations": 0,
+          "statusCounts": {},
+          "latestGateStatus": "unobserved",
+          "windowGateStatus": "unobserved",
+          "latest": null
+        },
+        "effectiveThresholdObserved": null,
+        "policyThresholdObserved": null,
+        "reconstructedPolicyThreshold": null,
+        "productionGateMeasured": false,
+        "productionGateStatus": "unobserved"
+      }
+    }
+  }
+}
