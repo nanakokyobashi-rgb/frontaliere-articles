@@ -156,13 +156,35 @@ jobs:
         id: sections
         env:
           REQUESTED: ${{ inputs.sections }}
-          DRY: ${{ steps.mode.outputs.dry }}
+          EVENT_NAME: ${{ github.event_name }}
+          PUSH_BEFORE: ${{ github.event.before }}
         run: |
           set -euo pipefail
           if [ -n "${REQUESTED:-}" ]; then
             SECTIONS="$(printf '%s' "$REQUESTED" | tr -d '[:space:]')"
           else
-            SECTIONS="$(node generator/scripts/generate-canton-hubs.mjs --list-enabled | paste -sd, -)"
+            ENABLED="$(node generator/scripts/generate-canton-hubs.mjs --list-enabled)"
+            SECTIONS="$(printf '%s\n' "$ENABLED" | paste -sd, -)"
+            # A canton-only article push changes the related-reading pool only
+            # for its own section. Shared/national or unknown changes keep
+            # the full refresh, as do missing bases and non-push runs.
+            if [[ "$EVENT_NAME" == push && -n "$PUSH_BEFORE" ]] &&
+              CHANGED="$(git diff --no-renames --name-only "$PUSH_BEFORE" HEAD)"; then
+              LOCAL='^(content/blog-body-(canton-[a-z]+)/|content/blog-meta-(canton-[a-z]+)-(it|en|de|fr)\.ts$|content/cantons/(canton-[a-z]+)/(registry|seo|slugs)\.ts$|data/sections/(canton-[a-z]+)/)'
+              AUXILIARY='^(data/generated-image-registry\.json$|public/images/blog/)'
+              CANTONS=()
+              while IFS= read -r path; do
+                if [[ "$path" =~ $LOCAL ]]; then
+                  CANTONS+=("${BASH_REMATCH[2]}${BASH_REMATCH[3]}${BASH_REMATCH[5]}${BASH_REMATCH[7]}")
+                elif [[ ! "$path" =~ $AUXILIARY ]]; then
+                  CANTONS=()
+                  break
+                fi
+              done <<< "$CHANGED"
+              if (( ${#CANTONS[@]} > 0 )); then
+                SECTIONS="$(printf '%s\n' "${CANTONS[@]}" | sort -u | awk 'NR==FNR {enabled[$0]; next} $0 in enabled' <(printf '%s\n' "$ENABLED") - | paste -sd, -)"
+              fi
+            fi
           fi
           if [ -z "$SECTIONS" ]; then
             echo "count=0" >> "$GITHUB_OUTPUT"
@@ -320,6 +342,8 @@ jobs:
               echo
               echo "| hub | news | blocchi dati | omessi | stato |"
               echo "|---|---|---|---|---|"
+              # JavaScript template expressions are evaluated by Node.
+              # shellcheck disable=SC2016
               node -e '
                 const r = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"));
                 for (const h of r.hubs) console.log(`| ${h.section}/${h.topic} | ${h.curatedArticles} | ${h.dataBlocks.join(", ") || "—"} | ${h.omittedBlocks.map((b) => `${b.id} (${b.code})`).join(", ") || "—"} | ${h.changed ? (r.dryRun ? "cambierebbe" : "scritto") : "invariato"} |`);
