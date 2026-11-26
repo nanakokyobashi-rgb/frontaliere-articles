@@ -107,6 +107,12 @@ export function readCantonHubDocument(root, section, topic) {
     if (error?.code === 'ENOENT') return null;
     throw error;
   }
+  return parseCantonHubDocument(raw, section, topic);
+}
+
+export function parseCantonHubDocument(raw, section, topic) {
+  if (!cantonHubTopics(section).includes(topic)) throw new Error(`Tema "${topic}" sconosciuto per ${section}`);
+  const rel = cantonHubDataFile(section, topic);
   let doc;
   try {
     doc = JSON.parse(raw);
