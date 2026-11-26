@@ -87,6 +87,9 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.bienne-corrieri-salariati-2026.title': 'Bienne: all salaried couriers eliminated',
     'blog.article.bienne-corrieri-salariati-2026.excerpt': 'The headline published on November 11, 2026 at 05:55 announces in Biel the elimination of all salaried Just Eat couriers.',
     'blog.article.bienne-corrieri-salariati-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.priorita-traffico-cinque-tratti.title': 'Priority for commercial traffic on five new sections in Bern',
+    'blog.article.priorita-traffico-cinque-tratti.excerpt': 'The decision of the Gemeinderat of November 26, 2026 opens five new sections in 2027, following a positive pilot launched on June 1, 2025.',
+    'blog.article.priorita-traffico-cinque-tratti.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBeEn;

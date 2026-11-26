@@ -138,5 +138,11 @@
     "articleId": "bienne-corrieri-salariati-2026",
     "ts": "2026-11-12T04:56:56.894Z",
     "keyForm": 2
+  },
+  "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/wirtschaftsverkehr-wird-auf-fuenf-weiteren-strecken-priorisiert": {
+    "articleId": "priorita-traffico-cinque-tratti",
+    "ts": "2026-11-26T12:58:40.268Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "76fe2a70ebe689ee152ad8c84cf3721ecf8885836e853727ac24378d55756391"
   }
 }

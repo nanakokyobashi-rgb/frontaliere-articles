@@ -87,6 +87,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.bienne-corrieri-salariati-2026.title': 'Bienne : suppression de tous les coursiers salariés',
     'blog.article.bienne-corrieri-salariati-2026.excerpt': 'Le titre publié le 11 novembre 2026 à 05:55 annonce à Bienne la suppression de tous les coursiers salariés de Just Eat.',
     'blog.article.bienne-corrieri-salariati-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.priorita-traffico-cinque-tratti.title': 'Priorité au trafic économique sur cinq nouveaux tronçons à Berne',
+    'blog.article.priorita-traffico-cinque-tratti.excerpt': 'La décision du Gemeinderat du 26 novembre 2026 ouvre cinq nouveaux tronçons en 2027, après un projet pilote positif lancé le 1er juin 2025.',
+    'blog.article.priorita-traffico-cinque-tratti.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBeFr;

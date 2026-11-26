@@ -87,6 +87,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.bienne-corrieri-salariati-2026.title': 'Biel: Alle angestellten Kuriere gestrichen',
     'blog.article.bienne-corrieri-salariati-2026.excerpt': 'Die am 11. November 2026 um 05:55 Uhr veröffentlichte Schlagzeile kündigt in Biel die Streichung aller angestellten Kuriere von Just Eat an.',
     'blog.article.bienne-corrieri-salariati-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.priorita-traffico-cinque-tratti.title': 'Priorität für den Wirtschaftsverkehr auf fünf neuen Strecken in Bern',
+    'blog.article.priorita-traffico-cinque-tratti.excerpt': 'Die Entscheidung des Gemeinderats vom 26. November 2026 eröffnet 2027 fünf neue Strecken, nach einem positiven Pilotprojekt, das am 1. Juni 2025 gestartet wurde.',
+    'blog.article.priorita-traffico-cinque-tratti.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBeDe;
