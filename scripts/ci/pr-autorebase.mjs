@@ -61,6 +61,7 @@
  *       GITHUB_REPOSITORY. Richiede `gh` + `git` in un checkout full-history.
  */
 import { createHash } from 'node:crypto';
+import { manifestPinLookup } from './manifest-pinned-issues.mjs';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
 import {
@@ -1333,7 +1334,25 @@ function revalidateConflictHandoffRoute(num, branch, head) {
   });
 }
 
+export function manifestPinnedCloseDecision(issue, repo, lookup = manifestPinLookup) {
+  const pin = lookup === manifestPinLookup
+    ? manifestPinLookup(issue, repo)
+    : lookup(issue, repo);
+  if (!pin?.ok) return { close: false, reason: 'manifest-unreadable' };
+  if (pin.path) return { close: false, reason: 'manifest-pinned', path: pin.path };
+  return { close: true, reason: 'not-pinned' };
+}
+
 function closeResolvedConflictHandoff(issue, num, head, decision) {
+  const pinDecision = manifestPinnedCloseDecision(issue, REPO);
+  if (!pinDecision.close && pinDecision.reason === 'manifest-unreadable') {
+    console.log(`::warning::issue #${issue}: manifest pin lookup non disponibile — chiusura sospesa fail-closed.`);
+    return false;
+  }
+  if (!pinDecision.close) {
+    console.log(`issue #${issue}: tenuta aperta dal manifest (${pinDecision.path}).`);
+    return false;
+  }
   const proof = decision.reason === 'origin-merged'
     ? `la PR di origine #${num} risulta MERGED`
     : `git merge-tree --write-tree origin/main ${String(head).slice(0, 12)} risulta clean sulla stessa HEAD`;

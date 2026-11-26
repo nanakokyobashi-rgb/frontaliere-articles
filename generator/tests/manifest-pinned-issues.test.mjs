@@ -29,6 +29,7 @@ import { fileURLToPath } from 'node:url';
 import { manifestPinLookup, manifestPinnedIssues, pinnedBy, PINNING_MODES } from '../../scripts/ci/manifest-pinned-issues.mjs';
 import { handoffDecision } from '../../scripts/ci/handoff-to-site.mjs';
 import { decideReconcileAction } from '../../scripts/ci/reconcile-followups.mjs';
+import { manifestPinnedCloseDecision } from '../../scripts/ci/pr-autorebase.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MANIFEST_PATH = path.join(ROOT, 'scripts/ci/loop-sync-manifest.json');
@@ -85,6 +86,12 @@ test('senza repo, o su manifest illeggibile, non si pinna niente (direzione sicu
   assert.equal(manifestPinnedIssues(path.join(tmp, 'assente.json')).size, 0);
   assert.equal(manifestPinLookup(986, THIS_REPO, tmp).ok, false, 'il closer deve distinguere il manifest illeggibile da un miss');
   assert.equal(manifestPinLookup(986, THIS_REPO, MANIFEST_PATH).ok, true);
+});
+
+test('il closer fail-closed sul manifest e lascia chiudere solo un miss caricato', () => {
+  assert.deepEqual(manifestPinnedCloseDecision(42, THIS_REPO, () => ({ ok: false, path: null })), { close: false, reason: 'manifest-unreadable' });
+  assert.deepEqual(manifestPinnedCloseDecision(42, THIS_REPO, () => ({ ok: true, path: 'scripts/ci/example.mjs' })), { close: false, reason: 'manifest-pinned', path: 'scripts/ci/example.mjs' });
+  assert.deepEqual(manifestPinnedCloseDecision(42, THIS_REPO, () => ({ ok: true, path: null })), { close: true, reason: 'not-pinned' });
 });
 
 test('il lookup dei pin normalizza il case del repository', () => {
