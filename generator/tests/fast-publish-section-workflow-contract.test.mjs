@@ -64,9 +64,8 @@ test('un replay pinned superato usa un nuovo nonce per la revisione di destinazi
   for (const caller of [boundedDispatch, render]) {
     assert.match(caller, /"\$\{replay_args\[@\]\}" -f dispatch_nonce=/u);
   }
-  assert.match(render, /nonce_hash=.*"\$\{replay_args\[@\]\}"/u);
-  assert.match(boundedDispatch, /nonce_hash=.*"\$\{replay_identity_args\[@\]\}"/u);
-  assert.match(boundedDispatch, /dispatch_nonce="stale-late-\$\{replay_identity_head:0:12\}-\$\{SECTION\}-\$\{nonce_hash\}"/u);
+  assert.match(render, /--replay-nonce "\$current_main" "\$SECTION" "\$\{replay_args\[@\]\}"/u);
+  assert.match(boundedDispatch, /--replay-nonce "\$CURRENT_MAIN" "\$SECTION" "\$\{replay_args\[@\]\}"/u);
   assert.match(boundedDispatch, /-f dispatch_nonce="\$dispatch_nonce"/u);
   assert.match(boundedDispatch, /dispatch_cohort="stale-late-\$\{GITHUB_RUN_ID\}-\$\{SECTION\}-n1"/u);
   assert.match(boundedDispatch, /-f dispatch_cohort="\$dispatch_cohort"/u);
@@ -788,6 +787,38 @@ printf 'history verified\\n'
         git(checkout, 'merge-base', '--is-ancestor', shortBase, pin);
       }
     });
+  }
+});
+
+test('replay equivalenti condividono il nonce anche quando avanza il codice operativo', () => {
+  const root = mkdtempSync(path.join(tmpdir(), 'section-replay-identity-'));
+  const helper = fileURLToPath(new URL('../../scripts/ci/section-source-unaffected.sh', import.meta.url));
+  const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8' }).trim();
+  const commit = (file) => {
+    mkdirSync(path.join(root, path.dirname(file)), { recursive: true });
+    writeFileSync(path.join(root, file), file);
+    git('add', file);
+    git('-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.test', 'commit', '-qm', file);
+    return git('rev-parse', 'HEAD');
+  };
+  const nonce = (head, slug = 'first') => execFileSync('bash', [
+    helper, '--replay-nonce', head, 'canton-tg',
+    '-f', `source_commit=${head}`, '-f', `source_main_commit=${head}`,
+    '-f', `push_after=${head}`, '-f', `article_ids=["${slug}"]`,
+  ], { cwd: root, encoding: 'utf8' }).trim();
+  try {
+    git('init', '-q');
+    const original = commit('content/article.ts');
+    commit('generator/scripts/create-article.mjs');
+    commit('generator/data/crawler-cross-repo-contract.json');
+    const equivalent = commit('.github/workflows/translate-pending.yml');
+    const changed = commit('content/another.ts');
+    assert.match(nonce(original), /^stale-late-[0-9a-f]{12}-canton-tg-[0-9a-f]{16}$/u);
+    assert.equal(nonce(original), nonce(equivalent));
+    assert.notEqual(nonce(original), nonce(changed));
+    assert.notEqual(nonce(equivalent), nonce(equivalent, 'second'));
+  } finally {
+    rmSync(root, { recursive: true, force: true });
   }
 });
 

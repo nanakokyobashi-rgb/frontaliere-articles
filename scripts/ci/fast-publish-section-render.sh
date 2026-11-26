@@ -98,9 +98,9 @@ dispatch_stale_replay() {
     -f push_after="$replay_after"
     -f coordinated_recovery="$child_coordinated_recovery"
   )
-  # Hash the dispatched inputs so equivalent recoveries can share a run.
-  nonce_hash="$(printf '%s\0' "${replay_args[@]}" | sha256sum | cut -c1-16)"
-  dispatch_nonce="stale-late-${current_main:0:12}-${SECTION}-${nonce_hash}"
+  # Use the same identity as the bounded dispatcher for equivalent inputs.
+  dispatch_nonce="$(bash .replay-dispatcher-source/scripts/ci/section-source-unaffected.sh \
+    --replay-nonce "$current_main" "$SECTION" "${replay_args[@]}")" || return 1
   dispatch_cohort="stale-late-${GITHUB_RUN_ID}-${SECTION}-n1"
   dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"
   if ! bash .replay-dispatcher-source/scripts/ci/dispatch-fast-publish-replay.sh "$REPO" "$dispatch_title" --ref main \
