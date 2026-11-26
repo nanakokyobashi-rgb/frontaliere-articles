@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T10:34:02.735Z",
-  "contentHash": "3c995fc7afeb97d20e375ea97faea464f7de4c787233492ffae5387482d38d76",
+  "updatedAt": "2026-11-26T12:13:23.265Z",
+  "contentHash": "bb91bd8f9c40e16dc2cd709571873c1e655c6ac751ad3cfdfda53c0bd89e6510",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "4",
+          "value": "3",
           "note": "segnalazioni aggiornate: 26 novembre 2026"
         },
         {
@@ -47,12 +47,6 @@
               "value": "Chiusura",
               "detail": "fine prevista: 16 dicembre 2026",
               "date": "2026-11-12T13:26:00.000Z"
-            },
-            {
-              "label": "A2 Basel -> Luzern tra Svincolo autostradale Sempach E Svincolo autostradale Rothenburg Situazione: problemi di traffico cantiere, lunghezza [km] 1.3 Limitazione del traffico: corsia d'emergenza…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 26 novembre 2026",
-              "date": "2026-11-13T06:42:00.000Z"
             },
             {
               "label": "A14 Luzern <-> Zug tra Raccordo autostradale Diramazione Rotsee E Svincolo autostradale Buchrain Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Limitazione del traffico: corsia…",
@@ -89,6 +83,12 @@
               "value": "Cantiere",
               "detail": "fine prevista: 11 dicembre 2026",
               "date": "2025-12-04T19:00:00.000Z"
+            },
+            {
+              "label": "A2 Basel -> Luzern Svincolo autostradale Rothenburg Situazione: problemi di traffico cantiere Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 18 dicembre 2026",
+              "date": "2026-09-15T03:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -179,7 +179,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-26T12:13:23.265Z"
     },
     "en": {
       "canton": "LU",
@@ -189,7 +189,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "4",
+          "value": "3",
           "note": "reports as of 26 November 2026"
         },
         {
@@ -209,12 +209,6 @@
               "value": "Closure",
               "detail": "until 16 December 2026",
               "date": "2026-11-12T13:26:00.000Z"
-            },
-            {
-              "label": "A2 Basel -> Luzern tra Svincolo autostradale Sempach E Svincolo autostradale Rothenburg Situazione: problemi di traffico cantiere, lunghezza [km] 1.3 Limitazione del traffico: corsia d'emergenza…",
-              "value": "Closure",
-              "detail": "until 26 November 2026",
-              "date": "2026-11-13T06:42:00.000Z"
             },
             {
               "label": "A14 Luzern <-> Zug tra Raccordo autostradale Diramazione Rotsee E Svincolo autostradale Buchrain Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Limitazione del traffico: corsia…",
@@ -251,6 +245,12 @@
               "value": "Roadworks",
               "detail": "until 11 December 2026",
               "date": "2025-12-04T19:00:00.000Z"
+            },
+            {
+              "label": "A2 Basel -> Luzern Svincolo autostradale Rothenburg Situazione: problemi di traffico cantiere Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata…",
+              "value": "Roadworks",
+              "detail": "until 18 December 2026",
+              "date": "2026-09-15T03:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -339,7 +339,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-26T12:13:23.265Z"
     },
     "de": {
       "canton": "LU",
@@ -349,7 +349,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "4",
+          "value": "3",
           "note": "Meldungen vom 26. November 2026"
         },
         {
@@ -369,12 +369,6 @@
               "value": "Sperrung",
               "detail": "bis 16. Dezember 2026",
               "date": "2026-11-12T13:26:00.000Z"
-            },
-            {
-              "label": "A2 Basel -> Luzern zwischen Anschluss Sempach und Anschluss Rothenburg Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.3 Verkehrsführung: Pannenstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 26. November 2026",
-              "date": "2026-11-13T06:42:00.000Z"
             },
             {
               "label": "A14 Luzern <-> Zug zwischen Autobahndreieck Verzweigung Rotsee und Anschluss Buchrain Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.6 Verkehrsführung: Pannenstreifen gesperrt",
@@ -411,6 +405,12 @@
               "value": "Baustelle",
               "detail": "bis 11. Dezember 2026",
               "date": "2025-12-04T19:00:00.000Z"
+            },
+            {
+              "label": "A2 Basel -> Luzern Anschluss Rothenburg Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 4.5",
+              "value": "Baustelle",
+              "detail": "bis 18. Dezember 2026",
+              "date": "2026-09-15T03:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -499,7 +499,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-26T12:13:23.265Z"
     },
     "fr": {
       "canton": "LU",
@@ -509,7 +509,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "4",
+          "value": "3",
           "note": "signalements au 26 novembre 2026"
         },
         {
@@ -529,12 +529,6 @@
               "value": "Fermeture",
               "detail": "jusqu’au 16 décembre 2026",
               "date": "2026-11-12T13:26:00.000Z"
-            },
-            {
-              "label": "A2 Bâle -> Lucerne entre Jonction autoroutière Sempach et Jonction autoroutière Rothenburg Situation: trafic perturbé travaux, longueur [km] 1.3 Gestion du trafic: bande d'arrêt d'urgence fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 26 novembre 2026",
-              "date": "2026-11-13T06:42:00.000Z"
             },
             {
               "label": "A14 Lucerne <-> Zoug entre Echangeur Echangeur du Rotsee et Jonction autoroutière Buchrain Situation: trafic perturbé travaux, longueur [km] 0.6 Gestion du trafic: bande d'arrêt d'urgence fermée",
@@ -571,6 +565,12 @@
               "value": "Chantier",
               "detail": "jusqu’au 11 décembre 2026",
               "date": "2025-12-04T19:00:00.000Z"
+            },
+            {
+              "label": "A2 Bâle -> Lucerne Jonction autoroutière Rothenburg Situation: trafic perturbé travaux Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de largeur largeur de la…",
+              "value": "Chantier",
+              "detail": "jusqu’au 18 décembre 2026",
+              "date": "2026-09-15T03:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -661,7 +661,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-26T12:13:23.265Z"
     }
   }
 }
