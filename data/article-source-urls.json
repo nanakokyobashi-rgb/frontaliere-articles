@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/roberto-gatti-a-figli-di-un-gol-minore-da-chiasso-alla-solbiatese-le-undici-gioie-di-mister-promozione/2686915": {
-    "articleId": "roberto-gatti-11-promozioni-podcast",
-    "ts": "2026-09-25T15:46:26.991Z",
-    "keyForm": 2
-  },
   "https://www.varesenoi.it/2026/09/25/leggi-notizia/argomenti/politica-20/articolo/trenord-ha-abbandonato-una-trentina-di-passeggeri-a-gallarate-la-regione-chieda-conto-allazien-1.html": {
     "articleId": "trenord-abbandono-passeggeri-gallarate",
     "ts": "2026-09-25T17:01:17.243Z",
@@ -2501,5 +2496,11 @@
     "ts": "2026-11-25T16:05:58.762Z",
     "keyForm": 2,
     "sourceContentFingerprint": "2b2be80a99dca56a46465bec474c6a20dee3739302b3d0d7f14438293bd8301f"
+  },
+  "https://www.laregione.ch/cantone/mendrisiotto/1964851/la-sem-riapre-chiasso-e-ors-rincorre-il-personale-per-due-mesi-in-piu": {
+    "articleId": "sem-chiasso-personale-due-mesi",
+    "ts": "2026-11-26T08:46:31.298Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "12ad81415d93fdc42a999500a93815c472d115c7f6edf73fe4aebe10f16ac8ed"
   }
 }

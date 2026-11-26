@@ -7486,11 +7486,17 @@ ${proofResponseFormat}`
   // ALL models have exhausted their per-model retries.
   const FACTCHECK_429_BACKOFF_CAP_MS = 30_000;
   const FACTCHECK_MIN_ROUND_MS = 15_000;
+  const FACTCHECK_FINAL_RESERVE_MS = 30_000;
+  const FACTCHECK_MAX_FINAL_RESERVE_MS = 45_000;
+  const FACTCHECK_FINAL_RESERVE_THRESHOLD_MS = FACTCHECK_MIN_ROUND_MS + FACTCHECK_FINAL_RESERVE_MS;
   const initialFactCheckMs = factCheckDeadlineMs - Date.now();
-  // Reserve at most a quarter of the budget above one minute for the final
-  // Codex call. Keep the original short window when the budget is tight.
-  const finalReserveMs = initialFactCheckMs >= 2 * FACTCHECK_MIN_ROUND_MS
-    ? Math.min(45_000, Math.max(FACTCHECK_MIN_ROUND_MS, Math.floor((initialFactCheckMs - 60_000) / 4)))
+  // A first consensus round needs 15s, and a fresh Codex verification needs
+  // 30s. Do not claim a final reserve until both windows fit in the initial
+  // fact-check budget (45s); below that threshold all time stays with the
+  // normal retry loop. Keep the 45s ceiling.
+  const finalReserveMs = initialFactCheckMs >= FACTCHECK_FINAL_RESERVE_THRESHOLD_MS
+    ? Math.min(FACTCHECK_MAX_FINAL_RESERVE_MS, initialFactCheckMs - FACTCHECK_MIN_ROUND_MS,
+      Math.max(FACTCHECK_FINAL_RESERVE_MS, Math.floor((initialFactCheckMs - 60_000) / 4)))
     : 0;
   const retryDeadlineMs = factCheckDeadlineMs - finalReserveMs;
   const maxPrimaryRounds = Math.min(
@@ -7599,6 +7605,7 @@ ${proofResponseFormat}`
         editorialProofFailures,
         isEvergreen: isEvergreenArticle,
         editorialContext,
+        retryInvalidVerdict: excludeCodex,
         excludeModels: [
           ...priorVoters,
           ...(excludeCodex ? [AI_MODELS.CODEX_CLI_PRIMARY] : []),
@@ -8074,6 +8081,19 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
       ambiguous: 'più verdetti nella stessa risposta, nessuno scelto',
     }[error] || 'JSON non valido';
     console.error(`  ⚠️  LLM fact-check (${model}${via}): ${label} — ${safeSignalDiagnosticTextForLog(factCheckRawSnippet(raw))}`);
+    // Recover in this lane while the other verifier may still be waiting.
+    if (opts.retryInvalidVerdict && servedBy && opts.deadlineMs - Date.now() >= 10_000) {
+      try {
+        return await _runSingleFactCheck(model, prompt, {
+          ...opts,
+          fresh: true,
+          retryInvalidVerdict: false,
+          excludeModels: [...excludeModels, servedBy],
+        });
+      } catch (err) {
+        console.error(`  ⚠️  LLM fact-check (${model}): retry fallito — ${safeSignalDiagnosticTextForLog(err.message)}`);
+      }
+    }
     return null;
   }
 
@@ -15826,13 +15846,17 @@ Rispondi con un JSON object (no markdown, no code fences):
 }
 
 function buildPendingBodyRetranslationPrompt({ langName, field, itValue, partLabel = '', rejectionReason = '' }) {
-  const correction = {
+  const correctionsByReason = {
     'numeric-association': 'Controlla ogni coppia dato-etichetta separatamente. Mantieni nella stessa proposizione ogni valore e il suo nome, anche se il nome è ripetuto.',
     'numeric-values': 'Confronta tutte le cifre con la fonte prima di rispondere. Riproduci ogni valore, segno, unità e percentuale nell’ordine originale.',
     'localized-calendar': 'Controlla tutte le date. Localizza il nome del mese e l’ordine per la lingua di arrivo, conservando giorno, mese, anno ed estremi di ogni intervallo.',
     'line-skeleton': 'Confronta il Markdown riga per riga. Conserva le righe vuote e la posizione di ciascun titolo, punto elenco e citazione.',
     completeness: 'Verifica che ogni frase originale compaia nella traduzione, compresi gli incisi e le frasi finali.',
-  }[rejectionReason];
+  };
+  const correction = [...new Set([].concat(rejectionReason))]
+    .map((reason) => Object.hasOwn(correctionsByReason, reason) ? correctionsByReason[reason] : '')
+    .filter(Boolean)
+    .join('\n');
   return `Traduci COMPLETAMENTE in ${langName} il seguente corpo dell'articolo per il sito Frontaliere Ticino.
 
 VINCOLI OBBLIGATORI:
@@ -16039,7 +16063,7 @@ async function translatePendingBodyWithCodex(
           () => '',
           `${locale}:${field}-pending-codex-validation`,
           locale,
-          { pretranslatedResult: { [field]: text }, onReject: (reason) => { rejectionReason = reason; } },
+          { pretranslatedResult: { [field]: text }, onReject: (reason) => { rejectionReason = [reason].concat(rejectionReason); } },
         )
         : stripTableHeaderColumnMarkers(text);
       if (validatedText) {
@@ -16097,7 +16121,7 @@ async function translatePendingBodyWithHistoricalChain(
     translate: async ({ text: masked }) => {
       const wordCount = countWords(masked || '');
       let rejectionReason = previousRejectionReason;
-      const onReject = (reason) => { rejectionReason = reason; };
+      const onReject = (reason) => { rejectionReason = [reason].concat(rejectionReason); };
       const translateSegments = (chunkWords) => chunkTranslator(
         masked,
         field,
@@ -18487,6 +18511,10 @@ ${localizedToponymInstruction(targetLang)}`;
           const rejectionReason = bodyKey ? RUN_REPORT.translation.bodyValidationRejections?.[bodyKey] : undefined;
           const onReject = (reason) => {
             const rejections = RUN_REPORT.translation.bodyValidationRejections ??= {};
+            if (rejectionReason && rejectionReason !== reason) {
+              const previous = RUN_REPORT.translation.bodyValidationPreviousRejections ??= {};
+              previous[bodyKey] = rejectionReason;
+            }
             rejections[bodyKey] = reason;
           };
           let retried;
@@ -18805,7 +18833,11 @@ ${localizedToponymInstruction(targetLang)}`;
     isLaneAvailable: () => pendingBodyRecoveryAvailable(),
     shouldStop: () => pendingBodyLaneShouldStop(),
     translate: ({ locale, field, itValue }) => {
-      const rejectionReason = RUN_REPORT.translation.bodyValidationRejections?.[freeMtFieldKey(locale, field)];
+      const bodyKey = freeMtFieldKey(locale, field);
+      const rejectionReason = [
+        RUN_REPORT.translation.bodyValidationRejections?.[bodyKey],
+        RUN_REPORT.translation.bodyValidationPreviousRejections?.[bodyKey],
+      ];
       const options = { callWithRetry, translateInChunks, rejectionReason };
       return pendingBodySecondLaneAvailable()
         ? translatePendingBodyWithCodex(itValue, locale, field, {
@@ -20967,6 +20999,9 @@ function decodeSeoEntities(data) {
 
 function modifySeoService(data) {
   decodeSeoEntities(data);
+  // Validate the stored fields against the final editorial title, after
+  // generation, rewriting and entity normalization have finished.
+  repairSeoTitleFields(data.seo, data.content.it.title);
   assertPlainDescriptionFields(data.seo, {
     fieldPrefix: 'seo.',
     id: data.id,

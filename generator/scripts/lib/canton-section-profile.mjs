@@ -163,6 +163,7 @@ export const CANTON_TOPICAL_TERMS_DE_FR = Object.freeze([
   // previdenza e assicurazioni sociali
   'ahv', 'iv-rente', 'pensionskasse', 'krankenkass', 'krankenversicherung', 'prämie', 'praemie',
   'prämienverbilligung', 'avs', 'caisse de pension', 'assurance maladie', 'assurance-maladie', 'subside',
+  'sozialhilfe', 'aide sociale',
   // lavoro
   'lohn', 'löhne', 'loehne', 'mindestlohn', 'arbeitsmarkt', 'arbeitslos', 'arbeitsplätze', 'arbeitsplatz',
   'entlassung', 'stellenabbau', 'kurzarbeit', 'gesamtarbeitsvertrag', 'fachkräfte', 'fachkraefte',

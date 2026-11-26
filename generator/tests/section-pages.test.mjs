@@ -3899,7 +3899,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.doesNotMatch(wf, /install[^\n]*(?:section-source-unaffected\.sh|render_source)/);
   assert.match(wf, /SECTION_SOURCE_UNAFFECTED_HELPER: \.replay-dispatcher-source\/scripts\/ci\/section-source-unaffected\.sh/);
   assert.match(wf, /run: bash \.replay-dispatcher-source\/scripts\/ci\/fast-publish-section-render\.sh/);
-  assert.match(publisher, /const helper = process\.env\.SECTION_SOURCE_UNAFFECTED_HELPER \|\| 'scripts\/ci\/section-source-unaffected\.sh';[\s\S]*?spawnSync\('bash', \[path\.resolve\(ROOT_DIR, helper\), expected, current\]/);
+  assert.match(publisher, /const helper = process\.env\.SECTION_SOURCE_UNAFFECTED_HELPER \|\| 'scripts\/ci\/section-source-unaffected\.sh';[\s\S]*?spawnSync\('bash', \[path\.resolve\(ROOT_DIR, helper\), \.\.\.scope, expected, current\]/);
   assert.match(wf, /bash \.replay-dispatcher-source\/scripts\/ci\/section-source-unaffected\.sh "\$pinned_source" "\$current_main"/);
   assert.match(render, /bash \.replay-dispatcher-source\/scripts\/ci\/section-source-unaffected\.sh "\$pinned_replay_main" "\$current_main"/);
   assert.match(wf, /- name: Guard pinned replay freshness/);

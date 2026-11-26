@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "b036474b0d51022b162d9074e4c35900cd60ac40055f92a7c1d354f35c476a81",
+  "updatedAt": "2026-11-26T10:34:02.735Z",
+  "contentHash": "66ee65c2514eb0956b27ccf1cfa4b49e0586e9d52e35764c9e17a2382d6c3ffe",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-25T19:39:26.365Z",
+      "updatedAt": "2026-11-26T03:50:03.880Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-25T16:08:35.229Z",
+      "updatedAt": "2026-11-26T01:13:56.099Z",
       "keyFacts": 0
     }
   ],
@@ -38,12 +38,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "6",
-          "note": "segnalazioni aggiornate: 25 novembre 2026"
+          "note": "segnalazioni aggiornate: 26 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "27",
-          "note": "segnalazioni aggiornate: 25 novembre 2026"
+          "note": "segnalazioni aggiornate: 26 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -152,13 +152,14 @@
               "date": "2026-11-04T05:48:00.000Z"
             },
             {
-              "label": "Revocato: A1 Bern -> St. Gallen tra Svincolo autostradale Dietikon E Galleria Galleria Gubrist Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-11-25T04:45:00.000Z"
+              "label": "Affoltern am Albis <-> Merenschwand Luogo Obfelden Situazione: problemi di traffico Causa: lavori di costruzione",
+              "value": "Cantiere",
+              "detail": "fine prevista: 30 giugno 2027",
+              "date": "2025-04-26T06:04:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-25T19:39:26.365Z"
+          "updatedAt": "2026-11-26T03:50:03.880Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -196,7 +197,7 @@
               "url": "https://www.zh.ch/de/news-uebersicht/mitteilungen/2026/mobilitaet/veloverkehr/velowinter-kalt-nass-und-trotzdem-schoen.html"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -280,7 +281,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T10:34:02.735Z"
     },
     "en": {
       "canton": "ZH",
@@ -296,12 +297,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "6",
-          "note": "reports as of 25 November 2026"
+          "note": "reports as of 26 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "27",
-          "note": "reports as of 25 November 2026"
+          "note": "reports as of 26 November 2026"
         }
       ],
       "dataBlocks": [
@@ -410,13 +411,14 @@
               "date": "2026-11-04T05:48:00.000Z"
             },
             {
-              "label": "Revocato: A1 Bern -> St. Gallen tra Svincolo autostradale Dietikon E Galleria Galleria Gubrist Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-11-25T04:45:00.000Z"
+              "label": "Affoltern am Albis <-> Merenschwand Luogo Obfelden Situazione: problemi di traffico Causa: lavori di costruzione",
+              "value": "Roadworks",
+              "detail": "until 30 June 2027",
+              "date": "2025-04-26T06:04:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-25T19:39:26.365Z"
+          "updatedAt": "2026-11-26T03:50:03.880Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -454,7 +456,7 @@
               "url": "https://www.zh.ch/de/news-uebersicht/mitteilungen/2026/mobilitaet/veloverkehr/velowinter-kalt-nass-und-trotzdem-schoen.html"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -538,7 +540,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T10:34:02.735Z"
     },
     "de": {
       "canton": "ZH",
@@ -554,12 +556,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "6",
-          "note": "Meldungen vom 25. November 2026"
+          "note": "Meldungen vom 26. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "27",
-          "note": "Meldungen vom 25. November 2026"
+          "note": "Meldungen vom 26. November 2026"
         }
       ],
       "dataBlocks": [
@@ -668,13 +670,14 @@
               "date": "2026-11-04T05:48:00.000Z"
             },
             {
-              "label": "Aufgehoben: A1 Bern -> St. Gallen zwischen Anschluss Dietikon und Tunnel Gubrist-Tunnel Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-11-25T04:45:00.000Z"
+              "label": "Affoltern am Albis <-> Merenschwand Ortschaft Obfelden Sachlage: Verkehrsbehinderung Ursache: Bauarbeiten",
+              "value": "Baustelle",
+              "detail": "bis 30. Juni 2027",
+              "date": "2025-04-26T06:04:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-25T19:39:26.365Z"
+          "updatedAt": "2026-11-26T03:50:03.880Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -712,7 +715,7 @@
               "url": "https://www.zh.ch/de/news-uebersicht/mitteilungen/2026/mobilitaet/veloverkehr/velowinter-kalt-nass-und-trotzdem-schoen.html"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -796,7 +799,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T10:34:02.735Z"
     },
     "fr": {
       "canton": "ZH",
@@ -812,12 +815,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "6",
-          "note": "signalements au 25 novembre 2026"
+          "note": "signalements au 26 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "27",
-          "note": "signalements au 25 novembre 2026"
+          "note": "signalements au 26 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -926,13 +929,14 @@
               "date": "2026-11-04T05:48:00.000Z"
             },
             {
-              "label": "Révoqué: A1 Berne -> St-Gall entre Jonction autoroutière Dietikon et Tunnel Tunnel du Gubrist Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-11-25T04:45:00.000Z"
+              "label": "Affoltern am Albis <-> Merenschwand Localité Obfelden Situation: trafic perturbé Raison: travaux de construction",
+              "value": "Chantier",
+              "detail": "jusqu’au 30 juin 2027",
+              "date": "2025-04-26T06:04:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-25T19:39:26.365Z"
+          "updatedAt": "2026-11-26T03:50:03.880Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -970,7 +974,7 @@
               "url": "https://www.zh.ch/de/news-uebersicht/mitteilungen/2026/mobilitaet/veloverkehr/velowinter-kalt-nass-und-trotzdem-schoen.html"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -1054,7 +1058,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T10:34:02.735Z"
     }
   }
 }
