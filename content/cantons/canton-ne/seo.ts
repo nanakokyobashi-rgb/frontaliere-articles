@@ -1045,6 +1045,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-neuchatel-supporto-progetti-piloti-disabili': {
+    title: 'Neuchâtel finanzia 3 progetti pilota per autonomia disabili',
+    description: 'Il Cantone di Neuchâtel sostiene CODIS, PROFIL e CDA con CHF 400\'000 all\'anno per rafforzare l\'autonomia delle persone con disabilità da gennaio 2026.',
+    keywords: 'frontalieri, ticino, svizzera, italia, neuch, finanzia, progetti, pilota',
+    ogTitle: 'Neuchâtel supporta 3 progetti pilota per l\'autonomia',
+    ogDescription: 'Il Cantone di Neuchâtel ha selezionato tre progetti pilota (CODIS, PROFIL, CDA) con un finanziamento annuale di CHF 400\'000 per rafforzare l\'autonomia delle persone con disabilità, a partire da gennaio 2026.',
+    canonicalPath: '/articoli-neuchatel/neuchatel-supporto-progetti-piloti-disabili/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Neuchâtel finanzia 3 progetti pilota per autonomia disabili",
+      "description": "Il Cantone di Neuchâtel sostiene CODIS, PROFIL e CDA con CHF 400'000 all'anno per rafforzare l'autonomia delle persone con disabilità da gennaio 2026.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-neuchatel-supporto-progetti-piloti-disabili.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-26T15:28:20+00:00",
+      "dateModified": "2026-11-26T15:28:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-neuchatel/neuchatel-supporto-progetti-piloti-disabili/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

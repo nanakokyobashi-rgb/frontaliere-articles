@@ -9,7 +9,8 @@
  *      lo ha corretto a mano, o perche' `generate-article.yml` e' cambiato senza
  *      rigenerare — i cantoni girano con una logica che non e' piu' quella di
  *      frontaliere/svizzera, e niente lo dice. Il confronto e' byte per byte.
- *   2. Il core e' la sorgente piu' le sostituzioni dichiarate. Le sostituzioni
+ *   2. Il core e' la sorgente piu' le sostituzioni dichiarate, che aggiungono
+ *      anche il gate cantonale e il suo upload diagnostico. Le sostituzioni
  *      toccano i punti che decidono QUALE sezione scrive e QUALE workflow
  *      riparte: qui i blocchi `run:` del core vengono eseguiti accanto a quelli
  *      della sorgente, e con gli input della coppia storica devono dare lo
@@ -235,11 +236,31 @@ test('il preflight FAQ è best-effort, ma l\'artifact dell\'articolo non pushato
 test('gli step che le sostituzioni non toccano sono identici alla sorgente, commenti a parte', () => {
   const sourceSteps = stepNames(SOURCE).filter((name) => name !== 'Resolve national section for the production queue');
   const coreSteps = stepNames(CORE);
-  const gateSteps = coreSteps.filter((s) => !sourceSteps.includes(s));
+  const receiptStep = 'Upload canton section gate receipt';
+  const corpusOnlySteps = coreSteps.filter((s) => !sourceSteps.includes(s));
+  const gateSteps = corpusOnlySteps.filter((s) => s !== receiptStep);
   assert.deepEqual(coreSteps.filter((s) => sourceSteps.includes(s)), sourceSteps, 'il core ha perso o riordinato uno step della sorgente');
-  assert.equal(gateSteps.length, 7, `gli step in piu' sono quelli del gate di sezione: ${gateSteps.join(' | ')}`);
-  assert.ok(gateSteps.every((s) => s.startsWith('Section gate — ')), 'gli step del gate hanno nomi propri: un omonimo di uno step della sorgente renderebbe ambiguo ogni test che estrae per nome');
   assert.equal(new Set(coreSteps).size, coreSteps.length, 'nomi di step duplicati nel core');
+  assert.ok(corpusOnlySteps.includes(receiptStep), 'l\'upload della ricevuta appartiene solo al core');
+  const receiptIndex = coreSteps.indexOf(receiptStep);
+  assert.deepEqual(coreSteps.slice(receiptIndex - 1, receiptIndex + 2), [
+    'Section gate — ammissione del cantone (Remote Config, budget, tetto globale, beacon)',
+    receiptStep,
+    'Section gate — conferma dello slot ammesso',
+  ]);
+  assert.equal(workflowStepBlock(CORE, receiptStep), [
+    `      - name: ${receiptStep}`,
+    "        if: steps.canton.outcome == 'success'",
+    '        continue-on-error: true',
+    '        uses: actions/upload-artifact@v7',
+    '        with:',
+    '          name: canton-section-gate-${{ github.run_id }}-${{ github.run_attempt }}',
+    '          path: ${{ runner.temp }}/canton-section-gate.json',
+    '          retention-days: 3',
+    '          if-no-files-found: ignore',
+  ].join('\n'));
+  assert.equal(corpusOnlySteps.length, 8, `attesi sette step del gate e il suo upload: ${corpusOnlySteps.join(' | ')}`);
+  assert.ok(gateSteps.every((s) => s.startsWith('Section gate — ')), 'gli step del gate hanno nomi propri: un omonimo di uno step della sorgente renderebbe ambiguo ogni test che estrae per nome');
 
   // Lo step INTERO (if, env, with, run), non solo il blocco run: uno step
   // `uses:` o un `if:` cambiato per sbaglio non hanno un run da confrontare.
