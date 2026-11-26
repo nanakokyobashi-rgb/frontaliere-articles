@@ -213,8 +213,8 @@ test('the consensus counts one vote per model that answered, and seeks a second 
   const loop = SRC.slice(start, end);
   assert.doesNotMatch(loop, /modelResults\.push\(/, 'un voto aggiunto senza passare da addIndependentVote');
   assert.match(loop, /addIndependentVote\(modelResults, modelsToQuery\[i\], s\.value\)/);
-  assert.match(loop, /const voted = modelResults\.map\(\(r\) => r\.servedBy\);\s*const next = priorVoters\.length\s*\?\s*verificationModels\.find\(\(model\) => !voted\.includes\(model\) && !modelsToQuery\.includes\(model\)\)\s*:/);
-  assert.match(loop, /_runSingleFactCheck\(next,\s*verificationPrompt,\s*\{\s*isEvergreen:\s*isEvergreenArticle,\s*editorialContext,\s*excludeModels:\s*voted,\s*invalidVerdictModels,\s*editorialProofFailures,\s*deadlineMs,\s*\.\.\.\(priorVoters\.length \? \{ fresh: true \} : \{\}\),\s*\}\)/);
+  assert.match(loop, /const voted = modelResults\.map\(\(r\) => r\.servedBy\);[\s\S]*?const next = priorVoters\.length\s*\?\s*verificationModels\.find\(\(model\) => !voted\.includes\(model\) && !modelsToQuery\.includes\(model\)\)\s*:/);
+  assert.match(loop, /_runSingleFactCheck\(next,\s*verificationPrompt,\s*\{\s*isEvergreen:\s*isEvergreenArticle,\s*editorialContext,\s*excludeModels:\s*recoverThroughGroq \? \[\.\.\.new Set\(\[\.\.\.voted, AI_MODELS\.CODEX_CLI_PRIMARY\]\)\] : voted,\s*invalidVerdictModels,\s*editorialProofFailures,\s*deadlineMs,\s*\.\.\.\(priorVoters\.length \? \{ fresh: true \} : \{\}\),\s*\}\)/);
   assert.match(loop, /addIndependentVote\(modelResults, verificationModels\[2\], fallback\)/);
   const line = SRC.split('\n').find((l) => l.includes('buildFactCheckCallOptions({ model,'));
   assert.match(line, /jsonMode: true, excludeModels,/);
