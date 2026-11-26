@@ -16,7 +16,9 @@ on:
       - 'content/blog-meta-canton-gr-en.ts'
       - 'content/blog-meta-canton-gr-de.ts'
       - 'content/blog-meta-canton-gr-fr.ts'
-      - 'content/cantons/canton-gr/**'
+      - 'content/cantons/canton-gr/registry.ts'
+      - 'content/cantons/canton-gr/slugs.ts'
+      - 'content/cantons/canton-gr/seo.ts'
   workflow_dispatch:
     inputs:
       section:

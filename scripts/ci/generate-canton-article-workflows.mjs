@@ -812,7 +812,8 @@ export function sectionCorpusPaths(section) {
     if (!p.startsWith('content/')) throw new Error(`${section}: ${p} non e' sotto content/`);
   }
   return {
-    pushPaths: [`${s.bodyDir}/**`, ...s.metaFiles, `${sectionDir}/**`],
+    // Hub refreshes have their own publisher and never add articles.
+    pushPaths: [`${s.bodyDir}/**`, ...s.metaFiles, s.registryFile, s.slugDataFile, s.seoWriteFile],
     bodyPathRegex: `^${escapeRegex(s.bodyDir)}/[a-z]{2}/.+\\.ts$`,
   };
 }
