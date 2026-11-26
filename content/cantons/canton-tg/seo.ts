@@ -1225,7 +1225,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-supporto-datori-lavoro-turgovia.webp`,
+        "url": `${BASE_URL}/images/blog/article-rav-sedi-pubblicazione-vakanze.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Immagine illustrativa pertinente al tema dell’articolo"
