@@ -7633,9 +7633,13 @@ ${proofResponseFormat}`
     // Recover absent and duplicate votes through a different answering model.
     if (modelResults.length === 1 && (droppedDuplicate || modelResults[0].servedBy !== AI_MODELS.CODEX_CLI_PRIMARY)) {
       const voted = modelResults.map((r) => r.servedBy);
+      // If both primary requests fell back to the same model, use the free
+      // lane for immediate recovery and preserve the reserved Codex window.
+      const recoverThroughGroq = droppedDuplicate && !voted.includes(AI_MODELS.GROQ_GPT_OSS_120B);
       const next = priorVoters.length
         ? verificationModels.find((model) => !voted.includes(model) && !modelsToQuery.includes(model))
-        : verificationModels.slice(2).find((m) => !voted.includes(m))
+        : (recoverThroughGroq ? AI_MODELS.GROQ_GPT_OSS_120B : undefined)
+          || verificationModels.slice(2).find((m) => !voted.includes(m))
           || verificationModels.find((m) => !voted.includes(m))
           || modelsToQuery[1];
       try {
@@ -7643,7 +7647,7 @@ ${proofResponseFormat}`
           const extra = await _runSingleFactCheck(next, verificationPrompt, {
             isEvergreen: isEvergreenArticle,
             editorialContext,
-            excludeModels: voted,
+            excludeModels: recoverThroughGroq ? [...new Set([...voted, AI_MODELS.CODEX_CLI_PRIMARY])] : voted,
             invalidVerdictModels,
             editorialProofFailures,
             deadlineMs,
