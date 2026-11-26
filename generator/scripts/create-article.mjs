@@ -11131,6 +11131,29 @@ function headlineStackHasNavigation(stack) {
   });
 }
 
+/**
+ * EasyBlog can spell its RDFa type as a bare token, a CURIE, or a full URL,
+ * and the title anchor is not required to carry the theme's optional
+ * `uk-link-reset` class. Keep the card boundary structural: an article type
+ * is still required, and an article nested in an aside is never a headline
+ * card for this source.
+ */
+function isEligibleEasyBlogCard(ancestors, anchor) {
+  const card = ancestors.findLast((node) => node.name === 'article');
+  if (!card || ancestors.some((node) => node.name === 'aside')) return false;
+  if (headlineStackHasNavigation([...ancestors, anchor])) return false;
+
+  const articleTypes = new Set(['article', 'blogposting', 'newsarticle']);
+  const hasArticleType = headlineAttributeValue(card.attrs, 'typeof')
+    .trim()
+    .split(/\s+/u)
+    .some((token) => {
+      const localType = token.toLowerCase().match(/(?:^|[:/#])(article|blogposting|newsarticle)$/u)?.[1];
+      return articleTypes.has(localType);
+    });
+  return hasArticleType;
+}
+
 function structuralHeadlineForLink(html, linkStart, anchorTag) {
   const stack = headlineAncestorStack(html, linkStart);
   if (headlineStackHasNavigation(stack)) return null;
@@ -11254,10 +11277,7 @@ function extractHeadlines(html, baseUrl) {
     const easyBlogCard = useEasyBlogCard
       ? ancestors.findLast((node) => node.name === 'article')
       : null;
-    if (useEasyBlogCard && (!easyBlogCard || headlineAttributeValue(easyBlogCard.attrs, 'typeof') !== 'Article'
-      || ancestors.some((node) => node.name === 'aside')
-      || headlineStackHasNavigation([...ancestors, anchor])
-      || !headlineAttributeValue(anchor.attrs, 'class').split(/\s+/u).includes('uk-link-reset'))) {
+    if (useEasyBlogCard && !isEligibleEasyBlogCard(ancestors, anchor)) {
       anchor = nextAnchor;
       continue;
     }

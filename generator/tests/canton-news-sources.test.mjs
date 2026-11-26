@@ -2028,6 +2028,26 @@ test('Syna Argovia legge la data della propria scheda senza scaricare il dettagl
   ]);
 });
 
+test('EasyBlog accetta varianti del tipo articolo senza richiedere uk-link-reset', async () => {
+  const source = sourceOf('AG', 'https://syna.ch/aargau/ag-aktuell');
+  const card = (slug, type) => `<article typeof="${type}">
+    <a href="/aargau/ag-aktuell/${slug}">Eine Meldung aus dem Kanton Aargau</a>
+  </article>`;
+  const html = '<main>'
+    + card('lowercase-article', 'article')
+    + card('schema-news-article', 'https://schema.org/NewsArticle')
+    + '<aside>' + card('sidebar-article', 'Article') + '</aside>'
+    + card('not-an-article', 'Product')
+    + '</main>';
+  const { impl, calls } = fakeFetch({ [source.url]: { body: html } });
+  const result = await scanCantonSource(source, ctx(impl));
+  assert.deepEqual(calls.map(({ url }) => url), [source.url]);
+  assert.deepEqual(result.headlines.map(({ url }) => new URL(url).pathname.split('/').at(-1)), [
+    'lowercase-article',
+    'schema-news-article',
+  ]);
+});
+
 test('dateFromCardLabel: date editoriali locali alla scheda con una sola richiesta', async () => {
   const source = sourceOf('ZG', 'https://zg.ch/de/news');
   const pathFor = (slug) => '/de/news/2026/10/' + slug;
