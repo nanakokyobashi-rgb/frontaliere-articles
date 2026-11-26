@@ -30,7 +30,12 @@ import { sanitizeArticleFaqMarkdown } from '../../../scripts/lib/article-link-co
 
 /** Domini delle fonti primarie, sottodomini compresi. */
 export const OFFICIAL_SOURCE_DOMAINS = Object.freeze([
-  'admin.ch', 'ti.ch', 'ch.ch', 'ahv-iv.ch', 'parlament.ch',
+  'admin.ch', 'ch.ch', 'ahv-iv.ch', 'parlament.ch',
+  // Portali delle amministrazioni nel repertorio della Cancelleria federale.
+  // https://www.ch.ch/en/safety-and-justice/addresses-of-administrative-authorities/
+  'ag.ch', 'ai.ch', 'ar.ch', 'be.ch', 'baselland.ch', 'bs.ch', 'fr.ch', 'ge.ch',
+  'gl.ch', 'gr.ch', 'jura.ch', 'lu.ch', 'ne.ch', 'nw.ch', 'ow.ch', 'sg.ch',
+  'sh.ch', 'so.ch', 'sz.ch', 'tg.ch', 'ti.ch', 'ur.ch', 'vd.ch', 'vs.ch', 'zg.ch', 'zh.ch',
   'agenziaentrate.gov.it', 'inps.it', 'normattiva.it', 'gazzettaufficiale.it',
   'mef.gov.it', 'finanze.gov.it', 'salute.gov.it', 'governo.it', 'camera.it', 'senato.it',
   'regione.lombardia.it', 'regione.piemonte.it',
