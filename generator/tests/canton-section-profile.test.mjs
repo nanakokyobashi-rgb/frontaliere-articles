@@ -406,6 +406,19 @@ test('prompt cantonali: stesso formato di risposta delle storiche, cantone e con
   assert.match(CREATE_ARTICLE, /const enrichmentLine = IS_CANTON && !boundToText\n\s+\? CANTON_LINES\.expandEnrichmentLine/);
 });
 
+test('canton pre-spend prompts require a local fact even for a local publisher', () => {
+  const ju = buildCantonProfile('canton-ju');
+  const headline = 'La pénurie de main-d’œuvre qualifiée a poursuivi son repli en 2026';
+  const classification = cantonClassifierPrompt(ju, { headline, sourceHint: 'www.rfj.ch' });
+  const selection = cantonHeadlineSelectionPrompt(ju, {
+    headlineList: `H1 » (www.rfj.ch) ${headline}`, recentArticles: '', jsonQuoteSafetyRule: '',
+  });
+  assert.match(classification, /Notizie nazionali senza un nesso concreto/);
+  assert.match(classification, /dominio locale della testata non costituisce un nesso/);
+  assert.match(selection, /escludi quelle nazionali/);
+  assert.match(selection, /fatto o conseguenza locale documentata/);
+});
+
 test('prompt cantonali: contesto e liste hanno capi deterministici, lessico di ammissione intatto', () => {
   const p = buildCantonProfile('canton-gr', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
   const classifier = cantonClassifierPrompt(p, {

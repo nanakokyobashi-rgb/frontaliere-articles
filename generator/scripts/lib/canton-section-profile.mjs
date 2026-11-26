@@ -900,6 +900,7 @@ ${contextLine(p)}
 NON è rilevante:
 - Cronaca nera, incidenti, sport, cultura ed eventi senza impatto pratico su chi vive o lavora nel cantone
 - Notizie di altri cantoni o di altri paesi senza ricadute sul Canton ${p.cantonName}
+- Notizie nazionali senza un nesso concreto dichiarato nel titolo o nel sommario con il Canton ${p.cantonName} o i suoi frontalieri. Il dominio locale della testata non costituisce un nesso.
 - Gossip, intrattenimento, necrologi, risultati sportivi
 
 La fonte può essere in tedesco, francese o italiano: giudica il contenuto, non la lingua.
@@ -924,6 +925,7 @@ ARTICOLI GIÀ PUBBLICATI (NON scegliere argomenti simili o già coperti). Questo
 ${compactRecentArticles}
 
 CRITERI DI SELEZIONE (in ordine di priorità):
+Prima di ordinare le notizie, escludi quelle nazionali o di altri cantoni che non documentano un fatto, un dato o una conseguenza concreta per il Canton ${p.cantonName} o i suoi frontalieri. Una testata locale può ripubblicare un lancio nazionale: il dominio della testata non costituisce un nesso.
 1. IMPATTO PRATICO NEL CANTONE: lavoro e salari, fisco e imposta alla fonte, AVS/LPP, premi cassa malati, permessi, decisioni del governo o del parlamento cantonale, casa, mobilità e trasporti (chiusure, cantieri, orari), servizi pubblici
 2. FRONTALIERI: a parità di impatto, preferisci le notizie che toccano chi attraversa il confine per lavorare nel cantone
 3. NOVITÀ: notizie recenti con un fatto concreto (decisione, dato, scadenza, cambiamento)
@@ -936,7 +938,7 @@ ${jsonQuoteSafetyRule}
 Rispondi con un JSON object (no markdown, no code fences). Usa la CHIAVE della headline scelta, mai un numero nudo e mai il titolo di un articolo già pubblicato:
 {
   "selectedId": "<chiave della headline scelta, esattamente nella forma H1, H2, …>",
-  "reason": "<perché questa notizia conta per chi vive o lavora nel Canton ${p.cantonName}, max 2 frasi>"
+  "reason": "<fatto o conseguenza locale documentata dalla notizia, max 2 frasi>"
 }`;
 }
 
