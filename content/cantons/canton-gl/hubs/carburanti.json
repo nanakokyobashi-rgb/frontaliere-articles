@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "carburanti",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "0b94a9b4b64aacf11acddd2d2bc74af19ac05df3b0abf4b8ff8b2deff403a682",
+  "updatedAt": "2026-11-26T13:26:37.913Z",
+  "contentHash": "41a0058f80419f0cc56883470698e835de49820c40a9bf6e67b63778d293a37b",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-03T14:41:22.679Z",
+      "updatedAt": "2026-11-25T17:35:23.405Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-03T14:41:22.679Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Netstal: il Cantone apre un'altra via secondaria",
+          "url": "/articoli-glarona/netstal-via-secondaria/",
+          "excerpt": "A Netstal circa 100 auto in meno alla rotatoria Wiggispark potrebbero alleggerire la coda sulla Querspange nell'ora di punta serale.",
+          "date": "2026-11-26T13:23:22.205Z"
+        },
         {
           "title": "Glarona: Governo contro le detrazioni per risparmio energetico",
           "url": "/articoli-glarona/glarona-detrazioni-energia-2029/",
@@ -82,12 +88,6 @@
           "url": "/articoli-glarona/glarona-adesione-programma-perspecta/",
           "excerpt": "Il Governo di Glarona partecipa a Perspecta da ottobre 2026 a fine 2031 per favorire l'integrazione professionale tramite consulenze individuali BSLB.",
           "date": "2026-10-29T07:33:02.883Z"
-        },
-        {
-          "title": "Braunwald: al via un progetto, 80 milioni per 266 abitanti",
-          "url": "/articoli-glarona/braunwald-progetto-80-milioni/",
-          "excerpt": "La fonte indica 80 milioni di franchi per 266 abitanti a Braunwald e annuncia l'avvio di un grande progetto contro i pericoli naturali.",
-          "date": "2026-10-22T02:24:47.943Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-26T13:26:37.913Z"
     },
     "en": {
       "canton": "GL",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-03T14:41:22.679Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Netstal: the canton opens another side road",
+          "url": "/en/glarus-articles/netstal-side-route/",
+          "excerpt": "In Netstal, around 100 fewer cars at the Wiggispark roundabout could ease the queue on the Querspange during the evening rush hour.",
+          "date": "2026-11-26T13:23:22.205Z"
+        },
         {
           "title": "Glarus: Government opposes energy-saving tax deductions",
           "url": "/en/glarus-articles/glarus-energy-deductions-2029/",
@@ -169,12 +175,6 @@
           "url": "/en/glarus-articles/glarus-joins-perspecta-program/",
           "excerpt": "The Government of Glarus participates in Perspecta from October 2026 to the end of 2031 to promote professional integration through individual BSLB consultations.",
           "date": "2026-10-29T07:33:02.883Z"
-        },
-        {
-          "title": "Braunwald: a project gets underway, 80 million for 266 inhabitants",
-          "url": "/en/glarus-articles/braunwald-project-80-million/",
-          "excerpt": "The source indicates 80 million francs for 266 residents in Braunwald and announces the launch of a major project against natural hazards.",
-          "date": "2026-10-22T02:24:47.943Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-26T13:26:37.913Z"
     },
     "de": {
       "canton": "GL",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-03T14:41:22.679Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Netstal: Der Kanton eröffnet eine weitere Nebenstraße",
+          "url": "/de/glarus-artikel/netstal-schleichweg/",
+          "excerpt": "In Netstal könnten rund 100 Autos weniger am Kreisverkehr Wiggispark den Rückstau auf der Querspange während der abendlichen Hauptverkehrszeit verringern.",
+          "date": "2026-11-26T13:23:22.205Z"
+        },
         {
           "title": "Glarus: Regierung gegen Abzüge für Energiesparmassnahmen",
           "url": "/de/glarus-artikel/glarus-energieabzuege-2029/",
@@ -256,12 +262,6 @@
           "url": "/de/glarus-artikel/glarus-nimmt-an-perspecta-teil/",
           "excerpt": "Die Regierung Glarus nimmt von Oktober 2026 bis Ende 2031 an Perspecta teil, um die berufliche Integration durch individuelle BSLB-Beratung zu fördern.",
           "date": "2026-10-29T07:33:02.883Z"
-        },
-        {
-          "title": "Braunwald: Start eines Projekts, 80 Millionen für 266 Einwohner",
-          "url": "/de/glarus-artikel/braunwald-projekt-80-millionen/",
-          "excerpt": "Die Quelle nennt 80 Millionen Franken für 266 Einwohner in Braunwald und kündigt den Beginn eines großen Projekts gegen Naturgefahren an.",
-          "date": "2026-10-22T02:24:47.943Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-26T13:26:37.913Z"
     },
     "fr": {
       "canton": "GL",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-03T14:41:22.679Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Netstal : le canton ouvre une autre voie secondaire",
+          "url": "/fr/articles-glaris/netstal-route-secondaire/",
+          "excerpt": "À Netstal, environ 100 voitures de moins au giratoire Wiggispark pourraient alléger la file sur la Querspange à l'heure de pointe du soir.",
+          "date": "2026-11-26T13:23:22.205Z"
+        },
         {
           "title": "Glaris : Gouvernement opposé aux déductions pour les économies d’énergie",
           "url": "/fr/articles-glaris/glaris-deductions-energie-2029/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-glaris/glaris-adhere-au-programme-perspecta/",
           "excerpt": "Le Gouvernement de Glaris participe à Perspecta d'octobre 2026 à fin 2031 pour favoriser l'intégration professionnelle par le biais de consultations individuelles BSLB.",
           "date": "2026-10-29T07:33:02.883Z"
-        },
-        {
-          "title": "Braunwald : un projet démarre, 80 millions pour 266 habitants",
-          "url": "/fr/articles-glaris/braunwald-projet-80-millions/",
-          "excerpt": "La source indique 80 millions de francs pour 266 habitants à Braunwald et annonce le lancement d'un grand projet contre les dangers naturels.",
-          "date": "2026-10-22T02:24:47.943Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-26T13:26:37.913Z"
     }
   }
 }
