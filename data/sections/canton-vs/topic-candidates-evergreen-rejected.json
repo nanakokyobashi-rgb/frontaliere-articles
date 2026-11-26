@@ -4,18 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/830157/der-herbst-der-langen-messer-wilde-wahl-oder-gar-parlamentsstreik-wie-das-svpticket-gesprengt-werden-k%c3%b6nnte": {
-      "section": "canton-vs",
-      "ts": 1795520624841
-    },
-    "canton-vs::https://www.pomona.ch/story/830214/der-b%c3%bcezer-soll-fr%c3%bcher-in-rente-als-der-b%c3%bcrogummi-eine-bestechende-idee-mit-haken": {
-      "section": "canton-vs",
-      "ts": 1795520626564
-    },
-    "canton-vs::https://www.pomona.ch/story/830154/hunderte-demonstrieren-in-bern-gegen-entlassungen-in-der-medienbranche": {
-      "section": "canton-vs",
-      "ts": 1795520628155
-    },
     "canton-vs::https://www.pomona.ch/story/830679/wallis-plant-neue-regeln-f%c3%bcr-die-gesundheitskosten": {
       "section": "canton-vs",
       "ts": 1795564152375
@@ -79,6 +67,18 @@
     "canton-vs::https://www.pomona.ch/story/831471/ungewisse-zukunft-f%c3%bcr-industrieareal-in-chippis": {
       "section": "canton-vs",
       "ts": 1795677617831
+    },
+    "canton-vs::https://www.pomona.ch/story/831581/trump-beschuldigt-die-schweiz-und-will-die-z%c3%b6lle-auf-15-prozent-erh%c3%b6hen-parmelin-reagiert": {
+      "section": "canton-vs",
+      "ts": 1795693492161
+    },
+    "canton-vs::https://www.pomona.ch/story/831391/frauen-werden-selbst-mit-staubsaugrobotern-ausgesp%c3%a4ht-und-abgeh%c3%b6rt": {
+      "section": "canton-vs",
+      "ts": 1795693493596
+    },
+    "canton-vs::https://www.pomona.ch/story/831403/milliarden-f%c3%bcr-die-armee-die-sp-will-eine-abstimmung-erzwingen": {
+      "section": "canton-vs",
+      "ts": 1795693494951
     }
   }
 }
