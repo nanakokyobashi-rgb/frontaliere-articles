@@ -1025,18 +1025,25 @@ test('le sole modifiche a body esistenti liberano la coda di generazione', () =>
   const end = admit.indexOf('content_push=false', start);
   assert.ok(start >= 0 && end > start);
   const bodyPath = 'content/blog-body-canton-sg/fr/article.ts';
-  const run = (files) => {
+  const run = (files, { before = null, after = null } = {}) => {
     const scratch = mkdtempSync(path.join(tmpdir(), 'generation-body-maintenance-'));
     try {
+      const beforeFile = path.join(scratch, 'before.json');
+      const afterFile = path.join(scratch, 'after.json');
+      if (before) writeFileSync(beforeFile, JSON.stringify(before));
+      if (after) writeFileSync(afterFile, JSON.stringify(after));
       const result = spawnSync('bash', ['-c', [
         'set -eu',
         'skip_generation_slot() { echo "reason=$1"; exit 0; }',
+        'gh_api_timeout() { case "$3" in *ref=before) cat "$REGISTRY_BEFORE";; *ref=after) cat "$REGISTRY_AFTER";; *) return 1;; esac; }',
         admit.slice(start, end),
         'echo continue',
       ].join('\n')], {
         encoding: 'utf8',
         env: {
           ...process.env,
+          REPO: 'fixture/corpus', PUSH_BEFORE: 'before', PUSH_SHA: 'after',
+          REGISTRY_BEFORE: beforeFile, REGISTRY_AFTER: afterFile,
           GITHUB_OUTPUT: path.join(scratch, 'github-output'),
           CANTON_ONLY: WF.match(/CANTON_ONLY: \|-\n((?: {12}[^\n]*\n)+)/)[1],
           BODY_MAINTENANCE_PATH_RE: '^content/blog-body(-[a-z0-9-]+)?/(it|de|en|fr)/[^/]+[.]ts$',
@@ -1070,7 +1077,17 @@ test('le sole modifiche a body esistenti liberano la coda di generazione', () =>
   assert.match(run(vaud), /reason=admit-canton-only-content/);
   const vaudCover = { filename: 'public/images/blog/article-manifestazione-losanna-tagli-bilancio.webp', status: 'added' };
   const imageRegistry = { filename: 'data/generated-image-registry.json', status: 'modified' };
-  assert.match(run([...vaud, vaudCover, imageRegistry]), /reason=admit-canton-only-content/);
+  const credit = { filename: 'content/image-credits/blog/article-manifestazione-losanna-tagli-bilancio.json', status: 'added' };
+  const registry = (...assets) => ({ schema: 1, assetCount: assets.length, assets });
+  const existing = { imageUrl: '/images/blog/article-national.webp', label: 'unchanged' };
+  const added = { imageUrl: '/images/blog/article-manifestazione-losanna-tagli-bilancio.webp' };
+  const before = registry(existing);
+  assert.match(run([...vaud, credit]), /reason=admit-canton-only-content/);
+  assert.match(run([...vaud, vaudCover, credit, imageRegistry], { before, after: registry(existing, added) }), /reason=admit-canton-only-content/);
+  assert.match(run([...vaud, vaudCover, imageRegistry], { before, after: registry({ ...existing, label: 'changed' }, added) }), /continue/);
+  assert.match(run([...vaud, vaudCover, imageRegistry], { before, after: registry(existing, added, added) }), /continue/);
+  assert.match(run([...vaud, vaudCover, imageRegistry]), /continue/);
+  assert.match(run([...vaud, { ...credit, filename: 'content/image-credits/blog/article-national.json' }]), /continue/);
   assert.match(run([...vaud, { filename: 'data/topic-candidates-today-picks.json', status: 'modified' }]), /continue/);
   assert.match(run([...vaud, { filename: 'content/cantons/canton-vd/hubs/runtime.ts', status: 'modified' }]), /continue/);
   assert.match(run([...vaud, imageRegistry]), /continue/);
