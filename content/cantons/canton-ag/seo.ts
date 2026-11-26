@@ -1245,6 +1245,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-muelimaert-lenzburg-gas-evacuazione': {
+    title: 'Evacuazione Mülimärt Lenzburg per fuoriuscita di anidride carbonica',
+    description: 'Al Mülimärt di Lenzburg è avvenuto un allarme per anidride carbonica martedì. 30 persone hanno riferito malessere e l\'area è stata liberata.',
+    keywords: 'frontalieri, ticino, svizzera, italia, evacuazione, mülimärt, lenzburg, fuoriuscita',
+    ogTitle: 'Evacuazione Mülimärt Lenzburg per gas',
+    ogDescription: 'Martedì poco dopo le 11.30, il Mülimärt di Lenzburg è stato evacuato per fuoriuscita di anidride carbonica. 30 persone hanno avuto malessere; nessun trasporto in ospedale è avvenuto.',
+    canonicalPath: '/articoli-argovia/muelimaert-lenzburg-gas-evacuazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Evacuazione Mülimärt Lenzburg per fuoriuscita di anidride carbonica",
+      "description": "Al Mülimärt di Lenzburg è avvenuto un allarme per anidride carbonica martedì. 30 persone hanno riferito malessere e l'area è stata liberata.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-allarme-bernasconi-artificieri.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-26T18:53:56+00:00",
+      "dateModified": "2026-11-26T18:53:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/muelimaert-lenzburg-gas-evacuazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

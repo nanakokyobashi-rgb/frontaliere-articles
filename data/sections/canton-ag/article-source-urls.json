@@ -143,5 +143,11 @@
     "articleId": "incendio-sins-linea-s26",
     "ts": "2026-11-07T14:59:05.213Z",
     "keyForm": 2
+  },
+  "https://www.watson.ch/wirtschaft/schweiz/547328969-muelimaert-lenzburg-wegen-gasaustritt-evakuiert": {
+    "articleId": "muelimaert-lenzburg-gas-evacuazione",
+    "ts": "2026-11-26T18:53:56.380Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "76057a93aeaf358fdd4c75f2da78d4bbcb3dd06f0f75df55eb2a06a387d26871"
   }
 }

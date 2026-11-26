@@ -99,6 +99,9 @@ const blogMetaCantonAgIt: Record<string, string> = {
     'blog.article.incendio-sins-linea-s26.title': 'Incendio a Sins AG: interrotta la linea S26',
     'blog.article.incendio-sins-linea-s26.excerpt': 'Un incendio in un fienile a Sins AG ha interrotto la tratta tra Rotkreuz e Lenzburg: sulla S26 circolano bus sostitutivi fino alle 16 circa.',
     'blog.article.incendio-sins-linea-s26.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.muelimaert-lenzburg-gas-evacuazione.title': 'Evacuazione Mülimärt Lenzburg per fuoriuscita di anidride carbonica',
+    'blog.article.muelimaert-lenzburg-gas-evacuazione.excerpt': 'Allarme per anidride carbonica martedì poco dopo le 11.30; 30 persone hanno riferito malessere e vertigini; liberazione verso le 13.30.',
+    'blog.article.muelimaert-lenzburg-gas-evacuazione.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAgIt;

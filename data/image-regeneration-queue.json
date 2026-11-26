@@ -50,6 +50,16 @@
       "failureCount": 0,
       "requestedAt": "2026-11-26T13:37:40.314Z",
       "lastFailureAt": "2026-11-26T13:37:40.314Z"
+    },
+    {
+      "articleId": "muelimaert-lenzburg-gas-evacuazione",
+      "title": "Evacuazione Mülimärt Lenzburg per fuoriuscita di anidride carbonica",
+      "fallbackImage": "/images/blog/article-allarme-bernasconi-artificieri.webp",
+      "reason": "All image providers failed for article-muelimaert-lenzburg-gas-evacuazione: openai-codex (vision gate rejected image: Photorealistic synthetic emergency scene at a shopping center;",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-11-26T18:53:56.376Z",
+      "lastFailureAt": "2026-11-26T18:53:56.376Z"
     }
   ]
 }

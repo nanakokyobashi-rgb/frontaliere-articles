@@ -359,4 +359,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'muelimaert-lenzburg-gas-evacuazione',
+ category: 'pratico',
+ date: '2026-11-26T18:53:55.972Z',
+ image: '/images/blog/article-allarme-bernasconi-artificieri.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

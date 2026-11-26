@@ -99,6 +99,9 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.incendio-sins-linea-s26.title': 'Fire at Sins AG: S26 line interrupted',
     'blog.article.incendio-sins-linea-s26.excerpt': 'A fire in a barn in Sins AG has interrupted the route between Rotkreuz and Lenzburg: replacement buses are operating on the S26 until around 16:00.',
     'blog.article.incendio-sins-linea-s26.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.muelimaert-lenzburg-gas-evacuazione.title': 'Evacuation of Mülimärt Lenzburg due to a carbon dioxide leak',
+    'blog.article.muelimaert-lenzburg-gas-evacuazione.excerpt': 'Carbon dioxide alarm on Tuesday shortly after 11.30; 30 people reported feeling unwell and experiencing dizziness; clearance around 13.30.',
+    'blog.article.muelimaert-lenzburg-gas-evacuazione.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAgEn;
