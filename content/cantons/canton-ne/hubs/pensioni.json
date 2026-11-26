@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "pensioni",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "8e8989a79154fb37c9f400ebc15eed2fa4753ff797ab36365bf70b23d92e5900",
+  "updatedAt": "2026-11-26T15:32:14.755Z",
+  "contentHash": "85c5de544e80095384bdb0b74766168b1736c07d3e30e34da4ff1dd791b8fbb5",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -129,6 +129,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Neuchâtel finanzia 3 progetti pilota per autonomia disabili",
+          "url": "/articoli-neuchatel/neuchatel-supporto-progetti-piloti-disabili/",
+          "excerpt": "Il Cantone di Neuchâtel ha selezionato tre iniziative innovative dopo l'appello a progetti pilota «Vie, logement, carrière» lanciato nel 2024.",
+          "date": "2026-11-26T15:28:20.281Z"
+        },
+        {
           "title": "Licenziamenti al Locle: 90 posti e piano sociale",
           "url": "/articoli-neuchatel/tagli-lavoro-piano-sociale/",
           "excerpt": "90 posti soppressi al Locle, 10 meno dei 100 annunciati in ottobre.",
@@ -151,12 +157,6 @@
           "url": "/articoli-neuchatel/frontalieri-aumento-pausa-2023/",
           "excerpt": "L'Osservatorio statistico dell'Arc giurassiano (Ostaj) segnala che in vent'anni i frontalieri sono più che triplicati, con quasi 75.000 al giorno, ma la dinamica è in pausa dal 2023.",
           "date": "2026-11-08T13:22:41.489Z"
-        },
-        {
-          "title": "Stagnazione frontalieri: dati Ostaj e libro sui legami transfrontalieri",
-          "url": "/articoli-neuchatel/ostaj-stagnazione-frontalieri/",
-          "excerpt": "L'Observatoire statistique de l'Arc jurassien (Ostaj) segnala stagnazione dei lavoratori frontalieri, triplicati in vent'anni.",
-          "date": "2026-11-07T11:35:41.176Z"
         }
       ],
       "links": [
@@ -177,7 +177,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T15:32:14.755Z"
     },
     "en": {
       "canton": "NE",
@@ -284,6 +284,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Neuchâtel funds 3 pilot projects for the autonomy of people with disabilities",
+          "url": "/en/neuchatel-articles/neuchatel-support-pilot-disability-projects/",
+          "excerpt": "The Canton of Neuchâtel selected three innovative initiatives following the call for pilot projects “Life, housing, career” launched in 2024.",
+          "date": "2026-11-26T15:28:20.281Z"
+        },
+        {
           "title": "Layoffs in Le Locle: 90 positions and social plan",
           "url": "/en/neuchatel-articles/le-locle-job-cuts-social-plan/",
           "excerpt": "90 positions eliminated in Le Locle, 10 fewer than the 100 announced in October.",
@@ -306,12 +312,6 @@
           "url": "/en/neuchatel-articles/frontalieri-increase-pause-2023/",
           "excerpt": "The Statistical Observatory of the Jura Arc (Ostaj) reports that over twenty years, cross-border workers have more than tripled, reaching nearly 75.000 per day, but the trend has been on hold since 2023.",
           "date": "2026-11-08T13:22:41.489Z"
-        },
-        {
-          "title": "Stagnation of cross-border commuters: Ostaj data and book on cross-border ties",
-          "url": "/en/neuchatel-articles/ostaj-frontalier-stagnation/",
-          "excerpt": "The Statistical Observatory of the Jura Arc (Ostaj) reports stagnation among cross-border workers, who have tripled in twenty years.",
-          "date": "2026-11-07T11:35:41.176Z"
         }
       ],
       "links": [
@@ -332,7 +332,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T15:32:14.755Z"
     },
     "de": {
       "canton": "NE",
@@ -439,6 +439,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Neuenburg finanziert 3 Pilotprojekte für Autonomie behinderter Menschen",
+          "url": "/de/neuenburg-artikel/neuenburg-unterstuetzung-pilotprojekte-behinderte/",
+          "excerpt": "Der Kanton Neuenburg hat nach dem 2024 lancierten Aufruf zu Pilotprojekten «Vie, logement, carrière» drei innovative Initiativen ausgewählt.",
+          "date": "2026-11-26T15:28:20.281Z"
+        },
+        {
           "title": "Entlassungen in Locle: 90 Stellen und Sozialplan",
           "url": "/de/neuenburg-artikel/le-locle-stellenabbau-sozialplan/",
           "excerpt": "90 Stellen in Locle gestrichen, 10 weniger als die im Oktober angekündigten 100.",
@@ -461,12 +467,6 @@
           "url": "/de/neuenburg-artikel/frontalier-anstieg-pause-2023/",
           "excerpt": "Das statistische Observatorium des Jurabogens (Ostaj) weist darauf hin, dass sich die Zahl der Grenzgänger in zwanzig Jahren mehr als verdreifacht hat und fast 75.000 von ihnen täglich die Grenze überqueren, die…",
           "date": "2026-11-08T13:22:41.489Z"
-        },
-        {
-          "title": "Stagnazione frontalieri: Ostaj-Daten und Buch zu grenzüberschreitenden Verbindungen",
-          "url": "/de/neuenburg-artikel/ostaj-frontalier-stagnation/",
-          "excerpt": "Das Observatoire statistique de l 'Arc jurassien (Ostaj) berichtet von einer Stagnation der Grenzgänger, die sich in zwanzigJahren verdreifacht hat.",
-          "date": "2026-11-07T11:35:41.176Z"
         }
       ],
       "links": [
@@ -487,7 +487,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T15:32:14.755Z"
     },
     "fr": {
       "canton": "NE",
@@ -594,6 +594,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Neuchâtel finance 3 projets pilotes pour l’autonomie des personnes handicapées",
+          "url": "/fr/articles-neuchatel/neuchatel-soutient-projets-pilotes-handicap/",
+          "excerpt": "À l'issue de la procédure de sélection des projets pilotes « Vie, logement, carrière », engagée en 2024, le Canton de Neuchâtel a retenu trois initiatives innovantes.",
+          "date": "2026-11-26T15:28:20.281Z"
+        },
+        {
           "title": "Licenciements au Locle : 90 postes et plan social",
           "url": "/fr/articles-neuchatel/le-locle-suppressions-emplois-plan-social/",
           "excerpt": "90 postes supprimés au Locle, 10 de moins que les 100 annoncés en octobre.",
@@ -616,12 +622,6 @@
           "url": "/fr/articles-neuchatel/frontaliers-hausse-stabilisation-2023/",
           "excerpt": "L'Observatoire statistique de l'Arc jurassien (Ostaj) indique qu'en vingt ans, le nombre de frontaliers a plus que triplé, avec près de 75.000 par jour, mais que la dynamique est en pause depuis 2023.",
           "date": "2026-11-08T13:22:41.489Z"
-        },
-        {
-          "title": "Stagnazione frontalieri: dati Ostaj e libro sui legami",
-          "url": "/fr/articles-neuchatel/ostaj-stagnation-frontalier/",
-          "excerpt": "L'Observatoire statistique de l'Arc jurassien (Ostaj) signale une stagnation du nombre de travailleurs frontaliers, dont le nombre a triplé en vingt ans.",
-          "date": "2026-11-07T11:35:41.176Z"
         }
       ],
       "links": [
@@ -642,7 +642,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T15:32:14.755Z"
     }
   }
 }
