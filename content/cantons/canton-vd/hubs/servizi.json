@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "c8c9d0868a30743d66923a2be4945b68b851cfa962e4ff91e54ab7a37ded7fc9",
+  "updatedAt": "2026-11-26T13:02:36.485Z",
+  "contentHash": "aad6a28a8df6d2f0dc6c88842f73141a773d764cb1145efec63713b08ed3a6e8",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -18,13 +18,8 @@
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-11-26T00:36:15.946Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-25T16:08:35.229Z",
+      "updatedAt": "2026-11-26T01:13:56.099Z",
       "keyFacts": 0
     }
   ],
@@ -100,20 +95,6 @@
           "updatedAt": "2026-11-25T21:43:23.986Z"
         },
         {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Lausanne",
-              "value": "6 °C",
-              "detail": "oggi da 3 a 6 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-26T00:36:15.946Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -149,7 +130,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26734-le-canton-de-vaud-recommande-la-vaccination-contre-la-grippe-le-covid-19-et-le-vrs-aux-personnes-a-risque"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -229,7 +210,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T13:02:36.485Z"
     },
     "en": {
       "canton": "VD",
@@ -302,20 +283,6 @@
           "updatedAt": "2026-11-25T21:43:23.986Z"
         },
         {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Lausanne",
-              "value": "6 °C",
-              "detail": "today from 3 to 6 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-26T00:36:15.946Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -351,7 +318,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26734-le-canton-de-vaud-recommande-la-vaccination-contre-la-grippe-le-covid-19-et-le-vrs-aux-personnes-a-risque"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -427,7 +394,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T13:02:36.485Z"
     },
     "de": {
       "canton": "VD",
@@ -500,20 +467,6 @@
           "updatedAt": "2026-11-25T21:43:23.986Z"
         },
         {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Lausanne",
-              "value": "6 °C",
-              "detail": "heute 3 bis 6 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-26T00:36:15.946Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -549,7 +502,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26734-le-canton-de-vaud-recommande-la-vaccination-contre-la-grippe-le-covid-19-et-le-vrs-aux-personnes-a-risque"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -625,7 +578,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T13:02:36.485Z"
     },
     "fr": {
       "canton": "VD",
@@ -698,20 +651,6 @@
           "updatedAt": "2026-11-25T21:43:23.986Z"
         },
         {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Lausanne",
-              "value": "6 °C",
-              "detail": "aujourd’hui de 3 à 6 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-26T00:36:15.946Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -747,7 +686,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26734-le-canton-de-vaud-recommande-la-vaccination-contre-la-grippe-le-covid-19-et-le-vrs-aux-personnes-a-risque"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -819,7 +758,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T13:02:36.485Z"
     }
   }
 }

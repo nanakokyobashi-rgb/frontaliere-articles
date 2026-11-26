@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "carburanti",
-  "updatedAt": "2026-11-12T10:45:43.005Z",
-  "contentHash": "b06d7ab38f2b08e39e93e1d74ea87a26045ed3e971b1e9216931594548f5ccd8",
+  "updatedAt": "2026-11-26T13:02:36.485Z",
+  "contentHash": "2055c6fe23f880d5cca00900adfa6cc8d844328a70d6afa7c5bde415251acb61",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-10T15:13:39.066Z",
+      "updatedAt": "2026-11-25T17:35:23.405Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-10T15:13:39.066Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Priorità al traffico economico su cinque nuovi tratti a Berna",
+          "url": "/articoli-berna/priorita-traffico-cinque-tratti/",
+          "excerpt": "La decisione del Gemeinderat del 26 novembre 2026 apre cinque nuovi tratti nel 2027, dopo un pilota positivo partito il 1° giugno 2025.",
+          "date": "2026-11-26T12:58:39.923Z"
+        },
         {
           "title": "Bienne: soppressi tutti i corrieri salariati",
           "url": "/articoli-berna/bienne-corrieri-salariati-2026/",
@@ -82,12 +88,6 @@
           "url": "/articoli-berna/procedure-impianti-solari-eolici/",
           "excerpt": "Dal 1° aprile 2026 è in vigore l'obbligo federale per impianti solari ed eolici di interesse nazionale; Berna adegua la legge edilizia.",
           "date": "2026-10-30T22:00:04.865Z"
-        },
-        {
-          "title": "Polizia cantonale di Berna estende lo sportello virtuale",
-          "url": "/articoli-berna/sportello-virtuale-polizia-berna/",
-          "excerpt": "Dal 2 novembre 2026 la Polizia cantonale di Berna offre in tutto il Cantone semplici servizi via videochiamata, anche in tedesco.",
-          "date": "2026-10-30T21:27:08.006Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-12T10:45:43.005Z"
+      "updatedAt": "2026-11-26T13:02:36.485Z"
     },
     "en": {
       "canton": "BE",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-10T15:13:39.066Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Priority for commercial traffic on five new sections in Bern",
+          "url": "/en/bern-articles/traffic-priority-five-routes/",
+          "excerpt": "The decision of the Gemeinderat of November 26, 2026 opens five new sections in 2027, following a positive pilot launched on June 1, 2025.",
+          "date": "2026-11-26T12:58:39.923Z"
+        },
         {
           "title": "Bienne: all salaried couriers eliminated",
           "url": "/en/bern-articles/biel-salaried-couriers-2026/",
@@ -169,12 +175,6 @@
           "url": "/en/bern-articles/solar-wind-plant-procedures/",
           "excerpt": "Since April 1, 2026, the federal requirement for solar and wind installations of national interest has been in force; Bern is amending the building law.",
           "date": "2026-10-30T22:00:04.865Z"
-        },
-        {
-          "title": "Bern cantonal police expands its virtual service desk",
-          "url": "/en/bern-articles/bern-virtual-police-counter/",
-          "excerpt": "From 2 November 2026, the Bern Cantonal Police will offer simple services via video call throughout the canton, also in German.",
-          "date": "2026-10-30T21:27:08.006Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-12T10:45:43.005Z"
+      "updatedAt": "2026-11-26T13:02:36.485Z"
     },
     "de": {
       "canton": "BE",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-10T15:13:39.066Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Priorität für den Wirtschaftsverkehr auf fünf neuen Strecken in Bern",
+          "url": "/de/bern-artikel/prioritaet-verkehr-fuenf-strecken/",
+          "excerpt": "Die Entscheidung des Gemeinderats vom 26. November 2026 eröffnet 2027 fünf neue Strecken, nach einem positiven Pilotprojekt, das am 1. Juni 2025 gestartet wurde.",
+          "date": "2026-11-26T12:58:39.923Z"
+        },
         {
           "title": "Biel: Alle angestellten Kuriere gestrichen",
           "url": "/de/bern-artikel/biel-angestellte-kuriere-2026/",
@@ -256,12 +262,6 @@
           "url": "/de/bern-artikel/verfahren-solare-windanlagen/",
           "excerpt": "Am 1. April 2026 ist der sogenannte Beschleunigungserlass des Bundes in Kraft getreten, der die Kantone verpflichtet, die Verfahren für den Bau, den Ausbau und die Erneuerung von Solar- und Windenergieanlagen von…",
           "date": "2026-10-30T22:00:04.865Z"
-        },
-        {
-          "title": "Kantonspolizei Bern erweitert den virtuellen Schalter",
-          "url": "/de/bern-artikel/virtueller-polizeischalter-bern/",
-          "excerpt": "Ab dem 2. November 2026 bietet die Kantonspolizei Bern im gesamten Kanton einfache Dienstleistungen per Videoanruf an, auch auf Deutsch.",
-          "date": "2026-10-30T21:27:08.006Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-12T10:45:43.005Z"
+      "updatedAt": "2026-11-26T13:02:36.485Z"
     },
     "fr": {
       "canton": "BE",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-10T15:13:39.066Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Priorité au trafic économique sur cinq nouveaux tronçons à Berne",
+          "url": "/fr/articles-berne/priorite-trafic-cinq-troncons/",
+          "excerpt": "La décision du Gemeinderat du 26 novembre 2026 ouvre cinq nouveaux tronçons en 2027, après un projet pilote positif lancé le 1er juin 2025.",
+          "date": "2026-11-26T12:58:39.923Z"
+        },
         {
           "title": "Bienne : suppression de tous les coursiers salariés",
           "url": "/fr/articles-berne/bienne-coursiers-salaries-2026/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-berne/procedures-installations-solaires/",
           "excerpt": "Depuis le 1er avril 2026, l'obligation fédérale concernant les installations solaires et éoliennes d'intérêt national est en vigueur ; Berne adapte la loi sur les constructions.",
           "date": "2026-10-30T22:00:04.865Z"
-        },
-        {
-          "title": "La police cantonale de Berne étend son guichet virtuel",
-          "url": "/fr/articles-berne/guichet-police-virtuel-berne/",
-          "excerpt": "À partir du 2 novembre 2026, la police cantonale de Berne propose dans tout le canton des services simples par visioconférence, également en allemand.",
-          "date": "2026-10-30T21:27:08.006Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-12T10:45:43.005Z"
+      "updatedAt": "2026-11-26T13:02:36.485Z"
     }
   }
 }

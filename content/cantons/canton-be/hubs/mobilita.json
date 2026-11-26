@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T10:34:02.735Z",
-  "contentHash": "31fe0d4a663b765da912b1071ed5abfa3f2305421045fceacb08bcde3712c8de",
+  "updatedAt": "2026-11-26T13:02:36.485Z",
+  "contentHash": "f5754ba250d1a4bdc6da024791d38ae7762d7fe0ef08b3758ae3caa30880ec70",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -133,6 +133,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Priorità al traffico economico su cinque nuovi tratti a Berna",
+          "url": "/articoli-berna/priorita-traffico-cinque-tratti/",
+          "excerpt": "La decisione del Gemeinderat del 26 novembre 2026 apre cinque nuovi tratti nel 2027, dopo un pilota positivo partito il 1° giugno 2025.",
+          "date": "2026-11-26T12:58:39.923Z"
+        },
+        {
           "title": "Lützelflüh: taglio di sicurezza, traffico su una corsia",
           "url": "/articoli-berna/ramsei-taglio-sicurezza-strada/",
           "excerpt": "A Ramsei, nel comune di Lützelflüh, la Sumiswaldstrasse verso Sumiswald sarà gestita su una corsia dal 2 al 13 novembre 2026, con semaforo.",
@@ -180,7 +186,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-26T13:02:36.485Z"
     },
     "en": {
       "canton": "BE",
@@ -296,6 +302,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Priority for commercial traffic on five new sections in Bern",
+          "url": "/en/bern-articles/traffic-priority-five-routes/",
+          "excerpt": "The decision of the Gemeinderat of November 26, 2026 opens five new sections in 2027, following a positive pilot launched on June 1, 2025.",
+          "date": "2026-11-26T12:58:39.923Z"
+        },
+        {
           "title": "Lützelflüh: safety tree felling, traffic on one lane",
           "url": "/en/bern-articles/ramsei-safety-logging-road/",
           "excerpt": "In Ramsei, in the municipality of Lützelflüh, Sumiswaldstrasse toward Sumiswald will be operated on a single lane from November 2 to 13, 2026, with traffic lights.",
@@ -343,7 +355,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-26T13:02:36.485Z"
     },
     "de": {
       "canton": "BE",
@@ -459,6 +471,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Priorität für den Wirtschaftsverkehr auf fünf neuen Strecken in Bern",
+          "url": "/de/bern-artikel/prioritaet-verkehr-fuenf-strecken/",
+          "excerpt": "Die Entscheidung des Gemeinderats vom 26. November 2026 eröffnet 2027 fünf neue Strecken, nach einem positiven Pilotprojekt, das am 1. Juni 2025 gestartet wurde.",
+          "date": "2026-11-26T12:58:39.923Z"
+        },
+        {
           "title": "Lützelflüh: Sicherheitsholzerei, Verkehr auf einer Fahrspur",
           "url": "/de/bern-artikel/ramsei-sicherheitsholzerei-strasse/",
           "excerpt": "Sie nennt den Ramseibergwald, den Ort Ramsei, die Gemeinde Lützelflüh und die Sumiswaldstrasse in Richtung Sumiswald.",
@@ -506,7 +524,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-26T13:02:36.485Z"
     },
     "fr": {
       "canton": "BE",
@@ -622,6 +640,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Priorité au trafic économique sur cinq nouveaux tronçons à Berne",
+          "url": "/fr/articles-berne/priorite-trafic-cinq-troncons/",
+          "excerpt": "La décision du Gemeinderat du 26 novembre 2026 ouvre cinq nouveaux tronçons en 2027, après un projet pilote positif lancé le 1er juin 2025.",
+          "date": "2026-11-26T12:58:39.923Z"
+        },
+        {
           "title": "Lützelflüh : coupe de sécurité, circulation sur une voie",
           "url": "/fr/articles-berne/ramsei-abattage-securite-route/",
           "excerpt": "À Ramsei, dans la commune de Lützelflüh, la Sumiswaldstrasse en direction de Sumiswald sera gérée sur une voie du 2 au 13 novembre 2026, avec des feux de signalisation.",
@@ -669,7 +693,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-26T13:02:36.485Z"
     }
   }
 }
