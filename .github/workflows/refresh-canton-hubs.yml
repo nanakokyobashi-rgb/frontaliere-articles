@@ -342,6 +342,8 @@ jobs:
               echo
               echo "| hub | news | blocchi dati | omessi | stato |"
               echo "|---|---|---|---|---|"
+              # JavaScript template expressions are evaluated by Node.
+              # shellcheck disable=SC2016
               node -e '
                 const r = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"));
                 for (const h of r.hubs) console.log(`| ${h.section}/${h.topic} | ${h.curatedArticles} | ${h.dataBlocks.join(", ") || "—"} | ${h.omittedBlocks.map((b) => `${b.id} (${b.code})`).join(", ") || "—"} | ${h.changed ? (r.dryRun ? "cambierebbe" : "scritto") : "invariato"} |`);
