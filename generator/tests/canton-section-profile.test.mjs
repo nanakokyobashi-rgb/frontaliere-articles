@@ -281,6 +281,13 @@ test("profili cantonali: l'URL della pagina-fonte ancora solo una fonte locale r
   const lu = buildCantonProfile('canton-lu', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
   assert.equal(lu.anchors('Qualitätsarbeit und Schulentwicklung rücken näher zusammen', 'https://www.nau.ch/politik/regional/story', 'https://www.nau.ch/ort/luzern'), true);
   assert.equal(lu.anchors('Nachrichten', 'https://www.tele1.ch/nachrichten/nachrichten-1', 'https://www.tele1.ch/sitemap-news.xml'), false);
+
+  const ju = buildCantonProfile('canton-ju');
+  const juraFeed = 'https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026.html';
+  assert.equal(ju.anchors('Le marché du travail suisse évolue', juraFeed, juraFeed), false);
+  const sh = buildCantonProfile('canton-sh');
+  const scopedFeed = 'https://www.shkb.ch/244-news-medienmitteilungen';
+  assert.equal(sh.anchors('Neue Zahlen zur Geschäftsentwicklung', scopedFeed, scopedFeed), true);
 });
 
 test('SH: alias locali e contesto scoped delle fonti ufficiali non promuovono i feed tedeschi', () => {

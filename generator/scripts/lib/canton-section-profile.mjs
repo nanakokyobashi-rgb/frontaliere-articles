@@ -689,7 +689,7 @@ export function buildCantonSourceUrlMap(cantonSections = loadCantonSectionProfil
       if (!key) continue;
       const host = registrableHost(key);
       const hostIsLocal = domainMap.get(host) === profile.code;
-      const pathHasCanton = termHits(key, cantonSourcePathTokens(profile.code)) > 0;
+      const pathHasCanton = termHits(decodeURIComponent(new URL(key).pathname), cantonSourcePathTokens(profile.code)) > 0;
       const explicitlyScoped = source.quirks?.localCantonContext === profile.code;
       const scoped = !source.quirks?.filterByCanton && (
         hostIsLocal
@@ -811,14 +811,13 @@ export function buildCantonProfile(section, deps) {
     if (String(cantonFilterBy || '').trim().toUpperCase() === code) return true;
     if (isLocalArea(text) || termHits(text, institutionNames) > 0 || hasFrontalieriSignal(text)) return true;
     const configuredSource = sourceUrlCanonicalKey(sourceUrl);
-    // A source URL may corroborate a local page only when its PATH names this
-    // canton. The publisher's host (even a single-canton .ch host) is not a
-    // fact about the candidate itself.
-    return Boolean(
-      configuredSource
-      && sourceUrlMap().get(configuredSource) === code
-      && termHits(configuredSource, sourcePathTokens) > 0,
-    );
+    // The publisher's host alone is not evidence about the candidate.
+    if (!configuredSource || sourceUrlMap().get(configuredSource) !== code) return false;
+    const explicitlyScoped = profile.newsSources.some((source) =>
+      source.quirks?.localCantonContext === code
+      && !source.quirks?.filterByCanton
+      && sourceUrlCanonicalKey(source.url) === configuredSource);
+    return explicitlyScoped || termHits(decodeURIComponent(new URL(configuredSource).pathname), sourcePathTokens) > 0;
   };
 
   return Object.freeze({
