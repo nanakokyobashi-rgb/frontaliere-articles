@@ -412,8 +412,8 @@ jobs:
           CALLER_WORKFLOW: generate-article.yml
           BODY_MAINTENANCE_PATH_RE: '^content/blog-body(-[a-z0-9-]+)?/(it|de|en|fr)/[^/]+[.]ts$'
           CANTON_ONLY: |-
-            def canton_content: test("^content/(blog-body-canton-[a-z0-9-]+/(it|de|en|fr)/[^/]+[.]ts|blog-meta-canton-[a-z0-9-]+-(it|de|en|fr)[.]ts|cantons/canton-[a-z0-9-]+/(registry|seo|slugs)[.]ts|cantons/canton-[a-z0-9-]+/hubs/[^/]+[.]json)$");
-            def canton_data: test("^data/sections/canton-[a-z0-9-]+/(article-source-urls|article-quotas|quota-state|topic-candidates-(consumed|today-picks|evergreen-(counter|rejected)|experimental-counter)|articles/[^/]+)[.]json$");
+            def canton_content: test("^content/(blog-body-canton-[a-z0-9-]+/(it|de|en|fr)/[^/]+[.]ts|blog-meta-canton-[a-z0-9-]+-(it|de|en|fr)[.]ts|cantons/canton-[a-z0-9-]+/((registry|seo|slugs)[.]ts|hubs/[^/]+[.]json))$");
+            def canton_data: test("^data/sections/canton-[a-z0-9-]+/(article-source-(urls|quotas)|article-quotas|quota-state|topic-candidates-(evergreen-(counter|rejected)|experimental-counter|consumed|today-picks)|articles/[^/]+)[.]json$");
             def canton_surface($path; $covers; $files): (($path | canton_content) or ($path | canton_data) or (($covers | index($path)) != null) or ($path == "data/generated-image-registry.json" and any($files[]; (.filename // "") as $file | ($covers | index($file)) != null)));
             [.[]?.files[]?] as $files
             | [$files[] | (.filename // "") | select(test("^content/blog-body-canton-[a-z0-9-]+/it/[^/]+[.]ts$")) | capture("^content/blog-body-canton-[a-z0-9-]+/it/(?<id>[^/]+)[.]ts$").id] as $ids
