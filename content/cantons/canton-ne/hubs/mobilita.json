@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "a9c41f878017c7e50608bac16b417a77acc892184dc4b9fa5dd3923bc4478aa4",
+  "updatedAt": "2026-11-26T10:34:02.735Z",
+  "contentHash": "d9aa5f9c3c1e63c039d7d2cccc198e65abb429ab35127b54c84421cddc23153f",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-25T19:39:26.365Z",
+      "updatedAt": "2026-11-26T03:50:03.880Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-25T16:08:35.229Z",
+      "updatedAt": "2026-11-26T01:13:56.099Z",
       "keyFacts": 0
     }
   ],
@@ -38,12 +38,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "1",
-          "note": "segnalazioni aggiornate: 25 novembre 2026"
+          "note": "segnalazioni aggiornate: 26 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "3",
-          "note": "segnalazioni aggiornate: 25 novembre 2026"
+          "note": "segnalazioni aggiornate: 26 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -89,13 +89,13 @@
             {
               "label": "Neuchâtel, Vaud et Fribourg s'engagent pour l'avenir de la navigation sur les trois lacs",
               "value": "Traffico",
-              "date": "2026-11-25T19:39:26.365Z",
+              "date": "2026-11-26T03:50:03.880Z",
               "url": "https://www.ne.ch/communiques-de-presse/neuchatel-vaud-et-fribourg-sengagent-pour-lavenir-de-la-navigation-sur-les-trois-lacs"
             },
             {
               "label": "Ouverture officielle de la piste cyclable mixte vélos-piétons entre Saint-Blaise et Cornaux",
               "value": "Traffico",
-              "date": "2026-11-25T19:39:26.365Z",
+              "date": "2026-11-26T03:50:03.880Z",
               "url": "https://www.ne.ch/communiques-de-presse/ouverture-officielle-de-la-piste-cyclable-mixte-velos-pietons-entre-saint-blaise-et-cornaux"
             },
             {
@@ -118,7 +118,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-25T19:39:26.365Z"
+          "updatedAt": "2026-11-26T03:50:03.880Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -141,7 +141,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -195,7 +195,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T10:34:02.735Z"
     },
     "en": {
       "canton": "NE",
@@ -211,12 +211,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "1",
-          "note": "reports as of 25 November 2026"
+          "note": "reports as of 26 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "3",
-          "note": "reports as of 25 November 2026"
+          "note": "reports as of 26 November 2026"
         }
       ],
       "dataBlocks": [
@@ -262,13 +262,13 @@
             {
               "label": "Neuchâtel, Vaud et Fribourg s'engagent pour l'avenir de la navigation sur les trois lacs",
               "value": "Traffic",
-              "date": "2026-11-25T19:39:26.365Z",
+              "date": "2026-11-26T03:50:03.880Z",
               "url": "https://www.ne.ch/communiques-de-presse/neuchatel-vaud-et-fribourg-sengagent-pour-lavenir-de-la-navigation-sur-les-trois-lacs"
             },
             {
               "label": "Ouverture officielle de la piste cyclable mixte vélos-piétons entre Saint-Blaise et Cornaux",
               "value": "Traffic",
-              "date": "2026-11-25T19:39:26.365Z",
+              "date": "2026-11-26T03:50:03.880Z",
               "url": "https://www.ne.ch/communiques-de-presse/ouverture-officielle-de-la-piste-cyclable-mixte-velos-pietons-entre-saint-blaise-et-cornaux"
             },
             {
@@ -291,7 +291,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-25T19:39:26.365Z"
+          "updatedAt": "2026-11-26T03:50:03.880Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -314,7 +314,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -368,7 +368,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T10:34:02.735Z"
     },
     "de": {
       "canton": "NE",
@@ -384,12 +384,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "1",
-          "note": "Meldungen vom 25. November 2026"
+          "note": "Meldungen vom 26. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "3",
-          "note": "Meldungen vom 25. November 2026"
+          "note": "Meldungen vom 26. November 2026"
         }
       ],
       "dataBlocks": [
@@ -435,13 +435,13 @@
             {
               "label": "Neuchâtel, Vaud et Fribourg s'engagent pour l'avenir de la navigation sur les trois lacs",
               "value": "Verkehr",
-              "date": "2026-11-25T19:39:26.365Z",
+              "date": "2026-11-26T03:50:03.880Z",
               "url": "https://www.ne.ch/communiques-de-presse/neuchatel-vaud-et-fribourg-sengagent-pour-lavenir-de-la-navigation-sur-les-trois-lacs"
             },
             {
               "label": "Ouverture officielle de la piste cyclable mixte vélos-piétons entre Saint-Blaise et Cornaux",
               "value": "Verkehr",
-              "date": "2026-11-25T19:39:26.365Z",
+              "date": "2026-11-26T03:50:03.880Z",
               "url": "https://www.ne.ch/communiques-de-presse/ouverture-officielle-de-la-piste-cyclable-mixte-velos-pietons-entre-saint-blaise-et-cornaux"
             },
             {
@@ -464,7 +464,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-25T19:39:26.365Z"
+          "updatedAt": "2026-11-26T03:50:03.880Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -541,7 +541,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T10:34:02.735Z"
     },
     "fr": {
       "canton": "NE",
@@ -557,12 +557,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "1",
-          "note": "signalements au 25 novembre 2026"
+          "note": "signalements au 26 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "3",
-          "note": "signalements au 25 novembre 2026"
+          "note": "signalements au 26 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -608,13 +608,13 @@
             {
               "label": "Neuchâtel, Vaud et Fribourg s'engagent pour l'avenir de la navigation sur les trois lacs",
               "value": "Trafic",
-              "date": "2026-11-25T19:39:26.365Z",
+              "date": "2026-11-26T03:50:03.880Z",
               "url": "https://www.ne.ch/communiques-de-presse/neuchatel-vaud-et-fribourg-sengagent-pour-lavenir-de-la-navigation-sur-les-trois-lacs"
             },
             {
               "label": "Ouverture officielle de la piste cyclable mixte vélos-piétons entre Saint-Blaise et Cornaux",
               "value": "Trafic",
-              "date": "2026-11-25T19:39:26.365Z",
+              "date": "2026-11-26T03:50:03.880Z",
               "url": "https://www.ne.ch/communiques-de-presse/ouverture-officielle-de-la-piste-cyclable-mixte-velos-pietons-entre-saint-blaise-et-cornaux"
             },
             {
@@ -637,7 +637,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-25T19:39:26.365Z"
+          "updatedAt": "2026-11-26T03:50:03.880Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -660,7 +660,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T01:13:56.099Z"
         }
       ],
       "curatedArticles": [
@@ -714,7 +714,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T10:34:02.735Z"
     }
   }
 }
