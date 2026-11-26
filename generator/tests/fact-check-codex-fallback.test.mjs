@@ -714,7 +714,6 @@ describe('fact-check retries under a reported input cap', () => {
       ...scope, padding, declaredInputCap: 8000, replies: [firstVote, secondVote],
     });
     assert.ok(Math.abs(estimate(prompt) - 9200) <= 3);
-    console.log(`SWISS_FACTCHECK_INPUT full=${estimate(prompt)} compact=${estimate(compactPrompt)} cap=7000`);
     assert.ok(estimate(compactPrompt) <= 7000, `stima: ${estimate(compactPrompt)}`);
     assert.ok(compactPrompt.includes(bodyEnd));
     assert.ok(compactPrompt.includes(sourceEnd));
