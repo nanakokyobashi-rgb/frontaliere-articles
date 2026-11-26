@@ -781,7 +781,7 @@ describe('fact-check retries under a reported input cap', () => {
     assert.match(compactPrompt, /episodi isolati/);
     assert.match(compactPrompt, /cultura\/festival\/gastronomia, sport\/gossip\/intrattenimento/);
     assert.match(compactPrompt, /fatti esteri senza impatto svizzero/);
-    assert.match(compactPrompt, /nesso reale, specifico e verificabile; FAIL se implicazioni nazionali forzate/);
+    assert.match(compactPrompt, /nesso reale, specifico e verificabile; FAIL: commento generico su cronaca senza nesso nazionale\./);
     assert.deepEqual(calls.map((call) => call.prompt), [compactPrompt, compactPrompt]);
     assert.equal(modelResults.length, 2);
   });

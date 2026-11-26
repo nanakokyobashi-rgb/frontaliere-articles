@@ -7417,7 +7417,7 @@ Prima di segnalare un fatto assente, rileggi la fonte cercando anche parafrasi. 
     : `- Fonte: controlla date, luoghi, persone, citazioni e misure. Date assenti: sospette. Contesto verificato: minor. Invenzioni e contraddizioni: critical.
 - Caso fabbricato = luogo/ente + ruolo + azione + esito/cifra senza riscontro nella fonte: critical:fatti_inventati.${IS_CANTON || IS_FRONTALIERE ? ' Esempi: infermiera segnala carenze igieniche a Lugano; medico denuncia pratiche non etiche a Chiasso; infermiere ORL ottiene un risarcimento; medico del Civico di Lugano denuncia frode con indagine FINMA.' : ' Verifica anche «Esempi concreti», «Casi pratici», «Casi reali», «Per esempio», «Caso 1» e «Caso 2».'}`;
   const compactRelevanceInstructions = !IS_CANTON && !IS_FRONTALIERE
-    ? `RILEVANZA SVIZZERA (critical:rilevanza_topica): nesso reale, specifico e verificabile; FAIL se implicazioni nazionali forzate. Escludi cronaca locale senza policy/economia/lavoro, episodi isolati, cultura/festival/gastronomia, sport/gossip/intrattenimento e fatti esteri senza impatto svizzero.`
+    ? `RILEVANZA SVIZZERA (critical:rilevanza_topica): nesso reale, specifico e verificabile; FAIL: commento generico su cronaca senza nesso nazionale. Escludi cronaca locale senza policy/economia/lavoro, episodi isolati, cultura/festival/gastronomia, sport/gossip/intrattenimento e fatti esteri senza impatto svizzero.`
     : relevanceInstructions;
   const compactPrompt = canCompact
     ? `${evidencePrefix}
