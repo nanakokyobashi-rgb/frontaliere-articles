@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-teufen-finanziamento-tunnel.webp",
+      "sha256": "ac6b46c0b87f27017a4f67d9e3de326364f17bece38fa22161ea691868269012"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-teufen-finanziamento-tunnel-480w.webp",
+      "sha256": "6d0a52fbf2788b6656314df2abd834bebc54ed08b539b3f32cf56229e21b4543"
+    }
+  ]
 }
