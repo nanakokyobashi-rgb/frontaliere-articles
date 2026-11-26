@@ -1323,6 +1323,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-inverno-sgallen-controlli-strade': {
+    title: 'Inverno a St.Gallen: controlli stradali tra fine ottobre e metà aprile',
+    description: 'Previsioni di neve e temperature sotto zero a St.Gallen. Controlli stradali tra fine ottobre e metà aprile con personale fino a 200 persone.',
+    keywords: 'frontalieri, ticino, svizzera, italia, inverno, gallen, controlli, stradali',
+    ogTitle: 'Inverno a St.Gallen: controlli stradali tra fine ottobre e metà aprile',
+    ogDescription: 'In vista delle condizioni invernali a St.Gallen, sono previste temperature sotto zero e nevicate. Lo sgombero segue una lista di priorità, con controlli notturni da fine ottobre a metà aprile.',
+    canonicalPath: '/articoli-san-gallo/inverno-sgallen-controlli-strade/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Inverno a St.Gallen: controlli stradali tra fine ottobre e metà aprile",
+      "description": "Previsioni di neve e temperature sotto zero a St.Gallen. Controlli stradali tra fine ottobre e metà aprile con personale fino a 200 persone.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-inverno-sgallen-controlli-strade.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-26T22:22:32+00:00",
+      "dateModified": "2026-11-26T22:22:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/inverno-sgallen-controlli-strade/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -425,4 +425,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'neuhausen-soppressione-strisce-pedonali',
+ category: 'pratico',
+ date: '2026-11-26T22:25:21.058Z',
+ image: '/images/blog/article-neuhausen-soppressione-strisce-pedonali.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

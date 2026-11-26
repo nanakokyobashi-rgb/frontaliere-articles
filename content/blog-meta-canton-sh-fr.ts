@@ -117,6 +117,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.lkw-unfall-chlaggi-strada.title': 'Camion renversé entre Guntmadingen et Neunkirch : H13 fermée',
     'blog.article.lkw-unfall-chlaggi-strada.excerpt': 'Le 25 novembre 2026, un camion s’est renversé sur la route principale entre Guntmadingen et Neunkirch, entraînant la fermeture de la H13 pendant plusieurs heures.',
     'blog.article.lkw-unfall-chlaggi-strada.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.neuhausen-soppressione-strisce-pedonali.title': 'Neuhausen supprime douze passages piétons dans le centre',
+    'blog.article.neuhausen-soppressione-strisce-pedonali.excerpt': 'Le Conseil communal de Neuhausen am Rheinfall a décidé de supprimer 12 des 18 passages piétons existants, avec une mise en œuvre prévue au premier semestre 2027.',
+    'blog.article.neuhausen-soppressione-strisce-pedonali.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

@@ -105,6 +105,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.votazione-fondo-rete-gas-wil.title': 'Referendum on the fund for decommissioning the TBW gas network in Wil',
     'blog.article.votazione-fondo-rete-gas-wil.excerpt': 'On November 29, 2026, a popular vote will be held on the regulation establishing the fund for the decommissioning and dismantling of the gas network of Wil’s technical services, TBW.',
     'blog.article.votazione-fondo-rete-gas-wil.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.inverno-sgallen-controlli-strade.title': 'Winter in St.Gallen: road checks between late October and mid-April',
+    'blog.article.inverno-sgallen-controlli-strade.excerpt': 'Snow and below-zero temperatures are expected; snow clearance follows defined priorities, with staff of up to 200 people.',
+    'blog.article.inverno-sgallen-controlli-strade.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;
