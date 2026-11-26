@@ -388,13 +388,13 @@ pages_build_commit_matches() {
 # same shard. Require ancestry and unchanged entries for every path we pushed.
 pages_build_preserves_push() {
   local expected="$1" built="$2" parent pushed_paths later_paths overlap
-  parent="$(git -C "$stage" rev-parse --verify "$expected^" 2>/dev/null)" || return 1
   git -C "$stage" merge-base --is-ancestor "$expected" "$built" 2>/dev/null || return 1
-  pushed_paths="$(git -C "$stage" diff --no-renames --name-only "$parent" "$expected" | LC_ALL=C sort)" || return 1
+  parent="$(git -C "$stage" rev-parse --verify "$expected^" 2>/dev/null)" || return 1
+  pushed_paths="$(git -C "$stage" diff --no-renames --name-only "$parent" "$expected" -- . ':(top,exclude,literal).shard-filecount' | LC_ALL=C sort)" || return 1
   [ -n "$pushed_paths" ] || return 1
   later_paths="$(git -C "$stage" diff --no-renames --name-only "$expected" "$built" | LC_ALL=C sort)" || return 1
   overlap="$(LC_ALL=C comm -12 - <(printf '%s\n' "$later_paths") <<< "$pushed_paths")" || return 1
-  [ -z "$overlap" ]
+  [ -z "$overlap" ] || return 2
 }
 
 # GitHub Pages starts a deployment for every push to a shard repository. A
@@ -408,6 +408,7 @@ wait_for_pages_build() {
   local require_exact="${3:-0}"
   local pages_url pages_repo token body pages_status pages_commit
   local last_checked_build=''
+  local fetch_build='' fetch_depth=16 proof_status
   local deadline remaining current_epoch request_timeout
 
   if ! [[ "$requested_deadline" =~ ^[0-9]+$ ]]; then
@@ -490,13 +491,23 @@ wait_for_pages_build() {
       esac
     elif [ "$require_exact" = 0 ] && [ "$pages_status" = built ] && [ "$pages_commit" != "$last_checked_build" ] \
         && [[ "$pages_commit" =~ ^[0-9a-f]{40}$ ]]; then
+      if [ "$fetch_build" != "$pages_commit" ]; then
+        fetch_build="$pages_commit"
+        fetch_depth=16
+      fi
       request_timeout=$((remaining < 20 ? remaining : 20))
       if timeout --kill-after=1s "${request_timeout}s" git ${GIT_PAT_OPTS[@]+"${GIT_PAT_OPTS[@]}"} -C "$stage" \
-          fetch --quiet --filter=blob:none --depth=16 origin "$pages_commit" >/dev/null 2>&1; then
-        last_checked_build="$pages_commit"
+          fetch --quiet --filter=blob:none --depth="$fetch_depth" origin "$pages_commit" >/dev/null 2>&1; then
         if pages_build_preserves_push "$pushed_commit" "$pages_commit"; then
           echo "✅ $section-$loc article shard: Pages build $pages_commit preserves $pushed_commit"
           return 0
+        else
+          proof_status=$?
+        fi
+        if [ "$proof_status" = 2 ] || git -C "$stage" merge-base --is-ancestor "$pages_commit" "$pushed_commit" 2>/dev/null; then
+          last_checked_build="$pages_commit"
+        elif [ "$(git -C "$stage" rev-parse --is-shallow-repository)" = true ]; then
+          fetch_depth=$((fetch_depth * 2))
         fi
       fi
       remaining=$((deadline - $(date +%s)))

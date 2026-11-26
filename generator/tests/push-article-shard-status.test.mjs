@@ -181,7 +181,11 @@ test('a later Pages build must descend from the push and preserve its changed pa
       return git(root, ['rev-parse', 'HEAD']);
     };
     const old = commit('hub.html', 'old hub');
+    writeFileSync(join(root, '.shard-filecount'), '1\n');
+    git(root, ['add', '.shard-filecount']);
     const pushed = commit('article.html', 'published article');
+    writeFileSync(join(root, '.shard-filecount'), '2\n');
+    git(root, ['add', '.shard-filecount']);
     const preserved = commit('hub.html', 'new hub');
     const overwritten = commit('article.html', 'different article');
     const source = readFileSync(PUSHER, 'utf8');
@@ -193,7 +197,7 @@ test('a later Pages build must descend from the push and preserve its changed pa
         pages_build_preserves_push "$2" "$built"
         echo "$?"
       done`, 'proof', root, pushed, preserved, overwritten, old], { encoding: 'utf8' });
-    assert.equal(result, '0\n1\n1\n');
+    assert.equal(result, '0\n2\n1\n');
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
