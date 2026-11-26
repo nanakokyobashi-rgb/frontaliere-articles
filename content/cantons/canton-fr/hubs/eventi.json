@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "77dc7035990c0d2c5fe42e75ccb6dcaac12e69eb8f1e12bca00f4375a84ed8dc",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "e970695bf8a09315629c0af4a0808ccc8b00bd17ed16f0f3a2e1ce7265a0226d",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T21:47:09.888Z",
+      "updatedAt": "2026-11-26T00:32:00.223Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "42",
+          "value": "58",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,75 +38,85 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "FRESEdE – Séance d'information en présentiel",
-              "detail": "Posieux",
-              "date": "2026-11-16",
-              "url": "https://www.fr.ch/essg/evenements/fresede-seance-dinformation-en-presentiel"
-            },
-            {
-              "label": "CFC ASSC avec maturité intégrée - Présentation Online via Teams - 17 novembre 2026",
-              "detail": "Teams",
-              "date": "2026-11-17",
-              "url": "https://www.fr.ch/essg/evenements/cfc-assc-avec-maturite-integree-presentation-online-via-teams-17-novembre-2026"
-            },
-            {
-              "label": "The Librarians : projection",
+              "label": "Nova",
               "detail": "Fribourg",
-              "date": "2026-11-17",
-              "url": "https://www.fr.ch/bcu/evenements/the-librarians-projection"
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nova/"
             },
             {
-              "label": "AUBÉTOILE | SOUND BATH",
-              "detail": "MIAM",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/evenements/musique/fribourg/aubetoile-sound-bath_AGTkky5"
-            },
-            {
-              "label": "Avant la nuit – L’Oiseau de feu",
-              "detail": "Equilibre, Fribourg",
-              "date": "2026-11-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/avant-la-nuit-loiseau-de-feu/"
-            },
-            {
-              "label": "Bien vivre dans les limites planétaires. Planifier la sobriété en Suisse",
+              "label": "Écrire, c'est possible ! (1)",
               "detail": "Fribourg",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bien-vivre-dans-les-limites-planetaires-planifier-la-sobriete-en-suisse/"
+              "date": "2026-11-26",
+              "url": "https://www.fr.ch/formation-et-ecoles/formation-pour-adultes-et-formation-continue/evenements/ecrire-cest-possible-1"
+            },
+            {
+              "label": "La mauvaise foi ? Des appréhensions ordinaires aux définitions académiques : conférence",
+              "detail": "Fribourg",
+              "date": "2026-11-26",
+              "url": "https://www.fr.ch/bcu/evenements/la-mauvaise-foi-des-apprehensions-ordinaires-aux-definitions-academiques-conference"
+            },
+            {
+              "label": "Vernissage CORPUS Le corps liquide",
+              "detail": "Fribourg",
+              "date": "2026-11-26",
+              "url": "https://www.fr.ch/mahf/evenements/vernissage-corpus-le-corps-liquide"
+            },
+            {
+              "label": "Brazil",
+              "detail": "Podium Düdingen, Düdingen",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/brazil_ALa7CM7"
+            },
+            {
+              "label": "Quo vadis Europe?",
+              "detail": "PER 21 — in corso, ultimo giorno: 9 dicembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/events/this-that/fribourg/quo-vadis-europe_AP78MWg"
             },
             {
               "label": "Pour qui tu te prends ?",
-              "detail": "Nuithonie, Villars-sur-Glâne",
-              "date": "2026-11-20",
+              "detail": "Nuithonie, Villars-sur-Glâne — in corso, ultimo giorno: 29 novembre 2026",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/pour-qui-tu-te-prends/"
             },
             {
-              "label": "Sonadores Big Band",
-              "detail": "La Spirale",
-              "date": "2026-11-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/fribourg/sonadores-big-band_AgY9cxR"
-            },
-            {
               "label": "Festival des droits de l’enfant : Les droits de l’enfant, c’est aussi ton histoire !",
-              "detail": "Fribourg",
-              "date": "2026-11-20",
+              "detail": "Fribourg — in corso, ultimo giorno: 27 novembre 2026",
+              "date": "2026-11-26",
               "url": "https://www.fr.ch/dsas/sej/bpej/evenements/festival-des-droits-de-lenfant-les-droits-de-lenfant-cest-aussi-ton-histoire"
             },
             {
-              "label": "Les midis de Sainte-Croix",
-              "detail": "Bulle",
-              "date": "2026-11-20",
-              "url": "https://www.fr.ch/conservatoire/evenements/les-midis-de-sainte-croix-5"
+              "label": "CORPUS - Le corps liquide",
+              "detail": "Fribourg",
+              "date": "2026-11-27",
+              "url": "https://www.fr.ch/mahf/evenements/corpus-le-corps-liquide"
+            },
+            {
+              "label": "Corpus V - Le corps liquide",
+              "detail": "Fribourg",
+              "date": "2026-11-27",
+              "url": "https://www.fr.ch/mahf/evenements/corpus-v-le-corps-liquide"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Organisation von Veranstaltungen auf dem Gemeindegebiet der Stadt Bulle",
+              "date": "2026-11-19T10:35:08.000Z",
+              "url": "https://www.fr.ch/de/ilfd/ogr/news/organisation-von-veranstaltungen-auf-dem-gemeindegebiet-der-stadt-bulle"
+            },
+            {
+              "label": "Organisation de manifestations sur le territoire communal de la Ville de Bulle",
+              "date": "2026-11-19T10:35:08.000Z",
+              "url": "https://www.fr.ch/diaf/prgr/actualites/organisation-de-manifestations-sur-le-territoire-communal-de-la-ville-de-bulle"
+            },
             {
               "label": "20. bis 27. November 2026: Festival der Kinderrechte",
               "date": "2026-11-04T13:00:09.000Z",
@@ -126,14 +136,9 @@
               "label": "Festival Kultur & Schule FKB: 17'000 Schülerinnen, Schüler und Lehrpersonen werden an der 9. Ausgabe teilnehmen",
               "date": "2026-11-04T06:23:38.000Z",
               "url": "https://www.fr.ch/de/bkad/news/festival-kultur-schule-fkb-17000-schuelerinnen-schueler-und-lehrpersonen-werden-an-der-9-ausgabe-teilnehmen"
-            },
-            {
-              "label": "Öffentlicher Informationsanlass zum Projekt einer Wildtierpassage in Saussivue",
-              "date": "2026-10-29T08:28:22.000Z",
-              "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +160,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "FR",
@@ -165,7 +170,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "42",
+          "value": "58",
           "note": "from the site’s events calendar"
         }
       ],
@@ -176,75 +181,85 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "FRESEdE – Séance d'information en présentiel",
-              "detail": "Posieux",
-              "date": "2026-11-16",
-              "url": "https://www.fr.ch/essg/evenements/fresede-seance-dinformation-en-presentiel"
-            },
-            {
-              "label": "CFC ASSC avec maturité intégrée - Présentation Online via Teams - 17 novembre 2026",
-              "detail": "Teams",
-              "date": "2026-11-17",
-              "url": "https://www.fr.ch/essg/evenements/cfc-assc-avec-maturite-integree-presentation-online-via-teams-17-novembre-2026"
-            },
-            {
-              "label": "The Librarians : projection",
+              "label": "Nova",
               "detail": "Fribourg",
-              "date": "2026-11-17",
-              "url": "https://www.fr.ch/bcu/evenements/the-librarians-projection"
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nova/"
             },
             {
-              "label": "AUBÉTOILE | SOUND BATH",
-              "detail": "MIAM",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/evenements/musique/fribourg/aubetoile-sound-bath_AGTkky5"
-            },
-            {
-              "label": "Avant la nuit – L’Oiseau de feu",
-              "detail": "Equilibre, Fribourg",
-              "date": "2026-11-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/avant-la-nuit-loiseau-de-feu/"
-            },
-            {
-              "label": "Bien vivre dans les limites planétaires. Planifier la sobriété en Suisse",
+              "label": "Écrire, c'est possible ! (1)",
               "detail": "Fribourg",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bien-vivre-dans-les-limites-planetaires-planifier-la-sobriete-en-suisse/"
+              "date": "2026-11-26",
+              "url": "https://www.fr.ch/formation-et-ecoles/formation-pour-adultes-et-formation-continue/evenements/ecrire-cest-possible-1"
+            },
+            {
+              "label": "La mauvaise foi ? Des appréhensions ordinaires aux définitions académiques : conférence",
+              "detail": "Fribourg",
+              "date": "2026-11-26",
+              "url": "https://www.fr.ch/bcu/evenements/la-mauvaise-foi-des-apprehensions-ordinaires-aux-definitions-academiques-conference"
+            },
+            {
+              "label": "Vernissage CORPUS Le corps liquide",
+              "detail": "Fribourg",
+              "date": "2026-11-26",
+              "url": "https://www.fr.ch/mahf/evenements/vernissage-corpus-le-corps-liquide"
+            },
+            {
+              "label": "Brazil",
+              "detail": "Podium Düdingen, Düdingen",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/brazil_ALa7CM7"
+            },
+            {
+              "label": "Quo vadis Europe?",
+              "detail": "PER 21 — ongoing, last day: 9 December 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/events/this-that/fribourg/quo-vadis-europe_AP78MWg"
             },
             {
               "label": "Pour qui tu te prends ?",
-              "detail": "Nuithonie, Villars-sur-Glâne",
-              "date": "2026-11-20",
+              "detail": "Nuithonie, Villars-sur-Glâne — ongoing, last day: 29 November 2026",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/pour-qui-tu-te-prends/"
             },
             {
-              "label": "Sonadores Big Band",
-              "detail": "La Spirale",
-              "date": "2026-11-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/fribourg/sonadores-big-band_AgY9cxR"
-            },
-            {
               "label": "Festival des droits de l’enfant : Les droits de l’enfant, c’est aussi ton histoire !",
-              "detail": "Fribourg",
-              "date": "2026-11-20",
+              "detail": "Fribourg — ongoing, last day: 27 November 2026",
+              "date": "2026-11-26",
               "url": "https://www.fr.ch/dsas/sej/bpej/evenements/festival-des-droits-de-lenfant-les-droits-de-lenfant-cest-aussi-ton-histoire"
             },
             {
-              "label": "Les midis de Sainte-Croix",
-              "detail": "Bulle",
-              "date": "2026-11-20",
-              "url": "https://www.fr.ch/conservatoire/evenements/les-midis-de-sainte-croix-5"
+              "label": "CORPUS - Le corps liquide",
+              "detail": "Fribourg",
+              "date": "2026-11-27",
+              "url": "https://www.fr.ch/mahf/evenements/corpus-le-corps-liquide"
+            },
+            {
+              "label": "Corpus V - Le corps liquide",
+              "detail": "Fribourg",
+              "date": "2026-11-27",
+              "url": "https://www.fr.ch/mahf/evenements/corpus-v-le-corps-liquide"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Organisation von Veranstaltungen auf dem Gemeindegebiet der Stadt Bulle",
+              "date": "2026-11-19T10:35:08.000Z",
+              "url": "https://www.fr.ch/de/ilfd/ogr/news/organisation-von-veranstaltungen-auf-dem-gemeindegebiet-der-stadt-bulle"
+            },
+            {
+              "label": "Organisation de manifestations sur le territoire communal de la Ville de Bulle",
+              "date": "2026-11-19T10:35:08.000Z",
+              "url": "https://www.fr.ch/diaf/prgr/actualites/organisation-de-manifestations-sur-le-territoire-communal-de-la-ville-de-bulle"
+            },
             {
               "label": "20. bis 27. November 2026: Festival der Kinderrechte",
               "date": "2026-11-04T13:00:09.000Z",
@@ -264,14 +279,9 @@
               "label": "Festival Kultur & Schule FKB: 17'000 Schülerinnen, Schüler und Lehrpersonen werden an der 9. Ausgabe teilnehmen",
               "date": "2026-11-04T06:23:38.000Z",
               "url": "https://www.fr.ch/de/bkad/news/festival-kultur-schule-fkb-17000-schuelerinnen-schueler-und-lehrpersonen-werden-an-der-9-ausgabe-teilnehmen"
-            },
-            {
-              "label": "Öffentlicher Informationsanlass zum Projekt einer Wildtierpassage in Saussivue",
-              "date": "2026-10-29T08:28:22.000Z",
-              "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -293,7 +303,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "FR",
@@ -303,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "42",
+          "value": "58",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -314,75 +324,85 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "FRESEdE – Séance d'information en présentiel",
-              "detail": "Posieux",
-              "date": "2026-11-16",
-              "url": "https://www.fr.ch/essg/evenements/fresede-seance-dinformation-en-presentiel"
-            },
-            {
-              "label": "CFC ASSC avec maturité intégrée - Présentation Online via Teams - 17 novembre 2026",
-              "detail": "Teams",
-              "date": "2026-11-17",
-              "url": "https://www.fr.ch/essg/evenements/cfc-assc-avec-maturite-integree-presentation-online-via-teams-17-novembre-2026"
-            },
-            {
-              "label": "The Librarians : projection",
+              "label": "Nova",
               "detail": "Fribourg",
-              "date": "2026-11-17",
-              "url": "https://www.fr.ch/bcu/evenements/the-librarians-projection"
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nova/"
             },
             {
-              "label": "AUBÉTOILE | SOUND BATH",
-              "detail": "MIAM",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/evenements/musique/fribourg/aubetoile-sound-bath_AGTkky5"
-            },
-            {
-              "label": "Avant la nuit – L’Oiseau de feu",
-              "detail": "Equilibre, Fribourg",
-              "date": "2026-11-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/avant-la-nuit-loiseau-de-feu/"
-            },
-            {
-              "label": "Bien vivre dans les limites planétaires. Planifier la sobriété en Suisse",
+              "label": "Écrire, c'est possible ! (1)",
               "detail": "Fribourg",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bien-vivre-dans-les-limites-planetaires-planifier-la-sobriete-en-suisse/"
+              "date": "2026-11-26",
+              "url": "https://www.fr.ch/formation-et-ecoles/formation-pour-adultes-et-formation-continue/evenements/ecrire-cest-possible-1"
+            },
+            {
+              "label": "La mauvaise foi ? Des appréhensions ordinaires aux définitions académiques : conférence",
+              "detail": "Fribourg",
+              "date": "2026-11-26",
+              "url": "https://www.fr.ch/bcu/evenements/la-mauvaise-foi-des-apprehensions-ordinaires-aux-definitions-academiques-conference"
+            },
+            {
+              "label": "Vernissage CORPUS Le corps liquide",
+              "detail": "Fribourg",
+              "date": "2026-11-26",
+              "url": "https://www.fr.ch/mahf/evenements/vernissage-corpus-le-corps-liquide"
+            },
+            {
+              "label": "Brazil",
+              "detail": "Podium Düdingen, Düdingen",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/brazil_ALa7CM7"
+            },
+            {
+              "label": "Quo vadis Europe?",
+              "detail": "PER 21 — läuft, letzter Tag: 9. Dezember 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/events/this-that/fribourg/quo-vadis-europe_AP78MWg"
             },
             {
               "label": "Pour qui tu te prends ?",
-              "detail": "Nuithonie, Villars-sur-Glâne",
-              "date": "2026-11-20",
+              "detail": "Nuithonie, Villars-sur-Glâne — läuft, letzter Tag: 29. November 2026",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/pour-qui-tu-te-prends/"
             },
             {
-              "label": "Sonadores Big Band",
-              "detail": "La Spirale",
-              "date": "2026-11-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/fribourg/sonadores-big-band_AgY9cxR"
-            },
-            {
               "label": "Festival des droits de l’enfant : Les droits de l’enfant, c’est aussi ton histoire !",
-              "detail": "Fribourg",
-              "date": "2026-11-20",
+              "detail": "Fribourg — läuft, letzter Tag: 27. November 2026",
+              "date": "2026-11-26",
               "url": "https://www.fr.ch/dsas/sej/bpej/evenements/festival-des-droits-de-lenfant-les-droits-de-lenfant-cest-aussi-ton-histoire"
             },
             {
-              "label": "Les midis de Sainte-Croix",
-              "detail": "Bulle",
-              "date": "2026-11-20",
-              "url": "https://www.fr.ch/conservatoire/evenements/les-midis-de-sainte-croix-5"
+              "label": "CORPUS - Le corps liquide",
+              "detail": "Fribourg",
+              "date": "2026-11-27",
+              "url": "https://www.fr.ch/mahf/evenements/corpus-le-corps-liquide"
+            },
+            {
+              "label": "Corpus V - Le corps liquide",
+              "detail": "Fribourg",
+              "date": "2026-11-27",
+              "url": "https://www.fr.ch/mahf/evenements/corpus-v-le-corps-liquide"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Organisation von Veranstaltungen auf dem Gemeindegebiet der Stadt Bulle",
+              "date": "2026-11-19T10:35:08.000Z",
+              "url": "https://www.fr.ch/de/ilfd/ogr/news/organisation-von-veranstaltungen-auf-dem-gemeindegebiet-der-stadt-bulle"
+            },
+            {
+              "label": "Organisation de manifestations sur le territoire communal de la Ville de Bulle",
+              "date": "2026-11-19T10:35:08.000Z",
+              "url": "https://www.fr.ch/diaf/prgr/actualites/organisation-de-manifestations-sur-le-territoire-communal-de-la-ville-de-bulle"
+            },
             {
               "label": "20. bis 27. November 2026: Festival der Kinderrechte",
               "date": "2026-11-04T13:00:09.000Z",
@@ -402,14 +422,9 @@
               "label": "Festival Kultur & Schule FKB: 17'000 Schülerinnen, Schüler und Lehrpersonen werden an der 9. Ausgabe teilnehmen",
               "date": "2026-11-04T06:23:38.000Z",
               "url": "https://www.fr.ch/de/bkad/news/festival-kultur-schule-fkb-17000-schuelerinnen-schueler-und-lehrpersonen-werden-an-der-9-ausgabe-teilnehmen"
-            },
-            {
-              "label": "Öffentlicher Informationsanlass zum Projekt einer Wildtierpassage in Saussivue",
-              "date": "2026-10-29T08:28:22.000Z",
-              "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -431,7 +446,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "FR",
@@ -441,7 +456,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "42",
+          "value": "58",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -452,75 +467,85 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "FRESEdE – Séance d'information en présentiel",
-              "detail": "Posieux",
-              "date": "2026-11-16",
-              "url": "https://www.fr.ch/essg/evenements/fresede-seance-dinformation-en-presentiel"
-            },
-            {
-              "label": "CFC ASSC avec maturité intégrée - Présentation Online via Teams - 17 novembre 2026",
-              "detail": "Teams",
-              "date": "2026-11-17",
-              "url": "https://www.fr.ch/essg/evenements/cfc-assc-avec-maturite-integree-presentation-online-via-teams-17-novembre-2026"
-            },
-            {
-              "label": "The Librarians : projection",
+              "label": "Nouvelle",
               "detail": "Fribourg",
-              "date": "2026-11-17",
-              "url": "https://www.fr.ch/bcu/evenements/the-librarians-projection"
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nova/"
             },
             {
-              "label": "AUBÉTOILE | SOUND BATH",
-              "detail": "MIAM",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/evenements/musique/fribourg/aubetoile-sound-bath_AGTkky5"
-            },
-            {
-              "label": "Avant la nuit – L’Oiseau de feu",
-              "detail": "Equilibre, Fribourg",
-              "date": "2026-11-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/avant-la-nuit-loiseau-de-feu/"
-            },
-            {
-              "label": "Bien vivre dans les limites planétaires. Planifier la sobriété en Suisse",
+              "label": "Écrire, c'est possible ! (1)",
               "detail": "Fribourg",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bien-vivre-dans-les-limites-planetaires-planifier-la-sobriete-en-suisse/"
+              "date": "2026-11-26",
+              "url": "https://www.fr.ch/formation-et-ecoles/formation-pour-adultes-et-formation-continue/evenements/ecrire-cest-possible-1"
+            },
+            {
+              "label": "La mauvaise foi ? Des appréhensions ordinaires aux définitions académiques : conférence",
+              "detail": "Fribourg",
+              "date": "2026-11-26",
+              "url": "https://www.fr.ch/bcu/evenements/la-mauvaise-foi-des-apprehensions-ordinaires-aux-definitions-academiques-conference"
+            },
+            {
+              "label": "Vernissage CORPUS Le corps liquide",
+              "detail": "Fribourg",
+              "date": "2026-11-26",
+              "url": "https://www.fr.ch/mahf/evenements/vernissage-corpus-le-corps-liquide"
+            },
+            {
+              "label": "Brazil",
+              "detail": "Podium Düdingen, Düdingen",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/brazil_ALa7CM7"
+            },
+            {
+              "label": "Quo vadis Europe?",
+              "detail": "PER 21 — en cours, dernier jour : 9 décembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/events/this-that/fribourg/quo-vadis-europe_AP78MWg"
             },
             {
               "label": "Pour qui tu te prends ?",
-              "detail": "Nuithonie, Villars-sur-Glâne",
-              "date": "2026-11-20",
+              "detail": "Nuithonie, Villars-sur-Glâne — en cours, dernier jour : 29 novembre 2026",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/pour-qui-tu-te-prends/"
             },
             {
-              "label": "Sonadores Big Band",
-              "detail": "La Spirale",
-              "date": "2026-11-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/fribourg/sonadores-big-band_AgY9cxR"
-            },
-            {
               "label": "Festival des droits de l’enfant : Les droits de l’enfant, c’est aussi ton histoire !",
-              "detail": "Fribourg",
-              "date": "2026-11-20",
+              "detail": "Fribourg — en cours, dernier jour : 27 novembre 2026",
+              "date": "2026-11-26",
               "url": "https://www.fr.ch/dsas/sej/bpej/evenements/festival-des-droits-de-lenfant-les-droits-de-lenfant-cest-aussi-ton-histoire"
             },
             {
-              "label": "Les midis de Sainte-Croix",
-              "detail": "Bulle",
-              "date": "2026-11-20",
-              "url": "https://www.fr.ch/conservatoire/evenements/les-midis-de-sainte-croix-5"
+              "label": "CORPUS - Le corps liquide",
+              "detail": "Fribourg",
+              "date": "2026-11-27",
+              "url": "https://www.fr.ch/mahf/evenements/corpus-le-corps-liquide"
+            },
+            {
+              "label": "Corpus V - Le corps liquide",
+              "detail": "Fribourg",
+              "date": "2026-11-27",
+              "url": "https://www.fr.ch/mahf/evenements/corpus-v-le-corps-liquide"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Organisation von Veranstaltungen auf dem Gemeindegebiet der Stadt Bulle",
+              "date": "2026-11-19T10:35:08.000Z",
+              "url": "https://www.fr.ch/de/ilfd/ogr/news/organisation-von-veranstaltungen-auf-dem-gemeindegebiet-der-stadt-bulle"
+            },
+            {
+              "label": "Organisation de manifestations sur le territoire communal de la Ville de Bulle",
+              "date": "2026-11-19T10:35:08.000Z",
+              "url": "https://www.fr.ch/diaf/prgr/actualites/organisation-de-manifestations-sur-le-territoire-communal-de-la-ville-de-bulle"
+            },
             {
               "label": "20. bis 27. November 2026: Festival der Kinderrechte",
               "date": "2026-11-04T13:00:09.000Z",
@@ -540,14 +565,9 @@
               "label": "Festival Kultur & Schule FKB: 17'000 Schülerinnen, Schüler und Lehrpersonen werden an der 9. Ausgabe teilnehmen",
               "date": "2026-11-04T06:23:38.000Z",
               "url": "https://www.fr.ch/de/bkad/news/festival-kultur-schule-fkb-17000-schuelerinnen-schueler-und-lehrpersonen-werden-an-der-9-ausgabe-teilnehmen"
-            },
-            {
-              "label": "Öffentlicher Informationsanlass zum Projekt einer Wildtierpassage in Saussivue",
-              "date": "2026-10-29T08:28:22.000Z",
-              "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -569,7 +589,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

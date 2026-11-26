@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "pensioni",
-  "updatedAt": "2026-11-07T06:55:41.643Z",
-  "contentHash": "5efa96820d4d3640e22c6ff11d4cb681e709729c62e8351e179ca97b3d4df20b",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "a508cbeefe70b2a7e169b02db1dac035257accba0ee2109505fffd5ae9fc54ce",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-06T22:26:45.566Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Calendrier des rentes 2027",
+              "date": "2026-11-17",
+              "url": "https://www.cpev.ch/actualites/calendrier-des-rentes-2027"
+            },
+            {
               "label": "Investissement responsable : évolution des critères d'exclusions",
               "date": "2026-11-06",
               "url": "https://www.cpev.ch/actualites/investissement-responsable-evolution-des-criteres-dexclusions"
@@ -159,14 +164,9 @@
               "label": "Première séance d’information et d’échange avec les parties prenantes de la Caisse",
               "date": "2026-09-30",
               "url": "https://www.cpev.ch/actualites/premiere-seance-dinformation-et-dechange-avec-les-parties-prenantes-de-la-caisse"
-            },
-            {
-              "label": "Célébration du bouquet de chantier à Prilly",
-              "date": "2026-09-17",
-              "url": "https://www.cpev.ch/actualites/celebration-du-bouquet-de-chantier-prilly"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -214,7 +214,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "VD",
@@ -323,6 +323,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Calendrier des rentes 2027",
+              "date": "2026-11-17",
+              "url": "https://www.cpev.ch/actualites/calendrier-des-rentes-2027"
+            },
+            {
               "label": "Investissement responsable : évolution des critères d'exclusions",
               "date": "2026-11-06",
               "url": "https://www.cpev.ch/actualites/investissement-responsable-evolution-des-criteres-dexclusions"
@@ -346,14 +351,9 @@
               "label": "Première séance d’information et d’échange avec les parties prenantes de la Caisse",
               "date": "2026-09-30",
               "url": "https://www.cpev.ch/actualites/premiere-seance-dinformation-et-dechange-avec-les-parties-prenantes-de-la-caisse"
-            },
-            {
-              "label": "Célébration du bouquet de chantier à Prilly",
-              "date": "2026-09-17",
-              "url": "https://www.cpev.ch/actualites/celebration-du-bouquet-de-chantier-prilly"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -401,7 +401,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "VD",
@@ -510,6 +510,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Calendrier des rentes 2027",
+              "date": "2026-11-17",
+              "url": "https://www.cpev.ch/actualites/calendrier-des-rentes-2027"
+            },
+            {
               "label": "Investissement responsable : évolution des critères d'exclusions",
               "date": "2026-11-06",
               "url": "https://www.cpev.ch/actualites/investissement-responsable-evolution-des-criteres-dexclusions"
@@ -533,14 +538,9 @@
               "label": "Première séance d’information et d’échange avec les parties prenantes de la Caisse",
               "date": "2026-09-30",
               "url": "https://www.cpev.ch/actualites/premiere-seance-dinformation-et-dechange-avec-les-parties-prenantes-de-la-caisse"
-            },
-            {
-              "label": "Célébration du bouquet de chantier à Prilly",
-              "date": "2026-09-17",
-              "url": "https://www.cpev.ch/actualites/celebration-du-bouquet-de-chantier-prilly"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -588,7 +588,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "VD",
@@ -697,6 +697,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Calendrier des rentes 2027",
+              "date": "2026-11-17",
+              "url": "https://www.cpev.ch/actualites/calendrier-des-rentes-2027"
+            },
+            {
               "label": "Investissement responsable : évolution des critères d'exclusions",
               "date": "2026-11-06",
               "url": "https://www.cpev.ch/actualites/investissement-responsable-evolution-des-criteres-dexclusions"
@@ -720,14 +725,9 @@
               "label": "Première séance d’information et d’échange avec les parties prenantes de la Caisse",
               "date": "2026-09-30",
               "url": "https://www.cpev.ch/actualites/premiere-seance-dinformation-et-dechange-avec-les-parties-prenantes-de-la-caisse"
-            },
-            {
-              "label": "Célébration du bouquet de chantier à Prilly",
-              "date": "2026-09-17",
-              "url": "https://www.cpev.ch/actualites/celebration-du-bouquet-de-chantier-prilly"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -775,7 +775,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-07T06:55:41.643Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

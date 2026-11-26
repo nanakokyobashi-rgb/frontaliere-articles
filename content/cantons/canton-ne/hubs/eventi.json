@@ -4,17 +4,17 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "eventi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "2d0413681f88e6e297b76cb38ab88e8d18fef71a9e261353ee8eca4d2951933a",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "ce11bf9a78196537c1c51c59bb3238d386fb80cb46876dbff8f71291f02dc97f",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T21:47:09.888Z",
+      "updatedAt": "2026-11-26T00:32:00.223Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "18",
+          "value": "25",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Dimanche malin",
-              "detail": "LATENIUM (Parc et Musée d'archéologie de Neuchâtel), Neuchâtel — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/hauterive-ne/dimanche-malin_Aub7T1P"
-            },
-            {
               "label": "750 Jahre der Stiftskirche",
               "detail": "La Collégiale de Neuchâtel, Neuchâtel — in corso, ultimo giorno: 10 dicembre 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.guidle.com/it/events/this-that/neuchatel/750-years-of-the-collegiate-church_AfG33R1"
             },
             {
               "label": "Un parfum de Chocolat",
               "detail": "Boudry — in corso, ultimo giorno: 30 novembre 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
             },
             {
               "label": "Apéro Contes",
               "detail": "La Chaux-de-Fonds — in corso, ultimo giorno: 28 novembre 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
             },
             {
-              "label": "Boulimy Comedy Mardy",
-              "detail": "Neuchâtel",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/boulimy-comedy-mardy-1/"
+              "label": "LA PÊCHE DU JOUR",
+              "detail": "St-Aubin NE",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-peche-du-jour-1/"
             },
             {
-              "label": "Vincent Delerm",
-              "detail": "Théâtre du Passage, Neuchâtel",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/vincent-delerm_AhLNUKn"
+              "label": "MARIE JAY (CH) + ROMSII (FR)",
+              "detail": "Case à Chocs, Neuchâtel",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/marie-jay-ch-romsii-fr_ATsX6mY"
             },
             {
-              "label": "Écouter voir... Le temps. Ciné-concert",
-              "detail": "Neuchâtel",
-              "date": "2026-11-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ecouter-voir-le-temps-cineconcert/"
+              "label": "Ceremony of Carols",
+              "detail": "Temple évang.-réf. de Peseux",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/peseux/ceremony-of-carols_AXu3pPZ"
             },
             {
-              "label": "Babillages",
-              "detail": "Musée d'ethnographie, Neuchâtel",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/babillages/"
+              "label": "La compagnie du Tais-Toi !",
+              "detail": "Théâtre Tais-toi !, Neuchâtel",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/neuchatel/la-compagnie-du-tais-toi-_AxSQW6Z"
             },
             {
-              "label": "JWLES (FR) + AMIRAL (CH)",
-              "detail": "Queen Kong Club, Neuchâtel",
-              "date": "2026-11-20",
-              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/jwles-fr-amiral-ch_AuKar6j"
+              "label": "Cie Allée des Cerisiers : Le Vent dans les Saules",
+              "detail": "Colombier NE",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cie-allee-des-cerisiers-le-vent-dans-les-saules/"
             },
             {
-              "label": "SYD MATTERS (FR) + Superweak (CH)",
-              "detail": "Neuchâtel",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/syd-matters-fr-superweak-ch/"
+              "label": "ET SI C'ÉTAIT LE DERNIER? - SOIRÉE DE GALA",
+              "detail": "Temple du Bas, Neuchâtel",
+              "date": "2026-11-29",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/neuchatel/et-si-cetait-le-dernier-soiree-de-gala_AFqQP7R"
+            },
+            {
+              "label": "IMPERIAL TRIUMPHANT (USA) + KNOLL (USA)",
+              "detail": "Case à Chocs, Neuchâtel",
+              "date": "2026-12-01",
+              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/imperial-triumphant-usa-knoll-usa_AMXSiE5"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/neuchatel/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -128,7 +128,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -150,7 +150,7 @@
           "url": "/eventi/neuchatel/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "NE",
@@ -160,7 +160,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "18",
+          "value": "25",
           "note": "from the site’s events calendar"
         }
       ],
@@ -171,69 +171,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Dimanche malin",
-              "detail": "LATENIUM (Parc et Musée d'archéologie de Neuchâtel), Neuchâtel — ongoing, last day: 22 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/hauterive-ne/dimanche-malin_Aub7T1P"
-            },
-            {
               "label": "750 Years of the Collegiate Church",
               "detail": "La Collégiale de Neuchâtel, Neuchâtel — ongoing, last day: 10 December 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.guidle.com/it/events/this-that/neuchatel/750-years-of-the-collegiate-church_AfG33R1"
             },
             {
               "label": "Un parfum de Chocolat",
               "detail": "Boudry — ongoing, last day: 30 November 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
             },
             {
               "label": "Apéro Contes",
               "detail": "La Chaux-de-Fonds — ongoing, last day: 28 November 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
             },
             {
-              "label": "Boulimy Comedy Mardy",
-              "detail": "Neuchâtel",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/boulimy-comedy-mardy-1/"
+              "label": "LA PÊCHE DU JOUR",
+              "detail": "St-Aubin NE",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-peche-du-jour-1/"
             },
             {
-              "label": "Vincent Delerm",
-              "detail": "Théâtre du Passage, Neuchâtel",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/vincent-delerm_AhLNUKn"
+              "label": "MARIE JAY (CH) + ROMSII (FR)",
+              "detail": "Case à Chocs, Neuchâtel",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/marie-jay-ch-romsii-fr_ATsX6mY"
             },
             {
-              "label": "Ecouter voir... Le temps. Ciné-concert",
-              "detail": "Neuchâtel",
-              "date": "2026-11-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ecouter-voir-le-temps-cineconcert/"
+              "label": "Ceremony of Carols",
+              "detail": "Temple évang.-réf. de Peseux",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/peseux/ceremony-of-carols_AXu3pPZ"
             },
             {
-              "label": "Babillages",
-              "detail": "Musée d'ethnographie, Neuchâtel",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/babillages/"
+              "label": "La compagnie du Tais-Toi !",
+              "detail": "Théâtre Tais-toi !, Neuchâtel",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/neuchatel/la-compagnie-du-tais-toi-_AxSQW6Z"
             },
             {
-              "label": "JWLES (FR) + AMIRAL (CH)",
-              "detail": "Queen Kong Club, Neuchâtel",
-              "date": "2026-11-20",
-              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/jwles-fr-amiral-ch_AuKar6j"
+              "label": "Cie Allée des Cerisiers : Le Vent dans les Saules",
+              "detail": "Colombier NE",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cie-allee-des-cerisiers-le-vent-dans-les-saules/"
             },
             {
-              "label": "SYD MATTERS (FR) + Superweak (CH)",
-              "detail": "Neuchâtel",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/syd-matters-fr-superweak-ch/"
+              "label": "ET SI C'ÉTAIT LE DERNIER? - SOIRÉE DE GALA",
+              "detail": "Temple du Bas, Neuchâtel",
+              "date": "2026-11-29",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/neuchatel/et-si-cetait-le-dernier-soiree-de-gala_AFqQP7R"
+            },
+            {
+              "label": "IMPERIAL TRIUMPHANT (USA) + KNOLL (USA)",
+              "detail": "Case à Chocs, Neuchâtel",
+              "date": "2026-12-01",
+              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/imperial-triumphant-usa-knoll-usa_AMXSiE5"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/neuchatel/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -261,7 +261,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -283,7 +283,7 @@
           "url": "/en/events/neuchatel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "NE",
@@ -293,7 +293,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "18",
+          "value": "25",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -304,69 +304,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Dimanche malin",
-              "detail": "LATENIUM (Parc et Musée d'archéologie de Neuchâtel), Neuchâtel — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/hauterive-ne/dimanche-malin_Aub7T1P"
-            },
-            {
               "label": "750 Jahre der Stiftskirche",
               "detail": "La Collégiale de Neuchâtel, Neuchâtel — läuft, letzter Tag: 10. Dezember 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.guidle.com/it/events/this-that/neuchatel/750-years-of-the-collegiate-church_AfG33R1"
             },
             {
               "label": "Un parfum de Chocolat",
               "detail": "Boudry — läuft, letzter Tag: 30. November 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
             },
             {
               "label": "Apéro Contes",
               "detail": "La Chaux-de-Fonds — läuft, letzter Tag: 28. November 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
             },
             {
-              "label": "Boulimy Comedy Mardy",
-              "detail": "Neuchâtel",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/boulimy-comedy-mardy-1/"
+              "label": "LA PÊCHE DU JOUR",
+              "detail": "St-Aubin NE",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-peche-du-jour-1/"
             },
             {
-              "label": "Vincent Delerm",
-              "detail": "Théâtre du Passage, Neuchâtel",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/vincent-delerm_AhLNUKn"
+              "label": "MARIE JAY (CH) + ROMSII (FR)",
+              "detail": "Case à Chocs, Neuchâtel",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/marie-jay-ch-romsii-fr_ATsX6mY"
             },
             {
-              "label": "Écouter voir... Le temps. Ciné-Konzert",
-              "detail": "Neuchâtel",
-              "date": "2026-11-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ecouter-voir-le-temps-cineconcert/"
+              "label": "Ceremony of Carols",
+              "detail": "Temple évang.-réf. de Peseux",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/peseux/ceremony-of-carols_AXu3pPZ"
             },
             {
-              "label": "Babylagen",
-              "detail": "Musée d'ethnographie, Neuchâtel",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/babillages/"
+              "label": "La compagnie du Tais-Toi !",
+              "detail": "Théâtre Tais-toi !, Neuchâtel",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/neuchatel/la-compagnie-du-tais-toi-_AxSQW6Z"
             },
             {
-              "label": "JWLES (FR) + AMIRAL (CH)",
-              "detail": "Queen Kong Club, Neuchâtel",
-              "date": "2026-11-20",
-              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/jwles-fr-amiral-ch_AuKar6j"
+              "label": "Cie Allée des Cerisiers : Le Vent dans les Saules",
+              "detail": "Colombier NE",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cie-allee-des-cerisiers-le-vent-dans-les-saules/"
             },
             {
-              "label": "SYD MATTERS (FR) + Superweak (CH)",
-              "detail": "Neuchâtel",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/syd-matters-fr-superweak-ch/"
+              "label": "ET SI C'ÉTAIT LE DERNIER? - SOIRÉE DE GALA",
+              "detail": "Temple du Bas, Neuchâtel",
+              "date": "2026-11-29",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/neuchatel/et-si-cetait-le-dernier-soiree-de-gala_AFqQP7R"
+            },
+            {
+              "label": "IMPERIAL TRIUMPHANT (USA) + KNOLL (USA)",
+              "detail": "Case à Chocs, Neuchâtel",
+              "date": "2026-12-01",
+              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/imperial-triumphant-usa-knoll-usa_AMXSiE5"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/neuenburg/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -394,7 +394,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -416,7 +416,7 @@
           "url": "/de/veranstaltungen/neuenburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "NE",
@@ -426,7 +426,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "18",
+          "value": "25",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -437,69 +437,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Dimanche malin",
-              "detail": "LATENIUM (Parc et Musée d'archéologie de Neuchâtel), Neuchâtel — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/hauterive-ne/dimanche-malin_Aub7T1P"
-            },
-            {
               "label": "750 ans de la Collégiale",
               "detail": "La Collégiale de Neuchâtel, Neuchâtel — en cours, dernier jour : 10 décembre 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.guidle.com/it/events/this-that/neuchatel/750-years-of-the-collegiate-church_AfG33R1"
             },
             {
               "label": "Un parfum de Chocolat",
               "detail": "Boudry — en cours, dernier jour : 30 novembre 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
             },
             {
               "label": "Apéro Contes",
               "detail": "La Chaux-de-Fonds — en cours, dernier jour : 28 novembre 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
             },
             {
-              "label": "Boulimy Comedy Mardy",
-              "detail": "Neuchâtel",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/boulimy-comedy-mardy-1/"
+              "label": "LA PÊCHE DU JOUR",
+              "detail": "St-Aubin NE",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-peche-du-jour-1/"
             },
             {
-              "label": "Vincent Delerm",
-              "detail": "Théâtre du Passage, Neuchâtel",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/vincent-delerm_AhLNUKn"
+              "label": "MARIE JAY (CH) + ROMSII (FR)",
+              "detail": "Case à Chocs, Neuchâtel",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/marie-jay-ch-romsii-fr_ATsX6mY"
             },
             {
-              "label": "Ecouter voir... Le temps. Ciné-concert",
-              "detail": "Neuchâtel",
-              "date": "2026-11-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ecouter-voir-le-temps-cineconcert/"
+              "label": "Ceremony of Carols",
+              "detail": "Temple évang.-réf. de Peseux",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/peseux/ceremony-of-carols_AXu3pPZ"
             },
             {
-              "label": "Les Babillages",
-              "detail": "Musée d'ethnographie, Neuchâtel",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/babillages/"
+              "label": "La compagnie du Tais-Toi !",
+              "detail": "Théâtre Tais-toi !, Neuchâtel",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/neuchatel/la-compagnie-du-tais-toi-_AxSQW6Z"
             },
             {
-              "label": "JWLES (FR) + AMIRAL (CH)",
-              "detail": "Queen Kong Club, Neuchâtel",
-              "date": "2026-11-20",
-              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/jwles-fr-amiral-ch_AuKar6j"
+              "label": "Cie Allée des Cerisiers : Le Vent dans les Saules",
+              "detail": "Colombier NE",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cie-allee-des-cerisiers-le-vent-dans-les-saules/"
             },
             {
-              "label": "SYD MATTERS (FR) + Superweak (CH)",
-              "detail": "Neuchâtel",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/syd-matters-fr-superweak-ch/"
+              "label": "ET SI C'ÉTAIT LE DERNIER? - SOIRÉE DE GALA",
+              "detail": "Temple du Bas, Neuchâtel",
+              "date": "2026-11-29",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/neuchatel/et-si-cetait-le-dernier-soiree-de-gala_AFqQP7R"
+            },
+            {
+              "label": "IMPERIAL TRIUMPHANT (USA) + KNOLL (USA)",
+              "detail": "Case à Chocs, Neuchâtel",
+              "date": "2026-12-01",
+              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/imperial-triumphant-usa-knoll-usa_AMXSiE5"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/neuchatel/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -527,7 +527,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +549,7 @@
           "url": "/fr/evenements/neuchatel/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

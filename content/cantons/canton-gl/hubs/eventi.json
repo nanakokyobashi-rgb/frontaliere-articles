@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "091ded01d1ad807ee68c4bf56fe80ed04bebcb1beb894481cade8a8e77b9818c",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "0085903dedd2f6888caf12dfa42898688a8b4dd80a8115121c61007fca1f8de0",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T21:47:09.888Z",
+      "updatedAt": "2026-11-26T00:32:00.223Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "26",
+          "value": "25",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Seniorenkino im Wortreich: \"Rebuilding\"",
-              "detail": "Wortreich Buchhandlung & Antiquariat, Glarus",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/seniorenkino-im-wortreich-rebuilding/"
+              "label": "Frank Richter: #LOVEMYJOB",
+              "detail": "Schwanden",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frank-richter-1/"
             },
             {
-              "label": "KISS Suppenznacht",
-              "detail": "ReVier Ennenda, Glarus",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kiss-suppenznacht/"
+              "label": "Orange Days: 16 days against violence against women",
+              "detail": "Anna Göldi Museum — in corso, ultimo giorno: 10 dicembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orange-days-16-tage-gegen-geschlechtsspezifische-gewalt/"
             },
             {
-              "label": "Terramation - Eine sanfte Rückkehr zur Erde",
-              "detail": "Glarus",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/terramation-eine-sanfte-rueckkehr-zur-erde/"
+              "label": "Weihnachtsmärt Mollis",
+              "detail": "Mollis",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmaert-mollis/"
             },
             {
-              "label": "WEIHNACHTSBASTELN FÜR KINDER",
-              "detail": "St. Josefsheim",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsbasteln-fuer-kinder/"
+              "label": "ortsFEST Chlausmärt-Stand",
+              "detail": "8867 Niederurnen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ortsfest-chlausmaert-stand/"
             },
             {
-              "label": "Zentangele im Schulhaus Braunwald, 20. November 2026",
+              "label": "Chlauseinzug Niederurnen",
+              "detail": "Luftseilbahn-Allmeindplatz",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/chlauseinzug-niederurnen/"
+            },
+            {
+              "label": "Erntedankfest im Panoramahotel Braunwald, 28. November 2026",
               "detail": "Braunwald, Glarus Süd",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/zentangele-im-schulhaus-braunwald-20-november-2026/"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erntedankfest-im-panoramahotel-braunwald-28-november-2026/"
             },
             {
-              "label": "Chränzli TV Netstal",
-              "detail": "Netstal",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chraenzli-tv-netstal/"
+              "label": "Fabian Unteregger: Fachkräftemangel",
+              "detail": "Gemeindezentrum Schwanden",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fabian-unteregger-fachkraeftemangel/"
             },
             {
-              "label": "Sich mit der Sammlung anlegen",
-              "detail": "Glarus",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sich-mit-der-sammlung-anlegen/"
+              "label": "Jahreskonzert 2026 Harmoniemusik Elm",
+              "detail": "Gemeindehaus Elm",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/elm/jahreskonzert-2026-harmoniemusik-elm_AaJX9NB"
             },
             {
-              "label": "Kulturbühne und Trio Anderscht",
-              "detail": "Seminarhotel Lihn",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kulturbuehne-und-trio-anderscht/"
+              "label": "Troubadours Tour-zwöierlei singen Matter",
+              "detail": "Schützenhaus Glarus, Glarus",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/troubadours-tour-zwoeierlei-singen-matter_A628xDm"
             },
             {
-              "label": "Mateo Gudenrath - UNFILTERED",
-              "detail": "Kulturzentrum Holästei",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mateo-gudenrath-unfiltered-4/"
-            },
-            {
-              "label": "Mercado Latino - Salsa Night",
-              "detail": "Glarus",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mercado-latino-salsa-night-3/"
+              "label": "Soulmarket",
+              "detail": "Markthalle Glarus, Glarus",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/soulmarket_AU8vi8h"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "GL",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "26",
+          "value": "25",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Seniorenkino im Wortreich: \"Rebuilding\"",
-              "detail": "Wortreich Buchhandlung & Antiquariat, Glarus",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/seniorenkino-im-wortreich-rebuilding/"
+              "label": "Frank Richter: #LOVEMYJOB",
+              "detail": "Schwanden",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frank-richter-1/"
             },
             {
-              "label": "KISS Suppenznacht",
-              "detail": "ReVier Ennenda, Glarus",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kiss-suppenznacht/"
+              "label": "Orange Days: 16 days against violence against women",
+              "detail": "Anna Göldi Museum — ongoing, last day: 10 December 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orange-days-16-tage-gegen-geschlechtsspezifische-gewalt/"
             },
             {
-              "label": "Terramation - Eine sanfte Rückkehr zur Erde",
-              "detail": "Glarus",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/terramation-eine-sanfte-rueckkehr-zur-erde/"
+              "label": "Weihnachtsmärt Mollis",
+              "detail": "Mollis",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmaert-mollis/"
             },
             {
-              "label": "WEIHNACHTSBASTELN FÜR KINDER",
-              "detail": "St. Josefsheim",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsbasteln-fuer-kinder/"
+              "label": "ortsFEST Chlausmärt-Stand",
+              "detail": "8867 Niederurnen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ortsfest-chlausmaert-stand/"
             },
             {
-              "label": "Zentangele im Schulhaus Braunwald, 20. November 2026",
+              "label": "Chlauseinzug Niederurnen",
+              "detail": "Luftseilbahn-Allmeindplatz",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/chlauseinzug-niederurnen/"
+            },
+            {
+              "label": "Erntedankfest im Panoramahotel Braunwald, 28. November 2026",
               "detail": "Braunwald, Glarus Süd",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/zentangele-im-schulhaus-braunwald-20-november-2026/"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erntedankfest-im-panoramahotel-braunwald-28-november-2026/"
             },
             {
-              "label": "Chränzli TV Netstal",
-              "detail": "Netstal",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chraenzli-tv-netstal/"
+              "label": "Fabian Unteregger: Fachkräftemangel",
+              "detail": "Gemeindezentrum Schwanden",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fabian-unteregger-fachkraeftemangel/"
             },
             {
-              "label": "Sich mit der Sammlung anlegen",
-              "detail": "Glarus",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sich-mit-der-sammlung-anlegen/"
+              "label": "Jahreskonzert 2026 Harmoniemusik Elm",
+              "detail": "Gemeindehaus Elm",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/elm/jahreskonzert-2026-harmoniemusik-elm_AaJX9NB"
             },
             {
-              "label": "Kulturbühne und Trio Anderscht",
-              "detail": "Seminarhotel Lihn",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kulturbuehne-und-trio-anderscht/"
+              "label": "Troubadours Tour-zwöierlei singen Matter",
+              "detail": "Schützenhaus Glarus, Glarus",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/troubadours-tour-zwoeierlei-singen-matter_A628xDm"
             },
             {
-              "label": "Mateo Gudenrath - UNFILTERED",
-              "detail": "Kulturzentrum Holästei",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mateo-gudenrath-unfiltered-4/"
-            },
-            {
-              "label": "Mercado Latino - Salsa Night",
-              "detail": "Glarus",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mercado-latino-salsa-night-3/"
+              "label": "Soulmarket",
+              "detail": "Markthalle Glarus, Glarus",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/soulmarket_AU8vi8h"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "GL",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "26",
+          "value": "25",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Seniorenkino im Wortreich: \"Rebuilding\"",
-              "detail": "Wortreich Buchhandlung & Antiquariat, Glarus",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/seniorenkino-im-wortreich-rebuilding/"
+              "label": "Frank Richter: #LOVEMYJOB",
+              "detail": "Schwanden",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frank-richter-1/"
             },
             {
-              "label": "KISS Suppenznacht",
-              "detail": "ReVier Ennenda, Glarus",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kiss-suppenznacht/"
+              "label": "Orange Days: 16 Tage gegen geschlechtsspezifische Gewalt",
+              "detail": "Anna Göldi Museum — läuft, letzter Tag: 10. Dezember 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orange-days-16-tage-gegen-geschlechtsspezifische-gewalt/"
             },
             {
-              "label": "Terramation - Eine sanfte Rückkehr zur Erde",
-              "detail": "Glarus",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/terramation-eine-sanfte-rueckkehr-zur-erde/"
+              "label": "Weihnachtsmärt Mollis",
+              "detail": "Mollis",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmaert-mollis/"
             },
             {
-              "label": "WEIHNACHTSBASTELN FÜR KINDER",
-              "detail": "St. Josefsheim",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsbasteln-fuer-kinder/"
+              "label": "ortsFEST Chlausmärt-Stand",
+              "detail": "8867 Niederurnen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ortsfest-chlausmaert-stand/"
             },
             {
-              "label": "Zentangele im Schulhaus Braunwald, 20. November 2026",
+              "label": "Chlauseinzug Niederurnen",
+              "detail": "Luftseilbahn-Allmeindplatz",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/chlauseinzug-niederurnen/"
+            },
+            {
+              "label": "Erntedankfest im Panoramahotel Braunwald, 28. November 2026",
               "detail": "Braunwald, Glarus Süd",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/zentangele-im-schulhaus-braunwald-20-november-2026/"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erntedankfest-im-panoramahotel-braunwald-28-november-2026/"
             },
             {
-              "label": "Chränzli TV Netstal",
-              "detail": "Netstal",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chraenzli-tv-netstal/"
+              "label": "Fabian Unteregger: Fachkräftemangel",
+              "detail": "Gemeindezentrum Schwanden",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fabian-unteregger-fachkraeftemangel/"
             },
             {
-              "label": "Sich mit der Sammlung anlegen",
-              "detail": "Glarus",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sich-mit-der-sammlung-anlegen/"
+              "label": "Jahreskonzert 2026 Harmoniemusik Elm",
+              "detail": "Gemeindehaus Elm",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/elm/jahreskonzert-2026-harmoniemusik-elm_AaJX9NB"
             },
             {
-              "label": "Kulturbühne und Trio Anderscht",
-              "detail": "Seminarhotel Lihn",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kulturbuehne-und-trio-anderscht/"
+              "label": "Troubadours Tour-zwöierlei singen Matter",
+              "detail": "Schützenhaus Glarus, Glarus",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/troubadours-tour-zwoeierlei-singen-matter_A628xDm"
             },
             {
-              "label": "Mateo Gudenrath - UNFILTERED",
-              "detail": "Kulturzentrum Holästei",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mateo-gudenrath-unfiltered-4/"
-            },
-            {
-              "label": "Mercado Latino - Salsa Night",
-              "detail": "Glarus",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mercado-latino-salsa-night-3/"
+              "label": "Soulmarket",
+              "detail": "Markthalle Glarus, Glarus",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/soulmarket_AU8vi8h"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "GL",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "26",
+          "value": "25",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Seniorenkino im Wortreich: \"Rebuilding\"",
-              "detail": "Wortreich Buchhandlung & Antiquariat, Glarus",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/seniorenkino-im-wortreich-rebuilding/"
+              "label": "Frank Richter: #LOVEMYJOB",
+              "detail": "Schwanden",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frank-richter-1/"
             },
             {
-              "label": "KISS Suppenznacht",
-              "detail": "ReVier Ennenda, Glarus",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kiss-suppenznacht/"
+              "label": "Orange Days : 16 jours contre la violence envers les femmes",
+              "detail": "Anna Göldi Museum — en cours, dernier jour : 10 décembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orange-days-16-tage-gegen-geschlechtsspezifische-gewalt/"
             },
             {
-              "label": "Terramation - Eine sanfte Rückkehr zur Erde",
-              "detail": "Glarus",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/terramation-eine-sanfte-rueckkehr-zur-erde/"
+              "label": "Weihnachtsmärt Mollis",
+              "detail": "Mollis",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmaert-mollis/"
             },
             {
-              "label": "WEIHNACHTSBASTELN FÜR KINDER",
-              "detail": "St. Josefsheim",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsbasteln-fuer-kinder/"
+              "label": "ortsFEST Chlausmärt-Stand",
+              "detail": "8867 Niederurnen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ortsfest-chlausmaert-stand/"
             },
             {
-              "label": "Zentangele im Schulhaus Braunwald, 20. November 2026",
+              "label": "Chlauseinzug Niederurnen",
+              "detail": "Luftseilbahn-Allmeindplatz",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/chlauseinzug-niederurnen/"
+            },
+            {
+              "label": "Erntedankfest im Panoramahotel Braunwald, 28. November 2026",
               "detail": "Braunwald, Glarus Süd",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/zentangele-im-schulhaus-braunwald-20-november-2026/"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erntedankfest-im-panoramahotel-braunwald-28-november-2026/"
             },
             {
-              "label": "Chränzli TV Netstal",
-              "detail": "Netstal",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chraenzli-tv-netstal/"
+              "label": "Fabian Unteregger: Fachkräftemangel",
+              "detail": "Gemeindezentrum Schwanden",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fabian-unteregger-fachkraeftemangel/"
             },
             {
-              "label": "Sich mit der Sammlung anlegen",
-              "detail": "Glarus",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sich-mit-der-sammlung-anlegen/"
+              "label": "Jahreskonzert 2026 Harmoniemusik Elm",
+              "detail": "Gemeindehaus Elm",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/elm/jahreskonzert-2026-harmoniemusik-elm_AaJX9NB"
             },
             {
-              "label": "Kulturbühne und Trio Anderscht",
-              "detail": "Seminarhotel Lihn",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kulturbuehne-und-trio-anderscht/"
+              "label": "Troubadours Tour-zwöierlei singen Matter",
+              "detail": "Schützenhaus Glarus, Glarus",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/troubadours-tour-zwoeierlei-singen-matter_A628xDm"
             },
             {
-              "label": "Mateo Gudenrath - UNFILTERED",
-              "detail": "Kulturzentrum Holästei",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mateo-gudenrath-unfiltered-4/"
-            },
-            {
-              "label": "Mercado Latino - Salsa Night",
-              "detail": "Glarus",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mercado-latino-salsa-night-3/"
+              "label": "Soulmarket",
+              "detail": "Markthalle Glarus, Glarus",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/soulmarket_AU8vi8h"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

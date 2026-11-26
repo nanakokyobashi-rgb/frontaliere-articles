@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "servizi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "b2a611b4a972a415bbedf1e939dac6f276758a4aa3dd16d4c43f049b1eae77a2",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "f6a47568253ab0337fd4df2bb6e6cd44564598131752064181b92b813f21d8ba",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-16T06:25:42.818Z",
+      "updatedAt": "2026-11-25T21:43:23.986Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-16T06:51:00.113Z",
+      "updatedAt": "2026-11-26T00:36:15.946Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "11",
-          "note": "offerta mediana 500 CHF"
+          "note": "offerta mediana 200 CHF"
         }
       ],
       "dataBlocks": [
@@ -69,30 +69,30 @@
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
-              "label": "SZ4925",
+              "label": "SZ3281",
               "value": "2000 CHF",
               "detail": "offerta attuale",
-              "date": "2026-11-24T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1615"
+              "date": "2026-12-08T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1626"
             },
             {
-              "label": "SZ6641",
-              "value": "1500 CHF",
+              "label": "SZ8483",
+              "value": "1510 CHF",
               "detail": "offerta attuale",
-              "date": "2026-11-24T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1616"
+              "date": "2026-12-08T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1627"
             },
             {
-              "label": "SZ44477",
-              "value": "1200 CHF",
+              "label": "SZ10487",
+              "value": "200 CHF",
               "detail": "offerta attuale",
-              "date": "2026-11-24T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1625"
+              "date": "2026-12-08T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1628"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-16T06:25:42.818Z"
+          "updatedAt": "2026-11-25T21:43:23.986Z"
         },
         {
           "id": "meteo",
@@ -101,18 +101,28 @@
           "items": [
             {
               "label": "Schwyz",
-              "value": "6 °C",
-              "detail": "oggi da 6 a 10 °C"
+              "value": "3 °C",
+              "detail": "oggi da -1 a 3 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Rezepttipp für den Herbst",
+              "date": "2026-11-17",
+              "url": "https://spital-lachen.ch/ueber-uns/aktuelles/rezepttipp-fuer-den-herbst/"
+            },
+            {
+              "label": "Die Visite ist da!",
+              "date": "2026-11-17",
+              "url": "https://spital-lachen.ch/ueber-uns/aktuelles/die-visite-ist-da/"
+            },
             {
               "label": "Wechsel in der operativen Führung",
               "date": "2026-10-28",
@@ -122,14 +132,9 @@
               "label": "Depression stärker ins öffentliche Bewusstsein rücken",
               "date": "2026-10-07",
               "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/depression-staerker-ins-oeffentliche-bewusstsein-ruecken/"
-            },
-            {
-              "label": "Rettungsdienst Schwyz AG:",
-              "date": "2026-07-27",
-              "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +214,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "SZ",
@@ -226,7 +231,7 @@
         {
           "label": "Plate auctions running",
           "value": "11",
-          "note": "typical bid 500 CHF"
+          "note": "typical bid 200 CHF"
         }
       ],
       "dataBlocks": [
@@ -251,30 +256,30 @@
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
-              "label": "SZ4925",
+              "label": "SZ3281",
               "value": "2,000 CHF",
               "detail": "current bid",
-              "date": "2026-11-24T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1615"
+              "date": "2026-12-08T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1626"
             },
             {
-              "label": "SZ6641",
-              "value": "1,500 CHF",
+              "label": "SZ8483",
+              "value": "1,510 CHF",
               "detail": "current bid",
-              "date": "2026-11-24T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1616"
+              "date": "2026-12-08T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1627"
             },
             {
-              "label": "SZ44477",
-              "value": "1,200 CHF",
+              "label": "SZ10487",
+              "value": "200 CHF",
               "detail": "current bid",
-              "date": "2026-11-24T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1625"
+              "date": "2026-12-08T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1628"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-16T06:25:42.818Z"
+          "updatedAt": "2026-11-25T21:43:23.986Z"
         },
         {
           "id": "meteo",
@@ -283,18 +288,28 @@
           "items": [
             {
               "label": "Schwyz",
-              "value": "6 °C",
-              "detail": "today from 6 to 10 °C"
+              "value": "3 °C",
+              "detail": "today from -1 to 3 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Rezepttipp für den Herbst",
+              "date": "2026-11-17",
+              "url": "https://spital-lachen.ch/ueber-uns/aktuelles/rezepttipp-fuer-den-herbst/"
+            },
+            {
+              "label": "Die Visite ist da!",
+              "date": "2026-11-17",
+              "url": "https://spital-lachen.ch/ueber-uns/aktuelles/die-visite-ist-da/"
+            },
             {
               "label": "Wechsel in der operativen Führung",
               "date": "2026-10-28",
@@ -304,14 +319,9 @@
               "label": "Depression stärker ins öffentliche Bewusstsein rücken",
               "date": "2026-10-07",
               "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/depression-staerker-ins-oeffentliche-bewusstsein-ruecken/"
-            },
-            {
-              "label": "Rettungsdienst Schwyz AG:",
-              "date": "2026-07-27",
-              "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -387,7 +397,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "SZ",
@@ -404,7 +414,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "11",
-          "note": "mittleres Gebot 500 CHF"
+          "note": "mittleres Gebot 200 CHF"
         }
       ],
       "dataBlocks": [
@@ -429,30 +439,30 @@
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
-              "label": "SZ4925",
+              "label": "SZ3281",
               "value": "2’000 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-11-24T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1615"
+              "date": "2026-12-08T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1626"
             },
             {
-              "label": "SZ6641",
-              "value": "1’500 CHF",
+              "label": "SZ8483",
+              "value": "1’510 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-11-24T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1616"
+              "date": "2026-12-08T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1627"
             },
             {
-              "label": "SZ44477",
-              "value": "1’200 CHF",
+              "label": "SZ10487",
+              "value": "200 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-11-24T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1625"
+              "date": "2026-12-08T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1628"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-16T06:25:42.818Z"
+          "updatedAt": "2026-11-25T21:43:23.986Z"
         },
         {
           "id": "meteo",
@@ -461,18 +471,28 @@
           "items": [
             {
               "label": "Schwyz",
-              "value": "6 °C",
-              "detail": "heute 6 bis 10 °C"
+              "value": "3 °C",
+              "detail": "heute -1 bis 3 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Rezepttipp für den Herbst",
+              "date": "2026-11-17",
+              "url": "https://spital-lachen.ch/ueber-uns/aktuelles/rezepttipp-fuer-den-herbst/"
+            },
+            {
+              "label": "Die Visite ist da!",
+              "date": "2026-11-17",
+              "url": "https://spital-lachen.ch/ueber-uns/aktuelles/die-visite-ist-da/"
+            },
             {
               "label": "Wechsel in der operativen Führung",
               "date": "2026-10-28",
@@ -482,14 +502,9 @@
               "label": "Depression stärker ins öffentliche Bewusstsein rücken",
               "date": "2026-10-07",
               "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/depression-staerker-ins-oeffentliche-bewusstsein-ruecken/"
-            },
-            {
-              "label": "Rettungsdienst Schwyz AG:",
-              "date": "2026-07-27",
-              "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -565,7 +580,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "SZ",
@@ -582,7 +597,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "11",
-          "note": "offre centrale 500 CHF"
+          "note": "offre centrale 200 CHF"
         }
       ],
       "dataBlocks": [
@@ -607,30 +622,30 @@
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
-              "label": "SZ4925",
+              "label": "SZ3281",
               "value": "2 000 CHF",
               "detail": "offre actuelle",
-              "date": "2026-11-24T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1615"
+              "date": "2026-12-08T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1626"
             },
             {
-              "label": "SZ6641",
-              "value": "1 500 CHF",
+              "label": "SZ8483",
+              "value": "1 510 CHF",
               "detail": "offre actuelle",
-              "date": "2026-11-24T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1616"
+              "date": "2026-12-08T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1627"
             },
             {
-              "label": "SZ44477",
-              "value": "1 200 CHF",
+              "label": "SZ10487",
+              "value": "200 CHF",
               "detail": "offre actuelle",
-              "date": "2026-11-24T21:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1625"
+              "date": "2026-12-08T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1628"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-16T06:25:42.818Z"
+          "updatedAt": "2026-11-25T21:43:23.986Z"
         },
         {
           "id": "meteo",
@@ -639,18 +654,28 @@
           "items": [
             {
               "label": "Schwyz",
-              "value": "6 °C",
-              "detail": "aujourd’hui de 6 à 10 °C"
+              "value": "3 °C",
+              "detail": "aujourd’hui de -1 à 3 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Rezepttipp für den Herbst",
+              "date": "2026-11-17",
+              "url": "https://spital-lachen.ch/ueber-uns/aktuelles/rezepttipp-fuer-den-herbst/"
+            },
+            {
+              "label": "Die Visite ist da!",
+              "date": "2026-11-17",
+              "url": "https://spital-lachen.ch/ueber-uns/aktuelles/die-visite-ist-da/"
+            },
             {
               "label": "Wechsel in der operativen Führung",
               "date": "2026-10-28",
@@ -660,14 +685,9 @@
               "label": "Depression stärker ins öffentliche Bewusstsein rücken",
               "date": "2026-10-07",
               "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/depression-staerker-ins-oeffentliche-bewusstsein-ruecken/"
-            },
-            {
-              "label": "Rettungsdienst Schwyz AG:",
-              "date": "2026-07-27",
-              "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -739,7 +759,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

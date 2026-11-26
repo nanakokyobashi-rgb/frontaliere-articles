@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "fisco",
-  "updatedAt": "2026-11-08T22:45:42.198Z",
-  "contentHash": "9e07430a2029755a30a24036b9f631675bf62eb85916719e80f95d571cbf4d77",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "142acc38f2683716d8ba2c572941a644d630fdb584782eb57666a4910f4ef173",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-07T21:07:56.550Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -120,7 +120,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49548538"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -161,16 +161,16 @@
           "date": "2026-09-05T09:53:45.166Z"
         },
         {
-          "title": "Imposta di successione nel Vallese: aliquote e procedure",
-          "url": "/articoli-svizzera/eredita-donazioni-vallese-guida/",
-          "excerpt": "La successione nel Vallese è soggetta a imposte cantonali calcolate per grado di parentela. Coniuge e discendenti hanno esenzioni specifiche. Ecco come funziona e quali procedimenti seguire.",
-          "date": "2026-09-06T14:17:14.380Z"
-        },
-        {
           "title": "Vivere a Gressan e lavorare nel Vallese: fiscalità da frontaliere",
           "url": "/articoli-frontaliere/vivere-gressan-lavorare-vallese-frontaliere/",
           "excerpt": "Nuovo accordo 2024: imposta alla fonte in Svizzera, franchigie 10.000, modello 730 e credito d'imposta. Tutto ciò che serve sapere.",
           "date": "2026-08-22T03:23:40.233Z"
+        },
+        {
+          "title": "Imposta di successione nel Vallese: aliquote e procedure",
+          "url": "/articoli-svizzera/eredita-donazioni-vallese-guida/",
+          "excerpt": "La successione nel Vallese è soggetta a imposte cantonali calcolate per grado di parentela. Coniuge e discendenti hanno esenzioni specifiche. Ecco come funziona e quali procedimenti seguire.",
+          "date": "2026-09-06T14:17:14.380Z"
         }
       ],
       "latestCantonArticles": [],
@@ -200,7 +200,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "VS",
@@ -298,7 +298,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49548538"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -339,16 +339,16 @@
           "date": "2026-09-05T09:53:45.166Z"
         },
         {
-          "title": "Inheritance tax in Valais: rates and procedures",
-          "url": "/en/swiss-articles/inheritance-donations-valais-guide/",
-          "excerpt": "Succession in Valais is subject to cantonal taxes calculated by degree of kinship. Spouse and descendants have specific exemptions. Here's how it works and what procedures to follow.",
-          "date": "2026-09-06T14:17:14.380Z"
-        },
-        {
           "title": "Living in Gressan and working in Valais: border taxation",
           "url": "/en/cross-border-articles/live-gressan-work-valais-frontier-worker/",
           "excerpt": "New agreement 2024: source tax in Switzerland, deductibles 10,000, model 730 and tax credit. Everything you need to know.",
           "date": "2026-08-22T03:23:40.233Z"
+        },
+        {
+          "title": "Inheritance tax in Valais: rates and procedures",
+          "url": "/en/swiss-articles/inheritance-donations-valais-guide/",
+          "excerpt": "Succession in Valais is subject to cantonal taxes calculated by degree of kinship. Spouse and descendants have specific exemptions. Here's how it works and what procedures to follow.",
+          "date": "2026-09-06T14:17:14.380Z"
         }
       ],
       "latestCantonArticles": [],
@@ -378,7 +378,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "VS",
@@ -476,7 +476,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49548538"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -517,16 +517,16 @@
           "date": "2026-09-05T09:53:45.166Z"
         },
         {
-          "title": "Erbschaftssteuer im Wallis: Sätze und Verfahren",
-          "url": "/de/schweiz-artikel/erbschaft-schenkung-wallis-leitfaden/",
-          "excerpt": "Die Erbschaft im Wallis unterliegt kantonalen Steuern, die nach Verwandtschaftsgrad berechnet werden. Ehepartner und Nachkommen haben spezifische Ausnahmen. Hier ist, wie es funktioniert und welche Schritte zu befolgen…",
-          "date": "2026-09-06T14:17:14.380Z"
-        },
-        {
           "title": "Wohnen in Gressan und Arbeiten im Wallis: Grenzgängerbesteuerung",
           "url": "/de/grenzgaenger-artikel/in-gressan-wohnen-im-wallis-arbeiten-grenzgaenger/",
           "excerpt": "Neues Abkommen 2024: Quellensteuer in der Schweiz, Franchisen CHF 7 '500.10' 000, Vordruck 730 und Steuergutschrift. Alles, was Sie wissen müssen.",
           "date": "2026-08-22T03:23:40.233Z"
+        },
+        {
+          "title": "Erbschaftssteuer im Wallis: Sätze und Verfahren",
+          "url": "/de/schweiz-artikel/erbschaft-schenkung-wallis-leitfaden/",
+          "excerpt": "Die Erbschaft im Wallis unterliegt kantonalen Steuern, die nach Verwandtschaftsgrad berechnet werden. Ehepartner und Nachkommen haben spezifische Ausnahmen. Hier ist, wie es funktioniert und welche Schritte zu befolgen…",
+          "date": "2026-09-06T14:17:14.380Z"
         }
       ],
       "latestCantonArticles": [],
@@ -556,7 +556,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "VS",
@@ -654,7 +654,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49548538"
             }
           ],
-          "updatedAt": "2026-11-07T21:07:56.550Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -695,16 +695,16 @@
           "date": "2026-09-05T09:53:45.166Z"
         },
         {
-          "title": "Droit de succession en Valais : taux et procédures",
-          "url": "/fr/articles-suisse/heritage-donations-valais-guide/",
-          "excerpt": "La succession en Valais est soumise à des impôts cantonaux calculés par degré de parenté. Le conjoint et les descendants bénéficient d'exemptions spécifiques. Voici comment cela fonctionne et quelles procédures suivre.",
-          "date": "2026-09-06T14:17:14.380Z"
-        },
-        {
           "title": "Vivre à Gressan et travailler en Valais : fiscalité frontalière",
           "url": "/fr/articles-frontalier/vivre-a-gressan-travailler-en-valais-frontalier/",
           "excerpt": "Nouvel accord 2024 : impôt à la source en Suisse, franchises 10.000, modèle 730 et crédit d'impôt. Tout ce qu'il faut savoir.",
           "date": "2026-08-22T03:23:40.233Z"
+        },
+        {
+          "title": "Droit de succession en Valais : taux et procédures",
+          "url": "/fr/articles-suisse/heritage-donations-valais-guide/",
+          "excerpt": "La succession en Valais est soumise à des impôts cantonaux calculés par degré de parenté. Le conjoint et les descendants bénéficient d'exemptions spécifiques. Voici comment cela fonctionne et quelles procédures suivre.",
+          "date": "2026-09-06T14:17:14.380Z"
         }
       ],
       "latestCantonArticles": [],
@@ -734,7 +734,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-08T22:45:42.198Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

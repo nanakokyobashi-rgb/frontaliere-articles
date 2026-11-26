@@ -4,14 +4,14 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "e221b7ea8c72c435ef88854a2a80124bc50111569bb4254ad9e7eadbccbd405f",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "e38b4c0f548ee15d566d6af26648e7861729d5054c6b66b37a0e3605284bd729",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-15T14:17:31.463Z",
+      "updatedAt": "2026-11-25T17:35:23.405Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-11-22T07:00:00.000Z"
+      "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
   ],
   "locales": {
@@ -54,23 +54,35 @@
             },
             {
               "label": "Benzina 95 — Francia",
-              "value": "2,098 EUR/l",
-              "detail": "media regionale: minimo 1,942 EUR/l, 82 stazioni rilevate",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2,010 EUR/l",
+              "detail": "media regionale: minimo 1,908 EUR/l, 97 stazioni rilevate",
+              "date": "2026-11-25T15:24:38.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,228 EUR/l",
-              "detail": "media regionale: minimo 2,089 EUR/l, 80 stazioni rilevate",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2,163 EUR/l",
+              "detail": "media regionale: minimo 2,052 EUR/l, 98 stazioni rilevate",
+              "date": "2026-11-25T15:24:38.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Soletta: il Kantonsrat respinge la PUK sulla SOH",
+          "url": "/articoli-soletta/soletta-voto-puk-soh/",
+          "excerpt": "Il Kantonsrat di Soletta respinge la PUK sulla SOH: 26 favorevoli, 65 contrari e 4 astensioni dopo il rapporto sulla gestione del personale.",
+          "date": "2026-11-25T16:08:51.641Z"
+        },
+        {
+          "title": "Soletta: la commissione approva il preventivo 2027",
+          "url": "/articoli-soletta/soletta-preventivo-approvato/",
+          "excerpt": "Il preventivo 2027 prevede un disavanzo di circa CHF 42 milioni, migliorato di CHF 33,4 milioni rispetto alla proposta iniziale.",
+          "date": "2026-11-21T16:12:13.224Z"
+        },
         {
           "title": "Soletta: il Cantonsrat respinge la PUK sulla SOH",
           "url": "/articoli-soletta/cantonsrat-respinge-puk-soh/",
@@ -88,18 +100,6 @@
           "url": "/articoli-soletta/polizia-cantonale-comunicazione-media/",
           "excerpt": "Il servizio opera 365 giorni all'anno, gestisce X, Facebook e Instagram e vieta i droni entro 300 m da un evento.",
           "date": "2026-11-09T01:46:37.001Z"
-        },
-        {
-          "title": "Consiglio di Soletta respinge mandato sulla trasparenza delle campagne",
-          "url": "/articoli-soletta/consiglio-soletta-rifiuta-trasparenza/",
-          "excerpt": "Il Consiglio cantonale di Soletta ha respinto mercoledì l'elaborazione di una legge sulla trasparenza dei finanziatori delle campagne con 63 voti contrari e 31 favorevoli.",
-          "date": "2026-11-08T01:34:07.406Z"
-        },
-        {
-          "title": "Disoccupazione Canton Soletta ottobre 2026: 4'543 registrati",
-          "url": "/articoli-soletta/tasso-disoccupazione-ottobre-2026/",
-          "excerpt": "In ottobre 2026 nel Canton Soletta risultavano 4'543 disoccupati registrati, in diminuzione di otto persone rispetto al mese precedente.",
-          "date": "2026-11-06T03:29:06.353Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "SO",
@@ -153,23 +153,35 @@
             },
             {
               "label": "Petrol 95 — France",
-              "value": "2.098 EUR/l",
-              "detail": "regional average: lowest 1.942 EUR/l, 82 stations surveyed",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2.010 EUR/l",
+              "detail": "regional average: lowest 1.908 EUR/l, 97 stations surveyed",
+              "date": "2026-11-25T15:24:38.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.228 EUR/l",
-              "detail": "regional average: lowest 2.089 EUR/l, 80 stations surveyed",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2.163 EUR/l",
+              "detail": "regional average: lowest 2.052 EUR/l, 98 stations surveyed",
+              "date": "2026-11-25T15:24:38.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Solothurn: the Cantonal Council rejects the PUK on SOH",
+          "url": "/en/solothurn-articles/solothurn-vote-puk-soh/",
+          "excerpt": "The Solothurn Cantonal Council rejects a PUK on SOH: 26 in favor, 65 against and 4 abstentions following the report on personnel management.",
+          "date": "2026-11-25T16:08:51.641Z"
+        },
+        {
+          "title": "Solothurn: the commission approves the 2027 budget",
+          "url": "/en/solothurn-articles/solothurn-2027-budget-commission/",
+          "excerpt": "The 2027 budget projects a deficit of approximately CHF 42 million, an improvement of CHF 33,4 million compared with the initial proposal.",
+          "date": "2026-11-21T16:12:13.224Z"
+        },
         {
           "title": "Solothurn: Cantonsrat rejects PUK over SOH",
           "url": "/en/solothurn-articles/solothurn-cantonal-council-rejects-puk/",
@@ -187,18 +199,6 @@
           "url": "/en/solothurn-articles/cantonal-police-communication-media/",
           "excerpt": "The service operates 365 days a year, manages X, Facebook and Instagram, and prohibits drones within 300 m of an event.",
           "date": "2026-11-09T01:46:37.001Z"
-        },
-        {
-          "title": "Solothurn Council rejects mandate on campaign transparency",
-          "url": "/en/solothurn-articles/solothurn-council-rejects-transparency/",
-          "excerpt": "The Cantonal Council of Solothurn rejected on Wednesday the drafting of a law on transparency regarding campaign funders, with 63 votes against and 31 in favor.",
-          "date": "2026-11-08T01:34:07.406Z"
-        },
-        {
-          "title": "Unemployment in the Canton of Solothurn, October 2026: 4'543 registered",
-          "url": "/en/solothurn-articles/unemployment-rate-october-2026/",
-          "excerpt": "In October 2026, 4'543 registered unemployed people were recorded in the Canton of Solothurn, a decrease of eight people compared with the previous month.",
-          "date": "2026-11-06T03:29:06.353Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "SO",
@@ -252,23 +252,35 @@
             },
             {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.098 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.942 EUR/l, 82 erfasste Tankstellen",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2.010 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.908 EUR/l, 97 erfasste Tankstellen",
+              "date": "2026-11-25T15:24:38.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.228 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.089 EUR/l, 80 erfasste Tankstellen",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2.163 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.052 EUR/l, 98 erfasste Tankstellen",
+              "date": "2026-11-25T15:24:38.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Solothurn: Der Kantonsrat lehnt die PUK zur SOH ab",
+          "url": "/de/solothurn-artikel/solothurn-votum-puk-soh/",
+          "excerpt": "Der Kantonsrat von Solothurn lehnt die PUK zur SOH ab: 26 dafür, 65 dagegen und 4 Enthaltungen nach dem Bericht zur Personalführung.",
+          "date": "2026-11-25T16:08:51.641Z"
+        },
+        {
+          "title": "Solothurn: Die Kommission genehmigt den Voranschlag 2027",
+          "url": "/de/solothurn-artikel/solothurn-budget-2027-finanzkommission/",
+          "excerpt": "Der Voranschlag 2027 sieht ein Defizit von etwa CHF 42 Millionen vor, das sich gegenüber dem ursprünglichen Vorschlag um CHF 33,4 Millionen verbessert hat.",
+          "date": "2026-11-21T16:12:13.224Z"
+        },
         {
           "title": "Solothurn: Kantonsrat lehnt PUK zur SOH ab",
           "url": "/de/solothurn-artikel/solothurn-kantonsrat-lehnt-puk-ab/",
@@ -286,18 +298,6 @@
           "url": "/de/solothurn-artikel/polizei-kantonal-kommunikation-media/",
           "excerpt": "Der Dienst ist 365 Tage im Jahr tätig, betreut X, Facebook und Instagram und verbietet Drohnen im Umkreis von 300 m um eine Veranstaltung.",
           "date": "2026-11-09T01:46:37.001Z"
-        },
-        {
-          "title": "Solothurner Rat lehnt Auftrag zur Transparenz bei Kampagnen ab",
-          "url": "/de/solothurn-artikel/kantonsrat-solothurn-lehnt-transparenz/",
-          "excerpt": "Der Solothurner Kantonsrat hat am Mittwoch die Ausarbeitung eines Gesetzes über die Transparenz der Kampagnenfinanzierer mit 63 Gegenstimmen und 31 Ja-Stimmen abgelehnt.",
-          "date": "2026-11-08T01:34:07.406Z"
-        },
-        {
-          "title": "Solothurn: 4'543 Arbeitslose im Okt. 2026",
-          "url": "/de/solothurn-artikel/arbeitslosenquote-oktober-2026/",
-          "excerpt": "Im Oktober 2026 waren im Kanton Solothurn 4'543 Arbeitslose registriert, acht Personen weniger als im Vormonat.",
-          "date": "2026-11-06T03:29:06.353Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "SO",
@@ -351,23 +351,35 @@
             },
             {
               "label": "Essence 95 — France",
-              "value": "2,098 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,942 EUR/l, 82 stations relevées",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2,010 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,908 EUR/l, 97 stations relevées",
+              "date": "2026-11-25T15:24:38.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,228 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,089 EUR/l, 80 stations relevées",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2,163 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,052 EUR/l, 98 stations relevées",
+              "date": "2026-11-25T15:24:38.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Soleure : le Kantonsrat rejette la PUK sur la SOH",
+          "url": "/fr/articles-soleure/soleure-vote-puk-soh/",
+          "excerpt": "Le Kantonsrat de Soleure rejette la PUK sur la SOH : 26 favorables, 65 défavorables et 4 abstentions après le rapport sur la gestion du personnel.",
+          "date": "2026-11-25T16:08:51.641Z"
+        },
+        {
+          "title": "Soleure : la commission approuve le budget 2027",
+          "url": "/fr/articles-soleure/soleure-budget-2027-commission-finances/",
+          "excerpt": "Le budget 2027 prévoit un déficit d’environ CHF 42 millions, en amélioration de CHF 33,4 millions par rapport à la proposition initiale.",
+          "date": "2026-11-21T16:12:13.224Z"
+        },
         {
           "title": "Soleure : le Cantonsrat rejette la PUK sur la SOH",
           "url": "/fr/articles-soleure/soleure-conseil-cantonal-refuse-puk/",
@@ -385,18 +397,6 @@
           "url": "/fr/articles-soleure/police-cantonale-communication-media/",
           "excerpt": "Le service fonctionne 365 jours par an, gère X, Facebook et Instagram et interdit les drones dans un rayon de 300 m autour d’un événement.",
           "date": "2026-11-09T01:46:37.001Z"
-        },
-        {
-          "title": "Le Conseil de Soleure rejette le mandat sur la transparence des campagnes",
-          "url": "/fr/articles-soleure/conseil-soleure-rejette-transparence/",
-          "excerpt": "Selon le compte rendu publié par Nau.ch, le Conseil cantonal de Soleure a rejeté mercredi l'élaboration d'une loi visant à accroître la transparence des campagnes de votation.",
-          "date": "2026-11-08T01:34:07.406Z"
-        },
-        {
-          "title": "Chômage dans le canton de Soleure en octobre 2026 : 4'543 personnes inscrites",
-          "url": "/fr/articles-soleure/taux-chomage-octobre-2026/",
-          "excerpt": "En octobre 2026, 4'543 chômeurs étaient inscrits dans le canton de Soleure, soit huit personnes de moins que le mois précédent.",
-          "date": "2026-11-06T03:29:06.353Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

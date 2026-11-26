@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "servizi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "758a468049f0ac09c7e3ce7879a7b918d0d729dc3da1d9e9317938febda13bfb",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "67d1e44ef8cfde2e8aa65a66013f855ec98bcc407dd93e2ac2675f3c7782725f",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-16T06:51:00.113Z",
+      "updatedAt": "2026-11-26T00:36:15.946Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -60,18 +60,23 @@
           "items": [
             {
               "label": "Stans",
-              "value": "8 °C",
-              "detail": "oggi da 7 a 12 °C"
+              "value": "4 °C",
+              "detail": "oggi da 1 a 4 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Neue Öffnungszeiten Altstoffsammelstelle",
+              "date": "2026-11-20",
+              "url": "https://www.buochs.ch/_rte/information/3055315"
+            },
             {
               "label": "Präventionsanlass Psychische Gesundheit",
               "date": "2026-11-12",
@@ -91,14 +96,9 @@
               "label": "Öffnungszeiten Maria Himmelfahrt",
               "date": "2026-08-12",
               "url": "https://www.buochs.ch/_rte/information/2953735"
-            },
-            {
-              "label": "Öffnungszeiten 1. August",
-              "date": "2026-07-22",
-              "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -127,16 +127,16 @@
           "date": "2026-08-16T19:00:08.445Z"
         },
         {
-          "title": "Permesso C Canton Nidvaldo: requisiti e domanda",
-          "url": "/articoli-svizzera/permesso-c-nidvaldo-requisiti/",
-          "excerpt": "Guida completa al permesso di domicilio C nel Cantone di Nidvaldo: anni di residenza, criteri di integrazione e procedura.",
-          "date": "2026-09-14T00:24:26.273Z"
-        },
-        {
           "title": "Patente di guida in Nidvaldo: conversione e esami obbligatori",
           "url": "/articoli-svizzera/patente-guida-canton-nidvaldo-conversione/",
           "excerpt": "Per convertire la licenza di guida estera in Svizzera, è necessario presentare i seguenti documenti: il passaporto, la licenza di guida estera e una copia del contratto di affitto o della proprietà.",
           "date": "2026-08-17T01:54:54.677Z"
+        },
+        {
+          "title": "Permesso C Canton Nidvaldo: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-c-nidvaldo-requisiti/",
+          "excerpt": "Guida completa al permesso di domicilio C nel Cantone di Nidvaldo: anni di residenza, criteri di integrazione e procedura.",
+          "date": "2026-09-14T00:24:26.273Z"
         },
         {
           "title": "Permesso di domicilio C nel Cantone di Nidvaldo: requisiti e domanda",
@@ -178,7 +178,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "NW",
@@ -216,18 +216,23 @@
           "items": [
             {
               "label": "Stans",
-              "value": "8 °C",
-              "detail": "today from 7 to 12 °C"
+              "value": "4 °C",
+              "detail": "today from 1 to 4 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Neue Öffnungszeiten Altstoffsammelstelle",
+              "date": "2026-11-20",
+              "url": "https://www.buochs.ch/_rte/information/3055315"
+            },
             {
               "label": "Präventionsanlass Psychische Gesundheit",
               "date": "2026-11-12",
@@ -247,14 +252,9 @@
               "label": "Öffnungszeiten Maria Himmelfahrt",
               "date": "2026-08-12",
               "url": "https://www.buochs.ch/_rte/information/2953735"
-            },
-            {
-              "label": "Öffnungszeiten 1. August",
-              "date": "2026-07-22",
-              "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -283,16 +283,16 @@
           "date": "2026-08-16T19:00:08.445Z"
         },
         {
-          "title": "Permit C Canton Nidwalden: requirements and application",
-          "url": "/en/swiss-articles/permits-c-nidwalden-requirements/",
-          "excerpt": "Complete guide to residence permit C in the Canton of Nidwalden: years of residence, integration criteria and procedure.",
-          "date": "2026-09-14T00:24:26.273Z"
-        },
-        {
           "title": "Driving licence in Nidwalden: conversion and mandatory exams",
           "url": "/en/swiss-articles/patente-guida-canton-nidwalden-conversione-ed-esami/",
           "excerpt": "To convert your foreign driver's license in Switzerland, you need to present the following documents: your passport, your foreign driver's license, and a copy of your rental agreement or property.",
           "date": "2026-08-17T01:54:54.677Z"
+        },
+        {
+          "title": "Permit C Canton Nidwalden: requirements and application",
+          "url": "/en/swiss-articles/permits-c-nidwalden-requirements/",
+          "excerpt": "Complete guide to residence permit C in the Canton of Nidwalden: years of residence, integration criteria and procedure.",
+          "date": "2026-09-14T00:24:26.273Z"
         },
         {
           "title": "Residence permit C in the Canton of Nidwalden: requirements and application",
@@ -330,7 +330,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "NW",
@@ -368,18 +368,23 @@
           "items": [
             {
               "label": "Stans",
-              "value": "8 °C",
-              "detail": "heute 7 bis 12 °C"
+              "value": "4 °C",
+              "detail": "heute 1 bis 4 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Neue Öffnungszeiten Altstoffsammelstelle",
+              "date": "2026-11-20",
+              "url": "https://www.buochs.ch/_rte/information/3055315"
+            },
             {
               "label": "Präventionsanlass Psychische Gesundheit",
               "date": "2026-11-12",
@@ -399,14 +404,9 @@
               "label": "Öffnungszeiten Maria Himmelfahrt",
               "date": "2026-08-12",
               "url": "https://www.buochs.ch/_rte/information/2953735"
-            },
-            {
-              "label": "Öffnungszeiten 1. August",
-              "date": "2026-07-22",
-              "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -435,16 +435,16 @@
           "date": "2026-08-16T19:00:08.445Z"
         },
         {
-          "title": "C-Genehmigung Kanton Nidwalden: Voraussetzungen und Antrag",
-          "url": "/de/schweiz-artikel/bewilligung-c-nidwalden-voraussetzungen/",
-          "excerpt": "Vollständiger Leitfaden zur Niederlassungsbewilligung C im Kanton Nidwalden: Aufenthaltsjahre, Integrationskriterien und Verfahren.",
-          "date": "2026-09-14T00:24:26.273Z"
-        },
-        {
           "title": "Führerschein in Nidwalden: Umschulung und Pflichtprüfungen",
           "url": "/de/schweiz-artikel/fahrerlaubnis-kanton-nidwalden-umstellung/",
           "excerpt": "Um den ausländischen Führerschein in der Schweiz umzuwandeln, sind folgende Unterlagen vorzulegen: Reisepass, ausländischer Führerschein und eine Kopie des Miet- oder Eigentumsvertrages.",
           "date": "2026-08-17T01:54:54.677Z"
+        },
+        {
+          "title": "C-Genehmigung Kanton Nidwalden: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/bewilligung-c-nidwalden-voraussetzungen/",
+          "excerpt": "Vollständiger Leitfaden zur Niederlassungsbewilligung C im Kanton Nidwalden: Aufenthaltsjahre, Integrationskriterien und Verfahren.",
+          "date": "2026-09-14T00:24:26.273Z"
         },
         {
           "title": "Niederlassungsbewilligung C im Kanton Nidwalden: Voraussetzungen und Antrag",
@@ -482,7 +482,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "NW",
@@ -520,18 +520,23 @@
           "items": [
             {
               "label": "Stans",
-              "value": "8 °C",
-              "detail": "aujourd’hui de 7 à 12 °C"
+              "value": "4 °C",
+              "detail": "aujourd’hui de 1 à 4 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Neue Öffnungszeiten Altstoffsammelstelle",
+              "date": "2026-11-20",
+              "url": "https://www.buochs.ch/_rte/information/3055315"
+            },
             {
               "label": "Präventionsanlass Psychische Gesundheit",
               "date": "2026-11-12",
@@ -551,14 +556,9 @@
               "label": "Öffnungszeiten Maria Himmelfahrt",
               "date": "2026-08-12",
               "url": "https://www.buochs.ch/_rte/information/2953735"
-            },
-            {
-              "label": "Öffnungszeiten 1. August",
-              "date": "2026-07-22",
-              "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -587,16 +587,16 @@
           "date": "2026-08-16T19:00:08.445Z"
         },
         {
-          "title": "Permis C canton Nidwald : exigences et demande",
-          "url": "/fr/articles-suisse/permis-c-nidwald-conditions/",
-          "excerpt": "Guide complet du permis de séjour C dans le canton de Nidwald : années de résidence, critères d'intégration et procédure.",
-          "date": "2026-09-14T00:24:26.273Z"
-        },
-        {
           "title": "Permis de conduire à Nidwald : conversion et examens obligatoires",
           "url": "/fr/articles-suisse/permis-de-conduire-canton-nidwald-conversion/",
           "excerpt": "Pour convertir le permis de conduire étranger en Suisse, vous devez présenter les documents suivants : le passeport, le permis de conduire étranger et une copie du contrat de location ou de la propriété.",
           "date": "2026-08-17T01:54:54.677Z"
+        },
+        {
+          "title": "Permis C canton Nidwald : exigences et demande",
+          "url": "/fr/articles-suisse/permis-c-nidwald-conditions/",
+          "excerpt": "Guide complet du permis de séjour C dans le canton de Nidwald : années de résidence, critères d'intégration et procédure.",
+          "date": "2026-09-14T00:24:26.273Z"
         },
         {
           "title": "Permis de séjour C dans le canton de Nidwald : exigences et demande",
@@ -630,7 +630,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

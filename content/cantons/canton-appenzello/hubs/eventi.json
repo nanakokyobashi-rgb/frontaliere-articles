@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "f4350020bc69cbc29fa6be1896aafe756c55158da88ba706335b12cdeb98930c",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "5b1611de80aaa943dbd828785159fb523e44f3bbbd4bbc54cd8a93bf8afc5097",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T21:47:09.888Z",
+      "updatedAt": "2026-11-26T00:32:00.223Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "15",
+          "value": "20",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,46 +33,16 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Evento di intrattenimento Saumchörli Herisau",
-              "detail": "Casino Herisau, Herisau — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/events/herisau/entertainment-event-saumchoerli-herisau_AtYAVwh"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel — in corso, ultimo giorno: 9 dicembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
-            {
-              "label": "Ein Abend mit Joachim B. Schmidt",
-              "detail": "Appenzell",
-              "date": "2026-11-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ein-abend-mit-joachim-b-schmidt/"
-            },
-            {
-              "label": "Starbugs Comedy - Showtime",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/starbugs-comedy-showtime-4/"
-            },
-            {
-              "label": "Rugguussele ond Zaure mit Walter Neff, im Roothuus Gonten",
-              "detail": "Gonten",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
-            },
-            {
-              "label": "Preisträgerkonzert des II. Kammermusikwettbewerbs Paul Juon",
-              "detail": "Kunsthalle Appenzell, Appenzell",
-              "date": "2026-11-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/preistraegerkonzert-des-ii-kammermusikwettbewerbs-paul-juon_AZcYYpi"
-            },
-            {
               "label": "Vita! - Una serata incerta con Jane Mumford",
               "detail": "Trogen",
               "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/vita-una-serata-incerta-con-jane-mumford/"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — in corso, ultimo giorno: 9 dicembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Benefizkonzert apacella",
@@ -91,11 +61,41 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-27",
               "url": "https://www.guidle.com/it/events/music/herisau/loredana-und-kilian-why-is-shehe-like-that_AKTJwTc"
+            },
+            {
+              "label": "Degustazione notturna",
+              "detail": "Wienacht",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/degustazione-notturna/"
+            },
+            {
+              "label": "Mercatino di magia natalizia",
+              "detail": "Herisau",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercatino-di-magia-natalizia/"
+            },
+            {
+              "label": "Opas Diandl bei der Kulturgruppe Appenzell",
+              "detail": "Appenzell",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/opas-diandl-bei-der-kulturgruppe-appenzell/"
+            },
+            {
+              "label": "Opas Diandl «RIARN UND GSPIARN» Alpine Musiktraditionen",
+              "detail": "Kunsthalle Appenzell, Appenzell",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/appenzell/opas-diandl-riarn-und-gspiarn-alpine-musiktraditionen_A4RFSPS"
+            },
+            {
+              "label": "Produzione Dakar - Regole Matto",
+              "detail": "Walzenhausen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/produzione-dakar-regole-matto/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "15",
+          "value": "20",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,46 +144,16 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Entertainment event Saumchörli Herisau",
-              "detail": "Casino Herisau, Herisau — ongoing, last day: 22 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/events/herisau/entertainment-event-saumchoerli-herisau_AtYAVwh"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel — ongoing, last day: 9 December 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
-            {
-              "label": "Ein Abend mit Joachim B. Schmidt",
-              "detail": "Appenzell",
-              "date": "2026-11-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ein-abend-mit-joachim-b-schmidt/"
-            },
-            {
-              "label": "Starbugs Comedy - Showtime",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/starbugs-comedy-showtime-4/"
-            },
-            {
-              "label": "Rugguussele ond Zaure mit Walter Neff, im Roothuus Gonten",
-              "detail": "Gonten",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
-            },
-            {
-              "label": "Preisträgerkonzert des II. Kammermusikwettbewerbs Paul Juon",
-              "detail": "Kunsthalle Appenzell, Appenzell",
-              "date": "2026-11-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/preistraegerkonzert-des-ii-kammermusikwettbewerbs-paul-juon_AZcYYpi"
-            },
-            {
               "label": "Live! - An uncertain evening with Jane Mumford",
               "detail": "Trogen",
               "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/vita-una-serata-incerta-con-jane-mumford/"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — ongoing, last day: 9 December 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Benefizkonzert apacella",
@@ -202,11 +172,41 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-27",
               "url": "https://www.guidle.com/it/events/music/herisau/loredana-und-kilian-why-is-shehe-like-that_AKTJwTc"
+            },
+            {
+              "label": "How(h)night tasting",
+              "detail": "Wienacht",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/degustazione-notturna/"
+            },
+            {
+              "label": "Christmas magic market",
+              "detail": "Herisau",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercatino-di-magia-natalizia/"
+            },
+            {
+              "label": "Opas Diandl bei der Kulturgruppe Appenzell",
+              "detail": "Appenzell",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/opas-diandl-bei-der-kulturgruppe-appenzell/"
+            },
+            {
+              "label": "Opas Diandl «RIARN UND GSPIARN» Alpine Musiktraditionen",
+              "detail": "Kunsthalle Appenzell, Appenzell",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/appenzell/opas-diandl-riarn-und-gspiarn-alpine-musiktraditionen_A4RFSPS"
+            },
+            {
+              "label": "Dakar production - Matto rules",
+              "detail": "Walzenhausen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/produzione-dakar-regole-matto/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "15",
+          "value": "20",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,46 +255,16 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Unterhaltungsanlass Saumchörli Herisau",
-              "detail": "Casino Herisau, Herisau — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/events/herisau/entertainment-event-saumchoerli-herisau_AtYAVwh"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel — läuft, letzter Tag: 9. Dezember 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
-            {
-              "label": "Ein Abend mit Joachim B. Schmidt",
-              "detail": "Appenzell",
-              "date": "2026-11-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ein-abend-mit-joachim-b-schmidt/"
-            },
-            {
-              "label": "Starbugs Comedy - Showtime",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/starbugs-comedy-showtime-4/"
-            },
-            {
-              "label": "Rugguussele ond Zaure mit Walter Neff, im Roothuus Gonten",
-              "detail": "Gonten",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
-            },
-            {
-              "label": "Preisträgerkonzert des II. Kammermusikwettbewerbs Paul Juon",
-              "detail": "Kunsthalle Appenzell, Appenzell",
-              "date": "2026-11-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/preistraegerkonzert-des-ii-kammermusikwettbewerbs-paul-juon_AZcYYpi"
-            },
-            {
               "label": "Leben! – Ein unsicherer Abend mit Jane Mumford",
               "detail": "Trogen",
               "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/vita-una-serata-incerta-con-jane-mumford/"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — läuft, letzter Tag: 9. Dezember 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Benefizkonzert apacella",
@@ -313,11 +283,41 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-27",
               "url": "https://www.guidle.com/it/events/music/herisau/loredana-und-kilian-why-is-shehe-like-that_AKTJwTc"
+            },
+            {
+              "label": "Wie(h)nachts-Degustation",
+              "detail": "Wienacht",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/degustazione-notturna/"
+            },
+            {
+              "label": "Weihnachtszauber-Markt",
+              "detail": "Herisau",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercatino-di-magia-natalizia/"
+            },
+            {
+              "label": "Opas Diandl bei der Kulturgruppe Appenzell",
+              "detail": "Appenzell",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/opas-diandl-bei-der-kulturgruppe-appenzell/"
+            },
+            {
+              "label": "Opas Diandl «RIARN UND GSPIARN» Alpine Musiktraditionen",
+              "detail": "Kunsthalle Appenzell, Appenzell",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/appenzell/opas-diandl-riarn-und-gspiarn-alpine-musiktraditionen_A4RFSPS"
+            },
+            {
+              "label": "Dakar Produktion - Matto regiert",
+              "detail": "Walzenhausen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/produzione-dakar-regole-matto/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "15",
+          "value": "20",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,46 +366,16 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Manifestation de divertissement Saumchörli Herisau",
-              "detail": "Casino Herisau, Herisau — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/events/herisau/entertainment-event-saumchoerli-herisau_AtYAVwh"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel — en cours, dernier jour : 9 décembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
-            {
-              "label": "Ein Abend mit Joachim B. Schmidt",
-              "detail": "Appenzell",
-              "date": "2026-11-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ein-abend-mit-joachim-b-schmidt/"
-            },
-            {
-              "label": "Comédie Starbugs - Showtime",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/starbugs-comedy-showtime-4/"
-            },
-            {
-              "label": "Rugguussele ond Zaure mit Walter Neff, im Roothuus Gonten",
-              "detail": "Gonten",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rugguussele-ond-zaure-mit-walter-neff-im-roothuus-gonten/"
-            },
-            {
-              "label": "Preisträgerkonzert des II. Kammermusikwettbewerbs Paul Juon",
-              "detail": "Kunsthalle Appenzell, Appenzell",
-              "date": "2026-11-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/preistraegerkonzert-des-ii-kammermusikwettbewerbs-paul-juon_AZcYYpi"
-            },
-            {
               "label": "La vie ! - Une soirée incertaine avec Jane Mumford",
               "detail": "Trogen",
               "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/vita-una-serata-incerta-con-jane-mumford/"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — en cours, dernier jour : 9 décembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Benefizkonzert apacella",
@@ -424,11 +394,41 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-27",
               "url": "https://www.guidle.com/it/events/music/herisau/loredana-und-kilian-why-is-shehe-like-that_AKTJwTc"
+            },
+            {
+              "label": "Dégustation de vin",
+              "detail": "Wienacht",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/degustazione-notturna/"
+            },
+            {
+              "label": "Marché magique de Noël",
+              "detail": "Herisau",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercatino-di-magia-natalizia/"
+            },
+            {
+              "label": "Opas Diandl bei der Kulturgruppe Appenzell",
+              "detail": "Appenzell",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/opas-diandl-bei-der-kulturgruppe-appenzell/"
+            },
+            {
+              "label": "Opas Diandl «RIARN UND GSPIARN» Alpine Musiktraditionen",
+              "detail": "Kunsthalle Appenzell, Appenzell",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/appenzell/opas-diandl-riarn-und-gspiarn-alpine-musiktraditionen_A4RFSPS"
+            },
+            {
+              "label": "Production du Dakar - Matto règne",
+              "detail": "Walzenhausen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/produzione-dakar-regole-matto/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

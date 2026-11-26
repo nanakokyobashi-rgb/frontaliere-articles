@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "85d6a519fd11a753f46e6513ad9a7250cea4908c3e3fe39d5f8e21d53e9d0cf7",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "076d3a9a2bf711611fe127346fbbc6d8584f0ce16c03b6f79c7df4ae8e59daba",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T21:47:09.888Z",
+      "updatedAt": "2026-11-26T00:32:00.223Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "54",
+          "value": "46",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,68 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-11-16",
-              "url": "https://www.stadtluzern.ch/sitzung/7648417"
+              "label": "Art de Suisse",
+              "detail": "Luzern",
+              "date": "2026-11-26",
+              "url": "https://www.stadtluzern.ch/sitzung/7186733"
             },
             {
-              "label": "\"Schau rein\" Vielfalt vor der Haustür",
-              "detail": "Sempach — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schau-rein-vielfalt-vor-der-haustuer-4/"
+              "label": "30. Sitzung des Grossen Stadtrates von Luzern vom 26. November 2026",
+              "detail": "Luzern",
+              "date": "2026-11-26",
+              "url": "https://www.stadtluzern.ch/sitzung/7800919"
             },
             {
-              "label": "Traditional Farmers' Festival",
-              "detail": "Weggis — in corso, ultimo giorno: 17 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/traditional-farmers-festival/"
+              "label": "Katharinenmarkt mit Maschinenmarkt",
+              "detail": "Willisau",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/katharinenmarkt-mit-maschinenmarkt/"
+            },
+            {
+              "label": "Gewalt in der Partnerschaft endet nicht mit dem Älterwerden",
+              "detail": "Luzern",
+              "date": "2026-11-26",
+              "url": "https://www.stadtluzern.ch/sitzung/7806868"
+            },
+            {
+              "label": "E-L-R",
+              "detail": "Schüür",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/e-l-r_Aig5UgM"
+            },
+            {
+              "label": "Theateraufführung 2026 - Die kleine Hexe",
+              "detail": "Wauwil — in corso, ultimo giorno: 13 dicembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/theaterauffuehrung-2026-die-kleine-hexe/"
+            },
+            {
+              "label": "ballabile",
+              "detail": "Lucerna — in corso, ultimo giorno: 18 dicembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ballabile/"
             },
             {
               "label": "360° Milonga",
               "detail": "Bourbaki Panorama — in corso, ultimo giorno: 6 dicembre 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
             },
             {
-              "label": "Einführung für Lehrer:innen",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern — in corso, ultimo giorno: 25 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
+              "label": "Wine & Dine Trüffelevent",
+              "detail": "Oberkirch LU, Oberkirch",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-trueffelevent/"
             },
             {
-              "label": "Winter Qi Gong Inseli",
-              "detail": "Ebikon",
-              "date": "2026-11-17",
-              "url": "https://www.stadtluzern.ch/sitzung/7694119"
-            },
-            {
-              "label": "Eine Weihnachtsgeschichte",
-              "detail": "Luzerner Theater, Luzern",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/eine-weihnachtsgeschichte/"
-            },
-            {
-              "label": "Lesung mit Joachim B. Schmidt",
-              "detail": "Lucerne",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-mit-joachim-b-schmidt-2/"
-            },
-            {
-              "label": "Intuitives Gestalten & Malen",
-              "detail": "Atelier Yoku",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/events/this-that/lucerne/intuitives-gestalten-und-malen_ApAardw"
-            },
-            {
-              "label": "Kreative Abend-Auszeit",
-              "detail": "Atelier Yoku",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/events/this-that/lucerne/intuitives-gestalten-und-malen_AmnytMr"
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "detail": "Sursee",
+              "date": "2026-11-27",
+              "url": "https://www.stadtluzern.ch/sitzung/7694311"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -107,37 +108,37 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "30. Sitzung des Grossen Stadtrates von Luzern vom 26. November 2026",
+              "date": "2026-11-25T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7800919"
+            },
+            {
+              "label": "Gewalt in der Partnerschaft endet nicht mit dem Älterwerden",
+              "date": "2026-11-25T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7806868"
+            },
+            {
+              "label": "Art de Suisse",
+              "date": "2026-11-25T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7186733"
+            },
+            {
+              "label": "«Hôtel Silence» - Film im Rahmen der «Lebensreise»",
+              "date": "2026-11-24T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7629703"
+            },
+            {
+              "label": "Winter Qi Gong Inseli",
+              "date": "2026-11-23T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694122"
+            },
+            {
               "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-11-15T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648417"
-            },
-            {
-              "label": "Kinderanlass: Adventskalender aus alten Socken",
-              "date": "2026-11-13T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7626907"
-            },
-            {
-              "label": "Wir sind Energiestadt Gold – feiern Sie mit uns",
-              "date": "2026-11-13T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7794205"
-            },
-            {
-              "label": "Wissen am Mittag",
-              "date": "2026-11-12T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7660906"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "date": "2026-11-12T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694305"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-11-12T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463719"
+              "date": "2026-11-22T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648420"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -171,7 +172,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "LU",
@@ -181,7 +182,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "54",
+          "value": "46",
           "note": "from the site’s events calendar"
         }
       ],
@@ -192,68 +193,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-11-16",
-              "url": "https://www.stadtluzern.ch/sitzung/7648417"
+              "label": "Art de Suisse",
+              "detail": "Luzern",
+              "date": "2026-11-26",
+              "url": "https://www.stadtluzern.ch/sitzung/7186733"
             },
             {
-              "label": "\"Schau rein\" Vielfalt vor der Haustür",
-              "detail": "Sempach — ongoing, last day: 22 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schau-rein-vielfalt-vor-der-haustuer-4/"
+              "label": "30. Sitzung des Grossen Stadtrates von Luzern vom 26. November 2026",
+              "detail": "Luzern",
+              "date": "2026-11-26",
+              "url": "https://www.stadtluzern.ch/sitzung/7800919"
             },
             {
-              "label": "Traditional Farmers' Festival",
-              "detail": "Weggis — ongoing, last day: 17 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/traditional-farmers-festival/"
+              "label": "Katharinenmarkt mit Maschinenmarkt",
+              "detail": "Willisau",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/katharinenmarkt-mit-maschinenmarkt/"
+            },
+            {
+              "label": "Gewalt in der Partnerschaft endet nicht mit dem Älterwerden",
+              "detail": "Luzern",
+              "date": "2026-11-26",
+              "url": "https://www.stadtluzern.ch/sitzung/7806868"
+            },
+            {
+              "label": "E-L-R",
+              "detail": "Schüür",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/e-l-r_Aig5UgM"
+            },
+            {
+              "label": "Theateraufführung 2026 - Die kleine Hexe",
+              "detail": "Wauwil — ongoing, last day: 13 December 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/theaterauffuehrung-2026-die-kleine-hexe/"
+            },
+            {
+              "label": "danceable",
+              "detail": "Lucerna — ongoing, last day: 18 December 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ballabile/"
             },
             {
               "label": "360° Milonga",
               "detail": "Bourbaki Panorama — ongoing, last day: 6 December 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
             },
             {
-              "label": "Einführung für Lehrer:innen",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern — ongoing, last day: 25 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
+              "label": "Wine & Dine Trüffelevent",
+              "detail": "Oberkirch LU, Oberkirch",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-trueffelevent/"
             },
             {
-              "label": "Winter Qi Gong Inseli",
-              "detail": "Ebikon",
-              "date": "2026-11-17",
-              "url": "https://www.stadtluzern.ch/sitzung/7694119"
-            },
-            {
-              "label": "Eine Weihnachtsgeschichte",
-              "detail": "Luzerner Theater, Luzern",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/eine-weihnachtsgeschichte/"
-            },
-            {
-              "label": "Lesung mit Joachim B. Schmidt",
-              "detail": "Lucerne",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-mit-joachim-b-schmidt-2/"
-            },
-            {
-              "label": "Intuitives Gestalten & Malen",
-              "detail": "Atelier Yoku",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/events/this-that/lucerne/intuitives-gestalten-und-malen_ApAardw"
-            },
-            {
-              "label": "Intuitives Gestalten & Malen",
-              "detail": "Atelier Yoku",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/events/this-that/lucerne/intuitives-gestalten-und-malen_AmnytMr"
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "detail": "Sursee",
+              "date": "2026-11-27",
+              "url": "https://www.stadtluzern.ch/sitzung/7694311"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -261,37 +263,37 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "30. Sitzung des Grossen Stadtrates von Luzern vom 26. November 2026",
+              "date": "2026-11-25T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7800919"
+            },
+            {
+              "label": "Gewalt in der Partnerschaft endet nicht mit dem Älterwerden",
+              "date": "2026-11-25T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7806868"
+            },
+            {
+              "label": "Art de Suisse",
+              "date": "2026-11-25T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7186733"
+            },
+            {
+              "label": "«Hôtel Silence» - Film im Rahmen der «Lebensreise»",
+              "date": "2026-11-24T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7629703"
+            },
+            {
+              "label": "Winter Qi Gong Inseli",
+              "date": "2026-11-23T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694122"
+            },
+            {
               "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-11-15T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648417"
-            },
-            {
-              "label": "Kinderanlass: Adventskalender aus alten Socken",
-              "date": "2026-11-13T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7626907"
-            },
-            {
-              "label": "Wir sind Energiestadt Gold – feiern Sie mit uns",
-              "date": "2026-11-13T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7794205"
-            },
-            {
-              "label": "Wissen am Mittag",
-              "date": "2026-11-12T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7660906"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "date": "2026-11-12T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694305"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-11-12T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463719"
+              "date": "2026-11-22T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648420"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -325,7 +327,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "LU",
@@ -335,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "54",
+          "value": "46",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -346,68 +348,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-11-16",
-              "url": "https://www.stadtluzern.ch/sitzung/7648417"
+              "label": "Art de Suisse",
+              "detail": "Luzern",
+              "date": "2026-11-26",
+              "url": "https://www.stadtluzern.ch/sitzung/7186733"
             },
             {
-              "label": "\"Schau rein\" Vielfalt vor der Haustür",
-              "detail": "Sempach — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schau-rein-vielfalt-vor-der-haustuer-4/"
+              "label": "30. Sitzung des Grossen Stadtrates von Luzern vom 26. November 2026",
+              "detail": "Luzern",
+              "date": "2026-11-26",
+              "url": "https://www.stadtluzern.ch/sitzung/7800919"
             },
             {
-              "label": "Sennenchilbi Weggis",
-              "detail": "Weggis — läuft, letzter Tag: 17. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/traditional-farmers-festival/"
+              "label": "Katharinenmarkt mit Maschinenmarkt",
+              "detail": "Willisau",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/katharinenmarkt-mit-maschinenmarkt/"
+            },
+            {
+              "label": "Gewalt in der Partnerschaft endet nicht mit dem Älterwerden",
+              "detail": "Luzern",
+              "date": "2026-11-26",
+              "url": "https://www.stadtluzern.ch/sitzung/7806868"
+            },
+            {
+              "label": "E-L-R",
+              "detail": "Schüür",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/e-l-r_Aig5UgM"
+            },
+            {
+              "label": "Theateraufführung 2026 - Die kleine Hexe",
+              "detail": "Wauwil — läuft, letzter Tag: 13. Dezember 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/theaterauffuehrung-2026-die-kleine-hexe/"
+            },
+            {
+              "label": "tanzbar",
+              "detail": "Lucerna — läuft, letzter Tag: 18. Dezember 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ballabile/"
             },
             {
               "label": "360° Milonga",
               "detail": "Bourbaki Panorama — läuft, letzter Tag: 6. Dezember 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
             },
             {
-              "label": "Einführung für Lehrer:innen",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern — läuft, letzter Tag: 25. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
+              "label": "Wine & Dine Trüffelevent",
+              "detail": "Oberkirch LU, Oberkirch",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-trueffelevent/"
             },
             {
-              "label": "Winter Qi Gong Inseli",
-              "detail": "Ebikon",
-              "date": "2026-11-17",
-              "url": "https://www.stadtluzern.ch/sitzung/7694119"
-            },
-            {
-              "label": "Eine Weihnachtsgeschichte",
-              "detail": "Luzerner Theater, Luzern",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/eine-weihnachtsgeschichte/"
-            },
-            {
-              "label": "Lesung mit Joachim B. Schmidt",
-              "detail": "Lucerne",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-mit-joachim-b-schmidt-2/"
-            },
-            {
-              "label": "Intuitives Gestalten & Malen",
-              "detail": "Atelier Yoku",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/events/this-that/lucerne/intuitives-gestalten-und-malen_ApAardw"
-            },
-            {
-              "label": "Kreative Abend-Auszeit",
-              "detail": "Atelier Yoku",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/events/this-that/lucerne/intuitives-gestalten-und-malen_AmnytMr"
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "detail": "Sursee",
+              "date": "2026-11-27",
+              "url": "https://www.stadtluzern.ch/sitzung/7694311"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -415,37 +418,37 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "30. Sitzung des Grossen Stadtrates von Luzern vom 26. November 2026",
+              "date": "2026-11-25T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7800919"
+            },
+            {
+              "label": "Gewalt in der Partnerschaft endet nicht mit dem Älterwerden",
+              "date": "2026-11-25T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7806868"
+            },
+            {
+              "label": "Art de Suisse",
+              "date": "2026-11-25T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7186733"
+            },
+            {
+              "label": "«Hôtel Silence» - Film im Rahmen der «Lebensreise»",
+              "date": "2026-11-24T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7629703"
+            },
+            {
+              "label": "Winter Qi Gong Inseli",
+              "date": "2026-11-23T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694122"
+            },
+            {
               "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-11-15T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648417"
-            },
-            {
-              "label": "Kinderanlass: Adventskalender aus alten Socken",
-              "date": "2026-11-13T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7626907"
-            },
-            {
-              "label": "Wir sind Energiestadt Gold – feiern Sie mit uns",
-              "date": "2026-11-13T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7794205"
-            },
-            {
-              "label": "Wissen am Mittag",
-              "date": "2026-11-12T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7660906"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "date": "2026-11-12T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694305"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-11-12T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463719"
+              "date": "2026-11-22T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648420"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -479,7 +482,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "LU",
@@ -489,7 +492,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "54",
+          "value": "46",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -500,68 +503,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-11-16",
-              "url": "https://www.stadtluzern.ch/sitzung/7648417"
+              "label": "Art de Suisse",
+              "detail": "Luzern",
+              "date": "2026-11-26",
+              "url": "https://www.stadtluzern.ch/sitzung/7186733"
             },
             {
-              "label": "« Venir et découvrir » - La diversité à votre porte",
-              "detail": "Sempach — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schau-rein-vielfalt-vor-der-haustuer-4/"
+              "label": "30. Sitzung des Grossen Stadtrates von Luzern vom 26. November 2026",
+              "detail": "Luzern",
+              "date": "2026-11-26",
+              "url": "https://www.stadtluzern.ch/sitzung/7800919"
             },
             {
-              "label": "Bénichon de Weggis",
-              "detail": "Weggis — en cours, dernier jour : 17 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/traditional-farmers-festival/"
+              "label": "Katharinenmarkt mit Maschinenmarkt",
+              "detail": "Willisau",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/katharinenmarkt-mit-maschinenmarkt/"
+            },
+            {
+              "label": "Gewalt in der Partnerschaft endet nicht mit dem Älterwerden",
+              "detail": "Luzern",
+              "date": "2026-11-26",
+              "url": "https://www.stadtluzern.ch/sitzung/7806868"
+            },
+            {
+              "label": "E-L-R",
+              "detail": "Schüür",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/e-l-r_Aig5UgM"
+            },
+            {
+              "label": "Theateraufführung 2026 - Die kleine Hexe",
+              "detail": "Wauwil — en cours, dernier jour : 13 décembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/theaterauffuehrung-2026-die-kleine-hexe/"
+            },
+            {
+              "label": "dansant",
+              "detail": "Lucerna — en cours, dernier jour : 18 décembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ballabile/"
             },
             {
               "label": "360° Milonga",
               "detail": "Bourbaki Panorama — en cours, dernier jour : 6 décembre 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
             },
             {
-              "label": "Einführung für Lehrer:innen",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern — en cours, dernier jour : 25 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
+              "label": "Wine & Dine Trüffelevent",
+              "detail": "Oberkirch LU, Oberkirch",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-trueffelevent/"
             },
             {
-              "label": "Winter Qi Gong Inseli",
-              "detail": "Ebikon",
-              "date": "2026-11-17",
-              "url": "https://www.stadtluzern.ch/sitzung/7694119"
-            },
-            {
-              "label": "Eine Weihnachtsgeschichte",
-              "detail": "Luzerner Theater, Luzern",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/eine-weihnachtsgeschichte/"
-            },
-            {
-              "label": "Lesung mit Joachim B. Schmidt",
-              "detail": "Lucerne",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-mit-joachim-b-schmidt-2/"
-            },
-            {
-              "label": "Intuitives Gestalten & Malen",
-              "detail": "Atelier Yoku",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/events/this-that/lucerne/intuitives-gestalten-und-malen_ApAardw"
-            },
-            {
-              "label": "Kreative Abend-Auszeit",
-              "detail": "Atelier Yoku",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/events/this-that/lucerne/intuitives-gestalten-und-malen_AmnytMr"
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "detail": "Sursee",
+              "date": "2026-11-27",
+              "url": "https://www.stadtluzern.ch/sitzung/7694311"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -569,37 +573,37 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "30. Sitzung des Grossen Stadtrates von Luzern vom 26. November 2026",
+              "date": "2026-11-25T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7800919"
+            },
+            {
+              "label": "Gewalt in der Partnerschaft endet nicht mit dem Älterwerden",
+              "date": "2026-11-25T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7806868"
+            },
+            {
+              "label": "Art de Suisse",
+              "date": "2026-11-25T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7186733"
+            },
+            {
+              "label": "«Hôtel Silence» - Film im Rahmen der «Lebensreise»",
+              "date": "2026-11-24T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7629703"
+            },
+            {
+              "label": "Winter Qi Gong Inseli",
+              "date": "2026-11-23T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694122"
+            },
+            {
               "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-11-15T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648417"
-            },
-            {
-              "label": "Kinderanlass: Adventskalender aus alten Socken",
-              "date": "2026-11-13T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7626907"
-            },
-            {
-              "label": "Wir sind Energiestadt Gold – feiern Sie mit uns",
-              "date": "2026-11-13T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7794205"
-            },
-            {
-              "label": "Wissen am Mittag",
-              "date": "2026-11-12T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7660906"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "date": "2026-11-12T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694305"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-11-12T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463719"
+              "date": "2026-11-22T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648420"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -633,7 +637,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

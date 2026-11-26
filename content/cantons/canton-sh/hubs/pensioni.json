@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "pensioni",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "6bb15dbadfb695ae6f2c9fc9b7fb79468a841b8171d54f41fc44d8d918cb0d1d",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "e8187f190484c865fbe4705f87402ff4a464cd2096a9fdfa0f1b0cb622bf72da",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "13. AHV-Rente",
+              "date": "2026-11-19T15:37:45.000Z",
+              "url": "https://www.svash.ch/13-ahv-rente-2/"
+            },
+            {
               "label": "Planen Sie Ihre Pensionierung mit dem RentenKompass",
               "date": "2026-09-10T12:28:30.000Z",
               "url": "https://www.pksh.ch/planen-sie-ihre-pensionierung-mit-dem-rentenkompass/"
@@ -146,7 +151,7 @@
               "url": "https://www.pksh.ch/ersatzwahl-mitglied-der-verwaltungskommission-2/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -176,7 +181,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "SH",
@@ -285,6 +290,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "13. AHV-Rente",
+              "date": "2026-11-19T15:37:45.000Z",
+              "url": "https://www.svash.ch/13-ahv-rente-2/"
+            },
+            {
               "label": "Planen Sie Ihre Pensionierung mit dem RentenKompass",
               "date": "2026-09-10T12:28:30.000Z",
               "url": "https://www.pksh.ch/planen-sie-ihre-pensionierung-mit-dem-rentenkompass/"
@@ -295,7 +305,7 @@
               "url": "https://www.pksh.ch/ersatzwahl-mitglied-der-verwaltungskommission-2/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -325,7 +335,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "SH",
@@ -434,6 +444,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "13. AHV-Rente",
+              "date": "2026-11-19T15:37:45.000Z",
+              "url": "https://www.svash.ch/13-ahv-rente-2/"
+            },
+            {
               "label": "Planen Sie Ihre Pensionierung mit dem RentenKompass",
               "date": "2026-09-10T12:28:30.000Z",
               "url": "https://www.pksh.ch/planen-sie-ihre-pensionierung-mit-dem-rentenkompass/"
@@ -444,7 +459,7 @@
               "url": "https://www.pksh.ch/ersatzwahl-mitglied-der-verwaltungskommission-2/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -474,7 +489,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "SH",
@@ -583,6 +598,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "13. AHV-Rente",
+              "date": "2026-11-19T15:37:45.000Z",
+              "url": "https://www.svash.ch/13-ahv-rente-2/"
+            },
+            {
               "label": "Planen Sie Ihre Pensionierung mit dem RentenKompass",
               "date": "2026-09-10T12:28:30.000Z",
               "url": "https://www.pksh.ch/planen-sie-ihre-pensionierung-mit-dem-rentenkompass/"
@@ -593,7 +613,7 @@
               "url": "https://www.pksh.ch/ersatzwahl-mitglied-der-verwaltungskommission-2/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -623,7 +643,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

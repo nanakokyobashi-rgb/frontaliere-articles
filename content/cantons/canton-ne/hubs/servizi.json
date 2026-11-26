@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "servizi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "fb2aea925da883f4f89a5c17be2e9525188d537085fb1de0f3cdf7271f915d88",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "4193e78099036d98fb4586edf957858e9e20673f39c5f2afe2455dad7848ba0c",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-16T06:51:00.113Z",
+      "updatedAt": "2026-11-26T00:36:15.946Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -60,18 +60,33 @@
           "items": [
             {
               "label": "Neuchâtel",
-              "value": "9 °C",
-              "detail": "oggi da 9 a 11 °C"
+              "value": "5 °C",
+              "detail": "oggi da 2 a 5 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Le projet d’optimisation du traitement des permis de construire est lancé",
+              "date": "2026-11-24T14:45:48.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/le-projet-doptimisation-du-traitement-des-permis-de-construire-est-lance"
+            },
+            {
+              "label": "Enquête auprès des jeunes neuchâtelois : le harcèlement, la santé mentale et les écrans au centre de leurs préoccupations",
+              "date": "2026-11-24T09:17:12.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/enquete-aupres-des-jeunes-neuchatelois-le-harcelement-la-sante-mentale-et-les-ecrans-au-centre-de-leurs-preoccupations"
+            },
+            {
+              "label": "Subsides LAMal 2027 : maintenir l’effort en faveur du pouvoir d’achat",
+              "date": "2026-11-23T08:25:05.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/subsides-lamal-2027-maintenir-leffort-en-faveur-du-pouvoir-dachat"
+            },
             {
               "label": "Légère baisse du taux de chômage au mois d’octobre",
               "date": "2026-11-05T07:43:08.000Z",
@@ -86,19 +101,9 @@
               "label": "Assurance-chômage : Neuchâtel et Vaud s’unissent pour sensibiliser sur l’importance d’anticiper les recherches d’emploi avant l’inscription à l’ORP",
               "date": "2026-11-02T07:26:58.000Z",
               "url": "https://www.ne.ch/communiques-de-presse/assurance-chomage-neuchatel-et-vaud-sunissent-pour-sensibiliser-sur-limportance-danticiper-les-recherches-demploi-avant-linscription-lorp"
-            },
-            {
-              "label": "La vaccination contre les virus respiratoires hivernaux est recommandée aux personnes vulnérables",
-              "date": "2026-10-30T12:55:52.000Z",
-              "url": "https://www.ne.ch/communiques-de-presse/la-vaccination-contre-les-virus-respiratoires-hivernaux-est-recommandee-aux-personnes-vulnerables"
-            },
-            {
-              "label": "Stabilité du taux de chômage au mois de septembre 2026",
-              "date": "2026-10-06T06:56:52.000Z",
-              "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -115,16 +120,16 @@
           "date": "2026-10-10T19:55:31.284Z"
         },
         {
-          "title": "Patente di guida nel Canton Neuchâtel: conversione ed esami",
-          "url": "/articoli-svizzera/patente-guida-neuchatel-conversione-ed-esami/",
-          "excerpt": "Scopri come convertire la tua patente estera e sostenere gli esami nel Canton Neuchâtel.",
-          "date": "2026-09-07T10:58:31.983Z"
-        },
-        {
           "title": "Premi cassa malati Neuchâtel per giovani adulti 19-25 anni",
           "url": "/articoli-svizzera/cassa-malati-neuchatel-giovani-19-25/",
           "excerpt": "Analisi delle condizioni, premi e opzioni delle casse malati per giovani adulti residenti a Neuchâtel nella fascia 19-25 anni.",
           "date": "2026-06-25T19:27:13.945Z"
+        },
+        {
+          "title": "Patente di guida nel Canton Neuchâtel: conversione ed esami",
+          "url": "/articoli-svizzera/patente-guida-neuchatel-conversione-ed-esami/",
+          "excerpt": "Scopri come convertire la tua patente estera e sostenere gli esami nel Canton Neuchâtel.",
+          "date": "2026-09-07T10:58:31.983Z"
         },
         {
           "title": "Cassa malattia Neuchâtel: guida per giovani adulti 19-25 anni",
@@ -160,7 +165,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "NE",
@@ -198,18 +203,33 @@
           "items": [
             {
               "label": "Neuchâtel",
-              "value": "9 °C",
-              "detail": "today from 9 to 11 °C"
+              "value": "5 °C",
+              "detail": "today from 2 to 5 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Le projet d’optimisation du traitement des permis de construire est lancé",
+              "date": "2026-11-24T14:45:48.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/le-projet-doptimisation-du-traitement-des-permis-de-construire-est-lance"
+            },
+            {
+              "label": "Enquête auprès des jeunes neuchâtelois : le harcèlement, la santé mentale et les écrans au centre de leurs préoccupations",
+              "date": "2026-11-24T09:17:12.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/enquete-aupres-des-jeunes-neuchatelois-le-harcelement-la-sante-mentale-et-les-ecrans-au-centre-de-leurs-preoccupations"
+            },
+            {
+              "label": "Subsides LAMal 2027 : maintenir l’effort en faveur du pouvoir d’achat",
+              "date": "2026-11-23T08:25:05.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/subsides-lamal-2027-maintenir-leffort-en-faveur-du-pouvoir-dachat"
+            },
             {
               "label": "Légère baisse du taux de chômage au mois d’octobre",
               "date": "2026-11-05T07:43:08.000Z",
@@ -224,19 +244,9 @@
               "label": "Assurance-chômage : Neuchâtel et Vaud s’unissent pour sensibiliser sur l’importance d’anticiper les recherches d’emploi avant l’inscription à l’ORP",
               "date": "2026-11-02T07:26:58.000Z",
               "url": "https://www.ne.ch/communiques-de-presse/assurance-chomage-neuchatel-et-vaud-sunissent-pour-sensibiliser-sur-limportance-danticiper-les-recherches-demploi-avant-linscription-lorp"
-            },
-            {
-              "label": "La vaccination contre les virus respiratoires hivernaux est recommandée aux personnes vulnérables",
-              "date": "2026-10-30T12:55:52.000Z",
-              "url": "https://www.ne.ch/communiques-de-presse/la-vaccination-contre-les-virus-respiratoires-hivernaux-est-recommandee-aux-personnes-vulnerables"
-            },
-            {
-              "label": "Stabilité du taux de chômage au mois de septembre 2026",
-              "date": "2026-10-06T06:56:52.000Z",
-              "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -253,16 +263,16 @@
           "date": "2026-10-10T19:55:31.284Z"
         },
         {
-          "title": "Driver's license in the canton of Neuchâtel: conversion and exams",
-          "url": "/en/swiss-articles/driving-license-neuchatel-conversion-and-exams/",
-          "excerpt": "Learn how to convert your foreign license and take exams in the Canton of Neuchâtel.",
-          "date": "2026-09-07T10:58:31.983Z"
-        },
-        {
           "title": "Neuchâtel health insurance premiums for young adults aged 19-25",
           "url": "/en/swiss-articles/health-insurance-neuchatel-young-adults/",
           "excerpt": "Analysis of the conditions, premiums and options of sickness funds for young adults residing in Neuchâtel in the 19-25 age group.",
           "date": "2026-06-25T19:27:13.945Z"
+        },
+        {
+          "title": "Driver's license in the canton of Neuchâtel: conversion and exams",
+          "url": "/en/swiss-articles/driving-license-neuchatel-conversion-and-exams/",
+          "excerpt": "Learn how to convert your foreign license and take exams in the Canton of Neuchâtel.",
+          "date": "2026-09-07T10:58:31.983Z"
         },
         {
           "title": "Neuchâtel sickness fund: a guide for young adults aged 19-25",
@@ -294,7 +304,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "NE",
@@ -332,18 +342,33 @@
           "items": [
             {
               "label": "Neuchâtel",
-              "value": "9 °C",
-              "detail": "heute 9 bis 11 °C"
+              "value": "5 °C",
+              "detail": "heute 2 bis 5 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Le projet d’optimisation du traitement des permis de construire est lancé",
+              "date": "2026-11-24T14:45:48.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/le-projet-doptimisation-du-traitement-des-permis-de-construire-est-lance"
+            },
+            {
+              "label": "Enquête auprès des jeunes neuchâtelois : le harcèlement, la santé mentale et les écrans au centre de leurs préoccupations",
+              "date": "2026-11-24T09:17:12.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/enquete-aupres-des-jeunes-neuchatelois-le-harcelement-la-sante-mentale-et-les-ecrans-au-centre-de-leurs-preoccupations"
+            },
+            {
+              "label": "Subsides LAMal 2027 : maintenir l’effort en faveur du pouvoir d’achat",
+              "date": "2026-11-23T08:25:05.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/subsides-lamal-2027-maintenir-leffort-en-faveur-du-pouvoir-dachat"
+            },
             {
               "label": "Légère baisse du taux de chômage au mois d’octobre",
               "date": "2026-11-05T07:43:08.000Z",
@@ -358,19 +383,9 @@
               "label": "Assurance-chômage : Neuchâtel et Vaud s’unissent pour sensibiliser sur l’importance d’anticiper les recherches d’emploi avant l’inscription à l’ORP",
               "date": "2026-11-02T07:26:58.000Z",
               "url": "https://www.ne.ch/communiques-de-presse/assurance-chomage-neuchatel-et-vaud-sunissent-pour-sensibiliser-sur-limportance-danticiper-les-recherches-demploi-avant-linscription-lorp"
-            },
-            {
-              "label": "La vaccination contre les virus respiratoires hivernaux est recommandée aux personnes vulnérables",
-              "date": "2026-10-30T12:55:52.000Z",
-              "url": "https://www.ne.ch/communiques-de-presse/la-vaccination-contre-les-virus-respiratoires-hivernaux-est-recommandee-aux-personnes-vulnerables"
-            },
-            {
-              "label": "Stabilité du taux de chômage au mois de septembre 2026",
-              "date": "2026-10-06T06:56:52.000Z",
-              "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -387,16 +402,16 @@
           "date": "2026-10-10T19:55:31.284Z"
         },
         {
-          "title": "Führerschein im Kanton Neuenburg: Umschulung und Prüfungen",
-          "url": "/de/schweiz-artikel/fuhrerschein-neuenburg-umwandlung-und-pruefungen/",
-          "excerpt": "Erfahren Sie, wie Sie Ihren ausländischen Führerschein umtauschen und Prüfungen im Kanton Neuenburg ablegen können.",
-          "date": "2026-09-07T10:58:31.983Z"
-        },
-        {
           "title": "Krankenkassenprämien Neuenburg für junge Erwachsene 19-25 Jahre",
           "url": "/de/schweiz-artikel/krankenkasse-neuenburg-jugendliche/",
           "excerpt": "Analyse der Bedingungen, Prämien und Optionen der Krankenkassen für junge Erwachsene mit Wohnsitz in Neuenburg im Alter von 19-25 Jahren.",
           "date": "2026-06-25T19:27:13.945Z"
+        },
+        {
+          "title": "Führerschein im Kanton Neuenburg: Umschulung und Prüfungen",
+          "url": "/de/schweiz-artikel/fuhrerschein-neuenburg-umwandlung-und-pruefungen/",
+          "excerpt": "Erfahren Sie, wie Sie Ihren ausländischen Führerschein umtauschen und Prüfungen im Kanton Neuenburg ablegen können.",
+          "date": "2026-09-07T10:58:31.983Z"
         },
         {
           "title": "Krankenkasse Neuenburg: Leitfaden für junge Erwachsene 19-25 Jahre",
@@ -428,7 +443,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "NE",
@@ -466,18 +481,33 @@
           "items": [
             {
               "label": "Neuchâtel",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 9 à 11 °C"
+              "value": "5 °C",
+              "detail": "aujourd’hui de 2 à 5 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Le projet d’optimisation du traitement des permis de construire est lancé",
+              "date": "2026-11-24T14:45:48.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/le-projet-doptimisation-du-traitement-des-permis-de-construire-est-lance"
+            },
+            {
+              "label": "Enquête auprès des jeunes neuchâtelois : le harcèlement, la santé mentale et les écrans au centre de leurs préoccupations",
+              "date": "2026-11-24T09:17:12.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/enquete-aupres-des-jeunes-neuchatelois-le-harcelement-la-sante-mentale-et-les-ecrans-au-centre-de-leurs-preoccupations"
+            },
+            {
+              "label": "Subsides LAMal 2027 : maintenir l’effort en faveur du pouvoir d’achat",
+              "date": "2026-11-23T08:25:05.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/subsides-lamal-2027-maintenir-leffort-en-faveur-du-pouvoir-dachat"
+            },
             {
               "label": "Légère baisse du taux de chômage au mois d’octobre",
               "date": "2026-11-05T07:43:08.000Z",
@@ -492,19 +522,9 @@
               "label": "Assurance-chômage : Neuchâtel et Vaud s’unissent pour sensibiliser sur l’importance d’anticiper les recherches d’emploi avant l’inscription à l’ORP",
               "date": "2026-11-02T07:26:58.000Z",
               "url": "https://www.ne.ch/communiques-de-presse/assurance-chomage-neuchatel-et-vaud-sunissent-pour-sensibiliser-sur-limportance-danticiper-les-recherches-demploi-avant-linscription-lorp"
-            },
-            {
-              "label": "La vaccination contre les virus respiratoires hivernaux est recommandée aux personnes vulnérables",
-              "date": "2026-10-30T12:55:52.000Z",
-              "url": "https://www.ne.ch/communiques-de-presse/la-vaccination-contre-les-virus-respiratoires-hivernaux-est-recommandee-aux-personnes-vulnerables"
-            },
-            {
-              "label": "Stabilité du taux de chômage au mois de septembre 2026",
-              "date": "2026-10-06T06:56:52.000Z",
-              "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -521,16 +541,16 @@
           "date": "2026-10-10T19:55:31.284Z"
         },
         {
-          "title": "Permis de conduire dans le canton de Neuchâtel : conversion et examens",
-          "url": "/fr/articles-suisse/permis-de-conduire-neuchatel-conversion-et-examens/",
-          "excerpt": "Découvrez comment convertir votre permis étranger et passer les examens dans le canton de Neuchâtel.",
-          "date": "2026-09-07T10:58:31.983Z"
-        },
-        {
           "title": "Primes caisse maladie Neuchâtel jeunes adultes 19-25 ans",
           "url": "/fr/articles-suisse/assurance-maladie-neuchatel-jeunes-19-25/",
           "excerpt": "Analyse des conditions, primes et options des caisses-maladie pour jeunes adultes résidant à Neuchâtel dans la tranche d'âge 19-25 ans.",
           "date": "2026-06-25T19:27:13.945Z"
+        },
+        {
+          "title": "Permis de conduire dans le canton de Neuchâtel : conversion et examens",
+          "url": "/fr/articles-suisse/permis-de-conduire-neuchatel-conversion-et-examens/",
+          "excerpt": "Découvrez comment convertir votre permis étranger et passer les examens dans le canton de Neuchâtel.",
+          "date": "2026-09-07T10:58:31.983Z"
         },
         {
           "title": "Caisse maladie Neuchâtel : guide pour jeunes adultes 19-25 ans",
@@ -558,7 +578,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

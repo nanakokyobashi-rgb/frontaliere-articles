@@ -4,17 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "fb4ecd88f701648f28cc83162a98da310fa8a1a694506d32153a9e5d4ce90072",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "83631ece2e42cd8e9af11389f37e78a09124a73ed12e9268de469cdf549cdd99",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-16T07:21:34.368Z",
+      "updatedAt": "2026-11-25T19:39:26.365Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -28,7 +28,7 @@
         {
           "label": "Cantieri attivi o imminenti",
           "value": "1",
-          "note": "segnalazioni aggiornate: 16 novembre 2026"
+          "note": "segnalazioni aggiornate: 25 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -38,11 +38,6 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
-              "label": "Revocato: H8 Wattwil -> St. Gallen tra Luogo Waldstatt E Luogo Herisau Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-11-16T06:35:00.000Z"
-            },
-            {
               "label": "H8 Wattwil -> St. Gallen Luogo Herisau Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza Larghezza…",
               "value": "Cantiere",
               "detail": "fine prevista: 15 febbraio 2027",
@@ -50,13 +45,33 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Regierungsrat genehmigt Strassenbauprogramm 2027–2030",
+              "date": "2026-11-23",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/regierungsrat-genehmigt-strassenbauprogramm-2027-2030/"
+            },
+            {
+              "label": "Regierungsrat genehmigt Strassenbauprogramm 2027–2030",
+              "date": "2026-11-23",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/regierungsrat-genehmigt-strassenbauprogramm-2027-2030/"
+            },
+            {
+              "label": "Hauptverbindung für den Veloverkehr nimmt Form an",
+              "date": "2026-11-16",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/hauptverbindung-fuer-den-veloverkehr-nimmt-form-an/"
+            },
+            {
+              "label": "Hauptverbindung für den Veloverkehr nimmt Form an",
+              "date": "2026-11-16",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/hauptverbindung-fuer-den-veloverkehr-nimmt-form-an/"
+            },
             {
               "label": "Bushaltestelle Almenweg in Speicher wird umgebaut",
               "date": "2026-11-11",
@@ -66,29 +81,9 @@
               "label": "Bushaltestelle Almenweg in Speicher wird umgebaut",
               "date": "2026-11-11",
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-almenweg-in-speicher-wird-umgebaut/"
-            },
-            {
-              "label": "Bauauftrag für die Modernisierung der Linie Rheineck–Walzenhausen vergeben",
-              "date": "2026-11-03",
-              "url": "https://appenzellerbahnen.ch/de/unternehmen/medien/detail/bauauftrag-fuer-die-modernisierung-der-linie-rheineck-walzenhausen-vergeben.html"
-            },
-            {
-              "label": "12.10. - 21.10.2026, Einbahnverkehr Gemeinde Waldstatt",
-              "date": "2026-10-21",
-              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/1210-21102026-einbahnverkehr-gemeinde-waldstatt/"
-            },
-            {
-              "label": "14.10. - 15.10.2026, Strassensperrung Gemeinde Walzenhausen",
-              "date": "2026-10-15",
-              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/1410-15102026-strassensperrung-gemeinde-walzenhausen/"
-            },
-            {
-              "label": "Strassensperrung Gemeinde Urnäsch",
-              "date": "2026-10-15",
-              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/15102026-strassensperrung-gemeinde-urnaesch/"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -110,7 +105,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -121,7 +116,7 @@
         {
           "label": "Roadworks active or imminent",
           "value": "1",
-          "note": "reports as of 16 November 2026"
+          "note": "reports as of 25 November 2026"
         }
       ],
       "dataBlocks": [
@@ -131,11 +126,6 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
-              "label": "Revocato: H8 Wattwil -> St. Gallen tra Luogo Waldstatt E Luogo Herisau Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-11-16T06:35:00.000Z"
-            },
-            {
               "label": "H8 Wattwil -> St. Gallen Luogo Herisau Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza Larghezza…",
               "value": "Roadworks",
               "detail": "until 15 February 2027",
@@ -143,13 +133,33 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Regierungsrat genehmigt Strassenbauprogramm 2027–2030",
+              "date": "2026-11-23",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/regierungsrat-genehmigt-strassenbauprogramm-2027-2030/"
+            },
+            {
+              "label": "Regierungsrat genehmigt Strassenbauprogramm 2027–2030",
+              "date": "2026-11-23",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/regierungsrat-genehmigt-strassenbauprogramm-2027-2030/"
+            },
+            {
+              "label": "Hauptverbindung für den Veloverkehr nimmt Form an",
+              "date": "2026-11-16",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/hauptverbindung-fuer-den-veloverkehr-nimmt-form-an/"
+            },
+            {
+              "label": "Hauptverbindung für den Veloverkehr nimmt Form an",
+              "date": "2026-11-16",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/hauptverbindung-fuer-den-veloverkehr-nimmt-form-an/"
+            },
             {
               "label": "Bushaltestelle Almenweg in Speicher wird umgebaut",
               "date": "2026-11-11",
@@ -159,29 +169,9 @@
               "label": "Bushaltestelle Almenweg in Speicher wird umgebaut",
               "date": "2026-11-11",
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-almenweg-in-speicher-wird-umgebaut/"
-            },
-            {
-              "label": "Bauauftrag für die Modernisierung der Linie Rheineck–Walzenhausen vergeben",
-              "date": "2026-11-03",
-              "url": "https://appenzellerbahnen.ch/de/unternehmen/medien/detail/bauauftrag-fuer-die-modernisierung-der-linie-rheineck-walzenhausen-vergeben.html"
-            },
-            {
-              "label": "12.10. - 21.10.2026, Einbahnverkehr Gemeinde Waldstatt",
-              "date": "2026-10-21",
-              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/1210-21102026-einbahnverkehr-gemeinde-waldstatt/"
-            },
-            {
-              "label": "14.10. - 15.10.2026, Strassensperrung Gemeinde Walzenhausen",
-              "date": "2026-10-15",
-              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/1410-15102026-strassensperrung-gemeinde-walzenhausen/"
-            },
-            {
-              "label": "Strassensperrung Gemeinde Urnäsch",
-              "date": "2026-10-15",
-              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/15102026-strassensperrung-gemeinde-urnaesch/"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -203,7 +193,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -214,7 +204,7 @@
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "1",
-          "note": "Meldungen vom 16. November 2026"
+          "note": "Meldungen vom 25. November 2026"
         }
       ],
       "dataBlocks": [
@@ -224,11 +214,6 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
-              "label": "Aufgehoben: H8 Wattwil -> St. Gallen zwischen Ortschaft Waldstatt und Ortschaft Herisau Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-11-16T06:35:00.000Z"
-            },
-            {
               "label": "H8 Wattwil -> St. Gallen Ortschaft Herisau Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
               "value": "Baustelle",
               "detail": "bis 15. Februar 2027",
@@ -236,13 +221,33 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Regierungsrat genehmigt Strassenbauprogramm 2027–2030",
+              "date": "2026-11-23",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/regierungsrat-genehmigt-strassenbauprogramm-2027-2030/"
+            },
+            {
+              "label": "Regierungsrat genehmigt Strassenbauprogramm 2027–2030",
+              "date": "2026-11-23",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/regierungsrat-genehmigt-strassenbauprogramm-2027-2030/"
+            },
+            {
+              "label": "Hauptverbindung für den Veloverkehr nimmt Form an",
+              "date": "2026-11-16",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/hauptverbindung-fuer-den-veloverkehr-nimmt-form-an/"
+            },
+            {
+              "label": "Hauptverbindung für den Veloverkehr nimmt Form an",
+              "date": "2026-11-16",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/hauptverbindung-fuer-den-veloverkehr-nimmt-form-an/"
+            },
             {
               "label": "Bushaltestelle Almenweg in Speicher wird umgebaut",
               "date": "2026-11-11",
@@ -252,29 +257,9 @@
               "label": "Bushaltestelle Almenweg in Speicher wird umgebaut",
               "date": "2026-11-11",
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-almenweg-in-speicher-wird-umgebaut/"
-            },
-            {
-              "label": "Bauauftrag für die Modernisierung der Linie Rheineck–Walzenhausen vergeben",
-              "date": "2026-11-03",
-              "url": "https://appenzellerbahnen.ch/de/unternehmen/medien/detail/bauauftrag-fuer-die-modernisierung-der-linie-rheineck-walzenhausen-vergeben.html"
-            },
-            {
-              "label": "12.10. - 21.10.2026, Einbahnverkehr Gemeinde Waldstatt",
-              "date": "2026-10-21",
-              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/1210-21102026-einbahnverkehr-gemeinde-waldstatt/"
-            },
-            {
-              "label": "14.10. - 15.10.2026, Strassensperrung Gemeinde Walzenhausen",
-              "date": "2026-10-15",
-              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/1410-15102026-strassensperrung-gemeinde-walzenhausen/"
-            },
-            {
-              "label": "Strassensperrung Gemeinde Urnäsch",
-              "date": "2026-10-15",
-              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/15102026-strassensperrung-gemeinde-urnaesch/"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -296,7 +281,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -307,7 +292,7 @@
         {
           "label": "Chantiers actifs ou imminents",
           "value": "1",
-          "note": "signalements au 16 novembre 2026"
+          "note": "signalements au 25 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -317,11 +302,6 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
-              "label": "Révoqué: H8 Wattwil -> St-Gall entre Localité Waldstatt et Localité Herisau Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-11-16T06:35:00.000Z"
-            },
-            {
               "label": "H8 Wattwil -> St-Gall Localité Herisau Situation: trafic perturbé travaux, longueur [km] 2.0 Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de largeur largeur de…",
               "value": "Chantier",
               "detail": "jusqu’au 15 février 2027",
@@ -329,13 +309,33 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Regierungsrat genehmigt Strassenbauprogramm 2027–2030",
+              "date": "2026-11-23",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/regierungsrat-genehmigt-strassenbauprogramm-2027-2030/"
+            },
+            {
+              "label": "Regierungsrat genehmigt Strassenbauprogramm 2027–2030",
+              "date": "2026-11-23",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/regierungsrat-genehmigt-strassenbauprogramm-2027-2030/"
+            },
+            {
+              "label": "Hauptverbindung für den Veloverkehr nimmt Form an",
+              "date": "2026-11-16",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/hauptverbindung-fuer-den-veloverkehr-nimmt-form-an/"
+            },
+            {
+              "label": "Hauptverbindung für den Veloverkehr nimmt Form an",
+              "date": "2026-11-16",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/hauptverbindung-fuer-den-veloverkehr-nimmt-form-an/"
+            },
             {
               "label": "Bushaltestelle Almenweg in Speicher wird umgebaut",
               "date": "2026-11-11",
@@ -345,29 +345,9 @@
               "label": "Bushaltestelle Almenweg in Speicher wird umgebaut",
               "date": "2026-11-11",
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-almenweg-in-speicher-wird-umgebaut/"
-            },
-            {
-              "label": "Bauauftrag für die Modernisierung der Linie Rheineck–Walzenhausen vergeben",
-              "date": "2026-11-03",
-              "url": "https://appenzellerbahnen.ch/de/unternehmen/medien/detail/bauauftrag-fuer-die-modernisierung-der-linie-rheineck-walzenhausen-vergeben.html"
-            },
-            {
-              "label": "12.10. - 21.10.2026, Einbahnverkehr Gemeinde Waldstatt",
-              "date": "2026-10-21",
-              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/1210-21102026-einbahnverkehr-gemeinde-waldstatt/"
-            },
-            {
-              "label": "14.10. - 15.10.2026, Strassensperrung Gemeinde Walzenhausen",
-              "date": "2026-10-15",
-              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/1410-15102026-strassensperrung-gemeinde-walzenhausen/"
-            },
-            {
-              "label": "Strassensperrung Gemeinde Urnäsch",
-              "date": "2026-10-15",
-              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/15102026-strassensperrung-gemeinde-urnaesch/"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -389,7 +369,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

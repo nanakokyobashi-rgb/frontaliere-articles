@@ -4,8 +4,8 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "servizi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "a6842d8077b0df4a08bb1d4083bd4afad46b2d6a01ce05d06947a69861c5214b",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "df22e1112c03fc52d4c7a85c2f65581cfbd75f49e2d418aa27c90b8cc9425148",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-16T06:51:00.113Z",
+      "updatedAt": "2026-11-26T00:36:15.946Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -60,18 +60,23 @@
           "items": [
             {
               "label": "Sarnen",
-              "value": "7 °C",
-              "detail": "oggi da 7 a 12 °C"
+              "value": "4 °C",
+              "detail": "oggi da 0 a 4 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Änderung der Grundbuchverordnung (Rechtsgrundausweis in Erb- und Trustsachen)",
+              "date": "2026-11-17",
+              "url": "https://www.ow.ch/_rte/information/139672"
+            },
             {
               "label": "Krankenpflegeversicherung: Kosten- und Qualitätsziele 2028-2031 in der obligatorischen Krankenversicherung (OKP)",
               "date": "2026-09-08",
@@ -83,7 +88,7 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -163,7 +168,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "OW",
@@ -201,18 +206,23 @@
           "items": [
             {
               "label": "Sarnen",
-              "value": "7 °C",
-              "detail": "today from 7 to 12 °C"
+              "value": "4 °C",
+              "detail": "today from 0 to 4 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Änderung der Grundbuchverordnung (Rechtsgrundausweis in Erb- und Trustsachen)",
+              "date": "2026-11-17",
+              "url": "https://www.ow.ch/_rte/information/139672"
+            },
             {
               "label": "Krankenpflegeversicherung: Kosten- und Qualitätsziele 2028-2031 in der obligatorischen Krankenversicherung (OKP)",
               "date": "2026-09-08",
@@ -224,7 +234,7 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -300,7 +310,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "OW",
@@ -338,18 +348,23 @@
           "items": [
             {
               "label": "Sarnen",
-              "value": "7 °C",
-              "detail": "heute 7 bis 12 °C"
+              "value": "4 °C",
+              "detail": "heute 0 bis 4 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Änderung der Grundbuchverordnung (Rechtsgrundausweis in Erb- und Trustsachen)",
+              "date": "2026-11-17",
+              "url": "https://www.ow.ch/_rte/information/139672"
+            },
             {
               "label": "Krankenpflegeversicherung: Kosten- und Qualitätsziele 2028-2031 in der obligatorischen Krankenversicherung (OKP)",
               "date": "2026-09-08",
@@ -361,7 +376,7 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -437,7 +452,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "OW",
@@ -475,18 +490,23 @@
           "items": [
             {
               "label": "Sarnen",
-              "value": "7 °C",
-              "detail": "aujourd’hui de 7 à 12 °C"
+              "value": "4 °C",
+              "detail": "aujourd’hui de 0 à 4 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Änderung der Grundbuchverordnung (Rechtsgrundausweis in Erb- und Trustsachen)",
+              "date": "2026-11-17",
+              "url": "https://www.ow.ch/_rte/information/139672"
+            },
             {
               "label": "Krankenpflegeversicherung: Kosten- und Qualitätsziele 2028-2031 in der obligatorischen Krankenversicherung (OKP)",
               "date": "2026-09-08",
@@ -498,7 +518,7 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -570,7 +590,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

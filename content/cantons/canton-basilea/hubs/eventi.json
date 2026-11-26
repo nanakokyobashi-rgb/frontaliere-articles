@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "37ab8a71c9d346fb3b51d114b04d308fe809a770e32564469255caa1da17bbdb",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "009935f040fb94b55044e841f79d02ed04552e2e7465544581c6970d165818fa",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T21:47:09.888Z",
+      "updatedAt": "2026-11-26T00:32:00.223Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "92",
+          "value": "87",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Wochenmarkt auf dem Lindenplatz Allschwil",
-              "detail": "Lindenplatz, Allschwil — in corso, ultimo giorno: 27 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/allschwil/wochenmarkt-auf-dem-lindenplatz-allschwil_ANByB5x"
+              "label": "Einladung zum Podium: Wie viel Kultur braucht SRF?",
+              "detail": "Basel",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-podium-wie-viel-kultur-braucht-srf/"
             },
             {
-              "label": "Aroma-Massage",
-              "detail": "Bio-Medica Fachschule, Basel — in corso, ultimo giorno: 18 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
-            },
-            {
-              "label": "Öffentliche Führungen im Hanro-Depot",
-              "detail": "Liestal — in corso, ultimo giorno: 2 dicembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
-            },
-            {
-              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX LIKE A PRO",
-              "detail": "Basilea, Basel — in corso, ultimo giorno: 25 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "Krimi-Club in der Bibliothek Niederholz",
+              "label": "Adventserwachen im Rauracher Zentrum",
               "detail": "Riehen",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krimi-club-in-der-bibliothek-niederholz/"
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventserwachen-im-rauracher-zentrum/"
             },
             {
-              "label": "Workshop – Adventskranz stecken",
-              "detail": "Au Bouquet, Basel",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-adventskranz-stecken/"
+              "label": "Schauraum B: Nutzungsverdichtung: Räume teilen statt neu bauen.",
+              "detail": "Schauraum B, Basel",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schauraum-b-nutzungsverdichtung-raeume-teilen-statt-neu-bauen/"
             },
             {
-              "label": "ETRAN DE L'AÏR",
-              "detail": "Werkraum Warteck pp",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/etran-de-lair_AApy5DM"
+              "label": "Compressio",
+              "detail": "cheesmeyer, Sissach",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/sissach/compressio_AysaFsJ"
             },
             {
-              "label": "Walter Trout",
+              "label": "Cuarteto Quiroga: Beethovens Danksagung",
+              "detail": "Riehen",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cuarteto-quiroga-beethovens-danksagung/"
+            },
+            {
+              "label": "Pro-Pain",
               "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/walter-trout_AdQ3hWj"
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/pro-pain_Am2B12r"
             },
             {
-              "label": "Ein Entwurf macht Schule.",
-              "detail": "Universitätsbibliothek (UB), Basel",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ein-entwurf-macht-schule-2/"
+              "label": "Sven Ivanic & Jozo Brica - da&dunne",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sven-ivanic-jozo-brica-dadunne/"
             },
             {
-              "label": "Resilienz-Training: Psychische Gesundheit stärken",
-              "detail": "Psychiatrie Baselland, Liestal",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/liestal/resilienz-training-psychische-gesundheit-staerken_Ai5sv3h"
+              "label": "Christoph Brüske: «Lass mal die Boomer machen»",
+              "detail": "Basel",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/christoph-brueske-lass-mal-die-boomer-machen/"
+            },
+            {
+              "label": "Öffentliches Adventskranzbinden",
+              "detail": "Riehen — in corso, ultimo giorno: 26 novembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliches-adventskranzbinden/"
+            },
+            {
+              "label": "Bar per single",
+              "detail": "Bahnhof SBB Basel, Basel — in corso, ultimo giorno: 11 dicembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/events/party/basel/barhopping-for-singles_Am6qVZg"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "92",
+          "value": "87",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Wochenmarkt auf dem Lindenplatz Allschwil",
-              "detail": "Lindenplatz, Allschwil — ongoing, last day: 27 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/allschwil/wochenmarkt-auf-dem-lindenplatz-allschwil_ANByB5x"
+              "label": "Einladung zum Podium: Wie viel Kultur braucht SRF?",
+              "detail": "Basel",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-podium-wie-viel-kultur-braucht-srf/"
             },
             {
-              "label": "Aroma-Massage",
-              "detail": "Bio-Medica Fachschule, Basel — ongoing, last day: 18 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
-            },
-            {
-              "label": "Öffentliche Führungen im Hanro-Depot",
-              "detail": "Liestal — ongoing, last day: 2 December 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
-            },
-            {
-              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
-              "detail": "Basilea, Basel — ongoing, last day: 25 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "Krimi-Club in der Bibliothek Niederholz",
+              "label": "Adventserwachen im Rauracher Zentrum",
               "detail": "Riehen",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krimi-club-in-der-bibliothek-niederholz/"
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventserwachen-im-rauracher-zentrum/"
             },
             {
-              "label": "Workshop – Adventskranz stecken",
-              "detail": "Au Bouquet, Basel",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-adventskranz-stecken/"
+              "label": "Schauraum B: Nutzungsverdichtung: Räume teilen statt neu bauen.",
+              "detail": "Schauraum B, Basel",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schauraum-b-nutzungsverdichtung-raeume-teilen-statt-neu-bauen/"
             },
             {
-              "label": "ETRAN DE L'AÏR",
-              "detail": "Werkraum Warteck pp",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/etran-de-lair_AApy5DM"
+              "label": "Compressio",
+              "detail": "cheesmeyer, Sissach",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/sissach/compressio_AysaFsJ"
             },
             {
-              "label": "Alter Trout",
+              "label": "Cuarteto Quiroga: Beethovens Danksagung",
+              "detail": "Riehen",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cuarteto-quiroga-beethovens-danksagung/"
+            },
+            {
+              "label": "Pro-Pain",
               "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/walter-trout_AdQ3hWj"
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/pro-pain_Am2B12r"
             },
             {
-              "label": "Ein Entwurf macht Schule.",
-              "detail": "Universitätsbibliothek (UB), Basel",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ein-entwurf-macht-schule-2/"
+              "label": "Sven Ivanic & Jozo Brica - da&dunne",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sven-ivanic-jozo-brica-dadunne/"
             },
             {
-              "label": "Resilienz-Training: Psychische Gesundheit stärken",
-              "detail": "Psychiatrie Baselland, Liestal",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/liestal/resilienz-training-psychische-gesundheit-staerken_Ai5sv3h"
+              "label": "Christoph Brüske: «Lass mal die Boomer machen»",
+              "detail": "Basel",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/christoph-brueske-lass-mal-die-boomer-machen/"
+            },
+            {
+              "label": "Öffentliches Adventskranzbinden",
+              "detail": "Riehen — ongoing, last day: 26 November 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliches-adventskranzbinden/"
+            },
+            {
+              "label": "Barhopping for singles",
+              "detail": "Bahnhof SBB Basel, Basel — ongoing, last day: 11 December 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/events/party/basel/barhopping-for-singles_Am6qVZg"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "92",
+          "value": "87",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Wochenmarkt auf dem Lindenplatz Allschwil",
-              "detail": "Lindenplatz, Allschwil — läuft, letzter Tag: 27. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/allschwil/wochenmarkt-auf-dem-lindenplatz-allschwil_ANByB5x"
+              "label": "Einladung zum Podium: Wie viel Kultur braucht SRF?",
+              "detail": "Basel",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-podium-wie-viel-kultur-braucht-srf/"
             },
             {
-              "label": "Aroma-Massage",
-              "detail": "Bio-Medica Fachschule, Basel — läuft, letzter Tag: 18. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
-            },
-            {
-              "label": "Öffentliche Führungen im Hanro-Depot",
-              "detail": "Liestal — läuft, letzter Tag: 2. Dezember 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
-            },
-            {
-              "label": "B1 Rooftop Bistro – COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
-              "detail": "Basilea, Basel — läuft, letzter Tag: 25. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "Krimi-Club in der Bibliothek Niederholz",
+              "label": "Adventserwachen im Rauracher Zentrum",
               "detail": "Riehen",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krimi-club-in-der-bibliothek-niederholz/"
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventserwachen-im-rauracher-zentrum/"
             },
             {
-              "label": "Workshop – Adventskranz stecken",
-              "detail": "Au Bouquet, Basel",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-adventskranz-stecken/"
+              "label": "Schauraum B: Nutzungsverdichtung: Räume teilen statt neu bauen.",
+              "detail": "Schauraum B, Basel",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schauraum-b-nutzungsverdichtung-raeume-teilen-statt-neu-bauen/"
             },
             {
-              "label": "ETRAN DE L'AÏR",
-              "detail": "Werkraum Warteck pp",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/etran-de-lair_AApy5DM"
+              "label": "Compressio",
+              "detail": "cheesmeyer, Sissach",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/sissach/compressio_AysaFsJ"
             },
             {
-              "label": "Walter Forelle",
+              "label": "Cuarteto Quiroga: Beethovens Danksagung",
+              "detail": "Riehen",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cuarteto-quiroga-beethovens-danksagung/"
+            },
+            {
+              "label": "Pro-Pain",
               "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/walter-trout_AdQ3hWj"
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/pro-pain_Am2B12r"
             },
             {
-              "label": "Ein Entwurf macht Schule.",
-              "detail": "Universitätsbibliothek (UB), Basel",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ein-entwurf-macht-schule-2/"
+              "label": "Sven Ivanic & Jozo Brica - da&dunne",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sven-ivanic-jozo-brica-dadunne/"
             },
             {
-              "label": "Resilienz-Training: Psychische Gesundheit stärken",
-              "detail": "Psychiatrie Baselland, Liestal",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/liestal/resilienz-training-psychische-gesundheit-staerken_Ai5sv3h"
+              "label": "Christoph Brüske: «Lass mal die Boomer machen»",
+              "detail": "Basel",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/christoph-brueske-lass-mal-die-boomer-machen/"
+            },
+            {
+              "label": "Öffentliches Adventskranzbinden",
+              "detail": "Riehen — läuft, letzter Tag: 26. November 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliches-adventskranzbinden/"
+            },
+            {
+              "label": "Barhopping für Singles",
+              "detail": "Bahnhof SBB Basel, Basel — läuft, letzter Tag: 11. Dezember 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/events/party/basel/barhopping-for-singles_Am6qVZg"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "92",
+          "value": "87",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Wochenmarkt auf dem Lindenplatz Allschwil",
-              "detail": "Lindenplatz, Allschwil — en cours, dernier jour : 27 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/allschwil/wochenmarkt-auf-dem-lindenplatz-allschwil_ANByB5x"
+              "label": "Einladung zum Podium: Wie viel Kultur braucht SRF?",
+              "detail": "Basel",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-podium-wie-viel-kultur-braucht-srf/"
             },
             {
-              "label": "Aroma-Massage",
-              "detail": "Bio-Medica Fachschule, Basel — en cours, dernier jour : 18 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
-            },
-            {
-              "label": "Öffentliche Führungen im Hanro-Depot",
-              "detail": "Liestal — en cours, dernier jour : 2 décembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
-            },
-            {
-              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
-              "detail": "Basilea, Basel — en cours, dernier jour : 25 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "Krimi-Club in der Bibliothek Niederholz",
+              "label": "Adventserwachen im Rauracher Zentrum",
               "detail": "Riehen",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krimi-club-in-der-bibliothek-niederholz/"
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventserwachen-im-rauracher-zentrum/"
             },
             {
-              "label": "Workshop – Adventskranz stecken",
-              "detail": "Au Bouquet, Basel",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-adventskranz-stecken/"
+              "label": "Schauraum B: Nutzungsverdichtung: Räume teilen statt neu bauen.",
+              "detail": "Schauraum B, Basel",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schauraum-b-nutzungsverdichtung-raeume-teilen-statt-neu-bauen/"
             },
             {
-              "label": "ETRAN DE L'AÏR",
-              "detail": "Werkraum Warteck pp",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/etran-de-lair_AApy5DM"
+              "label": "Compressio",
+              "detail": "cheesmeyer, Sissach",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/sissach/compressio_AysaFsJ"
             },
             {
-              "label": "Walter Truite",
+              "label": "Cuarteto Quiroga: Beethovens Danksagung",
+              "detail": "Riehen",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cuarteto-quiroga-beethovens-danksagung/"
+            },
+            {
+              "label": "Pro-Pain",
               "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/walter-trout_AdQ3hWj"
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/pro-pain_Am2B12r"
             },
             {
-              "label": "Ein Entwurf macht Schule.",
-              "detail": "Universitätsbibliothek (UB), Basel",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ein-entwurf-macht-schule-2/"
+              "label": "Sven Ivanic & Jozo Brica - da&dunne",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sven-ivanic-jozo-brica-dadunne/"
             },
             {
-              "label": "Resilienz-Training: Psychische Gesundheit stärken",
-              "detail": "Psychiatrie Baselland, Liestal",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/liestal/resilienz-training-psychische-gesundheit-staerken_Ai5sv3h"
+              "label": "Christoph Brüske: «Lass mal die Boomer machen»",
+              "detail": "Basel",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/christoph-brueske-lass-mal-die-boomer-machen/"
+            },
+            {
+              "label": "Öffentliches Adventskranzbinden",
+              "detail": "Riehen — en cours, dernier jour : 26 novembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliches-adventskranzbinden/"
+            },
+            {
+              "label": "Barhopping pour les célibataires",
+              "detail": "Bahnhof SBB Basel, Basel — en cours, dernier jour : 11 décembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/events/party/basel/barhopping-for-singles_Am6qVZg"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

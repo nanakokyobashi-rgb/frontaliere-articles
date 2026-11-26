@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "664b135ff7eaf15dc2ea844aeeca304ba3f5e82b218845de9d882fa781f3d436",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "7a4de8a461ceff81231fbc2357eb76f066ec032f0e8dce1a10b76434913c46f3",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-16T06:48:18.514Z",
+      "updatedAt": "2026-11-25T21:12:11.717Z",
       "keyFacts": 0
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-16T06:51:00.113Z",
+      "updatedAt": "2026-11-26T00:36:15.946Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -66,37 +66,37 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-15T23:00:00.000Z"
+              "date": "2026-11-25T23:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-16T23:00:00.000Z"
+              "date": "2026-11-26T23:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-17T23:00:00.000Z"
+              "date": "2026-11-27T23:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-18T23:00:00.000Z"
+              "date": "2026-11-28T23:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-19T23:00:00.000Z"
+              "date": "2026-11-29T23:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-20T23:00:00.000Z"
+              "date": "2026-11-30T23:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-16T06:48:18.514Z"
+          "updatedAt": "2026-11-25T21:12:11.717Z"
         },
         {
           "id": "meteo",
@@ -105,12 +105,12 @@
           "items": [
             {
               "label": "Genève",
-              "value": "9 °C",
-              "detail": "oggi da 9 a 12 °C"
+              "value": "6 °C",
+              "detail": "oggi da 4 a 7 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,37 +118,37 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
-              "label": "SEROCoV-WORK+ : six ans de recherche pour mieux comprendre la pandémie",
-              "date": "2026-11-13",
-              "url": "https://www.hug.ch/actualite/serocov-work-six-ans-recherche-pour-mieux-comprendre-pandemie"
+              "label": "Le site internet de l'Observatoire statistique transfrontalier fait peau neuve",
+              "date": "2026-11-24T13:15:00.000Z",
+              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10899&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6093"
             },
             {
-              "label": "Promotion de la vie affective et de la santé sexuelle",
-              "date": "2026-11-13",
-              "url": "https://www.ge.ch/node/36459"
+              "label": "Les HUG renforcent la sécurité au Service des urgences adultes avec un dispositif de vidéoprotection",
+              "date": "2026-11-24",
+              "url": "https://www.hug.ch/actualite/hug-renforcent-securite-au-service-urgences-adultes-avec-dispositif-videoprotection"
             },
             {
-              "label": "OCIRT-Formation 220-26 - Loi sur l’égalité : état des lieux, aspects juridiques et mise en œuvre",
-              "date": "2026-11-12",
-              "url": "https://www.ge.ch/node/44025"
+              "label": "Quatre experts des HUG parmi les chercheuses et chercheurs les plus cités au monde",
+              "date": "2026-11-24",
+              "url": "https://www.hug.ch/actualite/quatre-experts-hug-parmi-chercheuses-chercheurs-plus-cites-au-monde"
             },
             {
-              "label": "Directive relative aux permissions d'exercer une activité professionnelle dans les eaux genevoises",
-              "date": "2026-11-12",
-              "url": "https://www.ge.ch/node/45491"
+              "label": "Le site de l'Observatoire statistique transfrontalier fait peau neuve",
+              "date": "2026-11-24",
+              "url": "https://www.crfginfo.org/fr/actualites/le-site-de-lobservatoire-statistique-transfrontalier-fait-peau-neuve"
             },
             {
-              "label": "Sortie d'hospitalisation de la personne atteinte d'Ebola",
-              "date": "2026-11-11",
-              "url": "https://www.hug.ch/actualite/sortie-hospitalisation-personne-atteinte-ebola"
+              "label": "Santé mentale : un nouveau dispositif en ligne pour aider les jeunes",
+              "date": "2026-11-20",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19151"
             },
             {
-              "label": "OCIRT-Formation 100-26 - Aménagement des locaux de travail : de la conception à la réalisation dans le respect des exigences légales en matière de santé et sécurité au travail",
-              "date": "2026-11-10",
-              "url": "https://www.ge.ch/node/45417"
+              "label": "Travailler à l’ère de l’IA : pourquoi se former tout au long de sa carrière est essentiel",
+              "date": "2026-11-19",
+              "url": "https://www.ge.ch/node/45396"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -228,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "GE",
@@ -267,37 +267,37 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-15T23:00:00.000Z"
+              "date": "2026-11-25T23:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-16T23:00:00.000Z"
+              "date": "2026-11-26T23:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-17T23:00:00.000Z"
+              "date": "2026-11-27T23:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-18T23:00:00.000Z"
+              "date": "2026-11-28T23:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-19T23:00:00.000Z"
+              "date": "2026-11-29T23:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-20T23:00:00.000Z"
+              "date": "2026-11-30T23:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-16T06:48:18.514Z"
+          "updatedAt": "2026-11-25T21:12:11.717Z"
         },
         {
           "id": "meteo",
@@ -306,12 +306,12 @@
           "items": [
             {
               "label": "Genève",
-              "value": "9 °C",
-              "detail": "today from 9 to 12 °C"
+              "value": "6 °C",
+              "detail": "today from 4 to 7 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -319,37 +319,37 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
-              "label": "SEROCoV-WORK+ : six ans de recherche pour mieux comprendre la pandémie",
-              "date": "2026-11-13",
-              "url": "https://www.hug.ch/actualite/serocov-work-six-ans-recherche-pour-mieux-comprendre-pandemie"
+              "label": "Le site internet de l'Observatoire statistique transfrontalier fait peau neuve",
+              "date": "2026-11-24T13:15:00.000Z",
+              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10899&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6093"
             },
             {
-              "label": "Promotion de la vie affective et de la santé sexuelle",
-              "date": "2026-11-13",
-              "url": "https://www.ge.ch/node/36459"
+              "label": "Les HUG renforcent la sécurité au Service des urgences adultes avec un dispositif de vidéoprotection",
+              "date": "2026-11-24",
+              "url": "https://www.hug.ch/actualite/hug-renforcent-securite-au-service-urgences-adultes-avec-dispositif-videoprotection"
             },
             {
-              "label": "OCIRT-Formation 220-26 - Loi sur l’égalité : état des lieux, aspects juridiques et mise en œuvre",
-              "date": "2026-11-12",
-              "url": "https://www.ge.ch/node/44025"
+              "label": "Quatre experts des HUG parmi les chercheuses et chercheurs les plus cités au monde",
+              "date": "2026-11-24",
+              "url": "https://www.hug.ch/actualite/quatre-experts-hug-parmi-chercheuses-chercheurs-plus-cites-au-monde"
             },
             {
-              "label": "Directive relative aux permissions d'exercer une activité professionnelle dans les eaux genevoises",
-              "date": "2026-11-12",
-              "url": "https://www.ge.ch/node/45491"
+              "label": "Le site de l'Observatoire statistique transfrontalier fait peau neuve",
+              "date": "2026-11-24",
+              "url": "https://www.crfginfo.org/fr/actualites/le-site-de-lobservatoire-statistique-transfrontalier-fait-peau-neuve"
             },
             {
-              "label": "Sortie d'hospitalisation de la personne atteinte d'Ebola",
-              "date": "2026-11-11",
-              "url": "https://www.hug.ch/actualite/sortie-hospitalisation-personne-atteinte-ebola"
+              "label": "Santé mentale : un nouveau dispositif en ligne pour aider les jeunes",
+              "date": "2026-11-20",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19151"
             },
             {
-              "label": "OCIRT-Formation 100-26 - Aménagement des locaux de travail : de la conception à la réalisation dans le respect des exigences légales en matière de santé et sécurité au travail",
-              "date": "2026-11-10",
-              "url": "https://www.ge.ch/node/45417"
+              "label": "Travailler à l’ère de l’IA : pourquoi se former tout au long de sa carrière est essentiel",
+              "date": "2026-11-19",
+              "url": "https://www.ge.ch/node/45396"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -424,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "GE",
@@ -463,37 +463,37 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-15T23:00:00.000Z"
+              "date": "2026-11-25T23:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-16T23:00:00.000Z"
+              "date": "2026-11-26T23:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-17T23:00:00.000Z"
+              "date": "2026-11-27T23:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-18T23:00:00.000Z"
+              "date": "2026-11-28T23:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-19T23:00:00.000Z"
+              "date": "2026-11-29T23:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-20T23:00:00.000Z"
+              "date": "2026-11-30T23:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-16T06:48:18.514Z"
+          "updatedAt": "2026-11-25T21:12:11.717Z"
         },
         {
           "id": "meteo",
@@ -502,12 +502,12 @@
           "items": [
             {
               "label": "Genève",
-              "value": "9 °C",
-              "detail": "heute 9 bis 12 °C"
+              "value": "6 °C",
+              "detail": "heute 4 bis 7 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -515,37 +515,37 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
-              "label": "SEROCoV-WORK+ : six ans de recherche pour mieux comprendre la pandémie",
-              "date": "2026-11-13",
-              "url": "https://www.hug.ch/actualite/serocov-work-six-ans-recherche-pour-mieux-comprendre-pandemie"
+              "label": "Le site internet de l'Observatoire statistique transfrontalier fait peau neuve",
+              "date": "2026-11-24T13:15:00.000Z",
+              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10899&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6093"
             },
             {
-              "label": "Promotion de la vie affective et de la santé sexuelle",
-              "date": "2026-11-13",
-              "url": "https://www.ge.ch/node/36459"
+              "label": "Les HUG renforcent la sécurité au Service des urgences adultes avec un dispositif de vidéoprotection",
+              "date": "2026-11-24",
+              "url": "https://www.hug.ch/actualite/hug-renforcent-securite-au-service-urgences-adultes-avec-dispositif-videoprotection"
             },
             {
-              "label": "OCIRT-Formation 220-26 - Loi sur l’égalité : état des lieux, aspects juridiques et mise en œuvre",
-              "date": "2026-11-12",
-              "url": "https://www.ge.ch/node/44025"
+              "label": "Quatre experts des HUG parmi les chercheuses et chercheurs les plus cités au monde",
+              "date": "2026-11-24",
+              "url": "https://www.hug.ch/actualite/quatre-experts-hug-parmi-chercheuses-chercheurs-plus-cites-au-monde"
             },
             {
-              "label": "Directive relative aux permissions d'exercer une activité professionnelle dans les eaux genevoises",
-              "date": "2026-11-12",
-              "url": "https://www.ge.ch/node/45491"
+              "label": "Le site de l'Observatoire statistique transfrontalier fait peau neuve",
+              "date": "2026-11-24",
+              "url": "https://www.crfginfo.org/fr/actualites/le-site-de-lobservatoire-statistique-transfrontalier-fait-peau-neuve"
             },
             {
-              "label": "Sortie d'hospitalisation de la personne atteinte d'Ebola",
-              "date": "2026-11-11",
-              "url": "https://www.hug.ch/actualite/sortie-hospitalisation-personne-atteinte-ebola"
+              "label": "Santé mentale : un nouveau dispositif en ligne pour aider les jeunes",
+              "date": "2026-11-20",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19151"
             },
             {
-              "label": "OCIRT-Formation 100-26 - Aménagement des locaux de travail : de la conception à la réalisation dans le respect des exigences légales en matière de santé et sécurité au travail",
-              "date": "2026-11-10",
-              "url": "https://www.ge.ch/node/45417"
+              "label": "Travailler à l’ère de l’IA : pourquoi se former tout au long de sa carrière est essentiel",
+              "date": "2026-11-19",
+              "url": "https://www.ge.ch/node/45396"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -620,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "GE",
@@ -659,37 +659,37 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-15T23:00:00.000Z"
+              "date": "2026-11-25T23:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-16T23:00:00.000Z"
+              "date": "2026-11-26T23:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-17T23:00:00.000Z"
+              "date": "2026-11-27T23:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-18T23:00:00.000Z"
+              "date": "2026-11-28T23:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-19T23:00:00.000Z"
+              "date": "2026-11-29T23:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-11-20T23:00:00.000Z"
+              "date": "2026-11-30T23:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-16T06:48:18.514Z"
+          "updatedAt": "2026-11-25T21:12:11.717Z"
         },
         {
           "id": "meteo",
@@ -698,12 +698,12 @@
           "items": [
             {
               "label": "Genève",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 9 à 12 °C"
+              "value": "6 °C",
+              "detail": "aujourd’hui de 4 à 7 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -711,37 +711,37 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
-              "label": "SEROCoV-WORK+ : six ans de recherche pour mieux comprendre la pandémie",
-              "date": "2026-11-13",
-              "url": "https://www.hug.ch/actualite/serocov-work-six-ans-recherche-pour-mieux-comprendre-pandemie"
+              "label": "Le site internet de l'Observatoire statistique transfrontalier fait peau neuve",
+              "date": "2026-11-24T13:15:00.000Z",
+              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10899&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6093"
             },
             {
-              "label": "Promotion de la vie affective et de la santé sexuelle",
-              "date": "2026-11-13",
-              "url": "https://www.ge.ch/node/36459"
+              "label": "Les HUG renforcent la sécurité au Service des urgences adultes avec un dispositif de vidéoprotection",
+              "date": "2026-11-24",
+              "url": "https://www.hug.ch/actualite/hug-renforcent-securite-au-service-urgences-adultes-avec-dispositif-videoprotection"
             },
             {
-              "label": "OCIRT-Formation 220-26 - Loi sur l’égalité : état des lieux, aspects juridiques et mise en œuvre",
-              "date": "2026-11-12",
-              "url": "https://www.ge.ch/node/44025"
+              "label": "Quatre experts des HUG parmi les chercheuses et chercheurs les plus cités au monde",
+              "date": "2026-11-24",
+              "url": "https://www.hug.ch/actualite/quatre-experts-hug-parmi-chercheuses-chercheurs-plus-cites-au-monde"
             },
             {
-              "label": "Directive relative aux permissions d'exercer une activité professionnelle dans les eaux genevoises",
-              "date": "2026-11-12",
-              "url": "https://www.ge.ch/node/45491"
+              "label": "Le site de l'Observatoire statistique transfrontalier fait peau neuve",
+              "date": "2026-11-24",
+              "url": "https://www.crfginfo.org/fr/actualites/le-site-de-lobservatoire-statistique-transfrontalier-fait-peau-neuve"
             },
             {
-              "label": "Sortie d'hospitalisation de la personne atteinte d'Ebola",
-              "date": "2026-11-11",
-              "url": "https://www.hug.ch/actualite/sortie-hospitalisation-personne-atteinte-ebola"
+              "label": "Santé mentale : un nouveau dispositif en ligne pour aider les jeunes",
+              "date": "2026-11-20",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19151"
             },
             {
-              "label": "OCIRT-Formation 100-26 - Aménagement des locaux de travail : de la conception à la réalisation dans le respect des exigences légales en matière de santé et sécurité au travail",
-              "date": "2026-11-10",
-              "url": "https://www.ge.ch/node/45417"
+              "label": "Travailler à l’ère de l’IA : pourquoi se former tout au long de sa carrière est essentiel",
+              "date": "2026-11-19",
+              "url": "https://www.ge.ch/node/45396"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -813,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

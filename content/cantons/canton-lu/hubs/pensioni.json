@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "pensioni",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "51d6c9c1dc94522ca1bb0e62ba112413211a0c9f728e26565561abf46be83208",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "834dd11032b5992592511ab18d20d014a29f8d7efc410ae8b541a447ddf783fb",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "LUPK Bulletin 2026",
+              "date": "2026-11-17",
+              "url": "https://www.lupk.ch/de/aktuell/lupk-bulletin-2024-2-2"
+            },
+            {
               "label": "Neue Grenzbeträge per 1.1.2027",
               "date": "2026-11-03",
               "url": "https://www.lupk.ch/de/aktuell/16122024-aenderung-grenzbetraege-112025-2"
@@ -159,14 +164,9 @@
               "label": "Ersatzwahl AN-Vertretung WK 1: Rechtskraft des Wahlergebnisses",
               "date": "2026-09-08",
               "url": "https://www.lupk.ch/de/aktuell/rechtskraft-wahlergebnis-2"
-            },
-            {
-              "label": "Anordnung Gesamterneuerungswahlen Arbeitnehmervertretung 2027 - 2031",
-              "date": "2026-08-28",
-              "url": "https://www.lupk.ch/de/aktuell/publikation-wahltag-ersatzwahl-wk-1-2-2"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -208,7 +208,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "LU",
@@ -317,6 +317,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "LUPK Bulletin 2026",
+              "date": "2026-11-17",
+              "url": "https://www.lupk.ch/de/aktuell/lupk-bulletin-2024-2-2"
+            },
+            {
               "label": "Neue Grenzbeträge per 1.1.2027",
               "date": "2026-11-03",
               "url": "https://www.lupk.ch/de/aktuell/16122024-aenderung-grenzbetraege-112025-2"
@@ -340,14 +345,9 @@
               "label": "Ersatzwahl AN-Vertretung WK 1: Rechtskraft des Wahlergebnisses",
               "date": "2026-09-08",
               "url": "https://www.lupk.ch/de/aktuell/rechtskraft-wahlergebnis-2"
-            },
-            {
-              "label": "Anordnung Gesamterneuerungswahlen Arbeitnehmervertretung 2027 - 2031",
-              "date": "2026-08-28",
-              "url": "https://www.lupk.ch/de/aktuell/publikation-wahltag-ersatzwahl-wk-1-2-2"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -389,7 +389,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "LU",
@@ -498,6 +498,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "LUPK Bulletin 2026",
+              "date": "2026-11-17",
+              "url": "https://www.lupk.ch/de/aktuell/lupk-bulletin-2024-2-2"
+            },
+            {
               "label": "Neue Grenzbeträge per 1.1.2027",
               "date": "2026-11-03",
               "url": "https://www.lupk.ch/de/aktuell/16122024-aenderung-grenzbetraege-112025-2"
@@ -521,14 +526,9 @@
               "label": "Ersatzwahl AN-Vertretung WK 1: Rechtskraft des Wahlergebnisses",
               "date": "2026-09-08",
               "url": "https://www.lupk.ch/de/aktuell/rechtskraft-wahlergebnis-2"
-            },
-            {
-              "label": "Anordnung Gesamterneuerungswahlen Arbeitnehmervertretung 2027 - 2031",
-              "date": "2026-08-28",
-              "url": "https://www.lupk.ch/de/aktuell/publikation-wahltag-ersatzwahl-wk-1-2-2"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -570,7 +570,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "LU",
@@ -679,6 +679,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "LUPK Bulletin 2026",
+              "date": "2026-11-17",
+              "url": "https://www.lupk.ch/de/aktuell/lupk-bulletin-2024-2-2"
+            },
+            {
               "label": "Neue Grenzbeträge per 1.1.2027",
               "date": "2026-11-03",
               "url": "https://www.lupk.ch/de/aktuell/16122024-aenderung-grenzbetraege-112025-2"
@@ -702,14 +707,9 @@
               "label": "Ersatzwahl AN-Vertretung WK 1: Rechtskraft des Wahlergebnisses",
               "date": "2026-09-08",
               "url": "https://www.lupk.ch/de/aktuell/rechtskraft-wahlergebnis-2"
-            },
-            {
-              "label": "Anordnung Gesamterneuerungswahlen Arbeitnehmervertretung 2027 - 2031",
-              "date": "2026-08-28",
-              "url": "https://www.lupk.ch/de/aktuell/publikation-wahltag-ersatzwahl-wk-1-2-2"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -751,7 +751,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

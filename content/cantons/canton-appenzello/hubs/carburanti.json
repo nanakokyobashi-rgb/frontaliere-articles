@@ -4,14 +4,14 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "acf348f4a870b81d203e70cbb61763f9ca528697c75dccc48cafad666f8ba9b7",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "39567a56bc7172f3c115177237acc5fc8226d68b6cde7ed20b7da164c4a6735a",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-15T14:17:31.463Z",
+      "updatedAt": "2026-11-25T17:35:23.405Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-11-22T14:17:31.463Z"
+      "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
   ],
   "locales": {
@@ -54,23 +54,41 @@
             },
             {
               "label": "Benzina 95 — Austria",
-              "value": "1,563 EUR/l",
-              "detail": "media regionale: minimo 1,547 EUR/l, 11 stazioni rilevate",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "1,562 EUR/l",
+              "detail": "media regionale: minimo 1,549 EUR/l, 10 stazioni rilevate",
+              "date": "2026-11-25T17:35:23.405Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "1,996 EUR/l",
-              "detail": "media regionale: minimo 1,987 EUR/l, 10 stazioni rilevate",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "1,954 EUR/l",
+              "detail": "media regionale: minimo 1,939 EUR/l, 11 stazioni rilevate",
+              "date": "2026-11-25T17:35:23.405Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Teufen: tunnel e opere finanziabili fino a 120 milioni",
+          "url": "/articoli-appenzello/teufen-finanziamento-tunnel/",
+          "excerpt": "Il comitato «Teufen mit Zukunft» riferisce che un finanziamento fino a 120 milioni di franchi potrebbe coprire il tunnel ferroviario e altre opere.",
+          "date": "2026-11-26T01:03:39.271Z"
+        },
+        {
+          "title": "Herisau: chiude il laboratorio di tende, 15 coinvolti",
+          "url": "/articoli-appenzello/herisau-chiude-confezione-tende/",
+          "excerpt": "Filtex chiude a Herisau il laboratorio di confezione di tende: la società cita il mercato svizzero dei tessili per la casa e 15 dipendenti coinvolti.",
+          "date": "2026-11-20T19:03:28.168Z"
+        },
+        {
+          "title": "Simon Graf scelto come medico cantonale dei due Appenzello",
+          "url": "/articoli-appenzello/simon-graf-medico-cantonale/",
+          "excerpt": "Simon Graf succede a Henrik Berthel come medico cantonale per Appenzello Esterno e Appenzello Interno, sulla base di un accordo sulle prestazioni.",
+          "date": "2026-11-19T08:14:27.826Z"
+        },
         {
           "title": "Gewerbeverband raccomanda Jung e Ruprecht nel 2027",
           "url": "/articoli-appenzello/governo-appenzello-candidati/",
@@ -82,24 +100,6 @@
           "url": "/articoli-appenzello/consiglio-gruppo-caldo-scuola/",
           "excerpt": "Il Consiglio comunale ha istituito la Arbeitsgruppe «Hitzeschutz und Begrünung»: aule e spazi esterni, con misure rapide per la protezione dal sole.",
           "date": "2026-11-10T02:51:13.479Z"
-        },
-        {
-          "title": "Appenzello, manuel ulmann assunto al bezirksbauamt",
-          "url": "/articoli-appenzello/ulmann-incarico-appenzello/",
-          "excerpt": "Il Consiglio distrettuale di Appenzell ha assunto Manuel Ulmann al 100 per cento: inizierà al Bezirksbauamt all'inizio di febbraio.",
-          "date": "2026-11-03T15:45:25.350Z"
-        },
-        {
-          "title": "Appenzello: approvate le tariffe mediche per il 2026",
-          "url": "/articoli-appenzello/tariffe-mediche-appenzello-2026/",
-          "excerpt": "La Standeskommission fissa il valore del punto tariffario a 0,86 CHF per le prestazioni ambulatoriali con effetto retroattivo dal 1° gennaio 2026.",
-          "date": "2026-11-03T10:02:49.152Z"
-        },
-        {
-          "title": "Appenzello Esterno: più giorni caldi nel 2026",
-          "url": "/articoli-appenzello/caldo-appenzello-esterno-2026/",
-          "excerpt": "Il confronto degli anni dal 2022 al 2026 mostra che, nell'estate 2026, nei siti esaminati del Canton Appenzello Esterno sono stati registrati sia più giorni caldi sia più notti tropicali.",
-          "date": "2026-11-03T08:54:47.590Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -153,23 +153,41 @@
             },
             {
               "label": "Petrol 95 — Austria",
-              "value": "1.563 EUR/l",
-              "detail": "regional average: lowest 1.547 EUR/l, 11 stations surveyed",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "1.562 EUR/l",
+              "detail": "regional average: lowest 1.549 EUR/l, 10 stations surveyed",
+              "date": "2026-11-25T17:35:23.405Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "1.996 EUR/l",
-              "detail": "regional average: lowest 1.987 EUR/l, 10 stations surveyed",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "1.954 EUR/l",
+              "detail": "regional average: lowest 1.939 EUR/l, 11 stations surveyed",
+              "date": "2026-11-25T17:35:23.405Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Teufen: tunnel and projects fundable up to 120 million",
+          "url": "/en/appenzell-articles/teufen-tunnel-investment-financing/",
+          "excerpt": "The «Teufen mit Zukunft» committee reports that financing of up to 120 million francs could cover the railway tunnel and other projects.",
+          "date": "2026-11-26T01:03:39.271Z"
+        },
+        {
+          "title": "Herisau: curtain workshop closes, 15 affected",
+          "url": "/en/appenzell-articles/herisau-curtain-workshop-closure/",
+          "excerpt": "Filtex is closing its curtain-making workshop in Herisau: the company cites the Swiss home textiles market and 15 employees affected.",
+          "date": "2026-11-20T19:03:28.168Z"
+        },
+        {
+          "title": "Simon Graf chosen as cantonal physician for the two Appenzell cantons",
+          "url": "/en/appenzell-articles/simon-graf-cantonal-doctor/",
+          "excerpt": "Simon Graf succeeds Henrik Berthel as cantonal physician for Appenzell Ausserrhoden and Appenzell Innerrhoden, based on a performance agreement.",
+          "date": "2026-11-19T08:14:27.826Z"
+        },
         {
           "title": "Gewerbeverband recommends Jung and Ruprecht in 2027",
           "url": "/en/appenzell-articles/appenzell-government-candidates/",
@@ -181,24 +199,6 @@
           "url": "/en/appenzell-articles/council-school-heat-group/",
           "excerpt": "The City Council established the Arbeitsgruppe «Hitzeschutz und Begrünung»: classrooms and outdoor spaces, with rapid measures for protection from the sun.",
           "date": "2026-11-10T02:51:13.479Z"
-        },
-        {
-          "title": "Appenzell, Manuel Ulmann hired at the Bezirksbauamt",
-          "url": "/en/appenzell-articles/ulmann-appenzell-appointment/",
-          "excerpt": "The Appenzell District Council has hired Manuel Ulmann on a 100 percent basis: he will start at the Bezirksbauamt at the beginning of February.",
-          "date": "2026-11-03T15:45:25.350Z"
-        },
-        {
-          "title": "Appenzell: medical fees approved for 2026",
-          "url": "/en/appenzell-articles/medical-tariffs-appenzell-2026/",
-          "excerpt": "The Standeskommission sets the tariff point value at 0,86 CHF for outpatient services, retroactive to January 1, 2026.",
-          "date": "2026-11-03T10:02:49.152Z"
-        },
-        {
-          "title": "Appenzell Ausserrhoden: more hot days in 2026",
-          "url": "/en/appenzell-articles/heat-appenzell-ausserrhoden-2026/",
-          "excerpt": "The comparison of the years from 2022 to 2026 shows that, in summer 2026, both more hot days and more tropical nights were recorded at the sites examined in the Canton of Appenzell Ausserrhoden.",
-          "date": "2026-11-03T08:54:47.590Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -252,23 +252,41 @@
             },
             {
               "label": "Benzin 95 — Österreich",
-              "value": "1.563 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.547 EUR/l, 11 erfasste Tankstellen",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "1.562 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.549 EUR/l, 10 erfasste Tankstellen",
+              "date": "2026-11-25T17:35:23.405Z"
             },
             {
               "label": "Diesel — Österreich",
-              "value": "1.996 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.987 EUR/l, 10 erfasste Tankstellen",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "1.954 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.939 EUR/l, 11 erfasste Tankstellen",
+              "date": "2026-11-25T17:35:23.405Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Teufen: Tunnel und weitere Bauvorhaben bis zu 120 Millionen finanzierbar",
+          "url": "/de/appenzell-artikel/teufen-tunnel-investitionen/",
+          "excerpt": "Das Komitee «Teufen mit Zukunft» berichtet, dass eine Finanzierung von bis zu 120 Millionen Franken den Eisenbahntunnel und weitere Bauvorhaben abdecken könnte.",
+          "date": "2026-11-26T01:03:39.271Z"
+        },
+        {
+          "title": "Herisau: Werkstatt für Vorhangkonfektion schliesst, 15 betroffen",
+          "url": "/de/appenzell-artikel/herisau-vorhangnaeherei-schliesst/",
+          "excerpt": "Filtex schliesst in Herisau die Werkstatt für Vorhangkonfektion: Das Unternehmen verweist auf den Schweizer Markt für Heimtextilien und 15 betroffene Mitarbeitende.",
+          "date": "2026-11-20T19:03:28.168Z"
+        },
+        {
+          "title": "Simon Graf als Kantonsarzt der beiden Appenzell ausgewählt",
+          "url": "/de/appenzell-artikel/simon-graf-kantonsarzt/",
+          "excerpt": "Simon Graf folgt Henrik Berthel als Kantonsarzt für Appenzell Ausserrhoden und Appenzell Innerrhoden auf der Grundlage einer Leistungsvereinbarung.",
+          "date": "2026-11-19T08:14:27.826Z"
+        },
         {
           "title": "Gewerbeverband empfiehlt Jung und Ruprecht im Jahr 2027",
           "url": "/de/appenzell-artikel/appenzell-regierungsrat-kandidaten/",
@@ -280,24 +298,6 @@
           "url": "/de/appenzell-artikel/gemeinderat-hitzeschutz-schule/",
           "excerpt": "Der Gemeinderat hat die Arbeitsgruppe «Hitzeschutz und Begrünung» eingerichtet: Klassenräume und Außenbereiche, mit schnellen Maßnahmen zum Sonnenschutz.",
           "date": "2026-11-10T02:51:13.479Z"
-        },
-        {
-          "title": "Appenzell, Manuel Ulmann beim Bezirksbauamt angestellt",
-          "url": "/de/appenzell-artikel/ulmann-anstellung-appenzell/",
-          "excerpt": "Der Bezirksrat von Appenzell hat Manuel Ulmann mit einem Beschäftigungsgrad von 100 Prozent angestellt: Die Tätigkeit beim Bezirksbauamt beginnt Anfang Februar.",
-          "date": "2026-11-03T15:45:25.350Z"
-        },
-        {
-          "title": "Appenzell: Medizinische Tarife für 2026 genehmigt",
-          "url": "/de/appenzell-artikel/arzttarife-appenzell-2026/",
-          "excerpt": "Die Vereinbarungen betreffen die Vergütung ambulanter medizinischer Leistungen im Rahmen der Pflichtkrankenversicherung. Für die drei Verträge gilt das angegebene Inkrafttredungsdatum rückwirkend zum 1. Januar 2026 und…",
-          "date": "2026-11-03T10:02:49.152Z"
-        },
-        {
-          "title": "Appenzell Ausserrhoden: mehr heiße Tage im Jahr 2026",
-          "url": "/de/appenzell-artikel/hitzebelastung-appenzell-ausserrhoden-2026/",
-          "excerpt": "Aus der Gegenüberstellung der Jahre 2022 bis 2026 geht hervor, dass die untersuchten Standorte im Kanton Appenzell Ausserrhoden im Sommer 2026 sowohl eine höhere Zahl heisser Tage als auch mehr Tropennächte aufwiesen.",
-          "date": "2026-11-03T08:54:47.590Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -351,23 +351,41 @@
             },
             {
               "label": "Essence 95 — Autriche",
-              "value": "1,563 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,547 EUR/l, 11 stations relevées",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "1,562 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,549 EUR/l, 10 stations relevées",
+              "date": "2026-11-25T17:35:23.405Z"
             },
             {
               "label": "Diesel — Autriche",
-              "value": "1,996 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,987 EUR/l, 10 stations relevées",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "1,954 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,939 EUR/l, 11 stations relevées",
+              "date": "2026-11-25T17:35:23.405Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Teufen : tunnel et ouvrages finançables jusqu’à 120 millions",
+          "url": "/fr/articles-appenzell/teufen-tunnel-investissements/",
+          "excerpt": "Le comité « Teufen mit Zukunft » indique qu’un financement pouvant atteindre 120 millions de francs pourrait couvrir le tunnel ferroviaire et d’autres ouvrages.",
+          "date": "2026-11-26T01:03:39.271Z"
+        },
+        {
+          "title": "Herisau : l’atelier de confection de rideaux ferme, 15 personnes concernées",
+          "url": "/fr/articles-appenzell/herisau-atelier-rideaux-ferme/",
+          "excerpt": "Filtex ferme à Herisau son atelier de confection de rideaux : la société cite le marché suisse du textile de maison et 15 employés concernés.",
+          "date": "2026-11-20T19:03:28.168Z"
+        },
+        {
+          "title": "Simon Graf choisi comme médecin cantonal des deux Appenzell",
+          "url": "/fr/articles-appenzell/simon-graf-medecin-cantonal/",
+          "excerpt": "Simon Graf succède à Henrik Berthel comme médecin cantonal pour Appenzell Rhodes-Extérieures et Appenzell Rhodes-Intérieures, sur la base d’un accord de prestations.",
+          "date": "2026-11-19T08:14:27.826Z"
+        },
         {
           "title": "Gewerbeverband recommande Jung et Ruprecht en 2027",
           "url": "/fr/articles-appenzell/candidats-gouvernement-appenzell/",
@@ -379,24 +397,6 @@
           "url": "/fr/articles-appenzell/groupe-conseil-chaleur-ecole/",
           "excerpt": "Le conseil municipal a créé le groupe de travail « Hitzeschutz und Begrünung » : salles de classe et espaces extérieurs, avec des mesures rapides de protection contre le soleil.",
           "date": "2026-11-10T02:51:13.479Z"
-        },
-        {
-          "title": "Appenzell, Manuel Ulmann engagé au Bezirksbauamt",
-          "url": "/fr/articles-appenzell/ulmann-nomination-appenzell/",
-          "excerpt": "Le Conseil de district d'Appenzell a engagé Manuel Ulmann à 100 pour cent : il commencera au Bezirksbauamt au début de février.",
-          "date": "2026-11-03T15:45:25.350Z"
-        },
-        {
-          "title": "Appenzell : tarifs médicaux approuvés pour 2026",
-          "url": "/fr/articles-appenzell/tarifs-medicaux-appenzell-2026/",
-          "excerpt": "La Standeskommission fixe la valeur en points tarifaires à 0,86 CHF pour les services ambulatoires avec effet rétroactif à compter du 1er janvier 2026.",
-          "date": "2026-11-03T10:02:49.152Z"
-        },
-        {
-          "title": "Appenzell Rhodes-Extérieures : davantage de jours chauds en 2026",
-          "url": "/fr/articles-appenzell/chaleur-appenzell-rhodes-exterieures-2026/",
-          "excerpt": "La comparaison des années 2022 à 2026 montre qu'au cours de l'été 2026, à la fois davantage de jours chauds et davantage de nuits tropicales ont été enregistrés sur les sites examinés du canton d'Appenzell…",
-          "date": "2026-11-03T08:54:47.590Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

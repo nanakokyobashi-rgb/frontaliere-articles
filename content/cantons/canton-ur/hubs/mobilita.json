@@ -4,17 +4,17 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "c162570f1786e7dfdf1497789b55ed2fc2d531aeab47d09b5da7464a3a14a87f",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "d31f7166c3e6db854477edca121785c2de0f5f39ed2717586b32e362bbff250d",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-16T07:21:34.368Z",
+      "updatedAt": "2026-11-25T19:39:26.365Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "2",
-          "note": "segnalazioni aggiornate: 16 novembre 2026"
+          "value": "1",
+          "note": "segnalazioni aggiornate: 25 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "7",
-          "note": "segnalazioni aggiornate: 16 novembre 2026"
+          "value": "5",
+          "note": "segnalazioni aggiornate: 25 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -48,10 +48,9 @@
               "date": "2026-09-09T07:08:00.000Z"
             },
             {
-              "label": "A2 Luzern -> S. Gottardo tra Svincolo autostradale Erstfeld E Galleria Galleria Platti Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: corsia d'emergenza…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 19 novembre 2026",
-              "date": "2026-11-12T12:00:00.000Z"
+              "label": "Revocato: A2 S. Gottardo <-> Luzern tra Raccordo autostradale Diramazione Altdorf E Galleria Galleria Seelisberg Situazione: pericolo Causa: animali sulla strada",
+              "value": "Traffico",
+              "date": "2026-11-17T23:46:00.000Z"
             },
             {
               "label": "H2 Airolo <-> Göschenen tra Luogo Andermatt E Luogo Hospental Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 4.0…",
@@ -66,38 +65,37 @@
               "date": "2026-10-06T11:16:00.000Z"
             },
             {
-              "label": "A2 S. Gottardo -> Luzern tra Area di servizio S. Gottardo E Raccordo autostradale Diramazione Altdorf Situazione: problemi di traffico cantiere, lunghezza [km] 0.15 Limitazione del traffico: corsie…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 17 novembre 2026",
-              "date": "2026-10-27T13:01:00.000Z"
-            },
-            {
               "label": "A2 S. Gottardo <-> Luzern tra Svincolo autostradale Amsteg E Galleria Galleria Naxberg Situazione: problemi di traffico cantiere, lunghezza [km] 1.0 Limitazione del traffico: corsie strette ridotta…",
               "value": "Cantiere",
               "detail": "fine prevista: 26 novembre 2026",
               "date": "2026-11-02T05:11:00.000Z"
             },
             {
-              "label": "A2 Luzern -> S. Gottardo tra Raccordo autostradale Diramazione Altdorf E Area di servizio S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Limitazione del traffico: corsie…",
+              "label": "A4 Brunnen -> Altdorf tra Luogo Sisikon E Galleria Galleria Flüelen Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.3",
               "value": "Cantiere",
-              "detail": "fine prevista: 26 novembre 2026",
-              "date": "2026-11-04T10:45:00.000Z"
+              "detail": "fine prevista: 27 novembre 2026",
+              "date": "2026-11-19T12:05:00.000Z"
             },
             {
-              "label": "A2 S. Gottardo <-> Luzern tra Svincolo autostradale Amsteg E Galleria Galleria Platti Situazione: problemi di traffico cantiere, lunghezza [km] 0.7 Limitazione del traffico: nuova viabilità Aggiunta…",
+              "label": "A2 S. Gottardo <-> Luzern tra Galleria Galleria Seelisberg E Raccordo autostradale Diramazione Altdorf Situazione: problemi di traffico cantiere, lunghezza [km] 2.4 Limitazione del traffico: corsie…",
               "value": "Cantiere",
-              "detail": "fine prevista: 17 novembre 2026",
-              "date": "2026-11-11T13:24:00.000Z"
+              "detail": "fine prevista: 3 dicembre 2026",
+              "date": "2026-11-25T13:11:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Änderung der Verkehrsregelnverordnung und der Verkehrszulassungsverordnung ...",
+              "date": "2026-11-19",
+              "url": "https://www.ur.ch/_rte/information/139405"
+            },
             {
               "label": "Ermächtigung zur Erhebung von Ordnungsbussen auf der ...",
               "date": "2026-11-03",
@@ -122,17 +120,18 @@
               "label": "Axenstrasse: nächtliche Sperrungen für Unterhalts- ...",
               "date": "2026-10-27",
               "url": "https://www.ur.ch/_rte/information/139150"
-            },
-            {
-              "label": "Bristenstrasse: Sperrungen wegen Nachtarbeiten",
-              "date": "2026-10-13",
-              "url": "https://www.ur.ch/_rte/information/138850"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Uri presenta un parere sui trasporti eccezionali",
+          "url": "/articoli-uri/uri-parere-trasporti-eccezionali/",
+          "excerpt": "Il Canton Uri ha inviato all'UVEK un parere su due ordinanze e sull'accompagnamento privato dei trasporti eccezionali nell'ambito della consultazione.",
+          "date": "2026-11-21T04:34:25.602Z"
+        },
         {
           "title": "Axenstrasse chiusa di notte per lavori di manutenzione nel Canton Uri",
           "url": "/articoli-uri/axenstrasse-chiusa-novembre-2026/",
@@ -146,10 +145,22 @@
           "date": "2026-10-27T11:34:34.578Z"
         },
         {
+          "title": "Blocco di roccia danneggia strada nel Meiental",
+          "url": "/articoli-uri/blocco-roccia-meiental/",
+          "excerpt": "Un blocco di roccia ha danneggiato strada cantonale e linea elettrica nel Meiental.",
+          "date": "2026-11-20T16:58:49.042Z"
+        },
+        {
           "title": "Seedorf: Reussstrasse chiusa per lavori di innesto",
           "url": "/articoli-uri/seedorf-reussstrasse-lavori-innesto/",
           "excerpt": "La Reussstrasse a Seedorf sarà chiusa per lavori all'innesto verso sud, direzione Attinghausen, in vista della pista ciclabile Altdorf-Seedorf.",
           "date": "2026-11-03T12:26:50.675Z"
+        },
+        {
+          "title": "Radweg Altdorf-Seedorf: Nessun servizio invernale su Byfangweg",
+          "url": "/articoli-uri/radweg-altdorf-seedorf-lavori/",
+          "excerpt": "La Baudirektion Uri ha comunicato regole speciali per il percorso ciclabile e pedonale tra Altdorf e Seedorf, ancora interessato da lavori.",
+          "date": "2026-11-21T11:01:17.886Z"
         },
         {
           "title": "Passo del Gottardo: chiusura invernale da giovedì",
@@ -162,24 +173,6 @@
           "url": "/articoli-uri/susten-furka-chiusura-invernale/",
           "excerpt": "Dal mercoledì 28 ottobre i passi della Furka e del Susten sono chiusi per l'inverno; il passo del San Gottardo resta percorribile di giorno.",
           "date": "2026-10-28T17:45:24.471Z"
-        },
-        {
-          "title": "Axenstrasse chiusa per quattro notti dal 2 al 6 novembre",
-          "url": "/articoli-uri/axenstrasse-chiusa-quattro-notti/",
-          "excerpt": "La Axenstrasse sarà completamente chiusa dal 2 al 6 novembre, ogni notte dalle 22 alle 5, per lavori di manutenzione.",
-          "date": "2026-10-20T09:56:09.960Z"
-        },
-        {
-          "title": "Incendio di un veicolo, chiuso il tunnel di Flüelen",
-          "url": "/articoli-uri/incendio-tunnel-fluelen/",
-          "excerpt": "Un incendio di un veicolo ha imposto la chiusura del tunnel di Flüelen per circa un'ora e mezza giovedì 29 ottobre.",
-          "date": "2026-10-31T10:27:30.338Z"
-        },
-        {
-          "title": "Passhöhe-Urnerboden: chiusura notturna della strada",
-          "url": "/articoli-uri/uri-chiusura-passhoehe/",
-          "excerpt": "Strada cantonale chiusa di notte tra Passhöhe e Urnerboden dal 14 al 15 ottobre per lavori di pavimentazione; con maltempo, i lavori slittano.",
-          "date": "2026-10-08T23:39:16.200Z"
         }
       ],
       "latestCantonArticles": [],
@@ -193,7 +186,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "UR",
@@ -203,13 +196,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "2",
-          "note": "reports as of 16 November 2026"
+          "value": "1",
+          "note": "reports as of 25 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "7",
-          "note": "reports as of 16 November 2026"
+          "value": "5",
+          "note": "reports as of 25 November 2026"
         }
       ],
       "dataBlocks": [
@@ -224,10 +217,9 @@
               "date": "2026-09-09T07:08:00.000Z"
             },
             {
-              "label": "A2 Luzern -> S. Gottardo tra Svincolo autostradale Erstfeld E Galleria Galleria Platti Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: corsia d'emergenza…",
-              "value": "Closure",
-              "detail": "until 19 November 2026",
-              "date": "2026-11-12T12:00:00.000Z"
+              "label": "Revocato: A2 S. Gottardo <-> Luzern tra Raccordo autostradale Diramazione Altdorf E Galleria Galleria Seelisberg Situazione: pericolo Causa: animali sulla strada",
+              "value": "Traffic",
+              "date": "2026-11-17T23:46:00.000Z"
             },
             {
               "label": "H2 Airolo <-> Göschenen tra Luogo Andermatt E Luogo Hospental Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 4.0…",
@@ -242,38 +234,37 @@
               "date": "2026-10-06T11:16:00.000Z"
             },
             {
-              "label": "A2 S. Gottardo -> Luzern tra Area di servizio S. Gottardo E Raccordo autostradale Diramazione Altdorf Situazione: problemi di traffico cantiere, lunghezza [km] 0.15 Limitazione del traffico: corsie…",
-              "value": "Roadworks",
-              "detail": "until 17 November 2026",
-              "date": "2026-10-27T13:01:00.000Z"
-            },
-            {
               "label": "A2 S. Gottardo <-> Luzern tra Svincolo autostradale Amsteg E Galleria Galleria Naxberg Situazione: problemi di traffico cantiere, lunghezza [km] 1.0 Limitazione del traffico: corsie strette ridotta…",
               "value": "Roadworks",
               "detail": "until 26 November 2026",
               "date": "2026-11-02T05:11:00.000Z"
             },
             {
-              "label": "A2 Luzern -> S. Gottardo tra Raccordo autostradale Diramazione Altdorf E Area di servizio S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Limitazione del traffico: corsie…",
+              "label": "A4 Brunnen -> Altdorf tra Luogo Sisikon E Galleria Galleria Flüelen Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.3",
               "value": "Roadworks",
-              "detail": "until 26 November 2026",
-              "date": "2026-11-04T10:45:00.000Z"
+              "detail": "until 27 November 2026",
+              "date": "2026-11-19T12:05:00.000Z"
             },
             {
-              "label": "A2 S. Gottardo <-> Luzern tra Svincolo autostradale Amsteg E Galleria Galleria Platti Situazione: problemi di traffico cantiere, lunghezza [km] 0.7 Limitazione del traffico: nuova viabilità Aggiunta…",
+              "label": "A2 S. Gottardo <-> Luzern tra Galleria Galleria Seelisberg E Raccordo autostradale Diramazione Altdorf Situazione: problemi di traffico cantiere, lunghezza [km] 2.4 Limitazione del traffico: corsie…",
               "value": "Roadworks",
-              "detail": "until 17 November 2026",
-              "date": "2026-11-11T13:24:00.000Z"
+              "detail": "until 3 December 2026",
+              "date": "2026-11-25T13:11:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Änderung der Verkehrsregelnverordnung und der Verkehrszulassungsverordnung ...",
+              "date": "2026-11-19",
+              "url": "https://www.ur.ch/_rte/information/139405"
+            },
             {
               "label": "Ermächtigung zur Erhebung von Ordnungsbussen auf der ...",
               "date": "2026-11-03",
@@ -298,17 +289,18 @@
               "label": "Axenstrasse: nächtliche Sperrungen für Unterhalts- ...",
               "date": "2026-10-27",
               "url": "https://www.ur.ch/_rte/information/139150"
-            },
-            {
-              "label": "Bristenstrasse: Sperrungen wegen Nachtarbeiten",
-              "date": "2026-10-13",
-              "url": "https://www.ur.ch/_rte/information/138850"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Uri presents an opinion on exceptional transports",
+          "url": "/en/uri-articles/uri-transport-rules-consultation/",
+          "excerpt": "Canton Uri has sent the UVEK an opinion on two ordinances and on the private escorting of exceptional transports as part of the consultation.",
+          "date": "2026-11-21T04:34:25.602Z"
+        },
         {
           "title": "Axenstrasse closed at night for maintenance work in the Canton of Uri",
           "url": "/en/uri-articles/axenstrasse-closed-november-2026/",
@@ -322,10 +314,22 @@
           "date": "2026-10-27T11:34:34.578Z"
         },
         {
+          "title": "Rockfall damages road in Meiental",
+          "url": "/en/uri-articles/rockfall-road-meiental/",
+          "excerpt": "A rockfall damaged the cantonal road and power line in Meiental.",
+          "date": "2026-11-20T16:58:49.042Z"
+        },
+        {
           "title": "Seedorf: Reussstrasse closed for connection works",
           "url": "/en/uri-articles/seedorf-reussstrasse-works-inlet/",
           "excerpt": "Reussstrasse in Seedorf will be closed for construction work at the southern junction, toward Attinghausen, in preparation for the Altdorf-Seedorf cycle path.",
           "date": "2026-11-03T12:26:50.675Z"
+        },
+        {
+          "title": "Altdorf-Seedorf cycle path: No winter service on Byfangweg",
+          "url": "/en/uri-articles/altdorf-seedorf-path-works/",
+          "excerpt": "Baudirektion Uri has announced special rules for the cycle and pedestrian path between Altdorf and Seedorf, which is still affected by construction work.",
+          "date": "2026-11-21T11:01:17.886Z"
         },
         {
           "title": "Gotthard Pass: winter closure from Thursday",
@@ -338,24 +342,6 @@
           "url": "/en/uri-articles/susten-furka-winter-closure/",
           "excerpt": "As of Wednesday, October 28, the Furka and Susten passes are closed for the winter; the San Gottardo Pass remains passable during the day.",
           "date": "2026-10-28T17:45:24.471Z"
-        },
-        {
-          "title": "Axenstrasse closed for four nights from November 2 to 6",
-          "url": "/en/uri-articles/axenstrasse-closed-four-nights/",
-          "excerpt": "Axenstrasse will be completely closed from November 2 to 6, every night from 22 to 5, for maintenance work.",
-          "date": "2026-10-20T09:56:09.960Z"
-        },
-        {
-          "title": "Vehicle fire, Flüelen tunnel closed",
-          "url": "/en/uri-articles/vehicle-fire-fluelen-tunnel/",
-          "excerpt": "A vehicle fire forced the closure of the Flüelen tunnel for about an hour and a half on Thursday, October 29.",
-          "date": "2026-10-31T10:27:30.338Z"
-        },
-        {
-          "title": "Passhöhe-Urnerboden: nighttime road closure",
-          "url": "/en/uri-articles/uri-night-road-closure/",
-          "excerpt": "Cantonal road closed at night between Passhöhe and Urnerboden from October 14 to 15 for paving work; in bad weather, the work will be postponed.",
-          "date": "2026-10-08T23:39:16.200Z"
         }
       ],
       "latestCantonArticles": [],
@@ -369,7 +355,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "UR",
@@ -379,13 +365,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "2",
-          "note": "Meldungen vom 16. November 2026"
+          "value": "1",
+          "note": "Meldungen vom 25. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "7",
-          "note": "Meldungen vom 16. November 2026"
+          "value": "5",
+          "note": "Meldungen vom 25. November 2026"
         }
       ],
       "dataBlocks": [
@@ -400,10 +386,9 @@
               "date": "2026-09-09T07:08:00.000Z"
             },
             {
-              "label": "A2 Luzern -> Gotthard zwischen Anschluss Erstfeld und Tunnel Platti-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Verkehrsführung: Pannenstreifen gesperrt Zusatz 1: vorübergehende…",
-              "value": "Sperrung",
-              "detail": "bis 19. November 2026",
-              "date": "2026-11-12T12:00:00.000Z"
+              "label": "Aufgehoben: A2 Gotthard <-> Luzern zwischen Autobahndreieck Verzweigung Altdorf und Tunnel Seelisberg-Tunnel Sachlage: Gefahr Ursache: Tiere auf der Fahrbahn",
+              "value": "Verkehr",
+              "date": "2026-11-17T23:46:00.000Z"
             },
             {
               "label": "H2 Airolo <-> Göschenen zwischen Ortschaft Andermatt und Ortschaft Hospental Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.5 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m]…",
@@ -418,38 +403,37 @@
               "date": "2026-10-06T11:16:00.000Z"
             },
             {
-              "label": "A2 Gotthard -> Luzern zwischen Raststätte Gotthard und Autobahndreieck Verzweigung Altdorf Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.15 Verkehrsführung: Fahrbahnverengung auf einen…",
-              "value": "Baustelle",
-              "detail": "bis 17. November 2026",
-              "date": "2026-10-27T13:01:00.000Z"
-            },
-            {
               "label": "A2 Gotthard <-> Luzern zwischen Anschluss Amsteg und Tunnel Naxberg-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.0 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt…",
               "value": "Baustelle",
               "detail": "bis 26. November 2026",
               "date": "2026-11-02T05:11:00.000Z"
             },
             {
-              "label": "A2 Luzern -> Gotthard zwischen Autobahndreieck Verzweigung Altdorf und Raststätte Gotthard Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.5 Verkehrsführung: Fahrbahnverengung auf einen…",
+              "label": "A4 Brunnen -> Altdorf zwischen Ortschaft Sisikon und Tunnel Flüelen-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.3",
               "value": "Baustelle",
-              "detail": "bis 26. November 2026",
-              "date": "2026-11-04T10:45:00.000Z"
+              "detail": "bis 27. November 2026",
+              "date": "2026-11-19T12:05:00.000Z"
             },
             {
-              "label": "A2 Gotthard <-> Luzern zwischen Anschluss Amsteg und Tunnel Platti-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.7 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende…",
+              "label": "A2 Gotthard <-> Luzern zwischen Tunnel Seelisberg-Tunnel und Autobahndreieck Verzweigung Altdorf Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.4 Verkehrsführung: Fahrbahnverengung auf einen…",
               "value": "Baustelle",
-              "detail": "bis 17. November 2026",
-              "date": "2026-11-11T13:24:00.000Z"
+              "detail": "bis 3. Dezember 2026",
+              "date": "2026-11-25T13:11:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Änderung der Verkehrsregelnverordnung und der Verkehrszulassungsverordnung ...",
+              "date": "2026-11-19",
+              "url": "https://www.ur.ch/_rte/information/139405"
+            },
             {
               "label": "Ermächtigung zur Erhebung von Ordnungsbussen auf der ...",
               "date": "2026-11-03",
@@ -474,17 +458,18 @@
               "label": "Axenstrasse: nächtliche Sperrungen für Unterhalts- ...",
               "date": "2026-10-27",
               "url": "https://www.ur.ch/_rte/information/139150"
-            },
-            {
-              "label": "Bristenstrasse: Sperrungen wegen Nachtarbeiten",
-              "date": "2026-10-13",
-              "url": "https://www.ur.ch/_rte/information/138850"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Uri legt eine Stellungnahme zu Ausnahmetransporten vor",
+          "url": "/de/uri-artikel/uri-verkehrsregeln-vernehmlassung/",
+          "excerpt": "Der Kanton Uri hat dem UVEK im Rahmen der Vernehmlassung eine Stellungnahme zu zwei Verordnungen und zur privaten Begleitung von Ausnahmetransporten übermittelt.",
+          "date": "2026-11-21T04:34:25.602Z"
+        },
         {
           "title": "Axenstrasse nachts wegen Wartungsarbeiten im Kanton Uri gesperrt",
           "url": "/de/uri-artikel/axenstrasse-geschlossen-november-2026/",
@@ -498,10 +483,22 @@
           "date": "2026-10-27T11:34:34.578Z"
         },
         {
+          "title": "Felsblock beschädigt Straße im Meiental",
+          "url": "/de/uri-artikel/felsblock-strasse-meiental/",
+          "excerpt": "Ein Felsblock hat die Kantonsstraße und die Stromleitung im Meiental beschädigt.",
+          "date": "2026-11-20T16:58:49.042Z"
+        },
+        {
           "title": "Seedorf: Reussstrasse wegen Arbeiten an der Einmündung gesperrt",
           "url": "/de/uri-artikel/seedorf-reussstrasse-arbeiten-innesto/",
           "excerpt": "Die Reussstrasse in Seedorf wird wegen Arbeiten an der Einmündung Richtung Süden, in Richtung Attinghausen, im Hinblick auf den Radweg Altdorf-Seedorf gesperrt.",
           "date": "2026-11-03T12:26:50.675Z"
+        },
+        {
+          "title": "Radweg Altdorf-Seedorf: Kein Winterdienst auf dem Byfangweg",
+          "url": "/de/uri-artikel/radweg-altdorf-seedorf-arbeiten/",
+          "excerpt": "Die Baudirektion Uri hat besondere Regeln für den Rad- und Fussweg zwischen Altdorf und Seedorf bekannt gegeben, an dem weiterhin gearbeitet wird.",
+          "date": "2026-11-21T11:01:17.886Z"
         },
         {
           "title": "Gotthardpass: Wintersperre ab Donnerstag",
@@ -514,24 +511,6 @@
           "url": "/de/uri-artikel/susten-furka-wintersperre/",
           "excerpt": "Es lässt sich über die Wintersperre der Furka und des Susten ab Mittwoch, 28. Oktober, berichten sowie über die abweichende Situation am Gotthard, der vorerst tagsüber befahrbar ist.",
           "date": "2026-10-28T17:45:24.471Z"
-        },
-        {
-          "title": "Axenstrasse vom 2. bis 6. November vier Nächte lang gesperrt",
-          "url": "/de/uri-artikel/axenstrasse-vier-naechte-gesperrt/",
-          "excerpt": "Die Axenstrasse wird während vier Nächten im Zeitraum vom 2. bis 6. November vollständig gesperrt.",
-          "date": "2026-10-20T09:56:09.960Z"
-        },
-        {
-          "title": "Brand eines Fahrzeugs, Tunnel von Flüelen geschlossen",
-          "url": "/de/uri-artikel/fahrzeugbrand-fluelen-tunnel/",
-          "excerpt": "Am Donnerstagmorgen, dem 29. Oktober, wurde der Flüeler Tunnel nach einem Fahrzeugbrand etwa eineinhalb Stunden lang gesperrt.",
-          "date": "2026-10-31T10:27:30.338Z"
-        },
-        {
-          "title": "Passhöhe-Urnerboden: nächtliche Sperrung der Straße",
-          "url": "/de/uri-artikel/uri-nachtsperrung-passhoehe/",
-          "excerpt": "Von Dienstag, 14. Oktober, bis Mittwoch, 15. Oktober, wird die Kantonsstraße zwischen Passhöhe und Urnerboden nachts gesperrt.",
-          "date": "2026-10-08T23:39:16.200Z"
         }
       ],
       "latestCantonArticles": [],
@@ -545,7 +524,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "UR",
@@ -555,13 +534,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "2",
-          "note": "signalements au 16 novembre 2026"
+          "value": "1",
+          "note": "signalements au 25 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "7",
-          "note": "signalements au 16 novembre 2026"
+          "value": "5",
+          "note": "signalements au 25 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -576,10 +555,9 @@
               "date": "2026-09-09T07:08:00.000Z"
             },
             {
-              "label": "A2 Lucerne -> St-Gothard entre Jonction autoroutière Erstfeld et Tunnel Tunnel Platti Situation: trafic perturbé travaux, longueur [km] 0.1 Gestion du trafic: bande d'arrêt d'urgence fermée…",
-              "value": "Fermeture",
-              "detail": "jusqu’au 19 novembre 2026",
-              "date": "2026-11-12T12:00:00.000Z"
+              "label": "Révoqué: A2 St-Gothard <-> Lucerne entre Echangeur Echangeur d'Altdorf et Tunnel Tunnel du Seelisberg Situation: danger Raison: animaux sur la route",
+              "value": "Trafic",
+              "date": "2026-11-17T23:46:00.000Z"
             },
             {
               "label": "H2 Airolo <-> Göschenen entre Localité Andermatt et Localité Hospental Situation: trafic perturbé travaux, longueur [km] 0.5 Complément 1: limitation temporaire de largeur largeur de la voie [m] 4.0…",
@@ -594,38 +572,37 @@
               "date": "2026-10-06T11:16:00.000Z"
             },
             {
-              "label": "A2 St-Gothard -> Lucerne entre Aire de service St-Gothard et Echangeur Echangeur d'Altdorf Situation: trafic perturbé travaux, longueur [km] 0.15 Gestion du trafic: rétrécissement des voies sur une…",
-              "value": "Chantier",
-              "detail": "jusqu’au 17 novembre 2026",
-              "date": "2026-10-27T13:01:00.000Z"
-            },
-            {
               "label": "A2 St-Gothard <-> Lucerne entre Jonction autoroutière Amsteg et Tunnel Tunnel Naxberg Situation: trafic perturbé travaux, longueur [km] 1.0 Gestion du trafic: rétrécissement des voies sur une voie…",
               "value": "Chantier",
               "detail": "jusqu’au 26 novembre 2026",
               "date": "2026-11-02T05:11:00.000Z"
             },
             {
-              "label": "A2 Lucerne -> St-Gothard entre Echangeur Echangeur d'Altdorf et Aire de service St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.5 Gestion du trafic: rétrécissement des voies sur une…",
+              "label": "A4 Brunnen -> Altdorf entre Localité Sisikon et Tunnel Tunnel de Flüelen Situation: trafic perturbé travaux, longueur [km] 0.2 Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.3",
               "value": "Chantier",
-              "detail": "jusqu’au 26 novembre 2026",
-              "date": "2026-11-04T10:45:00.000Z"
+              "detail": "jusqu’au 27 novembre 2026",
+              "date": "2026-11-19T12:05:00.000Z"
             },
             {
-              "label": "A2 St-Gothard <-> Lucerne entre Jonction autoroutière Amsteg et Tunnel Tunnel Platti Situation: trafic perturbé travaux, longueur [km] 0.7 Gestion du trafic: nouveau plan de circulation Complément…",
+              "label": "A2 St-Gothard <-> Lucerne entre Tunnel Tunnel du Seelisberg et Echangeur Echangeur d'Altdorf Situation: trafic perturbé travaux, longueur [km] 2.4 Gestion du trafic: rétrécissement des voies sur une…",
               "value": "Chantier",
-              "detail": "jusqu’au 17 novembre 2026",
-              "date": "2026-11-11T13:24:00.000Z"
+              "detail": "jusqu’au 3 décembre 2026",
+              "date": "2026-11-25T13:11:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Änderung der Verkehrsregelnverordnung und der Verkehrszulassungsverordnung ...",
+              "date": "2026-11-19",
+              "url": "https://www.ur.ch/_rte/information/139405"
+            },
             {
               "label": "Ermächtigung zur Erhebung von Ordnungsbussen auf der ...",
               "date": "2026-11-03",
@@ -650,17 +627,18 @@
               "label": "Axenstrasse: nächtliche Sperrungen für Unterhalts- ...",
               "date": "2026-10-27",
               "url": "https://www.ur.ch/_rte/information/139150"
-            },
-            {
-              "label": "Bristenstrasse: Sperrungen wegen Nachtarbeiten",
-              "date": "2026-10-13",
-              "url": "https://www.ur.ch/_rte/information/138850"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Uri présente un avis sur les transports exceptionnels",
+          "url": "/fr/articles-uri/uri-regles-transport-consultation/",
+          "excerpt": "Le canton d'Uri a envoyé à l'UVEK un avis sur deux ordonnances et sur l'accompagnement privé des transports exceptionnels dans le cadre de la consultation.",
+          "date": "2026-11-21T04:34:25.602Z"
+        },
         {
           "title": "Axenstrasse fermée de nuit pour travaux d'entretien dans le canton d'Uri",
           "url": "/fr/articles-uri/axenstrasse-fermee-novembre-2026/",
@@ -674,10 +652,22 @@
           "date": "2026-10-27T11:34:34.578Z"
         },
         {
+          "title": "Un bloc rocheux endommage une route dans le Meiental",
+          "url": "/fr/articles-uri/bloc-roche-route-meiental/",
+          "excerpt": "Un bloc rocheux a endommagé une route cantonale et une ligne électrique dans le Meiental.",
+          "date": "2026-11-20T16:58:49.042Z"
+        },
+        {
           "title": "Seedorf : Reussstrasse fermée pour des travaux de raccordement",
           "url": "/fr/articles-uri/seedorf-reussstrasse-travaux-injection/",
           "excerpt": "La Reussstrasse à Seedorf sera fermée pour des travaux de raccordement vers le sud, en direction d’Attinghausen, dans le cadre de la piste cyclable Altdorf-Seedorf.",
           "date": "2026-11-03T12:26:50.675Z"
+        },
+        {
+          "title": "Piste cyclable Altdorf-Seedorf : Aucun service hivernal sur Byfangweg",
+          "url": "/fr/articles-uri/chemin-altdorf-seedorf-travaux/",
+          "excerpt": "La Baudirektion Uri a communiqué des règles spéciales pour la liaison cyclable et piétonne entre Altdorf et Seedorf, qui fait encore l'objet de travaux.",
+          "date": "2026-11-21T11:01:17.886Z"
         },
         {
           "title": "Col du Gothard : fermeture hivernale dès jeudi",
@@ -690,24 +680,6 @@
           "url": "/fr/articles-uri/fermeture-hivernale-susten-furka/",
           "excerpt": "À partir du mercredi 28 octobre, les cols de la Furka et du Susten sont fermés pour l'hiver ; le col du Saint-Gothard reste praticable de jour.",
           "date": "2026-10-28T17:45:24.471Z"
-        },
-        {
-          "title": "Axenstrasse fermée pendant quatre nuits du 2 au 6 novembre",
-          "url": "/fr/articles-uri/axenstrasse-fermee-quatre-nuits/",
-          "excerpt": "L’Axenstrasse sera complètement fermée du 2 au 6 novembre, chaque nuit de 22 à 5, pour des travaux d’entretien.",
-          "date": "2026-10-20T09:56:09.960Z"
-        },
-        {
-          "title": "Incendie d’un véhicule, tunnel de Flüelen fermé",
-          "url": "/fr/articles-uri/incendie-tunnel-fluelen/",
-          "excerpt": "L’incendie d’un véhicule a entraîné la fermeture du tunnel de Flüelen pendant environ une heure et demie jeudi 29 octobre.",
-          "date": "2026-10-31T10:27:30.338Z"
-        },
-        {
-          "title": "Passhöhe-Urnerboden : fermeture nocturne de la route",
-          "url": "/fr/articles-uri/uri-fermeture-nocturne-route/",
-          "excerpt": "Route cantonale fermée de nuit entre Passhöhe et Urnerboden du 14 au 15 octobre pour des travaux de revêtement ; en cas de mauvais temps, les travaux sont reportés.",
-          "date": "2026-10-08T23:39:16.200Z"
         }
       ],
       "latestCantonArticles": [],
@@ -721,7 +693,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

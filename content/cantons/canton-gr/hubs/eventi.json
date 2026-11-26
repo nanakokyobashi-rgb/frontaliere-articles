@@ -4,17 +4,17 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "58a3a1791a00c9549a3d30d632b5e2f57f3933f2f1e0ed9db44ef25261ad2382",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "5d44a4fe007fb53016c42dbdd0ccfefeedda9e9f4f459783bf3fbdbc5362ec9f",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T21:47:09.888Z",
+      "updatedAt": "2026-11-26T00:32:00.223Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "75",
+          "value": "121",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Klangschnuppern",
-              "detail": "Nada Brahma, Bever",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/events/this-that/bever/sound-sniffing_AmmHUjP"
+              "label": "Bibel Genuss Tage 2025",
+              "detail": "7017 Flims Dorf, Flims",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bibel-genuss-tage-26-29-november-2026/"
             },
             {
-              "label": "Fitness- und Yogakurse",
-              "detail": "Hotel Schweizerhof — in corso, ultimo giorno: 30 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
+              "label": "Weihnachtsbazar",
+              "detail": "Kirchgemeindehaus Titthof, Chur",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/weihnachtsbazar/"
             },
             {
-              "label": "Kaffee & Gipfeli in der Kirchenstube",
-              "detail": "Evang.-ref. Kirche St. Theodul, Davos",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/davos-dorf/kaffee-und-gipfeli-in-der-kirchenstube_AsLZ7dC"
+              "label": "Lesekreis",
+              "detail": "Davos",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesekreis-10/"
             },
             {
-              "label": "AchtsamkeitsFlow in Versam",
-              "detail": "Haus Signina",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/versam/achtsamkeitsflow-in-versam_AEmq5HV"
+              "label": "Sitzung Gemeindeleitung",
+              "detail": "Pfarrhaus Grüsch, Grüsch",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/sitzung-gemeindeleitung_A6sWPAF"
             },
             {
-              "label": "Sketch - Davos",
-              "detail": "KaffeeKlatsch am Platz, Davos",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/davos-platz/sketch-davos_AstSygC"
+              "label": "Lesekreis im Pfarrhaus Fläsch",
+              "detail": "Fläsch",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesekreis-im-pfarrhaus-flaesch-2/"
             },
             {
-              "label": "Geschenke-Bazar und kleiner Flohmarkt des Frauenarbeitskreises",
-              "detail": "Comanderzentrum, Chur",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/geschenke-bazar-und-kleiner-flohmarkt-des-frauenarbeitskreises/"
+              "label": "Bibel Genuss Tage 2025",
+              "detail": "Flims",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bibel-genuss-tage-2025-2/"
             },
             {
-              "label": "Kaffee-Treff für Migrantinnen und Migranten",
-              "detail": "Pfarrsäli bei der Röm.-kath. Kirche Seewis-Pardisla",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/seewis-pardisla/kaffee-treff-fuer-migrantinnen-und-migranten_ABRL7T3"
+              "label": "ENCOUNTER - RHAETO ROMANSH DIGITIZATION",
+              "detail": "Valchava",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/encounter-rhaeto-romansh-digitization/"
             },
             {
               "label": "KiWo - Kinder Workshop",
-              "detail": "Evang- ref. Kirchgemeinde Oberengadin \"refurmo\", Zuoz",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuoz/kiwo-kinder-workshop_AVc3cxi"
+              "detail": "Gemeindeschule Bever, Bever — in corso, ultimo giorno: 9 dicembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bever/kiwo-kinder-workshop_AKNMZ2H"
             },
             {
-              "label": "AKTIV AB 60 - Lotto",
-              "detail": "St. Moritz",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aktiv-ab-60-lotto/"
+              "label": "Konftreff",
+              "detail": "Pfarrhaus Grüsch, Grüsch — in corso, ultimo giorno: 10 dicembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/konftreff-1_AbbGRkk"
             },
             {
-              "label": "Dörflernachmittag 60+",
-              "detail": "Davos",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/doerflernachmittag-60-2/"
+              "label": "J. S. Bach hören und geniessen mit Pfr. Dirk Schulz",
+              "detail": "Pfarrhaus Grüsch, Grüsch — in corso, ultimo giorno: 18 dicembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/j-s-bach-hoeren-und-geniessen-mit-pfr-dirk-schulz_ACByWhJ"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -177,7 +177,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "GR",
@@ -187,7 +187,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "75",
+          "value": "121",
           "note": "from the site’s events calendar"
         }
       ],
@@ -198,69 +198,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Sound sniffing",
-              "detail": "Nada Brahma, Bever",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/events/this-that/bever/sound-sniffing_AmmHUjP"
+              "label": "Bibel Genuss Tage 2025",
+              "detail": "7017 Flims Dorf, Flims",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bibel-genuss-tage-26-29-november-2026/"
             },
             {
-              "label": "Fitness and yoga classes",
-              "detail": "Hotel Schweizerhof — ongoing, last day: 30 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
+              "label": "Weihnachtsbazar",
+              "detail": "Kirchgemeindehaus Titthof, Chur",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/weihnachtsbazar/"
             },
             {
-              "label": "Kaffee & Gipfeli in der Kirchenstube",
-              "detail": "Evang.-ref. Kirche St. Theodul, Davos",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/davos-dorf/kaffee-und-gipfeli-in-der-kirchenstube_AsLZ7dC"
+              "label": "Lesekreis",
+              "detail": "Davos",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesekreis-10/"
             },
             {
-              "label": "AchtsamkeitsFlow in Versam",
-              "detail": "Haus Signina",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/versam/achtsamkeitsflow-in-versam_AEmq5HV"
+              "label": "Sitzung Gemeindeleitung",
+              "detail": "Pfarrhaus Grüsch, Grüsch",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/sitzung-gemeindeleitung_A6sWPAF"
             },
             {
-              "label": "Sketch - Davos",
-              "detail": "KaffeeKlatsch am Platz, Davos",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/davos-platz/sketch-davos_AstSygC"
+              "label": "Lesekreis im Pfarrhaus Fl Fl",
+              "detail": "Fläsch",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesekreis-im-pfarrhaus-flaesch-2/"
             },
             {
-              "label": "Geschenke-Bazar und kleiner Flohmarkt des Frauenarbeitskreises",
-              "detail": "Comanderzentrum, Chur",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/geschenke-bazar-und-kleiner-flohmarkt-des-frauenarbeitskreises/"
+              "label": "Bibel Genuss Tage 2025",
+              "detail": "Flims",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bibel-genuss-tage-2025-2/"
             },
             {
-              "label": "Kaffee-Treff für Migrantinnen und Migranten",
-              "detail": "Pfarrsäli bei der Röm.-kath. Kirche Seewis-Pardisla",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/seewis-pardisla/kaffee-treff-fuer-migrantinnen-und-migranten_ABRL7T3"
+              "label": "ENCOUNTER - RHAETO ROMANSH DIGITIZATION",
+              "detail": "Valchava",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/encounter-rhaeto-romansh-digitization/"
             },
             {
               "label": "KiWo - Kinder Workshop",
-              "detail": "Evang- ref. Kirchgemeinde Oberengadin \"refurmo\", Zuoz",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuoz/kiwo-kinder-workshop_AVc3cxi"
+              "detail": "Gemeindeschule Bever, Bever — ongoing, last day: 9 December 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bever/kiwo-kinder-workshop_AKNMZ2H"
             },
             {
-              "label": "AKTIV AB 60 - Lotto",
-              "detail": "St. Moritz",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aktiv-ab-60-lotto/"
+              "label": "Konftreff",
+              "detail": "Pfarrhaus Grüsch, Grüsch — ongoing, last day: 10 December 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/konftreff-1_AbbGRkk"
             },
             {
-              "label": "Dörflernachmittag 60+",
-              "detail": "Davos",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/doerflernachmittag-60-2/"
+              "label": "J. S. Bach hören und geniessen mit Pfr. Dirk Schulz",
+              "detail": "Pfarrhaus Grüsch, Grüsch — ongoing, last day: 18 December 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/j-s-bach-hoeren-und-geniessen-mit-pfr-dirk-schulz_ACByWhJ"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -273,7 +273,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -337,7 +337,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "GR",
@@ -347,7 +347,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "75",
+          "value": "121",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -358,69 +358,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Klangschnuppern",
-              "detail": "Nada Brahma, Bever",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/events/this-that/bever/sound-sniffing_AmmHUjP"
+              "label": "Bibel Genuss Tage 26. - 29. November 2026",
+              "detail": "7017 Flims Dorf, Flims",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bibel-genuss-tage-26-29-november-2026/"
             },
             {
-              "label": "Fitness- und Yogakurse",
-              "detail": "Hotel Schweizerhof — läuft, letzter Tag: 30. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
+              "label": "Weihnachtsbazar",
+              "detail": "Kirchgemeindehaus Titthof, Chur",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/weihnachtsbazar/"
             },
             {
-              "label": "Kaffee & Gipfeli in der Kirchenstube",
-              "detail": "Evang.-ref. Kirche St. Theodul, Davos",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/davos-dorf/kaffee-und-gipfeli-in-der-kirchenstube_AsLZ7dC"
+              "label": "Lesekreis",
+              "detail": "Davos",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesekreis-10/"
             },
             {
-              "label": "AchtsamkeitsFlow in Versam",
-              "detail": "Haus Signina",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/versam/achtsamkeitsflow-in-versam_AEmq5HV"
+              "label": "Sitzung Gemeindeleitung",
+              "detail": "Pfarrhaus Grüsch, Grüsch",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/sitzung-gemeindeleitung_A6sWPAF"
             },
             {
-              "label": "Sketch - Davos",
-              "detail": "KaffeeKlatsch am Platz, Davos",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/davos-platz/sketch-davos_AstSygC"
+              "label": "Lesekreis im Pfarrhaus FL Graffsch",
+              "detail": "Fläsch",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesekreis-im-pfarrhaus-flaesch-2/"
             },
             {
-              "label": "Geschenke-Bazar und kleiner Flohmarkt des Frauenarbeitskreises",
-              "detail": "Comanderzentrum, Chur",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/geschenke-bazar-und-kleiner-flohmarkt-des-frauenarbeitskreises/"
+              "label": "Gespräch mit den ZEIT Podcast Pfarrerstöchtern «Ein Leben in der Disruption»",
+              "detail": "Flims",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bibel-genuss-tage-2025-2/"
             },
             {
-              "label": "Kaffee-Treff für Migrantinnen und Migranten",
-              "detail": "Pfarrsäli bei der Röm.-kath. Kirche Seewis-Pardisla",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/seewis-pardisla/kaffee-treff-fuer-migrantinnen-und-migranten_ABRL7T3"
+              "label": "BEGEGNUNG – RÄTOROMANISCHE DIGITALISIERUNG",
+              "detail": "Valchava",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/encounter-rhaeto-romansh-digitization/"
             },
             {
               "label": "KiWo - Kinder Workshop",
-              "detail": "Evang- ref. Kirchgemeinde Oberengadin \"refurmo\", Zuoz",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuoz/kiwo-kinder-workshop_AVc3cxi"
+              "detail": "Gemeindeschule Bever, Bever — läuft, letzter Tag: 9. Dezember 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bever/kiwo-kinder-workshop_AKNMZ2H"
             },
             {
-              "label": "AKTIV AB 60 - Lotto",
-              "detail": "St. Moritz",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aktiv-ab-60-lotto/"
+              "label": "Konftreff",
+              "detail": "Pfarrhaus Grüsch, Grüsch — läuft, letzter Tag: 10. Dezember 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/konftreff-1_AbbGRkk"
             },
             {
-              "label": "Dörflernachmittag 60+",
-              "detail": "Davos",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/doerflernachmittag-60-2/"
+              "label": "J. S. Bach hören und geniessen mit Pfr. Dirk Schulz",
+              "detail": "Pfarrhaus Grüsch, Grüsch — läuft, letzter Tag: 18. Dezember 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/j-s-bach-hoeren-und-geniessen-mit-pfr-dirk-schulz_ACByWhJ"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -433,7 +433,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -497,7 +497,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "GR",
@@ -507,7 +507,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "75",
+          "value": "121",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -518,69 +518,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Klangschnuppern",
-              "detail": "Nada Brahma, Bever",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/events/this-that/bever/sound-sniffing_AmmHUjP"
+              "label": "Bibel Genuss Tage 2025",
+              "detail": "7017 Flims Dorf, Flims",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bibel-genuss-tage-26-29-november-2026/"
             },
             {
-              "label": "Fitness- und Yogakurse",
-              "detail": "Hotel Schweizerhof — en cours, dernier jour : 30 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/lenzerheidelai/fitness-und-yogakurse_AACQd2s"
+              "label": "Weihnachtsbazar",
+              "detail": "Kirchgemeindehaus Titthof, Chur",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/weihnachtsbazar/"
             },
             {
-              "label": "Kaffee & Gipfeli in der Kirchenstube",
-              "detail": "Evang.-ref. Kirche St. Theodul, Davos",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/davos-dorf/kaffee-und-gipfeli-in-der-kirchenstube_AsLZ7dC"
+              "label": "Lesekreis",
+              "detail": "Davos",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesekreis-10/"
             },
             {
-              "label": "AchtsamkeitsFlow in Versam",
-              "detail": "Haus Signina",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/versam/achtsamkeitsflow-in-versam_AEmq5HV"
+              "label": "Sitzung Gemeindeleitung",
+              "detail": "Pfarrhaus Grüsch, Grüsch",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/sitzung-gemeindeleitung_A6sWPAF"
             },
             {
-              "label": "Sketch - Davos",
-              "detail": "KaffeeKlatsch am Platz, Davos",
-              "date": "2026-11-17",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/davos-platz/sketch-davos_AstSygC"
+              "label": "Salle de bain au Pfarrhaus Fl Fl",
+              "detail": "Fläsch",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesekreis-im-pfarrhaus-flaesch-2/"
             },
             {
-              "label": "Geschenke-Bazar und kleiner Flohmarkt des Frauenarbeitskreises",
-              "detail": "Comanderzentrum, Chur",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/geschenke-bazar-und-kleiner-flohmarkt-des-frauenarbeitskreises/"
+              "label": "Bibel Genuss Tage 2025",
+              "detail": "Flims",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bibel-genuss-tage-2025-2/"
             },
             {
-              "label": "Kaffee-Treff für Migrantinnen und Migranten",
-              "detail": "Pfarrsäli bei der Röm.-kath. Kirche Seewis-Pardisla",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/seewis-pardisla/kaffee-treff-fuer-migrantinnen-und-migranten_ABRL7T3"
+              "label": "ENCOUNTER - RHAETO ROMANSH DIGITIZATION",
+              "detail": "Valchava",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/encounter-rhaeto-romansh-digitization/"
             },
             {
               "label": "KiWo - Kinder Workshop",
-              "detail": "Evang- ref. Kirchgemeinde Oberengadin \"refurmo\", Zuoz",
-              "date": "2026-11-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuoz/kiwo-kinder-workshop_AVc3cxi"
+              "detail": "Gemeindeschule Bever, Bever — en cours, dernier jour : 9 décembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bever/kiwo-kinder-workshop_AKNMZ2H"
             },
             {
-              "label": "AKTIV AB 60 - Lotto",
-              "detail": "St. Moritz",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aktiv-ab-60-lotto/"
+              "label": "Konftreff",
+              "detail": "Pfarrhaus Grüsch, Grüsch — en cours, dernier jour : 10 décembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/konftreff-1_AbbGRkk"
             },
             {
-              "label": "Dörflernachmittag 60+",
-              "detail": "Davos",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/doerflernachmittag-60-2/"
+              "label": "J. S. Bach hören und geniessen mit Pfr. Dirk Schulz",
+              "detail": "Pfarrhaus Grüsch, Grüsch — en cours, dernier jour : 18 décembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/j-s-bach-hoeren-und-geniessen-mit-pfr-dirk-schulz_ACByWhJ"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -593,7 +593,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -657,7 +657,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

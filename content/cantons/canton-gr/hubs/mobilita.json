@@ -4,22 +4,22 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "4814d7aee24dd06ffda48d61f11fa1db6bcb107e2cb7952fed9c188d6ba0a61f",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "3bc96c0ce3dba48a98c6c6c6b235d043b8a3dd2d109b8ce942758c7722fd4c8d",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-15T23:59:59.000Z",
+      "updatedAt": "2026-11-24T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-16T07:21:34.368Z",
+      "updatedAt": "2026-11-25T19:39:26.365Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -33,113 +33,83 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "St. Luzisteig (Fläsch-Balzers), settimana conclusa: 15 novembre 2026"
+          "note": "Campocologno-Tirano, settimana conclusa: 24 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "7",
-          "note": "segnalazioni aggiornate: 16 novembre 2026"
+          "note": "segnalazioni aggiornate: 25 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "9",
-          "note": "segnalazioni aggiornate: 16 novembre 2026"
+          "value": "5",
+          "note": "segnalazioni aggiornate: 25 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 9 novembre 2026 – 15 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 18 novembre 2026 – 24 novembre 2026, dal più scorrevole al più lento.",
           "items": [
-            {
-              "label": "St. Luzisteig (Fläsch-Balzers)",
-              "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/st-luzisteig/oggi/"
-            },
             {
               "label": "Campocologno-Tirano",
               "value": "0 min",
-              "detail": "49 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/campocologno-tirano/oggi/"
+            },
+            {
+              "label": "Castasegna-Villa di Chiavenna",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/castasegna-villa-di-chiavenna/oggi/"
             },
             {
               "label": "Forcola di Livigno",
               "value": "0 min",
-              "detail": "49 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/forcola-di-livigno/oggi/"
+            },
+            {
+              "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/giogo-di-santa-maria/oggi/"
             },
             {
               "label": "Martina-Nauders (Finstermünz)",
               "value": "0 min",
-              "detail": "49 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/martina-nauders/oggi/"
+            },
+            {
+              "label": "Passo dello Spluga (Montespluga)",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/passo-dello-spluga/oggi/"
             },
             {
               "label": "Samnaun-Spiss",
               "value": "0 min",
-              "detail": "49 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/samnaun-spiss/oggi/"
             },
             {
-              "label": "Tunnel Munt La Schera (Passo del Gallo)",
+              "label": "St. Luzisteig (Fläsch-Balzers)",
               "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/tunnel-munt-la-schera/oggi/"
-            },
-            {
-              "label": "Castasegna-Villa di Chiavenna",
-              "value": "0,1 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/castasegna-villa-di-chiavenna/oggi/"
-            },
-            {
-              "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
-              "value": "0,1 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/giogo-di-santa-maria/oggi/"
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/st-luzisteig/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-15T23:59:59.000Z"
+          "updatedAt": "2026-11-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Chiusure, cantieri e disagi",
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
-            {
-              "label": "A13 Bellinzona -> S. Bernardino Svincolo autostradale Grono Situazione: uscita chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 19 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 S. Bernardino -> Bellinzona tra Svincolo autostradale Lostallo E Svincolo autostradale Roveredo Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Chiusura",
-              "detail": "fine prevista: 18 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona -> S. Bernardino tra Svincolo autostradale Roveredo E Svincolo autostradale Lostallo Situazione: chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 19 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona -> S. Bernardino tra Svincolo autostradale Roveredo E Svincolo autostradale Lostallo Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Chiusura",
-              "detail": "fine prevista: 17 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona -> S. Bernardino Svincolo autostradale Grono Situazione: uscita chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Chiusura",
-              "detail": "fine prevista: 17 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
             {
               "label": "A13 S. Bernardino <-> Chur tra Svincolo autostradale Rothenbrunnen E Svincolo autostradale Bonaduz Situazione: chiusa cantiere",
               "value": "Chiusura",
@@ -153,6 +123,35 @@
               "date": "2026-11-12T12:07:00.000Z"
             },
             {
+              "label": "A13 S. Bernardino <-> Sargans tra Svincolo autostradale Chur Nord E Svincolo autostradale Landquart Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: corsia…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 11 dicembre 2026",
+              "date": "2026-11-19T10:28:00.000Z"
+            },
+            {
+              "label": "A13 Chur -> S. Bernardino tra Svincolo autostradale Chur Nord E Svincolo autostradale Chur Süd Situazione: chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 2 dicembre 2026",
+              "date": "2026-11-25T12:40:00.000Z"
+            },
+            {
+              "label": "Revocato: A13 Bellinzona <-> S. Bernardino Galleria Galleria San Bernardino Situazione: tunnel chiuso Causa: nevicata spazzaneve in uso",
+              "value": "Chiusura",
+              "date": "2026-11-25T17:48:00.000Z"
+            },
+            {
+              "label": "A13 S. Bernardino -> Chur tra Svincolo autostradale Bonaduz E Svincolo autostradale Reichenau Situazione: chiusa cantiere, lunghezza [km] 1.0",
+              "value": "Chiusura",
+              "detail": "fine prevista: 2 dicembre 2026",
+              "date": "2026-12-01T21:00:00.000Z"
+            },
+            {
+              "label": "A13 S. Bernardino <-> Chur tra Svincolo autostradale Rofla E Svincolo autostradale Sufers Situazione: chiusa cantiere, lunghezza [km] 1.1",
+              "value": "Chiusura",
+              "detail": "fine prevista: 3 dicembre 2026",
+              "date": "2026-12-02T21:00:00.000Z"
+            },
+            {
               "label": "A13 S. Bernardino <-> Coira tra Svincolo autostradale Splügen E Svincolo autostradale Sufers Situazione: problemi di traffico cantiere, lunghezza [km] 0.9 Aggiunta 1: limite temporaneo larghezza…",
               "value": "Cantiere",
               "detail": "fine prevista: 31 agosto 2028",
@@ -160,13 +159,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Neue Strassenverkehrssteuer ab 2027",
+              "date": "2026-11-23",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026112301.aspx"
+            },
             {
               "label": "Streckensperrung zwischen Thusis und Preda",
               "date": "2026-11-13",
@@ -191,14 +195,9 @@
               "label": "Ofenbergstrasse: Nachtsperrungen vom 2. bis 6. November 2026",
               "date": "2026-10-27",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026102701.aspx"
-            },
-            {
-              "label": "Der neue Bahnhof Chur West geht in Betrieb",
-              "date": "2026-10-26",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/inbetriebnahme-bahnhof-chur-west/"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -239,16 +238,16 @@
           "date": "2026-10-21T04:02:54.005Z"
         },
         {
-          "title": "IMC Oberengadin chiusa nei weekend per carenza di personale",
-          "url": "/articoli-grigioni/imc-oberengadin-weekend/",
-          "excerpt": "La Intermediate Care dello Spital Oberengadin non opera nei weekend di novembre per carenza di personale.",
-          "date": "2026-11-13T12:59:39.920Z"
-        },
-        {
           "title": "Fläsch chiude strada, sentieri e area d'arrampicata",
           "url": "/articoli-grigioni/flaesch-strada-sentieri-chiusi/",
           "excerpt": "Sopra Fläsch il rischio di distacco di roccia porta a chiusure precauzionali di strada, sentieri escursionistici e palestra d'arrampicata.",
           "date": "2026-10-09T11:33:58.551Z"
+        },
+        {
+          "title": "Strada della Calanca: chiusura totale tra Molina e Arvigo",
+          "url": "/articoli-grigioni/strada-calanca-chiusura-preventiva/",
+          "excerpt": "Chiusura totale da mercoledì alle 21.",
+          "date": "2026-10-07T06:43:54.388Z"
         }
       ],
       "latestCantonArticles": [],
@@ -290,7 +289,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "GR",
@@ -301,113 +300,83 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "St. Luzisteig (Fläsch-Balzers), week ending 15 November 2026"
+          "note": "Campocologno-Tirano, week ending 24 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "7",
-          "note": "reports as of 16 November 2026"
+          "note": "reports as of 25 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "9",
-          "note": "reports as of 16 November 2026"
+          "value": "5",
+          "note": "reports as of 25 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 9 November 2026 to 15 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 18 November 2026 to 24 November 2026, fastest first.",
           "items": [
-            {
-              "label": "St. Luzisteig (Fläsch-Balzers)",
-              "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/st-luzisteig/today/"
-            },
             {
               "label": "Campocologno-Tirano",
               "value": "0 min",
-              "detail": "49 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/campocologno-tirano/today/"
+            },
+            {
+              "label": "Castasegna-Villa di Chiavenna",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/castasegna-villa-di-chiavenna/today/"
             },
             {
               "label": "Forcola di Livigno",
               "value": "0 min",
-              "detail": "49 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/forcola-di-livigno/today/"
+            },
+            {
+              "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/giogo-di-santa-maria/today/"
             },
             {
               "label": "Martina-Nauders (Finstermünz)",
               "value": "0 min",
-              "detail": "49 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/martina-nauders/today/"
+            },
+            {
+              "label": "Passo dello Spluga (Montespluga)",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/passo-dello-spluga/today/"
             },
             {
               "label": "Samnaun-Spiss",
               "value": "0 min",
-              "detail": "49 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/samnaun-spiss/today/"
             },
             {
-              "label": "Tunnel Munt La Schera (Passo del Gallo)",
+              "label": "St. Luzisteig (Fläsch-Balzers)",
               "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/tunnel-munt-la-schera/today/"
-            },
-            {
-              "label": "Castasegna-Villa di Chiavenna",
-              "value": "0.1 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/castasegna-villa-di-chiavenna/today/"
-            },
-            {
-              "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
-              "value": "0.1 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/giogo-di-santa-maria/today/"
+              "detail": "48 readings",
+              "url": "/en/border-wait/st-luzisteig/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-15T23:59:59.000Z"
+          "updatedAt": "2026-11-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Closures, roadworks and disruptions",
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
-            {
-              "label": "A13 Bellinzona -> S. Bernardino Svincolo autostradale Grono Situazione: uscita chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 19 November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 S. Bernardino -> Bellinzona tra Svincolo autostradale Lostallo E Svincolo autostradale Roveredo Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Closure",
-              "detail": "until 18 November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona -> S. Bernardino tra Svincolo autostradale Roveredo E Svincolo autostradale Lostallo Situazione: chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 19 November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona -> S. Bernardino tra Svincolo autostradale Roveredo E Svincolo autostradale Lostallo Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Closure",
-              "detail": "until 17 November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona -> S. Bernardino Svincolo autostradale Grono Situazione: uscita chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Closure",
-              "detail": "until 17 November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
             {
               "label": "A13 S. Bernardino <-> Chur tra Svincolo autostradale Rothenbrunnen E Svincolo autostradale Bonaduz Situazione: chiusa cantiere",
               "value": "Closure",
@@ -421,6 +390,35 @@
               "date": "2026-11-12T12:07:00.000Z"
             },
             {
+              "label": "A13 S. Bernardino <-> Sargans tra Svincolo autostradale Chur Nord E Svincolo autostradale Landquart Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: corsia…",
+              "value": "Closure",
+              "detail": "until 11 December 2026",
+              "date": "2026-11-19T10:28:00.000Z"
+            },
+            {
+              "label": "A13 Chur -> S. Bernardino tra Svincolo autostradale Chur Nord E Svincolo autostradale Chur Süd Situazione: chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 2 December 2026",
+              "date": "2026-11-25T12:40:00.000Z"
+            },
+            {
+              "label": "Revocato: A13 Bellinzona <-> S. Bernardino Galleria Galleria San Bernardino Situazione: tunnel chiuso Causa: nevicata spazzaneve in uso",
+              "value": "Closure",
+              "date": "2026-11-25T17:48:00.000Z"
+            },
+            {
+              "label": "A13 S. Bernardino -> Chur tra Svincolo autostradale Bonaduz E Svincolo autostradale Reichenau Situazione: chiusa cantiere, lunghezza [km] 1.0",
+              "value": "Closure",
+              "detail": "until 2 December 2026",
+              "date": "2026-12-01T21:00:00.000Z"
+            },
+            {
+              "label": "A13 S. Bernardino <-> Chur tra Svincolo autostradale Rofla E Svincolo autostradale Sufers Situazione: chiusa cantiere, lunghezza [km] 1.1",
+              "value": "Closure",
+              "detail": "until 3 December 2026",
+              "date": "2026-12-02T21:00:00.000Z"
+            },
+            {
               "label": "A13 S. Bernardino <-> Coira tra Svincolo autostradale Splügen E Svincolo autostradale Sufers Situazione: problemi di traffico cantiere, lunghezza [km] 0.9 Aggiunta 1: limite temporaneo larghezza…",
               "value": "Roadworks",
               "detail": "until 31 August 2028",
@@ -428,13 +426,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Neue Strassenverkehrssteuer ab 2027",
+              "date": "2026-11-23",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026112301.aspx"
+            },
             {
               "label": "Streckensperrung zwischen Thusis und Preda",
               "date": "2026-11-13",
@@ -459,14 +462,9 @@
               "label": "Ofenbergstrasse: Nachtsperrungen vom 2. bis 6. November 2026",
               "date": "2026-10-27",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026102701.aspx"
-            },
-            {
-              "label": "Der neue Bahnhof Chur West geht in Betrieb",
-              "date": "2026-10-26",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/inbetriebnahme-bahnhof-chur-west/"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -507,16 +505,15 @@
           "date": "2026-10-21T04:02:54.005Z"
         },
         {
-          "title": "IMC Oberengadin closed on weekends due to staff shortage",
-          "url": "/en/graubunden-articles/oberengadin-imc-closed-weekends/",
-          "excerpt": "The Intermediate Care unit at Spital Oberengadin does not operate on weekends in November due to staff shortages.",
-          "date": "2026-11-13T12:59:39.920Z"
-        },
-        {
           "title": "Fläsch closes road, trails and climbing area",
           "url": "/en/graubunden-articles/flaesch-road-trails-closed/",
           "excerpt": "Above Fläsch, the risk of rockfall leads to precautionary closures of the road, hiking trails, and climbing gym.",
           "date": "2026-10-09T11:33:58.551Z"
+        },
+        {
+          "title": "Calanca Road: complete closure between Molina and Arvigo",
+          "url": "/en/graubunden-articles/calanca-road-preventive-closure/",
+          "date": "2026-10-07T06:43:54.388Z"
         }
       ],
       "latestCantonArticles": [],
@@ -558,7 +555,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "GR",
@@ -569,113 +566,83 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "St. Luzisteig (Fläsch-Balzers), Woche bis 15. November 2026"
+          "note": "Campocologno-Tirano, Woche bis 24. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "7",
-          "note": "Meldungen vom 16. November 2026"
+          "note": "Meldungen vom 25. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "9",
-          "note": "Meldungen vom 16. November 2026"
+          "value": "5",
+          "note": "Meldungen vom 25. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 9. November 2026 bis 15. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 18. November 2026 bis 24. November 2026, vom schnellsten zum langsamsten.",
           "items": [
-            {
-              "label": "St. Luzisteig (Fläsch-Balzers)",
-              "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/st-luzisteig/heute/"
-            },
             {
               "label": "Campocologno-Tirano",
               "value": "0 Min.",
-              "detail": "49 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/campocologno-tirano/heute/"
+            },
+            {
+              "label": "Castasegna-Villa di Chiavenna",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/castasegna-villa-di-chiavenna/heute/"
             },
             {
               "label": "Forcola di Livigno",
               "value": "0 Min.",
-              "detail": "49 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/forcola-di-livigno/heute/"
+            },
+            {
+              "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/giogo-di-santa-maria/heute/"
             },
             {
               "label": "Martina-Nauders (Finstermünz)",
               "value": "0 Min.",
-              "detail": "49 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/martina-nauders/heute/"
+            },
+            {
+              "label": "Passo dello Spluga (Montespluga)",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/passo-dello-spluga/heute/"
             },
             {
               "label": "Samnaun-Spiss",
               "value": "0 Min.",
-              "detail": "49 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/samnaun-spiss/heute/"
             },
             {
-              "label": "Tunnel Munt La Schera (Passo del Gallo)",
+              "label": "St. Luzisteig (Fläsch-Balzers)",
               "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/tunnel-munt-la-schera/heute/"
-            },
-            {
-              "label": "Castasegna-Villa di Chiavenna",
-              "value": "0.1 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/castasegna-villa-di-chiavenna/heute/"
-            },
-            {
-              "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
-              "value": "0.1 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/giogo-di-santa-maria/heute/"
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/st-luzisteig/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-15T23:59:59.000Z"
+          "updatedAt": "2026-11-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Sperrungen, Baustellen und Störungen",
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
-            {
-              "label": "A13 Bellinzona -> S. Bernardino Anschluss Grono Sachlage: Ausfahrt gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 19. November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 S. Bernardino -> Bellinzona zwischen Anschluss Lostallo und Anschluss Roveredo Sachlage: Strecke gesperrt Baustelle Verkehrsführung: Fahrstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 18. November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona -> S. Bernardino zwischen Anschluss Roveredo und Anschluss Lostallo Sachlage: Strecke gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 19. November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona -> S. Bernardino zwischen Anschluss Roveredo und Anschluss Lostallo Sachlage: Strecke gesperrt Baustelle Verkehrsführung: Fahrstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 17. November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzona -> S. Bernardino Anschluss Grono Sachlage: Ausfahrt gesperrt Baustelle Verkehrsführung: Fahrstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 17. November 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
             {
               "label": "A13 S. Bernardino <-> Chur zwischen Anschluss Rothenbrunnen und Anschluss Bonaduz Sachlage: Strecke gesperrt Baustelle",
               "value": "Sperrung",
@@ -689,6 +656,35 @@
               "date": "2026-11-12T12:07:00.000Z"
             },
             {
+              "label": "A13 S. Bernardino <-> Sargans zwischen Anschluss Chur-Nord und Anschluss Landquart Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Verkehrsführung: Pannenstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 11. Dezember 2026",
+              "date": "2026-11-19T10:28:00.000Z"
+            },
+            {
+              "label": "A13 Chur -> S. Bernardino zwischen Anschluss Chur-Nord und Anschluss Chur-Süd Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 2. Dezember 2026",
+              "date": "2026-11-25T12:40:00.000Z"
+            },
+            {
+              "label": "Aufgehoben: A13 Bellinzona <-> S. Bernardino Tunnel San Bernardino-Tunnel Sachlage: Tunnel gesperrt Ursache: Schneefall Schneeräumfahrzeuge im Einsatz",
+              "value": "Sperrung",
+              "date": "2026-11-25T17:48:00.000Z"
+            },
+            {
+              "label": "A13 S. Bernardino -> Chur zwischen Anschluss Bonaduz und Anschluss Reichenau Sachlage: Strecke gesperrt Baustelle, Länge [km] 1.0",
+              "value": "Sperrung",
+              "detail": "bis 2. Dezember 2026",
+              "date": "2026-12-01T21:00:00.000Z"
+            },
+            {
+              "label": "A13 S. Bernardino <-> Chur zwischen Anschluss Rofla und Anschluss Sufers Sachlage: Strecke gesperrt Baustelle, Länge [km] 1.1",
+              "value": "Sperrung",
+              "detail": "bis 3. Dezember 2026",
+              "date": "2026-12-02T21:00:00.000Z"
+            },
+            {
               "label": "A13 S. Bernardino <-> Chur zwischen Anschluss Splügen und Anschluss Sufers Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.9 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m]…",
               "value": "Baustelle",
               "detail": "bis 31. August 2028",
@@ -696,13 +692,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Neue Strassenverkehrssteuer ab 2027",
+              "date": "2026-11-23",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026112301.aspx"
+            },
             {
               "label": "Streckensperrung zwischen Thusis und Preda",
               "date": "2026-11-13",
@@ -727,14 +728,9 @@
               "label": "Ofenbergstrasse: Nachtsperrungen vom 2. bis 6. November 2026",
               "date": "2026-10-27",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026102701.aspx"
-            },
-            {
-              "label": "Der neue Bahnhof Chur West geht in Betrieb",
-              "date": "2026-10-26",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/inbetriebnahme-bahnhof-chur-west/"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -775,16 +771,16 @@
           "date": "2026-10-21T04:02:54.005Z"
         },
         {
-          "title": "IMC Oberengadin an Wochenenden wegen Personalmangels geschlossen",
-          "url": "/de/graubunden-artikel/imc-oberengadin-wochenende-geschlossen/",
-          "excerpt": "Die Intermediate Care des Spitals Oberengadin ist an den Wochenenden im November aufgrund von Personalmangel nicht in Betrieb.",
-          "date": "2026-11-13T12:59:39.920Z"
-        },
-        {
           "title": "Fläsch sperrt Straße, Wanderwege und Klettergarten",
           "url": "/de/graubunden-artikel/flaesch-strasse-wanderwege-gesperrt/",
           "excerpt": "Oberhalb von Fläsch führt die Gefahr eines Felsabbruchs zu vorsorglichen Sperrungen der Straße, der Wanderwege und des Klettergartens.",
           "date": "2026-10-09T11:33:58.551Z"
+        },
+        {
+          "title": "Calanca-Straße: vollständige Schließung zwischen Molina und Arvigo",
+          "url": "/de/graubunden-artikel/calancastrasse-praventive-sperrung/",
+          "excerpt": "Vollständige Schließung von Mittwoch um 21 Uhr.",
+          "date": "2026-10-07T06:43:54.388Z"
         }
       ],
       "latestCantonArticles": [],
@@ -826,7 +822,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "GR",
@@ -837,113 +833,83 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "St. Luzisteig (Fläsch-Balzers), semaine jusqu’au 15 novembre 2026"
+          "note": "Campocologno-Tirano, semaine jusqu’au 24 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "7",
-          "note": "signalements au 16 novembre 2026"
+          "note": "signalements au 25 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "9",
-          "note": "signalements au 16 novembre 2026"
+          "value": "5",
+          "note": "signalements au 25 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 9 novembre 2026 au 15 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 18 novembre 2026 au 24 novembre 2026, du plus fluide au plus lent.",
           "items": [
-            {
-              "label": "St. Luzisteig (Fläsch-Balzers)",
-              "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/st-luzisteig/aujourd-hui/"
-            },
             {
               "label": "Campocologno-Tirano",
               "value": "0 min",
-              "detail": "49 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/campocologno-tirano/aujourd-hui/"
+            },
+            {
+              "label": "Castasegna-Villa di Chiavenna",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/castasegna-villa-di-chiavenna/aujourd-hui/"
             },
             {
               "label": "Forcola di Livigno",
               "value": "0 min",
-              "detail": "49 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/forcola-di-livigno/aujourd-hui/"
+            },
+            {
+              "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/giogo-di-santa-maria/aujourd-hui/"
             },
             {
               "label": "Martina-Nauders (Finstermünz)",
               "value": "0 min",
-              "detail": "49 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/martina-nauders/aujourd-hui/"
+            },
+            {
+              "label": "Passo dello Spluga (Montespluga)",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/passo-dello-spluga/aujourd-hui/"
             },
             {
               "label": "Samnaun-Spiss",
               "value": "0 min",
-              "detail": "49 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/samnaun-spiss/aujourd-hui/"
             },
             {
-              "label": "Tunnel Munt La Schera (Passo del Gallo)",
+              "label": "St. Luzisteig (Fläsch-Balzers)",
               "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/tunnel-munt-la-schera/aujourd-hui/"
-            },
-            {
-              "label": "Castasegna-Villa di Chiavenna",
-              "value": "0,1 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/castasegna-villa-di-chiavenna/aujourd-hui/"
-            },
-            {
-              "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
-              "value": "0,1 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/giogo-di-santa-maria/aujourd-hui/"
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/st-luzisteig/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-15T23:59:59.000Z"
+          "updatedAt": "2026-11-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Fermetures, chantiers et perturbations",
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
-            {
-              "label": "A13 Bellinzone -> S. Bernardino Jonction autoroutière Grono Situation: sortie fermée travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 19 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 S. Bernardino -> Bellinzone entre Jonction autoroutière Lostallo et Jonction autoroutière Roveredo Situation: fermé travaux Gestion du trafic: voie fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 18 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzone -> S. Bernardino entre Jonction autoroutière Roveredo et Jonction autoroutière Lostallo Situation: fermé travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 19 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzone -> S. Bernardino entre Jonction autoroutière Roveredo et Jonction autoroutière Lostallo Situation: fermé travaux Gestion du trafic: voie fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 17 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
-            {
-              "label": "A13 Bellinzone -> S. Bernardino Jonction autoroutière Grono Situation: sortie fermée travaux Gestion du trafic: voie fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 17 novembre 2026",
-              "date": "2026-09-17T20:00:00.000Z"
-            },
             {
               "label": "A13 S. Bernardino <-> Coire entre Jonction autoroutière Rothenbrunnen et Jonction autoroutière Bonaduz Situation: fermé travaux",
               "value": "Fermeture",
@@ -957,6 +923,35 @@
               "date": "2026-11-12T12:07:00.000Z"
             },
             {
+              "label": "A13 S. Bernardino <-> Sargans entre Jonction autoroutière Coire-Nord et Jonction autoroutière Landquart Situation: trafic perturbé travaux, longueur [km] 0.1 Gestion du trafic: bande d'arrêt…",
+              "value": "Fermeture",
+              "detail": "jusqu’au 11 décembre 2026",
+              "date": "2026-11-19T10:28:00.000Z"
+            },
+            {
+              "label": "A13 Coire -> S. Bernardino entre Jonction autoroutière Coire-Nord et Jonction autoroutière Coire-Sud Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 2 décembre 2026",
+              "date": "2026-11-25T12:40:00.000Z"
+            },
+            {
+              "label": "Révoqué: A13 Bellinzone <-> S. Bernardino Tunnel San Bernardino-Tunnel Situation: tunnel fermé Raison: chutes de neige présence de chasse-neige",
+              "value": "Fermeture",
+              "date": "2026-11-25T17:48:00.000Z"
+            },
+            {
+              "label": "A13 S. Bernardino -> Coire entre Jonction autoroutière Bonaduz et Jonction autoroutière Reichenau Situation: fermé travaux, longueur [km] 1.0",
+              "value": "Fermeture",
+              "detail": "jusqu’au 2 décembre 2026",
+              "date": "2026-12-01T21:00:00.000Z"
+            },
+            {
+              "label": "A13 S. Bernardino <-> Coire entre Jonction autoroutière Rofla et Jonction autoroutière Sufers Situation: fermé travaux, longueur [km] 1.1",
+              "value": "Fermeture",
+              "detail": "jusqu’au 3 décembre 2026",
+              "date": "2026-12-02T21:00:00.000Z"
+            },
+            {
               "label": "A13 S. Bernardino <-> Coire entre Jonction autoroutière Splügen et Jonction autoroutière Sufers Situation: trafic perturbé travaux, longueur [km] 0.9 Complément 1: limitation temporaire de largeur…",
               "value": "Chantier",
               "detail": "jusqu’au 31 août 2028",
@@ -964,13 +959,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Neue Strassenverkehrssteuer ab 2027",
+              "date": "2026-11-23",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026112301.aspx"
+            },
             {
               "label": "Streckensperrung zwischen Thusis und Preda",
               "date": "2026-11-13",
@@ -995,14 +995,9 @@
               "label": "Ofenbergstrasse: Nachtsperrungen vom 2. bis 6. November 2026",
               "date": "2026-10-27",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026102701.aspx"
-            },
-            {
-              "label": "Der neue Bahnhof Chur West geht in Betrieb",
-              "date": "2026-10-26",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/inbetriebnahme-bahnhof-chur-west/"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -1043,16 +1038,16 @@
           "date": "2026-10-21T04:02:54.005Z"
         },
         {
-          "title": "IMC Oberengadin fermée les week-ends en raison d’un manque de personnel",
-          "url": "/fr/articles-grisons/imc-oberengadin-fermee-weekends/",
-          "excerpt": "L’Intermediate Care de Spital Oberengadin ne fonctionne pas les week-ends de novembre en raison d’un manque de personnel.",
-          "date": "2026-11-13T12:59:39.920Z"
-        },
-        {
           "title": "Fläsch ferme la route, les sentiers et le site d’escalade",
           "url": "/fr/articles-grisons/flaesch-route-sentiers-fermes/",
           "excerpt": "Au-dessus de Fläsch, le risque de chute de rochers entraîne la fermeture préventive de la route, des sentiers de randonnée et du site d’escalade.",
           "date": "2026-10-09T11:33:58.551Z"
+        },
+        {
+          "title": "Route de la Calanca : fermeture totale entre Molina et Arvigo",
+          "url": "/fr/articles-grisons/route-calanca-fermeture-preventive/",
+          "excerpt": "Fermeture totale à partir de mercredi à 21 h.",
+          "date": "2026-10-07T06:43:54.388Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1094,7 +1089,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

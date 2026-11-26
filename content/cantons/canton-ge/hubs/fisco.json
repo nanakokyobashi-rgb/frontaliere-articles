@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "fisco",
-  "updatedAt": "2026-11-12T21:05:42.386Z",
-  "contentHash": "91c3149bf8ab81d9d101b592961aeceb94388720026789f74cd9f56efa1741fd",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "a55982b6ce3e4a5054550e5cc7aa0d436d5b8c2b1982d08c848c4bd74d61d278",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T14:02:55.343Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -110,37 +110,37 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
-              "label": "Historique des taux d'adaptation de la valeur locative",
-              "date": "2026-11-09",
-              "url": "https://www.ge.ch/node/45440"
+              "label": "Barème ICC de l'impôt à la source sur les prestations en capital 2027",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45605"
             },
             {
-              "label": "Historique des déductions des cotisations au 3e pilier A",
-              "date": "2026-11-09",
-              "url": "https://www.ge.ch/node/45442"
+              "label": "Barèmes 2027 de perception de l'impôt à la source au format ASCII",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45604"
             },
             {
-              "label": "Historique des taux de capitalisation pour l'immobilier",
-              "date": "2026-11-06",
-              "url": "https://www.ge.ch/node/1149"
+              "label": "Déductions ICC de l’impôt à la source 2027",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45623"
             },
             {
-              "label": "Historique des taux d'intérêt ICC et taux d'escompte",
-              "date": "2026-11-06",
-              "url": "https://www.ge.ch/node/45428"
+              "label": "Déductions IFD de l’impôt à la source 2027",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45624"
             },
             {
-              "label": "Historique des taux d'intérêt IFD",
-              "date": "2026-11-06",
-              "url": "https://www.ge.ch/node/45430"
+              "label": "Barème IFD de l'impôt à la source sur les prestations en capital 2027",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45606"
             },
             {
-              "label": "Tentative de phishing en cours",
-              "date": "2026-10-19",
-              "url": "https://www.ge.ch/node/45263"
+              "label": "Barèmes 2027 de perception de l'impôt à la source",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45603"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -190,7 +190,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "GE",
@@ -278,37 +278,37 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
-              "label": "Historique des taux d'adaptation de la valeur locative",
-              "date": "2026-11-09",
-              "url": "https://www.ge.ch/node/45440"
+              "label": "Barème ICC de l'impôt à la source sur les prestations en capital 2027",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45605"
             },
             {
-              "label": "Historique des déductions des cotisations au 3e pilier A",
-              "date": "2026-11-09",
-              "url": "https://www.ge.ch/node/45442"
+              "label": "Barèmes 2027 de perception de l'impôt à la source au format ASCII",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45604"
             },
             {
-              "label": "Historique des taux de capitalisation pour l'immobilier",
-              "date": "2026-11-06",
-              "url": "https://www.ge.ch/node/1149"
+              "label": "Déductions ICC de l’impôt à la source 2027",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45623"
             },
             {
-              "label": "Historique des taux d'intérêt ICC et taux d'escompte",
-              "date": "2026-11-06",
-              "url": "https://www.ge.ch/node/45428"
+              "label": "Déductions IFD de l’impôt à la source 2027",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45624"
             },
             {
-              "label": "Historique des taux d'intérêt IFD",
-              "date": "2026-11-06",
-              "url": "https://www.ge.ch/node/45430"
+              "label": "Barème IFD de l'impôt à la source sur les prestations en capital 2027",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45606"
             },
             {
-              "label": "Tentative de phishing en cours",
-              "date": "2026-10-19",
-              "url": "https://www.ge.ch/node/45263"
+              "label": "Barèmes 2027 de perception de l'impôt à la source",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45603"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -358,7 +358,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "GE",
@@ -446,37 +446,37 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
-              "label": "Historique des taux d'adaptation de la valeur locative",
-              "date": "2026-11-09",
-              "url": "https://www.ge.ch/node/45440"
+              "label": "Barème ICC de l'impôt à la source sur les prestations en capital 2027",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45605"
             },
             {
-              "label": "Historique des déductions des cotisations au 3e pilier A",
-              "date": "2026-11-09",
-              "url": "https://www.ge.ch/node/45442"
+              "label": "Barèmes 2027 de perception de l'impôt à la source au format ASCII",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45604"
             },
             {
-              "label": "Historique des taux de capitalisation pour l'immobilier",
-              "date": "2026-11-06",
-              "url": "https://www.ge.ch/node/1149"
+              "label": "Déductions ICC de l’impôt à la source 2027",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45623"
             },
             {
-              "label": "Historique des taux d'intérêt ICC et taux d'escompte",
-              "date": "2026-11-06",
-              "url": "https://www.ge.ch/node/45428"
+              "label": "Déductions IFD de l’impôt à la source 2027",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45624"
             },
             {
-              "label": "Historique des taux d'intérêt IFD",
-              "date": "2026-11-06",
-              "url": "https://www.ge.ch/node/45430"
+              "label": "Barème IFD de l'impôt à la source sur les prestations en capital 2027",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45606"
             },
             {
-              "label": "Tentative de phishing en cours",
-              "date": "2026-10-19",
-              "url": "https://www.ge.ch/node/45263"
+              "label": "Barèmes 2027 de perception de l'impôt à la source",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45603"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -526,7 +526,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "GE",
@@ -614,37 +614,37 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
-              "label": "Historique des taux d'adaptation de la valeur locative",
-              "date": "2026-11-09",
-              "url": "https://www.ge.ch/node/45440"
+              "label": "Barème ICC de l'impôt à la source sur les prestations en capital 2027",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45605"
             },
             {
-              "label": "Historique des déductions des cotisations au 3e pilier A",
-              "date": "2026-11-09",
-              "url": "https://www.ge.ch/node/45442"
+              "label": "Barèmes 2027 de perception de l'impôt à la source au format ASCII",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45604"
             },
             {
-              "label": "Historique des taux de capitalisation pour l'immobilier",
-              "date": "2026-11-06",
-              "url": "https://www.ge.ch/node/1149"
+              "label": "Déductions ICC de l’impôt à la source 2027",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45623"
             },
             {
-              "label": "Historique des taux d'intérêt ICC et taux d'escompte",
-              "date": "2026-11-06",
-              "url": "https://www.ge.ch/node/45428"
+              "label": "Déductions IFD de l’impôt à la source 2027",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45624"
             },
             {
-              "label": "Historique des taux d'intérêt IFD",
-              "date": "2026-11-06",
-              "url": "https://www.ge.ch/node/45430"
+              "label": "Barème IFD de l'impôt à la source sur les prestations en capital 2027",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45606"
             },
             {
-              "label": "Tentative de phishing en cours",
-              "date": "2026-10-19",
-              "url": "https://www.ge.ch/node/45263"
+              "label": "Barèmes 2027 de perception de l'impôt à la source",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45603"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -694,7 +694,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-12T21:05:42.386Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

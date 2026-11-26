@@ -4,12 +4,12 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "eventi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "6f9d3ec8c4a52efcfdbf05e1e8caf4c17d4ada43fe2f2cca5e4ae870fdffe28b",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "a0cb83973f544a560679d896056eaa498e669bdeeedcfeb404f5d311981ff81a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T21:47:09.888Z",
+      "updatedAt": "2026-11-26T00:32:00.223Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "54",
+          "value": "36",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Weihnachtsdekorationen aus Gips und Papiermaché",
-              "detail": "Volkshochschule Solothurn, Solothurn",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsdekorationen-aus-gips-und-papiermache/"
+              "label": "Powder und Prosecco – ein Abend voller Tipps und Tricks rund ums Schminken",
+              "detail": "Solothurn",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/powder-und-prosecco-ein-abend-voller-tipps-und-tricks-rund-ums-schminken/"
+            },
+            {
+              "label": "Spielbistro: Spielhimmel meets VHS!",
+              "detail": "Solothurn",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spielbistro-spielhimmel-meets-vhs-1/"
+            },
+            {
+              "label": "UROGYNÄKOLOGIE UND ENDOMETRIOSE",
+              "detail": "Solothurn",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/urogynaekologie-und-endometriose/"
+            },
+            {
+              "label": "Mike Müller - Klassentreffen",
+              "detail": "Solothurn",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mike-mueller-klassentreffen-5/"
+            },
+            {
+              "label": "Kieran Goss & Annie Kinsella (IRL) - Special",
+              "detail": "Altes Spital",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/petits-spectacles/soleure/kieran-goss-und-annie-kinsella-irl-special_AKyjaHV"
+            },
+            {
+              "label": "Kitsch in der bildenden Kunst",
+              "detail": "Solothurn — in corso, ultimo giorno: 2 dicembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kitsch-in-der-bildenden-kunst/"
+            },
+            {
+              "label": "Computer Grundlagen",
+              "detail": "Solothurn — in corso, ultimo giorno: 8 dicembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/computer-grundlagen-3/"
             },
             {
               "label": "Fitness & Brunch",
               "detail": "Solheure, Solothurn — in corso, ultimo giorno: 13 dicembre 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fitness-brunch/"
-            },
-            {
-              "label": "tunSolothurn.ch",
-              "detail": "Derendingen — in corso, ultimo giorno: 18 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tunsolothurnch/"
             },
             {
               "label": "Mental abschalten – besser schlafen – Wie Sie das abendliche Grübeln abschalten",
               "detail": "Solothurn — in corso, ultimo giorno: 26 novembre 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mental-abschalten-besser-schlafen-wie-sie-das-abendliche-gruebeln-abschalten/"
-            },
-            {
-              "label": "TANZINOLTEN – Festival für Zeitgenössische Tanz",
-              "detail": "Olten — in corso, ultimo giorno: 21 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzinolten-festival-fuer-zeitgenoessische-tanz/"
-            },
-            {
-              "label": "Geologie der Schweiz",
-              "detail": "Solothurn — in corso, ultimo giorno: 24 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/geologie-der-schweiz/"
-            },
-            {
-              "label": "Offizieller Bahnkurs November 2026",
-              "detail": "Grenchen — in corso, ultimo giorno: 23 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/offizieller-bahnkurs-november-2026/"
             },
             {
               "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn — in corso, ultimo giorno: 3 dicembre 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
-            },
-            {
-              "label": "Kursreihe Schweizer Landwirtschaft",
-              "detail": "Solothurn — in corso, ultimo giorno: 18 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
-            },
-            {
-              "label": "Was ist Jazz?",
-              "detail": "Solothurn — in corso, ultimo giorno: 24 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/soletta/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/soletta/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "SO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "54",
+          "value": "36",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Weihnachtsdekorationen aus Gips und Papiermaché",
-              "detail": "Volkshochschule Solothurn, Solothurn",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsdekorationen-aus-gips-und-papiermache/"
+              "label": "Powder und Prosecco – ein Abend voller Tipps und Tricks rund ums Schminken",
+              "detail": "Solothurn",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/powder-und-prosecco-ein-abend-voller-tipps-und-tricks-rund-ums-schminken/"
+            },
+            {
+              "label": "Spielbistro: Spielhimmel meets VHS!",
+              "detail": "Solothurn",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spielbistro-spielhimmel-meets-vhs-1/"
+            },
+            {
+              "label": "UROGYNÄKOLOGIE UND ENDOMETRIOSE",
+              "detail": "Solothurn",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/urogynaekologie-und-endometriose/"
+            },
+            {
+              "label": "Mike Müller - Klassentreffen",
+              "detail": "Solothurn",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mike-mueller-klassentreffen-5/"
+            },
+            {
+              "label": "Kieran Goss & Annie Kinsella (IRL) - Special",
+              "detail": "Altes Spital",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/petits-spectacles/soleure/kieran-goss-und-annie-kinsella-irl-special_AKyjaHV"
+            },
+            {
+              "label": "Kitsch in der bildenden Kunst",
+              "detail": "Solothurn — ongoing, last day: 2 December 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kitsch-in-der-bildenden-kunst/"
+            },
+            {
+              "label": "Computer Grundlagen",
+              "detail": "Solothurn — ongoing, last day: 8 December 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/computer-grundlagen-3/"
             },
             {
               "label": "Fitness & Brunch",
               "detail": "Solheure, Solothurn — ongoing, last day: 13 December 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fitness-brunch/"
-            },
-            {
-              "label": "tunSolothurn.ch",
-              "detail": "Derendingen — ongoing, last day: 18 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tunsolothurnch/"
             },
             {
               "label": "Mental abschalten – besser schlafen – Wie Sie das abendliche Grübeln abschalten",
               "detail": "Solothurn — ongoing, last day: 26 November 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mental-abschalten-besser-schlafen-wie-sie-das-abendliche-gruebeln-abschalten/"
-            },
-            {
-              "label": "TANZINOLTEN – Festival für Zeitgenössische Tanz",
-              "detail": "Olten — ongoing, last day: 21 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzinolten-festival-fuer-zeitgenoessische-tanz/"
-            },
-            {
-              "label": "Geologie der Schweiz",
-              "detail": "Solothurn — ongoing, last day: 24 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/geologie-der-schweiz/"
-            },
-            {
-              "label": "Offizieller Bahnkurs November 2026",
-              "detail": "Grenchen — ongoing, last day: 23 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/offizieller-bahnkurs-november-2026/"
             },
             {
               "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn — ongoing, last day: 3 December 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
-            },
-            {
-              "label": "Kursreihe Schweizer Landwirtschaft",
-              "detail": "Solothurn — ongoing, last day: 18 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
-            },
-            {
-              "label": "Was ist Jazz?",
-              "detail": "Solothurn — ongoing, last day: 24 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/solothurn/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/solothurn/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "SO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "54",
+          "value": "36",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Weihnachtsdekorationen aus Gips und Papiermaché",
-              "detail": "Volkshochschule Solothurn, Solothurn",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsdekorationen-aus-gips-und-papiermache/"
+              "label": "Powder und Prosecco – ein Abend voller Tipps und Tricks rund ums Schminken",
+              "detail": "Solothurn",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/powder-und-prosecco-ein-abend-voller-tipps-und-tricks-rund-ums-schminken/"
+            },
+            {
+              "label": "Spielbistro: Spielhimmel meets VHS!",
+              "detail": "Solothurn",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spielbistro-spielhimmel-meets-vhs-1/"
+            },
+            {
+              "label": "UROGYNÄKOLOGIE UND ENDOMETRIOSE",
+              "detail": "Solothurn",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/urogynaekologie-und-endometriose/"
+            },
+            {
+              "label": "Mike Müller - Klassentreffen",
+              "detail": "Solothurn",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mike-mueller-klassentreffen-5/"
+            },
+            {
+              "label": "Kieran Goss & Annie Kinsella (IRL) - Special",
+              "detail": "Altes Spital",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/petits-spectacles/soleure/kieran-goss-und-annie-kinsella-irl-special_AKyjaHV"
+            },
+            {
+              "label": "Kitsch in der bildenden Kunst",
+              "detail": "Solothurn — läuft, letzter Tag: 2. Dezember 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kitsch-in-der-bildenden-kunst/"
+            },
+            {
+              "label": "Computer Grundlagen",
+              "detail": "Solothurn — läuft, letzter Tag: 8. Dezember 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/computer-grundlagen-3/"
             },
             {
               "label": "Fitness & Brunch",
               "detail": "Solheure, Solothurn — läuft, letzter Tag: 13. Dezember 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fitness-brunch/"
-            },
-            {
-              "label": "tunSolothurn.ch",
-              "detail": "Derendingen — läuft, letzter Tag: 18. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tunsolothurnch/"
             },
             {
               "label": "Mental abschalten – besser schlafen – Wie Sie das abendliche Grübeln abschalten",
               "detail": "Solothurn — läuft, letzter Tag: 26. November 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mental-abschalten-besser-schlafen-wie-sie-das-abendliche-gruebeln-abschalten/"
-            },
-            {
-              "label": "TANZINOLTEN – Festival für Zeitgenössische Tanz",
-              "detail": "Olten — läuft, letzter Tag: 21. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzinolten-festival-fuer-zeitgenoessische-tanz/"
-            },
-            {
-              "label": "Geologie der Schweiz",
-              "detail": "Solothurn — läuft, letzter Tag: 24. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/geologie-der-schweiz/"
-            },
-            {
-              "label": "Offizieller Bahnkurs November 2026",
-              "detail": "Grenchen — läuft, letzter Tag: 23. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/offizieller-bahnkurs-november-2026/"
             },
             {
               "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn — läuft, letzter Tag: 3. Dezember 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
-            },
-            {
-              "label": "Kursreihe Schweizer Landwirtschaft",
-              "detail": "Solothurn — läuft, letzter Tag: 18. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
-            },
-            {
-              "label": "Was ist Jazz?",
-              "detail": "Solothurn — läuft, letzter Tag: 24. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/solothurn/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/solothurn/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "SO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "54",
+          "value": "36",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Weihnachtsdekorationen aus Gips und Papiermaché",
-              "detail": "Volkshochschule Solothurn, Solothurn",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsdekorationen-aus-gips-und-papiermache/"
+              "label": "Powder und Prosecco – ein Abend voller Tipps und Tricks rund ums Schminken",
+              "detail": "Solothurn",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/powder-und-prosecco-ein-abend-voller-tipps-und-tricks-rund-ums-schminken/"
+            },
+            {
+              "label": "Spielbistro: Spielhimmel meets VHS!",
+              "detail": "Solothurn",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spielbistro-spielhimmel-meets-vhs-1/"
+            },
+            {
+              "label": "UROGYNÄKOLOGIE UND ENDOMETRIOSE",
+              "detail": "Solothurn",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/urogynaekologie-und-endometriose/"
+            },
+            {
+              "label": "Mike Müller - Klassentreffen",
+              "detail": "Solothurn",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mike-mueller-klassentreffen-5/"
+            },
+            {
+              "label": "Kieran Goss & Annie Kinsella (IRL) - Spécial",
+              "detail": "Altes Spital",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/petits-spectacles/soleure/kieran-goss-und-annie-kinsella-irl-special_AKyjaHV"
+            },
+            {
+              "label": "Kitsch in der bildenden Kunst",
+              "detail": "Solothurn — en cours, dernier jour : 2 décembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kitsch-in-der-bildenden-kunst/"
+            },
+            {
+              "label": "Computer Grundlagen",
+              "detail": "Solothurn — en cours, dernier jour : 8 décembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/computer-grundlagen-3/"
             },
             {
               "label": "Fitness & Brunch",
               "detail": "Solheure, Solothurn — en cours, dernier jour : 13 décembre 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fitness-brunch/"
-            },
-            {
-              "label": "tunSolothurn.ch",
-              "detail": "Derendingen — en cours, dernier jour : 18 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tunsolothurnch/"
             },
             {
               "label": "Mental abschalten – besser schlafen – Wie Sie das abendliche Grübeln abschalten",
               "detail": "Solothurn — en cours, dernier jour : 26 novembre 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mental-abschalten-besser-schlafen-wie-sie-das-abendliche-gruebeln-abschalten/"
-            },
-            {
-              "label": "TANZINOLTEN – Festival für Zeitgenössische Tanz",
-              "detail": "Olten — en cours, dernier jour : 21 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanzinolten-festival-fuer-zeitgenoessische-tanz/"
-            },
-            {
-              "label": "Geologie der Schweiz",
-              "detail": "Solothurn — en cours, dernier jour : 24 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/geologie-der-schweiz/"
-            },
-            {
-              "label": "Offizieller Bahnkurs November 2026",
-              "detail": "Grenchen — en cours, dernier jour : 23 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/offizieller-bahnkurs-november-2026/"
             },
             {
               "label": "Lu Jong: Tibetische Bewegungslehre",
               "detail": "Solothurn — en cours, dernier jour : 3 décembre 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
-            },
-            {
-              "label": "Kursreihe Schweizer Landwirtschaft",
-              "detail": "Solothurn — en cours, dernier jour : 18 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
-            },
-            {
-              "label": "Was ist Jazz?",
-              "detail": "Solothurn — en cours, dernier jour : 24 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/soleure/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/soleure/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "mobilita",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "9adace5156196bd8f1ae15aa81578a7834751cf9f433cad5c451c1db3111357e",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "8ca77d28d6d8b99c125e439f30be839996131e255db6ff36298f51d223a1c906",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-16T07:21:34.368Z",
+      "updatedAt": "2026-11-25T19:39:26.365Z",
       "keyFacts": 1
     }
   ],
@@ -23,7 +23,7 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "1",
-          "note": "segnalazioni aggiornate: 16 novembre 2026"
+          "note": "segnalazioni aggiornate: 25 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -37,15 +37,10 @@
               "value": "Chiusura",
               "detail": "fine prevista: 29 novembre 2026",
               "date": "2026-10-26T15:45:00.000Z"
-            },
-            {
-              "label": "Revocato: H17 Uznach -> Glarus tra Svincolo autostradale Näfels E Luogo Näfels Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-11-16T06:42:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         }
       ],
       "curatedArticles": [
@@ -74,16 +69,16 @@
           "date": "2026-10-19T12:11:05.452Z"
         },
         {
-          "title": "Abbonamenti trasporti Glarona: zone, tariffe e sconti",
-          "url": "/articoli-svizzera/abbonamenti-trasporti-glarona-tariffe/",
-          "excerpt": "Sistema di zone tariffarie, abbonamenti annuali e mensili, combinazione con metà-prezzo AG e sconti per studenti e apprendisti nel Cantone di Glarona.",
-          "date": "2026-08-23T14:43:40.056Z"
-        },
-        {
           "title": "Abbonamenti trasporti pubblici nel Cantone Glarona: zone, tariffe e combinazioni",
           "url": "/articoli-svizzera/trasporti-pubblici-glarona/",
           "excerpt": "Scopri i dettagli sui abbonamenti trasporti pubblici nel Cantone Glarona, incluse le zone, le tariffe e le combinazioni con metà-prezzo e AG.",
           "date": "2026-08-17T05:40:06.559Z"
+        },
+        {
+          "title": "Abbonamenti trasporti Glarona: zone, tariffe e sconti",
+          "url": "/articoli-svizzera/abbonamenti-trasporti-glarona-tariffe/",
+          "excerpt": "Sistema di zone tariffarie, abbonamenti annuali e mensili, combinazione con metà-prezzo AG e sconti per studenti e apprendisti nel Cantone di Glarona.",
+          "date": "2026-08-23T14:43:40.056Z"
         },
         {
           "title": "Sistema scolastico Canton Glarona: iscrizione e cicli",
@@ -103,7 +98,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "GL",
@@ -114,7 +109,7 @@
         {
           "label": "Road closures in force or imminent",
           "value": "1",
-          "note": "reports as of 16 November 2026"
+          "note": "reports as of 25 November 2026"
         }
       ],
       "dataBlocks": [
@@ -128,15 +123,10 @@
               "value": "Closure",
               "detail": "until 29 November 2026",
               "date": "2026-10-26T15:45:00.000Z"
-            },
-            {
-              "label": "Revocato: H17 Uznach -> Glarus tra Svincolo autostradale Näfels E Luogo Näfels Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-11-16T06:42:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         }
       ],
       "curatedArticles": [
@@ -165,16 +155,16 @@
           "date": "2026-10-19T12:11:05.452Z"
         },
         {
-          "title": "Glarus transport subscriptions: zones, rates and discounts",
-          "url": "/en/swiss-articles/glarus-transport-passes-zones-fares/",
-          "excerpt": "Tariff zone system, annual and monthly subscriptions, combination with half-price AG and discounts for students and apprentices in the Canton of Glarus.",
-          "date": "2026-08-23T14:43:40.056Z"
-        },
-        {
           "title": "Public transport passes in the canton of Glarus: zones, fares and combinations",
           "url": "/en/swiss-articles/public-transport-glaurus/",
           "excerpt": "Find out details about public transport passes in the Canton of Glarus, including zones, fares and half-price and AG combinations.",
           "date": "2026-08-17T05:40:06.559Z"
+        },
+        {
+          "title": "Glarus transport subscriptions: zones, rates and discounts",
+          "url": "/en/swiss-articles/glarus-transport-passes-zones-fares/",
+          "excerpt": "Tariff zone system, annual and monthly subscriptions, combination with half-price AG and discounts for students and apprentices in the Canton of Glarus.",
+          "date": "2026-08-23T14:43:40.056Z"
         },
         {
           "title": "Canton of Glarus school system: enrolment and cycles",
@@ -194,7 +184,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "GL",
@@ -205,7 +195,7 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "1",
-          "note": "Meldungen vom 16. November 2026"
+          "note": "Meldungen vom 25. November 2026"
         }
       ],
       "dataBlocks": [
@@ -219,15 +209,10 @@
               "value": "Sperrung",
               "detail": "bis 29. November 2026",
               "date": "2026-10-26T15:45:00.000Z"
-            },
-            {
-              "label": "Aufgehoben: H17 Uznach -> Glarus zwischen Anschluss Näfels und Ortschaft Näfels Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-11-16T06:42:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         }
       ],
       "curatedArticles": [
@@ -256,16 +241,16 @@
           "date": "2026-10-19T12:11:05.452Z"
         },
         {
-          "title": "Fahrkarten Glarus: Zonen, Tarife und Rabatte",
-          "url": "/de/schweiz-artikel/glarus-verkehrskarten-zonen-tarife/",
-          "excerpt": "Tarifzonen-System, Jahres- und Monatsabonnements, Kombination mit GA-Halbtax und Rabatten für Studierende und Lernende im Kanton Glarus.",
-          "date": "2026-08-23T14:43:40.056Z"
-        },
-        {
           "title": "ÖV-Abos im Kanton Glarus: Zonen, Tarife und Kombinationen",
           "url": "/de/schweiz-artikel/oeffentlicher-verkehr-glauis/",
           "excerpt": "Erfahren Sie mehr über die ÖV-Abos im Kanton Glarus inklusive Zonen, Tarife und Kombinationen mit Halbtax und GA.",
           "date": "2026-08-17T05:40:06.559Z"
+        },
+        {
+          "title": "Fahrkarten Glarus: Zonen, Tarife und Rabatte",
+          "url": "/de/schweiz-artikel/glarus-verkehrskarten-zonen-tarife/",
+          "excerpt": "Tarifzonen-System, Jahres- und Monatsabonnements, Kombination mit GA-Halbtax und Rabatten für Studierende und Lernende im Kanton Glarus.",
+          "date": "2026-08-23T14:43:40.056Z"
         },
         {
           "title": "Schulsystem des Kantons Glarus: Einschreibung und Zyklen",
@@ -285,7 +270,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "GL",
@@ -296,7 +281,7 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "1",
-          "note": "signalements au 16 novembre 2026"
+          "note": "signalements au 25 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -310,15 +295,10 @@
               "value": "Fermeture",
               "detail": "jusqu’au 29 novembre 2026",
               "date": "2026-10-26T15:45:00.000Z"
-            },
-            {
-              "label": "Révoqué: H17 Uznach -> Glaris entre Jonction autoroutière Näfels et Localité Näfels Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-11-16T06:42:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         }
       ],
       "curatedArticles": [
@@ -347,16 +327,16 @@
           "date": "2026-10-19T12:11:05.452Z"
         },
         {
-          "title": "Abonnements transports Glaris : zones, tarifs et réductions",
-          "url": "/fr/articles-suisse/glaris-abonnements-transport-zones-tarifs/",
-          "excerpt": "Système de zones tarifaires, abonnements annuels et mensuels, combinaison avec demi-tarif AG et réductions pour étudiants et apprentis dans le canton de Glaris.",
-          "date": "2026-08-23T14:43:40.056Z"
-        },
-        {
           "title": "Abbonamenti Glaris: zone, tarifs",
           "url": "/fr/articles-suisse/transport-en-commun-glauis/",
           "excerpt": "Découvrez les détails sur les abonnements transports publics dans le canton de Glaris, y compris les zones, les tarifs et les combinaisons avec demi-tarif et AG.",
           "date": "2026-08-17T05:40:06.559Z"
+        },
+        {
+          "title": "Abonnements transports Glaris : zones, tarifs et réductions",
+          "url": "/fr/articles-suisse/glaris-abonnements-transport-zones-tarifs/",
+          "excerpt": "Système de zones tarifaires, abonnements annuels et mensuels, combinaison avec demi-tarif AG et réductions pour étudiants et apprentis dans le canton de Glaris.",
+          "date": "2026-08-23T14:43:40.056Z"
         },
         {
           "title": "Système scolaire canton de Glaris : inscription et cycles",
@@ -376,7 +356,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

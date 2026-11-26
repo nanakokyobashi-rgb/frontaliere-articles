@@ -4,14 +4,14 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "carburanti",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "84fd7335a9f5e12ebe7eadd6985e7efd97b2c8eae2d1363189add1066d7a2a33",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "77aa1a7324b7a31f96d0bd395f41101887c74ab85703ab8dde66069c9d6e4c4d",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-15T14:17:31.463Z",
+      "updatedAt": "2026-11-25T17:35:23.405Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-11-22T07:00:00.000Z"
+      "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
   ],
   "locales": {
@@ -54,31 +54,31 @@
             },
             {
               "label": "Benzina 95 — Francia",
-              "value": "2,098 EUR/l",
-              "detail": "media regionale: minimo 1,942 EUR/l, 82 stazioni rilevate",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2,010 EUR/l",
+              "detail": "media regionale: minimo 1,908 EUR/l, 97 stazioni rilevate",
+              "date": "2026-11-25T15:24:38.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,228 EUR/l",
-              "detail": "media regionale: minimo 2,089 EUR/l, 80 stazioni rilevate",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2,163 EUR/l",
+              "detail": "media regionale: minimo 2,052 EUR/l, 98 stazioni rilevate",
+              "date": "2026-11-25T15:24:38.000Z"
             },
             {
               "label": "Benzina 95 — Germania",
-              "value": "2,035 EUR/l",
-              "detail": "media regionale: minimo 2,009 EUR/l, 7 stazioni rilevate",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "1,903 EUR/l",
+              "detail": "media regionale: minimo 1,879 EUR/l, 7 stazioni rilevate",
+              "date": "2026-11-25T17:35:23.405Z"
             },
             {
               "label": "Diesel — Germania",
-              "value": "2,338 EUR/l",
-              "detail": "media regionale: minimo 2,259 EUR/l, 8 stazioni rilevate",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "2,088 EUR/l",
+              "detail": "media regionale: minimo 2,059 EUR/l, 7 stazioni rilevate",
+              "date": "2026-11-25T17:35:23.405Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -165,31 +165,31 @@
             },
             {
               "label": "Petrol 95 — France",
-              "value": "2.098 EUR/l",
-              "detail": "regional average: lowest 1.942 EUR/l, 82 stations surveyed",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2.010 EUR/l",
+              "detail": "regional average: lowest 1.908 EUR/l, 97 stations surveyed",
+              "date": "2026-11-25T15:24:38.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.228 EUR/l",
-              "detail": "regional average: lowest 2.089 EUR/l, 80 stations surveyed",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2.163 EUR/l",
+              "detail": "regional average: lowest 2.052 EUR/l, 98 stations surveyed",
+              "date": "2026-11-25T15:24:38.000Z"
             },
             {
               "label": "Petrol 95 — Germany",
-              "value": "2.035 EUR/l",
-              "detail": "regional average: lowest 2.009 EUR/l, 7 stations surveyed",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "1.903 EUR/l",
+              "detail": "regional average: lowest 1.879 EUR/l, 7 stations surveyed",
+              "date": "2026-11-25T17:35:23.405Z"
             },
             {
               "label": "Diesel — Germany",
-              "value": "2.338 EUR/l",
-              "detail": "regional average: lowest 2.259 EUR/l, 8 stations surveyed",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "2.088 EUR/l",
+              "detail": "regional average: lowest 2.059 EUR/l, 7 stations surveyed",
+              "date": "2026-11-25T17:35:23.405Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -276,31 +276,31 @@
             },
             {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.098 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.942 EUR/l, 82 erfasste Tankstellen",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2.010 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.908 EUR/l, 97 erfasste Tankstellen",
+              "date": "2026-11-25T15:24:38.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.228 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.089 EUR/l, 80 erfasste Tankstellen",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2.163 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.052 EUR/l, 98 erfasste Tankstellen",
+              "date": "2026-11-25T15:24:38.000Z"
             },
             {
               "label": "Benzin 95 — Deutschland",
-              "value": "2.035 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.009 EUR/l, 7 erfasste Tankstellen",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "1.903 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.879 EUR/l, 7 erfasste Tankstellen",
+              "date": "2026-11-25T17:35:23.405Z"
             },
             {
               "label": "Diesel — Deutschland",
-              "value": "2.338 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.259 EUR/l, 8 erfasste Tankstellen",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "2.088 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.059 EUR/l, 7 erfasste Tankstellen",
+              "date": "2026-11-25T17:35:23.405Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -387,31 +387,31 @@
             },
             {
               "label": "Essence 95 — France",
-              "value": "2,098 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,942 EUR/l, 82 stations relevées",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2,010 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,908 EUR/l, 97 stations relevées",
+              "date": "2026-11-25T15:24:38.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,228 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,089 EUR/l, 80 stations relevées",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2,163 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,052 EUR/l, 98 stations relevées",
+              "date": "2026-11-25T15:24:38.000Z"
             },
             {
               "label": "Essence 95 — Allemagne",
-              "value": "2,035 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,009 EUR/l, 7 stations relevées",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "1,903 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,879 EUR/l, 7 stations relevées",
+              "date": "2026-11-25T17:35:23.405Z"
             },
             {
               "label": "Diesel — Allemagne",
-              "value": "2,338 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,259 EUR/l, 8 stations relevées",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "2,088 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,059 EUR/l, 7 stations relevées",
+              "date": "2026-11-25T17:35:23.405Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

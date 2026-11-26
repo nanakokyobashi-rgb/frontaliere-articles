@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "62666548ee10a6f206494c89cbe4e61f9cb34de13512da03ffaa14d0dd6538f6",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "268296bffaf416bae7c4dae9a4d6a57025a9c7c2af6a5666ffb69516b15ff9df",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T21:47:09.888Z",
+      "updatedAt": "2026-11-26T00:32:00.223Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "78",
+          "value": "110",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,75 +38,85 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Chasse au trésor",
-              "detail": "Captain Cook",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/chasse-au-tresor_ApUqyuG"
+              "label": "Das Universum von Tim Burton – präsentiert von Horizons Ensemble",
+              "detail": "Casino Barrière de Montreux, Montreux",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/musique/montreux/lunivers-de-tim-burton-par-horizons-ensemble_A1W2sEP"
+            },
+            {
+              "label": "The Biblio in your neighborhood!",
+              "detail": "Vevey",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-biblio-in-your-neighborhood-1/"
+            },
+            {
+              "label": "The World of Tim Burton by Horizons Ensemble",
+              "detail": "Montreux",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-world-of-tim-burton-by-horizons-ensemble/"
+            },
+            {
+              "label": "Les Jeudis du Sens",
+              "detail": "Eclépens",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-jeudis-du-sens/"
+            },
+            {
+              "label": "Spielt es oder spielt es?",
+              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey — in corso, ultimo giorno: 16 dicembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/events/this-that/vevey/does-it-play-or-not_AfWrwwy"
+            },
+            {
+              "label": "Maman sort danser",
+              "detail": "Mad — in corso, ultimo giorno: 5 dicembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/maman-sort-danser_AahCTq1"
+            },
+            {
+              "label": "Abend mit modernen Gesellschaftsspielen",
+              "detail": "L'Escale Centre de Loisirs pour aînés, La Tour-de-Peilz — in corso, ultimo giorno: 18 dicembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/la-tour-de-peilz/soiree-jeux-de-societe-modernes_A9KjsFW"
+            },
+            {
+              "label": "Rodage - Kevin Eyer",
+              "detail": "Le Cylure — in corso, ultimo giorno: 2 dicembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/rodage-kevin-eyer_As6BYkY"
+            },
+            {
+              "label": "Culture sans filtre",
+              "detail": "Bibliothèque municipale - Entre-Bois — in corso, ultimo giorno: 8 dicembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/culture-sans-filtre_AGmMqZW"
             },
             {
               "label": "Water Pong",
-              "detail": "Barberousse",
-              "date": "2026-11-16",
+              "detail": "Barberousse — in corso, ultimo giorno: 30 novembre 2026",
+              "date": "2026-11-26",
               "url": "https://www.guidle.com/it/events/this-that/lausanne/water-pong_AwneE9V"
-            },
-            {
-              "label": "International Summit on AI Powered Precision Medicine and Genomics (ISAIPMG2026)",
-              "detail": "Budapest, Lausanne",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/international-summit-on-ai-powered-precision-medicine-and-genomics-isaipmg2026/"
-            },
-            {
-              "label": "International Summit on AI Powered Precision Medicine and Genomics (ISAIPMG2026)",
-              "detail": "Budapest, Hungary",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/events/knowledge/lausanne/international-summit-on-ai-powered-precision-medicine-and-genomics-isaipmg2026_APmtQXx"
-            },
-            {
-              "label": "Café causette, conversation en français",
-              "detail": "Lausanne",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/cafe-causette-conversation-en-francais_AFFT2YW"
-            },
-            {
-              "label": "Club de lecture de la Bibliothèque La Sallaz",
-              "detail": "Bibliothèques de la Ville de Lausanne – La Sallaz, Lausanne",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/club-de-lecture-de-la-bibliotheque-la-sallaz_AjX8P7g"
-            },
-            {
-              "label": "Livres et dragons - Jeux de rôle (dès 15 ans)",
-              "detail": "Bibliothèques de la Ville de Lausanne – La Sallaz, Lausanne",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/livres-et-dragons-jeux-de-role-des-15-ans_AQxnMCg"
-            },
-            {
-              "label": "Projet Pré-HEM",
-              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/projet-pre-hem_AgSsuEH"
-            },
-            {
-              "label": "Le Tour d'Écrou - opéra",
-              "detail": "Opéra de Lausanne, Lausanne — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-tour-decrou-opera/"
-            },
-            {
-              "label": "Painting exhibition",
-              "detail": "Vevey — in corso, ultimo giorno: 25 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/painting-exhibition-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Manifestation du 24 novembre 2026 – 5'000 manifestants défilent en Ville de Lausanne",
+              "date": "2026-11-25T12:00:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=91360"
+            },
+            {
+              "label": "Manifestation du 20 novembre 2026 – 10'000 manifestants défilent en Ville de Lausanne",
+              "date": "2026-11-21T14:00:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=91350"
+            },
             {
               "label": "11e édition du Marché aux jouets",
               "date": "2026-11-04T08:00:00.000Z",
@@ -123,7 +133,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -145,7 +155,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "VD",
@@ -155,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "78",
+          "value": "110",
           "note": "from the site’s events calendar"
         }
       ],
@@ -166,75 +176,85 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Chasse au trésor",
-              "detail": "Captain Cook",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/chasse-au-tresor_ApUqyuG"
+              "label": "The World of Tim Burton by Horizons Ensemble",
+              "detail": "Casino Barrière de Montreux, Montreux",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/musique/montreux/lunivers-de-tim-burton-par-horizons-ensemble_A1W2sEP"
+            },
+            {
+              "label": "The Biblio in your neighborhood!",
+              "detail": "Vevey",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-biblio-in-your-neighborhood-1/"
+            },
+            {
+              "label": "The World of Tim Burton by Horizons Ensemble",
+              "detail": "Montreux",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-world-of-tim-burton-by-horizons-ensemble/"
+            },
+            {
+              "label": "Les Jeudis du Sens",
+              "detail": "Eclépens",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-jeudis-du-sens/"
+            },
+            {
+              "label": "Does it play or not?",
+              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey — ongoing, last day: 16 December 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/events/this-that/vevey/does-it-play-or-not_AfWrwwy"
+            },
+            {
+              "label": "Maman sort danser",
+              "detail": "Mad — ongoing, last day: 5 December 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/maman-sort-danser_AahCTq1"
+            },
+            {
+              "label": "Modern board games evening",
+              "detail": "L'Escale Centre de Loisirs pour aînés, La Tour-de-Peilz — ongoing, last day: 18 December 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/la-tour-de-peilz/soiree-jeux-de-societe-modernes_A9KjsFW"
+            },
+            {
+              "label": "Rodage – Kevin Eyer",
+              "detail": "Le Cylure — ongoing, last day: 2 December 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/rodage-kevin-eyer_As6BYkY"
+            },
+            {
+              "label": "Culture sans filtre",
+              "detail": "Bibliothèque municipale - Entre-Bois — ongoing, last day: 8 December 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/culture-sans-filtre_AGmMqZW"
             },
             {
               "label": "Pong",
-              "detail": "Barberousse",
-              "date": "2026-11-16",
+              "detail": "Barberousse — ongoing, last day: 30 November 2026",
+              "date": "2026-11-26",
               "url": "https://www.guidle.com/it/events/this-that/lausanne/water-pong_AwneE9V"
-            },
-            {
-              "label": "International Summit on AI Powered Precision Medicine and Genomics (ISAIPMG2026)",
-              "detail": "Budapest, Lausanne",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/international-summit-on-ai-powered-precision-medicine-and-genomics-isaipmg2026/"
-            },
-            {
-              "label": "International Summit on AI Powered Precision Medicine and Genomics (ISAIPMG2026)",
-              "detail": "Budapest, Hungary",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/events/knowledge/lausanne/international-summit-on-ai-powered-precision-medicine-and-genomics-isaipmg2026_APmtQXx"
-            },
-            {
-              "label": "Café causette, conversation en français",
-              "detail": "Lausanne",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/cafe-causette-conversation-en-francais_AFFT2YW"
-            },
-            {
-              "label": "Club de lecture de la Bibliothèque La Sallaz",
-              "detail": "Bibliothèques de la Ville de Lausanne – La Sallaz, Lausanne",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/club-de-lecture-de-la-bibliotheque-la-sallaz_AjX8P7g"
-            },
-            {
-              "label": "Livres et dragons - Jeux de rôle (dès 15 ans)",
-              "detail": "Bibliothèques de la Ville de Lausanne – La Sallaz, Lausanne",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/livres-et-dragons-jeux-de-role-des-15-ans_AQxnMCg"
-            },
-            {
-              "label": "Pré-HEM Project",
-              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/projet-pre-hem_AgSsuEH"
-            },
-            {
-              "label": "Le Tour d'Écrou - opéra",
-              "detail": "Opéra de Lausanne, Lausanne — ongoing, last day: 22 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-tour-decrou-opera/"
-            },
-            {
-              "label": "Painting exhibition",
-              "detail": "Vevey — ongoing, last day: 25 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/painting-exhibition-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Manifestation du 24 novembre 2026 – 5'000 manifestants défilent en Ville de Lausanne",
+              "date": "2026-11-25T12:00:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=91360"
+            },
+            {
+              "label": "Manifestation du 20 novembre 2026 – 10'000 manifestants défilent en Ville de Lausanne",
+              "date": "2026-11-21T14:00:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=91350"
+            },
             {
               "label": "11e édition du Marché aux jouets",
               "date": "2026-11-04T08:00:00.000Z",
@@ -251,7 +271,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -273,7 +293,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "VD",
@@ -283,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "78",
+          "value": "110",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -294,75 +314,85 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Chasse au trésor",
-              "detail": "Captain Cook",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/chasse-au-tresor_ApUqyuG"
+              "label": "Das Universum von Tim Burton – präsentiert von Horizons Ensemble",
+              "detail": "Casino Barrière de Montreux, Montreux",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/musique/montreux/lunivers-de-tim-burton-par-horizons-ensemble_A1W2sEP"
+            },
+            {
+              "label": "Die Biblio in deinem Viertel!",
+              "detail": "Vevey",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-biblio-in-your-neighborhood-1/"
+            },
+            {
+              "label": "Das Universum von Tim Burton – präsentiert von Horizons Ensemble",
+              "detail": "Montreux",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-world-of-tim-burton-by-horizons-ensemble/"
+            },
+            {
+              "label": "Les Jeudis du Sens",
+              "detail": "Eclépens",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-jeudis-du-sens/"
+            },
+            {
+              "label": "Spielt es oder spielt es?",
+              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey — läuft, letzter Tag: 16. Dezember 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/events/this-that/vevey/does-it-play-or-not_AfWrwwy"
+            },
+            {
+              "label": "Mama ist eine Art Tänzerin",
+              "detail": "Mad — läuft, letzter Tag: 5. Dezember 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/maman-sort-danser_AahCTq1"
+            },
+            {
+              "label": "Abend mit modernen Gesellschaftsspielen",
+              "detail": "L'Escale Centre de Loisirs pour aînés, La Tour-de-Peilz — läuft, letzter Tag: 18. Dezember 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/la-tour-de-peilz/soiree-jeux-de-societe-modernes_A9KjsFW"
+            },
+            {
+              "label": "Einlaufen – Kevin Eyer",
+              "detail": "Le Cylure — läuft, letzter Tag: 2. Dezember 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/rodage-kevin-eyer_As6BYkY"
+            },
+            {
+              "label": "Culture sans filtre",
+              "detail": "Bibliothèque municipale - Entre-Bois — läuft, letzter Tag: 8. Dezember 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/culture-sans-filtre_AGmMqZW"
             },
             {
               "label": "Wasserpong",
-              "detail": "Barberousse",
-              "date": "2026-11-16",
+              "detail": "Barberousse — läuft, letzter Tag: 30. November 2026",
+              "date": "2026-11-26",
               "url": "https://www.guidle.com/it/events/this-that/lausanne/water-pong_AwneE9V"
-            },
-            {
-              "label": "International Summit on AI Powered Precision Medicine and Genomics (ISAIPMG2026)",
-              "detail": "Budapest, Lausanne",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/international-summit-on-ai-powered-precision-medicine-and-genomics-isaipmg2026/"
-            },
-            {
-              "label": "International Summit on AI Powered Precision Medicine and Genomics (ISAIPMG2026)",
-              "detail": "Budapest, Hungary",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/events/knowledge/lausanne/international-summit-on-ai-powered-precision-medicine-and-genomics-isaipmg2026_APmtQXx"
-            },
-            {
-              "label": "Café causette, conversation en français",
-              "detail": "Lausanne",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/cafe-causette-conversation-en-francais_AFFT2YW"
-            },
-            {
-              "label": "Club de lecture de la Bibliothèque La Sallaz",
-              "detail": "Bibliothèques de la Ville de Lausanne – La Sallaz, Lausanne",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/club-de-lecture-de-la-bibliotheque-la-sallaz_AjX8P7g"
-            },
-            {
-              "label": "Livres et dragons - Jeux de rôle (dès 15 ans)",
-              "detail": "Bibliothèques de la Ville de Lausanne – La Sallaz, Lausanne",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/livres-et-dragons-jeux-de-role-des-15-ans_AQxnMCg"
-            },
-            {
-              "label": "Projekt Pré-HEM",
-              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/projet-pre-hem_AgSsuEH"
-            },
-            {
-              "label": "Le Tour d'Écrou - opéra",
-              "detail": "Opéra de Lausanne, Lausanne — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-tour-decrou-opera/"
-            },
-            {
-              "label": "Ausstellung von Gemälden",
-              "detail": "Vevey — läuft, letzter Tag: 25. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/painting-exhibition-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Manifestation du 24 novembre 2026 – 5'000 manifestants défilent en Ville de Lausanne",
+              "date": "2026-11-25T12:00:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=91360"
+            },
+            {
+              "label": "Manifestation du 20 novembre 2026 – 10'000 manifestants défilent en Ville de Lausanne",
+              "date": "2026-11-21T14:00:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=91350"
+            },
             {
               "label": "11e édition du Marché aux jouets",
               "date": "2026-11-04T08:00:00.000Z",
@@ -379,7 +409,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -401,7 +431,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "VD",
@@ -411,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "78",
+          "value": "110",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -422,75 +452,85 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Chasse au trésor",
-              "detail": "Captain Cook",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/chasse-au-tresor_ApUqyuG"
+              "label": "L’Univers de Tim Burton par Horizons Ensemble",
+              "detail": "Casino Barrière de Montreux, Montreux",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/musique/montreux/lunivers-de-tim-burton-par-horizons-ensemble_A1W2sEP"
+            },
+            {
+              "label": "La Biblio dans ton quartier !",
+              "detail": "Vevey",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-biblio-in-your-neighborhood-1/"
+            },
+            {
+              "label": "L’Univers de Tim Burton par Horizons Ensemble",
+              "detail": "Montreux",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-world-of-tim-burton-by-horizons-ensemble/"
+            },
+            {
+              "label": "Les Jeudis du Sens",
+              "detail": "Eclépens",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-jeudis-du-sens/"
+            },
+            {
+              "label": "Ça joue ou bien ?",
+              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey — en cours, dernier jour : 16 décembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/events/this-that/vevey/does-it-play-or-not_AfWrwwy"
+            },
+            {
+              "label": "Maman sort danseuse",
+              "detail": "Mad — en cours, dernier jour : 5 décembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/maman-sort-danser_AahCTq1"
+            },
+            {
+              "label": "Soirée jeux de société modernes",
+              "detail": "L'Escale Centre de Loisirs pour aînés, La Tour-de-Peilz — en cours, dernier jour : 18 décembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/la-tour-de-peilz/soiree-jeux-de-societe-modernes_A9KjsFW"
+            },
+            {
+              "label": "Rodage – Kevin Eyer",
+              "detail": "Le Cylure — en cours, dernier jour : 2 décembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/rodage-kevin-eyer_As6BYkY"
+            },
+            {
+              "label": "Culture sans filtre",
+              "detail": "Bibliothèque municipale - Entre-Bois — en cours, dernier jour : 8 décembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/culture-sans-filtre_AGmMqZW"
             },
             {
               "label": "Beer Pong",
-              "detail": "Barberousse",
-              "date": "2026-11-16",
+              "detail": "Barberousse — en cours, dernier jour : 30 novembre 2026",
+              "date": "2026-11-26",
               "url": "https://www.guidle.com/it/events/this-that/lausanne/water-pong_AwneE9V"
-            },
-            {
-              "label": "International Summit on AI Powered Precision Medicine and Genomics (ISAIPMG2026)",
-              "detail": "Budapest, Lausanne",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/international-summit-on-ai-powered-precision-medicine-and-genomics-isaipmg2026/"
-            },
-            {
-              "label": "International Summit on AI Powered Precision Medicine and Genomics (ISAIPMG2026)",
-              "detail": "Budapest, Hungary",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/events/knowledge/lausanne/international-summit-on-ai-powered-precision-medicine-and-genomics-isaipmg2026_APmtQXx"
-            },
-            {
-              "label": "Café causette, conversation en français",
-              "detail": "Lausanne",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/cafe-causette-conversation-en-francais_AFFT2YW"
-            },
-            {
-              "label": "Club de lecture de la Bibliothèque La Sallaz",
-              "detail": "Bibliothèques de la Ville de Lausanne – La Sallaz, Lausanne",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/club-de-lecture-de-la-bibliotheque-la-sallaz_AjX8P7g"
-            },
-            {
-              "label": "Livres et dragons - Jeux de rôle (dès 15 ans)",
-              "detail": "Bibliothèques de la Ville de Lausanne – La Sallaz, Lausanne",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/livres-et-dragons-jeux-de-role-des-15-ans_AQxnMCg"
-            },
-            {
-              "label": "Pour H",
-              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/projet-pre-hem_AgSsuEH"
-            },
-            {
-              "label": "Le Tour d'Écrou - opéra",
-              "detail": "Opéra de Lausanne, Lausanne — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-tour-decrou-opera/"
-            },
-            {
-              "label": "René Blöchlinger, peintures et gravures",
-              "detail": "Vevey — en cours, dernier jour : 25 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/painting-exhibition-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Manifestation du 24 novembre 2026 – 5'000 manifestants défilent en Ville de Lausanne",
+              "date": "2026-11-25T12:00:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=91360"
+            },
+            {
+              "label": "Manifestation du 20 novembre 2026 – 10'000 manifestants défilent en Ville de Lausanne",
+              "date": "2026-11-21T14:00:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=91350"
+            },
             {
               "label": "11e édition du Marché aux jouets",
               "date": "2026-11-04T08:00:00.000Z",
@@ -507,7 +547,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -529,7 +569,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

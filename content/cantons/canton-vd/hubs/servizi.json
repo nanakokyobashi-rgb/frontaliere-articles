@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "b8b5c33005d4e2ec4e6244f07b6dd9842f328fecbcd4f8ae507f6bea6bef03a1",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "c8c9d0868a30743d66923a2be4945b68b851cfa962e4ff91e54ab7a37ded7fc9",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-16T06:25:42.818Z",
+      "updatedAt": "2026-11-25T21:43:23.986Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-16T06:51:00.113Z",
+      "updatedAt": "2026-11-26T00:36:15.946Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -43,7 +43,7 @@
         },
         {
           "label": "Aste di targhe in corso",
-          "value": "14",
+          "value": "35",
           "note": "offerta mediana 2000 CHF"
         }
       ],
@@ -74,30 +74,30 @@
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
-              "label": "VD256",
-              "value": "2400 CHF",
+              "label": "VD7171",
+              "value": "2300 CHF",
               "detail": "offerta attuale",
-              "date": "2026-11-22T21:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/fr/auction/120792"
+              "date": "2026-11-29T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120852"
             },
             {
-              "label": "VD1389",
+              "label": "VD1161",
               "value": "2000 CHF",
               "detail": "offerta attuale",
-              "date": "2026-11-22T21:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/fr/auction/120805"
+              "date": "2026-11-29T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120875"
             },
             {
-              "label": "VD1469",
+              "label": "VD1229",
               "value": "2000 CHF",
               "detail": "offerta attuale",
-              "date": "2026-11-22T21:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/fr/auction/120804"
+              "date": "2026-11-29T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120876"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.encheres-vd.ch/fr/",
-          "updatedAt": "2026-11-16T06:25:42.818Z"
+          "updatedAt": "2026-11-25T21:43:23.986Z"
         },
         {
           "id": "meteo",
@@ -106,18 +106,23 @@
           "items": [
             {
               "label": "Lausanne",
-              "value": "10 °C",
-              "detail": "oggi da 9 a 12 °C"
+              "value": "6 °C",
+              "detail": "oggi da 3 a 6 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Le Canton de Vaud et deux grands clubs sportifs font équipe contre la violence domestique",
+              "date": "2026-11-19T09:30:00.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26818-default-acd390d6f1"
+            },
             {
               "label": "Soigne ton futur : une campagne pour la promotion des professions de santé",
               "date": "2026-11-13T11:51:59.000Z",
@@ -142,14 +147,9 @@
               "label": "Le Canton de Vaud recommande la vaccination contre la grippe, le Covid-19 et le VRS aux personnes à risque",
               "date": "2026-10-28T17:02:30.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26734-le-canton-de-vaud-recommande-la-vaccination-contre-la-grippe-le-covid-19-et-le-vrs-aux-personnes-a-risque"
-            },
-            {
-              "label": "Trente ans de politique d’intégration dans le canton de Vaud",
-              "date": "2026-10-05T15:03:42.000Z",
-              "url": "https://www.vd.ch/actualites/actualite/news/26679-default-47773e4170"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -178,16 +178,16 @@
           "date": "2026-09-04T06:34:11.412Z"
         },
         {
-          "title": "Permesso L breve durata Vaud: durata, proroga e diritti",
-          "url": "/articoli-svizzera/permesso-l-breve-durata-vaud-proroga/",
-          "excerpt": "Il permesso L consente di lavorare in Svizzera fino a 1 anno ed è rinnovabile. Scopri come richiedere la proroga, passare al permesso B e quali sono gli obblighi fiscali.",
-          "date": "2026-09-04T08:00:51.242Z"
-        },
-        {
           "title": "Sistema sanitario svizzero LAMal nel Canton Vaud",
           "url": "/articoli-svizzera/sistema-sanitario-lamal-2026-vaud/",
           "excerpt": "Guida completa al sistema sanitario svizzero nel Canton Vaud: obbligo LAMal, scelta della cassa malati, franchigie e sussidi cantonali.",
           "date": "2026-08-20T02:15:48.837Z"
+        },
+        {
+          "title": "Permesso L breve durata Vaud: durata, proroga e diritti",
+          "url": "/articoli-svizzera/permesso-l-breve-durata-vaud-proroga/",
+          "excerpt": "Il permesso L consente di lavorare in Svizzera fino a 1 anno ed è rinnovabile. Scopri come richiedere la proroga, passare al permesso B e quali sono gli obblighi fiscali.",
+          "date": "2026-09-04T08:00:51.242Z"
         },
         {
           "title": "Permesso L in Vaud: validità max 1 anno e proroga",
@@ -229,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "VD",
@@ -245,7 +245,7 @@
         },
         {
           "label": "Plate auctions running",
-          "value": "14",
+          "value": "35",
           "note": "typical bid 2,000 CHF"
         }
       ],
@@ -276,30 +276,30 @@
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
-              "label": "VD256",
-              "value": "2,400 CHF",
+              "label": "VD7171",
+              "value": "2,300 CHF",
               "detail": "current bid",
-              "date": "2026-11-22T21:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/fr/auction/120792"
+              "date": "2026-11-29T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120852"
             },
             {
-              "label": "VD1389",
+              "label": "VD1161",
               "value": "2,000 CHF",
               "detail": "current bid",
-              "date": "2026-11-22T21:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/fr/auction/120805"
+              "date": "2026-11-29T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120875"
             },
             {
-              "label": "VD1469",
+              "label": "VD1229",
               "value": "2,000 CHF",
               "detail": "current bid",
-              "date": "2026-11-22T21:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/fr/auction/120804"
+              "date": "2026-11-29T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120876"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.encheres-vd.ch/fr/",
-          "updatedAt": "2026-11-16T06:25:42.818Z"
+          "updatedAt": "2026-11-25T21:43:23.986Z"
         },
         {
           "id": "meteo",
@@ -308,18 +308,23 @@
           "items": [
             {
               "label": "Lausanne",
-              "value": "10 °C",
-              "detail": "today from 9 to 12 °C"
+              "value": "6 °C",
+              "detail": "today from 3 to 6 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Le Canton de Vaud et deux grands clubs sportifs font équipe contre la violence domestique",
+              "date": "2026-11-19T09:30:00.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26818-default-acd390d6f1"
+            },
             {
               "label": "Soigne ton futur : une campagne pour la promotion des professions de santé",
               "date": "2026-11-13T11:51:59.000Z",
@@ -344,14 +349,9 @@
               "label": "Le Canton de Vaud recommande la vaccination contre la grippe, le Covid-19 et le VRS aux personnes à risque",
               "date": "2026-10-28T17:02:30.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26734-le-canton-de-vaud-recommande-la-vaccination-contre-la-grippe-le-covid-19-et-le-vrs-aux-personnes-a-risque"
-            },
-            {
-              "label": "Trente ans de politique d’intégration dans le canton de Vaud",
-              "date": "2026-10-05T15:03:42.000Z",
-              "url": "https://www.vd.ch/actualites/actualite/news/26679-default-47773e4170"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -380,16 +380,16 @@
           "date": "2026-09-04T06:34:11.412Z"
         },
         {
-          "title": "Permit L short duration Vaud: duration, extension and rights",
-          "url": "/en/swiss-articles/work-permit-l-short-term-vaud/",
-          "excerpt": "The L permit allows you to work in Switzerland for up to 1 year and is renewable.",
-          "date": "2026-09-04T08:00:51.242Z"
-        },
-        {
           "title": "Swiss health system LAMal in the Canton of Vaud",
           "url": "/en/swiss-articles/switzerland-healthcare-lamal-vaud/",
           "excerpt": "Complete guide to the Swiss health system in the Canton of Vaud: LAMal obligation, choice of the sick fund, deductibles and cantonal subsidies.",
           "date": "2026-08-20T02:15:48.837Z"
+        },
+        {
+          "title": "Permit L short duration Vaud: duration, extension and rights",
+          "url": "/en/swiss-articles/work-permit-l-short-term-vaud/",
+          "excerpt": "The L permit allows you to work in Switzerland for up to 1 year and is renewable.",
+          "date": "2026-09-04T08:00:51.242Z"
         },
         {
           "title": "Permit L in Vaud: validity max 1 year and extension",
@@ -427,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "VD",
@@ -443,7 +443,7 @@
         },
         {
           "label": "Laufende Kontrollschild-Auktionen",
-          "value": "14",
+          "value": "35",
           "note": "mittleres Gebot 2’000 CHF"
         }
       ],
@@ -474,30 +474,30 @@
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
-              "label": "VD256",
-              "value": "2’400 CHF",
+              "label": "VD7171",
+              "value": "2’300 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-11-22T21:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/fr/auction/120792"
+              "date": "2026-11-29T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120852"
             },
             {
-              "label": "VD1389",
+              "label": "VD1161",
               "value": "2’000 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-11-22T21:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/fr/auction/120805"
+              "date": "2026-11-29T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120875"
             },
             {
-              "label": "VD1469",
+              "label": "VD1229",
               "value": "2’000 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-11-22T21:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/fr/auction/120804"
+              "date": "2026-11-29T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120876"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.encheres-vd.ch/fr/",
-          "updatedAt": "2026-11-16T06:25:42.818Z"
+          "updatedAt": "2026-11-25T21:43:23.986Z"
         },
         {
           "id": "meteo",
@@ -506,18 +506,23 @@
           "items": [
             {
               "label": "Lausanne",
-              "value": "10 °C",
-              "detail": "heute 9 bis 12 °C"
+              "value": "6 °C",
+              "detail": "heute 3 bis 6 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Le Canton de Vaud et deux grands clubs sportifs font équipe contre la violence domestique",
+              "date": "2026-11-19T09:30:00.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26818-default-acd390d6f1"
+            },
             {
               "label": "Soigne ton futur : une campagne pour la promotion des professions de santé",
               "date": "2026-11-13T11:51:59.000Z",
@@ -542,14 +547,9 @@
               "label": "Le Canton de Vaud recommande la vaccination contre la grippe, le Covid-19 et le VRS aux personnes à risque",
               "date": "2026-10-28T17:02:30.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26734-le-canton-de-vaud-recommande-la-vaccination-contre-la-grippe-le-covid-19-et-le-vrs-aux-personnes-a-risque"
-            },
-            {
-              "label": "Trente ans de politique d’intégration dans le canton de Vaud",
-              "date": "2026-10-05T15:03:42.000Z",
-              "url": "https://www.vd.ch/actualites/actualite/news/26679-default-47773e4170"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -578,16 +578,16 @@
           "date": "2026-09-04T06:34:11.412Z"
         },
         {
-          "title": "Kurzzeiturlaub Waadt: Dauer, Verlängerung und Rechte",
-          "url": "/de/schweiz-artikel/arbeitserlaubnis-l-kurzfristig-waadt/",
-          "excerpt": "Die Bewilligung L erlaubt bis zu 1 Jahr in der Schweiz zu arbeiten und ist verlängerbar. Erfahren Sie, wie Sie die Verlängerung beantragen, auf die B-Bewilligung wechseln und welche Steuerpflichten bestehen.",
-          "date": "2026-09-04T08:00:51.242Z"
-        },
-        {
           "title": "Schweizerisches Gesundheitssystem KVG im Kanton Waadt",
           "url": "/de/schweiz-artikel/schweizer-gesundheitssystem-lamal-waadt/",
           "excerpt": "Vollständiger Leitfaden zum Schweizer Gesundheitssystem im Kanton Waadt: KVG-Pflicht, Krankenkassenwahl, Franchisen und Kantonsbeiträge.",
           "date": "2026-08-20T02:15:48.837Z"
+        },
+        {
+          "title": "Kurzzeiturlaub Waadt: Dauer, Verlängerung und Rechte",
+          "url": "/de/schweiz-artikel/arbeitserlaubnis-l-kurzfristig-waadt/",
+          "excerpt": "Die Bewilligung L erlaubt bis zu 1 Jahr in der Schweiz zu arbeiten und ist verlängerbar. Erfahren Sie, wie Sie die Verlängerung beantragen, auf die B-Bewilligung wechseln und welche Steuerpflichten bestehen.",
+          "date": "2026-09-04T08:00:51.242Z"
         },
         {
           "title": "Ausweis L in der Waadt: Gültigkeit max. 1 Jahr und Verlängerung",
@@ -625,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "VD",
@@ -641,7 +641,7 @@
         },
         {
           "label": "Enchères de plaques en cours",
-          "value": "14",
+          "value": "35",
           "note": "offre centrale 2 000 CHF"
         }
       ],
@@ -672,30 +672,30 @@
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
-              "label": "VD256",
-              "value": "2 400 CHF",
+              "label": "VD7171",
+              "value": "2 300 CHF",
               "detail": "offre actuelle",
-              "date": "2026-11-22T21:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/fr/auction/120792"
+              "date": "2026-11-29T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120852"
             },
             {
-              "label": "VD1389",
+              "label": "VD1161",
               "value": "2 000 CHF",
               "detail": "offre actuelle",
-              "date": "2026-11-22T21:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/fr/auction/120805"
+              "date": "2026-11-29T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120875"
             },
             {
-              "label": "VD1469",
+              "label": "VD1229",
               "value": "2 000 CHF",
               "detail": "offre actuelle",
-              "date": "2026-11-22T21:00:00.000Z",
-              "url": "https://www.encheres-vd.ch/fr/auction/120804"
+              "date": "2026-11-29T21:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/fr/auction/120876"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.encheres-vd.ch/fr/",
-          "updatedAt": "2026-11-16T06:25:42.818Z"
+          "updatedAt": "2026-11-25T21:43:23.986Z"
         },
         {
           "id": "meteo",
@@ -704,18 +704,23 @@
           "items": [
             {
               "label": "Lausanne",
-              "value": "10 °C",
-              "detail": "aujourd’hui de 9 à 12 °C"
+              "value": "6 °C",
+              "detail": "aujourd’hui de 3 à 6 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Le Canton de Vaud et deux grands clubs sportifs font équipe contre la violence domestique",
+              "date": "2026-11-19T09:30:00.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26818-default-acd390d6f1"
+            },
             {
               "label": "Soigne ton futur : une campagne pour la promotion des professions de santé",
               "date": "2026-11-13T11:51:59.000Z",
@@ -740,14 +745,9 @@
               "label": "Le Canton de Vaud recommande la vaccination contre la grippe, le Covid-19 et le VRS aux personnes à risque",
               "date": "2026-10-28T17:02:30.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26734-le-canton-de-vaud-recommande-la-vaccination-contre-la-grippe-le-covid-19-et-le-vrs-aux-personnes-a-risque"
-            },
-            {
-              "label": "Trente ans de politique d’intégration dans le canton de Vaud",
-              "date": "2026-10-05T15:03:42.000Z",
-              "url": "https://www.vd.ch/actualites/actualite/news/26679-default-47773e4170"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -776,16 +776,16 @@
           "date": "2026-09-04T06:34:11.412Z"
         },
         {
-          "title": "Permis L courte durée vaudois : durée, prorogation et droits",
-          "url": "/fr/articles-suisse/permis-l-courte-duree-vaud/",
-          "excerpt": "Le permis L permet de travailler en Suisse jusqu'à 1 an et est renouvelable. Découvrez comment demander la prolongation, passer au permis B et quelles sont les obligations fiscales.",
-          "date": "2026-09-04T08:00:51.242Z"
-        },
-        {
           "title": "Système de santé suisse LAMal dans le canton de Vaud",
           "url": "/fr/articles-suisse/systeme-sante-suisse-lamal-vaud/",
           "excerpt": "Guide complet du système de santé suisse dans le canton de Vaud : obligation LAMal, choix de la caisse-maladie, franchises et allocations cantonales.",
           "date": "2026-08-20T02:15:48.837Z"
+        },
+        {
+          "title": "Permis L courte durée vaudois : durée, prorogation et droits",
+          "url": "/fr/articles-suisse/permis-l-courte-duree-vaud/",
+          "excerpt": "Le permis L permet de travailler en Suisse jusqu'à 1 an et est renouvelable. Découvrez comment demander la prolongation, passer au permis B et quelles sont les obligations fiscales.",
+          "date": "2026-09-04T08:00:51.242Z"
         },
         {
           "title": "Permis L en Vaud : validité max 1 an et prolongation",
@@ -819,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

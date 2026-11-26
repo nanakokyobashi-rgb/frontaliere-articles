@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "pensioni",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "5e77356830f68add510a2ac84dfce80d8dc6c61e9f8c49132dbdcf2786910f80",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "2413830b126aea7b39de21ab7d1bbd14298e501912b2e0e1e0ea3f89dfdfa811",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Des rendez-vous d’information gratuits dédiés à votre future retraite",
+              "date": "2026-11-16",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15281"
+            },
+            {
               "label": "Des nouvelles règles pour le cumul emploi-retraite à partir de 2027",
               "date": "2026-11-10",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18914"
@@ -159,14 +164,9 @@
               "label": "Aidants : dans quels cas l’accompagnement d’un proche compte pour la retraite ?",
               "date": "2026-10-20",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19097"
-            },
-            {
-              "label": "Quelle revalorisation pour les retraites complémentaires du privé ?",
-              "date": "2026-10-15",
-              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17790"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -208,7 +208,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "GE",
@@ -317,6 +317,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Des rendez-vous d’information gratuits dédiés à votre future retraite",
+              "date": "2026-11-16",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15281"
+            },
+            {
               "label": "Des nouvelles règles pour le cumul emploi-retraite à partir de 2027",
               "date": "2026-11-10",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18914"
@@ -340,14 +345,9 @@
               "label": "Aidants : dans quels cas l’accompagnement d’un proche compte pour la retraite ?",
               "date": "2026-10-20",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19097"
-            },
-            {
-              "label": "Quelle revalorisation pour les retraites complémentaires du privé ?",
-              "date": "2026-10-15",
-              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17790"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -389,7 +389,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "GE",
@@ -498,6 +498,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Des rendez-vous d’information gratuits dédiés à votre future retraite",
+              "date": "2026-11-16",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15281"
+            },
+            {
               "label": "Des nouvelles règles pour le cumul emploi-retraite à partir de 2027",
               "date": "2026-11-10",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18914"
@@ -521,14 +526,9 @@
               "label": "Aidants : dans quels cas l’accompagnement d’un proche compte pour la retraite ?",
               "date": "2026-10-20",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19097"
-            },
-            {
-              "label": "Quelle revalorisation pour les retraites complémentaires du privé ?",
-              "date": "2026-10-15",
-              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17790"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -570,7 +570,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "GE",
@@ -679,6 +679,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Des rendez-vous d’information gratuits dédiés à votre future retraite",
+              "date": "2026-11-16",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15281"
+            },
+            {
               "label": "Des nouvelles règles pour le cumul emploi-retraite à partir de 2027",
               "date": "2026-11-10",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18914"
@@ -702,14 +707,9 @@
               "label": "Aidants : dans quels cas l’accompagnement d’un proche compte pour la retraite ?",
               "date": "2026-10-20",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19097"
-            },
-            {
-              "label": "Quelle revalorisation pour les retraites complémentaires du privé ?",
-              "date": "2026-10-15",
-              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17790"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -751,7 +751,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

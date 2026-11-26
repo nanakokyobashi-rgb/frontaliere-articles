@@ -4,22 +4,22 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "mobilita",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "c945c08610e4e60480f5b1dfb6e575d749d0c72e2a4b82b03ff792cb1b683bd1",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "82eea9bb2e4f22c1c8629d3508eb743b1bfe06460cfb5bae57b9ea3349d72783",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-15T23:59:59.000Z",
+      "updatedAt": "2026-11-24T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-16T07:21:34.368Z",
+      "updatedAt": "2026-11-25T19:39:26.365Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -33,77 +33,71 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Vallorbe-Jougne (La Ferrière), settimana conclusa: 15 novembre 2026"
+          "note": "Chavannes-de-Bogis-Divonne, settimana conclusa: 24 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "20",
-          "note": "segnalazioni aggiornate: 16 novembre 2026"
+          "value": "17",
+          "note": "segnalazioni aggiornate: 25 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "31",
-          "note": "segnalazioni aggiornate: 16 novembre 2026"
+          "value": "29",
+          "note": "segnalazioni aggiornate: 25 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 9 novembre 2026 – 15 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 18 novembre 2026 – 24 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
-              "label": "Vallorbe-Jougne (La Ferrière)",
+              "label": "Chavannes-de-Bogis-Divonne",
               "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/vallorbe-jougne/oggi/"
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/chavannes-de-bogis-divonne/oggi/"
             },
             {
               "label": "Crassier-Divonne",
               "value": "0 min",
-              "detail": "49 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/crassier-divonne/oggi/"
             },
             {
               "label": "L'Auberson-Les Fourgs",
               "value": "0 min",
-              "detail": "49 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/l-auberson-les-fourgs/oggi/"
-            },
-            {
-              "label": "Chavannes-de-Bogis-Divonne",
-              "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/chavannes-de-bogis-divonne/oggi/"
             },
             {
               "label": "La Cure-Les Rousses",
               "value": "0 min",
-              "detail": "49 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/la-cure-les-rousses/oggi/"
             },
             {
               "label": "Le Brassus-Bois-d'Amont",
-              "value": "0,1 min",
-              "detail": "49 rilevazioni",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/le-brassus-bois-d-amont/oggi/"
+            },
+            {
+              "label": "Vallorbe-Jougne (La Ferrière)",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/vallorbe-jougne/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-15T23:59:59.000Z"
+          "updatedAt": "2026-11-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Chiusure, cantieri e disagi",
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
-            {
-              "label": "A9 Vevey <-> Martigny tra Svincolo autostradale Bex Sud E Svincolo autostradale St-Maurice Situazione: chiusa cantiere, lunghezza [km] 6.0 Limitazione del traffico: corsia chiusa",
-              "value": "Chiusura",
-              "detail": "fine prevista: 21 novembre 2026",
-              "date": "2026-08-28T15:24:00.000Z"
-            },
             {
               "label": "A9 Pontarlier <-> Lausanne tra Svincolo autostradale Ballaigues E Svincolo autostradale Les Clées Situazione: chiusa cantiere, lunghezza [km] 6.8",
               "value": "Chiusura",
@@ -141,20 +135,36 @@
               "date": "2026-09-16T12:09:00.000Z"
             },
             {
-              "label": "A9 Vevey <-> Martigny tra Svincolo autostradale Bex Nord E Svincolo autostradale St-Maurice Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
+              "label": "A9 Vevey <-> Sion tra Svincolo autostradale Bex Nord E Parcheggio Indivis Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsia d'emergenza chiusa",
               "value": "Chiusura",
-              "detail": "fine prevista: 19 novembre 2026",
-              "date": "2026-10-27T19:00:00.000Z"
+              "detail": "fine prevista: 26 novembre 2026",
+              "date": "2026-11-06T08:10:00.000Z"
+            },
+            {
+              "label": "A1 Genève <-> Lausanne tra Svincolo autostradale Nyon E Svincolo autostradale Gland Situazione: problemi di traffico cantiere, lunghezza [km] 0.7 Limitazione del traffico: corsia d'emergenza chiusa",
+              "value": "Chiusura",
+              "detail": "fine prevista: 4 dicembre 2026",
+              "date": "2026-11-10T04:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Travaux d’entretien de la chaussée",
+              "date": "2026-11-18T09:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=91120"
+            },
+            {
+              "label": "Le tram sera mis en exploitation commerciale le 13 décembre",
+              "date": "2026-11-13T12:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=91050"
+            },
             {
               "label": "Mobilité électrique : 200 bornes électriques sur le domaine public à l’horizon 2031",
               "date": "2026-11-05T13:00:00.000Z",
@@ -174,19 +184,9 @@
               "label": "Travaux de rénovation et de réhabilitation des parcs et domaines",
               "date": "2026-10-19T12:00:00.000Z",
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90670"
-            },
-            {
-              "label": "Travaux sur le pont de la Vuachère - circulation modifiée",
-              "date": "2026-10-13T09:30:00.000Z",
-              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90650"
-            },
-            {
-              "label": "Réfection de la chaussée de la route Aloys-Fauquez",
-              "date": "2026-10-07T12:00:00.000Z",
-              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90550"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -270,7 +270,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "VD",
@@ -281,77 +281,71 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Vallorbe-Jougne (La Ferrière), week ending 15 November 2026"
+          "note": "Chavannes-de-Bogis-Divonne, week ending 24 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "20",
-          "note": "reports as of 16 November 2026"
+          "value": "17",
+          "note": "reports as of 25 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "31",
-          "note": "reports as of 16 November 2026"
+          "value": "29",
+          "note": "reports as of 25 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 9 November 2026 to 15 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 18 November 2026 to 24 November 2026, fastest first.",
           "items": [
             {
-              "label": "Vallorbe-Jougne (La Ferrière)",
+              "label": "Chavannes-de-Bogis-Divonne",
               "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/vallorbe-jougne/today/"
+              "detail": "48 readings",
+              "url": "/en/border-wait/chavannes-de-bogis-divonne/today/"
             },
             {
               "label": "Crassier-Divonne",
               "value": "0 min",
-              "detail": "49 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/crassier-divonne/today/"
             },
             {
               "label": "L'Auberson-Les Fourgs",
               "value": "0 min",
-              "detail": "49 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/l-auberson-les-fourgs/today/"
-            },
-            {
-              "label": "Chavannes-de-Bogis-Divonne",
-              "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/chavannes-de-bogis-divonne/today/"
             },
             {
               "label": "La Cure-Les Rousses",
               "value": "0 min",
-              "detail": "49 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/la-cure-les-rousses/today/"
             },
             {
               "label": "Le Brassus-Bois-d'Amont",
-              "value": "0.1 min",
-              "detail": "49 readings",
+              "value": "0 min",
+              "detail": "48 readings",
               "url": "/en/border-wait/le-brassus-bois-d-amont/today/"
+            },
+            {
+              "label": "Vallorbe-Jougne (La Ferrière)",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/vallorbe-jougne/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-15T23:59:59.000Z"
+          "updatedAt": "2026-11-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Closures, roadworks and disruptions",
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
-            {
-              "label": "A9 Vevey <-> Martigny tra Svincolo autostradale Bex Sud E Svincolo autostradale St-Maurice Situazione: chiusa cantiere, lunghezza [km] 6.0 Limitazione del traffico: corsia chiusa",
-              "value": "Closure",
-              "detail": "until 21 November 2026",
-              "date": "2026-08-28T15:24:00.000Z"
-            },
             {
               "label": "A9 Pontarlier <-> Lausanne tra Svincolo autostradale Ballaigues E Svincolo autostradale Les Clées Situazione: chiusa cantiere, lunghezza [km] 6.8",
               "value": "Closure",
@@ -389,20 +383,36 @@
               "date": "2026-09-16T12:09:00.000Z"
             },
             {
-              "label": "A9 Vevey <-> Martigny tra Svincolo autostradale Bex Nord E Svincolo autostradale St-Maurice Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
+              "label": "A9 Vevey <-> Sion tra Svincolo autostradale Bex Nord E Parcheggio Indivis Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsia d'emergenza chiusa",
               "value": "Closure",
-              "detail": "until 19 November 2026",
-              "date": "2026-10-27T19:00:00.000Z"
+              "detail": "until 26 November 2026",
+              "date": "2026-11-06T08:10:00.000Z"
+            },
+            {
+              "label": "A1 Genève <-> Lausanne tra Svincolo autostradale Nyon E Svincolo autostradale Gland Situazione: problemi di traffico cantiere, lunghezza [km] 0.7 Limitazione del traffico: corsia d'emergenza chiusa",
+              "value": "Closure",
+              "detail": "until 4 December 2026",
+              "date": "2026-11-10T04:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Travaux d’entretien de la chaussée",
+              "date": "2026-11-18T09:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=91120"
+            },
+            {
+              "label": "Le tram sera mis en exploitation commerciale le 13 décembre",
+              "date": "2026-11-13T12:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=91050"
+            },
             {
               "label": "Mobilité électrique : 200 bornes électriques sur le domaine public à l’horizon 2031",
               "date": "2026-11-05T13:00:00.000Z",
@@ -422,19 +432,9 @@
               "label": "Travaux de rénovation et de réhabilitation des parcs et domaines",
               "date": "2026-10-19T12:00:00.000Z",
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90670"
-            },
-            {
-              "label": "Travaux sur le pont de la Vuachère - circulation modifiée",
-              "date": "2026-10-13T09:30:00.000Z",
-              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90650"
-            },
-            {
-              "label": "Réfection de la chaussée de la route Aloys-Fauquez",
-              "date": "2026-10-07T12:00:00.000Z",
-              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90550"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -517,7 +517,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "VD",
@@ -528,77 +528,71 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Vallorbe-Jougne (La Ferrière), Woche bis 15. November 2026"
+          "note": "Chavannes-de-Bogis-Divonne, Woche bis 24. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "20",
-          "note": "Meldungen vom 16. November 2026"
+          "value": "17",
+          "note": "Meldungen vom 25. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "31",
-          "note": "Meldungen vom 16. November 2026"
+          "value": "29",
+          "note": "Meldungen vom 25. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 9. November 2026 bis 15. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 18. November 2026 bis 24. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
-              "label": "Vallorbe-Jougne (La Ferrière)",
+              "label": "Chavannes-de-Bogis-Divonne",
               "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/vallorbe-jougne/heute/"
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/chavannes-de-bogis-divonne/heute/"
             },
             {
               "label": "Crassier-Divonne",
               "value": "0 Min.",
-              "detail": "49 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/crassier-divonne/heute/"
             },
             {
               "label": "L'Auberson-Les Fourgs",
               "value": "0 Min.",
-              "detail": "49 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/l-auberson-les-fourgs/heute/"
-            },
-            {
-              "label": "Chavannes-de-Bogis-Divonne",
-              "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/chavannes-de-bogis-divonne/heute/"
             },
             {
               "label": "La Cure-Les Rousses",
               "value": "0 Min.",
-              "detail": "49 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/la-cure-les-rousses/heute/"
             },
             {
               "label": "Le Brassus-Bois-d'Amont",
-              "value": "0.1 Min.",
-              "detail": "49 Messungen",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/le-brassus-bois-d-amont/heute/"
+            },
+            {
+              "label": "Vallorbe-Jougne (La Ferrière)",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/vallorbe-jougne/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-15T23:59:59.000Z"
+          "updatedAt": "2026-11-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Sperrungen, Baustellen und Störungen",
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
-            {
-              "label": "A9 Vevey <-> Martigny zwischen Anschluss Bex-Süd und Anschluss St-Maurice Sachlage: Strecke gesperrt Baustelle, Länge [km] 6.0 Verkehrsführung: Fahrstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 21. November 2026",
-              "date": "2026-08-28T15:24:00.000Z"
-            },
             {
               "label": "A9 Pontarlier <-> Lausanne zwischen Anschluss Ballaigues und Anschluss Les Clées Sachlage: Strecke gesperrt Baustelle, Länge [km] 6.8",
               "value": "Sperrung",
@@ -636,20 +630,36 @@
               "date": "2026-09-16T12:09:00.000Z"
             },
             {
-              "label": "A9 Vevey <-> Martigny zwischen Anschluss Bex-Nord und Anschluss St-Maurice Sachlage: Strecke gesperrt Baustelle Verkehrsführung: Fahrstreifen gesperrt",
+              "label": "A9 Vevey <-> Sion zwischen Anschluss Bex-Nord und Parkplatz Indivis Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: Pannenstreifen gesperrt",
               "value": "Sperrung",
-              "detail": "bis 19. November 2026",
-              "date": "2026-10-27T19:00:00.000Z"
+              "detail": "bis 26. November 2026",
+              "date": "2026-11-06T08:10:00.000Z"
+            },
+            {
+              "label": "A1 Genf <-> Lausanne zwischen Anschluss Nyon und Anschluss Gland Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.7 Verkehrsführung: Pannenstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 4. Dezember 2026",
+              "date": "2026-11-10T04:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Travaux d’entretien de la chaussée",
+              "date": "2026-11-18T09:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=91120"
+            },
+            {
+              "label": "Le tram sera mis en exploitation commerciale le 13 décembre",
+              "date": "2026-11-13T12:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=91050"
+            },
             {
               "label": "Mobilité électrique : 200 bornes électriques sur le domaine public à l’horizon 2031",
               "date": "2026-11-05T13:00:00.000Z",
@@ -669,19 +679,9 @@
               "label": "Travaux de rénovation et de réhabilitation des parcs et domaines",
               "date": "2026-10-19T12:00:00.000Z",
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90670"
-            },
-            {
-              "label": "Travaux sur le pont de la Vuachère - circulation modifiée",
-              "date": "2026-10-13T09:30:00.000Z",
-              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90650"
-            },
-            {
-              "label": "Réfection de la chaussée de la route Aloys-Fauquez",
-              "date": "2026-10-07T12:00:00.000Z",
-              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90550"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -764,7 +764,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "VD",
@@ -775,77 +775,71 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Vallorbe-Jougne (La Ferrière), semaine jusqu’au 15 novembre 2026"
+          "note": "Chavannes-de-Bogis-Divonne, semaine jusqu’au 24 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "20",
-          "note": "signalements au 16 novembre 2026"
+          "value": "17",
+          "note": "signalements au 25 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "31",
-          "note": "signalements au 16 novembre 2026"
+          "value": "29",
+          "note": "signalements au 25 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 9 novembre 2026 au 15 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 18 novembre 2026 au 24 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
-              "label": "Vallorbe-Jougne (La Ferrière)",
+              "label": "Chavannes-de-Bogis-Divonne",
               "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/vallorbe-jougne/aujourd-hui/"
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/chavannes-de-bogis-divonne/aujourd-hui/"
             },
             {
               "label": "Crassier-Divonne",
               "value": "0 min",
-              "detail": "49 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/crassier-divonne/aujourd-hui/"
             },
             {
               "label": "L'Auberson-Les Fourgs",
               "value": "0 min",
-              "detail": "49 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/l-auberson-les-fourgs/aujourd-hui/"
-            },
-            {
-              "label": "Chavannes-de-Bogis-Divonne",
-              "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/chavannes-de-bogis-divonne/aujourd-hui/"
             },
             {
               "label": "La Cure-Les Rousses",
               "value": "0 min",
-              "detail": "49 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/la-cure-les-rousses/aujourd-hui/"
             },
             {
               "label": "Le Brassus-Bois-d'Amont",
-              "value": "0,1 min",
-              "detail": "49 relevés",
+              "value": "0 min",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/le-brassus-bois-d-amont/aujourd-hui/"
+            },
+            {
+              "label": "Vallorbe-Jougne (La Ferrière)",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/vallorbe-jougne/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-15T23:59:59.000Z"
+          "updatedAt": "2026-11-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Fermetures, chantiers et perturbations",
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
-            {
-              "label": "A9 Vevey <-> Martigny entre Jonction autoroutière Bex-Sud et Jonction autoroutière St-Maurice Situation: fermé travaux, longueur [km] 6.0 Gestion du trafic: voie fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 21 novembre 2026",
-              "date": "2026-08-28T15:24:00.000Z"
-            },
             {
               "label": "A9 Pontarlier <-> Lausanne entre Jonction autoroutière Ballaigues et Jonction autoroutière Les Clées Situation: fermé travaux, longueur [km] 6.8",
               "value": "Fermeture",
@@ -883,20 +877,36 @@
               "date": "2026-09-16T12:09:00.000Z"
             },
             {
-              "label": "A9 Vevey <-> Martigny entre Jonction autoroutière Bex-Nord et Jonction autoroutière St-Maurice Situation: fermé travaux Gestion du trafic: voie fermée",
+              "label": "A9 Vevey <-> Sion entre Jonction autoroutière Bex-Nord et Parking Indivis Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: bande d'arrêt d'urgence fermée",
               "value": "Fermeture",
-              "detail": "jusqu’au 19 novembre 2026",
-              "date": "2026-10-27T19:00:00.000Z"
+              "detail": "jusqu’au 26 novembre 2026",
+              "date": "2026-11-06T08:10:00.000Z"
+            },
+            {
+              "label": "A1 Genève <-> Lausanne entre Jonction autoroutière Nyon et Jonction autoroutière Gland Situation: trafic perturbé travaux, longueur [km] 0.7 Gestion du trafic: bande d'arrêt d'urgence fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 4 décembre 2026",
+              "date": "2026-11-10T04:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Travaux d’entretien de la chaussée",
+              "date": "2026-11-18T09:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=91120"
+            },
+            {
+              "label": "Le tram sera mis en exploitation commerciale le 13 décembre",
+              "date": "2026-11-13T12:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=91050"
+            },
             {
               "label": "Mobilité électrique : 200 bornes électriques sur le domaine public à l’horizon 2031",
               "date": "2026-11-05T13:00:00.000Z",
@@ -916,19 +926,9 @@
               "label": "Travaux de rénovation et de réhabilitation des parcs et domaines",
               "date": "2026-10-19T12:00:00.000Z",
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90670"
-            },
-            {
-              "label": "Travaux sur le pont de la Vuachère - circulation modifiée",
-              "date": "2026-10-13T09:30:00.000Z",
-              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90650"
-            },
-            {
-              "label": "Réfection de la chaussée de la route Aloys-Fauquez",
-              "date": "2026-10-07T12:00:00.000Z",
-              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90550"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -1012,7 +1012,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

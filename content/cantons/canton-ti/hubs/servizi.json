@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "4bcfccacb13654b6bde5471773ec23bb239ee10d2b27ee23f7d4af43a46a1173",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "3d0870046fc0ffd366fbbe7ddd03d848af516adca199863b939fa9cbcf6d97a9",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,22 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-16T06:47:29.912Z",
+      "updatedAt": "2026-11-25T21:11:24.083Z",
       "keyFacts": 0
     },
     {
-      "id": "aste-targhe",
-      "updatedAt": "2026-11-16T06:25:42.818Z",
-      "keyFacts": 1
-    },
-    {
       "id": "meteo",
-      "updatedAt": "2026-11-16T06:51:00.113Z",
+      "updatedAt": "2026-11-26T00:36:15.946Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -45,11 +40,6 @@
           "value": "740,20 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
-        },
-        {
-          "label": "Aste di targhe in corso",
-          "value": "2",
-          "note": "offerta mediana 600 CHF"
         }
       ],
       "dataBlocks": [
@@ -79,63 +69,39 @@
           "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
           "items": [
             {
-              "label": "Pharmantica",
-              "detail": "Biasca, Biasca e Valli",
-              "date": "2026-11-13T17:00:00.000Z"
-            },
-            {
-              "label": "Montalbano",
-              "detail": "San Pietro di Stabio, Mendrisiotto",
-              "date": "2026-11-14T07:00:00.000Z"
-            },
-            {
-              "label": "Farmacia Sun Store Lugano Beltramina",
-              "detail": "Lugano, Luganese",
-              "date": "2026-11-14T07:00:00.000Z"
-            },
-            {
-              "label": "Moesa",
-              "detail": "Castione, Bellinzonese",
-              "date": "2026-11-16T17:30:00.000Z"
-            },
-            {
-              "label": "Zanini SA",
-              "detail": "Stabio, Mendrisiotto",
-              "date": "2026-11-17T07:00:00.000Z"
-            },
-            {
               "label": "Grassi",
               "detail": "Faido, Biasca e Valli",
               "date": "2026-11-20T17:00:00.000Z"
+            },
+            {
+              "label": "Fenice",
+              "detail": "Giubiasco, Bellinzonese",
+              "date": "2026-11-20T17:30:00.000Z"
+            },
+            {
+              "label": "Farmacia Amavita Gianella",
+              "detail": "Lugano, Luganese",
+              "date": "2026-11-21T07:00:00.000Z"
+            },
+            {
+              "label": "Moderna",
+              "detail": "Chiasso, Mendrisiotto",
+              "date": "2026-11-24T07:00:00.000Z"
+            },
+            {
+              "label": "Riviera",
+              "detail": "Lodrino, Biasca e Valli",
+              "date": "2026-11-27T17:00:00.000Z"
+            },
+            {
+              "label": "MGM Azione",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-11-27T17:30:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-16T06:47:29.912Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Aste delle targhe",
-          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
-          "items": [
-            {
-              "label": "TI92266",
-              "value": "600 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-25T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1545"
-            },
-            {
-              "label": "TI295952",
-              "value": "600 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-25T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1546"
-            }
-          ],
-          "sourceName": "Ufficio cantonale della circolazione",
-          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-16T06:25:42.818Z"
+          "updatedAt": "2026-11-25T21:11:24.083Z"
         },
         {
           "id": "meteo",
@@ -144,38 +110,58 @@
           "items": [
             {
               "label": "Bellinzona",
-              "value": "5 °C",
-              "detail": "oggi da 5 a 13 °C"
+              "value": "6 °C",
+              "detail": "oggi da 3 a 10 °C"
             },
             {
               "label": "Chiasso",
-              "value": "4 °C",
-              "detail": "oggi da 4 a 11 °C"
+              "value": "7 °C",
+              "detail": "oggi da 4 a 9 °C"
             },
             {
               "label": "Locarno",
-              "value": "7 °C",
-              "detail": "oggi da 7 a 13 °C"
+              "value": "8 °C",
+              "detail": "oggi da 5 a 11 °C"
             },
             {
               "label": "Lugano",
-              "value": "6 °C",
-              "detail": "oggi da 6 a 12 °C"
+              "value": "7 °C",
+              "detail": "oggi da 5 a 10 °C"
             },
             {
               "label": "Mendrisio",
-              "value": "3 °C",
-              "detail": "oggi da 4 a 11 °C"
+              "value": "6 °C",
+              "detail": "oggi da 4 a 9 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Una panchina per riflettere. Una sosta per il cambiamento",
+              "date": "2026-11-25",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/stop-violenza.html"
+            },
+            {
+              "label": "Il Green Team dell’EOC vince il Planetary Health Award 2026 della FMH",
+              "date": "2026-11-18",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/cs-greenaward.html"
+            },
+            {
+              "label": "Privilegiare il trattamento ambulatoriale, ricorrendo al ricovero stazionario solo quando clinicamente necessario",
+              "date": "2026-11-16",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/hsk0.html"
+            },
+            {
+              "label": "Giornata Mondiale Prematurità",
+              "date": "2026-11-15",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/gm-prematuri.html"
+            },
             {
               "label": "Un nuovo spazio di gioco, sorrisi e condivisione all'Istituto Pediatrico della Svizzera Italiana",
               "date": "2026-11-12",
@@ -185,29 +171,9 @@
               "label": "La fotobiomodulazione arriva all’Ospedale Italiano di Lugano per migliorare la qualità di vita durante la radioterapia",
               "date": "2026-11-10",
               "url": "https://www.eoc.ch/media-e-news/news/2026/fotobiomodulazione.html"
-            },
-            {
-              "label": "Proteggiamoci insieme dai virus respiratori",
-              "date": "2026-11-09",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/virus-respiratori.html"
-            },
-            {
-              "label": "Nuova nomina – Primario di Chirurgia pediatrica della Clinica di Chirurgia e Ortopedia pediatrica presso l’Istituto Pediatrico della Svizzera Italiana",
-              "date": "2026-11-05",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/nomina-betalli.html"
-            },
-            {
-              "label": "Il progetto Interreg \"OnTheDOT\" entra nel vivo",
-              "date": "2026-11-03",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/dot.html"
-            },
-            {
-              "label": "Chirurgia toracica di qualità",
-              "date": "2026-11-01",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/Chirurgia-toracica-di-qualit-.html"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -295,7 +261,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "TI",
@@ -308,11 +274,6 @@
           "value": "740.20 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
-        },
-        {
-          "label": "Plate auctions running",
-          "value": "2",
-          "note": "typical bid 600 CHF"
         }
       ],
       "dataBlocks": [
@@ -342,63 +303,39 @@
           "description": "Upcoming duty shifts published by the canton’s official service.",
           "items": [
             {
-              "label": "Pharmantica",
-              "detail": "Biasca, Biasca e Valli",
-              "date": "2026-11-13T17:00:00.000Z"
-            },
-            {
-              "label": "Montalbano",
-              "detail": "San Pietro di Stabio, Mendrisiotto",
-              "date": "2026-11-14T07:00:00.000Z"
-            },
-            {
-              "label": "Farmacia Sun Store Lugano Beltramina",
-              "detail": "Lugano, Luganese",
-              "date": "2026-11-14T07:00:00.000Z"
-            },
-            {
-              "label": "Moesa",
-              "detail": "Castione, Bellinzonese",
-              "date": "2026-11-16T17:30:00.000Z"
-            },
-            {
-              "label": "Zanini SA",
-              "detail": "Stabio, Mendrisiotto",
-              "date": "2026-11-17T07:00:00.000Z"
-            },
-            {
               "label": "Grassi",
               "detail": "Faido, Biasca e Valli",
               "date": "2026-11-20T17:00:00.000Z"
+            },
+            {
+              "label": "Fenice",
+              "detail": "Giubiasco, Bellinzonese",
+              "date": "2026-11-20T17:30:00.000Z"
+            },
+            {
+              "label": "Farmacia Amavita Gianella",
+              "detail": "Lugano, Luganese",
+              "date": "2026-11-21T07:00:00.000Z"
+            },
+            {
+              "label": "Moderna",
+              "detail": "Chiasso, Mendrisiotto",
+              "date": "2026-11-24T07:00:00.000Z"
+            },
+            {
+              "label": "Riviera",
+              "detail": "Lodrino, Biasca e Valli",
+              "date": "2026-11-27T17:00:00.000Z"
+            },
+            {
+              "label": "MGM Azione",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-11-27T17:30:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-16T06:47:29.912Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Number plate auctions",
-          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
-          "items": [
-            {
-              "label": "TI92266",
-              "value": "600 CHF",
-              "detail": "current bid",
-              "date": "2026-11-25T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1545"
-            },
-            {
-              "label": "TI295952",
-              "value": "600 CHF",
-              "detail": "current bid",
-              "date": "2026-11-25T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1546"
-            }
-          ],
-          "sourceName": "Cantonal road traffic office",
-          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-16T06:25:42.818Z"
+          "updatedAt": "2026-11-25T21:11:24.083Z"
         },
         {
           "id": "meteo",
@@ -407,38 +344,58 @@
           "items": [
             {
               "label": "Bellinzona",
-              "value": "5 °C",
-              "detail": "today from 5 to 13 °C"
+              "value": "6 °C",
+              "detail": "today from 3 to 10 °C"
             },
             {
               "label": "Chiasso",
-              "value": "4 °C",
-              "detail": "today from 4 to 11 °C"
+              "value": "7 °C",
+              "detail": "today from 4 to 9 °C"
             },
             {
               "label": "Locarno",
-              "value": "7 °C",
-              "detail": "today from 7 to 13 °C"
+              "value": "8 °C",
+              "detail": "today from 5 to 11 °C"
             },
             {
               "label": "Lugano",
-              "value": "6 °C",
-              "detail": "today from 6 to 12 °C"
+              "value": "7 °C",
+              "detail": "today from 5 to 10 °C"
             },
             {
               "label": "Mendrisio",
-              "value": "3 °C",
-              "detail": "today from 4 to 11 °C"
+              "value": "6 °C",
+              "detail": "today from 4 to 9 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Una panchina per riflettere. Una sosta per il cambiamento",
+              "date": "2026-11-25",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/stop-violenza.html"
+            },
+            {
+              "label": "Il Green Team dell’EOC vince il Planetary Health Award 2026 della FMH",
+              "date": "2026-11-18",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/cs-greenaward.html"
+            },
+            {
+              "label": "Privilegiare il trattamento ambulatoriale, ricorrendo al ricovero stazionario solo quando clinicamente necessario",
+              "date": "2026-11-16",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/hsk0.html"
+            },
+            {
+              "label": "Giornata Mondiale Prematurità",
+              "date": "2026-11-15",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/gm-prematuri.html"
+            },
             {
               "label": "Un nuovo spazio di gioco, sorrisi e condivisione all'Istituto Pediatrico della Svizzera Italiana",
               "date": "2026-11-12",
@@ -448,29 +405,9 @@
               "label": "La fotobiomodulazione arriva all’Ospedale Italiano di Lugano per migliorare la qualità di vita durante la radioterapia",
               "date": "2026-11-10",
               "url": "https://www.eoc.ch/media-e-news/news/2026/fotobiomodulazione.html"
-            },
-            {
-              "label": "Proteggiamoci insieme dai virus respiratori",
-              "date": "2026-11-09",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/virus-respiratori.html"
-            },
-            {
-              "label": "Nuova nomina – Primario di Chirurgia pediatrica della Clinica di Chirurgia e Ortopedia pediatrica presso l’Istituto Pediatrico della Svizzera Italiana",
-              "date": "2026-11-05",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/nomina-betalli.html"
-            },
-            {
-              "label": "Il progetto Interreg \"OnTheDOT\" entra nel vivo",
-              "date": "2026-11-03",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/dot.html"
-            },
-            {
-              "label": "Chirurgia toracica di qualità",
-              "date": "2026-11-01",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/Chirurgia-toracica-di-qualit-.html"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +490,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "TI",
@@ -566,11 +503,6 @@
           "value": "740.20 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
-        },
-        {
-          "label": "Laufende Kontrollschild-Auktionen",
-          "value": "2",
-          "note": "mittleres Gebot 600 CHF"
         }
       ],
       "dataBlocks": [
@@ -600,63 +532,39 @@
           "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
           "items": [
             {
-              "label": "Pharmantica",
-              "detail": "Biasca, Biasca e Valli",
-              "date": "2026-11-13T17:00:00.000Z"
-            },
-            {
-              "label": "Montalbano",
-              "detail": "San Pietro di Stabio, Mendrisiotto",
-              "date": "2026-11-14T07:00:00.000Z"
-            },
-            {
-              "label": "Farmacia Sun Store Lugano Beltramina",
-              "detail": "Lugano, Luganese",
-              "date": "2026-11-14T07:00:00.000Z"
-            },
-            {
-              "label": "Moesa",
-              "detail": "Castione, Bellinzonese",
-              "date": "2026-11-16T17:30:00.000Z"
-            },
-            {
-              "label": "Zanini SA",
-              "detail": "Stabio, Mendrisiotto",
-              "date": "2026-11-17T07:00:00.000Z"
-            },
-            {
               "label": "Grassi",
               "detail": "Faido, Biasca e Valli",
               "date": "2026-11-20T17:00:00.000Z"
+            },
+            {
+              "label": "Fenice",
+              "detail": "Giubiasco, Bellinzonese",
+              "date": "2026-11-20T17:30:00.000Z"
+            },
+            {
+              "label": "Farmacia Amavita Gianella",
+              "detail": "Lugano, Luganese",
+              "date": "2026-11-21T07:00:00.000Z"
+            },
+            {
+              "label": "Moderna",
+              "detail": "Chiasso, Mendrisiotto",
+              "date": "2026-11-24T07:00:00.000Z"
+            },
+            {
+              "label": "Riviera",
+              "detail": "Lodrino, Biasca e Valli",
+              "date": "2026-11-27T17:00:00.000Z"
+            },
+            {
+              "label": "MGM Azione",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-11-27T17:30:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-16T06:47:29.912Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Kontrollschild-Auktionen",
-          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
-          "items": [
-            {
-              "label": "TI92266",
-              "value": "600 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-25T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1545"
-            },
-            {
-              "label": "TI295952",
-              "value": "600 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-25T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1546"
-            }
-          ],
-          "sourceName": "Kantonales Strassenverkehrsamt",
-          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-16T06:25:42.818Z"
+          "updatedAt": "2026-11-25T21:11:24.083Z"
         },
         {
           "id": "meteo",
@@ -665,38 +573,58 @@
           "items": [
             {
               "label": "Bellinzona",
-              "value": "5 °C",
-              "detail": "heute 5 bis 13 °C"
+              "value": "6 °C",
+              "detail": "heute 3 bis 10 °C"
             },
             {
               "label": "Chiasso",
-              "value": "4 °C",
-              "detail": "heute 4 bis 11 °C"
+              "value": "7 °C",
+              "detail": "heute 4 bis 9 °C"
             },
             {
               "label": "Locarno",
-              "value": "7 °C",
-              "detail": "heute 7 bis 13 °C"
+              "value": "8 °C",
+              "detail": "heute 5 bis 11 °C"
             },
             {
               "label": "Lugano",
-              "value": "6 °C",
-              "detail": "heute 6 bis 12 °C"
+              "value": "7 °C",
+              "detail": "heute 5 bis 10 °C"
             },
             {
               "label": "Mendrisio",
-              "value": "3 °C",
-              "detail": "heute 4 bis 11 °C"
+              "value": "6 °C",
+              "detail": "heute 4 bis 9 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Una panchina per riflettere. Una sosta per il cambiamento",
+              "date": "2026-11-25",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/stop-violenza.html"
+            },
+            {
+              "label": "Il Green Team dell’EOC vince il Planetary Health Award 2026 della FMH",
+              "date": "2026-11-18",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/cs-greenaward.html"
+            },
+            {
+              "label": "Privilegiare il trattamento ambulatoriale, ricorrendo al ricovero stazionario solo quando clinicamente necessario",
+              "date": "2026-11-16",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/hsk0.html"
+            },
+            {
+              "label": "Giornata Mondiale Prematurità",
+              "date": "2026-11-15",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/gm-prematuri.html"
+            },
             {
               "label": "Un nuovo spazio di gioco, sorrisi e condivisione all'Istituto Pediatrico della Svizzera Italiana",
               "date": "2026-11-12",
@@ -706,29 +634,9 @@
               "label": "La fotobiomodulazione arriva all’Ospedale Italiano di Lugano per migliorare la qualità di vita durante la radioterapia",
               "date": "2026-11-10",
               "url": "https://www.eoc.ch/media-e-news/news/2026/fotobiomodulazione.html"
-            },
-            {
-              "label": "Proteggiamoci insieme dai virus respiratori",
-              "date": "2026-11-09",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/virus-respiratori.html"
-            },
-            {
-              "label": "Nuova nomina – Primario di Chirurgia pediatrica della Clinica di Chirurgia e Ortopedia pediatrica presso l’Istituto Pediatrico della Svizzera Italiana",
-              "date": "2026-11-05",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/nomina-betalli.html"
-            },
-            {
-              "label": "Il progetto Interreg \"OnTheDOT\" entra nel vivo",
-              "date": "2026-11-03",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/dot.html"
-            },
-            {
-              "label": "Chirurgia toracica di qualità",
-              "date": "2026-11-01",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/Chirurgia-toracica-di-qualit-.html"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -811,7 +719,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "TI",
@@ -824,11 +732,6 @@
           "value": "740,20 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
-        },
-        {
-          "label": "Enchères de plaques en cours",
-          "value": "2",
-          "note": "offre centrale 600 CHF"
         }
       ],
       "dataBlocks": [
@@ -858,63 +761,39 @@
           "description": "Prochaines gardes publiées par le service officiel du canton.",
           "items": [
             {
-              "label": "Pharmantica",
-              "detail": "Biasca, Biasca e Valli",
-              "date": "2026-11-13T17:00:00.000Z"
-            },
-            {
-              "label": "Montalbano",
-              "detail": "San Pietro di Stabio, Mendrisiotto",
-              "date": "2026-11-14T07:00:00.000Z"
-            },
-            {
-              "label": "Farmacia Sun Store Lugano Beltramina",
-              "detail": "Lugano, Luganese",
-              "date": "2026-11-14T07:00:00.000Z"
-            },
-            {
-              "label": "Moesa",
-              "detail": "Castione, Bellinzonese",
-              "date": "2026-11-16T17:30:00.000Z"
-            },
-            {
-              "label": "Zanini SA",
-              "detail": "Stabio, Mendrisiotto",
-              "date": "2026-11-17T07:00:00.000Z"
-            },
-            {
               "label": "Grassi",
               "detail": "Faido, Biasca e Valli",
               "date": "2026-11-20T17:00:00.000Z"
+            },
+            {
+              "label": "Fenice",
+              "detail": "Giubiasco, Bellinzonese",
+              "date": "2026-11-20T17:30:00.000Z"
+            },
+            {
+              "label": "Farmacia Amavita Gianella",
+              "detail": "Lugano, Luganese",
+              "date": "2026-11-21T07:00:00.000Z"
+            },
+            {
+              "label": "Moderna",
+              "detail": "Chiasso, Mendrisiotto",
+              "date": "2026-11-24T07:00:00.000Z"
+            },
+            {
+              "label": "Riviera",
+              "detail": "Lodrino, Biasca e Valli",
+              "date": "2026-11-27T17:00:00.000Z"
+            },
+            {
+              "label": "MGM Azione",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-11-27T17:30:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-16T06:47:29.912Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Enchères de plaques",
-          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
-          "items": [
-            {
-              "label": "TI92266",
-              "value": "600 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-25T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1545"
-            },
-            {
-              "label": "TI295952",
-              "value": "600 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-25T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1546"
-            }
-          ],
-          "sourceName": "Office cantonal de la circulation",
-          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-16T06:25:42.818Z"
+          "updatedAt": "2026-11-25T21:11:24.083Z"
         },
         {
           "id": "meteo",
@@ -923,38 +802,58 @@
           "items": [
             {
               "label": "Bellinzona",
-              "value": "5 °C",
-              "detail": "aujourd’hui de 5 à 13 °C"
+              "value": "6 °C",
+              "detail": "aujourd’hui de 3 à 10 °C"
             },
             {
               "label": "Chiasso",
-              "value": "4 °C",
-              "detail": "aujourd’hui de 4 à 11 °C"
+              "value": "7 °C",
+              "detail": "aujourd’hui de 4 à 9 °C"
             },
             {
               "label": "Locarno",
-              "value": "7 °C",
-              "detail": "aujourd’hui de 7 à 13 °C"
+              "value": "8 °C",
+              "detail": "aujourd’hui de 5 à 11 °C"
             },
             {
               "label": "Lugano",
-              "value": "6 °C",
-              "detail": "aujourd’hui de 6 à 12 °C"
+              "value": "7 °C",
+              "detail": "aujourd’hui de 5 à 10 °C"
             },
             {
               "label": "Mendrisio",
-              "value": "3 °C",
-              "detail": "aujourd’hui de 4 à 11 °C"
+              "value": "6 °C",
+              "detail": "aujourd’hui de 4 à 9 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Una panchina per riflettere. Una sosta per il cambiamento",
+              "date": "2026-11-25",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/stop-violenza.html"
+            },
+            {
+              "label": "Il Green Team dell’EOC vince il Planetary Health Award 2026 della FMH",
+              "date": "2026-11-18",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/cs-greenaward.html"
+            },
+            {
+              "label": "Privilegiare il trattamento ambulatoriale, ricorrendo al ricovero stazionario solo quando clinicamente necessario",
+              "date": "2026-11-16",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/hsk0.html"
+            },
+            {
+              "label": "Giornata Mondiale Prematurità",
+              "date": "2026-11-15",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/gm-prematuri.html"
+            },
             {
               "label": "Un nuovo spazio di gioco, sorrisi e condivisione all'Istituto Pediatrico della Svizzera Italiana",
               "date": "2026-11-12",
@@ -964,29 +863,9 @@
               "label": "La fotobiomodulazione arriva all’Ospedale Italiano di Lugano per migliorare la qualità di vita durante la radioterapia",
               "date": "2026-11-10",
               "url": "https://www.eoc.ch/media-e-news/news/2026/fotobiomodulazione.html"
-            },
-            {
-              "label": "Proteggiamoci insieme dai virus respiratori",
-              "date": "2026-11-09",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/virus-respiratori.html"
-            },
-            {
-              "label": "Nuova nomina – Primario di Chirurgia pediatrica della Clinica di Chirurgia e Ortopedia pediatrica presso l’Istituto Pediatrico della Svizzera Italiana",
-              "date": "2026-11-05",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/nomina-betalli.html"
-            },
-            {
-              "label": "Il progetto Interreg \"OnTheDOT\" entra nel vivo",
-              "date": "2026-11-03",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/dot.html"
-            },
-            {
-              "label": "Chirurgia toracica di qualità",
-              "date": "2026-11-01",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/Chirurgia-toracica-di-qualit-.html"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -1066,7 +945,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

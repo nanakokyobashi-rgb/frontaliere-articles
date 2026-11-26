@@ -4,22 +4,22 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "4e7da14e5ee9b38a7b3dc0e0d52367390a9ed7e14694b9aa18581751ad02d0fe",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "b036474b0d51022b162d9074e4c35900cd60ac40055f92a7c1d354f35c476a81",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-15T23:59:59.000Z",
+      "updatedAt": "2026-11-24T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-16T07:21:34.368Z",
+      "updatedAt": "2026-11-25T19:39:26.365Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -33,89 +33,83 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Jestetten – Laufen-Uhwiesen, Grenzstrasse, settimana conclusa: 15 novembre 2026"
+          "note": "Dettighofen – Rafz, settimana conclusa: 24 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "16",
-          "note": "segnalazioni aggiornate: 16 novembre 2026"
+          "value": "6",
+          "note": "segnalazioni aggiornate: 25 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "27",
-          "note": "segnalazioni aggiornate: 16 novembre 2026"
+          "note": "segnalazioni aggiornate: 25 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 9 novembre 2026 – 15 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 18 novembre 2026 – 24 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
-              "label": "Jestetten – Laufen-Uhwiesen, Grenzstrasse",
+              "label": "Dettighofen – Rafz",
               "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/jestetten-laufen-uhwiesen-grenzstrasse/oggi/"
-            },
-            {
-              "label": "Jestetten – Rheinau",
-              "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/jestetten-rheinau/oggi/"
-            },
-            {
-              "label": "Lottstetten – Nack",
-              "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/lottstetten-nack/oggi/"
-            },
-            {
-              "label": "Lottstetten – Rafz, Landstrasse",
-              "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/lottstetten-rafz-landstrasse/oggi/"
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/dettighofen-rafz/oggi/"
             },
             {
               "label": "Dettighofen – Wil ZH",
               "value": "0 min",
-              "detail": "49 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/dettighofen-wil-zh/oggi/"
             },
             {
               "label": "Hohentengen am Hochrhein – Wasterkingen",
               "value": "0 min",
-              "detail": "49 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/hohentengen-am-hochrhein-wasterkingen/oggi/"
             },
             {
               "label": "Jestetten – Laufen-Uhwiesen, Dorfstrasse",
               "value": "0 min",
-              "detail": "49 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/jestetten-laufen-uhwiesen-dorfstrasse/oggi/"
             },
             {
-              "label": "Lottstetten – Rafz, Schaffhausener Strasse",
-              "value": "0,1 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/lottstetten-rafz-schaffhausener-strasse/oggi/"
+              "label": "Jestetten – Laufen-Uhwiesen, Grenzstrasse",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/jestetten-laufen-uhwiesen-grenzstrasse/oggi/"
+            },
+            {
+              "label": "Jestetten – Rheinau",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/jestetten-rheinau/oggi/"
+            },
+            {
+              "label": "Klettgau – Wil ZH",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/klettgau-wil-zh/oggi/"
+            },
+            {
+              "label": "Lottstetten – Nack",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/lottstetten-nack/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-15T23:59:59.000Z"
+          "updatedAt": "2026-11-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Chiusure, cantieri e disagi",
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
-            {
-              "label": "A3 Zürich -> Chur Svincolo autostradale Horgen Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.1",
-              "value": "Chiusura",
-              "detail": "fine prevista: 27 novembre 2026",
-              "date": "2026-10-15T09:43:00.000Z"
-            },
             {
               "label": "A1L Letten <-> Diramazione Zürich Ost tra Svincolo autostradale Unterstrass E Svincolo autostradale Aubrugg Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
               "value": "Chiusura",
@@ -135,38 +129,57 @@
               "date": "2026-11-05T11:12:00.000Z"
             },
             {
-              "label": "A3 Basel -> Chur Svincolo autostradale Urdorf Nord Situazione: uscita chiusa cantiere, lunghezza [km] 0.6",
-              "value": "Chiusura",
-              "detail": "fine prevista: 19 novembre 2026",
-              "date": "2026-11-09T14:06:00.000Z"
-            },
-            {
-              "label": "A3 Basel -> Chur Svincolo autostradale Urdorf Süd Situazione: raccordo autostradale chiuso in entrata cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 20 novembre 2026",
-              "date": "2026-11-09T14:07:00.000Z"
-            },
-            {
-              "label": "A3 Chur -> Basel Svincolo autostradale Urdorf Nord Situazione: uscita chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 18 novembre 2026",
-              "date": "2026-11-09T19:30:00.000Z"
-            },
-            {
               "label": "A1 Bern -> St. Gallen Svincolo autostradale Weiningen Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.2",
               "value": "Chiusura",
               "detail": "fine prevista: 11 febbraio 2027",
               "date": "2026-11-09T19:30:00.000Z"
+            },
+            {
+              "label": "A1 St. Gallen -> Bern Svincolo autostradale Weiningen Situazione: uscita chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 11 febbraio 2027",
+              "date": "2026-11-09T19:30:00.000Z"
+            },
+            {
+              "label": "A4 Zürich -> Brunnen tra Svincolo autostradale Affoltern am Albis E Raccordo autostradale Diramazione Blegi Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 27 novembre 2026",
+              "date": "2026-11-11T05:45:00.000Z"
+            },
+            {
+              "label": "A51 Bülach -> Aeroporto tra Svincolo autostradale Bülach Süd E Svincolo autostradale Kloten Nord Situazione: colonna Causa: incidente precedente",
+              "value": "Traffico",
+              "date": "2026-11-04T05:48:00.000Z"
+            },
+            {
+              "label": "Revocato: A1 Bern -> St. Gallen tra Svincolo autostradale Dietikon E Galleria Galleria Gubrist Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-11-25T04:45:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Massnahmen gegen unerwünschten Durchgangsverkehr in den Quartieren Blumenau, Neuwiesen und Oberfeld",
+              "date": "2026-11-20",
+              "url": "https://stadt.winterthur.ch/medien/massnahmen-gegen-unerwuenschten-durchgangsverkehr-den-quartieren-blumenau-neuwiesen-und-oberfeld"
+            },
+            {
+              "label": "Kanton saniert Hirzelstrasse",
+              "date": "2026-11-19",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/11/kanton-erhoeht-sicherheit-auf-der-hirzelstrasse-zwischen-hirzel-und-schoenenberg.html"
+            },
+            {
+              "label": "Neubau städtischer Recycling-Hof an der Kronaustrasse",
+              "date": "2026-11-16",
+              "url": "https://stadt.winterthur.ch/medien/neubau-staedtischer-recycling-hof-der-kronaustrasse"
+            },
             {
               "label": "Stadtrat bedauert Bundesgerichtsentscheid in Sachen Gegenvorschlag zur «ÖV-Initiative»",
               "date": "2026-11-13T09:00:00.000Z",
@@ -181,24 +194,9 @@
               "label": "Velowinter im Magazin",
               "date": "2026-11-11",
               "url": "https://www.zh.ch/de/news-uebersicht/mitteilungen/2026/mobilitaet/veloverkehr/velowinter-kalt-nass-und-trotzdem-schoen.html"
-            },
-            {
-              "label": "Hinwil: Auto überschlägt sich und landet auf Autobahnzubringer",
-              "date": "2026-11-09",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/11/261109f_hinwil_vu.html"
-            },
-            {
-              "label": "Mehr Sicherheit auf der Forchstrasse in Zollikon",
-              "date": "2026-10-29",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/mehr-sicherheit-auf-der-forchstrasse-zwischen-zollikerberg-und-zumikon.html"
-            },
-            {
-              "label": "A1 / Brüttisellen: Stauumfahrer gebüsst",
-              "date": "2026-10-27",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/261027f_a1_bruettisellen_rastplatz.html"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -282,7 +280,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "ZH",
@@ -293,89 +291,83 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Jestetten – Laufen-Uhwiesen, Grenzstrasse, week ending 15 November 2026"
+          "note": "Dettighofen – Rafz, week ending 24 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "16",
-          "note": "reports as of 16 November 2026"
+          "value": "6",
+          "note": "reports as of 25 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "27",
-          "note": "reports as of 16 November 2026"
+          "note": "reports as of 25 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 9 November 2026 to 15 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 18 November 2026 to 24 November 2026, fastest first.",
           "items": [
             {
-              "label": "Jestetten – Laufen-Uhwiesen, Grenzstrasse",
+              "label": "Dettighofen – Rafz",
               "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/jestetten-laufen-uhwiesen-grenzstrasse/today/"
-            },
-            {
-              "label": "Jestetten – Rheinau",
-              "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/jestetten-rheinau/today/"
-            },
-            {
-              "label": "Lottstetten – Nack",
-              "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/lottstetten-nack/today/"
-            },
-            {
-              "label": "Lottstetten – Rafz, Landstrasse",
-              "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/lottstetten-rafz-landstrasse/today/"
+              "detail": "48 readings",
+              "url": "/en/border-wait/dettighofen-rafz/today/"
             },
             {
               "label": "Dettighofen – Wil ZH",
               "value": "0 min",
-              "detail": "49 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/dettighofen-wil-zh/today/"
             },
             {
               "label": "Hohentengen am Hochrhein – Wasterkingen",
               "value": "0 min",
-              "detail": "49 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/hohentengen-am-hochrhein-wasterkingen/today/"
             },
             {
               "label": "Jestetten – Laufen-Uhwiesen, Dorfstrasse",
               "value": "0 min",
-              "detail": "49 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/jestetten-laufen-uhwiesen-dorfstrasse/today/"
             },
             {
-              "label": "Lottstetten – Rafz, Schaffhausener Strasse",
-              "value": "0.1 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/lottstetten-rafz-schaffhausener-strasse/today/"
+              "label": "Jestetten – Laufen-Uhwiesen, Grenzstrasse",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/jestetten-laufen-uhwiesen-grenzstrasse/today/"
+            },
+            {
+              "label": "Jestetten – Rheinau",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/jestetten-rheinau/today/"
+            },
+            {
+              "label": "Klettgau – Wil ZH",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/klettgau-wil-zh/today/"
+            },
+            {
+              "label": "Lottstetten – Nack",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/lottstetten-nack/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-15T23:59:59.000Z"
+          "updatedAt": "2026-11-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Closures, roadworks and disruptions",
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
-            {
-              "label": "A3 Zürich -> Chur Svincolo autostradale Horgen Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.1",
-              "value": "Closure",
-              "detail": "until 27 November 2026",
-              "date": "2026-10-15T09:43:00.000Z"
-            },
             {
               "label": "A1L Letten <-> Diramazione Zürich Ost tra Svincolo autostradale Unterstrass E Svincolo autostradale Aubrugg Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
               "value": "Closure",
@@ -395,38 +387,57 @@
               "date": "2026-11-05T11:12:00.000Z"
             },
             {
-              "label": "A3 Basel -> Chur Svincolo autostradale Urdorf Nord Situazione: uscita chiusa cantiere, lunghezza [km] 0.6",
-              "value": "Closure",
-              "detail": "until 19 November 2026",
-              "date": "2026-11-09T14:06:00.000Z"
-            },
-            {
-              "label": "A3 Basel -> Chur Svincolo autostradale Urdorf Süd Situazione: raccordo autostradale chiuso in entrata cantiere",
-              "value": "Closure",
-              "detail": "until 20 November 2026",
-              "date": "2026-11-09T14:07:00.000Z"
-            },
-            {
-              "label": "A3 Chur -> Basel Svincolo autostradale Urdorf Nord Situazione: uscita chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 18 November 2026",
-              "date": "2026-11-09T19:30:00.000Z"
-            },
-            {
               "label": "A1 Bern -> St. Gallen Svincolo autostradale Weiningen Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.2",
               "value": "Closure",
               "detail": "until 11 February 2027",
               "date": "2026-11-09T19:30:00.000Z"
+            },
+            {
+              "label": "A1 St. Gallen -> Bern Svincolo autostradale Weiningen Situazione: uscita chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 11 February 2027",
+              "date": "2026-11-09T19:30:00.000Z"
+            },
+            {
+              "label": "A4 Zürich -> Brunnen tra Svincolo autostradale Affoltern am Albis E Raccordo autostradale Diramazione Blegi Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico…",
+              "value": "Closure",
+              "detail": "until 27 November 2026",
+              "date": "2026-11-11T05:45:00.000Z"
+            },
+            {
+              "label": "A51 Bülach -> Aeroporto tra Svincolo autostradale Bülach Süd E Svincolo autostradale Kloten Nord Situazione: colonna Causa: incidente precedente",
+              "value": "Traffic",
+              "date": "2026-11-04T05:48:00.000Z"
+            },
+            {
+              "label": "Revocato: A1 Bern -> St. Gallen tra Svincolo autostradale Dietikon E Galleria Galleria Gubrist Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-11-25T04:45:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Massnahmen gegen unerwünschten Durchgangsverkehr in den Quartieren Blumenau, Neuwiesen und Oberfeld",
+              "date": "2026-11-20",
+              "url": "https://stadt.winterthur.ch/medien/massnahmen-gegen-unerwuenschten-durchgangsverkehr-den-quartieren-blumenau-neuwiesen-und-oberfeld"
+            },
+            {
+              "label": "Kanton saniert Hirzelstrasse",
+              "date": "2026-11-19",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/11/kanton-erhoeht-sicherheit-auf-der-hirzelstrasse-zwischen-hirzel-und-schoenenberg.html"
+            },
+            {
+              "label": "Neubau städtischer Recycling-Hof an der Kronaustrasse",
+              "date": "2026-11-16",
+              "url": "https://stadt.winterthur.ch/medien/neubau-staedtischer-recycling-hof-der-kronaustrasse"
+            },
             {
               "label": "Stadtrat bedauert Bundesgerichtsentscheid in Sachen Gegenvorschlag zur «ÖV-Initiative»",
               "date": "2026-11-13T09:00:00.000Z",
@@ -441,24 +452,9 @@
               "label": "Velowinter im Magazin",
               "date": "2026-11-11",
               "url": "https://www.zh.ch/de/news-uebersicht/mitteilungen/2026/mobilitaet/veloverkehr/velowinter-kalt-nass-und-trotzdem-schoen.html"
-            },
-            {
-              "label": "Hinwil: Auto überschlägt sich und landet auf Autobahnzubringer",
-              "date": "2026-11-09",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/11/261109f_hinwil_vu.html"
-            },
-            {
-              "label": "Mehr Sicherheit auf der Forchstrasse in Zollikon",
-              "date": "2026-10-29",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/mehr-sicherheit-auf-der-forchstrasse-zwischen-zollikerberg-und-zumikon.html"
-            },
-            {
-              "label": "A1 / Brüttisellen: Stauumfahrer gebüsst",
-              "date": "2026-10-27",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/261027f_a1_bruettisellen_rastplatz.html"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -542,7 +538,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "ZH",
@@ -553,89 +549,83 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Jestetten – Laufen-Uhwiesen, Grenzstrasse, Woche bis 15. November 2026"
+          "note": "Dettighofen – Rafz, Woche bis 24. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "16",
-          "note": "Meldungen vom 16. November 2026"
+          "value": "6",
+          "note": "Meldungen vom 25. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "27",
-          "note": "Meldungen vom 16. November 2026"
+          "note": "Meldungen vom 25. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 9. November 2026 bis 15. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 18. November 2026 bis 24. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
-              "label": "Jestetten – Laufen-Uhwiesen, Grenzstrasse",
+              "label": "Dettighofen – Rafz",
               "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/jestetten-laufen-uhwiesen-grenzstrasse/heute/"
-            },
-            {
-              "label": "Jestetten – Rheinau",
-              "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/jestetten-rheinau/heute/"
-            },
-            {
-              "label": "Lottstetten – Nack",
-              "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/lottstetten-nack/heute/"
-            },
-            {
-              "label": "Lottstetten – Rafz, Landstrasse",
-              "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/lottstetten-rafz-landstrasse/heute/"
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/dettighofen-rafz/heute/"
             },
             {
               "label": "Dettighofen – Wil ZH",
               "value": "0 Min.",
-              "detail": "49 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/dettighofen-wil-zh/heute/"
             },
             {
               "label": "Hohentengen am Hochrhein – Wasterkingen",
               "value": "0 Min.",
-              "detail": "49 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/hohentengen-am-hochrhein-wasterkingen/heute/"
             },
             {
               "label": "Jestetten – Laufen-Uhwiesen, Dorfstrasse",
               "value": "0 Min.",
-              "detail": "49 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/jestetten-laufen-uhwiesen-dorfstrasse/heute/"
             },
             {
-              "label": "Lottstetten – Rafz, Schaffhausener Strasse",
-              "value": "0.1 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/lottstetten-rafz-schaffhausener-strasse/heute/"
+              "label": "Jestetten – Laufen-Uhwiesen, Grenzstrasse",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/jestetten-laufen-uhwiesen-grenzstrasse/heute/"
+            },
+            {
+              "label": "Jestetten – Rheinau",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/jestetten-rheinau/heute/"
+            },
+            {
+              "label": "Klettgau – Wil ZH",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/klettgau-wil-zh/heute/"
+            },
+            {
+              "label": "Lottstetten – Nack",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/lottstetten-nack/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-15T23:59:59.000Z"
+          "updatedAt": "2026-11-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Sperrungen, Baustellen und Störungen",
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
-            {
-              "label": "A3 Zürich -> Chur Anschluss Horgen Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 0.1",
-              "value": "Sperrung",
-              "detail": "bis 27. November 2026",
-              "date": "2026-10-15T09:43:00.000Z"
-            },
             {
               "label": "A1L Letten <-> Verzweigung Zürich-Ost zwischen Anschluss Unterstrass und Anschluss Aubrugg Sachlage: Strecke gesperrt Baustelle Verkehrsführung: Fahrstreifen gesperrt",
               "value": "Sperrung",
@@ -655,38 +645,57 @@
               "date": "2026-11-05T11:12:00.000Z"
             },
             {
-              "label": "A3 Basel -> Chur Anschluss Urdorf-Nord Sachlage: Ausfahrt gesperrt Baustelle, Länge [km] 0.6",
-              "value": "Sperrung",
-              "detail": "bis 19. November 2026",
-              "date": "2026-11-09T14:06:00.000Z"
-            },
-            {
-              "label": "A3 Basel -> Chur Anschluss Urdorf-Süd Sachlage: Einfahrt gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 20. November 2026",
-              "date": "2026-11-09T14:07:00.000Z"
-            },
-            {
-              "label": "A3 Chur -> Basel Anschluss Urdorf-Nord Sachlage: Ausfahrt gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 18. November 2026",
-              "date": "2026-11-09T19:30:00.000Z"
-            },
-            {
               "label": "A1 Bern -> St. Gallen Anschluss Weiningen Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 0.2",
               "value": "Sperrung",
               "detail": "bis 11. Februar 2027",
               "date": "2026-11-09T19:30:00.000Z"
+            },
+            {
+              "label": "A1 St. Gallen -> Bern Anschluss Weiningen Sachlage: Ausfahrt gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 11. Februar 2027",
+              "date": "2026-11-09T19:30:00.000Z"
+            },
+            {
+              "label": "A4 Zürich -> Brunnen zwischen Anschluss Affoltern am Albis und Autobahndreieck Verzweigung Blegi Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: Pannenstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 27. November 2026",
+              "date": "2026-11-11T05:45:00.000Z"
+            },
+            {
+              "label": "A51 Bülach -> Flughafen zwischen Anschluss Bülach-Süd und Anschluss Kloten-Nord Sachlage: Stau Ursache: vorausgegangener Unfall",
+              "value": "Verkehr",
+              "date": "2026-11-04T05:48:00.000Z"
+            },
+            {
+              "label": "Aufgehoben: A1 Bern -> St. Gallen zwischen Anschluss Dietikon und Tunnel Gubrist-Tunnel Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-11-25T04:45:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Massnahmen gegen unerwünschten Durchgangsverkehr in den Quartieren Blumenau, Neuwiesen und Oberfeld",
+              "date": "2026-11-20",
+              "url": "https://stadt.winterthur.ch/medien/massnahmen-gegen-unerwuenschten-durchgangsverkehr-den-quartieren-blumenau-neuwiesen-und-oberfeld"
+            },
+            {
+              "label": "Kanton saniert Hirzelstrasse",
+              "date": "2026-11-19",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/11/kanton-erhoeht-sicherheit-auf-der-hirzelstrasse-zwischen-hirzel-und-schoenenberg.html"
+            },
+            {
+              "label": "Neubau städtischer Recycling-Hof an der Kronaustrasse",
+              "date": "2026-11-16",
+              "url": "https://stadt.winterthur.ch/medien/neubau-staedtischer-recycling-hof-der-kronaustrasse"
+            },
             {
               "label": "Stadtrat bedauert Bundesgerichtsentscheid in Sachen Gegenvorschlag zur «ÖV-Initiative»",
               "date": "2026-11-13T09:00:00.000Z",
@@ -701,24 +710,9 @@
               "label": "Velowinter im Magazin",
               "date": "2026-11-11",
               "url": "https://www.zh.ch/de/news-uebersicht/mitteilungen/2026/mobilitaet/veloverkehr/velowinter-kalt-nass-und-trotzdem-schoen.html"
-            },
-            {
-              "label": "Hinwil: Auto überschlägt sich und landet auf Autobahnzubringer",
-              "date": "2026-11-09",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/11/261109f_hinwil_vu.html"
-            },
-            {
-              "label": "Mehr Sicherheit auf der Forchstrasse in Zollikon",
-              "date": "2026-10-29",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/mehr-sicherheit-auf-der-forchstrasse-zwischen-zollikerberg-und-zumikon.html"
-            },
-            {
-              "label": "A1 / Brüttisellen: Stauumfahrer gebüsst",
-              "date": "2026-10-27",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/261027f_a1_bruettisellen_rastplatz.html"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -802,7 +796,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "ZH",
@@ -813,89 +807,83 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Jestetten – Laufen-Uhwiesen, Grenzstrasse, semaine jusqu’au 15 novembre 2026"
+          "note": "Dettighofen – Rafz, semaine jusqu’au 24 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "16",
-          "note": "signalements au 16 novembre 2026"
+          "value": "6",
+          "note": "signalements au 25 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "27",
-          "note": "signalements au 16 novembre 2026"
+          "note": "signalements au 25 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 9 novembre 2026 au 15 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 18 novembre 2026 au 24 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
-              "label": "Jestetten – Laufen-Uhwiesen, Grenzstrasse",
+              "label": "Dettighofen – Rafz",
               "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/jestetten-laufen-uhwiesen-grenzstrasse/aujourd-hui/"
-            },
-            {
-              "label": "Jestetten – Rheinau",
-              "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/jestetten-rheinau/aujourd-hui/"
-            },
-            {
-              "label": "Lottstetten – Nack",
-              "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/lottstetten-nack/aujourd-hui/"
-            },
-            {
-              "label": "Lottstetten – Rafz, Landstrasse",
-              "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/lottstetten-rafz-landstrasse/aujourd-hui/"
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/dettighofen-rafz/aujourd-hui/"
             },
             {
               "label": "Dettighofen – Wil ZH",
               "value": "0 min",
-              "detail": "49 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/dettighofen-wil-zh/aujourd-hui/"
             },
             {
               "label": "Hohentengen am Hochrhein – Wasterkingen",
               "value": "0 min",
-              "detail": "49 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/hohentengen-am-hochrhein-wasterkingen/aujourd-hui/"
             },
             {
               "label": "Jestetten – Laufen-Uhwiesen, Dorfstrasse",
               "value": "0 min",
-              "detail": "49 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/jestetten-laufen-uhwiesen-dorfstrasse/aujourd-hui/"
             },
             {
-              "label": "Lottstetten – Rafz, Schaffhausener Strasse",
-              "value": "0,1 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/lottstetten-rafz-schaffhausener-strasse/aujourd-hui/"
+              "label": "Jestetten – Laufen-Uhwiesen, Grenzstrasse",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/jestetten-laufen-uhwiesen-grenzstrasse/aujourd-hui/"
+            },
+            {
+              "label": "Jestetten – Rheinau",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/jestetten-rheinau/aujourd-hui/"
+            },
+            {
+              "label": "Klettgau – Wil ZH",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/klettgau-wil-zh/aujourd-hui/"
+            },
+            {
+              "label": "Lottstetten – Nack",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/lottstetten-nack/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-15T23:59:59.000Z"
+          "updatedAt": "2026-11-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Fermetures, chantiers et perturbations",
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
-            {
-              "label": "A3 Zurich -> Coire Jonction autoroutière Horgen Situation: entrée fermée travaux, longueur [km] 0.1",
-              "value": "Fermeture",
-              "detail": "jusqu’au 27 novembre 2026",
-              "date": "2026-10-15T09:43:00.000Z"
-            },
             {
               "label": "A1L Letten <-> Echangeur de Zurich-Est entre Jonction autoroutière Unterstrass et Jonction autoroutière Aubrugg Situation: fermé travaux Gestion du trafic: voie fermée",
               "value": "Fermeture",
@@ -915,38 +903,57 @@
               "date": "2026-11-05T11:12:00.000Z"
             },
             {
-              "label": "A3 Bâle -> Coire Jonction autoroutière Urdorf-Nord Situation: sortie fermée travaux, longueur [km] 0.6",
-              "value": "Fermeture",
-              "detail": "jusqu’au 19 novembre 2026",
-              "date": "2026-11-09T14:06:00.000Z"
-            },
-            {
-              "label": "A3 Bâle -> Coire Jonction autoroutière Urdorf-Sud Situation: entrée fermée travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 20 novembre 2026",
-              "date": "2026-11-09T14:07:00.000Z"
-            },
-            {
-              "label": "A3 Coire -> Bâle Jonction autoroutière Urdorf-Nord Situation: sortie fermée travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 18 novembre 2026",
-              "date": "2026-11-09T19:30:00.000Z"
-            },
-            {
               "label": "A1 Berne -> St-Gall Jonction autoroutière Weiningen Situation: entrée fermée travaux, longueur [km] 0.2",
               "value": "Fermeture",
               "detail": "jusqu’au 11 février 2027",
               "date": "2026-11-09T19:30:00.000Z"
+            },
+            {
+              "label": "A1 St-Gall -> Berne Jonction autoroutière Weiningen Situation: sortie fermée travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 11 février 2027",
+              "date": "2026-11-09T19:30:00.000Z"
+            },
+            {
+              "label": "A4 Zurich -> Brunnen entre Jonction autoroutière Affoltern am Albis et Echangeur Echangeur de Blegi Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: bande d'arrêt d'urgence…",
+              "value": "Fermeture",
+              "detail": "jusqu’au 27 novembre 2026",
+              "date": "2026-11-11T05:45:00.000Z"
+            },
+            {
+              "label": "A51 Bülach -> Aéroport entre Jonction autoroutière Bülach-Sud et Jonction autoroutière Kloten-Nord Situation: bouchon Raison: accident précédent",
+              "value": "Trafic",
+              "date": "2026-11-04T05:48:00.000Z"
+            },
+            {
+              "label": "Révoqué: A1 Berne -> St-Gall entre Jonction autoroutière Dietikon et Tunnel Tunnel du Gubrist Situation: trafic en accordéon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-11-25T04:45:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Massnahmen gegen unerwünschten Durchgangsverkehr in den Quartieren Blumenau, Neuwiesen und Oberfeld",
+              "date": "2026-11-20",
+              "url": "https://stadt.winterthur.ch/medien/massnahmen-gegen-unerwuenschten-durchgangsverkehr-den-quartieren-blumenau-neuwiesen-und-oberfeld"
+            },
+            {
+              "label": "Kanton saniert Hirzelstrasse",
+              "date": "2026-11-19",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/11/kanton-erhoeht-sicherheit-auf-der-hirzelstrasse-zwischen-hirzel-und-schoenenberg.html"
+            },
+            {
+              "label": "Neubau städtischer Recycling-Hof an der Kronaustrasse",
+              "date": "2026-11-16",
+              "url": "https://stadt.winterthur.ch/medien/neubau-staedtischer-recycling-hof-der-kronaustrasse"
+            },
             {
               "label": "Stadtrat bedauert Bundesgerichtsentscheid in Sachen Gegenvorschlag zur «ÖV-Initiative»",
               "date": "2026-11-13T09:00:00.000Z",
@@ -961,24 +968,9 @@
               "label": "Velowinter im Magazin",
               "date": "2026-11-11",
               "url": "https://www.zh.ch/de/news-uebersicht/mitteilungen/2026/mobilitaet/veloverkehr/velowinter-kalt-nass-und-trotzdem-schoen.html"
-            },
-            {
-              "label": "Hinwil: Auto überschlägt sich und landet auf Autobahnzubringer",
-              "date": "2026-11-09",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/11/261109f_hinwil_vu.html"
-            },
-            {
-              "label": "Mehr Sicherheit auf der Forchstrasse in Zollikon",
-              "date": "2026-10-29",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/mehr-sicherheit-auf-der-forchstrasse-zwischen-zollikerberg-und-zumikon.html"
-            },
-            {
-              "label": "A1 / Brüttisellen: Stauumfahrer gebüsst",
-              "date": "2026-10-27",
-              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/261027f_a1_bruettisellen_rastplatz.html"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -1062,7 +1054,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "servizi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "277398ee066c861ea3fa35508fc5d0f59d7827c1505696526243659cb703b893",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "6d280a67b2aa112a4fef4ec15906eab99531317e7be72d5ece38cbce6da2a6c5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,13 +13,18 @@
       "keyFacts": 1
     },
     {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-25T21:43:23.986Z",
+      "keyFacts": 1
+    },
+    {
       "id": "meteo",
-      "updatedAt": "2026-11-16T06:51:00.113Z",
+      "updatedAt": "2026-11-26T00:36:15.946Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -35,6 +40,11 @@
           "value": "606,90 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "14",
+          "note": "offerta mediana 200 CHF"
         }
       ],
       "dataBlocks": [
@@ -59,24 +69,70 @@
           "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "FR10057",
+              "value": "1000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-30T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7393&locale=fr_ch"
+            },
+            {
+              "label": "FR15841",
+              "value": "700 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-30T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7394&locale=fr_ch"
+            },
+            {
+              "label": "FR16051",
+              "value": "600 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-30T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7395&locale=fr_ch"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
+          "updatedAt": "2026-11-25T21:43:23.986Z"
+        },
+        {
           "id": "meteo",
           "title": "Meteo",
           "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
           "items": [
             {
               "label": "Fribourg",
-              "value": "8 °C",
-              "detail": "oggi da 7 a 11 °C"
+              "value": "3 °C",
+              "detail": "oggi da 0 a 4 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Inauguration du Centre de santé de la Singine à l’HFR Tafers",
+              "date": "2026-11-20",
+              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/inauguration-du-centre-de-sante-de-la-singine-lhfr-tafers"
+            },
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-11-18T13:52:07.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-275"
+            },
+            {
+              "label": "L’HFR s’engage contre la violence et lance une campagne de sensibilisation pour ses patient-e-s et son personnel",
+              "date": "2026-11-18",
+              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/lhfr-sengage-contre-la-violence-et-lance-une-campagne-de-sensibilisation-pour-ses-patient-e-s-et-son-personnel"
+            },
             {
               "label": "Budget 2027 : un pas supplémentaire vers l’équilibre",
               "date": "2026-11-13",
@@ -91,24 +147,9 @@
               "label": "Numérisation des procédures de permis de construire : traitement entièrement électronique dès début 2027",
               "date": "2026-11-12T09:12:52.000Z",
               "url": "https://www.fr.ch/dime/actualites/numerisation-des-procedures-de-permis-de-construire-traitement-entierement-electronique-des-debut-2027"
-            },
-            {
-              "label": "Demandes de permis de construire et de démolir",
-              "date": "2026-11-11T16:34:09.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-274"
-            },
-            {
-              "label": "Opération d’envergure en matière de lutte contre le travail au noir",
-              "date": "2026-11-11T10:44:04.000Z",
-              "url": "https://www.fr.ch/deef/spe/actualites/operation-denvergure-en-matiere-de-lutte-contre-le-travail-au-noir"
-            },
-            {
-              "label": "Der Staat Freiburg vergibt sechs Stipendien für künstlerische Forschungsaufenthalte im Jahr 2027",
-              "date": "2026-11-06T11:15:14.000Z",
-              "url": "https://www.fr.ch/de/bkad/ka/news/der-staat-freiburg-vergibt-sechs-stipendien-fuer-kuenstlerische-forschungsaufenthalte-im-jahr-2027"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -143,12 +184,6 @@
           "date": "2026-08-23T23:28:41.725Z"
         },
         {
-          "title": "Permesso c canton Friburgo: requisiti e domanda",
-          "url": "/articoli-svizzera/permesso-c-friburgo-guida-requisiti/",
-          "excerpt": "Regole, tempistiche di residenza, criteri di integrazione e procedura per ottenere il permesso di domicilio C nel Cantone di Friburgo.",
-          "date": "2026-09-22T05:55:12.294Z"
-        },
-        {
           "title": "Patente di guida a Friburgo: conversione e requisiti",
           "url": "/articoli-svizzera/patente-di-guida-friburgo-conversione-ed-esami/",
           "excerpt": "Conversione della patente di guida estera nel Cantone di Friburgo, esami teorici e pratici, corsi obbligatori e ufficio della circolazione competente.",
@@ -159,6 +194,12 @@
           "url": "/articoli-svizzera/premi-cassa-malati-friburgo-riduzione/",
           "excerpt": "I premi della assicurazione malattia obbligatoria nel Cantone di Friburgo sono stati ridisegnati per offrire una copertura più equa ai cittadini.",
           "date": "2026-08-17T18:57:41.324Z"
+        },
+        {
+          "title": "Permesso c canton Friburgo: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-c-friburgo-guida-requisiti/",
+          "excerpt": "Regole, tempistiche di residenza, criteri di integrazione e procedura per ottenere il permesso di domicilio C nel Cantone di Friburgo.",
+          "date": "2026-09-22T05:55:12.294Z"
         }
       ],
       "latestCantonArticles": [],
@@ -188,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "FR",
@@ -201,6 +242,11 @@
           "value": "606.90 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "14",
+          "note": "typical bid 200 CHF"
         }
       ],
       "dataBlocks": [
@@ -225,24 +271,70 @@
           "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "FR10057",
+              "value": "1,000 CHF",
+              "detail": "current bid",
+              "date": "2026-11-30T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7393&locale=fr_ch"
+            },
+            {
+              "label": "FR15841",
+              "value": "700 CHF",
+              "detail": "current bid",
+              "date": "2026-11-30T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7394&locale=fr_ch"
+            },
+            {
+              "label": "FR16051",
+              "value": "600 CHF",
+              "detail": "current bid",
+              "date": "2026-11-30T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7395&locale=fr_ch"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
+          "updatedAt": "2026-11-25T21:43:23.986Z"
+        },
+        {
           "id": "meteo",
           "title": "Weather",
           "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
           "items": [
             {
               "label": "Fribourg",
-              "value": "8 °C",
-              "detail": "today from 7 to 11 °C"
+              "value": "3 °C",
+              "detail": "today from 0 to 4 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Inauguration du Centre de santé de la Singine à l’HFR Tafers",
+              "date": "2026-11-20",
+              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/inauguration-du-centre-de-sante-de-la-singine-lhfr-tafers"
+            },
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-11-18T13:52:07.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-275"
+            },
+            {
+              "label": "L’HFR s’engage contre la violence et lance une campagne de sensibilisation pour ses patient-e-s et son personnel",
+              "date": "2026-11-18",
+              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/lhfr-sengage-contre-la-violence-et-lance-une-campagne-de-sensibilisation-pour-ses-patient-e-s-et-son-personnel"
+            },
             {
               "label": "Budget 2027 : un pas supplémentaire vers l’équilibre",
               "date": "2026-11-13",
@@ -257,24 +349,9 @@
               "label": "Numérisation des procédures de permis de construire : traitement entièrement électronique dès début 2027",
               "date": "2026-11-12T09:12:52.000Z",
               "url": "https://www.fr.ch/dime/actualites/numerisation-des-procedures-de-permis-de-construire-traitement-entierement-electronique-des-debut-2027"
-            },
-            {
-              "label": "Demandes de permis de construire et de démolir",
-              "date": "2026-11-11T16:34:09.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-274"
-            },
-            {
-              "label": "Opération d’envergure en matière de lutte contre le travail au noir",
-              "date": "2026-11-11T10:44:04.000Z",
-              "url": "https://www.fr.ch/deef/spe/actualites/operation-denvergure-en-matiere-de-lutte-contre-le-travail-au-noir"
-            },
-            {
-              "label": "Der Staat Freiburg vergibt sechs Stipendien für künstlerische Forschungsaufenthalte im Jahr 2027",
-              "date": "2026-11-06T11:15:14.000Z",
-              "url": "https://www.fr.ch/de/bkad/ka/news/der-staat-freiburg-vergibt-sechs-stipendien-fuer-kuenstlerische-forschungsaufenthalte-im-jahr-2027"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -309,12 +386,6 @@
           "date": "2026-08-23T23:28:41.725Z"
         },
         {
-          "title": "Permit c canton Fribourg: requirements and application",
-          "url": "/en/swiss-articles/settlement-permit-c-fribourg-requirements-application/",
-          "excerpt": "Rules, residence times, integration criteria and procedure for obtaining residence permit C in the Canton of Fribourg.",
-          "date": "2026-09-22T05:55:12.294Z"
-        },
-        {
           "title": "Driving licence in Fribourg: conversion and requirements",
           "url": "/en/swiss-articles/driving-license-fribourg-conversion-and-exams/",
           "excerpt": "Conversion of the foreign driver's license in the Canton of Fribourg, theoretical and practical exams, compulsory courses and competent traffic office.",
@@ -325,6 +396,12 @@
           "url": "/en/swiss-articles/premi-cassa-malati-fribourg/",
           "excerpt": "Compulsory health insurance premiums in the Canton of Fribourg have been redesigned to offer fairer coverage to citizens.",
           "date": "2026-08-17T18:57:41.324Z"
+        },
+        {
+          "title": "Permit c canton Fribourg: requirements and application",
+          "url": "/en/swiss-articles/settlement-permit-c-fribourg-requirements-application/",
+          "excerpt": "Rules, residence times, integration criteria and procedure for obtaining residence permit C in the Canton of Fribourg.",
+          "date": "2026-09-22T05:55:12.294Z"
         }
       ],
       "latestCantonArticles": [],
@@ -350,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "FR",
@@ -363,6 +440,11 @@
           "value": "606.90 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "14",
+          "note": "mittleres Gebot 200 CHF"
         }
       ],
       "dataBlocks": [
@@ -387,24 +469,70 @@
           "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "FR10057",
+              "value": "1’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-30T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7393&locale=fr_ch"
+            },
+            {
+              "label": "FR15841",
+              "value": "700 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-30T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7394&locale=fr_ch"
+            },
+            {
+              "label": "FR16051",
+              "value": "600 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-30T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7395&locale=fr_ch"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
+          "updatedAt": "2026-11-25T21:43:23.986Z"
+        },
+        {
           "id": "meteo",
           "title": "Wetter",
           "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
           "items": [
             {
               "label": "Fribourg",
-              "value": "8 °C",
-              "detail": "heute 7 bis 11 °C"
+              "value": "3 °C",
+              "detail": "heute 0 bis 4 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Inauguration du Centre de santé de la Singine à l’HFR Tafers",
+              "date": "2026-11-20",
+              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/inauguration-du-centre-de-sante-de-la-singine-lhfr-tafers"
+            },
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-11-18T13:52:07.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-275"
+            },
+            {
+              "label": "L’HFR s’engage contre la violence et lance une campagne de sensibilisation pour ses patient-e-s et son personnel",
+              "date": "2026-11-18",
+              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/lhfr-sengage-contre-la-violence-et-lance-une-campagne-de-sensibilisation-pour-ses-patient-e-s-et-son-personnel"
+            },
             {
               "label": "Budget 2027 : un pas supplémentaire vers l’équilibre",
               "date": "2026-11-13",
@@ -419,24 +547,9 @@
               "label": "Numérisation des procédures de permis de construire : traitement entièrement électronique dès début 2027",
               "date": "2026-11-12T09:12:52.000Z",
               "url": "https://www.fr.ch/dime/actualites/numerisation-des-procedures-de-permis-de-construire-traitement-entierement-electronique-des-debut-2027"
-            },
-            {
-              "label": "Demandes de permis de construire et de démolir",
-              "date": "2026-11-11T16:34:09.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-274"
-            },
-            {
-              "label": "Opération d’envergure en matière de lutte contre le travail au noir",
-              "date": "2026-11-11T10:44:04.000Z",
-              "url": "https://www.fr.ch/deef/spe/actualites/operation-denvergure-en-matiere-de-lutte-contre-le-travail-au-noir"
-            },
-            {
-              "label": "Der Staat Freiburg vergibt sechs Stipendien für künstlerische Forschungsaufenthalte im Jahr 2027",
-              "date": "2026-11-06T11:15:14.000Z",
-              "url": "https://www.fr.ch/de/bkad/ka/news/der-staat-freiburg-vergibt-sechs-stipendien-fuer-kuenstlerische-forschungsaufenthalte-im-jahr-2027"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -471,12 +584,6 @@
           "date": "2026-08-23T23:28:41.725Z"
         },
         {
-          "title": "Kantonsgenehmigung Freiburg: Voraussetzungen und Antrag",
-          "url": "/de/schweiz-artikel/niederlassungsbewilligung-c-freiburg-voraussetzungen-gesuch/",
-          "excerpt": "Regeln, Aufenthaltszeiten, Integrationskriterien und Verfahren zur Erlangung der Niederlassungsbewilligung C im Kanton Freiburg.",
-          "date": "2026-09-22T05:55:12.294Z"
-        },
-        {
           "title": "Führerschein in Freiburg: Umstellung und Voraussetzungen",
           "url": "/de/schweiz-artikel/fuehrerschein-freiburg-umstellung-und-pruefungen/",
           "excerpt": "Umwandlung des ausländischen Führerscheins im Kanton Freiburg, theoretische und praktische Prüfungen, Pflichtkurse und zuständiges Strassenverkehrsamt.",
@@ -487,6 +594,12 @@
           "url": "/de/schweiz-artikel/pflichtkrankenkassenpreise-kanton-freiburg/",
           "excerpt": "Die Prämien der gesetzlichen Krankenversicherung im Kanton Freiburg wurden neu gestaltet, um den Bürgern eine gerechtere Deckung zu bieten.",
           "date": "2026-08-17T18:57:41.324Z"
+        },
+        {
+          "title": "Kantonsgenehmigung Freiburg: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/niederlassungsbewilligung-c-freiburg-voraussetzungen-gesuch/",
+          "excerpt": "Regeln, Aufenthaltszeiten, Integrationskriterien und Verfahren zur Erlangung der Niederlassungsbewilligung C im Kanton Freiburg.",
+          "date": "2026-09-22T05:55:12.294Z"
         }
       ],
       "latestCantonArticles": [],
@@ -512,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "FR",
@@ -525,6 +638,11 @@
           "value": "606,90 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "14",
+          "note": "offre centrale 200 CHF"
         }
       ],
       "dataBlocks": [
@@ -549,24 +667,70 @@
           "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "FR10057",
+              "value": "1 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-30T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7393&locale=fr_ch"
+            },
+            {
+              "label": "FR15841",
+              "value": "700 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-30T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7394&locale=fr_ch"
+            },
+            {
+              "label": "FR16051",
+              "value": "600 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-30T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7395&locale=fr_ch"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
+          "updatedAt": "2026-11-25T21:43:23.986Z"
+        },
+        {
           "id": "meteo",
           "title": "Météo",
           "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
           "items": [
             {
               "label": "Fribourg",
-              "value": "8 °C",
-              "detail": "aujourd’hui de 7 à 11 °C"
+              "value": "3 °C",
+              "detail": "aujourd’hui de 0 à 4 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Inauguration du Centre de santé de la Singine à l’HFR Tafers",
+              "date": "2026-11-20",
+              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/inauguration-du-centre-de-sante-de-la-singine-lhfr-tafers"
+            },
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-11-18T13:52:07.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-275"
+            },
+            {
+              "label": "L’HFR s’engage contre la violence et lance une campagne de sensibilisation pour ses patient-e-s et son personnel",
+              "date": "2026-11-18",
+              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/lhfr-sengage-contre-la-violence-et-lance-une-campagne-de-sensibilisation-pour-ses-patient-e-s-et-son-personnel"
+            },
             {
               "label": "Budget 2027 : un pas supplémentaire vers l’équilibre",
               "date": "2026-11-13",
@@ -581,24 +745,9 @@
               "label": "Numérisation des procédures de permis de construire : traitement entièrement électronique dès début 2027",
               "date": "2026-11-12T09:12:52.000Z",
               "url": "https://www.fr.ch/dime/actualites/numerisation-des-procedures-de-permis-de-construire-traitement-entierement-electronique-des-debut-2027"
-            },
-            {
-              "label": "Demandes de permis de construire et de démolir",
-              "date": "2026-11-11T16:34:09.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-274"
-            },
-            {
-              "label": "Opération d’envergure en matière de lutte contre le travail au noir",
-              "date": "2026-11-11T10:44:04.000Z",
-              "url": "https://www.fr.ch/deef/spe/actualites/operation-denvergure-en-matiere-de-lutte-contre-le-travail-au-noir"
-            },
-            {
-              "label": "Der Staat Freiburg vergibt sechs Stipendien für künstlerische Forschungsaufenthalte im Jahr 2027",
-              "date": "2026-11-06T11:15:14.000Z",
-              "url": "https://www.fr.ch/de/bkad/ka/news/der-staat-freiburg-vergibt-sechs-stipendien-fuer-kuenstlerische-forschungsaufenthalte-im-jahr-2027"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -633,12 +782,6 @@
           "date": "2026-08-23T23:28:41.725Z"
         },
         {
-          "title": "Permis c canton de Fribourg : exigences et demande",
-          "url": "/fr/articles-suisse/permis-c-fribourg-conditions-demande/",
-          "excerpt": "Règles, temps de résidence, critères d'intégration et procédure d'obtention du permis de séjour C dans le canton de Fribourg.",
-          "date": "2026-09-22T05:55:12.294Z"
-        },
-        {
           "title": "Permis de conduire à Fribourg : conversion et exigences",
           "url": "/fr/articles-suisse/permis-de-conduire-fribourg-conversion-et-examen/",
           "excerpt": "Conversion du permis de conduire étranger dans le canton de Fribourg, examens théoriques et pratiques, cours obligatoires et bureau de la circulation compétent.",
@@ -649,6 +792,12 @@
           "url": "/fr/articles-suisse/premieres-maladie-obligatoire-canton-fribourg/",
           "excerpt": "Les primes de l'assurance maladie obligatoire dans le canton de Fribourg ont été redessinées pour offrir une couverture plus équitable aux citoyens.",
           "date": "2026-08-17T18:57:41.324Z"
+        },
+        {
+          "title": "Permis c canton de Fribourg : exigences et demande",
+          "url": "/fr/articles-suisse/permis-c-fribourg-conditions-demande/",
+          "excerpt": "Règles, temps de résidence, critères d'intégration et procédure d'obtention du permis de séjour C dans le canton de Fribourg.",
+          "date": "2026-09-22T05:55:12.294Z"
         }
       ],
       "latestCantonArticles": [],
@@ -670,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

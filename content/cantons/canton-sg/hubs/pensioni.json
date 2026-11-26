@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "pensioni",
-  "updatedAt": "2026-11-11T06:54:26.222Z",
-  "contentHash": "229f16efeefab5b794f28b1e47401ac4a49db9a133a2f901a3577f7f984127c3",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "557c8b0a8a77cfb5c99528df3924ba0dd7788bdda332015f21fa90070e8a81b5",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-10T22:34:57.446Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Neuerungen 2027",
+              "date": "2026-11-17",
+              "url": "https://www.svasg.ch/news/meldungen/neuerungen.php"
+            },
+            {
               "label": "AHVeasy schafft Voraussetzungen für einen papierlosen Datenaustausch",
               "date": "2026-11-09",
               "url": "https://www.svasg.ch/news/meldungen/20261109_ahveasy.php"
@@ -159,14 +164,9 @@
               "label": "Prämienverbilligung 2027 bereits jetzt beantragen",
               "date": "2026-09-01",
               "url": "https://www.svasg.ch/news/meldungen/20260901_ipv_fruehere-gutschrift.php"
-            },
-            {
-              "label": "Einfachere Anmeldung von Familienzulagen dank AHVeasy",
-              "date": "2026-08-17",
-              "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -214,7 +214,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "SG",
@@ -323,6 +323,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Neuerungen 2027",
+              "date": "2026-11-17",
+              "url": "https://www.svasg.ch/news/meldungen/neuerungen.php"
+            },
+            {
               "label": "AHVeasy schafft Voraussetzungen für einen papierlosen Datenaustausch",
               "date": "2026-11-09",
               "url": "https://www.svasg.ch/news/meldungen/20261109_ahveasy.php"
@@ -346,14 +351,9 @@
               "label": "Prämienverbilligung 2027 bereits jetzt beantragen",
               "date": "2026-09-01",
               "url": "https://www.svasg.ch/news/meldungen/20260901_ipv_fruehere-gutschrift.php"
-            },
-            {
-              "label": "Einfachere Anmeldung von Familienzulagen dank AHVeasy",
-              "date": "2026-08-17",
-              "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -401,7 +401,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "SG",
@@ -510,6 +510,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Neuerungen 2027",
+              "date": "2026-11-17",
+              "url": "https://www.svasg.ch/news/meldungen/neuerungen.php"
+            },
+            {
               "label": "AHVeasy schafft Voraussetzungen für einen papierlosen Datenaustausch",
               "date": "2026-11-09",
               "url": "https://www.svasg.ch/news/meldungen/20261109_ahveasy.php"
@@ -533,14 +538,9 @@
               "label": "Prämienverbilligung 2027 bereits jetzt beantragen",
               "date": "2026-09-01",
               "url": "https://www.svasg.ch/news/meldungen/20260901_ipv_fruehere-gutschrift.php"
-            },
-            {
-              "label": "Einfachere Anmeldung von Familienzulagen dank AHVeasy",
-              "date": "2026-08-17",
-              "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -588,7 +588,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "SG",
@@ -697,6 +697,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Neuerungen 2027",
+              "date": "2026-11-17",
+              "url": "https://www.svasg.ch/news/meldungen/neuerungen.php"
+            },
+            {
               "label": "AHVeasy schafft Voraussetzungen für einen papierlosen Datenaustausch",
               "date": "2026-11-09",
               "url": "https://www.svasg.ch/news/meldungen/20261109_ahveasy.php"
@@ -720,14 +725,9 @@
               "label": "Prämienverbilligung 2027 bereits jetzt beantragen",
               "date": "2026-09-01",
               "url": "https://www.svasg.ch/news/meldungen/20260901_ipv_fruehere-gutschrift.php"
-            },
-            {
-              "label": "Einfachere Anmeldung von Familienzulagen dank AHVeasy",
-              "date": "2026-08-17",
-              "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-11-10T22:34:57.446Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -775,7 +775,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-11T06:54:26.222Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

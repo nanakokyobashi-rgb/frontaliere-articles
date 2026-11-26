@@ -4,14 +4,14 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "carburanti",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "3dee7cedab17865a3bb965a4eca8eba55d5f9169ce2f0b737fd699e252699ada",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "c07fabbb5412228ae5fb2e0d094da6737869b33c35e44f2a52422d08f8f46370",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-15T14:17:31.463Z",
+      "updatedAt": "2026-11-25T17:35:23.405Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-11-22T07:00:00.000Z"
+      "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
   ],
   "locales": {
@@ -54,23 +54,29 @@
             },
             {
               "label": "Benzina 95 — Francia",
-              "value": "2,054 EUR/l",
-              "detail": "media regionale: minimo 1,899 EUR/l, 78 stazioni rilevate",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2,021 EUR/l",
+              "detail": "media regionale: minimo 1,873 EUR/l, 91 stazioni rilevate",
+              "date": "2026-11-25T15:03:00.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,192 EUR/l",
-              "detail": "media regionale: minimo 2,059 EUR/l, 92 stazioni rilevate",
-              "date": "2026-11-15T09:12:56.000Z"
+              "value": "2,118 EUR/l",
+              "detail": "media regionale: minimo 1,999 EUR/l, 92 stazioni rilevate",
+              "date": "2026-11-25T15:03:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Licenziamenti al Locle: 90 posti e piano sociale",
+          "url": "/articoli-neuchatel/tagli-lavoro-piano-sociale/",
+          "excerpt": "90 posti soppressi al Locle, 10 meno dei 100 annunciati in ottobre.",
+          "date": "2026-11-21T15:10:34.819Z"
+        },
         {
           "title": "Oltre il 71% delle imprese industriali vede vulnerabilità nella supply chain",
           "url": "/articoli-neuchatel/imprese-neuchateloise-rischio-supply-chain/",
@@ -94,12 +100,6 @@
           "url": "/articoli-neuchatel/ostaj-stagnazione-frontalieri/",
           "excerpt": "L'Observatoire statistique de l'Arc jurassien (Ostaj) segnala stagnazione dei lavoratori frontalieri, triplicati in vent'anni.",
           "date": "2026-11-07T11:35:41.176Z"
-        },
-        {
-          "title": "Neuchâtel: tre dossier trattati dal Consiglio di Stato",
-          "url": "/articoli-neuchatel/neuchatel-dossier-consiglio-stato/",
-          "excerpt": "Il 2 novembre 2026 il Consiglio di Stato del Canton Neuchâtel ha diffuso le informazioni brevi relative alla sua seduta.",
-          "date": "2026-11-06T03:22:02.144Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "NE",
@@ -153,23 +153,29 @@
             },
             {
               "label": "Petrol 95 — France",
-              "value": "2.054 EUR/l",
-              "detail": "regional average: lowest 1.899 EUR/l, 78 stations surveyed",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2.021 EUR/l",
+              "detail": "regional average: lowest 1.873 EUR/l, 91 stations surveyed",
+              "date": "2026-11-25T15:03:00.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.192 EUR/l",
-              "detail": "regional average: lowest 2.059 EUR/l, 92 stations surveyed",
-              "date": "2026-11-15T09:12:56.000Z"
+              "value": "2.118 EUR/l",
+              "detail": "regional average: lowest 1.999 EUR/l, 92 stations surveyed",
+              "date": "2026-11-25T15:03:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Layoffs in Le Locle: 90 positions and social plan",
+          "url": "/en/neuchatel-articles/le-locle-job-cuts-social-plan/",
+          "excerpt": "90 positions eliminated in Le Locle, 10 fewer than the 100 announced in October.",
+          "date": "2026-11-21T15:10:34.819Z"
+        },
         {
           "title": "Over 71% of industrial companies see vulnerabilities in the supply chain",
           "url": "/en/neuchatel-articles/neuchatel-companies-supply-chain-risk/",
@@ -193,12 +199,6 @@
           "url": "/en/neuchatel-articles/ostaj-frontalier-stagnation/",
           "excerpt": "The Statistical Observatory of the Jura Arc (Ostaj) reports stagnation among cross-border workers, who have tripled in twenty years.",
           "date": "2026-11-07T11:35:41.176Z"
-        },
-        {
-          "title": "Neuchâtel: three dossiers handled by the Council of State",
-          "url": "/en/neuchatel-articles/neuchatel-state-council-dossiers/",
-          "excerpt": "On November 2, 2026, the Council of State of the Canton of Neuchâtel published brief information relating to its meeting.",
-          "date": "2026-11-06T03:22:02.144Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "NE",
@@ -252,23 +252,29 @@
             },
             {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.054 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.899 EUR/l, 78 erfasste Tankstellen",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2.021 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.873 EUR/l, 91 erfasste Tankstellen",
+              "date": "2026-11-25T15:03:00.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.192 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.059 EUR/l, 92 erfasste Tankstellen",
-              "date": "2026-11-15T09:12:56.000Z"
+              "value": "2.118 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.999 EUR/l, 92 erfasste Tankstellen",
+              "date": "2026-11-25T15:03:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Entlassungen in Locle: 90 Stellen und Sozialplan",
+          "url": "/de/neuenburg-artikel/le-locle-stellenabbau-sozialplan/",
+          "excerpt": "90 Stellen in Locle gestrichen, 10 weniger als die im Oktober angekündigten 100.",
+          "date": "2026-11-21T15:10:34.819Z"
+        },
         {
           "title": "Mehr als 71% der Industrieunternehmen sehen eine Anfälligkeit in der Lieferkette",
           "url": "/de/neuenburg-artikel/neuenburg-unternehmen-lieferkettenrisiko/",
@@ -292,12 +298,6 @@
           "url": "/de/neuenburg-artikel/ostaj-frontalier-stagnation/",
           "excerpt": "Das Observatoire statistique de l 'Arc jurassien (Ostaj) berichtet von einer Stagnation der Grenzgänger, die sich in zwanzigJahren verdreifacht hat.",
           "date": "2026-11-07T11:35:41.176Z"
-        },
-        {
-          "title": "Neuenburg: drei vom Staatsrat behandelte Dossiers",
-          "url": "/de/neuenburg-artikel/neuenburg-regierungsrat-dossiers/",
-          "excerpt": "Der Staatsrat des Kantons Neuch hat am 2.November 2026 die Kurzinformationen zu seiner Sitzung veröffentlicht.",
-          "date": "2026-11-06T03:22:02.144Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "NE",
@@ -351,23 +351,29 @@
             },
             {
               "label": "Essence 95 — France",
-              "value": "2,054 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,899 EUR/l, 78 stations relevées",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2,021 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,873 EUR/l, 91 stations relevées",
+              "date": "2026-11-25T15:03:00.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,192 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,059 EUR/l, 92 stations relevées",
-              "date": "2026-11-15T09:12:56.000Z"
+              "value": "2,118 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,999 EUR/l, 92 stations relevées",
+              "date": "2026-11-25T15:03:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Licenciements au Locle : 90 postes et plan social",
+          "url": "/fr/articles-neuchatel/le-locle-suppressions-emplois-plan-social/",
+          "excerpt": "90 postes supprimés au Locle, 10 de moins que les 100 annoncés en octobre.",
+          "date": "2026-11-21T15:10:34.819Z"
+        },
         {
           "title": "Plus de 71 % des industriels jugent la supply chain fragile",
           "url": "/fr/articles-neuchatel/entreprises-neuchatel-defi-dependance/",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-neuchatel/ostaj-stagnation-frontalier/",
           "excerpt": "L'Observatoire statistique de l'Arc jurassien (Ostaj) signale une stagnation du nombre de travailleurs frontaliers, dont le nombre a triplé en vingt ans.",
           "date": "2026-11-07T11:35:41.176Z"
-        },
-        {
-          "title": "Neuchâtel : trois dossiers traités par le Conseil d'État",
-          "url": "/fr/articles-neuchatel/neuchatel-dossiers-conseil-etat/",
-          "excerpt": "Le 2 novembre 2026, le Conseil d'État du canton de Neuchâtel a diffusé les informations succinctes relatives à sa séance.",
-          "date": "2026-11-06T03:22:02.144Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

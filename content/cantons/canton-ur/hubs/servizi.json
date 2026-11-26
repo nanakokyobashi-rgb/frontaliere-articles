@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "servizi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "861c501f394f932694f3c3d95f1a2c62237d87354c9c6d8e8fce3e8db90d70be",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "4cf2e5d2891413af526829c02020d8c55ab4ce17fdd0d8b644fc283beec48fcb",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-16T06:51:00.113Z",
+      "updatedAt": "2026-11-26T00:36:15.946Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -60,18 +60,23 @@
           "items": [
             {
               "label": "Altdorf",
-              "value": "8 °C",
-              "detail": "oggi da 7 a 11 °C"
+              "value": "3 °C",
+              "detail": "oggi da 0 a 4 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Änderung der Grundbuchverordnung (Rechtsgrundausweis ...",
+              "date": "2026-11-19",
+              "url": "https://www.ur.ch/_rte/information/139402"
+            },
             {
               "label": "Kantonsspital Uri: Kostenrahmen eingehalten - Neubau ...",
               "date": "2026-11-13",
@@ -93,7 +98,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -140,10 +145,10 @@
           "date": "2026-08-15T23:51:12.284Z"
         },
         {
-          "title": "Permesso C canton Uri: anni e procedura",
-          "url": "/articoli-svizzera/permesso-c-canton-uri-richiesta/",
-          "excerpt": "Requisiti federali e cantonali per ottenere il permesso di domicilio C nel Cantone Uri: 10 anni di residenza, integrazione e conoscenze linguistiche.",
-          "date": "2026-09-09T01:51:36.573Z"
+          "title": "Permesso di domicilio C nel Cantone di Uri: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-di-domicilio-c-ur-requisiti-e-domanda/",
+          "excerpt": "La durata richiesta per il permesso di domicilio C nel Cantone di Uri, i criteri di integrazione e le conoscenze linguistiche richieste.",
+          "date": "2026-08-16T02:10:19.833Z"
         }
       ],
       "latestCantonArticles": [],
@@ -173,7 +178,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "UR",
@@ -211,18 +216,23 @@
           "items": [
             {
               "label": "Altdorf",
-              "value": "8 °C",
-              "detail": "today from 7 to 11 °C"
+              "value": "3 °C",
+              "detail": "today from 0 to 4 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Änderung der Grundbuchverordnung (Rechtsgrundausweis ...",
+              "date": "2026-11-19",
+              "url": "https://www.ur.ch/_rte/information/139402"
+            },
             {
               "label": "Kantonsspital Uri: Kostenrahmen eingehalten - Neubau ...",
               "date": "2026-11-13",
@@ -244,7 +254,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -291,10 +301,10 @@
           "date": "2026-08-15T23:51:12.284Z"
         },
         {
-          "title": "Permit C canton Uri: years and procedure",
-          "url": "/en/swiss-articles/permit-c-canton-uri-request/",
-          "excerpt": "Federal and cantonal requirements to obtain residence permit C in Canton Uri: 10 years of residence, integration and language skills.",
-          "date": "2026-09-09T01:51:36.573Z"
+          "title": "Residence permit C in the Canton of Uri: requirements and application",
+          "url": "/en/swiss-articles/c-permit-uri-requirements-and-application/",
+          "excerpt": "The duration required for residence permit C in the Canton of Uri, the integration criteria and the language skills required.",
+          "date": "2026-08-16T02:10:19.833Z"
         }
       ],
       "latestCantonArticles": [],
@@ -320,7 +330,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "UR",
@@ -358,18 +368,23 @@
           "items": [
             {
               "label": "Altdorf",
-              "value": "8 °C",
-              "detail": "heute 7 bis 11 °C"
+              "value": "3 °C",
+              "detail": "heute 0 bis 4 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Änderung der Grundbuchverordnung (Rechtsgrundausweis ...",
+              "date": "2026-11-19",
+              "url": "https://www.ur.ch/_rte/information/139402"
+            },
             {
               "label": "Kantonsspital Uri: Kostenrahmen eingehalten - Neubau ...",
               "date": "2026-11-13",
@@ -391,7 +406,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -438,10 +453,10 @@
           "date": "2026-08-15T23:51:12.284Z"
         },
         {
-          "title": "Ausweis C Kanton Uri: Jahre und Verfahren",
-          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-c-kanton-uri-antrag/",
-          "excerpt": "Eidgenössische und kantonale Voraussetzungen für die Niederlassungsbewilligung C im Kanton Uri: 10 Jahre Aufenthalt, Integration und Sprachkenntnisse.",
-          "date": "2026-09-09T01:51:36.573Z"
+          "title": "Niederlassungsbewilligung C im Kanton Uri: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/c-aufenthaltstitel-uri-anforderungen-und-antrag/",
+          "excerpt": "Die erforderliche Dauer für die Niederlassungsbewilligung C im Kanton Uri, die Integrationskriterien und die erforderlichen Sprachkenntnisse.",
+          "date": "2026-08-16T02:10:19.833Z"
         }
       ],
       "latestCantonArticles": [],
@@ -467,7 +482,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "UR",
@@ -505,18 +520,23 @@
           "items": [
             {
               "label": "Altdorf",
-              "value": "8 °C",
-              "detail": "aujourd’hui de 7 à 11 °C"
+              "value": "3 °C",
+              "detail": "aujourd’hui de 0 à 4 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Änderung der Grundbuchverordnung (Rechtsgrundausweis ...",
+              "date": "2026-11-19",
+              "url": "https://www.ur.ch/_rte/information/139402"
+            },
             {
               "label": "Kantonsspital Uri: Kostenrahmen eingehalten - Neubau ...",
               "date": "2026-11-13",
@@ -538,7 +558,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -585,10 +605,10 @@
           "date": "2026-08-15T23:51:12.284Z"
         },
         {
-          "title": "Permis C canton URI : années et procédure",
-          "url": "/fr/articles-suisse/permis-c-canton-uri-demande/",
-          "excerpt": "Conditions fédérales et cantonales pour obtenir le permis de séjour C dans le canton d'Uri : 10 ans de résidence, d'intégration et de connaissances linguistiques.",
-          "date": "2026-09-09T01:51:36.573Z"
+          "title": "Permis de séjour C dans le canton d'Uri : exigences et demande",
+          "url": "/fr/articles-suisse/permis-de-sejour-c-uri-exigences-et-demande/",
+          "excerpt": "La durée requise pour le permis de séjour C dans le canton d'Uri, les critères d'intégration et les connaissances linguistiques requises.",
+          "date": "2026-08-16T02:10:19.833Z"
         }
       ],
       "latestCantonArticles": [],
@@ -610,7 +630,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

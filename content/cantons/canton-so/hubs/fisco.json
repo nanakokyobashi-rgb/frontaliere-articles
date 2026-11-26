@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "fisco",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "9e77cfc4b286e4d5bf712e5e795642ce948c3024e1af993885a409cabf598625",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "6b253ecb002d30cb3eece235695737950a73c5c29135b2da5fa8cc2f8d6bb02b",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -115,10 +115,16 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/ja-zur-revision-des-gesetzes-ueber-die-staats-und-gemeindesteuern-2027/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Soletta: la commissione approva il preventivo 2027",
+          "url": "/articoli-soletta/soletta-preventivo-approvato/",
+          "excerpt": "Il preventivo 2027 prevede un disavanzo di circa CHF 42 milioni, migliorato di CHF 33,4 milioni rispetto alla proposta iniziale.",
+          "date": "2026-11-21T16:12:13.224Z"
+        },
         {
           "title": "Soletta: aliquote successione e donazione senza imposta federale",
           "url": "/articoli-svizzera/soletta-successione-donazione-aliquote/",
@@ -161,7 +167,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "SO",
@@ -254,10 +260,16 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/ja-zur-revision-des-gesetzes-ueber-die-staats-und-gemeindesteuern-2027/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Solothurn: the commission approves the 2027 budget",
+          "url": "/en/solothurn-articles/solothurn-2027-budget-commission/",
+          "excerpt": "The 2027 budget projects a deficit of approximately CHF 42 million, an improvement of CHF 33,4 million compared with the initial proposal.",
+          "date": "2026-11-21T16:12:13.224Z"
+        },
         {
           "title": "Solothurn: inheritance and gift tax rates without federal tax",
           "url": "/en/swiss-articles/solothurn-inheritance-donation-rates/",
@@ -300,7 +312,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "SO",
@@ -393,10 +405,16 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/ja-zur-revision-des-gesetzes-ueber-die-staats-und-gemeindesteuern-2027/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Solothurn: Die Kommission genehmigt den Voranschlag 2027",
+          "url": "/de/solothurn-artikel/solothurn-budget-2027-finanzkommission/",
+          "excerpt": "Der Voranschlag 2027 sieht ein Defizit von etwa CHF 42 Millionen vor, das sich gegenüber dem ursprünglichen Vorschlag um CHF 33,4 Millionen verbessert hat.",
+          "date": "2026-11-21T16:12:13.224Z"
+        },
         {
           "title": "Solothurn: Erbschafts- und Schenkungssteuersätze ohne Bundessteuer",
           "url": "/de/schweiz-artikel/solothurn-erbschaft-schenkung-saetze/",
@@ -439,7 +457,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "SO",
@@ -532,10 +550,16 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/ja-zur-revision-des-gesetzes-ueber-die-staats-und-gemeindesteuern-2027/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Soleure : la commission approuve le budget 2027",
+          "url": "/fr/articles-soleure/soleure-budget-2027-commission-finances/",
+          "excerpt": "Le budget 2027 prévoit un déficit d’environ CHF 42 millions, en amélioration de CHF 33,4 millions par rapport à la proposition initiale.",
+          "date": "2026-11-21T16:12:13.224Z"
+        },
         {
           "title": "Soleure : taux des droits de succession et de donation sans impôt fédéral",
           "url": "/fr/articles-suisse/soleure-heritage-donation-taux/",
@@ -578,7 +602,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

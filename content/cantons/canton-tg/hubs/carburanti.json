@@ -4,14 +4,14 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "743019b5ba912728b7b4c38728b2154e9e77808c0060f8e4901baa16d2baaea0",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "85fd58062ab0ae5fd3868e2c01bcf1ec8c9bd248cd19cd2b3c221c4e09611a8e",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-15T14:17:31.463Z",
+      "updatedAt": "2026-11-25T17:35:23.405Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-11-22T14:17:31.463Z"
+      "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
   ],
   "locales": {
@@ -54,52 +54,52 @@
             },
             {
               "label": "Benzina 95 — Germania",
-              "value": "2,086 EUR/l",
-              "detail": "media regionale: minimo 2,079 EUR/l, 3 stazioni rilevate",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "1,976 EUR/l",
+              "detail": "media regionale: minimo 1,969 EUR/l, 3 stazioni rilevate",
+              "date": "2026-11-25T17:35:23.405Z"
             },
             {
               "label": "Diesel — Germania",
-              "value": "2,356 EUR/l",
-              "detail": "media regionale: minimo 2,349 EUR/l, 3 stazioni rilevate",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "2,136 EUR/l",
+              "detail": "media regionale: minimo 2,129 EUR/l, 3 stazioni rilevate",
+              "date": "2026-11-25T17:35:23.405Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Turgovia sostiene l'insediamento delle imprese",
+          "url": "/articoli-turgovia/turgovia-insediamento-imprese/",
+          "excerpt": "Il Canton Turgovia offre accompagnamento, informazioni e consulenza su immobili, direttive, autorizzazioni e contatti con uffici e autorità.",
+          "date": "2026-11-26T05:16:59.735Z"
+        },
+        {
+          "title": "Sedi RAV e piattaforme per datori di lavoro in Turgovia",
+          "url": "/articoli-turgovia/rav-sedi-pubblicazione-vakanze/",
+          "excerpt": "Le sedi RAV sono ad Amriswil, Frauenfeld e Kreuzlingen; le vakanze possono essere pubblicate gratuitamente su arbeit.swiss.",
+          "date": "2026-11-25T23:29:48.666Z"
+        },
+        {
+          "title": "Disoccupazione in Turgovia: guida del RAV Thurgau",
+          "url": "/articoli-turgovia/disoccupazione-rav-thurgau/",
+          "excerpt": "RAV Thurgau: primi passi, iscrizione, diritti, video sull'indennità e consulenza BIZplus a Frauenfeld e Kreuzlingen per chi cerca lavoro.",
+          "date": "2026-11-25T17:16:39.833Z"
+        },
+        {
+          "title": "Turgovia: tre RAV aiutano i datori a trovare personale",
+          "url": "/articoli-turgovia/turgovia-rav-assunzioni-permessi/",
+          "excerpt": "Le sedi RAV di Amriswil, Frauenfeld e Kreuzlingen aiutano i datori; su arbeit.swiss le posizioni vacanti si pubblicano gratuitamente.",
+          "date": "2026-11-20T17:41:44.230Z"
+        },
+        {
           "title": "Referendumspublikation budget 2027 frauenfeld",
           "url": "/articoli-turgovia/referendum-budget-2027-frauenfeld/",
           "excerpt": "Il documento è disponibile in formato PDF con dimensione di 87 KB; non contiene cifre né voci di spesa specifiche.",
           "date": "2026-11-12T23:00:04.094Z"
-        },
-        {
-          "title": "Bad Egelsee: +5 CHF per la sauna dal 2027",
-          "url": "/articoli-turgovia/bad-egelsee-supplemento-sauna/",
-          "excerpt": "Dal 1° gennaio 2027 il biglietto con sauna costerà CHF 15 per gli adulti e CHF 10 per giovani, apprendisti e studenti.",
-          "date": "2026-11-11T22:21:06.280Z"
-        },
-        {
-          "title": "Domanda edilizia per Meisenweg 9 a Frauenfeld",
-          "url": "/articoli-turgovia/domanda-edilizia-meisenweg/",
-          "excerpt": "L'avviso riguarda Meisenweg 9 a Frauenfeld: casa unifamiliare, impianto solare e area esterna, con consultazione dal 4 al 23 novembre 2026.",
-          "date": "2026-11-06T12:57:20.385Z"
-        },
-        {
-          "title": "Supporto imprese Canton Turgovia: condizioni quadro e insediamento",
-          "url": "/articoli-turgovia/economia-imprese-cantone-turgovia/",
-          "excerpt": "L'amministrazione offre accompagnamento, informazione e consulenza alle imprese esistenti e a chi desidera insediarsi nel Cantone Turgovia.",
-          "date": "2026-11-04T04:02:52.006Z"
-        },
-        {
-          "title": "Turgovia: piano di risparmio da 60 milioni entro il 2030",
-          "url": "/articoli-turgovia/turgovia-piano-risparmio-60-milioni/",
-          "excerpt": "Il Governo propone 37 misure per stabilizzare le finanze cantonali.",
-          "date": "2026-11-03T03:53:14.620Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "TG",
@@ -153,52 +153,52 @@
             },
             {
               "label": "Petrol 95 — Germany",
-              "value": "2.086 EUR/l",
-              "detail": "regional average: lowest 2.079 EUR/l, 3 stations surveyed",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "1.976 EUR/l",
+              "detail": "regional average: lowest 1.969 EUR/l, 3 stations surveyed",
+              "date": "2026-11-25T17:35:23.405Z"
             },
             {
               "label": "Diesel — Germany",
-              "value": "2.356 EUR/l",
-              "detail": "regional average: lowest 2.349 EUR/l, 3 stations surveyed",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "2.136 EUR/l",
+              "detail": "regional average: lowest 2.129 EUR/l, 3 stations surveyed",
+              "date": "2026-11-25T17:35:23.405Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgau supports business establishment",
+          "url": "/en/thurgau-articles/thurgau-business-settlement/",
+          "excerpt": "The Canton of Thurgau offers support, information and advice on properties, directives, permits and contacts with offices and authorities.",
+          "date": "2026-11-26T05:16:59.735Z"
+        },
+        {
+          "title": "RAV offices and platforms for employers in Thurgau",
+          "url": "/en/thurgau-articles/rav-office-vacancy-publication/",
+          "excerpt": "The RAV offices are in Amriswil, Frauenfeld and Kreuzlingen; vacancies can be published free of charge on arbeit.swiss.",
+          "date": "2026-11-25T23:29:48.666Z"
+        },
+        {
+          "title": "Unemployment in Thurgau: RAV Thurgau guide",
+          "url": "/en/thurgau-articles/thurgau-rav-unemployment/",
+          "excerpt": "RAV Thurgau: first steps, registration, rights, a video on unemployment benefit and BIZplus advice in Frauenfeld and Kreuzlingen for job seekers.",
+          "date": "2026-11-25T17:16:39.833Z"
+        },
+        {
+          "title": "Thurgau: three RAV offices help employers find staff",
+          "url": "/en/thurgau-articles/thurgau-rav-hiring-permits/",
+          "excerpt": "The RAV offices in Amriswil, Frauenfeld and Kreuzlingen help employers; vacancies are posted free of charge on arbeit.swiss.",
+          "date": "2026-11-20T17:41:44.230Z"
+        },
+        {
           "title": "Referendum publication budget 2027 Frauenfeld",
           "url": "/en/thurgau-articles/referendum-publication-budget-2027-frauenfeld/",
           "excerpt": "The document is available in PDF format with a size of 87 KB; it contains neither figures nor specific expense items.",
           "date": "2026-11-12T23:00:04.094Z"
-        },
-        {
-          "title": "Bad Egelsee: +5 CHF for the sauna starting in 2027",
-          "url": "/en/thurgau-articles/bad-egelsee-sauna-surcharge/",
-          "excerpt": "From January 1, 2027, the ticket with sauna will cost CHF 15 for adults and CHF 10 for young people, apprentices and students.",
-          "date": "2026-11-11T22:21:06.280Z"
-        },
-        {
-          "title": "Building application for Meisenweg 9 in Frauenfeld",
-          "url": "/en/thurgau-articles/building-permit-meisenweg/",
-          "excerpt": "The notice concerns Meisenweg 9 in Frauenfeld: a single-family house, solar installation and outdoor area, with consultation from November 4 to 23, 2026.",
-          "date": "2026-11-06T12:57:20.385Z"
-        },
-        {
-          "title": "Business support in Thurgau: conditions and establishment",
-          "url": "/en/thurgau-articles/thurgau-business-canton-economy/",
-          "excerpt": "The administration provides support, information and advice to existing businesses and to those wishing to establish themselves in the Canton of Thurgau.",
-          "date": "2026-11-04T04:02:52.006Z"
-        },
-        {
-          "title": "Thurgau: savings plan of 60 million by 2030",
-          "url": "/en/thurgau-articles/thurgau-savings-plan-60-million/",
-          "excerpt": "The Government proposes 37 measures to stabilize cantonal finances.",
-          "date": "2026-11-03T03:53:14.620Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "TG",
@@ -252,52 +252,52 @@
             },
             {
               "label": "Benzin 95 — Deutschland",
-              "value": "2.086 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.079 EUR/l, 3 erfasste Tankstellen",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "1.976 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.969 EUR/l, 3 erfasste Tankstellen",
+              "date": "2026-11-25T17:35:23.405Z"
             },
             {
               "label": "Diesel — Deutschland",
-              "value": "2.356 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.349 EUR/l, 3 erfasste Tankstellen",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "2.136 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.129 EUR/l, 3 erfasste Tankstellen",
+              "date": "2026-11-25T17:35:23.405Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgau unterstützt die Ansiedlung von Unternehmen",
+          "url": "/de/thurgau-artikel/thurgau-unternehmensansiedlung/",
+          "excerpt": "Der Kanton Thurgau bietet Begleitung, Informationen und Beratung zu Immobilien, Richtlinien, Bewilligungen und Kontakten mit Ämtern und Behörden.",
+          "date": "2026-11-26T05:16:59.735Z"
+        },
+        {
+          "title": "RAV-Standorte und Plattformen für Arbeitgeber im Thurgau",
+          "url": "/de/thurgau-artikel/rav-standorte-stellenanzeigen/",
+          "excerpt": "Die RAV-Standorte befinden sich in Amriswil, Frauenfeld und Kreuzlingen; offene Stellen können kostenlos auf arbeit.swiss veröffentlicht werden.",
+          "date": "2026-11-25T23:29:48.666Z"
+        },
+        {
+          "title": "Arbeitslosigkeit im Thurgau: Leitfaden des RAV Thurgau",
+          "url": "/de/thurgau-artikel/arbeitslos-rav-thurgau/",
+          "excerpt": "RAV Thurgau: erste Schritte, Anmeldung, Rechte, Video zur Arbeitslosenentschädigung und Beratung von BIZplus in Frauenfeld und Kreuzlingen für Arbeitsuchende.",
+          "date": "2026-11-25T17:16:39.833Z"
+        },
+        {
+          "title": "Thurgau: Drei RAV helfen Arbeitgebern, Personal zu finden",
+          "url": "/de/thurgau-artikel/thurgau-rav-personal-bewilligungen/",
+          "excerpt": "Die RAV-Standorte in Amriswil, Frauenfeld und Kreuzlingen helfen Arbeitgebern; auf arbeit.swiss werden offene Stellen kostenlos veröffentlicht.",
+          "date": "2026-11-20T17:41:44.230Z"
+        },
+        {
           "title": "Referendums-Publikation Budget 2027 Frauenfeld",
           "url": "/de/thurgau-artikel/referendums-publikation-budget-2027-frauenfeld/",
           "excerpt": "Das Dokument ist als PDF mit einer Größe von 87 KB verfügbar; es enthält weder Zahlen noch spezifische Ausgabenposten.",
           "date": "2026-11-12T23:00:04.094Z"
-        },
-        {
-          "title": "Bad Egelsee: +5 CHF für die Sauna ab 2027",
-          "url": "/de/thurgau-artikel/bad-egelsee-sauna-aufpreis/",
-          "excerpt": "Ab dem 1. Januar 2027 kostet das Ticket mit Sauna CHF 15 für Erwachsene und CHF 10 für Jugendliche, Lernende und Studierende.",
-          "date": "2026-11-11T22:21:06.280Z"
-        },
-        {
-          "title": "Bauantrag für Meisenweg 9 in Frauenfeld",
-          "url": "/de/thurgau-artikel/baugesuch-meisenweg/",
-          "excerpt": "Die Mitteilung betrifft Meisenweg 9 in Frauenfeld: Einfamilienhaus, Solaranlage und Außenbereich, mit Beratung vom 4. bis 23. November 2026.",
-          "date": "2026-11-06T12:57:20.385Z"
-        },
-        {
-          "title": "Unterstützung für Unternehmen im Kanton Thurgau: Rahmenbedingungen und Ansiedlung",
-          "url": "/de/thurgau-artikel/wirtschaft-firmen-kanton-thurgau/",
-          "excerpt": "Die Verwaltung bietet bestehenden Unternehmen und allen, die sich im Kanton Thurgau ansiedeln möchten, Begleitung, Information und Beratung.",
-          "date": "2026-11-04T04:02:52.006Z"
-        },
-        {
-          "title": "Thurgau: Sparplan über 60 Millionen bis 2030",
-          "url": "/de/thurgau-artikel/thurgau-sparpaket-60-millionen/",
-          "excerpt": "Die Regierung schlägt 37 Massnahmen zur Stabilisierung der Kantonsfinanzen vor.",
-          "date": "2026-11-03T03:53:14.620Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "TG",
@@ -351,52 +351,52 @@
             },
             {
               "label": "Essence 95 — Allemagne",
-              "value": "2,086 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,079 EUR/l, 3 stations relevées",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "1,976 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,969 EUR/l, 3 stations relevées",
+              "date": "2026-11-25T17:35:23.405Z"
             },
             {
               "label": "Diesel — Allemagne",
-              "value": "2,356 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,349 EUR/l, 3 stations relevées",
-              "date": "2026-11-15T14:17:31.463Z"
+              "value": "2,136 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,129 EUR/l, 3 stations relevées",
+              "date": "2026-11-25T17:35:23.405Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "La Thurgovie soutient l'implantation des entreprises",
+          "url": "/fr/articles-thurgovie/thurgovie-installation-entreprises/",
+          "excerpt": "Le canton de Thurgovie offre un accompagnement, des informations et des conseils concernant l'immobilier, les directives, les autorisations et les contacts avec les offices et les autorités.",
+          "date": "2026-11-26T05:16:59.735Z"
+        },
+        {
+          "title": "Offices ORP et plateformes pour employeurs en Thurgovie",
+          "url": "/fr/articles-thurgovie/bureaux-rav-publication-offres/",
+          "excerpt": "Les offices ORP se trouvent à Amriswil, Frauenfeld et Kreuzlingen ; les postes vacants peuvent être publiés gratuitement sur arbeit.swiss.",
+          "date": "2026-11-25T23:29:48.666Z"
+        },
+        {
+          "title": "Chômage en Thurgovie : guide du RAV Thurgovie",
+          "url": "/fr/articles-thurgovie/chomage-rav-thurgovie/",
+          "excerpt": "RAV Thurgovie : premiers pas, inscription, droits, vidéo sur l’indemnité et conseil BIZplus à Frauenfeld et Kreuzlingen pour les personnes à la recherche d’un emploi.",
+          "date": "2026-11-25T17:16:39.833Z"
+        },
+        {
+          "title": "Thurgovie : trois ORP aident les employeurs à trouver du personnel",
+          "url": "/fr/articles-thurgovie/thurgovie-orc-embauche-permis/",
+          "excerpt": "Les ORP d’Amriswil, Frauenfeld et Kreuzlingen aident les employeurs ; sur arbeit.swiss, les postes vacants sont publiés gratuitement.",
+          "date": "2026-11-20T17:41:44.230Z"
+        },
+        {
           "title": "Publication du référendum budget 2027 Frauenfeld",
           "url": "/fr/articles-thurgovie/publication-du-referendum-budget-2027-frauenfeld/",
           "excerpt": "Le document est disponible au format PDF et sa taille est de 87 KB ; il ne contient ni chiffres ni postes de dépenses spécifiques.",
           "date": "2026-11-12T23:00:04.094Z"
-        },
-        {
-          "title": "Bad Egelsee : +5 CHF pour le sauna à partir de 2027",
-          "url": "/fr/articles-thurgovie/bad-egelsee-supplement-sauna/",
-          "excerpt": "À partir du 1er janvier 2027, le billet avec sauna coûtera CHF 15 pour les adultes et CHF 10 pour les jeunes, apprentis et étudiants.",
-          "date": "2026-11-11T22:21:06.280Z"
-        },
-        {
-          "title": "Demande de permis de construire pour Meisenweg 9 à Frauenfeld",
-          "url": "/fr/articles-thurgovie/permis-construire-meisenweg/",
-          "excerpt": "L'avis concerne Meisenweg 9 à Frauenfeld : maison individuelle, installation solaire et aménagement des espaces extérieurs, avec consultation du 4 au 23 novembre 2026.",
-          "date": "2026-11-06T12:57:20.385Z"
-        },
-        {
-          "title": "Soutien entreprises Thurgovie : cadres et implantation",
-          "url": "/fr/articles-thurgovie/economie-entreprises-canton-thurgovie/",
-          "excerpt": "L’administration propose un accompagnement, des informations et des conseils aux entreprises existantes ainsi qu’aux personnes qui souhaitent s’implanter dans le canton de Thurgovie.",
-          "date": "2026-11-04T04:02:52.006Z"
-        },
-        {
-          "title": "Thurgovie : plan d’économies de 60 millions d’ici 2030",
-          "url": "/fr/articles-thurgovie/thurgovie-plan-economies-60-millions/",
-          "excerpt": "Le Gouvernement propose 37 mesures pour stabiliser les finances cantonales.",
-          "date": "2026-11-03T03:53:14.620Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

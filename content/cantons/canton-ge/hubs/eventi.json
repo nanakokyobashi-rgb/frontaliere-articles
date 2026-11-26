@@ -4,17 +4,17 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "707645641b4cd20aa725fd3db82e0dd9a18f0203001662d470565870d7f77cba",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "7e3a23063ba8ab27f88ba7534ae921e834d73b63ca5406b192d92ddc44b38f78",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T21:47:09.888Z",
+      "updatedAt": "2026-11-26T00:32:00.223Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "363",
+          "value": "378",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Ari Hoenig Trio",
+              "label": "« Hasards sauvages » - Café scientifique : Composer avec la montagne entre changements, catastrophes et retour du loup.",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/hoenig-trio"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/hasards-sauvages-cafe-scientifique-composer-montagne-entre-changements-catastrophes-retour-loup"
             },
             {
-              "label": "COMPLET Formation pour les intervenant.x.es du programme MasculinitéS",
+              "label": "Blooze and More - Concert du BAG",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/complet-formation-intervenantxes-programme-masculinites"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/blooze-more-concert"
             },
             {
-              "label": "En tant qu'homme, rejoins notre équipe bénévoles MasculinitéS !",
+              "label": "Cité Seniors fête ses 20 ans | 47 ans d'histoire des squats à Genève - Conférence, causerie et balades",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/tant-quhomme-rejoins-equipe-benevoles-masculinites-0"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades-2"
             },
             {
-              "label": "FILMAR 2026 La chair du mâle est aride – Rubén Barrios Rodríguez",
+              "label": "Complet - Atelier d'écriture: mise en mots de la violence",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/filmar-2026-chair-male-aride-ruben-barrios-rodriguez"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/atelier-ecriture-mise-mots-violence"
             },
             {
-              "label": "MORPHONG",
+              "label": "Complet - KNEECAP + Fawzi x Smokaholic",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/morphong"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/kneecap-fawzi-smokaholic"
             },
             {
-              "label": "PréPro night : MILAN | MACÉO",
+              "label": "CONCERT (Festival Celtiques) - YULE, un spectacle interceltiques",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/prepro-night-milan-maceo"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/concert-festival-celtiques-yule-spectacle-interceltiques"
             },
             {
-              "label": "Projection de Manas et table ronde : Rendre visible l'invisible, Ethique et Politique autour de Manas",
+              "label": "Conférence exceptionnelle: Comment repenser notre rapport au temps ?Faire société dans un monde marqué par l’urgence.",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/projection-manas-table-ronde-rendre-visible-invisible-ethique-politique-autour-manas"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/conference-exceptionnelle-repenser-rapport-temps-faire-societe-monde-marque-urgence"
             },
             {
-              "label": "Quatuors de Beethoven",
+              "label": "CORPS Ô PLURIELLES (performance)",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/quatuors-beethoven"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/corps-plurielles-performance"
             },
             {
-              "label": "Rencontre avec Anne Bourrassé",
+              "label": "Cours de Tango Argentin - Niveau débutant",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/rencontre-anne-bourrasse"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-10"
             },
             {
-              "label": "VIVRE",
+              "label": "Cyberviolences – résister collectivement à la silenciation",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/vivre"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/cyberviolences-resister-collectivement-silenciation"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ginevra/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "GE",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "363",
+          "value": "378",
           "note": "from the site’s events calendar"
         }
       ],
@@ -161,69 +161,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Ari Hoenig Trio",
+              "label": "« Hasards sauvages » - Café scientifique : Composer avec la montagne entre changements, catastrophes et retour du loup.",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/hoenig-trio"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/hasards-sauvages-cafe-scientifique-composer-montagne-entre-changements-catastrophes-retour-loup"
             },
             {
-              "label": "COMPLET Formation pour les intervenant.x.es du programme MasculinitéS",
+              "label": "Blooze and More - Concert du BAG",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/complet-formation-intervenantxes-programme-masculinites"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/blooze-more-concert"
             },
             {
-              "label": "En tant qu'homme, rejoins notre équipe bénévoles MasculinitéS !",
+              "label": "Cité Seniors fête ses 20 ans | 47 ans d'histoire des squats à Genève - Conférence, causerie et balades",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/tant-quhomme-rejoins-equipe-benevoles-masculinites-0"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades-2"
             },
             {
-              "label": "FILMAR 2026 La chair du mâle est aride – Rubén Barrios Rodríguez",
+              "label": "Complet - Atelier d'écriture: mise en mots de la violence",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/filmar-2026-chair-male-aride-ruben-barrios-rodriguez"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/atelier-ecriture-mise-mots-violence"
             },
             {
-              "label": "MORPHONG",
+              "label": "Complet - KNEECAP + Fawzi x Smokaholic",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/morphong"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/kneecap-fawzi-smokaholic"
             },
             {
-              "label": "PréPro night : MILAN | MACÉO",
+              "label": "CONCERT (Festival Celtiques) - YULE, un spectacle interceltiques",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/prepro-night-milan-maceo"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/concert-festival-celtiques-yule-spectacle-interceltiques"
             },
             {
-              "label": "Projection de Manas et table ronde : Rendre visible l'invisible, Ethique et Politique autour de Manas",
+              "label": "Conférence exceptionnelle: Comment repenser notre rapport au temps ?Faire société dans un monde marqué par l’urgence.",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/projection-manas-table-ronde-rendre-visible-invisible-ethique-politique-autour-manas"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/conference-exceptionnelle-repenser-rapport-temps-faire-societe-monde-marque-urgence"
             },
             {
-              "label": "Quatuors de Beethoven",
+              "label": "CORPS Ô PLURIELLES (performance)",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/quatuors-beethoven"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/corps-plurielles-performance"
             },
             {
-              "label": "Rencontre avec Anne Bourrassé",
+              "label": "Cours de Tango Argentin - Niveau débutant",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/rencontre-anne-bourrasse"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-10"
             },
             {
-              "label": "VIVRE",
+              "label": "Cyberviolences – résister collectivement à la silenciation",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/vivre"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/cyberviolences-resister-collectivement-silenciation"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/geneva/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "GE",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "363",
+          "value": "378",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -284,69 +284,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Ari Hoenig Trio",
+              "label": "« Hasards sauvages » - Café scientifique : Composer avec la montagne entre changements, catastrophes et retour du loup.",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/hoenig-trio"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/hasards-sauvages-cafe-scientifique-composer-montagne-entre-changements-catastrophes-retour-loup"
             },
             {
-              "label": "COMPLET Formation pour les intervenant.x.es du programme MasculinitéS",
+              "label": "Blooze and More - Concert du BAG",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/complet-formation-intervenantxes-programme-masculinites"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/blooze-more-concert"
             },
             {
-              "label": "En tant qu'homme, rejoins notre équipe bénévoles MasculinitéS !",
+              "label": "Cité Seniors fête ses 20 ans | 47 ans d'histoire des squats à Genève - Conférence, causerie et balades",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/tant-quhomme-rejoins-equipe-benevoles-masculinites-0"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades-2"
             },
             {
-              "label": "FILMAR 2026 La chair du mâle est aride – Rubén Barrios Rodríguez",
+              "label": "Complet - Atelier d'écriture: mise en mots de la violence",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/filmar-2026-chair-male-aride-ruben-barrios-rodriguez"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/atelier-ecriture-mise-mots-violence"
             },
             {
-              "label": "MORPHONG",
+              "label": "Complet - KNEECAP + Fawzi x Smokaholic",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/morphong"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/kneecap-fawzi-smokaholic"
             },
             {
-              "label": "PréPro night : MILAN | MACÉO",
+              "label": "CONCERT (Festival Celtiques) - YULE, un spectacle interceltiques",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/prepro-night-milan-maceo"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/concert-festival-celtiques-yule-spectacle-interceltiques"
             },
             {
-              "label": "Projection de Manas et table ronde : Rendre visible l'invisible, Ethique et Politique autour de Manas",
+              "label": "Conférence exceptionnelle: Comment repenser notre rapport au temps ?Faire société dans un monde marqué par l’urgence.",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/projection-manas-table-ronde-rendre-visible-invisible-ethique-politique-autour-manas"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/conference-exceptionnelle-repenser-rapport-temps-faire-societe-monde-marque-urgence"
             },
             {
-              "label": "Quatuors de Beethoven",
+              "label": "CORPS Ô PLURIELLES (performance)",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/quatuors-beethoven"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/corps-plurielles-performance"
             },
             {
-              "label": "Rencontre avec Anne Bourrassé",
+              "label": "Cours de Tango Argentin - Niveau débutant",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/rencontre-anne-bourrasse"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-10"
             },
             {
-              "label": "VIVRE",
+              "label": "Cyberviolences – résister collectivement à la silenciation",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/vivre"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/cyberviolences-resister-collectivement-silenciation"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/genf/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "GE",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "363",
+          "value": "378",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -407,69 +407,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Ari Hoenig Trio",
+              "label": "« Hasards sauvages » - Café scientifique : Composer avec la montagne entre changements, catastrophes et retour du loup.",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/hoenig-trio"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/hasards-sauvages-cafe-scientifique-composer-montagne-entre-changements-catastrophes-retour-loup"
             },
             {
-              "label": "COMPLET Formation pour les intervenant.x.es du programme MasculinitéS",
+              "label": "Blooze and More - Concert du BAG",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/complet-formation-intervenantxes-programme-masculinites"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/blooze-more-concert"
             },
             {
-              "label": "En tant qu'homme, rejoins notre équipe bénévoles MasculinitéS !",
+              "label": "Cité Seniors fête ses 20 ans | 47 ans d'histoire des squats à Genève - Conférence, causerie et balades",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/tant-quhomme-rejoins-equipe-benevoles-masculinites-0"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades-2"
             },
             {
-              "label": "FILMAR 2026 La chair du mâle est aride – Rubén Barrios Rodríguez",
+              "label": "Complet - Atelier d'écriture: mise en mots de la violence",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/filmar-2026-chair-male-aride-ruben-barrios-rodriguez"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/atelier-ecriture-mise-mots-violence"
             },
             {
-              "label": "MORPHONG",
+              "label": "Complet - KNEECAP + Fawzi x Smokaholic",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/morphong"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/kneecap-fawzi-smokaholic"
             },
             {
-              "label": "PréPro night : MILAN | MACÉO",
+              "label": "CONCERT (Festival Celtiques) - YULE, un spectacle interceltiques",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/prepro-night-milan-maceo"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/concert-festival-celtiques-yule-spectacle-interceltiques"
             },
             {
-              "label": "Projection de Manas et table ronde : Rendre visible l'invisible, Ethique et Politique autour de Manas",
+              "label": "Conférence exceptionnelle: Comment repenser notre rapport au temps ?Faire société dans un monde marqué par l’urgence.",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/projection-manas-table-ronde-rendre-visible-invisible-ethique-politique-autour-manas"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/conference-exceptionnelle-repenser-rapport-temps-faire-societe-monde-marque-urgence"
             },
             {
-              "label": "Quatuors de Beethoven",
+              "label": "CORPS Ô PLURIELLES (performance)",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/quatuors-beethoven"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/corps-plurielles-performance"
             },
             {
-              "label": "Rencontre avec Anne Bourrassé",
+              "label": "Cours de Tango Argentin - Niveau débutant",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/rencontre-anne-bourrasse"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-10"
             },
             {
-              "label": "VIVRE",
+              "label": "Cyberviolences – résister collectivement à la silenciation",
               "detail": "Genève",
-              "date": "2026-11-16",
-              "url": "https://www.geneve.ch/agenda/vivre"
+              "date": "2026-11-26",
+              "url": "https://www.geneve.ch/agenda/cyberviolences-resister-collectivement-silenciation"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/geneve/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

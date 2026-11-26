@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "fisco",
-  "updatedAt": "2026-11-13T02:47:52.804Z",
-  "contentHash": "e2d8f0be28a898ef97d868bf2d5a162c207899ad9a9d1b468d97d48a8d805622",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "40db650a47c82e1d70e7c20395b605b350059bae0d7623e3b1654d85e77bd42e",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-12T14:02:55.343Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -120,7 +120,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -135,6 +135,12 @@
           "url": "/articoli-vaud/fisco-vaud-indennita-abuso-imposte/",
           "excerpt": "La RTS riferisce che una vittima di abusi sessuali commessi a Pully deve pagare imposte su una parte dei CHF 220'000 versati dalla Chiesa cattolica.",
           "date": "2026-10-21T04:19:30.522Z"
+        },
+        {
+          "title": "Vaud: corteo a Losanna contro austerità e tagli di bilancio",
+          "url": "/articoli-vaud/manifestazione-losanna-tagli-bilancio/",
+          "excerpt": "Martedì sera Losanna ha ospitato una nuova manifestazione contro l'austerità e i tagli di bilancio nei servizi pubblici vodesi.",
+          "date": "2026-11-25T17:54:03.955Z"
         },
         {
           "title": "Losanna: deficit di 77,7 milioni nel budget 2027",
@@ -165,12 +171,6 @@
           "url": "/articoli-svizzera/guida-fiscale-vaud-2026/",
           "excerpt": "Tre livelli fiscali, moltiplicatore comunale e procedura online: la guida 2026 alla dichiarazione in Svizzera con focus sul canton Vaud.",
           "date": "2026-10-03T11:04:13.754Z"
-        },
-        {
-          "title": "Vaud, taglio fiscale del 12% sul reddito e sulla sostanza",
-          "url": "/articoli-svizzera/vaud-riduzione-reddito-sostanza/",
-          "excerpt": "Il Vaud approva una riduzione del 12% delle imposte cantonali su reddito e sostanza. Si parla di 272 milioni in meno dal prossimo 1° gennaio.",
-          "date": "2026-09-28T21:32:07.062Z"
         }
       ],
       "latestCantonArticles": [],
@@ -200,7 +200,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "VD",
@@ -298,7 +298,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -313,6 +313,12 @@
           "url": "/en/vaud-articles/vaud-tax-abuse-compensation-taxes/",
           "excerpt": "RTS reports that a victim of sexual abuse committed in Pully must pay taxes on a portion of the CHF 220,000 paid by the Catholic Church.",
           "date": "2026-10-21T04:19:30.522Z"
+        },
+        {
+          "title": "Vaud: march in Lausanne against austerity and budget cuts",
+          "url": "/en/vaud-articles/lausanne-demonstration-budget-cuts/",
+          "excerpt": "On Tuesday evening, Lausanne hosted a new demonstration against austerity and budget cuts in Vaud's public services.",
+          "date": "2026-11-25T17:54:03.955Z"
         },
         {
           "title": "Lausanne: deficit of 77,7 million in the 2027 budget",
@@ -342,12 +348,6 @@
           "url": "/en/swiss-articles/swiss-tax-return-vaud-2026/",
           "excerpt": "Three tax levels, municipal multiplier and online procedure: the 2026 guide to filing a tax return in Switzerland with a focus on the canton of Vaud.",
           "date": "2026-10-03T11:04:13.754Z"
-        },
-        {
-          "title": "Vaud, 12% tax cut on income and wealth",
-          "url": "/en/swiss-articles/vaud-tax-cut-income-wealth/",
-          "excerpt": "Vaud approves a 12% reduction in cantonal income and substance taxes. There is talk of 272 million less from next January 1.",
-          "date": "2026-09-28T21:32:07.062Z"
         }
       ],
       "latestCantonArticles": [],
@@ -377,7 +377,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "VD",
@@ -475,7 +475,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -490,6 +490,12 @@
           "url": "/de/waadt-artikel/waadt-steuer-missbrauchsentschadigung-steuern/",
           "excerpt": "Die RTS berichtet, dass ein Opfer von sexuellem Missbrauch, der in Pully begangen wurde, auf einen Teil der von der katholischen Kirche gezahlten CHF 220'000 Steuern zahlen muss.",
           "date": "2026-10-21T04:19:30.522Z"
+        },
+        {
+          "title": "Waadt: Demonstrationszug in Lausanne gegen Austerität und Haushaltskürzungen",
+          "url": "/de/waadt-artikel/manifestation-lausanne-budgetkurzungen/",
+          "excerpt": "Am Dienstagabend fand in Lausanne eine neue Demonstration gegen die Sparmaßnahmen und Haushaltskürzungen im öffentlichen Dienst des Kantons Waadt statt.",
+          "date": "2026-11-25T17:54:03.955Z"
         },
         {
           "title": "Lausanne: Defizit von 77,7 Millionen im Budget 2027",
@@ -519,12 +525,6 @@
           "url": "/de/schweiz-artikel/steuererklaerung-waadt-2026/",
           "excerpt": "Drei Steuerstufen, kommunaler Steuerfuss und Online-Verfahren: der Leitfaden 2026 zur Steuererklärung in der Schweiz mit Fokus auf den Kanton Waadt.",
           "date": "2026-10-03T11:04:13.754Z"
-        },
-        {
-          "title": "Waadt, Steuersenkung von 12% auf Einkommen und Vermögen",
-          "url": "/de/schweiz-artikel/waadt-steuersenkung-einkommen-vermoegen/",
-          "excerpt": "Das Waadtland genehmigt eine Senkung der kantonalen Einkommens- und Vermögenssteuern um 12%. Man spricht von 272 Millionen weniger ab dem 1. Januar.",
-          "date": "2026-09-28T21:32:07.062Z"
         }
       ],
       "latestCantonArticles": [],
@@ -554,7 +554,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "VD",
@@ -652,7 +652,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-11-12T14:02:55.343Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -667,6 +667,12 @@
           "url": "/fr/articles-vaud/fisc-vaud-indemnite-abus-impots/",
           "excerpt": "D'après la RTS, une personne victime d'abus sexuels à Pully est imposée sur une partie de l'indemnité de 220'000 francs versée par l'Eglise catholique.",
           "date": "2026-10-21T04:19:30.522Z"
+        },
+        {
+          "title": "Vaud : cortège à Lausanne contre l’austérité et les coupes budgétaires",
+          "url": "/fr/articles-vaud/manifestation-lausanne-coupes-budget/",
+          "excerpt": "À Lausanne, un nouveau rassemblement a contesté mardi l'austérité et les coupes budgétaires touchant les services publics vaudois.",
+          "date": "2026-11-25T17:54:03.955Z"
         },
         {
           "title": "Lausanne : déficit de 77,7 millions dans le budget 2027",
@@ -697,12 +703,6 @@
           "url": "/fr/articles-suisse/declaration-impots-vaud-2026/",
           "excerpt": "Trois niveaux fiscaux, multiplicateur communal et procédure en ligne : le guide 2026 de la déclaration en Suisse, avec un focus sur le canton de Vaud.",
           "date": "2026-10-03T11:04:13.754Z"
-        },
-        {
-          "title": "Vaud, réduction d'impôt de 12 % sur le revenu et la fortune",
-          "url": "/fr/articles-suisse/vaud-baisse-impots-revenu-fortune/",
-          "excerpt": "Le Vaud approuve une réduction de 12% des impôts cantonaux sur le revenu et la fortune. On parle de 272 millions de moins à partir du 1er janvier prochain.",
-          "date": "2026-09-28T21:32:07.062Z"
         }
       ],
       "latestCantonArticles": [],
@@ -732,7 +732,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-13T02:47:52.804Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

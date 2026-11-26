@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "fdbca259a37b439a57925fe5b9c116d0705eb528386d79873f4b6bab1cc5d49a",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "5e8244ff5d0f70dfbb4f736bb7aa57f061164b52175164150c90999b8ce151e2",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T21:47:09.888Z",
+      "updatedAt": "2026-11-26T00:32:00.223Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "15",
+          "value": "11",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Altdorfer Beenälisuppä",
-              "detail": "Altdorf",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/altdorfer-beenaelisuppae/"
-            },
-            {
-              "label": "Pirmin Huber Swiss Folk",
+              "label": "Ein Lieblings-Lieder-Abend",
               "detail": "theater(uri), Altdorf (UR)",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pirmin-huber-swiss-folk/"
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ein-lieblings-lieder-abend/"
             },
             {
-              "label": "Kreatives Geschichtenausdenken",
+              "label": "Samichlauseinzug",
               "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kreatives-geschichtenausdenken/"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/samichlauseinzug/"
             },
             {
-              "label": "Altdorfer Warenmarkt",
+              "label": "Adventskonzert",
+              "detail": "Kulturkommission Andermatt, Andermatt",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/adventskonzert-4/"
+            },
+            {
+              "label": "TriffAltdorf Sonntagsgespräche 10. Staffel: Stilles Licht - Rampenlicht",
               "detail": "Altdorf",
-              "date": "2026-11-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/warenmarkt-5/"
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-sonntagsgespraeche-10-staffel-stilles-licht-rampenlicht/"
             },
             {
-              "label": "Gedächtnisfeier für unsere verstorbenen Mitglieder",
+              "label": "Die Stille kennt deinen Namen",
+              "detail": "theater(uri), Altdorf (UR)",
+              "date": "2026-12-02",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-stille-kennt-deinen-namen/"
+            },
+            {
+              "label": "Musik zur Adventszeit im Kulturkloster",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-12-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/musik-zur-adventszeit-im-kulturkloster/"
+            },
+            {
+              "label": "Workshop \"Ur-Klangwelten von Langnauerli und Stöpselbass\"",
               "detail": "Altdorf",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gedaechtnisfeier-fuer-unsere-verstorbenen-mitglieder/"
+              "date": "2026-12-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-ur-klangwelten-von-langnauerli-und-stoepselbass/"
             },
             {
-              "label": "Comeback Tell!",
+              "label": "Dr Samichlaus macht Hausbesuche",
+              "detail": "Gemeindehaus Isenthal, Isenthal",
+              "date": "2026-12-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/dr-samichlaus-macht-hausbesuche/"
+            },
+            {
+              "label": "Saiten und Schatten",
               "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comeback-tell/"
+              "date": "2026-12-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/saiten-und-schatten/"
             },
             {
-              "label": "Orgelnacht",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/orgelnacht/"
-            },
-            {
-              "label": "ZW. HEUTE UND MORGEN",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zw-heute-und-morgen/"
-            },
-            {
-              "label": "TriffAltdorf Mittagstreff: Restaurant Pizzeria Wilhelm Tell",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-24",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-mittagstreff-restaurant-pizzeria-wilhelm-tell/"
-            },
-            {
-              "label": "TriffAltdorf Lesetreff",
-              "detail": "TriffAltdorf, Altdorf (UR)",
-              "date": "2026-11-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesetreff/"
+              "label": "GUGUS!",
+              "detail": "theater(uri), Altdorf (UR)",
+              "date": "2026-12-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gugus/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "UR",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "15",
+          "value": "11",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Altdorfer Beenälisuppä",
-              "detail": "Altdorf",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/altdorfer-beenaelisuppae/"
-            },
-            {
-              "label": "Pirmin Huber Swiss Folk",
+              "label": "Ein Lieblings-Lieder-Abend",
               "detail": "theater(uri), Altdorf (UR)",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pirmin-huber-swiss-folk/"
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ein-lieblings-lieder-abend/"
             },
             {
-              "label": "Kreatives Geschichtenausdenken",
+              "label": "Samichlauseinzug",
               "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kreatives-geschichtenausdenken/"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/samichlauseinzug/"
             },
             {
-              "label": "Altdorfer Warenmarkt",
+              "label": "Adventskonzert",
+              "detail": "Kulturkommission Andermatt, Andermatt",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/adventskonzert-4/"
+            },
+            {
+              "label": "TriffAltdorf Sonntagsgespräche 10. Staffel: Stilles Licht - Rampenlicht",
               "detail": "Altdorf",
-              "date": "2026-11-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/warenmarkt-5/"
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-sonntagsgespraeche-10-staffel-stilles-licht-rampenlicht/"
             },
             {
-              "label": "Gedächtnisfeier für unsere verstorbenen Mitglieder",
+              "label": "Die Stille kennt deinen Namen",
+              "detail": "theater(uri), Altdorf (UR)",
+              "date": "2026-12-02",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-stille-kennt-deinen-namen/"
+            },
+            {
+              "label": "Musik zur Adventszeit im Kulturkloster",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-12-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/musik-zur-adventszeit-im-kulturkloster/"
+            },
+            {
+              "label": "Workshop \"Ur-Klangwelten von Langnauerli und Stöpselbass\"",
               "detail": "Altdorf",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gedaechtnisfeier-fuer-unsere-verstorbenen-mitglieder/"
+              "date": "2026-12-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-ur-klangwelten-von-langnauerli-und-stoepselbass/"
             },
             {
-              "label": "Comeback Tell!",
+              "label": "Dr Samichlaus macht Hausbesuche",
+              "detail": "Gemeindehaus Isenthal, Isenthal",
+              "date": "2026-12-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/dr-samichlaus-macht-hausbesuche/"
+            },
+            {
+              "label": "Saiten und Schatten",
               "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comeback-tell/"
+              "date": "2026-12-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/saiten-und-schatten/"
             },
             {
-              "label": "Orgelnacht",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/orgelnacht/"
-            },
-            {
-              "label": "ZW. HEUTE UND MORGEN",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zw-heute-und-morgen/"
-            },
-            {
-              "label": "TriffAltdorf Mittagstreff: Restaurant Pizzeria Wilhelm Tell",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-24",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-mittagstreff-restaurant-pizzeria-wilhelm-tell/"
-            },
-            {
-              "label": "TriffAltdorf Lesetreff",
-              "detail": "TriffAltdorf, Altdorf (UR)",
-              "date": "2026-11-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesetreff/"
+              "label": "GUGUS!",
+              "detail": "theater(uri), Altdorf (UR)",
+              "date": "2026-12-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gugus/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "UR",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "15",
+          "value": "11",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Altdorfer Beenälisuppä",
-              "detail": "Altdorf",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/altdorfer-beenaelisuppae/"
-            },
-            {
-              "label": "Pirmin Huber Swiss Folk",
+              "label": "Ein Lieblings-Lieder-Abend",
               "detail": "theater(uri), Altdorf (UR)",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pirmin-huber-swiss-folk/"
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ein-lieblings-lieder-abend/"
             },
             {
-              "label": "Kreatives Geschichtenausdenken",
+              "label": "Samichlauseinzug",
               "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kreatives-geschichtenausdenken/"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/samichlauseinzug/"
             },
             {
-              "label": "Altdorfer Warenmarkt",
+              "label": "Adventskonzert",
+              "detail": "Kulturkommission Andermatt, Andermatt",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/adventskonzert-4/"
+            },
+            {
+              "label": "TriffAltdorf Sonntagsgespräche 10. Staffel: Stilles Licht - Rampenlicht",
               "detail": "Altdorf",
-              "date": "2026-11-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/warenmarkt-5/"
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-sonntagsgespraeche-10-staffel-stilles-licht-rampenlicht/"
             },
             {
-              "label": "Gedächtnisfeier für unsere verstorbenen Mitglieder",
+              "label": "Die Stille kennt deinen Namen",
+              "detail": "theater(uri), Altdorf (UR)",
+              "date": "2026-12-02",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-stille-kennt-deinen-namen/"
+            },
+            {
+              "label": "Musik zur Adventszeit im Kulturkloster",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-12-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/musik-zur-adventszeit-im-kulturkloster/"
+            },
+            {
+              "label": "Workshop \"Ur-Klangwelten von Langnauerli und Stöpselbass\"",
               "detail": "Altdorf",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gedaechtnisfeier-fuer-unsere-verstorbenen-mitglieder/"
+              "date": "2026-12-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-ur-klangwelten-von-langnauerli-und-stoepselbass/"
             },
             {
-              "label": "Comeback Tell!",
+              "label": "Dr Samichlaus macht Hausbesuche",
+              "detail": "Gemeindehaus Isenthal, Isenthal",
+              "date": "2026-12-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/dr-samichlaus-macht-hausbesuche/"
+            },
+            {
+              "label": "Saiten und Schatten",
               "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comeback-tell/"
+              "date": "2026-12-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/saiten-und-schatten/"
             },
             {
-              "label": "Orgelnacht",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/orgelnacht/"
-            },
-            {
-              "label": "ZW. HEUTE UND MORGEN",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zw-heute-und-morgen/"
-            },
-            {
-              "label": "TriffAltdorf Mittagstreff: Restaurant Pizzeria Wilhelm Tell",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-24",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-mittagstreff-restaurant-pizzeria-wilhelm-tell/"
-            },
-            {
-              "label": "TriffAltdorf Lesetreff",
-              "detail": "TriffAltdorf, Altdorf (UR)",
-              "date": "2026-11-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesetreff/"
+              "label": "GUGUS!",
+              "detail": "theater(uri), Altdorf (UR)",
+              "date": "2026-12-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gugus/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "UR",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "15",
+          "value": "11",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Altdorfer Beenälisuppä",
-              "detail": "Altdorf",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/altdorfer-beenaelisuppae/"
-            },
-            {
-              "label": "Pirmin Huber Swiss Folk",
+              "label": "Ein Lieblings-Lieder-Abend",
               "detail": "theater(uri), Altdorf (UR)",
-              "date": "2026-11-17",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pirmin-huber-swiss-folk/"
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ein-lieblings-lieder-abend/"
             },
             {
-              "label": "Kreatives Geschichtenausdenken",
+              "label": "Samichlauseinzug",
               "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kreatives-geschichtenausdenken/"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/samichlauseinzug/"
             },
             {
-              "label": "Warenmarkt",
+              "label": "Adventskonzert",
+              "detail": "Kulturkommission Andermatt, Andermatt",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/adventskonzert-4/"
+            },
+            {
+              "label": "TriffAltdorf Sonntagsgespräche 10. Staffel: Stilles Licht - Rampenlicht",
               "detail": "Altdorf",
-              "date": "2026-11-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/warenmarkt-5/"
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-sonntagsgespraeche-10-staffel-stilles-licht-rampenlicht/"
             },
             {
-              "label": "Gedächtnisfeier für unsere verstorbenen Mitglieder",
+              "label": "Die Stille kennt deinen Namen",
+              "detail": "theater(uri), Altdorf (UR)",
+              "date": "2026-12-02",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-stille-kennt-deinen-namen/"
+            },
+            {
+              "label": "Musik zur Adventszeit im Kulturkloster",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-12-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/musik-zur-adventszeit-im-kulturkloster/"
+            },
+            {
+              "label": "Workshop \"Ur-Klangwelten von Langnauerli und Stöpselbass\"",
               "detail": "Altdorf",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gedaechtnisfeier-fuer-unsere-verstorbenen-mitglieder/"
+              "date": "2026-12-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-ur-klangwelten-von-langnauerli-und-stoepselbass/"
             },
             {
-              "label": "Comeback Tell!",
+              "label": "Dr Samichlaus macht Hausbesuche",
+              "detail": "Gemeindehaus Isenthal, Isenthal",
+              "date": "2026-12-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/dr-samichlaus-macht-hausbesuche/"
+            },
+            {
+              "label": "Saiten und Schatten",
               "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comeback-tell/"
+              "date": "2026-12-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/saiten-und-schatten/"
             },
             {
-              "label": "Orgelnacht",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/orgelnacht/"
-            },
-            {
-              "label": "ZW. HEUTE UND MORGEN",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zw-heute-und-morgen/"
-            },
-            {
-              "label": "TriffAltdorf Mittagstreff: Restaurant Pizzeria Wilhelm Tell",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-11-24",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/triffaltdorf-mittagstreff-restaurant-pizzeria-wilhelm-tell/"
-            },
-            {
-              "label": "TriffAltdorf Lesetreff",
-              "detail": "TriffAltdorf, Altdorf (UR)",
-              "date": "2026-11-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesetreff/"
+              "label": "GUGUS!",
+              "detail": "theater(uri), Altdorf (UR)",
+              "date": "2026-12-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gugus/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

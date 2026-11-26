@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "d6bba73c94394fcc1b068b23faa2659e8377e5eab0c31b7c9fa38edf56dbfe87",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "3e96db129e5ccad109b3901ab51d5cb9d2670ee140b48bb6386834de7c3ff750",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T21:47:09.888Z",
+      "updatedAt": "2026-11-26T00:32:00.223Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "247",
+          "value": "221",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Corpi in prestito",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/58243"
+              "label": "OSI al LAC",
+              "detail": "Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/osi-al-lac/"
             },
             {
-              "label": "F. Reinhart. Il modello come strumento progettuale",
-              "detail": "Palazzo Franscini, Bellinzona",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64787"
+              "label": "Park Eun Sun - Mario Botta",
+              "detail": "Fondazione Gabriele e Anna Braglia, Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/63350"
             },
             {
-              "label": "La semina della speranza - Demetra e Persefone",
-              "detail": "Kosmos, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64908"
+              "label": "Be connected - Lunch with OSI",
+              "detail": "Lac, Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/64703"
             },
             {
-              "label": "Giovanni Anselmo",
-              "detail": "Repetto Gallery, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/63802"
+              "label": "A scuola in sicurezza in Ticino",
+              "detail": "Casa del Popolo, Bellinzona",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/65093"
             },
             {
-              "label": "Diga del Sambuco e nuovi scenari energetici",
-              "detail": "Biblioteca cantonale Bellinzona, Bellinzona",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64882"
+              "label": "Anima Mundi - Esposizione di pittura e scultura",
+              "detail": "Tania Art Galerie, Locarno",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/64750"
             },
             {
-              "label": "Ugo Mulas, Pietro Consagra, Arnaldo Pomodoro",
-              "detail": "Cortesi Gallery, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/63724"
+              "label": "Giornata famigliari curanti",
+              "detail": "Sede SeSi, Bellinzona",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/65059"
             },
             {
-              "label": "Neurovisioni – Il corpo che impara",
-              "detail": "Lux Art House, Massagno",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64747"
+              "label": "Cena di beneficenza",
+              "detail": "Osteria Lafranchi, Bellinzona",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/64864"
             },
             {
-              "label": "Anni Settanta. Terrore e Diritti",
-              "detail": "Lac, Sala Teatro, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64648"
+              "label": "Domande coraggiose",
+              "detail": "Liceo Diocesano, Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/65107"
             },
             {
-              "label": "Lunedì Jazz",
-              "detail": "Snack Bar Incontro, Muralto",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64990"
+              "label": "Fiumi di parole",
+              "detail": "Biblioteca cantonale, Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/64605"
             },
             {
-              "label": "Shai Maestro - Live Music",
-              "detail": "Studio Foce, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64033"
+              "label": "Incontro letterario con Julie Arlin",
+              "detail": "Bar Oops, Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/64929"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -104,6 +104,18 @@
           "url": "/articoli-ticino/sistema-ferroviario-accordo-ue/",
           "excerpt": "Secondo il testo, l'accordo riguarderebbe anche i trasporti. Nel comparto ferroviario, il trattato consentirebbe alle compagnie straniere di utilizzare le rotaie svizzere, finanziate con risorse dei contribuenti.",
           "date": "2026-10-28T01:31:55.792Z"
+        },
+        {
+          "title": "Festival AI a Lugano: 13 aree e oltre 60 relatori",
+          "url": "/articoli-frontaliere/festival-ai-lugano-aree/",
+          "excerpt": "Al Palazzo dei Congressi di Lugano, il Festival AI riunisce oltre 60 relatori internazionali in 13 aree, con un'area espositiva gratuita aperta a tutti.",
+          "date": "2026-11-21T08:36:27.600Z"
+        },
+        {
+          "title": "Mendrisio porta feste e pista di ghiaccio in piazza",
+          "url": "/articoli-frontaliere/mendrisio-feste-pista-ghiaccio/",
+          "excerpt": "Da fine novembre a gennaio Mendrisio anima piazze e quartieri con pista di ghiaccio, scambio degli auguri e un calendario di appuntamenti.",
+          "date": "2026-11-20T22:27:41.950Z"
         },
         {
           "title": "Scacchi a Bissone: i vincitori del VI Festival",
@@ -134,18 +146,6 @@
           "url": "/articoli-frontaliere/teatro-locarno-fondi-pubblici/",
           "excerpt": "A Locarno, l’assemblea annuale dell’Associazione «Amici del Teatro di Locarno» ha riunito giovedì sera oltre cento soci nel teatro cittadino.",
           "date": "2026-10-09T23:43:17.647Z"
-        },
-        {
-          "title": "Sagra dell'uva a Mendrisio: bilancio positivo",
-          "url": "/articoli-frontaliere/sagra-uva-mendrisio-bilancio/",
-          "excerpt": "Bilancio positivo per la 70ª Sagra dell'uva di Mendrisio: stimate 20-25mila persone e nessun intervento di rilievo per la sicurezza.",
-          "date": "2026-09-27T18:44:48.773Z"
-        },
-        {
-          "title": "Locarno Film Festival: la cultura come legame",
-          "url": "/articoli-frontaliere/locarno-film-festival-resistenza-legami/",
-          "excerpt": "Il Locarno Film Festival inaugura con 'Les Yeux Verts', esplorando temi di trauma e resilienza attraverso il cinema in Piazza Grande.",
-          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "latestCantonArticles": [],
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "247",
+          "value": "221",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,69 +184,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Borrowed bodies",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/58243"
+              "label": "OSI al LAC",
+              "detail": "Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/osi-al-lac/"
             },
             {
-              "label": "F. Reinhart. The Model as a Design Tool",
-              "detail": "Palazzo Franscini, Bellinzona",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64787"
+              "label": "Park Eun Sun-Mario Botta",
+              "detail": "Fondazione Gabriele e Anna Braglia, Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/63350"
             },
             {
-              "label": "The sowing of hope - Demeter and Persephone",
-              "detail": "Kosmos, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64908"
+              "label": "Be connected-Lunch OSI",
+              "detail": "Lac, Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/64703"
             },
             {
-              "label": "John Anselm",
-              "detail": "Repetto Gallery, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/63802"
+              "label": "Safe at school in Ticino",
+              "detail": "Casa del Popolo, Bellinzona",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/65093"
             },
             {
-              "label": "Sambuco Dam and new energy scenarios",
-              "detail": "Biblioteca cantonale Bellinzona, Bellinzona",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64882"
+              "label": "Anima Mundi - Painting and Sculpture Exhibition",
+              "detail": "Tania Art Galerie, Locarno",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/64750"
             },
             {
-              "label": "Ugo Mulas, Pietro Consagra, Arnaldo Pomodoro",
-              "detail": "Cortesi Gallery, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/63724"
+              "label": "Family Carers' Day",
+              "detail": "Sede SeSi, Bellinzona",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/65059"
             },
             {
-              "label": "Neurovisions – The Learning Body",
-              "detail": "Lux Art House, Massagno",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64747"
+              "label": "Charity dinner",
+              "detail": "Osteria Lafranchi, Bellinzona",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/64864"
             },
             {
-              "label": "Seventies. Terror and Rights",
-              "detail": "Lac, Sala Teatro, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64648"
+              "label": "Bold questions",
+              "detail": "Liceo Diocesano, Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/65107"
             },
             {
-              "label": "Monday Jazz",
-              "detail": "Snack Bar Incontro, Muralto",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64990"
+              "label": "Rivers of words",
+              "detail": "Biblioteca cantonale, Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/64605"
             },
             {
-              "label": "Shai Maestro-Live Music",
-              "detail": "Studio Foce, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64033"
+              "label": "Literary meeting with Julie Arlin",
+              "detail": "Bar Oops, Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/64929"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -255,6 +255,18 @@
           "url": "/en/ticino-articles/railway-system-eu-agreement/",
           "excerpt": "This restriction is the starting point for the analysis written by Lorenzo Quadri, a member of the National Council of the Lega dei Ticinesi, on the agreement to submit to the EU and its consequences for the railway…",
           "date": "2026-10-28T01:31:55.792Z"
+        },
+        {
+          "title": "Festival AI in Lugano: 13 areas and over 60 speakers",
+          "url": "/en/cross-border-articles/lugano-ai-festival-areas/",
+          "excerpt": "At the Palazzo dei Congressi di Lugano, Festival AI brings together over 60 international speakers across 13 areas, with a free exhibition area open to everyone.",
+          "date": "2026-11-21T08:36:27.600Z"
+        },
+        {
+          "title": "Mendrisio brings festivities and an ice rink to the square",
+          "url": "/en/cross-border-articles/mendrisio-festivities-ice-rink/",
+          "excerpt": "From late November to January, Mendrisio brings squares and neighborhoods to life with an ice rink, an exchange of greetings and a calendar of events.",
+          "date": "2026-11-20T22:27:41.950Z"
         },
         {
           "title": "Chess in Bissone: the winners of the VI Festival",
@@ -285,18 +297,6 @@
           "url": "/en/cross-border-articles/locarno-theatre-public-funding/",
           "excerpt": "After the artistic presentation, the discussion focused on the prospects for the programming of Teatro di Locarno.",
           "date": "2026-10-09T23:43:17.647Z"
-        },
-        {
-          "title": "Grape Festival in Mendrisio: positive outcome",
-          "url": "/en/cross-border-articles/mendrisio-grape-festival-results/",
-          "excerpt": "Positive outcome for the 70th Mendrisio Grape Festival: an estimated 20,000–25,000 people and no major security interventions.",
-          "date": "2026-09-27T18:44:48.773Z"
-        },
-        {
-          "title": "Locarno Film Festival: culture as a link",
-          "url": "/en/cross-border-articles/locarno-film-festival-bonds-resistance/",
-          "excerpt": "The Locarno Film Festival opens with 'Les Yeux Verts', exploring themes of trauma and resilience through cinema in Piazza Grande.",
-          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "latestCantonArticles": [],
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "247",
+          "value": "221",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -335,69 +335,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Leihkörper",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/58243"
+              "label": "OSI al LAC",
+              "detail": "Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/osi-al-lac/"
             },
             {
-              "label": "F. Reinhart. Das Modell als Planungsinstrument",
-              "detail": "Palazzo Franscini, Bellinzona",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64787"
+              "label": "Park Eun Sun – Mario Botta",
+              "detail": "Fondazione Gabriele e Anna Braglia, Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/63350"
             },
             {
-              "label": "Die Saat der Hoffnung - Demeter und Persephone",
-              "detail": "Kosmos, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64908"
+              "label": "Sei verbunden – Mittagessen mit OSI",
+              "detail": "Lac, Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/64703"
             },
             {
-              "label": "Johannes Anselm",
-              "detail": "Repetto Gallery, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/63802"
+              "label": "Sicher zur Schule im Tessin",
+              "detail": "Casa del Popolo, Bellinzona",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/65093"
             },
             {
-              "label": "Sambuco-Staudamm und neue Energieszenarien",
-              "detail": "Biblioteca cantonale Bellinzona, Bellinzona",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64882"
+              "label": "Anima Mundi - Ausstellung von Gemälden und Skulpturen",
+              "detail": "Tania Art Galerie, Locarno",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/64750"
             },
             {
-              "label": "Ugo Mulas, Pietro Consagra, Arnaldo Pomodoro",
-              "detail": "Cortesi Gallery, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/63724"
+              "label": "Tag der pflegenden Angehörigen",
+              "detail": "Sede SeSi, Bellinzona",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/65059"
             },
             {
-              "label": "Neurovisions – Der lernende Körper",
-              "detail": "Lux Art House, Massagno",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64747"
+              "label": "Wohltätigkeitsdinner",
+              "detail": "Osteria Lafranchi, Bellinzona",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/64864"
             },
             {
-              "label": "1970er Jahre. Terror und Rechte",
-              "detail": "Lac, Sala Teatro, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64648"
+              "label": "Mutige Fragen",
+              "detail": "Liceo Diocesano, Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/65107"
             },
             {
-              "label": "Montag Jazz",
-              "detail": "Snack Bar Incontro, Muralto",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64990"
+              "label": "Flüsse von Worten",
+              "detail": "Biblioteca cantonale, Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/64605"
             },
             {
-              "label": "Shai Maestro – Live-Musik",
-              "detail": "Studio Foce, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64033"
+              "label": "Literarische Begegnung mit Julie Arlin",
+              "detail": "Bar Oops, Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/64929"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -406,6 +406,18 @@
           "url": "/de/tessin-artikel/schienennetz-eu-abkommen/",
           "excerpt": "Der CEO der FFS hatte bereits gewarnt, dass selbst eine auf 20 % begrenzte Marktöffnung das Schweizer Taktfahrplansystem hätte gefährden können. Mit dem Abkommen wäre die Öffnung, so der Artikel, sicherlich…",
           "date": "2026-10-28T01:31:55.792Z"
+        },
+        {
+          "title": "Festival AI in Lugano: 13 Bereiche und mehr als 60 Referenten",
+          "url": "/de/grenzgaenger-artikel/ki-festival-lugano-bereiche/",
+          "excerpt": "Im Palazzo dei Congressi di Lugano versammelt das Festival AI mehr als 60 internationale Referenten in 13 Bereichen, mit einem kostenlosen und allen offenstehenden Ausstellungsbereich.",
+          "date": "2026-11-21T08:36:27.600Z"
+        },
+        {
+          "title": "Mendrisio bringt Feste und eine Eisbahn auf den Platz",
+          "url": "/de/grenzgaenger-artikel/mendrisio-festtage-eisbahn/",
+          "excerpt": "Von Ende November bis Januar belebt Mendrisio Plätze und Quartiere mit einer Eisbahn, dem Austausch von guten Wünschen und einem Veranstaltungskalender.",
+          "date": "2026-11-20T22:27:41.950Z"
         },
         {
           "title": "Schach in Bissone: die Gewinner des VI Festivals",
@@ -436,18 +448,6 @@
           "url": "/de/grenzgaenger-artikel/theater-locarno-oeffentliche-gelder/",
           "excerpt": "Nach der künstlerischen Präsentation konzentrierte sich die Diskussion auf die Perspektiven der Programmgestaltung des Teatro di Locarno.",
           "date": "2026-10-09T23:43:17.647Z"
-        },
-        {
-          "title": "Traubenfest in Mendrisio: positive Bilanz",
-          "url": "/de/grenzgaenger-artikel/traubenfest-mendrisio-bilanz/",
-          "excerpt": "Positive Bilanz für das 70. Traubenfest von Mendrisio: schätzungsweise 20-25 Tausend Personen und kein nennenswerter Sicherheitseinsatz.",
-          "date": "2026-09-27T18:44:48.773Z"
-        },
-        {
-          "title": "Locarno Film Festival: Kultur als Verbindung",
-          "url": "/de/grenzgaenger-artikel/locarno-film-festival-bande-widerstand/",
-          "excerpt": "Das Locarno Film Festival eröffnet mit \"Les Yeux Verts\" und erforscht Themen wie Trauma und Resilienz durch das Kino auf der Piazza Grande.",
-          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "latestCantonArticles": [],
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "247",
+          "value": "221",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -486,69 +486,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Corps prêtés",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/58243"
+              "label": "OSI al LAC",
+              "detail": "Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/osi-al-lac/"
             },
             {
-              "label": "F. Reinhart. La maquette comme outil de conception",
-              "detail": "Palazzo Franscini, Bellinzona",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64787"
+              "label": "Park Eun Sun-Mario Botta",
+              "detail": "Fondazione Gabriele e Anna Braglia, Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/63350"
             },
             {
-              "label": "La semence de l'espoir - Déméter et Perséphone",
-              "detail": "Kosmos, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64908"
+              "label": "Soyez en contact - Déjeuner avec OSI",
+              "detail": "Lac, Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/64703"
             },
             {
-              "label": "Giovanni Anselme",
-              "detail": "Repetto Gallery, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/63802"
+              "label": "À l’école en toute sécurité au Tessin",
+              "detail": "Casa del Popolo, Bellinzona",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/65093"
             },
             {
-              "label": "Barrage de Sambuco et nouveaux scénarios énergétiques",
-              "detail": "Biblioteca cantonale Bellinzona, Bellinzona",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64882"
+              "label": "Anima Mundi - Exposition de peinture et de sculpture",
+              "detail": "Tania Art Galerie, Locarno",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/64750"
             },
             {
-              "label": "Ugo Mulas, avec Pietro Consagra et Arnaldo Pomodoro",
-              "detail": "Cortesi Gallery, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/63724"
+              "label": "Journée des aidants familiaux",
+              "detail": "Sede SeSi, Bellinzona",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/65059"
             },
             {
-              "label": "Neurovisions – Le corps apprenant",
-              "detail": "Lux Art House, Massagno",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64747"
+              "label": "Dîner caritatif",
+              "detail": "Osteria Lafranchi, Bellinzona",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/64864"
             },
             {
-              "label": "Années soixante-dix. Terreur et droits",
-              "detail": "Lac, Sala Teatro, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64648"
+              "label": "Des questions audacieuses",
+              "detail": "Liceo Diocesano, Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/65107"
             },
             {
-              "label": "Lundi Jazz",
-              "detail": "Snack Bar Incontro, Muralto",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64990"
+              "label": "Rivières de mots",
+              "detail": "Biblioteca cantonale, Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/64605"
             },
             {
-              "label": "Shai Maestro - Musique live",
-              "detail": "Studio Foce, Lugano",
-              "date": "2026-11-16",
-              "url": "https://www.tio.ch/agenda/day/20261116/64033"
+              "label": "Rencontre littéraire avec Julie Arlin",
+              "detail": "Bar Oops, Lugano",
+              "date": "2026-11-26",
+              "url": "https://www.tio.ch/agenda/day/20261126/64929"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -557,6 +557,18 @@
           "url": "/fr/articles-tessin/systeme-ferroviaire-accord-ue/",
           "excerpt": "Cette contrainte constitue le point de départ de l'analyse signée par Lorenzo Quadri, conseiller national de la Lega dei Ticinesi, sur l'accord de soumission à l'UE et ses conséquences pour le réseau ferroviaire.",
           "date": "2026-10-28T01:31:55.792Z"
+        },
+        {
+          "title": "Festival AI à Lugano : 13 domaines et plus de 60 intervenants",
+          "url": "/fr/articles-frontalier/festival-ia-lugano-domaines/",
+          "excerpt": "Au Palais des congrès de Lugano, le Festival AI réunit plus de 60 intervenants internationaux dans 13 domaines, avec un espace d’exposition gratuit ouvert à tous.",
+          "date": "2026-11-21T08:36:27.600Z"
+        },
+        {
+          "title": "Mendrisio apporte fêtes et patinoire sur la place",
+          "url": "/fr/articles-frontalier/mendrisio-fetes-patinoire/",
+          "excerpt": "De fin novembre à janvier, Mendrisio anime ses places et ses quartiers avec une patinoire, un échange de vœux et un calendrier de rendez-vous.",
+          "date": "2026-11-20T22:27:41.950Z"
         },
         {
           "title": "Échecs à Bissone : les vainqueurs du VI Festival",
@@ -587,18 +599,6 @@
           "url": "/fr/articles-frontalier/theatre-locarno-fonds-publics/",
           "excerpt": "A Locarno, la réunion annuelle de l'association «Amis du Théâtre de Locarno» a réuni jeudi soir plus d'une centaine de membres au théâtre municipal.",
           "date": "2026-10-09T23:43:17.647Z"
-        },
-        {
-          "title": "Fête du raisin à Mendrisio : bilan positif",
-          "url": "/fr/articles-frontalier/fete-raisin-mendrisio-bilan/",
-          "excerpt": "Bilan positif pour la 70e Fête du raisin de Mendrisio : 20-25 mille personnes estimées et aucune intervention notable pour la sécurité.",
-          "date": "2026-09-27T18:44:48.773Z"
-        },
-        {
-          "title": "Festival du film de Locarno : la culture comme lien",
-          "url": "/fr/articles-frontalier/locarno-film-festival-liens-resistance/",
-          "excerpt": "Le Locarno Film Festival ouvre avec « Les Yeux Verts », explorant les thèmes du traumatisme et de la résilience à travers le cinéma sur la Piazza Grande.",
-          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "latestCantonArticles": [],
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

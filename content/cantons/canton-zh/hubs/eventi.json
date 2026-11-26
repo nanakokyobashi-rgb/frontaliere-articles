@@ -4,13 +4,18 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "d195eab793d33c0d27e56ddb35044cf4d6f882ad4714235e2cfb0d28126a06ac",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "7c25ea24fc7d6faa2fb8a9d858768e49f4fc02b63f0acf00e9e3f80f3040f4d5",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T21:47:09.888Z",
+      "updatedAt": "2026-11-26T00:32:00.223Z",
       "keyFacts": 1
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
+      "keyFacts": 0
     }
   ],
   "locales": {
@@ -22,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "324",
+          "value": "314",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,83 +38,96 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Metzgete nach Wahl: Im Hotel Sedartis kommt auf den Teller, was schmeckt",
-              "detail": "Thalwil",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-nach-wahl-im-hotel-sedartis-kommt-auf-den-teller-was-schmeckt/"
+              "label": "Weihnachtsmarkt Winterthur 2026",
+              "detail": "8400 Winterthur, Winterthur",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmarkt-winterthur-2026/"
             },
             {
-              "label": "Pharmaceutical Automation and Digitalisation Congress 2026",
-              "detail": "Mövenpick Hotel Zürich-Regensdorf, Regensdorf",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/regensdorf/pharmaceutical-automation-and-digitalisation-congress-2026_A39nq1k"
+              "label": "KCXL - International Ophthalmology Experts's Meeting 2026",
+              "detail": "Stadtspital Zürich Triemli, Zürich",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/kcxl-international-ophthalmology-expertss-meeting-2026_AKfg8hW"
             },
             {
-              "label": "Swiss Payment Forum 2026",
-              "detail": "Zürich Marriott Hotel, Zürich",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/swiss-payment-forum-2026_Ap34E6e"
+              "label": "Uster Märt",
+              "detail": "Innenstadt, Uster",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/uster-maert/"
             },
             {
-              "label": "Swiss AI Summit 2026",
-              "detail": "Kunsthaus Zürich, Zürich",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/swiss-ai-summit-2026_AyKpYFV"
+              "label": "Zauberpark mit Professor & Profesora Bummbastic",
+              "detail": "Flughafenpark im Circle, Zürich",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/zauberpark-mit-professor-und-profesora-bummbastic_AALjxNu"
             },
             {
-              "label": "Mütter- und Väterberatung in Greifensee",
-              "detail": "Reformiertes Kirchgemeindehaus Greifensee, Greifensee",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/greifensee/muetter-und-vaeterberatung-in-greifensee_A7MCrKM"
+              "label": "Kerzenziehen (Kreativabend für alle)",
+              "detail": "Urdorf",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-kreativabend-fuer-alle/"
             },
             {
-              "label": "Mütter- und Väterberatung in Egg",
-              "detail": "Kinder- und Jugendbüro, Zürich",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/egg-b-zuerich/muetter-und-vaeterberatung-in-egg_AyGCRBZ"
+              "label": "Kunst-Stück: Impressionismus (Vertiefung)",
+              "detail": "Kunsthaus Zürich Chipperfield-Bau, Zürich",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kunststueck-impressionismus-vertiefung/"
             },
             {
-              "label": "Schreibdienst / Infopoint",
-              "detail": "Katholische Pfarrei St. Martin, Raum David und Raum Mirjam",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/effretikon/schreibdienst-infopoint_A9UpJPZ"
+              "label": "Out of Service? – Schweizer Sakralarchitektur im Wandel",
+              "detail": "ZAZ Zentrum Architektur Zürich, Zürich",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/vernissage-out-of-service-schweizer-sakralarchitektur-im-wandel_AXBrejm"
             },
             {
-              "label": "«Mein Klang, meine Reise» von Wael Sami Elkholy",
-              "detail": "sogar theater",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/mein-klang-meine-reise-von-wael-sami-elkholy_AY4tXmX"
+              "label": "Collection Insights: “She-Devils on Wheels – Headquaters”",
+              "detail": "Migros Museum für Gegenwartskunst, Zürich",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/collection-insights-she-devils-on-wheels-headquaters/"
             },
             {
-              "label": "Fondue a bordo della Doppia freccia rossa «Churchill».",
-              "detail": "Zürich HB, Zürich",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fondue-a-bordo-della-doppia-freccia-rossa-churchill/"
+              "label": "Kunissimo",
+              "detail": "Salzhaus, Winterthur",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/kunissimo_A8jwPWf"
             },
             {
-              "label": "Berlin ist ja so gross",
-              "detail": "Stadtgarten, Winterthur",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/berlin-ist-ja-so-gross/"
+              "label": "Röm.-kath. Kirchgemeindeversammlung",
+              "detail": "Kath. Pfarreizentrum Urdorf, Urdorf",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roemkath-kirchgemeindeversammlung/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Erhöhung der städtischen Beiträge für das Zurich Film Festival",
+              "date": "2026-11-25T11:00:00.000Z",
+              "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/11/erhoehung-staedtische-beitraege-zurich-film-festival.html"
+            }
+          ],
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Giorni festivi Cantone Zurigo: guida a calendario e regole",
-          "url": "/articoli-svizzera/giorni-festivi-canton-zurigo-guida/",
-          "excerpt": "Come distinguere le festività cantonali da quelle federali.",
-          "date": "2026-10-12T00:26:51.075Z"
-        },
         {
           "title": "Festival Zurigo: alla Svizzera luna wedler il golden eye award",
           "url": "/articoli-svizzera/luna-wedler-golden-eye-award-zurigo/",
           "excerpt": "L'attrice svizzera riceve il premio per essere la prima attrice svizzera a vincere il Golden Eye Award.",
           "date": "2026-09-07T13:05:51.871Z"
+        },
+        {
+          "title": "Giorni festivi Cantone Zurigo: guida a calendario e regole",
+          "url": "/articoli-svizzera/giorni-festivi-canton-zurigo-guida/",
+          "excerpt": "Come distinguere le festività cantonali da quelle federali.",
+          "date": "2026-10-12T00:26:51.075Z"
         }
       ],
       "latestCantonArticles": [],
@@ -123,7 +141,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "ZH",
@@ -133,7 +151,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "324",
+          "value": "314",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,83 +162,96 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Metzgete nach Wahl: Im Hotel Sedartis kommt auf den Teller, was schmeckt",
-              "detail": "Thalwil",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-nach-wahl-im-hotel-sedartis-kommt-auf-den-teller-was-schmeckt/"
+              "label": "Weihnachtsmarkt Winterthur 2026",
+              "detail": "8400 Winterthur, Winterthur",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmarkt-winterthur-2026/"
             },
             {
-              "label": "Pharmaceutical Automation and Digitalisation Congress 2026",
-              "detail": "Mövenpick Hotel Zürich-Regensdorf, Regensdorf",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/regensdorf/pharmaceutical-automation-and-digitalisation-congress-2026_A39nq1k"
+              "label": "KCXL - International Ophthalmology Experts's Meeting 2026",
+              "detail": "Stadtspital Zürich Triemli, Zürich",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/kcxl-international-ophthalmology-expertss-meeting-2026_AKfg8hW"
             },
             {
-              "label": "Swiss Payment Forum 2026",
-              "detail": "Zürich Marriott Hotel, Zürich",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/swiss-payment-forum-2026_Ap34E6e"
+              "label": "Uster Märt",
+              "detail": "Innenstadt, Uster",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/uster-maert/"
             },
             {
-              "label": "Swiss AI Summit 2026",
-              "detail": "Kunsthaus Zürich, Zürich",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/swiss-ai-summit-2026_AyKpYFV"
+              "label": "Zauberpark mit Professor & Profesora Bummbastic",
+              "detail": "Flughafenpark im Circle, Zürich",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/zauberpark-mit-professor-und-profesora-bummbastic_AALjxNu"
             },
             {
-              "label": "Mütter- und Väterberatung in Greifensee",
-              "detail": "Reformiertes Kirchgemeindehaus Greifensee, Greifensee",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/greifensee/muetter-und-vaeterberatung-in-greifensee_A7MCrKM"
+              "label": "Kerzenziehen (Kreativabend für alle)",
+              "detail": "Urdorf",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-kreativabend-fuer-alle/"
             },
             {
-              "label": "Mütter- und Väterberatung in Egg",
-              "detail": "Kinder- und Jugendbüro, Zürich",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/egg-b-zuerich/muetter-und-vaeterberatung-in-egg_AyGCRBZ"
+              "label": "Kunst-Stück: Impressionismus (Vertiefung)",
+              "detail": "Kunsthaus Zürich Chipperfield-Bau, Zürich",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kunststueck-impressionismus-vertiefung/"
             },
             {
-              "label": "Schreibdienst / Infopoint",
-              "detail": "Katholische Pfarrei St. Martin, Raum David und Raum Mirjam",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/effretikon/schreibdienst-infopoint_A9UpJPZ"
+              "label": "Out of Service? – Swiss Sacred Architecture in Transition",
+              "detail": "ZAZ Zentrum Architektur Zürich, Zürich",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/vernissage-out-of-service-schweizer-sakralarchitektur-im-wandel_AXBrejm"
             },
             {
-              "label": "«Mein Klang, meine Reise» von Wael Sami Elkholy",
-              "detail": "sogar theater",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/mein-klang-meine-reise-von-wael-sami-elkholy_AY4tXmX"
+              "label": "Collection Insights: “She-Devils on Wheels – Headquaters”",
+              "detail": "Migros Museum für Gegenwartskunst, Zürich",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/collection-insights-she-devils-on-wheels-headquaters/"
             },
             {
-              "label": "Fondue trip on the “Churchill” Red Arrow.",
-              "detail": "Zürich HB, Zürich",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fondue-a-bordo-della-doppia-freccia-rossa-churchill/"
+              "label": "Kunissimo",
+              "detail": "Salzhaus, Winterthur",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/kunissimo_A8jwPWf"
             },
             {
-              "label": "Berlin ist ja so gross",
-              "detail": "Stadtgarten, Winterthur",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/berlin-ist-ja-so-gross/"
+              "label": "Röm.-kath. Kirchgemeindeversammlung",
+              "detail": "Kath. Pfarreizentrum Urdorf, Urdorf",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roemkath-kirchgemeindeversammlung/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Erhöhung der städtischen Beiträge für das Zurich Film Festival",
+              "date": "2026-11-25T11:00:00.000Z",
+              "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/11/erhoehung-staedtische-beitraege-zurich-film-festival.html"
+            }
+          ],
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Public holidays in the Canton of Zurich: guide to the calendar and rules",
-          "url": "/en/swiss-articles/public-holidays-zurich-canton-guide/",
-          "excerpt": "How to distinguish cantonal holidays from federal ones.",
-          "date": "2026-10-12T00:26:51.075Z"
-        },
         {
           "title": "Festival Zurich: the golden eye award goes to Luna Wedler in Switzerland",
           "url": "/en/swiss-articles/luna-wedler-golden-eye-award-zurich/",
           "excerpt": "The Swiss actress receives the award for being the first Swiss actress to win the Golden Eye Award.",
           "date": "2026-09-07T13:05:51.871Z"
+        },
+        {
+          "title": "Public holidays in the Canton of Zurich: guide to the calendar and rules",
+          "url": "/en/swiss-articles/public-holidays-zurich-canton-guide/",
+          "excerpt": "How to distinguish cantonal holidays from federal ones.",
+          "date": "2026-10-12T00:26:51.075Z"
         }
       ],
       "latestCantonArticles": [],
@@ -234,7 +265,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "ZH",
@@ -244,7 +275,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "324",
+          "value": "314",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,83 +286,96 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Metzgete nach Wahl: Im Hotel Sedartis kommt auf den Teller, was schmeckt",
-              "detail": "Thalwil",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-nach-wahl-im-hotel-sedartis-kommt-auf-den-teller-was-schmeckt/"
+              "label": "Weihnachtsmarkt Winterthur 2026",
+              "detail": "8400 Winterthur, Winterthur",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmarkt-winterthur-2026/"
             },
             {
-              "label": "Pharmaceutical Automation and Digitalisation Congress 2026",
-              "detail": "Mövenpick Hotel Zürich-Regensdorf, Regensdorf",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/regensdorf/pharmaceutical-automation-and-digitalisation-congress-2026_A39nq1k"
+              "label": "KCXL - International Ophthalmology Experts's Meeting 2026",
+              "detail": "Stadtspital Zürich Triemli, Zürich",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/kcxl-international-ophthalmology-expertss-meeting-2026_AKfg8hW"
             },
             {
-              "label": "Swiss Payment Forum 2026",
-              "detail": "Zürich Marriott Hotel, Zürich",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/swiss-payment-forum-2026_Ap34E6e"
+              "label": "Uster Märt",
+              "detail": "Innenstadt, Uster",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/uster-maert/"
             },
             {
-              "label": "Swiss AI Summit 2026",
-              "detail": "Kunsthaus Zürich, Zürich",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/swiss-ai-summit-2026_AyKpYFV"
+              "label": "Zauberpark mit Professor & Profesora Bummbastic",
+              "detail": "Flughafenpark im Circle, Zürich",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/zauberpark-mit-professor-und-profesora-bummbastic_AALjxNu"
             },
             {
-              "label": "Mütter- und Väterberatung in Greifensee",
-              "detail": "Reformiertes Kirchgemeindehaus Greifensee, Greifensee",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/greifensee/muetter-und-vaeterberatung-in-greifensee_A7MCrKM"
+              "label": "Kerzenziehen (Kreativabend für alle)",
+              "detail": "Urdorf",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-kreativabend-fuer-alle/"
             },
             {
-              "label": "Mütter- und Väterberatung in Egg",
-              "detail": "Kinder- und Jugendbüro, Zürich",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/egg-b-zuerich/muetter-und-vaeterberatung-in-egg_AyGCRBZ"
+              "label": "Kunst-Stück: Impressionismus (Vertiefung)",
+              "detail": "Kunsthaus Zürich Chipperfield-Bau, Zürich",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kunststueck-impressionismus-vertiefung/"
             },
             {
-              "label": "Schreibdienst / Infopoint",
-              "detail": "Katholische Pfarrei St. Martin, Raum David und Raum Mirjam",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/effretikon/schreibdienst-infopoint_A9UpJPZ"
+              "label": "Außer Betrieb? – Schweizer heiliger Architektur im Wandel",
+              "detail": "ZAZ Zentrum Architektur Zürich, Zürich",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/vernissage-out-of-service-schweizer-sakralarchitektur-im-wandel_AXBrejm"
             },
             {
-              "label": "«Mein Klang, meine Reise» von Wael Sami Elkholy",
-              "detail": "sogar theater",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/mein-klang-meine-reise-von-wael-sami-elkholy_AY4tXmX"
+              "label": "Collection Insights: “She-Devils on Wheels – Headquaters”",
+              "detail": "Migros Museum für Gegenwartskunst, Zürich",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/collection-insights-she-devils-on-wheels-headquaters/"
             },
             {
-              "label": "Fonduefahrt im Roten Doppelpfeil «Churchill».",
-              "detail": "Zürich HB, Zürich",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fondue-a-bordo-della-doppia-freccia-rossa-churchill/"
+              "label": "Kunissimo",
+              "detail": "Salzhaus, Winterthur",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/kunissimo_A8jwPWf"
             },
             {
-              "label": "Berlin ist ja so gross",
-              "detail": "Stadtgarten, Winterthur",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/berlin-ist-ja-so-gross/"
+              "label": "Röm.-kath. Kirchgemeindeversammlung",
+              "detail": "Kath. Pfarreizentrum Urdorf, Urdorf",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roemkath-kirchgemeindeversammlung/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Erhöhung der städtischen Beiträge für das Zurich Film Festival",
+              "date": "2026-11-25T11:00:00.000Z",
+              "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/11/erhoehung-staedtische-beitraege-zurich-film-festival.html"
+            }
+          ],
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Feiertage im Kanton Zürich: Leitfaden zu Kalender und Regeln",
-          "url": "/de/schweiz-artikel/feiertage-kanton-zuerich-leitfaden/",
-          "excerpt": "Wie man kantonale Feiertage von eidgenössischen unterscheidet.",
-          "date": "2026-10-12T00:26:51.075Z"
-        },
         {
           "title": "Festival Zürich: An die Schweiz Luna Wedler den Golden Eye Award",
           "url": "/de/schweiz-artikel/luna-wedler-golden-eye-award-zuerich/",
           "excerpt": "Die Schweizer Schauspielerin erhält den Preis, weil sie als erste Schweizer Schauspielerin den Golden Eye Award gewonnen hat.",
           "date": "2026-09-07T13:05:51.871Z"
+        },
+        {
+          "title": "Feiertage im Kanton Zürich: Leitfaden zu Kalender und Regeln",
+          "url": "/de/schweiz-artikel/feiertage-kanton-zuerich-leitfaden/",
+          "excerpt": "Wie man kantonale Feiertage von eidgenössischen unterscheidet.",
+          "date": "2026-10-12T00:26:51.075Z"
         }
       ],
       "latestCantonArticles": [],
@@ -345,7 +389,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "ZH",
@@ -355,7 +399,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "324",
+          "value": "314",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,83 +410,96 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Metzgete nach Wahl: Im Hotel Sedartis kommt auf den Teller, was schmeckt",
-              "detail": "Thalwil",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-nach-wahl-im-hotel-sedartis-kommt-auf-den-teller-was-schmeckt/"
+              "label": "Weihnachtsmarkt Winterthur 2026",
+              "detail": "8400 Winterthur, Winterthur",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmarkt-winterthur-2026/"
             },
             {
-              "label": "Pharmaceutical Automation and Digitalisation Congress 2026",
-              "detail": "Mövenpick Hotel Zürich-Regensdorf, Regensdorf",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/regensdorf/pharmaceutical-automation-and-digitalisation-congress-2026_A39nq1k"
+              "label": "KCXL - International Ophthalmology Experts's Meeting 2026",
+              "detail": "Stadtspital Zürich Triemli, Zürich",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/kcxl-international-ophthalmology-expertss-meeting-2026_AKfg8hW"
             },
             {
-              "label": "Swiss Payment Forum 2026",
-              "detail": "Zürich Marriott Hotel, Zürich",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/swiss-payment-forum-2026_Ap34E6e"
+              "label": "Uster Märt",
+              "detail": "Innenstadt, Uster",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/uster-maert/"
             },
             {
-              "label": "Swiss AI Summit 2026",
-              "detail": "Kunsthaus Zürich, Zürich",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/swiss-ai-summit-2026_AyKpYFV"
+              "label": "Zauberpark mit Professor & Profesora Bummbastic",
+              "detail": "Flughafenpark im Circle, Zürich",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/zauberpark-mit-professor-und-profesora-bummbastic_AALjxNu"
             },
             {
-              "label": "Mütter- und Väterberatung in Greifensee",
-              "detail": "Reformiertes Kirchgemeindehaus Greifensee, Greifensee",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/greifensee/muetter-und-vaeterberatung-in-greifensee_A7MCrKM"
+              "label": "Kerzenziehen (Kreativabend für alle)",
+              "detail": "Urdorf",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-kreativabend-fuer-alle/"
             },
             {
-              "label": "Mütter- und Väterberatung in Egg",
-              "detail": "Kinder- und Jugendbüro, Zürich",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/egg-b-zuerich/muetter-und-vaeterberatung-in-egg_AyGCRBZ"
+              "label": "Kunst-Stück: Impressionismus (Vertiefung)",
+              "detail": "Kunsthaus Zürich Chipperfield-Bau, Zürich",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kunststueck-impressionismus-vertiefung/"
             },
             {
-              "label": "Schreibdienst / Infopoint",
-              "detail": "Katholische Pfarrei St. Martin, Raum David und Raum Mirjam",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/effretikon/schreibdienst-infopoint_A9UpJPZ"
+              "label": "Hors service ? – L’architecture sacrée suisse en mutation",
+              "detail": "ZAZ Zentrum Architektur Zürich, Zürich",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/vernissage-out-of-service-schweizer-sakralarchitektur-im-wandel_AXBrejm"
             },
             {
-              "label": "«Mein Klang, meine Reise» von Wael Sami Elkholy",
-              "detail": "sogar theater",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/mein-klang-meine-reise-von-wael-sami-elkholy_AY4tXmX"
+              "label": "Collection Insights: “She-Devils on Wheels – Headquaters”",
+              "detail": "Migros Museum für Gegenwartskunst, Zürich",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/collection-insights-she-devils-on-wheels-headquaters/"
             },
             {
-              "label": "Voyage fondue à bord de la Flèche Rouge «Churchill».",
-              "detail": "Zürich HB, Zürich",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fondue-a-bordo-della-doppia-freccia-rossa-churchill/"
+              "label": "Kunissimo",
+              "detail": "Salzhaus, Winterthur",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/kunissimo_A8jwPWf"
             },
             {
-              "label": "Berlin ist ja so gross",
-              "detail": "Stadtgarten, Winterthur",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/berlin-ist-ja-so-gross/"
+              "label": "Röm.-kath. Kirchgemeindeversammlung",
+              "detail": "Kath. Pfarreizentrum Urdorf, Urdorf",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roemkath-kirchgemeindeversammlung/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Erhöhung der städtischen Beiträge für das Zurich Film Festival",
+              "date": "2026-11-25T11:00:00.000Z",
+              "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/11/erhoehung-staedtische-beitraege-zurich-film-festival.html"
+            }
+          ],
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Jours fériés du canton de Zurich : guide du calendrier et des règles",
-          "url": "/fr/articles-suisse/jours-feries-canton-zurich-guide/",
-          "excerpt": "Comment distinguer les jours fériés cantonaux des jours fériés fédéraux.",
-          "date": "2026-10-12T00:26:51.075Z"
-        },
         {
           "title": "Festival Zurich : à la Suisse luna wedler le golden eye award",
           "url": "/fr/articles-suisse/luna-wedler-golden-eye-award-zurich/",
           "excerpt": "L'actrice suisse reçoit le prix pour être la première actrice suisse à remporter le Golden Eye Award.",
           "date": "2026-09-07T13:05:51.871Z"
+        },
+        {
+          "title": "Jours fériés du canton de Zurich : guide du calendrier et des règles",
+          "url": "/fr/articles-suisse/jours-feries-canton-zurich-guide/",
+          "excerpt": "Comment distinguer les jours fériés cantonaux des jours fériés fédéraux.",
+          "date": "2026-10-12T00:26:51.075Z"
         }
       ],
       "latestCantonArticles": [],
@@ -456,7 +513,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

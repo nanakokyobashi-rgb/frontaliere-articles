@@ -4,12 +4,12 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "eventi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "e42e6b963a02d9c61f1923dfc34353020416cbbcfd964b3e87c78b62471327a1",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "f0698beba89befc7a67b6125f8b7d4d956b3c59c40aa03f93742ea6f5bba5b92",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T21:47:09.888Z",
+      "updatedAt": "2026-11-26T00:32:00.223Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "70",
+          "value": "68",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Öffentliche Führung: Culinarium Alpinum",
-              "detail": "Culinarium Alpinum, Stans, Stans",
-              "date": "2026-11-16",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89486"
+              "label": "6. Primar / 3. ORS: Schulimpfen",
+              "detail": "Emmetten, Emmetten, Emmetten",
+              "date": "2026-11-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/93961"
+            },
+            {
+              "label": "Hanspeter Müller-Drossaart - Babyboomers Weltreise",
+              "detail": "lit.z Literaturhaus Zentralschweiz, Stans, Stans",
+              "date": "2026-11-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94306"
+            },
+            {
+              "label": "Kinder Café",
+              "detail": "Pfarreiheim, Stans, Stans",
+              "date": "2026-11-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/89084"
+            },
+            {
+              "label": "Hanspeter Müller-Drossaart – Babyboomers Weltreise",
+              "detail": "lit.z Literaturhaus Zentralschweiz, Stans",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hanspeter-mueller-drossaart-babyboomers-weltreise/"
             },
             {
               "label": "Laternenweg mit Samichlais Geschichte",
               "detail": "Emmetten, Emmetten, Emmetten — in corso, ultimo giorno: 11 dicembre 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.nw.ch/anlaesseaktuelles/94819"
             },
             {
               "label": "Samichlais-Briefkasten",
               "detail": "Pfarrhaus Emmetten, beim Pfarrhaus Emmetten, Emmetten — in corso, ultimo giorno: 29 novembre 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.nw.ch/anlaesseaktuelles/94822"
             },
             {
-              "label": "Ausstellung «Undenklichkeit» von Gauthier Cerf",
-              "detail": "Kulturraum Ermitage, Beckenried, Beckenried — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95335"
+              "label": "Die frohe Botschaft von Jesus Christus",
+              "detail": "Bücher von Matt, Stans, Stans",
+              "date": "2026-11-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95041"
             },
             {
-              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
-              "detail": "Kulturraum, Buochs, Buochs — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
+              "label": "Punschabend beim Laternenweg",
+              "detail": "Schützen-12i Hütte, Emmetten, Emmetten",
+              "date": "2026-11-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94810"
             },
             {
-              "label": "Frauengemeinschaft - Messe im Ranft",
-              "detail": "Ranft-Kapelle, Flüeli-Ranft",
-              "date": "2026-11-17",
-              "url": "https://www.nw.ch/anlaesseaktuelles/90568"
+              "label": "FG: Adventskranz binden",
+              "detail": "Pfarreihaus, Beckenried, Beckenried",
+              "date": "2026-11-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94927"
             },
             {
-              "label": "Caféhaus Musik",
-              "detail": "Alterswohnheim Hungacher, Beckenried, Beckenried",
-              "date": "2026-11-17",
-              "url": "https://www.nw.ch/anlaesseaktuelles/85828"
-            },
-            {
-              "label": "Queer-Stamm Stans",
-              "detail": "Steiböckli, Stans, Stans",
-              "date": "2026-11-18",
-              "url": "https://www.nw.ch/anlaesseaktuelles/91144"
-            },
-            {
-              "label": "begegnen und bewegen",
-              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
-              "date": "2026-11-18",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89767"
-            },
-            {
-              "label": "Herbstkonzert - Jodlerklub Heimelig Buochs und Jodlerklub Fruttklänge Kerns",
-              "detail": "Pfarrkirche St. Martin Buochs, Buochs, Buochs",
-              "date": "2026-11-18",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95389"
+              "label": "Beizentour Mittag",
+              "detail": "Restaurant Sternen, Buochs, Buochs",
+              "date": "2026-11-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/91525"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/nidvaldo/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/nidvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "NW",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "70",
+          "value": "68",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Öffentliche Führung: Culinarium Alpinum",
-              "detail": "Culinarium Alpinum, Stans, Stans",
-              "date": "2026-11-16",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89486"
+              "label": "6. Primar / 3. ORS: Schulimpfen",
+              "detail": "Emmetten, Emmetten, Emmetten",
+              "date": "2026-11-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/93961"
+            },
+            {
+              "label": "Hanspeter Müller-Drossaart - Babyboomers Weltreise",
+              "detail": "lit.z Literaturhaus Zentralschweiz, Stans, Stans",
+              "date": "2026-11-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94306"
+            },
+            {
+              "label": "Kinder Café",
+              "detail": "Pfarreiheim, Stans, Stans",
+              "date": "2026-11-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/89084"
+            },
+            {
+              "label": "Hanspeter Müller-Drossaart – Babyboomers Weltreise",
+              "detail": "lit.z Literaturhaus Zentralschweiz, Stans",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hanspeter-mueller-drossaart-babyboomers-weltreise/"
             },
             {
               "label": "Laternenweg mit Samichlais Geschichte",
               "detail": "Emmetten, Emmetten, Emmetten — ongoing, last day: 11 December 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.nw.ch/anlaesseaktuelles/94819"
             },
             {
               "label": "Samichlais-Briefkasten",
               "detail": "Pfarrhaus Emmetten, beim Pfarrhaus Emmetten, Emmetten — ongoing, last day: 29 November 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.nw.ch/anlaesseaktuelles/94822"
             },
             {
-              "label": "Ausstellung «Undenklichkeit» von Gauthier Cerf",
-              "detail": "Kulturraum Ermitage, Beckenried, Beckenried — ongoing, last day: 22 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95335"
+              "label": "Die frohe Botschaft von Jesus Christus",
+              "detail": "Bücher von Matt, Stans, Stans",
+              "date": "2026-11-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95041"
             },
             {
-              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
-              "detail": "Kulturraum, Buochs, Buochs — ongoing, last day: 22 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
+              "label": "Punschabend beim Laternenweg",
+              "detail": "Schützen-12i Hütte, Emmetten, Emmetten",
+              "date": "2026-11-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94810"
             },
             {
-              "label": "Frauengemeinschaft - Messe im Ranft",
-              "detail": "Ranft-Kapelle, Flüeli-Ranft",
-              "date": "2026-11-17",
-              "url": "https://www.nw.ch/anlaesseaktuelles/90568"
+              "label": "FG: Adventskranz binden",
+              "detail": "Pfarreihaus, Beckenried, Beckenried",
+              "date": "2026-11-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94927"
             },
             {
-              "label": "Caféhaus Musik",
-              "detail": "Alterswohnheim Hungacher, Beckenried, Beckenried",
-              "date": "2026-11-17",
-              "url": "https://www.nw.ch/anlaesseaktuelles/85828"
-            },
-            {
-              "label": "Queer-Stamm Stans",
-              "detail": "Steiböckli, Stans, Stans",
-              "date": "2026-11-18",
-              "url": "https://www.nw.ch/anlaesseaktuelles/91144"
-            },
-            {
-              "label": "begegnen und bewegen",
-              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
-              "date": "2026-11-18",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89767"
-            },
-            {
-              "label": "Herbstkonzert - Jodlerklub Heimelig Buochs und Jodlerklub Fruttklänge Kerns",
-              "detail": "Pfarrkirche St. Martin Buochs, Buochs, Buochs",
-              "date": "2026-11-18",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95389"
+              "label": "Beizentour Mittag",
+              "detail": "Restaurant Sternen, Buochs, Buochs",
+              "date": "2026-11-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/91525"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/nidwalden/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/nidwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "NW",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "70",
+          "value": "68",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Öffentliche Führung: Culinarium Alpinum",
-              "detail": "Culinarium Alpinum, Stans, Stans",
-              "date": "2026-11-16",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89486"
+              "label": "6. Primar / 3. ORS: Schulimpfen",
+              "detail": "Emmetten, Emmetten, Emmetten",
+              "date": "2026-11-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/93961"
+            },
+            {
+              "label": "Hanspeter Müller-Drossaart - Babyboomers Weltreise",
+              "detail": "lit.z Literaturhaus Zentralschweiz, Stans, Stans",
+              "date": "2026-11-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94306"
+            },
+            {
+              "label": "Kinder Café",
+              "detail": "Pfarreiheim, Stans, Stans",
+              "date": "2026-11-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/89084"
+            },
+            {
+              "label": "Hanspeter Müller-Drossaart – Babyboomers Weltreise",
+              "detail": "lit.z Literaturhaus Zentralschweiz, Stans",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hanspeter-mueller-drossaart-babyboomers-weltreise/"
             },
             {
               "label": "Laternenweg mit Samichlais Geschichte",
               "detail": "Emmetten, Emmetten, Emmetten — läuft, letzter Tag: 11. Dezember 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.nw.ch/anlaesseaktuelles/94819"
             },
             {
               "label": "Samichlais-Briefkasten",
               "detail": "Pfarrhaus Emmetten, beim Pfarrhaus Emmetten, Emmetten — läuft, letzter Tag: 29. November 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.nw.ch/anlaesseaktuelles/94822"
             },
             {
-              "label": "Ausstellung «Undenklichkeit» von Gauthier Cerf",
-              "detail": "Kulturraum Ermitage, Beckenried, Beckenried — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95335"
+              "label": "Die frohe Botschaft von Jesus Christus",
+              "detail": "Bücher von Matt, Stans, Stans",
+              "date": "2026-11-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95041"
             },
             {
-              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
-              "detail": "Kulturraum, Buochs, Buochs — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
+              "label": "Punschabend beim Laternenweg",
+              "detail": "Schützen-12i Hütte, Emmetten, Emmetten",
+              "date": "2026-11-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94810"
             },
             {
-              "label": "Frauengemeinschaft - Messe im Ranft",
-              "detail": "Ranft-Kapelle, Flüeli-Ranft",
-              "date": "2026-11-17",
-              "url": "https://www.nw.ch/anlaesseaktuelles/90568"
+              "label": "FG: Adventskranz binden",
+              "detail": "Pfarreihaus, Beckenried, Beckenried",
+              "date": "2026-11-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94927"
             },
             {
-              "label": "Caféhaus Musik",
-              "detail": "Alterswohnheim Hungacher, Beckenried, Beckenried",
-              "date": "2026-11-17",
-              "url": "https://www.nw.ch/anlaesseaktuelles/85828"
-            },
-            {
-              "label": "Queer-Stamm Stans",
-              "detail": "Steiböckli, Stans, Stans",
-              "date": "2026-11-18",
-              "url": "https://www.nw.ch/anlaesseaktuelles/91144"
-            },
-            {
-              "label": "begegnen und bewegen",
-              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
-              "date": "2026-11-18",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89767"
-            },
-            {
-              "label": "Herbstkonzert - Jodlerklub Heimelig Buochs und Jodlerklub Fruttklänge Kerns",
-              "detail": "Pfarrkirche St. Martin Buochs, Buochs, Buochs",
-              "date": "2026-11-18",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95389"
+              "label": "Beizentour Mittag",
+              "detail": "Restaurant Sternen, Buochs, Buochs",
+              "date": "2026-11-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/91525"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/nidwalden/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/nidwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "NW",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "70",
+          "value": "68",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Öffentliche Führung: Culinarium Alpinum",
-              "detail": "Culinarium Alpinum, Stans, Stans",
-              "date": "2026-11-16",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89486"
+              "label": "6. Primar / 3. ORS: Schulimpfen",
+              "detail": "Emmetten, Emmetten, Emmetten",
+              "date": "2026-11-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/93961"
+            },
+            {
+              "label": "Hanspeter Müller-Drossaart - Babyboomers Weltreise",
+              "detail": "lit.z Literaturhaus Zentralschweiz, Stans, Stans",
+              "date": "2026-11-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94306"
+            },
+            {
+              "label": "Kinder Café",
+              "detail": "Pfarreiheim, Stans, Stans",
+              "date": "2026-11-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/89084"
+            },
+            {
+              "label": "Hanspeter Müller-Drossaart – Babyboomers Weltreise",
+              "detail": "lit.z Literaturhaus Zentralschweiz, Stans",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hanspeter-mueller-drossaart-babyboomers-weltreise/"
             },
             {
               "label": "Laternenweg mit Samichlais Geschichte",
               "detail": "Emmetten, Emmetten, Emmetten — en cours, dernier jour : 11 décembre 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.nw.ch/anlaesseaktuelles/94819"
             },
             {
               "label": "Samichlais-Briefkasten",
               "detail": "Pfarrhaus Emmetten, beim Pfarrhaus Emmetten, Emmetten — en cours, dernier jour : 29 novembre 2026",
-              "date": "2026-11-16",
+              "date": "2026-11-26",
               "url": "https://www.nw.ch/anlaesseaktuelles/94822"
             },
             {
-              "label": "Ausstellung «Undenklichkeit» von Gauthier Cerf",
-              "detail": "Kulturraum Ermitage, Beckenried, Beckenried — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95335"
+              "label": "Die frohe Botschaft von Jesus Christus",
+              "detail": "Bücher von Matt, Stans, Stans",
+              "date": "2026-11-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95041"
             },
             {
-              "label": "Jubiläumsausstellung 25 Jahre Scherenschnittkunst Paul Waser",
-              "detail": "Kulturraum, Buochs, Buochs — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94222"
+              "label": "Punschabend beim Laternenweg",
+              "detail": "Schützen-12i Hütte, Emmetten, Emmetten",
+              "date": "2026-11-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94810"
             },
             {
-              "label": "Frauengemeinschaft - Messe im Ranft",
-              "detail": "Ranft-Kapelle, Flüeli-Ranft",
-              "date": "2026-11-17",
-              "url": "https://www.nw.ch/anlaesseaktuelles/90568"
+              "label": "FG: Adventskranz binden",
+              "detail": "Pfarreihaus, Beckenried, Beckenried",
+              "date": "2026-11-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94927"
             },
             {
-              "label": "Caféhaus Musik",
-              "detail": "Alterswohnheim Hungacher, Beckenried, Beckenried",
-              "date": "2026-11-17",
-              "url": "https://www.nw.ch/anlaesseaktuelles/85828"
-            },
-            {
-              "label": "Queer-Stamm Stans",
-              "detail": "Steiböckli, Stans, Stans",
-              "date": "2026-11-18",
-              "url": "https://www.nw.ch/anlaesseaktuelles/91144"
-            },
-            {
-              "label": "begegnen und bewegen",
-              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
-              "date": "2026-11-18",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89767"
-            },
-            {
-              "label": "Herbstkonzert - Jodlerklub Heimelig Buochs und Jodlerklub Fruttklänge Kerns",
-              "detail": "Pfarrkirche St. Martin Buochs, Buochs, Buochs",
-              "date": "2026-11-18",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95389"
+              "label": "Beizentour Mittag",
+              "detail": "Restaurant Sternen, Buochs, Buochs",
+              "date": "2026-11-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/91525"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/nidwald/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/nidwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

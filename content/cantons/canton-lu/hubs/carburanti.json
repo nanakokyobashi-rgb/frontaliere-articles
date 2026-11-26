@@ -4,12 +4,12 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-11-11T07:33:34.935Z",
-  "contentHash": "ec9623fdcb642d9eed4a57d92ebb264643255e72e6ccc98c658acf8e831541ed",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "023ceb0b9f333cdca57adf107727d90e1f158321b0e49271ceda5c4483e874f7",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-10T15:13:39.066Z",
+      "updatedAt": "2026-11-25T17:35:23.405Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-10T15:13:39.066Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Würzenbach: nuovi spazi scolastici e palestra allo studio",
+          "url": "/articoli-lucerna/spazi-scolastici-wurzenbach/",
+          "excerpt": "Lucerna: spazi insufficienti a Würzenbach e Büttenen; ampliamenti e palestra tripla allo studio, lavori possibili dal 2031.",
+          "date": "2026-11-21T08:48:22.358Z"
+        },
         {
           "title": "Lucerna: il 13 dicembre 2026 cambia la rete bus",
           "url": "/articoli-lucerna/cambio-orari-bus-lucerna/",
@@ -82,12 +88,6 @@
           "url": "/articoli-lucerna/kriens-riduce-imposte/",
           "excerpt": "Zentralplus segnala la decisione di Kriens; il materiale disponibile non indica importo, percentuale o decorrenza della riduzione.",
           "date": "2026-11-07T00:45:28.812Z"
-        },
-        {
-          "title": "Canton Lucerna: meno certificati medici per le assenze scolastiche",
-          "url": "/articoli-lucerna/lucerna-scuole-certificati-medici/",
-          "excerpt": "Durante la stagione influenzale, le direzioni scolastiche richiederanno il certificato medico solo in presenza di dubbi fondati sulle assenze degli alunni.",
-          "date": "2026-11-03T01:05:01.707Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-11T07:33:34.935Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "LU",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-10T15:13:39.066Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Würzenbach: new school spaces and a sports hall under consideration",
+          "url": "/en/lucerne-articles/wurzenbach-school-space/",
+          "excerpt": "Lucerne: insufficient space in Würzenbach and Büttenen; expansions and a triple sports hall under consideration, construction work possible from 2031.",
+          "date": "2026-11-21T08:48:22.358Z"
+        },
         {
           "title": "Lucerne: the bus network changes on December 13, 2026",
           "url": "/en/lucerne-articles/lucerne-bus-timetable-change/",
@@ -169,12 +175,6 @@
           "url": "/en/lucerne-articles/kriens-tax-cut/",
           "excerpt": "Zentralplus reports Kriens’s decision; the available material does not specify the amount, percentage, or effective date of the reduction.",
           "date": "2026-11-07T00:45:28.812Z"
-        },
-        {
-          "title": "Canton Lucerne: fewer medical certificates for school absences",
-          "url": "/en/lucerne-articles/lucerne-schools-medical-certificates/",
-          "excerpt": "During flu season, school administrations will require a medical certificate only when there are well-founded doubts about students' absences.",
-          "date": "2026-11-03T01:05:01.707Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-11T07:33:34.935Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "LU",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-10T15:13:39.066Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Würzenbach: neue Schulräume und eine Sporthalle werden geprüft",
+          "url": "/de/luzern-artikel/schulraum-wurzenbach/",
+          "excerpt": "Luzern: unzureichende Räume in Würzenbach und Büttenen; Erweiterungen und eine Dreifachturnhalle werden geprüft, Arbeiten ab 2031 möglich.",
+          "date": "2026-11-21T08:48:22.358Z"
+        },
         {
           "title": "Luzern: Am 13. Dezember 2026 ändert sich das Busnetz",
           "url": "/de/luzern-artikel/luzern-fahrplanwechsel-bus/",
@@ -256,12 +262,6 @@
           "url": "/de/luzern-artikel/kriens-steuersenkung/",
           "excerpt": "Der Titel der von Zentralplus veröffentlichten Nachricht weist darauf hin, dass Kriens eine Steuersenkung beschlossen hat.",
           "date": "2026-11-07T00:45:28.812Z"
-        },
-        {
-          "title": "Kanton Luzern: weniger ärztliche Atteste für Schulabsenzen",
-          "url": "/de/luzern-artikel/luzern-schulen-arztzeugnisse/",
-          "excerpt": "Während der Grippesaison werden die Schulleitungen ein ärztliches Attest nur verlangen, wenn begründete Zweifel an den Absenzen der Schülerinnen und Schüler bestehen.",
-          "date": "2026-11-03T01:05:01.707Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-11T07:33:34.935Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "LU",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-10T15:13:39.066Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Würzenbach : nouveaux espaces scolaires et salle de sport à l’étude",
+          "url": "/fr/articles-lucerne/espace-scolaire-wurzenbach/",
+          "excerpt": "Lucerne : espaces insuffisants à Würzenbach et Büttenen ; agrandissements et triple salle de sport à l’étude, travaux possibles à partir de 2031.",
+          "date": "2026-11-21T08:48:22.358Z"
+        },
         {
           "title": "Lucerne : le 13 décembre 2026, le réseau de bus change",
           "url": "/fr/articles-lucerne/lucerne-changement-horaires-bus/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-lucerne/baisse-impots-kriens/",
           "excerpt": "Zentralplus signale la décision de Kriens ; le matériel disponible n’indique ni le montant, ni le pourcentage, ni la date d’entrée en vigueur de la réduction.",
           "date": "2026-11-07T00:45:28.812Z"
-        },
-        {
-          "title": "Canton de Lucerne : moins de certificats médicaux pour les absences scolaires",
-          "url": "/fr/articles-lucerne/lucerne-ecoles-certificats-medicaux/",
-          "excerpt": "Durant la saison grippale, les directions des écoles ne demanderont un certificat médical qu'en présence de doutes fondés concernant les absences des élèves.",
-          "date": "2026-11-03T01:05:01.707Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-11T07:33:34.935Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "fisco",
-  "updatedAt": "2026-11-06T12:06:41.332Z",
-  "contentHash": "d7138372a327a630e21b29dd659fa13ce910e0e16c064b04fc9a9ccc5b847ce9",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "527ac7dcf1adfc83f268f2fd2381020f77e6f234b8e4a58aed621dc7ca4df109",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -132,16 +132,16 @@
           "date": "2026-10-03T11:59:46.219Z"
         },
         {
-          "title": "Imposta cantonale Svizzera 2026: confronto Argovia",
-          "url": "/articoli-svizzera/argovia-mappa-fiscale-2026/",
-          "excerpt": "Nel 2026 il confronto parte da tre livelli fiscali: federale, cantonale e comunale. In Argovia contano legge cantonale e moltiplicatore comunale.",
-          "date": "2026-10-01T03:59:43.159Z"
-        },
-        {
           "title": "Imposte cantonali Argovia: aliquote e deduzioni",
           "url": "/articoli-svizzera/imposte-cantonali-argovia-aliquote/",
           "excerpt": "Scopri come funzionano imposte cantonali e comunali nel Cantone Argovia, aliquote progressive, deduzioni ammesse e come dichiarare online. Guida pratica.",
           "date": "2026-09-02T06:24:53.222Z"
+        },
+        {
+          "title": "Imposta cantonale Svizzera 2026: confronto Argovia",
+          "url": "/articoli-svizzera/argovia-mappa-fiscale-2026/",
+          "excerpt": "Nel 2026 il confronto parte da tre livelli fiscali: federale, cantonale e comunale. In Argovia contano legge cantonale e moltiplicatore comunale.",
+          "date": "2026-10-01T03:59:43.159Z"
         }
       ],
       "latestCantonArticles": [],
@@ -171,7 +171,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-06T12:06:41.332Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "AG",
@@ -286,16 +286,16 @@
           "date": "2026-10-03T11:59:46.219Z"
         },
         {
-          "title": "Swiss Cantonal Taxes 2026: A Comparison of Aargau",
-          "url": "/en/swiss-articles/aargau-tax-comparison-2026/",
-          "excerpt": "In 2026, the comparison starts from three tax levels: federal, cantonal and municipal. In Aargau, the cantonal law and the municipal multiplier count.",
-          "date": "2026-10-01T03:59:43.159Z"
-        },
-        {
           "title": "Aargau Cantonal Taxes: Rates and Deductions",
           "url": "/en/swiss-articles/cantonal-taxes-aargau-rates-deductions/",
           "excerpt": "Find out how cantonal and municipal taxes work in the Canton of Aargau, including progressive tax rates, allowable deductions, and how to file your taxes online. A practical guide.",
           "date": "2026-09-02T06:24:53.222Z"
+        },
+        {
+          "title": "Swiss Cantonal Taxes 2026: A Comparison of Aargau",
+          "url": "/en/swiss-articles/aargau-tax-comparison-2026/",
+          "excerpt": "In 2026, the comparison starts from three tax levels: federal, cantonal and municipal. In Aargau, the cantonal law and the municipal multiplier count.",
+          "date": "2026-10-01T03:59:43.159Z"
         }
       ],
       "latestCantonArticles": [],
@@ -325,7 +325,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-06T12:06:41.332Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "AG",
@@ -440,16 +440,16 @@
           "date": "2026-10-03T11:59:46.219Z"
         },
         {
-          "title": "Kantonalsteuer Schweiz 2026: Vergleich mit dem Kanton Aargau",
-          "url": "/de/schweiz-artikel/steuervergleich-aargau-2026/",
-          "excerpt": "Im Jahr 2026 beginnt der Vergleich mit drei Steuerebenen: Bundes-, Kantons- und Gemeindeebene. In Aargau zählen das Kantonsgesetz und der Gemeindemultiplikator.",
-          "date": "2026-10-01T03:59:43.159Z"
-        },
-        {
           "title": "Kantonale Steuern im Aargau: Steuersätze und Abzüge",
           "url": "/de/schweiz-artikel/kantonal-steuern-aargau-saetze-abzuege/",
           "excerpt": "Erfahren Sie, wie die kantonalen und kommunalen Steuern im Kanton Aargau funktionieren, welche progressiven Steuersätze gelten, welche Abzüge zulässig sind und wie Sie Ihre Steuererklärung online einreichen können. Ein…",
           "date": "2026-09-02T06:24:53.222Z"
+        },
+        {
+          "title": "Kantonalsteuer Schweiz 2026: Vergleich mit dem Kanton Aargau",
+          "url": "/de/schweiz-artikel/steuervergleich-aargau-2026/",
+          "excerpt": "Im Jahr 2026 beginnt der Vergleich mit drei Steuerebenen: Bundes-, Kantons- und Gemeindeebene. In Aargau zählen das Kantonsgesetz und der Gemeindemultiplikator.",
+          "date": "2026-10-01T03:59:43.159Z"
         }
       ],
       "latestCantonArticles": [],
@@ -479,7 +479,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-06T12:06:41.332Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "AG",
@@ -594,16 +594,16 @@
           "date": "2026-10-03T11:59:46.219Z"
         },
         {
-          "title": "Taxe cantonale suisse 2026 : comparaison avec l’Argovie",
-          "url": "/fr/articles-suisse/comparatif-fiscal-argovie-2026/",
-          "excerpt": "En 2026, la comparaison part de trois niveaux d’imposition : fédéral, cantonal et municipal. En Aargovie, la loi cantonale et le multiplicateur municipal comptent.",
-          "date": "2026-10-01T03:59:43.159Z"
-        },
-        {
           "title": "Impôts cantonaux d'Argovie : taux et déductions",
           "url": "/fr/articles-suisse/impots-cantonaux-argovie-taux-deductions/",
           "excerpt": "Découvrez le fonctionnement des impôts cantonaux et communaux dans le canton d'Argovie, les taux progressifs, les déductions autorisées et comment faire sa déclaration en ligne. Guide pratique.",
           "date": "2026-09-02T06:24:53.222Z"
+        },
+        {
+          "title": "Taxe cantonale suisse 2026 : comparaison avec l’Argovie",
+          "url": "/fr/articles-suisse/comparatif-fiscal-argovie-2026/",
+          "excerpt": "En 2026, la comparaison part de trois niveaux d’imposition : fédéral, cantonal et municipal. En Aargovie, la loi cantonale et le multiplicateur municipal comptent.",
+          "date": "2026-10-01T03:59:43.159Z"
         }
       ],
       "latestCantonArticles": [],
@@ -633,7 +633,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-06T12:06:41.332Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

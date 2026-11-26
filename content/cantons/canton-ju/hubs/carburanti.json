@@ -4,14 +4,14 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "carburanti",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "58fb85e273edd7ad4f3f89bd43ef90a0dc55f7903d69aa88228e76b56f798f7a",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "0a529493389b6d36a8fac070f8a2040ffb7ed35a0ab0c006a1731fe130f3bb8c",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-15T14:17:31.463Z",
+      "updatedAt": "2026-11-25T17:35:23.405Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-11-22T07:00:00.000Z"
+      "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
   ],
   "locales": {
@@ -54,23 +54,29 @@
             },
             {
               "label": "Benzina 95 — Francia",
-              "value": "2,077 EUR/l",
-              "detail": "media regionale: minimo 1,899 EUR/l, 173 stazioni rilevate",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2,015 EUR/l",
+              "detail": "media regionale: minimo 1,873 EUR/l, 202 stazioni rilevate",
+              "date": "2026-11-25T15:59:22.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,208 EUR/l",
-              "detail": "media regionale: minimo 2,059 EUR/l, 183 stazioni rilevate",
-              "date": "2026-11-15T09:12:56.000Z"
+              "value": "2,139 EUR/l",
+              "detail": "media regionale: minimo 1,999 EUR/l, 204 stazioni rilevate",
+              "date": "2026-11-25T15:59:21.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Hôpital du Jura e BKW si esercitano per sicurezza emergenze",
+          "url": "/articoli-giura/hospitale-jura-bwk-esercitazione/",
+          "excerpt": "Tre mattinate di formazione hanno riunito il personale delle ambulanze dell’Hôpital du Jura e i collaboratori di BKW.",
+          "date": "2026-11-21T06:26:15.732Z"
+        },
         {
           "title": "Hôpital du Jura conferma solidità finanziaria e ruolo centrale",
           "url": "/articoli-giura/ospedale-giura-solidita-finanziaria/",
@@ -94,12 +100,6 @@
           "url": "/articoli-giura/cff-cargo-rinuncia-legno-alle/",
           "excerpt": "Ad Alle, in Ajoie, CFF Cargo ha deciso di sopprimere da dicembre il servizio ferroviario per i carri singoli impiegato nel trasporto del legno.",
           "date": "2026-10-29T08:45:30.807Z"
-        },
-        {
-          "title": "Arco giurassiano: mutazioni del lavoro frontaliero",
-          "url": "/articoli-giura/mutazioni-lavoro-frontaliero-jura/",
-          "excerpt": "La puntata 43718 di «Le sens de l'éco» mette a tema le mutazioni dell'impiego frontaliero nell'Arco giurassiano; il materiale fornito non riporta altri dettagli.",
-          "date": "2026-10-28T11:22:42.284Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "JU",
@@ -153,23 +153,29 @@
             },
             {
               "label": "Petrol 95 — France",
-              "value": "2.077 EUR/l",
-              "detail": "regional average: lowest 1.899 EUR/l, 173 stations surveyed",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2.015 EUR/l",
+              "detail": "regional average: lowest 1.873 EUR/l, 202 stations surveyed",
+              "date": "2026-11-25T15:59:22.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.208 EUR/l",
-              "detail": "regional average: lowest 2.059 EUR/l, 183 stations surveyed",
-              "date": "2026-11-15T09:12:56.000Z"
+              "value": "2.139 EUR/l",
+              "detail": "regional average: lowest 1.999 EUR/l, 204 stations surveyed",
+              "date": "2026-11-25T15:59:21.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Hôpital du Jura and BKW train for safety in emergencies",
+          "url": "/en/jura-articles/hospitale-jura-bwk-exercise/",
+          "excerpt": "Three mornings of training brought together ambulance staff from Hôpital du Jura and BKW employees.",
+          "date": "2026-11-21T06:26:15.732Z"
+        },
         {
           "title": "Hôpital du Jura confirms financial solidity and central role",
           "url": "/en/jura-articles/jura-hospital-financial-solidity/",
@@ -193,12 +199,6 @@
           "url": "/en/jura-articles/cff-cargo-renounces-wood-transport-alle/",
           "excerpt": "In Alle, in Ajoie, CFF Cargo has decided to cancel the railway service for single wagons used in the transport of wood from December.",
           "date": "2026-10-29T08:45:30.807Z"
-        },
-        {
-          "title": "Jura Arc: transformations in cross-border employment",
-          "url": "/en/jura-articles/jurassian-arc-cross-border-work/",
-          "excerpt": "Episode 43718 of «Le sens de l'éco» focuses on changes in cross-border employment in the Jura Arc; the material provided contains no other details.",
-          "date": "2026-10-28T11:22:42.284Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "JU",
@@ -252,23 +252,29 @@
             },
             {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.077 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.899 EUR/l, 173 erfasste Tankstellen",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2.015 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.873 EUR/l, 202 erfasste Tankstellen",
+              "date": "2026-11-25T15:59:22.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.208 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.059 EUR/l, 183 erfasste Tankstellen",
-              "date": "2026-11-15T09:12:56.000Z"
+              "value": "2.139 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.999 EUR/l, 204 erfasste Tankstellen",
+              "date": "2026-11-25T15:59:21.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Hôpital du Jura und BKW üben für die Sicherheit bei Notfällen",
+          "url": "/de/jura-artikel/hospitale-jura-bwk-uebung/",
+          "excerpt": "Drei Schulungsvormittage brachten das Ambulanzpersonal des Hôpital du Jura und die Mitarbeitenden von BKW zusammen.",
+          "date": "2026-11-21T06:26:15.732Z"
+        },
         {
           "title": "Hôpital du Jura bestätigt finanzielle Solidität und zentrale Rolle",
           "url": "/de/jura-artikel/hopital-du-jura-bestatigt-finanzielle-soliditat-und-zentrale-rolle/",
@@ -292,12 +298,6 @@
           "url": "/de/jura-artikel/sbb-cargo-verzichtet-auf-holztransport-alle/",
           "excerpt": "In Alle, in Ajoie, hat CFF Cargo beschlossen, den Bahnverkehr für Einzelwagen für den Holztransport ab Dezember einzustellen.",
           "date": "2026-10-29T08:45:30.807Z"
-        },
-        {
-          "title": "Jurabogen: Veränderungen der Grenzgängerbeschäftigung",
-          "url": "/de/jura-artikel/jurabogen-grenzgaenger-arbeit/",
-          "excerpt": "Die Folge 43718 von «Le sens de l'éco» thematisiert die Veränderungen der Grenzgängerbeschäftigung im Jurabogen; das bereitgestellte Material enthält keine weiteren Details.",
-          "date": "2026-10-28T11:22:42.284Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "JU",
@@ -351,23 +351,29 @@
             },
             {
               "label": "Essence 95 — France",
-              "value": "2,077 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,899 EUR/l, 173 stations relevées",
-              "date": "2026-11-15T07:00:00.000Z"
+              "value": "2,015 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,873 EUR/l, 202 stations relevées",
+              "date": "2026-11-25T15:59:22.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,208 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,059 EUR/l, 183 stations relevées",
-              "date": "2026-11-15T09:12:56.000Z"
+              "value": "2,139 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,999 EUR/l, 204 stations relevées",
+              "date": "2026-11-25T15:59:21.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Hôpital du Jura et BKW s’exercent pour la sécurité en cas d’urgence",
+          "url": "/fr/articles-jura/hopital-jura-bwk-exercice/",
+          "excerpt": "Pendant trois matinées de formation, le personnel ambulancier de l’Hôpital du Jura et les collaborateurs de BKW ont examiné comment secourir une personne blessée près d’une installation électrique sans compromettre la…",
+          "date": "2026-11-21T06:26:15.732Z"
+        },
         {
           "title": "Hôpital du Jura confirme sa solidité financière et son rôle central",
           "url": "/fr/articles-jura/hopital-jurassien-solidite-financiere/",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-jura/cff-cargo-renonce-transport-bois-alle/",
           "excerpt": "A Alle, en Ajoie, CFF Cargo a décidé de supprimer à partir de décembre la desserte ferroviaire des wagons isolés utilisés pour le transport du bois.",
           "date": "2026-10-29T08:45:30.807Z"
-        },
-        {
-          "title": "Arc jurassien : mutations du travail frontalier",
-          "url": "/fr/articles-jura/arc-jurassien-emploi-frontalier/",
-          "excerpt": "L'épisode 43718 de «Le sens de l'éco» porte sur les mutations de l'emploi frontalier dans l'Arc jurassien ; le matériel fourni ne rapporte pas d'autres détails.",
-          "date": "2026-10-28T11:22:42.284Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

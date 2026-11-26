@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "af023fee94cc06dc572d1e01a7cd688ec748629082a899b8e4223ae1a27d6f1c",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "5c2ec954b4866a22c7b5f1d4147dec3cef64c3995b61b149769484d4a00fa43b",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,22 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-16T06:48:19.706Z",
+      "updatedAt": "2026-11-25T21:12:13.113Z",
       "keyFacts": 0
     },
     {
-      "id": "aste-targhe",
-      "updatedAt": "2026-11-16T06:25:42.818Z",
-      "keyFacts": 1
-    },
-    {
       "id": "meteo",
-      "updatedAt": "2026-11-16T06:51:00.113Z",
+      "updatedAt": "2026-11-26T00:36:15.946Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -45,11 +40,6 @@
           "value": "639,80 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
-        },
-        {
-          "label": "Aste di targhe in corso",
-          "value": "31",
-          "note": "offerta mediana 570 CHF"
         }
       ],
       "dataBlocks": [
@@ -86,68 +76,37 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-15T23:00:00.000Z"
+              "date": "2026-11-25T23:00:00.000Z"
             },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-16T23:00:00.000Z"
+              "date": "2026-11-26T23:00:00.000Z"
             },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-17T23:00:00.000Z"
+              "date": "2026-11-27T23:00:00.000Z"
             },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-18T23:00:00.000Z"
+              "date": "2026-11-28T23:00:00.000Z"
             },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-19T23:00:00.000Z"
+              "date": "2026-11-29T23:00:00.000Z"
             },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-20T23:00:00.000Z"
+              "date": "2026-11-30T23:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-16T06:48:19.706Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Aste delle targhe",
-          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
-          "items": [
-            {
-              "label": "ZH906",
-              "value": "19.600 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-18T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/44022"
-            },
-            {
-              "label": "ZH5485",
-              "value": "5400 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-18T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43765"
-            },
-            {
-              "label": "ZH42021",
-              "value": "1530 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-18T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43775"
-            }
-          ],
-          "sourceName": "Ufficio cantonale della circolazione",
-          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-11-16T06:25:42.818Z"
+          "updatedAt": "2026-11-25T21:12:13.113Z"
         },
         {
           "id": "meteo",
@@ -156,12 +115,12 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "8 °C",
-              "detail": "oggi da 8 a 11 °C"
+              "value": "1 °C",
+              "detail": "oggi da 0 a 2 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -169,37 +128,37 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "USZ baut Zentrum für Spenderorgane aus – Mehr Organe für Transplantationen bedeuten mehr Chancen auf Leben",
+              "date": "2026-11-24T12:11:50.000Z",
+              "url": "https://www.usz.ch/usz-baut-zentrum-fuer-spenderorgane-aus/"
+            },
+            {
+              "label": "Direkt über den Patientinnen und Patienten: Hologramm ermöglicht präzisere Operation am Gehirn",
+              "date": "2026-11-19T09:00:14.000Z",
+              "url": "https://www.usz.ch/hologramm-ermoeglicht-praezisere-operation-am-gehirn/"
+            },
+            {
+              "label": "Information zum Stand der Entschädigungsforderung im Zusammenhang mit den Untersuchungen zur Herzchirurgie",
+              "date": "2026-11-18T17:12:31.000Z",
+              "url": "https://www.usz.ch/information-zum-stand-der-entschaedigungsforderung-im-zusammenhang-mit-den-untersuchungen-zur-herzchirurgie/"
+            },
+            {
+              "label": "Information zum Stand der Staatshaftungsbegehren im Zusammenhang mit den Untersuchungen zur Herzchirurgie",
+              "date": "2026-11-18T17:12:31.000Z",
+              "url": "https://www.usz.ch/information-zum-stand-der-staatshaftungsbegehren-im-zusammenhang-mit-den-untersuchungen-zur-herzchirurgie/"
+            },
+            {
+              "label": "Podcast USZ direkt – Neonatologie: Der schwierige Start ins Leben",
+              "date": "2026-11-16T08:17:47.000Z",
+              "url": "https://www.usz.ch/podcast-usz-direkt-neonatologie-der-schwierige-start-ins-leben/"
+            },
+            {
               "label": "50 Jahre Stammzelltransplantation am USZ",
               "date": "2026-11-12T08:22:02.000Z",
               "url": "https://www.usz.ch/50-jahre-stammzelltransplantation-am-usz/"
-            },
-            {
-              "label": "Zwillingsschwangerschaft: Doppeltes Glück, besondere Betreuung",
-              "date": "2026-11-10T10:35:09.000Z",
-              "url": "https://www.usz.ch/zwillingsschwangerschaft-doppeltes-glueck-besondere-betreuung/"
-            },
-            {
-              "label": "„Für andere da zu sein, ist unsere Aufgabe als Mensch.“",
-              "date": "2026-11-10T07:00:35.000Z",
-              "url": "https://www.usz.ch/fuer-andere-da-zu-sein-ist-unsere-aufgabe-als-mensch/"
-            },
-            {
-              "label": "Wenn Erektionsprobleme das Herz betreffen",
-              "date": "2026-11-10T06:57:45.000Z",
-              "url": "https://www.usz.ch/wenn-erektionsprobleme-das-herz-betreffen/"
-            },
-            {
-              "label": "Männergesundheit: Kleine Schritte, grosse Wirkung",
-              "date": "2026-11-09T16:35:31.000Z",
-              "url": "https://www.usz.ch/maennergesundheit/"
-            },
-            {
-              "label": "HPV-Impfung: Warum sie auch für Jungen und Männer wichtig ist",
-              "date": "2026-11-06T13:22:37.000Z",
-              "url": "https://www.usz.ch/hpv-impfung-warum-sie-auch-fuer-jungen-und-maenner-wichtig-ist/"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -279,7 +238,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "ZH",
@@ -292,11 +251,6 @@
           "value": "639.80 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
-        },
-        {
-          "label": "Plate auctions running",
-          "value": "31",
-          "note": "typical bid 570 CHF"
         }
       ],
       "dataBlocks": [
@@ -333,68 +287,37 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-15T23:00:00.000Z"
+              "date": "2026-11-25T23:00:00.000Z"
             },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-16T23:00:00.000Z"
+              "date": "2026-11-26T23:00:00.000Z"
             },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-17T23:00:00.000Z"
+              "date": "2026-11-27T23:00:00.000Z"
             },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-18T23:00:00.000Z"
+              "date": "2026-11-28T23:00:00.000Z"
             },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-19T23:00:00.000Z"
+              "date": "2026-11-29T23:00:00.000Z"
             },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-20T23:00:00.000Z"
+              "date": "2026-11-30T23:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-16T06:48:19.706Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Number plate auctions",
-          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
-          "items": [
-            {
-              "label": "ZH906",
-              "value": "19,600 CHF",
-              "detail": "current bid",
-              "date": "2026-11-18T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/44022"
-            },
-            {
-              "label": "ZH5485",
-              "value": "5,400 CHF",
-              "detail": "current bid",
-              "date": "2026-11-18T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43765"
-            },
-            {
-              "label": "ZH42021",
-              "value": "1,530 CHF",
-              "detail": "current bid",
-              "date": "2026-11-18T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43775"
-            }
-          ],
-          "sourceName": "Cantonal road traffic office",
-          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-11-16T06:25:42.818Z"
+          "updatedAt": "2026-11-25T21:12:13.113Z"
         },
         {
           "id": "meteo",
@@ -403,12 +326,12 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "8 °C",
-              "detail": "today from 8 to 11 °C"
+              "value": "1 °C",
+              "detail": "today from 0 to 2 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -416,37 +339,37 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "USZ baut Zentrum für Spenderorgane aus – Mehr Organe für Transplantationen bedeuten mehr Chancen auf Leben",
+              "date": "2026-11-24T12:11:50.000Z",
+              "url": "https://www.usz.ch/usz-baut-zentrum-fuer-spenderorgane-aus/"
+            },
+            {
+              "label": "Direkt über den Patientinnen und Patienten: Hologramm ermöglicht präzisere Operation am Gehirn",
+              "date": "2026-11-19T09:00:14.000Z",
+              "url": "https://www.usz.ch/hologramm-ermoeglicht-praezisere-operation-am-gehirn/"
+            },
+            {
+              "label": "Information zum Stand der Entschädigungsforderung im Zusammenhang mit den Untersuchungen zur Herzchirurgie",
+              "date": "2026-11-18T17:12:31.000Z",
+              "url": "https://www.usz.ch/information-zum-stand-der-entschaedigungsforderung-im-zusammenhang-mit-den-untersuchungen-zur-herzchirurgie/"
+            },
+            {
+              "label": "Information zum Stand der Staatshaftungsbegehren im Zusammenhang mit den Untersuchungen zur Herzchirurgie",
+              "date": "2026-11-18T17:12:31.000Z",
+              "url": "https://www.usz.ch/information-zum-stand-der-staatshaftungsbegehren-im-zusammenhang-mit-den-untersuchungen-zur-herzchirurgie/"
+            },
+            {
+              "label": "Podcast USZ direkt – Neonatologie: Der schwierige Start ins Leben",
+              "date": "2026-11-16T08:17:47.000Z",
+              "url": "https://www.usz.ch/podcast-usz-direkt-neonatologie-der-schwierige-start-ins-leben/"
+            },
+            {
               "label": "50 Jahre Stammzelltransplantation am USZ",
               "date": "2026-11-12T08:22:02.000Z",
               "url": "https://www.usz.ch/50-jahre-stammzelltransplantation-am-usz/"
-            },
-            {
-              "label": "Zwillingsschwangerschaft: Doppeltes Glück, besondere Betreuung",
-              "date": "2026-11-10T10:35:09.000Z",
-              "url": "https://www.usz.ch/zwillingsschwangerschaft-doppeltes-glueck-besondere-betreuung/"
-            },
-            {
-              "label": "„Für andere da zu sein, ist unsere Aufgabe als Mensch.“",
-              "date": "2026-11-10T07:00:35.000Z",
-              "url": "https://www.usz.ch/fuer-andere-da-zu-sein-ist-unsere-aufgabe-als-mensch/"
-            },
-            {
-              "label": "Wenn Erektionsprobleme das Herz betreffen",
-              "date": "2026-11-10T06:57:45.000Z",
-              "url": "https://www.usz.ch/wenn-erektionsprobleme-das-herz-betreffen/"
-            },
-            {
-              "label": "Männergesundheit: Kleine Schritte, grosse Wirkung",
-              "date": "2026-11-09T16:35:31.000Z",
-              "url": "https://www.usz.ch/maennergesundheit/"
-            },
-            {
-              "label": "HPV-Impfung: Warum sie auch für Jungen und Männer wichtig ist",
-              "date": "2026-11-06T13:22:37.000Z",
-              "url": "https://www.usz.ch/hpv-impfung-warum-sie-auch-fuer-jungen-und-maenner-wichtig-ist/"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -522,7 +445,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "ZH",
@@ -535,11 +458,6 @@
           "value": "639.80 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
-        },
-        {
-          "label": "Laufende Kontrollschild-Auktionen",
-          "value": "31",
-          "note": "mittleres Gebot 570 CHF"
         }
       ],
       "dataBlocks": [
@@ -576,68 +494,37 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-15T23:00:00.000Z"
+              "date": "2026-11-25T23:00:00.000Z"
             },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-16T23:00:00.000Z"
+              "date": "2026-11-26T23:00:00.000Z"
             },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-17T23:00:00.000Z"
+              "date": "2026-11-27T23:00:00.000Z"
             },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-18T23:00:00.000Z"
+              "date": "2026-11-28T23:00:00.000Z"
             },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-19T23:00:00.000Z"
+              "date": "2026-11-29T23:00:00.000Z"
             },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-20T23:00:00.000Z"
+              "date": "2026-11-30T23:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-16T06:48:19.706Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Kontrollschild-Auktionen",
-          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
-          "items": [
-            {
-              "label": "ZH906",
-              "value": "19’600 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-18T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/44022"
-            },
-            {
-              "label": "ZH5485",
-              "value": "5’400 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-18T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43765"
-            },
-            {
-              "label": "ZH42021",
-              "value": "1’530 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-18T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43775"
-            }
-          ],
-          "sourceName": "Kantonales Strassenverkehrsamt",
-          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-11-16T06:25:42.818Z"
+          "updatedAt": "2026-11-25T21:12:13.113Z"
         },
         {
           "id": "meteo",
@@ -646,12 +533,12 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "8 °C",
-              "detail": "heute 8 bis 11 °C"
+              "value": "1 °C",
+              "detail": "heute 0 bis 2 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -659,37 +546,37 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "USZ baut Zentrum für Spenderorgane aus – Mehr Organe für Transplantationen bedeuten mehr Chancen auf Leben",
+              "date": "2026-11-24T12:11:50.000Z",
+              "url": "https://www.usz.ch/usz-baut-zentrum-fuer-spenderorgane-aus/"
+            },
+            {
+              "label": "Direkt über den Patientinnen und Patienten: Hologramm ermöglicht präzisere Operation am Gehirn",
+              "date": "2026-11-19T09:00:14.000Z",
+              "url": "https://www.usz.ch/hologramm-ermoeglicht-praezisere-operation-am-gehirn/"
+            },
+            {
+              "label": "Information zum Stand der Entschädigungsforderung im Zusammenhang mit den Untersuchungen zur Herzchirurgie",
+              "date": "2026-11-18T17:12:31.000Z",
+              "url": "https://www.usz.ch/information-zum-stand-der-entschaedigungsforderung-im-zusammenhang-mit-den-untersuchungen-zur-herzchirurgie/"
+            },
+            {
+              "label": "Information zum Stand der Staatshaftungsbegehren im Zusammenhang mit den Untersuchungen zur Herzchirurgie",
+              "date": "2026-11-18T17:12:31.000Z",
+              "url": "https://www.usz.ch/information-zum-stand-der-staatshaftungsbegehren-im-zusammenhang-mit-den-untersuchungen-zur-herzchirurgie/"
+            },
+            {
+              "label": "Podcast USZ direkt – Neonatologie: Der schwierige Start ins Leben",
+              "date": "2026-11-16T08:17:47.000Z",
+              "url": "https://www.usz.ch/podcast-usz-direkt-neonatologie-der-schwierige-start-ins-leben/"
+            },
+            {
               "label": "50 Jahre Stammzelltransplantation am USZ",
               "date": "2026-11-12T08:22:02.000Z",
               "url": "https://www.usz.ch/50-jahre-stammzelltransplantation-am-usz/"
-            },
-            {
-              "label": "Zwillingsschwangerschaft: Doppeltes Glück, besondere Betreuung",
-              "date": "2026-11-10T10:35:09.000Z",
-              "url": "https://www.usz.ch/zwillingsschwangerschaft-doppeltes-glueck-besondere-betreuung/"
-            },
-            {
-              "label": "„Für andere da zu sein, ist unsere Aufgabe als Mensch.“",
-              "date": "2026-11-10T07:00:35.000Z",
-              "url": "https://www.usz.ch/fuer-andere-da-zu-sein-ist-unsere-aufgabe-als-mensch/"
-            },
-            {
-              "label": "Wenn Erektionsprobleme das Herz betreffen",
-              "date": "2026-11-10T06:57:45.000Z",
-              "url": "https://www.usz.ch/wenn-erektionsprobleme-das-herz-betreffen/"
-            },
-            {
-              "label": "Männergesundheit: Kleine Schritte, grosse Wirkung",
-              "date": "2026-11-09T16:35:31.000Z",
-              "url": "https://www.usz.ch/maennergesundheit/"
-            },
-            {
-              "label": "HPV-Impfung: Warum sie auch für Jungen und Männer wichtig ist",
-              "date": "2026-11-06T13:22:37.000Z",
-              "url": "https://www.usz.ch/hpv-impfung-warum-sie-auch-fuer-jungen-und-maenner-wichtig-ist/"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -765,7 +652,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "ZH",
@@ -778,11 +665,6 @@
           "value": "639,80 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
-        },
-        {
-          "label": "Enchères de plaques en cours",
-          "value": "31",
-          "note": "offre centrale 570 CHF"
         }
       ],
       "dataBlocks": [
@@ -819,68 +701,37 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-15T23:00:00.000Z"
+              "date": "2026-11-25T23:00:00.000Z"
             },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-16T23:00:00.000Z"
+              "date": "2026-11-26T23:00:00.000Z"
             },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-17T23:00:00.000Z"
+              "date": "2026-11-27T23:00:00.000Z"
             },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-18T23:00:00.000Z"
+              "date": "2026-11-28T23:00:00.000Z"
             },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-19T23:00:00.000Z"
+              "date": "2026-11-29T23:00:00.000Z"
             },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-20T23:00:00.000Z"
+              "date": "2026-11-30T23:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-16T06:48:19.706Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Enchères de plaques",
-          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
-          "items": [
-            {
-              "label": "ZH906",
-              "value": "19 600 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-18T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/44022"
-            },
-            {
-              "label": "ZH5485",
-              "value": "5 400 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-18T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43765"
-            },
-            {
-              "label": "ZH42021",
-              "value": "1 530 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-18T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43775"
-            }
-          ],
-          "sourceName": "Office cantonal de la circulation",
-          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-11-16T06:25:42.818Z"
+          "updatedAt": "2026-11-25T21:12:13.113Z"
         },
         {
           "id": "meteo",
@@ -889,12 +740,12 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "8 °C",
-              "detail": "aujourd’hui de 8 à 11 °C"
+              "value": "1 °C",
+              "detail": "aujourd’hui de 0 à 2 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -902,37 +753,37 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "USZ baut Zentrum für Spenderorgane aus – Mehr Organe für Transplantationen bedeuten mehr Chancen auf Leben",
+              "date": "2026-11-24T12:11:50.000Z",
+              "url": "https://www.usz.ch/usz-baut-zentrum-fuer-spenderorgane-aus/"
+            },
+            {
+              "label": "Direkt über den Patientinnen und Patienten: Hologramm ermöglicht präzisere Operation am Gehirn",
+              "date": "2026-11-19T09:00:14.000Z",
+              "url": "https://www.usz.ch/hologramm-ermoeglicht-praezisere-operation-am-gehirn/"
+            },
+            {
+              "label": "Information zum Stand der Entschädigungsforderung im Zusammenhang mit den Untersuchungen zur Herzchirurgie",
+              "date": "2026-11-18T17:12:31.000Z",
+              "url": "https://www.usz.ch/information-zum-stand-der-entschaedigungsforderung-im-zusammenhang-mit-den-untersuchungen-zur-herzchirurgie/"
+            },
+            {
+              "label": "Information zum Stand der Staatshaftungsbegehren im Zusammenhang mit den Untersuchungen zur Herzchirurgie",
+              "date": "2026-11-18T17:12:31.000Z",
+              "url": "https://www.usz.ch/information-zum-stand-der-staatshaftungsbegehren-im-zusammenhang-mit-den-untersuchungen-zur-herzchirurgie/"
+            },
+            {
+              "label": "Podcast USZ direkt – Neonatologie: Der schwierige Start ins Leben",
+              "date": "2026-11-16T08:17:47.000Z",
+              "url": "https://www.usz.ch/podcast-usz-direkt-neonatologie-der-schwierige-start-ins-leben/"
+            },
+            {
               "label": "50 Jahre Stammzelltransplantation am USZ",
               "date": "2026-11-12T08:22:02.000Z",
               "url": "https://www.usz.ch/50-jahre-stammzelltransplantation-am-usz/"
-            },
-            {
-              "label": "Zwillingsschwangerschaft: Doppeltes Glück, besondere Betreuung",
-              "date": "2026-11-10T10:35:09.000Z",
-              "url": "https://www.usz.ch/zwillingsschwangerschaft-doppeltes-glueck-besondere-betreuung/"
-            },
-            {
-              "label": "„Für andere da zu sein, ist unsere Aufgabe als Mensch.“",
-              "date": "2026-11-10T07:00:35.000Z",
-              "url": "https://www.usz.ch/fuer-andere-da-zu-sein-ist-unsere-aufgabe-als-mensch/"
-            },
-            {
-              "label": "Wenn Erektionsprobleme das Herz betreffen",
-              "date": "2026-11-10T06:57:45.000Z",
-              "url": "https://www.usz.ch/wenn-erektionsprobleme-das-herz-betreffen/"
-            },
-            {
-              "label": "Männergesundheit: Kleine Schritte, grosse Wirkung",
-              "date": "2026-11-09T16:35:31.000Z",
-              "url": "https://www.usz.ch/maennergesundheit/"
-            },
-            {
-              "label": "HPV-Impfung: Warum sie auch für Jungen und Männer wichtig ist",
-              "date": "2026-11-06T13:22:37.000Z",
-              "url": "https://www.usz.ch/hpv-impfung-warum-sie-auch-fuer-jungen-und-maenner-wichtig-ist/"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -1004,7 +855,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

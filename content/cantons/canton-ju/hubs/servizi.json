@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "849a5e40a92405ded14c6c7347360c857d90d6d1b498b68edbeefdd3c9e4cd61",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "9d7a24e7fa20fe360781084afd1964000ec981aef6a0a80106c5b9525c7eec85",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-16T06:48:19.706Z",
+      "updatedAt": "2026-11-25T21:12:13.113Z",
       "keyFacts": 0
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-16T06:51:00.113Z",
+      "updatedAt": "2026-11-26T00:36:15.946Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -64,39 +64,39 @@
           "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
           "items": [
             {
-              "label": "Sun Store Milliet Gare",
-              "detail": "Porrentruy, Ajoie",
-              "date": "2026-11-14T07:00:00.000Z"
-            },
-            {
-              "label": "Tilleul",
+              "label": "Pharmacie du Centre",
               "detail": "Delémont, Delémont",
-              "date": "2026-11-14T07:00:00.000Z"
+              "date": "2026-11-21T07:00:00.000Z"
             },
             {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-16T17:30:00.000Z"
+              "label": "Pharmacie Neukomm",
+              "detail": "Courgenay, Ajoie",
+              "date": "2026-11-21T07:00:00.000Z"
             },
             {
-              "label": "Centre Coop",
+              "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-17T17:30:00.000Z"
+              "date": "2026-11-26T17:30:00.000Z"
             },
             {
-              "label": "Centre Coop",
+              "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-18T17:30:00.000Z"
+              "date": "2026-11-27T17:30:00.000Z"
             },
             {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-19T17:30:00.000Z"
+              "label": "Pharmacie du Jura",
+              "detail": "Delémont, Delémont",
+              "date": "2026-11-28T07:00:00.000Z"
+            },
+            {
+              "label": "Sun Store Esplanade",
+              "detail": "Porrentruy, Ajoie",
+              "date": "2026-11-28T07:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-16T06:48:19.706Z"
+          "updatedAt": "2026-11-25T21:12:13.113Z"
         },
         {
           "id": "meteo",
@@ -105,12 +105,12 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "9 °C",
-              "detail": "oggi da 8 a 11 °C"
+              "value": "2 °C",
+              "detail": "oggi da 0 a 2 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -138,10 +138,16 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Hôpital du Jura e BKW si esercitano per sicurezza emergenze",
+          "url": "/articoli-giura/hospitale-jura-bwk-esercitazione/",
+          "excerpt": "Tre mattinate di formazione hanno riunito il personale delle ambulanze dell’Hôpital du Jura e i collaboratori di BKW.",
+          "date": "2026-11-21T06:26:15.732Z"
+        },
         {
           "title": "Permesso di dimora B in Giura: requisiti, documenti e rinnovo",
           "url": "/articoli-svizzera/permesso-dimora-b-canton-giura/",
@@ -188,7 +194,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "JU",
@@ -225,39 +231,39 @@
           "description": "Upcoming duty shifts published by the canton’s official service.",
           "items": [
             {
-              "label": "Sun Store Milliet Gare",
-              "detail": "Porrentruy, Ajoie",
-              "date": "2026-11-14T07:00:00.000Z"
-            },
-            {
-              "label": "Tilleul",
+              "label": "Pharmacie du Centre",
               "detail": "Delémont, Delémont",
-              "date": "2026-11-14T07:00:00.000Z"
+              "date": "2026-11-21T07:00:00.000Z"
             },
             {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-16T17:30:00.000Z"
+              "label": "Pharmacie Neukomm",
+              "detail": "Courgenay, Ajoie",
+              "date": "2026-11-21T07:00:00.000Z"
             },
             {
-              "label": "Centre Coop",
+              "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-17T17:30:00.000Z"
+              "date": "2026-11-26T17:30:00.000Z"
             },
             {
-              "label": "Centre Coop",
+              "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-18T17:30:00.000Z"
+              "date": "2026-11-27T17:30:00.000Z"
             },
             {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-19T17:30:00.000Z"
+              "label": "Pharmacie du Jura",
+              "detail": "Delémont, Delémont",
+              "date": "2026-11-28T07:00:00.000Z"
+            },
+            {
+              "label": "Sun Store Esplanade",
+              "detail": "Porrentruy, Ajoie",
+              "date": "2026-11-28T07:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-16T06:48:19.706Z"
+          "updatedAt": "2026-11-25T21:12:13.113Z"
         },
         {
           "id": "meteo",
@@ -266,12 +272,12 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "9 °C",
-              "detail": "today from 8 to 11 °C"
+              "value": "2 °C",
+              "detail": "today from 0 to 2 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -299,10 +305,16 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Hôpital du Jura and BKW train for safety in emergencies",
+          "url": "/en/jura-articles/hospitale-jura-bwk-exercise/",
+          "excerpt": "Three mornings of training brought together ambulance staff from Hôpital du Jura and BKW employees.",
+          "date": "2026-11-21T06:26:15.732Z"
+        },
         {
           "title": "Residence permit B in Jura: requirements, documents and renewal",
           "url": "/en/swiss-articles/residence-permit-b-jura/",
@@ -345,7 +357,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "JU",
@@ -382,39 +394,39 @@
           "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
           "items": [
             {
-              "label": "Sun Store Milliet Gare",
-              "detail": "Porrentruy, Ajoie",
-              "date": "2026-11-14T07:00:00.000Z"
-            },
-            {
-              "label": "Tilleul",
+              "label": "Pharmacie du Centre",
               "detail": "Delémont, Delémont",
-              "date": "2026-11-14T07:00:00.000Z"
+              "date": "2026-11-21T07:00:00.000Z"
             },
             {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-16T17:30:00.000Z"
+              "label": "Pharmacie Neukomm",
+              "detail": "Courgenay, Ajoie",
+              "date": "2026-11-21T07:00:00.000Z"
             },
             {
-              "label": "Centre Coop",
+              "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-17T17:30:00.000Z"
+              "date": "2026-11-26T17:30:00.000Z"
             },
             {
-              "label": "Centre Coop",
+              "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-18T17:30:00.000Z"
+              "date": "2026-11-27T17:30:00.000Z"
             },
             {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-19T17:30:00.000Z"
+              "label": "Pharmacie du Jura",
+              "detail": "Delémont, Delémont",
+              "date": "2026-11-28T07:00:00.000Z"
+            },
+            {
+              "label": "Sun Store Esplanade",
+              "detail": "Porrentruy, Ajoie",
+              "date": "2026-11-28T07:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-16T06:48:19.706Z"
+          "updatedAt": "2026-11-25T21:12:13.113Z"
         },
         {
           "id": "meteo",
@@ -423,12 +435,12 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "9 °C",
-              "detail": "heute 8 bis 11 °C"
+              "value": "2 °C",
+              "detail": "heute 0 bis 2 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -456,10 +468,16 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Hôpital du Jura und BKW üben für die Sicherheit bei Notfällen",
+          "url": "/de/jura-artikel/hospitale-jura-bwk-uebung/",
+          "excerpt": "Drei Schulungsvormittage brachten das Ambulanzpersonal des Hôpital du Jura und die Mitarbeitenden von BKW zusammen.",
+          "date": "2026-11-21T06:26:15.732Z"
+        },
         {
           "title": "Aufenthaltsbewilligung B im Jura: Voraussetzungen, Dokumente und Verlängerung",
           "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-jura/",
@@ -502,7 +520,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "JU",
@@ -539,39 +557,39 @@
           "description": "Prochaines gardes publiées par le service officiel du canton.",
           "items": [
             {
-              "label": "Sun Store Milliet Gare",
-              "detail": "Porrentruy, Ajoie",
-              "date": "2026-11-14T07:00:00.000Z"
-            },
-            {
-              "label": "Tilleul",
+              "label": "Pharmacie du Centre",
               "detail": "Delémont, Delémont",
-              "date": "2026-11-14T07:00:00.000Z"
+              "date": "2026-11-21T07:00:00.000Z"
             },
             {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-16T17:30:00.000Z"
+              "label": "Pharmacie Neukomm",
+              "detail": "Courgenay, Ajoie",
+              "date": "2026-11-21T07:00:00.000Z"
             },
             {
-              "label": "Centre Coop",
+              "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-17T17:30:00.000Z"
+              "date": "2026-11-26T17:30:00.000Z"
             },
             {
-              "label": "Centre Coop",
+              "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-11-18T17:30:00.000Z"
+              "date": "2026-11-27T17:30:00.000Z"
             },
             {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-19T17:30:00.000Z"
+              "label": "Pharmacie du Jura",
+              "detail": "Delémont, Delémont",
+              "date": "2026-11-28T07:00:00.000Z"
+            },
+            {
+              "label": "Sun Store Esplanade",
+              "detail": "Porrentruy, Ajoie",
+              "date": "2026-11-28T07:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-11-16T06:48:19.706Z"
+          "updatedAt": "2026-11-25T21:12:13.113Z"
         },
         {
           "id": "meteo",
@@ -580,12 +598,12 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 8 à 11 °C"
+              "value": "2 °C",
+              "detail": "aujourd’hui de 0 à 2 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -613,10 +631,16 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Hôpital du Jura et BKW s’exercent pour la sécurité en cas d’urgence",
+          "url": "/fr/articles-jura/hopital-jura-bwk-exercice/",
+          "excerpt": "Pendant trois matinées de formation, le personnel ambulancier de l’Hôpital du Jura et les collaborateurs de BKW ont examiné comment secourir une personne blessée près d’une installation électrique sans compromettre la…",
+          "date": "2026-11-21T06:26:15.732Z"
+        },
         {
           "title": "Permis de séjour B dans le Jura : exigences, documents et renouvellement",
           "url": "/fr/articles-suisse/permis-dimora-b-jura/",
@@ -655,7 +679,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

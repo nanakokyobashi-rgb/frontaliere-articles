@@ -4,22 +4,22 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "906931b9f19704305c64fa16972fa883eca2c96f9515b465929acfc14b9b276e",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "d0a2dd85a786f8118ba83cf16834665ab097fb28c3d988778c0a8721a3874dad",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-15T23:59:59.000Z",
+      "updatedAt": "2026-11-24T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-16T07:21:34.368Z",
+      "updatedAt": "2026-11-25T19:39:26.365Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -33,77 +33,77 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Kriessern-Mäder, settimana conclusa: 15 novembre 2026"
+          "note": "Au-Lustenau, settimana conclusa: 24 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "5",
-          "note": "segnalazioni aggiornate: 16 novembre 2026"
+          "value": "3",
+          "note": "segnalazioni aggiornate: 25 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "14",
-          "note": "segnalazioni aggiornate: 16 novembre 2026"
+          "value": "10",
+          "note": "segnalazioni aggiornate: 25 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 9 novembre 2026 – 15 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 18 novembre 2026 – 24 novembre 2026, dal più scorrevole al più lento.",
           "items": [
+            {
+              "label": "Au-Lustenau",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/au-lustenau/oggi/"
+            },
+            {
+              "label": "Buchs (SG)-Schaan",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/buchs-schaan/oggi/"
+            },
+            {
+              "label": "Diepoldsau-Hohenems",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/diepoldsau-hohenems/oggi/"
+            },
+            {
+              "label": "Haag-Bendern",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/haag-bendern/oggi/"
+            },
             {
               "label": "Kriessern-Mäder",
               "value": "0 min",
-              "detail": "49 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/kriessern-mader/oggi/"
             },
             {
               "label": "Montlingen-Koblach",
               "value": "0 min",
-              "detail": "49 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/montlingen-koblach/oggi/"
-            },
-            {
-              "label": "Rüthi-Meiningen",
-              "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/ruthi-meiningen/oggi/"
-            },
-            {
-              "label": "Salez-Ruggell",
-              "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/salez-ruggell/oggi/"
             },
             {
               "label": "Rheineck-Gaißau",
               "value": "0 min",
-              "detail": "49 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/rheineck-gai-au/oggi/"
             },
             {
-              "label": "Sevelen-Vaduz",
+              "label": "Rüthi-Meiningen",
               "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/sevelen-vaduz/oggi/"
-            },
-            {
-              "label": "Trübbach-Balzers",
-              "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/trubbach-balzers/oggi/"
-            },
-            {
-              "label": "Widnau-Lustenau (Wiesenrain)",
-              "value": "0 min",
-              "detail": "49 rilevazioni",
-              "url": "/traffico-dogane/widnau-lustenau/oggi/"
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/ruthi-meiningen/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-15T23:59:59.000Z"
+          "updatedAt": "2026-11-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -123,22 +123,10 @@
               "date": "2026-01-15T14:55:00.000Z"
             },
             {
-              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gallen-Kreuzbleiche <-> Rosenbergstrasse Svincolo autostradale St. Gallen-Kreuzbleiche Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gallen-Kreuzbleiche <-> Rosenbergstrasse Svincolo autostradale St. Gallen-Kreuzbleiche Situazione: entrato-uscito chiusa cantiere, lunghezza [km] 1.0",
               "value": "Chiusura",
-              "detail": "fine prevista: 20 novembre 2026",
-              "date": "2026-07-01T18:00:00.000Z"
-            },
-            {
-              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gallen-Kreuzbleiche -> Rosenbergstrasse tra Svincolo autostradale St. Gallen-Kreuzbleiche E Svincolo autostradale Rosenbergstrasse Situazione: uscita…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 20 novembre 2026",
-              "date": "2026-07-08T11:32:00.000Z"
-            },
-            {
-              "label": "A3 Zürich -> Chur Svincolo autostradale Murg Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 1.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.0",
-              "value": "Chiusura",
-              "detail": "fine prevista: 20 novembre 2026",
-              "date": "2026-11-06T14:29:00.000Z"
+              "detail": "fine prevista: 11 dicembre 2026",
+              "date": "2026-11-22T19:00:00.000Z"
             },
             {
               "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Oberriet E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Causa: veicoli di manutenzione lenti…",
@@ -157,10 +145,22 @@
               "value": "Cantiere",
               "detail": "fine prevista: 18 dicembre 2026",
               "date": "2026-06-29T18:00:00.000Z"
+            },
+            {
+              "label": "A13 Sargans <-> St. Margrethen Svincolo autostradale Buchs Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo peso…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 29 novembre 2026",
+              "date": "2026-10-01T22:00:00.000Z"
+            },
+            {
+              "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Trübbach E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: corsie strette…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 27 novembre 2026",
+              "date": "2026-10-04T17:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -168,37 +168,37 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Beginn der Wintersaison im Strassenverkehr",
+              "date": "2026-11-25",
+              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/beginn-der-wintersaison-im-strassenverkehr.html"
+            },
+            {
+              "label": "Musikalische Adventsreise in der Bahnhofshalle",
+              "date": "2026-11-23",
+              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/musikalische-adventsreise-in-der-bahnhofshalle.html"
+            },
+            {
+              "label": "Dienstag, 17.11.2026 Ersatzbau der Rheinbrücke Au–Lustenau wird vorbereitet",
+              "date": "2026-11-17",
+              "url": "https://presse.vorarlberg.at/land/public/Ersatzbau-der-Rheinbruecke-Au-Lustenau-wird-vorbereitet"
+            },
+            {
+              "label": "Ersatzbau der Rheinbrücke Au–Lustenau wird vorbereitet",
+              "date": "2026-11-17",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/ersatzbau-der-rheinbruecke-au-lustenau-wird-vorbereitet.html"
+            },
+            {
+              "label": "Regierung korrigiert die Motorfahrzeugsteuer",
+              "date": "2026-11-16",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/regierung-korrigiert-die-motorfahrzeugsteuer.html"
+            },
+            {
               "label": "Strassengesetz: Kommission beantragt Änderungen",
               "date": "2026-11-13",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/strassengesetz--kommission-beantragt-aenderungen-.html"
-            },
-            {
-              "label": "Goldach / St.Gallen: Zwei Unfälle sorgen für Rückstau auf A1",
-              "date": "2026-11-12",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/goldach---st-gallen--zwei-unfaelle-sorgen-fuer-rueckstau-auf-a1.html"
-            },
-            {
-              "label": "Velovorzugsroute entlang der Bahn – Start zur Mitwirkung",
-              "date": "2026-11-12",
-              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/velovorzugsroute-entlang-der-bahn---start-zur-mitwirkung.html"
-            },
-            {
-              "label": "Mittwoch, 11.11.2026 Stadttunnel Feldkirch: Durchschlag geschafft",
-              "date": "2026-11-11",
-              "url": "https://presse.vorarlberg.at/land/public/Stadttunnel-Feldkirch-Durchschlag-geschafft"
-            },
-            {
-              "label": "Fünf neue Kunstwerke für den Mühleggbahntunnel",
-              "date": "2026-11-09",
-              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/fuenf-neue-kunstwerke-fuer-den-muehleggbahntunnel.html"
-            },
-            {
-              "label": "Gossau: Brand in Gastrobetrieb",
-              "date": "2026-11-04",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/gossau--brand-in-gastrobetrieb.html"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -286,7 +286,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "SG",
@@ -297,77 +297,77 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Kriessern-Mäder, week ending 15 November 2026"
+          "note": "Au-Lustenau, week ending 24 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "5",
-          "note": "reports as of 16 November 2026"
+          "value": "3",
+          "note": "reports as of 25 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "14",
-          "note": "reports as of 16 November 2026"
+          "value": "10",
+          "note": "reports as of 25 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 9 November 2026 to 15 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 18 November 2026 to 24 November 2026, fastest first.",
           "items": [
+            {
+              "label": "Au-Lustenau",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/au-lustenau/today/"
+            },
+            {
+              "label": "Buchs (SG)-Schaan",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/buchs-schaan/today/"
+            },
+            {
+              "label": "Diepoldsau-Hohenems",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/diepoldsau-hohenems/today/"
+            },
+            {
+              "label": "Haag-Bendern",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/haag-bendern/today/"
+            },
             {
               "label": "Kriessern-Mäder",
               "value": "0 min",
-              "detail": "49 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/kriessern-mader/today/"
             },
             {
               "label": "Montlingen-Koblach",
               "value": "0 min",
-              "detail": "49 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/montlingen-koblach/today/"
-            },
-            {
-              "label": "Rüthi-Meiningen",
-              "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/ruthi-meiningen/today/"
-            },
-            {
-              "label": "Salez-Ruggell",
-              "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/salez-ruggell/today/"
             },
             {
               "label": "Rheineck-Gaißau",
               "value": "0 min",
-              "detail": "49 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/rheineck-gai-au/today/"
             },
             {
-              "label": "Sevelen-Vaduz",
+              "label": "Rüthi-Meiningen",
               "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/sevelen-vaduz/today/"
-            },
-            {
-              "label": "Trübbach-Balzers",
-              "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/trubbach-balzers/today/"
-            },
-            {
-              "label": "Widnau-Lustenau (Wiesenrain)",
-              "value": "0 min",
-              "detail": "49 readings",
-              "url": "/en/border-wait/widnau-lustenau/today/"
+              "detail": "48 readings",
+              "url": "/en/border-wait/ruthi-meiningen/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-15T23:59:59.000Z"
+          "updatedAt": "2026-11-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -387,22 +387,10 @@
               "date": "2026-01-15T14:55:00.000Z"
             },
             {
-              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gallen-Kreuzbleiche <-> Rosenbergstrasse Svincolo autostradale St. Gallen-Kreuzbleiche Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gallen-Kreuzbleiche <-> Rosenbergstrasse Svincolo autostradale St. Gallen-Kreuzbleiche Situazione: entrato-uscito chiusa cantiere, lunghezza [km] 1.0",
               "value": "Closure",
-              "detail": "until 20 November 2026",
-              "date": "2026-07-01T18:00:00.000Z"
-            },
-            {
-              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gallen-Kreuzbleiche -> Rosenbergstrasse tra Svincolo autostradale St. Gallen-Kreuzbleiche E Svincolo autostradale Rosenbergstrasse Situazione: uscita…",
-              "value": "Closure",
-              "detail": "until 20 November 2026",
-              "date": "2026-07-08T11:32:00.000Z"
-            },
-            {
-              "label": "A3 Zürich -> Chur Svincolo autostradale Murg Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 1.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.0",
-              "value": "Closure",
-              "detail": "until 20 November 2026",
-              "date": "2026-11-06T14:29:00.000Z"
+              "detail": "until 11 December 2026",
+              "date": "2026-11-22T19:00:00.000Z"
             },
             {
               "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Oberriet E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Causa: veicoli di manutenzione lenti…",
@@ -421,10 +409,22 @@
               "value": "Roadworks",
               "detail": "until 18 December 2026",
               "date": "2026-06-29T18:00:00.000Z"
+            },
+            {
+              "label": "A13 Sargans <-> St. Margrethen Svincolo autostradale Buchs Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo peso…",
+              "value": "Roadworks",
+              "detail": "until 29 November 2026",
+              "date": "2026-10-01T22:00:00.000Z"
+            },
+            {
+              "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Trübbach E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: corsie strette…",
+              "value": "Roadworks",
+              "detail": "until 27 November 2026",
+              "date": "2026-10-04T17:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -432,37 +432,37 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Beginn der Wintersaison im Strassenverkehr",
+              "date": "2026-11-25",
+              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/beginn-der-wintersaison-im-strassenverkehr.html"
+            },
+            {
+              "label": "Musikalische Adventsreise in der Bahnhofshalle",
+              "date": "2026-11-23",
+              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/musikalische-adventsreise-in-der-bahnhofshalle.html"
+            },
+            {
+              "label": "Dienstag, 17.11.2026 Ersatzbau der Rheinbrücke Au–Lustenau wird vorbereitet",
+              "date": "2026-11-17",
+              "url": "https://presse.vorarlberg.at/land/public/Ersatzbau-der-Rheinbruecke-Au-Lustenau-wird-vorbereitet"
+            },
+            {
+              "label": "Ersatzbau der Rheinbrücke Au–Lustenau wird vorbereitet",
+              "date": "2026-11-17",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/ersatzbau-der-rheinbruecke-au-lustenau-wird-vorbereitet.html"
+            },
+            {
+              "label": "Regierung korrigiert die Motorfahrzeugsteuer",
+              "date": "2026-11-16",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/regierung-korrigiert-die-motorfahrzeugsteuer.html"
+            },
+            {
               "label": "Strassengesetz: Kommission beantragt Änderungen",
               "date": "2026-11-13",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/strassengesetz--kommission-beantragt-aenderungen-.html"
-            },
-            {
-              "label": "Goldach / St.Gallen: Zwei Unfälle sorgen für Rückstau auf A1",
-              "date": "2026-11-12",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/goldach---st-gallen--zwei-unfaelle-sorgen-fuer-rueckstau-auf-a1.html"
-            },
-            {
-              "label": "Velovorzugsroute entlang der Bahn – Start zur Mitwirkung",
-              "date": "2026-11-12",
-              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/velovorzugsroute-entlang-der-bahn---start-zur-mitwirkung.html"
-            },
-            {
-              "label": "Mittwoch, 11.11.2026 Stadttunnel Feldkirch: Durchschlag geschafft",
-              "date": "2026-11-11",
-              "url": "https://presse.vorarlberg.at/land/public/Stadttunnel-Feldkirch-Durchschlag-geschafft"
-            },
-            {
-              "label": "Fünf neue Kunstwerke für den Mühleggbahntunnel",
-              "date": "2026-11-09",
-              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/fuenf-neue-kunstwerke-fuer-den-muehleggbahntunnel.html"
-            },
-            {
-              "label": "Gossau: Brand in Gastrobetrieb",
-              "date": "2026-11-04",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/gossau--brand-in-gastrobetrieb.html"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +549,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "SG",
@@ -560,77 +560,77 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Kriessern-Mäder, Woche bis 15. November 2026"
+          "note": "Au-Lustenau, Woche bis 24. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "5",
-          "note": "Meldungen vom 16. November 2026"
+          "value": "3",
+          "note": "Meldungen vom 25. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "14",
-          "note": "Meldungen vom 16. November 2026"
+          "value": "10",
+          "note": "Meldungen vom 25. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 9. November 2026 bis 15. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 18. November 2026 bis 24. November 2026, vom schnellsten zum langsamsten.",
           "items": [
+            {
+              "label": "Au-Lustenau",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/au-lustenau/heute/"
+            },
+            {
+              "label": "Buchs (SG)-Schaan",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/buchs-schaan/heute/"
+            },
+            {
+              "label": "Diepoldsau-Hohenems",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/diepoldsau-hohenems/heute/"
+            },
+            {
+              "label": "Haag-Bendern",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/haag-bendern/heute/"
+            },
             {
               "label": "Kriessern-Mäder",
               "value": "0 Min.",
-              "detail": "49 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/kriessern-mader/heute/"
             },
             {
               "label": "Montlingen-Koblach",
               "value": "0 Min.",
-              "detail": "49 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/montlingen-koblach/heute/"
-            },
-            {
-              "label": "Rüthi-Meiningen",
-              "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/ruthi-meiningen/heute/"
-            },
-            {
-              "label": "Salez-Ruggell",
-              "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/salez-ruggell/heute/"
             },
             {
               "label": "Rheineck-Gaißau",
               "value": "0 Min.",
-              "detail": "49 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/rheineck-gai-au/heute/"
             },
             {
-              "label": "Sevelen-Vaduz",
+              "label": "Rüthi-Meiningen",
               "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/sevelen-vaduz/heute/"
-            },
-            {
-              "label": "Trübbach-Balzers",
-              "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/trubbach-balzers/heute/"
-            },
-            {
-              "label": "Widnau-Lustenau (Wiesenrain)",
-              "value": "0 Min.",
-              "detail": "49 Messungen",
-              "url": "/de/wartezeit-grenze/widnau-lustenau/heute/"
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/ruthi-meiningen/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-15T23:59:59.000Z"
+          "updatedAt": "2026-11-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -650,22 +650,10 @@
               "date": "2026-01-15T14:55:00.000Z"
             },
             {
-              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gallen-Kreuzbleiche <-> Rosenbergstrasse Anschluss St. Gallen-Kreuzbleiche Sachlage: Einfahrt gesperrt Baustelle",
+              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gallen-Kreuzbleiche <-> Rosenbergstrasse Anschluss St. Gallen-Kreuzbleiche Sachlage: Ein- und Ausfahrt gesperrt Baustelle, Länge [km] 1.0",
               "value": "Sperrung",
-              "detail": "bis 20. November 2026",
-              "date": "2026-07-01T18:00:00.000Z"
-            },
-            {
-              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gallen-Kreuzbleiche -> Rosenbergstrasse zwischen Anschluss St. Gallen-Kreuzbleiche und Anschluss Rosenbergstrasse Sachlage: Ausfahrt gesperrt Baustelle…",
-              "value": "Sperrung",
-              "detail": "bis 20. November 2026",
-              "date": "2026-07-08T11:32:00.000Z"
-            },
-            {
-              "label": "A3 Zürich -> Chur Anschluss Murg Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 1.3 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.0",
-              "value": "Sperrung",
-              "detail": "bis 20. November 2026",
-              "date": "2026-11-06T14:29:00.000Z"
+              "detail": "bis 11. Dezember 2026",
+              "date": "2026-11-22T19:00:00.000Z"
             },
             {
               "label": "A13 Sargans <-> St. Margrethen zwischen Anschluss Oberriet und Anschluss Haag Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Ursache: Wanderbaustelle Verkehrsführung: Fahrbahnverengung auf…",
@@ -684,10 +672,22 @@
               "value": "Baustelle",
               "detail": "bis 18. Dezember 2026",
               "date": "2026-06-29T18:00:00.000Z"
+            },
+            {
+              "label": "A13 Sargans <-> St. Margrethen Anschluss Buchs Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Beschränkung des…",
+              "value": "Baustelle",
+              "detail": "bis 29. November 2026",
+              "date": "2026-10-01T22:00:00.000Z"
+            },
+            {
+              "label": "A13 Sargans <-> St. Margrethen zwischen Anschluss Trübbach und Anschluss Haag Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen…",
+              "value": "Baustelle",
+              "detail": "bis 27. November 2026",
+              "date": "2026-10-04T17:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -695,37 +695,37 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Beginn der Wintersaison im Strassenverkehr",
+              "date": "2026-11-25",
+              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/beginn-der-wintersaison-im-strassenverkehr.html"
+            },
+            {
+              "label": "Musikalische Adventsreise in der Bahnhofshalle",
+              "date": "2026-11-23",
+              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/musikalische-adventsreise-in-der-bahnhofshalle.html"
+            },
+            {
+              "label": "Dienstag, 17.11.2026 Ersatzbau der Rheinbrücke Au–Lustenau wird vorbereitet",
+              "date": "2026-11-17",
+              "url": "https://presse.vorarlberg.at/land/public/Ersatzbau-der-Rheinbruecke-Au-Lustenau-wird-vorbereitet"
+            },
+            {
+              "label": "Ersatzbau der Rheinbrücke Au–Lustenau wird vorbereitet",
+              "date": "2026-11-17",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/ersatzbau-der-rheinbruecke-au-lustenau-wird-vorbereitet.html"
+            },
+            {
+              "label": "Regierung korrigiert die Motorfahrzeugsteuer",
+              "date": "2026-11-16",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/regierung-korrigiert-die-motorfahrzeugsteuer.html"
+            },
+            {
               "label": "Strassengesetz: Kommission beantragt Änderungen",
               "date": "2026-11-13",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/strassengesetz--kommission-beantragt-aenderungen-.html"
-            },
-            {
-              "label": "Goldach / St.Gallen: Zwei Unfälle sorgen für Rückstau auf A1",
-              "date": "2026-11-12",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/goldach---st-gallen--zwei-unfaelle-sorgen-fuer-rueckstau-auf-a1.html"
-            },
-            {
-              "label": "Velovorzugsroute entlang der Bahn – Start zur Mitwirkung",
-              "date": "2026-11-12",
-              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/velovorzugsroute-entlang-der-bahn---start-zur-mitwirkung.html"
-            },
-            {
-              "label": "Mittwoch, 11.11.2026 Stadttunnel Feldkirch: Durchschlag geschafft",
-              "date": "2026-11-11",
-              "url": "https://presse.vorarlberg.at/land/public/Stadttunnel-Feldkirch-Durchschlag-geschafft"
-            },
-            {
-              "label": "Fünf neue Kunstwerke für den Mühleggbahntunnel",
-              "date": "2026-11-09",
-              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/fuenf-neue-kunstwerke-fuer-den-muehleggbahntunnel.html"
-            },
-            {
-              "label": "Gossau: Brand in Gastrobetrieb",
-              "date": "2026-11-04",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/gossau--brand-in-gastrobetrieb.html"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -812,7 +812,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "SG",
@@ -823,77 +823,77 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Kriessern-Mäder, semaine jusqu’au 15 novembre 2026"
+          "note": "Au-Lustenau, semaine jusqu’au 24 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "5",
-          "note": "signalements au 16 novembre 2026"
+          "value": "3",
+          "note": "signalements au 25 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "14",
-          "note": "signalements au 16 novembre 2026"
+          "value": "10",
+          "note": "signalements au 25 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 9 novembre 2026 au 15 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 18 novembre 2026 au 24 novembre 2026, du plus fluide au plus lent.",
           "items": [
+            {
+              "label": "Au-Lustenau",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/au-lustenau/aujourd-hui/"
+            },
+            {
+              "label": "Buchs (SG)-Schaan",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/buchs-schaan/aujourd-hui/"
+            },
+            {
+              "label": "Diepoldsau-Hohenems",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/diepoldsau-hohenems/aujourd-hui/"
+            },
+            {
+              "label": "Haag-Bendern",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/haag-bendern/aujourd-hui/"
+            },
             {
               "label": "Kriessern-Mäder",
               "value": "0 min",
-              "detail": "49 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/kriessern-mader/aujourd-hui/"
             },
             {
               "label": "Montlingen-Koblach",
               "value": "0 min",
-              "detail": "49 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/montlingen-koblach/aujourd-hui/"
-            },
-            {
-              "label": "Rüthi-Meiningen",
-              "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/ruthi-meiningen/aujourd-hui/"
-            },
-            {
-              "label": "Salez-Ruggell",
-              "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/salez-ruggell/aujourd-hui/"
             },
             {
               "label": "Rheineck-Gaißau",
               "value": "0 min",
-              "detail": "49 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/rheineck-gai-au/aujourd-hui/"
             },
             {
-              "label": "Sevelen-Vaduz",
+              "label": "Rüthi-Meiningen",
               "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/sevelen-vaduz/aujourd-hui/"
-            },
-            {
-              "label": "Trübbach-Balzers",
-              "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/trubbach-balzers/aujourd-hui/"
-            },
-            {
-              "label": "Widnau-Lustenau (Wiesenrain)",
-              "value": "0 min",
-              "detail": "49 relevés",
-              "url": "/fr/temps-attente-douane/widnau-lustenau/aujourd-hui/"
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/ruthi-meiningen/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-15T23:59:59.000Z"
+          "updatedAt": "2026-11-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -913,22 +913,10 @@
               "date": "2026-01-15T14:55:00.000Z"
             },
             {
-              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gall-Kreuzbleiche <-> Rosenbergstrasse Jonction autoroutière St. Gall-Kreuzbleiche Situation: entrée fermée travaux",
+              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gall-Kreuzbleiche <-> Rosenbergstrasse Jonction autoroutière St. Gall-Kreuzbleiche Situation: Entrée et sortie verrouillées travaux, longueur [km] 1.0",
               "value": "Fermeture",
-              "detail": "jusqu’au 20 novembre 2026",
-              "date": "2026-07-01T18:00:00.000Z"
-            },
-            {
-              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gall-Kreuzbleiche -> Rosenbergstrasse entre Jonction autoroutière St. Gall-Kreuzbleiche et Jonction autoroutière Rosenbergstrasse Situation: sortie…",
-              "value": "Fermeture",
-              "detail": "jusqu’au 20 novembre 2026",
-              "date": "2026-07-08T11:32:00.000Z"
-            },
-            {
-              "label": "A3 Zurich -> Coire Jonction autoroutière Murg Situation: entrée fermée travaux, longueur [km] 1.3 Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.0",
-              "value": "Fermeture",
-              "detail": "jusqu’au 20 novembre 2026",
-              "date": "2026-11-06T14:29:00.000Z"
+              "detail": "jusqu’au 11 décembre 2026",
+              "date": "2026-11-22T19:00:00.000Z"
             },
             {
               "label": "A13 Sargans <-> St. Margrethen entre Jonction autoroutière Oberriet et Jonction autoroutière Haag Situation: trafic perturbé travaux, longueur [km] 2.0 Raison: véhicules de maintenance lents Gestion…",
@@ -947,10 +935,22 @@
               "value": "Chantier",
               "detail": "jusqu’au 18 décembre 2026",
               "date": "2026-06-29T18:00:00.000Z"
+            },
+            {
+              "label": "A13 Sargans <-> St. Margrethen Jonction autoroutière Buchs Situation: trafic perturbé travaux, longueur [km] 0.1 Gestion du trafic: nouveau plan de circulation Complément 1: limite temporaire du…",
+              "value": "Chantier",
+              "detail": "jusqu’au 29 novembre 2026",
+              "date": "2026-10-01T22:00:00.000Z"
+            },
+            {
+              "label": "A13 Sargans <-> St. Margrethen entre Jonction autoroutière Trübbach et Jonction autoroutière Haag Situation: trafic perturbé travaux, longueur [km] 2.0 Gestion du trafic: rétrécissement des voies…",
+              "value": "Chantier",
+              "detail": "jusqu’au 27 novembre 2026",
+              "date": "2026-10-04T17:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -958,37 +958,37 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Beginn der Wintersaison im Strassenverkehr",
+              "date": "2026-11-25",
+              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/beginn-der-wintersaison-im-strassenverkehr.html"
+            },
+            {
+              "label": "Musikalische Adventsreise in der Bahnhofshalle",
+              "date": "2026-11-23",
+              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/musikalische-adventsreise-in-der-bahnhofshalle.html"
+            },
+            {
+              "label": "Dienstag, 17.11.2026 Ersatzbau der Rheinbrücke Au–Lustenau wird vorbereitet",
+              "date": "2026-11-17",
+              "url": "https://presse.vorarlberg.at/land/public/Ersatzbau-der-Rheinbruecke-Au-Lustenau-wird-vorbereitet"
+            },
+            {
+              "label": "Ersatzbau der Rheinbrücke Au–Lustenau wird vorbereitet",
+              "date": "2026-11-17",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/ersatzbau-der-rheinbruecke-au-lustenau-wird-vorbereitet.html"
+            },
+            {
+              "label": "Regierung korrigiert die Motorfahrzeugsteuer",
+              "date": "2026-11-16",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/regierung-korrigiert-die-motorfahrzeugsteuer.html"
+            },
+            {
               "label": "Strassengesetz: Kommission beantragt Änderungen",
               "date": "2026-11-13",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/strassengesetz--kommission-beantragt-aenderungen-.html"
-            },
-            {
-              "label": "Goldach / St.Gallen: Zwei Unfälle sorgen für Rückstau auf A1",
-              "date": "2026-11-12",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/goldach---st-gallen--zwei-unfaelle-sorgen-fuer-rueckstau-auf-a1.html"
-            },
-            {
-              "label": "Velovorzugsroute entlang der Bahn – Start zur Mitwirkung",
-              "date": "2026-11-12",
-              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/velovorzugsroute-entlang-der-bahn---start-zur-mitwirkung.html"
-            },
-            {
-              "label": "Mittwoch, 11.11.2026 Stadttunnel Feldkirch: Durchschlag geschafft",
-              "date": "2026-11-11",
-              "url": "https://presse.vorarlberg.at/land/public/Stadttunnel-Feldkirch-Durchschlag-geschafft"
-            },
-            {
-              "label": "Fünf neue Kunstwerke für den Mühleggbahntunnel",
-              "date": "2026-11-09",
-              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/fuenf-neue-kunstwerke-fuer-den-muehleggbahntunnel.html"
-            },
-            {
-              "label": "Gossau: Brand in Gastrobetrieb",
-              "date": "2026-11-04",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/gossau--brand-in-gastrobetrieb.html"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -1076,7 +1076,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

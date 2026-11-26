@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "pensioni",
-  "updatedAt": "2026-11-04T05:38:48.337Z",
-  "contentHash": "4645465351637750f6f255909cb4971e83bf167bceefc85d38bfd65ae1669ed5",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "6871f534cf8710594754d1cf703fc8e2c7aadd466d31991770fc9d9babe837f8",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T13:02:31.533Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,16 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Allocations familiales : le Gouvernement s’engage pour un soutien renforcé aux familles",
+              "date": "2026-11-18",
+              "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Allocations-familiales-le-Gouvernement-s-engage-pour-un-soutien-renforce-aux-familles.html"
+            },
+            {
+              "label": "Premier versement de la 13ème rente AVS en décembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.ecasjura.ch/fr/Actualites/Premier-versement-de-la-13eme-rente-AVS-en-decembre-2026.html"
+            },
+            {
               "label": "Journée des proches aidants",
               "date": "2026-10-23",
               "url": "https://www.ecasjura.ch/fr/Actualites/Journee-des-proches-aidants-1.html"
@@ -151,7 +161,7 @@
               "url": "https://www.ecasjura.ch/fr/Actualites/La-rente-minimale-AVS-AI-augmentera-de-20-francs.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -187,7 +197,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "JU",
@@ -296,6 +306,16 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Allocations familiales : le Gouvernement s’engage pour un soutien renforcé aux familles",
+              "date": "2026-11-18",
+              "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Allocations-familiales-le-Gouvernement-s-engage-pour-un-soutien-renforce-aux-familles.html"
+            },
+            {
+              "label": "Premier versement de la 13ème rente AVS en décembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.ecasjura.ch/fr/Actualites/Premier-versement-de-la-13eme-rente-AVS-en-decembre-2026.html"
+            },
+            {
               "label": "Journée des proches aidants",
               "date": "2026-10-23",
               "url": "https://www.ecasjura.ch/fr/Actualites/Journee-des-proches-aidants-1.html"
@@ -311,7 +331,7 @@
               "url": "https://www.ecasjura.ch/fr/Actualites/La-rente-minimale-AVS-AI-augmentera-de-20-francs.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -347,7 +367,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "JU",
@@ -456,6 +476,16 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Allocations familiales : le Gouvernement s’engage pour un soutien renforcé aux familles",
+              "date": "2026-11-18",
+              "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Allocations-familiales-le-Gouvernement-s-engage-pour-un-soutien-renforce-aux-familles.html"
+            },
+            {
+              "label": "Premier versement de la 13ème rente AVS en décembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.ecasjura.ch/fr/Actualites/Premier-versement-de-la-13eme-rente-AVS-en-decembre-2026.html"
+            },
+            {
               "label": "Journée des proches aidants",
               "date": "2026-10-23",
               "url": "https://www.ecasjura.ch/fr/Actualites/Journee-des-proches-aidants-1.html"
@@ -471,7 +501,7 @@
               "url": "https://www.ecasjura.ch/fr/Actualites/La-rente-minimale-AVS-AI-augmentera-de-20-francs.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -507,7 +537,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "JU",
@@ -616,6 +646,16 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Allocations familiales : le Gouvernement s’engage pour un soutien renforcé aux familles",
+              "date": "2026-11-18",
+              "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Allocations-familiales-le-Gouvernement-s-engage-pour-un-soutien-renforce-aux-familles.html"
+            },
+            {
+              "label": "Premier versement de la 13ème rente AVS en décembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.ecasjura.ch/fr/Actualites/Premier-versement-de-la-13eme-rente-AVS-en-decembre-2026.html"
+            },
+            {
               "label": "Journée des proches aidants",
               "date": "2026-10-23",
               "url": "https://www.ecasjura.ch/fr/Actualites/Journee-des-proches-aidants-1.html"
@@ -631,7 +671,7 @@
               "url": "https://www.ecasjura.ch/fr/Actualites/La-rente-minimale-AVS-AI-augmentera-de-20-francs.html"
             }
           ],
-          "updatedAt": "2026-11-03T13:02:31.533Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -667,7 +707,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-04T05:38:48.337Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

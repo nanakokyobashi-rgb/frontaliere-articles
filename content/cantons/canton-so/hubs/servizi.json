@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "885729f9565bfa006044829250fdbe384246c72a0e7364c5da875259d719d29a",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "bbb5d2f748f2aa044776063c0b6691c21bbe86b1867db3e6e6bf95214525f1a7",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,22 +14,22 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-16T06:48:19.706Z",
+      "updatedAt": "2026-11-25T21:12:13.113Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-16T06:25:42.818Z",
+      "updatedAt": "2026-11-25T21:43:23.986Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-16T06:51:00.113Z",
+      "updatedAt": "2026-11-26T00:36:15.946Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -49,7 +49,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "6",
-          "note": "offerta mediana 880 CHF"
+          "note": "offerta mediana 700 CHF"
         }
       ],
       "dataBlocks": [
@@ -76,22 +76,22 @@
             {
               "label": "Saner Apotheke Dornach",
               "detail": "Dornach, Dorneck-Thierstein",
-              "date": "2026-11-22T08:00:00.000Z"
+              "date": "2026-11-29T08:00:00.000Z"
             },
             {
-              "label": "Apotheke - Drogerie Kurz",
-              "detail": "Trimbach, Olten",
-              "date": "2026-11-22T09:00:00.000Z"
-            },
-            {
-              "label": "Medbase Apotheke - Grenchen",
+              "label": "Apotheke Coop-Vitality - Grenchen",
               "detail": "Grenchen, Solothurn",
-              "date": "2026-11-22T09:00:00.000Z"
+              "date": "2026-11-29T09:00:00.000Z"
+            },
+            {
+              "label": "Apotheke zum Kreuz",
+              "detail": "Olten, Olten",
+              "date": "2026-11-29T09:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-11-16T06:48:19.706Z"
+          "updatedAt": "2026-11-25T21:12:13.113Z"
         },
         {
           "id": "aste-targhe",
@@ -99,30 +99,30 @@
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
-              "label": "SO2152",
-              "value": "1500 CHF",
+              "label": "SO3660",
+              "value": "1200 CHF",
               "detail": "offerta attuale",
-              "date": "2026-11-18T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3405&locale=de_CH"
+              "date": "2026-12-02T16:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3418&locale=de_CH"
             },
             {
-              "label": "SO4314",
-              "value": "1500 CHF",
+              "label": "SO5611",
+              "value": "1200 CHF",
               "detail": "offerta attuale",
-              "date": "2026-11-18T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3403&locale=de_CH"
+              "date": "2026-12-02T16:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3419&locale=de_CH"
             },
             {
-              "label": "SO5095",
-              "value": "1500 CHF",
+              "label": "SO9772",
+              "value": "1200 CHF",
               "detail": "offerta attuale",
-              "date": "2026-11-18T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3404&locale=de_CH"
+              "date": "2026-12-02T16:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3420&locale=de_CH"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-16T06:25:42.818Z"
+          "updatedAt": "2026-11-25T21:43:23.986Z"
         },
         {
           "id": "meteo",
@@ -131,12 +131,12 @@
           "items": [
             {
               "label": "Solothurn",
-              "value": "7 °C",
-              "detail": "oggi da 7 a 10 °C"
+              "value": "3 °C",
+              "detail": "oggi da 0 a 3 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -174,7 +174,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -254,7 +254,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "SO",
@@ -271,7 +271,7 @@
         {
           "label": "Plate auctions running",
           "value": "6",
-          "note": "typical bid 880 CHF"
+          "note": "typical bid 700 CHF"
         }
       ],
       "dataBlocks": [
@@ -298,22 +298,22 @@
             {
               "label": "Saner Apotheke Dornach",
               "detail": "Dornach, Dorneck-Thierstein",
-              "date": "2026-11-22T08:00:00.000Z"
+              "date": "2026-11-29T08:00:00.000Z"
             },
             {
-              "label": "Apotheke - Drogerie Kurz",
-              "detail": "Trimbach, Olten",
-              "date": "2026-11-22T09:00:00.000Z"
-            },
-            {
-              "label": "Medbase Apotheke - Grenchen",
+              "label": "Apotheke Coop-Vitality - Grenchen",
               "detail": "Grenchen, Solothurn",
-              "date": "2026-11-22T09:00:00.000Z"
+              "date": "2026-11-29T09:00:00.000Z"
+            },
+            {
+              "label": "Apotheke zum Kreuz",
+              "detail": "Olten, Olten",
+              "date": "2026-11-29T09:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-11-16T06:48:19.706Z"
+          "updatedAt": "2026-11-25T21:12:13.113Z"
         },
         {
           "id": "aste-targhe",
@@ -321,30 +321,30 @@
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
-              "label": "SO2152",
-              "value": "1,500 CHF",
+              "label": "SO3660",
+              "value": "1,200 CHF",
               "detail": "current bid",
-              "date": "2026-11-18T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3405&locale=de_CH"
+              "date": "2026-12-02T16:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3418&locale=de_CH"
             },
             {
-              "label": "SO4314",
-              "value": "1,500 CHF",
+              "label": "SO5611",
+              "value": "1,200 CHF",
               "detail": "current bid",
-              "date": "2026-11-18T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3403&locale=de_CH"
+              "date": "2026-12-02T16:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3419&locale=de_CH"
             },
             {
-              "label": "SO5095",
-              "value": "1,500 CHF",
+              "label": "SO9772",
+              "value": "1,200 CHF",
               "detail": "current bid",
-              "date": "2026-11-18T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3404&locale=de_CH"
+              "date": "2026-12-02T16:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3420&locale=de_CH"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-16T06:25:42.818Z"
+          "updatedAt": "2026-11-25T21:43:23.986Z"
         },
         {
           "id": "meteo",
@@ -353,12 +353,12 @@
           "items": [
             {
               "label": "Solothurn",
-              "value": "7 °C",
-              "detail": "today from 7 to 10 °C"
+              "value": "3 °C",
+              "detail": "today from 0 to 3 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -396,7 +396,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -472,7 +472,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "SO",
@@ -489,7 +489,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "6",
-          "note": "mittleres Gebot 880 CHF"
+          "note": "mittleres Gebot 700 CHF"
         }
       ],
       "dataBlocks": [
@@ -516,22 +516,22 @@
             {
               "label": "Saner Apotheke Dornach",
               "detail": "Dornach, Dorneck-Thierstein",
-              "date": "2026-11-22T08:00:00.000Z"
+              "date": "2026-11-29T08:00:00.000Z"
             },
             {
-              "label": "Apotheke - Drogerie Kurz",
-              "detail": "Trimbach, Olten",
-              "date": "2026-11-22T09:00:00.000Z"
-            },
-            {
-              "label": "Medbase Apotheke - Grenchen",
+              "label": "Apotheke Coop-Vitality - Grenchen",
               "detail": "Grenchen, Solothurn",
-              "date": "2026-11-22T09:00:00.000Z"
+              "date": "2026-11-29T09:00:00.000Z"
+            },
+            {
+              "label": "Apotheke zum Kreuz",
+              "detail": "Olten, Olten",
+              "date": "2026-11-29T09:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-11-16T06:48:19.706Z"
+          "updatedAt": "2026-11-25T21:12:13.113Z"
         },
         {
           "id": "aste-targhe",
@@ -539,30 +539,30 @@
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
-              "label": "SO2152",
-              "value": "1’500 CHF",
+              "label": "SO3660",
+              "value": "1’200 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-11-18T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3405&locale=de_CH"
+              "date": "2026-12-02T16:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3418&locale=de_CH"
             },
             {
-              "label": "SO4314",
-              "value": "1’500 CHF",
+              "label": "SO5611",
+              "value": "1’200 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-11-18T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3403&locale=de_CH"
+              "date": "2026-12-02T16:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3419&locale=de_CH"
             },
             {
-              "label": "SO5095",
-              "value": "1’500 CHF",
+              "label": "SO9772",
+              "value": "1’200 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-11-18T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3404&locale=de_CH"
+              "date": "2026-12-02T16:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3420&locale=de_CH"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-16T06:25:42.818Z"
+          "updatedAt": "2026-11-25T21:43:23.986Z"
         },
         {
           "id": "meteo",
@@ -571,12 +571,12 @@
           "items": [
             {
               "label": "Solothurn",
-              "value": "7 °C",
-              "detail": "heute 7 bis 10 °C"
+              "value": "3 °C",
+              "detail": "heute 0 bis 3 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -614,7 +614,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -690,7 +690,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "SO",
@@ -707,7 +707,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "6",
-          "note": "offre centrale 880 CHF"
+          "note": "offre centrale 700 CHF"
         }
       ],
       "dataBlocks": [
@@ -734,22 +734,22 @@
             {
               "label": "Saner Apotheke Dornach",
               "detail": "Dornach, Dorneck-Thierstein",
-              "date": "2026-11-22T08:00:00.000Z"
+              "date": "2026-11-29T08:00:00.000Z"
             },
             {
-              "label": "Apotheke - Drogerie Kurz",
-              "detail": "Trimbach, Olten",
-              "date": "2026-11-22T09:00:00.000Z"
-            },
-            {
-              "label": "Medbase Apotheke - Grenchen",
+              "label": "Apotheke Coop-Vitality - Grenchen",
               "detail": "Grenchen, Solothurn",
-              "date": "2026-11-22T09:00:00.000Z"
+              "date": "2026-11-29T09:00:00.000Z"
+            },
+            {
+              "label": "Apotheke zum Kreuz",
+              "detail": "Olten, Olten",
+              "date": "2026-11-29T09:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-11-16T06:48:19.706Z"
+          "updatedAt": "2026-11-25T21:12:13.113Z"
         },
         {
           "id": "aste-targhe",
@@ -757,30 +757,30 @@
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
-              "label": "SO2152",
-              "value": "1 500 CHF",
+              "label": "SO3660",
+              "value": "1 200 CHF",
               "detail": "offre actuelle",
-              "date": "2026-11-18T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3405&locale=de_CH"
+              "date": "2026-12-02T16:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3418&locale=de_CH"
             },
             {
-              "label": "SO4314",
-              "value": "1 500 CHF",
+              "label": "SO5611",
+              "value": "1 200 CHF",
               "detail": "offre actuelle",
-              "date": "2026-11-18T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3403&locale=de_CH"
+              "date": "2026-12-02T16:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3419&locale=de_CH"
             },
             {
-              "label": "SO5095",
-              "value": "1 500 CHF",
+              "label": "SO9772",
+              "value": "1 200 CHF",
               "detail": "offre actuelle",
-              "date": "2026-11-18T16:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3404&locale=de_CH"
+              "date": "2026-12-02T16:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3420&locale=de_CH"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-16T06:25:42.818Z"
+          "updatedAt": "2026-11-25T21:43:23.986Z"
         },
         {
           "id": "meteo",
@@ -789,12 +789,12 @@
           "items": [
             {
               "label": "Solothurn",
-              "value": "7 °C",
-              "detail": "aujourd’hui de 7 à 10 °C"
+              "value": "3 °C",
+              "detail": "aujourd’hui de 0 à 3 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -832,7 +832,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -904,7 +904,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

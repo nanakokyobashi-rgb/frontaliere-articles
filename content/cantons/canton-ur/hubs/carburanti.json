@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "carburanti",
-  "updatedAt": "2026-11-11T23:34:02.011Z",
-  "contentHash": "45b9e76e836d8c983966349be003b23ecd95358de86edf06f9a079a65b1e6881",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "e8585a61976ea7ec2e9924a3f9d2dc0abee5fcaaa6c7aba2f83acb10c195ecc7",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-10T15:13:39.066Z",
+      "updatedAt": "2026-11-25T17:35:23.405Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,11 +54,29 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-10T15:13:39.066Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Radweg Altdorf-Seedorf: Nessun servizio invernale su Byfangweg",
+          "url": "/articoli-uri/radweg-altdorf-seedorf-lavori/",
+          "excerpt": "La Baudirektion Uri ha comunicato regole speciali per il percorso ciclabile e pedonale tra Altdorf e Seedorf, ancora interessato da lavori.",
+          "date": "2026-11-21T11:01:17.886Z"
+        },
+        {
+          "title": "Uri presenta un parere sui trasporti eccezionali",
+          "url": "/articoli-uri/uri-parere-trasporti-eccezionali/",
+          "excerpt": "Il Canton Uri ha inviato all'UVEK un parere su due ordinanze e sull'accompagnamento privato dei trasporti eccezionali nell'ambito della consultazione.",
+          "date": "2026-11-21T04:34:25.602Z"
+        },
+        {
+          "title": "Blocco di roccia danneggia strada nel Meiental",
+          "url": "/articoli-uri/blocco-roccia-meiental/",
+          "excerpt": "Un blocco di roccia ha danneggiato strada cantonale e linea elettrica nel Meiental.",
+          "date": "2026-11-20T16:58:49.042Z"
+        },
         {
           "title": "Uri: Jürg Janett nuovo capo di protezione e militare",
           "url": "/articoli-uri/janett-protezione-uri/",
@@ -70,24 +88,6 @@
           "url": "/articoli-uri/presidenza-spiringen-schuler/",
           "excerpt": "Peter Schuler, vicepresidente in carica, subentrerà a René Müller il 1° gennaio; il mandato indicato è 2026/27.",
           "date": "2026-11-08T05:26:38.176Z"
-        },
-        {
-          "title": "René Schuler assumerà la presidenza di Unterschächen",
-          "url": "/articoli-uri/rene-schuler-unterschachen/",
-          "excerpt": "René Schuler assumerà a inizio 2027 la presidenza di Unterschächen e succederà ad André Bissig, che lascerà il Gemeinderat a fine anno.",
-          "date": "2026-11-08T04:28:05.393Z"
-        },
-        {
-          "title": "Uri: riconoscimento ai familiari assistenti",
-          "url": "/articoli-uri/riconoscimento-familiari-assistenti-uri/",
-          "excerpt": "Il 30 ottobre Uri ha ringraziato i familiari assistenti. Christian Arnold ha consegnato un omaggio ad Annemarie Arnold.",
-          "date": "2026-11-06T11:28:43.895Z"
-        },
-        {
-          "title": "Uri avvia progetto su cultura e integrazione",
-          "url": "/articoli-uri/uri-progetto-cultura-integrazione/",
-          "excerpt": "Il progetto «Netzwerk Kultur und Integration» durerà tre anni, con avvio previsto il 1° dicembre 2026, per facilitare l'accesso delle persone migranti alle offerte culturali urane.",
-          "date": "2026-11-06T08:38:58.092Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-11T23:34:02.011Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "UR",
@@ -141,11 +141,29 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-10T15:13:39.066Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Altdorf-Seedorf cycle path: No winter service on Byfangweg",
+          "url": "/en/uri-articles/altdorf-seedorf-path-works/",
+          "excerpt": "Baudirektion Uri has announced special rules for the cycle and pedestrian path between Altdorf and Seedorf, which is still affected by construction work.",
+          "date": "2026-11-21T11:01:17.886Z"
+        },
+        {
+          "title": "Uri presents an opinion on exceptional transports",
+          "url": "/en/uri-articles/uri-transport-rules-consultation/",
+          "excerpt": "Canton Uri has sent the UVEK an opinion on two ordinances and on the private escorting of exceptional transports as part of the consultation.",
+          "date": "2026-11-21T04:34:25.602Z"
+        },
+        {
+          "title": "Rockfall damages road in Meiental",
+          "url": "/en/uri-articles/rockfall-road-meiental/",
+          "excerpt": "A rockfall damaged the cantonal road and power line in Meiental.",
+          "date": "2026-11-20T16:58:49.042Z"
+        },
         {
           "title": "Uri: Jürg Janett new head of civil protection and military affairs",
           "url": "/en/uri-articles/janett-population-protection-uri/",
@@ -157,24 +175,6 @@
           "url": "/en/uri-articles/spiringen-municipal-president-schuler/",
           "excerpt": "Peter Schuler, the incumbent vice president, will succeed René Müller on January 1; the term indicated is 2026/27.",
           "date": "2026-11-08T05:26:38.176Z"
-        },
-        {
-          "title": "René Schuler will assume the presidency of Unterschächen",
-          "url": "/en/uri-articles/rene-schuler-will-assume-the-presidency-of-unterschachen/",
-          "excerpt": "René Schuler will assume the presidency of Unterschächen at the beginning of 2027 and succeed André Bissig, who will leave the municipal council at the end of the year.",
-          "date": "2026-11-08T04:28:05.393Z"
-        },
-        {
-          "title": "Uri: recognition for family caregivers",
-          "url": "/en/uri-articles/recognition-family-caregivers-uri/",
-          "excerpt": "On October 30, Uri thanked family caregivers. Christian Arnold presented a gift to Annemarie Arnold.",
-          "date": "2026-11-06T11:28:43.895Z"
-        },
-        {
-          "title": "Uri launches project on culture and integration",
-          "url": "/en/uri-articles/uri-culture-integration-project/",
-          "excerpt": "The “Netzwerk Kultur und Integration” project will last three years, with a planned start date of December 1, 2026, to facilitate migrants’ access to urban cultural offerings.",
-          "date": "2026-11-06T08:38:58.092Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-11T23:34:02.011Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "UR",
@@ -228,11 +228,29 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-10T15:13:39.066Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Radweg Altdorf-Seedorf: Kein Winterdienst auf dem Byfangweg",
+          "url": "/de/uri-artikel/radweg-altdorf-seedorf-arbeiten/",
+          "excerpt": "Die Baudirektion Uri hat besondere Regeln für den Rad- und Fussweg zwischen Altdorf und Seedorf bekannt gegeben, an dem weiterhin gearbeitet wird.",
+          "date": "2026-11-21T11:01:17.886Z"
+        },
+        {
+          "title": "Uri legt eine Stellungnahme zu Ausnahmetransporten vor",
+          "url": "/de/uri-artikel/uri-verkehrsregeln-vernehmlassung/",
+          "excerpt": "Der Kanton Uri hat dem UVEK im Rahmen der Vernehmlassung eine Stellungnahme zu zwei Verordnungen und zur privaten Begleitung von Ausnahmetransporten übermittelt.",
+          "date": "2026-11-21T04:34:25.602Z"
+        },
+        {
+          "title": "Felsblock beschädigt Straße im Meiental",
+          "url": "/de/uri-artikel/felsblock-strasse-meiental/",
+          "excerpt": "Ein Felsblock hat die Kantonsstraße und die Stromleitung im Meiental beschädigt.",
+          "date": "2026-11-20T16:58:49.042Z"
+        },
         {
           "title": "Uri: Jürg Janett neuer Chef für Schutz und Militär",
           "url": "/de/uri-artikel/janett-bevoelkerungsschutz-uri/",
@@ -244,24 +262,6 @@
           "url": "/de/uri-artikel/spiringen-gemeindepraesident-schuler/",
           "excerpt": "Peter Schuler, der amtierende Vizepräsident, wird am 1. Januar die Nachfolge von René Müller antreten; die angegebene Amtsdauer lautet 2026/27.",
           "date": "2026-11-08T05:26:38.176Z"
-        },
-        {
-          "title": "René Schuler wird das Gemeindepräsidium von Unterschächen übernehmen",
-          "url": "/de/uri-artikel/rene-schuler-wird-das-gemeindeprasidium-von-unterschachen-ubernehmen/",
-          "excerpt": "René Schuler wird Anfang 2027 das Gemeindepräsidium von Unterschächen übernehmen und André Bissig nachfolgen, der den Gemeinderat Ende des Jahres verlassen wird.",
-          "date": "2026-11-08T04:28:05.393Z"
-        },
-        {
-          "title": "Uri: Anerkennung für pflegende Angehörige",
-          "url": "/de/uri-artikel/anerkennung-pflegende-angehoerige-uri/",
-          "excerpt": "Am 30. Oktober dankte Uri den pflegenden Angehörigen. Christian Arnold überreichte Annemarie Arnold ein Präsent.",
-          "date": "2026-11-06T11:28:43.895Z"
-        },
-        {
-          "title": "Uri startet Projekt zu Kultur und Integration",
-          "url": "/de/uri-artikel/uri-kultur-integrationsprojekt/",
-          "excerpt": "Das Projekt \"Netzwerk Kultur und Integration\" wird drei Jahre dauern, beginnend am 1. Dezember 2026, um Migranten den Zugang zu den kulturellen Angeboten von Uri zu erleichtern.",
-          "date": "2026-11-06T08:38:58.092Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-11T23:34:02.011Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "UR",
@@ -315,11 +315,29 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-10T15:13:39.066Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Piste cyclable Altdorf-Seedorf : Aucun service hivernal sur Byfangweg",
+          "url": "/fr/articles-uri/chemin-altdorf-seedorf-travaux/",
+          "excerpt": "La Baudirektion Uri a communiqué des règles spéciales pour la liaison cyclable et piétonne entre Altdorf et Seedorf, qui fait encore l'objet de travaux.",
+          "date": "2026-11-21T11:01:17.886Z"
+        },
+        {
+          "title": "Uri présente un avis sur les transports exceptionnels",
+          "url": "/fr/articles-uri/uri-regles-transport-consultation/",
+          "excerpt": "Le canton d'Uri a envoyé à l'UVEK un avis sur deux ordonnances et sur l'accompagnement privé des transports exceptionnels dans le cadre de la consultation.",
+          "date": "2026-11-21T04:34:25.602Z"
+        },
+        {
+          "title": "Un bloc rocheux endommage une route dans le Meiental",
+          "url": "/fr/articles-uri/bloc-roche-route-meiental/",
+          "excerpt": "Un bloc rocheux a endommagé une route cantonale et une ligne électrique dans le Meiental.",
+          "date": "2026-11-20T16:58:49.042Z"
+        },
         {
           "title": "Uri : Jürg Janett, nouveau chef de la protection et des affaires militaires",
           "url": "/fr/articles-uri/janett-protection-population-uri/",
@@ -331,24 +349,6 @@
           "url": "/fr/articles-uri/spiringen-president-communal-schuler/",
           "excerpt": "Peter Schuler, vice-président en exercice, succédera à René Müller le 1er janvier ; le mandat indiqué est 2026/27.",
           "date": "2026-11-08T05:26:38.176Z"
-        },
-        {
-          "title": "René Schuler assumera la présidence d’Unterschächen",
-          "url": "/fr/articles-uri/rene-schuler-assumera-la-presidence-d-unterschachen/",
-          "excerpt": "René Schuler assumera début 2027 la présidence d’Unterschächen et succédera à André Bissig, qui quittera le Gemeinderat à la fin de l’année.",
-          "date": "2026-11-08T04:28:05.393Z"
-        },
-        {
-          "title": "Uri : reconnaissance envers les proches aidants",
-          "url": "/fr/articles-uri/reconnaissance-proches-aidants-uri/",
-          "excerpt": "Le 30 octobre, Uri a remercié les proches aidants. Christian Arnold a remis un cadeau à Annemarie Arnold.",
-          "date": "2026-11-06T11:28:43.895Z"
-        },
-        {
-          "title": "Uri lance un projet sur la culture et l’intégration",
-          "url": "/fr/articles-uri/uri-projet-culture-integration/",
-          "excerpt": "Le projet «Netzwerk Kultur und Integration» durera trois ans, avec un démarrage prévu le 1er décembre 2026, afin de faciliter l’accès des personnes migrantes aux offres culturelles urbaines.",
-          "date": "2026-11-06T08:38:58.092Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-11T23:34:02.011Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

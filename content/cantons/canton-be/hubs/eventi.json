@@ -4,13 +4,18 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "16407416e284bddae7bd73b50a654c4838dcfc4a47799740e01f65b56f098002",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "a3f98fec11f4aae817dec402be9025686606aeee3e712c90d03a074d60046eb9",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T21:47:09.888Z",
+      "updatedAt": "2026-11-26T00:32:00.223Z",
       "keyFacts": 1
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
+      "keyFacts": 0
     }
   ],
   "locales": {
@@ -22,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "169",
+          "value": "179",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +38,82 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Soirée d'Échecs / Schachabend",
-              "detail": "Multimondo, Biel/Bienne",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/soiree-dechecs-schachabend-2/"
+              "label": "Philosophie des sciences",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-des-sciences/"
             },
             {
-              "label": "Fatoumata Diawara",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/rubigen/fatoumata-diawara_ADGYb7A"
+              "label": "STRICK MIT SCHICK",
+              "detail": "Beatenberg",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/beatenberg/schick-mit-strick_AkfneuF"
             },
             {
-              "label": "Jon Cleary",
-              "detail": "Bierhübeli",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/jon-cleary_A1B64wC"
+              "label": "Öffentliche Themenführung «Adventsbummel Thun» (de)",
+              "detail": "Thun",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-themenfuehrung-adventsbummel-thun-de/"
             },
             {
-              "label": "Adventskranz Work-Shop/ Kurs inkl. Prosecco und Tea Time",
-              "detail": "Bern — in corso, ultimo giorno: 29 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-workshop-kurs-inkl-prosecco-und-tea-time/"
+              "label": "Caroline Bachmann",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/caroline-bachmann-1/"
             },
             {
-              "label": "Sound and Dine",
-              "detail": "3775 Lenk im Simmental, Lenk — in corso, ultimo giorno: 2 dicembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/sound-and-dine/"
+              "label": "NMBE Leseratten lesen «Das Geschenk» von Gaea Schoeters",
+              "detail": "Naturhistorisches Museum Bern, Bern",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nmbe-leseratten-lesen-das-geschenk-von-gaea-schoeters/"
             },
             {
-              "label": "Jugendtreff Modi*hus Bienzguet",
-              "detail": "Modi*hus Bienzguet — in corso, ultimo giorno: 4 dicembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-modihus-bienzguet_A1S6STm"
+              "label": "Christmas Sessions 2026 – CHICAGO Experience feat. Danny Seraphine & T. Rex",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/christmas-sessions-2026-chicago-experience-feat-danny-seraphine-t-rex/"
             },
             {
-              "label": "Jugendtreff G23",
-              "detail": "Jugendhaus G23 — in corso, ultimo giorno: 4 dicembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-g23_AjHXNJ3"
+              "label": "Landhaus Live - DADA ANTE PORTAS",
+              "detail": "Restaurant Landhaus Liebefeld",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/liebefeld/landhaus-live-dada-ante-portas_AxPc3Bq"
             },
             {
-              "label": "Zischtig Karaoke in der Gemmi Taverne",
-              "detail": "Kandersteg — in corso, ultimo giorno: 24 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
+              "label": "Make it naked",
+              "detail": "Heitere Fahne - die Idealistenkiste",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wabern/make-it-naked_AKNQ7kk"
             },
             {
-              "label": "Saaner Abesitza 2026",
-              "detail": "Saanen — in corso, ultimo giorno: 18 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/saaner-abesitza/"
+              "label": "Huttwiler Wiehnachtsmärit",
+              "detail": "Huttwil — in corso, ultimo giorno: 29 novembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/huttwiler-wiehnachtsmaerit/"
             },
             {
-              "label": "moving moments",
-              "detail": "Sporthalle Ebnit, Saanen — in corso, ultimo giorno: 29 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
+              "label": "Candle Making",
+              "detail": "Schul- und Dorfbibliothek Oey, Diemtigen — in corso, ultimo giorno: 28 novembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/candle-making-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Über 26 Tonnen Zwiebeln und 360 Marktstände am Zibelemärit",
+              "date": "2026-11-23T09:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/ueber-26-tonnen-zwiebeln-und-360-marktstaende-am-zibelemaerit"
+            }
+          ],
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +153,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +163,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "169",
+          "value": "179",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,69 +174,82 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Soirée d'Échecs / Schachabend",
-              "detail": "Multimondo, Biel/Bienne",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/soiree-dechecs-schachabend-2/"
+              "label": "Philosophie des sciences",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-des-sciences/"
             },
             {
-              "label": "Fatoumata Diawara",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/rubigen/fatoumata-diawara_ADGYb7A"
+              "label": "STRICK MIT SCHICK",
+              "detail": "Beatenberg",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/beatenberg/schick-mit-strick_AkfneuF"
             },
             {
-              "label": "Jon Cleary",
-              "detail": "Bierhübeli",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/jon-cleary_A1B64wC"
+              "label": "Öffentliche Themenführung «Adventsbummel Thun» (de)",
+              "detail": "Thun",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-themenfuehrung-adventsbummel-thun-de/"
             },
             {
-              "label": "Adventskranz Work-Shop/ Kurs inkl. Prosecco und Tea Time",
-              "detail": "Bern — ongoing, last day: 29 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-workshop-kurs-inkl-prosecco-und-tea-time/"
+              "label": "Caroline Bachmann",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/caroline-bachmann-1/"
             },
             {
-              "label": "Sound and Dine",
-              "detail": "3775 Lenk im Simmental, Lenk — ongoing, last day: 2 December 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/sound-and-dine/"
+              "label": "NMBE Leseratten lesen «Das Geschenk» von Gaea Schoeters",
+              "detail": "Naturhistorisches Museum Bern, Bern",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nmbe-leseratten-lesen-das-geschenk-von-gaea-schoeters/"
             },
             {
-              "label": "Jugendtreff Modi*hus Bienzguet",
-              "detail": "Modi*hus Bienzguet — ongoing, last day: 4 December 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-modihus-bienzguet_A1S6STm"
+              "label": "Christmas Sessions 2026 CHICAGO Experience feat. Danny Seraphine & T. Rex",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/christmas-sessions-2026-chicago-experience-feat-danny-seraphine-t-rex/"
             },
             {
-              "label": "Jugendtreff G23",
-              "detail": "Jugendhaus G23 — ongoing, last day: 4 December 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-g23_AjHXNJ3"
+              "label": "Landhaus Live - DADA ANTE PORTAS",
+              "detail": "Restaurant Landhaus Liebefeld",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/liebefeld/landhaus-live-dada-ante-portas_AxPc3Bq"
             },
             {
-              "label": "Zischtig Karaoke in der Gemmi Taverne",
-              "detail": "Kandersteg — ongoing, last day: 24 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
+              "label": "Make it naked",
+              "detail": "Heitere Fahne - die Idealistenkiste",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wabern/make-it-naked_AKNQ7kk"
             },
             {
-              "label": "Saaner Abesitza 2026",
-              "detail": "Saanen — ongoing, last day: 18 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/saaner-abesitza/"
+              "label": "Huttwiler Wiehnachtsmärit",
+              "detail": "Huttwil — ongoing, last day: 29 November 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/huttwiler-wiehnachtsmaerit/"
             },
             {
-              "label": "moving moments",
-              "detail": "Sporthalle Ebnit, Saanen — ongoing, last day: 29 November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
+              "label": "Candle Making",
+              "detail": "Schul- und Dorfbibliothek Oey, Diemtigen — ongoing, last day: 28 November 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/candle-making-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Über 26 Tonnen Zwiebeln und 360 Marktstände am Zibelemärit",
+              "date": "2026-11-23T09:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/ueber-26-tonnen-zwiebeln-und-360-marktstaende-am-zibelemaerit"
+            }
+          ],
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +289,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +299,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "169",
+          "value": "179",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,69 +310,82 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Soirée d'Échecs / Schachabend",
-              "detail": "Multimondo, Biel/Bienne",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/soiree-dechecs-schachabend-2/"
+              "label": "Philosophie des sciences",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-des-sciences/"
             },
             {
-              "label": "Fatoumata Diawara",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/rubigen/fatoumata-diawara_ADGYb7A"
+              "label": "STRICK MIT SCHICK",
+              "detail": "Beatenberg",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/beatenberg/schick-mit-strick_AkfneuF"
             },
             {
-              "label": "Jon Cleary",
-              "detail": "Bierhübeli",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/jon-cleary_A1B64wC"
+              "label": "Öffentliche Themenführung «Adventsbummel Thun» (de)",
+              "detail": "Thun",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-themenfuehrung-adventsbummel-thun-de/"
             },
             {
-              "label": "Adventskranz Work-Shop/ Kurs inkl. Prosecco und Tea Time",
-              "detail": "Bern — läuft, letzter Tag: 29. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-workshop-kurs-inkl-prosecco-und-tea-time/"
+              "label": "Caroline Bachmann",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/caroline-bachmann-1/"
             },
             {
-              "label": "Sound and Dine",
-              "detail": "3775 Lenk im Simmental, Lenk — läuft, letzter Tag: 2. Dezember 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/sound-and-dine/"
+              "label": "NMBE Leseratten lesen «Das Geschenk» von Gaea Schoeters",
+              "detail": "Naturhistorisches Museum Bern, Bern",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nmbe-leseratten-lesen-das-geschenk-von-gaea-schoeters/"
             },
             {
-              "label": "Jugendtreff Modi*hus Bienzguet",
-              "detail": "Modi*hus Bienzguet — läuft, letzter Tag: 4. Dezember 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-modihus-bienzguet_A1S6STm"
+              "label": "Christmas Sessions 2026 – CHICAGO Experience mit Danny Seraphine & T. Rex",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/christmas-sessions-2026-chicago-experience-feat-danny-seraphine-t-rex/"
             },
             {
-              "label": "Jugendtreff G23",
-              "detail": "Jugendhaus G23 — läuft, letzter Tag: 4. Dezember 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-g23_AjHXNJ3"
+              "label": "Landhaus Live - DADA ANTE PORTAS",
+              "detail": "Restaurant Landhaus Liebefeld",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/liebefeld/landhaus-live-dada-ante-portas_AxPc3Bq"
             },
             {
-              "label": "Zischtig Karaoke in der Gemmi Taverne",
-              "detail": "Kandersteg — läuft, letzter Tag: 24. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
+              "label": "Make it naked",
+              "detail": "Heitere Fahne - die Idealistenkiste",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wabern/make-it-naked_AKNQ7kk"
             },
             {
-              "label": "Saaner Abesitza 2026",
-              "detail": "Saanen — läuft, letzter Tag: 18. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/saaner-abesitza/"
+              "label": "Huttwiler Wiehnachtsmärit",
+              "detail": "Huttwil — läuft, letzter Tag: 29. November 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/huttwiler-wiehnachtsmaerit/"
             },
             {
-              "label": "BeMo - Bewegte Momente",
-              "detail": "Sporthalle Ebnit, Saanen — läuft, letzter Tag: 29. November 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
+              "label": "Kerzenziehen",
+              "detail": "Schul- und Dorfbibliothek Oey, Diemtigen — läuft, letzter Tag: 28. November 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/candle-making-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Über 26 Tonnen Zwiebeln und 360 Marktstände am Zibelemärit",
+              "date": "2026-11-23T09:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/ueber-26-tonnen-zwiebeln-und-360-marktstaende-am-zibelemaerit"
+            }
+          ],
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +425,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +435,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "169",
+          "value": "179",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,69 +446,82 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Soirée d'Échecs / Schachabend",
-              "detail": "Multimondo, Biel/Bienne",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/soiree-dechecs-schachabend-2/"
+              "label": "Philosophie des sciences",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-des-sciences/"
             },
             {
-              "label": "Fatoumata Diawara",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/rubigen/fatoumata-diawara_ADGYb7A"
+              "label": "STRICK AVEC SCHICK",
+              "detail": "Beatenberg",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/beatenberg/schick-mit-strick_AkfneuF"
             },
             {
-              "label": "Jon Cleary",
-              "detail": "Bierhübeli",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/jon-cleary_A1B64wC"
+              "label": "Öffentliche Themenführung «Adventsbummel Thun» (de)",
+              "detail": "Thun",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-themenfuehrung-adventsbummel-thun-de/"
             },
             {
-              "label": "Adventskranz Work-Shop/ Kurs inkl. Prosecco und Tea Time",
-              "detail": "Bern — en cours, dernier jour : 29 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-workshop-kurs-inkl-prosecco-und-tea-time/"
+              "label": "Caroline Bachmann",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/caroline-bachmann-1/"
             },
             {
-              "label": "Sound and Dine",
-              "detail": "3775 Lenk im Simmental, Lenk — en cours, dernier jour : 2 décembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/sound-and-dine/"
+              "label": "NMBE Leseratten lesen «Das Geschenk» von Gaea Schoeters",
+              "detail": "Naturhistorisches Museum Bern, Bern",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nmbe-leseratten-lesen-das-geschenk-von-gaea-schoeters/"
             },
             {
-              "label": "Jugendtreff Modi*hus Bienzguet",
-              "detail": "Modi*hus Bienzguet — en cours, dernier jour : 4 décembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-modihus-bienzguet_A1S6STm"
+              "label": "Christmas Sessions 2026 – CHICAGO Experience avec Danny Seraphine et T. Rex",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/christmas-sessions-2026-chicago-experience-feat-danny-seraphine-t-rex/"
             },
             {
-              "label": "Jugendtreff G23",
-              "detail": "Jugendhaus G23 — en cours, dernier jour : 4 décembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/bern/jugendtreff-g23_AjHXNJ3"
+              "label": "Landhaus Live - DADA ANTE PORTAS",
+              "detail": "Restaurant Landhaus Liebefeld",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/liebefeld/landhaus-live-dada-ante-portas_AxPc3Bq"
             },
             {
-              "label": "Zischtig Karaoke in der Gemmi Taverne",
-              "detail": "Kandersteg — en cours, dernier jour : 24 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/karaoke-2/"
+              "label": "Make it naked",
+              "detail": "Heitere Fahne - die Idealistenkiste",
+              "date": "2026-11-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wabern/make-it-naked_AKNQ7kk"
             },
             {
-              "label": "Saaner Abesitza 2026",
-              "detail": "Saanen — en cours, dernier jour : 18 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/saaner-abesitza/"
+              "label": "Huttwiler Wiehnachtsmärit",
+              "detail": "Huttwil — en cours, dernier jour : 29 novembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/huttwiler-wiehnachtsmaerit/"
             },
             {
-              "label": "des moments mouvementés",
-              "detail": "Sporthalle Ebnit, Saanen — en cours, dernier jour : 29 novembre 2026",
-              "date": "2026-11-16",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
+              "label": "Fabrication de bougies",
+              "detail": "Schul- und Dorfbibliothek Oey, Diemtigen — en cours, dernier jour : 28 novembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/candle-making-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Über 26 Tonnen Zwiebeln und 360 Marktstände am Zibelemärit",
+              "date": "2026-11-23T09:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/ueber-26-tonnen-zwiebeln-und-360-marktstaende-am-zibelemaerit"
+            }
+          ],
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +561,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

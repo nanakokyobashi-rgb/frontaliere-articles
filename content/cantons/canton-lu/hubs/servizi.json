@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "servizi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "cb7311888411ce0d75d82f0f7b8f40b0bb16ef0d435602b205ab21d7e6be11b1",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "9c1156630e23bdad84a9a5ffc0b3dc8c646835f44c4c8e00f39945707f141539",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-11-16T06:51:00.113Z",
+      "updatedAt": "2026-11-26T00:36:15.946Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -70,18 +70,23 @@
           "items": [
             {
               "label": "Luzern",
-              "value": "8 °C",
-              "detail": "oggi da 7 a 13 °C"
+              "value": "3 °C",
+              "detail": "oggi da 1 a 3 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Fünf Jahre fachliche Zusammenarbeit mit der ukrainischen Kinder- und Jugendpsychiatrie",
+              "date": "2026-10-28",
+              "url": "https://www.lups.ch/2026/11/25/fuenf-jahre-fachliche-zusammenarbeit-mit-der-ukrainischen-kinder-und-jugendpsychiatrie/"
+            },
             {
               "label": "Luzerner Psychiatrie AG eröffnet Tagesklinik psychiatrische Arbeitsrehabilitation",
               "date": "2026-10-08",
@@ -101,17 +106,18 @@
               "label": "Ambulatorium KJPD Sarnen an neuem Standort",
               "date": "2026-08-03",
               "url": "https://www.lups.ch/2026/08/18/ambulatorium-kjpd-sarnen-an-neuem-standort/"
-            },
-            {
-              "label": "Rémy Gasser ist neuer CEO der Luzerner Psychiatrie AG",
-              "date": "2026-07-20",
-              "url": "https://www.lups.ch/2026/08/03/remy-gasser-ist-neuer-ceo-der-luzerner-psychiatrie-ag/"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Würzenbach: nuovi spazi scolastici e palestra allo studio",
+          "url": "/articoli-lucerna/spazi-scolastici-wurzenbach/",
+          "excerpt": "Lucerna: spazi insufficienti a Würzenbach e Büttenen; ampliamenti e palestra tripla allo studio, lavori possibili dal 2031.",
+          "date": "2026-11-21T08:48:22.358Z"
+        },
         {
           "title": "Canton Lucerna: meno certificati medici per le assenze scolastiche",
           "url": "/articoli-lucerna/lucerna-scuole-certificati-medici/",
@@ -153,12 +159,6 @@
           "url": "/articoli-svizzera/patente-estera-lucerna-procedura/",
           "excerpt": "Procedura di conversione della patente estera nel Cantone Lucerna: esame teorico e pratico, corsi obbligatori, ufficio della circolazione.",
           "date": "2026-09-03T19:12:14.541Z"
-        },
-        {
-          "title": "Autorizzazione edilizia Canton Lucerna: requisiti, procedura",
-          "url": "/articoli-svizzera/permesso-edilizio-lucerna/",
-          "excerpt": "Nel Cantone di Lucerna contano autorizzazione, documenti, ruolo di comune e cantone, opposizioni o ricorsi e stop ai lavori senza permesso.",
-          "date": "2026-10-09T03:07:26.294Z"
         }
       ],
       "latestCantonArticles": [],
@@ -188,7 +188,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "LU",
@@ -236,18 +236,23 @@
           "items": [
             {
               "label": "Luzern",
-              "value": "8 °C",
-              "detail": "today from 7 to 13 °C"
+              "value": "3 °C",
+              "detail": "today from 1 to 3 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Fünf Jahre fachliche Zusammenarbeit mit der ukrainischen Kinder- und Jugendpsychiatrie",
+              "date": "2026-10-28",
+              "url": "https://www.lups.ch/2026/11/25/fuenf-jahre-fachliche-zusammenarbeit-mit-der-ukrainischen-kinder-und-jugendpsychiatrie/"
+            },
             {
               "label": "Luzerner Psychiatrie AG eröffnet Tagesklinik psychiatrische Arbeitsrehabilitation",
               "date": "2026-10-08",
@@ -267,17 +272,18 @@
               "label": "Ambulatorium KJPD Sarnen an neuem Standort",
               "date": "2026-08-03",
               "url": "https://www.lups.ch/2026/08/18/ambulatorium-kjpd-sarnen-an-neuem-standort/"
-            },
-            {
-              "label": "Rémy Gasser ist neuer CEO der Luzerner Psychiatrie AG",
-              "date": "2026-07-20",
-              "url": "https://www.lups.ch/2026/08/03/remy-gasser-ist-neuer-ceo-der-luzerner-psychiatrie-ag/"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Würzenbach: new school spaces and a sports hall under consideration",
+          "url": "/en/lucerne-articles/wurzenbach-school-space/",
+          "excerpt": "Lucerne: insufficient space in Würzenbach and Büttenen; expansions and a triple sports hall under consideration, construction work possible from 2031.",
+          "date": "2026-11-21T08:48:22.358Z"
+        },
         {
           "title": "Canton Lucerne: fewer medical certificates for school absences",
           "url": "/en/lucerne-articles/lucerne-schools-medical-certificates/",
@@ -318,12 +324,6 @@
           "url": "/en/swiss-articles/driving-licence-lucerne-conversion-procedure/",
           "excerpt": "Procedure for converting the foreign licence in the Canton of Lucerne: theoretical and practical examination, compulsory courses, traffic office.",
           "date": "2026-09-03T19:12:14.541Z"
-        },
-        {
-          "title": "Building permit in the Canton of Lucerne: requirements, procedure",
-          "url": "/en/swiss-articles/lucerne-building-permit-guide/",
-          "excerpt": "In the Canton of Lucerne, authorization, documents, the roles of the municipality and canton, objections or appeals, and stopping work without a permit matter.",
-          "date": "2026-10-09T03:07:26.294Z"
         }
       ],
       "latestCantonArticles": [],
@@ -349,7 +349,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "LU",
@@ -397,18 +397,23 @@
           "items": [
             {
               "label": "Luzern",
-              "value": "8 °C",
-              "detail": "heute 7 bis 13 °C"
+              "value": "3 °C",
+              "detail": "heute 1 bis 3 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Fünf Jahre fachliche Zusammenarbeit mit der ukrainischen Kinder- und Jugendpsychiatrie",
+              "date": "2026-10-28",
+              "url": "https://www.lups.ch/2026/11/25/fuenf-jahre-fachliche-zusammenarbeit-mit-der-ukrainischen-kinder-und-jugendpsychiatrie/"
+            },
             {
               "label": "Luzerner Psychiatrie AG eröffnet Tagesklinik psychiatrische Arbeitsrehabilitation",
               "date": "2026-10-08",
@@ -428,17 +433,18 @@
               "label": "Ambulatorium KJPD Sarnen an neuem Standort",
               "date": "2026-08-03",
               "url": "https://www.lups.ch/2026/08/18/ambulatorium-kjpd-sarnen-an-neuem-standort/"
-            },
-            {
-              "label": "Rémy Gasser ist neuer CEO der Luzerner Psychiatrie AG",
-              "date": "2026-07-20",
-              "url": "https://www.lups.ch/2026/08/03/remy-gasser-ist-neuer-ceo-der-luzerner-psychiatrie-ag/"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Würzenbach: neue Schulräume und eine Sporthalle werden geprüft",
+          "url": "/de/luzern-artikel/schulraum-wurzenbach/",
+          "excerpt": "Luzern: unzureichende Räume in Würzenbach und Büttenen; Erweiterungen und eine Dreifachturnhalle werden geprüft, Arbeiten ab 2031 möglich.",
+          "date": "2026-11-21T08:48:22.358Z"
+        },
         {
           "title": "Kanton Luzern: weniger ärztliche Atteste für Schulabsenzen",
           "url": "/de/luzern-artikel/luzern-schulen-arztzeugnisse/",
@@ -479,12 +485,6 @@
           "url": "/de/schweiz-artikel/fahrerausweis-luzern-umschreibung-verfahren/",
           "excerpt": "Umwandlungsverfahren des ausländischen Führerscheins im Kanton Luzern: Theorie- und Praxisprüfung, Pflichtkurse, Strassenverkehrsamt.",
           "date": "2026-09-03T19:12:14.541Z"
-        },
-        {
-          "title": "Baubewilligung im Kanton Luzern: Voraussetzungen, Verfahren",
-          "url": "/de/schweiz-artikel/baubewilligung-luzern-verfahren/",
-          "excerpt": "Im Kanton Luzern sind die Baubewilligung, die Unterlagen, die Rolle von Gemeinde und Kanton, Einsprachen oder Beschwerden sowie ein Baustopp bei Arbeiten ohne Bewilligung entscheidend.",
-          "date": "2026-10-09T03:07:26.294Z"
         }
       ],
       "latestCantonArticles": [],
@@ -510,7 +510,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "LU",
@@ -558,18 +558,23 @@
           "items": [
             {
               "label": "Luzern",
-              "value": "8 °C",
-              "detail": "aujourd’hui de 7 à 13 °C"
+              "value": "3 °C",
+              "detail": "aujourd’hui de 1 à 3 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Fünf Jahre fachliche Zusammenarbeit mit der ukrainischen Kinder- und Jugendpsychiatrie",
+              "date": "2026-10-28",
+              "url": "https://www.lups.ch/2026/11/25/fuenf-jahre-fachliche-zusammenarbeit-mit-der-ukrainischen-kinder-und-jugendpsychiatrie/"
+            },
             {
               "label": "Luzerner Psychiatrie AG eröffnet Tagesklinik psychiatrische Arbeitsrehabilitation",
               "date": "2026-10-08",
@@ -589,17 +594,18 @@
               "label": "Ambulatorium KJPD Sarnen an neuem Standort",
               "date": "2026-08-03",
               "url": "https://www.lups.ch/2026/08/18/ambulatorium-kjpd-sarnen-an-neuem-standort/"
-            },
-            {
-              "label": "Rémy Gasser ist neuer CEO der Luzerner Psychiatrie AG",
-              "date": "2026-07-20",
-              "url": "https://www.lups.ch/2026/08/03/remy-gasser-ist-neuer-ceo-der-luzerner-psychiatrie-ag/"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Würzenbach : nouveaux espaces scolaires et salle de sport à l’étude",
+          "url": "/fr/articles-lucerne/espace-scolaire-wurzenbach/",
+          "excerpt": "Lucerne : espaces insuffisants à Würzenbach et Büttenen ; agrandissements et triple salle de sport à l’étude, travaux possibles à partir de 2031.",
+          "date": "2026-11-21T08:48:22.358Z"
+        },
         {
           "title": "Canton de Lucerne : moins de certificats médicaux pour les absences scolaires",
           "url": "/fr/articles-lucerne/lucerne-ecoles-certificats-medicaux/",
@@ -641,12 +647,6 @@
           "url": "/fr/articles-suisse/permis-lucerne-conversion-procedure/",
           "excerpt": "Procédure de conversion du permis étranger dans le canton de Lucerne : examen théorique et pratique, cours obligatoires, bureau de la circulation.",
           "date": "2026-09-03T19:12:14.541Z"
-        },
-        {
-          "title": "Autorisation de construire dans le canton de Lucerne : exigences, procédure",
-          "url": "/fr/articles-suisse/permis-construire-lucerne/",
-          "excerpt": "Dans le canton de Lucerne, l’autorisation, les documents, le rôle de la commune et du canton, les oppositions ou recours et l’arrêt des travaux sans permis sont importants.",
-          "date": "2026-10-09T03:07:26.294Z"
         }
       ],
       "latestCantonArticles": [],
@@ -668,7 +668,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

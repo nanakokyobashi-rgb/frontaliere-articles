@@ -4,14 +4,14 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "carburanti",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "60519d7a81d4f55e62f45512d6ef2af4acfa2bc2f7492852b793a6ec7c45e073",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "b58d2a54f17f488e8904e193ad20753345b512752bdfa1e773f074d074ff0cfd",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-15T14:17:31.463Z",
+      "updatedAt": "2026-11-25T17:35:23.405Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-11-22T07:17:48.000Z"
+      "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
   ],
   "locales": {
@@ -54,19 +54,19 @@
             },
             {
               "label": "Benzina 95 — Francia",
-              "value": "2,033 EUR/l",
-              "detail": "media regionale: minimo 1,899 EUR/l, 189 stazioni rilevate",
-              "date": "2026-11-15T07:17:48.000Z"
+              "value": "1,988 EUR/l",
+              "detail": "media regionale: minimo 1,844 EUR/l, 204 stazioni rilevate",
+              "date": "2026-11-25T15:03:00.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,173 EUR/l",
-              "detail": "media regionale: minimo 2,035 EUR/l, 204 stazioni rilevate",
-              "date": "2026-11-15T09:12:56.000Z"
+              "value": "2,105 EUR/l",
+              "detail": "media regionale: minimo 1,965 EUR/l, 204 stazioni rilevate",
+              "date": "2026-11-25T15:03:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [
@@ -88,7 +88,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "VD",
@@ -129,19 +129,19 @@
             },
             {
               "label": "Petrol 95 — France",
-              "value": "2.033 EUR/l",
-              "detail": "regional average: lowest 1.899 EUR/l, 189 stations surveyed",
-              "date": "2026-11-15T07:17:48.000Z"
+              "value": "1.988 EUR/l",
+              "detail": "regional average: lowest 1.844 EUR/l, 204 stations surveyed",
+              "date": "2026-11-25T15:03:00.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.173 EUR/l",
-              "detail": "regional average: lowest 2.035 EUR/l, 204 stations surveyed",
-              "date": "2026-11-15T09:12:56.000Z"
+              "value": "2.105 EUR/l",
+              "detail": "regional average: lowest 1.965 EUR/l, 204 stations surveyed",
+              "date": "2026-11-25T15:03:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [
@@ -163,7 +163,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "VD",
@@ -204,19 +204,19 @@
             },
             {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.033 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.899 EUR/l, 189 erfasste Tankstellen",
-              "date": "2026-11-15T07:17:48.000Z"
+              "value": "1.988 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.844 EUR/l, 204 erfasste Tankstellen",
+              "date": "2026-11-25T15:03:00.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.173 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.035 EUR/l, 204 erfasste Tankstellen",
-              "date": "2026-11-15T09:12:56.000Z"
+              "value": "2.105 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.965 EUR/l, 204 erfasste Tankstellen",
+              "date": "2026-11-25T15:03:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [
@@ -238,7 +238,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "VD",
@@ -279,19 +279,19 @@
             },
             {
               "label": "Essence 95 — France",
-              "value": "2,033 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,899 EUR/l, 189 stations relevées",
-              "date": "2026-11-15T07:17:48.000Z"
+              "value": "1,988 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,844 EUR/l, 204 stations relevées",
+              "date": "2026-11-25T15:03:00.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,173 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,035 EUR/l, 204 stations relevées",
-              "date": "2026-11-15T09:12:56.000Z"
+              "value": "2,105 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,965 EUR/l, 204 stations relevées",
+              "date": "2026-11-25T15:03:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-11-15T14:17:31.463Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [
@@ -313,7 +313,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

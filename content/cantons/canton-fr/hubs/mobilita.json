@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "4ffb3e011b5fd637298b33314aeb546256d9b0a0854ed1ab1e5540d7449cbd4c",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "80c432c0cc381fd79b43ba0ea9c3ffeef2c57cc14f42acc3a7028b71851264b7",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-16T07:21:34.368Z",
+      "updatedAt": "2026-11-25T19:39:26.365Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "14",
-          "note": "segnalazioni aggiornate: 16 novembre 2026"
+          "value": "13",
+          "note": "segnalazioni aggiornate: 25 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "6",
-          "note": "segnalazioni aggiornate: 16 novembre 2026"
+          "value": "5",
+          "note": "segnalazioni aggiornate: 25 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -61,6 +61,12 @@
               "date": "2026-10-12T16:35:00.000Z"
             },
             {
+              "label": "Route de la Heitera, Freiburg in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 18 dicembre 2026",
+              "date": "2026-10-20T05:00:00.000Z"
+            },
+            {
               "label": "Route du Postillon, Courtepin in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
               "value": "Chiusura",
               "detail": "fine prevista: 27 novembre 2026",
@@ -73,32 +79,41 @@
               "date": "2026-10-26T06:35:00.000Z"
             },
             {
-              "label": "Amtmerswilweg, Wünnewil-Flamatt in tutte le direzioni Situazione: divieto di transito Causa: lavori di manutenzione",
-              "value": "Chiusura",
-              "detail": "fine prevista: 23 novembre 2026",
-              "date": "2026-10-27T16:49:00.000Z"
-            },
-            {
-              "label": "Nussbaumen, Wünnewil-Flamatt in tutte le direzioni Situazione: divieto di transito Causa: lavori di manutenzione",
-              "value": "Chiusura",
-              "detail": "fine prevista: 23 novembre 2026",
-              "date": "2026-10-27T16:51:00.000Z"
-            },
-            {
               "label": "Route de Chesau, Bossonnens in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
               "value": "Chiusura",
               "detail": "fine prevista: 23 dicembre 2026",
               "date": "2026-11-02T10:34:00.000Z"
+            },
+            {
+              "label": "Route de la Gare, Grolley in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 4 dicembre 2026",
+              "date": "2026-11-04T13:34:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Restriction de circulation - Route des Arsenaux - dimanche 29 novembre 2026 (05h30 - 19h00)",
+              "date": "2026-11-24T07:47:26.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-des-arsenaux-dimanche-29-novembre-2026-05h30-19h00"
+            },
+            {
+              "label": "Restriction de circulation - Grand-Fontaine et Pont du Milieu - le 25 novembre 2026 (06h00 - 18h00)",
+              "date": "2026-11-18T09:23:27.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-grand-fontaine-et-pont-du-milieu-le-25-novembre-2026-06h00"
+            },
+            {
+              "label": "Avry-Prez: Eine Verbindung für mehr Sicherheit im Fuss- und Veloverkehr",
+              "date": "2026-11-17T09:01:09.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/avry-prez-eine-verbindung-fuer-mehr-sicherheit-im-fuss-und-veloverkehr"
+            },
             {
               "label": "Botterens-Villarbeney: ein Projekt für mehr Sicherheit im Fuss- und Veloverkehr",
               "date": "2026-11-13T14:02:03.000Z",
@@ -113,27 +128,18 @@
               "label": "Bossonnens : la route cantonale de Vevey réaménagée pour améliorer la sécurité des usagers",
               "date": "2026-11-10T11:07:01.000Z",
               "url": "https://www.fr.ch/dime/actualites/bossonnens-la-route-cantonale-de-vevey-reamenagee-pour-ameliorer-la-securite-des-usagers"
-            },
-            {
-              "label": "Bossonnens: Sanierungsarbeiten auf der Kantonsstrasse von Vevey für mehr Sicherheit der Verkehrsteilnehmenden",
-              "date": "2026-11-10T11:07:01.000Z",
-              "url": "https://www.fr.ch/de/rimu/news/bossonnens-sanierungsarbeiten-auf-der-kantonsstrasse-von-vevey-fuer-mehr-sicherheit-der-verkehrsteilnehmenden"
-            },
-            {
-              "label": "Restrictions de circulation dues aux manifestations",
-              "date": "2026-11-10T03:27:00.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/restrictions-de-circulation-dues-aux-manifestations"
-            },
-            {
-              "label": "Système de comptage routier par capteur optique",
-              "date": "2026-11-09T17:07:27.000Z",
-              "url": "https://www.fr.ch/mobilite-et-transport/transports-individuels-motorises/systeme-de-comptage-routier-par-capteur-optique"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Studio mobilità Gruyère: 25 comuni invitati a analisi approfondita",
+          "url": "/articoli-friburgo/gruyere-studio-mobilita-profondo/",
+          "excerpt": "Venticinque comuni della Gruyère sono invitati a un'analisi approfondita della mobilità, con una prima diagnosi prevista a dicembre e conclusioni attese nell'autunno 2027.",
+          "date": "2026-11-20T10:27:53.106Z"
+        },
         {
           "title": "Friburgo: Consiglio di Stato rigetta linea ferroviaria diretta Friburgo-Bulle",
           "url": "/articoli-friburgo/friburgo-no-linea-diretta/",
@@ -165,22 +171,16 @@
           "date": "2026-10-08T15:33:51.044Z"
         },
         {
-          "title": "Ginevra-Friburgo, una tratta ferroviaria sotto pressione",
-          "url": "/articoli-svizzera/linea-ginevra-friburgo-pressione/",
-          "excerpt": "Tredici interruzioni dall'inizio dell'anno hanno interessato la linea ferroviaria tra Ginevra e Friburgo.",
-          "date": "2026-10-08T21:08:07.621Z"
-        },
-        {
           "title": "Abbonamenti trasporti pubblici nel Cantone di Friburgo: zone e tariffe",
           "url": "/articoli-svizzera/trasporti-pubblici-canton-friburgo-abbonamenti/",
           "excerpt": "Ecco i dettagli sugli abbonamenti dei trasporti pubblici nel Cantone di Friburgo.",
           "date": "2026-08-18T00:58:21.517Z"
         },
         {
-          "title": "Abbonamenti trasporti pubblici canton Friburgo: zone e tariffe",
-          "url": "/articoli-svizzera/abbonamenti-friburgo-zone-tariffe/",
-          "excerpt": "Zone tariffarie progressive, abbonamenti annuali e mensili, sconti per studenti: guida completa ai trasporti pubblici friburghesi e nazionali.",
-          "date": "2026-08-24T02:28:56.399Z"
+          "title": "Ginevra-Friburgo, una tratta ferroviaria sotto pressione",
+          "url": "/articoli-svizzera/linea-ginevra-friburgo-pressione/",
+          "excerpt": "Tredici interruzioni dall'inizio dell'anno hanno interessato la linea ferroviaria tra Ginevra e Friburgo.",
+          "date": "2026-10-08T21:08:07.621Z"
         }
       ],
       "latestCantonArticles": [],
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "FR",
@@ -204,13 +204,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "14",
-          "note": "reports as of 16 November 2026"
+          "value": "13",
+          "note": "reports as of 25 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "6",
-          "note": "reports as of 16 November 2026"
+          "value": "5",
+          "note": "reports as of 25 November 2026"
         }
       ],
       "dataBlocks": [
@@ -238,6 +238,12 @@
               "date": "2026-10-12T16:35:00.000Z"
             },
             {
+              "label": "Route de la Heitera, Freiburg in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
+              "value": "Closure",
+              "detail": "until 18 December 2026",
+              "date": "2026-10-20T05:00:00.000Z"
+            },
+            {
               "label": "Route du Postillon, Courtepin in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
               "value": "Closure",
               "detail": "until 27 November 2026",
@@ -250,32 +256,41 @@
               "date": "2026-10-26T06:35:00.000Z"
             },
             {
-              "label": "Amtmerswilweg, Wünnewil-Flamatt in tutte le direzioni Situazione: divieto di transito Causa: lavori di manutenzione",
-              "value": "Closure",
-              "detail": "until 23 November 2026",
-              "date": "2026-10-27T16:49:00.000Z"
-            },
-            {
-              "label": "Nussbaumen, Wünnewil-Flamatt in tutte le direzioni Situazione: divieto di transito Causa: lavori di manutenzione",
-              "value": "Closure",
-              "detail": "until 23 November 2026",
-              "date": "2026-10-27T16:51:00.000Z"
-            },
-            {
               "label": "Route de Chesau, Bossonnens in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
               "value": "Closure",
               "detail": "until 23 December 2026",
               "date": "2026-11-02T10:34:00.000Z"
+            },
+            {
+              "label": "Route de la Gare, Grolley in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
+              "value": "Closure",
+              "detail": "until 4 December 2026",
+              "date": "2026-11-04T13:34:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Restriction de circulation - Route des Arsenaux - dimanche 29 novembre 2026 (05h30 - 19h00)",
+              "date": "2026-11-24T07:47:26.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-des-arsenaux-dimanche-29-novembre-2026-05h30-19h00"
+            },
+            {
+              "label": "Restriction de circulation - Grand-Fontaine et Pont du Milieu - le 25 novembre 2026 (06h00 - 18h00)",
+              "date": "2026-11-18T09:23:27.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-grand-fontaine-et-pont-du-milieu-le-25-novembre-2026-06h00"
+            },
+            {
+              "label": "Avry-Prez: Eine Verbindung für mehr Sicherheit im Fuss- und Veloverkehr",
+              "date": "2026-11-17T09:01:09.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/avry-prez-eine-verbindung-fuer-mehr-sicherheit-im-fuss-und-veloverkehr"
+            },
             {
               "label": "Botterens-Villarbeney: ein Projekt für mehr Sicherheit im Fuss- und Veloverkehr",
               "date": "2026-11-13T14:02:03.000Z",
@@ -290,27 +305,18 @@
               "label": "Bossonnens : la route cantonale de Vevey réaménagée pour améliorer la sécurité des usagers",
               "date": "2026-11-10T11:07:01.000Z",
               "url": "https://www.fr.ch/dime/actualites/bossonnens-la-route-cantonale-de-vevey-reamenagee-pour-ameliorer-la-securite-des-usagers"
-            },
-            {
-              "label": "Bossonnens: Sanierungsarbeiten auf der Kantonsstrasse von Vevey für mehr Sicherheit der Verkehrsteilnehmenden",
-              "date": "2026-11-10T11:07:01.000Z",
-              "url": "https://www.fr.ch/de/rimu/news/bossonnens-sanierungsarbeiten-auf-der-kantonsstrasse-von-vevey-fuer-mehr-sicherheit-der-verkehrsteilnehmenden"
-            },
-            {
-              "label": "Restrictions de circulation dues aux manifestations",
-              "date": "2026-11-10T03:27:00.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/restrictions-de-circulation-dues-aux-manifestations"
-            },
-            {
-              "label": "Système de comptage routier par capteur optique",
-              "date": "2026-11-09T17:07:27.000Z",
-              "url": "https://www.fr.ch/mobilite-et-transport/transports-individuels-motorises/systeme-de-comptage-routier-par-capteur-optique"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Gruyère mobility study: 25 municipalities invited to in-depth analysis",
+          "url": "/en/fribourg-articles/gruyere-mobility-study-deep/",
+          "excerpt": "Twenty-five municipalities in Gruyère are invited to an in-depth analysis of mobility, with an initial assessment planned for December and conclusions expected in autumn 2027.",
+          "date": "2026-11-20T10:27:53.106Z"
+        },
         {
           "title": "Fribourg: State Council rejects direct Fribourg-Bulle railway line",
           "url": "/en/fribourg-articles/fribourg-no-direct-line/",
@@ -342,22 +348,16 @@
           "date": "2026-10-08T15:33:51.044Z"
         },
         {
-          "title": "Geneva–Fribourg, a railway route under pressure",
-          "url": "/en/swiss-articles/geneva-fribourg-rail-line-pressure/",
-          "excerpt": "Thirteen disruptions since the beginning of the year have affected the railway line between Geneva and Fribourg.",
-          "date": "2026-10-08T21:08:07.621Z"
-        },
-        {
           "title": "Public transport passes in the canton of Fribourg: zones and fares",
           "url": "/en/swiss-articles/fribourg-public-transport-abonements/",
           "excerpt": "Here are the details on public transport subscriptions in the Canton of Fribourg.",
           "date": "2026-08-18T00:58:21.517Z"
         },
         {
-          "title": "Public transport tickets canton Fribourg: zones and fares",
-          "url": "/en/swiss-articles/fribourg-public-transport-subscriptions-zones/",
-          "excerpt": "Progressive fare zones, annual and monthly subscriptions, discounts for students: a complete guide to public transport in Fribourg and the country.",
-          "date": "2026-08-24T02:28:56.399Z"
+          "title": "Geneva–Fribourg, a railway route under pressure",
+          "url": "/en/swiss-articles/geneva-fribourg-rail-line-pressure/",
+          "excerpt": "Thirteen disruptions since the beginning of the year have affected the railway line between Geneva and Fribourg.",
+          "date": "2026-10-08T21:08:07.621Z"
         }
       ],
       "latestCantonArticles": [],
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "FR",
@@ -381,13 +381,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "14",
-          "note": "Meldungen vom 16. November 2026"
+          "value": "13",
+          "note": "Meldungen vom 25. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "6",
-          "note": "Meldungen vom 16. November 2026"
+          "value": "5",
+          "note": "Meldungen vom 25. November 2026"
         }
       ],
       "dataBlocks": [
@@ -415,6 +415,12 @@
               "date": "2026-10-12T16:35:00.000Z"
             },
             {
+              "label": "Route de la Heitera, Freiburg in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 18. Dezember 2026",
+              "date": "2026-10-20T05:00:00.000Z"
+            },
+            {
               "label": "Route du Postillon, Courtepin in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
               "value": "Sperrung",
               "detail": "bis 27. November 2026",
@@ -427,32 +433,41 @@
               "date": "2026-10-26T06:35:00.000Z"
             },
             {
-              "label": "Amtmerswilweg, Wünnewil-Flamatt in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Unterhaltsarbeiten",
-              "value": "Sperrung",
-              "detail": "bis 23. November 2026",
-              "date": "2026-10-27T16:49:00.000Z"
-            },
-            {
-              "label": "Nussbaumen, Wünnewil-Flamatt in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Unterhaltsarbeiten",
-              "value": "Sperrung",
-              "detail": "bis 23. November 2026",
-              "date": "2026-10-27T16:51:00.000Z"
-            },
-            {
               "label": "Route de Chesau, Bossonnens in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
               "value": "Sperrung",
               "detail": "bis 23. Dezember 2026",
               "date": "2026-11-02T10:34:00.000Z"
+            },
+            {
+              "label": "Route de la Gare, Grolley in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 4. Dezember 2026",
+              "date": "2026-11-04T13:34:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Restriction de circulation - Route des Arsenaux - dimanche 29 novembre 2026 (05h30 - 19h00)",
+              "date": "2026-11-24T07:47:26.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-des-arsenaux-dimanche-29-novembre-2026-05h30-19h00"
+            },
+            {
+              "label": "Restriction de circulation - Grand-Fontaine et Pont du Milieu - le 25 novembre 2026 (06h00 - 18h00)",
+              "date": "2026-11-18T09:23:27.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-grand-fontaine-et-pont-du-milieu-le-25-novembre-2026-06h00"
+            },
+            {
+              "label": "Avry-Prez: Eine Verbindung für mehr Sicherheit im Fuss- und Veloverkehr",
+              "date": "2026-11-17T09:01:09.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/avry-prez-eine-verbindung-fuer-mehr-sicherheit-im-fuss-und-veloverkehr"
+            },
             {
               "label": "Botterens-Villarbeney: ein Projekt für mehr Sicherheit im Fuss- und Veloverkehr",
               "date": "2026-11-13T14:02:03.000Z",
@@ -467,27 +482,18 @@
               "label": "Bossonnens : la route cantonale de Vevey réaménagée pour améliorer la sécurité des usagers",
               "date": "2026-11-10T11:07:01.000Z",
               "url": "https://www.fr.ch/dime/actualites/bossonnens-la-route-cantonale-de-vevey-reamenagee-pour-ameliorer-la-securite-des-usagers"
-            },
-            {
-              "label": "Bossonnens: Sanierungsarbeiten auf der Kantonsstrasse von Vevey für mehr Sicherheit der Verkehrsteilnehmenden",
-              "date": "2026-11-10T11:07:01.000Z",
-              "url": "https://www.fr.ch/de/rimu/news/bossonnens-sanierungsarbeiten-auf-der-kantonsstrasse-von-vevey-fuer-mehr-sicherheit-der-verkehrsteilnehmenden"
-            },
-            {
-              "label": "Restrictions de circulation dues aux manifestations",
-              "date": "2026-11-10T03:27:00.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/restrictions-de-circulation-dues-aux-manifestations"
-            },
-            {
-              "label": "Système de comptage routier par capteur optique",
-              "date": "2026-11-09T17:07:27.000Z",
-              "url": "https://www.fr.ch/mobilite-et-transport/transports-individuels-motorises/systeme-de-comptage-routier-par-capteur-optique"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Mobilitätsstudie Gruyère: 25 Gemeinden zu einer eingehenden Analyse eingeladen",
+          "url": "/de/freiburg-artikel/gruyere-mobilitatsstudie-tief/",
+          "excerpt": "Fünfundzwanzig Gemeinden der Gruyère sind zu einer eingehenden Analyse der Mobilität eingeladen, wobei eine erste Diagnose im Dezember vorgesehen ist und Schlussfolgerungen im Herbst 2027 erwartet werden.",
+          "date": "2026-11-20T10:27:53.106Z"
+        },
         {
           "title": "Freiburg: Staatsrat lehnt direkte Bahnlinie Freiburg-Bulle ab",
           "url": "/de/freiburg-artikel/friburg-keine-direktstrecke/",
@@ -519,22 +525,16 @@
           "date": "2026-10-08T15:33:51.044Z"
         },
         {
-          "title": "Genf-Freiburg, eine unter Druck stehende Bahnstrecke",
-          "url": "/de/schweiz-artikel/bahnstrecke-genf-freiburg-unter-druck/",
-          "excerpt": "Seit Jahresbeginn kam es auf der Bahnstrecke zwischen Genf und Freiburg zu dreizehn Unterbrechungen.",
-          "date": "2026-10-08T21:08:07.621Z"
-        },
-        {
           "title": "Öffentliche Verkehrsmittel im Kanton Freiburg: Zonen und Tarife",
           "url": "/de/schweiz-artikel/freiburg-oeffentliche-verkehr-abos/",
           "excerpt": "Hier finden Sie die Details zu den ÖV-Abos im Kanton Freiburg.",
           "date": "2026-08-18T00:58:21.517Z"
         },
         {
-          "title": "Öffentliche Verkehrsmittel Kanton Freiburg: Zonen und Tarife",
-          "url": "/de/schweiz-artikel/freiburg-fahrkarten-abo-zonen-tarife/",
-          "excerpt": "Progressive Tarifzonen, Jahres- und Monatsabonnements, Studentenrabatte: Kompletter Leitfaden für den öffentlichen Verkehr in Freiburg und im Inland.",
-          "date": "2026-08-24T02:28:56.399Z"
+          "title": "Genf-Freiburg, eine unter Druck stehende Bahnstrecke",
+          "url": "/de/schweiz-artikel/bahnstrecke-genf-freiburg-unter-druck/",
+          "excerpt": "Seit Jahresbeginn kam es auf der Bahnstrecke zwischen Genf und Freiburg zu dreizehn Unterbrechungen.",
+          "date": "2026-10-08T21:08:07.621Z"
         }
       ],
       "latestCantonArticles": [],
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "FR",
@@ -558,13 +558,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "14",
-          "note": "signalements au 16 novembre 2026"
+          "value": "13",
+          "note": "signalements au 25 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "6",
-          "note": "signalements au 16 novembre 2026"
+          "value": "5",
+          "note": "signalements au 25 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -592,6 +592,12 @@
               "date": "2026-10-12T16:35:00.000Z"
             },
             {
+              "label": "Route de la Heitera, Freiburg dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
+              "value": "Fermeture",
+              "detail": "jusqu’au 18 décembre 2026",
+              "date": "2026-10-20T05:00:00.000Z"
+            },
+            {
               "label": "Route du Postillon, Courtepin dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
               "value": "Fermeture",
               "detail": "jusqu’au 27 novembre 2026",
@@ -604,32 +610,41 @@
               "date": "2026-10-26T06:35:00.000Z"
             },
             {
-              "label": "Amtmerswilweg, Wünnewil-Flamatt dans les deux sens Situation: circulation de transit interdite Raison: travaux de maintenance",
-              "value": "Fermeture",
-              "detail": "jusqu’au 23 novembre 2026",
-              "date": "2026-10-27T16:49:00.000Z"
-            },
-            {
-              "label": "Nussbaumen, Wünnewil-Flamatt dans les deux sens Situation: circulation de transit interdite Raison: travaux de maintenance",
-              "value": "Fermeture",
-              "detail": "jusqu’au 23 novembre 2026",
-              "date": "2026-10-27T16:51:00.000Z"
-            },
-            {
               "label": "Route de Chesau, Bossonnens dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
               "value": "Fermeture",
               "detail": "jusqu’au 23 décembre 2026",
               "date": "2026-11-02T10:34:00.000Z"
+            },
+            {
+              "label": "Route de la Gare, Grolley dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
+              "value": "Fermeture",
+              "detail": "jusqu’au 4 décembre 2026",
+              "date": "2026-11-04T13:34:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Restriction de circulation - Route des Arsenaux - dimanche 29 novembre 2026 (05h30 - 19h00)",
+              "date": "2026-11-24T07:47:26.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-des-arsenaux-dimanche-29-novembre-2026-05h30-19h00"
+            },
+            {
+              "label": "Restriction de circulation - Grand-Fontaine et Pont du Milieu - le 25 novembre 2026 (06h00 - 18h00)",
+              "date": "2026-11-18T09:23:27.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-grand-fontaine-et-pont-du-milieu-le-25-novembre-2026-06h00"
+            },
+            {
+              "label": "Avry-Prez: Eine Verbindung für mehr Sicherheit im Fuss- und Veloverkehr",
+              "date": "2026-11-17T09:01:09.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/avry-prez-eine-verbindung-fuer-mehr-sicherheit-im-fuss-und-veloverkehr"
+            },
             {
               "label": "Botterens-Villarbeney: ein Projekt für mehr Sicherheit im Fuss- und Veloverkehr",
               "date": "2026-11-13T14:02:03.000Z",
@@ -644,27 +659,18 @@
               "label": "Bossonnens : la route cantonale de Vevey réaménagée pour améliorer la sécurité des usagers",
               "date": "2026-11-10T11:07:01.000Z",
               "url": "https://www.fr.ch/dime/actualites/bossonnens-la-route-cantonale-de-vevey-reamenagee-pour-ameliorer-la-securite-des-usagers"
-            },
-            {
-              "label": "Bossonnens: Sanierungsarbeiten auf der Kantonsstrasse von Vevey für mehr Sicherheit der Verkehrsteilnehmenden",
-              "date": "2026-11-10T11:07:01.000Z",
-              "url": "https://www.fr.ch/de/rimu/news/bossonnens-sanierungsarbeiten-auf-der-kantonsstrasse-von-vevey-fuer-mehr-sicherheit-der-verkehrsteilnehmenden"
-            },
-            {
-              "label": "Restrictions de circulation dues aux manifestations",
-              "date": "2026-11-10T03:27:00.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/restrictions-de-circulation-dues-aux-manifestations"
-            },
-            {
-              "label": "Système de comptage routier par capteur optique",
-              "date": "2026-11-09T17:07:27.000Z",
-              "url": "https://www.fr.ch/mobilite-et-transport/transports-individuels-motorises/systeme-de-comptage-routier-par-capteur-optique"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Étude de la mobilité en Gruyère : 25 communes invitées à une analyse approfondie",
+          "url": "/fr/articles-fribourg/gruyere-etude-mobilite-approfondie/",
+          "excerpt": "Vingt-cinq communes de la Gruyère sont invitées à une analyse approfondie de la mobilité, avec un premier diagnostic prévu en décembre et des conclusions attendues à l’automne 2027.",
+          "date": "2026-11-20T10:27:53.106Z"
+        },
         {
           "title": "Fribourg : le Conseil d’État rejette la ligne ferroviaire directe Fribourg-Bulle",
           "url": "/fr/articles-fribourg/fribourg-pas-de-liaison-directe/",
@@ -696,22 +702,16 @@
           "date": "2026-10-08T15:33:51.044Z"
         },
         {
-          "title": "Genève-Fribourg, une ligne ferroviaire sous pression",
-          "url": "/fr/articles-suisse/ligne-geneve-fribourg-sous-pression/",
-          "excerpt": "Treize interruptions depuis le début de l’année ont touché la ligne ferroviaire entre Genève et Fribourg.",
-          "date": "2026-10-08T21:08:07.621Z"
-        },
-        {
           "title": "Abonnements transports publics dans le canton de Fribourg : zones et tarifs",
           "url": "/fr/articles-suisse/fribourg-transports-en-commun-abonnements/",
           "excerpt": "Voici les détails des abonnements aux transports publics dans le canton de Fribourg.",
           "date": "2026-08-18T00:58:21.517Z"
         },
         {
-          "title": "Abonnements transports publics canton de Fribourg : zones et tarifs",
-          "url": "/fr/articles-suisse/fribourg-abonnements-transports-zones-tarifs/",
-          "excerpt": "Zones tarifaires progressives, abonnements annuels et mensuels, réductions pour étudiants : guide complet des transports publics fribourgeois et nationaux.",
-          "date": "2026-08-24T02:28:56.399Z"
+          "title": "Genève-Fribourg, une ligne ferroviaire sous pression",
+          "url": "/fr/articles-suisse/ligne-geneve-fribourg-sous-pression/",
+          "excerpt": "Treize interruptions depuis le début de l’année ont touché la ligne ferroviaire entre Genève et Fribourg.",
+          "date": "2026-10-08T21:08:07.621Z"
         }
       ],
       "latestCantonArticles": [],
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

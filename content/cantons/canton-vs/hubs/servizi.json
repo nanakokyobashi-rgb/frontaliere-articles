@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "b6e073c0dbcc6e9dfc395ed6c5537dc2d3e98c440886f6ac801479ddb8da812b",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "b4c5811133b5d503b1450911d3b7c3816f38af047ecd273b69f9a6e8088107fb",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,13 +13,18 @@
       "keyFacts": 1
     },
     {
+      "id": "aste-targhe",
+      "updatedAt": "2026-11-25T21:43:23.986Z",
+      "keyFacts": 1
+    },
+    {
       "id": "meteo",
-      "updatedAt": "2026-11-16T06:51:00.113Z",
+      "updatedAt": "2026-11-26T00:36:15.946Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -35,6 +40,11 @@
           "value": "582,80 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "5",
+          "note": "offerta mediana 650 CHF"
         }
       ],
       "dataBlocks": [
@@ -59,24 +69,70 @@
           "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "VS73",
+              "value": "11.000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-12-15T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=955&locale=fr_CH"
+            },
+            {
+              "label": "VS803",
+              "value": "5000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-12-15T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=956&locale=fr_CH"
+            },
+            {
+              "label": "VS90333",
+              "value": "650 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-12-15T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=957&locale=fr_CH"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
+          "updatedAt": "2026-11-25T21:43:23.986Z"
+        },
+        {
           "id": "meteo",
           "title": "Meteo",
           "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
           "items": [
             {
               "label": "Sion",
-              "value": "6 °C",
-              "detail": "oggi da 5 a 10 °C"
+              "value": "4 °C",
+              "detail": "oggi da 2 a 7 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Cérémonie des records en dialyse",
+              "date": "2026-11-25",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/11/25/ceremonie-des-records-en-dialyse"
+            },
+            {
+              "label": "Financement uniforme des prestations de l’assurance-maladie (EFAS) - Mise en consultation de l’avant-projet de modification de la législation cantonale d’application",
+              "date": "2026-11-23",
+              "url": "https://www.vs.ch/web/communication/w/financement-uniforme-des-prestations-de-l-assurance-maladie-efas-mise-en-consultation-de-l-avant-projet-de-modification-de-la-l%C3%A9gislation-cantonale-d-application"
+            },
+            {
+              "label": "Extension du Master en médecine humaine de l’Université de Fribourg",
+              "date": "2026-11-20",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/11/20/extension-du-master-en-medecine-humaine-de-luniversite-de-fribourg"
+            },
             {
               "label": "La maternité de Sion à la rencontre des familles au Salon de la Parentalité à Conthey",
               "date": "2026-11-04",
@@ -91,24 +147,9 @@
               "label": "Quelques foulées pour nos « prémas » : un événement ouvert à toutes et tous le dimanche 15 novembre 2026",
               "date": "2026-10-29",
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/29/quelques-foulees-pour-nos-premas-un-evenement-ouvert-a-toutes-et-tous-le-dimanche-15-novembre-2026"
-            },
-            {
-              "label": "Séverine Charbonnet-Lusson obtient le mérite soignant 2026",
-              "date": "2026-10-28",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/28/severine-charbonnet-lusson-obtient-le-merite-soignant-2026"
-            },
-            {
-              "label": "Reconnaître et traiter un AVC",
-              "date": "2026-10-26",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/26/reconnaitre-et-traiter-un-avc"
-            },
-            {
-              "label": "La santé de la population en Valais 2026",
-              "date": "2026-10-16",
-              "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51561272"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -143,16 +184,16 @@
           "date": "2026-09-05T17:13:22.938Z"
         },
         {
-          "title": "Asilo nido e custodia bambini in Vallese: costi",
-          "url": "/articoli-svizzera/custodia-bambini-vallese-sussidi/",
-          "excerpt": "In Vallese asili nido, famiglie diurne e doposcuola: tariffe calcolate sul reddito e sussidi cantonali disponibili per la custodia dei bambini.",
-          "date": "2026-09-30T19:28:17.623Z"
-        },
-        {
           "title": "Permesso di domicilio C nel Canton Vallese: requisiti e domanda",
           "url": "/articoli-svizzera/permesso-domicilio-c-canton-vallese-requisiti-domanda/",
           "excerpt": "Scopri i requisiti e la procedura per ottenere il permesso di domicilio C nel Canton Vallese, inclusi anni richiesti, criteri di integrazione e conoscenze linguistiche.",
           "date": "2026-09-06T00:58:20.006Z"
+        },
+        {
+          "title": "Asilo nido e custodia bambini in Vallese: costi",
+          "url": "/articoli-svizzera/custodia-bambini-vallese-sussidi/",
+          "excerpt": "In Vallese asili nido, famiglie diurne e doposcuola: tariffe calcolate sul reddito e sussidi cantonali disponibili per la custodia dei bambini.",
+          "date": "2026-09-30T19:28:17.623Z"
         },
         {
           "title": "Sistema scolastico canton Vallese: iscrizione e cicli",
@@ -188,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "VS",
@@ -201,6 +242,11 @@
           "value": "582.80 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "5",
+          "note": "typical bid 650 CHF"
         }
       ],
       "dataBlocks": [
@@ -225,24 +271,70 @@
           "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "VS73",
+              "value": "11,000 CHF",
+              "detail": "current bid",
+              "date": "2026-12-15T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=955&locale=fr_CH"
+            },
+            {
+              "label": "VS803",
+              "value": "5,000 CHF",
+              "detail": "current bid",
+              "date": "2026-12-15T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=956&locale=fr_CH"
+            },
+            {
+              "label": "VS90333",
+              "value": "650 CHF",
+              "detail": "current bid",
+              "date": "2026-12-15T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=957&locale=fr_CH"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
+          "updatedAt": "2026-11-25T21:43:23.986Z"
+        },
+        {
           "id": "meteo",
           "title": "Weather",
           "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
           "items": [
             {
               "label": "Sion",
-              "value": "6 °C",
-              "detail": "today from 5 to 10 °C"
+              "value": "4 °C",
+              "detail": "today from 2 to 7 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Cérémonie des records en dialyse",
+              "date": "2026-11-25",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/11/25/ceremonie-des-records-en-dialyse"
+            },
+            {
+              "label": "Financement uniforme des prestations de l’assurance-maladie (EFAS) - Mise en consultation de l’avant-projet de modification de la législation cantonale d’application",
+              "date": "2026-11-23",
+              "url": "https://www.vs.ch/web/communication/w/financement-uniforme-des-prestations-de-l-assurance-maladie-efas-mise-en-consultation-de-l-avant-projet-de-modification-de-la-l%C3%A9gislation-cantonale-d-application"
+            },
+            {
+              "label": "Extension du Master en médecine humaine de l’Université de Fribourg",
+              "date": "2026-11-20",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/11/20/extension-du-master-en-medecine-humaine-de-luniversite-de-fribourg"
+            },
             {
               "label": "La maternité de Sion à la rencontre des familles au Salon de la Parentalité à Conthey",
               "date": "2026-11-04",
@@ -257,24 +349,9 @@
               "label": "Quelques foulées pour nos « prémas » : un événement ouvert à toutes et tous le dimanche 15 novembre 2026",
               "date": "2026-10-29",
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/29/quelques-foulees-pour-nos-premas-un-evenement-ouvert-a-toutes-et-tous-le-dimanche-15-novembre-2026"
-            },
-            {
-              "label": "Séverine Charbonnet-Lusson obtient le mérite soignant 2026",
-              "date": "2026-10-28",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/28/severine-charbonnet-lusson-obtient-le-merite-soignant-2026"
-            },
-            {
-              "label": "Reconnaître et traiter un AVC",
-              "date": "2026-10-26",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/26/reconnaitre-et-traiter-un-avc"
-            },
-            {
-              "label": "La santé de la population en Valais 2026",
-              "date": "2026-10-16",
-              "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51561272"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -309,16 +386,16 @@
           "date": "2026-09-05T17:13:22.938Z"
         },
         {
-          "title": "Daycare and Childcare in Valais: Costs",
-          "url": "/en/swiss-articles/childcare-costs-valais/",
-          "excerpt": "In Valais, daycare centers, family daycare, and after-school programs: fees are based on income, and cantonal subsidies are available for child care.",
-          "date": "2026-09-30T19:28:17.623Z"
-        },
-        {
           "title": "Residence permit C in the Canton of Valais: requirements and application",
           "url": "/en/swiss-articles/permit-c-residence-canton-valais-requirements-application/",
           "excerpt": "Learn about the requirements and procedure for obtaining a residence permit C in the Canton of Valais, including the required years, integration criteria and language skills.",
           "date": "2026-09-06T00:58:20.006Z"
+        },
+        {
+          "title": "Daycare and Childcare in Valais: Costs",
+          "url": "/en/swiss-articles/childcare-costs-valais/",
+          "excerpt": "In Valais, daycare centers, family daycare, and after-school programs: fees are based on income, and cantonal subsidies are available for child care.",
+          "date": "2026-09-30T19:28:17.623Z"
         },
         {
           "title": "Valais cantonal school system: enrollment and cycles",
@@ -350,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "VS",
@@ -363,6 +440,11 @@
           "value": "582.80 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "5",
+          "note": "mittleres Gebot 650 CHF"
         }
       ],
       "dataBlocks": [
@@ -387,24 +469,70 @@
           "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "VS73",
+              "value": "11’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-12-15T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=955&locale=fr_CH"
+            },
+            {
+              "label": "VS803",
+              "value": "5’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-12-15T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=956&locale=fr_CH"
+            },
+            {
+              "label": "VS90333",
+              "value": "650 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-12-15T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=957&locale=fr_CH"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
+          "updatedAt": "2026-11-25T21:43:23.986Z"
+        },
+        {
           "id": "meteo",
           "title": "Wetter",
           "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
           "items": [
             {
               "label": "Sion",
-              "value": "6 °C",
-              "detail": "heute 5 bis 10 °C"
+              "value": "4 °C",
+              "detail": "heute 2 bis 7 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Cérémonie des records en dialyse",
+              "date": "2026-11-25",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/11/25/ceremonie-des-records-en-dialyse"
+            },
+            {
+              "label": "Financement uniforme des prestations de l’assurance-maladie (EFAS) - Mise en consultation de l’avant-projet de modification de la législation cantonale d’application",
+              "date": "2026-11-23",
+              "url": "https://www.vs.ch/web/communication/w/financement-uniforme-des-prestations-de-l-assurance-maladie-efas-mise-en-consultation-de-l-avant-projet-de-modification-de-la-l%C3%A9gislation-cantonale-d-application"
+            },
+            {
+              "label": "Extension du Master en médecine humaine de l’Université de Fribourg",
+              "date": "2026-11-20",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/11/20/extension-du-master-en-medecine-humaine-de-luniversite-de-fribourg"
+            },
             {
               "label": "La maternité de Sion à la rencontre des familles au Salon de la Parentalité à Conthey",
               "date": "2026-11-04",
@@ -419,24 +547,9 @@
               "label": "Quelques foulées pour nos « prémas » : un événement ouvert à toutes et tous le dimanche 15 novembre 2026",
               "date": "2026-10-29",
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/29/quelques-foulees-pour-nos-premas-un-evenement-ouvert-a-toutes-et-tous-le-dimanche-15-novembre-2026"
-            },
-            {
-              "label": "Séverine Charbonnet-Lusson obtient le mérite soignant 2026",
-              "date": "2026-10-28",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/28/severine-charbonnet-lusson-obtient-le-merite-soignant-2026"
-            },
-            {
-              "label": "Reconnaître et traiter un AVC",
-              "date": "2026-10-26",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/26/reconnaitre-et-traiter-un-avc"
-            },
-            {
-              "label": "La santé de la population en Valais 2026",
-              "date": "2026-10-16",
-              "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51561272"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -471,16 +584,16 @@
           "date": "2026-09-05T17:13:22.938Z"
         },
         {
-          "title": "Kindertagesstätte und Kinderbetreuung im Wallis: Kosten",
-          "url": "/de/schweiz-artikel/kinderbetreuung-kosten-wallis/",
-          "excerpt": "Im Wallis: Kindertagesstätten, Tagesfamilien und Nachmittagsbetreuung: einkommensabhängige Tarife und kantonale Zuschüsse für die Kinderbetreuung.",
-          "date": "2026-09-30T19:28:17.623Z"
-        },
-        {
           "title": "Niederlassungsbewilligung C im Kanton Wallis: Voraussetzungen und Antrag",
           "url": "/de/schweiz-artikel/aufenthaltsbewilligung-c-kanton-wallis-anforderungen-antrag/",
           "excerpt": "Erfahren Sie mehr über die Voraussetzungen und das Verfahren zur Erlangung der Niederlassungsbewilligung C im Kanton Wallis, einschliesslich erforderlicher Jahre, Integrationskriterien und Sprachkenntnisse.",
           "date": "2026-09-06T00:58:20.006Z"
+        },
+        {
+          "title": "Kindertagesstätte und Kinderbetreuung im Wallis: Kosten",
+          "url": "/de/schweiz-artikel/kinderbetreuung-kosten-wallis/",
+          "excerpt": "Im Wallis: Kindertagesstätten, Tagesfamilien und Nachmittagsbetreuung: einkommensabhängige Tarife und kantonale Zuschüsse für die Kinderbetreuung.",
+          "date": "2026-09-30T19:28:17.623Z"
         },
         {
           "title": "Schulsystem Kanton Wallis: Einschreibung und Zyklen",
@@ -512,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "VS",
@@ -525,6 +638,11 @@
           "value": "582,80 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "5",
+          "note": "offre centrale 650 CHF"
         }
       ],
       "dataBlocks": [
@@ -549,24 +667,70 @@
           "updatedAt": "2026-11-15T11:58:26.359Z"
         },
         {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "VS73",
+              "value": "11 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-12-15T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=955&locale=fr_CH"
+            },
+            {
+              "label": "VS803",
+              "value": "5 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-12-15T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=956&locale=fr_CH"
+            },
+            {
+              "label": "VS90333",
+              "value": "650 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-12-15T14:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=957&locale=fr_CH"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
+          "updatedAt": "2026-11-25T21:43:23.986Z"
+        },
+        {
           "id": "meteo",
           "title": "Météo",
           "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
           "items": [
             {
               "label": "Sion",
-              "value": "6 °C",
-              "detail": "aujourd’hui de 5 à 10 °C"
+              "value": "4 °C",
+              "detail": "aujourd’hui de 2 à 7 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-16T06:51:00.113Z"
+          "updatedAt": "2026-11-26T00:36:15.946Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Cérémonie des records en dialyse",
+              "date": "2026-11-25",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/11/25/ceremonie-des-records-en-dialyse"
+            },
+            {
+              "label": "Financement uniforme des prestations de l’assurance-maladie (EFAS) - Mise en consultation de l’avant-projet de modification de la législation cantonale d’application",
+              "date": "2026-11-23",
+              "url": "https://www.vs.ch/web/communication/w/financement-uniforme-des-prestations-de-l-assurance-maladie-efas-mise-en-consultation-de-l-avant-projet-de-modification-de-la-l%C3%A9gislation-cantonale-d-application"
+            },
+            {
+              "label": "Extension du Master en médecine humaine de l’Université de Fribourg",
+              "date": "2026-11-20",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/11/20/extension-du-master-en-medecine-humaine-de-luniversite-de-fribourg"
+            },
             {
               "label": "La maternité de Sion à la rencontre des familles au Salon de la Parentalité à Conthey",
               "date": "2026-11-04",
@@ -581,24 +745,9 @@
               "label": "Quelques foulées pour nos « prémas » : un événement ouvert à toutes et tous le dimanche 15 novembre 2026",
               "date": "2026-10-29",
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/29/quelques-foulees-pour-nos-premas-un-evenement-ouvert-a-toutes-et-tous-le-dimanche-15-novembre-2026"
-            },
-            {
-              "label": "Séverine Charbonnet-Lusson obtient le mérite soignant 2026",
-              "date": "2026-10-28",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/28/severine-charbonnet-lusson-obtient-le-merite-soignant-2026"
-            },
-            {
-              "label": "Reconnaître et traiter un AVC",
-              "date": "2026-10-26",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/26/reconnaitre-et-traiter-un-avc"
-            },
-            {
-              "label": "La santé de la population en Valais 2026",
-              "date": "2026-10-16",
-              "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51561272"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -633,16 +782,16 @@
           "date": "2026-09-05T17:13:22.938Z"
         },
         {
-          "title": "Crèche et garde d’enfants en Valais : coûts",
-          "url": "/fr/articles-suisse/garde-enfants-couts-valais/",
-          "excerpt": "Dans le Valais, crèches, familles d'accueil de jour et garderies périscolaires : tarifs calculés en fonction des revenus et aides cantonales disponibles pour la garde des enfants.",
-          "date": "2026-09-30T19:28:17.623Z"
-        },
-        {
           "title": "Permis de séjour C dans le canton du Valais : exigences et demande",
           "url": "/fr/articles-suisse/permis-c-residence-canton-valais-conditions-demande/",
           "excerpt": "Découvrez les conditions et la procédure d'obtention du permis de séjour C dans le canton du Valais, y compris les années requises, les critères d'intégration et les connaissances linguistiques.",
           "date": "2026-09-06T00:58:20.006Z"
+        },
+        {
+          "title": "Crèche et garde d’enfants en Valais : coûts",
+          "url": "/fr/articles-suisse/garde-enfants-couts-valais/",
+          "excerpt": "Dans le Valais, crèches, familles d'accueil de jour et garderies périscolaires : tarifs calculés en fonction des revenus et aides cantonales disponibles pour la garde des enfants.",
+          "date": "2026-09-30T19:28:17.623Z"
         },
         {
           "title": "Système scolaire du canton du Valais : inscription et cycles",
@@ -670,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

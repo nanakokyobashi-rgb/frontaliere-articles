@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "5797d040a507bd3246e3ced139ba338923aa9fbd591d34a873eaa0dd44686a78",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "218aec9c3ba207d4b16dc5afc784730c32dc11d5a57c8dd5bc8774bae1a68a14",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-15T21:47:09.888Z",
+      "updatedAt": "2026-11-26T00:32:00.223Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "23",
+          "value": "18",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,75 +38,90 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Evening sale z'Hallau",
-              "detail": "8215 Hallau, Hallau",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/evening-sale-zhallau/"
+              "label": "speis&trank stories with Urs Weibel and Andreas Reich",
+              "detail": "Haberhaus Bühne, Schaffhausen",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/speistrank-stories-with-urs-weibel-and-andreas-reich/"
             },
             {
-              "label": "Manon Mullener [ch]",
-              "detail": "Kulturzentrum Kammgarn",
-              "date": "2026-11-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/manon-mullener-ch_AaS9bms"
-            },
-            {
-              "label": "Bühne Cipolla - Der Untergang des Hauses Usher (nach Edgar Allan Poe)",
-              "detail": "Theater Bachturnhalle",
-              "date": "2026-11-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/buehne-cipolla-der-untergang-des-hauses-usher-nach-edgar-allan-poe_AkYG35Q"
-            },
-            {
-              "label": "Cipolla Theater - The Fall of the House of Usher (based on Edgar Allan Poe)",
-              "detail": "Schaffhausen",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cipolla-theater-the-fall-of-the-house-of-usher-based-on-edgar-allan-poe/"
-            },
-            {
-              "label": "Mercatino dell'Avvento a Neunkirch",
-              "detail": "Neunkirch",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsmarkt-in-neunkirch/"
-            },
-            {
-              "label": "Autumn tasting Bringolf Weinbau",
-              "detail": "Bringolf Weinbau, Hallau",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/degustation-bringolf-weinbau/"
-            },
-            {
-              "label": "THE RED HOT SERENADERS – Blues, Swing & Ragtime",
-              "detail": "Kunstschür, Stein am Rhein",
-              "date": "2026-11-21",
-              "url": "https://www.guidle.com/it/evenements/musique/stein-am-rhein/the-red-hot-serenaders-blues-swing-et-ragtime_AdYKfgA"
-            },
-            {
-              "label": "Stummfilmklassiker - Die Abenteuer des Prinzen Achmed mit Live-Musik",
-              "detail": "Schwanen Kino & Theater, Stein am Rhein",
-              "date": "2026-11-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/stein-am-rhein/stummfilmklassiker-die-abenteuer-des-prinzen-achmed-mit-live-musik_AJqf3qE"
-            },
-            {
-              "label": "The Adventures of Prince Achmed - 100 years of Cinema Schwanen",
-              "detail": "Stein am Rhein",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-adventures-of-prince-achmed-100-years-of-cinema-schwanen-2/"
-            },
-            {
-              "label": "Troubadours Tour – zwöierlei singen Mani Matter",
+              "label": "Komoco: «Chora»",
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
-              "date": "2026-11-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/troubadours-tour-zwoeierlei-singen-mani-matter_AUBTu2F"
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/komoco-chora/"
+            },
+            {
+              "label": "Rötiberg Christmas Market",
+              "detail": "Rötiberg-Kellerei, Wilchingen — in corso, ultimo giorno: 23 dicembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roetiberg-weihnachtsmarkt/"
+            },
+            {
+              "label": "Glüehwy by starlight",
+              "detail": "Wilchinger Bergwy, Wilchingen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/glueehwy-by-starlight/"
+            },
+            {
+              "label": "Sarah Hugentobler - Is That Me? A Solo for Many",
+              "detail": "Schaffhausen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sarah-hugentobler-is-that-me-a-solo-for-many/"
+            },
+            {
+              "label": "Stoppel und Bart",
+              "detail": "Bistro Chez Ulrique, Stein am Rhein",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/small-stage/stein-am-rhein/stubble-and-beard_AkttT3B"
+            },
+            {
+              "label": "Christmas market/ tasting",
+              "detail": "Trotte Löhningen, Löhningen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/christmas-market-tasting/"
+            },
+            {
+              "label": "Live Musik mit Just Two",
+              "detail": "Restaurant Grünerbaum",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/events/music/neuhausen/live-music-with-just-two_A1gDgEm"
+            },
+            {
+              "label": "Food & Drink Stories with Urs Weibel and Andreas Reich",
+              "detail": "Haberhaus Bühne, Schaffhausen",
+              "date": "2026-12-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/food-drink-stories-with-urs-weibel-and-andreas-reich/"
+            },
+            {
+              "label": "First Friday im Stemmler Museum",
+              "detail": "Museum Stemmler",
+              "date": "2026-12-04",
+              "url": "https://www.guidle.com/it/search/schaffhausen/first-friday-at-the-stemmler-museum_AY1acJW"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Weihnachtsausstellung im Rosgartenmuseum Konstanz \"Kleine Schätze, große Weihnachtsfreude. Eine Reise in die Spielzeugwelt vergangener Zeiten\"",
+              "date": "2026-11-25T16:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kleine+schaetze_+grosse+weihnachtsfreude_+eine+reise+in+die+spielzeugwelt+vergangener+zeiten"
+            },
+            {
+              "label": "Öffentliche Führung Sonderausstellung Rosgartenmuseum \"Die Mosbruggers. Eine Künstlerfamilie am Bodensee\"",
+              "date": "2026-11-20T16:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/oeffentliche+fuehrung+sonderausstellung+rosgartenmuseum+die+mosbruggers_+eine+kuenstlerfamilie+am+bodensee"
+            },
+            {
+              "label": "Bodensee Philharmonie: 4. Philharmonisches Konzert \"Muskelspiele\"",
+              "date": "2026-11-17T14:12:02.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/bodensee+philharmonie_+4_+philharmonisches+konzert"
+            },
             {
               "label": "Fasnächtliche Fundstücke beim Museumsflohmarkt",
               "date": "2026-11-12T16:00:00.000Z",
@@ -121,24 +136,9 @@
               "label": "Fasnächtliche Fundstücke beim Museumsflohmarkt",
               "date": "2026-11-12T16:00:00.000Z",
               "url": "https://www.konstanz.de/798774"
-            },
-            {
-              "label": "Abendführung und Vorstellung der Ausstellungsbroschüre in der Wessenberg-Galerie",
-              "date": "2026-11-08T16:00:00.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/abendfuehrung+und+vorstellung+der+ausstellungsbroschuere"
-            },
-            {
-              "label": "In der Adventszeit mit dem Wasserbus zum Weihnachtsmarkt",
-              "date": "2026-11-03T09:07:03.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/in+der+adventszeit+mit+dem+wasserbus+zum+weihnachtsmarkt"
-            },
-            {
-              "label": "Konzert mit jazzCube",
-              "date": "2026-11-02T08:24:00.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/konzert+seze+jazzcube"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -160,7 +160,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "SH",
@@ -170,7 +170,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "23",
+          "value": "18",
           "note": "from the site’s events calendar"
         }
       ],
@@ -181,75 +181,90 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Evening sale z'Hallau",
-              "detail": "8215 Hallau, Hallau",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/evening-sale-zhallau/"
+              "label": "speis&trank stories with Urs Weibel and Andreas Reich",
+              "detail": "Haberhaus Bühne, Schaffhausen",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/speistrank-stories-with-urs-weibel-and-andreas-reich/"
             },
             {
-              "label": "Manon Mullener [ch]",
-              "detail": "Kulturzentrum Kammgarn",
-              "date": "2026-11-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/manon-mullener-ch_AaS9bms"
-            },
-            {
-              "label": "Cipolla Theater - The Fall of the House of Usher (based on Edgar Allan Poe)",
-              "detail": "Theater Bachturnhalle",
-              "date": "2026-11-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/buehne-cipolla-der-untergang-des-hauses-usher-nach-edgar-allan-poe_AkYG35Q"
-            },
-            {
-              "label": "Cipolla Theater - The Fall of the House of Usher (based on Edgar Allan Poe)",
-              "detail": "Schaffhausen",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cipolla-theater-the-fall-of-the-house-of-usher-based-on-edgar-allan-poe/"
-            },
-            {
-              "label": "Advent market in Neunkirch",
-              "detail": "Neunkirch",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsmarkt-in-neunkirch/"
-            },
-            {
-              "label": "Autumn tasting Bringolf Weinbau",
-              "detail": "Bringolf Weinbau, Hallau",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/degustation-bringolf-weinbau/"
-            },
-            {
-              "label": "THE RED HOT SERENADERS – Blues, Swing & Ragtime",
-              "detail": "Kunstschür, Stein am Rhein",
-              "date": "2026-11-21",
-              "url": "https://www.guidle.com/it/evenements/musique/stein-am-rhein/the-red-hot-serenaders-blues-swing-et-ragtime_AdYKfgA"
-            },
-            {
-              "label": "Stummfilmklassiker - Die Abenteuer des Prinzen Achmed mit Live-Musik",
-              "detail": "Schwanen Kino & Theater, Stein am Rhein",
-              "date": "2026-11-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/stein-am-rhein/stummfilmklassiker-die-abenteuer-des-prinzen-achmed-mit-live-musik_AJqf3qE"
-            },
-            {
-              "label": "The Adventures of Prince Achmed - 100 years of Cinema Schwanen",
-              "detail": "Stein am Rhein",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-adventures-of-prince-achmed-100-years-of-cinema-schwanen-2/"
-            },
-            {
-              "label": "Troubadours Tour – zwöierlei singen Mani Matter",
+              "label": "Komoco: «Chora»",
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
-              "date": "2026-11-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/troubadours-tour-zwoeierlei-singen-mani-matter_AUBTu2F"
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/komoco-chora/"
+            },
+            {
+              "label": "Rötiberg Christmas Market",
+              "detail": "Rötiberg-Kellerei, Wilchingen — ongoing, last day: 23 December 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roetiberg-weihnachtsmarkt/"
+            },
+            {
+              "label": "Glüehwy by starlight",
+              "detail": "Wilchinger Bergwy, Wilchingen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/glueehwy-by-starlight/"
+            },
+            {
+              "label": "Sarah Hugentobler - Is That Me? A Solo for Many",
+              "detail": "Schaffhausen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sarah-hugentobler-is-that-me-a-solo-for-many/"
+            },
+            {
+              "label": "Stubble and beard",
+              "detail": "Bistro Chez Ulrique, Stein am Rhein",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/small-stage/stein-am-rhein/stubble-and-beard_AkttT3B"
+            },
+            {
+              "label": "Christmas market/ tasting",
+              "detail": "Trotte Löhningen, Löhningen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/christmas-market-tasting/"
+            },
+            {
+              "label": "Live Music with Just Two",
+              "detail": "Restaurant Grünerbaum",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/events/music/neuhausen/live-music-with-just-two_A1gDgEm"
+            },
+            {
+              "label": "Food & Drink Stories with Urs Weibel and Andreas Reich",
+              "detail": "Haberhaus Bühne, Schaffhausen",
+              "date": "2026-12-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/food-drink-stories-with-urs-weibel-and-andreas-reich/"
+            },
+            {
+              "label": "First Friday at the Stemmler Museum",
+              "detail": "Museum Stemmler",
+              "date": "2026-12-04",
+              "url": "https://www.guidle.com/it/search/schaffhausen/first-friday-at-the-stemmler-museum_AY1acJW"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Weihnachtsausstellung im Rosgartenmuseum Konstanz \"Kleine Schätze, große Weihnachtsfreude. Eine Reise in die Spielzeugwelt vergangener Zeiten\"",
+              "date": "2026-11-25T16:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kleine+schaetze_+grosse+weihnachtsfreude_+eine+reise+in+die+spielzeugwelt+vergangener+zeiten"
+            },
+            {
+              "label": "Öffentliche Führung Sonderausstellung Rosgartenmuseum \"Die Mosbruggers. Eine Künstlerfamilie am Bodensee\"",
+              "date": "2026-11-20T16:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/oeffentliche+fuehrung+sonderausstellung+rosgartenmuseum+die+mosbruggers_+eine+kuenstlerfamilie+am+bodensee"
+            },
+            {
+              "label": "Bodensee Philharmonie: 4. Philharmonisches Konzert \"Muskelspiele\"",
+              "date": "2026-11-17T14:12:02.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/bodensee+philharmonie_+4_+philharmonisches+konzert"
+            },
             {
               "label": "Fasnächtliche Fundstücke beim Museumsflohmarkt",
               "date": "2026-11-12T16:00:00.000Z",
@@ -264,24 +279,9 @@
               "label": "Fasnächtliche Fundstücke beim Museumsflohmarkt",
               "date": "2026-11-12T16:00:00.000Z",
               "url": "https://www.konstanz.de/798774"
-            },
-            {
-              "label": "Abendführung und Vorstellung der Ausstellungsbroschüre in der Wessenberg-Galerie",
-              "date": "2026-11-08T16:00:00.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/abendfuehrung+und+vorstellung+der+ausstellungsbroschuere"
-            },
-            {
-              "label": "In der Adventszeit mit dem Wasserbus zum Weihnachtsmarkt",
-              "date": "2026-11-03T09:07:03.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/in+der+adventszeit+mit+dem+wasserbus+zum+weihnachtsmarkt"
-            },
-            {
-              "label": "Konzert mit jazzCube",
-              "date": "2026-11-02T08:24:00.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/konzert+seze+jazzcube"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -303,7 +303,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "SH",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "23",
+          "value": "18",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -324,75 +324,90 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Abendverkauf Hallau",
-              "detail": "8215 Hallau, Hallau",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/evening-sale-zhallau/"
+              "label": "speis&trank geschichten mit Urs Weibel und Andreas Reich",
+              "detail": "Haberhaus Bühne, Schaffhausen",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/speistrank-stories-with-urs-weibel-and-andreas-reich/"
             },
             {
-              "label": "Manon Mullener [ch]",
-              "detail": "Kulturzentrum Kammgarn",
-              "date": "2026-11-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/manon-mullener-ch_AaS9bms"
-            },
-            {
-              "label": "Bühne Cipolla - Der Untergang des Hauses Usher (nach Edgar Allan Poe)",
-              "detail": "Theater Bachturnhalle",
-              "date": "2026-11-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/buehne-cipolla-der-untergang-des-hauses-usher-nach-edgar-allan-poe_AkYG35Q"
-            },
-            {
-              "label": "Bühne Cipolla - Der Untergang des Hauses Usher (nach Edgar Allan Poe)",
-              "detail": "Schaffhausen",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cipolla-theater-the-fall-of-the-house-of-usher-based-on-edgar-allan-poe/"
-            },
-            {
-              "label": "Adventsmarkt in Neunkirch",
-              "detail": "Neunkirch",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsmarkt-in-neunkirch/"
-            },
-            {
-              "label": "Degustation Bringolf Weinbau",
-              "detail": "Bringolf Weinbau, Hallau",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/degustation-bringolf-weinbau/"
-            },
-            {
-              "label": "THE RED HOT SERENADERS – Blues, Swing & Ragtime",
-              "detail": "Kunstschür, Stein am Rhein",
-              "date": "2026-11-21",
-              "url": "https://www.guidle.com/it/evenements/musique/stein-am-rhein/the-red-hot-serenaders-blues-swing-et-ragtime_AdYKfgA"
-            },
-            {
-              "label": "Stummfilmklassiker - Die Abenteuer des Prinzen Achmed mit Live-Musik",
-              "detail": "Schwanen Kino & Theater, Stein am Rhein",
-              "date": "2026-11-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/stein-am-rhein/stummfilmklassiker-die-abenteuer-des-prinzen-achmed-mit-live-musik_AJqf3qE"
-            },
-            {
-              "label": "Die Abenteuer des Prinzen Achmed – 100 Jahre Cinema Schwanen",
-              "detail": "Stein am Rhein",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-adventures-of-prince-achmed-100-years-of-cinema-schwanen-2/"
-            },
-            {
-              "label": "Troubadours Tour – zwöierlei singen Mani Matter",
+              "label": "Komoco: «Chora»",
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
-              "date": "2026-11-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/troubadours-tour-zwoeierlei-singen-mani-matter_AUBTu2F"
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/komoco-chora/"
+            },
+            {
+              "label": "Rötiberg Wei(h)nachtsmarkt",
+              "detail": "Rötiberg-Kellerei, Wilchingen — läuft, letzter Tag: 23. Dezember 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roetiberg-weihnachtsmarkt/"
+            },
+            {
+              "label": "Glüehwy bei Sternenschein",
+              "detail": "Wilchinger Bergwy, Wilchingen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/glueehwy-by-starlight/"
+            },
+            {
+              "label": "Sarah Hugentobler - Bin ich das? Ein Solo für Viele",
+              "detail": "Schaffhausen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sarah-hugentobler-is-that-me-a-solo-for-many/"
+            },
+            {
+              "label": "Stoppel und Bart",
+              "detail": "Bistro Chez Ulrique, Stein am Rhein",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/small-stage/stein-am-rhein/stubble-and-beard_AkttT3B"
+            },
+            {
+              "label": "Weihnachtsmarkt/ Degustation",
+              "detail": "Trotte Löhningen, Löhningen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/christmas-market-tasting/"
+            },
+            {
+              "label": "Live Musik mit Just Two",
+              "detail": "Restaurant Grünerbaum",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/events/music/neuhausen/live-music-with-just-two_A1gDgEm"
+            },
+            {
+              "label": "speis&trank geschichten mit Urs Weibel und Andreas Reich",
+              "detail": "Haberhaus Bühne, Schaffhausen",
+              "date": "2026-12-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/food-drink-stories-with-urs-weibel-and-andreas-reich/"
+            },
+            {
+              "label": "First Friday im Stemmler Museum",
+              "detail": "Museum Stemmler",
+              "date": "2026-12-04",
+              "url": "https://www.guidle.com/it/search/schaffhausen/first-friday-at-the-stemmler-museum_AY1acJW"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Weihnachtsausstellung im Rosgartenmuseum Konstanz \"Kleine Schätze, große Weihnachtsfreude. Eine Reise in die Spielzeugwelt vergangener Zeiten\"",
+              "date": "2026-11-25T16:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kleine+schaetze_+grosse+weihnachtsfreude_+eine+reise+in+die+spielzeugwelt+vergangener+zeiten"
+            },
+            {
+              "label": "Öffentliche Führung Sonderausstellung Rosgartenmuseum \"Die Mosbruggers. Eine Künstlerfamilie am Bodensee\"",
+              "date": "2026-11-20T16:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/oeffentliche+fuehrung+sonderausstellung+rosgartenmuseum+die+mosbruggers_+eine+kuenstlerfamilie+am+bodensee"
+            },
+            {
+              "label": "Bodensee Philharmonie: 4. Philharmonisches Konzert \"Muskelspiele\"",
+              "date": "2026-11-17T14:12:02.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/bodensee+philharmonie_+4_+philharmonisches+konzert"
+            },
             {
               "label": "Fasnächtliche Fundstücke beim Museumsflohmarkt",
               "date": "2026-11-12T16:00:00.000Z",
@@ -407,24 +422,9 @@
               "label": "Fasnächtliche Fundstücke beim Museumsflohmarkt",
               "date": "2026-11-12T16:00:00.000Z",
               "url": "https://www.konstanz.de/798774"
-            },
-            {
-              "label": "Abendführung und Vorstellung der Ausstellungsbroschüre in der Wessenberg-Galerie",
-              "date": "2026-11-08T16:00:00.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/abendfuehrung+und+vorstellung+der+ausstellungsbroschuere"
-            },
-            {
-              "label": "In der Adventszeit mit dem Wasserbus zum Weihnachtsmarkt",
-              "date": "2026-11-03T09:07:03.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/in+der+adventszeit+mit+dem+wasserbus+zum+weihnachtsmarkt"
-            },
-            {
-              "label": "Konzert mit jazzCube",
-              "date": "2026-11-02T08:24:00.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/konzert+seze+jazzcube"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -446,7 +446,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "SH",
@@ -456,7 +456,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "23",
+          "value": "18",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -467,75 +467,90 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Vente du soir z'Hallau",
-              "detail": "8215 Hallau, Hallau",
-              "date": "2026-11-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/evening-sale-zhallau/"
+              "label": "speis&trank histoires avec Urs Weibel et Andreas Reich",
+              "detail": "Haberhaus Bühne, Schaffhausen",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/speistrank-stories-with-urs-weibel-and-andreas-reich/"
             },
             {
-              "label": "Manon Mullener [ch]",
-              "detail": "Kulturzentrum Kammgarn",
-              "date": "2026-11-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/manon-mullener-ch_AaS9bms"
-            },
-            {
-              "label": "Théâtre Cipolla - La Chute de la maison Usher (d'après Edgar Allan Poe)",
-              "detail": "Theater Bachturnhalle",
-              "date": "2026-11-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/buehne-cipolla-der-untergang-des-hauses-usher-nach-edgar-allan-poe_AkYG35Q"
-            },
-            {
-              "label": "Théâtre Cipolla - La Chute de la maison Usher (d'après Edgar Allan Poe)",
-              "detail": "Schaffhausen",
-              "date": "2026-11-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cipolla-theater-the-fall-of-the-house-of-usher-based-on-edgar-allan-poe/"
-            },
-            {
-              "label": "Marché de l'Avent à Neunkirch",
-              "detail": "Neunkirch",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsmarkt-in-neunkirch/"
-            },
-            {
-              "label": "Dégustation d'automne Bringolf Weinbau",
-              "detail": "Bringolf Weinbau, Hallau",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/degustation-bringolf-weinbau/"
-            },
-            {
-              "label": "THE RED HOT SERENADERS – Blues, swing et ragtime",
-              "detail": "Kunstschür, Stein am Rhein",
-              "date": "2026-11-21",
-              "url": "https://www.guidle.com/it/evenements/musique/stein-am-rhein/the-red-hot-serenaders-blues-swing-et-ragtime_AdYKfgA"
-            },
-            {
-              "label": "Stummfilmklassiker - Die Abenteuer des Prinzen Achmed mit Live-Musik",
-              "detail": "Schwanen Kino & Theater, Stein am Rhein",
-              "date": "2026-11-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/stein-am-rhein/stummfilmklassiker-die-abenteuer-des-prinzen-achmed-mit-live-musik_AJqf3qE"
-            },
-            {
-              "label": "Les aventures du prince Achmed - 100 ans de Cinéma Schwanen",
-              "detail": "Stein am Rhein",
-              "date": "2026-11-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-adventures-of-prince-achmed-100-years-of-cinema-schwanen-2/"
-            },
-            {
-              "label": "Troubadours Tour – zwöierlei singen Mani Matter",
+              "label": "Komoco: «Chora»",
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
-              "date": "2026-11-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/troubadours-tour-zwoeierlei-singen-mani-matter_AUBTu2F"
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/komoco-chora/"
+            },
+            {
+              "label": "Marché de Noël de Rötiberg",
+              "detail": "Rötiberg-Kellerei, Wilchingen — en cours, dernier jour : 23 décembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roetiberg-weihnachtsmarkt/"
+            },
+            {
+              "label": "Glüehwy à la lueur des étoiles",
+              "detail": "Wilchinger Bergwy, Wilchingen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/glueehwy-by-starlight/"
+            },
+            {
+              "label": "Sarah Hugentobler - Est-ce que c'est moi ? Un solo pour plusieurs",
+              "detail": "Schaffhausen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sarah-hugentobler-is-that-me-a-solo-for-many/"
+            },
+            {
+              "label": "chaume et barbe",
+              "detail": "Bistro Chez Ulrique, Stein am Rhein",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/small-stage/stein-am-rhein/stubble-and-beard_AkttT3B"
+            },
+            {
+              "label": "Marché de Noël/ Dégustation",
+              "detail": "Trotte Löhningen, Löhningen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/christmas-market-tasting/"
+            },
+            {
+              "label": "Concert de Just Two",
+              "detail": "Restaurant Grünerbaum",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/events/music/neuhausen/live-music-with-just-two_A1gDgEm"
+            },
+            {
+              "label": "Histoires autour de la table avec Urs Weibel et Andreas Reich",
+              "detail": "Haberhaus Bühne, Schaffhausen",
+              "date": "2026-12-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/food-drink-stories-with-urs-weibel-and-andreas-reich/"
+            },
+            {
+              "label": "First Friday au musée Stemmler",
+              "detail": "Museum Stemmler",
+              "date": "2026-12-04",
+              "url": "https://www.guidle.com/it/search/schaffhausen/first-friday-at-the-stemmler-museum_AY1acJW"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-11-15T21:47:09.888Z"
+          "updatedAt": "2026-11-26T00:32:00.223Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Weihnachtsausstellung im Rosgartenmuseum Konstanz \"Kleine Schätze, große Weihnachtsfreude. Eine Reise in die Spielzeugwelt vergangener Zeiten\"",
+              "date": "2026-11-25T16:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kleine+schaetze_+grosse+weihnachtsfreude_+eine+reise+in+die+spielzeugwelt+vergangener+zeiten"
+            },
+            {
+              "label": "Öffentliche Führung Sonderausstellung Rosgartenmuseum \"Die Mosbruggers. Eine Künstlerfamilie am Bodensee\"",
+              "date": "2026-11-20T16:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/oeffentliche+fuehrung+sonderausstellung+rosgartenmuseum+die+mosbruggers_+eine+kuenstlerfamilie+am+bodensee"
+            },
+            {
+              "label": "Bodensee Philharmonie: 4. Philharmonisches Konzert \"Muskelspiele\"",
+              "date": "2026-11-17T14:12:02.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/bodensee+philharmonie_+4_+philharmonisches+konzert"
+            },
             {
               "label": "Fasnächtliche Fundstücke beim Museumsflohmarkt",
               "date": "2026-11-12T16:00:00.000Z",
@@ -550,24 +565,9 @@
               "label": "Fasnächtliche Fundstücke beim Museumsflohmarkt",
               "date": "2026-11-12T16:00:00.000Z",
               "url": "https://www.konstanz.de/798774"
-            },
-            {
-              "label": "Abendführung und Vorstellung der Ausstellungsbroschüre in der Wessenberg-Galerie",
-              "date": "2026-11-08T16:00:00.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/abendfuehrung+und+vorstellung+der+ausstellungsbroschuere"
-            },
-            {
-              "label": "In der Adventszeit mit dem Wasserbus zum Weihnachtsmarkt",
-              "date": "2026-11-03T09:07:03.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/in+der+adventszeit+mit+dem+wasserbus+zum+weihnachtsmarkt"
-            },
-            {
-              "label": "Konzert mit jazzCube",
-              "date": "2026-11-02T08:24:00.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/konzert+seze+jazzcube"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -589,7 +589,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

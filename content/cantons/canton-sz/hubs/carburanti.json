@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "carburanti",
-  "updatedAt": "2026-11-11T21:52:52.345Z",
-  "contentHash": "04f27e420e83870f2bce5db24fbed1f7f8e6dcc8d1df7427b105bf0feb06e055",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "9fd058f39e65305264155ae9ea240f1c7f8b28d2d786f509cd7cab46eea10f77",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-10T15:13:39.066Z",
+      "updatedAt": "2026-11-25T17:35:23.405Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,11 +54,23 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-10T15:13:39.066Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Governo Svitto respinge procedura di autorizzazione per funzionari",
+          "url": "/articoli-svitto/gov-svitto-respinge-autorizzazione/",
+          "excerpt": "Le denunce contro funzionari in Svitto sono aumentate dal 2021, raggiungendo un massimo nel 2025; il Governo respinge la mozione M 7/26.",
+          "date": "2026-11-21T16:32:04.766Z"
+        },
+        {
+          "title": "Emanati i piani ciclabili cantonali del Canton Svitto",
+          "url": "/articoli-svitto/piani-rete-ciclabile-svitto/",
+          "excerpt": "La rete prevista ammonta a 1.152 km, di cui 280 km per spostamenti quotidiani e 872 km per tempo libero.",
+          "date": "2026-11-21T04:23:12.030Z"
+        },
         {
           "title": "Governo Svitto valuta ex seminario Rickenbach per abitazioni",
           "url": "/articoli-svitto/svitto-seminario-wohnraum-rickenbach/",
@@ -76,18 +88,6 @@
           "url": "/articoli-svitto/ricerca-fisco-aziende-svitto/",
           "excerpt": "Bote.ch collega la ricerca alla convenienza fiscale per le aziende del Canton Svitto, ma il materiale disponibile non indica misure, cifre o date.",
           "date": "2026-11-06T03:37:01.055Z"
-        },
-        {
-          "title": "Riarmo dell’esercito: il Nazionale evita l’aumento IVA",
-          "url": "/articoli-svitto/finanziamento-riarmo-esercito/",
-          "excerpt": "Riarmo da CHF 24 miliardi: il Nazionale punta a CHF 1,3 miliardi annui dal 2028 al 2045 senza aumentare l’IVA; la SP minaccia il referendum.",
-          "date": "2026-11-04T00:12:21.103Z"
-        },
-        {
-          "title": "SP Uri: no di misura al finanziamento della 13ª AVS",
-          "url": "/articoli-svitto/sp-uri-no-finanziamento-avs/",
-          "excerpt": "SP Uri: no di misura al finanziamento della 13ª AVS dopo una discussione vivace.",
-          "date": "2026-11-03T23:23:55.230Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-11T21:52:52.345Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "SZ",
@@ -141,11 +141,23 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-10T15:13:39.066Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Schwyz Government rejects authorization procedure for officials",
+          "url": "/en/schwyz-articles/schwyz-government-rejects-authorization/",
+          "excerpt": "Complaints against officials in Schwyz have increased since 2021, reaching a peak in 2025; the Government rejects motion M 7/26.",
+          "date": "2026-11-21T16:32:04.766Z"
+        },
+        {
+          "title": "Canton Schwyz's cantonal cycling plans issued",
+          "url": "/en/schwyz-articles/schwyz-cycling-network-plans/",
+          "excerpt": "The planned network amounts to 1.152 km, of which 280 km are for daily travel and 872 km for leisure.",
+          "date": "2026-11-21T04:23:12.030Z"
+        },
         {
           "title": "Schwyz government considers former Rickenbach seminary for housing",
           "url": "/en/schwyz-articles/schwyz-seminary-housing-rickenbach/",
@@ -163,18 +175,6 @@
           "url": "/en/schwyz-articles/schwyz-research-company-tax/",
           "excerpt": "Bote.ch links the research to the tax advantages for companies in the Canton of Schwyz, but the available material does not indicate any measures, figures, or dates.",
           "date": "2026-11-06T03:37:01.055Z"
-        },
-        {
-          "title": "Army rearmament: the National Council avoids the VAT increase",
-          "url": "/en/schwyz-articles/army-rearmament-funding/",
-          "excerpt": "Rearmament of CHF 24 billion: the National Council aims for CHF 1.3 billion annually from 2028 to 2045 without increasing VAT; the SP threatens a referendum.",
-          "date": "2026-11-04T00:12:21.103Z"
-        },
-        {
-          "title": "SP Uri: no to the measure to finance the 13th AVS",
-          "url": "/en/schwyz-articles/uri-sp-rejects-avs-funding/",
-          "excerpt": "SP Uri: no to the measure to finance the 13th AHV pension after a lively discussion.",
-          "date": "2026-11-03T23:23:55.230Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-11T21:52:52.345Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "SZ",
@@ -228,11 +228,23 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-10T15:13:39.066Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Schwyzer Regierung lehnt Genehmigungsverfahren für Amtsträger ab",
+          "url": "/de/schwyz-artikel/schwyz-regierung-lehnt-autorisierung/",
+          "excerpt": "Die Anzeigen gegen Amtsträger in Schwyz sind seit 2021 gestiegen und erreichten 2025 einen Höchststand; die Regierung lehnt die Motion M 7/26 ab.",
+          "date": "2026-11-21T16:32:04.766Z"
+        },
+        {
+          "title": "Kantonale Velonetzpläne des Kantons Schwyz erlassen",
+          "url": "/de/schwyz-artikel/schwyz-radwegenetzplane/",
+          "excerpt": "Das vorgesehene Netz umfasst 1.152 km, davon 280 km für Alltagswege und 872 km für die Freizeit.",
+          "date": "2026-11-21T04:23:12.030Z"
+        },
         {
           "title": "Schwyzer Regierung prüft ehemaliges Seminar in Rickenbach für Wohnzwecke",
           "url": "/de/schwyz-artikel/schwyz-seminar-wohnraum-rickenbach/",
@@ -250,18 +262,6 @@
           "url": "/de/schwyz-artikel/schwyzer-firmen-forschung-steuern/",
           "excerpt": "Bote.ch verbindet die Forschung mit der steuerlichen Attraktivität für Unternehmen im Kanton Schwyz, aber das verfügbare Material nennt keine Maßnahmen, Zahlen oder Daten.",
           "date": "2026-11-06T03:37:01.055Z"
-        },
-        {
-          "title": "Aufrüstung der Armee: Der Nationalrat vermeidet eine Mehrwertsteuererhöhung",
-          "url": "/de/schwyz-artikel/finanzierung-aufruestung-armee/",
-          "excerpt": "Aufrüstung im Umfang von CHF 24 Milliarden: Der Nationalrat setzt von 2028 bis 2045 auf jährlich CHF 1,3 Milliarden, ohne die Mehrwertsteuer zu erhöhen; die SP droht mit einem Referendum.",
-          "date": "2026-11-04T00:12:21.103Z"
-        },
-        {
-          "title": "SP Uri: Nein zur Massnahme zur Finanzierung der 13. AHV-Rente",
-          "url": "/de/schwyz-artikel/uri-sp-lehnt-ahv-finanzierung-ab/",
-          "excerpt": "Die Quelle berichtet, dass die SP Uri die Finanzierung der 13. AHV-Rente abgelehnt hat.",
-          "date": "2026-11-03T23:23:55.230Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-11T21:52:52.345Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "SZ",
@@ -315,11 +315,23 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-10T15:13:39.066Z"
+          "updatedAt": "2026-11-25T17:35:23.405Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Schwytz rejette l’autorisation pour les fonctionnaires",
+          "url": "/fr/articles-schwytz/schwytz-gouvernement-rejette-autorisation/",
+          "excerpt": "Les plaintes contre des fonctionnaires à Schwytz ont augmenté depuis 2021, atteignant un maximum en 2025; le Gouvernement rejette la motion M 7/26.",
+          "date": "2026-11-21T16:32:04.766Z"
+        },
+        {
+          "title": "Les plans cyclables cantonaux du canton de Schwytz ont été édictés",
+          "url": "/fr/articles-schwytz/plans-reseau-cyclable-schwyz/",
+          "excerpt": "Le réseau prévu s’élève à 1.152 km, dont 280 km pour les déplacements quotidiens et 872 km pour les loisirs.",
+          "date": "2026-11-21T04:23:12.030Z"
+        },
         {
           "title": "Schwyz évalue l’ex-séminaire de Rickenbach pour loger",
           "url": "/fr/articles-schwytz/schwyz-seminaire-logement-rickenbach/",
@@ -337,18 +349,6 @@
           "url": "/fr/articles-schwytz/recherche-entreprises-fiscalite-schwyz/",
           "excerpt": "Bote.ch relie la recherche à l’attractivité fiscale pour les entreprises du canton de Schwyz, mais les informations disponibles n’indiquent ni mesures, ni chiffres, ni dates.",
           "date": "2026-11-06T03:37:01.055Z"
-        },
-        {
-          "title": "Réarmement de l’armée : le National évite la hausse de la TVA",
-          "url": "/fr/articles-schwytz/financement-rearmement-armee/",
-          "excerpt": "Réarmement de CHF 24 milliards : le National vise CHF 1,3 milliard par an de 2028 à 2045 sans augmenter la TVA ; le PS menace de lancer un référendum.",
-          "date": "2026-11-04T00:12:21.103Z"
-        },
-        {
-          "title": "SP Uri : un non de justesse au financement de la 13e AVS",
-          "url": "/fr/articles-schwytz/uri-sp-refuse-financement-avs/",
-          "excerpt": "SP Uri : un non de justesse au financement de la 13e AVS après une discussion animée.",
-          "date": "2026-11-03T23:23:55.230Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-11T21:52:52.345Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }

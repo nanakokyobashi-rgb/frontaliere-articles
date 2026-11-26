@@ -4,22 +4,22 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-16T18:42:30.844Z",
-  "contentHash": "f774078b1e9957bf1c08a634ba9aa8c1b36e302c7f6d504bb54362f417e39449",
+  "updatedAt": "2026-11-26T07:02:23.749Z",
+  "contentHash": "0dee5ab8ed7b573a153ec534938b68a9e79593da980cd8278f9677ee612292d2",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-15T23:59:59.000Z",
+      "updatedAt": "2026-11-24T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-16T07:21:34.368Z",
+      "updatedAt": "2026-11-25T19:39:26.365Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-15T22:07:40.362Z",
+      "updatedAt": "2026-11-25T16:08:35.229Z",
       "keyFacts": 0
     }
   ],
@@ -33,48 +33,48 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, settimana conclusa: 15 novembre 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, settimana conclusa: 24 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "2",
-          "note": "segnalazioni aggiornate: 16 novembre 2026"
+          "value": "1",
+          "note": "segnalazioni aggiornate: 25 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 9 novembre 2026 – 15 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 18 novembre 2026 – 24 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
               "value": "0 min",
-              "detail": "49 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/diessenhofen-gailingen-am-hochrhein/oggi/"
             },
             {
               "label": "Konstanz – Kreuzlingen",
-              "value": "0,1 min",
-              "detail": "49 rilevazioni",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/konstanz-kreuzlingen/oggi/"
             },
             {
               "label": "Konstanz – Tägerwilen, Autostrada B33n/A7",
-              "value": "0,3 min",
-              "detail": "49 rilevazioni",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/konstanz-tagerwilen-autostrada-b33n-a7/oggi/"
             },
             {
               "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
-              "value": "0,3 min",
-              "detail": "49 rilevazioni",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/konstanz-tagerwilen-gottlieber-strasse/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-15T23:59:59.000Z"
+          "updatedAt": "2026-11-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -82,31 +82,30 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
-              "label": "Revocato: H14 Frauenfeld -> Romanshorn tra Luogo Bürglen E Luogo Sulgen Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-11-16T06:24:00.000Z"
-            },
-            {
               "label": "A7 Kreuzlingen -> Winterthur tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Frauenfeld Ost Situazione: problemi di traffico cantiere, lunghezza [km] 1.1 Limitazione del…",
               "value": "Cantiere",
               "detail": "fine prevista: 7 dicembre 2026",
               "date": "2026-11-09T09:11:00.000Z"
-            },
-            {
-              "label": "A1 Zürich <-> St. Gallen tra Parcheggio Stegen E Svincolo autostradale Matzingen Situazione: problemi di traffico cantiere, lunghezza [km] 2.5 Limitazione del traffico: nuova viabilità Aggiunta 1…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 20 novembre 2026",
-              "date": "2026-11-11T19:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Irene Meister gewinnt den Hauptpreis der Kreuzlinger Velo-Challenge",
+              "date": "2026-11-25T14:43:34.000Z",
+              "url": "https://www.kreuzlingen.ch/aktuelles/irene-meister-gewinnt-den-hauptpreis-der-kreuzlinger-velo-challenge"
+            },
+            {
+              "label": "1-Franken-Bus fährt auch im kommenden Jahr",
+              "date": "2026-11-17T15:25:50.000Z",
+              "url": "https://www.kreuzlingen.ch/aktuelles/1-franken-bus-faehrt-auch-im-kommenden-jahr"
+            },
             {
               "label": "Regierungsrat passt Gebühren im Strassenverkehrsamt an",
               "date": "2026-11-12",
@@ -126,19 +125,9 @@
               "label": "Jahrmarkt: Zentrum für Durchgangsverkehr gesperrt",
               "date": "2026-10-21T16:00:00.000Z",
               "url": "https://www.kreuzlingen.ch/aktuelles/jahrmarkt-zentrum-fuer-durchgangsverkehr-gesperrt"
-            },
-            {
-              "label": "Kantonsstrasse in Felben-Wellhausen wird saniert",
-              "date": "2026-10-16",
-              "url": "https://www.tg.ch/news.html/485/news/80433"
-            },
-            {
-              "label": "Neue Werkleitungen für die Nationalstrasse",
-              "date": "2026-10-14T06:33:47.000Z",
-              "url": "https://www.kreuzlingen.ch/aktuelles/neue-werkleitungen-fuer-die-nationalstrasse"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -204,7 +193,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "en": {
       "canton": "TG",
@@ -215,48 +204,48 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, week ending 15 November 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, week ending 24 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "2",
-          "note": "reports as of 16 November 2026"
+          "value": "1",
+          "note": "reports as of 25 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 9 November 2026 to 15 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 18 November 2026 to 24 November 2026, fastest first.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
               "value": "0 min",
-              "detail": "49 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/diessenhofen-gailingen-am-hochrhein/today/"
             },
             {
               "label": "Konstanz – Kreuzlingen",
-              "value": "0.1 min",
-              "detail": "49 readings",
+              "value": "0 min",
+              "detail": "48 readings",
               "url": "/en/border-wait/konstanz-kreuzlingen/today/"
             },
             {
               "label": "Konstanz – Tägerwilen, Autostrada B33n/A7",
-              "value": "0.3 min",
-              "detail": "49 readings",
+              "value": "0 min",
+              "detail": "48 readings",
               "url": "/en/border-wait/konstanz-tagerwilen-autostrada-b33n-a7/today/"
             },
             {
               "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
-              "value": "0.3 min",
-              "detail": "49 readings",
+              "value": "0 min",
+              "detail": "48 readings",
               "url": "/en/border-wait/konstanz-tagerwilen-gottlieber-strasse/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-15T23:59:59.000Z"
+          "updatedAt": "2026-11-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -264,31 +253,30 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
-              "label": "Revocato: H14 Frauenfeld -> Romanshorn tra Luogo Bürglen E Luogo Sulgen Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-11-16T06:24:00.000Z"
-            },
-            {
               "label": "A7 Kreuzlingen -> Winterthur tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Frauenfeld Ost Situazione: problemi di traffico cantiere, lunghezza [km] 1.1 Limitazione del…",
               "value": "Roadworks",
               "detail": "until 7 December 2026",
               "date": "2026-11-09T09:11:00.000Z"
-            },
-            {
-              "label": "A1 Zürich <-> St. Gallen tra Parcheggio Stegen E Svincolo autostradale Matzingen Situazione: problemi di traffico cantiere, lunghezza [km] 2.5 Limitazione del traffico: nuova viabilità Aggiunta 1…",
-              "value": "Roadworks",
-              "detail": "until 20 November 2026",
-              "date": "2026-11-11T19:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Irene Meister gewinnt den Hauptpreis der Kreuzlinger Velo-Challenge",
+              "date": "2026-11-25T14:43:34.000Z",
+              "url": "https://www.kreuzlingen.ch/aktuelles/irene-meister-gewinnt-den-hauptpreis-der-kreuzlinger-velo-challenge"
+            },
+            {
+              "label": "1-Franken-Bus fährt auch im kommenden Jahr",
+              "date": "2026-11-17T15:25:50.000Z",
+              "url": "https://www.kreuzlingen.ch/aktuelles/1-franken-bus-faehrt-auch-im-kommenden-jahr"
+            },
             {
               "label": "Regierungsrat passt Gebühren im Strassenverkehrsamt an",
               "date": "2026-11-12",
@@ -308,19 +296,9 @@
               "label": "Jahrmarkt: Zentrum für Durchgangsverkehr gesperrt",
               "date": "2026-10-21T16:00:00.000Z",
               "url": "https://www.kreuzlingen.ch/aktuelles/jahrmarkt-zentrum-fuer-durchgangsverkehr-gesperrt"
-            },
-            {
-              "label": "Kantonsstrasse in Felben-Wellhausen wird saniert",
-              "date": "2026-10-16",
-              "url": "https://www.tg.ch/news.html/485/news/80433"
-            },
-            {
-              "label": "Neue Werkleitungen für die Nationalstrasse",
-              "date": "2026-10-14T06:33:47.000Z",
-              "url": "https://www.kreuzlingen.ch/aktuelles/neue-werkleitungen-fuer-die-nationalstrasse"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +364,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "de": {
       "canton": "TG",
@@ -397,48 +375,48 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Diessenhofen – Gailingen am Hochrhein, Woche bis 15. November 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, Woche bis 24. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "2",
-          "note": "Meldungen vom 16. November 2026"
+          "value": "1",
+          "note": "Meldungen vom 25. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 9. November 2026 bis 15. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 18. November 2026 bis 24. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
               "value": "0 Min.",
-              "detail": "49 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/diessenhofen-gailingen-am-hochrhein/heute/"
             },
             {
               "label": "Konstanz – Kreuzlingen",
-              "value": "0.1 Min.",
-              "detail": "49 Messungen",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/konstanz-kreuzlingen/heute/"
             },
             {
               "label": "Konstanz – Tägerwilen, Autostrada B33n/A7",
-              "value": "0.3 Min.",
-              "detail": "49 Messungen",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/konstanz-tagerwilen-autostrada-b33n-a7/heute/"
             },
             {
               "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
-              "value": "0.3 Min.",
-              "detail": "49 Messungen",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/konstanz-tagerwilen-gottlieber-strasse/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-15T23:59:59.000Z"
+          "updatedAt": "2026-11-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -446,31 +424,30 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
-              "label": "Aufgehoben: H14 Frauenfeld -> Romanshorn zwischen Ortschaft Bürglen und Ortschaft Sulgen Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-11-16T06:24:00.000Z"
-            },
-            {
               "label": "A7 Kreuzlingen -> Winterthur zwischen Autobahndreieck Verzweigung Grüneck und Anschluss Frauenfeld-Ost Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.1 Verkehrsführung: Fahrbahnverengung auf…",
               "value": "Baustelle",
               "detail": "bis 7. Dezember 2026",
               "date": "2026-11-09T09:11:00.000Z"
-            },
-            {
-              "label": "A1 Zürich <-> St. Gallen zwischen Parkplatz Stegen und Anschluss Matzingen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.5 Verkehrsführung: veränderte Verkehrsführung Zusatz 1…",
-              "value": "Baustelle",
-              "detail": "bis 20. November 2026",
-              "date": "2026-11-11T19:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Irene Meister gewinnt den Hauptpreis der Kreuzlinger Velo-Challenge",
+              "date": "2026-11-25T14:43:34.000Z",
+              "url": "https://www.kreuzlingen.ch/aktuelles/irene-meister-gewinnt-den-hauptpreis-der-kreuzlinger-velo-challenge"
+            },
+            {
+              "label": "1-Franken-Bus fährt auch im kommenden Jahr",
+              "date": "2026-11-17T15:25:50.000Z",
+              "url": "https://www.kreuzlingen.ch/aktuelles/1-franken-bus-faehrt-auch-im-kommenden-jahr"
+            },
             {
               "label": "Regierungsrat passt Gebühren im Strassenverkehrsamt an",
               "date": "2026-11-12",
@@ -490,19 +467,9 @@
               "label": "Jahrmarkt: Zentrum für Durchgangsverkehr gesperrt",
               "date": "2026-10-21T16:00:00.000Z",
               "url": "https://www.kreuzlingen.ch/aktuelles/jahrmarkt-zentrum-fuer-durchgangsverkehr-gesperrt"
-            },
-            {
-              "label": "Kantonsstrasse in Felben-Wellhausen wird saniert",
-              "date": "2026-10-16",
-              "url": "https://www.tg.ch/news.html/485/news/80433"
-            },
-            {
-              "label": "Neue Werkleitungen für die Nationalstrasse",
-              "date": "2026-10-14T06:33:47.000Z",
-              "url": "https://www.kreuzlingen.ch/aktuelles/neue-werkleitungen-fuer-die-nationalstrasse"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -568,7 +535,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     },
     "fr": {
       "canton": "TG",
@@ -579,48 +546,48 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, semaine jusqu’au 15 novembre 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, semaine jusqu’au 24 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "2",
-          "note": "signalements au 16 novembre 2026"
+          "value": "1",
+          "note": "signalements au 25 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 9 novembre 2026 au 15 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 18 novembre 2026 au 24 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
               "value": "0 min",
-              "detail": "49 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/diessenhofen-gailingen-am-hochrhein/aujourd-hui/"
             },
             {
               "label": "Konstanz – Kreuzlingen",
-              "value": "0,1 min",
-              "detail": "49 relevés",
+              "value": "0 min",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/konstanz-kreuzlingen/aujourd-hui/"
             },
             {
               "label": "Konstanz – Tägerwilen, Autostrada B33n/A7",
-              "value": "0,3 min",
-              "detail": "49 relevés",
+              "value": "0 min",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/konstanz-tagerwilen-autostrada-b33n-a7/aujourd-hui/"
             },
             {
               "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
-              "value": "0,3 min",
-              "detail": "49 relevés",
+              "value": "0 min",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/konstanz-tagerwilen-gottlieber-strasse/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-15T23:59:59.000Z"
+          "updatedAt": "2026-11-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -628,31 +595,30 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
-              "label": "Révoqué: H14 Frauenfeld -> Romanshorn entre Localité Bürglen et Localité Sulgen Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-11-16T06:24:00.000Z"
-            },
-            {
               "label": "A7 Kreuzlingen -> Winterthur entre Echangeur Echangeur de Grüneck et Jonction autoroutière Frauenfeld-Est Situation: trafic perturbé travaux, longueur [km] 1.1 Gestion du trafic: rétrécissement des…",
               "value": "Chantier",
               "detail": "jusqu’au 7 décembre 2026",
               "date": "2026-11-09T09:11:00.000Z"
-            },
-            {
-              "label": "A1 Zurich <-> St-Gall entre Parking Stegen et Jonction autoroutière Matzingen Situation: trafic perturbé travaux, longueur [km] 2.5 Gestion du trafic: nouveau plan de circulation Complément 1…",
-              "value": "Chantier",
-              "detail": "jusqu’au 20 novembre 2026",
-              "date": "2026-11-11T19:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-16T07:21:34.368Z"
+          "updatedAt": "2026-11-25T19:39:26.365Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Irene Meister gewinnt den Hauptpreis der Kreuzlinger Velo-Challenge",
+              "date": "2026-11-25T14:43:34.000Z",
+              "url": "https://www.kreuzlingen.ch/aktuelles/irene-meister-gewinnt-den-hauptpreis-der-kreuzlinger-velo-challenge"
+            },
+            {
+              "label": "1-Franken-Bus fährt auch im kommenden Jahr",
+              "date": "2026-11-17T15:25:50.000Z",
+              "url": "https://www.kreuzlingen.ch/aktuelles/1-franken-bus-faehrt-auch-im-kommenden-jahr"
+            },
             {
               "label": "Regierungsrat passt Gebühren im Strassenverkehrsamt an",
               "date": "2026-11-12",
@@ -672,19 +638,9 @@
               "label": "Jahrmarkt: Zentrum für Durchgangsverkehr gesperrt",
               "date": "2026-10-21T16:00:00.000Z",
               "url": "https://www.kreuzlingen.ch/aktuelles/jahrmarkt-zentrum-fuer-durchgangsverkehr-gesperrt"
-            },
-            {
-              "label": "Kantonsstrasse in Felben-Wellhausen wird saniert",
-              "date": "2026-10-16",
-              "url": "https://www.tg.ch/news.html/485/news/80433"
-            },
-            {
-              "label": "Neue Werkleitungen für die Nationalstrasse",
-              "date": "2026-10-14T06:33:47.000Z",
-              "url": "https://www.kreuzlingen.ch/aktuelles/neue-werkleitungen-fuer-die-nationalstrasse"
             }
           ],
-          "updatedAt": "2026-11-15T22:07:40.362Z"
+          "updatedAt": "2026-11-25T16:08:35.229Z"
         }
       ],
       "curatedArticles": [
@@ -750,7 +706,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-16T18:42:30.844Z"
+      "updatedAt": "2026-11-26T07:02:23.749Z"
     }
   }
 }
