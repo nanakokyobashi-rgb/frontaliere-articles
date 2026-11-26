@@ -591,7 +591,9 @@ test('reconcile evita un backfill duplicato sulla stessa revisione e conserva la
     }));
     const run = (pendingFlip, main = commit, afterDispatch = '', activeRuns, release = commit) => execFileSync('bash', ['-c', [
       'rm -f main-after-dispatch',
-      'gh() { if [ "$1" = api ]; then printf "%s" "$ACTIVE_RUNS"; else printf "%s\\n" "$@"; '
+      'gh() { if [ "$1" = api ]; then '
+        + 'case "$PENDING_EDGE_FLIP:$*" in true:*created*|false:*created*) [ "$PENDING_EDGE_FLIP" = false ] || return 1;; false:*) return 1;; esac; '
+        + 'printf "%s" "$ACTIVE_RUNS"; else printf "%s\\n" "$@"; '
         + 'if [ -n "$MAIN_AFTER_DISPATCH" ]; then printf "%s\\n" "$MAIN_AFTER_DISPATCH" > main-after-dispatch; fi; fi; }',
       'date() { echo 2026-11-19T04:00:00Z; }',
       source.slice(start, end),
@@ -624,6 +626,7 @@ test('reconcile evita un backfill duplicato sulla stessa revisione e conserva la
     const cohort = ['canton-ne', 'canton-ti', 'canton-appenzello'].map((section) => ({
       ...pending(section, section === 'canton-ti' ? 'completed' : 'queued'),
       conclusion: section === 'canton-ti' ? 'success' : null,
+      created_at: '2026-11-18T12:00:00Z',
       display_title: `cover-publish-section / ${section} / nonce=reconcile-42-${key}-${section} / dry=false / c=reconcile-42-n3`,
     }));
     const reused = run('true', commit, '', cohort);
