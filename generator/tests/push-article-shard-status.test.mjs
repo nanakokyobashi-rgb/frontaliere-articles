@@ -168,6 +168,37 @@ test('il metadata remote-newer è obbligatorio e resta associato al commit del f
   assert.match(source, /restore_last_commit_skipped_newer_paths[\s\S]{0,120}shard_pat_push/u);
 });
 
+test('a later Pages build must descend from the push and preserve its changed paths', () => {
+  const root = mkdtempSync(join(tmpdir(), 'article-shard-pages-proof-'));
+  try {
+    git(root, ['init', '-q']);
+    git(root, ['config', 'user.name', 'Pages test']);
+    git(root, ['config', 'user.email', 'pages-test@example.invalid']);
+    const commit = (file, body) => {
+      writeFileSync(join(root, file), body);
+      git(root, ['add', file]);
+      git(root, ['commit', '-qm', file]);
+      return git(root, ['rev-parse', 'HEAD']);
+    };
+    const old = commit('hub.html', 'old hub');
+    const pushed = commit('article.html', 'published article');
+    const preserved = commit('hub.html', 'new hub');
+    const overwritten = commit('article.html', 'different article');
+    const source = readFileSync(PUSHER, 'utf8');
+    const proof = source.match(/^pages_build_preserves_push\(\) \{[\s\S]+?^\}/mu)?.[0];
+    assert.ok(proof);
+    const result = execFileSync('bash', ['-uo', 'pipefail', '-c', `${proof}
+      stage="$1"
+      for built in "\${@:3}"; do
+        pages_build_preserves_push "$2" "$built"
+        echo "$?"
+      done`, 'proof', root, pushed, preserved, overwritten, old], { encoding: 'utf8' });
+    assert.equal(result, '0\n1\n1\n');
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('i batch Pages sono seriali, raggruppati e riconciliabili', () => {
   const source = readFileSync(PUSHER, 'utf8');
   const workflow = readFileSync(WORKFLOW, 'utf8');
@@ -202,7 +233,9 @@ test('il rollback mantiene la revisione e pianifica il budget Pages per tutti i 
   assert.match(source, /candidate_parent.*expected_parent/u);
   assert.match(source, /expected_parent="\$candidate"/u);
   assert.match(source, /expected_parent.*remote_head/u);
-  assert.doesNotMatch(source, /merge-base --is-ancestor/u);
+  const rollback = source.match(/^rollback_serialized_publications\(\) \{[\s\S]+?^\}/mu)?.[0];
+  assert.ok(rollback);
+  assert.doesNotMatch(rollback, /merge-base --is-ancestor/u);
   assert.match(source, /rollback_content_revision[\s\S]{0,700}Content-Rev: \$rollback_content_revision/u);
   assert.match(source, /export ARTICLE_PUSH_PAGES_DEADLINE="\$article_push_pages_deadline"/u);
   assert.match(source, /ARTICLE_PUSH_PAGES_DEADLINE="\$article_push_pages_deadline"[\s\\\n]+ARTICLE_PUSH_STATUS_FILE/u);

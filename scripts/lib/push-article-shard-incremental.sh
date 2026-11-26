@@ -384,6 +384,19 @@ pages_build_commit_matches() {
   return 1
 }
 
+# Pages may skip an intermediate commit when another repository updates the
+# same shard. Require ancestry and unchanged entries for every path we pushed.
+pages_build_preserves_push() {
+  local expected="$1" built="$2" parent pushed_paths later_paths overlap
+  parent="$(git -C "$stage" rev-parse --verify "$expected^" 2>/dev/null)" || return 1
+  git -C "$stage" merge-base --is-ancestor "$expected" "$built" 2>/dev/null || return 1
+  pushed_paths="$(git -C "$stage" diff --no-renames --name-only "$parent" "$expected" | LC_ALL=C sort)" || return 1
+  [ -n "$pushed_paths" ] || return 1
+  later_paths="$(git -C "$stage" diff --no-renames --name-only "$expected" "$built" | LC_ALL=C sort)" || return 1
+  overlap="$(LC_ALL=C comm -12 - <(printf '%s\n' "$later_paths") <<< "$pushed_paths")" || return 1
+  [ -z "$overlap" ]
+}
+
 # GitHub Pages starts a deployment for every push to a shard repository. A
 # successful `git push` is therefore only the hand-off, not the end of a
 # serialized batch: starting the next push while this build is queued/building
@@ -392,7 +405,9 @@ pages_build_commit_matches() {
 # remotes are GitHub URLs and fail closed when their build cannot be observed.
 wait_for_pages_build() {
   local pushed_commit="$1" requested_deadline="${2:-${article_push_batch_pages_deadline:-$article_push_pages_deadline}}"
+  local require_exact="${3:-0}"
   local pages_url pages_repo token body pages_status pages_commit
+  local last_checked_build=''
   local deadline remaining current_epoch request_timeout
 
   if ! [[ "$requested_deadline" =~ ^[0-9]+$ ]]; then
@@ -473,6 +488,19 @@ wait_for_pages_build() {
           return 1
           ;;
       esac
+    elif [ "$require_exact" = 0 ] && [ "$pages_status" = built ] && [ "$pages_commit" != "$last_checked_build" ] \
+        && [[ "$pages_commit" =~ ^[0-9a-f]{40}$ ]]; then
+      request_timeout=$((remaining < 20 ? remaining : 20))
+      if timeout --kill-after=1s "${request_timeout}s" git ${GIT_PAT_OPTS[@]+"${GIT_PAT_OPTS[@]}"} -C "$stage" \
+          fetch --quiet --filter=blob:none --depth=16 origin "$pages_commit" >/dev/null 2>&1; then
+        last_checked_build="$pages_commit"
+        if pages_build_preserves_push "$pushed_commit" "$pages_commit"; then
+          echo "✅ $section-$loc article shard: Pages build $pages_commit preserves $pushed_commit"
+          return 0
+        fi
+      fi
+      remaining=$((deadline - $(date +%s)))
+      [ "$remaining" -gt 0 ] || continue
     fi
 
     echo "⏳ $section-$loc article shard: Pages build for $pushed_commit is '${pages_status:-not visible yet}' (waiting ${remaining}s)"
@@ -959,7 +987,7 @@ rollback_serialized_publications() {
       return 1
     fi
   fi
-  if ! wait_for_pages_build "$rollback_commit" "$rollback_deadline"; then
+  if ! wait_for_pages_build "$rollback_commit" "$rollback_deadline" 1; then
     echo "::error::serialized-push rollback reached git but its Pages build did not complete" >&2
     return 1
   fi
