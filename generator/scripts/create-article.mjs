@@ -380,6 +380,7 @@ import {
   codexCallDeadlineMs,
   initialTranslationDeadlineMs,
   CODEX_TRANSLATE_TRANSPORT_RETRIES,
+  CODEX_TRANSLATE_MIN_CALL_MS,
   getCascadeStats,
 } from './lib/free-translate.mjs';
 import {
@@ -7225,7 +7226,7 @@ function verifiedCantonFactsBlock(referenceText = '') {
   return `\nFATTI ANNUALI VERIFICATI DEL CANTONE (riferimento canonico separato dalla fonte originale; confronta qui aliquote e valori annuali, senza attribuirli alla fonte):\n"""\n${referenceText.trim()}\n"""\n`;
 }
 
-async function llmFactCheck(contentIt, sourceContent = '', sourceUrl = '', verifiedReferenceText = '', { precedesTranslation = false } = {}) {
+async function llmFactCheck(contentIt, sourceContent = '', sourceUrl = '', verifiedReferenceText = '', { preTranslationDeadlineMs = Infinity } = {}) {
   const articleText = [
     contentIt?.title || '',
     contentIt?.excerpt || '',
@@ -7474,18 +7475,9 @@ ${proofResponseFormat}`
   // is still never published without a verifier verdict.
   const FACTCHECK_INFRA_RETRIES = 3;
   const runDeadlineMs = RUN_START_MS + RUN_WALL_BUDGET_MS;
-  // Reserve time for translation even when verification starts late. Keep
-  // 45s for the checker when possible, and the original proportional reserve
-  // if the run is already too close to the deadline for both windows.
   const remainingAtFactCheckMs = Math.max(0, runDeadlineMs - Date.now());
-  const translationReserveFloorMs = precedesTranslation
-    ? Math.min(90_000, Math.max(0, remainingAtFactCheckMs - 45_000))
-    : 0;
-  const postFactCheckReserveMs = Math.min(120_000, Math.max(
-    translationReserveFloorMs,
-    Math.floor(remainingAtFactCheckMs / 4),
-  ));
-  const factCheckDeadlineMs = runDeadlineMs - postFactCheckReserveMs;
+  const postFactCheckReserveMs = Math.min(120_000, Math.floor(remainingAtFactCheckMs / 4));
+  const factCheckDeadlineMs = Math.min(runDeadlineMs - postFactCheckReserveMs, preTranslationDeadlineMs);
   // Cap on retry-after-derived backoff between outer fact-check attempts.
   // The per-model retry inside ai-models.mjs already honours the retry-after
   // header during its own loop; this cap guards the outer loop that fires when
@@ -23338,6 +23330,13 @@ async function main() {
 
 /** Core article pipeline: fetch → generate IT → validate → duplicates → translate → sanitize → image → modify files → git */
 async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
+  const translationDeadlineMs = initialTranslationDeadlineMs();
+  // The shared cutoff leaves the minimum Codex call window plus the same
+  // amount for preparing the translations. The helper already accounts for
+  // body recovery and the process shutdown margin.
+  const preTranslationDeadlineMs = translationDeadlineMs == null
+    ? Infinity
+    : translationDeadlineMs - 2 * CODEX_TRANSLATE_MIN_CALL_MS;
   // Una fonte che riusa gli URL arriva con l'identita' dell'item nel frammento
   // (`#ft-item=…`, vedi lib/source-url-ledger.mjs). Quella forma serve al
   // LEDGER (in fondo, recordSourceUrl); tutto il resto — scaricare la pagina,
@@ -24231,7 +24230,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
 
     // Step 3a.0c: LLM fact verification — PRIMARY BLOCKING GATE
     try {
-      const factResult = await llmFactCheck(data.content.it, pageContent, url, CANTON_FACTS_BRIEF, { precedesTranslation: true });
+      const factResult = await llmFactCheck(data.content.it, pageContent, url, CANTON_FACTS_BRIEF, { preTranslationDeadlineMs });
       if (factResult.unverified === true) {
         throw createFactCheckUnavailableError(factResult, 'article');
       }
@@ -24421,7 +24420,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
         let expandFactIssues = null;
         let expandFactSourceText = '';
         try {
-          const expandFactResult = await llmFactCheck(data.content.it, pageContent, url, CANTON_FACTS_BRIEF, { precedesTranslation: true });
+          const expandFactResult = await llmFactCheck(data.content.it, pageContent, url, CANTON_FACTS_BRIEF, { preTranslationDeadlineMs });
           if (expandFactResult.unverified === true) {
             throw createFactCheckUnavailableError(expandFactResult, 'expansion');
           }

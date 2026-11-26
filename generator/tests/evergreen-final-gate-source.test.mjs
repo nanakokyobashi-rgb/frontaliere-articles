@@ -349,10 +349,10 @@ test('#7 il brief cantonale è un riferimento verificato separato dalla fonte, a
   assert.equal(referenceBlock('  Fisco TI, dataset 2026.  '),
     '\nFATTI ANNUALI VERIFICATI DEL CANTONE (riferimento canonico separato dalla fonte originale; confronta qui aliquote e valori annuali, senza attribuirli alla fonte):\n"""\nFisco TI, dataset 2026.\n"""\n');
 
-  assert.match(src, /async function llmFactCheck\(contentIt, sourceContent = '', sourceUrl = '', verifiedReferenceText = '', \{ precedesTranslation = false \} = \{\}\)/);
+  assert.match(src, /async function llmFactCheck\(contentIt, sourceContent = '', sourceUrl = '', verifiedReferenceText = '', \{ preTranslationDeadlineMs = Infinity \} = \{\}\)/);
   assert.match(src, /\$\{verifiedCantonFactsBlock\(verifiedReferenceText\)\}/);
   assert.equal(
-    [...src.matchAll(/llmFactCheck\(data\.content\.it, pageContent, url, CANTON_FACTS_BRIEF, \{ precedesTranslation: true \}\)/g)].length,
+    [...src.matchAll(/llmFactCheck\(data\.content\.it, pageContent, url, CANTON_FACTS_BRIEF, \{ preTranslationDeadlineMs \}\)/g)].length,
     2,
     'sia la verifica iniziale sia quella post-espansione devono ricevere lo stesso brief canonico',
   );

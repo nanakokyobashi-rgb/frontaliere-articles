@@ -2247,7 +2247,7 @@ const CODEX_TRANSLATE_BATCH_MAX_CHARS_LIMIT = 50_000;
 const CODEX_TRANSLATE_BATCH_COLLECTION_MS = 25;
 // Sotto questo residuo una chiamata non ha il tempo di finire: stesso minimo
 // che ai-models.mjs applica alla lane (CODEX_CLI_MIN_TIMEOUT_MS).
-const CODEX_TRANSLATE_MIN_CALL_MS = 15_000;
+export const CODEX_TRANSLATE_MIN_CALL_MS = 15_000;
 // Il default resta quello dei chiamanti generali. translate-pending imposta il
 // valore esplicito FREE_TRANSLATE_CODEX_CALL_TIMEOUT_MS; il clamp impedisce a
 // un override del workflow di oltrepassare il tetto del broker.
