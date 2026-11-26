@@ -62,7 +62,7 @@
  */
 import '../../host/cantonSectionsBootstrap.mjs';
 import { execFileSync } from 'node:child_process';
-import { appendFileSync, mkdtempSync, readFileSync, realpathSync, rmSync } from 'node:fs';
+import { appendFileSync, mkdtempSync, readFileSync, realpathSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -73,11 +73,14 @@ import {
   CANTON_SECTION_DISABLED_MARKER,
   CANTON_SECTIONS_ENABLED_ENV,
   cantonSectionProfile,
+  loadCantonSectionProfiles,
+  parseEnabledCantonSections,
   resolveCantonSectionGate,
 } from '../../generator/scripts/lib/canton-section-profile.mjs';
 import { RC_LOADED_MARKER } from '../../generator/scripts/load-rc-env.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
+export const CANTON_GATE_RECEIPT_FILENAME = 'canton-section-gate.json';
 
 /** Marker scritto dal loader soltanto dopo una lettura riuscita del template. */
 export const RC_SENTINEL_ENV = RC_LOADED_MARKER;
@@ -191,6 +194,26 @@ export function positiveInt(raw, fallback) {
   if (!/^[0-9]+$/.test(s)) return fallback;
   const n = Number(s);
   return Number.isSafeInteger(n) && n > 0 ? n : fallback;
+}
+
+/** Proietta solo lo stato del gate di sezione prima dei controlli di ammissione successivi. */
+export function projectCantonGateReceipt({ section, runAttempt, env = {}, profiles }) {
+  if (typeof section !== 'string' || !isCantonSection(section)) return null;
+  if (typeof runAttempt !== 'string' && typeof runAttempt !== 'number') return null;
+  const attempt = positiveInt(runAttempt, null);
+  if (attempt === null || !profiles) return null;
+
+  const rcLoaded = remoteConfigLoaded(env);
+  const profileEnabled = cantonSectionProfile(section, profiles).enabled === true;
+  return {
+    schemaVersion: 1,
+    section,
+    runAttempt: attempt,
+    rcLoaded,
+    profileEnabled,
+    rcAllowsSection: rcLoaded ? parseEnabledCantonSections(env?.[CANTON_SECTIONS_ENABLED_ENV]).sections.has(section) : null,
+    gateEnabled: rcLoaded && resolveCantonSectionGate(section, { env, profiles }).enabled,
+  };
 }
 
 /** `dailyBudget` del profilo, abbassato (mai alzato) da un tetto globale opzionale. */
@@ -486,5 +509,17 @@ if (isMain()) {
     if (verdict.reason === 'canton-disabled') console.log(`${CANTON_SECTION_DISABLED_MARKER} section=${section}`);
     console.log(`canton-admit: ${section} non ammessa — ${verdict.detail}`);
     console.log(`GENERATION_OUTCOME kind=skipped reason=${verdict.reason} section=${section}`);
+  }
+  const { CANTON_GATE_RECEIPT_PATH, RUNNER_TEMP, GITHUB_RUN_ATTEMPT } = process.env;
+  if (RUNNER_TEMP && path.isAbsolute(RUNNER_TEMP)
+    && CANTON_GATE_RECEIPT_PATH === path.join(RUNNER_TEMP, CANTON_GATE_RECEIPT_FILENAME)) {
+    try {
+      const receipt = projectCantonGateReceipt({
+        section, runAttempt: GITHUB_RUN_ATTEMPT, env: process.env, profiles: loadCantonSectionProfiles(),
+      });
+      if (receipt) writeFileSync(CANTON_GATE_RECEIPT_PATH, `${JSON.stringify(receipt)}\n`, { flag: 'wx' });
+    } catch {
+      // L'osservazione è facoltativa. Il verdetto è già stato emesso.
+    }
   }
 }

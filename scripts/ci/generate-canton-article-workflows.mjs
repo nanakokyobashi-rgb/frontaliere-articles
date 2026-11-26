@@ -175,7 +175,18 @@ const SECTION_GATE_JOB = `  section_gate:
           CANTON_GENERATION_MAX_PARALLEL: \${{ vars.CANTON_GENERATION_MAX_PARALLEL }}
           CANTON_DAILY_BUDGET_CAP: \${{ vars.CANTON_DAILY_BUDGET_CAP }}
           QUOTA_BEACON_PEER_REPO: ${QUOTA_BEACON_PEER_REPO}
+          CANTON_GATE_RECEIPT_PATH: \${{ runner.temp }}/canton-section-gate.json
         run: node scripts/ci/canton-generation-admit.mjs
+
+      - name: Upload canton section gate receipt
+        if: steps.canton.outcome == 'success'
+        continue-on-error: true
+        uses: actions/upload-artifact@v7
+        with:
+          name: canton-section-gate-\${{ github.run_id }}-\${{ github.run_attempt }}
+          path: \${{ runner.temp }}/canton-section-gate.json
+          retention-days: 3
+          if-no-files-found: ignore
 
       - name: Section gate — conferma dello slot ammesso
         id: claim
