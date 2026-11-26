@@ -15,6 +15,10 @@
     "canton-ur::https://www.nau.ch/news/schweiz/wanderer-17-im-kanton-uri-tot-aufgefunden-67202816": {
       "section": "canton-ur",
       "ts": 1795624732931
+    },
+    "canton-ur::https://www.ur.ch/_rte/information/139525": {
+      "section": "canton-ur",
+      "ts": 1795692349076
     }
   }
 }
