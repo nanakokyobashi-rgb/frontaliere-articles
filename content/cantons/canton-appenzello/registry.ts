@@ -359,4 +359,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'appenzello-esterno-risparmio-verifica',
+ category: 'fiscale',
+ date: '2026-11-26T13:26:08.407Z',
+ image: '/images/blog/article-appenzello-esterno-risparmio-verifica.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

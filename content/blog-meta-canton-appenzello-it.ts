@@ -99,6 +99,9 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.teufen-finanziamento-tunnel.title': 'Teufen: tunnel e opere finanziabili fino a 120 milioni',
     'blog.article.teufen-finanziamento-tunnel.excerpt': 'Il comitato «Teufen mit Zukunft» riferisce che un finanziamento fino a 120 milioni di franchi potrebbe coprire il tunnel ferroviario e altre opere.',
     'blog.article.teufen-finanziamento-tunnel.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.appenzello-esterno-risparmio-verifica.title': 'Governo Appenzello Esterno verifica ulteriori risparmi',
+    'blog.article.appenzello-esterno-risparmio-verifica.excerpt': 'Misure precedenti hanno già generato CHF 9,5 milioni di risparmio annuo; l\'obiettivo è bilancio in pareggio e indebitamento stabilizzato.',
+    'blog.article.appenzello-esterno-risparmio-verifica.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAppenzelloIt;

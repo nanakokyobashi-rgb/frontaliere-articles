@@ -99,6 +99,9 @@ const blogMetaCantonAppenzelloFr: Record<string, string> = {
     'blog.article.teufen-finanziamento-tunnel.title': 'Teufen : tunnel et ouvrages finançables jusqu’à 120 millions',
     'blog.article.teufen-finanziamento-tunnel.excerpt': 'Le comité « Teufen mit Zukunft » indique qu’un financement pouvant atteindre 120 millions de francs pourrait couvrir le tunnel ferroviaire et d’autres ouvrages.',
     'blog.article.teufen-finanziamento-tunnel.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.appenzello-esterno-risparmio-verifica.title': 'Gouvernement d’Appenzell étudie d’autres économies',
+    'blog.article.appenzello-esterno-risparmio-verifica.excerpt': 'Les mesures précédentes ont déjà généré CHF 9,5 millions d\'économies annuelles ; l\'objectif est un budget équilibré et un endettement stabilisé.',
+    'blog.article.appenzello-esterno-risparmio-verifica.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAppenzelloFr;

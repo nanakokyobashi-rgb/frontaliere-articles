@@ -99,6 +99,9 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.teufen-finanziamento-tunnel.title': 'Teufen: tunnel and projects fundable up to 120 million',
     'blog.article.teufen-finanziamento-tunnel.excerpt': 'The «Teufen mit Zukunft» committee reports that financing of up to 120 million francs could cover the railway tunnel and other projects.',
     'blog.article.teufen-finanziamento-tunnel.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.appenzello-esterno-risparmio-verifica.title': 'Appenzell Ausserrhoden Government examines further savings',
+    'blog.article.appenzello-esterno-risparmio-verifica.excerpt': 'Previous measures have already generated CHF 9,5 million in annual savings; the objective is a balanced budget and stabilized debt.',
+    'blog.article.appenzello-esterno-risparmio-verifica.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAppenzelloEn;
