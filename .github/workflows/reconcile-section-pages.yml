@@ -308,15 +308,19 @@ jobs:
             exit "$verify_status"
           fi
           dispatch_sections="$(jq -c '[.sections[] | select(.dispatch)]' "$RUNNER_TEMP/reconcile-sections.json")"
+          # Reconcile runs serialize, but their children can outlive them.
+          run_filters=()
           if [ "$PENDING_EDGE_FLIP" != 'true' ]; then
-            # Reconcile runs serialize, but the child publisher outlives its
-            # coordinator. Reuse a recovery already working on this revision.
             since="$(date -u -d '6 hours ago' +%Y-%m-%dT%H:%M:%SZ)"
-            active_sections="$(gh api --paginate --slurp -X GET \
-              "repos/$GITHUB_REPOSITORY/actions/workflows/fast-publish-section.yml/runs" \
-              -f branch=main -f event=workflow_dispatch -f head_sha="$dispatch_source" \
-              -f "created=>=$since" -f per_page=100 \
-              | jq -ce --arg sha "$dispatch_source" '
+            run_filters+=(-f "created=>=$since")
+          fi
+          child_runs="$(gh api --paginate --slurp -X GET \
+            "repos/$GITHUB_REPOSITORY/actions/workflows/fast-publish-section.yml/runs" \
+            -f branch=main -f event=workflow_dispatch -f head_sha="$dispatch_source" \
+            -f per_page=100 "${run_filters[@]}")"
+          plan_key=''
+          if [ "$PENDING_EDGE_FLIP" != 'true' ]; then
+            active_sections="$(jq -ce --arg sha "$dispatch_source" '
                 if length == 0 or any(.[]; (.workflow_runs | type) != "array") then
                   error("invalid fast-publish-section run list")
                 else
@@ -329,12 +333,50 @@ jobs:
                     | capture($title_re).section]
                   | unique
                 end
-              ')"
+              ' <<< "$child_runs")"
             dispatch_sections="$(jq -c --argjson active "$active_sections" '
               map(select(.section as $section | ($active | index($section)) == null))
             ' <<< "$dispatch_sections")"
             if [ "$dispatch_sections" = '[]' ]; then
               echo 'Backfill già in coda o in corso sulla stessa revisione.'
+              exit 0
+            fi
+          else
+            # An edge flip needs a complete cohort. Its identity includes the
+            # release commit and exact recovery plan, including missing paths.
+            if ! [[ "$API_RELEASE_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
+              echo '::error::Commit della release API non valido per il backfill.'
+              exit 1
+            fi
+            plan_key="$(jq -cS 'map({section, selected, missingPagePaths, knownMissingPagePaths}) | sort_by(.section)' <<< "$dispatch_sections" | {
+              printf '%s\n' "$API_RELEASE_COMMIT"
+              cat
+            } | sha256sum | cut -c1-32)"
+            sections="$(jq -c 'map(.section) | sort' <<< "$dispatch_sections")"
+            reusable_cohort="$(jq -r --arg sha "$dispatch_source" --arg key "$plan_key" --argjson sections "$sections" '
+              if length == 0 or any(.[]; (.workflow_runs | type) != "array") then
+                error("invalid fast-publish-section run list")
+              else
+                ("^(?<id>[0-9]+)-" + $key + "-(?<section>canton-[a-z0-9-]+)$") as $nonce_re
+                | [.[].workflow_runs[] | select(.head_sha == $sha)
+                  | . as $run
+                  | (try (.display_title | capture("^cover-publish-section / (?<section>canton-[a-z0-9-]+) / nonce=reconcile-(?<nonce>[^ ]+) / dry=false / c=(?<cohort>[^ ]+)$")) catch empty) as $title
+                  | select($title.nonce | test($nonce_re))
+                  | ($title.nonce | capture($nonce_re)) as $nonce
+                  | select($title.section == $nonce.section
+                      and $title.cohort == "reconcile-\($nonce.id)-n\($sections | length)")
+                  | {section: $title.section, cohort: $title.cohort,
+                     active: ($run.status | IN("queued", "pending", "in_progress", "requested", "waiting")),
+                     success: ($run.status == "completed" and $run.conclusion == "success")}]
+                | group_by(.cohort)
+                | map(select((map(.section) | sort) == $sections
+                    and any(.[]; .active)
+                    and all(.[]; .active or .success)))
+                | .[0][0].cohort // ""
+              end
+            ' <<< "$child_runs")"
+            if [ -n "$reusable_cohort" ]; then
+              echo "Coorte equivalente già in coda o in corso per il flip API: $reusable_cohort (piano $plan_key)."
               exit 0
             fi
           fi
@@ -359,7 +401,7 @@ jobs:
           while IFS=$'\t' read -r section ids missing_page_paths known_missing_page_paths; do
             [ -n "$section" ] || continue
             echo "── backfill $section ids=$ids"
-            dispatch_nonce="reconcile-${GITHUB_RUN_ID}-${section}"
+            dispatch_nonce="reconcile-${GITHUB_RUN_ID}-${plan_key:+${plan_key}-}${section}"
             args=(
               -f "section=$section"
               -f "article_ids=$ids"

@@ -4764,7 +4764,7 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.doesNotMatch(wf, /Wait for all staged backfills before the API replay/);
   assert.match(wf, /Replay API after event-driven backfill readiness/);
   assert.match(wf, /event_replay=true/);
-  assert.match(wf, /dispatch_nonce="reconcile-\$\{GITHUB_RUN_ID\}-\$\{section\}"/);
+  assert.match(wf, /dispatch_nonce="reconcile-\$\{GITHUB_RUN_ID\}-\$\{plan_key:\+\$\{plan_key\}-\}\$\{section\}"/);
   assert.match(wf, /scripts\/ci\/verify-fast-publish-section-cohort\.sh/);
   assert.match(wf, /steps\.detect\.outputs\.leftover == '0'/);
   assert.match(wf, /steps\.detect\.outputs\.dispatch == '0'/);
