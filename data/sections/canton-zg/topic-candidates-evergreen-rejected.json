@@ -11,6 +11,10 @@
     "canton-zg::https://zg.ch/de/news/2026/november/2026-11-25-infos-des-regierungsrats": {
       "section": "canton-zg",
       "ts": 1795630031542
+    },
+    "canton-zg::https://www.zugerwoche.ch/zuger-news/detail/kanton-17": {
+      "section": "canton-zg",
+      "ts": 1795696359572
     }
   }
 }
