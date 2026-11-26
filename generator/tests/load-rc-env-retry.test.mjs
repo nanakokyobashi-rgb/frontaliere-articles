@@ -412,7 +412,13 @@ test('il loader CLI non esporta configurazione operatore se le credenziali manca
 });
 
 function runRcCli(t, {
-  env, template, sdkFails = false, restStatus = 200, adc = { project_id: 'fixture-project' }, expectedStatus = 0,
+  env,
+  template,
+  sdkFails = false,
+  restStatus = 200,
+  adc = { project_id: 'fixture-project' },
+  expectedStatus = 0,
+  existingApps = [],
 }) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'rc-cli-'));
   t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
@@ -428,6 +434,7 @@ function runRcCli(t, {
     import { registerHooks } from 'node:module';
 
     const template = ${JSON.stringify(template)};
+    const existingApps = ${JSON.stringify(existingApps)};
     function record(call) {
       appendFileSync(${JSON.stringify(calls)}, JSON.stringify(call) + '\\n');
     }
@@ -437,6 +444,9 @@ function runRcCli(t, {
       return template;
     }
     globalThis.rcFixture = {
+      getApps() {
+        return existingApps;
+      },
       initializeApp(options, name) {
         record(['init', options.projectId ?? null, name ?? null]);
         return {};
@@ -465,7 +475,8 @@ function runRcCli(t, {
       resolve(specifier, context, nextResolve) {
         const mocks = {
           'firebase-admin/app': [
-            'export const applicationDefault = () => ({}), getApps = () => [];',
+            'export const applicationDefault = () => ({});',
+            'export const getApps = () => globalThis.rcFixture.getApps();',
             'export const { initializeApp } = globalThis.rcFixture;',
           ].join('\\n'),
           'firebase-admin/remote-config': 'export const { getRemoteConfig } = globalThis.rcFixture;',
@@ -577,6 +588,17 @@ test('la CLI locale client usa la default app anche con ADC senza project_id', (
   });
   assert.deepEqual(result.calls.filter(([kind]) => kind !== 'import'), [expectedRcInit('client'), ['sdk', 'client']]);
   assert.equal(result.stdout, operatorMarker + "export OPERATOR_ENABLED='false'\nexport OPERATOR_MAX_EMAIL_PER_DAY='5'\n");
+});
+
+test('la CLI server riusa l’app Firebase operator-rc già registrata', (t) => {
+  const result = runRcCli(t, {
+    env: { FRONTALIERE_LOAD_OPERATOR_CONFIG: '1', FRONTALIERE_OPERATOR_RC_SOURCE: 'server' },
+    template: rcCliTemplate,
+    existingApps: [{ name: 'operator-rc' }],
+  });
+  assert.deepEqual(result.calls.filter(([kind]) => kind !== 'import'), [['sdk', 'server']]);
+  assert.equal(result.stdout, operatorMarker + "export OPERATOR_ENABLED='false'\n");
+  assert.doesNotMatch(result.stderr, /Firebase Admin unavailable/);
 });
 
 test('la CLI rifiuta il selector privato invalido prima di caricare SDK, credenziali o REST', (t) => {
