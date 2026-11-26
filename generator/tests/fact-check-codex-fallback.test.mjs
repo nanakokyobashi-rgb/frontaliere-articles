@@ -452,6 +452,15 @@ describe('fact-check retries under a reported input cap', () => {
     return { verdict: 'PASS', confidence: 0.9, issues: [], servedBy: model, editorialAssessment };
   };
 
+  test('duplicate free votes recover through a different model before using Codex again', async () => {
+    const { modelResults, calls } = await runRounds({ replies: [firstVote, firstVote, secondVote] });
+    assert.equal(calls[2].model, AI_MODELS.GROQ_GPT_OSS_120B);
+    assert.deepEqual(Array.from(calls[2].options.excludeModels), [firstVote.servedBy, CODEX]);
+    assert.deepEqual(Array.from(modelResults, ({ servedBy }) => servedBy), [
+      firstVote.servedBy, secondVote.servedBy,
+    ]);
+  });
+
   test('two invalid proofs recover through independent votes in the ordinary retry', async () => {
     const reject = structuredReply(false);
     const answerWithEvidence = (model, request, options) => {

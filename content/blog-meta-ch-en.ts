@@ -8738,6 +8738,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.commissioni-divise-preventivo.title': 'Federal budget: split fees',
     'blog.article.commissioni-divise-preventivo.excerpt': 'The States Commission: 11 votes in favour, 0 against and 1 abstention.',
     'blog.article.commissioni-divise-preventivo.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.fiscalita-tre-livelli-svizzera.title': 'Swiss taxation: three levels and distinct areas of responsibility',
+    'blog.article.fiscalita-tre-livelli-svizzera.excerpt': 'Swiss taxation is structured across three levels: direct federal tax, cantonal taxation and municipal taxation.',
+    'blog.article.fiscalita-tre-livelli-svizzera.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

@@ -8738,6 +8738,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.commissioni-divise-preventivo.title': 'Bundesbudget: Aufgeteilte Provisionen',
     'blog.article.commissioni-divise-preventivo.excerpt': 'Die Kommission der Kantone: 11 Ja, 0 Nein und 1 Enthaltung. Die Kommission des Nationalrates schlägt vor, das Projekt abzulehnen.',
     'blog.article.commissioni-divise-preventivo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.fiscalita-tre-livelli-svizzera.title': 'Schweizer Steuerwesen: drei Ebenen und getrennte Zuständigkeiten',
+    'blog.article.fiscalita-tre-livelli-svizzera.excerpt': 'Das Schweizer Steuerwesen ist auf drei Ebenen gegliedert: direkte Bundessteuer, kantonale Besteuerung und kommunale Besteuerung.',
+    'blog.article.fiscalita-tre-livelli-svizzera.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

@@ -30352,6 +30352,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'fiscalita-tre-livelli-svizzera',
+    category: 'fiscale',
+    date: '2026-11-26T05:09:08.612Z',
+    image: '/images/blog/article-fiscalita-tre-livelli-svizzera.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
