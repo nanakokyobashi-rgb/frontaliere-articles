@@ -184,6 +184,20 @@ describe('the call is pinned to Codex', () => {
   });
 });
 
+test('fact-check leaves translation time even when verification starts late', () => {
+  const start = SRC.indexOf('  const remainingAtFactCheckMs =');
+  const end = SRC.indexOf('  // Cap on retry-after', start);
+  const deadline = (remaining, precedesTranslation = true) => runInNewContext(
+    `${SRC.slice(start, end)}\nfactCheckDeadlineMs`,
+    { runDeadlineMs: remaining, precedesTranslation, Date: { now: () => 0 } },
+  );
+  assert.equal(deadline(140_000), 50_000);
+  assert.equal(deadline(100_000), 45_000);
+  assert.equal(deadline(100_000, false), 75_000);
+  assert.equal(deadline(40_000), 30_000);
+  assert.equal(deadline(600_000), 480_000);
+});
+
 describe('llmFactCheck wiring', () => {
   const start = SRC.indexOf('// ── Codex Luna Max safety fallback when the primary vote is missing ──');
   const failClosed = SRC.indexOf('if (modelResults.length === 0 || lacksSecondOpinion) {', start);
@@ -282,6 +296,7 @@ describe('infrastructure retries with a retained vote', () => {
       Date: { now: () => now },
       RUN_START_MS: 0,
       RUN_WALL_BUDGET_MS: 240_000,
+      precedesTranslation: false,
       addIndependentVote,
       console: { error: (message) => logs.push(message) },
       editorialContext,
