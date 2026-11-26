@@ -66,25 +66,9 @@ replay_args=(
   -f push_after="$replay_after"
   -f coordinated_recovery="$child_coordinated_recovery"
 )
-# The freshness guard permits cover and generation bookkeeping to advance.
-# Use the last substantive revision for identity, and still dispatch the
-# exact current revision for checkout and API release resolution.
-bookkeeping_revisions="$(bash .replay-dispatcher-source/scripts/ci/section-source-unaffected.sh --bookkeeping-revisions "$CURRENT_MAIN")"
-replay_identity_head="${bookkeeping_revisions##*$'\n'}"
-if ! [[ "$replay_identity_head" =~ ^[a-f0-9]{40}$ ]]; then
-  echo "::error::revisione degli input di pubblicazione non verificabile"
-  exit 1
-fi
-replay_identity_args=("${replay_args[@]}")
-for index in "${!replay_identity_args[@]}"; do
-  case "${replay_identity_args[index]}" in
-    "source_commit=$CURRENT_MAIN") replay_identity_args[index]="source_commit=$replay_identity_head" ;;
-    "source_main_commit=$CURRENT_MAIN") replay_identity_args[index]="source_main_commit=$replay_identity_head" ;;
-    "push_after=$CURRENT_MAIN") replay_identity_args[index]="push_after=$replay_identity_head" ;;
-  esac
-done
-nonce_hash="$(printf '%s\0' "${replay_identity_args[@]}" | sha256sum | cut -c1-16)"
-dispatch_nonce="stale-late-${replay_identity_head:0:12}-${SECTION}-${nonce_hash}"
+# Normalize identity while keeping the exact source revision in the dispatch.
+dispatch_nonce="$(bash .replay-dispatcher-source/scripts/ci/section-source-unaffected.sh \
+  --replay-nonce "$CURRENT_MAIN" "$SECTION" "${replay_args[@]}")"
 dispatch_cohort="stale-late-${GITHUB_RUN_ID}-${SECTION}-n1"
 dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"
 bash .replay-dispatcher-source/scripts/ci/dispatch-fast-publish-replay.sh "$REPO" "$dispatch_title" --ref main \

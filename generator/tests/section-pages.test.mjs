@@ -4174,8 +4174,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   const lateGuardNonceStart = render.indexOf('local replay_args=(');
   const lateGuardTitleStart = render.indexOf('dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"', lateGuardNonceStart);
   const lateGuardNonce = render.slice(lateGuardNonceStart, lateGuardTitleStart);
-  assert.match(lateGuardNonce, /nonce_hash="\$\(printf '%s\\0' "\$\{replay_args\[@\]\}" \| sha256sum \| cut -c1-16\)"/);
-  assert.match(lateGuardNonce, /dispatch_nonce="stale-late-\$\{current_main:0:12\}-\$\{SECTION\}-\$\{nonce_hash\}"/);
+  assert.match(lateGuardNonce, /--replay-nonce "\$current_main" "\$SECTION" "\$\{replay_args\[@\]\}"/);
   assert.match(lateGuardNonce, /dispatch_cohort="stale-late-\$\{GITHUB_RUN_ID\}-\$\{SECTION\}-n1"/);
   assert.match(wf, /id: push_range[\s\S]*resolve-workflow-run-push-range\.mjs/);
   assert.doesNotMatch(wf, /commits\/\$WORKFLOW_RUN_HEAD_SHA\/events/);

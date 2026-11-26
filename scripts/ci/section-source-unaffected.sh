@@ -7,17 +7,52 @@ bookkeeping_paths=(
   ':(top,exclude,literal)data/discovery-attempt-state.json'
   ':(top,exclude,literal)data/topic-candidates-evergreen-rejected.json'
   ':(top,exclude,glob)data/sections/*/topic-candidates-evergreen-rejected.json'
+  # Runtime and fixtures for producing future articles, never read by renderers.
+  ':(top,exclude,literal)generator/scripts/create-article.mjs'
+  ':(top,exclude,glob)generator/tests/**/*.test.mjs'
+  # Cross-repo crawler synchronization, separate from the published corpus.
+  ':(top,exclude,literal)generator/data/crawler-cross-repo-contract.json'
+  ':(top,exclude,literal)scripts/ci/loop-sync-manifest.json'
+  ':(top,exclude,literal)scripts/ci/translate-queue-recovery.mjs'
+  ':(top,exclude,literal).github/workflows/translate-pending.yml'
 )
 
-# Revisions on the first-parent chain since the last change to publication inputs
-# used for replay identity. A shallow boundary is a conservative lower bound.
+# A shallow boundary is a conservative lower bound for the replay identity.
+last_publication_input() {
+  local revision="$1" base
+  if ! git cat-file -e "$revision^{commit}" 2>/dev/null; then
+    timeout 60 git fetch --quiet --no-tags --no-write-fetch-head origin "$revision" >&2 || return 1
+  fi
+  base="$(git log -1 --first-parent --full-history --format=%H "$revision" -- . "${bookkeeping_paths[@]}")" || return 1
+  [[ "$base" =~ ^[a-f0-9]{40}$ ]] || return 1
+  printf '%s\n' "$base"
+}
+
 if [ "${1:-}" = '--bookkeeping-revisions' ]; then
   revision="${2:-}"
   [[ "$#" -eq 2 && "$revision" =~ ^[a-f0-9]{40}$ ]] || exit 1
-  base="$(git log -1 --first-parent --full-history --format=%H "$revision" -- . "${bookkeeping_paths[@]}")"
-  [[ "$base" =~ ^[a-f0-9]{40}$ ]] || exit 1
+  base="$(last_publication_input "$revision")"
   git rev-list --first-parent "$base..$revision"
   printf '%s\n' "$base"
+  exit 0
+fi
+
+if [ "${1:-}" = '--replay-nonce' ]; then
+  revision="${2:-}"
+  section="${3:-}"
+  [[ "$#" -ge 4 && "$revision" =~ ^[a-f0-9]{40}$ && "$section" =~ ^canton-[a-z0-9-]+$ ]] || exit 1
+  shift 3
+  base="$(last_publication_input "$revision")"
+  identity_args=()
+  for arg in "$@"; do
+    case "$arg" in
+      "source_commit=$revision"|"source_main_commit=$revision"|"push_after=$revision")
+        arg="${arg%%=*}=$base" ;;
+    esac
+    identity_args+=("$arg")
+  done
+  hash="$(printf '%s\0' "${identity_args[@]}" | sha256sum | cut -c1-16)"
+  printf 'stale-late-%s-%s-%s\n' "${base:0:12}" "$section" "$hash"
   exit 0
 fi
 
@@ -62,14 +97,11 @@ git diff --quiet --no-ext-diff --no-textconv --ignore-submodules=none "$expected
   ':(top,exclude,literal)data/image-regeneration-queue.json' \
   ':(top,exclude,literal)data/image-regeneration-queue-pending.jsonl' \
   ':(top,exclude,glob)data/image-regeneration-queue-pending.jsonl.*.pending' \
-  ':(top,exclude,glob)generator/tests/**/*.test.mjs' \
-  ':(top,exclude,literal)generator/scripts/create-article.mjs' \
   ':(top,exclude,literal)generator/scripts/lib/ai-models.mjs' \
   ':(top,exclude,literal)generator/scripts/lib/free-translate.mjs' \
   ':(top,exclude,literal)generator/scripts/lib/canton-news-sources.mjs' \
   ':(top,exclude,literal)scripts/ci/canton-generation-admit.mjs' \
-  ':(top,exclude,literal)scripts/ci/canton-generation-coverage.mjs' \
-  ':(top,exclude,literal)scripts/ci/loop-sync-manifest.json' || exit 1
+  ':(top,exclude,literal)scripts/ci/canton-generation-coverage.mjs' || exit 1
 
 # Match approved scheduling deltas in one direction, including every context line.
 normalized_workflow_diff() {
