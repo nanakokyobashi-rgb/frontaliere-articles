@@ -170,7 +170,7 @@ jobs:
             # the full refresh, as do missing bases and non-push runs.
             if [[ "$EVENT_NAME" == push && -n "$PUSH_BEFORE" ]] &&
               CHANGED="$(git diff --no-renames --name-only "$PUSH_BEFORE" HEAD)"; then
-              LOCAL='^(content/blog-body-(canton-[a-z]+)/|content/blog-meta-(canton-[a-z]+)-(it|en|de|fr)\.ts$|content/cantons/(canton-[a-z]+)/(registry|seo|slugs)\.ts$|data/sections/(canton-[a-z]+)/(articles/|article-source-urls\.json$|quota-state\.json$|topic-candidates-[a-z-]+-counter\.json$))'
+              LOCAL='^(content/blog-body-(canton-[a-z]+)/|content/blog-meta-(canton-[a-z]+)-(it|en|de|fr)\.ts$|content/cantons/(canton-[a-z]+)/(registry|seo|slugs)\.ts$|data/sections/(canton-[a-z]+)/)'
               AUXILIARY='^(data/generated-image-registry\.json$|public/images/blog/)'
               CANTONS=()
               while IFS= read -r path; do
