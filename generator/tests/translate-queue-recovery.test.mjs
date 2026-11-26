@@ -573,6 +573,44 @@ test('un detentore riavviato si misura da jobs.started_at', async () => {
   assert.equal(report.reasonCodes.includes('queue_slo_breached'), false);
 });
 
+test('un translate terminale con recovery ancora attiva non diventa un pending vecchio', async () => {
+  const runId = 33500000014;
+  const workflowRun = run(runId, {
+    conclusion: null,
+    created_at: '2026-08-30T17:00:00.000Z',
+    status: 'in_progress',
+  });
+  const { report } = await observe(fakeGithub({
+    activeJobsByRun: {
+      [runId]: {
+        jobs: [
+          {
+            id: 1,
+            name: 'translate',
+            status: 'completed',
+            conclusion: 'failure',
+            started_at: '2026-08-30T17:10:00.000Z',
+          },
+          {
+            id: 2,
+            name: 'translate_timeout_recovery',
+            status: 'in_progress',
+            started_at: '2026-09-01T17:00:00.000Z',
+          },
+        ],
+        total_count: 2,
+      },
+    },
+    currentRuns: [workflowRun],
+    pages: [[]],
+  }));
+  assert.equal(report.counts.active, 0);
+  assert.equal(report.counts.pending, 0);
+  assert.equal(report.queue.slo.state, 'empty');
+  assert.equal(report.queue.slo.alert, false);
+  assert.equal(report.reasonCodes.includes('queue_slo_breached'), false);
+});
+
 // #1806: un rerun pending conserva il `created_at` della prima esecuzione, e
 // datarlo da li' misurava l'eta' della prima coda, non l'attesa dell'attempt
 // corrente: su una coda sana il watchdog dichiarava `breached` a 174.420 s e
