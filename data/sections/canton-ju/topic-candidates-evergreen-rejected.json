@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ju::https://www.rfj.ch/rfj/actualite/region/20261123-un-budget-2027-encore-teinte-par-le-transfert-a-moutier.html": {
-      "section": "canton-ju",
-      "ts": 1795511282973
-    },
     "canton-ju::https://www.estrepublicain.fr/economie/2026/11/25/nouveaux-accords-entre-l-europe-et-la-suisse-ce-que-les-frontaliers-peuvent-en-attendre": {
       "section": "canton-ju",
       "ts": 1795662633717
@@ -19,6 +15,10 @@
     "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261125-nouvelle-deduction-forfaitaire-possible-pour-les-salaries-suisses.html": {
       "section": "canton-ju",
       "ts": 1795663939044
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261126-la-penurie-de-main-d-oeuvre-qualifiee-a-poursuivi-son-repli-en-2026.html": {
+      "section": "canton-ju",
+      "ts": 1795684613005
     }
   }
 }
