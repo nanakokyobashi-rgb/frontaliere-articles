@@ -8929,17 +8929,21 @@
           "notes": "Atom (<entry>), 70 entry con tag Wallis, 6 negli ultimi 7 giorni. Unica fonte tedesca nazionale con feed tematico sul cantone."
         },
         {
-          "url": "https://www.vs.ch/",
+          "url": "https://www.vs.ch/web/communication",
           "format": "html",
           "parser": "html-links",
-          "publisher": "Etat du Valais (home, comunicati)",
+          "publisher": "Etat du Valais (comunicati)",
           "language": "fr",
           "kind": "istituzionale",
           "topics": ["servizi", "fisco", "mobilita", "pensioni", "cronaca"],
-          "quirks": {},
+          "quirks": {
+            "articlePathPattern": "^/web/communication/e/com-et-media/[0-9]+/[0-9]+$",
+            "articleContent": "html-text",
+            "maxRequestsPerRun": 4
+          },
           "items7d": 4,
-          "verifiedAt": "2026-10-05",
-          "notes": "Nessun RSS del Cantone. La home espone 4 comunicati server-rendered (link /web/communication/w/<slug>, data dd.mm.yyyy nel <time>). La pagina /web/communication ha lista caricata via JS (0 link) e sitemap.xml e' un indice Liferay con figli vuoti: usare la home. Volume basso ma qualificato."
+          "verifiedAt": "2026-11-26",
+          "notes": "Elenco istituzionale con link e date nel codice HTML. Il filtro accetta solo le schede dei comunicati e il parser tenta la lettura del testo dei tre più recenti entro il budget di quattro richieste."
         },
         {
           "url": "https://www.policevalais.ch/category/communiques-pour-les-medias/feed/",
