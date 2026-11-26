@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "carburanti",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "77aa1a7324b7a31f96d0bd395f41101887c74ab85703ab8dde66069c9d6e4c4d",
+  "updatedAt": "2026-11-26T07:13:50.824Z",
+  "contentHash": "4e818e69fbc4cc5578bd2e602e8cce48605a0c146c9e6baf674abc6aaa661e70",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Camion urta il guardrail sulla A2 a Basilea: coda ai confini",
+          "url": "/articoli-basilea/camion-urta-a2-basilea/",
+          "excerpt": "Mercoledì mattina, verso le 8.45, un camion con targa polacca è finito contro la barriera di sicurezza nella zona dell'uscita Wettsteinallee, a Basilea.",
+          "date": "2026-11-26T07:11:14.270Z"
+        },
+        {
           "title": "Pfiffner Gruppe porta 450 posti di lavoro a Pratteln",
           "url": "/articoli-basilea/pfiffner-450-posti-pratteln/",
           "excerpt": "450 posti di lavoro sono collegati a Pratteln, con riferimento all'Industriepark Rheinkrone; il titolo menziona un cambiamento a Lehenmatt.",
@@ -106,12 +112,6 @@
           "url": "/articoli-basilea/fuoriuscita-acido-liestal/",
           "excerpt": "Circa 1.000 litri di acido cloridrico sono fuoriusciti presso Dragon Pharma nell'area industriale Oristal a Liestal; l'allarme è cessato intorno alle 15.45.",
           "date": "2026-11-11T06:50:50.396Z"
-        },
-        {
-          "title": "Riaprono accessi Osttangente a Basilea il 16 novembre 2026",
-          "url": "/articoli-basilea/osttangente-riapertura-basilea/",
-          "excerpt": "Il 16 novembre 2026 riaprono l'uscita Wettsteinallee e l'ingresso Riehenstrasse; la Schwarzwaldstrasse sotto l'A2 sarà percorribile.",
-          "date": "2026-11-07T12:34:26.574Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T07:13:50.824Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Truck hits guardrail on A2 in Basel: queue at the borders",
+          "url": "/en/basel-articles/basel-a2-truck-crash/",
+          "excerpt": "On Wednesday morning, at around 8.45, a truck with Polish license plates crashed into the safety barrier near the Wettsteinallee exit in Basel.",
+          "date": "2026-11-26T07:11:14.270Z"
+        },
+        {
           "title": "Pfiffner Gruppe brings 450 jobs to Pratteln",
           "url": "/en/basel-articles/pfiffner-450-jobs-pratteln/",
           "excerpt": "450 jobs are linked to Pratteln, with reference to the Industriepark Rheinkrone; the title mentions a change in Lehenmatt.",
@@ -217,12 +223,6 @@
           "url": "/en/basel-articles/acid-leak-liestal-industrial/",
           "excerpt": "Approximately 1.000 liters of hydrochloric acid leaked at Dragon Pharma in the Oristal industrial area in Liestal; the alarm ended around 15.45.",
           "date": "2026-11-11T06:50:50.396Z"
-        },
-        {
-          "title": "Osttangente access points in Basel reopen on November 16, 2026",
-          "url": "/en/basel-articles/osttangente-reopening-basel/",
-          "excerpt": "On November 16, 2026, the Wettsteinallee exit and Riehenstrasse entrance will reopen; Schwarzwaldstrasse under the A2 will be passable.",
-          "date": "2026-11-07T12:34:26.574Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T07:13:50.824Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lastwagen prallt auf A2 bei Basel gegen Leitplanke: Grenzstau",
+          "url": "/de/basel-artikel/basel-a2-lkw-unfall/",
+          "excerpt": "Am Mittwochmorgen kam es gegen 8.45 Uhr bei der Ausfahrt Wettsteinallee in Basel zu einem Unfall: Ein Lastwagen mit polnischem Kennzeichen kollidierte mit der Sicherheitsbarriere.",
+          "date": "2026-11-26T07:11:14.270Z"
+        },
+        {
           "title": "Pfiffner Gruppe bringt 450 Arbeitsplätze nach Pratteln",
           "url": "/de/basel-artikel/pfiffner-450-arbeitsplaetze-pratteln/",
           "excerpt": "450 Arbeitsplätze sind mit Pratteln verbunden, mit Bezug auf den Industriepark Rheinkrone; der Titel erwähnt eine Veränderung in Lehenmatt.",
@@ -328,12 +334,6 @@
           "url": "/de/basel-artikel/saeure-auslaufen-liestal/",
           "excerpt": "Etwa 1.000 Liter Salzsäure sind bei Dragon Pharma im Industriegebiet Oristal in Liestal ausgetreten; der Alarm endete gegen 15.45 Uhr.",
           "date": "2026-11-11T06:50:50.396Z"
-        },
-        {
-          "title": "Osttangente-Zugänge in Basel am 16. November 2026 wiedereröffnet",
-          "url": "/de/basel-artikel/osttangente-zugange-in-basel-am-16-november-2026-wiedereroffnet/",
-          "excerpt": "Am 16. November 2026 enden die Schliessungen und Umleitungen im Zusammenhang mit der Sanierung der Osttangente im Wettsteinquartier in Basel.",
-          "date": "2026-11-07T12:34:26.574Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T07:13:50.824Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Camion percute la glissière sur l’A2 à Bâle : bouchon",
+          "url": "/fr/articles-bale/accident-camion-a2-bale/",
+          "excerpt": "Mercredi matin, vers 8.45, un camion avec une plaque d'immatriculation polonaise a percuté la barrière de sécurité dans la zone de la sortie de Wettsteinallee, à Bâle.",
+          "date": "2026-11-26T07:11:14.270Z"
+        },
+        {
           "title": "Pfiffner Gruppe apporte 450 emplois à Pratteln",
           "url": "/fr/articles-bale/pfiffner-450-emplois-pratteln/",
           "excerpt": "450 emplois sont liés à Pratteln, en référence à l'Industriepark Rheinkrone ; le titre mentionne un changement à Lehenmatt.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-bale/fuite-acide-liestal/",
           "excerpt": "Environ 1.000 litres d’acide chlorhydrique se sont échappés chez Dragon Pharma dans la zone industrielle Oristal à Liestal ; l’alerte a pris fin vers 15.45.",
           "date": "2026-11-11T06:50:50.396Z"
-        },
-        {
-          "title": "Réouverture des accès Osttangente à Bâle le 16 novembre 2026",
-          "url": "/fr/articles-bale/osttangente-reouverture-basle/",
-          "excerpt": "Le 16 novembre 2026, la sortie Wettsteinallee et l'entrée Riehenstrasse rouvrent ; la Schwarzwaldstrasse sous l'A2 sera praticable.",
-          "date": "2026-11-07T12:34:26.574Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T07:13:50.824Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "ef708dae4109af4d0968b78258b9a9dcc2ef0882832afe72d21d0dcd7b133c22",
+  "updatedAt": "2026-11-26T07:13:50.824Z",
+  "contentHash": "641e05435d66521b57abfa20784ef4b1b96294fe95142a725083d26b39632f02",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -197,6 +197,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Camion urta il guardrail sulla A2 a Basilea: coda ai confini",
+          "url": "/articoli-basilea/camion-urta-a2-basilea/",
+          "excerpt": "Mercoledì mattina, verso le 8.45, un camion con targa polacca è finito contro la barriera di sicurezza nella zona dell'uscita Wettsteinallee, a Basilea.",
+          "date": "2026-11-26T07:11:14.270Z"
+        },
+        {
           "title": "BVB: rasatura in tram, intervento di pulizia documentato",
           "url": "/articoli-basilea/bvb-rasatura-tram-episodio/",
           "excerpt": "La Basler Verkehrsbetriebe (BVB) ha pubblicato su Facebook una foto di due rasoi blu e capelli sul pavimento di un tram; è il primo episodio di questo tipo noto.",
@@ -227,22 +233,16 @@
           "date": "2026-10-01T02:08:49.379Z"
         },
         {
-          "title": "Basilea Città: abbonamenti ai trasporti, zone e tariffe",
-          "url": "/articoli-svizzera/abbonamenti-basilea-zone-tariffe/",
-          "excerpt": "Comunità tariffaria, zone e formule mensili o annuali: come orientarsi a Basilea Città tra metà-prezzo, AG e sconti per studenti e apprendisti.",
-          "date": "2026-10-01T01:57:38.605Z"
-        },
-        {
           "title": "Trasporti Basilea Campagna: abbonamenti, zone e tariffe",
           "url": "/articoli-svizzera/trasporti-basilea-campagna-abbonamenti/",
           "excerpt": "Abbonamenti mensili e annuali, zone tariffarie, mezzo-prezzo e GA per pendolari e studenti in Basilea Campagna.",
           "date": "2026-08-20T02:48:51.897Z"
         },
         {
-          "title": "Grigioni non riprendono il modello basilese per gestire il traffico",
-          "url": "/articoli-svizzera/grigioni-modello-basilese-traffico/",
-          "excerpt": "Il governo grigionese è scettico sull'adozione del modello di sanzioni di Birsfelden per deviare il traffico festivo e turistico.",
-          "date": "2026-06-29T16:07:16.810Z"
+          "title": "Basilea Città: abbonamenti ai trasporti, zone e tariffe",
+          "url": "/articoli-svizzera/abbonamenti-basilea-zone-tariffe/",
+          "excerpt": "Comunità tariffaria, zone e formule mensili o annuali: come orientarsi a Basilea Città tra metà-prezzo, AG e sconti per studenti e apprendisti.",
+          "date": "2026-10-01T01:57:38.605Z"
         }
       ],
       "latestCantonArticles": [],
@@ -276,7 +276,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T07:13:50.824Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -451,6 +451,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Truck hits guardrail on A2 in Basel: queue at the borders",
+          "url": "/en/basel-articles/basel-a2-truck-crash/",
+          "excerpt": "On Wednesday morning, at around 8.45, a truck with Polish license plates crashed into the safety barrier near the Wettsteinallee exit in Basel.",
+          "date": "2026-11-26T07:11:14.270Z"
+        },
+        {
           "title": "BVB: mowing in trams, documented cleaning",
           "url": "/en/basel-articles/bvb-tram-shaving-incident/",
           "excerpt": "The Basler Verkehrsbetriebe (BVB) posted on Facebook a photo of two blue razors and hair on the floor of a tram; it is the first known episode of this type.",
@@ -481,22 +487,16 @@
           "date": "2026-10-01T02:08:49.379Z"
         },
         {
-          "title": "Basel-Stadt: transport travelcards, zones and fares",
-          "url": "/en/swiss-articles/basel-public-transport-passes/",
-          "excerpt": "Fare zone system, zones, and monthly or annual passes: a guide to navigating Basel-Stadt’s half-fare, GA, and student and apprentice discounts.",
-          "date": "2026-10-01T01:57:38.605Z"
-        },
-        {
           "title": "Transport Basel Countryside: subscriptions, zones and fares",
           "url": "/en/swiss-articles/transport-baselland-subscriptions-zones/",
           "excerpt": "Monthly and annual subscriptions, fare zones, half-price and GA for commuters and students in Basel Countryside.",
           "date": "2026-08-20T02:48:51.897Z"
         },
         {
-          "title": "Graubünden does not use the Basel model to manage traffic",
-          "url": "/en/swiss-articles/graubunden-basel-model-traffic/",
-          "excerpt": "The Grison government is sceptical about adopting the Birsfelden model of sanctions to divert holiday and tourist traffic.",
-          "date": "2026-06-29T16:07:16.810Z"
+          "title": "Basel-Stadt: transport travelcards, zones and fares",
+          "url": "/en/swiss-articles/basel-public-transport-passes/",
+          "excerpt": "Fare zone system, zones, and monthly or annual passes: a guide to navigating Basel-Stadt’s half-fare, GA, and student and apprentice discounts.",
+          "date": "2026-10-01T01:57:38.605Z"
         }
       ],
       "latestCantonArticles": [],
@@ -530,7 +530,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T07:13:50.824Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -705,6 +705,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Lastwagen prallt auf A2 bei Basel gegen Leitplanke: Grenzstau",
+          "url": "/de/basel-artikel/basel-a2-lkw-unfall/",
+          "excerpt": "Am Mittwochmorgen kam es gegen 8.45 Uhr bei der Ausfahrt Wettsteinallee in Basel zu einem Unfall: Ein Lastwagen mit polnischem Kennzeichen kollidierte mit der Sicherheitsbarriere.",
+          "date": "2026-11-26T07:11:14.270Z"
+        },
+        {
           "title": "BVB: Mähen in Straßenbahnen, dokumentierte Reinigung",
           "url": "/de/basel-artikel/bvb-tram-rasurungsfall/",
           "excerpt": "Am Montag veröffentlichten die Basler Verkehrsbetriebe (BVB) auf Facebook ein Foto, das das Unternehmen selbst überraschte.",
@@ -735,22 +741,16 @@
           "date": "2026-10-01T02:08:49.379Z"
         },
         {
-          "title": "Basel-Stadt: Fahrkarten, Zonen und Tarife",
-          "url": "/de/schweiz-artikel/basel-oev-abos-zonen-tarife/",
-          "excerpt": "Tarifverbund, Zonen und Monats- oder Jahresabonnements: So finden Sie sich in Basel-Stadt zurecht – zwischen Halbtax, GA und Ermäßigungen für Studenten und Auszubildende.",
-          "date": "2026-10-01T01:57:38.605Z"
-        },
-        {
           "title": "Transporte Basel-Landschaft: Abonnements, Zonen und Tarife",
           "url": "/de/schweiz-artikel/verkehr-baselland-abos-zonen/",
           "excerpt": "Monats- und Jahresabonnements, Tarifzonen, Halbtax und GA für Pendler und Studenten in Basel-Landschaft.",
           "date": "2026-08-20T02:48:51.897Z"
         },
         {
-          "title": "Graubünden greift bei der Verkehrssteuerung nicht auf das Basler Modell zurück",
-          "url": "/de/schweiz-artikel/graubuenden-basler-modell-verkehr/",
-          "excerpt": "Die Bündner Regierung ist skeptisch gegenüber der Einführung des Birsfeldener Sanktionsmodells, um den Urlaubs- und Tourismusverkehr abzulenken.",
-          "date": "2026-06-29T16:07:16.810Z"
+          "title": "Basel-Stadt: Fahrkarten, Zonen und Tarife",
+          "url": "/de/schweiz-artikel/basel-oev-abos-zonen-tarife/",
+          "excerpt": "Tarifverbund, Zonen und Monats- oder Jahresabonnements: So finden Sie sich in Basel-Stadt zurecht – zwischen Halbtax, GA und Ermäßigungen für Studenten und Auszubildende.",
+          "date": "2026-10-01T01:57:38.605Z"
         }
       ],
       "latestCantonArticles": [],
@@ -784,7 +784,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T07:13:50.824Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -959,6 +959,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Camion percute la glissière sur l’A2 à Bâle : bouchon",
+          "url": "/fr/articles-bale/accident-camion-a2-bale/",
+          "excerpt": "Mercredi matin, vers 8.45, un camion avec une plaque d'immatriculation polonaise a percuté la barrière de sécurité dans la zone de la sortie de Wettsteinallee, à Bâle.",
+          "date": "2026-11-26T07:11:14.270Z"
+        },
+        {
           "title": "BVB : tonte dans les tramways, nettoyage documenté",
           "url": "/fr/articles-bale/bvb-incident-rasage-tram/",
           "excerpt": "La Basler Verkehrsbetriebe (BVB) a publié sur Facebook une photo de deux rasoirs bleus et de cheveux sur le sol d'un tramway ; c'est le premier épisode connu de ce type.",
@@ -989,22 +995,16 @@
           "date": "2026-10-01T02:08:49.379Z"
         },
         {
-          "title": "Bâle-Ville : cartes de voyage, zones et tarifs de transport",
-          "url": "/fr/articles-suisse/abonnements-transports-bale-zones/",
-          "excerpt": "Réseau tarifaire, zones mensuelles ou annuelles et forfaits : comment vous orienter entre les cartes de voyage demi-tarif, les cartes de voyage GA et les réductions pour étudiants et apprentis.",
-          "date": "2026-10-01T01:57:38.605Z"
-        },
-        {
           "title": "Transports Bâle-Campagne : abonnements, zones et tarifs",
           "url": "/fr/articles-suisse/transports-bale-campagne-abonnements/",
           "excerpt": "Abonnements mensuels et annuels, zones tarifaires, demi-tarif et GA pour les navetteurs et les étudiants à Bâle-Campagne.",
           "date": "2026-08-20T02:48:51.897Z"
         },
         {
-          "title": "Grisons ne reprennent pas le modèle bâlois pour gérer le trafic",
-          "url": "/fr/articles-suisse/grisons-modele-bale-trafic/",
-          "excerpt": "Le gouvernement grison est sceptique quant à l'adoption du modèle de sanctions de Birsfelden pour détourner le trafic festif et touristique.",
-          "date": "2026-06-29T16:07:16.810Z"
+          "title": "Bâle-Ville : cartes de voyage, zones et tarifs de transport",
+          "url": "/fr/articles-suisse/abonnements-transports-bale-zones/",
+          "excerpt": "Réseau tarifaire, zones mensuelles ou annuelles et forfaits : comment vous orienter entre les cartes de voyage demi-tarif, les cartes de voyage GA et les réductions pour étudiants et apprentis.",
+          "date": "2026-10-01T01:57:38.605Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1038,7 +1038,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T07:13:50.824Z"
     }
   }
 }
