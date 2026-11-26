@@ -8738,6 +8738,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.commissioni-divise-preventivo.title': 'Preventivo federale: commissioni divise',
     'blog.article.commissioni-divise-preventivo.excerpt': 'La commissione degli Stati: 11 sì, 0 no e 1 astensione. La commissione del Nazionale propone di respingere il progetto.',
     'blog.article.commissioni-divise-preventivo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.fiscalita-tre-livelli-svizzera.title': 'Fiscalità svizzera: tre livelli e competenze distinte',
+    'blog.article.fiscalita-tre-livelli-svizzera.excerpt': 'La fiscalità svizzera è articolata su tre livelli: imposta federale diretta, imposizione cantonale e imposizione comunale.',
+    'blog.article.fiscalita-tre-livelli-svizzera.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

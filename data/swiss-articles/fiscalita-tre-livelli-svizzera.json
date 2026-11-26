@@ -1,0 +1,19 @@
+{
+  "id": "fiscalita-tre-livelli-svizzera",
+  "slug": "fiscalita-tre-livelli-svizzera",
+  "publishedAt": "2026-11-26T05:09:12.686Z",
+  "cluster": null,
+  "_pool": "proven",
+  "_pool_source": "experimental",
+  "_discovery_attribution": null,
+  "_topic_candidate_attribution": {
+    "candidateId": "30be371c",
+    "providers": [
+      "google-news-rss"
+    ],
+    "detectedAt": "2026-11-23T02:10:28.285Z",
+    "score": 0.35,
+    "redditPermalink": null
+  },
+  "_score_breakdown": null
+}
