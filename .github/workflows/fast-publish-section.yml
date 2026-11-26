@@ -895,6 +895,9 @@ jobs:
   # API replay, so a release can never announce a mixed R2 surface.
   publish_release_head:
     needs: [resolve, publish]
+    permissions:
+      contents: read
+      actions: write
     if: >-
       always() &&
       needs.resolve.result == 'success' &&
@@ -962,6 +965,15 @@ jobs:
             exit 0
           fi
           echo "rendered_head=$rendered_head" >> "$GITHUB_OUTPUT"
+
+      - name: Recheck promotion after an explicit bootstrap
+        if: github.event_name == 'workflow_dispatch' && inputs.bootstrap == true && steps.collect.outputs.rendered_head != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SECTION: ${{ inputs.section }}
+        run: |
+          gh workflow run auto-live-canton-sections.yml --repo "$GITHUB_REPOSITORY" --ref main \
+            -f mode=promote -f sections="$SECTION"
 
   # A push can start the API publisher before the section runner has uploaded
   # its HTML. After a successful staged section publish, every non-dry push
