@@ -1,7 +1,7 @@
 // Gemello node:test di tests/conflict-handoff-reconcile.test.ts del sito
 // (valerielinc-ops/frontaliere-si-o-no#10714 e #10728): chiusura degli
 // hand-off di conflitto il cui lavoro e' gia' fatto. Stessi casi puri, via
-// expect-shim; il wiring e' quello del followup-drainer.yml di questo repo.
+// expect-shim; il wiring e' nel workflow autonomo di questo repo.
 //
 // Con la PR di origine aperta si chiude solo con la prova da merge-tree:
 // `has-conflicts` tolta da pr-autorebase DOPO l'apertura dell'hand-off. La sola
@@ -23,9 +23,11 @@ import {
   declaresClosing,
   declaresSupersede,
   groupHandoffs,
+  handoffRouteDecision,
   originContentOnMain,
   reapplyInFlight,
   RECONCILE_MARKER,
+  shouldAttemptHandoffRoute,
   stillClosable,
 } from '../../scripts/ci/reconcile-conflict-handoffs.mjs';
 
@@ -110,6 +112,64 @@ describe('handoffResolution', () => {
       expect(handoffResolution(openOrigin({ headRefOid: NEW_HEAD, ...over }), { expectedHead: HEAD.slice(0, 12), conflictClearedAfterOpen: true }))
         .toEqual({ resolved: false, reason });
     }
+  });
+});
+
+describe('promozione dal consumer unico', () => {
+  it('promuove solo la stessa HEAD con conflitto merge-tree fresco', () => {
+    const issue = handoff(20001, 19422, { labels: ['agent:fix-queued'] });
+    expect(handoffRouteDecision({
+      issue,
+      origin: openOrigin({ mergeable: 'CONFLICTING' }),
+      verifiedHead: HEAD,
+      mergeTreeState: 'conflicted',
+      fetchOk: true,
+    })).toEqual({ action: 'route', reason: 'same-head-conflict' });
+
+    for (const over of [
+      { mergeTreeState: 'clean', fetchOk: true, reason: 'conflict-clean-await-reconcile' },
+      { mergeTreeState: 'unknown', fetchOk: true, reason: 'conflict-unverified' },
+      { mergeTreeState: 'conflicted', fetchOk: false, reason: 'conflict-unverified' },
+    ]) {
+      expect(handoffRouteDecision({
+        issue,
+        origin: openOrigin({ mergeable: 'CONFLICTING' }),
+        verifiedHead: HEAD,
+        mergeTreeState: over.mergeTreeState,
+        fetchOk: over.fetchOk,
+      })).toEqual({ action: 'keep', reason: over.reason });
+    }
+  });
+
+  it('HEAD cambiata, claim o routing già presente restano fail-closed', () => {
+    const queued = handoff(20001, 19422, { labels: ['agent:fix-queued'] });
+    expect(handoffRouteDecision({
+      issue: queued,
+      origin: openOrigin({ headRefOid: NEW_HEAD }),
+      verifiedHead: NEW_HEAD,
+      mergeTreeState: 'conflicted',
+      fetchOk: true,
+    })).toEqual({ action: 'keep', reason: 'origin-head-changed' });
+    expect(handoffRouteDecision({
+      issue: handoff(20001, 19422, { labels: ['agent:in-progress'] }),
+      origin: openOrigin(),
+      verifiedHead: HEAD,
+      mergeTreeState: 'conflicted',
+      fetchOk: true,
+    })).toEqual({ action: 'keep', reason: 'claim-active' });
+    expect(handoffRouteDecision({
+      issue: handoff(20001, 19422, { labels: ['agent:fix'] }),
+      origin: openOrigin(),
+      verifiedHead: HEAD,
+      mergeTreeState: 'conflicted',
+      fetchOk: true,
+    })).toEqual({ action: 'keep', reason: 'already-routed' });
+  });
+
+  it('tenta la prova git solo per keep legati al conflitto', () => {
+    expect(shouldAttemptHandoffRoute({ action: 'keep', reason: 'origin-open' })).toBe(true);
+    expect(shouldAttemptHandoffRoute({ action: 'keep', reason: 'reapply-in-flight' })).toBe(false);
+    expect(shouldAttemptHandoffRoute({ action: 'close', reason: 'origin-merged' })).toBe(false);
   });
 });
 
@@ -337,16 +397,40 @@ describe('originContentOnMain: applicazione hunk per hunk, non presenza di righe
   });
 });
 
-describe('wiring nel followup-drainer di questo repo', () => {
-  it('riconcilia prima del drain, con GITHUB_TOKEN, senza bloccarlo, e può leggere le PR', () => {
-    const workflow = readFileSync(new URL('../../.github/workflows/followup-drainer.yml', import.meta.url), 'utf8');
-    const step = workflow.indexOf('run: node scripts/ci/reconcile-conflict-handoffs.mjs');
-    const drain = workflow.indexOf('- name: Drain follow-up queue');
+describe('wiring nel workflow autonomo di questo repo', () => {
+  it('carica il PAT runtime e resta inerte senza di esso', () => {
+    const workflow = readFileSync(new URL('../../.github/workflows/conflict-handoff-reconcile.yml', import.meta.url), 'utf8');
+    const step = workflow.indexOf('node scripts/ci/reconcile-conflict-handoffs.mjs');
     expect(step).toBeGreaterThan(-1);
-    expect(drain).toBeGreaterThan(step);
-    const block = workflow.slice(workflow.lastIndexOf('- name: Reconcile conflict hand-offs', step), step);
+    const block = workflow.slice(
+      workflow.lastIndexOf('- name: Reconcile conflict hand-offs', step),
+      workflow.indexOf('\n', step),
+    );
     expect(block).toContain('continue-on-error: true');
     expect(block).toContain('GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}');
+    expect(block).toContain('runtime_pat="${GITHUB_PAT_NANAKO:-}"');
+    expect(block).toContain('if [ -z "$runtime_pat" ]; then');
+    expect(block).toContain('GH_TOKEN="$runtime_pat" node scripts/ci/reconcile-conflict-handoffs.mjs');
+    expect(workflow.indexOf('run: node generator/scripts/load-rc-env.mjs')).toBeLessThan(step);
+    const triggers = workflow.slice(workflow.indexOf('\non:'), workflow.indexOf('\n# Stessa chiave'));
+    expect(triggers).toContain('schedule:');
+    expect(triggers).toContain('workflow_dispatch:');
+    expect(triggers).not.toContain('issues:');
     expect(workflow).toContain('pull-requests: read');
+    expect(workflow).toContain('JOB_TIMEOUT_MINUTES: 6');
+    const deadline = workflow.indexOf('- name: Export job deadline');
+    const checkout = workflow.indexOf('- name: Checkout');
+    const setupNode = workflow.indexOf('- name: Setup Node.js');
+    expect(deadline).toBeGreaterThan(-1);
+    expect(checkout).toBeGreaterThan(deadline);
+    expect(workflow.slice(deadline, checkout)).toContain('CI_JOB_DEADLINE_EPOCH=');
+    const checkoutBlock = workflow.slice(checkout, setupNode);
+    expect(checkoutBlock).toContain('fetch-depth: 0');
+    expect(checkoutBlock).not.toContain('fetch-depth: 1');
+    expect(checkoutBlock).toContain('filter: blob:none');
+    expect(checkoutBlock).toContain('!/content');
+
+    const drainer = readFileSync(new URL('../../.github/workflows/followup-drainer.yml', import.meta.url), 'utf8');
+    expect(drainer).not.toContain('run: node scripts/ci/reconcile-conflict-handoffs.mjs');
   });
 });

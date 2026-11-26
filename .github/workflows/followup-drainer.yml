@@ -2,7 +2,11 @@ name: Follow-up drainer (queue → agent:fix, no-Claude)
 
 # Drena la coda `agent:fix-queued` fino a 15 issue diverse in parallelo,
 # promuovendo a `agent:fix` solo entro il cap e serializzando la scansione
-# della coda con il mutex repo-scoped `followup-daily-` dei writer daily.
+# della coda con il mutex repo-scoped `followup-daily-` dei writer daily. La
+# riconciliazione degli hand-off di conflitto gira nel workflow autonomo
+# `conflict-handoff-reconcile.yml`, unico consumer che può chiuderli o
+# promuoverli: qui resta soltanto il drain generico, che riceve anche eventi
+# `issues` e deve quindi evitare qualunque mutex repo-wide.
 #
 # Il mutex globale evita che issue diverse leggano lo stesso snapshot e
 # riservino due volte il medesimo candidato; il cap e il lease Codex-primary
@@ -50,8 +54,6 @@ permissions:
   contents: read
   actions: read
   issues: write
-  # La riconciliazione degli hand-off legge lo stato delle PR di origine.
-  pull-requests: read
 
 jobs:
   drain:
@@ -185,19 +187,6 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
         run: node scripts/ci/reconcile-routing-labels.mjs
-
-      # Gemello dello step del sito: chiude gli hand-off di conflitto di
-      # pr-autorebase il cui lavoro e' gia' fatto (PR di origine mergiata o di
-      # nuovo mergeable, riapplicazione mergiata, duplicati) PRIMA che il drain
-      # li promuova. Lo script e' `identical` nel manifest. GITHUB_TOKEN basta:
-      # chiudere una issue non deve avviare nessun workflow. Best-effort: esce 0
-      # e non tocca cio' che non sa leggere.
-      - name: Reconcile conflict hand-offs (zero-Claude)
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-        run: node scripts/ci/reconcile-conflict-handoffs.mjs
 
       - name: Drain follow-up queue (deterministic, no Claude)
         env:

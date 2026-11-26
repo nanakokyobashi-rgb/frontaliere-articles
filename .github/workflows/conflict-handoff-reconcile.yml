@@ -1,0 +1,96 @@
+name: Reconcile conflict hand-offs (no-Claude)
+
+# Chiude gli hand-off di conflitto il cui lavoro e' gia' stato completato. Il
+# workflow e' autonomo perche' il mutex repo-wide dei writer non puo' vivere in
+# followup-drainer.yml: quel workflow riceve eventi `issues`, e ogni evento
+# irrilevante occuperebbe o sostituirebbe la sola pending del gruppo globale.
+#
+# La cadenza precede nominalmente di tre minuti il followup-drainer; non e' un
+# vincolo di ordinamento (i cron GitHub possono slittare), percio' lo script
+# resta idempotente e fail-closed sugli stati ambigui.
+
+on:
+  schedule:
+    - cron: '2,27,52 * * * *'
+  workflow_dispatch:
+
+# Stessa chiave del workflow pr-autorebase: create/routing e reconcile degli
+# hand-off sono un unico writer repo-wide, non cancellante.
+concurrency:
+  group: conflict-handoff-writer-${{ github.repository }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: read
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    env:
+      JOB_TIMEOUT_MINUTES: 6
+    steps:
+      # `runBudgetFromEnv()` lascia una riserva prima del timeout del runner:
+      # senza questa deadline il budget sarebbe infinito e una sequenza di
+      # commento/close o route potrebbe essere interrotta a meta'.
+      - name: Export job deadline
+        run: echo "CI_JOB_DEADLINE_EPOCH=$(( $(date +%s) + ${{ env.JOB_TIMEOUT_MINUTES }} * 60 ))" >> "$GITHUB_ENV"
+
+      - name: Checkout
+        timeout-minutes: 5
+        uses: actions/checkout@v7
+        with:
+          # merge-tree deve vedere la base comune fra main e la HEAD della PR:
+          # un checkout shallow seguito dal fetch dei soli due tip non basta.
+          fetch-depth: 0
+          filter: blob:none
+          sparse-checkout: |
+            /*
+            !/content
+            !/dist
+            !/public
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
+          else
+            echo "⚠️ Nessuna Firebase SA — GITHUB_PAT_NANAKO non caricato; reconciler inerte per evitare un routing agent:fix senza evento al fixer."
+          fi
+
+      - name: Load secrets from Remote Config
+        id: load_rc_env
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Reconcile conflict hand-offs (zero-Claude)
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$runtime_pat" ]; then
+            echo "::warning::Nessun GITHUB_PAT_NANAKO runtime → reconciler inerte (agent:fix via GITHUB_TOKEN non riattiverebbe issue-fix)."
+            exit 0
+          fi
+          GH_TOKEN="$runtime_pat" node scripts/ci/reconcile-conflict-handoffs.mjs
+          rc=$?
+          unset runtime_pat
+          exit "$rc"
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f /tmp/firebase-sa.json

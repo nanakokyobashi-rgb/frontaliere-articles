@@ -6,7 +6,6 @@ import {
   CONFLICT_RESOLUTION_LOCK_LABEL,
   CONFLICT_RESOLUTION_LOCK_MAX_AGE_MS,
   conflictHandoffMarker,
-  decideConflictHandoffRevalidation,
   decideConflictResolutionLock,
   shouldHandOffConflict,
 } from '../../scripts/ci/pr-autorebase.mjs';
@@ -140,88 +139,19 @@ test('ogni ramo che abortisce un conflitto non auto-risolvibile passa la mano', 
   assert.equal(bare.length, handed.length);
 });
 
-test('la issue salta il triage e riceve agent:fix con un evento separato', () => {
+test('autorebase crea il hand-off triaged ma non lo promuove direttamente', () => {
+  const fn = SOURCE.slice(SOURCE.indexOf('function handOffConflictToFixer('), SOURCE.indexOf('function commentConflictOnce('));
   assert.ok(SOURCE.includes("'--label', 'agent:triaged'"));
-  assert.match(SOURCE, /'issue', 'edit', issue, '--repo', REPO, '--add-label', 'agent:fix'/);
+  assert.doesNotMatch(fn, /'issue', 'edit'[\s\S]*?'--add-label', 'agent:fix'/);
+  assert.doesNotMatch(fn, /'issue', 'close'/);
+  assert.match(fn, /conflict-handoff-reconcile/);
 });
 
-test("l'hand-off e' fail-closed: merge-tree deve confermare il conflitto e il marker segue il routing", () => {
+test("l'hand-off e' fail-closed: merge-tree conferma il conflitto prima della create", () => {
   const fn = SOURCE.slice(SOURCE.indexOf('function handOffConflictToFixer('), SOURCE.indexOf('function commentConflictOnce('));
   assert.ok(fn.includes("if (verdict.state !== 'conflicted')"), 'clean/unknown non devono aprire una issue');
-  const routed = fn.indexOf("if (!ghOk(['issue', 'edit', issue, '--repo', REPO, '--add-label', 'agent:fix']))");
-  const marker = fn.indexOf('${marker}');
-  assert.ok(routed > 0 && marker > routed, 'il marker si scrive solo dopo agent:fix confermato dall\'exit status');
-  assert.match(fn, /'issue', 'list'[\s\S]*in:title/, 'un retry riusa la issue gia\' aperta invece di duplicarla');
-});
-
-test('il routing finale richiede origine aperta, stessa HEAD e conflitto fresco', () => {
-  assert.deepEqual(decideConflictHandoffRevalidation({
-    origin: { state: 'OPEN', headRefOid: HEAD },
-    expectedHead: HEAD,
-    mergeTreeState: 'conflicted',
-  }), { action: 'route', reason: 'same-head-conflict' });
-
-  assert.deepEqual(decideConflictHandoffRevalidation({
-    origin: { state: 'OPEN', headRefOid: HEAD },
-    expectedHead: HEAD,
-    mergeTreeState: 'clean',
-  }), { action: 'close', reason: 'conflict-resolved' });
-  assert.deepEqual(decideConflictHandoffRevalidation({
-    origin: { state: 'MERGED', headRefOid: HEAD },
-    expectedHead: HEAD,
-    mergeTreeState: 'conflicted',
-  }), { action: 'close', reason: 'origin-merged' });
-});
-
-test('la race tra create e route resta fail-closed su HEAD/stato/prova cambiati', () => {
-  const changed = [
-    {
-      origin: { state: 'OPEN', headRefOid: 'b'.repeat(40) },
-      expectedHead: HEAD,
-      mergeTreeState: 'conflicted',
-      expectedReason: 'origin-head-changed',
-    },
-    {
-      origin: { state: 'CLOSED', headRefOid: HEAD },
-      expectedHead: HEAD,
-      mergeTreeState: 'conflicted',
-      expectedReason: 'origin-closed',
-    },
-    {
-      origin: { state: 'OPEN', headRefOid: HEAD },
-      expectedHead: HEAD,
-      mergeTreeState: 'unknown',
-      expectedReason: 'conflict-unverified',
-    },
-    {
-      origin: null,
-      expectedHead: HEAD,
-      mergeTreeState: 'conflicted',
-      expectedReason: 'origin-state-unreadable',
-    },
-  ];
-
-  for (const { expectedReason, ...input } of changed) {
-    assert.deepEqual(decideConflictHandoffRevalidation(input), {
-      action: 'queue',
-      reason: expectedReason,
-    });
-  }
-});
-
-test('il percorso live ricalcola la prova dopo create e prima di agent:fix/marker', () => {
-  const fn = SOURCE.slice(
-    SOURCE.indexOf('function handOffConflictToFixer('),
-    SOURCE.indexOf('function commentConflictOnce('),
-  );
   const create = fn.indexOf("'issue', 'create'");
-  const revalidate = fn.indexOf('revalidateConflictHandoffRoute(num, branch, head)', create);
-  const route = fn.indexOf("'issue', 'edit', issue, '--repo', REPO, '--add-label', 'agent:fix'", revalidate);
-  const marker = fn.indexOf('${marker}', route);
-
-  assert.ok(create > 0 && revalidate > create, 'la prova finale deve seguire la create/reuse della issue');
-  assert.ok(route > revalidate, 'agent:fix deve seguire la revalidation fresca');
-  assert.ok(marker > route, 'il marker deve seguire il routing confermato');
-  assert.match(fn.slice(revalidate, route), /fresh\.action !== 'route'/,
-    'stati clean/merged/ambigui devono uscire prima del routing');
+  const marker = fn.indexOf('${marker}');
+  assert.ok(create > 0 && marker > create, 'il marker segue la create/reuse affidata al consumer schedulato');
+  assert.match(fn, /'issue', 'list'[\s\S]*in:title/, 'un retry riusa la issue gia\' aperta invece di duplicarla');
 });

@@ -17,7 +17,7 @@ import fs, { realpathSync } from 'node:fs';
  * da se' (`closeResolvedHandoff`), ma gira solo quando issue-fix parte: questo
  * sweep copre gli hand-off che nessuno rilancia.
  *
- * Ogni tick (followup-drainer.yml, prima del drain) per ogni hand-off aperto:
+ * Ogni tick (`conflict-handoff-reconcile.yml`) per ogni hand-off aperto:
  *   1. duplicati della stessa PR di origine e HEAD → resta quella con un claim o una
  *      PR in volo, poi quella instradata al fixer, poi la piu' vecchia
  *      (`electHandoffKeeper`); le altre chiuse `duplicate`, ma non prima di
@@ -33,7 +33,8 @@ import fs, { realpathSync } from 'node:fs';
  *      riapplica: patch applicata su main hunk per hunk → `completed`; altrimenti
  *      `not planned` (superato) solo se l'hand-off non e' instradato e le issue
  *      che l'origine chiudeva non restano orfane (`decideClosedOrigin`);
- *   altrimenti resta aperta: c'e' ancora un contributo da riapplicare.
+ *   altrimenti resta aperta: se la stessa HEAD confligge ancora secondo un
+ *   `git merge-tree` fresco, questo stesso workflow la promuove a `agent:fix`.
  * Solo segnali deterministici: stato GitHub della PR, eventi della label
  * `has-conflicts` scritta da merge-tree, keyword di una PR mergiata e, per
  * un'origine chiusa, l'applicazione al contrario di OGNI hunk su main (mai
@@ -46,7 +47,7 @@ import fs, { realpathSync } from 'node:fs';
  *       GITHUB_REPOSITORY, DRY_RUN=1 (solo log), CI_JOB_DEADLINE_EPOCH.
  */
 
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 
 import {
   conflictClearedAfter,
@@ -58,6 +59,7 @@ import {
 } from './check-issue-already-resolved.mjs';
 import { closedIssueRefs } from './followup-resolution-match.mjs';
 import { runBudgetFromEnv } from './lib/run-budget.mjs';
+import { classifyMergeTreeStatus } from './pr-autorebase.mjs';
 import { CLAIM_LABEL } from './stale-claim-detector.mjs';
 import { manifestPinLookup } from './manifest-pinned-issues.mjs';
 
@@ -68,10 +70,21 @@ export const RECONCILE_MARKER = '<!-- CONFLICT_HANDOFF_RECONCILE -->';
 // Bound per run (AGENTS.md no-silent-cap: le eccedenze sono loggate e restano
 // al tick successivo, 20 minuti dopo).
 export const MAX_CLOSES_PER_RUN = 20;
+export const MAX_ROUTES_PER_RUN = 20;
 // Le PR mergiate lette per riconoscere una riapplicazione. Un hand-off vive
 // ore, non settimane: una riapplicazione piu' vecchia di questa finestra ha
 // gia' chiuso la sua issue con il `Closes` di GitHub.
 export const MERGED_PR_WINDOW = 200;
+const ROUTE_PROOF_BUDGET_MS = 15_000;
+const FULL_SHA_RE = /^[0-9a-f]{40}$/iu;
+const HEAD_PREFIX_RE = /^[0-9a-f]{7,40}$/iu;
+const ROUTABLE_KEEP_REASONS = new Set([
+  'origin-open',
+  'origin-has-conflicts',
+  'origin-mergeability-stale',
+  'conflict-clear-unproven',
+  'origin-head-unverified',
+]);
 
 function gh(args) {
   try {
@@ -142,6 +155,40 @@ export const ROUTING_LABELS = ['agent:fix', 'agent:fix-queued'];
 /** L'hand-off e' instradato al fixer (`agent:fix` o `agent:fix-queued`). Pura. */
 export function handoffRouted(issue) {
   return labelNames(issue).some((name) => ROUTING_LABELS.includes(name));
+}
+
+/** Solo un hand-off ancora conflittuale e sulla stessa HEAD può spendere un fixer. */
+export function handoffRouteDecision({
+  issue, origin, verifiedHead = '', mergeTreeState = 'unknown', fetchOk = false,
+}) {
+  const labels = Array.isArray(issue?.labels) ? labelNames(issue) : null;
+  if (String(issue?.state || 'OPEN').toUpperCase() !== 'OPEN') {
+    return { action: 'keep', reason: 'handoff-not-open' };
+  }
+  if (labels === null) return { action: 'keep', reason: 'handoff-labels-unreadable' };
+  if (labels.includes(CLAIM_LABEL)) return { action: 'keep', reason: 'claim-active' };
+  if (labels.includes('agent:fix')) return { action: 'keep', reason: 'already-routed' };
+
+  const state = String(origin?.state || '').toUpperCase();
+  if (state !== 'OPEN') return { action: 'keep', reason: state ? `origin-${state.toLowerCase()}` : 'origin-unreadable' };
+  const expected = conflictHandoffExpectedHead(issue?.body);
+  const current = String(origin?.headRefOid || '').toLowerCase();
+  const verified = String(verifiedHead || '').toLowerCase();
+  if (!HEAD_PREFIX_RE.test(expected) || !FULL_SHA_RE.test(current) || !FULL_SHA_RE.test(verified)) {
+    return { action: 'keep', reason: 'origin-head-unreadable' };
+  }
+  if (!current.startsWith(expected) || current !== verified) {
+    return { action: 'keep', reason: 'origin-head-changed' };
+  }
+  if (!fetchOk || mergeTreeState === 'unknown') return { action: 'keep', reason: 'conflict-unverified' };
+  if (mergeTreeState === 'clean') return { action: 'keep', reason: 'conflict-clean-await-reconcile' };
+  if (mergeTreeState === 'conflicted') return { action: 'route', reason: 'same-head-conflict' };
+  return { action: 'keep', reason: 'conflict-unverified' };
+}
+
+/** Un keep legato alla prova di conflitto merita la revalidation git; gli altri no. */
+export function shouldAttemptHandoffRoute(decision) {
+  return decision?.action === 'keep' && ROUTABLE_KEEP_REASONS.has(decision?.reason);
 }
 
 /**
@@ -557,7 +604,7 @@ export function closingComment({ reason, pr, originNumber, keeper, contentProof 
     '',
     outcome,
     '',
-    '_Segnale deterministico da `scripts/ci/reconcile-conflict-handoffs.mjs` (followup-drainer)._',
+    '_Segnale deterministico da `scripts/ci/reconcile-conflict-handoffs.mjs` (`conflict-handoff-reconcile.yml`)._',
   ].join('\n');
 }
 
@@ -585,6 +632,62 @@ function listOpenHandoffs() {
 function readOrigin(num) {
   return ghJson(['pr', 'view', String(num), '--repo', REPO,
     '--json', 'state,mergedAt,closedAt,mergeable,mergeStateStatus,headRefOid,labels,title,body']);
+}
+
+/** Porta localmente main e la HEAD della PR per una prova merge-tree fresca. */
+function fetchHandoffRefs(originNumber) {
+  try {
+    execFileSync('git', [
+      'fetch', '--no-tags', 'origin',
+      '+refs/heads/main:refs/remotes/origin/main',
+      `+refs/pull/${Number(originNumber)}/head:refs/remotes/origin/conflict-handoff-${Number(originNumber)}`,
+    ], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/** Stato plumbing della prova merge-tree; ogni errore resta unknown/fail-closed. */
+function mergeTreeState(headSha) {
+  const result = spawnSync('git', ['merge-tree', '--write-tree', 'origin/main', String(headSha || '')], {
+    encoding: 'utf8',
+    maxBuffer: 64 * 1024 * 1024,
+  });
+  return classifyMergeTreeStatus(result.status);
+}
+
+/**
+ * Unico percorso di promozione per gli hand-off di conflitto. Rilegge PR e
+ * issue subito prima dell'edit; HEAD cambiata, fetch/prova illeggibili, claim o
+ * chiusura lasciano tutto intatto fino al tick successivo.
+ */
+function routeHandoff(issue, originNumber) {
+  const firstOrigin = readOrigin(originNumber);
+  const verifiedHead = String(firstOrigin?.headRefOid || '').toLowerCase();
+  const fetchOk = FULL_SHA_RE.test(verifiedHead) && fetchHandoffRefs(originNumber);
+  const conflictState = fetchOk ? mergeTreeState(verifiedHead) : 'unknown';
+  const freshOrigin = readOrigin(originNumber);
+  const live = ghJson(['issue', 'view', String(issue.number), '--repo', REPO,
+    '--json', 'number,state,title,body,labels']);
+  const decision = handoffRouteDecision({
+    issue: live,
+    origin: freshOrigin,
+    verifiedHead,
+    mergeTreeState: conflictState,
+    fetchOk,
+  });
+  console.log(`#${issue.number} (PR di origine #${originNumber}): route-${decision.action} — ${decision.reason}`);
+  if (decision.action !== 'route' || DRY_RUN) return decision.action === 'route';
+
+  const args = ['issue', 'edit', String(issue.number), '--repo', REPO, '--add-label', 'agent:fix'];
+  if (labelNames(live).includes('agent:fix-queued')) args.push('--remove-label', 'agent:fix-queued');
+  if (gh(args) === null) {
+    console.log(`::warning::#${issue.number}: promozione agent:fix fallita → resta al prossimo tick.`);
+    return false;
+  }
+  console.log(`#${issue.number}: conflitto fresco sulla stessa HEAD → agent:fix.`);
+  return true;
 }
 
 // Oltre questo numero di file la prova di contenuto non si tenta (una lettura
@@ -704,6 +807,7 @@ function main() {
   const budget = runBudgetFromEnv();
   const now = Date.now();
   const actions = [];
+  const routes = [];
   for (const { origin, keeper, duplicates } of groupHandoffs(issues, openPrs || [])) {
     const { close, deferred } = planDuplicateClosures({ keeper, duplicates, origin }, openPrs, now);
     for (const { issue: dup, why } of deferred) {
@@ -737,6 +841,8 @@ function main() {
     console.log(`#${keeper.number} (PR di origine #${origin}): ${decision.action} — ${decision.reason}${decision.pr ? ` (#${decision.pr})` : ''}${contentProof && !contentProof.proven ? ` [contenuto: ${contentProof.reason}]` : ''}`);
     if (decision.action === 'close') {
       actions.push({ issue: keeper, reason: decision.reason, pr: decision.pr, originNumber: origin, contentProof, originIssues });
+    } else if (shouldAttemptHandoffRoute(decision)) {
+      routes.push({ issue: keeper, originNumber: origin });
     }
   }
 
@@ -758,9 +864,19 @@ function main() {
       console.log(`::warning::#${action.issue.number}: chiusura fallita (${action.reason}) → ritento al prossimo tick.`);
     }
   }
+
+  let routed = 0;
+  for (const [index, route] of routes.entries()) {
+    if (index >= MAX_ROUTES_PER_RUN) {
+      console.log(`::warning::cap route raggiunto (${MAX_ROUTES_PER_RUN}/run): ${routes.length - index} hand-off restano al prossimo tick.`);
+      break;
+    }
+    if (!budget.take(`#${route.issue.number} (prova route)`, ROUTE_PROOF_BUDGET_MS)) continue;
+    if (routeHandoff(route.issue, route.originNumber)) routed += 1;
+  }
   budget.report();
 
-  const summary = `Hand-off di conflitto: ${issues.length} aperti, ${closed.length} chiusi${DRY_RUN ? ' (dry-run)' : ''}.`;
+  const summary = `Hand-off di conflitto: ${issues.length} aperti, ${closed.length} chiusi, ${routed} promossi${DRY_RUN ? ' (dry-run)' : ''}.`;
   console.log(summary);
   if (process.env.GITHUB_STEP_SUMMARY) {
     const lines = closed.map((a) => `- #${a.issue.number} → ${a.reason}${a.pr ? ` (#${a.pr})` : ''}`);
@@ -768,7 +884,7 @@ function main() {
   }
 }
 
-// Best-effort: un errore non deve mai far fallire il drain che segue.
+// Best-effort: un errore lascia gli hand-off al tick schedulato successivo.
 if (process.argv[1] && (() => { try { return import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href; } catch { return false; } })()) {
   try {
     main();
