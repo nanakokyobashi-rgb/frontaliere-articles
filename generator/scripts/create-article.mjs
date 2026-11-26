@@ -7485,10 +7485,12 @@ ${proofResponseFormat}`
   const FACTCHECK_429_BACKOFF_CAP_MS = 30_000;
   const FACTCHECK_MIN_ROUND_MS = 15_000;
   const initialFactCheckMs = factCheckDeadlineMs - Date.now();
-  // Reserve at most a quarter of the budget above one minute for the final
-  // Codex call. Keep the original short window when the budget is tight.
+  // A fresh Codex verification can need more than the 15s used to start
+  // another consensus round. Keep at least 30s for it whenever the first
+  // consensus round can still run, and retain the 45s ceiling.
   const finalReserveMs = initialFactCheckMs >= 2 * FACTCHECK_MIN_ROUND_MS
-    ? Math.min(45_000, Math.max(FACTCHECK_MIN_ROUND_MS, Math.floor((initialFactCheckMs - 60_000) / 4)))
+    ? Math.min(45_000, initialFactCheckMs - FACTCHECK_MIN_ROUND_MS,
+      Math.max(30_000, Math.floor((initialFactCheckMs - 60_000) / 4)))
     : 0;
   const retryDeadlineMs = factCheckDeadlineMs - finalReserveMs;
   const maxPrimaryRounds = Math.min(
