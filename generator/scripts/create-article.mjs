@@ -7603,6 +7603,7 @@ ${proofResponseFormat}`
         editorialProofFailures,
         isEvergreen: isEvergreenArticle,
         editorialContext,
+        retryInvalidVerdict: excludeCodex,
         excludeModels: [
           ...priorVoters,
           ...(excludeCodex ? [AI_MODELS.CODEX_CLI_PRIMARY] : []),
@@ -8078,6 +8079,19 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
       ambiguous: 'più verdetti nella stessa risposta, nessuno scelto',
     }[error] || 'JSON non valido';
     console.error(`  ⚠️  LLM fact-check (${model}${via}): ${label} — ${safeSignalDiagnosticTextForLog(factCheckRawSnippet(raw))}`);
+    // Recover in this lane while the other verifier may still be waiting.
+    if (opts.retryInvalidVerdict && servedBy && opts.deadlineMs - Date.now() >= 10_000) {
+      try {
+        return await _runSingleFactCheck(model, prompt, {
+          ...opts,
+          fresh: true,
+          retryInvalidVerdict: false,
+          excludeModels: [...excludeModels, servedBy],
+        });
+      } catch (err) {
+        console.error(`  ⚠️  LLM fact-check (${model}): retry fallito — ${safeSignalDiagnosticTextForLog(err.message)}`);
+      }
+    }
     return null;
   }
 
