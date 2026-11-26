@@ -919,9 +919,9 @@
       "path": "scripts/ci/pr-collision-detector.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "709f0aa877975ada",
-        "corpus": "709f0aa877975ada",
-        "alignedAt": "2026-10-07"
+        "site": "c933d1286fd80439",
+        "corpus": "c933d1286fd80439",
+        "alignedAt": "2026-11-26"
       }
     },
     {
