@@ -1051,7 +1051,8 @@ async function main({ operatorOnly, source }) {
     if (source === 'server') {
       const creds = JSON.parse(readFileSync(process.env.GOOGLE_APPLICATION_CREDENTIALS, 'utf8'));
       if (!creds.project_id) throw new Error('service account JSON missing project_id');
-      const app = initializeApp({ credential: applicationDefault(), projectId: creds.project_id }, 'operator-rc');
+      const app = getApps().find((candidate) => candidate.name === 'operator-rc')
+        || initializeApp({ credential: applicationDefault(), projectId: creds.project_id }, 'operator-rc');
       admin = { remoteConfig: () => getRemoteConfig(app) };
     } else {
       if (!getApps().length) {
