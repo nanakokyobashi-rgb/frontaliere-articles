@@ -634,6 +634,7 @@ jobs:
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
           PINNED_SOURCE_COMMIT: ${{ inputs.source_commit }}
           PINNED_SOURCE_MAIN: ${{ inputs.source_main_commit }}
+          SECTION: ${{ matrix.target.section }}
         run: |
           set -euo pipefail
           pinned_source=''
@@ -660,7 +661,7 @@ jobs:
             exit 1
           fi
           echo "current_main=$current_main" >> "$GITHUB_OUTPUT"
-          if ! bash .replay-dispatcher-source/scripts/ci/section-source-unaffected.sh "$pinned_source" "$current_main"; then
+          if ! bash .replay-dispatcher-source/scripts/ci/section-source-unaffected.sh --section "$SECTION" "$pinned_source" "$current_main"; then
             echo "::notice::replay pinned saltato: main e' avanzata da $pinned_source a $current_main"
             echo 'fresh=false' >> "$GITHUB_OUTPUT"
             exit 0
