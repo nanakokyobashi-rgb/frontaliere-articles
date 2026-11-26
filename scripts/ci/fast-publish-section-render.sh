@@ -120,7 +120,7 @@ if [ -n "$pinned_replay_main" ]; then
     echo "::error::revisione corrente di main non valida prima degli upload"
     exit 1
   fi
-  if ! bash .replay-dispatcher-source/scripts/ci/section-source-unaffected.sh "$pinned_replay_main" "$current_main"; then
+  if ! bash .replay-dispatcher-source/scripts/ci/section-source-unaffected.sh --section "$SECTION" "$pinned_replay_main" "$current_main"; then
     api_release_commit=''
     if [ "$EVENT_NAME" = 'workflow_run' ]; then
       PUSH_BEFORE="${PUSH_BEFORE:-}" FETCH_MAIN=true \
