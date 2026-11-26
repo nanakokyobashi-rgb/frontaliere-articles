@@ -7417,12 +7417,12 @@ Prima di segnalare un fatto assente, rileggi la fonte cercando anche parafrasi. 
     : `- Fonte: controlla date, luoghi, persone, citazioni e misure. Date assenti: sospette. Contesto verificato: minor. Invenzioni e contraddizioni: critical.
 - Caso fabbricato = luogo/ente + ruolo + azione + esito/cifra senza riscontro nella fonte: critical:fatti_inventati.${IS_CANTON || IS_FRONTALIERE ? ' Esempi: infermiera segnala carenze igieniche a Lugano; medico denuncia pratiche non etiche a Chiasso; infermiere ORL ottiene un risarcimento; medico del Civico di Lugano denuncia frode con indagine FINMA.' : ' Verifica anche «Esempi concreti», «Casi pratici», «Casi reali», «Per esempio», «Caso 1» e «Caso 2».'}`;
   const compactRelevanceInstructions = !IS_CANTON && !IS_FRONTALIERE
-    ? `RILEVANZA SVIZZERA (critical:rilevanza_topica): nesso reale, specifico e verificabile; FAIL se implicazioni nazionali forzate. Escludi cronaca locale senza policy/economia/lavoro, episodi isolati, cultura/festival/gastronomia, sport/gossip/intrattenimento e fatti esteri senza impatto svizzero.`
+    ? `RILEVANZA SVIZZERA (critical:rilevanza_topica): nesso reale, specifico e verificabile; FAIL se implicazioni nazionali forzate. Escludi cronaca locale senza policy/economia/lavoro, episodi isolati, cultura/festival/gastronomia, sport/gossip/intrattenimento e fatti esteri senza impatto svizzero. FAIL: commento generico su cronaca senza nesso nazionale.`
     : relevanceInstructions;
   const compactPrompt = canCompact
     ? `${evidencePrefix}
 
-VERIFICA SISTEMATICA — controlla tutte le categorie:
+VERIFICA SISTEMATICA:
 - Leggi: verifica sigla, numero, anno, attribuzione e fonte. Critical: sigle inventate (${FACT_CHECK_INVENTED_ACRONYMS}), ${FACT_CHECK_INVENTED_LAWS}, vigenza senza legge, falsa tassa sanitaria, accordo non firmato.
 - Istituzioni e persone: verifica enti, competenze, ruoli e citazioni. Critical: enti inventati o incompetenti. NON esistono: ${FACT_CHECK_INVENTED_INSTITUTIONS}. Consiglieri federali attuali: ${FACT_CHECK_FEDERAL_COUNCILLORS}. Abuso critical:istituzioni: ${FACT_CHECK_FINMA_SCOPE}.
 - Dati: confronta aliquote, soglie e date. Decimali: cita studio e istituto. Accetta arrotondamenti attribuiti e valori canonici.
