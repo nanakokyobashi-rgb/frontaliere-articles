@@ -654,9 +654,9 @@
       "path": "scripts/ci/claude-codex-fallback.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "d57065848ac1a2b0",
-        "corpus": "d57065848ac1a2b0",
-        "alignedAt": "2026-10-07"
+        "site": "eecf0b2f461a08bf",
+        "corpus": "eecf0b2f461a08bf",
+        "alignedAt": "2026-11-26"
       }
     },
     {
