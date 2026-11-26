@@ -17718,7 +17718,11 @@ async function translateArticle(data) {
       }
       const sourceKeys = [...sourceBySpan.keys()].sort();
       const joinedKeys = [...joinedBySpan.keys()].sort();
-      if (sourceKeys.length === 0 || JSON.stringify(sourceKeys) !== JSON.stringify(joinedKeys)) return null;
+      if (sourceKeys.length === 0) return { verdict: null, reason: 'no-source-spans' };
+      if (joinedKeys.length === 0) return { verdict: null, reason: 'no-target-spans' };
+      if (JSON.stringify(sourceKeys) !== JSON.stringify(joinedKeys)) {
+        return { verdict: null, reason: 'unequal-span-sets' };
+      }
       const numericSequenceMatches = (sourceEntries, joinedEntries) => {
         if (JSON.stringify(sourceEntries.map(({ number }) => number))
           === JSON.stringify(joinedEntries.map(({ number }) => number))) return true;
@@ -17736,16 +17740,17 @@ async function translateArticle(data) {
         return JSON.stringify(semanticSequence(sourceEntries))
           === JSON.stringify(semanticSequence(joinedEntries));
       };
-      return sourceKeys.every((span) => numericSequenceMatches(sourceBySpan.get(span), joinedBySpan.get(span)));
+      const verdict = sourceKeys.every((span) => numericSequenceMatches(sourceBySpan.get(span), joinedBySpan.get(span)));
+      return { verdict, reason: verdict ? 'match' : 'value-order-mismatch' };
     };
-    const exactAssociation = compareNumericAssociations('exactSpan');
-    const anchorAssociation = exactAssociation === null && invariantAnchorTokens.size > 0
+    const { verdict: exactAssociation, reason: exactReason } = compareNumericAssociations('exactSpan');
+    const { verdict: anchorAssociation, reason: anchoredReason } = exactAssociation === null && invariantAnchorTokens.size > 0
       ? compareNumericAssociations(
         'anchorSpan',
         sourceAnchoredNumericContract,
         joinedAnchoredNumericContract,
       )
-      : null;
+      : { verdict: null, reason: 'not-evaluated' };
     // A number in fully localized prose can coexist with an anchored fact.
     // Keep empty slots and one slot per calendar group, so even identical
     // facts cannot trade anchors while components within a date may reorder.
@@ -17775,7 +17780,8 @@ async function translateArticle(data) {
     if (sourceNumericContract.values.length > 0 && numericAssociationMismatch) {
       console.error(
         `TRANSLATION_NUMBER_ASSOCIATION locale=${targetLang} field=${fieldKey}`
-        + ` exact=${exactAssociation} anchored=${anchorAssociation} invariantAnchors=${invariantAnchorTokens.size}`,
+        + ` exact=${exactAssociation} anchored=${anchorAssociation} invariantAnchors=${invariantAnchorTokens.size}`
+        + ` exactReason=${exactReason} anchoredReason=${anchoredReason}`,
       );
       return reject('numeric-association');
     }
