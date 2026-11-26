@@ -7415,9 +7415,9 @@ Prima di segnalare un fatto assente, rileggi la fonte cercando anche parafrasi. 
   const compactSourceInstructions = isEvergreenArticle
     ? '- Riferimenti: confronta date, luoghi, persone, citazioni e misure con i fatti verificati. Segnala affermazioni false, contraddette o troppo specifiche senza attribuzione. Un caso presentato come reale che combina luogo o ente, ruolo, azione ed esito (anche una cifra) senza riferimento verificato è critical:fatti_inventati. La stessa gravità vale per interviste e verifiche inventate.'
     : `- Fonte: controlla date, luoghi, persone, citazioni e misure. Date assenti: sospette. Contesto verificato: minor. Invenzioni e contraddizioni: critical.
-- Casi specifici (luogo/ente, ruolo, azione, esito) senza riscontro nella fonte: critical:fatti_inventati.${IS_CANTON || IS_FRONTALIERE ? ' Esempi: infermiera segnala carenze igieniche a Lugano; medico denuncia pratiche non etiche a Chiasso; infermiere ORL ottiene un risarcimento; medico del Civico di Lugano denuncia frode con indagine FINMA.' : ''}`;
+- Casi specifici (luogo/ente, ruolo, azione, esito o cifra) senza riscontro nella fonte: critical:fatti_inventati.${IS_CANTON || IS_FRONTALIERE ? ' Esempi: infermiera segnala carenze igieniche a Lugano; medico denuncia pratiche non etiche a Chiasso; infermiere ORL ottiene un risarcimento; medico del Civico di Lugano denuncia frode con indagine FINMA.' : ' Controlla anche le sezioni «Esempi concreti» e «Casi pratici».'}`;
   const compactRelevanceInstructions = !IS_CANTON && !IS_FRONTALIERE
-    ? `RILEVANZA SVIZZERA (critical:rilevanza_topica): richiedi un nesso concreto con vita, economia o politica svizzera (nazionale o cantonale). Non serve un nesso ticinese o frontaliere. Segnala implicazioni inventate e consigli generici che forzano il nesso.${isEvergreenArticle ? '' : ' FAIL per cronaca senza ricadute su policy, economia o vita in Svizzera, sport, gossip, intrattenimento ed eventi esteri senza impatto svizzero.'}`
+    ? `RILEVANZA SVIZZERA (critical:rilevanza_topica): serve un nesso reale con vita, economia o politica svizzera, anche cantonale. Segnala nessi inventati e consigli generici.${isEvergreenArticle ? '' : ' FAIL: cronaca o eventi esteri senza impatto svizzero, sport, gossip, intrattenimento.'}`
     : relevanceInstructions;
   const compactPrompt = canCompact
     ? `${evidencePrefix}

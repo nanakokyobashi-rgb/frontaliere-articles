@@ -721,6 +721,7 @@ describe('fact-check retries under a reported input cap', () => {
     assert.match(compactPrompt, /periodi, unità e basi coerenti/);
     assert.match(compactPrompt, /cause, effetti, previsioni e consigli senza prove/);
     assert.match(compactPrompt, /grounded_analysis = contributo concreto, dimostrato e assente dalla fonte/);
+    assert.match(compactPrompt, /luogo\/ente, ruolo, azione, esito o cifra.*Esempi concreti.*Casi pratici/);
     assert.deepEqual(calls.map((call) => call.prompt), [compactPrompt, compactPrompt]);
     assert.equal(modelResults.length, 2);
   });
