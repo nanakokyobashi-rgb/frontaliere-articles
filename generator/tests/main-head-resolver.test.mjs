@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { chmodSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { chmodSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
@@ -69,7 +69,7 @@ test('canton publisher only accepts fast-forwards limited to bookkeeping and gen
     git('commit', '-qm', relativePath);
     return git('rev-parse', 'HEAD');
   };
-  const check = (base, head) => spawnSync('bash', [helper, base, head], { cwd: directory }).status;
+  const check = (base, head, scope = []) => spawnSync('bash', [helper, ...scope, base, head], { cwd: directory }).status;
 
   try {
     git('init', '-q');
@@ -109,6 +109,22 @@ test('canton publisher only accepts fast-forwards limited to bookkeeping and gen
     assert.equal(check(base, latest), 1, 'a later bookkeeping commit cannot hide an intervening article change');
     assert.equal(check(latest, base), 1, 'a rewind cannot reuse the snapshot');
     assert.equal(check('invalid', latest), 1);
+    symlinkSync(path.join(ROOT, 'scripts'), path.join(directory, 'scripts'), 'dir');
+    const section = 'canton-basilea';
+    const topic = 'carburanti';
+    const hubPath = `content/cantons/${section}/hubs/${topic}.json`;
+    const hub = JSON.parse(spawnSync('git', ['show', `HEAD:${hubPath}`], { cwd: ROOT, encoding: 'utf8' }).stdout);
+    const added = commit(hubPath, JSON.stringify(hub));
+    hub.contentHash = '0'.repeat(64);
+    const updated = commit(hubPath, JSON.stringify(hub));
+    const malformed = commit(hubPath, '{}');
+    const turgovia = ['--section', 'canton-tg'];
+    assert.equal(check(latest, added, turgovia), 1);
+    assert.equal(check(added, updated), 1);
+    assert.equal(check(added, updated, turgovia), 0);
+    assert.equal(check(added, updated, ['--section', section]), 1);
+    assert.equal(check(updated, malformed, turgovia), 1);
+
   } finally {
     rmSync(directory, { recursive: true, force: true });
   }

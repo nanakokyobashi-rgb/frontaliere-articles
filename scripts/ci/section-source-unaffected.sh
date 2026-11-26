@@ -56,6 +56,15 @@ if [ "${1:-}" = '--replay-nonce' ]; then
   exit 0
 fi
 
+section_hub_paths=()
+section=
+
+if [ "${1:-}" = '--section' ]; then
+  section="${2:-}"
+  [[ "$#" -eq 4 && "$section" =~ ^canton-[a-z0-9-]+$ ]] || exit 1
+  shift 2
+fi
+
 bookkeeping_only=false
 if [ "${1:-}" = '--bookkeeping-only' ]; then
   bookkeeping_only=true
@@ -77,6 +86,33 @@ if ! git cat-file -e "$current^{commit}" 2>/dev/null; then
 fi
 git merge-base --is-ancestor "$expected" "$current" || exit 1
 
+if [ -n "${section:-}" ]; then
+  # Only edits to existing hub documents qualify. Additions and deletions
+  # can change shared hub coverage and the edge section registry.
+  hub_glob=':(top,glob)content/cantons/canton-*/hubs/*.json'
+  hub_changes="$(git diff --name-status --no-renames "$expected" "$current" -- "$hub_glob")" || exit 1
+  while IFS=$'\t' read -r status file; do
+    [ -z "$status" ] && continue
+    if [[ "$status" = M && "$file" =~ ^content/cantons/(canton-[a-z0-9-]+)/hubs/([a-z0-9-]+)\.json$ ]]; then
+      hub_section="${BASH_REMATCH[1]}"
+      hub_topic="${BASH_REMATCH[2]}"
+      if [ "$hub_section" != "$section" ]; then
+        node --input-type=module - "$expected" "$current" "$file" "$hub_section" "$hub_topic" <<'NODE' || exit 1
+import { execFileSync } from 'node:child_process';
+import { parseCantonHubDocument } from './scripts/lib/canton-hub-data.mjs';
+
+const [before, after, file, section, topic] = process.argv.slice(2);
+for (const sha of [before, after]) {
+  const raw = execFileSync('git', ['show', `${sha}:${file}`], { encoding: 'utf8' });
+  parseCantonHubDocument(raw, section, topic);
+}
+NODE
+        section_hub_paths+=(":(top,exclude,literal)$file")
+      fi
+    fi
+  done <<< "$hub_changes"
+fi
+
 if [ "$bookkeeping_only" = 'true' ]; then
   git diff --quiet --no-ext-diff --no-textconv --ignore-submodules=none \
     "$expected" "$current" -- . "${bookkeeping_paths[@]}"
@@ -94,6 +130,7 @@ git diff --quiet --no-ext-diff --no-textconv --ignore-submodules=none "$expected
   ":(top,exclude,literal)$section_workflow" \
   ":(top,exclude,literal)$shard_workflow" \
   "${bookkeeping_paths[@]}" \
+  "${section_hub_paths[@]}" \
   ':(top,exclude,literal)data/image-regeneration-queue.json' \
   ':(top,exclude,literal)data/image-regeneration-queue-pending.jsonl' \
   ':(top,exclude,glob)data/image-regeneration-queue-pending.jsonl.*.pending' \
