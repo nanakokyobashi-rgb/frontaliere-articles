@@ -1017,9 +1017,9 @@
       "path": "scripts/lib/codex-fallback-contract.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "339d945b935b757d",
-        "corpus": "339d945b935b757d",
-        "alignedAt": "2026-09-26"
+        "site": "abf05e678d5a8d6a",
+        "corpus": "abf05e678d5a8d6a",
+        "alignedAt": "2026-11-26"
       }
     },
     {
@@ -5131,9 +5131,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-21.yml",
       "mode": "identical",
       "baseline": {
-        "site": "2fa235e94cd6e536",
-        "corpus": "2fa235e94cd6e536",
-        "alignedAt": "2026-11-21"
+        "site": "2a280babc43e10e1",
+        "corpus": "2a280babc43e10e1",
+        "alignedAt": "2026-11-26"
       }
     },
     {
@@ -5161,9 +5161,9 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "2e6f84fb78406cfb",
-        "corpus": "2e6f84fb78406cfb",
-        "alignedAt": "2026-11-25"
+        "site": "0e5346a9a2c7f5a5",
+        "corpus": "0e5346a9a2c7f5a5",
+        "alignedAt": "2026-11-26"
       }
     },
     {
@@ -5173,8 +5173,8 @@
       "remoteDigestRequired": true,
       "reason": "La baseline registra lo stesso digest SHA-256 raw sui due lati; `remoteDigestRequired` rende il confronto remoto una precondizione fail-closed prima di accettare o riattestare la baseline e prima del trasporto.",
       "baseline": {
-        "site": "3b36e80ef0a6db31",
-        "corpus": "3b36e80ef0a6db31",
+        "site": "2eb8ee48aee58da2",
+        "corpus": "2eb8ee48aee58da2",
         "alignedAt": "2026-11-26"
       }
     },
