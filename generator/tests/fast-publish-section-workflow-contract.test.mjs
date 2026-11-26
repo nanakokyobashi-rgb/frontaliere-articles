@@ -589,9 +589,11 @@ test('reconcile evita un backfill duplicato sulla stessa revisione e conserva la
         section, dispatch: true, selected: [], missingPagePaths: [], knownMissingPagePaths: [],
       })),
     }));
-    const run = (pendingFlip, main = commit, afterDispatch = '') => execFileSync('bash', ['-c', [
+    const run = (pendingFlip, main = commit, afterDispatch = '', activeRuns, release = commit) => execFileSync('bash', ['-c', [
       'rm -f main-after-dispatch',
-      'gh() { if [ "$1" = api ]; then printf "%s" "$ACTIVE_RUNS"; else printf "%s\\n" "$@"; '
+      'gh() { if [ "$1" = api ]; then '
+        + 'case "$PENDING_EDGE_FLIP:$*" in true:*created*|false:*created*) [ "$PENDING_EDGE_FLIP" = false ] || return 1;; false:*) return 1;; esac; '
+        + 'printf "%s" "$ACTIVE_RUNS"; else printf "%s\\n" "$@"; '
         + 'if [ -n "$MAIN_AFTER_DISPATCH" ]; then printf "%s\\n" "$MAIN_AFTER_DISPATCH" > main-after-dispatch; fi; fi; }',
       'date() { echo 2026-11-19T04:00:00Z; }',
       source.slice(start, end),
@@ -599,9 +601,9 @@ test('reconcile evita un backfill duplicato sulla stessa revisione e conserva la
       cwd: root,
       env: {
         ...process.env, RUNNER_TEMP: root, GITHUB_PAT_NANAKO: 'test-token', GITHUB_REPOSITORY: 'test/corpus',
-        GITHUB_RUN_ID: '123', PENDING_EDGE_FLIP: pendingFlip, SOURCE_COMMIT: commit, API_RELEASE_COMMIT: commit,
+        GITHUB_RUN_ID: '123', PENDING_EDGE_FLIP: pendingFlip, SOURCE_COMMIT: commit, API_RELEASE_COMMIT: release,
         FAKE_MAIN: main, MAIN_AFTER_DISPATCH: afterDispatch,
-        ACTIVE_RUNS: JSON.stringify([{ workflow_runs: [
+        ACTIVE_RUNS: JSON.stringify([{ workflow_runs: activeRuns ?? [
           pending('canton-appenzello', 'pending'),
           pending('canton-ti', 'completed'),
           { ...pending('canton-ti', 'queued'), display_title: 'cover-publish-section / canton-ti / nonce=manual / dry=false / c=none' },
@@ -620,6 +622,21 @@ test('reconcile evita un backfill duplicato sulla stessa revisione e conserva la
     const flip = run('true');
     assert.match(flip, /section=canton-appenzello/);
     assert.match(flip, /dispatch_cohort=reconcile-123-n3/);
+    const key = flip.match(/dispatch_nonce=reconcile-123-([a-f0-9]{32})-canton-ti/)[1];
+    const cohort = ['canton-ne', 'canton-ti', 'canton-appenzello'].map((section) => ({
+      ...pending(section, section === 'canton-ti' ? 'completed' : 'queued'),
+      conclusion: section === 'canton-ti' ? 'success' : null,
+      created_at: '2026-11-18T12:00:00Z',
+      display_title: `cover-publish-section / ${section} / nonce=reconcile-42-${key}-${section} / dry=false / c=reconcile-42-n3`,
+    }));
+    const reused = run('true', commit, '', [pending('canton-ti', 'queued'), ...cohort]);
+    assert.match(reused, /Coorte equivalente/);
+    assert.doesNotMatch(reused, /dispatch_nonce=/);
+    assert.match(run('true', commit, '', cohort.slice(1)), /dispatch_cohort=reconcile-123-n3/);
+    assert.match(run('true', commit, '', cohort, ledger), /dispatch_cohort=reconcile-123-n3/);
+    cohort[1].conclusion = 'failure';
+    assert.match(run('true', commit, '', cohort), /dispatch_cohort=reconcile-123-n3/);
+
     const repinned = run('true', ledger);
     assert.equal(repinned.match(new RegExp(`^source_commit=${ledger}$`, 'gm'))?.length, 3);
     assert.equal(repinned.match(new RegExp(`^source_main_commit=${ledger}$`, 'gm'))?.length, 3);
