@@ -707,6 +707,20 @@ describe('fact-check retries under a reported input cap', () => {
     });
   }
 
+  test('il fact-check Svizzera con il carico osservato rientra nel limite Groq Qwen', async () => {
+    const scope = { section: 'svizzera', isCanton: false };
+    const padding = await loadFor(9200, scope);
+    const { calls, prompt, compactPrompt, modelResults } = await runRounds({
+      ...scope, padding, declaredInputCap: 8000, replies: [firstVote, secondVote],
+    });
+    assert.ok(Math.abs(estimate(prompt) - 9200) <= 3);
+    assert.ok(estimate(compactPrompt) <= 7000, `stima: ${estimate(compactPrompt)}`);
+    assert.ok(compactPrompt.includes(bodyEnd));
+    assert.ok(compactPrompt.includes(sourceEnd));
+    assert.deepEqual(calls.map((call) => call.prompt), [compactPrompt, compactPrompt]);
+    assert.equal(modelResults.length, 2);
+  });
+
   test('un evergreen nazionale sopra il tetto conserva corpo e riferimenti nel fact-check compatto', async () => {
     const scope = { section: 'svizzera', isCanton: false, sourceUrl: 'evergreen://fixture' };
     const padding = await loadFor(8250, scope);
