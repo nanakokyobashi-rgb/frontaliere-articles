@@ -361,6 +361,7 @@ jobs:
                 | [.[].workflow_runs[] | select(.head_sha == $sha)
                   | . as $run
                   | (try (.display_title | capture("^cover-publish-section / (?<section>canton-[a-z0-9-]+) / nonce=reconcile-(?<nonce>[^ ]+) / dry=false / c=(?<cohort>[^ ]+)$")) catch empty) as $title
+                  | select($title.nonce | test($nonce_re))
                   | ($title.nonce | capture($nonce_re)) as $nonce
                   | select($title.section == $nonce.section
                       and $title.cohort == "reconcile-\($nonce.id)-n\($sections | length)")

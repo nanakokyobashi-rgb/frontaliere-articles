@@ -629,7 +629,7 @@ test('reconcile evita un backfill duplicato sulla stessa revisione e conserva la
       created_at: '2026-11-18T12:00:00Z',
       display_title: `cover-publish-section / ${section} / nonce=reconcile-42-${key}-${section} / dry=false / c=reconcile-42-n3`,
     }));
-    const reused = run('true', commit, '', cohort);
+    const reused = run('true', commit, '', [pending('canton-ti', 'queued'), ...cohort]);
     assert.match(reused, /Coorte equivalente/);
     assert.doesNotMatch(reused, /dispatch_nonce=/);
     assert.match(run('true', commit, '', cohort.slice(1)), /dispatch_cohort=reconcile-123-n3/);
