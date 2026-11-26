@@ -99,6 +99,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.rav-sedi-pubblicazione-vakanze.title': 'RAV-Standorte und Plattformen für Arbeitgeber im Thurgau',
     'blog.article.rav-sedi-pubblicazione-vakanze.excerpt': 'Die RAV-Standorte befinden sich in Amriswil, Frauenfeld und Kreuzlingen; offene Stellen können kostenlos auf arbeit.swiss veröffentlicht werden.',
     'blog.article.rav-sedi-pubblicazione-vakanze.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.turgovia-insediamento-imprese.title': 'Thurgau unterstützt die Ansiedlung von Unternehmen',
+    'blog.article.turgovia-insediamento-imprese.excerpt': 'Der Kanton Thurgau bietet Begleitung, Informationen und Beratung zu Immobilien, Richtlinien, Bewilligungen und Kontakten mit Ämtern und Behörden.',
+    'blog.article.turgovia-insediamento-imprese.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTgDe;

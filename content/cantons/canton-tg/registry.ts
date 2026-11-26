@@ -360,4 +360,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'turgovia-insediamento-imprese',
+ category: 'pratico',
+ date: '2026-11-26T05:16:59.735Z',
+ image: '/images/blog/article-turgovia-insediamento-imprese.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

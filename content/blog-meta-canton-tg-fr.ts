@@ -99,6 +99,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.rav-sedi-pubblicazione-vakanze.title': 'Offices ORP et plateformes pour employeurs en Thurgovie',
     'blog.article.rav-sedi-pubblicazione-vakanze.excerpt': 'Les offices ORP se trouvent à Amriswil, Frauenfeld et Kreuzlingen ; les postes vacants peuvent être publiés gratuitement sur arbeit.swiss.',
     'blog.article.rav-sedi-pubblicazione-vakanze.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.turgovia-insediamento-imprese.title': 'La Thurgovie soutient l\'implantation des entreprises',
+    'blog.article.turgovia-insediamento-imprese.excerpt': 'Le canton de Thurgovie offre un accompagnement, des informations et des conseils concernant l\'immobilier, les directives, les autorisations et les contacts avec les offices et les autorités.',
+    'blog.article.turgovia-insediamento-imprese.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTgFr;
