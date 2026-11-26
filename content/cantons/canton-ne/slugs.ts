@@ -30,6 +30,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'fiscalita-coppie-sposate-voto': { it: 'fiscalita-coppie-sposate-voto', en: 'taxation-married-couples-vote', de: 'besteuerung-verheirateter-paare-wahl', fr: 'fiscalite-couples-maries-vote' },
  'imprese-neuchateloise-rischio-supply-chain': { it: 'imprese-neuchateloise-rischio-supply-chain', en: 'neuchatel-companies-supply-chain-risk', de: 'neuenburg-unternehmen-lieferkettenrisiko', fr: 'entreprises-neuchatel-defi-dependance' },
  'tagli-lavoro-piano-sociale': { it: 'tagli-lavoro-piano-sociale', en: 'le-locle-job-cuts-social-plan', de: 'le-locle-stellenabbau-sozialplan', fr: 'le-locle-suppressions-emplois-plan-social' },
+ 'neuchatel-supporto-progetti-piloti-disabili': { it: 'neuchatel-supporto-progetti-piloti-disabili', en: 'neuchatel-support-pilot-disability-projects', de: 'neuenburg-unterstuetzung-pilotprojekte-behinderte', fr: 'neuchatel-soutient-projets-pilotes-handicap' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -84,6 +84,9 @@ const blogMetaCantonNeEn: Record<string, string> = {
     'blog.article.tagli-lavoro-piano-sociale.title': 'Layoffs in Le Locle: 90 positions and social plan',
     'blog.article.tagli-lavoro-piano-sociale.excerpt': '90 positions eliminated in Le Locle, 10 fewer than the 100 announced in October.',
     'blog.article.tagli-lavoro-piano-sociale.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.neuchatel-supporto-progetti-piloti-disabili.title': 'Neuchâtel funds 3 pilot projects for the autonomy of people with disabilities',
+    'blog.article.neuchatel-supporto-progetti-piloti-disabili.excerpt': 'The Canton of Neuchâtel selected three innovative initiatives following the call for pilot projects “Life, housing, career” launched in 2024.',
+    'blog.article.neuchatel-supporto-progetti-piloti-disabili.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonNeEn;

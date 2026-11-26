@@ -305,4 +305,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'neuchatel-supporto-progetti-piloti-disabili',
+ category: 'novita',
+ date: '2026-11-26T15:28:20.281Z',
+ image: '/images/blog/article-neuchatel-supporto-progetti-piloti-disabili.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

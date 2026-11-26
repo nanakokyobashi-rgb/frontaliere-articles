@@ -84,6 +84,9 @@ const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.tagli-lavoro-piano-sociale.title': 'Licenziamenti al Locle: 90 posti e piano sociale',
     'blog.article.tagli-lavoro-piano-sociale.excerpt': '90 posti soppressi al Locle, 10 meno dei 100 annunciati in ottobre.',
     'blog.article.tagli-lavoro-piano-sociale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.neuchatel-supporto-progetti-piloti-disabili.title': 'Neuchâtel finanzia 3 progetti pilota per autonomia disabili',
+    'blog.article.neuchatel-supporto-progetti-piloti-disabili.excerpt': 'Il Cantone di Neuchâtel ha selezionato tre iniziative innovative dopo l\'appello a progetti pilota «Vie, logement, carrière» lanciato nel 2024.',
+    'blog.article.neuchatel-supporto-progetti-piloti-disabili.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonNeIt;

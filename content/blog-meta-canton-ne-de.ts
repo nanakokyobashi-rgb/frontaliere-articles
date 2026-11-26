@@ -84,6 +84,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.tagli-lavoro-piano-sociale.title': 'Entlassungen in Locle: 90 Stellen und Sozialplan',
     'blog.article.tagli-lavoro-piano-sociale.excerpt': '90 Stellen in Locle gestrichen, 10 weniger als die im Oktober angekündigten 100.',
     'blog.article.tagli-lavoro-piano-sociale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.neuchatel-supporto-progetti-piloti-disabili.title': 'Neuenburg finanziert 3 Pilotprojekte für Autonomie behinderter Menschen',
+    'blog.article.neuchatel-supporto-progetti-piloti-disabili.excerpt': 'Der Kanton Neuenburg hat nach dem 2024 lancierten Aufruf zu Pilotprojekten «Vie, logement, carrière» drei innovative Initiativen ausgewählt.',
+    'blog.article.neuchatel-supporto-progetti-piloti-disabili.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonNeDe;
