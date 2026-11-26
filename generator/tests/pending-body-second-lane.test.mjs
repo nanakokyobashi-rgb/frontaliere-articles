@@ -951,6 +951,14 @@ return buildPendingBodyRetranslationPrompt;`)(),
   const { onReject, ...options } = chunkOptions;
   assert.equal(typeof onReject, 'function');
   assert.deepEqual(options, { forceLegacy: true, chunkWords: 240 });
+
+  const recovered = await translatePendingBodyWithHistoricalChain(
+    longIt, 'de', 'body1',
+    { callWithRetry, translateInChunks, rejectionReason: ['line-skeleton', ['numeric-association']] },
+  );
+  assert.equal(recovered, expected);
+  assert.equal(chunkOptions.chunkWords, 120);
+  assert.equal(wholeBodyCalls, 0);
 });
 
 test('la catena storica rifiuta il caller senza il traduttore chunked prima di tradurre', async () => {
@@ -3129,6 +3137,7 @@ test('il recupero conserva in un chunk dedicato un atomo oltre il target ma entr
   const chunker = buildChunker();
   const atom = `[ ${'parola '.repeat(241).trim()}](https://example.test)`;
   assert.deepEqual(chunker(`Prima ${atom} dopo`, 240, true), ['Prima', atom, 'dopo']);
+  assert.deepEqual(chunker(`Prima ${atom} dopo`, 120, true), ['Prima', atom, 'dopo']);
   assert.throws(() => chunker(atom, 240), /protected translation atom exceeds/);
   const tooLong = `[ ${'parola '.repeat(501).trim()}](https://example.test)`;
   assert.throws(() => chunker(tooLong, 240, true), /protected translation atom exceeds/);
