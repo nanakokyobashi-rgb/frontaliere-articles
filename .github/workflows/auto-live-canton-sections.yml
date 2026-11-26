@@ -1,8 +1,9 @@
 name: Auto-live Canton Sections
 
-# D22: il cron ricontrolla ogni giorno le sezioni cantonali ancora draft. Gli
-# eventi dei tre generatori/preparatori riaprono lo stesso controllo subito
-# dopo un articolo, un refresh degli hub o un bootstrap R2 riuscito.
+# D22: il cron ricontrolla ogni giorno le sezioni cantonali ancora draft.
+# I generatori e gli aggiornamenti degli hub anticipano il controllo. Il
+# bootstrap R2 viene ricontrollato dal cron, evitando una run di promozione
+# per ogni pubblicazione ordinaria o replay di una sezione già live.
 on:
   schedule:
     - cron: '37 9 * * *'
@@ -25,7 +26,6 @@ on:
       - 'Generate Blog Article (canton-nw)'
       - 'Generate Blog Article (canton-sh)'
       - 'Refresh Canton Hubs'
-      - 'fast-publish-section'
     types: [completed]
 
 concurrency:

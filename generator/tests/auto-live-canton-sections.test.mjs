@@ -296,6 +296,7 @@ test('workflow D22 usa cron/dispatch, lancia refresh e bootstrap, crea solo PR e
   assert.match(WORKFLOW, /cron: '37 9 \* \* \*'/u);
   assert.match(WORKFLOW, /workflow_dispatch:/u);
   assert.match(WORKFLOW, /workflow_run:/u);
+  assert.doesNotMatch(WORKFLOW, /^\s*- 'fast-publish-section'$/mu);
   assert.match(WORKFLOW, /gh workflow run refresh-canton-hubs\.yml/u);
   assert.match(WORKFLOW, /gh workflow run fast-publish-section\.yml/u);
   assert.match(WORKFLOW, /node scripts\/ci\/auto-live-canton-sections\.mjs "\$\{args\[@\]\}"/u);
