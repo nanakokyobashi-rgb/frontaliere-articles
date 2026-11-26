@@ -99,6 +99,9 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.rav-sedi-pubblicazione-vakanze.title': 'RAV offices and platforms for employers in Thurgau',
     'blog.article.rav-sedi-pubblicazione-vakanze.excerpt': 'The RAV offices are in Amriswil, Frauenfeld and Kreuzlingen; vacancies can be published free of charge on arbeit.swiss.',
     'blog.article.rav-sedi-pubblicazione-vakanze.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.turgovia-insediamento-imprese.title': 'Thurgau supports business establishment',
+    'blog.article.turgovia-insediamento-imprese.excerpt': 'The Canton of Thurgau offers support, information and advice on properties, directives, permits and contacts with offices and authorities.',
+    'blog.article.turgovia-insediamento-imprese.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTgEn;

@@ -99,6 +99,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.rav-sedi-pubblicazione-vakanze.title': 'Sedi RAV e piattaforme per datori di lavoro in Turgovia',
     'blog.article.rav-sedi-pubblicazione-vakanze.excerpt': 'Le sedi RAV sono ad Amriswil, Frauenfeld e Kreuzlingen; le vakanze possono essere pubblicate gratuitamente su arbeit.swiss.',
     'blog.article.rav-sedi-pubblicazione-vakanze.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.turgovia-insediamento-imprese.title': 'Turgovia sostiene l\'insediamento delle imprese',
+    'blog.article.turgovia-insediamento-imprese.excerpt': 'Il Canton Turgovia offre accompagnamento, informazioni e consulenza su immobili, direttive, autorizzazioni e contatti con uffici e autorità.',
+    'blog.article.turgovia-insediamento-imprese.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTgIt;

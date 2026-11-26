@@ -35,6 +35,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'turgovia-rav-assunzioni-permessi': { it: 'turgovia-rav-assunzioni-permessi', en: 'thurgau-rav-hiring-permits', de: 'thurgau-rav-personal-bewilligungen', fr: 'thurgovie-orc-embauche-permis' },
  'disoccupazione-rav-thurgau': { it: 'disoccupazione-rav-thurgau', en: 'thurgau-rav-unemployment', de: 'arbeitslos-rav-thurgau', fr: 'chomage-rav-thurgovie' },
  'rav-sedi-pubblicazione-vakanze': { it: 'rav-sedi-pubblicazione-vakanze', en: 'rav-office-vacancy-publication', de: 'rav-standorte-stellenanzeigen', fr: 'bureaux-rav-publication-offres' },
+ 'turgovia-insediamento-imprese': { it: 'turgovia-insediamento-imprese', en: 'thurgau-business-settlement', de: 'thurgau-unternehmensansiedlung', fr: 'thurgovie-installation-entreprises' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
