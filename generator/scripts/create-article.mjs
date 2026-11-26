@@ -20971,6 +20971,9 @@ function decodeSeoEntities(data) {
 
 function modifySeoService(data) {
   decodeSeoEntities(data);
+  // Validate the stored fields against the final editorial title, after
+  // generation, rewriting and entity normalization have finished.
+  repairSeoTitleFields(data.seo, data.content.it.title);
   assertPlainDescriptionFields(data.seo, {
     fieldPrefix: 'seo.',
     id: data.id,
