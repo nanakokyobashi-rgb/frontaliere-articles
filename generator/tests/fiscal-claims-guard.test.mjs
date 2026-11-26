@@ -309,6 +309,23 @@ test('domini ufficiali: sottodomini si, omonimi no', () => {
   for (const { url } of OFFICIAL_SOURCE_LINKS) assert.equal(isOfficialSourceUrl(url), true, url);
 });
 
+test('YMYL: i portali cantonali sono fonti ufficiali, i domini imitativi no', () => {
+  const data = {
+    id: 'ag-scuole-professionali-salute',
+    content: { it: { title: 'Scuole professionali per la salute in Argovia', excerpt: '', body1: 'Il comitato ha depositato un’iniziativa.' } },
+  };
+  const official = 'https://www.ag.ch/de/themen/staat-politik/wahlen-abstimmungen/volksinitiativen';
+  const media = 'https://www.fricktal.info/news/iniziativa';
+  assert.deepEqual(checkYmylPublishable(data, { sourceUrl: official }), { ymyl: true, problems: [] });
+  assert.deepEqual(checkYmylPublishable(data, { sourceUrl: media }).problems, ['nessun link a una fonte ufficiale']);
+  for (const url of ['https://amtsblatt.ag.ch/', 'https://www.baselland.ch/', 'https://www.sta.be.ch/', 'https://www.vd.ch/']) {
+    assert.equal(isOfficialSourceUrl(url), true, url);
+  }
+  for (const url of ['https://www.ag.ch.example.org/', 'https://fakeag.ch/', 'https://www.ag.ch@example.org/']) {
+    assert.equal(isOfficialSourceUrl(url), false, url);
+  }
+});
+
 test('le traduzioni non reintroducono un errore che l\'italiano non ha', () => {
   assert.throws(
     () => assertNoFiscalErrorsInLocales({ en: { body1: 'Old frontier workers benefit from an exemption of €7,500.' } }),
