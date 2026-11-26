@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "8f4074f0ccb7eab6c1b870373bae055da072559cc14d62bc662c59a11dbb42ff",
+  "updatedAt": "2026-11-26T18:57:59.667Z",
+  "contentHash": "93e849d74c46c8010a7103e882c9634d83379ad2e0f1dac19c7511665feec4d7",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Evacuazione Mülimärt Lenzburg per fuoriuscita di anidride carbonica",
+          "url": "/articoli-argovia/muelimaert-lenzburg-gas-evacuazione/",
+          "excerpt": "Allarme per anidride carbonica martedì poco dopo le 11.30; 30 persone hanno riferito malessere e vertigini; liberazione verso le 13.30.",
+          "date": "2026-11-26T18:53:55.972Z"
+        },
+        {
           "title": "Incendio a Sins AG: interrotta la linea S26",
           "url": "/articoli-argovia/incendio-sins-linea-s26/",
           "excerpt": "Un incendio in un fienile a Sins AG ha interrotto la tratta tra Rotkreuz e Lenzburg: sulla S26 circolano bus sostitutivi fino alle 16 circa.",
@@ -94,12 +100,6 @@
           "url": "/articoli-argovia/niederwil-aumento-imposta-2027/",
           "excerpt": "Niederwil propone il passaggio dal 103% al 107%; il deficit del budget 2027 scenderebbe da CHF 401'200 a CHF 151'200.",
           "date": "2026-11-06T12:02:37.265Z"
-        },
-        {
-          "title": "Aarau sostituirà i tigli rimasti al Zollrain",
-          "url": "/articoli-argovia/aarau-rinnovo-tigli-zollrain/",
-          "excerpt": "Aarau sostituirà i tigli rimasti al Zollrain e rinnoverà l’area verde.",
-          "date": "2026-11-03T19:57:16.000Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T18:57:59.667Z"
     },
     "en": {
       "canton": "AG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Evacuation of Mülimärt Lenzburg due to a carbon dioxide leak",
+          "url": "/en/aargau-articles/muelimaert-lenzburg-gas-evacuation/",
+          "excerpt": "Carbon dioxide alarm on Tuesday shortly after 11.30; 30 people reported feeling unwell and experiencing dizziness; clearance around 13.30.",
+          "date": "2026-11-26T18:53:55.972Z"
+        },
+        {
           "title": "Fire at Sins AG: S26 line interrupted",
           "url": "/en/aargau-articles/sins-fire-s26-rail-interruption/",
           "excerpt": "A fire in a barn in Sins AG has interrupted the route between Rotkreuz and Lenzburg: replacement buses are operating on the S26 until around 16:00.",
@@ -193,12 +199,6 @@
           "url": "/en/aargau-articles/niederwil-municipal-tax-2027/",
           "excerpt": "Niederwil proposes increasing it from 103% to 107%; the 2027 budget deficit would decrease from CHF 401'200 to CHF 151'200.",
           "date": "2026-11-06T12:02:37.265Z"
-        },
-        {
-          "title": "Aarau will replace the remaining lime trees at Zollrain",
-          "url": "/en/aargau-articles/aarau-zollrain-linden-renewal/",
-          "excerpt": "Aarau will replace the remaining linden trees at Zollrain and renovate the green space.",
-          "date": "2026-11-03T19:57:16.000Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T18:57:59.667Z"
     },
     "de": {
       "canton": "AG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Evakuierung von Mülimärt Lenzburg wegen eines Austritts von Kohlendioxid",
+          "url": "/de/aargau-artikel/muelimaert-lenzburg-gas-evakuierung/",
+          "excerpt": "Alarm wegen Kohlendioxid am Dienstag kurz nach 11.30 Uhr; 30 Personen berichteten über Unwohlsein und Schwindel; Freigabe gegen 13.30 Uhr.",
+          "date": "2026-11-26T18:53:55.972Z"
+        },
+        {
           "title": "Brand in Sins AG: Linie S26 unterbrochen",
           "url": "/de/aargau-artikel/brand-sins-s26-bahnunterbruch/",
           "excerpt": "Ein Brand in einer Scheune in Sins AG hat die Strecke zwischen Rotkreuz und Lenzburg unterbrochen: Auf der S26 verkehren bis etwa 16 Uhr Ersatzbusse.",
@@ -292,12 +298,6 @@
           "url": "/de/aargau-artikel/niederwil-steuerfuss-erhoehung-2027/",
           "excerpt": "Niederwil schlägt eine Erhöhung des Steuerfusses von 103% auf 107% vor; das Defizit des Budgets 2027 würde von CHF 401'200 auf CHF 151'200 sinken.",
           "date": "2026-11-06T12:02:37.265Z"
-        },
-        {
-          "title": "Aarau wird die verbliebenen Linden am Zollrain ersetzen",
-          "url": "/de/aargau-artikel/aarau-zollrain-linden-erneuerung/",
-          "excerpt": "Aarau wird die verbliebenen Linden am Zollrain ersetzen und die Grünanlage erneuern.",
-          "date": "2026-11-03T19:57:16.000Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T18:57:59.667Z"
     },
     "fr": {
       "canton": "AG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Évacuation de Mülimärt Lenzburg en raison d’une fuite de dioxyde de carbone",
+          "url": "/fr/articles-argovie/muelimaert-lenzburg-evacuation-gaz/",
+          "excerpt": "Alerte au dioxyde de carbone mardi peu après 11.30; 30 personnes ont signalé un malaise et des vertiges; fin de l’alerte vers 13.30.",
+          "date": "2026-11-26T18:53:55.972Z"
+        },
+        {
           "title": "Incendie à Sins AG : ligne S26 interrompue",
           "url": "/fr/articles-argovie/incendie-sins-s26-interruption/",
           "excerpt": "Un incendie dans une grange à Sins AG a interrompu la liaison entre Rotkreuz et Lenzburg : des bus de remplacement circulent sur la S26 jusqu’à environ 16 heures.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-argovie/niederwil-hausse-taux-fiscal-2027/",
           "excerpt": "Niederwil propose le passage de 103 % à 107 % ; le déficit du budget 2027 passerait de CHF 401'200 à CHF 151'200.",
           "date": "2026-11-06T12:02:37.265Z"
-        },
-        {
-          "title": "Aarau remplacera les tilleuls restants au Zollrain",
-          "url": "/fr/articles-argovie/aarau-renovation-tilleuls-zollrain/",
-          "excerpt": "Aarau remplacera les tilleuls restants au Zollrain et rénovera l’espace vert.",
-          "date": "2026-11-03T19:57:16.000Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-26T18:57:59.667Z"
     }
   }
 }
