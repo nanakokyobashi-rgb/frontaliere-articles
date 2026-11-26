@@ -16116,6 +16116,9 @@ async function translatePendingBodyWithHistoricalChain(
   const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
   const recoveryChunkWords = 240;
   const shorterChunkWords = recoveryChunkWords / 2;
+  const knownStructureRejection = ['numeric-values', 'numeric-association', 'line-skeleton', 'completeness']
+    .some((reason) => [previousRejectionReason].flat(Infinity).includes(reason));
+  const initialChunkWords = knownStructureRejection ? shorterChunkWords : recoveryChunkWords;
   const rejected = [];
   const text = await translateFieldFreeMt({
     text: itValue,
@@ -16141,13 +16144,13 @@ async function translatePendingBodyWithHistoricalChain(
         locale,
         { forceLegacy: true, chunkWords, onReject },
       );
-      const retryShorter = () => wordCount > shorterChunkWords && !pendingBodyLaneShouldStop()
+      const retryShorter = () => initialChunkWords > shorterChunkWords && wordCount > shorterChunkWords && !pendingBodyLaneShouldStop()
         ? translateSegments(shorterChunkWords)
         : '';
       let validated;
       try {
-        if (wordCount > recoveryChunkWords) {
-          validated = await translateSegments(recoveryChunkWords);
+        if (wordCount > initialChunkWords) {
+          validated = await translateSegments(initialChunkWords);
         } else {
           // Free MT separates template headings before invoking this callback.
           // Derive the markers for this same segment, as the validator does.

@@ -951,6 +951,14 @@ return buildPendingBodyRetranslationPrompt;`)(),
   const { onReject, ...options } = chunkOptions;
   assert.equal(typeof onReject, 'function');
   assert.deepEqual(options, { forceLegacy: true, chunkWords: 240 });
+
+  const recovered = await translatePendingBodyWithHistoricalChain(
+    longIt, 'de', 'body1',
+    { callWithRetry, translateInChunks, rejectionReason: ['line-skeleton', ['numeric-association']] },
+  );
+  assert.equal(recovered, expected);
+  assert.equal(chunkOptions.chunkWords, 120);
+  assert.equal(wholeBodyCalls, 0);
 });
 
 test('la catena storica rifiuta il caller senza il traduttore chunked prima di tradurre', async () => {
