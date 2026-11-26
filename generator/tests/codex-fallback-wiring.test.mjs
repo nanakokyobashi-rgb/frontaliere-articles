@@ -111,7 +111,7 @@ test('every active article CLI caller wires the OAuth Codex broker', () => {
       for (const index of preferredIndexes) {
         const consumer = stepBlock(lines, index);
         assert.match(consumer, new RegExp(escapeRegex(SOCKET)), `${rel}: Codex consumer lacks broker socket`);
-        assert.match(consumer, /AI_MODELS_PREFER:\s*codex-cli\/gpt-5\.6-luna/, `${rel}: Codex consumer preference is not pinned`);
+        assert.match(consumer, /AI_MODELS_PREFER:\s*codex-cli\/gpt-6-luna/, `${rel}: Codex consumer preference is not pinned`);
       }
     } else {
       if (oauthIndexes.length > 0) {
@@ -260,7 +260,7 @@ test('Codex primary keeps Luna Max and is reusable across crawler calls', () => 
   assert.doesNotMatch(action, /indirect Codex fallback/);
   assert.match(broker, /const DEFAULT_MAX_REQUESTS = 1/,
     'the broker default must remain one-shot when launched outside the composite action');
-  assert.match(broker, /CODEX_MODEL\s*=\s*['"]gpt-5\.6-luna['"]/);
+  assert.match(broker, /CODEX_MODEL\s*=\s*['"]gpt-6-luna['"]/);
   assert.match(broker, /CODEX_EFFORT\s*=\s*['"]max['"]/);
   assert.match(broker, /maxRequests/);
   assert.doesNotMatch(broker.slice(broker.indexOf('async function _callCodexCli'), broker.indexOf('function _callOmniRoute')), /_claimCodexCliFallback/);
