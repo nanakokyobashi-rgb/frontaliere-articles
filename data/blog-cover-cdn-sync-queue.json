@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-rav-sedi-pubblicazione-vakanze.webp",
+      "sha256": "77c00ca005f49ca2ef112590df31246b54c808c456800285e0eb71f47a32d04a"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-rav-sedi-pubblicazione-vakanze-480w.webp",
+      "sha256": "9829db543271c0c2f5d995aa0bd637d61c044b2e0cb4eb30c352879db35b06f5"
+    }
+  ]
 }
