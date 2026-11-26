@@ -20,6 +20,16 @@
       "failureCount": 68,
       "requestedAt": "2026-10-24T19:06:53.846Z",
       "lastFailureAt": "2026-11-26T04:39:18.934Z"
+    },
+    {
+      "articleId": "sem-chiasso-personale-due-mesi",
+      "title": "Sem riapre Chiasso: Ors cerca personale per due mesi in più",
+      "fallbackImage": "/images/blog/article-chiasso-via-motta-lavoro.webp",
+      "reason": "All image providers failed for article-sem-chiasso-personale-due-mesi: openai-codex (vision gate rejected image: Generic synthetic street illustration relevant to Chiasso and admin",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-11-26T08:46:31.297Z",
+      "lastFailureAt": "2026-11-26T08:46:31.297Z"
     }
   ]
 }

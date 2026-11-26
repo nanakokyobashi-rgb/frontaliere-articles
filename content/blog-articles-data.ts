@@ -48268,6 +48268,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sem-chiasso-personale-due-mesi',
+ category: 'novita',
+ date: '2026-11-26T08:46:28.620Z',
+ image: '/images/blog/article-chiasso-via-motta-lavoro.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
