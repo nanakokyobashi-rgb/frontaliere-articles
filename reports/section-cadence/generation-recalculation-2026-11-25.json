@@ -1,0 +1,2510 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-26T19:14:29.227Z",
+  "timeZone": "Europe/Zurich",
+  "window": {
+    "fromDateInclusive": "2026-11-25",
+    "toDateInclusive": "2026-11-25",
+    "startUtc": "2026-11-24T23:00:00.000Z",
+    "endExclusiveUtc": "2026-11-25T23:00:00.000Z"
+  },
+  "source": {
+    "repository": "nanakokyobashi-rgb/frontaliere-articles",
+    "manifestCommit": "86a364f1d224d8002e2df83d9dcdb3e61609f364",
+    "baselineReport": "reports/section-cadence/baseline-2026-11-25.json",
+    "collection": "generation-only historical recalculation after validating sanitized three-field Actions log TSV; does not recollect M1, M3 or M6 embeddings"
+  },
+  "workflowScope": {
+    "included": [
+      "generate-article.yml",
+      "generate-article-ag.yml",
+      "generate-article-appenzello.yml",
+      "generate-article-basilea.yml",
+      "generate-article-be.yml",
+      "generate-article-fr.yml",
+      "generate-article-ge.yml",
+      "generate-article-gl.yml",
+      "generate-article-gr.yml",
+      "generate-article-ju.yml",
+      "generate-article-lu.yml",
+      "generate-article-ne.yml",
+      "generate-article-nw.yml",
+      "generate-article-ow.yml",
+      "generate-article-sg.yml",
+      "generate-article-sh.yml",
+      "generate-article-so.yml",
+      "generate-article-sz.yml",
+      "generate-article-tg.yml",
+      "generate-article-ti.yml",
+      "generate-article-ur.yml",
+      "generate-article-vd.yml",
+      "generate-article-vs.yml",
+      "generate-article-zg.yml",
+      "generate-article-zh.yml"
+    ],
+    "excluded": []
+  },
+  "currentQueueSnapshotAt": "2026-11-26T19:14:29.227Z",
+  "capacity": {
+    "accountActionsJobLimit": null,
+    "accountActionsJobLimitSource": "not readable through the configured GitHub coordinator identity",
+    "observedMaxConcurrentGenerateJobs": 3,
+    "maximumObservedQueueWaitMinutes": 105.16666666666667,
+    "currentQueuedJobs": 0,
+    "oldestCurrentQueueWaitMinutes": 0
+  },
+  "metrics": {
+    "frontaliere": {
+      "expectedSlots": 24,
+      "runsCreated": 49,
+      "admitted": 49,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 35,
+        "unobservable-terminal": 2,
+        "article": 1,
+        "provider-unavailable": 11
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 2,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 49,
+      "llmExpectedAttempts": 49,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 49,
+      "m4RunsWithReadableLogs": 49,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 49,
+      "m5ReadableRuns": 49,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 49,
+        "p50": 0.21666666666666667,
+        "p90": 61.983333333333334,
+        "max": 105.16666666666667
+      },
+      "generateDuration": {
+        "count": 49,
+        "p50": 14.116666666666667,
+        "p90": 44,
+        "max": 52.483333333333334
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 49,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 49,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 49,
+        "readableLogs": 49,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "svizzera": {
+      "expectedSlots": 24,
+      "runsCreated": 39,
+      "admitted": 39,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 30,
+        "provider-unavailable": 9
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 0,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 39,
+      "llmExpectedAttempts": 39,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 39,
+      "m4RunsWithReadableLogs": 39,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 39,
+      "m5ReadableRuns": 39,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 39,
+        "p50": 0.2,
+        "p90": 3.7666666666666666,
+        "max": 20.883333333333333
+      },
+      "generateDuration": {
+        "count": 39,
+        "p50": 11.866666666666667,
+        "p90": 43.416666666666664,
+        "max": 43.9
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 39,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 39,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 39,
+        "readableLogs": 39,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-ag": {
+      "expectedSlots": 4,
+      "runsCreated": 4,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 4
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 0,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 4,
+        "p50": 0.06666666666666667,
+        "p90": 0.1,
+        "max": 0.1
+      },
+      "generateDuration": {
+        "count": 4,
+        "p50": 0.06666666666666667,
+        "p90": 0.08333333333333333,
+        "max": 0.08333333333333333
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-appenzello": {
+      "expectedSlots": 4,
+      "runsCreated": 4,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 4
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 0,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 4,
+        "p50": 0.06666666666666667,
+        "p90": 0.08333333333333333,
+        "max": 0.08333333333333333
+      },
+      "generateDuration": {
+        "count": 5,
+        "p50": 0.05,
+        "p90": 0.06666666666666667,
+        "max": 0.06666666666666667
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-basilea": {
+      "expectedSlots": 4,
+      "runsCreated": 4,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 4
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 0,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 4,
+        "p50": 0.08333333333333333,
+        "p90": 0.1,
+        "max": 0.1
+      },
+      "generateDuration": {
+        "count": 4,
+        "p50": 0.05,
+        "p90": 0.06666666666666667,
+        "max": 0.06666666666666667
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-be": {
+      "expectedSlots": 4,
+      "runsCreated": 4,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 4
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 0,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 4,
+        "p50": 0.06666666666666667,
+        "p90": 0.08333333333333333,
+        "max": 0.08333333333333333
+      },
+      "generateDuration": {
+        "count": 4,
+        "p50": 0.08333333333333333,
+        "p90": 0.08333333333333333,
+        "max": 0.08333333333333333
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-fr": {
+      "expectedSlots": 4,
+      "runsCreated": 4,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 4
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 0,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 4,
+        "p50": 0.06666666666666667,
+        "p90": 0.08333333333333333,
+        "max": 0.08333333333333333
+      },
+      "generateDuration": {
+        "count": 4,
+        "p50": 0.06666666666666667,
+        "p90": 0.08333333333333333,
+        "max": 0.08333333333333333
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-ge": {
+      "expectedSlots": 4,
+      "runsCreated": 4,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 4
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 0,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 4,
+        "p50": 0.06666666666666667,
+        "p90": 0.08333333333333333,
+        "max": 0.08333333333333333
+      },
+      "generateDuration": {
+        "count": 4,
+        "p50": 0.06666666666666667,
+        "p90": 0.06666666666666667,
+        "max": 0.06666666666666667
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-gl": {
+      "expectedSlots": 4,
+      "runsCreated": 4,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 3,
+        "provider-unavailable": 1
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 0,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 4,
+        "p50": 0.06666666666666667,
+        "p90": 0.06666666666666667,
+        "max": 0.06666666666666667
+      },
+      "generateDuration": {
+        "count": 4,
+        "p50": 0.08333333333333333,
+        "p90": 0.13333333333333333,
+        "max": 0.13333333333333333
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-gr": {
+      "expectedSlots": 4,
+      "runsCreated": 4,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 4
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 0,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 4,
+        "p50": 0.06666666666666667,
+        "p90": 0.08333333333333333,
+        "max": 0.08333333333333333
+      },
+      "generateDuration": {
+        "count": 4,
+        "p50": 0.05,
+        "p90": 0.08333333333333333,
+        "max": 0.08333333333333333
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-ju": {
+      "expectedSlots": 4,
+      "runsCreated": 4,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 4
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 0,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 4,
+        "p50": 0.06666666666666667,
+        "p90": 0.11666666666666667,
+        "max": 0.11666666666666667
+      },
+      "generateDuration": {
+        "count": 4,
+        "p50": 0.05,
+        "p90": 0.06666666666666667,
+        "max": 0.06666666666666667
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-lu": {
+      "expectedSlots": 4,
+      "runsCreated": 4,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 4
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 0,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 4,
+        "p50": 0.08333333333333333,
+        "p90": 0.11666666666666667,
+        "max": 0.11666666666666667
+      },
+      "generateDuration": {
+        "count": 4,
+        "p50": 0.06666666666666667,
+        "p90": 0.06666666666666667,
+        "max": 0.06666666666666667
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-ne": {
+      "expectedSlots": 4,
+      "runsCreated": 4,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 4
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 0,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 4,
+        "p50": 0.06666666666666667,
+        "p90": 0.08333333333333333,
+        "max": 0.08333333333333333
+      },
+      "generateDuration": {
+        "count": 4,
+        "p50": 0.08333333333333333,
+        "p90": 0.08333333333333333,
+        "max": 0.08333333333333333
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-nw": {
+      "expectedSlots": 4,
+      "runsCreated": 4,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 4
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 0,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 4,
+        "p50": 0.06666666666666667,
+        "p90": 0.1,
+        "max": 0.1
+      },
+      "generateDuration": {
+        "count": 4,
+        "p50": 0.1,
+        "p90": 0.15,
+        "max": 0.15
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-ow": {
+      "expectedSlots": 4,
+      "runsCreated": 4,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 4
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 0,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 4,
+        "p50": 0.08333333333333333,
+        "p90": 10.266666666666667,
+        "max": 10.266666666666667
+      },
+      "generateDuration": {
+        "count": 4,
+        "p50": 0.05,
+        "p90": 0.08333333333333333,
+        "max": 0.08333333333333333
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-sg": {
+      "expectedSlots": 4,
+      "runsCreated": 4,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 3,
+        "provider-unavailable": 1
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 0,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 4,
+        "p50": 0.1,
+        "p90": 11.583333333333334,
+        "max": 11.583333333333334
+      },
+      "generateDuration": {
+        "count": 4,
+        "p50": 0.05,
+        "p90": 0.06666666666666667,
+        "max": 0.06666666666666667
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-sh": {
+      "expectedSlots": 4,
+      "runsCreated": 4,
+      "admitted": 3,
+      "admissionSkipped": {},
+      "outcomes": {
+        "unobservable-terminal": 1,
+        "article": 1,
+        "declared": 2
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 1,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 3,
+      "llmExpectedAttempts": 3,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 3,
+      "m4RunsWithReadableLogs": 3,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 3,
+      "m5ReadableRuns": 3,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 4,
+        "p50": 0.08333333333333333,
+        "p90": 3.183333333333333,
+        "max": 3.183333333333333
+      },
+      "generateDuration": {
+        "count": 4,
+        "p50": 0.05,
+        "p90": 0.08333333333333333,
+        "max": 0.08333333333333333
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 3,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 3,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 3,
+        "readableLogs": 3,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-so": {
+      "expectedSlots": 4,
+      "runsCreated": 5,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 3,
+        "unobservable-terminal": 1,
+        "article": 1
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 1,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 5,
+        "p50": 0.15,
+        "p90": 3.4,
+        "max": 3.4
+      },
+      "generateDuration": {
+        "count": 5,
+        "p50": 0.06666666666666667,
+        "p90": 0.1,
+        "max": 0.1
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-sz": {
+      "expectedSlots": 4,
+      "runsCreated": 4,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 4
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 0,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 4,
+        "p50": 0.08333333333333333,
+        "p90": 3.3333333333333335,
+        "max": 3.3333333333333335
+      },
+      "generateDuration": {
+        "count": 4,
+        "p50": 0.06666666666666667,
+        "p90": 0.1,
+        "max": 0.1
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-tg": {
+      "expectedSlots": 4,
+      "runsCreated": 5,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "unobservable-terminal": 1,
+        "article": 1,
+        "declared": 3
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 1,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 5,
+        "p50": 0.08333333333333333,
+        "p90": 0.1,
+        "max": 0.1
+      },
+      "generateDuration": {
+        "count": 5,
+        "p50": 0.06666666666666667,
+        "p90": 0.08333333333333333,
+        "max": 0.08333333333333333
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-ti": {
+      "expectedSlots": 4,
+      "runsCreated": 4,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "provider-unavailable": 1,
+        "declared": 3
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 0,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 4,
+        "p50": 0.06666666666666667,
+        "p90": 12.65,
+        "max": 12.65
+      },
+      "generateDuration": {
+        "count": 4,
+        "p50": 0.08333333333333333,
+        "p90": 0.13333333333333333,
+        "max": 0.13333333333333333
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-ur": {
+      "expectedSlots": 4,
+      "runsCreated": 4,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 4
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 0,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 4,
+        "p50": 0.06666666666666667,
+        "p90": 6.25,
+        "max": 6.25
+      },
+      "generateDuration": {
+        "count": 4,
+        "p50": 0.06666666666666667,
+        "p90": 0.08333333333333333,
+        "max": 0.08333333333333333
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-vd": {
+      "expectedSlots": 4,
+      "runsCreated": 5,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "unobservable-terminal": 1,
+        "article": 1,
+        "declared": 3
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 1,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 5,
+        "p50": 0.06666666666666667,
+        "p90": 0.08333333333333333,
+        "max": 0.08333333333333333
+      },
+      "generateDuration": {
+        "count": 5,
+        "p50": 0.06666666666666667,
+        "p90": 0.06666666666666667,
+        "max": 0.06666666666666667
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-vs": {
+      "expectedSlots": 4,
+      "runsCreated": 4,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 4
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 0,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 4,
+        "p50": 0.06666666666666667,
+        "p90": 0.08333333333333333,
+        "max": 0.08333333333333333
+      },
+      "generateDuration": {
+        "count": 4,
+        "p50": 0.06666666666666667,
+        "p90": 0.06666666666666667,
+        "max": 0.06666666666666667
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-zg": {
+      "expectedSlots": 4,
+      "runsCreated": 4,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 4
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 0,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 4,
+        "p50": 0.08333333333333333,
+        "p90": 0.11666666666666667,
+        "max": 0.11666666666666667
+      },
+      "generateDuration": {
+        "count": 4,
+        "p50": 0.08333333333333333,
+        "p90": 0.08333333333333333,
+        "max": 0.08333333333333333
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    },
+    "canton-zh": {
+      "expectedSlots": 4,
+      "runsCreated": 4,
+      "admitted": 4,
+      "admissionSkipped": {},
+      "outcomes": {
+        "declared": 4
+      },
+      "unresolvedRunOutcomes": 0,
+      "terminalRunsWithoutOutcome": 0,
+      "providerRequestsByStage": {
+        "selection": 0,
+        "generation": 0,
+        "factCheck": 0,
+        "translation": 0,
+        "unclassified": 0
+      },
+      "llmRunsWithCounters": 0,
+      "llmRunsWithoutCounters": 4,
+      "llmExpectedAttempts": 4,
+      "llmObservedAttempts": 0,
+      "llmMissingAttempts": 4,
+      "m4RunsWithReadableLogs": 4,
+      "m4RunsWithoutLogs": 0,
+      "pushFiveAttemptExhaustionCount": 0,
+      "m5EligibleRuns": 4,
+      "m5ReadableRuns": 4,
+      "m5RunsWithoutLogs": 0,
+      "generateQueueWait": {
+        "count": 4,
+        "p50": 0.08333333333333333,
+        "p90": 0.08333333333333333,
+        "max": 0.08333333333333333
+      },
+      "generateDuration": {
+        "count": 4,
+        "p50": 0.06666666666666667,
+        "p90": 0.08333333333333333,
+        "max": 0.08333333333333333
+      },
+      "currentQueuedJobs": 0,
+      "oldestCurrentQueueWaitMinutes": null,
+      "m4Coverage": {
+        "expectedGenerationAttempts": 4,
+        "observedStructuredCounters": 0,
+        "missingStructuredCounters": 4,
+        "status": "partial",
+        "unassignedEligibleRuns": 0
+      },
+      "m5LogCoverage": {
+        "eligibleStartedRuns": 4,
+        "readableLogs": 4,
+        "missingLogs": 0,
+        "unassignedStartedRuns": 0,
+        "unassignedMissingLogs": 0,
+        "unassignedExhaustions": 0,
+        "complete": true
+      }
+    }
+  },
+  "workflowCoverage": {
+    "generate-article.yml": {
+      "section": null,
+      "expectedSlots": 48,
+      "listedRunsInWindow": 118,
+      "liveRunsOutsideWindow": 4,
+      "assignedRunsInWindow": 88,
+      "assignedRunsBySection": {
+        "frontaliere": 49,
+        "svizzera": 39
+      },
+      "unassignedRunsInWindow": 30,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {
+        "admit-content-backlog": 3,
+        "admit-in-flight": 27
+      },
+      "statuses": {
+        "completed": 118
+      },
+      "conclusions": {
+        "success": 118
+      },
+      "unassignedSamples": [
+        {
+          "displayTitle": "[dispatch-source-key=auto-scan] [dispatch-mode=production] [loop-clock manual] [generation-slot none] Generate Blog Article",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success",
+          "createdAt": "2026-11-25T22:37:41Z",
+          "generationJob": null,
+          "outcome": {
+            "kind": "skipped",
+            "reason": "admit-content-backlog",
+            "section": "unknown"
+          }
+        },
+        {
+          "displayTitle": "[dispatch-source-key=auto-scan] [dispatch-mode=production] [loop-clock manual] [generation-slot none] Generate Blog Article",
+          "event": "workflow_dispatch",
+          "status": "completed",
+          "conclusion": "success",
+          "createdAt": "2026-11-25T22:27:12Z",
+          "generationJob": null,
+          "outcome": {
+            "kind": "skipped",
+            "reason": "admit-in-flight",
+            "section": "unknown"
+          }
+        },
+        {
+          "displayTitle": "[dispatch-source-key=auto-scan] [dispatch-mode=production] [loop-clock manual] [generation-slot none] Generate Blog Article",
+          "event": "workflow_dispatch",
+          "status": "completed",
+          "conclusion": "success",
+          "createdAt": "2026-11-25T22:24:59Z",
+          "generationJob": null,
+          "outcome": {
+            "kind": "skipped",
+            "reason": "admit-in-flight",
+            "section": "unknown"
+          }
+        },
+        {
+          "displayTitle": "[dispatch-source-key=auto-scan] [dispatch-mode=production] [loop-clock manual] [generation-slot none] Generate Blog Article",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success",
+          "createdAt": "2026-11-25T22:24:40Z",
+          "generationJob": null,
+          "outcome": {
+            "kind": "skipped",
+            "reason": "admit-content-backlog",
+            "section": "unknown"
+          }
+        }
+      ]
+    },
+    "generate-article-ag.yml": {
+      "section": "canton-ag",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 4,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 4,
+      "assignedRunsBySection": {
+        "canton-ag": 4
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 4
+      },
+      "conclusions": {
+        "success": 4
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-appenzello.yml": {
+      "section": "canton-appenzello",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 4,
+      "liveRunsOutsideWindow": 1,
+      "assignedRunsInWindow": 4,
+      "assignedRunsBySection": {
+        "canton-appenzello": 4
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 4
+      },
+      "conclusions": {
+        "success": 4
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-basilea.yml": {
+      "section": "canton-basilea",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 4,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 4,
+      "assignedRunsBySection": {
+        "canton-basilea": 4
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 4
+      },
+      "conclusions": {
+        "success": 4
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-be.yml": {
+      "section": "canton-be",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 4,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 4,
+      "assignedRunsBySection": {
+        "canton-be": 4
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 4
+      },
+      "conclusions": {
+        "success": 4
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-fr.yml": {
+      "section": "canton-fr",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 4,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 4,
+      "assignedRunsBySection": {
+        "canton-fr": 4
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 4
+      },
+      "conclusions": {
+        "success": 4
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-ge.yml": {
+      "section": "canton-ge",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 4,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 4,
+      "assignedRunsBySection": {
+        "canton-ge": 4
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 4
+      },
+      "conclusions": {
+        "success": 4
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-gl.yml": {
+      "section": "canton-gl",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 4,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 4,
+      "assignedRunsBySection": {
+        "canton-gl": 4
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 4
+      },
+      "conclusions": {
+        "success": 4
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-gr.yml": {
+      "section": "canton-gr",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 4,
+      "liveRunsOutsideWindow": 1,
+      "assignedRunsInWindow": 4,
+      "assignedRunsBySection": {
+        "canton-gr": 4
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 4
+      },
+      "conclusions": {
+        "success": 4
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-ju.yml": {
+      "section": "canton-ju",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 4,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 4,
+      "assignedRunsBySection": {
+        "canton-ju": 4
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 4
+      },
+      "conclusions": {
+        "success": 4
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-lu.yml": {
+      "section": "canton-lu",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 4,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 4,
+      "assignedRunsBySection": {
+        "canton-lu": 4
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 4
+      },
+      "conclusions": {
+        "success": 4
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-ne.yml": {
+      "section": "canton-ne",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 4,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 4,
+      "assignedRunsBySection": {
+        "canton-ne": 4
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 4
+      },
+      "conclusions": {
+        "success": 4
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-nw.yml": {
+      "section": "canton-nw",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 4,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 4,
+      "assignedRunsBySection": {
+        "canton-nw": 4
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 4
+      },
+      "conclusions": {
+        "success": 4
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-ow.yml": {
+      "section": "canton-ow",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 4,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 4,
+      "assignedRunsBySection": {
+        "canton-ow": 4
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 4
+      },
+      "conclusions": {
+        "success": 4
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-sg.yml": {
+      "section": "canton-sg",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 4,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 4,
+      "assignedRunsBySection": {
+        "canton-sg": 4
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 4
+      },
+      "conclusions": {
+        "success": 4
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-sh.yml": {
+      "section": "canton-sh",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 4,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 4,
+      "assignedRunsBySection": {
+        "canton-sh": 4
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 4
+      },
+      "conclusions": {
+        "skipped": 1,
+        "success": 3
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-so.yml": {
+      "section": "canton-so",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 5,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 5,
+      "assignedRunsBySection": {
+        "canton-so": 5
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 5
+      },
+      "conclusions": {
+        "success": 4,
+        "skipped": 1
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-sz.yml": {
+      "section": "canton-sz",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 4,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 4,
+      "assignedRunsBySection": {
+        "canton-sz": 4
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 4
+      },
+      "conclusions": {
+        "success": 4
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-tg.yml": {
+      "section": "canton-tg",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 5,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 5,
+      "assignedRunsBySection": {
+        "canton-tg": 5
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 5
+      },
+      "conclusions": {
+        "skipped": 1,
+        "success": 4
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-ti.yml": {
+      "section": "canton-ti",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 4,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 4,
+      "assignedRunsBySection": {
+        "canton-ti": 4
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 4
+      },
+      "conclusions": {
+        "success": 4
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-ur.yml": {
+      "section": "canton-ur",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 4,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 4,
+      "assignedRunsBySection": {
+        "canton-ur": 4
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 4
+      },
+      "conclusions": {
+        "success": 4
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-vd.yml": {
+      "section": "canton-vd",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 5,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 5,
+      "assignedRunsBySection": {
+        "canton-vd": 5
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 5
+      },
+      "conclusions": {
+        "skipped": 1,
+        "success": 4
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-vs.yml": {
+      "section": "canton-vs",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 4,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 4,
+      "assignedRunsBySection": {
+        "canton-vs": 4
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 4
+      },
+      "conclusions": {
+        "success": 4
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-zg.yml": {
+      "section": "canton-zg",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 4,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 4,
+      "assignedRunsBySection": {
+        "canton-zg": 4
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 4
+      },
+      "conclusions": {
+        "success": 4
+      },
+      "unassignedSamples": []
+    },
+    "generate-article-zh.yml": {
+      "section": "canton-zh",
+      "expectedSlots": 4,
+      "listedRunsInWindow": 4,
+      "liveRunsOutsideWindow": 0,
+      "assignedRunsInWindow": 4,
+      "assignedRunsBySection": {
+        "canton-zh": 4
+      },
+      "unassignedRunsInWindow": 0,
+      "unassignedTerminalRunsWithoutOutcome": 0,
+      "unassignedOutcomeCounts": {},
+      "statuses": {
+        "completed": 4
+      },
+      "conclusions": {
+        "success": 4
+      },
+      "unassignedSamples": []
+    }
+  },
+  "unassigned": {
+    "runsInWindow": 30,
+    "runCountIncludingLiveOutsideWindow": 32,
+    "terminalRunsWithoutOutcome": 0,
+    "outcomeCounts": {
+      "admit-content-backlog": 3,
+      "admit-in-flight": 27
+    },
+    "m4EligibleRuns": 0,
+    "m5StartedRuns": 0,
+    "m5MissingLogs": 0,
+    "m5Exhaustions": 0,
+    "queueWaitMinutes": {
+      "count": 0,
+      "p50": null,
+      "p90": null,
+      "max": null
+    },
+    "currentQueuedJobs": 0,
+    "oldestCurrentQueueWaitMinutes": null
+  },
+  "llmRequestMarkers": {
+    "observedCount": 0,
+    "dedupStoreMarkers": 0,
+    "dedupEvidenceBySection": {
+      "frontaliere": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "svizzera": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-ag": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-appenzello": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-basilea": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-be": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-fr": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-ge": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-gl": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-gr": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-ju": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-lu": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-ne": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-nw": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-ow": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-sg": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-sh": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-so": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-sz": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-tg": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-ti": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-ur": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-vd": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-vs": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-zg": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      },
+      "canton-zh": {
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "minimumVerifiedEffectiveThreshold": null,
+        "minimumVerifiedStoreCount": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "latest": null
+      }
+    },
+    "interpretation": "historical runs predate request-boundary instrumentation; log parsing/assignment is repaired but past provider request counts are not recovered"
+  }
+}
