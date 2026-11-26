@@ -210,6 +210,62 @@ __CLAIM_FUNCTIONS__
  */
 export const CORE_REPLACEMENTS = [
   {
+    id: 'admit: il filtro dei push cantonali serve solo alla coda nazionale',
+    count: 1,
+    find: "          CANTON_REGISTRY_DELTA: |-\n"
+      + "            def asset_key: .imageUrl // .cover;\n"
+      + "            def valid:\n"
+      + "              type == \"object\" and (.assets | type) == \"array\"\n"
+      + "              and .assetCount == (.assets | length)\n"
+      + "              and all(.assets[]; type == \"object\" and (asset_key | type) == \"string\")\n"
+      + "              and (.assets | map(asset_key) | unique | length) == .assetCount;\n"
+      + "            length == 2 and all(.[]; valid) and\n"
+      + "            ((.[0] | del(.assets,.assetCount)) == (.[1] | del(.assets,.assetCount))) and\n"
+      + "            (map(.assets | INDEX(asset_key)) as [$before, $after]\n"
+      + "              | (($before + $after) | keys) as $keys\n"
+      + "              | all($keys[]; . as $key\n"
+      + "                | $before[$key] == $after[$key] or ($covers | index($key) != null)))\n"
+      + "          CANTON_ONLY: |-\n"
+      + "            def canton_content: test(\"^content/(blog-body-canton-[a-z0-9-]+/(it|de|en|fr)/[^/]+[.]ts|blog-meta-canton-[a-z0-9-]+-(it|de|en|fr)[.]ts|cantons/canton-[a-z0-9-]+/((registry|seo|slugs)[.]ts|hubs/[^/]+[.]json))$\");\n"
+      + "            def canton_data: test(\"^data/sections/canton-[a-z0-9-]+/(article-source-(urls|quotas)|article-quotas|quota-state|topic-candidates-(evergreen-(counter|rejected)|experimental-counter|consumed|today-picks)|articles/[^/]+)[.]json$\");\n"
+      + "            def canton_surface($path; $owned): (($path | canton_content) or ($path | canton_data) or (($owned | index($path)) != null) or ($path | test(\"^data/(generated|editorial)-image-registry[.]json$\")));\n"
+      + "            [.[]?.files[]?] as $files\n"
+      + "            | [$files[] | (.filename // \"\") | select(test(\"^content/blog-body-canton-[a-z0-9-]+/it/[^/]+[.]ts$\")) | capture(\"^content/blog-body-canton-[a-z0-9-]+/it/(?<id>[^/]+)[.]ts$\").id] as $ids\n"
+      + "            | [$ids[] | \"public/images/blog/article-\\(.)\" + \".webp\", \"public/images/blog/thumbnails/article-\\(.)-480w.webp\"] as $covers\n"
+      + "            | ($covers + [$ids[] | \"content/image-credits/blog/article-\\(.).json\", \"content/image-credits/blog/\\(.).json\"]) as $owned\n"
+      + "            | select(any($files[]; (.filename // \"\") | canton_content)\n"
+      + "              and all($files[]; ((.status == \"added\" or .status == \"modified\" or .status == \"renamed\") and ((.filename // \"\") as $path | canton_surface($path; $owned)) and (.status != \"renamed\" or ((.previous_filename // \"\") as $previous | canton_surface($previous; $owned))))))\n"
+      + "            | {covers: [$covers[] | select(startswith(\"public/images/blog/article-\")) | ltrimstr(\"public\")],\n"
+      + "               registries: [$files[] | .filename | select(test(\"^data/(generated|editorial)-image-registry[.]json$\"))] | unique}\n",
+    replace: '',
+  },
+  {
+    id: 'admit: i soli push cantonali non entrano nella coda nazionale',
+    count: 1,
+    find: "              if canton_plan=$(jq -ce \"$CANTON_ONLY\" <<<\"$compare_payload\" 2>/dev/null); then\n"
+      + "                canton_registries_match=true\n"
+      + "                canton_covers=$(jq -c '.covers' <<<\"$canton_plan\")\n"
+      + "                while IFS= read -r registry; do\n"
+      + "                  [ -n \"$registry\" ] || continue\n"
+      + "                  if ! registry_scratch=$(mktemp -d); then\n"
+      + "                    canton_registries_match=false\n"
+      + "                    break\n"
+      + "                  fi\n"
+      + "                  if ! gh_api_timeout -H 'Accept: application/vnd.github.raw+json' \"repos/$REPO/contents/$registry?ref=$PUSH_BEFORE\" >\"$registry_scratch/before\" 2>/dev/null \\\n"
+      + "                    || ! gh_api_timeout -H 'Accept: application/vnd.github.raw+json' \"repos/$REPO/contents/$registry?ref=$PUSH_SHA\" >\"$registry_scratch/after\" 2>/dev/null \\\n"
+      + "                    || ! jq -se --argjson covers \"$canton_covers\" \"$CANTON_REGISTRY_DELTA\" \"$registry_scratch/before\" \"$registry_scratch/after\" >/dev/null 2>&1; then\n"
+      + "                    canton_registries_match=false\n"
+      + "                  fi\n"
+      + "                  rm -rf -- \"$registry_scratch\"\n"
+      + "                  [ \"$canton_registries_match\" = true ] || break\n"
+      + "                done <<< \"$(jq -r '.registries[]' <<<\"$canton_plan\")\"\n"
+      + "                if [ \"$canton_registries_match\" = true ]; then\n"
+      + "                  skip_generation_slot admit-canton-only-content\n"
+      + "                fi\n"
+      + "              fi\n",
+    replace: '',
+  },
+  {
     id: 'admit: il core cantonale risolve la propria sezione',
     count: 1,
     find: "      national_section: ${{ steps.national_section.outputs.section }}\n",

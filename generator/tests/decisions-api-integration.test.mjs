@@ -94,6 +94,22 @@ for (const confidence of [0.12, 0.5, null, undefined, 1.01, Infinity, '0.9']) {
   });
 }
 
+test('il no nazionale a bassa confidenza richiede un verdetto testuale esplicito', async () => {
+  const decision = negative(0.26);
+  for (const response of ['relevant=yes; reason=elezione federale', 'risposta senza verdetto']) {
+    const { classify, apiCalls, textCalls, logs } = makeClassifier({
+      section: 'svizzera', decisions: [decision], text: async () => response,
+    });
+    const expected = response.startsWith('relevant=yes')
+      ? { relevant: true, reason: 'elezione federale', parsed: true }
+      : decision;
+    assert.deepEqual(await classify(), expected);
+    assert.deepEqual(apiCalls, [10_000]);
+    assert.equal(textCalls.length, 1);
+    assert.deepEqual(logs, [uncertainLog.replace('section=canton', 'section=svizzera')]);
+  }
+});
+
 test('il fallback usa il no testuale e i tre secondi rimasti sulla deadline originale', async () => {
   const { classify, apiCalls, textCalls } = makeClassifier({
     decisions: [negative(0.12)],
@@ -156,12 +172,13 @@ test('con meno di un millisecondo residuo il percorso testuale non parte', async
   }
 });
 
-test('il no cantonale maggioritario, il sì cantonale e il no non cantonale sono conclusivi', async () => {
+test('un verdetto positivo, un no affidabile o un no frontaliere sono conclusivi', async () => {
   for (const [section, decision] of [
     ['canton', negative(0.9)],
     ['canton', negative(1)],
     ['canton', { ...negative(0.12), relevant: true }],
-    ['svizzera', negative(0.12)],
+    ['svizzera', negative(0.74)],
+    ['frontaliere', negative(0.12)],
   ]) {
     const { classify, apiCalls, textCalls, logs } = makeClassifier({ section, decisions: [decision] });
     assert.equal(await classify(), decision);
