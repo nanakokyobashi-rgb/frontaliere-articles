@@ -7484,13 +7484,17 @@ ${proofResponseFormat}`
   // ALL models have exhausted their per-model retries.
   const FACTCHECK_429_BACKOFF_CAP_MS = 30_000;
   const FACTCHECK_MIN_ROUND_MS = 15_000;
+  const FACTCHECK_FINAL_RESERVE_MS = 30_000;
+  const FACTCHECK_MAX_FINAL_RESERVE_MS = 45_000;
+  const FACTCHECK_FINAL_RESERVE_THRESHOLD_MS = FACTCHECK_MIN_ROUND_MS + FACTCHECK_FINAL_RESERVE_MS;
   const initialFactCheckMs = factCheckDeadlineMs - Date.now();
-  // A fresh Codex verification can need more than the 15s used to start
-  // another consensus round. Keep at least 30s for it whenever the first
-  // consensus round can still run, and retain the 45s ceiling.
-  const finalReserveMs = initialFactCheckMs >= 2 * FACTCHECK_MIN_ROUND_MS
-    ? Math.min(45_000, initialFactCheckMs - FACTCHECK_MIN_ROUND_MS,
-      Math.max(30_000, Math.floor((initialFactCheckMs - 60_000) / 4)))
+  // A first consensus round needs 15s, and a fresh Codex verification needs
+  // 30s. Do not claim a final reserve until both windows fit in the initial
+  // fact-check budget (45s); below that threshold all time stays with the
+  // normal retry loop. Keep the 45s ceiling.
+  const finalReserveMs = initialFactCheckMs >= FACTCHECK_FINAL_RESERVE_THRESHOLD_MS
+    ? Math.min(FACTCHECK_MAX_FINAL_RESERVE_MS, initialFactCheckMs - FACTCHECK_MIN_ROUND_MS,
+      Math.max(FACTCHECK_FINAL_RESERVE_MS, Math.floor((initialFactCheckMs - 60_000) / 4)))
     : 0;
   const retryDeadlineMs = factCheckDeadlineMs - finalReserveMs;
   const maxPrimaryRounds = Math.min(

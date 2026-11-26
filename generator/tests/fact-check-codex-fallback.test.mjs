@@ -335,6 +335,18 @@ describe('infrastructure retries with a retained vote', () => {
     assert.ok(final.options.deadlineMs - final.now >= 30_000);
   });
 
+  test('requires the full 45-second initial window before reserving final Codex time', async () => {
+    const atThreshold = await runRounds('groq/openai/gpt-oss-20b', () => null, 180_000);
+    const thresholdFinal = atThreshold.calls.at(-1);
+    assert.equal(thresholdFinal.options.codexOnly, true);
+    assert.equal(thresholdFinal.options.deadlineMs - thresholdFinal.now, 30_000);
+
+    const belowThreshold = await runRounds('groq/openai/gpt-oss-20b', () => null, 181_000);
+    const belowFinal = belowThreshold.calls.at(-1);
+    assert.equal(belowFinal.options.codexOnly, true);
+    assert.ok(belowFinal.options.deadlineMs - belowFinal.now < 30_000);
+  });
+
   test('a serving Groq vote leaves no unused preference for immediate recovery', async () => {
     const { result, calls } = await runRounds(groq, () => null, 150_000);
     const retries = calls.slice(3, -1);
