@@ -16,7 +16,9 @@ on:
       - 'content/blog-meta-canton-vd-en.ts'
       - 'content/blog-meta-canton-vd-de.ts'
       - 'content/blog-meta-canton-vd-fr.ts'
-      - 'content/cantons/canton-vd/**'
+      - 'content/cantons/canton-vd/registry.ts'
+      - 'content/cantons/canton-vd/slugs.ts'
+      - 'content/cantons/canton-vd/seo.ts'
   workflow_dispatch:
     inputs:
       section:

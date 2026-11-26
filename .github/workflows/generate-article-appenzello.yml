@@ -16,7 +16,9 @@ on:
       - 'content/blog-meta-canton-appenzello-en.ts'
       - 'content/blog-meta-canton-appenzello-de.ts'
       - 'content/blog-meta-canton-appenzello-fr.ts'
-      - 'content/cantons/canton-appenzello/**'
+      - 'content/cantons/canton-appenzello/registry.ts'
+      - 'content/cantons/canton-appenzello/slugs.ts'
+      - 'content/cantons/canton-appenzello/seo.ts'
   workflow_dispatch:
     inputs:
       section:

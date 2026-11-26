@@ -820,6 +820,13 @@ test('push.paths: solo i path del corpus della propria sezione', () => {
   }
 });
 
+test('il refresh degli hub non avvia la generazione cantonale', () => {
+  for (const { canton, file, pushPaths } of CALLERS) {
+    const hub = `content/cantons/${canton.section}/hubs/mobilita.json`;
+    assert.ok(!pushPaths.some((pattern) => pathMatches(pattern, hub)), file);
+  }
+});
+
 test('un caller non reingressa sul commit prodotto dalla propria sezione', () => {
   for (const { canton, file, jobIf } of CALLERS) {
     const expected = `\${{ github.event_name != 'push' || github.event.head_commit.message != 'Generate blog article (${canton.section})' }}`;
