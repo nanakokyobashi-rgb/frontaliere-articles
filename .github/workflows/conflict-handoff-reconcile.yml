@@ -1,0 +1,49 @@
+name: Reconcile conflict hand-offs (no-Claude)
+
+# Chiude gli hand-off di conflitto il cui lavoro e' gia' stato completato. Il
+# workflow e' autonomo perche' il mutex repo-wide dei writer non puo' vivere in
+# followup-drainer.yml: quel workflow riceve eventi `issues`, e ogni evento
+# irrilevante occuperebbe o sostituirebbe la sola pending del gruppo globale.
+#
+# La cadenza precede nominalmente di tre minuti il followup-drainer; non e' un
+# vincolo di ordinamento (i cron GitHub possono slittare), percio' lo script
+# resta idempotente e fail-closed sugli stati ambigui.
+
+on:
+  schedule:
+    - cron: '2,27,52 * * * *'
+  workflow_dispatch:
+
+# Stessa chiave del workflow pr-autorebase: create/routing e reconcile degli
+# hand-off sono un unico writer repo-wide, non cancellante.
+concurrency:
+  group: conflict-handoff-writer-${{ github.repository }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: read
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Checkout
+        timeout-minutes: 5
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Reconcile conflict hand-offs (zero-Claude)
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: node scripts/ci/reconcile-conflict-handoffs.mjs

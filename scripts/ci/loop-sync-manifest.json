@@ -1520,7 +1520,7 @@
     {
       "path": ".github/workflows/followup-drainer.yml",
       "mode": "adapted",
-      "reason": "Niente npm ci; ponte RC del corpus; promozione via GITHUB_PAT_NANAKO; cadenza sfasata dal sito. Il riconciliatore degli hand-off vive in un job separato, prima del drain: condivide il mutex repo-wide non cancellante conflict-handoff-writer con il workflow corpus-only pr-autorebase, mentre il drain conserva il distinto mutex followup-daily dei writer dei bucket.",
+      "reason": "Niente npm ci; ponte RC del corpus; promozione via GITHUB_PAT_NANAKO; cadenza sfasata dal sito. Il drain conserva il mutex followup-daily dei writer dei bucket e non ospita il mutex repo-wide conflict-handoff-writer: questo workflow riceve eventi issues, che altrimenti entrerebbero tutti nella pending globale prima del filtro del job. La riconciliazione degli hand-off vive nel workflow corpus-only conflict-handoff-reconcile.yml.",
       "baseline": {
         "site": "608e5abb5b5fd017",
         "corpus": "a75e04aa122f57f3",
@@ -1632,11 +1632,21 @@
     {
       "path": ".github/workflows/pr-autorebase.yml",
       "mode": "corpus-only",
-      "reason": "Rimosso sul sito in PR #6584 'ci: richiedi LGTM prima dell'auto-merge nativo' (2026-08-26): il sito e' passato dall'autorebase custom alla merge queue nativa di GitHub. Qui resta necessario: identita' di push/dispatch GITHUB_PAT_NANAKO; sparse-checkout sui path pesanti di QUESTO repo (content/ con 14.888 file, dist/, public/) invece di public/images del sito — il job fa solo merge e push, non li legge mai; niente npm ci; cadenza sfasata (22,52); e nessuna GitHub App per usare la merge queue nativa con l'identita' corretta. Il writer condivide conflict-handoff-writer, repo-wide e non cancellante, con il job di riconciliazione del followup-drainer per serializzare create, routing e chiusura degli hand-off.",
+      "reason": "Rimosso sul sito in PR #6584 'ci: richiedi LGTM prima dell'auto-merge nativo' (2026-08-26): il sito e' passato dall'autorebase custom alla merge queue nativa di GitHub. Qui resta necessario: identita' di push/dispatch GITHUB_PAT_NANAKO; sparse-checkout sui path pesanti di QUESTO repo (content/ con 14.888 file, dist/, public/) invece di public/images del sito — il job fa solo merge e push, non li legge mai; niente npm ci; cadenza sfasata (22,52); e nessuna GitHub App per usare la merge queue nativa con l'identita' corretta. Il writer condivide conflict-handoff-writer, repo-wide e non cancellante, con il workflow autonomo conflict-handoff-reconcile.yml per serializzare create, routing e chiusura degli hand-off.",
       "baseline": {
         "site": null,
         "corpus": "ef98da20f76c33d0",
         "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/conflict-handoff-reconcile.yml",
+      "mode": "corpus-only",
+      "reason": "Workflow autonomo schedule/workflow_dispatch per il riconciliatore degli hand-off di conflitto del corpus. Condivide il mutex repo-wide non cancellante conflict-handoff-writer con pr-autorebase, ma resta separato dal followup-drainer issue-triggered: cosi' gli eventi issues irrilevanti non occupano o sostituiscono la sola pending globale prima del filtro del job. Il sito non ha l'autorebase custom corpus né questa coppia di writer.",
+      "baseline": {
+        "site": null,
+        "corpus": "f5d7dd7410db71eb",
+        "alignedAt": "2026-11-26"
       }
     },
     {
@@ -2073,7 +2083,7 @@
       "path": "generator/tests/conflict-handoff-reconcile.test.mjs",
       "sitePath": "tests/conflict-handoff-reconcile.test.ts",
       "mode": "adapted",
-      "reason": "Gemello node:test (via expect-shim) del test Vitest del sito sulla chiusura degli hand-off di conflitto gia' risolti: stessi casi puri (prova da merge-tree di conflictClearedAfter, handoffResolution sulla stessa HEAD e su una nuova, keyword Closes/Supersedes via closedIssueRefs, duplicati, decideHandoff, stillClosable, commento senza keyword di chiusura). Cambiano il runner, gli esempi (#1586/#1569) e il test di wiring, che legge il followup-drainer.yml di questo repo invece di ENTRYPOINTS, che qui non esiste.",
+      "reason": "Gemello node:test (via expect-shim) del test Vitest del sito sulla chiusura degli hand-off di conflitto gia' risolti: stessi casi puri (prova da merge-tree di conflictClearedAfter, handoffResolution sulla stessa HEAD e su una nuova, keyword Closes/Supersedes via closedIssueRefs, duplicati, decideHandoff, stillClosable, commento senza keyword di chiusura). Cambiano il runner, gli esempi (#1586/#1569) e il test di wiring, che legge il workflow autonomo conflict-handoff-reconcile.yml di questo repo invece di ENTRYPOINTS, che qui non esiste.",
       "baseline": {
         "site": "fbf2a618bc05e821",
         "corpus": "e0c0e4439bc7ec3a",

@@ -1,7 +1,7 @@
 // Gemello node:test di tests/conflict-handoff-reconcile.test.ts del sito
 // (valerielinc-ops/frontaliere-si-o-no#10714 e #10728): chiusura degli
 // hand-off di conflitto il cui lavoro e' gia' fatto. Stessi casi puri, via
-// expect-shim; il wiring e' quello del followup-drainer.yml di questo repo.
+// expect-shim; il wiring e' nel workflow autonomo di questo repo.
 //
 // Con la PR di origine aperta si chiude solo con la prova da merge-tree:
 // `has-conflicts` tolta da pr-autorebase DOPO l'apertura dell'hand-off. La sola
@@ -337,20 +337,21 @@ describe('originContentOnMain: applicazione hunk per hunk, non presenza di righe
   });
 });
 
-describe('wiring nel followup-drainer di questo repo', () => {
-  it('riconcilia in un job separato prima del drain, con GITHUB_TOKEN, e può leggere le PR', () => {
-    const workflow = readFileSync(new URL('../../.github/workflows/followup-drainer.yml', import.meta.url), 'utf8');
+describe('wiring nel workflow autonomo di questo repo', () => {
+  it('riconcilia solo su schedule/dispatch, con GITHUB_TOKEN, e può leggere le PR', () => {
+    const workflow = readFileSync(new URL('../../.github/workflows/conflict-handoff-reconcile.yml', import.meta.url), 'utf8');
     const step = workflow.indexOf('run: node scripts/ci/reconcile-conflict-handoffs.mjs');
-    const drainJob = workflow.indexOf('\n  drain:\n');
-    const drainStep = workflow.indexOf('- name: Drain follow-up queue');
     expect(step).toBeGreaterThan(-1);
-    expect(drainJob).toBeGreaterThan(step);
-    expect(drainStep).toBeGreaterThan(drainJob);
     const block = workflow.slice(workflow.lastIndexOf('- name: Reconcile conflict hand-offs', step), step);
     expect(block).toContain('continue-on-error: true');
     expect(block).toContain('GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}');
-    expect(workflow.slice(drainJob, drainStep)).toContain('needs: reconcile_conflict_handoffs');
-    expect(workflow.slice(drainJob)).not.toContain('run: node scripts/ci/reconcile-conflict-handoffs.mjs');
+    const triggers = workflow.slice(workflow.indexOf('\non:'), workflow.indexOf('\n# Stessa chiave'));
+    expect(triggers).toContain('schedule:');
+    expect(triggers).toContain('workflow_dispatch:');
+    expect(triggers).not.toContain('issues:');
     expect(workflow).toContain('pull-requests: read');
+
+    const drainer = readFileSync(new URL('../../.github/workflows/followup-drainer.yml', import.meta.url), 'utf8');
+    expect(drainer).not.toContain('run: node scripts/ci/reconcile-conflict-handoffs.mjs');
   });
 });

@@ -3,9 +3,9 @@ name: Follow-up drainer (queue → agent:fix, no-Claude)
 # Drena la coda `agent:fix-queued` fino a 15 issue diverse in parallelo,
 # promuovendo a `agent:fix` solo entro il cap e serializzando la scansione
 # della coda con il mutex repo-scoped `followup-daily-` dei writer daily. La
-# riconciliazione degli hand-off di conflitto gira prima in un job separato:
-# condivide `conflict-handoff-writer-` con pr-autorebase senza togliere al drain
-# il mutex dei bucket daily.
+# riconciliazione degli hand-off di conflitto gira nel workflow autonomo
+# `conflict-handoff-reconcile.yml`: qui resta soltanto il drain, che riceve
+# anche eventi `issues` e deve quindi evitare qualunque mutex repo-wide.
 #
 # Il mutex globale evita che issue diverse leggano lo stesso snapshot e
 # riservino due volte il medesimo candidato; il cap e il lease Codex-primary
@@ -53,51 +53,9 @@ permissions:
   contents: read
   actions: read
   issues: write
-  # La riconciliazione degli hand-off legge lo stato delle PR di origine.
-  pull-requests: read
 
 jobs:
-  reconcile_conflict_handoffs:
-    # Applica lo stesso filtro del drain prima di entrare nel mutex. Un evento
-    # irrilevante non deve occupare la sola pending Actions e sfrattare un
-    # writer utile in attesa.
-    if: >-
-      (github.event_name != 'issues' ||
-       github.event.label.name == 'agent:fix-queued' ||
-       github.event.label.name == 'agent:decompose-queued') &&
-      (github.event_name != 'workflow_run' ||
-       github.event.workflow_run.conclusion != 'skipped')
-    # Stessa chiave del workflow pr-autorebase: create/routing e reconcile
-    # degli hand-off sono un unico writer repo-wide, non cancellante.
-    concurrency:
-      group: conflict-handoff-writer-${{ github.repository }}
-      cancel-in-progress: false
-    runs-on: ubuntu-latest
-    timeout-minutes: 6
-    steps:
-      - name: Checkout
-        timeout-minutes: 5
-        uses: actions/checkout@v7
-        with:
-          fetch-depth: 1
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v7
-        with:
-          node-version: '22'
-
-      # Chiude gli hand-off il cui lavoro e' gia' fatto PRIMA che il drain li
-      # promuova. Best-effort come prima: lo script resta fail-closed sugli
-      # stati ambigui e un errore non trasforma l'issue in agent:fix.
-      - name: Reconcile conflict hand-offs (zero-Claude)
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-        run: node scripts/ci/reconcile-conflict-handoffs.mjs
-
   drain:
-    needs: reconcile_conflict_handoffs
     # Un issue-fix SKIPPED (es. label diversa da agent:fix) non libera slot né
     # riaccoda nulla: non vale un wake-up.
     if: >-

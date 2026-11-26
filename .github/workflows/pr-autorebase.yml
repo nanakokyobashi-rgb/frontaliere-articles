@@ -43,7 +43,7 @@ on:
         required: false
         default: false
 
-# `pr-autorebase.mjs` e il riconciliatore degli hand-off nel followup-drainer
+# `pr-autorebase.mjs` e il workflow autonomo conflict-handoff-reconcile.yml
 # scrivono la stessa risorsa remota (issue di hand-off + routing). Una chiave
 # repo-wide comune chiude la finestra read/create/reread fra processi distinti;
 # non cancellare il writer attivo, altrimenti puo' lasciare una issue creata ma
