@@ -1017,9 +1017,9 @@
       "path": "scripts/lib/codex-fallback-contract.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "339d945b935b757d",
-        "corpus": "339d945b935b757d",
-        "alignedAt": "2026-09-26"
+        "site": "abf05e678d5a8d6a",
+        "corpus": "abf05e678d5a8d6a",
+        "alignedAt": "2026-11-26"
       }
     },
     {

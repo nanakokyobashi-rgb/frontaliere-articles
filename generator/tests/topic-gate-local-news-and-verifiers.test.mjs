@@ -195,7 +195,7 @@ test('the fact-check verifiers are models that answer today: Codex plus independ
   assert.ok(positions.every((p) => p !== -1), `verificatori attesi: ${order.join(', ')}`);
   assert.deepEqual([...positions].sort((a, b) => a - b), positions, 'ordine dei verificatori cambiato');
   assert.doesNotMatch(list, /GPT_4_1|GPT4O/, 'GitHub Models e\' ritirato: non puo\' essere un verificatore');
-  assert.equal(AI_MODELS.CODEX_CLI_PRIMARY, 'codex-cli/gpt-5.6-luna');
+  assert.equal(AI_MODELS.CODEX_CLI_PRIMARY, 'codex-cli/gpt-6-luna');
   assert.equal(AI_MODELS.GROQ_GPT_OSS_120B, 'groq/openai/gpt-oss-120b');
   assert.match(SRC, /availableVerifiers\.length >= 2 \? availableVerifiers : verificationCandidates/);
 });
