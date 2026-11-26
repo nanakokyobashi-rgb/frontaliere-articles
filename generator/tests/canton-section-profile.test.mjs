@@ -32,6 +32,7 @@ import {
   CANTON_PROMPT_CANDIDATE_LINE_MAX_CHARS,
   CANTON_PROMPT_CONTEXT_MAX_CHARS,
   CANTON_PROMPT_PUBLISHED_EXCERPT_MAX_CHARS,
+  CANTON_PROMPT_SUMMARY_MAX_CHARS,
   CANTON_SECTIONS_ENABLED_ENV,
   CANTON_STATE_ROOT,
   buildCantonProfile,
@@ -265,7 +266,8 @@ test('profilo canton-gr: ammissione multilingue, cronaca solo con impatto pratic
   assert.equal(p.localAdmits('Zürich: Strasse nach Unfall gesperrt'), false, 'ma non e\' cronaca del cantone');
   assert.equal(p.anchors('Zürich: Strasse nach Unfall gesperrt', 'https://www.example.ch/a'), false);
   assert.equal(p.anchors('Neue Regeln für Grenzgänger', 'https://www.valtellinanotizie.com/x'), true, 'fonte del lato estero: basta il segnale frontalieri');
-  assert.equal(p.anchors('Neue Regeln', 'https://www.gr.ch/DE/Medien/x'), true, 'ente .ch del solo cantone');
+  assert.equal(p.anchors('Neue Regeln', 'https://www.gr.ch/DE/Medien/x'), false, 'il dominio .ch del cantone, da solo, non e\' una prova');
+  assert.equal(p.anchors('Kanton Graubünden verabschiedet neue Regeln', 'https://www.gr.ch/DE/Medien/x'), true, 'il titolo documenta il nesso col cantone');
   assert.equal(termHits('feststellen', ['stellen']), 0, 'gli stem si confrontano a inizio parola');
   assert.equal(termHits('https://example.test/mehr%20bus%20der%20vbsh', ['vbsh']), 1, 'gli URL percent-encoded conservano il confine di parola');
 });
@@ -279,6 +281,13 @@ test("profili cantonali: l'URL della pagina-fonte ancora solo una fonte locale r
   const lu = buildCantonProfile('canton-lu', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
   assert.equal(lu.anchors('Qualitätsarbeit und Schulentwicklung rücken näher zusammen', 'https://www.nau.ch/politik/regional/story', 'https://www.nau.ch/ort/luzern'), true);
   assert.equal(lu.anchors('Nachrichten', 'https://www.tele1.ch/nachrichten/nachrichten-1', 'https://www.tele1.ch/sitemap-news.xml'), false);
+
+  const ju = buildCantonProfile('canton-ju');
+  const juraFeed = 'https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026.html';
+  assert.equal(ju.anchors('Le marché du travail suisse évolue', juraFeed, juraFeed), false);
+  const sh = buildCantonProfile('canton-sh');
+  const scopedFeed = 'https://www.shkb.ch/244-news-medienmitteilungen';
+  assert.equal(sh.anchors('Neue Zahlen zur Geschäftsentwicklung', scopedFeed, scopedFeed), true);
 });
 
 test('SH: alias locali e contesto scoped delle fonti ufficiali non promuovono i feed tedeschi', () => {
@@ -407,12 +416,46 @@ test('prompt cantonali: stesso formato di risposta delle storiche, cantone e con
   assert.ok(prompt.includes(PROFILES.cantons.find((c) => c.code === 'TI').frontalieriContext.slice(0, 60)));
   const lines = cantonPromptLines(p);
   assert.match(lines.topicalRelevanceGate, /"abort_topical_relevance": true/);
+  assert.match(lines.topicalRelevanceGate, /Il solo dominio locale.*non sono prove/);
   assert.match(lines.factCheckRelevance(false), /rilevanza_topica/);
+  assert.match(lines.factCheckRelevance(false), /Il solo dominio locale.*non sono prove/);
+  assert.match(lines.factCheckRelevance(true), /Il solo dominio locale.*non sono prove/);
   assert.equal(lines.factCheckRelevance(true).includes('NON sono nessi reali'), false, 'per un evergreen il paragrafo sulla cronaca sparisce, come nelle storiche');
   // L'espansione gira dopo il fact-check: la riga cantonale non chiede fatti
   // nuovi (ne' altri cantoni), a differenza di quella nazionale.
   assert.match(lines.expandEnrichmentLine, /NON aggiungere NESSUN fatto, numero, comune, altro cantone/);
   assert.match(CREATE_ARTICLE, /const enrichmentLine = IS_CANTON && !boundToText\n\s+\? CANTON_LINES\.expandEnrichmentLine/);
+});
+
+test('canton pre-spend prompts require a local fact even for a local publisher', () => {
+  const ju = buildCantonProfile('canton-ju');
+  const headline = 'La pénurie de main-d’œuvre qualifiée a poursuivi son repli en 2026';
+  const classification = cantonClassifierPrompt(ju, { headline, sourceHint: 'www.rfj.ch' });
+  const selection = cantonHeadlineSelectionPrompt(ju, {
+    headlineList: `H1 » (www.rfj.ch) ${headline}`, recentArticles: '', jsonQuoteSafetyRule: '',
+  });
+  assert.match(classification, /Notizie nazionali senza un nesso concreto/);
+  assert.match(classification, /dominio locale della testata non costituisce un nesso/);
+  assert.match(selection, /escludi quelle nazionali/);
+  assert.match(selection, /fatto o conseguenza locale documentata/);
+});
+
+test('selettore cantonale: il sommario già visto dal classifier arriva nella lista entro il cap', () => {
+  const ju = buildCantonProfile('canton-ju');
+  const headline = 'La pénurie de main-d’œuvre qualifiée a poursuivi son repli en 2026';
+  const summary = 'Nel Canton Giura il calo della carenza di personale modifica concretamente le assunzioni locali.';
+  const selection = cantonHeadlineSelectionPrompt(ju, {
+    headlineList: `H1 » (www.rfj.ch ⏳UNDATED) ${headline}\nH2 » (www.rfj.ch) ${headline}`,
+    summaries: [summary, 'Secondo sommario della stessa testata.'],
+    recentArticles: '',
+    jsonQuoteSafetyRule: '',
+  });
+  const candidateLine = selection.split('\n').find((line) => line.startsWith('H1 »'));
+  assert.ok(candidateLine, 'la candidata resta selezionabile');
+  assert.match(candidateLine, /SOMMARIO: Nel Canton Giura/);
+  assert.match(selection.split('\n').find((line) => line.startsWith('H2 »')), /SOMMARIO: Secondo sommario/);
+  assert.ok(candidateLine.length <= CANTON_PROMPT_CANDIDATE_LINE_MAX_CHARS);
+  assert.ok(summary.length <= CANTON_PROMPT_SUMMARY_MAX_CHARS);
 });
 
 test('prompt cantonali: contesto e liste hanno capi deterministici, lessico di ammissione intatto', () => {

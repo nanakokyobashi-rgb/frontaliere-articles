@@ -92,7 +92,8 @@ const makePrompt = new Function(
   // IS_CANTON / SECTION_PROFILE / cantonHeadlineSelectionPrompt: il ramo
   // della sezione cantonale (P6b); spento di default, come per le storiche.
   `const { IS_FRONTALIERE, JSON_QUOTE_SAFETY_RULE_IT, IS_CANTON = false, SECTION_PROFILE = null, cantonHeadlineSelectionPrompt = null } = __d;\n`
-  + `${cutDecl('function HEADLINE_SELECTION_PROMPT(headlineList, recentArticles) {')}\n`
+  + `${cutDecl('function headlineSourceSummary(headline) {')}\n`
+  + `${cutDecl('function HEADLINE_SELECTION_PROMPT(headlineList, recentArticles, candidates = []) {')}\n`
   + 'return HEADLINE_SELECTION_PROMPT;',
 );
 

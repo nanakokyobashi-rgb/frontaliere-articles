@@ -61,6 +61,7 @@ export const CANTON_SECTIONS_ENABLED_ENV = 'CANTON_ARTICLE_SECTIONS_ENABLED';
 export const CANTON_PROMPT_CONTEXT_MAX_CHARS = 360;
 export const CANTON_PROMPT_CANDIDATE_LINE_MAX_CHARS = 220;
 export const CANTON_PROMPT_PUBLISHED_EXCERPT_MAX_CHARS = 48;
+export const CANTON_PROMPT_SUMMARY_MAX_CHARS = 320;
 
 // Il classifier è un filtro fail-open: una headline oltre questo tetto resta
 // nel pool e passa comunque al gate REGOLA #0. Il tetto impedisce che una
@@ -515,12 +516,6 @@ export default ${cfg.seoConstName};
 
 // ── Il profilo letto dai rami di sezione ─────────────────────────────────────
 
-let _domainMap = null;
-function sourceDomainMap() {
-  if (!_domainMap) _domainMap = buildSourceDomainMap(loadCantonSectionProfiles());
-  return _domainMap;
-}
-
 let _sourceUrlMap = null;
 let _sharedFeedOwnersByKey = null;
 const LOCAL_SOURCE_KINDS = new Set(['media', 'istituzionale', 'polizia']);
@@ -694,7 +689,7 @@ export function buildCantonSourceUrlMap(cantonSections = loadCantonSectionProfil
       if (!key) continue;
       const host = registrableHost(key);
       const hostIsLocal = domainMap.get(host) === profile.code;
-      const pathHasCanton = termHits(key, cantonSourcePathTokens(profile.code)) > 0;
+      const pathHasCanton = termHits(decodeURIComponent(new URL(key).pathname), cantonSourcePathTokens(profile.code)) > 0;
       const explicitlyScoped = source.quirks?.localCantonContext === profile.code;
       const scoped = !source.quirks?.filterByCanton && (
         hostIsLocal
@@ -811,6 +806,19 @@ export function buildCantonProfile(section, deps) {
   const localAdmits = (text) => isLocalArea(text) && hasPracticalImpact(text);
   const countTopical = (text) => nationalHits(text, nationalTopical) + termHits(text, topicalTerms);
   const countAdmission = (text) => nationalHits(text, nationalAdmission) + termHits(text, topicalTerms);
+  const sourcePathTokens = cantonSourcePathTokens(code);
+  const hasSourceGroundedLocalEvidence = (text, sourceUrl, cantonFilterBy) => {
+    if (String(cantonFilterBy || '').trim().toUpperCase() === code) return true;
+    if (isLocalArea(text) || termHits(text, institutionNames) > 0 || hasFrontalieriSignal(text)) return true;
+    const configuredSource = sourceUrlCanonicalKey(sourceUrl);
+    // The publisher's host alone is not evidence about the candidate.
+    if (!configuredSource || sourceUrlMap().get(configuredSource) !== code) return false;
+    const explicitlyScoped = profile.newsSources.some((source) =>
+      source.quirks?.localCantonContext === code
+      && !source.quirks?.filterByCanton
+      && sourceUrlCanonicalKey(source.url) === configuredSource);
+    return explicitlyScoped || termHits(decodeURIComponent(new URL(configuredSource).pathname), sourcePathTokens) > 0;
+  };
 
   return Object.freeze({
     kind: 'canton',
@@ -837,20 +845,14 @@ export function buildCantonProfile(section, deps) {
     isLocalArea,
     hasPracticalImpact,
     hasFrontalieriSignal,
+    hasSourceGroundedLocalEvidence,
     /**
-     * Il gate geografico dello scan: il testo nomina un luogo del cantone, la
-     * fonte e' una testata/ente `.ch` di questo solo cantone, o (fonti del
-     * lato estero) parla di frontalieri.
+     * Il gate geografico dello scan: il testo o il sommario nominano un luogo
+     * del cantone, un'istituzione del cantone o i suoi frontalieri. Un dominio
+     * locale, da solo, non e' una prova del nesso della notizia.
      */
-    anchors(text, url, sourceUrl, cantonFilterBy) {
-      if (String(cantonFilterBy || '').trim().toUpperCase() === code) return true;
-      if (isLocalArea(text)) return true;
-      if (termHits(text, institutionNames) > 0) return true;
-      const host = registrableHost(url || '');
-      if (host && sourceDomainMap().get(host) === code) return true;
-      const configuredSource = sourceUrlCanonicalKey(sourceUrl);
-      if (configuredSource && sourceUrlMap().get(configuredSource) === code) return true;
-      return hasFrontalieriSignal(text);
+    anchors(text, _url, sourceUrl, cantonFilterBy) {
+      return hasSourceGroundedLocalEvidence(text, sourceUrl, cantonFilterBy);
     },
   });
 }
@@ -880,6 +882,44 @@ function compactPromptList(value, maxLineChars) {
   }).join('\n');
 }
 
+function compactPromptPart(value, maxChars) {
+  const text = String(value || '').trimEnd();
+  if (text.length <= maxChars) return text;
+  if (maxChars <= 1) return '…'.slice(0, maxChars);
+  return `${text.slice(0, maxChars - 1).trimEnd()}…`;
+}
+
+function compactCantonCandidateLine(line, summaries) {
+  const text = String(line || '').trimEnd();
+  const match = /^(H(\d+)\s»\s+\([^)]*\)\s+)(.+)$/u.exec(text);
+  if (!match) return compactPromptList(text, CANTON_PROMPT_CANDIDATE_LINE_MAX_CHARS);
+  const [, prefix, candidateIndex, headline] = match;
+  const summary = String(summaries[Number(candidateIndex) - 1] || '').replace(/\s+/gu, ' ').trim().slice(0, CANTON_PROMPT_SUMMARY_MAX_CHARS);
+  if (!summary) return compactPromptList(text, CANTON_PROMPT_CANDIDATE_LINE_MAX_CHARS);
+
+  const marker = ' — SOMMARIO: ';
+  const contentBudget = CANTON_PROMPT_CANDIDATE_LINE_MAX_CHARS - prefix.length;
+  if (contentBudget <= marker.length + 2) {
+    return compactPromptList(text, CANTON_PROMPT_CANDIDATE_LINE_MAX_CHARS);
+  }
+  if (headline.length + marker.length + summary.length <= contentBudget) {
+    return `${prefix}${headline}${marker}${summary}`;
+  }
+
+  const pairBudget = contentBudget - marker.length;
+  const summaryBudget = Math.min(summary.length, Math.max(1, Math.floor(pairBudget * 0.45)));
+  const titleBudget = Math.max(1, pairBudget - summaryBudget);
+  return `${prefix}${compactPromptPart(headline, titleBudget)}${marker}${compactPromptPart(summary, summaryBudget)}`;
+}
+
+function compactCantonCandidateList(value, summaries) {
+  return String(value || '').split('\n').map((line) => compactCantonCandidateLine(line, summaries)).join('\n');
+}
+
+function cantonSourceGroundingRule(name) {
+  return `NESSO FONDATO NELLA FONTE (CRITICO): per una notizia nazionale, il titolo, il sommario o il testo della fonte devono dichiarare un fatto, un dato o una conseguenza concreta per il Canton ${name} o i suoi frontalieri. Il solo dominio locale, il nome della testata o un'interpretazione generica non sono prove. AVS/LPP, fisco, lavoro, servizi e trasporti valgono solo se la fonte li collega concretamente a questo cantone o ai suoi frontalieri.`;
+}
+
 function compactPublishedDigest(value, maxExcerptChars) {
   return String(value || '').split('\n').map((line) => {
     const separator = ' — ';
@@ -898,22 +938,25 @@ export function cantonClassifierPrompt(p, { headline, sourceHint, summary }) {
 ${contextLine(p)}
 È RILEVANTE: lavoro e salari nel cantone (assunzioni, licenziamenti, chiusure, contratti), fisco cantonale e imposta alla fonte, AVS/LPP, premi cassa malati e sussidi, permessi (B, G), decisioni del governo e del parlamento cantonale, preventivo e servizi pubblici, casa e affitti, mobilità e trasporti nel cantone (strade, cantieri, chiusure, treni e bus, valichi), economia e imprese del cantone, temi dei frontalieri che lavorano nel cantone. Cronaca locale SOLO se avviene nel Canton ${p.cantonName} E ha un impatto pratico (strada chiusa, deviazione, servizio interrotto, evacuazione).
 
+${cantonSourceGroundingRule(p.cantonName)}
+
 NON è rilevante:
 - Cronaca nera, incidenti, sport, cultura ed eventi senza impatto pratico su chi vive o lavora nel cantone
 - Notizie di altri cantoni o di altri paesi senza ricadute sul Canton ${p.cantonName}
+- Notizie nazionali senza un nesso concreto dichiarato nel titolo o nel sommario con il Canton ${p.cantonName} o i suoi frontalieri. Il dominio locale della testata non costituisce un nesso.
 - Gossip, intrattenimento, necrologi, risultati sportivi
 
 La fonte può essere in tedesco, francese o italiano: giudica il contenuto, non la lingua.
 
 HEADLINE: ${String(headline || '').slice(0, 240)}
-${sourceHint ? `FONTE: ${sourceHint}\n` : ''}${summary ? `SOMMARIO: ${String(summary).slice(0, 320)}\n` : ''}
+${sourceHint ? `FONTE: ${sourceHint}\n` : ''}${summary ? `SOMMARIO: ${String(summary).slice(0, CANTON_PROMPT_SUMMARY_MAX_CHARS)}\n` : ''}
 Rispondi ESATTAMENTE in questo formato (una riga):
 relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
 }
 
 /** Il prompt di selezione della headline (stesso protocollo H<n> delle storiche). */
-export function cantonHeadlineSelectionPrompt(p, { headlineList, recentArticles, jsonQuoteSafetyRule }) {
-  const compactHeadlineList = compactPromptList(headlineList, CANTON_PROMPT_CANDIDATE_LINE_MAX_CHARS);
+export function cantonHeadlineSelectionPrompt(p, { headlineList, recentArticles, jsonQuoteSafetyRule, summaries = [] }) {
+  const compactHeadlineList = compactCantonCandidateList(headlineList, summaries);
   const compactRecentArticles = compactPublishedDigest(recentArticles, CANTON_PROMPT_PUBLISHED_EXCERPT_MAX_CHARS);
   return `Sei un editor del sito frontaliereticino.ch, sezione del Canton ${p.cantonName}.
 Devi scegliere UN articolo da queste headline di fonti del cantone per scrivere un pezzo utile a chi vive o lavora nel Canton ${p.cantonName}, frontalieri compresi.
@@ -925,6 +968,8 @@ ARTICOLI GIÀ PUBBLICATI (NON scegliere argomenti simili o già coperti). Questo
 ${compactRecentArticles}
 
 CRITERI DI SELEZIONE (in ordine di priorità):
+Prima di ordinare le notizie, escludi quelle nazionali o di altri cantoni che non documentano un fatto, un dato o una conseguenza concreta per il Canton ${p.cantonName} o i suoi frontalieri. Una testata locale può ripubblicare un lancio nazionale: il dominio della testata non costituisce un nesso.
+${cantonSourceGroundingRule(p.cantonName)}
 1. IMPATTO PRATICO NEL CANTONE: lavoro e salari, fisco e imposta alla fonte, AVS/LPP, premi cassa malati, permessi, decisioni del governo o del parlamento cantonale, casa, mobilità e trasporti (chiusure, cantieri, orari), servizi pubblici
 2. FRONTALIERI: a parità di impatto, preferisci le notizie che toccano chi attraversa il confine per lavorare nel cantone
 3. NOVITÀ: notizie recenti con un fatto concreto (decisione, dato, scadenza, cambiamento)
@@ -937,7 +982,7 @@ ${jsonQuoteSafetyRule}
 Rispondi con un JSON object (no markdown, no code fences). Usa la CHIAVE della headline scelta, mai un numero nudo e mai il titolo di un articolo già pubblicato:
 {
   "selectedId": "<chiave della headline scelta, esattamente nella forma H1, H2, …>",
-  "reason": "<perché questa notizia conta per chi vive o lavora nel Canton ${p.cantonName}, max 2 frasi>"
+  "reason": "<fatto o conseguenza locale documentata dalla notizia, max 2 frasi>"
 }`;
 }
 
@@ -956,6 +1001,8 @@ export function cantonPromptLines(p) {
     factCheckPersona: `Sei un fact-checker senior specializzato in affari del Canton ${name} e della Svizzera (fiscalità cantonale e federale, mercato del lavoro, assicurazioni sociali, frontalieri), per un pubblico che vive o lavora nel cantone.`,
     factCheckRelevance: (isEvergreen) => `11. **RILEVANZA TOPICA PER IL CANTON ${name.toUpperCase()} (CRITICO)**: L'articolo deve avere un nesso REALE, SPECIFICO e VERIFICABILE con la vita di chi vive o lavora nel Canton ${name}, frontalieri compresi. Sono nessi reali: lavoro e salari nel cantone, fisco cantonale e imposta alla fonte, AVS/LPP/LAMal e premi, permessi B/G, decisioni del governo e del parlamento cantonale, preventivo e servizi pubblici, casa e affitti, mobilità e trasporti nel cantone (chiusure, cantieri, orari), economia e imprese del cantone, cronaca locale nel cantone con un impatto pratico documentato dalla fonte.
 
+   ${cantonSourceGroundingRule(name)}
+
    ${isEvergreen ? '' : 'NON sono nessi reali (segnala "critical" come "rilevanza_topica"): cronaca nera, sport, cultura ed eventi senza impatto pratico, notizie di altri cantoni o paesi senza ricadute sul cantone, gossip.'}
 
    SEGNALE D'ALLARME (= "critical: rilevanza_topica"): forzare «implicazioni per i frontalieri» o consigli generici ("consulta un avvocato", "verifica l'assicurazione") su un fatto che la fonte non collega al cantone.
@@ -973,6 +1020,7 @@ Prima di scrivere, valuta se la fonte ha un nesso REALE e VERIFICABILE con chi v
 - Mobilità: strade, cantieri, chiusure, deviazioni, treni e bus, valichi di confine
 - Cronaca locale NEL cantone con un impatto pratico documentato (strada chiusa, servizio interrotto, evacuazione)
 ${contextLine(p)}
+${cantonSourceGroundingRule(name)}
 NON sono nesso reale: cronaca nera, sport, cultura ed eventi senza impatto pratico, fatti di altri cantoni o paesi senza ricadute sul cantone.
 
 Se il nesso NON c'è, RIFIUTATI e restituisci SOLTANTO:
