@@ -1467,6 +1467,26 @@
       }
     },
     {
+      "path": "scripts/ci/measure-section-cadence-m6.mjs",
+      "mode": "corpus-only",
+      "reason": "Supplemento Linux per misurare M6 con snapshot congelato, binding ONNX compatibile e prove runtime di soglia del dedup. Il generatore e gli indici del corpus non esistono sul sito, che consuma solo l'API pubblicata.",
+      "baseline": {
+        "site": null,
+        "corpus": "befc78075a34d1bc",
+        "alignedAt": "2026-11-26"
+      }
+    },
+    {
+      "path": "scripts/ci/measure-section-cadence.mjs",
+      "mode": "corpus-only",
+      "reason": "Collector F0 delle metriche di cadenza, admission, fanout, esaurimento retry, chiamate LLM e dedup per il generatore del corpus; il sito consuma l'API e non possiede le run o i registry sorgente misurati.",
+      "baseline": {
+        "site": null,
+        "corpus": "67594255b2924385",
+        "alignedAt": "2026-11-26"
+      }
+    },
+    {
       "path": "scripts/ci/triage-sweep.mjs",
       "mode": "identical",
       "baseline": {
@@ -3864,6 +3884,16 @@
         "corpus": "01d6f42092d2b18c",
         "alignedAt": "2026-10-06",
         "forcedAt": "2026-10-06T21:28:54.202Z"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/llm-call-metrics.mjs",
+      "mode": "corpus-only",
+      "reason": "Registra i tentativi fisici dei provider nei workflow di generazione del corpus, raggruppati per fase per la misura F0. Il sito non esegue questi workflow né conserva i relativi job log.",
+      "baseline": {
+        "site": null,
+        "corpus": "bc00da980f990bce",
+        "alignedAt": "2026-11-26"
       }
     },
     {

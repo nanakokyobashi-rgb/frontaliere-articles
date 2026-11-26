@@ -176,13 +176,18 @@ function notifyAwaitingVitest(pr) {
  * trigger `push`/`pull_request` del workflow, MIRROR-ato perché lo YAML non
  * può importare questa const — guard in
  * `generator/tests/generator-ci-required-gate.test.mjs`). Una voce che finisce
- * per `/` è un prefisso di cartella; le altre sono match esatti di file. Puro
- * → testabile senza gh.
+ * per `/` è un prefisso di cartella; `*` corrisponde a caratteri non separatori
+ * di path, e le altre sono match esatti di file. Puro → testabile senza gh.
  */
 export function touchesGeneratorCiPaths(filenames) {
   if (!Array.isArray(filenames)) return false;
   return filenames.some((f) =>
-    GENERATOR_CI_TRIGGER_PATHS.some((p) => (p.endsWith('/') ? f.startsWith(p) : f === p))
+    GENERATOR_CI_TRIGGER_PATHS.some((p) => {
+      if (p.endsWith('/')) return f.startsWith(p);
+      if (!p.includes('*')) return f === p;
+      const escaped = p.split('*').map((part) => part.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+      return new RegExp(`^${escaped.join('[^/]*')}$`).test(f);
+    })
   );
 }
 

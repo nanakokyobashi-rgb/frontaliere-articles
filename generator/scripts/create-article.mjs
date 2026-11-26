@@ -71,6 +71,7 @@ import { readArticleRegistry } from '../../scripts/lib/registry-image-reader.mjs
 import { readCanonicalPath } from '../../scripts/lib/seo-canonical-path.mjs';
 import { VALID_NAV_ACTIONS, sanitizeArticleMarkdownLinks } from '../../scripts/lib/article-link-contract.mjs';
 import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, getProviderRosterStatus, providerRosterReady, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, getProviderForModel, applyModelsPrefer, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
+import { getLlmProviderRequestsByStage, resetLlmProviderRequests, withLlmCallStage } from './lib/llm-call-metrics.mjs';
 import { classifyWithDecisionsApi } from './lib/decisions-api.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './lib/fetch-with-ref-timeout.mjs';
@@ -2798,6 +2799,14 @@ function finalizeRunReport(status, extra = {}) {
   RUN_REPORT.status = status || 'unknown';
   RUN_REPORT.endedAt = new Date().toISOString();
   Object.assign(RUN_REPORT, extra || {});
+  RUN_REPORT.llmProviderRequestsByStage = getLlmProviderRequestsByStage();
+  const generationAttempt = Number(process.env.CREATE_ARTICLE_GENERATION_ATTEMPT);
+  console.error(`GENERATION_LLM_CALLS ${JSON.stringify({
+    schemaVersion: 1,
+    generationAttempt: Number.isInteger(generationAttempt) && generationAttempt > 0 ? generationAttempt : null,
+    section: RUN_REPORT.section || SECTION_NAME || null,
+    providerRequestsByStage: RUN_REPORT.llmProviderRequestsByStage,
+  })}`);
   try {
     persistDiscoveryAttemptOutcome(RUN_REPORT.status);
   } catch (err) {
@@ -24551,6 +24560,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // defaults → behavior is unchanged. Store/meta absent (e.g. svizzera not yet
   // built) → the gate degrades to a no-op (fail-open).
   await checkSemanticNearDuplicate(data, {
+    section: SECTION_NAME,
     store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
     meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
   });
@@ -24831,6 +24841,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     console.error('🔍 Verifica duplicati post-riparazione:');
     checkForDuplicates(data);
     await checkSemanticNearDuplicate(data, {
+      section: SECTION_NAME,
       store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
       meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
     });
@@ -26034,6 +26045,7 @@ export async function registerArticleFiles(data, opts = {}) {
   console.error('🔍 Verifica duplicati post-riparazione nel writer condiviso:');
   checkForDuplicates(data, { allowRecurringDailyEdition });
   await checkSemanticNearDuplicate(data, {
+    section: SECTION_NAME,
     store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
     meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
     ignoreNeighbor: allowRecurringDailyEdition ? isDailyBriefArticleId : undefined,
@@ -26143,6 +26155,19 @@ const invokedDirectly = (() => {
   }
 })();
 
+// Keep the original source bodies and call sites stable for the source-level
+// safety contracts. Replace only their runtime bindings after declarations.
+const classifyFrontaliereRelevanceWithoutStage = classifyFrontaliereRelevance;
+classifyFrontaliereRelevance = (...args) => withLlmCallStage('selection', () => classifyFrontaliereRelevanceWithoutStage(...args));
+const requestHeadlineSelectionWithoutStage = requestHeadlineSelection;
+requestHeadlineSelection = (...args) => withLlmCallStage('selection', () => requestHeadlineSelectionWithoutStage(...args));
+const llmFactCheckWithoutStage = llmFactCheck;
+llmFactCheck = (...args) => withLlmCallStage('factCheck', () => llmFactCheckWithoutStage(...args));
+const translateArticleWithoutStage = translateArticle;
+translateArticle = (...args) => withLlmCallStage('translation', () => translateArticleWithoutStage(...args));
+const generateAndValidateArticleWithoutStage = generateAndValidateArticle;
+generateAndValidateArticle = (...args) => withLlmCallStage('generation', () => generateAndValidateArticleWithoutStage(...args));
+
 if (invokedDirectly) {
   // Registered as the FIRST thing inside the CLI guard, i.e. BEFORE ai-models.mjs
   // arms its own SIGTERM hook on first use (lazy, at first score persistence
@@ -26193,6 +26218,11 @@ if (invokedDirectly) {
   // ne aggiunge un altro senza che niente lo segnali. Qui la mutezza diventa un
   // esito: exit 1, con la ragione. Non copre il caso «articolo prodotto» perche'
   // li' lo status e' `generated` e si esce 0, come sempre.
+  resetLlmProviderRequests();
+  const generationAttempt = Number(process.env.CREATE_ARTICLE_GENERATION_ATTEMPT);
+  if (Number.isInteger(generationAttempt) && generationAttempt > 0) {
+    console.error(`GENERATION_ATTEMPT attempt=${generationAttempt} section=${SECTION_NAME || 'unknown'}`);
+  }
   main().then(async () => {
     if (RUN_REPORT?.status === 'generated') return;
     console.error(
