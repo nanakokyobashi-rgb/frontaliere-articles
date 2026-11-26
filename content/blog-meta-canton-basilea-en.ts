@@ -72,6 +72,9 @@ const blogMetaCantonBasileaEn: Record<string, string> = {
     'blog.article.pfiffner-450-posti-pratteln.title': 'Pfiffner Gruppe brings 450 jobs to Pratteln',
     'blog.article.pfiffner-450-posti-pratteln.excerpt': '450 jobs are linked to Pratteln, with reference to the Industriepark Rheinkrone; the title mentions a change in Lehenmatt.',
     'blog.article.pfiffner-450-posti-pratteln.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.camion-urta-a2-basilea.title': 'Truck hits guardrail on A2 in Basel: queue at the borders',
+    'blog.article.camion-urta-a2-basilea.excerpt': 'On Wednesday morning, at around 8.45, a truck with Polish license plates crashed into the safety barrier near the Wettsteinallee exit in Basel.',
+    'blog.article.camion-urta-a2-basilea.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBasileaEn;

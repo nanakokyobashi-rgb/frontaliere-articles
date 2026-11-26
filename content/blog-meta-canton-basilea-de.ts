@@ -72,6 +72,9 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.pfiffner-450-posti-pratteln.title': 'Pfiffner Gruppe bringt 450 Arbeitsplätze nach Pratteln',
     'blog.article.pfiffner-450-posti-pratteln.excerpt': '450 Arbeitsplätze sind mit Pratteln verbunden, mit Bezug auf den Industriepark Rheinkrone; der Titel erwähnt eine Veränderung in Lehenmatt.',
     'blog.article.pfiffner-450-posti-pratteln.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.camion-urta-a2-basilea.title': 'Lastwagen prallt auf A2 bei Basel gegen Leitplanke: Grenzstau',
+    'blog.article.camion-urta-a2-basilea.excerpt': 'Am Mittwochmorgen kam es gegen 8.45 Uhr bei der Ausfahrt Wettsteinallee in Basel zu einem Unfall: Ein Lastwagen mit polnischem Kennzeichen kollidierte mit der Sicherheitsbarriere.',
+    'blog.article.camion-urta-a2-basilea.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBasileaDe;

@@ -260,4 +260,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'camion-urta-a2-basilea',
+ category: 'pratico',
+ date: '2026-11-26T07:11:14.270Z',
+ image: '/images/blog/article-camion-urta-a2-basilea.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BASILEA'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

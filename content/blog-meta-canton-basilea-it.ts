@@ -72,6 +72,9 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.pfiffner-450-posti-pratteln.title': 'Pfiffner Gruppe porta 450 posti di lavoro a Pratteln',
     'blog.article.pfiffner-450-posti-pratteln.excerpt': '450 posti di lavoro sono collegati a Pratteln, con riferimento all\'Industriepark Rheinkrone; il titolo menziona un cambiamento a Lehenmatt.',
     'blog.article.pfiffner-450-posti-pratteln.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.camion-urta-a2-basilea.title': 'Camion urta il guardrail sulla A2 a Basilea: coda ai confini',
+    'blog.article.camion-urta-a2-basilea.excerpt': 'Mercoledì mattina, verso le 8.45, un camion con targa polacca è finito contro la barriera di sicurezza nella zona dell\'uscita Wettsteinallee, a Basilea.',
+    'blog.article.camion-urta-a2-basilea.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBasileaIt;

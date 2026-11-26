@@ -103,5 +103,11 @@
     "articleId": "pfiffner-450-posti-pratteln",
     "ts": "2026-11-12T23:48:39.528Z",
     "keyForm": 2
+  },
+  "https://onlinereports.ch/a/lastwagen-in-basel-verunfallt-stau-bis-an-die-landesgrenzen": {
+    "articleId": "camion-urta-a2-basilea",
+    "ts": "2026-11-26T07:11:14.858Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "fac219022921b49c56de8ad9c7b2f7cbad58c13d7e4910950a8331c60e2dedea"
   }
 }

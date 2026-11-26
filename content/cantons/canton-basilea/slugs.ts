@@ -26,6 +26,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'gdk-premi-piu-bassi': { it: 'gdk-premi-piu-bassi', en: 'gdk-lower-efas-premiums', de: 'gdk-tiefere-efas-praemien', fr: 'gdk-baisse-primes-efas' },
  'basilea-mozioni-climatizzazione': { it: 'basilea-mozioni-climatizzazione', en: 'basel-ac-authorization-motions', de: 'basel-klimaanlagen-mozioni', fr: 'basle-motions-climatisation' },
  'pfiffner-450-posti-pratteln': { it: 'pfiffner-450-posti-pratteln', en: 'pfiffner-450-jobs-pratteln', de: 'pfiffner-450-arbeitsplaetze-pratteln', fr: 'pfiffner-450-emplois-pratteln' },
+ 'camion-urta-a2-basilea': { it: 'camion-urta-a2-basilea', en: 'basel-a2-truck-crash', de: 'basel-a2-lkw-unfall', fr: 'accident-camion-a2-bale' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

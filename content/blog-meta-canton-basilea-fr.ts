@@ -72,6 +72,9 @@ const blogMetaCantonBasileaFr: Record<string, string> = {
     'blog.article.pfiffner-450-posti-pratteln.title': 'Pfiffner Gruppe apporte 450 emplois à Pratteln',
     'blog.article.pfiffner-450-posti-pratteln.excerpt': '450 emplois sont liés à Pratteln, en référence à l\'Industriepark Rheinkrone ; le titre mentionne un changement à Lehenmatt.',
     'blog.article.pfiffner-450-posti-pratteln.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.camion-urta-a2-basilea.title': 'Camion percute la glissière sur l’A2 à Bâle : bouchon',
+    'blog.article.camion-urta-a2-basilea.excerpt': 'Mercredi matin, vers 8.45, un camion avec une plaque d\'immatriculation polonaise a percuté la barrière de sécurité dans la zone de la sortie de Wettsteinallee, à Bâle.',
+    'blog.article.camion-urta-a2-basilea.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBasileaFr;
