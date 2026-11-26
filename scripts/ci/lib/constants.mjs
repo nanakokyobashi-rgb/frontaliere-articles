@@ -256,7 +256,8 @@ export const GENERATOR_CI_JOB_NAME = 'test';
  * `pull_request.paths` in `.github/workflows/generator-ci.yml` (lo YAML non
  * può importare una const JS). Le voci che finiscono per `/` sono prefissi di
  * cartella (`generator/**` → `generator/`); le altre sono match esatti di
- * file. Usati da `auto-merge-eval.mjs` (`touchesGeneratorCiPaths`) per capire
+ * file, salvo `*` che corrisponde a caratteri non separatori di path. Usati da
+ * `auto-merge-eval.mjs` (`touchesGeneratorCiPaths`) per capire
  * se una PR deve attendere anche `GENERATOR_CI_JOB_NAME`, non solo
  * `VITEST_CHECK_NAME`, prima di mergiare — condizionato ai path così una PR di
  * solo contenuto non paga mai il costo extra (nessun check-run "test" da
@@ -276,6 +277,7 @@ export const GENERATOR_CI_TRIGGER_PATHS = [
   'scripts/ci/check-article-source-runtime.mjs',
   'scripts/lib/npm-ci-retry.sh',
   'scripts/ci/loop-sync-manifest.json',
+  'scripts/ci/measure-section-cadence*.mjs',
   '.github/workflows/generator-ci.yml',
   'package.json',
   'package-lock.json',

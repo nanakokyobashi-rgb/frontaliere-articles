@@ -80,6 +80,13 @@ test('touchesGeneratorCiPaths: riconosce i match esatti di file', () => {
   assert.equal(touchesGeneratorCiPaths(['.github/workflows/generator-ci.yml']), true);
 });
 
+test('touchesGeneratorCiPaths: riconosce glob di file senza attraversare directory', () => {
+  assert.equal(touchesGeneratorCiPaths(['scripts/ci/measure-section-cadence.mjs']), true);
+  assert.equal(touchesGeneratorCiPaths(['scripts/ci/measure-section-cadence-m6.mjs']), true);
+  assert.equal(touchesGeneratorCiPaths(['scripts/ci/measure-section-cadence/extra.mjs']), false);
+  assert.equal(touchesGeneratorCiPaths(['scripts/ci/other.mjs']), false);
+});
+
 test('touchesGeneratorCiPaths: un file dentro una cartella con un prefisso simile ma diverso NON matcha', () => {
   // 'hostess/' non deve matchare il prefisso 'host/' (bug classico di startsWith
   // senza slash finale) — le entry sono già scritte con lo slash, ma la guardia

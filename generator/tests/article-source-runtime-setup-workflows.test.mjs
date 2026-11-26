@@ -42,7 +42,7 @@ const PARSER_JOBS = {
   '.github/workflows/generate-border-wait-ranking-weekly.yml': ['refresh'],
   '.github/workflows/generate-daily-brief.yml': ['edition'],
   '.github/workflows/generation-health-watchdog.yml': ['watch'],
-  '.github/workflows/generator-ci.yml': ['test', 'dry-run'],
+  '.github/workflows/generator-ci.yml': ['test', 'dry-run', 'measure-section-cadence-m6'],
   '.github/workflows/publish-api.yml': ['publish'],
   '.github/workflows/publish-journalist-articles.yml': ['publish'],
   '.github/workflows/reconcile-article-shards.yml': ['reconcile'],
