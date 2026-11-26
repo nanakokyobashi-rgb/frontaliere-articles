@@ -1211,6 +1211,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-teufen-finanziamento-tunnel': {
+    title: 'Teufen: tunnel e opere finanziabili fino a 120 milioni',
+    description: 'Il comitato Teufen mit Zukunft riferisce che fino a 120 milioni di franchi potrebbero finanziare il tunnel ferroviario e altri investimenti a Teufen.',
+    keywords: 'frontalieri, ticino, svizzera, italia, teufen, tunnel, opere, finanziabili',
+    ogTitle: 'Teufen: tunnel e opere finanziabili fino a 120 milioni',
+    ogDescription: 'Secondo il comitato Teufen mit Zukunft, la forza finanziaria e fiscale di Teufen consentirebbe di sostenere fino a 120 milioni di franchi per un programma che include il tunnel ferroviario, una palestra, una piscina e strutture residenziali.',
+    canonicalPath: '/articoli-appenzello/teufen-finanziamento-tunnel/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Teufen: tunnel e opere finanziabili fino a 120 milioni",
+      "description": "Il comitato Teufen mit Zukunft riferisce che fino a 120 milioni di franchi potrebbero finanziare il tunnel ferroviario e altri investimenti a Teufen.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-teufen-finanziamento-tunnel.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-26T01:03:39+00:00",
+      "dateModified": "2026-11-26T01:03:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/teufen-finanziamento-tunnel/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -148,5 +148,11 @@
     "articleId": "herisau-chiude-confezione-tende",
     "ts": "2026-11-20T19:03:28.755Z",
     "keyForm": 2
+  },
+  "https://appenzell24.ch/news/komitee-sieht-im-bahntunnel-langfristigen-nutzen": {
+    "articleId": "teufen-finanziamento-tunnel",
+    "ts": "2026-11-26T01:03:39.931Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "3c2739dc0328cc6fac0d05464efc7e5122b4e2a71c0acfe0556847521820deb1"
   }
 }

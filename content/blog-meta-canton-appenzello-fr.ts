@@ -96,6 +96,9 @@ const blogMetaCantonAppenzelloFr: Record<string, string> = {
     'blog.article.herisau-chiude-confezione-tende.title': 'Herisau : l’atelier de confection de rideaux ferme, 15 personnes concernées',
     'blog.article.herisau-chiude-confezione-tende.excerpt': 'Filtex ferme à Herisau son atelier de confection de rideaux : la société cite le marché suisse du textile de maison et 15 employés concernés.',
     'blog.article.herisau-chiude-confezione-tende.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.teufen-finanziamento-tunnel.title': 'Teufen : tunnel et ouvrages finançables jusqu’à 120 millions',
+    'blog.article.teufen-finanziamento-tunnel.excerpt': 'Le comité « Teufen mit Zukunft » indique qu’un financement pouvant atteindre 120 millions de francs pourrait couvrir le tunnel ferroviaire et d’autres ouvrages.',
+    'blog.article.teufen-finanziamento-tunnel.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAppenzelloFr;

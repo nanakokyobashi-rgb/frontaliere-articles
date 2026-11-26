@@ -96,6 +96,9 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.herisau-chiude-confezione-tende.title': 'Herisau: curtain workshop closes, 15 affected',
     'blog.article.herisau-chiude-confezione-tende.excerpt': 'Filtex is closing its curtain-making workshop in Herisau: the company cites the Swiss home textiles market and 15 employees affected.',
     'blog.article.herisau-chiude-confezione-tende.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.teufen-finanziamento-tunnel.title': 'Teufen: tunnel and projects fundable up to 120 million',
+    'blog.article.teufen-finanziamento-tunnel.excerpt': 'The «Teufen mit Zukunft» committee reports that financing of up to 120 million francs could cover the railway tunnel and other projects.',
+    'blog.article.teufen-finanziamento-tunnel.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAppenzelloEn;

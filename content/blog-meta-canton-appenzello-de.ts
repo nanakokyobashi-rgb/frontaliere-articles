@@ -96,6 +96,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.herisau-chiude-confezione-tende.title': 'Herisau: Werkstatt für Vorhangkonfektion schliesst, 15 betroffen',
     'blog.article.herisau-chiude-confezione-tende.excerpt': 'Filtex schliesst in Herisau die Werkstatt für Vorhangkonfektion: Das Unternehmen verweist auf den Schweizer Markt für Heimtextilien und 15 betroffene Mitarbeitende.',
     'blog.article.herisau-chiude-confezione-tende.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.teufen-finanziamento-tunnel.title': 'Teufen: Tunnel und weitere Bauvorhaben bis zu 120 Millionen finanzierbar',
+    'blog.article.teufen-finanziamento-tunnel.excerpt': 'Das Komitee «Teufen mit Zukunft» berichtet, dass eine Finanzierung von bis zu 120 Millionen Franken den Eisenbahntunnel und weitere Bauvorhaben abdecken könnte.',
+    'blog.article.teufen-finanziamento-tunnel.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;

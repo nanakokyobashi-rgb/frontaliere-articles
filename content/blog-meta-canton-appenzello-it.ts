@@ -96,6 +96,9 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.herisau-chiude-confezione-tende.title': 'Herisau: chiude il laboratorio di tende, 15 coinvolti',
     'blog.article.herisau-chiude-confezione-tende.excerpt': 'Filtex chiude a Herisau il laboratorio di confezione di tende: la società cita il mercato svizzero dei tessili per la casa e 15 dipendenti coinvolti.',
     'blog.article.herisau-chiude-confezione-tende.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.teufen-finanziamento-tunnel.title': 'Teufen: tunnel e opere finanziabili fino a 120 milioni',
+    'blog.article.teufen-finanziamento-tunnel.excerpt': 'Il comitato «Teufen mit Zukunft» riferisce che un finanziamento fino a 120 milioni di franchi potrebbe coprire il tunnel ferroviario e altre opere.',
+    'blog.article.teufen-finanziamento-tunnel.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAppenzelloIt;

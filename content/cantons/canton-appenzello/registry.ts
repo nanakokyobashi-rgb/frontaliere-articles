@@ -348,4 +348,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'teufen-finanziamento-tunnel',
+ category: 'novita',
+ date: '2026-11-26T01:03:39.271Z',
+ image: '/images/blog/article-teufen-finanziamento-tunnel.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

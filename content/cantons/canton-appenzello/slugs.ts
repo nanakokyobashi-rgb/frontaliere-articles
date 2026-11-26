@@ -34,6 +34,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'governo-appenzello-candidati': { it: 'governo-appenzello-candidati', en: 'appenzell-government-candidates', de: 'appenzell-regierungsrat-kandidaten', fr: 'candidats-gouvernement-appenzell' },
  'simon-graf-medico-cantonale': { it: 'simon-graf-medico-cantonale', en: 'simon-graf-cantonal-doctor', de: 'simon-graf-kantonsarzt', fr: 'simon-graf-medecin-cantonal' },
  'herisau-chiude-confezione-tende': { it: 'herisau-chiude-confezione-tende', en: 'herisau-curtain-workshop-closure', de: 'herisau-vorhangnaeherei-schliesst', fr: 'herisau-atelier-rideaux-ferme' },
+ 'teufen-finanziamento-tunnel': { it: 'teufen-finanziamento-tunnel', en: 'teufen-tunnel-investment-financing', de: 'teufen-tunnel-investitionen', fr: 'teufen-tunnel-investissements' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
