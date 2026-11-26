@@ -2481,11 +2481,18 @@ export async function publish({
   // Hold it through the dependent HTML PUTs and release it before purge.
   const leasedCandidates = candidateKeys.filter(imageNamespaceForKey);
   const sharedNamespaces = [...new Set(leasedCandidates.map(imageNamespaceForKey))];
-  if (sharedNamespaces.length > 0) {
-    if (!sharedCoverContext) {
-      imageLeases = await imageLeaseOps.acquire(sharedNamespaces, { signal, timeoutMs: 30_000 });
+  if (sharedNamespaces.length > 0 && !sharedCoverContext) {
+    try {
+      imageLeases = await imageLeaseOps.acquire(sharedNamespaces, { signal });
       sharedCoverContext = serializeImageLeaseContext(imageLeases);
+    } catch (error) {
+      const contention = sharedNamespaces.some((namespace) =>
+        error?.message === `[r2-image-namespace-lock] timed out waiting for namespace ${namespace}`);
+      if (!contention) throw error;
+      console.log(`::notice::[${LOG}] lease delle copertine occupato: le pagine dipendenti restano differite`);
     }
+  }
+  if (sharedNamespaces.length > 0 && sharedCoverContext) {
     for (const namespace of sharedNamespaces) await imageLeaseOps.verify(sharedCoverContext, namespace);
     const identical = await findIdenticalCantonAssetKeys({
       candidateKeys: leasedCandidates, uploadByKey, assetProbeImpl,

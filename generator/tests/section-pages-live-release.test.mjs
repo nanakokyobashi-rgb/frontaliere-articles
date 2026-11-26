@@ -684,10 +684,11 @@ test('publisher: un cover identico nei namespace leased resta nel percorso prote
 });
 
 test('publisher: copertina condivisa identica sblocca le quattro route mentre il lease è attivo', async (t) => {
-  for (const mode of ['bytes identici', 'bytes diversi', 'lease perso prima del PUT']) {
+  for (const mode of ['bytes identici', 'bytes diversi', 'lease perso prima del PUT', 'lease occupato']) {
     await t.test(mode, async () => {
       const identical = mode !== 'bytes diversi';
       const leaseLost = mode === 'lease perso prima del PUT';
+      const contended = mode === 'lease occupato';
       const assetKey = 'images/blog/shared.webp';
       const localBytes = webpFixture(0x11);
       const remoteBytes = identical ? localBytes : webpFixture(0x22);
@@ -697,8 +698,13 @@ test('publisher: copertina condivisa identica sblocca le quattro route mentre il
       const fixture = await publishFourLocaleSharedAsset({
         localBytes, assetKey, events,
         imageLeaseOps: {
-          acquire: async (namespaces) => {
+          acquire: async (namespaces, options) => {
             assert.deepEqual(namespaces, ['blog']);
+            assert.equal(options.timeoutMs, undefined, 'usa il budget condiviso del lock');
+            if (contended) {
+              events.push('lease-contended');
+              throw new Error('[r2-image-namespace-lock] timed out waiting for namespace blog');
+            }
             events.push('lease-acquired');
             held = true;
             return [{
@@ -728,11 +734,12 @@ test('publisher: copertina condivisa identica sblocca le quattro route mentre il
       });
       try {
         assert.equal(fixture.result.failures, leaseLost ? 1 : 0);
-        assert.equal(fixture.result.uploaded, identical && !leaseLost ? 4 : 0);
-        if (!leaseLost) assert.equal(fixture.result.deferredAssetPages, identical ? 0 : 4);
+        assert.equal(fixture.result.uploaded, identical && !leaseLost && !contended ? 4 : 0);
+        if (!leaseLost) assert.equal(fixture.result.deferredAssetPages, identical && !contended ? 0 : 4);
         assert.equal(held, false);
         assert.ok(!events.includes(`asset-upload:${assetKey}`));
-        assert.ok(events.indexOf('asset-upload:images/unrelated.webp') < events.indexOf('lease-acquired'));
+        assert.ok(events.indexOf('asset-upload:images/unrelated.webp') < events.indexOf(contended ? 'lease-contended' : 'lease-acquired'));
+        if (contended) assert.deepEqual(fixture.assetProbeCalls, []);
         for (const event of events.filter((value) => value.startsWith('page-upload:'))) {
           const at = events.indexOf(event);
           assert.equal(events[at - 1], 'lease-verified');
