@@ -390,6 +390,7 @@ import {
 } from './lib/article-free-mt.mjs';
 import {
   createFreeMtRecoveryReport,
+  freeMtFieldKey,
   recordFreeMtUnusableOutput,
   claimFreeMtLlmFallback,
   wasFreeMtUnusable,
@@ -15802,6 +15803,7 @@ function buildPendingBodyRetranslationPrompt({ langName, field, itValue, partLab
   const correction = {
     'numeric-association': 'Controlla ogni coppia dato-etichetta separatamente. Mantieni nella stessa proposizione ogni valore e il suo nome, anche se il nome è ripetuto.',
     'numeric-values': 'Confronta tutte le cifre con la fonte prima di rispondere. Riproduci ogni valore, segno, unità e percentuale nell’ordine originale.',
+    'localized-calendar': 'Controlla tutte le date. Localizza il nome del mese e l’ordine per la lingua di arrivo, conservando giorno, mese, anno ed estremi di ogni intervallo.',
     'line-skeleton': 'Confronta il Markdown riga per riga. Conserva le righe vuote e la posizione di ciascun titolo, punto elenco e citazione.',
     completeness: 'Verifica che ogni frase originale compaia nella traduzione, compresi gli incisi e le frasi finali.',
   }[rejectionReason];
@@ -15892,7 +15894,7 @@ async function translatePendingBodyWithCodex(
   itValue,
   locale,
   field,
-  { onCodexCall = null, callWithRetry = null, translateInChunks = null } = {},
+  { onCodexCall = null, callWithRetry = null, translateInChunks = null, rejectionReason = '' } = {},
 ) {
   const chunkTranslator = assertChunkTranslator(translateInChunks, 'translatePendingBodyWithCodex');
   const codex = AI_MODELS.CODEX_CLI_PRIMARY;
@@ -15920,7 +15922,7 @@ async function translatePendingBodyWithCodex(
         processDeadlineMs: codexRecoveryDeadlineMs,
       }) === null;
       if (canFallback && (!pendingBodySecondLaneAvailable() || deadlineTooClose)) {
-        return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry, translateInChunks: chunkTranslator });
+        return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry, translateInChunks: chunkTranslator, rejectionReason });
       }
       throw new Error('lane Codex fermata senza prova di indisponibilità del modello');
     },
@@ -15934,7 +15936,7 @@ async function translatePendingBodyWithCodex(
         processDeadlineMs: codexRecoveryDeadlineMs,
       });
       if (deadlineMs === null) {
-        if (canFallback) return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry, translateInChunks: chunkTranslator });
+        if (canFallback) return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry, translateInChunks: chunkTranslator, rejectionReason });
         throw new Error('finestra residua troppo corta per una chiamata Codex');
       }
       const codexCallOptions = {
@@ -16011,7 +16013,7 @@ async function translatePendingBodyWithCodex(
           () => '',
           `${locale}:${field}-pending-codex-validation`,
           locale,
-          { pretranslatedResult: { [field]: text } },
+          { pretranslatedResult: { [field]: text }, onReject: (reason) => { rejectionReason = reason; } },
         )
         : stripTableHeaderColumnMarkers(text);
       if (validatedText) {
@@ -16029,7 +16031,7 @@ async function translatePendingBodyWithCodex(
         // restituisce un campo vuoto. Se Codex ha anche prodotto un output
         // rifiutato, riprovare la stessa corsia ricreerebbe il difetto: la
         // catena storica riceve `forceLegacy` e non torna al Codex disponibile.
-        return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry, translateInChunks: chunkTranslator });
+        return translatePendingBodyWithHistoricalChain(itValue, locale, field, { callWithRetry, translateInChunks: chunkTranslator, rejectionReason });
       }
       if (!validatedText && rejected.length > 0) {
         console.error(`  ⚠️  [seconda corsia] ${locale}:${field} rifiutato da translateFieldFreeMt (${rejected.join(', ')})`);
@@ -16050,7 +16052,7 @@ async function translatePendingBodyWithHistoricalChain(
   itValue,
   locale,
   field,
-  { callWithRetry, translateInChunks } = {},
+  { callWithRetry, translateInChunks, rejectionReason: previousRejectionReason = '' } = {},
 ) {
   if (typeof callWithRetry !== 'function') {
     throw new TypeError('translatePendingBodyWithHistoricalChain: `callWithRetry` è richiesto');
@@ -16068,7 +16070,7 @@ async function translatePendingBodyWithHistoricalChain(
     fieldName: field,
     translate: async ({ text: masked }) => {
       const wordCount = countWords(masked || '');
-      let rejectionReason = '';
+      let rejectionReason = previousRejectionReason;
       const onReject = (reason) => { rejectionReason = reason; };
       const translateSegments = (chunkWords) => chunkTranslator(
         masked,
@@ -16101,6 +16103,7 @@ async function translatePendingBodyWithHistoricalChain(
               langName,
               field,
               itValue: markedSegment.markedText,
+              rejectionReason,
             }),
             Math.max(5000, Math.ceil(countWords(masked || '') * 5)),
             `${locale}:${field}-pending-retry`,
@@ -17967,8 +17970,8 @@ async function translateArticle(data) {
           targetLang,
           `${targetLang}:${field.replace('body', 'b')}-free-mt-validation`,
           (reason) => {
-            const rejections = RUN_REPORT.translation.freeMtBodyValidationRejections ??= {};
-            rejections[`${targetLang}:${field}`] = reason;
+            const rejections = RUN_REPORT.translation.bodyValidationRejections ??= {};
+            rejections[freeMtFieldKey(targetLang, field)] = reason;
           },
         ),
       });
@@ -18454,9 +18457,12 @@ ${localizedToponymInstruction(targetLang)}`;
           const oversizedBody = isBodyField
             && typeof translateInChunks === 'function'
             && countWords(itValue) > TRANSLATION_CHUNK_THRESHOLD;
-          const rejectionReason = isBodyField
-            ? RUN_REPORT.translation.freeMtBodyValidationRejections?.[`${locale}:${field}`]
-            : undefined;
+          const bodyKey = isBodyField ? freeMtFieldKey(locale, field) : null;
+          const rejectionReason = bodyKey ? RUN_REPORT.translation.bodyValidationRejections?.[bodyKey] : undefined;
+          const onReject = (reason) => {
+            const rejections = RUN_REPORT.translation.bodyValidationRejections ??= {};
+            rejections[bodyKey] = reason;
+          };
           let retried;
           if (oversizedBody) {
             // Keep the missing-field recovery under the same per-request cap
@@ -18476,6 +18482,7 @@ ${localizedToponymInstruction(targetLang)}`;
               }),
               `${locale}:${recoveryField}-missing-retry`,
               locale,
+              { onReject },
             );
             retried = translatedStringOrNull(chunked, locale);
           } else {
@@ -18505,6 +18512,7 @@ ${localizedToponymInstruction(targetLang)}`;
                 rawRetried,
                 locale,
                 `${locale}:${recoveryField}-missing-validation`,
+                onReject,
               )
               : rawRetried;
             if (isBodyField && rawRetried !== null && retried === null) {
@@ -18770,23 +18778,16 @@ ${localizedToponymInstruction(targetLang)}`;
     lane: initialPendingBodyLane,
     isLaneAvailable: () => pendingBodyRecoveryAvailable(),
     shouldStop: () => pendingBodyLaneShouldStop(),
-    translate: ({ locale, field, itValue }) => pendingBodySecondLaneAvailable()
-      ? translatePendingBodyWithCodex(
-        itValue,
-        locale,
-        field,
-        {
+    translate: ({ locale, field, itValue }) => {
+      const rejectionReason = RUN_REPORT.translation.bodyValidationRejections?.[freeMtFieldKey(locale, field)];
+      const options = { callWithRetry, translateInChunks, rejectionReason };
+      return pendingBodySecondLaneAvailable()
+        ? translatePendingBodyWithCodex(itValue, locale, field, {
+          ...options,
           onCodexCall: () => { translationRecoveryCodexCalls += 1; },
-          callWithRetry,
-          translateInChunks,
-        },
-      )
-      : translatePendingBodyWithHistoricalChain(
-        itValue,
-        locale,
-        field,
-        { callWithRetry, translateInChunks },
-      ),
+        })
+        : translatePendingBodyWithHistoricalChain(itValue, locale, field, options);
+    },
     rejectReason: ({ locale, field, itValue, text }) => {
       if (translatedStringOrNull(text, locale) === null) return 'testo non usabile';
       if (isSourcePassthrough(text, itValue)) return "identico all'italiano";
