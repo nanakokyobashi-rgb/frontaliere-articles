@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 1298,
+  "assetCount": 1299,
   "assets": [
     {
       "schema": 1,
@@ -53951,6 +53951,49 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Generic synthetic winter road scene in an alpine setting; no visible text, logos, people, or specific incident."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-bollettino-frontaliere-2026-11-27",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2",
+      "executorModel": "gpt-6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "a10b07d7a7428c38a9b5bf0f9fac6f3843327e3d82b64f418ff9e292e650f4ce",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "1f3edd9e96aaa471a31cb6eb20077a9d2cc9c33c6a87cbce7ae7e4da673eac4b",
+      "bytes": 94452,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-11-27T14:51:03.103Z",
+      "verifiedAt": "2026-11-27T14:51:11.965Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-bollettino-frontaliere-2026-11-27.webp",
+      "area": "Ticino e pendolarismo transfrontaliero",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Generic photorealistic still life of a travel wallet, unmarked coins, and a map; no visible text, logos, people, or specific event."
       }
     }
   ],

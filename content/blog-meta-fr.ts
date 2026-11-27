@@ -13768,6 +13768,11 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.protocollo-fiscale-lavoro-remoto.title': 'L’Italie et la Suisse signent le protocole sur le télétravail',
     'blog.article.protocollo-fiscale-lavoro-remoto.excerpt': 'Le Protocole a été signé le 6 juin 2024. Télétravail à domicile jusqu’à 25 % à partir du 1er janvier 2024.',
     'blog.article.protocollo-fiscale-lavoro-remoto.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.bollettino-frontaliere-2026-11-27.title': 'Frontaliers : change +58,80 € sur 4 000 CHF — 27 novembre 2026',
+    'blog.article.bollettino-frontaliere-2026-11-27.excerpt': 'Les chiffres du jour, 27 novembre 2026, pour les frontaliers : les dernières attentes aux douanes, les communes où le carburant coûte le moins cher, le taux franc-euro et les offres d\'emploi actives en Suisse sur notre job board. Relevés quotidiens de notre suivi.',
+    'blog.article.bollettino-frontaliere-2026-11-27.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.bollettino-frontaliere-2026-11-27.seoDescription': 'Bulletin frontalier 27 novembre 2026 : attentes aux douanes, prix du carburant, taux CHF/EUR et offres d\'emploi actives en Suisse.',
+    'blog.article.bollettino-frontaliere-2026-11-27.ogDescription': 'Les chiffres du 27 novembre 2026 pour les frontaliers : attentes aux douanes, communes où le carburant coûte le moins cher, dernier taux CHF/EUR et offres d\'emploi actives sur notre job board suisse au quotidien.',
 };
 
 export default blogMetaFr;
