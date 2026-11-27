@@ -148,10 +148,10 @@ test('every active article CLI caller wires the OAuth Codex broker', () => {
 
 // Decisione del proprietario del 2026-10-06: Codex è la prima lane di ogni
 // cascata di traduzione; DeepL/Azure/MT restano ripieghi nell'ordine storico.
-// Il broker parte dopo Argos bulk e prima della 2b. L'artifact arriva dal
-// lockstep del sito, quindi il test segue la capacità del broker, non una
-// copia storica della posizione del tier.
-test('translate-pending: broker dopo Argos e Codex primario in 2a.2/2b/2d/2e', () => {
+// Il pre-pass delle descrizioni può usare Codex prima di Argos; in quel caso
+// il broker deve precederlo. Senza quel consumer anticipato, il broker parte
+// dopo Argos bulk e prima della cascata.
+test('translate-pending: il broker precede i consumer Codex autorizzati', () => {
   const source = read(TRANSLATION_WORKFLOW);
   const lines = source.split('\n');
   const setupIndex = lines.findIndex((line) => /^\s*-?\s*uses:\s*\.\/\.github\/actions\/setup-claude-haiku-fallback\s*$/.test(line));
@@ -164,25 +164,42 @@ test('translate-pending: broker dopo Argos e Codex primario in 2a.2/2b/2d/2e', (
   const argosBulk = stepStart(/^\s*- name: "Phase 2a: .*Argos/);
   const argosMopup = stepStart(/^\s*- name: "Phase 2c mop-up: .*Argos/);
   assert.ok(argosBulk >= 0 && argosMopup >= 0, 'Argos phases not found');
-  assert.ok(setupIndex > argosBulk && setupIndex < argosMopup, 'the Codex broker must start after Argos bulk and before the 2b cascade');
+  const staleDescriptionPrepass = stepStart(/^\s*- name: "Phase 2 pre: Repair stale source-copy descriptions \(bounded\)"$/);
+  const staleDescriptionBlock = staleDescriptionPrepass >= 0 ? stepBlock(lines, staleDescriptionPrepass) : '';
+  const staleDescriptionUsesBroker = /CODEX_AUTH_BROKER_SOCKET:/.test(staleDescriptionBlock);
+  if (staleDescriptionUsesBroker) {
+    assert.ok(setupIndex < staleDescriptionPrepass, 'the Codex broker must start before the stale-description pre-pass');
+  } else {
+    assert.ok(setupIndex > argosBulk && setupIndex < argosMopup, 'without an earlier Codex consumer, the broker starts after Argos bulk');
+  }
   assert.match(stepBlock(lines, setupIndex), /broker_idle_ttl_ms:\s*"?(\d+)"?/);
 
   const consumers = lines
     .map((line, index) => /^\s+CODEX_AUTH_BROKER_SOCKET:/.test(line) ? stepBlock(lines, index) : null)
     .filter((block) => block && !block.includes('- name: Cleanup Codex auth broker'));
-  // La corsia titoli 2a.2 (dopo Argos bulk, prima della 2b) riceve il socket
-  // dal lockstep del sito successivo alla PR 12158; l'artifact precedente non
-  // la elenca. Entrambe le forme sono valide, nessun'altra fase lo e'.
+  const firstConsumerIndex = lines.findIndex((line, index) =>
+    /^\s+CODEX_AUTH_BROKER_SOCKET:/.test(line)
+      && !stepBlock(lines, index).includes('- name: Cleanup Codex auth broker'),
+  );
+  assert.ok(firstConsumerIndex >= 0, 'Codex consumer not found');
+  assert.ok(setupIndex < firstConsumerIndex, 'the Codex broker must start before every consumer');
+  // Il pre-pass e la corsia titoli 2a.2 sono consumer opzionali del broker;
+  // tutte le altre fasi che lo ricevono restano esplicite e ordinate.
+  const STALE_DESCRIPTION_PREPASS = 'Phase 2 pre: Repair stale source-copy descriptions (bounded)';
   const TITLE_LANE_2A2 = 'Phase 2a.2: Fix untranslated titles (free cascade, before descriptions)';
   const consumerNames = consumers.map((block) => /- name: "?([^"\n]+)"?/.exec(block)?.[1]);
-  assert.deepEqual(
-    consumerNames.filter((name) => name !== TITLE_LANE_2A2),
-    ['Phase 2b: Translate pending jobs (cascade top-up)', 'Phase 2d: Fix untranslated titles (free cascade)', 'Phase 2e: Fix untranslated descriptions (free cascade)'],
-    'only the 2a.2/2b/2d/2e translation phases may receive the Codex socket',
+  const expectedConsumerNames = [];
+  if (staleDescriptionUsesBroker) expectedConsumerNames.push(STALE_DESCRIPTION_PREPASS);
+  if (consumerNames.includes(TITLE_LANE_2A2)) expectedConsumerNames.push(TITLE_LANE_2A2);
+  expectedConsumerNames.push(
+    'Phase 2b: Translate pending jobs (cascade top-up)',
+    'Phase 2d: Fix untranslated titles (free cascade)',
+    'Phase 2e: Fix untranslated descriptions (free cascade)',
   );
-  assert.ok(
-    consumerNames.indexOf(TITLE_LANE_2A2) <= 0,
-    'the 2a.2 title lane, when it receives the Codex socket, comes before the 2b cascade',
+  assert.deepEqual(
+    consumerNames,
+    expectedConsumerNames,
+    'only the stale-description pre-pass and 2a.2/2b/2d/2e phases may receive the Codex socket, in workflow order',
   );
   const workflowFallbackBudget = /FREE_TRANSLATE_CODEX_MAX_CALLS=(\d+)/.exec(source)?.[1];
   const hasWorkflowCallBudget = /FREE_TRANSLATE_CODEX_MAX_CALLS_REPO:/.test(source)
