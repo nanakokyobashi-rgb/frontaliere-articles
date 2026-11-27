@@ -145,6 +145,14 @@ on:
         required: false
         type: boolean
         default: false
+      pr:
+        description: 'Limita il dispatch a una sola PR (richiede expected_head_sha)'
+        required: false
+        type: string
+      expected_head_sha:
+        description: 'HEAD esatta della PR; un mismatch termina senza mutazioni'
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -270,6 +278,8 @@ jobs:
           REPO: ${{ github.repository }}
           EVENT_NAME: ${{ github.event_name }}
           RUN_ID: ${{ github.run_id }}
+          TARGET_PR: ${{ github.event.inputs.pr }}
+          EXPECTED_HEAD_SHA: ${{ github.event.inputs.expected_head_sha }}
           TRIGGER_PRS: ${{ join(github.event.workflow_run.pull_requests.*.number, ' ') }}
           FULL_SCAN_SLOT_S: '1800'
         run: |
@@ -278,7 +288,14 @@ jobs:
             export GH_TOKEN="$GITHUB_PAT_NANAKO"
           fi
           mode=full
-          if [ "$EVENT_NAME" = "workflow_run" ]; then
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] && { [ -n "${TARGET_PR:-}" ] || [ -n "${EXPECTED_HEAD_SHA:-}" ]; }; then
+            if ! [[ "${TARGET_PR:-}" =~ ^[1-9][0-9]*$ ]] || ! [[ "${EXPECTED_HEAD_SHA:-}" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::error::Target incompleto o non valida; scan non eseguito." >&2
+              exit 1
+            fi
+            mode=targeted
+            echo "Dispatch limitato alla PR target #$TARGET_PR e alla HEAD indicata."
+          elif [ "$EVENT_NAME" = "workflow_run" ]; then
             mode=scoped
             now=$(date -u +%s)
             slot_start=$(( now - now % FULL_SCAN_SLOT_S ))
@@ -351,6 +368,8 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
+          TARGET_PR: ${{ github.event.inputs.pr }}
+          EXPECTED_HEAD_SHA: ${{ github.event.inputs.expected_head_sha }}
           # Unica sorgente del nome del check anche per questo workflow.
           CI_CHECK_NAME: 'tests (node --test)'
           # `full` o `scoped` (step precedente). Vuoto = completo: e' la
@@ -399,7 +418,26 @@ jobs:
           # esattamente il difetto che questo workflow esiste per non avere.
           # Con `--paginate` la risposta arriva come una SEQUENZA di array (uno
           # per pagina): `jq -c '.[]'` la legge come stream, senza `--slurp`.
-          prs=$(gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" 2>/dev/null || echo '[]')
+          if [ "${SCAN_MODE:-full}" = "targeted" ]; then
+            if ! target=$(gh api "repos/$REPO/pulls/$TARGET_PR"); then
+              echo "::error::Lettura della PR target fallita; nessuno scan o mutazione." >&2
+              exit 1
+            fi
+            # shellcheck disable=SC2016 # `$number` e `$sha` sono variabili jq.
+            if ! printf '%s' "$target" | jq -e --argjson number "$TARGET_PR" --arg sha "$EXPECTED_HEAD_SHA" \
+              'type == "object" and .number == $number and .state == "open" and .head.sha == $sha' >/dev/null; then
+              echo "::notice::La PR target e la HEAD non coincidono piu' con la diagnosi; nessuna mutazione."
+              exit 0
+            fi
+            echo "Scan limitato alla PR target #$TARGET_PR sulla HEAD osservata."
+            prs=$(printf '%s\n' "$target" | jq -cs '.')
+          else
+            if ! prs=$(gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" \
+              | jq -s 'if length == 0 or any(.[]; type != "array") then error("risposta PR paginata inattesa") else add end'); then
+              echo "::error::Query PR aperte fallita o non valida: scan non eseguito." >&2
+              exit 1
+            fi
+          fi
           # Scope ridotto (`Decide scan scope`): le stesse regole, applicate
           # alle sole PR del run di `tests` che ha fatto nascere questo run. Il
           # filtro agisce su ogni pagina e conserva la sequenza di array.

@@ -41,6 +41,9 @@ on:
       head_ref:
         description: 'Branch della PR, usato per serializzare il redispatch con workflow_run'
         required: true
+      expected_head_sha:
+        description: 'HEAD esatta osservata dal dispatcher (il mismatch termina senza azione)'
+        required: false
 
 # Serializzato per BRANCH, non per numero PR: nel contesto `workflow_run` il
 # numero non e' affidabile (`pull_requests` e' spesso vuoto), mentre
@@ -148,6 +151,7 @@ jobs:
           REPO: ${{ github.repository }}
           EVENT_NAME: ${{ github.event_name }}
           DISPATCH_PR: ${{ github.event.inputs.pr }}
+          DISPATCH_EXPECTED_HEAD_SHA: ${{ github.event.inputs.expected_head_sha }}
           RUN_ID: ${{ github.event.workflow_run.id }}
           RUN_SHA: ${{ github.event.workflow_run.head_sha }}
           RUN_BRANCH: ${{ github.event.workflow_run.head_branch }}
@@ -164,6 +168,15 @@ jobs:
             if ! [[ "$HEAD_SHA" =~ ^[0-9a-f]{40}$ ]]; then
               echo "::error::HEAD di #$PR illeggibile: senza SHA la ricerca per head_sha restituirebbe le run di qualunque PR."
               exit 1
+            fi
+            if [ -n "${DISPATCH_EXPECTED_HEAD_SHA:-}" ]; then
+              if ! [[ "$DISPATCH_EXPECTED_HEAD_SHA" =~ ^[a-f0-9]{40}$ ]]; then
+                echo "::error::SHA target non valida; stop fail-closed."
+                exit 1
+              fi
+              if [ "$HEAD_SHA" != "$DISPATCH_EXPECTED_HEAD_SHA" ]; then
+                skip "HEAD della PR cambiata dopo la diagnosi; target obsoleto, nessuna azione."
+              fi
             fi
             # La run rossa si cerca per SHA, non fra le ultime 20 run del repo:
             # qui 20 run coprono circa 50 minuti (misurato: 05:26Z → 06:17Z del
@@ -223,6 +236,9 @@ jobs:
           author=$(printf '%s' "$pr" | jq -r '.user.login')
           head_ref=$(printf '%s' "$pr" | jq -r '.head.ref')
           head_sha=$(printf '%s' "$pr" | jq -r '.head.sha')
+          if [ -n "${DISPATCH_EXPECTED_HEAD_SHA:-}" ] && [ "$head_sha" != "$DISPATCH_EXPECTED_HEAD_SHA" ]; then
+            skip "HEAD della PR cambiata durante il preflight; target obsoleto, nessuna azione."
+          fi
           has_autofix=$(printf '%s' "$pr" | jq -r 'if any(.labels[]?.name; . == "agent:autofix") then "true" else "false" end')
 
           if [ "$state" != "open" ]; then

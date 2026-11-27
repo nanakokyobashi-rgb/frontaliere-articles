@@ -81,6 +81,14 @@ test('il preflight ha sul disco l helper che decide il prefilter', () => {
   );
 });
 
+test('il dispatch manuale resta legato alla HEAD verificata dal dispatcher', () => {
+  const block = preflightBlock();
+  assert.match(source, /expected_head_sha:[\s\S]*required: false/u);
+  assert.match(block, /DISPATCH_EXPECTED_HEAD_SHA: \$\{\{ github\.event\.inputs\.expected_head_sha \}\}/u);
+  assert.match(block, /HEAD_SHA" != "\$DISPATCH_EXPECTED_HEAD_SHA"[\s\S]*skip[\s\S]*target obsoleto/u);
+  assert.match(block, /head_sha" != "\$DISPATCH_EXPECTED_HEAD_SHA"[\s\S]*target obsoleto/u);
+});
+
 test('redcheck filtra il rosso di sola review prima di spendere Claude', () => {
   const block = preflightBlock();
 
