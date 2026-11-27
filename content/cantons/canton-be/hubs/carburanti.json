@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "carburanti",
-  "updatedAt": "2026-11-26T13:02:36.485Z",
-  "contentHash": "2055c6fe23f880d5cca00900adfa6cc8d844328a70d6afa7c5bde415251acb61",
+  "updatedAt": "2026-11-27T18:54:22.160Z",
+  "contentHash": "337bde04b7b3d38b4ba1ad60eb8b33df0b829bb8334991596e3c1d26d3fa4190",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-25T17:35:23.405Z",
+      "updatedAt": "2026-11-26T17:17:35.133Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-26T17:17:35.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Governo Berna prende atto petizione sulla fisioterapia",
+          "url": "/articoli-berna/risposta-petizione-fisioterapia-berna/",
+          "excerpt": "Il Governo del Canton Berna ha preso atto della petizione «Per una fisioterapia garantita e vicina al luogo di domicilio nel Canton Berna», considerandone le richieste nelle procedure tariffarie in corso.",
+          "date": "2026-11-27T18:50:20.097Z"
+        },
         {
           "title": "Priorità al traffico economico su cinque nuovi tratti a Berna",
           "url": "/articoli-berna/priorita-traffico-cinque-tratti/",
@@ -82,12 +88,6 @@
           "url": "/articoli-berna/revisione-legge-personale-berna/",
           "excerpt": "Il Governo cantonale apre la consultazione sulla revisione parziale della legge sul personale: il termine è fissato al 12 febbraio 2027.",
           "date": "2026-11-06T23:39:10.303Z"
-        },
-        {
-          "title": "Revisione legge edilizia Berna per impianti solari ed eolici",
-          "url": "/articoli-berna/procedure-impianti-solari-eolici/",
-          "excerpt": "Dal 1° aprile 2026 è in vigore l'obbligo federale per impianti solari ed eolici di interesse nazionale; Berna adegua la legge edilizia.",
-          "date": "2026-10-30T22:00:04.865Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T18:54:22.160Z"
     },
     "en": {
       "canton": "BE",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-26T17:17:35.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Bern Government takes note of physiotherapy petition",
+          "url": "/en/bern-articles/bern-physiotherapy-petition-response/",
+          "excerpt": "The Government of the Canton of Bern has taken note of the petition “For guaranteed physiotherapy close to home in the Canton of Bern,” considering its requests in the ongoing tariff procedures.",
+          "date": "2026-11-27T18:50:20.097Z"
+        },
         {
           "title": "Priority for commercial traffic on five new sections in Bern",
           "url": "/en/bern-articles/traffic-priority-five-routes/",
@@ -169,12 +175,6 @@
           "url": "/en/bern-articles/bern-personnel-law-consultation/",
           "excerpt": "The cantonal government is opening the consultation on the partial revision of the personnel law: the deadline is set for February 12, 2027.",
           "date": "2026-11-06T23:39:10.303Z"
-        },
-        {
-          "title": "Revision of Bern building law for solar and wind installations",
-          "url": "/en/bern-articles/solar-wind-plant-procedures/",
-          "excerpt": "Since April 1, 2026, the federal requirement for solar and wind installations of national interest has been in force; Bern is amending the building law.",
-          "date": "2026-10-30T22:00:04.865Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T18:54:22.160Z"
     },
     "de": {
       "canton": "BE",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-26T17:17:35.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Regierung Bern nimmt Physiotherapie-Petition zur Kenntnis",
+          "url": "/de/bern-artikel/antwort-petition-physiotherapie-bern/",
+          "excerpt": "Die Regierung des Kantons Bern hat die Petition «Für eine gesicherte und wohnortnahe Physiotherapie im Kanton Bern» zur Kenntnis genommen und berücksichtigt deren Anliegen in den laufenden Tarifverfahren.",
+          "date": "2026-11-27T18:50:20.097Z"
+        },
         {
           "title": "Priorität für den Wirtschaftsverkehr auf fünf neuen Strecken in Bern",
           "url": "/de/bern-artikel/prioritaet-verkehr-fuenf-strecken/",
@@ -256,12 +262,6 @@
           "url": "/de/bern-artikel/bern-personalgesetz-vernehmlassung/",
           "excerpt": "Die Kantonsregierung eröffnet die Vernehmlassung zur Teilrevision des Personalgesetzes: Die Frist ist auf den 12. Februar 2027 festgelegt.",
           "date": "2026-11-06T23:39:10.303Z"
-        },
-        {
-          "title": "Revision des Berner Baugesetzes für Solar- und Windenergieanlagen",
-          "url": "/de/bern-artikel/verfahren-solare-windanlagen/",
-          "excerpt": "Am 1. April 2026 ist der sogenannte Beschleunigungserlass des Bundes in Kraft getreten, der die Kantone verpflichtet, die Verfahren für den Bau, den Ausbau und die Erneuerung von Solar- und Windenergieanlagen von…",
-          "date": "2026-10-30T22:00:04.865Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T18:54:22.160Z"
     },
     "fr": {
       "canton": "BE",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-26T17:17:35.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Le gouvernement bernois prend acte de la pétition sur la physiothérapie",
+          "url": "/fr/articles-berne/reponse-petition-physiotherapie-berne/",
+          "excerpt": "Le gouvernement du canton de Berne a pris acte de la pétition « Pour une physiothérapie garantie et proche du lieu de domicile dans le canton de Berne », en tenant compte de ses demandes dans les procédures tarifaires…",
+          "date": "2026-11-27T18:50:20.097Z"
+        },
         {
           "title": "Priorité au trafic économique sur cinq nouveaux tronçons à Berne",
           "url": "/fr/articles-berne/priorite-trafic-cinq-troncons/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-berne/berne-loi-personnel-consultation/",
           "excerpt": "Le Gouvernement cantonal ouvre la consultation sur la révision partielle de la loi sur le personnel : le délai est fixé au 12 février 2027.",
           "date": "2026-11-06T23:39:10.303Z"
-        },
-        {
-          "title": "Révision de la loi bernoise sur le solaire et l'éolien",
-          "url": "/fr/articles-berne/procedures-installations-solaires/",
-          "excerpt": "Depuis le 1er avril 2026, l'obligation fédérale concernant les installations solaires et éoliennes d'intérêt national est en vigueur ; Berne adapte la loi sur les constructions.",
-          "date": "2026-10-30T22:00:04.865Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T18:54:22.160Z"
     }
   }
 }
