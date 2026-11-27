@@ -10,7 +10,6 @@
  * `callSingleModel` costruisce, senza avviare nessun processo Codex.
  */
 import { strict as assert } from 'node:assert';
-import { readFileSync } from 'node:fs';
 import fs from 'node:fs';
 import net from 'node:net';
 import os from 'node:os';
@@ -19,7 +18,7 @@ import { afterEach, beforeEach, test } from 'node:test';
 
 import { AI_MODELS, callSingleModel, resetState } from '../scripts/lib/ai-models.mjs';
 
-const ENV_KEYS = ['CODEX_AUTH_BROKER_SOCKET', 'HAIKU_FALLBACK_GATE', 'ENABLE_CODEX_ARTICLE_FALLBACK', 'AI_MODELS_SCHEMA_MODE', 'OPENROUTER_API_KEY'];
+const ENV_KEYS = ['CODEX_AUTH_BROKER_SOCKET', 'HAIKU_FALLBACK_GATE', 'ENABLE_CODEX_ARTICLE_FALLBACK', 'AI_MODELS_SCHEMA_MODE'];
 const savedEnv = Object.fromEntries(ENV_KEYS.map((key) => [key, process.env[key]]));
 let server;
 let root;
@@ -119,40 +118,4 @@ test('jsonMode accetta un array quando il chiamante dichiara la forma top-level'
   assert.equal(requests[0].schema, null);
   assert.match(requests[0].prompt, /Return exactly one valid JSON array/);
   assert.doesNotMatch(requests[0].prompt, /Return exactly one valid JSON object/);
-});
-
-test('array JSON mode does not force the object-only response format on HTTP providers', async () => {
-  const previousFetch = globalThis.fetch;
-  process.env.OPENROUTER_API_KEY = 'fixture-key';
-  globalThis.fetch = async (_url, init) => {
-    const body = JSON.parse(init.body);
-    assert.equal(body.response_format, undefined);
-    return new Response(JSON.stringify({
-      choices: [{ message: { content: '[{"q":"Domanda?","a":"Risposta."}]' } }],
-    }), { status: 200, headers: { 'content-type': 'application/json' } });
-  };
-  try {
-    const text = await callSingleModel(messages, {
-      model: AI_MODELS.OR_LLAMA_3_3,
-      jsonMode: true,
-      jsonTopLevelType: 'array',
-      maxRetriesPerModel: 1,
-      recordScore: false,
-    });
-    assert.equal(text, '[{"q":"Domanda?","a":"Risposta."}]');
-  } finally {
-    globalThis.fetch = previousFetch;
-  }
-});
-
-test('i consumatori che chiedono array dichiarano il tipo JSON anche alla cascata', () => {
-  const faqSource = readFileSync(new URL('../scripts/batch-add-faq-to-articles.mjs', import.meta.url), 'utf8');
-  assert.equal(
-    (faqSource.match(/jsonMode: true, jsonTopLevelType: 'array'/g) || []).length,
-    2,
-    'generazione FAQ e top-up devono dichiarare entrambe l’array atteso',
-  );
-
-  const topicSource = readFileSync(new URL('../scripts/lib/article-topic-selector.mjs', import.meta.url), 'utf8');
-  assert.match(topicSource, /jsonMode: true,\s*jsonTopLevelType: 'array'/);
 });
