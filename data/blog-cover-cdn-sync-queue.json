@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-assistenza-sociale-svitto-criterio-bisogno.webp",
+      "sha256": "211b06328b98656a6a73b151ab39a8c6697cb7996ab21c14222851da7277f1f3"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-assistenza-sociale-svitto-criterio-bisogno-480w.webp",
+      "sha256": "efdde9097667094b3140a9ee6edc801b98efed879499d6d4d445143e7e5c00ec"
+    }
+  ]
 }
