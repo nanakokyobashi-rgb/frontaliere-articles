@@ -1050,6 +1050,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-rottura-condotta-route-neuve': {
+    title: 'Rottura condotta acqua: traffico alternato su route Neuve a Friburgo',
+    description: 'Rottura condotta d\'acqua mercoledì sera in parte alta della route Neuve a Friburgo. Traffico alternato giovedì; circa dieci immobili senza acqua.',
+    keywords: 'frontalieri, ticino, svizzera, italia, rottura, condotta, acqua, traffico',
+    ogTitle: 'Rottura condotta acqua route Neuve Friburgo',
+    ogDescription: 'Mercoledì sera si è rotta una condotta d\'acqua a Friburgo, danneggiando la strada. Giovedì la circolazione su route Neuve è stata alternata; una decina di immobili è rimasta senza acqua.',
+    canonicalPath: '/articoli-friburgo/rottura-condotta-route-neuve/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Rottura condotta acqua: traffico alternato su route Neuve a Friburgo",
+      "description": "Rottura condotta d'acqua mercoledì sera in parte alta della route Neuve a Friburgo. Traffico alternato giovedì; circa dieci immobili senza acqua.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-rottura-condotta-route-neuve.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-27T07:50:19+00:00",
+      "dateModified": "2026-11-27T07:50:19+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-friburgo/rottura-condotta-route-neuve/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

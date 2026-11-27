@@ -84,6 +84,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.bakery-bakery-apre-friburgo.title': 'Bakery Bakery eröffnet die erste Filiale in der Romandie in Freiburg',
     'blog.article.bakery-bakery-apre-friburgo.excerpt': 'Die vegane Bäckereikette, die in Bern gegründet wurde, eröffnet in Freiburg ihre erste Filiale in der Romandie; 11 Geschäfte haben jenseits der Saane bereits eröffnet.',
     'blog.article.bakery-bakery-apre-friburgo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.rottura-condotta-route-neuve.title': 'Wasserrohrbruch: Wechselverkehr auf der route Neuve in Freiburg',
+    'blog.article.rottura-condotta-route-neuve.excerpt': 'Der Bruch einer Wasserleitung am Mittwochabend beschädigte die Straße im oberen Teil der route Neuve; etwa zehn Gebäude waren ohne Wasser geblieben.',
+    'blog.article.rottura-condotta-route-neuve.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonFrDe;

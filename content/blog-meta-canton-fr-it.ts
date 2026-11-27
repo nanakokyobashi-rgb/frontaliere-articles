@@ -84,6 +84,9 @@ const blogMetaCantonFrIt: Record<string, string> = {
     'blog.article.bakery-bakery-apre-friburgo.title': 'Bakery Bakery apre la prima filiale romanda a Friburgo',
     'blog.article.bakery-bakery-apre-friburgo.excerpt': 'La catena di boulangerie vegana nata a Berna apre a Friburgo la sua prima filiale romanda; 11 negozi sono già aperti oltre Sarine.',
     'blog.article.bakery-bakery-apre-friburgo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.rottura-condotta-route-neuve.title': 'Rottura condotta acqua: traffico alternato su route Neuve a Friburgo',
+    'blog.article.rottura-condotta-route-neuve.excerpt': 'La rottura di una condotta d\'acqua mercoledì sera ha danneggiato la strada in parte alta della route Neuve; una decina di immobili è rimasta senza acqua.',
+    'blog.article.rottura-condotta-route-neuve.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonFrIt;

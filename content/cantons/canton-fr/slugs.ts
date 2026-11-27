@@ -30,6 +30,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'friburgo-destra-tre-seggi': { it: 'friburgo-destra-tre-seggi', en: 'fribourg-right-three-seats', de: 'freiburg-rechte-drei-sitze', fr: 'fribourg-droite-trois-sieges' },
  'gruyere-studio-mobilita-profondo': { it: 'gruyere-studio-mobilita-profondo', en: 'gruyere-mobility-study-deep', de: 'gruyere-mobilitatsstudie-tief', fr: 'gruyere-etude-mobilite-approfondie' },
  'bakery-bakery-apre-friburgo': { it: 'bakery-bakery-apre-friburgo', en: 'bakery-bakery-opens-fribourg', de: 'bakery-bakery-apert-friburg', fr: 'bakery-bakery-ouvre-fribourg' },
+ 'rottura-condotta-route-neuve': { it: 'rottura-condotta-route-neuve', en: 'pipe-break-route-neuve-fribourg', de: 'rohrbruch-route-neuve-freiburg', fr: 'rupture-conduite-route-neuve' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
