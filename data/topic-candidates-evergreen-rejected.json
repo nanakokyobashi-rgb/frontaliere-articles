@@ -7138,10 +7138,10 @@
       "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-24T22:05:43.475Z",
-      "lastStrikeAt": "2026-11-25T22:22:09.714Z",
-      "expiresAt": "2026-12-25T22:22:09.714Z"
+      "lastStrikeAt": "2026-11-27T03:15:14.876Z",
+      "expiresAt": "2026-12-27T03:15:14.876Z"
     },
     {
       "keyword": "vivere a Pusiano e lavorare in Ticino da frontaliere",
