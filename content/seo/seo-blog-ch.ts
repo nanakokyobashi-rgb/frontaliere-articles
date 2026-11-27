@@ -110714,6 +110714,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-voto-federale-soglie-svitto': {
+    title: 'Quattro date di voto federale e soglie per iniziative',
+    description: 'La fonte indica quattro date di voto federale all\'anno. Per un\'iniziativa popolare: 100\'000 firme in 18 mesi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, quattro, date, voto, federale',
+    ogTitle: 'Voto federale svizzero: date e soglie',
+    ogDescription: 'La fonte indica quattro date di voto federale all\'anno. Per un\'iniziativa popolare: 100\'000 firme in 18 mesi.',
+    canonicalPath: '/articoli-svizzera/voto-federale-soglie-svitto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Quattro date di voto federale e soglie per iniziative",
+      "description": "La fonte indica quattro date di voto federale all'anno. Per un'iniziativa popolare: 100'000 firme in 18 mesi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-voto-federale-soglie-svitto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-27T23:01:26+00:00",
+      "dateModified": "2026-11-27T23:01:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/voto-federale-soglie-svitto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

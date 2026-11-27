@@ -8756,6 +8756,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.assistenza-sociale-svitto-criterio-bisogno.title': 'Sozialhilfe Schwyz: Verwaltung und Bedürftigkeitskriterium',
     'blog.article.assistenza-sociale-svitto-criterio-bisogno.excerpt': 'Die Sozialhilfe wird in der Schweiz in der Regel von den Kantonen und Gemeinden nach dem Bedürftigkeitsprinzip verwaltet.',
     'blog.article.assistenza-sociale-svitto-criterio-bisogno.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.voto-federale-soglie-svitto.title': 'Vier eidgenössische Abstimmungstermine und Schwellenwerte für Initiativen',
+    'blog.article.voto-federale-soglie-svitto.excerpt': 'Die Quelle nennt vier eidgenössische Abstimmungstermine pro Jahr.',
+    'blog.article.voto-federale-soglie-svitto.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

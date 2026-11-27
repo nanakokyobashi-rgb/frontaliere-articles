@@ -8756,6 +8756,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.assistenza-sociale-svitto-criterio-bisogno.title': 'Assistenza sociale Svitto: amministrazione e criterio di bisogno',
     'blog.article.assistenza-sociale-svitto-criterio-bisogno.excerpt': 'L\'assistenza sociale è generalmente amministrata dai Cantoni e dai comuni in Svizzera, basandosi sul criterio del bisogno.',
     'blog.article.assistenza-sociale-svitto-criterio-bisogno.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.voto-federale-soglie-svitto.title': 'Quattro date di voto federale e soglie per iniziative',
+    'blog.article.voto-federale-soglie-svitto.excerpt': 'La fonte indica quattro date di voto federale all\'anno. Per un\'iniziativa popolare: 100\'000 firme in 18 mesi.',
+    'blog.article.voto-federale-soglie-svitto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;
