@@ -13762,6 +13762,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.frontalieri-smart-working-limite-fiscale.title': 'Grenzgänger im Homeoffice: steuerliche Grenze aus Italien',
     'blog.article.frontalieri-smart-working-limite-fiscale.excerpt': 'Die steuerliche Schwelle für Telearbeit aus Italien beträgt 25%.',
     'blog.article.frontalieri-smart-working-limite-fiscale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.protocollo-fiscale-lavoro-remoto.title': 'Italien und die Schweiz unterzeichnen das Protokoll zur Telearbeit',
+    'blog.article.protocollo-fiscale-lavoro-remoto.excerpt': 'Das Protokoll wurde am 6. Juni 2024 unterzeichnet. Telearbeit von zu Hause aus bis zu 25 % ab dem 1. Januar 2024.',
+    'blog.article.protocollo-fiscale-lavoro-remoto.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;

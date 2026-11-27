@@ -13764,6 +13764,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.frontalieri-smart-working-limite-fiscale.title': 'Frontalieri smart working: limite fiscale dall\'Italia',
     'blog.article.frontalieri-smart-working-limite-fiscale.excerpt': 'La soglia fiscale del telelavoro dall\'Italia è 25%. Il protocollo è entrato in vigore il 9 febbraio 2026.',
     'blog.article.frontalieri-smart-working-limite-fiscale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.protocollo-fiscale-lavoro-remoto.title': 'Italia e Svizzera firmano il protocollo sul telelavoro',
+    'blog.article.protocollo-fiscale-lavoro-remoto.excerpt': 'Il Protocollo è stato firmato il 6 giugno 2024. Telelavoro da casa fino al 25% dal 1° gennaio 2024.',
+    'blog.article.protocollo-fiscale-lavoro-remoto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;

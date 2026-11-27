@@ -115278,6 +115278,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-protocollo-fiscale-lavoro-remoto': {
+    title: 'Italia e Svizzera firmano il protocollo sul telelavoro',
+    description: 'Il Protocollo è stato firmato il 6 giugno 2024. Telelavoro da casa fino al 25% dal 1° gennaio 2024.',
+    keywords: 'frontalieri, ticino, svizzera, italia, firmano, protocollo, telelavoro, stato',
+    ogTitle: 'Italia e Svizzera firmano il protocollo sul telelavoro',
+    ogDescription: 'Il Protocollo è stato firmato il 6 giugno 2024. Telelavoro da casa fino al 25% dal 1° gennaio 2024.',
+    canonicalPath: '/articoli-frontaliere/protocollo-fiscale-lavoro-remoto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Italia e Svizzera firmano il protocollo sul telelavoro",
+      "description": "Il Protocollo è stato firmato il 6 giugno 2024. Telelavoro da casa fino al 25% dal 1° gennaio 2024.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-protocollo-fiscale-lavoro-remoto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-27T07:45:34+00:00",
+      "dateModified": "2026-11-27T07:45:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/protocollo-fiscale-lavoro-remoto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

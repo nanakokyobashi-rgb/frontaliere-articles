@@ -13763,6 +13763,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.frontalieri-smart-working-limite-fiscale.title': 'Cross-border commuters working remotely: tax limit from Italy',
     'blog.article.frontalieri-smart-working-limite-fiscale.excerpt': 'The tax threshold for teleworking from Italy is 25%. The protocol entered into force on February 9, 2026.',
     'blog.article.frontalieri-smart-working-limite-fiscale.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.protocollo-fiscale-lavoro-remoto.title': 'Italy and Switzerland sign the protocol on teleworking',
+    'blog.article.protocollo-fiscale-lavoro-remoto.excerpt': 'The Protocol was signed on June 6, 2024. Teleworking from home up to 25% since January 1, 2024.',
+    'blog.article.protocollo-fiscale-lavoro-remoto.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;

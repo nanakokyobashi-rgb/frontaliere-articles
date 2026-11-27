@@ -48299,6 +48299,16 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'protocollo-fiscale-lavoro-remoto',
+ category: 'fiscale',
+ date: '2026-11-27T07:45:32.925Z',
+ image: '/images/blog/article-protocollo-fiscale-lavoro-remoto.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
