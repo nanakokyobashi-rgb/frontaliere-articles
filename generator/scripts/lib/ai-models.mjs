@@ -2142,6 +2142,10 @@ const DEFAULT_OPTS = {
   temperature: 0.2,
   maxTokens: 4096,
   jsonMode: false,
+  // JSON mode defaults to an object. Callers that consume a top-level array
+  // must say so explicitly, so both the Codex prompt/guard and HTTP providers
+  // agree with the consumer's shape.
+  jsonTopLevelType: 'object',
   /**
    * Let a caller that owns a repair-and-shape-validation step receive the raw
    * Codex text. The default remains fail-closed JSON validation for every
@@ -2154,8 +2158,9 @@ const DEFAULT_OPTS = {
    * API (OpenAI: `response_format.json_schema` strict; Gemini:
    * `generationConfig.responseSchema`) so required fields can no longer be
    * silently omitted. Providers without schema-mode support gracefully fall
-   * back to plain `jsonMode` (json_object) — the per-call retry loop in
-   * create-article.mjs continues to act as a safety net for those.
+   * back to plain JSON mode. Object responses use `json_object`; callers that
+   * declare an array root leave the response format unset so arrays remain
+   * valid. The per-call retry loop in create-article.mjs remains a safety net.
    *
    * Shape: `{ name: string, schema: object }` where `schema` is a standard
    * JSON-Schema fragment (subset compatible with OpenAI strict mode: object
@@ -3120,6 +3125,7 @@ function _responseCacheKey(messages, o) {
     t: o.temperature,
     mt: o.maxTokens,
     j: o.jsonMode,
+    jt: o.jsonTopLevelType || 'object',
     s: o.jsonSchema || null,
     // A raw repairable response must never be served to a strict JSON caller
     // (or vice versa) through the opt-in response cache.
@@ -7278,9 +7284,9 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
 
   // Prefer strict JSON-Schema mode when the caller provided a schema AND this
   // provider supports it — this is what stops the model from silently dropping
-  // required fields like `body2`/`body3`. Falls back to `json_object` mode for
-  // providers that don't support strict schema (the per-call retry loop in
-  // create-article.mjs continues to cover that case).
+  // required fields like `body2`/`body3`. Object responses fall back to
+  // `json_object` mode for providers that don't support strict schema. Array
+  // responses rely on their explicit prompt instead of an object-only mode.
   //
   // AI_MODELS_SCHEMA_MODE=off disables schema-mode entirely (ops kill-switch);
   // AI_MODELS_SCHEMA_MODE=force opts in every OpenAI-compat provider (probe
@@ -7295,7 +7301,7 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
         schema: opts.jsonSchema.schema,
       },
     };
-  } else if (opts.jsonMode || opts.jsonSchema) {
+  } else if ((opts.jsonMode || opts.jsonSchema) && opts.jsonTopLevelType !== 'array') {
     responseFormat = { type: 'json_object' };
   }
 
@@ -8246,7 +8252,7 @@ function _requestCodexExecution({ prompt, timeoutMs, schema, deadlineMs }) {
   });
 }
 
-function _codexPrompt(messages, { jsonOnly = false } = {}) {
+function _codexPrompt(messages, { jsonOnly = false, jsonTopLevelType = 'object' } = {}) {
   const system = messages.filter((m) => m.role === 'system').map((m) => m.content).join('\n\n');
   const user = messages.filter((m) => m.role !== 'system').map((m) => m.content).join('\n\n');
   const prompt = [
@@ -8254,12 +8260,16 @@ function _codexPrompt(messages, { jsonOnly = false } = {}) {
     user,
   ].filter(Boolean).join('\n\n');
   return jsonOnly
-    ? `${prompt}\n\nReturn exactly one valid JSON object and no Markdown fences or commentary.`
+    ? `${prompt}\n\nReturn exactly one valid JSON ${jsonTopLevelType} and no Markdown fences or commentary.`
     : prompt;
 }
 
 function _codexFallbackJsonRequest(opts = {}) {
   const wantsJson = !!opts.jsonMode || !!opts.jsonSchema;
+  const jsonTopLevelType = opts.jsonTopLevelType ?? 'object';
+  if (wantsJson && !['object', 'array'].includes(jsonTopLevelType)) {
+    throw new TypeError(`Unsupported JSON top-level type: ${String(jsonTopLevelType)}`);
+  }
   const schemaMode = getSchemaMode();
   const requestedSchema = opts.jsonSchema?.schema || opts.jsonSchema;
   // Only a caller's explicit schema reaches `--output-schema`. Codex hands it to
@@ -8268,18 +8278,19 @@ function _codexFallbackJsonRequest(opts = {}) {
   // every property in `required`, see buildArticleJsonSchema in
   // create-article.mjs): the schema-less headline selection got
   // `invalid_request_error` on every Codex call (run 36020533094). A jsonMode
-  // call without a schema sends none; the prompt asks for one JSON object and
-  // _validateCodexCliResult enforces it here.
+  // call without a schema sends none; the prompt and _validateCodexCliResult
+  // enforce the requested JSON root type.
   const schemaApplied = wantsJson && schemaMode !== 'off'
     && !!requestedSchema && typeof requestedSchema === 'object';
   return {
     wantsJson,
+    jsonTopLevelType,
     schemaApplied,
     schema: schemaApplied ? requestedSchema : null,
   };
 }
 
-function _validateCodexCliResult(result, { wantsJson, schemaApplied, deferJsonValidation = false }) {
+function _validateCodexCliResult(result, { wantsJson, jsonTopLevelType = 'object', schemaApplied, deferJsonValidation = false }) {
   if (!wantsJson || deferJsonValidation) return result;
   let parsed;
   try {
@@ -8287,11 +8298,15 @@ function _validateCodexCliResult(result, { wantsJson, schemaApplied, deferJsonVa
   } catch {
     throw new Error('Codex CLI returned invalid JSON for a JSON-mode request');
   }
-  // Without a schema sent (kill-switch off, or a schema-less jsonMode call)
-  // there is no provider-side shape guarantee, but jsonMode still promises a
-  // JSON object to its caller.
-  if (!schemaApplied && (!parsed || typeof parsed !== 'object' || Array.isArray(parsed))) {
-    throw new Error('Codex CLI returned JSON that is not an object');
+  // Without a schema sent (kill-switch off, or a schema-less jsonMode call),
+  // jsonMode still enforces the root shape declared by the caller.
+  if (!schemaApplied) {
+    const matchesRootType = jsonTopLevelType === 'array'
+      ? Array.isArray(parsed)
+      : !!parsed && typeof parsed === 'object' && !Array.isArray(parsed);
+    if (!matchesRootType) {
+      throw new Error(`Codex CLI returned JSON that is not an ${jsonTopLevelType}`);
+    }
   }
   return result;
 }
@@ -8305,7 +8320,10 @@ async function _callCodexCli(messages, opts = {}) {
   const timeoutMs = _codexFallbackTimeoutMs(opts);
   const jsonRequest = _codexFallbackJsonRequest(opts);
   const result = await _requestCodexExecution({
-    prompt: _codexPrompt(messages, { jsonOnly: jsonRequest.wantsJson }),
+    prompt: _codexPrompt(messages, {
+      jsonOnly: jsonRequest.wantsJson,
+      jsonTopLevelType: jsonRequest.jsonTopLevelType,
+    }),
     timeoutMs,
     schema: jsonRequest.schema,
     deadlineMs: _finiteDeadlineMs(opts),
@@ -9394,6 +9412,7 @@ async function _callModelWithCodexTransportRetry(model, messages, opts) {
  * @param {number} [opts.temperature=0.2]
  * @param {number} [opts.maxTokens=4096]
  * @param {boolean} [opts.jsonMode=false]
+ * @param {'object'|'array'} [opts.jsonTopLevelType='object'] — expected JSON root
  * @param {number} [opts.timeout=30000]
  * @param {number} [opts.maxRetriesPerModel=5]
  * @param {number} [opts.backoffMs=2500]
@@ -9490,6 +9509,7 @@ export async function callSingleModel(messages, opts = {}) {
  *   chain (after sort and preference), e.g. the model whose HTTP-200 answer the
  *   caller just rejected. Ignored under AI_MODELS_FORCE_CHAIN and when it would
  *   leave the chain empty; disables the response cache for the call.
+ * @param {'object'|'array'} [opts.jsonTopLevelType='object'] — expected JSON root
  * @param {boolean} [opts.retryCodexTransport=false] — opt-in retry for Codex broker transport flaps
  * @param {number} [opts.codexTransportRetries=2] — maximum retries when the opt-in is enabled
  * @param {(deadlineMs?: number) => boolean} [opts.onCodexTransportRetry] — return false to refuse a physical retry

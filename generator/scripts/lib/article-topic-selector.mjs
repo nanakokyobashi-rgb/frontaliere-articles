@@ -631,6 +631,7 @@ async function classifyChunk(list, callLLM, opts = {}) {
       // because batches of 350+ headlines blew through the 1024-token cap.
       maxTokens: Math.min(16384, 256 + list.length * 8),
       jsonMode: true,
+      jsonTopLevelType: 'array',
       ...(opts.model ? { model: opts.model } : {}),
     });
   } catch {

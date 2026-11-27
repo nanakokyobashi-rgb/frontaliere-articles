@@ -1014,7 +1014,7 @@ async function _generateFaqITAttempt(bodyText, maxTokens) {
 
   const raw = await callFaqModel(
     [{ role: 'user', content: prompt }],
-    { temperature: 0.5, maxTokens, jsonMode: true },
+    { temperature: 0.5, maxTokens, jsonMode: true, jsonTopLevelType: 'array' },
   );
 
   const repaired = repairJsonArray(raw);
@@ -1089,7 +1089,7 @@ async function _generateTopUpFaqITAttempt(bodyText, existingFaq, maxTokens) {
 
   const raw = await callFaqModel(
     [{ role: 'user', content: prompt }],
-    { temperature: 0.5, maxTokens, jsonMode: true },
+    { temperature: 0.5, maxTokens, jsonMode: true, jsonTopLevelType: 'array' },
   );
 
   const repaired = repairJsonArray(raw);
