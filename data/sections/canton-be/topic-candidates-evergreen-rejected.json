@@ -4,13 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/708298/der-stau-in-nidau-bremst-auch-die-bieler-busse-und-das-postauto": {
+    "canton-be::https://www.lejdj.ch/articles/a-bienne-le-cafe-bar-cecil-et-le-palace-sont-fermes-106655": {
       "section": "canton-be",
-      "ts": 1795436321581
-    },
-    "canton-be::https://ajour.ch/story/708485/sbb-schieben-dem-schwarzfahren-einen-riegel-mit-neuer-technik": {
-      "section": "canton-be",
-      "ts": 1795436322927
+      "ts": 1795740369828
     }
   }
 }
