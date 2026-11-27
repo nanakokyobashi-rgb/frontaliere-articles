@@ -102,6 +102,9 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.lausanne-luci-foranee.title': 'Lausanne: lights off from 1 to 5 starting December 2026',
     'blog.article.lausanne-luci-foranee.excerpt': 'A one-year trial and collection of feedback in the spring. Switch-off from 1 to 5 starting in December 2026.',
     'blog.article.lausanne-luci-foranee.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.ehnv-riorganizzazione-chiusura-chamblon.title': 'eHnv completes reorganization, closes Chamblon on October 29, 2026',
+    'blog.article.ehnv-riorganizzazione-chiusura-chamblon.excerpt': 'eHnv goes from four sites to three. 116 beds were transferred between hospital sites.',
+    'blog.article.ehnv-riorganizzazione-chiusura-chamblon.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVdEn;

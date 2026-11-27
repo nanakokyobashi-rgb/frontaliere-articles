@@ -4,13 +4,18 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T14:54:45.873Z",
-  "contentHash": "f33b0e512fade81e801aae0331f0e74c551bb25e07f270f0e9dfd03e3793c6fb",
+  "updatedAt": "2026-11-27T18:19:07.194Z",
+  "contentHash": "e1f49a111a0eb336890c9618a0bffed4bcbf4b61f7170436a87608ce87fb1deb",
   "blocks": [
     {
       "id": "attese-valichi",
       "updatedAt": "2026-11-26T23:59:59.000Z",
       "keyFacts": 1
+    },
+    {
+      "id": "chiusure-cantieri",
+      "updatedAt": "2026-11-27T09:11:52.310Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -59,6 +64,20 @@
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
           "updatedAt": "2026-11-26T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Chiusure, cantieri e disagi",
+          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
+          "items": [
+            {
+              "label": "Revocato: A16 Boncourt -> Delémont tra Svincolo autostradale St-Ursanne E Svincolo autostradale Glovelier Situazione: tunnel bloccato Causa: veicolo in avaria Limitazione del traffico: corsia…",
+              "value": "Traffico",
+              "date": "2026-11-27T07:38:00.000Z"
+            }
+          ],
+          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +148,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "en": {
       "canton": "JU",
@@ -171,6 +190,20 @@
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
           "updatedAt": "2026-11-26T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Closures, roadworks and disruptions",
+          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
+          "items": [
+            {
+              "label": "Revocato: A16 Boncourt -> Delémont tra Svincolo autostradale St-Ursanne E Svincolo autostradale Glovelier Situazione: tunnel bloccato Causa: veicolo in avaria Limitazione del traffico: corsia…",
+              "value": "Traffic",
+              "date": "2026-11-27T07:38:00.000Z"
+            }
+          ],
+          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +274,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "de": {
       "canton": "JU",
@@ -283,6 +316,20 @@
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
           "updatedAt": "2026-11-26T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Sperrungen, Baustellen und Störungen",
+          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
+          "items": [
+            {
+              "label": "Aufgehoben: A16 Boncourt -> Delsberg zwischen Anschluss St-Ursanne und Anschluss Glovelier Sachlage: Tunnel blockiert Ursache: Pannenfahrzeug Verkehrsführung: Fahrstreifen blockiert Empfehlung: eine…",
+              "value": "Verkehr",
+              "date": "2026-11-27T07:38:00.000Z"
+            }
+          ],
+          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -353,7 +400,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "fr": {
       "canton": "JU",
@@ -395,6 +442,20 @@
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
           "updatedAt": "2026-11-26T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Fermetures, chantiers et perturbations",
+          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
+          "items": [
+            {
+              "label": "Révoqué: A16 Boncourt -> Delémont entre Jonction autoroutière St-Ursanne et Jonction autoroutière Glovelier Situation: tunnel bloqué Raison: véhicule en panne Gestion du trafic: voie bloquée…",
+              "value": "Trafic",
+              "date": "2026-11-27T07:38:00.000Z"
+            }
+          ],
+          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -465,7 +526,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     }
   }
 }

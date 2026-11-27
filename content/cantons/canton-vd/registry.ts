@@ -370,4 +370,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'ehnv-riorganizzazione-chiusura-chamblon',
+ category: 'novita',
+ date: '2026-11-27T17:36:22.846Z',
+ image: '/images/blog/article-ehnv-riorganizzazione-chiusura-chamblon.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

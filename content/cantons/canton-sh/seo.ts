@@ -1528,6 +1528,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-nuovo-sistema-stipendi-insegnanti': {
+    title: 'Nuovo sistema salariale per insegnanti costa quasi 9 milioni all\'anno',
+    description: 'Il nuovo sistema salariale per gli insegnanti di Sciaffusa comporterebbe quasi CHF 9 milioni di spesa aggiuntiva all’anno per Cantone e Comuni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, nuovo, sistema, salariale, insegnanti',
+    ogTitle: 'Nuovo sistema stipendi insegnanti Sciaffusa quasi 9 milioni',
+    ogDescription: 'Il nuovo sistema salariale per gli insegnanti di Sciaffusa comporterebbe quasi CHF 9 milioni di spesa aggiuntiva all’anno per Cantone e Comuni. Il Consiglio cantonale deve ancora esaminare la proposta.',
+    canonicalPath: '/articoli-sciaffusa/nuovo-sistema-stipendi-insegnanti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nuovo sistema salariale per insegnanti costa quasi 9 milioni all'anno",
+      "description": "Il nuovo sistema salariale per gli insegnanti di Sciaffusa comporterebbe quasi CHF 9 milioni di spesa aggiuntiva all’anno per Cantone e Comuni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-nuovo-sistema-stipendi-insegnanti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-27T16:26:04+00:00",
+      "dateModified": "2026-11-27T16:26:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/nuovo-sistema-stipendi-insegnanti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

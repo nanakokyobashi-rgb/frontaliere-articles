@@ -51,6 +51,9 @@ const blogMetaCantonSzFr: Record<string, string> = {
     'blog.article.gov-svitto-respinge-autorizzazione.title': 'Schwytz rejette l’autorisation pour les fonctionnaires',
     'blog.article.gov-svitto-respinge-autorizzazione.excerpt': 'Les plaintes contre des fonctionnaires à Schwytz ont augmenté depuis 2021, atteignant un maximum en 2025; le Gouvernement rejette la motion M 7/26.',
     'blog.article.gov-svitto-respinge-autorizzazione.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.svitto-microsoft-365-amministrazione.title': 'Schwyz confirme Microsoft 365 pour l’administration',
+    'blog.article.svitto-microsoft-365-amministrazione.excerpt': 'Le Conseil d’État ne voit pas de raisons de revoir son choix ; il suivra néanmoins l’évolution des solutions open source.',
+    'blog.article.svitto-microsoft-365-amministrazione.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSzFr;

@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T09:50:55.309Z",
-  "contentHash": "08938a648730838b11856352bf987936d2996d41049d56786792433010190787",
+  "updatedAt": "2026-11-27T18:19:07.194Z",
+  "contentHash": "9cb09b4074f7cc6bfa5909a9fc744427c68fe8e5d017cf2be5434fddb95f5e33",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-27T00:05:50.684Z",
+      "updatedAt": "2026-11-27T09:11:52.310Z",
       "keyFacts": 1
     }
   ],
@@ -39,13 +39,13 @@
               "date": "2026-10-26T15:45:00.000Z"
             },
             {
-              "label": "A3 Zürich -> Chur tra Svincolo autostradale Bilten E Raccordo autostradale Diramazione Niederurnen Situazione: problemi di traffico Causa: incidente",
+              "label": "A3 Zürich -> Chur tra Svincolo autostradale Bilten E Raccordo autostradale Diramazione Niederurnen Situazione: colonna Causa: manto stradale dissestato Limitazione del traffico: corsie strette…",
               "value": "Traffico",
-              "date": "2026-11-26T19:49:00.000Z"
+              "date": "2026-11-27T06:52:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         }
       ],
       "curatedArticles": [
@@ -103,7 +103,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "en": {
       "canton": "GL",
@@ -130,13 +130,13 @@
               "date": "2026-10-26T15:45:00.000Z"
             },
             {
-              "label": "A3 Zürich -> Chur tra Svincolo autostradale Bilten E Raccordo autostradale Diramazione Niederurnen Situazione: problemi di traffico Causa: incidente",
+              "label": "A3 Zürich -> Chur tra Svincolo autostradale Bilten E Raccordo autostradale Diramazione Niederurnen Situazione: colonna Causa: manto stradale dissestato Limitazione del traffico: corsie strette…",
               "value": "Traffic",
-              "date": "2026-11-26T19:49:00.000Z"
+              "date": "2026-11-27T06:52:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         }
       ],
       "curatedArticles": [
@@ -194,7 +194,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "de": {
       "canton": "GL",
@@ -221,13 +221,13 @@
               "date": "2026-10-26T15:45:00.000Z"
             },
             {
-              "label": "A3 Zürich -> Chur zwischen Anschluss Bilten und Autobahndreieck Verzweigung Niederurnen Sachlage: Verkehrsbehinderung Ursache: Unfall",
+              "label": "A3 Zürich -> Chur zwischen Anschluss Bilten und Autobahndreieck Verzweigung Niederurnen Sachlage: Stau Ursache: Strassenschäden Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt",
               "value": "Verkehr",
-              "date": "2026-11-26T19:49:00.000Z"
+              "date": "2026-11-27T06:52:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +285,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "fr": {
       "canton": "GL",
@@ -312,13 +312,13 @@
               "date": "2026-10-26T15:45:00.000Z"
             },
             {
-              "label": "A3 Zurich -> Coire entre Jonction autoroutière Bilten et Echangeur Echangeur de Niederurnen Situation: trafic perturbé Raison: accident",
+              "label": "A3 Zurich -> Coire entre Jonction autoroutière Bilten et Echangeur Echangeur de Niederurnen Situation: bouchon Raison: surface de la route en mauvais état Gestion du trafic: rétrécissement des voies…",
               "value": "Trafic",
-              "date": "2026-11-26T19:49:00.000Z"
+              "date": "2026-11-27T06:52:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         }
       ],
       "curatedArticles": [
@@ -376,7 +376,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     }
   }
 }

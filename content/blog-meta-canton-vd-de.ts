@@ -102,6 +102,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.lausanne-luci-foranee.title': 'Lausanne: Beleuchtung von Dezember 2026 an zwischen 1 und 5 Uhr ausgeschaltet',
     'blog.article.lausanne-luci-foranee.excerpt': 'Einjähriger Test und Einholung von Stellungnahmen im Frühjahr.',
     'blog.article.lausanne-luci-foranee.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.ehnv-riorganizzazione-chiusura-chamblon.title': 'eHnv schließt Reorganisation ab, Chamblon schließt am 29. Oktober 2026',
+    'blog.article.ehnv-riorganizzazione-chiusura-chamblon.excerpt': 'Die eHnv wechseln von vier Standorten zu drei. 116 Betten wurden zwischen den Krankenhausstandorten verlegt.',
+    'blog.article.ehnv-riorganizzazione-chiusura-chamblon.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVdDe;

@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T09:50:55.309Z",
-  "contentHash": "8c29d349db468c808238938106c323dac19bef5b8ad45f79edf92f3ae7fc704a",
+  "updatedAt": "2026-11-27T16:22:51.037Z",
+  "contentHash": "8be1d7c820bdefd000f05dc1cb24b3169135ab1fa0534f3773cc220fd5f31a7a",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -27,7 +27,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "3",
+          "value": "2",
           "note": "segnalazioni aggiornate: 27 novembre 2026"
         }
       ],
@@ -60,12 +60,6 @@
               "value": "Cantiere",
               "detail": "fine prevista: 10 dicembre 2026",
               "date": "2026-11-02T08:35:00.000Z"
-            },
-            {
-              "label": "A4 Brunnen <-> Zürich tra Svincolo autostradale Küssnacht E Svincolo autostradale Brunnen Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Causa: veicoli di manutenzione lenti…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 27 novembre 2026",
-              "date": "2026-11-18T06:43:00.000Z"
             },
             {
               "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Reichenburg E Svincolo autostradale Lachen Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Limitazione del traffico: corsie…",
@@ -115,7 +109,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-27T16:22:51.037Z"
     },
     "en": {
       "canton": "SZ",
@@ -130,7 +124,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "3",
+          "value": "2",
           "note": "reports as of 27 November 2026"
         }
       ],
@@ -163,12 +157,6 @@
               "value": "Roadworks",
               "detail": "until 10 December 2026",
               "date": "2026-11-02T08:35:00.000Z"
-            },
-            {
-              "label": "A4 Brunnen <-> Zürich tra Svincolo autostradale Küssnacht E Svincolo autostradale Brunnen Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Causa: veicoli di manutenzione lenti…",
-              "value": "Roadworks",
-              "detail": "until 27 November 2026",
-              "date": "2026-11-18T06:43:00.000Z"
             },
             {
               "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Reichenburg E Svincolo autostradale Lachen Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Limitazione del traffico: corsie…",
@@ -218,7 +206,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-27T16:22:51.037Z"
     },
     "de": {
       "canton": "SZ",
@@ -233,7 +221,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "3",
+          "value": "2",
           "note": "Meldungen vom 27. November 2026"
         }
       ],
@@ -266,12 +254,6 @@
               "value": "Baustelle",
               "detail": "bis 10. Dezember 2026",
               "date": "2026-11-02T08:35:00.000Z"
-            },
-            {
-              "label": "A4 Brunnen <-> Zürich zwischen Anschluss Küssnacht und Anschluss Brunnen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Ursache: Wanderbaustelle Verkehrsführung: Fahrbahnverengung auf einen…",
-              "value": "Baustelle",
-              "detail": "bis 27. November 2026",
-              "date": "2026-11-18T06:43:00.000Z"
             },
             {
               "label": "A3 Chur -> Zürich zwischen Autobahndreieck Verzweigung Reichenburg und Anschluss Lachen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.5 Verkehrsführung: Fahrbahnverengung auf einen…",
@@ -321,7 +303,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-27T16:22:51.037Z"
     },
     "fr": {
       "canton": "SZ",
@@ -336,7 +318,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "3",
+          "value": "2",
           "note": "signalements au 27 novembre 2026"
         }
       ],
@@ -369,12 +351,6 @@
               "value": "Chantier",
               "detail": "jusqu’au 10 décembre 2026",
               "date": "2026-11-02T08:35:00.000Z"
-            },
-            {
-              "label": "A4 Brunnen <-> Zurich entre Jonction autoroutière Küssnacht et Jonction autoroutière Brunnen Situation: trafic perturbé travaux, longueur [km] 0.2 Raison: véhicules de maintenance lents Gestion du…",
-              "value": "Chantier",
-              "detail": "jusqu’au 27 novembre 2026",
-              "date": "2026-11-18T06:43:00.000Z"
             },
             {
               "label": "A3 Coire -> Zurich entre Echangeur Echangeur de Reichenburg et Jonction autoroutière Lachen Situation: trafic perturbé travaux, longueur [km] 0.5 Gestion du trafic: rétrécissement des voies sur une…",
@@ -424,7 +400,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-27T16:22:51.037Z"
     }
   }
 }

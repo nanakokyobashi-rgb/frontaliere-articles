@@ -1284,6 +1284,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ehnv-riorganizzazione-chiusura-chamblon': {
+    title: 'eHnv conclude riorganizzazione, chiude Chamblon il 29 ottobre 2026',
+    description: 'Gli eHnv passano da quattro sedi a tre. 116 letti sono stati trasferiti tra le sedi ospedaliere.',
+    keywords: 'frontalieri, ticino, svizzera, italia, ehnv, conclude, riorganizzazione, chiude',
+    ogTitle: 'eHnv riorganizzazione chiusura Chamblon 29 ottobre 2026',
+    ogDescription: 'Gli eHnv passano da quattro sedi a tre. 116 letti sono stati trasferiti tra le sedi ospedaliere.',
+    canonicalPath: '/articoli-vaud/ehnv-riorganizzazione-chiusura-chamblon/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "eHnv conclude riorganizzazione, chiude Chamblon il 29 ottobre 2026",
+      "description": "Gli eHnv passano da quattro sedi a tre. 116 letti sono stati trasferiti tra le sedi ospedaliere.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ehnv-riorganizzazione-chiusura-chamblon.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-27T17:36:23+00:00",
+      "dateModified": "2026-11-27T17:36:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/ehnv-riorganizzazione-chiusura-chamblon/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

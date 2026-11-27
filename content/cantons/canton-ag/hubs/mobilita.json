@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T14:54:45.873Z",
-  "contentHash": "7f511e40236fab7e89c0132a56ad98e581f5c1dc726f8152587428cd5264a250",
+  "updatedAt": "2026-11-27T18:19:07.194Z",
+  "contentHash": "d20006fd97fc1fee1fa9c349a7007904ba83dd933e9918e03e375e7037ad72aa",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-27T00:05:50.684Z",
+      "updatedAt": "2026-11-27T09:11:52.310Z",
       "keyFacts": 2
     },
     {
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "9",
+          "value": "13",
           "note": "segnalazioni aggiornate: 27 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "22",
+          "value": "20",
           "note": "segnalazioni aggiornate: 27 novembre 2026"
         }
       ],
@@ -154,7 +154,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -270,7 +270,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "en": {
       "canton": "AG",
@@ -285,12 +285,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "9",
+          "value": "13",
           "note": "reports as of 27 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "22",
+          "value": "20",
           "note": "reports as of 27 November 2026"
         }
       ],
@@ -402,7 +402,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -518,7 +518,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "de": {
       "canton": "AG",
@@ -533,12 +533,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "9",
+          "value": "13",
           "note": "Meldungen vom 27. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "22",
+          "value": "20",
           "note": "Meldungen vom 27. November 2026"
         }
       ],
@@ -650,7 +650,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -766,7 +766,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "fr": {
       "canton": "AG",
@@ -781,12 +781,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "9",
+          "value": "13",
           "note": "signalements au 27 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "22",
+          "value": "20",
           "note": "signalements au 27 novembre 2026"
         }
       ],
@@ -898,7 +898,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1014,7 +1014,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     }
   }
 }

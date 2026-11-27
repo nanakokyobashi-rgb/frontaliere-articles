@@ -4,12 +4,12 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T09:50:55.309Z",
-  "contentHash": "37513470a67253b427d546697b8984e8b6e284ed3dcfa7e75469bfcffe082292",
+  "updatedAt": "2026-11-27T18:19:07.194Z",
+  "contentHash": "d924f32cb35fc837afddaad987cc3f83bcb73e13d8d1d1b46a446b53f2263578",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-27T00:05:50.684Z",
+      "updatedAt": "2026-11-27T09:11:52.310Z",
       "keyFacts": 2
     },
     {
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "12",
+          "value": "11",
           "note": "segnalazioni aggiornate: 27 novembre 2026"
         }
       ],
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -161,7 +161,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "en": {
       "canton": "SO",
@@ -176,7 +176,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "12",
+          "value": "11",
           "note": "reports as of 27 November 2026"
         }
       ],
@@ -236,7 +236,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -304,7 +304,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "de": {
       "canton": "SO",
@@ -319,7 +319,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "12",
+          "value": "11",
           "note": "Meldungen vom 27. November 2026"
         }
       ],
@@ -379,7 +379,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -447,7 +447,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "fr": {
       "canton": "SO",
@@ -462,7 +462,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "12",
+          "value": "11",
           "note": "signalements au 27 novembre 2026"
         }
       ],
@@ -522,7 +522,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -591,7 +591,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     }
   }
 }
