@@ -123,6 +123,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.nuovo-sistema-stipendi-insegnanti.title': 'Neues Lohnsystem für Lehrkräfte kostet fast 9 Millionen pro Jahr',
     'blog.article.nuovo-sistema-stipendi-insegnanti.excerpt': 'Das neue Lohnsystem für die Lehrkräfte in Schaffhausen würde für den Kanton und die Gemeinden zusätzliche Ausgaben von fast CHF 9 Millionen pro Jahr bedeuten.',
     'blog.article.nuovo-sistema-stipendi-insegnanti.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.panne-lampioni-sciaffusa-giovedi.title': 'Straßenbeleuchtung fällt Donnerstag in Schaffhausen aus',
+    'blog.article.panne-lampioni-sciaffusa-giovedi.excerpt': 'Am Donnerstagmorgen kam es in Schaffhausen zu einer Störung der Straßenbeleuchtung.',
+    'blog.article.panne-lampioni-sciaffusa-giovedi.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;

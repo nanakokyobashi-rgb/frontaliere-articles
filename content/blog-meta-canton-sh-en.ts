@@ -123,6 +123,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.nuovo-sistema-stipendi-insegnanti.title': 'New salary system for teachers costs almost 9 million a year',
     'blog.article.nuovo-sistema-stipendi-insegnanti.excerpt': 'The new salary system for teachers in Schaffhausen would entail almost CHF 9 million in additional spending per year for the Canton and the municipalities.',
     'blog.article.nuovo-sistema-stipendi-insegnanti.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.panne-lampioni-sciaffusa-giovedi.title': 'Streetlight outage in several neighborhoods of Schaffhausen on Thursday morning',
+    'blog.article.panne-lampioni-sciaffusa-giovedi.excerpt': 'A streetlight outage occurred in Schaffhausen on Thursday morning.',
+    'blog.article.panne-lampioni-sciaffusa-giovedi.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

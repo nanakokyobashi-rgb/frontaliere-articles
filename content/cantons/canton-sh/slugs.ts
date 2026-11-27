@@ -43,6 +43,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'lkw-unfall-chlaggi-strada': { it: 'lkw-unfall-chlaggi-strada', en: 'lkw-chlaggi-road-closure', de: 'lkw-chlaggi-strassensperrung', fr: 'accident-chlaggi-route-fermeture' },
  'neuhausen-soppressione-strisce-pedonali': { it: 'neuhausen-soppressione-strisce-pedonali', en: 'neuhausen-pedestrian-stripe-removal', de: 'neuhausen-fussgaengerstreifen-aufhebung', fr: 'neuhausen-suppression-passages-pietons' },
  'nuovo-sistema-stipendi-insegnanti': { it: 'nuovo-sistema-stipendi-insegnanti', en: 'new-teacher-salary-system', de: 'neues-lehrersystem-gehalt', fr: 'nouveau-systeme-salaires-enseignants' },
+ 'panne-lampioni-sciaffusa-giovedi': { it: 'panne-lampioni-sciaffusa-giovedi', en: 'schaffhausen-street-light-failure-thursday', de: 'schaffhausen-laternenstorung-donnerstag', fr: 'panne-lampadaires-schaffhouse-jeudi' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

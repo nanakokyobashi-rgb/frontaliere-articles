@@ -123,6 +123,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.nuovo-sistema-stipendi-insegnanti.title': 'Nuovo sistema salariale per insegnanti costa quasi 9 milioni all\'anno',
     'blog.article.nuovo-sistema-stipendi-insegnanti.excerpt': 'Il nuovo sistema salariale per gli insegnanti di Sciaffusa comporterebbe quasi CHF 9 milioni di spesa aggiuntiva all’anno per il Cantone e i Comuni.',
     'blog.article.nuovo-sistema-stipendi-insegnanti.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.panne-lampioni-sciaffusa-giovedi.title': 'Guasto lampioni a Sciaffusa giovedì mattina in più quartieri',
+    'blog.article.panne-lampioni-sciaffusa-giovedi.excerpt': 'Giovedì mattina si è verificato un guasto ai lampioni a Sciaffusa.',
+    'blog.article.panne-lampioni-sciaffusa-giovedi.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;

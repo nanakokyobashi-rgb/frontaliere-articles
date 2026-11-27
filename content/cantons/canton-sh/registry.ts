@@ -447,4 +447,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'panne-lampioni-sciaffusa-giovedi',
+ category: 'pratico',
+ date: '2026-11-27T22:20:38.587Z',
+ image: '/images/blog/article-panne-lampioni-sciaffusa-giovedi.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -123,6 +123,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.nuovo-sistema-stipendi-insegnanti.title': 'Un nouveau système salarial pour les enseignants coûte près de 9 millions par an',
     'blog.article.nuovo-sistema-stipendi-insegnanti.excerpt': 'Le nouveau système salarial pour les enseignants de Schaffhouse entraînerait près de 9 millions CHF de dépenses supplémentaires par an pour le canton et les communes.',
     'blog.article.nuovo-sistema-stipendi-insegnanti.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.panne-lampioni-sciaffusa-giovedi.title': 'Panne des lampadaires à Schaffhouse jeudi matin dans plusieurs quartiers',
+    'blog.article.panne-lampioni-sciaffusa-giovedi.excerpt': 'Une panne des lampadaires s’est produite jeudi matin à Schaffhouse.',
+    'blog.article.panne-lampioni-sciaffusa-giovedi.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;
