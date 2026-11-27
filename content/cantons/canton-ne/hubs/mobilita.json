@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T14:54:45.873Z",
-  "contentHash": "072dd27ae8cfd637b7ab3c3af01534647f8b3df2d9db447562ac4936f8bb21d5",
+  "updatedAt": "2026-11-27T18:19:07.194Z",
+  "contentHash": "842c3c09ecb6add85270127cc84283769e6eeb6a97e2b3c66e43a493b356cf61",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-27T00:05:50.684Z",
+      "updatedAt": "2026-11-27T09:11:52.310Z",
       "keyFacts": 2
     },
     {
@@ -89,13 +89,13 @@
             {
               "label": "Neuchâtel, Vaud et Fribourg s'engagent pour l'avenir de la navigation sur les trois lacs",
               "value": "Traffico",
-              "date": "2026-11-27T00:05:50.684Z",
+              "date": "2026-11-27T09:11:52.310Z",
               "url": "https://www.ne.ch/communiques-de-presse/neuchatel-vaud-et-fribourg-sengagent-pour-lavenir-de-la-navigation-sur-les-trois-lacs"
             },
             {
               "label": "Ouverture officielle de la piste cyclable mixte vélos-piétons entre Saint-Blaise et Cornaux",
               "value": "Traffico",
-              "date": "2026-11-27T00:05:50.684Z",
+              "date": "2026-11-27T09:11:52.310Z",
               "url": "https://www.ne.ch/communiques-de-presse/ouverture-officielle-de-la-piste-cyclable-mixte-velos-pietons-entre-saint-blaise-et-cornaux"
             },
             {
@@ -118,7 +118,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -195,7 +195,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "en": {
       "canton": "NE",
@@ -262,13 +262,13 @@
             {
               "label": "Neuchâtel, Vaud et Fribourg s'engagent pour l'avenir de la navigation sur les trois lacs",
               "value": "Traffic",
-              "date": "2026-11-27T00:05:50.684Z",
+              "date": "2026-11-27T09:11:52.310Z",
               "url": "https://www.ne.ch/communiques-de-presse/neuchatel-vaud-et-fribourg-sengagent-pour-lavenir-de-la-navigation-sur-les-trois-lacs"
             },
             {
               "label": "Ouverture officielle de la piste cyclable mixte vélos-piétons entre Saint-Blaise et Cornaux",
               "value": "Traffic",
-              "date": "2026-11-27T00:05:50.684Z",
+              "date": "2026-11-27T09:11:52.310Z",
               "url": "https://www.ne.ch/communiques-de-presse/ouverture-officielle-de-la-piste-cyclable-mixte-velos-pietons-entre-saint-blaise-et-cornaux"
             },
             {
@@ -291,7 +291,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -368,7 +368,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "de": {
       "canton": "NE",
@@ -435,13 +435,13 @@
             {
               "label": "Neuchâtel, Vaud et Fribourg s'engagent pour l'avenir de la navigation sur les trois lacs",
               "value": "Verkehr",
-              "date": "2026-11-27T00:05:50.684Z",
+              "date": "2026-11-27T09:11:52.310Z",
               "url": "https://www.ne.ch/communiques-de-presse/neuchatel-vaud-et-fribourg-sengagent-pour-lavenir-de-la-navigation-sur-les-trois-lacs"
             },
             {
               "label": "Ouverture officielle de la piste cyclable mixte vélos-piétons entre Saint-Blaise et Cornaux",
               "value": "Verkehr",
-              "date": "2026-11-27T00:05:50.684Z",
+              "date": "2026-11-27T09:11:52.310Z",
               "url": "https://www.ne.ch/communiques-de-presse/ouverture-officielle-de-la-piste-cyclable-mixte-velos-pietons-entre-saint-blaise-et-cornaux"
             },
             {
@@ -464,7 +464,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -541,7 +541,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "fr": {
       "canton": "NE",
@@ -608,13 +608,13 @@
             {
               "label": "Neuchâtel, Vaud et Fribourg s'engagent pour l'avenir de la navigation sur les trois lacs",
               "value": "Trafic",
-              "date": "2026-11-27T00:05:50.684Z",
+              "date": "2026-11-27T09:11:52.310Z",
               "url": "https://www.ne.ch/communiques-de-presse/neuchatel-vaud-et-fribourg-sengagent-pour-lavenir-de-la-navigation-sur-les-trois-lacs"
             },
             {
               "label": "Ouverture officielle de la piste cyclable mixte vélos-piétons entre Saint-Blaise et Cornaux",
               "value": "Trafic",
-              "date": "2026-11-27T00:05:50.684Z",
+              "date": "2026-11-27T09:11:52.310Z",
               "url": "https://www.ne.ch/communiques-de-presse/ouverture-officielle-de-la-piste-cyclable-mixte-velos-pietons-entre-saint-blaise-et-cornaux"
             },
             {
@@ -637,7 +637,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -714,7 +714,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T09:50:55.309Z",
-  "contentHash": "5f769b3de3086b494df2ee88b92c9c1b999c595b83f59cef696f54e7ea33417d",
+  "updatedAt": "2026-11-27T18:19:07.194Z",
+  "contentHash": "51762447f4e2ae6231ce9c3fd9c20d93e918ee64a7d016c41ecb20cf4fea4b44",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-27T00:05:50.684Z",
+      "updatedAt": "2026-11-27T09:11:52.310Z",
       "keyFacts": 2
     },
     {
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "22",
+          "value": "21",
           "note": "segnalazioni aggiornate: 27 novembre 2026"
         }
       ],
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -179,7 +179,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "en": {
       "canton": "LU",
@@ -194,7 +194,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "22",
+          "value": "21",
           "note": "reports as of 27 November 2026"
         }
       ],
@@ -254,7 +254,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -339,7 +339,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "de": {
       "canton": "LU",
@@ -354,7 +354,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "22",
+          "value": "21",
           "note": "Meldungen vom 27. November 2026"
         }
       ],
@@ -414,7 +414,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -499,7 +499,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "fr": {
       "canton": "LU",
@@ -514,7 +514,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "22",
+          "value": "21",
           "note": "signalements au 27 novembre 2026"
         }
       ],
@@ -574,7 +574,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -661,7 +661,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     }
   }
 }

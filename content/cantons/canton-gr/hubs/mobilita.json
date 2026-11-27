@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T14:08:14.305Z",
-  "contentHash": "7c864cd3e32ae56a133de58d9440347fe6ecc46dad0e052a5932cee814413aaa",
+  "updatedAt": "2026-11-27T18:19:07.194Z",
+  "contentHash": "e33ac599fdd5f5bfa8b07a001b37a82885e6a26aca0f4df0975e78ffe96d4310",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-27T00:05:50.684Z",
+      "updatedAt": "2026-11-27T09:11:52.310Z",
       "keyFacts": 2
     },
     {
@@ -152,13 +152,14 @@
               "date": "2026-11-26T07:41:00.000Z"
             },
             {
-              "label": "H19 Reichenau -> Disentis tra Luogo Reichenau E Incrocio Flims Ost Situazione: problemi di traffico Causa: nevicata",
-              "value": "Traffico",
-              "date": "2026-11-26T08:35:00.000Z"
+              "label": "A13 S. Bernardino <-> Coira tra Svincolo autostradale Splügen E Svincolo autostradale Sufers Situazione: problemi di traffico cantiere, lunghezza [km] 0.9 Aggiunta 1: limite temporaneo larghezza…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 31 agosto 2028",
+              "date": "2026-06-01T03:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -288,7 +289,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-27T14:08:14.305Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "en": {
       "canton": "GR",
@@ -418,13 +419,14 @@
               "date": "2026-11-26T07:41:00.000Z"
             },
             {
-              "label": "H19 Reichenau -> Disentis tra Luogo Reichenau E Incrocio Flims Ost Situazione: problemi di traffico Causa: nevicata",
-              "value": "Traffic",
-              "date": "2026-11-26T08:35:00.000Z"
+              "label": "A13 S. Bernardino <-> Coira tra Svincolo autostradale Splügen E Svincolo autostradale Sufers Situazione: problemi di traffico cantiere, lunghezza [km] 0.9 Aggiunta 1: limite temporaneo larghezza…",
+              "value": "Roadworks",
+              "detail": "until 31 August 2028",
+              "date": "2026-06-01T03:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -553,7 +555,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-27T14:08:14.305Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "de": {
       "canton": "GR",
@@ -683,13 +685,14 @@
               "date": "2026-11-26T07:41:00.000Z"
             },
             {
-              "label": "H19 Reichenau -> Disentis zwischen Ortschaft Reichenau und Kreuzung Flims-Ost Sachlage: Verkehrsbehinderung Ursache: Schneefall",
-              "value": "Verkehr",
-              "date": "2026-11-26T08:35:00.000Z"
+              "label": "A13 S. Bernardino <-> Chur zwischen Anschluss Splügen und Anschluss Sufers Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.9 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m]…",
+              "value": "Baustelle",
+              "detail": "bis 31. August 2028",
+              "date": "2026-06-01T03:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -819,7 +822,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-27T14:08:14.305Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "fr": {
       "canton": "GR",
@@ -949,13 +952,14 @@
               "date": "2026-11-26T07:41:00.000Z"
             },
             {
-              "label": "H19 Reichenau -> Disentis entre Localité Reichenau et Carrefour Flims-Est Situation: trafic perturbé Raison: chutes de neige",
-              "value": "Trafic",
-              "date": "2026-11-26T08:35:00.000Z"
+              "label": "A13 S. Bernardino <-> Coire entre Jonction autoroutière Splügen et Jonction autoroutière Sufers Situation: trafic perturbé travaux, longueur [km] 0.9 Complément 1: limitation temporaire de largeur…",
+              "value": "Chantier",
+              "detail": "jusqu’au 31 août 2028",
+              "date": "2026-06-01T03:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1085,7 +1089,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-27T14:08:14.305Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     }
   }
 }

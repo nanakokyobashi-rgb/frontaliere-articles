@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T09:50:55.309Z",
-  "contentHash": "c82502526734a2bedbb5deb7ca7c84503c8728796e8014e68437af61cd751170",
+  "updatedAt": "2026-11-27T18:19:07.194Z",
+  "contentHash": "9661a9f4d94012074559529801ecf011e209d9e8b39046ad6f808bc5a4471e4c",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-27T00:05:50.684Z",
+      "updatedAt": "2026-11-27T09:11:52.310Z",
       "keyFacts": 2
     },
     {
@@ -53,6 +53,12 @@
               "date": "2026-11-17T23:46:00.000Z"
             },
             {
+              "label": "Altdorf UR, Tellsgasse, Altdorf in tutte le direzioni Situazione: problemi di traffico Causa: evento importante Limitazione del traffico: nuova viabilità",
+              "value": "Traffico",
+              "detail": "fine prevista: 28 novembre 2026",
+              "date": "2026-11-27T07:35:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen tra Luogo Andermatt E Luogo Hospental Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 4.0…",
               "value": "Cantiere",
               "detail": "fine prevista: 31 dicembre 2026",
@@ -72,7 +78,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -174,7 +180,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "en": {
       "canton": "UR",
@@ -210,6 +216,12 @@
               "date": "2026-11-17T23:46:00.000Z"
             },
             {
+              "label": "Altdorf UR, Tellsgasse, Altdorf in tutte le direzioni Situazione: problemi di traffico Causa: evento importante Limitazione del traffico: nuova viabilità",
+              "value": "Traffic",
+              "detail": "until 28 November 2026",
+              "date": "2026-11-27T07:35:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen tra Luogo Andermatt E Luogo Hospental Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 4.0…",
               "value": "Roadworks",
               "detail": "until 31 December 2026",
@@ -229,7 +241,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -331,7 +343,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "de": {
       "canton": "UR",
@@ -367,6 +379,12 @@
               "date": "2026-11-17T23:46:00.000Z"
             },
             {
+              "label": "Altdorf UR, Tellsgasse, Altdorf in beide Richtungen Sachlage: Verkehrsbehinderung Ursache: Veranstaltung Verkehrsführung: veränderte Verkehrsführung",
+              "value": "Verkehr",
+              "detail": "bis 28. November 2026",
+              "date": "2026-11-27T07:35:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen zwischen Ortschaft Andermatt und Ortschaft Hospental Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.5 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m]…",
               "value": "Baustelle",
               "detail": "bis 31. Dezember 2026",
@@ -386,7 +404,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -488,7 +506,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "fr": {
       "canton": "UR",
@@ -524,6 +542,12 @@
               "date": "2026-11-17T23:46:00.000Z"
             },
             {
+              "label": "Altdorf UR, Tellsgasse, Altdorf dans les deux sens Situation: trafic perturbé Raison: événement majeur Gestion du trafic: nouveau plan de circulation",
+              "value": "Trafic",
+              "detail": "jusqu’au 28 novembre 2026",
+              "date": "2026-11-27T07:35:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen entre Localité Andermatt et Localité Hospental Situation: trafic perturbé travaux, longueur [km] 0.5 Complément 1: limitation temporaire de largeur largeur de la voie [m] 4.0…",
               "value": "Chantier",
               "detail": "jusqu’au 31 décembre 2026",
@@ -543,7 +567,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -645,7 +669,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     }
   }
 }
