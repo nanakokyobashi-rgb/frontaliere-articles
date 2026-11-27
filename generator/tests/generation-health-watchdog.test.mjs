@@ -135,6 +135,16 @@ const LOG_FRONTALIERE_OK = [
   'generate\tGenerate the article\t2026-08-10T15:18:14.6037711Z PRESPEND_GATE_OUTCOME emptied=0 recovered=evergreen before=54 kept=3 status=generated section=frontaliere',
 ].join('\n');
 
+const LOG_CANTON_DIAGNOSTICS = [
+  'SECTION_REQUESTED: canton-lu',
+  'DRY: false',
+  '📡 Stadt Luzern [rss]: 10 recenti su 10 (budget 1 richieste)',
+  '⚠️ luzernerzeitung.ch: https://example.org/feed: HTTP 403',
+  'LLM fact-check (provider/model): fallito — no result',
+  'Fact-check: 429 rate-limit rilevato',
+  'Fact-check unavailable (article): Tutti i modelli di verifica non hanno prodotto un verdetto',
+].join('\n');
+
 const LOG_OVERSIZE = [
   'generate\tResolve run mode and section\t2026-08-10T12:35:30.1Z event=schedule chain=false → section=frontaliere dry_run=false',
   'generate\tGenerate the article\t2026-08-10T12:36:01.1Z ⏭️  [gpt-4.1] Skipped — request would exceed 8000-token limit (estimated 9431)',
@@ -347,6 +357,17 @@ describe('parseRunLog — i marker già emessi dalla pipeline', () => {
     assert.equal(r.gates[0].status, 'generated');
     assert.equal(r.evergreenSaturated, false);
     assert.equal(r.tokenLimitSkips.length, 0);
+  });
+
+  test('attribuisce i log cantonali e separa fonti, provider e rate-limit', () => {
+    const r = parseRunLog(LOG_CANTON_DIAGNOSTICS);
+    assert.equal(r.section, 'canton-lu');
+    assert.equal(r.dryRun, false);
+    assert.deepEqual(r.sourceReads, [{ recent: 10, total: 10 }]);
+    assert.deepEqual(r.sourceHttpFailures, [403]);
+    assert.equal(r.providerErrorEvents, 1);
+    assert.equal(r.providerUnavailable, true);
+    assert.equal(r.rateLimitEvents, 1);
   });
 
   test('DUE righe del gate nella stessa run: si leggono entrambe', () => {

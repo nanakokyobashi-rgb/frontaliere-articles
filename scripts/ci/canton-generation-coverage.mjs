@@ -103,7 +103,10 @@ function summarizeCantonCoverage(rows) {
     'no-article': 'nessun articolo nella finestra',
     gap: 'articolo assente nella finestra', covered: 'coperto',
   };
-  const lines = rows.map(({ section, status, detail }) => `- ${section}: ${labels[status]} (${detail})`);
+  const lines = rows.map(({ section, status, detail, diagnosis }) => {
+    const evidence = diagnosis ? `${detail}; diagnosi: ${diagnosis}` : detail;
+    return `- ${section}: ${labels[status]} (${evidence})`;
+  });
   const summary = lines.join('\n');
   if (rows.some(({ status }) => status === 'unknown')) return { summary, available: false };
   if (rows.some(({ status }) => status === 'gap')) return { summary, firing: true, body: summary };
@@ -111,7 +114,67 @@ function summarizeCantonCoverage(rows) {
   return { summary, firing: false };
 }
 
-export function collectCantonGenerationCoverage({ now, repoRoot, commits, env = process.env }) {
+export function summarizeCantonRunDiagnostics(runs) {
+  const bySection = {};
+  for (const run of runs || []) {
+    const section = String(run?.section || '');
+    if (!/^canton-[a-z]+$/u.test(section) || run?.dryRun !== false) continue;
+    const entry = bySection[section] ??= {
+      runs: 0,
+      sourceReadCount: 0,
+      recentItems: 0,
+      httpFailuresByStatus: {},
+      providerErrorRuns: 0,
+      providerUnavailableRuns: 0,
+      rateLimitEvents: 0,
+      poolSaturatedRuns: 0,
+      newsPoolRejectedRuns: 0,
+    };
+    entry.runs++;
+    for (const source of run.sourceReads || []) {
+      entry.sourceReadCount++;
+      entry.recentItems += Number.isFinite(source.recent) ? source.recent : 0;
+    }
+    for (const status of run.sourceHttpFailures || []) {
+      const code = String(status);
+      entry.httpFailuresByStatus[code] = (entry.httpFailuresByStatus[code] || 0) + 1;
+    }
+    if (run.providerErrorEvents > 0) entry.providerErrorRuns++;
+    if (run.providerUnavailable) entry.providerUnavailableRuns++;
+    entry.rateLimitEvents += Number.isFinite(run.rateLimitEvents) ? run.rateLimitEvents : 0;
+    if (run.evergreenSaturated) entry.poolSaturatedRuns++;
+    if ((run.totalRejections || []).some((rejection) => rejection.section === section)) {
+      entry.newsPoolRejectedRuns++;
+    }
+  }
+  return bySection;
+}
+
+function formatCantonDiagnosis(diagnostics) {
+  if (!diagnostics?.runs) return 'nessun log cantonale recente';
+  const parts = [];
+  if (diagnostics.sourceReadCount) {
+    parts.push(`${diagnostics.sourceReadCount} letture fonte, ${diagnostics.recentItems} item recenti`);
+  }
+  const httpFailures = Object.entries(diagnostics.httpFailuresByStatus || {})
+    .sort(([a], [b]) => a.localeCompare(b));
+  const httpFailureCount = httpFailures.reduce((total, [, count]) => total + count, 0);
+  if (httpFailureCount) {
+    parts.push(`${httpFailureCount} errori HTTP (${httpFailures.map(([status, count]) => `${status}×${count}`).join(', ')})`);
+  }
+  if (diagnostics.poolSaturatedRuns) parts.push(`pool evergreen saturo in ${diagnostics.poolSaturatedRuns} run`);
+  if (diagnostics.newsPoolRejectedRuns) parts.push(`pool news respinto in ${diagnostics.newsPoolRejectedRuns} run`);
+  if (diagnostics.providerUnavailableRuns) {
+    parts.push(`fact-check senza verdetto in ${diagnostics.providerUnavailableRuns}/${diagnostics.runs} run`);
+  } else if (diagnostics.providerErrorRuns) {
+    parts.push(`errori provider osservati in ${diagnostics.providerErrorRuns}/${diagnostics.runs} run`);
+  }
+  if (diagnostics.rateLimitEvents) parts.push(`risposte rate-limit: ${diagnostics.rateLimitEvents}`);
+  if (!parts.length) parts.push(`nessuna causa specifica nei ${diagnostics.runs} log`);
+  return `${diagnostics.runs} run: ${parts.join('; ')}`;
+}
+
+export function collectCantonGenerationCoverage({ now, repoRoot, commits, env = process.env, runDiagnostics = {} }) {
   const profiles = loadCantonSectionProfiles();
   const kill = resolveKillSwitch(env);
   const dry = [];
@@ -120,10 +183,17 @@ export function collectCantonGenerationCoverage({ now, repoRoot, commits, env = 
     const { section } = profile;
     let shared;
     if (kill.state !== 'verified') shared = { status: 'unknown', detail: 'Remote Config non verificato' };
-    else if (!resolveCantonSectionGate(section, { env, profiles }).enabled || kill.sections.includes(section)) {
-      shared = { status: 'inactive', detail: 'profilo o gate disabilitato, oppure kill switch attivo' };
+    else if (kill.sections.includes(section)) {
+      shared = { status: 'inactive', detail: 'kill switch attivo (disabilitazione intenzionale)' };
+    } else if (!resolveCantonSectionGate(section, { env, profiles }).enabled) {
+      shared = { status: 'inactive', detail: 'profilo o gate disabilitato' };
     }
-    dry.push({ section, ...(shared ?? measureCantonDry(profile, commits, now)) });
+    const dryRow = shared ?? measureCantonDry(profile, commits, now);
+    dry.push({
+      section,
+      ...dryRow,
+      ...(dryRow.status === 'gap' ? { diagnosis: formatCantonDiagnosis(runDiagnostics[section]) } : {}),
+    });
     locales.push({ section, ...(shared ?? measureCantonLocales(section, repoRoot, now)) });
   }
   return {

@@ -168,7 +168,10 @@ import {
   imageRegenerationActionableAt,
   readImageRegenerationQueue,
 } from '../../generator/scripts/lib/image-regeneration-queue.mjs';
-import { collectCantonGenerationCoverage } from './canton-generation-coverage.mjs';
+import {
+  collectCantonGenerationCoverage,
+  summarizeCantonRunDiagnostics,
+} from './canton-generation-coverage.mjs';
 import { SECRET_PATTERNS } from './scan-hardcoded-secrets.mjs';
 import { topicCoverageKey } from '../../generator/scripts/lib/topic-coverage-guard.mjs';
 
@@ -695,8 +698,8 @@ export function countRecentInFlightGenerations(
 // comando (`event=$EV chain=$CHAIN → section=$SEC dry_run=$DRY`) e poi con i
 // valori risolti. `$EV` non è `\w+`, quindi l'eco non aggancia mai — e non
 // serve distinguere le due occorrenze in un altro modo, più fragile.
-const RUN_MODE_RE = /event=(\w+) chain=(\w+) → section=(\w+) dry_run=(\w+)/;
-const TARGET_SECTION_RE = /TARGET_SECTION:\s*(\w+)/;
+const RUN_MODE_RE = /event=(\w+) chain=(\w+) → section=([\w-]+) dry_run=(\w+)/;
+const TARGET_SECTION_RE = /TARGET_SECTION:\s*([\w-]+)/;
 /**
  * I marker `NOME k=v k=v …` della pipeline, TUTTE le occorrenze, letti come
  * mappa di campi invece che per posizione.
@@ -874,13 +877,22 @@ export function parseCoverOutcomes(text) {
  *   generationTokenLimitSkips: Array<{model: string, limit: number, estimated: number}>,
  *   modelFailures: Array<{model: string, code: string}>,
  *   modelsTouched: string[],
- *   coverOutcomes: Array<{articleId: string, kind: 'generated'|'fallback', source: string, reason: string}>
+ *   coverOutcomes: Array<{articleId: string, kind: 'generated'|'fallback', source: string, reason: string}>,
+ *   sourceReads: Array<{recent: number, total: number}>, sourceHttpFailures: number[],
+ *   providerErrorEvents: number, providerUnavailable: boolean, rateLimitEvents: number
  * }}
  */
 export function parseRunLog(text) {
   const t = String(text || '');
+  // GitHub renders the `run:` script with ANSI styling. Exclude those echoed
+  // command lines from the new diagnostics so source literals cannot be
+  // mistaken for runtime evidence.
+  const observedLines = t.split(/\r?\n/u).filter((line) => !line.includes('\u001b['));
+  const observedText = observedLines.join('\n');
   const mode = RUN_MODE_RE.exec(t);
   const targetM = TARGET_SECTION_RE.exec(t);
+  const cantonSection = /(?:SECTION_REQUESTED|PRIMARY_SECTION|SECTION_PRODUCED):\s*(canton-[a-z]+)/u.exec(observedText);
+  const drySummary = /\bDRY:\s*(true|false)\s*$/imu.exec(observedText);
   // TUTTE le occorrenze, non la prima. Dopo #180 una singola run prova ENTRAMBE
   // le sezioni e stampa DUE righe `PRESPEND_GATE_OUTCOME`, una per sezione: con
   // `exec` la seconda non la leggeva nessuno. Misurato il 2026-08-11 sulle 69
@@ -902,7 +914,9 @@ export function parseRunLog(text) {
   // Il fallback sulla PRIMA riga del gate resta la sezione della RUN, che è
   // un'altra domanda da «di che sezione è questo esito»: serve solo a chi conta
   // le run (`runs`, `saturated`), e solo quando i marker di modo non si leggono.
-  const section = mode ? mode[3] : (targetM ? targetM[1] : (gates[0] ? gates[0].section : null));
+  const section = mode
+    ? mode[3]
+    : (targetM ? targetM[1] : (cantonSection ? cantonSection[1] : (gates[0] ? gates[0].section : null)));
   const promptBudgetMarkers = parsePromptBudgetMarkers(t);
   const tokenLimitSkipMatches = [...t.matchAll(TOKEN_LIMIT_RE)].map((m) => ({
     index: m.index ?? -1,
@@ -924,7 +938,9 @@ export function parseRunLog(text) {
     // Lo step `Generate the article` (dove vive TARGET_SECTION) è saltato quando
     // `dry == 'true'`, quindi la sua presenza è di per sé la prova che il run non
     // era dry — utile sui log in cui la riga `event=… dry_run=…` non è leggibile.
-    dryRun: mode ? mode[4] === 'true' : (targetM ? false : null),
+    dryRun: mode
+      ? mode[4] === 'true'
+      : (targetM ? false : (cantonSection && drySummary ? drySummary[1] === 'true' : null)),
     outcomes: parseMarkerRecords(t, 'GENERATION_OUTCOME', ['kind'])
       .map((f) => ({
         kind: f.kind,
@@ -963,6 +979,23 @@ export function parseRunLog(text) {
       MODEL_TOUCHED_RES.flatMap((re) => [...t.matchAll(re)].map((m) => m[1])),
     )].sort(),
     coverOutcomes: parseCoverOutcomes(t),
+    sourceReads: observedLines.flatMap((line) => {
+      if (!line.includes('📡')) return [];
+      const match = /:\s*(\d+)\s+recenti\s+su\s+(\d+)/u.exec(line);
+      return match ? [{ recent: Number(match[1]), total: Number(match[2]) }] : [];
+    }),
+    sourceHttpFailures: observedLines.flatMap((line) => {
+      if (!line.includes('⚠️') || !/https?:\/\//iu.test(line)) return [];
+      const match = /\bHTTP\s+(\d{3})\b/iu.exec(line);
+      return match ? [Number(match[1])] : [];
+    }),
+    providerErrorEvents: observedLines.filter((line) =>
+      /(?:LLM fact-check\b.*(?:fallito|failed)|All AI models failed)/iu.test(line),
+    ).length,
+    providerUnavailable: /(?:TUTTI i modelli di verifica hanno fallito|Fact-check unavailable\b)/iu.test(observedText),
+    rateLimitEvents: observedLines.filter((line) =>
+      /(?:429|rate-limit)/iu.test(line) && /(?:LLM|fact-check|provider|modelli)/iu.test(line),
+    ).length,
   };
 }
 
@@ -2470,13 +2503,13 @@ export async function collectRunLogs(repo, { maxRuns, lookbackHours, concurrency
   const raw = gh(['run', 'list', '--repo', repo, '--workflow=generate-article.yml',
     '--limit', String(Math.min(200, maxRuns * 3)),
     '--json', 'databaseId,conclusion,status,createdAt,updatedAt,displayTitle']);
-  if (raw === null) return { available: false, inFlight: null };
+  if (raw === null) return { available: false, inFlight: null, cantonDiagnostics: {} };
 
   let runs;
   try {
     runs = JSON.parse(raw || '[]');
   } catch {
-    return { available: false, inFlight: null };
+    return { available: false, inFlight: null, cantonDiagnostics: {} };
   }
   const inFlight = countRecentInFlightGenerations(runs, Date.now());
   const eligible = runs
@@ -2484,7 +2517,7 @@ export async function collectRunLogs(repo, { maxRuns, lookbackHours, concurrency
       && Date.parse(r.createdAt) >= since)
     .slice(0, maxRuns);
 
-  if (!eligible.length) return { available: false, inFlight };
+  if (!eligible.length) return { available: false, inFlight, cantonDiagnostics: {} };
 
   const parsed = [];
   let failures = 0;
@@ -2510,7 +2543,7 @@ export async function collectRunLogs(repo, { maxRuns, lookbackHours, concurrency
   const okRate = eligible.length ? parsed.length / eligible.length : 0;
   if (okRate < MIN_LOG_SUCCESS_RATE) {
     console.warn(`::warning::[generation-health] solo ${parsed.length}/${eligible.length} log leggibili (${(okRate * 100).toFixed(0)}%) — le condizioni sui log NON vengono valutate: «non ho misurato» non è «sta bene».`);
-    return { available: false, inFlight };
+    return { available: false, inFlight, cantonDiagnostics: {} };
   }
 
   const summary = summarizeRuns(parsed);
@@ -2527,6 +2560,7 @@ export async function collectRunLogs(repo, { maxRuns, lookbackHours, concurrency
     oversize: summary.oversize,
     roster: summary.roster,
     coverHealth: summary.coverHealth,
+    cantonDiagnostics: summarizeCantonRunDiagnostics(parsed),
   };
 }
 
@@ -2650,13 +2684,17 @@ export async function collectMeasurements(repo, {
     commitCollectionError = error;
     commits = { available: false, lookbackHours: commitLookback };
   }
+  const runs = await collectRunLogsFn(repo, { maxRuns: maxLogRuns, lookbackHours: runLookback });
   return {
     measurements: {
       now: observedAt, commits,
-      runs: await collectRunLogsFn(repo, { maxRuns: maxLogRuns, lookbackHours: runLookback }),
+      runs,
       corpus: collectCorpusFn(repoRoot),
       coverQueue: collectCoverQueueFn(repoRoot, observedAt),
-      cantonCoverage: collectCantonGenerationCoverage({ now: observedAt, repoRoot, commits, env }),
+      cantonCoverage: collectCantonGenerationCoverage({
+        now: observedAt, repoRoot, commits, env,
+        runDiagnostics: runs?.cantonDiagnostics || {},
+      }),
     },
     commitCollectionError,
   };

@@ -5,7 +5,10 @@ import path from 'node:path';
 import test from 'node:test';
 import { cantonSectionPaths, loadCantonSectionProfiles } from '../scripts/lib/canton-section-profile.mjs';
 import { corpusPath } from '../scripts/lib/corpus-paths.mjs';
-import { collectCantonGenerationCoverage } from '../../scripts/ci/canton-generation-coverage.mjs';
+import {
+  collectCantonGenerationCoverage,
+  summarizeCantonRunDiagnostics,
+} from '../../scripts/ci/canton-generation-coverage.mjs';
 import { collectCommits, collectMeasurements, evaluateConditions, reconcile } from '../../scripts/ci/scan-generation-health.mjs';
 
 const HOUR = 3_600_000;
@@ -50,8 +53,8 @@ function commitHistory(hours, rows = []) {
   });
 }
 
-function measure(root, commits, env = ENV) {
-  return collectCantonGenerationCoverage({ repoRoot: root, now: NOW, commits, env });
+function measure(root, commits, env = ENV, runDiagnostics = {}) {
+  return collectCantonGenerationCoverage({ repoRoot: root, now: NOW, commits, env, runDiagnostics });
 }
 
 test('dry usa solo le pubblicazioni entro i due estremi della finestra', (t) => {
@@ -105,8 +108,46 @@ test('RC ignoto, gate spento e kill switch rendono indisponibili entrambi i verd
       assert.equal(result.available, false);
       assert.deepEqual(result.summary.split('\n').map((line) => line.split(':')[0]), profiles.map(({ section }) => `- ${section}`));
       assert.match(result.summary, new RegExp(`canton-ag: ${label}`));
+      if (env.CANTON_ARTICLE_SECTIONS_KILL) {
+        assert.match(result.summary, /kill switch attivo \(disabilitazione intenzionale\)/);
+      }
     }
   }
+});
+
+test('canton-dry distingue errori fonti, saturazione pool e fact-check senza verdetto', (t) => {
+  const { root } = fixture(t);
+  const diagnostics = summarizeCantonRunDiagnostics([
+    {
+      section: 'canton-ag', dryRun: false,
+      sourceReads: [{ recent: 19, total: 20 }], sourceHttpFailures: [403, 503],
+      providerErrorEvents: 3, providerUnavailable: true, rateLimitEvents: 2,
+      evergreenSaturated: true, totalRejections: [{ section: 'canton-ag' }],
+    },
+    { section: 'canton-ag', dryRun: true, sourceHttpFailures: [429] },
+    { section: 'frontaliere', dryRun: false, sourceHttpFailures: [404] },
+  ]);
+  assert.deepEqual(diagnostics['canton-ag'], {
+    runs: 1,
+    sourceReadCount: 1,
+    recentItems: 19,
+    httpFailuresByStatus: { '403': 1, '503': 1 },
+    providerErrorRuns: 1,
+    providerUnavailableRuns: 1,
+    rateLimitEvents: 2,
+    poolSaturatedRuns: 1,
+    newsPoolRejectedRuns: 1,
+  });
+
+  const result = measure(root, commitHistory(48), ENV, diagnostics)['canton-dry'];
+  assert.equal(result.firing, true);
+  assert.match(result.body, /canton-ag: articolo assente nella finestra/);
+  assert.match(result.body, /1 letture fonte, 19 item recenti/);
+  assert.match(result.body, /2 errori HTTP \(403×1, 503×1\)/);
+  assert.match(result.body, /pool evergreen saturo in 1 run/);
+  assert.match(result.body, /pool news respinto in 1 run/);
+  assert.match(result.body, /fact-check senza verdetto in 1\/1 run/);
+  assert.match(result.body, /risposte rate-limit: 2/);
 });
 
 test('locale-gap richiede titolo e corpo per lo stesso id nelle quattro lingue', (t) => {
