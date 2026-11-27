@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "carburanti",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "9fd058f39e65305264155ae9ea240f1c7f8b28d2d786f509cd7cab46eea10f77",
+  "updatedAt": "2026-11-27T16:22:51.037Z",
+  "contentHash": "0368dc626c9c092703960a7172e1d864e7d2d50d55ec6e94d3cc250bf4243a91",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-25T17:35:23.405Z",
+      "updatedAt": "2026-11-26T17:17:35.133Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-26T17:17:35.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Svitto conferma Microsoft 365 per l'amministrazione",
+          "url": "/articoli-svitto/svitto-microsoft-365-amministrazione/",
+          "excerpt": "Il Consiglio di Stato non vede ragioni per rivedere la scelta; seguirà comunque lo sviluppo di soluzioni open source.",
+          "date": "2026-11-27T16:18:36.750Z"
+        },
         {
           "title": "Governo Svitto respinge procedura di autorizzazione per funzionari",
           "url": "/articoli-svitto/gov-svitto-respinge-autorizzazione/",
@@ -82,12 +88,6 @@
           "url": "/articoli-svitto/martinimarkt-principale-strada-chiusa/",
           "excerpt": "Dalle 6.00 alle 20.00 dell'intero giorno di mercato, l'accesso e l'uscita sono vietati su Hauptstrasse tra Dorfplatz e Benzigerstrasse.",
           "date": "2026-11-07T08:08:34.915Z"
-        },
-        {
-          "title": "Svitto, la ricerca dovrebbe convenire di più alle aziende",
-          "url": "/articoli-svitto/ricerca-fisco-aziende-svitto/",
-          "excerpt": "Bote.ch collega la ricerca alla convenienza fiscale per le aziende del Canton Svitto, ma il materiale disponibile non indica misure, cifre o date.",
-          "date": "2026-11-06T03:37:01.055Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T16:22:51.037Z"
     },
     "en": {
       "canton": "SZ",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-26T17:17:35.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Schwyz confirms Microsoft 365 for the administration",
+          "url": "/en/schwyz-articles/schwyz-microsoft-365-administration/",
+          "excerpt": "The Council of State sees no reason to review the choice; it will nevertheless follow the development of open-source solutions.",
+          "date": "2026-11-27T16:18:36.750Z"
+        },
         {
           "title": "Schwyz Government rejects authorization procedure for officials",
           "url": "/en/schwyz-articles/schwyz-government-rejects-authorization/",
@@ -169,12 +175,6 @@
           "url": "/en/schwyz-articles/martinimarkt-hauptstrasse-closed/",
           "excerpt": "From 6:00 a.m. to 8:00 p.m. throughout the entire market day, entry and exit are prohibited on Hauptstrasse between Dorfplatz and Benzigerstrasse.",
           "date": "2026-11-07T08:08:34.915Z"
-        },
-        {
-          "title": "Schwyz, research should be more worthwhile for companies",
-          "url": "/en/schwyz-articles/schwyz-research-company-tax/",
-          "excerpt": "Bote.ch links the research to the tax advantages for companies in the Canton of Schwyz, but the available material does not indicate any measures, figures, or dates.",
-          "date": "2026-11-06T03:37:01.055Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T16:22:51.037Z"
     },
     "de": {
       "canton": "SZ",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-26T17:17:35.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Schwyz bestätigt Microsoft 365 für die Verwaltung",
+          "url": "/de/schwyz-artikel/schwyz-microsoft-365-verwaltung/",
+          "excerpt": "Der Staatsrat sieht keinen Grund, die Entscheidung zu überdenken; er wird die Entwicklung von Open-Source-Lösungen dennoch verfolgen.",
+          "date": "2026-11-27T16:18:36.750Z"
+        },
         {
           "title": "Schwyzer Regierung lehnt Genehmigungsverfahren für Amtsträger ab",
           "url": "/de/schwyz-artikel/schwyz-regierung-lehnt-autorisierung/",
@@ -256,12 +262,6 @@
           "url": "/de/schwyz-artikel/martinimarkt-hauptstrasse-gesperrt/",
           "excerpt": "Während des gesamten Markttags von 6.00 bis 20.00 Uhr sind Zu- und Wegfahrt auf der Hauptstrasse zwischen Dorfplatz und Benzigerstrasse verboten.",
           "date": "2026-11-07T08:08:34.915Z"
-        },
-        {
-          "title": "Schwyz, Forschung sollte sich für Unternehmen mehr lohnen",
-          "url": "/de/schwyz-artikel/schwyzer-firmen-forschung-steuern/",
-          "excerpt": "Bote.ch verbindet die Forschung mit der steuerlichen Attraktivität für Unternehmen im Kanton Schwyz, aber das verfügbare Material nennt keine Maßnahmen, Zahlen oder Daten.",
-          "date": "2026-11-06T03:37:01.055Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T16:22:51.037Z"
     },
     "fr": {
       "canton": "SZ",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-26T17:17:35.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Schwyz confirme Microsoft 365 pour l’administration",
+          "url": "/fr/articles-schwytz/schwyz-microsoft-365-administration/",
+          "excerpt": "Le Conseil d’État ne voit pas de raisons de revoir son choix ; il suivra néanmoins l’évolution des solutions open source.",
+          "date": "2026-11-27T16:18:36.750Z"
+        },
         {
           "title": "Schwytz rejette l’autorisation pour les fonctionnaires",
           "url": "/fr/articles-schwytz/schwytz-gouvernement-rejette-autorisation/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-schwytz/martinimarkt-hauptstrasse-fermee/",
           "excerpt": "De 6.00 à 20.00 pendant toute la journée du marché, l’accès et la sortie sont interdits sur Hauptstrasse entre Dorfplatz et Benzigerstrasse.",
           "date": "2026-11-07T08:08:34.915Z"
-        },
-        {
-          "title": "Schwyz, la recherche devrait être plus avantageuse pour les entreprises",
-          "url": "/fr/articles-schwytz/recherche-entreprises-fiscalite-schwyz/",
-          "excerpt": "Bote.ch relie la recherche à l’attractivité fiscale pour les entreprises du canton de Schwyz, mais les informations disponibles n’indiquent ni mesures, ni chiffres, ni dates.",
-          "date": "2026-11-06T03:37:01.055Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T16:22:51.037Z"
     }
   }
 }
