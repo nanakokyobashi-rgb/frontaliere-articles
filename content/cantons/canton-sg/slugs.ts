@@ -38,6 +38,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'incidenti-a1-goldach-san-gallo': { it: 'incidenti-a1-goldach-san-gallo', en: 'a1-crashes-goldach-st-gallen', de: 'unfaelle-a1-goldach-st-gallen', fr: 'accidents-a1-goldach-saint-gall' },
  'votazione-fondo-rete-gas-wil': { it: 'votazione-fondo-rete-gas-wil', en: 'wil-gas-network-fund-vote', de: 'abstimmung-fonds-gasnetz-wil', fr: 'vote-fonds-reseau-gaz-wil' },
  'inverno-sgallen-controlli-strade': { it: 'inverno-sgallen-controlli-strade', en: 'sgallen-winter-road-controls', de: 'winter-sgallen-strassenkontrollen', fr: 'hiver-sgallen-controles-routes' },
+ 'sg-politica-fondiaria-attiva': { it: 'sg-politica-fondiaria-attiva', en: 'sg-active-land-policy', de: 'sg-aktive-bodenpolitik', fr: 'sg-politique-fonciere-active' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -108,6 +108,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.inverno-sgallen-controlli-strade.title': 'Winter in St.Gallen: Straßenkontrollen zwischen Ende Oktober und Mitte April',
     'blog.article.inverno-sgallen-controlli-strade.excerpt': 'Schnee und Temperaturen unter null Grad erwartet; die Räumung folgt festgelegten Prioritäten, mit bis zu 200 Personen.',
     'blog.article.inverno-sgallen-controlli-strade.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.sg-politica-fondiaria-attiva.title': 'St. Gallen eröffnet Vernehmlassung zum Gesetz über aktive Bodenpolitik',
+    'blog.article.sg-politica-fondiaria-attiva.excerpt': 'Die Vernehmlassung zum Gesetzesentwurf ist bis zum 31. Januar 2027 offen und an das Amt für Wirtschaft und Arbeit gerichtet.',
+    'blog.article.sg-politica-fondiaria-attiva.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSgDe;

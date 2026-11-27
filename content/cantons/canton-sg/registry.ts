@@ -391,4 +391,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sg-politica-fondiaria-attiva',
+ category: 'novita',
+ date: '2026-11-27T09:54:25.553Z',
+ image: '/images/blog/article-sg-politica-fondiaria-attiva.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
