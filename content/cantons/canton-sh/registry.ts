@@ -436,4 +436,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'nuovo-sistema-stipendi-insegnanti',
+ category: 'novita',
+ date: '2026-11-27T16:26:04.350Z',
+ image: '/images/blog/article-nuovo-sistema-stipendi-insegnanti.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

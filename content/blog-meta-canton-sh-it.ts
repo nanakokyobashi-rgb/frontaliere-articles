@@ -120,6 +120,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.neuhausen-soppressione-strisce-pedonali.title': 'Neuhausen sopprime dodici strisce pedonali nel centro',
     'blog.article.neuhausen-soppressione-strisce-pedonali.excerpt': 'Il Consiglio comunale di Neuhausen am Rheinfall ha deciso di sopprimere 12 su 18 strisce pedonali esistenti, con attuazione prevista nel primo semestre 2027.',
     'blog.article.neuhausen-soppressione-strisce-pedonali.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.nuovo-sistema-stipendi-insegnanti.title': 'Nuovo sistema salariale per insegnanti costa quasi 9 milioni all\'anno',
+    'blog.article.nuovo-sistema-stipendi-insegnanti.excerpt': 'Il nuovo sistema salariale per gli insegnanti di Sciaffusa comporterebbe quasi CHF 9 milioni di spesa aggiuntiva all’anno per il Cantone e i Comuni.',
+    'blog.article.nuovo-sistema-stipendi-insegnanti.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;

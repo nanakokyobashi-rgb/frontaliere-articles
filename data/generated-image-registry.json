@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 1300,
+  "assetCount": 1301,
   "assets": [
     {
       "schema": 1,
@@ -54037,6 +54037,49 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Generic synthetic administrative office scene with a desktop computer and documents; the Swiss flag supports the Swiss administration context. No readable text, logos, or people are visible."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-nuovo-sistema-stipendi-insegnanti",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2",
+      "executorModel": "gpt-6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "a148adb3f7d5bbb9dcec50ea9dc43c3f57a2834eede435d93a58d51434e227b1",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "dc089b672dc5042ad65c16d96c201f1d7cc79f19b005d7d26141096d91949a21",
+      "bytes": 215544,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-11-27T16:25:51.508Z",
+      "verifiedAt": "2026-11-27T16:26:03.933Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-nuovo-sistema-stipendi-insegnanti.webp",
+      "area": "Swiss border region",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Generic autumn school exterior, relevant to the teachers’ salary topic; no readable text, logos, or recognizable foreground people."
       }
     }
   ],
