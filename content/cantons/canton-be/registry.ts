@@ -325,4 +325,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'risposta-petizione-fisioterapia-berna',
+ category: 'novita',
+ date: '2026-11-27T18:50:20.097Z',
+ image: '/images/blog/article-risposta-petizione-fisioterapia-berna.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

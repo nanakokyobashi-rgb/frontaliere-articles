@@ -90,6 +90,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.priorita-traffico-cinque-tratti.title': 'Priorité au trafic économique sur cinq nouveaux tronçons à Berne',
     'blog.article.priorita-traffico-cinque-tratti.excerpt': 'La décision du Gemeinderat du 26 novembre 2026 ouvre cinq nouveaux tronçons en 2027, après un projet pilote positif lancé le 1er juin 2025.',
     'blog.article.priorita-traffico-cinque-tratti.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.risposta-petizione-fisioterapia-berna.title': 'Le gouvernement bernois prend acte de la pétition sur la physiothérapie',
+    'blog.article.risposta-petizione-fisioterapia-berna.excerpt': 'Le gouvernement du canton de Berne a pris acte de la pétition « Pour une physiothérapie garantie et proche du lieu de domicile dans le canton de Berne », en tenant compte de ses demandes dans les procédures tarifaires en cours.',
+    'blog.article.risposta-petizione-fisioterapia-berna.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBeFr;
