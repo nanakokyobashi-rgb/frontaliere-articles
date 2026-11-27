@@ -1626,8 +1626,9 @@ test('workflow refresh-canton-hubs: cron giornaliero, zero sezioni = successo, r
   }
   assert.match(wf, /rebase-onto-remote\.sh "\$REMOTE" "\$TARGET" \\\n\s+--section-surfaces/);
   assert.match(wf, /persist-credentials: false/);
-  // Push col PAT della regola di AGENTS.md, con quello degli altri produttori come riserva; mai il GITHUB_TOKEN.
-  assert.match(wf, /PUSH_TOKEN="\$\{GITHUB_PAT_NANAKO:-\$\{GITHUB_PAT:-\}\}"/);
+  // Push col PAT owner-only della regola di AGENTS.md; mai il GITHUB_TOKEN o un fallback ambiguo.
+  assert.match(wf, /PUSH_TOKEN="\$\{GITHUB_PAT_NANAKO:-\}"/);
+  assert.doesNotMatch(wf, /GITHUB_PAT_NANAKO:-\$\{GITHUB_PAT:-\}/);
   assert.match(wf, /REMOTE="https:\/\/x-access-token:\$\{PUSH_TOKEN\}@github\.com\//);
   assert.doesNotMatch(wf, /x-access-token:\$\{GITHUB_TOKEN\}|secrets\.GITHUB_TOKEN/);
   assert.match(wf, /group: refresh-canton-hubs/);
