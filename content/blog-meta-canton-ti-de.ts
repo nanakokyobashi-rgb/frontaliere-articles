@@ -87,6 +87,9 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.reclutamento-infermieri-varese.title': 'Pflegekräfte aus der Lombardei in Richtung Tessin: 7.000 CHF',
     'blog.article.reclutamento-infermieri-varese.excerpt': 'Das Lohngefälle treibt italienische Pflegekräfte weiterhin über die Grenze: Eine junge Fachkraft aus der Provinz Varese wechselte von den monatlichen 1.800 Euro aus der vorherigen Beschäftigung zu einer Stelle in der Schweiz, wo 7.000 Franken verdient werden.',
     'blog.article.reclutamento-infermieri-varese.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.svizzera-schengen-controlli-frontalieri.title': 'Mögliche Grenzkontrollen, wenn die Schweiz aus dem Schengen-Raum austritt',
+    'blog.article.svizzera-schengen-controlli-frontalieri.excerpt': 'Der Bericht des Bundesrates wurde am 18. September 2026 veröffentlicht.',
+    'blog.article.svizzera-schengen-controlli-frontalieri.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTiDe;

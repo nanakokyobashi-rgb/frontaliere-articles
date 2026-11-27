@@ -87,6 +87,9 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.reclutamento-infermieri-varese.title': 'Infermieri lombardi verso il Ticino: 7.000 CHF',
     'blog.article.reclutamento-infermieri-varese.excerpt': 'Il divario retributivo continua a spingere gli infermieri italiani oltreconfine: una giovane professionista della provincia di Varese è passata dai 1.800 euro mensili del precedente impiego a un lavoro in Svizzera, dove guadagna 7.000 franchi.',
     'blog.article.reclutamento-infermieri-varese.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.svizzera-schengen-controlli-frontalieri.title': 'Possibili controlli ai confini se la Svizzera esce da Schengen',
+    'blog.article.svizzera-schengen-controlli-frontalieri.excerpt': 'Il rapporto del Consiglio federale è stato pubblicato il 18 settembre 2026.',
+    'blog.article.svizzera-schengen-controlli-frontalieri.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTiIt;

@@ -81,6 +81,17 @@
       "requestedAt": "2026-11-27T06:40:48.091Z",
       "lastFailureAt": "2026-11-27T06:40:48.091Z",
       "retryHint": "no-text"
+    },
+    {
+      "articleId": "svizzera-schengen-controlli-frontalieri",
+      "title": "Possibili controlli ai confini se la Svizzera esce da Schengen",
+      "fallbackImage": "/images/blog/article-rapporto-consiglio-federale-schengen.webp",
+      "reason": "All image providers failed for article-svizzera-schengen-controlli-frontalieri: openai-codex (vision gate rejected image: Generic border-crossing scene with commuter traffic; a sma",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-11-27T10:54:42.564Z",
+      "lastFailureAt": "2026-11-27T10:54:42.564Z",
+      "retryHint": "no-text"
     }
   ]
 }
