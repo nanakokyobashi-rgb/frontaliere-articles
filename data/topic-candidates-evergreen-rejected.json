@@ -6612,6 +6612,18 @@
       "firstSeenAt": "2026-11-27T09:41:53.938Z",
       "lastValidatedAt": "2026-11-27T09:41:53.938Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "salario minimo canton Svitto requisiti e applicazione",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-27T10:03:36.998Z",
+      "lastValidatedAt": "2026-11-27T10:03:36.998Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -15861,10 +15873,6 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.rsi.ch/s/4257428": {
-      "section": "svizzera",
-      "ts": 1795596455762
-    },
     "frontaliere::https://www.ocst.ch/il-lavoro/411-professioni/404-sociosanitario/2638-salute-premi-di-cassa-malati-e-responsabilita-una-riflessione-sul-crescente-costo-della-sanita-ticinese": {
       "section": "frontaliere",
       "ts": 1795603807220
@@ -15900,6 +15908,10 @@
     "svizzera::https://cambiavalute.ch/guide/casa/ritiro-secondo-pilastro-comprare-casa-icondizioni-fiscalita": {
       "section": "svizzera",
       "ts": 1795764246237
+    },
+    "svizzera::https://www3.ti.ch/dfe/dr/ustat/allegati/digitale/mercato_lavoro/notiziario/2026q1": {
+      "section": "svizzera",
+      "ts": 1795773294344
     }
   }
 }
