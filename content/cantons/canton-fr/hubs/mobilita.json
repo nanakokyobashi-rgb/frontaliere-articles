@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T07:48:33.256Z",
-  "contentHash": "1c3aea7b4961c7eb0f804c31790bd65e6e3b3a7f99b7d84ce63ee2bae5cfddb4",
+  "updatedAt": "2026-11-27T07:53:46.045Z",
+  "contentHash": "a4e61f9e90d350146b04f183c18d84528ad98ec8ad3a10a6bd9186e790702c3d",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -140,6 +140,12 @@
           "date": "2026-11-20T10:27:53.106Z"
         },
         {
+          "title": "Rottura condotta acqua: traffico alternato su route Neuve a Friburgo",
+          "url": "/articoli-friburgo/rottura-condotta-route-neuve/",
+          "excerpt": "La rottura di una condotta d'acqua mercoledì sera ha danneggiato la strada in parte alta della route Neuve; una decina di immobili è rimasta senza acqua.",
+          "date": "2026-11-27T07:50:19.630Z"
+        },
+        {
           "title": "Friburgo: Consiglio di Stato rigetta linea ferroviaria diretta Friburgo-Bulle",
           "url": "/articoli-friburgo/friburgo-no-linea-diretta/",
           "excerpt": "Il Consiglio di Stato del Canton Friburgo non vuole una linea ferroviaria diretta tra Friburgo e Bulle.",
@@ -174,12 +180,6 @@
           "url": "/articoli-svizzera/trasporti-pubblici-canton-friburgo-abbonamenti/",
           "excerpt": "Ecco i dettagli sugli abbonamenti dei trasporti pubblici nel Cantone di Friburgo.",
           "date": "2026-08-18T00:58:21.517Z"
-        },
-        {
-          "title": "Ginevra-Friburgo, una tratta ferroviaria sotto pressione",
-          "url": "/articoli-svizzera/linea-ginevra-friburgo-pressione/",
-          "excerpt": "Tredici interruzioni dall'inizio dell'anno hanno interessato la linea ferroviaria tra Ginevra e Friburgo.",
-          "date": "2026-10-08T21:08:07.621Z"
         }
       ],
       "latestCantonArticles": [],
@@ -193,7 +193,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-27T07:48:33.256Z"
+      "updatedAt": "2026-11-27T07:53:46.045Z"
     },
     "en": {
       "canton": "FR",
@@ -316,6 +316,12 @@
           "date": "2026-11-20T10:27:53.106Z"
         },
         {
+          "title": "Water main break: alternating traffic on route Neuve in Fribourg",
+          "url": "/en/fribourg-articles/pipe-break-route-neuve-fribourg/",
+          "excerpt": "A water main break on Wednesday evening damaged the road in the upper part of route Neuve; around ten properties were left without water.",
+          "date": "2026-11-27T07:50:19.630Z"
+        },
+        {
           "title": "Fribourg: State Council rejects direct Fribourg-Bulle railway line",
           "url": "/en/fribourg-articles/fribourg-no-direct-line/",
           "excerpt": "The Council of State of the Canton of Fribourg does not want a direct railway line between Fribourg and Bulle.",
@@ -350,12 +356,6 @@
           "url": "/en/swiss-articles/fribourg-public-transport-abonements/",
           "excerpt": "Here are the details on public transport subscriptions in the Canton of Fribourg.",
           "date": "2026-08-18T00:58:21.517Z"
-        },
-        {
-          "title": "Geneva–Fribourg, a railway route under pressure",
-          "url": "/en/swiss-articles/geneva-fribourg-rail-line-pressure/",
-          "excerpt": "Thirteen disruptions since the beginning of the year have affected the railway line between Geneva and Fribourg.",
-          "date": "2026-10-08T21:08:07.621Z"
         }
       ],
       "latestCantonArticles": [],
@@ -369,7 +369,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-27T07:48:33.256Z"
+      "updatedAt": "2026-11-27T07:53:46.045Z"
     },
     "de": {
       "canton": "FR",
@@ -492,6 +492,12 @@
           "date": "2026-11-20T10:27:53.106Z"
         },
         {
+          "title": "Wasserrohrbruch: Wechselverkehr auf der route Neuve in Freiburg",
+          "url": "/de/freiburg-artikel/rohrbruch-route-neuve-freiburg/",
+          "excerpt": "Der Bruch einer Wasserleitung am Mittwochabend beschädigte die Straße im oberen Teil der route Neuve; etwa zehn Gebäude waren ohne Wasser geblieben.",
+          "date": "2026-11-27T07:50:19.630Z"
+        },
+        {
           "title": "Freiburg: Staatsrat lehnt direkte Bahnlinie Freiburg-Bulle ab",
           "url": "/de/freiburg-artikel/friburg-keine-direktstrecke/",
           "excerpt": "Freiburg will keine direkte Bahnlinie nach Bulle Das Postulat wurde im Mai 2022 angenommen: 87 Stimmen gegen 3 Das Projekt wird als kostspielig und technisch.",
@@ -526,12 +532,6 @@
           "url": "/de/schweiz-artikel/freiburg-oeffentliche-verkehr-abos/",
           "excerpt": "Hier finden Sie die Details zu den ÖV-Abos im Kanton Freiburg.",
           "date": "2026-08-18T00:58:21.517Z"
-        },
-        {
-          "title": "Genf-Freiburg, eine unter Druck stehende Bahnstrecke",
-          "url": "/de/schweiz-artikel/bahnstrecke-genf-freiburg-unter-druck/",
-          "excerpt": "Seit Jahresbeginn kam es auf der Bahnstrecke zwischen Genf und Freiburg zu dreizehn Unterbrechungen.",
-          "date": "2026-10-08T21:08:07.621Z"
         }
       ],
       "latestCantonArticles": [],
@@ -545,7 +545,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-27T07:48:33.256Z"
+      "updatedAt": "2026-11-27T07:53:46.045Z"
     },
     "fr": {
       "canton": "FR",
@@ -668,6 +668,12 @@
           "date": "2026-11-20T10:27:53.106Z"
         },
         {
+          "title": "Rupture de conduite d’eau : circulation alternée à Fribourg",
+          "url": "/fr/articles-fribourg/rupture-conduite-route-neuve/",
+          "excerpt": "La rupture d’une conduite d’eau mercredi soir a endommagé la chaussée dans la partie haute de la route Neuve ; une dizaine d’immeubles est restée sans eau.",
+          "date": "2026-11-27T07:50:19.630Z"
+        },
+        {
           "title": "Fribourg : le Conseil d’État rejette la ligne ferroviaire directe Fribourg-Bulle",
           "url": "/fr/articles-fribourg/fribourg-pas-de-liaison-directe/",
           "excerpt": "Le Conseil d’État du canton de Fribourg ne souhaite pas de ligne ferroviaire directe entre Fribourg et Bulle.",
@@ -702,12 +708,6 @@
           "url": "/fr/articles-suisse/fribourg-transports-en-commun-abonnements/",
           "excerpt": "Voici les détails des abonnements aux transports publics dans le canton de Fribourg.",
           "date": "2026-08-18T00:58:21.517Z"
-        },
-        {
-          "title": "Genève-Fribourg, une ligne ferroviaire sous pression",
-          "url": "/fr/articles-suisse/ligne-geneve-fribourg-sous-pression/",
-          "excerpt": "Treize interruptions depuis le début de l’année ont touché la ligne ferroviaire entre Genève et Fribourg.",
-          "date": "2026-10-08T21:08:07.621Z"
         }
       ],
       "latestCantonArticles": [],
@@ -721,7 +721,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-27T07:48:33.256Z"
+      "updatedAt": "2026-11-27T07:53:46.045Z"
     }
   }
 }
