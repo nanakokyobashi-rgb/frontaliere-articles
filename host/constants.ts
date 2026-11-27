@@ -231,39 +231,77 @@ const JOB_BOARD_SECTION_PREFIX_SOURCE = 'cerca-lavoro|find-jobs|trouver-emploi|j
 const JOB_BOARD_SECTION_PATHNAME_RX =
   new RegExp(`^(?:/(?:it|en|de|fr))?/(?:${JOB_BOARD_SECTION_PREFIX_SOURCE})-[a-z][a-z-]*(?:/|$)`);
 
+/** Event name the client listens on; shared contract with services/adBlockDetection.ts. */
+const FC_ADBLOCK_SIGNAL_EVENT = 'frontaliere:adblock-data';
+
 /**
- * Click-only Offerwall gate (site source: build-plugins/constants.ts, where
- * the live probes behind it are recorded). AdSense includes the whole site
- * (owner decision 2026-09-26), so the gate decides where the Offerwall may
- * open. For the Funding Choices call that carries OFFERWALL (it also carries
- * the GDPR consent message and the ad-block message):
- *  - off the job-board sections, article pages included, only the Offerwall
- *    is suppressed and the gate is marked `off_board`; it never proceeds
- *    there, because "Candidati" does not exist on those pages;
- *  - on every job-board section the call is HELD only when a consent decision
- *    is stored on both sides — the site's key AND a TC string in Funding
- *    Choices' `FCCDCF` cookie — and `window.__ftOfferwallGate.release()`
- *    proceeds it when the visitor clicks "Candidati". Otherwise only the
- *    Offerwall is suppressed (`suppressed`), so the CMP shows at once.
- * Calls before OFFERWALL is typed proceed immediately; if AD_BLOCKING is
- * already typed, that one message remains filtered.
+ * Click-only Offerwall gate (2026-09-24; every job-board section and
+ * off-board suppression since 2026-09-26, owner decision).
  *
- * A "Candidati" click that lands BEFORE Funding Choices reaches this gate is
- * deliberately not queued. The site's consumer (services/offerwallClickGate.ts
- * and components/community/RewardedApplicationOffer.tsx) reads the gate as
- * `absent`, reports `rewarded_offerwall_not_shown` with `reason=not_held`, and
- * takes the GPT path, whose no-fill ends in a same-tab employer hand-off: the
- * visitor never waits on a second click. A visit that started off the board
- * reads `off_board` (`reason=off_board_page`) and takes the same GPT path. A
- * call held later on that page view stays held on purpose. Replaying the
- * click into it would render an Offerwall on top of the GPT request already
- * in flight, the double flow the site's review ruled out. The value is
- * transported: change it in the site first, since the SiteShellContract
- * fingerprint must match on both sides. AD_BLOCKING is filtered whenever
- * its enum is available, including during OFFERWALL bootstrap; consent and
- * other FC messages remain available.
+ * The Offerwall is the AdSense one, the only rewarded demand the site has,
+ * and it must appear only when the visitor clicks "Candidati", never on entry
+ * to a page. AdSense includes the whole site, so the gate decides where it
+ * may open. Funding Choices calls `controlledMessagingFunction` twice per
+ * page view: first with an empty MessageTypeEnum, then with
+ * OFFERWALL/AD_BLOCKING populated. The live enum values are strings
+ * ({OFFERWALL:"offerwall"}, read on the job board 2026-09-27); a number is
+ * accepted too. A number-only check (#9974) read the live enum as missing and
+ * sent `proceed(false)` for every visitor, dropping the Offerwall and the CMP
+ * site-wide. The first enum-less call is a one-shot bootstrap allowance; if
+ * the enum is still missing on a later call, the gate fails closed because a
+ * type-specific Offerwall suppression is not possible. The second call also
+ * carries the GDPR
+ * consent message: holding it for a visitor with no consent decision kept
+ * the CMP off screen until the release (live probe, 24-09). So:
+ *  - once OFFERWALL is typed, it filters AD_BLOCKING separately so the
+ *    first-party localized recovery offer can handle confirmed blockers;
+ *    consent and other Funding Choices message types remain available;
+ *  - off the job-board sections (JOB_BOARD_SECTION_PATHNAME_RX: every canton,
+ *    the Switzerland aggregator, it/en/de/fr) it suppresses the Offerwall
+ *    (`proceed(false,[OFFERWALL])`) and marks the gate `off_board`.
+ *    It never proceeds
+ *    the Offerwall there: "Candidati" does not exist on those pages;
+ *  - on a job-board section the call is HELD only when a decision is stored
+ *    on both sides: `frontaliere_ads_consent` (our bridge) AND a TC string in
+ *    Funding Choices' own `FCCDCF` cookie (before consent its TC slot is null;
+ *    a TCF v2 string always starts with "C"). Our key alone outlives the
+ *    Funding Choices cookie, and a held re-prompt would hide the CMP for the
+ *    whole SPA session. Otherwise it suppresses only the Offerwall (the CMP
+ *    remains available; no Offerwall on that
+ *    page view) and marks the gate `suppressed` so the click can report why.
+ *    If Funding Choices later confirms an active blocker, a held callback is
+ *    released with OFFERWALL suppressed; AD_BLOCKING is filtered so the
+ *    first-party offer can render without waiting for the user's click.
+ * A visitor who lands off the board and navigates to a job in the SPA marks
+ * the entry as waiting for a fresh Offerwall callback. When Funding Choices
+ * delivers that destination-route callback, it is held when consent is still
+ * available, so `window.__ftOfferwallGate.release()` can open the Offerwall
+ * on the destination route. Leaving the board still suppresses the held
+ * callback and returns to `off_board`. When Funding Choices confirms an
+ * active blocker, AD_BLOCKING remains filtered independently of the
+ * Offerwall click; otherwise the click-only Offerwall remains held.
+ * `release()`
+ * (services/offerwallClickGate.ts, from the rewarded application offer)
+ * proceeds a held call. Live probe on the job board
+ * with consent stored: holding only that call left the TCF signal and the
+ * first AdSense request on schedule (11.9 s vs 7.7-16.5 s in two controls),
+ * while holding the first call pushed it from 16.5 s to 32.9 s. The first call
+ * never waits for the Offerwall enum. Any already-typed AD_BLOCKING value is
+ * filtered, including during bootstrap.
+ * Offerwall follows the click policy, and consent and other FC messages remain
+ * available unless FC itself suppresses them.
+ *
+ * Carried by index.html (inline copy), OFFERWALL_FC_SNIPPET,
+ * ADSENSE_LOADER_CONTENT and GPT_LOADER_CONTENT (build-plugins/jobBoardGpt.ts,
+ * deferred but ordered before DOMContentLoaded), so every page that loads
+ * Funding Choices installs it before user interaction. The loader matters most:
+ * most job-board URLs (listing, company, search, sector pages) and every
+ * static page without the snippet load Funding Choices only through it. The
+ * first copy to run installs the gate and the others step aside.
+ * tests/offerwall-click-gate-parity.test.ts executes the copies and pins the
+ * path regex of the inline twin.
  */
-export const FC_JOBBOARD_OFFERWALL_GATE_JS = `(function(){var g=window.googlefc=window.googlefc||{};if(g.__ftOfferwallGateInstalled)return;var previousControlledMessagingFunction=g.controlledMessagingFunction;function isJobBoardPath(){var p=window.location&&window.location.pathname||'';return /${JOB_BOARD_SECTION_PATHNAME_RX.source}/.test(p);}function hasConsentDecision(){var d=false;try{d=!!window.localStorage.getItem('${ADS_CONSENT_STORAGE_KEY}');}catch(e){}if(d){var c=(window.document&&window.document.cookie||'').match(/(?:^|;\\s*)FCCDCF=([^;]*)/),v='';try{v=c?decodeURIComponent(c[1]):'';}catch(e){}d=/\\x22C[A-Za-z0-9_-]{20,}/.test(v);}return d;}function captureDecision(a,t){return{allow:a!==false,types:Array.isArray(t)?t.slice():undefined};}function appendTypes(t,e){for(var i=0;i<(e||[]).length;i++)if(t.indexOf(e[i])===-1)t.push(e[i]);}function mergeDecisions(p,q){var a=p||{allow:true},b=q||{allow:true};if(a.allow&&b.allow)return{allow:true};if(!a.allow&&(!a.types||!a.types.length))return{allow:false};if(!b.allow&&(!b.types||!b.types.length))return{allow:false};var t=[];appendTypes(t,a.types);appendTypes(t,b.types);return{allow:false,types:t};}function deliver(m,p,q){var d=mergeDecisions(p,q);if(d.allow)m.proceed(true);else if(d.types&&d.types.length)m.proceed(false,d.types);else m.proceed(false);}function hold(w,e,o){w.held=w.held||[];w.held.push(e);w.offerwall=o;w.state='held';w.release=function(){if(w.state!=='held')return false;w.state='released';var h=w.held.splice(0);for(var i=0;i<h.length;i++)try{deliver(h[i].message,h[i].previous,{allow:true});}catch(e){}return true;};}function syncRoute(){var w=window.__ftOfferwallGate;if(!w)return;if(isJobBoardPath()){if(w.state==='off_board'&&w.reacquire){w.reacquire=undefined;w.state=hasConsentDecision()?'idle':'suppressed';w.held=[];w.release=undefined;w.offerwall=undefined;}return;}if(w.state==='held'){var h=w.held.splice(0),o=w.offerwall!==undefined?w.offerwall:(g.MessageTypeEnum||{}).OFFERWALL;for(var i=0;i<h.length;i++)try{deliver(h[i].message,h[i].previous,o===undefined?{allow:false}:{allow:false,types:[o]});}catch(e){}}w.state='off_board';w.held=[];w.release=undefined;w.offerwall=undefined;w.reacquire=undefined;}function watchRoutes(){var h=window.history;if(h)['pushState','replaceState'].forEach(function(k){var original=h[k];if(typeof original!=='function')return;h[k]=function(){var r=original.apply(this,arguments);syncRoute();return r;};});if(typeof window.addEventListener==='function')window.addEventListener('popstate',syncRoute);}function handleControlledMessaging(m,p){var E=g.MessageTypeEnum||{};if(typeof E.AD_BLOCKING==='number'||typeof E.AD_BLOCKING==='string')p=mergeDecisions(p,{allow:false,types:[E.AD_BLOCKING]});if(typeof E.OFFERWALL!=='number'&&typeof E.OFFERWALL!=='string'){if(g.__ftOfferwallBootstrapComplete){deliver(m,p,{allow:false});return;}g.__ftOfferwallBootstrapComplete=true;deliver(m,p,{allow:true});return;}syncRoute();if(!isJobBoardPath()){var w=window.__ftOfferwallGate=window.__ftOfferwallGate||{state:'off_board',held:[]};w.reacquire=true;deliver(m,p,{allow:false,types:[E.OFFERWALL]});return;}if(!hasConsentDecision()){window.__ftOfferwallGate=window.__ftOfferwallGate||{state:'suppressed',held:[]};deliver(m,p,{allow:false,types:[E.OFFERWALL]});return;}var w=window.__ftOfferwallGate=window.__ftOfferwallGate||{state:'idle',held:[]};if(w.state==='released'){deliver(m,p,{allow:true});return;}hold(w,{message:m,previous:p},E.OFFERWALL);}g.controlledMessagingFunction=function(m){var self=this,done=false,finish=function(p){if(done)return;done=true;handleControlledMessaging(m,p||{allow:false});};if(typeof previousControlledMessagingFunction!=='function'){finish({allow:true});return;}var delegated=Object.create(m);delegated.proceed=function(a,t){finish(captureDecision(a,t));};var result;try{result=previousControlledMessagingFunction.call(self,delegated);}catch(e){finish({allow:false});return;}if(result&&typeof result.then==='function')result.then(function(){if(!done)finish({allow:false});},function(){finish({allow:false});});};g.__ftOfferwallGateInstalled=true;watchRoutes();})();`;
+export const FC_JOBBOARD_OFFERWALL_GATE_JS = `(function(){var g=window.googlefc=window.googlefc||{};if(g.__ftOfferwallGateInstalled)return;var previousControlledMessagingFunction=g.controlledMessagingFunction;function isJobBoardPath(){var p=window.location&&window.location.pathname||'';return /${JOB_BOARD_SECTION_PATHNAME_RX.source}/.test(p);}function hasConsentDecision(){var d=false;try{d=!!window.localStorage.getItem('${ADS_CONSENT_STORAGE_KEY}');}catch(e){}if(d){var c=(window.document&&window.document.cookie||'').match(/(?:^|;\\s*)FCCDCF=([^;]*)/),v='';try{v=c?decodeURIComponent(c[1]):'';}catch(e){}d=/\\x22C[A-Za-z0-9_-]{20,}/.test(v);}return d;}function captureDecision(a,t){return{allow:a!==false,types:Array.isArray(t)?t.slice():undefined};}function appendTypes(t,e){for(var i=0;i<(e||[]).length;i++)if(t.indexOf(e[i])===-1)t.push(e[i]);}function mergeDecisions(p,q){var a=p||{allow:true},b=q||{allow:true};if(a.allow&&b.allow)return{allow:true};if(!a.allow&&(!a.types||!a.types.length))return{allow:false};if(!b.allow&&(!b.types||!b.types.length))return{allow:false};var t=[];appendTypes(t,a.types);appendTypes(t,b.types);return{allow:false,types:t};}function deliver(m,p,q){var d=mergeDecisions(p,q);if(d.allow)m.proceed(true);else if(d.types&&d.types.length)m.proceed(false,d.types);else m.proceed(false);}function adBlockConfirmed(){var b=window.__ftAdBlock;return !!b&&b.blocked===true&&b.adsAllowed!==true;}function hold(w,e,o){w.held=w.held||[];w.held.push(e);w.offerwall=o;w.state='held';w.release=function(showOfferwall){if(w.state!=='held')return false;var show=showOfferwall!==false;w.state=show?'released':'suppressed';var h=w.held.splice(0);for(var i=0;i<h.length;i++)try{deliver(h[i].message,h[i].previous,show?{allow:true}:{allow:false,types:[w.offerwall]});}catch(e){}return true;};}function releaseForAdBlock(){var w=window.__ftOfferwallGate;if(w&&w.state==='held'&&adBlockConfirmed()&&typeof w.release==='function')w.release(false);}function syncRoute(){var w=window.__ftOfferwallGate;if(!w)return;if(isJobBoardPath()){if(w.state==='off_board'&&w.reacquire){w.reacquire=undefined;w.state=hasConsentDecision()?'idle':'suppressed';w.held=[];w.release=undefined;w.offerwall=undefined;}return;}if(w.state==='held'){var h=w.held.splice(0),o=w.offerwall!==undefined?w.offerwall:(g.MessageTypeEnum||{}).OFFERWALL;for(var i=0;i<h.length;i++)try{deliver(h[i].message,h[i].previous,o===undefined?{allow:false}:{allow:false,types:[o]});}catch(e){}}w.state='off_board';w.held=[];w.release=undefined;w.offerwall=undefined;w.reacquire=undefined;}function watchRoutes(){var h=window.history;if(h)['pushState','replaceState'].forEach(function(k){var original=h[k];if(typeof original!=='function')return;h[k]=function(){var r=original.apply(this,arguments);syncRoute();return r;};});if(typeof window.addEventListener==='function')window.addEventListener('popstate',syncRoute);}function handleControlledMessaging(m,p){var E=g.MessageTypeEnum||{};if(typeof E.AD_BLOCKING==='number'||typeof E.AD_BLOCKING==='string')p=mergeDecisions(p,{allow:false,types:[E.AD_BLOCKING]});if(typeof E.OFFERWALL!=='number'&&typeof E.OFFERWALL!=='string'){if(g.__ftOfferwallBootstrapComplete){deliver(m,p,{allow:false});return;}g.__ftOfferwallBootstrapComplete=true;deliver(m,p,{allow:true});return;}syncRoute();if(!isJobBoardPath()){var w=window.__ftOfferwallGate=window.__ftOfferwallGate||{state:'off_board',held:[]};w.reacquire=true;deliver(m,p,{allow:false,types:[E.OFFERWALL]});return;}if(!hasConsentDecision()){window.__ftOfferwallGate=window.__ftOfferwallGate||{state:'suppressed',held:[]};deliver(m,p,{allow:false,types:[E.OFFERWALL]});return;}var w=window.__ftOfferwallGate=window.__ftOfferwallGate||{state:'idle',held:[]};if(w.state==='released'){deliver(m,p,{allow:true});return;}if(w.state==='suppressed'){deliver(m,p,{allow:false,types:[E.OFFERWALL]});return;}if(adBlockConfirmed()){w.state='suppressed';w.held=[];w.release=undefined;deliver(m,p,{allow:false,types:[E.OFFERWALL]});return;}hold(w,{message:m,previous:p},E.OFFERWALL);}g.controlledMessagingFunction=function(m){var self=this,done=false,finish=function(p){if(done)return;done=true;handleControlledMessaging(m,p||{allow:false});};if(typeof previousControlledMessagingFunction!=='function'){finish({allow:true});return;}var delegated=Object.create(m);delegated.proceed=function(a,t){finish(captureDecision(a,t));};var result;try{result=previousControlledMessagingFunction.call(self,delegated);}catch(e){finish({allow:false});return;}if(result&&typeof result.then==='function')result.then(function(){if(!done)finish({allow:false});},function(){finish({allow:false});});};g.__ftOfferwallGateInstalled=true;watchRoutes();if(typeof window.addEventListener==='function')window.addEventListener('${FC_ADBLOCK_SIGNAL_EVENT}',releaseForAdBlock);})();`;
 
 /**
  * Funding Choices MESSAGING loader, injected PARSE-TIME into the <head> of

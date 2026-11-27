@@ -4330,15 +4330,16 @@
       "mode": "adapted",
       "reason": "Costanti host adattate dal sito: il fingerprint confronta i 23 scalari autorevoli del SiteShellContract; nomi content-addressed e byte degli asset statici sono verificati separatamente in host/third-party-shell-assets-fingerprint.json e host/third-party-shell-assets.json. Il runtime Firebase mantiene il match sulla chiave esatta e non espone segreti.",
       "baseline": {
-        "site": "ed98db8c95caaf5d",
-        "corpus": "3b7ed3cce6e5027b",
-        "alignedAt": "2026-11-15"
+        "site": "b70bee1c3c0ed944",
+        "corpus": "b9eed654cad5e232",
+        "alignedAt": "2026-11-27",
+        "forcedAt": "2026-11-27T03:33:54.613Z"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 23,
-        "sha256": "038caa0a6ed799ada3e7c192c8c31aa5a0a04ee9fbd7ebffca1dc7f9caa1343f"
+        "sha256": "c68044897a02cadd73d8e221c2a5781f9351a86af435db21055e352a6bdd4ac4"
       }
     },
     {
@@ -4555,10 +4556,10 @@
       "mode": "adapted",
       "reason": "Impronta SHA-256 dei 23 campi scalari di SiteShellContract, prodotta e verificata da host/tests/shell-contract-fingerprint.test.mjs. Il gemello del sito e' tests/articles-shell-contract-fingerprint.json, ma i digest differiscono intenzionalmente: il sito registra gli URL globali stabili e la shell host include i nomi content-addressed degli asset. La dichiarazione scalarFingerprint su host/constants.ts confronta separatamente entrambi i valori.",
       "baseline": {
-        "site": "cb29a37dd7c6ce74",
-        "corpus": "f5198cca59c9534a",
-        "alignedAt": "2026-11-15",
-        "forcedAt": "2026-11-15T19:04:16.629Z"
+        "site": "ce82a9d59f48dc49",
+        "corpus": "008491b1d6ae9d05",
+        "alignedAt": "2026-11-27",
+        "forcedAt": "2026-11-27T03:33:54.638Z"
       }
     },
     {
@@ -7049,7 +7050,7 @@
       "baseline": {
         "site": "07ce7fdd280ebf30",
         "corpus": "07ce7fdd280ebf30",
-        "alignedAt": "2026-11-20"
+        "alignedAt": "2026-11-27"
       },
       "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3078"
     },
@@ -7061,7 +7062,7 @@
       "baseline": {
         "site": "2aa134c3edf47044",
         "corpus": "c47d30d67f05fecb",
-        "alignedAt": "2026-11-20"
+        "alignedAt": "2026-11-27"
       }
     },
     {
