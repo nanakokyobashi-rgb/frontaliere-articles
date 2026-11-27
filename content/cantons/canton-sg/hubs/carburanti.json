@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-27T04:41:16.871Z",
-  "contentHash": "2a0b18edf13c782040667332ceea3cd44a0e8ae4ef8104068fd26f8ddac2c12c",
+  "updatedAt": "2026-11-27T09:58:06.883Z",
+  "contentHash": "2627103e90e0aaae88765e170d084a7051f28bcd13c8115c63d605586f9767f3",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "San Gallo avvia consultazione legge politica fondiaria attiva",
+          "url": "/articoli-san-gallo/sg-politica-fondiaria-attiva/",
+          "excerpt": "La consultazione sul progetto di legge è aperta fino al 31 gennaio 2027, destinata all'Ufficio per l'economia e il lavoro.",
+          "date": "2026-11-27T09:54:25.553Z"
+        },
+        {
           "title": "Inverno a St.Gallen: controlli stradali tra fine ottobre e metà aprile",
           "url": "/articoli-san-gallo/inverno-sgallen-controlli-strade/",
           "excerpt": "Neve e temperature sotto zero previste; lo sgombero segue priorità definite, con personale fino a 200 persone.",
@@ -106,12 +112,6 @@
           "url": "/articoli-san-gallo/corsa-frauenfeld-wil-2026/",
           "excerpt": "La corsa collega Frauenfeld e Wil passando per Matzingen, Wängi, Eschlikon e Sirnach; la polizia chiuderà temporaneamente strade specifiche a Wil.",
           "date": "2026-11-10T13:27:36.197Z"
-        },
-        {
-          "title": "Voto a Wil domenica 29 novembre 2026 su proposte comunali e federali",
-          "url": "/articoli-san-gallo/voto-wil-29-novembre-2026/",
-          "excerpt": "Domenica 29 novembre 2026, a Wil saranno sottoposte al voto due proposte comunali.",
-          "date": "2026-11-07T09:39:57.626Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:58:06.883Z"
     },
     "en": {
       "canton": "SG",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "St. Gallen launches consultation on active land policy law",
+          "url": "/en/st-gallen-articles/sg-active-land-policy/",
+          "excerpt": "The consultation on the draft law is open until January 31, 2027, and is intended for the Office for Economy and Labor.",
+          "date": "2026-11-27T09:54:25.553Z"
+        },
+        {
           "title": "Winter in St.Gallen: road checks between late October and mid-April",
           "url": "/en/st-gallen-articles/sgallen-winter-road-controls/",
           "excerpt": "Snow and below-zero temperatures are expected; snow clearance follows defined priorities, with staff of up to 200 people.",
@@ -217,12 +223,6 @@
           "url": "/en/st-gallen-articles/frauenfeld-wil-race-2026/",
           "excerpt": "The race connects Frauenfeld and Wil via Matzingen, Wängi, Eschlikon and Sirnach; the police will temporarily close specific roads in Wil.",
           "date": "2026-11-10T13:27:36.197Z"
-        },
-        {
-          "title": "Voting in Wil on Sunday, November 29, 2026, on municipal and federal proposals",
-          "url": "/en/st-gallen-articles/wil-vote-november-29-2026/",
-          "excerpt": "On Sunday, November 29, 2026, two municipal proposals will be put to a vote in Wil.",
-          "date": "2026-11-07T09:39:57.626Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:58:06.883Z"
     },
     "de": {
       "canton": "SG",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "St. Gallen eröffnet Vernehmlassung zum Gesetz über aktive Bodenpolitik",
+          "url": "/de/st-gallen-artikel/sg-aktive-bodenpolitik/",
+          "excerpt": "Die Vernehmlassung zum Gesetzesentwurf ist bis zum 31. Januar 2027 offen und an das Amt für Wirtschaft und Arbeit gerichtet.",
+          "date": "2026-11-27T09:54:25.553Z"
+        },
+        {
           "title": "Winter in St.Gallen: Straßenkontrollen zwischen Ende Oktober und Mitte April",
           "url": "/de/st-gallen-artikel/winter-sgallen-strassenkontrollen/",
           "excerpt": "Schnee und Temperaturen unter null Grad erwartet; die Räumung folgt festgelegten Prioritäten, mit bis zu 200 Personen.",
@@ -328,12 +334,6 @@
           "url": "/de/st-gallen-artikel/lauf-frauenfeld-wil-2026/",
           "excerpt": "Der Lauf verbindet Frauenfeld und Wil und führt über Matzingen, Wängi, Eschlikon und Sirnach; die Polizei wird in Wil bestimmte Strassen vorübergehend sperren.",
           "date": "2026-11-10T13:27:36.197Z"
-        },
-        {
-          "title": "Abstimmung in Wil am 29.11.: kommunale & eidg. Vorlagen",
-          "url": "/de/st-gallen-artikel/wil-wahl-29-november-2026/",
-          "excerpt": "Am Sonntag, 29. November 2026, werden in Wil zwei kommunale Vorlagen zur Abstimmung vorgelegt.",
-          "date": "2026-11-07T09:39:57.626Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:58:06.883Z"
     },
     "fr": {
       "canton": "SG",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Saint-Gall consulte sur la politique foncière active",
+          "url": "/fr/articles-saint-gall/sg-politique-fonciere-active/",
+          "excerpt": "La consultation sur le projet de loi est ouverte jusqu’au 31 janvier 2027 et est destinée à l’Office de l’économie et du travail.",
+          "date": "2026-11-27T09:54:25.553Z"
+        },
+        {
           "title": "Hiver à St.Gallen : contrôles routiers entre fin octobre et mi-avril",
           "url": "/fr/articles-saint-gall/hiver-sgallen-controles-routes/",
           "excerpt": "Neige et températures inférieures à zéro prévues ; le déneigement suit des priorités définies, avec un effectif pouvant atteindre 200 personnes.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-saint-gall/course-frauenfeld-wil-2026/",
           "excerpt": "La course relie Frauenfeld et Wil en passant par Matzingen, Wängi, Eschlikon et Sirnach ; la police fermera temporairement certaines routes à Wil.",
           "date": "2026-11-10T13:27:36.197Z"
-        },
-        {
-          "title": "Vote à Wil le 29 novembre 2026 : communal et fédéral",
-          "url": "/fr/articles-saint-gall/vote-wil-29-novembre-2026/",
-          "excerpt": "Le dimanche 29 novembre 2026, deux propositions communales seront soumises au vote à Wil.",
-          "date": "2026-11-07T09:39:57.626Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:58:06.883Z"
     }
   }
 }
