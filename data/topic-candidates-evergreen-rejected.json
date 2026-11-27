@@ -6396,6 +6396,102 @@
       "firstSeenAt": "2026-11-25T01:48:30.768Z",
       "lastValidatedAt": "2026-11-25T01:48:30.768Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "assicurazione immobili canton Uri guida a obbligo e premi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-27T04:55:35.507Z",
+      "lastValidatedAt": "2026-11-27T04:55:35.507Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "aprire un'attività canton Uri registro di commercio e costi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T04:58:06.326Z",
+      "lastValidatedAt": "2026-11-27T04:58:06.326Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "patente di guida canton Uri conversione ed esami",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T05:07:19.104Z",
+      "lastValidatedAt": "2026-11-27T05:07:19.104Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "imposta di successione e donazione canton Uri aliquote",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T05:07:52.334Z",
+      "lastValidatedAt": "2026-11-27T05:07:52.334Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "orari di apertura negozi canton Uri guida a domeniche e festivi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T05:15:58.573Z",
+      "lastValidatedAt": "2026-11-27T05:15:58.573Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "imposta sui cani canton Uri guida a importi e registrazione",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T05:16:41.059Z",
+      "lastValidatedAt": "2026-11-27T05:16:41.059Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "licenza di caccia canton Uri requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T05:17:05.938Z",
+      "lastValidatedAt": "2026-11-27T05:17:05.938Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "permesso di pesca canton Uri requisiti e stagioni",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T05:17:32.954Z",
+      "lastValidatedAt": "2026-11-27T05:17:32.954Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -7322,6 +7418,30 @@
       "firstStrikeAt": "2026-11-25T01:50:26.684Z",
       "lastStrikeAt": "2026-11-25T01:50:26.684Z",
       "expiresAt": "2026-12-25T01:50:26.684Z"
+    },
+    {
+      "keyword": "formazione continua canton Uri requisiti e contributi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-27T05:06:59.244Z",
+      "lastStrikeAt": "2026-11-27T05:06:59.244Z",
+      "expiresAt": "2026-12-27T05:06:59.244Z"
+    },
+    {
+      "keyword": "giorni festivi canton Uri guida a calendario e regole",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-27T05:15:28.843Z",
+      "lastStrikeAt": "2026-11-27T05:15:28.843Z",
+      "expiresAt": "2026-12-27T05:15:28.843Z"
     }
   ],
   "legacy": [
