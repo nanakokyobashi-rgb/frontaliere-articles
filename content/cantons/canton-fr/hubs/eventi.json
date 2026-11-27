@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "e970695bf8a09315629c0af4a0808ccc8b00bd17ed16f0f3a2e1ce7265a0226d",
+  "updatedAt": "2026-11-27T01:58:59.946Z",
+  "contentHash": "e1e71eb7425595069686914e98a157823bacd710cfff33442c3ab36db51366fe",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T00:32:00.223Z",
+      "updatedAt": "2026-11-26T16:33:33.919Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-25T16:08:35.229Z",
+      "updatedAt": "2026-11-26T15:51:00.529Z",
       "keyFacts": 0
     }
   ],
@@ -38,54 +38,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Nova",
-              "detail": "Fribourg",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nova/"
-            },
-            {
-              "label": "Écrire, c'est possible ! (1)",
-              "detail": "Fribourg",
-              "date": "2026-11-26",
-              "url": "https://www.fr.ch/formation-et-ecoles/formation-pour-adultes-et-formation-continue/evenements/ecrire-cest-possible-1"
-            },
-            {
-              "label": "La mauvaise foi ? Des appréhensions ordinaires aux définitions académiques : conférence",
-              "detail": "Fribourg",
-              "date": "2026-11-26",
-              "url": "https://www.fr.ch/bcu/evenements/la-mauvaise-foi-des-apprehensions-ordinaires-aux-definitions-academiques-conference"
-            },
-            {
-              "label": "Vernissage CORPUS Le corps liquide",
-              "detail": "Fribourg",
-              "date": "2026-11-26",
-              "url": "https://www.fr.ch/mahf/evenements/vernissage-corpus-le-corps-liquide"
-            },
-            {
-              "label": "Brazil",
-              "detail": "Podium Düdingen, Düdingen",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/brazil_ALa7CM7"
-            },
-            {
-              "label": "Quo vadis Europe?",
-              "detail": "PER 21 — in corso, ultimo giorno: 9 dicembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/this-that/fribourg/quo-vadis-europe_AP78MWg"
-            },
-            {
-              "label": "Pour qui tu te prends ?",
-              "detail": "Nuithonie, Villars-sur-Glâne — in corso, ultimo giorno: 29 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pour-qui-tu-te-prends/"
-            },
-            {
-              "label": "Festival des droits de l’enfant : Les droits de l’enfant, c’est aussi ton histoire !",
-              "detail": "Fribourg — in corso, ultimo giorno: 27 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.fr.ch/dsas/sej/bpej/evenements/festival-des-droits-de-lenfant-les-droits-de-lenfant-cest-aussi-ton-histoire"
-            },
-            {
               "label": "CORPUS - Le corps liquide",
               "detail": "Fribourg",
               "date": "2026-11-27",
@@ -96,11 +48,59 @@
               "detail": "Fribourg",
               "date": "2026-11-27",
               "url": "https://www.fr.ch/mahf/evenements/corpus-v-le-corps-liquide"
+            },
+            {
+              "label": "Nova",
+              "detail": "Fribourg — in corso, ultimo giorno: 23 dicembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nova/"
+            },
+            {
+              "label": "Quo vadis Europe?",
+              "detail": "PER 21 — in corso, ultimo giorno: 9 dicembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/this-that/fribourg/quo-vadis-europe_AP78MWg"
+            },
+            {
+              "label": "Pour qui tu te prends ?",
+              "detail": "Nuithonie, Villars-sur-Glâne — in corso, ultimo giorno: 29 novembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pour-qui-tu-te-prends/"
+            },
+            {
+              "label": "Festival des droits de l’enfant : Les droits de l’enfant, c’est aussi ton histoire !",
+              "detail": "Fribourg — in corso, ultimo giorno: 27 novembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.fr.ch/dsas/sej/bpej/evenements/festival-des-droits-de-lenfant-les-droits-de-lenfant-cest-aussi-ton-histoire"
+            },
+            {
+              "label": "Marché de Noël de La Pierraz",
+              "detail": "Chavannes-les-Forts, Siviriez",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marche-de-noel-de-la-pierraz/"
+            },
+            {
+              "label": "J’aimerais arrêtée",
+              "detail": "Treyvaux",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jaimerais-arretee/"
+            },
+            {
+              "label": "Marché de Noël d’Ependes",
+              "detail": "Halle polyvalente d'Ependes",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/evenements/culture-populaire/ependes-fr/marche-de-noel-dependes_A4pnDrN"
+            },
+            {
+              "label": "Monstre Mic-Mac",
+              "detail": "Fribourg",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/monstre-mic-mac/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -138,7 +138,7 @@
               "url": "https://www.fr.ch/de/bkad/news/festival-kultur-schule-fkb-17000-schuelerinnen-schueler-und-lehrpersonen-werden-an-der-9-ausgabe-teilnehmen"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -160,7 +160,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T01:58:59.946Z"
     },
     "en": {
       "canton": "FR",
@@ -181,54 +181,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Nova",
-              "detail": "Fribourg",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nova/"
-            },
-            {
-              "label": "Écrire, c'est possible ! (1)",
-              "detail": "Fribourg",
-              "date": "2026-11-26",
-              "url": "https://www.fr.ch/formation-et-ecoles/formation-pour-adultes-et-formation-continue/evenements/ecrire-cest-possible-1"
-            },
-            {
-              "label": "La mauvaise foi ? Des appréhensions ordinaires aux définitions académiques : conférence",
-              "detail": "Fribourg",
-              "date": "2026-11-26",
-              "url": "https://www.fr.ch/bcu/evenements/la-mauvaise-foi-des-apprehensions-ordinaires-aux-definitions-academiques-conference"
-            },
-            {
-              "label": "Vernissage CORPUS Le corps liquide",
-              "detail": "Fribourg",
-              "date": "2026-11-26",
-              "url": "https://www.fr.ch/mahf/evenements/vernissage-corpus-le-corps-liquide"
-            },
-            {
-              "label": "Brazil",
-              "detail": "Podium Düdingen, Düdingen",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/brazil_ALa7CM7"
-            },
-            {
-              "label": "Quo vadis Europe?",
-              "detail": "PER 21 — ongoing, last day: 9 December 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/this-that/fribourg/quo-vadis-europe_AP78MWg"
-            },
-            {
-              "label": "Pour qui tu te prends ?",
-              "detail": "Nuithonie, Villars-sur-Glâne — ongoing, last day: 29 November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pour-qui-tu-te-prends/"
-            },
-            {
-              "label": "Festival des droits de l’enfant : Les droits de l’enfant, c’est aussi ton histoire !",
-              "detail": "Fribourg — ongoing, last day: 27 November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.fr.ch/dsas/sej/bpej/evenements/festival-des-droits-de-lenfant-les-droits-de-lenfant-cest-aussi-ton-histoire"
-            },
-            {
               "label": "CORPUS - Le corps liquide",
               "detail": "Fribourg",
               "date": "2026-11-27",
@@ -239,11 +191,59 @@
               "detail": "Fribourg",
               "date": "2026-11-27",
               "url": "https://www.fr.ch/mahf/evenements/corpus-v-le-corps-liquide"
+            },
+            {
+              "label": "Nova",
+              "detail": "Fribourg — ongoing, last day: 23 December 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nova/"
+            },
+            {
+              "label": "Quo vadis Europe?",
+              "detail": "PER 21 — ongoing, last day: 9 December 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/this-that/fribourg/quo-vadis-europe_AP78MWg"
+            },
+            {
+              "label": "Pour qui tu te prends ?",
+              "detail": "Nuithonie, Villars-sur-Glâne — ongoing, last day: 29 November 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pour-qui-tu-te-prends/"
+            },
+            {
+              "label": "Festival des droits de l’enfant : Les droits de l’enfant, c’est aussi ton histoire !",
+              "detail": "Fribourg — ongoing, last day: 27 November 2026",
+              "date": "2026-11-27",
+              "url": "https://www.fr.ch/dsas/sej/bpej/evenements/festival-des-droits-de-lenfant-les-droits-de-lenfant-cest-aussi-ton-histoire"
+            },
+            {
+              "label": "Marché de Noël de La Pierraz",
+              "detail": "Chavannes-les-Forts, Siviriez",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marche-de-noel-de-la-pierraz/"
+            },
+            {
+              "label": "J’aimerais arrêtée",
+              "detail": "Treyvaux",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jaimerais-arretee/"
+            },
+            {
+              "label": "Ependes Christmas Market",
+              "detail": "Halle polyvalente d'Ependes",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/evenements/culture-populaire/ependes-fr/marche-de-noel-dependes_A4pnDrN"
+            },
+            {
+              "label": "Monstre Mic-Mac",
+              "detail": "Fribourg",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/monstre-mic-mac/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -281,7 +281,7 @@
               "url": "https://www.fr.ch/de/bkad/news/festival-kultur-schule-fkb-17000-schuelerinnen-schueler-und-lehrpersonen-werden-an-der-9-ausgabe-teilnehmen"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -303,7 +303,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T01:58:59.946Z"
     },
     "de": {
       "canton": "FR",
@@ -324,54 +324,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Nova",
-              "detail": "Fribourg",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nova/"
-            },
-            {
-              "label": "Écrire, c'est possible ! (1)",
-              "detail": "Fribourg",
-              "date": "2026-11-26",
-              "url": "https://www.fr.ch/formation-et-ecoles/formation-pour-adultes-et-formation-continue/evenements/ecrire-cest-possible-1"
-            },
-            {
-              "label": "La mauvaise foi ? Des appréhensions ordinaires aux définitions académiques : conférence",
-              "detail": "Fribourg",
-              "date": "2026-11-26",
-              "url": "https://www.fr.ch/bcu/evenements/la-mauvaise-foi-des-apprehensions-ordinaires-aux-definitions-academiques-conference"
-            },
-            {
-              "label": "Vernissage CORPUS Le corps liquide",
-              "detail": "Fribourg",
-              "date": "2026-11-26",
-              "url": "https://www.fr.ch/mahf/evenements/vernissage-corpus-le-corps-liquide"
-            },
-            {
-              "label": "Brazil",
-              "detail": "Podium Düdingen, Düdingen",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/brazil_ALa7CM7"
-            },
-            {
-              "label": "Quo vadis Europe?",
-              "detail": "PER 21 — läuft, letzter Tag: 9. Dezember 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/this-that/fribourg/quo-vadis-europe_AP78MWg"
-            },
-            {
-              "label": "Pour qui tu te prends ?",
-              "detail": "Nuithonie, Villars-sur-Glâne — läuft, letzter Tag: 29. November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pour-qui-tu-te-prends/"
-            },
-            {
-              "label": "Festival des droits de l’enfant : Les droits de l’enfant, c’est aussi ton histoire !",
-              "detail": "Fribourg — läuft, letzter Tag: 27. November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.fr.ch/dsas/sej/bpej/evenements/festival-des-droits-de-lenfant-les-droits-de-lenfant-cest-aussi-ton-histoire"
-            },
-            {
               "label": "CORPUS - Le corps liquide",
               "detail": "Fribourg",
               "date": "2026-11-27",
@@ -382,11 +334,59 @@
               "detail": "Fribourg",
               "date": "2026-11-27",
               "url": "https://www.fr.ch/mahf/evenements/corpus-v-le-corps-liquide"
+            },
+            {
+              "label": "Nova",
+              "detail": "Fribourg — läuft, letzter Tag: 23. Dezember 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nova/"
+            },
+            {
+              "label": "Quo vadis Europe?",
+              "detail": "PER 21 — läuft, letzter Tag: 9. Dezember 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/this-that/fribourg/quo-vadis-europe_AP78MWg"
+            },
+            {
+              "label": "Pour qui tu te prends ?",
+              "detail": "Nuithonie, Villars-sur-Glâne — läuft, letzter Tag: 29. November 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pour-qui-tu-te-prends/"
+            },
+            {
+              "label": "Festival des droits de l’enfant : Les droits de l’enfant, c’est aussi ton histoire !",
+              "detail": "Fribourg — läuft, letzter Tag: 27. November 2026",
+              "date": "2026-11-27",
+              "url": "https://www.fr.ch/dsas/sej/bpej/evenements/festival-des-droits-de-lenfant-les-droits-de-lenfant-cest-aussi-ton-histoire"
+            },
+            {
+              "label": "Weihnachtsmarkt in La Pierraz",
+              "detail": "Chavannes-les-Forts, Siviriez",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marche-de-noel-de-la-pierraz/"
+            },
+            {
+              "label": "J’aimerais arrêtée",
+              "detail": "Treyvaux",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jaimerais-arretee/"
+            },
+            {
+              "label": "Weihnachtsmarkt von Ependes",
+              "detail": "Halle polyvalente d'Ependes",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/evenements/culture-populaire/ependes-fr/marche-de-noel-dependes_A4pnDrN"
+            },
+            {
+              "label": "Monstre Mic-Mac",
+              "detail": "Fribourg",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/monstre-mic-mac/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -424,7 +424,7 @@
               "url": "https://www.fr.ch/de/bkad/news/festival-kultur-schule-fkb-17000-schuelerinnen-schueler-und-lehrpersonen-werden-an-der-9-ausgabe-teilnehmen"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -446,7 +446,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T01:58:59.946Z"
     },
     "fr": {
       "canton": "FR",
@@ -467,54 +467,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Nouvelle",
-              "detail": "Fribourg",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nova/"
-            },
-            {
-              "label": "Écrire, c'est possible ! (1)",
-              "detail": "Fribourg",
-              "date": "2026-11-26",
-              "url": "https://www.fr.ch/formation-et-ecoles/formation-pour-adultes-et-formation-continue/evenements/ecrire-cest-possible-1"
-            },
-            {
-              "label": "La mauvaise foi ? Des appréhensions ordinaires aux définitions académiques : conférence",
-              "detail": "Fribourg",
-              "date": "2026-11-26",
-              "url": "https://www.fr.ch/bcu/evenements/la-mauvaise-foi-des-apprehensions-ordinaires-aux-definitions-academiques-conference"
-            },
-            {
-              "label": "Vernissage CORPUS Le corps liquide",
-              "detail": "Fribourg",
-              "date": "2026-11-26",
-              "url": "https://www.fr.ch/mahf/evenements/vernissage-corpus-le-corps-liquide"
-            },
-            {
-              "label": "Brazil",
-              "detail": "Podium Düdingen, Düdingen",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/brazil_ALa7CM7"
-            },
-            {
-              "label": "Quo vadis Europe?",
-              "detail": "PER 21 — en cours, dernier jour : 9 décembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/this-that/fribourg/quo-vadis-europe_AP78MWg"
-            },
-            {
-              "label": "Pour qui tu te prends ?",
-              "detail": "Nuithonie, Villars-sur-Glâne — en cours, dernier jour : 29 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pour-qui-tu-te-prends/"
-            },
-            {
-              "label": "Festival des droits de l’enfant : Les droits de l’enfant, c’est aussi ton histoire !",
-              "detail": "Fribourg — en cours, dernier jour : 27 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.fr.ch/dsas/sej/bpej/evenements/festival-des-droits-de-lenfant-les-droits-de-lenfant-cest-aussi-ton-histoire"
-            },
-            {
               "label": "CORPUS - Le corps liquide",
               "detail": "Fribourg",
               "date": "2026-11-27",
@@ -525,11 +477,59 @@
               "detail": "Fribourg",
               "date": "2026-11-27",
               "url": "https://www.fr.ch/mahf/evenements/corpus-v-le-corps-liquide"
+            },
+            {
+              "label": "Nouvelle",
+              "detail": "Fribourg — en cours, dernier jour : 23 décembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nova/"
+            },
+            {
+              "label": "Quo vadis Europe?",
+              "detail": "PER 21 — en cours, dernier jour : 9 décembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/this-that/fribourg/quo-vadis-europe_AP78MWg"
+            },
+            {
+              "label": "Pour qui tu te prends ?",
+              "detail": "Nuithonie, Villars-sur-Glâne — en cours, dernier jour : 29 novembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pour-qui-tu-te-prends/"
+            },
+            {
+              "label": "Festival des droits de l’enfant : Les droits de l’enfant, c’est aussi ton histoire !",
+              "detail": "Fribourg — en cours, dernier jour : 27 novembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.fr.ch/dsas/sej/bpej/evenements/festival-des-droits-de-lenfant-les-droits-de-lenfant-cest-aussi-ton-histoire"
+            },
+            {
+              "label": "Marché de Noël de La Pierraz",
+              "detail": "Chavannes-les-Forts, Siviriez",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marche-de-noel-de-la-pierraz/"
+            },
+            {
+              "label": "J’aimerais arrêtée",
+              "detail": "Treyvaux",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jaimerais-arretee/"
+            },
+            {
+              "label": "Marché de Noël d’Épendes",
+              "detail": "Halle polyvalente d'Ependes",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/evenements/culture-populaire/ependes-fr/marche-de-noel-dependes_A4pnDrN"
+            },
+            {
+              "label": "Monstre Mic-Mac",
+              "detail": "Fribourg",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/monstre-mic-mac/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -567,7 +567,7 @@
               "url": "https://www.fr.ch/de/bkad/news/festival-kultur-schule-fkb-17000-schuelerinnen-schueler-und-lehrpersonen-werden-an-der-9-ausgabe-teilnehmen"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -589,7 +589,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T01:58:59.946Z"
     }
   }
 }
