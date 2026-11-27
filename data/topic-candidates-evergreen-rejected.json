@@ -7642,10 +7642,10 @@
       "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-27T13:14:00.227Z",
-      "lastStrikeAt": "2026-11-27T13:14:00.227Z",
-      "expiresAt": "2026-12-27T13:14:00.227Z"
+      "lastStrikeAt": "2026-11-27T14:14:19.145Z",
+      "expiresAt": "2026-12-27T14:14:19.145Z"
     }
   ],
   "legacy": [
