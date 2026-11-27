@@ -4,12 +4,12 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "023ceb0b9f333cdca57adf107727d90e1f158321b0e49271ceda5c4483e874f7",
+  "updatedAt": "2026-11-27T20:47:55.924Z",
+  "contentHash": "48fe4fd965e684f024d6044d3cc579234727ad9c0c8912e555fbd9632ed93adf",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-25T17:35:23.405Z",
+      "updatedAt": "2026-11-26T17:17:35.133Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-26T17:17:35.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Esperimento viario nel centro di Lucerna dal dicembre 2026",
+          "url": "/articoli-lucerna/esperimento-viario-lucerna-centro/",
+          "excerpt": "La prima tappa dell'esperimento viario nel centro di Lucerna parte a metà dicembre 2026, con l'annuncio del 27 novembre 2026.",
+          "date": "2026-11-27T20:44:43.180Z"
+        },
         {
           "title": "Würzenbach: nuovi spazi scolastici e palestra allo studio",
           "url": "/articoli-lucerna/spazi-scolastici-wurzenbach/",
@@ -82,12 +88,6 @@
           "url": "/articoli-lucerna/semal-st-klemens-ebikon/",
           "excerpt": "Test alla fermata St. Klemens sulla strada cantonale verso Lucerna; decisione prevista a fine estate 2027 dopo consultazione.",
           "date": "2026-11-07T09:26:29.750Z"
-        },
-        {
-          "title": "Kriens decide una riduzione delle imposte",
-          "url": "/articoli-lucerna/kriens-riduce-imposte/",
-          "excerpt": "Zentralplus segnala la decisione di Kriens; il materiale disponibile non indica importo, percentuale o decorrenza della riduzione.",
-          "date": "2026-11-07T00:45:28.812Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T20:47:55.924Z"
     },
     "en": {
       "canton": "LU",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-26T17:17:35.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Road experiment in central Lucerne from December 2026",
+          "url": "/en/lucerne-articles/lucerne-city-traffic-experiment/",
+          "excerpt": "The first stage of the road experiment in central Lucerne begins in mid-December 2026, with the announcement on November 27, 2026.",
+          "date": "2026-11-27T20:44:43.180Z"
+        },
         {
           "title": "Würzenbach: new school spaces and a sports hall under consideration",
           "url": "/en/lucerne-articles/wurzenbach-school-space/",
@@ -169,12 +175,6 @@
           "url": "/en/lucerne-articles/st-klemens-ebikon-traffic-light/",
           "excerpt": "Test at the St. Klemens stop on the cantonal road toward Lucerne; decision expected at the end of summer 2027 after consultation.",
           "date": "2026-11-07T09:26:29.750Z"
-        },
-        {
-          "title": "Kriens decides on a tax reduction",
-          "url": "/en/lucerne-articles/kriens-tax-cut/",
-          "excerpt": "Zentralplus reports Kriens’s decision; the available material does not specify the amount, percentage, or effective date of the reduction.",
-          "date": "2026-11-07T00:45:28.812Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T20:47:55.924Z"
     },
     "de": {
       "canton": "LU",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-26T17:17:35.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Verkehrsexperiment im Zentrum von Luzern ab Dezember 2026",
+          "url": "/de/luzern-artikel/verkehrsexperiment-luzern-zentrum/",
+          "excerpt": "Die erste Etappe des Verkehrsexperiments im Zentrum von Luzern beginnt Mitte Dezember 2026, mit der Ankündigung vom 27. November 2026.",
+          "date": "2026-11-27T20:44:43.180Z"
+        },
         {
           "title": "Würzenbach: neue Schulräume und eine Sporthalle werden geprüft",
           "url": "/de/luzern-artikel/schulraum-wurzenbach/",
@@ -256,12 +262,6 @@
           "url": "/de/luzern-artikel/semafor-st-klemens-ebikon/",
           "excerpt": "Test an der Haltestelle St. Klemens an der Kantonsstrasse nach Luzern; Entscheidung nach Rücksprache für Spätsommer 2027 geplant.",
           "date": "2026-11-07T09:26:29.750Z"
-        },
-        {
-          "title": "Kriens beschließt eine Steuersenkung",
-          "url": "/de/luzern-artikel/kriens-steuersenkung/",
-          "excerpt": "Der Titel der von Zentralplus veröffentlichten Nachricht weist darauf hin, dass Kriens eine Steuersenkung beschlossen hat.",
-          "date": "2026-11-07T00:45:28.812Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T20:47:55.924Z"
     },
     "fr": {
       "canton": "LU",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-26T17:17:35.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Expérience de circulation dans le centre de Lucerne à partir de décembre 2026",
+          "url": "/fr/articles-lucerne/experimentation-routiere-lucerne-centre/",
+          "excerpt": "La première étape de l’expérience de circulation dans le centre de Lucerne commence à la mi-décembre 2026, avec l’annonce du 27 novembre 2026.",
+          "date": "2026-11-27T20:44:43.180Z"
+        },
         {
           "title": "Würzenbach : nouveaux espaces scolaires et salle de sport à l’étude",
           "url": "/fr/articles-lucerne/espace-scolaire-wurzenbach/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-lucerne/semafore-st-klemens-ebikon/",
           "excerpt": "Test à l'arrêt St. Klemens sur la route cantonale en direction de Lucerne ; décision prévue à la fin de l'été 2027 après consultation.",
           "date": "2026-11-07T09:26:29.750Z"
-        },
-        {
-          "title": "Kriens décide une réduction des impôts",
-          "url": "/fr/articles-lucerne/baisse-impots-kriens/",
-          "excerpt": "Zentralplus signale la décision de Kriens ; le matériel disponible n’indique ni le montant, ni le pourcentage, ni la date d’entrée en vigueur de la réduction.",
-          "date": "2026-11-07T00:45:28.812Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T20:47:55.924Z"
     }
   }
 }
