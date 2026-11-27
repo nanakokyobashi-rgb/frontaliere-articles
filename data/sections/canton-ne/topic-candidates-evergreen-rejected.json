@@ -15,6 +15,10 @@
     "canton-ne::https://www.letemps.ch/economie/horlogerie-joaillerie/le-pointage-aux-toilettes-juge-discriminatoire-envers-les-femmes-par-la-justice-neuchateloise": {
       "section": "canton-ne",
       "ts": 1795704894031
+    },
+    "canton-ne::https://www.rts.ch/play/tv/emission/couleurs-locales?id=470618": {
+      "section": "canton-ne",
+      "ts": 1795748858854
     }
   }
 }
