@@ -4,37 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-fr::https://www.h-fr.ch/newsroom/communiques-de-presse/inauguration-du-centre-de-sante-de-la-singine-lhfr-tafers": {
+    "canton-fr::https://www.laliberte.ch/articles/regions/economie-regionale/dans-une-situation-financiere-critique-la-start-up-marlinoise-revario-est-sauvee-1495846": {
       "section": "canton-fr",
-      "ts": 1795264473375
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/306108/der-sensebezirk-hat-neu-ein-gesundheitszentrum": {
-      "section": "canton-fr",
-      "ts": 1795264475364
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/307068/freiburger-wirtschaft-legt-wieder-zu": {
-      "section": "canton-fr",
-      "ts": 1795269344235
-    },
-    "canton-fr::https://www.laliberte.ch/articles/regions/broye/le-budget-revu-a-la-hausse-est-valide-1491087": {
-      "section": "canton-fr",
-      "ts": 1795270449592
-    },
-    "canton-fr::https://www.laliberte.ch/articles/le-master-de-medecine-humaine-de-fribourg-etendu-au-valais-1490880": {
-      "section": "canton-fr",
-      "ts": 1795290173698
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/306764/freiburger-arbeitgeberverband-kritisiert-forderung-nach-5000-franken-mindestlohn": {
-      "section": "canton-fr",
-      "ts": 1795354732596
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/306803/zwei-monate-krankenkasse-gratis-sp-lanciert-milliardenplan-gegen-pr%c3%a4mienhammer": {
-      "section": "canton-fr",
-      "ts": 1795354734210
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/307533/was-kostet-uns-der-ahvausbau-2-rappen-15-franken-oder-doch-milliarden": {
-      "section": "canton-fr",
-      "ts": 1795419522717
+      "ts": 1795788300538
     }
   }
 }
