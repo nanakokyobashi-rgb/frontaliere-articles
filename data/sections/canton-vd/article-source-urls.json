@@ -144,5 +144,11 @@
     "ts": "2026-11-25T17:54:04.456Z",
     "keyForm": 2,
     "sourceContentFingerprint": "6eca5d36901f9668ab3b9d6a83fb8edfa61619d7650fc124e5857fc7eb4cedbb"
+  },
+  "https://www.lausanne.ch/apps/actualites/index.php?actu_id=91420": {
+    "articleId": "lausanne-luci-foranee",
+    "ts": "2026-11-27T11:27:58.760Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "3e82c3c8843159e51bfc53e1b79b40d9510c4a071156028b4447c8e9c43e15cb"
   }
 }

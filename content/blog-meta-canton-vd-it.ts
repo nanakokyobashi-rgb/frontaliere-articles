@@ -99,6 +99,9 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.manifestazione-losanna-tagli-bilancio.title': 'Vaud: corteo a Losanna contro austerità e tagli di bilancio',
     'blog.article.manifestazione-losanna-tagli-bilancio.excerpt': 'Martedì sera Losanna ha ospitato una nuova manifestazione contro l\'austerità e i tagli di bilancio nei servizi pubblici vodesi.',
     'blog.article.manifestazione-losanna-tagli-bilancio.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.lausanne-luci-foranee.title': 'Losanna: luci spente dalle 1 alle 5 da dicembre 2026',
+    'blog.article.lausanne-luci-foranee.excerpt': 'Test di un anno e raccolta dei pareri in primavera. Spegnimento dalle 1 alle 5 da dicembre 2026.',
+    'blog.article.lausanne-luci-foranee.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVdIt;

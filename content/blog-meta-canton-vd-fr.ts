@@ -99,6 +99,9 @@ const blogMetaCantonVdFr: Record<string, string> = {
     'blog.article.manifestazione-losanna-tagli-bilancio.title': 'Vaud : cortège à Lausanne contre l’austérité et les coupes budgétaires',
     'blog.article.manifestazione-losanna-tagli-bilancio.excerpt': 'À Lausanne, un nouveau rassemblement a contesté mardi l\'austérité et les coupes budgétaires touchant les services publics vaudois.',
     'blog.article.manifestazione-losanna-tagli-bilancio.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.lausanne-luci-foranee.title': 'Lausanne : éclairage éteint de 1 h à 5 h à partir de décembre 2026',
+    'blog.article.lausanne-luci-foranee.excerpt': 'Essai d\'un an et collecte des avis au printemps. Extinction de 1 h à 5 h à partir de décembre 2026.',
+    'blog.article.lausanne-luci-foranee.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonVdFr;

@@ -99,6 +99,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.manifestazione-losanna-tagli-bilancio.title': 'Waadt: Demonstrationszug in Lausanne gegen Austerität und Haushaltskürzungen',
     'blog.article.manifestazione-losanna-tagli-bilancio.excerpt': 'Am Dienstagabend fand in Lausanne eine neue Demonstration gegen die Sparmaßnahmen und Haushaltskürzungen im öffentlichen Dienst des Kantons Waadt statt.',
     'blog.article.manifestazione-losanna-tagli-bilancio.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.lausanne-luci-foranee.title': 'Lausanne: Beleuchtung von Dezember 2026 an zwischen 1 und 5 Uhr ausgeschaltet',
+    'blog.article.lausanne-luci-foranee.excerpt': 'Einjähriger Test und Einholung von Stellungnahmen im Frühjahr.',
+    'blog.article.lausanne-luci-foranee.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVdDe;

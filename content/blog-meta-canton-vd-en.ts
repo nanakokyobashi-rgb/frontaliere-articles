@@ -99,6 +99,9 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.manifestazione-losanna-tagli-bilancio.title': 'Vaud: march in Lausanne against austerity and budget cuts',
     'blog.article.manifestazione-losanna-tagli-bilancio.excerpt': 'On Tuesday evening, Lausanne hosted a new demonstration against austerity and budget cuts in Vaud\'s public services.',
     'blog.article.manifestazione-losanna-tagli-bilancio.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.lausanne-luci-foranee.title': 'Lausanne: lights off from 1 to 5 starting December 2026',
+    'blog.article.lausanne-luci-foranee.excerpt': 'A one-year trial and collection of feedback in the spring. Switch-off from 1 to 5 starting in December 2026.',
+    'blog.article.lausanne-luci-foranee.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVdEn;
