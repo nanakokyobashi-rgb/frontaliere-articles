@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "pensioni",
-  "updatedAt": "2026-10-17T00:58:07.231Z",
-  "contentHash": "484d18e1be416dae514bcd1d1a2564e6beed53747471d00b4c03a5bd65aa013e",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "bbae809bb6b7af77d1d0ec1fce8102f22668bce723eec4eebaa560cf83e4cc7d",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T15:35:32.859Z",
+      "updatedAt": "2026-11-26T15:51:00.529Z",
       "keyFacts": 0
     }
   ],
@@ -136,12 +136,22 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
-              "label": "Vorstandswahlen 2027–2031",
+              "label": "Wahl der Vorstandsmitglieder",
+              "date": "2026-11-26",
+              "url": "https://www.zugerpk.ch/deu/wahl-der-vorstandsmitglieder-2027-2031_49080.shtml"
+            },
+            {
+              "label": "Zuger Pensionskasse als «Great Place To Work» zertifiziert",
+              "date": "2026-11-26",
+              "url": "https://www.zugerpk.ch/deu/zuger-pensionskasse-als-great-place-to-work-zertifiziert_49101.shtml"
+            },
+            {
+              "label": "Information Vorstandswahlen",
               "date": "2026-08-25",
               "url": "https://www.zugerpk.ch/deu/vorstandswahlen-20272031_49022.shtml"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -171,7 +181,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-17T00:58:07.231Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "ZG",
@@ -280,12 +290,22 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
-              "label": "Vorstandswahlen 2027–2031",
+              "label": "Wahl der Vorstandsmitglieder",
+              "date": "2026-11-26",
+              "url": "https://www.zugerpk.ch/deu/wahl-der-vorstandsmitglieder-2027-2031_49080.shtml"
+            },
+            {
+              "label": "Zuger Pensionskasse als «Great Place To Work» zertifiziert",
+              "date": "2026-11-26",
+              "url": "https://www.zugerpk.ch/deu/zuger-pensionskasse-als-great-place-to-work-zertifiziert_49101.shtml"
+            },
+            {
+              "label": "Information Vorstandswahlen",
               "date": "2026-08-25",
               "url": "https://www.zugerpk.ch/deu/vorstandswahlen-20272031_49022.shtml"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -315,7 +335,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-17T00:58:07.231Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "ZG",
@@ -424,12 +444,22 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
-              "label": "Vorstandswahlen 2027–2031",
+              "label": "Wahl der Vorstandsmitglieder",
+              "date": "2026-11-26",
+              "url": "https://www.zugerpk.ch/deu/wahl-der-vorstandsmitglieder-2027-2031_49080.shtml"
+            },
+            {
+              "label": "Zuger Pensionskasse als «Great Place To Work» zertifiziert",
+              "date": "2026-11-26",
+              "url": "https://www.zugerpk.ch/deu/zuger-pensionskasse-als-great-place-to-work-zertifiziert_49101.shtml"
+            },
+            {
+              "label": "Information Vorstandswahlen",
               "date": "2026-08-25",
               "url": "https://www.zugerpk.ch/deu/vorstandswahlen-20272031_49022.shtml"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -459,7 +489,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-17T00:58:07.231Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "ZG",
@@ -568,12 +598,22 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
-              "label": "Vorstandswahlen 2027–2031",
+              "label": "Wahl der Vorstandsmitglieder",
+              "date": "2026-11-26",
+              "url": "https://www.zugerpk.ch/deu/wahl-der-vorstandsmitglieder-2027-2031_49080.shtml"
+            },
+            {
+              "label": "Zuger Pensionskasse als «Great Place To Work» zertifiziert",
+              "date": "2026-11-26",
+              "url": "https://www.zugerpk.ch/deu/zuger-pensionskasse-als-great-place-to-work-zertifiziert_49101.shtml"
+            },
+            {
+              "label": "Information Vorstandswahlen",
               "date": "2026-08-25",
               "url": "https://www.zugerpk.ch/deu/vorstandswahlen-20272031_49022.shtml"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -603,7 +643,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-17T00:58:07.231Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T10:34:02.735Z",
-  "contentHash": "fcdbc4177b2ca495451ce83a904e8a17b7971bc0e848c9da9b82a0170bccf59f",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "a30b99489d50a8c65a91ba9ee32dbc17c8e7c8904dccea10b8e18b06b0cf5559",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-26T03:50:03.880Z",
+      "updatedAt": "2026-11-26T13:22:01.562Z",
       "keyFacts": 2
     }
   ],
@@ -22,12 +22,12 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "2",
+          "value": "3",
           "note": "segnalazioni aggiornate: 26 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "4",
+          "value": "3",
           "note": "segnalazioni aggiornate: 26 novembre 2026"
         }
       ],
@@ -44,6 +44,12 @@
               "date": "2026-10-23T12:31:00.000Z"
             },
             {
+              "label": "A4 Brunnen <-> Zürich tra Raccordo autostradale Diramazione Blegi E Svincolo autostradale Küssnacht Situazione: problemi di traffico cantiere, lunghezza [km] 13.0 Limitazione del traffico: corsia…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 4 dicembre 2026",
+              "date": "2026-11-26T05:25:00.000Z"
+            },
+            {
               "label": "Wangen a. A. <-> Wolfwil Luogo Wangen a. A. Situazione: chiusa Causa: evento importante",
               "value": "Chiusura",
               "detail": "fine prevista: 29 novembre 2026",
@@ -54,12 +60,6 @@
               "value": "Cantiere",
               "detail": "fine prevista: 10 dicembre 2026",
               "date": "2026-11-02T08:35:00.000Z"
-            },
-            {
-              "label": "A4 Brunnen <-> Zürich Svincolo autostradale Küssnacht Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5",
-              "value": "Cantiere",
-              "detail": "fine prevista: 26 novembre 2026",
-              "date": "2026-11-11T05:46:00.000Z"
             },
             {
               "label": "A4 Brunnen <-> Zürich tra Svincolo autostradale Küssnacht E Svincolo autostradale Brunnen Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Causa: veicoli di manutenzione lenti…",
@@ -75,7 +75,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         }
       ],
       "curatedArticles": [
@@ -115,7 +115,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "SZ",
@@ -125,12 +125,12 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "2",
+          "value": "3",
           "note": "reports as of 26 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "4",
+          "value": "3",
           "note": "reports as of 26 November 2026"
         }
       ],
@@ -147,6 +147,12 @@
               "date": "2026-10-23T12:31:00.000Z"
             },
             {
+              "label": "A4 Brunnen <-> Zürich tra Raccordo autostradale Diramazione Blegi E Svincolo autostradale Küssnacht Situazione: problemi di traffico cantiere, lunghezza [km] 13.0 Limitazione del traffico: corsia…",
+              "value": "Closure",
+              "detail": "until 4 December 2026",
+              "date": "2026-11-26T05:25:00.000Z"
+            },
+            {
               "label": "Wangen a. A. <-> Wolfwil Luogo Wangen a. A. Situazione: chiusa Causa: evento importante",
               "value": "Closure",
               "detail": "until 29 November 2026",
@@ -157,12 +163,6 @@
               "value": "Roadworks",
               "detail": "until 10 December 2026",
               "date": "2026-11-02T08:35:00.000Z"
-            },
-            {
-              "label": "A4 Brunnen <-> Zürich Svincolo autostradale Küssnacht Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5",
-              "value": "Roadworks",
-              "detail": "until 26 November 2026",
-              "date": "2026-11-11T05:46:00.000Z"
             },
             {
               "label": "A4 Brunnen <-> Zürich tra Svincolo autostradale Küssnacht E Svincolo autostradale Brunnen Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Causa: veicoli di manutenzione lenti…",
@@ -178,7 +178,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         }
       ],
       "curatedArticles": [
@@ -218,7 +218,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "SZ",
@@ -228,12 +228,12 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "2",
+          "value": "3",
           "note": "Meldungen vom 26. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "4",
+          "value": "3",
           "note": "Meldungen vom 26. November 2026"
         }
       ],
@@ -250,6 +250,12 @@
               "date": "2026-10-23T12:31:00.000Z"
             },
             {
+              "label": "A4 Brunnen <-> Zürich zwischen Autobahndreieck Verzweigung Blegi und Anschluss Küssnacht Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 13.0 Verkehrsführung: Pannenstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 4. Dezember 2026",
+              "date": "2026-11-26T05:25:00.000Z"
+            },
+            {
               "label": "Wangen a. A. <-> Wolfwil Ortschaft Wangen a. A. Sachlage: Strecke gesperrt Ursache: Veranstaltung",
               "value": "Sperrung",
               "detail": "bis 29. November 2026",
@@ -260,12 +266,6 @@
               "value": "Baustelle",
               "detail": "bis 10. Dezember 2026",
               "date": "2026-11-02T08:35:00.000Z"
-            },
-            {
-              "label": "A4 Brunnen <-> Zürich Anschluss Küssnacht Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.5",
-              "value": "Baustelle",
-              "detail": "bis 26. November 2026",
-              "date": "2026-11-11T05:46:00.000Z"
             },
             {
               "label": "A4 Brunnen <-> Zürich zwischen Anschluss Küssnacht und Anschluss Brunnen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Ursache: Wanderbaustelle Verkehrsführung: Fahrbahnverengung auf einen…",
@@ -281,7 +281,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         }
       ],
       "curatedArticles": [
@@ -321,7 +321,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "SZ",
@@ -331,12 +331,12 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "2",
+          "value": "3",
           "note": "signalements au 26 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "4",
+          "value": "3",
           "note": "signalements au 26 novembre 2026"
         }
       ],
@@ -353,6 +353,12 @@
               "date": "2026-10-23T12:31:00.000Z"
             },
             {
+              "label": "A4 Brunnen <-> Zurich entre Echangeur Echangeur de Blegi et Jonction autoroutière Küssnacht Situation: trafic perturbé travaux, longueur [km] 13.0 Gestion du trafic: bande d'arrêt d'urgence fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 4 décembre 2026",
+              "date": "2026-11-26T05:25:00.000Z"
+            },
+            {
               "label": "Wangen a. A. <-> Wolfwil Localité Wangen a. A. Situation: fermé Raison: événement majeur",
               "value": "Fermeture",
               "detail": "jusqu’au 29 novembre 2026",
@@ -363,12 +369,6 @@
               "value": "Chantier",
               "detail": "jusqu’au 10 décembre 2026",
               "date": "2026-11-02T08:35:00.000Z"
-            },
-            {
-              "label": "A4 Brunnen <-> Zurich Jonction autoroutière Küssnacht Situation: trafic perturbé travaux, longueur [km] 0.2 Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.5",
-              "value": "Chantier",
-              "detail": "jusqu’au 26 novembre 2026",
-              "date": "2026-11-11T05:46:00.000Z"
             },
             {
               "label": "A4 Brunnen <-> Zurich entre Jonction autoroutière Küssnacht et Jonction autoroutière Brunnen Situation: trafic perturbé travaux, longueur [km] 0.2 Raison: véhicules de maintenance lents Gestion du…",
@@ -384,7 +384,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         }
       ],
       "curatedArticles": [
@@ -424,7 +424,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

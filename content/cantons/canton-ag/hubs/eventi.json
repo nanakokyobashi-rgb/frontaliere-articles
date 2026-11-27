@@ -4,12 +4,12 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "a458b83a0a509703c54ae076db809089a58cc1f9d316b56699a8cef03baa40a5",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "7f6a7e511cd1c651c50150d438d99d43483258dd3cb336cdb93541ffdf82e37b",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T00:32:00.223Z",
+      "updatedAt": "2026-11-26T16:33:33.919Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "91",
+          "value": "85",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "50 Jahre Aarauer Kerzenziehen 2026",
+              "detail": "Aarau",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/50-jahre-aarauer-kerzenziehen-2026/"
+            },
+            {
+              "label": "Taschenlampenführung für Kinder",
+              "detail": "Muri AG",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-fuer-kinder/"
+            },
+            {
+              "label": "Adventsfunkeln in Rheinfelden",
+              "detail": "Rheinfelden",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsfunkeln-in-rheinfelden/"
+            },
+            {
+              "label": "Adventsweg Zofingen 2026",
+              "detail": "Heitere-Platz, Zofingen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsweg-zofingen-2026/"
+            },
+            {
+              "label": "Bar per single",
+              "detail": "Baden",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/eventi/party/baden/bar-per-single_A7Q7DPu"
+            },
+            {
+              "label": "I QUATTRO \"SWISSMAS\" - Die grosse Schweizer Weihnachtstournee 2026",
+              "detail": "Röm.-kath. Stadtkirche Mellingen, Mellingen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/i-quattro-swissmas-die-grosse-schweizer-weihnachtstournee-2026-6/"
+            },
+            {
+              "label": "Michael Arbenz feat. Atom String Quartet and Florian Arbenz: Reflecting Bach",
+              "detail": "Konservi, Seon",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/seon/michael-arbenz-feat-atom-string-quartet-and-florian-arbenz-reflecting-bach_AXYa6h5"
+            },
+            {
+              "label": "DUB SPENCER & TRANCE HILL - Live in Surround - Mixed by Umberto Echo",
+              "detail": "Royal, Baden",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/dub-spencer-und-trance-hill-synchronos-tour_APtw4aU"
+            },
+            {
               "label": "Lerntreff Baden",
-              "detail": "Familienzentrum Karussell Region Baden, Baden",
-              "date": "2026-11-26",
+              "detail": "Familienzentrum Karussell Region Baden, Baden — in corso, ultimo giorno: 10 dicembre 2026",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/baden/lerntreff-baden_Aa8Vsfe"
-            },
-            {
-              "label": "Afterwork Live Musik - The Jacket Pockets",
-              "detail": "Henry's Live Music & Sport Bar, Baden",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/afterwork-live-musik-the-jacket-pockets_AfB9ee6"
-            },
-            {
-              "label": "Am Donnerstag FüBi im Museum: Hilfe, ich erbe!",
-              "detail": "Historisches Museum Baden, Baden",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/baden/am-donnerstag-fuebi-im-museum-hilfe-ich-erbe_A5WPLnY"
-            },
-            {
-              "label": "Live@the Campus-Veronika Kehl-Griesslehner & Kehl-Kollektiv",
-              "detail": "FHNW Campus Brugg-Windisch, Windisch",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/music/windisch/livethe-campus-veronika-kehl-griesslehner-und-kehl-kollektiv_ALhag8s"
-            },
-            {
-              "label": "Chris Regez Band & Alain Boog: Live in Schinznach-Dorf",
-              "detail": "Gasthof Bären, Schinznach",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schinznach-dorf/chris-regez-band-und-alain-boog-live-in-schinznach-dorf_AHT32hy"
-            },
-            {
-              "label": "Live Konzert von \"Scrambled EG´s",
-              "detail": "Baden",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/live-konzert-von-scrambled-egs/"
-            },
-            {
-              "label": "Ludwig Seuss Band (DE)",
-              "detail": "Baden",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ludwig-seuss-band-de/"
-            },
-            {
-              "label": "Weisse Zeiten",
-              "detail": "Saalbau Reinach",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-ag/weisse-zeiten_AHfWNWZ"
             },
             {
               "label": "diagonal - Club Festival Aarau",
               "detail": "Aarau, verschiedene Orte, Aarau — in corso, ultimo giorno: 28 novembre 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/diagonal-club-festival-aarau_At1MGcr"
-            },
-            {
-              "label": "Spieleabend",
-              "detail": "turgitreff — in corso, ultimo giorno: 9 dicembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/turgi/spieleabend_ALAdG9a"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "AG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "91",
+          "value": "85",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "50 Jahre Aarauer Kerzenziehen 2026",
+              "detail": "Aarau",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/50-jahre-aarauer-kerzenziehen-2026/"
+            },
+            {
+              "label": "Taschenlampenführung für Kinder",
+              "detail": "Muri AG",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-fuer-kinder/"
+            },
+            {
+              "label": "Adventsfunkeln in Rheinfelden",
+              "detail": "Rheinfelden",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsfunkeln-in-rheinfelden/"
+            },
+            {
+              "label": "Adventsweg Zofingen 2026",
+              "detail": "Heitere-Platz, Zofingen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsweg-zofingen-2026/"
+            },
+            {
+              "label": "Barhopping for singles",
+              "detail": "Baden",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/eventi/party/baden/bar-per-single_A7Q7DPu"
+            },
+            {
+              "label": "I QUATTRO \"SWISSMAS\" - Die grosse Schweizer Weihnachtstournee 2026",
+              "detail": "Röm.-kath. Stadtkirche Mellingen, Mellingen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/i-quattro-swissmas-die-grosse-schweizer-weihnachtstournee-2026-6/"
+            },
+            {
+              "label": "Michael Arbenz feat. Atom String Quartet and Florian Arbenz: Reflecting Bach",
+              "detail": "Konservi, Seon",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/seon/michael-arbenz-feat-atom-string-quartet-and-florian-arbenz-reflecting-bach_AXYa6h5"
+            },
+            {
+              "label": "DUB SPENCER & TRANCE HILL - Live in Surround - Mixed by Umberto Echo",
+              "detail": "Royal, Baden",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/dub-spencer-und-trance-hill-synchronos-tour_APtw4aU"
+            },
+            {
               "label": "Lerntreff Baden",
-              "detail": "Familienzentrum Karussell Region Baden, Baden",
-              "date": "2026-11-26",
+              "detail": "Familienzentrum Karussell Region Baden, Baden — ongoing, last day: 10 December 2026",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/baden/lerntreff-baden_Aa8Vsfe"
-            },
-            {
-              "label": "Afterwork Live Musik - The Jacket Pockets",
-              "detail": "Henry's Live Music & Sport Bar, Baden",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/afterwork-live-musik-the-jacket-pockets_AfB9ee6"
-            },
-            {
-              "label": "Am Donnerstag FüBi im Museum: Hilfe, ich erbe!",
-              "detail": "Historisches Museum Baden, Baden",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/baden/am-donnerstag-fuebi-im-museum-hilfe-ich-erbe_A5WPLnY"
-            },
-            {
-              "label": "Live@the Campus-Veronika Kehl-Griesslehner & Kehl-Kollektiv",
-              "detail": "FHNW Campus Brugg-Windisch, Windisch",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/music/windisch/livethe-campus-veronika-kehl-griesslehner-und-kehl-kollektiv_ALhag8s"
-            },
-            {
-              "label": "Chris Regez Band & Alain Boog: Live in Schinznach-Dorf",
-              "detail": "Gasthof Bären, Schinznach",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schinznach-dorf/chris-regez-band-und-alain-boog-live-in-schinznach-dorf_AHT32hy"
-            },
-            {
-              "label": "Live Konzert von \"Scrambled EG´s",
-              "detail": "Baden",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/live-konzert-von-scrambled-egs/"
-            },
-            {
-              "label": "Ludwig Seuss Band (DE)",
-              "detail": "Baden",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ludwig-seuss-band-de/"
-            },
-            {
-              "label": "Weisse Zeiten",
-              "detail": "Saalbau Reinach",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-ag/weisse-zeiten_AHfWNWZ"
             },
             {
               "label": "diagonal - Club Festival Aarau",
               "detail": "Aarau, verschiedene Orte, Aarau — ongoing, last day: 28 November 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/diagonal-club-festival-aarau_At1MGcr"
-            },
-            {
-              "label": "Spieleabend",
-              "detail": "turgitreff — ongoing, last day: 9 December 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/turgi/spieleabend_ALAdG9a"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "AG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "91",
+          "value": "85",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "50 Jahre Aarauer Kerzenziehen 2026",
+              "detail": "Aarau",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/50-jahre-aarauer-kerzenziehen-2026/"
+            },
+            {
+              "label": "Taschenlampenführung für Kinder",
+              "detail": "Muri AG",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-fuer-kinder/"
+            },
+            {
+              "label": "Adventsfunkeln in Rheinfelden",
+              "detail": "Rheinfelden",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsfunkeln-in-rheinfelden/"
+            },
+            {
+              "label": "Adventsweg Zofingen 2026",
+              "detail": "Heitere-Platz, Zofingen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsweg-zofingen-2026/"
+            },
+            {
+              "label": "Barhopping für Singles",
+              "detail": "Baden",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/eventi/party/baden/bar-per-single_A7Q7DPu"
+            },
+            {
+              "label": "I QUATTRO \"SWISSMAS\" - Die grosse Schweizer Weihnachtstournee 2026",
+              "detail": "Röm.-kath. Stadtkirche Mellingen, Mellingen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/i-quattro-swissmas-die-grosse-schweizer-weihnachtstournee-2026-6/"
+            },
+            {
+              "label": "Michael Arbenz feat. Atom String Quartet and Florian Arbenz: Reflecting Bach",
+              "detail": "Konservi, Seon",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/seon/michael-arbenz-feat-atom-string-quartet-and-florian-arbenz-reflecting-bach_AXYa6h5"
+            },
+            {
+              "label": "DUB SPENCER & TRANCE HILL - Live in Surround - Mixed by Umberto Echo",
+              "detail": "Royal, Baden",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/dub-spencer-und-trance-hill-synchronos-tour_APtw4aU"
+            },
+            {
               "label": "Lerntreff Baden",
-              "detail": "Familienzentrum Karussell Region Baden, Baden",
-              "date": "2026-11-26",
+              "detail": "Familienzentrum Karussell Region Baden, Baden — läuft, letzter Tag: 10. Dezember 2026",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/baden/lerntreff-baden_Aa8Vsfe"
-            },
-            {
-              "label": "Afterwork Live Musik - The Jacket Pockets",
-              "detail": "Henry's Live Music & Sport Bar, Baden",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/afterwork-live-musik-the-jacket-pockets_AfB9ee6"
-            },
-            {
-              "label": "Am Donnerstag FüBi im Museum: Hilfe, ich erbe!",
-              "detail": "Historisches Museum Baden, Baden",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/baden/am-donnerstag-fuebi-im-museum-hilfe-ich-erbe_A5WPLnY"
-            },
-            {
-              "label": "Live@the Campus-Veronika Kehl-Griesslehner & Kehl-Kollektiv",
-              "detail": "FHNW Campus Brugg-Windisch, Windisch",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/music/windisch/livethe-campus-veronika-kehl-griesslehner-und-kehl-kollektiv_ALhag8s"
-            },
-            {
-              "label": "Chris Regez Band & Alain Boog: Live in Schinznach-Dorf",
-              "detail": "Gasthof Bären, Schinznach",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schinznach-dorf/chris-regez-band-und-alain-boog-live-in-schinznach-dorf_AHT32hy"
-            },
-            {
-              "label": "Live Konzert von \"Scrambled EG´s",
-              "detail": "Baden",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/live-konzert-von-scrambled-egs/"
-            },
-            {
-              "label": "Ludwig Seuss Band (DE)",
-              "detail": "Baden",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ludwig-seuss-band-de/"
-            },
-            {
-              "label": "Weisse Zeiten",
-              "detail": "Saalbau Reinach",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-ag/weisse-zeiten_AHfWNWZ"
             },
             {
               "label": "diagonal - Club Festival Aarau",
               "detail": "Aarau, verschiedene Orte, Aarau — läuft, letzter Tag: 28. November 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/diagonal-club-festival-aarau_At1MGcr"
-            },
-            {
-              "label": "Spieleabend",
-              "detail": "turgitreff — läuft, letzter Tag: 9. Dezember 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/turgi/spieleabend_ALAdG9a"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "AG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "91",
+          "value": "85",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "50 Jahre Aarauer Kerzenziehen 2026",
+              "detail": "Aarau",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/50-jahre-aarauer-kerzenziehen-2026/"
+            },
+            {
+              "label": "Taschenlampenführung für Kinder",
+              "detail": "Muri AG",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-fuer-kinder/"
+            },
+            {
+              "label": "Adventsfunkeln in Rheinfelden",
+              "detail": "Rheinfelden",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsfunkeln-in-rheinfelden/"
+            },
+            {
+              "label": "Adventsweg Zofingen 2026",
+              "detail": "Heitere-Platz, Zofingen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsweg-zofingen-2026/"
+            },
+            {
+              "label": "Barhopping pour les célibataires",
+              "detail": "Baden",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/eventi/party/baden/bar-per-single_A7Q7DPu"
+            },
+            {
+              "label": "I QUATTRO \"SWISSMAS\" - Die grosse Schweizer Weihnachtstournee 2026",
+              "detail": "Röm.-kath. Stadtkirche Mellingen, Mellingen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/i-quattro-swissmas-die-grosse-schweizer-weihnachtstournee-2026-6/"
+            },
+            {
+              "label": "Michael Arbenz feat. Atom String Quartet and Florian Arbenz: Reflecting Bach",
+              "detail": "Konservi, Seon",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/seon/michael-arbenz-feat-atom-string-quartet-and-florian-arbenz-reflecting-bach_AXYa6h5"
+            },
+            {
+              "label": "DUB SPENCER & TRANCE HILL - Live in Surround - Mixed by Umberto Echo",
+              "detail": "Royal, Baden",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/dub-spencer-und-trance-hill-synchronos-tour_APtw4aU"
+            },
+            {
               "label": "Lerntreff Baden",
-              "detail": "Familienzentrum Karussell Region Baden, Baden",
-              "date": "2026-11-26",
+              "detail": "Familienzentrum Karussell Region Baden, Baden — en cours, dernier jour : 10 décembre 2026",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/baden/lerntreff-baden_Aa8Vsfe"
-            },
-            {
-              "label": "Afterwork Live Musik - The Jacket Pockets",
-              "detail": "Henry's Live Music & Sport Bar, Baden",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/afterwork-live-musik-the-jacket-pockets_AfB9ee6"
-            },
-            {
-              "label": "Am Donnerstag FüBi im Museum: Hilfe, ich erbe!",
-              "detail": "Historisches Museum Baden, Baden",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/baden/am-donnerstag-fuebi-im-museum-hilfe-ich-erbe_A5WPLnY"
-            },
-            {
-              "label": "Live@the Campus-Veronika Kehl-Griesslehner & Kehl-Kollektiv",
-              "detail": "FHNW Campus Brugg-Windisch, Windisch",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/music/windisch/livethe-campus-veronika-kehl-griesslehner-und-kehl-kollektiv_ALhag8s"
-            },
-            {
-              "label": "Chris Regez Band & Alain Boog: Live in Schinznach-Dorf",
-              "detail": "Gasthof Bären, Schinznach",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schinznach-dorf/chris-regez-band-und-alain-boog-live-in-schinznach-dorf_AHT32hy"
-            },
-            {
-              "label": "Live Konzert von \"Scrambled EG´s",
-              "detail": "Baden",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/live-konzert-von-scrambled-egs/"
-            },
-            {
-              "label": "Ludwig Seuss Band (DE)",
-              "detail": "Baden",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ludwig-seuss-band-de/"
-            },
-            {
-              "label": "Weisse Zeiten",
-              "detail": "Saalbau Reinach",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-ag/weisse-zeiten_AHfWNWZ"
             },
             {
               "label": "diagonal - Club Festival Aarau",
               "detail": "Aarau, verschiedene Orte, Aarau — en cours, dernier jour : 28 novembre 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/diagonal-club-festival-aarau_At1MGcr"
-            },
-            {
-              "label": "Spieleabend",
-              "detail": "turgitreff — en cours, dernier jour : 9 décembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/turgi/spieleabend_ALAdG9a"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

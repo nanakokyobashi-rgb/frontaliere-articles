@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-11-26T23:51:27.867Z",
-  "contentHash": "90888df0a970786c580b8fa1eeceb9990f7c898ae147b25b985205bdcf8c27e5",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "af48027873df1fa120c8504bceda2caba9760814b773e037c532bcd99e45bf2b",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "315",
+          "value": "308",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,64 +38,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Weihnachtsmarkt Winterthur 2026",
-              "detail": "8400 Winterthur, Winterthur",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmarkt-winterthur-2026/"
+              "label": "Adventskranz, Gesteck oder Türkranz - selbst gemacht!",
+              "detail": "Tann, Dürnten",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-gesteck-oder-tuerkranz-selbst-gemacht/"
             },
             {
-              "label": "KCXL - International Ophthalmology Experts's Meeting 2026",
-              "detail": "Stadtspital Zürich Triemli, Zürich",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/kcxl-international-ophthalmology-expertss-meeting-2026_AKfg8hW"
+              "label": "Degustations- & Verkaufstage bei Weinbau Familie Brunner",
+              "detail": "Kleinandelfingen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/degustations-verkaufstage-bei-weinbau-familie-brunner/"
             },
             {
-              "label": "Uster Märt",
-              "detail": "Innenstadt, Uster",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/uster-maert/"
+              "label": "Hands-on",
+              "detail": "Winterthur",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hands-on/"
             },
             {
-              "label": "Zauberpark mit Professor & Profesora Bummbastic",
-              "detail": "Flughafenpark im Circle, Zürich",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/zauberpark-mit-professor-und-profesora-bummbastic_AALjxNu"
+              "label": "ETOP Annual Meeting 2026",
+              "detail": "Dorint Airport-Hotel Zürich, Opfikon",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/opfikon/etop-annual-meeting-2026_AqdKesg"
             },
             {
-              "label": "Kerzenziehen (Kreativabend für alle)",
-              "detail": "Urdorf",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-kreativabend-fuer-alle/"
+              "label": "Dietiker Weihnachtsmarkt und Samichlaus-Einzug",
+              "detail": "Kirchplatz, Dietikon",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/dietiker-weihnachtsmarkt-und-samichlaus-einzug/"
             },
             {
-              "label": "Kunst-Stück: Impressionismus (Vertiefung)",
-              "detail": "Kunsthaus Zürich Chipperfield-Bau, Zürich",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kunststueck-impressionismus-vertiefung/"
+              "label": "ETOP Annual Meeting 2026",
+              "detail": "Dorint Airport-Hotel Zürich, Zürich",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/etop-annual-meeting-2026/"
             },
             {
-              "label": "Out of Service? – Schweizer Sakralarchitektur im Wandel",
-              "detail": "ZAZ Zentrum Architektur Zürich, Zürich",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/vernissage-out-of-service-schweizer-sakralarchitektur-im-wandel_AXBrejm"
+              "label": "Fondue-Genuss im historischen Buffetwagen",
+              "detail": "Saland, Bauma",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fondue-genuss-im-historischen-buffetwagen/"
             },
             {
-              "label": "Collection Insights: “She-Devils on Wheels – Headquaters”",
-              "detail": "Migros Museum für Gegenwartskunst, Zürich",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/collection-insights-she-devils-on-wheels-headquaters/"
+              "label": "Durchatmen",
+              "detail": "Kloten",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/durchatmen/"
             },
             {
-              "label": "Kunissimo",
-              "detail": "Salzhaus, Winterthur",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/kunissimo_A8jwPWf"
+              "label": "Adventskranzen",
+              "detail": "Dietikon",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranzen/"
             },
             {
-              "label": "Röm.-kath. Kirchgemeindeversammlung",
-              "detail": "Kath. Pfarreizentrum Urdorf, Urdorf",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roemkath-kirchgemeindeversammlung/"
+              "label": "Casino Night",
+              "detail": "Pfäffikon ZH, Pfäffikon",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/casino-night/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -141,7 +141,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T23:51:27.867Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "ZH",
@@ -151,7 +151,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "315",
+          "value": "308",
           "note": "from the site’s events calendar"
         }
       ],
@@ -162,64 +162,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Weihnachtsmarkt Winterthur 2026",
-              "detail": "8400 Winterthur, Winterthur",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmarkt-winterthur-2026/"
+              "label": "Adventskranz, Gesteck oder Türkranz - selbst gemacht!",
+              "detail": "Tann, Dürnten",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-gesteck-oder-tuerkranz-selbst-gemacht/"
             },
             {
-              "label": "KCXL - International Ophthalmology Experts's Meeting 2026",
-              "detail": "Stadtspital Zürich Triemli, Zürich",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/kcxl-international-ophthalmology-expertss-meeting-2026_AKfg8hW"
+              "label": "Degustations- & Verkaufstage bei Weinbau Familie Brunner",
+              "detail": "Kleinandelfingen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/degustations-verkaufstage-bei-weinbau-familie-brunner/"
             },
             {
-              "label": "Uster Märt",
-              "detail": "Innenstadt, Uster",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/uster-maert/"
+              "label": "Hands-on",
+              "detail": "Winterthur",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hands-on/"
             },
             {
-              "label": "Zauberpark mit Professor & Profesora Bummbastic",
-              "detail": "Flughafenpark im Circle, Zürich",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/zauberpark-mit-professor-und-profesora-bummbastic_AALjxNu"
+              "label": "ETOP Annual Meeting 2026",
+              "detail": "Dorint Airport-Hotel Zürich, Opfikon",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/opfikon/etop-annual-meeting-2026_AqdKesg"
             },
             {
-              "label": "Kerzenziehen (Kreativabend für alle)",
-              "detail": "Urdorf",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-kreativabend-fuer-alle/"
+              "label": "Dietiker Weihnachtsmarkt und Samichlaus-Einzug",
+              "detail": "Kirchplatz, Dietikon",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/dietiker-weihnachtsmarkt-und-samichlaus-einzug/"
             },
             {
-              "label": "Kunst-Stück: Impressionismus (Vertiefung)",
-              "detail": "Kunsthaus Zürich Chipperfield-Bau, Zürich",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kunststueck-impressionismus-vertiefung/"
+              "label": "ETOP Annual Meeting 2026",
+              "detail": "Dorint Airport-Hotel Zürich, Zürich",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/etop-annual-meeting-2026/"
             },
             {
-              "label": "Out of Service? – Swiss Sacred Architecture in Transition",
-              "detail": "ZAZ Zentrum Architektur Zürich, Zürich",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/vernissage-out-of-service-schweizer-sakralarchitektur-im-wandel_AXBrejm"
+              "label": "Fondue-Genuss im historischen Buffetwagen",
+              "detail": "Saland, Bauma",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fondue-genuss-im-historischen-buffetwagen/"
             },
             {
-              "label": "Collection Insights: “She-Devils on Wheels – Headquaters”",
-              "detail": "Migros Museum für Gegenwartskunst, Zürich",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/collection-insights-she-devils-on-wheels-headquaters/"
+              "label": "Durchatmen",
+              "detail": "Kloten",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/durchatmen/"
             },
             {
-              "label": "Kunissimo",
-              "detail": "Salzhaus, Winterthur",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/kunissimo_A8jwPWf"
+              "label": "Adventskranzen",
+              "detail": "Dietikon",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranzen/"
             },
             {
-              "label": "Röm.-kath. Kirchgemeindeversammlung",
-              "detail": "Kath. Pfarreizentrum Urdorf, Urdorf",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roemkath-kirchgemeindeversammlung/"
+              "label": "Casino Night",
+              "detail": "Pfäffikon ZH, Pfäffikon",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/casino-night/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -265,7 +265,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T23:51:27.867Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "ZH",
@@ -275,7 +275,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "315",
+          "value": "308",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -286,64 +286,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Weihnachtsmarkt Winterthur 2026",
-              "detail": "8400 Winterthur, Winterthur",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmarkt-winterthur-2026/"
+              "label": "Adventskranz, Gesteck oder Türkranz - selbst gemacht!",
+              "detail": "Tann, Dürnten",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-gesteck-oder-tuerkranz-selbst-gemacht/"
             },
             {
-              "label": "KCXL - International Ophthalmology Experts's Meeting 2026",
-              "detail": "Stadtspital Zürich Triemli, Zürich",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/kcxl-international-ophthalmology-expertss-meeting-2026_AKfg8hW"
+              "label": "Degustations- & Verkaufstage bei Weinbau Familie Brunner",
+              "detail": "Kleinandelfingen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/degustations-verkaufstage-bei-weinbau-familie-brunner/"
             },
             {
-              "label": "Uster Märt",
-              "detail": "Innenstadt, Uster",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/uster-maert/"
+              "label": "Hands-on",
+              "detail": "Winterthur",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hands-on/"
             },
             {
-              "label": "Zauberpark mit Professor & Profesora Bummbastic",
-              "detail": "Flughafenpark im Circle, Zürich",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/zauberpark-mit-professor-und-profesora-bummbastic_AALjxNu"
+              "label": "ETOP Annual Meeting 2026",
+              "detail": "Dorint Airport-Hotel Zürich, Opfikon",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/opfikon/etop-annual-meeting-2026_AqdKesg"
             },
             {
-              "label": "Kerzenziehen (Kreativabend für alle)",
-              "detail": "Urdorf",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-kreativabend-fuer-alle/"
+              "label": "Dietiker Weihnachtsmarkt und Samichlaus-Einzug",
+              "detail": "Kirchplatz, Dietikon",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/dietiker-weihnachtsmarkt-und-samichlaus-einzug/"
             },
             {
-              "label": "Kunst-Stück: Impressionismus (Vertiefung)",
-              "detail": "Kunsthaus Zürich Chipperfield-Bau, Zürich",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kunststueck-impressionismus-vertiefung/"
+              "label": "ETOP Annual Meeting 2026",
+              "detail": "Dorint Airport-Hotel Zürich, Zürich",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/etop-annual-meeting-2026/"
             },
             {
-              "label": "Außer Betrieb? – Schweizer heiliger Architektur im Wandel",
-              "detail": "ZAZ Zentrum Architektur Zürich, Zürich",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/vernissage-out-of-service-schweizer-sakralarchitektur-im-wandel_AXBrejm"
+              "label": "Fondue-Genuss im historischen Buffetwagen",
+              "detail": "Saland, Bauma",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fondue-genuss-im-historischen-buffetwagen/"
             },
             {
-              "label": "Collection Insights: “She-Devils on Wheels – Headquaters”",
-              "detail": "Migros Museum für Gegenwartskunst, Zürich",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/collection-insights-she-devils-on-wheels-headquaters/"
+              "label": "Durchatmen",
+              "detail": "Kloten",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/durchatmen/"
             },
             {
-              "label": "Kunissimo",
-              "detail": "Salzhaus, Winterthur",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/kunissimo_A8jwPWf"
+              "label": "Adventskranzen",
+              "detail": "Dietikon",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranzen/"
             },
             {
-              "label": "Röm.-kath. Kirchgemeindeversammlung",
-              "detail": "Kath. Pfarreizentrum Urdorf, Urdorf",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roemkath-kirchgemeindeversammlung/"
+              "label": "Casino Night",
+              "detail": "Pfäffikon ZH, Pfäffikon",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/casino-night/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -389,7 +389,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-26T23:51:27.867Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "ZH",
@@ -399,7 +399,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "315",
+          "value": "308",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -410,64 +410,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Weihnachtsmarkt Winterthur 2026",
-              "detail": "8400 Winterthur, Winterthur",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmarkt-winterthur-2026/"
+              "label": "Adventskranz, Gesteck oder Türkranz - selbst gemacht!",
+              "detail": "Tann, Dürnten",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-gesteck-oder-tuerkranz-selbst-gemacht/"
             },
             {
-              "label": "KCXL - International Ophthalmology Experts's Meeting 2026",
-              "detail": "Stadtspital Zürich Triemli, Zürich",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/kcxl-international-ophthalmology-expertss-meeting-2026_AKfg8hW"
+              "label": "Degustations- & Verkaufstage bei Weinbau Familie Brunner",
+              "detail": "Kleinandelfingen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/degustations-verkaufstage-bei-weinbau-familie-brunner/"
             },
             {
-              "label": "Uster Märt",
-              "detail": "Innenstadt, Uster",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/uster-maert/"
+              "label": "Hands-on",
+              "detail": "Winterthur",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hands-on/"
             },
             {
-              "label": "Zauberpark mit Professor & Profesora Bummbastic",
-              "detail": "Flughafenpark im Circle, Zürich",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/zauberpark-mit-professor-und-profesora-bummbastic_AALjxNu"
+              "label": "ETOP Annual Meeting 2026",
+              "detail": "Dorint Airport-Hotel Zürich, Opfikon",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/opfikon/etop-annual-meeting-2026_AqdKesg"
             },
             {
-              "label": "Kerzenziehen (Kreativabend für alle)",
-              "detail": "Urdorf",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kerzenziehen-kreativabend-fuer-alle/"
+              "label": "Dietiker Weihnachtsmarkt und Samichlaus-Einzug",
+              "detail": "Kirchplatz, Dietikon",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/dietiker-weihnachtsmarkt-und-samichlaus-einzug/"
             },
             {
-              "label": "Kunst-Stück: Impressionismus (Vertiefung)",
-              "detail": "Kunsthaus Zürich Chipperfield-Bau, Zürich",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kunststueck-impressionismus-vertiefung/"
+              "label": "ETOP Annual Meeting 2026",
+              "detail": "Dorint Airport-Hotel Zürich, Zürich",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/etop-annual-meeting-2026/"
             },
             {
-              "label": "Hors service ? – L’architecture sacrée suisse en mutation",
-              "detail": "ZAZ Zentrum Architektur Zürich, Zürich",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/vernissage-out-of-service-schweizer-sakralarchitektur-im-wandel_AXBrejm"
+              "label": "Fondue-Genuss im historischen Buffetwagen",
+              "detail": "Saland, Bauma",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fondue-genuss-im-historischen-buffetwagen/"
             },
             {
-              "label": "Collection Insights: “She-Devils on Wheels – Headquaters”",
-              "detail": "Migros Museum für Gegenwartskunst, Zürich",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/collection-insights-she-devils-on-wheels-headquaters/"
+              "label": "Durchatmen",
+              "detail": "Kloten",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/durchatmen/"
             },
             {
-              "label": "Kunissimo",
-              "detail": "Salzhaus, Winterthur",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/kunissimo_A8jwPWf"
+              "label": "Adventskranzen",
+              "detail": "Dietikon",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranzen/"
             },
             {
-              "label": "Röm.-kath. Kirchgemeindeversammlung",
-              "detail": "Kath. Pfarreizentrum Urdorf, Urdorf",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roemkath-kirchgemeindeversammlung/"
+              "label": "Casino Night",
+              "detail": "Pfäffikon ZH, Pfäffikon",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/casino-night/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -513,7 +513,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-26T23:51:27.867Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T17:26:42.969Z",
-  "contentHash": "42de2de6ec252a812b2bf754a5f2f844f8cc8aeb72bc2ef2d784d6c39831a001",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "8845dd82234aea074101954845b18a884f100e8701982e1748cdbe4e80f53c9c",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-26T03:50:03.880Z",
+      "updatedAt": "2026-11-26T13:22:01.562Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-26T15:51:00.529Z",
       "keyFacts": 0
     }
   ],
@@ -131,42 +131,52 @@
             {
               "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
               "value": "Traffico",
-              "date": "2026-11-26T03:50:03.880Z",
+              "date": "2026-11-26T13:22:01.562Z",
               "url": "https://www.ge.ch/node/45418"
             },
             {
               "label": "Perturbations de la circulation le samedi 14 novembre 2026",
               "value": "Traffico",
-              "date": "2026-11-26T03:50:03.880Z",
+              "date": "2026-11-26T13:22:01.562Z",
               "url": "https://www.ge.ch/node/45507"
             },
             {
               "label": "Perturbations de la circulation - jeudi 26 novembre",
               "value": "Traffico",
-              "date": "2026-11-26T03:50:03.880Z",
+              "date": "2026-11-26T13:22:01.562Z",
               "url": "https://www.ge.ch/node/45630"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
-              "value": "Cantiere",
-              "date": "2026-11-26T03:50:03.880Z",
-              "url": "https://www.ge.ch/node/45397"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 16 novembre 2026",
               "value": "Cantiere",
-              "date": "2026-11-26T03:50:03.880Z",
+              "date": "2026-11-26T13:22:01.562Z",
               "url": "https://www.ge.ch/node/45465"
+            },
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 23 novembre 2026",
+              "value": "Cantiere",
+              "date": "2026-11-26T13:22:01.562Z",
+              "url": "https://www.ge.ch/node/45530"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 30 novembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.ge.ch/node/45611"
+            },
+            {
+              "label": "Modification de l'ordonnance sur les organes de sécurité des entreprises de transports publics (OOST; RS745.21) et révision complète de l'ordonnance sur la vidéosurveillance dans les transports…",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45637"
+            },
             {
               "label": "Transports publics: soutien au renforcement des moyens de sécurité",
               "date": "2026-11-25",
@@ -186,19 +196,9 @@
               "label": "Plan sectoriel des transports, partie Infrastructure route (SIN) - consultation publique",
               "date": "2026-11-16",
               "url": "https://www.ge.ch/node/45444"
-            },
-            {
-              "label": "Perturbations de la circulation le samedi 14 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.ge.ch/node/45507"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 16 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.ge.ch/node/45465"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "GE",
@@ -367,42 +367,52 @@
             {
               "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
               "value": "Traffic",
-              "date": "2026-11-26T03:50:03.880Z",
+              "date": "2026-11-26T13:22:01.562Z",
               "url": "https://www.ge.ch/node/45418"
             },
             {
               "label": "Perturbations de la circulation le samedi 14 novembre 2026",
               "value": "Traffic",
-              "date": "2026-11-26T03:50:03.880Z",
+              "date": "2026-11-26T13:22:01.562Z",
               "url": "https://www.ge.ch/node/45507"
             },
             {
               "label": "Perturbations de la circulation - jeudi 26 novembre",
               "value": "Traffic",
-              "date": "2026-11-26T03:50:03.880Z",
+              "date": "2026-11-26T13:22:01.562Z",
               "url": "https://www.ge.ch/node/45630"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
-              "value": "Roadworks",
-              "date": "2026-11-26T03:50:03.880Z",
-              "url": "https://www.ge.ch/node/45397"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 16 novembre 2026",
               "value": "Roadworks",
-              "date": "2026-11-26T03:50:03.880Z",
+              "date": "2026-11-26T13:22:01.562Z",
               "url": "https://www.ge.ch/node/45465"
+            },
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 23 novembre 2026",
+              "value": "Roadworks",
+              "date": "2026-11-26T13:22:01.562Z",
+              "url": "https://www.ge.ch/node/45530"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 30 novembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.ge.ch/node/45611"
+            },
+            {
+              "label": "Modification de l'ordonnance sur les organes de sécurité des entreprises de transports publics (OOST; RS745.21) et révision complète de l'ordonnance sur la vidéosurveillance dans les transports…",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45637"
+            },
             {
               "label": "Transports publics: soutien au renforcement des moyens de sécurité",
               "date": "2026-11-25",
@@ -422,19 +432,9 @@
               "label": "Plan sectoriel des transports, partie Infrastructure route (SIN) - consultation publique",
               "date": "2026-11-16",
               "url": "https://www.ge.ch/node/45444"
-            },
-            {
-              "label": "Perturbations de la circulation le samedi 14 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.ge.ch/node/45507"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 16 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.ge.ch/node/45465"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -494,7 +494,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "GE",
@@ -603,42 +603,52 @@
             {
               "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
               "value": "Verkehr",
-              "date": "2026-11-26T03:50:03.880Z",
+              "date": "2026-11-26T13:22:01.562Z",
               "url": "https://www.ge.ch/node/45418"
             },
             {
               "label": "Perturbations de la circulation le samedi 14 novembre 2026",
               "value": "Verkehr",
-              "date": "2026-11-26T03:50:03.880Z",
+              "date": "2026-11-26T13:22:01.562Z",
               "url": "https://www.ge.ch/node/45507"
             },
             {
               "label": "Perturbations de la circulation - jeudi 26 novembre",
               "value": "Verkehr",
-              "date": "2026-11-26T03:50:03.880Z",
+              "date": "2026-11-26T13:22:01.562Z",
               "url": "https://www.ge.ch/node/45630"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
-              "value": "Baustelle",
-              "date": "2026-11-26T03:50:03.880Z",
-              "url": "https://www.ge.ch/node/45397"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 16 novembre 2026",
               "value": "Baustelle",
-              "date": "2026-11-26T03:50:03.880Z",
+              "date": "2026-11-26T13:22:01.562Z",
               "url": "https://www.ge.ch/node/45465"
+            },
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 23 novembre 2026",
+              "value": "Baustelle",
+              "date": "2026-11-26T13:22:01.562Z",
+              "url": "https://www.ge.ch/node/45530"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 30 novembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.ge.ch/node/45611"
+            },
+            {
+              "label": "Modification de l'ordonnance sur les organes de sécurité des entreprises de transports publics (OOST; RS745.21) et révision complète de l'ordonnance sur la vidéosurveillance dans les transports…",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45637"
+            },
             {
               "label": "Transports publics: soutien au renforcement des moyens de sécurité",
               "date": "2026-11-25",
@@ -658,19 +668,9 @@
               "label": "Plan sectoriel des transports, partie Infrastructure route (SIN) - consultation publique",
               "date": "2026-11-16",
               "url": "https://www.ge.ch/node/45444"
-            },
-            {
-              "label": "Perturbations de la circulation le samedi 14 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.ge.ch/node/45507"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 16 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.ge.ch/node/45465"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -730,7 +730,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "GE",
@@ -839,42 +839,52 @@
             {
               "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
               "value": "Trafic",
-              "date": "2026-11-26T03:50:03.880Z",
+              "date": "2026-11-26T13:22:01.562Z",
               "url": "https://www.ge.ch/node/45418"
             },
             {
               "label": "Perturbations de la circulation le samedi 14 novembre 2026",
               "value": "Trafic",
-              "date": "2026-11-26T03:50:03.880Z",
+              "date": "2026-11-26T13:22:01.562Z",
               "url": "https://www.ge.ch/node/45507"
             },
             {
               "label": "Perturbations de la circulation - jeudi 26 novembre",
               "value": "Trafic",
-              "date": "2026-11-26T03:50:03.880Z",
+              "date": "2026-11-26T13:22:01.562Z",
               "url": "https://www.ge.ch/node/45630"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 9 novembre 2026",
-              "value": "Chantier",
-              "date": "2026-11-26T03:50:03.880Z",
-              "url": "https://www.ge.ch/node/45397"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 16 novembre 2026",
               "value": "Chantier",
-              "date": "2026-11-26T03:50:03.880Z",
+              "date": "2026-11-26T13:22:01.562Z",
               "url": "https://www.ge.ch/node/45465"
+            },
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 23 novembre 2026",
+              "value": "Chantier",
+              "date": "2026-11-26T13:22:01.562Z",
+              "url": "https://www.ge.ch/node/45530"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 30 novembre 2026",
+              "date": "2026-11-26",
+              "url": "https://www.ge.ch/node/45611"
+            },
+            {
+              "label": "Modification de l'ordonnance sur les organes de sécurité des entreprises de transports publics (OOST; RS745.21) et révision complète de l'ordonnance sur la vidéosurveillance dans les transports…",
+              "date": "2026-11-25",
+              "url": "https://www.ge.ch/node/45637"
+            },
             {
               "label": "Transports publics: soutien au renforcement des moyens de sécurité",
               "date": "2026-11-25",
@@ -894,19 +904,9 @@
               "label": "Plan sectoriel des transports, partie Infrastructure route (SIN) - consultation publique",
               "date": "2026-11-16",
               "url": "https://www.ge.ch/node/45444"
-            },
-            {
-              "label": "Perturbations de la circulation le samedi 14 novembre 2026",
-              "date": "2026-11-13",
-              "url": "https://www.ge.ch/node/45507"
-            },
-            {
-              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 16 novembre 2026",
-              "date": "2026-11-12",
-              "url": "https://www.ge.ch/node/45465"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -966,7 +966,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

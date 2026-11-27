@@ -4,17 +4,17 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T17:26:42.969Z",
-  "contentHash": "73a423f9a997133713746ede57df4ad5c365770c3aeaf392aea1a5a5da7b6983",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "35059df40baf6e62e498197211271f78e09a6c54f703f5476de1f8fb1423701a",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-26T03:50:03.880Z",
+      "updatedAt": "2026-11-26T13:22:01.562Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-26T15:51:00.529Z",
       "keyFacts": 0
     }
   ],
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "66",
+          "value": "64",
           "note": "segnalazioni aggiornate: 26 novembre 2026"
         }
       ],
@@ -90,13 +90,23 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Wirtschaftsverkehr wird auf fünf weiteren Strecken priorisiert",
+              "date": "2026-11-26T05:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/wirtschaftsverkehr-wird-auf-fuenf-weiteren-strecken-priorisiert"
+            },
+            {
+              "label": "Fahrplanwechsel",
+              "date": "2026-11-26",
+              "url": "https://www.bernmobil.ch/de/fahrplanwechsel"
+            },
             {
               "label": "Brückfeld: Bessere Parkiermöglichkeiten für Anwohnende",
               "date": "2026-11-24T10:00:00.000Z",
@@ -116,19 +126,9 @@
               "label": "«Tram Kleinwabern» und «Sanierung Zentrum Wabern»",
               "date": "2026-11-19",
               "url": "https://www.bernmobil.ch/de/tram-kleinwabern-und-sanierung-zentrum-wabern-1"
-            },
-            {
-              "label": "Tram Kleinwabern/Sanierung Zentrum Wabern",
-              "date": "2026-11-19",
-              "url": "https://www.bernmobil.ch/de/tram-kleinwabernsanierung-zentrum-wabern"
-            },
-            {
-              "label": "Beschwerden eingereicht – Baustart muss warten",
-              "date": "2026-11-16",
-              "url": "https://www.bernmobil.ch/de/beschwerden-eingereicht-baustart-muss-warten"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -186,7 +186,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "BE",
@@ -201,7 +201,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "66",
+          "value": "64",
           "note": "reports as of 26 November 2026"
         }
       ],
@@ -259,13 +259,23 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Wirtschaftsverkehr wird auf fünf weiteren Strecken priorisiert",
+              "date": "2026-11-26T05:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/wirtschaftsverkehr-wird-auf-fuenf-weiteren-strecken-priorisiert"
+            },
+            {
+              "label": "Fahrplanwechsel",
+              "date": "2026-11-26",
+              "url": "https://www.bernmobil.ch/de/fahrplanwechsel"
+            },
             {
               "label": "Brückfeld: Bessere Parkiermöglichkeiten für Anwohnende",
               "date": "2026-11-24T10:00:00.000Z",
@@ -285,19 +295,9 @@
               "label": "«Tram Kleinwabern» und «Sanierung Zentrum Wabern»",
               "date": "2026-11-19",
               "url": "https://www.bernmobil.ch/de/tram-kleinwabern-und-sanierung-zentrum-wabern-1"
-            },
-            {
-              "label": "Tram Kleinwabern/Sanierung Zentrum Wabern",
-              "date": "2026-11-19",
-              "url": "https://www.bernmobil.ch/de/tram-kleinwabernsanierung-zentrum-wabern"
-            },
-            {
-              "label": "Beschwerden eingereicht – Baustart muss warten",
-              "date": "2026-11-16",
-              "url": "https://www.bernmobil.ch/de/beschwerden-eingereicht-baustart-muss-warten"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -355,7 +355,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "BE",
@@ -370,7 +370,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "66",
+          "value": "64",
           "note": "Meldungen vom 26. November 2026"
         }
       ],
@@ -428,13 +428,23 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Wirtschaftsverkehr wird auf fünf weiteren Strecken priorisiert",
+              "date": "2026-11-26T05:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/wirtschaftsverkehr-wird-auf-fuenf-weiteren-strecken-priorisiert"
+            },
+            {
+              "label": "Fahrplanwechsel",
+              "date": "2026-11-26",
+              "url": "https://www.bernmobil.ch/de/fahrplanwechsel"
+            },
             {
               "label": "Brückfeld: Bessere Parkiermöglichkeiten für Anwohnende",
               "date": "2026-11-24T10:00:00.000Z",
@@ -454,19 +464,9 @@
               "label": "«Tram Kleinwabern» und «Sanierung Zentrum Wabern»",
               "date": "2026-11-19",
               "url": "https://www.bernmobil.ch/de/tram-kleinwabern-und-sanierung-zentrum-wabern-1"
-            },
-            {
-              "label": "Tram Kleinwabern/Sanierung Zentrum Wabern",
-              "date": "2026-11-19",
-              "url": "https://www.bernmobil.ch/de/tram-kleinwabernsanierung-zentrum-wabern"
-            },
-            {
-              "label": "Beschwerden eingereicht – Baustart muss warten",
-              "date": "2026-11-16",
-              "url": "https://www.bernmobil.ch/de/beschwerden-eingereicht-baustart-muss-warten"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -524,7 +524,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "BE",
@@ -539,7 +539,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "66",
+          "value": "64",
           "note": "signalements au 26 novembre 2026"
         }
       ],
@@ -597,13 +597,23 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Wirtschaftsverkehr wird auf fünf weiteren Strecken priorisiert",
+              "date": "2026-11-26T05:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/wirtschaftsverkehr-wird-auf-fuenf-weiteren-strecken-priorisiert"
+            },
+            {
+              "label": "Fahrplanwechsel",
+              "date": "2026-11-26",
+              "url": "https://www.bernmobil.ch/de/fahrplanwechsel"
+            },
             {
               "label": "Brückfeld: Bessere Parkiermöglichkeiten für Anwohnende",
               "date": "2026-11-24T10:00:00.000Z",
@@ -623,19 +633,9 @@
               "label": "«Tram Kleinwabern» und «Sanierung Zentrum Wabern»",
               "date": "2026-11-19",
               "url": "https://www.bernmobil.ch/de/tram-kleinwabern-und-sanierung-zentrum-wabern-1"
-            },
-            {
-              "label": "Tram Kleinwabern/Sanierung Zentrum Wabern",
-              "date": "2026-11-19",
-              "url": "https://www.bernmobil.ch/de/tram-kleinwabernsanierung-zentrum-wabern"
-            },
-            {
-              "label": "Beschwerden eingereicht – Baustart muss warten",
-              "date": "2026-11-16",
-              "url": "https://www.bernmobil.ch/de/beschwerden-eingereicht-baustart-muss-warten"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -693,7 +693,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "eventi",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "1586709cba5a8fcd56f88552843695158d2c57333965b711e34d3f788969aa57",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "009d02f08eef46db2583fdf2efd44242faf78858c5c0deaaf4ea30c3d752e540",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T00:32:00.223Z",
+      "updatedAt": "2026-11-26T16:33:33.919Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "33",
+          "value": "32",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,28 +33,16 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Fit im Kopf - selbständig und mit Freude älter werden",
-              "detail": "Residenz am Schärme, Am Schärme 1, Sarnen, Sarnen",
-              "date": "2026-11-26",
-              "url": "https://www.ow.ch/anlaesseaktuelles/94255"
-            },
-            {
-              "label": "Korporationsversammlung",
-              "detail": "MZG, Giswil, Giswil",
-              "date": "2026-11-26",
-              "url": "https://www.ow.ch/anlaesseaktuelles/86425"
-            },
-            {
-              "label": "L’autunno benefico dei cuochi della Gilda",
-              "detail": "Gesamte Schweiz, Sachseln — in corso, ultimo giorno: 4 dicembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/suisse-sans-indication-de-lieu/lautomne-caritatif-de-la-guilde_A4bgNcf"
-            },
-            {
               "label": "Samigloiseinzug",
               "detail": "Schulhausplatz, Giswil, Giswil",
               "date": "2026-11-27",
               "url": "https://www.ow.ch/anlaesseaktuelles/87629"
+            },
+            {
+              "label": "L’autunno benefico dei cuochi della Gilda",
+              "detail": "Gesamte Schweiz, Sachseln — in corso, ultimo giorno: 4 dicembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/suisse-sans-indication-de-lieu/lautomne-caritatif-de-la-guilde_A4bgNcf"
             },
             {
               "label": "Schneewittli",
@@ -91,11 +79,23 @@
               "detail": "altes Spritzenhaus, Sarnen, Sarnen",
               "date": "2026-12-01",
               "url": "https://www.ow.ch/anlaesseaktuelles/94957"
+            },
+            {
+              "label": "Monatsübung",
+              "detail": "MZG, Giswil, Giswil",
+              "date": "2026-12-01",
+              "url": "https://www.ow.ch/anlaesseaktuelles/87506"
+            },
+            {
+              "label": "Webinar - Jugendliche im Nachtleben: Ausprobieren Gruppendruck Risiko",
+              "detail": "Sachseln",
+              "date": "2026-12-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/webinar-jugendliche-im-nachtleben-ausprobieren-gruppendruck-risiko/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/obvaldo/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/obvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "OW",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "33",
+          "value": "32",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,28 +138,16 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Fit im Kopf - selbständig und mit Freude älter werden",
-              "detail": "Residenz am Schärme, Am Schärme 1, Sarnen, Sarnen",
-              "date": "2026-11-26",
-              "url": "https://www.ow.ch/anlaesseaktuelles/94255"
-            },
-            {
-              "label": "Korporationsversammlung",
-              "detail": "MZG, Giswil, Giswil",
-              "date": "2026-11-26",
-              "url": "https://www.ow.ch/anlaesseaktuelles/86425"
-            },
-            {
-              "label": "Gilde Charity Herbst",
-              "detail": "Gesamte Schweiz, Sachseln — ongoing, last day: 4 December 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/suisse-sans-indication-de-lieu/lautomne-caritatif-de-la-guilde_A4bgNcf"
-            },
-            {
               "label": "Samigloiseinzug",
               "detail": "Schulhausplatz, Giswil, Giswil",
               "date": "2026-11-27",
               "url": "https://www.ow.ch/anlaesseaktuelles/87629"
+            },
+            {
+              "label": "Gilde Charity Herbst",
+              "detail": "Gesamte Schweiz, Sachseln — ongoing, last day: 4 December 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/suisse-sans-indication-de-lieu/lautomne-caritatif-de-la-guilde_A4bgNcf"
             },
             {
               "label": "Schneewittli",
@@ -196,11 +184,23 @@
               "detail": "altes Spritzenhaus, Sarnen, Sarnen",
               "date": "2026-12-01",
               "url": "https://www.ow.ch/anlaesseaktuelles/94957"
+            },
+            {
+              "label": "Monatsübung",
+              "detail": "MZG, Giswil, Giswil",
+              "date": "2026-12-01",
+              "url": "https://www.ow.ch/anlaesseaktuelles/87506"
+            },
+            {
+              "label": "Webinar - Jugendliche im Nachtleben: Ausprobieren Gruppendruck Risiko",
+              "detail": "Sachseln",
+              "date": "2026-12-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/webinar-jugendliche-im-nachtleben-ausprobieren-gruppendruck-risiko/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/obwalden/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/obwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "OW",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "33",
+          "value": "32",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,28 +243,16 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Fit im Kopf - selbständig und mit Freude älter werden",
-              "detail": "Residenz am Schärme, Am Schärme 1, Sarnen, Sarnen",
-              "date": "2026-11-26",
-              "url": "https://www.ow.ch/anlaesseaktuelles/94255"
-            },
-            {
-              "label": "Korporationsversammlung",
-              "detail": "MZG, Giswil, Giswil",
-              "date": "2026-11-26",
-              "url": "https://www.ow.ch/anlaesseaktuelles/86425"
-            },
-            {
-              "label": "Gilde Charity Herbst",
-              "detail": "Gesamte Schweiz, Sachseln — läuft, letzter Tag: 4. Dezember 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/suisse-sans-indication-de-lieu/lautomne-caritatif-de-la-guilde_A4bgNcf"
-            },
-            {
               "label": "Samigloiseinzug",
               "detail": "Schulhausplatz, Giswil, Giswil",
               "date": "2026-11-27",
               "url": "https://www.ow.ch/anlaesseaktuelles/87629"
+            },
+            {
+              "label": "Gilde Charity Herbst",
+              "detail": "Gesamte Schweiz, Sachseln — läuft, letzter Tag: 4. Dezember 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/suisse-sans-indication-de-lieu/lautomne-caritatif-de-la-guilde_A4bgNcf"
             },
             {
               "label": "Schneewittli",
@@ -301,11 +289,23 @@
               "detail": "altes Spritzenhaus, Sarnen, Sarnen",
               "date": "2026-12-01",
               "url": "https://www.ow.ch/anlaesseaktuelles/94957"
+            },
+            {
+              "label": "Monatsübung",
+              "detail": "MZG, Giswil, Giswil",
+              "date": "2026-12-01",
+              "url": "https://www.ow.ch/anlaesseaktuelles/87506"
+            },
+            {
+              "label": "Webinar - Jugendliche im Nachtleben: Ausprobieren Gruppendruck Risiko",
+              "detail": "Sachseln",
+              "date": "2026-12-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/webinar-jugendliche-im-nachtleben-ausprobieren-gruppendruck-risiko/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/obwalden/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/obwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "OW",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "33",
+          "value": "32",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,28 +348,16 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Fit im Kopf - selbständig und mit Freude älter werden",
-              "detail": "Residenz am Schärme, Am Schärme 1, Sarnen, Sarnen",
-              "date": "2026-11-26",
-              "url": "https://www.ow.ch/anlaesseaktuelles/94255"
-            },
-            {
-              "label": "Korporationsversammlung",
-              "detail": "MZG, Giswil, Giswil",
-              "date": "2026-11-26",
-              "url": "https://www.ow.ch/anlaesseaktuelles/86425"
-            },
-            {
-              "label": "L’automne caritatif de la Guilde",
-              "detail": "Gesamte Schweiz, Sachseln — en cours, dernier jour : 4 décembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/suisse-sans-indication-de-lieu/lautomne-caritatif-de-la-guilde_A4bgNcf"
-            },
-            {
               "label": "Samigloiseinzug",
               "detail": "Schulhausplatz, Giswil, Giswil",
               "date": "2026-11-27",
               "url": "https://www.ow.ch/anlaesseaktuelles/87629"
+            },
+            {
+              "label": "L’automne caritatif de la Guilde",
+              "detail": "Gesamte Schweiz, Sachseln — en cours, dernier jour : 4 décembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/suisse-sans-indication-de-lieu/lautomne-caritatif-de-la-guilde_A4bgNcf"
             },
             {
               "label": "Schneewittli",
@@ -406,11 +394,23 @@
               "detail": "altes Spritzenhaus, Sarnen, Sarnen",
               "date": "2026-12-01",
               "url": "https://www.ow.ch/anlaesseaktuelles/94957"
+            },
+            {
+              "label": "Monatsübung",
+              "detail": "MZG, Giswil, Giswil",
+              "date": "2026-12-01",
+              "url": "https://www.ow.ch/anlaesseaktuelles/87506"
+            },
+            {
+              "label": "Webinar - Jugendliche im Nachtleben: Ausprobieren Gruppendruck Risiko",
+              "detail": "Sachseln",
+              "date": "2026-12-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/webinar-jugendliche-im-nachtleben-ausprobieren-gruppendruck-risiko/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/obwald/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/obwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

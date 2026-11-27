@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "pensioni",
-  "updatedAt": "2026-10-28T17:02:29.143Z",
-  "contentHash": "eeef703dde8771a81225965f0735175aee4a8e22a33f055230176b051f486817",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "b548b715524c5ec3f32e00ce5a28b761516b2df3bfadd122d0ff163f4b933099",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T11:41:09.250Z",
+      "updatedAt": "2026-11-26T15:51:00.529Z",
       "keyFacts": 0
     }
   ],
@@ -161,14 +161,9 @@
               "label": "Pensionskassengesetz: Punktuelle Anpassungen an bewährtem Gesetz",
               "date": "2026-10-28",
               "url": "https://www.bs.ch/medienmitteilungen/2026-pensionskassengesetz-punktuelle-anpassungen-bewaehrtem-gesetz"
-            },
-            {
-              "label": "Aspekte Ausgabe Juli 2026",
-              "date": "2026-07-30",
-              "url": "https://www.pkbs.ch/de/news/news-detail/aspekte-ausgabe-juli-2026/"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -228,7 +223,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -362,14 +357,9 @@
               "label": "Pensionskassengesetz: Punktuelle Anpassungen an bewährtem Gesetz",
               "date": "2026-10-28",
               "url": "https://www.bs.ch/medienmitteilungen/2026-pensionskassengesetz-punktuelle-anpassungen-bewaehrtem-gesetz"
-            },
-            {
-              "label": "Aspekte Ausgabe Juli 2026",
-              "date": "2026-07-30",
-              "url": "https://www.pkbs.ch/de/news/news-detail/aspekte-ausgabe-juli-2026/"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -429,7 +419,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -563,14 +553,9 @@
               "label": "Pensionskassengesetz: Punktuelle Anpassungen an bewährtem Gesetz",
               "date": "2026-10-28",
               "url": "https://www.bs.ch/medienmitteilungen/2026-pensionskassengesetz-punktuelle-anpassungen-bewaehrtem-gesetz"
-            },
-            {
-              "label": "Aspekte Ausgabe Juli 2026",
-              "date": "2026-07-30",
-              "url": "https://www.pkbs.ch/de/news/news-detail/aspekte-ausgabe-juli-2026/"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -630,7 +615,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -764,14 +749,9 @@
               "label": "Pensionskassengesetz: Punktuelle Anpassungen an bewährtem Gesetz",
               "date": "2026-10-28",
               "url": "https://www.bs.ch/medienmitteilungen/2026-pensionskassengesetz-punktuelle-anpassungen-bewaehrtem-gesetz"
-            },
-            {
-              "label": "Aspekte Ausgabe Juli 2026",
-              "date": "2026-07-30",
-              "url": "https://www.pkbs.ch/de/news/news-detail/aspekte-ausgabe-juli-2026/"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -831,7 +811,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T17:26:42.969Z",
-  "contentHash": "accc503d9d6112bb3e3ddbd066703295ef3f645f53db3d0bb40c16eb8850bad7",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "9ad0bb231c0f77ed41341487892e344cc845a86425b560ac94e17673b2aa709d",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-26T03:50:03.880Z",
+      "updatedAt": "2026-11-26T13:22:01.562Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-26T15:51:00.529Z",
       "keyFacts": 0
     }
   ],
@@ -117,12 +117,6 @@
               "date": "2025-10-19T19:00:00.000Z"
             },
             {
-              "label": "A2 Luzern <-> Basel tra Raccordo autostradale Diramazione Hagnau E Svincolo autostradale Pratteln Situazione: chiusa cantiere, lunghezza [km] 5.3",
-              "value": "Chiusura",
-              "detail": "fine prevista: 27 novembre 2026",
-              "date": "2026-10-29T07:34:00.000Z"
-            },
-            {
               "label": "A2 Luzern <-> Basel tra Svincolo autostradale Liestal E Svincolo autostradale Sissach Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: corsia d'emergenza chiusa",
               "value": "Chiusura",
               "detail": "fine prevista: 3 dicembre 2026",
@@ -151,16 +145,27 @@
               "value": "Chiusura",
               "detail": "fine prevista: 14 dicembre 2026",
               "date": "2026-11-24T13:15:00.000Z"
+            },
+            {
+              "label": "A3 Zürich -> Basel Svincolo autostradale Basel-Kannenfeld Situazione: uscita chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 8 dicembre 2026",
+              "date": "2026-11-26T05:31:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Das Wiehnachts-Drämmli ist wieder unterwegs",
+              "date": "2026-11-26T13:00:14.000Z",
+              "url": "https://www.bvb.ch/de/2026/11/26/das-wiehnachts-draemmli-ist-wieder-unterwegs/"
+            },
             {
               "label": "Geschenkideen von der BVB",
               "date": "2026-11-25T08:06:12.000Z",
@@ -185,14 +190,9 @@
               "label": "Auch auf Social Media unterwegs",
               "date": "2026-11-09T08:55:52.000Z",
               "url": "https://www.bvb.ch/de/2026/11/09/auch-auf-social-media-unterwegs/"
-            },
-            {
-              "label": "Stig au du mit yy",
-              "date": "2026-11-09T08:46:30.000Z",
-              "url": "https://www.bvb.ch/de/2026/11/09/stig-au-du-mit-yy/"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -276,7 +276,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -371,12 +371,6 @@
               "date": "2025-10-19T19:00:00.000Z"
             },
             {
-              "label": "A2 Luzern <-> Basel tra Raccordo autostradale Diramazione Hagnau E Svincolo autostradale Pratteln Situazione: chiusa cantiere, lunghezza [km] 5.3",
-              "value": "Closure",
-              "detail": "until 27 November 2026",
-              "date": "2026-10-29T07:34:00.000Z"
-            },
-            {
               "label": "A2 Luzern <-> Basel tra Svincolo autostradale Liestal E Svincolo autostradale Sissach Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: corsia d'emergenza chiusa",
               "value": "Closure",
               "detail": "until 3 December 2026",
@@ -405,16 +399,27 @@
               "value": "Closure",
               "detail": "until 14 December 2026",
               "date": "2026-11-24T13:15:00.000Z"
+            },
+            {
+              "label": "A3 Zürich -> Basel Svincolo autostradale Basel-Kannenfeld Situazione: uscita chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 8 December 2026",
+              "date": "2026-11-26T05:31:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Das Wiehnachts-Drämmli ist wieder unterwegs",
+              "date": "2026-11-26T13:00:14.000Z",
+              "url": "https://www.bvb.ch/de/2026/11/26/das-wiehnachts-draemmli-ist-wieder-unterwegs/"
+            },
             {
               "label": "Geschenkideen von der BVB",
               "date": "2026-11-25T08:06:12.000Z",
@@ -439,14 +444,9 @@
               "label": "Auch auf Social Media unterwegs",
               "date": "2026-11-09T08:55:52.000Z",
               "url": "https://www.bvb.ch/de/2026/11/09/auch-auf-social-media-unterwegs/"
-            },
-            {
-              "label": "Stig au du mit yy",
-              "date": "2026-11-09T08:46:30.000Z",
-              "url": "https://www.bvb.ch/de/2026/11/09/stig-au-du-mit-yy/"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -530,7 +530,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -625,12 +625,6 @@
               "date": "2025-10-19T19:00:00.000Z"
             },
             {
-              "label": "A2 Luzern <-> Basel zwischen Autobahndreieck Verzweigung Hagnau und Anschluss Pratteln Sachlage: Strecke gesperrt Baustelle, Länge [km] 5.3",
-              "value": "Sperrung",
-              "detail": "bis 27. November 2026",
-              "date": "2026-10-29T07:34:00.000Z"
-            },
-            {
               "label": "A2 Luzern <-> Basel zwischen Anschluss Liestal und Anschluss Sissach Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Verkehrsführung: Pannenstreifen gesperrt",
               "value": "Sperrung",
               "detail": "bis 3. Dezember 2026",
@@ -659,16 +653,27 @@
               "value": "Sperrung",
               "detail": "bis 14. Dezember 2026",
               "date": "2026-11-24T13:15:00.000Z"
+            },
+            {
+              "label": "A3 Zürich -> Basel Anschluss Basel-Kannenfeld Sachlage: Ausfahrt gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 8. Dezember 2026",
+              "date": "2026-11-26T05:31:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Das Wiehnachts-Drämmli ist wieder unterwegs",
+              "date": "2026-11-26T13:00:14.000Z",
+              "url": "https://www.bvb.ch/de/2026/11/26/das-wiehnachts-draemmli-ist-wieder-unterwegs/"
+            },
             {
               "label": "Geschenkideen von der BVB",
               "date": "2026-11-25T08:06:12.000Z",
@@ -693,14 +698,9 @@
               "label": "Auch auf Social Media unterwegs",
               "date": "2026-11-09T08:55:52.000Z",
               "url": "https://www.bvb.ch/de/2026/11/09/auch-auf-social-media-unterwegs/"
-            },
-            {
-              "label": "Stig au du mit yy",
-              "date": "2026-11-09T08:46:30.000Z",
-              "url": "https://www.bvb.ch/de/2026/11/09/stig-au-du-mit-yy/"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -784,7 +784,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -879,12 +879,6 @@
               "date": "2025-10-19T19:00:00.000Z"
             },
             {
-              "label": "A2 Lucerne <-> Bâle entre Echangeur Echangeur de Hagnau et Jonction autoroutière Pratteln Situation: fermé travaux, longueur [km] 5.3",
-              "value": "Fermeture",
-              "detail": "jusqu’au 27 novembre 2026",
-              "date": "2026-10-29T07:34:00.000Z"
-            },
-            {
               "label": "A2 Lucerne <-> Bâle entre Jonction autoroutière Liestal et Jonction autoroutière Sissach Situation: trafic perturbé travaux, longueur [km] 0.1 Gestion du trafic: bande d'arrêt d'urgence fermée",
               "value": "Fermeture",
               "detail": "jusqu’au 3 décembre 2026",
@@ -913,16 +907,27 @@
               "value": "Fermeture",
               "detail": "jusqu’au 14 décembre 2026",
               "date": "2026-11-24T13:15:00.000Z"
+            },
+            {
+              "label": "A3 Zurich -> Bâle Jonction autoroutière Bâle-Kannenfeld Situation: sortie fermée travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 8 décembre 2026",
+              "date": "2026-11-26T05:31:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Das Wiehnachts-Drämmli ist wieder unterwegs",
+              "date": "2026-11-26T13:00:14.000Z",
+              "url": "https://www.bvb.ch/de/2026/11/26/das-wiehnachts-draemmli-ist-wieder-unterwegs/"
+            },
             {
               "label": "Geschenkideen von der BVB",
               "date": "2026-11-25T08:06:12.000Z",
@@ -947,14 +952,9 @@
               "label": "Auch auf Social Media unterwegs",
               "date": "2026-11-09T08:55:52.000Z",
               "url": "https://www.bvb.ch/de/2026/11/09/auch-auf-social-media-unterwegs/"
-            },
-            {
-              "label": "Stig au du mit yy",
-              "date": "2026-11-09T08:46:30.000Z",
-              "url": "https://www.bvb.ch/de/2026/11/09/stig-au-du-mit-yy/"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -1038,7 +1038,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

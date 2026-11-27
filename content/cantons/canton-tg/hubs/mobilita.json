@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T17:26:42.969Z",
-  "contentHash": "d8b74313815935067ce79e2faee5ba7d80fbab329d5c1a159d44b6b01358cc1a",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "da91dcffc0ac14cff28b13964a05252d2ef769af663f3af697fcf5472e70d1e7",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-26T03:50:03.880Z",
+      "updatedAt": "2026-11-26T13:22:01.562Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-26T15:51:00.529Z",
       "keyFacts": 0
     }
   ],
@@ -82,11 +82,6 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
-              "label": "Revocato: A1 Zürich <-> St. Gallen tra Svincolo autostradale Matzingen E Parcheggio Stegen Situazione: pericolo Causa: animali sulla strada",
-              "value": "Traffico",
-              "date": "2026-11-26T03:24:00.000Z"
-            },
-            {
               "label": "A7 Kreuzlingen -> Winterthur tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Frauenfeld Ost Situazione: problemi di traffico cantiere, lunghezza [km] 1.1 Limitazione del…",
               "value": "Cantiere",
               "detail": "fine prevista: 7 dicembre 2026",
@@ -94,13 +89,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "IBK bringt Anliegen der Bodenseeregion zu Verkehr und Energie nach Bern",
+              "date": "2026-11-26",
+              "url": "https://www.tg.ch/news.html/485/news/80883"
+            },
             {
               "label": "Irene Meister gewinnt den Hauptpreis der Kreuzlinger Velo-Challenge",
               "date": "2026-11-25T14:43:34.000Z",
@@ -125,14 +125,9 @@
               "label": "Einige Änderungen im Bahn- und Busfahrplan für 2027",
               "date": "2026-10-23",
               "url": "https://www.tg.ch/news.html/485/news/80512"
-            },
-            {
-              "label": "Jahrmarkt: Zentrum für Durchgangsverkehr gesperrt",
-              "date": "2026-10-21T16:00:00.000Z",
-              "url": "https://www.kreuzlingen.ch/aktuelles/jahrmarkt-zentrum-fuer-durchgangsverkehr-gesperrt"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -198,7 +193,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "TG",
@@ -258,11 +253,6 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
-              "label": "Revocato: A1 Zürich <-> St. Gallen tra Svincolo autostradale Matzingen E Parcheggio Stegen Situazione: pericolo Causa: animali sulla strada",
-              "value": "Traffic",
-              "date": "2026-11-26T03:24:00.000Z"
-            },
-            {
               "label": "A7 Kreuzlingen -> Winterthur tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Frauenfeld Ost Situazione: problemi di traffico cantiere, lunghezza [km] 1.1 Limitazione del…",
               "value": "Roadworks",
               "detail": "until 7 December 2026",
@@ -270,13 +260,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "IBK bringt Anliegen der Bodenseeregion zu Verkehr und Energie nach Bern",
+              "date": "2026-11-26",
+              "url": "https://www.tg.ch/news.html/485/news/80883"
+            },
             {
               "label": "Irene Meister gewinnt den Hauptpreis der Kreuzlinger Velo-Challenge",
               "date": "2026-11-25T14:43:34.000Z",
@@ -301,14 +296,9 @@
               "label": "Einige Änderungen im Bahn- und Busfahrplan für 2027",
               "date": "2026-10-23",
               "url": "https://www.tg.ch/news.html/485/news/80512"
-            },
-            {
-              "label": "Jahrmarkt: Zentrum für Durchgangsverkehr gesperrt",
-              "date": "2026-10-21T16:00:00.000Z",
-              "url": "https://www.kreuzlingen.ch/aktuelles/jahrmarkt-zentrum-fuer-durchgangsverkehr-gesperrt"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -374,7 +364,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "TG",
@@ -434,11 +424,6 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
-              "label": "Aufgehoben: A1 Zürich <-> St. Gallen zwischen Anschluss Matzingen und Parkplatz Stegen Sachlage: Gefahr Ursache: Tiere auf der Fahrbahn",
-              "value": "Verkehr",
-              "date": "2026-11-26T03:24:00.000Z"
-            },
-            {
               "label": "A7 Kreuzlingen -> Winterthur zwischen Autobahndreieck Verzweigung Grüneck und Anschluss Frauenfeld-Ost Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.1 Verkehrsführung: Fahrbahnverengung auf…",
               "value": "Baustelle",
               "detail": "bis 7. Dezember 2026",
@@ -446,13 +431,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "IBK bringt Anliegen der Bodenseeregion zu Verkehr und Energie nach Bern",
+              "date": "2026-11-26",
+              "url": "https://www.tg.ch/news.html/485/news/80883"
+            },
             {
               "label": "Irene Meister gewinnt den Hauptpreis der Kreuzlinger Velo-Challenge",
               "date": "2026-11-25T14:43:34.000Z",
@@ -477,14 +467,9 @@
               "label": "Einige Änderungen im Bahn- und Busfahrplan für 2027",
               "date": "2026-10-23",
               "url": "https://www.tg.ch/news.html/485/news/80512"
-            },
-            {
-              "label": "Jahrmarkt: Zentrum für Durchgangsverkehr gesperrt",
-              "date": "2026-10-21T16:00:00.000Z",
-              "url": "https://www.kreuzlingen.ch/aktuelles/jahrmarkt-zentrum-fuer-durchgangsverkehr-gesperrt"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -550,7 +535,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "TG",
@@ -610,11 +595,6 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
-              "label": "Révoqué: A1 Zurich <-> St-Gall entre Jonction autoroutière Matzingen et Parking Stegen Situation: danger Raison: animaux sur la route",
-              "value": "Trafic",
-              "date": "2026-11-26T03:24:00.000Z"
-            },
-            {
               "label": "A7 Kreuzlingen -> Winterthur entre Echangeur Echangeur de Grüneck et Jonction autoroutière Frauenfeld-Est Situation: trafic perturbé travaux, longueur [km] 1.1 Gestion du trafic: rétrécissement des…",
               "value": "Chantier",
               "detail": "jusqu’au 7 décembre 2026",
@@ -622,13 +602,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "IBK bringt Anliegen der Bodenseeregion zu Verkehr und Energie nach Bern",
+              "date": "2026-11-26",
+              "url": "https://www.tg.ch/news.html/485/news/80883"
+            },
             {
               "label": "Irene Meister gewinnt den Hauptpreis der Kreuzlinger Velo-Challenge",
               "date": "2026-11-25T14:43:34.000Z",
@@ -653,14 +638,9 @@
               "label": "Einige Änderungen im Bahn- und Busfahrplan für 2027",
               "date": "2026-10-23",
               "url": "https://www.tg.ch/news.html/485/news/80512"
-            },
-            {
-              "label": "Jahrmarkt: Zentrum für Durchgangsverkehr gesperrt",
-              "date": "2026-10-21T16:00:00.000Z",
-              "url": "https://www.kreuzlingen.ch/aktuelles/jahrmarkt-zentrum-fuer-durchgangsverkehr-gesperrt"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -726,7 +706,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

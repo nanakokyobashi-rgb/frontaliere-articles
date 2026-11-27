@@ -4,17 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T10:34:02.735Z",
-  "contentHash": "6a14d2e99bcdbcb69544f50852ed2cbd8166f3d393c52f86e7aefcecd6f2a721",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "1aa63a86751642f66bd2d4eadb2fb8f7027df390fde8e2dac27668997e451960",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-26T03:50:03.880Z",
+      "updatedAt": "2026-11-26T13:22:01.562Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-26T15:51:00.529Z",
       "keyFacts": 0
     }
   ],
@@ -38,6 +38,11 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
+              "label": "Revocato: H8 Wattwil -> St. Gallen tra Luogo Waldstatt E Luogo Herisau Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-11-26T12:33:00.000Z"
+            },
+            {
               "label": "H8 Wattwil -> St. Gallen Luogo Herisau Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza Larghezza…",
               "value": "Cantiere",
               "detail": "fine prevista: 15 febbraio 2027",
@@ -45,7 +50,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -83,7 +88,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-almenweg-in-speicher-wird-umgebaut/"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -105,7 +110,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -126,6 +131,11 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
+              "label": "Revocato: H8 Wattwil -> St. Gallen tra Luogo Waldstatt E Luogo Herisau Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-11-26T12:33:00.000Z"
+            },
+            {
               "label": "H8 Wattwil -> St. Gallen Luogo Herisau Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza Larghezza…",
               "value": "Roadworks",
               "detail": "until 15 February 2027",
@@ -133,7 +143,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -171,7 +181,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-almenweg-in-speicher-wird-umgebaut/"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -193,7 +203,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -214,6 +224,11 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
+              "label": "Aufgehoben: H8 Wattwil -> St. Gallen zwischen Ortschaft Waldstatt und Ortschaft Herisau Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-11-26T12:33:00.000Z"
+            },
+            {
               "label": "H8 Wattwil -> St. Gallen Ortschaft Herisau Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
               "value": "Baustelle",
               "detail": "bis 15. Februar 2027",
@@ -221,7 +236,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -259,7 +274,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-almenweg-in-speicher-wird-umgebaut/"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -281,7 +296,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -302,6 +317,11 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
+              "label": "Révoqué: H8 Wattwil -> St-Gall entre Localité Waldstatt et Localité Herisau Situation: bouchon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-11-26T12:33:00.000Z"
+            },
+            {
               "label": "H8 Wattwil -> St-Gall Localité Herisau Situation: trafic perturbé travaux, longueur [km] 2.0 Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de largeur largeur de…",
               "value": "Chantier",
               "detail": "jusqu’au 15 février 2027",
@@ -309,7 +329,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -347,7 +367,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-almenweg-in-speicher-wird-umgebaut/"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -369,7 +389,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

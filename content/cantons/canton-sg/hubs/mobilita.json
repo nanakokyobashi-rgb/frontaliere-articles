@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T22:26:01.478Z",
-  "contentHash": "1260416e3ccdef3735e4705bbfd7f320f4a46c5b365101c89c11582a578e771d",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "f4b3e7271f95e0d0e7d607dafb2b49ff9504748f0b4164b97b304c042c030bea",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-26T03:50:03.880Z",
+      "updatedAt": "2026-11-26T13:22:01.562Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-26T15:51:00.529Z",
       "keyFacts": 0
     }
   ],
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "10",
+          "value": "9",
           "note": "segnalazioni aggiornate: 26 novembre 2026"
         }
       ],
@@ -129,6 +129,11 @@
               "date": "2026-11-22T19:00:00.000Z"
             },
             {
+              "label": "A13 Sargans -> St. Margrethen tra Svincolo autostradale Sennwald E Svincolo autostradale Oberriet Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-11-26T12:36:00.000Z"
+            },
+            {
               "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Oberriet E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Causa: veicoli di manutenzione lenti…",
               "value": "Cantiere",
               "detail": "fine prevista: 8 dicembre 2026",
@@ -151,16 +156,10 @@
               "value": "Cantiere",
               "detail": "fine prevista: 29 novembre 2026",
               "date": "2026-10-01T22:00:00.000Z"
-            },
-            {
-              "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Trübbach E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: corsie strette…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 27 novembre 2026",
-              "date": "2026-10-04T17:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -178,6 +177,11 @@
               "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/musikalische-adventsreise-in-der-bahnhofshalle.html"
             },
             {
+              "label": "Kanton St.Gallen: Drei Unfälle auf der A1 im Morgenverkehr",
+              "date": "2026-11-23",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st-gallen--drei-unfaelle-auf-der-a1-im-morgenverkehr.html"
+            },
+            {
               "label": "Dienstag, 17.11.2026 Ersatzbau der Rheinbrücke Au–Lustenau wird vorbereitet",
               "date": "2026-11-17",
               "url": "https://presse.vorarlberg.at/land/public/Ersatzbau-der-Rheinbruecke-Au-Lustenau-wird-vorbereitet"
@@ -191,14 +195,9 @@
               "label": "Regierung korrigiert die Motorfahrzeugsteuer",
               "date": "2026-11-16",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/regierung-korrigiert-die-motorfahrzeugsteuer.html"
-            },
-            {
-              "label": "Strassengesetz: Kommission beantragt Änderungen",
-              "date": "2026-11-13",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/strassengesetz--kommission-beantragt-aenderungen-.html"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -286,7 +285,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-26T22:26:01.478Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "SG",
@@ -306,7 +305,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "10",
+          "value": "9",
           "note": "reports as of 26 November 2026"
         }
       ],
@@ -393,6 +392,11 @@
               "date": "2026-11-22T19:00:00.000Z"
             },
             {
+              "label": "A13 Sargans -> St. Margrethen tra Svincolo autostradale Sennwald E Svincolo autostradale Oberriet Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-11-26T12:36:00.000Z"
+            },
+            {
               "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Oberriet E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Causa: veicoli di manutenzione lenti…",
               "value": "Roadworks",
               "detail": "until 8 December 2026",
@@ -415,16 +419,10 @@
               "value": "Roadworks",
               "detail": "until 29 November 2026",
               "date": "2026-10-01T22:00:00.000Z"
-            },
-            {
-              "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Trübbach E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: corsie strette…",
-              "value": "Roadworks",
-              "detail": "until 27 November 2026",
-              "date": "2026-10-04T17:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -442,6 +440,11 @@
               "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/musikalische-adventsreise-in-der-bahnhofshalle.html"
             },
             {
+              "label": "Kanton St.Gallen: Drei Unfälle auf der A1 im Morgenverkehr",
+              "date": "2026-11-23",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st-gallen--drei-unfaelle-auf-der-a1-im-morgenverkehr.html"
+            },
+            {
               "label": "Dienstag, 17.11.2026 Ersatzbau der Rheinbrücke Au–Lustenau wird vorbereitet",
               "date": "2026-11-17",
               "url": "https://presse.vorarlberg.at/land/public/Ersatzbau-der-Rheinbruecke-Au-Lustenau-wird-vorbereitet"
@@ -455,14 +458,9 @@
               "label": "Regierung korrigiert die Motorfahrzeugsteuer",
               "date": "2026-11-16",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/regierung-korrigiert-die-motorfahrzeugsteuer.html"
-            },
-            {
-              "label": "Strassengesetz: Kommission beantragt Änderungen",
-              "date": "2026-11-13",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/strassengesetz--kommission-beantragt-aenderungen-.html"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +547,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-26T22:26:01.478Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "SG",
@@ -569,7 +567,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "10",
+          "value": "9",
           "note": "Meldungen vom 26. November 2026"
         }
       ],
@@ -656,6 +654,11 @@
               "date": "2026-11-22T19:00:00.000Z"
             },
             {
+              "label": "A13 Sargans -> St. Margrethen zwischen Anschluss Sennwald und Anschluss Oberriet Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-11-26T12:36:00.000Z"
+            },
+            {
               "label": "A13 Sargans <-> St. Margrethen zwischen Anschluss Oberriet und Anschluss Haag Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Ursache: Wanderbaustelle Verkehrsführung: Fahrbahnverengung auf…",
               "value": "Baustelle",
               "detail": "bis 8. Dezember 2026",
@@ -678,16 +681,10 @@
               "value": "Baustelle",
               "detail": "bis 29. November 2026",
               "date": "2026-10-01T22:00:00.000Z"
-            },
-            {
-              "label": "A13 Sargans <-> St. Margrethen zwischen Anschluss Trübbach und Anschluss Haag Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen…",
-              "value": "Baustelle",
-              "detail": "bis 27. November 2026",
-              "date": "2026-10-04T17:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -705,6 +702,11 @@
               "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/musikalische-adventsreise-in-der-bahnhofshalle.html"
             },
             {
+              "label": "Kanton St.Gallen: Drei Unfälle auf der A1 im Morgenverkehr",
+              "date": "2026-11-23",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st-gallen--drei-unfaelle-auf-der-a1-im-morgenverkehr.html"
+            },
+            {
               "label": "Dienstag, 17.11.2026 Ersatzbau der Rheinbrücke Au–Lustenau wird vorbereitet",
               "date": "2026-11-17",
               "url": "https://presse.vorarlberg.at/land/public/Ersatzbau-der-Rheinbruecke-Au-Lustenau-wird-vorbereitet"
@@ -718,14 +720,9 @@
               "label": "Regierung korrigiert die Motorfahrzeugsteuer",
               "date": "2026-11-16",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/regierung-korrigiert-die-motorfahrzeugsteuer.html"
-            },
-            {
-              "label": "Strassengesetz: Kommission beantragt Änderungen",
-              "date": "2026-11-13",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/strassengesetz--kommission-beantragt-aenderungen-.html"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -812,7 +809,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-26T22:26:01.478Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "SG",
@@ -832,7 +829,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "10",
+          "value": "9",
           "note": "signalements au 26 novembre 2026"
         }
       ],
@@ -919,6 +916,11 @@
               "date": "2026-11-22T19:00:00.000Z"
             },
             {
+              "label": "A13 Sargans -> St. Margrethen entre Jonction autoroutière Sennwald et Jonction autoroutière Oberriet Situation: bouchon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-11-26T12:36:00.000Z"
+            },
+            {
               "label": "A13 Sargans <-> St. Margrethen entre Jonction autoroutière Oberriet et Jonction autoroutière Haag Situation: trafic perturbé travaux, longueur [km] 2.0 Raison: véhicules de maintenance lents Gestion…",
               "value": "Chantier",
               "detail": "jusqu’au 8 décembre 2026",
@@ -941,16 +943,10 @@
               "value": "Chantier",
               "detail": "jusqu’au 29 novembre 2026",
               "date": "2026-10-01T22:00:00.000Z"
-            },
-            {
-              "label": "A13 Sargans <-> St. Margrethen entre Jonction autoroutière Trübbach et Jonction autoroutière Haag Situation: trafic perturbé travaux, longueur [km] 2.0 Gestion du trafic: rétrécissement des voies…",
-              "value": "Chantier",
-              "detail": "jusqu’au 27 novembre 2026",
-              "date": "2026-10-04T17:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -968,6 +964,11 @@
               "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/musikalische-adventsreise-in-der-bahnhofshalle.html"
             },
             {
+              "label": "Kanton St.Gallen: Drei Unfälle auf der A1 im Morgenverkehr",
+              "date": "2026-11-23",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st-gallen--drei-unfaelle-auf-der-a1-im-morgenverkehr.html"
+            },
+            {
               "label": "Dienstag, 17.11.2026 Ersatzbau der Rheinbrücke Au–Lustenau wird vorbereitet",
               "date": "2026-11-17",
               "url": "https://presse.vorarlberg.at/land/public/Ersatzbau-der-Rheinbruecke-Au-Lustenau-wird-vorbereitet"
@@ -981,14 +982,9 @@
               "label": "Regierung korrigiert die Motorfahrzeugsteuer",
               "date": "2026-11-16",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/regierung-korrigiert-die-motorfahrzeugsteuer.html"
-            },
-            {
-              "label": "Strassengesetz: Kommission beantragt Änderungen",
-              "date": "2026-11-13",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/strassengesetz--kommission-beantragt-aenderungen-.html"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -1076,7 +1072,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-26T22:26:01.478Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

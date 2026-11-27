@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T17:26:42.969Z",
-  "contentHash": "3d8cd84a23160604ec50a8531c2b6142241ead23258a1d8daeab1174429f86f2",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "a68cf2a1559e9e5709cb9ebc691c847fe4645d5d8e354a28e914a1b5c8b4765f",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-26T03:50:03.880Z",
+      "updatedAt": "2026-11-26T13:22:01.562Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-26T15:51:00.529Z",
       "keyFacts": 0
     }
   ],
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "5",
+          "value": "4",
           "note": "segnalazioni aggiornate: 26 novembre 2026"
         }
       ],
@@ -147,20 +147,18 @@
               "date": "2026-12-02T21:00:00.000Z"
             },
             {
-              "label": "A13 S. Bernardino <-> Coira tra Svincolo autostradale Splügen E Svincolo autostradale Sufers Situazione: problemi di traffico cantiere, lunghezza [km] 0.9 Aggiunta 1: limite temporaneo larghezza…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 31 agosto 2028",
-              "date": "2026-06-01T03:00:00.000Z"
+              "label": "H28 Klosters-Selfranga / Vereina <-> Susch tra Luogo Klosters-Selfranga / Vereina E Luogo Davos Situazione: neve sulla strada",
+              "value": "Traffico",
+              "date": "2026-11-26T07:41:00.000Z"
             },
             {
-              "label": "H3 Silvaplana <-> Savognin tra Luogo Bivio E Incrocio Silvaplana-Est Situazione: problemi di traffico cantiere Aggiunta 1: limite temporaneo altezza Altezza veicolo [m] 5.0",
-              "value": "Cantiere",
-              "detail": "fine prevista: 31 maggio 2027",
-              "date": "2026-06-23T22:00:00.000Z"
+              "label": "H19 Reichenau -> Disentis tra Luogo Reichenau E Incrocio Flims Ost Situazione: problemi di traffico Causa: nevicata",
+              "value": "Traffico",
+              "date": "2026-11-26T08:35:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -198,7 +196,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026102701.aspx"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -290,7 +288,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "GR",
@@ -310,7 +308,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "5",
+          "value": "4",
           "note": "reports as of 26 November 2026"
         }
       ],
@@ -415,20 +413,18 @@
               "date": "2026-12-02T21:00:00.000Z"
             },
             {
-              "label": "A13 S. Bernardino <-> Coira tra Svincolo autostradale Splügen E Svincolo autostradale Sufers Situazione: problemi di traffico cantiere, lunghezza [km] 0.9 Aggiunta 1: limite temporaneo larghezza…",
-              "value": "Roadworks",
-              "detail": "until 31 August 2028",
-              "date": "2026-06-01T03:00:00.000Z"
+              "label": "H28 Klosters-Selfranga / Vereina <-> Susch tra Luogo Klosters-Selfranga / Vereina E Luogo Davos Situazione: neve sulla strada",
+              "value": "Traffic",
+              "date": "2026-11-26T07:41:00.000Z"
             },
             {
-              "label": "H3 Silvaplana <-> Savognin tra Luogo Bivio E Incrocio Silvaplana-Est Situazione: problemi di traffico cantiere Aggiunta 1: limite temporaneo altezza Altezza veicolo [m] 5.0",
-              "value": "Roadworks",
-              "detail": "until 31 May 2027",
-              "date": "2026-06-23T22:00:00.000Z"
+              "label": "H19 Reichenau -> Disentis tra Luogo Reichenau E Incrocio Flims Ost Situazione: problemi di traffico Causa: nevicata",
+              "value": "Traffic",
+              "date": "2026-11-26T08:35:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -466,7 +462,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026102701.aspx"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -557,7 +553,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "GR",
@@ -577,7 +573,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "5",
+          "value": "4",
           "note": "Meldungen vom 26. November 2026"
         }
       ],
@@ -682,20 +678,18 @@
               "date": "2026-12-02T21:00:00.000Z"
             },
             {
-              "label": "A13 S. Bernardino <-> Chur zwischen Anschluss Splügen und Anschluss Sufers Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.9 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m]…",
-              "value": "Baustelle",
-              "detail": "bis 31. August 2028",
-              "date": "2026-06-01T03:00:00.000Z"
+              "label": "H28 Klosters-Selfranga / Vereina <-> Susch zwischen Ortschaft Klosters-Selfranga / Vereina und Ortschaft Davos Sachlage: schneebedeckte Fahrbahn",
+              "value": "Verkehr",
+              "date": "2026-11-26T07:41:00.000Z"
             },
             {
-              "label": "H3 Silvaplana <-> Savognin zwischen Ortschaft Bivio und Kreuzung Silvaplana-Ost Sachlage: Verkehrsbehinderung Baustelle Zusatz 1: vorübergehende Beschränkung der Höhe Fahrzeughöhe [m] 5.0",
-              "value": "Baustelle",
-              "detail": "bis 31. Mai 2027",
-              "date": "2026-06-23T22:00:00.000Z"
+              "label": "H19 Reichenau -> Disentis zwischen Ortschaft Reichenau und Kreuzung Flims-Ost Sachlage: Verkehrsbehinderung Ursache: Schneefall",
+              "value": "Verkehr",
+              "date": "2026-11-26T08:35:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -733,7 +727,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026102701.aspx"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -825,7 +819,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "GR",
@@ -845,7 +839,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "5",
+          "value": "4",
           "note": "signalements au 26 novembre 2026"
         }
       ],
@@ -950,20 +944,18 @@
               "date": "2026-12-02T21:00:00.000Z"
             },
             {
-              "label": "A13 S. Bernardino <-> Coire entre Jonction autoroutière Splügen et Jonction autoroutière Sufers Situation: trafic perturbé travaux, longueur [km] 0.9 Complément 1: limitation temporaire de largeur…",
-              "value": "Chantier",
-              "detail": "jusqu’au 31 août 2028",
-              "date": "2026-06-01T03:00:00.000Z"
+              "label": "H28 Klosters-Selfranga / Vereina <-> Susch entre Localité Klosters-Selfranga / Vereina et Localité Davos Situation: route enneigée",
+              "value": "Trafic",
+              "date": "2026-11-26T07:41:00.000Z"
             },
             {
-              "label": "H3 Silvaplana <-> Savognin entre Localité Bivio et Carrefour Silvaplana-Est Situation: trafic perturbé travaux Complément 1: limitation temporaire de hauteur hauteur du véhicule [m] 5.0",
-              "value": "Chantier",
-              "detail": "jusqu’au 31 mai 2027",
-              "date": "2026-06-23T22:00:00.000Z"
+              "label": "H19 Reichenau -> Disentis entre Localité Reichenau et Carrefour Flims-Est Situation: trafic perturbé Raison: chutes de neige",
+              "value": "Trafic",
+              "date": "2026-11-26T08:35:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1001,7 +993,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026102701.aspx"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -1093,7 +1085,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

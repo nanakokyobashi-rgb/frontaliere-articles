@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "servizi",
-  "updatedAt": "2026-11-26T13:02:36.485Z",
-  "contentHash": "d9f2bc9df3835e3f2c45ffe575bde8778d95fd349d3244cdf7bb4939bca2e24e",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "3a4f677b06f9c802ddf698dca6aa4d1ca707135bfd6183c624e1d5f4cfaa8a8a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-26T03:41:13.403Z",
+      "updatedAt": "2026-11-26T22:27:34.149Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-25T21:43:23.986Z",
+      "updatedAt": "2026-11-26T21:36:19.183Z",
       "keyFacts": 1
     }
   ],
@@ -76,11 +76,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-11-25T23:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-11-26T23:00:00.000Z"
             },
             {
@@ -102,11 +97,16 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-11-30T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-12-01T23:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-11-26T03:41:13.403Z"
+          "updatedAt": "2026-11-26T22:27:34.149Z"
         },
         {
           "id": "aste-targhe",
@@ -137,21 +137,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-26T21:36:19.183Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "GDK chiede premi più bassi per EFAS dal 2028",
-          "url": "/articoli-basilea/gdk-premi-piu-bassi/",
-          "excerpt": "La GDK chiede un cambio EFAS a costo neutro: dal 2028 i Cantoni finanzieranno anche le prestazioni ambulatoriali; i premi dovrebbero calare o crescere meno.",
-          "date": "2026-11-11T08:13:12.113Z"
-        },
         {
           "title": "BVB: rasatura in tram, intervento di pulizia documentato",
           "url": "/articoli-basilea/bvb-rasatura-tram-episodio/",
           "excerpt": "La Basler Verkehrsbetriebe (BVB) ha pubblicato su Facebook una foto di due rasoi blu e capelli sul pavimento di un tram; è il primo episodio di questo tipo noto.",
           "date": "2026-10-27T00:34:47.659Z"
+        },
+        {
+          "title": "GDK chiede premi più bassi per EFAS dal 2028",
+          "url": "/articoli-basilea/gdk-premi-piu-bassi/",
+          "excerpt": "La GDK chiede un cambio EFAS a costo neutro: dal 2028 i Cantoni finanzieranno anche le prestazioni ambulatoriali; i premi dovrebbero calare o crescere meno.",
+          "date": "2026-11-11T08:13:12.113Z"
         },
         {
           "title": "Gran Consiglio Basilea: mozioni per semplificare autorizzazioni climatizzatori",
@@ -225,7 +225,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -279,11 +279,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-11-25T23:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-11-26T23:00:00.000Z"
             },
             {
@@ -305,11 +300,16 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-11-30T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-12-01T23:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-11-26T03:41:13.403Z"
+          "updatedAt": "2026-11-26T22:27:34.149Z"
         },
         {
           "id": "aste-targhe",
@@ -340,21 +340,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-26T21:36:19.183Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "GDK calls for lower EFAS premiums starting in 2028",
-          "url": "/en/basel-articles/gdk-lower-efas-premiums/",
-          "excerpt": "The GDK is calling for a cost-neutral change to EFAS: from 2028, the cantons will also finance outpatient services; premiums should fall or rise less.",
-          "date": "2026-11-11T08:13:12.113Z"
-        },
         {
           "title": "BVB: mowing in trams, documented cleaning",
           "url": "/en/basel-articles/bvb-tram-shaving-incident/",
           "excerpt": "The Basler Verkehrsbetriebe (BVB) posted on Facebook a photo of two blue razors and hair on the floor of a tram; it is the first known episode of this type.",
           "date": "2026-10-27T00:34:47.659Z"
+        },
+        {
+          "title": "GDK calls for lower EFAS premiums starting in 2028",
+          "url": "/en/basel-articles/gdk-lower-efas-premiums/",
+          "excerpt": "The GDK is calling for a cost-neutral change to EFAS: from 2028, the cantons will also finance outpatient services; premiums should fall or rise less.",
+          "date": "2026-11-11T08:13:12.113Z"
         },
         {
           "title": "Basel Grand Council: motions to simplify air conditioner permits",
@@ -420,7 +420,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -474,11 +474,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-11-25T23:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-11-26T23:00:00.000Z"
             },
             {
@@ -500,11 +495,16 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-11-30T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-12-01T23:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-11-26T03:41:13.403Z"
+          "updatedAt": "2026-11-26T22:27:34.149Z"
         },
         {
           "id": "aste-targhe",
@@ -535,21 +535,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-26T21:36:19.183Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "GDK fordert niedrigere Prämien für EFAS ab 2028",
-          "url": "/de/basel-artikel/gdk-tiefere-efas-praemien/",
-          "excerpt": "Die GDK fordert einen kostenneutralen EFAS-Wechsel: Ab 2028 werden die Kantone auch ambulante Leistungen finanzieren; die Prämien sollten sinken oder weniger stark steigen.",
-          "date": "2026-11-11T08:13:12.113Z"
-        },
         {
           "title": "BVB: Mähen in Straßenbahnen, dokumentierte Reinigung",
           "url": "/de/basel-artikel/bvb-tram-rasurungsfall/",
           "excerpt": "Am Montag veröffentlichten die Basler Verkehrsbetriebe (BVB) auf Facebook ein Foto, das das Unternehmen selbst überraschte.",
           "date": "2026-10-27T00:34:47.659Z"
+        },
+        {
+          "title": "GDK fordert niedrigere Prämien für EFAS ab 2028",
+          "url": "/de/basel-artikel/gdk-tiefere-efas-praemien/",
+          "excerpt": "Die GDK fordert einen kostenneutralen EFAS-Wechsel: Ab 2028 werden die Kantone auch ambulante Leistungen finanzieren; die Prämien sollten sinken oder weniger stark steigen.",
+          "date": "2026-11-11T08:13:12.113Z"
         },
         {
           "title": "Basler Grosser Rat: Motionen zur Vereinfachung der Bewilligungen für Klimaanlagen",
@@ -615,7 +615,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -669,11 +669,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-11-25T23:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-11-26T23:00:00.000Z"
             },
             {
@@ -695,11 +690,16 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-11-30T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-12-01T23:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-11-26T03:41:13.403Z"
+          "updatedAt": "2026-11-26T22:27:34.149Z"
         },
         {
           "id": "aste-targhe",
@@ -730,21 +730,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-26T21:36:19.183Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "La GDK demande des primes moins élevées pour l’EFAS à partir de 2028",
-          "url": "/fr/articles-bale/gdk-baisse-primes-efas/",
-          "excerpt": "La GDK demande un changement de l’EFAS à coût neutre : à partir de 2028, les cantons financeront également les prestations ambulatoires ; les primes devraient baisser ou augmenter moins.",
-          "date": "2026-11-11T08:13:12.113Z"
-        },
         {
           "title": "BVB : tonte dans les tramways, nettoyage documenté",
           "url": "/fr/articles-bale/bvb-incident-rasage-tram/",
           "excerpt": "La Basler Verkehrsbetriebe (BVB) a publié sur Facebook une photo de deux rasoirs bleus et de cheveux sur le sol d'un tramway ; c'est le premier épisode connu de ce type.",
           "date": "2026-10-27T00:34:47.659Z"
+        },
+        {
+          "title": "La GDK demande des primes moins élevées pour l’EFAS à partir de 2028",
+          "url": "/fr/articles-bale/gdk-baisse-primes-efas/",
+          "excerpt": "La GDK demande un changement de l’EFAS à coût neutre : à partir de 2028, les cantons financeront également les prestations ambulatoires ; les primes devraient baisser ou augmenter moins.",
+          "date": "2026-11-11T08:13:12.113Z"
         },
         {
           "title": "Grand Conseil de Bâle : simplifier les autorisations climatiseurs",
@@ -802,7 +802,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

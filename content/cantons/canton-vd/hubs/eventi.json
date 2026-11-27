@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "268296bffaf416bae7c4dae9a4d6a57025a9c7c2af6a5666ffb69516b15ff9df",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "4be0be409105badfd9ee2e76ba1d2ce166a4d9d49b7863d0ad34799c03211991",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T00:32:00.223Z",
+      "updatedAt": "2026-11-26T16:33:33.919Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-25T16:08:35.229Z",
+      "updatedAt": "2026-11-26T15:51:00.529Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "110",
+          "value": "115",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Das Universum von Tim Burton – präsentiert von Horizons Ensemble",
-              "detail": "Casino Barrière de Montreux, Montreux",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/musique/montreux/lunivers-de-tim-burton-par-horizons-ensemble_A1W2sEP"
+              "label": "Afro panico",
+              "detail": "Lausanne",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/afro-panico/"
             },
             {
-              "label": "The Biblio in your neighborhood!",
+              "label": "Tokyo-Ga",
+              "detail": "Lausanne",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tokyo-ga/"
+            },
+            {
+              "label": "ASHEN (FR) + ALCHEMISTS (VERNISSAGE, CH) + FALLEN SKIES (CH)",
+              "detail": "Le Romandie",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/ashen-fr-alchemists-vernissage-ch-fallen-skies-ch_AbmexVH"
+            },
+            {
+              "label": "At the funeral of death",
               "detail": "Vevey",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-biblio-in-your-neighborhood-1/"
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/at-the-funeral-of-death/"
             },
             {
-              "label": "The World of Tim Burton by Horizons Ensemble",
-              "detail": "Montreux",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-world-of-tim-burton-by-horizons-ensemble/"
+              "label": "Candlelight concert: QUEEN vs ABBA",
+              "detail": "Château Salavaux, Vully-les-Lacs",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kerzenlichtkonzert-queen-vs-abba/"
             },
             {
-              "label": "Les Jeudis du Sens",
-              "detail": "Eclépens",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-jeudis-du-sens/"
+              "label": "Kerzenlichtkonzert: QUEEN vs ABBA",
+              "detail": "Château Salavaux",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/salavaux/candlelight-concert-queen-vs-abba_AswY331"
             },
             {
-              "label": "Spielt es oder spielt es?",
-              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey — in corso, ultimo giorno: 16 dicembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/this-that/vevey/does-it-play-or-not_AfWrwwy"
+              "label": "wave trail - live",
+              "detail": "Théâtre de l'Odéon",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/villeneuve-vd/wave-trail-live_AdN6qSt"
             },
             {
-              "label": "Maman sort danser",
-              "detail": "Mad — in corso, ultimo giorno: 5 dicembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/maman-sort-danser_AahCTq1"
+              "label": "End-of-year tastings & craft market",
+              "detail": "St-Prex, Saint-Prex",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endofyear-tastings-craft-market/"
             },
             {
-              "label": "Abend mit modernen Gesellschaftsspielen",
-              "detail": "L'Escale Centre de Loisirs pour aînés, La Tour-de-Peilz — in corso, ultimo giorno: 18 dicembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/la-tour-de-peilz/soiree-jeux-de-societe-modernes_A9KjsFW"
+              "label": "Degustazione di champagne e spumanti",
+              "detail": "Basilea, Champagne",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/liquid-tasting-champagner-schaumweine/"
             },
             {
-              "label": "Rodage - Kevin Eyer",
-              "detail": "Le Cylure — in corso, ultimo giorno: 2 dicembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/rodage-kevin-eyer_As6BYkY"
-            },
-            {
-              "label": "Culture sans filtre",
-              "detail": "Bibliothèque municipale - Entre-Bois — in corso, ultimo giorno: 8 dicembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/culture-sans-filtre_AGmMqZW"
-            },
-            {
-              "label": "Water Pong",
-              "detail": "Barberousse — in corso, ultimo giorno: 30 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/this-that/lausanne/water-pong_AwneE9V"
+              "label": "Sam Sauvage + Paolo.",
+              "detail": "Losanna, Lausanne",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sam-sauvage-paolo/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -133,7 +133,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +155,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "VD",
@@ -165,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "110",
+          "value": "115",
           "note": "from the site’s events calendar"
         }
       ],
@@ -176,69 +176,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "The World of Tim Burton by Horizons Ensemble",
-              "detail": "Casino Barrière de Montreux, Montreux",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/musique/montreux/lunivers-de-tim-burton-par-horizons-ensemble_A1W2sEP"
+              "label": "Afro panico",
+              "detail": "Lausanne",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/afro-panico/"
             },
             {
-              "label": "The Biblio in your neighborhood!",
+              "label": "Tokyo-Ga",
+              "detail": "Lausanne",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tokyo-ga/"
+            },
+            {
+              "label": "ASHEN (FR) + ALCHEMISTS (VERNISSAGE, CH) + FALLEN SKIES (CH)",
+              "detail": "Le Romandie",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/ashen-fr-alchemists-vernissage-ch-fallen-skies-ch_AbmexVH"
+            },
+            {
+              "label": "At the funeral of death",
               "detail": "Vevey",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-biblio-in-your-neighborhood-1/"
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/at-the-funeral-of-death/"
             },
             {
-              "label": "The World of Tim Burton by Horizons Ensemble",
-              "detail": "Montreux",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-world-of-tim-burton-by-horizons-ensemble/"
+              "label": "Candlelight concert: QUEEN vs ABBA",
+              "detail": "Château Salavaux, Vully-les-Lacs",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kerzenlichtkonzert-queen-vs-abba/"
             },
             {
-              "label": "Les Jeudis du Sens",
-              "detail": "Eclépens",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-jeudis-du-sens/"
+              "label": "Candlelight concert: QUEEN vs ABBA",
+              "detail": "Château Salavaux",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/salavaux/candlelight-concert-queen-vs-abba_AswY331"
             },
             {
-              "label": "Does it play or not?",
-              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey — ongoing, last day: 16 December 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/this-that/vevey/does-it-play-or-not_AfWrwwy"
+              "label": "wave trail - live",
+              "detail": "Théâtre de l'Odéon",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/villeneuve-vd/wave-trail-live_AdN6qSt"
             },
             {
-              "label": "Maman sort danser",
-              "detail": "Mad — ongoing, last day: 5 December 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/maman-sort-danser_AahCTq1"
+              "label": "End-of-year tastings & craft market",
+              "detail": "St-Prex, Saint-Prex",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endofyear-tastings-craft-market/"
             },
             {
-              "label": "Modern board games evening",
-              "detail": "L'Escale Centre de Loisirs pour aînés, La Tour-de-Peilz — ongoing, last day: 18 December 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/la-tour-de-peilz/soiree-jeux-de-societe-modernes_A9KjsFW"
+              "label": "Champagne & Sparkling Wines Tasting",
+              "detail": "Basilea, Champagne",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/liquid-tasting-champagner-schaumweine/"
             },
             {
-              "label": "Rodage – Kevin Eyer",
-              "detail": "Le Cylure — ongoing, last day: 2 December 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/rodage-kevin-eyer_As6BYkY"
-            },
-            {
-              "label": "Culture sans filtre",
-              "detail": "Bibliothèque municipale - Entre-Bois — ongoing, last day: 8 December 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/culture-sans-filtre_AGmMqZW"
-            },
-            {
-              "label": "Pong",
-              "detail": "Barberousse — ongoing, last day: 30 November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/this-that/lausanne/water-pong_AwneE9V"
+              "label": "Sam Sauvage + Paolo.",
+              "detail": "Losanna, Lausanne",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sam-sauvage-paolo/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -271,7 +271,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -293,7 +293,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "VD",
@@ -303,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "110",
+          "value": "115",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -314,69 +314,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Das Universum von Tim Burton – präsentiert von Horizons Ensemble",
-              "detail": "Casino Barrière de Montreux, Montreux",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/musique/montreux/lunivers-de-tim-burton-par-horizons-ensemble_A1W2sEP"
+              "label": "Afro panico",
+              "detail": "Lausanne",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/afro-panico/"
             },
             {
-              "label": "Die Biblio in deinem Viertel!",
+              "label": "Tokyo-Ga",
+              "detail": "Lausanne",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tokyo-ga/"
+            },
+            {
+              "label": "ASHEN (FR) + ALCHEMISTS (VERNISSAGE, CH) + FALLEN SKIES (CH)",
+              "detail": "Le Romandie",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/ashen-fr-alchemists-vernissage-ch-fallen-skies-ch_AbmexVH"
+            },
+            {
+              "label": "Auf der Beerdigung des Todes",
               "detail": "Vevey",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-biblio-in-your-neighborhood-1/"
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/at-the-funeral-of-death/"
             },
             {
-              "label": "Das Universum von Tim Burton – präsentiert von Horizons Ensemble",
-              "detail": "Montreux",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-world-of-tim-burton-by-horizons-ensemble/"
+              "label": "Kerzenlichtkonzert: QUEEN vs ABBA",
+              "detail": "Château Salavaux, Vully-les-Lacs",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kerzenlichtkonzert-queen-vs-abba/"
             },
             {
-              "label": "Les Jeudis du Sens",
-              "detail": "Eclépens",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-jeudis-du-sens/"
+              "label": "Kerzenlichtkonzert: QUEEN vs ABBA",
+              "detail": "Château Salavaux",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/salavaux/candlelight-concert-queen-vs-abba_AswY331"
             },
             {
-              "label": "Spielt es oder spielt es?",
-              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey — läuft, letzter Tag: 16. Dezember 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/this-that/vevey/does-it-play-or-not_AfWrwwy"
+              "label": "wave trail - live",
+              "detail": "Théâtre de l'Odéon",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/villeneuve-vd/wave-trail-live_AdN6qSt"
             },
             {
-              "label": "Mama ist eine Art Tänzerin",
-              "detail": "Mad — läuft, letzter Tag: 5. Dezember 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/maman-sort-danser_AahCTq1"
+              "label": "Weinverkostungen zum Jahresende & Kunsthandwerksmarkt",
+              "detail": "St-Prex, Saint-Prex",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endofyear-tastings-craft-market/"
             },
             {
-              "label": "Abend mit modernen Gesellschaftsspielen",
-              "detail": "L'Escale Centre de Loisirs pour aînés, La Tour-de-Peilz — läuft, letzter Tag: 18. Dezember 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/la-tour-de-peilz/soiree-jeux-de-societe-modernes_A9KjsFW"
+              "label": "Liquid Tasting Champagner & Schaumweine",
+              "detail": "Basilea, Champagne",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/liquid-tasting-champagner-schaumweine/"
             },
             {
-              "label": "Einlaufen – Kevin Eyer",
-              "detail": "Le Cylure — läuft, letzter Tag: 2. Dezember 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/rodage-kevin-eyer_As6BYkY"
-            },
-            {
-              "label": "Culture sans filtre",
-              "detail": "Bibliothèque municipale - Entre-Bois — läuft, letzter Tag: 8. Dezember 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/culture-sans-filtre_AGmMqZW"
-            },
-            {
-              "label": "Wasserpong",
-              "detail": "Barberousse — läuft, letzter Tag: 30. November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/this-that/lausanne/water-pong_AwneE9V"
+              "label": "Sam Sauvage + Paolo.",
+              "detail": "Losanna, Lausanne",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sam-sauvage-paolo/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -409,7 +409,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -431,7 +431,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "VD",
@@ -441,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "110",
+          "value": "115",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -452,69 +452,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "L’Univers de Tim Burton par Horizons Ensemble",
-              "detail": "Casino Barrière de Montreux, Montreux",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/musique/montreux/lunivers-de-tim-burton-par-horizons-ensemble_A1W2sEP"
+              "label": "Afro panico",
+              "detail": "Lausanne",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/afro-panico/"
             },
             {
-              "label": "La Biblio dans ton quartier !",
+              "label": "Tokyo-Ga",
+              "detail": "Lausanne",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tokyo-ga/"
+            },
+            {
+              "label": "ASHEN (FR) + ALCHEMISTS (VERNISSAGE, CH) + FALLEN SKIES (CH)",
+              "detail": "Le Romandie",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/ashen-fr-alchemists-vernissage-ch-fallen-skies-ch_AbmexVH"
+            },
+            {
+              "label": "Aux obsèques de la mort",
               "detail": "Vevey",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-biblio-in-your-neighborhood-1/"
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/at-the-funeral-of-death/"
             },
             {
-              "label": "L’Univers de Tim Burton par Horizons Ensemble",
-              "detail": "Montreux",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-world-of-tim-burton-by-horizons-ensemble/"
+              "label": "Concert à la Bougie: QUEEN vs ABBA",
+              "detail": "Château Salavaux, Vully-les-Lacs",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kerzenlichtkonzert-queen-vs-abba/"
             },
             {
-              "label": "Les Jeudis du Sens",
-              "detail": "Eclépens",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-jeudis-du-sens/"
+              "label": "Concert à la Bougie: QUEEN vs ABBA",
+              "detail": "Château Salavaux",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/salavaux/candlelight-concert-queen-vs-abba_AswY331"
             },
             {
-              "label": "Ça joue ou bien ?",
-              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey — en cours, dernier jour : 16 décembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/this-that/vevey/does-it-play-or-not_AfWrwwy"
+              "label": "Wave Trail - live",
+              "detail": "Théâtre de l'Odéon",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/villeneuve-vd/wave-trail-live_AdN6qSt"
             },
             {
-              "label": "Maman sort danseuse",
-              "detail": "Mad — en cours, dernier jour : 5 décembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/maman-sort-danser_AahCTq1"
+              "label": "Dégustations de fin d'année & marché des saveurs artisanal",
+              "detail": "St-Prex, Saint-Prex",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endofyear-tastings-craft-market/"
             },
             {
-              "label": "Soirée jeux de société modernes",
-              "detail": "L'Escale Centre de Loisirs pour aînés, La Tour-de-Peilz — en cours, dernier jour : 18 décembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/la-tour-de-peilz/soiree-jeux-de-societe-modernes_A9KjsFW"
+              "label": "Dégustation de champagnes et de vins mousseux",
+              "detail": "Basilea, Champagne",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/liquid-tasting-champagner-schaumweine/"
             },
             {
-              "label": "Rodage – Kevin Eyer",
-              "detail": "Le Cylure — en cours, dernier jour : 2 décembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/rodage-kevin-eyer_As6BYkY"
-            },
-            {
-              "label": "Culture sans filtre",
-              "detail": "Bibliothèque municipale - Entre-Bois — en cours, dernier jour : 8 décembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/culture-sans-filtre_AGmMqZW"
-            },
-            {
-              "label": "Beer Pong",
-              "detail": "Barberousse — en cours, dernier jour : 30 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/this-that/lausanne/water-pong_AwneE9V"
+              "label": "Sam Sauvage + Paolo.",
+              "detail": "Losanna, Lausanne",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sam-sauvage-paolo/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -547,7 +547,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -569,7 +569,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

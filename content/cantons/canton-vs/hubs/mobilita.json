@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T17:26:42.969Z",
-  "contentHash": "b92187f4f07cdc1a84e0828818bb72e81552c735fe566a5aadf4069de6e6310a",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "423010d42e5954d5d66b9d3f158df76916d59349d7f3452748fcc9664166fe72",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-26T03:50:03.880Z",
+      "updatedAt": "2026-11-26T13:22:01.562Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-26T15:51:00.529Z",
       "keyFacts": 0
     }
   ],
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "6",
+          "value": "7",
           "note": "segnalazioni aggiornate: 26 novembre 2026"
         }
       ],
@@ -135,7 +135,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -173,7 +173,7 @@
               "url": "https://www.ossolanews.it/2026/11/24/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/tir-blocca-la-statale-per-macugnaga-traffico-interrotto-in-entrambe-le-direzioni.html"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -243,7 +243,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "VS",
@@ -263,7 +263,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "6",
+          "value": "7",
           "note": "reports as of 26 November 2026"
         }
       ],
@@ -356,7 +356,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -394,7 +394,7 @@
               "url": "https://www.ossolanews.it/2026/11/24/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/tir-blocca-la-statale-per-macugnaga-traffico-interrotto-in-entrambe-le-direzioni.html"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -464,7 +464,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "VS",
@@ -484,7 +484,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "6",
+          "value": "7",
           "note": "Meldungen vom 26. November 2026"
         }
       ],
@@ -577,7 +577,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -615,7 +615,7 @@
               "url": "https://www.ossolanews.it/2026/11/24/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/tir-blocca-la-statale-per-macugnaga-traffico-interrotto-in-entrambe-le-direzioni.html"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -685,7 +685,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "VS",
@@ -705,7 +705,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "6",
+          "value": "7",
           "note": "signalements au 26 novembre 2026"
         }
       ],
@@ -798,7 +798,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-26T13:22:01.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -836,7 +836,7 @@
               "url": "https://www.ossolanews.it/2026/11/24/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/tir-blocca-la-statale-per-macugnaga-traffico-interrotto-in-entrambe-le-direzioni.html"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -906,7 +906,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }
