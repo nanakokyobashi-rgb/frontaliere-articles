@@ -1149,7 +1149,7 @@ jobs:
           # `http.https://github.com/.extraheader`, and that header takes
           # PRECEDENCE over credentials embedded in a push URL. So the push
           # below authenticated as GITHUB_TOKEN — which this job grants only
-          # `contents: read` — instead of as GITHUB_PAT, and was rejected five
+          # `contents: read` — instead of as the owner PAT, and was rejected five
           # times over. The article had already been generated and committed
           # locally by then, so it was simply lost.
           persist-credentials: false
@@ -2824,8 +2824,8 @@ jobs:
             echo "::error::create-article run report is missing before the push/rebase loop"
             exit 1
           fi
-          if [ -z "${GITHUB_PAT:-}" ]; then
-            echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push fires no workflow at all (anti-recursion), so the article would never reach the site via publish-api.yml AND the self-trigger chain would stop dead. Both depend on this push being PAT-authenticated."
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "::error::GITHUB_PAT_NANAKO missing — a GITHUB_TOKEN push fires no workflow at all (anti-recursion), so the article would never reach the site via publish-api.yml AND the self-trigger chain would stop dead. Both depend on this push being PAT-authenticated."
             exit 1
           fi
           if [ "$discovery_recovery_only" = "true" ]; then
@@ -2854,7 +2854,7 @@ jobs:
           fi
 
           TARGET="${{ github.ref_name }}"
-          REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
+          REMOTE="https://x-access-token:${GITHUB_PAT_NANAKO}@github.com/${{ github.repository }}.git"
           # La stessa costante e' letta dal rebase helper: un reconcile fallito
           # non puo' diventare un retry del push.
           source scripts/lib/rebase-onto-remote-status.sh
@@ -3113,11 +3113,10 @@ jobs:
       # quindi un interruttore letto da li' fallirebbe APERTO proprio quando
       # l'auth si rompe, cioe' quando spegnerlo serve di piu'.
       #
-      # I PAT: `GITHUB_PAT_NANAKO` come primario (nanako e' admin qui),
-      # `GITHUB_PAT` come fallback. Rimisurato il 2026-08-18 con la sonda contro
-      # un ref inesistente: ENTRAMBI rispondono 422 «No ref found», cioe' sono
-      # autorizzati a dispatchare — vedi la correzione nell'intestazione. Sono
-      # gia' in `process.env` dopo lo step «Load secrets from Remote Config».
+      # Il PAT operativo e' `GITHUB_PAT_NANAKO` (nanako e' admin qui). Non usare
+      # `GITHUB_PAT` come fallback: questo workflow deve sempre chainare con la
+      # stessa identita' owner che fa scattare le pipeline successive. Il valore
+      # e' gia' in `process.env` dopo lo step «Load secrets from Remote Config».
       #
       # Le soglie sono overridabili via env perche' generate-article-chain.test.mjs
       # esegue questo blocco davvero; nulla le imposta in CI.
@@ -3211,10 +3210,6 @@ jobs:
 
           token="${GITHUB_PAT_NANAKO:-}"
           token_name=GITHUB_PAT_NANAKO
-          if [ -z "$token" ]; then
-            token="${GITHUB_PAT:-}"
-            token_name=GITHUB_PAT
-          fi
           [ -n "$token" ] || stop "nessun PAT in ambiente (Remote Config non caricato?)"
 
           # Le graffe non sono stile: `$depth→` fa entrare i byte della freccia
@@ -3239,12 +3234,6 @@ jobs:
           }
 
           code=$(dispatch "$token")
-          if [ "$code" != "204" ] && [ "$token_name" = "GITHUB_PAT_NANAKO" ] && [ -n "${GITHUB_PAT:-}" ]; then
-            echo "::warning::dispatch con GITHUB_PAT_NANAKO → HTTP $code, riprovo con GITHUB_PAT"
-            token_name=GITHUB_PAT
-            code=$(dispatch "${GITHUB_PAT}")
-          fi
-
           if [ "$code" = "204" ]; then
             echo "$kind dispatchato con $token_name: sezione $next_section, depth $next_depth, streak $next_streak, soccorso $next_rescue"
             exit 0

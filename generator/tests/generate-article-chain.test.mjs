@@ -1436,8 +1436,8 @@ const CHAIN_RUN = extractRun('Chain — dispatch the next link');
 
 /**
  * Esegue lo step «Chain» con `curl` stubbato. `codes` e' la sequenza di codici
- * HTTP che i `curl` successivi restituiscono, cosi' che il fallback sul secondo
- * PAT sia osservabile invece che dedotto.
+ * HTTP che il `curl` restituisce, cosi' che l'uso del PAT owner-only sia
+ * osservabile invece che dedotto.
  */
 function runChainStep({
   dry = 'false',
@@ -1454,7 +1454,7 @@ function runChainStep({
   armed = null,
   disabledFile = false,
   patNanako = 'pat-nanako',
-  pat = 'pat-fallback',
+  pat = null,
   codes = ['204'],
   maxDepth = '40',
   maxStreak = '6',
@@ -1654,21 +1654,17 @@ test('un self-test dry non e\' un anello', () => {
   assert.equal(runChainStep({ dry: 'true' }).dispatches.length, 0);
 });
 
-test('il secondo PAT e\' un fallback vero, e senza PAT non si fallisce', () => {
-  // Rimisurato il 2026-08-18: entrambi i token rispondono 422 «No ref found»
-  // alla sonda contro un ref inesistente, cioe' entrambi possono dispatchare.
-  // Il fallback esiste perche' un token puo' scadere, non perche' uno dei due
-  // sia noto per non funzionare.
-  const r = runChainStep({ codes: ['403', '204'] });
-  assert.equal(r.dispatches.length, 2, 'un 403 sul primario deve far ritentare col secondo');
-  assert.match(r.dispatches[1], /Authorization: Bearer pat-fallback/);
+test('Chain usa solo il PAT owner-only, e senza quello non si fallisce', () => {
+  const r = runChainStep({ codes: ['204'] });
+  assert.equal(r.dispatches.length, 1);
+  assert.match(r.dispatches[0], /Authorization: Bearer pat-nanako/);
   assert.equal(r.status, 0);
 
-  const senza = runChainStep({ patNanako: null, pat: null });
+  const senza = runChainStep({ patNanako: null, pat: 'pat-fallback' });
   assert.equal(senza.dispatches.length, 0);
   assert.equal(senza.status, 0, 'nessun PAT non e\' un fallimento della run: e\' un giro di cron in piu\'');
 
-  const rosso = runChainStep({ codes: ['500', '500'] });
+  const rosso = runChainStep({ codes: ['500'] });
   assert.equal(rosso.status, 0, 'nemmeno un dispatch fallito puo\' rendere rossa una generazione riuscita');
   // Il messaggio nomina QUALE dei due ha fallito: un soccorso mancato e un
   // anello mancato costano cose diverse (il primo brucia il gettone, il secondo no).
