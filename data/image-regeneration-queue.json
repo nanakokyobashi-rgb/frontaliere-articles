@@ -60,6 +60,16 @@
       "failureCount": 0,
       "requestedAt": "2026-11-26T18:53:56.376Z",
       "lastFailureAt": "2026-11-26T18:53:56.376Z"
+    },
+    {
+      "articleId": "frontalieri-smart-working-limite-fiscale",
+      "title": "Frontalieri smart working: limite fiscale dall'Italia",
+      "fallbackImage": "/images/blog/article-frontaliere-tasse-italia-svizzera-2026-simulazione-pratica.webp",
+      "reason": "All image providers failed for article-frontalieri-smart-working-limite-fiscale: openai-codex (vision gate rejected image: Generic synthetic smart-working scene by a lake; a promin",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-11-27T04:38:17.424Z",
+      "lastFailureAt": "2026-11-27T04:38:17.424Z"
     }
   ]
 }
