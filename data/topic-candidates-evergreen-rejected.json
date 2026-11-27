@@ -15741,22 +15741,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/11/fumarola-cisl-a-como-servono-salari-giusti-e-regole-certe-per-i-frontalieri/2749213": {
-      "section": "frontaliere",
-      "ts": 1795567297719
-    },
-    "frontaliere::https://cambiavalute.ch/guide/permessi/permesso-g-per-frontalieri-guida-2026-al-rilascio-rinnovo-e-telelavoro": {
-      "section": "frontaliere",
-      "ts": 1795582506324
-    },
-    "frontaliere::https://www.biancolavoro.it/lavorare-in-svizzera-guida-aggiornata-a-permessi-stipendi-e-frontalieri": {
-      "section": "frontaliere",
-      "ts": 1795582633707
-    },
-    "svizzera::https://www.ilgiorno.it/como/cronaca/polizze-sanitarie-alle-stelle-in-f0a74e0f": {
-      "section": "svizzera",
-      "ts": 1795585418531
-    },
     "svizzera::https://www.rsi.ch/s/4257428": {
       "section": "svizzera",
       "ts": 1795596455762
@@ -15788,6 +15772,10 @@
     "frontaliere::https://cambiavalute.ch/guide/previdenza/quando-e-come-prelevare-il-secondo-pilastro-lpp-se-sei-frontaliere": {
       "section": "frontaliere",
       "ts": 1795739050997
+    },
+    "svizzera::https://www.ilgiorno.it/como/cronaca/polizze-sanitarie-alle-stelle-in-f0a74e0f": {
+      "section": "svizzera",
+      "ts": 1795758914231
     }
   }
 }
