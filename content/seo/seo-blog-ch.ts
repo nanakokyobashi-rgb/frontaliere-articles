@@ -110597,6 +110597,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-uri-targhe-collaudo-auto': {
+    title: 'Uri: targhe e immatricolazione, intervalli del collaudo',
+    description: 'Uri: costi e requisiti di targhe e immatricolazione vanno verificati alla fonte ufficiale cantonale; per le auto il primo collaudo è dopo cinque anni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, targhe, immatricolazione, intervalli, collaudo',
+    ogTitle: 'Uri: immatricolazione e intervalli del collaudo',
+    ogDescription: 'A Uri, per le auto il primo collaudo è dopo cinque anni dalla prima messa in circolazione; poi, in genere, intervalli di tre e due anni. Tariffe e documenti non sono indicati; i dettagli vanno verificati presso la fonte ufficiale cantonale.',
+    canonicalPath: '/articoli-svizzera/uri-targhe-collaudo-auto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Uri: targhe e immatricolazione, intervalli del collaudo",
+      "description": "Uri: costi e requisiti di targhe e immatricolazione vanno verificati alla fonte ufficiale cantonale; per le auto il primo collaudo è dopo cinque anni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-zurigo-targhe-immatricolazione-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-27T06:40:46+00:00",
+      "dateModified": "2026-11-27T06:40:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/uri-targhe-collaudo-auto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

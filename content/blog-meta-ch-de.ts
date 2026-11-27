@@ -8747,6 +8747,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.rimborso-imposta-secondo-pilastro-svizzero.title': 'Zweite Säule: Quellensteuer-Erstattung für Italienansässige',
     'blog.article.rimborso-imposta-secondo-pilastro-svizzero.excerpt': 'Seit 2024 wurden laut der von Fiscomania veröffentlichten Darstellung Ablehnungen seitens der Schweizer Kantonsbehörden bei Anträgen auf Rückerstattung der auf dem Kapital der zweiten Säule einbehaltenen Quellensteuer gemeldet.',
     'blog.article.rimborso-imposta-secondo-pilastro-svizzero.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.uri-targhe-collaudo-auto.title': 'Uri: Kennzeichen und Zulassung, Prüfintervalle',
+    'blog.article.uri-targhe-collaudo-auto.excerpt': 'Bei Autos findet die erste Prüfung fünf Jahre nach der ersten Inverkehrsetzung statt, danach in der Regel nach drei und zwei Jahren.',
+    'blog.article.uri-targhe-collaudo-auto.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

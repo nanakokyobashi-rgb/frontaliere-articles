@@ -8747,6 +8747,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.rimborso-imposta-secondo-pilastro-svizzero.title': 'Secondo pilastro svizzero: rimborso imposta alla fonte per residenti in Italia',
     'blog.article.rimborso-imposta-secondo-pilastro-svizzero.excerpt': 'Dal 2024, secondo la ricostruzione pubblicata da Fiscomania, sono stati segnalati dinieghi da parte delle autorità cantonali svizzere alle richieste di rimborso dell’imposta alla fonte trattenuta sul capitale del secondo pilastro.',
     'blog.article.rimborso-imposta-secondo-pilastro-svizzero.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.uri-targhe-collaudo-auto.title': 'Uri: targhe e immatricolazione, intervalli del collaudo',
+    'blog.article.uri-targhe-collaudo-auto.excerpt': 'Per le auto, primo collaudo dopo cinque anni dalla prima messa in circolazione, poi in genere dopo tre e due.',
+    'blog.article.uri-targhe-collaudo-auto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

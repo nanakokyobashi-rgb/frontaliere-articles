@@ -8747,6 +8747,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.rimborso-imposta-secondo-pilastro-svizzero.title': 'Deuxième pilier suisse : remboursement fiscal en Italie',
     'blog.article.rimborso-imposta-secondo-pilastro-svizzero.excerpt': 'Depuis 2024, selon la reconstitution publiée par Fiscomania, des refus de la part des autorités cantonales suisses ont été signalés concernant les demandes de remboursement de l’impôt à la source retenu sur le capital du deuxième pilier.',
     'blog.article.rimborso-imposta-secondo-pilastro-svizzero.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.uri-targhe-collaudo-auto.title': 'Uri : plaques et immatriculation, intervalles du contrôle technique',
+    'blog.article.uri-targhe-collaudo-auto.excerpt': 'Pour les voitures, premier contrôle technique cinq ans après la première mise en circulation, puis généralement après trois ans et deux ans.',
+    'blog.article.uri-targhe-collaudo-auto.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaChFr;

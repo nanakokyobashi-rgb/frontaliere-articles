@@ -30382,6 +30382,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'uri-targhe-collaudo-auto',
+    category: 'pratico',
+    date: '2026-11-27T06:40:45.639Z',
+    image: '/images/blog/article-zurigo-targhe-immatricolazione-guida.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['UR'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
