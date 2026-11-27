@@ -75,6 +75,9 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.camion-urta-a2-basilea.title': 'Lastwagen prallt auf A2 bei Basel gegen Leitplanke: Grenzstau',
     'blog.article.camion-urta-a2-basilea.excerpt': 'Am Mittwochmorgen kam es gegen 8.45 Uhr bei der Ausfahrt Wettsteinallee in Basel zu einem Unfall: Ein Lastwagen mit polnischem Kennzeichen kollidierte mit der Sicherheitsbarriere.',
     'blog.article.camion-urta-a2-basilea.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.cyberattacco-basilea-campagna.title': 'Cyberangriff auf den Kanton Basel-Landschaft: Server isoliert',
+    'blog.article.cyberattacco-basilea-campagna.excerpt': 'Der Kanton meldet seit Sonntag Cyberangriffe auf die IT-Infrastruktur: Einige Server wurden vom Internet getrennt und es kommt zu Störungen bei den digitalen kantonalen Anwendungen.',
+    'blog.article.cyberattacco-basilea-campagna.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBasileaDe;

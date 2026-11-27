@@ -75,6 +75,9 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.camion-urta-a2-basilea.title': 'Camion urta il guardrail sulla A2 a Basilea: coda ai confini',
     'blog.article.camion-urta-a2-basilea.excerpt': 'Mercoledì mattina, verso le 8.45, un camion con targa polacca è finito contro la barriera di sicurezza nella zona dell\'uscita Wettsteinallee, a Basilea.',
     'blog.article.camion-urta-a2-basilea.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.cyberattacco-basilea-campagna.title': 'Cyberattacco al Canton Basilea Campagna: server isolati',
+    'blog.article.cyberattacco-basilea-campagna.excerpt': 'Il cantone segnala attacchi informatici alla struttura IT da domenica: alcuni server isolati e disservizi nelle applicazioni digitali cantonali.',
+    'blog.article.cyberattacco-basilea-campagna.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBasileaIt;
