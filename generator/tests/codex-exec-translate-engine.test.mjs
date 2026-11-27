@@ -3,7 +3,7 @@
  *
  * Decisione del proprietario 2026-10-04 (#1084 item 2, #2054): con DeepL a
  * quota esaurita e Azure a 401001, la bonifica delle coppie en/de/fr
- * bloccanti si fa con Codex (gpt-5.6-luna, effort max) eseguito in locale con
+ * bloccanti si fa con Codex (gpt-6-luna, effort max) eseguito in locale con
  * `codex exec`. Il vincolo e' che nessuna guardia venga saltata o allentata.
  *
  * Questo test blinda i tre modi in cui il motore potrebbe tradirlo:
@@ -95,7 +95,7 @@ test('gli argomenti di codex exec: sandbox read-only, niente rete di ricerca, pr
   const args = codexExecArgs({ workdir: '/w', outputPath: '/o/last.txt', instructionsPath: '/o/i.md' });
   assert.equal(args[0], 'exec');
   assert.deepEqual(args.slice(args.indexOf('--sandbox'), args.indexOf('--sandbox') + 2), ['--sandbox', 'read-only']);
-  assert.deepEqual(args.slice(args.indexOf('--model'), args.indexOf('--model') + 2), ['--model', 'gpt-5.6-luna']);
+  assert.deepEqual(args.slice(args.indexOf('--model'), args.indexOf('--model') + 2), ['--model', 'gpt-6-luna']);
   assert.ok(args.includes('model_reasoning_effort=max'));
   assert.ok(args.includes('web_search="disabled"'));
   assert.ok(args.includes('--ephemeral'));

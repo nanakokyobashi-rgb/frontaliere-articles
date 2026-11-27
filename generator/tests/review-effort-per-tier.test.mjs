@@ -65,7 +65,7 @@ test('la mappa tier→effort di tests.yml, ESEGUITA, da max solo ai tier alti', 
     for (const [tier, effort] of Object.entries(expected)) {
       const outFile = path.join(dir, `out-${tier}`);
       fs.writeFileSync(outFile, '');
-      const script = `set -euo pipefail\nGITHUB_OUTPUT=${JSON.stringify(outFile)}\n${setTier}\nset_tier ${JSON.stringify(tier)} gpt-5.6-luna 35\n`;
+      const script = `set -euo pipefail\nGITHUB_OUTPUT=${JSON.stringify(outFile)}\n${setTier}\nset_tier ${JSON.stringify(tier)} gpt-6-luna 35\n`;
       execFileSync('bash', ['-c', script], { stdio: ['ignore', 'ignore', 'pipe'] });
       const out = fs.readFileSync(outFile, 'utf8');
       assert.match(out, new RegExp(`^tier=${tier.replace(/[-]/g, '\\-')}$`, 'm'), `tier ${tier}: output tier assente`);

@@ -122,7 +122,7 @@ function runSetTier({ tier, turns, prior }) {
     fs.writeFileSync(out, '');
     const priorLine = prior === undefined ? '' : `prior_timeouts=${prior}\n`;
     execFileSync('bash', ['-c',
-      `set -euo pipefail\nGITHUB_OUTPUT=${JSON.stringify(out)}\n${priorLine}${extractSetTier()}\nset_tier ${tier} gpt-5.6-luna ${turns}\n`,
+      `set -euo pipefail\nGITHUB_OUTPUT=${JSON.stringify(out)}\n${priorLine}${extractSetTier()}\nset_tier ${tier} gpt-6-luna ${turns}\n`,
     ], { stdio: ['ignore', 'ignore', 'pipe'] });
     return Object.fromEntries(fs.readFileSync(out, 'utf8').trim().split('\n').map((l) => l.split('=')));
   } finally {

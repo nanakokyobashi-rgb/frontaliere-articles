@@ -491,7 +491,7 @@ runs:
           "$codex_cli_install_timeout_bin" --signal=TERM --kill-after=10s \
           "${codex_cli_install_timeout_seconds}s" "$trusted_node" "$trusted_npm" install \
             --prefix "$codex_prefix" --no-save --no-package-lock \
-            --no-fund --no-audit @openai/codex@0.153.4
+            --no-fund --no-audit @openai/codex@0.172.0
         install_status=$?
         if [ "$install_status" -ne 0 ]; then
           if [ "$install_status" -eq 124 ] || [ "$install_status" -eq 137 ]; then
@@ -518,7 +518,7 @@ runs:
             ;;
         esac
         codex_version="$($codex_realpath --version 2>&1)"
-        if ! printf '%s\n' "$codex_version" | grep -Eq '(^|[^0-9A-Za-z._-])v?0\.153\.4([^0-9A-Za-z._-]|$)'; then
+        if ! printf '%s\n' "$codex_version" | grep -Eq '(^|[^0-9A-Za-z._-])v?0\.172\.0([^0-9A-Za-z._-]|$)'; then
           echo "::warning::Pinned Codex CLI version attestation failed; the normal fallback cascade remains available"
           rm -rf -- "$codex_prefix"
           exit 0
@@ -533,7 +533,7 @@ runs:
         printf 'codex_realpath=%s\n' "$codex_realpath" >> "$GITHUB_OUTPUT"
         printf 'codex_sha256=%s\n' "$codex_sha256" >> "$GITHUB_OUTPUT"
         printf 'codex_prefix=%s\n' "$codex_prefix" >> "$GITHUB_OUTPUT"
-        echo "codex CLI installed and attested (0.153.4)"
+        echo "codex CLI installed and attested (0.172.0)"
 
     # Keep the subscription secret on this one action step. Only an explicit
     # AI consumer step receives the output socket path; unrelated housekeeping
@@ -667,7 +667,7 @@ runs:
         echo "ENABLE_HAIKU_ARTICLE_FALLBACK=${ENABLE_HAIKU_ARTICLE_FALLBACK:-<unset>} (ignored: Haiku is disabled and no longer gates Codex)"
         echo "claude CLI: disabled by owner decision — not installed, claude-cli/haiku is never offered"
         if [ -n "$CODEX_CLI_BIN" ]; then
-          echo "codex CLI: attested at $CODEX_CLI_BIN (version 0.153.4)"
+          echo "codex CLI: attested at $CODEX_CLI_BIN (version 0.172.0)"
         else
           echo "codex CLI: unavailable or failed attestation — the normal model chain will continue"
         fi

@@ -1017,9 +1017,9 @@
       "path": "scripts/lib/codex-fallback-contract.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "339d945b935b757d",
-        "corpus": "339d945b935b757d",
-        "alignedAt": "2026-09-26"
+        "site": "abf05e678d5a8d6a",
+        "corpus": "abf05e678d5a8d6a",
+        "alignedAt": "2026-11-26"
       }
     },
     {
@@ -3737,7 +3737,7 @@
     {
       "path": "generator/scripts/lib/codex-exec-call.mjs",
       "mode": "corpus-only",
-      "reason": "Trasporto LOCALE del tier Codex (`codex exec` sul login dell'operatore, gpt-5.6-luna a effort max, profilo `function`) usato solo da `retranslate-blocking-bodies.mjs --engine codex`, la bonifica dei body-locale bloccanti che esiste solo in questo repo (nanakokyobashi-rgb/frontaliere-articles#1084 item 2). Rifiuta la CI per costruzione: li' il tier Codex passa dal broker di `setup-claude-haiku-fallback`. Il sito non ha la bonifica, quindi non ha un gemello da portare.",
+      "reason": "Trasporto LOCALE del tier Codex (`codex exec` sul login dell'operatore, gpt-6-luna a effort max, profilo `function`) usato solo da `retranslate-blocking-bodies.mjs --engine codex`, la bonifica dei body-locale bloccanti che esiste solo in questo repo (nanakokyobashi-rgb/frontaliere-articles#1084 item 2). Rifiuta la CI per costruzione: li' il tier Codex passa dal broker di `setup-claude-haiku-fallback`. Il sito non ha la bonifica, quindi non ha un gemello da portare.",
       "baseline": {
         "site": null,
         "corpus": "fef73a85d3b1530d",

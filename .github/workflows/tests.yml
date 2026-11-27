@@ -1312,7 +1312,7 @@ jobs:
           if [ "${BODY_REREVIEW:-}" = "true" ]; then
             echo "code_unchanged_since=$HEAD_SHA" >> "$GITHUB_OUTPUT"
             echo "Body corretto dopo un verdetto non approvante sulla stessa HEAD → tier minimal (solo body)."
-            set_tier minimal gpt-5.6-luna 12
+            set_tier minimal gpt-6-luna 12
             exit 0
           fi
           # `gh pr view --json files` TRONCA a 100 file senza dirlo, e su questo
@@ -1333,13 +1333,13 @@ jobs:
           # scavalcando il guard di incompletezza qui sotto.
           if [ -z "$files" ] && [ "$files_complete" = "1" ]; then
             echo "Lista file vuota (PR rebase-only o vuota)."
-            set_tier normal gpt-5.6-luna 35
+            set_tier normal gpt-6-luna 35
             exit 0
           fi
           # Elenco incompleto: il tier NON si decide su un campione.
           if [ "$files_complete" != "1" ]; then
             echo "Elenco file INCOMPLETO ($count/$expected, causa: $reason) → tier high forzato: niente minimal, niente decisione funnel su un campione."
-            set_tier high gpt-5.6-luna 60
+            set_tier high gpt-6-luna 60
             exit 0
           fi
           if printf '%s' "$result" | node scripts/ci/review-test-policy.mjs only; then
@@ -1347,7 +1347,7 @@ jobs:
               set_tier tests-only none 0
             else
               # Includes a rename from application code or an uncertain snapshot.
-              set_tier high gpt-5.6-luna 60
+              set_tier high gpt-6-luna 60
             fi
             exit 0
           fi
@@ -1357,7 +1357,7 @@ jobs:
             # da verificare solo il contratto del body. E' il caso PIU' FREQUENTE
             # su questo repo, dove i workflow di generazione committano corpus.
             echo "PR di soli content/data (nessun codice toccato) → tier minimal."
-            set_tier minimal gpt-5.6-luna 12
+            set_tier minimal gpt-6-luna 12
             exit 0
           fi
           # funnel_crit <file-list> → exit 0 se la lista contiene codice
@@ -1414,9 +1414,9 @@ jobs:
               echo "incremental_base=$lastRev" >> "$GITHUB_OUTPUT"
               echo "Re-review incrementale: solo il delta dei file PR da $lastRev:"; echo "$delta_code"
               if funnel_crit "$delta_code"; then
-                set_tier incremental-high gpt-5.6-luna 35
+                set_tier incremental-high gpt-6-luna 35
               else
-                set_tier incremental gpt-5.6-luna 35
+                set_tier incremental gpt-6-luna 35
               fi
               exit 0
             fi
@@ -1426,12 +1426,12 @@ jobs:
           code_file_count=$(echo "$code_files" | grep -c . || true)
           if funnel_crit "$code_files"; then
             if [ "$code_file_count" -ge 25 ]; then
-              set_tier high-mega gpt-5.6-luna 120
+              set_tier high-mega gpt-6-luna 120
             else
-              set_tier high gpt-5.6-luna 60
+              set_tier high gpt-6-luna 60
             fi
           else
-            set_tier normal gpt-5.6-luna 35
+            set_tier normal gpt-6-luna 35
           fi
 
       # NIENTE proxy di compressione su questo step, e non e' una dimenticanza.

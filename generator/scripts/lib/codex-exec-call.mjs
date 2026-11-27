@@ -7,8 +7,10 @@
  * La bonifica delle coppie en/de/fr bloccanti (#1084 item 2, #2054) e' ferma
  * perche' i due tier alti della cascata non rispondono: DeepL ha la quota
  * esaurita su entrambe le chiavi e Azure risponde 401001 su entrambe. Il
- * proprietario ha deciso il 2026-10-04 di farla con Codex, modello
- * gpt-5.6-luna a effort massimo, in locale.
+ * proprietario ha deciso il 2026-10-04 di farla con Codex in locale. Il modello
+ * corrente è gpt-6-luna a effort massimo. Il 2026-11-27 una traduzione di prova
+ * via createCodexExecCall è riuscita con il login locale e Codex CLI 0.172.0
+ * sia sul Mac dell'operatore sia sul Mac principale.
  *
  * In CI il tier Codex di `free-translate.mjs` parla con il broker di
  * `.github/actions/setup-claude-haiku-fallback/codex-auth-broker.mjs` via
@@ -42,7 +44,7 @@ import { tmpdir } from 'node:os';
 import { delimiter, dirname, isAbsolute, join, resolve as resolvePath } from 'node:path';
 
 /** Stessi valori del broker (`CODEX_MODEL`, `CODEX_EFFORT`): un test li lega. */
-export const CODEX_EXEC_MODEL = 'gpt-5.6-luna';
+export const CODEX_EXEC_MODEL = 'gpt-6-luna';
 export const CODEX_EXEC_EFFORT = 'max';
 
 /** Profilo «function» del broker (`FUNCTION_PROFILE_INSTRUCTIONS`): un test li lega. */
