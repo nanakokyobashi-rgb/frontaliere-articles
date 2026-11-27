@@ -51,6 +51,9 @@ const blogMetaCantonSzIt: Record<string, string> = {
     'blog.article.gov-svitto-respinge-autorizzazione.title': 'Governo Svitto respinge procedura di autorizzazione per funzionari',
     'blog.article.gov-svitto-respinge-autorizzazione.excerpt': 'Le denunce contro funzionari in Svitto sono aumentate dal 2021, raggiungendo un massimo nel 2025; il Governo respinge la mozione M 7/26.',
     'blog.article.gov-svitto-respinge-autorizzazione.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.svitto-microsoft-365-amministrazione.title': 'Svitto conferma Microsoft 365 per l\'amministrazione',
+    'blog.article.svitto-microsoft-365-amministrazione.excerpt': 'Il Consiglio di Stato non vede ragioni per rivedere la scelta; seguirà comunque lo sviluppo di soluzioni open source.',
+    'blog.article.svitto-microsoft-365-amministrazione.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSzIt;

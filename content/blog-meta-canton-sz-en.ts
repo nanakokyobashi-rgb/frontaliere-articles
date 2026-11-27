@@ -51,6 +51,9 @@ const blogMetaCantonSzEn: Record<string, string> = {
     'blog.article.gov-svitto-respinge-autorizzazione.title': 'Schwyz Government rejects authorization procedure for officials',
     'blog.article.gov-svitto-respinge-autorizzazione.excerpt': 'Complaints against officials in Schwyz have increased since 2021, reaching a peak in 2025; the Government rejects motion M 7/26.',
     'blog.article.gov-svitto-respinge-autorizzazione.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.svitto-microsoft-365-amministrazione.title': 'Schwyz confirms Microsoft 365 for the administration',
+    'blog.article.svitto-microsoft-365-amministrazione.excerpt': 'The Council of State sees no reason to review the choice; it will nevertheless follow the development of open-source solutions.',
+    'blog.article.svitto-microsoft-365-amministrazione.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSzEn;
