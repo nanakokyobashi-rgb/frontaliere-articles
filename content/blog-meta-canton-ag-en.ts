@@ -102,6 +102,9 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.muelimaert-lenzburg-gas-evacuazione.title': 'Evacuation of Mülimärt Lenzburg due to a carbon dioxide leak',
     'blog.article.muelimaert-lenzburg-gas-evacuazione.excerpt': 'Carbon dioxide alarm on Tuesday shortly after 11.30; 30 people reported feeling unwell and experiencing dizziness; clearance around 13.30.',
     'blog.article.muelimaert-lenzburg-gas-evacuazione.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.baden-energiestadt-gold-sei-volte.title': 'Baden receives Energiestadt Gold for the sixth consecutive time',
+    'blog.article.baden-energiestadt-gold-sei-volte.excerpt': 'The certification was achieved with 81% of the available points; the Netto-Null analysis identifies areas for action.',
+    'blog.article.baden-energiestadt-gold-sei-volte.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAgEn;

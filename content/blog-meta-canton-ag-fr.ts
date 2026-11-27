@@ -102,6 +102,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.muelimaert-lenzburg-gas-evacuazione.title': 'Évacuation de Mülimärt Lenzburg en raison d’une fuite de dioxyde de carbone',
     'blog.article.muelimaert-lenzburg-gas-evacuazione.excerpt': 'Alerte au dioxyde de carbone mardi peu après 11.30; 30 personnes ont signalé un malaise et des vertiges; fin de l’alerte vers 13.30.',
     'blog.article.muelimaert-lenzburg-gas-evacuazione.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.baden-energiestadt-gold-sei-volte.title': 'Baden obtient Energiestadt Gold pour la sixième fois consécutive',
+    'blog.article.baden-energiestadt-gold-sei-volte.excerpt': 'La certification a été obtenue avec 81 % des points disponibles ; l’analyse Netto-Zéro signale des domaines d’intervention.',
+    'blog.article.baden-energiestadt-gold-sei-volte.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAgFr;

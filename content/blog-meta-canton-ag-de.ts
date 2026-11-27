@@ -102,6 +102,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.muelimaert-lenzburg-gas-evacuazione.title': 'Evakuierung von Mülimärt Lenzburg wegen eines Austritts von Kohlendioxid',
     'blog.article.muelimaert-lenzburg-gas-evacuazione.excerpt': 'Alarm wegen Kohlendioxid am Dienstag kurz nach 11.30 Uhr; 30 Personen berichteten über Unwohlsein und Schwindel; Freigabe gegen 13.30 Uhr.',
     'blog.article.muelimaert-lenzburg-gas-evacuazione.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.baden-energiestadt-gold-sei-volte.title': 'Baden erhält zum sechsten Mal in Folge Energiestadt Gold',
+    'blog.article.baden-energiestadt-gold-sei-volte.excerpt': 'Die Zertifizierung wurde mit 81% der verfügbaren Punkte erreicht; die Netto-Null-Analyse weist Handlungsbereiche aus.',
+    'blog.article.baden-energiestadt-gold-sei-volte.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAgDe;

@@ -36,6 +36,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'due-generazioni-immobiliare-mellingen': { it: 'due-generazioni-immobiliare-mellingen', en: 'two-generations-real-estate-mellingen', de: 'zwei-generationen-immobilien-mellingen', fr: 'deux-generations-immobilier-mellingen' },
  'incendio-sins-linea-s26': { it: 'incendio-sins-linea-s26', en: 'sins-fire-s26-rail-interruption', de: 'brand-sins-s26-bahnunterbruch', fr: 'incendie-sins-s26-interruption' },
  'muelimaert-lenzburg-gas-evacuazione': { it: 'muelimaert-lenzburg-gas-evacuazione', en: 'muelimaert-lenzburg-gas-evacuation', de: 'muelimaert-lenzburg-gas-evakuierung', fr: 'muelimaert-lenzburg-evacuation-gaz' },
+ 'baden-energiestadt-gold-sei-volte': { it: 'baden-energiestadt-gold-sei-volte', en: 'baden-energiestadt-gold-six-times', de: 'baden-energiestadt-gold-sechs-mal', fr: 'baden-energiestadt-gold-six-fois' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

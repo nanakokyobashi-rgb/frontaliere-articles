@@ -102,6 +102,9 @@ const blogMetaCantonAgIt: Record<string, string> = {
     'blog.article.muelimaert-lenzburg-gas-evacuazione.title': 'Evacuazione Mülimärt Lenzburg per fuoriuscita di anidride carbonica',
     'blog.article.muelimaert-lenzburg-gas-evacuazione.excerpt': 'Allarme per anidride carbonica martedì poco dopo le 11.30; 30 persone hanno riferito malessere e vertigini; liberazione verso le 13.30.',
     'blog.article.muelimaert-lenzburg-gas-evacuazione.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.baden-energiestadt-gold-sei-volte.title': 'Baden ottiene Energiestadt Gold per la sesta volta consecutiva',
+    'blog.article.baden-energiestadt-gold-sei-volte.excerpt': 'La certificazione è stata raggiunta con l\'81% dei punti disponibili; l\'analisi Netto-Null segnala ambiti d\'intervento.',
+    'blog.article.baden-energiestadt-gold-sei-volte.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAgIt;
