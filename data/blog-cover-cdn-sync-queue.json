@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-lausanne-luci-foranee.webp",
-      "sha256": "1e502da56a20b1aaa3e1a46d71113abf15d2a333eba8007973f5764223acebc0"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-lausanne-luci-foranee-480w.webp",
-      "sha256": "75c0fb13eaf3f9e0d3e1b7ae02943dcd0b9d3d16e9630d0ba0f0783096caa253"
-    }
-  ]
+  "items": []
 }
