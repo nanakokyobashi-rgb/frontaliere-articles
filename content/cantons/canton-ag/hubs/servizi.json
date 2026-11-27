@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-11-27T04:41:16.871Z",
-  "contentHash": "8819a24d1acb6d01ca0ec2e602be96a63c246c49d87ad416669a9ba6e1661526",
+  "updatedAt": "2026-11-27T09:50:55.309Z",
+  "contentHash": "3246bba7ea641b471cb86976a4a5ad91da51a5d9f85852a27cac6d3db8d7c428",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -18,8 +18,13 @@
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-27T00:43:53.354Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T15:51:00.529Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -90,6 +95,20 @@
           "updatedAt": "2026-11-26T21:36:19.183Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "0 °C",
+              "detail": "oggi da -1 a 2 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -125,7 +144,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/linearbeschleuniger-ksb-verzichtet-auf-rekurs"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -205,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "en": {
       "canton": "AG",
@@ -273,6 +292,20 @@
           "updatedAt": "2026-11-26T21:36:19.183Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "0 °C",
+              "detail": "today from -1 to 2 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -308,7 +341,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/linearbeschleuniger-ksb-verzichtet-auf-rekurs"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -384,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "de": {
       "canton": "AG",
@@ -452,6 +485,20 @@
           "updatedAt": "2026-11-26T21:36:19.183Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "0 °C",
+              "detail": "heute -1 bis 2 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -487,7 +534,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/linearbeschleuniger-ksb-verzichtet-auf-rekurs"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -563,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "fr": {
       "canton": "AG",
@@ -631,6 +678,20 @@
           "updatedAt": "2026-11-26T21:36:19.183Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "0 °C",
+              "detail": "aujourd’hui de -1 à 2 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -666,7 +727,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/linearbeschleuniger-ksb-verzichtet-auf-rekurs"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -738,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     }
   }
 }

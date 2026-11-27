@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T04:41:16.871Z",
-  "contentHash": "8845dd82234aea074101954845b18a884f100e8701982e1748cdbe4e80f53c9c",
+  "updatedAt": "2026-11-27T09:50:55.309Z",
+  "contentHash": "c8f0e944593d6a327d21702870d3ce343cad2f80a55538f5eff020fddf7c8901",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-26T13:22:01.562Z",
+      "updatedAt": "2026-11-27T00:05:50.684Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T15:51:00.529Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -38,12 +38,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "3",
-          "note": "segnalazioni aggiornate: 26 novembre 2026"
+          "note": "segnalazioni aggiornate: 27 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "3",
-          "note": "segnalazioni aggiornate: 26 novembre 2026"
+          "note": "segnalazioni aggiornate: 27 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -129,38 +129,38 @@
               "date": "2026-11-10T21:30:00.000Z"
             },
             {
-              "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
-              "value": "Traffico",
-              "date": "2026-11-26T13:22:01.562Z",
-              "url": "https://www.ge.ch/node/45418"
-            },
-            {
               "label": "Perturbations de la circulation le samedi 14 novembre 2026",
               "value": "Traffico",
-              "date": "2026-11-26T13:22:01.562Z",
+              "date": "2026-11-27T00:05:50.684Z",
               "url": "https://www.ge.ch/node/45507"
             },
             {
               "label": "Perturbations de la circulation - jeudi 26 novembre",
               "value": "Traffico",
-              "date": "2026-11-26T13:22:01.562Z",
+              "date": "2026-11-27T00:05:50.684Z",
               "url": "https://www.ge.ch/node/45630"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 16 novembre 2026",
               "value": "Cantiere",
-              "date": "2026-11-26T13:22:01.562Z",
+              "date": "2026-11-27T00:05:50.684Z",
               "url": "https://www.ge.ch/node/45465"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 23 novembre 2026",
               "value": "Cantiere",
-              "date": "2026-11-26T13:22:01.562Z",
+              "date": "2026-11-27T00:05:50.684Z",
               "url": "https://www.ge.ch/node/45530"
+            },
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 30 novembre 2026",
+              "value": "Cantiere",
+              "date": "2026-11-27T00:05:50.684Z",
+              "url": "https://www.ge.ch/node/45611"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-26T13:22:01.562Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -198,7 +198,7 @@
               "url": "https://www.ge.ch/node/45444"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "en": {
       "canton": "GE",
@@ -274,12 +274,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "3",
-          "note": "reports as of 26 November 2026"
+          "note": "reports as of 27 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "3",
-          "note": "reports as of 26 November 2026"
+          "note": "reports as of 27 November 2026"
         }
       ],
       "dataBlocks": [
@@ -365,38 +365,38 @@
               "date": "2026-11-10T21:30:00.000Z"
             },
             {
-              "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
-              "value": "Traffic",
-              "date": "2026-11-26T13:22:01.562Z",
-              "url": "https://www.ge.ch/node/45418"
-            },
-            {
               "label": "Perturbations de la circulation le samedi 14 novembre 2026",
               "value": "Traffic",
-              "date": "2026-11-26T13:22:01.562Z",
+              "date": "2026-11-27T00:05:50.684Z",
               "url": "https://www.ge.ch/node/45507"
             },
             {
               "label": "Perturbations de la circulation - jeudi 26 novembre",
               "value": "Traffic",
-              "date": "2026-11-26T13:22:01.562Z",
+              "date": "2026-11-27T00:05:50.684Z",
               "url": "https://www.ge.ch/node/45630"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 16 novembre 2026",
               "value": "Roadworks",
-              "date": "2026-11-26T13:22:01.562Z",
+              "date": "2026-11-27T00:05:50.684Z",
               "url": "https://www.ge.ch/node/45465"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 23 novembre 2026",
               "value": "Roadworks",
-              "date": "2026-11-26T13:22:01.562Z",
+              "date": "2026-11-27T00:05:50.684Z",
               "url": "https://www.ge.ch/node/45530"
+            },
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 30 novembre 2026",
+              "value": "Roadworks",
+              "date": "2026-11-27T00:05:50.684Z",
+              "url": "https://www.ge.ch/node/45611"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-26T13:22:01.562Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -434,7 +434,7 @@
               "url": "https://www.ge.ch/node/45444"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -494,7 +494,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "de": {
       "canton": "GE",
@@ -510,12 +510,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "3",
-          "note": "Meldungen vom 26. November 2026"
+          "note": "Meldungen vom 27. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "3",
-          "note": "Meldungen vom 26. November 2026"
+          "note": "Meldungen vom 27. November 2026"
         }
       ],
       "dataBlocks": [
@@ -601,38 +601,38 @@
               "date": "2026-11-10T21:30:00.000Z"
             },
             {
-              "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
-              "value": "Verkehr",
-              "date": "2026-11-26T13:22:01.562Z",
-              "url": "https://www.ge.ch/node/45418"
-            },
-            {
               "label": "Perturbations de la circulation le samedi 14 novembre 2026",
               "value": "Verkehr",
-              "date": "2026-11-26T13:22:01.562Z",
+              "date": "2026-11-27T00:05:50.684Z",
               "url": "https://www.ge.ch/node/45507"
             },
             {
               "label": "Perturbations de la circulation - jeudi 26 novembre",
               "value": "Verkehr",
-              "date": "2026-11-26T13:22:01.562Z",
+              "date": "2026-11-27T00:05:50.684Z",
               "url": "https://www.ge.ch/node/45630"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 16 novembre 2026",
               "value": "Baustelle",
-              "date": "2026-11-26T13:22:01.562Z",
+              "date": "2026-11-27T00:05:50.684Z",
               "url": "https://www.ge.ch/node/45465"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 23 novembre 2026",
               "value": "Baustelle",
-              "date": "2026-11-26T13:22:01.562Z",
+              "date": "2026-11-27T00:05:50.684Z",
               "url": "https://www.ge.ch/node/45530"
+            },
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 30 novembre 2026",
+              "value": "Baustelle",
+              "date": "2026-11-27T00:05:50.684Z",
+              "url": "https://www.ge.ch/node/45611"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-26T13:22:01.562Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -670,7 +670,7 @@
               "url": "https://www.ge.ch/node/45444"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -730,7 +730,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "fr": {
       "canton": "GE",
@@ -746,12 +746,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "3",
-          "note": "signalements au 26 novembre 2026"
+          "note": "signalements au 27 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "3",
-          "note": "signalements au 26 novembre 2026"
+          "note": "signalements au 27 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -837,38 +837,38 @@
               "date": "2026-11-10T21:30:00.000Z"
             },
             {
-              "label": "Opération ARGOS : action transfrontalière contre le trafic de stupéfiants",
-              "value": "Trafic",
-              "date": "2026-11-26T13:22:01.562Z",
-              "url": "https://www.ge.ch/node/45418"
-            },
-            {
               "label": "Perturbations de la circulation le samedi 14 novembre 2026",
               "value": "Trafic",
-              "date": "2026-11-26T13:22:01.562Z",
+              "date": "2026-11-27T00:05:50.684Z",
               "url": "https://www.ge.ch/node/45507"
             },
             {
               "label": "Perturbations de la circulation - jeudi 26 novembre",
               "value": "Trafic",
-              "date": "2026-11-26T13:22:01.562Z",
+              "date": "2026-11-27T00:05:50.684Z",
               "url": "https://www.ge.ch/node/45630"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 16 novembre 2026",
               "value": "Chantier",
-              "date": "2026-11-26T13:22:01.562Z",
+              "date": "2026-11-27T00:05:50.684Z",
               "url": "https://www.ge.ch/node/45465"
             },
             {
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 23 novembre 2026",
               "value": "Chantier",
-              "date": "2026-11-26T13:22:01.562Z",
+              "date": "2026-11-27T00:05:50.684Z",
               "url": "https://www.ge.ch/node/45530"
+            },
+            {
+              "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 30 novembre 2026",
+              "value": "Chantier",
+              "date": "2026-11-27T00:05:50.684Z",
+              "url": "https://www.ge.ch/node/45611"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-26T13:22:01.562Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -906,7 +906,7 @@
               "url": "https://www.ge.ch/node/45444"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -966,7 +966,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     }
   }
 }

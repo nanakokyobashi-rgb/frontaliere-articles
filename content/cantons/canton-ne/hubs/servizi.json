@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "servizi",
-  "updatedAt": "2026-11-26T13:02:36.485Z",
-  "contentHash": "4e3fde42dec0a1b706ff6ca0d249089bd280495895eeef27a9d4fdb9d9945fda",
+  "updatedAt": "2026-11-27T09:50:55.309Z",
+  "contentHash": "de7b5c2924c1cbd7584e41229c3fe5f6a8d1168e08a0021d806b001d6ff4b301",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,8 +13,13 @@
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-27T00:43:53.354Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -47,6 +52,20 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-11-15T11:58:26.359Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Neuchâtel",
+              "value": "2 °C",
+              "detail": "oggi da 1 a 5 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -84,7 +103,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/assurance-chomage-neuchatel-et-vaud-sunissent-pour-sensibiliser-sur-limportance-danticiper-les-recherches-demploi-avant-linscription-lorp"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -146,7 +165,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "en": {
       "canton": "NE",
@@ -176,6 +195,20 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-11-15T11:58:26.359Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Neuchâtel",
+              "value": "2 °C",
+              "detail": "today from 1 to 5 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -213,7 +246,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/assurance-chomage-neuchatel-et-vaud-sunissent-pour-sensibiliser-sur-limportance-danticiper-les-recherches-demploi-avant-linscription-lorp"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -271,7 +304,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "de": {
       "canton": "NE",
@@ -301,6 +334,20 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-11-15T11:58:26.359Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Neuchâtel",
+              "value": "2 °C",
+              "detail": "heute 1 bis 5 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -338,7 +385,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/assurance-chomage-neuchatel-et-vaud-sunissent-pour-sensibiliser-sur-limportance-danticiper-les-recherches-demploi-avant-linscription-lorp"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -396,7 +443,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "fr": {
       "canton": "NE",
@@ -426,6 +473,20 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-11-15T11:58:26.359Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Neuchâtel",
+              "value": "2 °C",
+              "detail": "aujourd’hui de 1 à 5 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -463,7 +524,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/assurance-chomage-neuchatel-et-vaud-sunissent-pour-sensibiliser-sur-limportance-danticiper-les-recherches-demploi-avant-linscription-lorp"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -517,7 +578,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     }
   }
 }

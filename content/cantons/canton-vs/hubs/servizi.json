@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-11-26T13:02:36.485Z",
-  "contentHash": "110919ddcb6d7802e76571dc7b20f932aba0dbf37153ca8a18782bcf70e66d08",
+  "updatedAt": "2026-11-27T09:50:55.309Z",
+  "contentHash": "7820cd70366bd8a16f574dfa8dc099853a96e64b7219e88dbf13406ee8396912",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-25T21:43:23.986Z",
+      "updatedAt": "2026-11-26T21:36:19.183Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-27T00:43:53.354Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -92,7 +97,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-26T21:36:19.183Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "2 °C",
+              "detail": "oggi da -3 a 7 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +149,7 @@
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/29/quelques-foulees-pour-nos-premas-un-evenement-ouvert-a-toutes-et-tous-le-dimanche-15-novembre-2026"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -210,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "en": {
       "canton": "VS",
@@ -280,7 +299,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-26T21:36:19.183Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "2 °C",
+              "detail": "today from -3 to 7 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -318,7 +351,7 @@
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/29/quelques-foulees-pour-nos-premas-un-evenement-ouvert-a-toutes-et-tous-le-dimanche-15-novembre-2026"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -394,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "de": {
       "canton": "VS",
@@ -464,7 +497,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-26T21:36:19.183Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "2 °C",
+              "detail": "heute -3 bis 7 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -502,7 +549,7 @@
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/29/quelques-foulees-pour-nos-premas-un-evenement-ouvert-a-toutes-et-tous-le-dimanche-15-novembre-2026"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -578,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "fr": {
       "canton": "VS",
@@ -648,7 +695,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-26T21:36:19.183Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "2 °C",
+              "detail": "aujourd’hui de -3 à 7 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -686,7 +747,7 @@
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/29/quelques-foulees-pour-nos-premas-un-evenement-ouvert-a-toutes-et-tous-le-dimanche-15-novembre-2026"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -758,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     }
   }
 }

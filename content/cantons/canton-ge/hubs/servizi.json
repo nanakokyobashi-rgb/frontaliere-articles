@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-11-27T04:41:16.871Z",
-  "contentHash": "1f4b1d0d22202f1ac0f40d3ddaed5b8300d90c6d5bd6b02184c849363d1bf334",
+  "updatedAt": "2026-11-27T09:50:55.309Z",
+  "contentHash": "abcecd4c70ca027df221c4dfc208ea81b5e46467f476f66bbb2484a4d904fb03",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -18,8 +18,13 @@
       "keyFacts": 0
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-27T00:43:53.354Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T15:51:00.529Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -94,6 +99,20 @@
           "updatedAt": "2026-11-26T22:27:32.834Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "4 °C",
+              "detail": "oggi da 2 a 7 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -129,7 +148,7 @@
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19151"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "en": {
       "canton": "GE",
@@ -281,6 +300,20 @@
           "updatedAt": "2026-11-26T22:27:32.834Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "4 °C",
+              "detail": "today from 2 to 7 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -316,7 +349,7 @@
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19151"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -391,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "de": {
       "canton": "GE",
@@ -463,6 +496,20 @@
           "updatedAt": "2026-11-26T22:27:32.834Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "4 °C",
+              "detail": "heute 2 bis 7 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -498,7 +545,7 @@
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19151"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -573,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "fr": {
       "canton": "GE",
@@ -645,6 +692,20 @@
           "updatedAt": "2026-11-26T22:27:32.834Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "4 °C",
+              "detail": "aujourd’hui de 2 à 7 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -680,7 +741,7 @@
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19151"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -752,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     }
   }
 }

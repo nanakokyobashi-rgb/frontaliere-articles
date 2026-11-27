@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T10:34:02.735Z",
-  "contentHash": "bea9b6bfc75f369bbe5a6112b8140b58cfa525aee7277fb8c7b0ce9bfac6b876",
+  "updatedAt": "2026-11-27T09:50:55.309Z",
+  "contentHash": "08938a648730838b11856352bf987936d2996d41049d56786792433010190787",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-26T03:50:03.880Z",
+      "updatedAt": "2026-11-27T00:05:50.684Z",
       "keyFacts": 1
     }
   ],
@@ -23,7 +23,7 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "1",
-          "note": "segnalazioni aggiornate: 26 novembre 2026"
+          "note": "segnalazioni aggiornate: 27 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -37,10 +37,15 @@
               "value": "Chiusura",
               "detail": "fine prevista: 29 novembre 2026",
               "date": "2026-10-26T15:45:00.000Z"
+            },
+            {
+              "label": "A3 Zürich -> Chur tra Svincolo autostradale Bilten E Raccordo autostradale Diramazione Niederurnen Situazione: problemi di traffico Causa: incidente",
+              "value": "Traffico",
+              "date": "2026-11-26T19:49:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         }
       ],
       "curatedArticles": [
@@ -98,7 +103,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "en": {
       "canton": "GL",
@@ -109,7 +114,7 @@
         {
           "label": "Road closures in force or imminent",
           "value": "1",
-          "note": "reports as of 26 November 2026"
+          "note": "reports as of 27 November 2026"
         }
       ],
       "dataBlocks": [
@@ -123,10 +128,15 @@
               "value": "Closure",
               "detail": "until 29 November 2026",
               "date": "2026-10-26T15:45:00.000Z"
+            },
+            {
+              "label": "A3 Zürich -> Chur tra Svincolo autostradale Bilten E Raccordo autostradale Diramazione Niederurnen Situazione: problemi di traffico Causa: incidente",
+              "value": "Traffic",
+              "date": "2026-11-26T19:49:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         }
       ],
       "curatedArticles": [
@@ -184,7 +194,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "de": {
       "canton": "GL",
@@ -195,7 +205,7 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "1",
-          "note": "Meldungen vom 26. November 2026"
+          "note": "Meldungen vom 27. November 2026"
         }
       ],
       "dataBlocks": [
@@ -209,10 +219,15 @@
               "value": "Sperrung",
               "detail": "bis 29. November 2026",
               "date": "2026-10-26T15:45:00.000Z"
+            },
+            {
+              "label": "A3 Zürich -> Chur zwischen Anschluss Bilten und Autobahndreieck Verzweigung Niederurnen Sachlage: Verkehrsbehinderung Ursache: Unfall",
+              "value": "Verkehr",
+              "date": "2026-11-26T19:49:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         }
       ],
       "curatedArticles": [
@@ -270,7 +285,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "fr": {
       "canton": "GL",
@@ -281,7 +296,7 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "1",
-          "note": "signalements au 26 novembre 2026"
+          "note": "signalements au 27 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -295,10 +310,15 @@
               "value": "Fermeture",
               "detail": "jusqu’au 29 novembre 2026",
               "date": "2026-10-26T15:45:00.000Z"
+            },
+            {
+              "label": "A3 Zurich -> Coire entre Jonction autoroutière Bilten et Echangeur Echangeur de Niederurnen Situation: trafic perturbé Raison: accident",
+              "value": "Trafic",
+              "date": "2026-11-26T19:49:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         }
       ],
       "curatedArticles": [
@@ -356,7 +376,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     }
   }
 }

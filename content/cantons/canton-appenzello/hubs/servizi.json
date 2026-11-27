@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "servizi",
-  "updatedAt": "2026-11-27T04:41:16.871Z",
-  "contentHash": "95c14e26f090a58f3227ee0aacef135e8f557465a9b5083ffa130fcbbcae94ba",
+  "updatedAt": "2026-11-27T09:50:55.309Z",
+  "contentHash": "06d6c2eb8018e81a7ba25ff1a3ad8038b1d1f0a6ccd263d15e5a7538cd3319c5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -18,8 +18,13 @@
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-27T00:43:53.354Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T15:51:00.529Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -95,6 +100,25 @@
           "updatedAt": "2026-11-26T21:36:19.183Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Appenzell",
+              "value": "-3 °C",
+              "detail": "oggi da -3 a 0 °C"
+            },
+            {
+              "label": "Herisau",
+              "value": "-2 °C",
+              "detail": "oggi da -3 a -1 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -125,7 +149,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -213,7 +237,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -286,6 +310,25 @@
           "updatedAt": "2026-11-26T21:36:19.183Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Appenzell",
+              "value": "-3 °C",
+              "detail": "today from -3 to 0 °C"
+            },
+            {
+              "label": "Herisau",
+              "value": "-2 °C",
+              "detail": "today from -3 to -1 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -316,7 +359,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -396,7 +439,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -469,6 +512,25 @@
           "updatedAt": "2026-11-26T21:36:19.183Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Appenzell",
+              "value": "-3 °C",
+              "detail": "heute -3 bis 0 °C"
+            },
+            {
+              "label": "Herisau",
+              "value": "-2 °C",
+              "detail": "heute -3 bis -1 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -499,7 +561,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -579,7 +641,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -652,6 +714,25 @@
           "updatedAt": "2026-11-26T21:36:19.183Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Appenzell",
+              "value": "-3 °C",
+              "detail": "aujourd’hui de -3 à 0 °C"
+            },
+            {
+              "label": "Herisau",
+              "value": "-2 °C",
+              "detail": "aujourd’hui de -3 à -1 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -682,7 +763,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -754,7 +835,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     }
   }
 }

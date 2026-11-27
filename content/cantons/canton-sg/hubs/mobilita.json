@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T06:43:55.311Z",
-  "contentHash": "23ec16e2677e76fec0c88aac7529d77684aac3f83e681b9e0b3049ff5663bc20",
+  "updatedAt": "2026-11-27T09:50:55.309Z",
+  "contentHash": "55ec0318d98fd55b63fc6229fc2e3136838962615635e726638ec6a0934f3191",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-26T13:22:01.562Z",
+      "updatedAt": "2026-11-27T00:05:50.684Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T15:51:00.529Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -38,12 +38,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "3",
-          "note": "segnalazioni aggiornate: 26 novembre 2026"
+          "note": "segnalazioni aggiornate: 27 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "8",
-          "note": "segnalazioni aggiornate: 26 novembre 2026"
+          "note": "segnalazioni aggiornate: 27 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -129,11 +129,6 @@
               "date": "2026-11-22T19:00:00.000Z"
             },
             {
-              "label": "A13 Sargans -> St. Margrethen tra Svincolo autostradale Sennwald E Svincolo autostradale Oberriet Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-11-26T12:36:00.000Z"
-            },
-            {
               "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Oberriet E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Causa: veicoli di manutenzione lenti…",
               "value": "Cantiere",
               "detail": "fine prevista: 8 dicembre 2026",
@@ -156,10 +151,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 29 novembre 2026",
               "date": "2026-10-01T22:00:00.000Z"
+            },
+            {
+              "label": "A3 Zürich <-> Chur tra Svincolo autostradale Sargans E Svincolo autostradale Flums Situazione: problemi di traffico cantiere Aggiunta 1: limite temporaneo altezza Altezza veicolo [m] 4.5",
+              "value": "Cantiere",
+              "detail": "fine prevista: 30 dicembre 2027",
+              "date": "2026-11-02T11:41:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-26T13:22:01.562Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -197,7 +198,7 @@
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/regierung-korrigiert-die-motorfahrzeugsteuer.html"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +286,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-27T06:43:55.311Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "en": {
       "canton": "SG",
@@ -301,12 +302,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "3",
-          "note": "reports as of 26 November 2026"
+          "note": "reports as of 27 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "8",
-          "note": "reports as of 26 November 2026"
+          "note": "reports as of 27 November 2026"
         }
       ],
       "dataBlocks": [
@@ -392,11 +393,6 @@
               "date": "2026-11-22T19:00:00.000Z"
             },
             {
-              "label": "A13 Sargans -> St. Margrethen tra Svincolo autostradale Sennwald E Svincolo autostradale Oberriet Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-11-26T12:36:00.000Z"
-            },
-            {
               "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Oberriet E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Causa: veicoli di manutenzione lenti…",
               "value": "Roadworks",
               "detail": "until 8 December 2026",
@@ -419,10 +415,16 @@
               "value": "Roadworks",
               "detail": "until 29 November 2026",
               "date": "2026-10-01T22:00:00.000Z"
+            },
+            {
+              "label": "A3 Zürich <-> Chur tra Svincolo autostradale Sargans E Svincolo autostradale Flums Situazione: problemi di traffico cantiere Aggiunta 1: limite temporaneo altezza Altezza veicolo [m] 4.5",
+              "value": "Roadworks",
+              "detail": "until 30 December 2027",
+              "date": "2026-11-02T11:41:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-26T13:22:01.562Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -460,7 +462,7 @@
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/regierung-korrigiert-die-motorfahrzeugsteuer.html"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -547,7 +549,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-27T06:43:55.311Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "de": {
       "canton": "SG",
@@ -563,12 +565,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "3",
-          "note": "Meldungen vom 26. November 2026"
+          "note": "Meldungen vom 27. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "8",
-          "note": "Meldungen vom 26. November 2026"
+          "note": "Meldungen vom 27. November 2026"
         }
       ],
       "dataBlocks": [
@@ -654,11 +656,6 @@
               "date": "2026-11-22T19:00:00.000Z"
             },
             {
-              "label": "A13 Sargans -> St. Margrethen zwischen Anschluss Sennwald und Anschluss Oberriet Sachlage: Stau Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-11-26T12:36:00.000Z"
-            },
-            {
               "label": "A13 Sargans <-> St. Margrethen zwischen Anschluss Oberriet und Anschluss Haag Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Ursache: Wanderbaustelle Verkehrsführung: Fahrbahnverengung auf…",
               "value": "Baustelle",
               "detail": "bis 8. Dezember 2026",
@@ -681,10 +678,16 @@
               "value": "Baustelle",
               "detail": "bis 29. November 2026",
               "date": "2026-10-01T22:00:00.000Z"
+            },
+            {
+              "label": "A3 Zürich <-> Chur zwischen Anschluss Sargans und Anschluss Flums Sachlage: Verkehrsbehinderung Baustelle Zusatz 1: vorübergehende Beschränkung der Höhe Fahrzeughöhe [m] 4.5",
+              "value": "Baustelle",
+              "detail": "bis 30. Dezember 2027",
+              "date": "2026-11-02T11:41:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-26T13:22:01.562Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -722,7 +725,7 @@
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/regierung-korrigiert-die-motorfahrzeugsteuer.html"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -809,7 +812,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-27T06:43:55.311Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "fr": {
       "canton": "SG",
@@ -825,12 +828,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "3",
-          "note": "signalements au 26 novembre 2026"
+          "note": "signalements au 27 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "8",
-          "note": "signalements au 26 novembre 2026"
+          "note": "signalements au 27 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -916,11 +919,6 @@
               "date": "2026-11-22T19:00:00.000Z"
             },
             {
-              "label": "A13 Sargans -> St. Margrethen entre Jonction autoroutière Sennwald et Jonction autoroutière Oberriet Situation: bouchon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-11-26T12:36:00.000Z"
-            },
-            {
               "label": "A13 Sargans <-> St. Margrethen entre Jonction autoroutière Oberriet et Jonction autoroutière Haag Situation: trafic perturbé travaux, longueur [km] 2.0 Raison: véhicules de maintenance lents Gestion…",
               "value": "Chantier",
               "detail": "jusqu’au 8 décembre 2026",
@@ -943,10 +941,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 29 novembre 2026",
               "date": "2026-10-01T22:00:00.000Z"
+            },
+            {
+              "label": "A3 Zurich <-> Coire entre Jonction autoroutière Sargans et Jonction autoroutière Flums Situation: trafic perturbé travaux Complément 1: limitation temporaire de hauteur hauteur du véhicule [m] 4.5",
+              "value": "Chantier",
+              "detail": "jusqu’au 30 décembre 2027",
+              "date": "2026-11-02T11:41:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-26T13:22:01.562Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -984,7 +988,7 @@
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/regierung-korrigiert-die-motorfahrzeugsteuer.html"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -1072,7 +1076,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-27T06:43:55.311Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     }
   }
 }

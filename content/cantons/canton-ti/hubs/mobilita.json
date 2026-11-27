@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T17:26:42.969Z",
-  "contentHash": "63bd342757113a7d0851aa1fc134c4a8fc647437240fa0b2b02756eb206e24c2",
+  "updatedAt": "2026-11-27T09:50:55.309Z",
+  "contentHash": "f276ce2836410bd2af799a838b5b7508de9d9ac448354902c61f8c357fd58314",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-26T03:50:03.880Z",
+      "updatedAt": "2026-11-27T00:05:50.684Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -38,12 +38,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "9",
-          "note": "segnalazioni aggiornate: 26 novembre 2026"
+          "note": "segnalazioni aggiornate: 27 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "19",
-          "note": "segnalazioni aggiornate: 26 novembre 2026"
+          "note": "segnalazioni aggiornate: 27 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -158,7 +158,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -196,7 +196,7 @@
               "url": "https://www.tilo.ch/avvisi/261026_NSIF-intervalli-cardini-e-ME-70h.html"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -292,7 +292,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "en": {
       "canton": "TI",
@@ -308,12 +308,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "9",
-          "note": "reports as of 26 November 2026"
+          "note": "reports as of 27 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "19",
-          "note": "reports as of 26 November 2026"
+          "note": "reports as of 27 November 2026"
         }
       ],
       "dataBlocks": [
@@ -428,7 +428,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -466,7 +466,7 @@
               "url": "https://www.tilo.ch/avvisi/261026_NSIF-intervalli-cardini-e-ME-70h.html"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -561,7 +561,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "de": {
       "canton": "TI",
@@ -577,12 +577,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "9",
-          "note": "Meldungen vom 26. November 2026"
+          "note": "Meldungen vom 27. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "19",
-          "note": "Meldungen vom 26. November 2026"
+          "note": "Meldungen vom 27. November 2026"
         }
       ],
       "dataBlocks": [
@@ -697,7 +697,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -735,7 +735,7 @@
               "url": "https://www.tilo.ch/avvisi/261026_NSIF-intervalli-cardini-e-ME-70h.html"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -830,7 +830,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "fr": {
       "canton": "TI",
@@ -846,12 +846,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "9",
-          "note": "signalements au 26 novembre 2026"
+          "note": "signalements au 27 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "19",
-          "note": "signalements au 26 novembre 2026"
+          "note": "signalements au 27 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -966,7 +966,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1004,7 +1004,7 @@
               "url": "https://www.tilo.ch/avvisi/261026_NSIF-intervalli-cardini-e-ME-70h.html"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -1100,7 +1100,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     }
   }
 }

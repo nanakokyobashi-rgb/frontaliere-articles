@@ -4,17 +4,17 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T04:41:16.871Z",
-  "contentHash": "35059df40baf6e62e498197211271f78e09a6c54f703f5476de1f8fb1423701a",
+  "updatedAt": "2026-11-27T09:50:55.309Z",
+  "contentHash": "89eee509a076824713efd2f2ca3dc671d7c807498a7f7935c8e96ab2f9223554",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-26T13:22:01.562Z",
+      "updatedAt": "2026-11-27T00:05:50.684Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T15:51:00.529Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "12",
-          "note": "segnalazioni aggiornate: 26 novembre 2026"
+          "note": "segnalazioni aggiornate: 27 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "64",
-          "note": "segnalazioni aggiornate: 26 novembre 2026"
+          "value": "65",
+          "note": "segnalazioni aggiornate: 27 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -90,7 +90,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-26T13:22:01.562Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -128,7 +128,7 @@
               "url": "https://www.bernmobil.ch/de/tram-kleinwabern-und-sanierung-zentrum-wabern-1"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -186,7 +186,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "en": {
       "canton": "BE",
@@ -197,12 +197,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "12",
-          "note": "reports as of 26 November 2026"
+          "note": "reports as of 27 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "64",
-          "note": "reports as of 26 November 2026"
+          "value": "65",
+          "note": "reports as of 27 November 2026"
         }
       ],
       "dataBlocks": [
@@ -259,7 +259,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-26T13:22:01.562Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -297,7 +297,7 @@
               "url": "https://www.bernmobil.ch/de/tram-kleinwabern-und-sanierung-zentrum-wabern-1"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -355,7 +355,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "de": {
       "canton": "BE",
@@ -366,12 +366,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "12",
-          "note": "Meldungen vom 26. November 2026"
+          "note": "Meldungen vom 27. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "64",
-          "note": "Meldungen vom 26. November 2026"
+          "value": "65",
+          "note": "Meldungen vom 27. November 2026"
         }
       ],
       "dataBlocks": [
@@ -428,7 +428,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-26T13:22:01.562Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -466,7 +466,7 @@
               "url": "https://www.bernmobil.ch/de/tram-kleinwabern-und-sanierung-zentrum-wabern-1"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -524,7 +524,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "fr": {
       "canton": "BE",
@@ -535,12 +535,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "12",
-          "note": "signalements au 26 novembre 2026"
+          "note": "signalements au 27 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "64",
-          "note": "signalements au 26 novembre 2026"
+          "value": "65",
+          "note": "signalements au 27 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -597,7 +597,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-26T13:22:01.562Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -635,7 +635,7 @@
               "url": "https://www.bernmobil.ch/de/tram-kleinwabern-und-sanierung-zentrum-wabern-1"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -693,7 +693,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     }
   }
 }

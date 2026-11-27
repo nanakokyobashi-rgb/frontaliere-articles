@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T07:53:46.045Z",
-  "contentHash": "a4e61f9e90d350146b04f183c18d84528ad98ec8ad3a10a6bd9186e790702c3d",
+  "updatedAt": "2026-11-27T09:50:55.309Z",
+  "contentHash": "9b6afdccd258076a55e740107d3bd03279b766d1c8117742a8b880122c17951b",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-26T13:22:01.562Z",
+      "updatedAt": "2026-11-27T00:05:50.684Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T15:51:00.529Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "13",
-          "note": "segnalazioni aggiornate: 26 novembre 2026"
+          "value": "12",
+          "note": "segnalazioni aggiornate: 27 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "4",
-          "note": "segnalazioni aggiornate: 26 novembre 2026"
+          "note": "segnalazioni aggiornate: 27 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-26T13:22:01.562Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +129,7 @@
               "url": "https://www.fr.ch/dime/actualites/bossonnens-la-route-cantonale-de-vevey-reamenagee-pour-ameliorer-la-securite-des-usagers"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -193,7 +193,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-27T07:53:46.045Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "en": {
       "canton": "FR",
@@ -203,13 +203,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "13",
-          "note": "reports as of 26 November 2026"
+          "value": "12",
+          "note": "reports as of 27 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "4",
-          "note": "reports as of 26 November 2026"
+          "note": "reports as of 27 November 2026"
         }
       ],
       "dataBlocks": [
@@ -267,7 +267,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-26T13:22:01.562Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -305,7 +305,7 @@
               "url": "https://www.fr.ch/dime/actualites/bossonnens-la-route-cantonale-de-vevey-reamenagee-pour-ameliorer-la-securite-des-usagers"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -369,7 +369,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-27T07:53:46.045Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "de": {
       "canton": "FR",
@@ -379,13 +379,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "13",
-          "note": "Meldungen vom 26. November 2026"
+          "value": "12",
+          "note": "Meldungen vom 27. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "4",
-          "note": "Meldungen vom 26. November 2026"
+          "note": "Meldungen vom 27. November 2026"
         }
       ],
       "dataBlocks": [
@@ -443,7 +443,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-26T13:22:01.562Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -481,7 +481,7 @@
               "url": "https://www.fr.ch/dime/actualites/bossonnens-la-route-cantonale-de-vevey-reamenagee-pour-ameliorer-la-securite-des-usagers"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -545,7 +545,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-27T07:53:46.045Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "fr": {
       "canton": "FR",
@@ -555,13 +555,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "13",
-          "note": "signalements au 26 novembre 2026"
+          "value": "12",
+          "note": "signalements au 27 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "4",
-          "note": "signalements au 26 novembre 2026"
+          "note": "signalements au 27 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -619,7 +619,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-26T13:22:01.562Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -657,7 +657,7 @@
               "url": "https://www.fr.ch/dime/actualites/bossonnens-la-route-cantonale-de-vevey-reamenagee-pour-ameliorer-la-securite-des-usagers"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -721,7 +721,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-27T07:53:46.045Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     }
   }
 }

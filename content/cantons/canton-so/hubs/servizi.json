@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-11-26T13:02:36.485Z",
-  "contentHash": "4fd6be10aa27ee20531ca0275677d42ee9f241776061a1f51887a02e68a047c1",
+  "updatedAt": "2026-11-27T09:50:55.309Z",
+  "contentHash": "597a4f0c863bebc77b0464e47dd793e57d18269beb572673604a69f60c4f48d5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,22 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-26T03:41:13.403Z",
+      "updatedAt": "2026-11-26T22:27:34.149Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-25T21:43:23.986Z",
+      "updatedAt": "2026-11-26T21:36:19.183Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-27T00:43:53.354Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -86,7 +91,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-11-26T03:41:13.403Z"
+          "updatedAt": "2026-11-26T22:27:34.149Z"
         },
         {
           "id": "aste-targhe",
@@ -117,7 +122,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-26T21:36:19.183Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "0 °C",
+              "detail": "oggi da -1 a 4 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -155,7 +174,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -235,7 +254,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "en": {
       "canton": "SO",
@@ -294,7 +313,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-11-26T03:41:13.403Z"
+          "updatedAt": "2026-11-26T22:27:34.149Z"
         },
         {
           "id": "aste-targhe",
@@ -325,7 +344,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-26T21:36:19.183Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "0 °C",
+              "detail": "today from -1 to 4 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -363,7 +396,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -439,7 +472,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "de": {
       "canton": "SO",
@@ -498,7 +531,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-11-26T03:41:13.403Z"
+          "updatedAt": "2026-11-26T22:27:34.149Z"
         },
         {
           "id": "aste-targhe",
@@ -529,7 +562,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-26T21:36:19.183Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "0 °C",
+              "detail": "heute -1 bis 4 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -567,7 +614,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -643,7 +690,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "fr": {
       "canton": "SO",
@@ -702,7 +749,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-11-26T03:41:13.403Z"
+          "updatedAt": "2026-11-26T22:27:34.149Z"
         },
         {
           "id": "aste-targhe",
@@ -733,7 +780,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-26T21:36:19.183Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "0 °C",
+              "detail": "aujourd’hui de -1 à 4 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-27T00:43:53.354Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -771,7 +832,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -843,7 +904,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     }
   }
 }
