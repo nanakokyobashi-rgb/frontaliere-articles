@@ -93,6 +93,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.spazi-scolastici-wurzenbach.title': 'Würzenbach: new school spaces and a sports hall under consideration',
     'blog.article.spazi-scolastici-wurzenbach.excerpt': 'Lucerne: insufficient space in Würzenbach and Büttenen; expansions and a triple sports hall under consideration, construction work possible from 2031.',
     'blog.article.spazi-scolastici-wurzenbach.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.esperimento-viario-lucerna-centro.title': 'Road experiment in central Lucerne from December 2026',
+    'blog.article.esperimento-viario-lucerna-centro.excerpt': 'The first stage of the road experiment in central Lucerne begins in mid-December 2026, with the announcement on November 27, 2026.',
+    'blog.article.esperimento-viario-lucerna-centro.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;

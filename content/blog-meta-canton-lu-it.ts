@@ -93,6 +93,9 @@ const blogMetaCantonLuIt: Record<string, string> = {
     'blog.article.spazi-scolastici-wurzenbach.title': 'Würzenbach: nuovi spazi scolastici e palestra allo studio',
     'blog.article.spazi-scolastici-wurzenbach.excerpt': 'Lucerna: spazi insufficienti a Würzenbach e Büttenen; ampliamenti e palestra tripla allo studio, lavori possibili dal 2031.',
     'blog.article.spazi-scolastici-wurzenbach.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.esperimento-viario-lucerna-centro.title': 'Esperimento viario nel centro di Lucerna dal dicembre 2026',
+    'blog.article.esperimento-viario-lucerna-centro.excerpt': 'La prima tappa dell\'esperimento viario nel centro di Lucerna parte a metà dicembre 2026, con l\'annuncio del 27 novembre 2026.',
+    'blog.article.esperimento-viario-lucerna-centro.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonLuIt;

@@ -93,6 +93,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.spazi-scolastici-wurzenbach.title': 'Würzenbach : nouveaux espaces scolaires et salle de sport à l’étude',
     'blog.article.spazi-scolastici-wurzenbach.excerpt': 'Lucerne : espaces insuffisants à Würzenbach et Büttenen ; agrandissements et triple salle de sport à l’étude, travaux possibles à partir de 2031.',
     'blog.article.spazi-scolastici-wurzenbach.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.esperimento-viario-lucerna-centro.title': 'Expérience de circulation dans le centre de Lucerne à partir de décembre 2026',
+    'blog.article.esperimento-viario-lucerna-centro.excerpt': 'La première étape de l’expérience de circulation dans le centre de Lucerne commence à la mi-décembre 2026, avec l’annonce du 27 novembre 2026.',
+    'blog.article.esperimento-viario-lucerna-centro.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonLuFr;
