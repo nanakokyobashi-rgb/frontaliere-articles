@@ -8750,6 +8750,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.uri-targhe-collaudo-auto.title': 'Uri: Kennzeichen und Zulassung, Prüfintervalle',
     'blog.article.uri-targhe-collaudo-auto.excerpt': 'Bei Autos findet die erste Prüfung fünf Jahre nach der ersten Inverkehrsetzung statt, danach in der Regel nach drei und zwei Jahren.',
     'blog.article.uri-targhe-collaudo-auto.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.salario-minimo-svitto-regole.title': 'Mindestlohn in Schwyz: kein eidgenössischer Mindestlohn und kantonale Regelungen',
+    'blog.article.salario-minimo-svitto-regole.excerpt': 'Die Schweiz hat keinen eidgenössischen Mindestlohn, aber einige Kantone haben einen eigenen; für Schwyz ist nichts bestätigt.',
+    'blog.article.salario-minimo-svitto-regole.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

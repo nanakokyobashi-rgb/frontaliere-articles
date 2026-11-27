@@ -110636,6 +110636,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-salario-minimo-svitto-regole': {
+    title: 'Salario minimo in Svitto: assenza federale e regole cantonali',
+    description: 'La Svizzera non ha salario minimo federale; alcuni Cantoni ne hanno uno proprio. Non sono disponibili dati specifici per Svitto.',
+    keywords: 'frontalieri, ticino, svizzera, italia, salario, minimo, svitto, assenza',
+    ogTitle: 'Salario minimo Svitto: assenza federale e regole cantonali',
+    ogDescription: 'La Svizzera non prevede un salario minimo federale, ma alcuni Cantoni hanno una propria disciplina. Non ci sono informazioni documentate su un minimo specifico per il Cantone di Svitto.',
+    canonicalPath: '/articoli-svizzera/salario-minimo-svitto-regole/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salario minimo in Svitto: assenza federale e regole cantonali",
+      "description": "La Svizzera non ha salario minimo federale; alcuni Cantoni ne hanno uno proprio. Non sono disponibili dati specifici per Svitto.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-salario-minimo-svitto-regole.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-27T09:47:50+00:00",
+      "dateModified": "2026-11-27T09:47:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/salario-minimo-svitto-regole/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -6528,6 +6528,90 @@
       "firstSeenAt": "2026-11-27T08:47:15.723Z",
       "lastValidatedAt": "2026-11-27T08:47:15.723Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "collaudo veicoli canton Uri convocazione e requisiti",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T09:37:16.290Z",
+      "lastValidatedAt": "2026-11-27T09:37:16.290Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "licenza esercizio pubblico canton Uri requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T09:39:04.910Z",
+      "lastValidatedAt": "2026-11-27T09:39:04.910Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "tasse universitarie canton Uri guida a iscrizione e contributi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T09:39:35.531Z",
+      "lastValidatedAt": "2026-11-27T09:39:35.531Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "integrazione e corsi di lingua canton Uri contributi e requisiti",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T09:40:06.333Z",
+      "lastValidatedAt": "2026-11-27T09:40:06.333Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "imposte cantonali canton Svitto aliquote e deduzioni",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-27T09:40:06.489Z",
+      "lastValidatedAt": "2026-11-27T09:40:06.489Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "premi cassa malati canton Svitto e riduzione premi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-27T09:41:53.779Z",
+      "lastValidatedAt": "2026-11-27T09:41:53.779Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "permesso di dimora B canton Svitto requisiti e rinnovo",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-27T09:41:53.938Z",
+      "lastValidatedAt": "2026-11-27T09:41:53.938Z",
+      "expiresAt": null
     }
   ],
   "strikes": [

@@ -8750,6 +8750,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.uri-targhe-collaudo-auto.title': 'Uri : plaques et immatriculation, intervalles du contrôle technique',
     'blog.article.uri-targhe-collaudo-auto.excerpt': 'Pour les voitures, premier contrôle technique cinq ans après la première mise en circulation, puis généralement après trois ans et deux ans.',
     'blog.article.uri-targhe-collaudo-auto.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.salario-minimo-svitto-regole.title': 'Salaire minimum à Schwytz : absence fédérale et règles cantonales',
+    'blog.article.salario-minimo-svitto-regole.excerpt': 'La Suisse n’a pas de salaire minimum fédéral, mais certains cantons en ont un qui leur est propre ; rien n’est confirmé pour Schwytz.',
+    'blog.article.salario-minimo-svitto-regole.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaChFr;

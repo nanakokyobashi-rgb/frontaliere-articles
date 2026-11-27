@@ -30393,6 +30393,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'salario-minimo-svitto-regole',
+    category: 'fiscale',
+    date: '2026-11-27T09:47:49.947Z',
+    image: '/images/blog/article-salario-minimo-svitto-regole.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['SZ'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

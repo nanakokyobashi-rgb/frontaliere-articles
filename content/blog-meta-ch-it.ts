@@ -8750,6 +8750,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.uri-targhe-collaudo-auto.title': 'Uri: targhe e immatricolazione, intervalli del collaudo',
     'blog.article.uri-targhe-collaudo-auto.excerpt': 'Per le auto, primo collaudo dopo cinque anni dalla prima messa in circolazione, poi in genere dopo tre e due.',
     'blog.article.uri-targhe-collaudo-auto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.salario-minimo-svitto-regole.title': 'Salario minimo in Svitto: assenza federale e regole cantonali',
+    'blog.article.salario-minimo-svitto-regole.excerpt': 'La Svizzera non ha un salario minimo federale, ma alcuni Cantoni ne hanno uno proprio; non è confermato nulla per Svitto.',
+    'blog.article.salario-minimo-svitto-regole.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;
