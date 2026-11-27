@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T10:58:44.432Z",
-  "contentHash": "35c7ccefca29e17308d888917fda72fbc05d98bf1204c23c3cb8b0e912001232",
+  "updatedAt": "2026-11-27T14:54:45.873Z",
+  "contentHash": "6745607dd69f43e3300644bad2db91abbbf5c6967aba57a05ed2d515fd5380f9",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-25T23:59:59.000Z",
+      "updatedAt": "2026-11-26T23:59:59.000Z",
       "keyFacts": 1
     },
     {
@@ -33,7 +33,7 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Biegno-Indemini, settimana conclusa: 25 novembre 2026"
+          "note": "Biegno-Indemini, settimana conclusa: 26 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
@@ -50,7 +50,7 @@
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 19 novembre 2026 – 25 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 20 novembre 2026 – 26 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Biegno-Indemini",
@@ -103,7 +103,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-25T23:59:59.000Z"
+          "updatedAt": "2026-11-26T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -292,7 +292,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-27T10:58:44.432Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "en": {
       "canton": "TI",
@@ -303,7 +303,7 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Biegno-Indemini, week ending 25 November 2026"
+          "note": "Biegno-Indemini, week ending 26 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
@@ -320,7 +320,7 @@
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 19 November 2026 to 25 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 20 November 2026 to 26 November 2026, fastest first.",
           "items": [
             {
               "label": "Biegno-Indemini",
@@ -373,7 +373,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-25T23:59:59.000Z"
+          "updatedAt": "2026-11-26T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -561,7 +561,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-27T10:58:44.432Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "de": {
       "canton": "TI",
@@ -572,7 +572,7 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Biegno-Indemini, Woche bis 25. November 2026"
+          "note": "Biegno-Indemini, Woche bis 26. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
@@ -589,7 +589,7 @@
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 19. November 2026 bis 25. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 20. November 2026 bis 26. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Biegno-Indemini",
@@ -642,7 +642,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-25T23:59:59.000Z"
+          "updatedAt": "2026-11-26T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -830,7 +830,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-27T10:58:44.432Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "fr": {
       "canton": "TI",
@@ -841,7 +841,7 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Biegno-Indemini, semaine jusqu’au 25 novembre 2026"
+          "note": "Biegno-Indemini, semaine jusqu’au 26 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
@@ -858,7 +858,7 @@
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 19 novembre 2026 au 25 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 20 novembre 2026 au 26 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Biegno-Indemini",
@@ -911,7 +911,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-25T23:59:59.000Z"
+          "updatedAt": "2026-11-26T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -1100,7 +1100,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-27T10:58:44.432Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     }
   }
 }
