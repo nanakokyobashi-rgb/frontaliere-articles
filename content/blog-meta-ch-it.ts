@@ -8753,6 +8753,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.salario-minimo-svitto-regole.title': 'Salario minimo in Svitto: assenza federale e regole cantonali',
     'blog.article.salario-minimo-svitto-regole.excerpt': 'La Svizzera non ha un salario minimo federale, ma alcuni Cantoni ne hanno uno proprio; non è confermato nulla per Svitto.',
     'blog.article.salario-minimo-svitto-regole.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.assistenza-sociale-svitto-criterio-bisogno.title': 'Assistenza sociale Svitto: amministrazione e criterio di bisogno',
+    'blog.article.assistenza-sociale-svitto-criterio-bisogno.excerpt': 'L\'assistenza sociale è generalmente amministrata dai Cantoni e dai comuni in Svizzera, basandosi sul criterio del bisogno.',
+    'blog.article.assistenza-sociale-svitto-criterio-bisogno.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

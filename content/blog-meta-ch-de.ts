@@ -8753,6 +8753,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.salario-minimo-svitto-regole.title': 'Mindestlohn in Schwyz: kein eidgenössischer Mindestlohn und kantonale Regelungen',
     'blog.article.salario-minimo-svitto-regole.excerpt': 'Die Schweiz hat keinen eidgenössischen Mindestlohn, aber einige Kantone haben einen eigenen; für Schwyz ist nichts bestätigt.',
     'blog.article.salario-minimo-svitto-regole.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.assistenza-sociale-svitto-criterio-bisogno.title': 'Sozialhilfe Schwyz: Verwaltung und Bedürftigkeitskriterium',
+    'blog.article.assistenza-sociale-svitto-criterio-bisogno.excerpt': 'Die Sozialhilfe wird in der Schweiz in der Regel von den Kantonen und Gemeinden nach dem Bedürftigkeitsprinzip verwaltet.',
+    'blog.article.assistenza-sociale-svitto-criterio-bisogno.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

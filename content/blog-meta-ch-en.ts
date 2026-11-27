@@ -8753,6 +8753,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.salario-minimo-svitto-regole.title': 'Minimum wage in Schwyz: no federal minimum and cantonal rules',
     'blog.article.salario-minimo-svitto-regole.excerpt': 'Switzerland has no federal minimum wage, but some cantons have their own; nothing is confirmed for Schwyz.',
     'blog.article.salario-minimo-svitto-regole.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.assistenza-sociale-svitto-criterio-bisogno.title': 'Social assistance in Schwyz: administration and the needs-based criterion',
+    'blog.article.assistenza-sociale-svitto-criterio-bisogno.excerpt': 'Social assistance is generally administered by the cantons and municipalities in Switzerland, based on the criterion of need.',
+    'blog.article.assistenza-sociale-svitto-criterio-bisogno.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

@@ -8753,6 +8753,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.salario-minimo-svitto-regole.title': 'Salaire minimum à Schwytz : absence fédérale et règles cantonales',
     'blog.article.salario-minimo-svitto-regole.excerpt': 'La Suisse n’a pas de salaire minimum fédéral, mais certains cantons en ont un qui leur est propre ; rien n’est confirmé pour Schwytz.',
     'blog.article.salario-minimo-svitto-regole.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.assistenza-sociale-svitto-criterio-bisogno.title': 'Assistance sociale de Schwytz : administration et critère de besoin',
+    'blog.article.assistenza-sociale-svitto-criterio-bisogno.excerpt': 'En Suisse, l’aide sociale est généralement gérée par les cantons et les communes, sur la base du critère du besoin.',
+    'blog.article.assistenza-sociale-svitto-criterio-bisogno.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaChFr;

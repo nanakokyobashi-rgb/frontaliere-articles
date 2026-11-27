@@ -2940,6 +2940,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'rimborso-imposta-secondo-pilastro-svizzero': { it: 'rimborso-imposta-secondo-pilastro-svizzero', en: 'swiss-second-pillar-tax-refund', de: 'rimborso-steuer-zweiter-saule-schweiz', fr: 'remboursement-impot-deuxieme-pilier-suisse' },
  'uri-targhe-collaudo-auto': { it: 'uri-targhe-collaudo-auto', en: 'uri-vehicle-registration-inspection', de: 'uri-kontrollschilder-zulassung-pruefung', fr: 'uri-plaques-immatriculation-controle' },
  'salario-minimo-svitto-regole': { it: 'salario-minimo-svitto-regole', en: 'schwyz-minimum-wage-rules', de: 'schwyz-mindestlohn-regeln', fr: 'schwytz-salaire-minimum-regles' },
+ 'assistenza-sociale-svitto-criterio-bisogno': { it: 'assistenza-sociale-svitto-criterio-bisogno', en: 'schwyz-social-assistance-need-criterion', de: 'schwyz-sozialhilfe-bedarfsprinzip', fr: 'aide-sociale-schwytz-critere-besoin' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
