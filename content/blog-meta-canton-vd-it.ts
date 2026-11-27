@@ -102,6 +102,9 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.lausanne-luci-foranee.title': 'Losanna: luci spente dalle 1 alle 5 da dicembre 2026',
     'blog.article.lausanne-luci-foranee.excerpt': 'Test di un anno e raccolta dei pareri in primavera. Spegnimento dalle 1 alle 5 da dicembre 2026.',
     'blog.article.lausanne-luci-foranee.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.ehnv-riorganizzazione-chiusura-chamblon.title': 'eHnv conclude riorganizzazione, chiude Chamblon il 29 ottobre 2026',
+    'blog.article.ehnv-riorganizzazione-chiusura-chamblon.excerpt': 'Gli eHnv passano da quattro sedi a tre. 116 letti sono stati trasferiti tra le sedi ospedaliere.',
+    'blog.article.ehnv-riorganizzazione-chiusura-chamblon.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVdIt;
