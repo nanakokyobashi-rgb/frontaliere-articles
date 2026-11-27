@@ -6516,6 +6516,18 @@
       "firstSeenAt": "2026-11-27T06:15:18.178Z",
       "lastValidatedAt": "2026-11-27T06:15:18.178Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "targhe e immatricolazione canton Uri guida a procedura e costi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T08:47:15.723Z",
+      "lastValidatedAt": "2026-11-27T08:47:15.723Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
