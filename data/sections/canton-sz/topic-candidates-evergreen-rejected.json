@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sz::https://www.bote.ch/nachrichten/schwyz/35000-zusaetzliche-steuererklaerungen-im-kanton-art-1733692": {
-      "section": "canton-sz",
-      "ts": 1795514910611
-    },
     "canton-sz::https://www.bote.ch/nachrichten/schwyz/bezirksgemeinde-im-eilzugstempo-steuerfuss-bleibt-wie-er-ist-art-1734000": {
       "section": "canton-sz",
       "ts": 1795624579395
@@ -39,6 +35,14 @@
     "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/realp-steuerfuss-bleibt-trotz-defizit-fuer-2027-unveraendert-art-1734151": {
       "section": "canton-sz",
       "ts": 1795646292476
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/schwyz/die-finanzielle-lage-in-arth-bleibt-angespannt-art-1734119": {
+      "section": "canton-sz",
+      "ts": 1795753694777
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/schwyz/13000-millionaere-hier-sprudelt-das-geld-im-kanton-schwyz-am-meisten-art-1734355": {
+      "section": "canton-sz",
+      "ts": 1795753740604
     }
   }
 }
