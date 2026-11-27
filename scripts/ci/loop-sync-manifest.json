@@ -5131,9 +5131,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-21.yml",
       "mode": "identical",
       "baseline": {
-        "site": "2fa235e94cd6e536",
-        "corpus": "2fa235e94cd6e536",
-        "alignedAt": "2026-11-21"
+        "site": "2a280babc43e10e1",
+        "corpus": "2a280babc43e10e1",
+        "alignedAt": "2026-11-27"
       }
     },
     {
@@ -5161,9 +5161,9 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "2e6f84fb78406cfb",
-        "corpus": "2e6f84fb78406cfb",
-        "alignedAt": "2026-11-25"
+        "site": "0e5346a9a2c7f5a5",
+        "corpus": "0e5346a9a2c7f5a5",
+        "alignedAt": "2026-11-27"
       }
     },
     {
@@ -5173,9 +5173,9 @@
       "remoteDigestRequired": true,
       "reason": "La baseline registra lo stesso digest SHA-256 raw sui due lati; `remoteDigestRequired` rende il confronto remoto una precondizione fail-closed prima di accettare o riattestare la baseline e prima del trasporto.",
       "baseline": {
-        "site": "3b36e80ef0a6db31",
-        "corpus": "3b36e80ef0a6db31",
-        "alignedAt": "2026-11-26"
+        "site": "0a5e2473251a8dbe",
+        "corpus": "0a5e2473251a8dbe",
+        "alignedAt": "2026-11-27"
       }
     },
     {
@@ -5284,7 +5284,7 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, non riclassifica come pending una run workflow-level ancora `in_progress` quando il job `translate` e' gia' terminale e resta attivo solo il recovery/post-processing, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica, legge le risposte JSON solo da stream bounded o da fallback con lunghezza dichiarata ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "89a6124ad2eb5d1c",
+        "corpus": "6dbbd1346e133567",
         "alignedAt": "2026-10-23"
       }
     },
