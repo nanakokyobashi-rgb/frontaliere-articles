@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T01:58:59.946Z",
-  "contentHash": "23e54e10743d79df32cfc78474252d9fa3ff0e06853d0b64b6a2212f8d88b8ff",
+  "updatedAt": "2026-11-27T07:48:33.256Z",
+  "contentHash": "1c3aea7b4961c7eb0f804c31790bd65e6e3b3a7f99b7d84ce63ee2bae5cfddb4",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "15",
+          "value": "13",
           "note": "segnalazioni aggiornate: 26 novembre 2026"
         },
         {
@@ -73,12 +73,6 @@
               "date": "2026-10-26T06:00:00.000Z"
             },
             {
-              "label": "Route de la Molière, Estavayer-le-Lac in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
-              "value": "Chiusura",
-              "detail": "fine prevista: 27 novembre 2026",
-              "date": "2026-10-26T06:35:00.000Z"
-            },
-            {
               "label": "Route de Chesau, Bossonnens in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
               "value": "Chiusura",
               "detail": "fine prevista: 23 dicembre 2026",
@@ -89,6 +83,11 @@
               "value": "Chiusura",
               "detail": "fine prevista: 4 dicembre 2026",
               "date": "2026-11-04T13:34:00.000Z"
+            },
+            {
+              "label": "Le Châtelard <-> Lac d'Emmoson tra Luogo Le Châtelard E Luogo Emosson Situazione: chiusa Causa: chiusura invernale",
+              "value": "Chiusura",
+              "date": "2026-11-06T06:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -194,7 +193,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-27T01:58:59.946Z"
+      "updatedAt": "2026-11-27T07:48:33.256Z"
     },
     "en": {
       "canton": "FR",
@@ -204,7 +203,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "15",
+          "value": "13",
           "note": "reports as of 26 November 2026"
         },
         {
@@ -250,12 +249,6 @@
               "date": "2026-10-26T06:00:00.000Z"
             },
             {
-              "label": "Route de la Molière, Estavayer-le-Lac in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
-              "value": "Closure",
-              "detail": "until 27 November 2026",
-              "date": "2026-10-26T06:35:00.000Z"
-            },
-            {
               "label": "Route de Chesau, Bossonnens in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
               "value": "Closure",
               "detail": "until 23 December 2026",
@@ -266,6 +259,11 @@
               "value": "Closure",
               "detail": "until 4 December 2026",
               "date": "2026-11-04T13:34:00.000Z"
+            },
+            {
+              "label": "Le Châtelard <-> Lac d'Emmoson tra Luogo Le Châtelard E Luogo Emosson Situazione: chiusa Causa: chiusura invernale",
+              "value": "Closure",
+              "date": "2026-11-06T06:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -371,7 +369,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-27T01:58:59.946Z"
+      "updatedAt": "2026-11-27T07:48:33.256Z"
     },
     "de": {
       "canton": "FR",
@@ -381,7 +379,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "15",
+          "value": "13",
           "note": "Meldungen vom 26. November 2026"
         },
         {
@@ -427,12 +425,6 @@
               "date": "2026-10-26T06:00:00.000Z"
             },
             {
-              "label": "Route de la Molière, Estavayer-le-Lac in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
-              "value": "Sperrung",
-              "detail": "bis 27. November 2026",
-              "date": "2026-10-26T06:35:00.000Z"
-            },
-            {
               "label": "Route de Chesau, Bossonnens in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
               "value": "Sperrung",
               "detail": "bis 23. Dezember 2026",
@@ -443,6 +435,11 @@
               "value": "Sperrung",
               "detail": "bis 4. Dezember 2026",
               "date": "2026-11-04T13:34:00.000Z"
+            },
+            {
+              "label": "Le Châtelard <-> Lac d'Emmoson zwischen Ortschaft Le Châtelard und Ortschaft Emosson Sachlage: Strecke gesperrt Ursache: Wintersperre",
+              "value": "Sperrung",
+              "date": "2026-11-06T06:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -548,7 +545,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-27T01:58:59.946Z"
+      "updatedAt": "2026-11-27T07:48:33.256Z"
     },
     "fr": {
       "canton": "FR",
@@ -558,7 +555,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "15",
+          "value": "13",
           "note": "signalements au 26 novembre 2026"
         },
         {
@@ -604,12 +601,6 @@
               "date": "2026-10-26T06:00:00.000Z"
             },
             {
-              "label": "Route de la Molière, Estavayer-le-Lac dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
-              "value": "Fermeture",
-              "detail": "jusqu’au 27 novembre 2026",
-              "date": "2026-10-26T06:35:00.000Z"
-            },
-            {
               "label": "Route de Chesau, Bossonnens dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
               "value": "Fermeture",
               "detail": "jusqu’au 23 décembre 2026",
@@ -620,6 +611,11 @@
               "value": "Fermeture",
               "detail": "jusqu’au 4 décembre 2026",
               "date": "2026-11-04T13:34:00.000Z"
+            },
+            {
+              "label": "Le Châtelard <-> Lac d'Emmoson entre Localité Le Châtelard et Localité Emosson Situation: fermé Raison: fermeture hivernale",
+              "value": "Fermeture",
+              "date": "2026-11-06T06:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -725,7 +721,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-27T01:58:59.946Z"
+      "updatedAt": "2026-11-27T07:48:33.256Z"
     }
   }
 }
