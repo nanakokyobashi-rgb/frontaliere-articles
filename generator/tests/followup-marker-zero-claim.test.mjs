@@ -331,6 +331,63 @@ test('il marker reale senza bucket nuovo ma con residui gia\' tracciati e\' uno 
   assert.equal(triageMarkerPersistenceExpectation(english).explicitZero, true);
 });
 
+test('una negazione del claim item conserva lo zero esplicito (#2299)', () => {
+  const observed = [
+    '## Post-merge follow-up triage: zero outstanding items.',
+    '',
+    '- Dropped: il residuo dei mapping richiamato da #17974 è in-flight in PR #3950 perché il file di manifest necessario è già modificato da una PR aperta; non viene creato un item concorrente.',
+  ].join('\n');
+  const variants = [
+    observed,
+    [
+      '## Post-merge follow-up triage',
+      '## Post-merge follow-up triage: zero outstanding items.',
+      '- DROPPED: non è stato creato un item concorrente.',
+    ].join('\n'),
+    [
+      '## Post-merge follow-up triage: zero outstanding items.',
+      '- Dropped: non e’ stato creato un item concorrente.',
+    ].join('\n'),
+    [
+      '## Post-merge follow-up triage: zero outstanding items.',
+      '- Dropped: no competing item was created for this PR.',
+    ].join('\n'),
+  ];
+
+  for (const marker of [...variants, observed.replace(/\n/g, '\\n')]) {
+    const expectation = triageMarkerPersistenceExpectation(marker);
+    let reads = 0;
+    assert.deepEqual(expectation.items, [], marker);
+    assert.deepEqual(expectation.buckets, [], marker);
+    assert.equal(expectation.explicitZero, true, marker);
+    assert.equal(expectation.requiresBucket, false, marker);
+    assert.equal(verifyTriageMarkerPersistence(marker, 3975, () => { reads += 1; return null; }), true, marker);
+    assert.equal(reads, 0, 'uno zero esplicito senza bucket non deve fare letture REST');
+  }
+
+  const droppedItem = [
+    '## Post-merge follow-up triage: zero outstanding items.',
+    '- FU-2026-11-21-001 — no-acceptance-condition: non viene creato un item concorrente.',
+  ].join('\n');
+  const droppedExpectation = triageMarkerPersistenceExpectation(droppedItem);
+  assert.deepEqual(droppedExpectation.items, []);
+  assert.equal(droppedExpectation.explicitZero, true);
+  assert.equal(droppedExpectation.requiresBucket, false);
+});
+
+test('un claim item positivo nella stessa riga resta fail-closed anche con una negazione (#2299)', () => {
+  for (const line of [
+    '- Non viene creato un item concorrente, ma viene creato un item distinto.',
+    '- No competing item was created and a different item was added.',
+  ]) {
+    const marker = `## Post-merge follow-up triage: zero outstanding items.\n${line}`;
+    const expectation = triageMarkerPersistenceExpectation(marker);
+    assert.equal(expectation.explicitZero, false, marker);
+    assert.equal(expectation.requiresBucket, true, marker);
+    assert.notEqual(verifyTriageMarkerPersistence(marker, 3975, () => null), true, marker);
+  }
+});
+
 test('un nuovo bucket assente da solo non prova che non siano stati aggiunti item (#2299)', () => {
   for (const marker of [
     [
