@@ -337,4 +337,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'esperimento-viario-lucerna-centro',
+ category: 'novita',
+ date: '2026-11-27T20:44:43.180Z',
+ image: '/images/blog/article-esperimento-viario-lucerna-centro.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['LU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -1177,6 +1177,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-esperimento-viario-lucerna-centro': {
+    title: 'Esperimento viario nel centro di Lucerna dal dicembre 2026',
+    description: 'Il Cantone di Lucerna avvia un esperimento viario nel centro cittadino a metà dicembre 2026. Consultazione prevista per la primavera 2027.',
+    keywords: 'frontalieri, ticino, svizzera, italia, esperimento, viario, centro, lucerna',
+    ogTitle: 'Esperimento viario centro Lucerna inizio dicembre 2026',
+    ogDescription: 'Il Cantone di Lucerna avvia un esperimento viario nel centro cittadino a metà dicembre 2026. Gli interventi inizieranno con la prima tappa e la popolazione potrà esprimersi nella primavera 2027.',
+    canonicalPath: '/articoli-lucerna/esperimento-viario-lucerna-centro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Esperimento viario nel centro di Lucerna dal dicembre 2026",
+      "description": "Il Cantone di Lucerna avvia un esperimento viario nel centro cittadino a metà dicembre 2026. Consultazione prevista per la primavera 2027.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-esperimento-viario-lucerna-centro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-27T20:44:43+00:00",
+      "dateModified": "2026-11-27T20:44:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/esperimento-viario-lucerna-centro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

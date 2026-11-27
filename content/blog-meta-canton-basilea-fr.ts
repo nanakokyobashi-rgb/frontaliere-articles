@@ -75,6 +75,9 @@ const blogMetaCantonBasileaFr: Record<string, string> = {
     'blog.article.camion-urta-a2-basilea.title': 'Camion percute la glissière sur l’A2 à Bâle : bouchon',
     'blog.article.camion-urta-a2-basilea.excerpt': 'Mercredi matin, vers 8.45, un camion avec une plaque d\'immatriculation polonaise a percuté la barrière de sécurité dans la zone de la sortie de Wettsteinallee, à Bâle.',
     'blog.article.camion-urta-a2-basilea.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.cyberattacco-basilea-campagna.title': 'Cyberattaque dans le canton de Bâle-Campagne : serveurs isolés',
+    'blog.article.cyberattacco-basilea-campagna.excerpt': 'Le canton signale des attaques informatiques contre son infrastructure informatique depuis dimanche : certains serveurs sont isolés et des perturbations affectent les applications numériques cantonales.',
+    'blog.article.cyberattacco-basilea-campagna.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBasileaFr;

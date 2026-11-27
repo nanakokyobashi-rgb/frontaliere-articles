@@ -90,6 +90,9 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.priorita-traffico-cinque-tratti.title': 'Priority for commercial traffic on five new sections in Bern',
     'blog.article.priorita-traffico-cinque-tratti.excerpt': 'The decision of the Gemeinderat of November 26, 2026 opens five new sections in 2027, following a positive pilot launched on June 1, 2025.',
     'blog.article.priorita-traffico-cinque-tratti.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.risposta-petizione-fisioterapia-berna.title': 'Bern Government takes note of physiotherapy petition',
+    'blog.article.risposta-petizione-fisioterapia-berna.excerpt': 'The Government of the Canton of Bern has taken note of the petition “For guaranteed physiotherapy close to home in the Canton of Bern,” considering its requests in the ongoing tariff procedures.',
+    'blog.article.risposta-petizione-fisioterapia-berna.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBeEn;

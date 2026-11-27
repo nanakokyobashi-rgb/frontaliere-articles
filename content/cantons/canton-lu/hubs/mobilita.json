@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T18:19:07.194Z",
-  "contentHash": "51762447f4e2ae6231ce9c3fd9c20d93e918ee64a7d016c41ecb20cf4fea4b44",
+  "updatedAt": "2026-11-27T20:47:55.924Z",
+  "contentHash": "944e79a9e6acaba472eca68706caff926333472a0882714fd7d33949f9c2698d",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -132,6 +132,12 @@
           "date": "2026-11-07T09:26:29.750Z"
         },
         {
+          "title": "Esperimento viario nel centro di Lucerna dal dicembre 2026",
+          "url": "/articoli-lucerna/esperimento-viario-lucerna-centro/",
+          "excerpt": "La prima tappa dell'esperimento viario nel centro di Lucerna parte a metà dicembre 2026, con l'annuncio del 27 novembre 2026.",
+          "date": "2026-11-27T20:44:43.180Z"
+        },
+        {
           "title": "Tunnel Sonnenberg chiuso per ispezione strutturale",
           "url": "/articoli-lucerna/tunnel-sonnenberg-chiusura-notte/",
           "excerpt": "Chiusura completa del tunnel Sonnenberg in entrambe le direzioni dalla notte tra il 4 e il 5 novembre 2026, dalle 22.00 alle 05.00.",
@@ -160,12 +166,6 @@
           "url": "/articoli-frontaliere/lugano-lucerna-partita-traffico/",
           "excerpt": "Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo.",
           "date": "2026-10-08T11:18:04.293Z"
-        },
-        {
-          "title": "Sistema scolastico cantonale di Lucerna: iscrizione e cicli",
-          "url": "/articoli-svizzera/sistema-scolastico-canton-lucerna-iscrizione-e-cicli/",
-          "excerpt": "Informati sui cicli di scuola, età di iscrizione e calendario scolastico per il Cantone di Lucerna.",
-          "date": "2026-08-14T02:37:30.479Z"
         }
       ],
       "latestCantonArticles": [],
@@ -179,7 +179,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-27T18:19:07.194Z"
+      "updatedAt": "2026-11-27T20:47:55.924Z"
     },
     "en": {
       "canton": "LU",
@@ -294,6 +294,12 @@
           "date": "2026-11-07T09:26:29.750Z"
         },
         {
+          "title": "Road experiment in central Lucerne from December 2026",
+          "url": "/en/lucerne-articles/lucerne-city-traffic-experiment/",
+          "excerpt": "The first stage of the road experiment in central Lucerne begins in mid-December 2026, with the announcement on November 27, 2026.",
+          "date": "2026-11-27T20:44:43.180Z"
+        },
+        {
           "title": "Sonnenberg Tunnel closed for structural inspection",
           "url": "/en/lucerne-articles/sonnenberg-tunnel-night-closure/",
           "excerpt": "Complete closure of the Sonnenberg tunnel in both directions during the night of November 4–5, 2026, from 22.00 to 05.00.",
@@ -320,12 +326,6 @@
           "title": "Lucerne fans in Lugano: road closures, traffic delays",
           "url": "/en/cross-border-articles/lucerne-fans-in-lugano-road-closures-traffic-delays/",
           "date": "2026-10-08T11:18:04.293Z"
-        },
-        {
-          "title": "Lucerne cantonal school system: enrolment and cycles",
-          "url": "/en/swiss-articles/lucerne-school-system-enrollment-and-cycles/",
-          "excerpt": "Find out about the school cycles, enrolment age and school calendar for the Canton of Lucerne.",
-          "date": "2026-08-14T02:37:30.479Z"
         }
       ],
       "latestCantonArticles": [],
@@ -339,7 +339,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-27T18:19:07.194Z"
+      "updatedAt": "2026-11-27T20:47:55.924Z"
     },
     "de": {
       "canton": "LU",
@@ -454,6 +454,12 @@
           "date": "2026-11-07T09:26:29.750Z"
         },
         {
+          "title": "Verkehrsexperiment im Zentrum von Luzern ab Dezember 2026",
+          "url": "/de/luzern-artikel/verkehrsexperiment-luzern-zentrum/",
+          "excerpt": "Die erste Etappe des Verkehrsexperiments im Zentrum von Luzern beginnt Mitte Dezember 2026, mit der Ankündigung vom 27. November 2026.",
+          "date": "2026-11-27T20:44:43.180Z"
+        },
+        {
           "title": "Tunnel Sonnenberg wegen struktureller Inspektion gesperrt",
           "url": "/de/luzern-artikel/sonnenberg-tunnel-nachtschliessung/",
           "excerpt": "Laut der Quelle wird der Sonnenberg-Tunnel in Luzern in der Nacht von Mittwoch, dem 4. November, auf Donnerstag, den 5. November 2026, in beiden Richtungen vollständig gesperrt.",
@@ -480,12 +486,6 @@
           "title": "Luzern-Fans in Lugano: Straßensperrungen, Verkehrsbehinderungen",
           "url": "/de/grenzgaenger-artikel/luzern-fans-in-lugano-stra-ensperrungen-verkehrsbehinderungen/",
           "date": "2026-10-08T11:18:04.293Z"
-        },
-        {
-          "title": "Kantonales Schulsystem Luzern: Einschreibung und Zyklen",
-          "url": "/de/schweiz-artikel/kantonales-schulsystem-luzern-einschreibung-und-zyklen/",
-          "excerpt": "Informieren Sie sich über die Schulzyklen, das Einschreibealter und den Schulkalender für den Kanton Luzern.",
-          "date": "2026-08-14T02:37:30.479Z"
         }
       ],
       "latestCantonArticles": [],
@@ -499,7 +499,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-27T18:19:07.194Z"
+      "updatedAt": "2026-11-27T20:47:55.924Z"
     },
     "fr": {
       "canton": "LU",
@@ -614,6 +614,12 @@
           "date": "2026-11-07T09:26:29.750Z"
         },
         {
+          "title": "Expérience de circulation dans le centre de Lucerne à partir de décembre 2026",
+          "url": "/fr/articles-lucerne/experimentation-routiere-lucerne-centre/",
+          "excerpt": "La première étape de l’expérience de circulation dans le centre de Lucerne commence à la mi-décembre 2026, avec l’annonce du 27 novembre 2026.",
+          "date": "2026-11-27T20:44:43.180Z"
+        },
+        {
           "title": "Tunnel du Sonnenberg fermé pour inspection structurelle",
           "url": "/fr/articles-lucerne/tunnel-sonnenberg-fermeture-nuit/",
           "excerpt": "Fermeture complète du tunnel du Sonnenberg dans les deux directions dans la nuit du 4 au 5 novembre 2026, de 22.00 à 05.00.",
@@ -642,12 +648,6 @@
           "url": "/fr/articles-frontalier/supporters-de-lucerne-a-lugano-fermetures-de-routes-retards-de-circulation/",
           "excerpt": "Samedi : FC Lugano-FC Lucerne à 18 h à Cornaredo.",
           "date": "2026-10-08T11:18:04.293Z"
-        },
-        {
-          "title": "Système scolaire cantonal de Lucerne : inscription et cycles",
-          "url": "/fr/articles-suisse/systeme-scolaire-canton-lucerne-inscription-et-cycles/",
-          "excerpt": "Renseignez-vous sur les cycles scolaires, l'âge d'inscription et le calendrier scolaire pour le canton de Lucerne.",
-          "date": "2026-08-14T02:37:30.479Z"
         }
       ],
       "latestCantonArticles": [],
@@ -661,7 +661,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-27T18:19:07.194Z"
+      "updatedAt": "2026-11-27T20:47:55.924Z"
     }
   }
 }
