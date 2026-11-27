@@ -488,9 +488,8 @@ async function collectActiveJobStart(client, state, currentRuns) {
       throw new ObservationFailure('liveness_census_inconclusive');
     }
 
-    const activeJobs = jobs.jobs.filter((job) => (
-      job?.name === 'translate' && job?.status === 'in_progress'
-    ));
+    const translateJobs = jobs.jobs.filter((job) => job?.name === 'translate');
+    const activeJobs = translateJobs.filter((job) => job?.status === 'in_progress');
     if (activeJobs.length > 1) {
       throw new ObservationFailure('liveness_census_inconclusive');
     }
@@ -509,12 +508,28 @@ async function collectActiveJobStart(client, state, currentRuns) {
     // mutex: the guard can be running by itself, or `translate` can be queued
     // behind another holder. Demote both shapes to pending so the report keeps
     // the waiting age instead of becoming empty and hiding a stuck queue.
-    const pendingJobs = jobs.jobs.filter((job) => (
-      job?.name === 'translate' && PENDING_STATUSES.has(job?.status)
-    ));
+    const pendingJobs = translateJobs.filter((job) => PENDING_STATUSES.has(job?.status));
     if (pendingJobs.length > 1) {
       throw new ObservationFailure('liveness_census_inconclusive');
     }
+
+    // A workflow can remain `in_progress` after `translate` has reached a
+    // terminal state: the timeout-recovery job and post-steps run in the same
+    // workflow after a failed translate job. That workflow is neither a
+    // holder nor a pending queue entry. Treat an unknown target-job status as
+    // inconclusive instead of silently dropping a real queue signal.
+    if (translateJobs.length > 0 && activeJobs.length === 0 && pendingJobs.length === 0) {
+      if (translateJobs.some((job) => !KNOWN_STATUSES.has(job?.status))) {
+        throw new ObservationFailure('liveness_census_inconclusive');
+      }
+      const activeIndex = state.activeRunIds.indexOf(runId);
+      if (activeIndex >= 0) {
+        state.activeRunIds.splice(activeIndex, 1);
+        state.activeCreatedMs.splice(activeIndex, 1);
+      }
+      continue;
+    }
+
     let waitStartedMs = createdMs;
     if (activeRun.run_attempt > 1) {
       // Un rerun conserva il `created_at` della prima esecuzione: se il job
