@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-nuovo-sistema-stipendi-insegnanti.webp",
-      "sha256": "dc089b672dc5042ad65c16d96c201f1d7cc79f19b005d7d26141096d91949a21"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-nuovo-sistema-stipendi-insegnanti-480w.webp",
-      "sha256": "a9ae3db917e3a9bb6a106a51d5d26dc5c58481b11f8378526c432d3c15a9a2ad"
-    }
-  ]
+  "items": []
 }
