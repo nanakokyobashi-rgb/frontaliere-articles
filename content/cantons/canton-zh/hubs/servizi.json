@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-11-27T18:19:07.194Z",
-  "contentHash": "81fb65d45eed571697db1c41eaea752cce11d11b37bc3b6a647ed5bcaee85611",
+  "updatedAt": "2026-11-27T23:05:38.141Z",
+  "contentHash": "fb8704e817c1477e89c1224564bb4c36c6cbc7a84b292a89846f22db3d1bd76e",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -81,11 +81,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-26T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-11-27T23:00:00.000Z"
             },
             {
@@ -107,6 +102,11 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-12-01T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-12-02T23:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
@@ -260,7 +260,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-27T18:19:07.194Z"
+      "updatedAt": "2026-11-27T23:05:38.141Z"
     },
     "en": {
       "canton": "ZH",
@@ -314,11 +314,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-26T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-11-27T23:00:00.000Z"
             },
             {
@@ -340,6 +335,11 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-12-01T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-12-02T23:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
@@ -489,7 +489,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-27T18:19:07.194Z"
+      "updatedAt": "2026-11-27T23:05:38.141Z"
     },
     "de": {
       "canton": "ZH",
@@ -543,11 +543,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-26T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-11-27T23:00:00.000Z"
             },
             {
@@ -569,6 +564,11 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-12-01T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-12-02T23:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
@@ -718,7 +718,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-27T18:19:07.194Z"
+      "updatedAt": "2026-11-27T23:05:38.141Z"
     },
     "fr": {
       "canton": "ZH",
@@ -772,11 +772,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-11-26T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-11-27T23:00:00.000Z"
             },
             {
@@ -798,6 +793,11 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-12-01T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-12-02T23:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
@@ -943,7 +943,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-27T18:19:07.194Z"
+      "updatedAt": "2026-11-27T23:05:38.141Z"
     }
   }
 }

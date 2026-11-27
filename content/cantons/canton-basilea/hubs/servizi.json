@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "servizi",
-  "updatedAt": "2026-11-27T14:54:45.873Z",
-  "contentHash": "3a4f677b06f9c802ddf698dca6aa4d1ca707135bfd6183c624e1d5f4cfaa8a8a",
+  "updatedAt": "2026-11-27T23:05:38.141Z",
+  "contentHash": "b3d6853bddee4b100d0b26775d006af78ae2af94e326cbb964b1ad4740ee3576",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -19,7 +19,7 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-26T21:36:19.183Z",
+      "updatedAt": "2026-11-27T08:31:31.851Z",
       "keyFacts": 1
     }
   ],
@@ -76,11 +76,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-11-26T23:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-11-27T23:00:00.000Z"
             },
             {
@@ -102,6 +97,11 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-12-01T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-12-02T23:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
@@ -137,7 +137,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-26T21:36:19.183Z"
+          "updatedAt": "2026-11-27T08:31:31.851Z"
         }
       ],
       "curatedArticles": [
@@ -225,7 +225,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-27T23:05:38.141Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -279,11 +279,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-11-26T23:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-11-27T23:00:00.000Z"
             },
             {
@@ -305,6 +300,11 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-12-01T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-12-02T23:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
@@ -340,7 +340,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-26T21:36:19.183Z"
+          "updatedAt": "2026-11-27T08:31:31.851Z"
         }
       ],
       "curatedArticles": [
@@ -420,7 +420,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-27T23:05:38.141Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -474,11 +474,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-11-26T23:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-11-27T23:00:00.000Z"
             },
             {
@@ -500,6 +495,11 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-12-01T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-12-02T23:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
@@ -535,7 +535,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-26T21:36:19.183Z"
+          "updatedAt": "2026-11-27T08:31:31.851Z"
         }
       ],
       "curatedArticles": [
@@ -615,7 +615,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-27T23:05:38.141Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -669,11 +669,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-11-26T23:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-11-27T23:00:00.000Z"
             },
             {
@@ -695,6 +690,11 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-12-01T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-12-02T23:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
@@ -730,7 +730,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-26T21:36:19.183Z"
+          "updatedAt": "2026-11-27T08:31:31.851Z"
         }
       ],
       "curatedArticles": [
@@ -802,7 +802,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-27T23:05:38.141Z"
     }
   }
 }
