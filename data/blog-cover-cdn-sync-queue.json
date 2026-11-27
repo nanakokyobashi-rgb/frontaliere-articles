@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-panne-lampioni-sciaffusa-giovedi.webp",
-      "sha256": "cc77143708102d855da858953fdb05f805e71586c965dc8e205fb1e340c729a7"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-panne-lampioni-sciaffusa-giovedi-480w.webp",
-      "sha256": "400d15ac7d3c7e0889693e28a79a0701b9792c4920a9917cf165c45e5833b532"
-    }
-  ]
+  "items": []
 }
