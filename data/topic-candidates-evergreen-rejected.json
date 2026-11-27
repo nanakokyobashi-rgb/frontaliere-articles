@@ -15945,10 +15945,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.ocst.ch/il-lavoro/411-professioni/404-sociosanitario/2638-salute-premi-di-cassa-malati-e-responsabilita-una-riflessione-sul-crescente-costo-della-sanita-ticinese": {
-      "section": "frontaliere",
-      "ts": 1795603807220
-    },
     "frontaliere::https://www.varesenoi.it/2026/11/26/leggi-notizia/articolo/centrosinistra-scontro-su-tassa-super-ricchi-scintille-tra-conte-e-i-leader-avs.html": {
       "section": "frontaliere",
       "ts": 1795676737556
@@ -15984,6 +15980,10 @@
     "svizzera::https://www3.ti.ch/dfe/dr/ustat/allegati/digitale/mercato_lavoro/notiziario/2026q1": {
       "section": "svizzera",
       "ts": 1795773294344
+    },
+    "frontaliere::https://cambiavalute.ch/guide/permessi/permesso-g-per-frontalieri-guida-2026-al-rilascio-rinnovo-e-telelavoro": {
+      "section": "frontaliere",
+      "ts": 1795803753550
     }
   }
 }
