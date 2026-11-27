@@ -6624,6 +6624,66 @@
       "firstSeenAt": "2026-11-27T10:03:36.998Z",
       "lastValidatedAt": "2026-11-27T10:03:36.998Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "assistenza sociale canton Svitto requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-27T13:05:00.084Z",
+      "lastValidatedAt": "2026-11-27T13:05:00.084Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "indennità di disoccupazione canton Svitto iscrizione URC",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-27T13:05:00.267Z",
+      "lastValidatedAt": "2026-11-27T13:05:00.267Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "assegni familiari canton Svitto importi e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T13:06:30.347Z",
+      "lastValidatedAt": "2026-11-27T13:06:30.347Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "imposta sugli autoveicoli canton Svitto calcolo e pagamento",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T13:08:02.435Z",
+      "lastValidatedAt": "2026-11-27T13:08:02.435Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "apprendistato e formazione professionale canton Svitto",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-27T13:08:02.617Z",
+      "lastValidatedAt": "2026-11-27T13:08:02.617Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -7574,6 +7634,18 @@
       "firstStrikeAt": "2026-11-27T05:15:28.843Z",
       "lastStrikeAt": "2026-11-27T05:15:28.843Z",
       "expiresAt": "2026-12-27T05:15:28.843Z"
+    },
+    {
+      "keyword": "incentivi energetici canton Svitto requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-27T13:14:00.227Z",
+      "lastStrikeAt": "2026-11-27T13:14:00.227Z",
+      "expiresAt": "2026-12-27T13:14:00.227Z"
     }
   ],
   "legacy": [
