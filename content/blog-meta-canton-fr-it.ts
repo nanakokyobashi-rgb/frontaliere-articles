@@ -81,6 +81,9 @@ const blogMetaCantonFrIt: Record<string, string> = {
     'blog.article.gruyere-studio-mobilita-profondo.title': 'Studio mobilità Gruyère: 25 comuni invitati a analisi approfondita',
     'blog.article.gruyere-studio-mobilita-profondo.excerpt': 'Venticinque comuni della Gruyère sono invitati a un\'analisi approfondita della mobilità, con una prima diagnosi prevista a dicembre e conclusioni attese nell\'autunno 2027.',
     'blog.article.gruyere-studio-mobilita-profondo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.bakery-bakery-apre-friburgo.title': 'Bakery Bakery apre la prima filiale romanda a Friburgo',
+    'blog.article.bakery-bakery-apre-friburgo.excerpt': 'La catena di boulangerie vegana nata a Berna apre a Friburgo la sua prima filiale romanda; 11 negozi sono già aperti oltre Sarine.',
+    'blog.article.bakery-bakery-apre-friburgo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonFrIt;

@@ -29,6 +29,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'neyruz-strada-cantonale-valtraloc': { it: 'neyruz-strada-cantonale-valtraloc', en: 'neyruz-cantonal-road-valtraloc', de: 'neyruz-kantonstrasse-valtraloc', fr: 'neyruz-route-cantonale-valtraloc' },
  'friburgo-destra-tre-seggi': { it: 'friburgo-destra-tre-seggi', en: 'fribourg-right-three-seats', de: 'freiburg-rechte-drei-sitze', fr: 'fribourg-droite-trois-sieges' },
  'gruyere-studio-mobilita-profondo': { it: 'gruyere-studio-mobilita-profondo', en: 'gruyere-mobility-study-deep', de: 'gruyere-mobilitatsstudie-tief', fr: 'gruyere-etude-mobilite-approfondie' },
+ 'bakery-bakery-apre-friburgo': { it: 'bakery-bakery-apre-friburgo', en: 'bakery-bakery-opens-fribourg', de: 'bakery-bakery-apert-friburg', fr: 'bakery-bakery-ouvre-fribourg' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

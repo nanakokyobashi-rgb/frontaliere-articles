@@ -123,5 +123,11 @@
     "articleId": "gruyere-studio-mobilita-profondo",
     "ts": "2026-11-20T10:27:53.660Z",
     "keyForm": 2
+  },
+  "https://www.laliberte.ch/articles/regions/ville-de-fribourg/la-chaine-de-boulangerie-vegane-nbsp-bakery-bakery-ouvre-sa-premiere-filiale-romande-a-fribourg-1495170": {
+    "articleId": "bakery-bakery-apre-friburgo",
+    "ts": "2026-11-27T01:55:31.951Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "1285579c11cc74da3ee98603770580cfae24ad4ee864c2f27c3f8f46e1928f3a"
   }
 }

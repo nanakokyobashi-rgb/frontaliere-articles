@@ -292,4 +292,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'bakery-bakery-apre-friburgo',
+ category: 'novita',
+ date: '2026-11-27T01:55:31.510Z',
+ image: '/images/blog/article-bakery-bakery-apre-friburgo.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['FR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -1011,6 +1011,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bakery-bakery-apre-friburgo': {
+    title: 'Bakery Bakery apre la prima filiale romanda a Friburgo',
+    description: 'Bakery Bakery, catena di boulangerie vegana nata a Berna, apre a Friburgo la prima filiale romanda. 11 negozi sono già aperti oltre Sarine.',
+    keywords: 'frontalieri, ticino, svizzera, italia, bakery, apre, prima, filiale',
+    ogTitle: 'Bakery Bakery apre prima filiale romanda a Friburgo',
+    ogDescription: 'Bakery Bakery, catena di boulangerie vegana nata a Berna, apre a Friburgo la sua prima filiale romanda. 11 negozi sono già aperti oltre Sarine. Cofondatore Kevin Schmid ne svela i retroscena.',
+    canonicalPath: '/articoli-friburgo/bakery-bakery-apre-friburgo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bakery Bakery apre la prima filiale romanda a Friburgo",
+      "description": "Bakery Bakery, catena di boulangerie vegana nata a Berna, apre a Friburgo la prima filiale romanda. 11 negozi sono già aperti oltre Sarine.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-bakery-bakery-apre-friburgo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-27T01:55:31+00:00",
+      "dateModified": "2026-11-27T01:55:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-friburgo/bakery-bakery-apre-friburgo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

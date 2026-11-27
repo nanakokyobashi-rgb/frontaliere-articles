@@ -81,6 +81,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.gruyere-studio-mobilita-profondo.title': 'Mobilitätsstudie Gruyère: 25 Gemeinden zu einer eingehenden Analyse eingeladen',
     'blog.article.gruyere-studio-mobilita-profondo.excerpt': 'Fünfundzwanzig Gemeinden der Gruyère sind zu einer eingehenden Analyse der Mobilität eingeladen, wobei eine erste Diagnose im Dezember vorgesehen ist und Schlussfolgerungen im Herbst 2027 erwartet werden.',
     'blog.article.gruyere-studio-mobilita-profondo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.bakery-bakery-apre-friburgo.title': 'Bakery Bakery eröffnet die erste Filiale in der Romandie in Freiburg',
+    'blog.article.bakery-bakery-apre-friburgo.excerpt': 'Die vegane Bäckereikette, die in Bern gegründet wurde, eröffnet in Freiburg ihre erste Filiale in der Romandie; 11 Geschäfte haben jenseits der Saane bereits eröffnet.',
+    'blog.article.bakery-bakery-apre-friburgo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonFrDe;

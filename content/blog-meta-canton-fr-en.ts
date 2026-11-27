@@ -81,6 +81,9 @@ const blogMetaCantonFrEn: Record<string, string> = {
     'blog.article.gruyere-studio-mobilita-profondo.title': 'Gruyère mobility study: 25 municipalities invited to in-depth analysis',
     'blog.article.gruyere-studio-mobilita-profondo.excerpt': 'Twenty-five municipalities in Gruyère are invited to an in-depth analysis of mobility, with an initial assessment planned for December and conclusions expected in autumn 2027.',
     'blog.article.gruyere-studio-mobilita-profondo.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.bakery-bakery-apre-friburgo.title': 'Bakery Bakery opens its first branch in French-speaking Switzerland in Fribourg',
+    'blog.article.bakery-bakery-apre-friburgo.excerpt': 'The vegan bakery chain founded in Bern opens its first branch in French-speaking Switzerland in Fribourg; 11 stores are already open across the Sarine.',
+    'blog.article.bakery-bakery-apre-friburgo.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonFrEn;
