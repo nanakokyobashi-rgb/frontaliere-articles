@@ -66,6 +66,9 @@ const blogMetaCantonGrEn: Record<string, string> = {
     'blog.article.imc-oberengadin-weekend.title': 'IMC Oberengadin closed on weekends due to staff shortage',
     'blog.article.imc-oberengadin-weekend.excerpt': 'The Intermediate Care unit at Spital Oberengadin does not operate on weekends in November due to staff shortages.',
     'blog.article.imc-oberengadin-weekend.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.neve-grigioni-incidenti.title': 'Snow in Graubünden, 18 accidents reported by police',
+    'blog.article.neve-grigioni-incidenti.excerpt': 'Up to 20 centimeters of fresh snow fell across Graubünden on Thursday; police report 18 accidents related to sleet.',
+    'blog.article.neve-grigioni-incidenti.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGrEn;

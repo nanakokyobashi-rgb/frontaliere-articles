@@ -66,6 +66,9 @@ const blogMetaCantonGrFr: Record<string, string> = {
     'blog.article.imc-oberengadin-weekend.title': 'IMC Oberengadin fermée les week-ends en raison d’un manque de personnel',
     'blog.article.imc-oberengadin-weekend.excerpt': 'L’Intermediate Care de Spital Oberengadin ne fonctionne pas les week-ends de novembre en raison d’un manque de personnel.',
     'blog.article.imc-oberengadin-weekend.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.neve-grigioni-incidenti.title': 'Neige dans les Grisons, 18 accidents signalés par la police',
+    'blog.article.neve-grigioni-incidenti.excerpt': 'Jusqu’à 20 centimètres de neige fraîche sont tombés jeudi dans tout le canton des Grisons; la police fait état de 18 accidents liés au grésil.',
+    'blog.article.neve-grigioni-incidenti.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonGrFr;
