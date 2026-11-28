@@ -341,7 +341,13 @@ export function summarizeDedupRuntimeEvidence(observations, sections) {
       : sectionObservations.some((observation) => observation.gateApplied)
         ? sectionObservations.every((observation) => modelAndThresholdVerified(observation) || observation.status === 'empty_input')
           ? 'active_verified_in_observed_markers' : 'active_model_or_threshold_unverified_in_observed_markers'
-        : sectionObservations.length ? 'no_comparable_candidate_observed' : 'unobserved';
+        // Finestra con sole osservazioni fail-closed: il gate non ha mai confrontato
+        // (store/modello non disponibili) ma il run si e' fermato senza pubblicare.
+        // Non e' fail-open ne' un gate verificato: M6 resta non misurato.
+        : sectionObservations.length > 0 && failClosedObservations === sectionObservations
+          .filter((observation) => observation.status !== 'empty_input').length
+          && failClosedObservations > 0 ? 'fail_closed_only_in_window'
+          : sectionObservations.length ? 'no_comparable_candidate_observed' : 'unobserved';
     return [section, {
       observationCount: sectionObservations.length,
       failOpenObservations,

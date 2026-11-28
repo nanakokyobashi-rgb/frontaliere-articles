@@ -41,6 +41,50 @@ export function setEmbedderForTests(fn) {
   _extractor = null;
 }
 
+/** Tentativi e backoff del download/inizializzazione del modello (M6). */
+export const MODEL_INIT_ATTEMPTS = 3;
+export const MODEL_INIT_BASE_BACKOFF_MS = 5000;
+
+const defaultSleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+/**
+ * Esegue `load` con un numero limitato di tentativi e backoff esponenziale
+ * (5 s, poi 20 s). Il download del modello (~470 MB dalla CDN pubblica
+ * HuggingFace) e' l'unico passo del dedup che dipende dalla rete: un guasto
+ * transitorio non deve fermare il run, uno persistente deve salire al gate
+ * fail-closed come esito dichiarato (DedupGateUnavailableError), non come
+ * errore non dichiarato. `EMBEDDING_INIT_BACKOFF_MS` sostituisce la base (0 nei test).
+ *
+ * @param {() => Promise<T>} load
+ * @param {{attempts?: number, baseBackoffMs?: number, sleep?: (ms: number) => Promise<void>, log?: (msg: string) => void}} [opts]
+ * @returns {Promise<T>}
+ * @template T
+ */
+export async function initWithRetry(load, opts = {}) {
+  const attempts = opts.attempts ?? MODEL_INIT_ATTEMPTS;
+  const envBase = Number(process.env.EMBEDDING_INIT_BACKOFF_MS);
+  const base = opts.baseBackoffMs ?? (Number.isFinite(envBase) && envBase >= 0 ? envBase : MODEL_INIT_BASE_BACKOFF_MS);
+  const sleep = opts.sleep ?? defaultSleep;
+  const log = opts.log ?? ((msg) => console.error(msg));
+  let lastError;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      return await load();
+    } catch (err) {
+      lastError = err;
+      const message = String(err?.message ?? err).slice(0, 200);
+      if (attempt < attempts) {
+        const delay = base * 4 ** (attempt - 1);
+        log(`EMBEDDING_MODEL_INIT_RETRY attempt=${attempt}/${attempts} delayMs=${delay} error=${JSON.stringify(message)}`);
+        await sleep(delay);
+      } else {
+        log(`EMBEDDING_MODEL_INIT_FAILED attempts=${attempts} error=${JSON.stringify(message)}`);
+      }
+    }
+  }
+  throw lastError;
+}
+
 async function getExtractor() {
   if (_extractorOverride) return _extractorOverride;
   if (!_extractor) {
@@ -55,7 +99,7 @@ async function getExtractor() {
     // 'q8' (~110MB, 4× smaller CI cache, negligible quality loss) is a safe
     // follow-up but requires regenerating the committed store with q8 in the
     // same change so the spaces match.
-    _extractor = await pipeline('feature-extraction', EMBEDDING_MODEL, { dtype: 'fp32' });
+    _extractor = await initWithRetry(() => pipeline('feature-extraction', EMBEDDING_MODEL, { dtype: 'fp32' }));
   }
   return _extractor;
 }

@@ -303,8 +303,13 @@ test('le ragioni locali alla sezione e quelle del pool condiviso usano codici di
   // verifier e quota usano il codice 5 quando il servizio condiviso non regge.
   const declared = src.match(/(?:process\.exit|await exitAfterFlush)\(EXIT_NO_ARTICLE_DECLARED\)/g) || [];
   assert.equal(
-    declared.length, 12,
-    'le dodici ragioni locali alla sezione (incluse le due della ripresa traduzioni: bozza esaurita e traduzione incompleta) devono mantenere il codice 4',
+    declared.length, 13,
+    'le tredici ragioni locali alla sezione (due della ripresa traduzioni, dedup semantico non eseguibile M6) devono mantenere il codice 4',
+  );
+  assert.match(
+    src,
+    /if \(isDedupGateUnavailableError\(e\)\) \{[\s\S]{0,900}reason=dedup-unavailable[\s\S]{0,200}await exitAfterFlush\(EXIT_NO_ARTICLE_DECLARED\)/u,
+    'il dedup non eseguibile e\' un esito dichiarato con la propria riga GENERATION_OUTCOME, non un errore generico',
   );
   assert.match(
     src,

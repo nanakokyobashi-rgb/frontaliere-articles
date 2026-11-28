@@ -542,7 +542,7 @@ import { truncateSlugAtWordBoundary } from './lib/slug-truncate.mjs';
 import { hasDomainAnchor } from './lib/discovery/domainAnchor.mjs';
 import { matchesFrontaliereAnchor, matchesFrontaliereUnambiguousAnchor } from './lib/discovery/frontaliereAnchor.mjs';
 import { isNonItalianScript, nonItalianScriptRatio } from './lib/itLanguageCheck.mjs';
-import { checkSemanticNearDuplicate } from './lib/scoring/semanticDedup.mjs';
+import { checkSemanticNearDuplicate, isDedupGateUnavailableError } from './lib/scoring/semanticDedup.mjs';
 import { assertTopicNotRecentlyCovered, findRecentTopicCoverage, assertComuneTitleMatchesSlug, topicCoverageKey } from './lib/topic-coverage-guard.mjs';
 import { computeAdaptiveEvergreenThresholds } from './lib/scoring/constants.mjs';
 import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFromBody } from './lib/article-body-repetition.mjs';
@@ -26719,6 +26719,16 @@ if (invokedDirectly) {
   // EXIT_NO_ARTICLE_DECLARED: un exit 0 senza articolo non si distingue da un
   // percorso che non ha dichiarato niente, ed e' quella indistinguibilita' — non
   // questo ramo — che ha prodotto le dieci ore di verde.
+  // Dedup semantico non eseguibile (modello non scaricabile dopo i retry, store
+  // non costruibile): il gate e' fail-closed, quindi NIENTE si pubblica, ma e'
+  // un esito DICHIARATO (exit 4 + riga GENERATION_OUTCOME dedicata), non un
+  // errore non dichiarato. Il workflow la riporta come reason=dedup-unavailable.
+  if (isDedupGateUnavailableError(e)) {
+    finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (dedup gate unavailable, fail-closed, not published): ${safeErrorMessage}`] });
+    console.error(`\n⚠️  Differito: dedup semantico non eseguibile (fail-closed), nessun articolo pubblicato. ${safeErrorMessage}`);
+    console.error(`GENERATION_OUTCOME kind=no-article reason=dedup-unavailable section=${SECTION_NAME}`);
+    await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
+  }
   if (isQualityRejectError(e)) {
     finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (content quality rejected, slop not published): ${safeErrorMessage}`] });
     console.error(`\n⚠️  Differito: nessun articolo conforme prodotto in questa run (rigetto qualità — slop non pubblicato). Riprovo al prossimo run. ${safeErrorMessage}`);

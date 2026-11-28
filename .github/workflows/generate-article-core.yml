@@ -1327,6 +1327,7 @@ jobs:
 
             if [ "$rc" = "4" ]; then
               echo "::warning::create-article.mjs: nessun articolo sulla sezione $sec, ragione legittima DICHIARATA (exit 4)"
+              grep -q 'reason=dedup-unavailable' "$stall_log" && declared_reason=dedup-unavailable
             elif [ "$rc" = "0" ]; then
               all_declared=false
               [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs e' uscito 0 sulla sezione $sec senza scrivere un corpo e senza dichiarare una ragione (attesa: exit 4)"
@@ -1372,7 +1373,7 @@ jobs:
             outcome_section="$effective"
           elif [ "$all_declared" = "true" ]; then
             outcome_kind="no-article"
-            outcome_reason="declared"
+            outcome_reason="${declared_reason:-declared}"
             outcome_section="$effective"
           fi
           echo "GENERATION_OUTCOME kind=$outcome_kind reason=$outcome_reason section=$outcome_section"

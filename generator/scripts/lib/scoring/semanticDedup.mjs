@@ -49,6 +49,12 @@ export class DedupGateUnavailableError extends Error {
   }
 }
 
+/** True per l'errore del gate fail-closed (esito DICHIARATO dal chiamante, mai un guasto non dichiarato). */
+export function isDedupGateUnavailableError(e) {
+  return e?.code === 'DEDUP_GATE_UNAVAILABLE'
+    || /DEDUP SEMANTICO NON ESEGUIBILE \(fail-closed/.test(String(e?.message ?? ''));
+}
+
 function emitStoreObservation(log, data, opts, store, meta, status, {
   queryModel = null,
   gateApplied = false,

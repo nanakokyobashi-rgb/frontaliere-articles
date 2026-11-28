@@ -30,7 +30,7 @@ import { EMBEDDING_DIM, EMBEDDING_MODEL } from '../evidence/constants.mjs';
 import { embedBatch } from '../evidence/embeddingClient.mjs';
 import { readStaticMetaFields } from '../meta-field-regex.mjs';
 import { loadEmbeddingMeta, loadEmbeddingStore } from './embeddingMatcher.mjs';
-import { buildDedupText } from './semanticDedup.mjs';
+import { DedupGateUnavailableError, buildDedupText } from './semanticDedup.mjs';
 
 const MAGIC = Buffer.from('EMBV1\0\0\0', 'binary');
 const HEADER_BYTES = 32;
@@ -231,7 +231,15 @@ export async function prepareSectionDedupStore(sectionConfig, overrides = {}) {
     }));
     ensured.get(key).catch(() => ensured.delete(key));
   }
-  await ensured.get(key);
+  try {
+    await ensured.get(key);
+  } catch (err) {
+    // Modello non scaricabile o costruzione fallita (dopo i retry di
+    // embeddingClient): il gate e' fail-closed, e il guasto e' un esito
+    // dichiarato (DedupGateUnavailableError), non un errore generico.
+    if (err instanceof DedupGateUnavailableError) throw err;
+    throw new DedupGateUnavailableError('store_build_failed', `costruzione dello store fallita: ${String(err?.message ?? err).slice(0, 200)}`);
+  }
   return {
     store: loadEmbeddingStore({ binPath: sectionConfig.embeddingsBinPath, force: true }),
     meta: loadEmbeddingMeta({ metaPath: sectionConfig.embeddingsMetaPath, force: true }),

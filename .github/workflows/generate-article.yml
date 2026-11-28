@@ -1910,7 +1910,7 @@ jobs:
           stall_log="$diag_dir/attempt.log"
           tee_pid=""
           attempt_pipe=""
-          # Tieni il client fuori dall'artifact, che va caricato solo se ci sono diagnostiche.
+          # Il client resta fuori dall'artifact.
           cdp_client="${RUNNER_TEMP:-/tmp}/cdp-stack.mjs"
 
           source scripts/ci/generation-watchdog-process.sh
@@ -2001,8 +2001,7 @@ jobs:
             done
           }
 
-          # Il watchdog viene atteso prima del cleanup del tentativo e
-          # terminato comunque all'uscita dallo step.
+          # Il watchdog termina comunque all'uscita.
           watch_pid=""
           # shellcheck disable=SC2317,SC2329
           stall_atexit() {
@@ -2108,7 +2107,7 @@ jobs:
             stall_watchdog "$attempt_pid" "$attempt_identity" &
             watch_pid=$!
             if wait "$attempt_pid"; then rc=0; else rc=$?; fi
-            # Il timeout può terminare la generazione mentre la cattura è in corso.
+            # Il timeout può terminare la cattura.
             if [ ! -f "$stall_flag" ]; then
               kill_tree KILL "$watch_pid"
             fi
@@ -2262,6 +2261,7 @@ jobs:
 
             if [ "$rc" = "4" ]; then
               echo "::warning::create-article.mjs: nessun articolo sulla sezione $sec, ragione legittima DICHIARATA (exit 4)"
+              grep -q 'reason=dedup-unavailable' "$stall_log" && declared_reason=dedup-unavailable
             elif [ "$rc" = "0" ]; then
               all_declared=false
               [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs e' uscito 0 sulla sezione $sec senza scrivere un corpo e senza dichiarare una ragione (attesa: exit 4)"
@@ -2307,7 +2307,7 @@ jobs:
             outcome_section="$effective"
           elif [ "$all_declared" = "true" ]; then
             outcome_kind="no-article"
-            outcome_reason="declared"
+            outcome_reason="${declared_reason:-declared}"
             outcome_section="$effective"
           fi
           echo "GENERATION_OUTCOME kind=$outcome_kind reason=$outcome_reason section=$outcome_section"
