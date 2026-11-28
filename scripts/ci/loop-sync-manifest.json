@@ -6886,11 +6886,51 @@
     {
       "path": "generator/scripts/lib/contextual-article-links.mjs",
       "mode": "corpus-only",
-      "reason": "Adapter del generatore corpus: collega i body localizzati e rispetta le traduzioni pending attraverso il matcher mirrorato. Il sito usa direttamente il linker dell’engine; non necessita di questo adapter del writer.",
+      "reason": "Adapter del generatore corpus: collega i body localizzati e rispetta le traduzioni pending attraverso il matcher mirrorato, e (F6.3b) aggiunge prima i link verso landing lavoro, professioni e pagine tematiche per cantone da generator/data/body-link-destinations.json. Il sito usa direttamente il linker dell’engine; non necessita di questo adapter del writer.",
       "baseline": {
         "site": null,
         "corpus": "c7f22a4b09ba57b1",
         "alignedAt": "2026-10-14"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/body-link-destinations.mjs",
+      "mode": "corpus-only",
+      "reason": "Matcher del generatore corpus per i link nel corpo verso landing lavoro del cantone, landing per professione e pagine tematiche per cantone (premi cassa malati, salario minimo): le URL vengono solo da generator/data/body-link-destinations.json, l'ancora e' sempre testo gia' presente nell'articolo. Il sito non genera articoli e non importa questo modulo; il confine col sito e' HTTP (le sitemap pubblicate).",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/body-link-canton-topics.mjs",
+      "mode": "corpus-only",
+      "reason": "Destinazioni tematiche per cantone dei link nel corpo (F6.3d): agenda eventi, tempi di attesa ai valichi, aste targhe, stipendio per professione, strutture sanitarie e pagine del Ticino. Modulo del generatore corpus, usato solo da body-link-destinations.mjs; le URL vengono da generator/data/body-link-destinations.json e il confine col sito resta HTTP (sitemap pubblicate).",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
+      "path": "scripts/ci/build-body-link-destinations.mjs",
+      "mode": "corpus-only",
+      "reason": "Costruisce e verifica (HTTP 200 + canonical) l'elenco versionato generator/data/body-link-destinations.json leggendo le sitemap pubblicate del sito e gli hreflang delle pagine IT. Strumento del corpus: il sito pubblica le sitemap e non possiede ne' l'elenco ne' il suo consumatore nel generatore.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
+      "path": "scripts/ci/measure-body-link-coverage.mjs",
+      "mode": "corpus-only",
+      "reason": "Misura di copertura dei link nel corpo (gate O3 del piano cadenza) su articoli reali di origin/main del corpus, applicando in memoria il linker del generatore. Sola lettura, senza gemello sul sito: il linker e l'API articoli vivono qui.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-11-28"
       }
     },
     {
