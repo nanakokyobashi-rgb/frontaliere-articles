@@ -738,7 +738,7 @@ test('senza budget residuo il tentativo dopo non parte nemmeno', () => {
 test('i default restano quelli del workflow, non quelli del test', () => {
   const gen = extractRun('Generate the article');
   assert.match(gen, /budget_s="\$\{GENERATE_BUDGET_S:-3000\}"/);
-  assert.match(gen, /hard_kill_s="\$\{GENERATE_HARD_KILL_S:-1440\}"/);
+  assert.match(gen, /hard_kill_s="\$\{GENERATE_HARD_KILL_S:-2400\}"/);
   // 540s lascia 60s di margine sopra il timeout di 480s della lane Codex per
   // i body, che puo' restare silenziosa mentre aspetta il broker. La soglia
   // resta sotto i 600s storici, cosi' un wedge non ricompra inutilmente quei
@@ -1748,47 +1748,23 @@ test('national queue resolves the section before starting the production job', (
   assert.match(WF, /SEC="\$\{\{ needs\.admit\.outputs\.national_section \}\}"/);
 });
 
-// ── F3.A.5: un run senza esito libera la corsia entro 30 minuti ──────────────
+// ── F3.A.5: due scadenze, la dura resta quella storica ──────────────────────
 //
-// Misura del 2026-11-28 su 24 run con esito letto: 13 chiudevano fra 36 e 39
-// minuti, tutte senza articolo, dentro il ciclo generazione -> fact-check/gate
-// -> rigenerazione. La deadline cooperativa e' `cap − 60s` di
-// CREATE_ARTICLE_MAX_WALL_MS; il cap e' `min(hard_kill_s, budget − SECONDS)`.
-const RUN_DEADLINE_DEFAULT_S = 1440;
+// La morbida (CREATE_ARTICLE_SOFT_WALL_MS, 1380000) sta in create-article e si
+// prova in run-deadline.test.mjs. Qui si fissa che il workflow non l'ha spostata:
+// cap 2400s, deadline cooperativa = cap - 60s.
+const RUN_DEADLINE_DEFAULT_S = 2400;
 
-test('F3.A.5: il cap di default del tentativo e la deadline cooperativa sono quelli corti', () => {
+test('F3.A.5: la scadenza dura del tentativo resta cap 2400s e deadline cooperativa 2340s', () => {
   const r = runGenerateStep({ section: 'svizzera', plan: ['0 0'] });
-  assert.equal(r.caps[0], `${RUN_DEADLINE_DEFAULT_S}s`, 'senza override il cap del primo tentativo deve essere 1440s');
-  assert.equal(
-    Number(r.wallMs[0]),
-    (RUN_DEADLINE_DEFAULT_S - 60) * 1000,
-    'il processo deve fermarsi da solo 60s prima del SIGTERM, con esito dichiarato',
-  );
+  assert.equal(r.caps[0], `${RUN_DEADLINE_DEFAULT_S}s`);
+  assert.equal(Number(r.wallMs[0]), (RUN_DEADLINE_DEFAULT_S - 60) * 1000);
 });
 
-test('F3.A.5: checkout + cap + coda di commit/dispatch stanno entro 30 minuti, in entrambi i workflow', () => {
-  const SETUP_S = 4 * 60; // checkout, npm ci e passi prima dello step (misurati 2-4 min)
-  const TAIL_S = 2 * 60; // commit/push/dispatch (misurati 0,7-1,5 min)
+test('F3.A.5: il default della dura e\' lo stesso in entrambi i workflow', () => {
   for (const [name, text] of [['generate-article.yml', WF], ['generate-article-core.yml', CORE_WF]]) {
     const m = text.match(/hard_kill_s="\$\{GENERATE_HARD_KILL_S:-(\d+)\}"/);
     assert.ok(m, `${name}: default di GENERATE_HARD_KILL_S non leggibile`);
     assert.equal(Number(m[1]), RUN_DEADLINE_DEFAULT_S, `${name}: default diverso da ${RUN_DEADLINE_DEFAULT_S}s`);
-    assert.ok(
-      SETUP_S + Number(m[1]) + TAIL_S <= 30 * 60,
-      `${name}: setup + cap + coda superano i 30 minuti`,
-    );
   }
-});
-
-test('F3.A.5: a deadline scaduta il fact-check non apre un altro giro di rigenerazione', () => {
-  const gate = GENERATOR_SOURCE.indexOf('F3.A.5: come per i gate deterministici');
-  assert.ok(gate > 0, 'il gate sul fact-check non c\'e\' piu\'');
-  const window = GENERATOR_SOURCE.slice(gate, gate + 1200);
-  assert.match(window, /attempt < maxAttempts && wallBudgetExceeded\(\)/);
-  assert.match(window, /throw err;/);
-  assert.match(
-    GENERATOR_SOURCE,
-    /if \(isFactCheckUnavailableError\(fcErr\)\) throw fcErr;\n\s+if \(attempt < maxAttempts && !wallBudgetExceeded\(\)\) \{/,
-    'il catch del fact-check deve rilanciare, non rigenerare, a budget scaduto',
-  );
 });
