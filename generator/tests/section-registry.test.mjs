@@ -1813,6 +1813,9 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.match(preflight, /now - \(\.created_at \| fromdateiso8601\)\) < '"\$COALESCE_MAX_AGE_SECONDS"'/);
   assert.match(preflight, /\.status == "queued" or \.status == "pending" or \.status == "waiting" or \.status == "requested"/);
   assert.match(preflight, /cede alla run push piu' recente \$coalesced_into/);
+  // La cessione e' revocabile: se il successore viene annullato dal reaper, questo ridispaccia main.
+  assert.match(preflight, /Cessione revocabile/);
+  assert.match(preflight, /publish-api-unwedge\.yml, che dopo avere\n\s+# annullato una run ne dispaccia una nuova su main/);
   assert.match(preflight, /### publish-api: run ceduta[\s\S]*>> "\$GITHUB_STEP_SUMMARY"/);
   const coverQueue = wf.slice(wf.indexOf('push_queue_commit()'), wf.indexOf('queue_changed=false'));
   assert.match(coverQueue, /\[ "\$api_input_changed" = 'true' \] && \[ "\$\{VERIFY_API_ADVANCE:-skip\}" = 'adopt' \]/);

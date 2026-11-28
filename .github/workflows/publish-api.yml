@@ -341,12 +341,15 @@ jobs:
               # secondi, cosi' la coda si svuota fino all'ultima, che ritargetta e
               # pubblica. Senza, ogni run in coda farebbe una pubblicazione intera e
               # con > 500 commit/giorno il backlog crescerebbe senza limite.
-              # Il limite di eta' e' la rete: se la run piu' recente viene annullata
-              # o muore prima del flip, le precedenti hanno gia' ceduto; una run
-              # vecchia di mezz'ora o piu' in coda non e' un successore affidabile
-              # (e' il caso che unwedge-pages-deploy-queue.mjs puo' annullare), quindi
-              # non fa cedere nessuno. Lettura non riuscita = nessuna coalescenza
-              # (fail-open: pubblicare di troppo e' sicuro, non pubblicare no).
+              # Cessione revocabile: se la run piu' recente viene annullata, muore
+              # prima del flip o resta al gate di `github-pages`, a ripubblicare
+              # main ci pensa la rete di publish-api-unwedge.yml, che dopo avere
+              # annullato una run ne dispaccia una nuova su main se nessun'altra
+              # run push e' viva (scripts/ci/unwedge-pages-deploy-queue.mjs). Il
+              # limite di eta' (COALESCE_MAX_AGE_SECONDS) resta: una run vecchia di
+              # mezz'ora in coda non e' un successore affidabile e non fa cedere
+              # nessuno. Lettura non riuscita = nessuna coalescenza (fail-open:
+              # pubblicare di troppo e' sicuro, non pubblicare no).
               newer_pending=0
               coalesced_into=''
               if [ "$EVENT_NAME" = 'push' ]; then
@@ -363,7 +366,7 @@ jobs:
                 {
                   echo "### publish-api: run ceduta"
                   echo "Questa run ($RUN_NUMBER) non pubblica: ha ceduto alla run push piu' recente \`$coalesced_into\` (in coda da meno di $((COALESCE_MAX_AGE_SECONDS / 60)) minuti), che pubblica main=\`$current_main\`."
-                  echo "Se quella run viene annullata o fallisce prima del flip, il prossimo push (o un dispatch) ripubblica: controlla il suo esito."
+                  echo "Se quella run viene annullata dal reaper del gate, publish-api-unwedge ne dispaccia una nuova su main; se fallisce prima del flip, il prossimo push (o un dispatch) ripubblica: controlla il suo esito."
                 } >> "$GITHUB_STEP_SUMMARY"
               else
                 trigger_inputs_differ=false

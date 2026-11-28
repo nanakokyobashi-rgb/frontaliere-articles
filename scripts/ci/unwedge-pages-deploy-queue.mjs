@@ -45,7 +45,10 @@
  * push to interrupt. A publish that fails, times out, or dies half-way reaches
  * a terminal conclusion on its own and releases the group without this
  * script's help. Cancelling loses nothing either: the newest pending publish
- * rebuilds the surface from `main`, which carries every earlier commit.
+ * rebuilds the surface from `main`, which carries every earlier commit. If no
+ * other live push run of main remains (publish-api.yml lets push runs yield to
+ * a newer one), main() redispatches `publish-api.yml` on main after the cancel
+ * (see needsRedispatch): no moment leaves main's delta without a publisher.
  *
  * The alternative — rejecting the pending deployment via
  * `POST /actions/runs/{id}/pending_deployments` with `state: rejected` — is not
@@ -221,6 +224,31 @@ export function cancelVerdict({
   return { cancel: true, reason: `parked at the ${PAGES_ENVIRONMENT} environment gate for ${ageMinutes} min`, ageMinutes };
 }
 
+const LIVE_STATUSES = new Set(['queued', 'pending', 'waiting', 'requested', 'in_progress']);
+
+/**
+ * Safety net for the push-coalescence in publish-api.yml: a push run yields to
+ * a newer queued push run, so cancelling that run here must not leave the
+ * delta of `main` without a publisher. After cancelling, a fresh `workflow_dispatch`
+ * on `main` is needed unless another LIVE push run of `main` (not one just
+ * cancelled) is known to exist; a push run always retargets to current main in
+ * its own preflight. Fails toward dispatching: an unreadable/malformed listing
+ * (null/undefined) cannot prove anyone else is alive, and an extra publish is
+ * safe while a missing one is not.
+ *
+ * @param {Array<object>|null|undefined} runs recent runs of publish-api.yml
+ * @param {{ cancelledIds: Array<number>, branch?: string }} opts
+ * @returns {boolean}
+ */
+export function needsRedispatch(runs, { cancelledIds = [], branch = PUBLISH_BRANCH } = {}) {
+  if (!Array.isArray(runs)) return true;
+  const gone = new Set(cancelledIds);
+  return !runs.some((run) => run?.event === 'push'
+    && run.head_branch === branch
+    && LIVE_STATUSES.has(run.status)
+    && !gone.has(run.id));
+}
+
 // ── Network (not unit-tested; exercised live) ───────────────────────
 
 function authToken() {
@@ -269,6 +297,23 @@ async function cancelRun(runId) {
   return false;
 }
 
+/** @returns {Promise<void>} throws when GitHub refuses the dispatch */
+async function dispatchPublish() {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), DEPLOY_QUEUE_API_TIMEOUT_MS);
+  try {
+    const res = await fetch(`${API}/repos/${REPO}/actions/workflows/${WORKFLOW_FILE}/dispatches`, {
+      method: 'POST',
+      headers: { ...githubApiHeaders(authToken()), 'content-type': 'application/json' },
+      body: JSON.stringify({ ref: PUBLISH_BRANCH }),
+      signal: controller.signal,
+    });
+    if (res.status !== 204) throw new Error(`dispatch → HTTP ${res.status}`);
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 /** Fresh run, jobs and pending deployments of one candidate, read together. */
 async function rereadCandidate(runId) {
   const [run, jobsBody, pendingDeployments] = await Promise.all([
@@ -315,6 +360,7 @@ async function main() {
 
   const failures = [];
   let cancelled = 0;
+  const cancelledIds = [];
   for (const listed of candidates) {
     let fresh;
     try {
@@ -332,8 +378,10 @@ async function main() {
       `::warning::Run ${fresh.run.id} (${fresh.run.head_sha?.slice(0, 8) ?? '?'}) has been ${verdict.reason} — cancelling to release the publish-api group.`,
     );
     try {
-      if (await cancelRun(fresh.run.id)) cancelled += 1;
-      else failures.push(`run ${fresh.run.id}: GitHub refused the cancel`);
+      if (await cancelRun(fresh.run.id)) {
+        cancelled += 1;
+        cancelledIds.push(fresh.run.id);
+      } else failures.push(`run ${fresh.run.id}: GitHub refused the cancel`);
     } catch (err) {
       failures.push(`run ${fresh.run.id}: cancel failed (${err?.message || err})`);
     }
@@ -342,6 +390,31 @@ async function main() {
   // The next queued publish starting is the real signal that the surface is
   // moving again.
   console.log(`Cancelled ${cancelled} wedged run(s).`);
+
+  // Invariant: the delta of main always has a run that will publish it. The
+  // coalescence in publish-api.yml lets a push run yield to a newer one, and
+  // that newer one may be exactly what was cancelled above. Re-read the queue
+  // after the cancel (a push that landed meanwhile has its own run and is seen
+  // here) and, if no other live push run of main exists, dispatch one.
+  if (cancelled > 0) {
+    let after = null;
+    try {
+      const body = await ghJson(`/repos/${REPO}/actions/workflows/${WORKFLOW_FILE}/runs?branch=${PUBLISH_BRANCH}&per_page=100`);
+      after = Array.isArray(body?.workflow_runs) ? body.workflow_runs : null;
+    } catch (err) {
+      console.log(`::warning::Could not re-read ${WORKFLOW_FILE} runs after the cancel: ${err.message} — dispatching to be safe`);
+    }
+    if (needsRedispatch(after, { cancelledIds })) {
+      try {
+        await dispatchPublish();
+        console.log(`Dispatched ${WORKFLOW_FILE} on ${PUBLISH_BRANCH}: no other live push run would publish main.`);
+      } catch (err) {
+        failures.push(`redispatch of ${WORKFLOW_FILE} failed (${err?.message || err})`);
+      }
+    } else {
+      console.log('Another live push run of main will publish: no redispatch needed.');
+    }
+  }
   if (failures.length > 0) {
     console.log(`::error::The publish-api queue may still be jammed: ${failures.join('; ')}`);
     process.exitCode = 1;
