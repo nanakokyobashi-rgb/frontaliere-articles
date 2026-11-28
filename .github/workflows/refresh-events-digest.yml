@@ -129,9 +129,11 @@ jobs:
           [ "${#CANTONS[@]}" -gt 0 ] || { echo '::error::nessun cantone richiesto'; exit 2; }
           CANTON_LIST="$(IFS=,; echo "${CANTONS[*]}")"
           SECTION_LIST="$(IFS=,; echo "${SECTIONS[*]}")"
-          echo "dry=$DRY" >> "$GITHUB_OUTPUT"
-          echo "cantons=$CANTON_LIST" >> "$GITHUB_OUTPUT"
-          echo "sections=$SECTION_LIST" >> "$GITHUB_OUTPUT"
+          {
+            echo "dry=$DRY"
+            echo "cantons=$CANTON_LIST"
+            echo "sections=$SECTION_LIST"
+          } >> "$GITHUB_OUTPUT"
           echo "event=$EVENT_NAME → dry_run=$DRY cantons=$CANTON_LIST sections=$SECTION_LIST"
 
       - name: Checkout
