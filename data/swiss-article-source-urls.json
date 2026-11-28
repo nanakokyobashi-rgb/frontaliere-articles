@@ -1,9 +1,4 @@
 {
-  "https://lenews.ch/2026/09/25/more-than-700-medicines-face-shortages-in-switzerland": {
-    "articleId": "carenze-medicinali-svizzera-2026",
-    "ts": "2026-09-26T00:42:55.689Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4110760": {
     "articleId": "kof-consensus-forecast-pil-2026",
     "ts": "2026-09-26T01:18:48.741Z",
@@ -2501,5 +2496,11 @@
     "ts": "2026-11-26T12:10:18.320Z",
     "keyForm": 2,
     "sourceContentFingerprint": "f44d5356570866ecb537b1e6c95a61459b5d121b75cc8a8e511852ee037ce95d"
+  },
+  "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/in-ticino-il-salario-minimo-sar%c3%a0-di-circa-4000-franchi-lordi-al-mese/91295439": {
+    "articleId": "salario-minimo-ticino-compromesso",
+    "ts": "2026-11-28T09:02:04.389Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "b854a3ca767e588b5fa09d9459b89233fe59344a01cd6e0390744b979c82f3c6"
   }
 }

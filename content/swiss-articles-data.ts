@@ -30446,6 +30446,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'salario-minimo-ticino-compromesso',
+    category: 'novita',
+    date: '2026-11-28T09:02:01.788Z',
+    image: '/images/blog/article-salario-minimo-ticino-compromesso.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    canton: ['TI'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
