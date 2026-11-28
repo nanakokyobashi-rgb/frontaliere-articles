@@ -8127,8 +8127,14 @@ function _requestCodexExecution({ prompt, timeoutMs, schema, deadlineMs }) {
     let started = false;
     const initialTimeoutMs = boundedByDeadline(queueWaitMs + executionSocketTimeoutMs);
     const timeoutError = (callerDeadline = false) => {
+      // The caller's deadline, not the broker, ended this request when it was
+      // already executing: say so (F4.0, 27-28/11: 69 «socket timed out» in
+      // 22 runs were all round deadlines shorter than a Codex fact-check).
+      const byCallerDeadline = callerDeadline === true || Date.now() >= deadlineAt;
       const error = started
-        ? _codexTransportError('Codex auth broker socket timed out')
+        ? _codexTransportError(byCallerDeadline
+          ? 'Codex auth broker socket timed out (caller deadline reached while Codex was still running)'
+          : 'Codex auth broker socket timed out')
         : _codexTransportError(`Codex auth broker queue wait timed out after ${Math.round(initialTimeoutMs / 1000)}s before Codex started`);
       // A short caller budget can expire against a healthy broker. Later
       // requests with time left must still be able to use the lane.

@@ -19,6 +19,11 @@ import { runInNewContext } from 'node:vm';
 import { afterEach, beforeEach, describe, test } from 'node:test';
 
 import { AI_MODELS, callLLM, estimateRequestTokens, resetState } from '../scripts/lib/ai-models.mjs';
+import {
+  FACTCHECK_MIN_ROUND_MS,
+  planFactCheckRounds as realPlanFactCheckRounds,
+  remainingFactCheckRounds,
+} from '../scripts/lib/fact-check-round-plan.mjs';
 import { addIndependentVote, extractFactCheckJson } from '../scripts/lib/fact-check-response.mjs';
 import { FACT_CHECK_CATEGORIES } from '../scripts/lib/article-factuality-gates.mjs';
 import { cantonPromptLines } from '../scripts/lib/canton-section-profile.mjs';
@@ -32,6 +37,12 @@ const compactPromptFitsStart = SRC.indexOf('const FACTCHECK_PROMPT_PROVIDER_HEAD
 const compactPromptFitsEnd = SRC.indexOf('\n}', compactPromptFitsStart);
 assert.ok(compactPromptFitsStart >= 0 && compactPromptFitsEnd > compactPromptFitsStart);
 const compactPromptFitsSource = SRC.slice(compactPromptFitsStart, compactPromptFitsEnd + 2);
+// Questi test simulano finestre da 2-4 minuti con giri da 15 s: la sandbox usa il
+// piano a 15 s anche con Codex nel roster. Il piano con la soglia Codex (giri da
+// 240 s) e' coperto da fact-check-round-plan.test.mjs.
+const planFactCheckRounds = (windowMs, options = {}) => realPlanFactCheckRounds(windowMs, { ...options, codexVerifier: false });
+const roundPlanSandbox = { planFactCheckRounds, remainingFactCheckRounds, FACTCHECK_MIN_ROUND_MS };
+
 const factCheckPromptFitsProviderLimit = runInNewContext(`${compactPromptFitsSource}\nfactCheckPromptFitsProviderLimit`, {
   Buffer,
   estimateRequestTokens,
@@ -251,6 +262,7 @@ describe('llmFactCheck wiring', () => {
       await runInNewContext(`(async () => { ${block} })()`, {
         AI_MODELS: { CODEX_CLI_PRIMARY: 'codex' },
         isModelAvailable: () => true,
+      ...roundPlanSandbox,
         _codexWroteThisHeadline: false,
         isEvergreenArticle: false,
         factCheckDeadlineMs: 1000,
@@ -305,7 +317,7 @@ describe('infrastructure retries with a retained vote', () => {
   const editorialContext = { articleBody: 'Corpo sintetico', evidenceText: 'Fonte sintetica' };
   const prompt = 'same article';
 
-  async function runRounds(firstServingModel, respond, initialTime = 130_000) {
+  async function runRounds(firstServingModel, respond, initialTime = 130_000, { realPlan = false, wallBudgetMs = 240_000 } = {}) {
     assert.ok(start >= 0 && end > start);
     const calls = [];
     const logs = [];
@@ -317,13 +329,15 @@ describe('infrastructure retries with a retained vote', () => {
       AI_MODELS,
       Date: { now: () => now },
       RUN_START_MS: 0,
-      RUN_WALL_BUDGET_MS: 240_000,
+      RUN_WALL_BUDGET_MS: wallBudgetMs,
       preTranslationDeadlineMs: Infinity,
       addIndependentVote,
       console: { error: (message) => logs.push(message) },
       editorialContext,
       isEvergreenArticle: false,
       isModelAvailable: () => true,
+      ...roundPlanSandbox,
+      ...(realPlan ? { planFactCheckRounds: realPlanFactCheckRounds } : {}),
       _codexWroteThisHeadline: false,
       remediationSourceText: '',
       isSharedTransientFactCheckRosterOutage: () => false,
@@ -353,6 +367,16 @@ describe('infrastructure retries with a retained vote', () => {
     assert.ok(logs.some((line) => line.includes('synthetic broker timeout')));
     return { result, calls, logs };
   }
+
+  test('con Codex nel roster il primo giro da 7 minuti non scade prima della risposta di Codex (run 46096712400)', async () => {
+    // 28/11: fact-check aperto con ~7 minuti: tre giri da ~125 s uccidevano Codex
+    // (che ne chiede 90-230) alla scadenza del giro, «broker socket timed out».
+    const wall = 540_000; // 420 s di finestra + 120 s di riserva post fact-check
+    const { calls } = await runRounds('first-serving-model', () => null, 0, { realPlan: true, wallBudgetMs: wall });
+    const firstCodex = calls.find(({ model }) => model === CODEX);
+    assert.ok(firstCodex.options.deadlineMs - firstCodex.now >= 240_000,
+      `Codex deve avere almeno 240 s, ha ${(firstCodex.options.deadlineMs - firstCodex.now) / 1000} s`);
+  });
 
   test('the retained vote gets a fresh Groq-first retry after Codex times out', async () => {
     const first = 'first-serving-model';
@@ -509,6 +533,7 @@ describe('fact-check retries under a reported input cap', () => {
       Buffer,
       getDeclaredRequestTokenLimit: (model) => model === AI_MODELS.GROQ_GPT_OSS_120B ? declaredInputCap : undefined,
       isModelAvailable: () => true,
+      ...roundPlanSandbox,
       safeSignalDiagnosticTextForLog: String,
       CANTON_LINES: cantonLines,
       IS_CANTON: isCanton,
