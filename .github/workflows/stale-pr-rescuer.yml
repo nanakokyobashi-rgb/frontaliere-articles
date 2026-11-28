@@ -419,7 +419,7 @@ jobs:
           # Con `--paginate` la risposta arriva come una SEQUENZA di array (uno
           # per pagina): `jq -c '.[]'` la legge come stream, senza `--slurp`.
           if [ "${SCAN_MODE:-full}" = "targeted" ]; then
-            if ! target=$(gh api "repos/$REPO/pulls/$TARGET_PR"); then
+            if ! target=$(gh api --paginate "repos/$REPO/pulls/$TARGET_PR"); then
               echo "::error::Lettura della PR target fallita; nessuno scan o mutazione." >&2
               exit 1
             fi
