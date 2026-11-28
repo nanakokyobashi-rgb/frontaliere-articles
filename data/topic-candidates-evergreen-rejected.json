@@ -6780,6 +6780,54 @@
       "firstSeenAt": "2026-11-28T04:20:57.080Z",
       "lastValidatedAt": "2026-11-28T04:20:57.080Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "orari di apertura negozi canton Svitto guida a domeniche e festivi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-28T06:02:37.011Z",
+      "lastValidatedAt": "2026-11-28T06:02:37.011Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "imposta sui cani canton Svitto guida a importi e registrazione",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-28T06:03:48.727Z",
+      "lastValidatedAt": "2026-11-28T06:03:48.727Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "licenza di caccia canton Svitto requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-28T06:04:19.016Z",
+      "lastValidatedAt": "2026-11-28T06:04:19.016Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "permesso di pesca canton Svitto requisiti e stagioni",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-28T06:05:06.564Z",
+      "lastValidatedAt": "2026-11-28T06:05:06.564Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -7790,6 +7838,30 @@
       "firstStrikeAt": "2026-11-28T03:24:33.067Z",
       "lastStrikeAt": "2026-11-28T05:14:29.926Z",
       "expiresAt": "2026-12-28T05:14:29.926Z"
+    },
+    {
+      "keyword": "giorni festivi canton Svitto guida a calendario e regole",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-28T05:59:56.436Z",
+      "lastStrikeAt": "2026-11-28T05:59:56.436Z",
+      "expiresAt": "2026-12-28T05:59:56.436Z"
+    },
+    {
+      "keyword": "targhe e immatricolazione canton Svitto guida a procedura e costi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-28T06:17:31.452Z",
+      "lastStrikeAt": "2026-11-28T06:17:31.452Z",
+      "expiresAt": "2026-12-28T06:17:31.452Z"
     }
   ],
   "legacy": [
