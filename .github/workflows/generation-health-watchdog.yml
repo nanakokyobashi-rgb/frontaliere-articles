@@ -28,8 +28,9 @@ name: Generation health watchdog
 #
 #  · Le due ore. La condizione con la finestra più stretta è `generation-idle`,
 #    a 6h: una passata ogni 2h la rileva entro un terzo della sua finestra. Più
-#    spesso non anticiperebbe nulla e costerebbe di più, perché ogni passata
-#    scarica fino a 60 log di run (~300 KB l'uno) per leggere i marker.
+#    spesso non anticiperebbe nulla e costerebbe di più: ogni passata scarica
+#    fino a 60 log core più una run cantonale per ciascuna sezione (24), circa
+#    300 KB per log, per leggere i marker e diagnosticare i divari.
 #
 # ── Perché il PAT per aprire ────────────────────────────────────────────────
 # Una issue creata dal GITHUB_TOKEN NON emette l'evento `issues: opened`
@@ -52,7 +53,7 @@ on:
         type: boolean
         default: false
       max_log_runs:
-        description: 'Cap sulle run di generate-article da leggere (default 60)'
+        description: 'Cap sui log core di generate-article (default 60); una run cantonale per sezione è aggiunta separatamente'
         required: false
         default: '60'
       run_lookback_hours:

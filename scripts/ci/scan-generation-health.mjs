@@ -41,6 +41,8 @@
  *     parte (`perCanton`) per misurare `canton-dry`.
  *  2. **I marker nei log delle run**, machine-readable e già in produzione:
  *       `event=<e> chain=<c> → section=<s> dry_run=<d>`  (generate-article.yml)
+ *       `SECTION_REQUESTED: canton-*`, `DRY: false` e letture/errori fonte
+ *       (generate-article-<cantone>.yml)
  *       `PRESPEND_GATE_OUTCOME emptied=… recovered=… status=… section=…`
  *       `PRESPEND_GATE_TOTAL_REJECTION before=… anchor_candidates=… section=…`
  *       `⏭️  [<modello>] Skipped — request would exceed <N>-token limit (estimated <M>)`
@@ -162,6 +164,7 @@ import { readTopLevelString, scanTopLevelArticleRecords } from '../lib/article-r
 import { decodeStaticStringLiteral } from '../lib/ts-literals.mjs';
 import { createGithubIssue, resolveGithubIssue } from '../lib/github-issue-creator.mjs';
 import { MAX_PREFLIGHT_REQUEST_TOKENS } from '../../generator/scripts/lib/ai-models.mjs';
+import { loadCantonSectionProfiles } from '../../generator/scripts/lib/canton-section-profile.mjs';
 import {
   failedImageRegenerationRetryIsEligible,
   IMAGE_REGENERATION_TERMINAL_STATUS,
@@ -1433,7 +1436,13 @@ export function findDuplicateTopicPairs(articles, opts = {}) {
 const REMEASURE = {
   commits: 'gh api "repos/$REPO/commits?sha=main&per_page=100" --jq \'.[] | "\\(.commit.committer.date)\\t\\(.commit.message | split("\\n")[0])"\'',
   runs: 'gh run list --repo "$REPO" --workflow=generate-article.yml --limit 200 --json databaseId,conclusion,createdAt'
-    + ' && gh run view <id> --repo "$REPO" --log | grep -E "PRESPEND_GATE_|would exceed|Tutte le keyword evergreen|→ section="',
+    + ' && gh run view <id> --repo "$REPO" --log | grep -E "PRESPEND_GATE_|would exceed|Tutte le keyword evergreen|→ section="'
+    + '\n# Diagnostica cantonale: una query per ciascun workflow generato.'
+    + '\nfor workflow in .github/workflows/generate-article-[a-z][a-z].yml'
+    + ' .github/workflows/generate-article-appenzello.yml .github/workflows/generate-article-basilea.yml; do'
+    + '\n  gh run list --repo "$REPO" --workflow="${workflow##*/}" --limit 3 --json databaseId,conclusion,status,createdAt'
+    + '\ndone'
+    + '\n# Per i log cantonali controllare SECTION_REQUESTED, DRY, 📡 e HTTP.',
   cover: 'jq \'{schema,count:(.items|length),oldest:(.items|map(.requestedAt)|sort|.[0])}\' data/image-regeneration-queue.json'
     + '\ngh run list --repo "$REPO" --workflow=generate-article.yml --limit 60 --json databaseId,createdAt'
     + '\n# per ogni run completata: gh run view <id> --repo "$REPO" --log | grep -aE \'\\[cover\\]\'',
@@ -2492,67 +2501,144 @@ export function collectCoverQueue(repoRoot = REPO_ROOT, now = Date.now()) {
 }
 
 /**
- * Log delle run recenti di `generate-article.yml`.
+ * Log delle run recenti di `generate-article.yml` e dei workflow cantonali.
  *
  * Le run `cancelled` sono escluse a monte: su questo repo sono un terzo del
  * totale (67 su 200 misurate) e sono la coda di concorrenza, non la pipeline.
- * Il parallelismo è basso di proposito — è la stessa quota API del sito.
+ * Il campione principale resta limitato a `maxRuns`; per i cantoni si legge
+ * una sola run completata recente per workflow, più i conteggi di quelle in
+ * coda/in corso. Le interrogazioni restano a parallelismo limitato.
  */
-export async function collectRunLogs(repo, { maxRuns, lookbackHours, concurrency = 4 } = {}) {
-  const since = Date.now() - lookbackHours * 3_600_000;
-  const raw = gh(['run', 'list', '--repo', repo, '--workflow=generate-article.yml',
-    '--limit', String(Math.min(200, maxRuns * 3)),
-    '--json', 'databaseId,conclusion,status,createdAt,updatedAt,displayTitle']);
-  if (raw === null) return { available: false, inFlight: null, cantonDiagnostics: {} };
-
-  let runs;
-  try {
-    runs = JSON.parse(raw || '[]');
-  } catch {
-    return { available: false, inFlight: null, cantonDiagnostics: {} };
-  }
-  const inFlight = countRecentInFlightGenerations(runs, Date.now());
-  const eligible = runs
-    .filter((r) => r.status === 'completed' && r.conclusion && r.conclusion !== 'cancelled'
-      && Date.parse(r.createdAt) >= since)
-    .slice(0, maxRuns);
-
-  if (!eligible.length) return { available: false, inFlight, cantonDiagnostics: {} };
-
-  const parsed = [];
-  let failures = 0;
-  for (let i = 0; i < eligible.length; i += concurrency) {
-    const batch = eligible.slice(i, i + concurrency);
-    const results = await Promise.all(batch.map(async (r) => {
+export async function collectRunLogs(repo, {
+  maxRuns,
+  lookbackHours,
+  concurrency = 4,
+  now = () => Date.now(),
+  listWorkflowRunsFn = async (repoName, workflow, limit) => {
+    const { stdout } = await execFileAsync('gh', [
+      'run', 'list', '--repo', repoName, `--workflow=${workflow}`,
+      '--limit', String(limit),
+      '--json', 'databaseId,conclusion,status,createdAt,updatedAt,displayTitle',
+    ], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, timeout: 20_000 });
+    const rows = JSON.parse(stdout || '[]');
+    if (!Array.isArray(rows)) throw new Error('workflow run list is not an array');
+    return rows;
+  },
+  readRunLogFn = async (repoName, runId) => {
+    const { stdout } = await execFileAsync(
+      'gh', ['run', 'view', String(runId), '--repo', repoName, '--log'],
+      { encoding: 'utf8', maxBuffer: 128 * 1024 * 1024, timeout: 20_000 },
+    );
+    return stdout;
+  },
+} = {}) {
+  const observedAt = now();
+  const since = observedAt - lookbackHours * 3_600_000;
+  const cantonSections = loadCantonSectionProfiles().cantons.map(({ section }) => section);
+  const cantonWorkflows = cantonSections.map((section) => ({
+    section,
+    workflow: `generate-article-${section.slice('canton-'.length)}.yml`,
+  }));
+  const workflowSpecs = [
+    { section: null, workflow: 'generate-article.yml' },
+    ...cantonWorkflows,
+  ];
+  const coreRunLimit = Math.min(200, maxRuns * 3);
+  const snapshots = new Map();
+  for (let i = 0; i < workflowSpecs.length; i += concurrency) {
+    const batch = workflowSpecs.slice(i, i + concurrency);
+    const results = await Promise.all(batch.map(async (spec) => {
+      const limit = spec.section ? 3 : coreRunLimit;
       try {
-        const { stdout } = await execFileAsync(
-          'gh', ['run', 'view', String(r.databaseId), '--repo', repo, '--log'],
-          { encoding: 'utf8', maxBuffer: 128 * 1024 * 1024 },
-        );
-        return { ...parseRunLog(stdout), runCreatedAt: Date.parse(r.createdAt) };
+        const rows = await listWorkflowRunsFn(repo, spec.workflow, limit);
+        return { spec, rows: Array.isArray(rows) ? rows : null };
       } catch {
-        return null;
+        return { spec, rows: null };
       }
     }));
-    for (const res of results) {
-      if (res === null) failures++;
-      else parsed.push(res);
+    for (const result of results) snapshots.set(result.spec.workflow, result.rows);
+  }
+
+  const coreRuns = snapshots.get('generate-article.yml');
+  const inFlight = Array.isArray(coreRuns) ? countRecentInFlightGenerations(coreRuns, observedAt) : null;
+  const eligibleCore = (Array.isArray(coreRuns) ? coreRuns : [])
+    .filter((run) => {
+      const createdAt = Date.parse(run.createdAt);
+      return run.status === 'completed' && run.conclusion && run.conclusion !== 'cancelled'
+        && Number.isFinite(createdAt) && createdAt >= since && createdAt <= observedAt;
+    })
+    .slice(0, maxRuns)
+    .map((run) => ({ run, section: null }));
+
+  const listUnavailableSections = [];
+  const inFlightBySection = {};
+  const eligibleCantonBySection = [];
+  for (const spec of cantonWorkflows) {
+    const runs = snapshots.get(spec.workflow);
+    if (!Array.isArray(runs)) {
+      listUnavailableSections.push(spec.section);
+      continue;
+    }
+    const recent = runs.filter((run) => {
+      const createdAt = Date.parse(run.createdAt);
+      return Number.isFinite(createdAt) && createdAt >= since && createdAt <= observedAt;
+    });
+    const inFlightCount = recent.filter((run) => IN_FLIGHT_GENERATION_STATUSES.has(String(run.status || ''))).length;
+    if (inFlightCount > 0) inFlightBySection[spec.section] = inFlightCount;
+    const latestCompleted = recent
+      .filter((run) => run.status === 'completed' && run.conclusion && run.conclusion !== 'cancelled')
+      .sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))[0];
+    if (latestCompleted) eligibleCantonBySection.push({ run: latestCompleted, section: spec.section });
+  }
+
+  const eligible = [...eligibleCore, ...eligibleCantonBySection];
+  const parsedCore = [];
+  const parsedCantons = [];
+  const logFailuresBySection = {};
+  let coreLogFailures = 0;
+  for (let i = 0; i < eligible.length; i += concurrency) {
+    const batch = eligible.slice(i, i + concurrency);
+    const results = await Promise.all(batch.map(async (item) => {
+      try {
+        const text = await readRunLogFn(repo, item.run.databaseId, item.section);
+        const parsed = parseRunLog(text);
+        if (!parsed.section && item.section) parsed.section = item.section;
+        return { ...parsed, runCreatedAt: Date.parse(item.run.createdAt), workflowSection: item.section };
+      } catch {
+        return { failed: true, workflowSection: item.section };
+      }
+    }));
+    for (const result of results) {
+      if (result.failed) {
+        if (result.workflowSection) {
+          logFailuresBySection[result.workflowSection] = (logFailuresBySection[result.workflowSection] || 0) + 1;
+        } else coreLogFailures++;
+      } else if (result.workflowSection) parsedCantons.push(result);
+      else parsedCore.push(result);
     }
   }
 
-  const okRate = eligible.length ? parsed.length / eligible.length : 0;
+  const cantonDiagnostics = summarizeCantonRunDiagnostics(parsedCantons, {
+    expectedSections: cantonSections,
+    listUnavailableSections,
+    inFlightBySection,
+    logFailuresBySection,
+  });
+  if (!eligibleCore.length) return { available: false, inFlight, cantonDiagnostics };
+
+  const okRate = parsedCore.length / eligibleCore.length;
   if (okRate < MIN_LOG_SUCCESS_RATE) {
-    console.warn(`::warning::[generation-health] solo ${parsed.length}/${eligible.length} log leggibili (${(okRate * 100).toFixed(0)}%) — le condizioni sui log NON vengono valutate: «non ho misurato» non è «sta bene».`);
-    return { available: false, inFlight, cantonDiagnostics: {} };
+    console.warn(`::warning::[generation-health] solo ${parsedCore.length}/${eligibleCore.length} log leggibili (${(okRate * 100).toFixed(0)}%) — le condizioni sui log NON vengono valutate: «non ho misurato» non è «sta bene».`);
+    return { available: false, inFlight, cantonDiagnostics };
   }
 
-  const summary = summarizeRuns(parsed);
-  const times = eligible.map((r) => Date.parse(r.createdAt)).filter(Number.isFinite);
+  const summary = summarizeRuns(parsedCore);
+  const times = eligibleCore.map(({ run }) => Date.parse(run.createdAt)).filter(Number.isFinite);
   return {
     available: true,
     inFlight,
-    total: parsed.length,
-    logFailures: failures,
+    total: parsedCore.length,
+    logFailures: coreLogFailures,
     spanHours: times.length > 1 ? (Math.max(...times) - Math.min(...times)) / 3_600_000 : 0,
     bySection: summary.bySection,
     outcomes: summary.outcomes,
@@ -2560,7 +2646,7 @@ export async function collectRunLogs(repo, { maxRuns, lookbackHours, concurrency
     oversize: summary.oversize,
     roster: summary.roster,
     coverHealth: summary.coverHealth,
-    cantonDiagnostics: summarizeCantonRunDiagnostics(parsed),
+    cantonDiagnostics,
   };
 }
 

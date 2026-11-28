@@ -61,6 +61,7 @@ import {
   collectCoverQueue,
   collectCommits,
   collectMeasurements,
+  collectRunLogs,
   countRecentInFlightGenerations,
   evaluateConditions,
   findDuplicateTopicPairs,
@@ -446,6 +447,58 @@ describe('parseRunLog — i marker già emessi dalla pipeline', () => {
       assert.deepEqual(r.tokenLimitSkips, []);
       assert.deepEqual(r.coverOutcomes, []);
     }
+  });
+});
+
+describe('collectRunLogs — i workflow cantonali hanno una diagnosi propria', () => {
+  test('legge una run cantonale per workflow senza ridurre il campione core', async () => {
+    const listCalls = [];
+    const coreRun = {
+      databaseId: 1, conclusion: 'success', status: 'completed',
+      createdAt: new Date(NOW - H).toISOString(), displayTitle: 'Generate Blog Article (frontaliere)',
+    };
+    const cantonRun = {
+      databaseId: 2, conclusion: 'success', status: 'completed',
+      createdAt: new Date(NOW - H / 2).toISOString(), displayTitle: 'Generate Blog Article (canton-lu)',
+    };
+    const pendingRun = {
+      databaseId: 3, conclusion: null, status: 'queued',
+      createdAt: new Date(NOW - H / 4).toISOString(), displayTitle: 'Generate Blog Article (canton-be)',
+    };
+
+    const result = await collectRunLogs('owner/repo', {
+      maxRuns: 60,
+      lookbackHours: 12,
+      now: () => NOW,
+      listWorkflowRunsFn: async (repo, workflow, limit) => {
+        listCalls.push({ repo, workflow, limit });
+        if (workflow === 'generate-article.yml') return [coreRun];
+        if (workflow === 'generate-article-lu.yml') return [cantonRun];
+        if (workflow === 'generate-article-be.yml') return [pendingRun];
+        if (workflow === 'generate-article-ge.yml') throw new Error('workflow list unavailable');
+        if (workflow === 'generate-article-ti.yml') return [{ ...cantonRun, databaseId: 4 }];
+        return [];
+      },
+      readRunLogFn: async (repo, runId, section) => {
+        assert.equal(repo, 'owner/repo');
+        if (section === 'canton-ti') throw new Error('run log unavailable');
+        return runId === 1 ? LOG_FRONTALIERE_OK : LOG_CANTON_DIAGNOSTICS;
+      },
+    });
+
+    assert.equal(listCalls.length, 25, 'un listing per il workflow core e per ciascuno dei 24 cantoni');
+    assert.equal(listCalls.find(({ workflow }) => workflow === 'generate-article.yml')?.limit, 180);
+    assert.ok(listCalls.filter(({ workflow }) => workflow !== 'generate-article.yml').every(({ limit }) => limit === 3));
+    assert.equal(result.available, true);
+    assert.equal(result.total, 1, 'il totale del campione core conserva il denominatore precedente');
+    assert.equal(result.cantonDiagnostics['canton-lu'].runs, 1);
+    assert.equal(result.cantonDiagnostics['canton-lu'].sourceReadCount, 1);
+    assert.equal(result.cantonDiagnostics['canton-lu'].recentItems, 10);
+    assert.deepEqual(result.cantonDiagnostics['canton-lu'].httpFailuresByStatus, { '403': 1 });
+    assert.equal(result.cantonDiagnostics['canton-lu'].providerUnavailableRuns, 1);
+    assert.equal(result.cantonDiagnostics['canton-be'].inFlightRuns, 1);
+    assert.equal(result.cantonDiagnostics['canton-ge'].listUnavailable, true);
+    assert.equal(result.cantonDiagnostics['canton-ti'].logFailures, 1);
   });
 });
 
