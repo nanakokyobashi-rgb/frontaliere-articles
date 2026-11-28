@@ -110,8 +110,8 @@ test('MEDIUM 2: lo stage fallito scrive un marcatore, il coordinator replay-a so
   assert.ok(stage.indexOf('Upload failed stage marker') < stage.indexOf('Cleanup Firebase credentials'));
 
   const replay = stepBlock(jobBlock('coordinate_api_release'), 'Replay full-section for failed stage legs');
-  assert.match(replay, /if: needs\.resolve\.outputs\.dry != 'true' && steps\.decision\.outputs\.failed_sections != '\[\]'/u);
-  assert.match(replay, /gh workflow run fast-publish-section\.yml[\s\S]*?-f section="\$section" -f dry_run=false -f article_ids='\[\]'/u);
+  assert.match(replay, /if: \$\{\{ !cancelled\(\) && needs\.resolve\.outputs\.dry != 'true' && steps\.decision\.outputs\.failed_sections != '\[\]' \}\}/u);
+  assert.match(replay, /dispatch-fast-publish-replay\.sh[\s\S]*?-f section="\$section" -f dry_run=false -f article_ids='\[\]'/u);
   assert.match(jobBlock('coordinate_api_release'), /failed_sections: \$\{\{ steps\.decision\.outputs\.failed_sections \}\}/u);
 });
 
@@ -221,35 +221,15 @@ function runProbe(root, ghBody, extraEnv = {}) {
   });
 }
 
-test('MEDIUM 3: il probe esclude la sostituzione solo senza run push vivi o cancellati', () => {
-  const root = mkdtempSync(path.join(tmpdir(), 'f1-r12-probe-'));
-  try {
-    const runs = (list) => `printf '%s\\n' '${JSON.stringify(list)}'`;
-    // Solo run completati con esito diverso da cancelled e il run corrente vivo.
-    assert.equal(runProbe(root, runs([
-      { id: 1, status: 'completed', conclusion: 'success' },
-      { id: 2, status: 'completed', conclusion: 'failure' },
-      { id: 100, status: 'in_progress', conclusion: null },
-    ])).stdout.trim(), 'true');
-    // Un run push ancora in corso puo avere un finalize pending.
-    assert.equal(runProbe(root, runs([{ id: 3, status: 'in_progress', conclusion: null }])).stdout.trim(), 'false');
-    assert.equal(runProbe(root, runs([{ id: 4, status: 'queued', conclusion: null }])).stdout.trim(), 'false');
-    // Un run push cancellato puo essere stato sostituito.
-    assert.equal(runProbe(root, runs([{ id: 5, status: 'completed', conclusion: 'cancelled' }])).stdout.trim(), 'false');
-    // Nessun run: esclusa.
-    assert.equal(runProbe(root, runs([])).stdout.trim(), 'true');
-  } finally {
-    rmSync(root, { recursive: true, force: true });
-  }
-});
+// Il comportamento per sezione del probe e' coperto da fast-publish-round13-review.test.mjs.
 
 test('MEDIUM 3: probe illeggibile o risposta non valida = non posso escludere (full-section)', () => {
   const root = mkdtempSync(path.join(tmpdir(), 'f1-r12-probe-fail-'));
   try {
-    const failing = runProbe(root, 'exit 1', { PATH: `${path.join(root, 'bin')}:${process.env.PATH}` });
+    const failing = runProbe(root, 'exit 1', { SECTION: 'canton-ow', PATH: `${path.join(root, 'bin')}:${process.env.PATH}` });
     assert.equal(failing.stdout.trim(), 'false');
     assert.equal(failing.status, 0);
-    assert.equal(runProbe(root, "printf '%s\\n' 'not-json'").stdout.trim(), 'false');
+    assert.equal(runProbe(root, "printf '%s\\n' 'not-json'", { SECTION: 'canton-ow' }).stdout.trim(), 'false');
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
@@ -278,7 +258,7 @@ test('LOW 4: il download degli stage artifact ritenta 3 volte con attesa e ripor
   assert.match(coordinator, /steps\.download_stage_1\.outcome == 'failure' && steps\.download_stage_2\.outcome == 'failure'/u);
   assert.match(coordinator, /STAGE_DOWNLOAD_FAILED: \$\{\{ steps\.download_stage_1\.outcome == 'failure' && steps\.download_stage_2\.outcome == 'failure' && steps\.download_stage_3\.outcome == 'failure' \}\}/u);
   assert.match(coordinator, /RUN_ID: \$\{\{ github\.run_id \}\}/u);
-  assert.equal((coordinator.match(/continue-on-error: true/gu) ?? []).length, 3, 'nessun altro step silenzia errori');
+  assert.equal((coordinator.match(/continue-on-error: true/gu) ?? []).length, 4, 'tre download e il replay (round 13): nessun altro step silenzia errori');
 });
 
 function runDownloadFailure(root, ghBody) {

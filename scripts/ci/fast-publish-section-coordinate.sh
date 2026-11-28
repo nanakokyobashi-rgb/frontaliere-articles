@@ -28,12 +28,13 @@ section_list() {
 # Il download degli stage artifact ha esaurito i tentativi. Se il run ha artifact
 # di stage il fallimento e' reale e va dichiarato: trattarlo come «nessuna gamba
 # ha prodotto uno stage» scarterebbe tutte le sezioni in silenzio. Se invece non
-# ce n'e' nessuno (tutte le gambe fallite/sostituite) si procede senza.
+# ce n'e' nessuno (tutte le gambe fallite/sostituite) si procede senza. I
+# marcatori `fast-publish-stage-failed-*` non sono stage: non entrano nel conteggio.
 if [ "${STAGE_DOWNLOAD_FAILED:-false}" = 'true' ]; then
   : "${REPO:?REPO is required to verify a failed stage download}"
   : "${RUN_ID:?RUN_ID is required to verify a failed stage download}"
   if ! listed="$(gh api -X GET "repos/$REPO/actions/runs/$RUN_ID/artifacts" -f per_page=100 \
-      --jq '[.artifacts[] | select(.name | startswith("fast-publish-stage-"))] | length' 2>/dev/null)" \
+      --jq '[.artifacts[] | select((.name | startswith("fast-publish-stage-")) and ((.name | startswith("fast-publish-stage-failed-")) | not))] | length' 2>/dev/null)" \
     || ! [[ "$listed" =~ ^[0-9]+$ ]]; then
     echo '::error::download degli stage artifact fallito 3 volte e l elenco degli artifact del run non e leggibile: nessuna sezione scartata, release non decisa' >&2
     exit 1

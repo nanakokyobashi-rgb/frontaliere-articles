@@ -833,25 +833,6 @@ jobs:
           REPO: ${{ github.repository }}
         run: bash scripts/ci/fast-publish-section-coordinate.sh
 
-      - name: Replay full-section for failed stage legs
-        if: needs.resolve.outputs.dry != 'true' && steps.decision.outputs.failed_sections != '[]'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          REPOSITORY: ${{ github.repository }}
-          FAILED_SECTIONS: ${{ steps.decision.outputs.failed_sections }}
-        run: |
-          set -euo pipefail
-          # Una gamba di stage fallita non ha ne' artifact ne' un'altra run che
-          # la possieda: senza replay le sue pagine restano 404 fino al giro
-          # del reconciler. Il dispatch senza ID e' un recupero full-section
-          # sotto lo slot di sezione (nessuna API: la barriera l'ha esclusa).
-          while IFS= read -r section; do
-            [[ "$section" =~ ^canton-[a-z0-9-]+$ ]] || { echo "::error::sezione di replay non valida: $section"; exit 1; }
-            gh workflow run fast-publish-section.yml --repo "$REPOSITORY" --ref main \
-              -f section="$section" -f dry_run=false -f article_ids='[]'
-            echo "::notice::replay full-section dispatchato per la gamba di stage fallita $section"
-          done < <(jq -r '.[]' <<<"$FAILED_SECTIONS")
-
       - name: Setup isolated article source runtime for Remote Config
         if: steps.decision.outputs.action == 'dispatch'
         uses: ./.github/actions/setup-article-source-runtime
@@ -900,6 +881,48 @@ jobs:
           gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main \
             -f source_commit="$API_COMMIT" \
             -f bing_seo_nonce="fast-publish-range-${before}-${API_COMMIT}"
+
+      - name: Replay full-section for failed stage legs
+        # Dopo il dispatch API e mai bloccante: un errore residuo del replay non
+        # deve far fallire coordinate_api_release (salterebbe tutti i finalize
+        # delle sezioni valide); il reconciler resta la rete.
+        if: ${{ !cancelled() && needs.resolve.outputs.dry != 'true' && steps.decision.outputs.failed_sections != '[]' }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          FAILED_SECTIONS: ${{ steps.decision.outputs.failed_sections }}
+        run: |
+          set -euo pipefail
+          # Una gamba di stage fallita non ha ne' artifact ne' un'altra run che
+          # la possieda: senza replay le sue pagine restano 404 fino al giro
+          # del reconciler. Il dispatch senza ID e' un recupero full-section
+          # sotto lo slot di sezione (nessuna API: la barriera l'ha esclusa).
+          # Il nonce e' legato al run (non al tentativo): un rerun ritrova il
+          # replay gia' accettato/in corso invece di accodarne un secondo; il
+          # dispatcher ritenta e verifica l'accettazione.
+          replayed=()
+          failed=()
+          while IFS= read -r section; do
+            [ -n "$section" ] || continue
+            [[ "$section" =~ ^canton-[a-z0-9-]+$ ]] || { echo "::warning::sezione di replay non valida: $section"; failed+=("$section"); continue; }
+            nonce="replay-failed-stage-${GITHUB_RUN_ID}-${section}"
+            title="cover-publish-section / ${section} / nonce=${nonce}"
+            if bash scripts/ci/dispatch-fast-publish-replay.sh "$REPOSITORY" "$title" --ref main \
+              -f section="$section" -f dry_run=false -f article_ids='[]' -f dispatch_nonce="$nonce"; then
+              replayed+=("$section")
+              echo "::notice::replay full-section dispatchato per la gamba di stage fallita $section"
+            else
+              failed+=("$section")
+              echo "::warning::replay full-section NON confermato per la gamba di stage fallita $section: resta al reconciler"
+            fi
+          done < <(jq -r '.[]' <<<"$FAILED_SECTIONS")
+          {
+            echo '### Replay delle gambe di stage fallite'
+            echo "- replay dispatchati o gia presenti: ${replayed[*]:-nessuno}"
+            echo "- replay non confermati (li riprende il reconciler): ${failed[*]:-nessuno}"
+          } >> "${GITHUB_STEP_SUMMARY:-/dev/null}"
+          exit 0
 
       - name: Cleanup Firebase credentials
         if: always()
