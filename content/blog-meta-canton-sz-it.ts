@@ -54,6 +54,9 @@ const blogMetaCantonSzIt: Record<string, string> = {
     'blog.article.svitto-microsoft-365-amministrazione.title': 'Svitto conferma Microsoft 365 per l\'amministrazione',
     'blog.article.svitto-microsoft-365-amministrazione.excerpt': 'Il Consiglio di Stato non vede ragioni per rivedere la scelta; seguirà comunque lo sviluppo di soluzioni open source.',
     'blog.article.svitto-microsoft-365-amministrazione.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.einsiedeln-investimenti-netti-piano.title': 'Einsiedeln riduce di CHF 43,4 mln gli investimenti',
+    'blog.article.einsiedeln-investimenti-netti-piano.excerpt': 'Il piano 2028–2030 riduce di circa CHF 43,4 milioni gli investimenti netti a CHF 70,8 milioni; dal 2031 al 2035 limite annuo generale di CHF 20 milioni.',
+    'blog.article.einsiedeln-investimenti-netti-piano.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSzIt;

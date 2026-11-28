@@ -69,7 +69,6 @@ jobs:
           node-version: '22'
 
       - name: Ensure loop labels exist (idempotente)
-        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}

@@ -665,6 +665,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-einsiedeln-investimenti-netti-piano': {
+    title: 'Einsiedeln riduce di CHF 43,4 mln gli investimenti',
+    description: 'Il Bezirksrat di Einsiedeln approva il piano 2028–2030: investimenti netti a CHF 70,8 milioni e limite annuo di CHF 20 milioni dal 2031.',
+    keywords: 'frontalieri, ticino, svizzera, italia, einsiedeln, riduce, investimenti, piano',
+    ogTitle: 'Einsiedeln: investimenti netti giù di CHF 43,4 milioni',
+    ogDescription: 'Il Bezirksrat ha approvato il piano 2028–2030 il 18 novembre 2026: investimenti netti ridotti di circa CHF 43,4 milioni, a CHF 70,8 milioni. Per il 2031–2035 è fissato un limite annuo generalmente di CHF 20 milioni.',
+    canonicalPath: '/articoli-svitto/einsiedeln-investimenti-netti-piano/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Einsiedeln riduce di CHF 43,4 mln gli investimenti",
+      "description": "Il Bezirksrat di Einsiedeln approva il piano 2028–2030: investimenti netti a CHF 70,8 milioni e limite annuo di CHF 20 milioni dal 2031.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-einsiedeln-investimenti-netti-piano.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-28T10:23:27+00:00",
+      "dateModified": "2026-11-28T10:23:27+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svitto/einsiedeln-investimenti-netti-piano/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

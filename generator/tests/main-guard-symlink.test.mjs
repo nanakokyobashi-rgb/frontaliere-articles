@@ -80,6 +80,7 @@ test('resolve-issue-verified entra in CLI anche quando invocato via symlink', ()
 
 test('ensure-loop-labels entra in CLI anche quando invocato via symlink', () => {
   const result = runViaSymlink('scripts/ci/ensure-loop-labels.mjs', ['--dry-run']);
-  assert.equal(result.status, 0, result.stderr);
+  // Fail-closed: senza repository la riconciliazione non puo' dirsi riuscita.
+  assert.equal(result.status, 1, result.stderr);
   assert.match(result.stderr, /GITHUB_REPOSITORY non impostato/);
 });

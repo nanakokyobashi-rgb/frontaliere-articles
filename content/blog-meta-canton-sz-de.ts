@@ -54,6 +54,9 @@ const blogMetaCantonSzDe: Record<string, string> = {
     'blog.article.svitto-microsoft-365-amministrazione.title': 'Schwyz bestätigt Microsoft 365 für die Verwaltung',
     'blog.article.svitto-microsoft-365-amministrazione.excerpt': 'Der Staatsrat sieht keinen Grund, die Entscheidung zu überdenken; er wird die Entwicklung von Open-Source-Lösungen dennoch verfolgen.',
     'blog.article.svitto-microsoft-365-amministrazione.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.einsiedeln-investimenti-netti-piano.title': 'Einsiedeln senkt die Investitionen um CHF 43,4 Mio.',
+    'blog.article.einsiedeln-investimenti-netti-piano.excerpt': 'Der Plan 2028–2030 senkt die Nettoinvestitionen um rund CHF 43,4 Millionen auf CHF 70,8 Millionen; von 2031 bis 2035 gilt eine allgemeine jährliche Obergrenze von CHF 20 Millionen.',
+    'blog.article.einsiedeln-investimenti-netti-piano.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSzDe;
