@@ -26,7 +26,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ensureLoopLabels, LABELS, MAX_DESCRIPTION } from '../../scripts/ci/ensure-loop-labels.mjs';
+import { ensureLoopLabels, LABELS, LIST_LIMIT, MAX_DESCRIPTION } from '../../scripts/ci/ensure-loop-labels.mjs';
 import { classifyIssue } from '../../scripts/lib/classify-issue.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -39,7 +39,7 @@ function labelFixture(overrides = {}) {
   })).filter((_, index) => index !== overrides.missingAt);
 }
 
-function ensureHarness({ labels = labelFixture(), failCommand, listResponse } = {}) {
+function ensureHarness({ labels = labelFixture(), failCommand, listResponse, createError, getResponse } = {}) {
   const calls = [];
   const messages = [];
   const runGh = (args) => {
@@ -48,6 +48,11 @@ function ensureHarness({ labels = labelFixture(), failCommand, listResponse } = 
       if (failCommand === 'list') throw Object.assign(new Error('do not print this'), { status: 403 });
       return listResponse ?? JSON.stringify(labels);
     }
+    if (args[0] === 'api') {
+      if (getResponse === undefined) throw Object.assign(new Error('do not print this'), { status: 404 });
+      return getResponse;
+    }
+    if (args[1] === 'create' && createError) throw createError;
     if (failCommand === args[1]) throw Object.assign(new Error('do not print this'), { status: 403 });
     return '';
   };
@@ -222,6 +227,54 @@ test('il fallimento nel creare una label rende non-zero il risultato dopo il ten
   assert.equal(fixture.calls.filter((args) => args[1] === 'create').length, 1);
   assert.ok(fixture.messages.some((message) => message.includes('status_403')));
   assert.ok(fixture.messages.every((message) => !message.includes('do not print this')));
+});
+
+const alreadyExistsError = () =>
+  Object.assign(new Error('do not print this'), {
+    status: 1,
+    stderr: 'HTTP 422: Validation Failed (already_exists)',
+  });
+
+test('create che trova la label gia creata da un run concorrente e successo dopo la rilettura per nome', () => {
+  const fixture = ensureHarness({
+    labels: labelFixture({ missingAt: 0 }),
+    createError: alreadyExistsError(),
+    getResponse: JSON.stringify({ name: LABELS[0][0] }),
+  });
+  assert.equal(ensureLoopLabels({ repo: 'owner/repo', runGh: fixture.runGh, logger: fixture.logger }), 0);
+  const reread = fixture.calls.filter((args) => args[0] === 'api');
+  assert.equal(reread.length, 1);
+  assert.deepEqual(reread[0].slice(0, 3), ['api', '-X', 'GET']);
+  assert.ok(reread[0][3].startsWith('repos/owner/repo/labels/'));
+  assert.ok(fixture.messages.some((message) => message.includes('concorrente')));
+});
+
+test('already_exists senza conferma dalla rilettura resta un fallimento', () => {
+  const fixture = ensureHarness({ labels: labelFixture({ missingAt: 0 }), createError: alreadyExistsError() });
+  assert.equal(ensureLoopLabels({ repo: 'owner/repo', runGh: fixture.runGh, logger: fixture.logger }), 1);
+  assert.ok(fixture.messages.every((message) => !message.includes('do not print this')));
+});
+
+test('un errore di create diverso da already_exists non viene riletto e resta fail-closed', () => {
+  const fixture = ensureHarness({
+    labels: labelFixture({ missingAt: 0 }),
+    createError: Object.assign(new Error('x'), { status: 1, stderr: 'HTTP 403: forbidden' }),
+    getResponse: JSON.stringify({ name: LABELS[0][0] }),
+  });
+  assert.equal(ensureLoopLabels({ repo: 'owner/repo', runGh: fixture.runGh, logger: fixture.logger }), 1);
+  assert.equal(fixture.calls.filter((args) => args[0] === 'api').length, 0);
+});
+
+test('il listing usa il tetto esteso e un elenco che lo raggiunge fallisce invece di indovinare', () => {
+  const ok = ensureHarness();
+  ensureLoopLabels({ repo: 'owner/repo', runGh: ok.runGh, logger: ok.logger });
+  const idx = ok.calls[0].indexOf('--limit');
+  assert.equal(ok.calls[0][idx + 1], String(LIST_LIMIT));
+
+  const filler = Array.from({ length: LIST_LIMIT }, (_, i) => ({ name: `x-${i}`, color: 'ffffff', description: '' }));
+  const full = ensureHarness({ labels: filler });
+  assert.equal(ensureLoopLabels({ repo: 'owner/repo', runGh: full.runGh, logger: full.logger }), 1);
+  assert.equal(full.calls.length, 1);
 });
 
 test('il fallimento nel riallineare una label rende non-zero il risultato', () => {

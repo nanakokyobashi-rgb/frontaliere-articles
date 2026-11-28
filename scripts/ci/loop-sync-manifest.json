@@ -3497,6 +3497,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/canton-evergreen.mjs",
+      "mode": "corpus-only",
+      "reason": "La manopola Remote Config CANTON_EVERGREEN_SECTIONS (WP3.10b): lista delle sezioni cantonali che, solo senza una notizia utilizzabile, ripiegano sul pool evergreen del proprio cantone (stessa sintassi di CANTON_HIGH_CADENCE_SECTIONS, vuota = comportamento di prima) e i codici cantone che alimentano il pool. Lo importa create-article.mjs. Corpus-only: il sito non ha sezioni cantonali.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
       "path": "generator/scripts/lib/canton-news-sources.mjs",
       "mode": "corpus-only",
       "reason": "Scanner delle fonti news delle sezioni cantonali (P6b): parser json-entities (iCMS NW/OW/SH), json-api (zh.ch, be.ch), news-sitemap e sitemap a periodo (settimana ISO, mese, anno), riuso di extractRssItems/extractHeadlines di create-article.mjs per RSS/Atom e link HTML; quirk del profilo (crawl-delay per host, maxRequestsPerRun, charset dichiarato, pubDate vuoto, anno sbagliato nei time datetime, paywall title+lead) e User-Agent dichiarato (D10). Dal P5b: sulle pagine html-links toglie la cornice del sito (nav, header e footer di pagina) e i link fuori da `articlePathPattern` dove il profilo lo dichiara, e per le fonti `urlReusedForDifferentStories` mette nell'URL l'identita' dell'item (`#ft-item=`, costruita con le funzioni di `source-url-ledger.mjs`). Corpus-only: le fonti per cantone e il generatore che le legge esistono solo nel corpus.",

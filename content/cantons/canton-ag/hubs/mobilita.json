@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-28T00:24:25.001Z",
-  "contentHash": "38435b9af044490c5774ed7fb20f72b9ac2e9166815de9032223d2020516f891",
+  "updatedAt": "2026-11-28T17:11:28.288Z",
+  "contentHash": "de00a61478c0846518285357cba143684650aba4d02decfc4eb20a8f41f92dc5",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "13",
+          "value": "12",
           "note": "segnalazioni aggiornate: 27 novembre 2026"
         },
         {
@@ -270,7 +270,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-28T00:24:25.001Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     },
     "en": {
       "canton": "AG",
@@ -285,7 +285,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "13",
+          "value": "12",
           "note": "reports as of 27 November 2026"
         },
         {
@@ -518,7 +518,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-28T00:24:25.001Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     },
     "de": {
       "canton": "AG",
@@ -533,7 +533,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "13",
+          "value": "12",
           "note": "Meldungen vom 27. November 2026"
         },
         {
@@ -766,7 +766,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-28T00:24:25.001Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     },
     "fr": {
       "canton": "AG",
@@ -781,7 +781,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "13",
+          "value": "12",
           "note": "signalements au 27 novembre 2026"
         },
         {
@@ -1014,7 +1014,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-28T00:24:25.001Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     }
   }
 }
