@@ -51,7 +51,7 @@ function makeClassifier({
     const IS_FRONTALIERE = false;
     const SECTION_PROFILE = {};
     const classifierSourceHint = () => '';
-    const cantonClassifierPrompt = () => 'prompt di prova';
+    const buildPrespendClassifierPrompt = () => 'prompt di prova';
     let _decisionApiCircuitOpen = false;
     let _decisionApiMissingKeyLogged = false;
     ${classifierSource}

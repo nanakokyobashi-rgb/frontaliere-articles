@@ -3,5 +3,6 @@
 # e questa prova su ognuno, un anello a 90 s riaprirebbe lo stesso pool.
 # Non vale se i backstop D/E del pre-spend gate hanno ripristinato candidati.
 (.article.id // null) == null
+and (.candidateAttempted // false) != true
 and (.headlines.preSpendGateBackstopRestored // 0) == 0
 and (.poolKnownEmpty == true or .evergreenPool.saturated == true or .headlines.preSpendGateTotalRejection == true)

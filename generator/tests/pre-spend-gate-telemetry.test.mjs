@@ -197,6 +197,7 @@ function makeGate({
     'PRESPEND_GATE_CONCURRENCY',
     'resolvePositiveIntEnv',
     '_classifyWithRejectionMemo',
+    'prespendClassifierIdentity',
     '_contentFingerprint',
     '_loadEvergreenRejectedTracker',
     '_persistEvergreenRejectedTracker',
@@ -232,6 +233,7 @@ function makeGate({
     // Memo cross-run dei "no": il vero modulo, su un tracker vuoto e senza
     // persistenza, cosi' il gate qui provato resta quello di sempre.
     classifyWithRejectionMemo,
+    () => 'test-identity',
     contentFingerprint,
     () => ({}),
     () => ({}),

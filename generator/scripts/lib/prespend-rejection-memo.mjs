@@ -17,7 +17,8 @@
  * (`uncertain`: confidenza <= 0,5 della Decisions API, non confermata dal
  * fallback testuale per scadenza, errore o risposta illeggibile).
  *
- * La chiave comprende un hash breve di titolo+sommario: una notizia aggiornata
+ * La chiave comprende l'identita' del classifier (modello + prompt) e un hash
+ * breve di titolo+sommario: una notizia aggiornata
  * sullo stesso URL con un titolo diverso viene rivalutata. Le voci hanno un
  * tetto proprio (`PRESPEND_RELEVANCE_URL_MAX`), separato da quello degli abort
  * del topic-gate, che quindi non vengono cacciati.
@@ -27,14 +28,38 @@ import {
   PRESPEND_RELEVANCE_KEY_PREFIX,
   isTopicGateAbortedUrl,
   recordTopicGateAbortedUrl,
+  topicGateUrlKey,
 } from './article-topic-selector.mjs';
 
 export const PRESPEND_REJECTION_KEY_PREFIX = PRESPEND_RELEVANCE_KEY_PREFIX;
 
-/** Hash breve (8 hex) di titolo+sommario, normalizzati: maiuscole e spazi non contano. */
-export function contentFingerprint(title, summary) {
+/**
+ * Identita' del classifier: modello + testo delle istruzioni (il prompt reso
+ * con input vuoti) + via di decisione. Cambia se cambia uno dei tre, quindi un
+ * cambio di `PRESPEND_GATE_MODEL` o di policy invalida i "no" gia' memorizzati.
+ */
+export function classifierIdentity({ model = '', promptTemplate = '', extra = '' } = {}) {
+  return createHash('sha256').update(`${model}\n${promptTemplate}\n${extra}`).digest('hex').slice(0, 8);
+}
+
+/**
+ * Hash breve (8 hex) di titolo+sommario, normalizzati: maiuscole e spazi non
+ * contano. Con `identity` (vedi `classifierIdentity`) entra nell'hash anche il
+ * classifier che ha dato il verdetto.
+ */
+export function contentFingerprint(title, summary, identity = '') {
   const norm = (v) => String(v ?? '').normalize('NFC').toLowerCase().replace(/\s+/g, ' ').trim();
-  return createHash('sha256').update(`${norm(title)}\n${norm(summary)}`).digest('hex').slice(0, 8);
+  const body = `${norm(title)}\n${norm(summary)}`;
+  return createHash('sha256').update(identity ? `${identity}\n${body}` : body).digest('hex').slice(0, 8);
+}
+
+/**
+ * Il pool e' PROVATO vuoto solo se nessuna generazione e' partita e non resta
+ * nessun candidato dopo scan, filtri, topic-gate e pre-spend (backstop inclusi).
+ * Un tentativo fallito per duplicato o qualita' non e' un pool vuoto.
+ */
+export function isPoolProvenEmpty({ candidateAttempted, remainingHeadlines }) {
+  return candidateAttempted !== true && (remainingHeadlines?.length ?? 0) === 0;
 }
 
 /** Chiave del memo: URL normalizzato, piu' `#<hash>` se l'item ha un contenuto da distinguere. */
@@ -57,9 +82,25 @@ export function recordPrespendRejectedUrls(tracker, urlKeys, section, now = Date
   let next = tracker;
   for (const urlKey of urlKeys) {
     const key = memoKey(urlKey);
-    if (key) next = recordTopicGateAbortedUrl(next, key, section, now);
+    if (!key) continue;
+    next = withoutOtherRevisions(next, key, section);
+    next = recordTopicGateAbortedUrl(next, key, section, now);
   }
   return next;
+}
+
+/**
+ * Un URL con molte revisioni di titolo non deve riempire il tetto: registrando
+ * una chiave `<url>#<hash>` si tolgono le altre revisioni dello stesso URL.
+ */
+function withoutOtherRevisions(tracker, key, section) {
+  const hash = key.lastIndexOf('#');
+  const urls = tracker?.topicGateUrls;
+  if (hash < 0 || !urls) return tracker;
+  const stem = topicGateUrlKey(key.slice(0, hash + 1), section);
+  const full = topicGateUrlKey(key, section);
+  const kept = Object.fromEntries(Object.entries(urls).filter(([k]) => k === full || !k.startsWith(stem)));
+  return Object.keys(kept).length === Object.keys(urls).length ? tracker : { ...tracker, topicGateUrls: kept };
 }
 
 /** A verdict worth remembering: an explicit, confident "no" the classifier actually produced. */

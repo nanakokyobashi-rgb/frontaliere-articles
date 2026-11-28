@@ -1509,12 +1509,15 @@ export function recordTopicGateAbortedUrl(tracker, urlKey, section, now = Date.n
     topicGateUrls[key] = { section, ts: now };
   }
   // Due tetti separati: le voci del memo pre-spend e gli abort del topic-gate non si cacciano a vicenda.
+  // Si pota in ordine di `ts` (la piu' vecchia, cioe' la prima a scadere), non
+  // di inserimento: un ordine di file diverso non espelle mai una voce recente.
   const isPrespend = (key) => key.slice(key.indexOf('::') + 2).startsWith(PRESPEND_RELEVANCE_KEY_PREFIX);
   for (const [group, max] of [
     [Object.keys(topicGateUrls).filter((key) => !isPrespend(key)), TOPIC_GATE_URL_MAX],
     [Object.keys(topicGateUrls).filter(isPrespend), PRESPEND_RELEVANCE_URL_MAX],
   ]) {
-    for (const key of group.slice(0, Math.max(0, group.length - max))) delete topicGateUrls[key];
+    const oldestFirst = group.sort((a, b) => topicGateUrls[a].ts - topicGateUrls[b].ts);
+    for (const key of oldestFirst.slice(0, Math.max(0, group.length - max))) delete topicGateUrls[key];
   }
   return { ...normalized, topicGateUrls };
 }

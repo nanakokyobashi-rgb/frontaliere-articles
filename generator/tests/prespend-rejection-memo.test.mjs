@@ -26,8 +26,10 @@ import {
   recordTopicGateAbortedUrl,
 } from '../scripts/lib/article-topic-selector.mjs';
 import {
+  classifierIdentity,
   classifyWithRejectionMemo,
   contentFingerprint,
+  isPoolProvenEmpty,
   isPrespendRejectedUrl,
   memoUrlKey,
   isDefinitiveRejection,
@@ -155,4 +157,75 @@ test('le voci del memo pre-spend hanno un tetto proprio: un abort recente del to
   for (let i = 0; i < TOPIC_GATE_URL_MAX + 3; i += 1) aborts = recordTopicGateAbortedUrl(aborts, `https://esempio.ch/a/${i}`, 'svizzera', NOW);
   assert.equal(isTopicGateAbortedUrl(aborts, 'https://esempio.ch/a/0', 'svizzera', NOW), false);
   assert.equal(isTopicGateAbortedUrl(aborts, 'https://esempio.ch/a/3', 'svizzera', NOW), true);
+});
+
+test('poolKnownEmpty: solo con la prova di pool vuoto, mai dopo un tentativo di generazione fallito', () => {
+  // Pool vuoto prima della generazione, o tutto scartato dal gate senza backstop.
+  assert.equal(isPoolProvenEmpty({ candidateAttempted: false, remainingHeadlines: [] }), true);
+  assert.equal(isPoolProvenEmpty({ candidateAttempted: false, remainingHeadlines: null }), true);
+  // Headline presente e tentativo fallito (duplicato o qualita'): il pool non e' vuoto.
+  assert.equal(isPoolProvenEmpty({ candidateAttempted: true, remainingHeadlines: [{ url: 'u' }] }), false);
+  // Anche se l'ultimo tentativo ha consumato l'unica headline, la generazione e' partita.
+  assert.equal(isPoolProvenEmpty({ candidateAttempted: true, remainingHeadlines: [] }), false);
+  // Nessun tentativo ma candidati rimasti (stop per budget): non e' una prova.
+  assert.equal(isPoolProvenEmpty({ candidateAttempted: false, remainingHeadlines: [{ url: 'u' }] }), false);
+  const src = readFileSync(path.join(HERE, '../scripts/create-article.mjs'), 'utf8');
+  assert.match(src, /if \(_isPoolProvenEmpty\(\{ candidateAttempted: RUN_REPORT\.candidateAttempted, remainingHeadlines: headlines \}\)\) \{\s*RUN_REPORT\.poolKnownEmpty = true;/);
+});
+
+test('la chiave del memo include l\'identita\' del classifier: un cambio di modello o di prompt invalida i "no"', async () => {
+  const idA = classifierIdentity({ model: 'm1', promptTemplate: 'istruzioni v1', extra: 'llm' });
+  const idModel = classifierIdentity({ model: 'm2', promptTemplate: 'istruzioni v1', extra: 'llm' });
+  const idPrompt = classifierIdentity({ model: 'm1', promptTemplate: 'istruzioni v2', extra: 'llm' });
+  assert.notEqual(idA, idModel);
+  assert.notEqual(idA, idPrompt);
+  assert.equal(idA, classifierIdentity({ model: 'm1', promptTemplate: 'istruzioni v1', extra: 'llm' }), 'stabile a parita\' di classifier');
+  const items = POOL.map((p, i) => ({ ...p, title: `T${i}`, summary: 'S' }));
+  const runWith = async (identity, tracker) => {
+    resetLlmProviderRequests();
+    const out = await classifyWithRejectionMemo(items, {
+      tracker, section: 'svizzera', normalizeUrl: norm, classify, runAll, now: NOW,
+      fingerprint: (item) => contentFingerprint(item.title, item.summary, identity),
+    });
+    return { ...out, selection: getLlmProviderRequestsByStage().selection };
+  };
+  const tracker = recordPrespendRejectedUrls({}, (await runWith(idA, {})).newRejections, 'svizzera', NOW);
+  assert.equal((await runWith(idA, tracker)).selection, 5, 'stesso classifier: i "no" restano memo');
+  assert.equal((await runWith(idModel, tracker)).selection, 10, 'modello cambiato: nessun hit');
+  assert.equal((await runWith(idPrompt, tracker)).selection, 10, 'prompt cambiato: nessun hit');
+  const src = readFileSync(path.join(HERE, '../scripts/create-article.mjs'), 'utf8');
+  assert.match(src, /_contentFingerprint\(p\.headlineText, p\.summary, classifierIdentity\)/);
+  assert.match(src, /promptTemplate: buildPrespendClassifierPrompt\(/);
+  assert.match(src, /model: process\.env\.PRESPEND_GATE_MODEL \|\| AI_MODELS\.CODEX_CLI_PRIMARY,\n\s*promptTemplate/);
+});
+
+test('trim per scadenza: oltre il tetto cade la voce piu\' vecchia, non la piu\' recente, anche con ordine di file diverso', () => {
+  const url = (i) => `https://esempio.ch/o/${i}`;
+  const key = (i) => `svizzera::prespend-relevance:${url(i)}`;
+  // Ordine di inserimento NON cronologico: la voce piu' recente e' la prima del file.
+  let base = recordPrespendRejectedUrls({}, [url(0)], 'svizzera', NOW);
+  for (let i = 1; i <= PRESPEND_RELEVANCE_URL_MAX; i += 1) {
+    base = recordPrespendRejectedUrls(base, [url(i)], 'svizzera', NOW - 1000 - i);
+  }
+  assert.equal(Object.keys(base.topicGateUrls)[0], key(0));
+  const next = recordPrespendRejectedUrls(base, ['https://esempio.ch/o/new'], 'svizzera', NOW);
+  const left = Object.keys(next.topicGateUrls);
+  assert.equal(left.length, PRESPEND_RELEVANCE_URL_MAX);
+  assert.ok(left.includes(key(0)), 'la voce piu\' recente sopravvive');
+  assert.ok(!left.includes(key(PRESPEND_RELEVANCE_URL_MAX)), 'la piu\' vecchia (prima a scadere) cade');
+});
+
+test('un URL con molte revisioni di titolo occupa una sola voce: la nuova sostituisce le vecchie', () => {
+  const url = 'https://esempio.ch/rev';
+  let tracker = {};
+  for (let r = 0; r < 50; r += 1) {
+    tracker = recordPrespendRejectedUrls(tracker, [memoUrlKey(url, contentFingerprint(`Titolo rev ${r}`, ''))], 'svizzera', NOW + r);
+  }
+  const keys = Object.keys(tracker.topicGateUrls);
+  assert.equal(keys.length, 1);
+  assert.ok(keys[0].endsWith(`#${contentFingerprint('Titolo rev 49', '')}`));
+  // Un altro URL e un'altra sezione non sono toccati.
+  tracker = recordPrespendRejectedUrls(tracker, [memoUrlKey('https://esempio.ch/altro', 'aaaaaaaa')], 'svizzera', NOW);
+  tracker = recordPrespendRejectedUrls(tracker, [memoUrlKey(url, 'bbbbbbbb')], 'frontaliere', NOW);
+  assert.equal(Object.keys(tracker.topicGateUrls).length, 3);
 });

@@ -513,7 +513,9 @@ import {
 } from './lib/article-topic-selector.mjs';
 import {
   classifyWithRejectionMemo as _classifyWithRejectionMemo,
+  classifierIdentity as _classifierIdentity,
   contentFingerprint as _contentFingerprint,
+  isPoolProvenEmpty as _isPoolProvenEmpty,
   recordPrespendRejectedUrls as _recordPrespendRejectedUrls,
 } from './lib/prespend-rejection-memo.mjs';
 
@@ -1265,22 +1267,9 @@ function classifyFrontaliereRelevance(headline, summary, sourceUrl, deadlineMs =
   return pending;
 }
 
-async function _classifyFrontaliereRelevanceUncached(headline, summary, sourceUrl, deadlineMs = null) {
-  const sourceHint = classifierSourceHint(sourceUrl);
-  const model = process.env.PRESPEND_GATE_MODEL || AI_MODELS.CODEX_CLI_PRIMARY;
-  const classifierTimeout = IS_CANTON ? CANTON_PRESPEND_CLASSIFIER_TIMEOUT_MS : 30_000;
-  const classifierDeadline = deadlineMs ?? (IS_CANTON
-    ? Math.min(
-      RUN_START_MS + RUN_WALL_BUDGET_MS,
-      Date.now() + CANTON_PRESPEND_CLASSIFIER_DEADLINE_MS,
-    )
-    : RUN_START_MS + RUN_WALL_BUDGET_MS);
-  const remainingClassifierMs = classifierDeadline - Date.now();
-  let classifierCallTimeout = Math.min(classifierTimeout, Math.floor(remainingClassifierMs));
-  if (classifierCallTimeout <= 0) {
-    return { relevant: true, reason: 'classifier-deadline-exceeded', fromError: true };
-  }
-  const prompt = IS_CANTON
+/** Prompt del classifier pre-spend. Con input vuoti e' il testo delle istruzioni, base dell'identita' del memo. */
+function buildPrespendClassifierPrompt({ headline, sourceHint, summary }) {
+  return IS_CANTON
     ? cantonClassifierPrompt(SECTION_PROFILE, { headline, sourceHint, summary })
     : IS_FRONTALIERE
     ? `Sei un editor del sito frontaliereticino.ch, per i FRONTALIERI ITALO-SVIZZERI che lavorano in Ticino e per chi vive in Ticino e nelle province di confine.
@@ -1312,6 +1301,33 @@ HEADLINE: ${String(headline || '').slice(0, 240)}
 ${sourceHint ? `FONTE: ${sourceHint}\n` : ''}${summary ? `SOMMARIO: ${String(summary).slice(0, 320)}\n` : ''}
 Rispondi ESATTAMENTE in questo formato (una riga):
 relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
+}
+
+/** Identita' del classifier: un cambio di modello, istruzioni o via di decisione invalida il memo cross-run. */
+function prespendClassifierIdentity() {
+  return _classifierIdentity({
+    model: process.env.PRESPEND_GATE_MODEL || AI_MODELS.CODEX_CLI_PRIMARY,
+    promptTemplate: buildPrespendClassifierPrompt({ headline: '', sourceHint: '', summary: '' }),
+    extra: process.env.DECISION_API_ENABLED === '1' ? 'decisions-api' : 'llm',
+  });
+}
+
+async function _classifyFrontaliereRelevanceUncached(headline, summary, sourceUrl, deadlineMs = null) {
+  const sourceHint = classifierSourceHint(sourceUrl);
+  const model = process.env.PRESPEND_GATE_MODEL || AI_MODELS.CODEX_CLI_PRIMARY;
+  const classifierTimeout = IS_CANTON ? CANTON_PRESPEND_CLASSIFIER_TIMEOUT_MS : 30_000;
+  const classifierDeadline = deadlineMs ?? (IS_CANTON
+    ? Math.min(
+      RUN_START_MS + RUN_WALL_BUDGET_MS,
+      Date.now() + CANTON_PRESPEND_CLASSIFIER_DEADLINE_MS,
+    )
+    : RUN_START_MS + RUN_WALL_BUDGET_MS);
+  const remainingClassifierMs = classifierDeadline - Date.now();
+  let classifierCallTimeout = Math.min(classifierTimeout, Math.floor(remainingClassifierMs));
+  if (classifierCallTimeout <= 0) {
+    return { relevant: true, reason: 'classifier-deadline-exceeded', fromError: true };
+  }
+  const prompt = buildPrespendClassifierPrompt({ headline, sourceHint, summary });
 
   // Per un no cantonale o nazionale, 0,5 è la soglia operativa: se la confidenza è
   // pari o inferiore, oppure non valida, si richiede una conferma testuale.
@@ -1518,6 +1534,9 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   // Zero col default; diverso da zero solo con un tetto esplicito.
   let keptUnclassified = 0;
   let filtered = []; // { headline, reason, rawHeadline, rawAnchor }
+  // Candidati pianificati per il classifier (contano contro il tetto). Le
+  // chiamate reali, al netto dei memo hit, sono `classifierCalls` piu' sotto.
+  let classifierPlanned = 0;
   let classifierCalls = 0;
   let unambiguousBypasses = 0;
   // Track strict-anchor matches so the D-backstop can restore top-N if the
@@ -1574,7 +1593,7 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
     // `unclassified: true` e' la marcatura che tiene onesto il conteggio a valle:
     // questa headline non ha ricevuto nessun verdetto, quindi non puo' valere
     // come «tenuta dal gate».
-    if (classifierCalls >= maxClassifier) {
+    if (classifierPlanned >= maxClassifier) {
       plan.push({ h, headlineText, kind: 'keep', unclassified: true });
       continue;
     }
@@ -1583,7 +1602,7 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
     // anchor. The strict-anchor signal could be passed as a hint, but
     // strict-anchor match alone (e.g. bare "frontalier") must NOT bypass
     // the classifier (see comment block above).
-    classifierCalls += 1;
+    classifierPlanned += 1;
     // `lead`: l'attacco che alcune fonti cantonali danno insieme al titolo
     // (feed a pagamento title+lead, API json): e' l'unico sommario che hanno.
     // Le headline delle sezioni storiche non lo portano mai.
@@ -1601,13 +1620,14 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   // corpo CMS cantonale verificato (vedi il pre-filtro «fonti gia' rifiutate»).
   let memoTracker = null;
   try { memoTracker = _loadEvergreenRejectedTracker(); } catch { /* la memoria e' un risparmio, non un gate */ }
+  const classifierIdentity = prespendClassifierIdentity();
   const { verdicts, memoHits, newRejections } = await _classifyWithRejectionMemo(
     toClassify.map(p => ({ plan: p, url: p.h?.url })),
     {
       tracker: memoTracker,
       section: SECTION_NAME,
       normalizeUrl: normalizeNewsUrl,
-      fingerprint: ({ plan: p }) => _contentFingerprint(p.headlineText, p.summary),
+      fingerprint: ({ plan: p }) => _contentFingerprint(p.headlineText, p.summary, classifierIdentity),
       runAll: (items, fn) => mapWithConcurrency(items, concurrency, fn),
       canReuse: ({ plan: p }) => !(IS_CANTON
         && typeof p.h?._cantonSourceContent === 'string'
@@ -1624,6 +1644,7 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
     },
   );
   toClassify.forEach((p, i) => { p.verdict = verdicts[i]; });
+  classifierCalls = classifierPlanned - memoHits;
   if (memoHits > 0) {
     console.error(`PRESPEND_GATE_REJECTION_MEMO section=${SECTION_NAME} hits=${memoHits} classified=${toClassify.length - memoHits}`);
   }
@@ -1829,7 +1850,7 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   // printed exactly that, against 0 of 26 on svizzera.
   if (totalRejection) {
     console.error(
-      `PRESPEND_GATE_TOTAL_REJECTION before=${headlines.length} classifier_calls=${classifierCalls}`
+      `PRESPEND_GATE_TOTAL_REJECTION before=${headlines.length} classifier_planned=${classifierPlanned} classifier_calls=${classifierCalls}`
       + ` anchor_candidates=${strictAnchorMatched.length} restored=${restoredByBackstop}`
       + ` backstop=${backstopKind} kept_after=${kept.length} section=${SECTION_NAME}`
       // Quante candidate erano entrate solo per esaurimento del tetto e sono
@@ -1841,7 +1862,7 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   }
 
   const dropped = headlines.length - kept.length;
-  if (classifierCalls > 0 || dropped > 0 || unambiguousBypasses > 0) {
+  if (classifierPlanned > 0 || dropped > 0 || unambiguousBypasses > 0) {
     const reasonsSummary = filtered.slice(0, 3)
       .map(f => f.signalDriven ? '[signal reason redacted]' : f.reason)
       .join(' | ');
@@ -1851,7 +1872,7 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
     const keptLabel = IS_FRONTALIERE ? 'frontaliere-relevant' : `rilevanti per la sezione ${SECTION_NAME}`;
     console.error(
       `  🔍 Pre-spend topic gate: ${headlines.length} candidates → ${kept.length} ${keptLabel} `
-      + `(classifier-calls=${classifierCalls}, anchor-bypass=${unambiguousBypasses}, dropped=${dropped}${reasonsSummary ? `: ${reasonsSummary}` : ''})`,
+      + `(classifier-planned=${classifierPlanned}, classifier-calls=${classifierCalls}, anchor-bypass=${unambiguousBypasses}, dropped=${dropped}${reasonsSummary ? `: ${reasonsSummary}` : ''})`,
     );
     if (filtered.length > 0) {
       for (const f of filtered.slice(0, 5)) {
@@ -1871,6 +1892,7 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   }
   if (typeof RUN_REPORT === 'object' && RUN_REPORT?.headlines) {
     RUN_REPORT.headlines.droppedPreSpendGate = (RUN_REPORT.headlines.droppedPreSpendGate || 0) + dropped;
+    RUN_REPORT.headlines.preSpendGateClassifierPlanned = (RUN_REPORT.headlines.preSpendGateClassifierPlanned || 0) + classifierPlanned;
     RUN_REPORT.headlines.preSpendGateClassifierCalls = (RUN_REPORT.headlines.preSpendGateClassifierCalls || 0) + classifierCalls;
     RUN_REPORT.headlines.preSpendGateRan = true;
     RUN_REPORT.headlines.preSpendGateBefore = headlines.length;
@@ -23212,7 +23234,12 @@ async function main() {
       // suoi temi sono frontalieri/Ticino o nazionali; gli evergreen del
       // cantone sono gli hub tematici di P10). Nessuna news utilizzabile = nessun
       // articolo in questo run, dichiarato come le altre ragioni legittime.
-      RUN_REPORT.poolKnownEmpty = true; // la catena non deve riaprire lo stesso pool vuoto
+      // Solo con la prova: nessuna generazione partita e nessun candidato rimasto
+      // dopo scan, filtri e gate (backstop inclusi). Un tentativo fallito per
+      // duplicato o qualita' NON e' un pool vuoto: la catena deve riprovare.
+      if (_isPoolProvenEmpty({ candidateAttempted: RUN_REPORT.candidateAttempted, remainingHeadlines: headlines })) {
+        RUN_REPORT.poolKnownEmpty = true; // la catena non deve riaprire lo stesso pool vuoto
+      }
       console.error(`CANTON_EVERGREEN_POOL_DISABLED section=${SECTION_NAME} — nessuna news utilizzabile e nessun pool evergreen per le sezioni cantonali: nessun articolo in questo run.`);
       finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, `No usable news for canton section ${SECTION_NAME} (no evergreen pool by construction)`] });
       // Ragione legittima #7 di dieci — vedi EXIT_NO_ARTICLE_DECLARED. Esiste
