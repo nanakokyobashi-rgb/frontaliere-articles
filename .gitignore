@@ -78,3 +78,28 @@ data/image-regeneration-queue-pending.jsonl.*.tmp
 /data/topic-candidates-evergreen-rejected.json.lock
 /data/topic-candidates-evergreen-rejected.json.lock.*
 /data/.topic-candidates-evergreen-rejected.json.tmp-*
+
+# Store di embedding del dedup semantico (M6): derivato dalle meta IT, ricostruito
+# o ripristinato da cache a ogni run di generazione. Mai committato: `git add -A`
+# dei workflow di generazione non deve raccoglierlo.
+data/article-embeddings.bin
+data/article-embeddings-meta.json
+data/swiss-article-embeddings.bin
+data/swiss-article-embeddings-meta.json
+data/sections/*/article-embeddings.bin
+data/sections/*/article-embeddings-meta.json
+
+# Modello locale del dedup (~470 MB, scritto da embeddingClient.mjs in
+# env.cacheDir): `git add -A` dei workflow di generazione non deve raccoglierlo,
+# o ogni run con un articolo prepara un commit col modello e il push fallisce.
+# Solo questa cartella e non tutta `.cache/`: `.cache/jobs-ai-cache.json` serve
+# ai crawler (crawler-group-*.yml) e non e' di questo percorso.
+.cache/transformers/
+
+# Temporanei dell'atomicWrite degli store (scritti prima del rename).
+data/article-embeddings.bin.tmp
+data/article-embeddings-meta.json.tmp
+data/swiss-article-embeddings.bin.tmp
+data/swiss-article-embeddings-meta.json.tmp
+data/sections/*/article-embeddings.bin.tmp
+data/sections/*/article-embeddings-meta.json.tmp

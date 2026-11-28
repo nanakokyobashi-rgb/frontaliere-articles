@@ -173,6 +173,8 @@ if [ "$marker" = "cooperative-stop" ]; then
   marker_line="GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=SIGTERM token=\${GENERATION_STOP_TOKEN:-missing}"
   printf '%s\\n' "$marker_line" > "\${GENERATION_STOP_FILE:?}"
   echo "GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=SIGTERM"
+elif [ "$marker" = "dedup-unavailable" ]; then
+  echo "DEDUP_GATE_UNAVAILABLE section=\${SECTION_FOR_MARKER:-x}"
 elif [ "$marker" = "ordinary-marker" ]; then
   echo "GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=SIGTERM"
 elif [ "$marker" = "stale-marker" ]; then
@@ -433,6 +435,25 @@ test('entrambe le sezioni secche: si ferma a due tentativi (TERMINAZIONE)', () =
   );
   // ...e con `article=false` lo step di commit non trova body da committare, il
   // push non tocca content/**, la catena si ferma dove si e' sempre fermata.
+});
+
+test('dedup semantico non eseguibile: un solo tentativo, catena ferma, un solo GENERATION_OUTCOME', () => {
+  const r = runGenerateStep({ section: 'svizzera', plan: ['4 0 0 dedup-unavailable', '0 1'] });
+  assert.equal(r.invocations.length, 1, 'il guasto e\' della sezione e del modello: provare l\'altra sezione spreca una generazione');
+  assert.equal(r.outputs.article, 'false');
+  assert.equal(r.outputs.declared, 'true');
+  assert.equal(r.outputs.provider_blocked, 'true', 'la catena lo legge come PROVIDER_BLOCKED e cede a Cloud Scheduler');
+  assert.equal(r.status, 0);
+  const outcomes = r.stdout.split('\n').filter((l) => /^GENERATION_OUTCOME /.test(l));
+  assert.deepEqual(outcomes, ['GENERATION_OUTCOME kind=no-article reason=dedup-unavailable section=svizzera'],
+    'il generatore stampa un token distinto: GENERATION_OUTCOME lo scrive solo il workflow, una volta');
+});
+
+test('declared_reason si azzera a ogni sezione del loop', () => {
+  const loop = GENERATE_RUN.slice(GENERATE_RUN.indexOf('for sec in "${sections[@]}"; do'));
+  assert.match(loop.slice(0, 120), /^for sec in "\$\{sections\[@\]\}"; do\n\s+declared_reason=""\n/);
+  assert.match(GENERATE_RUN, /DEDUP_GATE_UNAVAILABLE section=[\s\S]{0,400}provider_blocked=true[\s\S]{0,120}break/);
+  assert.match(GENERATE_RUN, /outcome_reason="\$\{declared_reason:-provider-unavailable\}"/);
 });
 
 test('un hard kill non riparte sull\'altra sezione', () => {

@@ -15,9 +15,12 @@
 // `${title}\n\n${excerpt}` sliced to 4000 chars) and rejects when the nearest
 // published neighbour is at/above EMBEDDING_NEAR_DUP_COSINE.
 //
-// Fail-open by design: degrades to a no-op (publish proceeds) when the
-// embedding store is absent or the embedding API call fails, so a transient
-// outage never blocks the pipeline.
+// Two modes. Default (unit tests, exploratory callers): fail-open, a no-op
+// when the embedding store is absent or the embed call fails. Production
+// callers pass `failClosed: true` (M6, 2026-11-28): an absent/incompatible
+// store, a failed or empty embedding and an unverifiable model throw
+// DedupGateUnavailableError instead of publishing without dedup. The marker
+// GENERATION_DEDUP_STORE records `failClosed` so the outcome is measurable.
 
 import { EMBEDDING_DIM, EMBEDDING_MODEL } from '../evidence/constants.mjs';
 import { embedOne, lastUsedEmbeddingModel } from '../evidence/embeddingClient.mjs';
@@ -30,6 +33,31 @@ import {
   EMBEDDING_TOP_K,
   computeAdaptiveNearDupCosine,
 } from './constants.mjs';
+
+/**
+ * The dedup gate could not run and the caller asked for fail-closed. The
+ * message deliberately avoids the word that `isDuplicateError()` in
+ * create-article.mjs matches: this is an infrastructure failure, not a clean
+ * "duplicate, try another topic" deferral.
+ */
+export class DedupGateUnavailableError extends Error {
+  constructor(status, detail) {
+    super(`❌ DEDUP SEMANTICO NON ESEGUIBILE (fail-closed, ${status}): ${detail}. Nessun articolo pubblicato senza il controllo.`);
+    this.name = 'DedupGateUnavailableError';
+    this.code = 'DEDUP_GATE_UNAVAILABLE';
+    // Guasto d'infrastruttura transitorio (modello non scaricabile, store non
+    // costruibile): chi consuma una coda (publish-journalist-article) deve
+    // differire e lasciare il documento in coda, non marcarlo failed per sempre.
+    this.retryable = true;
+    this.status = status;
+  }
+}
+
+/** True per l'errore del gate fail-closed (esito DICHIARATO dal chiamante, mai un guasto non dichiarato). */
+export function isDedupGateUnavailableError(e) {
+  return e?.code === 'DEDUP_GATE_UNAVAILABLE'
+    || /DEDUP SEMANTICO NON ESEGUIBILE \(fail-closed/.test(String(e?.message ?? ''));
+}
 
 function emitStoreObservation(log, data, opts, store, meta, status, {
   queryModel = null,
@@ -71,6 +99,7 @@ function emitStoreObservation(log, data, opts, store, meta, status, {
     },
     effectiveThreshold,
     thresholdSource,
+    failClosed: opts.failClosed === true && !gateApplied && status !== 'empty_input',
   })}`);
 }
 
@@ -116,6 +145,7 @@ export async function checkSemanticNearDuplicate(data, opts = {}) {
   const meta = opts.meta !== undefined ? opts.meta : loadEmbeddingMeta();
   if (!store) {
     emitStoreObservation(log, data, opts, null, meta, 'store_missing');
+    if (opts.failClosed === true) throw new DedupGateUnavailableError('store_missing', 'store embedding assente o illeggibile');
     log('  ⏭️  Dedup semantico saltato (store embedding assente)');
     return data;
   }
@@ -147,6 +177,7 @@ export async function checkSemanticNearDuplicate(data, opts = {}) {
       policyThreshold: threshold,
       thresholdSource,
     });
+    if (opts.failClosed === true) throw new DedupGateUnavailableError('embedding_failed', `embed fallito: ${err.message}`);
     log(`  ⏭️  Dedup semantico saltato (embed fallito: ${err.message})`);
     return data;
   }
@@ -155,6 +186,7 @@ export async function checkSemanticNearDuplicate(data, opts = {}) {
       policyThreshold: threshold,
       thresholdSource,
     });
+    if (opts.failClosed === true) throw new DedupGateUnavailableError('embedding_empty', 'embedding vuoto');
     log('  ⏭️  Dedup semantico saltato (embedding vuoto)');
     return data;
   }
@@ -169,6 +201,7 @@ export async function checkSemanticNearDuplicate(data, opts = {}) {
       policyThreshold: threshold,
       thresholdSource,
     });
+    if (opts.failClosed === true) throw new DedupGateUnavailableError('dimension_mismatch', `dimensione query ${vec.length} diversa dallo store ${store.dim}`);
     log(`  ⏭️  Dedup semantico saltato (dimensione query ${vec.length} ≠ store ${store.dim})`);
     return data;
   }
@@ -178,8 +211,17 @@ export async function checkSemanticNearDuplicate(data, opts = {}) {
       policyThreshold: threshold,
       thresholdSource,
     });
+    if (opts.failClosed === true) throw new DedupGateUnavailableError('model_mismatch', `modello dello store '${meta.model}' diverso dal provider attivo '${queryModel}'`);
     log(`  ⏭️  Dedup semantico saltato (store model '${meta.model}' ≠ provider attivo '${queryModel}' — cosine cross-provider non valida)`);
     return data;
+  }
+  if (opts.failClosed === true && !(typeof meta?.model === 'string' && queryModel)) {
+    emitStoreObservation(log, data, opts, store, meta, 'compared_model_unverified', {
+      queryModel,
+      policyThreshold: threshold,
+      thresholdSource,
+    });
+    throw new DedupGateUnavailableError('compared_model_unverified', 'modello dello store o della query non verificabile');
   }
   const ignoreNeighbor = typeof opts.ignoreNeighbor === 'function'
     ? opts.ignoreNeighbor

@@ -793,6 +793,33 @@ jobs:
       - name: Install dependencies
         run: bash scripts/lib/npm-ci-retry.sh
 
+      - name: Dedup store cache key
+        id: dedup_store_key
+        if: steps.mode.outputs.dry != 'true'
+        run: echo "day=$(date -u +%F)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache local embedding model (dedup)
+        if: steps.mode.outputs.dry != 'true'
+        uses: actions/cache@v6
+        with:
+          path: .cache/transformers
+          key: transformers-multilingual-e5-small-fp32-v1
+
+      - name: Cache section dedup embedding store
+        if: steps.mode.outputs.dry != 'true'
+        uses: actions/cache@v6
+        with:
+          path: |
+            data/article-embeddings.bin
+            data/article-embeddings-meta.json
+            data/swiss-article-embeddings.bin
+            data/swiss-article-embeddings-meta.json
+            data/sections/*/article-embeddings.bin
+            data/sections/*/article-embeddings-meta.json
+          key: dedup-store-v1-${{ steps.mode.outputs.section }}-${{ steps.dedup_store_key.outputs.day }}
+          restore-keys: |
+            dedup-store-v1-${{ steps.mode.outputs.section }}-
+
       - name: Prepare Firebase credentials
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
@@ -1073,6 +1100,7 @@ jobs:
           run_attempt="${GITHUB_RUN_ATTEMPT:-1}"
 
           for sec in "${sections[@]}"; do
+            declared_reason=""
             remaining=$(( budget_s - SECONDS ))
             if [ "$remaining" -lt "$min_attempt_s" ]; then
               echo "::warning::time budget spent — not attempting section $sec"
@@ -1300,6 +1328,9 @@ jobs:
 
             if [ "$rc" = "4" ]; then
               echo "::warning::create-article.mjs: nessun articolo sulla sezione $sec, ragione legittima DICHIARATA (exit 4)"
+              if grep -q 'DEDUP_GATE_UNAVAILABLE section=' "$stall_log"; then
+                declared_reason=dedup-unavailable; provider_blocked=true; effective="$sec"; break
+              fi
             elif [ "$rc" = "0" ]; then
               all_declared=false
               [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs e' uscito 0 sulla sezione $sec senza scrivere un corpo e senza dichiarare una ragione (attesa: exit 4)"
@@ -1341,11 +1372,11 @@ jobs:
             outcome_section="$effective"
           elif [ "$provider_blocked" = "true" ]; then
             outcome_kind="no-article"
-            outcome_reason="provider-unavailable"
+            outcome_reason="${declared_reason:-provider-unavailable}"
             outcome_section="$effective"
           elif [ "$all_declared" = "true" ]; then
             outcome_kind="no-article"
-            outcome_reason="declared"
+            outcome_reason="${declared_reason:-declared}"
             outcome_section="$effective"
           fi
           echo "GENERATION_OUTCOME kind=$outcome_kind reason=$outcome_reason section=$outcome_section"
@@ -1377,7 +1408,7 @@ jobs:
             exit 1
           fi
           if [ "$all_declared" != "true" ]; then
-            echo "::error::nessun articolo in $tried tentativi, e la ragione NON e' dichiarata: ${undeclared_why}. Vedi generator/scripts/lib/exhaustion-disposition.mjs per i codici dichiarati. Un'uscita senza articolo e senza dichiarazione e' il verde silenzioso della #313 (60+ run 'success' consecutive, 06:06Z→16:30Z del 2026-08-14), e da qui in poi e' rossa."
+            echo "::error::nessun articolo in $tried tentativi, e la ragione NON e' dichiarata: ${undeclared_why}. Codici dichiarati: generator/scripts/lib/exhaustion-disposition.mjs. Senza dichiarazione e' il verde silenzioso della #313: rossa."
             exit 1
           fi
           if [ "$provider_blocked" = "true" ]; then

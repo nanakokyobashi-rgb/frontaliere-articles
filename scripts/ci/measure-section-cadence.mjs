@@ -288,6 +288,10 @@ export function parseDedupStoreMarkers(logText) {
         policyParameters: parameters,
         effectiveThreshold: payload.effectiveThreshold,
         thresholdSource: payload.thresholdSource,
+        // Dal fix M6 il gate di produzione e' fail-closed: un'osservazione
+        // senza confronto con failClosed=true ha fermato il run, non ha
+        // pubblicato senza dedup, e non conta come fail-open.
+        failClosed: payload.failClosed === true && payload.gateApplied === false,
       });
     } catch {
       // Source lines and truncated workflow-log fragments are not runtime evidence.
@@ -326,19 +330,28 @@ export function summarizeDedupRuntimeEvidence(observations, sections) {
         || (observation.effectiveThreshold === minimum.effectiveThreshold && observation.storeCount < minimum.storeCount)
         ? observation : minimum
     ), null);
+    const failClosedObservations = sectionObservations.filter((observation) => observation.failClosed === true).length;
     const failOpenObservations = sectionObservations.filter((observation) => !observation.gateApplied
-      && observation.status !== 'empty_input').length;
+      && observation.status !== 'empty_input' && observation.failClosed !== true).length;
     const latestGateStatus = !latest ? 'unobserved'
-      : !latest.gateApplied ? `fail_open:${latest.status}`
+      : latest.failClosed === true ? `fail_closed:${latest.status}`
+        : !latest.gateApplied ? `fail_open:${latest.status}`
         : modelAndThresholdVerified(latest) ? 'active_verified' : 'active_model_or_threshold_unverified';
     const windowGateStatus = failOpenObservations > 0 ? 'fail_open_observed_in_window'
       : sectionObservations.some((observation) => observation.gateApplied)
         ? sectionObservations.every((observation) => modelAndThresholdVerified(observation) || observation.status === 'empty_input')
           ? 'active_verified_in_observed_markers' : 'active_model_or_threshold_unverified_in_observed_markers'
-        : sectionObservations.length ? 'no_comparable_candidate_observed' : 'unobserved';
+        // Finestra con sole osservazioni fail-closed: il gate non ha mai confrontato
+        // (store/modello non disponibili) ma il run si e' fermato senza pubblicare.
+        // Non e' fail-open ne' un gate verificato: M6 resta non misurato.
+        : sectionObservations.length > 0 && failClosedObservations === sectionObservations
+          .filter((observation) => observation.status !== 'empty_input').length
+          && failClosedObservations > 0 ? 'fail_closed_only_in_window'
+          : sectionObservations.length ? 'no_comparable_candidate_observed' : 'unobserved';
     return [section, {
       observationCount: sectionObservations.length,
       failOpenObservations,
+      failClosedObservations,
       statusCounts,
       latestGateStatus,
       windowGateStatus,

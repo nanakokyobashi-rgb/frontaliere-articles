@@ -542,11 +542,11 @@ import { truncateSlugAtWordBoundary } from './lib/slug-truncate.mjs';
 import { hasDomainAnchor } from './lib/discovery/domainAnchor.mjs';
 import { matchesFrontaliereAnchor, matchesFrontaliereUnambiguousAnchor } from './lib/discovery/frontaliereAnchor.mjs';
 import { isNonItalianScript, nonItalianScriptRatio } from './lib/itLanguageCheck.mjs';
-import { checkSemanticNearDuplicate } from './lib/scoring/semanticDedup.mjs';
+import { checkSemanticNearDuplicate, isDedupGateUnavailableError } from './lib/scoring/semanticDedup.mjs';
 import { assertTopicNotRecentlyCovered, findRecentTopicCoverage, assertComuneTitleMatchesSlug, topicCoverageKey } from './lib/topic-coverage-guard.mjs';
 import { computeAdaptiveEvergreenThresholds } from './lib/scoring/constants.mjs';
 import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFromBody } from './lib/article-body-repetition.mjs';
-import { loadEmbeddingStore, loadEmbeddingMeta } from './lib/scoring/embeddingMatcher.mjs';
+import { invalidatePreparedSectionDedupStore, prepareSectionDedupStore } from './lib/scoring/sectionEmbeddingStore.mjs';
 import {
   appendGeneratedImageRecord,
   createBlogImageRecordValidator,
@@ -2707,6 +2707,9 @@ function resolveRunRecovery() {
 }
 
 function persistDiscoveryAttemptOutcome(status) {
+  // Dedup non eseguibile = guasto di modello/store, non un candidato fallito:
+  // niente provenAttempts/outstandingProvenFailures.
+  if (RUN_REPORT?.dedupGateUnavailable === true) return;
   if (RUN_REPORT?.poolRecoveryEligible !== true) return;
   const poolKind = RUN_REPORT.poolSlotKind;
   if (!['proven', 'discovery'].includes(poolKind)) return;
@@ -4106,6 +4109,20 @@ function parseSectionArg(argv) {
 
 const SECTION_NAME = parseSectionArg(process.argv.slice(2));
 const SECTION = ARTICLE_SECTION_CONFIGS[SECTION_NAME];
+// Marcatore del dedup semantico non eseguibile: volutamente NON un
+// GENERATION_OUTCOME (lo stampa solo il workflow, una volta per run).
+const DEDUP_GATE_UNAVAILABLE_MARKER = 'DEDUP_GATE_UNAVAILABLE';
+
+/**
+ * Opzioni del gate di dedup semantico per la sezione attiva, in produzione.
+ * Lo store si costruisce/aggiorna qui, PRIMA del confronto (M6: nel corpus
+ * nessuno lo materializzava e il gate girava fail-open in ogni run), e il gate
+ * e' fail-closed: store o modello non disponibili = nessuna pubblicazione.
+ */
+async function sectionDedupGateOptions(extra = {}) {
+  const { store, meta } = await prepareSectionDedupStore(SECTION);
+  return { section: SECTION_NAME, store, meta, failClosed: true, ...extra };
+}
 // Il TIPO della sezione (frontaliere | national | canton) viene dal core, non
 // dal nome. I rami di sezione leggono SECTION_PROFILE (pool, ranker, lessico e
 // ancore della cantonale) o i due flag qui sotto, derivati dal tipo: i rami
@@ -22140,6 +22157,16 @@ async function main() {
     }
   }
 
+  // Preflight del dedup semantico (M6): il gate e' fail-closed e lo store si
+  // prepara solo dopo la generazione. Se modello o store non sono disponibili,
+  // lo si scopre QUI, prima di scansione, selezione e bozze (che consumano un
+  // tentativo), non dopo aver speso la generazione. Con lo store in cache la
+  // chiamata e' una lettura locale; l'errore sale a main().catch (exit 4 +
+  // DEDUP_GATE_UNAVAILABLE) e la catena si ferma.
+  if (!DRY_RUN_SCAN) {
+    await prepareSectionDedupStore(SECTION);
+  }
+
   // A verified Italian draft has priority over a new candidate. Claim the next
   // bounded attempt on disk BEFORE any provider call, so a hard-killed run
   // consumes its slot instead of creating an unbounded retry loop.
@@ -24687,13 +24714,10 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // vocabulary dupes the lexical Jaccard above cannot see (cosine ≥ ceiling).
   // Section-keyed embedding store so svizzera dedups against ITS OWN corpus,
   // never against frontaliere. For frontaliere these paths equal the module
-  // defaults → behavior is unchanged. Store/meta absent (e.g. svizzera not yet
-  // built) → the gate degrades to a no-op (fail-open).
-  await checkSemanticNearDuplicate(data, {
-    section: SECTION_NAME,
-    store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
-    meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
-  });
+  // defaults. The store is built/refreshed from the section's IT meta before
+  // the comparison and the gate is fail-closed (sectionDedupGateOptions): no
+  // store or no verifiable model = the run fails instead of publishing.
+  await checkSemanticNearDuplicate(data, await sectionDedupGateOptions());
   // Step 3a.4: «argomento già coperto» — l'unico gate che NON misura una
   // distanza lessicale. I due sopra confrontano quanto si somigliano due
   // testi; questo confronta DI COSA parlano. È la differenza che ha lasciato
@@ -25061,11 +25085,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     || preTranslationExcerptRepairs.length > 0 || excerptRepairs.length > 0) {
     console.error('🔍 Verifica duplicati post-riparazione:');
     checkForDuplicates(data);
-    await checkSemanticNearDuplicate(data, {
-      section: SECTION_NAME,
-      store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
-      meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
-    });
+    await checkSemanticNearDuplicate(data, await sectionDedupGateOptions());
   }
   // Entity decoding is the last content normalization before the write path.
   // Re-run the fiscal guard on every locale here: the earlier check ran before
@@ -26272,12 +26292,9 @@ export async function registerArticleFiles(data, opts = {}) {
     && isDailyBriefArticleId(data.id);
   console.error('🔍 Verifica duplicati post-riparazione nel writer condiviso:');
   checkForDuplicates(data, { allowRecurringDailyEdition });
-  await checkSemanticNearDuplicate(data, {
-    section: SECTION_NAME,
-    store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
-    meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
+  await checkSemanticNearDuplicate(data, await sectionDedupGateOptions({
     ignoreNeighbor: allowRecurringDailyEdition ? isDailyBriefArticleId : undefined,
-  });
+  }));
   // Stessa ragione, stesso percorso condiviso: i quattro produttori secondari
   // (daily-brief, events-digest, border-wait-ranking, journalist) importano
   // registerArticleFiles() direttamente e non passano mai dallo Step 3a.2 del
@@ -26335,6 +26352,10 @@ export async function registerArticleFiles(data, opts = {}) {
   // approvato il payload appena registrato; in caso contrario il marker deve
   // obbligare il run successivo a riesaminare la registrazione (#1126).
   endRegisterLock();
+  // Il processo puo' registrare altri articoli (publish-journalist-article): lo
+  // store del dedup preparato prima di questo non lo contiene. Invalidarlo qui
+  // fa rileggere al gate successivo la sorgente aggiornata (incrementale).
+  invalidatePreparedSectionDedupStore(SECTION);
   // RSS regeneration removed with #4974 item 2 — see the sibling call site
   // above. `opts.skipRss` is kept accepted-and-ignored so existing callers
   // passing it keep working; there is simply nothing left to skip.
@@ -26718,6 +26739,23 @@ if (invokedDirectly) {
   // EXIT_NO_ARTICLE_DECLARED: un exit 0 senza articolo non si distingue da un
   // percorso che non ha dichiarato niente, ed e' quella indistinguibilita' — non
   // questo ramo — che ha prodotto le dieci ore di verde.
+  // Dedup semantico non eseguibile (modello non scaricabile dopo i retry, store
+  // non costruibile): il gate e' fail-closed, quindi NIENTE si pubblica, ma e'
+  // un esito DICHIARATO (exit 4 + riga GENERATION_OUTCOME dedicata), non un
+  // errore non dichiarato. Il workflow la riporta come reason=dedup-unavailable
+  // leggendo DEDUP_GATE_UNAVAILABLE.
+  if (isDedupGateUnavailableError(e)) {
+    // Guasto d'infrastruttura, non un tentativo di candidato: non entra nei
+    // conteggi di recupero della pool (persistDiscoveryAttemptOutcome).
+    RUN_REPORT.dedupGateUnavailable = true;
+    finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (dedup gate unavailable, fail-closed, not published): ${safeErrorMessage}`] });
+    console.error(`\n⚠️  Differito: dedup semantico non eseguibile (fail-closed), nessun articolo pubblicato. ${safeErrorMessage}`);
+    // Token DISTINTO dal marcatore di esito del workflow: quello lo stampa il
+    // workflow una volta per run, e scan-generation-health/measure-section-cadence
+    // lo contano per riga; il generatore non deve produrne un secondo.
+    console.error(`${DEDUP_GATE_UNAVAILABLE_MARKER} section=${SECTION_NAME}`);
+    await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
+  }
   if (isQualityRejectError(e)) {
     finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (content quality rejected, slop not published): ${safeErrorMessage}`] });
     console.error(`\n⚠️  Differito: nessun articolo conforme prodotto in questa run (rigetto qualità — slop non pubblicato). Riprovo al prossimo run. ${safeErrorMessage}`);
