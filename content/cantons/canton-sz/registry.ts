@@ -193,4 +193,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'einsiedeln-investimenti-netti-piano',
+ category: 'novita',
+ date: '2026-11-28T10:23:27.197Z',
+ image: '/images/blog/article-einsiedeln-investimenti-netti-piano.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SZ'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
