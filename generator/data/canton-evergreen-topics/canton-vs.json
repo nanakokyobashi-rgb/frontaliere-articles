@@ -1,0 +1,487 @@
+{
+  "schemaVersion": 1,
+  "officialHosts": [
+    "vs.ch"
+  ],
+  "section": "canton-vs",
+  "sourceLanguage": "fr",
+  "verifiedAt": "2026-11-28",
+  "scopeNote": "Fonti ufficiali del Canton Vallese (vs.ch).",
+  "topics": [
+    {
+      "id": "vs-permessi-di-soggiorno",
+      "format": "guida",
+      "keyword": "Permessi di soggiorno in Vallese: L, B, C e G per frontalieri, durata e quando non servono",
+      "angle": "Quali permessi esistono per chi vive o lavora in Vallese oltre tre mesi, con il permesso G per frontalieri UE/AELE.",
+      "source": {
+        "url": "https://www.vs.ch/web/spm/permis-de-s%C3%A9jour",
+        "publisher": "Service de la population et des migrations du Valais",
+        "language": "fr"
+      },
+      "facts": [
+        {
+          "claim": "Per i frontalieri esiste il permesso G, di regola valido 5 anni.",
+          "evidence": "permis pour les frontalières et frontaliers (permis G, généralement valable 5 ans)"
+        },
+        {
+          "claim": "Il permesso L di breve durata vale fino a 1 anno.",
+          "evidence": "permis de séjour de courte durée (permis L, jusqu'à 1 an)"
+        },
+        {
+          "claim": "Per soggiorni o lavoro fino a tre mesi non serve un permesso di soggiorno.",
+          "evidence": "aucun permis de séjour n'est nécessaire"
+        }
+      ]
+    },
+    {
+      "id": "vs-ricongiungimento-familiare",
+      "format": "guida",
+      "keyword": "Ricongiungimento familiare in Vallese: chi conta come familiare e quali condizioni valgono",
+      "angle": "Come funziona il ricongiungimento familiare in Vallese per cittadini UE/AELE e di Stati terzi.",
+      "source": {
+        "url": "https://www.vs.ch/web/spm/regroupement-familial1",
+        "publisher": "Service de la population et des migrations du Valais",
+        "language": "fr"
+      },
+      "facts": [
+        {
+          "claim": "Per i cittadini UE/AELE sono familiari i figli e nipoti sotto i 21 anni o a carico.",
+          "evidence": "les enfants et petits-enfants de moins de 21 ans ou à charge"
+        },
+        {
+          "claim": "Per i cittadini di Stati terzi contano i figli sotto i 18 anni.",
+          "evidence": "les enfants de moins de 18 ans"
+        },
+        {
+          "claim": "Può servire un alloggio adeguato e non dipendere dall'aiuto sociale.",
+          "evidence": "disposer d’un logement approprié ou de ne pas dépendre de l’aide sociale"
+        }
+      ]
+    },
+    {
+      "id": "vs-cambio-di-cantone",
+      "format": "guida",
+      "keyword": "Cambiare cantone verso o dal Vallese con un permesso: cosa cambia per UE/AELE e Stati terzi",
+      "angle": "Le regole vallesane sul cambio di cantone di residenza e sull'annuncio dell'indirizzo entro 14 giorni.",
+      "source": {
+        "url": "https://www.vs.ch/web/spm/changement-de-canton1",
+        "publisher": "Service de la population et des migrations du Valais",
+        "language": "fr"
+      },
+      "facts": [
+        {
+          "claim": "I cittadini UE/AELE non hanno bisogno di una nuova autorizzazione se cambiano cantone.",
+          "evidence": "n’ont pas besoin d’une nouvelle autorisation si elles changent de canton de domicile"
+        },
+        {
+          "claim": "Il nuovo indirizzo va annunciato ai due comuni entro 14 giorni.",
+          "evidence": "dans un délai de 14 jours"
+        },
+        {
+          "claim": "Per gli Stati terzi l'autorizzazione vale solo nel cantone che l'ha rilasciata.",
+          "evidence": "n’est valable que sur le territoire du canton qui l’a délivrée"
+        }
+      ]
+    },
+    {
+      "id": "vs-cercare-lavoro-ue",
+      "format": "guida",
+      "keyword": "Cercare lavoro in Vallese da cittadino UE: tre mesi senza permesso e poi il permesso L",
+      "angle": "Cosa possono fare i cittadini UE che cercano lavoro in Vallese e quando serve annunciarsi al comune.",
+      "source": {
+        "url": "https://www.vs.ch/web/spm/rechercher-un-emploi1",
+        "publisher": "Service de la population et des migrations du Valais",
+        "language": "fr"
+      },
+      "facts": [
+        {
+          "claim": "Nei primi tre mesi si può soggiornare senza autorizzazione.",
+          "evidence": "sans autorisation durant les trois premiers mois"
+        },
+        {
+          "claim": "Dopo tre mesi viene rilasciato un permesso L UE/AELE di tre mesi.",
+          "evidence": "Une autorisation de séjour L UE/AELE d’une durée de trois mois"
+        },
+        {
+          "claim": "Può essere prorogato di sei mesi se le ricerche sono state effettive.",
+          "evidence": "prolongée pour six mois"
+        }
+      ]
+    },
+    {
+      "id": "vs-costi-documenti-identita",
+      "format": "guida",
+      "keyword": "Passaporto e carta d'identità in Vallese: costi 2026 e validità",
+      "angle": "Le tariffe cantonali dei documenti d'identità in Vallese, per adulti e bambini, con passaporto d'urgenza.",
+      "source": {
+        "url": "https://www.vs.ch/web/spm/frais-passeport-biom%C3%A9trique",
+        "publisher": "Service de la population et des migrations du Valais",
+        "language": "fr"
+      },
+      "facts": [
+        {
+          "claim": "Il passaporto per adulti costa 140 franchi più 5 di spedizione ed è valido 10 anni.",
+          "evidence": "Adultes (dès 18 ans): 140 francs + 5 francs frais de port, validité: 10 ans"
+        },
+        {
+          "claim": "La carta d'identità biometrica per adulti costa 65 franchi.",
+          "evidence": "Carte d'identité biométrique Adultes (dès 18 ans): 65 francs"
+        },
+        {
+          "claim": "Il passaporto d'urgenza costa 100 franchi al centro documenti.",
+          "evidence": "Passeport d'urgence Adultes et enfants: 100 francs"
+        }
+      ]
+    },
+    {
+      "id": "vs-dati-biometrici-permessi",
+      "format": "guida",
+      "keyword": "Dati biometrici per i permessi B, C, Ci, L e G in Vallese: come prendere appuntamento",
+      "angle": "Cosa succede quando si rinnova un permesso in Vallese: lettera d'avviso, appuntamento e validità dei dati.",
+      "source": {
+        "url": "https://www.vs.ch/web/spm/biometrie",
+        "publisher": "Service de la population et des migrations du Valais",
+        "language": "fr"
+      },
+      "facts": [
+        {
+          "claim": "I dati biometrici sono validi 5 anni.",
+          "evidence": "Celles-ci seront valables 5 ans"
+        },
+        {
+          "claim": "Per i cittadini non UE/AELE si prendono anche le impronte digitali.",
+          "evidence": "Photo, signature et empreintes digitales pour les personnes ressortissantes d’un pays hors UE/AELE"
+        },
+        {
+          "claim": "Per prenotare serve il codice di accesso personale a 8 cifre della lettera.",
+          "evidence": "code d’accès personnel à 8 chiffres"
+        }
+      ]
+    },
+    {
+      "id": "vs-controllo-abitanti",
+      "format": "guida",
+      "keyword": "Annunciarsi in un comune vallesano: il controllo abitanti e le pratiche per i permessi",
+      "angle": "Quali pratiche si fanno al controllo abitanti del comune di domicilio e quali al servizio cantonale.",
+      "source": {
+        "url": "https://www.vs.ch/web/spm/contr%C3%B4le-de-l-habitant",
+        "publisher": "Service de la population et des migrations du Valais",
+        "language": "fr"
+      },
+      "facts": [
+        {
+          "claim": "Le domande di permesso si presentano al controllo abitanti del comune di domicilio.",
+          "evidence": "Les demandes de permis de séjour doivent être présentées au contrôle de l’habitant de votre commune de domicile"
+        },
+        {
+          "claim": "Poi il dossier passa al servizio cantonale della popolazione per la decisione.",
+          "evidence": "Service cantonal de la population et des migrations pour décision"
+        },
+        {
+          "claim": "Anche la prolungazione o trasformazione (da L a B o da B a C) si chiede al comune.",
+          "evidence": "L en B ou B en C"
+        }
+      ]
+    },
+    {
+      "id": "vs-imposta-alla-fonte",
+      "format": "guida",
+      "keyword": "Imposta alla fonte in Vallese: portale per i conteggi di dipendenti e frontalieri",
+      "angle": "Come il Servizio cantonale delle contribuzioni del Vallese gestisce l'imposta alla fonte e il portale per i conteggi.",
+      "source": {
+        "url": "https://www.vs.ch/web/scc/source",
+        "publisher": "Service cantonal des contributions du Valais",
+        "language": "fr"
+      },
+      "facts": [
+        {
+          "claim": "La nuova legge sull'imposta alla fonte vale dal 1 gennaio 2021.",
+          "evidence": "Nouvelle loi dès le 1er janvier 2021"
+        },
+        {
+          "claim": "Il portale per i conteggi di dipendenti e frontalieri è in uso dal 1 gennaio 2021.",
+          "evidence": "Portail Impôt à la source (décomptes salariés/frontaliers dès le 01 janvier 2021)"
+        },
+        {
+          "claim": "I conteggi si trasmettono in forma elettronica.",
+          "evidence": "Transmission électronique des décomptes"
+        }
+      ]
+    },
+    {
+      "id": "vs-pass-13-trasporti",
+      "format": "guida",
+      "keyword": "PASS 13* in Vallese: il titolo di trasporto pubblico valesano con FAIRTIQ",
+      "angle": "Come funziona il credito di trasporto pubblico PASS 13* in Vallese, categorie e prezzi.",
+      "source": {
+        "url": "https://www.vs.ch/web/sdm/pass13",
+        "publisher": "Service de la mobilité du Valais",
+        "language": "fr"
+      },
+      "facts": [
+        {
+          "claim": "Il PASS 13* è il titolo di trasporto pubblico valesano da usare con l'app FAIRTIQ.",
+          "evidence": "le titre de transport public valaisan"
+        },
+        {
+          "claim": "La versione da 160 franchi dà viaggi per un valore di 200 franchi su 12 mesi.",
+          "evidence": "Le PASS 13* à 160.- qui donne droit à un crédit de transport public, soit des trajets d’une valeur de CHF 200.- sur 12 mois"
+        },
+        {
+          "claim": "Esistono due tipi di PASS 13*.",
+          "evidence": "Il existe deux types de PASS 13*"
+        }
+      ]
+    },
+    {
+      "id": "vs-ufficio-circolazione-orari",
+      "format": "guida",
+      "keyword": "Servizio della circolazione stradale del Vallese: orari degli sportelli e pratiche più richieste",
+      "angle": "Orari di apertura delle sedi del Vallese e prestazioni più richieste: targhe, esami, licenze di allievo.",
+      "source": {
+        "url": "https://www.vs.ch/web/scn",
+        "publisher": "Service de la circulation routière et de la navigation du Valais",
+        "language": "fr"
+      },
+      "facts": [
+        {
+          "claim": "Da lunedì a giovedì gli sportelli sono aperti dalle 8:00 alle 11:30 e dalle 13:30 alle 17:00.",
+          "evidence": "Lundi, mardi, mercredi et jeudi 8h00 - 11h30 et 13h30 - 17h00"
+        },
+        {
+          "claim": "Il venerdì l'apertura è dalle 8:00 alle 16:00.",
+          "evidence": "Vendredi 8h00 - 16h00"
+        },
+        {
+          "claim": "A Sion il martedì si resta aperti fino alle 18:00.",
+          "evidence": "Sion : mardi jusqu'à 18h00"
+        }
+      ]
+    },
+    {
+      "id": "vs-certificazione-adulti",
+      "format": "guida",
+      "keyword": "Titolo professionale per adulti in Vallese: CFC e AFP senza apprendistato formale",
+      "angle": "Come ottenere in Vallese un CFC o un AFP con esperienza professionale: validazione, articolo 32 e hotline.",
+      "source": {
+        "url": "https://www.vs.ch/web/sfop/cpa",
+        "publisher": "Service de la formation professionnelle du Valais",
+        "language": "fr"
+      },
+      "facts": [
+        {
+          "claim": "Gli adulti possono ottenere AFP o CFC senza un percorso formale.",
+          "evidence": "sans avoir préalablement suivi une voie de formation formelle"
+        },
+        {
+          "claim": "Esiste la validazione degli apprendimenti dall'esperienza.",
+          "evidence": "Validation des acquis de l'expérience (VAE)"
+        },
+        {
+          "claim": "La hotline in francese è allo 027 606 95 55.",
+          "evidence": "Hotline (français) 027 606 95 55"
+        }
+      ]
+    },
+    {
+      "id": "vs-formazione-fuori-cantone",
+      "format": "guida",
+      "keyword": "Formazione professionale fuori dal Vallese: quando il Cantone finanzia una scuola a tempo pieno",
+      "angle": "Condizioni per chiedere un contributo per una scuola professionale a tempo pieno fuori Cantone.",
+      "source": {
+        "url": "https://www.vs.ch/web/sfop/formation-hors-canton",
+        "publisher": "Service de la formation professionnelle du Valais",
+        "language": "fr"
+      },
+      "facts": [
+        {
+          "claim": "Il Cantone sostiene soprattutto la formazione duale.",
+          "evidence": "Le canton du Valais soutient principalement la formation duale"
+        },
+        {
+          "claim": "Una condizione è non avere un posto di apprendistato disponibile in Vallese.",
+          "evidence": "Aucune place d'apprentissage disponible en Valais"
+        },
+        {
+          "claim": "Serve la prova di residenza in Vallese.",
+          "evidence": "Preuve de résidence en Valais"
+        }
+      ]
+    },
+    {
+      "id": "vs-aiuto-sociale",
+      "format": "guida",
+      "keyword": "Aiuto sociale in Vallese: principi, sussidiarietà e misure di inserimento",
+      "angle": "Come funziona l'aiuto sociale pubblico in Vallese e quali misure comprende.",
+      "source": {
+        "url": "https://www.vs.ch/web/sas/aide-sociale",
+        "publisher": "Service de l'action sociale du Valais",
+        "language": "fr"
+      },
+      "facts": [
+        {
+          "claim": "L'aiuto sociale interviene in via sussidiaria rispetto ad altre fonti di reddito.",
+          "evidence": "Elle intervient de façon subsidiaire à toutes autres sources de revenus"
+        },
+        {
+          "claim": "Punta al ritorno all'autonomia sociale e finanziaria.",
+          "evidence": "L’aide sociale vise le retour à l’autonomie sociale et financière des bénéficiaires"
+        },
+        {
+          "claim": "Comprende misure di inserimento sociale e professionale.",
+          "evidence": "Des mesures d’insertion sociale et professionnelle"
+        }
+      ]
+    },
+    {
+      "id": "vs-preapprendistato",
+      "format": "guida",
+      "keyword": "Preapprendistato in Vallese: PAI per migranti e PAP professionale",
+      "angle": "I due modelli di preapprendistato del Vallese per giovani che non possono ancora iniziare una formazione.",
+      "source": {
+        "url": "https://www.vs.ch/web/sfop/pr%C3%A9apprentissage",
+        "publisher": "Service de la formation professionnelle du Valais",
+        "language": "fr"
+      },
+      "facts": [
+        {
+          "claim": "Il Servizio offre due modelli di preapprendistato.",
+          "evidence": "deux modèles de préapprentissage"
+        },
+        {
+          "claim": "Il PAI è il preapprendistato di integrazione per un pubblico migrante.",
+          "evidence": "PAI : préapprentissage d’intégration"
+        },
+        {
+          "claim": "Il PAP è il preapprendistato professionale.",
+          "evidence": "PAP : préapprentissage professionnel"
+        }
+      ]
+    },
+    {
+      "id": "vs-aiuto-alle-vittime-lavi",
+      "format": "guida",
+      "keyword": "Aiuto alle vittime di reati in Vallese: LAVI e numeri utili 117 e 142",
+      "angle": "Chi ha diritto all'aiuto previsto dalla LAVI in Vallese e a chi rivolgersi.",
+      "source": {
+        "url": "https://www.vs.ch/web/sas/lavi",
+        "publisher": "Service de l'action sociale du Valais",
+        "language": "fr"
+      },
+      "facts": [
+        {
+          "claim": "La LAVI è in vigore dal 1 gennaio 1993.",
+          "evidence": "La LAVI est entrée en vigueur le 1er janvier 1993"
+        },
+        {
+          "claim": "In caso di pericolo imminente si chiama il 117.",
+          "evidence": "Qui contacter en cas de danger imminent ? 117"
+        },
+        {
+          "claim": "In caso di violenza il numero indicato è il 142.",
+          "evidence": "Qui contacter en cas de violence ? 142"
+        }
+      ]
+    },
+    {
+      "id": "vs-mobilita-dolce",
+      "format": "approfondimento",
+      "keyword": "Mobilità dolce in Vallese: leggi cantonali del 2012 e del 2023 per ciclisti e pedoni",
+      "angle": "Cosa include la mobilità dolce nel Vallese e come due leggi cantonali regolano quella quotidiana e quella del tempo libero.",
+      "source": {
+        "url": "https://www.vs.ch/web/sdm/mobilit%C3%A9-douce",
+        "publisher": "Service de la mobilité du Valais",
+        "language": "fr"
+      },
+      "facts": [
+        {
+          "claim": "Si distinguono due forme di mobilità dolce.",
+          "evidence": "On distingue deux formes de mobilité douce"
+        },
+        {
+          "claim": "Quella quotidiana è regolata dal 2023 dalla legge sui trasporti pubblici e sulla mobilità dolce quotidiana.",
+          "evidence": "régie depuis 2023 par la Loi cantonale sur les transports publics et la mobilité douce quotidienne"
+        },
+        {
+          "claim": "Quella del tempo libero è regolata dal 2012 dalla legge sugli itinerari di mobilità del tempo libero.",
+          "evidence": "régie depuis 2012 par la loi cantonale sur les itinéraires de mobilité de loisirs"
+        }
+      ]
+    },
+    {
+      "id": "vs-proches-aidants",
+      "format": "guida",
+      "keyword": "Familiari curanti in Vallese: servizio di sollievo a domicilio e aiuto finanziario",
+      "angle": "Le prestazioni cantonali per i familiari curanti in Vallese e l'ufficio di coordinamento per il tema disabilità.",
+      "source": {
+        "url": "https://www.vs.ch/web/sas/proches-aidants",
+        "publisher": "Service de l'action sociale du Valais",
+        "language": "fr"
+      },
+      "facts": [
+        {
+          "claim": "Si può far ricorso a un servizio di sollievo a domicilio.",
+          "evidence": "Faire appel à un service de relève à domicile"
+        },
+        {
+          "claim": "Si può chiedere un aiuto finanziario individuale.",
+          "evidence": "Demander une aide financière individuelle"
+        },
+        {
+          "claim": "L'ufficio di riferimento è l'OCQH.",
+          "evidence": "Office de coordination pour les questions dans le domaine du handicap (OCQH)"
+        }
+      ]
+    },
+    {
+      "id": "vs-dati-salute-2026",
+      "format": "dati",
+      "keyword": "La salute dei valesani nel 2026: i dati dell'Osservatorio valaisano della salute",
+      "angle": "Lettura del rapporto ufficiale del 16 ottobre 2026 sulla salute della popolazione del Vallese, con percentuali e confronto con la Svizzera.",
+      "source": {
+        "url": "https://www.vs.ch/web/ssp/e/news-ssp/10108/51561274",
+        "publisher": "Service de la santé publique du Valais",
+        "language": "fr"
+      },
+      "facts": [
+        {
+          "claim": "L'Osservatorio valaisano della salute ha pubblicato il rapporto «La santé de la population en Valais 2026».",
+          "evidence": "L’Observatoire valaisan de la santé (OVS) publie un rapport"
+        },
+        {
+          "claim": "Nel 2022 l'83% degli adulti vallesani si dichiara in buona salute, contro l'85% in Svizzera.",
+          "evidence": "83 % des adultes en 2022 (Suisse : 85 %)"
+        },
+        {
+          "claim": "Tra gli 11 e i 15 anni l'86% si considera in buona o ottima salute nel 2022.",
+          "evidence": "86 % se considèrent en bon ou excellent état de santé en 2022"
+        }
+      ]
+    },
+    {
+      "id": "vs-dati-depurazione-2025",
+      "format": "dati",
+      "keyword": "Depurazione delle acque in Vallese: il bilancio 2025 delle stazioni di depurazione",
+      "angle": "Lettura del comunicato ufficiale del 16 novembre 2026 sul bilancio 2025 delle STEP valesane: fosforo, azoto e micro-inquinanti.",
+      "source": {
+        "url": "https://www.vs.ch/web/sen/e/news/10108/52463268",
+        "publisher": "Service de l'environnement du Valais",
+        "language": "fr"
+      },
+      "facts": [
+        {
+          "claim": "Il bilancio 2025 riguarda il funzionamento delle stazioni di depurazione valesane.",
+          "evidence": "Le bilan 2025 du fonctionnement des stations d’épuration (STEP) valaisannes"
+        },
+        {
+          "claim": "Nel 2025 l'efficacia di eliminazione del fosforo è migliorata ulteriormente.",
+          "evidence": "En 2025, l’efficacité d’élimination du phosphore s’est encore améliorée"
+        },
+        {
+          "claim": "Le prestazioni di nitrificazione sono peggiorate rispetto all'anno precedente.",
+          "evidence": "les performances de nitrification (traitement de l'azote) se sont dégradées"
+        }
+      ]
+    }
+  ]
+}

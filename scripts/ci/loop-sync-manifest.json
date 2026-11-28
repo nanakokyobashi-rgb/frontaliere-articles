@@ -3497,6 +3497,66 @@
       }
     },
     {
+      "path": "generator/scripts/lib/canton-nonnews.mjs",
+      "mode": "corpus-only",
+      "reason": "La manopola Remote Config CANTON_NONNEWS_SECTIONS (F4.2 del piano cadenza 20 articoli per sezione): lista delle sezioni cantonali che, senza notizie, ripiegano su un pool di argomenti da pagine ufficiali del cantone invece di uscire con CANTON_EVERGREEN_POOL_DISABLED (stessa sintassi di CANTON_HIGH_CADENCE_SECTIONS, vuota = comportamento di prima). Contiene la scelta dell'argomento (fonte ufficiale HTTP 200 con almeno 3 citazioni verbatim, copertura a 90 giorni sul ledger delle fonti, guardia anti-template fra cantoni) e il SOURCE CONTENT della generazione. Corpus-only: il pool news, i profili e la generazione cantonale vivono solo qui; il sito consuma gli articoli pubblicati come JSON.",
+      "baseline": {
+        "site": null,
+        "corpus": "f86e651bd9b2dab4",
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
+      "path": "generator/scripts/verify-canton-evergreen-topics.mjs",
+      "mode": "corpus-only",
+      "reason": "Verifica dei pool di argomenti non-news per cantone (F4.2): --check offline (schema, almeno 15 argomenti sulle sezioni pilota, host ufficiale, nessun clone fra cantoni) e --online (fonte HTTP 200 e citazioni verbatim nella pagina). Corpus-only: i pool sono dati del generatore del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "2d231c5f7ea25c99",
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
+      "path": "generator/data/canton-evergreen-topics/canton-basilea.json",
+      "mode": "corpus-only",
+      "reason": "Pool di argomenti non-news della sezione canton-basilea (F4.2): pagine ufficiali del Canton Basilea Citta' (bs.ch, statistik.bs.ch) con citazioni verbatim verificate da verify-canton-evergreen-topics.mjs. Dato del generatore del corpus, nessun gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "21927b11468f0974",
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
+      "path": "generator/data/canton-evergreen-topics/canton-be.json",
+      "mode": "corpus-only",
+      "reason": "Pool di argomenti non-news della sezione canton-be (F4.2): pagine ufficiali del Canton Berna (be.ch e sottodomini) con citazioni verbatim verificate da verify-canton-evergreen-topics.mjs. Dato del generatore del corpus, nessun gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "c7e5d570f978027e",
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
+      "path": "generator/data/canton-evergreen-topics/canton-vs.json",
+      "mode": "corpus-only",
+      "reason": "Pool di argomenti non-news della sezione canton-vs (F4.2): pagine ufficiali del Canton Vallese (vs.ch) con citazioni verbatim verificate da verify-canton-evergreen-topics.mjs. Dato del generatore del corpus, nessun gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "b4bd4980bf7717dd",
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
+      "path": "generator/tests/canton-nonnews.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Test della manopola CANTON_NONNEWS_SECTIONS e del pool non-news cantonale (F4.2): lista vuota = comportamento di oggi, candidato non-news senza notizie, copertura a 90 giorni, fonte non raggiungibile, guardia anti-template. Corpus-only come il codice che copre.",
+      "baseline": {
+        "site": null,
+        "corpus": "2c2962d3ba1d59c7",
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
       "path": "generator/scripts/lib/canton-news-sources.mjs",
       "mode": "corpus-only",
       "reason": "Scanner delle fonti news delle sezioni cantonali (P6b): parser json-entities (iCMS NW/OW/SH), json-api (zh.ch, be.ch), news-sitemap e sitemap a periodo (settimana ISO, mese, anno), riuso di extractRssItems/extractHeadlines di create-article.mjs per RSS/Atom e link HTML; quirk del profilo (crawl-delay per host, maxRequestsPerRun, charset dichiarato, pubDate vuoto, anno sbagliato nei time datetime, paywall title+lead) e User-Agent dichiarato (D10). Dal P5b: sulle pagine html-links toglie la cornice del sito (nav, header e footer di pagina) e i link fuori da `articlePathPattern` dove il profilo lo dichiara, e per le fonti `urlReusedForDifferentStories` mette nell'URL l'identita' dell'item (`#ft-item=`, costruita con le funzioni di `source-url-ledger.mjs`). Corpus-only: le fonti per cantone e il generatore che le legge esistono solo nel corpus.",

@@ -1,0 +1,487 @@
+{
+  "schemaVersion": 1,
+  "officialHosts": [
+    "be.ch"
+  ],
+  "section": "canton-be",
+  "sourceLanguage": "de",
+  "verifiedAt": "2026-11-28",
+  "scopeNote": "Fonti ufficiali del Canton Berna (be.ch e sottodomini).",
+  "topics": [
+    {
+      "id": "be-novita-fiscali-2025",
+      "format": "guida",
+      "keyword": "Novità fiscali Canton Berna anno fiscale 2025: deduzione per i figli e aliquota cantonale",
+      "angle": "Cosa cambia nella dichiarazione 2025 a Berna: deduzioni per figli, compensazione della progressione a freddo e prospettive 2026.",
+      "source": {
+        "url": "https://www.sv.fin.be.ch/de/start/themen/steuererklaerung/was-ist-neu.html",
+        "publisher": "Steuerverwaltung des Kantons Bern",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Per le imposte cantonali e comunali la deduzione massima per figlio resta di 16'000 franchi l'anno.",
+          "evidence": "16'000 Franken pro Jahr"
+        },
+        {
+          "claim": "Per l'imposta federale la deduzione per i costi di custodia dei figli sale a 25'800 franchi.",
+          "evidence": "25'800 Franken pro Jahr"
+        },
+        {
+          "claim": "Dal 2025 il Cantone abbassa l'aliquota cantonale per le persone fisiche.",
+          "evidence": "Senkung der kantonalen Steueranlage für natürliche Personen"
+        }
+      ]
+    },
+    {
+      "id": "be-pilastro-3a",
+      "format": "guida",
+      "keyword": "Pilastro 3a nel Canton Berna: deduzioni 2025-2026 e dal 2027",
+      "angle": "Quanto si può dedurre dal reddito imponibile a Berna con il terzo pilastro e come cambiano i massimali dal 2027.",
+      "source": {
+        "url": "https://www.sv.fin.be.ch/de/start/themen/steuersituationen/saeule-3a.html",
+        "publisher": "Steuerverwaltung des Kantons Bern",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Per chi ha una cassa pensione il massimo deducibile 2025/2026 è di 7'258 franchi.",
+          "evidence": "CHF 7'258"
+        },
+        {
+          "claim": "Senza cassa pensione si deduce il 20 per cento del reddito, al massimo 36'288 franchi.",
+          "evidence": "maximal CHF 36'288"
+        },
+        {
+          "claim": "Dal 2027 i massimali salgono a 7'373 e 36'864 franchi.",
+          "evidence": "Ab 2027 jährlich bis CHF 7’373"
+        }
+      ]
+    },
+    {
+      "id": "be-cambio-domicilio-tasse",
+      "format": "guida",
+      "keyword": "Trasloco nel Canton Berna: dove si pagano le imposte se si cambia comune, cantone o si arriva dall'estero",
+      "angle": "Le regole di Berna sull'assoggettamento fiscale quando si cambia domicilio durante l'anno.",
+      "source": {
+        "url": "https://www.sv.fin.be.ch/de/start/themen/steuersituationen/wohnsitzwechsel.html",
+        "publisher": "Steuerverwaltung des Kantons Bern",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Cambiando comune nel Cantone si paga per l'intero anno nel comune di domicilio al 31 dicembre.",
+          "evidence": "am 31. Dezember des Steuerjahres Ihren Wohnsitz hatten, also in der Zuzugs-Gemeinde"
+        },
+        {
+          "claim": "Chi si trasferisce a Berna in corso d'anno è assoggettato per l'intero anno se il 31 dicembre vi risiede.",
+          "evidence": "für das gesamte Steuerjahr im Kanton Bern unbeschränkt steuerpflichtig"
+        },
+        {
+          "claim": "Chi arriva dall'estero diventa soggetto a imposta nel Canton Berna.",
+          "evidence": "Wenn Sie im Verlauf des Jahres Ihren Wohnsitz vom Ausland in den Kanton Bern verlegen"
+        }
+      ]
+    },
+    {
+      "id": "be-scambio-automatico-informazioni",
+      "format": "approfondimento",
+      "keyword": "Conti esteri e scambio automatico di informazioni: cosa vede il fisco del Canton Berna",
+      "angle": "Come lo scambio automatico di informazioni (AIA) rende noti all'amministrazione bernese i conti all'estero non dichiarati.",
+      "source": {
+        "url": "https://www.sv.fin.be.ch/de/start/themen/steuersituationen/aia.html",
+        "publisher": "Steuerverwaltung des Kantons Bern",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Dal 2018 le autorità fiscali svizzere ricevono dati su conti bancari esteri in modo automatizzato.",
+          "evidence": "Seit dem Kalenderjahr 2018 erhalten die schweizerischen Steuerbehörden"
+        },
+        {
+          "claim": "Sono toccate le persone residenti in Svizzera con un conto in un Paese UE.",
+          "evidence": "die beispielsweise über ein Bankkonto in einem EU-Land verfügen"
+        },
+        {
+          "claim": "L'amministrazione bernese può avviare una procedura di imposta suppletiva e penale.",
+          "evidence": "Nach- und Strafsteuerverfahren"
+        }
+      ]
+    },
+    {
+      "id": "be-pensionamento-13-avs",
+      "format": "guida",
+      "keyword": "Pensionamento nel Canton Berna: come si dichiarano rendite e la 13a AVS, tassata",
+      "angle": "Cosa deve dichiarare chi va in pensione a Berna e come viene tassata la tredicesima rendita AVS pagata per la prima volta a dicembre 2026.",
+      "source": {
+        "url": "https://www.sv.fin.be.ch/de/start/themen/steuersituationen/pensionierung.html",
+        "publisher": "Steuerverwaltung des Kantons Bern",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "La 13a rendita AVS è versata per la prima volta a dicembre 2026.",
+          "evidence": "Die 13. AHV-Rente wird im Dezember 2026 erstmals ausbezahlt"
+        },
+        {
+          "claim": "La 13a rendita è imponibile.",
+          "evidence": "Die 13. AHV-Rente ist steuerbar"
+        },
+        {
+          "claim": "Le rendite del secondo pilastro riscosse per la prima volta sono sempre imponibili al 100 per cento.",
+          "evidence": "Neu fliessende Renten und Pensionen aus der 2. Säule sind immer zu 100% steuerbar"
+        }
+      ]
+    },
+    {
+      "id": "be-dopo-dichiarazione",
+      "format": "guida",
+      "keyword": "Dichiarazione d'imposta a Berna: cosa succede dopo l'invio e quante sono tassate automaticamente",
+      "angle": "Dove si consegna la dichiarazione bernese, come viene controllata e quante sono tassate in automatico.",
+      "source": {
+        "url": "https://www.sv.fin.be.ch/de/start/themen/steuererklaerung/steuererklaerung-ausfuellen-privatpersonen/nach-ausfuellen-steuererklaerung.html",
+        "publisher": "Steuerverwaltung des Kantons Bern",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Le dichiarazioni compilate con BE-Login arrivano direttamente all'amministrazione fiscale.",
+          "evidence": "Mit BE-Login ausgefüllte Steuererklärungen gehen direkt zur Steuerverwaltung"
+        },
+        {
+          "claim": "Quelle stampate si consegnano al comune di domicilio.",
+          "evidence": "reichen Sie bei der Wohnsitzgemeinde ein"
+        },
+        {
+          "claim": "Circa il 20 per cento delle dichiarazioni di privati è tassato in modo completamente automatico.",
+          "evidence": "Rund 20 Prozent der Steuererklärungen von Privatpersonen"
+        }
+      ]
+    },
+    {
+      "id": "be-imposta-alla-fonte-chi",
+      "format": "guida",
+      "keyword": "Imposta alla fonte nel Canton Berna: chi vi è soggetto, frontalieri compresi",
+      "angle": "Chi paga la ritenuta alla fonte secondo l'amministrazione fiscale di Berna, con il caso dei frontalieri e dei dimoranti settimanali.",
+      "source": {
+        "url": "https://www.sv.fin.be.ch/de/start/themen/quellensteuer/wer-unterliegt-der-quellensteuer.html",
+        "publisher": "Steuerverwaltung des Kantons Bern",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Sono soggetti i lavoratori stranieri residenti senza permesso C.",
+          "evidence": "die nicht im Besitz der Niederlassungsbewilligung (Ausweis C) sind"
+        },
+        {
+          "claim": "Anche chi non risiede in Svizzera è soggetto per certi redditi.",
+          "evidence": "Personen ohne steuerrechtlichen Wohnsitz oder Aufenthalt in der Schweiz sind ebenfalls für gewisse Einkünfte quellensteuerpflichtig"
+        },
+        {
+          "claim": "Tra questi ci sono dimoranti di breve durata, frontalieri e dimoranti settimanali.",
+          "evidence": "Kurzaufenthalter/-innen, Grenzgänger/-innen und Wochenaufenthalter/-innen"
+        }
+      ]
+    },
+    {
+      "id": "be-successioni-donazioni",
+      "format": "guida",
+      "keyword": "Imposta di successione e donazione nel Canton Berna: franchigia di 12'000 franchi",
+      "angle": "Chi paga l'imposta di successione e donazione a Berna, quando è esente e come funziona la franchigia.",
+      "source": {
+        "url": "https://www.sv.fin.be.ch/de/start/themen/steuersituationen/erbschaft-und-schenkung.html",
+        "publisher": "Steuerverwaltung des Kantons Bern",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Eredità e donazioni a discendenti e coniugi sono esenti.",
+          "evidence": "Schenkungen an Nachkommen und Ehepartner-/innen sind steuerfrei"
+        },
+        {
+          "claim": "Per altre persone la franchigia è di 12'000 franchi.",
+          "evidence": "im Umfang von CHF 12'000 steuerfrei"
+        },
+        {
+          "claim": "La franchigia vale una volta sola se in cinque anni arrivano più attribuzioni dalla stessa persona.",
+          "evidence": "innert 5 Jahren mehrere Zuwendungen von derselben Person"
+        }
+      ]
+    },
+    {
+      "id": "be-autodenuncia-esente",
+      "format": "guida",
+      "keyword": "Autodenuncia fiscale non punibile nel Canton Berna: condizioni e multa dalla seconda volta",
+      "angle": "Come funziona l'autodenuncia esente da pena per redditi non dichiarati a Berna e cosa succede se si ripete.",
+      "source": {
+        "url": "https://www.sv.fin.be.ch/de/start/themen/steuersituationen/straflose-selbstanzeige.html",
+        "publisher": "Steuerverwaltung des Kantons Bern",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "La prima autodenuncia spontanea resta impunita.",
+          "evidence": "bleibt die Hinterziehung bei der erstmaligen Selbstanzeige straflos"
+        },
+        {
+          "claim": "Dalla seconda autodenuncia la multa è un quinto dell'imposta sottratta.",
+          "evidence": "Bei jeder weiteren Selbstanzeige beträgt die Busse ein Fünftel der hinterzogenen Steuer"
+        },
+        {
+          "claim": "Non servono moduli speciali: basta una lettera all'amministrazione fiscale.",
+          "evidence": "Für die Selbstanzeige gibt es keine Formvorschriften oder spezielle Formulare"
+        }
+      ]
+    },
+    {
+      "id": "be-imposta-sulla-spesa",
+      "format": "approfondimento",
+      "keyword": "Tassazione globale a Berna: l'imposta sul dispendio per chi arriva dall'estero senza lavorare",
+      "angle": "Cos'è la tassazione secondo il dispendio nel Canton Berna e quali soglie minime si applicano.",
+      "source": {
+        "url": "https://www.sv.fin.be.ch/de/start/themen/steuersituationen/besteuerung-nach-dem-aufwand.html",
+        "publisher": "Steuerverwaltung des Kantons Bern",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Chi non svolge attività lucrativa in Svizzera può scegliere un'imposta forfettaria sul dispendio.",
+          "evidence": "eine Pauschalsteuer nach dem Aufwand zu entrichten"
+        },
+        {
+          "claim": "La base minima è il settuplo della pigione annua o del valore locativo, comunque almeno 400'000 franchi.",
+          "evidence": "das Siebenfache des jährlichen Mietzinses oder des Eigenmietwertes der Wohnung, mindestens jedoch CHF 400'000"
+        },
+        {
+          "claim": "Si applicano le tariffe ordinarie dell'imposta sul reddito e sulla sostanza.",
+          "evidence": "kommen die ordentlichen Tarife der Einkommens- und Vermögenssteuern zur Anwendung"
+        }
+      ]
+    },
+    {
+      "id": "be-giovani-imposte",
+      "format": "guida",
+      "keyword": "Imposte a 18 anni nel Canton Berna: quando i giovani devono compilare la dichiarazione",
+      "angle": "Da quando un giovane bernese è soggetto a imposta e come si trattano il salario di apprendistato e il patrimonio dei minorenni.",
+      "source": {
+        "url": "https://www.sv.fin.be.ch/de/start/themen/steuersituationen/jugendliche.html",
+        "publisher": "Steuerverwaltung des Kantons Bern",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "A 18 anni i giovani diventano pienamente soggetti a imposta anche se fanno già un apprendistato.",
+          "evidence": "vollumfänglich selber steuerpflichtig"
+        },
+        {
+          "claim": "I minorenni di regola non compilano una dichiarazione propria.",
+          "evidence": "müssen grundsätzlich keine eigene Steuererklärung ausfüllen"
+        },
+        {
+          "claim": "Il salario di apprendistato dei minorenni non va indicato nella dichiarazione dei genitori.",
+          "evidence": "ist nicht in der Steuererklärung der Eltern zu deklarieren"
+        }
+      ]
+    },
+    {
+      "id": "be-separazione-divorzio-imposte",
+      "format": "guida",
+      "keyword": "Separazione e divorzio nel Canton Berna: tassazione separata e alimenti",
+      "angle": "Come cambia la tassazione a Berna con separazione o divorzio e come si trattano gli alimenti.",
+      "source": {
+        "url": "https://www.sv.fin.be.ch/de/start/themen/steuersituationen/trennung-und-scheidung.html",
+        "publisher": "Steuerverwaltung des Kantons Bern",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "In caso di separazione o divorzio i coniugi sono tassati separatamente per l'intero periodo fiscale.",
+          "evidence": "für die ganze Steuerperiode getrennt veranlagt und besteuert"
+        },
+        {
+          "claim": "Dall'anno della separazione ciascuno compila una propria dichiarazione.",
+          "evidence": "beide Personen ab dem Trennungsjahr eine eigene Steuererklärung ausfüllen"
+        },
+        {
+          "claim": "Gli alimenti ricevuti sono imponibili e chi li versa può dedurli.",
+          "evidence": "Die leistende Person kann diese Unterhaltsbeiträge abziehen"
+        }
+      ]
+    },
+    {
+      "id": "be-termine-dichiarazione",
+      "format": "guida",
+      "keyword": "Termine della dichiarazione 2025 nel Canton Berna: proroga automatica al 30 novembre 2026",
+      "angle": "Perché a Berna l'ultima scadenza per la dichiarazione 2025 è stata prorogata d'ufficio e cosa ha causato l'interruzione dei servizi digitali.",
+      "source": {
+        "url": "https://www.sv.fin.be.ch/de/start/themen/steuererklaerung/steuererklaerung-ausfuellen-privatpersonen.html",
+        "publisher": "Steuerverwaltung des Kantons Bern",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "L'ultimo termine è stato prorogato automaticamente dal 15 al 30 novembre 2026.",
+          "evidence": "automatisch vom 15. auf den 30. November 2026 verlängert"
+        },
+        {
+          "claim": "La proroga compensa l'interruzione del servizio per la migrazione tecnica.",
+          "evidence": "Die technische Umstellung bei der Steuerverwaltung des Kantons Bern ist erfolgreich abgeschlossen"
+        },
+        {
+          "claim": "La dichiarazione si può compilare online o su carta.",
+          "evidence": "Sie können diese online oder auf Papier ausfüllen und einreichen"
+        }
+      ]
+    },
+    {
+      "id": "be-licenza-di-allievo-2027",
+      "format": "guida",
+      "keyword": "Licenza di allievo conducente a Berna: cosa cambia dal 1 gennaio 2027",
+      "angle": "Il nuovo percorso verso la patente nel Canton Berna: corso di sensibilizzazione al traffico prima dell'esame teorico, nothelfer e test della vista digitali.",
+      "source": {
+        "url": "https://www.svsa.sid.be.ch/de/start/lernfahrer/lernfahrausweis.html",
+        "publisher": "Strassenverkehrs- und Schifffahrtsamt des Kantons Bern",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Dal 1 gennaio 2027 il percorso verso la patente viene in parte riorganizzato e digitalizzato.",
+          "evidence": "ab 1. Januar 2027 wird der Weg zum Führerausweis teilweise neu gestaltet und digitalisiert"
+        },
+        {
+          "claim": "Corso di primo soccorso e test della vista saranno registrati in forma digitale.",
+          "evidence": "Nothilfekurs und Sehtest werden ab 2027 digital erfasst"
+        },
+        {
+          "claim": "La prima domanda si consegna di persona presso una sede, un posto di polizia o il comune.",
+          "evidence": "einem Polizeiposten oder Ihrer Gemeindeverwaltung einreichen"
+        }
+      ]
+    },
+    {
+      "id": "be-passaporto-carta-identita",
+      "format": "guida",
+      "keyword": "Passaporto e carta d'identità nel Canton Berna: i sette centri documenti e i tempi",
+      "angle": "Come si ordina un documento d'identità a Berna: richiesta online, appuntamento in un centro, rilievo biometrico e tempi di consegna.",
+      "source": {
+        "url": "https://www.pass-id.sid.be.ch/de/start/dienstleistungen/neuer-pass-id.html",
+        "publisher": "Kanton Bern",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "L'appuntamento si prende in uno dei sette centri documenti.",
+          "evidence": "einem der sieben Ausweiszentren"
+        },
+        {
+          "claim": "Alla visita si rileva la foto sul posto: non serve portarla.",
+          "evidence": "Bringen Sie darum bitte kein Passfoto mit"
+        },
+        {
+          "claim": "Il documento arriva entro 10 giorni lavorativi per raccomandata.",
+          "evidence": "innerhalb von 10 Arbeitstagen per Einschreiben"
+        }
+      ]
+    },
+    {
+      "id": "be-disoccupazione-ava",
+      "format": "guida",
+      "keyword": "Disoccupazione nel Canton Berna: iscrizione all'ufficio regionale di collocamento e indennità",
+      "angle": "I passi da fare a Berna se si è (quasi) disoccupati: iscrizione online, richiesta dell'indennità e obblighi durante la disoccupazione.",
+      "source": {
+        "url": "https://www.weu.be.ch/de/start/themen/wirtschaft-und-arbeit/arbeitnehmende/anmelden-rav-alk.html",
+        "publisher": "Amt für Arbeitslosenversicherung des Kantons Bern",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Chi è (presto) disoccupato e vive nel Cantone deve iscriversi al più presto all'ufficio regionale di collocamento.",
+          "evidence": "Melden Sie sich so schnell wie möglich bei der Regionalen Arbeitsvermittlung"
+        },
+        {
+          "claim": "Dopo l'iscrizione bisogna chiedere l'indennità di disoccupazione.",
+          "evidence": "müssen Sie Arbeitslosengeld beantragen"
+        },
+        {
+          "claim": "L'iscrizione alla disoccupazione si può fare online.",
+          "evidence": "Arbeitslosigkeit online anmelden"
+        }
+      ]
+    },
+    {
+      "id": "be-dati-budget-2027",
+      "format": "dati",
+      "keyword": "Budget 2027 del Canton Berna: cosa prevede il piano finanziario 2028-2030 e gli investimenti a dieci anni",
+      "angle": "Come funzionano budget e piano dei compiti e delle finanze del Canton Berna, con i documenti ufficiali 2027-2030 e la pianificazione degli investimenti 2027-2036.",
+      "source": {
+        "url": "https://www.fin.be.ch/de/start/themen/Finanzen/budget-und-aufgaben--finanzplan.html",
+        "publisher": "Finanzdirektion des Kantons Bern",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Il Cantone pubblica il Budget 2027 con il piano dei compiti e delle finanze 2028-2030.",
+          "evidence": "Budget 2027 und Aufgaben-/Finanzplan 2028-2030"
+        },
+        {
+          "claim": "La pianificazione degli investimenti copre il periodo 2027-2036.",
+          "evidence": "Gesamtkantonale Investitionsplanung 2027-2036"
+        },
+        {
+          "claim": "Budget e piano finanziario sono strumenti centrali di governo e Gran Consiglio per i prossimi quattro anni.",
+          "evidence": "zentrale Steuerungsinstrumente des Regierungsrates und des Grossen Rates"
+        }
+      ]
+    },
+    {
+      "id": "be-dati-conto-annuale-2025",
+      "format": "dati",
+      "keyword": "Conto annuale 2025 del Canton Berna: rapporto di gestione in due volumi e sintesi dei valori chiave",
+      "angle": "Cosa contiene il rapporto di gestione 2025 del Canton Berna: conto annuale con allegato, gruppi di prodotti e scheda di sintesi.",
+      "source": {
+        "url": "https://www.fin.be.ch/de/start/themen/Finanzen/Geschaeftsbericht.html",
+        "publisher": "Finanzdirektion des Kantons Bern",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Il volume 1 contiene il conto annuale e l'allegato del Canton Berna.",
+          "evidence": "Geschäftsbericht 2025 - Band 1: Jahresrechnung und Anhang des Kantons Bern"
+        },
+        {
+          "claim": "Il volume 2 riporta i risultati dei gruppi di prodotti.",
+          "evidence": "Band 2: Produktgruppen"
+        },
+        {
+          "claim": "Una scheda riassume i valori chiave e gli sviluppi del conto annuale.",
+          "evidence": "Zusammenfassung der wichtigsten Eckwerte und Entwicklungen der Jahresrechnung"
+        }
+      ]
+    },
+    {
+      "id": "be-perequazione-finanziaria-filag",
+      "format": "approfondimento",
+      "keyword": "Perequazione finanziaria nel Canton Berna: i quattro pilastri della FILAG per i comuni",
+      "angle": "Come funziona la perequazione finanziaria e degli oneri tra Canton Berna e comuni e dove trovare dati e strumenti di pianificazione.",
+      "source": {
+        "url": "https://www.fin.be.ch/de/start/themen/Finanzen/FinanzundLastenausgleich.html",
+        "publisher": "Finanzdirektion des Kantons Bern",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Il sistema poggia su quattro pilastri.",
+          "evidence": "Die vier Säulen des Finanz- und Lastenausgleichs im Kanton Bern"
+        },
+        {
+          "claim": "Le basi legali sono la legge e l'ordinanza FILAG e FILAV.",
+          "evidence": "Gesetz und Verordnung über den Finanz- und Lastenausgleich (FILAG, FILAV)"
+        },
+        {
+          "claim": "Per i comuni esiste uno strumento Excel per pianificare i contributi.",
+          "evidence": "Excel-Tool für Gemeinden zur Planung der Finanz- und Lastenausgleichsbeiträge"
+        }
+      ]
+    }
+  ]
+}

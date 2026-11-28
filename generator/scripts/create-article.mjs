@@ -764,6 +764,19 @@ import {
 // l'intestazione del modulo per la differenza fra duplicare il CONTENUTO
 // (bloccato) e coprire lo stesso TEMA con due tagli (ammesso).
 import { findCrossSectionSourceDuplicate } from './lib/cross-section-dedup.mjs';
+// Formati non-news delle sezioni cantonali (F4.2, CANTON_NONNEWS_SECTIONS):
+// pool di argomenti da pagine ufficiali del cantone, verificate a ogni run.
+import {
+  CANTON_NONNEWS_POOL_ID,
+  COVERAGE_WINDOW_DAYS as NONNEWS_COVERAGE_WINDOW_DAYS,
+  buildNonNewsSourceContent,
+  fetchSourcePage as fetchNonNewsSourcePage,
+  isNonNewsSection,
+  loadTopicPool as loadNonNewsTopicPool,
+  pickNonNewsTopic,
+  sourceCoveredWithin,
+  validateTopicPool as validateNonNewsTopicPool,
+} from './lib/canton-nonnews.mjs';
 
 // ── Smarter generator inputs (Phase 3 — spec 2026-05-06) ───────
 // data/article-performance.json is produced weekly by Phase 1A.
@@ -4083,6 +4096,8 @@ function buildSectionProfile(sectionName) {
       // Ammissione senza i token eventi/cultura, come frontaliere (#189): un
       // festival non e' un fatto con impatto pratico sul cantone.
       nationalAdmissionKeywords: SVIZZERA_TOPICAL_KEYWORDS.filter((k) => !FRONTALIERE_EVENTS_CULTURE_KEYWORDS.has(k)),
+      // F4.2: lista vuota (default) = evergreenPool null = exit 4 come prima.
+      cantonNonNews: isNonNewsSection(sectionName),
     });
   }
   if (kind !== 'frontaliere' && kind !== 'national') {
@@ -4470,7 +4485,7 @@ function normalizeSourceDomain(domain) {
 // L'import sta qui e non nel blocco in testa al file perche' e' l'unico punto
 // che lo usa e la sezione sotto e' l'unica che ne parla; e' una dichiarazione
 // top-level a tutti gli effetti, quindi resta issata come le altre.
-import { ledgerViewsForLookup, makeLedgerEntry, hasSameLedgerSourceContent, newsUrlKey, legacyNewsUrlKey, itemIdentityOf, stripItemIdentity, checkItemOnPage, pageTitleEvidence } from './lib/source-url-ledger.mjs';
+import { readLedgerEntry, ledgerViewsForLookup, makeLedgerEntry, hasSameLedgerSourceContent, newsUrlKey, legacyNewsUrlKey, itemIdentityOf, stripItemIdentity, checkItemOnPage, pageTitleEvidence } from './lib/source-url-ledger.mjs';
 
 // ── Source URL tracking: prevent re-using the same news source URL ─────
 function loadSourceUrls() {
@@ -21870,6 +21885,8 @@ const LOCAL_MIN_VIABLE_MS = 11 * 60_000;
  * time left for even one call.
  */
 const MIN_VIABLE_ATTEMPT_MS = 2 * 60_000;
+// Tentativi non-news per run (F4.2): ogni tentativo e' una generazione completa.
+const NONNEWS_MAX_ATTEMPTS = 3;
 
 /**
  * Turn a fail-closed missing consensus into a typed run-level error. Only a
@@ -23229,6 +23246,139 @@ async function main() {
       // solo nel corpus: lib/exhaustion-disposition.mjs e' un gemello identico
       // del sito, dove create-article non ha sezioni cantonali. Il codice 4
       // resta riservato agli esiti locali alla sezione in entrambi i repo.
+      await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
+    } else if (!newsSuccess && !candidateSuccess && IS_CANTON) {
+      // ── Fase 2 cantonale (F4.2): formato non-news da pagina ufficiale ──
+      // Si arriva qui SOLO se `evergreenPool` e' valorizzato, cioe' la sezione e'
+      // in CANTON_NONNEWS_SECTIONS (altrimenti il ramo sopra ha gia' dichiarato
+      // exit 4), e SOLO dopo che il pool news del run non ha prodotto un
+      // articolo: le notizie hanno sempre la precedenza. Il budget giornaliero
+      // e' applicato a monte da canton-generation-admit.mjs (skip daily-budget).
+      // Stessi gate di una notizia: la pagina ufficiale e' il SOURCE CONTENT di
+      // generateAndValidateArticle (fact-check, traduzioni e dedup invariati).
+      console.error(`📚 Fase 2 cantonale: formati non-news da fonti ufficiali (${SECTION_NAME})...\n`);
+      const nonNewsLoaded = loadNonNewsTopicPool(SECTION_NAME);
+      const nonNewsPoolErrors = nonNewsLoaded.pool
+        ? validateNonNewsTopicPool(nonNewsLoaded.pool, { section: SECTION_NAME })
+        : [nonNewsLoaded.error];
+      if (nonNewsPoolErrors.length > 0) {
+        console.error(`CANTON_NONNEWS_POOL_INVALID section=${SECTION_NAME} — ${nonNewsPoolErrors.slice(0, 3).join('; ')}: nessun articolo in questo run.`);
+        finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, `Canton non-news pool unavailable for ${SECTION_NAME}`] });
+        // Ragione legittima #7 di dieci — vedi EXIT_NO_ARTICLE_DECLARED.
+        await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
+      }
+      const nonNewsPool = nonNewsLoaded.pool;
+      const nonNewsLedgerContext = {
+        section: SECTION_NAME,
+        pool: CANTON_NONNEWS_POOL_ID,
+        poolEpoch: _computeEvergreenPoolEpoch(nonNewsPool.topics, SECTION_NAME),
+        now: Date.now(),
+      };
+      let nonNewsTracker = _loadEvergreenRejectedTracker();
+      const nonNewsSourceLedger = loadSourceUrls();
+      // Articoli recenti (90 giorni) degli ALTRI cantoni, dai loro ledger URL→id:
+      // lo slug e' il titolo dell'articolo. Serve alla guardia anti-template.
+      const otherCantonRecentArticles = [];
+      for (const [name, ledger] of Object.entries(loadAllSectionSourceUrls())) {
+        if (name === SECTION_NAME || !name.startsWith('canton-')) continue;
+        for (const [key, value] of Object.entries(ledger || {})) {
+          const entry = readLedgerEntry(value);
+          if (entry?.articleId && sourceCoveredWithin({ [key]: value }, key, { windowDays: NONNEWS_COVERAGE_WINDOW_DAYS })) {
+            otherCantonRecentArticles.push({ id: entry.articleId, section: name });
+          }
+        }
+      }
+      RUN_REPORT.evergreenPool.ran = true;
+      RUN_REPORT.evergreenPool.size = nonNewsPool.topics.length;
+      const nonNewsTried = new Set();
+      for (let attempt = 1; attempt <= NONNEWS_MAX_ATTEMPTS; attempt++) {
+        if (newAttemptWallExceeded()) {
+          console.error('⏱️  Budget wall-clock superato — interrompo i tentativi non-news; deferito al prossimo run.');
+          break;
+        }
+        {
+          const remainingForNewAttemptMs = RUN_WALL_BUDGET_MS - (Date.now() - RUN_START_MS);
+          if (remainingForNewAttemptMs < MIN_VIABLE_ATTEMPT_MS) {
+            RUN_REPORT.notes.push(`Canton non-news loop stopped early: minimum-viable-attempt reserve (attempt=${attempt})`);
+            break;
+          }
+        }
+        const pick = await pickNonNewsTopic({
+          section: SECTION_NAME,
+          pool: nonNewsPool,
+          excludeIds: nonNewsTried,
+          isRejected: (topic) => _isEvergreenRejected(nonNewsTracker, topic.keyword, nonNewsLedgerContext),
+          isCovered: (topic) => sourceCoveredWithin(
+            nonNewsSourceLedger,
+            normalizeNewsUrl(topic.source.url),
+            { windowDays: NONNEWS_COVERAGE_WINDOW_DAYS },
+          ),
+          otherCantonArticles: otherCantonRecentArticles,
+          isPreflightDuplicate: (topic) => preFlightEvergreenCheck({ keyword: topic.keyword }).duplicate === true,
+          fetchPage: (pageUrl) => fetchNonNewsSourcePage(pageUrl),
+        });
+        if (!pick) {
+          // Riga propria e non `reportEvergreenPoolSaturation`: quella e' il
+          // contratto del pool evergreen nazionale (watchdog e denominatore).
+          console.error(
+            `CANTON_NONNEWS_POOL_EXHAUSTED section=${SECTION_NAME} pool=${nonNewsPool.topics.length}`
+            + ` tried=${nonNewsTried.size} attempt=${attempt}`,
+          );
+          console.error('\n⚠️  Nessun argomento non-news utilizzabile (coperti, rigettati, fonte non raggiungibile o fatti non verificati). Nessun articolo in questo run.');
+          finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, `No usable canton non-news topic for ${SECTION_NAME}`] });
+          // Ragione legittima #1 di dieci — vedi EXIT_NO_ARTICLE_DECLARED.
+          await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
+        }
+        RUN_REPORT.evergreenPool.checked += pick.skipped.length + 1;
+        RUN_REPORT.evergreenPool.skippedBanned += pick.skipped.filter((x) => x.reason === 'rejected').length;
+        const { topic } = pick;
+        nonNewsTried.add(topic.id);
+        try {
+          RUN_REPORT.selectedArticleType = 'evergreen_dynamic';
+          RUN_REPORT.selectedSource = 'canton-nonnews';
+          RUN_REPORT.selectedUrl = topic.source.url;
+          RUN_REPORT.discoveryAttribution = null;
+          RUN_REPORT.topicCandidateAttribution = null;
+          console.error(`📚 Non-news tentativo ${attempt}: [${topic.format}] ${topic.id} — fonte ufficiale ${topic.source.publisher}`);
+          await generateAndValidateArticle(topic.source.url, {
+            headline: topic.keyword,
+            source: 'canton-nonnews',
+            relatedHeadlines: [],
+            _cantonSourceContent: buildNonNewsSourceContent(topic, pick.pageText, pick.verified),
+          });
+          RUN_REPORT.pool = 'canton-nonnews';
+          RUN_REPORT.poolSource = 'canton-nonnews';
+          try {
+            _saveQuotaState(_incrementCounter(quotaState));
+          } catch { /* ignore */ }
+          return; // Success — exit main
+        } catch (e) {
+          const isDuplicate = isDuplicateError(e);
+          if (e?.pendingTranslationIncomplete) throw e;
+          if (isDuplicate) captureDuplicateReasons(e.message);
+          const isTopicGateAbort = e.topicGateAbort === true || /topic-gate abort/i.test(e.message);
+          const isQualityReject = isQualityRejectError(e);
+          if (!isDuplicate && !isQualityReject) throw e; // Infrastructure error → propagate
+          const now = Date.now();
+          if (isDuplicate || isTopicGateAbort) {
+            nonNewsTracker = _persistEvergreenRejectedTracker(
+              (tracker) => _appendEvergreenRejected(tracker, topic.keyword, {
+                context: nonNewsLedgerContext,
+                now,
+                reason: isTopicGateAbort ? 'topic-gate' : 'duplicate',
+              }),
+            );
+          } else if (e.imageQualityFailure !== true) {
+            nonNewsTracker = _persistEvergreenRejectedTracker(
+              (tracker) => _strikeEvergreenKeyword(tracker, topic.keyword, { context: nonNewsLedgerContext, now }),
+            );
+          }
+          console.error(`\n⚠️  Argomento non-news ${topic.id} rigettato (${isDuplicate ? 'duplicato' : isTopicGateAbort ? 'topic-gate' : 'qualita'}) — cerco il prossimo...\n`);
+        }
+      }
+      console.error('\n⚠️  Tentativi non-news esauriti. Nessun articolo in questo run.');
+      finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'Canton non-news retries exhausted'] });
+      // Ragione legittima #3 di dieci — vedi EXIT_NO_ARTICLE_DECLARED.
       await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
     } else if (!newsSuccess && !candidateSuccess) {
       console.error('📚 Fase 2: Fallback evergreen — generazione articolo SEO long-tail...\n');
