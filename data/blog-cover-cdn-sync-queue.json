@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-salario-minimo-ticino-compromesso.webp",
-      "sha256": "37139d523c1777c18f7b09746a545d424838cae9b42947e651da001019c76afe"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-salario-minimo-ticino-compromesso-480w.webp",
-      "sha256": "15ef19d64138915ed7cce425bd4caf6a0329a93e1c441d4519091ed5bf339d01"
-    }
-  ]
+  "items": []
 }
