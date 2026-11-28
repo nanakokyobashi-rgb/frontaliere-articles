@@ -11,11 +11,10 @@
  * provenienza PR `agent:autofix`, il segnale `orphaned` e `fu-prio:*` — non
  * esistevano.
  *
- * `gh issue edit --add-label <nome>` NON crea la label: fallisce. E nei
- * workflow quel fallimento è gestito con un warning non bloccante (di
- * proposito: un triage che non riesce a instradare non deve diventare una run
- * rossa). Il risultato sarebbe stato un ciclo che gira, logga, esce 0 — e non
- * instrada niente. Inerte, senza un errore da nessuna parte.
+ * `gh issue edit --add-label <nome>` NON crea la label: fallisce. Se la
+ * riconciliazione delle label non riesce, i workflow devono fermarsi prima di
+ * classificare o avviare un fixer; proseguire trasformerebbe un problema
+ * visibile in un ciclo inerte.
  *
  * `scripts/lib/github-issue-creator.mjs` ha già il suo `ensureLabelsExist` per
  * le label che APPONE lui (`priority:*`, `crawler-transient`), quindi il
@@ -122,21 +121,37 @@ function gh(args) {
  */
 export const MAX_DESCRIPTION = 100;
 
-function main() {
-  if (!REPO) {
-    console.error('[ensure-loop-labels] GITHUB_REPOSITORY non impostato — esco senza fare nulla.');
-    return 0;
+function errorCode(error) {
+  if (Number.isInteger(error?.status)) return `status_${error.status}`;
+  if (typeof error?.code === 'string' && /^[A-Z0-9_]+$/.test(error.code)) return error.code;
+  if (error?.name === 'SyntaxError') return 'invalid_json';
+  if (error?.name === 'TypeError') return 'invalid_response';
+  return 'unknown';
+}
+
+export function ensureLoopLabels({
+  repo = REPO,
+  dryRun = DRY,
+  runGh = gh,
+  logger = console,
+} = {}) {
+  if (!repo) {
+    logger.error('[ensure-loop-labels] GITHUB_REPOSITORY non impostato.');
+    return 1;
   }
 
-  let existing = new Map();
+  let existing;
   try {
     // JSON diretto, non una concatenazione in jq: un separatore inventato
     // (null byte, tab) o non passa attraverso execFileSync o si scontra col
     // contenuto stesso delle descrizioni.
-    const raw = gh(['label', 'list', '--repo', REPO, '--limit', '200', '--json', 'name,description,color']);
+    const raw = runGh(['label', 'list', '--repo', repo, '--limit', '200', '--json', 'name,description,color']);
+    const labels = JSON.parse(raw);
+    if (!Array.isArray(labels)) throw new TypeError('invalid_response');
+    existing = new Map();
     // GitHub tratta i nomi delle label come case-insensitive per l'unicità:
     // creare `Bug` dove esiste `bug` fallisce. Il confronto va fatto uguale.
-    for (const l of JSON.parse(raw || '[]')) {
+    for (const l of labels) {
       if (l && l.name) {
         existing.set(String(l.name).toLowerCase(), {
           description: String(l.description || ''),
@@ -144,9 +159,9 @@ function main() {
         });
       }
     }
-  } catch (e) {
-    console.error(`[ensure-loop-labels] impossibile elencare le label (${String(e.message).slice(0, 100)}) — esco senza bloccare.`);
-    return 0;
+  } catch (error) {
+    logger.error(`[ensure-loop-labels] impossibile elencare le label (${errorCode(error)}).`);
+    return 1;
   }
 
   // Riconcilia le descrizioni divergenti. Senza questo, correggere una
@@ -158,6 +173,7 @@ function main() {
   // colore lo stesso stallo silenzioso che questa riconciliazione esiste per
   // chiudere — cambiarlo nel codice non lo porterebbe mai sul repo.
   let fixed = 0;
+  let failures = 0;
   for (const [name, color, description] of LABELS) {
     const cur = existing.get(name.toLowerCase());
     if (cur === undefined) continue;
@@ -167,16 +183,17 @@ function main() {
     if (!args.length) continue;
     const what = args.filter((a) => a.startsWith('--')).map((a) => a.slice(2)).join(' + ');
     if (DRY) {
-      console.log(`[ensure-loop-labels] (dry-run) aggiornerei ${what} di "${name}"`);
+      logger.log(`[ensure-loop-labels] (dry-run) aggiornerei ${what} di "${name}"`);
       fixed++;
       continue;
     }
     try {
-      gh(['label', 'edit', name, '--repo', REPO, ...args]);
-      console.log(`[ensure-loop-labels] ${what} aggiornato: "${name}"`);
+      runGh(['label', 'edit', name, '--repo', repo, ...args]);
+      logger.log(`[ensure-loop-labels] ${what} aggiornato: "${name}"`);
       fixed++;
-    } catch (e) {
-      console.warn(`::warning::[ensure-loop-labels] "${name}" non aggiornata: ${String(e.message).slice(0, 100)}`);
+    } catch (error) {
+      failures++;
+      logger.error(`::error::[ensure-loop-labels] "${name}" non aggiornata (${errorCode(error)}).`);
     }
   }
 
@@ -184,32 +201,30 @@ function main() {
   const missing = LABELS.filter(([name]) => !existing.has(name.toLowerCase()));
 
   if (!missing.length) {
-    console.log(`[ensure-loop-labels] tutte le ${LABELS.length} label del ciclo esistono già${fixed ? ` (${fixed} riallineata/e)` : ''}.`);
-    return 0;
+    logger.log(`[ensure-loop-labels] tutte le ${LABELS.length} label del ciclo esistono già${fixed ? ` (${fixed} riallineata/e)` : ''}.`);
+    return failures === 0 ? 0 : 1;
   }
 
   for (const [name, color, description] of missing) {
     if (DRY) {
-      console.log(`[ensure-loop-labels] (dry-run) creerei "${name}"`);
+      logger.log(`[ensure-loop-labels] (dry-run) creerei "${name}"`);
       created++;
       continue;
     }
     try {
-      const args = ['label', 'create', name, '--repo', REPO, '--color', color];
+      const args = ['label', 'create', name, '--repo', repo, '--color', color];
       if (description) args.push('--description', description);
-      gh(args);
-      console.log(`[ensure-loop-labels] creata "${name}"`);
+      runGh(args);
+      logger.log(`[ensure-loop-labels] creata "${name}"`);
       created++;
-    } catch (e) {
-      // Non fatale: una label che non si riesce a creare va segnalata forte,
-      // ma non deve far fallire il triage — il warning a valle dirà comunque
-      // che il routing non è stato applicato.
-      console.warn(`::warning::[ensure-loop-labels] impossibile creare "${name}": ${String(e.message).slice(0, 120)}`);
+    } catch (error) {
+      failures++;
+      logger.error(`::error::[ensure-loop-labels] impossibile creare "${name}" (${errorCode(error)}).`);
     }
   }
 
-  console.log(`[ensure-loop-labels] ${created}/${missing.length} label mancanti create.`);
-  return 0;
+  logger.log(`[ensure-loop-labels] ${created}/${missing.length} label mancanti create; ${failures} operazioni fallite.`);
+  return failures === 0 ? 0 : 1;
 }
 
 // Solo in modalità CLI: senza questa guardia, importare il modulo da un test
@@ -219,9 +234,9 @@ if ((() => {
   catch { return false; }
 })()) {
   try {
-    process.exit(main());
-  } catch (e) {
-    console.error(`[ensure-loop-labels] errore non fatale: ${e && e.stack ? e.stack : e}`);
-    process.exit(0);
+    process.exitCode = ensureLoopLabels();
+  } catch {
+    console.error('[ensure-loop-labels] errore inatteso.');
+    process.exitCode = 1;
   }
 }

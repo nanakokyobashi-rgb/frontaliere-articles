@@ -24,10 +24,38 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { LABELS, MAX_DESCRIPTION } from '../../scripts/ci/ensure-loop-labels.mjs';
+import { ensureLoopLabels, LABELS, MAX_DESCRIPTION } from '../../scripts/ci/ensure-loop-labels.mjs';
 import { classifyIssue } from '../../scripts/lib/classify-issue.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+
+function labelFixture(overrides = {}) {
+  return LABELS.map(([name, color, description], index) => ({
+    name,
+    color: overrides.wrongColorAt === index ? 'ffffff' : color,
+    description,
+  })).filter((_, index) => index !== overrides.missingAt);
+}
+
+function ensureHarness({ labels = labelFixture(), failCommand, listResponse } = {}) {
+  const calls = [];
+  const messages = [];
+  const runGh = (args) => {
+    calls.push(args);
+    if (args[1] === 'list') {
+      if (failCommand === 'list') throw Object.assign(new Error('do not print this'), { status: 403 });
+      return listResponse ?? JSON.stringify(labels);
+    }
+    if (failCommand === args[1]) throw Object.assign(new Error('do not print this'), { status: 403 });
+    return '';
+  };
+  const logger = {
+    log: (message) => messages.push(message),
+    error: (message) => messages.push(message),
+    warn: (message) => messages.push(message),
+  };
+  return { calls, messages, runGh, logger };
+}
 
 test('nessuna descrizione supera il limite di GitHub', () => {
   const tooLong = LABELS.filter(([, , d]) => (d || '').length > MAX_DESCRIPTION).map(
@@ -167,4 +195,43 @@ test('ogni fu-prio che il classificatore puo\' emettere ha la sua label', () => 
     `Il classificatore puo' emettere queste label di priorita', ma ensure-loop-labels non le crea. ` +
       `La issue verrebbe accodata senza priorita' e non drenata mai:\n  ${missing.join('\n  ')}`,
   );
+});
+
+test('la riconciliazione fallisce se non può leggere le label o il repo non è configurato', () => {
+  const noRepo = ensureHarness();
+  assert.equal(ensureLoopLabels({ repo: '', runGh: noRepo.runGh, logger: noRepo.logger }), 1);
+  assert.equal(noRepo.calls.length, 0);
+
+  const readFailure = ensureHarness({ failCommand: 'list' });
+  assert.equal(ensureLoopLabels({ repo: 'owner/repo', runGh: readFailure.runGh, logger: readFailure.logger }), 1);
+  assert.equal(readFailure.calls.length, 1);
+  assert.ok(readFailure.messages.every((message) => !message.includes('do not print this')));
+});
+
+test('la riconciliazione non modifica label se la risposta di GitHub non è una lista valida', () => {
+  const fixture = ensureHarness({ listResponse: '{}' });
+  assert.equal(ensureLoopLabels({ repo: 'owner/repo', runGh: fixture.runGh, logger: fixture.logger }), 1);
+  assert.equal(fixture.calls.length, 1);
+});
+
+test('il fallimento nel creare una label rende non-zero il risultato dopo il tentativo bounded', () => {
+  const fixture = ensureHarness({ labels: labelFixture({ missingAt: 0 }), failCommand: 'create' });
+  assert.equal(ensureLoopLabels({ repo: 'owner/repo', runGh: fixture.runGh, logger: fixture.logger }), 1);
+  assert.equal(fixture.calls.filter((args) => args[1] === 'create').length, 1);
+  assert.ok(fixture.messages.some((message) => message.includes('status_403')));
+  assert.ok(fixture.messages.every((message) => !message.includes('do not print this')));
+});
+
+test('il fallimento nel riallineare una label rende non-zero il risultato', () => {
+  const fixture = ensureHarness({ labels: labelFixture({ wrongColorAt: 0 }), failCommand: 'edit' });
+  assert.equal(ensureLoopLabels({ repo: 'owner/repo', runGh: fixture.runGh, logger: fixture.logger }), 1);
+  assert.equal(fixture.calls.filter((args) => args[1] === 'edit').length, 1);
+  assert.equal(fixture.calls.filter((args) => args[1] === 'create').length, 0);
+});
+
+test('la riconciliazione completa è idempotente quando tutte le label sono allineate', () => {
+  const fixture = ensureHarness();
+  assert.equal(ensureLoopLabels({ repo: 'owner/repo', runGh: fixture.runGh, logger: fixture.logger }), 0);
+  assert.equal(fixture.calls.length, 1);
+  assert.ok(fixture.messages.some((message) => message.includes('tutte le')));
 });
