@@ -4,12 +4,12 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "eventi",
-  "updatedAt": "2026-11-27T04:41:16.871Z",
-  "contentHash": "71cc24f9228bbc7a66fb411df7bef759127cc5067e08a6b3da4bfd590394bf8e",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "91b1689b782b4252cac64ddae5b6f41d31a057b96fcec5cf581f61c293036069",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T16:33:33.919Z",
+      "updatedAt": "2026-11-27T16:21:34.268Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "32",
+          "value": "33",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,36 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Tiny House konkret – Von der Idee zum realistischen Plan",
-              "detail": "Solothurn",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tiny-house-konkret-von-der-idee-zum-realistischen-plan-1/"
-            },
-            {
-              "label": "Kitsch in der bildenden Kunst",
-              "detail": "Solothurn — in corso, ultimo giorno: 2 dicembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kitsch-in-der-bildenden-kunst/"
-            },
-            {
-              "label": "Computer Grundlagen",
-              "detail": "Solothurn — in corso, ultimo giorno: 8 dicembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/computer-grundlagen-3/"
-            },
-            {
-              "label": "Fitness & Brunch",
-              "detail": "Solheure, Solothurn — in corso, ultimo giorno: 13 dicembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fitness-brunch/"
-            },
-            {
-              "label": "Lu Jong: Tibetische Bewegungslehre",
-              "detail": "Solothurn — in corso, ultimo giorno: 3 dicembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
-            },
             {
               "label": "Enter Retrotechnikmarkt",
               "detail": "Derendingen",
@@ -91,11 +61,41 @@
               "detail": "wydeKANTINE, Dornach",
               "date": "2026-11-28",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/joel-von-mutzenbecher-unboxed-1/"
+            },
+            {
+              "label": "Kitsch in der bildenden Kunst",
+              "detail": "Solothurn — in corso, ultimo giorno: 2 dicembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kitsch-in-der-bildenden-kunst/"
+            },
+            {
+              "label": "Computer Grundlagen",
+              "detail": "Solothurn — in corso, ultimo giorno: 8 dicembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/computer-grundlagen-3/"
+            },
+            {
+              "label": "Fitness & Brunch",
+              "detail": "Solheure, Solothurn — in corso, ultimo giorno: 13 dicembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fitness-brunch/"
+            },
+            {
+              "label": "Lu Jong: Tibetische Bewegungslehre",
+              "detail": "Solothurn — in corso, ultimo giorno: 3 dicembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
+            },
+            {
+              "label": "Café Philo – «Selbstbestimmung am Lebensende»",
+              "detail": "KulturBistro Solothurn, Solothurn",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cafe-philo-selbstbestimmung-am-lebensende/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/soletta/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/soletta/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "SO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "32",
+          "value": "33",
           "note": "from the site’s events calendar"
         }
       ],
@@ -143,36 +143,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Tiny House konkret – Von der Idee zum realistischen Plan",
-              "detail": "Solothurn",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tiny-house-konkret-von-der-idee-zum-realistischen-plan-1/"
-            },
-            {
-              "label": "Kitsch in der bildenden Kunst",
-              "detail": "Solothurn — ongoing, last day: 2 December 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kitsch-in-der-bildenden-kunst/"
-            },
-            {
-              "label": "Computer Grundlagen",
-              "detail": "Solothurn — ongoing, last day: 8 December 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/computer-grundlagen-3/"
-            },
-            {
-              "label": "Fitness & Brunch",
-              "detail": "Solheure, Solothurn — ongoing, last day: 13 December 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fitness-brunch/"
-            },
-            {
-              "label": "Lu Jong: Tibetische Bewegungslehre",
-              "detail": "Solothurn — ongoing, last day: 3 December 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
-            },
             {
               "label": "Enter Retrotechnikmarkt",
               "detail": "Derendingen",
@@ -202,11 +172,41 @@
               "detail": "wydeKANTINE, Dornach",
               "date": "2026-11-28",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/joel-von-mutzenbecher-unboxed-1/"
+            },
+            {
+              "label": "Kitsch in der bildenden Kunst",
+              "detail": "Solothurn — ongoing, last day: 2 December 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kitsch-in-der-bildenden-kunst/"
+            },
+            {
+              "label": "Computer Grundlagen",
+              "detail": "Solothurn — ongoing, last day: 8 December 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/computer-grundlagen-3/"
+            },
+            {
+              "label": "Fitness & Brunch",
+              "detail": "Solheure, Solothurn — ongoing, last day: 13 December 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fitness-brunch/"
+            },
+            {
+              "label": "Lu Jong: Tibetische Bewegungslehre",
+              "detail": "Solothurn — ongoing, last day: 3 December 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
+            },
+            {
+              "label": "Café Philo – «Selbstbestimmung am Lebensende»",
+              "detail": "KulturBistro Solothurn, Solothurn",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cafe-philo-selbstbestimmung-am-lebensende/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/solothurn/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/solothurn/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "SO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "32",
+          "value": "33",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -254,36 +254,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Tiny House konkret – Von der Idee zum realistischen Plan",
-              "detail": "Solothurn",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tiny-house-konkret-von-der-idee-zum-realistischen-plan-1/"
-            },
-            {
-              "label": "Kitsch in der bildenden Kunst",
-              "detail": "Solothurn — läuft, letzter Tag: 2. Dezember 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kitsch-in-der-bildenden-kunst/"
-            },
-            {
-              "label": "Computer Grundlagen",
-              "detail": "Solothurn — läuft, letzter Tag: 8. Dezember 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/computer-grundlagen-3/"
-            },
-            {
-              "label": "Fitness & Brunch",
-              "detail": "Solheure, Solothurn — läuft, letzter Tag: 13. Dezember 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fitness-brunch/"
-            },
-            {
-              "label": "Lu Jong: Tibetische Bewegungslehre",
-              "detail": "Solothurn — läuft, letzter Tag: 3. Dezember 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
-            },
             {
               "label": "Enter Retrotechnikmarkt",
               "detail": "Derendingen",
@@ -313,11 +283,41 @@
               "detail": "wydeKANTINE, Dornach",
               "date": "2026-11-28",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/joel-von-mutzenbecher-unboxed-1/"
+            },
+            {
+              "label": "Kitsch in der bildenden Kunst",
+              "detail": "Solothurn — läuft, letzter Tag: 2. Dezember 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kitsch-in-der-bildenden-kunst/"
+            },
+            {
+              "label": "Computer Grundlagen",
+              "detail": "Solothurn — läuft, letzter Tag: 8. Dezember 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/computer-grundlagen-3/"
+            },
+            {
+              "label": "Fitness & Brunch",
+              "detail": "Solheure, Solothurn — läuft, letzter Tag: 13. Dezember 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fitness-brunch/"
+            },
+            {
+              "label": "Lu Jong: Tibetische Bewegungslehre",
+              "detail": "Solothurn — läuft, letzter Tag: 3. Dezember 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
+            },
+            {
+              "label": "Café Philo – «Selbstbestimmung am Lebensende»",
+              "detail": "KulturBistro Solothurn, Solothurn",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cafe-philo-selbstbestimmung-am-lebensende/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/solothurn/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/solothurn/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "SO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "32",
+          "value": "33",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -365,36 +365,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Tiny House konkret – Von der Idee zum realistischen Plan",
-              "detail": "Solothurn",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tiny-house-konkret-von-der-idee-zum-realistischen-plan-1/"
-            },
-            {
-              "label": "Kitsch in der bildenden Kunst",
-              "detail": "Solothurn — en cours, dernier jour : 2 décembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kitsch-in-der-bildenden-kunst/"
-            },
-            {
-              "label": "Computer Grundlagen",
-              "detail": "Solothurn — en cours, dernier jour : 8 décembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/computer-grundlagen-3/"
-            },
-            {
-              "label": "Fitness & Brunch",
-              "detail": "Solheure, Solothurn — en cours, dernier jour : 13 décembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fitness-brunch/"
-            },
-            {
-              "label": "Lu Jong: Tibetische Bewegungslehre",
-              "detail": "Solothurn — en cours, dernier jour : 3 décembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
-            },
             {
               "label": "Enter Retrotechnikmarkt",
               "detail": "Derendingen",
@@ -424,11 +394,41 @@
               "detail": "wydeKANTINE, Dornach",
               "date": "2026-11-28",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/joel-von-mutzenbecher-unboxed-1/"
+            },
+            {
+              "label": "Kitsch in der bildenden Kunst",
+              "detail": "Solothurn — en cours, dernier jour : 2 décembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kitsch-in-der-bildenden-kunst/"
+            },
+            {
+              "label": "Computer Grundlagen",
+              "detail": "Solothurn — en cours, dernier jour : 8 décembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/computer-grundlagen-3/"
+            },
+            {
+              "label": "Fitness & Brunch",
+              "detail": "Solheure, Solothurn — en cours, dernier jour : 13 décembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fitness-brunch/"
+            },
+            {
+              "label": "Lu Jong: Tibetische Bewegungslehre",
+              "detail": "Solothurn — en cours, dernier jour : 3 décembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lu-jong-tibetische-bewegungslehre/"
+            },
+            {
+              "label": "Café Philo – «Selbstbestimmung am Lebensende»",
+              "detail": "KulturBistro Solothurn, Solothurn",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cafe-philo-selbstbestimmung-am-lebensende/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/soleure/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/soleure/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

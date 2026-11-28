@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-11-27T23:05:38.141Z",
-  "contentHash": "e7fe0e250dc49cef43c3c9dab5ac95b199d76acd50b4e925b7cfde1ca1903319",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "4ed369e8c04c3e4e54340d361f275e1f482b59f7be0c43385f02a09672871595",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-27T05:36:35.505Z",
+      "updatedAt": "2026-11-27T16:21:34.268Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-27T01:13:06.824Z",
+      "updatedAt": "2026-11-27T15:38:08.536Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "44",
+          "value": "46",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,68 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Wine & Dine Trüffelevent",
-              "detail": "Oberkirch LU, Oberkirch",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-trueffelevent/"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "detail": "Sursee",
-              "date": "2026-11-27",
-              "url": "https://www.stadtluzern.ch/sitzung/7694311"
-            },
-            {
-              "label": "Wissen am Mittag",
-              "detail": "Luzern",
-              "date": "2026-11-27",
-              "url": "https://www.stadtluzern.ch/sitzung/7660909"
-            },
-            {
-              "label": "Salonkonzert",
-              "detail": "Luzern",
-              "date": "2026-11-27",
-              "url": "https://www.stadtluzern.ch/sitzung/7463725"
-            },
-            {
-              "label": "The Four Seasons By Candlelight",
-              "detail": "KKL Luzern, Luzern",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/classical/lucerne/obrasso-concerts-the-four-seasons-by-candlelight_A8FqRTJ"
-            },
-            {
-              "label": "Art de Suisse",
-              "detail": "Luzern — in corso, ultimo giorno: 29 novembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.stadtluzern.ch/sitzung/7186733"
-            },
-            {
-              "label": "Theateraufführung 2026 - Die kleine Hexe",
-              "detail": "Wauwil — in corso, ultimo giorno: 13 dicembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/theaterauffuehrung-2026-die-kleine-hexe/"
-            },
-            {
-              "label": "ballabile",
-              "detail": "Lucerna — in corso, ultimo giorno: 18 dicembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ballabile/"
-            },
-            {
-              "label": "360° Milonga",
-              "detail": "Bourbaki Panorama — in corso, ultimo giorno: 6 dicembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
-            },
-            {
               "label": "Besichtigung Pavillon Manal, Horw",
               "detail": "Horw",
               "date": "2026-11-28",
               "url": "https://www.stadtluzern.ch/sitzung/7626931"
+            },
+            {
+              "label": "Digital Safety Clinic",
+              "date": "2026-11-28",
+              "url": "https://www.stadtluzern.ch/sitzung/7801246"
+            },
+            {
+              "label": "öffentliche Sagenführung 28.11",
+              "detail": "Willisau Tourismus, Willisau",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oeffentliche-sagenfuehrung-2811/"
+            },
+            {
+              "label": "ELVIS - Christmas Dinner und Show",
+              "detail": "Wasserschloss Wyher, Ettiswil",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/elvis-christmas-dinner-und-show_AXAa1Na"
+            },
+            {
+              "label": "«Ich brech’ die Herzen…» im MaiHof",
+              "detail": "Der MaiHof",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/ich-brech-die-herzen-im-maihof_AGWSTkU"
+            },
+            {
+              "label": "«Ich brech’ die Herzen…» im MaiHof",
+              "detail": "Der MaiHof, Luzern",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ich-brech-die-herzen-im-maihof/"
+            },
+            {
+              "label": "Tanzveranstaltung",
+              "detail": "Hotel 3 Könige, Entlebuch",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/entlebuch/tanzveranstaltung_A5F331t"
+            },
+            {
+              "label": "The Sound of James Bond – Licenced to Thrill",
+              "detail": "Lucerne",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-sound-of-james-bond-licenced-to-thrill/"
+            },
+            {
+              "label": "Esther Hasler - Lichtjahre",
+              "detail": "Kulturmühle, Horw",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/horw/esther-hasler-lichtjahre_AZ5cpPF"
+            },
+            {
+              "label": "Wine & Dine Trüffelevent",
+              "detail": "Oberkirch LU, Oberkirch — in corso, ultimo giorno: 28 novembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-trueffelevent/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-11-27T05:36:35.505Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -138,7 +137,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7800919"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -172,7 +171,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T23:05:38.141Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "LU",
@@ -182,7 +181,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "44",
+          "value": "46",
           "note": "from the site’s events calendar"
         }
       ],
@@ -193,69 +192,68 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Wine & Dine Trüffelevent",
-              "detail": "Oberkirch LU, Oberkirch",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-trueffelevent/"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "detail": "Sursee",
-              "date": "2026-11-27",
-              "url": "https://www.stadtluzern.ch/sitzung/7694311"
-            },
-            {
-              "label": "Wissen am Mittag",
-              "detail": "Luzern",
-              "date": "2026-11-27",
-              "url": "https://www.stadtluzern.ch/sitzung/7660909"
-            },
-            {
-              "label": "Salonkonzert",
-              "detail": "Luzern",
-              "date": "2026-11-27",
-              "url": "https://www.stadtluzern.ch/sitzung/7463725"
-            },
-            {
-              "label": "The Four Seasons By Candlelight",
-              "detail": "KKL Luzern, Luzern",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/classical/lucerne/obrasso-concerts-the-four-seasons-by-candlelight_A8FqRTJ"
-            },
-            {
-              "label": "Art de Suisse",
-              "detail": "Luzern — ongoing, last day: 29 November 2026",
-              "date": "2026-11-27",
-              "url": "https://www.stadtluzern.ch/sitzung/7186733"
-            },
-            {
-              "label": "Theateraufführung 2026 - Die kleine Hexe",
-              "detail": "Wauwil — ongoing, last day: 13 December 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/theaterauffuehrung-2026-die-kleine-hexe/"
-            },
-            {
-              "label": "danceable",
-              "detail": "Lucerna — ongoing, last day: 18 December 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ballabile/"
-            },
-            {
-              "label": "360° Milonga",
-              "detail": "Bourbaki Panorama — ongoing, last day: 6 December 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
-            },
-            {
               "label": "Besichtigung Pavillon Manal, Horw",
               "detail": "Horw",
               "date": "2026-11-28",
               "url": "https://www.stadtluzern.ch/sitzung/7626931"
+            },
+            {
+              "label": "Digital Safety Clinic",
+              "date": "2026-11-28",
+              "url": "https://www.stadtluzern.ch/sitzung/7801246"
+            },
+            {
+              "label": "öffentliche Sagenführung 28.11",
+              "detail": "Willisau Tourismus, Willisau",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oeffentliche-sagenfuehrung-2811/"
+            },
+            {
+              "label": "ELVIS - Christmas Dinner und Show",
+              "detail": "Wasserschloss Wyher, Ettiswil",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/elvis-christmas-dinner-und-show_AXAa1Na"
+            },
+            {
+              "label": "«Ich brech’ die Herzen…» im MaiHof",
+              "detail": "Der MaiHof",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/ich-brech-die-herzen-im-maihof_AGWSTkU"
+            },
+            {
+              "label": "«Ich brech’ die Herzen…» im MaiHof",
+              "detail": "Der MaiHof, Luzern",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ich-brech-die-herzen-im-maihof/"
+            },
+            {
+              "label": "Tanzveranstaltung",
+              "detail": "Hotel 3 Könige, Entlebuch",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/entlebuch/tanzveranstaltung_A5F331t"
+            },
+            {
+              "label": "The Sound of James Bond – Licenced to Thrill",
+              "detail": "Lucerne",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-sound-of-james-bond-licenced-to-thrill/"
+            },
+            {
+              "label": "Esther Hasler - Lichtjahre",
+              "detail": "Kulturmühle, Horw",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/horw/esther-hasler-lichtjahre_AZ5cpPF"
+            },
+            {
+              "label": "Wine & Dine Trüffelevent",
+              "detail": "Oberkirch LU, Oberkirch — ongoing, last day: 28 November 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-trueffelevent/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-11-27T05:36:35.505Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -293,7 +291,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7800919"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +325,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T23:05:38.141Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "LU",
@@ -337,7 +335,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "44",
+          "value": "46",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -348,69 +346,68 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Wine & Dine Trüffelevent",
-              "detail": "Oberkirch LU, Oberkirch",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-trueffelevent/"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "detail": "Sursee",
-              "date": "2026-11-27",
-              "url": "https://www.stadtluzern.ch/sitzung/7694311"
-            },
-            {
-              "label": "Wissen am Mittag",
-              "detail": "Luzern",
-              "date": "2026-11-27",
-              "url": "https://www.stadtluzern.ch/sitzung/7660909"
-            },
-            {
-              "label": "Salonkonzert",
-              "detail": "Luzern",
-              "date": "2026-11-27",
-              "url": "https://www.stadtluzern.ch/sitzung/7463725"
-            },
-            {
-              "label": "The Four Seasons By Candlelight",
-              "detail": "KKL Luzern, Luzern",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/classical/lucerne/obrasso-concerts-the-four-seasons-by-candlelight_A8FqRTJ"
-            },
-            {
-              "label": "Art de Suisse",
-              "detail": "Luzern — läuft, letzter Tag: 29. November 2026",
-              "date": "2026-11-27",
-              "url": "https://www.stadtluzern.ch/sitzung/7186733"
-            },
-            {
-              "label": "Theateraufführung 2026 - Die kleine Hexe",
-              "detail": "Wauwil — läuft, letzter Tag: 13. Dezember 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/theaterauffuehrung-2026-die-kleine-hexe/"
-            },
-            {
-              "label": "tanzbar",
-              "detail": "Lucerna — läuft, letzter Tag: 18. Dezember 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ballabile/"
-            },
-            {
-              "label": "360° Milonga",
-              "detail": "Bourbaki Panorama — läuft, letzter Tag: 6. Dezember 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
-            },
-            {
               "label": "Besichtigung Pavillon Manal, Horw",
               "detail": "Horw",
               "date": "2026-11-28",
               "url": "https://www.stadtluzern.ch/sitzung/7626931"
+            },
+            {
+              "label": "Digital Safety Clinic",
+              "date": "2026-11-28",
+              "url": "https://www.stadtluzern.ch/sitzung/7801246"
+            },
+            {
+              "label": "öffentliche Sagenführung 28.11",
+              "detail": "Willisau Tourismus, Willisau",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oeffentliche-sagenfuehrung-2811/"
+            },
+            {
+              "label": "ELVIS - Christmas Dinner und Show",
+              "detail": "Wasserschloss Wyher, Ettiswil",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/elvis-christmas-dinner-und-show_AXAa1Na"
+            },
+            {
+              "label": "«Ich brech’ die Herzen…» im MaiHof",
+              "detail": "Der MaiHof",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/ich-brech-die-herzen-im-maihof_AGWSTkU"
+            },
+            {
+              "label": "«Ich brech’ die Herzen…» im MaiHof",
+              "detail": "Der MaiHof, Luzern",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ich-brech-die-herzen-im-maihof/"
+            },
+            {
+              "label": "Tanzveranstaltung",
+              "detail": "Hotel 3 Könige, Entlebuch",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/entlebuch/tanzveranstaltung_A5F331t"
+            },
+            {
+              "label": "The Sound of James Bond – Licenced to Thrill",
+              "detail": "Lucerne",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-sound-of-james-bond-licenced-to-thrill/"
+            },
+            {
+              "label": "Esther Hasler - Lichtjahre",
+              "detail": "Kulturmühle, Horw",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/horw/esther-hasler-lichtjahre_AZ5cpPF"
+            },
+            {
+              "label": "Wine & Dine Trüffelevent",
+              "detail": "Oberkirch LU, Oberkirch — läuft, letzter Tag: 28. November 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-trueffelevent/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-11-27T05:36:35.505Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -448,7 +445,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7800919"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -482,7 +479,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-27T23:05:38.141Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "LU",
@@ -492,7 +489,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "44",
+          "value": "46",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -503,69 +500,68 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Wine & Dine Trüffelevent",
-              "detail": "Oberkirch LU, Oberkirch",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-trueffelevent/"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "detail": "Sursee",
-              "date": "2026-11-27",
-              "url": "https://www.stadtluzern.ch/sitzung/7694311"
-            },
-            {
-              "label": "Wissen am Mittag",
-              "detail": "Luzern",
-              "date": "2026-11-27",
-              "url": "https://www.stadtluzern.ch/sitzung/7660909"
-            },
-            {
-              "label": "Salonkonzert",
-              "detail": "Luzern",
-              "date": "2026-11-27",
-              "url": "https://www.stadtluzern.ch/sitzung/7463725"
-            },
-            {
-              "label": "The Four Seasons By Candlelight (Les quatre saisons aux chandelles)",
-              "detail": "KKL Luzern, Luzern",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/classical/lucerne/obrasso-concerts-the-four-seasons-by-candlelight_A8FqRTJ"
-            },
-            {
-              "label": "Art de Suisse",
-              "detail": "Luzern — en cours, dernier jour : 29 novembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.stadtluzern.ch/sitzung/7186733"
-            },
-            {
-              "label": "Theateraufführung 2026 - Die kleine Hexe",
-              "detail": "Wauwil — en cours, dernier jour : 13 décembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/theaterauffuehrung-2026-die-kleine-hexe/"
-            },
-            {
-              "label": "dansant",
-              "detail": "Lucerna — en cours, dernier jour : 18 décembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ballabile/"
-            },
-            {
-              "label": "360° Milonga",
-              "detail": "Bourbaki Panorama — en cours, dernier jour : 6 décembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-milonga_A4rSFAh"
-            },
-            {
               "label": "Besichtigung Pavillon Manal, Horw",
               "detail": "Horw",
               "date": "2026-11-28",
               "url": "https://www.stadtluzern.ch/sitzung/7626931"
+            },
+            {
+              "label": "Digital Safety Clinic",
+              "date": "2026-11-28",
+              "url": "https://www.stadtluzern.ch/sitzung/7801246"
+            },
+            {
+              "label": "öffentliche Sagenführung 28.11",
+              "detail": "Willisau Tourismus, Willisau",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oeffentliche-sagenfuehrung-2811/"
+            },
+            {
+              "label": "ELVIS - Christmas Dinner und Show",
+              "detail": "Wasserschloss Wyher, Ettiswil",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/elvis-christmas-dinner-und-show_AXAa1Na"
+            },
+            {
+              "label": "«Ich brech’ die Herzen…» im MaiHof",
+              "detail": "Der MaiHof",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/ich-brech-die-herzen-im-maihof_AGWSTkU"
+            },
+            {
+              "label": "«Ich brech’ die Herzen…» im MaiHof",
+              "detail": "Der MaiHof, Luzern",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ich-brech-die-herzen-im-maihof/"
+            },
+            {
+              "label": "Tanzveranstaltung",
+              "detail": "Hotel 3 Könige, Entlebuch",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/entlebuch/tanzveranstaltung_A5F331t"
+            },
+            {
+              "label": "The Sound of James Bond – Licenced to Thrill",
+              "detail": "Lucerne",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-sound-of-james-bond-licenced-to-thrill/"
+            },
+            {
+              "label": "Esther Hasler - Lichtjahre",
+              "detail": "Kulturmühle, Horw",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/horw/esther-hasler-lichtjahre_AZ5cpPF"
+            },
+            {
+              "label": "Wine & Dine Trüffelevent",
+              "detail": "Oberkirch LU, Oberkirch — en cours, dernier jour : 28 novembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-trueffelevent/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-11-27T05:36:35.505Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -603,7 +599,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7800919"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -637,7 +633,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-27T23:05:38.141Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

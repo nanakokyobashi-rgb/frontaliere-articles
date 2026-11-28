@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-11-27T04:41:16.871Z",
-  "contentHash": "799d3f97d7d85ff9b0173c569b6ffc8e83bfdfc66f354314ce3a3bf8e35935ee",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "e8efdc82ae3e33b1318f021f92a2802fe54d5d1efa64079735ae49b541985fa0",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T16:33:33.919Z",
+      "updatedAt": "2026-11-27T16:21:34.268Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T15:51:00.529Z",
+      "updatedAt": "2026-11-27T15:38:08.536Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "61",
+          "value": "57",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Adventsmarkt Bischofszell",
-              "detail": "9220 Bischofszell, Bischofszell",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/adventsmarkt-bischofszell/"
-            },
-            {
-              "label": "WINE & TRÜFFEL",
-              "detail": "Arbon",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-trueffel/"
-            },
-            {
-              "label": "Adventskranzen für junge Menschen",
+              "label": "Adventskranz gestalten",
               "detail": "Weinfelden",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranzen-fuer-junge-menschen/"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-gestalten-1/"
             },
             {
-              "label": "Jam's Musicbar",
-              "detail": "Kulturforum Amriswil, Amriswil",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/amriswil/jams-musicbar_AhVrMUG"
+              "label": "Impuls Project - Zmorge esse",
+              "detail": "Weinfelden",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/impuls-project-zmorge-esse/"
             },
             {
-              "label": "Herbstversammlung G300m",
-              "detail": "Schiesssportzentrum, Weinfelden",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/herbstversammlung-g300m/"
+              "label": "Arboner Christkindlimarkt",
+              "detail": "Altstadt Arbon, Arbon",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/arboner-christkindlimarkt/"
             },
             {
-              "label": "Long Distance Calling",
+              "label": "Forum «Tanz»",
+              "detail": "Musikschule Weinfelden, Weinfelden",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/forum-tanz_ASQAKSu"
+            },
+            {
+              "label": "Les Touristes",
               "detail": "Kulturzentrum Presswerk, Arbon",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/long-distance-calling_AegGjTW"
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/les-touristes_AYec9NB"
             },
             {
-              "label": "The Original USA Gospel Singers & Band",
-              "detail": "Pentorama Amriswil, Amriswil",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/amriswil/the-original-usa-gospel-singers-und-band_AJP5YmD"
-            },
-            {
-              "label": "Kerzenziehen für Kinder und Erwachsene",
-              "detail": "Kreuzlingen — in corso, ultimo giorno: 27 novembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eintauchen-kerzenziehen-2026/"
+              "label": "Adventsmarkt Bischofszell",
+              "detail": "9220 Bischofszell, Bischofszell — in corso, ultimo giorno: 29 novembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/adventsmarkt-bischofszell/"
             },
             {
               "label": "Café Vergissmeinnicht für Menschen mit und ohne Demenz",
               "detail": "Restaurant Grüner Baum, Weinfelden — in corso, ultimo giorno: 18 dicembre 2026",
-              "date": "2026-11-27",
+              "date": "2026-11-28",
               "url": "https://www.guidle.com/it/veranstaltungen/koerper-geist/weinfelden/cafe-vergissmeinnicht-fuer-menschen-mit-und-ohne-demenz_ATvTden"
             },
             {
               "label": "Öffentliche Führung in der Eisenbibliothek",
               "detail": "Eisenbibliothek Paradies — in corso, ultimo giorno: 17 dicembre 2026",
-              "date": "2026-11-27",
+              "date": "2026-11-28",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schlatt-tg/oeffentliche-fuehrung-in-der-eisenbibliothek_A2urnHS"
+            },
+            {
+              "label": "Gesprächsgruppe für Bezugspersonen von Menschen mit Demenz",
+              "detail": "Evangelisches Kirchgemeindehaus, Steckborn — in corso, ultimo giorno: 17 dicembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/steckborn/gespraechsgruppe-fuer-bezugspersonen-von-menschen-mit-demenz_AJguFWT"
+            },
+            {
+              "label": "Gesprächsgruppe für Bezugspersonen von Menschen mit Demenz",
+              "detail": "Genossenschaft Alterszentrum, Kreuzlingen — in corso, ultimo giorno: 17 dicembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kreuzlingen/gespraechsgruppe-fuer-bezugspersonen-von-menschen-mit-demenz_AKPV6A5"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -133,7 +133,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -161,7 +161,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "TG",
@@ -171,7 +171,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "61",
+          "value": "57",
           "note": "from the site’s events calendar"
         }
       ],
@@ -182,69 +182,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Adventsmarkt Bischofszell",
-              "detail": "9220 Bischofszell, Bischofszell",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/adventsmarkt-bischofszell/"
-            },
-            {
-              "label": "WINE & TRÜFFEL",
-              "detail": "Arbon",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-trueffel/"
-            },
-            {
-              "label": "Adventskranzen für junge Menschen",
+              "label": "Adventskranz gestalten",
               "detail": "Weinfelden",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranzen-fuer-junge-menschen/"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-gestalten-1/"
             },
             {
-              "label": "Jam's Musicbar",
-              "detail": "Kulturforum Amriswil, Amriswil",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/amriswil/jams-musicbar_AhVrMUG"
+              "label": "Impuls Project - Zmorge esse",
+              "detail": "Weinfelden",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/impuls-project-zmorge-esse/"
             },
             {
-              "label": "Herbstversammlung G300m",
-              "detail": "Schiesssportzentrum, Weinfelden",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/herbstversammlung-g300m/"
+              "label": "Arboner Christkindlimarkt",
+              "detail": "Altstadt Arbon, Arbon",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/arboner-christkindlimarkt/"
             },
             {
-              "label": "Long Distance Calling",
+              "label": "Forum «Tanz»",
+              "detail": "Musikschule Weinfelden, Weinfelden",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/forum-tanz_ASQAKSu"
+            },
+            {
+              "label": "Les Touristes",
               "detail": "Kulturzentrum Presswerk, Arbon",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/long-distance-calling_AegGjTW"
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/les-touristes_AYec9NB"
             },
             {
-              "label": "The Original USA Gospel Singers & Band",
-              "detail": "Pentorama Amriswil, Amriswil",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/amriswil/the-original-usa-gospel-singers-und-band_AJP5YmD"
-            },
-            {
-              "label": "Kerzenziehen für Kinder und Erwachsene",
-              "detail": "Kreuzlingen — ongoing, last day: 27 November 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eintauchen-kerzenziehen-2026/"
+              "label": "Adventsmarkt Bischofszell",
+              "detail": "9220 Bischofszell, Bischofszell — ongoing, last day: 29 November 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/adventsmarkt-bischofszell/"
             },
             {
               "label": "Café Vergissmeinnicht for people with and without dementia",
               "detail": "Restaurant Grüner Baum, Weinfelden — ongoing, last day: 18 December 2026",
-              "date": "2026-11-27",
+              "date": "2026-11-28",
               "url": "https://www.guidle.com/it/veranstaltungen/koerper-geist/weinfelden/cafe-vergissmeinnicht-fuer-menschen-mit-und-ohne-demenz_ATvTden"
             },
             {
               "label": "Öffentliche Führung in der Eisenbibliothek",
               "detail": "Eisenbibliothek Paradies — ongoing, last day: 17 December 2026",
-              "date": "2026-11-27",
+              "date": "2026-11-28",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schlatt-tg/oeffentliche-fuehrung-in-der-eisenbibliothek_A2urnHS"
+            },
+            {
+              "label": "Discussion Group for Carers of People with Dementia",
+              "detail": "Evangelisches Kirchgemeindehaus, Steckborn — ongoing, last day: 17 December 2026",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/steckborn/gespraechsgruppe-fuer-bezugspersonen-von-menschen-mit-demenz_AJguFWT"
+            },
+            {
+              "label": "Discussion Group for Carers of People with Dementia",
+              "detail": "Genossenschaft Alterszentrum, Kreuzlingen — ongoing, last day: 17 December 2026",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kreuzlingen/gespraechsgruppe-fuer-bezugspersonen-von-menschen-mit-demenz_AKPV6A5"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -277,7 +277,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -305,7 +305,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "TG",
@@ -315,7 +315,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "61",
+          "value": "57",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -326,69 +326,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Adventsmarkt Bischofszell",
-              "detail": "9220 Bischofszell, Bischofszell",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/adventsmarkt-bischofszell/"
-            },
-            {
-              "label": "WINE & TRÜFFEL",
-              "detail": "Arbon",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-trueffel/"
-            },
-            {
-              "label": "Adventskranzen für junge Menschen",
+              "label": "Adventskranz gestalten",
               "detail": "Weinfelden",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranzen-fuer-junge-menschen/"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-gestalten-1/"
             },
             {
-              "label": "Jam's Musicbar",
-              "detail": "Kulturforum Amriswil, Amriswil",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/amriswil/jams-musicbar_AhVrMUG"
+              "label": "Impuls Project - Zmorge esse",
+              "detail": "Weinfelden",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/impuls-project-zmorge-esse/"
             },
             {
-              "label": "Herbstversammlung G300m",
-              "detail": "Schiesssportzentrum, Weinfelden",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/herbstversammlung-g300m/"
+              "label": "Arboner Christkindlimarkt",
+              "detail": "Altstadt Arbon, Arbon",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/arboner-christkindlimarkt/"
             },
             {
-              "label": "Long Distance Calling",
+              "label": "Forum «Tanz»",
+              "detail": "Musikschule Weinfelden, Weinfelden",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/forum-tanz_ASQAKSu"
+            },
+            {
+              "label": "Les Touristes",
               "detail": "Kulturzentrum Presswerk, Arbon",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/long-distance-calling_AegGjTW"
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/les-touristes_AYec9NB"
             },
             {
-              "label": "The Original USA Gospel Singers & Band",
-              "detail": "Pentorama Amriswil, Amriswil",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/amriswil/the-original-usa-gospel-singers-und-band_AJP5YmD"
-            },
-            {
-              "label": "Kerzenziehen für Kinder und Erwachsene",
-              "detail": "Kreuzlingen — läuft, letzter Tag: 27. November 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eintauchen-kerzenziehen-2026/"
+              "label": "Adventsmarkt Bischofszell",
+              "detail": "9220 Bischofszell, Bischofszell — läuft, letzter Tag: 29. November 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/adventsmarkt-bischofszell/"
             },
             {
               "label": "Café Vergisssmeinno für Menschen mit und ohne Demenz",
               "detail": "Restaurant Grüner Baum, Weinfelden — läuft, letzter Tag: 18. Dezember 2026",
-              "date": "2026-11-27",
+              "date": "2026-11-28",
               "url": "https://www.guidle.com/it/veranstaltungen/koerper-geist/weinfelden/cafe-vergissmeinnicht-fuer-menschen-mit-und-ohne-demenz_ATvTden"
             },
             {
               "label": "Öffentliche Führung in der Eisenbibliothek",
               "detail": "Eisenbibliothek Paradies — läuft, letzter Tag: 17. Dezember 2026",
-              "date": "2026-11-27",
+              "date": "2026-11-28",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schlatt-tg/oeffentliche-fuehrung-in-der-eisenbibliothek_A2urnHS"
+            },
+            {
+              "label": "Diskussionsgruppe für Menschen mit Demenz",
+              "detail": "Evangelisches Kirchgemeindehaus, Steckborn — läuft, letzter Tag: 17. Dezember 2026",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/steckborn/gespraechsgruppe-fuer-bezugspersonen-von-menschen-mit-demenz_AJguFWT"
+            },
+            {
+              "label": "Diskussionsgruppe für Menschen mit Demenz",
+              "detail": "Genossenschaft Alterszentrum, Kreuzlingen — läuft, letzter Tag: 17. Dezember 2026",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kreuzlingen/gespraechsgruppe-fuer-bezugspersonen-von-menschen-mit-demenz_AKPV6A5"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -421,7 +421,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -449,7 +449,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "TG",
@@ -459,7 +459,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "61",
+          "value": "57",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -470,69 +470,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Adventsmarkt Bischofszell",
-              "detail": "9220 Bischofszell, Bischofszell",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/adventsmarkt-bischofszell/"
-            },
-            {
-              "label": "WINE & TRÜFFEL",
-              "detail": "Arbon",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-trueffel/"
-            },
-            {
-              "label": "Adventskranzen für junge Menschen",
+              "label": "Adventskranz gestalten",
               "detail": "Weinfelden",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranzen-fuer-junge-menschen/"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-gestalten-1/"
             },
             {
-              "label": "Jam's Musicbar",
-              "detail": "Kulturforum Amriswil, Amriswil",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/amriswil/jams-musicbar_AhVrMUG"
+              "label": "Impuls Project - Zmorge esse",
+              "detail": "Weinfelden",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/impuls-project-zmorge-esse/"
             },
             {
-              "label": "Herbstversammlung G300m",
-              "detail": "Schiesssportzentrum, Weinfelden",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/herbstversammlung-g300m/"
+              "label": "Arboner Christkindlimarkt",
+              "detail": "Altstadt Arbon, Arbon",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/arboner-christkindlimarkt/"
             },
             {
-              "label": "Long Distance Calling",
+              "label": "Forum «Tanz»",
+              "detail": "Musikschule Weinfelden, Weinfelden",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/forum-tanz_ASQAKSu"
+            },
+            {
+              "label": "Les Touristes",
               "detail": "Kulturzentrum Presswerk, Arbon",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/long-distance-calling_AegGjTW"
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/les-touristes_AYec9NB"
             },
             {
-              "label": "The Original USA Gospel Singers & Band",
-              "detail": "Pentorama Amriswil, Amriswil",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/amriswil/the-original-usa-gospel-singers-und-band_AJP5YmD"
-            },
-            {
-              "label": "Kerzenziehen für Kinder und Erwachsene",
-              "detail": "Kreuzlingen — en cours, dernier jour : 27 novembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eintauchen-kerzenziehen-2026/"
+              "label": "Adventsmarkt Bischofszell",
+              "detail": "9220 Bischofszell, Bischofszell — en cours, dernier jour : 29 novembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/adventsmarkt-bischofszell/"
             },
             {
               "label": "Café Myosotis pour les personnes atteintes ou non de démence",
               "detail": "Restaurant Grüner Baum, Weinfelden — en cours, dernier jour : 18 décembre 2026",
-              "date": "2026-11-27",
+              "date": "2026-11-28",
               "url": "https://www.guidle.com/it/veranstaltungen/koerper-geist/weinfelden/cafe-vergissmeinnicht-fuer-menschen-mit-und-ohne-demenz_ATvTden"
             },
             {
               "label": "Öffentliche Führung in der Eisenbibliothek",
               "detail": "Eisenbibliothek Paradies — en cours, dernier jour : 17 décembre 2026",
-              "date": "2026-11-27",
+              "date": "2026-11-28",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schlatt-tg/oeffentliche-fuehrung-in-der-eisenbibliothek_A2urnHS"
+            },
+            {
+              "label": "Groupe de discussion pour les aidants de personnes atteintes de démence",
+              "detail": "Evangelisches Kirchgemeindehaus, Steckborn — en cours, dernier jour : 17 décembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/steckborn/gespraechsgruppe-fuer-bezugspersonen-von-menschen-mit-demenz_AJguFWT"
+            },
+            {
+              "label": "Groupe de discussion pour les aidants de personnes atteintes de démence",
+              "detail": "Genossenschaft Alterszentrum, Kreuzlingen — en cours, dernier jour : 17 décembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kreuzlingen/gespraechsgruppe-fuer-bezugspersonen-von-menschen-mit-demenz_AKPV6A5"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -565,7 +565,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -593,7 +593,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

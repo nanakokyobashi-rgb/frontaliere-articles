@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T18:19:07.194Z",
-  "contentHash": "e33ac599fdd5f5bfa8b07a001b37a82885e6a26aca0f4df0975e78ffe96d4310",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "a9300d207cd3a2e2402e4f9337641b3445a918c1f639c1db19fd8baab7ffca0d",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-27T01:13:06.824Z",
+      "updatedAt": "2026-11-27T15:38:08.536Z",
       "keyFacts": 0
     }
   ],
@@ -167,6 +167,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Calancastrasse: Provisorische Umfahrung mit Notbrücke wird in Betrieb genommen",
+              "date": "2026-11-27",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026112701.aspx"
+            },
+            {
               "label": "Neue Strassenverkehrssteuer ab 2027",
               "date": "2026-11-23",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026112301.aspx"
@@ -190,14 +195,9 @@
               "label": "Historische Stoffe, bleibende Erinnerung: Widmung des Salonwagens As 1141 an Willy Hochstrasser",
               "date": "2026-10-28",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/rollout-as-1141/"
-            },
-            {
-              "label": "Ofenbergstrasse: Nachtsperrungen vom 2. bis 6. November 2026",
-              "date": "2026-10-27",
-              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026102701.aspx"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -289,7 +289,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-27T18:19:07.194Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "GR",
@@ -434,6 +434,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Calancastrasse: Provisorische Umfahrung mit Notbrücke wird in Betrieb genommen",
+              "date": "2026-11-27",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026112701.aspx"
+            },
+            {
               "label": "Neue Strassenverkehrssteuer ab 2027",
               "date": "2026-11-23",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026112301.aspx"
@@ -457,14 +462,9 @@
               "label": "Historische Stoffe, bleibende Erinnerung: Widmung des Salonwagens As 1141 an Willy Hochstrasser",
               "date": "2026-10-28",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/rollout-as-1141/"
-            },
-            {
-              "label": "Ofenbergstrasse: Nachtsperrungen vom 2. bis 6. November 2026",
-              "date": "2026-10-27",
-              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026102701.aspx"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -555,7 +555,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-27T18:19:07.194Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "GR",
@@ -700,6 +700,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Calancastrasse: Provisorische Umfahrung mit Notbrücke wird in Betrieb genommen",
+              "date": "2026-11-27",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026112701.aspx"
+            },
+            {
               "label": "Neue Strassenverkehrssteuer ab 2027",
               "date": "2026-11-23",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026112301.aspx"
@@ -723,14 +728,9 @@
               "label": "Historische Stoffe, bleibende Erinnerung: Widmung des Salonwagens As 1141 an Willy Hochstrasser",
               "date": "2026-10-28",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/rollout-as-1141/"
-            },
-            {
-              "label": "Ofenbergstrasse: Nachtsperrungen vom 2. bis 6. November 2026",
-              "date": "2026-10-27",
-              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026102701.aspx"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -822,7 +822,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-27T18:19:07.194Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "GR",
@@ -967,6 +967,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Calancastrasse: Provisorische Umfahrung mit Notbrücke wird in Betrieb genommen",
+              "date": "2026-11-27",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026112701.aspx"
+            },
+            {
               "label": "Neue Strassenverkehrssteuer ab 2027",
               "date": "2026-11-23",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026112301.aspx"
@@ -990,14 +995,9 @@
               "label": "Historische Stoffe, bleibende Erinnerung: Widmung des Salonwagens As 1141 an Willy Hochstrasser",
               "date": "2026-10-28",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/rollout-as-1141/"
-            },
-            {
-              "label": "Ofenbergstrasse: Nachtsperrungen vom 2. bis 6. November 2026",
-              "date": "2026-10-27",
-              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026102701.aspx"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -1089,7 +1089,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-27T18:19:07.194Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

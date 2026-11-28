@@ -4,17 +4,17 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-11-27T04:41:16.871Z",
-  "contentHash": "035ce2513b8b2e5dce00485f5068260a5d868e587a233da8276364b904738f71",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "075acea397995729d83c2ee95b914d3e3da590d6b56eafec912e4c7c4cd7a2c8",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T16:33:33.919Z",
+      "updatedAt": "2026-11-27T16:21:34.268Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T15:51:00.529Z",
+      "updatedAt": "2026-11-27T15:38:08.536Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "123",
+          "value": "133",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Nateira Unia - Salbenkurse",
-              "detail": "Veia Principala 24",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/this-that/salouf/nateira-unia-salbenkurse_AttdNVU"
+              "label": "Adventsmarkt Fläsch 28. November 2026",
+              "detail": "Fläsch",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-flaesch-28-november-2026/"
             },
             {
-              "label": "Eigenheim Messe",
-              "detail": "AREON Eventhalle, Chur",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/eigenheim-messe-chur-2025/"
+              "label": "Klosters Christmas Market",
+              "detail": "Klosters",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klosters-christmas-market/"
             },
             {
-              "label": "Weihnachtsmarkt mit dem Frauenarbeitskreis",
-              "detail": "Chur",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmarkt-mit-dem-frauenarbeitskreis/"
+              "label": "MEMORY",
+              "detail": "Küblis",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/memory/"
             },
             {
-              "label": "KULTUR FÜR WEN?",
-              "detail": "Chur",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kultur-fuer-wen/"
+              "label": "Reavertüra Jon Sport - Wiedereröffnung Jon Sport",
+              "detail": "Scuol",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reavertuera-jon-sport-wiedereroeffnung-jon-sport/"
             },
             {
-              "label": "Per Anhalter um die Welt - Explora Reise Comedy vom Beifahrersitz",
-              "detail": "Chur",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/per-anhalter-um-die-welt-explora-reise-comedy-vom-beifahrersitz/"
+              "label": "47th Blick Sports Weeks Davos",
+              "detail": "Davos",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/47th-blick-sports-weeks-davos/"
             },
             {
-              "label": "Movie Premiere Night – Season Opening",
-              "detail": "Laax",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/movie-premiere-night-season-opening/"
+              "label": "3rd Smuggler Trophy",
+              "detail": "Silvretta Arena Samnaun-Ischgl, Samnaun",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/5-schmugglertrophy/"
+            },
+            {
+              "label": "Hitching-Kurs",
+              "detail": "7550 Scuol, Scuol",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hitching-kurs/"
             },
             {
               "label": "Bibel Genuss Tage 2025",
-              "detail": "7017 Flims Dorf, Flims — in corso, ultimo giorno: 29 novembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bibel-genuss-tage-26-29-november-2026/"
+              "detail": "Evang.-ref. Kirche St. Martin, Flims",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/moderierte-diskussion-was-ist-frieden-und-wie-wird-er-moeglich/"
             },
             {
-              "label": "Sitzung Gemeindeleitung",
-              "detail": "Pfarrhaus Grüsch, Grüsch — in corso, ultimo giorno: 17 dicembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/sitzung-gemeindeleitung_A6sWPAF"
+              "label": "Advent Market / Advent Aperitif",
+              "detail": "Arosa",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advent-market-advent-aperitif/"
             },
             {
-              "label": "KiWo - Kinder Workshop",
-              "detail": "Gemeindeschule Bever, Bever — in corso, ultimo giorno: 9 dicembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bever/kiwo-kinder-workshop_AKNMZ2H"
-            },
-            {
-              "label": "Konftreff",
-              "detail": "Pfarrhaus Grüsch, Grüsch — in corso, ultimo giorno: 10 dicembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/konftreff-1_AbbGRkk"
+              "label": "Advents-Hock",
+              "detail": "Cazis",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advents-hock/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -177,7 +177,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "GR",
@@ -187,7 +187,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "123",
+          "value": "133",
           "note": "from the site’s events calendar"
         }
       ],
@@ -198,69 +198,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Nateira Unia – Salbenkurse",
-              "detail": "Veia Principala 24",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/this-that/salouf/nateira-unia-salbenkurse_AttdNVU"
+              "label": "Adventsmarkt Fläsch 28. November 2026",
+              "detail": "Fläsch",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-flaesch-28-november-2026/"
             },
             {
-              "label": "Eigenheim Messe",
-              "detail": "AREON Eventhalle, Chur",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/eigenheim-messe-chur-2025/"
+              "label": "Klosters Christmas Market",
+              "detail": "Klosters",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klosters-christmas-market/"
             },
             {
-              "label": "Weihnachtsmarkt mit dem Frauenarbeitskreis",
-              "detail": "Chur",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmarkt-mit-dem-frauenarbeitskreis/"
+              "label": "MEMORY",
+              "detail": "Küblis",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/memory/"
             },
             {
-              "label": "KULTUR FÜR WEN?",
-              "detail": "Chur",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kultur-fuer-wen/"
+              "label": "Reavertüra Jon Sport - Wiedereröffnung Jon Sport",
+              "detail": "Scuol",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reavertuera-jon-sport-wiedereroeffnung-jon-sport/"
             },
             {
-              "label": "Per Anhalter um die Welt - Explora Reise Comedy vom Beifahrersitz",
-              "detail": "Chur",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/per-anhalter-um-die-welt-explora-reise-comedy-vom-beifahrersitz/"
+              "label": "47th Blick Sports Weeks Davos",
+              "detail": "Davos",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/47th-blick-sports-weeks-davos/"
             },
             {
-              "label": "Movie Premiere Night – Season Opening",
-              "detail": "Laax",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/movie-premiere-night-season-opening/"
+              "label": "3rd Smuggler Trophy",
+              "detail": "Silvretta Arena Samnaun-Ischgl, Samnaun",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/5-schmugglertrophy/"
+            },
+            {
+              "label": "Hitching-Kurs",
+              "detail": "7550 Scuol, Scuol",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hitching-kurs/"
             },
             {
               "label": "Bibel Genuss Tage 2025",
-              "detail": "7017 Flims Dorf, Flims — ongoing, last day: 29 November 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bibel-genuss-tage-26-29-november-2026/"
+              "detail": "Evang.-ref. Kirche St. Martin, Flims",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/moderierte-diskussion-was-ist-frieden-und-wie-wird-er-moeglich/"
             },
             {
-              "label": "Sitzung Gemeindeleitung",
-              "detail": "Pfarrhaus Grüsch, Grüsch — ongoing, last day: 17 December 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/sitzung-gemeindeleitung_A6sWPAF"
+              "label": "Advent Market / Advent Aperitif",
+              "detail": "Arosa",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advent-market-advent-aperitif/"
             },
             {
-              "label": "KiWo - Kinder Workshop",
-              "detail": "Gemeindeschule Bever, Bever — ongoing, last day: 9 December 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bever/kiwo-kinder-workshop_AKNMZ2H"
-            },
-            {
-              "label": "Konftreff",
-              "detail": "Pfarrhaus Grüsch, Grüsch — ongoing, last day: 10 December 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/konftreff-1_AbbGRkk"
+              "label": "Advents-Hock",
+              "detail": "Cazis",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advents-hock/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -273,7 +273,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -337,7 +337,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "GR",
@@ -347,7 +347,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "123",
+          "value": "133",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -358,69 +358,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Naturia Unia – Salbenkurse",
-              "detail": "Veia Principala 24",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/this-that/salouf/nateira-unia-salbenkurse_AttdNVU"
+              "label": "Adventsmarkt Fläsch 28. November 2026",
+              "detail": "Fläsch",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-flaesch-28-november-2026/"
             },
             {
-              "label": "Eigenheim Messe",
-              "detail": "AREON Eventhalle, Chur",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/eigenheim-messe-chur-2025/"
+              "label": "Weihnachtsmarkt Klosters 2026",
+              "detail": "Klosters",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klosters-christmas-market/"
             },
             {
-              "label": "Weihnachtsmarkt mit dem Frauenarbeitskreis",
-              "detail": "Chur",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmarkt-mit-dem-frauenarbeitskreis/"
+              "label": "MEMORIE",
+              "detail": "Küblis",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/memory/"
             },
             {
-              "label": "KULTUR FÜR WEN?",
-              "detail": "Chur",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kultur-fuer-wen/"
+              "label": "Reavertüra Jon Sport - Wiedereröffnung Jon Sport",
+              "detail": "Scuol",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reavertuera-jon-sport-wiedereroeffnung-jon-sport/"
             },
             {
-              "label": "Per Anhalter um die Welt - Explora Reise Comedy vom Beifahrersitz",
-              "detail": "Chur",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/per-anhalter-um-die-welt-explora-reise-comedy-vom-beifahrersitz/"
+              "label": "47. Blick Sportwochen Davos",
+              "detail": "Davos",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/47th-blick-sports-weeks-davos/"
             },
             {
-              "label": "Movie Premiere Night – Season Opening",
-              "detail": "Laax",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/movie-premiere-night-season-opening/"
+              "label": "5. Schmuggler-Trophy",
+              "detail": "Silvretta Arena Samnaun-Ischgl, Samnaun",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/5-schmugglertrophy/"
             },
             {
-              "label": "Bibel Genuss Tage 26. - 29. November 2026",
-              "detail": "7017 Flims Dorf, Flims — läuft, letzter Tag: 29. November 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bibel-genuss-tage-26-29-november-2026/"
+              "label": "Hitching-Kurs",
+              "detail": "7550 Scuol, Scuol",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hitching-kurs/"
             },
             {
-              "label": "Sitzung Gemeindeleitung",
-              "detail": "Pfarrhaus Grüsch, Grüsch — läuft, letzter Tag: 17. Dezember 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/sitzung-gemeindeleitung_A6sWPAF"
+              "label": "Moderierte Diskussion \"Was ist Frieden und wie wird er möglich?\"",
+              "detail": "Evang.-ref. Kirche St. Martin, Flims",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/moderierte-diskussion-was-ist-frieden-und-wie-wird-er-moeglich/"
             },
             {
-              "label": "KiWo - Kinder Workshop",
-              "detail": "Gemeindeschule Bever, Bever — läuft, letzter Tag: 9. Dezember 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bever/kiwo-kinder-workshop_AKNMZ2H"
+              "label": "Advents Markt / Advents Apéro",
+              "detail": "Arosa",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advent-market-advent-aperitif/"
             },
             {
-              "label": "Konftreff",
-              "detail": "Pfarrhaus Grüsch, Grüsch — läuft, letzter Tag: 10. Dezember 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/konftreff-1_AbbGRkk"
+              "label": "Advents-Hock",
+              "detail": "Cazis",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advents-hock/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -433,7 +433,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -497,7 +497,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "GR",
@@ -507,7 +507,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "123",
+          "value": "133",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -518,69 +518,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Nateira Unia – Cours de premiers secours",
-              "detail": "Veia Principala 24",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/this-that/salouf/nateira-unia-salbenkurse_AttdNVU"
+              "label": "Adventsmarkt Fläsch 28. November 2026",
+              "detail": "Fläsch",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-flaesch-28-november-2026/"
             },
             {
-              "label": "Eigenheim Messe",
-              "detail": "AREON Eventhalle, Chur",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/eigenheim-messe-chur-2025/"
+              "label": "Klosters Christmas Market",
+              "detail": "Klosters",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klosters-christmas-market/"
             },
             {
-              "label": "Weihnachtsmarkt mit dem Frauenarbeitskreis",
-              "detail": "Chur",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmarkt-mit-dem-frauenarbeitskreis/"
+              "label": "MEMORY",
+              "detail": "Küblis",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/memory/"
             },
             {
-              "label": "KULTUR FÜR WEN?",
-              "detail": "Chur",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kultur-fuer-wen/"
+              "label": "Reavertüra Jon Sport - Wiedereröffnung Jon Sport",
+              "detail": "Scuol",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reavertuera-jon-sport-wiedereroeffnung-jon-sport/"
             },
             {
-              "label": "Per Anhalter um die Welt - Explora Reise Comedy vom Beifahrersitz",
-              "detail": "Chur",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/per-anhalter-um-die-welt-explora-reise-comedy-vom-beifahrersitz/"
+              "label": "47th Blick Sports Weeks Davos",
+              "detail": "Davos",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/47th-blick-sports-weeks-davos/"
             },
             {
-              "label": "Movie Premiere Night – Season Opening",
-              "detail": "Laax",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/movie-premiere-night-season-opening/"
+              "label": "3rd Smuggler Trophy",
+              "detail": "Silvretta Arena Samnaun-Ischgl, Samnaun",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/5-schmugglertrophy/"
+            },
+            {
+              "label": "Hitching-Kurs",
+              "detail": "7550 Scuol, Scuol",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hitching-kurs/"
             },
             {
               "label": "Bibel Genuss Tage 2025",
-              "detail": "7017 Flims Dorf, Flims — en cours, dernier jour : 29 novembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bibel-genuss-tage-26-29-november-2026/"
+              "detail": "Evang.-ref. Kirche St. Martin, Flims",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/moderierte-diskussion-was-ist-frieden-und-wie-wird-er-moeglich/"
             },
             {
-              "label": "Sitzung Gemeindeleitung",
-              "detail": "Pfarrhaus Grüsch, Grüsch — en cours, dernier jour : 17 décembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/sitzung-gemeindeleitung_A6sWPAF"
+              "label": "Marché de l'Avent / Apéro de l'Avent",
+              "detail": "Arosa",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advent-market-advent-aperitif/"
             },
             {
-              "label": "KiWo - Kinder Workshop",
-              "detail": "Gemeindeschule Bever, Bever — en cours, dernier jour : 9 décembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bever/kiwo-kinder-workshop_AKNMZ2H"
-            },
-            {
-              "label": "Konftreff",
-              "detail": "Pfarrhaus Grüsch, Grüsch — en cours, dernier jour : 10 décembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/konftreff-1_AbbGRkk"
+              "label": "Advents-Hock",
+              "detail": "Cazis",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advents-hock/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -593,7 +593,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -657,7 +657,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-11-27T04:41:16.871Z",
-  "contentHash": "4be0be409105badfd9ee2e76ba1d2ce166a4d9d49b7863d0ad34799c03211991",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "79a5eb744438b7ddb4e19d903ea4e18ae97562c3f9547f1aba8ebfc5c7edc5e3",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T16:33:33.919Z",
+      "updatedAt": "2026-11-27T16:21:34.268Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T15:51:00.529Z",
+      "updatedAt": "2026-11-27T15:38:08.536Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "115",
+          "value": "106",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Afro panico",
+              "label": "Baulmes Christmas Market",
+              "detail": "Baulmes",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/baulmes-christmas-market/"
+            },
+            {
+              "label": "LA TEMPERATURA - 15",
               "detail": "Lausanne",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/afro-panico/"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-temperatura-15/"
             },
             {
-              "label": "Tokyo-Ga",
-              "detail": "Lausanne",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tokyo-ga/"
+              "label": "Blumengestaltungs-Workshop zu Weihnachten",
+              "detail": "Caveau des Vignerons, Chardonne",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/events/this-that/chardonne/christmas-flower-arranging-workshop_AxV1tck"
             },
             {
-              "label": "ASHEN (FR) + ALCHEMISTS (VERNISSAGE, CH) + FALLEN SKIES (CH)",
-              "detail": "Le Romandie",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/ashen-fr-alchemists-vernissage-ch-fallen-skies-ch_AbmexVH"
+              "label": "Cabaret Parfumé",
+              "detail": "Base Bar",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/cabaret-parfume_AbADNKd"
             },
             {
-              "label": "At the funeral of death",
-              "detail": "Vevey",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/at-the-funeral-of-death/"
+              "label": "House of Perreo - 2",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/events/music/lausanne/house-of-perreo-2_AUqwZHm"
             },
             {
-              "label": "Candlelight concert: QUEEN vs ABBA",
-              "detail": "Château Salavaux, Vully-les-Lacs",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kerzenlichtkonzert-queen-vs-abba/"
-            },
-            {
-              "label": "Kerzenlichtkonzert: QUEEN vs ABBA",
-              "detail": "Château Salavaux",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/music/salavaux/candlelight-concert-queen-vs-abba_AswY331"
-            },
-            {
-              "label": "wave trail - live",
-              "detail": "Théâtre de l'Odéon",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/music/villeneuve-vd/wave-trail-live_AdN6qSt"
-            },
-            {
-              "label": "End-of-year tastings & craft market",
-              "detail": "St-Prex, Saint-Prex",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endofyear-tastings-craft-market/"
-            },
-            {
-              "label": "Degustazione di champagne e spumanti",
-              "detail": "Basilea, Champagne",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/liquid-tasting-champagner-schaumweine/"
-            },
-            {
-              "label": "Sam Sauvage + Paolo.",
+              "label": "House of Perreo - 2",
               "detail": "Losanna, Lausanne",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sam-sauvage-paolo/"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/house-of-perreo-3/"
+            },
+            {
+              "label": "Magie de Noël au Cirque de Corcelles",
+              "detail": "Corcelles-près-Payerne",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/magie-de-noel-au-cirque-de-corcelles/"
+            },
+            {
+              "label": "Schweizer Brass-Band-Meisterschaft 2026 (CSBB 2026)",
+              "detail": "2m2c - Montreux Music & Convention Centre, Montreux",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/montreux/schweizer-brass-band-meisterschaft-2026-csbb-2026_Avk87ud"
+            },
+            {
+              "label": "Weihnachtsmarkt mit Werken lokaler Künstler und Kunsthandwerker",
+              "detail": "Galerie-Atelier Arva, Vevey",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/vevey/weihnachtsmarkt-mit-werken-lokaler-kuenstler-und-kunsthandwerker_A6N2Zge"
+            },
+            {
+              "label": "Danse & Parkinson",
+              "detail": "Théâtre Sévelin 36",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/danse-und-parkinson_AcP6EEy"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -133,7 +133,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +155,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "VD",
@@ -165,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "115",
+          "value": "106",
           "note": "from the site’s events calendar"
         }
       ],
@@ -176,69 +176,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Afro panico",
+              "label": "Baulmes Christmas Market",
+              "detail": "Baulmes",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/baulmes-christmas-market/"
+            },
+            {
+              "label": "LA TEMPERATURA - 15",
               "detail": "Lausanne",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/afro-panico/"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-temperatura-15/"
             },
             {
-              "label": "Tokyo-Ga",
-              "detail": "Lausanne",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tokyo-ga/"
+              "label": "Christmas Flower Arranging Workshop",
+              "detail": "Caveau des Vignerons, Chardonne",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/events/this-that/chardonne/christmas-flower-arranging-workshop_AxV1tck"
             },
             {
-              "label": "ASHEN (FR) + ALCHEMISTS (VERNISSAGE, CH) + FALLEN SKIES (CH)",
-              "detail": "Le Romandie",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/ashen-fr-alchemists-vernissage-ch-fallen-skies-ch_AbmexVH"
+              "label": "Cabaret Parfumé",
+              "detail": "Base Bar",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/cabaret-parfume_AbADNKd"
             },
             {
-              "label": "At the funeral of death",
-              "detail": "Vevey",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/at-the-funeral-of-death/"
+              "label": "House of Perreo-2",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/events/music/lausanne/house-of-perreo-2_AUqwZHm"
             },
             {
-              "label": "Candlelight concert: QUEEN vs ABBA",
-              "detail": "Château Salavaux, Vully-les-Lacs",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kerzenlichtkonzert-queen-vs-abba/"
-            },
-            {
-              "label": "Candlelight concert: QUEEN vs ABBA",
-              "detail": "Château Salavaux",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/music/salavaux/candlelight-concert-queen-vs-abba_AswY331"
-            },
-            {
-              "label": "wave trail - live",
-              "detail": "Théâtre de l'Odéon",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/music/villeneuve-vd/wave-trail-live_AdN6qSt"
-            },
-            {
-              "label": "End-of-year tastings & craft market",
-              "detail": "St-Prex, Saint-Prex",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endofyear-tastings-craft-market/"
-            },
-            {
-              "label": "Champagne & Sparkling Wines Tasting",
-              "detail": "Basilea, Champagne",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/liquid-tasting-champagner-schaumweine/"
-            },
-            {
-              "label": "Sam Sauvage + Paolo.",
+              "label": "House of Perreo - 2",
               "detail": "Losanna, Lausanne",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sam-sauvage-paolo/"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/house-of-perreo-3/"
+            },
+            {
+              "label": "Magie de Noël au Cirque de Corcelles",
+              "detail": "Corcelles-près-Payerne",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/magie-de-noel-au-cirque-de-corcelles/"
+            },
+            {
+              "label": "2026 Swiss Brass Band Championship (CSBB 2026)",
+              "detail": "2m2c - Montreux Music & Convention Centre, Montreux",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/montreux/schweizer-brass-band-meisterschaft-2026-csbb-2026_Avk87ud"
+            },
+            {
+              "label": "Christmas Market Featuring Local Artists and Artisans",
+              "detail": "Galerie-Atelier Arva, Vevey",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/vevey/weihnachtsmarkt-mit-werken-lokaler-kuenstler-und-kunsthandwerker_A6N2Zge"
+            },
+            {
+              "label": "Danse & Parkinson",
+              "detail": "Théâtre Sévelin 36",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/danse-und-parkinson_AcP6EEy"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -271,7 +271,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -293,7 +293,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "VD",
@@ -303,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "115",
+          "value": "106",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -314,69 +314,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Afro panico",
+              "label": "Weihnachtsmarkt in Baulmes",
+              "detail": "Baulmes",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/baulmes-christmas-market/"
+            },
+            {
+              "label": "LA TEMPERATURA - 15",
               "detail": "Lausanne",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/afro-panico/"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-temperatura-15/"
             },
             {
-              "label": "Tokyo-Ga",
-              "detail": "Lausanne",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tokyo-ga/"
+              "label": "Blumengestaltungs-Workshop zu Weihnachten",
+              "detail": "Caveau des Vignerons, Chardonne",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/events/this-that/chardonne/christmas-flower-arranging-workshop_AxV1tck"
             },
             {
-              "label": "ASHEN (FR) + ALCHEMISTS (VERNISSAGE, CH) + FALLEN SKIES (CH)",
-              "detail": "Le Romandie",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/ashen-fr-alchemists-vernissage-ch-fallen-skies-ch_AbmexVH"
+              "label": "Cabaret Parfumé",
+              "detail": "Base Bar",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/cabaret-parfume_AbADNKd"
             },
             {
-              "label": "Auf der Beerdigung des Todes",
-              "detail": "Vevey",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/at-the-funeral-of-death/"
+              "label": "Haus Perreo - 2",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/events/music/lausanne/house-of-perreo-2_AUqwZHm"
             },
             {
-              "label": "Kerzenlichtkonzert: QUEEN vs ABBA",
-              "detail": "Château Salavaux, Vully-les-Lacs",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kerzenlichtkonzert-queen-vs-abba/"
-            },
-            {
-              "label": "Kerzenlichtkonzert: QUEEN vs ABBA",
-              "detail": "Château Salavaux",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/music/salavaux/candlelight-concert-queen-vs-abba_AswY331"
-            },
-            {
-              "label": "wave trail - live",
-              "detail": "Théâtre de l'Odéon",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/music/villeneuve-vd/wave-trail-live_AdN6qSt"
-            },
-            {
-              "label": "Weinverkostungen zum Jahresende & Kunsthandwerksmarkt",
-              "detail": "St-Prex, Saint-Prex",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endofyear-tastings-craft-market/"
-            },
-            {
-              "label": "Liquid Tasting Champagner & Schaumweine",
-              "detail": "Basilea, Champagne",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/liquid-tasting-champagner-schaumweine/"
-            },
-            {
-              "label": "Sam Sauvage + Paolo.",
+              "label": "House of Perreo - 2",
               "detail": "Losanna, Lausanne",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sam-sauvage-paolo/"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/house-of-perreo-3/"
+            },
+            {
+              "label": "Magie de Noël au Cirque de Corcelles",
+              "detail": "Corcelles-près-Payerne",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/magie-de-noel-au-cirque-de-corcelles/"
+            },
+            {
+              "label": "Schweizer Brass-Band-Meisterschaft 2026 (CSBB 2026)",
+              "detail": "2m2c - Montreux Music & Convention Centre, Montreux",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/montreux/schweizer-brass-band-meisterschaft-2026-csbb-2026_Avk87ud"
+            },
+            {
+              "label": "Weihnachtsmarkt mit Werken lokaler Künstler und Kunsthandwerker",
+              "detail": "Galerie-Atelier Arva, Vevey",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/vevey/weihnachtsmarkt-mit-werken-lokaler-kuenstler-und-kunsthandwerker_A6N2Zge"
+            },
+            {
+              "label": "Danse & Parkinson",
+              "detail": "Théâtre Sévelin 36",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/danse-und-parkinson_AcP6EEy"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -409,7 +409,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -431,7 +431,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "VD",
@@ -441,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "115",
+          "value": "106",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -452,69 +452,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Afro panico",
+              "label": "Marché de Noël de Baulmes",
+              "detail": "Baulmes",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/baulmes-christmas-market/"
+            },
+            {
+              "label": "LA TEMPERATURA - 15",
               "detail": "Lausanne",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/afro-panico/"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-temperatura-15/"
             },
             {
-              "label": "Tokyo-Ga",
-              "detail": "Lausanne",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tokyo-ga/"
+              "label": "Atelier de décoration florales pour Noël",
+              "detail": "Caveau des Vignerons, Chardonne",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/events/this-that/chardonne/christmas-flower-arranging-workshop_AxV1tck"
             },
             {
-              "label": "ASHEN (FR) + ALCHEMISTS (VERNISSAGE, CH) + FALLEN SKIES (CH)",
-              "detail": "Le Romandie",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/ashen-fr-alchemists-vernissage-ch-fallen-skies-ch_AbmexVH"
+              "label": "Cabaret Parfumé",
+              "detail": "Base Bar",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/cabaret-parfume_AbADNKd"
             },
             {
-              "label": "Aux obsèques de la mort",
-              "detail": "Vevey",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/at-the-funeral-of-death/"
+              "label": "Maison de Perreo - 2",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/events/music/lausanne/house-of-perreo-2_AUqwZHm"
             },
             {
-              "label": "Concert à la Bougie: QUEEN vs ABBA",
-              "detail": "Château Salavaux, Vully-les-Lacs",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kerzenlichtkonzert-queen-vs-abba/"
-            },
-            {
-              "label": "Concert à la Bougie: QUEEN vs ABBA",
-              "detail": "Château Salavaux",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/music/salavaux/candlelight-concert-queen-vs-abba_AswY331"
-            },
-            {
-              "label": "Wave Trail - live",
-              "detail": "Théâtre de l'Odéon",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/music/villeneuve-vd/wave-trail-live_AdN6qSt"
-            },
-            {
-              "label": "Dégustations de fin d'année & marché des saveurs artisanal",
-              "detail": "St-Prex, Saint-Prex",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/endofyear-tastings-craft-market/"
-            },
-            {
-              "label": "Dégustation de champagnes et de vins mousseux",
-              "detail": "Basilea, Champagne",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/liquid-tasting-champagner-schaumweine/"
-            },
-            {
-              "label": "Sam Sauvage + Paolo.",
+              "label": "House of Perreo - 2",
               "detail": "Losanna, Lausanne",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sam-sauvage-paolo/"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/house-of-perreo-3/"
+            },
+            {
+              "label": "Magie de Noël au Cirque de Corcelles",
+              "detail": "Corcelles-près-Payerne",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/magie-de-noel-au-cirque-de-corcelles/"
+            },
+            {
+              "label": "Championnat Suisse des Brass Band (CSBB 2026)",
+              "detail": "2m2c - Montreux Music & Convention Centre, Montreux",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/montreux/schweizer-brass-band-meisterschaft-2026-csbb-2026_Avk87ud"
+            },
+            {
+              "label": "Marché de Noël d'artistes et artisans locaux de l'ARVA",
+              "detail": "Galerie-Atelier Arva, Vevey",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/vevey/weihnachtsmarkt-mit-werken-lokaler-kuenstler-und-kunsthandwerker_A6N2Zge"
+            },
+            {
+              "label": "Danse & Parkinson",
+              "detail": "Théâtre Sévelin 36",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/lausanne/danse-und-parkinson_AcP6EEy"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -547,7 +547,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -569,7 +569,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

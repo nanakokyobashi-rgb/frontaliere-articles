@@ -4,12 +4,12 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-11-27T04:41:16.871Z",
-  "contentHash": "7f6a7e511cd1c651c50150d438d99d43483258dd3cb336cdb93541ffdf82e37b",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "c3723548f736f1029b77ee348c4a5b550a6d55c0720385fa8fe0814fb5418022",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T16:33:33.919Z",
+      "updatedAt": "2026-11-27T16:21:34.268Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "85",
+          "value": "84",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "50 Jahre Aarauer Kerzenziehen 2026",
-              "detail": "Aarau",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/50-jahre-aarauer-kerzenziehen-2026/"
-            },
-            {
-              "label": "Taschenlampenführung für Kinder",
-              "detail": "Muri AG",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-fuer-kinder/"
-            },
-            {
-              "label": "Adventsfunkeln in Rheinfelden",
-              "detail": "Rheinfelden",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsfunkeln-in-rheinfelden/"
-            },
-            {
-              "label": "Adventsweg Zofingen 2026",
-              "detail": "Heitere-Platz, Zofingen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsweg-zofingen-2026/"
-            },
-            {
-              "label": "Bar per single",
+              "label": "Thai Magic Dinner",
               "detail": "Baden",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/eventi/party/baden/bar-per-single_A7Q7DPu"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/thai-magic-dinner/"
             },
             {
-              "label": "I QUATTRO \"SWISSMAS\" - Die grosse Schweizer Weihnachtstournee 2026",
-              "detail": "Röm.-kath. Stadtkirche Mellingen, Mellingen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/i-quattro-swissmas-die-grosse-schweizer-weihnachtstournee-2026-6/"
+              "label": "Weihnachtsmarkt \"Aarburg Leuchtet\"",
+              "detail": "Aarburg",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmarkt-aarburg-leuchtet-1/"
             },
             {
-              "label": "Michael Arbenz feat. Atom String Quartet and Florian Arbenz: Reflecting Bach",
-              "detail": "Konservi, Seon",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/seon/michael-arbenz-feat-atom-string-quartet-and-florian-arbenz-reflecting-bach_AXYa6h5"
+              "label": "Das Weihnachtsoratorium von J.S. Bach tanzen",
+              "detail": "Propstei Wislikofen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-weihnachtsoratorium-von-js-bach-tanzen/"
             },
             {
-              "label": "DUB SPENCER & TRANCE HILL - Live in Surround - Mixed by Umberto Echo",
-              "detail": "Royal, Baden",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/dub-spencer-und-trance-hill-synchronos-tour_APtw4aU"
+              "label": "Sins im Advent",
+              "detail": "Sins",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sins-im-advent/"
             },
             {
-              "label": "Lerntreff Baden",
-              "detail": "Familienzentrum Karussell Region Baden, Baden — in corso, ultimo giorno: 10 dicembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/baden/lerntreff-baden_Aa8Vsfe"
+              "label": "Heilkräuter & Hausmittel - aus Garten + Natur / Winterkurs",
+              "detail": "Gipf-Oberfrick",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/gipf-oberfrick/heilkraeuter-und-hausmittel-aus-garten-natur-winterkurs_A2iTdEf"
             },
             {
-              "label": "diagonal - Club Festival Aarau",
-              "detail": "Aarau, verschiedene Orte, Aarau — in corso, ultimo giorno: 28 novembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/diagonal-club-festival-aarau_At1MGcr"
+              "label": "Chlausmarkt im Klingnauer Städtli",
+              "detail": "Klingnau",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chlausmarkt-im-klingnauer-staedtli/"
+            },
+            {
+              "label": "ADVENTSMARKT IM PARK vom SCHWEIZER STROHMUSEUM",
+              "detail": "Wohlen AG",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-park-vom-schweizer-strohmuseum/"
+            },
+            {
+              "label": "Öffentliche Führung",
+              "detail": "Aarau",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-11/"
+            },
+            {
+              "label": "Frauenbund Muri - Adventsfenster-Besichtigung",
+              "detail": "Muri AG",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frauenbund-muri-adventsfenster-besichtigung/"
+            },
+            {
+              "label": "Les Papillons",
+              "detail": "Schule Bettwil, Bettwil",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bettwil/les-papillons_AfXk2Dn"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "AG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "85",
+          "value": "84",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "50 Jahre Aarauer Kerzenziehen 2026",
-              "detail": "Aarau",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/50-jahre-aarauer-kerzenziehen-2026/"
-            },
-            {
-              "label": "Taschenlampenführung für Kinder",
-              "detail": "Muri AG",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-fuer-kinder/"
-            },
-            {
-              "label": "Adventsfunkeln in Rheinfelden",
-              "detail": "Rheinfelden",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsfunkeln-in-rheinfelden/"
-            },
-            {
-              "label": "Adventsweg Zofingen 2026",
-              "detail": "Heitere-Platz, Zofingen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsweg-zofingen-2026/"
-            },
-            {
-              "label": "Barhopping for singles",
+              "label": "Thai Magic Dinner",
               "detail": "Baden",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/eventi/party/baden/bar-per-single_A7Q7DPu"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/thai-magic-dinner/"
             },
             {
-              "label": "I QUATTRO \"SWISSMAS\" - Die grosse Schweizer Weihnachtstournee 2026",
-              "detail": "Röm.-kath. Stadtkirche Mellingen, Mellingen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/i-quattro-swissmas-die-grosse-schweizer-weihnachtstournee-2026-6/"
+              "label": "Weihnachtsmarkt \"Aarburg Leuchtet\"",
+              "detail": "Aarburg",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmarkt-aarburg-leuchtet-1/"
             },
             {
-              "label": "Michael Arbenz feat. Atom String Quartet and Florian Arbenz: Reflecting Bach",
-              "detail": "Konservi, Seon",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/seon/michael-arbenz-feat-atom-string-quartet-and-florian-arbenz-reflecting-bach_AXYa6h5"
+              "label": "Das Weihnachtsoratorium von J.S. Bach tanzen",
+              "detail": "Propstei Wislikofen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-weihnachtsoratorium-von-js-bach-tanzen/"
             },
             {
-              "label": "DUB SPENCER & TRANCE HILL - Live in Surround - Mixed by Umberto Echo",
-              "detail": "Royal, Baden",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/dub-spencer-und-trance-hill-synchronos-tour_APtw4aU"
+              "label": "Sins im Advent",
+              "detail": "Sins",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sins-im-advent/"
             },
             {
-              "label": "Lerntreff Baden",
-              "detail": "Familienzentrum Karussell Region Baden, Baden — ongoing, last day: 10 December 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/baden/lerntreff-baden_Aa8Vsfe"
+              "label": "Medicinal Herbs & Home Remedies – from the Garden + Nature / Winter Course",
+              "detail": "Gipf-Oberfrick",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/gipf-oberfrick/heilkraeuter-und-hausmittel-aus-garten-natur-winterkurs_A2iTdEf"
             },
             {
-              "label": "diagonal - Club Festival Aarau",
-              "detail": "Aarau, verschiedene Orte, Aarau — ongoing, last day: 28 November 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/diagonal-club-festival-aarau_At1MGcr"
+              "label": "Chlausmarkt im Klingnauer Städtli",
+              "detail": "Klingnau",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chlausmarkt-im-klingnauer-staedtli/"
+            },
+            {
+              "label": "ADVENTSMARKT IM PARK vom SCHWEIZER STROHMUSEUM",
+              "detail": "Wohlen AG",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-park-vom-schweizer-strohmuseum/"
+            },
+            {
+              "label": "Öffentliche Führung",
+              "detail": "Aarau",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-11/"
+            },
+            {
+              "label": "Frauenbund Muri - Adventsfenster-Besichtigung",
+              "detail": "Muri AG",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frauenbund-muri-adventsfenster-besichtigung/"
+            },
+            {
+              "label": "Les Papillons",
+              "detail": "Schule Bettwil, Bettwil",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bettwil/les-papillons_AfXk2Dn"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "AG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "85",
+          "value": "84",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "50 Jahre Aarauer Kerzenziehen 2026",
-              "detail": "Aarau",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/50-jahre-aarauer-kerzenziehen-2026/"
-            },
-            {
-              "label": "Taschenlampenführung für Kinder",
-              "detail": "Muri AG",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-fuer-kinder/"
-            },
-            {
-              "label": "Adventsfunkeln in Rheinfelden",
-              "detail": "Rheinfelden",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsfunkeln-in-rheinfelden/"
-            },
-            {
-              "label": "Adventsweg Zofingen 2026",
-              "detail": "Heitere-Platz, Zofingen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsweg-zofingen-2026/"
-            },
-            {
-              "label": "Barhopping für Singles",
+              "label": "Thai Magic Duo Dinner",
               "detail": "Baden",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/eventi/party/baden/bar-per-single_A7Q7DPu"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/thai-magic-dinner/"
             },
             {
-              "label": "I QUATTRO \"SWISSMAS\" - Die grosse Schweizer Weihnachtstournee 2026",
-              "detail": "Röm.-kath. Stadtkirche Mellingen, Mellingen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/i-quattro-swissmas-die-grosse-schweizer-weihnachtstournee-2026-6/"
+              "label": "Weihnachtsmarkt \"Aarburg Leuchtet\"",
+              "detail": "Aarburg",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmarkt-aarburg-leuchtet-1/"
             },
             {
-              "label": "Michael Arbenz feat. Atom String Quartet and Florian Arbenz: Reflecting Bach",
-              "detail": "Konservi, Seon",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/seon/michael-arbenz-feat-atom-string-quartet-and-florian-arbenz-reflecting-bach_AXYa6h5"
+              "label": "Das Weihnachtsoratorium von J.S. Bach tanzen",
+              "detail": "Propstei Wislikofen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-weihnachtsoratorium-von-js-bach-tanzen/"
             },
             {
-              "label": "DUB SPENCER & TRANCE HILL - Live in Surround - Mixed by Umberto Echo",
-              "detail": "Royal, Baden",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/dub-spencer-und-trance-hill-synchronos-tour_APtw4aU"
+              "label": "Sins im Advent",
+              "detail": "Sins",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sins-im-advent/"
             },
             {
-              "label": "Lerntreff Baden",
-              "detail": "Familienzentrum Karussell Region Baden, Baden — läuft, letzter Tag: 10. Dezember 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/baden/lerntreff-baden_Aa8Vsfe"
+              "label": "Heilkräuter & Hausmittel – aus Garten + Natur / Winterkurs",
+              "detail": "Gipf-Oberfrick",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/gipf-oberfrick/heilkraeuter-und-hausmittel-aus-garten-natur-winterkurs_A2iTdEf"
             },
             {
-              "label": "diagonal - Club Festival Aarau",
-              "detail": "Aarau, verschiedene Orte, Aarau — läuft, letzter Tag: 28. November 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/diagonal-club-festival-aarau_At1MGcr"
+              "label": "Chlausmarkt im Klingnauer Städtli",
+              "detail": "Klingnau",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chlausmarkt-im-klingnauer-staedtli/"
+            },
+            {
+              "label": "ADVENTSMARKT IM PARK vom SCHWEIZER STROHMUSEUM",
+              "detail": "Wohlen AG",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-park-vom-schweizer-strohmuseum/"
+            },
+            {
+              "label": "Öffentliche Führung",
+              "detail": "Aarau",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-11/"
+            },
+            {
+              "label": "Frauenbund Muri - Adventsfenster-Besichtigung",
+              "detail": "Muri AG",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frauenbund-muri-adventsfenster-besichtigung/"
+            },
+            {
+              "label": "Les Papillons",
+              "detail": "Schule Bettwil, Bettwil",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bettwil/les-papillons_AfXk2Dn"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "AG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "85",
+          "value": "84",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "50 Jahre Aarauer Kerzenziehen 2026",
-              "detail": "Aarau",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/50-jahre-aarauer-kerzenziehen-2026/"
-            },
-            {
-              "label": "Taschenlampenführung für Kinder",
-              "detail": "Muri AG",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-fuer-kinder/"
-            },
-            {
-              "label": "Adventsfunkeln in Rheinfelden",
-              "detail": "Rheinfelden",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsfunkeln-in-rheinfelden/"
-            },
-            {
-              "label": "Adventsweg Zofingen 2026",
-              "detail": "Heitere-Platz, Zofingen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsweg-zofingen-2026/"
-            },
-            {
-              "label": "Barhopping pour les célibataires",
+              "label": "Thai Magic Dinner",
               "detail": "Baden",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/eventi/party/baden/bar-per-single_A7Q7DPu"
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/thai-magic-dinner/"
             },
             {
-              "label": "I QUATTRO \"SWISSMAS\" - Die grosse Schweizer Weihnachtstournee 2026",
-              "detail": "Röm.-kath. Stadtkirche Mellingen, Mellingen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/i-quattro-swissmas-die-grosse-schweizer-weihnachtstournee-2026-6/"
+              "label": "Weihnachtsmarkt \"Aarburg Leuchtet\"",
+              "detail": "Aarburg",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmarkt-aarburg-leuchtet-1/"
             },
             {
-              "label": "Michael Arbenz feat. Atom String Quartet and Florian Arbenz: Reflecting Bach",
-              "detail": "Konservi, Seon",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/seon/michael-arbenz-feat-atom-string-quartet-and-florian-arbenz-reflecting-bach_AXYa6h5"
+              "label": "Das Weihnachtsoratorium von J.S. Bach tanzen",
+              "detail": "Propstei Wislikofen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-weihnachtsoratorium-von-js-bach-tanzen/"
             },
             {
-              "label": "DUB SPENCER & TRANCE HILL - Live in Surround - Mixed by Umberto Echo",
-              "detail": "Royal, Baden",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/dub-spencer-und-trance-hill-synchronos-tour_APtw4aU"
+              "label": "Sins im Advent",
+              "detail": "Sins",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sins-im-advent/"
             },
             {
-              "label": "Lerntreff Baden",
-              "detail": "Familienzentrum Karussell Region Baden, Baden — en cours, dernier jour : 10 décembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/baden/lerntreff-baden_Aa8Vsfe"
+              "label": "Plantes médicinales et remèdes maison – du jardin + de la nature / Cours d’hiver",
+              "detail": "Gipf-Oberfrick",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/gipf-oberfrick/heilkraeuter-und-hausmittel-aus-garten-natur-winterkurs_A2iTdEf"
             },
             {
-              "label": "diagonal - Club Festival Aarau",
-              "detail": "Aarau, verschiedene Orte, Aarau — en cours, dernier jour : 28 novembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/diagonal-club-festival-aarau_At1MGcr"
+              "label": "Chlausmarkt im Klingnauer Städtli",
+              "detail": "Klingnau",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chlausmarkt-im-klingnauer-staedtli/"
+            },
+            {
+              "label": "ADVENTSMARKT IM PARK vom SCHWEIZER STROHMUSEUM",
+              "detail": "Wohlen AG",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsmarkt-im-park-vom-schweizer-strohmuseum/"
+            },
+            {
+              "label": "Öffentliche Führung",
+              "detail": "Aarau",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-11/"
+            },
+            {
+              "label": "Frauenbund Muri - Adventsfenster-Besichtigung",
+              "detail": "Muri AG",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frauenbund-muri-adventsfenster-besichtigung/"
+            },
+            {
+              "label": "Les Papillons",
+              "detail": "Schule Bettwil, Bettwil",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bettwil/les-papillons_AfXk2Dn"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-11-27T01:58:59.946Z",
-  "contentHash": "e1e71eb7425595069686914e98a157823bacd710cfff33442c3ab36db51366fe",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "5174fcb3f07767f5c549bbe42a92e18834827c4e6dff0ba7dd4cb9cc4786c3c3",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T16:33:33.919Z",
+      "updatedAt": "2026-11-27T16:21:34.268Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T15:51:00.529Z",
+      "updatedAt": "2026-11-27T15:38:08.536Z",
       "keyFacts": 0
     }
   ],
@@ -38,42 +38,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "CORPUS - Le corps liquide",
-              "detail": "Fribourg",
-              "date": "2026-11-27",
-              "url": "https://www.fr.ch/mahf/evenements/corpus-le-corps-liquide"
-            },
-            {
-              "label": "Corpus V - Le corps liquide",
-              "detail": "Fribourg",
-              "date": "2026-11-27",
-              "url": "https://www.fr.ch/mahf/evenements/corpus-v-le-corps-liquide"
-            },
-            {
-              "label": "Nova",
-              "detail": "Fribourg — in corso, ultimo giorno: 23 dicembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nova/"
-            },
-            {
-              "label": "Quo vadis Europe?",
-              "detail": "PER 21 — in corso, ultimo giorno: 9 dicembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/this-that/fribourg/quo-vadis-europe_AP78MWg"
-            },
-            {
-              "label": "Pour qui tu te prends ?",
-              "detail": "Nuithonie, Villars-sur-Glâne — in corso, ultimo giorno: 29 novembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pour-qui-tu-te-prends/"
-            },
-            {
-              "label": "Festival des droits de l’enfant : Les droits de l’enfant, c’est aussi ton histoire !",
-              "detail": "Fribourg — in corso, ultimo giorno: 27 novembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.fr.ch/dsas/sej/bpej/evenements/festival-des-droits-de-lenfant-les-droits-de-lenfant-cest-aussi-ton-histoire"
-            },
-            {
               "label": "Marché de Noël de La Pierraz",
               "detail": "Chavannes-les-Forts, Siviriez",
               "date": "2026-11-28",
@@ -96,11 +60,47 @@
               "detail": "Fribourg",
               "date": "2026-11-28",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/monstre-mic-mac/"
+            },
+            {
+              "label": "Vincent Kucholl Un spectacle de droite – Le monde selon Reto Zenhäusern",
+              "detail": "Fribourg",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/vincent-kucholl-un-spectacle-de-droite-le-monde-selon-reto-zenhaeusern/"
+            },
+            {
+              "label": "Noël au Moulin",
+              "detail": "Fribourg",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/noel-au-moulin/"
+            },
+            {
+              "label": "Stage découverte à la Police cantonale - Deviens policier·ère le temps d’une matinée ! - 28 novembre 2026",
+              "detail": "Granges-Paccot",
+              "date": "2026-11-28",
+              "url": "https://www.fr.ch/dsjs/pol/evenements/stage-decouverte-a-la-police-cantonale-deviens-policierere-le-temps-dune-matinee-28-novembre-2026"
+            },
+            {
+              "label": "La symphonie des générations",
+              "detail": "Granges-Paccot",
+              "date": "2026-11-28",
+              "url": "https://www.fr.ch/conservatoire/evenements/la-symphonie-des-generations"
+            },
+            {
+              "label": "Musique de la saga Twilight par Mystery Ensemble",
+              "detail": "Franziskanerkirche Fribourg / Ferences templom, Fribourg",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/musique-de-la-saga-twilight-par-mystery-ensemble_AqiWis3"
+            },
+            {
+              "label": "Musique de la saga Twilight",
+              "detail": "L’église du Couvent des Cordeliers",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/musique-de-la-saga-twilight_ARLF8E1"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -138,7 +138,7 @@
               "url": "https://www.fr.ch/de/bkad/news/festival-kultur-schule-fkb-17000-schuelerinnen-schueler-und-lehrpersonen-werden-an-der-9-ausgabe-teilnehmen"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -160,7 +160,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T01:58:59.946Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "FR",
@@ -180,42 +180,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "CORPUS - Le corps liquide",
-              "detail": "Fribourg",
-              "date": "2026-11-27",
-              "url": "https://www.fr.ch/mahf/evenements/corpus-le-corps-liquide"
-            },
-            {
-              "label": "Corpus V - Le corps liquide",
-              "detail": "Fribourg",
-              "date": "2026-11-27",
-              "url": "https://www.fr.ch/mahf/evenements/corpus-v-le-corps-liquide"
-            },
-            {
-              "label": "Nova",
-              "detail": "Fribourg — ongoing, last day: 23 December 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nova/"
-            },
-            {
-              "label": "Quo vadis Europe?",
-              "detail": "PER 21 — ongoing, last day: 9 December 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/this-that/fribourg/quo-vadis-europe_AP78MWg"
-            },
-            {
-              "label": "Pour qui tu te prends ?",
-              "detail": "Nuithonie, Villars-sur-Glâne — ongoing, last day: 29 November 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pour-qui-tu-te-prends/"
-            },
-            {
-              "label": "Festival des droits de l’enfant : Les droits de l’enfant, c’est aussi ton histoire !",
-              "detail": "Fribourg — ongoing, last day: 27 November 2026",
-              "date": "2026-11-27",
-              "url": "https://www.fr.ch/dsas/sej/bpej/evenements/festival-des-droits-de-lenfant-les-droits-de-lenfant-cest-aussi-ton-histoire"
-            },
             {
               "label": "Marché de Noël de La Pierraz",
               "detail": "Chavannes-les-Forts, Siviriez",
@@ -239,11 +203,47 @@
               "detail": "Fribourg",
               "date": "2026-11-28",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/monstre-mic-mac/"
+            },
+            {
+              "label": "Vincent Kucholl Un spectacle de droite – Le monde selon Reto Zenhäusern",
+              "detail": "Fribourg",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/vincent-kucholl-un-spectacle-de-droite-le-monde-selon-reto-zenhaeusern/"
+            },
+            {
+              "label": "Noël au Moulin",
+              "detail": "Fribourg",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/noel-au-moulin/"
+            },
+            {
+              "label": "Stage découverte à la Police cantonale - Deviens policier·ère le temps d’une matinée ! - 28 novembre 2026",
+              "detail": "Granges-Paccot",
+              "date": "2026-11-28",
+              "url": "https://www.fr.ch/dsjs/pol/evenements/stage-decouverte-a-la-police-cantonale-deviens-policierere-le-temps-dune-matinee-28-novembre-2026"
+            },
+            {
+              "label": "La symphonie des générations",
+              "detail": "Granges-Paccot",
+              "date": "2026-11-28",
+              "url": "https://www.fr.ch/conservatoire/evenements/la-symphonie-des-generations"
+            },
+            {
+              "label": "Music from the Twilight saga by Mystery Ensemble",
+              "detail": "Franziskanerkirche Fribourg / Ferences templom, Fribourg",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/musique-de-la-saga-twilight-par-mystery-ensemble_AqiWis3"
+            },
+            {
+              "label": "Musique de la saga Twilight",
+              "detail": "L’église du Couvent des Cordeliers",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/musique-de-la-saga-twilight_ARLF8E1"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -281,7 +281,7 @@
               "url": "https://www.fr.ch/de/bkad/news/festival-kultur-schule-fkb-17000-schuelerinnen-schueler-und-lehrpersonen-werden-an-der-9-ausgabe-teilnehmen"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -303,7 +303,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T01:58:59.946Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "FR",
@@ -323,42 +323,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "CORPUS - Le corps liquide",
-              "detail": "Fribourg",
-              "date": "2026-11-27",
-              "url": "https://www.fr.ch/mahf/evenements/corpus-le-corps-liquide"
-            },
-            {
-              "label": "Corpus V - Le corps liquide",
-              "detail": "Fribourg",
-              "date": "2026-11-27",
-              "url": "https://www.fr.ch/mahf/evenements/corpus-v-le-corps-liquide"
-            },
-            {
-              "label": "Nova",
-              "detail": "Fribourg — läuft, letzter Tag: 23. Dezember 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nova/"
-            },
-            {
-              "label": "Quo vadis Europe?",
-              "detail": "PER 21 — läuft, letzter Tag: 9. Dezember 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/this-that/fribourg/quo-vadis-europe_AP78MWg"
-            },
-            {
-              "label": "Pour qui tu te prends ?",
-              "detail": "Nuithonie, Villars-sur-Glâne — läuft, letzter Tag: 29. November 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pour-qui-tu-te-prends/"
-            },
-            {
-              "label": "Festival des droits de l’enfant : Les droits de l’enfant, c’est aussi ton histoire !",
-              "detail": "Fribourg — läuft, letzter Tag: 27. November 2026",
-              "date": "2026-11-27",
-              "url": "https://www.fr.ch/dsas/sej/bpej/evenements/festival-des-droits-de-lenfant-les-droits-de-lenfant-cest-aussi-ton-histoire"
-            },
             {
               "label": "Weihnachtsmarkt in La Pierraz",
               "detail": "Chavannes-les-Forts, Siviriez",
@@ -382,11 +346,47 @@
               "detail": "Fribourg",
               "date": "2026-11-28",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/monstre-mic-mac/"
+            },
+            {
+              "label": "Vincent Kucholl Un spectacle de droite – Le monde selon Reto Zenhäusern",
+              "detail": "Fribourg",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/vincent-kucholl-un-spectacle-de-droite-le-monde-selon-reto-zenhaeusern/"
+            },
+            {
+              "label": "Noël au Moulin",
+              "detail": "Fribourg",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/noel-au-moulin/"
+            },
+            {
+              "label": "Stage découverte à la Police cantonale - Deviens policier·ère le temps d’une matinée ! - 28 novembre 2026",
+              "detail": "Granges-Paccot",
+              "date": "2026-11-28",
+              "url": "https://www.fr.ch/dsjs/pol/evenements/stage-decouverte-a-la-police-cantonale-deviens-policierere-le-temps-dune-matinee-28-novembre-2026"
+            },
+            {
+              "label": "La symphonie des générations",
+              "detail": "Granges-Paccot",
+              "date": "2026-11-28",
+              "url": "https://www.fr.ch/conservatoire/evenements/la-symphonie-des-generations"
+            },
+            {
+              "label": "Musik aus der Twilight par Mystery Ensemble Saga",
+              "detail": "Franziskanerkirche Fribourg / Ferences templom, Fribourg",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/musique-de-la-saga-twilight-par-mystery-ensemble_AqiWis3"
+            },
+            {
+              "label": "Musique de la saga Twilight",
+              "detail": "L’église du Couvent des Cordeliers",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/musique-de-la-saga-twilight_ARLF8E1"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -424,7 +424,7 @@
               "url": "https://www.fr.ch/de/bkad/news/festival-kultur-schule-fkb-17000-schuelerinnen-schueler-und-lehrpersonen-werden-an-der-9-ausgabe-teilnehmen"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -446,7 +446,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-27T01:58:59.946Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "FR",
@@ -466,42 +466,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "CORPUS - Le corps liquide",
-              "detail": "Fribourg",
-              "date": "2026-11-27",
-              "url": "https://www.fr.ch/mahf/evenements/corpus-le-corps-liquide"
-            },
-            {
-              "label": "Corpus V - Le corps liquide",
-              "detail": "Fribourg",
-              "date": "2026-11-27",
-              "url": "https://www.fr.ch/mahf/evenements/corpus-v-le-corps-liquide"
-            },
-            {
-              "label": "Nouvelle",
-              "detail": "Fribourg — en cours, dernier jour : 23 décembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nova/"
-            },
-            {
-              "label": "Quo vadis Europe?",
-              "detail": "PER 21 — en cours, dernier jour : 9 décembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/this-that/fribourg/quo-vadis-europe_AP78MWg"
-            },
-            {
-              "label": "Pour qui tu te prends ?",
-              "detail": "Nuithonie, Villars-sur-Glâne — en cours, dernier jour : 29 novembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pour-qui-tu-te-prends/"
-            },
-            {
-              "label": "Festival des droits de l’enfant : Les droits de l’enfant, c’est aussi ton histoire !",
-              "detail": "Fribourg — en cours, dernier jour : 27 novembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.fr.ch/dsas/sej/bpej/evenements/festival-des-droits-de-lenfant-les-droits-de-lenfant-cest-aussi-ton-histoire"
-            },
             {
               "label": "Marché de Noël de La Pierraz",
               "detail": "Chavannes-les-Forts, Siviriez",
@@ -525,11 +489,47 @@
               "detail": "Fribourg",
               "date": "2026-11-28",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/monstre-mic-mac/"
+            },
+            {
+              "label": "Vincent Kucholl Un spectacle de droite – Le monde selon Reto Zenhäusern",
+              "detail": "Fribourg",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/vincent-kucholl-un-spectacle-de-droite-le-monde-selon-reto-zenhaeusern/"
+            },
+            {
+              "label": "Noël au Moulin",
+              "detail": "Fribourg",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/noel-au-moulin/"
+            },
+            {
+              "label": "Stage découverte à la Police cantonale - Deviens policier·ère le temps d’une matinée ! - 28 novembre 2026",
+              "detail": "Granges-Paccot",
+              "date": "2026-11-28",
+              "url": "https://www.fr.ch/dsjs/pol/evenements/stage-decouverte-a-la-police-cantonale-deviens-policierere-le-temps-dune-matinee-28-novembre-2026"
+            },
+            {
+              "label": "La symphonie des générations",
+              "detail": "Granges-Paccot",
+              "date": "2026-11-28",
+              "url": "https://www.fr.ch/conservatoire/evenements/la-symphonie-des-generations"
+            },
+            {
+              "label": "Musique de la saga T saga",
+              "detail": "Franziskanerkirche Fribourg / Ferences templom, Fribourg",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/musique-de-la-saga-twilight-par-mystery-ensemble_AqiWis3"
+            },
+            {
+              "label": "Musique de la saga Twilight",
+              "detail": "L’église du Couvent des Cordeliers",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/musique-de-la-saga-twilight_ARLF8E1"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -567,7 +567,7 @@
               "url": "https://www.fr.ch/de/bkad/news/festival-kultur-schule-fkb-17000-schuelerinnen-schueler-und-lehrpersonen-werden-an-der-9-ausgabe-teilnehmen"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -589,7 +589,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-27T01:58:59.946Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

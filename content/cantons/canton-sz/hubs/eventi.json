@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "eventi",
-  "updatedAt": "2026-11-27T04:41:16.871Z",
-  "contentHash": "d17f8a20523657b9701afe8e4ba1b39127890937d7308c4dbfbbd425aca752ec",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "6e44c2580a1ea6fc768826e4899dae48523841cb705089e60bd99892676797b4",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T16:33:33.919Z",
+      "updatedAt": "2026-11-27T16:21:34.268Z",
       "keyFacts": 1
     }
   ],
@@ -33,18 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Christmas market by the lake - fountain",
-              "detail": "Erlebnisregion Mythen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsmarkt-am-see-brunnen/"
-            },
-            {
-              "label": "2 Tages Weiterbildung mit Zertifikat - Wickel und Auflagen EMR / ASCA",
-              "detail": "Sattel-Hochstuckli, Sattel — in corso, ultimo giorno: 9 dicembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/2-tages-weiterbildung-mit-zertifikat-wickel-und-auflagen-emr-asca-3/"
-            },
-            {
               "label": "12. Rockabilly/Rock'n'Roll Festival 2026",
               "detail": "District 28, Wangen (SZ)",
               "date": "2026-11-28",
@@ -55,6 +43,12 @@
               "detail": "Einsiedeln",
               "date": "2026-11-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/jahreskonzert-blasorchester-fm-bennau/"
+            },
+            {
+              "label": "2 Tages Weiterbildung mit Zertifikat - Wickel und Auflagen EMR / ASCA",
+              "detail": "Sattel-Hochstuckli, Sattel — in corso, ultimo giorno: 9 dicembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/2-tages-weiterbildung-mit-zertifikat-wickel-und-auflagen-emr-asca-3/"
             },
             {
               "label": "Singing Advent - Advents- und Weihnachtslieder aus aller Welt",
@@ -91,11 +85,17 @@
               "detail": "6418 Rothenthurm, Rothenthurm",
               "date": "2026-12-05",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/christchindlimaercht-rothenthurm/"
+            },
+            {
+              "label": "Winterkonzert 2026 | Motto: Paris de nuit",
+              "detail": "Mehrzweckhalle Altendorf, Altendorf",
+              "date": "2026-12-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/winterkonzert-2026-motto-paris-de-nuit/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/svitto/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/svitto/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "SZ",
@@ -138,18 +138,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Christmas market by the lake - fountain",
-              "detail": "Erlebnisregion Mythen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsmarkt-am-see-brunnen/"
-            },
-            {
-              "label": "2 Tages Weiterbildung mit Zertifikat - Wickel und Auflagen EMR / ASCA",
-              "detail": "Sattel-Hochstuckli, Sattel — ongoing, last day: 9 December 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/2-tages-weiterbildung-mit-zertifikat-wickel-und-auflagen-emr-asca-3/"
-            },
-            {
               "label": "12. Rockabilly/Rock'n'Roll Festival 2026",
               "detail": "District 28, Wangen (SZ)",
               "date": "2026-11-28",
@@ -160,6 +148,12 @@
               "detail": "Einsiedeln",
               "date": "2026-11-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/jahreskonzert-blasorchester-fm-bennau/"
+            },
+            {
+              "label": "2 Tages Weiterbildung mit Zertifikat - Wickel und Auflagen EMR / ASCA",
+              "detail": "Sattel-Hochstuckli, Sattel — ongoing, last day: 9 December 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/2-tages-weiterbildung-mit-zertifikat-wickel-und-auflagen-emr-asca-3/"
             },
             {
               "label": "Singing Advent - Advents- und Weihnachtslieder aus aller Welt",
@@ -196,11 +190,17 @@
               "detail": "6418 Rothenthurm, Rothenthurm",
               "date": "2026-12-05",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/christchindlimaercht-rothenthurm/"
+            },
+            {
+              "label": "Winterkonzert 2026 | Motto: Paris de nuit",
+              "detail": "Mehrzweckhalle Altendorf, Altendorf",
+              "date": "2026-12-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/winterkonzert-2026-motto-paris-de-nuit/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schwyz/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/schwyz/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "SZ",
@@ -243,18 +243,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Weihnachtsmarkt am See - Brunnen",
-              "detail": "Erlebnisregion Mythen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsmarkt-am-see-brunnen/"
-            },
-            {
-              "label": "2 Tages Weiterbildung mit Zertifikat - Wickel und Auflagen EMR / ASCA",
-              "detail": "Sattel-Hochstuckli, Sattel — läuft, letzter Tag: 9. Dezember 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/2-tages-weiterbildung-mit-zertifikat-wickel-und-auflagen-emr-asca-3/"
-            },
-            {
               "label": "12. Rockabilly/Rock'n'Roll Festival 2026",
               "detail": "District 28, Wangen (SZ)",
               "date": "2026-11-28",
@@ -265,6 +253,12 @@
               "detail": "Einsiedeln",
               "date": "2026-11-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/jahreskonzert-blasorchester-fm-bennau/"
+            },
+            {
+              "label": "2 Tages Weiterbildung mit Zertifikat - Wickel und Auflagen EMR / ASCA",
+              "detail": "Sattel-Hochstuckli, Sattel — läuft, letzter Tag: 9. Dezember 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/2-tages-weiterbildung-mit-zertifikat-wickel-und-auflagen-emr-asca-3/"
             },
             {
               "label": "Singing Advent - Advents- und Weihnachtslieder aus aller Welt",
@@ -301,11 +295,17 @@
               "detail": "6418 Rothenthurm, Rothenthurm",
               "date": "2026-12-05",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/christchindlimaercht-rothenthurm/"
+            },
+            {
+              "label": "Winterkonzert 2026 | Motto: Paris de nuit",
+              "detail": "Mehrzweckhalle Altendorf, Altendorf",
+              "date": "2026-12-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/winterkonzert-2026-motto-paris-de-nuit/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schwyz/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/schwyz/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "SZ",
@@ -348,18 +348,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Marché de Noël au bord du lac - Fontaine",
-              "detail": "Erlebnisregion Mythen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/weihnachtsmarkt-am-see-brunnen/"
-            },
-            {
-              "label": "2 Tages Weiterbildung mit Zertifikat - Wickel und Auflagen EMR / ASCA",
-              "detail": "Sattel-Hochstuckli, Sattel — en cours, dernier jour : 9 décembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/2-tages-weiterbildung-mit-zertifikat-wickel-und-auflagen-emr-asca-3/"
-            },
-            {
               "label": "12. Rockabilly/Rock'n'Roll Festival 2026",
               "detail": "District 28, Wangen (SZ)",
               "date": "2026-11-28",
@@ -370,6 +358,12 @@
               "detail": "Einsiedeln",
               "date": "2026-11-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/jahreskonzert-blasorchester-fm-bennau/"
+            },
+            {
+              "label": "2 Tages Weiterbildung mit Zertifikat - Wickel und Auflagen EMR / ASCA",
+              "detail": "Sattel-Hochstuckli, Sattel — en cours, dernier jour : 9 décembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/2-tages-weiterbildung-mit-zertifikat-wickel-und-auflagen-emr-asca-3/"
             },
             {
               "label": "Singing Advent - Advents- und Weihnachtslieder aus aller Welt",
@@ -406,11 +400,17 @@
               "detail": "6418 Rothenthurm, Rothenthurm",
               "date": "2026-12-05",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/christchindlimaercht-rothenthurm/"
+            },
+            {
+              "label": "Winterkonzert 2026 | Motto: Paris de nuit",
+              "detail": "Mehrzweckhalle Altendorf, Altendorf",
+              "date": "2026-12-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/winterkonzert-2026-motto-paris-de-nuit/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schwytz/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/schwytz/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

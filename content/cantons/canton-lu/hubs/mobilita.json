@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T20:47:55.924Z",
-  "contentHash": "944e79a9e6acaba472eca68706caff926333472a0882714fd7d33949f9c2698d",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "96c06ac8974c2d99f06bdd320c1e950945e78ead7e13e578de4bc8cab8772395",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-27T01:13:06.824Z",
+      "updatedAt": "2026-11-27T15:38:08.536Z",
       "keyFacts": 0
     }
   ],
@@ -115,7 +115,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -132,16 +132,16 @@
           "date": "2026-11-07T09:26:29.750Z"
         },
         {
-          "title": "Esperimento viario nel centro di Lucerna dal dicembre 2026",
-          "url": "/articoli-lucerna/esperimento-viario-lucerna-centro/",
-          "excerpt": "La prima tappa dell'esperimento viario nel centro di Lucerna parte a metà dicembre 2026, con l'annuncio del 27 novembre 2026.",
-          "date": "2026-11-27T20:44:43.180Z"
-        },
-        {
           "title": "Tunnel Sonnenberg chiuso per ispezione strutturale",
           "url": "/articoli-lucerna/tunnel-sonnenberg-chiusura-notte/",
           "excerpt": "Chiusura completa del tunnel Sonnenberg in entrambe le direzioni dalla notte tra il 4 e il 5 novembre 2026, dalle 22.00 alle 05.00.",
           "date": "2026-10-31T11:51:39.474Z"
+        },
+        {
+          "title": "Esperimento viario nel centro di Lucerna dal dicembre 2026",
+          "url": "/articoli-lucerna/esperimento-viario-lucerna-centro/",
+          "excerpt": "La prima tappa dell'esperimento viario nel centro di Lucerna parte a metà dicembre 2026, con l'annuncio del 27 novembre 2026.",
+          "date": "2026-11-27T20:44:43.180Z"
         },
         {
           "title": "Lucerna: il 13 dicembre 2026 cambia la rete bus",
@@ -179,7 +179,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-27T20:47:55.924Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "LU",
@@ -277,7 +277,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -294,16 +294,16 @@
           "date": "2026-11-07T09:26:29.750Z"
         },
         {
-          "title": "Road experiment in central Lucerne from December 2026",
-          "url": "/en/lucerne-articles/lucerne-city-traffic-experiment/",
-          "excerpt": "The first stage of the road experiment in central Lucerne begins in mid-December 2026, with the announcement on November 27, 2026.",
-          "date": "2026-11-27T20:44:43.180Z"
-        },
-        {
           "title": "Sonnenberg Tunnel closed for structural inspection",
           "url": "/en/lucerne-articles/sonnenberg-tunnel-night-closure/",
           "excerpt": "Complete closure of the Sonnenberg tunnel in both directions during the night of November 4–5, 2026, from 22.00 to 05.00.",
           "date": "2026-10-31T11:51:39.474Z"
+        },
+        {
+          "title": "Road experiment in central Lucerne from December 2026",
+          "url": "/en/lucerne-articles/lucerne-city-traffic-experiment/",
+          "excerpt": "The first stage of the road experiment in central Lucerne begins in mid-December 2026, with the announcement on November 27, 2026.",
+          "date": "2026-11-27T20:44:43.180Z"
         },
         {
           "title": "Lucerne: the bus network changes on December 13, 2026",
@@ -339,7 +339,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-27T20:47:55.924Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "LU",
@@ -437,7 +437,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -454,16 +454,16 @@
           "date": "2026-11-07T09:26:29.750Z"
         },
         {
-          "title": "Verkehrsexperiment im Zentrum von Luzern ab Dezember 2026",
-          "url": "/de/luzern-artikel/verkehrsexperiment-luzern-zentrum/",
-          "excerpt": "Die erste Etappe des Verkehrsexperiments im Zentrum von Luzern beginnt Mitte Dezember 2026, mit der Ankündigung vom 27. November 2026.",
-          "date": "2026-11-27T20:44:43.180Z"
-        },
-        {
           "title": "Tunnel Sonnenberg wegen struktureller Inspektion gesperrt",
           "url": "/de/luzern-artikel/sonnenberg-tunnel-nachtschliessung/",
           "excerpt": "Laut der Quelle wird der Sonnenberg-Tunnel in Luzern in der Nacht von Mittwoch, dem 4. November, auf Donnerstag, den 5. November 2026, in beiden Richtungen vollständig gesperrt.",
           "date": "2026-10-31T11:51:39.474Z"
+        },
+        {
+          "title": "Verkehrsexperiment im Zentrum von Luzern ab Dezember 2026",
+          "url": "/de/luzern-artikel/verkehrsexperiment-luzern-zentrum/",
+          "excerpt": "Die erste Etappe des Verkehrsexperiments im Zentrum von Luzern beginnt Mitte Dezember 2026, mit der Ankündigung vom 27. November 2026.",
+          "date": "2026-11-27T20:44:43.180Z"
         },
         {
           "title": "Luzern: Am 13. Dezember 2026 ändert sich das Busnetz",
@@ -499,7 +499,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-27T20:47:55.924Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "LU",
@@ -597,7 +597,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -614,16 +614,16 @@
           "date": "2026-11-07T09:26:29.750Z"
         },
         {
-          "title": "Expérience de circulation dans le centre de Lucerne à partir de décembre 2026",
-          "url": "/fr/articles-lucerne/experimentation-routiere-lucerne-centre/",
-          "excerpt": "La première étape de l’expérience de circulation dans le centre de Lucerne commence à la mi-décembre 2026, avec l’annonce du 27 novembre 2026.",
-          "date": "2026-11-27T20:44:43.180Z"
-        },
-        {
           "title": "Tunnel du Sonnenberg fermé pour inspection structurelle",
           "url": "/fr/articles-lucerne/tunnel-sonnenberg-fermeture-nuit/",
           "excerpt": "Fermeture complète du tunnel du Sonnenberg dans les deux directions dans la nuit du 4 au 5 novembre 2026, de 22.00 à 05.00.",
           "date": "2026-10-31T11:51:39.474Z"
+        },
+        {
+          "title": "Expérience de circulation dans le centre de Lucerne à partir de décembre 2026",
+          "url": "/fr/articles-lucerne/experimentation-routiere-lucerne-centre/",
+          "excerpt": "La première étape de l’expérience de circulation dans le centre de Lucerne commence à la mi-décembre 2026, avec l’annonce du 27 novembre 2026.",
+          "date": "2026-11-27T20:44:43.180Z"
         },
         {
           "title": "Lucerne : le 13 décembre 2026, le réseau de bus change",
@@ -661,7 +661,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-27T20:47:55.924Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

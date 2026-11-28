@@ -4,12 +4,12 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-11-27T04:41:16.871Z",
-  "contentHash": "e8cfbadeeed78c20c7733434b0e0b39f4f1dffd8e07428abf862d5799826ab65",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "2a51ef5d5545a5fa4630856b7197039f8568aaef8a3719394812048188e76a2f",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T16:33:33.919Z",
+      "updatedAt": "2026-11-27T16:21:34.268Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "66",
+          "value": "68",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Tarabust ! #1",
-              "detail": "Le Spot → Cave à Jazz, Sion",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tarabust-1/"
+              "label": "Butter, Jam, and Literature - Olivier May",
+              "detail": "Sion / Sitten, Sion",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/beurre-confiture-et-litterature-1/"
             },
             {
-              "label": "Craft market",
-              "detail": "Brig, Brig-Glis",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/craft-market/"
+              "label": "Winter magic Simplon village",
+              "detail": "Simplon Dorf, Simplon",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/winter-magic-simplon-village/"
             },
             {
-              "label": "Konzert mit Ephraim Salzmann",
-              "detail": "Hotel Glocke",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/konzert-mit-ephraim-salzmann/"
+              "label": "Atelier l'Azuré : Atelier de peinture intuitive surprise [EN]",
+              "detail": "Martigny",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-lazure-atelier-de-peinture-intuitive-surprise-en/"
             },
             {
-              "label": "Konzert mit Ephraim Salzmann inkl. 4-Gang-Abendmenü",
-              "detail": "Hotel Glocke",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/music/reckingen-vs/concert-with-ephraim-salzmann-including-a-4-course-dinner_AYR2Gij"
+              "label": "Passions baroques II",
+              "detail": "NODA BCVS - Salle de concerts et congrès, Sion",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/events/this-that/sion/baroque-passions-ii_AcUdnWq"
             },
             {
-              "label": "Bénabar",
-              "detail": "Théâtre du Martolet",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/music/st-maurice/benabar_AAfbqjp"
+              "label": "Nija F. + Grim De Mortem",
+              "detail": "PlattuLadu2",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/brig/nija-f-grim-de-mortem_AZr7ieb"
             },
             {
-              "label": "Bénabar",
-              "detail": "Saint-Maurice",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/benabar/"
+              "label": "Nija F. + Grim De Mortem",
+              "detail": "PlattuLadu2, Brig-Glis",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/nija-f-grim-de-mortem/"
             },
             {
-              "label": "Emelyne + Kaja Holzer",
-              "detail": "Visp",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/emelyne-kaja-holzer/"
+              "label": "Musique de la saga Twilight",
+              "detail": "Pôle Musique Sion, Sion",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/events/music/sion/music-from-the-twilight-saga_A49RuGu"
             },
             {
-              "label": "E-L-R – Abraham",
-              "detail": "Le Manoir de la Ville de Martigny, Martigny",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/martigny/e-l-r-abraham_AJj2tVh"
+              "label": "Kirchenauszug St. Niklaus",
+              "detail": "Kirche St. Oswald, St. Niklaus",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/kirchenauszug-st-niklaus/"
             },
             {
-              "label": "Alice im Wunderland",
-              "detail": "Visp — in corso, ultimo giorno: 2 dicembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alice-im-wunderland/"
+              "label": "Circa - Wolf",
+              "detail": "Monthey",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circa-wolf/"
             },
             {
-              "label": "\"ABSTRACTS\" EXHIBITION",
-              "detail": "Sierre — in corso, ultimo giorno: 22 dicembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/exposition-abtraits/"
+              "label": "X-mas SONGS",
+              "detail": "MEbU - Münster Earport, Goms",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/x-mas-songs/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vallese/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "VS",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "66",
+          "value": "68",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Tarabust ! #1",
-              "detail": "Le Spot → Cave à Jazz, Sion",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tarabust-1/"
+              "label": "Butter, Jam, and Literature - Olivier May",
+              "detail": "Sion / Sitten, Sion",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/beurre-confiture-et-litterature-1/"
             },
             {
-              "label": "Craft market",
-              "detail": "Brig, Brig-Glis",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/craft-market/"
+              "label": "Winter magic Simplon village",
+              "detail": "Simplon Dorf, Simplon",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/winter-magic-simplon-village/"
             },
             {
-              "label": "Konzert mit Ephraim Salzmann",
-              "detail": "Hotel Glocke",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/konzert-mit-ephraim-salzmann/"
+              "label": "Atelier l'Azuré : Atelier de peinture intuitive surprise [EN]",
+              "detail": "Martigny",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-lazure-atelier-de-peinture-intuitive-surprise-en/"
             },
             {
-              "label": "Concert with Ephraim Salzmann, including a 4-course dinner",
-              "detail": "Hotel Glocke",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/music/reckingen-vs/concert-with-ephraim-salzmann-including-a-4-course-dinner_AYR2Gij"
+              "label": "Baroque passions II",
+              "detail": "NODA BCVS - Salle de concerts et congrès, Sion",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/events/this-that/sion/baroque-passions-ii_AcUdnWq"
             },
             {
-              "label": "Bénabar",
-              "detail": "Théâtre du Martolet",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/music/st-maurice/benabar_AAfbqjp"
+              "label": "Nija F. + Grim De Mortem",
+              "detail": "PlattuLadu2",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/brig/nija-f-grim-de-mortem_AZr7ieb"
             },
             {
-              "label": "Bénabar",
-              "detail": "Saint-Maurice",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/benabar/"
+              "label": "Nija F. + Grim De Mortem",
+              "detail": "PlattuLadu2, Brig-Glis",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/nija-f-grim-de-mortem/"
             },
             {
-              "label": "Emelyne + Kaja Holzer",
-              "detail": "Visp",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/emelyne-kaja-holzer/"
+              "label": "Music from the Twilight Saga",
+              "detail": "Pôle Musique Sion, Sion",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/events/music/sion/music-from-the-twilight-saga_A49RuGu"
             },
             {
-              "label": "E-L-R - Abraham",
-              "detail": "Le Manoir de la Ville de Martigny, Martigny",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/martigny/e-l-r-abraham_AJj2tVh"
+              "label": "Kirchenauszug St. Niklaus",
+              "detail": "Kirche St. Oswald, St. Niklaus",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/kirchenauszug-st-niklaus/"
             },
             {
-              "label": "Alice im Wunderland",
-              "detail": "Visp — ongoing, last day: 2 December 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alice-im-wunderland/"
+              "label": "Circa - Wolf",
+              "detail": "Monthey",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circa-wolf/"
             },
             {
-              "label": "\"ABSTRACTS\" EXHIBITION",
-              "detail": "Sierre — ongoing, last day: 22 December 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/exposition-abtraits/"
+              "label": "X-mas SONGS",
+              "detail": "MEbU - Münster Earport, Goms",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/x-mas-songs/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/valais/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "VS",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "66",
+          "value": "68",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Tarabust ! #1",
-              "detail": "Le Spot → Cave à Jazz, Sion",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tarabust-1/"
+              "label": "Butter, Marmelade und Literatur – Olivier May",
+              "detail": "Sion / Sitten, Sion",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/beurre-confiture-et-litterature-1/"
             },
             {
-              "label": "Handwerkmarkt",
-              "detail": "Brig, Brig-Glis",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/craft-market/"
+              "label": "Winterzauber Simplon Dorf",
+              "detail": "Simplon Dorf, Simplon",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/winter-magic-simplon-village/"
             },
             {
-              "label": "Konzert mit Ephraim Salzmann",
-              "detail": "Hotel Glocke",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/konzert-mit-ephraim-salzmann/"
+              "label": "Atelier l'Azuré : Atelier de peinture intuitive surprise [DE]",
+              "detail": "Martigny",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-lazure-atelier-de-peinture-intuitive-surprise-en/"
             },
             {
-              "label": "Konzert mit Ephraim Salzmann inkl. 4-Gang-Abendmenü",
-              "detail": "Hotel Glocke",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/music/reckingen-vs/concert-with-ephraim-salzmann-including-a-4-course-dinner_AYR2Gij"
+              "label": "Passions baroques II",
+              "detail": "NODA BCVS - Salle de concerts et congrès, Sion",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/events/this-that/sion/baroque-passions-ii_AcUdnWq"
             },
             {
-              "label": "Bénabar",
-              "detail": "Théâtre du Martolet",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/music/st-maurice/benabar_AAfbqjp"
+              "label": "Nija F. + Grim De Mortem",
+              "detail": "PlattuLadu2",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/brig/nija-f-grim-de-mortem_AZr7ieb"
             },
             {
-              "label": "Bénabar",
-              "detail": "Saint-Maurice",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/benabar/"
+              "label": "Nija F. + Grim De Mortem",
+              "detail": "PlattuLadu2, Brig-Glis",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/nija-f-grim-de-mortem/"
             },
             {
-              "label": "Emelyne + Kaja Holzer",
-              "detail": "Visp",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/emelyne-kaja-holzer/"
+              "label": "Musique de la saga Twilight",
+              "detail": "Pôle Musique Sion, Sion",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/events/music/sion/music-from-the-twilight-saga_A49RuGu"
             },
             {
-              "label": "E-L-R – Abraham",
-              "detail": "Le Manoir de la Ville de Martigny, Martigny",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/martigny/e-l-r-abraham_AJj2tVh"
+              "label": "Kirchenauszug St. Niklaus",
+              "detail": "Kirche St. Oswald, St. Niklaus",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/kirchenauszug-st-niklaus/"
             },
             {
-              "label": "Alice im Wunderland",
-              "detail": "Visp — läuft, letzter Tag: 2. Dezember 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alice-im-wunderland/"
+              "label": "Circa - Wolf",
+              "detail": "Monthey",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circa-wolf/"
             },
             {
-              "label": "AUSSTELLUNG „ABTRAITS“",
-              "detail": "Sierre — läuft, letzter Tag: 22. Dezember 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/exposition-abtraits/"
+              "label": "X-mas SONGS",
+              "detail": "MEbU - Münster Earport, Goms",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/x-mas-songs/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/wallis/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "VS",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "66",
+          "value": "68",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Tarabust ! #1",
-              "detail": "Le Spot → Cave à Jazz, Sion",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tarabust-1/"
+              "label": "Beurre, confiture et littérature",
+              "detail": "Sion / Sitten, Sion",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/beurre-confiture-et-litterature-1/"
             },
             {
-              "label": "Marché artisanal",
-              "detail": "Brig, Brig-Glis",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/craft-market/"
+              "label": "Magie hivernale du village de Simplon",
+              "detail": "Simplon Dorf, Simplon",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/winter-magic-simplon-village/"
             },
             {
-              "label": "Konzert mit Ephraim Salzmann",
-              "detail": "Hotel Glocke",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/konzert-mit-ephraim-salzmann/"
+              "label": "Atelier l'Azuré : Atelier de peinture intuitive surprise",
+              "detail": "Martigny",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-lazure-atelier-de-peinture-intuitive-surprise-en/"
             },
             {
-              "label": "Konzert mit Ephraim Salzmann inkl. 4-Gang-Abendmenü",
-              "detail": "Hotel Glocke",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/music/reckingen-vs/concert-with-ephraim-salzmann-including-a-4-course-dinner_AYR2Gij"
+              "label": "Passions baroques II",
+              "detail": "NODA BCVS - Salle de concerts et congrès, Sion",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/events/this-that/sion/baroque-passions-ii_AcUdnWq"
             },
             {
-              "label": "Bénabar",
-              "detail": "Théâtre du Martolet",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/music/st-maurice/benabar_AAfbqjp"
+              "label": "Nija F. + Grim De Mortem",
+              "detail": "PlattuLadu2",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/brig/nija-f-grim-de-mortem_AZr7ieb"
             },
             {
-              "label": "Bénabar",
-              "detail": "Saint-Maurice",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/benabar/"
+              "label": "Nija F. + Grim De Mortem",
+              "detail": "PlattuLadu2, Brig-Glis",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/nija-f-grim-de-mortem/"
             },
             {
-              "label": "Emelyne + Kaja Holzer",
-              "detail": "Visp",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/emelyne-kaja-holzer/"
+              "label": "Musique de la saga Twilight",
+              "detail": "Pôle Musique Sion, Sion",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/events/music/sion/music-from-the-twilight-saga_A49RuGu"
             },
             {
-              "label": "E-L-R - Abraham",
-              "detail": "Le Manoir de la Ville de Martigny, Martigny",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/martigny/e-l-r-abraham_AJj2tVh"
+              "label": "Kirchenauszug St. Niklaus",
+              "detail": "Kirche St. Oswald, St. Niklaus",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/kirchenauszug-st-niklaus/"
             },
             {
-              "label": "Alice im Wunderland",
-              "detail": "Visp — en cours, dernier jour : 2 décembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alice-im-wunderland/"
+              "label": "Circa - Wolf",
+              "detail": "Monthey",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circa-wolf/"
             },
             {
-              "label": "EXPOSITION \" ABTRAITS \"",
-              "detail": "Sierre — en cours, dernier jour : 22 décembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/exposition-abtraits/"
+              "label": "X-mas SONGS",
+              "detail": "MEbU - Münster Earport, Goms",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/x-mas-songs/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/valais/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }
