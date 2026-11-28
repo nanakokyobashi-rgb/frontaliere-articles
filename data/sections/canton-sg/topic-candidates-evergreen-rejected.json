@@ -11,6 +11,10 @@
     "canton-sg::https://www.sg.ch/news/sgch_kantonspolizei/2026/11/altstaetten--unfall-auf-fussgaengerstreifen.html": {
       "section": "canton-sg",
       "ts": 1795837325239
+    },
+    "canton-sg::https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st-gallen--fahrunfaehige-verkehrsteilnehmende.html": {
+      "section": "canton-sg",
+      "ts": 1795881037449
     }
   }
 }
