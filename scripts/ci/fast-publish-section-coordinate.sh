@@ -25,6 +25,26 @@ section_list() {
   jq -c '[.[].section] | unique | sort' <<<"$1"
 }
 
+# Il download degli stage artifact ha esaurito i tentativi. Se il run ha artifact
+# di stage il fallimento e' reale e va dichiarato: trattarlo come «nessuna gamba
+# ha prodotto uno stage» scarterebbe tutte le sezioni in silenzio. Se invece non
+# ce n'e' nessuno (tutte le gambe fallite/sostituite) si procede senza.
+if [ "${STAGE_DOWNLOAD_FAILED:-false}" = 'true' ]; then
+  : "${REPO:?REPO is required to verify a failed stage download}"
+  : "${RUN_ID:?RUN_ID is required to verify a failed stage download}"
+  if ! listed="$(gh api -X GET "repos/$REPO/actions/runs/$RUN_ID/artifacts" -f per_page=100 \
+      --jq '[.artifacts[] | select(.name | startswith("fast-publish-stage-"))] | length' 2>/dev/null)" \
+    || ! [[ "$listed" =~ ^[0-9]+$ ]]; then
+    echo '::error::download degli stage artifact fallito 3 volte e l elenco degli artifact del run non e leggibile: nessuna sezione scartata, release non decisa' >&2
+    exit 1
+  fi
+  if [ "$listed" != '0' ]; then
+    echo "::error::download degli stage artifact fallito 3 volte ma il run ne ha $listed: nessuna sezione scartata, release non decisa (il reconciler riprende da qui)" >&2
+    exit 1
+  fi
+  echo '::notice::nessun artifact di stage nel run: nessuna gamba ha prodotto uno stage'
+fi
+
 requested_stage_sections="$(section_list "$STAGE_MATRIX")"
 # Nessuna barriera tutto-o-niente: una gamba di stage fallita, cancellata o
 # sostituita dal pending piu' recente non ha artifact. Il coordinator procede
@@ -44,6 +64,18 @@ if [ "$requested_stage_sections" != '[]' ]; then
   done < <(jq -r '.[]' <<<"$requested_stage_sections")
 fi
 dropped_sections="$(jq -cn --argjson requested "$requested_stage_sections" --argjson staged "$stage_sections" '$requested - $staged')"
+# Fra le scartate, quelle con un marcatore di gamba FALLITA non hanno nessun
+# proprietario (le sostituite/cancellate restano alla run che le possiede): escono
+# dalla release API e ricevono un replay full-section dal workflow.
+failed_sections='[]'
+while IFS= read -r section; do
+  [ -n "$section" ] || continue
+  marker="$ARTIFACTS_DIR/fast-publish-stage-failed-$section.json"
+  if [ -s "$marker" ] && jq -e --arg section "$section" '.failed == true and .section == $section' "$marker" >/dev/null 2>&1; then
+    failed_sections="$(jq -c --arg section "$section" '. + [$section] | unique | sort' <<<"$failed_sections")"
+    echo "::warning::gamba di stage FALLITA per $section: esce dalla release API e riceve un replay full-section"
+  fi
+done < <(jq -r '.[]' <<<"$dropped_sections")
 # La matrix finale perde le sezioni di stage senza artifact.
 final_matrix="$(jq -c --argjson dropped "$dropped_sections" 'map(select(.section as $s | $dropped | index($s) | not))' <<<"$FINAL_MATRIX")"
 final_sections="$(section_list "$final_matrix")"
@@ -82,7 +114,7 @@ if [ -n "$api_baseline" ] && [ "$latest" != "$api_baseline" ]; then
     new_api_targets="$(node scripts/ci/fast-publish-section.mjs r2-api-stage-plan-range "$PUSH_AFTER" "$latest")"
   fi
 fi
-new_api_sections="$(section_list "$new_api_targets")"
+new_api_sections="$(jq -c --argjson failed "$failed_sections" '[.[].section] | unique | sort | . - $failed' <<<"$new_api_targets")"
 unaffected_sections='[]'
 while IFS= read -r section; do
   source="$(jq -r --arg section "$section" '.[$section] // empty' <<<"$staged_sources")"
@@ -108,7 +140,7 @@ if [ "$verified_latest" != "$latest" ]; then
       new_api_targets="$(node scripts/ci/fast-publish-section.mjs r2-api-stage-plan-range "$PUSH_AFTER" "$latest")"
     fi
   fi
-  new_api_sections="$(section_list "$new_api_targets")"
+  new_api_sections="$(jq -c --argjson failed "$failed_sections" '[.[].section] | unique | sort | . - $failed' <<<"$new_api_targets")"
   unaffected_sections='[]'
   while IFS= read -r section; do
     source="$(jq -r --arg section "$section" '.[$section] // empty' <<<"$staged_sources")"
@@ -132,7 +164,17 @@ decision_json="$(jq -cn \
   --argjson newApiDataChanged "$new_api_changed" \
   --argjson unaffectedSections "$unaffected_sections" \
   '{stageTargets:$stageTargets,newApiTargets:$newApiTargets,stagedSources:$stagedSources,latestCommit:$latestCommit,newApiDataChanged:$newApiDataChanged,unaffectedSections:$unaffectedSections}')"
-decision="$(node scripts/ci/fast-publish-section.mjs r2-api-stage-barrier <<<"$decision_json")"
+# Tutte le gambe richieste sono fallite e nessun'altra sezione partecipa: non c'e'
+# niente da rilasciare ne' da attendere; il replay full-section rifa' il lavoro.
+nothing_to_release=false
+if [ "$stage_sections" = '[]' ] && [ "$failed_sections" != '[]' ] \
+  && [ "$new_api_sections" = '[]' ] && [ "$final_sections" = '[]' ]; then
+  nothing_to_release=true
+  echo '::warning::nessuna sezione con stage valido: nessun rilascio API da questa run'
+  decision='{"canDispatchApi":false,"waitForLatestApi":false,"staleStageSections":[],"notStagedAtLatest":[]}'
+else
+  decision="$(node scripts/ci/fast-publish-section.mjs r2-api-stage-barrier <<<"$decision_json")"
+fi
 can_dispatch="$(jq -r '.canDispatchApi' <<<"$decision")"
 wait_latest="$(jq -r '.waitForLatestApi' <<<"$decision")"
 api_commit=''
@@ -159,7 +201,9 @@ defer_to_finalize_if_target_is_unstaged() {
   fi
 }
 
-if [ "$API_ACTION" = 'dispatch' ]; then
+if [ "$nothing_to_release" = 'true' ]; then
+  :
+elif [ "$API_ACTION" = 'dispatch' ]; then
   if [ "$can_dispatch" = 'true' ]; then
     action=dispatch
     wait_api=true
@@ -202,6 +246,7 @@ fi
 
 echo "final_matrix=$final_matrix" >> "$GITHUB_OUTPUT"
 echo "staged_sections=$stage_sections" >> "$GITHUB_OUTPUT"
+echo "failed_sections=$failed_sections" >> "$GITHUB_OUTPUT"
 echo "action=$action" >> "$GITHUB_OUTPUT"
 echo "api_commit=$api_commit" >> "$GITHUB_OUTPUT"
 echo "api_baseline=$api_baseline" >> "$GITHUB_OUTPUT"

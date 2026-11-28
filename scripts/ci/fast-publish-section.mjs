@@ -91,6 +91,7 @@ const FAST_PUBLISH_TRIGGER_REFRESH_PATHS = new Set([
   'scripts/lib/conditional-cdn-put.sh',
   'scripts/ci/fast-publish-section-coordinate.sh',
   'scripts/ci/fast-publish-section-late-api-recovery.sh',
+  'scripts/ci/fast-publish-section-pending-probe.sh',
   'scripts/ci/wait-fast-publish-api-readiness.mjs',
   'scripts/ci/dispatch-fast-publish-replay.sh',
   'scripts/ci/dispatch-bounded-section-replay.sh',

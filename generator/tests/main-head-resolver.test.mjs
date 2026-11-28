@@ -119,7 +119,10 @@ test('canton publisher only accepts fast-forwards limited to bookkeeping and gen
     const updated = commit(hubPath, JSON.stringify(hub));
     const malformed = commit(hubPath, '{}');
     const turgovia = ['--section', 'canton-tg'];
-    assert.equal(check(latest, added, turgovia), 1);
+    // Il guard usa lo stesso planner del publish (r2-plan-range): l'aggiunta di
+    // un hub di Basilea non rende nulla per Turgovia, quindi non la invalida.
+    assert.equal(check(latest, added, turgovia), 0);
+    assert.equal(check(latest, added, ['--section', section]), 1);
     assert.equal(check(added, updated), 1);
     assert.equal(check(added, updated, turgovia), 0);
     assert.equal(check(added, updated, ['--section', section]), 1);

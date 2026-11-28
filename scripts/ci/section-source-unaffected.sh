@@ -95,6 +95,27 @@ fi
 git merge-base --is-ancestor "$expected" "$current" || exit 1
 
 if [ -n "${section:-}" ]; then
+  # Una modifica a un hub esistente di un'altra sezione deve restare un
+  # documento valido su entrambe le revisioni: uno malformato non puo' essere
+  # dichiarato irrilevante. Aggiunte e cancellazioni sono scopate dal planner.
+  hub_glob=':(top,glob)content/cantons/canton-*/hubs/*.json'
+  hub_changes="$(git diff --name-status --no-renames "$expected" "$current" -- "$hub_glob")" || exit 1
+  while IFS=$'\t' read -r status file; do
+    [ -z "$status" ] && continue
+    if [ "$status" = M ] && [[ "$file" =~ ^content/cantons/(canton-[a-z0-9-]+)/hubs/([a-z0-9-]+)\.json$ ]] \
+      && [ "${BASH_REMATCH[1]}" != "$section" ]; then
+      node --input-type=module - "$expected" "$current" "$file" "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}" <<'NODE' || exit 1
+import { execFileSync } from 'node:child_process';
+import { parseCantonHubDocument } from './scripts/lib/canton-hub-data.mjs';
+
+const [before, after, file, section, topic] = process.argv.slice(2);
+for (const sha of [before, after]) {
+  const raw = execFileSync('git', ['show', `${sha}:${file}`], { encoding: 'utf8' });
+  parseCantonHubDocument(raw, section, topic);
+}
+NODE
+    fi
+  done <<< "$hub_changes"
   # Usa lo stesso planner del publish per body, registry, metadata, hub e
   # immagini, leggendo i blob esatti del range anche se la worktree e' pinned.
   section_matrix="$(node scripts/ci/fast-publish-section.mjs r2-plan-range "$expected" "$current")" || {

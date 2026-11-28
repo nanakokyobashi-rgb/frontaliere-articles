@@ -41,6 +41,7 @@ on:
       - 'scripts/ci/fast-publish-section.mjs'
       - 'scripts/ci/fast-publish-section-coordinate.sh'
       - 'scripts/ci/fast-publish-section-late-api-recovery.sh'
+      - 'scripts/ci/fast-publish-section-pending-probe.sh'
       - 'scripts/ci/wait-fast-publish-api-readiness.mjs'
       - 'scripts/ci/dispatch-fast-publish-replay.sh'
       - 'scripts/ci/read-main-head.sh'
@@ -707,6 +708,28 @@ jobs:
           path: ${{ runner.temp }}/fast-publish-stage-${{ matrix.target.section }}.json
           if-no-files-found: error
 
+      # Una gamba FALLITA (non sostituita ne' cancellata) lascia un marcatore: il
+      # coordinator la distingue da una gamba sostituita dal pending piu' recente
+      # (che resta alla run che la possiede) e dispaccia un replay full-section.
+      # Il nome non coincide con l'artifact di stage `fast-publish-stage-<canton>`.
+      - name: Record failed stage marker
+        if: failure()
+        env:
+          SECTION: ${{ matrix.target.section }}
+        run: |
+          set -euo pipefail
+          [[ "$SECTION" =~ ^canton-[a-z0-9-]+$ ]] || exit 0
+          jq -cn --arg section "$SECTION" '{section:$section,failed:true}' \
+            > "$RUNNER_TEMP/fast-publish-stage-failed-$SECTION.json"
+
+      - name: Upload failed stage marker
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: fast-publish-stage-failed-${{ matrix.target.section }}
+          path: ${{ runner.temp }}/fast-publish-stage-failed-${{ matrix.target.section }}.json
+          if-no-files-found: ignore
+
       - name: Cleanup Firebase credentials
         if: always()
         run: rm -f "$RUNNER_TEMP/sa.json"
@@ -732,6 +755,7 @@ jobs:
       # pending limit across phases.
       final_matrix: ${{ steps.decision.outputs.final_matrix }}
       staged_sections: ${{ steps.decision.outputs.staged_sections }}
+      failed_sections: ${{ steps.decision.outputs.failed_sections }}
       api_commit: ${{ steps.decision.outputs.api_commit }}
       api_baseline: ${{ steps.decision.outputs.api_baseline }}
       defer_api_wait: ${{ steps.decision.outputs.defer_api_wait }}
@@ -749,10 +773,42 @@ jobs:
         with:
           node-version: '22'
 
+      # Il download puo' fallire per un errore transitorio: un errore non deve
+      # diventare «tutte le sezioni scartate». Tre tentativi con attesa, poi il
+      # coordinator verifica con l'elenco degli artifact del run se il fallimento
+      # e' reale (artifact presenti ma non scaricabili: errore esplicito) o se
+      # semplicemente nessuna gamba ha prodotto uno stage.
       - name: Download all completed stage artifacts
+        id: download_stage_1
         if: needs.resolve.outputs.stage_any == 'true'
-        # Se tutte le gambe hanno fallito non c'e' nulla da scaricare: il
-        # coordinator decide sulle sole sezioni con artifact.
+        continue-on-error: true
+        uses: actions/download-artifact@v7
+        with:
+          pattern: fast-publish-stage-*
+          path: ${{ runner.temp }}/fast-publish-stage-artifacts
+          merge-multiple: true
+
+      - name: Wait before retrying the stage artifact download (2/3)
+        if: needs.resolve.outputs.stage_any == 'true' && steps.download_stage_1.outcome == 'failure'
+        run: sleep 20
+
+      - name: Retry the stage artifact download (2/3)
+        id: download_stage_2
+        if: needs.resolve.outputs.stage_any == 'true' && steps.download_stage_1.outcome == 'failure'
+        continue-on-error: true
+        uses: actions/download-artifact@v7
+        with:
+          pattern: fast-publish-stage-*
+          path: ${{ runner.temp }}/fast-publish-stage-artifacts
+          merge-multiple: true
+
+      - name: Wait before retrying the stage artifact download (3/3)
+        if: needs.resolve.outputs.stage_any == 'true' && steps.download_stage_1.outcome == 'failure' && steps.download_stage_2.outcome == 'failure'
+        run: sleep 45
+
+      - name: Retry the stage artifact download (3/3)
+        id: download_stage_3
+        if: needs.resolve.outputs.stage_any == 'true' && steps.download_stage_1.outcome == 'failure' && steps.download_stage_2.outcome == 'failure'
         continue-on-error: true
         uses: actions/download-artifact@v7
         with:
@@ -771,9 +827,30 @@ jobs:
           PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
           PUSH_AFTER: ${{ needs.resolve.outputs.push_after }}
           ARTIFACTS_DIR: ${{ runner.temp }}/fast-publish-stage-artifacts
+          STAGE_DOWNLOAD_FAILED: ${{ steps.download_stage_1.outcome == 'failure' && steps.download_stage_2.outcome == 'failure' && steps.download_stage_3.outcome == 'failure' }}
+          RUN_ID: ${{ github.run_id }}
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
         run: bash scripts/ci/fast-publish-section-coordinate.sh
+
+      - name: Replay full-section for failed stage legs
+        if: needs.resolve.outputs.dry != 'true' && steps.decision.outputs.failed_sections != '[]'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          FAILED_SECTIONS: ${{ steps.decision.outputs.failed_sections }}
+        run: |
+          set -euo pipefail
+          # Una gamba di stage fallita non ha ne' artifact ne' un'altra run che
+          # la possieda: senza replay le sue pagine restano 404 fino al giro
+          # del reconciler. Il dispatch senza ID e' un recupero full-section
+          # sotto lo slot di sezione (nessuna API: la barriera l'ha esclusa).
+          while IFS= read -r section; do
+            [[ "$section" =~ ^canton-[a-z0-9-]+$ ]] || { echo "::error::sezione di replay non valida: $section"; exit 1; }
+            gh workflow run fast-publish-section.yml --repo "$REPOSITORY" --ref main \
+              -f section="$section" -f dry_run=false -f article_ids='[]'
+            echo "::notice::replay full-section dispatchato per la gamba di stage fallita $section"
+          done < <(jq -r '.[]' <<<"$FAILED_SECTIONS")
 
       - name: Setup isolated article source runtime for Remote Config
         if: steps.decision.outputs.action == 'dispatch'
@@ -863,7 +940,9 @@ jobs:
           node-version: '22'
 
       - name: Preserve the result recorder from the workflow revision
-        run: install -m 0755 scripts/ci/record-fast-publish-result.sh "$RUNNER_TEMP/record-fast-publish-result.sh"
+        run: |
+          install -m 0755 scripts/ci/record-fast-publish-result.sh "$RUNNER_TEMP/record-fast-publish-result.sh"
+          install -m 0755 scripts/ci/fast-publish-section-pending-probe.sh "$RUNNER_TEMP/fast-publish-section-pending-probe.sh"
 
       - name: Download stage artifact for this section
         if: needs.resolve.outputs.stage_any == 'true' && contains(fromJSON(needs.coordinate_api_release.outputs.staged_sections || '[]'), matrix.target.section)
@@ -886,6 +965,10 @@ jobs:
           TARGET_IDS_JSON: ${{ toJSON(matrix.target.ids || fromJSON('[]')) }}
           TARGET_MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.missingPagePaths || fromJSON('[]')) }}
           PINNED_SOURCE: ${{ needs.resolve.outputs.source_commit || inputs.source_commit }}
+          DRY: ${{ needs.resolve.outputs.dry }}
+          REPO: ${{ github.repository }}
+          CURRENT_RUN_ID: ${{ github.run_id }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           observed="$(bash scripts/ci/read-main-head.sh)"
@@ -915,6 +998,19 @@ jobs:
             --argjson ids "${TARGET_IDS_JSON:-[]}" --argjson missingPagePaths "${TARGET_MISSING_PAGE_PATHS_JSON:-[]}" \
             '{eventName:$eventName,bootstrap:$bootstrap,ids:$ids,missingPagePaths:$missingPagePaths}' \
             | node scripts/ci/fast-publish-section.mjs r2-targeted-dispatch)"
+          # Un dispatch reale condivide il gruppo `fast-publish-<sezione>`
+          # (queue: single) con i finalize dei push: entrando in coda puo' aver
+          # sostituito un finalize pending di un push e renderebbe solo i propri
+          # ids. Il render mirato vale solo se la sostituzione e' ESCLUSA; se non
+          # si puo' escludere (run push vivi/cancellati, probe illeggibile) il
+          # finalize fa full-section: nessuna pagina del push va persa.
+          if [ "$targeted" = 'true' ] && [ "$DRY" != 'true' ]; then
+            can_exclude="$(bash "$RUNNER_TEMP/fast-publish-section-pending-probe.sh")"
+            if [ "$can_exclude" != 'true' ]; then
+              echo "::notice::dispatch mirato di $SECTION non puo' escludere di aver sostituito un finalize pending di push: full-section latest"
+              targeted=false
+            fi
+          fi
           if [ "$STAGE_ANY" = 'true' ] && [ -s "$STAGE_ARTIFACT" ]; then
             stage_source="$(jq -r '.sourceCommit' "$STAGE_ARTIFACT")"
           elif [ "$CLEANUP_INACTIVE_SURFACE" != 'true' ] && [ "$targeted" != 'true' ] \
