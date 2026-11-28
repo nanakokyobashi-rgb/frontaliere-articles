@@ -478,12 +478,24 @@ function readArticleSubjectsFromGitHub(repo, ref) {
   return raw === null ? null : raw.split('\n').filter(Boolean);
 }
 
-export function readInFlightRunsFromGitHub(repo, { readGh = gh, warn = console.warn } = {}) {
+/** Istante `created` (secondi, UTC, senza millisecondi) come lo vuole il filtro dell'API Actions. */
+export function runsCreatedUpperBound(nowMs) {
+  return new Date(nowMs).toISOString().replace(/\.\d{3}Z$/, 'Z');
+}
+
+export function readInFlightRunsFromGitHub(repo, { readGh = gh, warn = console.warn, nowMs = Date.now() } = {}) {
+  // Le run create DOPO l'istante di lettura sono piu' recenti di quella che
+  // chiede l'ammissione e `olderCantonRuns` non le conta: escluderle dalla
+  // lista la rende stabile in testa. Senza il filtro ogni run nuova spostava
+  // tutte le altre e la paginazione di `pending` (coda piena) ripeteva gli id
+  // a ogni lettura, fino a `parallel-unreadable` (JU, VS: run 46128017848,
+  // 46113131801). Un id ripetuto resta ambiguo e chiude l'ammissione.
+  const createdFilter = encodeURIComponent(`<=${runsCreatedUpperBound(nowMs)}`);
   function readStatus(status) {
     let duplicate = false;
     try {
       const raw = readGh(['api', '--paginate', '--slurp',
-        `repos/${repo}/actions/runs?status=${status}&per_page=${RUNS_PER_PAGE}`]);
+        `repos/${repo}/actions/runs?status=${status}&per_page=${RUNS_PER_PAGE}&created=${createdFilter}`]);
       const rows = flattenPaginatedInFlightRuns(JSON.parse(raw), {
         onDuplicate: () => { duplicate = true; },
       });

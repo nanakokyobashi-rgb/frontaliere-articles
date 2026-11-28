@@ -43,6 +43,7 @@ import {
   positiveInt,
   projectCantonGateReceipt,
   readInFlightRunsFromGitHub,
+  runsCreatedUpperBound,
   remoteConfigLoaded,
 } from '../../scripts/ci/canton-generation-admit.mjs';
 import { callerWorkflowFile } from '../../scripts/ci/generate-canton-article-workflows.mjs';
@@ -352,6 +353,9 @@ const cleanSnapshot = JSON.stringify([admissionPage(repeatSnapshotRun)]);
 const emptySnapshot = JSON.stringify([admissionPage()]);
 const [firstStatus, secondStatus, thirdStatus] = IN_FLIGHT_STATUSES;
 
+const SNAPSHOT_NOW_MS = Date.parse('2026-11-28T17:20:00Z');
+const SNAPSHOT_CREATED = encodeURIComponent('<=2026-11-28T17:20:00Z');
+
 function readAdmissionSnapshots(requests, expectedRows, retriedStatuses = []) {
   const repo = 'owner/corpus';
   const calls = [];
@@ -364,10 +368,11 @@ function readAdmissionSnapshots(requests, expectedRows, retriedStatuses = []) {
       return response;
     },
     warn: (warning) => warnings.push(warning),
+    nowMs: SNAPSHOT_NOW_MS,
   });
   assert.deepEqual(calls, requests.map(([status]) => [
     'api', '--paginate', '--slurp',
-    `repos/${repo}/actions/runs?status=${status}&per_page=${RUNS_PER_PAGE}`,
+    `repos/${repo}/actions/runs?status=${status}&per_page=${RUNS_PER_PAGE}&created=${SNAPSHOT_CREATED}`,
   ]));
   assert.deepEqual(rows, expectedRows);
   assert.deepEqual(warnings, retriedStatuses.map((status) =>
@@ -943,4 +948,15 @@ test('canton-generation-slots.json: baseSlotHours di ogni entry coincide con que
       assert.equal(v.reason !== 'admit-cadence', entry.baseSlotHours.includes(hour), `${entry.section} ${hour}:xx`);
     }
   }
+});
+
+test('la lettura delle run in volo e\' ancorata a un istante: le run create dopo non spostano le pagine', () => {
+  assert.equal(runsCreatedUpperBound(Date.parse('2026-11-28T17:20:00.987Z')), '2026-11-28T17:20:00Z');
+  assert.equal(SNAPSHOT_CREATED, '%3C%3D2026-11-28T17%3A20%3A00Z');
+  // Un id ripetuto resta ambiguo anche con il filtro: i retry e la chiusura sono quelli di prima.
+  readAdmissionSnapshots([
+    [firstStatus, ambiguousSnapshot],
+    [firstStatus, ambiguousSnapshot],
+    [firstStatus, ambiguousSnapshot],
+  ], null, [firstStatus, firstStatus]);
 });
