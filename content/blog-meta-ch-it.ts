@@ -8768,6 +8768,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.salario-minimo-ticino-compromesso.title': 'Salario minimo in Ticino circa 4\'000 franchi lordi al mese',
     'blog.article.salario-minimo-ticino-compromesso.excerpt': 'Il Gran Consiglio ha approvato il compromesso ticinese. L\'aumento è progressivo e dal 2030 segue il rincaro.',
     'blog.article.salario-minimo-ticino-compromesso.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.minimo-obvaldo-contratti.title': 'Obvaldo senza salario minimo cantonale generale',
+    'blog.article.minimo-obvaldo-contratti.excerpt': 'Obvaldo non ha un salario minimo cantonale legale generale. Minimi possono essere previsti da CCL o GAV pertinenti.',
+    'blog.article.minimo-obvaldo-contratti.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;
