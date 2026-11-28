@@ -5945,6 +5945,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/fact-check-round-plan.mjs",
+      "mode": "corpus-only",
+      "reason": "Piano dei giri di fact-check dentro la finestra residua del run: con Codex tra i verificatori un giro vale almeno 240 s invece di 15 s (il 33% dei run del 27-28/11 perdeva l'articolo perche' Codex era interrotto alla scadenza del giro, non per un guasto del broker). Usato solo da `llmFactCheck` di create-article.mjs del generatore corpus, che e' un gemello `adapted`; il sito non ha un gemello del modulo.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
       "path": "generator/scripts/lib/free-mt-recovery.mjs",
       "mode": "corpus-only",
       "reason": "Contatori e cap della recovery LLM dopo un output free-MT non utilizzabile (#831 item 2). Il cap e' una QUOTA PER LOCALE, non un budget globale: il loop missing-field scorre en/de/fr in ordine e un contatore unico si esauriva tutto su `en`, lasciando `de` e `fr` al fallback italiano. Il generatore del corpus e' l'unico produttore dopo il cutover; il sito non ha un gemello del modulo e non deve ricevere questa dipendenza.",

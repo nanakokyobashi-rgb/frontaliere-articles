@@ -289,7 +289,7 @@ test('una richiesta mai partita scade come attesa in coda, senza toccare lo scor
 
 test('dopo il segnale di avvio lo scadere del budget e\' un timeout del socket, di trasporto', async () => {
   behavior = (client) => { client.write('\x01'); };
-  await assert.rejects(() => callCodex({ deadlineMs: Date.now() + 1500 }), /Codex auth broker socket timed out/);
+  await assert.rejects(() => callCodex({ deadlineMs: Date.now() + 1500 }), /Codex auth broker socket timed out \(caller deadline reached while Codex was still running\)/);
   assert.match(logged(), /guasto di trasporto/);
   assert.equal(codexScore(), 0);
   assert.equal(isModelAvailable(CODEX), true);

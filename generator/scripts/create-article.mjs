@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 import '../../host/cantonSectionsBootstrap.mjs';
+import {
+  FACTCHECK_MIN_ROUND_MS,
+  planFactCheckRounds,
+  remainingFactCheckRounds,
+} from './lib/fact-check-round-plan.mjs';
 /**
  * create-article.mjs — Generate a complete blog article using the configured LLM.
  *
@@ -7585,24 +7590,20 @@ ${proofResponseFormat}`
   // header during its own loop; this cap guards the outer loop that fires when
   // ALL models have exhausted their per-model retries.
   const FACTCHECK_429_BACKOFF_CAP_MS = 30_000;
-  const FACTCHECK_MIN_ROUND_MS = 15_000;
-  const FACTCHECK_FINAL_RESERVE_MS = 30_000;
-  const FACTCHECK_MAX_FINAL_RESERVE_MS = 45_000;
-  const FACTCHECK_FINAL_RESERVE_THRESHOLD_MS = FACTCHECK_MIN_ROUND_MS + FACTCHECK_FINAL_RESERVE_MS;
   const initialFactCheckMs = factCheckDeadlineMs - Date.now();
   // A first consensus round needs 15s, and a fresh Codex verification needs
-  // 30s. Do not claim a final reserve until both windows fit in the initial
-  // fact-check budget (45s); below that threshold all time stays with the
-  // normal retry loop. Keep the 45s ceiling.
-  const finalReserveMs = initialFactCheckMs >= FACTCHECK_FINAL_RESERVE_THRESHOLD_MS
-    ? Math.min(FACTCHECK_MAX_FINAL_RESERVE_MS, initialFactCheckMs - FACTCHECK_MIN_ROUND_MS,
-      Math.max(FACTCHECK_FINAL_RESERVE_MS, Math.floor((initialFactCheckMs - 60_000) / 4)))
-    : 0;
-  const retryDeadlineMs = factCheckDeadlineMs - finalReserveMs;
-  const maxPrimaryRounds = Math.min(
-    FACTCHECK_INFRA_RETRIES,
-    Math.max(1, Math.floor((initialFactCheckMs - finalReserveMs) / FACTCHECK_MIN_ROUND_MS)),
+  // 30s: no final reserve below 45s. When Codex is a verifier a round is worth
+  // at least CODEX_FACTCHECK_ROUND_MS (a Codex fact-check takes 90-230s): the
+  // old 15s unit split a ~7 minute window into three rounds that each killed
+  // Codex half-way ("broker socket timed out" at the round deadline, 33% of
+  // runs on 27-28/11). See lib/fact-check-round-plan.mjs.
+  const codexIsVerifier = verificationModels.includes(AI_MODELS.CODEX_CLI_PRIMARY)
+    && isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY);
+  const { finalReserveMs, maxPrimaryRounds, minRoundMs: factCheckRoundMinMs } = planFactCheckRounds(
+    initialFactCheckMs,
+    { codexVerifier: codexIsVerifier, infraRetries: FACTCHECK_INFRA_RETRIES },
   );
+  const retryDeadlineMs = factCheckDeadlineMs - finalReserveMs;
   let fcLastRejectMsgs = [];
   const fcProviderErrors = [];
   // A usable vote, an empty fulfilled response, or a duplicate vote means at
@@ -7674,10 +7675,7 @@ ${proofResponseFormat}`
     const now = Date.now();
     const remainingMs = retryDeadlineMs - now;
     if (remainingMs <= 0 || (fcAttempt > 1 && remainingMs < FACTCHECK_MIN_ROUND_MS)) break;
-    const remainingRounds = Math.min(
-      maxPrimaryRounds - fcAttempt + 1,
-      Math.max(1, Math.floor(remainingMs / FACTCHECK_MIN_ROUND_MS)),
-    );
+    const remainingRounds = remainingFactCheckRounds(remainingMs, maxPrimaryRounds - fcAttempt + 1, factCheckRoundMinMs);
     const roundBudgetMs = Math.floor(remainingMs / remainingRounds);
     const deadlineMs = now + roundBudgetMs;
     // Leave a full minimum window for an independent recovery when the round
