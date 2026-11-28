@@ -4134,6 +4134,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/scoring/sectionEmbeddingStore.mjs",
+      "mode": "corpus-only",
+      "reason": "Materializza lo store di embedding per sezione letto dal gate di dedup semantico (`SECTION.embeddingsBinPath`): nel corpus nessuno scriveva `data/article-embeddings.bin` e analoghi, quindi il gate vedeva `store_missing` e pubblicava senza dedup. Il builder storico vive nel sito e copre solo la sezione frontaliere, i suoi artefatti non scendono qui; il sito non ha un gemello ne' ne ha bisogno, perche' i contenuti per sezione sono scritti solo dal generatore del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "b94c8efa3884ff57",
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
       "path": "generator/scripts/lib/scoring/semanticDedup.mjs",
       "sitePath": "scripts/lib/scoring/semanticDedup.mjs",
       "mode": "adapted",
