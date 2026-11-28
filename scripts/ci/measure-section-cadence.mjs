@@ -110,13 +110,13 @@ export function parseArgs(argv) {
   for (let i = 0; i < argv.length; i += 1) {
     const flag = argv[i];
     if (flag === '--help' || flag === '-h') return { help: true };
-    if (!['--from', '--to', '--output'].includes(flag)) throw new Error(`Opzione sconosciuta: ${flag}`);
+    if (!['--from', '--to', '--output', '--cache-dir'].includes(flag)) throw new Error(`Opzione sconosciuta: ${flag}`);
     const value = argv[i + 1];
     if (!value || value.startsWith('--')) throw new Error(`${flag} richiede un valore`);
     args[flag.slice(2)] = value;
     i += 1;
   }
-  if (!args.from || !args.to) throw new Error('Uso: node scripts/ci/measure-section-cadence.mjs --from YYYY-MM-DD --to YYYY-MM-DD [--output file.json]');
+  if (!args.from || !args.to) throw new Error('Uso: node scripts/ci/measure-section-cadence.mjs --from YYYY-MM-DD --to YYYY-MM-DD [--output file.json] [--cache-dir dir]');
   makeDateWindow(args.from, args.to);
   return args;
 }
@@ -418,17 +418,58 @@ function shellFreeGit(args, options = {}) {
   });
 }
 
-function github(args, { maxBuffer = 64 * 1024 * 1024 } = {}) {
+// Identita' del coordinatore: `default` = nessun `--identity` (quota del
+// proprietario). Il PAT `nanako` e' lo stesso della CI del corpus: usarlo per
+// la misura giornaliera ne ha esaurito la quota (28/11), quindi e' opt-in.
+export function ghIdentityArgs(env = process.env) {
+  const identity = String(env.MEASURE_GH_IDENTITY || 'default').trim() || 'default';
+  return identity === 'default' ? [] : ['--identity', identity];
+}
+
+let githubRequestCount = 0;
+export function getGithubRequestCount() { return githubRequestCount; }
+export function resetGithubRequestCount() { githubRequestCount = 0; }
+
+function defaultGithubRunner(argv, options) {
   if (!fs.existsSync(GH_FRONTALIERE)) throw new Error(`Coordinatore GitHub non trovato: ${GH_FRONTALIERE}`);
-  return execFileAsync(GH_FRONTALIERE, ['--identity', 'nanako', ...args, '--repo', GH_REPO], {
+  return execFileAsync(GH_FRONTALIERE, argv, options).then(({ stdout }) => stdout);
+}
+let githubRunner = defaultGithubRunner;
+export function setGithubRunnerForTest(runner) {
+  const previous = githubRunner;
+  githubRunner = runner || defaultGithubRunner;
+  return previous;
+}
+
+function github(args, { maxBuffer = 64 * 1024 * 1024 } = {}) {
+  githubRequestCount += 1;
+  return new Promise((resolve) => resolve(githubRunner([...ghIdentityArgs(), ...args, '--repo', GH_REPO], {
     cwd: REPO_ROOT,
     encoding: 'utf8',
     maxBuffer,
     timeout: 180_000,
     windowsHide: true,
-  }).then(({ stdout }) => stdout).catch((error) => {
+  }))).catch((error) => {
     throw new Error(`lettura GitHub fallita per '${args.slice(0, 3).join(' ')}' (exit ${error.code || error.signal || 'unknown'})`);
   });
+}
+
+// Cache su disco dei run terminali (view JSON + log): un run completato non
+// cambia, quindi si scarica una volta sola. Directory: --cache-dir o
+// MEASURE_CACHE_DIR; senza, nessuna cache.
+let measureCacheDir = null;
+export function setMeasureCacheDir(dir) { measureCacheDir = dir ? path.resolve(dir) : null; }
+function cacheFile(run, kind) {
+  return measureCacheDir ? path.join(measureCacheDir, `${run.databaseId}-${run.attempt || 1}.${kind}`) : null;
+}
+function cacheRead(run, kind) {
+  const file = cacheFile(run, kind);
+  try { return file && fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : null; } catch { return null; }
+}
+function cacheWrite(run, kind, text) {
+  const file = cacheFile(run, kind);
+  if (!file) return;
+  try { fs.mkdirSync(measureCacheDir, { recursive: true }); fs.writeFileSync(file, text); } catch { /* cache best effort */ }
 }
 
 function ghDateRange(window) {
@@ -1021,18 +1062,30 @@ async function listWorkflowRuns(workflow, window, { limit = 1000, liveOnly = fal
   return [...unique.values()];
 }
 
-async function viewRun(run, withLogs) {
+export async function viewRun(run, withLogs) {
   const attemptArgs = Number.isInteger(run.attempt) && run.attempt > 0 ? ['--attempt', String(run.attempt)] : [];
-  const json = JSON.parse(await github([
+  const cachedJson = cacheRead(run, 'json');
+  const json = cachedJson ? JSON.parse(cachedJson) : JSON.parse(await github([
     'run', 'view', String(run.databaseId), ...attemptArgs, '--json', VIEW_FIELDS,
   ]));
+  const status = String(json.status).toLowerCase();
+  const terminal = status === 'completed';
+  if (!cachedJson && terminal) cacheWrite(run, 'json', JSON.stringify(json));
   let logs = '';
-  if (withLogs && !['queued', 'waiting', 'pending'].includes(String(json.status).toLowerCase())) {
-    try {
-      logs = await github(['run', 'view', String(run.databaseId), ...attemptArgs, '--log'], { maxBuffer: 96 * 1024 * 1024 });
-    } catch (error) {
-      // A log may expire or an active run may not have produced one yet.
-      json.logReadError = error.code || 'unavailable';
+  // I run `skipped` non hanno log: nessuna richiesta. I log servono solo a
+  // M2/M4/M5 dei run in finestra, una volta per run (cache se terminale).
+  const skipped = String(json.conclusion || run.conclusion || '').toLowerCase() === 'skipped';
+  if (withLogs && !skipped && !['queued', 'waiting', 'pending'].includes(status)) {
+    const cachedLog = terminal ? cacheRead(run, 'log') : null;
+    if (cachedLog !== null) logs = cachedLog;
+    else {
+      try {
+        logs = await github(['run', 'view', String(run.databaseId), ...attemptArgs, '--log'], { maxBuffer: 96 * 1024 * 1024 });
+        if (terminal) cacheWrite(run, 'log', logs);
+      } catch (error) {
+        // A log may expire or an active run may not have produced one yet.
+        json.logReadError = error.code || 'unavailable';
+      }
     }
   }
   return { json, logs };
@@ -2614,13 +2667,15 @@ function sectionDuplicatesForReport(duplicates, section) {
 }
 
 function printHelp() {
-  console.log('Uso: node scripts/ci/measure-section-cadence.mjs --from YYYY-MM-DD --to YYYY-MM-DD [--output file.json]');
+  console.log('Uso: node scripts/ci/measure-section-cadence.mjs --from YYYY-MM-DD --to YYYY-MM-DD [--output file.json] [--cache-dir dir]');
+  console.log('Identita GitHub: MEASURE_GH_IDENTITY (default: nessuna, non la quota della CI).');
   console.log('Le date sono inclusive e interpretate in Europe/Zurich. Il report include M1–M6 per le 26 sezioni.');
 }
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (args.help) return printHelp();
+  setMeasureCacheDir(args['cache-dir'] || process.env.MEASURE_CACHE_DIR || null);
   const report = await collectBaseline(args);
   const json = `${JSON.stringify(report, null, 2)}\n`;
   if (args.output) {
@@ -2634,6 +2689,7 @@ async function main() {
     total.m2Runs += section.M2.runsCreated;
     return total;
   }, { m1: 0, m2Runs: 0 });
+  console.log(`requests=${getGithubRequestCount()}`);
   console.log(`M1=${counts.m1} articoli verificati; run generazione=${counts.m2Runs}; baseline ${report.window.hours}h (${report.window.fromDateInclusive}–${report.window.toDateInclusive} Europe/Zurich).`);
 }
 

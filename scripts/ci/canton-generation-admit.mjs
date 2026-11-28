@@ -8,7 +8,7 @@
  * PRIMA che il job `generate` esista: una sezione non ammessa non fa checkout
  * del corpus, non installa dipendenze e non chiama nessun modello.
  *
- * Quattro domande, dalla meno costosa alla piu' costosa. La prima che risponde
+ * Cinque domande, dalla meno costosa alla piu' costosa. La prima che risponde
  * «no» chiude la run con successo e con un marcatore nel log:
  *
  *   1. LA SEZIONE PUO' GENERARE? (D16)
@@ -28,10 +28,20 @@
  *        pubblicazione leggono le sezioni attive: generare per una sezione
  *        spenta nel core vorrebbe dire scrivere file che il rebase non sa
  *        risolvere e che nessuno pubblica.
+ *   1b. LO SLOT E' NELLA CADENZA DELLA SEZIONE? Il calendario e' orario per
+ *      tutti i cantoni (rete di ripartenza), ma una sezione FUORI da
+ *      `CANTON_HIGH_CADENCE_SECTIONS` (Remote Config, vuoto = nessuna) tiene la
+ *      cadenza di base di 6 ore: gli altri slot escono con `admit-cadence`,
+ *      prima di ogni lettura GitHub e di ogni chiamata a un modello. Con la
+ *      lista vuota gli slot ammessi sono quelli del calendario di prima, uno per
+ *      uno. Lo slot saltato viene CONSUMATO (`consume_slot=true`): il job
+ *      `section_gate` lo conferma al registro Firestore senza generare, cosi' lo
+ *      scheduler non lo ridispaccia a ogni tick nei 16 minuti di tolleranza.
  *   2. C'E' ANCORA BUDGET? (D19) I commit `Generate blog article (<sezione>)`
  *      delle ultime 24 ore sul ramo di destinazione, contro `dailyBudget` del
- *      profilo (`generator/data/canton-sections.json`), eventualmente abbassato
- *      da `vars.CANTON_DAILY_BUDGET_CAP` (override di rollout che può solo ridurre il profilo).
+ *      profilo (`generator/data/canton-sections.json`; `HIGH_CADENCE_DAILY_BUDGET`
+ *      per le sezioni in `CANTON_HIGH_CADENCE_SECTIONS`), eventualmente abbassato
+ *      da `vars.CANTON_DAILY_BUDGET_CAP` (override di rollout che può solo ridurre il budget).
  *   3. QUANTI CANTONI STANNO GIA' GENERANDO? Una lettura delle run in uno
  *      degli stati di `IN_FLIGHT_STATUSES` del repo: quelle dei workflow
  *      `generate-article-<cantone>.yml` PIU' VECCHIE di questa non devono raggiungere
@@ -52,7 +62,8 @@
  * frontaliere/svizzera. La 4 eredita il contratto proceed-safe di
  * `check-quota-backoff.mjs` (un beacon illeggibile non e' un beacon attivo).
  *
- * Output (`GITHUB_OUTPUT`): `proceed=true|false`, `reason=<motivo>`.
+ * Output (`GITHUB_OUTPUT`): `proceed=true|false`, `reason=<motivo>`, e
+ * `consume_slot=true` solo per `admit-cadence` (vedi 1b).
  * Log: `GENERATION_OUTCOME kind=skipped reason=<motivo> section=<id>` quando
  * salta (stessa forma di `admit`), piu' `CANTON_SECTION_DISABLED section=<id>`
  * per una sezione spenta (stesso marcatore di `create-article.mjs`).
@@ -77,6 +88,13 @@ import {
   parseEnabledCantonSections,
   resolveCantonSectionGate,
 } from '../../generator/scripts/lib/canton-section-profile.mjs';
+import {
+  HIGH_CADENCE_DAILY_BUDGET,
+  CANTON_HIGH_CADENCE_ENV,
+  baseSlotHoursBySection,
+  isHighCadenceSection,
+  slotHourFromKey,
+} from '../../generator/scripts/lib/canton-high-cadence.mjs';
 import { RC_LOADED_MARKER } from '../../generator/scripts/load-rc-env.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -218,12 +236,17 @@ export function projectCantonGateReceipt({ section, runAttempt, env = {}, profil
   };
 }
 
-/** `dailyBudget` del profilo, abbassato (mai alzato) da un tetto globale opzionale. */
-export function effectiveDailyBudget(profile, capRaw) {
-  const budget = Number(profile?.dailyBudget);
-  if (!Number.isInteger(budget) || budget < 0) {
+/**
+ * `dailyBudget` del profilo (`HIGH_CADENCE_DAILY_BUDGET` per una sezione in
+ * `CANTON_HIGH_CADENCE_SECTIONS`), abbassato (mai alzato) da un tetto globale
+ * opzionale.
+ */
+export function effectiveDailyBudget(profile, capRaw, { highCadence = false } = {}) {
+  const profileBudget = Number(profile?.dailyBudget);
+  if (!Number.isInteger(profileBudget) || profileBudget < 0) {
     throw new Error(`dailyBudget non valido per ${profile?.section}: ${profile?.dailyBudget}`);
   }
+  const budget = highCadence ? Math.max(profileBudget, HIGH_CADENCE_DAILY_BUDGET) : profileBudget;
   const cap = positiveInt(capRaw, null);
   return cap === null ? budget : Math.min(budget, cap);
 }
@@ -244,14 +267,17 @@ export function countSectionArticles(subjects, section) {
  *
  * @param {Array<{ id: number, path: string, created_at: string, status?: string }>} runs run in volo del repo
  * @param {number|string} selfId
+ * @param {number|string} [parentId] run padre dell'anello di catena (escluso), 0 = nessuno
  * @returns {{ older: number, total: number, selfSeen: boolean }}
  */
-export function olderCantonRuns(runs, selfId) {
+export function olderCantonRuns(runs, selfId, parentId = 0) {
   const me = Number(selfId);
+  const dad = Number(parentId) > 0 ? Number(parentId) : 0;
   const canton = (runs || []).filter((r) => r && typeof r.path === 'string'
     && workflowPathWithoutRef(r.path) !== CORE_WORKFLOW_PATH && CANTON_WORKFLOW_PATH_RE.test(r.path));
   const self = canton.find((r) => Number(r.id) === me);
-  const others = canton.filter((r) => Number(r.id) !== me);
+  // Il run padre di un anello della catena e' ancora in volo mentre dispaccia il link: non e' una rivale.
+  const others = canton.filter((r) => Number(r.id) !== me && (dad === 0 || Number(r.id) !== dad));
   if (!self) {
     // Questa run non e' nell'elenco (lo stato non e' ancora visibile): non
     // c'e' un istante con cui confrontare, quindi ogni altra run conta. E' il
@@ -261,6 +287,15 @@ export function olderCantonRuns(runs, selfId) {
   const older = others.filter((r) => r.created_at < self.created_at
     || (r.created_at === self.created_at && Number(r.id) < me)).length;
   return { older, total: others.length, selfSeen: true };
+}
+
+/** `slotHour` cade in una delle ore di base, o entro ±`tolerance` ore da una (giro di 24 h)? */
+export function slotWithinBaseHours(slotHour, baseHours, tolerance = 0) {
+  const t = Math.max(0, Math.trunc(Number(tolerance)) || 0);
+  return baseHours.some((h) => {
+    const d = Math.abs(slotHour - h) % 24;
+    return Math.min(d, 24 - d) <= t;
+  });
 }
 
 /**
@@ -277,8 +312,12 @@ export function olderCantonRuns(runs, selfId) {
  *   readInFlightRuns: () => Array<{ id: number, path: string, created_at: string, status?: string }> | null,
  *   readQuotaBeacon: () => { active: boolean, resetsAt?: number | null },
  *   selfId?: number | string,
- * }} input
- * @returns {{ proceed: boolean, reason: string, detail: string, unknown?: string[] }}
+ *   parentId?: number | string,
+ *   slotHour?: number | null,
+ *   slotToleranceHours?: number,
+ * }} input `slotHour` e' l'ora UTC dello slot del calendario (null = la run non e' uno slot);
+ * `slotToleranceHours` allarga di ±N ore l'ora ammessa dalla cadenza di base (un cron nativo in ritardo)
+ * @returns {{ proceed: boolean, reason: string, detail: string, unknown?: string[], consumeSlot?: boolean }}
  */
 export function decideCantonAdmission({
   section,
@@ -291,6 +330,9 @@ export function decideCantonAdmission({
   readInFlightRuns,
   readQuotaBeacon,
   selfId = 0,
+  parentId = 0,
+  slotHour = null,
+  slotToleranceHours = 0,
 }) {
   if (!isCantonSection(section)) {
     throw new Error(`"${section}" non e' una sezione cantonale del core`);
@@ -330,7 +372,23 @@ export function decideCantonAdmission({
     };
   }
 
-  const budget = effectiveDailyBudget(cantonSectionProfile(section, profiles), env?.CANTON_DAILY_BUDGET_CAP);
+  const highCadence = isHighCadenceSection(section, env);
+  if (slotHour !== null && !highCadence) {
+    const allSections = (profiles ?? loadCantonSectionProfiles()).cantons.map((c) => c.section);
+    const baseHours = baseSlotHoursBySection(allSections).get(section) ?? [];
+    if (!slotWithinBaseHours(slotHour, baseHours, slotToleranceHours)) {
+      return {
+        proceed: false,
+        reason: 'admit-cadence',
+        detail: `slot delle ${String(slotHour).padStart(2, '0')}:xx UTC fuori dalla cadenza di base (${baseHours.join(',')}): `
+          + `la sezione non e' in ${CANTON_HIGH_CADENCE_ENV}`,
+        consumeSlot: true,
+        unknown: gate.unknown,
+      };
+    }
+  }
+
+  const budget = effectiveDailyBudget(cantonSectionProfile(section, profiles), env?.CANTON_DAILY_BUDGET_CAP, { highCadence });
   const subjects = readArticleSubjects();
   if (!Array.isArray(subjects)) {
     return {
@@ -357,7 +415,7 @@ export function decideCantonAdmission({
       detail: 'run in volo non leggibili: il tetto globale non e\' verificabile, si salta lo slot',
     };
   }
-  const { older, total, selfSeen } = olderCantonRuns(runs, selfId);
+  const { older, total, selfSeen } = olderCantonRuns(runs, selfId, parentId);
   if (older >= cap) {
     return {
       proceed: false,
@@ -472,6 +530,23 @@ function readQuotaBeaconFromScript() {
   }
 }
 
+/**
+ * L'ora UTC dello slot che ha avviato la run: dal `recovery_slot` di Cloud
+ * Scheduler, o dall'ora corrente per un cron nativo. `null` per ogni altro
+ * evento (push, dispatch manuale, anello di catena): non sono slot del calendario.
+ */
+export function cadenceSlotToleranceHours(env) {
+  // Un cron nativo parte in ritardo (anche di decine di minuti) e puo' cadere nell'ora dopo lo slot:
+  // non e' uno slot fuori cadenza. Cloud Scheduler porta lo slot esatto nel recovery_slot.
+  return env?.DISPATCH_ORIGIN !== 'cloud_scheduler' && env?.EVENT_NAME === 'schedule' ? 1 : 0;
+}
+
+export function cadenceSlotHour(env, now = new Date()) {
+  if (env?.DISPATCH_ORIGIN === 'cloud_scheduler') return slotHourFromKey(env.RECOVERY_SLOT);
+  if (env?.EVENT_NAME === 'schedule') return now.getUTCHours();
+  return null;
+}
+
 function isMain() {
   try {
     return realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url));
@@ -491,6 +566,9 @@ if (isMain()) {
       eventName: process.env.EVENT_NAME || '',
       dispatchOrigin: process.env.DISPATCH_ORIGIN || 'manual',
       selfId: process.env.SELF_ID || 0,
+      parentId: process.env.PARENT_RUN_ID || 0,
+      slotHour: cadenceSlotHour(process.env),
+      slotToleranceHours: cadenceSlotToleranceHours(process.env),
       readArticleSubjects: () => (repo ? readArticleSubjectsFromGitHub(repo, ref) : null),
       readInFlightRuns: () => (repo ? readInFlightRunsFromGitHub(repo) : null),
       readQuotaBeacon: readQuotaBeaconFromScript,
@@ -503,7 +581,10 @@ if (isMain()) {
     console.warn(`::warning::canton-admit: ${CANTON_SECTIONS_ENABLED_ENV} nomina cantoni sconosciuti al core: ${verdict.unknown.join(', ')}`);
   }
   if (process.env.GITHUB_OUTPUT) {
-    appendFileSync(process.env.GITHUB_OUTPUT, `proceed=${verdict.proceed}\nreason=${verdict.reason}\n`);
+    appendFileSync(
+      process.env.GITHUB_OUTPUT,
+      `proceed=${verdict.proceed}\nreason=${verdict.reason}\n${verdict.consumeSlot ? 'consume_slot=true\n' : ''}`,
+    );
   }
   if (verdict.proceed) {
     console.log(`canton-admit: ${section} ammessa (${verdict.reason}) — ${verdict.detail}`);
