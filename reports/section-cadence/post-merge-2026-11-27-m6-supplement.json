@@ -1,0 +1,5547 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-28T01:04:51.990Z",
+  "window": {
+    "fromDateInclusive": "2026-11-27",
+    "toDateInclusive": "2026-11-27",
+    "startUtc": "2026-11-26T23:00:00.000Z",
+    "endExclusiveUtc": "2026-11-27T23:00:00.000Z",
+    "hours": 24
+  },
+  "inputReport": "reports/section-cadence/post-merge-2026-11-27-recalculated.json",
+  "source": {
+    "manifestCommit": "62e2f32bff3c5b440ec3a4919c1513a695989f8c",
+    "sectionArticleCounts": {
+      "frontaliere": 4538,
+      "svizzera": 2915,
+      "canton-ag": 34,
+      "canton-appenzello": 33,
+      "canton-basilea": 25,
+      "canton-be": 30,
+      "canton-fr": 28,
+      "canton-ge": 16,
+      "canton-gl": 15,
+      "canton-gr": 22,
+      "canton-ju": 15,
+      "canton-lu": 31,
+      "canton-ne": 28,
+      "canton-nw": 10,
+      "canton-ow": 3,
+      "canton-sg": 36,
+      "canton-sh": 41,
+      "canton-so": 32,
+      "canton-sz": 17,
+      "canton-tg": 33,
+      "canton-ti": 29,
+      "canton-ur": 26,
+      "canton-vd": 34,
+      "canton-vs": 22,
+      "canton-zg": 22,
+      "canton-zh": 30
+    },
+    "indexRows": 8065,
+    "m6InputSnapshotChecksum": "5b805846a77a3603b1a3f9e04cae2649f9ab663fd99ecbefcc504295b1f86c38"
+  },
+  "runtimeLogCoverageBySection": {
+    "frontaliere": {
+      "expectedGenerationAttempts": 28,
+      "readableRuns": 28,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "svizzera": {
+      "expectedGenerationAttempts": 26,
+      "readableRuns": 26,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-ag": {
+      "expectedGenerationAttempts": 4,
+      "readableRuns": 4,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-appenzello": {
+      "expectedGenerationAttempts": 4,
+      "readableRuns": 4,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-basilea": {
+      "expectedGenerationAttempts": 4,
+      "readableRuns": 4,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-be": {
+      "expectedGenerationAttempts": 4,
+      "readableRuns": 4,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-fr": {
+      "expectedGenerationAttempts": 3,
+      "readableRuns": 3,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-ge": {
+      "expectedGenerationAttempts": 4,
+      "readableRuns": 4,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-gl": {
+      "expectedGenerationAttempts": 4,
+      "readableRuns": 4,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-gr": {
+      "expectedGenerationAttempts": 3,
+      "readableRuns": 3,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-ju": {
+      "expectedGenerationAttempts": 4,
+      "readableRuns": 4,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-lu": {
+      "expectedGenerationAttempts": 4,
+      "readableRuns": 4,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-ne": {
+      "expectedGenerationAttempts": 4,
+      "readableRuns": 4,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-nw": {
+      "expectedGenerationAttempts": 4,
+      "readableRuns": 4,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-ow": {
+      "expectedGenerationAttempts": 4,
+      "readableRuns": 4,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-sg": {
+      "expectedGenerationAttempts": 3,
+      "readableRuns": 3,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-sh": {
+      "expectedGenerationAttempts": 4,
+      "readableRuns": 4,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-so": {
+      "expectedGenerationAttempts": 4,
+      "readableRuns": 4,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-sz": {
+      "expectedGenerationAttempts": 4,
+      "readableRuns": 4,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-tg": {
+      "expectedGenerationAttempts": 4,
+      "readableRuns": 4,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-ti": {
+      "expectedGenerationAttempts": 4,
+      "readableRuns": 4,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-ur": {
+      "expectedGenerationAttempts": 2,
+      "readableRuns": 2,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-vd": {
+      "expectedGenerationAttempts": 4,
+      "readableRuns": 4,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-vs": {
+      "expectedGenerationAttempts": 3,
+      "readableRuns": 3,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-zg": {
+      "expectedGenerationAttempts": 3,
+      "readableRuns": 3,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    },
+    "canton-zh": {
+      "expectedGenerationAttempts": 4,
+      "readableRuns": 4,
+      "missingLogs": 0,
+      "unassignedEligibleRuns": 0,
+      "complete": true
+    }
+  },
+  "metric": {
+    "available": false,
+    "conservativeUpperBoundAvailable": false,
+    "policyThresholdProxyAvailable": true,
+    "candidateWindowComplete": false,
+    "dateIndependentZero": false,
+    "reason": "runtime store and effective-threshold evidence is incomplete; only the explicitly labeled policy-threshold proxy is available",
+    "productionGateMeasured": false,
+    "productionGateUnmeasuredSections": [
+      "canton-ag",
+      "canton-appenzello",
+      "canton-basilea",
+      "canton-be",
+      "canton-fr",
+      "canton-ge",
+      "canton-gl",
+      "canton-gr",
+      "canton-ju",
+      "canton-lu",
+      "canton-ne",
+      "canton-nw",
+      "canton-ow",
+      "canton-sg",
+      "canton-sh",
+      "canton-so",
+      "canton-sz",
+      "canton-tg",
+      "canton-ti",
+      "canton-ur",
+      "canton-vd",
+      "canton-vs",
+      "canton-zg",
+      "canton-zh",
+      "frontaliere",
+      "svizzera"
+    ],
+    "model": "Xenova/multilingual-e5-small",
+    "expectedModel": "Xenova/multilingual-e5-small",
+    "expectedDimension": 384,
+    "indexCoverage": {
+      "cutoffDate": "2026-08-30",
+      "untilDate": "2026-11-27",
+      "indexRows": 8065,
+      "candidateRecords": 2901,
+      "mappedCandidateRecords": 2901,
+      "skippedCandidateRecords": 0,
+      "skippedByReason": {},
+      "recordsWithUnknownDate": 2,
+      "dateUnknownCandidatesIncludedInUpperBound": [
+        {
+          "section": "frontaliere",
+          "id": "smood-chiusura-impatto-lavoro"
+        },
+        {
+          "section": "frontaliere",
+          "id": "stop-ristorni-tassa-salute"
+        }
+      ],
+      "upperBoundComplete": true,
+      "candidateCountsBySection": {
+        "frontaliere": 919,
+        "svizzera": 1368,
+        "canton-ag": 34,
+        "canton-appenzello": 33,
+        "canton-basilea": 25,
+        "canton-be": 30,
+        "canton-fr": 28,
+        "canton-ge": 16,
+        "canton-gl": 15,
+        "canton-gr": 22,
+        "canton-ju": 15,
+        "canton-lu": 31,
+        "canton-ne": 28,
+        "canton-nw": 10,
+        "canton-ow": 3,
+        "canton-sg": 36,
+        "canton-sh": 41,
+        "canton-so": 32,
+        "canton-sz": 17,
+        "canton-tg": 33,
+        "canton-ti": 29,
+        "canton-ur": 26,
+        "canton-vd": 34,
+        "canton-vs": 22,
+        "canton-zg": 22,
+        "canton-zh": 30
+      },
+      "complete": false
+    },
+    "cutoffDate": "2026-08-30",
+    "untilDate": "2026-11-27",
+    "indexedArticles": 2901,
+    "embeddedArticles": 2901,
+    "missingMetadata": 0,
+    "comparedPairs": 1545654,
+    "sectionStoreCounts": {
+      "canton-ag": 34,
+      "canton-appenzello": 33,
+      "canton-basilea": 25,
+      "canton-be": 30,
+      "canton-fr": 28,
+      "canton-ge": 16,
+      "canton-gl": 15,
+      "canton-gr": 22,
+      "canton-ju": 15,
+      "canton-lu": 31,
+      "canton-ne": 28,
+      "canton-nw": 10,
+      "canton-ow": 3,
+      "canton-sg": 36,
+      "canton-sh": 41,
+      "canton-so": 32,
+      "canton-sz": 17,
+      "canton-tg": 33,
+      "canton-ti": 29,
+      "canton-ur": 26,
+      "canton-vd": 34,
+      "canton-vs": 22,
+      "canton-zg": 22,
+      "canton-zh": 30,
+      "frontaliere": 4538,
+      "svizzera": 2915
+    },
+    "thresholdsBySection": {
+      "canton-ag": 0.93,
+      "canton-appenzello": 0.93,
+      "canton-basilea": 0.93,
+      "canton-be": 0.93,
+      "canton-fr": 0.93,
+      "canton-ge": 0.93,
+      "canton-gl": 0.86,
+      "canton-gr": 0.93,
+      "canton-ju": 0.93,
+      "canton-lu": 0.93,
+      "canton-ne": 0.93,
+      "canton-nw": 0.93,
+      "canton-ow": 0.93,
+      "canton-sg": 0.93,
+      "canton-sh": 0.93,
+      "canton-so": 0.86,
+      "canton-sz": 0.93,
+      "canton-tg": 0.93,
+      "canton-ti": 0.93,
+      "canton-ur": 0.86,
+      "canton-vd": 0.93,
+      "canton-vs": 0.93,
+      "canton-zg": 0.86,
+      "canton-zh": 0.93,
+      "frontaliere": 0.95,
+      "svizzera": 0.95
+    },
+    "thresholdCorpusCountSourceBySection": {
+      "canton-ag": "runtime_policy_parameters_with_manifest_count_reconstruction",
+      "canton-appenzello": "runtime_policy_parameters_with_manifest_count_reconstruction",
+      "canton-basilea": "runtime_policy_parameters_with_manifest_count_reconstruction",
+      "canton-be": "runtime_policy_parameters_with_manifest_count_reconstruction",
+      "canton-fr": "runtime_policy_parameters_with_manifest_count_reconstruction",
+      "canton-ge": "runtime_policy_parameters_with_manifest_count_reconstruction",
+      "canton-gl": "local_policy_with_manifest_count_reconstruction_runtime_unobserved",
+      "canton-gr": "runtime_policy_parameters_with_manifest_count_reconstruction",
+      "canton-ju": "runtime_policy_parameters_with_manifest_count_reconstruction",
+      "canton-lu": "runtime_policy_parameters_with_manifest_count_reconstruction",
+      "canton-ne": "runtime_policy_parameters_with_manifest_count_reconstruction",
+      "canton-nw": "runtime_policy_parameters_with_manifest_count_reconstruction",
+      "canton-ow": "runtime_policy_parameters_with_manifest_count_reconstruction",
+      "canton-sg": "runtime_policy_parameters_with_manifest_count_reconstruction",
+      "canton-sh": "runtime_policy_parameters_with_manifest_count_reconstruction",
+      "canton-so": "local_policy_with_manifest_count_reconstruction_runtime_unobserved",
+      "canton-sz": "runtime_policy_parameters_with_manifest_count_reconstruction",
+      "canton-tg": "runtime_policy_parameters_with_manifest_count_reconstruction",
+      "canton-ti": "runtime_policy_parameters_with_manifest_count_reconstruction",
+      "canton-ur": "local_policy_with_manifest_count_reconstruction_runtime_unobserved",
+      "canton-vd": "runtime_policy_parameters_with_manifest_count_reconstruction",
+      "canton-vs": "runtime_policy_parameters_with_manifest_count_reconstruction",
+      "canton-zg": "local_policy_with_manifest_count_reconstruction_runtime_unobserved",
+      "canton-zh": "runtime_policy_parameters_with_manifest_count_reconstruction",
+      "frontaliere": "runtime_policy_parameters_with_manifest_count_reconstruction",
+      "svizzera": "runtime_policy_parameters_with_manifest_count_reconstruction"
+    },
+    "thresholdCountSourceBySection": {
+      "canton-ag": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-appenzello": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-basilea": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-be": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-fr": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-ge": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-gl": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-gr": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-ju": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-lu": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-ne": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-nw": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-ow": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-sg": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-sh": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-so": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-sz": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-tg": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-ti": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-ur": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-vd": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-vs": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-zg": "manifest_matched_public_index_count_not_runtime_proof",
+      "canton-zh": "manifest_matched_public_index_count_not_runtime_proof",
+      "frontaliere": "manifest_matched_public_index_count_not_runtime_proof",
+      "svizzera": "manifest_matched_public_index_count_not_runtime_proof"
+    },
+    "sectionStoreStatus": {
+      "canton-ag": {
+        "path": "data/sections/canton-ag/article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 6,
+        "failOpenObservations": 6,
+        "statusCounts": {
+          "store_missing": 6
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 4,
+          "readableRuns": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 34,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.93,
+        "thresholdUsedForPairMetric": 0.93,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      },
+      "canton-appenzello": {
+        "path": "data/sections/canton-appenzello/article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 5,
+        "failOpenObservations": 5,
+        "statusCounts": {
+          "store_missing": 5
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 4,
+          "readableRuns": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 33,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.93,
+        "thresholdUsedForPairMetric": 0.93,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      },
+      "canton-basilea": {
+        "path": "data/sections/canton-basilea/article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 2,
+        "failOpenObservations": 2,
+        "statusCounts": {
+          "store_missing": 2
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 4,
+          "readableRuns": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 25,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.93,
+        "thresholdUsedForPairMetric": 0.93,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      },
+      "canton-be": {
+        "path": "data/sections/canton-be/article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 4,
+        "failOpenObservations": 4,
+        "statusCounts": {
+          "store_missing": 4
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 4,
+          "readableRuns": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 30,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.93,
+        "thresholdUsedForPairMetric": 0.93,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      },
+      "canton-fr": {
+        "path": "data/sections/canton-fr/article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 5,
+        "failOpenObservations": 5,
+        "statusCounts": {
+          "store_missing": 5
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 3,
+          "readableRuns": 3,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 28,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.93,
+        "thresholdUsedForPairMetric": 0.93,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      },
+      "canton-ge": {
+        "path": "data/sections/canton-ge/article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 5,
+        "failOpenObservations": 5,
+        "statusCounts": {
+          "store_missing": 5
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 4,
+          "readableRuns": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 16,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.93,
+        "thresholdUsedForPairMetric": 0.93,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      },
+      "canton-gl": {
+        "path": "data/sections/canton-gl/article-embeddings.bin",
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 4,
+          "readableRuns": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": null,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": null,
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": null,
+        "publishedIndexCount": 15,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.86,
+        "thresholdUsedForPairMetric": 0.86,
+        "thresholdSource": "local_policy_with_manifest_count_reconstruction_runtime_unobserved"
+      },
+      "canton-gr": {
+        "path": "data/sections/canton-gr/article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 3,
+        "failOpenObservations": 3,
+        "statusCounts": {
+          "store_missing": 3
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 3,
+          "readableRuns": 3,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 22,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.93,
+        "thresholdUsedForPairMetric": 0.93,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      },
+      "canton-ju": {
+        "path": "data/sections/canton-ju/article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 7,
+        "failOpenObservations": 7,
+        "statusCounts": {
+          "store_missing": 7
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 4,
+          "readableRuns": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 15,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.93,
+        "thresholdUsedForPairMetric": 0.93,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      },
+      "canton-lu": {
+        "path": "data/sections/canton-lu/article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 5,
+        "failOpenObservations": 5,
+        "statusCounts": {
+          "store_missing": 5
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 4,
+          "readableRuns": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 31,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.93,
+        "thresholdUsedForPairMetric": 0.93,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      },
+      "canton-ne": {
+        "path": "data/sections/canton-ne/article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 1,
+        "failOpenObservations": 1,
+        "statusCounts": {
+          "store_missing": 1
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 4,
+          "readableRuns": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 28,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.93,
+        "thresholdUsedForPairMetric": 0.93,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      },
+      "canton-nw": {
+        "path": "data/sections/canton-nw/article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 2,
+        "failOpenObservations": 2,
+        "statusCounts": {
+          "store_missing": 2
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 4,
+          "readableRuns": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 10,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.93,
+        "thresholdUsedForPairMetric": 0.93,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      },
+      "canton-ow": {
+        "path": "data/sections/canton-ow/article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 2,
+        "failOpenObservations": 2,
+        "statusCounts": {
+          "store_missing": 2
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 4,
+          "readableRuns": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 3,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.93,
+        "thresholdUsedForPairMetric": 0.93,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      },
+      "canton-sg": {
+        "path": "data/sections/canton-sg/article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 3,
+        "failOpenObservations": 3,
+        "statusCounts": {
+          "store_missing": 3
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 3,
+          "readableRuns": 3,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 36,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.93,
+        "thresholdUsedForPairMetric": 0.93,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      },
+      "canton-sh": {
+        "path": "data/sections/canton-sh/article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 8,
+        "failOpenObservations": 8,
+        "statusCounts": {
+          "store_missing": 8
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 4,
+          "readableRuns": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 41,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.93,
+        "thresholdUsedForPairMetric": 0.93,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      },
+      "canton-so": {
+        "path": "data/sections/canton-so/article-embeddings.bin",
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 4,
+          "readableRuns": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": null,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": null,
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": null,
+        "publishedIndexCount": 32,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.86,
+        "thresholdUsedForPairMetric": 0.86,
+        "thresholdSource": "local_policy_with_manifest_count_reconstruction_runtime_unobserved"
+      },
+      "canton-sz": {
+        "path": "data/sections/canton-sz/article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 4,
+        "failOpenObservations": 4,
+        "statusCounts": {
+          "store_missing": 4
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 4,
+          "readableRuns": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 17,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.93,
+        "thresholdUsedForPairMetric": 0.93,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      },
+      "canton-tg": {
+        "path": "data/sections/canton-tg/article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 2,
+        "failOpenObservations": 2,
+        "statusCounts": {
+          "store_missing": 2
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 4,
+          "readableRuns": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 33,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.93,
+        "thresholdUsedForPairMetric": 0.93,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      },
+      "canton-ti": {
+        "path": "data/sections/canton-ti/article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 4,
+        "failOpenObservations": 4,
+        "statusCounts": {
+          "store_missing": 4
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 4,
+          "readableRuns": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 29,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.93,
+        "thresholdUsedForPairMetric": 0.93,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      },
+      "canton-ur": {
+        "path": "data/sections/canton-ur/article-embeddings.bin",
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 2,
+          "readableRuns": 2,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": null,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": null,
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": null,
+        "publishedIndexCount": 26,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.86,
+        "thresholdUsedForPairMetric": 0.86,
+        "thresholdSource": "local_policy_with_manifest_count_reconstruction_runtime_unobserved"
+      },
+      "canton-vd": {
+        "path": "data/sections/canton-vd/article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 4,
+        "failOpenObservations": 4,
+        "statusCounts": {
+          "store_missing": 4
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 4,
+          "readableRuns": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 34,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.93,
+        "thresholdUsedForPairMetric": 0.93,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      },
+      "canton-vs": {
+        "path": "data/sections/canton-vs/article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 5,
+        "failOpenObservations": 5,
+        "statusCounts": {
+          "store_missing": 5
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 3,
+          "readableRuns": 3,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 22,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.93,
+        "thresholdUsedForPairMetric": 0.93,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      },
+      "canton-zg": {
+        "path": "data/sections/canton-zg/article-embeddings.bin",
+        "latestGateStatus": "unobserved",
+        "windowGateStatus": "unobserved",
+        "observationCount": 0,
+        "failOpenObservations": 0,
+        "statusCounts": {},
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 3,
+          "readableRuns": 3,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": null,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": null,
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": null,
+        "publishedIndexCount": 22,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.86,
+        "thresholdUsedForPairMetric": 0.86,
+        "thresholdSource": "local_policy_with_manifest_count_reconstruction_runtime_unobserved"
+      },
+      "canton-zh": {
+        "path": "data/sections/canton-zh/article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 3,
+        "failOpenObservations": 3,
+        "statusCounts": {
+          "store_missing": 3
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 4,
+          "readableRuns": 4,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 30,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.93,
+        "thresholdUsedForPairMetric": 0.93,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      },
+      "frontaliere": {
+        "path": "data/article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 19,
+        "failOpenObservations": 19,
+        "statusCounts": {
+          "store_missing": 19
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 28,
+          "readableRuns": 28,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 4538,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.95,
+        "thresholdUsedForPairMetric": 0.95,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      },
+      "svizzera": {
+        "path": "data/swiss-article-embeddings.bin",
+        "latestGateStatus": "fail_open:store_missing",
+        "windowGateStatus": "fail_open_observed_in_window",
+        "observationCount": 25,
+        "failOpenObservations": 25,
+        "statusCounts": {
+          "store_missing": 25
+        },
+        "runtimeLogCoverage": {
+          "expectedGenerationAttempts": 26,
+          "readableRuns": 26,
+          "missingLogs": 0,
+          "unassignedEligibleRuns": 0,
+          "complete": true
+        },
+        "runtimeStorePresent": false,
+        "runtimeStoreCount": null,
+        "runtimeStoreDimension": null,
+        "runtimeMetaModel": null,
+        "runtimeQueryModel": null,
+        "runtimeExpectedModel": "Xenova/multilingual-e5-small",
+        "runtimeEffectiveThreshold": null,
+        "runtimeMinimumVerifiedEffectiveThreshold": null,
+        "verifiedThresholdObservationCount": 0,
+        "verifiedThresholdsStable": false,
+        "runtimePolicyThreshold": null,
+        "runtimePolicyParameters": {
+          "baseThreshold": 0.93,
+          "ceiling": 0.95,
+          "corpusBaseline": 300,
+          "corpusScaleK": 0.08
+        },
+        "publishedIndexCount": 2915,
+        "runtimeStoreCountMatchesPublishedIndex": null,
+        "reconstructedPolicyThreshold": 0.95,
+        "thresholdUsedForPairMetric": 0.95,
+        "thresholdSource": "runtime_policy_parameters_with_manifest_count_reconstruction"
+      }
+    },
+    "thresholdRule": "same-section uses the minimum verified runtime effective threshold across the measurement window; when runtime evidence is unavailable the reported policy-threshold proxy uses an explicitly labeled threshold reconstructed from the public index count and policy parameters. Cross-canton unordered pairs use min(left threshold, right threshold), equivalent to exceedance in either direction.",
+    "thresholdSource": "runtime markers report store.count, model compatibility and effective threshold; when unavailable, policy threshold is reconstructed from the validated public index count and runtime policy parameters when present",
+    "productionStoreAvailability": "runtime evidence is incomplete or records a fail-open; local files and public binary URLs are not treated as proof of the production store",
+    "activeGateRuntimeStatus": "a fail-open outcome was observed in the measurement window; M6 also reports the intended policy threshold separately",
+    "nearDuplicatePairCount": null,
+    "conservativeUpperBoundNearDuplicatePairCount": null,
+    "policyThresholdProxyPairCount": 3098,
+    "knownDateLowerBoundPairCount": 3098,
+    "pairsCappedAt": 200,
+    "sameSectionPairsBySection": {
+      "frontaliere": 1450,
+      "svizzera": 272,
+      "canton-ag": 3,
+      "canton-appenzello": 0,
+      "canton-basilea": 2,
+      "canton-be": 0,
+      "canton-fr": 0,
+      "canton-ge": 0,
+      "canton-gl": 12,
+      "canton-gr": 0,
+      "canton-ju": 0,
+      "canton-lu": 0,
+      "canton-ne": 1,
+      "canton-nw": 0,
+      "canton-ow": 0,
+      "canton-sg": 5,
+      "canton-sh": 0,
+      "canton-so": 114,
+      "canton-sz": 0,
+      "canton-tg": 15,
+      "canton-ti": 2,
+      "canton-ur": 27,
+      "canton-vd": 2,
+      "canton-vs": 3,
+      "canton-zg": 73,
+      "canton-zh": 0
+    },
+    "crossCantonPairsBySectionInvolved": {
+      "frontaliere": 0,
+      "svizzera": 0,
+      "canton-ag": 71,
+      "canton-appenzello": 101,
+      "canton-basilea": 36,
+      "canton-be": 70,
+      "canton-fr": 35,
+      "canton-ge": 20,
+      "canton-gl": 134,
+      "canton-gr": 37,
+      "canton-ju": 26,
+      "canton-lu": 88,
+      "canton-ne": 70,
+      "canton-nw": 35,
+      "canton-ow": 11,
+      "canton-sg": 60,
+      "canton-sh": 132,
+      "canton-so": 457,
+      "canton-sz": 48,
+      "canton-tg": 59,
+      "canton-ti": 45,
+      "canton-ur": 255,
+      "canton-vd": 59,
+      "canton-vs": 32,
+      "canton-zg": 312,
+      "canton-zh": 41
+    },
+    "knownDateSameSectionPairsBySection": {
+      "frontaliere": 1450,
+      "svizzera": 272,
+      "canton-ag": 3,
+      "canton-appenzello": 0,
+      "canton-basilea": 2,
+      "canton-be": 0,
+      "canton-fr": 0,
+      "canton-ge": 0,
+      "canton-gl": 12,
+      "canton-gr": 0,
+      "canton-ju": 0,
+      "canton-lu": 0,
+      "canton-ne": 1,
+      "canton-nw": 0,
+      "canton-ow": 0,
+      "canton-sg": 5,
+      "canton-sh": 0,
+      "canton-so": 114,
+      "canton-sz": 0,
+      "canton-tg": 15,
+      "canton-ti": 2,
+      "canton-ur": 27,
+      "canton-vd": 2,
+      "canton-vs": 3,
+      "canton-zg": 73,
+      "canton-zh": 0
+    },
+    "knownDateCrossCantonPairsBySectionInvolved": {
+      "frontaliere": 0,
+      "svizzera": 0,
+      "canton-ag": 71,
+      "canton-appenzello": 101,
+      "canton-basilea": 36,
+      "canton-be": 70,
+      "canton-fr": 35,
+      "canton-ge": 20,
+      "canton-gl": 134,
+      "canton-gr": 37,
+      "canton-ju": 26,
+      "canton-lu": 88,
+      "canton-ne": 70,
+      "canton-nw": 35,
+      "canton-ow": 11,
+      "canton-sg": 60,
+      "canton-sh": 132,
+      "canton-so": 457,
+      "canton-sz": 48,
+      "canton-tg": 59,
+      "canton-ti": 45,
+      "canton-ur": 255,
+      "canton-vd": 59,
+      "canton-vs": 32,
+      "canton-zg": 312,
+      "canton-zh": 41
+    },
+    "thresholdCoverage": {
+      "sectionsMeasured": 26,
+      "sectionsExpected": 26
+    },
+    "pairs": [
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "argovia-disoccupazione-settembre",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-gr",
+          "id": "lavoro-grigioni-settembre-2026",
+          "date": "2026-10-08",
+          "dateStatus": "known"
+        },
+        "cosine": 0.931017,
+        "threshold": 0.93,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-gr": 0.93
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "argovia-disoccupazione-settembre",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-disoccupazione-settembre",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.913174,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "argovia-disoccupazione-settembre",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "tasso-disoccupazione-ottobre-2026",
+          "date": "2026-11-06",
+          "dateStatus": "known"
+        },
+        "cosine": 0.893142,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "argovia-parita-salariale",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ag",
+          "id": "iniziativa-parita-salariale-ag",
+          "date": "2026-10-18",
+          "dateStatus": "known"
+        },
+        "cosine": 0.961911,
+        "threshold": 0.93,
+        "thresholdBySection": {
+          "canton-ag": 0.93
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "blackout-brugg-guasto-alta-tensione",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "blocco-roccia-meiental",
+          "date": "2026-11-20",
+          "dateStatus": "known"
+        },
+        "cosine": 0.869425,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "buchs-deficit-2027-budget",
+          "date": "2026-10-09",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-preventivo-approvato",
+          "date": "2026-11-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.899223,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "buchs-deficit-2027-budget",
+          "date": "2026-10-09",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-riduzione-premi-2027",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "cosine": 0.870488,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "buchs-deficit-2027-budget",
+          "date": "2026-10-09",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-sussidi-premi-2027",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "cosine": 0.871368,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "buchs-deficit-2027-budget",
+          "date": "2026-10-09",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "andermatt-fisco-wyden",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "cosine": 0.874871,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "buchs-deficit-2027-budget",
+          "date": "2026-10-09",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-2027-surplus",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.894056,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "buchs-deficit-2027-budget",
+          "date": "2026-10-09",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-avanzo-2027",
+          "date": "2026-10-11",
+          "dateStatus": "known"
+        },
+        "cosine": 0.888629,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "buchs-deficit-2027-budget",
+          "date": "2026-10-09",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "cham-moltiplicatore-fiscale-2027",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "cosine": 0.896581,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "buchs-deficit-2027-budget",
+          "date": "2026-10-09",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.879181,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "chiusura-hochrheinbahn-2026",
+          "date": "2026-10-08",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-gl",
+          "id": "kloentalerstrasse-cantiere-2026",
+          "date": "2026-10-19",
+          "dateStatus": "known"
+        },
+        "cosine": 0.869008,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-gl": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "chiusura-hochrheinbahn-2026",
+          "date": "2026-10-08",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-gl",
+          "id": "muehlehorn-strada-chiusa-ottobre",
+          "date": "2026-10-18",
+          "dateStatus": "known"
+        },
+        "cosine": 0.883517,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-gl": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "chiusura-hochrheinbahn-2026",
+          "date": "2026-10-08",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "a1-lavori-notturni-luterbach",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "cosine": 0.862364,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "chiusura-hochrheinbahn-2026",
+          "date": "2026-10-08",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "axenstrasse-chiusa-novembre-2026",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "cosine": 0.861954,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "chiusura-hochrheinbahn-2026",
+          "date": "2026-10-08",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-chiusura-passhoehe",
+          "date": "2026-10-09",
+          "dateStatus": "known"
+        },
+        "cosine": 0.864928,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "chiusura-hochrheinbahn-2026",
+          "date": "2026-10-08",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "esecutivo-zugo-mandato-2030",
+          "date": "2026-10-26",
+          "dateStatus": "known"
+        },
+        "cosine": 0.860172,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "eventi-weekend-argovia",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-gl",
+          "id": "eventi-weekend-glarona",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.926537,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-gl": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "eventi-weekend-argovia",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-tg",
+          "id": "eventi-weekend-turgovia",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.959389,
+        "threshold": 0.93,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-tg": 0.93
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "eventi-weekend-argovia",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "eventi-weekend-uri",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.923045,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "eventi-weekend-argovia",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-vs",
+          "id": "eventi-weekend-vallese",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.938661,
+        "threshold": 0.93,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-vs": 0.93
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "eventi-weekend-argovia",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "eventi-weekend-zugo",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.933753,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "fislisbach-acqua-potabile",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ag",
+          "id": "siccita-fislisbach-forniture",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "cosine": 0.972863,
+        "threshold": 0.93,
+        "thresholdBySection": {
+          "canton-ag": 0.93
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "fislisbach-acqua-potabile",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-preventivo-approvato",
+          "date": "2026-11-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.867113,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "fislisbach-steuerfuss-109",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-preventivo-approvato",
+          "date": "2026-11-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.890353,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "fislisbach-steuerfuss-109",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-sussidi-premi-2027",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "cosine": 0.863704,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "fislisbach-steuerfuss-109",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "andermatt-fisco-wyden",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "cosine": 0.869449,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "fislisbach-steuerfuss-109",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-2027-surplus",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.882316,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "fislisbach-steuerfuss-109",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-avanzo-2027",
+          "date": "2026-10-11",
+          "dateStatus": "known"
+        },
+        "cosine": 0.875926,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "fislisbach-steuerfuss-109",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "cham-moltiplicatore-fiscale-2027",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "cosine": 0.884857,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "fislisbach-steuerfuss-109",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.877614,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "incendio-sins-linea-s26",
+          "date": "2026-11-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "incendio-tunnel-fluelen",
+          "date": "2026-10-31",
+          "dateStatus": "known"
+        },
+        "cosine": 0.861704,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "iniziativa-parita-salariale-ag",
+          "date": "2026-10-18",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-aumento-salari",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "cosine": 0.861744,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "maja-riniker-eletta-governo-argovia",
+          "date": "2026-10-20",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ag",
+          "id": "riniker-governo-argovia",
+          "date": "2026-10-18",
+          "dateStatus": "known"
+        },
+        "cosine": 0.935483,
+        "threshold": 0.93,
+        "thresholdBySection": {
+          "canton-ag": 0.93
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "mellingen-budget-2027",
+          "date": "2026-10-24",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-appenzello",
+          "id": "deficit-comune-preventivo-2027",
+          "date": "2026-10-12",
+          "dateStatus": "known"
+        },
+        "cosine": 0.933705,
+        "threshold": 0.93,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-appenzello": 0.93
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "mellingen-budget-2027",
+          "date": "2026-10-24",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "premi-malattia-soletta-2027",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.868497,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "mellingen-budget-2027",
+          "date": "2026-10-24",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-preventivo-approvato",
+          "date": "2026-11-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.912889,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "mellingen-budget-2027",
+          "date": "2026-10-24",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-riduzione-premi-2027",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "cosine": 0.875918,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "mellingen-budget-2027",
+          "date": "2026-10-24",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "andermatt-fisco-wyden",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "cosine": 0.864201,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "mellingen-budget-2027",
+          "date": "2026-10-24",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-2027-surplus",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.883413,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "mellingen-budget-2027",
+          "date": "2026-10-24",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-avanzo-2027",
+          "date": "2026-10-11",
+          "dateStatus": "known"
+        },
+        "cosine": 0.885977,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "mellingen-budget-2027",
+          "date": "2026-10-24",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "cham-moltiplicatore-fiscale-2027",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "cosine": 0.89167,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "mellingen-budget-2027",
+          "date": "2026-10-24",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.896035,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "mobilita-aargovia-sistema-unico",
+          "date": "2026-10-24",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "conteggio-traffico-uri-novembre",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "cosine": 0.866962,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "niederwil-aumento-imposta-2027",
+          "date": "2026-11-06",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "premi-malattia-soletta-2027",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.861157,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "niederwil-aumento-imposta-2027",
+          "date": "2026-11-06",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-preventivo-approvato",
+          "date": "2026-11-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.88713,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "niederwil-aumento-imposta-2027",
+          "date": "2026-11-06",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "andermatt-fisco-wyden",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "cosine": 0.874307,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "niederwil-aumento-imposta-2027",
+          "date": "2026-11-06",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-2027-surplus",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.879829,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "niederwil-aumento-imposta-2027",
+          "date": "2026-11-06",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-avanzo-2027",
+          "date": "2026-10-11",
+          "dateStatus": "known"
+        },
+        "cosine": 0.872284,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "niederwil-aumento-imposta-2027",
+          "date": "2026-11-06",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "cham-moltiplicatore-fiscale-2027",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "cosine": 0.901978,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "niederwil-aumento-imposta-2027",
+          "date": "2026-11-06",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.874779,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "obermumpf-strada-sanificazione-2024",
+          "date": "2026-10-09",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-gl",
+          "id": "kloentalerstrasse-cantiere-2026",
+          "date": "2026-10-19",
+          "dateStatus": "known"
+        },
+        "cosine": 0.865144,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-gl": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "obermumpf-strada-sanificazione-2024",
+          "date": "2026-10-09",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "bristenstrasse-regimi-traffico-2026",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "cosine": 0.867849,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "obermumpf-strada-sanificazione-2024",
+          "date": "2026-10-09",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-chiusura-passhoehe",
+          "date": "2026-10-09",
+          "dateStatus": "known"
+        },
+        "cosine": 0.868673,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "oelrainstrasse-chiusura-5-novembre",
+          "date": "2026-11-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "luterbach-a5-rampe-notte",
+          "date": "2026-10-08",
+          "dateStatus": "known"
+        },
+        "cosine": 0.860145,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "oelrainstrasse-chiusura-5-novembre",
+          "date": "2026-11-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "axenstrasse-chiusa-novembre-2026",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "cosine": 0.871175,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "oelrainstrasse-chiusura-5-novembre",
+          "date": "2026-11-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "axenstrasse-chiusa-quattro-notti",
+          "date": "2026-10-20",
+          "dateStatus": "known"
+        },
+        "cosine": 0.886982,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "oelrainstrasse-chiusura-5-novembre",
+          "date": "2026-11-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "bristenstrasse-regimi-traffico-2026",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "cosine": 0.876048,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "oelrainstrasse-chiusura-5-novembre",
+          "date": "2026-11-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-chiusura-passhoehe",
+          "date": "2026-10-09",
+          "dateStatus": "known"
+        },
+        "cosine": 0.870903,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "riduzione-premi-argovia-2027",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "proposta-premi-assicurazione-2027",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "cosine": 0.865858,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "riduzione-premi-argovia-2027",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-preventivo-approvato",
+          "date": "2026-11-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.864264,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "riduzione-premi-argovia-2027",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-riduzione-premi-2027",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "cosine": 0.885676,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "riduzione-premi-argovia-2027",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "esecutivo-zugo-mandato-2030",
+          "date": "2026-10-26",
+          "dateStatus": "known"
+        },
+        "cosine": 0.860466,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "riduzione-premi-argovia-2027",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zugo-assegnazione-mandato-2030",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.8709,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "ristrizioni-rueeblimart-aarau",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-gl",
+          "id": "kloentalerstrasse-cantiere-2026",
+          "date": "2026-10-19",
+          "dateStatus": "known"
+        },
+        "cosine": 0.877581,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-gl": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "ristrizioni-rueeblimart-aarau",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-gl",
+          "id": "muehlehorn-strada-chiusa-ottobre",
+          "date": "2026-10-18",
+          "dateStatus": "known"
+        },
+        "cosine": 0.87479,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-gl": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "ristrizioni-rueeblimart-aarau",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "a1-lavori-notturni-luterbach",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "cosine": 0.871795,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "ristrizioni-rueeblimart-aarau",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "luterbach-a5-rampe-notte",
+          "date": "2026-10-08",
+          "dateStatus": "known"
+        },
+        "cosine": 0.875668,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "ristrizioni-rueeblimart-aarau",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "axenstrasse-chiusa-novembre-2026",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "cosine": 0.868356,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "ristrizioni-rueeblimart-aarau",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "bristenstrasse-regimi-traffico-2026",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "cosine": 0.86127,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "ristrizioni-rueeblimart-aarau",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "conteggio-traffico-uri-novembre",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "cosine": 0.87818,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-ag",
+          "id": "siccita-fislisbach-forniture",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-preventivo-approvato",
+          "date": "2026-11-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.861867,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-ag": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "45-residenti-richiesta-rumore",
+          "date": "2026-10-31",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-progetti-trasporto-governo",
+          "date": "2026-10-08",
+          "dateStatus": "known"
+        },
+        "cosine": 0.861336,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "appenzell-remunerazioni-energia-2027",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-preventivo-approvato",
+          "date": "2026-11-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.875071,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "appenzell-remunerazioni-energia-2027",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-riduzione-premi-2027",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "cosine": 0.863146,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "appenzell-remunerazioni-energia-2027",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.864961,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "appenzello-deficit-budget",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-preventivo-approvato",
+          "date": "2026-11-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.890617,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "appenzello-deficit-budget",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-2027-surplus",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.890192,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "appenzello-deficit-budget",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-avanzo-2027",
+          "date": "2026-10-11",
+          "dateStatus": "known"
+        },
+        "cosine": 0.883403,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "appenzello-deficit-budget",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "cham-moltiplicatore-fiscale-2027",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "cosine": 0.867733,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "appenzello-deficit-budget",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.881401,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "appenzello-esterno-risparmio-verifica",
+          "date": "2026-11-26",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-preventivo-approvato",
+          "date": "2026-11-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.872336,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "appenzello-esterno-risparmio-verifica",
+          "date": "2026-11-26",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-sussidi-premi-2027",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "cosine": 0.862742,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "appenzello-esterno-risparmio-verifica",
+          "date": "2026-11-26",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-2027-surplus",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.860595,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "appenzello-esterno-risparmio-verifica",
+          "date": "2026-11-26",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zuger-rapporto-gestione-2025",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.870746,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "appenzello-esterno-risparmio-verifica",
+          "date": "2026-11-26",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.872481,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "appenzello-tasso-fiscale-390",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "premi-malattia-soletta-2027",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.869246,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "appenzello-tasso-fiscale-390",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-preventivo-approvato",
+          "date": "2026-11-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.909982,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "appenzello-tasso-fiscale-390",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-riduzione-premi-2027",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "cosine": 0.877578,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "appenzello-tasso-fiscale-390",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-sussidi-premi-2027",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "cosine": 0.868359,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "appenzello-tasso-fiscale-390",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-2027-surplus",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.878836,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "appenzello-tasso-fiscale-390",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-avanzo-2027",
+          "date": "2026-10-11",
+          "dateStatus": "known"
+        },
+        "cosine": 0.88048,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "appenzello-tasso-fiscale-390",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "cham-moltiplicatore-fiscale-2027",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "cosine": 0.879218,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "appenzello-tasso-fiscale-390",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.923515,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "costi-sanita-meno-entrate",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-gl",
+          "id": "revisione-fiscale-canton-glarona",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.869397,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-gl": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "costi-sanita-meno-entrate",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "finanzkommission-k-rzt-kredit-digitalisierung",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "cosine": 0.863926,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "costi-sanita-meno-entrate",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "premi-malattia-soletta-2027",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.887877,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "costi-sanita-meno-entrate",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "proposta-premi-assicurazione-2027",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "cosine": 0.866033,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "costi-sanita-meno-entrate",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-parlamento-budget-2027-inchiesta-soh",
+          "date": "2026-10-20",
+          "dateStatus": "known"
+        },
+        "cosine": 0.870136,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "costi-sanita-meno-entrate",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-preventivo-approvato",
+          "date": "2026-11-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.917658,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "costi-sanita-meno-entrate",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-riduzione-premi-2027",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "cosine": 0.901551,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "costi-sanita-meno-entrate",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-sussidi-premi-2027",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "cosine": 0.887787,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "costi-sanita-meno-entrate",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-2027-surplus",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.883356,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "costi-sanita-meno-entrate",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-avanzo-2027",
+          "date": "2026-10-11",
+          "dateStatus": "known"
+        },
+        "cosine": 0.890076,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "costi-sanita-meno-entrate",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "cham-moltiplicatore-fiscale-2027",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "cosine": 0.876967,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "costi-sanita-meno-entrate",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "risch-231-milioni-tasse",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "cosine": 0.860104,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "costi-sanita-meno-entrate",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zuger-rapporto-gestione-2025",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.868999,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "costi-sanita-meno-entrate",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.905992,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "deficit-comune-preventivo-2027",
+          "date": "2026-10-12",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "finanzkommission-k-rzt-kredit-digitalisierung",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "cosine": 0.864583,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "deficit-comune-preventivo-2027",
+          "date": "2026-10-12",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "premi-malattia-soletta-2027",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.877002,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "deficit-comune-preventivo-2027",
+          "date": "2026-10-12",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-parlamento-budget-2027-inchiesta-soh",
+          "date": "2026-10-20",
+          "dateStatus": "known"
+        },
+        "cosine": 0.865624,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "deficit-comune-preventivo-2027",
+          "date": "2026-10-12",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-preventivo-approvato",
+          "date": "2026-11-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.936069,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "deficit-comune-preventivo-2027",
+          "date": "2026-10-12",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-riduzione-premi-2027",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "cosine": 0.893284,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "deficit-comune-preventivo-2027",
+          "date": "2026-10-12",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-sussidi-premi-2027",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "cosine": 0.868952,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "deficit-comune-preventivo-2027",
+          "date": "2026-10-12",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-2027-surplus",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.89133,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "deficit-comune-preventivo-2027",
+          "date": "2026-10-12",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-avanzo-2027",
+          "date": "2026-10-11",
+          "dateStatus": "known"
+        },
+        "cosine": 0.890902,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "deficit-comune-preventivo-2027",
+          "date": "2026-10-12",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "cham-moltiplicatore-fiscale-2027",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "cosine": 0.903035,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "deficit-comune-preventivo-2027",
+          "date": "2026-10-12",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zugo-assegnazione-mandato-2030",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.861954,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "deficit-comune-preventivo-2027",
+          "date": "2026-10-12",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.90336,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "eventi-weekend-appenzello",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-fr",
+          "id": "eventi-weekend-friburgo",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.931101,
+        "threshold": 0.93,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-fr": 0.93
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "eventi-weekend-appenzello",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-gl",
+          "id": "eventi-weekend-glarona",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.92264,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-gl": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "eventi-weekend-appenzello",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ne",
+          "id": "eventi-weekend-neuchatel",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.933235,
+        "threshold": 0.93,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-ne": 0.93
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "eventi-weekend-appenzello",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-sz",
+          "id": "eventi-weekend-svitto",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.932184,
+        "threshold": 0.93,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-sz": 0.93
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "eventi-weekend-appenzello",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-tg",
+          "id": "eventi-weekend-turgovia",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.936571,
+        "threshold": 0.93,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-tg": 0.93
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "eventi-weekend-appenzello",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "eventi-weekend-uri",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.924493,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "eventi-weekend-appenzello",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-vs",
+          "id": "eventi-weekend-vallese",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.943004,
+        "threshold": 0.93,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-vs": 0.93
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "eventi-weekend-appenzello",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "eventi-weekend-zugo",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.942562,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "governo-appenzello-candidati",
+          "date": "2026-11-10",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "baar-rinnovo-comunale-2027",
+          "date": "2026-10-08",
+          "dateStatus": "known"
+        },
+        "cosine": 0.879376,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "governo-appenzello-candidati",
+          "date": "2026-11-10",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "esecutivo-zugo-mandato-2030",
+          "date": "2026-10-26",
+          "dateStatus": "known"
+        },
+        "cosine": 0.86219,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "governo-appenzello-candidati",
+          "date": "2026-11-10",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "ricorso-federale-espulsione-zugo",
+          "date": "2026-10-20",
+          "dateStatus": "known"
+        },
+        "cosine": 0.864314,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "heiden-risparmi-preventivo-2027",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-preventivo-approvato",
+          "date": "2026-11-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.907887,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "heiden-risparmi-preventivo-2027",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-riduzione-premi-2027",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "cosine": 0.88951,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "heiden-risparmi-preventivo-2027",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-sussidi-premi-2027",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "cosine": 0.871609,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "heiden-risparmi-preventivo-2027",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-2027-surplus",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.888364,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "heiden-risparmi-preventivo-2027",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-avanzo-2027",
+          "date": "2026-10-11",
+          "dateStatus": "known"
+        },
+        "cosine": 0.88734,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "heiden-risparmi-preventivo-2027",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "cham-moltiplicatore-fiscale-2027",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "cosine": 0.876874,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "heiden-risparmi-preventivo-2027",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zuger-rapporto-gestione-2025",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.866632,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "heiden-risparmi-preventivo-2027",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.915452,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "herisau-verkehr-appenzello",
+          "date": "2026-10-10",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-progetti-trasporto-governo",
+          "date": "2026-10-08",
+          "dateStatus": "known"
+        },
+        "cosine": 0.889397,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "hundwil-imposte-preventivo",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "finanzkommission-k-rzt-kredit-digitalisierung",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "cosine": 0.865784,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "hundwil-imposte-preventivo",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "premi-malattia-soletta-2027",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.866266,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "hundwil-imposte-preventivo",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-preventivo-approvato",
+          "date": "2026-11-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.914966,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "hundwil-imposte-preventivo",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-riduzione-premi-2027",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "cosine": 0.896522,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "hundwil-imposte-preventivo",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-sussidi-premi-2027",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "cosine": 0.87641,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "hundwil-imposte-preventivo",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-2027-surplus",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.884996,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "hundwil-imposte-preventivo",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-avanzo-2027",
+          "date": "2026-10-11",
+          "dateStatus": "known"
+        },
+        "cosine": 0.892349,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "hundwil-imposte-preventivo",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "cham-moltiplicatore-fiscale-2027",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "cosine": 0.881085,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "hundwil-imposte-preventivo",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zuger-rapporto-gestione-2025",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.869172,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "hundwil-imposte-preventivo",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.922275,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "investimenti-tetto-fotovoltaico-2027",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "premi-malattia-soletta-2027",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.865456,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "investimenti-tetto-fotovoltaico-2027",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-preventivo-approvato",
+          "date": "2026-11-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.896774,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "investimenti-tetto-fotovoltaico-2027",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-riduzione-premi-2027",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "cosine": 0.893636,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "investimenti-tetto-fotovoltaico-2027",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-2027-surplus",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.865858,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "investimenti-tetto-fotovoltaico-2027",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-avanzo-2027",
+          "date": "2026-10-11",
+          "dateStatus": "known"
+        },
+        "cosine": 0.877756,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "investimenti-tetto-fotovoltaico-2027",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.892674,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "lavoro-ar-rav-settembre-2026",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-disoccupazione-settembre",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.882307,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "tariffe-mediche-appenzello-2026",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "aumento-salari-soletta-2027",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "cosine": 0.874879,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "tariffe-mediche-appenzello-2026",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "aumento-salari-statale-2027",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "cosine": 0.871085,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "tariffe-mediche-appenzello-2026",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "premi-malattia-soletta-2027",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.869525,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "tariffe-mediche-appenzello-2026",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-aumento-salari",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "cosine": 0.866526,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "tariffe-mediche-appenzello-2026",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-preventivo-approvato",
+          "date": "2026-11-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.876593,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "tariffe-mediche-appenzello-2026",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-stipendi-pubblici-2027",
+          "date": "2026-10-29",
+          "dateStatus": "known"
+        },
+        "cosine": 0.866143,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "tariffe-mediche-appenzello-2026",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-riduzione-premi-2027",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "cosine": 0.864601,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "teufen-budget-deficit-2027",
+          "date": "2026-10-19",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-preventivo-approvato",
+          "date": "2026-11-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.906808,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "teufen-budget-deficit-2027",
+          "date": "2026-10-19",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-riduzione-premi-2027",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "cosine": 0.880792,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "teufen-budget-deficit-2027",
+          "date": "2026-10-19",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-2027-surplus",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.892851,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "teufen-budget-deficit-2027",
+          "date": "2026-10-19",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-budget-avanzo-2027",
+          "date": "2026-10-11",
+          "dateStatus": "known"
+        },
+        "cosine": 0.888525,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "teufen-budget-deficit-2027",
+          "date": "2026-10-19",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "cham-moltiplicatore-fiscale-2027",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "cosine": 0.898659,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "teufen-budget-deficit-2027",
+          "date": "2026-10-19",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.896201,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "teufen-finanziamento-tunnel",
+          "date": "2026-11-26",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-gl",
+          "id": "braunwald-progetto-80-milioni",
+          "date": "2026-10-22",
+          "dateStatus": "known"
+        },
+        "cosine": 0.862924,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-gl": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "teufen-finanziamento-tunnel",
+          "date": "2026-11-26",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-preventivo-approvato",
+          "date": "2026-11-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.867995,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-appenzello",
+          "id": "teufen-ricorso-progetto-bundt",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "ricorso-federale-espulsione-zugo",
+          "date": "2026-10-20",
+          "dateStatus": "known"
+        },
+        "cosine": 0.872463,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-appenzello": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "basel-stadt-siti-online-di-nuoto",
+          "date": "2026-10-25",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "uri-chiusura-passhoehe",
+          "date": "2026-10-09",
+          "dateStatus": "known"
+        },
+        "cosine": 0.868729,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "baselland-maiali-enzootica",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-pneumonia-suini",
+          "date": "2026-10-09",
+          "dateStatus": "known"
+        },
+        "cosine": 0.881916,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "basilea-cantieri-alle-sei",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zugo-revisione-legge-edilizia-2026",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.862211,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "domande-edilizie-solo-digitale-2027",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-basilea",
+          "id": "permessi-edilizi-digitali-basel",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.955119,
+        "threshold": 0.93,
+        "thresholdBySection": {
+          "canton-basilea": 0.93
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "domande-edilizie-solo-digitale-2027",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "governo-soletta-ottobre-2026",
+          "date": "2026-10-20",
+          "dateStatus": "known"
+        },
+        "cosine": 0.8602,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "domande-edilizie-solo-digitale-2027",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "revisione-pbg-zugo-2026",
+          "date": "2026-10-22",
+          "dateStatus": "known"
+        },
+        "cosine": 0.875536,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "domande-edilizie-solo-digitale-2027",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zugo-revisione-legge-edilizia-2026",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.876778,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "gdk-premi-piu-bassi",
+          "date": "2026-11-11",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "premi-malattia-soletta-2027",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.863088,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "gdk-premi-piu-bassi",
+          "date": "2026-11-11",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "proposta-premi-assicurazione-2027",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "cosine": 0.869136,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "gdk-premi-piu-bassi",
+          "date": "2026-11-11",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-preventivo-approvato",
+          "date": "2026-11-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.864879,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "gdk-premi-piu-bassi",
+          "date": "2026-11-11",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "solothurn-sussidi-premi-2027",
+          "date": "2026-10-28",
+          "dateStatus": "known"
+        },
+        "cosine": 0.868689,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "gdk-premi-piu-bassi",
+          "date": "2026-11-11",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zug-fondo-zukunftskapital-900m",
+          "date": "2026-11-07",
+          "dateStatus": "known"
+        },
+        "cosine": 0.860698,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "osttangente-riapertura-basilea",
+          "date": "2026-11-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-gl",
+          "id": "kloentalerstrasse-cantiere-2026",
+          "date": "2026-10-19",
+          "dateStatus": "known"
+        },
+        "cosine": 0.87028,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-gl": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "osttangente-riapertura-basilea",
+          "date": "2026-11-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-gl",
+          "id": "muehlehorn-strada-chiusa-ottobre",
+          "date": "2026-10-18",
+          "dateStatus": "known"
+        },
+        "cosine": 0.861292,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-gl": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "osttangente-riapertura-basilea",
+          "date": "2026-11-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "a1-lavori-notturni-luterbach",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "cosine": 0.885126,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "osttangente-riapertura-basilea",
+          "date": "2026-11-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "axenstrasse-chiusa-novembre-2026",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "cosine": 0.884192,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "osttangente-riapertura-basilea",
+          "date": "2026-11-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-ur",
+          "id": "bristenstrasse-regimi-traffico-2026",
+          "date": "2026-10-23",
+          "dateStatus": "known"
+        },
+        "cosine": 0.885356,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-ur": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "permessi-edilizi-digitali-basel",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "soletta-preventivo-approvato",
+          "date": "2026-11-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.866632,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "permessi-edilizi-digitali-basel",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "esecutivo-zugo-mandato-2030",
+          "date": "2026-10-26",
+          "dateStatus": "known"
+        },
+        "cosine": 0.864567,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "permessi-edilizi-digitali-basel",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "revisione-pbg-zugo-2026",
+          "date": "2026-10-22",
+          "dateStatus": "known"
+        },
+        "cosine": 0.863528,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "permessi-edilizi-digitali-basel",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "ricorso-federale-espulsione-zugo",
+          "date": "2026-10-20",
+          "dateStatus": "known"
+        },
+        "cosine": 0.866054,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "permessi-edilizi-digitali-basel",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zugo-assegnazione-mandato-2030",
+          "date": "2026-10-21",
+          "dateStatus": "known"
+        },
+        "cosine": 0.865163,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "permessi-edilizi-digitali-basel",
+          "date": "2026-10-07",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-zg",
+          "id": "zugo-revisione-legge-edilizia-2026",
+          "date": "2026-10-17",
+          "dateStatus": "known"
+        },
+        "cosine": 0.860232,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-zg": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "salario-minimo-basilea-2027",
+          "date": "2026-10-26",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-basilea",
+          "id": "salario-minimo-basilea-aumento",
+          "date": "2026-10-31",
+          "dateStatus": "known"
+        },
+        "cosine": 0.963052,
+        "threshold": 0.93,
+        "thresholdBySection": {
+          "canton-basilea": 0.93
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "salario-minimo-basilea-2027",
+          "date": "2026-10-26",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "aumento-salari-soletta-2027",
+          "date": "2026-11-03",
+          "dateStatus": "known"
+        },
+        "cosine": 0.882655,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-so": 0.86
+        }
+      },
+      {
+        "left": {
+          "section": "canton-basilea",
+          "id": "salario-minimo-basilea-2027",
+          "date": "2026-10-26",
+          "dateStatus": "known"
+        },
+        "right": {
+          "section": "canton-so",
+          "id": "aumento-salari-statale-2027",
+          "date": "2026-10-27",
+          "dateStatus": "known"
+        },
+        "cosine": 0.887494,
+        "threshold": 0.86,
+        "thresholdBySection": {
+          "canton-basilea": 0.93,
+          "canton-so": 0.86
+        }
+      }
+    ]
+  }
+}

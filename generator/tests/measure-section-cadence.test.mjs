@@ -13,6 +13,9 @@ import {
   countPushFiveAttemptExhaustions,
   collectM6Supplement,
   createM6InputSnapshot,
+  currentGenerateQueueWaitMinutes,
+  generationJob,
+  generationJobIsQueued,
   generationJobWasAdmitted,
   hasCompleteM5Coverage,
   m6ZeroIsDateIndependent,
@@ -240,11 +243,11 @@ test('public API records join ID, section slug and localized metadata', () => {
   const api = {
     national: [{ id: 'news-one', date: '2026-11-25', section: undefined, commit: 'abc' }],
     swiss: [{ id: 'news-two', date: '2026-11-25T00:00:00+01:00' }],
-    cantons: [{ id: 'news-three', date: '2026-11-25T23:30:00Z', section: 'canton-ti' }],
+    cantons: [{ id: 'news-three', datePublished: '2026-11-25T23:30:00Z', section: 'canton-ti' }],
     slugs: {
       blog: { 'news-one': { it: 'notizia-uno' } },
       swiss: { 'news-two': { it: 'notizia-due' } },
-      cantons: { 'news-three': { it: 'notizia-tre' } },
+      cantons: { 'canton-ti': { 'news-three': { it: 'notizia-tre' } } },
     },
     meta: {
       frontaliere: { 'blog.article.news-one.title': 'Uno', 'blog.article.news-one.excerpt': 'Estratto uno' },
@@ -317,11 +320,17 @@ test('slug deduplication is scoped to section and skipped records remain explici
       { id: 'duplicate-national', date: '2026-11-25' },
     ],
     swiss: [],
-    cantons: [{ id: 'same-canton', date: '2026-11-25', section: 'canton-ti' }],
+    cantons: [
+      { id: 'same-canton', date: '2026-11-25', section: 'canton-ti' },
+      { id: 'same-slug-be', date: '2026-11-25', section: 'canton-be' },
+    ],
     slugs: {
       blog: { 'same-national': { it: 'same-slug' }, 'duplicate-national': { it: 'same-slug' } },
       swiss: {},
-      cantons: { 'same-canton': { it: 'same-slug' } },
+      cantons: {
+        'canton-ti': { 'same-canton': { it: 'same-slug' } },
+        'canton-be': { 'same-slug-be': { it: 'same-slug' } },
+      },
     },
     meta: { frontaliere: {}, svizzera: {}, canton: {} },
   };
@@ -329,9 +338,34 @@ test('slug deduplication is scoped to section and skipped records remain explici
   assert.deepEqual(result.articles.map(({ section, slug }) => `${section}:${slug}`), [
     'frontaliere:same-slug',
     'canton-ti:same-slug',
+    'canton-be:same-slug',
   ]);
   assert.deepEqual(result.duplicateSlugsBySection, { frontaliere: 1 });
   assert.equal(result.missingRecordCount, 1);
+});
+
+test('M1 datePublished aliases map, while unassigned rows with unknown dates block section coverage', () => {
+  const api = {
+    national: [{ id: 'national-date-published', datePublished: '2026-11-25' }],
+    swiss: [],
+    cantons: [{ id: 'unknown-canton-date', section: 'canton-not-configured', date: '' }],
+    slugs: {
+      blog: { 'national-date-published': { it: 'nazionale-data-pubblicata' } },
+      swiss: {},
+      cantons: {},
+    },
+    meta: { frontaliere: {}, svizzera: {}, canton: {} },
+  };
+  const normalized = buildArticleRecords(api);
+  assert.equal(normalized.articles.length, 1);
+  assert.equal(normalized.articles[0].publishedDate, '2026-11-25');
+  const coverage = summarizeM1IndexCoverage(api, normalized, '2026-11-25', '2026-11-25');
+  assert.equal(coverage.rowsWithUnknownDate, 1);
+  assert.equal(coverage.rowsWithUnknownSection, 1);
+  assert.equal(coverage.rowsWithUnknownSectionAndDate, 1);
+  assert.equal(coverage.unassignedUnknownDateSkippedCandidates, 1);
+  assert.equal(coverage.coverageComplete, false);
+  assert.equal(Object.values(coverage.sections).every((section) => !section.coverageComplete), true);
 });
 
 test('M1 verified totals are bucketed by the verified Zurich datePublished day', () => {
@@ -362,6 +396,12 @@ test('M2 admission excludes completed skipped jobs, and M6 uses section-local th
   assert.equal(generationJobWasAdmitted({ status: 'completed', conclusion: 'skipped', startedAt: null }), false);
   assert.equal(generationJobWasAdmitted({ status: 'completed', conclusion: 'failure', startedAt: '2026-11-25T10:00:00Z' }), true);
   assert.equal(generationJobWasAdmitted({ status: 'queued', conclusion: null, startedAt: null }), true);
+  assert.equal(generationJobWasAdmitted({ status: 'pending', conclusion: null, startedAt: null }), true);
+  assert.equal(generationJobIsQueued({ status: 'pending' }), true);
+  assert.equal(generationJobIsQueued({ status: 'in_progress' }), false);
+  const now = Date.parse('2026-11-27T23:50:00Z');
+  assert.equal(currentGenerateQueueWaitMinutes({ status: 'pending' }, now - 120_000, now), 2);
+  assert.equal(currentGenerateQueueWaitMinutes({ status: 'completed' }, now - 120_000, now), null);
   const thresholds = { 'canton-ti': 0.94, 'canton-be': 0.92 };
   assert.equal(nearDuplicateThresholdForPair({ section: 'canton-ti' }, { section: 'canton-ti' }, thresholds), 0.94);
   assert.equal(nearDuplicateThresholdForPair({ section: 'canton-ti' }, { section: 'canton-be' }, thresholds), 0.92);
@@ -377,6 +417,20 @@ test('M2 admission excludes completed skipped jobs, and M6 uses section-local th
   assert.deepEqual(resolveThresholdCorpusSize({ storeCount: null, storeFileMissing: false, publishedIndexCount: 40 }), {
     count: null, source: 'unavailable',
   });
+});
+
+test('generation job selection ignores admission and section gate jobs', () => {
+  const jobs = [
+    { name: 'generate / admit', status: 'completed', conclusion: 'success', startedAt: '2026-11-27T22:35:13Z' },
+    { name: 'generate / section_gate', status: 'completed', conclusion: 'success', startedAt: '2026-11-27T22:35:41Z' },
+    { name: 'generate / generate production', status: 'completed', conclusion: 'skipped' },
+  ];
+  const selected = generationJob(jobs);
+  assert.equal(selected, jobs[2]);
+  assert.equal(generationJobWasAdmitted(selected), false);
+  assert.equal(generationJob([{ name: 'generate / generate production', status: 'completed', startedAt: '2026-11-27T22:36:16Z' }])?.status, 'completed');
+  assert.equal(generationJob([{ name: 'generate / generate dry run', status: 'completed', startedAt: '2026-11-27T22:36:16Z' }]), null);
+  assert.equal(generationJob([{ name: 'generate / section_gate', status: 'completed', startedAt: '2026-11-27T22:35:41Z' }]), null);
 });
 
 test('terminal M2 runs without a resolved marker remain visible as unobservable', () => {
