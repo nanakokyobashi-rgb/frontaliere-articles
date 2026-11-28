@@ -964,7 +964,20 @@ jobs:
           fi
 
           budget_s="${GENERATE_BUDGET_S:-3000}"
-          hard_kill_s="${GENERATE_HARD_KILL_S:-2400}"
+          # F3.A.5 (2026-11-28): deadline cooperativa del run, 1440s (24 min).
+          # Misura su 24 run con esito letto (generate-article.yml e
+          # generate-article-{ge,lu,ne,ag}.yml): 13 su 24 chiudono fra 36 e 39
+          # min, tutte `no-article` (declared / provider-unavailable), cioe'
+          # senza articolo; lo stadio e' il ciclo generazione -> fact-check/gate
+          # -> rigenerazione (chiamate codex da 2-3 min ciascuna, 5-6 giri), non
+          # la selezione (~1,5 min) ne' la traduzione. Il cap precedente (2400s)
+          # lasciava la corsia a quel ciclo per 36-40 min. Con 1440s il processo
+          # si ferma da solo a cap-60 = 1380s (CREATE_ARTICLE_MAX_WALL_MS) con
+          # esito dichiarato; checkout/npm ci (~3 min) + 1440s + commit/push/
+          # dispatch (~1,5 min) tengono il job entro ~30 min. Resta
+          # sovrascrivibile con GENERATE_HARD_KILL_S; i controlli di qualita'
+          # (gate deterministici, fact-check, soglie) non cambiano.
+          hard_kill_s="${GENERATE_HARD_KILL_S:-1440}"
 
           stall_s="${GENERATE_STALL_S:-540}"
           stall_poll_s="${GENERATE_STALL_POLL_S:-30}"

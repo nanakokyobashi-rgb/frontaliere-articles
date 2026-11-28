@@ -24432,6 +24432,18 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
             throw err;
           }
         }
+        // F3.A.5: come per i gate deterministici, a deadline cooperativa scaduta
+        // non si apre un altro giro generazione + fact-check (5-6 giri da 2-3 min
+        // erano lo stadio che teneva la corsia per 36-40 min senza esito). Il
+        // throw e' raccolto dal catch (fcErr) sotto, che con budget scaduto
+        // rilancia: stesso no-article dichiarato, verdetto non allentato.
+        if (attempt < maxAttempts && wallBudgetExceeded()) {
+          console.error(
+            `  ⏱️  Budget wall-clock (${Math.round(RUN_WALL_BUDGET_MS / 60000)}min) superato dopo ${attempt}/${maxAttempts} `
+            + 'tentativi sul fact-check — interrompo invece di aprire un altro giro di rigenerazione.',
+          );
+          throw err;
+        }
         if (attempt < maxAttempts) {
           // Feed the flagged claims into the next attempt's prompt so the model
           // fixes exactly what it invented instead of regenerating blind.
@@ -24469,7 +24481,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       // run so every headline does not repeat the same failed cascade.
       if (fcErr.qualityReject === true) throw fcErr;
       if (isFactCheckUnavailableError(fcErr)) throw fcErr;
-      if (attempt < maxAttempts) {
+      if (attempt < maxAttempts && !wallBudgetExceeded()) {
         console.error(`  🔄 Rigenero per fact-check: ${safeSignalDiagnosticTextForLog(fcErr.message).slice(0, 120)} (${attempt}/${maxAttempts})...`);
         continue;
       }
