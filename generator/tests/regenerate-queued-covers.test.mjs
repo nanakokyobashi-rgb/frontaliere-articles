@@ -1756,13 +1756,26 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
     1,
     'il checkout resolve deve distinguere dispatch live e replay pinnato',
   );
+  // Il vecchio job `publish` e' diviso in stage/finalize: entrambi fanno il
+  // checkout della revisione del workflow e poi leggono la HEAD di main dentro
+  // lo slot di sezione; la sorgente ricalcolata dal resolve stale (o pinnata
+  // dal replay) arriva al finalize come PINNED_SOURCE e al render come
+  // SOURCE_COMMIT, senza essere mai sostituita dal ref del trigger.
+  const sectionFinalizeJob = sectionPublisher.slice(sectionPublisher.indexOf('\n  finalize:\n'));
   assert.match(
-    sectionPublisher,
-    /ref: \$\{\{ needs\.resolve\.outputs\.source_commit \|\| github\.event\.workflow_run\.head_sha \|\| inputs\.source_commit \|\| \(github\.event_name == 'workflow_dispatch' && inputs\.bootstrap != true && github\.ref\) \|\| github\.sha \}\}/u,
-    'il publish deve usare la sorgente ricalcolata dal resolve stale',
+    sectionFinalizeJob,
+    /PINNED_SOURCE: \$\{\{ needs\.resolve\.outputs\.source_commit \|\| inputs\.source_commit \}\}/u,
+    'il finalize deve usare la sorgente ricalcolata dal resolve stale',
+  );
+  assert.match(
+    sectionFinalizeJob,
+    /SOURCE_COMMIT: \$\{\{ needs\.resolve\.outputs\.source_commit \|\| inputs\.source_commit \}\}/u,
+    'il render del finalize riceve la sorgente ricalcolata dal resolve stale',
   );
   assert.match(sectionContract, /normal_dispatch='false'/u);
-  assert.match(sectionPublisher, /REF: \$\{\{ github\.ref \}\}/u);
+  // stage/finalize leggono sempre la HEAD di main nello slot di sezione e
+  // dichiarano al render il ref main (non il ref del trigger).
+  assert.match(sectionFinalizeJob, /REF: refs\/heads\/main/u);
   assert.match(sectionPublisher, /preflight_head: \$\{\{ steps\.preflight_head\.outputs\.head \}\}/u);
   assert.match(sectionPublisher, /PREFLIGHT_HEAD: \$\{\{ needs\.resolve\.outputs\.preflight_head \}\}/u);
   assert.match(sectionRender, /validated_head="\$PREFLIGHT_HEAD"/u);
@@ -1795,14 +1808,19 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(sectionContract, /refresh_live_plan_and_preflight\(\) \{[\s\S]*check-blog-body-links\.mjs/u);
   assert.match(sectionLiveLoop, /rendered_head=\$EXPECTED_MAIN_HEAD/u);
   assert.match(sectionLiveLoop, /staging live completata sulla HEAD \$EXPECTED_MAIN_HEAD/u);
-  assert.match(sectionContract, /mixed_matrix: \$\{\{ steps\.collect\.outputs\.mixed_matrix \}\}/u);
-  assert.match(sectionContract, /echo 'mixed_matrix=false'/u);
-  assert.match(sectionContract, /HEAD diverse[\s\S]*mixed_matrix=true[\s\S]*exit 0/u);
-  assert.match(sectionContract, /Redispatch staged backfill on current main after stale replay or mixed matrix/u);
-  assert.match(sectionContract, /MIXED_MATRIX: \$\{\{ needs\.publish_release_head\.outputs\.mixed_matrix \}\}/u);
-  assert.match(sectionContract, /matrix mista rilevata[\s\S]*read-main-head\.sh/u);
-  assert.match(sectionContract, /needs\.publish_release_head\.outputs\.mixed_matrix == 'true'/u);
-  assert.match(sectionContract, /needs\.publish_release_head\.outputs\.mixed_matrix != 'true'/u);
+  // Il vecchio job publish_release_head (collect + matrix mista + redispatch)
+  // e' sostituito dal coordinator: ogni sezione e' staged con la propria
+  // revisione, il coordinator rilegge main (barriera con doppia osservazione)
+  // e il finalize recupera sotto lo slot le sezioni cambiate dopo lo stage,
+  // senza un redispatch su main corrente.
+  assert.match(sectionContract, /needs: \[resolve, stage\]/u);
+  assert.match(sectionContract, /bash scripts\/ci\/fast-publish-section-coordinate\.sh/u);
+  const sectionCoordinator = fs.readFileSync(new URL('../../scripts/ci/fast-publish-section-coordinate.sh', import.meta.url), 'utf8');
+  assert.match(sectionCoordinator, /main avanza ripetutamente durante la barriera API; nessun dispatch stale consentito/u);
+  assert.match(sectionContract, /fast-publish-section\.mjs r2-late-finalize-recovery/u);
+  assert.match(sectionContract, /sezione \$SECTION cambiata dopo lo stage; recupero latest full-section sotto lo slot corrente/u);
+  assert.match(sectionContract, /mixed_recovery|coordinated_recovery/u);
+  assert.doesNotMatch(sectionContract, /publish_release_head/u);
   assert.doesNotMatch(sectionLiveLoop, /sleep 30/u);
   assert.doesNotMatch(sectionLiveLoop, /deferred_retry/u);
   for (const [publisher, contract] of [

@@ -813,7 +813,19 @@ test('i publisher rapidi eseguono il link gate prima di ogni pubblicazione', () 
     const gateSource = `${workflow}\n${preflight}`;
     const linkGate = gateSource.indexOf('node scripts/ci/check-blog-body-links.mjs');
     const syntaxGate = gateSource.indexOf('node scripts/ci/check-blog-body-syntax.mjs');
-    const publishJob = workflow.indexOf('\n  publish:');
+    // Il publisher di sezione e' diviso in stage -> coordinate_api_release ->
+    // finalize, tutti `needs: resolve` (dove gira il preflight): il gate deve
+    // chiudersi prima del PRIMO job che pubblica (stage), e ogni job successivo
+    // deve dipendere da resolve.
+    const publishJob = workflow.indexOf(file === 'fast-publish-section.yml' ? '\n  stage:' : '\n  publish:');
+    if (file === 'fast-publish-section.yml') {
+      for (const jobName of ['stage', 'coordinate_api_release', 'finalize']) {
+        const jobStart = workflow.indexOf(`\n  ${jobName}:`);
+        assert.ok(jobStart > 0, `${file}: job ${jobName} assente`);
+        assert.match(workflow.slice(jobStart, jobStart + 600), /needs: (?:\[[^\]]*\bresolve\b[^\]]*\]|resolve\b)/u,
+          `${file}: il job ${jobName} deve dipendere da resolve (gate prima della pubblicazione)`);
+      }
+    }
     const preflightStep = file === 'fast-publish-section.yml'
       ? workflow.indexOf('bash scripts/ci/fast-publish-section-preflight.sh')
       : linkGate;

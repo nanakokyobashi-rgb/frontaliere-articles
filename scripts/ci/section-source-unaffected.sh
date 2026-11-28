@@ -53,12 +53,18 @@ if [ "${1:-}" = '--replay-nonce' ]; then
     esac
     identity_args+=("$arg")
   done
-  hash="$(printf '%s\0' "${identity_args[@]}" | sha256sum | cut -c1-16)"
+  if command -v sha256sum >/dev/null 2>&1; then
+    hash="$(printf '%s\0' "${identity_args[@]}" | sha256sum | cut -c1-16)"
+  elif command -v shasum >/dev/null 2>&1; then
+    hash="$(printf '%s\0' "${identity_args[@]}" | shasum -a 256 | cut -c1-16)"
+  else
+    echo '::error::sha256sum o shasum non disponibile per il nonce stale-late' >&2
+    exit 1
+  fi
   printf 'stale-late-%s-%s-%s\n' "${base:0:12}" "$section" "$hash"
   exit 0
 fi
 
-section_hub_paths=()
 section=
 
 if [ "${1:-}" = '--section' ]; then
@@ -89,17 +95,16 @@ fi
 git merge-base --is-ancestor "$expected" "$current" || exit 1
 
 if [ -n "${section:-}" ]; then
-  # Only edits to existing hub documents qualify. Additions and deletions
-  # can change shared hub coverage and the edge section registry.
+  # Una modifica a un hub esistente di un'altra sezione deve restare un
+  # documento valido su entrambe le revisioni: uno malformato non puo' essere
+  # dichiarato irrilevante. Aggiunte e cancellazioni sono scopate dal planner.
   hub_glob=':(top,glob)content/cantons/canton-*/hubs/*.json'
   hub_changes="$(git diff --name-status --no-renames "$expected" "$current" -- "$hub_glob")" || exit 1
   while IFS=$'\t' read -r status file; do
     [ -z "$status" ] && continue
-    if [[ "$status" = M && "$file" =~ ^content/cantons/(canton-[a-z0-9-]+)/hubs/([a-z0-9-]+)\.json$ ]]; then
-      hub_section="${BASH_REMATCH[1]}"
-      hub_topic="${BASH_REMATCH[2]}"
-      if [ "$hub_section" != "$section" ]; then
-        node --input-type=module - "$expected" "$current" "$file" "$hub_section" "$hub_topic" <<'NODE' || exit 1
+    if [ "$status" = M ] && [[ "$file" =~ ^content/cantons/(canton-[a-z0-9-]+)/hubs/([a-z0-9-]+)\.json$ ]] \
+      && [ "${BASH_REMATCH[1]}" != "$section" ]; then
+      node --input-type=module - "$expected" "$current" "$file" "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}" <<'NODE' || exit 1
 import { execFileSync } from 'node:child_process';
 import { parseCantonHubDocument } from './scripts/lib/canton-hub-data.mjs';
 
@@ -109,10 +114,22 @@ for (const sha of [before, after]) {
   parseCantonHubDocument(raw, section, topic);
 }
 NODE
-        section_hub_paths+=(":(top,exclude,literal)$file")
-      fi
     fi
   done <<< "$hub_changes"
+  # Usa lo stesso planner del publish per body, registry, metadata, hub e
+  # immagini, leggendo i blob esatti del range anche se la worktree e' pinned.
+  section_matrix="$(node scripts/ci/fast-publish-section.mjs r2-plan-range "$expected" "$current")" || {
+    echo '::error::impossibile calcolare lo scope R2 sulle revisioni del replay' >&2
+    exit 1
+  }
+  if ! jq -e 'type == "array" and all(.[]; .section | type == "string")' <<< "$section_matrix" >/dev/null; then
+    echo '::error::piano R2 non valido per la guardia di sezione' >&2
+    exit 1
+  fi
+  if jq -e --arg section "$section" 'any(.[]; .section == $section)' <<< "$section_matrix" >/dev/null; then
+    exit 1
+  fi
+  exit 0
 fi
 
 if [ "$bookkeeping_only" = 'true' ]; then
@@ -132,7 +149,6 @@ git diff --quiet --no-ext-diff --no-textconv --ignore-submodules=none "$expected
   ":(top,exclude,literal)$section_workflow" \
   ":(top,exclude,literal)$shard_workflow" \
   "${bookkeeping_paths[@]}" \
-  "${section_hub_paths[@]}" \
   ':(top,exclude,literal)data/image-regeneration-queue.json' \
   ':(top,exclude,literal)data/image-regeneration-queue-pending.jsonl' \
   ':(top,exclude,glob)data/image-regeneration-queue-pending.jsonl.*.pending' \

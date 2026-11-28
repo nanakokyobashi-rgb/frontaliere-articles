@@ -249,6 +249,76 @@
       }
     },
     {
+      "path": "scripts/ci/fast-publish-api-only-decision.mjs",
+      "mode": "corpus-only",
+      "reason": "Decisione pura dei follow-up api-only: sceglie le sezioni da ridispatchare solo quando nessun Fast Publish diretto da push le possiede. Il sito non ha il publisher per sezione del corpus ne' questo passaggio, quindi il path resta corpus-only per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
+      "path": "scripts/ci/fast-publish-api-only-listener.sh",
+      "mode": "corpus-only",
+      "reason": "Listener del workflow api-only del corpus: applica la decisione di follow-up e rilancia le sezioni con il contratto del publisher. Il sito non possiede questo workflow ne' il publisher corpus-side, quindi il path resta corpus-only per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
+      "path": "scripts/ci/fast-publish-section-coordinate.sh",
+      "mode": "corpus-only",
+      "reason": "Coordinamento del fast-publish-section estratto dal workflow per restare sotto il limite del parser GitHub Actions: serializza i child workflow della stessa run. Il sito non possiede il publisher corpus-side ne' questo helper, quindi il path resta corpus-only per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
+      "path": "scripts/ci/fast-publish-section-late-api-recovery.sh",
+      "mode": "corpus-only",
+      "reason": "Recovery tardivo dell'API dopo un fast-publish-section estratto dal workflow per restare sotto il limite del parser GitHub Actions. Il sito non possiede il publisher corpus-side ne' questo helper, quindi il path resta corpus-only per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
+      "path": "scripts/ci/fast-publish-section-readiness-recovery.sh",
+      "mode": "corpus-only",
+      "reason": "Recovery del finalize dopo un readiness-timeout: accoda un dispatch bounded della sezione con la release API attesa. Il sito non possiede il publisher corpus-side ne' questo helper, quindi il path resta corpus-only per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
+      "path": "scripts/ci/fast-publish-section-pending-probe.sh",
+      "mode": "corpus-only",
+      "reason": "Sonda dei fast-publish-section ancora pendenti usata dal coordinamento corpus-side. Il sito non possiede il publisher corpus-side ne' questo helper, quindi il path resta corpus-only per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
+      "path": "scripts/ci/wait-fast-publish-api-readiness.mjs",
+      "mode": "corpus-only",
+      "reason": "Attesa bounded della readiness dell'API pubblicata dopo un fast-publish, usata dai workflow del corpus. Il sito non pubblica l'API dal corpus ne' possiede questo helper, quindi il path resta corpus-only per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
       "path": "scripts/ci/fast-publish-section-edge-candidate.sh",
       "mode": "corpus-only",
       "reason": "Resolver fail-closed della release edge intermedia usato da fast-publish-section quando la run ha osservato una release stale: accetta solo un commit antenato della punta corrente con registro di sezione invariato e delega il piano al publisher corpus-side. Il sito non possiede questo workflow né il suo fallback edge, quindi il path resta corpus-only per costruzione.",

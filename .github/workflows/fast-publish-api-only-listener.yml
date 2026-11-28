@@ -1,0 +1,76 @@
+name: fast-publish-api-only-listener
+run-name: fast-publish-api-only-listener / ${{ github.event.workflow_run.head_sha || github.sha }}
+
+on:
+  workflow_run:
+    workflows: ['Publish article data API']
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  dispatch_api_only_targets:
+    # Anche schedule e workflow_dispatch (replay con source_commit): il trigger
+    # workflow_run e' stato tolto da fast-publish-section, quindi senza questi
+    # eventi nessuno riconcilierebbe R2 dopo un rilascio non-push. Lo script
+    # distingue i casi: push = range del push; non-push = commit effettivamente
+    # pubblicato (registro edge) e solo le sezioni ancora indietro.
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: Checkout listener and corpus planner
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Setup isolated article source runtime
+        uses: ./.github/actions/setup-article-source-runtime
+
+      - name: Install dependencies for Remote Config
+        run: bash scripts/lib/npm-ci-retry.sh
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo '::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set'
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      - name: Load dispatch token from Remote Config
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Dispatch only uncovered API-only section targets
+        id: dispatch
+        env:
+          REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ github.token }}
+          WORKFLOW_RUN_ID: ${{ github.event.workflow_run.id }}
+          WORKFLOW_RUN_EVENT: ${{ github.event.workflow_run.event }}
+          WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          WORKFLOW_RUN_DISPLAY_TITLE: ${{ github.event.workflow_run.display_title }}
+        run: bash scripts/ci/fast-publish-api-only-listener.sh
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f "$RUNNER_TEMP/sa.json"

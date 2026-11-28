@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import {
   compareProvesDirectParent,
   flattenWorkflowRunPages,
+  parseFastPublishRangeRunTitle,
   parsePushRangeRunTitle,
   resolvePushRange,
 } from '../../scripts/ci/resolve-workflow-run-push-range.mjs';
@@ -47,6 +48,17 @@ test('workflow_run push range: usa il confine persistito nel titolo della run AP
   });
   assert.equal(parsePushRangeRunTitle('Publish article data API / range=none..' + HEAD), null);
   assert.equal(parsePushRangeRunTitle('Publish article data API / range=' + BEFORE + '..' + OTHER)?.after, OTHER);
+});
+
+test('workflow_run API dispatch: riconosce il range diretto nel nonce del titolo', () => {
+  const title = `Publish article data API (fast-publish-range-${BEFORE}-${HEAD}) / range=none..${OTHER}`;
+  assert.deepEqual(parseFastPublishRangeRunTitle(title), {
+    before: BEFORE,
+    after: HEAD,
+    workflowRunHead: OTHER,
+  }, 'il marker identifica il source_commit anche se --ref main avanza prima del run');
+  assert.equal(parseFastPublishRangeRunTitle(`${title.slice(0, -40)}invalid`), null);
+  assert.equal(parseFastPublishRangeRunTitle(`Publish article data API / range=none..${HEAD}`), null);
 });
 
 test('workflow_run push range: usa il run API precedente quando manca il PushEvent', () => {
