@@ -6744,6 +6744,42 @@
       "firstSeenAt": "2026-11-28T03:30:48.803Z",
       "lastValidatedAt": "2026-11-28T03:30:48.803Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "formazione continua canton Svitto requisiti e contributi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-28T04:18:41.162Z",
+      "lastValidatedAt": "2026-11-28T04:18:41.162Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "patente di guida canton Svitto conversione ed esami",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-28T04:18:41.420Z",
+      "lastValidatedAt": "2026-11-28T04:18:41.420Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "imposta di successione e donazione canton Svitto aliquote",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-28T04:20:57.080Z",
+      "lastValidatedAt": "2026-11-28T04:20:57.080Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -7738,10 +7774,10 @@
       "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-28T03:15:36.214Z",
-      "lastStrikeAt": "2026-11-28T03:15:36.214Z",
-      "expiresAt": "2026-12-28T03:15:36.214Z"
+      "lastStrikeAt": "2026-11-28T04:09:52.120Z",
+      "expiresAt": "2026-12-28T04:09:52.120Z"
     },
     {
       "keyword": "assicurazione immobili canton Svitto guida a obbligo e premi",
@@ -7750,10 +7786,10 @@
       "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-28T03:24:33.067Z",
-      "lastStrikeAt": "2026-11-28T03:24:33.067Z",
-      "expiresAt": "2026-12-28T03:24:33.067Z"
+      "lastStrikeAt": "2026-11-28T04:16:37.575Z",
+      "expiresAt": "2026-12-28T04:16:37.575Z"
     }
   ],
   "legacy": [
