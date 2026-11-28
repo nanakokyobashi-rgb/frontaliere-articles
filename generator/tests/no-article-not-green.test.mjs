@@ -303,8 +303,8 @@ test('le ragioni locali alla sezione e quelle del pool condiviso usano codici di
   // verifier e quota usano il codice 5 quando il servizio condiviso non regge.
   const declared = src.match(/(?:process\.exit|await exitAfterFlush)\(EXIT_NO_ARTICLE_DECLARED\)/g) || [];
   assert.equal(
-    declared.length, 10,
-    'le dieci ragioni locali alla sezione devono mantenere il codice 4',
+    declared.length, 12,
+    'le dodici ragioni locali alla sezione (incluse le due della ripresa traduzioni: bozza esaurita e traduzione incompleta) devono mantenere il codice 4',
   );
   assert.match(
     src,
@@ -423,8 +423,8 @@ test('un generate fallito salva solo i marker di recovery e lascia rossa la run'
     assert.match(condition, /steps\.generate\.outcome == 'failure'/);
     assert.match(
       condition,
-      /success\(\)\s*\|\|\s*\(failure\(\)\s*&&\s*steps\.generate\.outcome == 'failure'\s*&&\s*steps\.generate\.outputs\.article != 'true'\s*&&\s*\(steps\.generate\.outputs\.cooperative_stop == 'true'\s*\|\|\s*steps\.generate\.outputs\.outcome_kind == 'error'\)\)/,
-      `${path.basename(file)}: recovery solo per stop cooperativo o errore dichiarato, senza cambiare la precedenza`,
+      /success\(\)\s*\|\|\s*\(failure\(\)\s*&&\s*steps\.generate\.outcome == 'failure'\s*&&\s*steps\.generate\.outputs\.article != 'true'\s*&&\s*\(steps\.generate\.outputs\.cooperative_stop == 'true'\s*\|\|\s*steps\.generate\.outputs\.outcome_kind == 'error'\s*\|\|\s*steps\.generate\.outputs\.outcome_kind == 'timeout'\)\)/,
+      `${path.basename(file)}: recovery solo per stop cooperativo, errore o timeout dichiarati, senza cambiare la precedenza`,
     );
     assert.match(
       workflow,
@@ -434,7 +434,9 @@ test('un generate fallito salva solo i marker di recovery e lascia rossa la run'
 
     const failureStart = commit.indexOf('if [ "${{ steps.generate.outcome }}" = "failure" ]; then');
     const normalStage = commit.indexOf('            git add -A', failureStart);
-    const recoveryGate = commit.indexOf('if [ "$discovery_recovery_only" = "true" ]; then');
+    // Il gate del report e' `recovery_only_commit`: raccoglie sia il contatore
+    // di discovery sia le bozze di traduzione validate.
+    const recoveryGate = commit.indexOf('if [ "$recovery_only_commit" = "true" ]; then');
     const reportGate = commit.indexOf('elif [ -s .tmp/create-article-run-report.json ]');
     assert.ok(failureStart >= 0 && normalStage > failureStart, `${path.basename(file)}: il ramo di errore deve precedere lo staging generale`);
     assert.ok(recoveryGate > failureStart && reportGate > recoveryGate, `${path.basename(file)}: il recupero deve precedere qualunque uso del report`);

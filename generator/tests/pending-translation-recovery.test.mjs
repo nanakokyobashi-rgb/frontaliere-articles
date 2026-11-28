@@ -420,7 +420,7 @@ test('nessuna superficie pubblicata (API, indici, sitemap, feed, trigger di publ
 test('la ripresa rigira i gate sui testi ripresi e un URL esplicito lascia intatta la bozza', () => {
   const source = fs.readFileSync(path.join(ROOT, 'generator/scripts/create-article.mjs'), 'utf8');
   const resumeGate = source.indexOf('TRANSLATION_CANDIDATES_UNVERIFIED');
-  const translate = source.indexOf('await translateArticle(data, { resumeOnlyMissing', resumeGate);
+  const translate = source.indexOf('await translateArticle(data);', resumeGate);
   const slugs = source.indexOf('relocalizeSlugsAfterTranslation(data', translate);
   const fabricated = source.indexOf('assertNoFabricatedLaborOfficeCrossLocale(data);', translate);
   const finalCompleteness = source.indexOf('const missingBeforePublish', fabricated);

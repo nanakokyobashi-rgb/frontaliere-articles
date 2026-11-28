@@ -10236,6 +10236,14 @@ async function fetchPageContent(url, sourceContext = null) {
   pendingCantonSourceLead = '';
   pendingCantonSourcePaywall = '';
 
+  // Ripresa di una traduzione: la fonte verificata e' nel draft, nessuna rete.
+  const resumedDraft = sourceContext?._pendingTranslationDraft;
+  if (resumedDraft) {
+    lastSourcePublishedAt = resumedDraft.sourceDate || '';
+    lastSourcePageTitle = resumedDraft.sourceTitle || '';
+    return resumedDraft.pageContent;
+  }
+
   // Handle BFS stats-update articles — no web page to scrape, build the
   // prompt from Firestore numbers written by refresh-bfs-stats.
   if (url.startsWith('stats-bfs://')) {
@@ -16307,7 +16315,13 @@ function removeFaqPairsWithRejectedControls(content, locale) {
   return rejectedCount;
 }
 
-async function translateArticle(data, { resumeOnlyMissing = false } = {}) {
+// Articoli ripresi da un draft: `translateArticle(data)` salta il batch per
+// locale e lascia al recovery per-campo solo i campi riaperti. La marca vive
+// qui e non in un secondo parametro per non cambiare la firma della funzione.
+const RESUME_ONLY_MISSING_TRANSLATIONS = new WeakSet();
+
+async function translateArticle(data) {
+  const resumeOnlyMissing = RESUME_ONLY_MISSING_TRANSLATIONS.has(data);
   // Il report di recovery è una quota PER ARTICOLO. RUN_REPORT vive più a
   // lungo del funnel: senza reset, un secondo articolo erediterebbe i campi
   // rifiutati e i claim già spesi dal primo (issue #1244).
@@ -22980,8 +22994,8 @@ async function main() {
             if (_persistRankerStateOnSuccess) _persistRankerStateOnSuccess();
             return; // Success — exit main
           } catch (e) {
-            if (e?.pendingTranslationIncomplete) throw e;
             const isDuplicate = isDuplicateError(e);
+            if (e?.pendingTranslationIncomplete) throw e;
             if (isDuplicate && e.duplicateSourceContent) {
               RUN_REPORT.preFilterDrops.urlAlreadyUsed += 1;
               console.error('   🔗 Testo fonte già usato — provo un’altra headline (non conta come tentativo)');
@@ -23332,8 +23346,8 @@ async function main() {
           } catch { /* ignore */ }
           return; // Success — exit main
         } catch (e) {
-          if (e?.pendingTranslationIncomplete) throw e;
           const isDuplicate = isDuplicateError(e);
+          if (e?.pendingTranslationIncomplete) throw e;
           if (isDuplicate) captureDuplicateReasons(e.message);
           // Fact-check / quality failures → try next keyword instead of crashing.
           // Includes REGOLA #0 topic-gate aborts — same rationale as the proven-pool
@@ -23488,29 +23502,20 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   }
 
   // Step 1: Fetch page content
-  pendingCantonSourceContent = pendingTranslationDraft?.pageContent
-    || (typeof sourceContext?._cantonSourceContent === 'string'
-      ? sourceContext._cantonSourceContent
-      : '');
-  pendingCantonSourcePublishedAt = pendingTranslationDraft?.sourceDate
-    || (sourceContext?.date instanceof Date && !Number.isNaN(sourceContext.date.getTime())
-      ? sourceContext.date.toISOString()
-      : '');
-  pendingCantonSourceTitle = pendingTranslationDraft?.sourceTitle
-    || (typeof sourceContext?.headline === 'string' ? sourceContext.headline : '');
+  pendingCantonSourceContent = typeof sourceContext?._cantonSourceContent === 'string'
+    ? sourceContext._cantonSourceContent
+    : '';
+  pendingCantonSourcePublishedAt = sourceContext?.date instanceof Date && !Number.isNaN(sourceContext.date.getTime())
+    ? sourceContext.date.toISOString()
+    : '';
+  pendingCantonSourceTitle = typeof sourceContext?.headline === 'string' ? sourceContext.headline : '';
   pendingCantonSourceLead = typeof sourceContext?._cantonSourceLead === 'string'
     ? sourceContext._cantonSourceLead
     : '';
   pendingCantonSourcePaywall = sourceContext?._cantonSourcePaywall === 'title+lead'
     ? sourceContext._cantonSourcePaywall
     : '';
-  const pageContent = pendingTranslationDraft
-    ? pendingTranslationDraft.pageContent
-    : await fetchPageContent(url, sourceContext);
-  if (pendingTranslationDraft) {
-    lastSourcePublishedAt = pendingTranslationDraft.sourceDate || '';
-    lastSourcePageTitle = pendingTranslationDraft.sourceTitle || '';
-  }
+  const pageContent = await fetchPageContent(url, sourceContext);
   const priorSource = loadSourceUrls()[normalizeNewsUrl(sourceUrl)];
   if (hasSameLedgerSourceContent(priorSource, pageContent)) {
     const err = new Error('DUPLICATO: testo della fonte già usato sullo stesso URL');
@@ -24800,8 +24805,9 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   }
 
   // Step 3b: Translate to EN/DE/FR (only runs if not a duplicate)
+  if (pendingTranslationDraft) RESUME_ONLY_MISSING_TRANSLATIONS.add(data);
   try {
-    await translateArticle(data, { resumeOnlyMissing: Boolean(pendingTranslationDraft) });
+    await translateArticle(data);
   } catch (translationError) {
     const missingFields = missingPendingTranslationFields(data);
     if (missingFields.length > 0 && translationError?.pendingBodyTranslations) {
@@ -25148,15 +25154,15 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // nessun file deve essere gia' stato scritto. Sovrascrive di proposito un
   // eventuale `articleType` arrivato dal payload del modello.
   data.articleType = registryArticleTypeForRun(RUN_REPORT.selectedArticleType, url);
+  const missingBeforePublish = missingPendingTranslationFields(data);
+  if (missingBeforePublish.length > 0) rejectIncompleteTranslation(missingBeforePublish);
+  persistPendingTranslationState([]);
   data.canton = registryCantonsOrNone(data, url);
   assertSeoEntryNotRegistered(data.id);
   // The primary path writes directly and does not pass through
   // registerArticleFiles(); this is the last identity check after every slug
   // derivation and immediately before the first corpus write.
   assertNoArticleIdentityServiceMarkers(data, { qualityReject: true });
-  const missingBeforePublish = missingPendingTranslationFields(data);
-  if (missingBeforePublish.length > 0) rejectIncompleteTranslation(missingBeforePublish);
-  persistPendingTranslationState([]);
   beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);

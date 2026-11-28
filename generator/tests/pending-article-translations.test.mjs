@@ -143,7 +143,8 @@ test('drafts are atomic, section-scoped, resumable, and removable', (t) => {
 test('the CLI prioritizes stored drafts, skips full locale batches on resume, and gates publication', () => {
   assert.match(CREATE_ARTICLE, /TRANSLATION_RESUME section=\$\{SECTION_NAME\}/u);
   assert.match(CREATE_ARTICLE, /claimPendingTranslationDraft\(nextDraft\)/u);
-  assert.match(CREATE_ARTICLE, /translateArticle\(data, \{ resumeOnlyMissing: Boolean\(pendingTranslationDraft\) \}\)/u);
+  assert.match(CREATE_ARTICLE, /if \(pendingTranslationDraft\) RESUME_ONLY_MISSING_TRANSLATIONS\.add\(data\);\s+try \{\s+await translateArticle\(data\);/u);
+  assert.match(CREATE_ARTICLE, /async function translateArticle\(data\) \{\s+const resumeOnlyMissing = RESUME_ONLY_MISSING_TRANSLATIONS\.has\(data\);/u);
   assert.match(CREATE_ARTICLE, /pendingTranslationDraft\.missingFields,\s+\.\.\.missingPendingTranslationFields\(data\)/u);
   assert.match(CREATE_ARTICLE, /TRANSLATION_EXHAUSTED section=\$\{SECTION_NAME\}/u);
   assert.match(CREATE_ARTICLE, /pending translation recovery exhausted after \$\{MAX_PENDING_TRANSLATION_ATTEMPTS\}\/\$\{MAX_PENDING_TRANSLATION_ATTEMPTS\} attempts/u);
