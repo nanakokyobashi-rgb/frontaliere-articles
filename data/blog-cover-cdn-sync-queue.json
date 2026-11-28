@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-einsiedeln-investimenti-netti-piano.webp",
-      "sha256": "bdb8e0c23b555a0fe8fb813fbd5a622ac8eeb7d8e7c2f4cc80d6cf325ae2f2b4"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-einsiedeln-investimenti-netti-piano-480w.webp",
-      "sha256": "d00f4054583d5c4930daad735c5a29aff1e14fe4e39e336e170ef6fdd50dbf57"
-    }
-  ]
+  "items": []
 }
