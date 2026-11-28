@@ -113,6 +113,8 @@ export const KNOWN_RUN_CONCLUSIONS = Object.freeze([
 ]);
 const KNOWN_RUN_CONCLUSION_SET = new Set(KNOWN_RUN_CONCLUSIONS);
 export const RUNS_PER_PAGE = 100;
+// Limite globale: al massimo 2 richieste aggiuntive per ammissione.
+const MAX_DUPLICATE_RETRIES = 2;
 const ISO_UTC_TIMESTAMP_RE = /^(\d{4})-(\d{2})-(\d{2})T([01]\d|2[0-3]):([0-5]\d):([0-5]\d)(?:\.\d+)?Z$/u;
 
 function isIsoUtcTimestamp(value) {
@@ -434,11 +436,11 @@ export function readInFlightRunsFromGitHub(repo, { readGh = gh, warn = console.w
   }
 
   const byId = new Map();
-  let retried = false;
+  let duplicateRetries = 0;
   for (const status of IN_FLIGHT_STATUSES) {
     let result = readStatus(status);
-    if (result.duplicate && !retried) {
-      retried = true;
+    while (result.duplicate && duplicateRetries < MAX_DUPLICATE_RETRIES) {
+      duplicateRetries += 1;
       warn(`::warning::canton-admit: duplicate run ID, retrying status=${status}`);
       result = readStatus(status);
     }

@@ -523,9 +523,25 @@ const TRACKED_RESIDUALS_RE = /(?:\bresidu[io]\b[^\r\n]*(?:già\s+tracciat\w*|non
 // The previous unbounded same-line match treated an unrelated `PR aperta ...`
 // followed later by `un item` as an item creation, invalidating a real zero
 // marker from PR #3855. Stop at sentence punctuation so prose about another
-// object cannot be joined to the item by accident.
-const POSITIVE_ITEM_CLAIM_RE = /(?:\b(?:aggiunt\w*|creat\w*|apert\w*|updated?|added|created|opened)\b[^.!?;\r\n]*\bitems?(?!-level)\b|\bitems?(?!-level)\b[^.!?;\r\n]*\b(?:aggiunt\w*|creat\w*|apert\w*|updated?|added|created|opened)\b)/i;
-const NEGATIVE_ITEM_CLAIM_RE = /\b(?:nessun(?:o)?|no|zero|0)\s+items?\b/i;
+// object cannot be joined to the item by accident. Explicitly negate the
+// matching action/item pair too: `non viene creato un item` contains the same
+// verb and noun as a positive claim, but is still evidence for a zero (#2299).
+const ITEM_ACTION_RE_SOURCE = String.raw`(?:aggiunt\w*|creat\w*|apert\w*|updated?|added|created|opened)`;
+const POSITIVE_ITEM_CLAIM_RE = new RegExp(
+  String.raw`(?:\b${ITEM_ACTION_RE_SOURCE}\b[^.!?;\r\n]*\bitems?(?!-level)\b|\bitems?(?!-level)\b[^.!?;\r\n]*\b${ITEM_ACTION_RE_SOURCE}\b)`,
+  'i',
+);
+const NEGATIVE_ITEM_CLAIM_RE = new RegExp(
+  String.raw`(?:\b(?:nessun[oa]?|no|zero|0)\s+(?:[\p{L}\p{M}-]+\s+){0,2}items?(?!-level)\b`
+    + String.raw`|\b(?:non|without|senza)\b[^.!?;\r\n]*\b${ITEM_ACTION_RE_SOURCE}\b[^.!?;\r\n]*\bitems?(?!-level)\b`
+    + String.raw`|\bitems?(?!-level)\b[^.!?;\r\n]*\b(?:non|not|never|without|senza)\b[^.!?;\r\n]*\b${ITEM_ACTION_RE_SOURCE}\b)`,
+  'iu',
+);
+const ITEM_CLAIM_CLAUSE_SEPARATOR_RE = /[,;.!?]|\b(?:and|but|ma|invece|however)\b|\be\b(?!['’])/iu;
+function hasPositiveItemClaimLine(line) {
+  return String(line ?? '').split(ITEM_CLAIM_CLAUSE_SEPARATOR_RE).some((clause) =>
+    POSITIVE_ITEM_CLAIM_RE.test(clause) && !NEGATIVE_ITEM_CLAIM_RE.test(clause));
+}
 // A canonical zero marker may repeat a stable FU id while explaining why the
 // candidate was dropped by the deterministic follow-up contract. Such a line
 // is evidence for the zero, not a persistence claim. Keep this list tied to
@@ -782,7 +798,7 @@ export function triageMarkerPersistenceExpectation(markerBody) {
   const nonPersistedZeroLines = canonicalZero
     ? new Set(claimEvidenceLines.filter((line) => {
       if (!DIRECT_FU_BULLET_RE.test(line)) return false;
-      if (/Follow-up\s+item\s*:/i.test(line) || POSITIVE_ITEM_CLAIM_RE.test(line)) return false;
+      if (/Follow-up\s+item\s*:/i.test(line) || hasPositiveItemClaimLine(line)) return false;
       const historical = /\bgi[àa]\s+tracciat[oa]\b/i.test(line)
         && !/\bnon\b[^\r\n]*\bgi[àa]\s+tracciat[oa]\b/i.test(line);
       return historical || DROPPED_ZERO_ITEM_REASON_RE.test(line);
@@ -816,8 +832,7 @@ export function triageMarkerPersistenceExpectation(markerBody) {
   });
   const inlineCodeFreeAttestations = attesting.map((line) => line.replace(/(`+)[^`]*?\1/g, ' '));
   const hasPositiveItemClaim = uniqueItems.length > 0
-    || inlineCodeFreeAttestations.some((line) =>
-      POSITIVE_ITEM_CLAIM_RE.test(line) && !NEGATIVE_ITEM_CLAIM_RE.test(line));
+    || inlineCodeFreeAttestations.some(hasPositiveItemClaimLine);
   const noNewDailyBucketZero = inlineCodeFreeAttestations.some((line) => NO_NEW_DAILY_BUCKET_RE.test(line))
     && inlineCodeFreeAttestations.some((line) => TRACKED_RESIDUALS_RE.test(line))
     && !hasPositiveItemClaim;

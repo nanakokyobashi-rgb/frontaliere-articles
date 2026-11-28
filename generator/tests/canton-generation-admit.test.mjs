@@ -345,7 +345,7 @@ const cleanSnapshot = JSON.stringify([admissionPage(repeatSnapshotRun)]);
 const emptySnapshot = JSON.stringify([admissionPage()]);
 const [firstStatus, secondStatus, thirdStatus] = IN_FLIGHT_STATUSES;
 
-function readAdmissionSnapshots(requests, expectedRows, retriedStatus) {
+function readAdmissionSnapshots(requests, expectedRows, retriedStatuses = []) {
   const repo = 'owner/corpus';
   const calls = [];
   const warnings = [];
@@ -363,9 +363,8 @@ function readAdmissionSnapshots(requests, expectedRows, retriedStatus) {
     `repos/${repo}/actions/runs?status=${status}&per_page=${RUNS_PER_PAGE}`,
   ]));
   assert.deepEqual(rows, expectedRows);
-  assert.deepEqual(warnings, retriedStatus
-    ? [`::warning::canton-admit: duplicate run ID, retrying status=${retriedStatus}`]
-    : []);
+  assert.deepEqual(warnings, retriedStatuses.map((status) =>
+    `::warning::canton-admit: duplicate run ID, retrying status=${status}`));
 }
 
 test('il lettore scarta tutte le pagine ambigue e conserva la deduplicazione fra stati', () => {
@@ -376,15 +375,23 @@ test('il lettore scarta tutte le pagine ambigue e conserva la deduplicazione fra
     [secondStatus, cleanSnapshot],
     [thirdStatus, laterStatusSnapshot],
     ...IN_FLIGHT_STATUSES.slice(3).map((status) => [status, emptySnapshot]),
-  ], [repeatSnapshotRun], secondStatus);
+  ], [repeatSnapshotRun], [secondStatus]);
 });
 
-test('il lettore chiude l’ammissione se il secondo tentativo fallisce', () => {
-  for (const response of [ambiguousSnapshot, 'invalid JSON', null, new Error('transport failed')]) {
+test('il lettore riprova due volte una paginazione ambigua e poi chiude l’ammissione', () => {
+  readAdmissionSnapshots([
+    [firstStatus, ambiguousSnapshot],
+    [firstStatus, ambiguousSnapshot],
+    [firstStatus, ambiguousSnapshot],
+  ], null, [firstStatus, firstStatus]);
+});
+
+test('il lettore chiude l’ammissione se un retry termina con errore', () => {
+  for (const response of ['invalid JSON', JSON.stringify([{ total_count: 1 }]), null, new Error('transport failed')]) {
     readAdmissionSnapshots([
       [firstStatus, ambiguousSnapshot],
       [firstStatus, response],
-    ], null, firstStatus);
+    ], null, [firstStatus]);
   }
 });
 
@@ -394,12 +401,24 @@ test('il lettore non riprova dopo un errore di parsing, schema o trasporto', () 
   }
 });
 
-test('il lettore condivide un solo tentativo aggiuntivo fra tutti gli stati', () => {
+test('il lettore consuma al massimo due retry aggiuntivi fra tutti gli stati', () => {
   readAdmissionSnapshots([
     [firstStatus, ambiguousSnapshot],
     [firstStatus, cleanSnapshot],
     [secondStatus, ambiguousSnapshot],
-  ], null, firstStatus);
+    [secondStatus, cleanSnapshot],
+    [thirdStatus, emptySnapshot],
+    ...IN_FLIGHT_STATUSES.slice(3).map((status) => [status, emptySnapshot]),
+  ], [repeatSnapshotRun], [firstStatus, secondStatus]);
+});
+
+test('il lettore puo usare entrambi i retry sullo stesso stato prima di fallire chiuso', () => {
+  readAdmissionSnapshots([
+    [firstStatus, ambiguousSnapshot],
+    [firstStatus, ambiguousSnapshot],
+    [firstStatus, cleanSnapshot],
+    ...IN_FLIGHT_STATUSES.slice(1).map((status) => [status, emptySnapshot]),
+  ], [repeatSnapshotRun], [firstStatus, firstStatus]);
 });
 
 test('il gate e il core condividono stati, conclusioni e dimensione pagina', () => {
