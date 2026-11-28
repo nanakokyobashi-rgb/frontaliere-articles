@@ -48,6 +48,9 @@ const blogMetaCantonGlIt: Record<string, string> = {
     'blog.article.netstal-via-secondaria.title': 'Netstal: il Cantone apre un\'altra via secondaria',
     'blog.article.netstal-via-secondaria.excerpt': 'A Netstal circa 100 auto in meno alla rotatoria Wiggispark potrebbero alleggerire la coda sulla Querspange nell\'ora di punta serale.',
     'blog.article.netstal-via-secondaria.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.netstal-glarus-motion-proroga.title': 'Glarona chiede un anno in più per la mozione Netstal-Glarona',
+    'blog.article.netstal-glarus-motion-proroga.excerpt': 'Il Consiglio di Stato chiede al Landrat di spostare al 20 novembre 2027 il termine della mozione sulla circonvallazione Netstal–Glarona.',
+    'blog.article.netstal-glarus-motion-proroga.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGlIt;

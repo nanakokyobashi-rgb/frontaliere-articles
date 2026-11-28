@@ -48,6 +48,9 @@ const blogMetaCantonGlDe: Record<string, string> = {
     'blog.article.netstal-via-secondaria.title': 'Netstal: Der Kanton eröffnet eine weitere Nebenstraße',
     'blog.article.netstal-via-secondaria.excerpt': 'In Netstal könnten rund 100 Autos weniger am Kreisverkehr Wiggispark den Rückstau auf der Querspange während der abendlichen Hauptverkehrszeit verringern.',
     'blog.article.netstal-via-secondaria.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.netstal-glarus-motion-proroga.title': 'Glarus beantragt ein zusätzliches Jahr für die Motion Netstal–Glarus',
+    'blog.article.netstal-glarus-motion-proroga.excerpt': 'Der Regierungsrat beantragt beim Landrat, die Frist der Motion zur Umfahrung Netstal–Glarus auf den 20. November 2027 zu verschieben.',
+    'blog.article.netstal-glarus-motion-proroga.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGlDe;

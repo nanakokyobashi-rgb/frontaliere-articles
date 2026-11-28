@@ -48,6 +48,9 @@ const blogMetaCantonGlEn: Record<string, string> = {
     'blog.article.netstal-via-secondaria.title': 'Netstal: the canton opens another side road',
     'blog.article.netstal-via-secondaria.excerpt': 'In Netstal, around 100 fewer cars at the Wiggispark roundabout could ease the queue on the Querspange during the evening rush hour.',
     'blog.article.netstal-via-secondaria.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.netstal-glarus-motion-proroga.title': 'Glarus asks for one more year for the Netstal–Glarus motion',
+    'blog.article.netstal-glarus-motion-proroga.excerpt': 'The Council of State asks the Landrat to move the deadline for the motion on the Netstal–Glarus bypass to November 20, 2027.',
+    'blog.article.netstal-glarus-motion-proroga.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGlEn;

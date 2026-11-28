@@ -130,6 +130,16 @@ const DELEGATED_WRITERS = [
 // censimento lo ritrova dal codice.
 const REGENERABLE_STATE = [
   'generator/scripts/lib/article-topic-selector.mjs',
+  // Controller del workflow canton hubs. La closure raggiungibile importa il
+  // producer e quindi nomina superfici pubblicate, ma questi entrypoint
+  // scrivono soltanto output temporanei (`GITHUB_OUTPUT`) o il receipt in
+  // `RUNNER_TEMP`. Il receipt viene caricato solo dopo la scrittura completa e
+  // prima del push: un'interruzione fallisce lo step e impedisce upload/push;
+  // un receipt assente al run consumer forza il refresh globale.
+  'generator/scripts/resolve-canton-hub-refresh-mode.mjs',
+  'generator/scripts/resolve-canton-hub-refresh-proof.mjs',
+  'generator/scripts/wait-canton-hub-sitemap-ready.mjs',
+  'generator/scripts/write-canton-hub-refresh-receipt.mjs',
 ];
 
 // #922 item 5: allargare il predicato d'ingresso da `writeFileSync(` al NOME

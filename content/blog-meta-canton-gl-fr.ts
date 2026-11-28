@@ -48,6 +48,9 @@ const blogMetaCantonGlFr: Record<string, string> = {
     'blog.article.netstal-via-secondaria.title': 'Netstal : le canton ouvre une autre voie secondaire',
     'blog.article.netstal-via-secondaria.excerpt': 'À Netstal, environ 100 voitures de moins au giratoire Wiggispark pourraient alléger la file sur la Querspange à l\'heure de pointe du soir.',
     'blog.article.netstal-via-secondaria.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.netstal-glarus-motion-proroga.title': 'Glaris demande une année supplémentaire pour la motion Netstal-Glaris',
+    'blog.article.netstal-glarus-motion-proroga.excerpt': 'Le Conseil d’État demande au Landrat de reporter au 20 novembre 2027 le délai de la motion sur le contournement Netstal–Glaris.',
+    'blog.article.netstal-glarus-motion-proroga.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonGlFr;

@@ -587,6 +587,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-netstal-glarus-motion-proroga': {
+    title: 'Glarona chiede un anno in più per la mozione Netstal-Glarona',
+    description: 'Il Consiglio di Stato di Glarona chiede al Landrat di spostare al 20 novembre 2027 il termine della mozione sulla circonvallazione Netstal–Glarona.',
+    keywords: 'frontalieri, ticino, svizzera, italia, glarona, chiede, anno, mozione',
+    ogTitle: 'Circonvallazione Netstal-Glarona, chiesta una proroga',
+    ogDescription: 'Il no del popolo svizzero all\'ampliamento delle strade nazionali nel novembre 2024 ha ritardato la progettazione con la Confederazione.',
+    canonicalPath: '/articoli-glarona/netstal-glarus-motion-proroga/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Glarona chiede un anno in più per la mozione Netstal-Glarona",
+      "description": "Il Consiglio di Stato di Glarona chiede al Landrat di spostare al 20 novembre 2027 il termine della mozione sulla circonvallazione Netstal–Glarona.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-netstal-glarus-motion-proroga.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-28T07:17:26+00:00",
+      "dateModified": "2026-11-28T07:17:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-glarona/netstal-glarus-motion-proroga/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
