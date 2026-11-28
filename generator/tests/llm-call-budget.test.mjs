@@ -298,7 +298,7 @@ test('③ il tetto del classifier e opt-in, e il JSDoc dice cio che il codice fa
 
 test('③ le classificazioni girano a concorrenza limitata, non piu in serie', () => {
   const gate = extractBlock('async function applyPreSpendTopicGate(');
-  assert.match(gate.text, /await mapWithConcurrency\(toClassify, concurrency,/);
+  assert.match(gate.text, /runAll: \(items, fn\) => mapWithConcurrency\(items, concurrency, fn\)/);
 
   // Il giro che scorre il pool deve restare deterministico: nessuna chiamata
   // di rete dentro. E' quello a rendere l'assegnazione del budget identica a

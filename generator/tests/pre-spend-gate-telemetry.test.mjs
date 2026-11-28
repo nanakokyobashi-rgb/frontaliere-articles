@@ -42,7 +42,7 @@
  * function source and evaluates it with those names injected. If the
  * extraction delimiters move, the test throws instead of passing vacuously.
  */
-import { classifyWithRejectionMemo, recordPrespendRejectedUrls } from '../scripts/lib/prespend-rejection-memo.mjs';
+import { classifyWithRejectionMemo, contentFingerprint, recordPrespendRejectedUrls } from '../scripts/lib/prespend-rejection-memo.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -197,6 +197,7 @@ function makeGate({
     'PRESPEND_GATE_CONCURRENCY',
     'resolvePositiveIntEnv',
     '_classifyWithRejectionMemo',
+    '_contentFingerprint',
     '_loadEvergreenRejectedTracker',
     '_persistEvergreenRejectedTracker',
     '_recordPrespendRejectedUrls',
@@ -231,6 +232,7 @@ function makeGate({
     // Memo cross-run dei "no": il vero modulo, su un tracker vuoto e senza
     // persistenza, cosi' il gate qui provato resta quello di sempre.
     classifyWithRejectionMemo,
+    contentFingerprint,
     () => ({}),
     () => ({}),
     recordPrespendRejectedUrls,

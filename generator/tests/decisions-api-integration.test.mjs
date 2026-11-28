@@ -214,3 +214,16 @@ test('senza un no precedente, il parser storico accetta un verdetto nel testo li
   const { classify } = makeClassifier({ text: async () => 'Verdetto: relevant=no; reason=fuori tema' });
   assert.deepEqual(await classify(), { relevant: false, reason: 'fuori tema', parsed: true });
 });
+
+test('F3.A.6: il no incerto restituito dal fallback e\' marcato `uncertain`, quello confermato dal testo no', async () => {
+  const kept = makeClassifier({ decisions: [negative(0.12)], text: async () => null });
+  assert.equal((await kept.classify()).uncertain, true, 'scadenza/illeggibile: resta il no incerto, marcato');
+  const failed = makeClassifier({ decisions: [negative(0.12)], text: async () => { throw new Error('x'); } });
+  assert.equal((await failed.classify()).uncertain, true);
+  const deadline = makeClassifier({ decisions: [negative(0.12)], apiElapsedMs: 10_000 });
+  assert.equal((await deadline.classify()).uncertain, true);
+  const confirmed = makeClassifier({ decisions: [negative(0.12)], text: async () => 'relevant=no; reason=fuori tema' });
+  assert.equal((await confirmed.classify()).uncertain, undefined, 'il testo conferma il no: e\' un verdetto vero');
+  const sure = makeClassifier({ decisions: [negative(0.9)] });
+  assert.equal((await sure.classify()).uncertain, undefined);
+});

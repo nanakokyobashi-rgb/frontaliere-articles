@@ -1016,6 +1016,13 @@ export function shouldForceEvergreen(count, ratio = EVERGREEN_QUOTA_DEFAULT) {
  */
 export const TOPIC_GATE_URL_TTL_MS = 48 * 60 * 60 * 1000;
 export const TOPIC_GATE_URL_MAX = 300;
+/**
+ * Prefisso delle voci del memo del classifier pre-spend (`prespend-relevance:`),
+ * che vivono nello stesso `topicGateUrls` ma hanno un tetto proprio: quindi
+ * centinaia di "no" del classifier non cacciano un abort del topic-gate.
+ */
+export const PRESPEND_RELEVANCE_KEY_PREFIX = 'prespend-relevance:';
+export const PRESPEND_RELEVANCE_URL_MAX = 600;
 export const EVERGREEN_STRIKE_LIMIT = 3;
 
 function emptyEvergreenRejectedTracker() {
@@ -1501,8 +1508,14 @@ export function recordTopicGateAbortedUrl(tracker, urlKey, section, now = Date.n
     delete topicGateUrls[key];
     topicGateUrls[key] = { section, ts: now };
   }
-  const keys = Object.keys(topicGateUrls);
-  for (const key of keys.slice(0, Math.max(0, keys.length - TOPIC_GATE_URL_MAX))) delete topicGateUrls[key];
+  // Due tetti separati: le voci del memo pre-spend e gli abort del topic-gate non si cacciano a vicenda.
+  const isPrespend = (key) => key.slice(key.indexOf('::') + 2).startsWith(PRESPEND_RELEVANCE_KEY_PREFIX);
+  for (const [group, max] of [
+    [Object.keys(topicGateUrls).filter((key) => !isPrespend(key)), TOPIC_GATE_URL_MAX],
+    [Object.keys(topicGateUrls).filter(isPrespend), PRESPEND_RELEVANCE_URL_MAX],
+  ]) {
+    for (const key of group.slice(0, Math.max(0, group.length - max))) delete topicGateUrls[key];
+  }
   return { ...normalized, topicGateUrls };
 }
 
@@ -2066,6 +2079,8 @@ export default {
   clearEvergreenStrikesForPool,
   TOPIC_GATE_URL_TTL_MS,
   TOPIC_GATE_URL_MAX,
+  PRESPEND_RELEVANCE_KEY_PREFIX,
+  PRESPEND_RELEVANCE_URL_MAX,
   topicGateUrlKey,
   isTopicGateAbortedUrl,
   recordTopicGateAbortedUrl,

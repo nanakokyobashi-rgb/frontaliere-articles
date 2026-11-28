@@ -13,14 +13,34 @@
  * Cio' che NON cambia: il gate resta lo stesso (stesso prompt, stessa soglia, i
  * backstop D/E ripartono dall'intero pool). Si salta solo la chiamata che
  * restituirebbe lo stesso "no". Solo i verdetti definitivi vengono ricordati:
- * mai un fail-open (`fromError`) ne' un esito non analizzato.
+ * mai un fail-open (`fromError`), un esito non analizzato o un "no" incerto
+ * (`uncertain`: confidenza <= 0,5 della Decisions API, non confermata dal
+ * fallback testuale per scadenza, errore o risposta illeggibile).
+ *
+ * La chiave comprende un hash breve di titolo+sommario: una notizia aggiornata
+ * sullo stesso URL con un titolo diverso viene rivalutata. Le voci hanno un
+ * tetto proprio (`PRESPEND_RELEVANCE_URL_MAX`), separato da quello degli abort
+ * del topic-gate, che quindi non vengono cacciati.
  */
+import { createHash } from 'node:crypto';
 import {
+  PRESPEND_RELEVANCE_KEY_PREFIX,
   isTopicGateAbortedUrl,
   recordTopicGateAbortedUrl,
 } from './article-topic-selector.mjs';
 
-export const PRESPEND_REJECTION_KEY_PREFIX = 'prespend-relevance:';
+export const PRESPEND_REJECTION_KEY_PREFIX = PRESPEND_RELEVANCE_KEY_PREFIX;
+
+/** Hash breve (8 hex) di titolo+sommario, normalizzati: maiuscole e spazi non contano. */
+export function contentFingerprint(title, summary) {
+  const norm = (v) => String(v ?? '').normalize('NFC').toLowerCase().replace(/\s+/g, ' ').trim();
+  return createHash('sha256').update(`${norm(title)}\n${norm(summary)}`).digest('hex').slice(0, 8);
+}
+
+/** Chiave del memo: URL normalizzato, piu' `#<hash>` se l'item ha un contenuto da distinguere. */
+export function memoUrlKey(urlKey, fingerprint = '') {
+  return urlKey ? `${urlKey}${fingerprint ? `#${fingerprint}` : ''}` : '';
+}
 
 function memoKey(urlKey) {
   return urlKey ? `${PRESPEND_REJECTION_KEY_PREFIX}${urlKey}` : '';
@@ -42,14 +62,18 @@ export function recordPrespendRejectedUrls(tracker, urlKeys, section, now = Date
   return next;
 }
 
-/** A verdict worth remembering: an explicit "no" the classifier actually produced. */
+/** A verdict worth remembering: an explicit, confident "no" the classifier actually produced. */
 export function isDefinitiveRejection(verdict) {
-  return !!verdict && verdict.relevant === false && verdict.fromError !== true && verdict.memo !== true;
+  return !!verdict && verdict.relevant === false
+    && verdict.fromError !== true && verdict.memo !== true && verdict.uncertain !== true;
 }
 
 /**
  * Resolve the verdict of every `item` ({ url, ... }), calling `classify` only
  * for those with no live "no" in `tracker`.
+ *
+ * `fingerprint(item)` (opzionale) restituisce l'hash di contenuto che entra
+ * nella chiave: un item con lo stesso URL ma un contenuto diverso non e' un hit.
  *
  * @returns {Promise<{ verdicts: object[], memoHits: number, newRejections: string[] }>}
  */
@@ -60,9 +84,10 @@ export async function classifyWithRejectionMemo(items, {
   classify,
   runAll,
   canReuse = () => true,
+  fingerprint = () => '',
   now = Date.now(),
 }) {
-  const urlKeys = items.map((item) => (item?.url ? normalizeUrl(item.url) : ''));
+  const urlKeys = items.map((item) => (item?.url ? memoUrlKey(normalizeUrl(item.url), fingerprint(item)) : ''));
   let memoHits = 0;
   const verdicts = await runAll(items, async (item, i) => {
     if (urlKeys[i] && canReuse(item) && isPrespendRejectedUrl(tracker, urlKeys[i], section, now)) {

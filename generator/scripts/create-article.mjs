@@ -513,6 +513,7 @@ import {
 } from './lib/article-topic-selector.mjs';
 import {
   classifyWithRejectionMemo as _classifyWithRejectionMemo,
+  contentFingerprint as _contentFingerprint,
   recordPrespendRejectedUrls as _recordPrespendRejectedUrls,
 } from './lib/prespend-rejection-memo.mjs';
 
@@ -1323,6 +1324,8 @@ relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
         || (Number.isFinite(confidence) && confidence > 0.5 && confidence <= 1)) {
         return decision;
       }
+      // `uncertain`: il "no" a confidenza <= 0,5 non e' definitivo e non entra nel memo cross-run.
+      decision.uncertain = true;
       uncertainNegative = decision;
       console.error(`PRESPEND_DECISION_API_FALLBACK section=${SECTION_NAME || 'unknown'} code=DECISIONS_API_UNCERTAIN_NEGATIVE`);
     }
@@ -1604,6 +1607,7 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
       tracker: memoTracker,
       section: SECTION_NAME,
       normalizeUrl: normalizeNewsUrl,
+      fingerprint: ({ plan: p }) => _contentFingerprint(p.headlineText, p.summary),
       runAll: (items, fn) => mapWithConcurrency(items, concurrency, fn),
       canReuse: ({ plan: p }) => !(IS_CANTON
         && typeof p.h?._cantonSourceContent === 'string'
