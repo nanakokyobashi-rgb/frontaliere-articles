@@ -114,22 +114,37 @@ function summarizeCantonCoverage(rows) {
   return { summary, firing: false };
 }
 
-export function summarizeCantonRunDiagnostics(runs) {
+export function summarizeCantonRunDiagnostics(runs, {
+  expectedSections = [],
+  listUnavailableSections = [],
+  inFlightBySection = {},
+  logFailuresBySection = {},
+} = {}) {
   const bySection = {};
+  const entryFor = (section) => bySection[section] ??= {
+    runs: 0,
+    sourceReadCount: 0,
+    recentItems: 0,
+    httpFailuresByStatus: {},
+    providerErrorRuns: 0,
+    providerUnavailableRuns: 0,
+    rateLimitEvents: 0,
+    poolSaturatedRuns: 0,
+    newsPoolRejectedRuns: 0,
+  };
+  for (const section of expectedSections) entryFor(section);
   for (const run of runs || []) {
     const section = String(run?.section || '');
-    if (!/^canton-[a-z]+$/u.test(section) || run?.dryRun !== false) continue;
-    const entry = bySection[section] ??= {
-      runs: 0,
-      sourceReadCount: 0,
-      recentItems: 0,
-      httpFailuresByStatus: {},
-      providerErrorRuns: 0,
-      providerUnavailableRuns: 0,
-      rateLimitEvents: 0,
-      poolSaturatedRuns: 0,
-      newsPoolRejectedRuns: 0,
-    };
+    if (!/^canton-[a-z]+$/u.test(section)) continue;
+    const entry = entryFor(section);
+    if (run?.dryRun === true) {
+      entry.dryRuns = (entry.dryRuns || 0) + 1;
+      continue;
+    }
+    if (run?.dryRun !== false) {
+      entry.unclassifiedRuns = (entry.unclassifiedRuns || 0) + 1;
+      continue;
+    }
     entry.runs++;
     for (const source of run.sourceReads || []) {
       entry.sourceReadCount++;
@@ -147,11 +162,29 @@ export function summarizeCantonRunDiagnostics(runs) {
       entry.newsPoolRejectedRuns++;
     }
   }
+  for (const section of listUnavailableSections) entryFor(section).listUnavailable = true;
+  for (const [section, count] of Object.entries(inFlightBySection)) {
+    if (Number.isSafeInteger(count) && count > 0) entryFor(section).inFlightRuns = count;
+  }
+  for (const [section, count] of Object.entries(logFailuresBySection)) {
+    if (Number.isSafeInteger(count) && count > 0) entryFor(section).logFailures = count;
+  }
   return bySection;
 }
 
 function formatCantonDiagnosis(diagnostics) {
-  if (!diagnostics?.runs) return 'nessun log cantonale recente';
+  if (diagnostics?.listUnavailable) return 'diagnosi non disponibile: lista workflow non leggibile';
+  if (!diagnostics?.runs) {
+    const pending = diagnostics?.inFlightRuns ? `${diagnostics.inFlightRuns} run in coda o in corso` : null;
+    const failures = diagnostics?.logFailures ? `${diagnostics.logFailures} log non leggibili` : null;
+    const dry = diagnostics?.dryRuns ? `${diagnostics.dryRuns} run solo dry` : null;
+    const unclassified = diagnostics?.unclassifiedRuns
+      ? `${diagnostics.unclassifiedRuns} log senza modalità verificabile` : null;
+    const details = [pending, failures, dry, unclassified].filter(Boolean);
+    return details.length
+      ? `nessun log cantonale completato; ${details.join('; ')}`
+      : 'nessun log cantonale completato nella finestra';
+  }
   const parts = [];
   if (diagnostics.sourceReadCount) {
     parts.push(`${diagnostics.sourceReadCount} letture fonte, ${diagnostics.recentItems} item recenti`);
@@ -170,6 +203,10 @@ function formatCantonDiagnosis(diagnostics) {
     parts.push(`errori provider osservati in ${diagnostics.providerErrorRuns}/${diagnostics.runs} run`);
   }
   if (diagnostics.rateLimitEvents) parts.push(`risposte rate-limit: ${diagnostics.rateLimitEvents}`);
+  if (diagnostics.inFlightRuns) parts.push(`${diagnostics.inFlightRuns} run in coda o in corso`);
+  if (diagnostics.logFailures) parts.push(`${diagnostics.logFailures} log non leggibili`);
+  if (diagnostics.dryRuns) parts.push(`${diagnostics.dryRuns} run solo dry`);
+  if (diagnostics.unclassifiedRuns) parts.push(`${diagnostics.unclassifiedRuns} log senza modalità verificabile`);
   if (!parts.length) parts.push(`nessuna causa specifica nei ${diagnostics.runs} log`);
   return `${diagnostics.runs} run: ${parts.join('; ')}`;
 }

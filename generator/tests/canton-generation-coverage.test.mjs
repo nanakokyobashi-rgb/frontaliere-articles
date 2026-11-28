@@ -137,6 +137,7 @@ test('canton-dry distingue errori fonti, saturazione pool e fact-check senza ver
     rateLimitEvents: 2,
     poolSaturatedRuns: 1,
     newsPoolRejectedRuns: 1,
+    dryRuns: 1,
   });
 
   const result = measure(root, commitHistory(48), ENV, diagnostics)['canton-dry'];
@@ -148,6 +149,26 @@ test('canton-dry distingue errori fonti, saturazione pool e fact-check senza ver
   assert.match(result.body, /pool news respinto in 1 run/);
   assert.match(result.body, /fact-check senza verdetto in 1\/1 run/);
   assert.match(result.body, /risposte rate-limit: 2/);
+});
+
+test('canton-dry distingue run pendenti, log illeggibili e lista workflow indisponibile', (t) => {
+  const { root } = fixture(t);
+  const diagnostics = summarizeCantonRunDiagnostics([
+    { section: 'canton-ti', dryRun: null },
+    { section: 'canton-gr', dryRun: true },
+  ], {
+    expectedSections: ['canton-ag', 'canton-be', 'canton-ge', 'canton-gr', 'canton-ti'],
+    inFlightBySection: { 'canton-be': 2 },
+    logFailuresBySection: { 'canton-ag': 1 },
+    listUnavailableSections: ['canton-ge'],
+  });
+  const env = { ...ENV, CANTON_ARTICLE_SECTIONS_ENABLED: 'AG BE GE GR TI' };
+  const summary = measure(root, commitHistory(48), env, diagnostics)['canton-dry'].summary;
+  assert.match(summary, /canton-ag: articolo assente[^\n]*nessun log cantonale completato; 1 log non leggibili/);
+  assert.match(summary, /canton-be: articolo assente[^\n]*2 run in coda o in corso/);
+  assert.match(summary, /canton-ge: articolo assente[^\n]*diagnosi non disponibile: lista workflow non leggibile/);
+  assert.match(summary, /canton-gr: articolo assente[^\n]*1 run solo dry/);
+  assert.match(summary, /canton-ti: articolo assente[^\n]*1 log senza modalità verificabile/);
 });
 
 test('locale-gap richiede titolo e corpo per lo stesso id nelle quattro lingue', (t) => {
