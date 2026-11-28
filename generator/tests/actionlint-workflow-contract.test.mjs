@@ -26,7 +26,7 @@ test('required PR check validates every workflow and ShellChecks changed workflo
   assert.match(TESTS_WORKFLOW, /go install github\.com\/rhysd\/actionlint\/cmd\/actionlint@v1\.7\.12/);
   assert.match(
     TESTS_WORKFLOW,
-    /name: Lint GitHub Actions workflow syntax and expressions[\s\S]+?set -euo pipefail[\s\S]+?git ls-files -z -- '\.github\/workflows\/\*\.yml' '\.github\/workflows\/\*\.yaml' \| xargs -0 -r actionlint -shellcheck= -config-file \.github\/actionlint\.yaml/,
+    /name: Lint GitHub Actions workflow syntax and expressions[\s\S]+?set -euo pipefail[\s\S]+?git ls-files -z -- '\.github\/workflows\/\*\.yml' '\.github\/workflows\/\*\.yaml' \| xargs -0 -r timeout --kill-after=10 180 actionlint -shellcheck= -config-file \.github\/actionlint\.yaml/,
   );
   assert.match(
     TESTS_WORKFLOW,
@@ -59,11 +59,23 @@ test('required PR check validates every workflow and ShellChecks changed workflo
   }
 });
 
+test('il lint dei workflow ha un timeout esplicito e un messaggio chiaro', () => {
+  const start = TESTS_WORKFLOW.indexOf('- name: Lint GitHub Actions workflow syntax and expressions');
+  assert.notEqual(start, -1);
+  const end = TESTS_WORKFLOW.indexOf('\n      - name:', start + 1);
+  const step = TESTS_WORKFLOW.slice(start, end === -1 ? undefined : end);
+  assert.match(step, /timeout-minutes: 5/);
+  assert.match(step, /xargs -0 -r timeout --kill-after=10 180 actionlint/);
+  assert.match(step, /::error::actionlint ha superato il timeout/);
+});
+
 test('ShellCheck on changed workflows runs without the global opt-out', () => {
   const start = TESTS_WORKFLOW.indexOf('- name: ShellCheck changed GitHub Actions workflows');
   assert.notEqual(start, -1);
   const end = TESTS_WORKFLOW.indexOf('\n      - name:', start + 1);
   const step = TESTS_WORKFLOW.slice(start, end === -1 ? undefined : end);
   assert.match(step, /actionlint -config-file \.github\/actionlint\.yaml/);
+  assert.match(step, /timeout --kill-after=10 180 actionlint/);
+  assert.match(step, /timeout-minutes: 5/);
   assert.doesNotMatch(step, /-shellcheck=/);
 });
