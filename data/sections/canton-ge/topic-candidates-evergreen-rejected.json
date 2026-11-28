@@ -7,6 +7,10 @@
     "canton-ge::https://statistique.ge.ch/rss/affiche_article.asp?url=https://statistique.ge.ch/actualites/welcome.asp?actu=6094": {
       "section": "canton-ge",
       "ts": 1795720746658
+    },
+    "canton-ge::https://www.rts.ch/info/regions/geneve/2026/article/geneve-4-000-manifestants-contre-le-projet-de-budget-29429260.html?rts_source=rss_t": {
+      "section": "canton-ge",
+      "ts": 1795851763409
     }
   }
 }
