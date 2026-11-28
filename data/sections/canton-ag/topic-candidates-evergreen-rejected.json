@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ag::https://www.fricktal.info/news/gemeinden/rheinfelden/rheinfelden-aargauischen-volksinitiative-fuer-berufsfachschulen-gesundheit-und-soziales-in-allen-regionen-des-kantons-lanciert.html": {
-      "section": "canton-ag",
-      "ts": 1795653263826
-    },
     "canton-ag::https://www.reussbote.ch/der-steuerfuss-soll-erhoeht-werden": {
       "section": "canton-ag",
       "ts": 1795676375888
@@ -23,6 +19,10 @@
     "canton-ag::https://www.fricktal.info/news/regionales/treffsichere-schuetzen-des-bezirksverbandes-rheinfelden-wurden-in-moehlin-geehrt.html": {
       "section": "canton-ag",
       "ts": 1795804152481
+    },
+    "canton-ag::https://www.reussbote.ch/kanton-aargau-eine-15-jaehrige-aus-sachsen-wird-vermisst": {
+      "section": "canton-ag",
+      "ts": 1795847375273
     }
   }
 }
