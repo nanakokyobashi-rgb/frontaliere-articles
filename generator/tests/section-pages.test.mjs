@@ -3850,8 +3850,9 @@ test('fast-publish-section.yml: barriera staged e concorrenza per sezione', () =
   assert.match(wf, /^  push:\n\s+branches: \[main\]/m);
   assert.doesNotMatch(wf, /^  workflow_run:/m, 'il trigger API-only vive nel listener separato');
   assert.match(listener, /workflows: \['Publish article data API'\]/);
-  assert.match(listener, /github\.event\.workflow_run\.event == 'push'/);
-  assert.doesNotMatch(listener, /workflow_run\.event == '(?:schedule|workflow_dispatch)'/);
+  // Round 14: anche schedule e workflow_dispatch riconciliano R2, ma lo script
+  // le distingue dal push (commit pubblicato + sezioni indietro), non il filtro.
+  assert.doesNotMatch(listener, /workflow_run\.event == '(?:push|schedule|workflow_dispatch)'/);
   assert.match(resolver, /r2-api-stage-plan-range/);
   assert.match(resolver, /api_action=dispatch/);
   assert.match(resolver, /publish_api_push_owner.*?api_action=wait/s);

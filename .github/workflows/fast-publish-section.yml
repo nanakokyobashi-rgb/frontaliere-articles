@@ -42,6 +42,7 @@ on:
       - 'scripts/ci/fast-publish-section-coordinate.sh'
       - 'scripts/ci/fast-publish-section-late-api-recovery.sh'
       - 'scripts/ci/fast-publish-section-pending-probe.sh'
+      - 'scripts/ci/fast-publish-section-readiness-recovery.sh'
       - 'scripts/ci/wait-fast-publish-api-readiness.mjs'
       - 'scripts/ci/dispatch-fast-publish-replay.sh'
       - 'scripts/ci/read-main-head.sh'
@@ -988,6 +989,7 @@ jobs:
           TARGET_IDS_JSON: ${{ toJSON(matrix.target.ids || fromJSON('[]')) }}
           TARGET_MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.missingPagePaths || fromJSON('[]')) }}
           PINNED_SOURCE: ${{ needs.resolve.outputs.source_commit || inputs.source_commit }}
+          API_RELEASE_COMMIT_INPUT: ${{ inputs.api_release_commit }}
           DRY: ${{ needs.resolve.outputs.dry }}
           REPO: ${{ github.repository }}
           CURRENT_RUN_ID: ${{ github.run_id }}
@@ -1037,10 +1039,14 @@ jobs:
           if [ "$STAGE_ANY" = 'true' ] && [ -s "$STAGE_ARTIFACT" ]; then
             stage_source="$(jq -r '.sourceCommit' "$STAGE_ARTIFACT")"
           elif [ "$CLEANUP_INACTIVE_SURFACE" != 'true' ] && [ "$targeted" != 'true' ] \
+            && [ -z "${API_RELEASE_COMMIT_INPUT:-}" ] \
             && [[ "${PREFLIGHT_HEAD:-}" =~ ^[a-f0-9]{40}$ ]]; then
             # Any stage-less active target may have replaced a pending push,
             # including landing/hub-only dispatches with ids=[]. Force a full
             # latest-section recovery even when preflight already equals latest.
+            # Un dispatch API-only (api_release_commit) non entra qui: la release
+            # e' gia' pubblicata o attesa dal coordinator e il suo unico render
+            # full-section e' quello del finalize, senza restage prima.
             stage_source="$PREFLIGHT_HEAD"
             force_full_section=true
             echo "::notice::target senza artifact stage: bootstrap full-section latest per $SECTION"
@@ -1194,6 +1200,7 @@ jobs:
         run: bash scripts/ci/fast-publish-section-late-api-recovery.sh
 
       - name: Wait for recovered API release readiness
+        id: wait_recovered_api
         if: steps.late_api_recovery.outputs.wait_api == 'true'
         env:
           EXPECTED_API_COMMIT: ${{ steps.late_api_recovery.outputs.api_commit }}
@@ -1202,12 +1209,35 @@ jobs:
         run: node scripts/ci/wait-fast-publish-api-readiness.mjs
 
       - name: Wait for API release readiness while holding the section slot
+        id: wait_slot_api
         if: steps.start_source.outputs.fresh == 'true' && steps.start_source.outputs.rebootstrap != 'true' && needs.coordinate_api_release.outputs.wait_api == 'true'
         env:
           EXPECTED_API_COMMIT: ${{ needs.coordinate_api_release.outputs.api_commit }}
           SECTION: ${{ matrix.target.section }}
           FAST_PUBLISH_API_WAIT_MS: '5400000'
         run: node scripts/ci/wait-fast-publish-api-readiness.mjs
+
+      # publish-api rimasto in coda oltre il tetto di 90 minuti: la readiness
+      # termina con `readiness-timeout`, il render salta e il push API tardivo
+      # sarebbe scartato dal listener (lo attribuisce a Fast Publish). Accoda una
+      # recovery della sezione con la release API attesa: nonce legato al run
+      # (idempotente al rerun), al massimo 3 generazioni (g1..g3) cosi' una coda
+      # che non si smaltisce non genera una catena infinita.
+      - name: Queue recovery after API readiness timeout
+        if: always() && needs.resolve.outputs.dry != 'true' && (steps.wait_recovered_api.outputs.readiness_timeout == 'true' || steps.wait_slot_api.outputs.readiness_timeout == 'true')
+        continue-on-error: true
+        env:
+          SECTION: ${{ matrix.target.section }}
+          REPOSITORY: ${{ github.repository }}
+          API_COMMIT: ${{ steps.late_api_recovery.outputs.api_commit || needs.coordinate_api_release.outputs.api_commit }}
+          PARENT_NONCE: ${{ inputs.dispatch_nonce }}
+          TARGET_IDS_JSON: ${{ toJSON(matrix.target.ids || fromJSON('[]')) }}
+          TARGET_MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.missingPagePaths || fromJSON('[]')) }}
+          TARGET_KNOWN_MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.knownMissingPagePaths || fromJSON('[]')) }}
+          TARGET_BOOTSTRAP: ${{ matrix.target.bootstrap || false }}
+          TARGET_REMOVE_STALE: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
+          TARGET_CLEANUP: ${{ matrix.target.cleanupInactiveSurface || false }}
+        run: bash scripts/ci/fast-publish-section-readiness-recovery.sh
 
       - name: Acquire bootstrap R2 gate for finalization
         id: acquire_finalize_bootstrap

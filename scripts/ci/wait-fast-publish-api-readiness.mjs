@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { spawnSync } from 'node:child_process';
+import { appendFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
@@ -191,6 +192,44 @@ export async function waitForFastPublishApiReadiness({
   throw new Error(`esito=readiness-timeout: readiness API Fast Publish non verificata entro ${waitMs}ms (sezioni ${targets.join(',')}, atteso ${expectedCommit}): ${lastReason}`);
 }
 
+/**
+ * Quali sezioni sono indietro rispetto a una release gia' pubblicata. Una sola
+ * riconciliazione HTTP per tutte le sezioni: i difetti globali (manifest o
+ * registro edge non sul commit, flip pendente) non sono una questione di
+ * sezione e fanno fallire il chiamante invece di accodare un fan-out.
+ */
+export async function sectionsBehindRelease({
+  sections,
+  expectedCommit,
+  attemptBudgetMs = DEFAULT_ATTEMPT_BUDGET_MS,
+  reconcileImpl = reconcile,
+  isDescendant = isCommitDescendantOf,
+} = {}) {
+  if (!Array.isArray(sections) || sections.length === 0 || sections.some((id) => typeof id !== 'string' || !id)) {
+    throw new Error('sections deve contenere almeno una sezione R2');
+  }
+  if (!SHA_RE.test(expectedCommit ?? '')) throw new Error('expectedCommit richiede una SHA completa');
+  const report = await reconcileImpl({ sectionIds: sections, checkLandingContent: false, budgetMs: attemptBudgetMs });
+  const covers = (actual) => actual === expectedCommit || isDescendant(actual, expectedCommit) === true;
+  if (report?.skipped) throw new Error(`riconciliazione non eseguibile: ${report.skipped}`);
+  if (!covers(report?.apiCommit) || !covers(report?.edgeCommit) || report?.pendingEdgeFlip === true) {
+    throw new Error(`release ${expectedCommit} non ancora stabile su manifest/edge (api ${report?.apiCommit ?? 'assente'}, edge ${report?.edgeCommit ?? 'assente'})`);
+  }
+  const behind = [];
+  for (const section of sections) {
+    const result = fastPublishReadiness(report, { sections: [section], expectedCommit, isDescendant });
+    if (!result.ready) behind.push({ section, reason: result.reason });
+  }
+  return { expectedCommit, behind: behind.map((entry) => entry.section).sort(), reasons: behind };
+}
+
+/** Il finalize dichiara il timeout alla pipeline: chi lo riprende lo legge qui. */
+export function markReadinessTimeout(error, outputFile = process.env.GITHUB_OUTPUT) {
+  if (!/esito=readiness-timeout/u.test(error?.message ?? '') || !outputFile) return false;
+  appendFileSync(outputFile, 'readiness_timeout=true\n');
+  return true;
+}
+
 export async function main(env = process.env, argv = process.argv.slice(2)) {
   const sections = env.SECTIONS_JSON ? JSON.parse(env.SECTIONS_JSON) : [env.SECTION].filter(Boolean);
   const expectedCommit = env.EXPECTED_API_COMMIT;
@@ -203,14 +242,27 @@ export async function main(env = process.env, argv = process.argv.slice(2)) {
     process.stdout.write(`${JSON.stringify(result)}\n`);
     return result;
   }
-  const result = await waitForFastPublishApiReadiness({
-    sections,
-    expectedCommit,
-    waitMs: positiveInteger(env.FAST_PUBLISH_API_WAIT_MS, 'FAST_PUBLISH_API_WAIT_MS', DEFAULT_WAIT_MS),
-    attemptBudgetMs: positiveInteger(env.FAST_PUBLISH_API_ATTEMPT_BUDGET_MS, 'FAST_PUBLISH_API_ATTEMPT_BUDGET_MS', DEFAULT_ATTEMPT_BUDGET_MS),
-    retryDelayMs: positiveInteger(env.FAST_PUBLISH_API_RETRY_DELAY_MS, 'FAST_PUBLISH_API_RETRY_DELAY_MS', DEFAULT_RETRY_DELAY_MS),
-  });
-  return result;
+  if (argv.includes('--behind')) {
+    const result = await sectionsBehindRelease({
+      sections,
+      expectedCommit,
+      attemptBudgetMs: positiveInteger(env.FAST_PUBLISH_API_ATTEMPT_BUDGET_MS, 'FAST_PUBLISH_API_ATTEMPT_BUDGET_MS', DEFAULT_ATTEMPT_BUDGET_MS),
+    });
+    process.stdout.write(`${JSON.stringify(result)}\n`);
+    return result;
+  }
+  try {
+    return await waitForFastPublishApiReadiness({
+      sections,
+      expectedCommit,
+      waitMs: positiveInteger(env.FAST_PUBLISH_API_WAIT_MS, 'FAST_PUBLISH_API_WAIT_MS', DEFAULT_WAIT_MS),
+      attemptBudgetMs: positiveInteger(env.FAST_PUBLISH_API_ATTEMPT_BUDGET_MS, 'FAST_PUBLISH_API_ATTEMPT_BUDGET_MS', DEFAULT_ATTEMPT_BUDGET_MS),
+      retryDelayMs: positiveInteger(env.FAST_PUBLISH_API_RETRY_DELAY_MS, 'FAST_PUBLISH_API_RETRY_DELAY_MS', DEFAULT_RETRY_DELAY_MS),
+    });
+  } catch (error) {
+    markReadinessTimeout(error, env.GITHUB_OUTPUT);
+    throw error;
+  }
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {

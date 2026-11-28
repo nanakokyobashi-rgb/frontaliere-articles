@@ -22,12 +22,8 @@ if WORKFLOW_RUN_DISPLAY_TITLE="$WORKFLOW_RUN_DISPLAY_TITLE" \
   node scripts/ci/resolve-workflow-run-push-range.mjs --fast-publish-range >/dev/null 2>&1; then
   marked='true'
 fi
-if [ "$WORKFLOW_RUN_EVENT" != 'push' ]; then
-  if [ "$marked" = 'true' ]; then
-    echo '::notice::Fast Publish listener salta il workflow_dispatch API correlato a un push Fast'
-  else
-    echo "::notice::Fast Publish listener ignora il workflow API non-push: $WORKFLOW_RUN_EVENT"
-  fi
+if [ "$WORKFLOW_RUN_EVENT" != 'push' ] && [ "$marked" = 'true' ]; then
+  echo '::notice::Fast Publish listener salta il workflow_dispatch API correlato a un push Fast'
   echo 'dispatch_count=0' >> "$GITHUB_OUTPUT"
   exit 0
 fi
@@ -61,19 +57,48 @@ if [ "$WORKFLOW_RUN_EVENT" = 'push' ]; then
   api_local_targets="$(node scripts/ci/fast-publish-section.mjs r2-api-stage-plan-range "$before" "$after")"
 fi
 
-reconciliation_targets="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan "$WORKFLOW_RUN_HEAD_SHA")"
+behind_sections='null'
+reconcile_commit="$WORKFLOW_RUN_HEAD_SHA"
+if [ "$is_push" != 'true' ]; then
+  # schedule / workflow_dispatch: head_sha e' la HEAD di main al lancio, non la
+  # release servita (un replay con source_commit pubblica un commit diverso).
+  # Il commit effettivamente pubblicato e' quello del registro edge; si
+  # riconciliano solo le sezioni R2 live ancora indietro rispetto a esso.
+  reconcile_commit="$(node scripts/ci/fast-publish-section.mjs r2-edge-release-commit)"
+  if ! [[ "$reconcile_commit" =~ ^[a-f0-9]{40}$ ]]; then
+    echo '::error::commit pubblicato non leggibile dal registro edge'
+    exit 1
+  fi
+  if ! git cat-file -e "$reconcile_commit^{commit}" 2>/dev/null; then
+    git fetch --quiet --no-tags origin "$reconcile_commit"
+  fi
+  git checkout --detach "$reconcile_commit" >/dev/null
+fi
+reconciliation_targets="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan "$reconcile_commit")"
+if [ "$is_push" != 'true' ]; then
+  live_sections="$(jq -c '[.[] | select(.bootstrap == true and ((.cleanupInactiveSurface // false) | not)) | .section] | unique' <<<"$reconciliation_targets")"
+  if [ "$live_sections" = '[]' ]; then
+    behind_sections='[]'
+  else
+    behind_report="$(EXPECTED_API_COMMIT="$reconcile_commit" SECTIONS_JSON="$live_sections" \
+      FAST_PUBLISH_API_ATTEMPT_BUDGET_MS="${FAST_PUBLISH_API_ATTEMPT_BUDGET_MS:-300000}" \
+      node scripts/ci/wait-fast-publish-api-readiness.mjs --behind)"
+    behind_sections="$(jq -c '.behind' <<<"$behind_report")"
+  fi
+fi
 decision_input="$(jq -cn \
   --argjson isPush "$is_push" \
   --argjson fastPushOwner "$fast_push_owner" \
   --argjson markedFastPublishRange "$marked" \
   --argjson apiLocalTargets "$api_local_targets" \
   --argjson reconciliationTargets "$reconciliation_targets" \
-  '{isPush:$isPush,fastPushOwner:$fastPushOwner,markedFastPublishRange:$markedFastPublishRange,apiLocalTargets:$apiLocalTargets,reconciliationTargets:$reconciliationTargets}')"
+  --argjson behindSections "$behind_sections" \
+  '{isPush:$isPush,fastPushOwner:$fastPushOwner,markedFastPublishRange:$markedFastPublishRange,apiLocalTargets:$apiLocalTargets,reconciliationTargets:$reconciliationTargets,behindSections:$behindSections}')"
 decision="$(node scripts/ci/fast-publish-api-only-decision.mjs <<<"$decision_input")"
 targets="$(jq -c '.targets' <<<"$decision")"
 reason="$(jq -r '.reason' <<<"$decision")"
 if [ "$(jq -r '.skip' <<<"$decision")" = 'true' ]; then
-  echo "::notice::Fast Publish listener salta il range $WORKFLOW_RUN_HEAD_SHA: $reason"
+  echo "::notice::Fast Publish listener salta il range $reconcile_commit: $reason"
   echo 'dispatch_count=0' >> "$GITHUB_OUTPUT"
   exit 0
 fi
@@ -111,9 +136,9 @@ while IFS= read -r target; do
     -f 'dry_run=false' \
     -f 'replay_api_after_publish=false' \
     -f 'coordinated_recovery=false' \
-    -f "api_release_commit=$WORKFLOW_RUN_HEAD_SHA" \
+    -f "api_release_commit=$reconcile_commit" \
     -f "dispatch_nonce=$nonce" \
     -f "dispatch_cohort=$cohort"
 done < <(jq -c '.[]' <<<"$targets")
 echo "dispatch_count=$count" >> "$GITHUB_OUTPUT"
-echo "::notice::dispatchate $count sezioni API-only sulla release $WORKFLOW_RUN_HEAD_SHA"
+echo "::notice::dispatchate $count sezioni API-only sulla release $reconcile_commit"

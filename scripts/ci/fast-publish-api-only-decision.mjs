@@ -13,6 +13,7 @@ export function decideApiOnlyDispatch({
   fastPushTargets = [],
   apiLocalTargets = [],
   reconciliationTargets = [],
+  behindSections = null,
 } = {}) {
   for (const [name, value] of [
     ['fastPushTargets', fastPushTargets],
@@ -26,7 +27,22 @@ export function decideApiOnlyDispatch({
     return { skip: true, reason: 'direct-fast-publish-marker', targets: [] };
   }
   if (!isPush) {
-    return { skip: true, reason: 'non-push-api-event', targets: [] };
+    // Schedule e dispatch manuali di publish-api: nessun range da pianificare.
+    // Senza una misura delle sezioni indietro restano ignorati; con la misura si
+    // riconciliano solo quelle, mai un fan-out sulla stessa HEAD invariata.
+    if (behindSections === null) return { skip: true, reason: 'non-push-api-event', targets: [] };
+    if (!Array.isArray(behindSections)) throw new Error('behindSections deve essere un array');
+    const behind = new Set(behindSections);
+    const targets = reconciliationTargets
+      .filter((target) => target?.cleanupInactiveSurface !== true && behind.has(target?.section))
+      .sort((a, b) => a.section.localeCompare(b.section));
+    for (const section of behind) {
+      if (!targets.some((target) => target.section === section)) {
+        throw new Error(`sezione indietro assente dal piano edge: ${section}`);
+      }
+    }
+    if (targets.length === 0) return { skip: true, reason: 'non-push-api-release-current', targets: [] };
+    return { skip: false, reason: 'non-push-api-release-behind', targets };
   }
   if (isPush && (fastPushOwner || fastPushTargets.length > 0)) {
     return { skip: true, reason: 'direct-push-fast-publish-owner', targets: [] };

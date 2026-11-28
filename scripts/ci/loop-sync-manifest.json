@@ -289,6 +289,16 @@
       }
     },
     {
+      "path": "scripts/ci/fast-publish-section-readiness-recovery.sh",
+      "mode": "corpus-only",
+      "reason": "Recovery del finalize dopo un readiness-timeout: accoda un dispatch bounded della sezione con la release API attesa. Il sito non possiede il publisher corpus-side ne' questo helper, quindi il path resta corpus-only per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
       "path": "scripts/ci/fast-publish-section-pending-probe.sh",
       "mode": "corpus-only",
       "reason": "Sonda dei fast-publish-section ancora pendenti usata dal coordinamento corpus-side. Il sito non possiede il publisher corpus-side ne' questo helper, quindi il path resta corpus-only per costruzione.",

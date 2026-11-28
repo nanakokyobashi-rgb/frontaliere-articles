@@ -142,12 +142,12 @@ test('solo il listener non-Fast ascolta il completamento publish-api', () => {
   assert.match(listenerWorkflow, /workflows: \['Publish article data API'\]/u);
   assert.match(listenerWorkflow, /github\.event\.workflow_run\.conclusion == 'success'/u);
   assert.match(listenerWorkflow, /scripts\/ci\/fast-publish-api-only-listener\.sh/u);
-  assert.match(listenerWorkflow, /github\.event\.workflow_run\.event == 'push'/u, 'solo push API-only possono creare dispatch Fast');
+  assert.doesNotMatch(listenerWorkflow, /workflow_run\.event == 'push'/u, 'anche schedule e dispatch API riconciliano R2 (round 14)');
   const source = readFileSync(new URL('../../scripts/ci/fast-publish-api-only-listener.sh', import.meta.url), 'utf8');
   assert.match(source, /--fast-push-trigger "\$before" "\$after" \.github\/workflows\/fast-publish-section\.yml/u);
   assert.match(source, /gh workflow run fast-publish-section\.yml/u);
-  assert.match(source, /api_release_commit=\$WORKFLOW_RUN_HEAD_SHA/u);
-  assert.match(source, /WORKFLOW_RUN_EVENT" != 'push'[\s\S]*?dispatch_count=0[\s\S]*?exit 0/u);
+  assert.match(source, /api_release_commit=\$reconcile_commit/u);
+  assert.match(source, /WORKFLOW_RUN_EVENT" != 'push' \] && \[ "\$marked" = 'true'[\s\S]*?dispatch_count=0[\s\S]*?exit 0/u);
   assert.doesNotMatch(source, /gh run list|actions\/runs.*poll/u);
   assert.match(source, /done < <\(jq -c '\.\[\]' <<<"\$targets"\)/u);
 });

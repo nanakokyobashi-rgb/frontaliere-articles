@@ -378,6 +378,9 @@ function dateMs(value) {
 }
 
 export function publishRunDurationMinutes(run) {
+  // `updatedAt` e' un proxy del completamento solo a run chiusa: su una run in
+  // coda o in corso e' l'ultimo aggiornamento e darebbe una durata fasulla.
+  if (typeof run?.status === 'string' && run.status.toLowerCase() !== 'completed') return null;
   const startedAt = dateMs(run?.startedAt) ?? dateMs(run?.createdAt);
   const finishedAt = dateMs(run?.updatedAt);
   if (startedAt === null || finishedAt === null || finishedAt < startedAt) return null;
