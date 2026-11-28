@@ -836,8 +836,13 @@ export function buildCantonProfile(section, deps) {
     // (vocabolario e candidate sperimentali sono frontalieri/nazionali: il tier
     // sperimentale proporrebbe una keyword evergreen frontaliera), niente pool
     // evergreen generico: gli evergreen cantonali sono gli hub di P10.
+    // La domanda di ricerca entra con un ranker a parte (`sectionDemandRanker`,
+    // F6.2): vocabolario PER SEZIONE da Search Console, locale e senza LLM,
+    // dopo la freschezza; `demandRanker` resta false perche' il ranker storico
+    // userebbe il vocabolario frontaliere e le candidate sperimentali.
     discoveryPool: false,
     demandRanker: false,
+    sectionDemandRanker: true,
     evergreenPool: null,
     hasTopical: (text) => countTopical(text) > 0,
     countTopical,

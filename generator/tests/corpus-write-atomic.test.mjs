@@ -57,6 +57,7 @@ const CHOKE_POINTS = [
   ['generator/scripts/repair-localized-toponyms.mjs', 'nessun workflow: bonifica deterministica degli esonimi localizzati'],
   ['generator/scripts/backfill-article-cantons.mjs', 'nessun workflow: backfill one-shot del campo canton lanciato a mano'],
   ['generator/scripts/backfill-article-type.mjs', 'nessun workflow: backfill one-shot del campo articleType lanciato a mano'],
+  ['generator/scripts/build-section-demand-vocabulary.mjs', 'refresh-section-demand-vocabulary.yml'],
   ['generator/scripts/lib/article-registry-image.mjs', 'regenerate-queued-covers.yml'],
   ['generator/scripts/lib/daily-brief-image.mjs', 'generate-daily-brief.yml'],
   ['generator/scripts/regenerate-queued-covers.mjs', 'regenerate-queued-covers.yml'],

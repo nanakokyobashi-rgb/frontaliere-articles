@@ -1,0 +1,653 @@
+{
+ "version": 1,
+ "source": "google-search-console",
+ "window": {
+  "from": "2026-10-29",
+  "to": "2026-11-25",
+  "days": 28
+ },
+ "generatedAt": "2026-11-28T14:41:07.082Z",
+ "top": 80,
+ "minQueryImpressions": 5,
+ "queryFilterVersion": 2,
+ "discardedByReason": {
+  "unknown_token": 1200,
+  "person_pattern": 37,
+  "generic": 40,
+  "syntax": 2,
+  "toponym_excess": 4,
+  "too_long": 20,
+  "no_domain": 32,
+  "contact": 5,
+  "digits": 6,
+  "too_short": 8
+ },
+ "truncatedAliases": [],
+ "sections": {
+  "canton-ag": {
+   "totalQueries": 47,
+   "keptQueries": 14,
+   "keptImpressions": 215,
+   "queries": [
+    {
+     "query": "prämienverbilligung aargau",
+     "impressions": 48,
+     "clicks": 0,
+     "position": 29.2
+    },
+    {
+     "query": "steuerfuss fislisbach",
+     "impressions": 35,
+     "clicks": 0,
+     "position": 10.2
+    },
+    {
+     "query": "ahv maximalrente",
+     "impressions": 33,
+     "clicks": 0,
+     "position": 6.4
+    },
+    {
+     "query": "fislisbach steuerfuss",
+     "impressions": 15,
+     "clicks": 0,
+     "position": 10.3
+    },
+    {
+     "query": "niederwil steuerfuss",
+     "impressions": 13,
+     "clicks": 0,
+     "position": 8.7
+    },
+    {
+     "query": "steuerfuss niederwil",
+     "impressions": 13,
+     "clicks": 0,
+     "position": 7.9
+    },
+    {
+     "query": "ahv maximalrente 2025",
+     "impressions": 11,
+     "clicks": 0,
+     "position": 5.3
+    },
+    {
+     "query": "steuerfuss fislisbach 2026",
+     "impressions": 9,
+     "clicks": 0,
+     "position": 10.9
+    },
+    {
+     "query": "ahv rente 2025",
+     "impressions": 8,
+     "clicks": 0,
+     "position": 8.3
+    },
+    {
+     "query": "mellingen steuerfuss",
+     "impressions": 8,
+     "clicks": 0,
+     "position": 11.5
+    },
+    {
+     "query": "prämienverbilligung aargau 2027",
+     "impressions": 6,
+     "clicks": 0,
+     "position": 11.2
+    },
+    {
+     "query": "prämienverbilligung aargau tabelle",
+     "impressions": 6,
+     "clicks": 0,
+     "position": 21.2
+    },
+    {
+     "query": "niederlenz steuerfuss",
+     "impressions": 5,
+     "clicks": 0,
+     "position": 18.6
+    },
+    {
+     "query": "steuerfuss aargau liste 2026",
+     "impressions": 5,
+     "clicks": 0,
+     "position": 18.8
+    }
+   ]
+  },
+  "canton-basilea": {
+   "totalQueries": 33,
+   "keptQueries": 2,
+   "keptImpressions": 36,
+   "queries": [
+    {
+     "query": "quellensteuer basel",
+     "impressions": 30,
+     "clicks": 0,
+     "position": 52.2
+    },
+    {
+     "query": "steuern basel",
+     "impressions": 6,
+     "clicks": 0,
+     "position": 23.5
+    }
+   ]
+  },
+  "canton-fr": {
+   "totalQueries": 26,
+   "keptQueries": 1,
+   "keptImpressions": 28,
+   "queries": [
+    {
+     "query": "quellensteuer kanton freiburg",
+     "impressions": 28,
+     "clicks": 0,
+     "position": 40.8
+    }
+   ]
+  },
+  "canton-ge": {
+   "totalQueries": 23,
+   "keptQueries": 4,
+   "keptImpressions": 41,
+   "queries": [
+    {
+     "query": "salario minimo ginevra",
+     "impressions": 16,
+     "clicks": 0,
+     "position": 6.8
+    },
+    {
+     "query": "salaire minimum genève",
+     "impressions": 13,
+     "clicks": 0,
+     "position": 93.4
+    },
+    {
+     "query": "geneva tax",
+     "impressions": 7,
+     "clicks": 0,
+     "position": 39.6
+    },
+    {
+     "query": "genf mindestlohn",
+     "impressions": 5,
+     "clicks": 0,
+     "position": 9.2
+    }
+   ]
+  },
+  "canton-gl": {
+   "totalQueries": 15,
+   "keptQueries": 2,
+   "keptImpressions": 21,
+   "queries": [
+    {
+     "query": "quellensteuer glarus",
+     "impressions": 15,
+     "clicks": 0,
+     "position": 33.3
+    },
+    {
+     "query": "steuern glarus",
+     "impressions": 6,
+     "clicks": 0,
+     "position": 33.2
+    }
+   ]
+  },
+  "canton-gr": {
+   "totalQueries": 32,
+   "keptQueries": 4,
+   "keptImpressions": 56,
+   "queries": [
+    {
+     "query": "graubünden verkehr",
+     "impressions": 25,
+     "clicks": 0,
+     "position": 21
+    },
+    {
+     "query": "verkehr graubünden",
+     "impressions": 18,
+     "clicks": 0,
+     "position": 16
+    },
+    {
+     "query": "strassen graubünden",
+     "impressions": 7,
+     "clicks": 0,
+     "position": 29.1
+    },
+    {
+     "query": "lido di grono",
+     "impressions": 6,
+     "clicks": 2,
+     "position": 5.2
+    }
+   ]
+  },
+  "canton-ju": {
+   "totalQueries": 15,
+   "keptQueries": 1,
+   "keptImpressions": 6,
+   "queries": [
+    {
+     "query": "pensione svizzera",
+     "impressions": 6,
+     "clicks": 0,
+     "position": 27
+    }
+   ]
+  },
+  "canton-lu": {
+   "totalQueries": 13,
+   "keptQueries": 1,
+   "keptImpressions": 36,
+   "queries": [
+    {
+     "query": "verkehr luzern",
+     "impressions": 36,
+     "clicks": 0,
+     "position": 70.3
+    }
+   ]
+  },
+  "canton-ne": {
+   "totalQueries": 9,
+   "keptQueries": 1,
+   "keptImpressions": 16,
+   "queries": [
+    {
+     "query": "canton neuchatel assurance",
+     "impressions": 16,
+     "clicks": 0,
+     "position": 36.7
+    }
+   ]
+  },
+  "canton-ow": {
+   "totalQueries": 5,
+   "keptQueries": 2,
+   "keptImpressions": 16,
+   "queries": [
+    {
+     "query": "quellensteuer obwalden",
+     "impressions": 10,
+     "clicks": 0,
+     "position": 11
+    },
+    {
+     "query": "obwalden steuern",
+     "impressions": 6,
+     "clicks": 0,
+     "position": 14.7
+    }
+   ]
+  },
+  "canton-sg": {
+   "totalQueries": 8,
+   "keptQueries": 1,
+   "keptImpressions": 9,
+   "queries": [
+    {
+     "query": "ahv maximalrente 2026",
+     "impressions": 9,
+     "clicks": 0,
+     "position": 8.6
+    }
+   ]
+  },
+  "canton-sh": {
+   "totalQueries": 21,
+   "keptQueries": 3,
+   "keptImpressions": 41,
+   "queries": [
+    {
+     "query": "quellensteuer schaffhausen",
+     "impressions": 30,
+     "clicks": 0,
+     "position": 57.6
+    },
+    {
+     "query": "schaffhausen steuern",
+     "impressions": 6,
+     "clicks": 0,
+     "position": 22.8
+    },
+    {
+     "query": "steuern schaffhausen",
+     "impressions": 5,
+     "clicks": 0,
+     "position": 23.2
+    }
+   ]
+  },
+  "canton-so": {
+   "totalQueries": 29,
+   "keptQueries": 15,
+   "keptImpressions": 314,
+   "queries": [
+    {
+     "query": "prämienverbilligung solothurn 2027",
+     "impressions": 205,
+     "clicks": 1,
+     "position": 9.9
+    },
+    {
+     "query": "steuerfuss zuchwil 2026",
+     "impressions": 12,
+     "clicks": 0,
+     "position": 14.4
+    },
+    {
+     "query": "steuerfuss derendingen 2026",
+     "impressions": 10,
+     "clicks": 0,
+     "position": 8.5
+    },
+    {
+     "query": "steuerfuss grenchen",
+     "impressions": 10,
+     "clicks": 0,
+     "position": 2
+    },
+    {
+     "query": "prämienverbilligung solothurn 2026",
+     "impressions": 9,
+     "clicks": 0,
+     "position": 45.9
+    },
+    {
+     "query": "steuerfuss grenchen 2026",
+     "impressions": 9,
+     "clicks": 0,
+     "position": 4.7
+    },
+    {
+     "query": "steuerfuss dulliken 2026",
+     "impressions": 8,
+     "clicks": 0,
+     "position": 8
+    },
+    {
+     "query": "steuerfuss gretzenbach 2026",
+     "impressions": 8,
+     "clicks": 0,
+     "position": 7.3
+    },
+    {
+     "query": "steuerfuss schönenwerd 2026",
+     "impressions": 8,
+     "clicks": 0,
+     "position": 10
+    },
+    {
+     "query": "steuerfuss biberist 2026",
+     "impressions": 7,
+     "clicks": 0,
+     "position": 17
+    },
+    {
+     "query": "steuerfuss bellach 2026",
+     "impressions": 6,
+     "clicks": 0,
+     "position": 10.2
+    },
+    {
+     "query": "steuerfuss egerkingen 2026",
+     "impressions": 6,
+     "clicks": 0,
+     "position": 12.2
+    },
+    {
+     "query": "steuersatz solothurn",
+     "impressions": 6,
+     "clicks": 0,
+     "position": 42
+    },
+    {
+     "query": "prämienverbilligung solothurn",
+     "impressions": 5,
+     "clicks": 0,
+     "position": 31.6
+    },
+    {
+     "query": "steuerfuss olten 2026",
+     "impressions": 5,
+     "clicks": 0,
+     "position": 15.4
+    }
+   ]
+  },
+  "canton-sz": {
+   "totalQueries": 5,
+   "keptQueries": 1,
+   "keptImpressions": 5,
+   "queries": [
+    {
+     "query": "veranstaltungen schwyz",
+     "impressions": 5,
+     "clicks": 0,
+     "position": 48.2
+    }
+   ]
+  },
+  "canton-tg": {
+   "totalQueries": 30,
+   "keptQueries": 5,
+   "keptImpressions": 87,
+   "queries": [
+    {
+     "query": "quellensteuer thurgau",
+     "impressions": 37,
+     "clicks": 0,
+     "position": 56.6
+    },
+    {
+     "query": "steuern thurgau",
+     "impressions": 21,
+     "clicks": 0,
+     "position": 33.4
+    },
+    {
+     "query": "steuererklärung thurgau",
+     "impressions": 16,
+     "clicks": 0,
+     "position": 30.9
+    },
+    {
+     "query": "vorsorge thurgau",
+     "impressions": 7,
+     "clicks": 0,
+     "position": 12.7
+    },
+    {
+     "query": "steuerfuss frauenfeld",
+     "impressions": 6,
+     "clicks": 0,
+     "position": 15.5
+    }
+   ]
+  },
+  "canton-ti": {
+   "totalQueries": 46,
+   "keptQueries": 6,
+   "keptImpressions": 52,
+   "queries": [
+    {
+     "query": "eventi ticino",
+     "impressions": 12,
+     "clicks": 0,
+     "position": 45.2
+    },
+    {
+     "query": "steuern tessin",
+     "impressions": 12,
+     "clicks": 0,
+     "position": 14.4
+    },
+    {
+     "query": "traffico.ticino",
+     "impressions": 10,
+     "clicks": 0,
+     "position": 40.3
+    },
+    {
+     "query": "quellensteuer tessin",
+     "impressions": 7,
+     "clicks": 0,
+     "position": 13.1
+    },
+    {
+     "query": "eventi ticino oggi",
+     "impressions": 6,
+     "clicks": 0,
+     "position": 45.5
+    },
+    {
+     "query": "steuern italien",
+     "impressions": 5,
+     "clicks": 0,
+     "position": 33.2
+    }
+   ]
+  },
+  "canton-ur": {
+   "totalQueries": 8,
+   "keptQueries": 1,
+   "keptImpressions": 7,
+   "queries": [
+    {
+     "query": "veranstaltungen uri",
+     "impressions": 7,
+     "clicks": 0,
+     "position": 35
+    }
+   ]
+  },
+  "canton-zg": {
+   "totalQueries": 35,
+   "keptQueries": 5,
+   "keptImpressions": 57,
+   "queries": [
+    {
+     "query": "quellensteuer zug",
+     "impressions": 16,
+     "clicks": 0,
+     "position": 47.6
+    },
+    {
+     "query": "quellensteuer kanton zug",
+     "impressions": 13,
+     "clicks": 0,
+     "position": 41
+    },
+    {
+     "query": "zug quellensteuer",
+     "impressions": 12,
+     "clicks": 0,
+     "position": 47.6
+    },
+    {
+     "query": "zug tax rate",
+     "impressions": 11,
+     "clicks": 0,
+     "position": 26.9
+    },
+    {
+     "query": "steuern zug",
+     "impressions": 5,
+     "clicks": 0,
+     "position": 23.2
+    }
+   ]
+  },
+  "canton-zh": {
+   "totalQueries": 69,
+   "keptQueries": 13,
+   "keptImpressions": 111,
+   "queries": [
+    {
+     "query": "zürich mindestlohn 2027",
+     "impressions": 22,
+     "clicks": 0,
+     "position": 6.7
+    },
+    {
+     "query": "pensions zurich",
+     "impressions": 14,
+     "clicks": 0,
+     "position": 14
+    },
+    {
+     "query": "zurigo pensioni",
+     "impressions": 13,
+     "clicks": 0,
+     "position": 9.3
+    },
+    {
+     "query": "ahv maximalrente 2026",
+     "impressions": 11,
+     "clicks": 0,
+     "position": 44
+    },
+    {
+     "query": "steuerfuss meilen 2026",
+     "impressions": 8,
+     "clicks": 0,
+     "position": 10.9
+    },
+    {
+     "query": "einkommensteuer zürich",
+     "impressions": 6,
+     "clicks": 0,
+     "position": 67
+    },
+    {
+     "query": "quellensteuer zürich",
+     "impressions": 6,
+     "clicks": 0,
+     "position": 32
+    },
+    {
+     "query": "steuerfuss kloten 2026",
+     "impressions": 6,
+     "clicks": 0,
+     "position": 16.5
+    },
+    {
+     "query": "altersrente aktuell",
+     "impressions": 5,
+     "clicks": 0,
+     "position": 55.6
+    },
+    {
+     "query": "einkommensteuer zürich tabelle",
+     "impressions": 5,
+     "clicks": 0,
+     "position": 43
+    },
+    {
+     "query": "quellensteuer kanton zürich",
+     "impressions": 5,
+     "clicks": 0,
+     "position": 32.2
+    },
+    {
+     "query": "zurich tax",
+     "impressions": 5,
+     "clicks": 0,
+     "position": 30.6
+    },
+    {
+     "query": "zurich tax rate",
+     "impressions": 5,
+     "clicks": 0,
+     "position": 47.8
+    }
+   ]
+  }
+ }
+}

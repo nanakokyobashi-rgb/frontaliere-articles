@@ -261,6 +261,7 @@ test('profilo canton-gr: ammissione multilingue, cronaca solo con impatto pratic
   assert.equal(p.evergreenPool, null, 'nessun pool evergreen generico per le sezioni cantonali');
   assert.equal(p.discoveryPool, false);
   assert.equal(p.demandRanker, false);
+  assert.equal(p.sectionDemandRanker, true, 'F6.2: ranker per domanda di sezione, separato da quello storico');
   assert.equal(p.hasAdmission('Kanton Graubünden senkt die Steuern'), true);
   assert.equal(p.hasAdmission('Öffentliche Auflage zur Teilrevision Nutzungsplanung Stoffelmatte'), true);
   assert.equal(p.hasAdmission('Mise à l’enquête du plan d’affectation communal'), true);
@@ -523,6 +524,7 @@ test('create-article: i rami cantonali leggono il profilo, e le storiche restano
   assert.match(CREATE_ARTICLE, /else if \(slotKind === 'discovery'\) \{/);
   assert.match(CREATE_ARTICLE, /if \(!newsSuccess && !forceEvergreen && SECTION_PROFILE\.discoveryPool\) \{/);
   assert.match(CREATE_ARTICLE, /if \(SECTION_PROFILE\.demandRanker && \(_demandVocabulary/);
+  assert.match(CREATE_ARTICLE, /if \(!chosen && SECTION_PROFILE\.sectionDemandRanker && _sectionDemandVocabulary\) \{/);
 });
 
 test('--dry-run-scan: misura fino alla selezione ed esce prima di generare o scrivere', () => {

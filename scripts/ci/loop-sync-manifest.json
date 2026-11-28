@@ -7296,6 +7296,46 @@
         "corpus": "233c1dea7dab4923",
         "alignedAt": "2026-11-05"
       }
+    },
+    {
+      "path": "generator/scripts/lib/canton-section-demand-ranker.mjs",
+      "mode": "corpus-only",
+      "reason": "Ranker di selezione per domanda di ricerca delle sezioni cantonali (F6.2, O2): punteggia le headline del pool contro il vocabolario di query Search Console della SEZIONE (`generator/data/section-demand-vocabulary.json`), in modo deterministico e locale (zero chiamate LLM), con la freschezza come primo criterio e nessuna scelta quando il vocabolario e' insufficiente. Corpus-only: lo chiama solo create-article.mjs del corpus per i profili con `sectionDemandRanker`; il sito non genera articoli cantonali.",
+      "baseline": {
+        "site": null,
+        "corpus": "23971d45d8f3367a",
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
+      "path": "generator/scripts/build-section-demand-vocabulary.mjs",
+      "mode": "corpus-only",
+      "reason": "Rigenera il vocabolario di domanda per sezione cantonale leggendo le query Search Console degli ultimi 28 giorni sulle pagine di ciascuna sezione nelle quattro lingue. Strumento del corpus che scrive un JSON sotto generator/data/; il sito non lo esegue ne' lo importa.",
+      "baseline": {
+        "site": null,
+        "corpus": "bd30cbaf80db4e69",
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/section-demand-query-filter.mjs",
+      "mode": "corpus-only",
+      "reason": "Filtro di privacy e di dominio delle query Search Console del vocabolario di domanda per sezione cantonale (F6.2): grammatica chiusa a token esatti (dominio, generici, anni, toponimi della sola sezione, al massimo uno per query): scarta nomi di persona, contatti, codici, operatori e ogni token fuori dagli elenchi, senza prefissi ne' sottostringhe. Lo importano solo build-section-demand-vocabulary.mjs e canton-section-demand-ranker.mjs del corpus; il sito non genera articoli cantonali ne' usa questo vocabolario.",
+      "baseline": {
+        "site": null,
+        "corpus": "8d2cc720e98c482e",
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
+      "path": ".github/workflows/refresh-section-demand-vocabulary.yml",
+      "mode": "corpus-only",
+      "reason": "Rinnovo mensile del vocabolario di domanda per sezione cantonale (F6.2): rigenera generator/data/section-demand-vocabulary.json da Search Console con il filtro di privacy e apre una PR di soli dati. Il sito non ha ne' il builder ne' il ranker di sezione.",
+      "baseline": {
+        "site": null,
+        "corpus": "e8b9684ae3f550b6",
+        "alignedAt": "2026-11-28"
+      }
     }
   ]
 }
