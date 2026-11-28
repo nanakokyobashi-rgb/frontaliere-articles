@@ -916,6 +916,10 @@ async function publish(registry, { history = [], seed, fail, corrupt, salt, extr
     bootstrapWaitMs,
     sleep,
     stagingVerifyRetryMs: 0,
+    // Niente git vero con SHA finti: su un clone parziale `cat-file`/`merge-base` su un
+    // oggetto sconosciuto puo' fare un lazy fetch dal promisor. La regressione e' coperta
+    // in publish-section-edge-staging.test.mjs.
+    isOlderThanLive: () => false,
   });
   return { io, logs, before, result };
 }
@@ -1793,6 +1797,38 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.match(freshnessHelper, /git merge-base --is-ancestor "\$published_source" "\$current_main"/);
   assert.match(freshnessHelper, /apiInputChangedInRange/);
   assert.match(freshnessHelper, /publish-api-skip/);
+  assert.match(freshnessHelper, /VERIFY_API_ADVANCE/);
+  assert.equal(
+    (wf.match(/VERIFY_API_ADVANCE: \$\{\{ inputs\.source_commit == '' && 'adopt' \|\| 'skip' \}\}/g) || []).length,
+    7,
+    'le barriere (cover pre-Pages, cover in-step, Pages, edge, ...) adottano l avanzamento; i replay bounded restano skip',
+  );
+  // Preflight e source-current: solo-dati -> ritarget; codice/workflow -> skip; replay -> skip.
+  for (const guard of [preflight, barrier.slice(0, barrier.indexOf('PREFLIGHT: la sintassi') > 0 ? barrier.indexOf('PREFLIGHT: la sintassi') : 6000)]) {
+    assert.match(guard, /\[ "\$trigger_inputs_differ" = true \] && \[ "\$EXPLICIT_REPLAY" != 'true' \]/);
+    assert.match(guard, /apiTriggerCodeDiffersBetween/);
+    assert.match(guard, /cambiano solo dati/);
+  }
+  // Coalescenza nel preflight: una run push piu' recente in coda pubblica al suo posto; fail-open.
+  assert.match(preflight, /EVENT_NAME: \$\{\{ github\.event_name \}\}/);
+  assert.match(preflight, /RUN_NUMBER: \$\{\{ github\.run_number \}\}/);
+  assert.match(preflight, /actions\/workflows\/publish-api\.yml\/runs\?per_page=100/);
+  assert.match(preflight, /\.run_number > '"\$RUN_NUMBER"'/);
+  assert.match(preflight, /nessuna coalescenza, questa run pubblica/);
+  assert.match(preflight, /\[ "\$newer_pending" -gt 0 \]/);
+  // Rete: cede solo a una run piu' recente E fresca (non una che unwedge puo' annullare), e lo dice nel summary.
+  assert.match(preflight, /COALESCE_MAX_AGE_SECONDS: '1800'/);
+  assert.match(preflight, /now - \(\.created_at \| fromdateiso8601\)\) < '"\$COALESCE_MAX_AGE_SECONDS"'/);
+  assert.match(preflight, /\.status == "queued" or \.status == "pending" or \.status == "waiting" or \.status == "requested"/);
+  assert.match(preflight, /cede alla run push piu' recente \$coalesced_into/);
+  // La cessione e' revocabile: se il successore viene annullato dal reaper, questo ridispaccia main.
+  assert.match(preflight, /Cessione revocabile/);
+  assert.match(preflight, /publish-api-unwedge\.yml, che dopo avere\n\s+# annullato una run ne dispaccia una nuova su main/);
+  assert.match(preflight, /### publish-api: run ceduta[\s\S]*>> "\$GITHUB_STEP_SUMMARY"/);
+  const coverQueue = wf.slice(wf.indexOf('push_queue_commit()'), wf.indexOf('queue_changed=false'));
+  assert.match(coverQueue, /\[ "\$api_input_changed" = 'true' \] && \[ "\$\{VERIFY_API_ADVANCE:-skip\}" = 'adopt' \]/);
+  assert.match(coverQueue, /la run prosegue sulla sorgente \$source_commit/);
+  assert.match(wf, /PUBLISH_API_EDGE_ADVANCE: \$\{\{ inputs\.source_commit == '' && 'adopt' \|\| 'skip' \}\}/);
   assert.match(freshnessHelper, /PUBLISH_API_SKIP=true/);
   assert.match(freshnessHelper, /il commit dell'artifact resta/);
   assert.match(freshnessHelper, /PUBLISH_API_SOURCE_COMMIT/);
@@ -1800,10 +1836,10 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.match(queuePush, /apiInputChangedInRange/);
   assert.match(queuePush, /PUBLISH_API_SOURCE_COMMIT=\$queued_head/);
   assert.match(edgePublisher, /verifySourceCurrent = null/);
-  assert.match(edgePublisher, /await verifySourceCurrent\(\)/);
+  assert.match(edgePublisher, /await verifySourceCurrent\(\{ phase: 'flip' \}\)/);
   assert.match(edgePublisher, /apiInputChangedInRange/);
   assert.ok(
-    edgePublisher.indexOf('await verifySourceCurrent()') < edgePublisher.indexOf('flipped = io.upload(pointerFile'),
+    edgePublisher.indexOf("await verifySourceCurrent({ phase: 'flip' })") < edgePublisher.indexOf('flipped = io.upload(pointerFile'),
     'il guard interno deve precedere immediatamente il PUT del puntatore',
   );
   assert.match(wf, /Verify source before governed cover publish/);
@@ -1892,6 +1928,7 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
     "        if: env.PUBLISH_API_SKIP != 'true' && steps.deploy.outcome == 'success'",
     '        env:',
     '          GH_TOKEN: ${{ github.token }}',
+    "          PUBLISH_API_EDGE_ADVANCE: ${{ inputs.source_commit == '' && 'adopt' || 'skip' }}",
     '        run: node scripts/publish-section-edge.mjs',
   ].join('\n'));
   // Nessuno step fra il flip e la notifica, e la notifica non porta

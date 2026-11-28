@@ -193,14 +193,37 @@ function gitIsAncestor(ancestor, observedDescendant) {
  * The workflow checks freshness before entering this module, but staging and
  * bootstrap can wait for a long time. The final pointer PUT needs its own
  * source-of-truth check, immediately before the only mutable edge write. A
- * later main commit is safe to adopt only when it contains no publish-api
- * input; the artifact commit remains the expected value because it is the
- * commit recorded in manifest.json and consumed by downstream publishers.
+ * later main commit is safe to adopt when it contains no publish-api input;
+ * the artifact commit remains the expected value because it is the commit
+ * recorded in manifest.json and consumed by downstream publishers.
+ *
+ * With `adoptApiAdvance` a later main that DOES contain API input is adopted
+ * too (history still has to reconcile): the staged snapshot is complete and
+ * self-consistent, runs are serialised and each starts from the then-current
+ * main, so publishing it only moves the edge forward and the next run
+ * publishes the delta. Refusing instead made the whole run fail whenever main
+ * advanced during the (long) staging, so with a continuous stream of commits
+ * no run ever reached the flip. The regression the guard really has to stop
+ * (a snapshot older than the live pointer) is checked by `assertNotOlderThanLive`.
  */
 export async function assertExpectedMainHead(
   expected,
   readMainHead = publishedMainHead,
-  { isAncestor = gitIsAncestor, apiInputChanged = apiInputChangedInRange } = {},
+  {
+    isAncestor = gitIsAncestor,
+    apiInputChanged = apiInputChangedInRange,
+    adoptApiAdvance = false,
+    // Durante le ATTESE (bootstrap, lease) un main avanzato con input API non
+    // deve tenere occupata la coda `queue: max` fino a 145 minuti: oltre
+    // `adoptMaxAgeMs` dalla prima volta che l'avanzamento e' stato visto si
+    // interrompe, cosi' la run piu' nuova prende il posto. `null` = nessun
+    // limite (il controllo finale prima del PUT non ha mai un limite: li' la
+    // run e' arrivata al flip e deve pubblicare).
+    adoptMaxAgeMs = null,
+    advanceState = null,
+    now = Date.now,
+    log = console.log,
+  } = {},
 ) {
   if (!FULL_GIT_SHA_RE.test(String(expected ?? ''))) {
     throw new Error('PUBLISH_API_SOURCE_COMMIT non contiene una SHA completa');
@@ -245,6 +268,23 @@ export async function assertExpectedMainHead(
         { cause: error },
       );
     }
+    if (apiInputChangedInDelta && adoptApiAdvance) {
+      if (adoptMaxAgeMs !== null && advanceState) {
+        const t = now();
+        if (advanceState.firstSeenAt == null) advanceState.firstSeenAt = t;
+        else if (t - advanceState.firstSeenAt > adoptMaxAgeMs) {
+          throw new Error(
+            "main e' avanzato durante lo staging edge (" + expected + " → " + refreshedCurrent + ") con input API nuovi da oltre "
+              + Math.round(adoptMaxAgeMs / 60_000) + " minuti mentre la run e' ancora in attesa: attesa interrotta per liberare la coda",
+          );
+        }
+      }
+      log(
+        "::notice::[section-edge] main e' avanzato durante lo staging edge (" + expected + " → " + refreshedCurrent
+          + ") con input API nuovi: si pubblica lo snapshot gia' in staging, il delta lo pubblica la run successiva",
+      );
+      return refreshedCurrent;
+    }
     if (apiInputChangedInDelta) {
       throw new Error(
         "main e' avanzato durante lo staging edge (" + expected + " → " + refreshedCurrent + ") e contiene input API nuovi; flip interrotto",
@@ -253,6 +293,44 @@ export async function assertExpectedMainHead(
     return refreshedCurrent;
   }
   return current;
+}
+
+/**
+ * True when `releaseCommit` is a strict ancestor of `liveCommit`: publishing it
+ * would move the edge pointer backwards. A live commit that is unknown locally
+ * or on another line of history (rewritten history) cannot be classified and
+ * is not treated as a regression, so it can never wedge publication.
+ */
+export function releaseOlderThanLive(releaseCommit, liveCommit, { exec = execFileSync, log = console.log } = {}) {
+  if (!FULL_GIT_SHA_RE.test(String(releaseCommit ?? '')) || !FULL_GIT_SHA_RE.test(String(liveCommit ?? ''))) return false;
+  if (releaseCommit === liveCommit) return false;
+  const git = (args) => {
+    try {
+      exec('git', ['-C', ROOT, ...args], { stdio: 'ignore', timeout: 30_000 });
+      return 0;
+    } catch (error) {
+      return error?.status === 1 ? 1 : 2;
+    }
+  };
+  // Ogni ramo che NON puo' dimostrare la regressione lascia pubblicare, ma lo
+  // dice: un controllo di sicurezza spento in silenzio non si vede mai.
+  // `cat-file -e` su un oggetto mancante esce 128 (come un errore vero di git):
+  // `rev-parse --verify --quiet` esce 1 solo per «oggetto ignoto», 128 per il resto.
+  const known = git(['rev-parse', '--verify', '--quiet', liveCommit + '^{commit}']);
+  if (known === 1) {
+    log("::warning::[section-edge] controllo di regressione non eseguibile: il commit servito " + liveCommit + " e' ignoto al checkout; si procede senza");
+    return false;
+  }
+  if (known !== 0) {
+    log("::warning::[section-edge] controllo di regressione non eseguibile: errore git (rev-parse) su " + liveCommit + "; si procede senza");
+    return false;
+  }
+  const ancestry = git(['merge-base', '--is-ancestor', releaseCommit, liveCommit]);
+  if (ancestry === 2) {
+    log("::warning::[section-edge] controllo di regressione non eseguibile: errore git (merge-base) tra " + releaseCommit + " e " + liveCommit + "; si procede senza");
+    return false;
+  }
+  return ancestry === 0;
 }
 
 const sha256 = (data) => createHash('sha256').update(data).digest('hex');
@@ -592,6 +670,13 @@ export const BOOTSTRAP_RETRY_MS = 20 * 1000;
 const BOOTSTRAP_FRESHNESS_INTERVAL_MS = 120_000;
 
 class StagingFreshnessError extends Error {}
+
+/** Minuti oltre i quali un main avanzato con input API interrompe le ATTESE (non il flip). */
+export const ADOPT_WAIT_MAX_MINUTES = 15;
+export function adoptWaitMaxAgeMs(env = process.env) {
+  const minutes = Number(env.PUBLISH_API_EDGE_ADVANCE_WAIT_MINUTES);
+  return (Number.isFinite(minutes) && minutes > 0 ? minutes : ADOPT_WAIT_MAX_MINUTES) * 60_000;
+}
 /** Un tombstone transitorio non deve lasciare un lease attivo fino al TTL. */
 export const BOOTSTRAP_RELEASE_ATTEMPTS = 3;
 
@@ -868,6 +953,7 @@ export async function publishRelease(
     stagingVerifyAttempts = STAGING_VERIFY_ATTEMPTS,
     stagingVerifyRetryMs = STAGING_VERIFY_RETRY_MS,
     verifySourceCurrent = null,
+    isOlderThanLive = releaseOlderThanLive,
     sleep,
     now = Date.now,
   },
@@ -886,6 +972,18 @@ export async function publishRelease(
     else log(`::warning::[section-edge] ${phase}: ${what} — ${where}; niente di servito cambiava, il publish prosegue`);
     return { code: mandatory || forceFailure ? 1 : 0, phase, flipped };
   };
+
+  // Pubblicare uno snapshot piu' vecchio del puntatore servito sarebbe un
+  // rollback dell'edge: l'unico caso in cui la freshness deve davvero fermare.
+  const liveCommit = previous.state === 'ok' ? previous.doc?.commit : null;
+  if (mandatory && liveCommit && isOlderThanLive(release.commit, liveCommit, { log })) {
+    return stop(
+      'regression',
+      `la release ${release.commit} e' piu' vecchia di quella servita (${liveCommit}): il puntatore non torna indietro`,
+      false,
+      true,
+    );
+  }
 
   const missingCreds = ['R2_ACCESS_KEY_ID', 'R2_SECRET_ACCESS_KEY', 'R2_S3_ENDPOINT', 'R2_BUCKET', 'CF_API_TOKEN'].filter((name) => !env[name]);
 
@@ -998,7 +1096,7 @@ export async function publishRelease(
     if (typeof verifySourceCurrent !== 'function') return;
     lastFreshnessCheckAt = now();
     try {
-      await verifySourceCurrent();
+      await verifySourceCurrent({ phase: 'wait' });
     } catch (error) {
       throw new StagingFreshnessError(error?.message ?? String(error), { cause: error });
     }
@@ -1095,9 +1193,22 @@ export async function publishRelease(
     fs.writeFileSync(pointerFile, JSON.stringify(pointer));
     if (typeof verifySourceCurrent === 'function') {
       try {
-        await verifySourceCurrent();
+        await verifySourceCurrent({ phase: 'flip' });
       } catch (error) {
         return await stopBeforeFlip('freshness', error?.message ?? String(error));
+      }
+    }
+    // Un altro publisher puo' aver mosso il puntatore durante staging, attese e
+    // handshake: si rilegge il live subito prima del PUT e si ripete il
+    // controllo di regressione sul valore appena letto.
+    if (mandatory) {
+      const latest = await readPreviousRelease(io);
+      const latestLive = latest.state === 'ok' ? latest.doc?.commit : null;
+      if (latestLive && isOlderThanLive(release.commit, latestLive, { log })) {
+        return await stopBeforeFlip(
+          'regression',
+          `la release ${release.commit} e' piu' vecchia di quella servita adesso (${latestLive}): il puntatore non torna indietro`,
+        );
       }
     }
     flipped = io.upload(pointerFile, EDGE_SECTION_REGISTRY_FILE, REGISTRY_CACHE_CONTROL);
@@ -1164,8 +1275,14 @@ export async function main(argv = process.argv.slice(2), { env = process.env, io
     return 0;
   }
   const expectedSourceCommit = env.PUBLISH_API_SOURCE_COMMIT || env.PUBLISHED_SOURCE_COMMIT || '';
+  const advanceState = { firstSeenAt: null };
   const verifySourceCurrent = expectedSourceCommit
-    ? () => assertExpectedMainHead(expectedSourceCommit)
+    ? (context = {}) => assertExpectedMainHead(expectedSourceCommit, publishedMainHead, {
+      adoptApiAdvance: env.PUBLISH_API_EDGE_ADVANCE === 'adopt',
+      adoptMaxAgeMs: context.phase === 'wait' ? adoptWaitMaxAgeMs(env) : null,
+      advanceState,
+      log,
+    })
     : env.CI === 'true'
       ? async () => {
         throw new Error('PUBLISH_API_SOURCE_COMMIT assente in CI: impossibile verificare la sorgente prima del flip');
