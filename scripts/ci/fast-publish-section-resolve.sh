@@ -316,6 +316,8 @@ if [ -n "$pinned_source" ]; then
     [ "$(printf '%s' "$replay_matrix" | jq 'length')" -gt 0 ] && any=true
     bootstrap=false
     [ "$(printf '%s' "$replay_matrix" | jq 'any(.[]; .bootstrap == true)')" = 'true' ] && bootstrap=true
+    # Slot di concorrenza: dry-run e target non eleggibili fuori dal gruppo reale.
+    replay_matrix="$(printf '%s' "$replay_matrix" | node scripts/ci/fast-publish-section.mjs r2-annotate-slots "$replay_dry")"
     {
       echo "matrix=$replay_matrix"
       echo "any=$any"
@@ -489,6 +491,10 @@ elif [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ "$any" = 'true' ] \
   stage_matrix="$(printf '%s\n' "$matrix" | full_section_matrix)"
   api_action=dispatch
 fi
+# Slot di concorrenza: dry-run e target non eleggibili non devono sostituire
+# il pending reale di un push (queue: single).
+matrix="$(printf '%s' "$matrix" | node scripts/ci/fast-publish-section.mjs r2-annotate-slots "$dry")"
+stage_matrix="$(printf '%s' "$stage_matrix" | node scripts/ci/fast-publish-section.mjs r2-annotate-slots "$dry")"
 stage_any=false
 [ "$(jq 'length' <<< "$stage_matrix")" -gt 0 ] && stage_any=true
 {

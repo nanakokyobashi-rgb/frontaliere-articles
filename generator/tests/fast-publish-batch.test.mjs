@@ -226,6 +226,7 @@ test('C1 finalize tardivo recupera full-section C2 se queue:single sostituisce l
     rebootstrap: true,
     fullSection: true,
     sourceCommit: '2'.repeat(40),
+    renderCommit: '2'.repeat(40),
     checkApiAfterStage: true,
   });
   assert.equal(recovery.sourceCommit, '2'.repeat(40), 'il finalize C1 copre C2 nella propria run e nello slot acquisito');
@@ -258,6 +259,7 @@ test('un dispatch bounded tardivo con ids vuoti recupera il push anche se prefli
     rebootstrap: true,
     fullSection: true,
     sourceCommit: latestPushHead,
+    renderCommit: latestPushHead,
     checkApiAfterStage: true,
   });
   assert.equal(new Set([queue.running, queue.pending]).size, 2,

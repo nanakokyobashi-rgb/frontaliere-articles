@@ -17,6 +17,9 @@ on:
       - 'sections/registry.json'
       # Declared images and queued-cover writes are filtered below.
       - 'public/images/**'
+      # canton-sections.json e canton-url-slugs.json NON sono qui: una loro
+      # modifica e' un input API e passa dal listener
+      # fast-publish-api-only-listener.yml dopo publish-api verde.
       - 'generator/scripts/lib/canton-hubs/paths.mjs'
       - 'generator/scripts/lib/corpus-paths.mjs'
       - 'generator/scripts/lib/control-char-write-report.mjs'
@@ -40,7 +43,6 @@ on:
       - 'scripts/ci/fast-publish-section-late-api-recovery.sh'
       - 'scripts/ci/wait-fast-publish-api-readiness.mjs'
       - 'scripts/ci/dispatch-fast-publish-replay.sh'
-      - 'scripts/ci/dispatch-bounded-section-replay.sh'
       - 'scripts/ci/read-main-head.sh'
       - 'scripts/ci/resolve-workflow-run-push-range.mjs'
       - 'scripts/ci/retry-cmd.sh'
@@ -50,7 +52,6 @@ on:
       - 'scripts/ci/fast-publish-section-edge-candidate.sh'
       - 'scripts/ci/fast-publish-section-preflight.sh'
       - 'scripts/ci/fast-publish-section-render.sh'
-      - 'scripts/ci/fast-publish-section-recovery.sh'
       - 'scripts/ci/record-fast-publish-result.sh'
       - 'scripts/cf-purge-cache.mjs'
       - 'scripts/offload-generated-images-cdn.mjs'
@@ -554,7 +555,9 @@ jobs:
       matrix:
         target: ${{ fromJSON(needs.resolve.outputs.stage_matrix) }}
     concurrency:
-      group: fast-publish-${{ matrix.target.section }}
+      # Dry-run e target non eleggibili vivono in un gruppo separato (group
+      # annotato dal resolver): non sostituiscono il pending reale di un push.
+      group: ${{ matrix.target.group || format('fast-publish-{0}', matrix.target.section) }}
       cancel-in-progress: false
       queue: single
     steps:
@@ -710,11 +713,13 @@ jobs:
 
   coordinate_api_release:
     needs: [resolve, stage]
+    # Nessuna barriera tutto-o-niente: una gamba di stage fallita o sostituita
+    # dal pending piu' recente non blocca le altre. Il coordinator lavora sulle
+    # sole sezioni con artifact di stage (vedi final_matrix).
     if: >-
-      always() &&
+      !cancelled() &&
       needs.resolve.result == 'success' &&
-      needs.resolve.outputs.any == 'true' &&
-      (needs.stage.result == 'success' || needs.stage.result == 'skipped')
+      needs.resolve.outputs.any == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 190
     permissions:
@@ -725,7 +730,8 @@ jobs:
       # barrier is active. Once the coordinator completes, each target joins
       # the same queue:single group as stage, preserving the 1 running + 1
       # pending limit across phases.
-      final_matrix: ${{ needs.resolve.outputs.matrix }}
+      final_matrix: ${{ steps.decision.outputs.final_matrix }}
+      staged_sections: ${{ steps.decision.outputs.staged_sections }}
       api_commit: ${{ steps.decision.outputs.api_commit }}
       api_baseline: ${{ steps.decision.outputs.api_baseline }}
       defer_api_wait: ${{ steps.decision.outputs.defer_api_wait }}
@@ -745,6 +751,9 @@ jobs:
 
       - name: Download all completed stage artifacts
         if: needs.resolve.outputs.stage_any == 'true'
+        # Se tutte le gambe hanno fallito non c'e' nulla da scaricare: il
+        # coordinator decide sulle sole sezioni con artifact.
+        continue-on-error: true
         uses: actions/download-artifact@v7
         with:
           pattern: fast-publish-stage-*
@@ -823,10 +832,9 @@ jobs:
     name: finalize (${{ matrix.target.section }})
     needs: [resolve, stage, coordinate_api_release]
     if: >-
-      always() &&
+      !cancelled() &&
       needs.resolve.result == 'success' &&
       needs.resolve.outputs.any == 'true' &&
-      (needs.stage.result == 'success' || needs.stage.result == 'skipped') &&
       (needs.coordinate_api_release.result == 'success' || needs.coordinate_api_release.result == 'skipped')
     runs-on: ubuntu-latest
     timeout-minutes: 360
@@ -836,7 +844,9 @@ jobs:
       matrix:
         target: ${{ fromJSON(needs.coordinate_api_release.outputs.final_matrix) }}
     concurrency:
-      group: fast-publish-${{ matrix.target.section }}
+      # Dry-run e target non eleggibili vivono in un gruppo separato (group
+      # annotato dal resolver): non sostituiscono il pending reale di un push.
+      group: ${{ matrix.target.group || format('fast-publish-{0}', matrix.target.section) }}
       cancel-in-progress: false
       queue: single
     steps:
@@ -852,8 +862,11 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Preserve the result recorder from the workflow revision
+        run: install -m 0755 scripts/ci/record-fast-publish-result.sh "$RUNNER_TEMP/record-fast-publish-result.sh"
+
       - name: Download stage artifact for this section
-        if: needs.resolve.outputs.stage_any == 'true'
+        if: needs.resolve.outputs.stage_any == 'true' && contains(fromJSON(needs.coordinate_api_release.outputs.staged_sections || '[]'), matrix.target.section)
         uses: actions/download-artifact@v7
         with:
           name: fast-publish-stage-${{ matrix.target.section }}
@@ -868,6 +881,11 @@ jobs:
           PREFLIGHT_HEAD: ${{ needs.resolve.outputs.preflight_head }}
           CLEANUP_INACTIVE_SURFACE: ${{ matrix.target.cleanupInactiveSurface || false }}
           DEFER_API_WAIT: ${{ needs.coordinate_api_release.outputs.defer_api_wait || false }}
+          EVENT_NAME: ${{ github.event_name }}
+          TARGET_BOOTSTRAP: ${{ matrix.target.bootstrap || false }}
+          TARGET_IDS_JSON: ${{ toJSON(matrix.target.ids || fromJSON('[]')) }}
+          TARGET_MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.missingPagePaths || fromJSON('[]')) }}
+          PINNED_SOURCE: ${{ needs.resolve.outputs.source_commit || inputs.source_commit }}
         run: |
           set -euo pipefail
           observed="$(bash scripts/ci/read-main-head.sh)"
@@ -891,9 +909,15 @@ jobs:
           stage_source=''
           section_changed=false
           force_full_section=false
+          # Dispatch con ID espliciti o pagine 404 note: render mirato, mai
+          # full-section solo perche' manca l'artifact di stage.
+          targeted="$(jq -cn --arg eventName "$EVENT_NAME" --argjson bootstrap "${TARGET_BOOTSTRAP:-false}" \
+            --argjson ids "${TARGET_IDS_JSON:-[]}" --argjson missingPagePaths "${TARGET_MISSING_PAGE_PATHS_JSON:-[]}" \
+            '{eventName:$eventName,bootstrap:$bootstrap,ids:$ids,missingPagePaths:$missingPagePaths}' \
+            | node scripts/ci/fast-publish-section.mjs r2-targeted-dispatch)"
           if [ "$STAGE_ANY" = 'true' ] && [ -s "$STAGE_ARTIFACT" ]; then
             stage_source="$(jq -r '.sourceCommit' "$STAGE_ARTIFACT")"
-          elif [ "$CLEANUP_INACTIVE_SURFACE" != 'true' ] \
+          elif [ "$CLEANUP_INACTIVE_SURFACE" != 'true' ] && [ "$targeted" != 'true' ] \
             && [[ "${PREFLIGHT_HEAD:-}" =~ ^[a-f0-9]{40}$ ]]; then
             # Any stage-less active target may have replaced a pending push,
             # including landing/hub-only dispatches with ids=[]. Force a full
@@ -908,20 +932,40 @@ jobs:
             echo "::notice::sezione $SECTION cambiata dopo lo stage; recupero latest full-section sotto lo slot corrente"
             section_changed=true
           fi
+          # Un figlio pinnato (reconciler, replay bounded) rende la revisione
+          # attestata nell'artifact di coorte se la sezione non e' cambiata.
+          pinned=''
+          pinned_unaffected=false
+          if [[ "${PINNED_SOURCE:-}" =~ ^[a-f0-9]{40}$ ]] && [ "$PINNED_SOURCE" != "$observed" ] \
+            && [ "$CLEANUP_INACTIVE_SURFACE" != 'true' ]; then
+            if ! git cat-file -e "$PINNED_SOURCE^{commit}" 2>/dev/null; then git fetch --quiet --no-tags origin "$PINNED_SOURCE"; fi
+            pinned="$PINNED_SOURCE"
+            if bash scripts/ci/section-source-unaffected.sh --section "$SECTION" "$pinned" "$observed"; then
+              pinned_unaffected=true
+            fi
+          fi
           recovery_decision="$(jq -cn \
             --arg stageCommit "$stage_source" \
             --arg latestCommit "$observed" \
+            --arg pinnedCommit "$pinned" \
             --argjson sectionChanged "$section_changed" \
             --argjson forceFullSection "$force_full_section" \
             --argjson deferApiWait "${DEFER_API_WAIT:-false}" \
-            '{stageCommit:$stageCommit,latestCommit:$latestCommit,sectionChanged:$sectionChanged,deferApiWait:$deferApiWait,forceFullSection:$forceFullSection}' \
+            --argjson targeted "$targeted" \
+            --argjson pinnedUnaffected "$pinned_unaffected" \
+            '{stageCommit:$stageCommit,latestCommit:$latestCommit,pinnedCommit:$pinnedCommit,sectionChanged:$sectionChanged,deferApiWait:$deferApiWait,forceFullSection:$forceFullSection,targeted:$targeted,pinnedUnaffected:$pinnedUnaffected}' \
             | node scripts/ci/fast-publish-section.mjs r2-late-finalize-recovery)"
           rebootstrap="$(jq -r '.rebootstrap' <<<"$recovery_decision")"
+          render_commit="$(jq -r '.renderCommit' <<<"$recovery_decision")"
+          if [ "$render_commit" != "$observed" ]; then
+            echo "::notice::figlio pinnato: rendo $render_commit (sezione invariata fino a $observed)"
+            git checkout --detach "$render_commit"
+          fi
           {
             echo 'fresh=true'
             echo "rebootstrap=$rebootstrap"
             echo "stage_source=$stage_source"
-            echo "head=$observed"
+            echo "head=$render_commit"
           } >> "$GITHUB_OUTPUT"
 
       - name: Setup isolated article source runtime
@@ -1035,7 +1079,7 @@ jobs:
         env:
           EXPECTED_API_COMMIT: ${{ steps.late_api_recovery.outputs.api_commit }}
           SECTION: ${{ matrix.target.section }}
-          FAST_PUBLISH_API_WAIT_MS: '10800000'
+          FAST_PUBLISH_API_WAIT_MS: '5400000'
         run: node scripts/ci/wait-fast-publish-api-readiness.mjs
 
       - name: Wait for API release readiness while holding the section slot
@@ -1043,7 +1087,7 @@ jobs:
         env:
           EXPECTED_API_COMMIT: ${{ needs.coordinate_api_release.outputs.api_commit }}
           SECTION: ${{ matrix.target.section }}
-          FAST_PUBLISH_API_WAIT_MS: '10800000'
+          FAST_PUBLISH_API_WAIT_MS: '5400000'
         run: node scripts/ci/wait-fast-publish-api-readiness.mjs
 
       - name: Acquire bootstrap R2 gate for finalization
@@ -1075,14 +1119,14 @@ jobs:
           API_RELEASE_COMMIT: ${{ steps.late_api_recovery.outputs.api_commit || needs.coordinate_api_release.outputs.api_commit }}
           ALLOW_DEFERRED_LIVE_RELEASE: false
           REPLAY_API_AFTER_PUBLISH: false
-          COORDINATED_RECOVERY: false
+          COORDINATED_RECOVERY: ${{ inputs.coordinated_recovery }}
           SOURCE_COMMIT: ${{ steps.start_source.outputs.head }}
           SOURCE_MAIN_COMMIT: ${{ steps.start_source.outputs.head }}
           PINNED_REPLAY_MAIN: ${{ steps.start_source.outputs.head }}
           EXPECTED_MAIN_HEAD: ${{ steps.start_source.outputs.head }}
           DEFER_STALE_HANDOFF: true
-          DISPATCH_NONCE: ''
-          DISPATCH_COHORT: ''
+          DISPATCH_NONCE: ${{ inputs.dispatch_nonce }}
+          DISPATCH_COHORT: ${{ inputs.dispatch_cohort }}
           REF: refs/heads/main
           WORKFLOW_RUN_HEAD_SHA: ${{ steps.start_source.outputs.head }}
           GH_TOKEN: ${{ github.token }}
@@ -1103,6 +1147,31 @@ jobs:
           SECTION: ${{ matrix.target.section }}
           REPOSITORY: ${{ github.repository }}
         run: gh workflow run auto-live-canton-sections.yml --repo "$REPOSITORY" --ref main -f mode=promote -f sections="$SECTION"
+
+      - name: Record publish result
+        if: always()
+        env:
+          SECTION: ${{ matrix.target.section }}
+          RENDERED_HEAD: ${{ steps.render.outputs.rendered_head }}
+          STALE_HANDOFF: ${{ steps.render.outputs.stale_handoff }}
+          STALE_HANDOFF_HEAD: ${{ steps.render.outputs.stale_handoff_head }}
+          STALE_HANDOFF_NONCE: ${{ steps.render.outputs.stale_handoff_nonce }}
+          STALE_HANDOFF_TITLE: ${{ steps.render.outputs.stale_handoff_title }}
+          FRESH: ${{ steps.start_source.outputs.fresh }}
+          DISPATCH_NONCE: ${{ inputs.dispatch_nonce }}
+          DISPATCH_COHORT: ${{ inputs.dispatch_cohort }}
+          COORDINATED_RECOVERY: ${{ inputs.coordinated_recovery }}
+          SOURCE_COMMIT: ${{ needs.resolve.outputs.source_commit || inputs.source_commit }}
+          SOURCE_MAIN_COMMIT: ${{ needs.resolve.outputs.source_commit || inputs.source_main_commit }}
+        run: bash "$RUNNER_TEMP/record-fast-publish-result.sh"
+
+      - name: Upload publish result
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: fast-publish-result-${{ matrix.target.section }}
+          path: ${{ runner.temp }}/fast-publish-result.json
+          if-no-files-found: error
 
       - name: Cleanup Firebase credentials
         if: always()

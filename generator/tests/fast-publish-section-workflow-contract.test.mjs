@@ -69,7 +69,7 @@ test('stage, coordinator e finalize rispettano la barriera e un solo slot pendin
     ['finalize', finalize],
   ]) {
     assert.match(job, /^    concurrency:\n(?: {6}[^\n]*\n)*/mu);
-    assert.match(job, /^      group: fast-publish-\$\{\{ matrix\.target\.section \}\}$/mu);
+    assert.match(job, /^      group: \$\{\{ matrix\.target\.group \|\| format\('fast-publish-\{0\}', matrix\.target\.section\) \}\}$/mu);
     assert.match(job, /^      cancel-in-progress: false$/mu);
     assert.match(job, /^      queue: single$/mu, `${name} must keep one waiting run per section`);
   }
@@ -78,8 +78,8 @@ test('stage, coordinator e finalize rispettano la barriera e un solo slot pendin
   assert.match(stage, /max-parallel: 4/u);
   assert.match(coordinator, /needs: \[resolve, stage\]/u);
   assert.match(coordinator, /needs\.resolve\.outputs\.any == 'true'/u);
-  assert.match(coordinator, /needs\.stage\.result == 'success' \|\| needs\.stage\.result == 'skipped'/u);
-  assert.match(coordinator, /final_matrix: \$\{\{ needs\.resolve\.outputs\.matrix \}\}/u);
+  assert.doesNotMatch(coordinator, /needs\.stage\.result == 'success'/u, 'nessuna barriera tutto-o-niente sullo stage');
+  assert.match(coordinator, /final_matrix: \$\{\{ steps\.decision\.outputs\.final_matrix \}\}/u);
   assert.ok(workflow.indexOf('\n  stage:') < workflow.indexOf('\n  coordinate_api_release:'));
   assert.ok(workflow.indexOf('\n  coordinate_api_release:') < workflow.indexOf('\n  finalize:'));
 
@@ -89,11 +89,12 @@ test('stage, coordinator e finalize rispettano la barriera e un solo slot pendin
     'the unscoped coordinator must finish without an API wait');
   assert.equal((coordinator.match(/gh workflow run publish-api\.yml/g) ?? []).length, 1);
   assert.match(finalize, /Wait for API release readiness while holding the section slot/u);
-  assert.match(finalize, /FAST_PUBLISH_API_WAIT_MS: '10800000'/u);
+  assert.match(finalize, /FAST_PUBLISH_API_WAIT_MS: '5400000'/u);
   assert.ok(finalize.indexOf('Wait for API release readiness while holding the section slot')
     < finalize.indexOf('- name: Render and finalize latest section pages'));
   assert.match(finalize, /needs: \[resolve, stage, coordinate_api_release\]/u);
   assert.match(finalize, /needs\.coordinate_api_release\.result == 'success' \|\| needs\.coordinate_api_release\.result == 'skipped'/u);
+  assert.doesNotMatch(finalize, /needs\.stage\.result == 'success'/u);
   assert.match(finalize, /Read latest main after acquiring the section slot/u);
 });
 
@@ -102,7 +103,7 @@ test('la matrix finalize compare solo dopo l output del coordinator globale', ()
   const finalize = jobBlock('finalize');
   assert.match(finalize, /needs: \[resolve, stage, coordinate_api_release\]/u);
   assert.match(finalize, /target: \$\{\{ fromJSON\(needs\.coordinate_api_release\.outputs\.final_matrix\) \}\}/u);
-  assert.match(coordinator, /final_matrix: \$\{\{ needs\.resolve\.outputs\.matrix \}\}/u);
+  assert.match(coordinator, /final_matrix: \$\{\{ steps\.decision\.outputs\.final_matrix \}\}/u);
   assert.doesNotMatch(coordinator, /wait-fast-publish-api-readiness\.mjs/u,
     'il coordinator resta un barrier job globale breve; il wait avviene solo quando esiste finalize per target');
   assert.match(finalize, /Wait for API release readiness while holding the section slot/u);
@@ -137,7 +138,7 @@ test('i target stale cedono al pending per sezione senza dispatchare altri run',
 
 test('il finalize recupera una stage cross-phase sostituita con bootstrap latest nello stesso slot', () => {
   const finalize = jobBlock('finalize');
-  assert.match(finalize, /group: fast-publish-\$\{\{ matrix\.target\.section \}\}/u);
+  assert.match(finalize, /group: \$\{\{ matrix\.target\.group \|\| format\('fast-publish-\{0\}', matrix\.target\.section\) \}\}/u);
   assert.match(finalize, /queue: single/u);
   assert.match(finalize, /CLEANUP_INACTIVE_SURFACE: \$\{\{ matrix\.target\.cleanupInactiveSurface \|\| false \}\}/u);
   assert.match(finalize, /if \[ "\$CLEANUP_INACTIVE_SURFACE" = 'true' \]; then[\s\S]*?eligible=true[\s\S]*?r2-section-eligible/u);
@@ -155,8 +156,8 @@ test('il finalize recupera una stage cross-phase sostituita con bootstrap latest
   assert.match(finalize, /force_full_section=false[\s\S]*?stage_source="\$PREFLIGHT_HEAD"[\s\S]*?force_full_section=true/u,
     'qualunque target attivo senza artifact forza full-section latest, anche con ids vuoti e preflight già latest');
   assert.match(finalize, /--argjson forceFullSection "\$force_full_section"[\s\S]*?forceFullSection:\$forceFullSection[\s\S]*?r2-late-finalize-recovery/u);
-  assert.doesNotMatch(finalize, /TARGET_IDS_JSON|length > 0/u,
-    'la decisione di recovery non dipende dalla cardinalità degli article_ids');
+  assert.match(finalize, /\[ "\$targeted" != 'true' \][\s\S]*?force_full_section=true/u,
+    'il full-section forzato vale solo per i bounded senza ID e senza pagine 404 note (dispatch mirati: render mirato)');
   assert.match(finalize, /if \[ "\$CLEANUP_INACTIVE_SURFACE" != 'true' \][\s\S]*?section-source-unaffected\.sh --section/u,
     'cleanup-only non deve essere convertito in full-section render');
   assert.match(finalize, /ARTICLE_IDS_JSON: \$\{\{ steps\.start_source\.outputs\.rebootstrap == 'true' && '\[\]' \|\| toJSON\(matrix\.target\.ids\) \}\}/u);
@@ -228,7 +229,7 @@ test('il coordinator dispatcha e il finalize attende HTTP sotto lo slot della se
   const finalize = jobBlock('finalize');
   assert.match(coordinator, /- name: Dispatch publish-api for the staged release/u);
   assert.doesNotMatch(coordinator, /Wait for the served API release|wait-fast-publish-api-readiness\.mjs/u);
-  assert.match(finalize, /group: fast-publish-\$\{\{ matrix\.target\.section \}\}[\s\S]*?queue: single/u);
+  assert.match(finalize, /group: \$\{\{ matrix\.target\.group[\s\S]*?queue: single/u);
   assert.match(finalize, /if: steps\.start_source\.outputs\.fresh == 'true' && steps\.start_source\.outputs\.rebootstrap != 'true' && needs\.coordinate_api_release\.outputs\.wait_api == 'true'[\s\S]*?wait-fast-publish-api-readiness\.mjs/u);
 });
 
@@ -254,8 +255,8 @@ test('il wait API rimane sotto lo slot cantonale e il coordinator non attende fu
   assert.match(coordinator, /needs: \[resolve, stage\]/u);
   assert.match(coordinator, /timeout-minutes: 190/u);
   assert.doesNotMatch(coordinator, /FAST_PUBLISH_API_WAIT_MS|wait-fast-publish-api-readiness\.mjs/u);
-  assert.match(finalize, /group: fast-publish-\$\{\{ matrix\.target\.section \}\}[\s\S]*?queue: single/u);
-  assert.match(finalize, /FAST_PUBLISH_API_WAIT_MS: '10800000'/u);
+  assert.match(finalize, /group: \$\{\{ matrix\.target\.group[\s\S]*?queue: single/u);
+  assert.match(finalize, /FAST_PUBLISH_API_WAIT_MS: '5400000'/u);
   assert.match(finalize, /Wait for API release readiness while holding the section slot/u);
 });
 

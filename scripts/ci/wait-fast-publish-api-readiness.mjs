@@ -1,11 +1,14 @@
 #!/usr/bin/env node
+import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 import { reconcile } from '../reconcile-section-pages.mjs';
 
 const SHA_RE = /^[a-f0-9]{40}$/u;
-const DEFAULT_WAIT_MS = 180 * 60 * 1000;
+// Tetto dello slot di sezione: oltre 90 minuti il finalize fallisce con un
+// esito dichiarato invece di tenere lo slot fino al timeout del job.
+const DEFAULT_WAIT_MS = 90 * 60 * 1000;
 const DEFAULT_ATTEMPT_BUDGET_MS = 60 * 1000;
 const DEFAULT_RETRY_DELAY_MS = 30 * 1000;
 
@@ -18,17 +21,41 @@ function positiveInteger(value, name, fallback) {
   return parsed;
 }
 
-export function fastPublishReadiness(report, { section, sections, expectedCommit }) {
+/**
+ * True se `actual` coincide con `expected` o ne e' discendente: publish-api
+ * puo' saltare il commit atteso e pubblicare una HEAD successiva che lo
+ * contiene, e la release servita copre comunque gli input attesi.
+ */
+export function isCommitDescendantOf(actual, expected, { cwd = process.cwd() } = {}) {
+  if (!SHA_RE.test(actual ?? '') || !SHA_RE.test(expected ?? '')) return false;
+  if (actual === expected) return true;
+  const git = (...args) => spawnSync('git', args, { cwd, encoding: 'utf8', timeout: 60_000 });
+  for (const sha of [expected, actual]) {
+    if (git('cat-file', '-e', `${sha}^{commit}`).status !== 0
+      && git('fetch', '--quiet', '--no-tags', 'origin', sha).status !== 0) {
+      return false;
+    }
+  }
+  return git('merge-base', '--is-ancestor', expected, actual).status === 0;
+}
+
+export function fastPublishReadiness(report, {
+  section,
+  sections,
+  expectedCommit,
+  isDescendant = () => false,
+}) {
+  const covers = (actual) => actual === expectedCommit || isDescendant(actual, expectedCommit) === true;
   const targets = sections ?? (section ? [section] : []);
   if (!Array.isArray(targets) || targets.length === 0 || targets.some((id) => typeof id !== 'string' || !id)) {
     return { ready: false, reason: 'nessuna sezione R2 richiesta per la readiness' };
   }
   if (report?.skipped) return { ready: false, reason: report.skipped };
-  if (report?.apiCommit !== expectedCommit) {
-    return { ready: false, reason: `manifest API non ancora sul commit ${expectedCommit}` };
+  if (!covers(report?.apiCommit)) {
+    return { ready: false, reason: `manifest API non ancora sul commit ${expectedCommit} o su un suo discendente (osservato ${report?.apiCommit ?? 'assente'})` };
   }
-  if (report?.edgeCommit !== expectedCommit || report?.pendingEdgeFlip === true) {
-    return { ready: false, reason: `registro edge non ancora sul commit ${expectedCommit}` };
+  if (!covers(report?.edgeCommit) || report?.pendingEdgeFlip === true) {
+    return { ready: false, reason: `registro edge non ancora sul commit ${expectedCommit} o su un suo discendente (osservato ${report?.edgeCommit ?? 'assente'})` };
   }
   if (targets.every((targetSection) => report?.sectionStatuses?.[targetSection] === 'draft')) {
     return {
@@ -91,6 +118,7 @@ export async function probeFastPublishApiReadiness({
   expectedCommit,
   attemptBudgetMs = DEFAULT_ATTEMPT_BUDGET_MS,
   reconcileImpl = reconcile,
+  isDescendant = isCommitDescendantOf,
 } = {}) {
   const targets = sections ?? [];
   if (!Array.isArray(targets) || targets.length === 0 || targets.some((id) => typeof id !== 'string' || !id)) {
@@ -105,7 +133,7 @@ export async function probeFastPublishApiReadiness({
     checkLandingContent: false,
     budgetMs: attemptBudgetMs,
   });
-  const result = fastPublishReadiness(report, { sections: targets, expectedCommit });
+  const result = fastPublishReadiness(report, { sections: targets, expectedCommit, isDescendant });
   return { ready: result.ready, reason: result.reason };
 }
 
@@ -117,6 +145,7 @@ export async function waitForFastPublishApiReadiness({
   attemptBudgetMs = DEFAULT_ATTEMPT_BUDGET_MS,
   retryDelayMs = DEFAULT_RETRY_DELAY_MS,
   reconcileImpl = reconcile,
+  isDescendant = isCommitDescendantOf,
   sleepImpl = (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
   now = Date.now,
   log = console.log,
@@ -144,7 +173,7 @@ export async function waitForFastPublishApiReadiness({
         checkLandingContent: false,
         budgetMs,
       });
-      const result = fastPublishReadiness(report, { sections: targets, expectedCommit });
+      const result = fastPublishReadiness(report, { sections: targets, expectedCommit, isDescendant });
       if (result.ready) {
         log(`::notice::readiness API Fast Publish verificata al tentativo ${attempt}: ${result.reason}`);
         return { ...result, attempts: attempt, report };
@@ -159,7 +188,7 @@ export async function waitForFastPublishApiReadiness({
     log(`::notice::readiness API Fast Publish in attesa (${attempt}): ${lastReason}; nuovo controllo tra ${delayMs}ms`);
     await sleepImpl(delayMs);
   }
-  throw new Error(`readiness API Fast Publish non verificata entro ${waitMs}ms: ${lastReason}`);
+  throw new Error(`esito=readiness-timeout: readiness API Fast Publish non verificata entro ${waitMs}ms (sezioni ${targets.join(',')}, atteso ${expectedCommit}): ${lastReason}`);
 }
 
 export async function main(env = process.env, argv = process.argv.slice(2)) {

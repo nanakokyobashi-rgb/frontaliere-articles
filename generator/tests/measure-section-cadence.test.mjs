@@ -709,8 +709,8 @@ test('M3 covers every non-content Fast Publish push trigger emitted by the workf
       && !pattern.startsWith('public/images/')
   ));
   const exactPaths = nonContentPatterns.filter((pattern) => !/[?*\[\]{}]/u.test(pattern));
-  assert.equal(exactPaths.length, 69, 'il contract copre tutti i 69 push.paths non-content esatti');
-  assert.equal(nonContentPatterns.length, 71, 'engine/** e host/** sono inclusi oltre ai 69 path esatti');
+  assert.equal(exactPaths.length, 67, 'il contract copre tutti i 67 push.paths non-content esatti');
+  assert.equal(nonContentPatterns.length, 69, 'engine/** e host/** sono inclusi oltre ai 67 path esatti');
 
   const activeSections = ARTICLE_SECTION_CORE_LIST.map((entry) => entry.section);
   const activeR2Sections = ARTICLE_SECTION_CORE_LIST

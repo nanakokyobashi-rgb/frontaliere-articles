@@ -1462,6 +1462,37 @@ export function r2ApiStageBarrierDecision({
   };
 }
 
+/**
+ * Un dispatch con ID espliciti o pagine 404 verificate (figlio del reconciler,
+ * replay bounded) ha uno scope proprio: non va allargato a un render
+ * full-section sotto lock solo perche' non esiste un artifact di stage.
+ * Il full-section resta per i bounded senza ID ne' pagine e per i push.
+ */
+export function r2FinalizeIsTargetedDispatch({
+  eventName = '',
+  bootstrap = false,
+  ids = [],
+  missingPagePaths = [],
+} = {}) {
+  if (eventName !== 'workflow_dispatch' || bootstrap === true) return false;
+  const count = (value) => (Array.isArray(value) ? value.length : 0);
+  return count(ids) > 0 || count(missingPagePaths) > 0;
+}
+
+/**
+ * Gruppo di concorrenza per target. Dry-run e target non eleggibili non
+ * devono occupare lo slot pending di un push reale: con `queue: single` un
+ * dispatch sostituirebbe il run in coda e ne perderebbe il lavoro.
+ */
+export function annotateSlotGroups(matrix, { dry = false, eligible = r2SectionEligible } = {}) {
+  if (!Array.isArray(matrix)) throw new Error('r2-annotate-slots: la matrix deve essere un array');
+  return matrix.map((target) => {
+    const idle = dry === true
+      || (target.cleanupInactiveSurface !== true && eligible(target.section) !== true);
+    return { ...target, group: `fast-publish-${idle ? 'idle-' : ''}${target.section}` };
+  });
+}
+
 /** Recover a late finalizer in its existing section slot after coalescing. */
 export function r2LateFinalizeRecoveryDecision({
   stageCommit = '',
@@ -1469,22 +1500,36 @@ export function r2LateFinalizeRecoveryDecision({
   sectionChanged = false,
   deferApiWait = false,
   forceFullSection = false,
+  targeted = false,
+  pinnedCommit = '',
+  pinnedUnaffected = false,
 } = {}) {
   if (!/^[a-f0-9]{40,64}$/iu.test(latestCommit ?? '')) {
     throw new Error('r2-late-finalize-recovery: latestCommit deve essere una SHA Git completa');
   }
-  if ([sectionChanged, deferApiWait, forceFullSection].some((value) => typeof value !== 'boolean')) {
-    throw new Error('r2-late-finalize-recovery: sectionChanged, deferApiWait e forceFullSection devono essere booleani');
+  if ([sectionChanged, deferApiWait, forceFullSection, targeted, pinnedUnaffected]
+    .some((value) => typeof value !== 'boolean')) {
+    throw new Error('r2-late-finalize-recovery: sectionChanged, deferApiWait, forceFullSection, targeted e pinnedUnaffected devono essere booleani');
   }
   if (stageCommit && !/^[a-f0-9]{40,64}$/iu.test(stageCommit)) {
     throw new Error('r2-late-finalize-recovery: stageCommit non valida');
   }
-  const rebootstrap = forceFullSection || deferApiWait
-    || (sectionChanged && Boolean(stageCommit) && stageCommit !== latestCommit);
+  if (pinnedCommit && !/^[a-f0-9]{40,64}$/iu.test(pinnedCommit)) {
+    throw new Error('r2-late-finalize-recovery: pinnedCommit non valida');
+  }
+  // Un target mirato non diventa mai full-section per assenza di stage.
+  const rebootstrap = !targeted && (forceFullSection || deferApiWait
+    || (sectionChanged && Boolean(stageCommit) && stageCommit !== latestCommit));
+  // Un figlio pinnato pubblica la revisione che dichiara nell'artifact di
+  // coorte, purche' la sezione non sia cambiata fino alla HEAD osservata.
+  const renderCommit = pinnedCommit && pinnedCommit !== latestCommit && pinnedUnaffected && !rebootstrap
+    ? pinnedCommit
+    : latestCommit;
   return {
     rebootstrap,
     fullSection: rebootstrap,
     sourceCommit: latestCommit,
+    renderCommit,
     checkApiAfterStage: rebootstrap,
   };
 }
@@ -1627,6 +1672,13 @@ if (isMain()) {
       const input = JSON.parse(readFileSync(0, 'utf8'));
       console.log(JSON.stringify(r2LateFinalizeRecoveryDecision(input)));
     }
+    else if (cmd === 'r2-targeted-dispatch') {
+      console.log(String(r2FinalizeIsTargetedDispatch(JSON.parse(readFileSync(0, 'utf8')))));
+    }
+    else if (cmd === 'r2-annotate-slots') {
+      const matrix = JSON.parse(readFileSync(0, 'utf8'));
+      console.log(JSON.stringify(annotateSlotGroups(matrix, { dry: arg === 'true' })));
+    }
     else if (cmd === 'r2-late-api-recovery') {
       const input = JSON.parse(readFileSync(0, 'utf8'));
       console.log(JSON.stringify(r2LateApiRecoveryAction(input)));
@@ -1660,7 +1712,7 @@ if (isMain()) {
     else if (cmd === 'image-plan') console.log(JSON.stringify(imagePublishPlan(readFileSync(0, 'utf8').split('\n'), activeCorpusCoreEntries(), { served: arg })));
     else if (cmd === 'section-of' && arg) console.log(sectionOf(arg));
     else if (cmd === 'shard-of' && arg) console.log(shardOf(arg));
-    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | body-plan [shard|r2] < files | article-plan [shard|r2] < files | image-plan [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files | r2-plan-range <before> <after> | r2-api-stage-plan-range <before> <after> | r2-api-stage-barrier < decision.json | r2-late-finalize-recovery < decision.json | r2-late-api-recovery < decision.json | r2-api-wait-defer < decision.json | r2-api-data-range <before> <after> | r2-api-latest-data-commit <before> <after> | r2-section-eligible <section> | r2-reconcile-plan <commit> | r2-edge-release-commit | r2-api-push-plan < diff.json edge.json');
+    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | body-plan [shard|r2] < files | article-plan [shard|r2] < files | image-plan [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files | r2-plan-range <before> <after> | r2-api-stage-plan-range <before> <after> | r2-api-stage-barrier < decision.json | r2-late-finalize-recovery < decision.json | r2-targeted-dispatch < target.json | r2-annotate-slots <dry> < matrix.json | r2-late-api-recovery < decision.json | r2-api-wait-defer < decision.json | r2-api-data-range <before> <after> | r2-api-latest-data-commit <before> <after> | r2-section-eligible <section> | r2-reconcile-plan <commit> | r2-edge-release-commit | r2-api-push-plan < diff.json edge.json');
   };
   run().catch((error) => {
     console.error(`::error::fast-publish-section: ${error?.message ?? error}`);

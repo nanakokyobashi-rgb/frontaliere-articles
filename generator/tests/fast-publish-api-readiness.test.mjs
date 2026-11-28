@@ -146,8 +146,9 @@ test('probe readiness singolo distingue API pronta da release mancante senza dis
   assert.deepEqual(await probeFastPublishApiReadiness({
     sections: [SECTION],
     expectedCommit: COMMIT,
+    isDescendant: () => false,
     reconcileImpl: async () => report({ apiCommit: 'b'.repeat(40) }),
-  }), { ready: false, reason: `manifest API non ancora sul commit ${COMMIT}` });
+  }), { ready: false, reason: `manifest API non ancora sul commit ${COMMIT} o su un suo discendente (osservato ${'b'.repeat(40)})` });
   await assert.rejects(() => probeFastPublishApiReadiness({
     sections: [SECTION],
     expectedCommit: COMMIT,
@@ -188,7 +189,8 @@ test('wait HTTP scade entro il budget e resta fail-closed', async () => {
     now: () => now,
     sleepImpl: async (delay) => { now += delay; },
     log: () => {},
+    isDescendant: () => false,
     reconcileImpl: async () => report({ edgeCommit: 'b'.repeat(40) }),
-  }), /non verificata entro 500ms/u);
+  }), /esito=readiness-timeout: readiness API Fast Publish non verificata entro 500ms/u);
   assert.equal(now, 500);
 });

@@ -3857,7 +3857,7 @@ test('fast-publish-section.yml: barriera staged e concorrenza per sezione', () =
   assert.match(resolver, /publish_api_push_owner.*?api_action=wait/s);
 
   for (const job of [stage, finalize]) {
-    assert.match(job, /group: fast-publish-\$\{\{ matrix\.target\.section \}\}/);
+    assert.match(job, /group: \$\{\{ matrix\.target\.group \|\| format\('fast-publish-\{0\}', matrix\.target\.section\) \}\}/);
     assert.match(job, /cancel-in-progress: false/);
     assert.match(job, /queue: single/);
     assert.match(job, /max-parallel: 4/);
@@ -3865,7 +3865,7 @@ test('fast-publish-section.yml: barriera staged e concorrenza per sezione', () =
   assert.match(stage, /fromJSON\(needs\.resolve\.outputs\.stage_matrix\)/);
   assert.match(coordinator, /needs: \[resolve, stage\]/);
   assert.match(coordinator, /needs\.resolve\.outputs\.any == 'true'/);
-  assert.match(coordinator, /final_matrix: \$\{\{ needs\.resolve\.outputs\.matrix \}\}/);
+  assert.match(coordinator, /final_matrix: \$\{\{ steps\.decision\.outputs\.final_matrix \}\}/);
   assert.match(finalize, /needs: \[resolve, stage, coordinate_api_release\]/);
   assert.match(finalize, /fromJSON\(needs\.coordinate_api_release\.outputs\.final_matrix\)/);
   assert.ok(wf.indexOf('\n  stage:') < wf.indexOf('\n  coordinate_api_release:'));

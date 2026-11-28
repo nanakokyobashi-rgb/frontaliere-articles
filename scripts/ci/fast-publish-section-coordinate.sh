@@ -25,17 +25,28 @@ section_list() {
   jq -c '[.[].section] | unique | sort' <<<"$1"
 }
 
-stage_sections="$(section_list "$STAGE_MATRIX")"
-final_sections="$(section_list "$FINAL_MATRIX")"
+requested_stage_sections="$(section_list "$STAGE_MATRIX")"
+# Nessuna barriera tutto-o-niente: una gamba di stage fallita, cancellata o
+# sostituita dal pending piu' recente non ha artifact. Il coordinator procede
+# con le sezioni che hanno staged; le altre restano a chi le possiede.
+stage_sections='[]'
 artifact_files=()
-if [ "$stage_sections" != '[]' ]; then
+if [ "$requested_stage_sections" != '[]' ]; then
   while IFS= read -r section; do
     [[ "$section" =~ ^canton-[a-z0-9-]+$ ]] || { echo "::error::section stage non valida: $section" >&2; exit 1; }
     artifact="$ARTIFACTS_DIR/fast-publish-stage-$section.json"
-    [ -s "$artifact" ] || { echo "::error::artifact stage mancante per $section" >&2; exit 1; }
-    artifact_files+=("$artifact")
-  done < <(jq -r '.[]' <<<"$stage_sections")
+    if [ -s "$artifact" ]; then
+      artifact_files+=("$artifact")
+      stage_sections="$(jq -c --arg section "$section" '. + [$section] | unique | sort' <<<"$stage_sections")"
+    else
+      echo "::warning::stage di $section assente (fallito, cancellato o sostituito): la sezione esce da questa release e resta alla run che la possiede"
+    fi
+  done < <(jq -r '.[]' <<<"$requested_stage_sections")
 fi
+dropped_sections="$(jq -cn --argjson requested "$requested_stage_sections" --argjson staged "$stage_sections" '$requested - $staged')"
+# La matrix finale perde le sezioni di stage senza artifact.
+final_matrix="$(jq -c --argjson dropped "$dropped_sections" 'map(select(.section as $s | $dropped | index($s) | not))' <<<"$FINAL_MATRIX")"
+final_sections="$(section_list "$final_matrix")"
 
 staged_sources='{}'
 if [ "${#artifact_files[@]}" -gt 0 ]; then
@@ -189,6 +200,8 @@ if [ "$wait_api" = 'true' ] && [ "$sections_json" = '[]' ]; then
   exit 1
 fi
 
+echo "final_matrix=$final_matrix" >> "$GITHUB_OUTPUT"
+echo "staged_sections=$stage_sections" >> "$GITHUB_OUTPUT"
 echo "action=$action" >> "$GITHUB_OUTPUT"
 echo "api_commit=$api_commit" >> "$GITHUB_OUTPUT"
 echo "api_baseline=$api_baseline" >> "$GITHUB_OUTPUT"
