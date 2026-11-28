@@ -295,6 +295,20 @@ jobs:
             fi
             mode=targeted
             echo "Dispatch limitato alla PR target #$TARGET_PR e alla HEAD indicata."
+            # La lettura e la verifica del target stanno QUI e non nello step di
+            # scan: ShellCheck su quello step e' gia' al limite e questa aggiunta
+            # lo porta oltre ogni timeout (verificato: actionlint non termina).
+            if ! target=$(gh api --paginate "repos/$REPO/pulls/$TARGET_PR"); then
+              echo "::error::Lettura della PR target fallita; nessuno scan o mutazione." >&2
+              exit 1
+            fi
+            if ! printf '%s' "$target" | jq -e \
+              'type == "object" and .number == ($ENV.TARGET_PR | tonumber) and .state == "open" and .head.sha == $ENV.EXPECTED_HEAD_SHA' >/dev/null; then
+              echo "::notice::La PR target e la HEAD non coincidono piu' con la diagnosi; nessuna mutazione."
+              mode=skip
+            else
+              printf '%s\n' "$target" | jq -cs '.' > "${RUNNER_TEMP:-/tmp}/stale-rescuer-target-pr.json"
+            fi
           elif [ "$EVENT_NAME" = "workflow_run" ]; then
             mode=scoped
             now=$(date -u +%s)
@@ -364,6 +378,7 @@ jobs:
             "+refs/heads/main:refs/remotes/origin/main"
 
       - name: Scan open PRs and flag stalled ones
+        if: steps.scope.outputs.mode != 'skip'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
@@ -419,18 +434,9 @@ jobs:
           # Con `--paginate` la risposta arriva come una SEQUENZA di array (uno
           # per pagina): `jq -c '.[]'` la legge come stream, senza `--slurp`.
           if [ "${SCAN_MODE:-full}" = "targeted" ]; then
-            if ! target=$(gh api --paginate "repos/$REPO/pulls/$TARGET_PR"); then
-              echo "::error::Lettura della PR target fallita; nessuno scan o mutazione." >&2
-              exit 1
-            fi
-            # shellcheck disable=SC2016 # `$number` e `$sha` sono variabili jq.
-            if ! printf '%s' "$target" | jq -e --argjson number "$TARGET_PR" --arg sha "$EXPECTED_HEAD_SHA" \
-              'type == "object" and .number == $number and .state == "open" and .head.sha == $sha' >/dev/null; then
-              echo "::notice::La PR target e la HEAD non coincidono piu' con la diagnosi; nessuna mutazione."
-              exit 0
-            fi
-            echo "Scan limitato alla PR target #$TARGET_PR sulla HEAD osservata."
-            prs=$(printf '%s\n' "$target" | jq -cs '.')
+            # Target gia' letto e verificato dallo step `Decide scan scope`.
+            echo "Scan limitato alla PR target sulla HEAD osservata."
+            prs=$(cat "${RUNNER_TEMP:-/tmp}/stale-rescuer-target-pr.json")
           else
             if ! prs=$(gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" \
               | jq -s 'if length == 0 or any(.[]; type != "array") then error("risposta PR paginata inattesa") else add end'); then
