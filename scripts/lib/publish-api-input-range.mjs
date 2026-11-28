@@ -197,6 +197,51 @@ export function apiTriggerInputsDifferBetween(
   return diffApiInputs(execFileSyncImpl, before, after, paths) === 'api';
 }
 
+/**
+ * Path del trigger che sono DATI: un loro cambio non altera il codice ne' il
+ * workflow con cui una run costruisce e pubblica. Tutto cio' che e' nel trigger
+ * e non combacia qui e' CODICE (scripts/**, .github/**, generator/scripts/**,
+ * engine/**, host/**, articleSections.ts, generator/data/*.mjs, ...): per
+ * default un path ignoto vale codice, cosi' una nuova voce del trigger non
+ * puo' essere scambiata per un dato.
+ */
+const PUBLISH_API_DATA_PATH_RES = [
+  /^content\//u,
+  /^data\//u,
+  /^public\/images\//u,
+  /^sections\//u,
+  /^generator\/data\/[^/]+\.json$/u,
+  /^scripts\/ci\/excerpt-completeness-baseline\.json$/u,
+];
+
+export function isPublishApiDataPath(file) {
+  return PUBLISH_API_DATA_PATH_RES.some((re) => re.test(file));
+}
+
+/**
+ * True se tra `before` e `after` cambia almeno un path del trigger che e'
+ * CODICE (non dato). Serve a decidere se una run non-replay puo' ritargettare
+ * la sorgente su main (solo dati cambiati) o deve cedere il posto alla run
+ * della nuova push (codice o workflow cambiati).
+ */
+export function apiTriggerCodeDiffersBetween(
+  { before, after },
+  { execFileSyncImpl = execFileSync, triggerPathsImpl = publishApiTriggerPaths } = {},
+) {
+  if (!FULL_GIT_SHA_RE.test(before ?? '') || !FULL_GIT_SHA_RE.test(after ?? '')) {
+    throw new Error('commit non valido per il confronto degli input API');
+  }
+  const paths = publishApiFreshnessPaths({ triggerPathsImpl });
+  if (paths.length === 0) throw new Error('nessun path da confrontare per gli input API');
+  validatePaths(paths);
+  readGit(execFileSyncImpl, ['merge-base', '--is-ancestor', before, after]);
+  const changed = readGit(execFileSyncImpl, [
+    'diff', '--name-only', '-z', '--no-renames', '--no-ext-diff', '--ignore-submodules=none',
+    before, after, '--', ...paths,
+  ]);
+  return changed.split('\0').filter(Boolean).some((file) => !isPublishApiDataPath(file));
+}
+
 function findApiInput(exec, head, paths, base = null) {
   const revisions = base ? ['^' + base] : [];
   const historyArgs = (start) => ['rev-list', '--max-count=1', start, ...revisions, '--', ...paths];
