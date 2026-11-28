@@ -1,0 +1,237 @@
+{
+  "schema": 1,
+  "section": "svizzera",
+  "articleId": "stipendi-crescita-svizzera-2027",
+  "sourceUrl": "https://www.prealpina.it/news/valli-e-laghi/574670/anno-nuovo-stipendi-piu-alti-in-svizzera-ecco-dove-aumenteranno-di-piu.html",
+  "sourceContext": {
+    "headline": "Anno nuovo, stipendi più alti in Svizzera: ecco dove aumenteranno di più - La Prealpina",
+    "url": "https://www.prealpina.it/news/valli-e-laghi/574670/anno-nuovo-stipendi-piu-alti-in-svizzera-ecco-dove-aumenteranno-di-piu.html",
+    "source": "news",
+    "relatedHeadlines": [
+      {
+        "headline": "Lavorare in Svizzera 2026: guida pratica e consigli utili - Ti Consiglio",
+        "source": "news",
+        "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5wS2NlMHBPVnJObU51UmFOejJpTjhOdmJSNGQwRmVtaHMzTXUtNDNwcTZjaEN2NW5nNTU2QTc1NldSMklXR2djLV9SV19yMC13M0FXYWhTSjd4T2RERFNHWHVIdW9xUTlKZ0xDZmo1U0ZOd1ZGS2gzUXRrRQ?oc=5"
+      },
+      {
+        "headline": "Polizze sanitarie alle stelle in Ticino . Spunta l’idea di una cassa pubblica - Il Giorno",
+        "source": "news",
+        "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPb1JINnh3QVY3WlpXNWpQdndNcHcxWi16LXZMM0pLd1hzQXFUVGQyQnFVZGQ1bmtvUWxFSzEwdEY1dXZYaFN1S2t2LU0tNUN4MnVhSS1xdFkzcUlaaTNjdWpONlBORFJXVEZkenBjdXk4SVVjU1NYd3lXeW9sS2trZ0ZzUDM?oc=5"
+      },
+      {
+        "headline": "In Ticino si vota per contrastare il dumping salariale e sociale - TVS tvsvizzera.it",
+        "source": "news",
+        "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQazA0Wmx4OTVqbU05Vk9sWjZmeWR6R29fVld2NVdwUWNZTkRGSXVIUExwM3dxZTkxUHc2MGhYQXRqUHJSVExuQnBZUDEzWFJQR3hPOG85T1dKaDJCcFNKWV9wWXJmeWxWa1FJLS1JODU3d0xaaE5EdXBKSl9uYkpQaHktVWRSSW1VN1d0Q2lsM0lmZzFIRlNpQ1EzN2ZKRmhyVG1TdElVY2RhMlBrUkMwaXV6Mi1SaVJ6NC1MczJVYTg?oc=5"
+      }
+    ],
+    "_discoveryId": "discovery::news::anno nuovo, stipendi più alti in svizzera: ecco dove aumenteranno di più - la prealpina",
+    "_discoveryCandidate": {
+      "headline": "Anno nuovo, stipendi più alti in Svizzera: ecco dove aumenteranno di più - La Prealpina",
+      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPN2lySGJvZkozSDd0QVBiTlE4N3MtbkpmX0NreVpXeV8xVVU0X2RwSHIxazZaTzhLOWtUVFlMeDlwdnh5RjhVWnZPLTdycW40Z0dOZ0NJZDZqQ19hakZSZFhhUWZXT3k3d3ltcWpQZlRGZVllYnJGS3VNYklWZkNnTFRVdXpJY0xvaXR3aGxJWjYtVUh3UU9CLXBUazFBVlZMcjhEU25VaDh5T01jWU5kM3FoVG9ZV1pmazltY3hSSVZKRDZ0?oc=5",
+      "source": "news",
+      "meta": {
+        "ageHours": 439.82934805555556,
+        "sourceUrl": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPN2lySGJvZkozSDd0QVBiTlE4N3MtbkpmX0NreVpXeV8xVVU0X2RwSHIxazZaTzhLOWtUVFlMeDlwdnh5RjhVWnZPLTdycW40Z0dOZ0NJZDZqQ19hakZSZFhhUWZXT3k3d3ltcWpQZlRGZVllYnJGS3VNYklWZkNnTFRVdXpJY0xvaXR3aGxJWjYtVUh3UU9CLXBUazFBVlZMcjhEU25VaDh5T01jWU5kM3FoVG9ZV1pmazltY3hSSVZKRDZ0?oc=5",
+        "sourceName": "La Prealpina",
+        "publisherHost": "prealpina.it",
+        "pubDate": "Tue, 10 Nov 2026 08:00:00 GMT",
+        "seed": "busta paga frontalieri Ticino"
+      },
+      "_scoreBreakdown": {
+        "stage": "discovery",
+        "source": "news",
+        "rawScore": 100,
+        "confidence": 0.7,
+        "freshnessFactor": 1,
+        "finalScore": 70,
+        "cluster": "fiscale"
+      },
+      "_discoveryScore": 70
+    },
+    "_publisherHost": "prealpina.it",
+    "_needsGoogleNewsDecode": true,
+    "_resolvedFromGoogleNewsRss": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPN2lySGJvZkozSDd0QVBiTlE4N3MtbkpmX0NreVpXeV8xVVU0X2RwSHIxazZaTzhLOWtUVFlMeDlwdnh5RjhVWnZPLTdycW40Z0dOZ0NJZDZqQ19hakZSZFhhUWZXT3k3d3ltcWpQZlRGZVllYnJGS3VNYklWZkNnTFRVdXpJY0xvaXR3aGxJWjYtVUh3UU9CLXBUazFBVlZMcjhEU25VaDh5T01jWU5kM3FoVG9ZV1pmazltY3hSSVZKRDZ0?oc=5"
+  },
+  "pageContent": "Salari in Svizzera, avanti piano per l’anno prossimo. Nel corso del 2027 infatti per le buste paga dei frontalieri è previsto solo un leggero aumento, anche in considerazione dell’andamento dell’inflazione e delle altre principali voci economiche. Secondo l’indagine periodica compiuta da Ubs su un campione di 400 imprese, per il 2027 le imprese prevedono infatti progressioni medie nominali (ossia senza tenere conto dell’inflazione) in busta paga dell’1%, rispetto all’1,1% dell’anno in corso. Con un’inflazione dello 0,8% (secondo le previsioni dello stesso istituto di credito), l’aumento reale degli stipendi risulterebbe quindi pari allo 0,2%. Si tratta di un valore inferiore alla media di lungo periodo e all’aumento del potere d’acquisto previsto per l’anno in corso, dello 0,4%. [articlepreview id=\"566558\" link=\"https://www.prealpina.it/news/economia/566558/frontalieri-pro-e-contro-attratti-dallo-stipendio-pesano-il-traffico-e-le-disparita.html\"] A causa dell’aumento dei prezzi del petrolio, l’inflazione in Svizzera è ora prevista in media allo 0,7% quest’anno, contro lo 0,6% delle stime precedenti. L’aumento dei prezzi al consumo dovrebbe raggiungere lo 0,8% nel 2027, con un incremento di 0,2 punti percentuali rispetto alle previsioni di settembre. L’andamento nei vari settori Nella maggior parte dei settori viene previsto un aumento dei salari nominali dell’1%. I rami dell’orologeria e della gioielleria (+0,7%) e del commercio al dettaglio (+0,8%) dovrebbero registrare una progressione leggermente inferiore alla media. Per i settori dei metalli (+1,2%), della chimica e della farmaceutica (+1,2%), nonché dell’energia, dell’approvvigionamento e del riciclaggio (+1,5%) Ubs si aspetta invece una busta paga più fornita. Nel settore turistico, alberghi e ristoranti nei quali lavorano molti frontalieri italiani, l’aumento del salario previsto per l’anno prossimo è indicato nello +0,6%. L’incremento della busta paga - minima - per addetti era già stato concordato dalle parti sociali. Un ritocco che corrisponde al rincaro atteso, come spiegato a suo tempo in una nota congiunta dalle associazioni padronali GastroSuisse, HotellerieSuisse, Swiss Catering Association e dai rappresentanti dei lavoratori Hotel & Gastro Union, Syna e Unia. Concretamente, un dipendente (nel caso, un frontaliere) in possesso di un certificato federale di formazione pratica o di un titolo equivalente (Cat. II) vedrà il proprio salario mensile lordo salire da 4.070 a 4.094 franchi. Questo accordo permette di «concentrarsi sulle trattative relative al nuovo contratto collettivo di lavoro», hanno precisato le parti sociali. Per quanto riguarda i contratti stagionali, gli aumenti dei salari minimi entreranno in vigore all’inizio della stagione estiva. Quella invernale si conclude al più tardi il 30 aprile 2027, mentre l’estiva ha inizio il giorno successivo, il 1° maggio 2027. «La modesta crescita dei salari reali dovrebbe rafforzare solo in misura minima il potere d’acquisto dei consumatori. Allo stesso tempo, l’aumento medio previsto dei premi delle casse malattia, stimato al 5% nel 2027, erode il reddito disponibile», hanno constatato gli esperti di Ubs. L’aumento dei costi sanitari «frena la crescita dei redditi di circa 0,3 punti percentuali e supera l’aumento previsto dei salari reali». Le previsioni delle aziende Le imprese guardano comunque al futuro con moderato ottimismo: il 49% prevede una ripresa moderata, il 46% una stagnazione e solo il 5% una recessione. Il settore industriale è particolarmente ottimista. Sebbene la fiducia delle imprese sia aumentata in tutti i settori, in particolare nell’industria, le prospettive per il mercato del lavoro restano modeste. La maggioranza delle aziende prevede infatti che il tasso di disoccupazione rimanga invariato e che l’organico ristagni. Tuttavia Ubs non ha modificato le proprie previsioni di crescita, prevedendo ancora per quest’anno un prodotto interno lordo (Pil), al netto degli eventi sportivi, in aumento dell’1,8% e dell’1,5% nel 2027. [articlepreview id=\"572836\" link=\"https://www.prealpina.it/news/cronaca/572836/infermieri-la-fuga-in-svizzera-continua.html\"] Nonostante queste prospettive positive, «le aziende mantengono un atteggiamento cauto riguardo alle loro previsioni sul mercato del lavoro». L’anno prossimo, il 59% delle imprese intervistate prevede che l’organico rimanga invariato, il 22% un aumento e il 18% una diminuzione. Dopo aver raggiunto il 2,8% lo scorso anno, il tasso di disoccupazione dovrebbe attestarsi al 3,1% nell’esercizio in corso, per poi scendere leggermente al 3% nel 2027.",
+  "sourceDate": "2026-11-10T07:46:38.000Z",
+  "sourceTitle": "Anno nuovo, stipendi pi&ugrave; alti in Svizzera: ecco dove aumenteranno di pi&ugrave;\nAnno nuovo, stipendi pi&ugrave; alti in Svizzera: ecco dove aumenteranno di pi&ugrave;\nAnno nuovo, stipendi pi&ugrave; alti in Svizzera: ecco dove aumenteranno di pi&ugrave; - Prealpina\nAnno nuovo, stipendi pi&ugrave; alti in Svizzera: ecco dove aumenteranno di pi&ugrave;",
+  "data": {
+    "id": "stipendi-crescita-svizzera-2027",
+    "category": "fiscale",
+    "image": "lago-lugano.webp",
+    "hasCalculator": true,
+    "imagePrompt": "Photorealistic DSLR image of a Swiss landscape near Lake Lugano during a clear autumn day. Focus on a quiet, professional atmosphere.",
+    "imageAlt": {
+      "it": "Paesaggio svizzero vicino al Lago di Lugano per contesto economico.",
+      "en": "Swiss landscape near Lake Lugano for economic context.",
+      "de": "Schweizer Landschaft am Lago Lugano für wirtschaftlichen Kontext.",
+      "fr": "Paysage suisse près du lac de Lugano pour contexte économique."
+    },
+    "slugs": {
+      "it": "stipendi-crescita-svizzera-2027",
+      "en": "salaries-growth-switzerland-2027",
+      "de": "stipend-wachstum-schweiz-2027",
+      "fr": "salaires-croissance-suisse-2027"
+    },
+    "content": {
+      "it": {
+        "title": "Salari in Svizzera: previsione media crescita nominale 1% nel 2027",
+        "excerpt": "UBS prevede salari nominali medi in crescita dell’1% nel 2027.",
+        "body1": "## In breve\n- UBS prevede salari nominali medi in crescita dell’1% nel 2027.\n- L’aumento reale stimato è dello 0,2%, con inflazione allo 0,8%.\n- Negli alberghi, il minimo lordo Cat. II sale a 4.094 franchi.\n\n## Fatti chiave\n- Indagine UBS: 400 imprese\n- Aumento nominale medio previsto per il 2027: 1%\n- Aumento previsto nel settore alberghiero e della ristorazione: 0,6%\n- Salario mensile lordo Cat. II: da 4.070 a 4.094 franchi\n- Settori con la crescita nominale maggiore: energia, approvvigionamento e riciclaggio, 1,5%\n\nLa previsione di UBS per il 2027 è di una progressione media nominale degli stipendi dell’1%. L’indagine periodica, riferita a un campione di 400 imprese, indica un ritmo leggermente inferiore all’1,1% previsto per l’anno in corso. La Prealpina riferisce che l’aumento riguarda le buste paga in Svizzera, comprese quelle dei frontalieri, ma la media non descrive in modo uniforme ogni settore o categoria professionale.\n\n### Differenze tra settori\n\nNella maggior parte dei rami economici le aziende prevedono un aumento nominale dell’1%. Le progressioni indicate sono inferiori in orologeria e gioielleria, dove la stima è dello 0,7%, e nel commercio al dettaglio, con lo 0,8%. UBS si attende invece un incremento dell’1,2% nei settori dei metalli e della chimica e farmaceutica. Per energia, approvvigionamento e riciclaggio la previsione sale all’1,5%, il valore più alto tra quelli riportati.\n\nNel turismo, che comprende alberghi e ristoranti con molti frontalieri italiani, l’aumento previsto per il 2027 è dello 0,6%. Per gli addetti, l’incremento minimo è già stato concordato dalle parti sociali e corrisponde al rincaro atteso. L’accordo riguarda, tra gli altri, GastroSuisse, HotellerieSuisse e Swiss Catering Association per le associazioni padronali, e Hotel & Gastro Union, Syna e Unia per i lavoratori.\n\nPer un dipendente con certificato federale di formazione pratica, o titolo equivalente, inquadrato in Cat. II, il salario mensile lordo passa da 4.070 a 4.094 franchi. La differenza aritmetica tra i due importi è di 24 franchi al mese. È un valore riferito a quella categoria e alla paga minima concordata, non una stima applicabile a ogni lavoratore del comparto. Le parti sociali hanno collegato l’intesa alla possibilità di concentrarsi sulle trattative per il nuovo contratto collettivo di lavoro. Le stime settoriali di UBS restano invece previsioni medie delle imprese: non sono, da sole, una decisione comune su tutte le retribuzioni.\n\n##",
+        "body2": "### Salari reali, inflazione e reddito disponibile\n\nLa distinzione centrale per leggere la previsione è quella tra aumento nominale e aumento reale. UBS definisce nominale la progressione che non tiene conto dell’inflazione. Per il 2027 stima una crescita nominale media dell’1% e un’inflazione dello 0,8%; sottraendo la seconda cifra dalla prima si ottiene l’aumento reale dello 0,2% indicato dall’istituto. È un calcolo basato sulle due previsioni, non la misura del risultato effettivo che ogni dipendente riceverà.\n\nIl confronto con l’anno in corso mostra una riduzione della crescita prevista. Per le buste paga la media nominale stimata è dell’1,1%, mentre l’aumento del potere d’acquisto previsto è dello 0,4%. Nel 2027 quest’ultimo valore scenderebbe allo 0,2%: la differenza tra le due stime reali è di 0,2 punti percentuali. Il confronto mette quindi in relazione due previsioni annuali, non due aumenti già contabilizzati nelle singole buste paga.\n\nAnche le stime sui prezzi sono cambiate. Per l’anno in corso l’inflazione media svizzera è ora prevista allo 0,7%, rispetto allo 0,6% delle stime precedenti. UBS collega la revisione all’aumento dei prezzi del petrolio. Per il 2027 l’aumento dei prezzi al consumo è previsto allo 0,8%, cioè 0,2 punti percentuali in più rispetto alle previsioni di settembre. La stima per l’anno prossimo è dunque superiore di 0,1 punti a quella aggiornata per l’anno in corso, pur restando una previsione.\n\nLa pressione sul reddito disponibile viene anche dai premi delle casse malattia, che UBS prevede in crescita media del 5% nel 2027. Gli esperti dell’istituto calcolano che i maggiori costi sanitari ridurranno di circa 0,3 punti percentuali la crescita dei redditi, un impatto superiore all’aumento atteso dei salari reali, pari allo 0,2%. I due valori misurano aspetti diversi: il dato sui salari tiene conto dell’inflazione, mentre quello sui premi segnala un’ulteriore pressione sul reddito disponibile. Non essendo quantificato l’effetto sul bilancio di un singolo lavoratore o di una famiglia, il raffronto riguarda soltanto le medie e le stime riportate.\n\nIl risultato complessivo descritto da UBS è una crescita modesta del potere d’acquisto: la progressione delle retribuzioni reali dovrebbe rafforzarlo solo in misura minima. L’indagine non fornisce, nei dati citati, importi individuali dei premi né il reddito di ciascun gruppo di lavoratori. Non consente quindi di trasformare la stima nazionale in una cifra netta valida per ogni busta paga o per ogni costo della vita familiare.\n\n##",
+        "body3": "### Fiducia delle imprese e occupazione\n\nLe risposte delle aziende delineano un ottimismo prudente. Il 49% delle imprese intervistate prevede una ripresa moderata, il 46% si aspetta stagnazione e il 5% una recessione. UBS rileva che la fiducia è aumentata in tutti i settori, in particolare nell’industria, che risulta il comparto più ottimista. Sono valutazioni sul futuro economico delle imprese e non indicano, da sole, quanti posti di lavoro saranno effettivamente creati o soppressi.\n\nSul mercato del lavoro le prospettive restano più caute. Per il prossimo anno, il 59% delle aziende prevede un organico invariato, il 22% un aumento e il 18% una diminuzione. La maggioranza si aspetta inoltre che il tasso di disoccupazione resti invariato e che il numero di addetti ristagni. Le percentuali riportate descrivono le attese delle imprese intervistate; la fonte non le suddivide per cantone o per singola professione.\n\nUBS non ha modificato le proprie previsioni di crescita del prodotto interno lordo. Al netto degli eventi sportivi, il Pil è atteso in aumento dell’1,8% nell’anno in corso e dell’1,5% nel 2027. La differenza aritmetica tra le due previsioni è di 0,3 punti percentuali. Per la disoccupazione, dopo il 2,8% dello scorso anno, la stima è del 3,1% nell’esercizio in corso e del 3% nel 2027: l’ultima previsione è inferiore di 0,1 punti rispetto a quella per l’anno in corso. Questi valori aiutano a distinguere la crescita economica attesa dalle intenzioni di assunzione, che nelle risposte delle aziende restano moderate.\n\nLa fonte riporta anche una scadenza utile per i contratti stagionali del settore alberghiero e della ristorazione. Gli aumenti dei salari minimi stagionali entreranno in vigore all’inizio della stagione estiva. La stagione invernale si conclude al più tardi il 30 aprile 2027; quella estiva inizia il giorno successivo, il 1 maggio 2027. Le due date definiscono il passaggio tra le stagioni indicato dalle parti sociali, ma non specificano ulteriori importi per le diverse categorie stagionali.\n\nNel complesso, le previsioni distinguono tre piani: l’aumento medio dei salari, la dinamica attesa di prezzi e premi sanitari, e le aspettative delle imprese su produzione e organici. UBS non indica che la crescita del Pil si tradurrà automaticamente in aumenti salariali ulteriori o in nuove assunzioni. Per consultare le voci della retribuzione, è disponibile la [busta paga svizzera](nav:payslip).",
+        "faq": [
+          {
+            "q": "Qual è la previsione media di crescita nominale degli stipendi per il 2027 secondo UBS?",
+            "a": "UBS prevede una progressione media nominale degli stipendi dell’1% per il 2027. L’indagine si basa su un campione di 400 imprese e indica che il ritmo previsto è inferiore all’1,1% stimato per l’anno in corso."
+          },
+          {
+            "q": "Qual è l'aumento minimo lordo Cat. II previsto per gli alberghi?",
+            "a": "Negli alberghi, il minimo lordo Cat. II sale a 4.094 franchi, passando da 4.070 franchi per un dipendente con certificato federale di formazione pratica o titolo equivalente."
+          },
+          {
+            "q": "Quali settori prevedono la maggiore crescita nominale degli stipendi nel 2027?",
+            "a": "I settori di energia, approvvigionamento e riciclaggio prevedono un aumento nominale del 1,5%, che è il valore più alto riportato nell'indagine UBS."
+          },
+          {
+            "q": "Qual è l'aumento reale stimato per il 2027 secondo UBS?",
+            "a": "L'aumento reale stimato per il 2027 è dello 0,2%, calcolato sottraendo l'inflazione prevista allo 0,8% dalla crescita nominale media dell’1%."
+          }
+        ]
+      },
+      "en": {
+        "title": "Salaries in Switzerland: average nominal growth forecast at 1% in 2027",
+        "excerpt": "UBS forecasts average nominal salaries to grow by 1% in 2027.",
+        "body2": "### Real wages, inflation and disposable income\n\nThe key distinction for interpreting the forecast is between nominal and real increases. UBS defines nominal growth as an increase that does not take inflation into account. For 2027, it estimates average nominal growth of 1% and inflation of 0,8%; subtracting the second figure from the first gives the real increase of 0,2% indicated by the institution. This calculation is based on the two forecasts, not on the actual outcome each employee will receive.\n\nA comparison with the current year shows a reduction in projected growth. For paychecks, the estimated nominal average is 1,1%, while the projected increase in purchasing power is 0,4%. In 2027, the latter figure would fall to 0,2%: the difference between the two real estimates is 0,2 percentage points. The comparison therefore relates two annual forecasts, not two increases already recorded in individual paychecks.\n\nPrice estimates have also changed. For the current year, average Swiss inflation is now forecast at 0,7%, compared with 0,6% in previous estimates. UBS links the revision to the increase in oil prices. For 2027, the increase in consumer prices is forecast at 0,8%, that is, 0,2 percentage points higher than in the September forecasts. The estimate for next year is therefore 0,1 points higher than the updated estimate for the current year, while remaining a forecast.\n\nPressure on disposable income also comes from health insurance premiums, which UBS forecasts will increase by an average of 5% in 2027. The institution’s experts calculate that higher healthcare costs will reduce income growth by about 0,3 percentage points, an impact greater than the expected increase in real wages, at 0,2%. The two figures measure different things: the wage figure takes inflation into account, while the premium figure signals additional pressure on disposable income. Since the effect on the budget of an individual worker or family has not been quantified, the comparison concerns only the averages and estimates reported.\n\nThe overall result described by UBS is modest growth in purchasing power: the increase in real wages should strengthen it only minimally. The survey does not provide, in the cited data, individual premium amounts or the income of each group of workers. It therefore does not allow the national estimate to be converted into a net figure applicable to every paycheck or to every household’s cost of living.\n\n##",
+        "body3": "### Business confidence and employment\n\nCompanies’ responses point to cautious optimism. 49% of the companies surveyed expect a moderate recovery, 46% expect stagnation and 5% a recession. UBS reports that confidence has increased in all sectors, particularly in industry, which is the most optimistic sector. These are assessments of companies’ economic outlook and do not, on their own, indicate how many jobs will actually be created or eliminated.\n\nThe outlook for the labor market remains more cautious. For next year, 59% of companies expect their workforce to remain unchanged, 22% expect an increase and 18% a decrease. The majority also expect the unemployment rate to remain unchanged and the number of employees to stagnate. The reported percentages describe the expectations of the companies surveyed; the source does not break them down by canton or individual profession.\n\nUBS has not changed its GDP growth forecasts. Excluding sporting events, GDP is expected to grow by 1.8% in the current year and by 1.5% in 2027. The arithmetic difference between the two forecasts is 0.3 percentage points. For unemployment, following 2.8% last year, the estimate is 3.1% in the current year and 3% in 2027: the latest forecast is 0.1 points lower than the one for the current year. These figures help distinguish expected economic growth from hiring intentions, which remain moderate in companies’ responses.\n\nThe source also reports a useful deadline for seasonal contracts in the hotel and restaurant sector. Increases to seasonal minimum wages will take effect at the beginning of the summer season. The winter season ends no later than April 30, 2027; the summer season begins the following day, May 1, 2027. The two dates define the transition between seasons as indicated by the social partners, but do not specify any further amounts for the different seasonal categories.\n\nOverall, the forecasts distinguish three areas: average wage increases, the expected trend in prices and health insurance premiums, and companies’ expectations for production and staffing levels. UBS does not indicate that GDP growth will automatically translate into further wage increases or new hires. To consult the pay items, [busta paga svizzera](nav:payslip) is available.",
+        "faq": [
+          {
+            "q": "What is the average forecast for nominal wage growth in 2027 according to UBS?",
+            "a": "UBS expects average nominal wage growth of 1% for 2027. The survey is based on a sample of 400 companies and indicates that the expected pace is below the 1.1% estimated for the current year."
+          },
+          {
+            "q": "What is the minimum gross increase for Category II hotels?",
+            "a": "In hotels, the gross minimum for Cat. II rises to 4,094 francs, up from 4,070 francs for an employee with a federal certificate of practical training or equivalent qualification."
+          },
+          {
+            "q": "Which sectors are expected to see the highest nominal wage growth in 2027?",
+            "a": "The energy, supply and recycling sectors provide for a nominal increase of 1.5%, the highest figure reported in the UBS survey."
+          },
+          {
+            "q": "What is the estimated real increase for 2027 according to UBS?",
+            "a": "The estimated real increase for 2027 is 0.2%, calculated by subtracting forecast inflation of 0.8% from average nominal growth of 1%."
+          }
+        ]
+      },
+      "de": {
+        "title": "Löhne in der Schweiz: durchschnittliches nominales Wachstum von 1 % im Jahr 2027 prognostiziert",
+        "excerpt": "UBS prognostiziert für 2027 einen Anstieg der durchschnittlichen Nominallöhne um 1 %.",
+        "faq": [
+          {
+            "q": "Wie lautet die durchschnittliche Prognose für das nominale Lohnwachstum im Jahr 2027 laut UBS?",
+            "a": "UBS erwartet für 2027 einen durchschnittlichen nominalen Lohnanstieg von 1 %. Die Erhebung basiert auf einer Stichprobe von 400 Unternehmen und zeigt, dass das erwartete Tempo unter den für das laufende Jahr geschätzten 1,1 % liegt."
+          },
+          {
+            "q": "Wie hoch ist die vorgesehene Bruttomindestlohnerhöhung für Hotels der Kat. II?",
+            "a": "In Hotels steigt der Bruttomindestlohn der Kat. II auf 4.094 Franken, ausgehend von 4.070 Franken für einen Mitarbeitenden mit eidgenössischem Berufsattest oder gleichwertigem Abschluss."
+          },
+          {
+            "q": "Welche Branchen erwarten 2027 das größte nominale Lohnwachstum?",
+            "a": "Die Sektoren Energie, Versorgung und Recycling erwarten einen nominalen Anstieg von 1,5 %, der der höchste in der UBS-Umfrage ausgewiesene Wert ist."
+          },
+          {
+            "q": "Wie hoch ist der für 2027 laut UBS geschätzte reale Anstieg?",
+            "a": "Der für 2027 geschätzte reale Anstieg beträgt 0,2 %, berechnet durch Abzug der prognostizierten Inflation von 0,8 % vom durchschnittlichen nominalen Wachstum von 1 %."
+          }
+        ]
+      },
+      "fr": {
+        "title": "Salaires en Suisse : prévision d’une croissance nominale moyenne de 1 % en 2027",
+        "excerpt": "UBS prévoit une hausse des salaires nominaux moyens de 1 % en 2027.",
+        "body2": "### Salaires réels, inflation et revenu disponible\n\nLa distinction centrale pour interpréter la prévision est celle entre hausse nominale et hausse réelle. UBS qualifie de nominale la progression qui ne tient pas compte de l’inflation. Pour 2027, l’institut estime la hausse nominale moyenne à 1% et l’inflation à 0,8%; en soustrayant le second chiffre du premier, on obtient la hausse réelle de 0,2% indiquée par l’institut. Il s’agit d’un calcul fondé sur les deux prévisions, et non de la mesure du résultat effectif que recevra chaque salarié.\n\nLa comparaison avec l’année en cours montre une baisse de la croissance prévue. Pour les salaires, la hausse nominale moyenne estimée est de 1,1%, tandis que la hausse prévue du pouvoir d’achat est de 0,4%. En 2027, cette dernière valeur passerait à 0,2% : l’écart entre les deux estimations réelles est de 0,2 point de pourcentage. La comparaison met donc en relation deux prévisions annuelles, et non deux hausses déjà comptabilisées sur les fiches de paie individuelles.\n\nLes estimations des prix ont également changé. Pour l’année en cours, l’inflation moyenne suisse est désormais prévue à 0,7%, contre 0,6% dans les estimations précédentes. UBS attribue cette révision à la hausse des prix du pétrole. Pour 2027, la hausse des prix à la consommation est prévue à 0,8%, soit 0,2 point de pourcentage de plus que dans les prévisions de septembre. L’estimation pour l’année prochaine est donc supérieure de 0,1 point à celle, actualisée, pour l’année en cours, tout en restant une prévision.\n\nLa pression sur le revenu disponible vient aussi des primes d’assurance maladie, dont UBS prévoit une hausse moyenne de 5% en 2027. Les experts de l’institut estiment que l’augmentation des coûts de santé réduira d’environ 0,3 point de pourcentage la croissance des revenus, un impact supérieur à la hausse attendue des salaires réels, qui s’élève à 0,2%. Les deux valeurs mesurent des aspects différents : le chiffre des salaires tient compte de l’inflation, tandis que celui des primes signale une pression supplémentaire sur le revenu disponible. Comme l’effet sur le budget d’un salarié ou d’une famille n’est pas quantifié, la comparaison porte uniquement sur les moyennes et les estimations rapportées.\n\nLe résultat global décrit par UBS est une faible progression du pouvoir d’achat : la hausse des rémunérations réelles ne devrait le renforcer que très légèrement. L’enquête ne fournit pas, dans les données citées, les montants individuels des primes ni les revenus de chaque groupe de travailleurs. Elle ne permet donc pas de convertir l’estimation nationale en un montant net valable pour chaque fiche de paie ou pour chaque dépense du ménage.\n\n##",
+        "body3": "### Confiance des entreprises et emploi\n\nLes réponses des entreprises dessinent un optimisme prudent. 49% des entreprises interrogées prévoient une reprise modérée, 46% s’attendent à une stagnation et 5% à une récession. UBS constate que la confiance a augmenté dans tous les secteurs, en particulier dans l’industrie, qui apparaît comme le secteur le plus optimiste. Il s’agit d’évaluations sur l’avenir économique des entreprises et elles n’indiquent pas, à elles seules, combien d’emplois seront effectivement créés ou supprimés.\n\nSur le marché du travail, les perspectives restent plus prudentes. Pour l’année prochaine, 59% des entreprises prévoient des effectifs inchangés, 22% une hausse et 18% une baisse. La majorité s’attend également à ce que le taux de chômage reste inchangé et que le nombre de salariés stagne. Les pourcentages indiqués décrivent les attentes des entreprises interrogées ; la source ne les ventile ni par canton ni par profession.\n\nUBS n’a pas modifié ses prévisions de croissance du produit intérieur brut. Hors événements sportifs, le PIB devrait augmenter de 1,8% cette année et de 1,5% en 2027. La différence arithmétique entre les deux prévisions est de 0,3 point de pourcentage. Pour le chômage, après 2,8% l’an dernier, l’estimation est de 3,1% pour l’exercice en cours et de 3% en 2027 : la dernière prévision est inférieure de 0,1 point à celle pour l’année en cours. Ces valeurs permettent de distinguer la croissance économique attendue des intentions d’embauche, qui restent modérées dans les réponses des entreprises.\n\nLa source indique également une échéance utile pour les contrats saisonniers du secteur hôtelier et de la restauration. Les augmentations des salaires minimaux saisonniers entreront en vigueur au début de la saison d’été. La saison d’hiver se termine au plus tard le 30 avril 2027 ; la saison d’été commence le lendemain, le 1er mai 2027. Ces deux dates définissent le passage entre les saisons indiqué par les partenaires sociaux, mais ne précisent pas d’autres montants pour les différentes catégories saisonnières.\n\nDans l’ensemble, les prévisions distinguent trois plans : la hausse moyenne des salaires, l’évolution attendue des prix et des primes d’assurance maladie, et les attentes des entreprises en matière de production et d’effectifs. UBS n’indique pas que la croissance du PIB se traduira automatiquement par des hausses de salaire supplémentaires ou par de nouvelles embauches. Pour consulter les rubriques de rémunération, la [busta paga svizzera](nav:payslip) est disponible.",
+        "faq": [
+          {
+            "q": "Quelle est la prévision moyenne de croissance nominale des salaires pour 2027 selon UBS ?",
+            "a": "UBS prévoit une progression nominale moyenne des salaires de 1% pour 2027. L’enquête s’appuie sur un échantillon de 400 entreprises et indique que le rythme prévu est inférieur au taux de 1,1% estimé pour l’année en cours."
+          },
+          {
+            "q": "Quelle est l’augmentation minimale brute Cat. II prévue pour les hôtels ?",
+            "a": "Dans les hôtels, le minimum brut cat. II passe à 4.094 francs, contre 4.070 francs pour un employé titulaire d’un certificat fédéral de formation pratique ou d’un titre équivalent."
+          },
+          {
+            "q": "Quels secteurs prévoient la plus forte croissance nominale des salaires en 2027 ?",
+            "a": "Les secteurs de l’énergie, de l’approvisionnement et du recyclage prévoient une augmentation nominale de 1,5 %, qui est la valeur la plus élevée relevée dans l’enquête d’UBS."
+          },
+          {
+            "q": "Quelle est l’augmentation réelle estimée pour 2027 selon UBS ?",
+            "a": "L’augmentation réelle estimée pour 2027 est de 0,2 %, calculée en soustrayant l’inflation prévue de 0,8 % à la croissance nominale moyenne de 1 %."
+          }
+        ]
+      }
+    },
+    "seo": {
+      "title": "Salari in Svizzera: previsione media crescita nominale 1% nel 2027",
+      "description": "UBS prevede salari nominali medi in crescita dell’1% nel 2027. L’aumento reale stimato è dello 0,2%, con inflazione allo 0,8%.",
+      "keywords": "frontalieri, ticino, svizzera, italia, salari, previsione, media, crescita",
+      "ogTitle": "Salari Svizzera 2027: crescita nominale 1%",
+      "ogDescription": "UBS prevede salari nominali medi in crescita dell’1% nel 2027.",
+      "headline": "Salari in Svizzera: previsione media crescita nominale 1% nel 2027",
+      "breadcrumbName": "Salari in Svizzera"
+    },
+    "author": {
+      "slug": "redazione",
+      "name": "Redazione Frontaliere Ticino",
+      "linkedinUrl": "https://www.linkedin.com/company/frontaliere-ticino/"
+    }
+  },
+  "attempts": 1,
+  "missingFields": [
+    "en.body1",
+    "de.body1",
+    "de.body2",
+    "de.body3",
+    "fr.body1"
+  ],
+  "createdAt": "2026-11-28T15:55:21.660Z",
+  "updatedAt": "2026-11-28T16:03:04.657Z",
+  "verifiedAt": "2026-11-28T15:55:21.660Z",
+  "translationState": "unverified-candidate",
+  "translationsVerified": false,
+  "unverifiedFields": [
+    "en.title",
+    "en.excerpt",
+    "en.body2",
+    "en.body3",
+    "en.faq[0].q",
+    "en.faq[0].a",
+    "en.faq[1].q",
+    "en.faq[1].a",
+    "en.faq[2].q",
+    "en.faq[2].a",
+    "en.faq[3].q",
+    "en.faq[3].a",
+    "de.title",
+    "de.excerpt",
+    "de.faq[0].q",
+    "de.faq[0].a",
+    "de.faq[1].q",
+    "de.faq[1].a",
+    "de.faq[2].q",
+    "de.faq[2].a",
+    "de.faq[3].q",
+    "de.faq[3].a",
+    "fr.title",
+    "fr.excerpt",
+    "fr.body2",
+    "fr.body3",
+    "fr.faq[0].q",
+    "fr.faq[0].a",
+    "fr.faq[1].q",
+    "fr.faq[1].a",
+    "fr.faq[2].q",
+    "fr.faq[2].a",
+    "fr.faq[3].q",
+    "fr.faq[3].a"
+  ]
+}
