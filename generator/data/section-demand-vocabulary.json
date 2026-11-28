@@ -6,15 +6,27 @@
   "to": "2026-11-25",
   "days": 28
  },
- "generatedAt": "2026-11-28T12:38:34.113Z",
+ "generatedAt": "2026-11-28T13:11:03.219Z",
  "top": 80,
  "minQueryImpressions": 2,
+ "queryFilterVersion": 1,
+ "discardedByReason": {
+  "no_domain": 536,
+  "unknown_token": 408,
+  "person_pattern": 40,
+  "generic": 29,
+  "syntax": 2,
+  "too_long": 5,
+  "contact": 4,
+  "digits": 6,
+  "too_short": 8
+ },
  "truncatedAliases": [],
  "sections": {
   "canton-ag": {
-   "totalQueries": 201,
-   "keptQueries": 80,
-   "keptImpressions": 497,
+   "totalQueries": 83,
+   "keptQueries": 42,
+   "keptImpressions": 337,
    "queries": [
     {
      "query": "prämienverbilligung aargau",
@@ -39,12 +51,6 @@
      "impressions": 33,
      "clicks": 0,
      "position": 6.4
-    },
-    {
-     "query": "argovie",
-     "impressions": 27,
-     "clicks": 0,
-     "position": 9.9
     },
     {
      "query": "fislisbach steuerfuss",
@@ -77,28 +83,10 @@
      "position": 7.7
     },
     {
-     "query": "prämienverbilligung aargau bis wann",
-     "impressions": 9,
-     "clicks": 0,
-     "position": 9.3
-    },
-    {
      "query": "steuerfuss fislisbach 2026",
      "impressions": 9,
      "clicks": 0,
      "position": 10.9
-    },
-    {
-     "query": "ahv rente 2025",
-     "impressions": 8,
-     "clicks": 0,
-     "position": 8.3
-    },
-    {
-     "query": "la-k491",
-     "impressions": 8,
-     "clicks": 0,
-     "position": 4.6
     },
     {
      "query": "mellingen steuerfuss",
@@ -107,28 +95,10 @@
      "position": 11.5
     },
     {
-     "query": "bis wann prämienverbilligung beantragen aargau",
-     "impressions": 7,
-     "clicks": 0,
-     "position": 8.3
-    },
-    {
      "query": "polizeidekret aargau",
      "impressions": 7,
      "clicks": 0,
      "position": 8.3
-    },
-    {
-     "query": "wie berechne ich meine voraussichtliche ahv-rente? im kanton aargau",
-     "impressions": 7,
-     "clicks": 0,
-     "position": 8
-    },
-    {
-     "query": "ersatzwahl regierungsrat aargau",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 10
     },
     {
      "query": "pensionsrechner aargau",
@@ -179,36 +149,6 @@
      "position": 10
     },
     {
-     "query": "sva aargau prämienverbilligung",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 28.2
-    },
-    {
-     "query": "ahv höchstrente",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 8.5
-    },
-    {
-     "query": "maja riniker",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 30.3
-    },
-    {
-     "query": "maja riniker ehemann",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 45
-    },
-    {
-     "query": "pensionsrechner schweiz: brutto vs. netto im alter. im kanton aargau",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 5.8
-    },
-    {
      "query": "prämienverbilligung aargau 2026",
      "impressions": 4,
      "clicks": 0,
@@ -233,46 +173,10 @@
      "position": 9.8
     },
     {
-     "query": "sva aargau prämienverbilligung beantragen",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 38
-    },
-    {
-     "query": "sva aargau pv online",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 42.8
-    },
-    {
-     "query": "sva prämienverbilligung aargau",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 35.3
-    },
-    {
      "query": "wochenend events",
      "impressions": 4,
      "clicks": 0,
      "position": 74
-    },
-    {
-     "query": "zollrain",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 6.5
-    },
-    {
-     "query": "ahv auszahlung 2026 aargau",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 40.3
-    },
-    {
-     "query": "allerta blackout",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 5
     },
     {
      "query": "grenzsteuersatz aargau",
@@ -287,18 +191,6 @@
      "position": 61.3
     },
     {
-     "query": "maximale ahv rente",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 26
-    },
-    {
-     "query": "maximale ahv-rente 2025",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 20.7
-    },
-    {
      "query": "maximalrente ahv 2025",
      "impressions": 3,
      "clicks": 0,
@@ -309,54 +201,6 @@
      "impressions": 3,
      "clicks": 0,
      "position": 48
-    },
-    {
-     "query": "sva prämienverbilligung 2025",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 74.7
-    },
-    {
-     "query": "veranstaltungen dieses wochenende",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 49.7
-    },
-    {
-     "query": "was läuft dieses wochenende",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 76.3
-    },
-    {
-     "query": "am wochenende",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 66.5
-    },
-    {
-     "query": "baregg tunnel verkehrsinfo",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 59.5
-    },
-    {
-     "query": "concessioni idroelettriche",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 10
-    },
-    {
-     "query": "dieses wochenende",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 59.5
-    },
-    {
-     "query": "events heute in der nähe",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 41.5
     },
     {
      "query": "events wochenende",
@@ -371,34 +215,10 @@
      "position": 27
     },
     {
-     "query": "ibb störung",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 7
-    },
-    {
-     "query": "ipv aargau",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 56.5
-    },
-    {
-     "query": "maximale rente",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 61
-    },
-    {
      "query": "maximalrente ahv",
      "impressions": 2,
      "clicks": 0,
      "position": 7
-    },
-    {
-     "query": "ordentliche pensionierung in aargau",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 8
     },
     {
      "query": "prämienverbilligung aargau code bestellen",
@@ -411,12 +231,6 @@
      "impressions": 2,
      "clicks": 0,
      "position": 62.5
-    },
-    {
-     "query": "staumeldungen aargau",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 48.5
     },
     {
      "query": "steuerfuss aargau gemeinden 2026",
@@ -443,30 +257,6 @@
      "position": 48.5
     },
     {
-     "query": "streckensperrung hochrheinbahn",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 33.5
-    },
-    {
-     "query": "sva aargau code bestellen",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 31
-    },
-    {
-     "query": "sva aargau prämienverbilligung online antrag",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 47
-    },
-    {
-     "query": "sva änderungsantrag",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 23.5
-    },
-    {
      "query": "veranstaltungen aargau",
      "impressions": 2,
      "clicks": 0,
@@ -479,71 +269,29 @@
      "position": 45.5
     },
     {
-     "query": "veranstaltungen heute oberaargau",
+     "query": "verkehrssteuer aargau 2026",
      "impressions": 2,
      "clicks": 0,
-     "position": 86
+     "position": 56
     },
     {
-     "query": "veranstaltungen in der nähe",
+     "query": "zollrain aarau",
      "impressions": 2,
      "clicks": 0,
-     "position": 52.5
-    },
-    {
-     "query": "veranstaltungen in der nähe heute",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 76
+     "position": 11
     }
    ]
   },
   "canton-appenzello": {
-   "totalQueries": 23,
-   "keptQueries": 10,
-   "keptImpressions": 59,
+   "totalQueries": 6,
+   "keptQueries": 3,
+   "keptImpressions": 8,
    "queries": [
-    {
-     "query": "isabella walzthöny",
-     "impressions": 18,
-     "clicks": 0,
-     "position": 10.1
-    },
-    {
-     "query": "pv anlage kosten appenzell",
-     "impressions": 10,
-     "clicks": 0,
-     "position": 53.9
-    },
-    {
-     "query": "pv anlage einfamilienhaus appenzell",
-     "impressions": 8,
-     "clicks": 0,
-     "position": 47
-    },
-    {
-     "query": "dachsanierung appenzell",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 24
-    },
-    {
-     "query": "walzthöny appenzell",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 13.6
-    },
     {
      "query": "veranstaltungen appenzell heute",
      "impressions": 4,
      "clicks": 0,
      "position": 59.5
-    },
-    {
-     "query": "risparmio fis",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 25.3
     },
     {
      "query": "appenzell veranstaltungen 2026",
@@ -556,32 +304,14 @@
      "impressions": 2,
      "clicks": 0,
      "position": 16
-    },
-    {
-     "query": "was läuft dieses wochenende",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 69
     }
    ]
   },
   "canton-basilea": {
-   "totalQueries": 109,
-   "keptQueries": 52,
-   "keptImpressions": 326,
+   "totalQueries": 53,
+   "keptQueries": 24,
+   "keptImpressions": 115,
    "queries": [
-    {
-     "query": "kiosk claraplatz",
-     "impressions": 37,
-     "clicks": 0,
-     "position": 9.4
-    },
-    {
-     "query": "website basel",
-     "impressions": 35,
-     "clicks": 0,
-     "position": 49.8
-    },
     {
      "query": "quellensteuer basel",
      "impressions": 30,
@@ -595,100 +325,16 @@
      "position": 40.7
     },
     {
-     "query": "klimpact",
-     "impressions": 21,
-     "clicks": 0,
-     "position": 6.3
-    },
-    {
-     "query": "basler gastronomie mehrwertsteuer",
-     "impressions": 12,
-     "clicks": 0,
-     "position": 8.4
-    },
-    {
-     "query": "autobahn basel gesperrt heute",
-     "impressions": 8,
-     "clicks": 0,
-     "position": 19.3
-    },
-    {
-     "query": "barfüsserplatz",
-     "impressions": 8,
-     "clicks": 0,
-     "position": 27.1
-    },
-    {
-     "query": "claraplatz kiosk",
-     "impressions": 8,
-     "clicks": 0,
-     "position": 9.6
-    },
-    {
-     "query": "leere gestelle auf baustelle finden",
-     "impressions": 8,
-     "clicks": 0,
-     "position": 15.4
-    },
-    {
-     "query": "basel frankreich grenze",
-     "impressions": 7,
-     "clicks": 0,
-     "position": 86.3
-    },
-    {
      "query": "lohntabelle basel stadt 2027",
      "impressions": 7,
      "clicks": 0,
      "position": 8.6
     },
     {
-     "query": "online basel",
-     "impressions": 7,
-     "clicks": 0,
-     "position": 54.9
-    },
-    {
-     "query": "basel power outage",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 9.2
-    },
-    {
-     "query": "staumelder basel",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 64.2
-    },
-    {
-     "query": "staumeldungen basel",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 51.5
-    },
-    {
      "query": "steuern basel",
      "impressions": 6,
      "clicks": 0,
      "position": 23.5
-    },
-    {
-     "query": "which cities publish permit application dates",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 3.8
-    },
-    {
-     "query": "a2 basel",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 38.8
-    },
-    {
-     "query": "baustelle claraplatz basel",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 9
     },
     {
      "query": "e steuern basel",
@@ -709,28 +355,10 @@
      "position": 23.8
     },
     {
-     "query": "baltax 2025",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 4
-    },
-    {
-     "query": "basel news",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 36
-    },
-    {
      "query": "baustelle a2 basel",
      "impressions": 3,
      "clicks": 0,
      "position": 38.3
-    },
-    {
-     "query": "elektroauto kaufen basel",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 5.3
     },
     {
      "query": "esteuern basel",
@@ -751,18 +379,6 @@
      "position": 50.5
     },
     {
-     "query": "autobahn richtung basel",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 59
-    },
-    {
-     "query": "basel autobahn gesperrt",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 38
-    },
-    {
      "query": "basel quellensteuer",
      "impressions": 2,
      "clicks": 0,
@@ -781,24 +397,6 @@
      "position": 50.5
     },
     {
-     "query": "basel switzerland news",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 61
-    },
-    {
-     "query": "baustelle claraplatz",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 10.5
-    },
-    {
-     "query": "eservce",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 5.5
-    },
-    {
      "query": "grenzübergang basel",
      "impressions": 2,
      "clicks": 0,
@@ -809,18 +407,6 @@
      "impressions": 2,
      "clicks": 0,
      "position": 9.5
-    },
-    {
-     "query": "maximaler steuerabzug 3a für selbstständige 2025. in basel",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 4
-    },
-    {
-     "query": "mindestlohn basel monatlich",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 56.5
     },
     {
      "query": "stau a2 basel",
@@ -859,12 +445,6 @@
      "position": 34
     },
     {
-     "query": "verkehr richtung basel",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 45
-    },
-    {
      "query": "verkehrsmeldungen basel",
      "impressions": 2,
      "clicks": 0,
@@ -875,19 +455,13 @@
      "impressions": 2,
      "clicks": 0,
      "position": 41.5
-    },
-    {
-     "query": "wegleitung steuererklärung basel-stadt 2025",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 7
     }
    ]
   },
   "canton-be": {
-   "totalQueries": 32,
-   "keptQueries": 14,
-   "keptImpressions": 58,
+   "totalQueries": 15,
+   "keptQueries": 9,
+   "keptImpressions": 44,
    "queries": [
     {
      "query": "handänderungssteuer bern",
@@ -908,12 +482,6 @@
      "position": 32.1
     },
     {
-     "query": "carburant",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 14.8
-    },
-    {
      "query": "aumento pensione invalidità",
      "impressions": 3,
      "clicks": 1,
@@ -924,12 +492,6 @@
      "impressions": 3,
      "clicks": 0,
      "position": 24.3
-    },
-    {
-     "query": "benzina",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 41.5
     },
     {
      "query": "benzina svizzera",
@@ -944,28 +506,10 @@
      "position": 34.5
     },
     {
-     "query": "energy entlassungen",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 20
-    },
-    {
-     "query": "friderici essence",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 32.5
-    },
-    {
      "query": "straßen sperrung",
      "impressions": 2,
      "clicks": 0,
      "position": 48
-    },
-    {
-     "query": "tram kleinwabern",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 60
     },
     {
      "query": "verkehr bern",
@@ -976,87 +520,15 @@
    ]
   },
   "canton-fr": {
-   "totalQueries": 83,
-   "keptQueries": 32,
-   "keptImpressions": 135,
+   "totalQueries": 34,
+   "keptQueries": 12,
+   "keptImpressions": 54,
    "queries": [
     {
      "query": "quellensteuer kanton freiburg",
      "impressions": 28,
      "clicks": 0,
      "position": 40.8
-    },
-    {
-     "query": "kann ich die fahrzeugsteuer im kanton freiburg in raten bezahlen?",
-     "impressions": 9,
-     "clicks": 0,
-     "position": 3.4
-    },
-    {
-     "query": "wie bekomme ich im kanton freiburg eine neue rechnung für die fahrzeugsteuer?",
-     "impressions": 9,
-     "clicks": 0,
-     "position": 6.2
-    },
-    {
-     "query": "candidats prefecture sarine",
-     "impressions": 8,
-     "clicks": 0,
-     "position": 7.5
-    },
-    {
-     "query": "friburgo svizzera",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 31.8
-    },
-    {
-     "query": "wie wechsle ich im kanton freiburg von a 35 kw zur kategorie a?",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 7.2
-    },
-    {
-     "query": "cpautomation rolex",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 10.8
-    },
-    {
-     "query": "fribourg",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 11.8
-    },
-    {
-     "query": "friburgo",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 45.3
-    },
-    {
-     "query": "friderici essence prix",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 44.5
-    },
-    {
-     "query": "markus julmy",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 6.3
-    },
-    {
-     "query": "starrag vuadens",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 48.8
-    },
-    {
-     "query": "starrag vuadens sa",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 4.8
     },
     {
      "query": "steuerfuss kanton freiburg",
@@ -1071,46 +543,16 @@
      "position": 33.3
     },
     {
-     "query": "prix essence friderici",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 46.7
-    },
-    {
-     "query": "julmy markus",
-     "impressions": 2,
-     "clicks": 2,
-     "position": 1.5
-    },
-    {
      "query": "chomage fribourg",
      "impressions": 2,
      "clicks": 0,
      "position": 25.5
     },
     {
-     "query": "cp automation rolex",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 8
-    },
-    {
-     "query": "cpautomation",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 4.5
-    },
-    {
      "query": "freiburg arbeitslosenquote",
      "impressions": 2,
      "clicks": 0,
      "position": 7
-    },
-    {
-     "query": "friderici essence",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 50
     },
     {
      "query": "grossratswahlen kanton freiburg",
@@ -1129,12 +571,6 @@
      "impressions": 2,
      "clicks": 0,
      "position": 35
-    },
-    {
-     "query": "rolex s.a.",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 9.5
     },
     {
      "query": "steuern kanton freiburg",
@@ -1159,32 +595,14 @@
      "impressions": 2,
      "clicks": 0,
      "position": 24.5
-    },
-    {
-     "query": "wie berechne ich meine fahrzeugsteuer im kanton freiburg?",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 6
-    },
-    {
-     "query": "wie verändert sich meine freiburger fahrzeugsteuer, wenn ich mein auto ersetze?",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 5
     }
    ]
   },
   "canton-ge": {
-   "totalQueries": 62,
-   "keptQueries": 23,
-   "keptImpressions": 133,
+   "totalQueries": 19,
+   "keptQueries": 7,
+   "keptImpressions": 37,
    "queries": [
-    {
-     "query": "frontaliere",
-     "impressions": 16,
-     "clicks": 0,
-     "position": 86.3
-    },
     {
      "query": "salario minimo ginevra",
      "impressions": 16,
@@ -1192,58 +610,10 @@
      "position": 6.8
     },
     {
-     "query": "salaire minimum genève",
-     "impressions": 13,
-     "clicks": 0,
-     "position": 93.4
-    },
-    {
-     "query": "geneva self-employed family allowance contribution rate 2025 official",
-     "impressions": 12,
-     "clicks": 0,
-     "position": 49.1
-    },
-    {
-     "query": "ticino confronti",
-     "impressions": 11,
-     "clicks": 0,
-     "position": 82.9
-    },
-    {
-     "query": "ginebra transporte gratis 2023",
-     "impressions": 9,
-     "clicks": 0,
-     "position": 6.1
-    },
-    {
-     "query": "frontalieri",
-     "impressions": 7,
-     "clicks": 0,
-     "position": 21.6
-    },
-    {
      "query": "geneva tax",
      "impressions": 7,
      "clicks": 0,
      "position": 39.6
-    },
-    {
-     "query": "genf mindestlohn",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 9.2
-    },
-    {
-     "query": "airspace geneva",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 52
-    },
-    {
-     "query": "mindestlohn landwirtschaft 2027",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 3.3
     },
     {
      "query": "traffic geneva",
@@ -1258,52 +628,10 @@
      "position": 97.3
     },
     {
-     "query": "forfait fiscal genève pour expatriés",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 25
-    },
-    {
      "query": "iva ginevra",
      "impressions": 3,
      "clicks": 0,
      "position": 23.3
-    },
-    {
-     "query": "autoroute genève fermé",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 82.5
-    },
-    {
-     "query": "fascia frontalieri svizzera",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 83.5
-    },
-    {
-     "query": "hug 2027",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 4
-    },
-    {
-     "query": "mindestlohn genf",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 48
-    },
-    {
-     "query": "permis suisse prix autour de geneva,switzerland",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 24
-    },
-    {
-     "query": "salaire minimum geneve",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 54
     },
     {
      "query": "salario minimo 2027",
@@ -1320,21 +648,15 @@
    ]
   },
   "canton-gl": {
-   "totalQueries": 50,
-   "keptQueries": 26,
-   "keptImpressions": 81,
+   "totalQueries": 26,
+   "keptQueries": 19,
+   "keptImpressions": 62,
    "queries": [
     {
      "query": "quellensteuer glarus",
      "impressions": 15,
      "clicks": 0,
      "position": 33.3
-    },
-    {
-     "query": "braunwald einwohner",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 10.8
     },
     {
      "query": "steuern glarus",
@@ -1353,12 +675,6 @@
      "impressions": 3,
      "clicks": 0,
      "position": 57.3
-    },
-    {
-     "query": "glarona",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 47.3
     },
     {
      "query": "grundstückgewinnsteuer glarus",
@@ -1385,24 +701,6 @@
      "position": 55
     },
     {
-     "query": "am wochenende",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 77
-    },
-    {
-     "query": "assurance maladie canton glaris",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 21
-    },
-    {
-     "query": "glarotax",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 67.5
-    },
-    {
      "query": "glarus veranstaltungen",
      "impressions": 2,
      "clicks": 0,
@@ -1415,22 +713,10 @@
      "position": 12.5
     },
     {
-     "query": "nicolas kistler",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 6.5
-    },
-    {
      "query": "schlechtwetterprogramm glarus",
      "impressions": 2,
      "clicks": 0,
      "position": 20
-    },
-    {
-     "query": "seminar glarnerland",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 88.5
     },
     {
      "query": "steuer glarus",
@@ -1483,39 +769,15 @@
    ]
   },
   "canton-gr": {
-   "totalQueries": 84,
-   "keptQueries": 51,
-   "keptImpressions": 268,
+   "totalQueries": 56,
+   "keptQueries": 36,
+   "keptImpressions": 160,
    "queries": [
     {
      "query": "graubünden verkehr",
      "impressions": 25,
      "clicks": 0,
      "position": 21
-    },
-    {
-     "query": "staumeldung graubünden",
-     "impressions": 20,
-     "clicks": 0,
-     "position": 36.4
-    },
-    {
-     "query": "staumeldungen graubünden",
-     "impressions": 20,
-     "clicks": 0,
-     "position": 39
-    },
-    {
-     "query": "staumelder graubünden",
-     "impressions": 18,
-     "clicks": 0,
-     "position": 54.4
-    },
-    {
-     "query": "steuern sparen graubünden",
-     "impressions": 18,
-     "clicks": 0,
-     "position": 13.9
     },
     {
      "query": "verkehr graubünden",
@@ -1554,12 +816,6 @@
      "position": 7
     },
     {
-     "query": "strassenzustand graubuenden",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 36.6
-    },
-    {
      "query": "verkehrsmeldungen graubünden",
      "impressions": 5,
      "clicks": 0,
@@ -1578,12 +834,6 @@
      "position": 52.3
     },
     {
-     "query": "renten ost",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 10
-    },
-    {
      "query": "strassen gr",
      "impressions": 4,
      "clicks": 0,
@@ -1596,18 +846,6 @@
      "position": 35.3
     },
     {
-     "query": "strassenzustand pässe graubünden",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 50.8
-    },
-    {
-     "query": "colosseo grigioni;9;10.488095238095237",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 64
-    },
-    {
      "query": "lido grono",
      "impressions": 3,
      "clicks": 0,
@@ -1618,12 +856,6 @@
      "impressions": 3,
      "clicks": 0,
      "position": 45.7
-    },
-    {
-     "query": "righetti combustibili",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 28.3
     },
     {
      "query": "stau graubünden",
@@ -1644,12 +876,6 @@
      "position": 27
     },
     {
-     "query": "strassen graubünden tcs",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 19
-    },
-    {
      "query": "strassenzustand graubünden heute",
      "impressions": 3,
      "clicks": 0,
@@ -1660,12 +886,6 @@
      "impressions": 3,
      "clicks": 0,
      "position": 18.3
-    },
-    {
-     "query": "brigels bergbahnen sanierung",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 16.5
     },
     {
      "query": "gr strassen",
@@ -1698,12 +918,6 @@
      "position": 88.5
     },
     {
-     "query": "nalps solar",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 11
-    },
-    {
      "query": "piscina grono",
      "impressions": 2,
      "clicks": 0,
@@ -1716,22 +930,10 @@
      "position": 11
     },
     {
-     "query": "rossa val calanca",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 27
-    },
-    {
      "query": "steuersatz graubünden",
      "impressions": 2,
      "clicks": 0,
      "position": 65.5
-    },
-    {
-     "query": "strade grigioni",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 28
     },
     {
      "query": "strassen gr ch",
@@ -1782,12 +984,6 @@
      "position": 20
     },
     {
-     "query": "verkehrslage graubünden a13",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 13
-    },
-    {
      "query": "verkehrsmeldung aktuell graubünden",
      "impressions": 2,
      "clicks": 0,
@@ -1796,22 +992,10 @@
    ]
   },
   "canton-ju": {
-   "totalQueries": 37,
-   "keptQueries": 17,
-   "keptImpressions": 67,
+   "totalQueries": 18,
+   "keptQueries": 8,
+   "keptImpressions": 25,
    "queries": [
-    {
-     "query": "sandrine crevoisier",
-     "impressions": 10,
-     "clicks": 0,
-     "position": 10.2
-    },
-    {
-     "query": "versamento nella cassa pensioni",
-     "impressions": 7,
-     "clicks": 0,
-     "position": 19.3
-    },
     {
      "query": "pensione svizzera",
      "impressions": 6,
@@ -1819,40 +1003,10 @@
      "position": 27
     },
     {
-     "query": "blendio jura",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 26.6
-    },
-    {
-     "query": "pagamento della cassa pensioni",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 18.6
-    },
-    {
      "query": "cassa pensioni",
      "impressions": 4,
      "clicks": 0,
      "position": 14.8
-    },
-    {
-     "query": "pagamento della cassa pensioni all'estero",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 24.5
-    },
-    {
-     "query": "tasse sul pilastro 3a al momento del pagamento",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 4.5
-    },
-    {
-     "query": "far pagare la cassa pensioni all'estero",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 11.7
     },
     {
      "query": "pensioni svizzera",
@@ -1873,22 +1027,10 @@
      "position": 15
     },
     {
-     "query": "cassa d assicurazione malattia regione",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 52.5
-    },
-    {
      "query": "pensione minima svizzera",
      "impressions": 2,
      "clicks": 0,
      "position": 69
-    },
-    {
-     "query": "tassazione del pagamento pilastro 3a",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 15
     },
     {
      "query": "tassazione pilastro 3a",
@@ -1905,39 +1047,15 @@
    ]
   },
   "canton-lu": {
-   "totalQueries": 42,
-   "keptQueries": 20,
-   "keptImpressions": 17652,
+   "totalQueries": 21,
+   "keptQueries": 11,
+   "keptImpressions": 61,
    "queries": [
-    {
-     "query": "sonnenberg tunnel",
-     "impressions": 17550,
-     "clicks": 0,
-     "position": 3.9
-    },
     {
      "query": "verkehr luzern",
      "impressions": 36,
      "clicks": 0,
      "position": 70.3
-    },
-    {
-     "query": "kandidaten fdp nottwil",
-     "impressions": 12,
-     "clicks": 0,
-     "position": 23.7
-    },
-    {
-     "query": "kandidaten fdp luzern",
-     "impressions": 11,
-     "clicks": 0,
-     "position": 29.3
-    },
-    {
-     "query": "fdp luzern",
-     "impressions": 7,
-     "clicks": 0,
-     "position": 70.1
     },
     {
      "query": "imposta alla fonte ticino 2027",
@@ -1958,12 +1076,6 @@
      "position": 60.7
     },
     {
-     "query": "valentin humbel",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 5.3
-    },
-    {
      "query": "verkehrsinfo luzern",
      "impressions": 3,
      "clicks": 0,
@@ -1974,24 +1086,6 @@
      "impressions": 2,
      "clicks": 0,
      "position": 55.5
-    },
-    {
-     "query": "herzogberg tunnel",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 41
-    },
-    {
-     "query": "kantonsratswahlen luzern fdp",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 27.5
-    },
-    {
-     "query": "pension volta",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 19.5
     },
     {
      "query": "steuerfuss schenkon",
@@ -2012,12 +1106,6 @@
      "position": 37
     },
     {
-     "query": "tunnel spitzenberg",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 21
-    },
-    {
      "query": "verkehrslage luzern",
      "impressions": 2,
      "clicks": 0,
@@ -2032,207 +1120,15 @@
    ]
   },
   "canton-ne": {
-   "totalQueries": 92,
-   "keptQueries": 40,
-   "keptImpressions": 740,
+   "totalQueries": 10,
+   "keptQueries": 3,
+   "keptImpressions": 20,
    "queries": [
-    {
-     "query": "aldi neuchatel",
-     "impressions": 295,
-     "clicks": 2,
-     "position": 10.2
-    },
-    {
-     "query": "aldi neuenburg",
-     "impressions": 65,
-     "clicks": 0,
-     "position": 9
-    },
-    {
-     "query": "aldi neuchatel fermeture",
-     "impressions": 63,
-     "clicks": 1,
-     "position": 6
-    },
-    {
-     "query": "fermeture aldi neuchatel",
-     "impressions": 35,
-     "clicks": 1,
-     "position": 5.7
-    },
-    {
-     "query": "gas neuchatel",
-     "impressions": 35,
-     "clicks": 0,
-     "position": 6.5
-    },
-    {
-     "query": "aldi neuchâtel",
-     "impressions": 27,
-     "clicks": 0,
-     "position": 10.2
-    },
-    {
-     "query": "caisse maladie neuchatel",
-     "impressions": 23,
-     "clicks": 0,
-     "position": 36.5
-    },
-    {
-     "query": "aldi suisse neuchâtel",
-     "impressions": 20,
-     "clicks": 1,
-     "position": 10.8
-    },
-    {
-     "query": "aldi neuchâtel horaire",
-     "impressions": 20,
-     "clicks": 0,
-     "position": 12.5
-    },
-    {
-     "query": "aldi fermeture",
-     "impressions": 18,
-     "clicks": 0,
-     "position": 8.9
-    },
     {
      "query": "canton neuchatel assurance",
      "impressions": 16,
      "clicks": 0,
      "position": 36.7
-    },
-    {
-     "query": "aldi draize",
-     "impressions": 14,
-     "clicks": 0,
-     "position": 7.2
-    },
-    {
-     "query": "neuchatel",
-     "impressions": 13,
-     "clicks": 0,
-     "position": 23.8
-    },
-    {
-     "query": "horaire aldi neuchatel",
-     "impressions": 9,
-     "clicks": 0,
-     "position": 10.6
-    },
-    {
-     "query": "chiusura aldi",
-     "impressions": 8,
-     "clicks": 0,
-     "position": 5.4
-    },
-    {
-     "query": "fermeture aldi",
-     "impressions": 7,
-     "clicks": 0,
-     "position": 10.9
-    },
-    {
-     "query": "aldi chiusura",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 5.7
-    },
-    {
-     "query": "que faire à neuchâtel ce week end",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 49.2
-    },
-    {
-     "query": "renten ost",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 31.6
-    },
-    {
-     "query": "assurance maladie neuchâtel",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 21.8
-    },
-    {
-     "query": "chiusura aldi oggi",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 11
-    },
-    {
-     "query": "cpcn",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 19.3
-    },
-    {
-     "query": "événements neuchâtel centre-ville",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 46.3
-    },
-    {
-     "query": "aldi centre ville",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 6.7
-    },
-    {
-     "query": "aldi chiude",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 11.3
-    },
-    {
-     "query": "assemblage neuchatel",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 52.7
-    },
-    {
-     "query": "que faire à neuchâtel ce week-end",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 53.3
-    },
-    {
-     "query": "vignette 2022 aktion",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 19
-    },
-    {
-     "query": "winzerfest neuenburg",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 58.7
-    },
-    {
-     "query": "aldi chiusura oggi",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 9
-    },
-    {
-     "query": "aldi fermeture définitive",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 7
-    },
-    {
-     "query": "assurance maladie neuchatel",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 38
-    },
-    {
-     "query": "événement neuchâtel ce week-end",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 27.5
     },
     {
      "query": "markt neuenburg",
@@ -2241,84 +1137,18 @@
      "position": 61.5
     },
     {
-     "query": "neuenburg aldi",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 7
-    },
-    {
-     "query": "prix abonnement transn",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 46
-    },
-    {
-     "query": "projet logement neuchatel",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 62
-    },
-    {
      "query": "veranstaltungen neuenburg",
      "impressions": 2,
      "clicks": 0,
      "position": 18
-    },
-    {
-     "query": "vignette 2022 rabatt",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 17
-    },
-    {
-     "query": "zones neuchatel",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 41.5
     }
    ]
   },
   "canton-nw": {
-   "totalQueries": 36,
-   "keptQueries": 23,
-   "keptImpressions": 92,
+   "totalQueries": 19,
+   "keptQueries": 14,
+   "keptImpressions": 43,
    "queries": [
-    {
-     "query": "postauto online-fahrplan 2026",
-     "impressions": 8,
-     "clicks": 0,
-     "position": 14
-    },
-    {
-     "query": "assurance maladie canton nidwald",
-     "impressions": 7,
-     "clicks": 0,
-     "position": 5.7
-    },
-    {
-     "query": "fahrplan postauto nidwalden",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 12.2
-    },
-    {
-     "query": "postauto neuer fahrplan",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 20
-    },
-    {
-     "query": "postauto neuer fahrplan 2026",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 18.3
-    },
-    {
-     "query": "postauto online fahrplan 2026",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 13.5
-    },
     {
      "query": "events nidwalden obwalden",
      "impressions": 5,
@@ -2344,12 +1174,6 @@
      "position": 42.8
     },
     {
-     "query": "postauto fahrplan 2026",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 17.5
-    },
-    {
      "query": "steuern nw",
      "impressions": 4,
      "clicks": 0,
@@ -2366,18 +1190,6 @@
      "impressions": 3,
      "clicks": 0,
      "position": 37
-    },
-    {
-     "query": "postauto nidwalden",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 49
-    },
-    {
-     "query": "postauto online fahrplan 2026 pdf",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 14.7
     },
     {
      "query": "veranstaltungen nidwalden heute",
@@ -2424,9 +1236,9 @@
    ]
   },
   "canton-ow": {
-   "totalQueries": 10,
-   "keptQueries": 7,
-   "keptImpressions": 29,
+   "totalQueries": 8,
+   "keptQueries": 6,
+   "keptImpressions": 26,
    "queries": [
     {
      "query": "quellensteuer obwalden",
@@ -2445,12 +1257,6 @@
      "impressions": 4,
      "clicks": 0,
      "position": 28.3
-    },
-    {
-     "query": "etax obwalden",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 5
     },
     {
      "query": "steuern obwalden",
@@ -2473,16 +1279,10 @@
    ]
   },
   "canton-sg": {
-   "totalQueries": 41,
-   "keptQueries": 17,
-   "keptImpressions": 71,
+   "totalQueries": 11,
+   "keptQueries": 6,
+   "keptImpressions": 22,
    "queries": [
-    {
-     "query": "staumeldung st gallen",
-     "impressions": 11,
-     "clicks": 0,
-     "position": 24.8
-    },
     {
      "query": "ahv maximalrente 2026",
      "impressions": 9,
@@ -2490,52 +1290,10 @@
      "position": 8.6
     },
     {
-     "query": "staumeldung st.gallen",
-     "impressions": 9,
-     "clicks": 0,
-     "position": 20.6
-    },
-    {
-     "query": "max ahv-rente 2026",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 23.6
-    },
-    {
-     "query": "bahnhof wil abstimmung",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 9.8
-    },
-    {
-     "query": "spital grabs haus a",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 4.5
-    },
-    {
-     "query": "spital grabs haus s",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 12.3
-    },
-    {
      "query": "verkehrsmeldung aktuell st gallen",
      "impressions": 4,
      "clicks": 0,
      "position": 23.8
-    },
-    {
-     "query": "hsg san gallo",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 11.3
-    },
-    {
-     "query": "spital grabs haus h",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 9.3
     },
     {
      "query": "stau st gallen",
@@ -2548,24 +1306,6 @@
      "impressions": 2,
      "clicks": 0,
      "position": 5
-    },
-    {
-     "query": "maximale ahv-rente 2026",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 58
-    },
-    {
-     "query": "sbb schalter uznach",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 13
-    },
-    {
-     "query": "spital grabs haus r",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 15.5
     },
     {
      "query": "st gallen verkehr",
@@ -2582,27 +1322,15 @@
    ]
   },
   "canton-sh": {
-   "totalQueries": 73,
-   "keptQueries": 30,
-   "keptImpressions": 183,
+   "totalQueries": 33,
+   "keptQueries": 13,
+   "keptImpressions": 94,
    "queries": [
     {
      "query": "quellensteuer schaffhausen",
      "impressions": 30,
      "clicks": 0,
      "position": 57.6
-    },
-    {
-     "query": "sperrung schaffhauser straße singen",
-     "impressions": 26,
-     "clicks": 0,
-     "position": 7.9
-    },
-    {
-     "query": "stephan rawyler",
-     "impressions": 22,
-     "clicks": 0,
-     "position": 9
     },
     {
      "query": "steuerverwaltung schaffhausen grenzgängersteuer",
@@ -2629,12 +1357,6 @@
      "position": 32.4
     },
     {
-     "query": "sciaffusa",
-     "impressions": 7,
-     "clicks": 0,
-     "position": 44.3
-    },
-    {
      "query": "schaffhausen steuern",
      "impressions": 6,
      "clicks": 0,
@@ -2647,40 +1369,10 @@
      "position": 23.2
     },
     {
-     "query": "assurance maladie schaffhouse",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 20.8
-    },
-    {
      "query": "steuern sh",
      "impressions": 4,
      "clicks": 0,
      "position": 41.3
-    },
-    {
-     "query": "ahv auszahlung schaffhausen",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 95.7
-    },
-    {
-     "query": "data center beringen",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 9.3
-    },
-    {
-     "query": "galgenbucktunnel gesperrt",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 9.7
-    },
-    {
-     "query": "singen schaffhauser straße sperrung",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 9.3
     },
     {
      "query": "steuern schaffhausen 2025",
@@ -2689,43 +1381,7 @@
      "position": 39
     },
     {
-     "query": "coop 2027",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 5.5
-    },
-    {
-     "query": "coop wage",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 9.5
-    },
-    {
      "query": "kantonale steuerverwaltung schaffhausen",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 39.5
-    },
-    {
-     "query": "noah thus stein am rhein",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 19
-    },
-    {
-     "query": "rechenzentrum beringen",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 48
-    },
-    {
-     "query": "schaffhauser straße singen gesperrt",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 10.5
-    },
-    {
-     "query": "seehas konstanz singen aktuell",
      "impressions": 2,
      "clicks": 0,
      "position": 39.5
@@ -2747,31 +1403,13 @@
      "impressions": 2,
      "clicks": 0,
      "position": 62
-    },
-    {
-     "query": "strabag beringen",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 49.5
-    },
-    {
-     "query": "teilrevision spitalgesetz schaffhausen",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 22
-    },
-    {
-     "query": "zürich stuttgart zug direkt",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 77.5
     }
    ]
   },
   "canton-so": {
-   "totalQueries": 72,
-   "keptQueries": 41,
-   "keptImpressions": 568,
+   "totalQueries": 46,
+   "keptQueries": 30,
+   "keptImpressions": 529,
    "queries": [
     {
      "query": "prämienverbilligung solothurn 2027",
@@ -2828,12 +1466,6 @@
      "position": 4.7
     },
     {
-     "query": "prämienverbilligung solothurn formular 2027 pdf",
-     "impressions": 8,
-     "clicks": 1,
-     "position": 9.3
-    },
-    {
      "query": "steuerfuss dulliken 2026",
      "impressions": 8,
      "clicks": 0,
@@ -2848,12 +1480,6 @@
     {
      "query": "steuerfuss schönenwerd 2026",
      "impressions": 8,
-     "clicks": 0,
-     "position": 10
-    },
-    {
-     "query": "scala stipendi cantone 2027",
-     "impressions": 7,
      "clicks": 0,
      "position": 10
     },
@@ -2888,12 +1514,6 @@
      "position": 31.6
     },
     {
-     "query": "sodistore home",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 7.4
-    },
-    {
      "query": "steuerfuss olten 2026",
      "impressions": 5,
      "clicks": 0,
@@ -2910,18 +1530,6 @@
      "impressions": 4,
      "clicks": 0,
      "position": 9.8
-    },
-    {
-     "query": "gav solothurn",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 22.7
-    },
-    {
-     "query": "ipv solothurn",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 52.7
     },
     {
      "query": "kantonale durchschnittsprämie 2027",
@@ -2954,40 +1562,10 @@
      "position": 38.3
     },
     {
-     "query": "teuerungsausgleich kanton solothurn 2027",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 7.7
-    },
-    {
-     "query": "enzootischer pneumonie",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 10
-    },
-    {
-     "query": "gav kanton solothurn",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 22
-    },
-    {
-     "query": "ich meine für das jahr 2027",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 3.5
-    },
-    {
      "query": "kanton solothurn lohntabelle",
      "impressions": 2,
      "clicks": 0,
      "position": 45
-    },
-    {
-     "query": "member of the cantonal council of solothurn",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 69
     },
     {
      "query": "prämienverbilligung solothurn rechner",
@@ -3008,12 +1586,6 @@
      "position": 20
     },
     {
-     "query": "session kantonsrat solothurn",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 10.5
-    },
-    {
      "query": "steuern solothurn",
      "impressions": 2,
      "clicks": 0,
@@ -3022,34 +1594,10 @@
    ]
   },
   "canton-sz": {
-   "totalQueries": 18,
-   "keptQueries": 8,
-   "keptImpressions": 41,
+   "totalQueries": 8,
+   "keptQueries": 4,
+   "keptImpressions": 11,
    "queries": [
-    {
-     "query": "tax return schwyz",
-     "impressions": 11,
-     "clicks": 0,
-     "position": 12.5
-    },
-    {
-     "query": "schwyz tax news",
-     "impressions": 8,
-     "clicks": 0,
-     "position": 6.9
-    },
-    {
-     "query": "ahv uri",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 11.7
-    },
-    {
-     "query": "assurance maladie canton schwytz",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 66.2
-    },
     {
      "query": "veranstaltungen schwyz",
      "impressions": 5,
@@ -3077,9 +1625,9 @@
    ]
   },
   "canton-tg": {
-   "totalQueries": 149,
-   "keptQueries": 79,
-   "keptImpressions": 392,
+   "totalQueries": 60,
+   "keptQueries": 33,
+   "keptImpressions": 221,
    "queries": [
     {
      "query": "arbeitsinspektorat thurgau",
@@ -3112,70 +1660,10 @@
      "position": 30.9
     },
     {
-     "query": "pbv thurgau",
-     "impressions": 9,
-     "clicks": 0,
-     "position": 9.8
-    },
-    {
-     "query": "rav amriswil",
-     "impressions": 9,
-     "clicks": 0,
-     "position": 42.7
-    },
-    {
-     "query": "rav kreuzlingen",
-     "impressions": 8,
-     "clicks": 0,
-     "position": 50.5
-    },
-    {
-     "query": "rav thurgau",
-     "impressions": 8,
-     "clicks": 0,
-     "position": 31
-    },
-    {
-     "query": "rav anmeldung thurgau",
-     "impressions": 7,
-     "clicks": 0,
-     "position": 42.4
-    },
-    {
-     "query": "turgovia",
-     "impressions": 7,
-     "clicks": 0,
-     "position": 24.4
-    },
-    {
      "query": "vorsorge thurgau",
      "impressions": 7,
      "clicks": 0,
      "position": 12.7
-    },
-    {
-     "query": "agence interim thurgovie",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 23.8
-    },
-    {
-     "query": "ahv auszahlung 2026",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 71
-    },
-    {
-     "query": "avs 2026",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 63.5
-    },
-    {
-     "query": "personaldienstleister thurgau",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 19.8
     },
     {
      "query": "steuerfuss frauenfeld",
@@ -3184,46 +1672,10 @@
      "position": 15.5
     },
     {
-     "query": "ki beratung thurgau",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 20.8
-    },
-    {
-     "query": "13 ahv rente auszahlung",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 45.5
-    },
-    {
-     "query": "amriswil rav",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 41
-    },
-    {
-     "query": "einfache steuer thurgau",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 72.3
-    },
-    {
-     "query": "personalverleih thurgau",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 32.8
-    },
-    {
      "query": "quellensteuer thurgau tarife 2026",
      "impressions": 4,
      "clicks": 0,
      "position": 15
-    },
-    {
-     "query": "steuer optimierung thurgau",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 19
     },
     {
      "query": "steuererklärung frauenfeld",
@@ -3238,12 +1690,6 @@
      "position": 33.3
     },
     {
-     "query": "thurgau news",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 4.5
-    },
-    {
      "query": "zurigo pensioni",
      "impressions": 4,
      "clicks": 0,
@@ -3254,66 +1700,6 @@
      "impressions": 3,
      "clicks": 0,
      "position": 92.3
-    },
-    {
-     "query": "ahv auszahlung thurgau 2026",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 17
-    },
-    {
-     "query": "ahv-rente 2026 auszahlung",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 67.3
-    },
-    {
-     "query": "ahv-rente auszahlung 2026",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 70.7
-    },
-    {
-     "query": "auszahlung ahv 2026",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 66.7
-    },
-    {
-     "query": "business packages thurgau",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 25
-    },
-    {
-     "query": "immobilien beratung thurgau",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 14.3
-    },
-    {
-     "query": "iv auszahlung thurgau 2026",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 31
-    },
-    {
-     "query": "iv rente auszahlung 2026",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 66.3
-    },
-    {
-     "query": "marketing hilfen thurgau",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 35.3
-    },
-    {
-     "query": "rav frauenfeld",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 27
     },
     {
      "query": "steueramt frauenfeld",
@@ -3334,76 +1720,10 @@
      "position": 36.3
     },
     {
-     "query": "thurgovie",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 74
-    },
-    {
-     "query": "unternehmensberatung thurgau",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 34.3
-    },
-    {
-     "query": "ahv auszahlung 2026 thurgau",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 22.5
-    },
-    {
-     "query": "ahv rente 2026 auszahlung",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 72
-    },
-    {
      "query": "arbeitgeberservice",
      "impressions": 2,
      "clicks": 0,
      "position": 17.5
-    },
-    {
-     "query": "auszahlung säule 3a steuern thurgau",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 23
-    },
-    {
-     "query": "calendrier paiement avs 2026",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 37.5
-    },
-    {
-     "query": "digitaler schalter",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 16.5
-    },
-    {
-     "query": "einfache steuer thurgau tabelle",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 49
-    },
-    {
-     "query": "firmengründung thurgau",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 46
-    },
-    {
-     "query": "gesetz über strassen und wege thurgau",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 5.5
-    },
-    {
-     "query": "iv auszahlung 2026",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 63.5
     },
     {
      "query": "kantonale steuerverwaltung thurgau",
@@ -3412,22 +1732,10 @@
      "position": 11
     },
     {
-     "query": "ocv en ligne",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 35
-    },
-    {
      "query": "quellensteuer tg",
      "impressions": 2,
      "clicks": 0,
      "position": 56
-    },
-    {
-     "query": "quellensteuer thurgau anmeldung",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 71
     },
     {
      "query": "quellensteuer thurgau tabelle",
@@ -3440,24 +1748,6 @@
      "impressions": 2,
      "clicks": 0,
      "position": 82.5
-    },
-    {
-     "query": "rav regionales arbeitsvermittlungszentrum frauenfeld",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 56
-    },
-    {
-     "query": "rentenauszahlung",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 63
-    },
-    {
-     "query": "ruhezeiten thurgau",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 71
     },
     {
      "query": "steuererklärung thurgau 2024",
@@ -3490,12 +1780,6 @@
      "position": 37.5
     },
     {
-     "query": "steuern sparen thurgau",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 17
-    },
-    {
      "query": "steuerprogression thurgau",
      "impressions": 2,
      "clicks": 0,
@@ -3512,12 +1796,6 @@
      "impressions": 2,
      "clicks": 0,
      "position": 41.5
-    },
-    {
-     "query": "steuerwert auto berechnen thurgau",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 23
     },
     {
      "query": "strassensteuer thurgau",
@@ -3548,44 +1826,14 @@
      "impressions": 2,
      "clicks": 0,
      "position": 52
-    },
-    {
-     "query": "was läuft dieses wochenende",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 80
     }
    ]
   },
   "canton-ti": {
-   "totalQueries": 116,
-   "keptQueries": 53,
-   "keptImpressions": 345,
+   "totalQueries": 47,
+   "keptQueries": 25,
+   "keptImpressions": 104,
    "queries": [
-    {
-     "query": "quellensteuer rückforderung pensionskasse",
-     "impressions": 55,
-     "clicks": 0,
-     "position": 63.8
-    },
-    {
-     "query": "quellensteuer pensionskasse rückforderung",
-     "impressions": 40,
-     "clicks": 0,
-     "position": 60.6
-    },
-    {
-     "query": "quellensteuer rückforderung",
-     "impressions": 31,
-     "clicks": 0,
-     "position": 19.3
-    },
-    {
-     "query": "quellensteuer kapitalleistung rückforderung",
-     "impressions": 28,
-     "clicks": 0,
-     "position": 64.7
-    },
     {
      "query": "eventi ticino",
      "impressions": 12,
@@ -3599,34 +1847,10 @@
      "position": 14.4
     },
     {
-     "query": "ticino confronti",
-     "impressions": 11,
-     "clicks": 0,
-     "position": 66.4
-    },
-    {
-     "query": "novità di stagione ticinesi",
-     "impressions": 10,
-     "clicks": 0,
-     "position": 28.1
-    },
-    {
      "query": "traffico.ticino",
      "impressions": 10,
      "clicks": 0,
      "position": 40.3
-    },
-    {
-     "query": "lsads",
-     "impressions": 7,
-     "clicks": 0,
-     "position": 5.9
-    },
-    {
-     "query": "quellensteuer rückerstattung",
-     "impressions": 7,
-     "clicks": 0,
-     "position": 61.7
     },
     {
      "query": "quellensteuer tessin",
@@ -3645,12 +1869,6 @@
      "impressions": 6,
      "clicks": 0,
      "position": 11.7
-    },
-    {
-     "query": "frontalieri news",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 48
     },
     {
      "query": "steuern italien",
@@ -3677,30 +1895,6 @@
      "position": 43
     },
     {
-     "query": "how settlement agreements will change after january 2027",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 9
-    },
-    {
-     "query": "site:frontaliereticino.ch",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 5.8
-    },
-    {
-     "query": "ustat",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 5
-    },
-    {
-     "query": "agenda ticino",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 40.7
-    },
-    {
      "query": "benzina ticino",
      "impressions": 3,
      "clicks": 0,
@@ -3713,46 +1907,16 @@
      "position": 23.7
     },
     {
-     "query": "frontalieri",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 26.7
-    },
-    {
      "query": "imposte ticino",
      "impressions": 3,
      "clicks": 0,
      "position": 29.3
     },
     {
-     "query": "schweizer quellensteuer rückerstattung",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 36.7
-    },
-    {
      "query": "ticino eventi",
      "impressions": 3,
      "clicks": 0,
      "position": 25.3
-    },
-    {
-     "query": "amsa bus",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 9
-    },
-    {
-     "query": "amsa mendrisio",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 5
-    },
-    {
-     "query": "aufwachraum",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 89
     },
     {
      "query": "benzinpreis tessin",
@@ -3765,24 +1929,6 @@
      "impressions": 2,
      "clicks": 0,
      "position": 12.5
-    },
-    {
-     "query": "circolazione ticino",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 17
-    },
-    {
-     "query": "come cambiare lo stipendio da svizzeri",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 53.5
-    },
-    {
-     "query": "cosa fare in ticino oggi",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 41.5
     },
     {
      "query": "eventi in ticino oggi",
@@ -3809,46 +1955,10 @@
      "position": 9.5
     },
     {
-     "query": "info strade ticino",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 29.5
-    },
-    {
      "query": "krankenversicherung kanton tessin",
      "impressions": 2,
      "clicks": 0,
      "position": 48
-    },
-    {
-     "query": "melania ticino",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 50
-    },
-    {
-     "query": "operationsraum",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 44
-    },
-    {
-     "query": "prezzo benzina ticino oggi",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 34.5
-    },
-    {
-     "query": "quellensteuer rückerstattung schweiz",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 41.5
-    },
-    {
-     "query": "sagre ticino oggi",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 18
     },
     {
      "query": "steuergesetz tessin",
@@ -3861,12 +1971,6 @@
      "impressions": 2,
      "clicks": 0,
      "position": 40.5
-    },
-    {
-     "query": "terzo pilastro frontalieri",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 32.5
     },
     {
      "query": "ticino eventi oggi",
@@ -3883,28 +1987,10 @@
    ]
   },
   "canton-ur": {
-   "totalQueries": 81,
-   "keptQueries": 38,
-   "keptImpressions": 201,
+   "totalQueries": 30,
+   "keptQueries": 19,
+   "keptImpressions": 77,
    "queries": [
-    {
-     "query": "axenstrasse gesperrt",
-     "impressions": 20,
-     "clicks": 0,
-     "position": 19.9
-    },
-    {
-     "query": "tcs axenstrasse",
-     "impressions": 19,
-     "clicks": 0,
-     "position": 74.9
-    },
-    {
-     "query": "felix gisler",
-     "impressions": 13,
-     "clicks": 0,
-     "position": 9.7
-    },
     {
      "query": "axenstrasse",
      "impressions": 11,
@@ -3912,34 +1998,10 @@
      "position": 36.7
     },
     {
-     "query": "uri news",
-     "impressions": 10,
-     "clicks": 0,
-     "position": 17.2
-    },
-    {
      "query": "bristenstrasse sperrung",
      "impressions": 9,
      "clicks": 0,
      "position": 10.1
-    },
-    {
-     "query": "axenstrasse offen",
-     "impressions": 8,
-     "clicks": 0,
-     "position": 19.9
-    },
-    {
-     "query": "leza aschwanden",
-     "impressions": 8,
-     "clicks": 0,
-     "position": 9
-    },
-    {
-     "query": "uri tax",
-     "impressions": 8,
-     "clicks": 0,
-     "position": 7.9
     },
     {
      "query": "gemeinderat unterschächen",
@@ -3952,18 +2014,6 @@
      "impressions": 7,
      "clicks": 0,
      "position": 35
-    },
-    {
-     "query": "activités à canton of uri",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 22.2
-    },
-    {
-     "query": "ist die axenstrasse offen",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 49.2
     },
     {
      "query": "steuerfuss altdorf uri",
@@ -3990,40 +2040,10 @@
      "position": 10
     },
     {
-     "query": "uritax",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 6
-    },
-    {
-     "query": "col de la furka ouverture 2026",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 8.3
-    },
-    {
      "query": "gemeindepräsident spiringen",
      "impressions": 3,
      "clicks": 0,
      "position": 4.3
-    },
-    {
-     "query": "ist die axenstrasse aktuell offen",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 43
-    },
-    {
-     "query": "news uri",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 11
-    },
-    {
-     "query": "rene schuler",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 7
     },
     {
      "query": "steuern uri",
@@ -4050,12 +2070,6 @@
      "position": 7.5
     },
     {
-     "query": "assurance maladie canton uri",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 24.5
-    },
-    {
      "query": "axenstrasse sperrung",
      "impressions": 2,
      "clicks": 0,
@@ -4074,18 +2088,6 @@
      "position": 5
     },
     {
-     "query": "etax uri login",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 6
-    },
-    {
-     "query": "gärtnerei gisler niederwil schliessung",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 7.5
-    },
-    {
      "query": "kanton uri steuern",
      "impressions": 2,
      "clicks": 0,
@@ -4098,306 +2100,23 @@
      "position": 35.5
     },
     {
-     "query": "st gotthard pass open",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 22
-    },
-    {
      "query": "tunnelbrand",
      "impressions": 2,
      "clicks": 0,
      "position": 57.5
-    },
-    {
-     "query": "uri newsletter",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 6.5
-    }
-   ]
-  },
-  "canton-vd": {
-   "totalQueries": 86,
-   "keptQueries": 40,
-   "keptImpressions": 219,
-   "queries": [
-    {
-     "query": "waadt news",
-     "impressions": 29,
-     "clicks": 0,
-     "position": 6.5
-    },
-    {
-     "query": "grève fonction publique vaud",
-     "impressions": 16,
-     "clicks": 0,
-     "position": 4.4
-    },
-    {
-     "query": "lripp",
-     "impressions": 13,
-     "clicks": 0,
-     "position": 7
-    },
-    {
-     "query": "cdhr frontalier",
-     "impressions": 12,
-     "clicks": 0,
-     "position": 46.3
-    },
-    {
-     "query": "salaire etat de vaud 2027",
-     "impressions": 12,
-     "clicks": 0,
-     "position": 9.2
-    },
-    {
-     "query": "ctmg",
-     "impressions": 11,
-     "clicks": 0,
-     "position": 20.6
-    },
-    {
-     "query": "058 6 116 116",
-     "impressions": 9,
-     "clicks": 0,
-     "position": 7.6
-    },
-    {
-     "query": "grève fonctionnaires vaudois",
-     "impressions": 9,
-     "clicks": 0,
-     "position": 4.3
-    },
-    {
-     "query": "budget vaudois 2027",
-     "impressions": 8,
-     "clicks": 0,
-     "position": 9.6
-    },
-    {
-     "query": "2045",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 21.7
-    },
-    {
-     "query": "contribution différentielle frontaliers",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 48.7
-    },
-    {
-     "query": "indexation salaire vaud 2027",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 10.5
-    },
-    {
-     "query": "salaire sage femme",
-     "impressions": 6,
-     "clicks": 0,
-     "position": 25
-    },
-    {
-     "query": "116",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 40.6
-    },
-    {
-     "query": "echelle salaire vaud 2027",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 10.8
-    },
-    {
-     "query": "hôpital des nounours",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 7.8
-    },
-    {
-     "query": "je regarde des offres en mode hybride à lausanne",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 10.6
-    },
-    {
-     "query": "indexation vaud",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 11
-    },
-    {
-     "query": "installation borne de recharge lausanne",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 29.5
-    },
-    {
-     "query": "waadt",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 26.8
-    },
-    {
-     "query": "(\"beginn der bauarbeiten\" or \"start der bauarbeiten\" or \"baubeginn erfolgt\" or \"baustart erfolgt\") \"dezember 2026\"",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 8.7
-    },
-    {
-     "query": "budget 2027 vaud",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 11
-    },
-    {
-     "query": "indexation salaire 2027 vaud",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 10.7
-    },
-    {
-     "query": "oui",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 5.7
-    },
-    {
-     "query": "indicizzazione stipendi",
-     "impressions": 2,
-     "clicks": 1,
-     "position": 4.5
-    },
-    {
-     "query": "budget vaud 2027",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 12
-    },
-    {
-     "query": "cdhr",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 11.5
-    },
-    {
-     "query": "central des médecins vaud",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 54.5
-    },
-    {
-     "query": "centrale des médecins vaud",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 61
-    },
-    {
-     "query": "centrale santé vaud",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 10.5
-    },
-    {
-     "query": "faje vaud",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 10
-    },
-    {
-     "query": "impetigine",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 31.5
-    },
-    {
-     "query": "indexation",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 43.5
-    },
-    {
-     "query": "je change de canton et je veux savoir si les salaires diffèrent beaucoup entre vaud et valais",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 2
-    },
-    {
-     "query": "morges gare",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 42
-    },
-    {
-     "query": "salaire vaud 2027",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 10
-    },
-    {
-     "query": "steuern in frankreich für schweizer rentner",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 42
-    },
-    {
-     "query": "vaud",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 13
-    },
-    {
-     "query": "vaud budget 2027",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 2.5
-    },
-    {
-     "query": "yes",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 5.5
     }
    ]
   },
   "canton-vs": {
-   "totalQueries": 70,
-   "keptQueries": 31,
-   "keptImpressions": 154,
+   "totalQueries": 25,
+   "keptQueries": 11,
+   "keptImpressions": 38,
    "queries": [
-    {
-     "query": "wallis news",
-     "impressions": 41,
-     "clicks": 0,
-     "position": 5.9
-    },
-    {
-     "query": "parcheggio iselle di trasquera",
-     "impressions": 17,
-     "clicks": 1,
-     "position": 9.6
-    },
     {
      "query": "strassenzustand wallis",
      "impressions": 10,
      "clicks": 0,
      "position": 15.8
-    },
-    {
-     "query": "novità di stagione ticinesi",
-     "impressions": 9,
-     "clicks": 0,
-     "position": 15.1
-    },
-    {
-     "query": "strassensperrungen oberwallis",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 15.6
     },
     {
      "query": "strassensperrungen wallis aktuell",
@@ -4406,52 +2125,10 @@
      "position": 17.6
     },
     {
-     "query": "forfait fiscal valais",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 12.3
-    },
-    {
      "query": "pensione svizzera",
      "impressions": 4,
      "clicks": 0,
      "position": 36.3
-    },
-    {
-     "query": "terzo pilastro frontalieri",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 36.8
-    },
-    {
-     "query": "via notte fermeture",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 31.3
-    },
-    {
-     "query": "wallis news heute",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 14.5
-    },
-    {
-     "query": "ems la providence valais",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 38.7
-    },
-    {
-     "query": "impôt à la source valais",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 55.3
-    },
-    {
-     "query": "impot cantonal valais",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 35.7
     },
     {
      "query": "steuern wallis",
@@ -4466,28 +2143,10 @@
      "position": 7.7
     },
     {
-     "query": "ticino confronti",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 60
-    },
-    {
      "query": "valais tax",
      "impressions": 3,
      "clicks": 0,
      "position": 31.3
-    },
-    {
-     "query": "calcul impôt valais personne morale",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 97
-    },
-    {
-     "query": "degustazioni di vino vallese",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 40
     },
     {
      "query": "erbschaftssteuer wallis",
@@ -4496,28 +2155,10 @@
      "position": 86.5
     },
     {
-     "query": "impot sur la fortune valais",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 14.5
-    },
-    {
-     "query": "impots valais",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 41.5
-    },
-    {
      "query": "massimale pilastro 3a 2021",
      "impressions": 2,
      "clicks": 0,
      "position": 57
-    },
-    {
-     "query": "news wallis",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 17
     },
     {
      "query": "strassensperrungen wallis",
@@ -4526,28 +2167,10 @@
      "position": 20
     },
     {
-     "query": "tachofernauslese",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 60.5
-    },
-    {
      "query": "tassazione pilastro 3a",
      "impressions": 2,
      "clicks": 0,
      "position": 22
-    },
-    {
-     "query": "tasse sul prelievo pilastro 3a",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 22
-    },
-    {
-     "query": "taux imposition valais",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 54
     },
     {
      "query": "verkehr wallis",
@@ -4558,9 +2181,9 @@
    ]
   },
   "canton-zg": {
-   "totalQueries": 64,
-   "keptQueries": 32,
-   "keptImpressions": 163,
+   "totalQueries": 43,
+   "keptQueries": 23,
+   "keptImpressions": 141,
    "queries": [
     {
      "query": "steuerfuss cham",
@@ -4617,28 +2240,10 @@
      "position": 72.5
     },
     {
-     "query": "was ist los in zug heute",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 60
-    },
-    {
-     "query": "etax zug 2025",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 38
-    },
-    {
      "query": "steuerfuss kanton zug",
      "impressions": 3,
      "clicks": 0,
      "position": 48
-    },
-    {
-     "query": "zug corporate tax rate",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 49
     },
     {
      "query": "zug steuerfuss",
@@ -4657,12 +2262,6 @@
      "impressions": 2,
      "clicks": 0,
      "position": 45.5
-    },
-    {
-     "query": "medienmitteilung zug",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 77.5
     },
     {
      "query": "stadt zug veranstaltungen",
@@ -4701,12 +2300,6 @@
      "position": 46.5
     },
     {
-     "query": "tax law revision zug",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 45
-    },
-    {
      "query": "veranstaltungen kanton zug",
      "impressions": 2,
      "clicks": 0,
@@ -4719,34 +2312,10 @@
      "position": 34
     },
     {
-     "query": "zug article",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 10.5
-    },
-    {
      "query": "zug events heute",
      "impressions": 2,
      "clicks": 0,
      "position": 65
-    },
-    {
-     "query": "zug heute",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 59.5
-    },
-    {
-     "query": "zug news english",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 8.5
-    },
-    {
-     "query": "zug tax",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 7.5
     },
     {
      "query": "zug taxes",
@@ -4757,9 +2326,9 @@
    ]
   },
   "canton-zh": {
-   "totalQueries": 253,
-   "keptQueries": 80,
-   "keptImpressions": 451,
+   "totalQueries": 108,
+   "keptQueries": 41,
+   "keptImpressions": 230,
    "queries": [
     {
      "query": "steuerumfeld zürich",
@@ -4768,40 +2337,10 @@
      "position": 11.5
     },
     {
-     "query": "sick note zurich",
-     "impressions": 29,
-     "clicks": 0,
-     "position": 7.3
-    },
-    {
-     "query": "zürich mindestlohn 2027",
-     "impressions": 22,
-     "clicks": 0,
-     "position": 6.7
-    },
-    {
-     "query": "emergenza acqua",
-     "impressions": 19,
-     "clicks": 0,
-     "position": 47.5
-    },
-    {
-     "query": "newsletter zurich",
-     "impressions": 19,
-     "clicks": 0,
-     "position": 63.8
-    },
-    {
      "query": "grenzsteuersatz zürich",
      "impressions": 18,
      "clicks": 0,
      "position": 22.3
-    },
-    {
-     "query": "servizio idrico di emergenza",
-     "impressions": 18,
-     "clicks": 0,
-     "position": 47.5
     },
     {
      "query": "uetlibergtunnel aktuell",
@@ -4822,40 +2361,16 @@
      "position": 9.3
     },
     {
-     "query": "ich will abschätzen wie hoch die steuern in zürich sind und wie viel netto mir bleibt",
-     "impressions": 12,
-     "clicks": 0,
-     "position": 6.3
-    },
-    {
      "query": "ahv maximalrente 2026",
      "impressions": 11,
      "clicks": 0,
      "position": 44
     },
     {
-     "query": "zurich news",
-     "impressions": 9,
-     "clicks": 0,
-     "position": 43.4
-    },
-    {
      "query": "steuerfuss meilen 2026",
      "impressions": 8,
      "clicks": 0,
      "position": 10.9
-    },
-    {
-     "query": "déménager travailler banque genève",
-     "impressions": 7,
-     "clicks": 0,
-     "position": 4.9
-    },
-    {
-     "query": "marginal tax rate zurich",
-     "impressions": 7,
-     "clicks": 0,
-     "position": 50.7
     },
     {
      "query": "einkommensteuer zürich",
@@ -4876,12 +2391,6 @@
      "position": 16.5
     },
     {
-     "query": "altersrente aktuell",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 55.6
-    },
-    {
      "query": "einkommensteuer zürich tabelle",
      "impressions": 5,
      "clicks": 0,
@@ -4892,12 +2401,6 @@
      "impressions": 5,
      "clicks": 0,
      "position": 32.2
-    },
-    {
-     "query": "zürich news",
-     "impressions": 5,
-     "clicks": 0,
-     "position": 37
     },
     {
      "query": "zurich tax",
@@ -4912,52 +2415,16 @@
      "position": 47.8
     },
     {
-     "query": "bank now umzug",
-     "impressions": 4,
-     "clicks": 2,
-     "position": 4.3
-    },
-    {
-     "query": "cronaca zurigo oggi",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 28.5
-    },
-    {
      "query": "maximalrente ahv 2026",
      "impressions": 4,
      "clicks": 0,
      "position": 78.3
     },
     {
-     "query": "news zürich",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 55
-    },
-    {
-     "query": "rentenangleichung",
-     "impressions": 4,
-     "clicks": 0,
-     "position": 31.8
-    },
-    {
      "query": "ahv-maximalrente 2026",
      "impressions": 3,
      "clicks": 0,
      "position": 73.7
-    },
-    {
-     "query": "bis wann muss man die steuern bezahlen zürich",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 10.7
-    },
-    {
-     "query": "nebenverdienst steuern zürich",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 12.7
     },
     {
      "query": "steuerprogression zürich",
@@ -4984,28 +2451,10 @@
      "position": 41.3
     },
     {
-     "query": "sva zürich auszahlungstermine 2026",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 53.3
-    },
-    {
      "query": "verkehrslage zürich",
      "impressions": 3,
      "clicks": 0,
      "position": 30.7
-    },
-    {
-     "query": "wegleitung steuererklärung zürich 2024",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 67.3
-    },
-    {
-     "query": "zone klarheitsplan",
-     "impressions": 3,
-     "clicks": 0,
-     "position": 82.7
     },
     {
      "query": "zurich pension",
@@ -5020,46 +2469,10 @@
      "position": 66.3
     },
     {
-     "query": "51",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 5
-    },
-    {
-     "query": "ahv auszahlung 2026 zürich",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 36.5
-    },
-    {
-     "query": "aktueller rentenwert",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 77
-    },
-    {
-     "query": "apply for zurich academy trust vehicle cover easily",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 9.5
-    },
-    {
-     "query": "auffahrt zürich",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 45.5
-    },
-    {
      "query": "autosteuer zürich",
      "impressions": 2,
      "clicks": 0,
      "position": 84
-    },
-    {
-     "query": "car postal lignes",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 50.5
     },
     {
      "query": "diesel svizzera",
@@ -5078,48 +2491,6 @@
      "impressions": 2,
      "clicks": 0,
      "position": 51.5
-    },
-    {
-     "query": "max ahv-rente 2026",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 39.5
-    },
-    {
-     "query": "maximale ahv-rente 2026",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 45
-    },
-    {
-     "query": "news from zurich",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 64
-    },
-    {
-     "query": "news zurich",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 37
-    },
-    {
-     "query": "öffentlich verkehrsmittel",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 91
-    },
-    {
-     "query": "pension in switzerland for foreigners",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 9.5
-    },
-    {
-     "query": "prix essence friderici",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 47
     },
     {
      "query": "quellensteuer zürich 2026",
@@ -5146,28 +2517,10 @@
      "position": 52.5
     },
     {
-     "query": "rentenwert",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 66.5
-    },
-    {
-     "query": "rentenwerte",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 44
-    },
-    {
      "query": "steuerabzüge zürich",
      "impressions": 2,
      "clicks": 0,
      "position": 48
-    },
-    {
-     "query": "steuererklärung zürich wegleitung",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 15
     },
     {
      "query": "steuern zürich",
@@ -5194,28 +2547,10 @@
      "position": 68.5
     },
     {
-     "query": "sva auszahlung 2026",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 78
-    },
-    {
      "query": "tax rates switzerland 2026",
      "impressions": 2,
      "clicks": 0,
      "position": 91.5
-    },
-    {
-     "query": "tramlinie 50 zürich",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 9
-    },
-    {
-     "query": "velostrade",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 10
     },
     {
      "query": "verkehrslage zürich aktuell",
@@ -5224,22 +2559,22 @@
      "position": 33
     },
     {
-     "query": "wegleitung steuererklärung zürich 2025",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 68
-    },
-    {
-     "query": "zurich income tax",
-     "impressions": 2,
-     "clicks": 0,
-     "position": 52
-    },
-    {
      "query": "zurich tax rates",
      "impressions": 2,
      "clicks": 0,
      "position": 51.5
+    },
+    {
+     "query": "zurich taxes",
+     "impressions": 2,
+     "clicks": 0,
+     "position": 43.5
+    },
+    {
+     "query": "zürich verkehr",
+     "impressions": 2,
+     "clicks": 0,
+     "position": 40
     }
    ]
   }

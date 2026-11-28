@@ -15,6 +15,10 @@
  *   node generator/scripts/build-section-demand-vocabulary.mjs [--days 28] [--top 80]
  *        [--sections canton-ti,canton-vd] [--out <file>] [--dry-run]
  *
+ * PRIVACY: le query passano dal filtro `lib/section-demand-query-filter.mjs`
+ * (allowlist di dominio + scarto di nomi, contatti, codici) prima di essere
+ * aggregate; nel log finiscono solo conteggi.
+ *
  * Senza credenziali o con GSC non raggiungibile esce con codice 1 SENZA toccare
  * il file: un vocabolario vecchio e' meglio di uno vuoto. Le sezioni senza
  * righe restano fuori (il ranker le tratta come "vocabolario insufficiente").
@@ -26,6 +30,7 @@ import { fileURLToPath } from 'node:url';
 
 import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import { SECTION_DEMAND_VOCABULARY_VERSION } from './lib/canton-section-demand-ranker.mjs';
+import { QUERY_FILTER_VERSION, classifyDemandQuery } from './lib/section-demand-query-filter.mjs';
 
 const GSC_SITE = 'sc-domain:frontaliereticino.ch';
 const GSC_SCOPE = 'https://www.googleapis.com/auth/webmasters.readonly';
@@ -75,14 +80,24 @@ function pathOfPage(value) {
 /**
  * Funzione pura: righe GSC `{keys: [query, page], clicks, impressions, position}`
  * -> `{[section]: {...}}`. Esportata per i test.
+ *
+ * PRIVACY: ogni query passa da `classifyDemandQuery` PRIMA dell'aggregazione e
+ * quelle che non sono domanda di dominio (nomi di persone, contatti, codici,
+ * operatori) vengono SCARTATE, non anonimizzate. Se si passa `stats`, vi si
+ * accumulano SOLO i conteggi per categoria di scarto (query distinte): mai il
+ * testo di una query scartata.
  */
-export function buildVocabularySections(rows, aliasMap, { top = DEFAULT_TOP, minImpressions = MIN_QUERY_IMPRESSIONS } = {}) {
+export function buildVocabularySections(rows, aliasMap, { top = DEFAULT_TOP, minImpressions = MIN_QUERY_IMPRESSIONS, stats = null } = {}) {
   const acc = new Map();
+  const verdicts = new Map();
   for (const row of rows) {
     const [rawQuery, page] = row.keys || [];
     const section = sectionOfPath(pathOfPage(page), aliasMap);
     const query = String(rawQuery ?? '').toLowerCase().replace(/\s+/g, ' ').trim();
     if (!section || !query) continue;
+    let verdict = verdicts.get(query);
+    if (!verdict) { verdict = classifyDemandQuery(query); verdicts.set(query, verdict); }
+    if (!verdict.keep) continue;
     const bySection = acc.get(section) || new Map();
     const bucket = bySection.get(query) || { clicks: 0, impressions: 0, positionWeighted: 0 };
     bucket.clicks += row.clicks || 0;
@@ -90,6 +105,14 @@ export function buildVocabularySections(rows, aliasMap, { top = DEFAULT_TOP, min
     bucket.positionWeighted += (row.position || 0) * (row.impressions || 0);
     bySection.set(query, bucket);
     acc.set(section, bySection);
+  }
+  if (stats) {
+    stats.discarded = {};
+    stats.keptDistinct = 0;
+    for (const verdict of verdicts.values()) {
+      if (verdict.keep) stats.keptDistinct += 1;
+      else stats.discarded[verdict.reason] = (stats.discarded[verdict.reason] || 0) + 1;
+    }
   }
   const sections = {};
   for (const section of [...acc.keys()].sort()) {
@@ -181,7 +204,8 @@ async function main() {
     if (sweep.truncated) truncated.push(alias);
     rows.push(...sweep.rows);
   }
-  const built = buildVocabularySections(rows, aliasMap, { top });
+  const stats = {};
+  const built = buildVocabularySections(rows, aliasMap, { top, stats });
   const document = {
     version: SECTION_DEMAND_VOCABULARY_VERSION,
     source: 'google-search-console',
@@ -189,11 +213,15 @@ async function main() {
     generatedAt: new Date().toISOString(),
     top,
     minQueryImpressions: MIN_QUERY_IMPRESSIONS,
+    queryFilterVersion: QUERY_FILTER_VERSION,
+    // Solo conteggi per categoria di scarto, mai il testo delle query scartate.
+    discardedByReason: stats.discarded,
     truncatedAliases: truncated,
     sections: built,
   };
   const summary = Object.entries(built).map(([s, v]) => `${s}:${v.keptQueries}q/${v.keptImpressions}i`).join(' ');
   console.error(`vocabolario: ${Object.keys(built).length}/${sections.length} sezioni con segnale (${windowFrom}..${windowTo}) ${summary}`);
+  console.error(`query distinte tenute=${stats.keptDistinct} scartate per categoria: ${JSON.stringify(stats.discarded)}`);
   if (Object.keys(built).length === 0) throw new Error('nessuna sezione con query: il file non viene toccato');
   if (args['dry-run']) return;
   fs.mkdirSync(path.dirname(out), { recursive: true });

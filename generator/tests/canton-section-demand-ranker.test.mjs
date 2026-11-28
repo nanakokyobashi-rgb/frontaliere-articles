@@ -11,6 +11,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import {
+  MAX_VOCABULARY_AGE_DAYS,
   MIN_VOCABULARY_QUERIES,
   compileVocabulary,
   demandScore,
@@ -26,6 +27,7 @@ import {
   sectionOfPath,
 } from '../scripts/build-section-demand-vocabulary.mjs';
 import { buildCantonProfile } from '../scripts/lib/canton-section-profile.mjs';
+import { classifyDemandQuery, queryRef } from '../scripts/lib/section-demand-query-filter.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = fs.readFileSync(path.join(HERE, '../scripts/create-article.mjs'), 'utf8');
@@ -69,7 +71,7 @@ test('con vocabolario: la headline con piu domanda precede quella senza, a parit
   assert.equal(r.picks.length, 1);
   assert.match(r.picks[0].headline, /Premi cassa malati/);
   assert.equal(r.picks[0]._selectedSource, 'section-demand');
-  assert.ok(r.picks[0]._score.matchedQueries.includes('premi cassa malati 2027'));
+  assert.ok(r.picks[0]._score.matchedQueryRefs.includes(queryRef('premi cassa malati 2027')));
 });
 
 test('senza vocabolario l ordine del pool non viene riordinato (nessuna scelta)', () => {
@@ -159,8 +161,8 @@ test('loader: file mancante, rotto o di altra versione => null', () => {
   assert.equal(loadSectionDemandVocabulary(path.join(dir, 'bad.json')), null);
   fs.writeFileSync(path.join(dir, 'v9.json'), JSON.stringify({ version: 9, sections: {} }));
   assert.equal(loadSectionDemandVocabulary(path.join(dir, 'v9.json')), null);
-  fs.writeFileSync(path.join(dir, 'ok.json'), JSON.stringify({ version: 1, sections: { 'canton-ti': vocab() } }));
-  const loaded = loadSectionDemandVocabulary(path.join(dir, 'ok.json'));
+  fs.writeFileSync(path.join(dir, 'ok.json'), JSON.stringify({ version: 1, generatedAt: hoursAgo(24 * 3).toISOString(), sections: { 'canton-ti': vocab() } }));
+  const loaded = loadSectionDemandVocabulary(path.join(dir, 'ok.json'), { now: NOW });
   assert.ok(sectionVocabularyFor(loaded, 'canton-ti'));
   assert.equal(sectionVocabularyFor(loaded, 'canton-vd'), null);
 });
@@ -192,4 +194,153 @@ test('vocabolario versionato: file valido e le sezioni presenti hanno segnale su
     assert.match(section, /^canton-[a-z]+$/);
     assert.ok(Array.isArray(entry.queries) && entry.queries.length > 0, section);
   }
+});
+
+// ── Privacy, invecchiamento e pool vecchio (round 2 di F6.2). DATI INVENTATI. ──
+
+function captureStderr(fn) {
+  const original = console.error;
+  const lines = [];
+  console.error = (...args) => { lines.push(args.join(' ')); };
+  try { return { result: fn(), lines }; } finally { console.error = original; }
+}
+
+test('filtro: scarta, non anonimizza, nomi di persona inventati con o senza dominio', () => {
+  const discarded = [
+    'giacomo verdi lugano',        // nome + localita'
+    'verdi lugano',                // solo cognome + localita'
+    'giacomo verdi',               // nome cognome senza dominio
+    'mario rossi stipendio',       // stipendio di una persona
+    'stipendio giacomo verdi',
+    'rossi steuererklärung',       // cognome + dominio: un token ignoto potrebbe essere un cognome
+    'ehemann von lucia neri steuern',
+    'moglie di giacomo verdi',
+    'necrologio ticino',
+    'todesanzeige aargau',
+  ];
+  for (const q of discarded) assert.equal(classifyDemandQuery(q).keep, false, 'scartata: categoria ' + classifyDemandQuery(q).reason);
+  assert.equal(classifyDemandQuery('mario rossi stipendio').reason, 'person_pattern');
+  assert.equal(classifyDemandQuery('ehemann von lucia neri steuern').reason, 'person_pattern');
+  assert.ok(['unknown_token', 'no_domain'].includes(classifyDemandQuery('giacomo verdi').reason));
+});
+
+test('filtro: contatti, cifre, sintassi, lunghezza e query troppo corte', () => {
+  assert.equal(classifyDemandQuery('info@esempio.invalid steuer').reason, 'contact');
+  assert.equal(classifyDemandQuery('https://esempio.invalid/steuer').reason, 'contact');
+  assert.equal(classifyDemandQuery('www.esempio steuer').reason, 'contact');
+  assert.equal(classifyDemandQuery('079 123 45 67 steuer').reason, 'digits');
+  assert.equal(classifyDemandQuery('0791234567').reason, 'digits');
+  assert.equal(classifyDemandQuery('steuer abc123;def').reason, 'syntax');
+  assert.equal(classifyDemandQuery('"steuer" AND (lohn OR gehalt)').reason, 'syntax');
+  assert.equal(classifyDemandQuery('steuer ' + 'parola '.repeat(12)).reason, 'too_long');
+  assert.equal(classifyDemandQuery('a').reason, 'too_short');
+  assert.equal(classifyDemandQuery('1 2').reason, 'too_short');
+});
+
+test('filtro MEDIUM: query generiche a un token o di sole cifre fuori', () => {
+  for (const q of ['yes', 'oui', '2026', '12345', 'benzina', 'frontaliere', 'ticino', 'zürich']) {
+    assert.equal(classifyDemandQuery(q).keep, false, q);
+  }
+  assert.equal(classifyDemandQuery('2026 2027').keep, false);
+});
+
+test('filtro: righe lecite di dominio restano (4 lingue)', () => {
+  for (const q of ['steuerfuss zürich 2026', 'premi cassa malati 2027', 'imposta alla fonte ticino', 'salario infermiere ticino', 'quellensteuer kanton zug', 'affitti lugano', 'permesso G frontalieri', 'stau a2 basel heute', 'fiscalité genève', 'eventi ticino oggi']) {
+    assert.deepEqual(classifyDemandQuery(q), { keep: true, reason: null }, q);
+  }
+});
+
+test('builder: scarta PRIMA dell aggregazione; i conteggi non contengono testo delle query', () => {
+  const aliasMap = buildAliasMap(['canton-ti']);
+  const page = 'https://frontaliereticino.ch/articoli-ticino/x';
+  const row = (query, impressions) => ({ keys: [query, page], clicks: 0, impressions, position: 8 });
+  const rows = [
+    row('Steuerfuss Zürich 2026', 40),
+    row('affitti lugano', 30),
+    row('giacomo verdi lugano', 500),
+    row('mario rossi stipendio', 500),
+    row('info@esempio.invalid', 500),
+    row('079 123 45 67', 500),
+    row('abc123;def steuer', 500),
+    row('yes', 500),
+  ];
+  const stats = {};
+  const out = buildVocabularySections(rows, aliasMap, { stats });
+  assert.deepEqual(out['canton-ti'].queries.map((q) => q.query), ['steuerfuss zürich 2026', 'affitti lugano']);
+  assert.equal(out['canton-ti'].totalQueries, 2, 'le scartate non entrano nemmeno nel totale');
+  assert.equal(stats.keptDistinct, 2);
+  assert.equal(Object.values(stats.discarded).reduce((a, b) => a + b, 0), 6);
+  const dump = JSON.stringify({ out, stats });
+  for (const leaked of ['verdi', 'rossi', 'esempio', '123', 'abc']) assert.ok(!dump.includes(leaked), 'nessun testo scartato nell output');
+});
+
+test('runtime: un JSON vecchio con nomi non li porta nel ranker ne nel punteggio', () => {
+  const dirty = { queries: [...vocab().queries, { query: 'giacomo verdi lugano', impressions: 900, clicks: 9, position: 5 }, { query: 'verdi', impressions: 900, clicks: 9, position: 5 }] };
+  const compiled = compileVocabulary(dirty, { ignoreTerms: IGNORE });
+  assert.ok(compiled.every((c) => !/verdi/.test(JSON.stringify(c))), 'nessuna voce compilata dai nomi');
+  const r = rankCantonHeadlines([h('Giacomo Verdi a Lugano: incontro pubblico', 2)], dirty, { now: NOW, ignoreTerms: IGNORE });
+  assert.deepEqual(r.picks, [], 'la headline con il nome non trova domanda');
+  // Un vocabolario sufficiente SOLO grazie alle query personali diventa insufficiente.
+  const names = Array.from({ length: 10 }, (_, i) => ({ query: `giacomo verdi${i} lugano`, impressions: 100, clicks: 1, position: 7 }));
+  assert.equal(usableSectionVocabulary({ queries: names }), null);
+});
+
+test('log: il ranker espone solo un riferimento breve della query, mai il testo', () => {
+  const r = rankCantonHeadlines([h('Premi cassa malati 2027: aumento medio', 3)], vocab(), { now: NOW, ignoreTerms: IGNORE });
+  const refs = r.picks[0]._score.matchedQueryRefs;
+  assert.ok(refs.length > 0 && refs.every((x) => /^q-[0-9a-f]{8}$/.test(x)));
+  assert.ok(!JSON.stringify(r.picks[0]._score).includes('premi cassa'));
+  assert.ok(/matchedQueryRefs\.join/.test(CREATE_ARTICLE) && !/matchedQueries/.test(CREATE_ARTICLE), 'create-article logga i riferimenti');
+});
+
+test('loader: vocabolario stantio (> 45 giorni) o senza data => null con SECTION_DEMAND_STALE', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'sdv-stale-'));
+  const write = (name, generatedAt) => {
+    const file = path.join(dir, name);
+    fs.writeFileSync(file, JSON.stringify({ version: 1, ...(generatedAt ? { generatedAt } : {}), sections: { 'canton-ti': vocab() } }));
+    return file;
+  };
+  assert.equal(MAX_VOCABULARY_AGE_DAYS, 45);
+  const stale = captureStderr(() => loadSectionDemandVocabulary(write('old.json', hoursAgo(24 * 60).toISOString()), { now: NOW }));
+  assert.equal(stale.result, null);
+  assert.ok(stale.lines.some((l) => l.startsWith('SECTION_DEMAND_STALE')));
+  assert.ok(stale.lines.every((l) => !l.includes('premi cassa')), 'il log stantio non cita query');
+  const edge = captureStderr(() => loadSectionDemandVocabulary(write('edge.json', hoursAgo(24 * 44).toISOString()), { now: NOW }));
+  assert.ok(edge.result, '44 giorni e\' ancora valido');
+  assert.deepEqual(edge.lines, []);
+  assert.equal(captureStderr(() => loadSectionDemandVocabulary(write('nodate.json', null), { now: NOW })).result, null);
+});
+
+test('no-fresh-pool: se la fascia migliore e la 2 (vecchia o senza data) nessuna scelta', () => {
+  const old = rankCantonHeadlines([h('Premi cassa malati 2027 in aumento', 24 * 20), h('Imposta alla fonte, cosa cambia', null)], vocab(), { now: NOW, ignoreTerms: IGNORE });
+  assert.deepEqual(old.picks, []);
+  assert.equal(old.reason, 'no-fresh-pool');
+  assert.equal(old.band, 2);
+  const recent = rankCantonHeadlines([h('Premi cassa malati 2027 in aumento', 100)], vocab(), { now: NOW, ignoreTerms: IGNORE });
+  assert.equal(recent.picks.length, 1, 'la fascia 1 (recente) continua a funzionare');
+  assert.equal(recent.band, 1);
+});
+
+test('vocabolario versionato: ogni query presente passa il filtro di privacy', () => {
+  const file = path.join(HERE, '../data/section-demand-vocabulary.json');
+  const doc = JSON.parse(fs.readFileSync(file, 'utf8'));
+  let total = 0;
+  let rejected = 0;
+  for (const entry of Object.values(doc.sections)) {
+    for (const q of entry.queries) { total += 1; if (!classifyDemandQuery(q.query).keep) rejected += 1; }
+  }
+  assert.ok(total > 0);
+  assert.equal(rejected, 0, 'nessuna query personale o fuori dominio nel file versionato');
+  assert.ok(doc.discardedByReason && typeof doc.discardedByReason === 'object', 'conteggi di scarto presenti, mai testo');
+});
+
+test('workflow di rinnovo mensile: schedule + dispatch, builder, PR con PAT', () => {
+  const wf = fs.readFileSync(path.join(HERE, '../../.github/workflows/refresh-section-demand-vocabulary.yml'), 'utf8');
+  assert.match(wf, /\n  schedule:\n(?:\s+#.*\n)*\s+- cron: '[^']+'/);
+  assert.match(wf, /workflow_dispatch:/);
+  assert.match(wf, /node generator\/scripts\/load-rc-env\.mjs/);
+  assert.match(wf, /build-section-demand-vocabulary\.mjs/);
+  assert.match(wf, /gh pr create/);
+  assert.match(wf, /## Implementato/);
+  assert.match(wf, /## Non implementato \(ancora\)/);
 });

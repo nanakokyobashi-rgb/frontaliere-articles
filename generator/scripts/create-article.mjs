@@ -22783,7 +22783,7 @@ async function main() {
                   chosen = ranked.picks[0];
                   rankerTier = 'section-demand';
                   rankerScoreObj = chosen._score;
-                  console.error(`   ✅ Ranker sezione: score=${chosen._score.score.toFixed(3)} fascia=${chosen._score.freshnessBand} query=${chosen._score.matchedQueries.join(' | ')}`);
+                  console.error(`   ✅ Ranker sezione: score=${chosen._score.score.toFixed(3)} fascia=${chosen._score.freshnessBand} query=${chosen._score.matchedQueryRefs.join(' | ')}`);
                   console.error(`   📰 ${safeTopicSelectionLogLabel(chosen)}\n`);
                 }
               } catch {

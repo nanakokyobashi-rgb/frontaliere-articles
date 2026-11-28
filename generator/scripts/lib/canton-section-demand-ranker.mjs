@@ -21,11 +21,19 @@
  *     vince l'ordine originale del pool;
  *  3. nessuna query riconosciuta nella fascia fresca => nessuna scelta
  *     (`picks` vuoto) e il chiamante prosegue con la selezione di oggi;
- *  4. sezione senza vocabolario sufficiente => nessuna scelta, stesso esito.
+ *  4. sezione senza vocabolario sufficiente => nessuna scelta, stesso esito;
+ *  5. se la fascia migliore del pool e' la 2 (tutto vecchio o senza data) =>
+ *     `no-fresh-pool`: nessuna scelta, decide la selezione LLM di oggi;
+ *  6. PRIVACY: le query del vocabolario passano a runtime dallo stesso filtro
+ *     del builder (allowlist di dominio, niente nomi/contatti/codici) e nei log
+ *     compare solo un riferimento breve (`q-<hash>`), mai la query intera;
+ *  7. un vocabolario con `generatedAt` piu' vecchio di 45 giorni non si carica.
  *
  * Funzioni pure salvo `loadSectionDemandVocabulary` (legge un file JSON).
  */
 import fs from 'node:fs';
+
+import { isAllowedDemandQuery, queryRef } from './section-demand-query-filter.mjs';
 
 export const SECTION_DEMAND_VOCABULARY_VERSION = 1;
 /** Sotto queste soglie la sezione non ha segnale sufficiente: comportamento di oggi. */
@@ -33,6 +41,8 @@ export const MIN_VOCABULARY_QUERIES = 8;
 export const MIN_VOCABULARY_IMPRESSIONS = 60;
 export const FRESH_HOURS = 48;
 export const RECENT_HOURS = 24 * 7;
+/** Oltre questa eta' il vocabolario non descrive piu' la domanda: comportamento di oggi. */
+export const MAX_VOCABULARY_AGE_DAYS = 45;
 const HOUR_MS = 3600 * 1000;
 const NOVELTY_DUP_JACCARD = 0.6;
 
@@ -102,7 +112,8 @@ export function queryWeight(entry) {
  */
 export function usableSectionVocabulary(sectionVocab) {
   const queries = Array.isArray(sectionVocab?.queries) ? sectionVocab.queries : [];
-  const valid = queries.filter((q) => typeof q?.query === 'string' && q.query.trim() && Number(q.impressions) > 0);
+  // Difesa a runtime: un JSON vecchio non deve riportare dati personali nei log.
+  const valid = queries.filter((q) => typeof q?.query === 'string' && q.query.trim() && Number(q.impressions) > 0 && isAllowedDemandQuery(q.query));
   const impressions = valid.reduce((sum, q) => sum + Number(q.impressions), 0);
   if (valid.length < MIN_VOCABULARY_QUERIES || impressions < MIN_VOCABULARY_IMPRESSIONS) return null;
   return { queries: valid, impressions };
@@ -119,7 +130,7 @@ export function compileVocabulary(sectionVocab, { ignoreTerms = [] } = {}) {
     // Una query fatta solo del nome del cantone non e' domanda su un argomento.
     if (stems.length === 0) continue;
     const required = stems.length <= 2 ? stems.length : Math.ceil(stems.length * 0.67);
-    compiled.push({ query: entry.query, stems, required, weight: queryWeight(entry) });
+    compiled.push({ ref: queryRef(entry.query), stems, required, weight: queryWeight(entry) });
   }
   return compiled.length >= MIN_VOCABULARY_QUERIES ? compiled : null;
 }
@@ -134,7 +145,7 @@ export function demandScore(headlineText, compiled) {
     for (const stem of entry.stems) if (stems.has(stem)) hits += 1;
     if (hits >= entry.required) {
       score += entry.weight;
-      if (matched.length < 5) matched.push(entry.query);
+      if (matched.length < 5) matched.push(entry.ref);
     }
   }
   return { score, matched };
@@ -202,6 +213,8 @@ export function rankCantonHeadlines(headlines, sectionVocab, opts = {}) {
   const bandOpts = { freshHours: opts.freshHours, recentHours: opts.recentHours };
   const banded = list.map((h, index) => ({ h, index, band: freshnessBand(h, now, bandOpts) }));
   const bestBand = Math.min(...banded.map((x) => x.band));
+  // Pool tutto vecchio o senza data: la domanda non decide, resta la selezione LLM.
+  if (bestBand >= 2) return { picks: [], reason: 'no-fresh-pool', band: bestBand, considered: 0 };
   const existing = Array.isArray(opts.existingTitles) ? opts.existingTitles : [];
   const scored = [];
   for (const { h, index, band } of banded) {
@@ -218,7 +231,7 @@ export function rankCantonHeadlines(headlines, sectionVocab, opts = {}) {
     ...top.h,
     relatedHeadlines: relatedHeadlinesFor(top.h, list),
     _selectedSource: 'section-demand',
-    _score: { score: top.score, demandScore: top.score, matchedQueries: top.matched, freshnessBand: bestBand },
+    _score: { score: top.score, demandScore: top.score, matchedQueryRefs: top.matched, freshnessBand: bestBand },
     _cluster: null,
   };
   return { picks: [pick], reason: 'demand-match', band: bestBand, considered: scored.length };
@@ -226,12 +239,20 @@ export function rankCantonHeadlines(headlines, sectionVocab, opts = {}) {
 
 /**
  * Legge il vocabolario per sezione. Mai un'eccezione: file mancante, JSON
- * rotto o versione diversa => null (comportamento di oggi).
+ * rotto, versione diversa o `generatedAt` assente/piu' vecchio di
+ * `MAX_VOCABULARY_AGE_DAYS` => null (comportamento di oggi). Il caso stantio
+ * logga `SECTION_DEMAND_STALE` con la sola data, nessuna query.
  */
-export function loadSectionDemandVocabulary(filePath) {
+export function loadSectionDemandVocabulary(filePath, { now = Date.now(), maxAgeDays = MAX_VOCABULARY_AGE_DAYS } = {}) {
   try {
     const parsed = JSON.parse(fs.readFileSync(filePath, 'utf8'));
     if (!parsed || parsed.version !== SECTION_DEMAND_VOCABULARY_VERSION || typeof parsed.sections !== 'object') return null;
+    const generated = Date.parse(parsed.generatedAt);
+    const ageDays = Number.isNaN(generated) ? null : (now - generated) / (24 * HOUR_MS);
+    if (ageDays === null || ageDays > maxAgeDays) {
+      console.error(`SECTION_DEMAND_STALE generatedAt=${Number.isNaN(generated) ? 'invalid' : parsed.generatedAt} ageDays=${ageDays === null ? 'n/a' : Math.floor(ageDays)} maxAgeDays=${maxAgeDays} fallback=llm_selector`);
+      return null;
+    }
     return parsed;
   } catch {
     return null;

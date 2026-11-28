@@ -1,0 +1,164 @@
+name: Refresh section demand vocabulary
+
+# Rigenera ogni mese `generator/data/section-demand-vocabulary.json` (F6.2):
+# il vocabolario di domanda di ricerca PER SEZIONE cantonale che il ranker
+# locale `canton-section-demand-ranker.mjs` usa dopo la freschezza delle
+# notizie. Il loader scarta un vocabolario con `generatedAt` piu' vecchio di
+# 45 giorni (log `SECTION_DEMAND_STALE`, selezione LLM di sempre): questo
+# workflow evita che il ranker si spenga in silenzio.
+#
+# PRIVACY: le query di Search Console passano dal filtro
+# `generator/scripts/lib/section-demand-query-filter.mjs` (allowlist di dominio,
+# scarto di nomi di persone, contatti, codici) PRIMA dell'aggregazione. Il
+# builder stampa solo conteggi per categoria, mai il testo di una query. La PR
+# contiene solo il JSON filtrato.
+#
+# Una PR alla volta: se ce n'e' una aperta (prefisso `chore/section-demand-vocabulary-`)
+# il run esce verde senza fare nulla. Il push usa il PAT di Remote Config,
+# perche' un push col GITHUB_TOKEN non fa partire `tests` e la review.
+
+on:
+  schedule:
+    # Il 3 di ogni mese alle 06:41 UTC: GSC ha gia' pubblicato i giorni a
+    # cavallo del mese e il cron e' sfalsato dagli altri.
+    - cron: '41 6 3 * *'
+  workflow_dispatch:
+    inputs:
+      days:
+        description: 'Finestra Search Console in giorni (default 28)'
+        required: false
+        default: '28'
+        type: string
+      dry_run:
+        description: 'Costruisce e stampa i conteggi, ma non scrive ne apre la PR'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: refresh-section-demand-vocabulary
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      DAYS: ${{ inputs.days || '28' }}
+      DRY_RUN: ${{ inputs.dry_run == true && 'true' || 'false' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          # Il push usa il PAT caricato da Remote Config: con le credenziali
+          # persistite dal checkout v7 si autenticherebbe come GITHUB_TOKEN.
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Setup isolated article source runtime
+        uses: ./.github/actions/setup-article-source-runtime
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON assente: servono il service account di Search Console e il PAT del push"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      # Il loader esce 0 anche quando non carica niente: il controllo di
+      # successo e' esplicito nello step dopo.
+      - name: Load secrets from Remote Config
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Remote Config loaded
+        run: |
+          set -euo pipefail
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "::error::Remote Config non caricato (GITHUB_PAT_NANAKO assente): senza PAT la PR non farebbe partire i check"
+            exit 1
+          fi
+
+      # Una PR alla volta: prefisso del branch con `gh api --paginate`, solo
+      # branch di questo repo (un fork non puo' spegnere il rinnovo).
+      - name: Guard — rinnovo gia' in volo
+        id: guard
+        env:
+          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" --jq '.[] | [.head.repo.full_name, .head.ref] | @tsv' |
+            awk -F '\t' -v repo="$REPO" '$1 == repo { print $2 }' > /tmp/open-prs.txt
+          OPEN=$(grep -c '^chore/section-demand-vocabulary-' /tmp/open-prs.txt || true)
+          echo "open_refreshes=$OPEN" >> "$GITHUB_OUTPUT"
+          if [ "$OPEN" != "0" ]; then
+            echo "::notice::Un rinnovo del vocabolario e' gia' aperto: niente di nuovo finche' non si chiude."
+          fi
+
+      - name: Install dependencies
+        if: steps.guard.outputs.open_refreshes == '0'
+        run: bash scripts/lib/npm-ci-retry.sh
+
+      # Senza credenziali o con GSC non raggiungibile il builder esce 1 senza
+      # toccare il file: un vocabolario vecchio e' meglio di uno vuoto.
+      - name: Rebuild the vocabulary (counts only in the log)
+        if: steps.guard.outputs.open_refreshes == '0'
+        run: |
+          set -euo pipefail
+          case "$DAYS" in ''|*[!0-9]*) echo "::error::days non numerico"; exit 1 ;; esac
+          ARGS=(--days "$DAYS")
+          if [ "$DRY_RUN" = "true" ]; then ARGS+=(--dry-run); fi
+          node generator/scripts/build-section-demand-vocabulary.mjs "${ARGS[@]}"
+
+      - name: Open the refresh PR
+        if: steps.guard.outputs.open_refreshes == '0' && env.DRY_RUN != 'true'
+        env:
+          REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          FILE=generator/data/section-demand-vocabulary.json
+          if git diff --quiet -- "$FILE"; then
+            echo "nessun cambiamento nel vocabolario: niente PR"
+            exit 0
+          fi
+          # Solo conteggi: il file e' gia' filtrato e il body non cita query.
+          SECTIONS="$(node -e 'const d=JSON.parse(require("fs").readFileSync(process.argv[1],"utf8"));console.log(Object.keys(d.sections).length)' "$FILE")"
+          GENERATED="$(node -e 'const d=JSON.parse(require("fs").readFileSync(process.argv[1],"utf8"));console.log(d.generatedAt)' "$FILE")"
+          BRANCH="chore/section-demand-vocabulary-${GITHUB_RUN_ID}"
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout -b "$BRANCH"
+          git add -- "$FILE"
+          git commit -m "chore(selezione): rinnovo vocabolario di domanda per sezione"
+          git remote set-url origin "https://x-access-token:${GITHUB_PAT_NANAKO}@github.com/${REPO}.git"
+          git push origin "$BRANCH"
+          {
+            echo '## Implementato'
+            echo "- Rigenerato \`generator/data/section-demand-vocabulary.json\` (generatedAt ${GENERATED}, ${SECTIONS} sezioni con segnale) da Search Console, filtrato per privacy prima dell'aggregazione: il file contiene solo query di dominio, nessun nome di persona, contatto o codice. Run: ${RUN_URL}"
+            echo
+            echo '## Non implementato (ancora)'
+            echo "- Nessuna modifica al ranker ne' ai profili: il rinnovo cambia solo i dati. **Stato:** \`Nessun lavoro dovuto\`"
+          } > /tmp/pr-body.md
+          GH_TOKEN="$GITHUB_PAT_NANAKO" gh pr create --repo "$REPO" --base main --head "$BRANCH" \
+            --title "chore(selezione): rinnovo vocabolario di domanda per sezione" \
+            --body-file /tmp/pr-body.md
+
+      - name: Cleanup credentials
+        if: always()
+        run: rm -f "$RUNNER_TEMP/sa.json"
