@@ -7918,10 +7918,10 @@
       "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-11-28T05:59:56.436Z",
-      "lastStrikeAt": "2026-11-28T07:38:25.659Z",
-      "expiresAt": "2026-12-28T07:38:25.659Z"
+      "lastStrikeAt": "2026-11-28T08:29:04.121Z",
+      "expiresAt": "2026-12-28T08:29:04.121Z"
     },
     {
       "keyword": "targhe e immatricolazione canton Svitto guida a procedura e costi",
@@ -7942,10 +7942,22 @@
       "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-28T07:44:30.599Z",
-      "lastStrikeAt": "2026-11-28T07:44:30.599Z",
-      "expiresAt": "2026-12-28T07:44:30.599Z"
+      "lastStrikeAt": "2026-11-28T08:33:01.821Z",
+      "expiresAt": "2026-12-28T08:33:01.821Z"
+    },
+    {
+      "keyword": "permesso di dimora B canton Obvaldo requisiti e rinnovo",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-28T08:37:51.997Z",
+      "lastStrikeAt": "2026-11-28T08:37:51.997Z",
+      "expiresAt": "2026-12-28T08:37:51.997Z"
     }
   ],
   "legacy": [
