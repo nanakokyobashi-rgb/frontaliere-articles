@@ -7,7 +7,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
 
-import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
+import { ARTICLE_SECTION_CORE_ALL, ARTICLE_SECTION_CORE_LIST } from '../../engine/shared/articleSectionCore.mjs';
 import {
   EMBEDDING_NEAR_DUP_CORPUS_BASELINE,
   EMBEDDING_NEAR_DUP_CORPUS_SCALE_K,
@@ -19,7 +19,7 @@ import { cosineSimilarity } from '../../generator/scripts/lib/scoring/embeddingM
 import { buildDedupText } from '../../generator/scripts/lib/scoring/semanticDedup.mjs';
 import { EMBEDDING_DIM, EMBEDDING_MODEL } from '../../generator/scripts/lib/evidence/constants.mjs';
 import { cantonSectionPaths } from '../../generator/scripts/lib/canton-section-profile.mjs';
-import { sectionWriteSurfaces } from '../lib/article-surfaces.mjs';
+import { r2PublishPlan, r2PublishPlanForRange } from './fast-publish-section.mjs';
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(SCRIPT_DIR, '../..');
@@ -375,6 +375,21 @@ function dateMs(value) {
   if (typeof value !== 'string' || value === INVALID_DATE) return null;
   const parsed = Date.parse(value);
   return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
+}
+
+export function publishRunDurationMinutes(run) {
+  const startedAt = dateMs(run?.startedAt) ?? dateMs(run?.createdAt);
+  const finishedAt = dateMs(run?.updatedAt);
+  if (startedAt === null || finishedAt === null || finishedAt < startedAt) return null;
+  return (finishedAt - startedAt) / 60_000;
+}
+
+export function isNoopFastPublishRun(run, commit) {
+  const event = String(run?.event || '').toLowerCase();
+  return Boolean(commit)
+    && Array.isArray(commit.touchedSections)
+    && commit.touchedSections.length === 0
+    && (!event || event === 'push');
 }
 
 function shellFreeGit(args, options = {}) {
@@ -1444,15 +1459,20 @@ export function countPushFiveAttemptExhaustions(logText) {
 function parseMainCommits(window) {
   const output = shellFreeGit([
     'log', 'origin/main', '--first-parent', `--since=${window.start.toISOString()}`,
-    `--until=${new Date(window.endExclusive.getTime() - 1).toISOString()}`, '--format=%H%x09%ct', '--name-only',
+    `--until=${new Date(window.endExclusive.getTime() - 1).toISOString()}`, '--format=%H%x09%P%x09%ct', '--name-only',
   ]);
   const commits = [];
   let current = null;
   for (const line of output.split(/\r?\n/)) {
     if (!line.trim()) continue;
-    const header = line.match(/^([0-9a-f]{40})\t(\d+)$/);
+    const header = line.match(/^([0-9a-f]{40})\t([0-9a-f ]*)\t(\d+)$/);
     if (header) {
-      current = { sha: header[1], commitAt: Number(header[2]) * 1000, changedPaths: [] };
+      current = {
+        sha: header[1],
+        parent: header[2].trim().split(/\s+/u)[0] || null,
+        commitAt: Number(header[3]) * 1000,
+        changedPaths: [],
+      };
       commits.push(current);
     } else if (current) current.changedPaths.push(line.trim());
   }
@@ -1464,39 +1484,91 @@ function sectionFromPublishTitle(run) {
   return value && ARTICLE_SECTION_CORE_ALL[value] ? value : 'unknown';
 }
 
-function pathsInSurface(value) {
-  if (typeof value === 'string') return [value.split(':')[0]];
-  if (Array.isArray(value)) return value.flatMap(pathsInSurface);
-  return [];
+/**
+ * Map live per-section concurrency jobs to their sections.
+ *
+ * Count every live matrix job regardless of whether it is waiting on a
+ * dependency or a section concurrency group. Resolve and API-coordinator jobs
+ * have no section assignment; an explicit workflow_dispatch target is used
+ * when no live matrix job exists yet, while automatic runs remain unscoped.
+ */
+export function publishSectionsFromJobs(jobs = [], { liveOnly = false } = {}) {
+  if (!Array.isArray(jobs)) return [];
+  // Explicit stage/finalize names are `stage (canton-ti)`. Also accept the
+  // actual default Actions matrix spelling from older runs, e.g.
+  // `publish (canton-ow, false, false, false)`, where the section is first.
+  const sectionForJob = (job) => String(job?.name || '')
+    .match(/^(?:publish|stage|finalize)\s*\(([^,)]+)(?:,[^)]*)?\)$/i)?.[1]?.trim();
+  const knownSections = jobs.map(sectionForJob)
+    .filter((section) => section && ARTICLE_SECTION_CORE_ALL[section]);
+  if (!liveOnly) return [...new Set(knownSections)].sort();
+
+  const liveStatuses = new Set(['queued', 'in_progress', 'waiting', 'pending', 'requested']);
+  const activeSections = jobs
+    .filter((job) => liveStatuses.has(String(job?.status || '').toLowerCase()))
+    .map(sectionForJob)
+    .filter((section) => section && ARTICLE_SECTION_CORE_ALL[section]);
+  return [...new Set(activeSections)].sort();
 }
 
-export function commitTouchedSections(changedPaths) {
-  return Object.keys(ARTICLE_SECTION_CORE_ALL).filter((section) => {
-    const surfaces = sectionWriteSurfaces(section);
-    const exactPaths = new Set(Object.entries(surfaces)
-      .filter(([key]) => !['seoGlobPrefix', 'sidecarDir', 'bodyDir'].includes(key))
-      .flatMap(([, value]) => pathsInSurface(value)));
-    const bodyDir = surfaces.bodyDir;
-    const sidecarDir = surfaces.sidecarDir;
-    const seoGlobPrefix = surfaces.seoGlobPrefix;
-    return changedPaths.some((changedPath) => exactPaths.has(changedPath)
-      || (bodyDir && changedPath.startsWith(`${bodyDir}/`))
-      || (sidecarDir && changedPath.startsWith(`${sidecarDir}/`))
-      || (seoGlobPrefix && changedPath.startsWith(seoGlobPrefix)));
-  });
-}
-
-async function resolvePublishLiveSection(run) {
+/** Keep target attribution conservative when the jobs endpoint cannot be read. */
+export function publishLiveSectionsFromRun(run, { jobs = [], jobsReadable = true } = {}) {
+  if (jobsReadable) {
+    const matrixSections = publishSectionsFromJobs(jobs, { liveOnly: true });
+    if (matrixSections.length > 0) return matrixSections;
+  }
   const titledSection = sectionFromPublishTitle(run);
-  if (titledSection !== 'unknown') return titledSection;
+  return titledSection === 'unknown' ? [] : [titledSection];
+}
+
+/** Count section-held runs and preserve barrier/resolve runs as unscoped. */
+export function countPublishLiveAssignments(liveRuns = [], sections = []) {
+  const bySection = Object.fromEntries(sections.map((section) => [section, 0]));
+  let unscoped = 0;
+  for (const run of liveRuns) {
+    const targets = Array.isArray(run?.sections) ? run.sections : [];
+    if (targets.length === 0) {
+      unscoped += 1;
+      continue;
+    }
+    for (const section of targets) {
+      if (bySection[section] !== undefined) bySection[section] += 1;
+    }
+  }
+  return { bySection, unscoped };
+}
+
+export function commitTouchedSections(
+  changedPaths,
+  activeSections = Object.keys(ARTICLE_SECTION_CORE_ALL),
+  { before, after } = {},
+) {
+  const activeCore = ARTICLE_SECTION_CORE_LIST.filter((entry) => activeSections.includes(entry.section));
+  const rangeSensitive = changedPaths.some((changedPath) => (
+    changedPath === 'sections/registry.json'
+      || changedPath === 'content/article-index-exclusions.json'
+      || changedPath.startsWith('public/images/')
+  ));
+  if (rangeSensitive && (!before || !after)) {
+    throw new Error('M3 richiede il range before..after per registry, exclusions e immagini');
+  }
+  // The workflow resolves every push through this same R2 planner. Keep the
+  // range-aware path for commits whose ownership depends on before/after and
+  // fail closed when a caller omits that range.
+  const r2Targets = (before && after
+    ? r2PublishPlanForRange(before, after, activeCore)
+    : r2PublishPlan(changedPaths, activeCore)).map((target) => target.section);
+  return [...new Set(r2Targets)].sort();
+}
+
+async function resolvePublishLiveSections(run) {
   try {
     const { json } = await viewRun(run, false);
-    const names = (json.jobs || []).map((job) => String(job.name || ''));
-    const sections = names.map((name) => name.match(/^publish\s*\(([^)]+)\)$/i)?.[1])
-      .filter((section) => section && ARTICLE_SECTION_CORE_ALL[section]);
-    return sections.length === 1 ? sections[0] : 'unknown';
+    return publishLiveSectionsFromRun(run, { jobs: json.jobs || [] });
   } catch {
-    return 'unknown';
+    // Without a live matrix target, preserve an explicit workflow_dispatch
+    // target conservatively; auto-titled push runs stay unscoped.
+    return publishLiveSectionsFromRun(run, { jobsReadable: false });
   }
 }
 
@@ -1554,24 +1626,30 @@ async function collectPublishMetrics(window, sections, articleRecords, pageResul
     listWorkflowRuns('fast-publish-section.yml', window, { liveOnly: true }),
   ]);
   const mappedRuns = runs.map((run) => ({ ...run, section: sectionFromPublishTitle(run) }));
-  const resolvedLiveRuns = await mapLimit(liveRuns, 4, async (run) => ({ ...run, section: await resolvePublishLiveSection(run) }));
-  const aliveBySection = Object.fromEntries(sections.map((section) => [section, 0]));
-  let unscopedAlive = 0;
-  for (const run of resolvedLiveRuns) {
-    if (run.section === 'unknown') unscopedAlive += 1;
-    else if (aliveBySection[run.section] !== undefined) aliveBySection[run.section] += 1;
-  }
+  const resolvedLiveRuns = await mapLimit(liveRuns, 4, async (run) => ({ ...run, sections: await resolvePublishLiveSections(run) }));
+  const liveAssignment = countPublishLiveAssignments(resolvedLiveRuns, sections);
 
   const mainCommits = parseMainCommits(window);
   const commitsBySha = Object.fromEntries(mainCommits.map((commit) => [commit.sha, {
     ...commit,
-    touchedSections: commitTouchedSections(commit.changedPaths),
+    touchedSections: commitTouchedSections(commit.changedPaths, sections, {
+      before: commit.parent,
+      after: commit.sha,
+    }),
     publishRuns: 0,
+    noopRuns: 0,
+    noopRunDurationsMinutes: [],
   }]));
   const runsByCommitAndSection = {};
   for (const run of mappedRuns) {
     const commit = commitsBySha[run.headSha];
-    if (commit) commit.publishRuns += 1;
+    if (commit && isNoopFastPublishRun(run, commit)) {
+      commit.noopRuns += 1;
+      const durationMinutes = publishRunDurationMinutes(run);
+      if (durationMinutes !== null) commit.noopRunDurationsMinutes.push(durationMinutes);
+    } else if (commit) {
+      commit.publishRuns += 1;
+    }
     if (commit && run.section !== 'unknown') {
       const key = `${run.headSha}:${run.section}`;
       runsByCommitAndSection[key] = (runsByCommitAndSection[key] || 0) + 1;
@@ -1634,7 +1712,7 @@ async function collectPublishMetrics(window, sections, articleRecords, pageResul
     const observedRunsWithPage = observedPageLatencies.filter((latency) => latency.section === section).map((latency) => latency.minutes);
     return [section, {
       fastPublishRunsCreated: sectionRuns.length,
-      liveRuns: aliveBySection[section],
+      liveRuns: liveAssignment.bySection[section],
       articleCommitRunFanout: percentiles([...(contentCommitRunCounts[section]?.values() || [])]),
       commitToVerifiedPageObservationMinutes: percentiles(observedRunsWithPage),
       commitToSuccessfulPublishRunCompletionProxyMinutes: percentiles(runsWithPage),
@@ -1645,17 +1723,25 @@ async function collectPublishMetrics(window, sections, articleRecords, pageResul
     sha: commit.sha,
     touchedSections: commit.touchedSections,
     publishRuns: commit.publishRuns,
+    noopRuns: commit.noopRuns,
+    noopRunDurationsMinutes: percentiles(commit.noopRunDurationsMinutes),
     violation: commit.publishRuns > commit.touchedSections.length,
   }));
   const commitFanout = commitFanoutRows.map((commit) => commit.publishRuns);
+  const noopRunDurations = Object.values(commitsBySha)
+    .flatMap((commit) => commit.noopRunDurationsMinutes.filter(Number.isFinite));
   const allLatencyValues = publishLatencies.map((latency) => latency.minutes);
   const allObservationValues = observedPageLatencies.map((latency) => latency.minutes);
   const violatedCommits = commitFanoutRows.filter((commit) => commit.violation);
+  const noopRunViolations = commitFanoutRows.filter((commit) => commit.noopRuns > 1);
   return {
     metrics,
     runCount: runs.length,
     liveRunsCount: resolvedLiveRuns.length,
-    liveUnscopedRuns: unscopedAlive,
+    liveUnscopedRuns: liveAssignment.unscoped,
+    noopRuns: commitFanoutRows.reduce((total, commit) => total + commit.noopRuns, 0),
+    noopRunDurationsMinutes: percentiles(noopRunDurations),
+    noopRunViolations: noopRunViolations.length,
     commitRunFanout: percentiles(commitFanout),
     commitRunFanoutWithRuns: commitFanout.filter((count) => count > 0).length,
     commitRunFanoutViolations: violatedCommits.length,
@@ -2445,7 +2531,12 @@ async function collectBaseline(args) {
     actionsCapacity: capacity,
     M3Summary: {
       fastPublishRunsCreated: publish.runCount,
+      liveFastPublishRuns: publish.liveRunsCount,
       liveUnscopedFastPublishRuns: publish.liveUnscopedRuns,
+      liveRunAttribution: 'Per-section liveRuns count every live publish/stage/finalize matrix job, including queued or pending jobs behind workflow dependencies or section concurrency. An explicit workflow_dispatch section from the run title is used when the Jobs API is unavailable or has no live matrix target (for example, while resolve runs); auto-titled runs without a target remain in liveFastPublishRuns and liveUnscopedFastPublishRuns.',
+      noopRuns: publish.noopRuns,
+      noopRunDurationsMinutes: publish.noopRunDurationsMinutes,
+      noopRunViolations: publish.noopRunViolations,
       maxRunsPerMainCommit: publish.commitRunFanout.max,
       commitRunFanout: publish.commitRunFanout,
       mainCommitsInWindow: publish.mainCommitCount,

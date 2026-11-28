@@ -43,7 +43,7 @@
  * manca solo una pagina di sezione, con `ids: []` (rinfresco di landing,
  * archivio e hub).
  *
- * Uso: node scripts/reconcile-section-pages.mjs --out <report.json> [--cap N] [--landing-limit N] [--budget-ms N] [--physical-pages-only] [--defer-existing-landings-until-flip]
+ * Uso: node scripts/reconcile-section-pages.mjs --out <report.json> [--cap N] [--landing-limit N] [--budget-ms N] [--section ID] [--physical-pages-only] [--defer-existing-landings-until-flip]
  * Solo builtin Node: gira senza npm ci.
  */
 import '../host/cantonSectionsBootstrap.mjs';
@@ -817,12 +817,20 @@ export async function reconcile({
   landingCardLimit = CANTON_LANDING_CARD_LIMIT,
   checkLandingContent = true,
   deferExistingLandingsUntilFlip = false,
+  sectionIds = null,
   fetchImpl = fetch,
   retryDelayMs = RECONCILE_FETCH_RETRY_DELAY_MS,
   sleepImpl = defaultSleep,
   budgetMs = RECONCILE_FETCH_MAX_DURATION_MS,
   now = Date.now,
 } = {}) {
+  const requestedSectionIds = sectionIds === null ? null : [...new Set(sectionIds)];
+  if (requestedSectionIds !== null && (
+    requestedSectionIds.length === 0
+    || requestedSectionIds.some((section) => typeof section !== 'string' || !ARTICLE_SECTION_CORE_ALL[section])
+  )) {
+    throw new Error('sectionIds deve contenere almeno una sezione R2 valida');
+  }
   const duration = Number(budgetMs);
   if (!Number.isSafeInteger(duration) || duration <= 0) {
     throw new Error('budgetMs deve essere una durata positiva intera finita');
@@ -892,8 +900,13 @@ export async function reconcile({
   const pendingEdgeFlip = edgeRegistry.commit !== manifest.commit;
   const probeLandingsPhysically = !checkLandingContent || (deferExistingLandingsUntilFlip && pendingEdgeFlip);
   const catalogById = new Map((catalog.sections ?? []).map((entry) => [entry.id, entry]));
-  const live = Object.entries(candidateRegistry.sections ?? {})
+  const candidateStatuses = candidateRegistry.sections ?? {};
+  const sectionStatuses = requestedSectionIds === null ? null : Object.fromEntries(
+    requestedSectionIds.map((id) => [id, candidateStatuses[id]?.status ?? null]),
+  );
+  const live = Object.entries(candidateStatuses)
     .filter(([, state]) => state.status === 'live')
+    .filter(([id]) => requestedSectionIds === null || requestedSectionIds.includes(id))
     .map(([id]) => catalogById.get(id));
   if (live.some((entry) => !entry || typeof entry.sitemap !== 'string' || !entry.sitemap)) {
     return skippedSurface({
@@ -904,7 +917,14 @@ export async function reconcile({
       pendingEdgeFlip,
     });
   }
-  if (live.length === 0) return { skipped: null, apiCommit: manifest.commit, edgeCommit: edgeRegistry.commit, pendingEdgeFlip, sections: [] };
+  if (live.length === 0) return {
+    skipped: null,
+    apiCommit: manifest.commit,
+    edgeCommit: edgeRegistry.commit,
+    pendingEdgeFlip,
+    ...(sectionStatuses ? { sectionStatuses } : {}),
+    sections: [],
+  };
   const rows = await getJson(`${apiBase}/canton-articles.json`, fetchImpl, fetchOptions);
   const dateById = new Map(rows.map((row) => [row.id, row.updatedAt || row.date || '']));
   const sections = [];
@@ -1028,6 +1048,7 @@ export async function reconcile({
     edgeCommit: edgeRegistry.commit,
     pendingEdgeFlip,
     ...(landingContentDeferred ? { landingContentDeferred: true } : {}),
+    ...(sectionStatuses ? { sectionStatuses } : {}),
     sections,
   };
 }
@@ -1037,7 +1058,7 @@ export async function main(argv = process.argv.slice(2)) {
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === '--physical-pages-only' || argv[i] === '--defer-existing-landings-until-flip') {
       args[argv[i].slice(2)] = true;
-    } else if (argv[i] === '--out' || argv[i] === '--cap' || argv[i] === '--landing-limit' || argv[i] === '--budget-ms') {
+    } else if (argv[i] === '--out' || argv[i] === '--cap' || argv[i] === '--landing-limit' || argv[i] === '--budget-ms' || argv[i] === '--section') {
       const value = argv[i + 1];
       if (value === undefined || value.startsWith('--')) throw new Error(`${argv[i]} richiede un valore`);
       args[argv[i].slice(2)] = value;
@@ -1059,6 +1080,7 @@ export async function main(argv = process.argv.slice(2)) {
   const apiBase = (process.env.RECONCILE_API_BASE || API_BASE_DEFAULT).replace(/\/+$/, '');
   const report = await reconcile({
     apiBase, cap, landingCardLimit, budgetMs,
+    sectionIds: args.section ? [args.section] : null,
     checkLandingContent: !args['physical-pages-only'],
     deferExistingLandingsUntilFlip: args['defer-existing-landings-until-flip'],
   });

@@ -309,15 +309,25 @@ jobs:
           fi
           dispatch_sections="$(jq -c '[.sections[] | select(.dispatch)]' "$RUNNER_TEMP/reconcile-sections.json")"
           # Reconcile runs serialize, but their children can outlive them.
-          run_filters=()
+          run_args=(-f per_page=100)
           if [ "$PENDING_EDGE_FLIP" != 'true' ]; then
             since="$(date -u -d '6 hours ago' +%Y-%m-%dT%H:%M:%SZ)"
-            run_filters+=(-f "created=>=$since")
+            run_args+=(-f "created=>=$since")
           fi
           child_runs="$(gh api --paginate --slurp -X GET \
             "repos/$GITHUB_REPOSITORY/actions/workflows/fast-publish-section.yml/runs" \
             -f branch=main -f event=workflow_dispatch -f head_sha="$dispatch_source" \
-            -f per_page=100 "${run_filters[@]}")"
+            "${run_args[@]}")"
+          hash_stream() {
+            if command -v sha256sum >/dev/null 2>&1; then
+              sha256sum
+            elif command -v shasum >/dev/null 2>&1; then
+              shasum -a 256
+            else
+              echo '::error::sha256sum o shasum non disponibile per il fingerprint del piano' >&2
+              return 1
+            fi
+          }
           plan_key=''
           if [ "$PENDING_EDGE_FLIP" != 'true' ]; then
             active_sections="$(jq -ce --arg sha "$dispatch_source" '
@@ -351,7 +361,7 @@ jobs:
             plan_key="$(jq -cS 'map({section, selected, missingPagePaths, knownMissingPagePaths}) | sort_by(.section)' <<< "$dispatch_sections" | {
               printf '%s\n' "$API_RELEASE_COMMIT"
               cat
-            } | sha256sum | cut -c1-32)"
+              } | hash_stream | cut -c1-32)"
             sections="$(jq -c 'map(.section) | sort' <<< "$dispatch_sections")"
             reusable_cohort="$(jq -r --arg sha "$dispatch_source" --arg key "$plan_key" --argjson sections "$sections" '
               if length == 0 or any(.[]; (.workflow_runs | type) != "array") then

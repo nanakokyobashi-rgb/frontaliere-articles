@@ -28,12 +28,19 @@ if [ -n "${SOURCE_COMMIT:-}" ]; then
     exit 1
   fi
 fi
-pinned_replay_main=''
-if [ "$EVENT_NAME" = 'workflow_run' ]; then
+pinned_replay_main="${PINNED_REPLAY_MAIN:-}"
+if [ -z "$pinned_replay_main" ] && [ "$EVENT_NAME" = 'workflow_run' ]; then
   pinned_replay_main="$WORKFLOW_RUN_HEAD_SHA"
-elif [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ -n "${SOURCE_COMMIT:-}" ]; then
+elif [ -z "$pinned_replay_main" ] && [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ -n "${SOURCE_COMMIT:-}" ]; then
   pinned_replay_main="$SOURCE_MAIN_COMMIT"
 fi
+
+defer_stale_handoff() {
+  local current_main="${1:-}"
+  echo 'stale_handoff=true' >> "$GITHUB_OUTPUT"
+  [ -z "$current_main" ] || echo "stale_handoff_head=$current_main" >> "$GITHUB_OUTPUT"
+  echo "::notice::target $SECTION ceduto alla run latest; nessun replay aggiuntivo dispatchato"
+}
 
 # A pinned child must not silently hand its parent an artifact from an older
 # revision. Redispatch the exact section on the newly observed main and expose
@@ -120,7 +127,12 @@ if [ -n "$pinned_replay_main" ]; then
     echo "::error::revisione corrente di main non valida prima degli upload"
     exit 1
   fi
-  if ! bash .replay-dispatcher-source/scripts/ci/section-source-unaffected.sh --section "$SECTION" "$pinned_replay_main" "$current_main"; then
+  freshness_helper="${SECTION_SOURCE_UNAFFECTED_HELPER:-scripts/ci/section-source-unaffected.sh}"
+  if ! bash "$freshness_helper" --section "$SECTION" "$pinned_replay_main" "$current_main"; then
+    if [ "${DEFER_STALE_HANDOFF:-false}" = 'true' ]; then
+      defer_stale_handoff "$current_main"
+      exit 0
+    fi
     api_release_commit=''
     if [ "$EVENT_NAME" = 'workflow_run' ]; then
       PUSH_BEFORE="${PUSH_BEFORE:-}" FETCH_MAIN=true \
@@ -209,6 +221,11 @@ refresh_live_plan_and_preflight() {
     # piano ricalcolato verifica la HEAD ma non amplia gli ID richiesti.
     refresh_scope='false'
   fi
+  if [ "${FULL_SECTION_LATEST_RECOVERY:-false}" = 'true' ]; then
+    # This path intentionally recovers a coalesced same-section stage from
+    # current main; the caller has already chosen a full-section bootstrap.
+    refresh_scope='false'
+  fi
   live_matrix="$(git diff --name-status "$plan_before" HEAD \
     | PUSH_BEFORE="$plan_before" node scripts/ci/fast-publish-section.mjs r2-plan \
     | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
@@ -216,8 +233,15 @@ refresh_live_plan_and_preflight() {
     'map(select(.section == $section)) | if length == 1 then .[0] else empty end' \
     <<<"$live_matrix")"
   if [ "$refresh_scope" = 'true' ] && [ -n "$live_target" ]; then
-    ARTICLE_IDS_JSON="$(jq -c '.ids // []' <<<"$live_target")"
-    BOOTSTRAP="$(jq -r '.bootstrap // false' <<<"$live_target")"
+    if [ "${TARGET_BOOTSTRAP:-false}" = 'true' ]; then
+      # A queue:single pending run may replace earlier section jobs. Render
+      # the complete current section so the surviving run covers their IDs.
+      ARTICLE_IDS_JSON='[]'
+      BOOTSTRAP=true
+    else
+      ARTICLE_IDS_JSON="$(jq -c '.ids // []' <<<"$live_target")"
+      BOOTSTRAP="$(jq -r '.bootstrap // false' <<<"$live_target")"
+    fi
     REMOVE_STALE_CANTON_RSS_FEEDS="$(jq -r '.removeStaleCantonRssFeeds // false' <<<"$live_target")"
     CLEANUP_INACTIVE_SURFACE="$(jq -r '.cleanupInactiveSurface // false' <<<"$live_target")"
     printf '%s' "$ARTICLE_IDS_JSON" > "$article_ids_file"
@@ -313,6 +337,10 @@ if [ "$normal_dispatch" != 'true' ]; then
     fi
     current_main="$(bash scripts/ci/read-main-head.sh)"
     [ "$current_main" != "$pinned_replay_main" ] || exit 1
+    if [ "${DEFER_STALE_HANDOFF:-false}" = 'true' ]; then
+      defer_stale_handoff "$current_main"
+      exit 0
+    fi
     dispatch_stale_replay "$pinned_replay_main" "$current_main"
     {
       echo 'stale_handoff=true'
@@ -411,6 +439,10 @@ while :; do
   if ! handoff_head="$(bash scripts/ci/read-main-head.sh)"; then
     echo "::error::impossibile leggere la HEAD corrente per il replay dopo tre tentativi stale"
     exit 1
+  fi
+  if [ "${DEFER_STALE_HANDOFF:-false}" = 'true' ]; then
+    defer_stale_handoff "$handoff_head"
+    exit 0
   fi
   if ! dispatch_stale_replay "${EXPECTED_MAIN_HEAD:-$validated_head}" "$handoff_head" ''; then
     echo "::error::impossibile consegnare la sezione al coordinatore sulla HEAD $handoff_head"

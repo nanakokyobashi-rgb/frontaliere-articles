@@ -72,11 +72,59 @@ const SHARED_RENDER_REFRESH_PATHS = new Set([
   'scripts/lib/content-updated-at.mjs',
 ]);
 
-// Cambiare uno di questi moduli cambia il risultato di ogni publisher R2,
-// non una sola sezione: il workflow deve quindi rifare il bootstrap di tutte
-// le sezioni cantonali R2 attive, invece di produrre una matrice vuota.
-// Il CLI del puntatore edge passa dal publisher API e dal reconcile post-publish.
+// These exact non-content push triggers can change the publisher, article
+// transforms, validation inputs, or release coordination. A trigger-only
+// change therefore bootstraps the active R2 matrix instead of creating an
+// empty Fast Publish run. The workflow inventory is contract-tested against
+// this planner so additions cannot silently escape M3 attribution.
+const FAST_PUBLISH_TRIGGER_REFRESH_PATHS = new Set([
+  '.github/workflows/fast-publish-section.yml',
+  'scripts/ci/check-blog-body-links.mjs',
+  'scripts/ci/check-blog-body-syntax.mjs',
+  'scripts/lib/article-link-contract.mjs',
+  'scripts/lib/typescript-expression-scanner.mjs',
+  'scripts/lib/rss-feed-body-adapter.mjs',
+  'generator/scripts/lib/article-meta-block.mjs',
+  'generator/scripts/lib/article-excerpt.mjs',
+  'scripts/lib/section-bootstrap-lock.mjs',
+  'scripts/ci/section-bootstrap-lock.mjs',
+  'scripts/lib/conditional-cdn-put.sh',
+  'scripts/ci/fast-publish-section-coordinate.sh',
+  'scripts/ci/fast-publish-section-late-api-recovery.sh',
+  'scripts/ci/wait-fast-publish-api-readiness.mjs',
+  'scripts/ci/dispatch-fast-publish-replay.sh',
+  'scripts/ci/dispatch-bounded-section-replay.sh',
+  'scripts/ci/read-main-head.sh',
+  'scripts/ci/resolve-workflow-run-push-range.mjs',
+  'scripts/ci/fetch-push-base-if-missing.sh',
+  'scripts/ci/section-source-unaffected.sh',
+  'scripts/ci/fast-publish-section-resolve.sh',
+  'scripts/ci/fast-publish-section-edge-candidate.sh',
+  'scripts/ci/fast-publish-section-preflight.sh',
+  'scripts/ci/fast-publish-section-render.sh',
+  'scripts/ci/fast-publish-section-recovery.sh',
+  'scripts/ci/record-fast-publish-result.sh',
+  'scripts/lib/seo-entry.mjs',
+  'scripts/lib/article-registry-reader.mjs',
+  'scripts/lib/ts-literals.mjs',
+  'generator/scripts/lib/daily-brief-content.mjs',
+  'generator/scripts/lib/daily-brief-data.mjs',
+  'generator/scripts/lib/daily-brief-insights.mjs',
+  'generator/scripts/lib/localized-toponyms.mjs',
+  'generator/scripts/lib/localized-toponym-table.mjs',
+  'generator/scripts/lib/static-article-field-scanner.mjs',
+  'generator/data/localized-toponyms.json',
+  'generator/scripts/lib/fetch-with-ref-timeout.mjs',
+]);
+
+// Le dipendenze che cambiano l'output R2 condiviso e i trigger di codice del
+// workflow elencati sopra producono un bootstrap per ogni sezione cantonale R2
+// attiva. Così quei trigger non generano una run Fast senza target e M3 misura
+// la stessa matrice che il workflow esegue. Un'immagine priva di owner resta
+// invece un no-op intenzionale: il CLI del puntatore edge passa dal publisher
+// API e dal reconcile post-publish.
 const SHARED_R2_REFRESH_PATHS = new Set([
+  ...FAST_PUBLISH_TRIGGER_REFRESH_PATHS,
   'generator/scripts/lib/canton-hubs/paths.mjs',
   'generator/scripts/lib/corpus-paths.mjs',
   'generator/scripts/lib/control-char-write-report.mjs',
@@ -92,6 +140,8 @@ const SHARED_R2_REFRESH_PATHS = new Set([
   'scripts/lib/corpus-floors.mjs',
   'scripts/lib/corpus-sections.mjs',
   'scripts/lib/engine-corpus-view.mjs',
+  'generator/data/canton-sections.json',
+  'generator/data/canton-url-slugs.json',
   'scripts/lib/sanitize-control-chars.mjs',
   'scripts/lib/section-registry.mjs',
   'scripts/lib/assert-hub-locale-slug.mjs',
@@ -641,14 +691,18 @@ function imageKeyFromReference(reference) {
  * must wake the same section/id publisher as a body commit, while an image
  * shared by several records wakes all of them.
  */
-export function imageArticleOwners(files, coreList = activeCorpusCoreEntries()) {
+export function imageArticleOwners(
+  files,
+  coreList = activeCorpusCoreEntries(),
+  { readRegistrySource = (rel) => (existsSync(rel) ? readFileSync(rel, 'utf8') : null) } = {},
+) {
   const keys = new Set(changedFileRecords(files).map(({ rel }) => imageKeyFromPublicPath(rel)).filter(Boolean));
   if (keys.size === 0) return new Map();
   const owners = new Map();
   for (const section of activeSourceSections(coreList)) {
     const registryFile = sectionSourceSurfaces(section.section).registryFile;
-    if (!existsSync(registryFile)) continue;
-    const source = readFileSync(registryFile, 'utf8');
+    const source = readRegistrySource(registryFile);
+    if (source === null || source === undefined) continue;
     for (const body of articleRegistryObjectBodies(source)) {
       const fields = articleRegistryObjectFields(body);
       const imageKey = imageKeyFromReference(fields.get('image'));
@@ -826,6 +880,28 @@ export function articlePublishPlan(
       ids: [...targets.get(section.section)].sort(),
       bootstrap: false,
     }));
+}
+
+/** Piano article/shard per una revisione Git, con registry e diff storici. */
+export function articlePublishPlanForRange(before, after, coreList = activeCorpusCoreEntries(), { served } = {}) {
+  for (const [label, revision] of [['before', before], ['after', after]]) {
+    if (typeof revision !== 'string' || !/^[a-f0-9]{40,64}$/i.test(revision)) {
+      throw new Error(`article-plan-range: ${label} deve essere una revisione Git completa`);
+    }
+  }
+  const files = execFileSync('git', ['diff', '--name-status', before, after], { encoding: 'utf8' }).split('\n');
+  const readAt = (revision) => (rel) => gitSourceAtRevision(revision, rel);
+  const readPreviousSource = readAt(before);
+  const readCurrentSource = readAt(after);
+  return articlePublishPlan(files, coreList, {
+    served,
+    readPreviousSource,
+    readCurrentSource,
+    articleIdsForSection: (section) => {
+      const source = sourceText(readCurrentSource, sectionSourceSurfaces(section.section).registryFile);
+      return source === null ? new Set() : registryArticleIdsFromSource(source);
+    },
+  });
 }
 
 /** Promozioni e demozioni cantonali R2 fra due versioni del registro. */
@@ -1026,6 +1102,10 @@ function registryArticleIds(section) {
     throw new Error(`registry della sezione '${section.section}' non trovato: ${registryFile}`);
   }
   const source = readFileSync(registryFile, 'utf8');
+  return registryArticleIdsFromSource(source);
+}
+
+function registryArticleIdsFromSource(source) {
   return new Set(
     articleRegistryObjectBodies(source)
       .map((body) => articleRegistryObjectFields(body).get('id'))
@@ -1112,6 +1192,13 @@ export function shardOf(section, coreList = activeCorpusCoreEntries()) {
   return entry.shardKey;
 }
 
+/** R2 target ancora eleggibile nella revisione corrente. */
+export function r2SectionEligible(section, coreList = activeCorpusCoreEntries()) {
+  return activeSourceSections(coreList).some((entry) => (
+    entry.section === section && entry.kind === 'canton' && !entry.shardKey
+  ));
+}
+
 /**
  * Le sezioni R2 (cantonali attive) toccate da un insieme di file cambiati, con
  * gli id degli articoli il cui corpo e' cambiato. `bootstrap: true` significa
@@ -1178,11 +1265,37 @@ export function r2PublishPlan(
       else state.ids.add(body.id);
       continue;
     }
+    const metaOwner = sections.find((section) => (
+      rel.startsWith(`${section.metaPrefix}-`)
+      && /^[a-z]{2}\.ts$/.test(rel.slice(`${section.metaPrefix}-`.length))
+    ));
+    if (metaOwner) {
+      const previous = sourceText(readPreviousSource, rel);
+      const current = sourceText(readCurrentSource, rel);
+      const changedIds = changedRecordIds(metaRecords(previous), metaRecords(current));
+      if (changedIds.length === 0) {
+        // A non-record edit can change the shared metadata transform. Keep
+        // that uncommon case conservative within the owning section.
+        if (previous !== current) {
+          touch(metaOwner.section).bootstrap = true;
+        }
+      } else {
+        const registryFile = sectionSourceSurfaces(metaOwner.section).registryFile;
+        const registered = new Set([
+          ...registryArticleIdsFromSource(sourceText(readPreviousSource, registryFile) ?? ''),
+          ...registryArticleIdsFromSource(sourceText(readCurrentSource, registryFile) ?? ''),
+        ]);
+        for (const id of changedIds) {
+          if (registered.has(id)) touch(metaOwner.section).ids.add(id);
+        }
+      }
+      continue;
+    }
     for (const s of sections) {
       const cantonRoot = `content/cantons/${s.section}/`;
       const hubRoot = `${cantonRoot}hubs/`;
       const isHubData = rel.startsWith(hubRoot);
-      const own = rel.startsWith(cantonRoot) || rel.startsWith(`${s.metaPrefix}-`);
+      const own = rel.startsWith(cantonRoot);
       if (!own) continue;
       const state = touch(s.section);
       // Hub JSON changes only refresh the non-article surfaces. Every other
@@ -1190,7 +1303,11 @@ export function r2PublishPlan(
       if (!isHubData) state.bootstrap = true;
     }
   }
-  for (const [section, ids] of imageArticleOwners(files, coreList)) {
+  const imageOwners = imageArticleOwners(files, coreList, { readRegistrySource: readCurrentSource });
+  // An image without a registry owner is still a valid workflow trigger, but
+  // it has no section target until an article references it. The resolver
+  // closes that run without a matrix; M3 attributes it as a no-op run.
+  for (const [section, ids] of imageOwners) {
     const target = sections.find((s) => s.section === section);
     if (!target) continue;
     const state = touch(section);
@@ -1208,6 +1325,241 @@ export function r2PublishPlan(
       if (state.removeStaleCantonRssFeeds) target.removeStaleCantonRssFeeds = true;
       return target;
     });
+}
+
+/**
+ * Piano R2 per un range Git esplicito. I publisher in coda usano questo per
+ * verificare uno scope contro i blob effettivi di entrambe le revisioni,
+ * anche quando il loro checkout non coincide piu' con l'evento originale.
+ */
+export function r2PublishPlanForRange(before, after, coreList = activeCorpusCoreEntries()) {
+  for (const [label, revision] of [['before', before], ['after', after]]) {
+    if (typeof revision !== 'string' || !/^[a-f0-9]{40,64}$/i.test(revision)) {
+      throw new Error(`r2-plan-range: ${label} deve essere una revisione Git completa`);
+    }
+  }
+  const files = execFileSync('git', ['diff', '--name-status', before, after], { encoding: 'utf8' }).split('\n');
+  const readAt = (revision) => (rel) => gitSourceAtRevision(revision, rel);
+  let registryRefreshSections = [];
+  let registryCleanupSections = [];
+  if (changedFileRecords(files).some(({ rel }) => rel === 'sections/registry.json')) {
+    const previous = JSON.parse(gitSourceAtRevision(before, 'sections/registry.json'));
+    const next = JSON.parse(gitSourceAtRevision(after, 'sections/registry.json'));
+    const transitions = liveRegistryTransitions(previous, next, coreList);
+    registryRefreshSections = transitions.map(({ section }) => section);
+    registryCleanupSections = transitions
+      .filter(({ removeStaleCantonRssFeeds }) => removeStaleCantonRssFeeds)
+      .map(({ section }) => section);
+  }
+  return r2PublishPlan(files, coreList, {
+    registryRefreshSections,
+    registryCleanupSections,
+    readPreviousSource: readAt(before),
+    readCurrentSource: readAt(after),
+  });
+}
+
+/**
+ * Pagine che devono esistere prima del flip dell'API: solo sorgenti locali
+ * delle sezioni R2, mai un refresh renderer condiviso. Il piano completo del
+ * render resta separato e viene applicato nel finalize dopo la release.
+ */
+export function r2ApiStagePlanForRange(before, after, coreList = activeCorpusCoreEntries()) {
+  for (const [label, revision] of [['before', before], ['after', after]]) {
+    if (typeof revision !== 'string' || !/^[a-f0-9]{40,64}$/i.test(revision)) {
+      throw new Error(`r2-api-stage-plan: ${label} deve essere una revisione Git completa`);
+    }
+  }
+  const files = execFileSync('git', ['diff', '--name-status', before, after], { encoding: 'utf8' }).split('\n');
+  const sections = activeSourceSections(coreList).filter((section) => section.kind === 'canton' && !section.shardKey);
+  const localSectionInputs = (rel) => {
+    if (rel === ARTICLE_INDEX_EXCLUSIONS_FILE
+      || rel === 'sections/registry.json'
+      || rel.startsWith('public/images/')
+      || rel === 'generator/data/canton-sections.json'
+      || rel === 'generator/data/canton-url-slugs.json') return true;
+    const body = sectionForBodyPath(rel, coreList);
+    if (body && sections.some((section) => section.section === body.section)) return true;
+    if (sections.some((section) => (
+      rel.startsWith(`content/cantons/${section.section}/`)
+      || (rel.startsWith(`${section.metaPrefix}-`) && /^[a-z]{2}\.ts$/u.test(rel.slice(`${section.metaPrefix}-`.length)))
+    ))) return true;
+    return false;
+  };
+  const records = changedFileRecords(files).filter(({ rel }) => localSectionInputs(rel));
+  if (records.length === 0) return [];
+
+  const configChanged = records.some(({ rel }) => (
+    rel === 'generator/data/canton-sections.json' || rel === 'generator/data/canton-url-slugs.json'
+  ));
+  const readAt = (revision) => (rel) => gitSourceAtRevision(revision, rel);
+  const registryChanged = records.some(({ rel }) => rel === 'sections/registry.json');
+  let registryRefreshSections = [];
+  let registryCleanupSections = [];
+  if (registryChanged) {
+    const previous = JSON.parse(gitSourceAtRevision(before, 'sections/registry.json'));
+    const next = JSON.parse(gitSourceAtRevision(after, 'sections/registry.json'));
+    const transitions = liveRegistryTransitions(previous, next, coreList);
+    registryRefreshSections = transitions
+      .filter(({ removeStaleCantonRssFeeds }) => !removeStaleCantonRssFeeds)
+      .map(({ section }) => section);
+    registryCleanupSections = transitions
+      .filter(({ removeStaleCantonRssFeeds }) => removeStaleCantonRssFeeds)
+      .map(({ section }) => section);
+  }
+  const plan = r2PublishPlan(records.map(({ status, rel }) => `${status}\t${rel}`), coreList, {
+    registryRefreshSections,
+    registryCleanupSections,
+    readPreviousSource: readAt(before),
+    readCurrentSource: readAt(after),
+  }).filter((target) => target.removeStaleCantonRssFeeds !== true);
+  if (configChanged) {
+    const bySection = new Map(plan.map((target) => [target.section, target]));
+    for (const section of sections) {
+      bySection.set(section.section, { section: section.section, ids: [], bootstrap: true });
+    }
+    return sections.filter(({ section }) => bySection.has(section)).map(({ section }) => bySection.get(section));
+  }
+  return plan.map((target) => ({ ...target, ids: [], bootstrap: true }));
+}
+
+/** Decide whether staged pages cover every API input reachable at the barrier. */
+export function r2ApiStageBarrierDecision({
+  stageTargets = [],
+  newApiTargets = [],
+  stagedSources = {},
+  latestCommit,
+  newApiDataChanged = false,
+  unaffectedSections = [],
+} = {}) {
+  if (!/^[a-f0-9]{40,64}$/iu.test(latestCommit ?? '')) {
+    throw new Error('r2-stage-barrier: latestCommit deve essere una SHA Git completa');
+  }
+  if (!Array.isArray(stageTargets) || !Array.isArray(newApiTargets) || !Array.isArray(unaffectedSections)) {
+    throw new Error('r2-stage-barrier: target e sezioni unaffected devono essere array');
+  }
+  const stageSet = new Set(stageTargets);
+  const unaffected = new Set(unaffectedSections);
+  const staleStageSections = stageTargets.filter((section) => {
+    const source = stagedSources[section];
+    return !/^[a-f0-9]{40,64}$/iu.test(source ?? '')
+      || (source !== latestCommit && !unaffected.has(section));
+  });
+  const notStagedAtLatest = [...new Set(newApiTargets)].filter((section) => (
+    !stageSet.has(section) || staleStageSections.includes(section)
+  ));
+  // A later renderer-only change can make the staged HTML old without adding
+  // API input. The API release is still safe: finalization renders latest
+  // afterward. Gate only on API targets introduced since the stage.
+  const canDispatchApi = stageTargets.length > 0 && notStagedAtLatest.length === 0;
+  return {
+    latestCommit,
+    canDispatchApi,
+    waitForLatestApi: newApiDataChanged && !canDispatchApi,
+    staleStageSections,
+    notStagedAtLatest,
+    apiWaitSections: [...new Set([...stageTargets, ...newApiTargets])],
+  };
+}
+
+/** Recover a late finalizer in its existing section slot after coalescing. */
+export function r2LateFinalizeRecoveryDecision({
+  stageCommit = '',
+  latestCommit,
+  sectionChanged = false,
+  deferApiWait = false,
+  forceFullSection = false,
+} = {}) {
+  if (!/^[a-f0-9]{40,64}$/iu.test(latestCommit ?? '')) {
+    throw new Error('r2-late-finalize-recovery: latestCommit deve essere una SHA Git completa');
+  }
+  if ([sectionChanged, deferApiWait, forceFullSection].some((value) => typeof value !== 'boolean')) {
+    throw new Error('r2-late-finalize-recovery: sectionChanged, deferApiWait e forceFullSection devono essere booleani');
+  }
+  if (stageCommit && !/^[a-f0-9]{40,64}$/iu.test(stageCommit)) {
+    throw new Error('r2-late-finalize-recovery: stageCommit non valida');
+  }
+  const rebootstrap = forceFullSection || deferApiWait
+    || (sectionChanged && Boolean(stageCommit) && stageCommit !== latestCommit);
+  return {
+    rebootstrap,
+    fullSection: rebootstrap,
+    sourceCommit: latestCommit,
+    checkApiAfterStage: rebootstrap,
+  };
+}
+
+/** Probe first; wait on an automatic owner or dispatch only a missing release. */
+export function r2LateApiRecoveryAction({
+  apiInputsChanged = false,
+  readinessReady = false,
+  automaticPublisherOwner = false,
+} = {}) {
+  if ([apiInputsChanged, readinessReady, automaticPublisherOwner].some((value) => typeof value !== 'boolean')) {
+    throw new Error('r2-late-api-recovery: gli input devono essere booleani');
+  }
+  if (!apiInputsChanged || readinessReady) return { action: 'none', waitApi: false };
+  return automaticPublisherOwner
+    ? { action: 'wait', waitApi: true }
+    : { action: 'dispatch', waitApi: true };
+}
+
+export function r2ShouldDeferApiReadinessToFinalize({
+  finalTargets = [],
+  staleStageSections = [],
+  notStagedAtLatest = [],
+} = {}) {
+  for (const [name, value] of [
+    ['finalTargets', finalTargets],
+    ['staleStageSections', staleStageSections],
+    ['notStagedAtLatest', notStagedAtLatest],
+  ]) {
+    if (!Array.isArray(value) || value.some((section) => typeof section !== 'string' || !section)) {
+      throw new Error(`r2-api-wait-defer: ${name} deve essere un array di sezioni`);
+    }
+  }
+  const final = new Set(finalTargets);
+  return [...new Set([...staleStageSections, ...notStagedAtLatest])].some((section) => final.has(section));
+}
+
+/** True se il range cambia sorgenti dati dell'API, anziche' solo codice. */
+export function r2RangeHasApiDataInputs(files) {
+  return changedFileRecords(files).some(({ rel }) => (
+    rel.startsWith('content/')
+    || rel.startsWith('sections/')
+    || rel.startsWith('public/images/')
+    || rel === 'generator/data/canton-sections.json'
+    || rel === 'generator/data/canton-url-slugs.json'
+  ));
+}
+
+export function r2RangeHasApiDataInputsBetween(before, after) {
+  for (const [label, revision] of [['before', before], ['after', after]]) {
+    if (typeof revision !== 'string' || !/^[a-f0-9]{40,64}$/i.test(revision)) {
+      throw new Error(`r2-api-data-range: ${label} deve essere una revisione Git completa`);
+    }
+  }
+  const files = execFileSync('git', ['diff', '--name-status', before, after], { encoding: 'utf8' }).split('\n');
+  return r2RangeHasApiDataInputs(files);
+}
+
+/** Return the newest first-parent commit in a range that changed API data. */
+export function latestR2ApiDataCommitBetween(before, after) {
+  for (const [label, revision] of [['before', before], ['after', after]]) {
+    if (typeof revision !== 'string' || !/^[a-f0-9]{40,64}$/i.test(revision)) {
+      throw new Error(`r2-api-latest-data-commit: ${label} deve essere una revisione Git completa`);
+    }
+  }
+  const candidates = execFileSync('git', [
+    'log', '--first-parent', '--format=%H', `${before}..${after}`, '--',
+    'content/', 'sections/', 'public/images/',
+    'generator/data/canton-sections.json', 'generator/data/canton-url-slugs.json',
+  ], { encoding: 'utf8' }).trim().split('\n').filter(Boolean);
+  for (const commit of candidates) {
+    const parent = execFileSync('git', ['rev-parse', `${commit}^1`], { encoding: 'utf8' }).trim();
+    if (r2RangeHasApiDataInputsBetween(parent, commit)) return commit;
+  }
+  return '';
 }
 
 function isMain() {
@@ -1259,6 +1611,41 @@ if (isMain()) {
         readPreviousSource: (rel) => gitSourceAtRevision(ledgerBefore, rel),
       })));
     }
+    else if (cmd === 'r2-plan-range') {
+      if (!arg || !process.argv[4]) throw new Error('r2-plan-range richiede before e after');
+      console.log(JSON.stringify(r2PublishPlanForRange(arg, process.argv[4], activeCorpusCoreEntries())));
+    }
+    else if (cmd === 'r2-api-stage-plan-range') {
+      if (!arg || !process.argv[4]) throw new Error('r2-api-stage-plan-range richiede before e after');
+      console.log(JSON.stringify(r2ApiStagePlanForRange(arg, process.argv[4], activeCorpusCoreEntries())));
+    }
+    else if (cmd === 'r2-api-stage-barrier') {
+      const input = JSON.parse(readFileSync(0, 'utf8'));
+      console.log(JSON.stringify(r2ApiStageBarrierDecision(input)));
+    }
+    else if (cmd === 'r2-late-finalize-recovery') {
+      const input = JSON.parse(readFileSync(0, 'utf8'));
+      console.log(JSON.stringify(r2LateFinalizeRecoveryDecision(input)));
+    }
+    else if (cmd === 'r2-late-api-recovery') {
+      const input = JSON.parse(readFileSync(0, 'utf8'));
+      console.log(JSON.stringify(r2LateApiRecoveryAction(input)));
+    }
+    else if (cmd === 'r2-api-wait-defer') {
+      const input = JSON.parse(readFileSync(0, 'utf8'));
+      console.log(String(r2ShouldDeferApiReadinessToFinalize(input)));
+    }
+    else if (cmd === 'r2-api-data-range') {
+      if (!arg || !process.argv[4]) throw new Error('r2-api-data-range richiede before e after');
+      console.log(String(r2RangeHasApiDataInputsBetween(arg, process.argv[4])));
+    }
+    else if (cmd === 'r2-api-latest-data-commit') {
+      if (!arg || !process.argv[4]) throw new Error('r2-api-latest-data-commit richiede before e after');
+      console.log(latestR2ApiDataCommitBetween(arg, process.argv[4]));
+    }
+    else if (cmd === 'r2-section-eligible' && arg) {
+      console.log(String(r2SectionEligible(arg, activeCorpusCoreEntries())));
+    }
     else if (cmd === 'r2-reconcile-plan') {
       console.log(JSON.stringify(liveR2ReconciliationPlan(await fetchEdgeSectionRegistry(), activeCorpusCoreEntries(), arg)));
     }
@@ -1273,7 +1660,7 @@ if (isMain()) {
     else if (cmd === 'image-plan') console.log(JSON.stringify(imagePublishPlan(readFileSync(0, 'utf8').split('\n'), activeCorpusCoreEntries(), { served: arg })));
     else if (cmd === 'section-of' && arg) console.log(sectionOf(arg));
     else if (cmd === 'shard-of' && arg) console.log(shardOf(arg));
-    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | body-plan [shard|r2] < files | article-plan [shard|r2] < files | image-plan [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files | r2-reconcile-plan <commit> | r2-edge-release-commit | r2-api-push-plan < diff.json edge.json');
+    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | body-plan [shard|r2] < files | article-plan [shard|r2] < files | image-plan [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files | r2-plan-range <before> <after> | r2-api-stage-plan-range <before> <after> | r2-api-stage-barrier < decision.json | r2-late-finalize-recovery < decision.json | r2-late-api-recovery < decision.json | r2-api-wait-defer < decision.json | r2-api-data-range <before> <after> | r2-api-latest-data-commit <before> <after> | r2-section-eligible <section> | r2-reconcile-plan <commit> | r2-edge-release-commit | r2-api-push-plan < diff.json edge.json');
   };
   run().catch((error) => {
     console.error(`::error::fast-publish-section: ${error?.message ?? error}`);

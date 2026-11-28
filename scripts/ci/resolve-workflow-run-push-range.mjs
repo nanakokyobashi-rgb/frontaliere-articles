@@ -18,6 +18,7 @@ function validBefore(value) {
 }
 
 const PUSH_RANGE_RUN_TITLE_RE = /\/ range=(none|[a-f0-9]{40})\.\.([a-f0-9]{40})$/u;
+const FAST_PUBLISH_RANGE_RUN_TITLE_RE = /\(fast-publish-range-([a-f0-9]{40})-([a-f0-9]{40})\) \/ range=none\.\.([a-f0-9]{40})$/u;
 
 /**
  * Read the exact push boundary persisted by publish-api.yml in its run title.
@@ -29,6 +30,17 @@ export function parsePushRangeRunTitle(value) {
   const match = PUSH_RANGE_RUN_TITLE_RE.exec(String(value ?? ''));
   if (!match || match[1] === 'none' || !validBefore(match[1])) return null;
   return { before: match[1], after: match[2] };
+}
+
+/** Range originale del push che ha stageato le pagine prima del dispatch API. */
+export function parseFastPublishRangeRunTitle(value) {
+  const match = FAST_PUBLISH_RANGE_RUN_TITLE_RE.exec(String(value ?? ''));
+  if (!match) return null;
+  // source_commit is pinned by workflow_dispatch, while `--ref main` resolves
+  // github.sha when the run starts. Main can advance between those moments;
+  // the nonce therefore owns the published source SHA, and the title range
+  // SHA is only the workflow-run checkout for diagnostics.
+  return { before: match[1], after: match[2], workflowRunHead: match[3] };
 }
 
 /**
@@ -150,6 +162,14 @@ function readWorkflowRunHistory({ repo, headSha, workflowRunId }) {
 }
 
 function main() {
+  if (process.argv[2] === '--fast-publish-range') {
+    const range = parseFastPublishRangeRunTitle(process.env.WORKFLOW_RUN_DISPLAY_TITLE);
+    if (!range) throw new Error('titolo workflow_run privo di un range Fast Publish valido');
+    console.log(`before=${range.before}`);
+    console.log(`after=${range.after}`);
+    console.log('source=fast-publish-range-title');
+    return;
+  }
   const repo = String(process.env.REPO ?? '').trim();
   const headSha = String(process.env.WORKFLOW_RUN_HEAD_SHA ?? '').trim();
   const workflowRunId = String(process.env.WORKFLOW_RUN_ID ?? '').trim();

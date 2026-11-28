@@ -101,6 +101,21 @@ reconcile_edge_matrix() {
   echo "::error::registro edge non coerente dopo $attempt tentativi; nessun replay verra' accodato" >&2
   return 1
 }
+range_has_api_data() {
+  local before_ref="${1:-}" after_ref="${2:-}" before_sha='' after_sha='' result=''
+  if [ -z "$before_ref" ] || [[ "$before_ref" =~ ^0+$ ]]; then before_ref=HEAD~1; fi
+  if [ -z "$after_ref" ]; then after_ref=HEAD; fi
+  before_sha="$(git rev-parse "$before_ref^{commit}")" || return 1
+  after_sha="$(git rev-parse "$after_ref^{commit}")" || return 1
+  result="$(node scripts/ci/fast-publish-section.mjs r2-api-data-range "$before_sha" "$after_sha")" || return 1
+  case "$result" in
+    true|false) printf '%s\n' "$result" ;;
+    *) echo "::error::esito API data non valido per $before_sha..$after_sha" >&2; return 1 ;;
+  esac
+}
+full_section_matrix() {
+  jq -c 'map(if .cleanupInactiveSurface == true then . else . + {ids: [], bootstrap: true} end)'
+}
 if [ "$EVENT_NAME" = 'push' ] || { [ "$EVENT_NAME" = 'workflow_run' ] && [ "$WORKFLOW_RUN_EVENT" = 'push' ]; }; then
   cover_drain_message="${COVER_DRAIN_COMMIT_MESSAGE:-}"
   if [ "$EVENT_NAME" = 'workflow_run' ]; then
@@ -114,16 +129,38 @@ if [ "$EVENT_NAME" = 'push' ] || { [ "$EVENT_NAME" = 'workflow_run' ] && [ "$WOR
       echo 'matrix=[]'
       echo 'any=false'
       echo 'dry=false'
+      echo 'stage_matrix=[]'
+      echo 'stage_any=false'
+      echo 'api_action=none'
+      echo 'api_wait_commit='
       echo 'replay_api_after_publish=false'
       echo 'allow_deferred_live_release=false'
     } >> "$GITHUB_OUTPUT"
     exit 0
   fi
 fi
+if [ "$EVENT_NAME" = 'workflow_run' ] && [ "$WORKFLOW_RUN_EVENT" = 'workflow_dispatch' ] \
+  && [ "${WORKFLOW_RUN_RANGE_SOURCE:-}" = 'fast-publish-range-title' ]; then
+  echo "::notice::workflow_run del dispatch API gia' coperto dal push Fast Publish; nessuna seconda matrix"
+  {
+    echo 'matrix=[]'
+    echo 'any=false'
+    echo 'dry=false'
+    echo 'stage_matrix=[]'
+    echo 'stage_any=false'
+    echo 'api_action=none'
+    echo 'api_wait_commit='
+    echo 'replay_api_after_publish=false'
+    echo 'allow_deferred_live_release=false'
+    echo "before=$PUSH_BEFORE"
+    echo "after=$PUSH_AFTER"
+    echo 'source_commit='
+    echo "api_release_commit=${API_RELEASE_COMMIT_INPUT:-}"
+  } >> "$GITHUB_OUTPUT"
+  exit 0
+fi
 pinned_source=''
-if [ "$EVENT_NAME" = 'workflow_run' ]; then
-  pinned_source="${WORKFLOW_RUN_HEAD_SHA:-}"
-elif [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ -n "${SOURCE_COMMIT_INPUT:-}" ]; then
+if [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ -n "${SOURCE_COMMIT_INPUT:-}" ]; then
   pinned_source="${SOURCE_MAIN_COMMIT_INPUT:-$SOURCE_COMMIT_INPUT}"
 fi
 if [ -n "$pinned_source" ]; then
@@ -271,18 +308,9 @@ if [ -n "$pinned_source" ]; then
       echo '::error::checkout stale replan non coincide con la HEAD corrente'
       exit 1
     fi
-    # Reuse the push planner when the original range is still provable.
-    # The edge matrix alone requests a full render for every live canton.
-    # The verified range preserves real bootstrap changes and article IDs,
-    # while the edge matrix still governs the refreshes and cleanup.
-    if [ "$EVENT_NAME" = 'workflow_run' ] && [ "$WORKFLOW_RUN_EVENT" = 'push' ] \
-      && [[ "$replay_before" =~ ^[a-f0-9]{40}$ ]] \
-      && git merge-base --is-ancestor "$replay_before" "$pinned_source" \
-      && git merge-base --is-ancestor "$pinned_source" "$current_main"; then
-      replay_diff="$(git diff --name-status "$replay_before" "$current_main" \
-        | PUSH_BEFORE="$replay_before" node scripts/ci/fast-publish-section.mjs r2-plan)"
-      replay_matrix="$(printf '%s\n%s\n' "$replay_diff" "$replay_matrix" \
-        | node scripts/ci/fast-publish-section.mjs r2-api-push-plan)"
+    # Classify the original API push; render the current head for those targets.
+    if [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ -n "${SOURCE_COMMIT_INPUT:-}" ]; then
+      replay_matrix="$(printf '%s\n' "$replay_matrix" | full_section_matrix)"
     fi
     any=false
     [ "$(printf '%s' "$replay_matrix" | jq 'length')" -gt 0 ] && any=true
@@ -293,6 +321,18 @@ if [ -n "$pinned_source" ]; then
       echo "any=$any"
       echo "dry=$replay_dry"
       echo "bootstrap=$bootstrap"
+      stage_matrix='[]'
+      stage_any=false
+      api_action=none
+      if [ "$any" = 'true' ] && { [ "$bootstrap" = 'true' ] || [ "$replay_api_after_publish" = 'true' ]; }; then
+        stage_matrix="$(printf '%s\n' "$replay_matrix" | full_section_matrix)"
+        stage_any=true
+        api_action=dispatch
+      fi
+      echo "stage_matrix=$stage_matrix"
+      echo "stage_any=$stage_any"
+      echo "api_action=$api_action"
+      echo 'api_wait_commit='
       echo "replay_api_after_publish=$replay_api_after_publish"
       echo "allow_deferred_live_release=$allow_deferred_live_release"
       echo "source_commit=$current_main"
@@ -307,6 +347,7 @@ fi
 before="${PUSH_BEFORE:-}"
 after="${PUSH_AFTER:-}"
 replay_api_after_publish=false
+api_data_changed=false
 if [ "$EVENT_NAME" = 'workflow_run' ]; then
   if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || [ "$(git rev-parse HEAD)" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
     echo "::error::workflow_run head non coincide con il checkout"
@@ -358,33 +399,42 @@ else
   dry=false
   allow_deferred_live_release=false
   if [ "$EVENT_NAME" = 'workflow_run' ]; then
-    # Ogni completion API deve leggere il registro edge della
-    # release appena completata: anche una kill-switch o un hub
-    # mancante puo' rendere non-live una sezione senza una
-    # transizione in sections/registry.json.
-    edge_matrix="$(reconcile_edge_matrix "$WORKFLOW_RUN_HEAD_SHA")"
     if [ "$WORKFLOW_RUN_EVENT" = 'push' ]; then
       if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
-      # Il replay della push API deve riprodurre il piano dei contenuti
-      # della push originaria: il primo fast-publish puo' essere
-      # fallito mentre attendeva la release API, senza modificare il registro.
-      diff_matrix="$(git diff --name-status "$before" HEAD 2>/dev/null \
-        | PUSH_BEFORE="$before" node scripts/ci/fast-publish-section.mjs r2-plan \
-        | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
-      # Un API push riuscito puo' cambiare RSS anche se il diff
-      # contiene solo input del generatore non associabili a una
-      # singola sezione. Aggiorna landing/archive/hub/RSS di tutte le
-      # cantonali live, mantenendo gli articoli circoscritti al diff.
-      matrix="$(printf '%s\n%s\n' "$diff_matrix" "$edge_matrix" \
-        | node scripts/ci/fast-publish-section.mjs r2-api-push-plan)"
+      api_data_changed="$(range_has_api_data "$before" "${after:-$WORKFLOW_RUN_HEAD_SHA}")"
+      if [ "$api_data_changed" = 'true' ]; then
+        diff_matrix="$(node scripts/ci/fast-publish-section.mjs r2-plan-range "$before" "${after:-$WORKFLOW_RUN_HEAD_SHA}")"
+        if [ "$(jq 'length' <<< "$diff_matrix")" -gt 0 ]; then
+          # The push trigger owns the direct stage/finalize path for these R2 inputs.
+          matrix='[]'
+        else
+          # API-only ranges keep the post-publish live reconciliation path.
+          edge_matrix="$(reconcile_edge_matrix "$WORKFLOW_RUN_HEAD_SHA")"
+          matrix="$(printf '%s\n%s\n' "$diff_matrix" "$edge_matrix" \
+            | node scripts/ci/fast-publish-section.mjs r2-api-push-plan)"
+        fi
+      else
+        # Render-code-only commits were handled by the direct push trigger.
+        matrix='[]'
+      fi
     else
-      matrix="$edge_matrix"
+      # Schedule e dispatch espliciti restano riconciliazioni edge complete.
+      matrix="$(reconcile_edge_matrix "$WORKFLOW_RUN_HEAD_SHA")"
     fi
   else
     if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
-    matrix="$(git diff --name-status "$before" HEAD 2>/dev/null \
-      | PUSH_BEFORE="$before" node scripts/ci/fast-publish-section.mjs r2-plan \
-      | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
+    matrix="$(node scripts/ci/fast-publish-section.mjs r2-plan-range "$before" "${after:-HEAD}")"
+    if [ "$EVENT_NAME" = 'push' ]; then
+      api_data_changed="$(range_has_api_data "$before" "${after:-HEAD}")"
+      matrix="$(printf '%s\n' "$matrix" | full_section_matrix)"
+      if [ "$api_data_changed" = 'true' ]; then
+        replay_api_after_publish=true
+        allow_deferred_live_release=true
+      else
+        replay_api_after_publish=false
+        allow_deferred_live_release=false
+      fi
+    fi
   fi
 fi
 # Applica i kill switch anche ai workflow_dispatch, inclusi i replay
@@ -406,11 +456,50 @@ bootstrap=false
 if [ "$(printf '%s' "$matrix" | jq 'any(.[]; .bootstrap == true)')" = "true" ]; then
   bootstrap=true
 fi
+stage_matrix='[]'
+api_action=none
+api_wait_commit=''
+if [ "$EVENT_NAME" = 'push' ] && [ "$api_data_changed" = 'true' ] && [ "$any" = 'true' ]; then
+  stage_matrix="$(node scripts/ci/fast-publish-section.mjs r2-api-stage-plan-range "$before" "${after:-HEAD}")"
+  publish_api_push_owner="$(node scripts/ci/fast-publish-api-only-decision.mjs \
+    --push-trigger "$before" "${after:-HEAD}" .github/workflows/publish-api.yml)"
+  if [ "$publish_api_push_owner" = 'true' ]; then
+    # publish-api already owns this push through its paths filter. Stage
+    # before observing its release, then finalize without a duplicate run.
+    api_action=wait
+    api_wait_commit="${after:-$(git rev-parse HEAD)}"
+  else
+    # Local R2 inputs outside publish-api's push filter still need one API
+    # publish after every requested section has staged.
+    api_action=dispatch
+  fi
+elif [ "$EVENT_NAME" = 'workflow_run' ] && [ "$any" = 'true' ]; then
+  api_action=wait
+  api_wait_commit="$WORKFLOW_RUN_HEAD_SHA"
+elif [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ "$any" = 'true' ] \
+  && [ -n "${API_RELEASE_COMMIT_INPUT:-}" ]; then
+  if ! [[ "$API_RELEASE_COMMIT_INPUT" =~ ^[a-f0-9]{40}$ ]]; then
+    echo '::error::api_release_commit deve essere una SHA completa'
+    exit 1
+  fi
+  api_action=wait
+  api_wait_commit="$API_RELEASE_COMMIT_INPUT"
+elif [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ "$any" = 'true' ] \
+  && { [ "$bootstrap" = 'true' ] || [ "$replay_api_after_publish" = 'true' ]; }; then
+  stage_matrix="$(printf '%s\n' "$matrix" | full_section_matrix)"
+  api_action=dispatch
+fi
+stage_any=false
+[ "$(jq 'length' <<< "$stage_matrix")" -gt 0 ] && stage_any=true
 {
   echo "matrix=$matrix"
   echo "any=$any"
   echo "dry=$dry"
   echo "bootstrap=$bootstrap"
+  echo "stage_matrix=$stage_matrix"
+  echo "stage_any=$stage_any"
+  echo "api_action=$api_action"
+  echo "api_wait_commit=$api_wait_commit"
   echo "replay_api_after_publish=$replay_api_after_publish"
   echo "allow_deferred_live_release=$allow_deferred_live_release"
   echo "before=$before"

@@ -12,9 +12,8 @@ on:
       - 'content/article-index-exclusions.json'
       - 'content/blog-body-canton-*/**'
       - 'content/blog-meta-canton-*'
-      # Il flip draft -> live cambia solo il registro. Il primo pass carica le
-      # pagine necessarie al bootstrap; il replay workflow_run, dopo il
-      # completamento di publish-api, verifica feed RSS e landing sul live.
+      # Il flip draft -> live cambia solo il registro; lo stage carica le
+      # pagine necessarie prima della pubblicazione API.
       - 'sections/registry.json'
       # Declared images and queued-cover writes are filtered below.
       - 'public/images/**'
@@ -37,6 +36,9 @@ on:
       - 'scripts/ci/section-bootstrap-lock.mjs'
       - 'scripts/lib/conditional-cdn-put.sh'
       - 'scripts/ci/fast-publish-section.mjs'
+      - 'scripts/ci/fast-publish-section-coordinate.sh'
+      - 'scripts/ci/fast-publish-section-late-api-recovery.sh'
+      - 'scripts/ci/wait-fast-publish-api-readiness.mjs'
       - 'scripts/ci/dispatch-fast-publish-replay.sh'
       - 'scripts/ci/dispatch-bounded-section-replay.sh'
       - 'scripts/ci/read-main-head.sh'
@@ -88,12 +90,6 @@ on:
       - 'scripts/lib/parse-positive-num.mjs'
       - 'generator/scripts/load-rc-env.mjs'
       - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
-  # API publication can complete after this pass; workflow_run refreshes live
-  # canton non-article surfaces and cleanup.
-  workflow_run:
-    workflows: ['Publish article data API']
-    types: [completed]
-    branches: [main]
   workflow_dispatch:
     inputs:
       section:
@@ -191,25 +187,23 @@ permissions:
 
 jobs:
   resolve:
-    if: >-
-      github.event_name != 'workflow_run' ||
-      (github.event.workflow_run.conclusion == 'success' &&
-       (github.event.workflow_run.event == 'push' ||
-        github.event.workflow_run.event == 'schedule' ||
-        github.event.workflow_run.event == 'workflow_dispatch') &&
-       github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
     # Include checkout/teardown overhead while bounding a stalled resolver.
     timeout-minutes: 10
     outputs:
       matrix: ${{ steps.plan.outputs.matrix }}
       any: ${{ steps.plan.outputs.any }}
+      stage_matrix: ${{ steps.plan.outputs.stage_matrix }}
+      stage_any: ${{ steps.plan.outputs.stage_any }}
+      api_action: ${{ steps.plan.outputs.api_action }}
+      api_wait_commit: ${{ steps.plan.outputs.api_wait_commit }}
       dry: ${{ steps.plan.outputs.dry }}
       bootstrap: ${{ steps.plan.outputs.bootstrap }}
       replay_api_after_publish: ${{ steps.replay_mode.outputs.replay_api_after_publish }}
       allow_deferred_live_release: ${{ steps.replay_mode.outputs.allow_deferred_live_release }}
       push_before: ${{ steps.plan.outputs.before }}
       push_after: ${{ steps.plan.outputs.after }}
+      event_before: ${{ steps.push_range.outputs.before }}
       source_commit: ${{ steps.plan.outputs.source_commit }}
       api_release_commit: ${{ steps.plan.outputs.api_release_commit }}
       preflight_head: ${{ steps.preflight_head.outputs.head }}
@@ -346,6 +340,7 @@ jobs:
           SOURCE_MAIN_COMMIT_INPUT: ${{ inputs.source_main_commit }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
           WORKFLOW_RUN_EVENT: ${{ github.event.workflow_run.event }}
+          WORKFLOW_RUN_DISPLAY_TITLE: ${{ github.event.workflow_run.display_title }}
         run: |
           set -euo pipefail
           before="${PUSH_BEFORE:-}"
@@ -377,10 +372,33 @@ jobs:
                 exit 1
               fi
               echo "::notice::range push originaria risolta via $range_source: $before -> $after"
+            elif [ "$WORKFLOW_RUN_EVENT" = 'workflow_dispatch' ]; then
+              range_output="$(WORKFLOW_RUN_DISPLAY_TITLE="$WORKFLOW_RUN_DISPLAY_TITLE" \
+                node scripts/ci/resolve-workflow-run-push-range.mjs --fast-publish-range)" || {
+                range_output=''
+              }
+              if [ -n "$range_output" ]; then
+                range_source=''
+                while IFS='=' read -r key value; do
+                  case "$key" in
+                    before) before="$value" ;;
+                    after) after="$value" ;;
+                    source) range_source="$value" ;;
+                  esac
+                done <<< "$range_output"
+                if [ "$range_source" != 'fast-publish-range-title' ] \
+                  && [ "$after" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
+                  echo '::error::range Fast Publish nel titolo non coincide con la HEAD del workflow_run API'
+                  exit 1
+                fi
+                echo "::notice::range Fast Publish originario risolto dal titolo: $before -> $after"
+              fi
             elif [ "$WORKFLOW_RUN_EVENT" != 'schedule' ] && [ "$WORKFLOW_RUN_EVENT" != 'workflow_dispatch' ]; then
               echo "::error::workflow_run event non supportato: $WORKFLOW_RUN_EVENT"
               exit 1
             fi
+          elif [ "$EVENT_NAME" = 'push' ]; then
+            range_source='push-event'
           elif [ "$EVENT_NAME" = 'workflow_dispatch' ]; then
             if [ -n "${SOURCE_COMMIT_INPUT:-}" ] && ! [[ "$SOURCE_COMMIT_INPUT" =~ ^[a-f0-9]{40}$ ]]; then
               echo "::error::source_commit richiede una SHA completa"
@@ -411,10 +429,14 @@ jobs:
               fi
               before="$dispatch_before"
               after="$dispatch_after"
+              range_source='dispatch-input'
             fi
           fi
-          echo "before=$before" >> "$GITHUB_OUTPUT"
-          echo "after=$after" >> "$GITHUB_OUTPUT"
+          {
+            echo "before=$before"
+            echo "after=$after"
+            echo "source=${range_source:-}"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Fetch push base (resolve)
         env:
@@ -446,6 +468,7 @@ jobs:
           PUSH_AFTER: ${{ steps.push_range.outputs.after }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
           WORKFLOW_RUN_EVENT: ${{ github.event.workflow_run.event }}
+          WORKFLOW_RUN_RANGE_SOURCE: ${{ steps.push_range.outputs.source }}
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
           SOURCE_COMMIT_INPUT: ${{ inputs.source_commit }}
@@ -471,16 +494,9 @@ jobs:
           set -euo pipefail
           replay_api_after_publish="${PLAN_REPLAY_API_AFTER_PUBLISH:-false}"
           allow_deferred_live_release="${PLAN_ALLOW_DEFERRED_LIVE_RELEASE:-false}"
-          # Un push puo' vincere la gara con publish-api prima che le pagine
-          # siano su R2. Il render staged resta fail-closed sugli errori reali,
-          # ma se la matrice ha completato con successo il replay API e' parte
-          # obbligatoria del percorso normale, non un'opzione riservata al
-          # bootstrap. Cosi' il timeout bounded dell'API non lascia uno staged
-          # parziale senza redispatch.
-          if [ "$EVENT_NAME" = 'push' ] && [ "$ANY" = 'true' ] && [ "$DRY" != 'true' ]; then
-            replay_api_after_publish=true
-            allow_deferred_live_release=true
-          fi
+          # I push con fonti API articolo vengono pubblicati dal solo pass
+          # workflow_run dopo il successo di publish-api. Il push diretto resta
+          # per il codice di render e non dispatcha una build API duplicata.
           echo "replay_api_after_publish=$replay_api_after_publish" >> "$GITHUB_OUTPUT"
           echo "allow_deferred_live_release=$allow_deferred_live_release" >> "$GITHUB_OUTPUT"
 
@@ -526,304 +542,111 @@ jobs:
         if: steps.plan.outputs.any == 'true'
         run: echo "head=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
-  publish:
+  stage:
+    name: stage (${{ matrix.target.section }})
     needs: resolve
-    if: needs.resolve.outputs.any == 'true'
+    if: needs.resolve.outputs.stage_any == 'true'
     runs-on: ubuntu-latest
-    # Il job conserva il budget esteso per i retry del render; il gate bootstrap
-    # del publisher API ha invece una finestra bounded breve e lascia il recupero
-    # al replay gia' previsto quando il fast-publish e' ancora in coda.
     timeout-minutes: 360
     strategy:
       fail-fast: false
-      # Canton jobs acquire the same CDN image namespace lease for each PUT.
-      # Keep a full-corpus matrix from making every canton compete at once.
       max-parallel: 4
       matrix:
-        target: ${{ fromJSON(needs.resolve.outputs.matrix) }}
+        target: ${{ fromJSON(needs.resolve.outputs.stage_matrix) }}
     concurrency:
       group: fast-publish-${{ matrix.target.section }}
       cancel-in-progress: false
-      # Con tre richieste per sezione, la terza attende il suo turno
-      # senza sostituire la seconda già in coda.
-      queue: max
+      queue: single
     steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-        with:
-          ref: ${{ needs.resolve.outputs.source_commit || github.event.workflow_run.head_sha || inputs.source_commit || (github.event_name == 'workflow_dispatch' && inputs.bootstrap != true && github.ref) || github.sha }}
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: Checkout replay dispatcher from workflow revision
+      - name: Checkout workflow source
         uses: actions/checkout@v7
         with:
           ref: ${{ github.sha }}
-          path: .replay-dispatcher-source
-          fetch-depth: 1
-          sparse-checkout: |
-            .github/actions/setup-article-source-runtime/action.yml
-            scripts/ci/article-source-runtime/package.json
-            scripts/ci/article-source-runtime/package-lock.json
-            scripts/ci/check-article-source-runtime.mjs
-            scripts/lib/npm-ci-retry.sh
-            scripts/ci/dispatch-fast-publish-replay.sh
-            scripts/ci/dispatch-bounded-section-replay.sh
-            scripts/ci/read-main-head.sh
-            scripts/ci/fetch-push-base-if-missing.sh
-            scripts/ci/fast-publish-section-render.sh
-            scripts/ci/section-source-unaffected.sh
-            scripts/ci/record-fast-publish-result.sh
-          sparse-checkout-cone-mode: false
+          fetch-depth: 0
           persist-credentials: false
 
-      - name: Materialize freshness helper from workflow revision
-        run: |
-          set -euo pipefail
-          source='.replay-dispatcher-source/scripts/ci/read-main-head.sh'
-          target='scripts/ci/read-main-head.sh'
-          render_source='.replay-dispatcher-source/scripts/ci/fast-publish-section-render.sh'
-          if [ ! -f "$render_source" ]; then
-            echo "::error::helper di render non presente nel checkout della revisione del workflow"
-            exit 1
-          fi
-          test -f .replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh
-          ln -sfn "$PWD/.replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh" scripts/ci/fetch-push-base-if-missing.sh
-          if [ -f "$source" ]; then
-            install -m 0755 "$source" "$target"
-          elif [ -f "$target" ]; then
-            chmod 0755 "$target"
-            echo "::warning::helper della punta di main assente nella revisione del dispatcher; uso quello del checkout pinned"
-          else
-            echo "::warning::helper della punta di main assente nelle revisioni disponibili; genero il fallback git-transport"
-            cat > "$target" <<'EOF'
-            #!/usr/bin/env bash
-            set -euo pipefail
-            remote="${1:-origin}"
-            ref="${2:-refs/heads/main}"
-            if [ "$#" -gt 2 ]; then
-              echo "usage: $0 [remote] [ref]" >&2
-              exit 2
-            fi
-            main_head=''
-            for attempt in 1 2 3; do
-              main_head=''
-              ls_remote_out=''
-              if ls_remote_out="$(timeout 60 git ls-remote --refs "$remote" "$ref" 2>/dev/null)"; then
-                main_head="$(printf '%s\n' "$ls_remote_out" | awk -v wanted="$ref" '$2 == wanted { print $1; exit }')"
-              fi
-              if [[ "$main_head" =~ ^[a-f0-9]{40}$ ]]; then
-                printf '%s\n' "$main_head"
-                exit 0
-              fi
-              [ "$attempt" -lt 3 ] && sleep "$((attempt * 5))"
-            done
-            echo "::error::punta di $ref non risolvibile via git ls-remote" >&2
-            exit 1
-          EOF
-            chmod 0755 "$target"
-          fi
-
-      - name: Guard pinned replay freshness
-        id: replay_freshness
-        env:
-          GH_TOKEN: ${{ github.token }}
-          REPO: ${{ github.repository }}
-          EVENT_NAME: ${{ github.event_name }}
-          RESOLVED_SOURCE_COMMIT: ${{ needs.resolve.outputs.source_commit }}
-          WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
-          PINNED_SOURCE_COMMIT: ${{ inputs.source_commit }}
-          PINNED_SOURCE_MAIN: ${{ inputs.source_main_commit }}
-          SECTION: ${{ matrix.target.section }}
-        run: |
-          set -euo pipefail
-          pinned_source=''
-          if [ -n "${RESOLVED_SOURCE_COMMIT:-}" ]; then
-            pinned_source="$RESOLVED_SOURCE_COMMIT"
-          elif [ "$EVENT_NAME" = 'workflow_run' ]; then
-            pinned_source="${WORKFLOW_RUN_HEAD_SHA:-}"
-          elif [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ -n "${PINNED_SOURCE_COMMIT:-}" ]; then
-            pinned_source="${PINNED_SOURCE_MAIN:-$PINNED_SOURCE_COMMIT}"
-          else
-            echo 'fresh=true' >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          if [ -z "$pinned_source" ] || ! [[ "$pinned_source" =~ ^[a-f0-9]{40}$ ]]; then
-            echo "::error::revisione pinned non valida per il guard di freschezza"
-            exit 1
-          fi
-          if ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
-            echo "::error::impossibile verificare la revisione corrente di main prima del replay"
-            exit 1
-          fi
-          if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
-            echo "::error::revisione corrente di main non valida"
-            exit 1
-          fi
-          echo "current_main=$current_main" >> "$GITHUB_OUTPUT"
-          if ! bash .replay-dispatcher-source/scripts/ci/section-source-unaffected.sh --section "$SECTION" "$pinned_source" "$current_main"; then
-            echo "::notice::replay pinned saltato: main e' avanzata da $pinned_source a $current_main"
-            echo 'fresh=false' >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          echo 'fresh=true' >> "$GITHUB_OUTPUT"
-
-      - name: Set up Node
-        if: steps.replay_freshness.outputs.fresh == 'true' || github.event.workflow_run.head_sha != ''
+      - name: Setup Node
         uses: actions/setup-node@v7
         with:
           node-version: '22'
-          cache: 'npm'
 
-      # workflow_run stale resolves an API release; bounded stale does not.
-      - name: Setup isolated article source runtime
-        if: steps.replay_freshness.outputs.fresh == 'true' || github.event.workflow_run.head_sha != ''
-        uses: ./.replay-dispatcher-source/.github/actions/setup-article-source-runtime
-
-      # Un replay stantio usa il workflow corrente su main e la sua HEAD come
-      # sorgente del corpus. Per una run API osservata conserva P come release
-      # solo se P copre tutti gli input raggiungibili dalla HEAD corrente;
-      # un bounded dispatch riparte senza il vecchio override e lascia che il
-      # publisher ricalcoli una release compatibile. In entrambi i casi, se la
-      # release corrente non e' pronta il replay resta in attesa invece di
-      # creare una superficie mista.
-      - name: Prepare Firebase credentials for stale replay recovery
-        if: steps.replay_freshness.outputs.fresh == 'false'
+      - name: Read main after acquiring the section slot
+        id: start_source
         env:
-          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+          SECTION: ${{ matrix.target.section }}
         run: |
           set -euo pipefail
-          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
-            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set — Remote Config is the only source of the dispatch token"
+          observed="$(bash scripts/ci/read-main-head.sh)"
+          if ! [[ "$observed" =~ ^[a-f0-9]{40}$ ]]; then
+            echo '::error::HEAD main non valida dopo aver acquisito lo slot della sezione'
             exit 1
           fi
-          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/stale-replay-sa.json"
-          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/stale-replay-sa.json" >> "$GITHUB_ENV"
-
-      - name: Load dispatch token for stale replay recovery
-        if: steps.replay_freshness.outputs.fresh == 'false'
-        run: node generator/scripts/load-rc-env.mjs
-
-      - name: Dispatch bounded replay with current corpus checkout
-        if: steps.replay_freshness.outputs.fresh == 'false'
-        env:
-          REPO: ${{ github.repository }}
-          SECTION: ${{ matrix.target.section }}
-          ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
-          MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.missingPagePaths || fromJSON('[]')) }}
-          KNOWN_MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.knownMissingPagePaths || fromJSON('[]')) }}
-          BOOTSTRAP: ${{ matrix.target.bootstrap }}
-          REMOVE_STALE_CANTON_RSS_FEEDS: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
-          CLEANUP_INACTIVE_SURFACE: ${{ matrix.target.cleanupInactiveSurface || false }}
-          ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.allow_deferred_live_release }}
-          DRY: ${{ needs.resolve.outputs.dry }}
-          REPLAY_API_AFTER_PUBLISH: ${{ inputs.replay_api_after_publish }}
-          COORDINATED_RECOVERY: ${{ inputs.coordinated_recovery }}
-          STALE_HEAD: ${{ github.event.workflow_run.head_sha }}
-          CURRENT_MAIN: ${{ steps.replay_freshness.outputs.current_main }}
-          ORIGINAL_PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
-        run: bash .replay-dispatcher-source/scripts/ci/dispatch-bounded-section-replay.sh
-
-      - name: Fetch fallback corpus revision for manifest migration
-        if: steps.replay_freshness.outputs.fresh == 'true'
-        env:
-          EVENT_NAME: ${{ github.event_name }}
-          PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
-          PUSH_AFTER: ${{ needs.resolve.outputs.push_after }}
-          WORKFLOW_RUN_HEAD_SHA: ${{ needs.resolve.outputs.source_commit || github.event.workflow_run.head_sha }}
-        run: |
-          set -euo pipefail
-          if [ "$EVENT_NAME" = 'workflow_run' ]; then
-            if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || [ "$(git rev-parse HEAD)" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
-              echo "::error::workflow_run head non coincide con il checkout"
-              exit 1
-            fi
+          if ! git cat-file -e "$observed^{commit}" 2>/dev/null; then git fetch --quiet --no-tags origin "$observed"; fi
+          git checkout --detach "$observed"
+          eligible="$(node scripts/ci/fast-publish-section.mjs r2-section-eligible "$SECTION")"
+          if [ "$eligible" != 'true' ]; then
+            echo "::error::target stage $SECTION non eleggibile sulla HEAD $observed; cede alla run latest"
+            exit 1
           fi
-          bash scripts/ci/fetch-push-base-if-missing.sh
+          echo "head=$observed" >> "$GITHUB_OUTPUT"
+
+      - name: Setup isolated article source runtime
+        uses: ./.github/actions/setup-article-source-runtime
 
       - name: Install dependencies
-        if: steps.replay_freshness.outputs.fresh == 'true'
-        run: |
-          set -euo pipefail
-          bash scripts/lib/npm-ci-retry.sh
-          lock_hash="$(sha256sum package.json package-lock.json | sha256sum | cut -d' ' -f1)"
-          echo "INSTALLED_DEPENDENCY_LOCK_HASH=$lock_hash" >> "$GITHUB_ENV"
+        run: bash scripts/lib/npm-ci-retry.sh
 
-      # Remote Config e' la sola sorgente delle credenziali R2 e Cloudflare.
-      # In dry non servono: il render e la validazione girano comunque.
       - name: Prepare Firebase credentials
-        if: steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true'
+        if: needs.resolve.outputs.dry != 'true'
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
           set -euo pipefail
           if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
-            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set — Remote Config is the only source of the R2 and Cloudflare credentials"
+            echo '::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set'
             exit 1
           fi
           printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
 
-      - name: Load secrets from Remote Config
-        if: steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true'
+      - name: Load R2 and CDN credentials
+        if: needs.resolve.outputs.dry != 'true'
         run: node generator/scripts/load-rc-env.mjs
 
-      # Un upload che «salta» per credenziali assenti esce 0 da
-      # upload-cdn-file.sh: qui l'assenza deve fermare il job PRIMA del render,
-      # non diventare una pubblicazione verde che non ha caricato niente.
-      - name: Require the R2 and Cloudflare credentials
-        if: steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true'
+      - name: Require R2 and Cloudflare credentials
+        if: needs.resolve.outputs.dry != 'true'
         run: |
           set -euo pipefail
           missing=()
-          for v in R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_S3_ENDPOINT R2_BUCKET CF_API_TOKEN; do
-            [ -n "${!v:-}" ] || missing+=("$v")
+          for name in R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_S3_ENDPOINT R2_BUCKET CF_API_TOKEN; do
+            [ -n "${!name:-}" ] || missing+=("$name")
           done
           if [ "${#missing[@]}" -gt 0 ]; then
-            echo "::error::missing after the Remote Config load: ${missing[*]}"
+            echo "::error::missing after Remote Config load: ${missing[*]}"
             exit 1
           fi
 
-      # Le pagine rese qui prendono la shell da `host/`. Il riferimento a
-      # `/assets/gtag-init-<hash>.js` ha il nome derivato dal contenuto: cambia
-      # ogni volta che il sito cambia quei byte, e l'oggetto arriva sulla CDN
-      # solo con un deploy completo del sito, ore dopo che il contratto puo'
-      # arrivare qui. Il 2026-10-07 gli emettitori veloci del sito hanno
-      # pubblicato quel riferimento prima del file: 404 su ogni articolo
-      # rirenderizzato per 2 h 40 min (sito issue 12270). Questo passo carica
-      # il file se la CDN non lo ha, non sostituisce mai un oggetto e ferma il
-      # job se non riesce a stabilirlo: scripts/ci/ensure-host-shell-assets.mjs.
-      - name: Ensure the host shell assets are on the CDN
-        if: steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true'
+      - name: Ensure host shell assets are on the CDN
+        if: needs.resolve.outputs.dry != 'true'
         run: bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/ci/ensure-host-shell-assets.mjs
 
-      # Un bootstrap di una sezione gia' live carica HTML mentre il publisher
-      # API prepara la stessa release. Il gate R2 viene acquisito PRIMA del
-      # render e rilasciato anche su errore: publish-section-edge aspetta il
-      # suo sblocco prima di fare il PUT del registro. Se publish-api ha vinto
-      # la gara di avvio, il bootstrap attende il lease edge-publisher e
-      # riprende dopo il suo rilascio; il replay API successivo riallinea il
-      # registry alla nuova superficie HTML.
       - name: Acquire bootstrap R2 gate
         id: acquire_bootstrap
-        if: steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true' && matrix.target.bootstrap == true
+        if: needs.resolve.outputs.dry != 'true'
         env:
           SECTION: ${{ matrix.target.section }}
-          LOCK_WAIT_MS: 3300000
-          LOCK_RETRY_MS: 20000
           GH_TOKEN: ${{ github.token }}
-        run: node scripts/ci/section-bootstrap-lock.mjs acquire --section "$SECTION" --commit "$(git rev-parse HEAD)" --wait-ms "$LOCK_WAIT_MS" --retry-ms "$LOCK_RETRY_MS"
+        run: node scripts/ci/section-bootstrap-lock.mjs acquire --section "$SECTION" --commit "${{ steps.start_source.outputs.head }}" --wait-ms 3300000 --retry-ms 20000
 
-      - name: Render, validate and publish the section pages
+      - name: Stage full section before API release
         id: render
-        if: steps.replay_freshness.outputs.fresh == 'true'
         env:
           SECTION: ${{ matrix.target.section }}
-          ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
-          MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.missingPagePaths || fromJSON('[]')) }}
-          KNOWN_MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.knownMissingPagePaths || fromJSON('[]')) }}
-          BOOTSTRAP: ${{ matrix.target.bootstrap }}
-          TARGET_BOOTSTRAP: ${{ matrix.target.bootstrap }}
+          ARTICLE_IDS_JSON: '[]'
+          MISSING_PAGE_PATHS_JSON: '[]'
+          KNOWN_MISSING_PAGE_PATHS_JSON: '[]'
+          BOOTSTRAP: true
+          TARGET_BOOTSTRAP: true
           FAST_PUBLISH_ARMED: ${{ vars.FAST_PUBLISH_ARMED }}
           DRY: ${{ needs.resolve.outputs.dry }}
           EVENT_NAME: ${{ github.event_name }}
@@ -832,415 +655,454 @@ jobs:
           PREFLIGHT_HEAD: ${{ needs.resolve.outputs.preflight_head }}
           REMOVE_STALE_CANTON_RSS_FEEDS: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
           CLEANUP_INACTIVE_SURFACE: ${{ matrix.target.cleanupInactiveSurface || false }}
-          API_RELEASE_COMMIT: ${{ needs.resolve.outputs.api_release_commit }}
-          ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.allow_deferred_live_release }}
-          REPLAY_API_AFTER_PUBLISH: ${{ needs.resolve.outputs.replay_api_after_publish }}
-          COORDINATED_RECOVERY: ${{ inputs.coordinated_recovery }}
-          SOURCE_COMMIT: ${{ needs.resolve.outputs.source_commit || inputs.source_commit }}
-          SOURCE_MAIN_COMMIT: ${{ needs.resolve.outputs.source_commit || inputs.source_main_commit }}
-          DISPATCH_NONCE: ${{ inputs.dispatch_nonce }}
-          DISPATCH_COHORT: ${{ inputs.dispatch_cohort }}
-          REF: ${{ github.ref }}
-          WORKFLOW_RUN_HEAD_SHA: ${{ needs.resolve.outputs.source_commit || github.event.workflow_run.head_sha }}
-          EXPECTED_MAIN_HEAD: ${{ needs.resolve.outputs.source_commit || github.event.workflow_run.head_sha || inputs.source_main_commit || github.event.after || github.sha }}
+          API_RELEASE_COMMIT: ''
+          ALLOW_DEFERRED_LIVE_RELEASE: true
+          REPLAY_API_AFTER_PUBLISH: false
+          COORDINATED_RECOVERY: false
+          SOURCE_COMMIT: ${{ steps.start_source.outputs.head }}
+          SOURCE_MAIN_COMMIT: ${{ steps.start_source.outputs.head }}
+          PINNED_REPLAY_MAIN: ${{ steps.start_source.outputs.head }}
+          EXPECTED_MAIN_HEAD: ${{ steps.start_source.outputs.head }}
+          DEFER_STALE_HANDOFF: true
+          DISPATCH_NONCE: ''
+          DISPATCH_COHORT: ''
+          REF: refs/heads/main
+          WORKFLOW_RUN_HEAD_SHA: ${{ steps.start_source.outputs.head }}
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
-          SECTION_SOURCE_UNAFFECTED_HELPER: .replay-dispatcher-source/scripts/ci/section-source-unaffected.sh
-        run: bash .replay-dispatcher-source/scripts/ci/fast-publish-section-render.sh
+          SECTION_SOURCE_UNAFFECTED_HELPER: scripts/ci/section-source-unaffected.sh
+        run: bash scripts/ci/fast-publish-section-render.sh
 
       - name: Release bootstrap R2 gate
-        # GITHUB_ENV aggiorna l'ambiente dei passi successivi, ma non è una
-        # base affidabile per la valutazione dell'espressione `if` del passo.
-        # L'outcome dell'acquire è il fatto durevole: se ha acquisito il lease,
-        # il release deve partire anche quando il render fallisce.
-        if: always() && steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true' && ((matrix.target.bootstrap == true && steps.acquire_bootstrap.outcome == 'success') || steps.render.outputs.dynamic_bootstrap_lock == 'true')
+        if: always() && needs.resolve.outputs.dry != 'true' && steps.acquire_bootstrap.outcome == 'success'
         env:
           SECTION: ${{ matrix.target.section }}
         run: bash scripts/ci/retry-cmd.sh node scripts/ci/section-bootstrap-lock.mjs release --section "$SECTION"
 
-      - name: Summary
-        if: always()
+      - name: Require stage to be complete
+        if: steps.render.outputs.stale_handoff == 'true'
         run: |
-          set -euo pipefail
-          s="$RUNNER_TEMP/section-summary.json"
-          [ -s "$s" ] || { echo "nessun summary: il render non e' arrivato in fondo"; exit 0; }
-          jq -r '"sezione \(.section) (\(.declaredStatus // "?")): pagine \(.counts | tostring), hub mancanti \(.hubsMissing | tostring), difetti \(.defects | length), pubblicato \(.published | tostring)"' "$s"
+          echo '::error::stage ceduto a una run latest; nessun dispatch API effettuato'
+          exit 1
 
-      - name: Record publish result
-        if: always()
+      - name: Write stage artifact
+        if: success()
         env:
           SECTION: ${{ matrix.target.section }}
-          RENDERED_HEAD: ${{ steps.render.outputs.rendered_head }}
-          STALE_HANDOFF: ${{ steps.render.outputs.stale_handoff }}
-          STALE_HANDOFF_HEAD: ${{ steps.render.outputs.stale_handoff_head }}
-          STALE_HANDOFF_NONCE: ${{ steps.render.outputs.stale_handoff_nonce }}
-          STALE_HANDOFF_TITLE: ${{ steps.render.outputs.stale_handoff_title }}
-          FRESH: ${{ steps.replay_freshness.outputs.fresh }}
-          DISPATCH_NONCE: ${{ inputs.dispatch_nonce }}
-          DISPATCH_COHORT: ${{ inputs.dispatch_cohort }}
-          COORDINATED_RECOVERY: ${{ inputs.coordinated_recovery }}
-          SOURCE_COMMIT: ${{ needs.resolve.outputs.source_commit || inputs.source_commit }}
-          SOURCE_MAIN_COMMIT: ${{ needs.resolve.outputs.source_commit || inputs.source_main_commit }}
-        run: bash .replay-dispatcher-source/scripts/ci/record-fast-publish-result.sh
+          SOURCE_COMMIT: ${{ steps.start_source.outputs.head }}
+        run: |
+          set -euo pipefail
+          jq -n --arg section "$SECTION" --arg sourceCommit "$SOURCE_COMMIT" \
+            '{section: $section, sourceCommit: $sourceCommit, staged: true}' \
+            > "$RUNNER_TEMP/fast-publish-stage-$SECTION.json"
 
-      - name: Upload publish result
-        if: always()
+      - name: Upload stage artifact
+        if: success()
         uses: actions/upload-artifact@v7
         with:
-          name: fast-publish-result-${{ matrix.target.section }}
-          path: ${{ runner.temp }}/fast-publish-result.json
+          name: fast-publish-stage-${{ matrix.target.section }}
+          path: ${{ runner.temp }}/fast-publish-stage-${{ matrix.target.section }}.json
           if-no-files-found: error
 
-  # Matrix job outputs are scalar: GitHub keeps the value from whichever leg
-  # finishes last. Compare every leg's recorded productive HEAD before any
-  # API replay, so a release can never announce a mixed R2 surface.
-  publish_release_head:
-    needs: [resolve, publish]
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f "$RUNNER_TEMP/sa.json"
+
+  coordinate_api_release:
+    needs: [resolve, stage]
+    if: >-
+      always() &&
+      needs.resolve.result == 'success' &&
+      needs.resolve.outputs.any == 'true' &&
+      (needs.stage.result == 'success' || needs.stage.result == 'skipped')
+    runs-on: ubuntu-latest
+    timeout-minutes: 190
     permissions:
       contents: read
       actions: write
-    if: >-
-      always() &&
-      needs.resolve.result == 'success' &&
-      needs.publish.result == 'success' &&
-      needs.resolve.outputs.dry != 'true'
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
     outputs:
-      rendered_head: ${{ steps.collect.outputs.rendered_head }}
-      mixed_matrix: ${{ steps.collect.outputs.mixed_matrix }}
-      stale_handoff: ${{ steps.collect.outputs.stale_handoff }}
+      # Keep the per-section finalize jobs unmaterialized while this global
+      # barrier is active. Once the coordinator completes, each target joins
+      # the same queue:single group as stage, preserving the 1 running + 1
+      # pending limit across phases.
+      final_matrix: ${{ needs.resolve.outputs.matrix }}
+      api_commit: ${{ steps.decision.outputs.api_commit }}
+      api_baseline: ${{ steps.decision.outputs.api_baseline }}
+      defer_api_wait: ${{ steps.decision.outputs.defer_api_wait }}
+      wait_api: ${{ steps.decision.outputs.wait_api }}
     steps:
-      - name: Download matrix publish results
-        uses: actions/download-artifact@v7
-        with:
-          pattern: fast-publish-result-*
-          path: ${{ runner.temp }}/fast-publish-results
-          merge-multiple: false
-
-      - name: Verify one productive HEAD for the whole matrix
-        id: collect
-        env:
-          EXPECTED_MATRIX: ${{ needs.resolve.outputs.matrix }}
-        run: |
-          set -euo pipefail
-          echo 'mixed_matrix=false' >> "$GITHUB_OUTPUT"
-          echo 'stale_handoff=false' >> "$GITHUB_OUTPUT"
-          results_dir="$RUNNER_TEMP/fast-publish-results"
-          mapfile -t result_files < <(find "$results_dir" -type f -name fast-publish-result.json -print)
-          if [ "${#result_files[@]}" -eq 0 ]; then
-            echo "::error::nessun risultato della matrix publish disponibile per il replay API"
-            exit 1
-          fi
-          actual="$(jq -s -c 'map({section, rendered_head, stale_handoff, stale_handoff_head, stale_handoff_nonce, stale_handoff_title, fresh})' "${result_files[@]}")"
-          expected_sections="$(jq -c '[.[].section] | sort' <<<"$EXPECTED_MATRIX")"
-          actual_sections="$(jq -c 'map(.section) | sort' <<<"$actual")"
-          if [ "$actual_sections" != "$expected_sections" ]; then
-            echo "::error::risultati publish incompleti o duplicati: attesi $expected_sections, ricevuti $actual_sections"
-            exit 1
-          fi
-          if jq -e 'any(.[]; .stale_handoff == "true")' <<<"$actual" >/dev/null; then
-            echo 'stale_handoff=true' >> "$GITHUB_OUTPUT"
-            # A stale leg has no productive revision. The matrix coordinator
-            # must rebuild the complete plan on current main, including the
-            # sections whose sibling happened to finish on the old checkout.
-            echo 'mixed_matrix=true' >> "$GITHUB_OUTPUT"
-          fi
-          if jq -e 'all(.[]; (.rendered_head == "" and ((.stale_handoff == "true") or (.fresh == "false"))))' <<<"$actual" >/dev/null; then
-            echo "::notice::tutte le leg hanno consegnato il replay stale o rilevato un replay pinned obsoleto; nessuna HEAD non pubblicata viene dichiarata produttiva"
-            exit 0
-          fi
-          if jq -e 'any(.[]; ((.rendered_head // "") | test("^[a-f0-9]{40}$"))) and any(.[]; ((.fresh // "") != "true" or (.stale_handoff // "") == "true" or (.rendered_head // "") == ""))' <<<"$actual" >/dev/null; then
-            echo "::warning::matrix mista: almeno una leg non e' fresca mentre un'altra ha prodotto una HEAD; accodo il recovery sulla HEAD corrente"
-            echo 'mixed_matrix=true' >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          if ! jq -e 'all(.[]; ((.rendered_head // "") | test("^[a-f0-9]{40}$")))' <<<"$actual" >/dev/null; then
-            echo "::error::almeno una leg della matrix non ha prodotto una HEAD pubblicabile"
-            exit 1
-          fi
-          rendered_head="$(jq -r 'map(.rendered_head) | unique | if length == 1 then .[0] else empty end' <<<"$actual")"
-          if [ -z "$rendered_head" ]; then
-            echo "::warning::la matrix publish ha prodotto HEAD diverse; accodo il recovery sulla HEAD corrente: $actual"
-            echo 'mixed_matrix=true' >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          echo "rendered_head=$rendered_head" >> "$GITHUB_OUTPUT"
-
-      - name: Recheck promotion after an explicit bootstrap
-        if: github.event_name == 'workflow_dispatch' && inputs.bootstrap == true && steps.collect.outputs.rendered_head != ''
-        env:
-          GH_TOKEN: ${{ github.token }}
-          SECTION: ${{ inputs.section }}
-        run: |
-          gh workflow run auto-live-canton-sections.yml --repo "$GITHUB_REPOSITORY" --ref main \
-            -f mode=promote -f sections="$SECTION"
-
-  # A push can start the API publisher before the section runner has uploaded
-  # its HTML. After a successful staged section publish, every non-dry push
-  # arms the API replay so an earlier fail-closed readiness check cannot strand
-  # the registry on the previous release. API-triggered replays are excluded
-  # to prevent a workflow_run loop; genuine render errors still block replay.
-  # Mixed matrix HEADs are handed to the recovery dispatch below, and their
-  # child completions drive the API replay through reconcile-section-pages.
-  replay-api-after-staged-release:
-    needs: [resolve, publish, publish_release_head]
-    if: >-
-      always() &&
-      inputs.coordinated_recovery != true &&
-      needs.resolve.result == 'success' &&
-      needs.publish.result == 'success' &&
-      needs.publish_release_head.result == 'success' &&
-      (needs.publish_release_head.outputs.rendered_head != '' ||
-       needs.publish_release_head.outputs.mixed_matrix == 'true') &&
-      (needs.publish_release_head.outputs.mixed_matrix == 'true' ||
-       needs.resolve.outputs.bootstrap == 'true' || needs.resolve.outputs.replay_api_after_publish == 'true') &&
-      needs.resolve.outputs.dry != 'true' &&
-      github.event_name != 'workflow_run'
-    runs-on: ubuntu-latest
-    timeout-minutes: 360
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          # Il replay deve usare esattamente la revisione dalla quale il
-          # publisher ha renderizzato e caricato le pagine. `main` puo' essere
-          # avanzata durante il render; il guard sotto in quel caso lascia il
-          # lavoro al run generato dal nuovo push.
-          ref: ${{ needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
-          fetch-depth: 1
-          persist-credentials: false
-
-      - name: Checkout replay dispatcher from workflow revision
+      - name: Checkout workflow source
         uses: actions/checkout@v7
         with:
           ref: ${{ github.sha }}
-          path: .replay-dispatcher-source
-          fetch-depth: 1
-          sparse-checkout: |
-            scripts/ci/dispatch-fast-publish-replay.sh
-            scripts/ci/read-main-head.sh
-            scripts/ci/fetch-push-base-if-missing.sh
-            scripts/ci/fast-publish-section-recovery.sh
-          sparse-checkout-cone-mode: false
+          fetch-depth: 0
           persist-credentials: false
 
-      - name: Materialize freshness helper from workflow revision
-        run: |
-          set -euo pipefail
-          source='.replay-dispatcher-source/scripts/ci/read-main-head.sh'
-          target='scripts/ci/read-main-head.sh'
-          recovery_source='.replay-dispatcher-source/scripts/ci/fast-publish-section-recovery.sh'
-          recovery_target='scripts/ci/fast-publish-section-recovery.sh'
-          if [ ! -f "$recovery_source" ]; then
-            echo "::error::helper di recovery non presente nel checkout della revisione del workflow"
-            exit 1
-          fi
-          install -m 0755 "$recovery_source" "$recovery_target"
-          test -f .replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh
-          ln -sfn "$PWD/.replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh" scripts/ci/fetch-push-base-if-missing.sh
-          if [ -f "$source" ]; then
-            install -m 0755 "$source" "$target"
-          elif [ -f "$target" ]; then
-            chmod 0755 "$target"
-            echo "::warning::helper della punta di main assente nella revisione del dispatcher; uso quello del checkout pinned"
-          else
-            echo "::warning::helper della punta di main assente nelle revisioni disponibili; genero il fallback git-transport"
-            cat > "$target" <<'EOF'
-            #!/usr/bin/env bash
-            set -euo pipefail
-            remote="${1:-origin}"
-            ref="${2:-refs/heads/main}"
-            if [ "$#" -gt 2 ]; then
-              echo "usage: $0 [remote] [ref]" >&2
-              exit 2
-            fi
-            main_head=''
-            for attempt in 1 2 3; do
-              main_head=''
-              ls_remote_out=''
-              if ls_remote_out="$(timeout 60 git ls-remote --refs "$remote" "$ref" 2>/dev/null)"; then
-                main_head="$(printf '%s\n' "$ls_remote_out" | awk -v wanted="$ref" '$2 == wanted { print $1; exit }')"
-              fi
-              if [[ "$main_head" =~ ^[a-f0-9]{40}$ ]]; then
-                printf '%s\n' "$main_head"
-                exit 0
-              fi
-              [ "$attempt" -lt 3 ] && sleep "$((attempt * 5))"
-            done
-            echo "::error::punta di $ref non risolvibile via git ls-remote" >&2
-            exit 1
-          EOF
-            chmod 0755 "$target"
-          fi
-
-      - name: Verify staged release revision is still main
-        id: replay_freshness
-        env:
-          GH_TOKEN: ${{ github.token }}
-          REPOSITORY: ${{ github.repository }}
-          SOURCE_COMMIT: ${{ needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
-          MIXED_MATRIX: ${{ needs.publish_release_head.outputs.mixed_matrix }}
-        run: |
-          set -euo pipefail
-          if [ "${MIXED_MATRIX:-}" = 'true' ]; then
-            if ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
-              echo "::error::impossibile verificare main dopo una matrix mista"
-              exit 1
-            fi
-            if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
-              echo "::error::revisione corrente di main non valida dopo una matrix mista"
-              exit 1
-            fi
-            echo "current_main=$current_main" >> "$GITHUB_OUTPUT"
-            echo "::notice::matrix mista rilevata; il recovery ripartira' dalla HEAD corrente $current_main"
-            echo 'fresh=false' >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
-            echo "::error::source commit non e' una SHA completa per il replay staged"
-            exit 1
-          fi
-          if ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
-            echo "::error::impossibile verificare main prima del replay API"
-            exit 1
-          fi
-          if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
-            echo "::error::revisione corrente di main non valida per il replay bootstrap"
-            exit 1
-          fi
-          echo "current_main=$current_main" >> "$GITHUB_OUTPUT"
-          if [ "$current_main" != "$SOURCE_COMMIT" ]; then
-            echo "::notice::main e' avanzata da $SOURCE_COMMIT a $current_main durante il backfill; il passo recovery redispatchera' il publisher sulla HEAD corrente"
-            echo 'fresh=false' >> "$GITHUB_OUTPUT"
-          else
-            echo "main ancora sulla revisione staged $SOURCE_COMMIT"
-            echo 'fresh=true' >> "$GITHUB_OUTPUT"
-          fi
-
-      - uses: actions/setup-node@v7
-        if: steps.replay_freshness.outcome == 'success'
+      - name: Setup Node
+        uses: actions/setup-node@v7
         with:
           node-version: '22'
-          cache: npm
+
+      - name: Download all completed stage artifacts
+        if: needs.resolve.outputs.stage_any == 'true'
+        uses: actions/download-artifact@v7
+        with:
+          pattern: fast-publish-stage-*
+          path: ${{ runner.temp }}/fast-publish-stage-artifacts
+          merge-multiple: true
+
+      - name: Prepare API release decision
+        id: decision
+        env:
+          API_ACTION: ${{ needs.resolve.outputs.dry == 'true' && 'none' || needs.resolve.outputs.api_action }}
+          API_WAIT_COMMIT: ${{ needs.resolve.outputs.api_wait_commit }}
+          STAGE_MATRIX: ${{ needs.resolve.outputs.stage_matrix }}
+          FINAL_MATRIX: ${{ needs.resolve.outputs.matrix }}
+          EVENT_NAME: ${{ github.event_name }}
+          PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
+          PUSH_AFTER: ${{ needs.resolve.outputs.push_after }}
+          ARTIFACTS_DIR: ${{ runner.temp }}/fast-publish-stage-artifacts
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: bash scripts/ci/fast-publish-section-coordinate.sh
+
+      - name: Setup isolated article source runtime for Remote Config
+        if: steps.decision.outputs.action == 'dispatch'
+        uses: ./.github/actions/setup-article-source-runtime
 
       - name: Install dependencies for Remote Config
-        if: steps.replay_freshness.outcome == 'success'
+        if: steps.decision.outputs.action == 'dispatch'
         run: bash scripts/lib/npm-ci-retry.sh
 
-      - name: Prepare Firebase credentials
-        if: steps.replay_freshness.outcome == 'success'
+      - name: Prepare Firebase credentials for dispatch
+        if: steps.decision.outputs.action == 'dispatch'
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
           set -euo pipefail
           if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
-            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set — Remote Config is the only source of the dispatch token"
+            echo '::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set'
             exit 1
           fi
           printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
 
       - name: Load dispatch token from Remote Config
-        if: steps.replay_freshness.outcome == 'success'
+        if: steps.decision.outputs.action == 'dispatch'
         run: node generator/scripts/load-rc-env.mjs
 
-      - name: Redispatch staged backfill on current main after stale replay or mixed matrix
-        id: stale
-        if: >-
-          steps.replay_freshness.outputs.fresh == 'false' ||
-          needs.publish_release_head.outputs.mixed_matrix == 'true'
+      - name: Dispatch publish-api for the staged release
+        if: steps.decision.outputs.action == 'dispatch'
         env:
           REPOSITORY: ${{ github.repository }}
-          TARGET_MATRIX: ${{ needs.resolve.outputs.matrix }}
-          ORIGINAL_PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
-          CURRENT_MAIN: ${{ steps.replay_freshness.outputs.current_main }}
-          MIXED_MATRIX: ${{ needs.publish_release_head.outputs.mixed_matrix }}
-          PRESERVE_EXPLICIT_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.section != '' }}
-          DRY: ${{ needs.resolve.outputs.dry }}
-          REPLAY_API_AFTER_PUBLISH: ${{ needs.resolve.outputs.replay_api_after_publish }}
-          ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.allow_deferred_live_release }}
-          DISPATCH_NONCE: ${{ inputs.dispatch_nonce }}
-        run: bash scripts/ci/fast-publish-section-recovery.sh
-
-      - name: Replay publish-api after staged release
-        if: >-
-          (steps.replay_freshness.outputs.fresh == 'true' &&
-           needs.publish_release_head.outputs.mixed_matrix != 'true')
-        env:
-          REPOSITORY: ${{ github.repository }}
-          SOURCE_COMMIT: ${{ steps.stale.outputs.recovery_head || steps.replay_freshness.outputs.current_main || needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
+          API_COMMIT: ${{ steps.decision.outputs.api_commit }}
+          PUSH_BEFORE: ${{ needs.resolve.outputs.event_before }}
         run: |
           set -euo pipefail
-          if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]] \
-            || [ "$(git rev-parse HEAD)" != "$SOURCE_COMMIT" ]; then
-            echo "::error::checkout del replay non coincide con la revisione staged"
+          if ! [[ "$API_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
+            echo '::error::commit API non valido per il dispatch'
             exit 1
           fi
-          readiness_attempts=0
-          readiness_ready='false'
-          max_readiness_attempts=3
-          while (( readiness_attempts < max_readiness_attempts )); do
-            readiness_attempts=$((readiness_attempts + 1))
-            if ! REQUIRE_FULL_HISTORY=false PUSH_BEFORE='' FETCH_MAIN=true bash scripts/ci/fetch-push-base-if-missing.sh; then
-              echo "::error::impossibile aggiornare main tramite il guard bounded prima del replay API"
-              exit 1
-            fi
-            current_main="$(git rev-parse refs/remotes/origin/main)"
-            if [ "$current_main" != "$SOURCE_COMMIT" ]; then
-              echo "::error::main e' avanzata durante il backfill ($SOURCE_COMMIT -> $current_main); replay API non accodato"
-              exit 1
-            fi
-            readiness="$RUNNER_TEMP/staged-replay-readiness.json"
-            # Existing landings keep their previous content until the post-flip replay.
-            node scripts/reconcile-section-pages.mjs --out "$readiness" --cap 1 --physical-pages-only
-            if [ "$(jq -r 'if .skipped then "true" else "false" end' "$readiness")" != 'true' ] \
-              && [ "$(jq -r '.counts.missingPages' "$readiness")" = '0' ] \
-              && [ "$(jq -r '.counts.unknown' "$readiness")" = '0' ] \
-              && [ "$(jq -r '.counts.manifestUnknown' "$readiness")" = '0' ]; then
-              readiness_ready='true'
-              break
-            fi
-            if (( readiness_attempts < max_readiness_attempts )); then
-              retry_delay=$((readiness_attempts * 20))
-              echo "::notice::replay API non ancora dimostrato (tentativo $readiness_attempts/$max_readiness_attempts); ritento tra ${retry_delay}s"
-              sleep "$retry_delay"
-            fi
-          done
-          if [ "$readiness_ready" != 'true' ]; then
-            echo "::error::replay API bloccato: la readiness deferred non e' stata dimostrata dopo $max_readiness_attempts tentativi"
-            exit 1
-          fi
+          before="$PUSH_BEFORE"
+          if ! [[ "$before" =~ ^[a-f0-9]{40}$ ]]; then before="$(git rev-parse "$API_COMMIT^1")"; fi
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
           if [ -z "$runtime_pat" ]; then
-            echo "::error::GITHUB_PAT_NANAKO non caricato da Remote Config"
+            echo '::error::GITHUB_PAT_NANAKO non caricato da Remote Config'
             exit 1
           fi
           export GH_TOKEN="$runtime_pat"
-          verifyMainHeadAtDispatch() {
-            local current_main=''
-            if ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
-              echo "::error::impossibile verificare main immediatamente prima del dispatch publish-api"
-              return 1
-            fi
-            if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
-              echo "::error::HEAD di main non valida immediatamente prima del dispatch publish-api: $current_main"
-              return 1
-            fi
-            if [ "$current_main" != "$SOURCE_COMMIT" ]; then
-              echo "::notice::main e' avanzata dopo la readiness ($SOURCE_COMMIT -> $current_main); replay API interrotto"
-              return 2
-            fi
-          }
-          if verifyMainHeadAtDispatch; then
-            gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main -f source_commit="$SOURCE_COMMIT"
-          else
-            verify_status=$?
-            if [ "$verify_status" -eq 2 ]; then
-              echo "::notice::nessun dispatch publish-api: la superficie verra' riallineata dal percorso sulla nuova HEAD"
-              exit 0
-            fi
-            exit "$verify_status"
+          gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main \
+            -f source_commit="$API_COMMIT" \
+            -f bing_seo_nonce="fast-publish-range-${before}-${API_COMMIT}"
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f "$RUNNER_TEMP/sa.json"
+
+  finalize:
+    name: finalize (${{ matrix.target.section }})
+    needs: [resolve, stage, coordinate_api_release]
+    if: >-
+      always() &&
+      needs.resolve.result == 'success' &&
+      needs.resolve.outputs.any == 'true' &&
+      (needs.stage.result == 'success' || needs.stage.result == 'skipped') &&
+      (needs.coordinate_api_release.result == 'success' || needs.coordinate_api_release.result == 'skipped')
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        target: ${{ fromJSON(needs.coordinate_api_release.outputs.final_matrix) }}
+    concurrency:
+      group: fast-publish-${{ matrix.target.section }}
+      cancel-in-progress: false
+      queue: single
+    steps:
+      - name: Checkout workflow source
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Download stage artifact for this section
+        if: needs.resolve.outputs.stage_any == 'true'
+        uses: actions/download-artifact@v7
+        with:
+          name: fast-publish-stage-${{ matrix.target.section }}
+          path: ${{ runner.temp }}/fast-publish-stage-${{ matrix.target.section }}
+
+      - name: Read latest main after acquiring the section slot
+        id: start_source
+        env:
+          SECTION: ${{ matrix.target.section }}
+          STAGE_ARTIFACT: ${{ runner.temp }}/fast-publish-stage-${{ matrix.target.section }}/fast-publish-stage-${{ matrix.target.section }}.json
+          STAGE_ANY: ${{ needs.resolve.outputs.stage_any }}
+          PREFLIGHT_HEAD: ${{ needs.resolve.outputs.preflight_head }}
+          CLEANUP_INACTIVE_SURFACE: ${{ matrix.target.cleanupInactiveSurface || false }}
+          DEFER_API_WAIT: ${{ needs.coordinate_api_release.outputs.defer_api_wait || false }}
+        run: |
+          set -euo pipefail
+          observed="$(bash scripts/ci/read-main-head.sh)"
+          if ! [[ "$observed" =~ ^[a-f0-9]{40}$ ]]; then
+            echo '::error::HEAD main non valida dopo aver acquisito lo slot della sezione'
+            exit 1
           fi
+          if ! git cat-file -e "$observed^{commit}" 2>/dev/null; then git fetch --quiet --no-tags origin "$observed"; fi
+          git checkout --detach "$observed"
+          if [ "$CLEANUP_INACTIVE_SURFACE" = 'true' ]; then
+            eligible=true
+          else
+            eligible="$(node scripts/ci/fast-publish-section.mjs r2-section-eligible "$SECTION")"
+          fi
+          if [ "$eligible" != 'true' ]; then
+            echo '::notice::sezione non eleggibile sulla HEAD osservata; cede al pending latest'
+            echo 'fresh=false' >> "$GITHUB_OUTPUT"
+            echo "head=$observed" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          stage_source=''
+          section_changed=false
+          force_full_section=false
+          if [ "$STAGE_ANY" = 'true' ] && [ -s "$STAGE_ARTIFACT" ]; then
+            stage_source="$(jq -r '.sourceCommit' "$STAGE_ARTIFACT")"
+          elif [ "$CLEANUP_INACTIVE_SURFACE" != 'true' ] \
+            && [[ "${PREFLIGHT_HEAD:-}" =~ ^[a-f0-9]{40}$ ]]; then
+            # Any stage-less active target may have replaced a pending push,
+            # including landing/hub-only dispatches with ids=[]. Force a full
+            # latest-section recovery even when preflight already equals latest.
+            stage_source="$PREFLIGHT_HEAD"
+            force_full_section=true
+            echo "::notice::target senza artifact stage: bootstrap full-section latest per $SECTION"
+          fi
+          if [ "$CLEANUP_INACTIVE_SURFACE" != 'true' ] \
+            && [ -n "$stage_source" ] \
+            && ! bash scripts/ci/section-source-unaffected.sh --section "$SECTION" "$stage_source" "$observed"; then
+            echo "::notice::sezione $SECTION cambiata dopo lo stage; recupero latest full-section sotto lo slot corrente"
+            section_changed=true
+          fi
+          recovery_decision="$(jq -cn \
+            --arg stageCommit "$stage_source" \
+            --arg latestCommit "$observed" \
+            --argjson sectionChanged "$section_changed" \
+            --argjson forceFullSection "$force_full_section" \
+            --argjson deferApiWait "${DEFER_API_WAIT:-false}" \
+            '{stageCommit:$stageCommit,latestCommit:$latestCommit,sectionChanged:$sectionChanged,deferApiWait:$deferApiWait,forceFullSection:$forceFullSection}' \
+            | node scripts/ci/fast-publish-section.mjs r2-late-finalize-recovery)"
+          rebootstrap="$(jq -r '.rebootstrap' <<<"$recovery_decision")"
+          {
+            echo 'fresh=true'
+            echo "rebootstrap=$rebootstrap"
+            echo "stage_source=$stage_source"
+            echo "head=$observed"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Setup isolated article source runtime
+        if: steps.start_source.outputs.fresh == 'true'
+        uses: ./.github/actions/setup-article-source-runtime
+
+      - name: Install dependencies
+        if: steps.start_source.outputs.fresh == 'true'
+        run: bash scripts/lib/npm-ci-retry.sh
+
+      - name: Prepare Firebase credentials
+        if: steps.start_source.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true'
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo '::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set'
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      - name: Load R2 and CDN credentials
+        if: steps.start_source.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true'
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Require R2 and Cloudflare credentials
+        if: steps.start_source.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true'
+        run: |
+          set -euo pipefail
+          missing=()
+          for name in R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_S3_ENDPOINT R2_BUCKET CF_API_TOKEN; do
+            [ -n "${!name:-}" ] || missing+=("$name")
+          done
+          if [ "${#missing[@]}" -gt 0 ]; then
+            echo "::error::missing after Remote Config load: ${missing[*]}"
+            exit 1
+          fi
+
+      - name: Ensure host shell assets are on the CDN
+        if: steps.start_source.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true'
+        run: bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/ci/ensure-host-shell-assets.mjs
+
+      - name: Acquire bootstrap R2 gate for recovery stage
+        id: acquire_recovery_bootstrap
+        if: steps.start_source.outputs.fresh == 'true' && steps.start_source.outputs.rebootstrap == 'true' && needs.resolve.outputs.dry != 'true'
+        env:
+          SECTION: ${{ matrix.target.section }}
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/ci/section-bootstrap-lock.mjs acquire --section "$SECTION" --commit "${{ steps.start_source.outputs.head }}" --wait-ms 3300000 --retry-ms 20000
+
+      - name: Restage latest section before API readiness
+        id: recovery_stage
+        if: steps.start_source.outputs.fresh == 'true' && steps.start_source.outputs.rebootstrap == 'true' && needs.resolve.outputs.dry != 'true'
+        env:
+          SECTION: ${{ matrix.target.section }}
+          ARTICLE_IDS_JSON: '[]'
+          MISSING_PAGE_PATHS_JSON: '[]'
+          KNOWN_MISSING_PAGE_PATHS_JSON: '[]'
+          BOOTSTRAP: true
+          TARGET_BOOTSTRAP: true
+          FAST_PUBLISH_ARMED: ${{ vars.FAST_PUBLISH_ARMED }}
+          DRY: 'false'
+          EVENT_NAME: ${{ github.event_name }}
+          PUSH_BEFORE: ''
+          PUSH_AFTER: ${{ steps.start_source.outputs.head }}
+          PREFLIGHT_HEAD: ${{ needs.resolve.outputs.preflight_head }}
+          REMOVE_STALE_CANTON_RSS_FEEDS: false
+          CLEANUP_INACTIVE_SURFACE: false
+          API_RELEASE_COMMIT: ''
+          ALLOW_DEFERRED_LIVE_RELEASE: true
+          REPLAY_API_AFTER_PUBLISH: false
+          COORDINATED_RECOVERY: false
+          SOURCE_COMMIT: ''
+          SOURCE_MAIN_COMMIT: ''
+          PINNED_REPLAY_MAIN: ''
+          EXPECTED_MAIN_HEAD: ''
+          FULL_SECTION_LATEST_RECOVERY: true
+          DEFER_STALE_HANDOFF: true
+          DISPATCH_NONCE: ''
+          DISPATCH_COHORT: ''
+          REF: refs/heads/main
+          WORKFLOW_RUN_HEAD_SHA: ${{ steps.start_source.outputs.head }}
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          SECTION_SOURCE_UNAFFECTED_HELPER: scripts/ci/section-source-unaffected.sh
+        run: bash scripts/ci/fast-publish-section-render.sh
+
+      - name: Release bootstrap R2 gate after recovery stage
+        if: always() && steps.start_source.outputs.rebootstrap == 'true' && needs.resolve.outputs.dry != 'true' && steps.acquire_recovery_bootstrap.outcome == 'success'
+        env:
+          SECTION: ${{ matrix.target.section }}
+        run: bash scripts/ci/retry-cmd.sh node scripts/ci/section-bootstrap-lock.mjs release --section "$SECTION"
+
+      - name: Resolve late API release after recovery stage
+        id: late_api_recovery
+        if: steps.start_source.outputs.fresh == 'true' && steps.start_source.outputs.rebootstrap == 'true' && needs.resolve.outputs.dry != 'true'
+        env:
+          SECTION: ${{ matrix.target.section }}
+          STAGED_HEAD: ${{ steps.recovery_stage.outputs.rendered_head }}
+          STAGE_BASELINE_COMMIT: ${{ steps.start_source.outputs.stage_source || needs.resolve.outputs.push_before }}
+          API_BASELINE_COMMIT: ${{ needs.coordinate_api_release.outputs.api_baseline }}
+          COORDINATOR_API_COMMIT: ${{ needs.coordinate_api_release.outputs.api_commit }}
+          REPOSITORY: ${{ github.repository }}
+          GH_TOKEN: ${{ github.token }}
+        run: bash scripts/ci/fast-publish-section-late-api-recovery.sh
+
+      - name: Wait for recovered API release readiness
+        if: steps.late_api_recovery.outputs.wait_api == 'true'
+        env:
+          EXPECTED_API_COMMIT: ${{ steps.late_api_recovery.outputs.api_commit }}
+          SECTION: ${{ matrix.target.section }}
+          FAST_PUBLISH_API_WAIT_MS: '10800000'
+        run: node scripts/ci/wait-fast-publish-api-readiness.mjs
+
+      - name: Wait for API release readiness while holding the section slot
+        if: steps.start_source.outputs.fresh == 'true' && steps.start_source.outputs.rebootstrap != 'true' && needs.coordinate_api_release.outputs.wait_api == 'true'
+        env:
+          EXPECTED_API_COMMIT: ${{ needs.coordinate_api_release.outputs.api_commit }}
+          SECTION: ${{ matrix.target.section }}
+          FAST_PUBLISH_API_WAIT_MS: '10800000'
+        run: node scripts/ci/wait-fast-publish-api-readiness.mjs
+
+      - name: Acquire bootstrap R2 gate for finalization
+        id: acquire_finalize_bootstrap
+        if: steps.start_source.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true' && (matrix.target.bootstrap == true || steps.start_source.outputs.rebootstrap == 'true')
+        env:
+          SECTION: ${{ matrix.target.section }}
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/ci/section-bootstrap-lock.mjs acquire --section "$SECTION" --commit "${{ steps.start_source.outputs.head }}" --wait-ms 3300000 --retry-ms 20000
+
+      - name: Render and finalize latest section pages
+        id: render
+        if: steps.start_source.outputs.fresh == 'true'
+        env:
+          SECTION: ${{ matrix.target.section }}
+          ARTICLE_IDS_JSON: ${{ steps.start_source.outputs.rebootstrap == 'true' && '[]' || toJSON(matrix.target.ids) }}
+          MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.missingPagePaths || fromJSON('[]')) }}
+          KNOWN_MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.knownMissingPagePaths || fromJSON('[]')) }}
+          BOOTSTRAP: ${{ matrix.target.bootstrap || steps.start_source.outputs.rebootstrap == 'true' }}
+          TARGET_BOOTSTRAP: ${{ matrix.target.bootstrap || steps.start_source.outputs.rebootstrap == 'true' }}
+          FAST_PUBLISH_ARMED: ${{ vars.FAST_PUBLISH_ARMED }}
+          DRY: ${{ needs.resolve.outputs.dry }}
+          EVENT_NAME: ${{ github.event_name }}
+          PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
+          PUSH_AFTER: ${{ steps.start_source.outputs.head }}
+          PREFLIGHT_HEAD: ${{ needs.resolve.outputs.preflight_head }}
+          REMOVE_STALE_CANTON_RSS_FEEDS: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
+          CLEANUP_INACTIVE_SURFACE: ${{ matrix.target.cleanupInactiveSurface || false }}
+          API_RELEASE_COMMIT: ${{ steps.late_api_recovery.outputs.api_commit || needs.coordinate_api_release.outputs.api_commit }}
+          ALLOW_DEFERRED_LIVE_RELEASE: false
+          REPLAY_API_AFTER_PUBLISH: false
+          COORDINATED_RECOVERY: false
+          SOURCE_COMMIT: ${{ steps.start_source.outputs.head }}
+          SOURCE_MAIN_COMMIT: ${{ steps.start_source.outputs.head }}
+          PINNED_REPLAY_MAIN: ${{ steps.start_source.outputs.head }}
+          EXPECTED_MAIN_HEAD: ${{ steps.start_source.outputs.head }}
+          DEFER_STALE_HANDOFF: true
+          DISPATCH_NONCE: ''
+          DISPATCH_COHORT: ''
+          REF: refs/heads/main
+          WORKFLOW_RUN_HEAD_SHA: ${{ steps.start_source.outputs.head }}
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          SECTION_SOURCE_UNAFFECTED_HELPER: scripts/ci/section-source-unaffected.sh
+        run: bash scripts/ci/fast-publish-section-render.sh
+
+      - name: Release bootstrap R2 gate after finalization
+        if: always() && steps.start_source.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true' && ((matrix.target.bootstrap == true || steps.start_source.outputs.rebootstrap == 'true') && steps.acquire_finalize_bootstrap.outcome == 'success' || steps.render.outputs.dynamic_bootstrap_lock == 'true')
+        env:
+          SECTION: ${{ matrix.target.section }}
+        run: bash scripts/ci/retry-cmd.sh node scripts/ci/section-bootstrap-lock.mjs release --section "$SECTION"
+
+      - name: Promote explicit bootstrap section
+        if: success() && github.event_name == 'workflow_dispatch' && inputs.bootstrap == true && steps.render.outputs.rendered_head != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SECTION: ${{ matrix.target.section }}
+          REPOSITORY: ${{ github.repository }}
+        run: gh workflow run auto-live-canton-sections.yml --repo "$REPOSITORY" --ref main -f mode=promote -f sections="$SECTION"
 
       - name: Cleanup Firebase credentials
         if: always()
