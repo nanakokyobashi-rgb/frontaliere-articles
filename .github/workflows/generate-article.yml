@@ -2029,6 +2029,10 @@ jobs:
           outcome_reason="unclassified"
           outcome_section="$TARGET_SECTION"
           cooperative_stop=false
+          # Vero solo se OGNI tentativo dichiarato ha un run report che prova il
+          # pool vuoto (nessun candidato utilizzabile): il successore della
+          # catena troverebbe lo stesso pool nella stessa finestra.
+          pool_empty=true
           run_id="${GITHUB_RUN_ID:-local}"
           run_attempt="${GITHUB_RUN_ATTEMPT:-1}"
 
@@ -2265,10 +2269,14 @@ jobs:
               if grep -q 'DEDUP_GATE_UNAVAILABLE section=' "$stall_log"; then
                 declared_reason=dedup-unavailable; provider_blocked=true; effective="$sec"; break
               fi
+              if ! [ -s "$attempt_report" ] || ! jq -e '(.article.id // null) == null and (.poolKnownEmpty == true or .evergreenPool.saturated == true or .headlines.preSpendGateTotalRejection == true)' "$attempt_report" >/dev/null 2>&1; then
+                pool_empty=false
+              fi
             elif [ "$rc" = "0" ]; then
               all_declared=false
               [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs e' uscito 0 sulla sezione $sec senza scrivere un corpo e senza dichiarare una ragione (attesa: exit 4)"
             else
+              pool_empty=false
               all_declared=false
               [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs e' uscito $rc sulla sezione $sec (codice non dichiarato)"
             fi
@@ -2276,6 +2284,9 @@ jobs:
 
           if [ "$tried" = "0" ]; then
             all_declared=false
+          fi
+          if [ "$tried" = "0" ] || [ "$all_declared" != "true" ] || [ "$produced" = "true" ] || [ "$cooperative_stop" = "true" ] || [ "$provider_blocked" = "true" ] || [ "$roster_blocked" = "true" ]; then
+            pool_empty=false
           fi
 
           if [ "$partial_failure" = "true" ]; then
@@ -2320,6 +2331,7 @@ jobs:
             echo "section=$effective"
             echo "declared=$all_declared"
             echo "cooperative_stop=$cooperative_stop"
+            echo "pool_empty=$pool_empty"
             echo "outcome_kind=$outcome_kind"
             echo "roster_blocked=$roster_blocked"
             echo "provider_blocked=$provider_blocked"
@@ -3188,6 +3200,7 @@ jobs:
           ARTICLE: ${{ steps.generate.outputs.article }}
           DECLARED: ${{ steps.generate.outputs.declared }}
           COOPERATIVE_STOP: ${{ steps.generate.outputs.cooperative_stop }}
+          POOL_EMPTY: ${{ steps.generate.outputs.pool_empty }}
           ROSTER_BLOCKED: ${{ steps.generate.outputs.roster_blocked }}
           PROVIDER_BLOCKED: ${{ steps.generate.outputs.provider_blocked }}
           SECTION_PRODUCED: ${{ steps.generate.outputs.section }}
@@ -3241,6 +3254,7 @@ jobs:
           [ "${ARTICLE:-}" = "true" ] && stop "articolo prodotto — il successore lo fa gia' il push su content/**"
           [ "${PROVIDER_BLOCKED:-}" = "true" ] && stop "pool AI condiviso temporaneamente indisponibile; si cede a Cloud Scheduler"
           [ "${ROSTER_BLOCKED:-}" = "true" ] && stop "roster esaurito: il prossimo tentativo troverebbe lo stesso muro, non una finestra nuova"
+          [ "${POOL_EMPTY:-}" = "true" ] && stop "pool gia' noto come vuoto per la sezione in questa finestra (run report): un anello a 90 s riaprirebbe lo stesso pool; si cede a Cloud Scheduler"
           [ "${COOPERATIVE_STOP:-}" = "true" ] && stop "cap cooperativo raggiunto: nessun articolo e nessun dispatch immediato; si cede a Cloud Scheduler"
 
           # `kind` tiene distinte due cose che finiscono entrambe in un dispatch.

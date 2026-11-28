@@ -511,6 +511,10 @@ import {
   isTopicGateAbortedUrl as _isTopicGateAbortedUrl,
   recordTopicGateAbortedUrl as _recordTopicGateAbortedUrl,
 } from './lib/article-topic-selector.mjs';
+import {
+  classifyWithRejectionMemo as _classifyWithRejectionMemo,
+  recordPrespendRejectedUrls as _recordPrespendRejectedUrls,
+} from './lib/prespend-rejection-memo.mjs';
 
 // ── Phase 3 — Discovery pool + quota controller ──────────────────
 // Slot assignment between proven and discovery pools is read from
@@ -1589,16 +1593,41 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   // torna `relevant: true`), quindi un errore qui non perde una headline: la
   // tiene. Il `try` resta come belt+suspenders sul throw inatteso.
   const toClassify = plan.filter(p => p.kind === 'classify');
-  const verdicts = await mapWithConcurrency(toClassify, concurrency, async (p) => {
-    try {
-      return await classifyFrontaliereRelevance(p.headlineText, p.summary, p.urlText, classifierDeadline);
-    } catch {
-      // Should not happen — classifyFrontaliereRelevance already fails open
-      // — but belt+suspenders: keep the headline on any unexpected throw.
-      return { relevant: true, reason: 'classifier-throw', fromError: true };
-    }
-  });
+  // Un "no" gia' dato dal classifier a questo URL nelle ultime 48 h non si
+  // rispende: stessa regola del memo del topic-gate, stesso override per il
+  // corpo CMS cantonale verificato (vedi il pre-filtro «fonti gia' rifiutate»).
+  let memoTracker = null;
+  try { memoTracker = _loadEvergreenRejectedTracker(); } catch { /* la memoria e' un risparmio, non un gate */ }
+  const { verdicts, memoHits, newRejections } = await _classifyWithRejectionMemo(
+    toClassify.map(p => ({ plan: p, url: p.h?.url })),
+    {
+      tracker: memoTracker,
+      section: SECTION_NAME,
+      normalizeUrl: normalizeNewsUrl,
+      runAll: (items, fn) => mapWithConcurrency(items, concurrency, fn),
+      canReuse: ({ plan: p }) => !(IS_CANTON
+        && typeof p.h?._cantonSourceContent === 'string'
+        && p.h._cantonSourceContent.trim().length >= 200),
+      classify: async ({ plan: p }) => {
+        try {
+          return await classifyFrontaliereRelevance(p.headlineText, p.summary, p.urlText, classifierDeadline);
+        } catch {
+          // Should not happen — classifyFrontaliereRelevance already fails open
+          // — but belt+suspenders: keep the headline on any unexpected throw.
+          return { relevant: true, reason: 'classifier-throw', fromError: true };
+        }
+      },
+    },
+  );
   toClassify.forEach((p, i) => { p.verdict = verdicts[i]; });
+  if (memoHits > 0) {
+    console.error(`PRESPEND_GATE_REJECTION_MEMO section=${SECTION_NAME} hits=${memoHits} classified=${toClassify.length - memoHits}`);
+  }
+  if (newRejections.length > 0 && !DRY_RUN_SCAN) {
+    try {
+      _persistEvergreenRejectedTracker((tracker) => _recordPrespendRejectedUrls(tracker, newRejections, SECTION_NAME));
+    } catch { /* la memoria e' un risparmio, non un gate */ }
+  }
 
   // ── FASE 3: ricomposizione, nell'ordine del pool ──────────────────────
   for (const p of plan) {
@@ -23179,6 +23208,7 @@ async function main() {
       // suoi temi sono frontalieri/Ticino o nazionali; gli evergreen del
       // cantone sono gli hub tematici di P10). Nessuna news utilizzabile = nessun
       // articolo in questo run, dichiarato come le altre ragioni legittime.
+      RUN_REPORT.poolKnownEmpty = true; // la catena non deve riaprire lo stesso pool vuoto
       console.error(`CANTON_EVERGREEN_POOL_DISABLED section=${SECTION_NAME} — nessuna news utilizzabile e nessun pool evergreen per le sezioni cantonali: nessun articolo in questo run.`);
       finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, `No usable news for canton section ${SECTION_NAME} (no evergreen pool by construction)`] });
       // Ragione legittima #7 di dieci — vedi EXIT_NO_ARTICLE_DECLARED. Esiste

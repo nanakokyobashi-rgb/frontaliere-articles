@@ -1467,6 +1467,7 @@ function runChainStep({
   cooperativeStop = 'false',
   rosterBlocked = 'false',
   providerBlocked = 'false',
+  poolEmpty = 'false',
   sectionProduced = 'frontaliere',
   sectionRequested = 'frontaliere',
   depth = '0',
@@ -1522,6 +1523,7 @@ exit 0
         COOPERATIVE_STOP: cooperativeStop,
         ROSTER_BLOCKED: rosterBlocked,
         PROVIDER_BLOCKED: providerBlocked,
+        POOL_EMPTY: poolEmpty,
         SECTION_PRODUCED: sectionProduced,
         SECTION_REQUESTED: sectionRequested,
         CHAIN_DEPTH: depth,
@@ -1559,6 +1561,31 @@ test('un anello secco ma DICHIARATO dispatcha il successore, con la sezione alte
   assert.match(cmd, /"parent_run_id":"999"/, 'senza il padre, `admit` vedrebbe sempre una generazione in volo e salterebbe l\'anello');
   assert.match(cmd, /Authorization: Bearer pat-nanako/, 'il primario e\' il PAT del proprietario del repo');
   assert.equal(r.status, 0);
+});
+
+test('F3.A.6: pool gia\' noto come vuoto = nessun anello, anche se l\'esito e\' dichiarato', () => {
+  const empty = runChainStep({ declared: 'true', poolEmpty: 'true' });
+  assert.equal(empty.dispatches.length, 0, 'zero run, zero richieste LLM del successore');
+  assert.match(empty.stdout, /pool gia' noto come vuoto/);
+  // Senza la prova (POOL_EMPTY assente o false) il comportamento e' quello di sempre.
+  assert.equal(runChainStep({ declared: 'true', poolEmpty: 'false' }).dispatches.length, 1);
+  assert.equal(runChainStep({ declared: 'true', poolEmpty: '' }).dispatches.length, 1);
+});
+
+test('F3.A.6: il filtro jq del run report distingue pool vuoto da articolo prodotto o esito ignoto', () => {
+  for (const [name, wf] of [['generate-article.yml', WF], ['core', CORE_WF]]) {
+    const m = wf.match(/jq -e '(\(\.article\.id \/\/ null\)[^']*)' "\$attempt_report"/);
+    assert.ok(m, `${name}: filtro pool_empty presente`);
+    const evalJq = (report) => spawnSync('jq', ['-e', m[1]], { input: JSON.stringify(report), encoding: 'utf8' }).status === 0;
+    assert.equal(evalJq({ poolKnownEmpty: true }), true);
+    assert.equal(evalJq({ evergreenPool: { saturated: true } }), true);
+    assert.equal(evalJq({ headlines: { preSpendGateTotalRejection: true } }), true);
+    assert.equal(evalJq({ poolKnownEmpty: true, article: { id: 'x' } }), false, 'un articolo prodotto non e\' un pool vuoto');
+    assert.equal(evalJq({ headlines: { preSpendGateTotalRejection: false }, evergreenPool: { saturated: false } }), false);
+    assert.equal(evalJq({}), false);
+    assert.match(wf, /echo "pool_empty=\$pool_empty"/);
+    assert.match(wf, /POOL_EMPTY: \$\{\{ steps\.generate\.outputs\.pool_empty \}\}/);
+  }
 });
 
 test('un articolo prodotto NON dispatcha: il successore lo fa gia\' il push', () => {

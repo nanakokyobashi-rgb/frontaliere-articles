@@ -3967,6 +3967,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/prespend-rejection-memo.mjs",
+      "mode": "corpus-only",
+      "reason": "Memo cross-run dei verdetti negativi del classifier pre-spend, usato solo da create-article.mjs del corpus per ridurre le richieste LLM di selezione (F3.A.6). Il sito non esegue questi workflow.",
+      "baseline": {
+        "site": null,
+        "corpus": "44db4ed8a426208d",
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
       "path": "generator/scripts/lib/llm-payload-diagnostics.mjs",
       "sitePath": "scripts/lib/llm-payload-diagnostics.mjs",
       "mode": "adapted",
