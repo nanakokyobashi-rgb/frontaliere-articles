@@ -6900,6 +6900,18 @@
       "firstSeenAt": "2026-11-28T07:54:51.057Z",
       "lastValidatedAt": "2026-11-28T07:54:51.057Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "collaudo veicoli canton Svitto convocazione e requisiti",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-28T10:08:02.518Z",
+      "lastValidatedAt": "2026-11-28T10:08:02.518Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -7954,10 +7966,22 @@
       "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-28T08:37:51.997Z",
-      "lastStrikeAt": "2026-11-28T08:37:51.997Z",
-      "expiresAt": "2026-12-28T08:37:51.997Z"
+      "lastStrikeAt": "2026-11-28T10:18:24.939Z",
+      "expiresAt": "2026-12-28T10:18:24.939Z"
+    },
+    {
+      "keyword": "salario minimo canton Obvaldo requisiti e applicazione",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-28T10:27:03.999Z",
+      "lastStrikeAt": "2026-11-28T10:27:03.999Z",
+      "expiresAt": "2026-12-28T10:27:03.999Z"
     }
   ],
   "legacy": [
