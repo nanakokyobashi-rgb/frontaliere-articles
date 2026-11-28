@@ -10,9 +10,11 @@ import {
   classifyMergeTreeStatus,
   decideConflictScan,
   discoverOpenPullRequests,
+  gh,
   parsePaginatedPullRequests,
   preparePullRequestSweep,
 } from '../../scripts/ci/pr-autorebase.mjs';
+import { GitHubRateLimitError, ghWithRateLimitRetry } from '../../scripts/ci/lib/gh-rate-limit.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -104,58 +106,53 @@ describe('pr-autorebase paginated PR discovery', () => {
     }
   });
 
-  it('retries discovery once after a primary GitHub API rate limit resets', () => {
-    const fakeBin = mkdtempSync(path.join(tmpdir(), 'pr-autorebase-rate-limit-'));
-    const callLog = path.join(fakeBin, 'calls.log');
-    const stateFile = path.join(fakeBin, 'rate-limited-once');
-    const fakeGh = path.join(fakeBin, 'gh');
-    const script = path.join(ROOT, 'scripts/ci/pr-autorebase.mjs');
-    writeFileSync(callLog, '');
-    writeFileSync(stateFile, '0');
-    writeFileSync(fakeGh, `#!/bin/sh
-printf '%s\\n' "$*" >> "$CALL_LOG"
-case "$*" in
-  'api rate_limit')
-    printf '%s\\n' '{"resources":{"core":{"remaining":1,"reset":1800000000}}}'
-    ;;
-  *'pulls?state=open&per_page=100'*)
-    attempt=$(cat "$RATE_LIMIT_STATE")
-    if [ "$attempt" -eq 0 ]; then
-      printf '1\\n' > "$RATE_LIMIT_STATE"
-      printf '%s\\n' 'gh: API rate limit exceeded for user ID 1 (HTTP 403)' >&2
-      exit 1
-    fi
-    printf '%s\\n' '[[]]'
-    ;;
-  *) exit 42 ;;
-esac
-`);
-    chmodSync(fakeGh, 0o755);
+  it('routes discovery through the shared primary GitHub API rate-limit retry', () => {
+    const calls = [];
+    const logs = [];
+    let discoveryCalls = 0;
+    const exec = (_ghBin, args) => {
+      calls.push(args);
+      if (args[0] === 'api' && args[1] === 'rate_limit') {
+        return JSON.stringify({ resources: { core: { remaining: 1, reset: 1_800_000_000 } } });
+      }
+      if (args[0] === 'api' && args.includes('--paginate')) {
+        discoveryCalls += 1;
+        if (discoveryCalls === 1) {
+          const error = new Error('gh failed');
+          error.stderr = 'gh: API rate limit exceeded for user ID 1 (HTTP 403)';
+          throw error;
+        }
+        return '[[]]';
+      }
+      throw new Error(`unexpected gh invocation: ${args.join(' ')}`);
+    };
+    const result = gh([
+      'api', '--paginate', '--slurp',
+      'repos/owner/repo/pulls?state=open&per_page=100',
+    ], {}, (args, options) => ghWithRateLimitRetry(args, {
+      ...options,
+      exec,
+      maxWaitMs: 1_000,
+      jitterMaxMs: 0,
+      budget: { waits: 1 },
+      log: (line) => logs.push(line),
+    }));
 
-    try {
-      const result = spawnSync(process.execPath, [script], {
-        encoding: 'utf8',
-        env: {
-          ...process.env,
-          PATH: `${fakeBin}:${process.env.PATH ?? ''}`,
-          CALL_LOG: callLog,
-          RATE_LIMIT_STATE: stateFile,
-          GH_RATE_LIMIT_JITTER_MS: '0',
-          GITHUB_REPOSITORY: 'owner/repo',
-          GH_TOKEN: 'test-token',
-          GITHUB_RUN_NUMBER: '1',
-        },
-      });
-      assert.equal(result.status, 0, `${result.stdout}${result.stderr}`);
-      assert.match(result.stderr, /pr-autorebase: bucket REST `core` esaurito/);
-      assert.deepEqual(readFileSync(callLog, 'utf8').trim().split('\n'), [
-        'api --paginate --slurp repos/owner/repo/pulls?state=open&per_page=100',
-        'api rate_limit',
-        'api --paginate --slurp repos/owner/repo/pulls?state=open&per_page=100',
-      ]);
-    } finally {
-      rmSync(fakeBin, { recursive: true, force: true });
-    }
+    assert.deepEqual(result, [[]]);
+    assert.deepEqual(calls, [
+      ['api', '--paginate', '--slurp', 'repos/owner/repo/pulls?state=open&per_page=100'],
+      ['api', 'rate_limit'],
+      ['api', '--paginate', '--slurp', 'repos/owner/repo/pulls?state=open&per_page=100'],
+    ]);
+    assert.match(logs.join('\n'), /pr-autorebase: bucket REST `core` esaurito/);
+  });
+
+  it('keeps a terminal primary rate limit fatal even for an optional gh call', () => {
+    const failure = new GitHubRateLimitError('GitHub API rate limit esaurito', { resetAt: 1_800_000_000 });
+    assert.throws(
+      () => gh(['api', 'repos/owner/repo/pulls/1/reviews'], { allowFail: true }, () => { throw failure; }),
+      (error) => error === failure,
+    );
   });
 });
 

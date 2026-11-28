@@ -201,12 +201,16 @@ function sleepSync(ms) {
   if (ms > 0) execFileSync('sleep', [String(ms / 1_000)], { stdio: 'ignore' });
 }
 
-function gh(args, { json = true, allowFail = false } = {}) {
+export function gh(
+  args,
+  { json = true, allowFail = false } = {},
+  withRateLimitRetry = ghWithRateLimitRetry,
+) {
   try {
     // Tutte le chiamate di questo processo condividono il bucket REST del
     // token: un 403 da rate limit primario attende il reset verificabile e
     // ritenta una volta; senza recupero il flusso resta fail-closed.
-    const out = ghWithRateLimitRetry(args, { context: 'pr-autorebase' });
+    const out = withRateLimitRetry(args, { context: 'pr-autorebase' });
     return json ? JSON.parse(out) : out;
   } catch (e) {
     // Un errore ordinario opzionale resta ignorabile; un rate limit invece
