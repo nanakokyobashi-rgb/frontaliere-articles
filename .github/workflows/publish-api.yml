@@ -1408,6 +1408,7 @@ jobs:
           REPOSITORY: ${{ github.repository }}
           PUBLISHED_SOURCE_COMMIT: ${{ needs.source_preflight.outputs.source_commit }}
           VERIFY_CONTEXT: Pages publish
+          VERIFY_API_ADVANCE: ${{ inputs.source_commit == '' && 'adopt' || 'skip' }}
         run: bash scripts/ci/verify-publish-api-source-current.sh
 
       - uses: actions/configure-pages@v6
@@ -1463,6 +1464,7 @@ jobs:
           REPOSITORY: ${{ github.repository }}
           PUBLISHED_SOURCE_COMMIT: ${{ needs.source_preflight.outputs.source_commit }}
           VERIFY_CONTEXT: Pages deploy
+          VERIFY_API_ADVANCE: ${{ inputs.source_commit == '' && 'adopt' || 'skip' }}
         run: bash scripts/ci/verify-publish-api-source-current.sh
 
       - id: deploy
@@ -1478,6 +1480,7 @@ jobs:
           REPOSITORY: ${{ github.repository }}
           PUBLISHED_SOURCE_COMMIT: ${{ needs.source_preflight.outputs.source_commit }}
           VERIFY_CONTEXT: edge upload
+          VERIFY_API_ADVANCE: ${{ inputs.source_commit == '' && 'adopt' || 'skip' }}
         run: bash scripts/ci/verify-publish-api-source-current.sh
 
       # Push the article sitemaps straight to the edge.
@@ -1505,6 +1508,7 @@ jobs:
           REPOSITORY: ${{ github.repository }}
           PUBLISHED_SOURCE_COMMIT: ${{ needs.source_preflight.outputs.source_commit }}
           VERIFY_CONTEXT: edge document publish
+          VERIFY_API_ADVANCE: ${{ inputs.source_commit == '' && 'adopt' || 'skip' }}
         run: bash scripts/ci/verify-publish-api-source-current.sh
 
       - name: Push the article sitemaps and the blog index to the edge
@@ -1599,6 +1603,7 @@ jobs:
           REPOSITORY: ${{ github.repository }}
           PUBLISHED_SOURCE_COMMIT: ${{ needs.source_preflight.outputs.source_commit }}
           VERIFY_CONTEXT: edge flip
+          VERIFY_API_ADVANCE: ${{ inputs.source_commit == '' && 'adopt' || 'skip' }}
         run: |
           bash scripts/ci/verify-publish-api-source-current.sh
 
@@ -1629,11 +1634,15 @@ jobs:
       # superficie che R2 non serve; il sync schedulato del sito resta la rete.
       # Se niente di servito cambia (oggi: tutto draft) un problema di R2 e' un
       # warning e la notifica parte come sempre.
+      # PUBLISH_API_EDGE_ADVANCE: come le barriere, una run gia' partita pubblica
+      # il proprio snapshot anche se main avanza (la run successiva pubblica il
+      # delta); un replay bounded, che fissa un commit vecchio, resta fail-closed.
       - name: Publish the canton sections release to the edge
         id: publish_edge
         if: env.PUBLISH_API_SKIP != 'true' && steps.deploy.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
+          PUBLISH_API_EDGE_ADVANCE: ${{ inputs.source_commit == '' && 'adopt' || 'skip' }}
         run: node scripts/publish-section-edge.mjs
 
       # Tell the site the surface moved after the edge flip. A push is the

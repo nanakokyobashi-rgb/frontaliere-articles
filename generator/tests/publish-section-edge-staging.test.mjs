@@ -15,6 +15,7 @@ import {
   publishRelease,
   readPreviousRelease,
   releaseBase,
+  releaseOlderThanLive,
   waitForBootstrapLocks,
 } from '../../scripts/publish-section-edge.mjs';
 import { apiInputChangedInRange } from '../../scripts/lib/publish-api-input-range.mjs';
@@ -511,4 +512,131 @@ test('le letture di release e bootstrap restano fail-closed con un 200 senza bod
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
+});
+
+test('con adoptApiAdvance il guard edge adotta un main avanzato con input API nuovi e lascia il delta alla run successiva', async () => {
+  const source = 'a'.repeat(40);
+  const current = 'd'.repeat(40);
+  const logs = [];
+  assert.equal(
+    await assertExpectedMainHead(source, async () => current, {
+      isAncestor: () => true,
+      apiInputChanged: () => true,
+      adoptApiAdvance: true,
+      log: (line) => logs.push(line),
+    }),
+    current,
+  );
+  assert.match(logs.join('\n'), /input API nuovi: si pubblica lo snapshot gia' in staging/);
+  // Una storia non riconciliabile resta un rifiuto anche in modalita adopt.
+  await assert.rejects(
+    () => assertExpectedMainHead(source, async () => current, {
+      isAncestor: () => false,
+      apiInputChanged: () => true,
+      adoptApiAdvance: true,
+    }),
+    /storia non riconciliabile/,
+  );
+  // Input non classificabili: nessuna adozione.
+  await assert.rejects(
+    () => assertExpectedMainHead(source, async () => current, {
+      isAncestor: () => true,
+      apiInputChanged: () => { throw new Error('git rotto'); },
+      adoptApiAdvance: true,
+    }),
+    /input API non classificabili/,
+  );
+});
+
+function regressionRelease(commit) {
+  return {
+    commit,
+    base: releaseBase(commit),
+    registry: { schema: 1, commit, sections: { 'canton-ti': { status: 'retired' } } },
+    live: [],
+    files: [],
+    pointer: {
+      schema: 1,
+      commit,
+      sections: { 'canton-ti': { status: 'retired' } },
+      release: { commit, base: releaseBase(commit), files: {}, previous: null },
+    },
+  };
+}
+
+const CREDS = {
+  R2_ACCESS_KEY_ID: 'test',
+  R2_SECRET_ACCESS_KEY: 'test',
+  R2_S3_ENDPOINT: 'test',
+  R2_BUCKET: 'test',
+  CF_API_TOKEN: 'test',
+};
+
+async function publishAgainstLive({ releaseCommit, liveCommit, olderThanLive, freshnessThrows = false }) {
+  const live = {
+    schema: 1,
+    commit: liveCommit,
+    sections: { 'canton-ti': { status: 'live' } },
+    release: { commit: liveCommit, base: releaseBase(liveCommit), files: {}, previous: null },
+  };
+  const uploads = [];
+  const result = await publishRelease(regressionRelease(releaseCommit), {
+    env: CREDS,
+    io: {
+      fetchBytes: async (url) => (url.endsWith(EDGE_SECTION_REGISTRY_FILE)
+        ? { status: 200, body: Buffer.from(JSON.stringify(live)) }
+        : { status: 404 }),
+      upload: (_local, key) => { uploads.push(key); return true; },
+      remove: () => true,
+      acquireBootstrapLock: async () => 'acquired',
+      releaseBootstrapLock: async () => true,
+      purge: () => true,
+    },
+    isOlderThanLive: (candidate, liveSha) => {
+      assert.equal(candidate, releaseCommit);
+      assert.equal(liveSha, liveCommit);
+      return olderThanLive;
+    },
+    verifySourceCurrent: freshnessThrows ? async () => { throw new Error('fresh'); } : async () => {},
+    log: () => {},
+  });
+  return { result, uploads };
+}
+
+test('uno snapshot piu vecchio del puntatore servito viene rifiutato senza caricare nulla', async () => {
+  const { result, uploads } = await publishAgainstLive({
+    releaseCommit: 'a'.repeat(40),
+    liveCommit: 'b'.repeat(40),
+    olderThanLive: true,
+  });
+  assert.deepEqual(result, { code: 1, phase: 'regression', flipped: false });
+  assert.deepEqual(uploads, []);
+});
+
+test('uno snapshot piu nuovo del puntatore servito viene pubblicato anche se main e avanzato', async () => {
+  const { result, uploads } = await publishAgainstLive({
+    releaseCommit: 'b'.repeat(40),
+    liveCommit: 'a'.repeat(40),
+    olderThanLive: false,
+  });
+  assert.deepEqual(result, { code: 0, phase: 'done', flipped: true });
+  assert.ok(uploads.includes(EDGE_SECTION_REGISTRY_FILE), 'il puntatore viene flippato');
+});
+
+test('releaseOlderThanLive classifica antenato, discendente, storie divise e commit ignoti', () => {
+  const a = 'a'.repeat(40);
+  const b = 'b'.repeat(40);
+  const mk = ({ known = true, releaseIsAncestor }) => (command, args) => {
+    assert.equal(command, 'git');
+    const verb = args[2];
+    const fail = (status) => Object.assign(new Error('git'), { status });
+    if (verb === 'cat-file') { if (!known) throw fail(1); return ''; }
+    if (verb === 'merge-base') { if (!releaseIsAncestor) throw fail(1); return ''; }
+    throw fail(128);
+  };
+  assert.equal(releaseOlderThanLive(a, b, { exec: mk({ releaseIsAncestor: true }) }), true);
+  assert.equal(releaseOlderThanLive(a, b, { exec: mk({ releaseIsAncestor: false }) }), false);
+  assert.equal(releaseOlderThanLive(a, b, { exec: mk({ known: false, releaseIsAncestor: true }) }), false);
+  assert.equal(releaseOlderThanLive(a, a, { exec: mk({ releaseIsAncestor: true }) }), false);
+  assert.equal(releaseOlderThanLive(a, 'not-a-sha'), false);
 });

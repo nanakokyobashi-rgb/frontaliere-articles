@@ -1785,6 +1785,13 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.match(freshnessHelper, /git merge-base --is-ancestor "\$published_source" "\$current_main"/);
   assert.match(freshnessHelper, /apiInputChangedInRange/);
   assert.match(freshnessHelper, /publish-api-skip/);
+  assert.match(freshnessHelper, /VERIFY_API_ADVANCE/);
+  assert.equal(
+    (wf.match(/VERIFY_API_ADVANCE: \$\{\{ inputs\.source_commit == '' && 'adopt' \|\| 'skip' \}\}/g) || []).length,
+    5,
+    'le cinque barriere dopo la build adottano l avanzamento; i replay bounded restano skip',
+  );
+  assert.match(wf, /PUBLISH_API_EDGE_ADVANCE: \$\{\{ inputs\.source_commit == '' && 'adopt' \|\| 'skip' \}\}/);
   assert.match(freshnessHelper, /PUBLISH_API_SKIP=true/);
   assert.match(freshnessHelper, /il commit dell'artifact resta/);
   assert.match(freshnessHelper, /PUBLISH_API_SOURCE_COMMIT/);
@@ -1884,6 +1891,7 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
     "        if: env.PUBLISH_API_SKIP != 'true' && steps.deploy.outcome == 'success'",
     '        env:',
     '          GH_TOKEN: ${{ github.token }}',
+    "          PUBLISH_API_EDGE_ADVANCE: ${{ inputs.source_commit == '' && 'adopt' || 'skip' }}",
     '        run: node scripts/publish-section-edge.mjs',
   ].join('\n'));
   // Nessuno step fra il flip e la notifica, e la notifica non porta
