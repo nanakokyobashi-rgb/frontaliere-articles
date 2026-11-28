@@ -6479,7 +6479,7 @@
       "reason": "Gate del producer degli hub che applica completezza, controlli di pubblicazione e readiness sitemap prima del commit. E' logica di scrittura e coordinamento del corpus; il sito consuma gli hub pubblicati e non possiede questo gate.",
       "baseline": {
         "site": null,
-        "corpus": "206ad6034839ffe7",
+        "corpus": null,
         "alignedAt": "2026-11-28"
       }
     },
@@ -6489,7 +6489,7 @@
       "reason": "Gestisce il receipt di provenienza e lo scope dei refresh hub tra run publisher. E' un supporto del workflow corpus e non ha un gemello eseguito dal sito.",
       "baseline": {
         "site": null,
-        "corpus": "3edeec27380f142d",
+        "corpus": null,
         "alignedAt": "2026-11-28"
       }
     },
@@ -6499,7 +6499,7 @@
       "reason": "Calcola le URL canoniche che il publisher espone e verifica la readiness pubblica prima di aggiornare gli hub. E' un controllo del workflow corpus, senza gemello sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "380f2c1d4420389f",
+        "corpus": null,
         "alignedAt": "2026-11-28"
       }
     },
@@ -6869,7 +6869,7 @@
       "reason": "Verifica che il receipt di refresh hub sia legato allo SHA esatto attestato dall'artifact del run publisher GitHub Actions. E' un guard di provenienza del workflow del corpus; il sito non esegue questo coordinamento.",
       "baseline": {
         "site": null,
-        "corpus": "b631e595424c6419",
+        "corpus": null,
         "alignedAt": "2026-11-28"
       }
     },
