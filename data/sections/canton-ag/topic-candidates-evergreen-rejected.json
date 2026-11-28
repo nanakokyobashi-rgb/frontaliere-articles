@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ag::https://www.reussbote.ch/der-steuerfuss-soll-erhoeht-werden": {
-      "section": "canton-ag",
-      "ts": 1795676375888
-    },
     "canton-ag::https://www.reussbote.ch/kanton-bildung-aargau-gegen-steuerpaket": {
       "section": "canton-ag",
       "ts": 1795718108707
@@ -23,6 +19,10 @@
     "canton-ag::https://www.reussbote.ch/kanton-aargau-eine-15-jaehrige-aus-sachsen-wird-vermisst": {
       "section": "canton-ag",
       "ts": 1795847375273
+    },
+    "canton-ag::https://www.fricktal.info/news/gemeinden/kaisten/kaisten-nein-zu-mehr-steuern-ja-zu-hoeherem-wasserpreis.html": {
+      "section": "canton-ag",
+      "ts": 1795868980834
     }
   }
 }
