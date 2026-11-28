@@ -22129,7 +22129,9 @@ async function main() {
   // A verified Italian draft has priority over a new candidate. Claim the next
   // bounded attempt on disk BEFORE any provider call, so a hard-killed run
   // consumes its slot instead of creating an unbounded retry loop.
-  if (!DRY_RUN_SCAN && PENDING_TRANSLATION_DIR) {
+  // Con un URL esplicito (dispatch manuale) vince l'URL: la bozza resta intatta
+  // sul disco e riprende al primo run senza URL della stessa sezione.
+  if (!DRY_RUN_SCAN && PENDING_TRANSLATION_DIR && !url) {
     const drafts = listPendingTranslationDrafts(PENDING_TRANSLATION_DIR, SECTION_NAME);
     const exhaustedDrafts = drafts.filter((draft) => draft.attempts >= MAX_PENDING_TRANSLATION_ATTEMPTS);
     if (exhaustedDrafts.length > 0) {
@@ -24778,7 +24780,21 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // prima chiamata di traduzione. In caso di arresto improvviso resta quindi
   // una sorgente verificata da cui ripartire, senza rigenerare l'italiano.
   if (pendingTranslationDraft) {
-    clearPendingTranslationFields(data, pendingTranslationDraft.missingFields);
+    // Le traduzioni salvate sono candidati NON verificati (`translationState`):
+    // si riaprono i campi gia' mancanti piu' quelli che oggi non risultano
+    // utilizzabili, e tutti i gate dopo `translateArticle` (slug, istituzioni
+    // inventate, norme, qualita', immagini) girano sull'intero testo ripreso
+    // prima di ogni scrittura. Nulla del draft e' pubblicabile senza questo giro.
+    clearPendingTranslationFields(data, [
+      ...new Set([
+        ...pendingTranslationDraft.missingFields,
+        ...missingPendingTranslationFields(data),
+      ]),
+    ]);
+    console.error(
+      `TRANSLATION_CANDIDATES_UNVERIFIED article=${data.id} state=${pendingTranslationDraft.translationState} `
+      + `fields=${pendingTranslationDraft.unverifiedFields.length} regated=true`,
+    );
   } else {
     persistPendingTranslationState(missingPendingTranslationFields(data));
   }

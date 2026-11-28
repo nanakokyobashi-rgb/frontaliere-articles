@@ -2398,3 +2398,71 @@ test('--merge-counter senza campo e\' un errore del chiamante', () => {
     w.cleanup();
   }
 });
+
+const PENDING_DRAFT = 'data/sections/frontaliere/pending-translation-drafts/' + 'a'.repeat(64) + '.json';
+const PENDING_PREFIX = 'data/sections/frontaliere/pending-translation-drafts/';
+
+function seedPendingDraft(w) {
+  write(w.work, PENDING_DRAFT, '{"attempts":1}\n');
+  commitAll(w.work, 'seed pending draft');
+  git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+}
+
+test('una bozza pendente cancellata upstream (articolo pubblicato) non viene resuscitata dal commit rigiocato', () => {
+  const w = makeWorld();
+  try {
+    seedPendingDraft(w);
+    git(w.other, 'fetch', '-q', 'origin', 'main');
+    git(w.other, 'reset', '-q', '--hard', 'origin/main');
+    git(w.other, 'rm', '-q', '--', PENDING_DRAFT);
+    commitAll(w.other, 'Generate blog article (frontaliere)');
+    git(w.other, 'push', '-q', 'origin', 'HEAD:main');
+
+    write(w.work, PENDING_DRAFT, '{"attempts":2}\n');
+    write(w.work, BOOKKEEPING, '{"mine":true}\n');
+    commitAll(w.work, 'Record pending translation recovery (frontaliere)');
+
+    const { code, out } = runHelper(w.work, w.upstream, BOOKKEEPING, '--take-theirs', PENDING_PREFIX);
+    assert.equal(code, 0, `helper should succeed, got:\n${out}`);
+    assert.equal(existsSync(path.join(w.work, PENDING_DRAFT)), false, 'la bozza gia\' pubblicata non deve tornare');
+    assert.equal(git(w.work, 'ls-tree', '-r', '--name-only', 'HEAD', '--', PENDING_DRAFT).trim(), '');
+    assert.ok(!rebaseInProgress(w.work));
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('una bozza pendente cancellata dal commit rigiocato resta cancellata anche se upstream l\'ha incrementata', () => {
+  const w = makeWorld();
+  try {
+    seedPendingDraft(w);
+    landUpstream(w, [[PENDING_DRAFT, '{"attempts":2}\n', 'concurrent attempt bump']]);
+
+    git(w.work, 'rm', '-q', '--', PENDING_DRAFT);
+    write(w.work, 'content/blog-body/it/nuovo.ts', 'export const x = 1\n');
+    commitAll(w.work, 'Generate blog article (frontaliere)');
+
+    const { code, out } = runHelper(w.work, w.upstream, BOOKKEEPING, '--take-theirs', PENDING_PREFIX);
+    assert.equal(code, 0, `helper should succeed, got:\n${out}`);
+    assert.equal(existsSync(path.join(w.work, PENDING_DRAFT)), false);
+    assert.ok(existsSync(path.join(w.work, 'content/blog-body/it/nuovo.ts')));
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('due modifiche concorrenti della stessa bozza pendente restano risolte a favore del commit rigiocato', () => {
+  const w = makeWorld();
+  try {
+    seedPendingDraft(w);
+    landUpstream(w, [[PENDING_DRAFT, '{"attempts":2,"who":"upstream"}\n', 'concurrent bump']]);
+    write(w.work, PENDING_DRAFT, '{"attempts":2,"who":"mine"}\n');
+    commitAll(w.work, 'Record pending translation recovery (frontaliere)');
+
+    const { code, out } = runHelper(w.work, w.upstream, BOOKKEEPING, '--take-theirs', PENDING_PREFIX);
+    assert.equal(code, 0, `helper should succeed, got:\n${out}`);
+    assert.match(readFileSync(path.join(w.work, PENDING_DRAFT), 'utf8'), /"who":"mine"/u);
+  } finally {
+    w.cleanup();
+  }
+});

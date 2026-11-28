@@ -120,7 +120,14 @@ test('drafts are atomic, section-scoped, resumable, and removable', (t) => {
   assert.equal(writePendingTranslationDraft(directory, 'frontaliere', first).saved, true);
   const stored = listPendingTranslationDrafts(directory, 'frontaliere');
   assert.equal(stored.length, 1);
-  assert.deepEqual(stored[0], first);
+  assert.deepEqual(stored[0], {
+    ...first,
+    translationState: 'unverified-candidate',
+    translationsVerified: false,
+    unverifiedFields: pendingTranslationFieldDescriptors(article)
+      .map(({ key }) => key)
+      .filter((key) => !first.missingFields.includes(key)),
+  });
   assert.equal(fs.readdirSync(directory).length, 1);
   assert.match(fs.readdirSync(directory)[0], /^[a-f0-9]{64}\.json$/u);
   assert.throws(() => listPendingTranslationDrafts(directory, 'svizzera'), /section/u);
@@ -137,7 +144,7 @@ test('the CLI prioritizes stored drafts, skips full locale batches on resume, an
   assert.match(CREATE_ARTICLE, /TRANSLATION_RESUME section=\$\{SECTION_NAME\}/u);
   assert.match(CREATE_ARTICLE, /claimPendingTranslationDraft\(nextDraft\)/u);
   assert.match(CREATE_ARTICLE, /translateArticle\(data, \{ resumeOnlyMissing: Boolean\(pendingTranslationDraft\) \}\)/u);
-  assert.match(CREATE_ARTICLE, /clearPendingTranslationFields\(data, pendingTranslationDraft\.missingFields\)/u);
+  assert.match(CREATE_ARTICLE, /pendingTranslationDraft\.missingFields,\s+\.\.\.missingPendingTranslationFields\(data\)/u);
   assert.match(CREATE_ARTICLE, /TRANSLATION_EXHAUSTED section=\$\{SECTION_NAME\}/u);
   assert.match(CREATE_ARTICLE, /pending translation recovery exhausted after \$\{MAX_PENDING_TRANSLATION_ATTEMPTS\}\/\$\{MAX_PENDING_TRANSLATION_ATTEMPTS\} attempts/u);
   const exhaustedStart = CREATE_ARTICLE.indexOf('const exhaustedDrafts = drafts.filter');

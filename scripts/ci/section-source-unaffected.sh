@@ -7,6 +7,8 @@ bookkeeping_paths=(
   ':(top,exclude,literal)data/discovery-attempt-state.json'
   ':(top,exclude,literal)data/topic-candidates-evergreen-rejected.json'
   ':(top,exclude,glob)data/sections/*/topic-candidates-evergreen-rejected.json'
+  # Bozze di traduzione pendenti: stato del generatore, mai letto da API, sitemap o feed.
+  ':(top,exclude,glob)data/sections/*/pending-translation-drafts/**'
   # Runtime and fixtures for producing future articles, never read by renderers.
   ':(top,exclude,literal)generator/scripts/create-article.mjs'
   ':(top,exclude,glob)generator/tests/**/*.test.mjs'

@@ -8,6 +8,14 @@ import { pendingBodyTranslations } from './free-mt-recovery.mjs';
 
 export const MAX_PENDING_TRANSLATION_ATTEMPTS = 3;
 export const MAX_PENDING_TRANSLATION_DRAFTS_PER_SECTION = 50;
+/**
+ * Stato dei testi EN/DE/FR salvati nella bozza: sono candidati NON verificati.
+ * Solo l'italiano ha superato i gate al momento del salvataggio; le traduzioni
+ * (anche quelle gia' presenti) rigirano tutti i gate a ogni ripresa, prima di
+ * ogni pubblicazione. La directory della bozza non e' una superficie
+ * pubblicata (nessun build-api, sitemap o feed la legge).
+ */
+export const PENDING_TRANSLATION_STATE = 'unverified-candidate';
 
 function draftFilePath(directory, articleId) {
   const key = createHash('sha256').update(articleId).digest('hex');
@@ -59,9 +67,21 @@ export function normalizePendingTranslationDraft(raw, expectedSection) {
     updatedAt: raw.updatedAt,
     verifiedAt: raw.verifiedAt,
   };
-  if (draft.missingFields.some((field) => !pendingTranslationFieldDescriptors(draft.data).some((item) => item.key === field))) {
+  const descriptors = pendingTranslationFieldDescriptors(draft.data);
+  if (draft.missingFields.some((field) => !descriptors.some((item) => item.key === field))) {
     throw new Error(`pending translation draft has an unknown missing field for ${articleId}`);
   }
+  if (raw.translationsVerified === true
+    || (raw.translationState !== undefined && raw.translationState !== PENDING_TRANSLATION_STATE)) {
+    throw new Error(`pending translation draft cannot mark translations as verified for ${articleId}`);
+  }
+  // Derivati, mai fidati dal file: ogni campo tradotto presente e' un candidato
+  // non verificato finche' l'articolo non supera i gate e viene pubblicato.
+  draft.translationState = PENDING_TRANSLATION_STATE;
+  draft.translationsVerified = false;
+  draft.unverifiedFields = descriptors
+    .map(({ key }) => key)
+    .filter((key) => !draft.missingFields.includes(key));
   return draft;
 }
 

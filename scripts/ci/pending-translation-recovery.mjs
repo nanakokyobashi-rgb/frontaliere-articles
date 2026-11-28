@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Checkpoint validated pending translation drafts outside a generation
+ * Checkpoint validated pending translation drafts of every section outside a generation
  * worktree before CI discards failed-run changes, then restore and stage only
  * those drafts. The checkpoint lives under RUNNER_TEMP, so `git reset --hard`
  * and `git clean -fd` cannot erase the consumed attempt or its verified IT.
@@ -18,9 +18,9 @@ import {
   writePendingTranslationDraft,
   MAX_PENDING_TRANSLATION_DRAFTS_PER_SECTION,
 } from '../../generator/scripts/lib/pending-article-translations.mjs';
-import { sectionWriteSurfaces } from '../lib/article-surfaces.mjs';
+import { SECTIONS, sectionWriteSurfaces } from '../lib/article-surfaces.mjs';
 
-const CHECKPOINT_SCHEMA = 1;
+const CHECKPOINT_SCHEMA = 2;
 
 function repositoryRoot() {
   return execFileSync('git', ['rev-parse', '--show-toplevel'], { encoding: 'utf8' }).trim();
@@ -60,49 +60,91 @@ function assertMissingFieldsMatch(draft) {
   }
 }
 
-export function capturePendingTranslationRecovery({ root = repositoryRoot(), section, checkpointPath }) {
-  const checkpoint = assertCheckpointOutsideRepository(root, checkpointPath);
-  const { relative, absolute } = sectionDirectory(root, section);
-  const drafts = listPendingTranslationDrafts(absolute, section);
-  for (const draft of drafts) assertMissingFieldsMatch(draft);
-
-  writeJsonAtomic(checkpoint, {
-    schema: CHECKPOINT_SCHEMA,
-    section,
-    pendingTranslationDir: relative,
-    drafts,
-  });
-  fs.chmodSync(checkpoint, 0o600);
-  return drafts.length;
+/** `all` (o una lista separata da virgole) -> elenco di sezioni con superficie pending. */
+export function resolveRecoverySections(spec) {
+  if (typeof spec !== 'string' || !spec.trim()) throw new Error('section is required');
+  const names = spec.trim() === 'all'
+    ? Object.keys(SECTIONS).filter((name) => typeof SECTIONS[name]?.pendingTranslationDir === 'string')
+    : [...new Set(spec.split(',').map((name) => name.trim()).filter(Boolean))];
+  if (names.length === 0) throw new Error('no section with a pending translation surface');
+  return names.sort();
 }
 
+/**
+ * Cattura lo stato pending di TUTTE le sezioni indicate. Un run puo' tentare
+ * piu' sezioni (target piu' sibling): la sezione che salva la bozza non e'
+ * necessariamente quella riportata in output.
+ */
+export function capturePendingTranslationRecovery({ root = repositoryRoot(), section, checkpointPath }) {
+  const checkpoint = assertCheckpointOutsideRepository(root, checkpointPath);
+  const sections = {};
+  let total = 0;
+  for (const name of resolveRecoverySections(section)) {
+    const { relative, absolute } = sectionDirectory(root, name);
+    const drafts = listPendingTranslationDrafts(absolute, name);
+    for (const draft of drafts) assertMissingFieldsMatch(draft);
+    sections[name] = { pendingTranslationDir: relative, drafts };
+    total += drafts.length;
+  }
+
+  writeJsonAtomic(checkpoint, { schema: CHECKPOINT_SCHEMA, sections });
+  fs.chmodSync(checkpoint, 0o600);
+  return total;
+}
+
+/**
+ * Ripristina e mette in stage le bozze di ogni sezione catturata. Restituisce
+ * il numero di path realmente in stage sotto le directory pending, cosi' il
+ * chiamante apre un commit di recovery solo se qualcosa e' cambiato.
+ */
 export function restorePendingTranslationRecovery({ root = repositoryRoot(), section, checkpointPath }) {
   const checkpoint = assertCheckpointOutsideRepository(root, checkpointPath);
-  const { relative, absolute } = sectionDirectory(root, section);
+  const names = resolveRecoverySections(section);
   let snapshot;
   try {
     snapshot = JSON.parse(fs.readFileSync(checkpoint, 'utf8'));
   } catch (error) {
     throw new Error(`cannot read pending translation checkpoint: ${error.message}`);
   }
-  if (!snapshot || snapshot.schema !== CHECKPOINT_SCHEMA || snapshot.section !== section
-    || snapshot.pendingTranslationDir !== relative || !Array.isArray(snapshot.drafts)
-    || snapshot.drafts.length > MAX_PENDING_TRANSLATION_DRAFTS_PER_SECTION) {
-    throw new Error('pending translation checkpoint has an invalid schema, section, path, or draft count');
+  if (!snapshot || snapshot.schema !== CHECKPOINT_SCHEMA || !snapshot.sections
+    || typeof snapshot.sections !== 'object' || Array.isArray(snapshot.sections)
+    || JSON.stringify(Object.keys(snapshot.sections).sort()) !== JSON.stringify(names)) {
+    throw new Error('pending translation checkpoint has an invalid schema or section set');
   }
 
-  const drafts = snapshot.drafts.map((draft) => {
-    const validated = normalizePendingTranslationDraft(draft, section);
-    assertMissingFieldsMatch(validated);
-    return validated;
+  const plan = names.map((name) => {
+    const { relative, absolute } = sectionDirectory(root, name);
+    const entry = snapshot.sections[name];
+    if (!entry || entry.pendingTranslationDir !== relative || !Array.isArray(entry.drafts)
+      || entry.drafts.length > MAX_PENDING_TRANSLATION_DRAFTS_PER_SECTION) {
+      throw new Error('pending translation checkpoint has an invalid path or draft count');
+    }
+    const drafts = entry.drafts.map((draft) => {
+      const validated = normalizePendingTranslationDraft(draft, name);
+      assertMissingFieldsMatch(validated);
+      return validated;
+    });
+    if (new Set(drafts.map(({ articleId }) => articleId)).size !== drafts.length) {
+      throw new Error('pending translation checkpoint has duplicate article identities');
+    }
+    return { name, relative, absolute, drafts };
   });
-  const ids = new Set(drafts.map(({ articleId }) => articleId));
-  if (ids.size !== drafts.length) throw new Error('pending translation checkpoint has duplicate article identities');
 
-  fs.rmSync(absolute, { recursive: true, force: true });
-  for (const draft of drafts) writePendingTranslationDraft(absolute, section, draft);
-  execFileSync('git', ['add', '-A', '--', relative], { cwd: root, stdio: 'ignore' });
-  return drafts.length;
+  for (const { name, relative, absolute, drafts } of plan) {
+    fs.rmSync(absolute, { recursive: true, force: true });
+    for (const draft of drafts) writePendingTranslationDraft(absolute, name, draft);
+    const tracked = execFileSync('git', ['ls-files', '--', relative], { cwd: root, encoding: 'utf8' }).trim();
+    // `git add -A` su un path assente sia dal disco sia dall'indice e' un errore.
+    if (tracked || fs.existsSync(absolute)) {
+      execFileSync('git', ['add', '-A', '--', relative], { cwd: root, stdio: 'ignore' });
+    }
+  }
+  const staged = execFileSync(
+    'git',
+    ['diff', '--cached', '--name-only', '--', ...plan.map(({ relative }) => relative)],
+    { cwd: root, encoding: 'utf8' },
+  ).split('\n').filter(Boolean);
+  return staged.length;
 }
 
 function main() {

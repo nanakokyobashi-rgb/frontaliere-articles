@@ -1,10 +1,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
+import { SECTIONS } from '../../scripts/lib/article-surfaces.mjs';
 import {
   MAX_PENDING_TRANSLATION_ATTEMPTS,
   claimPendingTranslationDraft,
@@ -54,9 +55,11 @@ test('entrambi i workflow avviano il recovery su timeout ed errore', () => {
       /steps\.generate\.outputs\.outcome_kind == 'error'[\s\S]+steps\.generate\.outputs\.outcome_kind == 'timeout'/u,
       `${file}: la condizione del commit non copre errore e hard-kill`,
     );
-    assert.match(commit, /pending-translation-recovery\.mjs" capture "\$pending_section" "\$pending_checkpoint"/u, file);
-    assert.match(commit, /pending-translation-recovery\.mjs" restore "\$pending_section" "\$pending_checkpoint"/u, file);
+    assert.match(commit, /pending-translation-recovery\.mjs" capture all "\$pending_checkpoint"/u, file);
+    assert.match(commit, /pending-translation-recovery\.mjs" restore all "\$pending_checkpoint"/u, file);
     assert.match(commit, /pending_translation_recovery_only=true/u, file);
+    assert.doesNotMatch(commit, /recovery\.mjs" (capture|restore) "\$pending_section"/u,
+      `${file}: capture/restore non devono ridursi alla sola sezione dell'output (target + sibling)`);
   }
 });
 
@@ -73,8 +76,8 @@ test('in entrambi i workflow l’ordine è capture → reset/clean → restore',
     assert.ok(restore > clean, `${file}: restore precede clean`);
     assert.match(
       commit,
-      /if \[ "\$pending_count" -gt 0 \]; then[\s\S]+pending_translation_recovery_only=true/u,
-      `${file}: il recovery deve diventare commit-only solo con draft catturati`,
+      /if \[ "\$pending_staged" -gt 0 \]; then\s+pending_translation_recovery_only=true/u,
+      `${file}: il recovery deve diventare commit-only solo se il restore ha messo in stage qualcosa`,
     );
   }
 });
@@ -197,5 +200,188 @@ test('timeout ed error preservano draft, tentativo consumato e gate di pubblicaz
         disposeFixture(fixture);
       }
     }
+  }
+});
+
+function sampleDraftFor(section, articleId) {
+  const draft = sampleDraft();
+  draft.section = section;
+  draft.articleId = articleId;
+  draft.data.id = articleId;
+  return draft;
+}
+
+test('sibling: la bozza salvata dalla sezione effettiva sopravvive a timeout ed error anche se l\'output dice TARGET', () => {
+  for (const workflow of WORKFLOWS) {
+    for (const outcome of ['timeout', 'error']) {
+      const fixture = initFixtureRepo();
+      try {
+        // TARGET=frontaliere esce rc 4 senza bozza; poi `svizzera` salva una
+        // bozza IT verificata (tentativo gia' consumato) e viene hard-killed.
+        const siblingDir = path.join(fixture.root, 'data/sections/svizzera/pending-translation-drafts');
+        const claimed = claimPendingTranslationDraft(
+          sampleDraftFor('svizzera', 'sibling-draft-fixture'),
+          { now: '2026-11-28T12:01:00.000Z' },
+        );
+        writePendingTranslationDraft(siblingDir, 'svizzera', claimed);
+
+        assert.equal(
+          capturePendingTranslationRecovery({ root: fixture.root, section: 'all', checkpointPath: fixture.checkpointPath }),
+          1,
+          `${workflow}/${outcome}: capture di tutte le sezioni`,
+        );
+        execFileSync('git', ['-C', fixture.root, 'reset', '--hard', 'HEAD'], { stdio: 'ignore' });
+        execFileSync('git', ['-C', fixture.root, 'clean', '-fd'], { stdio: 'ignore' });
+        assert.equal(fs.existsSync(siblingDir), false, 'il clean deve aver cancellato la bozza non tracciata');
+        assert.equal(
+          restorePendingTranslationRecovery({ root: fixture.root, section: 'all', checkpointPath: fixture.checkpointPath }),
+          1,
+          `${workflow}/${outcome}: restore in stage`,
+        );
+        const restored = listPendingTranslationDrafts(siblingDir, 'svizzera');
+        assert.equal(restored.length, 1);
+        assert.equal(restored[0].attempts, 2, `${workflow}/${outcome}: il tentativo consumato dal sibling deve restare`);
+        const staged = execFileSync('git', ['-C', fixture.root, 'diff', '--cached', '--name-only'], { encoding: 'utf8' })
+          .trim().split('\n').filter(Boolean);
+        assert.equal(staged.length, 1);
+        assert.match(staged[0], /^data\/sections\/svizzera\/pending-translation-drafts\/[a-f0-9]{64}\.json$/u);
+      } finally {
+        disposeFixture(fixture);
+      }
+    }
+  }
+});
+
+test('capture con la sola sezione TARGET perderebbe la bozza del sibling (regressione documentata)', () => {
+  const fixture = initFixtureRepo();
+  try {
+    const siblingDir = path.join(fixture.root, 'data/sections/svizzera/pending-translation-drafts');
+    writePendingTranslationDraft(siblingDir, 'svizzera', sampleDraftFor('svizzera', 'sibling-only'));
+    assert.equal(
+      capturePendingTranslationRecovery({ root: fixture.root, section: 'frontaliere', checkpointPath: fixture.checkpointPath }),
+      0,
+    );
+    assert.equal(
+      capturePendingTranslationRecovery({ root: fixture.root, section: 'frontaliere,svizzera', checkpointPath: fixture.checkpointPath }),
+      1,
+    );
+  } finally {
+    disposeFixture(fixture);
+  }
+});
+
+test('un draft già committato e invariato non apre un commit di recovery vuoto', () => {
+  const fixture = initFixtureRepo();
+  try {
+    const dir = path.join(fixture.root, 'data/sections/frontaliere/pending-translation-drafts');
+    writePendingTranslationDraft(dir, 'frontaliere', sampleDraft());
+    execFileSync('git', ['-C', fixture.root, 'add', '-A'], { stdio: 'ignore' });
+    execFileSync('git', ['-C', fixture.root, 'commit', '-qm', 'persisted draft'], { stdio: 'ignore' });
+    assert.equal(capturePendingTranslationRecovery({ root: fixture.root, section: 'all', checkpointPath: fixture.checkpointPath }), 1);
+    execFileSync('git', ['-C', fixture.root, 'reset', '--hard', 'HEAD'], { stdio: 'ignore' });
+    assert.equal(
+      restorePendingTranslationRecovery({ root: fixture.root, section: 'all', checkpointPath: fixture.checkpointPath }),
+      0,
+      'nessun path cambiato: il workflow non deve fare commit',
+    );
+  } finally {
+    disposeFixture(fixture);
+  }
+});
+
+test('le traduzioni salvate sono candidati marcati NON verificati e non possono dichiararsi verificati', () => {
+  const draft = sampleDraft();
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'pending-unverified-'));
+  try {
+    writePendingTranslationDraft(dir, 'frontaliere', draft);
+    const [stored] = listPendingTranslationDrafts(dir, 'frontaliere');
+    assert.equal(stored.translationState, 'unverified-candidate');
+    assert.equal(stored.translationsVerified, false);
+    assert.deepEqual(stored.unverifiedFields, ['en.title', 'en.excerpt', 'en.body1']);
+    const file = fs.readdirSync(dir)[0];
+    const onDisk = JSON.parse(fs.readFileSync(path.join(dir, file), 'utf8'));
+    assert.equal(onDisk.translationsVerified, false, 'la marcatura deve stare nel file persistito');
+    assert.throws(
+      () => writePendingTranslationDraft(dir, 'frontaliere', { ...draft, translationsVerified: true }),
+      /cannot mark translations as verified/u,
+    );
+    assert.throws(
+      () => writePendingTranslationDraft(dir, 'frontaliere', { ...draft, translationState: 'verified' }),
+      /cannot mark translations as verified/u,
+    );
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('nessuna superficie pubblicata (API, indici, sitemap, feed, trigger di publish) legge le bozze pendenti', () => {
+  const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
+  const publishers = [
+    'scripts/build-api.mjs',
+    'scripts/build-blog-index.mjs',
+    'scripts/publish-article-fast.mjs',
+    'scripts/publish-section-edge.mjs',
+    'scripts/publish-section-pages.mjs',
+    'scripts/reconcile-article-shards.mjs',
+    'scripts/reconcile-section-pages.mjs',
+    ...fs.readdirSync(path.join(ROOT, 'scripts/lib')).filter((name) => name.endsWith('.mjs')).map((name) => `scripts/lib/${name}`),
+  ].filter((rel) => rel !== 'scripts/lib/article-surfaces.mjs' && fs.existsSync(path.join(ROOT, rel)));
+  for (const rel of publishers) {
+    const source = read(rel);
+    assert.doesNotMatch(source, /pending-translation-drafts|pendingTranslationDir/u, `${rel} non deve leggere lo stato pending`);
+    assert.doesNotMatch(source, /['"`]data\/sections['"`/]/u, `${rel} non deve scandire data/sections`);
+  }
+  // Un commit di sola recovery non e' un input di pubblicazione ne' un trigger.
+  assert.doesNotMatch(read('.github/workflows/publish-api.yml'), /data\/sections/u);
+  assert.match(read('scripts/ci/section-source-unaffected.sh'), /exclude,glob\)data\/sections\/\*\/pending-translation-drafts\/\*\*/u);
+  for (const section of Object.keys(SECTIONS)) {
+    const caller = `.github/workflows/generate-article-${section.replace(/^canton-/u, '')}.yml`;
+    if (!fs.existsSync(path.join(ROOT, caller))) continue;
+    assert.doesNotMatch(read(caller), /pending-translation-drafts/u, `${caller}: la recovery non deve riaccendere il caller`);
+  }
+});
+
+test('la ripresa rigira i gate sui testi ripresi e un URL esplicito lascia intatta la bozza', () => {
+  const source = fs.readFileSync(path.join(ROOT, 'generator/scripts/create-article.mjs'), 'utf8');
+  const resumeGate = source.indexOf('TRANSLATION_CANDIDATES_UNVERIFIED');
+  const translate = source.indexOf('await translateArticle(data, { resumeOnlyMissing', resumeGate);
+  const slugs = source.indexOf('relocalizeSlugsAfterTranslation(data', translate);
+  const fabricated = source.indexOf('assertNoFabricatedLaborOfficeCrossLocale(data);', translate);
+  const finalCompleteness = source.indexOf('const missingBeforePublish', fabricated);
+  const firstWrite = source.indexOf('modifyRouterTs(data);', finalCompleteness);
+  assert.ok(resumeGate > 0 && translate > resumeGate && slugs > translate && fabricated > slugs
+    && finalCompleteness > fabricated && firstWrite > finalCompleteness,
+  'i gate post-traduzione devono girare sull\'intero testo ripreso prima del primo write');
+  assert.match(source, /missingPendingTranslationFields\(data\),\s*\]\),\s*\]\);/u, 'i campi oggi inutilizzabili vanno riaperti');
+
+  assert.match(
+    source,
+    /if \(!DRY_RUN_SCAN && PENDING_TRANSLATION_DIR && !url\) \{\s+const drafts = listPendingTranslationDrafts/u,
+    'con URL esplicito la bozza non deve essere né reclamata né scartata',
+  );
+});
+
+test('un commit di sola bozza pendente è bookkeeping per il publisher (fast-forward non invalidante)', () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'pending-unaffected-'));
+  const git = (...args) => execFileSync('git', args, { cwd: directory, encoding: 'utf8' }).trim();
+  const commit = (rel, body) => {
+    fs.mkdirSync(path.dirname(path.join(directory, rel)), { recursive: true });
+    fs.writeFileSync(path.join(directory, rel), body);
+    git('add', '--', rel);
+    git('commit', '-qm', rel);
+    return git('rev-parse', 'HEAD');
+  };
+  const check = (base, head) => spawnSync('bash', [path.join(ROOT, 'scripts/ci/section-source-unaffected.sh'), base, head], { cwd: directory }).status;
+  try {
+    git('init', '-q');
+    git('config', 'user.email', 'test@example.com');
+    git('config', 'user.name', 'Test');
+    const base = commit('content/article.txt', 'original');
+    const pending = commit(`data/sections/frontaliere/pending-translation-drafts/${'a'.repeat(64)}.json`, '{}');
+    const article = commit('content/article.txt', 'changed');
+    assert.equal(check(base, pending), 0);
+    assert.equal(check(pending, article), 1);
+  } finally {
+    fs.rmSync(directory, { recursive: true, force: true });
   }
 });

@@ -1470,15 +1470,18 @@ jobs:
             fi
             pending_section='${{ steps.generate.outputs.section }}'
             pending_checkpoint="${RUNNER_TEMP:-/tmp}/pending-translation-${GITHUB_RUN_ID:-local}-${GITHUB_RUN_ATTEMPT:-1}.json"
-            pending_count="$(node "$GITHUB_WORKSPACE/scripts/ci/pending-translation-recovery.mjs" capture "$pending_section" "$pending_checkpoint")"
+            pending_count="$(node "$GITHUB_WORKSPACE/scripts/ci/pending-translation-recovery.mjs" capture all "$pending_checkpoint")"
             case "$pending_count" in
               ''|*[!0-9]*) echo "::error::invalid pending translation recovery count"; exit 1 ;;
             esac
             echo "::warning::generation failed without an article; discarding unverified changes and preserving validated recovery state"
             git reset --hard HEAD
             git clean -fd
-            if [ "$pending_count" -gt 0 ]; then
-              node "$GITHUB_WORKSPACE/scripts/ci/pending-translation-recovery.mjs" restore "$pending_section" "$pending_checkpoint"
+            pending_staged="$(node "$GITHUB_WORKSPACE/scripts/ci/pending-translation-recovery.mjs" restore all "$pending_checkpoint")"
+            case "$pending_staged" in
+              ''|*[!0-9]*) echo "::error::invalid pending translation restore count"; exit 1 ;;
+            esac
+            if [ "$pending_staged" -gt 0 ]; then
               pending_translation_recovery_only=true
             fi
             recovery_state='data/discovery-attempt-state.json'
