@@ -14,9 +14,17 @@
  *   source ~/Projects/frontaliere/bin/rc-env.sh
  *   node generator/scripts/build-section-demand-vocabulary.mjs [--days 28] [--top 80]
  *        [--sections canton-ti,canton-vd] [--out <file>] [--dry-run]
+ *   node generator/scripts/build-section-demand-vocabulary.mjs --verify
+ *        [--file <json>] [--previous <json>] [--max-change 0.3] [--allow-large-change]
+ *
+ * `--verify` rilegge il JSON gia' scritto e FALLISCE (exit 1) se una query non
+ * rispetta la grammatica chiusa del filtro, se e' sotto `minQueryImpressions`
+ * o (con `--previous`) se piu' del 30% delle query di una sezione e' nuovo
+ * rispetto al file precedente. Stampa solo conteggi per sezione e categoria,
+ * mai il testo di una query.
  *
  * PRIVACY: le query passano dal filtro `lib/section-demand-query-filter.mjs`
- * (allowlist di dominio + scarto di nomi, contatti, codici) prima di essere
+ * (grammatica chiusa a token esatti + scarto di nomi, contatti, codici) prima di essere
  * aggregate; nel log finiscono solo conteggi.
  *
  * Senza credenziali o con GSC non raggiungibile esce con codice 1 SENZA toccare
@@ -39,8 +47,10 @@ const LOCALE_PREFIX = /^\/(en|de|fr)(?=\/|$)/;
 const DAY_MS = 86400000;
 export const DEFAULT_OUTPUT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'data', 'section-demand-vocabulary.json');
 export const DEFAULT_TOP = 80;
-/** Una query con una sola impression e' rumore, non domanda. */
-export const MIN_QUERY_IMPRESSIONS = 2;
+/** Sotto 5 impression in 28 giorni una query e' rumore, e spesso una persona che cerca se stessa o un conoscente. */
+export const MIN_QUERY_IMPRESSIONS = 5;
+/** Quota massima di query nuove per sezione rispetto al file precedente. */
+export const MAX_SECTION_CHANGE = 0.3;
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -95,8 +105,9 @@ export function buildVocabularySections(rows, aliasMap, { top = DEFAULT_TOP, min
     const section = sectionOfPath(pathOfPage(page), aliasMap);
     const query = String(rawQuery ?? '').toLowerCase().replace(/\s+/g, ' ').trim();
     if (!section || !query) continue;
-    let verdict = verdicts.get(query);
-    if (!verdict) { verdict = classifyDemandQuery(query); verdicts.set(query, verdict); }
+    const verdictKey = `${section}\u0000${query}`;
+    let verdict = verdicts.get(verdictKey);
+    if (!verdict) { verdict = classifyDemandQuery(query, { section }); verdicts.set(verdictKey, verdict); }
     if (!verdict.keep) continue;
     const bySection = acc.get(section) || new Map();
     const bucket = bySection.get(query) || { clicks: 0, impressions: 0, positionWeighted: 0 };
@@ -135,6 +146,69 @@ export function buildVocabularySections(rows, aliasMap, { top = DEFAULT_TOP, min
     };
   }
   return sections;
+}
+
+/**
+ * Verifica un documento gia' costruito. Ritorna SOLO conteggi (mai testo di query).
+ * @returns {{ok: boolean, violations: {reasons: object, belowMinimum: number, checked: number},
+ *            changes: object[], changeViolations: string[]}}
+ */
+export function verifyVocabularyDocument(doc, { previous = null, maxChange = MAX_SECTION_CHANGE, allowLargeChange = false } = {}) {
+  const reasons = {};
+  let belowMinimum = 0;
+  let checked = 0;
+  const minImpressions = Number(doc?.minQueryImpressions) || MIN_QUERY_IMPRESSIONS;
+  const sections = doc && typeof doc.sections === 'object' && doc.sections ? doc.sections : {};
+  for (const [section, entry] of Object.entries(sections)) {
+    for (const q of Array.isArray(entry?.queries) ? entry.queries : []) {
+      checked += 1;
+      const verdict = classifyDemandQuery(q?.query, { section });
+      if (!verdict.keep) reasons[verdict.reason] = (reasons[verdict.reason] || 0) + 1;
+      if (!(Number(q?.impressions) >= Math.max(minImpressions, MIN_QUERY_IMPRESSIONS))) belowMinimum += 1;
+    }
+  }
+  const changes = [];
+  const changeViolations = [];
+  const prevSections = previous && typeof previous.sections === 'object' && previous.sections ? previous.sections : null;
+  if (prevSections) {
+    for (const [section, entry] of Object.entries(sections)) {
+      const old = prevSections[section];
+      if (!old) { changes.push({ section, newQueries: null, total: (entry?.queries || []).length, share: null }); continue; }
+      const oldSet = new Set((old.queries || []).map((q) => q?.query));
+      const current = entry?.queries || [];
+      const fresh = current.filter((q) => !oldSet.has(q?.query)).length;
+      const share = current.length > 0 ? fresh / current.length : 0;
+      changes.push({ section, newQueries: fresh, total: current.length, share: Math.round(share * 100) / 100 });
+      if (share > maxChange) changeViolations.push(section);
+    }
+  }
+  const grammarOk = Object.keys(reasons).length === 0 && belowMinimum === 0;
+  const changeOk = allowLargeChange || changeViolations.length === 0;
+  return { ok: grammarOk && changeOk, violations: { reasons, belowMinimum, checked }, changes, changeViolations };
+}
+
+function runVerify(args) {
+  const file = typeof args.file === 'string' ? path.resolve(args.file) : DEFAULT_OUTPUT;
+  const readJson = (f) => JSON.parse(fs.readFileSync(f, 'utf8'));
+  let doc;
+  try { doc = readJson(file); } catch (error) { console.error(`verify: file illeggibile (${error.code || 'parse'})`); return 1; }
+  let previous = null;
+  if (typeof args.previous === 'string') {
+    try { previous = readJson(path.resolve(args.previous)); } catch { console.error('verify: file precedente illeggibile: tetto di variazione non verificabile'); return 1; }
+  }
+  const maxChange = args['max-change'] !== undefined ? Number(args['max-change']) : MAX_SECTION_CHANGE;
+  const result = verifyVocabularyDocument(doc, { previous, maxChange, allowLargeChange: args['allow-large-change'] === true });
+  const { reasons, belowMinimum, checked } = result.violations;
+  console.error(`verify: ${checked} query controllate, violazioni di grammatica per categoria ${JSON.stringify(reasons)}, sotto soglia impression ${belowMinimum}`);
+  if (previous) {
+    console.error(`verify: variazione per sezione (nuove/totale) ${result.changes.map((c) => `${c.section}:${c.newQueries === null ? 'nuova' : `${c.newQueries}/${c.total}`}`).join(' ')}`);
+    if (result.changeViolations.length > 0) {
+      console.error(`verify: sezioni oltre il tetto del ${Math.round(maxChange * 100)}%: ${result.changeViolations.join(' ')}${args['allow-large-change'] === true ? ' (ammesso da --allow-large-change)' : ''}`);
+    }
+  }
+  if (!result.ok) { console.error('verify: FALLITO'); return 1; }
+  console.error('verify: ok');
+  return 0;
 }
 
 async function gscToken() {
@@ -180,6 +254,7 @@ const isoDay = (ms) => new Date(ms).toISOString().slice(0, 10);
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
+  if (args.verify) { process.exit(runVerify(args)); }
   const days = Number(args.days) || 28;
   const top = Number(args.top) || DEFAULT_TOP;
   const out = typeof args.out === 'string' ? path.resolve(args.out) : DEFAULT_OUTPUT;

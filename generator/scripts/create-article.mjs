@@ -22769,6 +22769,8 @@ async function main() {
                   availableHeadlines,
                   sectionVocabularyFor(_sectionDemandVocabulary, SECTION_NAME),
                   {
+                    // Il filtro di privacy ammette solo i toponimi di questa sezione.
+                    section: SECTION_NAME,
                     // Il nome del cantone nelle 4 lingue (dagli slug dell'hub) non e' domanda su un argomento.
                     ignoreTerms: [
                       SECTION_PROFILE.cantonName,

@@ -7,17 +7,26 @@
  * e le query finirebbero nei log CI, quindi qui si SCARTA (mai si anonimizza)
  * tutto cio' che non e' dimostrabilmente domanda di dominio.
  *
- * Contratto: una query si tiene SOLO se
- *  - non contiene contatti, URL, sequenze di cifre, sintassi da operatore,
- *    pattern su persone (stipendio di X, coniuge, necrologio...);
- *  - contiene almeno un termine di DOMINIO (fisco, permessi, lavoro, salari per
- *    professione, sanita', mobilita', scuola, casa, eventi, carburanti, cambio);
- *  - OGNI altro token e' un toponimo/istituzione noto, una parola generica o
- *    funzionale. Un token sconosciuto potrebbe essere un cognome: la query va
- *    scartata. Le query «nome cognome» senza dominio non passano mai.
+ * GRAMMATICA CHIUSA A TOKEN ESATTI (versione 2). Una query si tiene SOLO se e'
+ * una sequenza di token ciascuno dei quali e' presente in un elenco ESATTO:
+ *  - termini di dominio (fisco, permessi, lavoro, professioni, sanita',
+ *    mobilita', scuola, casa, eventi, carburanti, cambio, famiglia, burocrazia),
+ *    con una lista chiusa di suffissi di plurale/variante applicata SOLO a
+ *    questi (mai ai toponimi ne' ai generici);
+ *  - parole generiche o funzionali (elenco esplicito);
+ *  - anni 2020-2035 e pochi codici (permesso G, autostrada A2, pilastro 3a);
+ *  - toponimi: SOLO i comuni e i nomi del cantone della sezione, al massimo un
+ *    toponimo (comune o cantone, anche in sigla) per query; restano fuori i toponimi
+ *    corti (<= 4 lettere, per i comuni) o uguali a un prenome, un cognome
+ *    frequente o una parola di dominio/generica.
+ * e contiene almeno un termine di dominio. Nessun `startsWith`/`includes`: un
+ * cognome che inizia come una parola di dominio, o che coincide con un comune
+ * di un altro cantone, non passa. Le query «nome cognome» senza dominio non
+ * passano mai.
  *
- * Lo stesso filtro gira nel builder (prima dell'aggregazione) e nel loader a
- * runtime, cosi' un JSON vecchio non riporta dati personali nei log.
+ * Lo stesso filtro gira nel builder (prima dell'aggregazione), nel loader a
+ * runtime e nella modalita' `--verify` del builder, cosi' un JSON vecchio non
+ * riporta dati personali nei log.
  *
  * Funzioni pure salvo il caricamento (una volta) dei toponimi dal repo.
  */
@@ -26,8 +35,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-export const QUERY_FILTER_VERSION = 1;
-export const MAX_QUERY_TOKENS = 12;
+import { recognizeFirstName } from './first-name-recognition.mjs';
+
+export const QUERY_FILTER_VERSION = 2;
+export const MAX_QUERY_TOKENS = 8;
 
 const DATA_DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'data');
 
@@ -42,111 +53,173 @@ export function foldText(value) {
     .trim();
 }
 
-/** Riferimento breve e stabile di una query per i log (mai la query intera). */
-export function queryRef(query) {
-  return `q-${crypto.createHash('sha1').update(String(query ?? '')).digest('hex').slice(0, 8)}`;
+/** Sale per processo: i riferimenti nei log non sono invertibili per dizionario ne' confrontabili tra run. */
+const RUN_SALT = crypto.randomBytes(16);
+
+/** Riferimento breve di una query per i log (mai la query intera), valido solo dentro questo processo. */
+export function queryRef(query, salt = RUN_SALT) {
+  return `q-${crypto.createHmac('sha256', salt).update(String(query ?? '')).digest('hex').slice(0, 8)}`;
 }
 
 const words = (text) => text.split(/\s+/).filter(Boolean);
+const list = (text) => words(foldText(text));
 
-/** Stem di dominio per categoria (gia' in forma foldata). */
-const DOMAIN_STEMS = {
-  fisco: ['impost*', 'tass*', 'fisc*', 'steuer', 'tax*', 'dichiaraz', 'deduz', 'deduc', 'abzug', 'aliquot', 'moltiplicator', 'ahv', 'avs', 'lpp', 'bvg', 'iva', 'mwst', 'tva', 'pension', 'rendit', 'vorsorge', 'previdenz', 'pilastro', 'saule', 'pillar', 'prevoyance', 'retraite', 'contribut', 'beitrag', 'cotisation', 'ucc', 'ruling', 'quellensteuer', 'riscossione'],
-  permessi: ['permess', 'permit', 'bewilligung', 'aufenthalt', 'grenzgang', 'frontalier', 'cross border', 'permis', 'autorizzaz', 'autorisation', 'cittadinanz', 'naturalizz', 'einburger', 'visto', 'domicil', 'wohnsitz', 'residenz'],
-  lavoro: ['lavor', 'arbeit', 'travail', 'emploi', 'impiego', 'stellen', 'offerte di lavoro', 'salar', 'stipend', 'lohn*', 'gehalt', 'contratt', 'vertrag', 'contrat', 'disoccup', 'arbeitslos', 'chomage', 'indennit', 'assunz', 'licenzi', 'kundigung', 'concors', 'ferie', 'urlaub', 'assicurazione infortuni', 'infortun', 'job*', 'karriere', 'career', 'recruit', 'azienda'],
-  professioni: ['infermier', 'medico', 'medici', 'ingegner', 'insegnant', 'docent', 'cuoc', 'muratore', 'elettricist', 'autist', 'camerier', 'commess', 'operaio', 'magazzinier', 'pflege', 'arzt', 'lehrer', 'koch', 'elektriker', 'informatic', 'developer', 'krankenschwester', 'infirmi', 'enseignant', 'meccanic', 'idraulic', 'giardinier', 'parrucchier', 'contabil', 'avvocat', 'architett', 'farmacist', 'dentist', 'educator', 'badante', 'segretari', 'ristorazione', 'gastronomia', 'hotel', 'cuisinier', 'maurer', 'schreiner', 'falegnam', 'saldator', 'carpentier'],
-  sanita: ['lamal', 'kvg', 'krankenkass', 'cassa malati', 'cassamalati', 'assicuraz', 'versicher', 'assurance', 'ospedal', 'spital', 'hopital', 'sanit', 'gesundheit', 'sante', 'pramie', 'premi', 'franchigia', 'franchise', 'medic', 'farmac', 'apothek', 'pharmac', 'cura', 'pflegeversicherung', 'invalidit', 'pronto soccorso', 'notfall', 'vaccin', 'impf', 'sussidio', 'prestazion', 'verbilligung'],
-  mobilita: ['traffic', 'verkehr', 'trafic', 'autostrad', 'autobahn', 'autoroute', 'valic', 'grenzubergang', 'dogana', 'zoll*', 'douane', 'strada', 'strasse', 'route', 'cantier', 'baustelle', 'chiusur', 'sperrung', 'gottardo', 'gotthard', 'tunnel', 'treno', 'train', 'bahn', 'tilo', 'ffs', 'sbb', 'cff', 'vignett', 'bus', 'trasport', 'transport', 'mobilit', 'parcheggio', 'parking', 'parkplatz', 'cod*', 'stau', 'bouchon', 'patente', 'fuhrerschein', 'permis de conduire', 'targa', 'veicol', 'fahrzeug', 'incident', 'unfall', 'accident', 'tram', 'metro', 'funivia', 'aeroporto', 'flughafen', 'aeroport', 'monopattin', 'bici*', 'velo', 'abbonament', 'billett', 'biglietto', 'ticket', 'halbtax', 'mezzo pubblic', 'cantonale', 'kantonsstrasse', 'ciclabil'],
-  scuola: ['scuol', 'schul', 'ecole', 'universit', 'hochschule', 'studi*', 'kita', 'asilo', 'nido', 'maturit', 'formazion', 'ausbildung', 'formation', 'apprendist', 'lehre', 'borsa di studio', 'stipendio di studio', 'ferien scolast', 'calendario scolast', 'supsi', 'usi', 'eth', 'epfl', 'liceo', 'gymnasium', 'lycee'],
-  casa: ['affitt', 'miete*', 'loyer', 'locazion', 'cas*', 'wohnung', 'immobil', 'appartament', 'logement', 'alloggi', 'mutuo', 'hypothek', 'hypotheque', 'eigenmiet', 'sfratto', 'condomin', 'bolletta', 'strom', 'elettricit', 'energia', 'energie', 'riscaldament', 'rifiuti', 'abfall', 'dechet', 'acqua potabile', 'internet', 'fibra', 'comparator', 'agenzia immobiliare'],
-  eventi: ['event*', 'veranstalt', 'concert', 'festiv', 'fest*', 'mercat', 'markt', 'marche', 'carnevale', 'fiera', 'sagra', 'spettacol', 'mostra', 'museo', 'museum', 'musee', 'cinema', 'teatro', 'theater', 'gita', 'escursion', 'wanderung', 'weihnacht', 'natale', 'capodanno', 'feiertag', 'festivit', 'giorni festiv', 'meteo', 'wetter', 'previsioni', 'neve', 'schnee', 'piste', 'sci', 'lido', 'piscina', 'bagno', 'badi', 'sport', 'calcio', 'hockey'],
-  carburanti: ['benzin', 'carburant', 'diesel', 'tankstell', 'essence', 'gasolio', 'distributor', 'stazione di servizio', 'prezzo carburant', 'elettric', 'ricarica', 'colonnina', 'lade*', 'gpl', 'metano'],
-  cambio: ['cambio*', 'wechselkurs', 'kurs*', 'franco', 'chf', 'franc', 'euro', 'eur', 'change', 'devise', 'valuta', 'tasso', 'zins*', 'taux', 'cripto', 'bitcoin', 'banca', 'bank*', 'banque', 'conto', 'konto', 'twint', 'bonifico', 'iban', 'carta di credito', 'kreditkarte'],
-  famiglia: ['assegni', 'familiar', 'kinderzulage', 'zulage', 'allocation', 'congedo', 'mutterschaft', 'maternit', 'paternit', 'alimenti', 'divorzio', 'scheidung', 'matrimonio', 'heirat', 'successione', 'erb', 'eredit', 'testament', 'adozione', 'anziani', 'senioren', 'ems', 'spitex', 'bonus', 'sussid', 'aiuti', 'sozialhilfe', 'assistenza'],
-  burocrazia: ['ufficio', 'amt*', 'office', 'registro', 'handelsregister', 'registre', 'anagrafe', 'einwohner', 'tribunale', 'gericht', 'tribunal', 'polizia', 'polizei', 'police', 'multa', 'bussa', 'busse', 'amende', 'legge', 'gesetz', 'verordnung', 'ordinanza', 'concorso', 'bando', 'ausschreibung', 'gara', 'appalto', 'sondaggio', 'votazion', 'abstimmung', 'votation', 'elezion', 'wahl*', 'election', 'iniziativa', 'referendum', 'consiglio', 'regierung', 'gouvernement', 'governo', 'municipio', 'gemeinde', 'commune', 'dipartimento', 'departement', 'cantone', 'kanton', 'canton', 'cantonal', 'kantonal'],
+/** Suffissi ammessi per le sole parole di dominio lunghe (>= 5 lettere): plurali/varianti. */
+export const DOMAIN_SUFFIXES = Object.freeze(['', 's', 'e', 'n', 'en', 'i']);
+
+const DOMAIN_LEMMAS = `
+imposta imposte tassa tasse tassazione fisco fiscale fiscali fiscalita dichiarazione dichiarazioni deduzione deduzioni detrazione detrazioni aliquota aliquote moltiplicatore iva pensione pensioni rendita rendite previdenza previdenziale pilastro pilastri contributi contributo cassa casse malati cassamalati ruling riscossione imponibile avs lpp ucc
+steuer steuern steuerfuss steuerfusse steuererklarung steuersatz steuersatze steuertarif steuerrechner steuerabzug steuerabzuge steuerausweis steuerbetrag steuerrechnung steuervergleich quellensteuer einkommenssteuer einkommensteuer vermogenssteuer mehrwertsteuer mwst abzug abzuge ahv bvg rente renten altersrente maximalrente minimalrente pensionskasse vorsorge saule beitrag beitrage
+impot impots taxe taxes fiscalite deduction deductions tva prevoyance retraite cotisation cotisations pilier
+tax taxes taxation pension pillar vat withholding
+permesso permessi frontaliere frontalieri frontaliera frontaliers frontalier grenzganger grenzgangerin grenzgangerbewilligung bewilligung bewilligungen aufenthalt aufenthaltsbewilligung niederlassungsbewilligung arbeitsbewilligung permis autorisation autorisations cittadinanza naturalizzazione einburgerung visto visti domicilio wohnsitz residenza residenz permit permits
+lavoro lavori lavorare lavoratore lavoratori arbeit arbeiten arbeitsstelle arbeitsstellen arbeitsvertrag arbeitgeber arbeitnehmer travail emploi emplois impiego impieghi stellen stellenangebote stelle jobs job salario salari stipendio stipendi lohn lohne gehalt gehalter salaire salaires mindestlohn mindestlohne contratto contratti vertrag vertrage contrat contrats disoccupazione arbeitslos arbeitslosigkeit arbeitslosengeld arbeitslosenversicherung chomage indennita assunzione assunzioni licenziamento licenziamenti kundigung concorso concorsi ferie urlaub vacances infortuni infortunio karriere career recruiting azienda aziende unternehmen entreprise entreprises
+infermiere infermieri infermiera infermiere medico ingegnere ingegneri insegnante insegnanti docente docenti cuoco cuochi muratore muratori elettricista elettricisti autista autisti cameriere camerieri commesso commessa operaio operai magazziniere magazzinieri pflege pflegefachfrau pflegefachmann pflegefachperson arzt arzte lehrer lehrerin elektriker informatiker informatica developer krankenschwester infirmier infirmiere enseignant meccanico meccanici idraulico giardiniere parrucchiere contabile avvocato architetto farmacista dentista zahnarzt educatore educatrice badante segretaria ristorazione gastronomia hotel cuisinier falegname saldatore carpentier ingenieur
+lamal kvg krankenkasse krankenkassen krankenversicherung assicurazione assicurazioni versicherung versicherungen assurance assurances ospedale ospedali spital spitaler hopital hopitaux sanita gesundheit sante pramie pramien premi premio pramienverbilligung franchigia franchise medicina medicinali farmacia farmacie apotheke apotheken pharmacie cura cure pflegeversicherung invalidita soccorso notfall vaccino vaccini impfung sussidio sussidi prestazioni prestazione verbilligung pediatra ambulatorio
+traffico verkehr trafic autostrada autostrade autobahn autoroute valico valichi grenzubergang grenzubergange dogana dogane zoll douane strada strade strasse strassen route routes cantiere cantieri baustelle baustellen chiusura chiusure sperrung gottardo gotthard tunnel treno treni train trains bahn tilo ffs sbb cff vignetta vignette autobus bus trasporti trasporto transport mobilita parcheggio parcheggi parking parkplatz coda stau bouchon patente fuhrerschein targa veicolo veicoli fahrzeug incidente incidenti unfall unfalle accident tram metro funivia aeroporto flughafen aeroport monopattino bici velo abbonamento abbonamenti billett biglietto biglietti ticket halbtax ciclabile ciclabili ferrovia bahnhof gare fahrplan
+scuola scuole schule schulen ecole ecoles universita hochschule studio studi studium kita asilo nido maturita formazione ausbildung formation apprendistato lehre supsi usi eth epfl liceo gymnasium lycee scolastico scolastici scolastiche scolastica schulferien ferien
+affitto affitti miete mieten loyer loyers locazione casa case wohnung wohnungen immobile immobili immobilien appartamento appartamenti logement alloggio alloggi mutuo mutui hypothek hypotheken hypotheque eigenmietwert sfratto condominio bolletta bollette strom elettricita energia energie riscaldamento rifiuti abfall dechets internet fibra comparatore immobiliare
+eventi evento events event veranstaltungen veranstaltung concerto concerti concert festival fest feste markt mercato mercati marche carnevale fiera fiere sagra sagre spettacolo spettacoli mostra mostre museo musei museum musee cinema teatro theater gita escursione escursioni wanderung weihnachten weihnachtsmarkt natale capodanno feiertag feiertage festivita meteo wetter previsioni neve schnee piste sci lido piscina bagno badi sport calcio hockey
+benzina benzin carburante carburanti carburant diesel tankstelle tankstellen essence gasolio distributore distributori ricarica colonnina lade gpl metano elettrico elettrica
+cambio wechselkurs kurs franchi chf franc francs euro eur change devise valuta tasso tassi zins zinsen taux cripto bitcoin banca banche bank banken banque conto konto twint bonifico iban kreditkarte
+assegni assegno familiari familiare kinderzulage kinderzulagen familienzulagen zulage zulagen allocation allocations congedo mutterschaft maternita paternita alimenti divorzio scheidung matrimonio heirat successione erbschaft eredita testamento adozione anziani senioren ems spitex bonus aiuti sozialhilfe assistenza
+ufficio uffici amt amter office registro handelsregister registre anagrafe einwohnerkontrolle tribunale gericht tribunal polizia polizei police multa multe busse bussen amende legge leggi gesetz verordnung ordinanza bando ausschreibung gara appalto sondaggio votazione votazioni abstimmung votation elezioni wahlen election iniziativa referendum consiglio regierung gouvernement governo municipio gemeinde gemeinden commune communes dipartimento departement cantone kanton canton cantonale kantonal
+`;
+
+/** Parole generiche o funzionali: elenco ESATTO, niente prefissi ne' suffissi. */
+const GENERIC_WORDS = `
+anno anni annuale nuovo nuova nuovi nuove novita quanto quanti quanta costo costi come funziona funzionamento calcolo calcolare calcolatore tabella tabelle tariffa tariffe scadenza scadenze richiesta domanda modulo moduli orario orari apertura numero indirizzo contatti contatto sito ufficiale online guida requisiti durata importo limite limiti massimo massima minimo minima aumento riduzione oggi domani settimana mese mesi giorno giorni tempo tempi attesa quando dove cosa quale quali regole regola ultime ultimi fonte ancora sempre ogni tutto tutti senza sotto sopra oltre vicino nord sud est ovest centro piano differenza differenze diritto diritti obbligo possibile valido valida automatico esempio simulatore privato professionale personale secondo prima primo generale pubblico pubblica speciale lungo breve medio media totale netto lordo base dopo durante entro verso fino mezzo servizio servizi carta credito pronto offerte acqua potabile stazione borsa libero prezzo prezzi migliore migliori ticinese svizzera svizzero svizzeri svizzere italia italiano italiani frontiera confine comune comuni
+jahr jahre jahres neue neuer neues neu wie viel wieviel hoch hohe hoher berechnen berechnung rechner tabelle tabellen tarif tarife frist fristen antrag antrage formular formulare offnungszeiten adresse kontakt anleitung voraussetzung voraussetzungen dauer betrag maximal minimal erhohung heute morgen woche wochen monat monate tage tag wartezeit wann welche regel regeln unterschied zwischen beruflich privat ohne nach unter uber vor bei beim fur gegen durch alle aktuell aktuelle aktuelles letzte mitte norden suden osten westen allgemein brutto netto gultig beispiel kosten preis preise liste ubersicht bedeutet gilt muss kann darf wird sind nicht oder und auch schweiz schweizer schweizerische italien
+annee annees nouveau nouvelle nouveaux combien cout couts calcul calculer tableau delai delais demande formulaire horaire horaires contact guide condition conditions duree montant maximum minimum augmentation aujourd hui demain semaine mois jours jour attente quand quel quelle quels regle regles difference sans sous apres avant pour avec dans entre tous tout brut net valable exemple prix suisse italie
+year years new how much cost costs calculator calculation table rate rates deadline application form hours address requirement requirements duration amount increase today tomorrow week month days waiting when where what which rules law swiss switzerland border cross worker workers without with after before between near gross valid example list price prices latest current average median total italy frontier
+del dei della delle degli dello dal dalla dalle nel nella nelle sul sulla sulle con per tra fra che una uno gli non piu sono chi alla alle allo agli al da di in su il lo la le a e o ad ma dell dall nell sull all l d un
+the and for from that this are was has have will into about of to on at by vs
+der die das und mit von den dem des ein eine einer ist auf im am zum zur aus zu
+les des une dans pour avec sur par est sont qui que aux du de la le en un et
+`;
+
+/** Anni ammessi (2020-2035) e pochi codici brevi di dominio. */
+const YEAR_TOKENS = new Set(Array.from({ length: 16 }, (_, i) => String(2020 + i)));
+const CODE_TOKENS = new Set(['b', 'c', 'g', 'l', 'ci', '1', '2', '3', '3a', '2a', 'a1', 'a2', 'a3', 'a4', 'a9', 'a13', 'a28']);
+
+/** Cognomi molto frequenti (IT/DE/FR/EN): un toponimo uguale a uno di questi non entra nell'elenco dei luoghi. */
+const COMMON_SURNAMES = new Set(list(`
+rossi russo ferrari esposito bianchi romano colombo ricci marino greco bruno gallo conti de luca mancini costa giordano rizzo lombardi moretti barbieri fontana santoro mariani rinaldi caruso ferrara galli martini leone longo gentile martinelli vitale lombardo serra coppola desantis damico palumbo bernardi villa fiore ferri parisi bellini basile riva farina orlando sala sanna monti grasso pellegrini silvestri guidi
+mueller muller meier meyer schmid schmidt schneider fischer weber huber keller wagner steiner moser baumann brunner gerber frei zimmermann hofmann hoffmann lehmann koch bauer richter klein wolf schroeder neumann schwarz zimmer braun krueger hartmann lang werner schulz becker maurer schreiner graf roth gasser kaufmann berger vogel bachmann ammann baumgartner favre fuchs ackermann suter widmer wyss weiss winkler arnold jung mayer
+martin bernard dubois thomas robert richard petit durand leroy moreau simon laurent lefebvre michel garcia david bertrand roux vincent fournier morel girard andre mercier dupont lambert bonnet francois martinez
+smith johnson williams brown jones miller davis wilson anderson taylor moore jackson white harris clark lewis walker hall allen young king wright scott green baker adams nelson hill campbell mitchell roberts carter phillips evans turner parker collins edwards stewart morris murphy cook rogers morgan cooper peterson reed bailey bell kelly howard ward cox
+`));
+
+const FIRST_NAME_EXTRA = new Set(list('mario luca marco paolo giuseppe giovanni antonio francesco andrea alessandro roberto stefano matteo davide simone fabio daniele michele claudio giorgio angelo massimo riccardo enrico sergio pietro carlo luigi lorenzo gabriele federico nicola maurizio gianni flavio diego emanuele salvatore vincenzo domenico raffaele alberto danilo elia samuele maria anna giulia francesca sara laura chiara elena paola silvia valentina alessandra roberta federica martina elisa monica barbara daniela stefania cristina simona claudia patrizia rita giovanna carla lucia angela teresa hans peter urs markus daniel martin stefan andreas christoph michael werner ernst fritz heinz rolf beat kurt reto roland jurg jorg klaus dieter matthias patrick lukas jean pierre jacques philippe alain louis marcel rene olivier nicolas julien eric pascal gilles yves marie nathalie isabelle sylvie catherine christine john james robert william paul mark kevin brian'));
+const isFirstName = (token) => FIRST_NAME_EXTRA.has(token) || recognizeFirstName(token) !== null;
+const isSurname = (token) => COMMON_SURNAMES.has(token);
+
+function expandDomain(lemmas) {
+  const out = new Set();
+  for (const lemma of lemmas) {
+    out.add(lemma);
+    if (lemma.length >= 5) for (const suffix of DOMAIN_SUFFIXES) out.add(`${lemma}${suffix}`);
+  }
+  return out;
+}
+
+const FUNCTION_AND_GENERIC = new Set(list(GENERIC_WORDS));
+/** Parole di dominio che sono anche un cognome frequente o un prenome della lista corta: tolte. Un prenome raro non basta a comporre una persona: serve anche un cognome, che qui non e' mai un token ammesso. */
+const DOMAIN_NAME_COLLISIONS = [];
+const DOMAIN_WORDS = (() => {
+  const set = expandDomain(list(DOMAIN_LEMMAS));
+  for (const token of [...set]) {
+    if (token.length >= 3 && (isSurname(token) || FIRST_NAME_EXTRA.has(token))) { set.delete(token); DOMAIN_NAME_COLLISIONS.push(token); }
+  }
+  return set;
+})();
+
+/** Esposto per i test: elenchi chiusi (nessun testo di utente). */
+export const FILTER_LISTS = Object.freeze({
+  domainWordCount: DOMAIN_WORDS.size,
+  genericWordCount: FUNCTION_AND_GENERIC.size,
+  domainNameCollisions: DOMAIN_NAME_COLLISIONS,
+  isDomainWord: (token) => DOMAIN_WORDS.has(token),
+  isGenericWord: (token) => FUNCTION_AND_GENERIC.has(token),
+});
+
+const isDomainToken = (token) => DOMAIN_WORDS.has(token);
+const isGenericToken = (token) => FUNCTION_AND_GENERIC.has(token) || YEAR_TOKENS.has(token) || CODE_TOKENS.has(token);
+
+/** Codici cantone ammessi come riferimento al cantone (esclusi quelli che sono anche parole comuni). */
+const AMBIGUOUS_CANTON_CODES = new Set(['so', 'be', 'ne', 'fr', 'lu', 'ur', 'ai', 'ar', 'bl', 'bs', 'vd']);
+/** Sezione -> codici cantone coperti. */
+const SECTION_CANTON_CODES = { 'canton-appenzello': ['AI', 'AR'], 'canton-basilea': ['BS', 'BL'] };
+export const sectionCantonCodes = (section) => {
+  if (SECTION_CANTON_CODES[section]) return SECTION_CANTON_CODES[section];
+  const m = /^canton-([a-z]{2})$/.exec(String(section ?? ''));
+  return m ? [m[1].toUpperCase()] : [];
 };
-const foldStem = (stem) => (stem.endsWith('*') ? `${foldText(stem.slice(0, -1))}*` : foldText(stem));
-const DOMAIN_STEM_LIST = [...new Set(Object.values(DOMAIN_STEMS).flat().map(foldStem).filter(Boolean))];
-const DOMAIN_SINGLE = DOMAIN_STEM_LIST.filter((s) => !s.includes(' '));
-const DOMAIN_PHRASES = DOMAIN_STEM_LIST.filter((s) => s.includes(' ') && !s.endsWith('*'));
 
-/** Parole generiche o funzionali: non portano dominio ne' identificano persone. */
-const GENERIC_STEMS = [
-  // IT
-  'ann*', 'annual', 'nuov*', 'novit', 'quant*', 'cost*', 'come', 'funzion', 'calcol', 'tabell', 'tariff', 'scadenz', 'richiest', 'domand', 'modul', 'orari', 'apertur', 'numero', 'indirizz', 'contatt', 'sit*', 'ufficial', 'online', 'guida', 'requisit', 'durata', 'import', 'limit', 'massim', 'minim', 'aument', 'riduzion', 'oggi', 'domani', 'settiman', 'mes*', 'mesi', 'giorn', 'tempo', 'tempi', 'attesa', 'quando', 'dove', 'cosa', 'qual*', 'regol', 'ultim', 'font*', 'ancora', 'sempre', 'ogni', 'tutto', 'tutti', 'senza', 'sotto', 'sopra', 'oltre', 'vicino', 'nord', 'sud', 'est', 'ovest', 'centro', 'piano', 'differenz', 'diritt', 'obblig', 'possibil', 'valid', 'automatic', 'esempio', 'simulat', 'privat', 'professional', 'person', 'second', 'prim*', 'general', 'pubblic', 'special', 'lungo', 'breve', 'medio', 'media', 'medie', 'totale', 'netto', 'lordo', 'base', 'dopo', 'durante', 'entro', 'verso', 'fino', 'dal', 'alla', 'alle', 'allo', 'agli', 'sul', 'sulla',
-  // DE
-  'jahr*', 'neue*', 'wie', 'viel', 'hoch', 'hohe*', 'berechn', 'rechner', 'tabelle', 'tarif', 'frist*', 'antrag', 'formular', 'offnungszeit', 'adresse', 'kontakt', 'anleitung', 'voraussetzung', 'dauer', 'betrag', 'maximal', 'minimal', 'erhohung', 'heute', 'morgen', 'woche', 'monat', 'tage', 'wartezeit', 'wann', 'welche', 'regel', 'unterschied', 'zwischen', 'beruflich', 'privat', 'ohne', 'nach', 'unter', 'uber', 'vor', 'bei', 'beim', 'fur', 'gegen', 'durch', 'alle', 'aktuell', 'letzte', 'mitte', 'norden', 'suden', 'osten', 'westen', 'allgemein', 'brutto', 'netto', 'gultig', 'beispiel', 'kosten', 'preis', 'preise', 'liste', 'ubersicht', 'bedeutet', 'gilt', 'muss', 'kann', 'darf', 'wird', 'sind', 'nicht', 'oder', 'und', 'auch',
-  // FR
-  'annee', 'nouve*', 'combien', 'cout', 'calcul', 'tableau', 'tarif', 'delai', 'demande', 'formulaire', 'horaire', 'adresse', 'contact', 'guide', 'condition', 'duree', 'montant', 'maximum', 'minimum', 'augmentation', 'aujourd', 'demain', 'semaine', 'mois', 'jours', 'attente', 'quand', 'quel', 'regle', 'difference', 'sans', 'sous', 'apres', 'avant', 'pour', 'avec', 'dans', 'entre', 'tous', 'tout', 'brut', 'net', 'valable', 'exemple', 'liste', 'prix',
-  // EN
-  'year*', 'new', 'how', 'much', 'cost', 'calculat', 'table', 'rate*', 'deadline', 'applic', 'form*', 'hours', 'address', 'guide', 'requirement', 'duration', 'amount', 'maximum', 'minimum', 'increase', 'today', 'tomorrow', 'week', 'month', 'days', 'waiting', 'when', 'where', 'what', 'which', 'rules', 'law', 'swiss', 'switzerland', 'border', 'worker', 'workers', 'cross', 'without', 'with', 'after', 'before', 'between', 'near', 'gross', 'valid', 'example', 'list', 'price', 'prices', 'rates', 'latest', 'current', 'average', 'median', 'total',
-];
-const GENERIC_STEM_LIST = [...new Set(GENERIC_STEMS.map(foldStem).filter(Boolean))];
+const placeCache = new Map();
 
-/** Parole funzionali brevi (anche di 3 lettere) che non pesano mai. */
-const FUNCTION_WORDS = new Set([
-  'del', 'dei', 'della', 'delle', 'degli', 'dello', 'dal', 'dalla', 'dalle', 'nel', 'nella', 'nelle', 'sul', 'sulla', 'con', 'per', 'tra', 'fra', 'che', 'una', 'uno', 'gli', 'non', 'piu', 'sono', 'come', 'cosa', 'chi', 'dove',
-  'the', 'and', 'for', 'with', 'from', 'that', 'this', 'what', 'how', 'are', 'was', 'has', 'have', 'will', 'into', 'about', 'per', 'vs',
-  'der', 'die', 'das', 'und', 'mit', 'von', 'fur', 'den', 'dem', 'des', 'ein', 'eine', 'einer', 'ist', 'sind', 'auf', 'bei', 'wie', 'wird', 'zum', 'zur', 'aus', 'im', 'am',
-  'les', 'des', 'une', 'dans', 'pour', 'avec', 'sur', 'par', 'est', 'sont', 'qui', 'que', 'aux', 'du', 'de', 'la', 'le', 'en', 'un', 'et',
-]);
+function loadJson(name) {
+  try { return JSON.parse(fs.readFileSync(path.join(DATA_DIR, name), 'utf8')); } catch { return null; }
+}
 
-/** Prenomi frequenti (IT/DE/FR/EN): un token cosi' fuori dal dominio e' un indizio di persona. */
-const FIRST_NAMES = new Set([
-  'mario', 'luca', 'marco', 'paolo', 'giuseppe', 'giovanni', 'antonio', 'francesco', 'andrea', 'alessandro', 'roberto', 'stefano', 'matteo', 'davide', 'simone', 'fabio', 'daniele', 'michele', 'claudio', 'giorgio', 'angelo', 'massimo', 'riccardo', 'enrico', 'sergio', 'pietro', 'carlo', 'luigi', 'lorenzo', 'gabriele', 'federico', 'nicola', 'maurizio', 'franco', 'gianni', 'flavio', 'diego', 'emanuele', 'salvatore', 'vincenzo', 'domenico', 'raffaele', 'alberto', 'bruno', 'danilo', 'elia', 'samuele', 'thomas', 'tommaso', 'filippo', 'cristian', 'christian', 'dario', 'fabrizio', 'gianluca', 'ivan', 'manuel', 'mattia', 'moreno', 'renato', 'rocco', 'silvio', 'tiziano', 'valerio', 'walter',
-  'maria', 'anna', 'giulia', 'francesca', 'sara', 'laura', 'chiara', 'elena', 'paola', 'silvia', 'valentina', 'alessandra', 'roberta', 'federica', 'martina', 'elisa', 'monica', 'barbara', 'daniela', 'stefania', 'cristina', 'simona', 'claudia', 'patrizia', 'rita', 'giovanna', 'carla', 'lucia', 'angela', 'teresa', 'giuseppina', 'antonella', 'manuela', 'sabrina', 'serena', 'veronica', 'michela', 'nadia', 'ilaria', 'irene', 'marta', 'greta', 'alice', 'beatrice', 'caterina', 'eleonora', 'jessica', 'noemi', 'rosa', 'loredana', 'luisa', 'fiorella', 'graziella',
-  'hans', 'peter', 'urs', 'markus', 'thomas', 'daniel', 'martin', 'stefan', 'andreas', 'christoph', 'michael', 'werner', 'walter', 'ernst', 'fritz', 'heinz', 'rolf', 'bruno', 'beat', 'kurt', 'reto', 'roland', 'jurg', 'jorg', 'klaus', 'dieter', 'matthias', 'patrick', 'simon', 'lukas', 'nico', 'noah', 'jan', 'tim', 'felix', 'florian', 'sebastian', 'tobias', 'manfred', 'erika', 'ursula', 'monika', 'sabine', 'susanne', 'brigitte', 'heidi', 'verena', 'renate', 'barbara', 'katharina', 'andrea', 'nicole', 'sandra', 'petra', 'silvia', 'franziska', 'anja', 'julia', 'lea', 'lena', 'sophie', 'sophia', 'emma', 'mia', 'lara', 'nina', 'sarah', 'melanie', 'claudine', 'esther', 'ruth', 'margrit', 'gisela',
-  'jean', 'pierre', 'jacques', 'michel', 'philippe', 'alain', 'bernard', 'louis', 'andre', 'marcel', 'rene', 'daniel', 'olivier', 'nicolas', 'laurent', 'julien', 'david', 'eric', 'pascal', 'sylvain', 'cedric', 'fabrice', 'gilles', 'thierry', 'yves', 'francois', 'christophe', 'frederic', 'stephane', 'marie', 'nathalie', 'isabelle', 'sylvie', 'catherine', 'christine', 'martine', 'monique', 'francoise', 'sophie', 'camille', 'celine', 'aurelie', 'valerie', 'veronique', 'brigitte', 'jeanne', 'odile',
-  'john', 'james', 'robert', 'william', 'richard', 'charles', 'joseph', 'george', 'edward', 'henry', 'paul', 'mark', 'steven', 'kevin', 'brian', 'jason', 'ryan', 'jacob', 'mary', 'patricia', 'jennifer', 'linda', 'elizabeth', 'susan', 'margaret', 'dorothy', 'lisa', 'nancy', 'karen', 'betty', 'helen', 'sandy', 'donna', 'carol', 'emily', 'olivia', 'amanda',
-]);
+/** Una parola di un toponimo che lo renderebbe ambiguo (nome, cognome, dominio, generica). */
+function placeWordIsAmbiguous(word, { dataset = true } = {}) {
+  if (word.length < 3) return false; // particelle («sur», «bad») non decidono
+  const firstName = dataset ? isFirstName(word) : FIRST_NAME_EXTRA.has(word);
+  return isDomainToken(word) || FUNCTION_AND_GENERIC.has(word) || firstName || isSurname(word);
+}
 
-const INSTITUTION_STEMS = ['ufficio', 'amt', 'kanton', 'canton', 'cantone', 'cantonal', 'kantonal', 'gemeinde', 'commune', 'comune', 'comuni', 'municipio', 'regierung', 'governo', 'gouvernement', 'dipartimento', 'departement', 'prefettura', 'tribunale', 'gericht', 'svizzera', 'suisse', 'schweiz', 'switzerland', 'swiss', 'svizzer', 'schweizer', 'italia', 'italy', 'italien', 'italie', 'italian', 'lombardia', 'piemonte', 'varese', 'como', 'verbania', 'sondrio', 'lecco', 'novara', 'frontiera', 'frontier', 'grenze', 'confine', 'ticinese', 'zurigo', 'lucerna', 'vallese', 'friburgo', 'ginevra', 'grigioni', 'sangallo', 'berna', 'soletta', 'turgovia', 'sciaffusa', 'argovia', 'giura', 'neuchatel', 'nidvaldo', 'obvaldo', 'svitto', 'uri', 'zugo', 'glarona', 'basilea', 'appenzello', 'vaud', 'geneve', 'genf', 'valais', 'wallis', 'fribourg', 'freiburg', 'jura', 'tessin', 'graubunden', 'grisons', 'zurich', 'luzern', 'lucerne', 'bern', 'berne', 'solothurn', 'thurgau', 'schaffhausen', 'aargau', 'argovie', 'basel', 'bale', 'zug', 'glarus', 'schwyz', 'obwalden', 'nidwalden', 'appenzell', 'neuenburg'].map(foldText);
-
-let placeCache = null;
-
-/** Toponimi dal repo: comuni BFS, citta', cantoni e capoluoghi nelle 4 lingue. */
-function loadPlaceTokens() {
-  if (placeCache) return placeCache;
-  const tokens = new Set();
-  const add = (name) => {
-    const folded = foldText(String(name ?? '').replace(/\([^)]*\)/g, ' '));
-    for (const w of words(folded)) if (w.length >= 3) tokens.add(w);
+/**
+ * Toponimi ammessi per UNA sezione: comuni del/dei suo/suoi cantoni (4 lingue
+ * per i capoluoghi) e nomi del cantone. Mai i comuni di altri cantoni.
+ * @returns {{communes: Set<string>, cantonRefs: Set<string>}}
+ */
+export function sectionPlaces(section) {
+  if (placeCache.has(section)) return placeCache.get(section);
+  const codes = sectionCantonCodes(section);
+  const communes = new Set();
+  const cantonRefs = new Set();
+  const eligibleCommune = (phrase, dataset) => {
+    const ws = words(phrase);
+    if (ws.length === 0 || ws.length > 4) return false;
+    if (ws.length === 1 && phrase.length <= 4) return false;
+    return !ws.some((w) => placeWordIsAmbiguous(w, { dataset }));
   };
-  try {
-    const places = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'canton-classifier-places.json'), 'utf8'));
-    for (const list of Object.values(places.municipalities || {})) for (const name of list || []) add(name);
-    for (const town of places.towns || []) add(town?.name);
-  } catch { /* file assente: restano gli altri toponimi (piu' stretto, mai piu' largo) */ }
-  try {
-    const topo = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'localized-toponyms.json'), 'utf8'));
-    for (const entity of topo.entities || []) {
-      for (const kind of ['canton', 'capital']) {
-        for (const list of Object.values(entity?.[kind] || {})) for (const name of list || []) add(name);
-      }
+  // I capoluoghi sono nomi ufficiali del cantone: non vanno contro il dataset dei prenomi (es. «Basel»).
+  const addCommune = (name, { dataset = true } = {}) => {
+    const phrase = foldText(String(name ?? '').replace(/\([^)]*\)/g, ' '));
+    if (phrase && eligibleCommune(phrase, dataset)) communes.add(phrase);
+  };
+  const addCanton = (name) => {
+    const phrase = foldText(name);
+    const ws = words(phrase);
+    if (ws.length > 0 && ws.length <= 3 && !ws.some((w) => placeWordIsAmbiguous(w, { dataset: false }))) cantonRefs.add(phrase);
+  };
+  if (codes.length > 0) {
+    const places = loadJson('canton-classifier-places.json');
+    for (const code of codes) for (const name of places?.municipalities?.[code] || []) addCommune(name);
+    for (const town of places?.towns || []) if (codes.includes(town?.canton)) addCommune(town?.name);
+    const topo = loadJson('localized-toponyms.json');
+    for (const entity of topo?.entities || []) {
+      if (!codes.includes(entity?.code)) continue;
+      for (const names of Object.values(entity?.canton || {})) for (const name of names || []) addCanton(name);
+      for (const names of Object.values(entity?.capital || {})) for (const name of names || []) addCommune(name, { dataset: false });
     }
-  } catch { /* idem */ }
-  try {
-    const ti = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'ticino-municipalities.json'), 'utf8'));
-    for (const m of ti.municipalities || []) add(typeof m === 'string' ? m : (m?.name || m?.comune));
-  } catch { /* idem */ }
-  placeCache = tokens;
-  return tokens;
-}
-
-/** Stem: `x*` = prefisso, >= 5 caratteri = contenuto nel token (composti tedeschi), altrimenti token esatto. */
-function stemMatcher(stem) {
-  if (stem.endsWith('*')) { const p = stem.slice(0, -1); return (t) => t.startsWith(p); }
-  if (stem.length >= 5) return (t) => t.includes(stem);
-  return (t) => t === stem;
-}
-const compileStems = (list) => list.map(stemMatcher);
-const DOMAIN_MATCHERS = compileStems(DOMAIN_SINGLE);
-const GENERIC_MATCHERS = compileStems(GENERIC_STEM_LIST);
-
-function isDomainToken(token) { return DOMAIN_MATCHERS.some((m) => m(token)); }
-function isGenericToken(token) { return FUNCTION_WORDS.has(token) || GENERIC_MATCHERS.some((m) => m(token)); }
-function isInstitutionToken(token) {
-  return INSTITUTION_STEMS.some((stem) => token === stem || (stem.length >= 5 && token.startsWith(stem)));
+    for (const code of codes) {
+      const lower = code.toLowerCase();
+      if (!AMBIGUOUS_CANTON_CODES.has(lower)) cantonRefs.add(lower);
+    }
+    if (codes.includes('TI')) {
+      const ti = loadJson('ticino-municipalities.json');
+      for (const m of ti?.municipalities || []) addCommune(typeof m === 'string' ? m : (m?.name || m?.comune));
+      cantonRefs.add('ticino');
+    }
+  }
+  // Un nome di cantone non e' mai anche un comune da contare due volte.
+  for (const ref of cantonRefs) communes.delete(ref);
+  const result = { communes, cantonRefs };
+  placeCache.set(section, result);
+  return result;
 }
 
 const CONTACT_RE = /@|https?|www\.|\.(?:ch|com|net|org|it|de|fr|eu)\b/;
@@ -158,9 +231,10 @@ const PERSON_CONTEXT_RE = /\b(di|von|de|of|du|des)\s+[a-z]+\s+[a-z]+\s*$/;
 
 /**
  * @param {string} rawQuery  query GSC cosi' com'e'
+ * @param {{section?: string}} [opts]  sezione di appartenenza: senza di essa nessun toponimo e' ammesso
  * @returns {{keep: boolean, reason: string|null}}
  */
-export function classifyDemandQuery(rawQuery) {
+export function classifyDemandQuery(rawQuery, { section = null } = {}) {
   const raw = String(rawQuery ?? '').toLowerCase().trim();
   if (!raw) return { keep: false, reason: 'empty' };
   if (CONTACT_RE.test(raw)) return { keep: false, reason: 'contact' };
@@ -172,29 +246,40 @@ export function classifyDemandQuery(rawQuery) {
   const letters = (folded.match(/[a-z]/g) || []).length;
   if (letters < 2) return { keep: false, reason: 'too_short' };
   if (!tokens.some((t) => /^[a-z]{4,}$/.test(t))) return { keep: false, reason: 'generic' };
-
-  const placeTokens = loadPlaceTokens();
-  const isPlace = (t) => placeTokens.has(t) || isInstitutionToken(t);
   if (FAMILY_RE.test(folded)) return { keep: false, reason: 'person_pattern' };
 
-  // I token coperti da una frase di dominio («cassa malati») non contano come sconosciuti.
-  let residual = ` ${folded} `;
-  for (const phrase of DOMAIN_PHRASES) residual = residual.split(` ${phrase} `).join(' ');
-  const alpha = words(residual).filter((t) => /[a-z]/.test(t) && t.length >= 3);
-  const domainHit = alpha.some(isDomainToken) || DOMAIN_PHRASES.some((p) => ` ${folded} `.includes(` ${p} `));
-  const unknown = alpha.filter((t) => !isDomainToken(t) && !isPlace(t) && !isGenericToken(t));
-  const hasFirstName = alpha.some((t) => FIRST_NAMES.has(t) && !isDomainToken(t));
+  const places = section ? sectionPlaces(section) : { communes: new Set(), cantonRefs: new Set() };
+  let domainHit = false;
+  let communeCount = 0;
+  let cantonCount = 0;
+  let unknown = 0;
+  let firstNameHit = false;
+  for (let i = 0; i < tokens.length;) {
+    let matched = 0;
+    for (let n = Math.min(4, tokens.length - i); n >= 1 && !matched; n -= 1) {
+      const phrase = tokens.slice(i, i + n).join(' ');
+      if (places.communes.has(phrase)) { communeCount += 1; matched = n; }
+      else if (places.cantonRefs.has(phrase)) { cantonCount += 1; matched = n; }
+    }
+    if (matched) { i += matched; continue; }
+    const token = tokens[i];
+    if (isDomainToken(token)) domainHit = true;
+    else if (!isGenericToken(token)) { unknown += 1; if (isFirstName(token)) firstNameHit = true; }
+    i += 1;
+  }
 
-  if (INCOME_RE.test(folded) && (hasFirstName || unknown.length > 0)) return { keep: false, reason: 'person_pattern' };
-  if (PERSON_CONTEXT_RE.test(folded) && (hasFirstName || unknown.length > 0)) return { keep: false, reason: 'person_pattern' };
-  if (hasFirstName) return { keep: false, reason: 'unknown_token' };
+  const suspicious = unknown > 0 || firstNameHit;
+  if (INCOME_RE.test(folded) && suspicious) return { keep: false, reason: 'person_pattern' };
+  if (PERSON_CONTEXT_RE.test(folded) && suspicious) return { keep: false, reason: 'person_pattern' };
+  if (firstNameHit) return { keep: false, reason: 'unknown_token' };
+  if (unknown > 0) return { keep: false, reason: 'unknown_token' };
+  if (communeCount + cantonCount > 1) return { keep: false, reason: 'toponym_excess' };
   if (!domainHit) return { keep: false, reason: 'no_domain' };
-  if (unknown.length > 0) return { keep: false, reason: 'unknown_token' };
 
   // Una query a un solo token e' domanda su un argomento solo se il token e' un
   // composto specifico (>= 10 caratteri); i generici («benzina», «carburant»,
   // «frontaliere») e i toponimi soli no.
-  if (tokens.length === 1 && (tokens[0].length < 10 || GENERIC_SINGLES.has(tokens[0]) || isPlace(tokens[0]))) {
+  if (tokens.length === 1 && (tokens[0].length < 10 || GENERIC_SINGLES.has(tokens[0]))) {
     return { keep: false, reason: 'generic' };
   }
   return { keep: true, reason: null };
@@ -202,5 +287,5 @@ export function classifyDemandQuery(rawQuery) {
 
 const GENERIC_SINGLES = new Set(['carburante', 'carburant', 'frontaliere', 'frontalieri', 'frontaliers', 'frontalier', 'grenzgaenger', 'grenzganger', 'benzina', 'benzin', 'diesel', 'ticino', 'svizzera', 'lavoro', 'steuern', 'tasse', 'imposte', 'meteo', 'eventi', 'events', 'cambio', 'franco', 'euro']);
 
-/** `true` se la query puo' restare nel vocabolario. */
-export const isAllowedDemandQuery = (query) => classifyDemandQuery(query).keep;
+/** `true` se la query puo' restare nel vocabolario della sezione. */
+export const isAllowedDemandQuery = (query, opts) => classifyDemandQuery(query, opts).keep;

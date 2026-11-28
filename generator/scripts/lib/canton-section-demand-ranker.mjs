@@ -26,7 +26,7 @@
  *     `no-fresh-pool`: nessuna scelta, decide la selezione LLM di oggi;
  *  6. PRIVACY: le query del vocabolario passano a runtime dallo stesso filtro
  *     del builder (allowlist di dominio, niente nomi/contatti/codici) e nei log
- *     compare solo un riferimento breve (`q-<hash>`), mai la query intera;
+ *     compare solo un riferimento breve (`q-<hmac>`, con un sale per processo), mai la query intera;
  *  7. un vocabolario con `generatedAt` piu' vecchio di 45 giorni non si carica.
  *
  * Funzioni pure salvo `loadSectionDemandVocabulary` (legge un file JSON).
@@ -110,18 +110,18 @@ export function queryWeight(entry) {
  * Valida il vocabolario di UNA sezione. Ritorna null se insufficiente.
  * @returns {{queries: object[], impressions: number}|null}
  */
-export function usableSectionVocabulary(sectionVocab) {
+export function usableSectionVocabulary(sectionVocab, { section = null } = {}) {
   const queries = Array.isArray(sectionVocab?.queries) ? sectionVocab.queries : [];
   // Difesa a runtime: un JSON vecchio non deve riportare dati personali nei log.
-  const valid = queries.filter((q) => typeof q?.query === 'string' && q.query.trim() && Number(q.impressions) > 0 && isAllowedDemandQuery(q.query));
+  const valid = queries.filter((q) => typeof q?.query === 'string' && q.query.trim() && Number(q.impressions) > 0 && isAllowedDemandQuery(q.query, { section }));
   const impressions = valid.reduce((sum, q) => sum + Number(q.impressions), 0);
   if (valid.length < MIN_VOCABULARY_QUERIES || impressions < MIN_VOCABULARY_IMPRESSIONS) return null;
   return { queries: valid, impressions };
 }
 
 /** Compila le query in strutture di match (stem richiesti, soglia, peso). */
-export function compileVocabulary(sectionVocab, { ignoreTerms = [] } = {}) {
-  const usable = usableSectionVocabulary(sectionVocab);
+export function compileVocabulary(sectionVocab, { ignoreTerms = [], section = null } = {}) {
+  const usable = usableSectionVocabulary(sectionVocab, { section });
   if (!usable) return null;
   const ignored = ignoreStemSet(ignoreTerms);
   const compiled = [];
@@ -197,7 +197,7 @@ function relatedHeadlinesFor(chosen, pool) {
 /**
  * @param {Array<{headline: string, date?: Date|string|null, url?: string, source?: string}>} headlines
  * @param {object|null} sectionVocab  — `sections[<id>]` del vocabolario
- * @param {{now?: number, ignoreTerms?: string[], existingTitles?: string[], minScore?: number,
+ * @param {{now?: number, section?: string, ignoreTerms?: string[], existingTitles?: string[], minScore?: number,
  *          freshHours?: number, recentHours?: number, titleField?: string}} [opts]
  * @returns {{picks: object[], reason: string, band: number|null, considered: number}}
  */
@@ -207,7 +207,7 @@ export function rankCantonHeadlines(headlines, sectionVocab, opts = {}) {
   const now = Number.isFinite(opts.now) ? opts.now : Date.now();
   const minScore = typeof opts.minScore === 'number' ? opts.minScore : 0;
   if (list.length === 0) return { picks: [], reason: 'empty-pool', band: null, considered: 0 };
-  const compiled = compileVocabulary(sectionVocab, { ignoreTerms: opts.ignoreTerms });
+  const compiled = compileVocabulary(sectionVocab, { ignoreTerms: opts.ignoreTerms, section: opts.section });
   if (!compiled) return { picks: [], reason: 'insufficient-vocabulary', band: null, considered: 0 };
 
   const bandOpts = { freshHours: opts.freshHours, recentHours: opts.recentHours };

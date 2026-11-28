@@ -8,8 +8,8 @@ name: Refresh section demand vocabulary
 # workflow evita che il ranker si spenga in silenzio.
 #
 # PRIVACY: le query di Search Console passano dal filtro
-# `generator/scripts/lib/section-demand-query-filter.mjs` (allowlist di dominio,
-# scarto di nomi di persone, contatti, codici) PRIMA dell'aggregazione. Il
+# `generator/scripts/lib/section-demand-query-filter.mjs` (grammatica chiusa a token
+# esatti, scarto di nomi di persone, contatti, codici) PRIMA dell'aggregazione. Il
 # builder stampa solo conteggi per categoria, mai il testo di una query. La PR
 # contiene solo il JSON filtrato.
 #
@@ -34,6 +34,11 @@ on:
         required: false
         default: false
         type: boolean
+      allow_large_change:
+        description: 'Ammette piu del 30% di query nuove in una sezione (solo dispatch, dopo aver letto i conteggi)'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -50,6 +55,8 @@ jobs:
     env:
       DAYS: ${{ inputs.days || '28' }}
       DRY_RUN: ${{ inputs.dry_run == true && 'true' || 'false' }}
+      # Il tetto di variazione si supera solo a mano: lo schedule non ha input.
+      ALLOW_LARGE_CHANGE: ${{ github.event_name == 'workflow_dispatch' && inputs.allow_large_change == true && 'true' || 'false' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -123,6 +130,20 @@ jobs:
           case "$DAYS" in ''|*[!0-9]*) echo "::error::days non numerico"; exit 1 ;; esac
           ARGS=(--days "$DAYS")
           if [ "$DRY_RUN" = "true" ]; then ARGS+=(--dry-run); fi
+          # Copia del file precedente per il tetto di variazione dello step dopo.
+          cp generator/data/section-demand-vocabulary.json "$RUNNER_TEMP/section-demand-vocabulary.previous.json"
+          node generator/scripts/build-section-demand-vocabulary.mjs "${ARGS[@]}"
+
+      # Rilegge il JSON scritto e fallisce se una query esce dalla grammatica
+      # chiusa del filtro, se e' sotto la soglia di impression o se piu' del 30%
+      # delle query di una sezione e' nuovo. Stampa solo conteggi. Gira PRIMA
+      # di `git add`: un file sporco non arriva mai in una PR.
+      - name: Verify the vocabulary (grammar and change cap)
+        if: steps.guard.outputs.open_refreshes == '0' && env.DRY_RUN != 'true'
+        run: |
+          set -euo pipefail
+          ARGS=(--verify --previous "$RUNNER_TEMP/section-demand-vocabulary.previous.json")
+          if [ "$ALLOW_LARGE_CHANGE" = "true" ]; then ARGS+=(--allow-large-change); fi
           node generator/scripts/build-section-demand-vocabulary.mjs "${ARGS[@]}"
 
       - name: Open the refresh PR
@@ -150,7 +171,7 @@ jobs:
           git push origin "$BRANCH"
           {
             echo '## Implementato'
-            echo "- Rigenerato \`generator/data/section-demand-vocabulary.json\` (generatedAt ${GENERATED}, ${SECTIONS} sezioni con segnale) da Search Console, filtrato per privacy prima dell'aggregazione: il file contiene solo query di dominio, nessun nome di persona, contatto o codice. Run: ${RUN_URL}"
+            echo "- Rigenerato \`generator/data/section-demand-vocabulary.json\` (generatedAt ${GENERATED}, ${SECTIONS} sezioni con segnale) da Search Console, filtrato per privacy prima dell'aggregazione e riverificato (grammatica chiusa, soglia di impression, tetto di variazione per sezione): il file contiene solo query di dominio. Il body riporta solo conteggi. Run: ${RUN_URL}"
             echo
             echo '## Non implementato (ancora)'
             echo "- Nessuna modifica al ranker ne' ai profili: il rinnovo cambia solo i dati. **Stato:** \`Nessun lavoro dovuto\`"

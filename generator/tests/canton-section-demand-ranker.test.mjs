@@ -8,6 +8,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import crypto from 'node:crypto';
+import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 import {
@@ -23,11 +25,14 @@ import {
 } from '../scripts/lib/canton-section-demand-ranker.mjs';
 import {
   buildAliasMap,
+  MAX_SECTION_CHANGE,
+  MIN_QUERY_IMPRESSIONS,
   buildVocabularySections,
   sectionOfPath,
+  verifyVocabularyDocument,
 } from '../scripts/build-section-demand-vocabulary.mjs';
 import { buildCantonProfile } from '../scripts/lib/canton-section-profile.mjs';
-import { classifyDemandQuery, queryRef } from '../scripts/lib/section-demand-query-filter.mjs';
+import { classifyDemandQuery, FILTER_LISTS, queryRef, sectionPlaces } from '../scripts/lib/section-demand-query-filter.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = fs.readFileSync(path.join(HERE, '../scripts/create-article.mjs'), 'utf8');
@@ -55,7 +60,7 @@ test('vocabolario insufficiente: nessuna scelta (comportamento di oggi)', () => 
   assert.equal(usableSectionVocabulary({ queries: [] }), null);
   assert.equal(usableSectionVocabulary(null), null);
   const thin = { queries: vocab().queries.slice(0, MIN_VOCABULARY_QUERIES - 1) };
-  const r = rankCantonHeadlines([h('Premi cassa malati 2027 in aumento', 1)], thin, { now: NOW, ignoreTerms: IGNORE });
+  const r = rankCantonHeadlines([h('Premi cassa malati 2027 in aumento', 1)], thin, { now: NOW, ignoreTerms: IGNORE, section: 'canton-ti' });
   assert.deepEqual(r.picks, []);
   assert.equal(r.reason, 'insufficient-vocabulary');
   assert.equal(rankCantonHeadlines([h('x', 1)], null, { now: NOW }).reason, 'insufficient-vocabulary');
@@ -67,7 +72,7 @@ test('con vocabolario: la headline con piu domanda precede quella senza, a parit
     h('Premi cassa malati 2027: aumento medio in Ticino', 5),
     h('Imposta alla fonte, cosa cambia', 6),
   ];
-  const r = rankCantonHeadlines(pool, vocab(), { now: NOW, ignoreTerms: IGNORE });
+  const r = rankCantonHeadlines(pool, vocab(), { now: NOW, ignoreTerms: IGNORE, section: 'canton-ti' });
   assert.equal(r.picks.length, 1);
   assert.match(r.picks[0].headline, /Premi cassa malati/);
   assert.equal(r.picks[0]._selectedSource, 'section-demand');
@@ -84,7 +89,7 @@ test('freschezza prima della domanda: la notizia fresca non cede a una vecchia c
     h('Premi cassa malati 2027 in aumento, imposta alla fonte', 120), // vecchia, domanda alta
     h('Permesso G frontalieri: novita di oggi', 4),                  // fresca, domanda media
   ];
-  const r = rankCantonHeadlines(pool, vocab(), { now: NOW, ignoreTerms: IGNORE });
+  const r = rankCantonHeadlines(pool, vocab(), { now: NOW, ignoreTerms: IGNORE, section: 'canton-ti' });
   assert.match(r.picks[0].headline, /Permesso G/);
   assert.equal(r.band, 0);
 });
@@ -94,7 +99,7 @@ test('freschezza prima: fascia fresca senza match => nessuna scelta, non si scen
     h('Sagra di paese', 2),
     h('Premi cassa malati 2027 in aumento', 100),
   ];
-  const r = rankCantonHeadlines(pool, vocab(), { now: NOW, ignoreTerms: IGNORE });
+  const r = rankCantonHeadlines(pool, vocab(), { now: NOW, ignoreTerms: IGNORE, section: 'canton-ti' });
   assert.deepEqual(r.picks, []);
   assert.equal(r.reason, 'no-demand-match-in-freshest-band');
 });
@@ -105,33 +110,33 @@ test('senza data = fascia piu bassa; futuro = fresca', () => {
   assert.equal(freshnessBand(h('a', 100), NOW), 1);
   assert.equal(freshnessBand(h('a', 24 * 20), NOW), 2);
   assert.equal(freshnessBand({ headline: 'a', date: new Date(NOW + 3600e3) }, NOW), 0);
-  const r = rankCantonHeadlines([h('Imposta alla fonte', null), h('Sagra', 5)], vocab(), { now: NOW, ignoreTerms: IGNORE });
+  const r = rankCantonHeadlines([h('Imposta alla fonte', null), h('Sagra', 5)], vocab(), { now: NOW, ignoreTerms: IGNORE, section: 'canton-ti' });
   assert.deepEqual(r.picks, [], 'la fascia fresca (Sagra) non ha match: la senza-data non la scavalca');
 });
 
 test('il solo nome del cantone non e domanda su un argomento', () => {
-  const compiled = compileVocabulary(vocab(), { ignoreTerms: IGNORE });
+  const compiled = compileVocabulary(vocab(), { ignoreTerms: IGNORE, section: 'canton-ti' });
   assert.ok(!compiled.some((c) => c.query === 'ticino'));
   assert.equal(demandScore('Ticino: tutto sul Ticino', compiled).score, 0);
 });
 
 test('parita di punteggio: vince l ordine originale; deterministico', () => {
   const pool = [h('Imposta alla fonte: novita', 5), h('Imposta alla fonte: ultime', 5)];
-  const a = rankCantonHeadlines(pool, vocab(), { now: NOW, ignoreTerms: IGNORE });
-  const b = rankCantonHeadlines(pool, vocab(), { now: NOW, ignoreTerms: IGNORE });
+  const a = rankCantonHeadlines(pool, vocab(), { now: NOW, ignoreTerms: IGNORE, section: 'canton-ti' });
+  const b = rankCantonHeadlines(pool, vocab(), { now: NOW, ignoreTerms: IGNORE, section: 'canton-ti' });
   assert.equal(a.picks[0].headline, 'Imposta alla fonte: novita');
   assert.deepEqual(a, b);
 });
 
 test('titoli gia pubblicati: un quasi-duplicato viene saltato', () => {
   const pool = [h('Premi cassa malati 2027 in aumento', 2), h('Permesso G frontalieri: le regole', 3)];
-  const r = rankCantonHeadlines(pool, vocab(), { now: NOW, ignoreTerms: IGNORE, existingTitles: ['Premi cassa malati 2027 in aumento'] });
+  const r = rankCantonHeadlines(pool, vocab(), { now: NOW, ignoreTerms: IGNORE, section: 'canton-ti', existingTitles: ['Premi cassa malati 2027 in aumento'] });
   assert.match(r.picks[0].headline, /Permesso G/);
 });
 
 test('query in tedesco/francese: i token accentati sono normalizzati', () => {
   const v = { queries: [...vocab().queries, { query: 'Grenzgänger Quellensteuer', impressions: 150, clicks: 3, position: 9 }] };
-  const r = rankCantonHeadlines([h('Quellensteuer für Grenzgänger sinkt', 2), h('Sagra', 2)], v, { now: NOW, ignoreTerms: IGNORE });
+  const r = rankCantonHeadlines([h('Quellensteuer für Grenzgänger sinkt', 2), h('Sagra', 2)], v, { now: NOW, ignoreTerms: IGNORE, section: 'canton-ti' });
   assert.match(r.picks[0].headline, /Quellensteuer/);
 });
 
@@ -244,10 +249,128 @@ test('filtro MEDIUM: query generiche a un token o di sole cifre fuori', () => {
   assert.equal(classifyDemandQuery('2026 2027').keep, false);
 });
 
-test('filtro: righe lecite di dominio restano (4 lingue)', () => {
-  for (const q of ['steuerfuss zürich 2026', 'premi cassa malati 2027', 'imposta alla fonte ticino', 'salario infermiere ticino', 'quellensteuer kanton zug', 'affitti lugano', 'permesso G frontalieri', 'stau a2 basel heute', 'fiscalité genève', 'eventi ticino oggi']) {
-    assert.deepEqual(classifyDemandQuery(q), { keep: true, reason: null }, q);
+test('filtro: righe lecite di dominio restano (4 lingue), con i toponimi della propria sezione', () => {
+  const legit = [
+    ['steuerfuss zürich 2026', 'canton-zh'], ['veranstaltungen winterthur', 'canton-zh'], ['veranstaltungen lugano', 'canton-ti'],
+    ['premi cassa malati 2027', 'canton-ti'], ['imposta alla fonte ticino', 'canton-ti'], ['salario infermiere ticino', 'canton-ti'],
+    ['quellensteuer kanton zug', 'canton-zg'], ['affitti lugano', 'canton-ti'], ['permesso G frontalieri', 'canton-ti'],
+    ['stau a2 basel heute', 'canton-basilea'], ['fiscalité genève', 'canton-ge'], ['eventi ticino oggi', 'canton-ti'],
+    ['steuerfuss niederwil', 'canton-ag'],
+  ];
+  for (const [q, section] of legit) assert.deepEqual(classifyDemandQuery(q, { section }), { keep: true, reason: null }, `${section} ${q}`);
+  // Plurali/varianti elencati dalla lista chiusa di suffissi, solo per i termini di dominio.
+  for (const q of ['mieten zürich', 'krankenkassen prämien 2027']) assert.equal(classifyDemandQuery(q, { section: 'canton-zh' }).keep, true, q);
+});
+
+test('filtro: i toponimi sono solo quelli della sezione, uno per query', () => {
+  assert.equal(classifyDemandQuery('veranstaltungen winterthur', { section: 'canton-ti' }).keep, false, 'comune di un altro cantone');
+  assert.equal(classifyDemandQuery('veranstaltungen lugano').keep, false, 'senza sezione nessun toponimo');
+  assert.equal(classifyDemandQuery('affitti lugano locarno', { section: 'canton-ti' }).reason, 'toponym_excess');
+  assert.equal(classifyDemandQuery('steuerfuss lugano ticino', { section: 'canton-ti' }).reason, 'toponym_excess');
+  const ti = sectionPlaces('canton-ti');
+  assert.ok(ti.communes.has('lugano') && !ti.communes.has('winterthur'));
+  for (const section of ['canton-ti', 'canton-zh', 'canton-ag', 'canton-basilea', 'canton-appenzello']) {
+    const places = sectionPlaces(section);
+    assert.ok(places.communes.size > 0, section);
+    for (const name of places.communes) {
+      assert.ok(name.split(' ').length > 1 || name.length > 4, `toponimo corto escluso (${section})`);
+      for (const w of name.split(' ')) if (w.length >= 3) assert.ok(!FILTER_LISTS.isDomainWord(w) && !FILTER_LISTS.isGenericWord(w), 'toponimo uguale a una parola di dominio/generica');
+    }
   }
+});
+
+test('filtro: nessun prefisso ne sottostringa, solo token esatti (cognomi inventati)', () => {
+  // Cognomi INVENTATI che iniziano o contengono una parola di dominio: il vecchio matcher a prefisso li lasciava passare.
+  const dangerous = [
+    ['steuerlin brunnental', 'canton-zh'], ['taxner zorbelli', 'canton-ti'], ['impostoni lugano', 'canton-ti'], ['permessotti g', 'canton-ti'],
+    ['lavorini quarnetti ticino', 'canton-ti'], ['tassarelli affitti', 'canton-ti'], ['fiscalini steuer', 'canton-ti'], ['arbeitsen kolbrunn', 'canton-zh'],
+    ['lohnberg zürich', 'canton-zh'], ['mietmann zürich', 'canton-zh'], ['bahnoffer steuer', 'canton-zh'], ['krankenfeld prämien', 'canton-zh'],
+    ['casabelli lugano', 'canton-ti'], ['busaldi lugano', 'canton-ti'], ['scuolari steuer', 'canton-ti'],
+    // cognomi uguali a comuni di altri cantoni o del proprio cantone con un cognome in coda
+    ['steuerfuss uster', 'canton-ti'], ['affitti winterthur', 'canton-ti'], ['steuerfuss lugano zorbelli', 'canton-ti'], ['affitti locarno bellinzona', 'canton-ti'],
+    // ruolo + cognome
+    ['infermiera zorbelli lugano', 'canton-ti'], ['medico quarnetti', 'canton-ti'], ['avvocato vellini lugano', 'canton-ti'], ['muratore fornaroli ticino', 'canton-ti'],
+    ['lehrer brunnentaler zürich', 'canton-zh'], ['arzt kolbrunn', 'canton-zh'],
+    // via + nome
+    ['via zorbelli 12 lugano affitto', 'canton-ti'], ['via giovanni quarnetti affitto', 'canton-ti'], ['strasse brunnental 5 wohnung', 'canton-zh'],
+    // email e telefoni con spazi
+    ['zorbelli@esempio.invalid affitto', 'canton-ti'], ['steuer info@esempio.invalid', 'canton-zh'],
+    ['+41 79 123 45 67 lavoro', 'canton-ti'], ['079 123 45 67 affitto', 'canton-ti'], ['091 123 45 67 steuer', 'canton-ti'], ['0041 79 123 45 67 lavoro', 'canton-ti'],
+    // persone private con pattern noti
+    ['stipendio di maria zorbelli', 'canton-ti'], ['mario quarnetti permesso g', 'canton-ti'], ['ehemann von lucia quarnetti steuern', 'canton-zh'], ['rossi steuererklärung', 'canton-zh'],
+  ];
+  assert.ok(dangerous.length >= 30);
+  const passing = dangerous.filter(([q, section]) => classifyDemandQuery(q, { section }).keep);
+  assert.equal(passing.length, 0, `query pericolose che passano: ${passing.length}`);
+});
+
+test('versione del filtro 2 e soglia di impression 5', () => {
+  assert.equal(MIN_QUERY_IMPRESSIONS, 5);
+  const aliasMap = buildAliasMap(['canton-ti']);
+  const page = 'https://frontaliereticino.ch/articoli-ticino/x';
+  const rows = [{ keys: ['affitti lugano', page], clicks: 0, impressions: 4, position: 8 }, { keys: ['steuerfuss lugano', page], clicks: 0, impressions: 5, position: 8 }];
+  assert.deepEqual(buildVocabularySections(rows, aliasMap)['canton-ti'].queries.map((q) => q.query), ['steuerfuss lugano']);
+});
+
+test('queryRef: HMAC con sale, non invertibile per dizionario', () => {
+  const q = 'premi cassa malati 2027';
+  assert.equal(queryRef(q), queryRef(q), 'stabile dentro il processo');
+  assert.notEqual(queryRef(q, 'sale-a'), queryRef(q, 'sale-b'));
+  const sha1 = 'q-' + crypto.createHash('sha1').update(q).digest('hex').slice(0, 8);
+  assert.notEqual(queryRef(q), sha1, 'non e piu lo sha1 nudo');
+});
+
+const cleanDoc = () => ({
+  version: 1, minQueryImpressions: 5,
+  sections: { 'canton-ti': { queries: ['affitti lugano', 'steuerfuss lugano', 'premi cassa malati', 'permesso g frontalieri', 'treno tilo orari', 'assegni familiari', 'salario minimo ticino', 'eventi locarno', 'meteo lugano', 'carburanti ticino'].map((query) => ({ query, impressions: 9, clicks: 0, position: 8 })) } },
+});
+
+test('--verify: fallisce su un JSON sporco, passa su uno pulito, mai testo nell output', () => {
+  assert.equal(verifyVocabularyDocument(cleanDoc()).ok, true);
+  const dirty = cleanDoc();
+  dirty.sections['canton-ti'].queries.push({ query: 'steuerlin zorbelli', impressions: 50, clicks: 0, position: 3 });
+  const bad = verifyVocabularyDocument(dirty);
+  assert.equal(bad.ok, false);
+  assert.equal(bad.violations.reasons.unknown_token, 1);
+  const low = cleanDoc();
+  low.sections['canton-ti'].queries[0].impressions = 3;
+  assert.equal(verifyVocabularyDocument(low).ok, false, 'sotto la soglia di impression');
+
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'sdv-verify-'));
+  const file = path.join(dir, 'dirty.json');
+  fs.writeFileSync(file, JSON.stringify(dirty));
+  const script = path.join(HERE, '../scripts/build-section-demand-vocabulary.mjs');
+  const res = spawnSync(process.execPath, [script, '--verify', '--file', file], { encoding: 'utf8' });
+  assert.equal(res.status, 1);
+  assert.ok(!/zorbelli|steuerlin/.test(res.stderr + res.stdout), 'la query sporca non compare nell output');
+  const good = path.join(dir, 'clean.json');
+  fs.writeFileSync(good, JSON.stringify(cleanDoc()));
+  assert.equal(spawnSync(process.execPath, [script, '--verify', '--file', good], { encoding: 'utf8' }).status, 0);
+});
+
+test('--verify: tetto di variazione del 30% per sezione, superabile solo con allow-large-change', () => {
+  assert.equal(MAX_SECTION_CHANGE, 0.3);
+  const previous = cleanDoc();
+  const swap = (n) => {
+    const doc = cleanDoc();
+    const names = ['mieten lugano', 'wohnung lugano', 'steuern lugano', 'benzina lugano', 'bus lugano'];
+    for (let i = 0; i < n; i += 1) doc.sections['canton-ti'].queries[i] = { query: names[i], impressions: 9, clicks: 0, position: 8 };
+    return doc;
+  };
+  const small = verifyVocabularyDocument(swap(3), { previous });
+  assert.equal(small.ok, true, '3 su 10 = 30%: ammesso');
+  const large = verifyVocabularyDocument(swap(4), { previous });
+  assert.equal(large.ok, false, '4 su 10 = 40%: oltre il tetto');
+  assert.deepEqual(large.changeViolations, ['canton-ti']);
+  assert.equal(verifyVocabularyDocument(swap(4), { previous, allowLargeChange: true }).ok, true);
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'sdv-change-'));
+  const prev = path.join(dir, 'prev.json');
+  const next = path.join(dir, 'next.json');
+  fs.writeFileSync(prev, JSON.stringify(previous));
+  fs.writeFileSync(next, JSON.stringify(swap(4)));
+  const script = path.join(HERE, '../scripts/build-section-demand-vocabulary.mjs');
+  assert.equal(spawnSync(process.execPath, [script, '--verify', '--file', next, '--previous', prev], { encoding: 'utf8' }).status, 1);
+  assert.equal(spawnSync(process.execPath, [script, '--verify', '--file', next, '--previous', prev, '--allow-large-change'], { encoding: 'utf8' }).status, 0);
 });
 
 test('builder: scarta PRIMA dell aggregazione; i conteggi non contengono testo delle query', () => {
@@ -255,7 +378,7 @@ test('builder: scarta PRIMA dell aggregazione; i conteggi non contengono testo d
   const page = 'https://frontaliereticino.ch/articoli-ticino/x';
   const row = (query, impressions) => ({ keys: [query, page], clicks: 0, impressions, position: 8 });
   const rows = [
-    row('Steuerfuss Zürich 2026', 40),
+    row('Steuerfuss Lugano 2026', 40),
     row('affitti lugano', 30),
     row('giacomo verdi lugano', 500),
     row('mario rossi stipendio', 500),
@@ -266,7 +389,7 @@ test('builder: scarta PRIMA dell aggregazione; i conteggi non contengono testo d
   ];
   const stats = {};
   const out = buildVocabularySections(rows, aliasMap, { stats });
-  assert.deepEqual(out['canton-ti'].queries.map((q) => q.query), ['steuerfuss zürich 2026', 'affitti lugano']);
+  assert.deepEqual(out['canton-ti'].queries.map((q) => q.query), ['steuerfuss lugano 2026', 'affitti lugano']);
   assert.equal(out['canton-ti'].totalQueries, 2, 'le scartate non entrano nemmeno nel totale');
   assert.equal(stats.keptDistinct, 2);
   assert.equal(Object.values(stats.discarded).reduce((a, b) => a + b, 0), 6);
@@ -276,9 +399,9 @@ test('builder: scarta PRIMA dell aggregazione; i conteggi non contengono testo d
 
 test('runtime: un JSON vecchio con nomi non li porta nel ranker ne nel punteggio', () => {
   const dirty = { queries: [...vocab().queries, { query: 'giacomo verdi lugano', impressions: 900, clicks: 9, position: 5 }, { query: 'verdi', impressions: 900, clicks: 9, position: 5 }] };
-  const compiled = compileVocabulary(dirty, { ignoreTerms: IGNORE });
+  const compiled = compileVocabulary(dirty, { ignoreTerms: IGNORE, section: 'canton-ti' });
   assert.ok(compiled.every((c) => !/verdi/.test(JSON.stringify(c))), 'nessuna voce compilata dai nomi');
-  const r = rankCantonHeadlines([h('Giacomo Verdi a Lugano: incontro pubblico', 2)], dirty, { now: NOW, ignoreTerms: IGNORE });
+  const r = rankCantonHeadlines([h('Giacomo Verdi a Lugano: incontro pubblico', 2)], dirty, { now: NOW, ignoreTerms: IGNORE, section: 'canton-ti' });
   assert.deepEqual(r.picks, [], 'la headline con il nome non trova domanda');
   // Un vocabolario sufficiente SOLO grazie alle query personali diventa insufficiente.
   const names = Array.from({ length: 10 }, (_, i) => ({ query: `giacomo verdi${i} lugano`, impressions: 100, clicks: 1, position: 7 }));
@@ -286,7 +409,7 @@ test('runtime: un JSON vecchio con nomi non li porta nel ranker ne nel punteggio
 });
 
 test('log: il ranker espone solo un riferimento breve della query, mai il testo', () => {
-  const r = rankCantonHeadlines([h('Premi cassa malati 2027: aumento medio', 3)], vocab(), { now: NOW, ignoreTerms: IGNORE });
+  const r = rankCantonHeadlines([h('Premi cassa malati 2027: aumento medio', 3)], vocab(), { now: NOW, ignoreTerms: IGNORE, section: 'canton-ti' });
   const refs = r.picks[0]._score.matchedQueryRefs;
   assert.ok(refs.length > 0 && refs.every((x) => /^q-[0-9a-f]{8}$/.test(x)));
   assert.ok(!JSON.stringify(r.picks[0]._score).includes('premi cassa'));
@@ -312,11 +435,11 @@ test('loader: vocabolario stantio (> 45 giorni) o senza data => null con SECTION
 });
 
 test('no-fresh-pool: se la fascia migliore e la 2 (vecchia o senza data) nessuna scelta', () => {
-  const old = rankCantonHeadlines([h('Premi cassa malati 2027 in aumento', 24 * 20), h('Imposta alla fonte, cosa cambia', null)], vocab(), { now: NOW, ignoreTerms: IGNORE });
+  const old = rankCantonHeadlines([h('Premi cassa malati 2027 in aumento', 24 * 20), h('Imposta alla fonte, cosa cambia', null)], vocab(), { now: NOW, ignoreTerms: IGNORE, section: 'canton-ti' });
   assert.deepEqual(old.picks, []);
   assert.equal(old.reason, 'no-fresh-pool');
   assert.equal(old.band, 2);
-  const recent = rankCantonHeadlines([h('Premi cassa malati 2027 in aumento', 100)], vocab(), { now: NOW, ignoreTerms: IGNORE });
+  const recent = rankCantonHeadlines([h('Premi cassa malati 2027 in aumento', 100)], vocab(), { now: NOW, ignoreTerms: IGNORE, section: 'canton-ti' });
   assert.equal(recent.picks.length, 1, 'la fascia 1 (recente) continua a funzionare');
   assert.equal(recent.band, 1);
 });
@@ -326,8 +449,8 @@ test('vocabolario versionato: ogni query presente passa il filtro di privacy', (
   const doc = JSON.parse(fs.readFileSync(file, 'utf8'));
   let total = 0;
   let rejected = 0;
-  for (const entry of Object.values(doc.sections)) {
-    for (const q of entry.queries) { total += 1; if (!classifyDemandQuery(q.query).keep) rejected += 1; }
+  for (const [section, entry] of Object.entries(doc.sections)) {
+    for (const q of entry.queries) { total += 1; if (!classifyDemandQuery(q.query, { section }).keep || q.impressions < MIN_QUERY_IMPRESSIONS) rejected += 1; }
   }
   assert.ok(total > 0);
   assert.equal(rejected, 0, 'nessuna query personale o fuori dominio nel file versionato');
@@ -341,6 +464,10 @@ test('workflow di rinnovo mensile: schedule + dispatch, builder, PR con PAT', ()
   assert.match(wf, /node generator\/scripts\/load-rc-env\.mjs/);
   assert.match(wf, /build-section-demand-vocabulary\.mjs/);
   assert.match(wf, /gh pr create/);
+  assert.match(wf, /allow_large_change:/);
+  assert.ok(wf.indexOf('build-section-demand-vocabulary.mjs "${ARGS[@]}"') < wf.indexOf('--verify'), 'verify dopo il builder');
+  assert.ok(wf.indexOf('--verify') < wf.indexOf('git add --'), 'verify prima di git add');
+  assert.match(wf, /--allow-large-change/);
   assert.match(wf, /## Implementato/);
   assert.match(wf, /## Non implementato \(ancora\)/);
 });

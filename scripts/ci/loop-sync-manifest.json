@@ -7243,7 +7243,7 @@
       "reason": "Ranker di selezione per domanda di ricerca delle sezioni cantonali (F6.2, O2): punteggia le headline del pool contro il vocabolario di query Search Console della SEZIONE (`generator/data/section-demand-vocabulary.json`), in modo deterministico e locale (zero chiamate LLM), con la freschezza come primo criterio e nessuna scelta quando il vocabolario e' insufficiente. Corpus-only: lo chiama solo create-article.mjs del corpus per i profili con `sectionDemandRanker`; il sito non genera articoli cantonali.",
       "baseline": {
         "site": null,
-        "corpus": "0749dd013adff81b",
+        "corpus": "23971d45d8f3367a",
         "alignedAt": "2026-11-28"
       }
     },
@@ -7253,17 +7253,17 @@
       "reason": "Rigenera il vocabolario di domanda per sezione cantonale leggendo le query Search Console degli ultimi 28 giorni sulle pagine di ciascuna sezione nelle quattro lingue. Strumento del corpus che scrive un JSON sotto generator/data/; il sito non lo esegue ne' lo importa.",
       "baseline": {
         "site": null,
-        "corpus": "e9107c26e5c4e7b9",
+        "corpus": "23d797de9fb16f86",
         "alignedAt": "2026-11-28"
       }
     },
     {
       "path": "generator/scripts/lib/section-demand-query-filter.mjs",
       "mode": "corpus-only",
-      "reason": "Filtro di privacy e di dominio delle query Search Console del vocabolario di domanda per sezione cantonale (F6.2): scarta nomi di persona, contatti, codici, operatori e tutto cio' che non contiene un termine di dominio o un toponimo noto. Lo importano solo build-section-demand-vocabulary.mjs e canton-section-demand-ranker.mjs del corpus; il sito non genera articoli cantonali ne' usa questo vocabolario.",
+      "reason": "Filtro di privacy e di dominio delle query Search Console del vocabolario di domanda per sezione cantonale (F6.2): grammatica chiusa a token esatti (dominio, generici, anni, toponimi della sola sezione, al massimo uno per query): scarta nomi di persona, contatti, codici, operatori e ogni token fuori dagli elenchi, senza prefissi ne' sottostringhe. Lo importano solo build-section-demand-vocabulary.mjs e canton-section-demand-ranker.mjs del corpus; il sito non genera articoli cantonali ne' usa questo vocabolario.",
       "baseline": {
         "site": null,
-        "corpus": "ce217102317272d3",
+        "corpus": "8d2cc720e98c482e",
         "alignedAt": "2026-11-28"
       }
     },
@@ -7273,7 +7273,7 @@
       "reason": "Rinnovo mensile del vocabolario di domanda per sezione cantonale (F6.2): rigenera generator/data/section-demand-vocabulary.json da Search Console con il filtro di privacy e apre una PR di soli dati. Il sito non ha ne' il builder ne' il ranker di sezione.",
       "baseline": {
         "site": null,
-        "corpus": "f2b96158a2be5fc7",
+        "corpus": "da1589705804a590",
         "alignedAt": "2026-11-28"
       }
     }
