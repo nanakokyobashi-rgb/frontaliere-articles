@@ -477,6 +477,15 @@ export const RC_TO_ENV = {
   // la chiave NON sta in ALLOW_EMPTY_RC_KEYS.
   CANTON_ARTICLE_SECTIONS_ENABLED: ['CANTON_ARTICLE_SECTIONS_ENABLED'],
 
+  // Cadenza alta dei cantoni (piano «cadenza 20 articoli per sezione», F3.A):
+  // le sezioni cantonali (id `canton-ti`, codici `TI` o `all`) che generano con
+  // budget 24, tutti gli slot orari e la catena cantonale. Assente o vuoto =
+  // nessuna sezione = il comportamento di prima (budget 4, 4 slot al giorno,
+  // nessuna catena): il default locale sicuro. Letto da
+  // generator/scripts/lib/canton-high-cadence.mjs; la chiave NON sta in
+  // ALLOW_EMPTY_RC_KEYS perche' vuoto e assente vogliono dire la stessa cosa.
+  CANTON_HIGH_CADENCE_SECTIONS: ['CANTON_HIGH_CADENCE_SECTIONS'],
+
   // Kill-switch delle sezioni articolo cantonali (piano «sezioni articoli per
   // cantone», D9). Il rollout lo decide il registro committato
   // sections/registry.json; questo parametro SPEGNE soltanto: le sezioni
@@ -656,6 +665,7 @@ export const EXPECTED_ABSENT_RC_KEYS = new Set([
   'OMNIROUTE_PROVIDER_ALLOWLIST',
   'ENABLE_OMNIROUTE_FALLBACK',
   'CANTON_ARTICLE_SECTIONS_KILL',
+  'CANTON_HIGH_CADENCE_SECTIONS',
   'ASSISTED_APPLICATION_PAYMENT_PROVIDER',
   'SUMUP_API_KEY',
   'SERVER_META_CAPI_ACCESS_TOKEN',
