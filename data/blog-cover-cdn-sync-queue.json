@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-gkb-garanzia-aumento-pagamento.webp",
+      "sha256": "a3909dcc014b0bbe13e9ca779ebc36a0bd1a408c6a52d3c07f8538c6f6eb9ad8"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-gkb-garanzia-aumento-pagamento-480w.webp",
+      "sha256": "edf7fd1146d327ed4a107ed76bc1ca4205a30fc7c1def304cfe87431b1883ae7"
+    }
+  ]
 }
