@@ -56,7 +56,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { readFileSync, writeFileSync, mkdtempSync, mkdirSync, rmSync, chmodSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdtempSync, mkdirSync, rmSync, chmodSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -198,6 +198,8 @@ function runScan({
   // completo, cioe' la forma di cron e dispatch.
   scanMode,
   scopePrs,
+  targetPr,
+  expectedHeadSha,
 }) {
   const dir = mkdtempSync(path.join(tmpdir(), 'stale-pr-rescuer-'));
   try {
@@ -304,6 +306,7 @@ case "$sub" in
         *) if [ -z "$p" ]; then p="$1"; fi; shift ;;
       esac
     done
+    if [[ "\${SCAN_MODE:-}" == "targeted" ]]; then printf 'API %s\\n' "$p" >> ${JSON.stringify(calls)}; fi
     # L'ordine dei pattern conta: \`.../pulls/N/reviews\` matcha anche
     # \`*/pulls*\`, quindi le foglie vanno prima della lista.
     case "$p" in
@@ -344,6 +347,10 @@ case "$sub" in
       */pulls/*)
         if [ "$jq" = '.head.sha' ]; then
           node -e 'const value=require(process.argv[1]); const pr=Array.isArray(value)?value[0]:value; process.stdout.write(String(pr?.head?.sha||"")+"\\n")' ${JSON.stringify(fixPrs)}
+        elif [ -z "$jq" ]; then
+          target_number="\${p##*/}"
+          target_response=$(node -e 'const value=require(process.argv[1]); const list=Array.isArray(value)?value:[value]; const pr=list.find(item=>item.number===Number(process.argv[2])); if(!pr)process.exit(1); process.stdout.write(JSON.stringify({state:"open",...pr})+"\\n")' ${JSON.stringify(fixPrs)} "$target_number")
+          printf '%s\\n' "$target_response"
         elif [[ "$jq" == *"@tsv"* ]]; then
           # Rilettura della classe F: lo stato CORRENTE della PR. _live nella
           # fixture simula ciò che è cambiato fra la prima prova e la seconda;
@@ -471,6 +478,14 @@ esac
     chmodSync(path.join(bin, 'grep'), 0o755);
     chmodSync(path.join(bin, 'git'), 0o755);
 
+    // In modalita' `targeted` lo step di scan non legge il target: lo trova
+    // gia' verificato in un file scritto da `Decide scan scope`.
+    if (scanMode === 'targeted') {
+      writeFileSync(
+        path.join(dir, 'stale-rescuer-target-pr.json'),
+        JSON.stringify(prs.filter((pr) => pr.number === targetPr)),
+      );
+    }
     const script = path.join(dir, 'scan.sh');
     writeFileSync(script, SCAN_RUN);
 
@@ -489,6 +504,7 @@ esac
         DRY_RUN: dryRun ? 'true' : 'false',
         ...(scanMode === undefined ? {} : { SCAN_MODE: scanMode }),
         ...(scopePrs === undefined ? {} : { SCAN_SCOPE_PRS: scopePrs }),
+        RUNNER_TEMP: dir,
       },
     });
 
@@ -506,7 +522,7 @@ esac
     // sarebbe visibile invece che silenzioso.
     const workflowRuns = [...raw.matchAll(/^WORKFLOW_RUN (.+)$/gm)].map((m) => m[1]);
     const reruns = [...raw.matchAll(/^RUN_RERUN (.+)$/gm)].map((m) => m[1]);
-    return { labeled, unlabeled, comments, stdout, workflowRuns, reruns };
+    return { labeled, unlabeled, comments, stdout, workflowRuns, reruns, calls: raw.split(/\r?\n/u).filter(Boolean) };
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
@@ -2228,7 +2244,7 @@ const rescuerRun = (over = {}) => ({
   ...over,
 });
 
-function runScope({ event = 'workflow_run', runs = [], runsError = false, raw = null, nowS = SLOT_START + 600 }) {
+function runScope({ event = 'workflow_run', runs = [], runsError = false, raw = null, nowS = SLOT_START + 600, targetPr, expectedHeadSha }) {
   const dir = mkdtempSync(path.join(tmpdir(), 'stale-pr-scope-'));
   try {
     const bin = path.join(dir, 'bin');
@@ -2261,12 +2277,17 @@ echo ${nowS}
         EVENT_NAME: event,
         RUN_ID: String(SELF_RUN_ID),
         TRIGGER_PRS: '901',
+        ...(targetPr === undefined ? {} : { TARGET_PR: String(targetPr) }),
+        ...(expectedHeadSha === undefined ? {} : { EXPECTED_HEAD_SHA: expectedHeadSha }),
         FULL_SCAN_SLOT_S: '1800',
         GITHUB_OUTPUT: output,
+        RUNNER_TEMP: dir,
       },
     });
     const mode = (readFileSync(output, 'utf8').match(/^mode=(\w+)$/m) || [])[1];
-    return { mode, stdout, calls: readFileSync(calls, 'utf8').trim().split('\n').filter(Boolean) };
+    const targetFile = path.join(dir, 'stale-rescuer-target-pr.json');
+    const targetPrs = existsSync(targetFile) ? JSON.parse(readFileSync(targetFile, 'utf8')) : null;
+    return { mode, targetPrs, stdout, calls: readFileSync(calls, 'utf8').trim().split('\n').filter(Boolean) };
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
@@ -2278,6 +2299,49 @@ test('scope — cron e dispatch fanno sempre lo scan completo, senza letture', o
     assert.equal(r.mode, 'full', `${event}: ${r.stdout}`);
     assert.deepEqual(r.calls, [], `${event}: nessuna lettura per decidere`);
   }
+});
+
+test('scope — il dispatch con PR e SHA legge solo il target e lo consegna allo scan', opts, () => {
+  const pr = { state: 'open', ...openPr()[0] };
+  const target = runScope({
+    event: 'workflow_dispatch',
+    targetPr: 901,
+    expectedHeadSha: HEAD_SHA,
+    raw: JSON.stringify(pr),
+    runs: [rescuerRun()],
+  });
+  assert.equal(target.mode, 'targeted', target.stdout);
+  assert.deepEqual(target.calls, ['api --paginate repos/nanakokyobashi-rgb/frontaliere-articles/pulls/901']);
+  assert.match(target.stdout, /Dispatch limitato alla PR target #901/);
+  assert.deepEqual(target.targetPrs.map((item) => item.number), [901]);
+
+  // HEAD cambiata dopo la diagnosi: nessuno scan, nessun file di target.
+  const stale = runScope({
+    event: 'workflow_dispatch',
+    targetPr: 901,
+    expectedHeadSha: OLD_SHA,
+    raw: JSON.stringify(pr),
+  });
+  assert.equal(stale.mode, 'skip', stale.stdout);
+  assert.equal(stale.targetPrs, null);
+  assert.match(stale.stdout, /target e la HEAD non coincidono/);
+
+  // PR non piu' aperta: stesso esito.
+  const closed = runScope({
+    event: 'workflow_dispatch',
+    targetPr: 901,
+    expectedHeadSha: HEAD_SHA,
+    raw: JSON.stringify({ ...pr, state: 'closed' }),
+  });
+  assert.equal(closed.mode, 'skip', closed.stdout);
+
+  // Lettura fallita: errore, mai uno scan completo.
+  assert.throws(() => runScope({
+    event: 'workflow_dispatch',
+    targetPr: 901,
+    expectedHeadSha: HEAD_SHA,
+    runsError: true,
+  }));
 });
 
 test('scope — il primo run partito nella finestra fa lo scan completo', opts, () => {
@@ -2347,6 +2411,28 @@ test('scope ridotto: la classificazione tocca SOLO le PR del trigger', opts, () 
   const none = runScan({ ...common, scanMode: 'scoped', scopePrs: '' });
   assert.deepEqual(none.comments, [], none.stdout);
   assert.deepEqual(none.labeled, [], none.stdout);
+});
+
+test('dispatch target-only classifica una sola PR dal file verificato dallo scope', opts, () => {
+  const twoPrs = [...openPr(), ...openPr({ number: 902 })];
+  const targeted = runScan({
+    prs: twoPrs,
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: OLD_SHA, body: '🔴 **Important**: manca il guard' }),
+    scanMode: 'targeted',
+    targetPr: 902,
+  });
+  assert.deepEqual(targeted.comments.map(comment => comment.pr), [902], `${targeted.stdout}\n${targeted.calls.join('\n')}`);
+  assert.match(targeted.stdout, /Scan limitato alla PR target/);
+  assert.doesNotMatch(targeted.calls.join('\n'), /pulls\?state=open/);
+  assert.doesNotMatch(targeted.calls.join('\n'), /pulls\/901/);
+});
+
+test('lo step di scan salta quando lo scope ha escluso il target', () => {
+  const at = WF.indexOf('      - name: Scan open PRs and flag stalled ones\n');
+  assert.notEqual(at, -1);
+  const header = WF.slice(at, WF.indexOf('        env:', at));
+  assert.match(header, /if: steps\.scope\.outputs\.mode != 'skip'/);
 });
 
 test('il custode delle PR orfane gira solo nello scan completo', () => {
