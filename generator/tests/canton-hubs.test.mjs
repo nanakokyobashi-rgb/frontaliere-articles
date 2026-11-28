@@ -25,6 +25,7 @@ import { sectionWriteSurfaces } from '../../scripts/lib/article-surfaces.mjs';
 import { sectionSourceSurfaces } from '../../scripts/lib/corpus-sections.mjs';
 import { sectionRebaseSurfaces } from '../../scripts/ci/rebase-section-args.mjs';
 import { cantonSectionIds, cantonSectionProfile } from '../scripts/lib/canton-section-profile.mjs';
+import { isArticlePublicationPath, parsePublishApiRange, shouldWaitForArticlePublication } from '../scripts/lib/canton-hubs/publish-gate.mjs';
 import { CANTON_GROUPS, buildCantonServices } from '../scripts/lib/canton-services-data.mjs';
 import { articleUrl, filterUniqueCuratedCandidates, keywordTopicScore, loadCantonPool, loadSectionArticles, selectCuratedArticles, selectLatestCantonArticles, sidecarQuality } from '../scripts/lib/canton-hubs/articles.mjs';
 import { BLOCK_THRESHOLDS, CLOCK_SKEW_MS, DAY_MS, HOUR_MS, OMIT_CODES, dateMs, instantMs, isRealDay } from '../scripts/lib/canton-hubs/blocks-common.mjs';
@@ -1583,9 +1584,22 @@ test('workflow refresh-canton-hubs: cron giornaliero, zero sezioni = successo, r
   assert.ok(cron, 'cron giornaliero mancante');
   assert.ok(Number(cron[1]) % 15 !== 0, 'il minuto del cron va sfalsato dai quarti d\'ora');
   assert.match(wf, /workflow_dispatch:/);
-  assert.match(wf, /if \[ "\$\{\{ github\.event_name \}\}" = "push" \]; then[\s\S]*?DRY=false/);
+  assert.match(wf, /resolve-canton-hub-refresh-mode\.mjs/);
   assert.doesNotMatch(wf, /self-test/);
   assert.match(wf, /push:\n\s+branches: \[main\]/);
+  assert.match(wf, /workflow_run:\n\s+workflows: \['Publish article data API'\][\s\S]*?types: \[completed\][\s\S]*?branches: \[main\]/);
+  assert.match(wf, /if: github\.event_name != 'workflow_run' \|\| \(github\.event\.workflow_run\.conclusion == 'success'/);
+  assert.match(wf, /github\.event\.workflow_run\.head_sha/);
+  assert.match(wf, /steps\.mode\.outputs\.event == 'workflow_run'/);
+  assert.match(wf, /Wait for the published sitemap links/);
+  assert.match(wf, /wait-canton-hub-sitemap-ready\.mjs --section "\$SECTIONS" --timeout-seconds 600/);
+  assert.match(wf, /ARTIFACT_ARCHIVE: \$\{\{ runner\.temp \}\}\/publish-api-wrapper\/artifact\.tar/);
+  assert.match(wf, /extract-publisher-pages-artifact\.py --archive "\$ARTIFACT_ARCHIVE" --destination "\$STAGING_DIR"/);
+  assert.match(wf, /PUBLISH_API_ARTIFACT_DIR: \$\{\{ runner\.temp \}\}\/publish-api-staged/);
+  assert.ok(wf.indexOf('- name: Checkout') < wf.indexOf('- name: Setup Node.js'));
+  assert.ok(wf.indexOf('- name: Setup Node.js') < wf.indexOf('- name: Extract publisher Pages artifact safely'));
+  assert.ok(wf.indexOf('- name: Extract publisher Pages artifact safely') < wf.indexOf('- name: Resolve publisher artifact state'));
+  assert.ok(wf.indexOf('- name: Resolve publisher artifact state') < wf.indexOf('- name: Resolve run mode'));
   for (const pattern of [
     'content/blog-body/**',
     'content/blog-body-ch/**',
@@ -1596,13 +1610,10 @@ test('workflow refresh-canton-hubs: cron giornaliero, zero sezioni = successo, r
     'content/routerSwissData.ts',
     'data/blog-articles/**',
     'data/swiss-articles/**',
-  ]) assert.ok(wf.includes(`- '${pattern}'`), `${pattern}: path trigger mancante`);
-  assert.match(wf, /- 'content\/blog-body-canton-\*\/\*\*'/);
-  assert.match(wf, /- 'content\/cantons\/\*\/registry\.ts'/);
-  assert.match(wf, /- 'content\/cantons\/\*\/seo\.ts'/);
-  assert.match(wf, /- 'content\/cantons\/\*\/slugs\.ts'/);
+  ]) assert.ok(!wf.includes(`- '${pattern}'`), `${pattern}: non deve avviare il refresh prima del publisher`);
+  const pushPaths = wf.split(/\n  workflow_run:/)[0].split(/\n  push:/)[1];
+  assert.ok(pushPaths.includes("- 'data/article-source-urls.json'"), 'le sole URL fonte restano un trigger diretto');
   assert.match(wf, /- 'data\/sections\/canton-\*\/articles\/\*\*'/);
-  assert.doesNotMatch(wf, /- 'content\/cantons\/\*\*'/, 'il trigger non deve riavviarsi sui propri hub');
   assert.match(wf, /--list-enabled/);
   assert.match(wf, /count=0/);
   // Ogni step dopo la risoluzione delle sezioni e' condizionato a count != 0.
@@ -1635,12 +1646,32 @@ test('workflow refresh-canton-hubs: cron giornaliero, zero sezioni = successo, r
   // Il controllo dei link sta prima del commit e un link mancante lo ferma: niente
   // continue-on-error, niente --warn; solo le sitemap irraggiungibili sono tollerate.
   const linkStep = steps.find((s) => s.startsWith('Check hub links'));
-  assert.ok(linkStep && wf.indexOf('- name: Check hub links') < wf.indexOf('- name: Commit and push'));
+  assert.ok(linkStep && wf.indexOf('- name: Check hub links') < wf.indexOf('- name: Commit canton hubs'));
   assert.doesNotMatch(linkStep, /continue-on-error|--warn\b/);
   assert.match(linkStep, /verify-canton-hub-links\.mjs --section "\$SECTIONS" --soft-network/);
-  assert.doesNotMatch(wf, /continue-on-error: true/);
+  assert.doesNotMatch(linkStep, /continue-on-error: true/);
   // Il producer gira DOPO i refresh e PRIMA del commit; il commit non gira in dry-run.
-  const order = ['Fetch fuel prices per canton', 'Generate the canton hubs', 'Commit and push'].map((n) => wf.indexOf(`- name: ${n}`));
+  const order = ['Fetch fuel prices per canton', 'Generate the canton hubs', 'Commit canton hubs'].map((n) => wf.indexOf(`- name: ${n}`));
   assert.ok(order.every((i) => i > 0) && order[0] < order[1] && order[1] < order[2]);
-  assert.match(steps.find((s) => s.startsWith('Commit and push')), /steps\.mode\.outputs\.dry != 'true'/);
+  assert.match(steps.find((s) => s.startsWith('Commit canton hubs')), /steps\.mode\.outputs\.dry != 'true'/);
+});
+
+test('publish gate: refresh articolo dopo il publisher, ignorando gli output hub', () => {
+  assert.deepEqual(parsePublishApiRange('Publish article data API (automatic) / range=0123456789abcdef0123456789abcdef01234567..89abcdef0123456789abcdef0123456789abcdef'), {
+    before: '0123456789abcdef0123456789abcdef01234567',
+    after: '89abcdef0123456789abcdef0123456789abcdef',
+  });
+  assert.equal(parsePublishApiRange('Publish article data API (automatic)'), null);
+  assert.equal(isArticlePublicationPath('content/blog-body-canton-ti/article.md'), true);
+  assert.equal(isArticlePublicationPath('data/blog-articles/article.json'), true);
+  assert.equal(isArticlePublicationPath('content/cantons/canton-ti/hubs/eventi.json'), false);
+  assert.equal(isArticlePublicationPath('data/article-source-urls.json'), false);
+  assert.equal(shouldWaitForArticlePublication([
+    'content/cantons/canton-ti/hubs/eventi.json',
+    'generator/scripts/generate-canton-hubs.mjs',
+  ]), false);
+  assert.equal(shouldWaitForArticlePublication([
+    'content/cantons/canton-ti/hubs/eventi.json',
+    'content/blog-body-canton-ti/article.md',
+  ]), true);
 });
