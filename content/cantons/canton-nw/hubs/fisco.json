@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "fisco",
-  "updatedAt": "2026-11-07T11:15:37.760Z",
-  "contentHash": "8bcc3ece5b530114ebc59f6b24e6f04038976ec293a2867929824543a8a92231",
+  "updatedAt": "2026-11-28T17:11:28.288Z",
+  "contentHash": "487cf7344e9cbbf8d166b29cb58cf3ebe116063fcc47fc06271def66073f3610",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-06T22:26:45.566Z",
+      "updatedAt": "2026-11-27T15:38:08.536Z",
       "keyFacts": 0
     }
   ],
@@ -117,14 +117,9 @@
               "label": "Vorsicht vor Phishing-Mails",
               "date": "2026-09-14T10:34:56.000Z",
               "url": "https://www.steuern-nw.ch/vorsicht-vor-phishing-mails/"
-            },
-            {
-              "label": "Steuergesetzrevision 2029 – Abschaffung des Eigenmietwerts",
-              "date": "2026-07-31T13:10:57.000Z",
-              "url": "https://www.steuern-nw.ch/steuergesetzrevision-2029-abschaffung-des-eigenmietwerts/"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -182,7 +177,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-07T11:15:37.760Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     },
     "en": {
       "canton": "NW",
@@ -277,14 +272,9 @@
               "label": "Vorsicht vor Phishing-Mails",
               "date": "2026-09-14T10:34:56.000Z",
               "url": "https://www.steuern-nw.ch/vorsicht-vor-phishing-mails/"
-            },
-            {
-              "label": "Steuergesetzrevision 2029 – Abschaffung des Eigenmietwerts",
-              "date": "2026-07-31T13:10:57.000Z",
-              "url": "https://www.steuern-nw.ch/steuergesetzrevision-2029-abschaffung-des-eigenmietwerts/"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -342,7 +332,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-07T11:15:37.760Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     },
     "de": {
       "canton": "NW",
@@ -437,14 +427,9 @@
               "label": "Vorsicht vor Phishing-Mails",
               "date": "2026-09-14T10:34:56.000Z",
               "url": "https://www.steuern-nw.ch/vorsicht-vor-phishing-mails/"
-            },
-            {
-              "label": "Steuergesetzrevision 2029 – Abschaffung des Eigenmietwerts",
-              "date": "2026-07-31T13:10:57.000Z",
-              "url": "https://www.steuern-nw.ch/steuergesetzrevision-2029-abschaffung-des-eigenmietwerts/"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -502,7 +487,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-07T11:15:37.760Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     },
     "fr": {
       "canton": "NW",
@@ -597,14 +582,9 @@
               "label": "Vorsicht vor Phishing-Mails",
               "date": "2026-09-14T10:34:56.000Z",
               "url": "https://www.steuern-nw.ch/vorsicht-vor-phishing-mails/"
-            },
-            {
-              "label": "Steuergesetzrevision 2029 – Abschaffung des Eigenmietwerts",
-              "date": "2026-07-31T13:10:57.000Z",
-              "url": "https://www.steuern-nw.ch/steuergesetzrevision-2029-abschaffung-des-eigenmietwerts/"
             }
           ],
-          "updatedAt": "2026-11-06T22:26:45.566Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -662,7 +642,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-07T11:15:37.760Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     }
   }
 }
