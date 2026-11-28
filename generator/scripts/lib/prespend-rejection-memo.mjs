@@ -17,9 +17,11 @@
  * (`uncertain`: confidenza <= 0,5 della Decisions API, non confermata dal
  * fallback testuale per scadenza, errore o risposta illeggibile).
  *
- * La chiave comprende l'identita' del classifier (modello + prompt) e un hash
- * breve di titolo+sommario: una notizia aggiornata
- * sullo stesso URL con un titolo diverso viene rivalutata. Le voci hanno un
+ * La chiave e' `prespend-relevance:<classifierVersion>:<url>#<hash>`: la versione
+ * del classifier (modello + prompt + via di decisione, vedi `classifierIdentity`)
+ * e un hash breve di titolo+sommario. Un cambio di modello o di prompt non
+ * riusa i "no" vecchi; una notizia aggiornata sullo stesso URL con un titolo
+ * diverso viene rivalutata. Le voci hanno un
  * tetto proprio (`PRESPEND_RELEVANCE_URL_MAX`), separato da quello degli abort
  * del topic-gate, che quindi non vengono cacciati.
  */
@@ -42,15 +44,10 @@ export function classifierIdentity({ model = '', promptTemplate = '', extra = ''
   return createHash('sha256').update(`${model}\n${promptTemplate}\n${extra}`).digest('hex').slice(0, 8);
 }
 
-/**
- * Hash breve (8 hex) di titolo+sommario, normalizzati: maiuscole e spazi non
- * contano. Con `identity` (vedi `classifierIdentity`) entra nell'hash anche il
- * classifier che ha dato il verdetto.
- */
-export function contentFingerprint(title, summary, identity = '') {
+/** Hash breve (8 hex) di titolo+sommario, normalizzati: maiuscole e spazi non contano. */
+export function contentFingerprint(title, summary) {
   const norm = (v) => String(v ?? '').normalize('NFC').toLowerCase().replace(/\s+/g, ' ').trim();
-  const body = `${norm(title)}\n${norm(summary)}`;
-  return createHash('sha256').update(identity ? `${identity}\n${body}` : body).digest('hex').slice(0, 8);
+  return createHash('sha256').update(`${norm(title)}\n${norm(summary)}`).digest('hex').slice(0, 8);
 }
 
 /**
@@ -62,9 +59,13 @@ export function isPoolProvenEmpty({ candidateAttempted, remainingHeadlines }) {
   return candidateAttempted !== true && (remainingHeadlines?.length ?? 0) === 0;
 }
 
-/** Chiave del memo: URL normalizzato, piu' `#<hash>` se l'item ha un contenuto da distinguere. */
-export function memoUrlKey(urlKey, fingerprint = '') {
-  return urlKey ? `${urlKey}${fingerprint ? `#${fingerprint}` : ''}` : '';
+/**
+ * Chiave del memo (dopo il prefisso `prespend-relevance:`):
+ * `<classifierVersion>:<url>#<hash>`. Versione e hash sono omessi se vuoti.
+ */
+export function memoUrlKey(urlKey, fingerprint = '', classifierVersion = '') {
+  if (!urlKey) return '';
+  return `${classifierVersion ? `${classifierVersion}:` : ''}${urlKey}${fingerprint ? `#${fingerprint}` : ''}`;
 }
 
 function memoKey(urlKey) {
@@ -115,6 +116,8 @@ export function isDefinitiveRejection(verdict) {
  *
  * `fingerprint(item)` (opzionale) restituisce l'hash di contenuto che entra
  * nella chiave: un item con lo stesso URL ma un contenuto diverso non e' un hit.
+ * `classifierVersion` (da `classifierIdentity`) entra nella chiave: un classifier
+ * diverso (modello, prompt o via di decisione) non e' un hit.
  *
  * @returns {Promise<{ verdicts: object[], memoHits: number, newRejections: string[] }>}
  */
@@ -126,9 +129,10 @@ export async function classifyWithRejectionMemo(items, {
   runAll,
   canReuse = () => true,
   fingerprint = () => '',
+  classifierVersion = '',
   now = Date.now(),
 }) {
-  const urlKeys = items.map((item) => (item?.url ? memoUrlKey(normalizeUrl(item.url), fingerprint(item)) : ''));
+  const urlKeys = items.map((item) => (item?.url ? memoUrlKey(normalizeUrl(item.url), fingerprint(item), classifierVersion) : ''));
   let memoHits = 0;
   const verdicts = await runAll(items, async (item, i) => {
     if (urlKeys[i] && canReuse(item) && isPrespendRejectedUrl(tracker, urlKeys[i], section, now)) {

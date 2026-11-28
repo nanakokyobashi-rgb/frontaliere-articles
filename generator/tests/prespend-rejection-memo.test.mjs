@@ -135,6 +135,7 @@ test('la chiave include un hash di titolo+sommario: una notizia aggiornata sullo
   assert.equal(after.selection, 10, 'titolo diverso: nessun hit');
   assert.equal(after.memoHits, 0);
   assert.equal(memoUrlKey('https://a.ch/x', ''), 'https://a.ch/x');
+  assert.equal(memoUrlKey('https://a.ch/x', 'abcd1234', 'v1v1v1v1'), 'v1v1v1v1:https://a.ch/x#abcd1234');
   assert.equal(isPrespendRejectedUrl(tracker, 'https://esempio.ch/n/0', 'svizzera', NOW), false, 'senza hash la chiave non c\'e\'');
 });
 
@@ -185,16 +186,20 @@ test('la chiave del memo include l\'identita\' del classifier: un cambio di mode
     resetLlmProviderRequests();
     const out = await classifyWithRejectionMemo(items, {
       tracker, section: 'svizzera', normalizeUrl: norm, classify, runAll, now: NOW,
-      fingerprint: (item) => contentFingerprint(item.title, item.summary, identity),
+      fingerprint: (item) => contentFingerprint(item.title, item.summary),
+      classifierVersion: identity,
     });
     return { ...out, selection: getLlmProviderRequestsByStage().selection };
   };
-  const tracker = recordPrespendRejectedUrls({}, (await runWith(idA, {})).newRejections, 'svizzera', NOW);
+  const rejectedA = (await runWith(idA, {})).newRejections;
+  assert.ok(rejectedA.every((k) => k.startsWith(`${idA}:https://esempio.ch/n/`) && /#[0-9a-f]{8}$/.test(k)), 'chiave <classifierVersion>:<url>#<hash>');
+  const tracker = recordPrespendRejectedUrls({}, rejectedA, 'svizzera', NOW);
+  assert.ok(Object.keys(tracker.topicGateUrls).every((k) => k.includes(`::prespend-relevance:${idA}:https://`)), 'chiave completa nel tracker');
   assert.equal((await runWith(idA, tracker)).selection, 5, 'stesso classifier: i "no" restano memo');
   assert.equal((await runWith(idModel, tracker)).selection, 10, 'modello cambiato: nessun hit');
   assert.equal((await runWith(idPrompt, tracker)).selection, 10, 'prompt cambiato: nessun hit');
   const src = readFileSync(path.join(HERE, '../scripts/create-article.mjs'), 'utf8');
-  assert.match(src, /_contentFingerprint\(p\.headlineText, p\.summary, classifierIdentity\)/);
+  assert.match(src, /classifierVersion: classifierIdentity,/);
   assert.match(src, /promptTemplate: buildPrespendClassifierPrompt\(/);
   assert.match(src, /model: process\.env\.PRESPEND_GATE_MODEL \|\| AI_MODELS\.CODEX_CLI_PRIMARY,\n\s*promptTemplate/);
 });

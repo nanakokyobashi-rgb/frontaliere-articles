@@ -1628,7 +1628,8 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
       tracker: memoTracker,
       section: SECTION_NAME,
       normalizeUrl: normalizeNewsUrl,
-      fingerprint: ({ plan: p }) => _contentFingerprint(p.headlineText, p.summary, classifierIdentity),
+      fingerprint: ({ plan: p }) => _contentFingerprint(p.headlineText, p.summary),
+      classifierVersion: classifierIdentity,
       runAll: (items, fn) => mapWithConcurrency(items, concurrency, fn),
       canReuse: ({ plan: p }) => !(IS_CANTON
         && typeof p.h?._cantonSourceContent === 'string'

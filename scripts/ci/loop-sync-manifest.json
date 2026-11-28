@@ -4002,7 +4002,7 @@
       "reason": "Memo cross-run dei verdetti negativi del classifier pre-spend, usato solo da create-article.mjs del corpus per ridurre le richieste LLM di selezione (F3.A.6). Il sito non esegue questi workflow.",
       "baseline": {
         "site": null,
-        "corpus": "52157703c18a7708",
+        "corpus": "ea886f0de86b5711",
         "alignedAt": "2026-11-28"
       }
     },
