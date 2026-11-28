@@ -52,6 +52,20 @@ function sectionDirectory(root, section) {
   return { relative, absolute: directory };
 }
 
+function warn(message) {
+  // stderr: stdout porta il conteggio che lo step shell legge con $(...).
+  console.error(`::warning::pending-translation-recovery: ${message}`);
+}
+
+/** Vero se la directory pending differisce da HEAD (modifiche, aggiunte non tracciate, cancellazioni). */
+function pendingDirectoryChanged(root, relative) {
+  return execFileSync('git', ['status', '--porcelain', '--untracked-files=all', '--', relative], {
+    cwd: root,
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'ignore'],
+  }).trim() !== '';
+}
+
 function assertMissingFieldsMatch(draft) {
   const actual = missingPendingTranslationFields(draft.data).sort();
   const stored = [...draft.missingFields].sort();
@@ -71,9 +85,12 @@ export function resolveRecoverySections(spec) {
 }
 
 /**
- * Cattura lo stato pending di TUTTE le sezioni indicate. Un run puo' tentare
+ * Cattura lo stato pending delle sezioni indicate la cui directory pending e'
+ * cambiata rispetto a HEAD: le invariate le ripristina `git reset --hard` e una
+ * bozza gia' su main non deve poter bloccare il recovery. Un run puo' tentare
  * piu' sezioni (target piu' sibling): la sezione che salva la bozza non e'
- * necessariamente quella riportata in output.
+ * necessariamente quella riportata in output. Un errore di validazione resta
+ * confinato alla sezione: warning, bozza non salvata, le altre proseguono.
  */
 export function capturePendingTranslationRecovery({ root = repositoryRoot(), section, checkpointPath }) {
   const checkpoint = assertCheckpointOutsideRepository(root, checkpointPath);
@@ -81,8 +98,15 @@ export function capturePendingTranslationRecovery({ root = repositoryRoot(), sec
   let total = 0;
   for (const name of resolveRecoverySections(section)) {
     const { relative, absolute } = sectionDirectory(root, name);
-    const drafts = listPendingTranslationDrafts(absolute, name);
-    for (const draft of drafts) assertMissingFieldsMatch(draft);
+    if (!pendingDirectoryChanged(root, relative)) continue;
+    let drafts;
+    try {
+      drafts = listPendingTranslationDrafts(absolute, name);
+      for (const draft of drafts) assertMissingFieldsMatch(draft);
+    } catch (error) {
+      warn(`section '${name}': drafts not saved, validation failed: ${error?.message ?? error}`);
+      continue;
+    }
     sections[name] = { pendingTranslationDir: relative, drafts };
     total += drafts.length;
   }
@@ -108,27 +132,33 @@ export function restorePendingTranslationRecovery({ root = repositoryRoot(), sec
   }
   if (!snapshot || snapshot.schema !== CHECKPOINT_SCHEMA || !snapshot.sections
     || typeof snapshot.sections !== 'object' || Array.isArray(snapshot.sections)
-    || JSON.stringify(Object.keys(snapshot.sections).sort()) !== JSON.stringify(names)) {
+    || !Object.keys(snapshot.sections).every((name) => names.includes(name))) {
     throw new Error('pending translation checkpoint has an invalid schema or section set');
   }
 
-  const plan = names.map((name) => {
+  const plan = [];
+  for (const name of names) {
+    if (!Object.hasOwn(snapshot.sections, name)) continue;
     const { relative, absolute } = sectionDirectory(root, name);
     const entry = snapshot.sections[name];
-    if (!entry || entry.pendingTranslationDir !== relative || !Array.isArray(entry.drafts)
-      || entry.drafts.length > MAX_PENDING_TRANSLATION_DRAFTS_PER_SECTION) {
-      throw new Error('pending translation checkpoint has an invalid path or draft count');
+    try {
+      if (!entry || entry.pendingTranslationDir !== relative || !Array.isArray(entry.drafts)
+        || entry.drafts.length > MAX_PENDING_TRANSLATION_DRAFTS_PER_SECTION) {
+        throw new Error('pending translation checkpoint has an invalid path or draft count');
+      }
+      const drafts = entry.drafts.map((draft) => {
+        const validated = normalizePendingTranslationDraft(draft, name);
+        assertMissingFieldsMatch(validated);
+        return validated;
+      });
+      if (new Set(drafts.map(({ articleId }) => articleId)).size !== drafts.length) {
+        throw new Error('pending translation checkpoint has duplicate article identities');
+      }
+      plan.push({ name, relative, absolute, drafts });
+    } catch (error) {
+      warn(`section '${name}': drafts not restored, validation failed: ${error?.message ?? error}`);
     }
-    const drafts = entry.drafts.map((draft) => {
-      const validated = normalizePendingTranslationDraft(draft, name);
-      assertMissingFieldsMatch(validated);
-      return validated;
-    });
-    if (new Set(drafts.map(({ articleId }) => articleId)).size !== drafts.length) {
-      throw new Error('pending translation checkpoint has duplicate article identities');
-    }
-    return { name, relative, absolute, drafts };
-  });
+  }
 
   for (const { name, relative, absolute, drafts } of plan) {
     fs.rmSync(absolute, { recursive: true, force: true });
@@ -139,6 +169,7 @@ export function restorePendingTranslationRecovery({ root = repositoryRoot(), sec
       execFileSync('git', ['add', '-A', '--', relative], { cwd: root, stdio: 'ignore' });
     }
   }
+  if (plan.length === 0) return 0;
   const staged = execFileSync(
     'git',
     ['diff', '--cached', '--name-only', '--', ...plan.map(({ relative }) => relative)],
@@ -157,7 +188,7 @@ function main() {
     process.stdout.write(`${restorePendingTranslationRecovery({ section, checkpointPath })}\n`);
     return;
   }
-  throw new Error('usage: pending-translation-recovery.mjs <capture|restore> <section> <absolute-checkpoint-path>');
+  throw new Error('usage: pending-translation-recovery.mjs <capture|restore> <section>|all|<list> <absolute-checkpoint-path>');
 }
 
 function isMain() {

@@ -277,13 +277,89 @@ test('un draft già committato e invariato non apre un commit di recovery vuoto'
     writePendingTranslationDraft(dir, 'frontaliere', sampleDraft());
     execFileSync('git', ['-C', fixture.root, 'add', '-A'], { stdio: 'ignore' });
     execFileSync('git', ['-C', fixture.root, 'commit', '-qm', 'persisted draft'], { stdio: 'ignore' });
-    assert.equal(capturePendingTranslationRecovery({ root: fixture.root, section: 'all', checkpointPath: fixture.checkpointPath }), 1);
+    assert.equal(
+      capturePendingTranslationRecovery({ root: fixture.root, section: 'all', checkpointPath: fixture.checkpointPath }),
+      0,
+      'sezione invariata: nulla da catturare, la ripristina git reset',
+    );
     execFileSync('git', ['-C', fixture.root, 'reset', '--hard', 'HEAD'], { stdio: 'ignore' });
     assert.equal(
       restorePendingTranslationRecovery({ root: fixture.root, section: 'all', checkpointPath: fixture.checkpointPath }),
       0,
       'nessun path cambiato: il workflow non deve fare commit',
     );
+  } finally {
+    disposeFixture(fixture);
+  }
+});
+
+function commitInvalidDraft(fixture, section, articleId) {
+  const dir = path.join(fixture.root, `data/sections/${section}/pending-translation-drafts`);
+  writePendingTranslationDraft(dir, section, sampleDraftFor(section, articleId));
+  const file = path.join(dir, fs.readdirSync(dir)[0]);
+  const stored = JSON.parse(fs.readFileSync(file, 'utf8'));
+  stored.missingFields = ['en.title']; // non piu' coerente con il testo salvato
+  fs.writeFileSync(file, `${JSON.stringify(stored, null, 2)}\n`);
+  execFileSync('git', ['-C', fixture.root, 'add', '-A'], { stdio: 'ignore' });
+  execFileSync('git', ['-C', fixture.root, 'commit', '-qm', 'committed draft now invalid'], { stdio: 'ignore' });
+  return dir;
+}
+
+function captureResetRestore(fixture) {
+  const args = { root: fixture.root, section: 'all', checkpointPath: fixture.checkpointPath };
+  const captured = capturePendingTranslationRecovery(args);
+  execFileSync('git', ['-C', fixture.root, 'reset', '--hard', 'HEAD'], { stdio: 'ignore' });
+  execFileSync('git', ['-C', fixture.root, 'clean', '-fd'], { stdio: 'ignore' });
+  const staged = restorePendingTranslationRecovery(args);
+  const names = execFileSync('git', ['-C', fixture.root, 'diff', '--cached', '--name-only'], { encoding: 'utf8' })
+    .trim().split('\n').filter(Boolean);
+  return { captured, staged, names };
+}
+
+test('una bozza invalida in una sezione non toccata non blocca capture/restore delle altre', () => {
+  const fixture = initFixtureRepo();
+  try {
+    commitInvalidDraft(fixture, 'frontaliere', 'untouched-invalid');
+    const touched = path.join(fixture.root, 'data/sections/svizzera/pending-translation-drafts');
+    writePendingTranslationDraft(touched, 'svizzera', claimPendingTranslationDraft(
+      sampleDraftFor('svizzera', 'touched-valid'),
+      { now: '2026-11-28T12:01:00.000Z' },
+    ));
+    const { captured, staged, names } = captureResetRestore(fixture);
+    assert.equal(captured, 1);
+    assert.equal(staged, 1);
+    assert.equal(names.length, 1);
+    assert.match(names[0], /^data\/sections\/svizzera\/pending-translation-drafts\//u,
+      'il commit di recovery contiene solo la sezione toccata');
+  } finally {
+    disposeFixture(fixture);
+  }
+});
+
+test('una bozza invalida nella sezione toccata e\' confinata: warning, le altre sezioni e discovery-attempt-state restano', () => {
+  const fixture = initFixtureRepo();
+  try {
+    const invalidDir = commitInvalidDraft(fixture, 'frontaliere', 'touched-invalid');
+    // Il run tocca la sezione gia' invalida (nuova bozza non tracciata) e una valida.
+    writePendingTranslationDraft(invalidDir, 'frontaliere', sampleDraftFor('frontaliere', 'touched-invalid-new'));
+    const goodDir = path.join(fixture.root, 'data/sections/svizzera/pending-translation-drafts');
+    writePendingTranslationDraft(goodDir, 'svizzera', sampleDraftFor('svizzera', 'touched-good'));
+    const warnings = [];
+    const original = console.error;
+    console.error = (message) => warnings.push(String(message));
+    let result;
+    try {
+      result = captureResetRestore(fixture);
+    } finally {
+      console.error = original;
+    }
+    assert.equal(result.captured, 1);
+    assert.equal(result.staged, 1);
+    assert.match(result.names[0], /\/svizzera\/pending-translation-drafts\//u);
+    assert.ok(warnings.some((line) => /^::warning::.*section 'frontaliere'.*validation failed/u.test(line)),
+      `warning atteso, ricevuto: ${warnings.join(' | ')}`);
+    // discovery-attempt-state non e' toccato dal recovery delle bozze.
+    assert.equal(fs.readFileSync(path.join(fixture.root, 'data/discovery-attempt-state.json'), 'utf8'), '{"schema":1}\n');
   } finally {
     disposeFixture(fixture);
   }
