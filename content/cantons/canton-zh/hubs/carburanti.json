@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "carburanti",
-  "updatedAt": "2026-11-26T23:51:27.867Z",
-  "contentHash": "872a2dc7770495c64325b2cbc4cabb3d7baf6bcf1f0977499dcae14fb00295ac",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "c4d8bf848b3cdd137fbbad4e02bec85add9d674c70a537d339fff33c521de1a4",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-26T17:17:35.133Z",
+      "updatedAt": "2026-11-27T16:58:07.780Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,19 +54,19 @@
             },
             {
               "label": "Benzina 95 — Germania",
-              "value": "1,911 EUR/l",
+              "value": "1,915 EUR/l",
               "detail": "media regionale: minimo 1,890 EUR/l, 9 stazioni rilevate",
-              "date": "2026-11-26T17:17:35.133Z"
+              "date": "2026-11-27T16:58:07.780Z"
             },
             {
               "label": "Diesel — Germania",
-              "value": "2,135 EUR/l",
-              "detail": "media regionale: minimo 2,099 EUR/l, 9 stazioni rilevate",
-              "date": "2026-11-26T17:17:35.133Z"
+              "value": "2,159 EUR/l",
+              "detail": "media regionale: minimo 2,129 EUR/l, 9 stazioni rilevate",
+              "date": "2026-11-27T16:58:07.780Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-26T17:17:35.133Z"
+          "updatedAt": "2026-11-27T16:58:07.780Z"
         }
       ],
       "curatedArticles": [
@@ -88,7 +88,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-26T23:51:27.867Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "ZH",
@@ -129,19 +129,19 @@
             },
             {
               "label": "Petrol 95 — Germany",
-              "value": "1.911 EUR/l",
+              "value": "1.915 EUR/l",
               "detail": "regional average: lowest 1.890 EUR/l, 9 stations surveyed",
-              "date": "2026-11-26T17:17:35.133Z"
+              "date": "2026-11-27T16:58:07.780Z"
             },
             {
               "label": "Diesel — Germany",
-              "value": "2.135 EUR/l",
-              "detail": "regional average: lowest 2.099 EUR/l, 9 stations surveyed",
-              "date": "2026-11-26T17:17:35.133Z"
+              "value": "2.159 EUR/l",
+              "detail": "regional average: lowest 2.129 EUR/l, 9 stations surveyed",
+              "date": "2026-11-27T16:58:07.780Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-26T17:17:35.133Z"
+          "updatedAt": "2026-11-27T16:58:07.780Z"
         }
       ],
       "curatedArticles": [
@@ -163,7 +163,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-26T23:51:27.867Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "ZH",
@@ -204,19 +204,19 @@
             },
             {
               "label": "Benzin 95 — Deutschland",
-              "value": "1.911 EUR/l",
+              "value": "1.915 EUR/l",
               "detail": "regionaler Durchschnitt: tiefster Preis 1.890 EUR/l, 9 erfasste Tankstellen",
-              "date": "2026-11-26T17:17:35.133Z"
+              "date": "2026-11-27T16:58:07.780Z"
             },
             {
               "label": "Diesel — Deutschland",
-              "value": "2.135 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.099 EUR/l, 9 erfasste Tankstellen",
-              "date": "2026-11-26T17:17:35.133Z"
+              "value": "2.159 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.129 EUR/l, 9 erfasste Tankstellen",
+              "date": "2026-11-27T16:58:07.780Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-26T17:17:35.133Z"
+          "updatedAt": "2026-11-27T16:58:07.780Z"
         }
       ],
       "curatedArticles": [
@@ -238,7 +238,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-26T23:51:27.867Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "ZH",
@@ -279,19 +279,19 @@
             },
             {
               "label": "Essence 95 — Allemagne",
-              "value": "1,911 EUR/l",
+              "value": "1,915 EUR/l",
               "detail": "moyenne régionale : prix le plus bas 1,890 EUR/l, 9 stations relevées",
-              "date": "2026-11-26T17:17:35.133Z"
+              "date": "2026-11-27T16:58:07.780Z"
             },
             {
               "label": "Diesel — Allemagne",
-              "value": "2,135 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,099 EUR/l, 9 stations relevées",
-              "date": "2026-11-26T17:17:35.133Z"
+              "value": "2,159 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,129 EUR/l, 9 stations relevées",
+              "date": "2026-11-27T16:58:07.780Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-26T17:17:35.133Z"
+          "updatedAt": "2026-11-27T16:58:07.780Z"
         }
       ],
       "curatedArticles": [
@@ -313,7 +313,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-26T23:51:27.867Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

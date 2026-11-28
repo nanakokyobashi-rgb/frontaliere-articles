@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-11-27T23:05:38.141Z",
-  "contentHash": "70f48629abdfd7d207e2936eab0a777f236fd831f015fd9490fa03408920fc36",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "6d4c5c7ada20ac243d237cb172b143553b46ce396c6dca9c4e72beaa2c33c641",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-27T04:32:14.428Z",
+      "updatedAt": "2026-11-27T14:17:21.889Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-11-27T14:03:11.265Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-27T01:13:06.824Z",
+      "updatedAt": "2026-11-27T15:38:08.536Z",
       "keyFacts": 0
     }
   ],
@@ -91,13 +96,32 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-27T04:32:14.428Z"
+          "updatedAt": "2026-11-27T14:17:21.889Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "7 °C",
+              "detail": "oggi da 2 a 7 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-27T14:03:11.265Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Crack à Genève: le canton renforce la réduction des risques et ouvre de nouvelles perspectives de traitement",
+              "date": "2026-11-27",
+              "url": "https://www.ge.ch/node/45572"
+            },
             {
               "label": "Vous avez désormais accès à un suivi de vos formations en santé et sécurité au travail",
               "date": "2026-11-25",
@@ -122,14 +146,9 @@
               "label": "Le site de l'Observatoire statistique transfrontalier fait peau neuve",
               "date": "2026-11-24",
               "url": "https://www.crfginfo.org/fr/actualites/le-site-de-lobservatoire-statistique-transfrontalier-fait-peau-neuve"
-            },
-            {
-              "label": "Santé mentale : un nouveau dispositif en ligne pour aider les jeunes",
-              "date": "2026-11-20",
-              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19151"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-27T23:05:38.141Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "GE",
@@ -278,13 +297,32 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-27T04:32:14.428Z"
+          "updatedAt": "2026-11-27T14:17:21.889Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "7 °C",
+              "detail": "today from 2 to 7 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-27T14:03:11.265Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Crack à Genève: le canton renforce la réduction des risques et ouvre de nouvelles perspectives de traitement",
+              "date": "2026-11-27",
+              "url": "https://www.ge.ch/node/45572"
+            },
             {
               "label": "Vous avez désormais accès à un suivi de vos formations en santé et sécurité au travail",
               "date": "2026-11-25",
@@ -309,14 +347,9 @@
               "label": "Le site de l'Observatoire statistique transfrontalier fait peau neuve",
               "date": "2026-11-24",
               "url": "https://www.crfginfo.org/fr/actualites/le-site-de-lobservatoire-statistique-transfrontalier-fait-peau-neuve"
-            },
-            {
-              "label": "Santé mentale : un nouveau dispositif en ligne pour aider les jeunes",
-              "date": "2026-11-20",
-              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19151"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -391,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-27T23:05:38.141Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "GE",
@@ -460,13 +493,32 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-27T04:32:14.428Z"
+          "updatedAt": "2026-11-27T14:17:21.889Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "7 °C",
+              "detail": "heute 2 bis 7 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-27T14:03:11.265Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Crack à Genève: le canton renforce la réduction des risques et ouvre de nouvelles perspectives de traitement",
+              "date": "2026-11-27",
+              "url": "https://www.ge.ch/node/45572"
+            },
             {
               "label": "Vous avez désormais accès à un suivi de vos formations en santé et sécurité au travail",
               "date": "2026-11-25",
@@ -491,14 +543,9 @@
               "label": "Le site de l'Observatoire statistique transfrontalier fait peau neuve",
               "date": "2026-11-24",
               "url": "https://www.crfginfo.org/fr/actualites/le-site-de-lobservatoire-statistique-transfrontalier-fait-peau-neuve"
-            },
-            {
-              "label": "Santé mentale : un nouveau dispositif en ligne pour aider les jeunes",
-              "date": "2026-11-20",
-              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19151"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -573,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-27T23:05:38.141Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "GE",
@@ -642,13 +689,32 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-27T04:32:14.428Z"
+          "updatedAt": "2026-11-27T14:17:21.889Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "7 °C",
+              "detail": "aujourd’hui de 2 à 7 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-27T14:03:11.265Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Crack à Genève: le canton renforce la réduction des risques et ouvre de nouvelles perspectives de traitement",
+              "date": "2026-11-27",
+              "url": "https://www.ge.ch/node/45572"
+            },
             {
               "label": "Vous avez désormais accès à un suivi de vos formations en santé et sécurité au travail",
               "date": "2026-11-25",
@@ -673,14 +739,9 @@
               "label": "Le site de l'Observatoire statistique transfrontalier fait peau neuve",
               "date": "2026-11-24",
               "url": "https://www.crfginfo.org/fr/actualites/le-site-de-lobservatoire-statistique-transfrontalier-fait-peau-neuve"
-            },
-            {
-              "label": "Santé mentale : un nouveau dispositif en ligne pour aider les jeunes",
-              "date": "2026-11-20",
-              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19151"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -752,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-27T23:05:38.141Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

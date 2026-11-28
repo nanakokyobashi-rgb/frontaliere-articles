@@ -4,17 +4,17 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-11-27T04:41:16.871Z",
-  "contentHash": "af48027873df1fa120c8504bceda2caba9760814b773e037c532bcd99e45bf2b",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "edb8a5e21b2f132541ea31c7b1a3384105f1986e532c7c3af0ce3d59c71ef791",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T16:33:33.919Z",
+      "updatedAt": "2026-11-27T16:21:34.268Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T15:51:00.529Z",
+      "updatedAt": "2026-11-27T15:38:08.536Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "308",
+          "value": "290",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Adventskranz, Gesteck oder Türkranz - selbst gemacht!",
-              "detail": "Tann, Dürnten",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-gesteck-oder-tuerkranz-selbst-gemacht/"
+              "label": "Hallenturnier FC Uitikon",
+              "detail": "Schulhaus Allmend, Uitikon",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hallenturnier-fc-uitikon/"
             },
             {
-              "label": "Degustations- & Verkaufstage bei Weinbau Familie Brunner",
-              "detail": "Kleinandelfingen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/degustations-verkaufstage-bei-weinbau-familie-brunner/"
+              "label": "Adventsverkauf",
+              "detail": "Stadthaussaal Effretikon, Illnau-Effretikon",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsverkauf/"
             },
             {
-              "label": "Hands-on",
-              "detail": "Winterthur",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hands-on/"
+              "label": "Informationsevent ADHS / ADS Schweiz",
+              "detail": "Rüti ZH",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/informationsevent-adhs-ads-schweiz/"
             },
             {
-              "label": "ETOP Annual Meeting 2026",
-              "detail": "Dorint Airport-Hotel Zürich, Opfikon",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/opfikon/etop-annual-meeting-2026_AqdKesg"
+              "label": "Einhorn-Guezli verzieren am Chlausmärt Dübendorf",
+              "detail": "Dübendorf",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/einhorn-guezli-verzieren-am-chlausmaert-duebendorf/"
             },
             {
-              "label": "Dietiker Weihnachtsmarkt und Samichlaus-Einzug",
-              "detail": "Kirchplatz, Dietikon",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/dietiker-weihnachtsmarkt-und-samichlaus-einzug/"
+              "label": "Verein für Familiengärten VFD am Dübendorfer Chlausmärt 2026",
+              "detail": "Stadthausplatz, Dübendorf",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/verein-fuer-familiengaerten-vfd-am-duebendorfer-chlausmaert-2026/"
             },
             {
-              "label": "ETOP Annual Meeting 2026",
-              "detail": "Dorint Airport-Hotel Zürich, Zürich",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/etop-annual-meeting-2026/"
+              "label": "Captain Silberzahn - Das Familienmusical",
+              "detail": "Arche Winti, Winterthur",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/captain-silberzahn-das-familienmusical_A84EZW6"
             },
             {
-              "label": "Fondue-Genuss im historischen Buffetwagen",
-              "detail": "Saland, Bauma",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fondue-genuss-im-historischen-buffetwagen/"
+              "label": "Innenwelten - Zwischen Pinsel und Pixel",
+              "detail": "Kunsthaus Zürich Chipperfield-Bau, Zürich",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/innenwelten-zwischen-pinsel-und-pixel/"
             },
             {
-              "label": "Durchatmen",
-              "detail": "Kloten",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/durchatmen/"
+              "label": "Workshop Ballette entdecken «Romeo und Julia»",
+              "detail": "Opernhaus, Zürich",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/workshop-ballette-entdecken-romeo-und-julia/"
             },
             {
-              "label": "Adventskranzen",
-              "detail": "Dietikon",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranzen/"
+              "label": "«சக்கரை நிலவே காணும் போதே கரையாதே!»",
+              "detail": "PBZ Pestalozzi-Bibliothek Schwamendingen",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/-_AUcwngq"
             },
             {
-              "label": "Casino Night",
-              "detail": "Pfäffikon ZH, Pfäffikon",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/casino-night/"
+              "label": "Cristina Ginocchio, Anita Bürgi, Gabi Huldi – Malerei",
+              "detail": "Uster",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cristina-ginocchio-anita-buergi-gabi-huldi-malerei/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/11/erhoehung-staedtische-beitraege-zurich-film-festival.html"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -141,7 +141,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "ZH",
@@ -151,7 +151,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "308",
+          "value": "290",
           "note": "from the site’s events calendar"
         }
       ],
@@ -162,69 +162,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Adventskranz, Gesteck oder Türkranz - selbst gemacht!",
-              "detail": "Tann, Dürnten",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-gesteck-oder-tuerkranz-selbst-gemacht/"
+              "label": "Hallenturnier FC Uitikon",
+              "detail": "Schulhaus Allmend, Uitikon",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hallenturnier-fc-uitikon/"
             },
             {
-              "label": "Degustations- & Verkaufstage bei Weinbau Familie Brunner",
-              "detail": "Kleinandelfingen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/degustations-verkaufstage-bei-weinbau-familie-brunner/"
+              "label": "Adventsverkauf",
+              "detail": "Stadthaussaal Effretikon, Illnau-Effretikon",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsverkauf/"
             },
             {
-              "label": "Hands-on",
-              "detail": "Winterthur",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hands-on/"
+              "label": "Informationsevent ADHS / ADS Schweiz",
+              "detail": "Rüti ZH",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/informationsevent-adhs-ads-schweiz/"
             },
             {
-              "label": "ETOP Annual Meeting 2026",
-              "detail": "Dorint Airport-Hotel Zürich, Opfikon",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/opfikon/etop-annual-meeting-2026_AqdKesg"
+              "label": "Einhorn-Guezli verzieren am Chlausmärt Dübendorf",
+              "detail": "Dübendorf",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/einhorn-guezli-verzieren-am-chlausmaert-duebendorf/"
             },
             {
-              "label": "Dietiker Weihnachtsmarkt und Samichlaus-Einzug",
-              "detail": "Kirchplatz, Dietikon",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/dietiker-weihnachtsmarkt-und-samichlaus-einzug/"
+              "label": "Verein für Familiengärten VFD am Dübendorfer Chlausmärt 2026",
+              "detail": "Stadthausplatz, Dübendorf",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/verein-fuer-familiengaerten-vfd-am-duebendorfer-chlausmaert-2026/"
             },
             {
-              "label": "ETOP Annual Meeting 2026",
-              "detail": "Dorint Airport-Hotel Zürich, Zürich",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/etop-annual-meeting-2026/"
+              "label": "Captain Silberzahn - Das Familienmusical",
+              "detail": "Arche Winti, Winterthur",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/captain-silberzahn-das-familienmusical_A84EZW6"
             },
             {
-              "label": "Fondue-Genuss im historischen Buffetwagen",
-              "detail": "Saland, Bauma",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fondue-genuss-im-historischen-buffetwagen/"
+              "label": "Innenwelten - Zwischen Pinsel und Pixel",
+              "detail": "Kunsthaus Zürich Chipperfield-Bau, Zürich",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/innenwelten-zwischen-pinsel-und-pixel/"
             },
             {
-              "label": "Durchatmen",
-              "detail": "Kloten",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/durchatmen/"
+              "label": "Workshop Ballette entdecken «Romeo und Julia»",
+              "detail": "Opernhaus, Zürich",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/workshop-ballette-entdecken-romeo-und-julia/"
             },
             {
-              "label": "Adventskranzen",
-              "detail": "Dietikon",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranzen/"
+              "label": "«சக்கரை நிலவே காணும் போதே கரையாதே!»",
+              "detail": "PBZ Pestalozzi-Bibliothek Schwamendingen",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/-_AUcwngq"
             },
             {
-              "label": "Casino Night",
-              "detail": "Pfäffikon ZH, Pfäffikon",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/casino-night/"
+              "label": "Cristina Ginocchio, Anita Bürgi, Gabi Huldi – Malerei",
+              "detail": "Uster",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cristina-ginocchio-anita-buergi-gabi-huldi-malerei/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -237,7 +237,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/11/erhoehung-staedtische-beitraege-zurich-film-festival.html"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -265,7 +265,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "ZH",
@@ -275,7 +275,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "308",
+          "value": "290",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -286,69 +286,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Adventskranz, Gesteck oder Türkranz - selbst gemacht!",
-              "detail": "Tann, Dürnten",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-gesteck-oder-tuerkranz-selbst-gemacht/"
+              "label": "Hallenturnier FC Uitikon",
+              "detail": "Schulhaus Allmend, Uitikon",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hallenturnier-fc-uitikon/"
             },
             {
-              "label": "Degustations- & Verkaufstage bei Weinbau Familie Brunner",
-              "detail": "Kleinandelfingen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/degustations-verkaufstage-bei-weinbau-familie-brunner/"
+              "label": "Adventsverkauf",
+              "detail": "Stadthaussaal Effretikon, Illnau-Effretikon",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsverkauf/"
             },
             {
-              "label": "Hands-on",
-              "detail": "Winterthur",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hands-on/"
+              "label": "Informationsevent ADHS / ADS Schweiz",
+              "detail": "Rüti ZH",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/informationsevent-adhs-ads-schweiz/"
             },
             {
-              "label": "ETOP Annual Meeting 2026",
-              "detail": "Dorint Airport-Hotel Zürich, Opfikon",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/opfikon/etop-annual-meeting-2026_AqdKesg"
+              "label": "Einhorn-Guezli verzieren am Chlausmärt Dübendorf",
+              "detail": "Dübendorf",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/einhorn-guezli-verzieren-am-chlausmaert-duebendorf/"
             },
             {
-              "label": "Dietiker Weihnachtsmarkt und Samichlaus-Einzug",
-              "detail": "Kirchplatz, Dietikon",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/dietiker-weihnachtsmarkt-und-samichlaus-einzug/"
+              "label": "Verein für Familiengärten VFD am Dübendorfer Chlausmärt 2026",
+              "detail": "Stadthausplatz, Dübendorf",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/verein-fuer-familiengaerten-vfd-am-duebendorfer-chlausmaert-2026/"
             },
             {
-              "label": "ETOP Annual Meeting 2026",
-              "detail": "Dorint Airport-Hotel Zürich, Zürich",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/etop-annual-meeting-2026/"
+              "label": "Captain Silberzahn - Das Familienmusical",
+              "detail": "Arche Winti, Winterthur",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/captain-silberzahn-das-familienmusical_A84EZW6"
             },
             {
-              "label": "Fondue-Genuss im historischen Buffetwagen",
-              "detail": "Saland, Bauma",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fondue-genuss-im-historischen-buffetwagen/"
+              "label": "Innenwelten - Zwischen Pinsel und Pixel",
+              "detail": "Kunsthaus Zürich Chipperfield-Bau, Zürich",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/innenwelten-zwischen-pinsel-und-pixel/"
             },
             {
-              "label": "Durchatmen",
-              "detail": "Kloten",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/durchatmen/"
+              "label": "Workshop Ballette entdecken «Romeo und Julia»",
+              "detail": "Opernhaus, Zürich",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/workshop-ballette-entdecken-romeo-und-julia/"
             },
             {
-              "label": "Adventskranzen",
-              "detail": "Dietikon",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranzen/"
+              "label": "«சக்கரை நிலவே காணும் போதே கரையாதே!»",
+              "detail": "PBZ Pestalozzi-Bibliothek Schwamendingen",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/-_AUcwngq"
             },
             {
-              "label": "Casino Night",
-              "detail": "Pfäffikon ZH, Pfäffikon",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/casino-night/"
+              "label": "Cristina Ginocchio, Anita Bürgi, Gabi Huldi – Malerei",
+              "detail": "Uster",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cristina-ginocchio-anita-buergi-gabi-huldi-malerei/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -361,7 +361,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/11/erhoehung-staedtische-beitraege-zurich-film-festival.html"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -389,7 +389,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "ZH",
@@ -399,7 +399,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "308",
+          "value": "290",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -410,69 +410,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Adventskranz, Gesteck oder Türkranz - selbst gemacht!",
-              "detail": "Tann, Dürnten",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranz-gesteck-oder-tuerkranz-selbst-gemacht/"
+              "label": "Hallenturnier FC Uitikon",
+              "detail": "Schulhaus Allmend, Uitikon",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hallenturnier-fc-uitikon/"
             },
             {
-              "label": "Degustations- & Verkaufstage bei Weinbau Familie Brunner",
-              "detail": "Kleinandelfingen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/degustations-verkaufstage-bei-weinbau-familie-brunner/"
+              "label": "Vente de l'Avent",
+              "detail": "Stadthaussaal Effretikon, Illnau-Effretikon",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/adventsverkauf/"
             },
             {
-              "label": "Hands-on",
-              "detail": "Winterthur",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hands-on/"
+              "label": "Informationsevent ADHS / ADS Schweiz",
+              "detail": "Rüti ZH",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/informationsevent-adhs-ads-schweiz/"
             },
             {
-              "label": "ETOP Annual Meeting 2026",
-              "detail": "Dorint Airport-Hotel Zürich, Opfikon",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/opfikon/etop-annual-meeting-2026_AqdKesg"
+              "label": "Einhorn-Guezli verzieren am Chlausmärt Dübendorf",
+              "detail": "Dübendorf",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/einhorn-guezli-verzieren-am-chlausmaert-duebendorf/"
             },
             {
-              "label": "Dietiker Weihnachtsmarkt und Samichlaus-Einzug",
-              "detail": "Kirchplatz, Dietikon",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/dietiker-weihnachtsmarkt-und-samichlaus-einzug/"
+              "label": "Verein für Familiengärten VFD am Dübendorfer Chlausmärt 2026",
+              "detail": "Stadthausplatz, Dübendorf",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/verein-fuer-familiengaerten-vfd-am-duebendorfer-chlausmaert-2026/"
             },
             {
-              "label": "ETOP Annual Meeting 2026",
-              "detail": "Dorint Airport-Hotel Zürich, Zürich",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/etop-annual-meeting-2026/"
+              "label": "Captain Silberzahn - Das Familienmusical",
+              "detail": "Arche Winti, Winterthur",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/captain-silberzahn-das-familienmusical_A84EZW6"
             },
             {
-              "label": "Fondue-Genuss im historischen Buffetwagen",
-              "detail": "Saland, Bauma",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fondue-genuss-im-historischen-buffetwagen/"
+              "label": "Innenwelten - Zwischen Pinsel und Pixel",
+              "detail": "Kunsthaus Zürich Chipperfield-Bau, Zürich",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/innenwelten-zwischen-pinsel-und-pixel/"
             },
             {
-              "label": "Durchatmen",
-              "detail": "Kloten",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/durchatmen/"
+              "label": "Workshop Ballette entdecken «Romeo und Julia»",
+              "detail": "Opernhaus, Zürich",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/workshop-ballette-entdecken-romeo-und-julia/"
             },
             {
-              "label": "Adventskranzen",
-              "detail": "Dietikon",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranzen/"
+              "label": "«சக்கரை நிலவே காணும் போதே கரையாதே!»",
+              "detail": "PBZ Pestalozzi-Bibliothek Schwamendingen",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/-_AUcwngq"
             },
             {
-              "label": "Casino Night",
-              "detail": "Pfäffikon ZH, Pfäffikon",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/casino-night/"
+              "label": "Cristina Ginocchio, Anita Bürgi, Gabi Huldi – Malerei",
+              "detail": "Uster",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cristina-ginocchio-anita-buergi-gabi-huldi-malerei/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -485,7 +485,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/11/erhoehung-staedtische-beitraege-zurich-film-festival.html"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -513,7 +513,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T14:54:45.873Z",
-  "contentHash": "2e37024cee8e35a7ce6f89abfaf2e8cbe78c13224bc795e1c2fd6146936a43d0",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "afff7ee3c203928d454817c8720fae84020effcf6b8333dbcf0440863da83b79",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-27T00:05:50.684Z",
+      "updatedAt": "2026-11-27T09:11:52.310Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-27T01:13:06.824Z",
+      "updatedAt": "2026-11-27T15:38:08.536Z",
       "keyFacts": 0
     }
   ],
@@ -135,13 +135,23 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Statale 337 della Valle Vigezzo, senso unico alternato prorogato fino al 4 dicembre",
+              "date": "2026-11-27T14:26:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/27/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-senso-unico-alternato-prorogato-fino-al-4-dicembre.html"
+            },
+            {
+              "label": "In calo il tasso di utilizzo della capacità del corridoio del Sempione: in sei mesi è stato solo del 26,3 per cento",
+              "date": "2026-11-27T11:03:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/27/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/nettamente-calato-il-tasso-di-utilizzo-della-capacita-del-corridoio-del-sempione-in-sei-mesi-e-st.html"
+            },
             {
               "label": "Sempione, Italia Viva incalza la Regione: “Ora Gabusi venga a riferire in Aula”",
               "date": "2026-11-25T16:06:31.000Z",
@@ -161,19 +171,9 @@
               "label": "Sempione, Borghi lancia tre allarmi: “L’economia dell’Ossola rischia di finire in ginocchio”",
               "date": "2026-11-24T18:00:00.000Z",
               "url": "https://www.ossolanews.it/2026/11/24/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/sempione-borghi-lancia-tre-allarmi-leconomia-dellossola-rischia-di-finire-in-ginocchio-1.html"
-            },
-            {
-              "label": "Incidente sulla SS 549, riaperta la strada a Calasca Castiglione",
-              "date": "2026-11-24T15:47:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/24/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/incidente-sulla-ss-549-riaperta-la-strada-a-calasca-castiglione.html"
-            },
-            {
-              "label": "Tir blocca la statale per Macugnaga, traffico interrotto in entrambe le direzioni",
-              "date": "2026-11-24T11:35:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/24/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/tir-blocca-la-statale-per-macugnaga-traffico-interrotto-in-entrambe-le-direzioni.html"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -243,7 +243,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "VS",
@@ -356,13 +356,23 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Statale 337 della Valle Vigezzo, senso unico alternato prorogato fino al 4 dicembre",
+              "date": "2026-11-27T14:26:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/27/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-senso-unico-alternato-prorogato-fino-al-4-dicembre.html"
+            },
+            {
+              "label": "In calo il tasso di utilizzo della capacità del corridoio del Sempione: in sei mesi è stato solo del 26,3 per cento",
+              "date": "2026-11-27T11:03:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/27/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/nettamente-calato-il-tasso-di-utilizzo-della-capacita-del-corridoio-del-sempione-in-sei-mesi-e-st.html"
+            },
             {
               "label": "Sempione, Italia Viva incalza la Regione: “Ora Gabusi venga a riferire in Aula”",
               "date": "2026-11-25T16:06:31.000Z",
@@ -382,19 +392,9 @@
               "label": "Sempione, Borghi lancia tre allarmi: “L’economia dell’Ossola rischia di finire in ginocchio”",
               "date": "2026-11-24T18:00:00.000Z",
               "url": "https://www.ossolanews.it/2026/11/24/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/sempione-borghi-lancia-tre-allarmi-leconomia-dellossola-rischia-di-finire-in-ginocchio-1.html"
-            },
-            {
-              "label": "Incidente sulla SS 549, riaperta la strada a Calasca Castiglione",
-              "date": "2026-11-24T15:47:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/24/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/incidente-sulla-ss-549-riaperta-la-strada-a-calasca-castiglione.html"
-            },
-            {
-              "label": "Tir blocca la statale per Macugnaga, traffico interrotto in entrambe le direzioni",
-              "date": "2026-11-24T11:35:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/24/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/tir-blocca-la-statale-per-macugnaga-traffico-interrotto-in-entrambe-le-direzioni.html"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -464,7 +464,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "VS",
@@ -577,13 +577,23 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Statale 337 della Valle Vigezzo, senso unico alternato prorogato fino al 4 dicembre",
+              "date": "2026-11-27T14:26:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/27/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-senso-unico-alternato-prorogato-fino-al-4-dicembre.html"
+            },
+            {
+              "label": "In calo il tasso di utilizzo della capacità del corridoio del Sempione: in sei mesi è stato solo del 26,3 per cento",
+              "date": "2026-11-27T11:03:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/27/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/nettamente-calato-il-tasso-di-utilizzo-della-capacita-del-corridoio-del-sempione-in-sei-mesi-e-st.html"
+            },
             {
               "label": "Sempione, Italia Viva incalza la Regione: “Ora Gabusi venga a riferire in Aula”",
               "date": "2026-11-25T16:06:31.000Z",
@@ -603,19 +613,9 @@
               "label": "Sempione, Borghi lancia tre allarmi: “L’economia dell’Ossola rischia di finire in ginocchio”",
               "date": "2026-11-24T18:00:00.000Z",
               "url": "https://www.ossolanews.it/2026/11/24/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/sempione-borghi-lancia-tre-allarmi-leconomia-dellossola-rischia-di-finire-in-ginocchio-1.html"
-            },
-            {
-              "label": "Incidente sulla SS 549, riaperta la strada a Calasca Castiglione",
-              "date": "2026-11-24T15:47:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/24/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/incidente-sulla-ss-549-riaperta-la-strada-a-calasca-castiglione.html"
-            },
-            {
-              "label": "Tir blocca la statale per Macugnaga, traffico interrotto in entrambe le direzioni",
-              "date": "2026-11-24T11:35:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/24/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/tir-blocca-la-statale-per-macugnaga-traffico-interrotto-in-entrambe-le-direzioni.html"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -685,7 +685,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "VS",
@@ -798,13 +798,23 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Statale 337 della Valle Vigezzo, senso unico alternato prorogato fino al 4 dicembre",
+              "date": "2026-11-27T14:26:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/27/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-senso-unico-alternato-prorogato-fino-al-4-dicembre.html"
+            },
+            {
+              "label": "In calo il tasso di utilizzo della capacità del corridoio del Sempione: in sei mesi è stato solo del 26,3 per cento",
+              "date": "2026-11-27T11:03:00.000Z",
+              "url": "https://www.ossolanews.it/2026/11/27/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/nettamente-calato-il-tasso-di-utilizzo-della-capacita-del-corridoio-del-sempione-in-sei-mesi-e-st.html"
+            },
             {
               "label": "Sempione, Italia Viva incalza la Regione: “Ora Gabusi venga a riferire in Aula”",
               "date": "2026-11-25T16:06:31.000Z",
@@ -824,19 +834,9 @@
               "label": "Sempione, Borghi lancia tre allarmi: “L’economia dell’Ossola rischia di finire in ginocchio”",
               "date": "2026-11-24T18:00:00.000Z",
               "url": "https://www.ossolanews.it/2026/11/24/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/sempione-borghi-lancia-tre-allarmi-leconomia-dellossola-rischia-di-finire-in-ginocchio-1.html"
-            },
-            {
-              "label": "Incidente sulla SS 549, riaperta la strada a Calasca Castiglione",
-              "date": "2026-11-24T15:47:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/24/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/incidente-sulla-ss-549-riaperta-la-strada-a-calasca-castiglione.html"
-            },
-            {
-              "label": "Tir blocca la statale per Macugnaga, traffico interrotto in entrambe le direzioni",
-              "date": "2026-11-24T11:35:00.000Z",
-              "url": "https://www.ossolanews.it/2026/11/24/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/tir-blocca-la-statale-per-macugnaga-traffico-interrotto-in-entrambe-le-direzioni.html"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -906,7 +906,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

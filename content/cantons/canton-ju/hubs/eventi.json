@@ -4,12 +4,12 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "eventi",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "fae3cff78f986ae2be6287013197c41c7445183c7d8ef78e571d9900a648bb24",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "bb2b28192c41b17be87ca7f1925d6863ec0a3693f2b9c6f274d6fd38b8c9ec33",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T00:32:00.223Z",
+      "updatedAt": "2026-11-27T16:21:34.268Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "7",
+          "value": "6",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,12 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Bourvil en chanson",
-              "detail": "Vicques",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bourvil-en-chanson/"
-            },
             {
               "label": "Monsieur Bosseigne chez la BFM",
               "detail": "Saignelégier",
@@ -77,7 +71,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/giura/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -105,7 +99,7 @@
           "url": "/eventi/giura/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "JU",
@@ -115,7 +109,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "7",
+          "value": "6",
           "note": "from the site’s events calendar"
         }
       ],
@@ -125,12 +119,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Bourvil en chanson",
-              "detail": "Vicques",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bourvil-en-chanson/"
-            },
             {
               "label": "Monsieur Bosseigne chez la BFM",
               "detail": "Saignelégier",
@@ -170,7 +158,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/jura/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -198,7 +186,7 @@
           "url": "/en/events/jura/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "JU",
@@ -208,7 +196,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "7",
+          "value": "6",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -218,12 +206,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Bourvil en chanson",
-              "detail": "Vicques",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bourvil-en-chanson/"
-            },
             {
               "label": "Monsieur Bosseigne chez la BFM",
               "detail": "Saignelégier",
@@ -263,7 +245,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/jura/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -291,7 +273,7 @@
           "url": "/de/veranstaltungen/jura/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "JU",
@@ -301,7 +283,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "7",
+          "value": "6",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -311,12 +293,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Bourvil en chanson",
-              "detail": "Vicques",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bourvil-en-chanson/"
-            },
             {
               "label": "Monsieur Bosseigne chez la BFM",
               "detail": "Saignelégier",
@@ -356,7 +332,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/jura/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -384,7 +360,7 @@
           "url": "/fr/evenements/jura/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

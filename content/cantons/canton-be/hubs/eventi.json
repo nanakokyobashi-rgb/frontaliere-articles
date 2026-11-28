@@ -4,17 +4,17 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-11-27T04:41:16.871Z",
-  "contentHash": "cb8a54a5bc915029c39569c7af6ac633a90de62ecaf62c7e4ab12b54023f71da",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "8213ff8921dc12f393a9d50cfc72f1300d60da3a16348bf0551be7e402545223",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T16:33:33.919Z",
+      "updatedAt": "2026-11-27T16:21:34.268Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T15:51:00.529Z",
+      "updatedAt": "2026-11-27T15:38:08.536Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "177",
+          "value": "180",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,68 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "LiteratureLenk. Der Röstigraben n'existe pas.",
-              "detail": "Lenk i.S. (Lenk im Simmental), Lenk",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literaturelenk-der-roestigraben-nexiste-pas/"
+              "label": "Christmas exhibition Oey",
+              "detail": "Oey-Diemtigen, Diemtigen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/christmas-exhibition-oey/"
             },
             {
-              "label": "Mercatino di Natale di Kambly",
-              "detail": "Trubschachen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercatino-di-natale-di-kambly/"
+              "label": "Esperienza del mercatino di Natale di Brienz",
+              "detail": "Brienz, Brienz (BE)",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/esperienza-del-mercatino-di-natale-di-brienz-2025/"
             },
             {
-              "label": "KlangKeller-DidjDay",
-              "detail": "Klangkeller Bern, Bern",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/klangkeller-didjday_AB2sVHL"
+              "label": "Weihnachtsreiten",
+              "detail": "Schwarzenburg",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsreiten/"
             },
             {
-              "label": "Wine & Dine Südafrika",
-              "detail": "Spiez",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-suedafrika/"
+              "label": "31th Course des Pavés",
+              "detail": "La Neuveville",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/31th-course-des-paves/"
             },
             {
-              "label": "Bar per single",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/party/bern/barhopping-for-singles_AG9UYKr"
+              "label": "Diemtigtal Star Trail",
+              "detail": "Oey-Diemtigen, Diemtigen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/diemtigtal-star-trail/"
             },
             {
-              "label": "Gurtner & Schenk - Marathon",
-              "detail": "Kulturfabrik KUFA, Lyss",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gurtner-schenk-marathon-4/"
+              "label": "Sarina School Swimming Competition",
+              "detail": "Hallenbad Sportzentrum Gstaad AG, Saanen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sarina-schulwettschwimmen/"
             },
             {
-              "label": "Concerti invernali dell'Associazione musicale di Interlaken Unterseen",
-              "detail": "Evang.-ref. Kirche Unterseen, Interlaken",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/evenements/musique/unterseen/concerts-dhiver-de-lassociation-musicale-dinterlaken-unterseen_Aj79vdk"
+              "label": "Repair Café \" Reparieren statt wegwerfen\"",
+              "detail": "Freizeitstätte Langnau, Langnau im Emmental",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/langnau-im-emmental/repair-cafe-reparieren-statt-wegwerfen_ATJAJ8D"
             },
             {
-              "label": "Kate Pearl (Just Pearls) “Flutterby”",
-              "detail": "Villa Stucki",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/kate-pearl-just-pearls-flutterby_AZecuLV"
+              "label": "Eisbaden & Atmung Workshop",
+              "detail": "Bern",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eisbaden-atmung-workshop/"
             },
             {
-              "label": "The Monsters - Bern-In-Hell Tour",
-              "detail": "ISC, Bern",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/the-monsters-bern-in-hell-tour_AdTZX4V"
+              "label": "Visite guidée Nouveau Musée Bienne (NMB)",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-guidee-nouveau-musee-bienne-nmb/"
             },
             {
-              "label": "Remo Forrer",
-              "detail": "OldCapitol, Langenthal",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/remo-forrer_ANi8sgS"
+              "label": "Alexandra Frosio \"Café Schwuppdiwupp\" für Kinder ab 5 Jahren",
+              "detail": "Theater \"die Tonne\", Laupen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/alexandra-frosio-cafe-schwuppdiwupp-fuer-kinder-ab-5-jahren/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -112,7 +113,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/ueber-26-tonnen-zwiebeln-und-360-marktstaende-am-zibelemaerit"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -152,7 +153,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "BE",
@@ -162,7 +163,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "177",
+          "value": "180",
           "note": "from the site’s events calendar"
         }
       ],
@@ -173,68 +174,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "LiteratureLenk. Der Röstigraben n'existe pas.",
-              "detail": "Lenk i.S. (Lenk im Simmental), Lenk",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literaturelenk-der-roestigraben-nexiste-pas/"
+              "label": "Christmas exhibition Oey",
+              "detail": "Oey-Diemtigen, Diemtigen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/christmas-exhibition-oey/"
             },
             {
-              "label": "Kambly Christmas market",
-              "detail": "Trubschachen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercatino-di-natale-di-kambly/"
+              "label": "Experience Christmas Market Brienz",
+              "detail": "Brienz, Brienz (BE)",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/esperienza-del-mercatino-di-natale-di-brienz-2025/"
             },
             {
-              "label": "KlangKeller-DidjDay",
-              "detail": "Klangkeller Bern, Bern",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/klangkeller-didjday_AB2sVHL"
+              "label": "Weihnachtsreiten",
+              "detail": "Schwarzenburg",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsreiten/"
             },
             {
-              "label": "Wine & Dine Südafrika",
-              "detail": "Spiez",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-suedafrika/"
+              "label": "31th Course des Pavés",
+              "detail": "La Neuveville",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/31th-course-des-paves/"
             },
             {
-              "label": "Barhopping for singles",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/party/bern/barhopping-for-singles_AG9UYKr"
+              "label": "Diemtigtal Star Trail",
+              "detail": "Oey-Diemtigen, Diemtigen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/diemtigtal-star-trail/"
             },
             {
-              "label": "Gurtner & Schenk - Marathon",
-              "detail": "Kulturfabrik KUFA, Lyss",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gurtner-schenk-marathon-4/"
+              "label": "Sarina School Swimming Competition",
+              "detail": "Hallenbad Sportzentrum Gstaad AG, Saanen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sarina-schulwettschwimmen/"
             },
             {
-              "label": "Winter Concerts by the Interlaken Unterseen Music Society",
-              "detail": "Evang.-ref. Kirche Unterseen, Interlaken",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/evenements/musique/unterseen/concerts-dhiver-de-lassociation-musicale-dinterlaken-unterseen_Aj79vdk"
+              "label": "Repair Café \" Reparieren statt wegwerfen\"",
+              "detail": "Freizeitstätte Langnau, Langnau im Emmental",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/langnau-im-emmental/repair-cafe-reparieren-statt-wegwerfen_ATJAJ8D"
             },
             {
-              "label": "Kate Pearl (Just Pearls) \"Flutterby\"",
-              "detail": "Villa Stucki",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/kate-pearl-just-pearls-flutterby_AZecuLV"
+              "label": "Eisbaden & Atmung Workshop",
+              "detail": "Bern",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eisbaden-atmung-workshop/"
             },
             {
-              "label": "The Monsters - Bern-In-Hell Tour",
-              "detail": "ISC, Bern",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/the-monsters-bern-in-hell-tour_AdTZX4V"
+              "label": "Visite guidée Nouveau Musée Bienne (NMB)",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-guidee-nouveau-musee-bienne-nmb/"
             },
             {
-              "label": "Remo Forrer",
-              "detail": "OldCapitol, Langenthal",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/remo-forrer_ANi8sgS"
+              "label": "Alexandra Frosio \"Café Schwuppdiwupp\" für Kinder ab 5 Jahren",
+              "detail": "Theater \"die Tonne\", Laupen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/alexandra-frosio-cafe-schwuppdiwupp-fuer-kinder-ab-5-jahren/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -247,7 +249,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/ueber-26-tonnen-zwiebeln-und-360-marktstaende-am-zibelemaerit"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -287,7 +289,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "BE",
@@ -297,7 +299,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "177",
+          "value": "180",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -308,68 +310,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "LiteratureLenk. Der Röstigraben n'existe pas.",
-              "detail": "Lenk i.S. (Lenk im Simmental), Lenk",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literaturelenk-der-roestigraben-nexiste-pas/"
+              "label": "Weihnachtsausstellung Oey",
+              "detail": "Oey-Diemtigen, Diemtigen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/christmas-exhibition-oey/"
             },
             {
-              "label": "Kambly Weihnachtsmarkt",
-              "detail": "Trubschachen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercatino-di-natale-di-kambly/"
+              "label": "Erlebnis Weihnachtsmarkt Brienz",
+              "detail": "Brienz, Brienz (BE)",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/esperienza-del-mercatino-di-natale-di-brienz-2025/"
             },
             {
-              "label": "KlangKeller-DidjDay",
-              "detail": "Klangkeller Bern, Bern",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/klangkeller-didjday_AB2sVHL"
+              "label": "Weihnachtsreiten",
+              "detail": "Schwarzenburg",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsreiten/"
             },
             {
-              "label": "Wine & Dine Südafrika",
-              "detail": "Spiez",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-suedafrika/"
+              "label": "31. Course des Pavés",
+              "detail": "La Neuveville",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/31th-course-des-paves/"
             },
             {
-              "label": "Barhopping für Singles",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/party/bern/barhopping-for-singles_AG9UYKr"
+              "label": "Diemtigtaler Sternenweg",
+              "detail": "Oey-Diemtigen, Diemtigen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/diemtigtal-star-trail/"
             },
             {
-              "label": "Gurtner & Schenk - Marathon",
-              "detail": "Kulturfabrik KUFA, Lyss",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gurtner-schenk-marathon-4/"
+              "label": "Sarina-Schulwettschwimmen",
+              "detail": "Hallenbad Sportzentrum Gstaad AG, Saanen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sarina-schulwettschwimmen/"
             },
             {
-              "label": "Winterkonzerte Musikverein Interlaken Unterseen",
-              "detail": "Evang.-ref. Kirche Unterseen, Interlaken",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/evenements/musique/unterseen/concerts-dhiver-de-lassociation-musicale-dinterlaken-unterseen_Aj79vdk"
+              "label": "Repair Café \" Reparieren statt wegwerfen\"",
+              "detail": "Freizeitstätte Langnau, Langnau im Emmental",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/langnau-im-emmental/repair-cafe-reparieren-statt-wegwerfen_ATJAJ8D"
             },
             {
-              "label": "Kate Pearl (Just Pearls) \"Flutterby\"",
-              "detail": "Villa Stucki",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/kate-pearl-just-pearls-flutterby_AZecuLV"
+              "label": "Eisbaden & Atmung Workshop",
+              "detail": "Bern",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eisbaden-atmung-workshop/"
             },
             {
-              "label": "The Monsters - Bern-In-Hell Tour",
-              "detail": "ISC, Bern",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/the-monsters-bern-in-hell-tour_AdTZX4V"
+              "label": "Visite guidée Nouveau Musée Bienne (NMB)",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-guidee-nouveau-musee-bienne-nmb/"
             },
             {
-              "label": "Remo Forrer",
-              "detail": "OldCapitol, Langenthal",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/remo-forrer_ANi8sgS"
+              "label": "Alexandra Frosio \"Café Schwuppdiwupp\" für Kinder ab 5 Jahren",
+              "detail": "Theater \"die Tonne\", Laupen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/alexandra-frosio-cafe-schwuppdiwupp-fuer-kinder-ab-5-jahren/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -382,7 +385,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/ueber-26-tonnen-zwiebeln-und-360-marktstaende-am-zibelemaerit"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -422,7 +425,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "BE",
@@ -432,7 +435,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "177",
+          "value": "180",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -443,68 +446,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "LiteratureLenk. Der Röstigraben n'existe pas.",
-              "detail": "Lenk i.S. (Lenk im Simmental), Lenk",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literaturelenk-der-roestigraben-nexiste-pas/"
+              "label": "Exposition de Noël Oey",
+              "detail": "Oey-Diemtigen, Diemtigen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/christmas-exhibition-oey/"
             },
             {
-              "label": "Marché de Noël de Kambly",
-              "detail": "Trubschachen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercatino-di-natale-di-kambly/"
+              "label": "Marché de Noël de Brienz",
+              "detail": "Brienz, Brienz (BE)",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/esperienza-del-mercatino-di-natale-di-brienz-2025/"
             },
             {
-              "label": "KlangKeller-DidjDay",
-              "detail": "Klangkeller Bern, Bern",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/klangkeller-didjday_AB2sVHL"
+              "label": "Weihnachtsreiten",
+              "detail": "Schwarzenburg",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsreiten/"
             },
             {
-              "label": "Wine & Dine Südafrika",
-              "detail": "Spiez",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-suedafrika/"
+              "label": "31ème Course des Pavés",
+              "detail": "La Neuveville",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/31th-course-des-paves/"
             },
             {
-              "label": "Barhopping pour les célibataires",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/party/bern/barhopping-for-singles_AG9UYKr"
+              "label": "Diemtigtal Star Trail",
+              "detail": "Oey-Diemtigen, Diemtigen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/diemtigtal-star-trail/"
             },
             {
-              "label": "Gurtner & Schenk - Marathon",
-              "detail": "Kulturfabrik KUFA, Lyss",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gurtner-schenk-marathon-4/"
+              "label": "Course de natation scolaire de Sarina",
+              "detail": "Hallenbad Sportzentrum Gstaad AG, Saanen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sarina-schulwettschwimmen/"
             },
             {
-              "label": "Concerts d'hiver de l'association musicale d'Interlaken Unterseen",
-              "detail": "Evang.-ref. Kirche Unterseen, Interlaken",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/evenements/musique/unterseen/concerts-dhiver-de-lassociation-musicale-dinterlaken-unterseen_Aj79vdk"
+              "label": "Repair Café \" Reparieren statt wegwerfen\"",
+              "detail": "Freizeitstätte Langnau, Langnau im Emmental",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/langnau-im-emmental/repair-cafe-reparieren-statt-wegwerfen_ATJAJ8D"
             },
             {
-              "label": "Kate Pearl (Just Pearls) « Flutterby »",
-              "detail": "Villa Stucki",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/kate-pearl-just-pearls-flutterby_AZecuLV"
+              "label": "Eisbaden & Atmung Workshop",
+              "detail": "Bern",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eisbaden-atmung-workshop/"
             },
             {
-              "label": "The Monsters - Bern-In-Hell Tour",
-              "detail": "ISC, Bern",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/the-monsters-bern-in-hell-tour_AdTZX4V"
+              "label": "Visite guidée Nouveau Musée Bienne (NMB)",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-guidee-nouveau-musee-bienne-nmb/"
             },
             {
-              "label": "Remo Forrer",
-              "detail": "OldCapitol, Langenthal",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/remo-forrer_ANi8sgS"
+              "label": "Alexandra Frosio \"Café Schwuppdiwupp\" für Kinder ab 5 Jahren",
+              "detail": "Theater \"die Tonne\", Laupen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/alexandra-frosio-cafe-schwuppdiwupp-fuer-kinder-ab-5-jahren/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -517,7 +521,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/ueber-26-tonnen-zwiebeln-und-360-marktstaende-am-zibelemaerit"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -557,7 +561,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

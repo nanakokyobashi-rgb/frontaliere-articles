@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-11-27T04:41:16.871Z",
-  "contentHash": "758b61910a72798c8f5dcd83d76c87e0df7b44c028baa7f6d0c9f058342aa97e",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "0dc9631ba1236d87d6ab33944ddd0a52272287bec2f1e2de2981e41cbe083974",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T16:33:33.919Z",
+      "updatedAt": "2026-11-27T16:21:34.268Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "19",
+          "value": "17",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,30 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Benefizkonzert apacella",
-              "detail": "Schulhaus Gringel, Appenzell",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/benfizkonzert-apacella/"
-            },
-            {
-              "label": "Serata appenzellese con il \"Trio Kellerheims im\"",
-              "detail": "Hotel Heiden, Heiden",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/appenzeller-abend-mit-den-kellerheims-im-trio/"
-            },
-            {
-              "label": "Loredana & Kilian - Perché lei/lui è così?",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/music/herisau/loredana-und-kilian-why-is-shehe-like-that_AKTJwTc"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel — in corso, ultimo giorno: 9 dicembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
             {
               "label": "Degustazione notturna",
               "detail": "Wienacht",
@@ -87,15 +63,39 @@
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/produzione-dakar-regole-matto/"
             },
             {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — in corso, ultimo giorno: 9 dicembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
+            },
+            {
               "label": "«Loos-Stobede»",
               "detail": "Weissbad, Schwende-Rüte",
               "date": "2026-11-29",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/loos-stobede-1/"
+            },
+            {
+              "label": "Finestra d'Avvento",
+              "detail": "Urnäsch",
+              "date": "2026-12-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/finestra-davvento/"
+            },
+            {
+              "label": "Visita guidata pubblica alla Goba AG",
+              "detail": "Goba AG",
+              "date": "2026-12-03",
+              "url": "https://www.guidle.com/it/eventos/isso-e-aquilo/gontenbad/visita-guiada-pblica-a-goba-ag_AJW5cG1"
+            },
+            {
+              "label": "Es gibt keine alte Musik.",
+              "detail": "Appenzell",
+              "date": "2026-12-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/es-gibt-keine-alte-musik/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "19",
+          "value": "17",
           "note": "from the site’s events calendar"
         }
       ],
@@ -143,30 +143,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Benefizkonzert apacella",
-              "detail": "Schulhaus Gringel, Appenzell",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/benfizkonzert-apacella/"
-            },
-            {
-              "label": "Appenzell evening with the \"Kellerheims im Trio\"",
-              "detail": "Hotel Heiden, Heiden",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/appenzeller-abend-mit-den-kellerheims-im-trio/"
-            },
-            {
-              "label": "Loredana & Kilian - Why is SHE/HE like that?",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/music/herisau/loredana-und-kilian-why-is-shehe-like-that_AKTJwTc"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel — ongoing, last day: 9 December 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
             {
               "label": "How(h)night tasting",
               "detail": "Wienacht",
@@ -198,15 +174,39 @@
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/produzione-dakar-regole-matto/"
             },
             {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — ongoing, last day: 9 December 2026",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
+            },
+            {
               "label": "«Loos-Stobede»",
               "detail": "Weissbad, Schwende-Rüte",
               "date": "2026-11-29",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/loos-stobede-1/"
+            },
+            {
+              "label": "Advent window",
+              "detail": "Urnäsch",
+              "date": "2026-12-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/finestra-davvento/"
+            },
+            {
+              "label": "Public tour of the Goba AG",
+              "detail": "Goba AG",
+              "date": "2026-12-03",
+              "url": "https://www.guidle.com/it/eventos/isso-e-aquilo/gontenbad/visita-guiada-pblica-a-goba-ag_AJW5cG1"
+            },
+            {
+              "label": "Es gibt keine alte Musik.",
+              "detail": "Appenzell",
+              "date": "2026-12-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/es-gibt-keine-alte-musik/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "19",
+          "value": "17",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -254,30 +254,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Benefizkonzert apacella",
-              "detail": "Schulhaus Gringel, Appenzell",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/benfizkonzert-apacella/"
-            },
-            {
-              "label": "Appenzeller Abend mit den \"Kellerheims im Trio\"",
-              "detail": "Hotel Heiden, Heiden",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/appenzeller-abend-mit-den-kellerheims-im-trio/"
-            },
-            {
-              "label": "Loredana & Kilian - Warum ist SIE/ER so?",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/music/herisau/loredana-und-kilian-why-is-shehe-like-that_AKTJwTc"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel — läuft, letzter Tag: 9. Dezember 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
             {
               "label": "Wie(h)nachts-Degustation",
               "detail": "Wienacht",
@@ -309,15 +285,39 @@
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/produzione-dakar-regole-matto/"
             },
             {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — läuft, letzter Tag: 9. Dezember 2026",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
+            },
+            {
               "label": "«Loos-Stobede»",
               "detail": "Weissbad, Schwende-Rüte",
               "date": "2026-11-29",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/loos-stobede-1/"
+            },
+            {
+              "label": "Adventsfenster",
+              "detail": "Urnäsch",
+              "date": "2026-12-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/finestra-davvento/"
+            },
+            {
+              "label": "Öffentliche Führung durch die Goba AG",
+              "detail": "Goba AG",
+              "date": "2026-12-03",
+              "url": "https://www.guidle.com/it/eventos/isso-e-aquilo/gontenbad/visita-guiada-pblica-a-goba-ag_AJW5cG1"
+            },
+            {
+              "label": "Es gibt keine alte Musik.",
+              "detail": "Appenzell",
+              "date": "2026-12-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/es-gibt-keine-alte-musik/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "19",
+          "value": "17",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -365,30 +365,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Benefizkonzert apacella",
-              "detail": "Schulhaus Gringel, Appenzell",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/benfizkonzert-apacella/"
-            },
-            {
-              "label": "Soirée appenzelloise avec les \"Kellerheims en trio",
-              "detail": "Hotel Heiden, Heiden",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/appenzeller-abend-mit-den-kellerheims-im-trio/"
-            },
-            {
-              "label": "Loredana & Kilian - Pourquoi est-elle/il comme ça ?",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/music/herisau/loredana-und-kilian-why-is-shehe-like-that_AKTJwTc"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel — en cours, dernier jour : 9 décembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
             {
               "label": "Dégustation de vin",
               "detail": "Wienacht",
@@ -420,15 +396,39 @@
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/produzione-dakar-regole-matto/"
             },
             {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — en cours, dernier jour : 9 décembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
+            },
+            {
               "label": "«Loos-Stobede»",
               "detail": "Weissbad, Schwende-Rüte",
               "date": "2026-11-29",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/loos-stobede-1/"
+            },
+            {
+              "label": "Fenêtre de l'Avent",
+              "detail": "Urnäsch",
+              "date": "2026-12-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/finestra-davvento/"
+            },
+            {
+              "label": "Visite guidée publique de la Goba AG",
+              "detail": "Goba AG",
+              "date": "2026-12-03",
+              "url": "https://www.guidle.com/it/eventos/isso-e-aquilo/gontenbad/visita-guiada-pblica-a-goba-ag_AJW5cG1"
+            },
+            {
+              "label": "Es gibt keine alte Musik.",
+              "detail": "Appenzell",
+              "date": "2026-12-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/es-gibt-keine-alte-musik/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

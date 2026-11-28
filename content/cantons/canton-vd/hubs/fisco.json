@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "fisco",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "40db650a47c82e1d70e7c20395b605b350059bae0d7623e3b1654d85e77bd42e",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "154f58a2bd4cc9a19bbd83c233668d01d483bdd6e51ae1e9e5bcbc7bd19882d6",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-25T16:08:35.229Z",
+      "updatedAt": "2026-11-27T15:38:08.536Z",
       "keyFacts": 0
     }
   ],
@@ -110,6 +110,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Première édition des Assises vaudoises de la fiscalité",
+              "date": "2026-11-27T13:19:04.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26845-premiere-edition-des-assises-vaudoises-de-la-fiscalite"
+            },
+            {
               "label": "Grandes réformes fiscales: administration réorganisée",
               "date": "2026-11-09T10:01:00.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26780-grandes-reformes-fiscales-administration-reorganisee"
@@ -120,7 +125,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -200,7 +205,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "VD",
@@ -288,6 +293,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Première édition des Assises vaudoises de la fiscalité",
+              "date": "2026-11-27T13:19:04.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26845-premiere-edition-des-assises-vaudoises-de-la-fiscalite"
+            },
+            {
               "label": "Grandes réformes fiscales: administration réorganisée",
               "date": "2026-11-09T10:01:00.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26780-grandes-reformes-fiscales-administration-reorganisee"
@@ -298,7 +308,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -377,7 +387,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "VD",
@@ -465,6 +475,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Première édition des Assises vaudoises de la fiscalité",
+              "date": "2026-11-27T13:19:04.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26845-premiere-edition-des-assises-vaudoises-de-la-fiscalite"
+            },
+            {
               "label": "Grandes réformes fiscales: administration réorganisée",
               "date": "2026-11-09T10:01:00.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26780-grandes-reformes-fiscales-administration-reorganisee"
@@ -475,7 +490,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -554,7 +569,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "VD",
@@ -642,6 +657,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Première édition des Assises vaudoises de la fiscalité",
+              "date": "2026-11-27T13:19:04.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26845-premiere-edition-des-assises-vaudoises-de-la-fiscalite"
+            },
+            {
               "label": "Grandes réformes fiscales: administration réorganisée",
               "date": "2026-11-09T10:01:00.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26780-grandes-reformes-fiscales-administration-reorganisee"
@@ -652,7 +672,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -732,7 +752,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

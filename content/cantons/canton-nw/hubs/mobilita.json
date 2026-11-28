@@ -4,17 +4,17 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T09:50:55.309Z",
-  "contentHash": "8727739b6cbaaa9f4d36ca8b361644336dec5bc5196c6114d9f7b85ecda72703",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "01e47659fd747fc67c40429cf138b68cfeada584f157b2957e6f7267361cf332",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-27T00:05:50.684Z",
+      "updatedAt": "2026-11-27T09:11:52.310Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-27T01:13:06.824Z",
+      "updatedAt": "2026-11-27T15:38:08.536Z",
       "keyFacts": 0
     }
   ],
@@ -45,7 +45,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -56,6 +56,11 @@
               "label": "Strassensperrung Büelbrücke 03.12.2026",
               "date": "2026-11-26",
               "url": "https://www.hergiswil.ch/_rte/information/3051709"
+            },
+            {
+              "label": "Öffentliche Planauflage – Strassenbauprojekt inkl. Landerwerbs- bzw. Enteignungsplan: Kantonsstrasse KH4, Etappe 2, Ennetbürgen",
+              "date": "2026-11-24",
+              "url": "https://www.ennetbuergen.ch/_rte/information/3063571"
             },
             {
               "label": "Lawinengefahr: Sperrung Winterwanderweg Alpgschwänd – Sagenboden (Fräkmünt)",
@@ -76,14 +81,9 @@
               "label": "Dorf-Advent 28./29.11.2026: Verkehrsbehinderungen",
               "date": "2026-11-17",
               "url": "https://www.hergiswil.ch/_rte/information/2300212"
-            },
-            {
-              "label": "Baustellen-News: Sperrung Dorfstrasse vom 9.-27.11.2026",
-              "date": "2026-11-05",
-              "url": "https://www.buochs.ch/_rte/information/3042271"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -129,7 +129,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "NW",
@@ -157,7 +157,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -168,6 +168,11 @@
               "label": "Strassensperrung Büelbrücke 03.12.2026",
               "date": "2026-11-26",
               "url": "https://www.hergiswil.ch/_rte/information/3051709"
+            },
+            {
+              "label": "Öffentliche Planauflage – Strassenbauprojekt inkl. Landerwerbs- bzw. Enteignungsplan: Kantonsstrasse KH4, Etappe 2, Ennetbürgen",
+              "date": "2026-11-24",
+              "url": "https://www.ennetbuergen.ch/_rte/information/3063571"
             },
             {
               "label": "Lawinengefahr: Sperrung Winterwanderweg Alpgschwänd – Sagenboden (Fräkmünt)",
@@ -188,14 +193,9 @@
               "label": "Dorf-Advent 28./29.11.2026: Verkehrsbehinderungen",
               "date": "2026-11-17",
               "url": "https://www.hergiswil.ch/_rte/information/2300212"
-            },
-            {
-              "label": "Baustellen-News: Sperrung Dorfstrasse vom 9.-27.11.2026",
-              "date": "2026-11-05",
-              "url": "https://www.buochs.ch/_rte/information/3042271"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -241,7 +241,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "NW",
@@ -269,7 +269,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -280,6 +280,11 @@
               "label": "Strassensperrung Büelbrücke 03.12.2026",
               "date": "2026-11-26",
               "url": "https://www.hergiswil.ch/_rte/information/3051709"
+            },
+            {
+              "label": "Öffentliche Planauflage – Strassenbauprojekt inkl. Landerwerbs- bzw. Enteignungsplan: Kantonsstrasse KH4, Etappe 2, Ennetbürgen",
+              "date": "2026-11-24",
+              "url": "https://www.ennetbuergen.ch/_rte/information/3063571"
             },
             {
               "label": "Lawinengefahr: Sperrung Winterwanderweg Alpgschwänd – Sagenboden (Fräkmünt)",
@@ -300,14 +305,9 @@
               "label": "Dorf-Advent 28./29.11.2026: Verkehrsbehinderungen",
               "date": "2026-11-17",
               "url": "https://www.hergiswil.ch/_rte/information/2300212"
-            },
-            {
-              "label": "Baustellen-News: Sperrung Dorfstrasse vom 9.-27.11.2026",
-              "date": "2026-11-05",
-              "url": "https://www.buochs.ch/_rte/information/3042271"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -353,7 +353,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "NW",
@@ -381,7 +381,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-27T00:05:50.684Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -392,6 +392,11 @@
               "label": "Strassensperrung Büelbrücke 03.12.2026",
               "date": "2026-11-26",
               "url": "https://www.hergiswil.ch/_rte/information/3051709"
+            },
+            {
+              "label": "Öffentliche Planauflage – Strassenbauprojekt inkl. Landerwerbs- bzw. Enteignungsplan: Kantonsstrasse KH4, Etappe 2, Ennetbürgen",
+              "date": "2026-11-24",
+              "url": "https://www.ennetbuergen.ch/_rte/information/3063571"
             },
             {
               "label": "Lawinengefahr: Sperrung Winterwanderweg Alpgschwänd – Sagenboden (Fräkmünt)",
@@ -412,14 +417,9 @@
               "label": "Dorf-Advent 28./29.11.2026: Verkehrsbehinderungen",
               "date": "2026-11-17",
               "url": "https://www.hergiswil.ch/_rte/information/2300212"
-            },
-            {
-              "label": "Baustellen-News: Sperrung Dorfstrasse vom 9.-27.11.2026",
-              "date": "2026-11-05",
-              "url": "https://www.buochs.ch/_rte/information/3042271"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-27T09:50:55.309Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

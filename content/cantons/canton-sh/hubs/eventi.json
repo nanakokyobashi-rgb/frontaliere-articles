@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-11-27T04:41:16.871Z",
-  "contentHash": "5f78c6c26b7741834541801faa3e9233e95df043689e99d4aa74c821ac0bf9c4",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "74a5bb5665905d7c17506f9e853d30aa9bea3806953027a4a317d32545c1d435",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T16:33:33.919Z",
+      "updatedAt": "2026-11-27T16:21:34.268Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T15:51:00.529Z",
+      "updatedAt": "2026-11-27T15:38:08.536Z",
       "keyFacts": 0
     }
   ],
@@ -38,30 +38,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Glüehwy by starlight",
-              "detail": "Wilchinger Bergwy, Wilchingen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/glueehwy-by-starlight/"
-            },
-            {
-              "label": "Sarah Hugentobler - Is That Me? A Solo for Many",
-              "detail": "Schaffhausen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sarah-hugentobler-is-that-me-a-solo-for-many/"
-            },
-            {
-              "label": "Stoppel und Bart",
-              "detail": "Bistro Chez Ulrique, Stein am Rhein",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/small-stage/stein-am-rhein/stubble-and-beard_AkttT3B"
-            },
-            {
-              "label": "Rötiberg Christmas Market",
-              "detail": "Rötiberg-Kellerei, Wilchingen — in corso, ultimo giorno: 23 dicembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roetiberg-weihnachtsmarkt/"
-            },
-            {
               "label": "Christmas market/ tasting",
               "detail": "Trotte Löhningen, Löhningen",
               "date": "2026-11-28",
@@ -72,6 +48,18 @@
               "detail": "Restaurant Grünerbaum",
               "date": "2026-11-28",
               "url": "https://www.guidle.com/it/events/music/neuhausen/live-music-with-just-two_A1gDgEm"
+            },
+            {
+              "label": "Glüehwy by starlight",
+              "detail": "Wilchinger Bergwy, Wilchingen — in corso, ultimo giorno: 18 dicembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/glueehwy-by-starlight/"
+            },
+            {
+              "label": "Rötiberg Christmas Market",
+              "detail": "Rötiberg-Kellerei, Wilchingen — in corso, ultimo giorno: 23 dicembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roetiberg-weihnachtsmarkt/"
             },
             {
               "label": "Food & Drink Stories with Urs Weibel and Andreas Reich",
@@ -96,11 +84,23 @@
               "detail": "Museum Stemmler",
               "date": "2026-12-04",
               "url": "https://www.guidle.com/it/suche/schaffhausen/feierabendtier-des-monats_AjyPFgw"
+            },
+            {
+              "label": "Sara Santos & Vismel Barrios - Sin miedos (Cuban Flamenco)",
+              "detail": "Schaffhausen",
+              "date": "2026-12-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sara-santos-vismel-barrios-sin-miedos-cuban-flamenco/"
+            },
+            {
+              "label": "Advent tasting",
+              "detail": "Wilchingen",
+              "date": "2026-12-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advent-tasting/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -138,7 +138,7 @@
               "url": "https://www.konstanz.de/798774"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -160,7 +160,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "SH",
@@ -181,30 +181,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Glüehwy by starlight",
-              "detail": "Wilchinger Bergwy, Wilchingen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/glueehwy-by-starlight/"
-            },
-            {
-              "label": "Sarah Hugentobler - Is That Me? A Solo for Many",
-              "detail": "Schaffhausen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sarah-hugentobler-is-that-me-a-solo-for-many/"
-            },
-            {
-              "label": "Stubble and beard",
-              "detail": "Bistro Chez Ulrique, Stein am Rhein",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/small-stage/stein-am-rhein/stubble-and-beard_AkttT3B"
-            },
-            {
-              "label": "Rötiberg Christmas Market",
-              "detail": "Rötiberg-Kellerei, Wilchingen — ongoing, last day: 23 December 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roetiberg-weihnachtsmarkt/"
-            },
-            {
               "label": "Christmas market/ tasting",
               "detail": "Trotte Löhningen, Löhningen",
               "date": "2026-11-28",
@@ -215,6 +191,18 @@
               "detail": "Restaurant Grünerbaum",
               "date": "2026-11-28",
               "url": "https://www.guidle.com/it/events/music/neuhausen/live-music-with-just-two_A1gDgEm"
+            },
+            {
+              "label": "Glüehwy by starlight",
+              "detail": "Wilchinger Bergwy, Wilchingen — ongoing, last day: 18 December 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/glueehwy-by-starlight/"
+            },
+            {
+              "label": "Rötiberg Christmas Market",
+              "detail": "Rötiberg-Kellerei, Wilchingen — ongoing, last day: 23 December 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roetiberg-weihnachtsmarkt/"
             },
             {
               "label": "Food & Drink Stories with Urs Weibel and Andreas Reich",
@@ -239,11 +227,23 @@
               "detail": "Museum Stemmler",
               "date": "2026-12-04",
               "url": "https://www.guidle.com/it/suche/schaffhausen/feierabendtier-des-monats_AjyPFgw"
+            },
+            {
+              "label": "Sara Santos & Vismel Barrios - Sin miedos (Cuban Flamenco)",
+              "detail": "Schaffhausen",
+              "date": "2026-12-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sara-santos-vismel-barrios-sin-miedos-cuban-flamenco/"
+            },
+            {
+              "label": "Advent tasting",
+              "detail": "Wilchingen",
+              "date": "2026-12-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advent-tasting/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -281,7 +281,7 @@
               "url": "https://www.konstanz.de/798774"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -303,7 +303,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "SH",
@@ -324,30 +324,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Glüehwy bei Sternenschein",
-              "detail": "Wilchinger Bergwy, Wilchingen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/glueehwy-by-starlight/"
-            },
-            {
-              "label": "Sarah Hugentobler - Bin ich das? Ein Solo für Viele",
-              "detail": "Schaffhausen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sarah-hugentobler-is-that-me-a-solo-for-many/"
-            },
-            {
-              "label": "Stoppel und Bart",
-              "detail": "Bistro Chez Ulrique, Stein am Rhein",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/small-stage/stein-am-rhein/stubble-and-beard_AkttT3B"
-            },
-            {
-              "label": "Rötiberg Wei(h)nachtsmarkt",
-              "detail": "Rötiberg-Kellerei, Wilchingen — läuft, letzter Tag: 23. Dezember 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roetiberg-weihnachtsmarkt/"
-            },
-            {
               "label": "Weihnachtsmarkt/ Degustation",
               "detail": "Trotte Löhningen, Löhningen",
               "date": "2026-11-28",
@@ -358,6 +334,18 @@
               "detail": "Restaurant Grünerbaum",
               "date": "2026-11-28",
               "url": "https://www.guidle.com/it/events/music/neuhausen/live-music-with-just-two_A1gDgEm"
+            },
+            {
+              "label": "Glüehwy bei Sternenschein",
+              "detail": "Wilchinger Bergwy, Wilchingen — läuft, letzter Tag: 18. Dezember 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/glueehwy-by-starlight/"
+            },
+            {
+              "label": "Rötiberg Wei(h)nachtsmarkt",
+              "detail": "Rötiberg-Kellerei, Wilchingen — läuft, letzter Tag: 23. Dezember 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roetiberg-weihnachtsmarkt/"
             },
             {
               "label": "speis&trank geschichten mit Urs Weibel und Andreas Reich",
@@ -382,11 +370,23 @@
               "detail": "Museum Stemmler",
               "date": "2026-12-04",
               "url": "https://www.guidle.com/it/suche/schaffhausen/feierabendtier-des-monats_AjyPFgw"
+            },
+            {
+              "label": "Sara Santos & Vismel Barrios - Sin miedos (Flamenco cubano)",
+              "detail": "Schaffhausen",
+              "date": "2026-12-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sara-santos-vismel-barrios-sin-miedos-cuban-flamenco/"
+            },
+            {
+              "label": "Adventsdegustation",
+              "detail": "Wilchingen",
+              "date": "2026-12-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advent-tasting/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -424,7 +424,7 @@
               "url": "https://www.konstanz.de/798774"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -446,7 +446,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "SH",
@@ -467,30 +467,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Glüehwy à la lueur des étoiles",
-              "detail": "Wilchinger Bergwy, Wilchingen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/glueehwy-by-starlight/"
-            },
-            {
-              "label": "Sarah Hugentobler - Est-ce que c'est moi ? Un solo pour plusieurs",
-              "detail": "Schaffhausen",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sarah-hugentobler-is-that-me-a-solo-for-many/"
-            },
-            {
-              "label": "chaume et barbe",
-              "detail": "Bistro Chez Ulrique, Stein am Rhein",
-              "date": "2026-11-27",
-              "url": "https://www.guidle.com/it/events/small-stage/stein-am-rhein/stubble-and-beard_AkttT3B"
-            },
-            {
-              "label": "Marché de Noël de Rötiberg",
-              "detail": "Rötiberg-Kellerei, Wilchingen — en cours, dernier jour : 23 décembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roetiberg-weihnachtsmarkt/"
-            },
-            {
               "label": "Marché de Noël/ Dégustation",
               "detail": "Trotte Löhningen, Löhningen",
               "date": "2026-11-28",
@@ -501,6 +477,18 @@
               "detail": "Restaurant Grünerbaum",
               "date": "2026-11-28",
               "url": "https://www.guidle.com/it/events/music/neuhausen/live-music-with-just-two_A1gDgEm"
+            },
+            {
+              "label": "Glüehwy à la lueur des étoiles",
+              "detail": "Wilchinger Bergwy, Wilchingen — en cours, dernier jour : 18 décembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/glueehwy-by-starlight/"
+            },
+            {
+              "label": "Marché de Noël de Rötiberg",
+              "detail": "Rötiberg-Kellerei, Wilchingen — en cours, dernier jour : 23 décembre 2026",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roetiberg-weihnachtsmarkt/"
             },
             {
               "label": "Histoires autour de la table avec Urs Weibel et Andreas Reich",
@@ -525,11 +513,23 @@
               "detail": "Museum Stemmler",
               "date": "2026-12-04",
               "url": "https://www.guidle.com/it/suche/schaffhausen/feierabendtier-des-monats_AjyPFgw"
+            },
+            {
+              "label": "Sara Santos & Vismel Barrios - Sin miedos (flamenco cubain)",
+              "detail": "Schaffhausen",
+              "date": "2026-12-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sara-santos-vismel-barrios-sin-miedos-cuban-flamenco/"
+            },
+            {
+              "label": "Dégustation de l'Avent",
+              "detail": "Wilchingen",
+              "date": "2026-12-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/advent-tasting/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -567,7 +567,7 @@
               "url": "https://www.konstanz.de/798774"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -589,7 +589,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

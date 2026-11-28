@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "servizi",
-  "updatedAt": "2026-11-27T14:54:45.873Z",
-  "contentHash": "846dd55a0d953bbb7da025ec9eb14841b32ec7ffd213e5ff7ec09cc2f8bb964c",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "6319b7a7b71d5ec75b78ad6fe75c56c2821ed80c10ef765a7b12aacf62a9c142",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-26T21:36:19.183Z",
+      "updatedAt": "2026-11-27T08:31:31.851Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-27T14:03:11.265Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-27T01:13:06.824Z",
+      "updatedAt": "2026-11-27T15:38:08.536Z",
       "keyFacts": 0
     }
   ],
@@ -87,7 +92,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-26T21:36:19.183Z"
+          "updatedAt": "2026-11-27T08:31:31.851Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Schwyz",
+              "value": "2 °C",
+              "detail": "oggi da 0 a 2 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-27T14:03:11.265Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -115,7 +134,7 @@
               "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/depression-staerker-ins-oeffentliche-bewusstsein-ruecken/"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -124,6 +143,12 @@
           "url": "/articoli-svitto/svitto-cambio-cassa-malati/",
           "excerpt": "Le offerte per cambiare cassa malati spesso ingannano: una cassa locale di Svitto deve fare i conti con un business descritto come concorrenza sleale.",
           "date": "2026-10-08T14:43:30.771Z"
+        },
+        {
+          "title": "Autorizzazione edilizia Cantone Svitto: regole e uffici cantonali",
+          "url": "/articoli-svizzera/autorizzazione-edilizia-cantone-svitto/",
+          "excerpt": "Le regole e gli uffici per l'autorizzazione edilizia nel Cantone di Svitto sono di competenza cantonale.",
+          "date": "2026-11-28T00:21:34.665Z"
         },
         {
           "title": "Permesso di dimora B canton Svitto: requisiti e rinnovo",
@@ -160,12 +185,6 @@
           "url": "/articoli-svizzera/permesso-b-svitto-come-richiederlo/",
           "excerpt": "Durata 1-5 anni, prerequisiti e scadenze per il rinnovo. Guida completa con documenti necessari e assicurazione LAMal obbligatoria.",
           "date": "2026-08-23T00:29:38.108Z"
-        },
-        {
-          "title": "Premi cassa malati Svitto: fasce, franchigie e sussidi",
-          "url": "/articoli-svizzera/premi-cassa-malati-svitto/",
-          "excerpt": "Analisi dei premi dell'assicurazione malattia obbligatoria nel Cantone di Svitto: fasce di premio, franchigie, modelli e requisiti per la riduzione.",
-          "date": "2026-08-16T11:05:05.342Z"
         }
       ],
       "latestCantonArticles": [],
@@ -195,7 +214,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "SZ",
@@ -260,7 +279,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-26T21:36:19.183Z"
+          "updatedAt": "2026-11-27T08:31:31.851Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Schwyz",
+              "value": "2 °C",
+              "detail": "today from 0 to 2 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-27T14:03:11.265Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -288,7 +321,7 @@
               "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/depression-staerker-ins-oeffentliche-bewusstsein-ruecken/"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -297,6 +330,12 @@
           "url": "/en/schwyz-articles/schwyz-health-insurance-switch/",
           "excerpt": "Offers to switch health insurers are often deceptive: a local health insurer in Schwyz has to contend with a business described as unfair competition.",
           "date": "2026-10-08T14:43:30.771Z"
+        },
+        {
+          "title": "Building permits in the Canton of Schwyz: rules and cantonal offices",
+          "url": "/en/swiss-articles/building-permit-canton-schwyz/",
+          "excerpt": "The rules and offices for building permits in the Canton of Schwyz fall under cantonal jurisdiction.",
+          "date": "2026-11-28T00:21:34.665Z"
         },
         {
           "title": "Residence permit B canton Schwyz: requirements and renewal",
@@ -333,12 +372,6 @@
           "url": "/en/swiss-articles/residence-permit-b-schwyz-how-to-apply/",
           "excerpt": "Duration 1-5 years, prerequisites and renewal deadlines. Complete guide with necessary documents and mandatory LAMal insurance.",
           "date": "2026-08-23T00:29:38.108Z"
-        },
-        {
-          "title": "Schwyz sick pay premiums: bands, deductibles and subsidies",
-          "url": "/en/swiss-articles/schwyz-health-insurance-premiums/",
-          "excerpt": "Analysis of compulsory health insurance premiums in the Canton of Schwyz: premium brackets, deductibles, models and requirements for reduction.",
-          "date": "2026-08-16T11:05:05.342Z"
         }
       ],
       "latestCantonArticles": [],
@@ -364,7 +397,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "SZ",
@@ -429,7 +462,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-26T21:36:19.183Z"
+          "updatedAt": "2026-11-27T08:31:31.851Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Schwyz",
+              "value": "2 °C",
+              "detail": "heute 0 bis 2 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-27T14:03:11.265Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -457,7 +504,7 @@
               "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/depression-staerker-ins-oeffentliche-bewusstsein-ruecken/"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -466,6 +513,12 @@
           "url": "/de/schwyz-artikel/schwyz-krankenkassenwechsel/",
           "excerpt": "Die Angebote für einen Krankenkassenwechsel sind oft irreführend: Eine lokale Krankenkasse in Schwyz muss sich mit einem Geschäftsmodell auseinandersetzen, das als unlauterer Wettbewerb beschrieben wird.",
           "date": "2026-10-08T14:43:30.771Z"
+        },
+        {
+          "title": "Baubewilligung im Kanton Schwyz: Regeln und kantonale Ämter",
+          "url": "/de/schweiz-artikel/baugenehmigung-kanton-schwyz/",
+          "excerpt": "Die Regeln und Ämter für Baubewilligungen im Kanton Schwyz fallen in die kantonale Zuständigkeit.",
+          "date": "2026-11-28T00:21:34.665Z"
         },
         {
           "title": "Aufenthaltsbewilligung B Kanton Schwyz: Voraussetzungen und Verlängerung",
@@ -502,12 +555,6 @@
           "url": "/de/schweiz-artikel/aufenthaltsgenehmigung-b-schwyz-wie-beantragen/",
           "excerpt": "Laufzeit 1-5 Jahre, Voraussetzungen und Fristen für die Erneuerung. Vollständiger Leitfaden mit notwendigen Unterlagen und obligatorischer KVG-Versicherung.",
           "date": "2026-08-23T00:29:38.108Z"
-        },
-        {
-          "title": "Krankenkassenprämien Schwyz: Zeitabschnitte, Franchisen und Zuschüsse",
-          "url": "/de/schweiz-artikel/krankenkassenpraemien-schwyz/",
-          "excerpt": "Prämienanalyse der obligatorischen Krankenversicherung im Kanton Schwyz: Prämienspannen, Franchisen, Modelle und Reduktionsvoraussetzungen.",
-          "date": "2026-08-16T11:05:05.342Z"
         }
       ],
       "latestCantonArticles": [],
@@ -533,7 +580,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "SZ",
@@ -598,7 +645,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-11-26T21:36:19.183Z"
+          "updatedAt": "2026-11-27T08:31:31.851Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Schwyz",
+              "value": "2 °C",
+              "detail": "aujourd’hui de 0 à 2 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-27T14:03:11.265Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -626,7 +687,7 @@
               "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/depression-staerker-ins-oeffentliche-bewusstsein-ruecken/"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -635,6 +696,12 @@
           "url": "/fr/articles-schwytz/schwytz-changement-caisse-maladie/",
           "excerpt": "Les offres de changement de caisse-maladie sont souvent trompeuses : une caisse locale de Schwytz doit faire face à une activité décrite comme de la concurrence déloyale.",
           "date": "2026-10-08T14:43:30.771Z"
+        },
+        {
+          "title": "Permis de construire dans le canton de Schwytz : règles et services cantonaux",
+          "url": "/fr/articles-suisse/permis-construire-canton-schwytz/",
+          "excerpt": "Les règles et les services relatifs au permis de construire dans le canton de Schwytz relèvent de la compétence cantonale.",
+          "date": "2026-11-28T00:21:34.665Z"
         },
         {
           "title": "Permis de séjour B canton Schwytz : exigences et renouvellement",
@@ -671,12 +738,6 @@
           "url": "/fr/articles-suisse/permis-de-sejour-b-schwytz-comment-demander/",
           "excerpt": "Durée 1-5 ans, conditions préalables et délais de renouvellement. Guide complet avec documents nécessaires et assurance LAMal obligatoire.",
           "date": "2026-08-23T00:29:38.108Z"
-        },
-        {
-          "title": "Primes caisse-maladie Schwytz : tranches, franchises et subventions",
-          "url": "/fr/articles-suisse/primes-assurance-maladie-schwytz/",
-          "excerpt": "Analyse des primes de l'assurance maladie obligatoire dans le canton de Schwytz : fourchettes de primes, franchises, modèles et conditions de réduction.",
-          "date": "2026-08-16T11:05:05.342Z"
         }
       ],
       "latestCantonArticles": [],
@@ -698,7 +759,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-27T14:54:45.873Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

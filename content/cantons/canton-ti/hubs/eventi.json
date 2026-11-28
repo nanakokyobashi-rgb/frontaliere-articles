@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-11-27T04:41:16.871Z",
-  "contentHash": "849e1f162b60319f57d41d38da142e73d4140c30d418fbf8795fb42f07cafd55",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "b3001f5f4b85100bce9f0623e5b2819809dfbc59b8dbc7487fea3243d3e04a9e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T16:33:33.919Z",
+      "updatedAt": "2026-11-27T16:21:34.268Z",
       "keyFacts": 1
     }
   ],
@@ -33,69 +33,68 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Insieme InPista",
-              "detail": "Piazza Girasole, Massagno",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/64994"
+              "label": "Caffè riparazione",
+              "detail": "6500, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/65060"
             },
             {
-              "label": "BLA Biennale - Le latitudini dell'arte",
-              "detail": "Villa Santa Lucia, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/63945"
+              "label": "Non è “solo” mal di testa: è cefalea",
+              "detail": "Il Centro, Locarno",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/65168"
             },
             {
-              "label": "Il diritto della fraternità",
-              "detail": "Aula Multiuso, Facoltà di Teologia, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/65143"
+              "label": "Open Day alle Scuole Santa Maria",
+              "detail": "Scuole Santa Maria, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/64340"
             },
             {
-              "label": "Loving Highsmith",
-              "detail": "Biblioteca cantonale, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/64466"
+              "label": "Il mercatino solidale benefico di Natale di Mario",
+              "detail": "Via Lavizzari 10, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/64830"
             },
             {
-              "label": "John Lennon e Beatles Live Acoustic",
-              "detail": "Osteria La Palma, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/64665"
+              "label": "Mercatino benefico di Mario",
+              "detail": "Via Lavizzari 10, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/65123"
             },
             {
-              "label": "The Ghostwriter",
-              "detail": "Rialto il Cinema Muralto, Muralto",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/64834"
+              "label": "White Saturday",
+              "detail": "Aula Magna Scuole Nord, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/65073"
             },
             {
-              "label": "Decorazione tazza in ceramica",
-              "detail": "Atelier Manoamano, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/65214"
+              "label": "Mercatino di Natale - Chironico",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/suche/chironico/weihnachtsmarkt-von-chironico_ACHyZR9"
             },
             {
-              "label": "Assemblea ordinaria SFG Osogna-Lodrino",
-              "detail": "Sede degli Alpini, Bellinzona",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/65220"
+              "label": "Nando Snozzi | Ultima ipotesi senza cornice",
+              "detail": "Castel Grande, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/65102"
             },
             {
-              "label": "Bello sarebbe… ovvero insolite parole d’auguri",
-              "detail": "Teatro Paravento, Locarno",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/63689"
+              "label": "Il lascito di Giovanni Anselmo - Talk",
+              "detail": "Repetto Gallery, Lugano",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/64977"
             },
             {
-              "label": "lezioni di Aikido",
-              "detail": "Liceo Lugano 1, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/64795"
+              "label": "Tombola a bordo",
+              "detail": "Ferrovia Vigezzina-Centovalli, Locarno",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/64806"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -163,7 +162,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "TI",
@@ -184,69 +183,68 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Together on the slopes",
-              "detail": "Piazza Girasole, Massagno",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/64994"
+              "label": "Coffee machine repair",
+              "detail": "6500, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/65060"
             },
             {
-              "label": "BLA Biennale - The latitudes of art",
-              "detail": "Villa Santa Lucia, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/63945"
+              "label": "It’s not “just” a headache: it’s cephalalgia",
+              "detail": "Il Centro, Locarno",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/65168"
             },
             {
-              "label": "The universal right of fraternity",
-              "detail": "Aula Multiuso, Facoltà di Teologia, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/65143"
+              "label": "Open Day at Santa Maria Schools",
+              "detail": "Scuole Santa Maria, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/64340"
             },
             {
-              "label": "Loving Highsmith",
-              "detail": "Biblioteca cantonale, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/64466"
+              "label": "Mario's Christmas charity market",
+              "detail": "Via Lavizzari 10, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/64830"
             },
             {
-              "label": "John Lennon and Beatles Live Acoustic",
-              "detail": "Osteria La Palma, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/64665"
+              "label": "Mario's charity market",
+              "detail": "Via Lavizzari 10, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/65123"
             },
             {
-              "label": "The Ghostiter",
-              "detail": "Rialto il Cinema Muralto, Muralto",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/64834"
+              "label": "Satur",
+              "detail": "Aula Magna Scuole Nord, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/65073"
             },
             {
-              "label": "Ceramic mug decoration",
-              "detail": "Atelier Manoamano, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/65214"
+              "label": "Chironico Christmas Market",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/suche/chironico/weihnachtsmarkt-von-chironico_ACHyZR9"
             },
             {
-              "label": "Ordinary General Meeting of SFG Osogna-Lodrino",
-              "detail": "Sede degli Alpini, Bellinzona",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/65220"
+              "label": "Nando Snozzi | Latest design without a frame",
+              "detail": "Castel Grande, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/65102"
             },
             {
-              "label": "Bello sarebbe…ovvero insolite parole d’auguri (It would be great... or unconventional words of well-wishing)",
-              "detail": "Teatro Paravento, Locarno",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/63689"
+              "label": "The Legacy of Giovanni Anselmo – Talk",
+              "detail": "Repetto Gallery, Lugano",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/64977"
             },
             {
-              "label": "Aikido classes",
-              "detail": "Liceo Lugano 1, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/64795"
+              "label": "Tombola on board",
+              "detail": "Ferrovia Vigezzina-Centovalli, Locarno",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/64806"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -314,7 +312,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "TI",
@@ -335,69 +333,68 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Gemeinsam auf der Piste",
-              "detail": "Piazza Girasole, Massagno",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/64994"
+              "label": "Kaffee Reparatur",
+              "detail": "6500, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/65060"
             },
             {
-              "label": "BLA Biennale - Die Breitengrade der Kunst",
-              "detail": "Villa Santa Lucia, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/63945"
+              "label": "Es ist nicht „nur“ Kopfschmerz: Es ist Cephalea",
+              "detail": "Il Centro, Locarno",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/65168"
             },
             {
-              "label": "Das Recht auf Brüderlichkeit",
-              "detail": "Aula Multiuso, Facoltà di Teologia, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/65143"
+              "label": "Tag der offenen Tür in den Santa Maria-Schulen",
+              "detail": "Scuole Santa Maria, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/64340"
             },
             {
-              "label": "Liebevoller Highsmith",
-              "detail": "Biblioteca cantonale, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/64466"
+              "label": "Marios Weihnachts-Wohltätigkeitsmarkt",
+              "detail": "Via Lavizzari 10, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/64830"
             },
             {
-              "label": "John Lennon und Beatles Live Acoustic",
-              "detail": "Osteria La Palma, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/64665"
+              "label": "Marios Wohltätigkeitsmarkt",
+              "detail": "Via Lavizzari 10, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/65123"
             },
             {
-              "label": "Der Ghostwriter",
-              "detail": "Rialto il Cinema Muralto, Muralto",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/64834"
+              "label": "Weißer Samstag",
+              "detail": "Aula Magna Scuole Nord, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/65073"
             },
             {
-              "label": "Dekoration für Keramiktasse",
-              "detail": "Atelier Manoamano, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/65214"
+              "label": "Weihnachtsmarkt von Chironico",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/suche/chironico/weihnachtsmarkt-von-chironico_ACHyZR9"
             },
             {
-              "label": "Ordentliche Versammlung SFG Osogna-Lodrino",
-              "detail": "Sede degli Alpini, Bellinzona",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/65220"
+              "label": "Nando Snozzi | Letzte Hypothese ohne Rahmen",
+              "detail": "Castel Grande, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/65102"
             },
             {
-              "label": "Schön wäre… oder ungewöhnliche Grußworte",
-              "detail": "Teatro Paravento, Locarno",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/63689"
+              "label": "Das Vermächtnis von Giovanni Anselmo – Talk",
+              "detail": "Repetto Gallery, Lugano",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/64977"
             },
             {
-              "label": "Aikido-Kurse",
-              "detail": "Liceo Lugano 1, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/64795"
+              "label": "Tombola an Bord",
+              "detail": "Ferrovia Vigezzina-Centovalli, Locarno",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/64806"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +462,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "TI",
@@ -486,69 +483,68 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Ensemble sur les pistes",
-              "detail": "Piazza Girasole, Massagno",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/64994"
+              "label": "Réparation de machines à café",
+              "detail": "6500, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/65060"
             },
             {
-              "label": "BLA Biennale - Les latitudes de l'art",
-              "detail": "Villa Santa Lucia, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/63945"
+              "label": "Ce n’est pas « seulement » un mal de tête : c’est une céphalée",
+              "detail": "Il Centro, Locarno",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/65168"
             },
             {
-              "label": "Le droit à la fraternité",
-              "detail": "Aula Multiuso, Facoltà di Teologia, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/65143"
+              "label": "Journée portes ouvertes aux écoles Santa Maria",
+              "detail": "Scuole Santa Maria, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/64340"
             },
             {
-              "label": "Aimant Highsmith",
-              "detail": "Biblioteca cantonale, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/64466"
+              "label": "Le marché caritatif de Noël de Mario",
+              "detail": "Via Lavizzari 10, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/64830"
             },
             {
-              "label": "John Lennon et Beatles Live Acoustic",
-              "detail": "Osteria La Palma, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/64665"
+              "label": "Boutique caritative de Mario",
+              "detail": "Via Lavizzari 10, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/65123"
             },
             {
-              "label": "Le nègre écrivain",
-              "detail": "Rialto il Cinema Muralto, Muralto",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/64834"
+              "label": "Samedi blanc",
+              "detail": "Aula Magna Scuole Nord, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/65073"
             },
             {
-              "label": "Décoration de tasse en céramique",
-              "detail": "Atelier Manoamano, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/65214"
+              "label": "Marché de Noël de Chironico",
+              "date": "2026-11-28",
+              "url": "https://www.guidle.com/it/suche/chironico/weihnachtsmarkt-von-chironico_ACHyZR9"
             },
             {
-              "label": "Assemblée ordinaire SFG Osogna-Lodrino",
-              "detail": "Sede degli Alpini, Bellinzona",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/65220"
+              "label": "Nando Snozzi | Dernière hypothèse sans cadre",
+              "detail": "Castel Grande, Bellinzona",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/65102"
             },
             {
-              "label": "Ce serait beau... c'est-à-dire des mots de vœux inhabituels",
-              "detail": "Teatro Paravento, Locarno",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/63689"
+              "label": "L’héritage de Giovanni Anselmo - Conférence",
+              "detail": "Repetto Gallery, Lugano",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/64977"
             },
             {
-              "label": "cours d'aïkido",
-              "detail": "Liceo Lugano 1, Lugano",
-              "date": "2026-11-27",
-              "url": "https://www.tio.ch/agenda/day/20261127/64795"
+              "label": "Tombola à bord",
+              "detail": "Ferrovia Vigezzina-Centovalli, Locarno",
+              "date": "2026-11-28",
+              "url": "https://www.tio.ch/agenda/day/20261128/64806"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -616,7 +612,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-11-27T18:19:07.194Z",
-  "contentHash": "25c64a9610ce0109bc130b6e5670232e9e357d9212d9cfe7e27fe241c855850c",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "071baf314ed506dd43bb19dea4e947694201bc945428482720c34a14feaf0ced",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-27T04:31:26.334Z",
+      "updatedAt": "2026-11-27T14:16:33.130Z",
       "keyFacts": 0
     },
     {
@@ -23,8 +23,13 @@
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-27T14:03:11.265Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-27T01:13:06.824Z",
+      "updatedAt": "2026-11-27T15:38:08.536Z",
       "keyFacts": 0
     }
   ],
@@ -106,7 +111,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-27T04:31:26.334Z"
+          "updatedAt": "2026-11-27T14:16:33.130Z"
         },
         {
           "id": "aste-targhe",
@@ -131,6 +136,40 @@
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
           "updatedAt": "2026-11-27T08:31:31.851Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "9 °C",
+              "detail": "oggi da 1 a 8 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "8 °C",
+              "detail": "oggi da 4 a 9 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "9 °C",
+              "detail": "oggi da 3 a 9 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "10 °C",
+              "detail": "oggi da 4 a 9 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "8 °C",
+              "detail": "oggi da 3 a 8 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-27T14:03:11.265Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -168,7 +207,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/fotobiomodulazione.html"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -256,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-11-27T18:19:07.194Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "TI",
@@ -335,7 +374,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-27T04:31:26.334Z"
+          "updatedAt": "2026-11-27T14:16:33.130Z"
         },
         {
           "id": "aste-targhe",
@@ -360,6 +399,40 @@
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
           "updatedAt": "2026-11-27T08:31:31.851Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "9 °C",
+              "detail": "today from 1 to 8 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "8 °C",
+              "detail": "today from 4 to 9 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "9 °C",
+              "detail": "today from 3 to 9 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "10 °C",
+              "detail": "today from 4 to 9 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "8 °C",
+              "detail": "today from 3 to 8 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-27T14:03:11.265Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -397,7 +470,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/fotobiomodulazione.html"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -480,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-11-27T18:19:07.194Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "TI",
@@ -559,7 +632,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-27T04:31:26.334Z"
+          "updatedAt": "2026-11-27T14:16:33.130Z"
         },
         {
           "id": "aste-targhe",
@@ -584,6 +657,40 @@
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
           "updatedAt": "2026-11-27T08:31:31.851Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "9 °C",
+              "detail": "heute 1 bis 8 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "8 °C",
+              "detail": "heute 4 bis 9 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "9 °C",
+              "detail": "heute 3 bis 9 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "10 °C",
+              "detail": "heute 4 bis 9 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "8 °C",
+              "detail": "heute 3 bis 8 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-27T14:03:11.265Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -621,7 +728,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/fotobiomodulazione.html"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -704,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-11-27T18:19:07.194Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "TI",
@@ -783,7 +890,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-27T04:31:26.334Z"
+          "updatedAt": "2026-11-27T14:16:33.130Z"
         },
         {
           "id": "aste-targhe",
@@ -808,6 +915,40 @@
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
           "updatedAt": "2026-11-27T08:31:31.851Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "9 °C",
+              "detail": "aujourd’hui de 1 à 8 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "8 °C",
+              "detail": "aujourd’hui de 4 à 9 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "9 °C",
+              "detail": "aujourd’hui de 3 à 9 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "10 °C",
+              "detail": "aujourd’hui de 4 à 9 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "8 °C",
+              "detail": "aujourd’hui de 3 à 8 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-27T14:03:11.265Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -845,7 +986,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/fotobiomodulazione.html"
             }
           ],
-          "updatedAt": "2026-11-27T01:13:06.824Z"
+          "updatedAt": "2026-11-27T15:38:08.536Z"
         }
       ],
       "curatedArticles": [
@@ -925,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-11-27T18:19:07.194Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "eventi",
-  "updatedAt": "2026-11-27T04:41:16.871Z",
-  "contentHash": "ca5b6ab814969ec66c935fe12b9a70edd43cedc3ac921a61f7b8138fda8a7d3f",
+  "updatedAt": "2026-11-28T00:24:25.001Z",
+  "contentHash": "e94aaedc2fa0e307a4c81bfe9174f00abc41303df48b41dd4dae15824fc12ecd",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T16:33:33.919Z",
+      "updatedAt": "2026-11-27T16:21:34.268Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "68",
+          "value": "71",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,36 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Die frohe Botschaft von Jesus Christus",
-              "detail": "Bücher von Matt, Stans, Stans",
-              "date": "2026-11-27",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95041"
-            },
-            {
-              "label": "Punschabend beim Laternenweg",
-              "detail": "Schützen-12i Hütte, Emmetten, Emmetten",
-              "date": "2026-11-27",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94810"
-            },
-            {
-              "label": "FG: Adventskranz binden",
-              "detail": "Pfarreihaus, Beckenried, Beckenried",
-              "date": "2026-11-27",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94927"
-            },
-            {
-              "label": "Laternenweg mit Samichlais Geschichte",
-              "detail": "Emmetten, Emmetten, Emmetten — in corso, ultimo giorno: 11 dicembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94819"
-            },
-            {
-              "label": "Samichlais-Briefkasten",
-              "detail": "Pfarrhaus Emmetten, beim Pfarrhaus Emmetten, Emmetten — in corso, ultimo giorno: 29 novembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94822"
-            },
             {
               "label": "Beizentour Mittag",
               "detail": "Restaurant Sternen, Buochs, Buochs",
@@ -91,11 +61,41 @@
               "detail": "In der Kunstglasbläserei bei der Zuschauertribüne, Hergiswil am See",
               "date": "2026-11-28",
               "url": "https://www.nw.ch/anlaesseaktuelles/95368"
+            },
+            {
+              "label": "Samichlaisiizug und Advent im Dorf",
+              "detail": "Dorf, Ennetbürgen, Ennetbürgen",
+              "date": "2026-11-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/87911"
+            },
+            {
+              "label": "Stickworkshop mit Tina Moor, Co-Kuratorin der Ausstellung zu Augustina Flüeler",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-11-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95173"
+            },
+            {
+              "label": "Iffelen-Gottesdienst",
+              "detail": "Pfarrkirche, Ennetbürgen, Ennetbürgen",
+              "date": "2026-11-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/83716"
+            },
+            {
+              "label": "Samichlaisiizug Ennetbürgen",
+              "detail": "Ennetbürgen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/samichlaisiizug-ennetbuergen/"
+            },
+            {
+              "label": "schön&gut «Unter freiem Himmel»",
+              "detail": "Beckenried",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schoengut-unter-freiem-himmel-2/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/nidvaldo/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/nidvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "en": {
       "canton": "NW",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "68",
+          "value": "71",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,36 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Die frohe Botschaft von Jesus Christus",
-              "detail": "Bücher von Matt, Stans, Stans",
-              "date": "2026-11-27",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95041"
-            },
-            {
-              "label": "Punschabend beim Laternenweg",
-              "detail": "Schützen-12i Hütte, Emmetten, Emmetten",
-              "date": "2026-11-27",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94810"
-            },
-            {
-              "label": "FG: Adventskranz binden",
-              "detail": "Pfarreihaus, Beckenried, Beckenried",
-              "date": "2026-11-27",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94927"
-            },
-            {
-              "label": "Laternenweg mit Samichlais Geschichte",
-              "detail": "Emmetten, Emmetten, Emmetten — ongoing, last day: 11 December 2026",
-              "date": "2026-11-27",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94819"
-            },
-            {
-              "label": "Samichlais-Briefkasten",
-              "detail": "Pfarrhaus Emmetten, beim Pfarrhaus Emmetten, Emmetten — ongoing, last day: 29 November 2026",
-              "date": "2026-11-27",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94822"
-            },
             {
               "label": "Beizentour Mittag",
               "detail": "Restaurant Sternen, Buochs, Buochs",
@@ -196,11 +166,41 @@
               "detail": "In der Kunstglasbläserei bei der Zuschauertribüne, Hergiswil am See",
               "date": "2026-11-28",
               "url": "https://www.nw.ch/anlaesseaktuelles/95368"
+            },
+            {
+              "label": "Samichlaisiizug und Advent im Dorf",
+              "detail": "Dorf, Ennetbürgen, Ennetbürgen",
+              "date": "2026-11-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/87911"
+            },
+            {
+              "label": "Stickworkshop mit Tina Moor, Co-Kuratorin der Ausstellung zu Augustina Flüeler",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-11-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95173"
+            },
+            {
+              "label": "Iffelen-Gottesdienst",
+              "detail": "Pfarrkirche, Ennetbürgen, Ennetbürgen",
+              "date": "2026-11-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/83716"
+            },
+            {
+              "label": "Samichlaisiizug Ennetbürgen",
+              "detail": "Ennetbürgen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/samichlaisiizug-ennetbuergen/"
+            },
+            {
+              "label": "schön&gut «Unter freiem Himmel»",
+              "detail": "Beckenried",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schoengut-unter-freiem-himmel-2/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/nidwalden/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/nidwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "de": {
       "canton": "NW",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "68",
+          "value": "71",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,36 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Die frohe Botschaft von Jesus Christus",
-              "detail": "Bücher von Matt, Stans, Stans",
-              "date": "2026-11-27",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95041"
-            },
-            {
-              "label": "Punschabend beim Laternenweg",
-              "detail": "Schützen-12i Hütte, Emmetten, Emmetten",
-              "date": "2026-11-27",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94810"
-            },
-            {
-              "label": "FG: Adventskranz binden",
-              "detail": "Pfarreihaus, Beckenried, Beckenried",
-              "date": "2026-11-27",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94927"
-            },
-            {
-              "label": "Laternenweg mit Samichlais Geschichte",
-              "detail": "Emmetten, Emmetten, Emmetten — läuft, letzter Tag: 11. Dezember 2026",
-              "date": "2026-11-27",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94819"
-            },
-            {
-              "label": "Samichlais-Briefkasten",
-              "detail": "Pfarrhaus Emmetten, beim Pfarrhaus Emmetten, Emmetten — läuft, letzter Tag: 29. November 2026",
-              "date": "2026-11-27",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94822"
-            },
             {
               "label": "Beizentour Mittag",
               "detail": "Restaurant Sternen, Buochs, Buochs",
@@ -301,11 +271,41 @@
               "detail": "In der Kunstglasbläserei bei der Zuschauertribüne, Hergiswil am See",
               "date": "2026-11-28",
               "url": "https://www.nw.ch/anlaesseaktuelles/95368"
+            },
+            {
+              "label": "Samichlaisiizug und Advent im Dorf",
+              "detail": "Dorf, Ennetbürgen, Ennetbürgen",
+              "date": "2026-11-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/87911"
+            },
+            {
+              "label": "Stickworkshop mit Tina Moor, Co-Kuratorin der Ausstellung zu Augustina Flüeler",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-11-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95173"
+            },
+            {
+              "label": "Iffelen-Gottesdienst",
+              "detail": "Pfarrkirche, Ennetbürgen, Ennetbürgen",
+              "date": "2026-11-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/83716"
+            },
+            {
+              "label": "Samichlaisiizug Ennetbürgen",
+              "detail": "Ennetbürgen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/samichlaisiizug-ennetbuergen/"
+            },
+            {
+              "label": "schön&gut «Unter freiem Himmel»",
+              "detail": "Beckenried",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schoengut-unter-freiem-himmel-2/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/nidwalden/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/nidwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     },
     "fr": {
       "canton": "NW",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "68",
+          "value": "71",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,36 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Die frohe Botschaft von Jesus Christus",
-              "detail": "Bücher von Matt, Stans, Stans",
-              "date": "2026-11-27",
-              "url": "https://www.nw.ch/anlaesseaktuelles/95041"
-            },
-            {
-              "label": "Punschabend beim Laternenweg",
-              "detail": "Schützen-12i Hütte, Emmetten, Emmetten",
-              "date": "2026-11-27",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94810"
-            },
-            {
-              "label": "FG: Adventskranz binden",
-              "detail": "Pfarreihaus, Beckenried, Beckenried",
-              "date": "2026-11-27",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94927"
-            },
-            {
-              "label": "Laternenweg mit Samichlais Geschichte",
-              "detail": "Emmetten, Emmetten, Emmetten — en cours, dernier jour : 11 décembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94819"
-            },
-            {
-              "label": "Samichlais-Briefkasten",
-              "detail": "Pfarrhaus Emmetten, beim Pfarrhaus Emmetten, Emmetten — en cours, dernier jour : 29 novembre 2026",
-              "date": "2026-11-27",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94822"
-            },
             {
               "label": "Beizentour Mittag",
               "detail": "Restaurant Sternen, Buochs, Buochs",
@@ -406,11 +376,41 @@
               "detail": "In der Kunstglasbläserei bei der Zuschauertribüne, Hergiswil am See",
               "date": "2026-11-28",
               "url": "https://www.nw.ch/anlaesseaktuelles/95368"
+            },
+            {
+              "label": "Samichlaisiizug und Advent im Dorf",
+              "detail": "Dorf, Ennetbürgen, Ennetbürgen",
+              "date": "2026-11-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/87911"
+            },
+            {
+              "label": "Stickworkshop mit Tina Moor, Co-Kuratorin der Ausstellung zu Augustina Flüeler",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-11-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/95173"
+            },
+            {
+              "label": "Iffelen-Gottesdienst",
+              "detail": "Pfarrkirche, Ennetbürgen, Ennetbürgen",
+              "date": "2026-11-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/83716"
+            },
+            {
+              "label": "Samichlaisiizug Ennetbürgen",
+              "detail": "Ennetbürgen",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/samichlaisiizug-ennetbuergen/"
+            },
+            {
+              "label": "schön&gut «Unter freiem Himmel»",
+              "detail": "Beckenried",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schoengut-unter-freiem-himmel-2/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/nidwald/",
-          "updatedAt": "2026-11-26T16:33:33.919Z"
+          "updatedAt": "2026-11-27T16:21:34.268Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/nidwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-27T04:41:16.871Z"
+      "updatedAt": "2026-11-28T00:24:25.001Z"
     }
   }
 }
