@@ -6684,6 +6684,18 @@
       "firstSeenAt": "2026-11-27T13:08:02.617Z",
       "lastValidatedAt": "2026-11-27T13:08:02.617Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "autorizzazione edilizia canton Svitto requisiti e procedura",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-28T01:10:47.148Z",
+      "lastValidatedAt": "2026-11-28T01:10:47.148Z",
+      "expiresAt": null
     }
   ],
   "strikes": [

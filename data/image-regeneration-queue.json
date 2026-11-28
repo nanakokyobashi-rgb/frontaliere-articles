@@ -103,6 +103,17 @@
       "requestedAt": "2026-11-28T00:21:37.175Z",
       "lastFailureAt": "2026-11-28T00:21:37.175Z",
       "retryHint": "no-text"
+    },
+    {
+      "articleId": "voto-federale-iniziative-referendum",
+      "title": "Voti federali: quattro date annuali e soglie di firme",
+      "fallbackImage": "/images/blog/article-lucerna-elezioni-calendario-voto.webp",
+      "reason": "All image providers failed for article-voto-federale-iniziative-referendum: openai-codex (vision gate rejected image: Photograph of the Swiss Parliament building in Bern; lettering",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-11-28T01:17:57.732Z",
+      "lastFailureAt": "2026-11-28T01:17:57.732Z",
+      "retryHint": "no-text"
     }
   ]
 }

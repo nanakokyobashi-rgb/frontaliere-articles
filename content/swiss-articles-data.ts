@@ -30436,6 +30436,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'voto-federale-iniziative-referendum',
+    category: 'pratico',
+    date: '2026-11-28T01:17:55.737Z',
+    image: '/images/blog/article-lucerna-elezioni-calendario-voto.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
