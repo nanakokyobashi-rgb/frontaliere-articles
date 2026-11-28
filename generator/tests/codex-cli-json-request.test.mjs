@@ -104,3 +104,18 @@ test('senza schema resta il contratto locale: jsonMode rifiuta cio\' che non e\'
     /not an object/,
   );
 });
+
+test('jsonMode accetta un array quando il chiamante dichiara la forma top-level', async () => {
+  reply = '[{"q":"Domanda?","a":"Risposta."}]';
+  const text = await callSingleModel(messages, {
+    model: AI_MODELS.CODEX_CLI_PRIMARY,
+    jsonMode: true,
+    jsonTopLevelType: 'array',
+    maxRetriesPerModel: 1,
+  });
+  assert.equal(text, reply);
+  assert.equal(requests.length, 1);
+  assert.equal(requests[0].schema, null);
+  assert.match(requests[0].prompt, /Return exactly one valid JSON array/);
+  assert.doesNotMatch(requests[0].prompt, /Return exactly one valid JSON object/);
+});
