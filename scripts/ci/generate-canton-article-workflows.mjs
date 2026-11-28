@@ -60,7 +60,8 @@
  *     sezione: `vars.CANTON_CHAIN_MAX_RUNS_PER_HOUR` (default 3 run/ora, la
  *     variabile nazionale `vars.CHAIN_MAX_RUNS_PER_HOUR` ha default 20; il tetto
  *     conta solo le run che hanno tentato una generazione: non le `skipped`, non
- *     la run corrente),
+ *     la run corrente; le ammissioni negate che chiudono `success` non sono
+ *     distinguibili dall'elenco run, che non espone i job, e quindi contano),
  *     `no_article_streak` 6, `chain_depth` 40, `rescue_depth` 1; la catena si
  *     ferma allo skip `daily-budget` di `canton-generation-admit.mjs`. Con la
  *     lista vuota nessun anello parte, come prima della manopola;
@@ -703,6 +704,8 @@ const CORE_HEADER = `${AUTO_GENERATED_MARKER}
 # Variabili del repo: vars.CANTON_CHAIN_MAX_RUNS_PER_HOUR e' il tetto orario della catena
 # cantonale per sezione (default 3 run/ora; la variabile nazionale CHAIN_MAX_RUNS_PER_HOUR del sito ha default 20).
 # Il tetto conta le run che hanno tentato una generazione: non le skipped, non la run corrente.
+# Limite noto: l'elenco run non espone i job, quindi un'ammissione negata che chiude success
+# (il job generate non parte) conta nel tetto; il tetto resta cautelativo.
 # Rigenera: node ${GENERATOR_REL}
 # Verifica: node ${GENERATOR_REL} --check
 name: Generate Blog Article (core)

@@ -289,6 +289,15 @@ export function olderCantonRuns(runs, selfId, parentId = 0) {
   return { older, total: others.length, selfSeen: true };
 }
 
+/** `slotHour` cade in una delle ore di base, o entro ±`tolerance` ore da una (giro di 24 h)? */
+export function slotWithinBaseHours(slotHour, baseHours, tolerance = 0) {
+  const t = Math.max(0, Math.trunc(Number(tolerance)) || 0);
+  return baseHours.some((h) => {
+    const d = Math.abs(slotHour - h) % 24;
+    return Math.min(d, 24 - d) <= t;
+  });
+}
+
 /**
  * La decisione, pura rispetto alla rete: le letture arrivano come funzioni.
  *
@@ -305,7 +314,9 @@ export function olderCantonRuns(runs, selfId, parentId = 0) {
  *   selfId?: number | string,
  *   parentId?: number | string,
  *   slotHour?: number | null,
- * }} input `slotHour` e' l'ora UTC dello slot del calendario (null = la run non e' uno slot)
+ *   slotToleranceHours?: number,
+ * }} input `slotHour` e' l'ora UTC dello slot del calendario (null = la run non e' uno slot);
+ * `slotToleranceHours` allarga di ±N ore l'ora ammessa dalla cadenza di base (un cron nativo in ritardo)
  * @returns {{ proceed: boolean, reason: string, detail: string, unknown?: string[], consumeSlot?: boolean }}
  */
 export function decideCantonAdmission({
@@ -321,6 +332,7 @@ export function decideCantonAdmission({
   selfId = 0,
   parentId = 0,
   slotHour = null,
+  slotToleranceHours = 0,
 }) {
   if (!isCantonSection(section)) {
     throw new Error(`"${section}" non e' una sezione cantonale del core`);
@@ -364,7 +376,7 @@ export function decideCantonAdmission({
   if (slotHour !== null && !highCadence) {
     const allSections = (profiles ?? loadCantonSectionProfiles()).cantons.map((c) => c.section);
     const baseHours = baseSlotHoursBySection(allSections).get(section) ?? [];
-    if (!baseHours.includes(slotHour)) {
+    if (!slotWithinBaseHours(slotHour, baseHours, slotToleranceHours)) {
       return {
         proceed: false,
         reason: 'admit-cadence',
@@ -523,6 +535,12 @@ function readQuotaBeaconFromScript() {
  * Scheduler, o dall'ora corrente per un cron nativo. `null` per ogni altro
  * evento (push, dispatch manuale, anello di catena): non sono slot del calendario.
  */
+export function cadenceSlotToleranceHours(env) {
+  // Un cron nativo parte in ritardo (anche di decine di minuti) e puo' cadere nell'ora dopo lo slot:
+  // non e' uno slot fuori cadenza. Cloud Scheduler porta lo slot esatto nel recovery_slot.
+  return env?.DISPATCH_ORIGIN !== 'cloud_scheduler' && env?.EVENT_NAME === 'schedule' ? 1 : 0;
+}
+
 export function cadenceSlotHour(env, now = new Date()) {
   if (env?.DISPATCH_ORIGIN === 'cloud_scheduler') return slotHourFromKey(env.RECOVERY_SLOT);
   if (env?.EVENT_NAME === 'schedule') return now.getUTCHours();
@@ -550,6 +568,7 @@ if (isMain()) {
       selfId: process.env.SELF_ID || 0,
       parentId: process.env.PARENT_RUN_ID || 0,
       slotHour: cadenceSlotHour(process.env),
+      slotToleranceHours: cadenceSlotToleranceHours(process.env),
       readArticleSubjects: () => (repo ? readArticleSubjectsFromGitHub(repo, ref) : null),
       readInFlightRuns: () => (repo ? readInFlightRunsFromGitHub(repo) : null),
       readQuotaBeacon: readQuotaBeaconFromScript,

@@ -31,6 +31,8 @@ import {
   RC_SENTINEL_ENV,
   articleCommitSubject,
   cadenceSlotHour,
+  cadenceSlotToleranceHours,
+  slotWithinBaseHours,
   countSectionArticles,
   decideCantonAdmission,
   effectiveDailyBudget,
@@ -814,6 +816,30 @@ test('admit-cadence: una sezione in lista ammette ogni slot orario, le altre no'
     // Una sezione che non e' in lista resta sulla cadenza di base, anche se ne sono in lista altre.
     assert.equal(decision('canton-gr').proceed, LEGACY_SLOT_HOURS[SECTION].includes(hour), `fuori lista ${hour}`);
   }
+});
+
+test('admit-cadence: un cron nativo in ritardo di 50 minuti, caduto nell\'ora dopo lo slot, parte ancora', () => {
+  const env = { EVENT_NAME: 'schedule' };
+  assert.equal(cadenceSlotToleranceHours(env), 1);
+  assert.equal(cadenceSlotToleranceHours({ DISPATCH_ORIGIN: 'cloud_scheduler', EVENT_NAME: 'schedule' }), 0, 'lo slot di Cloud Scheduler e\' esatto');
+  assert.equal(cadenceSlotToleranceHours({ EVENT_NAME: 'workflow_dispatch' }), 0);
+  for (const baseHour of LEGACY_SLOT_HOURS[SECTION]) {
+    // cron programmato a baseHour:55, avviato con 50 minuti di ritardo: baseHour+1 a :45
+    const late = new Date(Date.UTC(2026, 10, 28, baseHour, 55) + 50 * 60_000);
+    const slotHour = cadenceSlotHour(env, late);
+    assert.equal(slotHour, (baseHour + 1) % 24);
+    const decide1 = (hour, tolerance) => decideCantonAdmission({
+      section: SECTION, env: envAll(), eventName: 'schedule', activeSections: allActive,
+      slotHour: hour, slotToleranceHours: tolerance, ...readers(),
+    });
+    assert.equal(decide1(slotHour, cadenceSlotToleranceHours(env)).reason, 'admitted', `ritardo dopo ${baseHour}`);
+    // Senza tolleranza il vecchio comportamento saltava lo slot.
+    assert.equal(decide1(slotHour, 0).reason, 'admit-cadence');
+    // Due ore dopo lo slot non e' piu' un ritardo plausibile: resta fuori cadenza.
+    assert.equal(decide1((baseHour + 2) % 24, 1).reason, 'admit-cadence');
+  }
+  assert.equal(slotWithinBaseHours(23, [0], 1), true, 'giro di mezzanotte');
+  assert.equal(slotWithinBaseHours(22, [0], 1), false);
 });
 
 test('admit-cadence vale solo per gli slot: dispatch manuale, anelli e push non hanno un\'ora di calendario', () => {

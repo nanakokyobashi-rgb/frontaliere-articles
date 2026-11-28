@@ -5,6 +5,8 @@
 # Variabili del repo: vars.CANTON_CHAIN_MAX_RUNS_PER_HOUR e' il tetto orario della catena
 # cantonale per sezione (default 3 run/ora; la variabile nazionale CHAIN_MAX_RUNS_PER_HOUR del sito ha default 20).
 # Il tetto conta le run che hanno tentato una generazione: non le skipped, non la run corrente.
+# Limite noto: l'elenco run non espone i job, quindi un'ammissione negata che chiude success
+# (il job generate non parte) conta nel tetto; il tetto resta cautelativo.
 # Rigenera: node scripts/ci/generate-canton-article-workflows.mjs
 # Verifica: node scripts/ci/generate-canton-article-workflows.mjs --check
 name: Generate Blog Article (core)
