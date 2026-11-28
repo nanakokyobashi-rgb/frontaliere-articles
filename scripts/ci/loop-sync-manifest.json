@@ -6474,6 +6474,36 @@
       }
     },
     {
+      "path": "generator/scripts/lib/canton-hubs/publish-gate.mjs",
+      "mode": "corpus-only",
+      "reason": "Gate del producer degli hub che applica completezza, controlli di pubblicazione e readiness sitemap prima del commit. E' logica di scrittura e coordinamento del corpus; il sito consuma gli hub pubblicati e non possiede questo gate.",
+      "baseline": {
+        "site": null,
+        "corpus": "206ad6034839ffe7",
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/refresh-receipt.mjs",
+      "mode": "corpus-only",
+      "reason": "Gestisce il receipt di provenienza e lo scope dei refresh hub tra run publisher. E' un supporto del workflow corpus e non ha un gemello eseguito dal sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "3edeec27380f142d",
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/sitemap-readiness.mjs",
+      "mode": "corpus-only",
+      "reason": "Calcola le URL canoniche che il publisher espone e verifica la readiness pubblica prima di aggiornare gli hub. E' un controllo del workflow corpus, senza gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "380f2c1d4420389f",
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
       "path": "scripts/lib/hub-landing-meta.mjs",
       "mode": "corpus-only",
       "reason": "Patch stale guardata dei metadati della landing italiana `/articoli-svizzera/`, applicata dal refresher che riscrive le pagine dello shard. Il sito non ha questo script: la landing e' servita dal corpus e il sito la consuma via HTTP.",
@@ -6831,6 +6861,16 @@
         "site": "32f3a2ebdacdce90",
         "corpus": "eaa660a9d1474ce7",
         "alignedAt": "2026-11-06"
+      }
+    },
+    {
+      "path": "scripts/ci/verify-canton-hub-proof-head.mjs",
+      "mode": "corpus-only",
+      "reason": "Verifica che il receipt di refresh hub sia legato allo SHA esatto attestato dall'artifact del run publisher GitHub Actions. E' un guard di provenienza del workflow del corpus; il sito non esegue questo coordinamento.",
+      "baseline": {
+        "site": null,
+        "corpus": "b631e595424c6419",
+        "alignedAt": "2026-11-28"
       }
     },
     {
