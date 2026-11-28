@@ -976,7 +976,7 @@ export async function publishRelease(
   // Pubblicare uno snapshot piu' vecchio del puntatore servito sarebbe un
   // rollback dell'edge: l'unico caso in cui la freshness deve davvero fermare.
   const liveCommit = previous.state === 'ok' ? previous.doc?.commit : null;
-  if (mandatory && liveCommit && isOlderThanLive(release.commit, liveCommit)) {
+  if (mandatory && liveCommit && isOlderThanLive(release.commit, liveCommit, { log })) {
     return stop(
       'regression',
       `la release ${release.commit} e' piu' vecchia di quella servita (${liveCommit}): il puntatore non torna indietro`,
@@ -1204,7 +1204,7 @@ export async function publishRelease(
     if (mandatory) {
       const latest = await readPreviousRelease(io);
       const latestLive = latest.state === 'ok' ? latest.doc?.commit : null;
-      if (latestLive && isOlderThanLive(release.commit, latestLive)) {
+      if (latestLive && isOlderThanLive(release.commit, latestLive, { log })) {
         return await stopBeforeFlip(
           'regression',
           `la release ${release.commit} e' piu' vecchia di quella servita adesso (${latestLive}): il puntatore non torna indietro`,

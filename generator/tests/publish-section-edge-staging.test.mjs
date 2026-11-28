@@ -654,7 +654,12 @@ test('releaseOlderThanLive classifica antenato, discendente, storie divise e com
   };
   assert.equal(releaseOlderThanLive(a, b, { exec: mk({ releaseIsAncestor: true }) }), true);
   assert.equal(releaseOlderThanLive(a, b, { exec: mk({ releaseIsAncestor: false }) }), false);
-  assert.equal(releaseOlderThanLive(a, b, { exec: mk({ known: false, releaseIsAncestor: true }) }), false);
+  // Il warning e' l'esito dichiarato del controllo non eseguibile: lo raccoglie il
+  // logger iniettato, mai stdout (frame del runner node:test).
+  const warnings = [];
+  assert.equal(releaseOlderThanLive(a, b, { exec: mk({ known: false, releaseIsAncestor: true }), log: (line) => warnings.push(line) }), false);
+  assert.equal(warnings.length, 1);
+  assert.match(warnings[0], /^::warning::\[section-edge\] controllo di regressione non eseguibile/u);
   assert.equal(releaseOlderThanLive(a, a, { exec: mk({ releaseIsAncestor: true }) }), false);
   assert.equal(releaseOlderThanLive(a, 'not-a-sha'), false);
 });
@@ -878,4 +883,11 @@ test('uno snapshot piu vecchio del live reale (git) e una regressione, uno piu n
   const { A, B, live0, isOlderThanLive } = tempHistory(t);
   assert.equal(isOlderThanLive(A, B), true);
   assert.equal(isOlderThanLive(B, A), false);
+});
+
+test('publishRelease inoltra il proprio logger al controllo di regressione (il warning non va su stdout)', () => {
+  const source = readFileSync(new URL('../../scripts/publish-section-edge.mjs', import.meta.url), 'utf8');
+  // Entrambi i punti (guard iniziale e ricontrollo prima del flip) passano `{ log }`:
+  // senza, il default console.log scrive su stdout e rompe il protocollo node:test.
+  assert.equal((source.match(/isOlderThanLive\(release\.commit, \w+, \{ log \}\)/gu) ?? []).length, 2);
 });
