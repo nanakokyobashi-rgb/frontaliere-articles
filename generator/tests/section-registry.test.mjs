@@ -1313,10 +1313,18 @@ test('edge: il bootstrap live tiene il lock fino al rilascio prima del flip', as
 
 test('edge: il lease R2 copre il timeout bootstrap massimo e il tombstone resta scaduto', () => {
   const fastPublish = readFileSync(path.join(ROOT, '.github/workflows/fast-publish-section.yml'), 'utf8');
-  const publishJob = fastPublish.match(/\n  publish:\n([\s\S]*?)(?=\n  [a-z0-9_-]+:)/)?.[1]
-    ?? fastPublish.slice(fastPublish.indexOf('\n  publish:\n'));
-  const fastPublishTimeoutMinutes = Number(publishJob?.match(/^\s+timeout-minutes:\s+(\d+)\s*$/m)?.[1]);
-  assert.ok(Number.isFinite(fastPublishTimeoutMinutes) && fastPublishTimeoutMinutes > 0, 'timeout job fast-publish assente');
+  // I job che tengono il gate bootstrap R2 sono stage e finalize (il vecchio
+  // job unico `publish` e' diviso); il coordinator non lo acquisisce. Il lease
+  // deve coprire il piu' lungo dei due.
+  const fastPublishJobTimeouts = ['stage', 'finalize'].map((jobName) => {
+    const job = fastPublish.match(new RegExp(`\\n  ${jobName}:\\n([\\s\\S]*?)(?=\\n  [a-z0-9_-]+:\\n)`))?.[1]
+      ?? fastPublish.slice(fastPublish.indexOf(`\n  ${jobName}:\n`));
+    return Number(job.match(/^\s+timeout-minutes:\s+(\d+)\s*$/m)?.[1]);
+  });
+  for (const minutes of fastPublishJobTimeouts) {
+    assert.ok(Number.isFinite(minutes) && minutes > 0, 'timeout dei job stage/finalize di fast-publish assente');
+  }
+  const fastPublishTimeoutMinutes = Math.max(...fastPublishJobTimeouts);
   const publishApi = readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
   const publishApiJob = publishApi.match(/\n  publish:\n([\s\S]*?)(?=\n  [a-z0-9_-]+:)/)?.[1]
     ?? publishApi.slice(publishApi.indexOf('\n  publish:\n'));

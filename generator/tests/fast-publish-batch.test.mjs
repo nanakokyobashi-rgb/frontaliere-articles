@@ -1,13 +1,23 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import '../../host/cantonSectionsBootstrap.mjs';
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { ARTICLE_SECTION_CORE_LIST } from '../../engine/shared/articleSectionCore.mjs';
-import { articlePublishPlan, bodyPublishPlan, bodyRegex } from '../../scripts/ci/fast-publish-section.mjs';
+import {
+  articlePublishPlan,
+  bodyPublishPlan,
+  bodyRegex,
+  r2ApiStageBarrierDecision,
+  r2LateApiRecoveryAction,
+  r2LateFinalizeRecoveryDecision,
+  r2PublishPlan,
+  r2ShouldDeferApiReadinessToFinalize,
+} from '../../scripts/ci/fast-publish-section.mjs';
+import { commitTouchedSections } from '../../scripts/ci/measure-section-cadence.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const workflow = readFileSync(resolve(here, '../../.github/workflows/fast-publish-article.yml'), 'utf8');
@@ -21,6 +31,284 @@ const pushBaseGuardPath = resolve(here, '../../scripts/ci/fetch-push-base-if-mis
 function git(cwd, ...args) {
   return execFileSync('git', args, { cwd, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
 }
+
+test('la classificazione del range API distingue code-only, contenuto e commit misti', (t) => {
+  const root = mkdtempSync(join(tmpdir(), 'r2-api-data-range-'));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  git(root, 'init', '--quiet', '--object-format=sha1');
+  git(root, 'config', 'user.name', 'Test');
+  git(root, 'config', 'user.email', 'test@example.invalid');
+  git(root, 'commit', '--quiet', '--allow-empty', '-m', 'base');
+  const base = git(root, 'rev-parse', 'HEAD');
+  const apiRangeHasData = (before, after) => execFileSync(
+    'node',
+    [resolve(here, '../../scripts/ci/fast-publish-section.mjs'), 'r2-api-data-range', before, after],
+    { cwd: root, encoding: 'utf8' },
+  ).trim() === 'true';
+  const commitFiles = (label, files) => {
+    for (const [file, source] of files) {
+      const target = join(root, file);
+      mkdirSync(dirname(target), { recursive: true });
+      writeFileSync(target, source);
+    }
+    git(root, 'add', '.');
+    git(root, 'commit', '--quiet', '-m', label);
+    return git(root, 'rev-parse', 'HEAD');
+  };
+
+  const renderOnly = commitFiles('renderer code', [
+    ['scripts/ci/fast-publish-section-render.sh', '# renderer\n'],
+  ]);
+  assert.equal(apiRangeHasData(base, renderOnly), false);
+
+  const content = commitFiles('canton content', [
+    ['content/blog-body-canton-ti/it/article.ts', 'export default "body";\n'],
+  ]);
+  assert.equal(apiRangeHasData(renderOnly, content), true);
+
+  const mixed = commitFiles('mixed content and renderer', [
+    ['content/cantons/canton-ti/hubs/local-news.json', '{"schema":1}\n'],
+    ['scripts/lib/article-render-pipeline.mjs', '// renderer change\n'],
+  ]);
+  assert.equal(apiRangeHasData(content, mixed), true);
+  assert.equal(apiRangeHasData(base, mixed), true, 'un range multi-commit deve conservare gli input dati');
+
+  const latestOwner = (before, after) => execFileSync(
+    'node',
+    [resolve(here, '../../scripts/ci/fast-publish-section.mjs'), 'r2-api-latest-data-commit', before, after],
+    { cwd: root, encoding: 'utf8' },
+  ).trim();
+  const laterRenderer = commitFiles('later code-only commit', [
+    ['scripts/lib/article-render-pipeline.mjs', '// later renderer change\n'],
+  ]);
+  assert.equal(latestOwner(renderOnly, laterRenderer), mixed, 'l’owner API resta l’ultimo commit dati prima del solo render');
+});
+
+test('lo stage pre-flip seleziona le sole sezioni R2 con input API locali', (t) => {
+  const root = mkdtempSync(join(tmpdir(), 'r2-api-stage-plan-'));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  git(root, 'init', '--quiet', '--object-format=sha1');
+  git(root, 'config', 'user.name', 'Test');
+  git(root, 'config', 'user.email', 'test@example.invalid');
+  git(root, 'commit', '--quiet', '--allow-empty', '-m', 'base');
+  const base = git(root, 'rev-parse', 'HEAD');
+  const plan = (before, after) => JSON.parse(execFileSync(
+    'node',
+    [resolve(here, '../../scripts/ci/fast-publish-section.mjs'), 'r2-api-stage-plan-range', before, after],
+    { cwd: root, encoding: 'utf8' },
+  ));
+  const commitFiles = (label, files) => {
+    for (const [file, source] of files) {
+      const target = join(root, file);
+      mkdirSync(dirname(target), { recursive: true });
+      writeFileSync(target, source);
+    }
+    git(root, 'add', '.');
+    git(root, 'commit', '--quiet', '-m', label);
+    return git(root, 'rev-parse', 'HEAD');
+  };
+
+  const codeOnly = commitFiles('renderer only', [
+    ['scripts/lib/article-render-pipeline.mjs', '// renderer\n'],
+  ]);
+  assert.deepEqual(plan(base, codeOnly), [], 'il codice render resta nel solo finalize');
+
+  const content = commitFiles('sezione TI', [
+    ['content/blog-body-canton-ti/it/article.ts', 'export default "body";\n'],
+  ]);
+  assert.deepEqual(plan(codeOnly, content), [{ section: 'canton-ti', ids: [], bootstrap: true }]);
+
+  const mixed = commitFiles('input TI e render condiviso', [
+    ['content/cantons/canton-ti/hubs/local-news.json', '{"schema":1}\n'],
+    ['scripts/lib/article-render-pipeline.mjs', '// renderer changed\n'],
+  ]);
+  assert.deepEqual(
+    plan(content, mixed),
+    [{ section: 'canton-ti', ids: [], bootstrap: true }],
+    'il render globale rimane nel finalize e non allarga la fase pre-flip',
+  );
+
+  const national = commitFiles('input nazionale', [
+    ['content/blog-body/it/national.ts', 'export default "national";\n'],
+  ]);
+  assert.deepEqual(plan(mixed, national), [], 'le sezioni nazionali non entrano nello stage R2');
+
+  for (const changedPath of [
+    'generator/data/canton-sections.json',
+    'generator/data/canton-url-slugs.json',
+  ]) {
+    const before = git(root, 'rev-parse', 'HEAD');
+    const after = commitFiles(`config condivisa ${changedPath}`, [[changedPath, '{"fixture":true}\n']]);
+    const targets = plan(before, after).map(({ section }) => section);
+    const touched = commitTouchedSections([changedPath], ARTICLE_SECTION_CORE_LIST.map((entry) => entry.section));
+    assert.ok(targets.length <= touched.length, `${changedPath}: dispatch=${targets.length}, touched=${touched.length}`);
+    assert.ok(targets.every((section) => touched.includes(section)),
+      `${changedPath}: ogni target dispatchato deve essere misurato come toccato`);
+  }
+});
+
+test('la barriera attende il publish-api owner quando dopo lo stage cambia un altra sezione', () => {
+  const decision = r2ApiStageBarrierDecision({
+    stageTargets: ['canton-ti'],
+    newApiTargets: ['canton-gr'],
+    stagedSources: { 'canton-ti': 'a'.repeat(40) },
+    latestCommit: 'b'.repeat(40),
+    newApiDataChanged: true,
+    unaffectedSections: ['canton-ti'],
+  });
+  assert.equal(decision.canDispatchApi, false, 'nessun dispatch latest con il target nuovo non staged');
+  assert.equal(decision.waitForLatestApi, true);
+  assert.deepEqual(decision.staleStageSections, []);
+  assert.deepEqual(decision.notStagedAtLatest, ['canton-gr']);
+  assert.deepEqual(decision.apiWaitSections, ['canton-ti', 'canton-gr']);
+});
+
+test('la barriera cede al run latest quando dopo lo stage cambia la stessa sezione', () => {
+  const decision = r2ApiStageBarrierDecision({
+    stageTargets: ['canton-ti'],
+    newApiTargets: ['canton-ti'],
+    stagedSources: { 'canton-ti': 'a'.repeat(40) },
+    latestCommit: 'b'.repeat(40),
+    newApiDataChanged: true,
+    unaffectedSections: [],
+  });
+  assert.equal(decision.canDispatchApi, false, 'lo stage stale non può autorizzare il flip');
+  assert.equal(decision.waitForLatestApi, true);
+  assert.deepEqual(decision.staleStageSections, ['canton-ti']);
+  assert.deepEqual(decision.notStagedAtLatest, ['canton-ti']);
+});
+
+test('la barriera dispatcha latest se ogni nuovo target API era staged alla revisione osservata', () => {
+  const decision = r2ApiStageBarrierDecision({
+    stageTargets: ['canton-ti'],
+    newApiTargets: ['canton-ti'],
+    stagedSources: { 'canton-ti': 'b'.repeat(40) },
+    latestCommit: 'b'.repeat(40),
+    newApiDataChanged: true,
+  });
+  assert.equal(decision.canDispatchApi, true);
+  assert.equal(decision.waitForLatestApi, false);
+});
+
+test('la barriera consente il dispatch quando cambia solo il renderer dopo uno stage completo', () => {
+  const decision = r2ApiStageBarrierDecision({
+    stageTargets: ['canton-ti'],
+    newApiTargets: [],
+    stagedSources: { 'canton-ti': 'a'.repeat(40) },
+    latestCommit: 'b'.repeat(40),
+    newApiDataChanged: false,
+    unaffectedSections: [],
+  });
+  assert.equal(decision.canDispatchApi, true);
+  assert.equal(decision.waitForLatestApi, false);
+  assert.deepEqual(decision.staleStageSections, ['canton-ti']);
+});
+
+test('C1 finalize tardivo recupera full-section C2 se queue:single sostituisce lo stage pending', () => {
+  const queue = {
+    running: { commit: 'C0', phase: 'finalize' },
+    pending: { commit: 'C2', phase: 'stage' },
+  };
+  // GitHub queue:single keeps the newest waiter, so C1's late finalize can
+  // replace C2's pending stage. The surviving job must carry C2 itself.
+  queue.pending = { commit: 'C1', phase: 'finalize' };
+  assert.equal(queue.running.commit, 'C0');
+  assert.deepEqual(queue.pending, { commit: 'C1', phase: 'finalize' });
+  assert.equal(new Set([queue.running, queue.pending]).size, 2, 'queue: single mantiene al massimo un running e un waiting');
+
+  const recovery = r2LateFinalizeRecoveryDecision({
+    stageCommit: '1'.repeat(40),
+    latestCommit: '2'.repeat(40),
+    sectionChanged: true,
+    deferApiWait: true,
+  });
+  assert.deepEqual(recovery, {
+    rebootstrap: true,
+    fullSection: true,
+    sourceCommit: '2'.repeat(40),
+    renderCommit: '2'.repeat(40),
+    checkApiAfterStage: true,
+  });
+  assert.equal(recovery.sourceCommit, '2'.repeat(40), 'il finalize C1 copre C2 nella propria run e nello slot acquisito');
+  assert.equal(new Set([queue.running, queue.pending]).size, 2, 'il recovery non aggiunge una terza run Fast viva');
+});
+
+test('un dispatch bounded tardivo con ids vuoti recupera il push anche se preflight è già latest', () => {
+  const preflightHead = '2'.repeat(40);
+  const latestPushHead = preflightHead;
+  const articleIds = [];
+  const queue = {
+    running: { commit: 'C0', phase: 'finalize' },
+    pending: { commit: 'C2', phase: 'stage', scope: 'full-section' },
+  };
+  // C1 is a valid landing/hub-only dispatch: it has no ids and no stage
+  // artifact. Its preflight already includes C2, so comparing source SHAs
+  // alone cannot reveal that C1 evicted C2's full-section stage.
+  queue.pending = { commit: 'C1', phase: 'finalize', scope: 'bounded-landing-hub' };
+  const recovery = r2LateFinalizeRecoveryDecision({
+    stageCommit: preflightHead,
+    latestCommit: latestPushHead,
+    sectionChanged: false,
+    deferApiWait: false,
+    forceFullSection: true,
+  });
+  assert.deepEqual(articleIds, [], 'la fixture riproduce la dispatch valida senza article ids');
+  assert.equal(queue.running.commit, 'C0');
+  assert.deepEqual(queue.pending, { commit: 'C1', phase: 'finalize', scope: 'bounded-landing-hub' });
+  assert.deepEqual(recovery, {
+    rebootstrap: true,
+    fullSection: true,
+    sourceCommit: latestPushHead,
+    renderCommit: latestPushHead,
+    checkApiAfterStage: true,
+  });
+  assert.equal(new Set([queue.running, queue.pending]).size, 2,
+    'la recovery resta nel waiter esistente e non apre una terza run');
+});
+
+test('recovery API attende l owner automatico, dispatcha solo il release mancante', () => {
+  assert.deepEqual(r2LateApiRecoveryAction({
+    apiInputsChanged: true,
+    readinessReady: true,
+    automaticPublisherOwner: false,
+  }), { action: 'none', waitApi: false });
+  assert.deepEqual(r2LateApiRecoveryAction({
+    apiInputsChanged: true,
+    readinessReady: false,
+    automaticPublisherOwner: true,
+  }), { action: 'wait', waitApi: true });
+  assert.deepEqual(r2LateApiRecoveryAction({
+    apiInputsChanged: true,
+    readinessReady: false,
+    automaticPublisherOwner: false,
+  }), { action: 'dispatch', waitApi: true });
+  assert.deepEqual(r2LateApiRecoveryAction({
+    apiInputsChanged: false,
+    readinessReady: false,
+    automaticPublisherOwner: false,
+  }), { action: 'none', waitApi: false });
+});
+
+test('la barriera differisce readiness soltanto quando il finalize include un target unstaged', () => {
+  assert.equal(r2ShouldDeferApiReadinessToFinalize({
+    finalTargets: ['canton-ti'],
+    staleStageSections: ['canton-ti'],
+    notStagedAtLatest: ['canton-ti'],
+  }), true);
+  assert.equal(r2ShouldDeferApiReadinessToFinalize({
+    finalTargets: ['canton-ti'],
+    staleStageSections: [],
+    notStagedAtLatest: ['canton-gr'],
+  }), false);
+});
+
+test('una modifica condivisa al render risveglia tutte e sole le sezioni R2', () => {
+  const plan = r2PublishPlan(['M\tscripts/lib/article-render-pipeline.mjs'], ARTICLE_SECTION_CORE_LIST);
+  const expected = ARTICLE_SECTION_CORE_LIST.filter((entry) => entry.kind === 'canton').map((entry) => entry.section);
+  assert.deepEqual(plan.map(({ section }) => section), expected);
+  assert.ok(plan.every(({ ids, bootstrap }) => ids.length === 0 && bootstrap === true));
+  assert.ok(plan.every(({ section }) => !['frontaliere', 'svizzera'].includes(section)));
+});
 
 function stepText(name) {
   const matches = [...workflow.matchAll(/^ {6}- name: (.+)$/gm)];

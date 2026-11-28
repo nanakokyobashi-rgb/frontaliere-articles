@@ -1,5 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import '../../host/cantonSectionsBootstrap.mjs';
 import {
   aggregateM1BySection,
   buildArticleRecords,
@@ -18,6 +23,7 @@ import {
   generationJobIsQueued,
   generationJobWasAdmitted,
   hasCompleteM5Coverage,
+  isNoopFastPublishRun,
   m6ZeroIsDateIndependent,
   makeDateWindow,
   m4MetricsAvailability,
@@ -28,6 +34,10 @@ import {
   parseLlmMetricMarkers,
   parseDedupStoreMarkers,
   percentiles,
+  publishRunDurationMinutes,
+  countPublishLiveAssignments,
+  publishSectionsFromJobs,
+  publishLiveSectionsFromRun,
   recordGenerationOutcome,
   resolveThresholdCorpusSize,
   sectionFromGeneration,
@@ -36,8 +46,40 @@ import {
   summarizeM1IndexCoverage,
   verifyM6InputSnapshot,
 } from '../../scripts/ci/measure-section-cadence.mjs';
-import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
+import { ARTICLE_SECTION_CORE_ALL, ARTICLE_SECTION_CORE_LIST } from '../../engine/shared/articleSectionCore.mjs';
+import {
+  articlePublishPlanForRange,
+  r2PublishPlan,
+  r2PublishPlanForRange,
+} from '../../scripts/ci/fast-publish-section.mjs';
 import { setEmbedderForTests } from '../scripts/lib/evidence/embeddingClient.mjs';
+
+function fastPublishPushPathPatterns() {
+  const workflow = readFileSync(new URL('../../.github/workflows/fast-publish-section.yml', import.meta.url), 'utf8');
+  const lines = workflow.split(/\r?\n/u);
+  const pushStart = lines.findIndex((line) => line === '  push:');
+  const dispatchStart = lines.findIndex((line, index) => index > pushStart && line === '  workflow_dispatch:');
+  assert.ok(pushStart >= 0 && dispatchStart > pushStart, 'workflow Fast Publish espone on.push e workflow_dispatch');
+  return lines.slice(pushStart, dispatchStart)
+    .map((line) => line.match(/^\s+-\s+'([^']+)'/u)?.[1])
+    .filter(Boolean);
+}
+
+function gitFixture(root, ...args) {
+  return execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+}
+
+function writeGitFixtureFile(root, relativePath, contents) {
+  const fullPath = path.join(root, relativePath);
+  mkdirSync(path.dirname(fullPath), { recursive: true });
+  writeFileSync(fullPath, contents);
+}
+
+function commitGitFixture(root, message) {
+  gitFixture(root, 'add', '--all');
+  gitFixture(root, 'commit', '--quiet', '-m', message);
+  return gitFixture(root, 'rev-parse', 'HEAD');
+}
 
 test('date windows use inclusive Zurich calendar dates across the CET offset', () => {
   const window = makeDateWindow('2026-11-25', '2026-11-25');
@@ -578,6 +620,338 @@ test('M6 embeds all candidates and compares them with production cosine without 
 test('M3 touched-section mapping follows canonical article write surfaces', () => {
   assert.deepEqual(commitTouchedSections(['content/blog-body-canton-ti/it/example.ts']), ['canton-ti']);
   assert.deepEqual(commitTouchedSections(['README.md']), []);
+});
+
+test('M3 classifica un push senza target come no-op e ne misura la durata', () => {
+  assert.equal(isNoopFastPublishRun(
+    { event: 'push', touchedSections: [] },
+    { touchedSections: [] },
+  ), true);
+  assert.equal(isNoopFastPublishRun(
+    { event: 'workflow_dispatch' },
+    { touchedSections: [] },
+  ), false, 'un dispatch manuale non è il no-op del push che ha aperto il workflow');
+  assert.equal(publishRunDurationMinutes({
+    startedAt: '2026-11-28T10:00:00.000Z',
+    updatedAt: '2026-11-28T10:02:30.000Z',
+  }), 2.5);
+  assert.equal(publishRunDurationMinutes({
+    createdAt: '2026-11-28T10:00:00.000Z',
+    updatedAt: '2026-11-28T10:02:30.000Z',
+  }), 2.5, 'createdAt è il fallback per una run non ancora materializzata con startedAt');
+  assert.equal(publishRunDurationMinutes({
+    startedAt: '2026-11-28T10:03:00.000Z',
+    updatedAt: '2026-11-28T10:02:30.000Z',
+  }), null);
+});
+
+test('M3 shared canton configs conservatively touch every active canton target', () => {
+  const activeCantons = ARTICLE_SECTION_CORE_LIST
+    .filter((entry) => entry.kind === 'canton' && entry.shardKey === null)
+    .map((entry) => entry.section)
+    .sort();
+  for (const changedPath of [
+    'generator/data/canton-sections.json',
+    'generator/data/canton-url-slugs.json',
+  ]) {
+    assert.deepEqual(commitTouchedSections([changedPath], ARTICLE_SECTION_CORE_LIST.map((entry) => entry.section)), activeCantons,
+      `${changedPath} può fan-outare a ciascuna sezione cantonale attiva`);
+  }
+});
+
+test('M3 shared publisher code maps to the emitted active R2 matrix only once per section', () => {
+  const activeSections = ARTICLE_SECTION_CORE_LIST.map((entry) => entry.section);
+  const activeR2Sections = ARTICLE_SECTION_CORE_LIST
+    .filter((entry) => entry.kind === 'canton' && !entry.shardKey)
+    .map((entry) => entry.section)
+    .sort();
+  const paths = [
+    'scripts/ci/fast-publish-section.mjs',
+    'scripts/lib/article-render-pipeline.mjs',
+    '.github/workflows/fast-publish-section.yml',
+  ];
+
+  for (const path of paths) {
+    const emittedSections = r2PublishPlan([path], ARTICLE_SECTION_CORE_LIST).map(({ section }) => section);
+    const touchedSections = commitTouchedSections([path], activeSections);
+    const fastPublishRunsForCommit = 1;
+    const replaysBySection = new Map();
+    for (const section of emittedSections) replaysBySection.set(section, (replaysBySection.get(section) || 0) + 1);
+
+    assert.deepEqual(touchedSections, activeR2Sections,
+      `${path}: il conteggio segue i target R2 attivi, senza shard nazionali o sezioni non attive`);
+    assert.ok(emittedSections.every((section) => touchedSections.includes(section)),
+      `${path}: ogni target della matrix è nel set M3 misurato`);
+    assert.ok([...replaysBySection.values()].every((count) => count <= 1),
+      `${path}: il planner emette al massimo un replay per sezione`);
+    assert.ok(fastPublishRunsForCommit <= touchedSections.length,
+      `${path}: una run diretta di questo commit non supera il numero di sezioni misurate`);
+    if (path !== '.github/workflows/fast-publish-section.yml') {
+      assert.deepEqual(emittedSections, activeR2Sections,
+        `${path}: il planner risveglia l’intera matrix cantonale attiva una sola volta`);
+    }
+  }
+
+  const simulatedRetiredSection = activeR2Sections[0];
+  const simulatedActiveSections = activeSections.filter((section) => section !== simulatedRetiredSection);
+  assert.deepEqual(
+    commitTouchedSections(['scripts/ci/fast-publish-section.mjs'], simulatedActiveSections),
+    activeR2Sections.filter((section) => section !== simulatedRetiredSection),
+    'il mapper usa l’inventario attivo fornito dal core e non riaggiunge una sezione disattivata',
+  );
+});
+
+test('M3 covers every non-content Fast Publish push trigger emitted by the workflow', () => {
+  const patterns = fastPublishPushPathPatterns();
+  const nonContentPatterns = patterns.filter((pattern) => (
+    !pattern.startsWith('content/')
+      && !pattern.startsWith('sections/')
+      && !pattern.startsWith('public/images/')
+  ));
+  const exactPaths = nonContentPatterns.filter((pattern) => !/[?*\[\]{}]/u.test(pattern));
+  assert.equal(exactPaths.length, 69, 'il contract copre tutti i 69 push.paths non-content esatti');
+  assert.equal(nonContentPatterns.length, 71, 'engine/** e host/** sono inclusi oltre ai 69 path esatti');
+
+  const activeSections = ARTICLE_SECTION_CORE_LIST.map((entry) => entry.section);
+  const activeR2Sections = ARTICLE_SECTION_CORE_LIST
+    .filter((entry) => entry.kind === 'canton' && !entry.shardKey)
+    .map((entry) => entry.section)
+    .sort();
+  const globSamples = {
+    'engine/**': 'engine/shared/articleSectionCore.mjs',
+    'host/**': 'host/cantonSectionsBootstrap.mjs',
+  };
+
+  for (const pattern of nonContentPatterns) {
+    const path = pattern.includes('*') ? globSamples[pattern] : pattern;
+    assert.ok(path, `${pattern}: il path trigger non-content ha una fixture concreta`);
+    const emittedSections = r2PublishPlan([path], ARTICLE_SECTION_CORE_LIST).map(({ section }) => section);
+    const touchedSections = commitTouchedSections([path], activeSections);
+    const replaysBySection = new Map();
+    for (const section of emittedSections) replaysBySection.set(section, (replaysBySection.get(section) || 0) + 1);
+
+    assert.ok(emittedSections.length > 0, `${pattern}: il trigger emette target Fast Publish`);
+    assert.deepEqual([...emittedSections].sort(), touchedSections,
+      `${pattern}: M3 misura gli stessi target che emette il planner`);
+    assert.deepEqual([...emittedSections].sort(), activeR2Sections,
+      `${pattern}: un trigger di codice ripubblica solo la matrix cantonale R2 attiva`);
+    assert.ok([...replaysBySection.values()].every((count) => count <= 1),
+      `${pattern}: al massimo un replay per target`);
+    assert.ok(1 <= touchedSections.length,
+      `${pattern}: una run Fast Publish diretta non supera le sezioni misurate`);
+  }
+});
+
+test('M3 confronta col planner R2 anche content, registry, exclusions e immagini', () => {
+  const patterns = fastPublishPushPathPatterns();
+  const samples = new Map([
+    ['content/cantons/**', 'content/cantons/canton-ti/hubs/fisco.json'],
+    ['content/article-index-exclusions.json', 'content/article-index-exclusions.json'],
+    ['content/blog-body-canton-*/**', 'content/blog-body-canton-ti/it/example.ts'],
+    ['content/blog-meta-canton-*', 'content/blog-meta-canton-ti-it.ts'],
+    ['sections/registry.json', 'sections/registry.json'],
+    ['public/images/**', 'public/images/cadence-unowned-review.png'],
+  ]);
+  const activeSections = ARTICLE_SECTION_CORE_LIST.map((entry) => entry.section);
+  for (const [pattern, path] of samples) {
+    assert.ok(patterns.includes(pattern), `${pattern}: il sample deve corrispondere a un push.path del workflow`);
+    if (path === 'sections/registry.json'
+      || path === 'content/article-index-exclusions.json'
+      || path.startsWith('public/images/')) {
+      assert.throws(
+        () => commitTouchedSections([path], activeSections),
+        /M3 richiede il range before\.\.after/,
+        `${pattern}: M3 non deve inventare target senza il range del push`,
+      );
+      continue;
+    }
+    const runtimeTargets = r2PublishPlan([path], ARTICLE_SECTION_CORE_LIST).map(({ section }) => section).sort();
+    const measuredTargets = commitTouchedSections([path], activeSections);
+    assert.deepEqual(measuredTargets, runtimeTargets, `${pattern}: M3 deve misurare il piano R2 senza una mappa parallela`);
+  }
+});
+
+test('M3 e runtime condividono il piano before/after per registry, exclusions e immagini', (t) => {
+  const root = mkdtempSync(path.join(os.tmpdir(), 'm3-r2-plan-range-'));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  gitFixture(root, 'init', '--quiet', '--object-format=sha1');
+  gitFixture(root, 'config', 'user.name', 'Test');
+  gitFixture(root, 'config', 'user.email', 'test@example.invalid');
+  writeGitFixtureFile(root, 'sections/registry.json', JSON.stringify({
+    schema: 1,
+    sections: { 'canton-ti': { status: 'draft' } },
+  }));
+  writeGitFixtureFile(root, 'content/cantons/canton-ti/registry.ts',
+    "export const CANTON_ARTICLES = [{ id: 'ti-article', image: '/images/blog/owned.webp' }];\n");
+  writeGitFixtureFile(root, 'content/article-index-exclusions.json', '{"excluded":[]}\n');
+  const base = commitGitFixture(root, 'fixture base');
+  const measureUrl = new URL('../../scripts/ci/measure-section-cadence.mjs', import.meta.url).href;
+  const plannerUrl = new URL('../../scripts/ci/fast-publish-section.mjs', import.meta.url).href;
+  const coreUrl = new URL('../../engine/shared/articleSectionCore.mjs', import.meta.url).href;
+  const comparePlans = (before, after, changedPath) => JSON.parse(execFileSync(process.execPath, [
+    '--input-type=module', '-e', `
+      import { ARTICLE_SECTION_CORE_LIST } from ${JSON.stringify(coreUrl)};
+      import { commitTouchedSections } from ${JSON.stringify(measureUrl)};
+      import { r2PublishPlanForRange } from ${JSON.stringify(plannerUrl)};
+      const before = process.env.M3_BEFORE;
+      const after = process.env.M3_AFTER;
+      const changedPath = process.env.M3_PATH;
+      const runtime = r2PublishPlanForRange(before, after, ARTICLE_SECTION_CORE_LIST).map(({ section }) => section).sort();
+      const measured = commitTouchedSections([changedPath], ARTICLE_SECTION_CORE_LIST.map(({ section }) => section), { before, after });
+      process.stdout.write(JSON.stringify({ runtime, measured }));
+    `,
+  ], {
+    cwd: root,
+    env: {
+      ...process.env,
+      M3_BEFORE: before,
+      M3_AFTER: after,
+      M3_PATH: changedPath,
+    },
+    encoding: 'utf8',
+  }));
+
+  const cases = [
+    {
+      message: 'owned image',
+      path: 'public/images/blog/owned.webp',
+      write: () => writeGitFixtureFile(root, 'public/images/blog/owned.webp', 'owned'),
+      expected: ['canton-ti'],
+    },
+    {
+      message: 'unowned image',
+      path: 'public/images/cadence-unowned-review.png',
+      write: () => writeGitFixtureFile(root, 'public/images/cadence-unowned-review.png', 'unowned'),
+      expected: [],
+    },
+    {
+      message: 'registry transition',
+      path: 'sections/registry.json',
+      write: () => writeGitFixtureFile(root, 'sections/registry.json', JSON.stringify({
+        schema: 1,
+        sections: { 'canton-ti': { status: 'live' } },
+      })),
+      expected: ['canton-ti'],
+    },
+    {
+      message: 'index exclusion for a non-R2 section',
+      path: 'content/article-index-exclusions.json',
+      write: () => writeGitFixtureFile(root, 'content/article-index-exclusions.json',
+        '{"excluded":[{"section":"frontaliere","id":"a"}]}\n'),
+      expected: [],
+    },
+  ];
+  let before = base;
+  for (const currentCase of cases) {
+    currentCase.write();
+    const after = commitGitFixture(root, currentCase.message);
+    const plans = comparePlans(before, after, currentCase.path);
+    assert.deepEqual(plans.runtime, currentCase.expected, `${currentCase.message}: runtime`);
+    assert.deepEqual(plans.measured, plans.runtime, `${currentCase.message}: M3 deve usare lo stesso before/after planner`);
+    before = after;
+  }
+});
+
+test('M3 counts matrix jobs by section and keeps a coordinator-only barrier globally visible', () => {
+  const section = 'canton-ti';
+  const duringCoordinator = [
+    {
+      id: 'C0',
+      status: 'in_progress',
+      jobs: [{ name: 'finalize (canton-ti)', status: 'in_progress' }],
+    },
+    {
+      id: 'C1',
+      status: 'in_progress',
+      jobs: [
+        { name: 'stage (canton-ti)', status: 'completed' },
+        { name: 'coordinate_api_release', status: 'in_progress' },
+      ],
+    },
+    {
+      id: 'C2',
+      status: 'in_progress',
+      jobs: [{ name: 'stage (canton-ti)', status: 'pending' }],
+    },
+  ];
+  const liveStatuses = new Set(['queued', 'in_progress', 'waiting', 'pending', 'requested']);
+  const liveRuns = duringCoordinator.filter((run) => liveStatuses.has(run.status));
+  const resolvedRuns = liveRuns.map((run) => ({
+    ...run,
+    sections: publishLiveSectionsFromRun({ displayTitle: 'cover-publish-section / auto / nonce=none' }, { jobs: run.jobs }),
+  }));
+  const assignments = countPublishLiveAssignments(resolvedRuns, [section]);
+  assert.equal(liveRuns.length, 3, 'tutti i workflow vivi restano nel conteggio aggregato');
+  assert.deepEqual(assignments, { bySection: { [section]: 2 }, unscoped: 1 },
+    'C0 finalize + C2 stage sono i due target TI; C1 ha solo il coordinator durante la barriera');
+  assert.deepEqual(publishSectionsFromJobs(duringCoordinator[1].jobs, { liveOnly: true }), [],
+    'il coordinator resta globale e non dichiara una finalize matrix prima del suo output');
+  assert.deepEqual(publishSectionsFromJobs(duringCoordinator[2].jobs, { liveOnly: true }), [section],
+    'lo stage pending C2 è attribuito al target mentre attende il concurrency group');
+
+  // Once the coordinator output becomes available, Actions materializes C1's
+  // finalize matrix. queue:single atomically replaces the older pending C2
+  // stage, leaving C0 running plus exactly one TI waiter.
+  const afterCoordinator = [
+    { id: 'C0', status: 'in_progress', jobs: [{ name: 'finalize (canton-ti)', status: 'in_progress' }] },
+    { id: 'C1', status: 'in_progress', jobs: [{ name: 'finalize (canton-ti)', status: 'pending' }] },
+    { id: 'C2', status: 'completed', conclusion: 'cancelled', jobs: [{ name: 'stage (canton-ti)', status: 'completed' }] },
+  ];
+  const afterAssignments = countPublishLiveAssignments(afterCoordinator
+    .filter((run) => liveStatuses.has(run.status))
+    .map((run) => ({ ...run, sections: publishLiveSectionsFromRun({}, { jobs: run.jobs }) })), [section]);
+  assert.deepEqual(afterAssignments, { bySection: { [section]: 2 }, unscoped: 0 },
+    'dopo l’espansione finalize sostituisce C2 nello stesso queue:single group');
+
+  const resolvingWorkflow = [
+    { name: 'resolve', status: 'in_progress' },
+    { name: 'stage (canton-ti)', status: 'pending' },
+  ];
+  assert.deepEqual(publishSectionsFromJobs(resolvingWorkflow, { liveOnly: true }), [section],
+    'una matrix pending è attribuita anche se resolve non è terminale');
+  assert.deepEqual(publishSectionsFromJobs([
+    { name: 'coordinate_api_release', status: 'in_progress' },
+  ], { liveOnly: true }), [],
+  'un coordinator privo di matrix target resta unscoped ma continua a essere contato nel totale workflow');
+  assert.deepEqual(publishLiveSectionsFromRun(
+    { displayTitle: 'cover-publish-section / canton-ti / nonce=manual' },
+    { jobsReadable: false },
+  ), [section], 'se il Jobs API non è leggibile un run manuale targettato resta attribuito conservativamente');
+  assert.deepEqual(publishLiveSectionsFromRun(
+    { displayTitle: 'cover-publish-section / auto / nonce=none' },
+    { jobsReadable: false },
+  ), [], 'una push auto senza Jobs API resta nel contatore unscoped, non sparisce');
+  assert.deepEqual(publishSectionsFromJobs([
+    { name: 'stage (canton-ti)' },
+    { name: 'finalize (canton-ti)' },
+    { name: 'finalize (canton-gr)' },
+    { name: 'coordinate_api_release' },
+  ]), ['canton-gr', 'canton-ti'], 'matrici multi-target vengono assegnate a ogni sezione una sola volta');
+
+  const actualActionsNames = [
+    { name: 'publish (canton-ow, false, false, false)', status: 'in_progress' },
+    { name: 'stage (canton-ti)', status: 'pending' },
+    { name: 'finalize (canton-gr)', status: 'queued' },
+  ];
+  assert.deepEqual(publishSectionsFromJobs(actualActionsNames), ['canton-gr', 'canton-ow', 'canton-ti'],
+    'i nomi effettivi Actions con matrix object mantengono la sezione nel primo campo');
+  assert.deepEqual(publishSectionsFromJobs(actualActionsNames, { liveOnly: true }), ['canton-gr', 'canton-ow', 'canton-ti'],
+    'running, pending e queued sono attribuiti alla sezione anche col nome matrix legacy');
+});
+
+test('M3 attribuisce il titolo dispatch esplicito quando Jobs API mostra solo resolve', () => {
+  const explicitTarget = { displayTitle: 'cover-publish-section / canton-ti / nonce=manual' };
+  const resolveOnly = [{ name: 'resolve', status: 'in_progress' }];
+  assert.deepEqual(publishLiveSectionsFromRun(explicitTarget, { jobs: resolveOnly, jobsReadable: true }), ['canton-ti'],
+    'il target resta misurabile prima che Actions materializzi la matrix');
+  assert.deepEqual(publishLiveSectionsFromRun(
+    { displayTitle: 'cover-publish-section / auto / nonce=none' },
+    { jobs: resolveOnly, jobsReadable: true },
+  ), [], 'una push automatica senza target matrix resta unscoped durante resolve');
+  assert.deepEqual(publishLiveSectionsFromRun(explicitTarget, {
+    jobs: [{ name: 'stage (canton-gr)', status: 'pending' }],
+    jobsReadable: true,
+  }), ['canton-gr'], 'la matrix canonica prevale sul titolo del run quando identifica target live');
 });
 
 test('page verifier helpers extract canonical URL and JSON-LD datePublished', () => {

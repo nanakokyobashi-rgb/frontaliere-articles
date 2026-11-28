@@ -298,8 +298,10 @@ test('workflow D22 usa cron/dispatch, lancia refresh e bootstrap, crea solo PR e
   assert.match(WORKFLOW, /workflow_run:/u);
   assert.doesNotMatch(WORKFLOW, /^\s*- 'fast-publish-section'$/mu);
   const publisher = fs.readFileSync(path.join(ROOT, '.github/workflows/fast-publish-section.yml'), 'utf8');
-  assert.match(publisher, /Recheck promotion after an explicit bootstrap\n\s+if: github\.event_name == 'workflow_dispatch' && inputs\.bootstrap == true && steps\.collect\.outputs\.rendered_head != ''/u);
-  assert.match(publisher, /gh workflow run auto-live-canton-sections\.yml[^\n]+\n\s+-f mode=promote -f sections="\$SECTION"/u);
+  // La promozione dopo un bootstrap esplicito vive nel finalize (che tiene lo
+  // slot di sezione e conosce la sezione del target), solo a render riuscito.
+  assert.match(publisher, /Promote explicit bootstrap section\n\s+if: success\(\) && github\.event_name == 'workflow_dispatch' && inputs\.bootstrap == true && steps\.render\.outputs\.rendered_head != ''/u);
+  assert.match(publisher, /SECTION: \$\{\{ matrix\.target\.section \}\}\n\s+REPOSITORY: \$\{\{ github\.repository \}\}\n\s+run: gh workflow run auto-live-canton-sections\.yml --repo "\$REPOSITORY" --ref main -f mode=promote -f sections="\$SECTION"/u);
   assert.match(WORKFLOW, /gh workflow run refresh-canton-hubs\.yml/u);
   assert.match(WORKFLOW, /gh workflow run fast-publish-section\.yml/u);
   assert.match(WORKFLOW, /node scripts\/ci\/auto-live-canton-sections\.mjs "\$\{args\[@\]\}"/u);

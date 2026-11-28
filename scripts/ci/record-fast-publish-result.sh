@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
+# Un output di step non valorizzato arriva vuoto: il verificatore di coorte
+# legge "false" per un render non ceduto, quindi il default e esplicito.
 
 result_file="$RUNNER_TEMP/fast-publish-result.json"
 jq -cn \
   --arg section "$SECTION" \
   --arg rendered_head "${RENDERED_HEAD:-}" \
-  --arg stale_handoff "${STALE_HANDOFF:-}" \
+  --arg stale_handoff "${STALE_HANDOFF:-false}" \
   --arg stale_handoff_head "${STALE_HANDOFF_HEAD:-}" \
   --arg stale_handoff_nonce "${STALE_HANDOFF_NONCE:-}" \
   --arg stale_handoff_title "${STALE_HANDOFF_TITLE:-}" \

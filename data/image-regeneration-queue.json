@@ -114,6 +114,17 @@
       "requestedAt": "2026-11-28T01:17:57.732Z",
       "lastFailureAt": "2026-11-28T01:17:57.732Z",
       "retryHint": "no-text"
+    },
+    {
+      "articleId": "lucerna-prova-corsie-autobus",
+      "title": "Lucerna prova corsie bus e modifiche alle fermate",
+      "fallbackImage": "/images/blog/article-autobus-elettrici-mendrisiotto-amsa.webp",
+      "reason": "All image providers failed for article-lucerna-prova-corsie-autobus: openai-codex (vision gate rejected image: Generic city-bus traffic scene, but vehicle plates and visible car ba",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-11-28T14:42:57.730Z",
+      "lastFailureAt": "2026-11-28T14:42:57.730Z",
+      "retryHint": "no-text"
     }
   ]
 }

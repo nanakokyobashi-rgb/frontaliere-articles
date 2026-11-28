@@ -10,6 +10,10 @@ const workflow = readFileSync(
   new URL('../../.github/workflows/fast-publish-section.yml', import.meta.url),
   'utf8',
 );
+const apiOnlyListenerWorkflow = readFileSync(
+  new URL('../../.github/workflows/fast-publish-api-only-listener.yml', import.meta.url),
+  'utf8',
+);
 const resolver = readFileSync(
   new URL('../../scripts/ci/fast-publish-section-resolve.sh', import.meta.url),
   'utf8',
@@ -32,6 +36,8 @@ const replayDispatcher = readFileSync(
 );
 
 const boundedDispatch = readFileSync(new URL('../../scripts/ci/dispatch-bounded-section-replay.sh', import.meta.url), 'utf8');
+const coordinatorScript = readFileSync(new URL('../../scripts/ci/fast-publish-section-coordinate.sh', import.meta.url), 'utf8');
+const lateApiRecovery = readFileSync(new URL('../../scripts/ci/fast-publish-section-late-api-recovery.sh', import.meta.url), 'utf8');
 
 function triggerBlock(name) {
   const start = workflow.indexOf(`\n  ${name}:`);
@@ -41,34 +47,129 @@ function triggerBlock(name) {
   return next < 0 ? rest : rest.slice(0, next);
 }
 
-test('il job publish accoda le richieste per sezione e limita il parallelismo della matrice', () => {
-  const publish = workflow.match(/\n  publish:\n[\s\S]*?(?=\n\S|\n  \S|$)/u)?.[0];
-  assert.ok(publish, 'manca il job publish');
+function jobBlock(name) {
+  const start = workflow.indexOf(`\n  ${name}:`, workflow.indexOf('\njobs:'));
+  assert.ok(start >= 0, `job ${name} missing`);
+  const rest = workflow.slice(start + 1);
+  const next = rest.search(/\n  [A-Za-z_][A-Za-z0-9_-]*:/u);
+  return next < 0 ? rest : rest.slice(0, next);
+}
 
-  const strategy = publish.match(/^    strategy:\n(?: {6}[^\n]*\n)*/mu)?.[0];
-  assert.ok(strategy, 'manca la strategia del job publish');
-  assert.match(strategy, /^      max-parallel: 4$/mu);
+test('stage, coordinator e finalize rispettano la barriera e un solo slot pending per sezione', () => {
+  const stage = jobBlock('stage');
+  const coordinator = jobBlock('coordinate_api_release');
+  const finalize = jobBlock('finalize');
+  assert.match(stage, /^    name: stage \(\$\{\{ matrix\.target\.section \}\}\)$/mu,
+    'il nome effettivo della matrix stage deve mantenere la sezione leggibile da M3');
+  assert.match(finalize, /^    name: finalize \(\$\{\{ matrix\.target\.section \}\}\)$/mu,
+    'il nome effettivo della matrix finalize deve mantenere la sezione leggibile da M3');
 
-  const concurrency = publish.match(/^    concurrency:\n(?: {6}[^\n]*\n)*/mu)?.[0];
-  assert.ok(concurrency, 'manca il blocco concurrency del job publish');
-  assert.match(concurrency, /^      group: fast-publish-\$\{\{ matrix\.target\.section \}\}$/mu);
-  assert.match(concurrency, /^      cancel-in-progress: false$/mu);
-  assert.match(concurrency, /^      queue: max$/mu);
+  for (const [name, job] of [
+    ['stage', stage],
+    ['finalize', finalize],
+  ]) {
+    assert.match(job, /^    concurrency:\n(?: {6}[^\n]*\n)*/mu);
+    assert.match(job, /^      group: \$\{\{ matrix\.target\.group \|\| format\('fast-publish-\{0\}', matrix\.target\.section\) \}\}$/mu);
+    assert.match(job, /^      cancel-in-progress: false$/mu);
+    assert.match(job, /^      queue: single$/mu, `${name} must keep one waiting run per section`);
+  }
+  assert.match(stage, /fromJSON\(needs\.resolve\.outputs\.stage_matrix\)/u);
+  assert.match(finalize, /fromJSON\(needs\.coordinate_api_release\.outputs\.final_matrix\)/u);
+  assert.match(stage, /max-parallel: 4/u);
+  assert.match(coordinator, /needs: \[resolve, stage\]/u);
+  assert.match(coordinator, /needs\.resolve\.outputs\.any == 'true'/u);
+  assert.doesNotMatch(coordinator, /needs\.stage\.result == 'success'/u, 'nessuna barriera tutto-o-niente sullo stage');
+  assert.match(coordinator, /final_matrix: \$\{\{ steps\.decision\.outputs\.final_matrix \}\}/u);
+  assert.ok(workflow.indexOf('\n  stage:') < workflow.indexOf('\n  coordinate_api_release:'));
+  assert.ok(workflow.indexOf('\n  coordinate_api_release:') < workflow.indexOf('\n  finalize:'));
+
+  const dispatch = coordinator.indexOf('- name: Dispatch publish-api for the staged release');
+  assert.ok(dispatch >= 0, 'coordinator must dispatch after the stage barrier');
+  assert.doesNotMatch(coordinator, /wait-fast-publish-api-readiness.mjs|Wait for the served API release/u,
+    'the unscoped coordinator must finish without an API wait');
+  assert.equal((coordinator.match(/gh workflow run publish-api\.yml/g) ?? []).length, 1);
+  assert.match(finalize, /Wait for API release readiness while holding the section slot/u);
+  assert.match(finalize, /FAST_PUBLISH_API_WAIT_MS: '5400000'/u);
+  assert.ok(finalize.indexOf('Wait for API release readiness while holding the section slot')
+    < finalize.indexOf('- name: Render and finalize latest section pages'));
+  assert.match(finalize, /needs: \[resolve, stage, coordinate_api_release\]/u);
+  assert.match(finalize, /needs\.coordinate_api_release\.result == 'success' \|\| needs\.coordinate_api_release\.result == 'skipped'/u);
+  assert.doesNotMatch(finalize, /needs\.stage\.result == 'success'/u);
+  assert.match(finalize, /Read latest main after acquiring the section slot/u);
 });
 
-test('un replay pinned superato usa un nuovo nonce per la revisione di destinazione', () => {
-  const step = workflow.split('      - name: Dispatch bounded replay with current corpus checkout\n')[1]
-    .split('\n      - name:')[0];
-  assert.match(step, /run: bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-bounded-section-replay\.sh/u);
-  assert.doesNotMatch(boundedDispatch, /DISPATCH_NONCE|DISPATCH_COHORT|inputs\.dispatch_(nonce|cohort)/u);
-  for (const caller of [boundedDispatch, render]) {
-    assert.match(caller, /"\$\{replay_args\[@\]\}" -f dispatch_nonce=/u);
-  }
-  assert.match(render, /--replay-nonce "\$current_main" "\$SECTION" "\$\{replay_args\[@\]\}"/u);
-  assert.match(boundedDispatch, /--replay-nonce "\$CURRENT_MAIN" "\$SECTION" "\$\{replay_args\[@\]\}"/u);
-  assert.match(boundedDispatch, /-f dispatch_nonce="\$dispatch_nonce"/u);
-  assert.match(boundedDispatch, /dispatch_cohort="stale-late-\$\{GITHUB_RUN_ID\}-\$\{SECTION\}-n1"/u);
-  assert.match(boundedDispatch, /-f dispatch_cohort="\$dispatch_cohort"/u);
+test('la matrix finalize compare solo dopo l output del coordinator globale', () => {
+  const coordinator = jobBlock('coordinate_api_release');
+  const finalize = jobBlock('finalize');
+  assert.match(finalize, /needs: \[resolve, stage, coordinate_api_release\]/u);
+  assert.match(finalize, /target: \$\{\{ fromJSON\(needs\.coordinate_api_release\.outputs\.final_matrix\) \}\}/u);
+  assert.match(coordinator, /final_matrix: \$\{\{ steps\.decision\.outputs\.final_matrix \}\}/u);
+  assert.doesNotMatch(coordinator, /wait-fast-publish-api-readiness\.mjs/u,
+    'il coordinator resta un barrier job globale breve; il wait avviene solo quando esiste finalize per target');
+  assert.match(finalize, /Wait for API release readiness while holding the section slot/u);
+});
+
+test('la classificazione separa lo stage API dal render code-only e mantiene la riconciliazione API-only', () => {
+  assert.match(resolver, /r2-api-data-range/);
+  assert.match(resolver, /r2-api-stage-plan-range "\$before" "\$\{after:-HEAD\}"/u);
+  assert.match(resolver, /api_action=dispatch/u);
+  assert.match(resolver, /--push-trigger "\$before" "\$\{after:-HEAD\}" \.github\/workflows\/publish-api\.yml/u);
+  assert.match(resolver, /publish_api_push_owner.*?api_action=wait/su);
+  assert.match(resolver, /api_action=none/u);
+  assert.match(resolver, /WORKFLOW_RUN_EVENT" = 'push'[\s\S]*?range_has_api_data[\s\S]*?matrix='\[\]'/u);
+  assert.match(resolver, /api_action=wait/u);
+  assert.match(resolver, /api_wait_commit="\$\{after:-\$\(git rev-parse HEAD\)\}"/u);
+  assert.match(workflow, /stage_matrix: \$\{\{ steps\.plan\.outputs\.stage_matrix \}\}/u);
+  assert.match(workflow, /api_action: \$\{\{ steps\.plan\.outputs\.api_action \}\}/u);
+  assert.match(render, /TARGET_BOOTSTRAP:-false.*true[\s\S]*ARTICLE_IDS_JSON='\[\]'[\s\S]*BOOTSTRAP=true/u);
+  assert.match(jobBlock('stage'), /ARTICLE_IDS_JSON: '\[\]'[\s\S]*BOOTSTRAP: true/u);
+  assert.match(jobBlock('finalize'), /ALLOW_DEFERRED_LIVE_RELEASE: false/u);
+});
+
+test('i target stale cedono al pending per sezione senza dispatchare altri run', () => {
+  assert.match(jobBlock('stage'), /steps\.render\.outputs\.stale_handoff == 'true'[\s\S]*nessun dispatch API effettuato/u);
+  assert.match(jobBlock('finalize'), /section-source-unaffected\.sh --section "\$SECTION" "\$stage_source" "\$observed"/u);
+  assert.match(jobBlock('stage'), /DEFER_STALE_HANDOFF: true/u);
+  assert.match(jobBlock('finalize'), /DEFER_STALE_HANDOFF: true/u);
+  assert.match(render, /defer_stale_handoff\(\)/u);
+  assert.doesNotMatch(workflow, /Dispatch bounded replay with current corpus checkout/u);
+  assert.doesNotMatch(workflow, /gh run list --repo .*fast-publish-section/u);
+});
+
+test('il finalize recupera una stage cross-phase sostituita con bootstrap latest nello stesso slot', () => {
+  const finalize = jobBlock('finalize');
+  assert.match(finalize, /group: \$\{\{ matrix\.target\.group \|\| format\('fast-publish-\{0\}', matrix\.target\.section\) \}\}/u);
+  assert.match(finalize, /queue: single/u);
+  assert.match(finalize, /CLEANUP_INACTIVE_SURFACE: \$\{\{ matrix\.target\.cleanupInactiveSurface \|\| false \}\}/u);
+  assert.match(finalize, /if \[ "\$CLEANUP_INACTIVE_SURFACE" = 'true' \]; then[\s\S]*?eligible=true[\s\S]*?r2-section-eligible/u);
+  assert.match(finalize, /sectionChanged:\$sectionChanged[\s\S]*?r2-late-finalize-recovery/u);
+  assert.match(finalize, /DEFER_API_WAIT: \$\{\{ needs\.coordinate_api_release\.outputs\.defer_api_wait \|\| false \}\}/u);
+  assert.match(finalize, /name: Restage latest section before API readiness/u);
+  assert.match(finalize, /name: Wait for recovered API release readiness/u);
+  assert.match(finalize, /TARGET_BOOTSTRAP: true/u);
+  assert.match(finalize, /ALLOW_DEFERRED_LIVE_RELEASE: true/u);
+  assert.match(finalize, /queue: single[\s\S]*?Read latest main after acquiring the section slot/u);
+  assert.match(finalize, /Acquire bootstrap R2 gate for recovery stage[\s\S]*?Restage latest section before API readiness[\s\S]*?Release bootstrap R2 gate after recovery stage[\s\S]*?Resolve late API release after recovery stage[\s\S]*?Wait for recovered API release readiness[\s\S]*?Acquire bootstrap R2 gate for finalization[\s\S]*?Render and finalize latest section pages/u);
+  assert.match(finalize, /FULL_SECTION_LATEST_RECOVERY: true/u);
+  assert.match(finalize, /PREFLIGHT_HEAD: \$\{\{ needs\.resolve\.outputs\.preflight_head \}\}/u);
+  assert.match(finalize, /elif \[ "\$CLEANUP_INACTIVE_SURFACE" != 'true' \][\s\S]*?\[\[ "\$\{PREFLIGHT_HEAD:-\}" =~ \^\[a-f0-9\]\{40\}\$ \]\][\s\S]*?stage_source="\$PREFLIGHT_HEAD"/u);
+  assert.match(finalize, /force_full_section=false[\s\S]*?stage_source="\$PREFLIGHT_HEAD"[\s\S]*?force_full_section=true/u,
+    'qualunque target attivo senza artifact forza full-section latest, anche con ids vuoti e preflight già latest');
+  assert.match(finalize, /--argjson forceFullSection "\$force_full_section"[\s\S]*?forceFullSection:\$forceFullSection[\s\S]*?r2-late-finalize-recovery/u);
+  assert.match(finalize, /\[ "\$targeted" != 'true' \][\s\S]*?force_full_section=true/u,
+    'il full-section forzato vale solo per i bounded senza ID e senza pagine 404 note (dispatch mirati: render mirato)');
+  assert.match(finalize, /if \[ "\$CLEANUP_INACTIVE_SURFACE" != 'true' \][\s\S]*?section-source-unaffected\.sh --section/u,
+    'cleanup-only non deve essere convertito in full-section render');
+  assert.match(finalize, /ARTICLE_IDS_JSON: \$\{\{ steps\.start_source\.outputs\.rebootstrap == 'true' && '\[\]' \|\| toJSON\(matrix\.target\.ids\) \}\}/u);
+  assert.match(finalize, /MISSING_PAGE_PATHS_JSON: \$\{\{ toJSON\(matrix\.target\.missingPagePaths/u,
+    'il recovery full-section conserva i path 404 verificati');
+  assert.match(finalize, /KNOWN_MISSING_PAGE_PATHS_JSON: \$\{\{ toJSON\(matrix\.target\.knownMissingPagePaths/u,
+    'il recovery full-section conserva il set dei 404 noti');
+  assert.match(lateApiRecovery, /r2-api-data-range "\$baseline" "\$STAGED_HEAD"/u);
+  assert.match(lateApiRecovery, /wait-fast-publish-api-readiness\.mjs --probe-once/u);
+  assert.match(lateApiRecovery, /r2-late-api-recovery/u);
+  assert.match(lateApiRecovery, /automaticPublisherOwner/);
+  assert.match(lateApiRecovery, /gh workflow run publish-api\.yml[\s\S]*?source_commit=\$api_commit/u);
 });
 
 test('fast-publish-section non crea run push sui branch di PR', () => {
@@ -78,15 +179,16 @@ test('fast-publish-section non crea run push sui branch di PR', () => {
   assert.doesNotMatch(workflow.slice(workflow.indexOf('\non:')), /\n  pull_request:/u);
 });
 
-test('fast-publish-section limita i replay workflow_run a publish-api verde su main', () => {
-  const run = triggerBlock('workflow_run');
+test('il listener separato ascolta solo publish-api verde su main', () => {
+  const runStart = apiOnlyListenerWorkflow.indexOf('\n  workflow_run:');
+  assert.ok(runStart >= 0, 'manca il trigger workflow_run nel listener');
+  const run = apiOnlyListenerWorkflow.slice(runStart + 1, apiOnlyListenerWorkflow.indexOf('\npermissions:', runStart));
   assert.match(run, /workflows: \['Publish article data API'\]/u);
   assert.match(run, /types: \[completed\]/u);
   assert.match(run, /branches: \[main\]/u);
-
-  const resolve = workflow.slice(workflow.indexOf('\n  resolve:'), workflow.indexOf('\n  plan:'));
-  assert.match(resolve, /github\.event\.workflow_run\.conclusion == 'success'/u);
-  assert.match(resolve, /github\.event\.workflow_run\.head_branch == 'main'/u);
+  assert.match(apiOnlyListenerWorkflow, /github\.event\.workflow_run\.conclusion == 'success'/u);
+  assert.match(apiOnlyListenerWorkflow, /github\.event\.workflow_run\.head_branch == 'main'/u);
+  assert.doesNotMatch(workflow, /^  workflow_run:/mu, 'la workflow Fast non deve creare run di follow-up');
 });
 
 test('fast-publish-section mantiene il contratto dispatch esplicito', () => {
@@ -103,30 +205,41 @@ test('fast-publish-section mantiene il contratto dispatch esplicito', () => {
   assert.match(dispatch, /dispatch_cohort:[\s\S]*?type: string/u);
 });
 
-test('fast-publish-section ricontrolla main subito prima del replay API', () => {
-  const replay = workflow.slice(workflow.indexOf('\n  replay-api-after-staged-release:'));
-  const dispatchStep = replay.slice(replay.indexOf('- name: Replay publish-api after staged release'));
-  const guardIndex = dispatchStep.indexOf('verifyMainHeadAtDispatch() {');
-  const dispatchIndex = dispatchStep.indexOf('gh workflow run publish-api.yml');
-
-  assert.ok(guardIndex >= 0, 'manca il controllo finale della HEAD di main');
-  assert.ok(dispatchIndex > guardIndex, 'il dispatch deve avvenire dopo il controllo finale');
-  assert.match(dispatchStep, /current_main="\$\(bash scripts\/ci\/read-main-head\.sh\)"/u);
-  assert.match(dispatchStep, /\[ "\$current_main" != "\$SOURCE_COMMIT" \]/u);
-  assert.match(dispatchStep, /replay API interrotto/u);
-  assert.match(dispatchStep, /if verifyMainHeadAtDispatch; then/u);
+test('il coordinator usa il marker range e fa readiness HTTP senza polling GitHub', () => {
+  const coordinator = jobBlock('coordinate_api_release');
+  const finalize = jobBlock('finalize');
+  const pushRange = workflow.slice(
+    workflow.indexOf('- name: Resolve originating push range'),
+    workflow.indexOf('- name: Fetch push base (resolve)'),
+  );
+  assert.match(coordinator, /bing_seo_nonce="fast-publish-range-\$\{before\}-\$\{API_COMMIT\}"/u);
+  assert.doesNotMatch(coordinator, /wait-fast-publish-api-readiness\.mjs/u);
+  assert.match(finalize, /Wait for API release readiness while holding the section slot/u);
+  assert.match(finalize, /steps\.start_source\.outputs\.rebootstrap != 'true' && needs\.coordinate_api_release\.outputs\.wait_api == 'true'/u);
+  assert.match(finalize, /run: node scripts\/ci\/wait-fast-publish-api-readiness\.mjs/u);
+  assert.doesNotMatch(coordinator, /gh run list|gh api .*actions\/runs/u);
+  assert.match(resolver, /workflow_run del dispatch API gia' coperto dal push Fast Publish/u);
+  assert.match(pushRange, /if \[ "\$range_source" != 'fast-publish-range-title' \][\s\\]*&& \[ "\$after" != "\$WORKFLOW_RUN_HEAD_SHA" \]/u);
 });
 
-test('fast-publish-section artifactizza nonce e revisione del child', () => {
-  const record = workflow.slice(workflow.indexOf('- name: Record publish result'));
-  assert.match(record, /DISPATCH_NONCE: \$\{\{ inputs\.dispatch_nonce \}\}/u);
-  assert.match(record, /DISPATCH_COHORT: \$\{\{ inputs\.dispatch_cohort \}\}/u);
-  assert.match(record, /COORDINATED_RECOVERY: \$\{\{ inputs\.coordinated_recovery \}\}/u);
-  assert.match(record, /SOURCE_COMMIT: \$\{\{ needs\.resolve\.outputs\.source_commit \|\| inputs\.source_commit \}\}/u);
-  assert.match(workflow, /scripts\/ci\/record-fast-publish-result\.sh/u);
-  assert.match(resultRecorder, /source_main_commit: \$source_main_commit/u);
-  assert.match(resultRecorder, /dispatch_nonce: \$dispatch_nonce/u);
-  assert.match(resultRecorder, /dispatch_cohort: \$dispatch_cohort/u);
+test('il coordinator dispatcha e il finalize attende HTTP sotto lo slot della sezione', () => {
+  const dispatchBranch = coordinatorScript.slice(coordinatorScript.indexOf('if [ "$API_ACTION" = \'dispatch\' ]; then'));
+  assert.match(dispatchBranch, /if \[ "\$can_dispatch" = 'true' \]; then\n\s+action=dispatch\n\s+wait_api=true\n\s+api_commit="\$latest"/u);
+  const coordinator = jobBlock('coordinate_api_release');
+  const finalize = jobBlock('finalize');
+  assert.match(coordinator, /- name: Dispatch publish-api for the staged release/u);
+  assert.doesNotMatch(coordinator, /Wait for the served API release|wait-fast-publish-api-readiness\.mjs/u);
+  assert.match(finalize, /group: \$\{\{ matrix\.target\.group[\s\S]*?queue: single/u);
+  assert.match(finalize, /if: steps\.start_source\.outputs\.fresh == 'true' && steps\.start_source\.outputs\.rebootstrap != 'true' && needs\.coordinate_api_release\.outputs\.wait_api == 'true'[\s\S]*?wait-fast-publish-api-readiness\.mjs/u);
+});
+
+test('il producer stage artifactizza la revisione completa osservata nello slot', () => {
+  const stage = jobBlock('stage');
+  assert.match(stage, /Read main after acquiring the section slot/u);
+  assert.match(stage, /sourceCommit: \$sourceCommit, staged: true/u);
+  assert.match(stage, /Upload stage artifact/u);
+  assert.match(stage, /name: fast-publish-stage-\$\{\{ matrix\.target\.section \}\}/u);
+  assert.match(stage, /SOURCE_COMMIT: \$\{\{ steps\.start_source\.outputs\.head \}\}/u);
 });
 
 test('il dispatcher riconosce il run-name con coorte dopo dry-run', () => {
@@ -135,26 +248,24 @@ test('il dispatcher riconosce il run-name con coorte dopo dry-run', () => {
   assert.match(replayDispatcher, /test\(" \/ dry=true\(\?: \/ c=\[\^\/\]\+\)\?\$"\)/u);
 });
 
-test('il replay checkout mantiene tutti gli helper nel profilo sparse', () => {
-  const replay = workflow.slice(workflow.indexOf('\n  replay-api-after-staged-release:'));
-  const checkout = replay.slice(
-    replay.indexOf('- name: Checkout replay dispatcher from workflow revision'),
-    replay.indexOf('- name: Materialize freshness helper from workflow revision'),
-  );
-
-  assert.match(checkout, /sparse-checkout:\s*\|/u);
-  assert.match(checkout, /scripts\/ci\/dispatch-fast-publish-replay\.sh[\s\S]*scripts\/ci\/read-main-head\.sh/u);
+test('il wait API rimane sotto lo slot cantonale e il coordinator non attende fuori gruppo', () => {
+  const coordinator = jobBlock('coordinate_api_release');
+  const finalize = jobBlock('finalize');
+  assert.doesNotMatch(coordinator, /^    concurrency:/mu);
+  assert.match(coordinator, /needs: \[resolve, stage\]/u);
+  assert.match(coordinator, /timeout-minutes: 190/u);
+  assert.doesNotMatch(coordinator, /FAST_PUBLISH_API_WAIT_MS|wait-fast-publish-api-readiness\.mjs/u);
+  assert.match(finalize, /group: \$\{\{ matrix\.target\.group[\s\S]*?queue: single/u);
+  assert.match(finalize, /FAST_PUBLISH_API_WAIT_MS: '5400000'/u);
+  assert.match(finalize, /Wait for API release readiness while holding the section slot/u);
 });
 
-test('fast-publish-section mantiene il resolver sotto il limite del parser GitHub', () => {
+test('fast-publish-section richiama resolver esterni senza incorporare script nel workflow', () => {
   assert.match(workflow, /- name: Materialize resolver from workflow revision/u);
   assert.match(workflow, /scripts\/ci\/fast-publish-section-resolve\.sh/u);
-  const resolve = workflow.slice(
-    workflow.indexOf('\n      - name: Resolve sections and article ids'),
-    workflow.indexOf('\n      - name: Arm normal push staged replay'),
-  );
+  const resolve = jobBlock('resolve');
   assert.match(resolve, /run: \|\n\s+bash scripts\/ci\/fast-publish-section-resolve\.sh/u);
-  assert.ok(resolver.length < 21_000, `resolver too large: ${resolver.length}`);
+  assert.ok(resolve.length < 21_000, `inline resolver job too large: ${resolve.length}`);
   assert.match(resolver, /reconcile_edge_matrix\(\)/u);
   assert.match(resolver, /GITHUB_OUTPUT/u);
   assert.match(resolver, /FAST_PUBLISH_ARMED/u);
@@ -428,28 +539,99 @@ jobs:
   }
 });
 
-test('fast-publish-section conserva la guardia di freschezza anche con checkout pinned precedente', () => {
-  const materializers = [...workflow.matchAll(/- name: Materialize (?:resolver|freshness helper) from workflow revision[\s\S]*?(?=\n      - name:|\n  [A-Za-z_][A-Za-z0-9_-]*:|$)/gu)]
-    .map((match) => match[0]);
-  assert.equal(materializers.length, 3, 'ogni job che legge main deve materializzare la guardia');
-  for (const block of materializers) {
-    assert.match(block, /if \[ -f "\$(?:source|main_head_source)" \]; then/u);
-    assert.match(block, /elif \[ -f "\$(?:target|main_head_target)" \]; then/u);
-    assert.match(block, /fallback git-transport/u);
-    assert.match(block, /git ls-remote --refs/u);
-    assert.match(block, /timeout 60/u);
-    assert.doesNotMatch(block, /helper della punta di main non presente.*exit 1/u);
+test('la guardia R2 scopa body, metadata, hub, registry e immagini alla sezione proprietaria', (t) => {
+  const root = mkdtempSync(path.join(tmpdir(), 'section-source-scope-'));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: 'pipe' }).trim();
+  const guard = fileURLToPath(new URL('../../scripts/ci/section-source-unaffected.sh', import.meta.url));
+  const planner = fileURLToPath(new URL('../../scripts/ci/fast-publish-section.mjs', import.meta.url));
+  git('init', '--quiet', '--object-format=sha1');
+  git('config', 'user.name', 'Test');
+  git('config', 'user.email', 'test@example.invalid');
+  mkdirSync(path.join(root, 'scripts/ci'), { recursive: true });
+  symlinkSync(planner, path.join(root, 'scripts/ci/fast-publish-section.mjs'));
+
+  const registry = (id, image) => `export const CANTON_ARTICLES = [{ id: '${id}', image: '/images/blog/${image}' }];\n`;
+  const registryState = (ti, vd) => JSON.stringify({
+    schema: 1,
+    sections: {
+      'canton-ti': { status: ti },
+      'canton-vd': { status: vd },
+    },
+  });
+  const baseFiles = new Map([
+    ['sections/registry.json', registryState('draft', 'draft')],
+    ['content/cantons/canton-ti/registry.ts', registry('ti-article', 'ti.webp')],
+    ['content/cantons/canton-vd/registry.ts', registry('vd-article', 'vd.webp')],
+    ['content/blog-meta-canton-ti-it.ts', `const META = {\n  'blog.article.ti-article.title': 'TI',\n};\n`],
+    ['content/blog-meta-canton-vd-it.ts', `const META = {\n  'blog.article.vd-article.title': 'VD',\n};\n`],
+  ]);
+  for (const [file, source] of baseFiles) {
+    mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
+    writeFileSync(path.join(root, file), source);
+  }
+  git('add', '.');
+  git('commit', '--quiet', '-m', 'R2 fixture base');
+  const base = git('rev-parse', 'HEAD');
+
+  const commitFile = (label, file, source) => {
+    mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
+    writeFileSync(path.join(root, file), source);
+    git('add', '.');
+    git('commit', '--quiet', '-m', label);
+    return git('rev-parse', 'HEAD');
+  };
+  const check = (section, expected, current, status, label) => {
+    const result = spawnSync('bash', [guard, '--section', section, expected, current], { cwd: root, encoding: 'utf8' });
+    assert.ifError(result.error);
+    assert.equal(result.status, status, `${label} / ${section}\n${result.stderr}`);
+  };
+
+  let previous = base;
+  let current = commitFile('body VD', 'content/blog-body-canton-vd/it/vd-article.ts', 'export default "VD";\n');
+  check('canton-ti', previous, current, 0, 'body di VD non invalida TI');
+  check('canton-vd', previous, current, 1, 'body di VD invalida VD');
+  previous = current;
+
+  current = commitFile('hub VD', 'content/cantons/canton-vd/hubs/local-news.json', '{"schema":1}\n');
+  check('canton-ti', previous, current, 0, 'hub di VD non invalida TI');
+  check('canton-vd', previous, current, 1, 'hub di VD invalida VD');
+  previous = current;
+
+  current = commitFile('metadata VD', 'content/blog-meta-canton-vd-it.ts', `const META = {\n  'blog.article.vd-article.title': 'VD aggiornato',\n};\n`);
+  check('canton-ti', previous, current, 0, 'metadata VD non invalida TI');
+  check('canton-vd', previous, current, 1, 'metadata VD invalida VD');
+  previous = current;
+
+  current = commitFile('immagine VD', 'public/images/blog/vd.webp', 'asset');
+  check('canton-ti', previous, current, 0, 'asset di VD non invalida TI');
+  check('canton-vd', previous, current, 1, 'asset di VD invalida VD');
+  previous = current;
+
+  current = commitFile('promozione VD', 'sections/registry.json', registryState('draft', 'live'));
+  check('canton-ti', previous, current, 0, 'flip registry VD non invalida TI');
+  check('canton-vd', previous, current, 1, 'flip registry VD invalida VD');
+});
+
+test('stage e finalize leggono latest soltanto dopo avere acquisito lo slot per sezione', () => {
+  const materializer = workflow.slice(
+    workflow.indexOf('\n      - name: Materialize resolver from workflow revision'),
+    workflow.indexOf('\n      - name: Set up Node (resolve)'),
+  );
+  assert.match(materializer, /fallback git-transport/u);
+  assert.match(materializer, /git ls-remote --refs/u);
+  for (const name of ['stage', 'finalize']) {
+    const job = jobBlock(name);
+    assert.match(job, /Read main after acquiring the section slot|Read latest main after acquiring the section slot/u);
+    assert.match(job, /bash scripts\/ci\/read-main-head\.sh/u);
+    assert.match(job, /git checkout --detach "\$observed"/u);
   }
 });
 
-test('fast-publish-section delega i blocchi shell grandi a script senza espressioni YAML', () => {
-  for (const name of [
-    'preflight',
-    'render',
-    'recovery',
-  ]) {
+test('fast-publish-section delega preflight e render a script shell senza espressioni YAML', () => {
+  for (const name of ['preflight', 'render']) {
     const path = `scripts/ci/fast-publish-section-${name}.sh`;
-    const checkout = name === "render" ? ".replay-dispatcher-source/" : "";
+    const checkout = '';
     assert.ok(workflow.includes(`run: bash ${checkout}${path}\n`), `workflow must run ${checkout}${path}`);
     const source = readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
     assert.match(source, /^#!\/usr\/bin\/env bash/u);
@@ -458,39 +640,14 @@ test('fast-publish-section delega i blocchi shell grandi a script senza espressi
   }
 });
 
-test('una gara stale consegna la sezione al coordinatore senza dichiarare una pubblicazione', () => {
-  assert.match(render, /dispatch_stale_replay\(\)/u);
-  assert.match(render, /echo "stale_handoff=true" >> "\$GITHUB_OUTPUT"/u);
-  assert.match(render, /echo "stale_handoff_head=\$handoff_head" >> "\$GITHUB_OUTPUT"/u);
-  assert.match(render, /echo "stale_handoff_nonce=\$stale_handoff_nonce" >> "\$GITHUB_OUTPUT"/u);
-  assert.match(render, /echo "stale_handoff_title=\$stale_handoff_title" >> "\$GITHUB_OUTPUT"/u);
-  assert.match(render, /coordinatore sulla HEAD/u);
-  assert.doesNotMatch(
-    render,
-    /main e' avanzata durante tre tentativi di render del publisher[\s\S]*exit 1/u,
-    'tre avanzamenti concorrenti devono accodare il replay, non lasciare il producer rosso',
-  );
-  assert.match(workflow, /STALE_HANDOFF: \$\{\{ steps\.render\.outputs\.stale_handoff \}\}/u);
-  assert.match(resultRecorder, /stale_handoff: \$stale_handoff/u);
-  assert.match(workflow, /stale_handoff: \$\{\{ steps\.collect\.outputs\.stale_handoff \}\}/u);
-  assert.match(workflow, /echo 'mixed_matrix=true' >> "\$GITHUB_OUTPUT"/u);
-  assert.doesNotMatch(workflow, /needs\.publish_release_head\.outputs\.stale_handoff != 'true'/u);
-  assert.match(
-    workflow,
-    /all\(\.\[\]; \(\.rendered_head == "" and \(\(\.stale_handoff == "true"\) or \(\.fresh == "false"\)\)\)\)/u,
-  );
-  assert.ok(
-    workflow.includes('(.stale_handoff // "") == "true"'),
-    'una matrix mista deve ricorrere al recovery, non annunciare una release parziale',
-  );
-  assert.match(workflow, /steps\.stale\.outputs\.recovery_head \|\| steps\.replay_freshness\.outputs\.current_main \|\| needs\.publish_release_head\.outputs\.rendered_head/u);
-  assert.match(workflow, /steps\.replay_freshness\.outputs\.fresh == 'false'[\s\S]*needs\.publish_release_head\.outputs\.mixed_matrix == 'true'/u);
-  assert.match(render, /-f dispatch_cohort="\$dispatch_cohort"/u);
-  assert.match(render, /child_replay_api_after_publish=false/u);
-  assert.match(render, /child_coordinated_recovery=true/u);
-  assert.match(render, /-f coordinated_recovery="\$child_coordinated_recovery"/u);
-  assert.match(boundedDispatch, /child_replay_api_after_publish=false/u);
-  assert.match(boundedDispatch, /child_coordinated_recovery=true/u);
+test('un target diventato stale cede al pending senza dispatchare un altro Fast Publish', () => {
+  assert.match(render, /defer_stale_handoff\(\)/u);
+  assert.match(render, /DEFER_STALE_HANDOFF:-false/u);
+  assert.match(render, /target \$SECTION ceduto alla run latest/u);
+  assert.match(jobBlock('stage'), /DEFER_STALE_HANDOFF: true/u);
+  assert.match(jobBlock('finalize'), /DEFER_STALE_HANDOFF: true/u);
+  assert.doesNotMatch(jobBlock('stage'), /dispatch-fast-publish-replay|dispatch-bounded-section-replay/u);
+  assert.doesNotMatch(jobBlock('finalize'), /dispatch-fast-publish-replay|dispatch-bounded-section-replay/u);
 });
 
 test('il replay pinned consegna la sezione se main avanza durante il render', () => {
@@ -534,25 +691,14 @@ test('il replay pinned consegna la sezione se main avanza durante il render', ()
   }
 });
 
-test('il replay stale installa il parser prima di risolvere la release API', () => {
-  const publish = workflow.slice(workflow.indexOf('\n  publish:'));
-  const runtime = publish.indexOf('- name: Setup isolated article source runtime');
-  const staleDispatch = publish.indexOf('- name: Dispatch bounded replay with current corpus checkout');
-
-  assert.ok(runtime >= 0, 'il publish deve inizializzare il runtime TypeScript');
-  assert.ok(staleDispatch > runtime, 'il runtime deve precedere il dispatch stale');
-  assert.match(
-    publish.slice(runtime, staleDispatch),
-    /if: steps\.replay_freshness\.outputs\.fresh == 'true' \|\| github\.event\.workflow_run\.head_sha != ''/u,
-  );
-  assert.match(
-    publish.slice(runtime, staleDispatch),
-    /uses: \.\/\.replay-dispatcher-source\/\.github\/actions\/setup-article-source-runtime/u,
-  );
-  assert.match(
-    boundedDispatch,
-    /import \{ resolveStaleReplayApiReleaseCommit \} from "\.\/scripts\/publish-section-pages\.mjs"/u,
-  );
+test('il coordinator prepara Remote Config prima del dispatch API', () => {
+  const coordinator = jobBlock('coordinate_api_release');
+  const runtime = coordinator.indexOf('- name: Setup isolated article source runtime for Remote Config');
+  const dispatch = coordinator.indexOf('- name: Dispatch publish-api for the staged release');
+  assert.ok(runtime >= 0 && dispatch > runtime);
+  assert.match(coordinator.slice(runtime, dispatch), /Install dependencies for Remote Config/u);
+  assert.match(coordinator.slice(runtime, dispatch), /Load dispatch token from Remote Config/u);
+  assert.ok(boundedDispatch.includes('import { resolveStaleReplayApiReleaseCommit } from "./scripts/publish-section-pages.mjs"'));
 });
 
 test('reconcile evita un backfill duplicato sulla stessa revisione e conserva la coorte del flip', () => {

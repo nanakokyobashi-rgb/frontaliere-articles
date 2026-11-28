@@ -71,7 +71,7 @@ permissions:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 40
     steps:
       - name: Resolve run mode
         id: mode
@@ -116,6 +116,39 @@ jobs:
 
       - name: Install dependencies
         run: bash scripts/lib/npm-ci-retry.sh --no-audit --no-fund --ignore-scripts
+
+      # M6 (dedup semantico): registerArticleFiles() esegue il gate di dedup
+      # semantico fail-closed, che costruisce/aggiorna lo store di embedding
+      # della sezione (sectionEmbeddingStore.mjs) col modello locale (~470 MB).
+      # Le stesse cache di generate-article.yml (stesso path e stessa chiave del
+      # modello => stesso archivio): solo un acceleratore, senza non cambia
+      # l'esito, ma il primo run a freddo non deve consumare il timeout del job.
+      # `--ignore-scripts` e' sicuro: onnxruntime-node porta i binari CPU nel
+      # pacchetto (il postinstall scarica solo gli EP CUDA).
+      - name: Dedup store cache key
+        id: dedup_store_key
+        run: echo "day=$(date -u +%F)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache local embedding model (dedup)
+        uses: actions/cache@v6
+        with:
+          path: .cache/transformers
+          key: transformers-multilingual-e5-small-fp32-v1
+
+      - name: Cache section dedup embedding store
+        uses: actions/cache@v6
+        with:
+          path: |
+            data/article-embeddings.bin
+            data/article-embeddings-meta.json
+            data/swiss-article-embeddings.bin
+            data/swiss-article-embeddings-meta.json
+            data/sections/*/article-embeddings.bin
+            data/sections/*/article-embeddings-meta.json
+          key: dedup-store-v1-secondary-${{ steps.dedup_store_key.outputs.day }}
+          restore-keys: |
+            dedup-store-v1-secondary-
+            dedup-store-v1-frontaliere-
 
       # Hard gate, deliberately before anything else: no window, no article.
       # Push self-tests are always dry: GitHub Actions IPs get HTTP 403 from

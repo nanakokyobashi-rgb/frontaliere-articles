@@ -36,7 +36,7 @@ const PARSER_JOBS = {
   '.github/workflows/bing-seo-loop.yml': ['audit'],
   '.github/workflows/content-gates-main.yml': ['gates'],
   '.github/workflows/fast-publish-article.yml': ['resolve', 'publish'],
-  '.github/workflows/fast-publish-section.yml': ['resolve', 'publish'],
+  '.github/workflows/fast-publish-section.yml': ['resolve', 'stage', 'finalize'],
   '.github/workflows/generate-article-core.yml': ['generate'],
   '.github/workflows/generate-article.yml': ['generate'],
   '.github/workflows/generate-border-wait-ranking-weekly.yml': ['refresh'],
@@ -54,8 +54,10 @@ const PARSER_JOBS = {
 };
 const RUNTIME_ACTION_PATHS = {
   '.github/workflows/fast-publish-section.yml': {
+    // resolve gira sul checkout del trigger e legge l'action dal sorgente del
+    // dispatcher; stage e finalize rileggono main dentro lo slot di sezione
+    // (HEAD osservata) e usano l'action di quel checkout, cioe' il default.
     resolve: './.replay-dispatcher-source/.github/actions/setup-article-source-runtime',
-    publish: './.replay-dispatcher-source/.github/actions/setup-article-source-runtime',
   },
   '.github/workflows/publish-api.yml': {
     publish: './.article-source-runtime/.github/actions/setup-article-source-runtime',
@@ -149,7 +151,10 @@ test('article-source runtime is isolated, pinned, retried, and limited to parser
       `${workflowPath}/${jobName}: detection must initialize the shared parser runtime`);
   }
 
-  for (const jobName of ['resolve', 'publish']) {
+  // Solo resolve gira sul checkout del trigger e legge l'action dal sorgente
+  // pinnato del dispatcher; stage/finalize usano l'action del checkout main
+  // osservato nello slot (verificato sotto).
+  for (const jobName of ['resolve']) {
     const job = getJobBlock(fastSection, jobName);
     assert.match(job, /ref: \$\{\{ github\.sha \}\}[\s\S]*?path: \.replay-dispatcher-source[\s\S]*?sparse-checkout:\s*\|[\s\S]*?\.github\/actions\/setup-article-source-runtime\/action\.yml[\s\S]*?scripts\/ci\/article-source-runtime\/package-lock\.json[\s\S]*?scripts\/ci\/check-article-source-runtime\.mjs[\s\S]*?scripts\/lib\/npm-ci-retry\.sh/);
     assert.match(job, /uses: \.\/\.replay-dispatcher-source\/\.github\/actions\/setup-article-source-runtime/);
@@ -171,9 +176,15 @@ test('article-source runtime is isolated, pinned, retried, and limited to parser
   }
 
   assert.match(getJobBlock(read('.github/workflows/fast-publish-article.yml'), 'publish'), /Setup isolated article source runtime\n        if: needs\.resolve\.outputs\.skip != 'true'/);
+  // stage: il job non esce prima del setup (l'eleggibilita' e' gia' verificata
+  // dallo step precedente); finalize: il runtime serve solo se la run e' fresca.
   assert.match(
-    getJobBlock(read('.github/workflows/fast-publish-section.yml'), 'publish'),
-    /Setup isolated article source runtime\n        if: steps\.replay_freshness\.outputs\.fresh == 'true' \|\| github\.event\.workflow_run\.head_sha != ''/,
+    getJobBlock(read('.github/workflows/fast-publish-section.yml'), 'stage'),
+    /Setup isolated article source runtime\n        uses: \.\/\.github\/actions\/setup-article-source-runtime/,
+  );
+  assert.match(
+    getJobBlock(read('.github/workflows/fast-publish-section.yml'), 'finalize'),
+    /Setup isolated article source runtime\n        if: steps\.start_source\.outputs\.fresh == 'true'\n        uses: \.\/\.github\/actions\/setup-article-source-runtime/,
   );
 
   const batchFaqWorkflow = read('.github/workflows/batch-faq-articles.yml');

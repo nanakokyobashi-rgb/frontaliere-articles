@@ -1237,6 +1237,39 @@ jobs:
       - name: Install dependencies
         run: bash scripts/lib/npm-ci-retry.sh
 
+      # M6 (dedup semantico): lo store di embedding della sezione si costruisce
+      # da services/locales/<meta>-it.ts nel generatore, PRIMA del confronto
+      # (sectionEmbeddingStore.mjs), e il gate e' fail-closed. Queste due cache
+      # sono solo un acceleratore: il modello e' ~470 MB dalla CDN pubblica
+      # HuggingFace, lo store un file per sezione aggiornato in modo incrementale.
+      # Nessun segreto, nessuna scrittura nel repo (gli store sono in .gitignore).
+      - name: Dedup store cache key
+        id: dedup_store_key
+        if: steps.mode.outputs.dry != 'true'
+        run: echo "day=$(date -u +%F)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache local embedding model (dedup)
+        if: steps.mode.outputs.dry != 'true'
+        uses: actions/cache@v6
+        with:
+          path: .cache/transformers
+          key: transformers-multilingual-e5-small-fp32-v1
+
+      - name: Cache section dedup embedding store
+        if: steps.mode.outputs.dry != 'true'
+        uses: actions/cache@v6
+        with:
+          path: |
+            data/article-embeddings.bin
+            data/article-embeddings-meta.json
+            data/swiss-article-embeddings.bin
+            data/swiss-article-embeddings-meta.json
+            data/sections/*/article-embeddings.bin
+            data/sections/*/article-embeddings-meta.json
+          key: dedup-store-v1-${{ steps.mode.outputs.section }}-${{ steps.dedup_store_key.outputs.day }}
+          restore-keys: |
+            dedup-store-v1-${{ steps.mode.outputs.section }}-
+
       - name: Prepare Firebase credentials
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
@@ -1877,7 +1910,7 @@ jobs:
           stall_log="$diag_dir/attempt.log"
           tee_pid=""
           attempt_pipe=""
-          # Tieni il client fuori dall'artifact, che va caricato solo se ci sono diagnostiche.
+          # Il client resta fuori dall'artifact.
           cdp_client="${RUNNER_TEMP:-/tmp}/cdp-stack.mjs"
 
           source scripts/ci/generation-watchdog-process.sh
@@ -1968,8 +2001,7 @@ jobs:
             done
           }
 
-          # Il watchdog viene atteso prima del cleanup del tentativo e
-          # terminato comunque all'uscita dallo step.
+          # Il watchdog termina comunque all'uscita.
           watch_pid=""
           # shellcheck disable=SC2317,SC2329
           stall_atexit() {
@@ -2001,6 +2033,7 @@ jobs:
           run_attempt="${GITHUB_RUN_ATTEMPT:-1}"
 
           for sec in "${sections[@]}"; do
+            declared_reason=""
             remaining=$(( budget_s - SECONDS ))
             if [ "$remaining" -lt "$min_attempt_s" ]; then
               echo "::warning::time budget spent — not attempting section $sec"
@@ -2075,7 +2108,7 @@ jobs:
             stall_watchdog "$attempt_pid" "$attempt_identity" &
             watch_pid=$!
             if wait "$attempt_pid"; then rc=0; else rc=$?; fi
-            # Il timeout può terminare la generazione mentre la cattura è in corso.
+            # Il timeout può terminare la cattura.
             if [ ! -f "$stall_flag" ]; then
               kill_tree KILL "$watch_pid"
             fi
@@ -2229,6 +2262,9 @@ jobs:
 
             if [ "$rc" = "4" ]; then
               echo "::warning::create-article.mjs: nessun articolo sulla sezione $sec, ragione legittima DICHIARATA (exit 4)"
+              if grep -q 'DEDUP_GATE_UNAVAILABLE section=' "$stall_log"; then
+                declared_reason=dedup-unavailable; provider_blocked=true; effective="$sec"; break
+              fi
             elif [ "$rc" = "0" ]; then
               all_declared=false
               [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs e' uscito 0 sulla sezione $sec senza scrivere un corpo e senza dichiarare una ragione (attesa: exit 4)"
@@ -2270,11 +2306,11 @@ jobs:
             outcome_section="$effective"
           elif [ "$provider_blocked" = "true" ]; then
             outcome_kind="no-article"
-            outcome_reason="provider-unavailable"
+            outcome_reason="${declared_reason:-provider-unavailable}"
             outcome_section="$effective"
           elif [ "$all_declared" = "true" ]; then
             outcome_kind="no-article"
-            outcome_reason="declared"
+            outcome_reason="${declared_reason:-declared}"
             outcome_section="$effective"
           fi
           echo "GENERATION_OUTCOME kind=$outcome_kind reason=$outcome_reason section=$outcome_section"
@@ -2306,7 +2342,7 @@ jobs:
             exit 1
           fi
           if [ "$all_declared" != "true" ]; then
-            echo "::error::nessun articolo in $tried tentativi, e la ragione NON e' dichiarata: ${undeclared_why}. Vedi generator/scripts/lib/exhaustion-disposition.mjs per i codici dichiarati. Un'uscita senza articolo e senza dichiarazione e' il verde silenzioso della #313 (60+ run 'success' consecutive, 06:06Z→16:30Z del 2026-08-14), e da qui in poi e' rossa."
+            echo "::error::nessun articolo in $tried tentativi, e la ragione NON e' dichiarata: ${undeclared_why}. Codici dichiarati: generator/scripts/lib/exhaustion-disposition.mjs. Senza dichiarazione e' il verde silenzioso della #313: rossa."
             exit 1
           fi
           if [ "$provider_blocked" = "true" ]; then

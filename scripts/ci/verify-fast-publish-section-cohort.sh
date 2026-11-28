@@ -223,8 +223,14 @@ while IFS=$'\t' read -r run_id nonce section run_head; do
     reopen_reconcile
     not_ready "artifact del child $run_id non scaricabile"
   fi
-  mapfile -t result_files < <(find "$run_dir" -type f -name fast-publish-result.json -print)
-  if [ "${#result_files[@]}" -ne 1 ]; then
+  result_file=''
+  result_file_count=0
+  while IFS= read -r candidate_file; do
+    [ -n "$candidate_file" ] || continue
+    result_file="$candidate_file"
+    result_file_count=$((result_file_count + 1))
+  done < <(find "$run_dir" -type f -name fast-publish-result.json -print)
+  if [ "$result_file_count" -ne 1 ]; then
     reopen_reconcile
     not_ready "artifact fast-publish-result non univoco per il child $run_id"
   fi
@@ -233,7 +239,7 @@ while IFS=$'\t' read -r run_id nonce section run_head; do
     # The dispatch event can point at a newer main than the pinned checkout.
     # Keep both revisions within the proven range and check the artifact's
     # source and rendered revision against its actual pin.
-    if ! artifact_source="$(jq -er '.source_commit | select(type == "string" and test("^[a-f0-9]{40}$"))' "${result_files[0]}")"; then
+    if ! artifact_source="$(jq -er '.source_commit | select(type == "string" and test("^[a-f0-9]{40}$"))' "$result_file")"; then
       not_ready "source commit assente o invalida nell'artifact child $run_id"
     fi
     if [ "$artifact_source" != "$run_head" ] && \
@@ -263,7 +269,7 @@ while IFS=$'\t' read -r run_id nonce section run_head; do
      and .fresh == "true"
      and (.stale_handoff // "false") == "false"
      and .coordinated_recovery == "true"' \
-    "${result_files[0]}" >/dev/null; then
+    "$result_file" >/dev/null; then
     not_ready "artifact child $run_id non coerente con $cohort/$nonce"
   fi
 done < <(jq -r '.runs[] | [.databaseId, .nonce, .section, .headSha] | @tsv' <<< "$candidate_json")

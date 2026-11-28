@@ -96,6 +96,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.esperimento-viario-lucerna-centro.title': 'Verkehrsexperiment im Zentrum von Luzern ab Dezember 2026',
     'blog.article.esperimento-viario-lucerna-centro.excerpt': 'Die erste Etappe des Verkehrsexperiments im Zentrum von Luzern beginnt Mitte Dezember 2026, mit der Ankündigung vom 27. November 2026.',
     'blog.article.esperimento-viario-lucerna-centro.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.lucerna-prova-corsie-autobus.title': 'Luzern testet Busspuren und Änderungen an Haltestellen',
+    'blog.article.lucerna-prova-corsie-autobus.excerpt': 'Seit Mitte Dezember testet der Kanton Busspuren, eine ausschließlich für Busse reservierte Spur und Änderungen an den Haltestellen Weggismatt, Seefeldstrasse und St. Klemens.',
+    'blog.article.lucerna-prova-corsie-autobus.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;

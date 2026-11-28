@@ -72,6 +72,9 @@ const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.coira-voto-alloggi-accessibili.title': 'Coira al voto il 29 novembre sugli alloggi accessibili',
     'blog.article.coira-voto-alloggi-accessibili.excerpt': 'Il voto comunale è fissato al 29 novembre. A Coira si decide sull\'iniziativa per alloggi accessibili.',
     'blog.article.coira-voto-alloggi-accessibili.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.gkb-garanzia-aumento-pagamento.title': 'GKB: aumento previsto per la garanzia cantonale',
+    'blog.article.gkb-garanzia-aumento-pagamento.excerpt': 'Il governo grigionese giudica solida la Graubündner Kantonalbank nonostante le vicende Benko e Stoffel.',
+    'blog.article.gkb-garanzia-aumento-pagamento.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGrIt;
