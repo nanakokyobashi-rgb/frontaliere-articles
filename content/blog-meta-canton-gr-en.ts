@@ -72,6 +72,9 @@ const blogMetaCantonGrEn: Record<string, string> = {
     'blog.article.coira-voto-alloggi-accessibili.title': 'Chur votes on November 29 on affordable housing',
     'blog.article.coira-voto-alloggi-accessibili.excerpt': 'The municipal vote is scheduled for November 29. Chur will decide on the initiative for affordable housing.',
     'blog.article.coira-voto-alloggi-accessibili.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.gkb-garanzia-aumento-pagamento.title': 'GKB: increase planned for the cantonal guarantee',
+    'blog.article.gkb-garanzia-aumento-pagamento.excerpt': 'The Graubündner government considers Graubündner Kantonalbank sound despite the Benko and Stoffel affairs.',
+    'blog.article.gkb-garanzia-aumento-pagamento.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGrEn;

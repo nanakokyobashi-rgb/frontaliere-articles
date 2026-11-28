@@ -72,6 +72,9 @@ const blogMetaCantonGrDe: Record<string, string> = {
     'blog.article.coira-voto-alloggi-accessibili.title': 'Chur stimmt am 29. November über bezahlbaren Wohnraum ab',
     'blog.article.coira-voto-alloggi-accessibili.excerpt': 'Die kommunale Abstimmung findet am 29. November statt. In Chur wird über die Initiative für bezahlbaren Wohnraum entschieden.',
     'blog.article.coira-voto-alloggi-accessibili.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.gkb-garanzia-aumento-pagamento.title': 'GKB: Erhöhung für die kantonale Garantie vorgesehen',
+    'blog.article.gkb-garanzia-aumento-pagamento.excerpt': 'Die Bündner Regierung beurteilt die Graubündner Kantonalbank trotz der Vorgänge um Benko und Stoffel als solide.',
+    'blog.article.gkb-garanzia-aumento-pagamento.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGrDe;

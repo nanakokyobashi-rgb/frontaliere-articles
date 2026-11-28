@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 1313,
+  "assetCount": 1314,
   "assets": [
     {
       "schema": 1,
@@ -54596,6 +54596,49 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Generic photorealistic synthetic scene of a Swiss mountain-town storefront; no people, readable text, signage, or logos."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-gkb-garanzia-aumento-pagamento",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2",
+      "executorModel": "gpt-6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "dfdba910b78311959ad56a249321913253b43615e1811cdc60b35543b3c7b757",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "a3909dcc014b0bbe13e9ca779ebc36a0bd1a408c6a52d3c07f8538c6f6eb9ad8",
+      "bytes": 200044,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-11-28T14:22:45.603Z",
+      "verifiedAt": "2026-11-28T14:22:55.046Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-gkb-garanzia-aumento-pagamento.webp",
+      "area": "Swiss border region",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Generic alpine institutional building in a Graubünden-like landscape; no visible text, logos, people, or specific event."
       }
     }
   ],

@@ -260,4 +260,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'gkb-garanzia-aumento-pagamento',
+ category: 'fiscale',
+ date: '2026-11-28T14:22:55.685Z',
+ image: '/images/blog/article-gkb-garanzia-aumento-pagamento.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GR'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
