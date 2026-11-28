@@ -8765,6 +8765,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.voto-federale-iniziative-referendum.title': 'Federal votes: four annual dates and signature thresholds',
     'blog.article.voto-federale-iniziative-referendum.excerpt': 'The federal calendar provides for four voting dates per year.',
     'blog.article.voto-federale-iniziative-referendum.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.salario-minimo-ticino-compromesso.title': 'Minimum wage in Ticino: around 4\'000 gross francs per month',
+    'blog.article.salario-minimo-ticino-compromesso.excerpt': 'The Grand Council approved the Ticino compromise. The increase is gradual and, from 2030, is adjusted for inflation.',
+    'blog.article.salario-minimo-ticino-compromesso.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

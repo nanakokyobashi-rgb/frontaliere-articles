@@ -8765,6 +8765,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.voto-federale-iniziative-referendum.title': 'Bundesabstimmungen: vier Abstimmungstermine pro Jahr und Unterschriftenhürden',
     'blog.article.voto-federale-iniziative-referendum.excerpt': 'Der eidgenössische Kalender sieht vier Abstimmungstermine pro Jahr vor.',
     'blog.article.voto-federale-iniziative-referendum.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.salario-minimo-ticino-compromesso.title': 'Mindestlohn im Tessin etwa 4\'000 Franken brutto pro Monat',
+    'blog.article.salario-minimo-ticino-compromesso.excerpt': 'Der Grosse Rat hat den Tessiner Kompromiss angenommen. Die Erhöhung erfolgt schrittweise und folgt ab 2030 der Teuerung.',
+    'blog.article.salario-minimo-ticino-compromesso.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;
