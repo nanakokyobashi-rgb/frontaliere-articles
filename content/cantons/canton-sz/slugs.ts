@@ -20,6 +20,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'piani-rete-ciclabile-svitto': { it: 'piani-rete-ciclabile-svitto', en: 'schwyz-cycling-network-plans', de: 'schwyz-radwegenetzplane', fr: 'plans-reseau-cyclable-schwyz' },
  'gov-svitto-respinge-autorizzazione': { it: 'gov-svitto-respinge-autorizzazione', en: 'schwyz-government-rejects-authorization', de: 'schwyz-regierung-lehnt-autorisierung', fr: 'schwytz-gouvernement-rejette-autorisation' },
  'svitto-microsoft-365-amministrazione': { it: 'svitto-microsoft-365-amministrazione', en: 'schwyz-microsoft-365-administration', de: 'schwyz-microsoft-365-verwaltung', fr: 'schwyz-microsoft-365-administration' },
+ 'einsiedeln-investimenti-netti-piano': { it: 'einsiedeln-investimenti-netti-piano', en: 'einsiedeln-net-investment-plan', de: 'einsiedeln-nettoinvestitionen-finanzplan', fr: 'einsiedeln-plan-investissements-nets' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

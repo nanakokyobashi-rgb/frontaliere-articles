@@ -4,18 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-02/bei-der-wefa-in-thayngen-kommt-es-zu-einem-wechsel": {
-      "section": "canton-sh",
-      "ts": 1795558089683
-    },
-    "canton-sh::https://www.schaffhausen24.ch/articles/421516-anpassung-der-richtpraemien-fuer-praemienverbilligungsbeitraege": {
-      "section": "canton-sh",
-      "ts": 1795645350820
-    },
-    "canton-sh::https://www.schaffhausen24.ch/articles/421478-digitale-gewalt-ist-echte-gewalt": {
-      "section": "canton-sh",
-      "ts": 1795666535167
-    },
     "canton-sh::https://www.radiomunot.ch/p/regionalnachrichten-vom-25-november-2026-1630-uhr-69ddvgv1xjpnouuttenpop": {
       "section": "canton-sh",
       "ts": 1795691506049
@@ -23,6 +11,18 @@
     "canton-sh::https://www.schaffhausen24.ch/articles/421106-praesentieren-und-kontakte-knuepfen": {
       "section": "canton-sh",
       "ts": 1795691848036
+    },
+    "canton-sh::https://www.shn.ch/region/stadt/2026-11-27/vermummte-brechen-mit-rammbock-in-schaffhauser-schmuckgeschaeft-ein-das": {
+      "section": "canton-sh",
+      "ts": 1795860886107
+    },
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-11-19/gf-schlaegt-jean-christophe-deslarzes-als-neues-mitglied-des": {
+      "section": "canton-sh",
+      "ts": 1795861371034
+    },
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-19/transport-fever-3-im-test-erfahren-sie-ob-dieses": {
+      "section": "canton-sh",
+      "ts": 1795861384254
     }
   }
 }
