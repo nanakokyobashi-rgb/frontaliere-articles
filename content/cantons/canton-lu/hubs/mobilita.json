@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-11-28T00:24:25.001Z",
-  "contentHash": "96c06ac8974c2d99f06bdd320c1e950945e78ead7e13e578de4bc8cab8772395",
+  "updatedAt": "2026-11-28T17:11:28.288Z",
+  "contentHash": "45c60b465892e73b9d61c29ca34feb8ad97955008aae4e146a66b58a67bf3975",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -120,6 +120,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Lucerna prova corsie bus e modifiche alle fermate",
+          "url": "/articoli-lucerna/lucerna-prova-corsie-autobus/",
+          "excerpt": "Da metà dicembre il Cantone prova corsie bus, una corsia riservata agli autobus e modifiche alle fermate Weggismatt, Seefeldstrasse e St. Klemens.",
+          "date": "2026-11-28T14:42:57.208Z"
+        },
+        {
           "title": "Passepartout: accesso più semplice al trasporto pubblico",
           "url": "/articoli-lucerna/passepartout-trasporto-centrale/",
           "excerpt": "Prima del 1986 servivano più biglietti per un viaggio nell'ÖV.",
@@ -160,12 +166,6 @@
           "url": "/articoli-svizzera/abbonamenti-trasporti-pubblici-canton-lucerna/",
           "excerpt": "La VBL offre diversi tipi di abbonamenti, tra cui il abbonamento mensile e annuale, per i residenti e gli studenti.",
           "date": "2026-08-15T21:36:07.353Z"
-        },
-        {
-          "title": "Lugano-Lucerna a Cornaredo: strade chiuse e ritardi sabato",
-          "url": "/articoli-frontaliere/lugano-lucerna-partita-traffico/",
-          "excerpt": "Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo.",
-          "date": "2026-10-08T11:18:04.293Z"
         }
       ],
       "latestCantonArticles": [],
@@ -179,7 +179,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-28T00:24:25.001Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     },
     "en": {
       "canton": "LU",
@@ -282,6 +282,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Lucerne tests bus lanes and stop changes",
+          "url": "/en/lucerne-articles/lucerne-tests-bus-lane-measures/",
+          "excerpt": "From mid-December, the Canton is testing bus lanes, a lane reserved for buses, and changes to the Weggismatt, Seefeldstrasse and St. Klemens stops.",
+          "date": "2026-11-28T14:42:57.208Z"
+        },
+        {
           "title": "Passepartout: easier access to public transport",
           "url": "/en/lucerne-articles/passepartout-central-transit/",
           "excerpt": "Before 1986, multiple tickets were required for a journey on public transport.",
@@ -321,11 +327,6 @@
           "url": "/en/swiss-articles/public-transport-passes-canton-lucerne-zones-and-fares/",
           "excerpt": "The VBL offers different types of subscriptions, including monthly and annual subscription, for residents and students.",
           "date": "2026-08-15T21:36:07.353Z"
-        },
-        {
-          "title": "Lucerne fans in Lugano: road closures, traffic delays",
-          "url": "/en/cross-border-articles/lucerne-fans-in-lugano-road-closures-traffic-delays/",
-          "date": "2026-10-08T11:18:04.293Z"
         }
       ],
       "latestCantonArticles": [],
@@ -339,7 +340,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-28T00:24:25.001Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     },
     "de": {
       "canton": "LU",
@@ -442,6 +443,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Luzern testet Busspuren und Änderungen an Haltestellen",
+          "url": "/de/luzern-artikel/luzern-testet-massnahmen-fuer-busse/",
+          "excerpt": "Seit Mitte Dezember testet der Kanton Busspuren, eine ausschließlich für Busse reservierte Spur und Änderungen an den Haltestellen Weggismatt, Seefeldstrasse und St. Klemens.",
+          "date": "2026-11-28T14:42:57.208Z"
+        },
+        {
           "title": "Passepartout: Einfacherer Zugang zum öffentlichen Verkehr",
           "url": "/de/luzern-artikel/passepartout-zentralschweiz-oev/",
           "excerpt": "Vor 1986 waren für eine Fahrt im ÖV mehrere Billette nötig.",
@@ -481,11 +488,6 @@
           "url": "/de/schweiz-artikel/ov-abos-kanton-luzern-zonen-und-tarife/",
           "excerpt": "Die VBL bietet verschiedene Arten von Abonnements, einschließlich Monats- und Jahresabonnements, für Bewohner und Studenten an.",
           "date": "2026-08-15T21:36:07.353Z"
-        },
-        {
-          "title": "Luzern-Fans in Lugano: Straßensperrungen, Verkehrsbehinderungen",
-          "url": "/de/grenzgaenger-artikel/luzern-fans-in-lugano-stra-ensperrungen-verkehrsbehinderungen/",
-          "date": "2026-10-08T11:18:04.293Z"
         }
       ],
       "latestCantonArticles": [],
@@ -499,7 +501,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-28T00:24:25.001Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     },
     "fr": {
       "canton": "LU",
@@ -602,6 +604,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Lucerne teste des voies de bus et des modifications aux arrêts",
+          "url": "/fr/articles-lucerne/lucerne-teste-mesures-bus/",
+          "excerpt": "À partir de la mi-décembre, le canton teste des voies de bus, une voie réservée aux autobus et des modifications aux arrêts Weggismatt, Seefeldstrasse et St. Klemens.",
+          "date": "2026-11-28T14:42:57.208Z"
+        },
+        {
           "title": "Passepartout : accès plus simple aux transports publics",
           "url": "/fr/articles-lucerne/passepartout-transports-centre/",
           "excerpt": "Avant 1986, plusieurs billets étaient nécessaires pour un trajet en transports publics.",
@@ -642,12 +650,6 @@
           "url": "/fr/articles-suisse/abonnements-transports-publics-canton-lucerne-zones-et-tarifs/",
           "excerpt": "La VBL propose différents types d'abonnements, dont l'abonnement mensuel et annuel, pour les résidents et les étudiants.",
           "date": "2026-08-15T21:36:07.353Z"
-        },
-        {
-          "title": "Supporters de Lucerne à Lugano : fermetures de routes, retards de circulation",
-          "url": "/fr/articles-frontalier/supporters-de-lucerne-a-lugano-fermetures-de-routes-retards-de-circulation/",
-          "excerpt": "Samedi : FC Lugano-FC Lucerne à 18 h à Cornaredo.",
-          "date": "2026-10-08T11:18:04.293Z"
         }
       ],
       "latestCantonArticles": [],
@@ -661,7 +663,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-28T00:24:25.001Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     }
   }
 }

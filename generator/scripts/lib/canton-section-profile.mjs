@@ -34,6 +34,10 @@
  *
  * Il pool evergreen generico NON vale per i cantoni: i suoi temi sono
  * frontalieri/Ticino o nazionali, e gli evergreen cantonali sono gli hub di P10.
+ * Eccezione dichiarata (WP3.10b): una sezione in `CANTON_EVERGREEN_SECTIONS`
+ * (Remote Config, default vuoto) ripiega, SOLO senza news utilizzabile, sui
+ * pilastri cantonali del proprio cantone (lib/canton-evergreen.mjs); il profilo
+ * resta `evergreenPool: null`.
  *
  * Solo builtin Node e moduli puri del corpus: i test lo importano senza `npm ci`.
  */
@@ -835,7 +839,9 @@ export function buildCantonProfile(section, deps) {
     // Niente pool discovery/Google News, niente ranker sulla domanda GSC
     // (vocabolario e candidate sperimentali sono frontalieri/nazionali: il tier
     // sperimentale proporrebbe una keyword evergreen frontaliera), niente pool
-    // evergreen generico: gli evergreen cantonali sono gli hub di P10.
+    // evergreen generico: gli evergreen cantonali sono gli hub di P10. Il
+    // ripiego per cantone di WP3.10b non passa da qui ma da
+    // `CANTON_EVERGREEN_SECTIONS` (lib/canton-evergreen.mjs).
     discoveryPool: false,
     demandRanker: false,
     evergreenPool: null,

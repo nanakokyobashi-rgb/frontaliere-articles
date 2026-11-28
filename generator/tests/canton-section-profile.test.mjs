@@ -515,7 +515,7 @@ test('create-article: i rami cantonali leggono il profilo, e le storiche restano
     assert.match(CREATE_ARTICLE, site);
   }
   // Pool evergreen, discovery e ranker: spenti per le cantonali dal profilo.
-  assert.match(CREATE_ARTICLE, /else if \(!newsSuccess && !candidateSuccess && !SECTION_PROFILE\.evergreenPool\) \{/);
+  assert.match(CREATE_ARTICLE, /else if \(!newsSuccess && !candidateSuccess && !SECTION_PROFILE\.evergreenPool && cantonEvergreenFallbackTopics\(\)\.length === 0\) \{/);
   assert.match(CREATE_ARTICLE, /const recoveryEligible = !forceEvergreen\s+&& !recoveryDisabled\s+&& Boolean\(SECTION_PROFILE\.discoveryPool\);/);
   assert.match(CREATE_ARTICLE, /const forceRecoveryDiscovery = recoveryDecision\.shouldForceDiscovery && recoveryEligible;/);
   assert.match(CREATE_ARTICLE, /const slotKind = forceEvergreen \|\| !SECTION_PROFILE\.discoveryPool\s+\? 'proven'\s+: forceRecoveryDiscovery\s+\? 'discovery'\s+: slotDecision\.slotKind;/);

@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "carburanti",
-  "updatedAt": "2026-11-26T13:26:37.913Z",
-  "contentHash": "41a0058f80419f0cc56883470698e835de49820c40a9bf6e67b63778d293a37b",
+  "updatedAt": "2026-11-28T17:11:28.288Z",
+  "contentHash": "1de6ce9552f56ebbe58bd0d53801b57518c2591d0367f7e230df9ab049ffa2dd",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-25T17:35:23.405Z",
+      "updatedAt": "2026-11-27T16:58:07.780Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-27T16:58:07.780Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Glarona chiede un anno in più per la mozione Netstal-Glarona",
+          "url": "/articoli-glarona/netstal-glarus-motion-proroga/",
+          "excerpt": "Il Consiglio di Stato chiede al Landrat di spostare al 20 novembre 2027 il termine della mozione sulla circonvallazione Netstal–Glarona.",
+          "date": "2026-11-28T07:17:26.000Z"
+        },
         {
           "title": "Netstal: il Cantone apre un'altra via secondaria",
           "url": "/articoli-glarona/netstal-via-secondaria/",
@@ -82,12 +88,6 @@
           "url": "/articoli-glarona/cantieri-strade-glarona-2027/",
           "excerpt": "Nel 2027 il Kirchweg di Glarona diventerà un cantiere; a Rüti sarà sostituito un ponte di 80 anni.",
           "date": "2026-10-29T22:36:35.347Z"
-        },
-        {
-          "title": "Glarona aderisce al programma pilota Perspecta",
-          "url": "/articoli-glarona/glarona-adesione-programma-perspecta/",
-          "excerpt": "Il Governo di Glarona partecipa a Perspecta da ottobre 2026 a fine 2031 per favorire l'integrazione professionale tramite consulenze individuali BSLB.",
-          "date": "2026-10-29T07:33:02.883Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-26T13:26:37.913Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     },
     "en": {
       "canton": "GL",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-27T16:58:07.780Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Glarus asks for one more year for the Netstal–Glarus motion",
+          "url": "/en/glarus-articles/netstal-glarus-bypass-motion-extension/",
+          "excerpt": "The Council of State asks the Landrat to move the deadline for the motion on the Netstal–Glarus bypass to November 20, 2027.",
+          "date": "2026-11-28T07:17:26.000Z"
+        },
         {
           "title": "Netstal: the canton opens another side road",
           "url": "/en/glarus-articles/netstal-side-route/",
@@ -169,12 +175,6 @@
           "url": "/en/glarus-articles/glarus-roads-bridges-2027/",
           "excerpt": "In 2027, the Kirchweg in Glarus will become a construction site; an 80-year-old bridge will be replaced in Rüti.",
           "date": "2026-10-29T22:36:35.347Z"
-        },
-        {
-          "title": "Glarus joins the Perspecta pilot program",
-          "url": "/en/glarus-articles/glarus-joins-perspecta-program/",
-          "excerpt": "The Government of Glarus participates in Perspecta from October 2026 to the end of 2031 to promote professional integration through individual BSLB consultations.",
-          "date": "2026-10-29T07:33:02.883Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-26T13:26:37.913Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     },
     "de": {
       "canton": "GL",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-27T16:58:07.780Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Glarus beantragt ein zusätzliches Jahr für die Motion Netstal–Glarus",
+          "url": "/de/glarus-artikel/netstal-glarus-umfahrung-motion-frist/",
+          "excerpt": "Der Regierungsrat beantragt beim Landrat, die Frist der Motion zur Umfahrung Netstal–Glarus auf den 20. November 2027 zu verschieben.",
+          "date": "2026-11-28T07:17:26.000Z"
+        },
         {
           "title": "Netstal: Der Kanton eröffnet eine weitere Nebenstraße",
           "url": "/de/glarus-artikel/netstal-schleichweg/",
@@ -256,12 +262,6 @@
           "url": "/de/glarus-artikel/glarner-strassen-bruecken-2027/",
           "excerpt": "Im Jahr 2027 wird der Kirchweg in Glarus zu einer Baustelle; in Rüti wird eine 80 Jahre alte Brücke ersetzt.",
           "date": "2026-10-29T22:36:35.347Z"
-        },
-        {
-          "title": "Glarus nimmt am Perspecta-Pilotprogramm teil",
-          "url": "/de/glarus-artikel/glarus-nimmt-an-perspecta-teil/",
-          "excerpt": "Die Regierung Glarus nimmt von Oktober 2026 bis Ende 2031 an Perspecta teil, um die berufliche Integration durch individuelle BSLB-Beratung zu fördern.",
-          "date": "2026-10-29T07:33:02.883Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-26T13:26:37.913Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     },
     "fr": {
       "canton": "GL",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-27T16:58:07.780Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Glaris demande une année supplémentaire pour la motion Netstal-Glaris",
+          "url": "/fr/articles-glaris/contournement-netstal-glaris-prolongation-motion/",
+          "excerpt": "Le Conseil d’État demande au Landrat de reporter au 20 novembre 2027 le délai de la motion sur le contournement Netstal–Glaris.",
+          "date": "2026-11-28T07:17:26.000Z"
+        },
         {
           "title": "Netstal : le canton ouvre une autre voie secondaire",
           "url": "/fr/articles-glaris/netstal-route-secondaire/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-glaris/routes-ponts-glaris-2027/",
           "excerpt": "En 2027, le Kirchweg de Glaris deviendra un chantier ; à Rüti, un pont vieux de 80 ans sera remplacé.",
           "date": "2026-10-29T22:36:35.347Z"
-        },
-        {
-          "title": "Glaris adhère au programme pilote Perspecta",
-          "url": "/fr/articles-glaris/glaris-adhere-au-programme-perspecta/",
-          "excerpt": "Le Gouvernement de Glaris participe à Perspecta d'octobre 2026 à fin 2031 pour favoriser l'intégration professionnelle par le biais de consultations individuelles BSLB.",
-          "date": "2026-10-29T07:33:02.883Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-26T13:26:37.913Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     }
   }
 }

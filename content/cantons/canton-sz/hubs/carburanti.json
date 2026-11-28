@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "carburanti",
-  "updatedAt": "2026-11-27T16:22:51.037Z",
-  "contentHash": "0368dc626c9c092703960a7172e1d864e7d2d50d55ec6e94d3cc250bf4243a91",
+  "updatedAt": "2026-11-28T17:11:28.288Z",
+  "contentHash": "a25baacadcaa5b3ea14be74c5a707c1876bce8906a86408483576f11e7f4d13a",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-26T17:17:35.133Z",
+      "updatedAt": "2026-11-27T16:58:07.780Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-26T17:17:35.133Z"
+          "updatedAt": "2026-11-27T16:58:07.780Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Einsiedeln riduce di CHF 43,4 mln gli investimenti",
+          "url": "/articoli-svitto/einsiedeln-investimenti-netti-piano/",
+          "excerpt": "Il piano 2028–2030 riduce di circa CHF 43,4 milioni gli investimenti netti a CHF 70,8 milioni; dal 2031 al 2035 limite annuo generale di CHF 20 milioni.",
+          "date": "2026-11-28T10:23:27.197Z"
+        },
         {
           "title": "Svitto conferma Microsoft 365 per l'amministrazione",
           "url": "/articoli-svitto/svitto-microsoft-365-amministrazione/",
@@ -82,12 +88,6 @@
           "url": "/articoli-svitto/svitto-seminario-wohnraum-rickenbach/",
           "excerpt": "L'ex seminario per insegnanti di Rickenbach è valutato per uso abitativo; il trasferimento degli uffici cantonali è previsto non prima del primo semestre 2030.",
           "date": "2026-11-11T16:54:58.624Z"
-        },
-        {
-          "title": "Martinimarkt: accesso e uscita non possibili su Hauptstrasse",
-          "url": "/articoli-svitto/martinimarkt-principale-strada-chiusa/",
-          "excerpt": "Dalle 6.00 alle 20.00 dell'intero giorno di mercato, l'accesso e l'uscita sono vietati su Hauptstrasse tra Dorfplatz e Benzigerstrasse.",
-          "date": "2026-11-07T08:08:34.915Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-27T16:22:51.037Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     },
     "en": {
       "canton": "SZ",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-26T17:17:35.133Z"
+          "updatedAt": "2026-11-27T16:58:07.780Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Einsiedeln reduces investments by CHF 43,4 million",
+          "url": "/en/schwyz-articles/einsiedeln-net-investment-plan/",
+          "excerpt": "The 2028–2030 plan reduces net investments by approximately CHF 43,4 million to CHF 70,8 million; from 2031 to 2035, a general annual limit of CHF 20 million.",
+          "date": "2026-11-28T10:23:27.197Z"
+        },
         {
           "title": "Schwyz confirms Microsoft 365 for the administration",
           "url": "/en/schwyz-articles/schwyz-microsoft-365-administration/",
@@ -169,12 +175,6 @@
           "url": "/en/schwyz-articles/schwyz-seminary-housing-rickenbach/",
           "excerpt": "The former teachers’ seminary in Rickenbach is being considered for residential use; the relocation of the cantonal offices is not expected before the first half of 2030.",
           "date": "2026-11-11T16:54:58.624Z"
-        },
-        {
-          "title": "Martinimarkt: access and exit not possible on Hauptstrasse",
-          "url": "/en/schwyz-articles/martinimarkt-hauptstrasse-closed/",
-          "excerpt": "From 6:00 a.m. to 8:00 p.m. throughout the entire market day, entry and exit are prohibited on Hauptstrasse between Dorfplatz and Benzigerstrasse.",
-          "date": "2026-11-07T08:08:34.915Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-27T16:22:51.037Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     },
     "de": {
       "canton": "SZ",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-26T17:17:35.133Z"
+          "updatedAt": "2026-11-27T16:58:07.780Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Einsiedeln senkt die Investitionen um CHF 43,4 Mio.",
+          "url": "/de/schwyz-artikel/einsiedeln-nettoinvestitionen-finanzplan/",
+          "excerpt": "Der Plan 2028–2030 senkt die Nettoinvestitionen um rund CHF 43,4 Millionen auf CHF 70,8 Millionen; von 2031 bis 2035 gilt eine allgemeine jährliche Obergrenze von CHF 20 Millionen.",
+          "date": "2026-11-28T10:23:27.197Z"
+        },
         {
           "title": "Schwyz bestätigt Microsoft 365 für die Verwaltung",
           "url": "/de/schwyz-artikel/schwyz-microsoft-365-verwaltung/",
@@ -256,12 +262,6 @@
           "url": "/de/schwyz-artikel/schwyz-seminar-wohnraum-rickenbach/",
           "excerpt": "Das ehemalige Lehrerseminar in Rickenbach wird für Wohnzwecke geprüft; die Verlegung der kantonalen Büros ist frühestens im ersten Halbjahr 2030 vorgesehen.",
           "date": "2026-11-11T16:54:58.624Z"
-        },
-        {
-          "title": "Martinimarkt: Zu- und Wegfahrt auf der Hauptstrasse nicht möglich",
-          "url": "/de/schwyz-artikel/martinimarkt-hauptstrasse-gesperrt/",
-          "excerpt": "Während des gesamten Markttags von 6.00 bis 20.00 Uhr sind Zu- und Wegfahrt auf der Hauptstrasse zwischen Dorfplatz und Benzigerstrasse verboten.",
-          "date": "2026-11-07T08:08:34.915Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-27T16:22:51.037Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     },
     "fr": {
       "canton": "SZ",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-26T17:17:35.133Z"
+          "updatedAt": "2026-11-27T16:58:07.780Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Einsiedeln réduit les investissements de CHF 43,4 millions",
+          "url": "/fr/articles-schwytz/einsiedeln-plan-investissements-nets/",
+          "excerpt": "Le plan 2028–2030 réduit les investissements nets d’environ CHF 43,4 millions à CHF 70,8 millions ; de 2031 à 2035, plafond annuel général de CHF 20 millions.",
+          "date": "2026-11-28T10:23:27.197Z"
+        },
         {
           "title": "Schwyz confirme Microsoft 365 pour l’administration",
           "url": "/fr/articles-schwytz/schwyz-microsoft-365-administration/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-schwytz/schwyz-seminaire-logement-rickenbach/",
           "excerpt": "L'ancien séminaire d'enseignants de Rickenbach est évalué en vue d'un usage résidentiel ; le déménagement des offices cantonaux n'est pas prévu avant le premier semestre 2030.",
           "date": "2026-11-11T16:54:58.624Z"
-        },
-        {
-          "title": "Martinimarkt : accès et sortie impossibles sur Hauptstrasse",
-          "url": "/fr/articles-schwytz/martinimarkt-hauptstrasse-fermee/",
-          "excerpt": "De 6.00 à 20.00 pendant toute la journée du marché, l’accès et la sortie sont interdits sur Hauptstrasse entre Dorfplatz et Benzigerstrasse.",
-          "date": "2026-11-07T08:08:34.915Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-27T16:22:51.037Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     }
   }
 }

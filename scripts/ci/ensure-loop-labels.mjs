@@ -121,6 +121,31 @@ function gh(args) {
  */
 export const MAX_DESCRIPTION = 100;
 
+/**
+ * Tetto del listing. `gh label list` pagina da sé fino a `--limit`; se la
+ * risposta lo raggiunge, l'elenco potrebbe essere troncato e una label gia'
+ * esistente fuori elenco verrebbe «creata» due volte. In quel caso si fallisce
+ * (fail-closed) invece di indovinare.
+ */
+export const LIST_LIMIT = 1000;
+
+/**
+ * Esito di `gh label create` su una label che esiste gia' (HTTP 422,
+ * `already_exists`): succede quando un run concorrente l'ha creata fra il
+ * nostro listing e la nostra create. E' un successo solo se una rilettura PER
+ * NOME conferma che la label c'e': ogni altro errore resta un fallimento.
+ */
+export function isAlreadyExists(error) {
+  const text = `${error?.stderr || ''}\n${error?.stdout || ''}`;
+  return /already[_ ]exists/i.test(text);
+}
+
+function labelExists(runGh, repo, name) {
+  const raw = runGh(['api', '-X', 'GET', `repos/${repo}/labels/${encodeURIComponent(name)}`]);
+  const parsed = JSON.parse(raw);
+  return String(parsed?.name || '').toLowerCase() === name.toLowerCase();
+}
+
 function errorCode(error) {
   if (Number.isInteger(error?.status)) return `status_${error.status}`;
   if (typeof error?.code === 'string' && /^[A-Z0-9_]+$/.test(error.code)) return error.code;
@@ -145,9 +170,10 @@ export function ensureLoopLabels({
     // JSON diretto, non una concatenazione in jq: un separatore inventato
     // (null byte, tab) o non passa attraverso execFileSync o si scontra col
     // contenuto stesso delle descrizioni.
-    const raw = runGh(['label', 'list', '--repo', repo, '--limit', '200', '--json', 'name,description,color']);
+    const raw = runGh(['label', 'list', '--repo', repo, '--limit', String(LIST_LIMIT), '--json', 'name,description,color']);
     const labels = JSON.parse(raw);
     if (!Array.isArray(labels)) throw new TypeError('invalid_response');
+    if (labels.length >= LIST_LIMIT) throw new TypeError('invalid_response');
     existing = new Map();
     // GitHub tratta i nomi delle label come case-insensitive per l'unicità:
     // creare `Bug` dove esiste `bug` fallisce. Il confronto va fatto uguale.
@@ -218,6 +244,16 @@ export function ensureLoopLabels({
       logger.log(`[ensure-loop-labels] creata "${name}"`);
       created++;
     } catch (error) {
+      if (isAlreadyExists(error)) {
+        try {
+          if (labelExists(runGh, repo, name)) {
+            logger.log(`[ensure-loop-labels] "${name}" esiste già (creata da un run concorrente).`);
+            continue;
+          }
+        } catch {
+          // rilettura non riuscita: resta un fallimento, vedi sotto
+        }
+      }
       failures++;
       logger.error(`::error::[ensure-loop-labels] impossibile creare "${name}" (${errorCode(error)}).`);
     }

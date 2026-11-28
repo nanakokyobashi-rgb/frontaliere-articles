@@ -225,11 +225,21 @@ jobs:
         # I workflow contengono script generati con blocchi JavaScript/template:
         # la scansione ShellCheck completa li interpreta come espansioni shell.
         # ShellCheck resta attivo nel controllo successivo sui workflow cambiati.
+        # Il timeout rende visibile un actionlint appeso (PR #4129: il check
+        # restava IN_PROGRESS fino ai 360 minuti del job). `timeout` di
+        # coreutils e' presente su ubuntu-latest; 124 = scaduto.
+        timeout-minutes: 5
         run: |
           set -euo pipefail
-          git ls-files -z -- '.github/workflows/*.yml' '.github/workflows/*.yaml' | xargs -0 -r actionlint -shellcheck= -config-file .github/actionlint.yaml
+          rc=0
+          git ls-files -z -- '.github/workflows/*.yml' '.github/workflows/*.yaml' | xargs -0 -r timeout --kill-after=10 180 actionlint -shellcheck= -config-file .github/actionlint.yaml || rc=$?
+          if [ "$rc" -eq 124 ] || [ "$rc" -eq 137 ]; then
+            echo '::error::actionlint ha superato il timeout di 180 secondi: probabile blocco del linter, non un errore del workflow.'
+          fi
+          exit "$rc"
 
       - name: ShellCheck changed GitHub Actions workflows
+        timeout-minutes: 5
         run: |
           set -euo pipefail
           base=''
@@ -295,7 +305,12 @@ jobs:
             exit 0
           fi
           printf 'ShellCheck attivo su %s workflow modificati.\n' "${#changed_workflows[@]}"
-          actionlint -config-file .github/actionlint.yaml "${changed_workflows[@]}"
+          rc=0
+          timeout --kill-after=10 180 actionlint -config-file .github/actionlint.yaml "${changed_workflows[@]}" || rc=$?
+          if [ "$rc" -eq 124 ] || [ "$rc" -eq 137 ]; then
+            echo '::error::actionlint/ShellCheck ha superato il timeout di 180 secondi: probabile blocco del linter su un workflow modificato.'
+          fi
+          exit "$rc"
 
       # ══════════════════════════════════════════════════════════════════════
       # FAMIGLIA 1/3 — contratto del body (ex workflow `PR body contract`)
