@@ -52,7 +52,9 @@ test('the compact provider guard accounts for serialized UTF-8 bytes and leaves 
   assert.equal(compactPromptFitsProviderLimit(nearLimitAscii, 7000), false);
   assert.equal(compactPromptFitsProviderLimit(nearLimitAscii, 8000), true);
 
-  const nearLimitUnicode = '漢'.repeat(22_000);
+  // A one-token-per-codepoint tokenizer would put this payload just under the
+  // provider cap even though the character-count estimator remains far below it.
+  const nearLimitUnicode = '漢'.repeat(7_500);
   assert.ok(estimateRequestTokens([{ role: 'user', content: nearLimitUnicode }]) < 8000);
   assert.equal(compactPromptFitsProviderLimit(nearLimitUnicode, 8000), false);
   assert.equal(compactPromptFitsProviderLimit(nearLimitAscii, 0), false);
@@ -813,6 +815,25 @@ describe('fact-check retries under a reported input cap', () => {
       replies: Array.from({ length: 6 }, () => capError(cap)),
     });
     assert.equal(compactPrompt, baseline.compactPrompt);
+    assert.deepEqual(calls.map((call) => call.prompt), Array(6).fill(prompt));
+    assert.ok(logs.every((line) => !line.includes('istruzioni compatte')));
+  });
+
+  test('does not select a compact prompt when its estimate already exceeds the provider cap', async () => {
+    const scope = { section: 'svizzera', isCanton: false };
+    const padding = await loadFor(8803, scope);
+    const baseline = await runRounds({ ...scope, padding, replies: [firstVote, secondVote] });
+    const compactEstimate = estimate(baseline.compactPrompt);
+    const cap = compactEstimate - 1;
+    assert.ok(estimate(baseline.prompt) > compactEstimate);
+    assert.ok(compactEstimate > cap);
+    assert.equal(compactPromptFitsProviderLimit(baseline.compactPrompt, cap), false);
+
+    const { calls, logs, prompt } = await runRounds({
+      ...scope,
+      padding,
+      replies: Array.from({ length: 6 }, () => capError(cap)),
+    });
     assert.deepEqual(calls.map((call) => call.prompt), Array(6).fill(prompt));
     assert.ok(logs.every((line) => !line.includes('istruzioni compatte')));
   });
