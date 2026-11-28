@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "source": "sitemap-jobs*.xml, sitemap-professions.xml, sitemap-profession-cantons.xml, sitemap-health-premiums.xml, sitemap-minimum-wage.xml (+ hreflang delle pagine IT)",
+ "source": "sitemap-jobs*.xml, sitemap-professions.xml, sitemap-profession-cantons.xml, sitemap-health-premiums.xml, sitemap-minimum-wage.xml; F6.3d: sitemap-eventi.xml, sitemap-border-wait.xml, sitemap-plate-auctions.xml, sitemap-salary-profession-cantons.xml, sitemap-health-facilities.xml, sitemap-weather*.xml, sitemap-farmacie.xml, sitemap-holidays.xml, sitemap-school-calendar.xml, sitemap-cost-of-living.xml, sitemap-fuel-daily.xml (+ hreflang delle pagine IT)",
  "verifiedBy": "HTTP 200 e <link rel=\"canonical\"> uguale al path, una lingua alla volta",
  "cantonLanding": {
   "AG": {
@@ -1758,6 +1758,1260 @@
     "de": "/de/mindestlohn/tessin/",
     "fr": "/fr/salaire-minimum/tessin/"
    }
+  }
+ },
+ "eventsLanding": {
+  "AG": {
+   "it": "/eventi/argovia/",
+   "en": "/en/events/aargau/",
+   "de": "/de/veranstaltungen/aargau/",
+   "fr": "/fr/evenements/argovie/"
+  },
+  "APPENZELLO": {
+   "it": "/eventi/appenzello/",
+   "en": "/en/events/appenzell/",
+   "de": "/de/veranstaltungen/appenzell/",
+   "fr": "/fr/evenements/appenzell/"
+  },
+  "BE": {
+   "it": "/eventi/berna/",
+   "en": "/en/events/bern/",
+   "de": "/de/veranstaltungen/bern/",
+   "fr": "/fr/evenements/berne/"
+  },
+  "BASILEA": {
+   "it": "/eventi/basilea/",
+   "en": "/en/events/basel/",
+   "de": "/de/veranstaltungen/basel/",
+   "fr": "/fr/evenements/bale/"
+  },
+  "FR": {
+   "it": "/eventi/friburgo/",
+   "en": "/en/events/fribourg/",
+   "de": "/de/veranstaltungen/freiburg/",
+   "fr": "/fr/evenements/fribourg/"
+  },
+  "GE": {
+   "it": "/eventi/ginevra/",
+   "en": "/en/events/geneva/",
+   "de": "/de/veranstaltungen/genf/",
+   "fr": "/fr/evenements/geneve/"
+  },
+  "GL": {
+   "it": "/eventi/glarona/",
+   "en": "/en/events/glarus/",
+   "de": "/de/veranstaltungen/glarus/",
+   "fr": "/fr/evenements/glaris/"
+  },
+  "GR": {
+   "it": "/eventi/grigioni/",
+   "en": "/en/events/graubunden/",
+   "de": "/de/veranstaltungen/graubunden/",
+   "fr": "/fr/evenements/grisons/"
+  },
+  "JU": {
+   "it": "/eventi/giura/",
+   "en": "/en/events/jura/",
+   "de": "/de/veranstaltungen/jura/",
+   "fr": "/fr/evenements/jura/"
+  },
+  "LU": {
+   "it": "/eventi/lucerna/",
+   "en": "/en/events/lucerne/",
+   "de": "/de/veranstaltungen/luzern/",
+   "fr": "/fr/evenements/lucerne/"
+  },
+  "NE": {
+   "it": "/eventi/neuchatel/",
+   "en": "/en/events/neuchatel/",
+   "de": "/de/veranstaltungen/neuenburg/",
+   "fr": "/fr/evenements/neuchatel/"
+  },
+  "NW": {
+   "it": "/eventi/nidvaldo/",
+   "en": "/en/events/nidwalden/",
+   "de": "/de/veranstaltungen/nidwalden/",
+   "fr": "/fr/evenements/nidwald/"
+  },
+  "OW": {
+   "it": "/eventi/obvaldo/",
+   "en": "/en/events/obwalden/",
+   "de": "/de/veranstaltungen/obwalden/",
+   "fr": "/fr/evenements/obwald/"
+  },
+  "SG": {
+   "it": "/eventi/san-gallo/",
+   "en": "/en/events/st-gallen/",
+   "de": "/de/veranstaltungen/st-gallen/",
+   "fr": "/fr/evenements/saint-gall/"
+  },
+  "SH": {
+   "it": "/eventi/sciaffusa/",
+   "en": "/en/events/schaffhausen/",
+   "de": "/de/veranstaltungen/schaffhausen/",
+   "fr": "/fr/evenements/schaffhouse/"
+  },
+  "SO": {
+   "it": "/eventi/soletta/",
+   "en": "/en/events/solothurn/",
+   "de": "/de/veranstaltungen/solothurn/",
+   "fr": "/fr/evenements/soleure/"
+  },
+  "SZ": {
+   "it": "/eventi/svitto/",
+   "en": "/en/events/schwyz/",
+   "de": "/de/veranstaltungen/schwyz/",
+   "fr": "/fr/evenements/schwytz/"
+  },
+  "TG": {
+   "it": "/eventi/turgovia/",
+   "en": "/en/events/thurgau/",
+   "de": "/de/veranstaltungen/thurgau/",
+   "fr": "/fr/evenements/thurgovie/"
+  },
+  "TI": {
+   "it": "/eventi/ticino/",
+   "en": "/en/events/ticino/",
+   "de": "/de/veranstaltungen/tessin/",
+   "fr": "/fr/evenements/tessin/"
+  },
+  "UR": {
+   "it": "/eventi/uri/",
+   "en": "/en/events/uri/",
+   "de": "/de/veranstaltungen/uri/",
+   "fr": "/fr/evenements/uri/"
+  },
+  "VD": {
+   "it": "/eventi/vaud/",
+   "en": "/en/events/vaud/",
+   "de": "/de/veranstaltungen/waadt/",
+   "fr": "/fr/evenements/vaud/"
+  },
+  "VS": {
+   "it": "/eventi/vallese/",
+   "en": "/en/events/valais/",
+   "de": "/de/veranstaltungen/wallis/",
+   "fr": "/fr/evenements/valais/"
+  },
+  "ZG": {
+   "it": "/eventi/zugo/",
+   "en": "/en/events/zug/",
+   "de": "/de/veranstaltungen/zug/",
+   "fr": "/fr/evenements/zoug/"
+  },
+  "ZH": {
+   "it": "/eventi/zurigo/",
+   "en": "/en/events/zurich/",
+   "de": "/de/veranstaltungen/zurich/",
+   "fr": "/fr/evenements/zurich/"
+  }
+ },
+ "borderTraffic": {
+  "hub": {
+   "it": "/traffico-dogane/",
+   "en": "/en/border-wait/",
+   "de": "/de/wartezeit-grenze/",
+   "fr": "/fr/temps-attente-douane/"
+  },
+  "TI/como": {
+   "it": "/traffico-dogane/ticino-como/",
+   "en": "/en/border-wait/ticino-como/",
+   "de": "/de/wartezeit-grenze/ticino-como/",
+   "fr": "/fr/temps-attente-douane/ticino-como/"
+  },
+  "TI/varese": {
+   "it": "/traffico-dogane/ticino-varese/",
+   "en": "/en/border-wait/ticino-varese/",
+   "de": "/de/wartezeit-grenze/ticino-varese/",
+   "fr": "/fr/temps-attente-douane/ticino-varese/"
+  },
+  "TI/verbano": {
+   "it": "/traffico-dogane/ticino-verbano/",
+   "en": "/en/border-wait/ticino-verbano/",
+   "de": "/de/wartezeit-grenze/ticino-verbano/",
+   "fr": "/fr/temps-attente-douane/ticino-verbano/"
+  },
+  "BASILEA/germania": {
+   "it": "/traffico-dogane/basilea-germania/",
+   "en": "/en/border-wait/basilea-germania/",
+   "de": "/de/wartezeit-grenze/basilea-germania/",
+   "fr": "/fr/temps-attente-douane/basilea-germania/"
+  },
+  "BASILEA/francia": {
+   "it": "/traffico-dogane/basilea-francia/",
+   "en": "/en/border-wait/basilea-francia/",
+   "de": "/de/wartezeit-grenze/basilea-francia/",
+   "fr": "/fr/temps-attente-douane/basilea-francia/"
+  },
+  "AG/germania": {
+   "it": "/traffico-dogane/argovia-germania/",
+   "en": "/en/border-wait/argovia-germania/",
+   "de": "/de/wartezeit-grenze/argovia-germania/",
+   "fr": "/fr/temps-attente-douane/argovia-germania/"
+  },
+  "ZH/germania": {
+   "it": "/traffico-dogane/zurigo-germania/",
+   "en": "/en/border-wait/zurigo-germania/",
+   "de": "/de/wartezeit-grenze/zurigo-germania/",
+   "fr": "/fr/temps-attente-douane/zurigo-germania/"
+  },
+  "SH/germania": {
+   "it": "/traffico-dogane/sciaffusa-germania/",
+   "en": "/en/border-wait/sciaffusa-germania/",
+   "de": "/de/wartezeit-grenze/sciaffusa-germania/",
+   "fr": "/fr/temps-attente-douane/sciaffusa-germania/"
+  },
+  "TG/germania": {
+   "it": "/traffico-dogane/turgovia-germania/",
+   "en": "/en/border-wait/turgovia-germania/",
+   "de": "/de/wartezeit-grenze/turgovia-germania/",
+   "fr": "/fr/temps-attente-douane/turgovia-germania/"
+  },
+  "SG/austria": {
+   "it": "/traffico-dogane/san-gallo-austria/",
+   "en": "/en/border-wait/san-gallo-austria/",
+   "de": "/de/wartezeit-grenze/san-gallo-austria/",
+   "fr": "/fr/temps-attente-douane/san-gallo-austria/"
+  },
+  "GR/austria": {
+   "it": "/traffico-dogane/grigioni-austria/",
+   "en": "/en/border-wait/grigioni-austria/",
+   "de": "/de/wartezeit-grenze/grigioni-austria/",
+   "fr": "/fr/temps-attente-douane/grigioni-austria/"
+  },
+  "SG/liechtenstein": {
+   "it": "/traffico-dogane/san-gallo-liechtenstein/",
+   "en": "/en/border-wait/san-gallo-liechtenstein/",
+   "de": "/de/wartezeit-grenze/san-gallo-liechtenstein/",
+   "fr": "/fr/temps-attente-douane/san-gallo-liechtenstein/"
+  },
+  "GR/liechtenstein": {
+   "it": "/traffico-dogane/grigioni-liechtenstein/",
+   "en": "/en/border-wait/grigioni-liechtenstein/",
+   "de": "/de/wartezeit-grenze/grigioni-liechtenstein/",
+   "fr": "/fr/temps-attente-douane/grigioni-liechtenstein/"
+  },
+  "GE/francia": {
+   "it": "/traffico-dogane/geneve-francia/",
+   "en": "/en/border-wait/geneve-francia/",
+   "de": "/de/wartezeit-grenze/geneve-francia/",
+   "fr": "/fr/temps-attente-douane/geneve-francia/"
+  },
+  "VD/francia": {
+   "it": "/traffico-dogane/vaud-francia/",
+   "en": "/en/border-wait/vaud-francia/",
+   "de": "/de/wartezeit-grenze/vaud-francia/",
+   "fr": "/fr/temps-attente-douane/vaud-francia/"
+  },
+  "NE/francia": {
+   "it": "/traffico-dogane/neuchatel-francia/",
+   "en": "/en/border-wait/neuchatel-francia/",
+   "de": "/de/wartezeit-grenze/neuchatel-francia/",
+   "fr": "/fr/temps-attente-douane/neuchatel-francia/"
+  },
+  "JU/francia": {
+   "it": "/traffico-dogane/giura-francia/",
+   "en": "/en/border-wait/giura-francia/",
+   "de": "/de/wartezeit-grenze/giura-francia/",
+   "fr": "/fr/temps-attente-douane/giura-francia/"
+  },
+  "VS/francia": {
+   "it": "/traffico-dogane/vallese-francia/",
+   "en": "/en/border-wait/vallese-francia/",
+   "de": "/de/wartezeit-grenze/vallese-francia/",
+   "fr": "/fr/temps-attente-douane/vallese-francia/"
+  },
+  "GR/italia": {
+   "it": "/traffico-dogane/grigioni-italia/",
+   "en": "/en/border-wait/grigioni-italia/",
+   "de": "/de/wartezeit-grenze/grigioni-italia/",
+   "fr": "/fr/temps-attente-douane/grigioni-italia/"
+  },
+  "VS/italia": {
+   "it": "/traffico-dogane/vallese-italia/",
+   "en": "/en/border-wait/vallese-italia/",
+   "de": "/de/wartezeit-grenze/vallese-italia/",
+   "fr": "/fr/temps-attente-douane/vallese-italia/"
+  }
+ },
+ "plateAuctions": {
+  "AG": {
+   "it": "/aste-targhe-svizzera/argovia-ag/",
+   "en": "/en/swiss-plate-auctions/aargau-ag/",
+   "de": "/de/schweizer-nummernschildauktionen/aargau-ag/",
+   "fr": "/fr/encheres-plaques-suisses/argovie-ag/"
+  },
+  "BE": {
+   "it": "/aste-targhe-svizzera/berna-be/",
+   "en": "/en/swiss-plate-auctions/bern-be/",
+   "de": "/de/schweizer-nummernschildauktionen/bern-be/",
+   "fr": "/fr/encheres-plaques-suisses/berne-be/"
+  },
+  "FR": {
+   "it": "/aste-targhe-svizzera/friburgo-fr/",
+   "en": "/en/swiss-plate-auctions/fribourg-fr/",
+   "de": "/de/schweizer-nummernschildauktionen/freiburg-fr/",
+   "fr": "/fr/encheres-plaques-suisses/fribourg-fr/"
+  },
+  "GE": {
+   "it": "/aste-targhe-svizzera/ginevra-ge/",
+   "en": "/en/swiss-plate-auctions/geneva-ge/",
+   "de": "/de/schweizer-nummernschildauktionen/genf-ge/",
+   "fr": "/fr/encheres-plaques-suisses/geneve-ge/"
+  },
+  "GL": {
+   "it": "/aste-targhe-svizzera/glarona-gl/",
+   "en": "/en/swiss-plate-auctions/glarus-gl/",
+   "de": "/de/schweizer-nummernschildauktionen/glarus-gl/",
+   "fr": "/fr/encheres-plaques-suisses/glaris-gl/"
+  },
+  "GR": {
+   "it": "/aste-targhe-svizzera/grigioni-gr/",
+   "en": "/en/swiss-plate-auctions/graubunden-gr/",
+   "de": "/de/schweizer-nummernschildauktionen/graubuenden-gr/",
+   "fr": "/fr/encheres-plaques-suisses/grisons-gr/"
+  },
+  "JU": {
+   "it": "/aste-targhe-svizzera/giura-ju/",
+   "en": "/en/swiss-plate-auctions/jura-ju/",
+   "de": "/de/schweizer-nummernschildauktionen/jura-ju/",
+   "fr": "/fr/encheres-plaques-suisses/jura-ju/"
+  },
+  "LU": {
+   "it": "/aste-targhe-svizzera/lucerna-lu/",
+   "en": "/en/swiss-plate-auctions/lucerne-lu/",
+   "de": "/de/schweizer-nummernschildauktionen/luzern-lu/",
+   "fr": "/fr/encheres-plaques-suisses/lucerne-lu/"
+  },
+  "NE": {
+   "it": "/aste-targhe-svizzera/neuchatel-ne/",
+   "en": "/en/swiss-plate-auctions/neuchatel-ne/",
+   "de": "/de/schweizer-nummernschildauktionen/neuenburg-ne/",
+   "fr": "/fr/encheres-plaques-suisses/neuchatel-ne/"
+  },
+  "NW": {
+   "it": "/aste-targhe-svizzera/nidvaldo-nw/",
+   "en": "/en/swiss-plate-auctions/nidwalden-nw/",
+   "de": "/de/schweizer-nummernschildauktionen/nidwalden-nw/",
+   "fr": "/fr/encheres-plaques-suisses/nidwald-nw/"
+  },
+  "OW": {
+   "it": "/aste-targhe-svizzera/obvaldo-ow/",
+   "en": "/en/swiss-plate-auctions/obwalden-ow/",
+   "de": "/de/schweizer-nummernschildauktionen/obwalden-ow/",
+   "fr": "/fr/encheres-plaques-suisses/obwald-ow/"
+  },
+  "SG": {
+   "it": "/aste-targhe-svizzera/san-gallo-sg/",
+   "en": "/en/swiss-plate-auctions/st-gallen-sg/",
+   "de": "/de/schweizer-nummernschildauktionen/st-gallen-sg/",
+   "fr": "/fr/encheres-plaques-suisses/saint-gall-sg/"
+  },
+  "SH": {
+   "it": "/aste-targhe-svizzera/sciaffusa-sh/",
+   "en": "/en/swiss-plate-auctions/schaffhausen-sh/",
+   "de": "/de/schweizer-nummernschildauktionen/schaffhausen-sh/",
+   "fr": "/fr/encheres-plaques-suisses/schaffhouse-sh/"
+  },
+  "SO": {
+   "it": "/aste-targhe-svizzera/soletta-so/",
+   "en": "/en/swiss-plate-auctions/solothurn-so/",
+   "de": "/de/schweizer-nummernschildauktionen/solothurn-so/",
+   "fr": "/fr/encheres-plaques-suisses/soleure-so/"
+  },
+  "SZ": {
+   "it": "/aste-targhe-svizzera/svitto-sz/",
+   "en": "/en/swiss-plate-auctions/schwyz-sz/",
+   "de": "/de/schweizer-nummernschildauktionen/schwyz-sz/",
+   "fr": "/fr/encheres-plaques-suisses/schwytz-sz/"
+  },
+  "TG": {
+   "it": "/aste-targhe-svizzera/turgovia-tg/",
+   "en": "/en/swiss-plate-auctions/thurgau-tg/",
+   "de": "/de/schweizer-nummernschildauktionen/thurgau-tg/",
+   "fr": "/fr/encheres-plaques-suisses/thurgovie-tg/"
+  },
+  "TI": {
+   "it": "/aste-targhe-svizzera/ticino-ti/",
+   "en": "/en/swiss-plate-auctions/ticino-ti/",
+   "de": "/de/schweizer-nummernschildauktionen/tessin-ti/",
+   "fr": "/fr/encheres-plaques-suisses/tessin-ti/"
+  },
+  "UR": {
+   "it": "/aste-targhe-svizzera/uri-ur/",
+   "en": "/en/swiss-plate-auctions/uri-ur/",
+   "de": "/de/schweizer-nummernschildauktionen/uri-ur/",
+   "fr": "/fr/encheres-plaques-suisses/uri-ur/"
+  },
+  "VD": {
+   "it": "/aste-targhe-svizzera/vaud-vd/",
+   "en": "/en/swiss-plate-auctions/vaud-vd/",
+   "de": "/de/schweizer-nummernschildauktionen/waadt-vd/",
+   "fr": "/fr/encheres-plaques-suisses/vaud-vd/"
+  },
+  "VS": {
+   "it": "/aste-targhe-svizzera/vallese-vs/",
+   "en": "/en/swiss-plate-auctions/valais-vs/",
+   "de": "/de/schweizer-nummernschildauktionen/wallis-vs/",
+   "fr": "/fr/encheres-plaques-suisses/valais-vs/"
+  },
+  "ZG": {
+   "it": "/aste-targhe-svizzera/zugo-zg/",
+   "en": "/en/swiss-plate-auctions/zug-zg/",
+   "de": "/de/schweizer-nummernschildauktionen/zug-zg/",
+   "fr": "/fr/encheres-plaques-suisses/zoug-zg/"
+  },
+  "ZH": {
+   "it": "/aste-targhe-svizzera/zurigo-zh/",
+   "en": "/en/swiss-plate-auctions/zurich-zh/",
+   "de": "/de/schweizer-nummernschildauktionen/zurich-zh/",
+   "fr": "/fr/encheres-plaques-suisses/zurich-zh/"
+  }
+ },
+ "salaryProfession": {
+  "AG/ingegnere": {
+   "it": "/stipendio-ingegnere-argovia/",
+   "en": "/en/salary-engineer-aargau/",
+   "de": "/de/gehalt-ingenieur-aargau/",
+   "fr": "/fr/salaire-ingenieur-argovie/"
+  },
+  "AG/infermiere": {
+   "it": "/stipendio-infermiere-argovia/",
+   "en": "/en/salary-nurse-aargau/",
+   "de": "/de/gehalt-krankenpfleger-aargau/",
+   "fr": "/fr/salaire-infirmier-argovie/"
+  },
+  "AG/farmacista": {
+   "it": "/stipendio-farmacista-argovia/",
+   "en": "/en/salary-pharmacist-aargau/",
+   "de": "/de/gehalt-apotheker-aargau/",
+   "fr": "/fr/salaire-pharmacien-argovie/"
+  },
+  "AG/educatore": {
+   "it": "/stipendio-educatore-argovia/",
+   "en": "/en/salary-educator-aargau/",
+   "de": "/de/gehalt-erzieher-aargau/",
+   "fr": "/fr/salaire-educateur-argovie/"
+  },
+  "AG/cuoco": {
+   "it": "/stipendio-cuoco-argovia/",
+   "en": "/en/salary-cook-aargau/",
+   "de": "/de/gehalt-koch-aargau/",
+   "fr": "/fr/salaire-cuisinier-argovie/"
+  },
+  "AG/psicologo": {
+   "it": "/stipendio-psicologo-argovia/",
+   "en": "/en/salary-psychologist-aargau/",
+   "de": "/de/gehalt-psychologe-aargau/",
+   "fr": "/fr/salaire-psychologue-argovie/"
+  },
+  "AG/assistente-sociale": {
+   "it": "/stipendio-assistente-sociale-argovia/",
+   "en": "/en/salary-social-worker-aargau/",
+   "de": "/de/gehalt-sozialarbeiter-aargau/",
+   "fr": "/fr/salaire-assistant-social-argovie/"
+  },
+  "APPENZELLO/infermiere": {
+   "it": "/stipendio-infermiere-appenzello/",
+   "en": "/en/salary-nurse-appenzell/",
+   "de": "/de/gehalt-krankenpfleger-appenzell/",
+   "fr": "/fr/salaire-infirmier-appenzell/"
+  },
+  "BASILEA/ingegnere": {
+   "it": "/stipendio-ingegnere-basilea/",
+   "en": "/en/salary-engineer-basel/",
+   "de": "/de/gehalt-ingenieur-basel/",
+   "fr": "/fr/salaire-ingenieur-bale/"
+  },
+  "BASILEA/infermiere": {
+   "it": "/stipendio-infermiere-basilea/",
+   "en": "/en/salary-nurse-basel/",
+   "de": "/de/gehalt-krankenpfleger-basel/",
+   "fr": "/fr/salaire-infirmier-bale/"
+  },
+  "BASILEA/farmacista": {
+   "it": "/stipendio-farmacista-basilea/",
+   "en": "/en/salary-pharmacist-basel/",
+   "de": "/de/gehalt-apotheker-basel/",
+   "fr": "/fr/salaire-pharmacien-bale/"
+  },
+  "BASILEA/educatore": {
+   "it": "/stipendio-educatore-basilea/",
+   "en": "/en/salary-educator-basel/",
+   "de": "/de/gehalt-erzieher-basel/",
+   "fr": "/fr/salaire-educateur-bale/"
+  },
+  "BASILEA/cuoco": {
+   "it": "/stipendio-cuoco-basilea/",
+   "en": "/en/salary-cook-basel/",
+   "de": "/de/gehalt-koch-basel/",
+   "fr": "/fr/salaire-cuisinier-bale/"
+  },
+  "BASILEA/psicologo": {
+   "it": "/stipendio-psicologo-basilea/",
+   "en": "/en/salary-psychologist-basel/",
+   "de": "/de/gehalt-psychologe-basel/",
+   "fr": "/fr/salaire-psychologue-bale/"
+  },
+  "BASILEA/assistente-sociale": {
+   "it": "/stipendio-assistente-sociale-basilea/",
+   "en": "/en/salary-social-worker-basel/",
+   "de": "/de/gehalt-sozialarbeiter-basel/",
+   "fr": "/fr/salaire-assistant-social-bale/"
+  },
+  "BE/ingegnere": {
+   "it": "/stipendio-ingegnere-berna/",
+   "en": "/en/salary-engineer-bern/",
+   "de": "/de/gehalt-ingenieur-bern/",
+   "fr": "/fr/salaire-ingenieur-berne/"
+  },
+  "BE/infermiere": {
+   "it": "/stipendio-infermiere-berna/",
+   "en": "/en/salary-nurse-bern/",
+   "de": "/de/gehalt-krankenpfleger-bern/",
+   "fr": "/fr/salaire-infirmier-berne/"
+  },
+  "BE/farmacista": {
+   "it": "/stipendio-farmacista-berna/",
+   "en": "/en/salary-pharmacist-bern/",
+   "de": "/de/gehalt-apotheker-bern/",
+   "fr": "/fr/salaire-pharmacien-berne/"
+  },
+  "BE/ostetrica": {
+   "it": "/stipendio-ostetrica-berna/",
+   "en": "/en/salary-midwife-bern/",
+   "de": "/de/gehalt-hebamme-bern/",
+   "fr": "/fr/salaire-sage-femme-berne/"
+  },
+  "BE/educatore": {
+   "it": "/stipendio-educatore-berna/",
+   "en": "/en/salary-educator-bern/",
+   "de": "/de/gehalt-erzieher-bern/",
+   "fr": "/fr/salaire-educateur-berne/"
+  },
+  "BE/cuoco": {
+   "it": "/stipendio-cuoco-berna/",
+   "en": "/en/salary-cook-bern/",
+   "de": "/de/gehalt-koch-bern/",
+   "fr": "/fr/salaire-cuisinier-berne/"
+  },
+  "BE/psicologo": {
+   "it": "/stipendio-psicologo-berna/",
+   "en": "/en/salary-psychologist-bern/",
+   "de": "/de/gehalt-psychologe-bern/",
+   "fr": "/fr/salaire-psychologue-berne/"
+  },
+  "BE/assistente-sociale": {
+   "it": "/stipendio-assistente-sociale-berna/",
+   "en": "/en/salary-social-worker-bern/",
+   "de": "/de/gehalt-sozialarbeiter-bern/",
+   "fr": "/fr/salaire-assistant-social-berne/"
+  },
+  "FR/ingegnere": {
+   "it": "/stipendio-ingegnere-friburgo/",
+   "en": "/en/salary-engineer-fribourg/",
+   "de": "/de/gehalt-ingenieur-freiburg/",
+   "fr": "/fr/salaire-ingenieur-fribourg/"
+  },
+  "FR/infermiere": {
+   "it": "/stipendio-infermiere-friburgo/",
+   "en": "/en/salary-nurse-fribourg/",
+   "de": "/de/gehalt-krankenpfleger-freiburg/",
+   "fr": "/fr/salaire-infirmier-fribourg/"
+  },
+  "FR/cuoco": {
+   "it": "/stipendio-cuoco-friburgo/",
+   "en": "/en/salary-cook-fribourg/",
+   "de": "/de/gehalt-koch-freiburg/",
+   "fr": "/fr/salaire-cuisinier-fribourg/"
+  },
+  "FR/psicologo": {
+   "it": "/stipendio-psicologo-friburgo/",
+   "en": "/en/salary-psychologist-fribourg/",
+   "de": "/de/gehalt-psychologe-freiburg/",
+   "fr": "/fr/salaire-psychologue-fribourg/"
+  },
+  "GE/ingegnere": {
+   "it": "/stipendio-ingegnere-ginevra/",
+   "en": "/en/salary-engineer-geneva/",
+   "de": "/de/gehalt-ingenieur-genf/",
+   "fr": "/fr/salaire-ingenieur-geneve/"
+  },
+  "GE/infermiere": {
+   "it": "/stipendio-infermiere-ginevra/",
+   "en": "/en/salary-nurse-geneva/",
+   "de": "/de/gehalt-krankenpfleger-genf/",
+   "fr": "/fr/salaire-infirmier-geneve/"
+  },
+  "GE/cuoco": {
+   "it": "/stipendio-cuoco-ginevra/",
+   "en": "/en/salary-cook-geneva/",
+   "de": "/de/gehalt-koch-genf/",
+   "fr": "/fr/salaire-cuisinier-geneve/"
+  },
+  "GE/psicologo": {
+   "it": "/stipendio-psicologo-ginevra/",
+   "en": "/en/salary-psychologist-geneva/",
+   "de": "/de/gehalt-psychologe-genf/",
+   "fr": "/fr/salaire-psychologue-geneve/"
+  },
+  "GL/infermiere": {
+   "it": "/stipendio-infermiere-glarona/",
+   "en": "/en/salary-nurse-glarus/",
+   "de": "/de/gehalt-krankenpfleger-glarus/",
+   "fr": "/fr/salaire-infirmier-glaris/"
+  },
+  "GL/cuoco": {
+   "it": "/stipendio-cuoco-glarona/",
+   "en": "/en/salary-cook-glarus/",
+   "de": "/de/gehalt-koch-glarus/",
+   "fr": "/fr/salaire-cuisinier-glaris/"
+  },
+  "GR/ingegnere": {
+   "it": "/stipendio-ingegnere-grigioni/",
+   "en": "/en/salary-engineer-graubunden/",
+   "de": "/de/gehalt-ingenieur-graubunden/",
+   "fr": "/fr/salaire-ingenieur-grisons/"
+  },
+  "GR/infermiere": {
+   "it": "/stipendio-infermiere-grigioni/",
+   "en": "/en/salary-nurse-graubunden/",
+   "de": "/de/gehalt-krankenpfleger-graubunden/",
+   "fr": "/fr/salaire-infirmier-grisons/"
+  },
+  "GR/farmacista": {
+   "it": "/stipendio-farmacista-grigioni/",
+   "en": "/en/salary-pharmacist-graubunden/",
+   "de": "/de/gehalt-apotheker-graubunden/",
+   "fr": "/fr/salaire-pharmacien-grisons/"
+  },
+  "GR/ostetrica": {
+   "it": "/stipendio-ostetrica-grigioni/",
+   "en": "/en/salary-midwife-graubunden/",
+   "de": "/de/gehalt-hebamme-graubunden/",
+   "fr": "/fr/salaire-sage-femme-grisons/"
+  },
+  "GR/educatore": {
+   "it": "/stipendio-educatore-grigioni/",
+   "en": "/en/salary-educator-graubunden/",
+   "de": "/de/gehalt-erzieher-graubunden/",
+   "fr": "/fr/salaire-educateur-grisons/"
+  },
+  "GR/cuoco": {
+   "it": "/stipendio-cuoco-grigioni/",
+   "en": "/en/salary-cook-graubunden/",
+   "de": "/de/gehalt-koch-graubunden/",
+   "fr": "/fr/salaire-cuisinier-grisons/"
+  },
+  "GR/psicologo": {
+   "it": "/stipendio-psicologo-grigioni/",
+   "en": "/en/salary-psychologist-graubunden/",
+   "de": "/de/gehalt-psychologe-graubunden/",
+   "fr": "/fr/salaire-psychologue-grisons/"
+  },
+  "GR/assistente-sociale": {
+   "it": "/stipendio-assistente-sociale-grigioni/",
+   "en": "/en/salary-social-worker-graubunden/",
+   "de": "/de/gehalt-sozialarbeiter-graubunden/",
+   "fr": "/fr/salaire-assistant-social-grisons/"
+  },
+  "JU/infermiere": {
+   "it": "/stipendio-infermiere-giura/",
+   "en": "/en/salary-nurse-jura/",
+   "de": "/de/gehalt-krankenpfleger-jura/",
+   "fr": "/fr/salaire-infirmier-jura/"
+  },
+  "LU/ingegnere": {
+   "it": "/stipendio-ingegnere-lucerna/",
+   "en": "/en/salary-engineer-lucerne/",
+   "de": "/de/gehalt-ingenieur-luzern/",
+   "fr": "/fr/salaire-ingenieur-lucerne/"
+  },
+  "LU/infermiere": {
+   "it": "/stipendio-infermiere-lucerna/",
+   "en": "/en/salary-nurse-lucerne/",
+   "de": "/de/gehalt-krankenpfleger-luzern/",
+   "fr": "/fr/salaire-infirmier-lucerne/"
+  },
+  "LU/farmacista": {
+   "it": "/stipendio-farmacista-lucerna/",
+   "en": "/en/salary-pharmacist-lucerne/",
+   "de": "/de/gehalt-apotheker-luzern/",
+   "fr": "/fr/salaire-pharmacien-lucerne/"
+  },
+  "LU/educatore": {
+   "it": "/stipendio-educatore-lucerna/",
+   "en": "/en/salary-educator-lucerne/",
+   "de": "/de/gehalt-erzieher-luzern/",
+   "fr": "/fr/salaire-educateur-lucerne/"
+  },
+  "LU/cuoco": {
+   "it": "/stipendio-cuoco-lucerna/",
+   "en": "/en/salary-cook-lucerne/",
+   "de": "/de/gehalt-koch-luzern/",
+   "fr": "/fr/salaire-cuisinier-lucerne/"
+  },
+  "LU/psicologo": {
+   "it": "/stipendio-psicologo-lucerna/",
+   "en": "/en/salary-psychologist-lucerne/",
+   "de": "/de/gehalt-psychologe-luzern/",
+   "fr": "/fr/salaire-psychologue-lucerne/"
+  },
+  "LU/assistente-sociale": {
+   "it": "/stipendio-assistente-sociale-lucerna/",
+   "en": "/en/salary-social-worker-lucerne/",
+   "de": "/de/gehalt-sozialarbeiter-luzern/",
+   "fr": "/fr/salaire-assistant-social-lucerne/"
+  },
+  "NE/ingegnere": {
+   "it": "/stipendio-ingegnere-neuchatel/",
+   "en": "/en/salary-engineer-neuchatel/",
+   "de": "/de/gehalt-ingenieur-neuenburg/",
+   "fr": "/fr/salaire-ingenieur-neuchatel/"
+  },
+  "NE/psicologo": {
+   "it": "/stipendio-psicologo-neuchatel/",
+   "en": "/en/salary-psychologist-neuchatel/",
+   "de": "/de/gehalt-psychologe-neuenburg/",
+   "fr": "/fr/salaire-psychologue-neuchatel/"
+  },
+  "NW/cuoco": {
+   "it": "/stipendio-cuoco-nidvaldo/",
+   "en": "/en/salary-cook-nidwalden/",
+   "de": "/de/gehalt-koch-nidwalden/",
+   "fr": "/fr/salaire-cuisinier-nidwald/"
+  },
+  "OW/infermiere": {
+   "it": "/stipendio-infermiere-obvaldo/",
+   "en": "/en/salary-nurse-obwalden/",
+   "de": "/de/gehalt-krankenpfleger-obwalden/",
+   "fr": "/fr/salaire-infirmier-obwald/"
+  },
+  "SG/ingegnere": {
+   "it": "/stipendio-ingegnere-san-gallo/",
+   "en": "/en/salary-engineer-st-gallen/",
+   "de": "/de/gehalt-ingenieur-st-gallen/",
+   "fr": "/fr/salaire-ingenieur-saint-gall/"
+  },
+  "SG/infermiere": {
+   "it": "/stipendio-infermiere-san-gallo/",
+   "en": "/en/salary-nurse-st-gallen/",
+   "de": "/de/gehalt-krankenpfleger-st-gallen/",
+   "fr": "/fr/salaire-infirmier-saint-gall/"
+  },
+  "SG/farmacista": {
+   "it": "/stipendio-farmacista-san-gallo/",
+   "en": "/en/salary-pharmacist-st-gallen/",
+   "de": "/de/gehalt-apotheker-st-gallen/",
+   "fr": "/fr/salaire-pharmacien-saint-gall/"
+  },
+  "SG/cuoco": {
+   "it": "/stipendio-cuoco-san-gallo/",
+   "en": "/en/salary-cook-st-gallen/",
+   "de": "/de/gehalt-koch-st-gallen/",
+   "fr": "/fr/salaire-cuisinier-saint-gall/"
+  },
+  "SG/psicologo": {
+   "it": "/stipendio-psicologo-san-gallo/",
+   "en": "/en/salary-psychologist-st-gallen/",
+   "de": "/de/gehalt-psychologe-st-gallen/",
+   "fr": "/fr/salaire-psychologue-saint-gall/"
+  },
+  "SH/infermiere": {
+   "it": "/stipendio-infermiere-sciaffusa/",
+   "en": "/en/salary-nurse-schaffhausen/",
+   "de": "/de/gehalt-krankenpfleger-schaffhausen/",
+   "fr": "/fr/salaire-infirmier-schaffhouse/"
+  },
+  "SH/cuoco": {
+   "it": "/stipendio-cuoco-sciaffusa/",
+   "en": "/en/salary-cook-schaffhausen/",
+   "de": "/de/gehalt-koch-schaffhausen/",
+   "fr": "/fr/salaire-cuisinier-schaffhouse/"
+  },
+  "SO/ingegnere": {
+   "it": "/stipendio-ingegnere-soletta/",
+   "en": "/en/salary-engineer-solothurn/",
+   "de": "/de/gehalt-ingenieur-solothurn/",
+   "fr": "/fr/salaire-ingenieur-soleure/"
+  },
+  "SO/infermiere": {
+   "it": "/stipendio-infermiere-soletta/",
+   "en": "/en/salary-nurse-solothurn/",
+   "de": "/de/gehalt-krankenpfleger-solothurn/",
+   "fr": "/fr/salaire-infirmier-soleure/"
+  },
+  "SO/farmacista": {
+   "it": "/stipendio-farmacista-soletta/",
+   "en": "/en/salary-pharmacist-solothurn/",
+   "de": "/de/gehalt-apotheker-solothurn/",
+   "fr": "/fr/salaire-pharmacien-soleure/"
+  },
+  "SO/educatore": {
+   "it": "/stipendio-educatore-soletta/",
+   "en": "/en/salary-educator-solothurn/",
+   "de": "/de/gehalt-erzieher-solothurn/",
+   "fr": "/fr/salaire-educateur-soleure/"
+  },
+  "SO/cuoco": {
+   "it": "/stipendio-cuoco-soletta/",
+   "en": "/en/salary-cook-solothurn/",
+   "de": "/de/gehalt-koch-solothurn/",
+   "fr": "/fr/salaire-cuisinier-soleure/"
+  },
+  "SO/assistente-sociale": {
+   "it": "/stipendio-assistente-sociale-soletta/",
+   "en": "/en/salary-social-worker-solothurn/",
+   "de": "/de/gehalt-sozialarbeiter-solothurn/",
+   "fr": "/fr/salaire-assistant-social-soleure/"
+  },
+  "SZ/infermiere": {
+   "it": "/stipendio-infermiere-svitto/",
+   "en": "/en/salary-nurse-schwyz/",
+   "de": "/de/gehalt-krankenpfleger-schwyz/",
+   "fr": "/fr/salaire-infirmier-schwytz/"
+  },
+  "SZ/psicologo": {
+   "it": "/stipendio-psicologo-svitto/",
+   "en": "/en/salary-psychologist-schwyz/",
+   "de": "/de/gehalt-psychologe-schwyz/",
+   "fr": "/fr/salaire-psychologue-schwytz/"
+  },
+  "TG/ingegnere": {
+   "it": "/stipendio-ingegnere-turgovia/",
+   "en": "/en/salary-engineer-thurgau/",
+   "de": "/de/gehalt-ingenieur-thurgau/",
+   "fr": "/fr/salaire-ingenieur-thurgovie/"
+  },
+  "TG/infermiere": {
+   "it": "/stipendio-infermiere-turgovia/",
+   "en": "/en/salary-nurse-thurgau/",
+   "de": "/de/gehalt-krankenpfleger-thurgau/",
+   "fr": "/fr/salaire-infirmier-thurgovie/"
+  },
+  "TG/farmacista": {
+   "it": "/stipendio-farmacista-turgovia/",
+   "en": "/en/salary-pharmacist-thurgau/",
+   "de": "/de/gehalt-apotheker-thurgau/",
+   "fr": "/fr/salaire-pharmacien-thurgovie/"
+  },
+  "TG/cuoco": {
+   "it": "/stipendio-cuoco-turgovia/",
+   "en": "/en/salary-cook-thurgau/",
+   "de": "/de/gehalt-koch-thurgau/",
+   "fr": "/fr/salaire-cuisinier-thurgovie/"
+  },
+  "TG/psicologo": {
+   "it": "/stipendio-psicologo-turgovia/",
+   "en": "/en/salary-psychologist-thurgau/",
+   "de": "/de/gehalt-psychologe-thurgau/",
+   "fr": "/fr/salaire-psychologue-thurgovie/"
+  },
+  "UR/infermiere": {
+   "it": "/stipendio-infermiere-uri/",
+   "en": "/en/salary-nurse-uri/",
+   "de": "/de/gehalt-krankenpfleger-uri/",
+   "fr": "/fr/salaire-infirmier-uri/"
+  },
+  "VD/ingegnere": {
+   "it": "/stipendio-ingegnere-vaud/",
+   "en": "/en/salary-engineer-vaud/",
+   "de": "/de/gehalt-ingenieur-waadt/",
+   "fr": "/fr/salaire-ingenieur-vaud/"
+  },
+  "VD/infermiere": {
+   "it": "/stipendio-infermiere-vaud/",
+   "en": "/en/salary-nurse-vaud/",
+   "de": "/de/gehalt-krankenpfleger-waadt/",
+   "fr": "/fr/salaire-infirmier-vaud/"
+  },
+  "VD/farmacista": {
+   "it": "/stipendio-farmacista-vaud/",
+   "en": "/en/salary-pharmacist-vaud/",
+   "de": "/de/gehalt-apotheker-waadt/",
+   "fr": "/fr/salaire-pharmacien-vaud/"
+  },
+  "VD/educatore": {
+   "it": "/stipendio-educatore-vaud/",
+   "en": "/en/salary-educator-vaud/",
+   "de": "/de/gehalt-erzieher-waadt/",
+   "fr": "/fr/salaire-educateur-vaud/"
+  },
+  "VD/cuoco": {
+   "it": "/stipendio-cuoco-vaud/",
+   "en": "/en/salary-cook-vaud/",
+   "de": "/de/gehalt-koch-waadt/",
+   "fr": "/fr/salaire-cuisinier-vaud/"
+  },
+  "VD/psicologo": {
+   "it": "/stipendio-psicologo-vaud/",
+   "en": "/en/salary-psychologist-vaud/",
+   "de": "/de/gehalt-psychologe-waadt/",
+   "fr": "/fr/salaire-psychologue-vaud/"
+  },
+  "VS/ingegnere": {
+   "it": "/stipendio-ingegnere-vallese/",
+   "en": "/en/salary-engineer-valais/",
+   "de": "/de/gehalt-ingenieur-wallis/",
+   "fr": "/fr/salaire-ingenieur-valais/"
+  },
+  "VS/infermiere": {
+   "it": "/stipendio-infermiere-vallese/",
+   "en": "/en/salary-nurse-valais/",
+   "de": "/de/gehalt-krankenpfleger-wallis/",
+   "fr": "/fr/salaire-infirmier-valais/"
+  },
+  "VS/educatore": {
+   "it": "/stipendio-educatore-vallese/",
+   "en": "/en/salary-educator-valais/",
+   "de": "/de/gehalt-erzieher-wallis/",
+   "fr": "/fr/salaire-educateur-valais/"
+  },
+  "VS/cuoco": {
+   "it": "/stipendio-cuoco-vallese/",
+   "en": "/en/salary-cook-valais/",
+   "de": "/de/gehalt-koch-wallis/",
+   "fr": "/fr/salaire-cuisinier-valais/"
+  },
+  "VS/psicologo": {
+   "it": "/stipendio-psicologo-vallese/",
+   "en": "/en/salary-psychologist-valais/",
+   "de": "/de/gehalt-psychologe-wallis/",
+   "fr": "/fr/salaire-psychologue-valais/"
+  },
+  "ZG/ingegnere": {
+   "it": "/stipendio-ingegnere-zugo/",
+   "en": "/en/salary-engineer-zug/",
+   "de": "/de/gehalt-ingenieur-zug/",
+   "fr": "/fr/salaire-ingenieur-zoug/"
+  },
+  "ZG/infermiere": {
+   "it": "/stipendio-infermiere-zugo/",
+   "en": "/en/salary-nurse-zug/",
+   "de": "/de/gehalt-krankenpfleger-zug/",
+   "fr": "/fr/salaire-infirmier-zoug/"
+  },
+  "ZG/cuoco": {
+   "it": "/stipendio-cuoco-zugo/",
+   "en": "/en/salary-cook-zug/",
+   "de": "/de/gehalt-koch-zug/",
+   "fr": "/fr/salaire-cuisinier-zoug/"
+  },
+  "ZG/psicologo": {
+   "it": "/stipendio-psicologo-zugo/",
+   "en": "/en/salary-psychologist-zug/",
+   "de": "/de/gehalt-psychologe-zug/",
+   "fr": "/fr/salaire-psychologue-zoug/"
+  },
+  "ZH/ingegnere": {
+   "it": "/stipendio-ingegnere-zurigo/",
+   "en": "/en/salary-engineer-zurich/",
+   "de": "/de/gehalt-ingenieur-zurich/",
+   "fr": "/fr/salaire-ingenieur-zurich/"
+  },
+  "ZH/infermiere": {
+   "it": "/stipendio-infermiere-zurigo/",
+   "en": "/en/salary-nurse-zurich/",
+   "de": "/de/gehalt-krankenpfleger-zurich/",
+   "fr": "/fr/salaire-infirmier-zurich/"
+  },
+  "ZH/farmacista": {
+   "it": "/stipendio-farmacista-zurigo/",
+   "en": "/en/salary-pharmacist-zurich/",
+   "de": "/de/gehalt-apotheker-zurich/",
+   "fr": "/fr/salaire-pharmacien-zurich/"
+  },
+  "ZH/ostetrica": {
+   "it": "/stipendio-ostetrica-zurigo/",
+   "en": "/en/salary-midwife-zurich/",
+   "de": "/de/gehalt-hebamme-zurich/",
+   "fr": "/fr/salaire-sage-femme-zurich/"
+  },
+  "ZH/educatore": {
+   "it": "/stipendio-educatore-zurigo/",
+   "en": "/en/salary-educator-zurich/",
+   "de": "/de/gehalt-erzieher-zurich/",
+   "fr": "/fr/salaire-educateur-zurich/"
+  },
+  "ZH/cuoco": {
+   "it": "/stipendio-cuoco-zurigo/",
+   "en": "/en/salary-cook-zurich/",
+   "de": "/de/gehalt-koch-zurich/",
+   "fr": "/fr/salaire-cuisinier-zurich/"
+  },
+  "ZH/psicologo": {
+   "it": "/stipendio-psicologo-zurigo/",
+   "en": "/en/salary-psychologist-zurich/",
+   "de": "/de/gehalt-psychologe-zurich/",
+   "fr": "/fr/salaire-psychologue-zurich/"
+  },
+  "ZH/assistente-sociale": {
+   "it": "/stipendio-assistente-sociale-zurigo/",
+   "en": "/en/salary-social-worker-zurich/",
+   "de": "/de/gehalt-sozialarbeiter-zurich/",
+   "fr": "/fr/salaire-assistant-social-zurich/"
+  }
+ },
+ "facilityLanding": {
+  "TI/eoc-ente-ospedaliero-cantonale": {
+   "it": "/strutture-sanitarie/eoc-ente-ospedaliero-cantonale/",
+   "en": "/en/healthcare-facilities/eoc-ente-ospedaliero-cantonale/",
+   "de": "/de/gesundheitseinrichtungen/eoc-ente-ospedaliero-cantonale/",
+   "fr": "/fr/etablissements-sante/eoc-ente-ospedaliero-cantonale/"
+  },
+  "LU/luks": {
+   "it": "/strutture-sanitarie/luks/",
+   "en": "/en/healthcare-facilities/luks/",
+   "de": "/de/gesundheitseinrichtungen/luks/",
+   "fr": "/fr/etablissements-sante/luks/"
+  },
+  "AG/ksa": {
+   "it": "/strutture-sanitarie/ksa/",
+   "en": "/en/healthcare-facilities/ksa/",
+   "de": "/de/gesundheitseinrichtungen/ksa/",
+   "fr": "/fr/etablissements-sante/ksa/"
+  },
+  "AG/ksb": {
+   "it": "/strutture-sanitarie/ksb/",
+   "en": "/en/healthcare-facilities/ksb/",
+   "de": "/de/gesundheitseinrichtungen/ksb/",
+   "fr": "/fr/etablissements-sante/ksb/"
+  },
+  "ZH/ksw": {
+   "it": "/strutture-sanitarie/ksw/",
+   "en": "/en/healthcare-facilities/ksw/",
+   "de": "/de/gesundheitseinrichtungen/ksw/",
+   "fr": "/fr/etablissements-sante/ksw/"
+  },
+  "ZH/usz": {
+   "it": "/strutture-sanitarie/usz/",
+   "en": "/en/healthcare-facilities/usz/",
+   "de": "/de/gesundheitseinrichtungen/usz/",
+   "fr": "/fr/etablissements-sante/usz/"
+  },
+  "BASILEA/unispital-basel": {
+   "it": "/strutture-sanitarie/unispital-basel/",
+   "en": "/en/healthcare-facilities/unispital-basel/",
+   "de": "/de/gesundheitseinrichtungen/unispital-basel/",
+   "fr": "/fr/etablissements-sante/unispital-basel/"
+  },
+  "BASILEA/ukbb": {
+   "it": "/strutture-sanitarie/ukbb/",
+   "en": "/en/healthcare-facilities/ukbb/",
+   "de": "/de/gesundheitseinrichtungen/ukbb/",
+   "fr": "/fr/etablissements-sante/ukbb/"
+  },
+  "BASILEA/ksbl": {
+   "it": "/strutture-sanitarie/ksbl/",
+   "en": "/en/healthcare-facilities/ksbl/",
+   "de": "/de/gesundheitseinrichtungen/ksbl/",
+   "fr": "/fr/etablissements-sante/ksbl/"
+  },
+  "GR/kantonsspital-graubuenden-ksgr": {
+   "it": "/strutture-sanitarie/kantonsspital-graubuenden-ksgr/",
+   "en": "/en/healthcare-facilities/kantonsspital-graubuenden-ksgr/",
+   "de": "/de/gesundheitseinrichtungen/kantonsspital-graubuenden-ksgr/",
+   "fr": "/fr/etablissements-sante/kantonsspital-graubuenden-ksgr/"
+  },
+  "VS/hopital-du-valais": {
+   "it": "/strutture-sanitarie/hopital-du-valais/",
+   "en": "/en/healthcare-facilities/hopital-du-valais/",
+   "de": "/de/gesundheitseinrichtungen/hopital-du-valais/",
+   "fr": "/fr/etablissements-sante/hopital-du-valais/"
+  },
+  "TG/spital-thurgau": {
+   "it": "/strutture-sanitarie/spital-thurgau/",
+   "en": "/en/healthcare-facilities/spital-thurgau/",
+   "de": "/de/gesundheitseinrichtungen/spital-thurgau/",
+   "fr": "/fr/etablissements-sante/spital-thurgau/"
+  },
+  "SH/spitaeler-schaffhausen": {
+   "it": "/strutture-sanitarie/spitaeler-schaffhausen/",
+   "en": "/en/healthcare-facilities/spitaeler-schaffhausen/",
+   "de": "/de/gesundheitseinrichtungen/spitaeler-schaffhausen/",
+   "fr": "/fr/etablissements-sante/spitaeler-schaffhausen/"
+  },
+  "FR/hfr-hopital-fribourgeois": {
+   "it": "/strutture-sanitarie/hfr-hopital-fribourgeois/",
+   "en": "/en/healthcare-facilities/hfr-hopital-fribourgeois/",
+   "de": "/de/gesundheitseinrichtungen/hfr-hopital-fribourgeois/",
+   "fr": "/fr/etablissements-sante/hfr-hopital-fribourgeois/"
+  },
+  "NE/rhne-reseau-hospitalier-neuchatelois": {
+   "it": "/strutture-sanitarie/rhne-reseau-hospitalier-neuchatelois/",
+   "en": "/en/healthcare-facilities/rhne-reseau-hospitalier-neuchatelois/",
+   "de": "/de/gesundheitseinrichtungen/rhne-reseau-hospitalier-neuchatelois/",
+   "fr": "/fr/etablissements-sante/rhne-reseau-hospitalier-neuchatelois/"
+  },
+  "JU/h-ju-hopital-du-jura": {
+   "it": "/strutture-sanitarie/h-ju-hopital-du-jura/",
+   "en": "/en/healthcare-facilities/h-ju-hopital-du-jura/",
+   "de": "/de/gesundheitseinrichtungen/h-ju-hopital-du-jura/",
+   "fr": "/fr/etablissements-sante/h-ju-hopital-du-jura/"
+  },
+  "ZG/zuger-kantonsspital": {
+   "it": "/strutture-sanitarie/zuger-kantonsspital/",
+   "en": "/en/healthcare-facilities/zuger-kantonsspital/",
+   "de": "/de/gesundheitseinrichtungen/zuger-kantonsspital/",
+   "fr": "/fr/etablissements-sante/zuger-kantonsspital/"
+  },
+  "SZ/spital-schwyz": {
+   "it": "/strutture-sanitarie/spital-schwyz/",
+   "en": "/en/healthcare-facilities/spital-schwyz/",
+   "de": "/de/gesundheitseinrichtungen/spital-schwyz/",
+   "fr": "/fr/etablissements-sante/spital-schwyz/"
+  },
+  "NW/spital-nidwalden": {
+   "it": "/strutture-sanitarie/spital-nidwalden/",
+   "en": "/en/healthcare-facilities/spital-nidwalden/",
+   "de": "/de/gesundheitseinrichtungen/spital-nidwalden/",
+   "fr": "/fr/etablissements-sante/spital-nidwalden/"
+  },
+  "OW/ksow": {
+   "it": "/strutture-sanitarie/ksow/",
+   "en": "/en/healthcare-facilities/ksow/",
+   "de": "/de/gesundheitseinrichtungen/ksow/",
+   "fr": "/fr/etablissements-sante/ksow/"
+  },
+  "GL/ksgl": {
+   "it": "/strutture-sanitarie/ksgl/",
+   "en": "/en/healthcare-facilities/ksgl/",
+   "de": "/de/gesundheitseinrichtungen/ksgl/",
+   "fr": "/fr/etablissements-sante/ksgl/"
+  }
+ },
+ "ticinoPages": {
+  "weather:hub": {
+   "it": "/meteo-frontalieri/",
+   "en": "/en/commute-weather/",
+   "de": "/de/pendler-wetter/",
+   "fr": "/fr/meteo-frontaliers/"
+  },
+  "weather:lugano": {
+   "it": "/meteo-frontalieri/lugano/",
+   "en": "/en/commute-weather/lugano/",
+   "de": "/de/pendler-wetter/lugano/",
+   "fr": "/fr/meteo-frontaliers/lugano/"
+  },
+  "weather:bellinzona": {
+   "it": "/meteo-frontalieri/bellinzona/",
+   "en": "/en/commute-weather/bellinzona/",
+   "de": "/de/pendler-wetter/bellenz/",
+   "fr": "/fr/meteo-frontaliers/bellinzone/"
+  },
+  "weather:mendrisio": {
+   "it": "/meteo-frontalieri/mendrisio/",
+   "en": "/en/commute-weather/mendrisio/",
+   "de": "/de/pendler-wetter/mendrisio/",
+   "fr": "/fr/meteo-frontaliers/mendrisio/"
+  },
+  "weather:locarno": {
+   "it": "/meteo-frontalieri/locarno/",
+   "en": "/en/commute-weather/locarno/",
+   "de": "/de/pendler-wetter/locarno/",
+   "fr": "/fr/meteo-frontaliers/locarno/"
+  },
+  "weather:chiasso": {
+   "it": "/meteo-frontalieri/chiasso/",
+   "en": "/en/commute-weather/chiasso/",
+   "de": "/de/pendler-wetter/chiasso/",
+   "fr": "/fr/meteo-frontaliers/chiasso/"
+  },
+  "weather-alerts:hub": {
+   "it": "/allerte-meteo/",
+   "en": "/en/weather-alerts/",
+   "de": "/de/wetterwarnungen/",
+   "fr": "/fr/alertes-meteo/"
+  },
+  "weather-alerts:gotthard-snow": {
+   "it": "/allerte/neve-gottardo/",
+   "en": "/en/alerts/snow-gotthard/",
+   "de": "/de/warnungen/schnee-gotthard/",
+   "fr": "/fr/alertes/neige-gothard/"
+  },
+  "pharmacies:ticino": {
+   "it": "/farmacie/ticino/",
+   "en": "/en/pharmacies/ticino/",
+   "de": "/de/apotheken/ticino/",
+   "fr": "/fr/pharmacies/ticino/"
+  },
+  "pharmacies:on-duty": {
+   "it": "/farmacie-di-turno/",
+   "en": "/en/on-duty-pharmacies/",
+   "de": "/de/notdienst-apotheken/",
+   "fr": "/fr/pharmacies-de-garde/"
+  },
+  "holidays:ticino": {
+   "it": "/giorni-festivi-ticino/",
+   "en": "/en/public-holidays-ticino/",
+   "de": "/de/feiertage-tessin/",
+   "fr": "/fr/jours-feries-tessin/"
+  },
+  "school-holidays:2027": {
+   "it": "/vita-in-ticino/vacanze-scolastiche-ticino-2027/",
+   "en": "/en/living-in-ticino/school-holidays-ticino-2027/",
+   "de": "/de/leben-im-tessin/schulferien-tessin-2027/",
+   "fr": "/fr/vivre-au-tessin/vacances-scolaires-tessin-2027/"
+  },
+  "school-holidays:2028": {
+   "it": "/vita-in-ticino/vacanze-scolastiche-ticino-2028/",
+   "en": "/en/living-in-ticino/school-holidays-ticino-2028/",
+   "de": "/de/leben-im-tessin/schulferien-tessin-2028/",
+   "fr": "/fr/vivre-au-tessin/vacances-scolaires-tessin-2028/"
+  },
+  "school-holidays:2029": {
+   "it": "/vita-in-ticino/vacanze-scolastiche-ticino-2029/",
+   "en": "/en/living-in-ticino/school-holidays-ticino-2029/",
+   "de": "/de/leben-im-tessin/schulferien-tessin-2029/",
+   "fr": "/fr/vivre-au-tessin/vacances-scolaires-tessin-2029/"
+  },
+  "cost-of-living:ticino": {
+   "it": "/costo-vita-ticino/",
+   "en": "/en/cost-of-living-ticino/",
+   "de": "/de/lebenshaltungskosten-tessin/",
+   "fr": "/fr/cout-vie-tessin/"
+  },
+  "cost-of-living:lugano": {
+   "it": "/costo-vita-lugano-ticino/",
+   "en": "/en/cost-of-living-lugano-ticino/",
+   "de": "/de/lebenshaltungskosten-lugano-tessin/",
+   "fr": "/fr/cout-vie-lugano-tessin/"
+  },
+  "cost-of-living:mendrisio": {
+   "it": "/costo-vita-mendrisio-ticino/",
+   "en": "/en/cost-of-living-mendrisio-ticino/",
+   "de": "/de/lebenshaltungskosten-mendrisio-tessin/",
+   "fr": "/fr/cout-vie-mendrisio-tessin/"
+  },
+  "cost-of-living:chiasso": {
+   "it": "/costo-vita-chiasso-ticino/",
+   "en": "/en/cost-of-living-chiasso-ticino/",
+   "de": "/de/lebenshaltungskosten-chiasso-tessin/",
+   "fr": "/fr/cout-vie-chiasso-tessin/"
+  },
+  "cost-of-living:bellinzona": {
+   "it": "/costo-vita-bellinzona-ticino/",
+   "en": "/en/cost-of-living-bellinzona-ticino/",
+   "de": "/de/lebenshaltungskosten-bellinzona-tessin/",
+   "fr": "/fr/cout-vie-bellinzona-tessin/"
+  },
+  "cost-of-living:locarno": {
+   "it": "/costo-vita-locarno-ticino/",
+   "en": "/en/cost-of-living-locarno-ticino/",
+   "de": "/de/lebenshaltungskosten-locarno-tessin/",
+   "fr": "/fr/cout-vie-locarno-tessin/"
+  },
+  "fuel:diesel": {
+   "it": "/prezzi-diesel/oggi/",
+   "en": "/en/diesel-price-switzerland/today/",
+   "de": "/de/dieselpreis-schweiz/heute/",
+   "fr": "/fr/prix-gasoil-suisse/aujourd-hui/"
+  },
+  "fuel:petrol": {
+   "it": "/prezzi-benzina/oggi/",
+   "en": "/en/gasoline-price-switzerland/today/",
+   "de": "/de/benzinpreis-schweiz/heute/",
+   "fr": "/fr/prix-essence-suisse/aujourd-hui/"
   }
  },
  "rejected": []

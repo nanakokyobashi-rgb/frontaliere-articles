@@ -7,7 +7,7 @@ const BODY_LINK_CAP = 4;
 // Strumenti `nav:`: il tetto storico resta 3 e sale a 4 solo se un link
 // verso lavori/professioni e' stato aggiunto prima.
 const NAV_LINK_CAP = 3;
-// Al massimo due link verso landing lavoro/professione per articolo.
+// Al massimo due link verso destinazioni (landing, pagine tematiche) per articolo, contando quelli gia' presenti.
 const DESTINATION_LINK_CAP = 2;
 
 /** Link existing localized prose. Missing translations and missing intent
@@ -26,14 +26,17 @@ export function enrichArticleInternalLinks(data, { isPending, bodySections, sect
     const combined = Object.values(sections).join('\n');
     const usedIds = new Set([...combined.matchAll(/\[[^\]]+\]\(nav:([a-z-]+)\)/g)].map(m => m[1]));
     const destinations = destinationPaths(locale);
+    let destinationsPresent = 0;
     for (const [id, target] of Object.entries(destinations)) {
-      if (target && combined.includes(`](${target})`)) usedIds.add(id);
+      if (target && combined.includes(`](${target})`)) { usedIds.add(id); destinationsPresent += 1; }
     }
     const fields = Object.entries(sections)
       .filter(([field, text]) => !isPending(data, locale, field) && typeof text === 'string' && text.trim());
 
     const before = usedIds.size;
-    const destinationBudget = Math.min(BODY_LINK_CAP, before + DESTINATION_LINK_CAP);
+    // Il tetto vale sul totale dei link verso destinazioni (anche quelli gia' presenti): rieseguire il
+    // linker sullo stesso corpo non ne aggiunge altri.
+    const destinationBudget = Math.min(BODY_LINK_CAP, before + Math.max(0, DESTINATION_LINK_CAP - destinationsPresent));
     for (const [field, text] of fields) {
       content[field] = linkContentKeywords(content[field] ?? text, locale, {
         matcher: destinationMatcher, destinations, usedIds, maxLinks: destinationBudget,

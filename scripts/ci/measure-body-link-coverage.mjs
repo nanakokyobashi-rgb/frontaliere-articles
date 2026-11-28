@@ -15,6 +15,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { enrichArticleInternalLinks } from '../../generator/scripts/lib/contextual-article-links.mjs';
+import { destinationPaths } from '../../generator/scripts/lib/body-link-destinations.mjs';
 
 const API_BASE = process.env.SECTION_CADENCE_API_BASE || 'https://nanakokyobashi-rgb.github.io/frontaliere-articles';
 const BODY_DIR = (section) => (section === 'frontaliere' ? 'blog-body' : section === 'svizzera' ? 'blog-body-ch' : `blog-body-${section}`);
@@ -48,14 +49,26 @@ function readBodies(repo, section, locale, id) {
 
 const LINK = /\[([^\]]+)\]\(([^)\s]+)\)/g;
 export function linksOf(text) { return [...text.matchAll(LINK)].map((m) => ({ anchor: m[1], target: m[2], index: m.index })); }
-const kindOf = (t) => (t.startsWith('nav:') ? 'tool' : /^\/(?:(?:en|de|fr)\/)?(?:cerca-lavoro-|find-jobs-|jobs-in|jobs-im|trouver-emploi|lavoro-|jobs-|arbeit-|travail-)/.test(t) ? 'jobs' : /^\//.test(t) ? 'site' : 'other');
+// F6.3d: i temi cantonali hanno un tipo proprio (dal prefisso dell'id nell'elenco destinazioni),
+// cosi' la misura li separa per tema.
+const THEME_BY_PATH = new Map();
+for (const locale of ['it', 'en', 'de', 'fr']) {
+  for (const [id, target] of Object.entries(destinationPaths(locale))) {
+    const prefix = id.split(':')[0];
+    if (['events', 'border', 'plates', 'salary', 'facility', 'ti'].includes(prefix)) THEME_BY_PATH.set(target, prefix === 'ti' ? 'ticino' : prefix);
+  }
+}
+const kindOf = (t) => (t.startsWith('nav:') ? 'tool' : THEME_BY_PATH.get(t) || (/^\/(?:(?:en|de|fr)\/)?(?:cerca-lavoro-|find-jobs-|jobs-in|jobs-im|trouver-emploi|lavoro-|jobs-|arbeit-|travail-)/.test(t) ? 'jobs' : /^\//.test(t) ? 'site' : 'other'));
 
 async function main() {
   const a = args(process.argv.slice(2));
   const repo = path.resolve(a.repo || '.');
   const count = Number(a.count || 240);
   const withLocales = Number(a.locales || 30);
-  const lists = [['articles.json', 'frontaliere'], ['swiss-articles.json', 'svizzera'], ['canton-articles.json', null]];
+  // `--sections cantons` limita il campione agli articoli cantonali (F6.3d).
+  const lists = a.sections === 'cantons'
+    ? [['canton-articles.json', null]]
+    : [['articles.json', 'frontaliere'], ['swiss-articles.json', 'svizzera'], ['canton-articles.json', null]];
   const pool = [];
   for (const [file, fixed] of lists) for (const x of await json(file)) pool.push({ id: x.id, date: x.date, section: fixed || x.section });
   pool.sort((p, q) => q.date.localeCompare(p.date));
@@ -81,7 +94,7 @@ async function main() {
   }
   const share = (pred, f) => Math.round((rows.filter(pred).length / rows.length) * 1000) / 10;
   const bySection = {};
-  for (const r of rows) (bySection[r.section.startsWith('canton-') ? 'cantoni' : r.section] ||= []).push(r);
+  for (const r of rows) (bySection[a.sections === 'cantons' ? r.section : r.section.startsWith('canton-') ? 'cantoni' : r.section] ||= []).push(r);
   const summary = {
     sampled: rows.length,
     beforeWithToolOrJobs: share((r) => r.before.some((k) => k !== 'other')),
@@ -94,6 +107,7 @@ async function main() {
     maxInternalLinksAfter: Math.max(...rows.map((r) => r.after.filter((k) => k !== 'other').length)),
     internalOver4After: rows.filter((r) => r.after.filter((k) => k !== 'other').length > 4).length,
     internalOver4Before: rows.filter((r) => r.before.filter((k) => k !== 'other').length > 4).length,
+    newLinkByKind: rows.flatMap((r) => r.added.filter((x) => x.locale === 'it')).reduce((acc, x) => { acc[x.kind] = (acc[x.kind] || 0) + 1; return acc; }, {}),
     newLinkLocales: [...new Set(rows.flatMap((r) => r.added.filter((x) => x.kind !== 'tool').map((x) => x.locale)))],
     bySection: Object.fromEntries(Object.entries(bySection).map(([k, v]) => [k, { n: v.length, afterWithToolOrJobs: Math.round(v.filter((r) => r.after.some((x) => x !== 'other')).length / v.length * 1000) / 10, newDestinationLinkShare: Math.round(v.filter((r) => r.added.some((x) => x.locale === 'it' && x.kind !== 'tool')).length / v.length * 1000) / 10 }])),
   };

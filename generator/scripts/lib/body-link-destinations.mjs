@@ -16,6 +16,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CANTON_DISPLAY_NAMES } from '../../../engine/shared/cantonDisplayNames.mjs';
+import { cantonTopicMatches, cantonTopicPaths } from './body-link-canton-topics.mjs';
 
 const DATA_FILE = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'data', 'body-link-destinations.json');
 const LOCALES = ['it', 'en', 'de', 'fr'];
@@ -128,6 +129,9 @@ const PROFESSIONS = [
   ['assistente-sociale', true, { it: ['assistente sociale', 'assistenti sociali'], en: ['social worker', 'social workers'], de: ['Sozialarbeiter', 'Sozialarbeitern', 'Sozialarbeiterin', 'Sozialarbeitende'], fr: ['assistant social', 'assistante sociale', 'assistants sociaux'] }],
   ['macellaio', true, { it: ['macellaio', 'macellai'], en: ['butcher', 'butchers'], de: ['Metzger', 'Metzgern', 'Metzgerin'], fr: ['boucher', 'bouchers'] }],
   ['saldatore', true, { it: ['saldatore', 'saldatori'], en: ['welder', 'welders'], de: ['Schweisser', 'Schweissern', 'Schweißer', 'Schweißern'], fr: ['soudeur', 'soudeurs'] }],
+  // Solo per le pagine «stipendio per professione» (F6.3d): nessuna landing lavoro a questi nomi.
+  ['farmacista', false, { it: ['farmacista', 'farmacisti', 'farmacista'], en: ['pharmacist', 'pharmacists'], de: ['Apotheker', 'Apothekern', 'Apothekerin', 'Apothekerinnen'], fr: ['pharmacien', 'pharmaciens', 'pharmacienne'] }],
+  ['psicologo', false, { it: ['psicologo', 'psicologi', 'psicologa', 'psicologhe'], en: ['psychologist', 'psychologists'], de: ['Psychologe', 'Psychologen', 'Psychologin', 'Psychologinnen'], fr: ['psychologue', 'psychologues'] }],
   ['architetto', true, { it: ['architetto', 'architetti', 'architetta'], en: ['architect', 'architects'], de: ['Architekt', 'Architekten', 'Architektin'], fr: ['architecte', 'architectes'] }],
 ];
 
@@ -143,6 +147,15 @@ const JOB_CONTEXT = {
   en: /(?<!\p{L})(?:job|work|hire|hiring|recruit|vacanc|salar|wage|shortage|staff|employ|profession|career|training|contract)/iu,
   de: /(?<!\p{L})(?:arbeit|job|stelle|lohn|löhne|gehalt|fachkräft|personal|mangel|beruf|anstell|rekrut|ausbildung|vertrag)/iu,
   fr: /(?<!\p{L})(?:travail|emploi|embauch|recrut|poste|salaire|pénurie|personnel|profession|métier|carrière|formation|contrat)/iu,
+};
+
+// «poste comptable», «formation infirmière», «sistema contabile»: il nome del mestiere e' qui un
+// aggettivo, non una persona. Misurato sugli articoli cantonali (F6.3d).
+const ADJECTIVAL_PRECEDER = {
+  it: /(?<!\p{L})(?:ufficio|uffici|servizio|servizi|sistema|sistemi|documento|documenti|bilancio|scrittura|scritture|registrazione|registrazioni|formazione|settore|ambito)\s+$/iu,
+  en: /(?<!\p{L})(?:cook|engineer)ing\s+$/iu,
+  de: /(?<!\p{L})(?:Pflege|Fach)\s+$/iu,
+  fr: /(?<!\p{L})(?:médicale?s?\s+(?:et|ou)|soignante?s?\s+(?:et|ou)|poste|postes|formation|formations|soins|pièce|pièces|écriture|écritures|système|systèmes|norme|normes|service|services|équipe|équipes|activité|activités)\s+$/iu,
 };
 
 const compiledProfessions = new Map();
@@ -176,6 +189,12 @@ const TOPIC_PHRASES = {
     fr: ['salaire minimum', 'salaires minimaux'],
   },
 };
+const topicCtx = {
+  word, alt, cantonNames, sentenceAround: (...a) => sentenceAround(...a),
+  cantonCodes: Object.keys(CANTON_DISPLAY_NAMES),
+  professionSlugs: PROFESSIONS.map(([slug]) => slug),
+  professionAliases: (slug, locale) => PROFESSIONS.find(([s]) => s === slug)[2][locale],
+};
 const compiledTopics = new Map();
 function topicMatchers(locale) {
   if (!compiledTopics.has(locale)) {
@@ -204,10 +223,10 @@ function cantonInSentence(sentence, locale, available) {
 // Frasi che negano o escludono un effetto («non sono documentati effetti su salario
 // minimo», «né con ...»): l'argomento e' citato per dire che NON c'entra, non e' un rinvio.
 const DISCLAIMER = {
-  it: /(?<!\p{L})(?:né|nè|non\s+(?:sono|è|risultano|viene|vengono)\s+(?:documentat|confermat|dimostrat|collegat|riportat)|non\s+(?:possono|può)\s+essere)/iu,
-  en: /(?<!\p{L})(?:nor|neither|not\s+(?:documented|confirmed|linked|reported)|no\s+documented|cannot\s+be|can\s?not\s+be)/iu,
-  de: /(?<!\p{L})(?:weder|noch|nicht\s+(?:dokumentiert|belegt|bestätigt)|keine\s+dokumentierten|können\s+nicht)/iu,
-  fr: /(?<!\p{L})(?:ni\s|pas\s+(?:documenté|confirmé|établi)|non\s+documenté|ne\s+peuvent\s+pas)/iu,
+  it: /(?<!\p{L})(?:né|nè|non\s+(?:sono|è|risultano|viene|vengono)\s+(?:documentat|confermat|dimostrat|collegat|riportat)|non\s+(?:possono|può)\s+essere|non\s+(?:misura|cita|tratta|quantifica|presenta|contiene|offre|fornisce|include|comprende|riporta|indica|calcola|stima|dimostra|collega|chiarisce|specifica|menziona|mostra)|non\s+descrive|senza\s+(?:indicare|specificare|quantificare|precisare)|nemmeno|neppure|neanche|lascia\s+fuori|fuori\s+dal\s+testo|restano?\s+fuori|esclus[aeio](?!\p{L}))/iu,
+  en: /(?<!\p{L})(?:nor|neither|not\s+(?:documented|confirmed|linked|reported)|no\s+documented|cannot\s+be|can\s?not\s+be|(?:does|do|did)\s+not\s+(?:measure|cite|mention|quantif|present|contain|offer|provide|include|cover|report|indicate|calculate|estimate|link|clarify|specify|show)|without\s+(?:specifying|stating|giving|quantifying|indicating)|not\s+even|leaves?\s+out|left\s+out|out\s+of\s+the\s+(?:text|scope)|outside\s+the\s+(?:text|scope)|excluded)/iu,
+  de: /(?<!\p{L})(?:weder|noch|nicht\s+(?:dokumentiert|belegt|bestätigt|misst|nennt|beziffert|enthält|liefert|umfasst|berücksichtigt|erwähnt|behandelt|quantifiziert)|keine\s+dokumentierten|können\s+nicht|ausserhalb|ausgeklammert|nicht\s+einmal|aussen\s+vor|ohne\s+(?:anzugeben|zu\s+\p{L}+)|nicht\s+von\b[^.!?\n]*\bdie\s+Rede|(?:beziffert|nennt|misst|enthält|liefert|erwähnt|behandelt|quantifiziert|berücksichtigt)\b[^.!?\n]*\bnicht(?![\p{L}]))/iu,
+  fr: /(?<!\p{L})(?:ni\s|pas\s+(?:documenté|confirmé|établi)|non\s+documenté|ne\s+peuvent\s+pas|ne\s+(?:mesure|cite|chiffre|contient|fournit|couvre|traite|mentionne|précise|présente|quantifie|donne)\s+pas|sans\s+(?:préciser|indiquer|quantifier)|pas\s+même|hors\s+du\s+texte|laisse\s+de\s+côté|exclu)/iu,
 };
 // Il salario minimo ha una pagina per cantone solo per alcuni cantoni: nelle altre
 // sezioni cantonali il termine compare quasi solo in elenchi di temi o in contesti diversi.
@@ -238,6 +257,7 @@ export function destinationPaths(locale, destinations = loadBodyLinkDestinations
   for (const [topic, table] of Object.entries(destinations.topicLanding || {})) {
     for (const [code, quad] of Object.entries(table)) out[`topic:${topic}:${code}`] = quad[locale];
   }
+  Object.assign(out, cantonTopicPaths(destinations, locale));
   return out;
 }
 
@@ -279,6 +299,7 @@ export function createBodyLinkMatcher({ sectionName = 'frontaliere', destination
         for (const m of text.matchAll(p.bare)) {
           const start = m.index; const end = start + m[0].length;
           if (!JOB_CONTEXT[locale].test(sentenceAround(text, start, end))) continue;
+          if (ADJECTIVAL_PRECEDER[locale].test(text.slice(Math.max(0, start - 24), start))) continue;
           matches.push({ id, start, end, target });
         }
       }
@@ -295,6 +316,7 @@ export function createBodyLinkMatcher({ sectionName = 'frontaliere', destination
         if (paths[id]) matches.push({ id, start, end, target: paths[id] });
       }
     }
+    if (cantonCode) matches.push(...cantonTopicMatches(text, locale, cantonCode, paths, topicCtx));
     const kept = matches.filter((m) => !DISCLAIMER[locale].test(sentenceAround(text, m.start, m.end))
       && (!m.id.startsWith('topic:minimum-wage:') || MINIMUM_WAGE_SECTIONS.has(sectionName)));
     // Priorita' al budget di link: ricerca lavoro e pagine tematiche prima dei mestieri.
