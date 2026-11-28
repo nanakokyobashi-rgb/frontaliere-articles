@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-minimo-obvaldo-contratti.webp",
+      "sha256": "8604d0d7872181bd3f012fee42a51f6ace43d3c28034e969a1aa75793e1dbfeb"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-minimo-obvaldo-contratti-480w.webp",
+      "sha256": "a5730019782cabe93a166489b11757e82d6956731a81c9b10bb956e423e79fd4"
+    }
+  ]
 }
