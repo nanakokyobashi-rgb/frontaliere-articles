@@ -19,6 +19,7 @@ function runHelper({
   githubEnv = true,
   restUnavailable = false,
   remoteRef = CURRENT + "\trefs/heads/main",
+  advancePolicy,
 } = {}) {
   const dir = mkdtempSync(resolve(tmpdir(), 'verify-publish-api-source-'));
   const envFile = resolve(dir, 'github-env');
@@ -57,6 +58,7 @@ function runHelper({
       FAKE_AUTHORITATIVE_MAIN: CURRENT,
       FAKE_FETCHED_AT_LEAST: String(fetchedAtLeastAuthoritative),
     };
+    if (advancePolicy) env.VERIFY_API_ADVANCE = advancePolicy;
     if (githubEnv) env.GITHUB_ENV = envFile;
     else delete env.GITHUB_ENV;
     try {
@@ -130,4 +132,29 @@ test('freshness helper fails closed when neither transport verifies main', () =>
   const result = runHelper({ restUnavailable: true, remoteRef: SOURCE + '\trefs/heads/other' });
   assert.equal(result.status, 1);
   assert.match(result.output, /impossibile verificare la HEAD corrente/u);
+});
+
+test('freshness helper in modalita adopt prosegue con la sorgente costruita quando main ha input API nuovi', () => {
+  const result = runHelper({ apiInputChanged: true, advancePolicy: 'adopt' });
+  assert.equal(result.status, 0);
+  assert.match(result.output, /publish-api prosegue prima di test/u);
+  assert.match(result.output, /pubblichera' il delta/u);
+  assert.doesNotMatch(result.output, /PUBLISH_API_SKIP=true/u, 'nessun marker di skip: le fasi successive girano');
+  assert.doesNotMatch(result.output, new RegExp('PUBLISH_API_SOURCE_COMMIT=' + CURRENT));
+
+  const outsideActions = runHelper({ apiInputChanged: true, advancePolicy: 'adopt', githubEnv: false });
+  assert.equal(outsideActions.status, 0);
+});
+
+test('freshness helper in modalita adopt resta fail-closed su storia non riconciliabile o fetch vecchio', () => {
+  assert.equal(runHelper({ ancestor: false, advancePolicy: 'adopt' }).status, 1);
+  assert.equal(
+    runHelper({ fetchedMain: SOURCE, fetchedAtLeastAuthoritative: false, advancePolicy: 'adopt' }).status,
+    1,
+  );
+});
+
+test('freshness helper con policy skip esplicita mantiene il comportamento dei replay bounded', () => {
+  const result = runHelper({ apiInputChanged: true, advancePolicy: 'skip' });
+  assert.match(result.output, /PUBLISH_API_SKIP=true/u);
 });

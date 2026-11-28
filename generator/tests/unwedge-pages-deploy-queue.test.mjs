@@ -157,22 +157,25 @@ test('cancelVerdict non cancella un altro ref, ne\' senza gate github-pages, ne\
 });
 
 // Lo script vero, con `fetch` sostituito: niente rete, niente token reale.
-function runScript(routes) {
+function runScript(routes, { failListAfterFirst = false } = {}) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'unwedge-'));
   const mock = path.join(dir, 'mock-fetch.mjs');
   fs.writeFileSync(mock, `
 const routes = JSON.parse(process.env.MOCK_ROUTES);
 globalThis.__calls = [];
+let listHits = 0;
 globalThis.fetch = async (url, init = {}) => {
   const method = init.method || 'GET';
   const hit = routes.find((r) => (r.method || 'GET') === method && url.includes(r.match));
   process.stderr.write('CALL ' + method + ' ' + url + '\\n');
   if (!hit) return new Response('{}', { status: 404 });
-  return new Response(JSON.stringify(hit.body ?? {}), { status: hit.status ?? 200 });
+  if (process.env.FAIL_LIST_AFTER_FIRST === '1' && hit.match.endsWith('/runs') && ++listHits > 1) return new Response('{}', { status: 500 });
+  const st = hit.status ?? 200;
+  return new Response(st === 204 ? null : JSON.stringify(hit.body ?? {}), { status: st });
 };
 `);
   const res = spawnSync(process.execPath, ['--import', mock, path.join(ROOT, 'scripts/ci/unwedge-pages-deploy-queue.mjs')], {
-    env: { ...process.env, GH_TOKEN: 'test-token', GITHUB_REPOSITORY: 'o/r', MOCK_ROUTES: JSON.stringify(routes) },
+    env: { ...process.env, GH_TOKEN: 'test-token', GITHUB_REPOSITORY: 'o/r', MOCK_ROUTES: JSON.stringify(routes), FAIL_LIST_AFTER_FIRST: failListAfterFirst ? '1' : '0' },
     encoding: 'utf8',
   });
   fs.rmSync(dir, { recursive: true, force: true });
@@ -180,7 +183,8 @@ globalThis.fetch = async (url, init = {}) => {
 }
 
 const LIST = '/actions/workflows/publish-api.yml/runs';
-const wedgedRoutes = (cancelStatus) => [
+const wedgedRoutes = (cancelStatus, { dispatchStatus = 204 } = {}) => [
+  { match: '/actions/workflows/publish-api.yml/dispatches', method: 'POST', status: dispatchStatus },
   { match: LIST, body: { workflow_runs: [REAL_RUN] } },
   { match: `/actions/runs/${REAL_RUN.id}/jobs`, body: { jobs: REAL_JOBS } },
   { match: `/actions/runs/${REAL_RUN.id}/pending_deployments`, body: REAL_PENDING },
@@ -210,7 +214,34 @@ test('script: run incastrata e cancel accettata → exit 0, una sola POST dopo l
   const calls = r.stderr.split('\n').filter((l) => l.startsWith('CALL'));
   const post = calls.findIndex((l) => l.startsWith('CALL POST'));
   assert.ok(post > calls.findIndex((l) => l.includes('/pending_deployments')), 'la cancel arriva dopo la ri-lettura');
-  assert.equal(calls.filter((l) => l.startsWith('CALL POST')).length, 1);
+  // Una cancel + un dispatch di rete (la sola run viva era quella annullata).
+  assert.equal(calls.filter((l) => l.startsWith('CALL POST') && l.includes('/cancel')).length, 1);
+  assert.equal(calls.filter((l) => l.startsWith('CALL POST') && l.includes('/dispatches')).length, 1);
+  assert.ok(calls.findIndex((l) => l.includes('/dispatches')) > post, 'il dispatch segue la cancel');
+});
+
+test('script: un\'altra run push viva dopo il cancel → nessun dispatch', () => {
+  const other = { id: 5, event: 'push', head_branch: 'main', status: 'queued' };
+  // La prima GET (status=waiting) vede la run incastrata; la ri-lettura dopo il cancel vede anche un push nuovo.
+  const routes = wedgedRoutes(202).map((r) => (r.match === LIST ? { ...r, body: { workflow_runs: [REAL_RUN, other] } } : r));
+  const r = runScript(routes);
+  assert.equal(r.status, 0, r.stdout + r.stderr);
+  assert.match(r.stdout, /no redispatch needed/);
+  assert.doesNotMatch(r.stderr, /CALL POST .*\/dispatches/);
+});
+
+test('script: ri-lettura dopo il cancel fallita → dispatch comunque (fail verso la pubblicazione)', () => {
+  const routes = wedgedRoutes(202);
+  const r = runScript(routes, { failListAfterFirst: true });
+  assert.equal(r.status, 0, r.stdout + r.stderr);
+  assert.match(r.stdout, /dispatching to be safe/);
+  assert.match(r.stderr, /CALL POST .*\/dispatches/);
+});
+
+test('script: dispatch di rete rifiutato → exit 1 con ::error::', () => {
+  const r = runScript(wedgedRoutes(202, { dispatchStatus: 403 }));
+  assert.equal(r.status, 1, r.stdout + r.stderr);
+  assert.match(r.stdout, /redispatch of publish-api\.yml failed/);
 });
 
 test('script: cancel rifiutata → exit 1 con ::error::, la coda non viene data per libera', () => {
@@ -225,4 +256,34 @@ test("script: alla ri-lettura la run e' partita → nessuna cancel, exit 0", () 
   assert.equal(r.status, 0, r.stdout + r.stderr);
   assert.doesNotMatch(r.stderr, /CALL POST/);
   assert.match(r.stdout, /left alone — status is now in_progress/);
+});
+
+// ── Cessione della coalescenza revocabile: rete di redispatch ──
+
+test('needsRedispatch: dispaccia salvo che sopravviva un\'altra run push viva di main, non annullata ora', async () => {
+  const { needsRedispatch } = await import('../../scripts/ci/unwedge-pages-deploy-queue.mjs');
+  const live = (id, over = {}) => ({ id, event: 'push', head_branch: 'main', status: 'queued', ...over });
+  // Lettura fallita o malformata: non si prova che qualcuno pubblichi -> dispatch.
+  assert.equal(needsRedispatch(null, { cancelledIds: [1] }), true);
+  assert.equal(needsRedispatch(undefined, { cancelledIds: [1] }), true);
+  // Solo la run appena annullata (anche se la lista la mostra ancora viva): dispatch.
+  assert.equal(needsRedispatch([live(1, { status: 'waiting' })], { cancelledIds: [1] }), true);
+  // Un'altra run push viva: nessun dispatch (un push arrivato dopo il cancel e' visto qui).
+  assert.equal(needsRedispatch([live(1, { status: 'waiting' }), live(2)], { cancelledIds: [1] }), false);
+  assert.equal(needsRedispatch([live(2, { status: 'in_progress' })], { cancelledIds: [1] }), false);
+  // Non contano: run chiuse, di altri branch, o non push (un replay pinned non copre main).
+  assert.equal(needsRedispatch([live(2, { status: 'completed' })], { cancelledIds: [1] }), true);
+  assert.equal(needsRedispatch([live(2, { head_branch: 'x' })], { cancelledIds: [1] }), true);
+  assert.equal(needsRedispatch([live(2, { event: 'workflow_dispatch' })], { cancelledIds: [1] }), true);
+  assert.equal(needsRedispatch([], { cancelledIds: [1] }), true);
+});
+
+test('lo script dispaccia publish-api su main dopo il cancel e il workflow cita la rete', () => {
+  const script = read('scripts/ci/unwedge-pages-deploy-queue.mjs');
+  assert.match(script, /actions\/workflows\/\$\{WORKFLOW_FILE\}\/dispatches/);
+  assert.match(script, /JSON\.stringify\(\{ ref: PUBLISH_BRANCH \}\)/);
+  assert.match(script, /redispatch of \$\{WORKFLOW_FILE\} failed/);
+  const publisher = read('.github/workflows/publish-api.yml');
+  assert.match(publisher, /Cessione revocabile/);
+  assert.match(publisher, /publish-api-unwedge ne dispaccia una nuova su main/);
 });
