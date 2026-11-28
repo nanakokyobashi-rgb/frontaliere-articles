@@ -648,7 +648,7 @@ test('releaseOlderThanLive classifica antenato, discendente, storie divise e com
     assert.equal(command, 'git');
     const verb = args[2];
     const fail = (status) => Object.assign(new Error('git'), { status });
-    if (verb === 'cat-file') { if (!known) throw fail(1); return ''; }
+    if (verb === 'rev-parse') { if (!known) throw fail(1); return ''; }
     if (verb === 'merge-base') { if (!releaseIsAncestor) throw fail(1); return ''; }
     throw fail(128);
   };
@@ -698,16 +698,20 @@ test('releaseOlderThanLive avvisa con ::warning:: quando il controllo non e eseg
   const logs = [];
   const log = (line) => logs.push(line);
   // commit servito ignoto
-  assert.equal(releaseOlderThanLive(a, b, { log, exec: (_c, args) => { if (args[2] === 'cat-file') throw fail(1); return ''; } }), false);
-  // errore/timeout di git su cat-file
+  assert.equal(releaseOlderThanLive(a, b, { log, exec: (_c, args) => { if (args[2] === 'rev-parse') throw fail(1); return ''; } }), false);
+  // 128 (come il vecchio `cat-file -e` su oggetto mancante) e' un errore di git, non «commit ignoto»
+  assert.equal(releaseOlderThanLive(a, b, { log, exec: (_c, args) => { if (args[2] === 'rev-parse') throw fail(128); return ''; } }), false);
+  // timeout/segnale di git
   assert.equal(releaseOlderThanLive(a, b, { log, exec: () => { throw fail(null); } }), false);
   // errore di git su merge-base
   assert.equal(releaseOlderThanLive(a, b, { log, exec: (_c, args) => { if (args[2] === 'merge-base') throw fail(128); return ''; } }), false);
-  assert.equal(logs.length, 3);
+  assert.equal(logs.length, 4);
   assert.ok(logs.every((l) => l.startsWith('::warning::[section-edge]')));
   assert.match(logs[0], /ignoto/);
-  assert.match(logs[1], /errore git \(cat-file\)/);
-  assert.match(logs[2], /errore git \(merge-base\)/);
+  assert.match(logs[1], /errore git \(rev-parse\)/);
+  assert.doesNotMatch(logs[1], /ignoto/);
+  assert.match(logs[2], /errore git \(rev-parse\)/);
+  assert.match(logs[3], /errore git \(merge-base\)/);
   // una storia divisa e un antenato dimostrato non emettono warning
   logs.length = 0;
   assert.equal(releaseOlderThanLive(a, b, { log, exec: (_c, args) => { if (args[2] === 'merge-base') throw fail(1); return ''; } }), false);

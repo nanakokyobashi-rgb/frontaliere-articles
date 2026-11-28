@@ -916,6 +916,10 @@ async function publish(registry, { history = [], seed, fail, corrupt, salt, extr
     bootstrapWaitMs,
     sleep,
     stagingVerifyRetryMs: 0,
+    // Niente git vero con SHA finti: su un clone parziale `cat-file`/`merge-base` su un
+    // oggetto sconosciuto puo' fare un lazy fetch dal promisor. La regressione e' coperta
+    // in publish-section-edge-staging.test.mjs.
+    isOlderThanLive: () => false,
   });
   return { io, logs, before, result };
 }
@@ -1804,6 +1808,12 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.match(preflight, /\.run_number > '"\$RUN_NUMBER"'/);
   assert.match(preflight, /nessuna coalescenza, questa run pubblica/);
   assert.match(preflight, /\[ "\$newer_pending" -gt 0 \]/);
+  // Rete: cede solo a una run piu' recente E fresca (non una che unwedge puo' annullare), e lo dice nel summary.
+  assert.match(preflight, /COALESCE_MAX_AGE_SECONDS: '1800'/);
+  assert.match(preflight, /now - \(\.created_at \| fromdateiso8601\)\) < '"\$COALESCE_MAX_AGE_SECONDS"'/);
+  assert.match(preflight, /\.status == "queued" or \.status == "pending" or \.status == "waiting" or \.status == "requested"/);
+  assert.match(preflight, /cede alla run push piu' recente \$coalesced_into/);
+  assert.match(preflight, /### publish-api: run ceduta[\s\S]*>> "\$GITHUB_STEP_SUMMARY"/);
   const coverQueue = wf.slice(wf.indexOf('push_queue_commit()'), wf.indexOf('queue_changed=false'));
   assert.match(coverQueue, /\[ "\$api_input_changed" = 'true' \] && \[ "\$\{VERIFY_API_ADVANCE:-skip\}" = 'adopt' \]/);
   assert.match(coverQueue, /la run prosegue sulla sorgente \$source_commit/);

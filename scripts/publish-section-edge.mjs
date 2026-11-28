@@ -314,13 +314,15 @@ export function releaseOlderThanLive(releaseCommit, liveCommit, { exec = execFil
   };
   // Ogni ramo che NON puo' dimostrare la regressione lascia pubblicare, ma lo
   // dice: un controllo di sicurezza spento in silenzio non si vede mai.
-  const known = git(['cat-file', '-e', liveCommit + '^{commit}']);
+  // `cat-file -e` su un oggetto mancante esce 128 (come un errore vero di git):
+  // `rev-parse --verify --quiet` esce 1 solo per «oggetto ignoto», 128 per il resto.
+  const known = git(['rev-parse', '--verify', '--quiet', liveCommit + '^{commit}']);
   if (known === 1) {
     log("::warning::[section-edge] controllo di regressione non eseguibile: il commit servito " + liveCommit + " e' ignoto al checkout; si procede senza");
     return false;
   }
   if (known !== 0) {
-    log("::warning::[section-edge] controllo di regressione non eseguibile: errore git (cat-file) su " + liveCommit + "; si procede senza");
+    log("::warning::[section-edge] controllo di regressione non eseguibile: errore git (rev-parse) su " + liveCommit + "; si procede senza");
     return false;
   }
   const ancestry = git(['merge-base', '--is-ancestor', releaseCommit, liveCommit]);

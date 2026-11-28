@@ -265,6 +265,8 @@ jobs:
           WORKFLOW_COMMIT: ${{ github.sha }}
           EVENT_NAME: ${{ github.event_name }}
           RUN_NUMBER: ${{ github.run_number }}
+          # Una run piu' recente in coda fa cedere questa solo se e' piu' giovane di cosi'.
+          COALESCE_MAX_AGE_SECONDS: '1800'
         run: |
           set -euo pipefail
           if ! current_main="$(timeout --kill-after=1s 60s gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"; then
@@ -333,24 +335,36 @@ jobs:
               exit 1
             fi
             if [ "$code_differs" = false ]; then
-              # Coalescenza: se in coda c'e' gia' una run push PIU' RECENTE, sara'
-              # lei a pubblicare main (stessi dati, stesso codice): questa cede il
-              # posto in pochi secondi, cosi' la coda si svuota fino all'ultima,
-              # che ritargetta e pubblica. Senza, ogni run in coda farebbe una
-              # pubblicazione intera e con > 500 commit/giorno il backlog
-              # crescerebbe senza limite. Lettura non riuscita = nessuna
-              # coalescenza (fail-open: pubblicare di troppo e' sicuro,
-              # non pubblicare no).
+              # Coalescenza: se in coda c'e' gia' una run push PIU' RECENTE e FRESCA
+              # (creata da meno di COALESCE_MAX_AGE_SECONDS), sara' lei a pubblicare
+              # main (stessi dati, stesso codice): questa cede il posto in pochi
+              # secondi, cosi' la coda si svuota fino all'ultima, che ritargetta e
+              # pubblica. Senza, ogni run in coda farebbe una pubblicazione intera e
+              # con > 500 commit/giorno il backlog crescerebbe senza limite.
+              # Il limite di eta' e' la rete: se la run piu' recente viene annullata
+              # o muore prima del flip, le precedenti hanno gia' ceduto; una run
+              # vecchia di mezz'ora o piu' in coda non e' un successore affidabile
+              # (e' il caso che unwedge-pages-deploy-queue.mjs puo' annullare), quindi
+              # non fa cedere nessuno. Lettura non riuscita = nessuna coalescenza
+              # (fail-open: pubblicare di troppo e' sicuro, non pubblicare no).
               newer_pending=0
+              coalesced_into=''
               if [ "$EVENT_NAME" = 'push' ]; then
-                if ! newer_pending="$(timeout --kill-after=1s 60s gh api "repos/$REPOSITORY/actions/workflows/publish-api.yml/runs?per_page=100" --jq '[.workflow_runs[] | select(.event == "push" and .run_number > '"$RUN_NUMBER"' and (.status == "queued" or .status == "pending" or .status == "waiting" or .status == "requested"))] | length')" ||
-                  ! [[ "$newer_pending" =~ ^[0-9]+$ ]]; then
+                if ! coalesced_into="$(timeout --kill-after=1s 60s gh api "repos/$REPOSITORY/actions/workflows/publish-api.yml/runs?per_page=100" --jq '[.workflow_runs[] | select(.event == "push" and .run_number > '"$RUN_NUMBER"' and (.status == "queued" or .status == "pending" or .status == "waiting" or .status == "requested") and ((now - (.created_at | fromdateiso8601)) < '"$COALESCE_MAX_AGE_SECONDS"'))] | sort_by(.run_number) | last | if . then "\(.run_number) \(.html_url)" else "" end')"; then
                   echo "::warning::coda publish-api non leggibile nel preflight: nessuna coalescenza, questa run pubblica"
-                  newer_pending=0
+                  coalesced_into=''
+                fi
+                if [ -n "$coalesced_into" ]; then
+                  newer_pending=1
                 fi
               fi
               if [ "$newer_pending" -gt 0 ]; then
-                echo "::notice::publish-api coalesced: $newer_pending run push piu' recenti in coda pubblicheranno main=$current_main"
+                echo "::notice::publish-api coalesced: cede alla run push piu' recente $coalesced_into, che pubblichera' main=$current_main"
+                {
+                  echo "### publish-api: run ceduta"
+                  echo "Questa run ($RUN_NUMBER) non pubblica: ha ceduto alla run push piu' recente \`$coalesced_into\` (in coda da meno di $((COALESCE_MAX_AGE_SECONDS / 60)) minuti), che pubblica main=\`$current_main\`."
+                  echo "Se quella run viene annullata o fallisce prima del flip, il prossimo push (o un dispatch) ripubblica: controlla il suo esito."
+                } >> "$GITHUB_STEP_SUMMARY"
               else
                 trigger_inputs_differ=false
                 echo "::notice::publish-api ritargettato: tra run=$WORKFLOW_COMMIT e main=$current_main cambiano solo dati; il codice del workflow e' invariato"
