@@ -1,0 +1,1764 @@
+{
+ "schema": 1,
+ "source": "sitemap-jobs*.xml, sitemap-professions.xml, sitemap-profession-cantons.xml, sitemap-health-premiums.xml, sitemap-minimum-wage.xml (+ hreflang delle pagine IT)",
+ "verifiedBy": "HTTP 200 e <link rel=\"canonical\"> uguale al path, una lingua alla volta",
+ "cantonLanding": {
+  "AG": {
+   "it": "/cerca-lavoro-argovia/",
+   "en": "/en/find-jobs-aargau/",
+   "de": "/de/jobs-im-aargau/",
+   "fr": "/fr/trouver-emploi-argovie/"
+  },
+  "APPENZELLO": {
+   "it": "/cerca-lavoro-appenzello/",
+   "en": "/en/find-jobs-appenzell/",
+   "de": "/de/jobs-in-appenzell/",
+   "fr": "/fr/trouver-emploi-appenzell/"
+  },
+  "BE": {
+   "it": "/cerca-lavoro-berna/",
+   "en": "/en/find-jobs-bern/",
+   "de": "/de/jobs-in-bern/",
+   "fr": "/fr/trouver-emploi-berne/"
+  },
+  "BASILEA": {
+   "it": "/cerca-lavoro-basilea/",
+   "en": "/en/find-jobs-basel/",
+   "de": "/de/jobs-in-basel/",
+   "fr": "/fr/trouver-emploi-bale/"
+  },
+  "FR": {
+   "it": "/cerca-lavoro-friburgo/",
+   "en": "/en/find-jobs-fribourg/",
+   "de": "/de/jobs-in-freiburg/",
+   "fr": "/fr/trouver-emploi-fribourg/"
+  },
+  "GE": {
+   "it": "/cerca-lavoro-ginevra/",
+   "en": "/en/find-jobs-geneva/",
+   "de": "/de/jobs-in-genf/",
+   "fr": "/fr/trouver-emploi-geneve/"
+  },
+  "GL": {
+   "it": "/cerca-lavoro-glarona/",
+   "en": "/en/find-jobs-glarus/",
+   "de": "/de/jobs-in-glarus/",
+   "fr": "/fr/trouver-emploi-glaris/"
+  },
+  "GR": {
+   "it": "/cerca-lavoro-grigioni/",
+   "en": "/en/find-jobs-graubunden/",
+   "de": "/de/jobs-in-graubunden/",
+   "fr": "/fr/trouver-emploi-grisons/"
+  },
+  "JU": {
+   "it": "/cerca-lavoro-giura/",
+   "en": "/en/find-jobs-jura/",
+   "de": "/de/jobs-im-jura/",
+   "fr": "/fr/trouver-emploi-jura/"
+  },
+  "LU": {
+   "it": "/cerca-lavoro-lucerna/",
+   "en": "/en/find-jobs-lucerne/",
+   "de": "/de/jobs-in-luzern/",
+   "fr": "/fr/trouver-emploi-lucerne/"
+  },
+  "NE": {
+   "it": "/cerca-lavoro-neuchatel/",
+   "en": "/en/find-jobs-neuchatel/",
+   "de": "/de/jobs-in-neuenburg/",
+   "fr": "/fr/trouver-emploi-neuchatel/"
+  },
+  "NW": {
+   "it": "/cerca-lavoro-nidvaldo/",
+   "en": "/en/find-jobs-nidwalden/",
+   "de": "/de/jobs-in-nidwalden/",
+   "fr": "/fr/trouver-emploi-nidwald/"
+  },
+  "OW": {
+   "it": "/cerca-lavoro-obvaldo/",
+   "en": "/en/find-jobs-obwalden/",
+   "de": "/de/jobs-in-obwalden/",
+   "fr": "/fr/trouver-emploi-obwald/"
+  },
+  "SG": {
+   "it": "/cerca-lavoro-san-gallo/",
+   "en": "/en/find-jobs-st-gallen/",
+   "de": "/de/jobs-in-st-gallen/",
+   "fr": "/fr/trouver-emploi-saint-gall/"
+  },
+  "SH": {
+   "it": "/cerca-lavoro-sciaffusa/",
+   "en": "/en/find-jobs-schaffhausen/",
+   "de": "/de/jobs-in-schaffhausen/",
+   "fr": "/fr/trouver-emploi-schaffhouse/"
+  },
+  "SO": {
+   "it": "/cerca-lavoro-soletta/",
+   "en": "/en/find-jobs-solothurn/",
+   "de": "/de/jobs-in-solothurn/",
+   "fr": "/fr/trouver-emploi-soleure/"
+  },
+  "SZ": {
+   "it": "/cerca-lavoro-svitto/",
+   "en": "/en/find-jobs-schwyz/",
+   "de": "/de/jobs-in-schwyz/",
+   "fr": "/fr/trouver-emploi-schwytz/"
+  },
+  "TG": {
+   "it": "/cerca-lavoro-turgovia/",
+   "en": "/en/find-jobs-thurgau/",
+   "de": "/de/jobs-im-thurgau/",
+   "fr": "/fr/trouver-emploi-thurgovie/"
+  },
+  "UR": {
+   "it": "/cerca-lavoro-uri/",
+   "en": "/en/find-jobs-uri/",
+   "de": "/de/jobs-in-uri/",
+   "fr": "/fr/trouver-emploi-uri/"
+  },
+  "VD": {
+   "it": "/cerca-lavoro-vaud/",
+   "en": "/en/find-jobs-vaud/",
+   "de": "/de/jobs-in-der-waadt/",
+   "fr": "/fr/trouver-emploi-vaud/"
+  },
+  "VS": {
+   "it": "/cerca-lavoro-vallese/",
+   "en": "/en/find-jobs-valais/",
+   "de": "/de/jobs-im-wallis/",
+   "fr": "/fr/trouver-emploi-valais/"
+  },
+  "ZG": {
+   "it": "/cerca-lavoro-zugo/",
+   "en": "/en/find-jobs-zug/",
+   "de": "/de/jobs-in-zug/",
+   "fr": "/fr/trouver-emploi-zoug/"
+  },
+  "ZH": {
+   "it": "/cerca-lavoro-zurigo/",
+   "en": "/en/find-jobs-zurich/",
+   "de": "/de/jobs-in-zurich/",
+   "fr": "/fr/trouver-emploi-zurich/"
+  },
+  "TI": {
+   "it": "/cerca-lavoro-ticino/",
+   "en": "/en/find-jobs-ticino/",
+   "de": "/de/jobs-im-tessin/",
+   "fr": "/fr/trouver-emploi-tessin/"
+  }
+ },
+ "nationalLanding": {
+  "it": "/cerca-lavoro-svizzera/",
+  "en": "/en/find-jobs-switzerland/",
+  "de": "/de/jobs-in-schweiz/",
+  "fr": "/fr/trouver-emploi-suisse/"
+ },
+ "professionLanding": {
+  "infermiere": {
+   "it": "/lavoro-ticino-infermiere/",
+   "en": "/en/jobs-ticino-nurse/",
+   "de": "/de/arbeit-tessin-krankenpfleger/",
+   "fr": "/fr/travail-tessin-infirmier/"
+  },
+  "operaio": {
+   "it": "/lavoro-ticino-operaio/",
+   "en": "/en/jobs-ticino-worker/",
+   "de": "/de/arbeit-tessin-arbeiter/",
+   "fr": "/fr/travail-tessin-ouvrier/"
+  },
+  "impiegato": {
+   "it": "/lavoro-ticino-impiegato/",
+   "en": "/en/jobs-ticino-clerk/",
+   "de": "/de/arbeit-tessin-sachbearbeiter/",
+   "fr": "/fr/travail-tessin-employe/"
+  },
+  "ingegnere": {
+   "it": "/lavoro-ticino-ingegnere/",
+   "en": "/en/jobs-ticino-engineer/",
+   "de": "/de/arbeit-tessin-ingenieur/",
+   "fr": "/fr/travail-tessin-ingenieur/"
+  },
+  "educatore": {
+   "it": "/lavoro-ticino-educatore/",
+   "en": "/en/jobs-ticino-educator/",
+   "de": "/de/arbeit-tessin-erzieher/",
+   "fr": "/fr/travail-tessin-educateur/"
+  },
+  "autista": {
+   "it": "/lavoro-ticino-autista/",
+   "en": "/en/jobs-ticino-driver/",
+   "de": "/de/arbeit-tessin-fahrer/",
+   "fr": "/fr/travail-tessin-chauffeur/"
+  },
+  "muratore": {
+   "it": "/lavoro-ticino-muratore/",
+   "en": "/en/jobs-ticino-mason/",
+   "de": "/de/arbeit-tessin-maurer/",
+   "fr": "/fr/travail-tessin-macon/"
+  },
+  "cuoco": {
+   "it": "/lavoro-ticino-cuoco/",
+   "en": "/en/jobs-ticino-cook/",
+   "de": "/de/arbeit-tessin-koch/",
+   "fr": "/fr/travail-tessin-cuisinier/"
+  },
+  "cameriere": {
+   "it": "/lavoro-ticino-cameriere/",
+   "en": "/en/jobs-ticino-waiter/",
+   "de": "/de/arbeit-tessin-kellner/",
+   "fr": "/fr/travail-tessin-serveur/"
+  },
+  "elettricista": {
+   "it": "/lavoro-ticino-elettricista/",
+   "en": "/en/jobs-ticino-electrician/",
+   "de": "/de/arbeit-tessin-elektriker/",
+   "fr": "/fr/travail-tessin-electricien/"
+  },
+  "fisioterapista": {
+   "it": "/lavoro-ticino-fisioterapista/",
+   "en": "/en/jobs-ticino-physiotherapist/",
+   "de": "/de/arbeit-tessin-physiotherapeut/",
+   "fr": "/fr/travail-tessin-physiotherapeute/"
+  },
+  "ostetrica": {
+   "it": "/lavoro-ticino-ostetrica/",
+   "en": "/en/jobs-ticino-midwife/",
+   "de": "/de/arbeit-tessin-hebamme/",
+   "fr": "/fr/travail-tessin-sage-femme/"
+  },
+  "oss": {
+   "it": "/lavoro-ticino-oss/",
+   "en": "/en/jobs-ticino-healthcare-assistant/",
+   "de": "/de/arbeit-tessin-fage/",
+   "fr": "/fr/travail-tessin-assistant-soins/"
+  },
+  "ottico-optometrista": {
+   "it": "/lavoro-ticino-ottico-optometrista/",
+   "en": "/en/jobs-ticino-optician-optometrist/",
+   "de": "/de/arbeit-tessin-optiker-optometrist/",
+   "fr": "/fr/travail-tessin-opticien-optometriste/"
+  },
+  "contabile": {
+   "it": "/lavoro-ticino-contabile/",
+   "en": "/en/jobs-ticino-accountant/",
+   "de": "/de/arbeit-tessin-buchhalter/",
+   "fr": "/fr/travail-tessin-comptable/"
+  },
+  "assistente-sociale": {
+   "it": "/lavoro-ticino-assistente-sociale/",
+   "en": "/en/jobs-ticino-social-worker/",
+   "de": "/de/arbeit-tessin-sozialarbeiter/",
+   "fr": "/fr/travail-tessin-assistant-social/"
+  },
+  "macellaio": {
+   "it": "/lavoro-ticino-macellaio/",
+   "en": "/en/jobs-ticino-butcher/",
+   "de": "/de/arbeit-tessin-metzger/",
+   "fr": "/fr/travail-tessin-boucher/"
+  },
+  "saldatore": {
+   "it": "/lavoro-ticino-saldatore/",
+   "en": "/en/jobs-ticino-welder/",
+   "de": "/de/arbeit-tessin-schweisser/",
+   "fr": "/fr/travail-tessin-soudeur/"
+  },
+  "architetto": {
+   "it": "/lavoro-ticino-architetto/",
+   "en": "/en/jobs-ticino-architect/",
+   "de": "/de/arbeit-tessin-architekt/",
+   "fr": "/fr/travail-tessin-architecte/"
+  }
+ },
+ "professionCantonLanding": {
+  "AG/infermiere": {
+   "it": "/lavoro-argovia-infermiere/",
+   "en": "/en/jobs-aargau-nurse/",
+   "de": "/de/arbeit-aargau-krankenpfleger/",
+   "fr": "/fr/travail-argovie-infirmier/"
+  },
+  "AG/operaio": {
+   "it": "/lavoro-argovia-operaio/",
+   "en": "/en/jobs-aargau-worker/",
+   "de": "/de/arbeit-aargau-arbeiter/",
+   "fr": "/fr/travail-argovie-ouvrier/"
+  },
+  "AG/impiegato": {
+   "it": "/lavoro-argovia-impiegato/",
+   "en": "/en/jobs-aargau-clerk/",
+   "de": "/de/arbeit-aargau-sachbearbeiter/",
+   "fr": "/fr/travail-argovie-employe/"
+  },
+  "AG/ingegnere": {
+   "it": "/lavoro-argovia-ingegnere/",
+   "en": "/en/jobs-aargau-engineer/",
+   "de": "/de/arbeit-aargau-ingenieur/",
+   "fr": "/fr/travail-argovie-ingenieur/"
+  },
+  "AG/educatore": {
+   "it": "/lavoro-argovia-educatore/",
+   "en": "/en/jobs-aargau-educator/",
+   "de": "/de/arbeit-aargau-erzieher/",
+   "fr": "/fr/travail-argovie-educateur/"
+  },
+  "AG/autista": {
+   "it": "/lavoro-argovia-autista/",
+   "en": "/en/jobs-aargau-driver/",
+   "de": "/de/arbeit-aargau-fahrer/",
+   "fr": "/fr/travail-argovie-chauffeur/"
+  },
+  "AG/muratore": {
+   "it": "/lavoro-argovia-muratore/",
+   "en": "/en/jobs-aargau-mason/",
+   "de": "/de/arbeit-aargau-maurer/",
+   "fr": "/fr/travail-argovie-macon/"
+  },
+  "AG/cuoco": {
+   "it": "/lavoro-argovia-cuoco/",
+   "en": "/en/jobs-aargau-cook/",
+   "de": "/de/arbeit-aargau-koch/",
+   "fr": "/fr/travail-argovie-cuisinier/"
+  },
+  "AG/elettricista": {
+   "it": "/lavoro-argovia-elettricista/",
+   "en": "/en/jobs-aargau-electrician/",
+   "de": "/de/arbeit-aargau-elektriker/",
+   "fr": "/fr/travail-argovie-electricien/"
+  },
+  "AG/fisioterapista": {
+   "it": "/lavoro-argovia-fisioterapista/",
+   "en": "/en/jobs-aargau-physiotherapist/",
+   "de": "/de/arbeit-aargau-physiotherapeut/",
+   "fr": "/fr/travail-argovie-physiotherapeute/"
+  },
+  "AG/oss": {
+   "it": "/lavoro-argovia-oss/",
+   "en": "/en/jobs-aargau-healthcare-assistant/",
+   "de": "/de/arbeit-aargau-fage/",
+   "fr": "/fr/travail-argovie-assistant-soins/"
+  },
+  "AG/ottico-optometrista": {
+   "it": "/lavoro-argovia-ottico-optometrista/",
+   "en": "/en/jobs-aargau-optician-optometrist/",
+   "de": "/de/arbeit-aargau-optiker-optometrist/",
+   "fr": "/fr/travail-argovie-opticien-optometriste/"
+  },
+  "AG/assistente-sociale": {
+   "it": "/lavoro-argovia-assistente-sociale/",
+   "en": "/en/jobs-aargau-social-worker/",
+   "de": "/de/arbeit-aargau-sozialarbeiter/",
+   "fr": "/fr/travail-argovie-assistant-social/"
+  },
+  "AG/macellaio": {
+   "it": "/lavoro-argovia-macellaio/",
+   "en": "/en/jobs-aargau-butcher/",
+   "de": "/de/arbeit-aargau-metzger/",
+   "fr": "/fr/travail-argovie-boucher/"
+  },
+  "AG/saldatore": {
+   "it": "/lavoro-argovia-saldatore/",
+   "en": "/en/jobs-aargau-welder/",
+   "de": "/de/arbeit-aargau-schweisser/",
+   "fr": "/fr/travail-argovie-soudeur/"
+  },
+  "AG/architetto": {
+   "it": "/lavoro-argovia-architetto/",
+   "en": "/en/jobs-aargau-architect/",
+   "de": "/de/arbeit-aargau-architekt/",
+   "fr": "/fr/travail-argovie-architecte/"
+  },
+  "APPENZELLO/infermiere": {
+   "it": "/lavoro-appenzello-infermiere/",
+   "en": "/en/jobs-appenzell-nurse/",
+   "de": "/de/arbeit-appenzell-krankenpfleger/",
+   "fr": "/fr/travail-appenzell-infirmier/"
+  },
+  "APPENZELLO/elettricista": {
+   "it": "/lavoro-appenzello-elettricista/",
+   "en": "/en/jobs-appenzell-electrician/",
+   "de": "/de/arbeit-appenzell-elektriker/",
+   "fr": "/fr/travail-appenzell-electricien/"
+  },
+  "APPENZELLO/oss": {
+   "it": "/lavoro-appenzello-oss/",
+   "en": "/en/jobs-appenzell-healthcare-assistant/",
+   "de": "/de/arbeit-appenzell-fage/",
+   "fr": "/fr/travail-appenzell-assistant-soins/"
+  },
+  "BASILEA/infermiere": {
+   "it": "/lavoro-basilea-infermiere/",
+   "en": "/en/jobs-basel-nurse/",
+   "de": "/de/arbeit-basel-krankenpfleger/",
+   "fr": "/fr/travail-bale-infirmier/"
+  },
+  "BASILEA/impiegato": {
+   "it": "/lavoro-basilea-impiegato/",
+   "en": "/en/jobs-basel-clerk/",
+   "de": "/de/arbeit-basel-sachbearbeiter/",
+   "fr": "/fr/travail-bale-employe/"
+  },
+  "BASILEA/ingegnere": {
+   "it": "/lavoro-basilea-ingegnere/",
+   "en": "/en/jobs-basel-engineer/",
+   "de": "/de/arbeit-basel-ingenieur/",
+   "fr": "/fr/travail-bale-ingenieur/"
+  },
+  "BASILEA/educatore": {
+   "it": "/lavoro-basilea-educatore/",
+   "en": "/en/jobs-basel-educator/",
+   "de": "/de/arbeit-basel-erzieher/",
+   "fr": "/fr/travail-bale-educateur/"
+  },
+  "BASILEA/cuoco": {
+   "it": "/lavoro-basilea-cuoco/",
+   "en": "/en/jobs-basel-cook/",
+   "de": "/de/arbeit-basel-koch/",
+   "fr": "/fr/travail-bale-cuisinier/"
+  },
+  "BASILEA/elettricista": {
+   "it": "/lavoro-basilea-elettricista/",
+   "en": "/en/jobs-basel-electrician/",
+   "de": "/de/arbeit-basel-elektriker/",
+   "fr": "/fr/travail-bale-electricien/"
+  },
+  "BASILEA/fisioterapista": {
+   "it": "/lavoro-basilea-fisioterapista/",
+   "en": "/en/jobs-basel-physiotherapist/",
+   "de": "/de/arbeit-basel-physiotherapeut/",
+   "fr": "/fr/travail-bale-physiotherapeute/"
+  },
+  "BASILEA/oss": {
+   "it": "/lavoro-basilea-oss/",
+   "en": "/en/jobs-basel-healthcare-assistant/",
+   "de": "/de/arbeit-basel-fage/",
+   "fr": "/fr/travail-bale-assistant-soins/"
+  },
+  "BASILEA/ottico-optometrista": {
+   "it": "/lavoro-basilea-ottico-optometrista/",
+   "en": "/en/jobs-basel-optician-optometrist/",
+   "de": "/de/arbeit-basel-optiker-optometrist/",
+   "fr": "/fr/travail-bale-opticien-optometriste/"
+  },
+  "BASILEA/contabile": {
+   "it": "/lavoro-basilea-contabile/",
+   "en": "/en/jobs-basel-accountant/",
+   "de": "/de/arbeit-basel-buchhalter/",
+   "fr": "/fr/travail-bale-comptable/"
+  },
+  "BASILEA/assistente-sociale": {
+   "it": "/lavoro-basilea-assistente-sociale/",
+   "en": "/en/jobs-basel-social-worker/",
+   "de": "/de/arbeit-basel-sozialarbeiter/",
+   "fr": "/fr/travail-bale-assistant-social/"
+  },
+  "BASILEA/macellaio": {
+   "it": "/lavoro-basilea-macellaio/",
+   "en": "/en/jobs-basel-butcher/",
+   "de": "/de/arbeit-basel-metzger/",
+   "fr": "/fr/travail-bale-boucher/"
+  },
+  "BE/infermiere": {
+   "it": "/lavoro-berna-infermiere/",
+   "en": "/en/jobs-bern-nurse/",
+   "de": "/de/arbeit-bern-krankenpfleger/",
+   "fr": "/fr/travail-berne-infirmier/"
+  },
+  "BE/operaio": {
+   "it": "/lavoro-berna-operaio/",
+   "en": "/en/jobs-bern-worker/",
+   "de": "/de/arbeit-bern-arbeiter/",
+   "fr": "/fr/travail-berne-ouvrier/"
+  },
+  "BE/impiegato": {
+   "it": "/lavoro-berna-impiegato/",
+   "en": "/en/jobs-bern-clerk/",
+   "de": "/de/arbeit-bern-sachbearbeiter/",
+   "fr": "/fr/travail-berne-employe/"
+  },
+  "BE/ingegnere": {
+   "it": "/lavoro-berna-ingegnere/",
+   "en": "/en/jobs-bern-engineer/",
+   "de": "/de/arbeit-bern-ingenieur/",
+   "fr": "/fr/travail-berne-ingenieur/"
+  },
+  "BE/educatore": {
+   "it": "/lavoro-berna-educatore/",
+   "en": "/en/jobs-bern-educator/",
+   "de": "/de/arbeit-bern-erzieher/",
+   "fr": "/fr/travail-berne-educateur/"
+  },
+  "BE/autista": {
+   "it": "/lavoro-berna-autista/",
+   "en": "/en/jobs-bern-driver/",
+   "de": "/de/arbeit-bern-fahrer/",
+   "fr": "/fr/travail-berne-chauffeur/"
+  },
+  "BE/muratore": {
+   "it": "/lavoro-berna-muratore/",
+   "en": "/en/jobs-bern-mason/",
+   "de": "/de/arbeit-bern-maurer/",
+   "fr": "/fr/travail-berne-macon/"
+  },
+  "BE/cuoco": {
+   "it": "/lavoro-berna-cuoco/",
+   "en": "/en/jobs-bern-cook/",
+   "de": "/de/arbeit-bern-koch/",
+   "fr": "/fr/travail-berne-cuisinier/"
+  },
+  "BE/elettricista": {
+   "it": "/lavoro-berna-elettricista/",
+   "en": "/en/jobs-bern-electrician/",
+   "de": "/de/arbeit-bern-elektriker/",
+   "fr": "/fr/travail-berne-electricien/"
+  },
+  "BE/fisioterapista": {
+   "it": "/lavoro-berna-fisioterapista/",
+   "en": "/en/jobs-bern-physiotherapist/",
+   "de": "/de/arbeit-bern-physiotherapeut/",
+   "fr": "/fr/travail-berne-physiotherapeute/"
+  },
+  "BE/ostetrica": {
+   "it": "/lavoro-berna-ostetrica/",
+   "en": "/en/jobs-bern-midwife/",
+   "de": "/de/arbeit-bern-hebamme/",
+   "fr": "/fr/travail-berne-sage-femme/"
+  },
+  "BE/oss": {
+   "it": "/lavoro-berna-oss/",
+   "en": "/en/jobs-bern-healthcare-assistant/",
+   "de": "/de/arbeit-bern-fage/",
+   "fr": "/fr/travail-berne-assistant-soins/"
+  },
+  "BE/ottico-optometrista": {
+   "it": "/lavoro-berna-ottico-optometrista/",
+   "en": "/en/jobs-bern-optician-optometrist/",
+   "de": "/de/arbeit-bern-optiker-optometrist/",
+   "fr": "/fr/travail-berne-opticien-optometriste/"
+  },
+  "BE/contabile": {
+   "it": "/lavoro-berna-contabile/",
+   "en": "/en/jobs-bern-accountant/",
+   "de": "/de/arbeit-bern-buchhalter/",
+   "fr": "/fr/travail-berne-comptable/"
+  },
+  "BE/assistente-sociale": {
+   "it": "/lavoro-berna-assistente-sociale/",
+   "en": "/en/jobs-bern-social-worker/",
+   "de": "/de/arbeit-bern-sozialarbeiter/",
+   "fr": "/fr/travail-berne-assistant-social/"
+  },
+  "BE/macellaio": {
+   "it": "/lavoro-berna-macellaio/",
+   "en": "/en/jobs-bern-butcher/",
+   "de": "/de/arbeit-bern-metzger/",
+   "fr": "/fr/travail-berne-boucher/"
+  },
+  "FR/infermiere": {
+   "it": "/lavoro-friburgo-infermiere/",
+   "en": "/en/jobs-fribourg-nurse/",
+   "de": "/de/arbeit-freiburg-krankenpfleger/",
+   "fr": "/fr/travail-fribourg-infirmier/"
+  },
+  "FR/operaio": {
+   "it": "/lavoro-friburgo-operaio/",
+   "en": "/en/jobs-fribourg-worker/",
+   "de": "/de/arbeit-freiburg-arbeiter/",
+   "fr": "/fr/travail-fribourg-ouvrier/"
+  },
+  "FR/impiegato": {
+   "it": "/lavoro-friburgo-impiegato/",
+   "en": "/en/jobs-fribourg-clerk/",
+   "de": "/de/arbeit-freiburg-sachbearbeiter/",
+   "fr": "/fr/travail-fribourg-employe/"
+  },
+  "FR/ingegnere": {
+   "it": "/lavoro-friburgo-ingegnere/",
+   "en": "/en/jobs-fribourg-engineer/",
+   "de": "/de/arbeit-freiburg-ingenieur/",
+   "fr": "/fr/travail-fribourg-ingenieur/"
+  },
+  "FR/autista": {
+   "it": "/lavoro-friburgo-autista/",
+   "en": "/en/jobs-fribourg-driver/",
+   "de": "/de/arbeit-freiburg-fahrer/",
+   "fr": "/fr/travail-fribourg-chauffeur/"
+  },
+  "FR/muratore": {
+   "it": "/lavoro-friburgo-muratore/",
+   "en": "/en/jobs-fribourg-mason/",
+   "de": "/de/arbeit-freiburg-maurer/",
+   "fr": "/fr/travail-fribourg-macon/"
+  },
+  "FR/cuoco": {
+   "it": "/lavoro-friburgo-cuoco/",
+   "en": "/en/jobs-fribourg-cook/",
+   "de": "/de/arbeit-freiburg-koch/",
+   "fr": "/fr/travail-fribourg-cuisinier/"
+  },
+  "FR/elettricista": {
+   "it": "/lavoro-friburgo-elettricista/",
+   "en": "/en/jobs-fribourg-electrician/",
+   "de": "/de/arbeit-freiburg-elektriker/",
+   "fr": "/fr/travail-fribourg-electricien/"
+  },
+  "FR/fisioterapista": {
+   "it": "/lavoro-friburgo-fisioterapista/",
+   "en": "/en/jobs-fribourg-physiotherapist/",
+   "de": "/de/arbeit-freiburg-physiotherapeut/",
+   "fr": "/fr/travail-fribourg-physiotherapeute/"
+  },
+  "FR/ottico-optometrista": {
+   "it": "/lavoro-friburgo-ottico-optometrista/",
+   "en": "/en/jobs-fribourg-optician-optometrist/",
+   "de": "/de/arbeit-freiburg-optiker-optometrist/",
+   "fr": "/fr/travail-fribourg-opticien-optometriste/"
+  },
+  "FR/contabile": {
+   "it": "/lavoro-friburgo-contabile/",
+   "en": "/en/jobs-fribourg-accountant/",
+   "de": "/de/arbeit-freiburg-buchhalter/",
+   "fr": "/fr/travail-fribourg-comptable/"
+  },
+  "FR/macellaio": {
+   "it": "/lavoro-friburgo-macellaio/",
+   "en": "/en/jobs-fribourg-butcher/",
+   "de": "/de/arbeit-freiburg-metzger/",
+   "fr": "/fr/travail-fribourg-boucher/"
+  },
+  "FR/saldatore": {
+   "it": "/lavoro-friburgo-saldatore/",
+   "en": "/en/jobs-fribourg-welder/",
+   "de": "/de/arbeit-freiburg-schweisser/",
+   "fr": "/fr/travail-fribourg-soudeur/"
+  },
+  "FR/architetto": {
+   "it": "/lavoro-friburgo-architetto/",
+   "en": "/en/jobs-fribourg-architect/",
+   "de": "/de/arbeit-freiburg-architekt/",
+   "fr": "/fr/travail-fribourg-architecte/"
+  },
+  "GE/infermiere": {
+   "it": "/lavoro-ginevra-infermiere/",
+   "en": "/en/jobs-geneva-nurse/",
+   "de": "/de/arbeit-genf-krankenpfleger/",
+   "fr": "/fr/travail-geneve-infirmier/"
+  },
+  "GE/impiegato": {
+   "it": "/lavoro-ginevra-impiegato/",
+   "en": "/en/jobs-geneva-clerk/",
+   "de": "/de/arbeit-genf-sachbearbeiter/",
+   "fr": "/fr/travail-geneve-employe/"
+  },
+  "GE/ingegnere": {
+   "it": "/lavoro-ginevra-ingegnere/",
+   "en": "/en/jobs-geneva-engineer/",
+   "de": "/de/arbeit-genf-ingenieur/",
+   "fr": "/fr/travail-geneve-ingenieur/"
+  },
+  "GE/muratore": {
+   "it": "/lavoro-ginevra-muratore/",
+   "en": "/en/jobs-geneva-mason/",
+   "de": "/de/arbeit-genf-maurer/",
+   "fr": "/fr/travail-geneve-macon/"
+  },
+  "GE/cuoco": {
+   "it": "/lavoro-ginevra-cuoco/",
+   "en": "/en/jobs-geneva-cook/",
+   "de": "/de/arbeit-genf-koch/",
+   "fr": "/fr/travail-geneve-cuisinier/"
+  },
+  "GE/elettricista": {
+   "it": "/lavoro-ginevra-elettricista/",
+   "en": "/en/jobs-geneva-electrician/",
+   "de": "/de/arbeit-genf-elektriker/",
+   "fr": "/fr/travail-geneve-electricien/"
+  },
+  "GE/oss": {
+   "it": "/lavoro-ginevra-oss/",
+   "en": "/en/jobs-geneva-healthcare-assistant/",
+   "de": "/de/arbeit-genf-fage/",
+   "fr": "/fr/travail-geneve-assistant-soins/"
+  },
+  "GE/contabile": {
+   "it": "/lavoro-ginevra-contabile/",
+   "en": "/en/jobs-geneva-accountant/",
+   "de": "/de/arbeit-genf-buchhalter/",
+   "fr": "/fr/travail-geneve-comptable/"
+  },
+  "GL/infermiere": {
+   "it": "/lavoro-glarona-infermiere/",
+   "en": "/en/jobs-glarus-nurse/",
+   "de": "/de/arbeit-glarus-krankenpfleger/",
+   "fr": "/fr/travail-glaris-infirmier/"
+  },
+  "GL/cuoco": {
+   "it": "/lavoro-glarona-cuoco/",
+   "en": "/en/jobs-glarus-cook/",
+   "de": "/de/arbeit-glarus-koch/",
+   "fr": "/fr/travail-glaris-cuisinier/"
+  },
+  "GR/infermiere": {
+   "it": "/lavoro-grigioni-infermiere/",
+   "en": "/en/jobs-graubunden-nurse/",
+   "de": "/de/arbeit-graubunden-krankenpfleger/",
+   "fr": "/fr/travail-grisons-infirmier/"
+  },
+  "GR/operaio": {
+   "it": "/lavoro-grigioni-operaio/",
+   "en": "/en/jobs-graubunden-worker/",
+   "de": "/de/arbeit-graubunden-arbeiter/",
+   "fr": "/fr/travail-grisons-ouvrier/"
+  },
+  "GR/impiegato": {
+   "it": "/lavoro-grigioni-impiegato/",
+   "en": "/en/jobs-graubunden-clerk/",
+   "de": "/de/arbeit-graubunden-sachbearbeiter/",
+   "fr": "/fr/travail-grisons-employe/"
+  },
+  "GR/ingegnere": {
+   "it": "/lavoro-grigioni-ingegnere/",
+   "en": "/en/jobs-graubunden-engineer/",
+   "de": "/de/arbeit-graubunden-ingenieur/",
+   "fr": "/fr/travail-grisons-ingenieur/"
+  },
+  "GR/educatore": {
+   "it": "/lavoro-grigioni-educatore/",
+   "en": "/en/jobs-graubunden-educator/",
+   "de": "/de/arbeit-graubunden-erzieher/",
+   "fr": "/fr/travail-grisons-educateur/"
+  },
+  "GR/autista": {
+   "it": "/lavoro-grigioni-autista/",
+   "en": "/en/jobs-graubunden-driver/",
+   "de": "/de/arbeit-graubunden-fahrer/",
+   "fr": "/fr/travail-grisons-chauffeur/"
+  },
+  "GR/muratore": {
+   "it": "/lavoro-grigioni-muratore/",
+   "en": "/en/jobs-graubunden-mason/",
+   "de": "/de/arbeit-graubunden-maurer/",
+   "fr": "/fr/travail-grisons-macon/"
+  },
+  "GR/cuoco": {
+   "it": "/lavoro-grigioni-cuoco/",
+   "en": "/en/jobs-graubunden-cook/",
+   "de": "/de/arbeit-graubunden-koch/",
+   "fr": "/fr/travail-grisons-cuisinier/"
+  },
+  "GR/cameriere": {
+   "it": "/lavoro-grigioni-cameriere/",
+   "en": "/en/jobs-graubunden-waiter/",
+   "de": "/de/arbeit-graubunden-kellner/",
+   "fr": "/fr/travail-grisons-serveur/"
+  },
+  "GR/elettricista": {
+   "it": "/lavoro-grigioni-elettricista/",
+   "en": "/en/jobs-graubunden-electrician/",
+   "de": "/de/arbeit-graubunden-elektriker/",
+   "fr": "/fr/travail-grisons-electricien/"
+  },
+  "GR/fisioterapista": {
+   "it": "/lavoro-grigioni-fisioterapista/",
+   "en": "/en/jobs-graubunden-physiotherapist/",
+   "de": "/de/arbeit-graubunden-physiotherapeut/",
+   "fr": "/fr/travail-grisons-physiotherapeute/"
+  },
+  "GR/ostetrica": {
+   "it": "/lavoro-grigioni-ostetrica/",
+   "en": "/en/jobs-graubunden-midwife/",
+   "de": "/de/arbeit-graubunden-hebamme/",
+   "fr": "/fr/travail-grisons-sage-femme/"
+  },
+  "GR/oss": {
+   "it": "/lavoro-grigioni-oss/",
+   "en": "/en/jobs-graubunden-healthcare-assistant/",
+   "de": "/de/arbeit-graubunden-fage/",
+   "fr": "/fr/travail-grisons-assistant-soins/"
+  },
+  "GR/ottico-optometrista": {
+   "it": "/lavoro-grigioni-ottico-optometrista/",
+   "en": "/en/jobs-graubunden-optician-optometrist/",
+   "de": "/de/arbeit-graubunden-optiker-optometrist/",
+   "fr": "/fr/travail-grisons-opticien-optometriste/"
+  },
+  "GR/contabile": {
+   "it": "/lavoro-grigioni-contabile/",
+   "en": "/en/jobs-graubunden-accountant/",
+   "de": "/de/arbeit-graubunden-buchhalter/",
+   "fr": "/fr/travail-grisons-comptable/"
+  },
+  "GR/assistente-sociale": {
+   "it": "/lavoro-grigioni-assistente-sociale/",
+   "en": "/en/jobs-graubunden-social-worker/",
+   "de": "/de/arbeit-graubunden-sozialarbeiter/",
+   "fr": "/fr/travail-grisons-assistant-social/"
+  },
+  "GR/macellaio": {
+   "it": "/lavoro-grigioni-macellaio/",
+   "en": "/en/jobs-graubunden-butcher/",
+   "de": "/de/arbeit-graubunden-metzger/",
+   "fr": "/fr/travail-grisons-boucher/"
+  },
+  "GR/architetto": {
+   "it": "/lavoro-grigioni-architetto/",
+   "en": "/en/jobs-graubunden-architect/",
+   "de": "/de/arbeit-graubunden-architekt/",
+   "fr": "/fr/travail-grisons-architecte/"
+  },
+  "JU/infermiere": {
+   "it": "/lavoro-giura-infermiere/",
+   "en": "/en/jobs-jura-nurse/",
+   "de": "/de/arbeit-jura-krankenpfleger/",
+   "fr": "/fr/travail-jura-infirmier/"
+  },
+  "LU/infermiere": {
+   "it": "/lavoro-lucerna-infermiere/",
+   "en": "/en/jobs-lucerne-nurse/",
+   "de": "/de/arbeit-luzern-krankenpfleger/",
+   "fr": "/fr/travail-lucerne-infirmier/"
+  },
+  "LU/operaio": {
+   "it": "/lavoro-lucerna-operaio/",
+   "en": "/en/jobs-lucerne-worker/",
+   "de": "/de/arbeit-luzern-arbeiter/",
+   "fr": "/fr/travail-lucerne-ouvrier/"
+  },
+  "LU/impiegato": {
+   "it": "/lavoro-lucerna-impiegato/",
+   "en": "/en/jobs-lucerne-clerk/",
+   "de": "/de/arbeit-luzern-sachbearbeiter/",
+   "fr": "/fr/travail-lucerne-employe/"
+  },
+  "LU/ingegnere": {
+   "it": "/lavoro-lucerna-ingegnere/",
+   "en": "/en/jobs-lucerne-engineer/",
+   "de": "/de/arbeit-luzern-ingenieur/",
+   "fr": "/fr/travail-lucerne-ingenieur/"
+  },
+  "LU/educatore": {
+   "it": "/lavoro-lucerna-educatore/",
+   "en": "/en/jobs-lucerne-educator/",
+   "de": "/de/arbeit-luzern-erzieher/",
+   "fr": "/fr/travail-lucerne-educateur/"
+  },
+  "LU/autista": {
+   "it": "/lavoro-lucerna-autista/",
+   "en": "/en/jobs-lucerne-driver/",
+   "de": "/de/arbeit-luzern-fahrer/",
+   "fr": "/fr/travail-lucerne-chauffeur/"
+  },
+  "LU/muratore": {
+   "it": "/lavoro-lucerna-muratore/",
+   "en": "/en/jobs-lucerne-mason/",
+   "de": "/de/arbeit-luzern-maurer/",
+   "fr": "/fr/travail-lucerne-macon/"
+  },
+  "LU/cuoco": {
+   "it": "/lavoro-lucerna-cuoco/",
+   "en": "/en/jobs-lucerne-cook/",
+   "de": "/de/arbeit-luzern-koch/",
+   "fr": "/fr/travail-lucerne-cuisinier/"
+  },
+  "LU/elettricista": {
+   "it": "/lavoro-lucerna-elettricista/",
+   "en": "/en/jobs-lucerne-electrician/",
+   "de": "/de/arbeit-luzern-elektriker/",
+   "fr": "/fr/travail-lucerne-electricien/"
+  },
+  "LU/fisioterapista": {
+   "it": "/lavoro-lucerna-fisioterapista/",
+   "en": "/en/jobs-lucerne-physiotherapist/",
+   "de": "/de/arbeit-luzern-physiotherapeut/",
+   "fr": "/fr/travail-lucerne-physiotherapeute/"
+  },
+  "LU/oss": {
+   "it": "/lavoro-lucerna-oss/",
+   "en": "/en/jobs-lucerne-healthcare-assistant/",
+   "de": "/de/arbeit-luzern-fage/",
+   "fr": "/fr/travail-lucerne-assistant-soins/"
+  },
+  "LU/ottico-optometrista": {
+   "it": "/lavoro-lucerna-ottico-optometrista/",
+   "en": "/en/jobs-lucerne-optician-optometrist/",
+   "de": "/de/arbeit-luzern-optiker-optometrist/",
+   "fr": "/fr/travail-lucerne-opticien-optometriste/"
+  },
+  "LU/assistente-sociale": {
+   "it": "/lavoro-lucerna-assistente-sociale/",
+   "en": "/en/jobs-lucerne-social-worker/",
+   "de": "/de/arbeit-luzern-sozialarbeiter/",
+   "fr": "/fr/travail-lucerne-assistant-social/"
+  },
+  "LU/macellaio": {
+   "it": "/lavoro-lucerna-macellaio/",
+   "en": "/en/jobs-lucerne-butcher/",
+   "de": "/de/arbeit-luzern-metzger/",
+   "fr": "/fr/travail-lucerne-boucher/"
+  },
+  "LU/saldatore": {
+   "it": "/lavoro-lucerna-saldatore/",
+   "en": "/en/jobs-lucerne-welder/",
+   "de": "/de/arbeit-luzern-schweisser/",
+   "fr": "/fr/travail-lucerne-soudeur/"
+  },
+  "NE/ingegnere": {
+   "it": "/lavoro-neuchatel-ingegnere/",
+   "en": "/en/jobs-neuchatel-engineer/",
+   "de": "/de/arbeit-neuenburg-ingenieur/",
+   "fr": "/fr/travail-neuchatel-ingenieur/"
+  },
+  "NE/macellaio": {
+   "it": "/lavoro-neuchatel-macellaio/",
+   "en": "/en/jobs-neuchatel-butcher/",
+   "de": "/de/arbeit-neuenburg-metzger/",
+   "fr": "/fr/travail-neuchatel-boucher/"
+  },
+  "NW/cuoco": {
+   "it": "/lavoro-nidvaldo-cuoco/",
+   "en": "/en/jobs-nidwalden-cook/",
+   "de": "/de/arbeit-nidwalden-koch/",
+   "fr": "/fr/travail-nidwald-cuisinier/"
+  },
+  "NW/elettricista": {
+   "it": "/lavoro-nidvaldo-elettricista/",
+   "en": "/en/jobs-nidwalden-electrician/",
+   "de": "/de/arbeit-nidwalden-elektriker/",
+   "fr": "/fr/travail-nidwald-electricien/"
+  },
+  "OW/infermiere": {
+   "it": "/lavoro-obvaldo-infermiere/",
+   "en": "/en/jobs-obwalden-nurse/",
+   "de": "/de/arbeit-obwalden-krankenpfleger/",
+   "fr": "/fr/travail-obwald-infirmier/"
+  },
+  "OW/operaio": {
+   "it": "/lavoro-obvaldo-operaio/",
+   "en": "/en/jobs-obwalden-worker/",
+   "de": "/de/arbeit-obwalden-arbeiter/",
+   "fr": "/fr/travail-obwald-ouvrier/"
+  },
+  "OW/elettricista": {
+   "it": "/lavoro-obvaldo-elettricista/",
+   "en": "/en/jobs-obwalden-electrician/",
+   "de": "/de/arbeit-obwalden-elektriker/",
+   "fr": "/fr/travail-obwald-electricien/"
+  },
+  "SG/infermiere": {
+   "it": "/lavoro-san-gallo-infermiere/",
+   "en": "/en/jobs-st-gallen-nurse/",
+   "de": "/de/arbeit-st-gallen-krankenpfleger/",
+   "fr": "/fr/travail-saint-gall-infirmier/"
+  },
+  "SG/operaio": {
+   "it": "/lavoro-san-gallo-operaio/",
+   "en": "/en/jobs-st-gallen-worker/",
+   "de": "/de/arbeit-st-gallen-arbeiter/",
+   "fr": "/fr/travail-saint-gall-ouvrier/"
+  },
+  "SG/impiegato": {
+   "it": "/lavoro-san-gallo-impiegato/",
+   "en": "/en/jobs-st-gallen-clerk/",
+   "de": "/de/arbeit-st-gallen-sachbearbeiter/",
+   "fr": "/fr/travail-saint-gall-employe/"
+  },
+  "SG/ingegnere": {
+   "it": "/lavoro-san-gallo-ingegnere/",
+   "en": "/en/jobs-st-gallen-engineer/",
+   "de": "/de/arbeit-st-gallen-ingenieur/",
+   "fr": "/fr/travail-saint-gall-ingenieur/"
+  },
+  "SG/autista": {
+   "it": "/lavoro-san-gallo-autista/",
+   "en": "/en/jobs-st-gallen-driver/",
+   "de": "/de/arbeit-st-gallen-fahrer/",
+   "fr": "/fr/travail-saint-gall-chauffeur/"
+  },
+  "SG/muratore": {
+   "it": "/lavoro-san-gallo-muratore/",
+   "en": "/en/jobs-st-gallen-mason/",
+   "de": "/de/arbeit-st-gallen-maurer/",
+   "fr": "/fr/travail-saint-gall-macon/"
+  },
+  "SG/cuoco": {
+   "it": "/lavoro-san-gallo-cuoco/",
+   "en": "/en/jobs-st-gallen-cook/",
+   "de": "/de/arbeit-st-gallen-koch/",
+   "fr": "/fr/travail-saint-gall-cuisinier/"
+  },
+  "SG/elettricista": {
+   "it": "/lavoro-san-gallo-elettricista/",
+   "en": "/en/jobs-st-gallen-electrician/",
+   "de": "/de/arbeit-st-gallen-elektriker/",
+   "fr": "/fr/travail-saint-gall-electricien/"
+  },
+  "SG/fisioterapista": {
+   "it": "/lavoro-san-gallo-fisioterapista/",
+   "en": "/en/jobs-st-gallen-physiotherapist/",
+   "de": "/de/arbeit-st-gallen-physiotherapeut/",
+   "fr": "/fr/travail-saint-gall-physiotherapeute/"
+  },
+  "SG/oss": {
+   "it": "/lavoro-san-gallo-oss/",
+   "en": "/en/jobs-st-gallen-healthcare-assistant/",
+   "de": "/de/arbeit-st-gallen-fage/",
+   "fr": "/fr/travail-saint-gall-assistant-soins/"
+  },
+  "SG/ottico-optometrista": {
+   "it": "/lavoro-san-gallo-ottico-optometrista/",
+   "en": "/en/jobs-st-gallen-optician-optometrist/",
+   "de": "/de/arbeit-st-gallen-optiker-optometrist/",
+   "fr": "/fr/travail-saint-gall-opticien-optometriste/"
+  },
+  "SG/macellaio": {
+   "it": "/lavoro-san-gallo-macellaio/",
+   "en": "/en/jobs-st-gallen-butcher/",
+   "de": "/de/arbeit-st-gallen-metzger/",
+   "fr": "/fr/travail-saint-gall-boucher/"
+  },
+  "SG/saldatore": {
+   "it": "/lavoro-san-gallo-saldatore/",
+   "en": "/en/jobs-st-gallen-welder/",
+   "de": "/de/arbeit-st-gallen-schweisser/",
+   "fr": "/fr/travail-saint-gall-soudeur/"
+  },
+  "SH/infermiere": {
+   "it": "/lavoro-sciaffusa-infermiere/",
+   "en": "/en/jobs-schaffhausen-nurse/",
+   "de": "/de/arbeit-schaffhausen-krankenpfleger/",
+   "fr": "/fr/travail-schaffhouse-infirmier/"
+  },
+  "SH/operaio": {
+   "it": "/lavoro-sciaffusa-operaio/",
+   "en": "/en/jobs-schaffhausen-worker/",
+   "de": "/de/arbeit-schaffhausen-arbeiter/",
+   "fr": "/fr/travail-schaffhouse-ouvrier/"
+  },
+  "SH/cuoco": {
+   "it": "/lavoro-sciaffusa-cuoco/",
+   "en": "/en/jobs-schaffhausen-cook/",
+   "de": "/de/arbeit-schaffhausen-koch/",
+   "fr": "/fr/travail-schaffhouse-cuisinier/"
+  },
+  "SH/elettricista": {
+   "it": "/lavoro-sciaffusa-elettricista/",
+   "en": "/en/jobs-schaffhausen-electrician/",
+   "de": "/de/arbeit-schaffhausen-elektriker/",
+   "fr": "/fr/travail-schaffhouse-electricien/"
+  },
+  "SH/fisioterapista": {
+   "it": "/lavoro-sciaffusa-fisioterapista/",
+   "en": "/en/jobs-schaffhausen-physiotherapist/",
+   "de": "/de/arbeit-schaffhausen-physiotherapeut/",
+   "fr": "/fr/travail-schaffhouse-physiotherapeute/"
+  },
+  "SH/ottico-optometrista": {
+   "it": "/lavoro-sciaffusa-ottico-optometrista/",
+   "en": "/en/jobs-schaffhausen-optician-optometrist/",
+   "de": "/de/arbeit-schaffhausen-optiker-optometrist/",
+   "fr": "/fr/travail-schaffhouse-opticien-optometriste/"
+  },
+  "SO/infermiere": {
+   "it": "/lavoro-soletta-infermiere/",
+   "en": "/en/jobs-solothurn-nurse/",
+   "de": "/de/arbeit-solothurn-krankenpfleger/",
+   "fr": "/fr/travail-soleure-infirmier/"
+  },
+  "SO/operaio": {
+   "it": "/lavoro-soletta-operaio/",
+   "en": "/en/jobs-solothurn-worker/",
+   "de": "/de/arbeit-solothurn-arbeiter/",
+   "fr": "/fr/travail-soleure-ouvrier/"
+  },
+  "SO/impiegato": {
+   "it": "/lavoro-soletta-impiegato/",
+   "en": "/en/jobs-solothurn-clerk/",
+   "de": "/de/arbeit-solothurn-sachbearbeiter/",
+   "fr": "/fr/travail-soleure-employe/"
+  },
+  "SO/ingegnere": {
+   "it": "/lavoro-soletta-ingegnere/",
+   "en": "/en/jobs-solothurn-engineer/",
+   "de": "/de/arbeit-solothurn-ingenieur/",
+   "fr": "/fr/travail-soleure-ingenieur/"
+  },
+  "SO/educatore": {
+   "it": "/lavoro-soletta-educatore/",
+   "en": "/en/jobs-solothurn-educator/",
+   "de": "/de/arbeit-solothurn-erzieher/",
+   "fr": "/fr/travail-soleure-educateur/"
+  },
+  "SO/autista": {
+   "it": "/lavoro-soletta-autista/",
+   "en": "/en/jobs-solothurn-driver/",
+   "de": "/de/arbeit-solothurn-fahrer/",
+   "fr": "/fr/travail-soleure-chauffeur/"
+  },
+  "SO/cuoco": {
+   "it": "/lavoro-soletta-cuoco/",
+   "en": "/en/jobs-solothurn-cook/",
+   "de": "/de/arbeit-solothurn-koch/",
+   "fr": "/fr/travail-soleure-cuisinier/"
+  },
+  "SO/elettricista": {
+   "it": "/lavoro-soletta-elettricista/",
+   "en": "/en/jobs-solothurn-electrician/",
+   "de": "/de/arbeit-solothurn-elektriker/",
+   "fr": "/fr/travail-soleure-electricien/"
+  },
+  "SO/fisioterapista": {
+   "it": "/lavoro-soletta-fisioterapista/",
+   "en": "/en/jobs-solothurn-physiotherapist/",
+   "de": "/de/arbeit-solothurn-physiotherapeut/",
+   "fr": "/fr/travail-soleure-physiotherapeute/"
+  },
+  "SO/oss": {
+   "it": "/lavoro-soletta-oss/",
+   "en": "/en/jobs-solothurn-healthcare-assistant/",
+   "de": "/de/arbeit-solothurn-fage/",
+   "fr": "/fr/travail-soleure-assistant-soins/"
+  },
+  "SO/ottico-optometrista": {
+   "it": "/lavoro-soletta-ottico-optometrista/",
+   "en": "/en/jobs-solothurn-optician-optometrist/",
+   "de": "/de/arbeit-solothurn-optiker-optometrist/",
+   "fr": "/fr/travail-soleure-opticien-optometriste/"
+  },
+  "SO/assistente-sociale": {
+   "it": "/lavoro-soletta-assistente-sociale/",
+   "en": "/en/jobs-solothurn-social-worker/",
+   "de": "/de/arbeit-solothurn-sozialarbeiter/",
+   "fr": "/fr/travail-soleure-assistant-social/"
+  },
+  "SO/macellaio": {
+   "it": "/lavoro-soletta-macellaio/",
+   "en": "/en/jobs-solothurn-butcher/",
+   "de": "/de/arbeit-solothurn-metzger/",
+   "fr": "/fr/travail-soleure-boucher/"
+  },
+  "SZ/infermiere": {
+   "it": "/lavoro-svitto-infermiere/",
+   "en": "/en/jobs-schwyz-nurse/",
+   "de": "/de/arbeit-schwyz-krankenpfleger/",
+   "fr": "/fr/travail-schwytz-infirmier/"
+  },
+  "SZ/operaio": {
+   "it": "/lavoro-svitto-operaio/",
+   "en": "/en/jobs-schwyz-worker/",
+   "de": "/de/arbeit-schwyz-arbeiter/",
+   "fr": "/fr/travail-schwytz-ouvrier/"
+  },
+  "SZ/impiegato": {
+   "it": "/lavoro-svitto-impiegato/",
+   "en": "/en/jobs-schwyz-clerk/",
+   "de": "/de/arbeit-schwyz-sachbearbeiter/",
+   "fr": "/fr/travail-schwytz-employe/"
+  },
+  "SZ/elettricista": {
+   "it": "/lavoro-svitto-elettricista/",
+   "en": "/en/jobs-schwyz-electrician/",
+   "de": "/de/arbeit-schwyz-elektriker/",
+   "fr": "/fr/travail-schwytz-electricien/"
+  },
+  "SZ/fisioterapista": {
+   "it": "/lavoro-svitto-fisioterapista/",
+   "en": "/en/jobs-schwyz-physiotherapist/",
+   "de": "/de/arbeit-schwyz-physiotherapeut/",
+   "fr": "/fr/travail-schwytz-physiotherapeute/"
+  },
+  "SZ/macellaio": {
+   "it": "/lavoro-svitto-macellaio/",
+   "en": "/en/jobs-schwyz-butcher/",
+   "de": "/de/arbeit-schwyz-metzger/",
+   "fr": "/fr/travail-schwytz-boucher/"
+  },
+  "TG/infermiere": {
+   "it": "/lavoro-turgovia-infermiere/",
+   "en": "/en/jobs-thurgau-nurse/",
+   "de": "/de/arbeit-thurgau-krankenpfleger/",
+   "fr": "/fr/travail-thurgovie-infirmier/"
+  },
+  "TG/operaio": {
+   "it": "/lavoro-turgovia-operaio/",
+   "en": "/en/jobs-thurgau-worker/",
+   "de": "/de/arbeit-thurgau-arbeiter/",
+   "fr": "/fr/travail-thurgovie-ouvrier/"
+  },
+  "TG/impiegato": {
+   "it": "/lavoro-turgovia-impiegato/",
+   "en": "/en/jobs-thurgau-clerk/",
+   "de": "/de/arbeit-thurgau-sachbearbeiter/",
+   "fr": "/fr/travail-thurgovie-employe/"
+  },
+  "TG/ingegnere": {
+   "it": "/lavoro-turgovia-ingegnere/",
+   "en": "/en/jobs-thurgau-engineer/",
+   "de": "/de/arbeit-thurgau-ingenieur/",
+   "fr": "/fr/travail-thurgovie-ingenieur/"
+  },
+  "TG/muratore": {
+   "it": "/lavoro-turgovia-muratore/",
+   "en": "/en/jobs-thurgau-mason/",
+   "de": "/de/arbeit-thurgau-maurer/",
+   "fr": "/fr/travail-thurgovie-macon/"
+  },
+  "TG/cuoco": {
+   "it": "/lavoro-turgovia-cuoco/",
+   "en": "/en/jobs-thurgau-cook/",
+   "de": "/de/arbeit-thurgau-koch/",
+   "fr": "/fr/travail-thurgovie-cuisinier/"
+  },
+  "TG/elettricista": {
+   "it": "/lavoro-turgovia-elettricista/",
+   "en": "/en/jobs-thurgau-electrician/",
+   "de": "/de/arbeit-thurgau-elektriker/",
+   "fr": "/fr/travail-thurgovie-electricien/"
+  },
+  "TG/fisioterapista": {
+   "it": "/lavoro-turgovia-fisioterapista/",
+   "en": "/en/jobs-thurgau-physiotherapist/",
+   "de": "/de/arbeit-thurgau-physiotherapeut/",
+   "fr": "/fr/travail-thurgovie-physiotherapeute/"
+  },
+  "TG/oss": {
+   "it": "/lavoro-turgovia-oss/",
+   "en": "/en/jobs-thurgau-healthcare-assistant/",
+   "de": "/de/arbeit-thurgau-fage/",
+   "fr": "/fr/travail-thurgovie-assistant-soins/"
+  },
+  "TG/ottico-optometrista": {
+   "it": "/lavoro-turgovia-ottico-optometrista/",
+   "en": "/en/jobs-thurgau-optician-optometrist/",
+   "de": "/de/arbeit-thurgau-optiker-optometrist/",
+   "fr": "/fr/travail-thurgovie-opticien-optometriste/"
+  },
+  "TG/macellaio": {
+   "it": "/lavoro-turgovia-macellaio/",
+   "en": "/en/jobs-thurgau-butcher/",
+   "de": "/de/arbeit-thurgau-metzger/",
+   "fr": "/fr/travail-thurgovie-boucher/"
+  },
+  "TG/saldatore": {
+   "it": "/lavoro-turgovia-saldatore/",
+   "en": "/en/jobs-thurgau-welder/",
+   "de": "/de/arbeit-thurgau-schweisser/",
+   "fr": "/fr/travail-thurgovie-soudeur/"
+  },
+  "UR/infermiere": {
+   "it": "/lavoro-uri-infermiere/",
+   "en": "/en/jobs-uri-nurse/",
+   "de": "/de/arbeit-uri-krankenpfleger/",
+   "fr": "/fr/travail-uri-infirmier/"
+  },
+  "UR/elettricista": {
+   "it": "/lavoro-uri-elettricista/",
+   "en": "/en/jobs-uri-electrician/",
+   "de": "/de/arbeit-uri-elektriker/",
+   "fr": "/fr/travail-uri-electricien/"
+  },
+  "UR/fisioterapista": {
+   "it": "/lavoro-uri-fisioterapista/",
+   "en": "/en/jobs-uri-physiotherapist/",
+   "de": "/de/arbeit-uri-physiotherapeut/",
+   "fr": "/fr/travail-uri-physiotherapeute/"
+  },
+  "VD/infermiere": {
+   "it": "/lavoro-vaud-infermiere/",
+   "en": "/en/jobs-vaud-nurse/",
+   "de": "/de/arbeit-waadt-krankenpfleger/",
+   "fr": "/fr/travail-vaud-infirmier/"
+  },
+  "VD/operaio": {
+   "it": "/lavoro-vaud-operaio/",
+   "en": "/en/jobs-vaud-worker/",
+   "de": "/de/arbeit-waadt-arbeiter/",
+   "fr": "/fr/travail-vaud-ouvrier/"
+  },
+  "VD/impiegato": {
+   "it": "/lavoro-vaud-impiegato/",
+   "en": "/en/jobs-vaud-clerk/",
+   "de": "/de/arbeit-waadt-sachbearbeiter/",
+   "fr": "/fr/travail-vaud-employe/"
+  },
+  "VD/ingegnere": {
+   "it": "/lavoro-vaud-ingegnere/",
+   "en": "/en/jobs-vaud-engineer/",
+   "de": "/de/arbeit-waadt-ingenieur/",
+   "fr": "/fr/travail-vaud-ingenieur/"
+  },
+  "VD/educatore": {
+   "it": "/lavoro-vaud-educatore/",
+   "en": "/en/jobs-vaud-educator/",
+   "de": "/de/arbeit-waadt-erzieher/",
+   "fr": "/fr/travail-vaud-educateur/"
+  },
+  "VD/autista": {
+   "it": "/lavoro-vaud-autista/",
+   "en": "/en/jobs-vaud-driver/",
+   "de": "/de/arbeit-waadt-fahrer/",
+   "fr": "/fr/travail-vaud-chauffeur/"
+  },
+  "VD/muratore": {
+   "it": "/lavoro-vaud-muratore/",
+   "en": "/en/jobs-vaud-mason/",
+   "de": "/de/arbeit-waadt-maurer/",
+   "fr": "/fr/travail-vaud-macon/"
+  },
+  "VD/cuoco": {
+   "it": "/lavoro-vaud-cuoco/",
+   "en": "/en/jobs-vaud-cook/",
+   "de": "/de/arbeit-waadt-koch/",
+   "fr": "/fr/travail-vaud-cuisinier/"
+  },
+  "VD/elettricista": {
+   "it": "/lavoro-vaud-elettricista/",
+   "en": "/en/jobs-vaud-electrician/",
+   "de": "/de/arbeit-waadt-elektriker/",
+   "fr": "/fr/travail-vaud-electricien/"
+  },
+  "VD/fisioterapista": {
+   "it": "/lavoro-vaud-fisioterapista/",
+   "en": "/en/jobs-vaud-physiotherapist/",
+   "de": "/de/arbeit-waadt-physiotherapeut/",
+   "fr": "/fr/travail-vaud-physiotherapeute/"
+  },
+  "VD/oss": {
+   "it": "/lavoro-vaud-oss/",
+   "en": "/en/jobs-vaud-healthcare-assistant/",
+   "de": "/de/arbeit-waadt-fage/",
+   "fr": "/fr/travail-vaud-assistant-soins/"
+  },
+  "VD/contabile": {
+   "it": "/lavoro-vaud-contabile/",
+   "en": "/en/jobs-vaud-accountant/",
+   "de": "/de/arbeit-waadt-buchhalter/",
+   "fr": "/fr/travail-vaud-comptable/"
+  },
+  "VD/macellaio": {
+   "it": "/lavoro-vaud-macellaio/",
+   "en": "/en/jobs-vaud-butcher/",
+   "de": "/de/arbeit-waadt-metzger/",
+   "fr": "/fr/travail-vaud-boucher/"
+  },
+  "VS/infermiere": {
+   "it": "/lavoro-vallese-infermiere/",
+   "en": "/en/jobs-valais-nurse/",
+   "de": "/de/arbeit-wallis-krankenpfleger/",
+   "fr": "/fr/travail-valais-infirmier/"
+  },
+  "VS/impiegato": {
+   "it": "/lavoro-vallese-impiegato/",
+   "en": "/en/jobs-valais-clerk/",
+   "de": "/de/arbeit-wallis-sachbearbeiter/",
+   "fr": "/fr/travail-valais-employe/"
+  },
+  "VS/ingegnere": {
+   "it": "/lavoro-vallese-ingegnere/",
+   "en": "/en/jobs-valais-engineer/",
+   "de": "/de/arbeit-wallis-ingenieur/",
+   "fr": "/fr/travail-valais-ingenieur/"
+  },
+  "VS/educatore": {
+   "it": "/lavoro-vallese-educatore/",
+   "en": "/en/jobs-valais-educator/",
+   "de": "/de/arbeit-wallis-erzieher/",
+   "fr": "/fr/travail-valais-educateur/"
+  },
+  "VS/autista": {
+   "it": "/lavoro-vallese-autista/",
+   "en": "/en/jobs-valais-driver/",
+   "de": "/de/arbeit-wallis-fahrer/",
+   "fr": "/fr/travail-valais-chauffeur/"
+  },
+  "VS/muratore": {
+   "it": "/lavoro-vallese-muratore/",
+   "en": "/en/jobs-valais-mason/",
+   "de": "/de/arbeit-wallis-maurer/",
+   "fr": "/fr/travail-valais-macon/"
+  },
+  "VS/cuoco": {
+   "it": "/lavoro-vallese-cuoco/",
+   "en": "/en/jobs-valais-cook/",
+   "de": "/de/arbeit-wallis-koch/",
+   "fr": "/fr/travail-valais-cuisinier/"
+  },
+  "VS/cameriere": {
+   "it": "/lavoro-vallese-cameriere/",
+   "en": "/en/jobs-valais-waiter/",
+   "de": "/de/arbeit-wallis-kellner/",
+   "fr": "/fr/travail-valais-serveur/"
+  },
+  "VS/elettricista": {
+   "it": "/lavoro-vallese-elettricista/",
+   "en": "/en/jobs-valais-electrician/",
+   "de": "/de/arbeit-wallis-elektriker/",
+   "fr": "/fr/travail-valais-electricien/"
+  },
+  "VS/fisioterapista": {
+   "it": "/lavoro-vallese-fisioterapista/",
+   "en": "/en/jobs-valais-physiotherapist/",
+   "de": "/de/arbeit-wallis-physiotherapeut/",
+   "fr": "/fr/travail-valais-physiotherapeute/"
+  },
+  "VS/oss": {
+   "it": "/lavoro-vallese-oss/",
+   "en": "/en/jobs-valais-healthcare-assistant/",
+   "de": "/de/arbeit-wallis-fage/",
+   "fr": "/fr/travail-valais-assistant-soins/"
+  },
+  "VS/ottico-optometrista": {
+   "it": "/lavoro-vallese-ottico-optometrista/",
+   "en": "/en/jobs-valais-optician-optometrist/",
+   "de": "/de/arbeit-wallis-optiker-optometrist/",
+   "fr": "/fr/travail-valais-opticien-optometriste/"
+  },
+  "VS/contabile": {
+   "it": "/lavoro-vallese-contabile/",
+   "en": "/en/jobs-valais-accountant/",
+   "de": "/de/arbeit-wallis-buchhalter/",
+   "fr": "/fr/travail-valais-comptable/"
+  },
+  "VS/macellaio": {
+   "it": "/lavoro-vallese-macellaio/",
+   "en": "/en/jobs-valais-butcher/",
+   "de": "/de/arbeit-wallis-metzger/",
+   "fr": "/fr/travail-valais-boucher/"
+  },
+  "VS/architetto": {
+   "it": "/lavoro-vallese-architetto/",
+   "en": "/en/jobs-valais-architect/",
+   "de": "/de/arbeit-wallis-architekt/",
+   "fr": "/fr/travail-valais-architecte/"
+  },
+  "ZG/infermiere": {
+   "it": "/lavoro-zugo-infermiere/",
+   "en": "/en/jobs-zug-nurse/",
+   "de": "/de/arbeit-zug-krankenpfleger/",
+   "fr": "/fr/travail-zoug-infirmier/"
+  },
+  "ZG/operaio": {
+   "it": "/lavoro-zugo-operaio/",
+   "en": "/en/jobs-zug-worker/",
+   "de": "/de/arbeit-zug-arbeiter/",
+   "fr": "/fr/travail-zoug-ouvrier/"
+  },
+  "ZG/impiegato": {
+   "it": "/lavoro-zugo-impiegato/",
+   "en": "/en/jobs-zug-clerk/",
+   "de": "/de/arbeit-zug-sachbearbeiter/",
+   "fr": "/fr/travail-zoug-employe/"
+  },
+  "ZG/ingegnere": {
+   "it": "/lavoro-zugo-ingegnere/",
+   "en": "/en/jobs-zug-engineer/",
+   "de": "/de/arbeit-zug-ingenieur/",
+   "fr": "/fr/travail-zoug-ingenieur/"
+  },
+  "ZG/cuoco": {
+   "it": "/lavoro-zugo-cuoco/",
+   "en": "/en/jobs-zug-cook/",
+   "de": "/de/arbeit-zug-koch/",
+   "fr": "/fr/travail-zoug-cuisinier/"
+  },
+  "ZG/elettricista": {
+   "it": "/lavoro-zugo-elettricista/",
+   "en": "/en/jobs-zug-electrician/",
+   "de": "/de/arbeit-zug-elektriker/",
+   "fr": "/fr/travail-zoug-electricien/"
+  },
+  "ZG/fisioterapista": {
+   "it": "/lavoro-zugo-fisioterapista/",
+   "en": "/en/jobs-zug-physiotherapist/",
+   "de": "/de/arbeit-zug-physiotherapeut/",
+   "fr": "/fr/travail-zoug-physiotherapeute/"
+  },
+  "ZG/macellaio": {
+   "it": "/lavoro-zugo-macellaio/",
+   "en": "/en/jobs-zug-butcher/",
+   "de": "/de/arbeit-zug-metzger/",
+   "fr": "/fr/travail-zoug-boucher/"
+  },
+  "ZH/infermiere": {
+   "it": "/lavoro-zurigo-infermiere/",
+   "en": "/en/jobs-zurich-nurse/",
+   "de": "/de/arbeit-zurich-krankenpfleger/",
+   "fr": "/fr/travail-zurich-infirmier/"
+  },
+  "ZH/operaio": {
+   "it": "/lavoro-zurigo-operaio/",
+   "en": "/en/jobs-zurich-worker/",
+   "de": "/de/arbeit-zurich-arbeiter/",
+   "fr": "/fr/travail-zurich-ouvrier/"
+  },
+  "ZH/impiegato": {
+   "it": "/lavoro-zurigo-impiegato/",
+   "en": "/en/jobs-zurich-clerk/",
+   "de": "/de/arbeit-zurich-sachbearbeiter/",
+   "fr": "/fr/travail-zurich-employe/"
+  },
+  "ZH/ingegnere": {
+   "it": "/lavoro-zurigo-ingegnere/",
+   "en": "/en/jobs-zurich-engineer/",
+   "de": "/de/arbeit-zurich-ingenieur/",
+   "fr": "/fr/travail-zurich-ingenieur/"
+  },
+  "ZH/educatore": {
+   "it": "/lavoro-zurigo-educatore/",
+   "en": "/en/jobs-zurich-educator/",
+   "de": "/de/arbeit-zurich-erzieher/",
+   "fr": "/fr/travail-zurich-educateur/"
+  },
+  "ZH/autista": {
+   "it": "/lavoro-zurigo-autista/",
+   "en": "/en/jobs-zurich-driver/",
+   "de": "/de/arbeit-zurich-fahrer/",
+   "fr": "/fr/travail-zurich-chauffeur/"
+  },
+  "ZH/muratore": {
+   "it": "/lavoro-zurigo-muratore/",
+   "en": "/en/jobs-zurich-mason/",
+   "de": "/de/arbeit-zurich-maurer/",
+   "fr": "/fr/travail-zurich-macon/"
+  },
+  "ZH/cuoco": {
+   "it": "/lavoro-zurigo-cuoco/",
+   "en": "/en/jobs-zurich-cook/",
+   "de": "/de/arbeit-zurich-koch/",
+   "fr": "/fr/travail-zurich-cuisinier/"
+  },
+  "ZH/cameriere": {
+   "it": "/lavoro-zurigo-cameriere/",
+   "en": "/en/jobs-zurich-waiter/",
+   "de": "/de/arbeit-zurich-kellner/",
+   "fr": "/fr/travail-zurich-serveur/"
+  },
+  "ZH/elettricista": {
+   "it": "/lavoro-zurigo-elettricista/",
+   "en": "/en/jobs-zurich-electrician/",
+   "de": "/de/arbeit-zurich-elektriker/",
+   "fr": "/fr/travail-zurich-electricien/"
+  },
+  "ZH/fisioterapista": {
+   "it": "/lavoro-zurigo-fisioterapista/",
+   "en": "/en/jobs-zurich-physiotherapist/",
+   "de": "/de/arbeit-zurich-physiotherapeut/",
+   "fr": "/fr/travail-zurich-physiotherapeute/"
+  },
+  "ZH/ostetrica": {
+   "it": "/lavoro-zurigo-ostetrica/",
+   "en": "/en/jobs-zurich-midwife/",
+   "de": "/de/arbeit-zurich-hebamme/",
+   "fr": "/fr/travail-zurich-sage-femme/"
+  },
+  "ZH/oss": {
+   "it": "/lavoro-zurigo-oss/",
+   "en": "/en/jobs-zurich-healthcare-assistant/",
+   "de": "/de/arbeit-zurich-fage/",
+   "fr": "/fr/travail-zurich-assistant-soins/"
+  },
+  "ZH/ottico-optometrista": {
+   "it": "/lavoro-zurigo-ottico-optometrista/",
+   "en": "/en/jobs-zurich-optician-optometrist/",
+   "de": "/de/arbeit-zurich-optiker-optometrist/",
+   "fr": "/fr/travail-zurich-opticien-optometriste/"
+  },
+  "ZH/contabile": {
+   "it": "/lavoro-zurigo-contabile/",
+   "en": "/en/jobs-zurich-accountant/",
+   "de": "/de/arbeit-zurich-buchhalter/",
+   "fr": "/fr/travail-zurich-comptable/"
+  },
+  "ZH/assistente-sociale": {
+   "it": "/lavoro-zurigo-assistente-sociale/",
+   "en": "/en/jobs-zurich-social-worker/",
+   "de": "/de/arbeit-zurich-sozialarbeiter/",
+   "fr": "/fr/travail-zurich-assistant-social/"
+  },
+  "ZH/macellaio": {
+   "it": "/lavoro-zurigo-macellaio/",
+   "en": "/en/jobs-zurich-butcher/",
+   "de": "/de/arbeit-zurich-metzger/",
+   "fr": "/fr/travail-zurich-boucher/"
+  },
+  "ZH/saldatore": {
+   "it": "/lavoro-zurigo-saldatore/",
+   "en": "/en/jobs-zurich-welder/",
+   "de": "/de/arbeit-zurich-schweisser/",
+   "fr": "/fr/travail-zurich-soudeur/"
+  },
+  "ZH/architetto": {
+   "it": "/lavoro-zurigo-architetto/",
+   "en": "/en/jobs-zurich-architect/",
+   "de": "/de/arbeit-zurich-architekt/",
+   "fr": "/fr/travail-zurich-architecte/"
+  }
+ },
+ "topicLanding": {
+  "health-premiums": {
+   "CH": {
+    "it": "/premi-cassa-malati/",
+    "en": "/en/health-insurance-premiums/",
+    "de": "/de/krankenkassenpraemien/",
+    "fr": "/fr/primes-assurance-maladie/"
+   },
+   "AG": {
+    "it": "/premi-cassa-malati/argovia/",
+    "en": "/en/health-insurance-premiums/aargau/",
+    "de": "/de/krankenkassenpraemien/aargau/",
+    "fr": "/fr/primes-assurance-maladie/argovie/"
+   },
+   "BE": {
+    "it": "/premi-cassa-malati/berna/",
+    "en": "/en/health-insurance-premiums/bern/",
+    "de": "/de/krankenkassenpraemien/bern/",
+    "fr": "/fr/primes-assurance-maladie/berne/"
+   },
+   "GE": {
+    "it": "/premi-cassa-malati/ginevra/",
+    "en": "/en/health-insurance-premiums/geneva/",
+    "de": "/de/krankenkassenpraemien/genf/",
+    "fr": "/fr/primes-assurance-maladie/geneve/"
+   },
+   "GL": {
+    "it": "/premi-cassa-malati/glarona/",
+    "en": "/en/health-insurance-premiums/glarus/",
+    "de": "/de/krankenkassenpraemien/glarus/",
+    "fr": "/fr/primes-assurance-maladie/glaris/"
+   },
+   "GR": {
+    "it": "/premi-cassa-malati/grigioni/",
+    "en": "/en/health-insurance-premiums/graubunden/",
+    "de": "/de/krankenkassenpraemien/graubuenden/",
+    "fr": "/fr/primes-assurance-maladie/grisons/"
+   },
+   "JU": {
+    "it": "/premi-cassa-malati/giura/",
+    "en": "/en/health-insurance-premiums/jura/",
+    "de": "/de/krankenkassenpraemien/jura/",
+    "fr": "/fr/primes-assurance-maladie/jura/"
+   },
+   "LU": {
+    "it": "/premi-cassa-malati/lucerna/",
+    "en": "/en/health-insurance-premiums/lucerne/",
+    "de": "/de/krankenkassenpraemien/luzern/",
+    "fr": "/fr/primes-assurance-maladie/lucerne/"
+   },
+   "NE": {
+    "it": "/premi-cassa-malati/neuchatel/",
+    "en": "/en/health-insurance-premiums/neuchatel/",
+    "de": "/de/krankenkassenpraemien/neuenburg/",
+    "fr": "/fr/primes-assurance-maladie/neuchatel/"
+   },
+   "NW": {
+    "it": "/premi-cassa-malati/nidvaldo/",
+    "en": "/en/health-insurance-premiums/nidwalden/",
+    "de": "/de/krankenkassenpraemien/nidwalden/",
+    "fr": "/fr/primes-assurance-maladie/nidwald/"
+   },
+   "OW": {
+    "it": "/premi-cassa-malati/obvaldo/",
+    "en": "/en/health-insurance-premiums/obwalden/",
+    "de": "/de/krankenkassenpraemien/obwalden/",
+    "fr": "/fr/primes-assurance-maladie/obwald/"
+   },
+   "SG": {
+    "it": "/premi-cassa-malati/san-gallo/",
+    "en": "/en/health-insurance-premiums/st-gallen/",
+    "de": "/de/krankenkassenpraemien/st-gallen/",
+    "fr": "/fr/primes-assurance-maladie/saint-gall/"
+   },
+   "SH": {
+    "it": "/premi-cassa-malati/sciaffusa/",
+    "en": "/en/health-insurance-premiums/schaffhausen/",
+    "de": "/de/krankenkassenpraemien/schaffhausen/",
+    "fr": "/fr/primes-assurance-maladie/schaffhouse/"
+   },
+   "SO": {
+    "it": "/premi-cassa-malati/soletta/",
+    "en": "/en/health-insurance-premiums/solothurn/",
+    "de": "/de/krankenkassenpraemien/solothurn/",
+    "fr": "/fr/primes-assurance-maladie/soleure/"
+   },
+   "SZ": {
+    "it": "/premi-cassa-malati/svitto/",
+    "en": "/en/health-insurance-premiums/schwyz/",
+    "de": "/de/krankenkassenpraemien/schwyz/",
+    "fr": "/fr/primes-assurance-maladie/schwytz/"
+   },
+   "TG": {
+    "it": "/premi-cassa-malati/turgovia/",
+    "en": "/en/health-insurance-premiums/thurgau/",
+    "de": "/de/krankenkassenpraemien/thurgau/",
+    "fr": "/fr/primes-assurance-maladie/thurgovie/"
+   },
+   "TI": {
+    "it": "/premi-cassa-malati/ticino/",
+    "en": "/en/health-insurance-premiums/ticino/",
+    "de": "/de/krankenkassenpraemien/tessin/",
+    "fr": "/fr/primes-assurance-maladie/tessin/"
+   },
+   "UR": {
+    "it": "/premi-cassa-malati/uri/",
+    "en": "/en/health-insurance-premiums/uri/",
+    "de": "/de/krankenkassenpraemien/uri/",
+    "fr": "/fr/primes-assurance-maladie/uri/"
+   },
+   "VD": {
+    "it": "/premi-cassa-malati/vaud/",
+    "en": "/en/health-insurance-premiums/vaud/",
+    "de": "/de/krankenkassenpraemien/waadt/",
+    "fr": "/fr/primes-assurance-maladie/vaud/"
+   },
+   "VS": {
+    "it": "/premi-cassa-malati/vallese/",
+    "en": "/en/health-insurance-premiums/valais/",
+    "de": "/de/krankenkassenpraemien/wallis/",
+    "fr": "/fr/primes-assurance-maladie/valais/"
+   },
+   "ZG": {
+    "it": "/premi-cassa-malati/zugo/",
+    "en": "/en/health-insurance-premiums/zug/",
+    "de": "/de/krankenkassenpraemien/zug/",
+    "fr": "/fr/primes-assurance-maladie/zoug/"
+   },
+   "ZH": {
+    "it": "/premi-cassa-malati/zurigo/",
+    "en": "/en/health-insurance-premiums/zurich/",
+    "de": "/de/krankenkassenpraemien/zuerich/",
+    "fr": "/fr/primes-assurance-maladie/zurich/"
+   }
+  },
+  "minimum-wage": {
+   "CH": {
+    "it": "/salario-minimo/",
+    "en": "/en/minimum-wage/",
+    "de": "/de/mindestlohn/",
+    "fr": "/fr/salaire-minimum/"
+   },
+   "GE": {
+    "it": "/salario-minimo/ginevra/",
+    "en": "/en/minimum-wage/geneva/",
+    "de": "/de/mindestlohn/genf/",
+    "fr": "/fr/salaire-minimum/geneve/"
+   },
+   "JU": {
+    "it": "/salario-minimo/giura/",
+    "en": "/en/minimum-wage/jura/",
+    "de": "/de/mindestlohn/jura/",
+    "fr": "/fr/salaire-minimum/jura/"
+   },
+   "NE": {
+    "it": "/salario-minimo/neuchatel/",
+    "en": "/en/minimum-wage/neuchatel/",
+    "de": "/de/mindestlohn/neuenburg/",
+    "fr": "/fr/salaire-minimum/neuchatel/"
+   },
+   "TI": {
+    "it": "/salario-minimo/ticino/",
+    "en": "/en/minimum-wage/ticino/",
+    "de": "/de/mindestlohn/tessin/",
+    "fr": "/fr/salaire-minimum/tessin/"
+   }
+  }
+ },
+ "rejected": []
+}

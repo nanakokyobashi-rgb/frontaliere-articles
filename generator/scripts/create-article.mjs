@@ -19819,6 +19819,8 @@ const INTERNAL_LINK_BLOCK = {
 function enforceStrongInternalLinks(data) {
   return enrichArticleInternalLinks(data, {
     isPending: isBodyTranslationPending, bodySections: collectBodySections,
+    // `typeof`: le funzioni vengono estratte e valutate in isolamento dai test del writer.
+    sectionName: typeof SECTION_NAME === 'string' ? SECTION_NAME : undefined,
   });
 }
 
