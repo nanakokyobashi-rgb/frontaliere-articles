@@ -30425,6 +30425,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'autorizzazione-edilizia-cantone-svitto',
+    category: 'pratico',
+    date: '2026-11-28T00:21:34.665Z',
+    image: '/images/blog/article-assistenza-sociale-svitto-criterio-bisogno.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['SZ'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

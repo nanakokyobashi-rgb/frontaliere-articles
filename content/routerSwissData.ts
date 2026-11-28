@@ -2942,6 +2942,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'salario-minimo-svitto-regole': { it: 'salario-minimo-svitto-regole', en: 'schwyz-minimum-wage-rules', de: 'schwyz-mindestlohn-regeln', fr: 'schwytz-salaire-minimum-regles' },
  'assistenza-sociale-svitto-criterio-bisogno': { it: 'assistenza-sociale-svitto-criterio-bisogno', en: 'schwyz-social-assistance-need-criterion', de: 'schwyz-sozialhilfe-bedarfsprinzip', fr: 'aide-sociale-schwytz-critere-besoin' },
  'voto-federale-soglie-svitto': { it: 'voto-federale-soglie-svitto', en: 'federal-vote-thresholds-svizzera', de: 'bundabstimmung-schwellen-sviz', fr: 'vote-federal-seuils-svit' },
+ 'autorizzazione-edilizia-cantone-svitto': { it: 'autorizzazione-edilizia-cantone-svitto', en: 'building-permit-canton-schwyz', de: 'baugenehmigung-kanton-schwyz', fr: 'permis-construire-canton-schwytz' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

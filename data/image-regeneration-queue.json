@@ -92,6 +92,17 @@
       "requestedAt": "2026-11-27T10:54:42.564Z",
       "lastFailureAt": "2026-11-27T10:54:42.564Z",
       "retryHint": "no-text"
+    },
+    {
+      "articleId": "autorizzazione-edilizia-cantone-svitto",
+      "title": "Autorizzazione edilizia Cantone Svitto: regole e uffici cantonali",
+      "fallbackImage": "/images/blog/article-assistenza-sociale-svitto-criterio-bisogno.webp",
+      "reason": "All image providers failed for article-autorizzazione-edilizia-cantone-svitto: openai-codex (vision gate rejected image: Generic planning office scene relevant to building authoriz",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-11-28T00:21:37.175Z",
+      "lastFailureAt": "2026-11-28T00:21:37.175Z",
+      "retryHint": "no-text"
     }
   ]
 }

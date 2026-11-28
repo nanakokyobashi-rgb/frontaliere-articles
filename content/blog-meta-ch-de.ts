@@ -8759,6 +8759,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.voto-federale-soglie-svitto.title': 'Vier eidgenössische Abstimmungstermine und Schwellenwerte für Initiativen',
     'blog.article.voto-federale-soglie-svitto.excerpt': 'Die Quelle nennt vier eidgenössische Abstimmungstermine pro Jahr.',
     'blog.article.voto-federale-soglie-svitto.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.autorizzazione-edilizia-cantone-svitto.title': 'Baubewilligung im Kanton Schwyz: Regeln und kantonale Ämter',
+    'blog.article.autorizzazione-edilizia-cantone-svitto.excerpt': 'Die Regeln und Ämter für Baubewilligungen im Kanton Schwyz fallen in die kantonale Zuständigkeit.',
+    'blog.article.autorizzazione-edilizia-cantone-svitto.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

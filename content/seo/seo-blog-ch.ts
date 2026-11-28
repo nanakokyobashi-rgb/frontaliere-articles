@@ -110753,6 +110753,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-autorizzazione-edilizia-cantone-svitto': {
+    title: 'Autorizzazione edilizia Cantone Svitto: regole e uffici cantonali',
+    description: 'Le regole e gli uffici per l\'autorizzazione edilizia a Svitto sono cantonali. Requisiti, termini e importi vanno verificati sulla fonte ufficiale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, autorizzazione, edilizia, cantone, svitto',
+    ogTitle: 'Autorizzazione edilizia Cantone Svitto: regole e uffici',
+    ogDescription: 'Le regole e gli uffici per l\'autorizzazione edilizia nel Cantone di Svitto sono di competenza cantonale. Requisiti, termini e importi vanno verificati sulla fonte ufficiale del cantone.',
+    canonicalPath: '/articoli-svizzera/autorizzazione-edilizia-cantone-svitto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Autorizzazione edilizia Cantone Svitto: regole e uffici cantonali",
+      "description": "Le regole e gli uffici per l'autorizzazione edilizia a Svitto sono cantonali. Requisiti, termini e importi vanno verificati sulla fonte ufficiale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-assistenza-sociale-svitto-criterio-bisogno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-28T00:21:35+00:00",
+      "dateModified": "2026-11-28T00:21:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/autorizzazione-edilizia-cantone-svitto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
