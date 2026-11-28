@@ -409,6 +409,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/run-deadline.mjs",
+      "mode": "corpus-only",
+      "reason": "Scadenze di un run di generazione (F3.A.5): la morbida (CREATE_ARTICLE_SOFT_WALL_MS) chiude l'apertura di nuovi tentativi finche' nessuna bozza IT ha superato i gate deterministici, la dura resta il tetto storico. Usato solo da create-article.mjs del corpus, che esegue i workflow di generazione; il sito non li ha.",
+      "baseline": {
+        "site": null,
+        "corpus": "e7f5c270a5083136",
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
       "path": "scripts/ci/section-source-unaffected.sh",
       "mode": "corpus-only",
       "reason": "Prima del render e delle scritture del publisher cantonale, verifica che le differenze tra due revisioni del corpus siano limitate ai file operativi, agli entrypoint dei test e agli input noti usati soltanto dalla generazione. Esclude puntualmente `.github/actionlint.yaml`, `scripts/ci/canton-generation-admit.mjs` (ammissione dei nuovi slot di generazione in section_gate) e `scripts/ci/loop-sync-manifest.json` (metadati di allineamento per CI e mirror). Per `.github/workflows/reconcile-section-pages.yml` accetta soltanto il delta approvato di scheduling, nella direzione prevista e con il contesto completo della patch. Ogni altra variazione del workflow invalida il piano di sezione. Il publisher appartiene al corpus.",

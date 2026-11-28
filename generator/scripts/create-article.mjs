@@ -726,6 +726,7 @@ import {
 // va data da un posto solo (AGENTS.md #6).
 import { SECTIONS as ARTICLE_SURFACES } from '../../scripts/lib/article-surfaces.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
+import { createRunDeadline, parseWallMs, DEFAULT_SOFT_WALL_MS } from './lib/run-deadline.mjs';
 import {
   IRPEF_ANNO_CORRENTE,
   IRPEF_ANNO_PRECEDENTE,
@@ -2341,6 +2342,12 @@ export function computeMaxGenerationAttempts(
 const RUN_REPORT = {
   startedAt: new Date().toISOString(),
   endedAt: null,
+  // F3.A.5: scadenze del run. `draftPassedGates` = una bozza IT ha superato i gate
+  // deterministici (la scadenza morbida non vale piu'); `deadlineApplied` = soft|hard|sigterm|null.
+  draftPassedGates: false,
+  deadlineApplied: null,
+  softWallMs: null,
+  hardWallMs: null,
   // Identifies the run for the defect memory, whose evidence bar counts
   // DISTINCT runs (one degraded run must not be able to confirm its own
   // hallucination six times over). 'local' outside CI.
@@ -2810,6 +2817,7 @@ function finalizeRunReport(status, extra = {}) {
 
   RUN_REPORT.status = status || 'unknown';
   RUN_REPORT.endedAt = new Date().toISOString();
+  syncDeadlineReport();
   Object.assign(RUN_REPORT, extra || {});
   RUN_REPORT.llmProviderRequestsByStage = getLlmProviderRequestsByStage();
   const generationAttempt = Number(process.env.CREATE_ARTICLE_GENERATION_ATTEMPT);
@@ -21625,6 +21633,10 @@ const RUN_WALL_BUDGET_MS = Number.isNaN(CREATE_ARTICLE_MAX_WALL_MS_PARSED)
   ? 30 * 60_000
   : CREATE_ARTICLE_MAX_WALL_MS_PARSED;
 const RUN_START_MS = Date.now();
+// F3.A.5: due scadenze. RUN_WALL_BUDGET_MS e' la DURA (invariata); la MORBIDA
+// chiude solo l'apertura di nuovi tentativi finche' nessuna bozza IT ha superato
+// i gate deterministici (vedi generator/scripts/lib/run-deadline.mjs).
+const RUN_SOFT_WALL_MS = parseWallMs(process.env.CREATE_ARTICLE_SOFT_WALL_MS, DEFAULT_SOFT_WALL_MS);
 
 /**
  * Margine fra la scadenza del tier di traduzione Codex e il budget wall-clock.
@@ -21690,6 +21702,12 @@ function installCodexTranslateProcessDeadline() {
  * mid-attempt. No new exit path, no new invariant.
  */
 let _sigtermStopRequested = false;
+const RUN_DEADLINE = createRunDeadline({
+  startMs: RUN_START_MS,
+  hardMs: RUN_WALL_BUDGET_MS,
+  softMs: RUN_SOFT_WALL_MS,
+  stopRequested: () => _sigtermStopRequested,
+});
 
 /** Quanto la fermata cooperativa puo' durare prima dell'uscita forzata (#525). */
 const COOPERATIVE_STOP_GRACE_MS = 45_000;
@@ -21757,7 +21775,31 @@ function requestCooperativeStop(signal) {
  * attempts), or once a SIGTERM has asked for a cooperative stop (#525).
  */
 function wallBudgetExceeded() {
-  return _sigtermStopRequested || (Date.now() - RUN_START_MS) > RUN_WALL_BUDGET_MS;
+  return _sigtermStopRequested || RUN_DEADLINE.hardExceeded();
+}
+
+/**
+ * F3.A.5: scadenza MORBIDA per aprire un nuovo tentativo (altro topic o altra
+ * rigenerazione) quando nessuna bozza IT ha ancora superato i gate
+ * deterministici. Un run in convergenza ricade sulla sola scadenza dura.
+ */
+function newAttemptWallExceeded() {
+  const blocked = RUN_DEADLINE.newAttemptBlocked();
+  if (blocked) syncDeadlineReport();
+  return blocked;
+}
+
+function syncDeadlineReport() {
+  const snap = RUN_DEADLINE.snapshot();
+  RUN_REPORT.draftPassedGates = snap.draftPassedGates;
+  RUN_REPORT.deadlineApplied = snap.deadlineApplied ?? (_sigtermStopRequested ? 'sigterm' : null);
+  RUN_REPORT.softWallMs = snap.softWallMs;
+  RUN_REPORT.hardWallMs = snap.hardWallMs;
+}
+
+function markRunConverging() {
+  RUN_DEADLINE.markConverging();
+  syncDeadlineReport();
 }
 
 /**
@@ -22646,8 +22688,8 @@ async function main() {
         for (let attempt = 1; attempt <= MAX_DUPLICATE_RETRIES; attempt++) {
           // Wall-clock budget guard: stop starting NEW topic attempts once the
           // global budget is spent (an already-started generation finished above).
-          if (wallBudgetExceeded()) {
-            console.error(`⏱️  Budget wall-clock (${Math.round(RUN_WALL_BUDGET_MS / 60000)}min) superato — interrompo i tentativi ${pool.name}; l'articolo è deferito al prossimo run.`);
+          if (newAttemptWallExceeded()) {
+            console.error(`⏱️  Budget wall-clock (${RUN_DEADLINE.applied}, ${Math.round((RUN_DEADLINE.applied === 'soft' ? RUN_DEADLINE.softMs : RUN_WALL_BUDGET_MS) / 60000)}min) superato — interrompo i tentativi ${pool.name}; l'articolo è deferito al prossimo run.`);
             break;
           }
           // Cross-headline minimum-viable-attempt reserve (2026-07-07, incident
@@ -23319,8 +23361,8 @@ async function main() {
         // single cron run blowing well past its intended wall-clock budget
         // (each attempt is ~60-90s plus up to 3×30s fact-check backoff)
         // instead of falling through gracefully to "prosegue senza nuovo articolo".
-        if (wallBudgetExceeded()) {
-          console.error(`⏱️  Budget wall-clock (${Math.round(RUN_WALL_BUDGET_MS / 60000)}min) superato — interrompo i tentativi evergreen; l'articolo è deferito al prossimo run.`);
+        if (newAttemptWallExceeded()) {
+          console.error(`⏱️  Budget wall-clock (${RUN_DEADLINE.applied}, ${Math.round((RUN_DEADLINE.applied === 'soft' ? RUN_DEADLINE.softMs : RUN_WALL_BUDGET_MS) / 60000)}min) superato — interrompo i tentativi evergreen; l'articolo è deferito al prossimo run.`);
           break;
         }
         // Cross-headline minimum-viable-attempt reserve: same guard as the
@@ -24338,7 +24380,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
         // tracker is persisted, the slot is released, and the next run starts
         // clean. A deferred article costs one slot; a hard kill costs the slot
         // AND repeats forever.
-        if (attempt < maxAttempts && wallBudgetExceeded()) {
+        if (attempt < maxAttempts && newAttemptWallExceeded()) {
           console.error(
             `  ⏱️  Budget wall-clock (${Math.round(RUN_WALL_BUDGET_MS / 60000)}min) superato dopo ${attempt}/${maxAttempts} `
             + `tentativi sui gate deterministici — interrompo invece di farmi uccidere dal timeout del workflow.`,
@@ -24362,6 +24404,8 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       // Gates passed — clear any earlier fact-check rejection carried from a
       // previous attempt; see the headline reset above for why.
       lastFactCheckErrors = null;
+      // F3.A.5: da qui il run e' in convergenza; vale solo la scadenza dura.
+      markRunConverging();
     }
 
     // Step 3a.0b-ter: conteggio parole IT — DETERMINISTICO, GRATIS, E PRIMA
