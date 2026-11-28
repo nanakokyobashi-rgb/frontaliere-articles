@@ -6708,6 +6708,42 @@
       "firstSeenAt": "2026-11-28T02:32:50.365Z",
       "lastValidatedAt": "2026-11-28T02:32:50.365Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "elezioni cantonali canton Svitto guida a calendario e voto",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-28T03:04:36.217Z",
+      "lastValidatedAt": "2026-11-28T03:04:36.217Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "avs e prestazioni complementari canton Svitto cassa di compensazione",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-28T03:18:49.976Z",
+      "lastValidatedAt": "2026-11-28T03:18:49.976Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "aprire un'attività canton Svitto registro di commercio e costi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-28T03:30:48.803Z",
+      "lastValidatedAt": "2026-11-28T03:30:48.803Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -7694,6 +7730,30 @@
       "firstStrikeAt": "2026-11-27T21:14:57.087Z",
       "lastStrikeAt": "2026-11-27T21:14:57.087Z",
       "expiresAt": "2026-12-27T21:14:57.087Z"
+    },
+    {
+      "keyword": "protezione civile canton Svitto requisiti e indennità",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-28T03:15:36.214Z",
+      "lastStrikeAt": "2026-11-28T03:15:36.214Z",
+      "expiresAt": "2026-12-28T03:15:36.214Z"
+    },
+    {
+      "keyword": "assicurazione immobili canton Svitto guida a obbligo e premi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-28T03:24:33.067Z",
+      "lastStrikeAt": "2026-11-28T03:24:33.067Z",
+      "expiresAt": "2026-12-28T03:24:33.067Z"
     }
   ],
   "legacy": [
