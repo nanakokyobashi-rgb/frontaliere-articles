@@ -1972,7 +1972,7 @@ jobs:
               [ "$quiet" -lt "$stall_s" ] && continue
 
               : > "$stall_flag"
-              echo "::warning::watchdog: nessun output per ${quiet}s (soglia ${stall_s}s) sulla sezione ${sec} — l'event loop e' bloccato, non e' lentezza. Prendo lo stack e uccido."
+              echo "::warning::watchdog: nessun output per ${quiet}s (soglia ${stall_s}s) sulla sezione ${sec} — event loop bloccato, non lentezza. Stack e kill."
 
               generation_capture_root_alive "$root" "$identity" "$stack_file" || return 0
               node_pids="$(create_article_pids "$root")"
@@ -2053,7 +2053,7 @@ jobs:
               outcome_kind="error"
               outcome_reason="undeclared"
               outcome_section="$sec"
-              [ -n "$undeclared_why" ] || undeclared_why="impossibile rimuovere il run report precedente per la sezione $sec: una prova stale non può attestare l'uscita corrente"
+              [ -n "$undeclared_why" ] || undeclared_why="impossibile rimuovere il run report precedente per la sezione $sec: prova stale non attestabile"
               echo "::error::impossibile rimuovere il run report precedente per la sezione $sec; rifiuto fail-closed"
               break
             fi
@@ -2068,7 +2068,7 @@ jobs:
               outcome_kind="error"
               outcome_reason="undeclared"
               outcome_section="$sec"
-              [ -n "$undeclared_why" ] || undeclared_why="impossibile rimuovere la run card precedente per la sezione $sec: una card stale non può attestare l'uscita corrente"
+              [ -n "$undeclared_why" ] || undeclared_why="impossibile rimuovere la run card precedente per la sezione $sec: card stale non attestabile"
               echo "::error::impossibile rimuovere la run card precedente per la sezione $sec; rifiuto fail-closed"
               break
             fi
@@ -2168,12 +2168,12 @@ jobs:
             fi
 
             if [ -f "$stall_flag" ]; then
-              echo "::warning::create-article.mjs muto per ${stall_s}s sulla sezione $sec — ucciso dal watchdog dello stallo, mentre il cap di durata (${cap}s) non era nemmeno vicino"
+              echo "::warning::create-article.mjs muto per ${stall_s}s sulla sezione $sec — ucciso dal watchdog dello stallo, cap di durata (${cap}s) lontano"
               outcome_kind="timeout"
               outcome_reason="stall"
               outcome_section="$sec"
               all_declared=false
-              [ -n "$undeclared_why" ] || undeclared_why="stallo: nessun output per ${stall_s}s sulla sezione $sec (kill del watchdog, exit $rc) — l'event loop e' bloccato da lavoro sincrono, ed e' un difetto DIVERSO dal kill duro per budget scaduto. Lo stack e' nell'artifact generate-article-diagnostics."
+              [ -n "$undeclared_why" ] || undeclared_why="stallo: nessun output per ${stall_s}s sulla sezione $sec (kill del watchdog, exit $rc) — event loop bloccato da lavoro sincrono, difetto DIVERSO dal kill duro per budget. Stack nell'artifact generate-article-diagnostics."
               break
             fi
             cooperative_stop=false
