@@ -486,6 +486,15 @@ export const RC_TO_ENV = {
   // ALLOW_EMPTY_RC_KEYS perche' vuoto e assente vogliono dire la stessa cosa.
   CANTON_HIGH_CADENCE_SECTIONS: ['CANTON_HIGH_CADENCE_SECTIONS'],
 
+  // Formati non-news per le sezioni cantonali (F4.2 del piano cadenza): lista
+  // delle sezioni (stessa sintassi di CANTON_HIGH_CADENCE_SECTIONS) che, senza
+  // notizie, ripiegano sul pool di argomenti da fonti ufficiali del cantone
+  // invece di uscire con CANTON_EVERGREEN_POOL_DISABLED. Assente o vuota = il
+  // comportamento di prima (default locale sicuro); letto da
+  // generator/scripts/lib/canton-nonnews.mjs. Non sta in ALLOW_EMPTY_RC_KEYS
+  // perche' vuoto e assente vogliono dire la stessa cosa.
+  CANTON_NONNEWS_SECTIONS: ['CANTON_NONNEWS_SECTIONS'],
+
   // Kill-switch delle sezioni articolo cantonali (piano «sezioni articoli per
   // cantone», D9). Il rollout lo decide il registro committato
   // sections/registry.json; questo parametro SPEGNE soltanto: le sezioni
@@ -666,6 +675,7 @@ export const EXPECTED_ABSENT_RC_KEYS = new Set([
   'ENABLE_OMNIROUTE_FALLBACK',
   'CANTON_ARTICLE_SECTIONS_KILL',
   'CANTON_HIGH_CADENCE_SECTIONS',
+  'CANTON_NONNEWS_SECTIONS',
   'ASSISTED_APPLICATION_PAYMENT_PROVIDER',
   'SUMUP_API_KEY',
   'SERVER_META_CAPI_ACCESS_TOKEN',

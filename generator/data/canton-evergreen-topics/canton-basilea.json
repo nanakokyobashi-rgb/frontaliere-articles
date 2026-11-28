@@ -1,0 +1,462 @@
+{
+  "schemaVersion": 1,
+  "officialHosts": [
+    "bs.ch"
+  ],
+  "section": "canton-basilea",
+  "sourceLanguage": "de",
+  "verifiedAt": "2026-11-28",
+  "scopeNote": "Fonti ufficiali del Canton Basilea Città (BS); baselland.ch risponde 403 e non è usato.",
+  "topics": [
+    {
+      "id": "bs-permesso-g-grenzgaenger",
+      "format": "guida",
+      "keyword": "Permesso per frontalieri a Basilea Città: come ottenere la Grenzgängerbewilligung",
+      "angle": "Guida pratica per chi abita all'estero e lavora nel Canton Basilea Città: cos'è il permesso per frontalieri, chi può chiederlo e cosa implica il rientro al domicilio.",
+      "source": {
+        "url": "https://www.bs.ch/themen/arbeit-und-steuern/arbeitsbewilligungen/arbeitsbewilligung-fuer-grenzgaenger",
+        "publisher": "Kanton Basel-Stadt",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Chi vive all'estero e vuole lavorare a Basilea Città ha bisogno di un permesso per frontalieri.",
+          "evidence": "benötigen Sie eine Grenzgängerbewilligung"
+        },
+        {
+          "claim": "I frontalieri UE/AELE tornano di regola ogni giorno, o almeno una volta alla settimana, al domicilio estero.",
+          "evidence": "kehren in der Regel täglich oder mindestens einmal pro Woche an ihren ausländischen Wohnsitz zurück"
+        },
+        {
+          "claim": "Possono abitare ovunque nell'UE/AELE e lavorare ovunque in Svizzera.",
+          "evidence": "Sie können überall in der EU/EFTA wohnen und überall in der Schweiz arbeiten"
+        }
+      ]
+    },
+    {
+      "id": "bs-patente-frontalieri",
+      "format": "guida",
+      "keyword": "Patente di guida per frontalieri a Basilea Città: dal 2024 niente più conversione UE/AELE",
+      "angle": "Cosa è cambiato dal 1 marzo 2024 per i frontalieri con patente UE/AELE che guidano veicoli professionali immatricolati in Svizzera e quando serve ancora la patente svizzera.",
+      "source": {
+        "url": "https://www.bs.ch/themen/mobilitaet/fuehrerausweise/fuehrerausweis-fuer-grenzgaengerinnen",
+        "publisher": "Kanton Basel-Stadt",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Dal 1 marzo 2024 la conversione delle patenti UE/AELE per i frontalieri non è più necessaria.",
+          "evidence": "Seit 1. März 2024 ist ein Umtausch von EU-/EFTA-Führerausweisen für Grenzgänger nicht mehr notwendig"
+        },
+        {
+          "claim": "Il Cantone non offre più la conversione delle patenti UE/AELE per frontalieri.",
+          "evidence": "Wir bieten den Umtausch der EU-/EFTA-Führerausweise für Grenzgänger nicht mehr an"
+        },
+        {
+          "claim": "Per i frontalieri di Stati non UE/AELE che guidano camion o autobus serve la patente svizzera prima della prima corsa professionale.",
+          "evidence": "Kategorien C, C1 (Lastwagen), D, D1 (Gesellschaftswagen)"
+        }
+      ]
+    },
+    {
+      "id": "bs-imposta-alla-fonte",
+      "format": "guida",
+      "keyword": "Imposta alla fonte a Basilea Città: chi la paga e cosa dicono i fogli informativi 2026",
+      "angle": "Come funziona la ritenuta alla fonte secondo l'amministrazione fiscale di Basilea Città, chi ne è escluso e dove trovare tariffe e indicazioni per i frontalieri francesi.",
+      "source": {
+        "url": "https://www.bs.ch/themen/arbeit-und-steuern/quellensteuer/informationen-zur-quellensteuer",
+        "publisher": "Kanton Basel-Stadt",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "L'imposta alla fonte viene trattenuta direttamente dallo stipendio.",
+          "evidence": "Die Quellensteuer wird direkt vom Lohn abgezogen"
+        },
+        {
+          "claim": "Sono esclusi i titolari di permesso di domicilio C.",
+          "evidence": "Davon ausgenommen sind Personen mit einer Niederlassungsbewilligung (Ausweis C)"
+        },
+        {
+          "claim": "Esiste un foglio informativo dedicato alla procedura per i frontalieri francesi.",
+          "evidence": "Merkblatt zum Vorgehen betreffend französische Grenzgänger"
+        }
+      ]
+    },
+    {
+      "id": "bs-notifica-90-giorni",
+      "format": "guida",
+      "keyword": "Lavorare a Basilea Città fino a 90 giorni: la procedura di notifica online per UE/AELE",
+      "angle": "Quando basta la notifica invece del permesso di lavoro, chi deve farla, con quali anticipi e con quale registrazione.",
+      "source": {
+        "url": "https://www.bs.ch/themen/arbeit-und-steuern/arbeitsbewilligungen/meldeverfahren-fuer-kurzfristige-erwerbstaetigkeit",
+        "publisher": "Kanton Basel-Stadt",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Fino a 90 giorni lavorativi effettivi all'anno civile non serve un permesso, solo la notifica.",
+          "evidence": "für bis zu 90 effektiven Arbeitstagen pro Kalenderjahr keine Arbeitsbewilligung"
+        },
+        {
+          "claim": "Gli incarichi di imprese con sede UE/AELE vanno notificati almeno 8 giorni prima dell'inizio.",
+          "evidence": "mindestens 8 Tage vor dem Arbeitsbeginn"
+        },
+        {
+          "claim": "La notifica richiede una registrazione una tantum su EasyGov.",
+          "evidence": "Dafür ist eine einmalige Registrierung bei EasyGov nötig"
+        }
+      ]
+    },
+    {
+      "id": "bs-dichiarazione-redditi-baltax",
+      "format": "guida",
+      "keyword": "Dichiarazione dei redditi a Basilea Città: BalTax Online e scadenze",
+      "angle": "Come si compila la dichiarazione per persone fisiche a Basilea Città con BalTax Online, da che età si è soggetti a imposta e cosa è cambiato dal 2020.",
+      "source": {
+        "url": "https://www.bs.ch/themen/arbeit-und-steuern/steuererklaerung/steuererklaerung-als-natuerliche-person-einreichen",
+        "publisher": "Kanton Basel-Stadt",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "La dichiarazione si può compilare online dall'anno fiscale 2020.",
+          "evidence": "Die Steuererklärung kann seit dem Steuerjahr 2020 online ausgefüllt werden"
+        },
+        {
+          "claim": "BalTax Online 2025 è disponibile nel portale fiscale dal 2 febbraio 2026.",
+          "evidence": "BalTax Online 2025 ist seit 2. Februar 2026 im Steuerportal verfügbar"
+        },
+        {
+          "claim": "Le persone fisiche dai 18 anni sono soggette a imposta.",
+          "evidence": "Privatpersonen ab dem Alter von 18 Jahren sind steuerpflichtig"
+        }
+      ]
+    },
+    {
+      "id": "bs-giorni-festivi",
+      "format": "guida",
+      "keyword": "Giorni festivi a Basilea Città 2026 e 2027: le date ufficiali",
+      "angle": "Il calendario dei nove festivi legali del Canton Basilea Città per il 2026 e il 2027, utile a chi lavora o fa il frontaliere in città.",
+      "source": {
+        "url": "https://www.bs.ch/themen/arbeit-und-steuern/feiertage-im-kanton-basel-stadt",
+        "publisher": "Kanton Basel-Stadt",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Il Cantone riconosce nove giorni festivi legali.",
+          "evidence": "neun gesetzliche Feiertage"
+        },
+        {
+          "claim": "Nel 2026 il Venerdì Santo cade il 3 aprile.",
+          "evidence": "03.04.2026 (Freitag) Karfreitag"
+        },
+        {
+          "claim": "Nel 2026 l'Ascensione cade il 14 maggio.",
+          "evidence": "14.05.2026 (Donnerstag) Auffahrt"
+        }
+      ]
+    },
+    {
+      "id": "bs-vacanze-scolastiche",
+      "format": "guida",
+      "keyword": "Vacanze scolastiche a Basilea Città: 14 settimane l'anno e giorni di Jolly",
+      "angle": "Il calendario delle vacanze scolastiche di Basilea Città e le offerte di accoglienza dei bambini durante le ferie, per famiglie residenti e frontaliere.",
+      "source": {
+        "url": "https://www.bs.ch/themen/bildung-und-kinderbetreuung/schulferien",
+        "publisher": "Kanton Basel-Stadt",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Gli alunni hanno 14 settimane di vacanze scolastiche all'anno.",
+          "evidence": "14 Wochen Schulferien pro Jahr"
+        },
+        {
+          "claim": "Il venerdì dopo l'Ascensione è giorno senza scuola.",
+          "evidence": "Freitag nach Auffahrt"
+        },
+        {
+          "claim": "Le prossime assemblee della conferenza scolastica cantonale sono il 10 marzo 2027, il 16 febbraio 2028 e il 21 marzo 2029.",
+          "evidence": "10. März 2027, 16. Februar 2028 und 21. März 2029"
+        }
+      ]
+    },
+    {
+      "id": "bs-rifiuti-bebbisagg",
+      "format": "guida",
+      "keyword": "Rifiuti a Basilea: il sacco blu BebbiSagg e il calendario di raccolta",
+      "angle": "Come si smaltiscono i rifiuti domestici a Basilea Città, quale sacco ufficiale usare e come funziona l'app Dräggwägg.",
+      "source": {
+        "url": "https://www.bs.ch/themen/umwelt-und-bauen/abfall-und-sauberkeit/abfallabfuhr",
+        "publisher": "Kanton Basel-Stadt",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Il sacco ufficiale a pagamento di Basilea si chiama BebbiSagg.",
+          "evidence": "BebbiSagg"
+        },
+        {
+          "claim": "Esiste in quattro formati da 10, 17, 35 e 60 litri.",
+          "evidence": "vier verschiedenen Grössen von 10, 17, 35 und 60 Liter"
+        },
+        {
+          "claim": "L'app Dräggwägg dà accesso a tutte le informazioni sulla raccolta.",
+          "evidence": "Dräggwägg-App"
+        }
+      ]
+    },
+    {
+      "id": "bs-assicurazione-malattia",
+      "format": "guida",
+      "keyword": "Assicurazione malattia a Basilea Città: obbligo, frontalieri e riduzione dei premi",
+      "angle": "Come funziona l'assicurazione di base secondo il Cantone di Basilea Città e a chi spetta la riduzione dei premi.",
+      "source": {
+        "url": "https://www.bs.ch/themen/gesundheit/das-system-der-krankenversicherung-der-schweiz",
+        "publisher": "Kanton Basel-Stadt",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "L'assicurazione di base è obbligatoria per chi abita in Svizzera.",
+          "evidence": "Die Grundversicherung ist obligatorisch"
+        },
+        {
+          "claim": "A Basilea Città chi ha un reddito basso può chiedere la riduzione dei premi.",
+          "evidence": "können im Kanton Basel-Stadt Prämienverbilligungen beantragen"
+        },
+        {
+          "claim": "In certe circostanze l'obbligo vale anche per chi lavora in Svizzera ma vive all'estero.",
+          "evidence": "(Grenzgängerinnen und Grenzgänger)"
+        }
+      ]
+    },
+    {
+      "id": "bs-asilo-nido-kita",
+      "format": "guida",
+      "keyword": "Asilo nido a Basilea Città: come funzionano le Kita e i contributi di accoglienza",
+      "angle": "Come cercare un posto in una Kita di Basilea Città, chi la gestisce e come funzionano i contributi per le spese di custodia.",
+      "source": {
+        "url": "https://www.bs.ch/themen/bildung-und-kinderbetreuung/kinderbetreuung/kita",
+        "publisher": "Kanton Basel-Stadt",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Le Kita accolgono i bambini dai tre mesi all'età prescolare.",
+          "evidence": "ab dem Alter von drei Monaten"
+        },
+        {
+          "claim": "Tutte le Kita sono gestite da privati e vigilate dal servizio cantonale per la custodia diurna.",
+          "evidence": "Alle Kitas werden von privaten Anbietenden geführt"
+        },
+        {
+          "claim": "Conviene cercare un posto sei-otto mesi prima dell'ingresso desiderato.",
+          "evidence": "sechs bis acht Monate vor dem gewünschten Eintritt"
+        }
+      ]
+    },
+    {
+      "id": "bs-strutture-diurne-scuola",
+      "format": "guida",
+      "keyword": "Doposcuola a Basilea Città: le Tagesstrukturen per scuola dell'infanzia, elementari e medie",
+      "angle": "Orari, costi e iscrizione alle strutture diurne scolastiche di Basilea Città e differenza tra scuola dell'infanzia, elementari e secondarie.",
+      "source": {
+        "url": "https://www.bs.ch/themen/bildung-und-kinderbetreuung/kinderbetreuung/tagesstrukturen",
+        "publisher": "Kanton Basel-Stadt",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Nell'infanzia e alle elementari le strutture diurne sono aperte dal lunedì al venerdì dalle 12 alle 18.",
+          "evidence": "von Montag bis Freitag von 12 bis 18 Uhr geöffnet"
+        },
+        {
+          "claim": "Nella scuola secondaria le strutture diurne sono gratuite.",
+          "evidence": "In der Sekundarschule sind die Tagesstrukturen kostenlos"
+        },
+        {
+          "claim": "Ogni scuola offre una propria accoglienza interna.",
+          "evidence": "schuleigene Tagesstrukturen"
+        }
+      ]
+    },
+    {
+      "id": "bs-dimora-settimanale",
+      "format": "guida",
+      "keyword": "Dimora settimanale a Basilea Città: quando si può avere un domicilio temporaneo per lavoro",
+      "angle": "Cosa significa Wochenaufenthalt secondo le regole di Basilea Città e a chi è pensato, per chi lavora in città e rientra nel fine settimana.",
+      "source": {
+        "url": "https://www.bs.ch/themen/persoenliches-und-wohnen/zuzug-und-aufenthalt/wochenaufenthalt-im-kanton-basel-stadt",
+        "publisher": "Kanton Basel-Stadt",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Il domicilio principale resta fuori dal Cantone.",
+          "evidence": "Sie haben Ihren Hauptwohnsitz und somit Ihre Niederlassung ausserhalb des Kantons"
+        },
+        {
+          "claim": "Si prende un domicilio secondario temporaneo a Basilea Città.",
+          "evidence": "temporären Nebenwohnsitz im Kanton Basel-Stadt"
+        },
+        {
+          "claim": "La dimora settimanale è in linea di principio solo una soluzione temporanea.",
+          "evidence": "nur eine vorübergehende Lösung"
+        }
+      ]
+    },
+    {
+      "id": "bs-permesso-c",
+      "format": "guida",
+      "keyword": "Permesso di domicilio C a Basilea Città: rinnovo e uffici",
+      "angle": "Come si rinnova il permesso C a Basilea Città, quando arriva l'avviso di scadenza e dove si trovano gli sportelli provvisori.",
+      "source": {
+        "url": "https://www.bs.ch/themen/persoenliches-und-wohnen/zuzug-und-aufenthalt/niederlassungsbewilligung-c-bewilligung",
+        "publisher": "Kanton Basel-Stadt",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Il permesso C viene rinnovato di cinque anni se i requisiti sono ancora soddisfatti.",
+          "evidence": "wird um fünf Jahre verlängert"
+        },
+        {
+          "claim": "Sei-otto settimane prima della scadenza arriva automaticamente un avviso.",
+          "evidence": "Sechs bis acht Wochen vor Bewilligungsablauf"
+        },
+        {
+          "claim": "Gli sportelli sono dell'Ufficio abitanti, passaporti e migrazione di Basilea Città.",
+          "evidence": "Einwohner-, Pass- und Migrationsamts Basel-Stadt"
+        }
+      ]
+    },
+    {
+      "id": "bs-licei",
+      "format": "guida",
+      "keyword": "Licei a Basilea Città: cinque ginnasi statali e il nuovo piano di studi 2027-28",
+      "angle": "Come funziona il percorso liceale a Basilea Città, quanti ginnasi esistono e cosa cambia con il piano di studi dal 2027-28.",
+      "source": {
+        "url": "https://www.bs.ch/themen/bildung-und-kinderbetreuung/schule/weiterfuehrende-schulen/gymnasium",
+        "publisher": "Kanton Basel-Stadt",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "A Basilea ci sono cinque ginnasi statali.",
+          "evidence": "In Basel gibt es fünf staatliche Gymnasien"
+        },
+        {
+          "claim": "Hanno tutti lo stesso piano di studi.",
+          "evidence": "Sie haben alle denselben Lehrplan"
+        },
+        {
+          "claim": "Esiste un piano di studi cantonale in vigore dall'anno scolastico 2027-28.",
+          "evidence": "Kantonaler Lehrplan ab SJ 2027-28"
+        }
+      ]
+    },
+    {
+      "id": "bs-dati-popolazione-2025",
+      "format": "dati",
+      "keyword": "Quanti abitanti ha il Canton Basilea Città: i dati dell'ufficio di statistica a fine 2025",
+      "angle": "Lettura dei dati ufficiali di Statistik Basel-Stadt sulla popolazione a fine 2025, con la crescita degli ultimi 20 anni e le previsioni.",
+      "source": {
+        "url": "https://www.statistik.bs.ch/thema/bev%C3%B6lkerung",
+        "publisher": "Statistisches Amt Basel-Stadt",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "A fine 2025 vivono nel Cantone circa 210'500 persone.",
+          "evidence": "gut 210'500 Einwohnerinnen und Einwohner"
+        },
+        {
+          "claim": "È il valore più alto dalla fine degli anni Settanta.",
+          "evidence": "höchste Wert seit Ende der 1970er-Jahre"
+        },
+        {
+          "claim": "Secondo le previsioni la popolazione continuerà a crescere.",
+          "evidence": "gemäss Prognose auch in Zukunft tun"
+        }
+      ]
+    },
+    {
+      "id": "bs-dati-lavoro-pendolari",
+      "format": "dati",
+      "keyword": "Quanti frontalieri lavorano a Basilea Città: occupazione e pendolari da Francia e Germania",
+      "angle": "I numeri ufficiali sul mercato del lavoro del Canton Basilea Città: occupati, quota di pendolari esteri e peso della sanità.",
+      "source": {
+        "url": "https://www.statistik.bs.ch/thema/wirtschaftundarbeit",
+        "publisher": "Statistisches Amt Basel-Stadt",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Nel 2024 lavorano nel Cantone circa 202'000 persone.",
+          "evidence": "arbeiten rund 202'000 Personen im Stadtkanton"
+        },
+        {
+          "claim": "Quasi il 20 per cento pendola dalla Francia o dalla Germania.",
+          "evidence": "knapp 20 Prozent pendeln aus Frankreich oder Deutschland"
+        },
+        {
+          "claim": "Circa un posto su sei è nella sanità.",
+          "evidence": "Rund jede sechste Stelle entfällt auf das Gesundheitswesen"
+        }
+      ]
+    },
+    {
+      "id": "bs-dati-abitazioni",
+      "format": "dati",
+      "keyword": "Case e affitti a Basilea Città: quante abitazioni ci sono e quanti vivono in proprietà",
+      "angle": "I dati ufficiali sul parco abitativo di Basilea Città: numero di alloggi, superficie media e quota di proprietà, la più bassa della Svizzera.",
+      "source": {
+        "url": "https://www.statistik.bs.ch/thema/bauenundwohnen",
+        "publisher": "Statistisches Amt Basel-Stadt",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Nel Cantone ci sono oltre 116'000 abitazioni.",
+          "evidence": "gut 116'000 Wohnungen"
+        },
+        {
+          "claim": "Un'abitazione misura in media circa 80 metri quadrati.",
+          "evidence": "rund 80 Quadratmeter"
+        },
+        {
+          "claim": "La quota di chi vive in proprietà è la più bassa nel confronto svizzero.",
+          "evidence": "niedrigste Wert"
+        }
+      ]
+    },
+    {
+      "id": "bs-dati-mobilita",
+      "format": "dati",
+      "keyword": "Come si muovono gli abitanti di Basilea Città: chilometri al giorno, auto e veicoli elettrici",
+      "angle": "I dati ufficiali su mobilità, auto elettriche ed energia a Basilea Città, letti in chiave pratica per chi si sposta ogni giorno.",
+      "source": {
+        "url": "https://www.statistik.bs.ch/thema/umweltundverkehr",
+        "publisher": "Statistisches Amt Basel-Stadt",
+        "language": "de"
+      },
+      "facts": [
+        {
+          "claim": "Ogni persona percorre in media quasi 20 chilometri al giorno nel Cantone.",
+          "evidence": "Knapp 20 Kilometer legt jede Person pro Tag im Schnitt im Kanton zurück"
+        },
+        {
+          "claim": "Quasi la metà dei chilometri è in auto.",
+          "evidence": "Fast die Hälfte davon mit dem Auto"
+        },
+        {
+          "claim": "Nel 2024 la quota di auto elettriche è di circa il 4 per cento.",
+          "evidence": "Der Anteil Elektroautos liegt 2024 bei rund 4 Prozent"
+        }
+      ]
+    }
+  ]
+}

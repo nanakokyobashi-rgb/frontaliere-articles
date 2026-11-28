@@ -836,9 +836,15 @@ export function buildCantonProfile(section, deps) {
     // (vocabolario e candidate sperimentali sono frontalieri/nazionali: il tier
     // sperimentale proporrebbe una keyword evergreen frontaliera), niente pool
     // evergreen generico: gli evergreen cantonali sono gli hub di P10.
+    //
+    // Unica eccezione (F4.2): una sezione elencata in `CANTON_NONNEWS_SECTIONS`
+    // (`deps.cantonNonNews`, calcolato da create-article con
+    // lib/canton-nonnews.mjs) ha il pool NON-NEWS del cantone, fatto di pagine
+    // ufficiali verificate, al posto dell'exit CANTON_EVERGREEN_POOL_DISABLED.
+    // Lista vuota = `null` = comportamento di prima.
     discoveryPool: false,
     demandRanker: false,
-    evergreenPool: null,
+    evergreenPool: deps?.cantonNonNews === true ? 'canton-nonnews' : null,
     hasTopical: (text) => countTopical(text) > 0,
     countTopical,
     hasAdmission: (text) => countAdmission(text) > 0 || localAdmits(text),
