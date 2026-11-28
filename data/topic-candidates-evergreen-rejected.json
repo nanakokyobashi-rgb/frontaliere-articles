@@ -16257,10 +16257,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenoi.it/2026/11/26/leggi-notizia/articolo/centrosinistra-scontro-su-tassa-super-ricchi-scintille-tra-conte-e-i-leader-avs.html": {
-      "section": "frontaliere",
-      "ts": 1795676737556
-    },
     "svizzera::https://www.filodiritto.com/firmato-il-nuovo-pacchetto-di-accordi-destinato-rilanciare-e-stabilizzare-le-relazioni-bilaterali": {
       "section": "svizzera",
       "ts": 1795697362416
@@ -16300,6 +16296,10 @@
     "frontaliere::https://www.cdt.ch/news/frontalieri-altra-stangata-fiscale-in-arrivo-stavolta-tocca-a-chi-e-sposato-340156": {
       "section": "frontaliere",
       "ts": 1795845194966
+    },
+    "frontaliere::https://www.tvsvizzera.it/tvs/relazioni-italo-svizzere/f/89646477": {
+      "section": "frontaliere",
+      "ts": 1795858363195
     }
   }
 }
