@@ -12,6 +12,7 @@
  * un termine di lavoro, oppure la professione). Se l'articolo non ha una
  * frase del genere non si aggiunge nessun link.
  */
+import '../../../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
