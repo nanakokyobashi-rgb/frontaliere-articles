@@ -267,14 +267,17 @@ export function countSectionArticles(subjects, section) {
  *
  * @param {Array<{ id: number, path: string, created_at: string, status?: string }>} runs run in volo del repo
  * @param {number|string} selfId
+ * @param {number|string} [parentId] run padre dell'anello di catena (escluso), 0 = nessuno
  * @returns {{ older: number, total: number, selfSeen: boolean }}
  */
-export function olderCantonRuns(runs, selfId) {
+export function olderCantonRuns(runs, selfId, parentId = 0) {
   const me = Number(selfId);
+  const dad = Number(parentId) > 0 ? Number(parentId) : 0;
   const canton = (runs || []).filter((r) => r && typeof r.path === 'string'
     && workflowPathWithoutRef(r.path) !== CORE_WORKFLOW_PATH && CANTON_WORKFLOW_PATH_RE.test(r.path));
   const self = canton.find((r) => Number(r.id) === me);
-  const others = canton.filter((r) => Number(r.id) !== me);
+  // Il run padre di un anello della catena e' ancora in volo mentre dispaccia il link: non e' una rivale.
+  const others = canton.filter((r) => Number(r.id) !== me && (dad === 0 || Number(r.id) !== dad));
   if (!self) {
     // Questa run non e' nell'elenco (lo stato non e' ancora visibile): non
     // c'e' un istante con cui confrontare, quindi ogni altra run conta. E' il
@@ -300,6 +303,7 @@ export function olderCantonRuns(runs, selfId) {
  *   readInFlightRuns: () => Array<{ id: number, path: string, created_at: string, status?: string }> | null,
  *   readQuotaBeacon: () => { active: boolean, resetsAt?: number | null },
  *   selfId?: number | string,
+ *   parentId?: number | string,
  *   slotHour?: number | null,
  * }} input `slotHour` e' l'ora UTC dello slot del calendario (null = la run non e' uno slot)
  * @returns {{ proceed: boolean, reason: string, detail: string, unknown?: string[], consumeSlot?: boolean }}
@@ -315,6 +319,7 @@ export function decideCantonAdmission({
   readInFlightRuns,
   readQuotaBeacon,
   selfId = 0,
+  parentId = 0,
   slotHour = null,
 }) {
   if (!isCantonSection(section)) {
@@ -398,7 +403,7 @@ export function decideCantonAdmission({
       detail: 'run in volo non leggibili: il tetto globale non e\' verificabile, si salta lo slot',
     };
   }
-  const { older, total, selfSeen } = olderCantonRuns(runs, selfId);
+  const { older, total, selfSeen } = olderCantonRuns(runs, selfId, parentId);
   if (older >= cap) {
     return {
       proceed: false,
@@ -543,6 +548,7 @@ if (isMain()) {
       eventName: process.env.EVENT_NAME || '',
       dispatchOrigin: process.env.DISPATCH_ORIGIN || 'manual',
       selfId: process.env.SELF_ID || 0,
+      parentId: process.env.PARENT_RUN_ID || 0,
       slotHour: cadenceSlotHour(process.env),
       readArticleSubjects: () => (repo ? readArticleSubjectsFromGitHub(repo, ref) : null),
       readInFlightRuns: () => (repo ? readInFlightRunsFromGitHub(repo) : null),

@@ -722,6 +722,45 @@ test('Chain cantonale: il tetto orario di 3 run per sezione e il budget fermano 
   assert.match(CORE, /generate:\n {4}needs: \[admit, section_gate\]\n {4}if: needs\.admit\.outputs\.proceed == 'true' && needs\.section_gate\.outputs\.proceed == 'true'/);
 });
 
+test('Chain cantonale: il tetto orario conta solo le run che hanno tentato una generazione (slot A, run-push saltata, anelli B e C)', () => {
+  const T = (m) => `2026-01-01T00:${String(m).padStart(2, '0')}:00Z`;
+  const wr = (id, minute, status, conclusion) => ({ id, created_at: T(minute), status, conclusion, head_branch: 'main' });
+  // Lo slot A ha prodotto l'articolo (completed/success); il suo push ha avviato una run il cui job `generate` e' saltato.
+  const slotA = wr(1001, 1, 'completed', 'success');
+  const pushSkipped = wr(1002, 6, 'completed', 'skipped');
+  const linkB = wr(1003, 7, 'completed', 'success');
+  const pushSkippedB = wr(1004, 12, 'completed', 'skipped');
+  const link = (selfId, runs, cap = '') => runAdmit(CORE, {
+    caller: 'generate-article-ti.yml',
+    changed: [],
+    runs,
+    selfCreated: runs.find((r) => r.id === selfId).created_at,
+    env: {
+      EVENT_NAME: 'workflow_dispatch', DISPATCH_ORIGIN: 'chain', SECTION_REQUESTED: 'canton-ti', SELF_ID: String(selfId),
+      CHAIN_DEPTH: '1', PARENT_RUN_ID: '1001', CHAIN_MAX_RUNS_PER_HOUR: cap,
+    },
+  });
+  // Anello B: A + run-push saltata + B stessa. Contate in modo grezzo sarebbero 3 = cap, e la catena si fermerebbe qui.
+  const b = link(1003, [slotA, pushSkipped, { ...linkB, status: 'in_progress', conclusion: null }]);
+  assert.doesNotMatch(b.stdout, /chain-hour-cap/, b.stdout);
+  assert.match(b.stdout, /Tetto orario: 1 run nell'ultima ora su un cap di 3/);
+  // Anello C: A, B (concluse) + due run-push saltate + C stessa: conta 2 (A e B), sotto il cap.
+  const linkC = wr(1005, 13, 'in_progress', null);
+  const c = link(1005, [slotA, pushSkipped, linkB, pushSkippedB, linkC]);
+  assert.doesNotMatch(c.stdout, /chain-hour-cap/, c.stdout);
+  assert.match(c.stdout, /Tetto orario: 2 run nell'ultima ora su un cap di 3/);
+  // Anello D: A, B, C sono tre tentativi veri: il tetto scatta davvero.
+  const linkCDone = { ...linkC, status: 'completed', conclusion: 'success' };
+  const linkD = wr(1007, 19, 'in_progress', null);
+  const d = link(1007, [slotA, pushSkipped, linkB, pushSkippedB, linkCDone, wr(1006, 18, 'completed', 'skipped'), linkD]);
+  assert.equal(d.outputs.proceed, 'false');
+  assert.match(d.stdout, /chain-hour-cap/);
+  assert.match(d.stdout, /3 run create nell'ultima ora \(cap 3\)/);
+  // Il cap resta configurabile e una run in volo conta come tentativo.
+  const e = link(1007, [slotA, linkB, linkD], '2');
+  assert.match(e.stdout, /chain-hour-cap/);
+});
+
 test('caller: il contratto dispatch_origin del sito (solo manual e cloud_scheduler) non cambia', () => {
   for (const { file } of CALLERS) {
     const text = readWorkflow(file);

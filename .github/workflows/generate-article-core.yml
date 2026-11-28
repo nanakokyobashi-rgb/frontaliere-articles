@@ -2,6 +2,9 @@
 # Sorgente: .github/workflows/generate-article.yml (job admit e generate, senza i commenti)
 #   + le sostituzioni dichiarate in CORE_REPLACEMENTS del generatore.
 # Le ragioni di ogni step stanno nella sorgente: si leggono e si modificano li'.
+# Variabili del repo: vars.CANTON_CHAIN_MAX_RUNS_PER_HOUR e' il tetto orario della catena
+# cantonale per sezione (default 3 run/ora; la variabile nazionale CHAIN_MAX_RUNS_PER_HOUR del sito ha default 20).
+# Il tetto conta le run che hanno tentato una generazione: non le skipped, non la run corrente.
 # Rigenera: node scripts/ci/generate-canton-article-workflows.mjs
 # Verifica: node scripts/ci/generate-canton-article-workflows.mjs --check
 name: Generate Blog Article (core)
@@ -432,7 +435,7 @@ jobs:
               ''|*[!0-9]*) cap=3 ;;
             esac
             last_hour=$(printf '%s' "$runs" \
-              | jq -er 'length' \
+              | jq -er --argjson me "$SELF_ID" '[.[] | select(.id != $me) | select(.conclusion != "skipped")] | length' \
               2>/dev/null) || fail_closed_admission
             case "${last_hour:-}" in
               ''|*[!0-9]*) last_hour=0 ;;
@@ -619,6 +622,7 @@ jobs:
           CANTON_GENERATION_MAX_PARALLEL: ${{ vars.CANTON_GENERATION_MAX_PARALLEL }}
           CANTON_DAILY_BUDGET_CAP: ${{ vars.CANTON_DAILY_BUDGET_CAP }}
           RECOVERY_SLOT: ${{ inputs.recovery_slot }}
+          PARENT_RUN_ID: ${{ inputs.parent_run_id }}
           QUOTA_BEACON_PEER_REPO: valerielinc-ops/frontaliere-si-o-no
           CANTON_GATE_RECEIPT_PATH: ${{ runner.temp }}/canton-section-gate.json
         run: node scripts/ci/canton-generation-admit.mjs

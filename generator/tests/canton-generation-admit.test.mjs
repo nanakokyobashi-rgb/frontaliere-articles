@@ -439,6 +439,24 @@ test('il gate e il core condividono stati, conclusioni e dimensione pagina', () 
   assert.equal(Number(pageSize[1]), RUNS_PER_PAGE);
 });
 
+test('tetto globale: il run padre di un anello, ancora in volo mentre dispaccia, non e\' una rivale', () => {
+  const dad = run(90, 'generate-article-ti.yml', '2026-10-05T10:00:00Z');
+  const other = run(91, 'generate-article-gr.yml', '2026-10-05T10:00:05Z');
+  const me = run(100, 'generate-article-ti.yml', '2026-10-05T10:01:00Z');
+  assert.deepEqual(olderCantonRuns([dad, other, me], 100), { older: 2, total: 2, selfSeen: true });
+  assert.deepEqual(olderCantonRuns([dad, other, me], 100, 90), { older: 1, total: 1, selfSeen: true });
+  assert.deepEqual(olderCantonRuns([dad, other], 100, 90), { older: 1, total: 1, selfSeen: false });
+  assert.deepEqual(olderCantonRuns([dad, other, me], 100, 0), { older: 2, total: 2, selfSeen: true });
+  assert.deepEqual(olderCantonRuns([dad, other, me], 100, 'x'), { older: 2, total: 2, selfSeen: true });
+  // Con il tetto a 1 l'anello passa solo se il padre e' escluso.
+  const base = {
+    section: SECTION, env: envAll({ CANTON_GENERATION_MAX_PARALLEL: '1' }), eventName: 'workflow_dispatch', dispatchOrigin: 'chain',
+    activeSections: allActive, selfId: 100, readArticleSubjects: () => [], readInFlightRuns: () => [dad, me], readQuotaBeacon: () => ({ active: false }),
+  };
+  assert.equal(decideCantonAdmission(base).reason, 'parallel-cap');
+  assert.equal(decideCantonAdmission({ ...base, parentId: 90 }).proceed, true);
+});
+
 test('tetto globale: due arrivi simultanei non si fermano a vicenda', () => {
   const a = run(100, 'generate-article-ti.yml', '2026-10-05T10:00:10Z');
   const b = run(101, 'generate-article-gr.yml', '2026-10-05T10:00:10Z');
@@ -873,9 +891,30 @@ test('CLI: admit-cadence esce 0, scrive consume_slot=true e il marcatore, senza 
 
 test('section_gate: lo slot fuori cadenza viene consumato nel registro senza aprire il job generate', () => {
   const gate = jobBlock('section_gate');
-  assert.match(gate, /RECOVERY_SLOT: \$\{\{ inputs\.recovery_slot \}\}\n {10}QUOTA_BEACON_PEER_REPO/, 'admit legge l\'ora dello slot');
+  assert.match(gate, /RECOVERY_SLOT: \$\{\{ inputs\.recovery_slot \}\}\n {10}PARENT_RUN_ID: \$\{\{ inputs\.parent_run_id \}\}\n {10}QUOTA_BEACON_PEER_REPO/, 'admit legge l\'ora dello slot');
   assert.match(gate, /id: claim\n {8}if: inputs\.dispatch_origin == 'cloud_scheduler' && \(steps\.canton\.outputs\.proceed == 'true' \|\| steps\.canton\.outputs\.consume_slot == 'true'\)/);
   assert.match(gate, /CONSUME_SLOT: \$\{\{ steps\.canton\.outputs\.consume_slot \}\}/);
   // Dopo la conferma, uno slot consumato esce proceed=false: il job generate non parte.
   assert.match(gate, /if \[ "\$CONSUME_SLOT" = 'true' \]; then\n[^\n]*\n {14}echo 'proceed=false' >> "\$GITHUB_OUTPUT"\n {12}else\n[^\n]*\n {14}echo 'proceed=true' >> "\$GITHUB_OUTPUT"/);
+});
+
+test('canton-generation-slots.json: baseSlotHours di ogni entry coincide con quello che admit-cadence ammette, ora per ora', () => {
+  const slots = JSON.parse(readFileSync(new URL('../data/canton-generation-slots.json', import.meta.url), 'utf8'));
+  assert.deepEqual(slots.entries.map((e) => e.section).sort(), PROFILES.cantons.map((c) => c.section).sort());
+  for (const entry of slots.entries) {
+    assert.deepEqual(entry.baseSlotHours, LEGACY_SLOT_HOURS[entry.section], `${entry.section}: ore di base come il calendario di prima`);
+    for (let hour = 0; hour < 24; hour += 1) {
+      const v = decideCantonAdmission({
+        section: entry.section,
+        env: envAll(),
+        eventName: 'workflow_dispatch',
+        dispatchOrigin: 'cloud_scheduler',
+        activeSections: allActive,
+        selfId: 100,
+        slotHour: hour,
+        ...readers(),
+      });
+      assert.equal(v.reason !== 'admit-cadence', entry.baseSlotHours.includes(hour), `${entry.section} ${hour}:xx`);
+    }
+  }
 });

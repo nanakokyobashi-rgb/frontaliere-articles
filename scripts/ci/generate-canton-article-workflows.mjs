@@ -57,7 +57,10 @@
  *     le sole sezioni in lista un articolo prodotto e un esito dichiarato
  *     (exit 4) dispacciano il successore del chiamante; un esito non
  *     dichiarato spende l'unico soccorso, exit 5 cede allo slot. Tetti per
- *     sezione: `CANTON_CHAIN_MAX_RUNS_PER_HOUR` (default 3 run/ora),
+ *     sezione: `vars.CANTON_CHAIN_MAX_RUNS_PER_HOUR` (default 3 run/ora, la
+ *     variabile nazionale `vars.CHAIN_MAX_RUNS_PER_HOUR` ha default 20; il tetto
+ *     conta solo le run che hanno tentato una generazione: non le `skipped`, non
+ *     la run corrente),
  *     `no_article_streak` 6, `chain_depth` 40, `rescue_depth` 1; la catena si
  *     ferma allo skip `daily-budget` di `canton-generation-admit.mjs`. Con la
  *     lista vuota nessun anello parte, come prima della manopola;
@@ -74,6 +77,7 @@ import { fileURLToPath } from 'node:url';
 
 import { ARTICLE_SECTION_CORE_ALL, isCantonSection } from '../../engine/shared/articleSectionCore.mjs';
 import { sectionWriteSurfaces } from '../lib/article-surfaces.mjs';
+import { baseSlotHoursBySection } from '../../generator/scripts/lib/canton-high-cadence.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -189,6 +193,7 @@ const SECTION_GATE_JOB = `  section_gate:
           CANTON_GENERATION_MAX_PARALLEL: \${{ vars.CANTON_GENERATION_MAX_PARALLEL }}
           CANTON_DAILY_BUDGET_CAP: \${{ vars.CANTON_DAILY_BUDGET_CAP }}
           RECOVERY_SLOT: \${{ inputs.recovery_slot }}
+          PARENT_RUN_ID: \${{ inputs.parent_run_id }}
           QUOTA_BEACON_PEER_REPO: ${QUOTA_BEACON_PEER_REPO}
           CANTON_GATE_RECEIPT_PATH: \${{ runner.temp }}/canton-section-gate.json
         run: node scripts/ci/canton-generation-admit.mjs
@@ -579,6 +584,14 @@ export const CORE_REPLACEMENTS = [
     replace: '          CHAIN_MAX_RUNS_PER_HOUR: ${{ vars.CANTON_CHAIN_MAX_RUNS_PER_HOUR }}\n',
   },
   {
+    id: 'admit: il tetto orario conta solo le run che hanno tentato una generazione',
+    count: 1,
+    find: "            last_hour=$(printf '%s' \"$runs\" \\\n"
+      + "              | jq -er 'length' \\\n",
+    replace: "            last_hour=$(printf '%s' \"$runs\" \\\n"
+      + "              | jq -er --argjson me \"$SELF_ID\" '[.[] | select(.id != $me) | select(.conclusion != \"skipped\")] | length' \\\n",
+  },
+  {
     id: 'admit: tetto orario di default della catena cantonale',
     count: 1,
     find: "              ''|*[!0-9]*) cap=20 ;;\n",
@@ -687,6 +700,9 @@ const CORE_HEADER = `${AUTO_GENERATED_MARKER}
 # Sorgente: ${WORKFLOWS_DIR}/${SOURCE_WORKFLOW} (job admit e generate, senza i commenti)
 #   + le sostituzioni dichiarate in CORE_REPLACEMENTS del generatore.
 # Le ragioni di ogni step stanno nella sorgente: si leggono e si modificano li'.
+# Variabili del repo: vars.CANTON_CHAIN_MAX_RUNS_PER_HOUR e' il tetto orario della catena
+# cantonale per sezione (default 3 run/ora; la variabile nazionale CHAIN_MAX_RUNS_PER_HOUR del sito ha default 20).
+# Il tetto conta le run che hanno tentato una generazione: non le skipped, non la run corrente.
 # Rigenera: node ${GENERATOR_REL}
 # Verifica: node ${GENERATOR_REL} --check
 name: Generate Blog Article (core)
@@ -1121,10 +1137,14 @@ function buildArtifactsFromRepo(root = ROOT) {
   });
   const artifacts = new Map([...workflows].map(([file, content]) => [path.join(WORKFLOWS_DIR, file), content]));
   const offsets = hourOffsets(profiles.cantons);
+  // `baseSlotHours`: le ore UTC della cadenza di base a 6 ore (le stesse di `admit-cadence`),
+  // cosi' lo scheduler del sito non spedisce gli slot fuori cadenza delle sezioni fuori lista.
+  const baseHours = baseSlotHoursBySection(profiles.cantons.map((c) => c.section));
   const entries = [...profiles.cantons].sort((a, b) => a.section.localeCompare(b.section)).map((canton) => ({
     section: canton.section,
     workflow: callerWorkflowFile(canton.code),
     cron: cronExpression(canton, offsets.get(canton.section)),
+    baseSlotHours: baseHours.get(canton.section),
   }));
   artifacts.set(SLOT_SCHEDULE_REL, JSON.stringify({ schema: 1, entries }, null, 2) + '\n');
   return { artifacts, workflows };
