@@ -19,7 +19,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
-import { initWithRetry } from '../scripts/lib/evidence/embeddingClient.mjs';
+import { initWithRetry, resolveTransformersCacheDir } from '../scripts/lib/evidence/embeddingClient.mjs';
 import { __resetCache } from '../scripts/lib/scoring/embeddingMatcher.mjs';
 import { __resetPreparedStores, prepareSectionDedupStore } from '../scripts/lib/scoring/sectionEmbeddingStore.mjs';
 import { DedupGateUnavailableError, isDedupGateUnavailableError } from '../scripts/lib/scoring/semanticDedup.mjs';
@@ -145,6 +145,15 @@ describe('M6 round 2 — retry del modello e esito dichiarato', () => {
       );
     });
 
+    it('DedupGateUnavailableError e\' retryable: il journalist lo differisce e il documento resta queued', () => {
+      assert.equal(new DedupGateUnavailableError('store_missing', 'x').retryable, true);
+      const src = read('generator/scripts/publish-journalist-article.mjs');
+      const start = src.indexOf('function classifyJournalistPublishError(error) {');
+      const classify = new Function(`${src.slice(start, src.indexOf('\n}\n', start) + 2)}\nreturn classifyJournalistPublishError;`)();
+      assert.equal(classify(new DedupGateUnavailableError('embedding_failed', 'modello giu')), 'deferred');
+      assert.equal(classify(new Error('boom')), 'failed');
+    });
+
     it('isDedupGateUnavailableError non scambia un errore qualsiasi ne un DUPLICATO', () => {
       assert.equal(isDedupGateUnavailableError(new Error('boom')), false);
       assert.equal(isDedupGateUnavailableError(new Error('❌ DUPLICATO: titolo')), false);
@@ -152,17 +161,46 @@ describe('M6 round 2 — retry del modello e esito dichiarato', () => {
     });
   });
 
+  it('preflight: lo store si prepara PRIMA di roster-bozze-selezione, solo fuori dal dry-run scan', () => {
+    const create = read('generator/scripts/create-article.mjs');
+    const pre = create.indexOf('await prepareSectionDedupStore(SECTION);\n  }\n');
+    assert.ok(pre > 0, 'preflight presente in main()');
+    assert.ok(create.slice(pre - 40, pre).includes('if (!DRY_RUN_SCAN) {'), 'non in dry-run scan');
+    assert.ok(pre > create.indexOf('async function main()'));
+    assert.ok(pre < create.indexOf('listPendingTranslationDrafts(PENDING_TRANSLATION_DIR, SECTION_NAME);'), 'prima delle bozze');
+    assert.ok(pre > create.indexOf('provider-input-cap-unavailable'), 'dopo il controllo del roster, prima di ogni generazione');
+  });
+
+  it('un dedup non eseguibile non entra nei conteggi di recupero della pool', () => {
+    const create = read('generator/scripts/create-article.mjs');
+    const fn = create.slice(create.indexOf('function persistDiscoveryAttemptOutcome(status) {'));
+    assert.match(fn.slice(0, 600), /dedupGateUnavailable === true\) return;\n\s+if \(RUN_REPORT\?\.poolRecoveryEligible/);
+  });
+
+  it('la cache dei pesi e\' sempre assoluta, radicata nel repo', () => {
+    const root = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
+    assert.equal(resolveTransformersCacheDir({}), join(root, '.cache', 'transformers'));
+    assert.equal(resolveTransformersCacheDir({ TRANSFORMERS_CACHE: 'altro/dir' }), join(root, 'altro', 'dir'));
+    assert.equal(resolveTransformersCacheDir({ TRANSFORMERS_CACHE: '/abs/cache' }), '/abs/cache');
+    assert.ok(resolve(resolveTransformersCacheDir({})) === resolveTransformersCacheDir({}));
+  });
+
   it('create-article esce 4 con la riga GENERATION_OUTCOME dedicata e il workflow la classifica', () => {
     const create = read('generator/scripts/create-article.mjs');
     const branch = create.slice(create.indexOf('if (isDedupGateUnavailableError(e)) {'));
     const end = branch.indexOf('\n  }\n');
     const body = branch.slice(0, end);
-    assert.match(body, /GENERATION_OUTCOME kind=no-article reason=dedup-unavailable section=\$\{SECTION_NAME\}/);
+    assert.match(body, /\$\{DEDUP_GATE_UNAVAILABLE_MARKER\} section=\$\{SECTION_NAME\}/);
+    assert.doesNotMatch(body, /GENERATION_OUTCOME/, 'un solo GENERATION_OUTCOME per run: lo stampa il workflow');
+    assert.match(body, /RUN_REPORT\.dedupGateUnavailable = true/);
+    assert.match(create, /const DEDUP_GATE_UNAVAILABLE_MARKER = 'DEDUP_GATE_UNAVAILABLE';/);
     assert.match(body, /exitAfterFlush\(EXIT_NO_ARTICLE_DECLARED\)/);
     for (const file of ['.github/workflows/generate-article.yml', '.github/workflows/generate-article-core.yml']) {
       const wf = read(file);
-      assert.match(wf, /grep -q 'reason=dedup-unavailable' "\$stall_log" && declared_reason=dedup-unavailable/, file);
+      assert.match(wf, /grep -q 'DEDUP_GATE_UNAVAILABLE section=' "\$stall_log"/, file);
+      assert.doesNotMatch(wf, /grep -q 'reason=dedup-unavailable'/, file);
       assert.match(wf, /outcome_reason="\$\{declared_reason:-declared\}"/, file);
+      assert.match(wf, /outcome_reason="\$\{declared_reason:-provider-unavailable\}"/, file);
     }
   });
 });

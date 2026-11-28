@@ -45,6 +45,10 @@ export class DedupGateUnavailableError extends Error {
     super(`❌ DEDUP SEMANTICO NON ESEGUIBILE (fail-closed, ${status}): ${detail}. Nessun articolo pubblicato senza il controllo.`);
     this.name = 'DedupGateUnavailableError';
     this.code = 'DEDUP_GATE_UNAVAILABLE';
+    // Guasto d'infrastruttura transitorio (modello non scaricabile, store non
+    // costruibile): chi consuma una coda (publish-journalist-article) deve
+    // differire e lasciare il documento in coda, non marcarlo failed per sempre.
+    this.retryable = true;
     this.status = status;
   }
 }

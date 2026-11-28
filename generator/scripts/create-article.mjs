@@ -2707,6 +2707,9 @@ function resolveRunRecovery() {
 }
 
 function persistDiscoveryAttemptOutcome(status) {
+  // Dedup non eseguibile = guasto di modello/store, non un candidato fallito:
+  // niente provenAttempts/outstandingProvenFailures.
+  if (RUN_REPORT?.dedupGateUnavailable === true) return;
   if (RUN_REPORT?.poolRecoveryEligible !== true) return;
   const poolKind = RUN_REPORT.poolSlotKind;
   if (!['proven', 'discovery'].includes(poolKind)) return;
@@ -4106,6 +4109,9 @@ function parseSectionArg(argv) {
 
 const SECTION_NAME = parseSectionArg(process.argv.slice(2));
 const SECTION = ARTICLE_SECTION_CONFIGS[SECTION_NAME];
+// Marcatore del dedup semantico non eseguibile: volutamente NON un
+// GENERATION_OUTCOME (lo stampa solo il workflow, una volta per run).
+const DEDUP_GATE_UNAVAILABLE_MARKER = 'DEDUP_GATE_UNAVAILABLE';
 
 /**
  * Opzioni del gate di dedup semantico per la sezione attiva, in produzione.
@@ -22151,6 +22157,16 @@ async function main() {
     }
   }
 
+  // Preflight del dedup semantico (M6): il gate e' fail-closed e lo store si
+  // prepara solo dopo la generazione. Se modello o store non sono disponibili,
+  // lo si scopre QUI, prima di scansione, selezione e bozze (che consumano un
+  // tentativo), non dopo aver speso la generazione. Con lo store in cache la
+  // chiamata e' una lettura locale; l'errore sale a main().catch (exit 4 +
+  // DEDUP_GATE_UNAVAILABLE) e la catena si ferma.
+  if (!DRY_RUN_SCAN) {
+    await prepareSectionDedupStore(SECTION);
+  }
+
   // A verified Italian draft has priority over a new candidate. Claim the next
   // bounded attempt on disk BEFORE any provider call, so a hard-killed run
   // consumes its slot instead of creating an unbounded retry loop.
@@ -26722,11 +26738,18 @@ if (invokedDirectly) {
   // Dedup semantico non eseguibile (modello non scaricabile dopo i retry, store
   // non costruibile): il gate e' fail-closed, quindi NIENTE si pubblica, ma e'
   // un esito DICHIARATO (exit 4 + riga GENERATION_OUTCOME dedicata), non un
-  // errore non dichiarato. Il workflow la riporta come reason=dedup-unavailable.
+  // errore non dichiarato. Il workflow la riporta come reason=dedup-unavailable
+  // leggendo DEDUP_GATE_UNAVAILABLE.
   if (isDedupGateUnavailableError(e)) {
+    // Guasto d'infrastruttura, non un tentativo di candidato: non entra nei
+    // conteggi di recupero della pool (persistDiscoveryAttemptOutcome).
+    RUN_REPORT.dedupGateUnavailable = true;
     finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (dedup gate unavailable, fail-closed, not published): ${safeErrorMessage}`] });
     console.error(`\n⚠️  Differito: dedup semantico non eseguibile (fail-closed), nessun articolo pubblicato. ${safeErrorMessage}`);
-    console.error(`GENERATION_OUTCOME kind=no-article reason=dedup-unavailable section=${SECTION_NAME}`);
+    // Token DISTINTO dal marcatore di esito del workflow: quello lo stampa il
+    // workflow una volta per run, e scan-generation-health/measure-section-cadence
+    // lo contano per riga; il generatore non deve produrne un secondo.
+    console.error(`${DEDUP_GATE_UNAVAILABLE_MARKER} section=${SECTION_NAME}`);
     await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   if (isQualityRejectError(e)) {

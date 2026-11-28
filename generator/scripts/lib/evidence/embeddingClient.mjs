@@ -11,9 +11,23 @@
 // The model weights download once from the public HuggingFace CDN (no key) and
 // are cached under `.cache/transformers` (env.cacheDir below; CI-cacheable).
 
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { EMBEDDING_DIM, EMBEDDING_MODEL } from './constants.mjs';
 
 const NO_PROVIDER_MSG = 'local embedding model unavailable';
+
+const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
+
+/**
+ * Cartella della cache dei pesi, sempre assoluta: un percorso relativo si
+ * risolve contro la cwd del processo (un worktree, una sottocartella), non
+ * contro la radice del repo dove `.gitignore` e actions/cache la aspettano.
+ */
+export function resolveTransformersCacheDir(env = process.env, repoRoot = REPO_ROOT) {
+  const configured = env.TRANSFORMERS_CACHE || '.cache/transformers';
+  return path.isAbsolute(configured) ? configured : path.resolve(repoRoot, configured);
+}
 
 /**
  * L2-normalize a vector in place and return it. The pipeline already returns
@@ -91,7 +105,7 @@ async function getExtractor() {
     const { pipeline, env } = await import('@huggingface/transformers');
     // Cache model weights in the repo (.cache/transformers) instead of
     // node_modules so CI can persist them across runs (actions/cache).
-    env.cacheDir = process.env.TRANSFORMERS_CACHE || '.cache/transformers';
+    env.cacheDir = resolveTransformersCacheDir();
     // dtype pinned for reproducibility: the committed store is built with this
     // exact dtype so daily incremental additions stay in one consistent vector
     // space (model id alone doesn't distinguish dtype). fp32 (~470MB) is used

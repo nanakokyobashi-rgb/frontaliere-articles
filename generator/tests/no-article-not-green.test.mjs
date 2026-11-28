@@ -308,8 +308,8 @@ test('le ragioni locali alla sezione e quelle del pool condiviso usano codici di
   );
   assert.match(
     src,
-    /if \(isDedupGateUnavailableError\(e\)\) \{[\s\S]{0,900}reason=dedup-unavailable[\s\S]{0,200}await exitAfterFlush\(EXIT_NO_ARTICLE_DECLARED\)/u,
-    'il dedup non eseguibile e\' un esito dichiarato con la propria riga GENERATION_OUTCOME, non un errore generico',
+    /if \(isDedupGateUnavailableError\(e\)\) \{[\s\S]{0,1200}DEDUP_GATE_UNAVAILABLE_MARKER[\s\S]{0,200}await exitAfterFlush\(EXIT_NO_ARTICLE_DECLARED\)/u,
+    'il dedup non eseguibile e\' un esito dichiarato con il proprio marcatore DEDUP_GATE_UNAVAILABLE, non un errore generico',
   );
   assert.match(
     src,
