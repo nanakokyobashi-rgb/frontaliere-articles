@@ -185,7 +185,7 @@
       "linkedinUrl": "https://www.linkedin.com/company/frontaliere-ticino/"
     }
   },
-  "attempts": 1,
+  "attempts": 2,
   "missingFields": [
     "en.body1",
     "de.body1",
@@ -194,7 +194,7 @@
     "fr.body1"
   ],
   "createdAt": "2026-11-28T15:55:21.660Z",
-  "updatedAt": "2026-11-28T16:03:04.657Z",
+  "updatedAt": "2026-11-28T17:09:57.928Z",
   "verifiedAt": "2026-11-28T15:55:21.660Z",
   "translationState": "unverified-candidate",
   "translationsVerified": false,
