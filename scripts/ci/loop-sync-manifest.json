@@ -4330,15 +4330,16 @@
       "mode": "adapted",
       "reason": "Costanti host adattate dal sito: il fingerprint confronta i 23 scalari autorevoli del SiteShellContract; nomi content-addressed e byte degli asset statici sono verificati separatamente in host/third-party-shell-assets-fingerprint.json e host/third-party-shell-assets.json. Il runtime Firebase mantiene il match sulla chiave esatta e non espone segreti.",
       "baseline": {
-        "site": "ed98db8c95caaf5d",
-        "corpus": "3b7ed3cce6e5027b",
-        "alignedAt": "2026-11-15"
+        "site": "d0169adce76d96c6",
+        "corpus": "92169a23763c7c89",
+        "alignedAt": "2026-11-27",
+        "forcedAt": "2026-11-27T05:50:33.995Z"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 23,
-        "sha256": "038caa0a6ed799ada3e7c192c8c31aa5a0a04ee9fbd7ebffca1dc7f9caa1343f"
+        "sha256": "f03dcfc86d4f942eb995c120caa3736dba29af5f8d8da78e69f13c9d13777725"
       }
     },
     {
@@ -4555,10 +4556,10 @@
       "mode": "adapted",
       "reason": "Impronta SHA-256 dei 23 campi scalari di SiteShellContract, prodotta e verificata da host/tests/shell-contract-fingerprint.test.mjs. Il gemello del sito e' tests/articles-shell-contract-fingerprint.json, ma i digest differiscono intenzionalmente: il sito registra gli URL globali stabili e la shell host include i nomi content-addressed degli asset. La dichiarazione scalarFingerprint su host/constants.ts confronta separatamente entrambi i valori.",
       "baseline": {
-        "site": "cb29a37dd7c6ce74",
-        "corpus": "f5198cca59c9534a",
-        "alignedAt": "2026-11-15",
-        "forcedAt": "2026-11-15T19:04:16.629Z"
+        "site": "48040f7db5f06237",
+        "corpus": "aa622530fe98c4f7",
+        "alignedAt": "2026-11-27",
+        "forcedAt": "2026-11-27T05:50:33.995Z"
       }
     },
     {
@@ -4941,8 +4942,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-02.yml",
       "mode": "identical",
       "baseline": {
-        "site": "2b21a4ddde0c1e02",
-        "corpus": "2b21a4ddde0c1e02",
+        "site": "881c0739d1e32de4",
+        "corpus": "881c0739d1e32de4",
         "alignedAt": "2026-11-27"
       }
     },
@@ -4951,8 +4952,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-03.yml",
       "mode": "identical",
       "baseline": {
-        "site": "a1889196683a7663",
-        "corpus": "a1889196683a7663",
+        "site": "ec5784660e145029",
+        "corpus": "ec5784660e145029",
         "alignedAt": "2026-11-27"
       }
     },
@@ -4971,8 +4972,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-05.yml",
       "mode": "identical",
       "baseline": {
-        "site": "b8b500cb21ce94b4",
-        "corpus": "b8b500cb21ce94b4",
+        "site": "15d353fb0601a63d",
+        "corpus": "15d353fb0601a63d",
         "alignedAt": "2026-11-27"
       }
     },
@@ -4981,8 +4982,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-06.yml",
       "mode": "identical",
       "baseline": {
-        "site": "86440ff52de912df",
-        "corpus": "86440ff52de912df",
+        "site": "cff836435a5905f3",
+        "corpus": "cff836435a5905f3",
         "alignedAt": "2026-11-27"
       }
     },
@@ -4991,8 +4992,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-07.yml",
       "mode": "identical",
       "baseline": {
-        "site": "0801b48021e57e42",
-        "corpus": "0801b48021e57e42",
+        "site": "2725a70aa8f1ae77",
+        "corpus": "2725a70aa8f1ae77",
         "alignedAt": "2026-11-27"
       }
     },
@@ -5011,8 +5012,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-09.yml",
       "mode": "identical",
       "baseline": {
-        "site": "00d87d48116d7684",
-        "corpus": "00d87d48116d7684",
+        "site": "9596351aa0a1a519",
+        "corpus": "9596351aa0a1a519",
         "alignedAt": "2026-11-27"
       }
     },
@@ -5021,8 +5022,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-10.yml",
       "mode": "identical",
       "baseline": {
-        "site": "4ec77703160aa01a",
-        "corpus": "4ec77703160aa01a",
+        "site": "efbdd94c1a0acffd",
+        "corpus": "efbdd94c1a0acffd",
         "alignedAt": "2026-11-27"
       }
     },
@@ -5041,8 +5042,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-12.yml",
       "mode": "identical",
       "baseline": {
-        "site": "5628e1576757b785",
-        "corpus": "5628e1576757b785",
+        "site": "d9520c3ef1d7150b",
+        "corpus": "d9520c3ef1d7150b",
         "alignedAt": "2026-11-27"
       }
     },
@@ -5051,8 +5052,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-13.yml",
       "mode": "identical",
       "baseline": {
-        "site": "c287f0cf7fe26ff4",
-        "corpus": "c287f0cf7fe26ff4",
+        "site": "dc90fadddbdf4387",
+        "corpus": "dc90fadddbdf4387",
         "alignedAt": "2026-11-27"
       }
     },
@@ -5061,8 +5062,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-14.yml",
       "mode": "identical",
       "baseline": {
-        "site": "49b429180b701037",
-        "corpus": "49b429180b701037",
+        "site": "bebc4ba1f07a7f85",
+        "corpus": "bebc4ba1f07a7f85",
         "alignedAt": "2026-11-27"
       }
     },
@@ -5081,8 +5082,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-16.yml",
       "mode": "identical",
       "baseline": {
-        "site": "7785ee59f7664a2c",
-        "corpus": "7785ee59f7664a2c",
+        "site": "727bc17450a641d4",
+        "corpus": "727bc17450a641d4",
         "alignedAt": "2026-11-27"
       }
     },
@@ -5091,8 +5092,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-17.yml",
       "mode": "identical",
       "baseline": {
-        "site": "ce4cb550de49b352",
-        "corpus": "ce4cb550de49b352",
+        "site": "52316065650477ca",
+        "corpus": "52316065650477ca",
         "alignedAt": "2026-11-27"
       }
     },
@@ -5111,8 +5112,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-19.yml",
       "mode": "identical",
       "baseline": {
-        "site": "d582ba2c280403ff",
-        "corpus": "d582ba2c280403ff",
+        "site": "f9132ced32aab6d9",
+        "corpus": "f9132ced32aab6d9",
         "alignedAt": "2026-11-27"
       }
     },
@@ -5121,8 +5122,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-20.yml",
       "mode": "identical",
       "baseline": {
-        "site": "239f0436232fbc8d",
-        "corpus": "239f0436232fbc8d",
+        "site": "ac5ad8cebc875a2d",
+        "corpus": "ac5ad8cebc875a2d",
         "alignedAt": "2026-11-27"
       }
     },
@@ -5131,8 +5132,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-21.yml",
       "mode": "identical",
       "baseline": {
-        "site": "91d6ff78f1bd5d7a",
-        "corpus": "91d6ff78f1bd5d7a",
+        "site": "be9e0870640591b9",
+        "corpus": "be9e0870640591b9",
         "alignedAt": "2026-11-27"
       }
     },
@@ -5141,8 +5142,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-22.yml",
       "mode": "identical",
       "baseline": {
-        "site": "e93a51a307c9859c",
-        "corpus": "e93a51a307c9859c",
+        "site": "28bdbe0ade3547ab",
+        "corpus": "28bdbe0ade3547ab",
         "alignedAt": "2026-11-27"
       }
     },
@@ -5151,8 +5152,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-23.yml",
       "mode": "identical",
       "baseline": {
-        "site": "f7aeb4b5aff351d1",
-        "corpus": "f7aeb4b5aff351d1",
+        "site": "80c3f9806e005a55",
+        "corpus": "80c3f9806e005a55",
         "alignedAt": "2026-11-27"
       }
     },
@@ -5173,8 +5174,8 @@
       "remoteDigestRequired": true,
       "reason": "La baseline registra lo stesso digest SHA-256 raw sui due lati; `remoteDigestRequired` rende il confronto remoto una precondizione fail-closed prima di accettare o riattestare la baseline e prima del trasporto.",
       "baseline": {
-        "site": "3bc82ee0b7a2a6a7",
-        "corpus": "3bc82ee0b7a2a6a7",
+        "site": "c4bb7de35332495d",
+        "corpus": "c4bb7de35332495d",
         "alignedAt": "2026-11-27"
       }
     },
@@ -7047,9 +7048,10 @@
       "mode": "adapted",
       "reason": "adattato al bundle host: il fingerprint byte-exact di site-support, AdSense, Partnerize, Meta Pixel e helper canonici viaggia insieme allo snapshot adattato host/third-party-shell-assets.json e alle versioni asset in host/constants.ts. Non trasportarlo da solo; verificare host/tests/host-shell-assets.test.mjs prima della pubblicazione.",
       "baseline": {
-        "site": "07ce7fdd280ebf30",
-        "corpus": "07ce7fdd280ebf30",
-        "alignedAt": "2026-11-20"
+        "site": "9c91e991791a5aaa",
+        "corpus": "9c91e991791a5aaa",
+        "alignedAt": "2026-11-27",
+        "forcedAt": "2026-11-27T05:50:33.995Z"
       },
       "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3078"
     },
@@ -7060,8 +7062,9 @@
       "reason": "Snapshot byte-exact di site-support, AdSense, Partnerize, Meta Pixel e guardia inline canonica, generato dall'exporter del sito. hostShellFiles verifica nomi e SHA senza import fra repository; sincronizzarlo nella stessa PR di host/third-party-shell-assets-fingerprint.json e host/constants.ts per conservare i byte e i nomi content-addressed che la pubblicazione usa.",
       "baseline": {
         "site": "2aa134c3edf47044",
-        "corpus": "c47d30d67f05fecb",
-        "alignedAt": "2026-11-20"
+        "corpus": "b4e0bf143910bcc7",
+        "alignedAt": "2026-11-27",
+        "forcedAt": "2026-11-27T05:50:33.995Z"
       }
     },
     {

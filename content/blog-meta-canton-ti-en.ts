@@ -87,6 +87,9 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.reclutamento-infermieri-varese.title': 'Lombard nurses heading to Ticino: 7.000 CHF',
     'blog.article.reclutamento-infermieri-varese.excerpt': 'The pay gap continues to drive Italian nurses abroad: a young professional from the province of Varese went from the 1.800 euros per month of her previous job to a job in Switzerland, where she earns 7.000 francs.',
     'blog.article.reclutamento-infermieri-varese.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.svizzera-schengen-controlli-frontalieri.title': 'Possible border checks if Switzerland leaves Schengen',
+    'blog.article.svizzera-schengen-controlli-frontalieri.excerpt': 'The Federal Council\'s report was published on September 18, 2026.',
+    'blog.article.svizzera-schengen-controlli-frontalieri.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTiEn;

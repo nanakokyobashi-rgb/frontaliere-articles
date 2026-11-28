@@ -108,6 +108,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.inverno-sgallen-controlli-strade.title': 'Winter in St.Gallen: road checks between late October and mid-April',
     'blog.article.inverno-sgallen-controlli-strade.excerpt': 'Snow and below-zero temperatures are expected; snow clearance follows defined priorities, with staff of up to 200 people.',
     'blog.article.inverno-sgallen-controlli-strade.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.sg-politica-fondiaria-attiva.title': 'St. Gallen launches consultation on active land policy law',
+    'blog.article.sg-politica-fondiaria-attiva.excerpt': 'The consultation on the draft law is open until January 31, 2027, and is intended for the Office for Economy and Labor.',
+    'blog.article.sg-politica-fondiaria-attiva.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;

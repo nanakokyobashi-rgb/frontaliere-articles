@@ -4,17 +4,17 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "5d44a4fe007fb53016c42dbdd0ccfefeedda9e9f4f459783bf3fbdbc5362ec9f",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "035ce2513b8b2e5dce00485f5068260a5d868e587a233da8276364b904738f71",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T00:32:00.223Z",
+      "updatedAt": "2026-11-26T16:33:33.919Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-25T16:08:35.229Z",
+      "updatedAt": "2026-11-26T15:51:00.529Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "121",
+          "value": "123",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "Nateira Unia - Salbenkurse",
+              "detail": "Veia Principala 24",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/this-that/salouf/nateira-unia-salbenkurse_AttdNVU"
+            },
+            {
+              "label": "Eigenheim Messe",
+              "detail": "AREON Eventhalle, Chur",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/eigenheim-messe-chur-2025/"
+            },
+            {
+              "label": "Weihnachtsmarkt mit dem Frauenarbeitskreis",
+              "detail": "Chur",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmarkt-mit-dem-frauenarbeitskreis/"
+            },
+            {
+              "label": "KULTUR FÜR WEN?",
+              "detail": "Chur",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kultur-fuer-wen/"
+            },
+            {
+              "label": "Per Anhalter um die Welt - Explora Reise Comedy vom Beifahrersitz",
+              "detail": "Chur",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/per-anhalter-um-die-welt-explora-reise-comedy-vom-beifahrersitz/"
+            },
+            {
+              "label": "Movie Premiere Night – Season Opening",
+              "detail": "Laax",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/movie-premiere-night-season-opening/"
+            },
+            {
               "label": "Bibel Genuss Tage 2025",
-              "detail": "7017 Flims Dorf, Flims",
-              "date": "2026-11-26",
+              "detail": "7017 Flims Dorf, Flims — in corso, ultimo giorno: 29 novembre 2026",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bibel-genuss-tage-26-29-november-2026/"
             },
             {
-              "label": "Weihnachtsbazar",
-              "detail": "Kirchgemeindehaus Titthof, Chur",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/weihnachtsbazar/"
-            },
-            {
-              "label": "Lesekreis",
-              "detail": "Davos",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesekreis-10/"
-            },
-            {
               "label": "Sitzung Gemeindeleitung",
-              "detail": "Pfarrhaus Grüsch, Grüsch",
-              "date": "2026-11-26",
+              "detail": "Pfarrhaus Grüsch, Grüsch — in corso, ultimo giorno: 17 dicembre 2026",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/gruesch/sitzung-gemeindeleitung_A6sWPAF"
-            },
-            {
-              "label": "Lesekreis im Pfarrhaus Fläsch",
-              "detail": "Fläsch",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesekreis-im-pfarrhaus-flaesch-2/"
-            },
-            {
-              "label": "Bibel Genuss Tage 2025",
-              "detail": "Flims",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bibel-genuss-tage-2025-2/"
-            },
-            {
-              "label": "ENCOUNTER - RHAETO ROMANSH DIGITIZATION",
-              "detail": "Valchava",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/encounter-rhaeto-romansh-digitization/"
             },
             {
               "label": "KiWo - Kinder Workshop",
               "detail": "Gemeindeschule Bever, Bever — in corso, ultimo giorno: 9 dicembre 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bever/kiwo-kinder-workshop_AKNMZ2H"
             },
             {
               "label": "Konftreff",
               "detail": "Pfarrhaus Grüsch, Grüsch — in corso, ultimo giorno: 10 dicembre 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/gruesch/konftreff-1_AbbGRkk"
-            },
-            {
-              "label": "J. S. Bach hören und geniessen mit Pfr. Dirk Schulz",
-              "detail": "Pfarrhaus Grüsch, Grüsch — in corso, ultimo giorno: 18 dicembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/j-s-bach-hoeren-und-geniessen-mit-pfr-dirk-schulz_ACByWhJ"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -177,7 +177,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "GR",
@@ -187,7 +187,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "121",
+          "value": "123",
           "note": "from the site’s events calendar"
         }
       ],
@@ -198,69 +198,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "Nateira Unia – Salbenkurse",
+              "detail": "Veia Principala 24",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/this-that/salouf/nateira-unia-salbenkurse_AttdNVU"
+            },
+            {
+              "label": "Eigenheim Messe",
+              "detail": "AREON Eventhalle, Chur",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/eigenheim-messe-chur-2025/"
+            },
+            {
+              "label": "Weihnachtsmarkt mit dem Frauenarbeitskreis",
+              "detail": "Chur",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmarkt-mit-dem-frauenarbeitskreis/"
+            },
+            {
+              "label": "KULTUR FÜR WEN?",
+              "detail": "Chur",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kultur-fuer-wen/"
+            },
+            {
+              "label": "Per Anhalter um die Welt - Explora Reise Comedy vom Beifahrersitz",
+              "detail": "Chur",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/per-anhalter-um-die-welt-explora-reise-comedy-vom-beifahrersitz/"
+            },
+            {
+              "label": "Movie Premiere Night – Season Opening",
+              "detail": "Laax",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/movie-premiere-night-season-opening/"
+            },
+            {
               "label": "Bibel Genuss Tage 2025",
-              "detail": "7017 Flims Dorf, Flims",
-              "date": "2026-11-26",
+              "detail": "7017 Flims Dorf, Flims — ongoing, last day: 29 November 2026",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bibel-genuss-tage-26-29-november-2026/"
             },
             {
-              "label": "Weihnachtsbazar",
-              "detail": "Kirchgemeindehaus Titthof, Chur",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/weihnachtsbazar/"
-            },
-            {
-              "label": "Lesekreis",
-              "detail": "Davos",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesekreis-10/"
-            },
-            {
               "label": "Sitzung Gemeindeleitung",
-              "detail": "Pfarrhaus Grüsch, Grüsch",
-              "date": "2026-11-26",
+              "detail": "Pfarrhaus Grüsch, Grüsch — ongoing, last day: 17 December 2026",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/gruesch/sitzung-gemeindeleitung_A6sWPAF"
-            },
-            {
-              "label": "Lesekreis im Pfarrhaus Fl Fl",
-              "detail": "Fläsch",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesekreis-im-pfarrhaus-flaesch-2/"
-            },
-            {
-              "label": "Bibel Genuss Tage 2025",
-              "detail": "Flims",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bibel-genuss-tage-2025-2/"
-            },
-            {
-              "label": "ENCOUNTER - RHAETO ROMANSH DIGITIZATION",
-              "detail": "Valchava",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/encounter-rhaeto-romansh-digitization/"
             },
             {
               "label": "KiWo - Kinder Workshop",
               "detail": "Gemeindeschule Bever, Bever — ongoing, last day: 9 December 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bever/kiwo-kinder-workshop_AKNMZ2H"
             },
             {
               "label": "Konftreff",
               "detail": "Pfarrhaus Grüsch, Grüsch — ongoing, last day: 10 December 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/gruesch/konftreff-1_AbbGRkk"
-            },
-            {
-              "label": "J. S. Bach hören und geniessen mit Pfr. Dirk Schulz",
-              "detail": "Pfarrhaus Grüsch, Grüsch — ongoing, last day: 18 December 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/j-s-bach-hoeren-und-geniessen-mit-pfr-dirk-schulz_ACByWhJ"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -273,7 +273,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -337,7 +337,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "GR",
@@ -347,7 +347,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "121",
+          "value": "123",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -358,69 +358,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "Naturia Unia – Salbenkurse",
+              "detail": "Veia Principala 24",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/this-that/salouf/nateira-unia-salbenkurse_AttdNVU"
+            },
+            {
+              "label": "Eigenheim Messe",
+              "detail": "AREON Eventhalle, Chur",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/eigenheim-messe-chur-2025/"
+            },
+            {
+              "label": "Weihnachtsmarkt mit dem Frauenarbeitskreis",
+              "detail": "Chur",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmarkt-mit-dem-frauenarbeitskreis/"
+            },
+            {
+              "label": "KULTUR FÜR WEN?",
+              "detail": "Chur",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kultur-fuer-wen/"
+            },
+            {
+              "label": "Per Anhalter um die Welt - Explora Reise Comedy vom Beifahrersitz",
+              "detail": "Chur",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/per-anhalter-um-die-welt-explora-reise-comedy-vom-beifahrersitz/"
+            },
+            {
+              "label": "Movie Premiere Night – Season Opening",
+              "detail": "Laax",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/movie-premiere-night-season-opening/"
+            },
+            {
               "label": "Bibel Genuss Tage 26. - 29. November 2026",
-              "detail": "7017 Flims Dorf, Flims",
-              "date": "2026-11-26",
+              "detail": "7017 Flims Dorf, Flims — läuft, letzter Tag: 29. November 2026",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bibel-genuss-tage-26-29-november-2026/"
             },
             {
-              "label": "Weihnachtsbazar",
-              "detail": "Kirchgemeindehaus Titthof, Chur",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/weihnachtsbazar/"
-            },
-            {
-              "label": "Lesekreis",
-              "detail": "Davos",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesekreis-10/"
-            },
-            {
               "label": "Sitzung Gemeindeleitung",
-              "detail": "Pfarrhaus Grüsch, Grüsch",
-              "date": "2026-11-26",
+              "detail": "Pfarrhaus Grüsch, Grüsch — läuft, letzter Tag: 17. Dezember 2026",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/gruesch/sitzung-gemeindeleitung_A6sWPAF"
-            },
-            {
-              "label": "Lesekreis im Pfarrhaus FL Graffsch",
-              "detail": "Fläsch",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesekreis-im-pfarrhaus-flaesch-2/"
-            },
-            {
-              "label": "Gespräch mit den ZEIT Podcast Pfarrerstöchtern «Ein Leben in der Disruption»",
-              "detail": "Flims",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bibel-genuss-tage-2025-2/"
-            },
-            {
-              "label": "BEGEGNUNG – RÄTOROMANISCHE DIGITALISIERUNG",
-              "detail": "Valchava",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/encounter-rhaeto-romansh-digitization/"
             },
             {
               "label": "KiWo - Kinder Workshop",
               "detail": "Gemeindeschule Bever, Bever — läuft, letzter Tag: 9. Dezember 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bever/kiwo-kinder-workshop_AKNMZ2H"
             },
             {
               "label": "Konftreff",
               "detail": "Pfarrhaus Grüsch, Grüsch — läuft, letzter Tag: 10. Dezember 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/gruesch/konftreff-1_AbbGRkk"
-            },
-            {
-              "label": "J. S. Bach hören und geniessen mit Pfr. Dirk Schulz",
-              "detail": "Pfarrhaus Grüsch, Grüsch — läuft, letzter Tag: 18. Dezember 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/j-s-bach-hoeren-und-geniessen-mit-pfr-dirk-schulz_ACByWhJ"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -433,7 +433,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -497,7 +497,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "GR",
@@ -507,7 +507,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "121",
+          "value": "123",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -518,69 +518,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "Nateira Unia – Cours de premiers secours",
+              "detail": "Veia Principala 24",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/this-that/salouf/nateira-unia-salbenkurse_AttdNVU"
+            },
+            {
+              "label": "Eigenheim Messe",
+              "detail": "AREON Eventhalle, Chur",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/eigenheim-messe-chur-2025/"
+            },
+            {
+              "label": "Weihnachtsmarkt mit dem Frauenarbeitskreis",
+              "detail": "Chur",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/weihnachtsmarkt-mit-dem-frauenarbeitskreis/"
+            },
+            {
+              "label": "KULTUR FÜR WEN?",
+              "detail": "Chur",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kultur-fuer-wen/"
+            },
+            {
+              "label": "Per Anhalter um die Welt - Explora Reise Comedy vom Beifahrersitz",
+              "detail": "Chur",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/per-anhalter-um-die-welt-explora-reise-comedy-vom-beifahrersitz/"
+            },
+            {
+              "label": "Movie Premiere Night – Season Opening",
+              "detail": "Laax",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/movie-premiere-night-season-opening/"
+            },
+            {
               "label": "Bibel Genuss Tage 2025",
-              "detail": "7017 Flims Dorf, Flims",
-              "date": "2026-11-26",
+              "detail": "7017 Flims Dorf, Flims — en cours, dernier jour : 29 novembre 2026",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bibel-genuss-tage-26-29-november-2026/"
             },
             {
-              "label": "Weihnachtsbazar",
-              "detail": "Kirchgemeindehaus Titthof, Chur",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/weihnachtsbazar/"
-            },
-            {
-              "label": "Lesekreis",
-              "detail": "Davos",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesekreis-10/"
-            },
-            {
               "label": "Sitzung Gemeindeleitung",
-              "detail": "Pfarrhaus Grüsch, Grüsch",
-              "date": "2026-11-26",
+              "detail": "Pfarrhaus Grüsch, Grüsch — en cours, dernier jour : 17 décembre 2026",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/gruesch/sitzung-gemeindeleitung_A6sWPAF"
-            },
-            {
-              "label": "Salle de bain au Pfarrhaus Fl Fl",
-              "detail": "Fläsch",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesekreis-im-pfarrhaus-flaesch-2/"
-            },
-            {
-              "label": "Bibel Genuss Tage 2025",
-              "detail": "Flims",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bibel-genuss-tage-2025-2/"
-            },
-            {
-              "label": "ENCOUNTER - RHAETO ROMANSH DIGITIZATION",
-              "detail": "Valchava",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/encounter-rhaeto-romansh-digitization/"
             },
             {
               "label": "KiWo - Kinder Workshop",
               "detail": "Gemeindeschule Bever, Bever — en cours, dernier jour : 9 décembre 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/bever/kiwo-kinder-workshop_AKNMZ2H"
             },
             {
               "label": "Konftreff",
               "detail": "Pfarrhaus Grüsch, Grüsch — en cours, dernier jour : 10 décembre 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/gruesch/konftreff-1_AbbGRkk"
-            },
-            {
-              "label": "J. S. Bach hören und geniessen mit Pfr. Dirk Schulz",
-              "detail": "Pfarrhaus Grüsch, Grüsch — en cours, dernier jour : 18 décembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/gruesch/j-s-bach-hoeren-und-geniessen-mit-pfr-dirk-schulz_ACByWhJ"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -593,7 +593,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026110901.aspx"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -657,7 +657,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

@@ -238,4 +238,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'neve-grigioni-incidenti',
+ category: 'pratico',
+ date: '2026-11-27T14:04:13.200Z',
+ image: '/images/blog/article-neve-grigioni-incidenti.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

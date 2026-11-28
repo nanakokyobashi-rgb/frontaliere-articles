@@ -4,54 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/830679/wallis-plant-neue-regeln-f%c3%bcr-die-gesundheitskosten": {
-      "section": "canton-vs",
-      "ts": 1795564152375
-    },
-    "canton-vs::https://www.pomona.ch/story/830536/80-franken-mehr-lohn-f%c3%bcr-walliser-metallbauer": {
-      "section": "canton-vs",
-      "ts": 1795564154129
-    },
-    "canton-vs::https://www.pomona.ch/story/830418/zwei-rappen-mit-milliardenfolgen-der-wahre-preis-der-13-ahvrente": {
-      "section": "canton-vs",
-      "ts": 1795564155412
-    },
-    "canton-vs::https://www.pomona.ch/story/830565/gastrowallis-b%c3%bcndelt-digitale-angebote-f%c3%bcr-das-gastgewerbe": {
-      "section": "canton-vs",
-      "ts": 1795564156651
-    },
-    "canton-vs::https://www.ossolanews.it/2026/11/25/leggi-notizia/argomenti/attualita-26/articolo/per-il-frontalierato-e-finito-il-tempo-delle-vacche-grasse.html": {
-      "section": "canton-vs",
-      "ts": 1795630226372
-    },
-    "canton-vs::https://www.pomona.ch/story/831143/gemeinde-naters-erh%c3%b6ht-trinkwassergeb%c3%bchren": {
-      "section": "canton-vs",
-      "ts": 1795630228326
-    },
-    "canton-vs::https://www.pomona.ch/story/829630/besser-geplant-durch-den-schnee-im-oberwallis-gepr%c3%bcfte-winterwanderwege-sind-neu-mit-infos-digital-abrufbar": {
-      "section": "canton-vs",
-      "ts": 1795630230061
-    },
-    "canton-vs::https://www.pomona.ch/story/830602/verbotene-werbung-gesundheitstipp-gewinnt-vor-gericht": {
-      "section": "canton-vs",
-      "ts": 1795630231338
-    },
-    "canton-vs::https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/11/25/ceremonie-des-records-en-dialyse": {
-      "section": "canton-vs",
-      "ts": 1795630247378
-    },
-    "canton-vs::https://www.pomona.ch/story/830603/bombendrohungen-an-deutschen-schulen": {
-      "section": "canton-vs",
-      "ts": 1795630249292
-    },
-    "canton-vs::https://www.pomona.ch/story/823923/durch-fr%c3%bchzeitige-weichenstellung-zur-finanziellen-freiheit": {
-      "section": "canton-vs",
-      "ts": 1795630250719
-    },
-    "canton-vs::https://www.pomona.ch/story/830417/vor-der-akwabstimmung-so-k%c3%b6nnte-die-kernkraft-der-zukunft-aussehen": {
-      "section": "canton-vs",
-      "ts": 1795630252059
-    },
     "canton-vs::https://www.pomona.ch/story/830955/handlungen-im-digitalen-raum-k%c3%b6nnen-f%c3%bcr-betroffene-schwerwiegende-folgen-haben": {
       "section": "canton-vs",
       "ts": 1795671898970
@@ -87,6 +39,10 @@
     "canton-vs::https://www.pomona.ch/story/828879/unwetter-und-itausf%c3%a4lle-bedrohen-das-wallis-am-h%c3%a4ufigsten": {
       "section": "canton-vs",
       "ts": 1795715108238
+    },
+    "canton-vs::https://www.pomona.ch/story/831143/gemeinde-naters-erh%c3%b6ht-trinkwassergeb%c3%bchren": {
+      "section": "canton-vs",
+      "ts": 1795823808885
     }
   }
 }

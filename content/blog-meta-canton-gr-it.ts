@@ -66,6 +66,9 @@ const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.imc-oberengadin-weekend.title': 'IMC Oberengadin chiusa nei weekend per carenza di personale',
     'blog.article.imc-oberengadin-weekend.excerpt': 'La Intermediate Care dello Spital Oberengadin non opera nei weekend di novembre per carenza di personale.',
     'blog.article.imc-oberengadin-weekend.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.neve-grigioni-incidenti.title': 'Neve in Grigioni, 18 incidenti segnalati dalla polizia',
+    'blog.article.neve-grigioni-incidenti.excerpt': 'Fino a 20 centimetri di neve fresca sono caduti giovedì in tutto il Grigioni; la polizia riferisce 18 incidenti legati al nevischio.',
+    'blog.article.neve-grigioni-incidenti.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGrIt;

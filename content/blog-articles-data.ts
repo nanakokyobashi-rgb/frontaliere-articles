@@ -48289,6 +48289,36 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'frontalieri-smart-working-limite-fiscale',
+ category: 'fiscale',
+ date: '2026-11-27T04:38:15.174Z',
+ image: '/images/blog/article-frontaliere-tasse-italia-svizzera-2026-simulazione-pratica.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
+ {
+ id: 'protocollo-fiscale-lavoro-remoto',
+ category: 'fiscale',
+ date: '2026-11-27T07:45:32.925Z',
+ image: '/images/blog/article-protocollo-fiscale-lavoro-remoto.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
+ {
+ id: 'bollettino-frontaliere-2026-11-27',
+ category: 'novita',
+ date: '2026-11-27T14:51:14.143Z',
+ image: '/images/blog/article-bollettino-frontaliere-2026-11-27.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

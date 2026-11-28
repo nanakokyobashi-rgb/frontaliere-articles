@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "009935f040fb94b55044e841f79d02ed04552e2e7465544581c6970d165818fa",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "9c9fde3f10f9677db85d7e18c8f49e7623005197c15f03eaa37e54d2be0af729",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T00:32:00.223Z",
+      "updatedAt": "2026-11-26T16:33:33.919Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "87",
+          "value": "85",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Einladung zum Podium: Wie viel Kultur braucht SRF?",
-              "detail": "Basel",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-podium-wie-viel-kultur-braucht-srf/"
+              "label": "SINGLE PARTY ( 2 FLOOR SPECIAL) | KINKER, BASEL",
+              "detail": "Münchenstein",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/single-party-2-floor-special-kinker-basel/"
             },
             {
-              "label": "Adventserwachen im Rauracher Zentrum",
-              "detail": "Riehen",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventserwachen-im-rauracher-zentrum/"
+              "label": "deb. Album Release Show | Support: Tiramisadness",
+              "detail": "Sommercasino",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/deb-album-release-show-support-tiramisadness_AG5JZe4"
             },
             {
-              "label": "Schauraum B: Nutzungsverdichtung: Räume teilen statt neu bauen.",
-              "detail": "Schauraum B, Basel",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schauraum-b-nutzungsverdichtung-raeume-teilen-statt-neu-bauen/"
+              "label": "MANTRAS & PROG PSYTRANCE",
+              "detail": "Kulturkirche Paulus",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/basel/mantras-und-prog-psytrance_AsR1iL8"
             },
             {
-              "label": "Compressio",
-              "detail": "cheesmeyer, Sissach",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/sissach/compressio_AysaFsJ"
-            },
-            {
-              "label": "Cuarteto Quiroga: Beethovens Danksagung",
-              "detail": "Riehen",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cuarteto-quiroga-beethovens-danksagung/"
-            },
-            {
-              "label": "Pro-Pain",
+              "label": "Hämatom",
               "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/pro-pain_Am2B12r"
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/populaer/pratteln/haematom_AZgNN4k"
             },
             {
-              "label": "Sven Ivanic & Jozo Brica - da&dunne",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sven-ivanic-jozo-brica-dadunne/"
+              "label": "Das Musikzimmer 2026 - Umbesetzt | \"à trois, ou avec tout l'orchestre\"",
+              "detail": "Zunftsaal Schmiedenhof, Basel",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-musikzimmer-2026-umbesetzt-a-trois-ou-avec-tout-lorchestre/"
             },
             {
-              "label": "Christoph Brüske: «Lass mal die Boomer machen»",
+              "label": "To Athena - ausverkauft",
+              "detail": "Kuppel Basel, Basel",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/to-athena_AdYFiQK"
+            },
+            {
+              "label": "Fredy Schär - UnverSchä®mt",
+              "detail": "Theater Fauteuil - Tabourettli",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/fredy-schaer-unverschaemt_AsvNnsE"
+            },
+            {
+              "label": "Fredy Schär - UnverSchä®mt",
               "detail": "Basel",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/christoph-brueske-lass-mal-die-boomer-machen/"
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fredy-schaer-unverschaemt/"
             },
             {
-              "label": "Öffentliches Adventskranzbinden",
-              "detail": "Riehen — in corso, ultimo giorno: 26 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliches-adventskranzbinden/"
+              "label": "Michael von der Heide - Michael von der Heide singt Knef",
+              "detail": "Kulturzentrum Alts Schlachthuus, Laufen",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/laufen/michael-von-der-heide-michael-von-der-heide-singt-knef_ASttyb8"
             },
             {
-              "label": "Bar per single",
-              "detail": "Bahnhof SBB Basel, Basel — in corso, ultimo giorno: 11 dicembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/party/basel/barhopping-for-singles_Am6qVZg"
+              "label": "Tension Winter Festival 2026",
+              "detail": "Messe Basel, Basel",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/tension-winter-festival-2026_AZWNMNU"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "87",
+          "value": "85",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Einladung zum Podium: Wie viel Kultur braucht SRF?",
-              "detail": "Basel",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-podium-wie-viel-kultur-braucht-srf/"
+              "label": "SINGLE PARTY ( 2 FLOOR SPECIAL) | KINKER, BASEL",
+              "detail": "Münchenstein",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/single-party-2-floor-special-kinker-basel/"
             },
             {
-              "label": "Adventserwachen im Rauracher Zentrum",
-              "detail": "Riehen",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventserwachen-im-rauracher-zentrum/"
+              "label": "deb. Album Release Show | Support: Tiramisadness",
+              "detail": "Sommercasino",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/deb-album-release-show-support-tiramisadness_AG5JZe4"
             },
             {
-              "label": "Schauraum B: Nutzungsverdichtung: Räume teilen statt neu bauen.",
-              "detail": "Schauraum B, Basel",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schauraum-b-nutzungsverdichtung-raeume-teilen-statt-neu-bauen/"
+              "label": "MANTRAS & PROG PSYTRANCE",
+              "detail": "Kulturkirche Paulus",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/basel/mantras-und-prog-psytrance_AsR1iL8"
             },
             {
-              "label": "Compressio",
-              "detail": "cheesmeyer, Sissach",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/sissach/compressio_AysaFsJ"
-            },
-            {
-              "label": "Cuarteto Quiroga: Beethovens Danksagung",
-              "detail": "Riehen",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cuarteto-quiroga-beethovens-danksagung/"
-            },
-            {
-              "label": "Pro-Pain",
+              "label": "Hm",
               "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/pro-pain_Am2B12r"
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/populaer/pratteln/haematom_AZgNN4k"
             },
             {
-              "label": "Sven Ivanic & Jozo Brica - da&dunne",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sven-ivanic-jozo-brica-dadunne/"
+              "label": "Das Musikzimmer 2026 - Umbesetzt | \"à trois, ou avec tout l'orchestre\"",
+              "detail": "Zunftsaal Schmiedenhof, Basel",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-musikzimmer-2026-umbesetzt-a-trois-ou-avec-tout-lorchestre/"
             },
             {
-              "label": "Christoph Brüske: «Lass mal die Boomer machen»",
+              "label": "To Athena - ausverkauft",
+              "detail": "Kuppel Basel, Basel",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/to-athena_AdYFiQK"
+            },
+            {
+              "label": "Fredy Schär - UnverSchä®mt",
+              "detail": "Theater Fauteuil - Tabourettli",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/fredy-schaer-unverschaemt_AsvNnsE"
+            },
+            {
+              "label": "Fredy Schär - UnverSchä®mt",
               "detail": "Basel",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/christoph-brueske-lass-mal-die-boomer-machen/"
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fredy-schaer-unverschaemt/"
             },
             {
-              "label": "Öffentliches Adventskranzbinden",
-              "detail": "Riehen — ongoing, last day: 26 November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliches-adventskranzbinden/"
+              "label": "Michael von der Heide - Michael von der Heide singt Knef",
+              "detail": "Kulturzentrum Alts Schlachthuus, Laufen",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/laufen/michael-von-der-heide-michael-von-der-heide-singt-knef_ASttyb8"
             },
             {
-              "label": "Barhopping for singles",
-              "detail": "Bahnhof SBB Basel, Basel — ongoing, last day: 11 December 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/party/basel/barhopping-for-singles_Am6qVZg"
+              "label": "Tension Winter Festival 2026",
+              "detail": "Messe Basel, Basel",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/tension-winter-festival-2026_AZWNMNU"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "87",
+          "value": "85",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Einladung zum Podium: Wie viel Kultur braucht SRF?",
-              "detail": "Basel",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-podium-wie-viel-kultur-braucht-srf/"
+              "label": "SINGLE PARTY ( 2 FLOOR SPECIAL) | KINKER, BASEL",
+              "detail": "Münchenstein",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/single-party-2-floor-special-kinker-basel/"
             },
             {
-              "label": "Adventserwachen im Rauracher Zentrum",
-              "detail": "Riehen",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventserwachen-im-rauracher-zentrum/"
+              "label": "deb. Album Release Show | Support: Tiramisadness",
+              "detail": "Sommercasino",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/deb-album-release-show-support-tiramisadness_AG5JZe4"
             },
             {
-              "label": "Schauraum B: Nutzungsverdichtung: Räume teilen statt neu bauen.",
-              "detail": "Schauraum B, Basel",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schauraum-b-nutzungsverdichtung-raeume-teilen-statt-neu-bauen/"
+              "label": "MANTRAS & PROG PSYTRANCE",
+              "detail": "Kulturkirche Paulus",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/basel/mantras-und-prog-psytrance_AsR1iL8"
             },
             {
-              "label": "Compressio",
-              "detail": "cheesmeyer, Sissach",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/sissach/compressio_AysaFsJ"
-            },
-            {
-              "label": "Cuarteto Quiroga: Beethovens Danksagung",
-              "detail": "Riehen",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cuarteto-quiroga-beethovens-danksagung/"
-            },
-            {
-              "label": "Pro-Pain",
+              "label": "H ①matom",
               "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/pro-pain_Am2B12r"
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/populaer/pratteln/haematom_AZgNN4k"
             },
             {
-              "label": "Sven Ivanic & Jozo Brica - da&dunne",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sven-ivanic-jozo-brica-dadunne/"
+              "label": "Das Musikzimmer 2026 - Umbesetzt | \"à trois, ou avec tout l'orchestre\"",
+              "detail": "Zunftsaal Schmiedenhof, Basel",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-musikzimmer-2026-umbesetzt-a-trois-ou-avec-tout-lorchestre/"
             },
             {
-              "label": "Christoph Brüske: «Lass mal die Boomer machen»",
+              "label": "To Athena - ausverkauft",
+              "detail": "Kuppel Basel, Basel",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/to-athena_AdYFiQK"
+            },
+            {
+              "label": "Fredy Schär - UnverSchä®mt",
+              "detail": "Theater Fauteuil - Tabourettli",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/fredy-schaer-unverschaemt_AsvNnsE"
+            },
+            {
+              "label": "Fredy Schär - UnverSchä®mt",
               "detail": "Basel",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/christoph-brueske-lass-mal-die-boomer-machen/"
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fredy-schaer-unverschaemt/"
             },
             {
-              "label": "Öffentliches Adventskranzbinden",
-              "detail": "Riehen — läuft, letzter Tag: 26. November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliches-adventskranzbinden/"
+              "label": "Michael von der Heide - Michael von der Heide singt Knef",
+              "detail": "Kulturzentrum Alts Schlachthuus, Laufen",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/laufen/michael-von-der-heide-michael-von-der-heide-singt-knef_ASttyb8"
             },
             {
-              "label": "Barhopping für Singles",
-              "detail": "Bahnhof SBB Basel, Basel — läuft, letzter Tag: 11. Dezember 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/party/basel/barhopping-for-singles_Am6qVZg"
+              "label": "Tension Winter Festival 2026",
+              "detail": "Messe Basel, Basel",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/tension-winter-festival-2026_AZWNMNU"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "87",
+          "value": "85",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Einladung zum Podium: Wie viel Kultur braucht SRF?",
-              "detail": "Basel",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-podium-wie-viel-kultur-braucht-srf/"
+              "label": "SINGLE PARTY ( 2 FLOOR SPECIAL) | KINKER, BASEL",
+              "detail": "Münchenstein",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/single-party-2-floor-special-kinker-basel/"
             },
             {
-              "label": "Adventserwachen im Rauracher Zentrum",
-              "detail": "Riehen",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventserwachen-im-rauracher-zentrum/"
+              "label": "deb. Album Release Show | Support: Tiramisadness",
+              "detail": "Sommercasino",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/deb-album-release-show-support-tiramisadness_AG5JZe4"
             },
             {
-              "label": "Schauraum B: Nutzungsverdichtung: Räume teilen statt neu bauen.",
-              "detail": "Schauraum B, Basel",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schauraum-b-nutzungsverdichtung-raeume-teilen-statt-neu-bauen/"
+              "label": "MANTRAS & PROG PSYTRANCE",
+              "detail": "Kulturkirche Paulus",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/basel/mantras-und-prog-psytrance_AsR1iL8"
             },
             {
-              "label": "Compressio",
-              "detail": "cheesmeyer, Sissach",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/sissach/compressio_AysaFsJ"
-            },
-            {
-              "label": "Cuarteto Quiroga: Beethovens Danksagung",
-              "detail": "Riehen",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cuarteto-quiroga-beethovens-danksagung/"
-            },
-            {
-              "label": "Pro-Pain",
+              "label": "Hématome",
               "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/pro-pain_Am2B12r"
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/populaer/pratteln/haematom_AZgNN4k"
             },
             {
-              "label": "Sven Ivanic & Jozo Brica - da&dunne",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sven-ivanic-jozo-brica-dadunne/"
+              "label": "Das Musikzimmer 2026 - Umbesetzt | \"à trois, ou avec tout l'orchestre\"",
+              "detail": "Zunftsaal Schmiedenhof, Basel",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-musikzimmer-2026-umbesetzt-a-trois-ou-avec-tout-lorchestre/"
             },
             {
-              "label": "Christoph Brüske: «Lass mal die Boomer machen»",
+              "label": "To Athena - ausverkauft",
+              "detail": "Kuppel Basel, Basel",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/to-athena_AdYFiQK"
+            },
+            {
+              "label": "Fredy Schär - UnverSchä®mt",
+              "detail": "Theater Fauteuil - Tabourettli",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/fredy-schaer-unverschaemt_AsvNnsE"
+            },
+            {
+              "label": "Fredy Schär - UnverSchä®mt",
               "detail": "Basel",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/christoph-brueske-lass-mal-die-boomer-machen/"
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fredy-schaer-unverschaemt/"
             },
             {
-              "label": "Öffentliches Adventskranzbinden",
-              "detail": "Riehen — en cours, dernier jour : 26 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliches-adventskranzbinden/"
+              "label": "Michael von der Heide - Michael von der Heide singt Knef",
+              "detail": "Kulturzentrum Alts Schlachthuus, Laufen",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/laufen/michael-von-der-heide-michael-von-der-heide-singt-knef_ASttyb8"
             },
             {
-              "label": "Barhopping pour les célibataires",
-              "detail": "Bahnhof SBB Basel, Basel — en cours, dernier jour : 11 décembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/party/basel/barhopping-for-singles_Am6qVZg"
+              "label": "Tension Winter Festival 2026",
+              "detail": "Messe Basel, Basel",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/tension-winter-festival-2026_AZWNMNU"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

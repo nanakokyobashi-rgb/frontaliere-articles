@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-27T01:58:59.946Z",
-  "contentHash": "23e54e10743d79df32cfc78474252d9fa3ff0e06853d0b64b6a2212f8d88b8ff",
+  "updatedAt": "2026-11-27T18:19:07.194Z",
+  "contentHash": "718d2a4904c0e5f331e1277de4c21fcb9bd9156659b4b4647ada6c076c379f23",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-26T13:22:01.562Z",
+      "updatedAt": "2026-11-27T09:11:52.310Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T15:51:00.529Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "15",
-          "note": "segnalazioni aggiornate: 26 novembre 2026"
+          "value": "11",
+          "note": "segnalazioni aggiornate: 27 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "4",
-          "note": "segnalazioni aggiornate: 26 novembre 2026"
+          "note": "segnalazioni aggiornate: 27 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -67,18 +67,6 @@
               "date": "2026-10-20T05:00:00.000Z"
             },
             {
-              "label": "Route du Postillon, Courtepin in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
-              "value": "Chiusura",
-              "detail": "fine prevista: 27 novembre 2026",
-              "date": "2026-10-26T06:00:00.000Z"
-            },
-            {
-              "label": "Route de la Molière, Estavayer-le-Lac in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
-              "value": "Chiusura",
-              "detail": "fine prevista: 27 novembre 2026",
-              "date": "2026-10-26T06:35:00.000Z"
-            },
-            {
               "label": "Route de Chesau, Bossonnens in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
               "value": "Chiusura",
               "detail": "fine prevista: 23 dicembre 2026",
@@ -89,10 +77,21 @@
               "value": "Chiusura",
               "detail": "fine prevista: 4 dicembre 2026",
               "date": "2026-11-04T13:34:00.000Z"
+            },
+            {
+              "label": "Le Châtelard <-> Lac d'Emmoson tra Luogo Le Châtelard E Luogo Emosson Situazione: chiusa Causa: chiusura invernale",
+              "value": "Chiusura",
+              "date": "2026-11-06T06:00:00.000Z"
+            },
+            {
+              "label": "Arangässlein 9, Murten in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 3 dicembre 2026",
+              "date": "2026-11-16T13:31:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-26T13:22:01.562Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +129,7 @@
               "url": "https://www.fr.ch/dime/actualites/bossonnens-la-route-cantonale-de-vevey-reamenagee-pour-ameliorer-la-securite-des-usagers"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -139,6 +138,12 @@
           "url": "/articoli-friburgo/gruyere-studio-mobilita-profondo/",
           "excerpt": "Venticinque comuni della Gruyère sono invitati a un'analisi approfondita della mobilità, con una prima diagnosi prevista a dicembre e conclusioni attese nell'autunno 2027.",
           "date": "2026-11-20T10:27:53.106Z"
+        },
+        {
+          "title": "Rottura condotta acqua: traffico alternato su route Neuve a Friburgo",
+          "url": "/articoli-friburgo/rottura-condotta-route-neuve/",
+          "excerpt": "La rottura di una condotta d'acqua mercoledì sera ha danneggiato la strada in parte alta della route Neuve; una decina di immobili è rimasta senza acqua.",
+          "date": "2026-11-27T07:50:19.630Z"
         },
         {
           "title": "Friburgo: Consiglio di Stato rigetta linea ferroviaria diretta Friburgo-Bulle",
@@ -175,12 +180,6 @@
           "url": "/articoli-svizzera/trasporti-pubblici-canton-friburgo-abbonamenti/",
           "excerpt": "Ecco i dettagli sugli abbonamenti dei trasporti pubblici nel Cantone di Friburgo.",
           "date": "2026-08-18T00:58:21.517Z"
-        },
-        {
-          "title": "Ginevra-Friburgo, una tratta ferroviaria sotto pressione",
-          "url": "/articoli-svizzera/linea-ginevra-friburgo-pressione/",
-          "excerpt": "Tredici interruzioni dall'inizio dell'anno hanno interessato la linea ferroviaria tra Ginevra e Friburgo.",
-          "date": "2026-10-08T21:08:07.621Z"
         }
       ],
       "latestCantonArticles": [],
@@ -194,7 +193,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-27T01:58:59.946Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "en": {
       "canton": "FR",
@@ -204,13 +203,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "15",
-          "note": "reports as of 26 November 2026"
+          "value": "11",
+          "note": "reports as of 27 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "4",
-          "note": "reports as of 26 November 2026"
+          "note": "reports as of 27 November 2026"
         }
       ],
       "dataBlocks": [
@@ -244,18 +243,6 @@
               "date": "2026-10-20T05:00:00.000Z"
             },
             {
-              "label": "Route du Postillon, Courtepin in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
-              "value": "Closure",
-              "detail": "until 27 November 2026",
-              "date": "2026-10-26T06:00:00.000Z"
-            },
-            {
-              "label": "Route de la Molière, Estavayer-le-Lac in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
-              "value": "Closure",
-              "detail": "until 27 November 2026",
-              "date": "2026-10-26T06:35:00.000Z"
-            },
-            {
               "label": "Route de Chesau, Bossonnens in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
               "value": "Closure",
               "detail": "until 23 December 2026",
@@ -266,10 +253,21 @@
               "value": "Closure",
               "detail": "until 4 December 2026",
               "date": "2026-11-04T13:34:00.000Z"
+            },
+            {
+              "label": "Le Châtelard <-> Lac d'Emmoson tra Luogo Le Châtelard E Luogo Emosson Situazione: chiusa Causa: chiusura invernale",
+              "value": "Closure",
+              "date": "2026-11-06T06:00:00.000Z"
+            },
+            {
+              "label": "Arangässlein 9, Murten in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
+              "value": "Closure",
+              "detail": "until 3 December 2026",
+              "date": "2026-11-16T13:31:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-26T13:22:01.562Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -307,7 +305,7 @@
               "url": "https://www.fr.ch/dime/actualites/bossonnens-la-route-cantonale-de-vevey-reamenagee-pour-ameliorer-la-securite-des-usagers"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -316,6 +314,12 @@
           "url": "/en/fribourg-articles/gruyere-mobility-study-deep/",
           "excerpt": "Twenty-five municipalities in Gruyère are invited to an in-depth analysis of mobility, with an initial assessment planned for December and conclusions expected in autumn 2027.",
           "date": "2026-11-20T10:27:53.106Z"
+        },
+        {
+          "title": "Water main break: alternating traffic on route Neuve in Fribourg",
+          "url": "/en/fribourg-articles/pipe-break-route-neuve-fribourg/",
+          "excerpt": "A water main break on Wednesday evening damaged the road in the upper part of route Neuve; around ten properties were left without water.",
+          "date": "2026-11-27T07:50:19.630Z"
         },
         {
           "title": "Fribourg: State Council rejects direct Fribourg-Bulle railway line",
@@ -352,12 +356,6 @@
           "url": "/en/swiss-articles/fribourg-public-transport-abonements/",
           "excerpt": "Here are the details on public transport subscriptions in the Canton of Fribourg.",
           "date": "2026-08-18T00:58:21.517Z"
-        },
-        {
-          "title": "Geneva–Fribourg, a railway route under pressure",
-          "url": "/en/swiss-articles/geneva-fribourg-rail-line-pressure/",
-          "excerpt": "Thirteen disruptions since the beginning of the year have affected the railway line between Geneva and Fribourg.",
-          "date": "2026-10-08T21:08:07.621Z"
         }
       ],
       "latestCantonArticles": [],
@@ -371,7 +369,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-27T01:58:59.946Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "de": {
       "canton": "FR",
@@ -381,13 +379,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "15",
-          "note": "Meldungen vom 26. November 2026"
+          "value": "11",
+          "note": "Meldungen vom 27. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "4",
-          "note": "Meldungen vom 26. November 2026"
+          "note": "Meldungen vom 27. November 2026"
         }
       ],
       "dataBlocks": [
@@ -421,18 +419,6 @@
               "date": "2026-10-20T05:00:00.000Z"
             },
             {
-              "label": "Route du Postillon, Courtepin in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
-              "value": "Sperrung",
-              "detail": "bis 27. November 2026",
-              "date": "2026-10-26T06:00:00.000Z"
-            },
-            {
-              "label": "Route de la Molière, Estavayer-le-Lac in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
-              "value": "Sperrung",
-              "detail": "bis 27. November 2026",
-              "date": "2026-10-26T06:35:00.000Z"
-            },
-            {
               "label": "Route de Chesau, Bossonnens in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
               "value": "Sperrung",
               "detail": "bis 23. Dezember 2026",
@@ -443,10 +429,21 @@
               "value": "Sperrung",
               "detail": "bis 4. Dezember 2026",
               "date": "2026-11-04T13:34:00.000Z"
+            },
+            {
+              "label": "Le Châtelard <-> Lac d'Emmoson zwischen Ortschaft Le Châtelard und Ortschaft Emosson Sachlage: Strecke gesperrt Ursache: Wintersperre",
+              "value": "Sperrung",
+              "date": "2026-11-06T06:00:00.000Z"
+            },
+            {
+              "label": "Arangässlein 9, Murten in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 3. Dezember 2026",
+              "date": "2026-11-16T13:31:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-26T13:22:01.562Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -484,7 +481,7 @@
               "url": "https://www.fr.ch/dime/actualites/bossonnens-la-route-cantonale-de-vevey-reamenagee-pour-ameliorer-la-securite-des-usagers"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -493,6 +490,12 @@
           "url": "/de/freiburg-artikel/gruyere-mobilitatsstudie-tief/",
           "excerpt": "Fünfundzwanzig Gemeinden der Gruyère sind zu einer eingehenden Analyse der Mobilität eingeladen, wobei eine erste Diagnose im Dezember vorgesehen ist und Schlussfolgerungen im Herbst 2027 erwartet werden.",
           "date": "2026-11-20T10:27:53.106Z"
+        },
+        {
+          "title": "Wasserrohrbruch: Wechselverkehr auf der route Neuve in Freiburg",
+          "url": "/de/freiburg-artikel/rohrbruch-route-neuve-freiburg/",
+          "excerpt": "Der Bruch einer Wasserleitung am Mittwochabend beschädigte die Straße im oberen Teil der route Neuve; etwa zehn Gebäude waren ohne Wasser geblieben.",
+          "date": "2026-11-27T07:50:19.630Z"
         },
         {
           "title": "Freiburg: Staatsrat lehnt direkte Bahnlinie Freiburg-Bulle ab",
@@ -529,12 +532,6 @@
           "url": "/de/schweiz-artikel/freiburg-oeffentliche-verkehr-abos/",
           "excerpt": "Hier finden Sie die Details zu den ÖV-Abos im Kanton Freiburg.",
           "date": "2026-08-18T00:58:21.517Z"
-        },
-        {
-          "title": "Genf-Freiburg, eine unter Druck stehende Bahnstrecke",
-          "url": "/de/schweiz-artikel/bahnstrecke-genf-freiburg-unter-druck/",
-          "excerpt": "Seit Jahresbeginn kam es auf der Bahnstrecke zwischen Genf und Freiburg zu dreizehn Unterbrechungen.",
-          "date": "2026-10-08T21:08:07.621Z"
         }
       ],
       "latestCantonArticles": [],
@@ -548,7 +545,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-27T01:58:59.946Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "fr": {
       "canton": "FR",
@@ -558,13 +555,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "15",
-          "note": "signalements au 26 novembre 2026"
+          "value": "11",
+          "note": "signalements au 27 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "4",
-          "note": "signalements au 26 novembre 2026"
+          "note": "signalements au 27 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -598,18 +595,6 @@
               "date": "2026-10-20T05:00:00.000Z"
             },
             {
-              "label": "Route du Postillon, Courtepin dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
-              "value": "Fermeture",
-              "detail": "jusqu’au 27 novembre 2026",
-              "date": "2026-10-26T06:00:00.000Z"
-            },
-            {
-              "label": "Route de la Molière, Estavayer-le-Lac dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
-              "value": "Fermeture",
-              "detail": "jusqu’au 27 novembre 2026",
-              "date": "2026-10-26T06:35:00.000Z"
-            },
-            {
               "label": "Route de Chesau, Bossonnens dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
               "value": "Fermeture",
               "detail": "jusqu’au 23 décembre 2026",
@@ -620,10 +605,21 @@
               "value": "Fermeture",
               "detail": "jusqu’au 4 décembre 2026",
               "date": "2026-11-04T13:34:00.000Z"
+            },
+            {
+              "label": "Le Châtelard <-> Lac d'Emmoson entre Localité Le Châtelard et Localité Emosson Situation: fermé Raison: fermeture hivernale",
+              "value": "Fermeture",
+              "date": "2026-11-06T06:00:00.000Z"
+            },
+            {
+              "label": "Arangässlein 9, Murten dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
+              "value": "Fermeture",
+              "detail": "jusqu’au 3 décembre 2026",
+              "date": "2026-11-16T13:31:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-26T13:22:01.562Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -661,7 +657,7 @@
               "url": "https://www.fr.ch/dime/actualites/bossonnens-la-route-cantonale-de-vevey-reamenagee-pour-ameliorer-la-securite-des-usagers"
             }
           ],
-          "updatedAt": "2026-11-26T15:51:00.529Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -670,6 +666,12 @@
           "url": "/fr/articles-fribourg/gruyere-etude-mobilite-approfondie/",
           "excerpt": "Vingt-cinq communes de la Gruyère sont invitées à une analyse approfondie de la mobilité, avec un premier diagnostic prévu en décembre et des conclusions attendues à l’automne 2027.",
           "date": "2026-11-20T10:27:53.106Z"
+        },
+        {
+          "title": "Rupture de conduite d’eau : circulation alternée à Fribourg",
+          "url": "/fr/articles-fribourg/rupture-conduite-route-neuve/",
+          "excerpt": "La rupture d’une conduite d’eau mercredi soir a endommagé la chaussée dans la partie haute de la route Neuve ; une dizaine d’immeubles est restée sans eau.",
+          "date": "2026-11-27T07:50:19.630Z"
         },
         {
           "title": "Fribourg : le Conseil d’État rejette la ligne ferroviaire directe Fribourg-Bulle",
@@ -706,12 +708,6 @@
           "url": "/fr/articles-suisse/fribourg-transports-en-commun-abonnements/",
           "excerpt": "Voici les détails des abonnements aux transports publics dans le canton de Fribourg.",
           "date": "2026-08-18T00:58:21.517Z"
-        },
-        {
-          "title": "Genève-Fribourg, une ligne ferroviaire sous pression",
-          "url": "/fr/articles-suisse/ligne-geneve-fribourg-sous-pression/",
-          "excerpt": "Treize interruptions depuis le début de l’année ont touché la ligne ferroviaire entre Genève et Fribourg.",
-          "date": "2026-10-08T21:08:07.621Z"
         }
       ],
       "latestCantonArticles": [],
@@ -725,7 +721,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-27T01:58:59.946Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     }
   }
 }

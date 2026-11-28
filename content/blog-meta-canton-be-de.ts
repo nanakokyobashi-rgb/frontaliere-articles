@@ -90,6 +90,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.priorita-traffico-cinque-tratti.title': 'Priorität für den Wirtschaftsverkehr auf fünf neuen Strecken in Bern',
     'blog.article.priorita-traffico-cinque-tratti.excerpt': 'Die Entscheidung des Gemeinderats vom 26. November 2026 eröffnet 2027 fünf neue Strecken, nach einem positiven Pilotprojekt, das am 1. Juni 2025 gestartet wurde.',
     'blog.article.priorita-traffico-cinque-tratti.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.risposta-petizione-fisioterapia-berna.title': 'Regierung Bern nimmt Physiotherapie-Petition zur Kenntnis',
+    'blog.article.risposta-petizione-fisioterapia-berna.excerpt': 'Die Regierung des Kantons Bern hat die Petition «Für eine gesicherte und wohnortnahe Physiotherapie im Kanton Bern» zur Kenntnis genommen und berücksichtigt deren Anliegen in den laufenden Tarifverfahren.',
+    'blog.article.risposta-petizione-fisioterapia-berna.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBeDe;

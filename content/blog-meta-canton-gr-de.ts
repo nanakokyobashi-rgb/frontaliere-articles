@@ -66,6 +66,9 @@ const blogMetaCantonGrDe: Record<string, string> = {
     'blog.article.imc-oberengadin-weekend.title': 'IMC Oberengadin an Wochenenden wegen Personalmangels geschlossen',
     'blog.article.imc-oberengadin-weekend.excerpt': 'Die Intermediate Care des Spitals Oberengadin ist an den Wochenenden im November aufgrund von Personalmangel nicht in Betrieb.',
     'blog.article.imc-oberengadin-weekend.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.neve-grigioni-incidenti.title': 'Schnee in Graubünden, 18 von der Polizei gemeldete Unfälle',
+    'blog.article.neve-grigioni-incidenti.excerpt': 'Am Donnerstag fielen in ganz Graubünden bis zu 20 Zentimeter Neuschnee; die Polizei berichtet von 18 Unfällen im Zusammenhang mit Schneeregen.',
+    'blog.article.neve-grigioni-incidenti.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGrDe;

@@ -4,17 +4,17 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "a3f98fec11f4aae817dec402be9025686606aeee3e712c90d03a074d60046eb9",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "cb8a54a5bc915029c39569c7af6ac633a90de62ecaf62c7e4ab12b54023f71da",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T00:32:00.223Z",
+      "updatedAt": "2026-11-26T16:33:33.919Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-25T16:08:35.229Z",
+      "updatedAt": "2026-11-26T15:51:00.529Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "179",
+          "value": "177",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,68 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Philosophie des sciences",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-des-sciences/"
+              "label": "LiteratureLenk. Der Röstigraben n'existe pas.",
+              "detail": "Lenk i.S. (Lenk im Simmental), Lenk",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literaturelenk-der-roestigraben-nexiste-pas/"
             },
             {
-              "label": "STRICK MIT SCHICK",
-              "detail": "Beatenberg",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/beatenberg/schick-mit-strick_AkfneuF"
+              "label": "Mercatino di Natale di Kambly",
+              "detail": "Trubschachen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercatino-di-natale-di-kambly/"
             },
             {
-              "label": "Öffentliche Themenführung «Adventsbummel Thun» (de)",
-              "detail": "Thun",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-themenfuehrung-adventsbummel-thun-de/"
+              "label": "KlangKeller-DidjDay",
+              "detail": "Klangkeller Bern, Bern",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/klangkeller-didjday_AB2sVHL"
             },
             {
-              "label": "Caroline Bachmann",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/caroline-bachmann-1/"
+              "label": "Wine & Dine Südafrika",
+              "detail": "Spiez",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-suedafrika/"
             },
             {
-              "label": "NMBE Leseratten lesen «Das Geschenk» von Gaea Schoeters",
-              "detail": "Naturhistorisches Museum Bern, Bern",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nmbe-leseratten-lesen-das-geschenk-von-gaea-schoeters/"
+              "label": "Bar per single",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/party/bern/barhopping-for-singles_AG9UYKr"
             },
             {
-              "label": "Christmas Sessions 2026 – CHICAGO Experience feat. Danny Seraphine & T. Rex",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/christmas-sessions-2026-chicago-experience-feat-danny-seraphine-t-rex/"
+              "label": "Gurtner & Schenk - Marathon",
+              "detail": "Kulturfabrik KUFA, Lyss",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gurtner-schenk-marathon-4/"
             },
             {
-              "label": "Landhaus Live - DADA ANTE PORTAS",
-              "detail": "Restaurant Landhaus Liebefeld",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/liebefeld/landhaus-live-dada-ante-portas_AxPc3Bq"
+              "label": "Concerti invernali dell'Associazione musicale di Interlaken Unterseen",
+              "detail": "Evang.-ref. Kirche Unterseen, Interlaken",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/evenements/musique/unterseen/concerts-dhiver-de-lassociation-musicale-dinterlaken-unterseen_Aj79vdk"
             },
             {
-              "label": "Make it naked",
-              "detail": "Heitere Fahne - die Idealistenkiste",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wabern/make-it-naked_AKNQ7kk"
+              "label": "Kate Pearl (Just Pearls) “Flutterby”",
+              "detail": "Villa Stucki",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/kate-pearl-just-pearls-flutterby_AZecuLV"
             },
             {
-              "label": "Huttwiler Wiehnachtsmärit",
-              "detail": "Huttwil — in corso, ultimo giorno: 29 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/huttwiler-wiehnachtsmaerit/"
+              "label": "The Monsters - Bern-In-Hell Tour",
+              "detail": "ISC, Bern",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/the-monsters-bern-in-hell-tour_AdTZX4V"
             },
             {
-              "label": "Candle Making",
-              "detail": "Schul- und Dorfbibliothek Oey, Diemtigen — in corso, ultimo giorno: 28 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/candle-making-1/"
+              "label": "Remo Forrer",
+              "detail": "OldCapitol, Langenthal",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/remo-forrer_ANi8sgS"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +112,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/ueber-26-tonnen-zwiebeln-und-360-marktstaende-am-zibelemaerit"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -153,7 +152,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "BE",
@@ -163,7 +162,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "179",
+          "value": "177",
           "note": "from the site’s events calendar"
         }
       ],
@@ -174,69 +173,68 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Philosophie des sciences",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-des-sciences/"
+              "label": "LiteratureLenk. Der Röstigraben n'existe pas.",
+              "detail": "Lenk i.S. (Lenk im Simmental), Lenk",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literaturelenk-der-roestigraben-nexiste-pas/"
             },
             {
-              "label": "STRICK MIT SCHICK",
-              "detail": "Beatenberg",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/beatenberg/schick-mit-strick_AkfneuF"
+              "label": "Kambly Christmas market",
+              "detail": "Trubschachen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercatino-di-natale-di-kambly/"
             },
             {
-              "label": "Öffentliche Themenführung «Adventsbummel Thun» (de)",
-              "detail": "Thun",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-themenfuehrung-adventsbummel-thun-de/"
+              "label": "KlangKeller-DidjDay",
+              "detail": "Klangkeller Bern, Bern",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/klangkeller-didjday_AB2sVHL"
             },
             {
-              "label": "Caroline Bachmann",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/caroline-bachmann-1/"
+              "label": "Wine & Dine Südafrika",
+              "detail": "Spiez",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-suedafrika/"
             },
             {
-              "label": "NMBE Leseratten lesen «Das Geschenk» von Gaea Schoeters",
-              "detail": "Naturhistorisches Museum Bern, Bern",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nmbe-leseratten-lesen-das-geschenk-von-gaea-schoeters/"
+              "label": "Barhopping for singles",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/party/bern/barhopping-for-singles_AG9UYKr"
             },
             {
-              "label": "Christmas Sessions 2026 CHICAGO Experience feat. Danny Seraphine & T. Rex",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/christmas-sessions-2026-chicago-experience-feat-danny-seraphine-t-rex/"
+              "label": "Gurtner & Schenk - Marathon",
+              "detail": "Kulturfabrik KUFA, Lyss",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gurtner-schenk-marathon-4/"
             },
             {
-              "label": "Landhaus Live - DADA ANTE PORTAS",
-              "detail": "Restaurant Landhaus Liebefeld",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/liebefeld/landhaus-live-dada-ante-portas_AxPc3Bq"
+              "label": "Winter Concerts by the Interlaken Unterseen Music Society",
+              "detail": "Evang.-ref. Kirche Unterseen, Interlaken",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/evenements/musique/unterseen/concerts-dhiver-de-lassociation-musicale-dinterlaken-unterseen_Aj79vdk"
             },
             {
-              "label": "Make it naked",
-              "detail": "Heitere Fahne - die Idealistenkiste",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wabern/make-it-naked_AKNQ7kk"
+              "label": "Kate Pearl (Just Pearls) \"Flutterby\"",
+              "detail": "Villa Stucki",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/kate-pearl-just-pearls-flutterby_AZecuLV"
             },
             {
-              "label": "Huttwiler Wiehnachtsmärit",
-              "detail": "Huttwil — ongoing, last day: 29 November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/huttwiler-wiehnachtsmaerit/"
+              "label": "The Monsters - Bern-In-Hell Tour",
+              "detail": "ISC, Bern",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/the-monsters-bern-in-hell-tour_AdTZX4V"
             },
             {
-              "label": "Candle Making",
-              "detail": "Schul- und Dorfbibliothek Oey, Diemtigen — ongoing, last day: 28 November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/candle-making-1/"
+              "label": "Remo Forrer",
+              "detail": "OldCapitol, Langenthal",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/remo-forrer_ANi8sgS"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -249,7 +247,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/ueber-26-tonnen-zwiebeln-und-360-marktstaende-am-zibelemaerit"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -289,7 +287,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "BE",
@@ -299,7 +297,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "179",
+          "value": "177",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -310,69 +308,68 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Philosophie des sciences",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-des-sciences/"
+              "label": "LiteratureLenk. Der Röstigraben n'existe pas.",
+              "detail": "Lenk i.S. (Lenk im Simmental), Lenk",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literaturelenk-der-roestigraben-nexiste-pas/"
             },
             {
-              "label": "STRICK MIT SCHICK",
-              "detail": "Beatenberg",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/beatenberg/schick-mit-strick_AkfneuF"
+              "label": "Kambly Weihnachtsmarkt",
+              "detail": "Trubschachen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercatino-di-natale-di-kambly/"
             },
             {
-              "label": "Öffentliche Themenführung «Adventsbummel Thun» (de)",
-              "detail": "Thun",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-themenfuehrung-adventsbummel-thun-de/"
+              "label": "KlangKeller-DidjDay",
+              "detail": "Klangkeller Bern, Bern",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/klangkeller-didjday_AB2sVHL"
             },
             {
-              "label": "Caroline Bachmann",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/caroline-bachmann-1/"
+              "label": "Wine & Dine Südafrika",
+              "detail": "Spiez",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-suedafrika/"
             },
             {
-              "label": "NMBE Leseratten lesen «Das Geschenk» von Gaea Schoeters",
-              "detail": "Naturhistorisches Museum Bern, Bern",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nmbe-leseratten-lesen-das-geschenk-von-gaea-schoeters/"
+              "label": "Barhopping für Singles",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/party/bern/barhopping-for-singles_AG9UYKr"
             },
             {
-              "label": "Christmas Sessions 2026 – CHICAGO Experience mit Danny Seraphine & T. Rex",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/christmas-sessions-2026-chicago-experience-feat-danny-seraphine-t-rex/"
+              "label": "Gurtner & Schenk - Marathon",
+              "detail": "Kulturfabrik KUFA, Lyss",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gurtner-schenk-marathon-4/"
             },
             {
-              "label": "Landhaus Live - DADA ANTE PORTAS",
-              "detail": "Restaurant Landhaus Liebefeld",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/liebefeld/landhaus-live-dada-ante-portas_AxPc3Bq"
+              "label": "Winterkonzerte Musikverein Interlaken Unterseen",
+              "detail": "Evang.-ref. Kirche Unterseen, Interlaken",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/evenements/musique/unterseen/concerts-dhiver-de-lassociation-musicale-dinterlaken-unterseen_Aj79vdk"
             },
             {
-              "label": "Make it naked",
-              "detail": "Heitere Fahne - die Idealistenkiste",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wabern/make-it-naked_AKNQ7kk"
+              "label": "Kate Pearl (Just Pearls) \"Flutterby\"",
+              "detail": "Villa Stucki",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/kate-pearl-just-pearls-flutterby_AZecuLV"
             },
             {
-              "label": "Huttwiler Wiehnachtsmärit",
-              "detail": "Huttwil — läuft, letzter Tag: 29. November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/huttwiler-wiehnachtsmaerit/"
+              "label": "The Monsters - Bern-In-Hell Tour",
+              "detail": "ISC, Bern",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/the-monsters-bern-in-hell-tour_AdTZX4V"
             },
             {
-              "label": "Kerzenziehen",
-              "detail": "Schul- und Dorfbibliothek Oey, Diemtigen — läuft, letzter Tag: 28. November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/candle-making-1/"
+              "label": "Remo Forrer",
+              "detail": "OldCapitol, Langenthal",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/remo-forrer_ANi8sgS"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -385,7 +382,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/ueber-26-tonnen-zwiebeln-und-360-marktstaende-am-zibelemaerit"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -425,7 +422,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "BE",
@@ -435,7 +432,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "179",
+          "value": "177",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -446,69 +443,68 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Philosophie des sciences",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-des-sciences/"
+              "label": "LiteratureLenk. Der Röstigraben n'existe pas.",
+              "detail": "Lenk i.S. (Lenk im Simmental), Lenk",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literaturelenk-der-roestigraben-nexiste-pas/"
             },
             {
-              "label": "STRICK AVEC SCHICK",
-              "detail": "Beatenberg",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/beatenberg/schick-mit-strick_AkfneuF"
+              "label": "Marché de Noël de Kambly",
+              "detail": "Trubschachen",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercatino-di-natale-di-kambly/"
             },
             {
-              "label": "Öffentliche Themenführung «Adventsbummel Thun» (de)",
-              "detail": "Thun",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-themenfuehrung-adventsbummel-thun-de/"
+              "label": "KlangKeller-DidjDay",
+              "detail": "Klangkeller Bern, Bern",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/klangkeller-didjday_AB2sVHL"
             },
             {
-              "label": "Caroline Bachmann",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/caroline-bachmann-1/"
+              "label": "Wine & Dine Südafrika",
+              "detail": "Spiez",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-suedafrika/"
             },
             {
-              "label": "NMBE Leseratten lesen «Das Geschenk» von Gaea Schoeters",
-              "detail": "Naturhistorisches Museum Bern, Bern",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nmbe-leseratten-lesen-das-geschenk-von-gaea-schoeters/"
+              "label": "Barhopping pour les célibataires",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/party/bern/barhopping-for-singles_AG9UYKr"
             },
             {
-              "label": "Christmas Sessions 2026 – CHICAGO Experience avec Danny Seraphine et T. Rex",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/christmas-sessions-2026-chicago-experience-feat-danny-seraphine-t-rex/"
+              "label": "Gurtner & Schenk - Marathon",
+              "detail": "Kulturfabrik KUFA, Lyss",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gurtner-schenk-marathon-4/"
             },
             {
-              "label": "Landhaus Live - DADA ANTE PORTAS",
-              "detail": "Restaurant Landhaus Liebefeld",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/liebefeld/landhaus-live-dada-ante-portas_AxPc3Bq"
+              "label": "Concerts d'hiver de l'association musicale d'Interlaken Unterseen",
+              "detail": "Evang.-ref. Kirche Unterseen, Interlaken",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/evenements/musique/unterseen/concerts-dhiver-de-lassociation-musicale-dinterlaken-unterseen_Aj79vdk"
             },
             {
-              "label": "Make it naked",
-              "detail": "Heitere Fahne - die Idealistenkiste",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wabern/make-it-naked_AKNQ7kk"
+              "label": "Kate Pearl (Just Pearls) « Flutterby »",
+              "detail": "Villa Stucki",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/kate-pearl-just-pearls-flutterby_AZecuLV"
             },
             {
-              "label": "Huttwiler Wiehnachtsmärit",
-              "detail": "Huttwil — en cours, dernier jour : 29 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/huttwiler-wiehnachtsmaerit/"
+              "label": "The Monsters - Bern-In-Hell Tour",
+              "detail": "ISC, Bern",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/the-monsters-bern-in-hell-tour_AdTZX4V"
             },
             {
-              "label": "Fabrication de bougies",
-              "detail": "Schul- und Dorfbibliothek Oey, Diemtigen — en cours, dernier jour : 28 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/candle-making-1/"
+              "label": "Remo Forrer",
+              "detail": "OldCapitol, Langenthal",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/remo-forrer_ANi8sgS"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -521,7 +517,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/ueber-26-tonnen-zwiebeln-und-360-marktstaende-am-zibelemaerit"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -561,7 +557,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

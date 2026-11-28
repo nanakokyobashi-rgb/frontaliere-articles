@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "5b1611de80aaa943dbd828785159fb523e44f3bbbd4bbc54cd8a93bf8afc5097",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "758b61910a72798c8f5dcd83d76c87e0df7b44c028baa7f6d0c9f058342aa97e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T00:32:00.223Z",
+      "updatedAt": "2026-11-26T16:33:33.919Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "20",
+          "value": "19",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,18 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Vita! - Una serata incerta con Jane Mumford",
-              "detail": "Trogen",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/vita-una-serata-incerta-con-jane-mumford/"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel — in corso, ultimo giorno: 9 dicembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
             {
               "label": "Benefizkonzert apacella",
               "detail": "Schulhaus Gringel, Appenzell",
@@ -61,6 +49,12 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-27",
               "url": "https://www.guidle.com/it/events/music/herisau/loredana-und-kilian-why-is-shehe-like-that_AKTJwTc"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — in corso, ultimo giorno: 9 dicembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Degustazione notturna",
@@ -91,11 +85,17 @@
               "detail": "Walzenhausen",
               "date": "2026-11-28",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/produzione-dakar-regole-matto/"
+            },
+            {
+              "label": "«Loos-Stobede»",
+              "detail": "Weissbad, Schwende-Rüte",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/loos-stobede-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "20",
+          "value": "19",
           "note": "from the site’s events calendar"
         }
       ],
@@ -143,18 +143,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Live! - An uncertain evening with Jane Mumford",
-              "detail": "Trogen",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/vita-una-serata-incerta-con-jane-mumford/"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel — ongoing, last day: 9 December 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
             {
               "label": "Benefizkonzert apacella",
               "detail": "Schulhaus Gringel, Appenzell",
@@ -172,6 +160,12 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-27",
               "url": "https://www.guidle.com/it/events/music/herisau/loredana-und-kilian-why-is-shehe-like-that_AKTJwTc"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — ongoing, last day: 9 December 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "How(h)night tasting",
@@ -202,11 +196,17 @@
               "detail": "Walzenhausen",
               "date": "2026-11-28",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/produzione-dakar-regole-matto/"
+            },
+            {
+              "label": "«Loos-Stobede»",
+              "detail": "Weissbad, Schwende-Rüte",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/loos-stobede-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "20",
+          "value": "19",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -254,18 +254,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Leben! – Ein unsicherer Abend mit Jane Mumford",
-              "detail": "Trogen",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/vita-una-serata-incerta-con-jane-mumford/"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel — läuft, letzter Tag: 9. Dezember 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
             {
               "label": "Benefizkonzert apacella",
               "detail": "Schulhaus Gringel, Appenzell",
@@ -283,6 +271,12 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-27",
               "url": "https://www.guidle.com/it/events/music/herisau/loredana-und-kilian-why-is-shehe-like-that_AKTJwTc"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — läuft, letzter Tag: 9. Dezember 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Wie(h)nachts-Degustation",
@@ -313,11 +307,17 @@
               "detail": "Walzenhausen",
               "date": "2026-11-28",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/produzione-dakar-regole-matto/"
+            },
+            {
+              "label": "«Loos-Stobede»",
+              "detail": "Weissbad, Schwende-Rüte",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/loos-stobede-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "20",
+          "value": "19",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -365,18 +365,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "La vie ! - Une soirée incertaine avec Jane Mumford",
-              "detail": "Trogen",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/vita-una-serata-incerta-con-jane-mumford/"
-            },
-            {
-              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
-              "detail": "Kloster Maria der Engel — en cours, dernier jour : 9 décembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
-            },
             {
               "label": "Benefizkonzert apacella",
               "detail": "Schulhaus Gringel, Appenzell",
@@ -394,6 +382,12 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-27",
               "url": "https://www.guidle.com/it/events/music/herisau/loredana-und-kilian-why-is-shehe-like-that_AKTJwTc"
+            },
+            {
+              "label": "Öffentliche Führung durch das 400-jährige Frauenkloster Maria der Engel",
+              "detail": "Kloster Maria der Engel — en cours, dernier jour : 9 décembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/appenzell/oeffentliche-fuehrung-durch-das-400-jaehrige-frauenkloster-maria-der-engel_ACfAq9n"
             },
             {
               "label": "Dégustation de vin",
@@ -424,11 +418,17 @@
               "detail": "Walzenhausen",
               "date": "2026-11-28",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/produzione-dakar-regole-matto/"
+            },
+            {
+              "label": "«Loos-Stobede»",
+              "detail": "Weissbad, Schwende-Rüte",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/loos-stobede-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

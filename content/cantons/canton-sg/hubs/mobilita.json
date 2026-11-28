@@ -4,22 +4,22 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T22:26:01.478Z",
-  "contentHash": "1260416e3ccdef3735e4705bbfd7f320f4a46c5b365101c89c11582a578e771d",
+  "updatedAt": "2026-11-27T14:54:45.873Z",
+  "contentHash": "f5b1524b685bd8873fb442e91d3063da177f8246dd5ee84ac4ef714c31e5d03f",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-11-25T23:59:59.000Z",
+      "updatedAt": "2026-11-26T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-26T03:50:03.880Z",
+      "updatedAt": "2026-11-27T00:05:50.684Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Au-Lustenau, settimana conclusa: 25 novembre 2026"
+          "note": "Au-Lustenau, settimana conclusa: 26 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "3",
-          "note": "segnalazioni aggiornate: 26 novembre 2026"
+          "note": "segnalazioni aggiornate: 27 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "10",
-          "note": "segnalazioni aggiornate: 26 novembre 2026"
+          "value": "8",
+          "note": "segnalazioni aggiornate: 27 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 19 novembre 2026 – 25 novembre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 20 novembre 2026 – 26 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Au-Lustenau",
@@ -103,7 +103,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-11-25T23:59:59.000Z"
+          "updatedAt": "2026-11-26T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -153,14 +153,14 @@
               "date": "2026-10-01T22:00:00.000Z"
             },
             {
-              "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Trübbach E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: corsie strette…",
+              "label": "A3 Zürich <-> Chur tra Svincolo autostradale Sargans E Svincolo autostradale Flums Situazione: problemi di traffico cantiere Aggiunta 1: limite temporaneo altezza Altezza veicolo [m] 4.5",
               "value": "Cantiere",
-              "detail": "fine prevista: 27 novembre 2026",
-              "date": "2026-10-04T17:00:00.000Z"
+              "detail": "fine prevista: 30 dicembre 2027",
+              "date": "2026-11-02T11:41:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -178,6 +178,11 @@
               "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/musikalische-adventsreise-in-der-bahnhofshalle.html"
             },
             {
+              "label": "Kanton St.Gallen: Drei Unfälle auf der A1 im Morgenverkehr",
+              "date": "2026-11-23",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st-gallen--drei-unfaelle-auf-der-a1-im-morgenverkehr.html"
+            },
+            {
               "label": "Dienstag, 17.11.2026 Ersatzbau der Rheinbrücke Au–Lustenau wird vorbereitet",
               "date": "2026-11-17",
               "url": "https://presse.vorarlberg.at/land/public/Ersatzbau-der-Rheinbruecke-Au-Lustenau-wird-vorbereitet"
@@ -191,14 +196,9 @@
               "label": "Regierung korrigiert die Motorfahrzeugsteuer",
               "date": "2026-11-16",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/regierung-korrigiert-die-motorfahrzeugsteuer.html"
-            },
-            {
-              "label": "Strassengesetz: Kommission beantragt Änderungen",
-              "date": "2026-11-13",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/strassengesetz--kommission-beantragt-aenderungen-.html"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -286,7 +286,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-26T22:26:01.478Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "en": {
       "canton": "SG",
@@ -297,24 +297,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Au-Lustenau, week ending 25 November 2026"
+          "note": "Au-Lustenau, week ending 26 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "3",
-          "note": "reports as of 26 November 2026"
+          "note": "reports as of 27 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "10",
-          "note": "reports as of 26 November 2026"
+          "value": "8",
+          "note": "reports as of 27 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 19 November 2026 to 25 November 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 20 November 2026 to 26 November 2026, fastest first.",
           "items": [
             {
               "label": "Au-Lustenau",
@@ -367,7 +367,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-11-25T23:59:59.000Z"
+          "updatedAt": "2026-11-26T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -417,14 +417,14 @@
               "date": "2026-10-01T22:00:00.000Z"
             },
             {
-              "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Trübbach E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: corsie strette…",
+              "label": "A3 Zürich <-> Chur tra Svincolo autostradale Sargans E Svincolo autostradale Flums Situazione: problemi di traffico cantiere Aggiunta 1: limite temporaneo altezza Altezza veicolo [m] 4.5",
               "value": "Roadworks",
-              "detail": "until 27 November 2026",
-              "date": "2026-10-04T17:00:00.000Z"
+              "detail": "until 30 December 2027",
+              "date": "2026-11-02T11:41:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -442,6 +442,11 @@
               "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/musikalische-adventsreise-in-der-bahnhofshalle.html"
             },
             {
+              "label": "Kanton St.Gallen: Drei Unfälle auf der A1 im Morgenverkehr",
+              "date": "2026-11-23",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st-gallen--drei-unfaelle-auf-der-a1-im-morgenverkehr.html"
+            },
+            {
               "label": "Dienstag, 17.11.2026 Ersatzbau der Rheinbrücke Au–Lustenau wird vorbereitet",
               "date": "2026-11-17",
               "url": "https://presse.vorarlberg.at/land/public/Ersatzbau-der-Rheinbruecke-Au-Lustenau-wird-vorbereitet"
@@ -455,14 +460,9 @@
               "label": "Regierung korrigiert die Motorfahrzeugsteuer",
               "date": "2026-11-16",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/regierung-korrigiert-die-motorfahrzeugsteuer.html"
-            },
-            {
-              "label": "Strassengesetz: Kommission beantragt Änderungen",
-              "date": "2026-11-13",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/strassengesetz--kommission-beantragt-aenderungen-.html"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +549,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-26T22:26:01.478Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "de": {
       "canton": "SG",
@@ -560,24 +560,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Au-Lustenau, Woche bis 25. November 2026"
+          "note": "Au-Lustenau, Woche bis 26. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "3",
-          "note": "Meldungen vom 26. November 2026"
+          "note": "Meldungen vom 27. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "10",
-          "note": "Meldungen vom 26. November 2026"
+          "value": "8",
+          "note": "Meldungen vom 27. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 19. November 2026 bis 25. November 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 20. November 2026 bis 26. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Au-Lustenau",
@@ -630,7 +630,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-11-25T23:59:59.000Z"
+          "updatedAt": "2026-11-26T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -680,14 +680,14 @@
               "date": "2026-10-01T22:00:00.000Z"
             },
             {
-              "label": "A13 Sargans <-> St. Margrethen zwischen Anschluss Trübbach und Anschluss Haag Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen…",
+              "label": "A3 Zürich <-> Chur zwischen Anschluss Sargans und Anschluss Flums Sachlage: Verkehrsbehinderung Baustelle Zusatz 1: vorübergehende Beschränkung der Höhe Fahrzeughöhe [m] 4.5",
               "value": "Baustelle",
-              "detail": "bis 27. November 2026",
-              "date": "2026-10-04T17:00:00.000Z"
+              "detail": "bis 30. Dezember 2027",
+              "date": "2026-11-02T11:41:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -705,6 +705,11 @@
               "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/musikalische-adventsreise-in-der-bahnhofshalle.html"
             },
             {
+              "label": "Kanton St.Gallen: Drei Unfälle auf der A1 im Morgenverkehr",
+              "date": "2026-11-23",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st-gallen--drei-unfaelle-auf-der-a1-im-morgenverkehr.html"
+            },
+            {
               "label": "Dienstag, 17.11.2026 Ersatzbau der Rheinbrücke Au–Lustenau wird vorbereitet",
               "date": "2026-11-17",
               "url": "https://presse.vorarlberg.at/land/public/Ersatzbau-der-Rheinbruecke-Au-Lustenau-wird-vorbereitet"
@@ -718,14 +723,9 @@
               "label": "Regierung korrigiert die Motorfahrzeugsteuer",
               "date": "2026-11-16",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/regierung-korrigiert-die-motorfahrzeugsteuer.html"
-            },
-            {
-              "label": "Strassengesetz: Kommission beantragt Änderungen",
-              "date": "2026-11-13",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/strassengesetz--kommission-beantragt-aenderungen-.html"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -812,7 +812,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-26T22:26:01.478Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "fr": {
       "canton": "SG",
@@ -823,24 +823,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Au-Lustenau, semaine jusqu’au 25 novembre 2026"
+          "note": "Au-Lustenau, semaine jusqu’au 26 novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "3",
-          "note": "signalements au 26 novembre 2026"
+          "note": "signalements au 27 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "10",
-          "note": "signalements au 26 novembre 2026"
+          "value": "8",
+          "note": "signalements au 27 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 19 novembre 2026 au 25 novembre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 20 novembre 2026 au 26 novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Au-Lustenau",
@@ -893,7 +893,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-11-25T23:59:59.000Z"
+          "updatedAt": "2026-11-26T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -943,14 +943,14 @@
               "date": "2026-10-01T22:00:00.000Z"
             },
             {
-              "label": "A13 Sargans <-> St. Margrethen entre Jonction autoroutière Trübbach et Jonction autoroutière Haag Situation: trafic perturbé travaux, longueur [km] 2.0 Gestion du trafic: rétrécissement des voies…",
+              "label": "A3 Zurich <-> Coire entre Jonction autoroutière Sargans et Jonction autoroutière Flums Situation: trafic perturbé travaux Complément 1: limitation temporaire de hauteur hauteur du véhicule [m] 4.5",
               "value": "Chantier",
-              "detail": "jusqu’au 27 novembre 2026",
-              "date": "2026-10-04T17:00:00.000Z"
+              "detail": "jusqu’au 30 décembre 2027",
+              "date": "2026-11-02T11:41:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -968,6 +968,11 @@
               "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/11/musikalische-adventsreise-in-der-bahnhofshalle.html"
             },
             {
+              "label": "Kanton St.Gallen: Drei Unfälle auf der A1 im Morgenverkehr",
+              "date": "2026-11-23",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st-gallen--drei-unfaelle-auf-der-a1-im-morgenverkehr.html"
+            },
+            {
               "label": "Dienstag, 17.11.2026 Ersatzbau der Rheinbrücke Au–Lustenau wird vorbereitet",
               "date": "2026-11-17",
               "url": "https://presse.vorarlberg.at/land/public/Ersatzbau-der-Rheinbruecke-Au-Lustenau-wird-vorbereitet"
@@ -981,14 +986,9 @@
               "label": "Regierung korrigiert die Motorfahrzeugsteuer",
               "date": "2026-11-16",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/regierung-korrigiert-die-motorfahrzeugsteuer.html"
-            },
-            {
-              "label": "Strassengesetz: Kommission beantragt Änderungen",
-              "date": "2026-11-13",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/strassengesetz--kommission-beantragt-aenderungen-.html"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -1076,7 +1076,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-26T22:26:01.478Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     }
   }
 }

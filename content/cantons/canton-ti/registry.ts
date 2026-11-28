@@ -315,4 +315,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'svizzera-schengen-controlli-frontalieri',
+ category: 'pratico',
+ date: '2026-11-27T10:54:42.121Z',
+ image: '/images/blog/article-rapporto-consiglio-federale-schengen.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

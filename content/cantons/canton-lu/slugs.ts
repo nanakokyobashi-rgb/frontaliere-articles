@@ -33,6 +33,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'nav-kita-proroga-fino-2030': { it: 'nav-kita-proroga-fino-2030', en: 'nav-kita-extension-until-2030', de: 'nav-kita-verlangerung-bis-2030', fr: 'nav-kita-prolongation-jusqua-2030' },
  'cambio-orari-bus-lucerna': { it: 'cambio-orari-bus-lucerna', en: 'lucerne-bus-timetable-change', de: 'luzern-fahrplanwechsel-bus', fr: 'lucerne-changement-horaires-bus' },
  'spazi-scolastici-wurzenbach': { it: 'spazi-scolastici-wurzenbach', en: 'wurzenbach-school-space', de: 'schulraum-wurzenbach', fr: 'espace-scolaire-wurzenbach' },
+ 'esperimento-viario-lucerna-centro': { it: 'esperimento-viario-lucerna-centro', en: 'lucerne-city-traffic-experiment', de: 'verkehrsexperiment-luzern-zentrum', fr: 'experimentation-routiere-lucerne-centre' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

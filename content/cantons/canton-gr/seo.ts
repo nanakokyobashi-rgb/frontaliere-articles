@@ -821,6 +821,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-neve-grigioni-incidenti': {
+    title: 'Neve in Grigioni, 18 incidenti segnalati dalla polizia',
+    description: 'Nei Grigioni, giovedì sono caduti fino a 20 centimetri di neve fresca; la polizia segnala 18 incidenti legati al nevischio.',
+    keywords: 'frontalieri, ticino, svizzera, italia, neve, grigioni, incidenti, segnalati',
+    ogTitle: 'Neve diffusa in Grigioni: 18 incidenti segnalati',
+    ogDescription: 'Suedostschweiz riferisce neve fresca diffusa fino a 20 centimetri in tutto il Canton Grigioni e 18 incidenti segnalati dalla polizia. Il passaggio pubblico non indica le strade coinvolte e lascia aperta la domanda sulla durata del caos del traffico.',
+    canonicalPath: '/articoli-grigioni/neve-grigioni-incidenti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Neve in Grigioni, 18 incidenti segnalati dalla polizia",
+      "description": "Nei Grigioni, giovedì sono caduti fino a 20 centimetri di neve fresca; la polizia segnala 18 incidenti legati al nevischio.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-neve-grigioni-incidenti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-27T14:04:13+00:00",
+      "dateModified": "2026-11-27T14:04:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-grigioni/neve-grigioni-incidenti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

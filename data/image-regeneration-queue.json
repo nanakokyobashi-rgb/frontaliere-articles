@@ -60,6 +60,49 @@
       "failureCount": 0,
       "requestedAt": "2026-11-26T18:53:56.376Z",
       "lastFailureAt": "2026-11-26T18:53:56.376Z"
+    },
+    {
+      "articleId": "frontalieri-smart-working-limite-fiscale",
+      "title": "Frontalieri smart working: limite fiscale dall'Italia",
+      "fallbackImage": "/images/blog/article-frontaliere-tasse-italia-svizzera-2026-simulazione-pratica.webp",
+      "reason": "All image providers failed for article-frontalieri-smart-working-limite-fiscale: openai-codex (vision gate rejected image: Generic synthetic smart-working scene by a lake; a promin",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-11-27T04:38:17.424Z",
+      "lastFailureAt": "2026-11-27T04:38:17.424Z"
+    },
+    {
+      "articleId": "uri-targhe-collaudo-auto",
+      "title": "Uri: targhe e immatricolazione, intervalli del collaudo",
+      "fallbackImage": "/images/blog/article-zurigo-targhe-immatricolazione-guida.webp",
+      "reason": "All image providers failed for article-uri-targhe-collaudo-auto: openai-codex (vision gate rejected image: Synthetic-looking alpine road scene relevant to Swiss vehicle registratio",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-11-27T06:40:48.091Z",
+      "lastFailureAt": "2026-11-27T06:40:48.091Z",
+      "retryHint": "no-text"
+    },
+    {
+      "articleId": "svizzera-schengen-controlli-frontalieri",
+      "title": "Possibili controlli ai confini se la Svizzera esce da Schengen",
+      "fallbackImage": "/images/blog/article-rapporto-consiglio-federale-schengen.webp",
+      "reason": "All image providers failed for article-svizzera-schengen-controlli-frontalieri: openai-codex (vision gate rejected image: Generic border-crossing scene with commuter traffic; a sma",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-11-27T10:54:42.564Z",
+      "lastFailureAt": "2026-11-27T10:54:42.564Z",
+      "retryHint": "no-text"
+    },
+    {
+      "articleId": "autorizzazione-edilizia-cantone-svitto",
+      "title": "Autorizzazione edilizia Cantone Svitto: regole e uffici cantonali",
+      "fallbackImage": "/images/blog/article-assistenza-sociale-svitto-criterio-bisogno.webp",
+      "reason": "All image providers failed for article-autorizzazione-edilizia-cantone-svitto: openai-codex (vision gate rejected image: Generic planning office scene relevant to building authoriz",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-11-28T00:21:37.175Z",
+      "lastFailureAt": "2026-11-28T00:21:37.175Z",
+      "retryHint": "no-text"
     }
   ]
 }

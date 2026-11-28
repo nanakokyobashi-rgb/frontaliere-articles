@@ -4,7 +4,7 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "servizi",
-  "updatedAt": "2026-11-26T13:02:36.485Z",
+  "updatedAt": "2026-11-27T14:54:45.873Z",
   "contentHash": "5f98f9004de7c145706af5b08e2184c4a11e68ae99808dfd8e8b6681be69b248",
   "blocks": [
     {
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -79,7 +79,7 @@
               "url": "https://www.buochs.ch/_rte/information/2953735"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -159,7 +159,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "en": {
       "canton": "NW",
@@ -221,7 +221,7 @@
               "url": "https://www.buochs.ch/_rte/information/2953735"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -297,7 +297,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "de": {
       "canton": "NW",
@@ -359,7 +359,7 @@
               "url": "https://www.buochs.ch/_rte/information/2953735"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -435,7 +435,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "fr": {
       "canton": "NW",
@@ -497,7 +497,7 @@
               "url": "https://www.buochs.ch/_rte/information/2953735"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -569,7 +569,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     }
   }
 }

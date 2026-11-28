@@ -4,7 +4,7 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "servizi",
-  "updatedAt": "2026-11-26T13:02:36.485Z",
+  "updatedAt": "2026-11-27T14:54:45.873Z",
   "contentHash": "d3f97f598c7e6d689ef3c37ea94ed5af7ed1b25c108c517b61bdb4cbcf6f105d",
   "blocks": [
     {
@@ -121,7 +121,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "en": {
       "canton": "GL",
@@ -226,7 +226,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "de": {
       "canton": "GL",
@@ -331,7 +331,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "fr": {
       "canton": "GL",
@@ -432,7 +432,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     }
   }
 }

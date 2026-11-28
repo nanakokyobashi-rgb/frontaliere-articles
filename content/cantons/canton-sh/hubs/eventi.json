@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "218aec9c3ba207d4b16dc5afc784730c32dc11d5a57c8dd5bc8774bae1a68a14",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "5f78c6c26b7741834541801faa3e9233e95df043689e99d4aa74c821ac0bf9c4",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T00:32:00.223Z",
+      "updatedAt": "2026-11-26T16:33:33.919Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-25T16:08:35.229Z",
+      "updatedAt": "2026-11-26T15:51:00.529Z",
       "keyFacts": 0
     }
   ],
@@ -38,24 +38,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "speis&trank stories with Urs Weibel and Andreas Reich",
-              "detail": "Haberhaus Bühne, Schaffhausen",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/speistrank-stories-with-urs-weibel-and-andreas-reich/"
-            },
-            {
-              "label": "Komoco: «Chora»",
-              "detail": "Stadttheater Schaffhausen, Schaffhausen",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/komoco-chora/"
-            },
-            {
-              "label": "Rötiberg Christmas Market",
-              "detail": "Rötiberg-Kellerei, Wilchingen — in corso, ultimo giorno: 23 dicembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roetiberg-weihnachtsmarkt/"
-            },
-            {
               "label": "Glüehwy by starlight",
               "detail": "Wilchinger Bergwy, Wilchingen",
               "date": "2026-11-27",
@@ -72,6 +54,12 @@
               "detail": "Bistro Chez Ulrique, Stein am Rhein",
               "date": "2026-11-27",
               "url": "https://www.guidle.com/it/events/small-stage/stein-am-rhein/stubble-and-beard_AkttT3B"
+            },
+            {
+              "label": "Rötiberg Christmas Market",
+              "detail": "Rötiberg-Kellerei, Wilchingen — in corso, ultimo giorno: 23 dicembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roetiberg-weihnachtsmarkt/"
             },
             {
               "label": "Christmas market/ tasting",
@@ -96,11 +84,23 @@
               "detail": "Museum Stemmler",
               "date": "2026-12-04",
               "url": "https://www.guidle.com/it/search/schaffhausen/first-friday-at-the-stemmler-museum_AY1acJW"
+            },
+            {
+              "label": "First Friday Schaffhausen",
+              "detail": "Schaffhausen",
+              "date": "2026-12-04",
+              "url": "https://www.guidle.com/it/evenements/schaffhouse/schaffhouse/first-friday-schaffhausen_A2JJi71"
+            },
+            {
+              "label": "Feierabendtier des Monats",
+              "detail": "Museum Stemmler",
+              "date": "2026-12-04",
+              "url": "https://www.guidle.com/it/suche/schaffhausen/feierabendtier-des-monats_AjyPFgw"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -138,7 +138,7 @@
               "url": "https://www.konstanz.de/798774"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -160,7 +160,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "SH",
@@ -181,24 +181,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "speis&trank stories with Urs Weibel and Andreas Reich",
-              "detail": "Haberhaus Bühne, Schaffhausen",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/speistrank-stories-with-urs-weibel-and-andreas-reich/"
-            },
-            {
-              "label": "Komoco: «Chora»",
-              "detail": "Stadttheater Schaffhausen, Schaffhausen",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/komoco-chora/"
-            },
-            {
-              "label": "Rötiberg Christmas Market",
-              "detail": "Rötiberg-Kellerei, Wilchingen — ongoing, last day: 23 December 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roetiberg-weihnachtsmarkt/"
-            },
-            {
               "label": "Glüehwy by starlight",
               "detail": "Wilchinger Bergwy, Wilchingen",
               "date": "2026-11-27",
@@ -215,6 +197,12 @@
               "detail": "Bistro Chez Ulrique, Stein am Rhein",
               "date": "2026-11-27",
               "url": "https://www.guidle.com/it/events/small-stage/stein-am-rhein/stubble-and-beard_AkttT3B"
+            },
+            {
+              "label": "Rötiberg Christmas Market",
+              "detail": "Rötiberg-Kellerei, Wilchingen — ongoing, last day: 23 December 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roetiberg-weihnachtsmarkt/"
             },
             {
               "label": "Christmas market/ tasting",
@@ -239,11 +227,23 @@
               "detail": "Museum Stemmler",
               "date": "2026-12-04",
               "url": "https://www.guidle.com/it/search/schaffhausen/first-friday-at-the-stemmler-museum_AY1acJW"
+            },
+            {
+              "label": "First Friday Schaffhausen",
+              "detail": "Schaffhausen",
+              "date": "2026-12-04",
+              "url": "https://www.guidle.com/it/evenements/schaffhouse/schaffhouse/first-friday-schaffhausen_A2JJi71"
+            },
+            {
+              "label": "Feierabendtier des Monats",
+              "detail": "Museum Stemmler",
+              "date": "2026-12-04",
+              "url": "https://www.guidle.com/it/suche/schaffhausen/feierabendtier-des-monats_AjyPFgw"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -281,7 +281,7 @@
               "url": "https://www.konstanz.de/798774"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -303,7 +303,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "SH",
@@ -324,24 +324,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "speis&trank geschichten mit Urs Weibel und Andreas Reich",
-              "detail": "Haberhaus Bühne, Schaffhausen",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/speistrank-stories-with-urs-weibel-and-andreas-reich/"
-            },
-            {
-              "label": "Komoco: «Chora»",
-              "detail": "Stadttheater Schaffhausen, Schaffhausen",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/komoco-chora/"
-            },
-            {
-              "label": "Rötiberg Wei(h)nachtsmarkt",
-              "detail": "Rötiberg-Kellerei, Wilchingen — läuft, letzter Tag: 23. Dezember 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roetiberg-weihnachtsmarkt/"
-            },
-            {
               "label": "Glüehwy bei Sternenschein",
               "detail": "Wilchinger Bergwy, Wilchingen",
               "date": "2026-11-27",
@@ -358,6 +340,12 @@
               "detail": "Bistro Chez Ulrique, Stein am Rhein",
               "date": "2026-11-27",
               "url": "https://www.guidle.com/it/events/small-stage/stein-am-rhein/stubble-and-beard_AkttT3B"
+            },
+            {
+              "label": "Rötiberg Wei(h)nachtsmarkt",
+              "detail": "Rötiberg-Kellerei, Wilchingen — läuft, letzter Tag: 23. Dezember 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roetiberg-weihnachtsmarkt/"
             },
             {
               "label": "Weihnachtsmarkt/ Degustation",
@@ -382,11 +370,23 @@
               "detail": "Museum Stemmler",
               "date": "2026-12-04",
               "url": "https://www.guidle.com/it/search/schaffhausen/first-friday-at-the-stemmler-museum_AY1acJW"
+            },
+            {
+              "label": "First Friday Schaffhausen",
+              "detail": "Schaffhausen",
+              "date": "2026-12-04",
+              "url": "https://www.guidle.com/it/evenements/schaffhouse/schaffhouse/first-friday-schaffhausen_A2JJi71"
+            },
+            {
+              "label": "Feierabendtier des Monats",
+              "detail": "Museum Stemmler",
+              "date": "2026-12-04",
+              "url": "https://www.guidle.com/it/suche/schaffhausen/feierabendtier-des-monats_AjyPFgw"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -424,7 +424,7 @@
               "url": "https://www.konstanz.de/798774"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -446,7 +446,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "SH",
@@ -467,24 +467,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "speis&trank histoires avec Urs Weibel et Andreas Reich",
-              "detail": "Haberhaus Bühne, Schaffhausen",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/speistrank-stories-with-urs-weibel-and-andreas-reich/"
-            },
-            {
-              "label": "Komoco: «Chora»",
-              "detail": "Stadttheater Schaffhausen, Schaffhausen",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/komoco-chora/"
-            },
-            {
-              "label": "Marché de Noël de Rötiberg",
-              "detail": "Rötiberg-Kellerei, Wilchingen — en cours, dernier jour : 23 décembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roetiberg-weihnachtsmarkt/"
-            },
-            {
               "label": "Glüehwy à la lueur des étoiles",
               "detail": "Wilchinger Bergwy, Wilchingen",
               "date": "2026-11-27",
@@ -501,6 +483,12 @@
               "detail": "Bistro Chez Ulrique, Stein am Rhein",
               "date": "2026-11-27",
               "url": "https://www.guidle.com/it/events/small-stage/stein-am-rhein/stubble-and-beard_AkttT3B"
+            },
+            {
+              "label": "Marché de Noël de Rötiberg",
+              "detail": "Rötiberg-Kellerei, Wilchingen — en cours, dernier jour : 23 décembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/roetiberg-weihnachtsmarkt/"
             },
             {
               "label": "Marché de Noël/ Dégustation",
@@ -525,11 +513,23 @@
               "detail": "Museum Stemmler",
               "date": "2026-12-04",
               "url": "https://www.guidle.com/it/search/schaffhausen/first-friday-at-the-stemmler-museum_AY1acJW"
+            },
+            {
+              "label": "First Friday Schaffhausen",
+              "detail": "Schaffhausen",
+              "date": "2026-12-04",
+              "url": "https://www.guidle.com/it/evenements/schaffhouse/schaffhouse/first-friday-schaffhausen_A2JJi71"
+            },
+            {
+              "label": "Feierabendtier des Monats",
+              "detail": "Museum Stemmler",
+              "date": "2026-12-04",
+              "url": "https://www.guidle.com/it/suche/schaffhausen/feierabendtier-des-monats_AjyPFgw"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -567,7 +567,7 @@
               "url": "https://www.konstanz.de/798774"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -589,7 +589,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

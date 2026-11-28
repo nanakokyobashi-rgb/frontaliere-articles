@@ -24,6 +24,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'innhub-la-punt-rinvio-apertura': { it: 'innhub-la-punt-rinvio-apertura', en: 'innhub-la-punt-opening-delay', de: 'innhub-la-punt-eroeffnung-verschoben', fr: 'innhub-la-punt-report-ouverture' },
  'vallo-protezione-sorte-lostallo': { it: 'vallo-protezione-sorte-lostallo', en: 'protection-barrier-sorte-lostallo', de: 'schutzmauer-sorte-lostallo', fr: 'mur-protection-sorte-lostallo' },
  'imc-oberengadin-weekend': { it: 'imc-oberengadin-weekend', en: 'oberengadin-imc-closed-weekends', de: 'imc-oberengadin-wochenende-geschlossen', fr: 'imc-oberengadin-fermee-weekends' },
+ 'neve-grigioni-incidenti': { it: 'neve-grigioni-incidenti', en: 'graubunden-snow-18-crashes', de: 'graubuenden-schnee-18-unfaelle', fr: 'neige-grisons-18-accidents' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

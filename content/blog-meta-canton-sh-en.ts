@@ -120,6 +120,12 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.neuhausen-soppressione-strisce-pedonali.title': 'Neuhausen eliminates twelve pedestrian crossings in the town center',
     'blog.article.neuhausen-soppressione-strisce-pedonali.excerpt': 'The municipal council of Neuhausen am Rheinfall has decided to eliminate 12 of 18 existing pedestrian crossings, with implementation planned in the first half of 2027.',
     'blog.article.neuhausen-soppressione-strisce-pedonali.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.nuovo-sistema-stipendi-insegnanti.title': 'New salary system for teachers costs almost 9 million a year',
+    'blog.article.nuovo-sistema-stipendi-insegnanti.excerpt': 'The new salary system for teachers in Schaffhausen would entail almost CHF 9 million in additional spending per year for the Canton and the municipalities.',
+    'blog.article.nuovo-sistema-stipendi-insegnanti.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.panne-lampioni-sciaffusa-giovedi.title': 'Streetlight outage in several neighborhoods of Schaffhausen on Thursday morning',
+    'blog.article.panne-lampioni-sciaffusa-giovedi.excerpt': 'A streetlight outage occurred in Schaffhausen on Thursday morning.',
+    'blog.article.panne-lampioni-sciaffusa-giovedi.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

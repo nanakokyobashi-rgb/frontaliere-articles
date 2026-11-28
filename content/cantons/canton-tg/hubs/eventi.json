@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "12aba3d57fbb55c485bd3cc7a8d0f60fcba35fa63e565bf89e59936912bbd505",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "799d3f97d7d85ff9b0173c569b6ffc8e83bfdfc66f354314ce3a3bf8e35935ee",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T00:32:00.223Z",
+      "updatedAt": "2026-11-26T16:33:33.919Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-25T16:08:35.229Z",
+      "updatedAt": "2026-11-26T15:51:00.529Z",
       "keyFacts": 0
     }
   ],
@@ -38,54 +38,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Sammlung öffne dich! Citizen Science im Historischen Museum",
-              "detail": "Historisches Museum Thurgau, Frauenfeld",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/frauenfeld/sammlung-oeffne-dich-citizen-science-im-historischen-museum_AuAZ3bi"
-            },
-            {
-              "label": "4-Gang Wine & Dine im Greuterhof Islikon",
-              "detail": "Greuterhof",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/4gang-wine-dine-im-greuterhof-islikon/"
-            },
-            {
-              "label": "Mythos Mittelalter – populäre Irrtümer über das «Finstere Zeitalter»",
-              "detail": "Weinfelden",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mythos-mittelalter-populaere-irrtuemer-ueber-das-finstere-zeitalter/"
-            },
-            {
-              "label": "Kerzenziehen für Kinder und Erwachsene",
-              "detail": "Kreuzlingen — in corso, ultimo giorno: 27 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eintauchen-kerzenziehen-2026/"
-            },
-            {
-              "label": "Café Vergissmeinnicht für Menschen mit und ohne Demenz",
-              "detail": "Restaurant Grüner Baum, Weinfelden — in corso, ultimo giorno: 18 dicembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/koerper-geist/weinfelden/cafe-vergissmeinnicht-fuer-menschen-mit-und-ohne-demenz_ATvTden"
-            },
-            {
-              "label": "Öffentliche Führung in der Eisenbibliothek",
-              "detail": "Eisenbibliothek Paradies — in corso, ultimo giorno: 17 dicembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schlatt-tg/oeffentliche-fuehrung-in-der-eisenbibliothek_A2urnHS"
-            },
-            {
-              "label": "Gesprächsgruppe für Bezugspersonen von Menschen mit Demenz",
-              "detail": "Evangelisches Kirchgemeindehaus, Steckborn — in corso, ultimo giorno: 17 dicembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/steckborn/gespraechsgruppe-fuer-bezugspersonen-von-menschen-mit-demenz_AJguFWT"
-            },
-            {
-              "label": "Gesprächsgruppe für Bezugspersonen von Menschen mit Demenz",
-              "detail": "Genossenschaft Alterszentrum, Kreuzlingen — in corso, ultimo giorno: 17 dicembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kreuzlingen/gespraechsgruppe-fuer-bezugspersonen-von-menschen-mit-demenz_AKPV6A5"
-            },
-            {
               "label": "Adventsmarkt Bischofszell",
               "detail": "9220 Bischofszell, Bischofszell",
               "date": "2026-11-27",
@@ -96,11 +48,59 @@
               "detail": "Arbon",
               "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-trueffel/"
+            },
+            {
+              "label": "Adventskranzen für junge Menschen",
+              "detail": "Weinfelden",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranzen-fuer-junge-menschen/"
+            },
+            {
+              "label": "Jam's Musicbar",
+              "detail": "Kulturforum Amriswil, Amriswil",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/amriswil/jams-musicbar_AhVrMUG"
+            },
+            {
+              "label": "Herbstversammlung G300m",
+              "detail": "Schiesssportzentrum, Weinfelden",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/herbstversammlung-g300m/"
+            },
+            {
+              "label": "Long Distance Calling",
+              "detail": "Kulturzentrum Presswerk, Arbon",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/long-distance-calling_AegGjTW"
+            },
+            {
+              "label": "The Original USA Gospel Singers & Band",
+              "detail": "Pentorama Amriswil, Amriswil",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/amriswil/the-original-usa-gospel-singers-und-band_AJP5YmD"
+            },
+            {
+              "label": "Kerzenziehen für Kinder und Erwachsene",
+              "detail": "Kreuzlingen — in corso, ultimo giorno: 27 novembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eintauchen-kerzenziehen-2026/"
+            },
+            {
+              "label": "Café Vergissmeinnicht für Menschen mit und ohne Demenz",
+              "detail": "Restaurant Grüner Baum, Weinfelden — in corso, ultimo giorno: 18 dicembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/koerper-geist/weinfelden/cafe-vergissmeinnicht-fuer-menschen-mit-und-ohne-demenz_ATvTden"
+            },
+            {
+              "label": "Öffentliche Führung in der Eisenbibliothek",
+              "detail": "Eisenbibliothek Paradies — in corso, ultimo giorno: 17 dicembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schlatt-tg/oeffentliche-fuehrung-in-der-eisenbibliothek_A2urnHS"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -133,7 +133,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -161,7 +161,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "TG",
@@ -182,54 +182,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Sammlung öffne dich! Citizen Science im Historischen Museum",
-              "detail": "Historisches Museum Thurgau, Frauenfeld",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/frauenfeld/sammlung-oeffne-dich-citizen-science-im-historischen-museum_AuAZ3bi"
-            },
-            {
-              "label": "4-Gang Wine & Dine im Greuterhof Islikon",
-              "detail": "Greuterhof",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/4gang-wine-dine-im-greuterhof-islikon/"
-            },
-            {
-              "label": "Mythos Mittelalter – populäre Irrtümer über das «Finstere Zeitalter»",
-              "detail": "Weinfelden",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mythos-mittelalter-populaere-irrtuemer-ueber-das-finstere-zeitalter/"
-            },
-            {
-              "label": "Kerzenziehen für Kinder und Erwachsene",
-              "detail": "Kreuzlingen — ongoing, last day: 27 November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eintauchen-kerzenziehen-2026/"
-            },
-            {
-              "label": "Café Vergissmeinnicht for people with and without dementia",
-              "detail": "Restaurant Grüner Baum, Weinfelden — ongoing, last day: 18 December 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/koerper-geist/weinfelden/cafe-vergissmeinnicht-fuer-menschen-mit-und-ohne-demenz_ATvTden"
-            },
-            {
-              "label": "Öffentliche Führung in der Eisenbibliothek",
-              "detail": "Eisenbibliothek Paradies — ongoing, last day: 17 December 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schlatt-tg/oeffentliche-fuehrung-in-der-eisenbibliothek_A2urnHS"
-            },
-            {
-              "label": "Discussion Group for Carers of People with Dementia",
-              "detail": "Evangelisches Kirchgemeindehaus, Steckborn — ongoing, last day: 17 December 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/steckborn/gespraechsgruppe-fuer-bezugspersonen-von-menschen-mit-demenz_AJguFWT"
-            },
-            {
-              "label": "Discussion Group for Carers of People with Dementia",
-              "detail": "Genossenschaft Alterszentrum, Kreuzlingen — ongoing, last day: 17 December 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kreuzlingen/gespraechsgruppe-fuer-bezugspersonen-von-menschen-mit-demenz_AKPV6A5"
-            },
-            {
               "label": "Adventsmarkt Bischofszell",
               "detail": "9220 Bischofszell, Bischofszell",
               "date": "2026-11-27",
@@ -240,11 +192,59 @@
               "detail": "Arbon",
               "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-trueffel/"
+            },
+            {
+              "label": "Adventskranzen für junge Menschen",
+              "detail": "Weinfelden",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranzen-fuer-junge-menschen/"
+            },
+            {
+              "label": "Jam's Musicbar",
+              "detail": "Kulturforum Amriswil, Amriswil",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/amriswil/jams-musicbar_AhVrMUG"
+            },
+            {
+              "label": "Herbstversammlung G300m",
+              "detail": "Schiesssportzentrum, Weinfelden",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/herbstversammlung-g300m/"
+            },
+            {
+              "label": "Long Distance Calling",
+              "detail": "Kulturzentrum Presswerk, Arbon",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/long-distance-calling_AegGjTW"
+            },
+            {
+              "label": "The Original USA Gospel Singers & Band",
+              "detail": "Pentorama Amriswil, Amriswil",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/amriswil/the-original-usa-gospel-singers-und-band_AJP5YmD"
+            },
+            {
+              "label": "Kerzenziehen für Kinder und Erwachsene",
+              "detail": "Kreuzlingen — ongoing, last day: 27 November 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eintauchen-kerzenziehen-2026/"
+            },
+            {
+              "label": "Café Vergissmeinnicht for people with and without dementia",
+              "detail": "Restaurant Grüner Baum, Weinfelden — ongoing, last day: 18 December 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/koerper-geist/weinfelden/cafe-vergissmeinnicht-fuer-menschen-mit-und-ohne-demenz_ATvTden"
+            },
+            {
+              "label": "Öffentliche Führung in der Eisenbibliothek",
+              "detail": "Eisenbibliothek Paradies — ongoing, last day: 17 December 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schlatt-tg/oeffentliche-fuehrung-in-der-eisenbibliothek_A2urnHS"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -277,7 +277,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -305,7 +305,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "TG",
@@ -326,54 +326,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Sammlung öffne dich! Citizen Science im Historischen Museum",
-              "detail": "Historisches Museum Thurgau, Frauenfeld",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/frauenfeld/sammlung-oeffne-dich-citizen-science-im-historischen-museum_AuAZ3bi"
-            },
-            {
-              "label": "4-Gang Wine & Dine im Greuterhof Islikon",
-              "detail": "Greuterhof",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/4gang-wine-dine-im-greuterhof-islikon/"
-            },
-            {
-              "label": "Mythos Mittelalter – populäre Irrtümer über das «Finstere Zeitalter»",
-              "detail": "Weinfelden",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mythos-mittelalter-populaere-irrtuemer-ueber-das-finstere-zeitalter/"
-            },
-            {
-              "label": "Kerzenziehen für Kinder und Erwachsene",
-              "detail": "Kreuzlingen — läuft, letzter Tag: 27. November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eintauchen-kerzenziehen-2026/"
-            },
-            {
-              "label": "Café Vergisssmeinno für Menschen mit und ohne Demenz",
-              "detail": "Restaurant Grüner Baum, Weinfelden — läuft, letzter Tag: 18. Dezember 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/koerper-geist/weinfelden/cafe-vergissmeinnicht-fuer-menschen-mit-und-ohne-demenz_ATvTden"
-            },
-            {
-              "label": "Öffentliche Führung in der Eisenbibliothek",
-              "detail": "Eisenbibliothek Paradies — läuft, letzter Tag: 17. Dezember 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schlatt-tg/oeffentliche-fuehrung-in-der-eisenbibliothek_A2urnHS"
-            },
-            {
-              "label": "Diskussionsgruppe für Menschen mit Demenz",
-              "detail": "Evangelisches Kirchgemeindehaus, Steckborn — läuft, letzter Tag: 17. Dezember 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/steckborn/gespraechsgruppe-fuer-bezugspersonen-von-menschen-mit-demenz_AJguFWT"
-            },
-            {
-              "label": "Diskussionsgruppe für Menschen mit Demenz",
-              "detail": "Genossenschaft Alterszentrum, Kreuzlingen — läuft, letzter Tag: 17. Dezember 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kreuzlingen/gespraechsgruppe-fuer-bezugspersonen-von-menschen-mit-demenz_AKPV6A5"
-            },
-            {
               "label": "Adventsmarkt Bischofszell",
               "detail": "9220 Bischofszell, Bischofszell",
               "date": "2026-11-27",
@@ -384,11 +336,59 @@
               "detail": "Arbon",
               "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-trueffel/"
+            },
+            {
+              "label": "Adventskranzen für junge Menschen",
+              "detail": "Weinfelden",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranzen-fuer-junge-menschen/"
+            },
+            {
+              "label": "Jam's Musicbar",
+              "detail": "Kulturforum Amriswil, Amriswil",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/amriswil/jams-musicbar_AhVrMUG"
+            },
+            {
+              "label": "Herbstversammlung G300m",
+              "detail": "Schiesssportzentrum, Weinfelden",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/herbstversammlung-g300m/"
+            },
+            {
+              "label": "Long Distance Calling",
+              "detail": "Kulturzentrum Presswerk, Arbon",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/long-distance-calling_AegGjTW"
+            },
+            {
+              "label": "The Original USA Gospel Singers & Band",
+              "detail": "Pentorama Amriswil, Amriswil",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/amriswil/the-original-usa-gospel-singers-und-band_AJP5YmD"
+            },
+            {
+              "label": "Kerzenziehen für Kinder und Erwachsene",
+              "detail": "Kreuzlingen — läuft, letzter Tag: 27. November 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eintauchen-kerzenziehen-2026/"
+            },
+            {
+              "label": "Café Vergisssmeinno für Menschen mit und ohne Demenz",
+              "detail": "Restaurant Grüner Baum, Weinfelden — läuft, letzter Tag: 18. Dezember 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/koerper-geist/weinfelden/cafe-vergissmeinnicht-fuer-menschen-mit-und-ohne-demenz_ATvTden"
+            },
+            {
+              "label": "Öffentliche Führung in der Eisenbibliothek",
+              "detail": "Eisenbibliothek Paradies — läuft, letzter Tag: 17. Dezember 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schlatt-tg/oeffentliche-fuehrung-in-der-eisenbibliothek_A2urnHS"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -421,7 +421,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -449,7 +449,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "TG",
@@ -470,54 +470,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Sammlung öffne dich! Citizen Science im Historischen Museum",
-              "detail": "Historisches Museum Thurgau, Frauenfeld",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/frauenfeld/sammlung-oeffne-dich-citizen-science-im-historischen-museum_AuAZ3bi"
-            },
-            {
-              "label": "4-Gang Wine & Dine im Greuterhof Islikon",
-              "detail": "Greuterhof",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/4gang-wine-dine-im-greuterhof-islikon/"
-            },
-            {
-              "label": "Mythos Mittelalter – populäre Irrtümer über das «Finstere Zeitalter»",
-              "detail": "Weinfelden",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mythos-mittelalter-populaere-irrtuemer-ueber-das-finstere-zeitalter/"
-            },
-            {
-              "label": "Kerzenziehen für Kinder und Erwachsene",
-              "detail": "Kreuzlingen — en cours, dernier jour : 27 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eintauchen-kerzenziehen-2026/"
-            },
-            {
-              "label": "Café Myosotis pour les personnes atteintes ou non de démence",
-              "detail": "Restaurant Grüner Baum, Weinfelden — en cours, dernier jour : 18 décembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/koerper-geist/weinfelden/cafe-vergissmeinnicht-fuer-menschen-mit-und-ohne-demenz_ATvTden"
-            },
-            {
-              "label": "Öffentliche Führung in der Eisenbibliothek",
-              "detail": "Eisenbibliothek Paradies — en cours, dernier jour : 17 décembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schlatt-tg/oeffentliche-fuehrung-in-der-eisenbibliothek_A2urnHS"
-            },
-            {
-              "label": "Groupe de discussion pour les aidants de personnes atteintes de démence",
-              "detail": "Evangelisches Kirchgemeindehaus, Steckborn — en cours, dernier jour : 17 décembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/steckborn/gespraechsgruppe-fuer-bezugspersonen-von-menschen-mit-demenz_AJguFWT"
-            },
-            {
-              "label": "Groupe de discussion pour les aidants de personnes atteintes de démence",
-              "detail": "Genossenschaft Alterszentrum, Kreuzlingen — en cours, dernier jour : 17 décembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/kreuzlingen/gespraechsgruppe-fuer-bezugspersonen-von-menschen-mit-demenz_AKPV6A5"
-            },
-            {
               "label": "Adventsmarkt Bischofszell",
               "detail": "9220 Bischofszell, Bischofszell",
               "date": "2026-11-27",
@@ -528,11 +480,59 @@
               "detail": "Arbon",
               "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-trueffel/"
+            },
+            {
+              "label": "Adventskranzen für junge Menschen",
+              "detail": "Weinfelden",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventskranzen-fuer-junge-menschen/"
+            },
+            {
+              "label": "Jam's Musicbar",
+              "detail": "Kulturforum Amriswil, Amriswil",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/amriswil/jams-musicbar_AhVrMUG"
+            },
+            {
+              "label": "Herbstversammlung G300m",
+              "detail": "Schiesssportzentrum, Weinfelden",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/herbstversammlung-g300m/"
+            },
+            {
+              "label": "Long Distance Calling",
+              "detail": "Kulturzentrum Presswerk, Arbon",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/long-distance-calling_AegGjTW"
+            },
+            {
+              "label": "The Original USA Gospel Singers & Band",
+              "detail": "Pentorama Amriswil, Amriswil",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/amriswil/the-original-usa-gospel-singers-und-band_AJP5YmD"
+            },
+            {
+              "label": "Kerzenziehen für Kinder und Erwachsene",
+              "detail": "Kreuzlingen — en cours, dernier jour : 27 novembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eintauchen-kerzenziehen-2026/"
+            },
+            {
+              "label": "Café Myosotis pour les personnes atteintes ou non de démence",
+              "detail": "Restaurant Grüner Baum, Weinfelden — en cours, dernier jour : 18 décembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/koerper-geist/weinfelden/cafe-vergissmeinnicht-fuer-menschen-mit-und-ohne-demenz_ATvTden"
+            },
+            {
+              "label": "Öffentliche Führung in der Eisenbibliothek",
+              "detail": "Eisenbibliothek Paradies — en cours, dernier jour : 17 décembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schlatt-tg/oeffentliche-fuehrung-in-der-eisenbibliothek_A2urnHS"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -565,7 +565,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -593,7 +593,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

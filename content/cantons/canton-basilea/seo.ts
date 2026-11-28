@@ -938,6 +938,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cyberattacco-basilea-campagna': {
+    title: 'Cyberattacco al Canton Basilea Campagna: server isolati',
+    description: 'Il Canton Basilea Campagna segnala attacchi informatici da domenica: alcuni server isolati e disservizi nelle applicazioni digitali cantonali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, cyberattacco, canton, basilea, campagna',
+    ogTitle: 'Cyberattacco alla struttura IT di Basilea Campagna',
+    ogDescription: 'Il Canton Basilea Campagna segnala diversi attacchi informatici alla struttura IT cantonale da domenica. Alcuni server sono stati isolati da Internet, con disservizi in applicazioni digitali.',
+    canonicalPath: '/articoli-basilea/cyberattacco-basilea-campagna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cyberattacco al Canton Basilea Campagna: server isolati",
+      "description": "Il Canton Basilea Campagna segnala attacchi informatici da domenica: alcuni server isolati e disservizi nelle applicazioni digitali cantonali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cyberattacco-basilea-campagna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-27T18:31:36+00:00",
+      "dateModified": "2026-11-27T18:31:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-basilea/cyberattacco-basilea-campagna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

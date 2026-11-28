@@ -4,12 +4,12 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-26T18:57:59.667Z",
-  "contentHash": "93e849d74c46c8010a7103e882c9634d83379ad2e0f1dac19c7511665feec4d7",
+  "updatedAt": "2026-11-27T06:40:45.240Z",
+  "contentHash": "43eb55f1e9989cf410bc40293b002d5849c6f58187717e82b85ae4e59e13bba2",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-25T17:35:23.405Z",
+      "updatedAt": "2026-11-26T17:17:35.133Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,23 +54,29 @@
             },
             {
               "label": "Benzina 95 — Germania",
-              "value": "1,905 EUR/l",
-              "detail": "media regionale: minimo 1,889 EUR/l, 5 stazioni rilevate",
-              "date": "2026-11-25T17:35:23.405Z"
+              "value": "1,917 EUR/l",
+              "detail": "media regionale: minimo 1,909 EUR/l, 5 stazioni rilevate",
+              "date": "2026-11-26T17:17:35.133Z"
             },
             {
               "label": "Diesel — Germania",
-              "value": "2,123 EUR/l",
-              "detail": "media regionale: minimo 2,099 EUR/l, 5 stazioni rilevate",
-              "date": "2026-11-25T17:35:23.405Z"
+              "value": "2,139 EUR/l",
+              "detail": "media regionale: minimo 2,129 EUR/l, 5 stazioni rilevate",
+              "date": "2026-11-26T17:17:35.133Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-26T17:17:35.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Baden ottiene Energiestadt Gold per la sesta volta consecutiva",
+          "url": "/articoli-argovia/baden-energiestadt-gold-sei-volte/",
+          "excerpt": "La certificazione è stata raggiunta con l'81% dei punti disponibili; l'analisi Netto-Null segnala ambiti d'intervento.",
+          "date": "2026-11-27T06:37:35.148Z"
+        },
         {
           "title": "Evacuazione Mülimärt Lenzburg per fuoriuscita di anidride carbonica",
           "url": "/articoli-argovia/muelimaert-lenzburg-gas-evacuazione/",
@@ -94,12 +100,6 @@
           "url": "/articoli-argovia/oelrainstrasse-chiusura-5-novembre/",
           "excerpt": "L'Oelrainstrasse tra Parkhaus Bahnhof e Parkhaus Theaterplatz sarà chiusa dalle 8.30 alle circa 11 per il rimontaggio di quattro container interrati.",
           "date": "2026-11-07T01:08:28.390Z"
-        },
-        {
-          "title": "Niederwil propone aliquota comunale al 107% nel 2027",
-          "url": "/articoli-argovia/niederwil-aumento-imposta-2027/",
-          "excerpt": "Niederwil propone il passaggio dal 103% al 107%; il deficit del budget 2027 scenderebbe da CHF 401'200 a CHF 151'200.",
-          "date": "2026-11-06T12:02:37.265Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-26T18:57:59.667Z"
+      "updatedAt": "2026-11-27T06:40:45.240Z"
     },
     "en": {
       "canton": "AG",
@@ -153,23 +153,29 @@
             },
             {
               "label": "Petrol 95 — Germany",
-              "value": "1.905 EUR/l",
-              "detail": "regional average: lowest 1.889 EUR/l, 5 stations surveyed",
-              "date": "2026-11-25T17:35:23.405Z"
+              "value": "1.917 EUR/l",
+              "detail": "regional average: lowest 1.909 EUR/l, 5 stations surveyed",
+              "date": "2026-11-26T17:17:35.133Z"
             },
             {
               "label": "Diesel — Germany",
-              "value": "2.123 EUR/l",
-              "detail": "regional average: lowest 2.099 EUR/l, 5 stations surveyed",
-              "date": "2026-11-25T17:35:23.405Z"
+              "value": "2.139 EUR/l",
+              "detail": "regional average: lowest 2.129 EUR/l, 5 stations surveyed",
+              "date": "2026-11-26T17:17:35.133Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-26T17:17:35.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Baden receives Energiestadt Gold for the sixth consecutive time",
+          "url": "/en/aargau-articles/baden-energiestadt-gold-six-times/",
+          "excerpt": "The certification was achieved with 81% of the available points; the Netto-Null analysis identifies areas for action.",
+          "date": "2026-11-27T06:37:35.148Z"
+        },
         {
           "title": "Evacuation of Mülimärt Lenzburg due to a carbon dioxide leak",
           "url": "/en/aargau-articles/muelimaert-lenzburg-gas-evacuation/",
@@ -193,12 +199,6 @@
           "url": "/en/aargau-articles/oelrainstrasse-closure-november-5/",
           "excerpt": "L'Oelrainstrasse between Parkhaus Bahnhof and Parkhaus Theaterplatz will be closed from 8:30 until approximately 11 for the reassembly of four underground containers.",
           "date": "2026-11-07T01:08:28.390Z"
-        },
-        {
-          "title": "Niederwil proposes a municipal tax rate of 107% in 2027",
-          "url": "/en/aargau-articles/niederwil-municipal-tax-2027/",
-          "excerpt": "Niederwil proposes increasing it from 103% to 107%; the 2027 budget deficit would decrease from CHF 401'200 to CHF 151'200.",
-          "date": "2026-11-06T12:02:37.265Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-26T18:57:59.667Z"
+      "updatedAt": "2026-11-27T06:40:45.240Z"
     },
     "de": {
       "canton": "AG",
@@ -252,23 +252,29 @@
             },
             {
               "label": "Benzin 95 — Deutschland",
-              "value": "1.905 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.889 EUR/l, 5 erfasste Tankstellen",
-              "date": "2026-11-25T17:35:23.405Z"
+              "value": "1.917 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.909 EUR/l, 5 erfasste Tankstellen",
+              "date": "2026-11-26T17:17:35.133Z"
             },
             {
               "label": "Diesel — Deutschland",
-              "value": "2.123 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.099 EUR/l, 5 erfasste Tankstellen",
-              "date": "2026-11-25T17:35:23.405Z"
+              "value": "2.139 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.129 EUR/l, 5 erfasste Tankstellen",
+              "date": "2026-11-26T17:17:35.133Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-26T17:17:35.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Baden erhält zum sechsten Mal in Folge Energiestadt Gold",
+          "url": "/de/aargau-artikel/baden-energiestadt-gold-sechs-mal/",
+          "excerpt": "Die Zertifizierung wurde mit 81% der verfügbaren Punkte erreicht; die Netto-Null-Analyse weist Handlungsbereiche aus.",
+          "date": "2026-11-27T06:37:35.148Z"
+        },
         {
           "title": "Evakuierung von Mülimärt Lenzburg wegen eines Austritts von Kohlendioxid",
           "url": "/de/aargau-artikel/muelimaert-lenzburg-gas-evakuierung/",
@@ -292,12 +298,6 @@
           "url": "/de/aargau-artikel/oelrainstrasse-schliessung-5-november/",
           "excerpt": "Die Oelrainstrasse zwischen Parkhaus Bahnhof und Parkhaus Theaterplatz wird von 8.30 bis etwa 11 Uhr wegen des Wiedereinbaus von vier unterirdischen Containern gesperrt.",
           "date": "2026-11-07T01:08:28.390Z"
-        },
-        {
-          "title": "Niederwil schlägt für 2027 einen Gemeindesteuerfuss von 107% vor",
-          "url": "/de/aargau-artikel/niederwil-steuerfuss-erhoehung-2027/",
-          "excerpt": "Niederwil schlägt eine Erhöhung des Steuerfusses von 103% auf 107% vor; das Defizit des Budgets 2027 würde von CHF 401'200 auf CHF 151'200 sinken.",
-          "date": "2026-11-06T12:02:37.265Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-26T18:57:59.667Z"
+      "updatedAt": "2026-11-27T06:40:45.240Z"
     },
     "fr": {
       "canton": "AG",
@@ -351,23 +351,29 @@
             },
             {
               "label": "Essence 95 — Allemagne",
-              "value": "1,905 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,889 EUR/l, 5 stations relevées",
-              "date": "2026-11-25T17:35:23.405Z"
+              "value": "1,917 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,909 EUR/l, 5 stations relevées",
+              "date": "2026-11-26T17:17:35.133Z"
             },
             {
               "label": "Diesel — Allemagne",
-              "value": "2,123 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,099 EUR/l, 5 stations relevées",
-              "date": "2026-11-25T17:35:23.405Z"
+              "value": "2,139 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,129 EUR/l, 5 stations relevées",
+              "date": "2026-11-26T17:17:35.133Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-26T17:17:35.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Baden obtient Energiestadt Gold pour la sixième fois consécutive",
+          "url": "/fr/articles-argovie/baden-energiestadt-gold-six-fois/",
+          "excerpt": "La certification a été obtenue avec 81 % des points disponibles ; l’analyse Netto-Zéro signale des domaines d’intervention.",
+          "date": "2026-11-27T06:37:35.148Z"
+        },
         {
           "title": "Évacuation de Mülimärt Lenzburg en raison d’une fuite de dioxyde de carbone",
           "url": "/fr/articles-argovie/muelimaert-lenzburg-evacuation-gaz/",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-argovie/oelrainstrasse-fermeture-5-novembre/",
           "excerpt": "L’Oelrainstrasse entre Parkhaus Bahnhof et Parkhaus Theaterplatz sera fermée de 8.30 à environ 11 pour le remontage de quatre conteneurs enterrés.",
           "date": "2026-11-07T01:08:28.390Z"
-        },
-        {
-          "title": "Niederwil propose un taux communal de 107 % en 2027",
-          "url": "/fr/articles-argovie/niederwil-hausse-taux-fiscal-2027/",
-          "excerpt": "Niederwil propose le passage de 103 % à 107 % ; le déficit du budget 2027 passerait de CHF 401'200 à CHF 151'200.",
-          "date": "2026-11-06T12:02:37.265Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-26T18:57:59.667Z"
+      "updatedAt": "2026-11-27T06:40:45.240Z"
     }
   }
 }

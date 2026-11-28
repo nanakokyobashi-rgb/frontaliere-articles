@@ -4,12 +4,12 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "d9e2a2f983a5474c0ee9fa99b7f6b91dd993e37757d42db0dcbe12b81682e1d4",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "e8cfbadeeed78c20c7733434b0e0b39f4f1dffd8e07428abf862d5799826ab65",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T00:32:00.223Z",
+      "updatedAt": "2026-11-26T16:33:33.919Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "67",
+          "value": "66",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,68 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Julien Perret - \"Intense Illusion\" at the Sequoïa",
-              "detail": "Sierre",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/julien-perret-intense-illusion-au-sequoia/"
+              "label": "Tarabust ! #1",
+              "detail": "Le Spot → Cave à Jazz, Sion",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tarabust-1/"
             },
             {
-              "label": "Shared Reading",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/brig/shared-reading_Ah9MAbZ"
+              "label": "Craft market",
+              "detail": "Brig, Brig-Glis",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/craft-market/"
+            },
+            {
+              "label": "Konzert mit Ephraim Salzmann",
+              "detail": "Hotel Glocke",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/konzert-mit-ephraim-salzmann/"
+            },
+            {
+              "label": "Konzert mit Ephraim Salzmann inkl. 4-Gang-Abendmenü",
+              "detail": "Hotel Glocke",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/reckingen-vs/concert-with-ephraim-salzmann-including-a-4-course-dinner_AYR2Gij"
+            },
+            {
+              "label": "Bénabar",
+              "detail": "Théâtre du Martolet",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/st-maurice/benabar_AAfbqjp"
+            },
+            {
+              "label": "Bénabar",
+              "detail": "Saint-Maurice",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/benabar/"
+            },
+            {
+              "label": "Emelyne + Kaja Holzer",
+              "detail": "Visp",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/emelyne-kaja-holzer/"
+            },
+            {
+              "label": "E-L-R – Abraham",
+              "detail": "Le Manoir de la Ville de Martigny, Martigny",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/martigny/e-l-r-abraham_AJj2tVh"
             },
             {
               "label": "Alice im Wunderland",
-              "detail": "Visp",
-              "date": "2026-11-26",
+              "detail": "Visp — in corso, ultimo giorno: 2 dicembre 2026",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/alice-im-wunderland/"
-            },
-            {
-              "label": "Wie passen sich Pflanzen an verschiedene Höhenlagen an?",
-              "detail": "DILEI, Meschlersaal",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/knowledge/susten/wie-passen-sich-pflanzen-an-verschiedene-hoehenlagen-an_AZvEGsT"
-            },
-            {
-              "label": "Abusitz",
-              "detail": "Zeughaus Kultur",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/musique/glis/abusitz_At24MQH"
-            },
-            {
-              "label": "Le cri du séquoia",
-              "detail": "Monthey — in corso, ultimo giorno: 26 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-cri-du-sequoia/"
-            },
-            {
-              "label": "Magique Molière Circus",
-              "detail": "Martigny — in corso, ultimo giorno: 26 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/magique-moliere-circus/"
-            },
-            {
-              "label": "LE VOYAGE DE MONSIEUR PERRICHON",
-              "detail": "Savièse — in corso, ultimo giorno: 26 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-voyage-de-monsieur-perrichon/"
             },
             {
               "label": "\"ABSTRACTS\" EXHIBITION",
               "detail": "Sierre — in corso, ultimo giorno: 22 dicembre 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/exposition-abtraits/"
-            },
-            {
-              "label": "Kreativ mit Karton – Dein Einstieg in die Welt des Cartonnage",
-              "detail": "Atelier Baz'art, Leukerbad — in corso, ultimo giorno: 6 dicembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/this-that/leukerbad/creative-with-cardboard-your-introduction-to-the-world-of-cartonnage_AFTZANG"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vallese/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -116,7 +117,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "VS",
@@ -126,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "67",
+          "value": "66",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,68 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Julien Perret - \"Intense Illusion\" at the Sequoïa",
-              "detail": "Sierre",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/julien-perret-intense-illusion-au-sequoia/"
+              "label": "Tarabust ! #1",
+              "detail": "Le Spot → Cave à Jazz, Sion",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tarabust-1/"
             },
             {
-              "label": "Shared Reading",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/brig/shared-reading_Ah9MAbZ"
+              "label": "Craft market",
+              "detail": "Brig, Brig-Glis",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/craft-market/"
+            },
+            {
+              "label": "Konzert mit Ephraim Salzmann",
+              "detail": "Hotel Glocke",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/konzert-mit-ephraim-salzmann/"
+            },
+            {
+              "label": "Concert with Ephraim Salzmann, including a 4-course dinner",
+              "detail": "Hotel Glocke",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/reckingen-vs/concert-with-ephraim-salzmann-including-a-4-course-dinner_AYR2Gij"
+            },
+            {
+              "label": "Bénabar",
+              "detail": "Théâtre du Martolet",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/st-maurice/benabar_AAfbqjp"
+            },
+            {
+              "label": "Bénabar",
+              "detail": "Saint-Maurice",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/benabar/"
+            },
+            {
+              "label": "Emelyne + Kaja Holzer",
+              "detail": "Visp",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/emelyne-kaja-holzer/"
+            },
+            {
+              "label": "E-L-R - Abraham",
+              "detail": "Le Manoir de la Ville de Martigny, Martigny",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/martigny/e-l-r-abraham_AJj2tVh"
             },
             {
               "label": "Alice im Wunderland",
-              "detail": "Visp",
-              "date": "2026-11-26",
+              "detail": "Visp — ongoing, last day: 2 December 2026",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/alice-im-wunderland/"
-            },
-            {
-              "label": "Wie passen sich Pflanzen an verschiedene Höhenlagen an?",
-              "detail": "DILEI, Meschlersaal",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/knowledge/susten/wie-passen-sich-pflanzen-an-verschiedene-hoehenlagen-an_AZvEGsT"
-            },
-            {
-              "label": "Abusitz",
-              "detail": "Zeughaus Kultur",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/musique/glis/abusitz_At24MQH"
-            },
-            {
-              "label": "Le cri du séquoia",
-              "detail": "Monthey — ongoing, last day: 26 November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-cri-du-sequoia/"
-            },
-            {
-              "label": "Magique Molière Circus",
-              "detail": "Martigny — ongoing, last day: 26 November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/magique-moliere-circus/"
-            },
-            {
-              "label": "LE VOYAGE DE MONSIEUR PERRICHON",
-              "detail": "Savièse — ongoing, last day: 26 November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-voyage-de-monsieur-perrichon/"
             },
             {
               "label": "\"ABSTRACTS\" EXHIBITION",
               "detail": "Sierre — ongoing, last day: 22 December 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/exposition-abtraits/"
-            },
-            {
-              "label": "Creative with cardboard – your introduction to the world of cartonnage",
-              "detail": "Atelier Baz'art, Leukerbad — ongoing, last day: 6 December 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/this-that/leukerbad/creative-with-cardboard-your-introduction-to-the-world-of-cartonnage_AFTZANG"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/valais/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -220,7 +222,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "VS",
@@ -230,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "67",
+          "value": "66",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -241,68 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Julien Perret – „Intense Illusion“ im Sequoïa",
-              "detail": "Sierre",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/julien-perret-intense-illusion-au-sequoia/"
+              "label": "Tarabust ! #1",
+              "detail": "Le Spot → Cave à Jazz, Sion",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tarabust-1/"
             },
             {
-              "label": "Gemeinsames Lesen",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/brig/shared-reading_Ah9MAbZ"
+              "label": "Handwerkmarkt",
+              "detail": "Brig, Brig-Glis",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/craft-market/"
+            },
+            {
+              "label": "Konzert mit Ephraim Salzmann",
+              "detail": "Hotel Glocke",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/konzert-mit-ephraim-salzmann/"
+            },
+            {
+              "label": "Konzert mit Ephraim Salzmann inkl. 4-Gang-Abendmenü",
+              "detail": "Hotel Glocke",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/reckingen-vs/concert-with-ephraim-salzmann-including-a-4-course-dinner_AYR2Gij"
+            },
+            {
+              "label": "Bénabar",
+              "detail": "Théâtre du Martolet",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/st-maurice/benabar_AAfbqjp"
+            },
+            {
+              "label": "Bénabar",
+              "detail": "Saint-Maurice",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/benabar/"
+            },
+            {
+              "label": "Emelyne + Kaja Holzer",
+              "detail": "Visp",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/emelyne-kaja-holzer/"
+            },
+            {
+              "label": "E-L-R – Abraham",
+              "detail": "Le Manoir de la Ville de Martigny, Martigny",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/martigny/e-l-r-abraham_AJj2tVh"
             },
             {
               "label": "Alice im Wunderland",
-              "detail": "Visp",
-              "date": "2026-11-26",
+              "detail": "Visp — läuft, letzter Tag: 2. Dezember 2026",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/alice-im-wunderland/"
-            },
-            {
-              "label": "Wie passen sich Pflanzen an verschiedene Höhenlagen an?",
-              "detail": "DILEI, Meschlersaal",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/knowledge/susten/wie-passen-sich-pflanzen-an-verschiedene-hoehenlagen-an_AZvEGsT"
-            },
-            {
-              "label": "Abusitz",
-              "detail": "Zeughaus Kultur",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/musique/glis/abusitz_At24MQH"
-            },
-            {
-              "label": "Le cri du séquoia",
-              "detail": "Monthey — läuft, letzter Tag: 26. November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-cri-du-sequoia/"
-            },
-            {
-              "label": "Magique Molière Circus",
-              "detail": "Martigny — läuft, letzter Tag: 26. November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/magique-moliere-circus/"
-            },
-            {
-              "label": "LE VOYAGE DE MONSIEUR PERRICHON",
-              "detail": "Savièse — läuft, letzter Tag: 26. November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-voyage-de-monsieur-perrichon/"
             },
             {
               "label": "AUSSTELLUNG „ABTRAITS“",
               "detail": "Sierre — läuft, letzter Tag: 22. Dezember 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/exposition-abtraits/"
-            },
-            {
-              "label": "Kreativ mit Karton – Dein Einstieg in die Welt des Cartonnage",
-              "detail": "Atelier Baz'art, Leukerbad — läuft, letzter Tag: 6. Dezember 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/this-that/leukerbad/creative-with-cardboard-your-introduction-to-the-world-of-cartonnage_AFTZANG"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/wallis/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -324,7 +327,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "VS",
@@ -334,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "67",
+          "value": "66",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -345,68 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Julien Perret - intense illusion au Sequoïa",
-              "detail": "Sierre",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/julien-perret-intense-illusion-au-sequoia/"
+              "label": "Tarabust ! #1",
+              "detail": "Le Spot → Cave à Jazz, Sion",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tarabust-1/"
             },
             {
-              "label": "Lecture partagée",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/brig/shared-reading_Ah9MAbZ"
+              "label": "Marché artisanal",
+              "detail": "Brig, Brig-Glis",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/craft-market/"
+            },
+            {
+              "label": "Konzert mit Ephraim Salzmann",
+              "detail": "Hotel Glocke",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/konzert-mit-ephraim-salzmann/"
+            },
+            {
+              "label": "Konzert mit Ephraim Salzmann inkl. 4-Gang-Abendmenü",
+              "detail": "Hotel Glocke",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/reckingen-vs/concert-with-ephraim-salzmann-including-a-4-course-dinner_AYR2Gij"
+            },
+            {
+              "label": "Bénabar",
+              "detail": "Théâtre du Martolet",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/st-maurice/benabar_AAfbqjp"
+            },
+            {
+              "label": "Bénabar",
+              "detail": "Saint-Maurice",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/benabar/"
+            },
+            {
+              "label": "Emelyne + Kaja Holzer",
+              "detail": "Visp",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/emelyne-kaja-holzer/"
+            },
+            {
+              "label": "E-L-R - Abraham",
+              "detail": "Le Manoir de la Ville de Martigny, Martigny",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/martigny/e-l-r-abraham_AJj2tVh"
             },
             {
               "label": "Alice im Wunderland",
-              "detail": "Visp",
-              "date": "2026-11-26",
+              "detail": "Visp — en cours, dernier jour : 2 décembre 2026",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/alice-im-wunderland/"
-            },
-            {
-              "label": "Wie passen sich Pflanzen an verschiedene Höhenlagen an?",
-              "detail": "DILEI, Meschlersaal",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/knowledge/susten/wie-passen-sich-pflanzen-an-verschiedene-hoehenlagen-an_AZvEGsT"
-            },
-            {
-              "label": "Abusitz",
-              "detail": "Zeughaus Kultur",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/evenements/musique/glis/abusitz_At24MQH"
-            },
-            {
-              "label": "Le cri du séquoia",
-              "detail": "Monthey — en cours, dernier jour : 26 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-cri-du-sequoia/"
-            },
-            {
-              "label": "Magique Molière Circus",
-              "detail": "Martigny — en cours, dernier jour : 26 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/magique-moliere-circus/"
-            },
-            {
-              "label": "LE VOYAGE DE MONSIEUR PERRICHON",
-              "detail": "Savièse — en cours, dernier jour : 26 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-voyage-de-monsieur-perrichon/"
             },
             {
               "label": "EXPOSITION \" ABTRAITS \"",
               "detail": "Sierre — en cours, dernier jour : 22 décembre 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/exposition-abtraits/"
-            },
-            {
-              "label": "Créatif avec le carton – ton entrée dans l’univers du cartonnage",
-              "detail": "Atelier Baz'art, Leukerbad — en cours, dernier jour : 6 décembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/events/this-that/leukerbad/creative-with-cardboard-your-introduction-to-the-world-of-cartonnage_AFTZANG"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/valais/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -428,7 +432,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

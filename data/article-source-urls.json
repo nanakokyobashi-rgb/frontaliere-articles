@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/a8-e-diramazione-gallarate-gattico-tre-notti-di-chiusure-e-deviazioni-nel-varesotto/2690233": {
-    "articleId": "lavori-verde-a8-d08",
-    "ts": "2026-09-25T17:54:10.734Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4112125": {
     "articleId": "ticket-stipendio-acquisti-ticino",
     "ts": "2026-09-25T18:43:54.329Z",
@@ -70,9 +65,10 @@
     "keyForm": 2
   },
   "https://www.tio.ch/newsblog/valute-e-frontiere/1952451/frontalieri-e-smart-working-quante-giornate-si-possono-lavorare-dall-italia-senza-problemi-fiscali": {
-    "articleId": "telelavoro-frontalieri-limite-italia",
-    "ts": "2026-09-26T06:53:28.248Z",
-    "keyForm": 2
+    "articleId": "frontalieri-smart-working-limite-fiscale",
+    "ts": "2026-11-27T04:38:17.426Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "1381688bf8fe6cd89adf0d603135c63fb005da86cbc7abe6b9a06a33e934e721"
   },
   "https://www.varesenews.it/2026/09/possibili-disagi-a-castronno-per-i-cantieri-notturni-in-contemporanea-sulla-gallaratese-e-in-autostrada/2689498": {
     "articleId": "castronno-chiusure-notturni-ottobre-2026",
@@ -2503,5 +2499,11 @@
     "ts": "2026-11-26T13:37:40.315Z",
     "keyForm": 2,
     "sourceContentFingerprint": "923a23671ce428afea3c55936fad4ae29751aba501a2dd3938b75fd71d4c642f"
+  },
+  "https://www.mef.gov.it/inevidenza/italia-e-svizzera-firmano-norme-fiscali-per-il-telelavoro": {
+    "articleId": "protocollo-fiscale-lavoro-remoto",
+    "ts": "2026-11-27T07:45:35.584Z",
+    "keyForm": 2,
+    "sourceContentFingerprint": "7ce6d277b8ede4a5332a7efa369228a1d65d896bf5e8d8d56b6a05e1a0084db0"
   }
 }

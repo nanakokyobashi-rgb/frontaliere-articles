@@ -4,17 +4,17 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T17:26:42.969Z",
-  "contentHash": "6d0e325864b4b4dd844fc66d67d74a643e07fc61ed01f41f259fc440b277813c",
+  "updatedAt": "2026-11-27T18:19:07.194Z",
+  "contentHash": "9661a9f4d94012074559529801ecf011e209d9e8b39046ad6f808bc5a4471e4c",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-26T03:50:03.880Z",
+      "updatedAt": "2026-11-27T09:11:52.310Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "1",
-          "note": "segnalazioni aggiornate: 26 novembre 2026"
+          "note": "segnalazioni aggiornate: 27 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "4",
-          "note": "segnalazioni aggiornate: 26 novembre 2026"
+          "value": "3",
+          "note": "segnalazioni aggiornate: 27 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -53,6 +53,12 @@
               "date": "2026-11-17T23:46:00.000Z"
             },
             {
+              "label": "Altdorf UR, Tellsgasse, Altdorf in tutte le direzioni Situazione: problemi di traffico Causa: evento importante Limitazione del traffico: nuova viabilità",
+              "value": "Traffico",
+              "detail": "fine prevista: 28 novembre 2026",
+              "date": "2026-11-27T07:35:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen tra Luogo Andermatt E Luogo Hospental Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 4.0…",
               "value": "Cantiere",
               "detail": "fine prevista: 31 dicembre 2026",
@@ -65,12 +71,6 @@
               "date": "2026-10-06T11:16:00.000Z"
             },
             {
-              "label": "A4 Brunnen -> Altdorf tra Luogo Sisikon E Galleria Galleria Flüelen Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.3",
-              "value": "Cantiere",
-              "detail": "fine prevista: 27 novembre 2026",
-              "date": "2026-11-19T12:05:00.000Z"
-            },
-            {
               "label": "A2 S. Gottardo <-> Luzern tra Galleria Galleria Seelisberg E Raccordo autostradale Diramazione Altdorf Situazione: problemi di traffico cantiere, lunghezza [km] 2.4 Limitazione del traffico: corsie…",
               "value": "Cantiere",
               "detail": "fine prevista: 3 dicembre 2026",
@@ -78,13 +78,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Ende der Bauarbeiten an der Bristenstrasse",
+              "date": "2026-11-26",
+              "url": "https://www.ur.ch/_rte/information/139837"
+            },
             {
               "label": "Änderung der Verkehrsregelnverordnung und der Verkehrszulassungsverordnung ...",
               "date": "2026-11-19",
@@ -109,14 +114,9 @@
               "label": "Verkehrsdaten werden aktualisiert",
               "date": "2026-10-27",
               "url": "https://www.ur.ch/_rte/information/138838"
-            },
-            {
-              "label": "Axenstrasse: nächtliche Sperrungen für Unterhalts- ...",
-              "date": "2026-10-27",
-              "url": "https://www.ur.ch/_rte/information/139150"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -180,7 +180,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "en": {
       "canton": "UR",
@@ -191,12 +191,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "1",
-          "note": "reports as of 26 November 2026"
+          "note": "reports as of 27 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "4",
-          "note": "reports as of 26 November 2026"
+          "value": "3",
+          "note": "reports as of 27 November 2026"
         }
       ],
       "dataBlocks": [
@@ -216,6 +216,12 @@
               "date": "2026-11-17T23:46:00.000Z"
             },
             {
+              "label": "Altdorf UR, Tellsgasse, Altdorf in tutte le direzioni Situazione: problemi di traffico Causa: evento importante Limitazione del traffico: nuova viabilità",
+              "value": "Traffic",
+              "detail": "until 28 November 2026",
+              "date": "2026-11-27T07:35:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen tra Luogo Andermatt E Luogo Hospental Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 4.0…",
               "value": "Roadworks",
               "detail": "until 31 December 2026",
@@ -228,12 +234,6 @@
               "date": "2026-10-06T11:16:00.000Z"
             },
             {
-              "label": "A4 Brunnen -> Altdorf tra Luogo Sisikon E Galleria Galleria Flüelen Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.3",
-              "value": "Roadworks",
-              "detail": "until 27 November 2026",
-              "date": "2026-11-19T12:05:00.000Z"
-            },
-            {
               "label": "A2 S. Gottardo <-> Luzern tra Galleria Galleria Seelisberg E Raccordo autostradale Diramazione Altdorf Situazione: problemi di traffico cantiere, lunghezza [km] 2.4 Limitazione del traffico: corsie…",
               "value": "Roadworks",
               "detail": "until 3 December 2026",
@@ -241,13 +241,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Ende der Bauarbeiten an der Bristenstrasse",
+              "date": "2026-11-26",
+              "url": "https://www.ur.ch/_rte/information/139837"
+            },
             {
               "label": "Änderung der Verkehrsregelnverordnung und der Verkehrszulassungsverordnung ...",
               "date": "2026-11-19",
@@ -272,14 +277,9 @@
               "label": "Verkehrsdaten werden aktualisiert",
               "date": "2026-10-27",
               "url": "https://www.ur.ch/_rte/information/138838"
-            },
-            {
-              "label": "Axenstrasse: nächtliche Sperrungen für Unterhalts- ...",
-              "date": "2026-10-27",
-              "url": "https://www.ur.ch/_rte/information/139150"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -343,7 +343,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "de": {
       "canton": "UR",
@@ -354,12 +354,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "1",
-          "note": "Meldungen vom 26. November 2026"
+          "note": "Meldungen vom 27. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "4",
-          "note": "Meldungen vom 26. November 2026"
+          "value": "3",
+          "note": "Meldungen vom 27. November 2026"
         }
       ],
       "dataBlocks": [
@@ -379,6 +379,12 @@
               "date": "2026-11-17T23:46:00.000Z"
             },
             {
+              "label": "Altdorf UR, Tellsgasse, Altdorf in beide Richtungen Sachlage: Verkehrsbehinderung Ursache: Veranstaltung Verkehrsführung: veränderte Verkehrsführung",
+              "value": "Verkehr",
+              "detail": "bis 28. November 2026",
+              "date": "2026-11-27T07:35:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen zwischen Ortschaft Andermatt und Ortschaft Hospental Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.5 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m]…",
               "value": "Baustelle",
               "detail": "bis 31. Dezember 2026",
@@ -391,12 +397,6 @@
               "date": "2026-10-06T11:16:00.000Z"
             },
             {
-              "label": "A4 Brunnen -> Altdorf zwischen Ortschaft Sisikon und Tunnel Flüelen-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.3",
-              "value": "Baustelle",
-              "detail": "bis 27. November 2026",
-              "date": "2026-11-19T12:05:00.000Z"
-            },
-            {
               "label": "A2 Gotthard <-> Luzern zwischen Tunnel Seelisberg-Tunnel und Autobahndreieck Verzweigung Altdorf Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.4 Verkehrsführung: Fahrbahnverengung auf einen…",
               "value": "Baustelle",
               "detail": "bis 3. Dezember 2026",
@@ -404,13 +404,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Ende der Bauarbeiten an der Bristenstrasse",
+              "date": "2026-11-26",
+              "url": "https://www.ur.ch/_rte/information/139837"
+            },
             {
               "label": "Änderung der Verkehrsregelnverordnung und der Verkehrszulassungsverordnung ...",
               "date": "2026-11-19",
@@ -435,14 +440,9 @@
               "label": "Verkehrsdaten werden aktualisiert",
               "date": "2026-10-27",
               "url": "https://www.ur.ch/_rte/information/138838"
-            },
-            {
-              "label": "Axenstrasse: nächtliche Sperrungen für Unterhalts- ...",
-              "date": "2026-10-27",
-              "url": "https://www.ur.ch/_rte/information/139150"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -506,7 +506,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "fr": {
       "canton": "UR",
@@ -517,12 +517,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "1",
-          "note": "signalements au 26 novembre 2026"
+          "note": "signalements au 27 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "4",
-          "note": "signalements au 26 novembre 2026"
+          "value": "3",
+          "note": "signalements au 27 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -542,6 +542,12 @@
               "date": "2026-11-17T23:46:00.000Z"
             },
             {
+              "label": "Altdorf UR, Tellsgasse, Altdorf dans les deux sens Situation: trafic perturbé Raison: événement majeur Gestion du trafic: nouveau plan de circulation",
+              "value": "Trafic",
+              "detail": "jusqu’au 28 novembre 2026",
+              "date": "2026-11-27T07:35:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen entre Localité Andermatt et Localité Hospental Situation: trafic perturbé travaux, longueur [km] 0.5 Complément 1: limitation temporaire de largeur largeur de la voie [m] 4.0…",
               "value": "Chantier",
               "detail": "jusqu’au 31 décembre 2026",
@@ -554,12 +560,6 @@
               "date": "2026-10-06T11:16:00.000Z"
             },
             {
-              "label": "A4 Brunnen -> Altdorf entre Localité Sisikon et Tunnel Tunnel de Flüelen Situation: trafic perturbé travaux, longueur [km] 0.2 Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.3",
-              "value": "Chantier",
-              "detail": "jusqu’au 27 novembre 2026",
-              "date": "2026-11-19T12:05:00.000Z"
-            },
-            {
               "label": "A2 St-Gothard <-> Lucerne entre Tunnel Tunnel du Seelisberg et Echangeur Echangeur d'Altdorf Situation: trafic perturbé travaux, longueur [km] 2.4 Gestion du trafic: rétrécissement des voies sur une…",
               "value": "Chantier",
               "detail": "jusqu’au 3 décembre 2026",
@@ -567,13 +567,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Ende der Bauarbeiten an der Bristenstrasse",
+              "date": "2026-11-26",
+              "url": "https://www.ur.ch/_rte/information/139837"
+            },
             {
               "label": "Änderung der Verkehrsregelnverordnung und der Verkehrszulassungsverordnung ...",
               "date": "2026-11-19",
@@ -598,14 +603,9 @@
               "label": "Verkehrsdaten werden aktualisiert",
               "date": "2026-10-27",
               "url": "https://www.ur.ch/_rte/information/138838"
-            },
-            {
-              "label": "Axenstrasse: nächtliche Sperrungen für Unterhalts- ...",
-              "date": "2026-10-27",
-              "url": "https://www.ur.ch/_rte/information/139150"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -669,7 +669,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     }
   }
 }

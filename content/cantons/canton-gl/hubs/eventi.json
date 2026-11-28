@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "0085903dedd2f6888caf12dfa42898688a8b4dd80a8115121c61007fca1f8de0",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "55d428f0a1d1ac14939181406209de103a174bca1d22445d51662141969894bf",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T00:32:00.223Z",
+      "updatedAt": "2026-11-26T16:33:33.919Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "25",
+          "value": "24",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,15 +33,9 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Frank Richter: #LOVEMYJOB",
-              "detail": "Schwanden",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frank-richter-1/"
-            },
-            {
               "label": "Orange Days: 16 days against violence against women",
               "detail": "Anna Göldi Museum — in corso, ultimo giorno: 10 dicembre 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orange-days-16-tage-gegen-geschlechtsspezifische-gewalt/"
             },
             {
@@ -91,11 +85,17 @@
               "detail": "Markthalle Glarus, Glarus",
               "date": "2026-11-28",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/soulmarket_AU8vi8h"
+            },
+            {
+              "label": "Adventsbrunch im Lihn",
+              "detail": "Filzbach (Kerenzerberg)",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsbrunch-im-lihn/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "GL",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "25",
+          "value": "24",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,15 +138,9 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Frank Richter: #LOVEMYJOB",
-              "detail": "Schwanden",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frank-richter-1/"
-            },
-            {
               "label": "Orange Days: 16 days against violence against women",
               "detail": "Anna Göldi Museum — ongoing, last day: 10 December 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orange-days-16-tage-gegen-geschlechtsspezifische-gewalt/"
             },
             {
@@ -196,11 +190,17 @@
               "detail": "Markthalle Glarus, Glarus",
               "date": "2026-11-28",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/soulmarket_AU8vi8h"
+            },
+            {
+              "label": "Adventsbrunch im Lihn",
+              "detail": "Filzbach (Kerenzerberg)",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsbrunch-im-lihn/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "GL",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "25",
+          "value": "24",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,15 +243,9 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Frank Richter: #LOVEMYJOB",
-              "detail": "Schwanden",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frank-richter-1/"
-            },
-            {
               "label": "Orange Days: 16 Tage gegen geschlechtsspezifische Gewalt",
               "detail": "Anna Göldi Museum — läuft, letzter Tag: 10. Dezember 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orange-days-16-tage-gegen-geschlechtsspezifische-gewalt/"
             },
             {
@@ -301,11 +295,17 @@
               "detail": "Markthalle Glarus, Glarus",
               "date": "2026-11-28",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/soulmarket_AU8vi8h"
+            },
+            {
+              "label": "Adventsbrunch im Lihn",
+              "detail": "Filzbach (Kerenzerberg)",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsbrunch-im-lihn/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "GL",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "25",
+          "value": "24",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,15 +348,9 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Frank Richter: #LOVEMYJOB",
-              "detail": "Schwanden",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frank-richter-1/"
-            },
-            {
               "label": "Orange Days : 16 jours contre la violence envers les femmes",
               "detail": "Anna Göldi Museum — en cours, dernier jour : 10 décembre 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orange-days-16-tage-gegen-geschlechtsspezifische-gewalt/"
             },
             {
@@ -406,11 +400,17 @@
               "detail": "Markthalle Glarus, Glarus",
               "date": "2026-11-28",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/soulmarket_AU8vi8h"
+            },
+            {
+              "label": "Adventsbrunch im Lihn",
+              "detail": "Filzbach (Kerenzerberg)",
+              "date": "2026-11-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adventsbrunch-im-lihn/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

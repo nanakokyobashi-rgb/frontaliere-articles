@@ -4,17 +4,17 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "7e3a23063ba8ab27f88ba7534ae921e834d73b63ca5406b192d92ddc44b38f78",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "a07e1b4d22da81cb072d2835bb83a0feebec0b0944d57d21551ce71abbd0ae35",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T00:32:00.223Z",
+      "updatedAt": "2026-11-26T16:33:33.919Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-25T16:08:35.229Z",
+      "updatedAt": "2026-11-26T15:51:00.529Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "378",
+          "value": "370",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "« Hasards sauvages » - Café scientifique : Composer avec la montagne entre changements, catastrophes et retour du loup.",
+              "label": "Afterwork Chocolat spécial Escalade",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/hasards-sauvages-cafe-scientifique-composer-montagne-entre-changements-catastrophes-retour-loup"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/afterwork-chocolat-special-escalade"
             },
             {
-              "label": "Blooze and More - Concert du BAG",
+              "label": "Atelier Wool & Wine \"Transformez la Laine de Mouton en Boules de Noël\"",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/blooze-more-concert"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/atelier-wool-wine-transformez-laine-mouton-boules-noel"
             },
             {
-              "label": "Cité Seniors fête ses 20 ans | 47 ans d'histoire des squats à Genève - Conférence, causerie et balades",
+              "label": "AUNTY RAYZOR + Blue Mush",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades-2"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/aunty-rayzor-blue-mush"
             },
             {
-              "label": "Complet - Atelier d'écriture: mise en mots de la violence",
+              "label": "Ciné Club",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/atelier-ecriture-mise-mots-violence"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/cine-club"
             },
             {
-              "label": "Complet - KNEECAP + Fawzi x Smokaholic",
+              "label": "Concert événement SEAMUS BLAKE 4TET «PLAYS THE MUSIC OF EDDIE HARRIS» Jazz/Funk/Soul",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/kneecap-fawzi-smokaholic"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/concert-evenement-seamus-blake-4tet-plays-music-eddie-harris-jazzfunksoul"
             },
             {
-              "label": "CONCERT (Festival Celtiques) - YULE, un spectacle interceltiques",
+              "label": "Concert sur le pouce à la Bibliothèque de la Cité avec un quatuor de violoncelles de l’Orchestre de Chambre de Genève",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/concert-festival-celtiques-yule-spectacle-interceltiques"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/concert-pouce-bibliotheque-cite-quatuor-violoncelles-orchestre-chambre-geneve"
             },
             {
-              "label": "Conférence exceptionnelle: Comment repenser notre rapport au temps ?Faire société dans un monde marqué par l’urgence.",
+              "label": "DANCE ME TO THE END OF LOVE",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/conference-exceptionnelle-repenser-rapport-temps-faire-societe-monde-marque-urgence"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/dance-love"
             },
             {
-              "label": "CORPS Ô PLURIELLES (performance)",
+              "label": "Dégustation de vins gratuite à Genève",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/corps-plurielles-performance"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/degustation-vins-gratuite-geneve"
             },
             {
-              "label": "Cours de Tango Argentin - Niveau débutant",
+              "label": "Deux pianos pour trois pianistes",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-10"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/pianos-trois-pianistes"
             },
             {
-              "label": "Cyberviolences – résister collectivement à la silenciation",
+              "label": "DJ CHIVI · REGGAETON, SALSA, MERENGUE, BACHATA",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/cyberviolences-resister-collectivement-silenciation"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/chivi-reggaeton-salsa-merengue-bachata-0"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ginevra/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "GE",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "378",
+          "value": "370",
           "note": "from the site’s events calendar"
         }
       ],
@@ -161,69 +161,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "« Hasards sauvages » - Café scientifique : Composer avec la montagne entre changements, catastrophes et retour du loup.",
+              "label": "Afterwork Chocolat spécial Escalade",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/hasards-sauvages-cafe-scientifique-composer-montagne-entre-changements-catastrophes-retour-loup"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/afterwork-chocolat-special-escalade"
             },
             {
-              "label": "Blooze and More - Concert du BAG",
+              "label": "Atelier Wool & Wine \"Transformez la Laine de Mouton en Boules de Noël\"",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/blooze-more-concert"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/atelier-wool-wine-transformez-laine-mouton-boules-noel"
             },
             {
-              "label": "Cité Seniors fête ses 20 ans | 47 ans d'histoire des squats à Genève - Conférence, causerie et balades",
+              "label": "AUNTY RAYZOR + Blue Mush",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades-2"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/aunty-rayzor-blue-mush"
             },
             {
-              "label": "Complet - Atelier d'écriture: mise en mots de la violence",
+              "label": "Ciné Club",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/atelier-ecriture-mise-mots-violence"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/cine-club"
             },
             {
-              "label": "Complet - KNEECAP + Fawzi x Smokaholic",
+              "label": "Concert événement SEAMUS BLAKE 4TET «PLAYS THE MUSIC OF EDDIE HARRIS» Jazz/Funk/Soul",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/kneecap-fawzi-smokaholic"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/concert-evenement-seamus-blake-4tet-plays-music-eddie-harris-jazzfunksoul"
             },
             {
-              "label": "CONCERT (Festival Celtiques) - YULE, un spectacle interceltiques",
+              "label": "Concert sur le pouce à la Bibliothèque de la Cité avec un quatuor de violoncelles de l’Orchestre de Chambre de Genève",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/concert-festival-celtiques-yule-spectacle-interceltiques"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/concert-pouce-bibliotheque-cite-quatuor-violoncelles-orchestre-chambre-geneve"
             },
             {
-              "label": "Conférence exceptionnelle: Comment repenser notre rapport au temps ?Faire société dans un monde marqué par l’urgence.",
+              "label": "DANCE ME TO THE END OF LOVE",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/conference-exceptionnelle-repenser-rapport-temps-faire-societe-monde-marque-urgence"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/dance-love"
             },
             {
-              "label": "CORPS Ô PLURIELLES (performance)",
+              "label": "Dégustation de vins gratuite à Genève",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/corps-plurielles-performance"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/degustation-vins-gratuite-geneve"
             },
             {
-              "label": "Cours de Tango Argentin - Niveau débutant",
+              "label": "Deux pianos pour trois pianistes",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-10"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/pianos-trois-pianistes"
             },
             {
-              "label": "Cyberviolences – résister collectivement à la silenciation",
+              "label": "DJ CHIVI · REGGAETON, SALSA, MERENGUE, BACHATA",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/cyberviolences-resister-collectivement-silenciation"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/chivi-reggaeton-salsa-merengue-bachata-0"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/geneva/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "GE",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "378",
+          "value": "370",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -284,69 +284,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "« Hasards sauvages » - Café scientifique : Composer avec la montagne entre changements, catastrophes et retour du loup.",
+              "label": "Afterwork Chocolat spécial Escalade",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/hasards-sauvages-cafe-scientifique-composer-montagne-entre-changements-catastrophes-retour-loup"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/afterwork-chocolat-special-escalade"
             },
             {
-              "label": "Blooze and More - Concert du BAG",
+              "label": "Atelier Wool & Wine \"Transformez la Laine de Mouton en Boules de Noël\"",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/blooze-more-concert"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/atelier-wool-wine-transformez-laine-mouton-boules-noel"
             },
             {
-              "label": "Cité Seniors fête ses 20 ans | 47 ans d'histoire des squats à Genève - Conférence, causerie et balades",
+              "label": "AUNTY RAYZOR + Blue Mush",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades-2"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/aunty-rayzor-blue-mush"
             },
             {
-              "label": "Complet - Atelier d'écriture: mise en mots de la violence",
+              "label": "Ciné Club",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/atelier-ecriture-mise-mots-violence"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/cine-club"
             },
             {
-              "label": "Complet - KNEECAP + Fawzi x Smokaholic",
+              "label": "Concert événement SEAMUS BLAKE 4TET «PLAYS THE MUSIC OF EDDIE HARRIS» Jazz/Funk/Soul",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/kneecap-fawzi-smokaholic"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/concert-evenement-seamus-blake-4tet-plays-music-eddie-harris-jazzfunksoul"
             },
             {
-              "label": "CONCERT (Festival Celtiques) - YULE, un spectacle interceltiques",
+              "label": "Concert sur le pouce à la Bibliothèque de la Cité avec un quatuor de violoncelles de l’Orchestre de Chambre de Genève",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/concert-festival-celtiques-yule-spectacle-interceltiques"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/concert-pouce-bibliotheque-cite-quatuor-violoncelles-orchestre-chambre-geneve"
             },
             {
-              "label": "Conférence exceptionnelle: Comment repenser notre rapport au temps ?Faire société dans un monde marqué par l’urgence.",
+              "label": "DANCE ME TO THE END OF LOVE",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/conference-exceptionnelle-repenser-rapport-temps-faire-societe-monde-marque-urgence"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/dance-love"
             },
             {
-              "label": "CORPS Ô PLURIELLES (performance)",
+              "label": "Dégustation de vins gratuite à Genève",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/corps-plurielles-performance"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/degustation-vins-gratuite-geneve"
             },
             {
-              "label": "Cours de Tango Argentin - Niveau débutant",
+              "label": "Deux pianos pour trois pianistes",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-10"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/pianos-trois-pianistes"
             },
             {
-              "label": "Cyberviolences – résister collectivement à la silenciation",
+              "label": "DJ CHIVI · REGGAETON, SALSA, MERENGUE, BACHATA",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/cyberviolences-resister-collectivement-silenciation"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/chivi-reggaeton-salsa-merengue-bachata-0"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/genf/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "GE",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "378",
+          "value": "370",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -407,69 +407,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "« Hasards sauvages » - Café scientifique : Composer avec la montagne entre changements, catastrophes et retour du loup.",
+              "label": "Afterwork Chocolat spécial Escalade",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/hasards-sauvages-cafe-scientifique-composer-montagne-entre-changements-catastrophes-retour-loup"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/afterwork-chocolat-special-escalade"
             },
             {
-              "label": "Blooze and More - Concert du BAG",
+              "label": "Atelier Wool & Wine \"Transformez la Laine de Mouton en Boules de Noël\"",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/blooze-more-concert"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/atelier-wool-wine-transformez-laine-mouton-boules-noel"
             },
             {
-              "label": "Cité Seniors fête ses 20 ans | 47 ans d'histoire des squats à Genève - Conférence, causerie et balades",
+              "label": "AUNTY RAYZOR + Blue Mush",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades-2"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/aunty-rayzor-blue-mush"
             },
             {
-              "label": "Complet - Atelier d'écriture: mise en mots de la violence",
+              "label": "Ciné Club",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/atelier-ecriture-mise-mots-violence"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/cine-club"
             },
             {
-              "label": "Complet - KNEECAP + Fawzi x Smokaholic",
+              "label": "Concert événement SEAMUS BLAKE 4TET «PLAYS THE MUSIC OF EDDIE HARRIS» Jazz/Funk/Soul",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/kneecap-fawzi-smokaholic"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/concert-evenement-seamus-blake-4tet-plays-music-eddie-harris-jazzfunksoul"
             },
             {
-              "label": "CONCERT (Festival Celtiques) - YULE, un spectacle interceltiques",
+              "label": "Concert sur le pouce à la Bibliothèque de la Cité avec un quatuor de violoncelles de l’Orchestre de Chambre de Genève",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/concert-festival-celtiques-yule-spectacle-interceltiques"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/concert-pouce-bibliotheque-cite-quatuor-violoncelles-orchestre-chambre-geneve"
             },
             {
-              "label": "Conférence exceptionnelle: Comment repenser notre rapport au temps ?Faire société dans un monde marqué par l’urgence.",
+              "label": "DANCE ME TO THE END OF LOVE",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/conference-exceptionnelle-repenser-rapport-temps-faire-societe-monde-marque-urgence"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/dance-love"
             },
             {
-              "label": "CORPS Ô PLURIELLES (performance)",
+              "label": "Dégustation de vins gratuite à Genève",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/corps-plurielles-performance"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/degustation-vins-gratuite-geneve"
             },
             {
-              "label": "Cours de Tango Argentin - Niveau débutant",
+              "label": "Deux pianos pour trois pianistes",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-10"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/pianos-trois-pianistes"
             },
             {
-              "label": "Cyberviolences – résister collectivement à la silenciation",
+              "label": "DJ CHIVI · REGGAETON, SALSA, MERENGUE, BACHATA",
               "detail": "Genève",
-              "date": "2026-11-26",
-              "url": "https://www.geneve.ch/agenda/cyberviolences-resister-collectivement-silenciation"
+              "date": "2026-11-27",
+              "url": "https://www.geneve.ch/agenda/chivi-reggaeton-salsa-merengue-bachata-0"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/geneve/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

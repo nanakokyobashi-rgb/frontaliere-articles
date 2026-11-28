@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "servizi",
-  "updatedAt": "2026-11-26T13:02:36.485Z",
-  "contentHash": "292f1591f43c5759d2731d5d6ec3a7629f21a1d810ec0b682aab558763165667",
+  "updatedAt": "2026-11-27T14:54:45.873Z",
+  "contentHash": "58120187e038a47f74ea1a6c02f6cf2a41def07146cff6da8bab2d2c0a3b0903",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -79,7 +79,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -88,6 +88,12 @@
           "url": "/articoli-uri/presidenza-spiringen-schuler/",
           "excerpt": "Peter Schuler, vicepresidente in carica, subentrerà a René Müller il 1° gennaio; il mandato indicato è 2026/27.",
           "date": "2026-11-08T05:26:38.176Z"
+        },
+        {
+          "title": "Uri: targhe e immatricolazione, intervalli del collaudo",
+          "url": "/articoli-svizzera/uri-targhe-collaudo-auto/",
+          "excerpt": "Per le auto, primo collaudo dopo cinque anni dalla prima messa in circolazione, poi in genere dopo tre e due.",
+          "date": "2026-11-27T06:40:45.639Z"
         },
         {
           "title": "Permesso B nel Canton Uri: requisiti e rinnovo",
@@ -124,12 +130,6 @@
           "url": "/articoli-svizzera/premi-cassa-malati-cantone-uri/",
           "excerpt": "I premi cassa malati nel Cantone Uri e le condizioni per la riduzione dei premi.",
           "date": "2026-08-15T23:51:12.284Z"
-        },
-        {
-          "title": "Permesso di domicilio C nel Cantone di Uri: requisiti e domanda",
-          "url": "/articoli-svizzera/permesso-di-domicilio-c-ur-requisiti-e-domanda/",
-          "excerpt": "La durata richiesta per il permesso di domicilio C nel Cantone di Uri, i criteri di integrazione e le conoscenze linguistiche richieste.",
-          "date": "2026-08-16T02:10:19.833Z"
         }
       ],
       "latestCantonArticles": [],
@@ -159,7 +159,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "en": {
       "canton": "UR",
@@ -221,7 +221,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -230,6 +230,12 @@
           "url": "/en/uri-articles/spiringen-municipal-president-schuler/",
           "excerpt": "Peter Schuler, the incumbent vice president, will succeed René Müller on January 1; the term indicated is 2026/27.",
           "date": "2026-11-08T05:26:38.176Z"
+        },
+        {
+          "title": "Uri: number plates and registration, inspection intervals",
+          "url": "/en/swiss-articles/uri-vehicle-registration-inspection/",
+          "excerpt": "For cars, the first inspection is after five years from the date they are first put into circulation, then generally after three years and two years.",
+          "date": "2026-11-27T06:40:45.639Z"
         },
         {
           "title": "Permit B in Canton Uri: Requirements and Renewal",
@@ -266,12 +272,6 @@
           "url": "/en/swiss-articles/health-insurance-premiums-canton-uri-and-premium-reduction/",
           "excerpt": "The sick cash premiums in Canton Uri and the conditions for the reduction of the premiums.",
           "date": "2026-08-15T23:51:12.284Z"
-        },
-        {
-          "title": "Residence permit C in the Canton of Uri: requirements and application",
-          "url": "/en/swiss-articles/c-permit-uri-requirements-and-application/",
-          "excerpt": "The duration required for residence permit C in the Canton of Uri, the integration criteria and the language skills required.",
-          "date": "2026-08-16T02:10:19.833Z"
         }
       ],
       "latestCantonArticles": [],
@@ -297,7 +297,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "de": {
       "canton": "UR",
@@ -359,7 +359,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -368,6 +368,12 @@
           "url": "/de/uri-artikel/spiringen-gemeindepraesident-schuler/",
           "excerpt": "Peter Schuler, der amtierende Vizepräsident, wird am 1. Januar die Nachfolge von René Müller antreten; die angegebene Amtsdauer lautet 2026/27.",
           "date": "2026-11-08T05:26:38.176Z"
+        },
+        {
+          "title": "Uri: Kennzeichen und Zulassung, Prüfintervalle",
+          "url": "/de/schweiz-artikel/uri-kontrollschilder-zulassung-pruefung/",
+          "excerpt": "Bei Autos findet die erste Prüfung fünf Jahre nach der ersten Inverkehrsetzung statt, danach in der Regel nach drei und zwei Jahren.",
+          "date": "2026-11-27T06:40:45.639Z"
         },
         {
           "title": "B-Bewilligung im Kanton Uri: Voraussetzungen und Erneuerung",
@@ -404,12 +410,6 @@
           "url": "/de/schweiz-artikel/krankenkassenpramien-kanton-uri-und-pramienverbilligung/",
           "excerpt": "Die Krankenkassenprämien im Kanton Uri und die Bedingungen für die Prämienverbilligung.",
           "date": "2026-08-15T23:51:12.284Z"
-        },
-        {
-          "title": "Niederlassungsbewilligung C im Kanton Uri: Voraussetzungen und Antrag",
-          "url": "/de/schweiz-artikel/c-aufenthaltstitel-uri-anforderungen-und-antrag/",
-          "excerpt": "Die erforderliche Dauer für die Niederlassungsbewilligung C im Kanton Uri, die Integrationskriterien und die erforderlichen Sprachkenntnisse.",
-          "date": "2026-08-16T02:10:19.833Z"
         }
       ],
       "latestCantonArticles": [],
@@ -435,7 +435,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "fr": {
       "canton": "UR",
@@ -497,7 +497,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -506,6 +506,12 @@
           "url": "/fr/articles-uri/spiringen-president-communal-schuler/",
           "excerpt": "Peter Schuler, vice-président en exercice, succédera à René Müller le 1er janvier ; le mandat indiqué est 2026/27.",
           "date": "2026-11-08T05:26:38.176Z"
+        },
+        {
+          "title": "Uri : plaques et immatriculation, intervalles du contrôle technique",
+          "url": "/fr/articles-suisse/uri-plaques-immatriculation-controle/",
+          "excerpt": "Pour les voitures, premier contrôle technique cinq ans après la première mise en circulation, puis généralement après trois ans et deux ans.",
+          "date": "2026-11-27T06:40:45.639Z"
         },
         {
           "title": "Permis B dans le canton d'Uri : exigences et renouvellement",
@@ -542,12 +548,6 @@
           "url": "/fr/articles-suisse/primes-caisse-maladie-canton-uri-et-reduction-des-primes/",
           "excerpt": "Les primes caisse-maladie dans le canton d'Uri et les conditions de réduction des primes.",
           "date": "2026-08-15T23:51:12.284Z"
-        },
-        {
-          "title": "Permis de séjour C dans le canton d'Uri : exigences et demande",
-          "url": "/fr/articles-suisse/permis-de-sejour-c-uri-exigences-et-demande/",
-          "excerpt": "La durée requise pour le permis de séjour C dans le canton d'Uri, les critères d'intégration et les connaissances linguistiques requises.",
-          "date": "2026-08-16T02:10:19.833Z"
         }
       ],
       "latestCantonArticles": [],
@@ -569,7 +569,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     }
   }
 }

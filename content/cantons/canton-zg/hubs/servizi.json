@@ -4,7 +4,7 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "servizi",
-  "updatedAt": "2026-11-26T13:02:36.485Z",
+  "updatedAt": "2026-11-27T14:54:45.873Z",
   "contentHash": "8f25554288c9b93fd38b832e3f09158f1aca8441a179e01d56d342fa432eeae2",
   "blocks": [
     {
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -84,7 +84,7 @@
               "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/medical-partnership-mit-dem-evz-neue-aerzte-teams"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -164,7 +164,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "en": {
       "canton": "ZG",
@@ -231,7 +231,7 @@
               "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/medical-partnership-mit-dem-evz-neue-aerzte-teams"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -307,7 +307,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "de": {
       "canton": "ZG",
@@ -374,7 +374,7 @@
               "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/medical-partnership-mit-dem-evz-neue-aerzte-teams"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -450,7 +450,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "fr": {
       "canton": "ZG",
@@ -517,7 +517,7 @@
               "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/medical-partnership-mit-dem-evz-neue-aerzte-teams"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -589,7 +589,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     }
   }
 }

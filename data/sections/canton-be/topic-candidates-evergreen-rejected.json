@@ -7,6 +7,10 @@
     "canton-be::https://www.lejdj.ch/articles/a-bienne-le-cafe-bar-cecil-et-le-palace-sont-fermes-106655": {
       "section": "canton-be",
       "ts": 1795740369828
+    },
+    "canton-be::https://www.api.news.apps.be.ch/api/atom/news/116ace7f-5dd1-4749-9bf2-dcf700473e1d": {
+      "section": "canton-be",
+      "ts": 1795783479154
     }
   }
 }

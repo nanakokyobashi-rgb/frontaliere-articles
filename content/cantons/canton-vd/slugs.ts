@@ -35,6 +35,8 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'quattro-temi-puntata-vaud': { it: 'quattro-temi-puntata-vaud', en: 'vaud-budget-tax-cut-debate', de: 'waadt-budget-steuersenkung-debatte', fr: 'vaud-budget-baisse-impot-debat' },
  'decisioni-grand-conseil-10-novembre': { it: 'decisioni-grand-conseil-10-novembre', en: 'grand-council-decisions-november-10', de: 'grosser-rat-entscheidungen-10-november', fr: 'decisions-grand-conseil-10-novembre' },
  'manifestazione-losanna-tagli-bilancio': { it: 'manifestazione-losanna-tagli-bilancio', en: 'lausanne-demonstration-budget-cuts', de: 'manifestation-lausanne-budgetkurzungen', fr: 'manifestation-lausanne-coupes-budget' },
+ 'lausanne-luci-foranee': { it: 'lausanne-luci-foranee', en: 'lausanne-outlying-lighting', de: 'lausanne-beleuchtung-aussenbezirke', fr: 'lausanne-eclairage-zones-foraines' },
+ 'ehnv-riorganizzazione-chiusura-chamblon': { it: 'ehnv-riorganizzazione-chiusura-chamblon', en: 'ehnv-reorganization-chamblon-closure', de: 'ehnv-umstrukturierung-chamblon-schliessung', fr: 'ehnv-reorganisation-fermeture-chamblon' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

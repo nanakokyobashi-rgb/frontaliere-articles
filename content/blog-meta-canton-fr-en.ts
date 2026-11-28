@@ -84,6 +84,9 @@ const blogMetaCantonFrEn: Record<string, string> = {
     'blog.article.bakery-bakery-apre-friburgo.title': 'Bakery Bakery opens its first branch in French-speaking Switzerland in Fribourg',
     'blog.article.bakery-bakery-apre-friburgo.excerpt': 'The vegan bakery chain founded in Bern opens its first branch in French-speaking Switzerland in Fribourg; 11 stores are already open across the Sarine.',
     'blog.article.bakery-bakery-apre-friburgo.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.rottura-condotta-route-neuve.title': 'Water main break: alternating traffic on route Neuve in Fribourg',
+    'blog.article.rottura-condotta-route-neuve.excerpt': 'A water main break on Wednesday evening damaged the road in the upper part of route Neuve; around ten properties were left without water.',
+    'blog.article.rottura-condotta-route-neuve.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonFrEn;

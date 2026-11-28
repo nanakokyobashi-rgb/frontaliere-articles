@@ -90,6 +90,9 @@ const blogMetaCantonBeIt: Record<string, string> = {
     'blog.article.priorita-traffico-cinque-tratti.title': 'Priorità al traffico economico su cinque nuovi tratti a Berna',
     'blog.article.priorita-traffico-cinque-tratti.excerpt': 'La decisione del Gemeinderat del 26 novembre 2026 apre cinque nuovi tratti nel 2027, dopo un pilota positivo partito il 1° giugno 2025.',
     'blog.article.priorita-traffico-cinque-tratti.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.risposta-petizione-fisioterapia-berna.title': 'Governo Berna prende atto petizione sulla fisioterapia',
+    'blog.article.risposta-petizione-fisioterapia-berna.excerpt': 'Il Governo del Canton Berna ha preso atto della petizione «Per una fisioterapia garantita e vicina al luogo di domicilio nel Canton Berna», considerandone le richieste nelle procedure tariffarie in corso.',
+    'blog.article.risposta-petizione-fisioterapia-berna.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBeIt;

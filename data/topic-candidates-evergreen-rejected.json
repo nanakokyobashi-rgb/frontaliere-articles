@@ -6396,6 +6396,294 @@
       "firstSeenAt": "2026-11-25T01:48:30.768Z",
       "lastValidatedAt": "2026-11-25T01:48:30.768Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "assicurazione immobili canton Uri guida a obbligo e premi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-27T04:55:35.507Z",
+      "lastValidatedAt": "2026-11-27T04:55:35.507Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "aprire un'attività canton Uri registro di commercio e costi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T04:58:06.326Z",
+      "lastValidatedAt": "2026-11-27T04:58:06.326Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "patente di guida canton Uri conversione ed esami",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T05:07:19.104Z",
+      "lastValidatedAt": "2026-11-27T05:07:19.104Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "imposta di successione e donazione canton Uri aliquote",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T05:07:52.334Z",
+      "lastValidatedAt": "2026-11-27T05:07:52.334Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "orari di apertura negozi canton Uri guida a domeniche e festivi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T05:15:58.573Z",
+      "lastValidatedAt": "2026-11-27T05:15:58.573Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "imposta sui cani canton Uri guida a importi e registrazione",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T05:16:41.059Z",
+      "lastValidatedAt": "2026-11-27T05:16:41.059Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "licenza di caccia canton Uri requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T05:17:05.938Z",
+      "lastValidatedAt": "2026-11-27T05:17:05.938Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "permesso di pesca canton Uri requisiti e stagioni",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T05:17:32.954Z",
+      "lastValidatedAt": "2026-11-27T05:17:32.954Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "formazione continua canton Uri requisiti e contributi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T06:14:38.246Z",
+      "lastValidatedAt": "2026-11-27T06:14:38.246Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "giorni festivi canton Uri guida a calendario e regole",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T06:15:18.178Z",
+      "lastValidatedAt": "2026-11-27T06:15:18.178Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "targhe e immatricolazione canton Uri guida a procedura e costi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T08:47:15.723Z",
+      "lastValidatedAt": "2026-11-27T08:47:15.723Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "collaudo veicoli canton Uri convocazione e requisiti",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T09:37:16.290Z",
+      "lastValidatedAt": "2026-11-27T09:37:16.290Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "licenza esercizio pubblico canton Uri requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T09:39:04.910Z",
+      "lastValidatedAt": "2026-11-27T09:39:04.910Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "tasse universitarie canton Uri guida a iscrizione e contributi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T09:39:35.531Z",
+      "lastValidatedAt": "2026-11-27T09:39:35.531Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "integrazione e corsi di lingua canton Uri contributi e requisiti",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T09:40:06.333Z",
+      "lastValidatedAt": "2026-11-27T09:40:06.333Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "imposte cantonali canton Svitto aliquote e deduzioni",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-27T09:40:06.489Z",
+      "lastValidatedAt": "2026-11-27T09:40:06.489Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "premi cassa malati canton Svitto e riduzione premi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-27T09:41:53.779Z",
+      "lastValidatedAt": "2026-11-27T09:41:53.779Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "permesso di dimora B canton Svitto requisiti e rinnovo",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-27T09:41:53.938Z",
+      "lastValidatedAt": "2026-11-27T09:41:53.938Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "salario minimo canton Svitto requisiti e applicazione",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-27T10:03:36.998Z",
+      "lastValidatedAt": "2026-11-27T10:03:36.998Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "assistenza sociale canton Svitto requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-27T13:05:00.084Z",
+      "lastValidatedAt": "2026-11-27T13:05:00.084Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "indennità di disoccupazione canton Svitto iscrizione URC",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-27T13:05:00.267Z",
+      "lastValidatedAt": "2026-11-27T13:05:00.267Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "assegni familiari canton Svitto importi e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T13:06:30.347Z",
+      "lastValidatedAt": "2026-11-27T13:06:30.347Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "imposta sugli autoveicoli canton Svitto calcolo e pagamento",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-11-27T13:08:02.435Z",
+      "lastValidatedAt": "2026-11-27T13:08:02.435Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "apprendistato e formazione professionale canton Svitto",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-27T13:08:02.617Z",
+      "lastValidatedAt": "2026-11-27T13:08:02.617Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -7322,6 +7610,66 @@
       "firstStrikeAt": "2026-11-25T01:50:26.684Z",
       "lastStrikeAt": "2026-11-25T01:50:26.684Z",
       "expiresAt": "2026-12-25T01:50:26.684Z"
+    },
+    {
+      "keyword": "formazione continua canton Uri requisiti e contributi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-27T05:06:59.244Z",
+      "lastStrikeAt": "2026-11-27T05:06:59.244Z",
+      "expiresAt": "2026-12-27T05:06:59.244Z"
+    },
+    {
+      "keyword": "giorni festivi canton Uri guida a calendario e regole",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-27T05:15:28.843Z",
+      "lastStrikeAt": "2026-11-27T05:15:28.843Z",
+      "expiresAt": "2026-12-27T05:15:28.843Z"
+    },
+    {
+      "keyword": "incentivi energetici canton Svitto requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 3,
+      "firstStrikeAt": "2026-11-27T13:14:00.227Z",
+      "lastStrikeAt": "2026-11-27T20:07:29.891Z",
+      "expiresAt": "2026-12-27T20:07:29.891Z"
+    },
+    {
+      "keyword": "autorizzazione edilizia canton Svitto requisiti e procedura",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 2,
+      "firstStrikeAt": "2026-11-27T21:06:59.329Z",
+      "lastStrikeAt": "2026-11-27T22:55:36.496Z",
+      "expiresAt": "2026-12-27T22:55:36.496Z"
+    },
+    {
+      "keyword": "voto cantonale canton Svitto guida a iniziative e referendum",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-27T21:14:57.087Z",
+      "lastStrikeAt": "2026-11-27T21:14:57.087Z",
+      "expiresAt": "2026-12-27T21:14:57.087Z"
     }
   ],
   "legacy": [
@@ -15621,30 +15969,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/11/fumarola-cisl-a-como-servono-salari-giusti-e-regole-certe-per-i-frontalieri/2749213": {
-      "section": "frontaliere",
-      "ts": 1795567297719
-    },
-    "frontaliere::https://cambiavalute.ch/guide/permessi/permesso-g-per-frontalieri-guida-2026-al-rilascio-rinnovo-e-telelavoro": {
-      "section": "frontaliere",
-      "ts": 1795582506324
-    },
-    "frontaliere::https://www.biancolavoro.it/lavorare-in-svizzera-guida-aggiornata-a-permessi-stipendi-e-frontalieri": {
-      "section": "frontaliere",
-      "ts": 1795582633707
-    },
-    "svizzera::https://www.ilgiorno.it/como/cronaca/polizze-sanitarie-alle-stelle-in-f0a74e0f": {
-      "section": "svizzera",
-      "ts": 1795585418531
-    },
-    "svizzera::https://www.rsi.ch/s/4257428": {
-      "section": "svizzera",
-      "ts": 1795596455762
-    },
-    "frontaliere::https://www.ocst.ch/il-lavoro/411-professioni/404-sociosanitario/2638-salute-premi-di-cassa-malati-e-responsabilita-una-riflessione-sul-crescente-costo-della-sanita-ticinese": {
-      "section": "frontaliere",
-      "ts": 1795603807220
-    },
     "frontaliere::https://www.varesenoi.it/2026/11/26/leggi-notizia/articolo/centrosinistra-scontro-su-tassa-super-ricchi-scintille-tra-conte-e-i-leader-avs.html": {
       "section": "frontaliere",
       "ts": 1795676737556
@@ -15668,6 +15992,22 @@
     "frontaliere::https://cambiavalute.ch/guide/previdenza/quando-e-come-prelevare-il-secondo-pilastro-lpp-se-sei-frontaliere": {
       "section": "frontaliere",
       "ts": 1795739050997
+    },
+    "svizzera::https://www.ilgiorno.it/como/cronaca/polizze-sanitarie-alle-stelle-in-f0a74e0f": {
+      "section": "svizzera",
+      "ts": 1795758914231
+    },
+    "svizzera::https://cambiavalute.ch/guide/casa/ritiro-secondo-pilastro-comprare-casa-icondizioni-fiscalita": {
+      "section": "svizzera",
+      "ts": 1795764246237
+    },
+    "svizzera::https://www3.ti.ch/dfe/dr/ustat/allegati/digitale/mercato_lavoro/notiziario/2026q1": {
+      "section": "svizzera",
+      "ts": 1795773294344
+    },
+    "frontaliere::https://cambiavalute.ch/guide/permessi/permesso-g-per-frontalieri-guida-2026-al-rilascio-rinnovo-e-telelavoro": {
+      "section": "frontaliere",
+      "ts": 1795803753550
     }
   }
 }

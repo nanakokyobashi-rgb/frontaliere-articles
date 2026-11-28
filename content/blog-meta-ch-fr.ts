@@ -8747,6 +8747,21 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.rimborso-imposta-secondo-pilastro-svizzero.title': 'Deuxième pilier suisse : remboursement fiscal en Italie',
     'blog.article.rimborso-imposta-secondo-pilastro-svizzero.excerpt': 'Depuis 2024, selon la reconstitution publiée par Fiscomania, des refus de la part des autorités cantonales suisses ont été signalés concernant les demandes de remboursement de l’impôt à la source retenu sur le capital du deuxième pilier.',
     'blog.article.rimborso-imposta-secondo-pilastro-svizzero.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.uri-targhe-collaudo-auto.title': 'Uri : plaques et immatriculation, intervalles du contrôle technique',
+    'blog.article.uri-targhe-collaudo-auto.excerpt': 'Pour les voitures, premier contrôle technique cinq ans après la première mise en circulation, puis généralement après trois ans et deux ans.',
+    'blog.article.uri-targhe-collaudo-auto.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.salario-minimo-svitto-regole.title': 'Salaire minimum à Schwytz : absence fédérale et règles cantonales',
+    'blog.article.salario-minimo-svitto-regole.excerpt': 'La Suisse n’a pas de salaire minimum fédéral, mais certains cantons en ont un qui leur est propre ; rien n’est confirmé pour Schwytz.',
+    'blog.article.salario-minimo-svitto-regole.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.assistenza-sociale-svitto-criterio-bisogno.title': 'Assistance sociale de Schwytz : administration et critère de besoin',
+    'blog.article.assistenza-sociale-svitto-criterio-bisogno.excerpt': 'En Suisse, l’aide sociale est généralement gérée par les cantons et les communes, sur la base du critère du besoin.',
+    'blog.article.assistenza-sociale-svitto-criterio-bisogno.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.voto-federale-soglie-svitto.title': 'Quatre dates de votation fédérale et seuils pour les initiatives',
+    'blog.article.voto-federale-soglie-svitto.excerpt': 'La source indique quatre dates de votation fédérale par an. Pour une initiative populaire : 100\'000 signatures en 18 mois.',
+    'blog.article.voto-federale-soglie-svitto.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.autorizzazione-edilizia-cantone-svitto.title': 'Permis de construire dans le canton de Schwytz : règles et services cantonaux',
+    'blog.article.autorizzazione-edilizia-cantone-svitto.excerpt': 'Les règles et les services relatifs au permis de construire dans le canton de Schwytz relèvent de la compétence cantonale.',
+    'blog.article.autorizzazione-edilizia-cantone-svitto.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaChFr;

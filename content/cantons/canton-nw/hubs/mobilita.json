@@ -4,17 +4,17 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T10:34:02.735Z",
-  "contentHash": "78ecf22a335ba166d6419e81904180b94140eb4d6519c26ad0f3d1f799ed9b1d",
+  "updatedAt": "2026-11-27T09:50:55.309Z",
+  "contentHash": "8727739b6cbaaa9f4d36ca8b361644336dec5bc5196c6114d9f7b85ecda72703",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-26T03:50:03.880Z",
+      "updatedAt": "2026-11-27T00:05:50.684Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -28,7 +28,7 @@
         {
           "label": "Cantieri attivi o imminenti",
           "value": "1",
-          "note": "segnalazioni aggiornate: 26 novembre 2026"
+          "note": "segnalazioni aggiornate: 27 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -45,13 +45,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Strassensperrung Büelbrücke 03.12.2026",
+              "date": "2026-11-26",
+              "url": "https://www.hergiswil.ch/_rte/information/3051709"
+            },
             {
               "label": "Lawinengefahr: Sperrung Winterwanderweg Alpgschwänd – Sagenboden (Fräkmünt)",
               "date": "2026-11-23",
@@ -73,17 +78,12 @@
               "url": "https://www.hergiswil.ch/_rte/information/2300212"
             },
             {
-              "label": "Strassensperrung Büelbrücke 23.11.2026",
-              "date": "2026-11-17",
-              "url": "https://www.hergiswil.ch/_rte/information/3051709"
-            },
-            {
               "label": "Baustellen-News: Sperrung Dorfstrasse vom 9.-27.11.2026",
               "date": "2026-11-05",
               "url": "https://www.buochs.ch/_rte/information/3042271"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -129,7 +129,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "en": {
       "canton": "NW",
@@ -140,7 +140,7 @@
         {
           "label": "Roadworks active or imminent",
           "value": "1",
-          "note": "reports as of 26 November 2026"
+          "note": "reports as of 27 November 2026"
         }
       ],
       "dataBlocks": [
@@ -157,13 +157,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Strassensperrung Büelbrücke 03.12.2026",
+              "date": "2026-11-26",
+              "url": "https://www.hergiswil.ch/_rte/information/3051709"
+            },
             {
               "label": "Lawinengefahr: Sperrung Winterwanderweg Alpgschwänd – Sagenboden (Fräkmünt)",
               "date": "2026-11-23",
@@ -185,17 +190,12 @@
               "url": "https://www.hergiswil.ch/_rte/information/2300212"
             },
             {
-              "label": "Strassensperrung Büelbrücke 23.11.2026",
-              "date": "2026-11-17",
-              "url": "https://www.hergiswil.ch/_rte/information/3051709"
-            },
-            {
               "label": "Baustellen-News: Sperrung Dorfstrasse vom 9.-27.11.2026",
               "date": "2026-11-05",
               "url": "https://www.buochs.ch/_rte/information/3042271"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -241,7 +241,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "de": {
       "canton": "NW",
@@ -252,7 +252,7 @@
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "1",
-          "note": "Meldungen vom 26. November 2026"
+          "note": "Meldungen vom 27. November 2026"
         }
       ],
       "dataBlocks": [
@@ -269,13 +269,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Strassensperrung Büelbrücke 03.12.2026",
+              "date": "2026-11-26",
+              "url": "https://www.hergiswil.ch/_rte/information/3051709"
+            },
             {
               "label": "Lawinengefahr: Sperrung Winterwanderweg Alpgschwänd – Sagenboden (Fräkmünt)",
               "date": "2026-11-23",
@@ -297,17 +302,12 @@
               "url": "https://www.hergiswil.ch/_rte/information/2300212"
             },
             {
-              "label": "Strassensperrung Büelbrücke 23.11.2026",
-              "date": "2026-11-17",
-              "url": "https://www.hergiswil.ch/_rte/information/3051709"
-            },
-            {
               "label": "Baustellen-News: Sperrung Dorfstrasse vom 9.-27.11.2026",
               "date": "2026-11-05",
               "url": "https://www.buochs.ch/_rte/information/3042271"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -353,7 +353,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     },
     "fr": {
       "canton": "NW",
@@ -364,7 +364,7 @@
         {
           "label": "Chantiers actifs ou imminents",
           "value": "1",
-          "note": "signalements au 26 novembre 2026"
+          "note": "signalements au 27 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -381,13 +381,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T00:05:50.684Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Strassensperrung Büelbrücke 03.12.2026",
+              "date": "2026-11-26",
+              "url": "https://www.hergiswil.ch/_rte/information/3051709"
+            },
             {
               "label": "Lawinengefahr: Sperrung Winterwanderweg Alpgschwänd – Sagenboden (Fräkmünt)",
               "date": "2026-11-23",
@@ -409,17 +414,12 @@
               "url": "https://www.hergiswil.ch/_rte/information/2300212"
             },
             {
-              "label": "Strassensperrung Büelbrücke 23.11.2026",
-              "date": "2026-11-17",
-              "url": "https://www.hergiswil.ch/_rte/information/3051709"
-            },
-            {
               "label": "Baustellen-News: Sperrung Dorfstrasse vom 9.-27.11.2026",
               "date": "2026-11-05",
               "url": "https://www.buochs.ch/_rte/information/3042271"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-26T10:34:02.735Z"
+      "updatedAt": "2026-11-27T09:50:55.309Z"
     }
   }
 }

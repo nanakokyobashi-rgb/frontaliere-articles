@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-11-26T17:26:42.969Z",
-  "contentHash": "1fd0148694ad09c6eff69b603251009c3d5b80a982814b0a311725b56241ac46",
+  "updatedAt": "2026-11-27T20:47:55.924Z",
+  "contentHash": "944e79a9e6acaba472eca68706caff926333472a0882714fd7d33949f9c2698d",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-26T03:50:03.880Z",
+      "updatedAt": "2026-11-27T09:11:52.310Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "3",
-          "note": "segnalazioni aggiornate: 26 novembre 2026"
+          "value": "4",
+          "note": "segnalazioni aggiornate: 27 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "20",
-          "note": "segnalazioni aggiornate: 26 novembre 2026"
+          "value": "21",
+          "note": "segnalazioni aggiornate: 27 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -61,6 +61,12 @@
               "date": "2026-11-25T05:35:00.000Z"
             },
             {
+              "label": "A2 Luzern <-> Basel tra Svincolo autostradale Sempach E Svincolo autostradale Sursee Situazione: problemi di traffico cantiere, lunghezza [km] 8.0 Limitazione del traffico: corsia d'emergenza chiusa",
+              "value": "Chiusura",
+              "detail": "fine prevista: 18 dicembre 2026",
+              "date": "2026-11-26T06:03:00.000Z"
+            },
+            {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
               "value": "Cantiere",
               "detail": "fine prevista: 17 dicembre 2027",
@@ -83,16 +89,10 @@
               "value": "Cantiere",
               "detail": "fine prevista: 11 dicembre 2026",
               "date": "2025-12-04T19:00:00.000Z"
-            },
-            {
-              "label": "A2 Basel -> Luzern Svincolo autostradale Rothenburg Situazione: problemi di traffico cantiere Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 18 dicembre 2026",
-              "date": "2026-09-15T03:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -115,7 +115,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -130,6 +130,12 @@
           "url": "/articoli-lucerna/semal-st-klemens-ebikon/",
           "excerpt": "Test alla fermata St. Klemens sulla strada cantonale verso Lucerna; decisione prevista a fine estate 2027 dopo consultazione.",
           "date": "2026-11-07T09:26:29.750Z"
+        },
+        {
+          "title": "Esperimento viario nel centro di Lucerna dal dicembre 2026",
+          "url": "/articoli-lucerna/esperimento-viario-lucerna-centro/",
+          "excerpt": "La prima tappa dell'esperimento viario nel centro di Lucerna parte a metà dicembre 2026, con l'annuncio del 27 novembre 2026.",
+          "date": "2026-11-27T20:44:43.180Z"
         },
         {
           "title": "Tunnel Sonnenberg chiuso per ispezione strutturale",
@@ -160,12 +166,6 @@
           "url": "/articoli-frontaliere/lugano-lucerna-partita-traffico/",
           "excerpt": "Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo.",
           "date": "2026-10-08T11:18:04.293Z"
-        },
-        {
-          "title": "Sistema scolastico cantonale di Lucerna: iscrizione e cicli",
-          "url": "/articoli-svizzera/sistema-scolastico-canton-lucerna-iscrizione-e-cicli/",
-          "excerpt": "Informati sui cicli di scuola, età di iscrizione e calendario scolastico per il Cantone di Lucerna.",
-          "date": "2026-08-14T02:37:30.479Z"
         }
       ],
       "latestCantonArticles": [],
@@ -179,7 +179,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T20:47:55.924Z"
     },
     "en": {
       "canton": "LU",
@@ -189,13 +189,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "3",
-          "note": "reports as of 26 November 2026"
+          "value": "4",
+          "note": "reports as of 27 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "20",
-          "note": "reports as of 26 November 2026"
+          "value": "21",
+          "note": "reports as of 27 November 2026"
         }
       ],
       "dataBlocks": [
@@ -223,6 +223,12 @@
               "date": "2026-11-25T05:35:00.000Z"
             },
             {
+              "label": "A2 Luzern <-> Basel tra Svincolo autostradale Sempach E Svincolo autostradale Sursee Situazione: problemi di traffico cantiere, lunghezza [km] 8.0 Limitazione del traffico: corsia d'emergenza chiusa",
+              "value": "Closure",
+              "detail": "until 18 December 2026",
+              "date": "2026-11-26T06:03:00.000Z"
+            },
+            {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
               "value": "Roadworks",
               "detail": "until 17 December 2027",
@@ -245,16 +251,10 @@
               "value": "Roadworks",
               "detail": "until 11 December 2026",
               "date": "2025-12-04T19:00:00.000Z"
-            },
-            {
-              "label": "A2 Basel -> Luzern Svincolo autostradale Rothenburg Situazione: problemi di traffico cantiere Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata…",
-              "value": "Roadworks",
-              "detail": "until 18 December 2026",
-              "date": "2026-09-15T03:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -277,7 +277,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -292,6 +292,12 @@
           "url": "/en/lucerne-articles/st-klemens-ebikon-traffic-light/",
           "excerpt": "Test at the St. Klemens stop on the cantonal road toward Lucerne; decision expected at the end of summer 2027 after consultation.",
           "date": "2026-11-07T09:26:29.750Z"
+        },
+        {
+          "title": "Road experiment in central Lucerne from December 2026",
+          "url": "/en/lucerne-articles/lucerne-city-traffic-experiment/",
+          "excerpt": "The first stage of the road experiment in central Lucerne begins in mid-December 2026, with the announcement on November 27, 2026.",
+          "date": "2026-11-27T20:44:43.180Z"
         },
         {
           "title": "Sonnenberg Tunnel closed for structural inspection",
@@ -320,12 +326,6 @@
           "title": "Lucerne fans in Lugano: road closures, traffic delays",
           "url": "/en/cross-border-articles/lucerne-fans-in-lugano-road-closures-traffic-delays/",
           "date": "2026-10-08T11:18:04.293Z"
-        },
-        {
-          "title": "Lucerne cantonal school system: enrolment and cycles",
-          "url": "/en/swiss-articles/lucerne-school-system-enrollment-and-cycles/",
-          "excerpt": "Find out about the school cycles, enrolment age and school calendar for the Canton of Lucerne.",
-          "date": "2026-08-14T02:37:30.479Z"
         }
       ],
       "latestCantonArticles": [],
@@ -339,7 +339,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T20:47:55.924Z"
     },
     "de": {
       "canton": "LU",
@@ -349,13 +349,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "3",
-          "note": "Meldungen vom 26. November 2026"
+          "value": "4",
+          "note": "Meldungen vom 27. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "20",
-          "note": "Meldungen vom 26. November 2026"
+          "value": "21",
+          "note": "Meldungen vom 27. November 2026"
         }
       ],
       "dataBlocks": [
@@ -383,6 +383,12 @@
               "date": "2026-11-25T05:35:00.000Z"
             },
             {
+              "label": "A2 Luzern <-> Basel zwischen Anschluss Sempach und Anschluss Sursee Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 8.0 Verkehrsführung: Pannenstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 18. Dezember 2026",
+              "date": "2026-11-26T06:03:00.000Z"
+            },
+            {
               "label": "H10 Bern <-> Luzern zwischen Ortschaft Wiggen und Ortschaft Kröschenbrunnen Sachlage: Verkehrsbehinderung Ursache: Bauarbeiten Verkehrsführung: wechselseitige Verkehrsführung",
               "value": "Baustelle",
               "detail": "bis 17. Dezember 2027",
@@ -405,16 +411,10 @@
               "value": "Baustelle",
               "detail": "bis 11. Dezember 2026",
               "date": "2025-12-04T19:00:00.000Z"
-            },
-            {
-              "label": "A2 Basel -> Luzern Anschluss Rothenburg Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 4.5",
-              "value": "Baustelle",
-              "detail": "bis 18. Dezember 2026",
-              "date": "2026-09-15T03:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -437,7 +437,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -452,6 +452,12 @@
           "url": "/de/luzern-artikel/semafor-st-klemens-ebikon/",
           "excerpt": "Test an der Haltestelle St. Klemens an der Kantonsstrasse nach Luzern; Entscheidung nach Rücksprache für Spätsommer 2027 geplant.",
           "date": "2026-11-07T09:26:29.750Z"
+        },
+        {
+          "title": "Verkehrsexperiment im Zentrum von Luzern ab Dezember 2026",
+          "url": "/de/luzern-artikel/verkehrsexperiment-luzern-zentrum/",
+          "excerpt": "Die erste Etappe des Verkehrsexperiments im Zentrum von Luzern beginnt Mitte Dezember 2026, mit der Ankündigung vom 27. November 2026.",
+          "date": "2026-11-27T20:44:43.180Z"
         },
         {
           "title": "Tunnel Sonnenberg wegen struktureller Inspektion gesperrt",
@@ -480,12 +486,6 @@
           "title": "Luzern-Fans in Lugano: Straßensperrungen, Verkehrsbehinderungen",
           "url": "/de/grenzgaenger-artikel/luzern-fans-in-lugano-stra-ensperrungen-verkehrsbehinderungen/",
           "date": "2026-10-08T11:18:04.293Z"
-        },
-        {
-          "title": "Kantonales Schulsystem Luzern: Einschreibung und Zyklen",
-          "url": "/de/schweiz-artikel/kantonales-schulsystem-luzern-einschreibung-und-zyklen/",
-          "excerpt": "Informieren Sie sich über die Schulzyklen, das Einschreibealter und den Schulkalender für den Kanton Luzern.",
-          "date": "2026-08-14T02:37:30.479Z"
         }
       ],
       "latestCantonArticles": [],
@@ -499,7 +499,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T20:47:55.924Z"
     },
     "fr": {
       "canton": "LU",
@@ -509,13 +509,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "3",
-          "note": "signalements au 26 novembre 2026"
+          "value": "4",
+          "note": "signalements au 27 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "20",
-          "note": "signalements au 26 novembre 2026"
+          "value": "21",
+          "note": "signalements au 27 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -543,6 +543,12 @@
               "date": "2026-11-25T05:35:00.000Z"
             },
             {
+              "label": "A2 Lucerne <-> Bâle entre Jonction autoroutière Sempach et Jonction autoroutière Sursee Situation: trafic perturbé travaux, longueur [km] 8.0 Gestion du trafic: bande d'arrêt d'urgence fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 18 décembre 2026",
+              "date": "2026-11-26T06:03:00.000Z"
+            },
+            {
               "label": "H10 Berne <-> Lucerne entre Localité Wiggen et Localité Kröschenbrunnen Situation: trafic perturbé Raison: travaux de construction Gestion du trafic: circulation alternée à une voie",
               "value": "Chantier",
               "detail": "jusqu’au 17 décembre 2027",
@@ -565,16 +571,10 @@
               "value": "Chantier",
               "detail": "jusqu’au 11 décembre 2026",
               "date": "2025-12-04T19:00:00.000Z"
-            },
-            {
-              "label": "A2 Bâle -> Lucerne Jonction autoroutière Rothenburg Situation: trafic perturbé travaux Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de largeur largeur de la…",
-              "value": "Chantier",
-              "detail": "jusqu’au 18 décembre 2026",
-              "date": "2026-09-15T03:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-26T03:50:03.880Z"
+          "updatedAt": "2026-11-27T09:11:52.310Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -597,7 +597,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -612,6 +612,12 @@
           "url": "/fr/articles-lucerne/semafore-st-klemens-ebikon/",
           "excerpt": "Test à l'arrêt St. Klemens sur la route cantonale en direction de Lucerne ; décision prévue à la fin de l'été 2027 après consultation.",
           "date": "2026-11-07T09:26:29.750Z"
+        },
+        {
+          "title": "Expérience de circulation dans le centre de Lucerne à partir de décembre 2026",
+          "url": "/fr/articles-lucerne/experimentation-routiere-lucerne-centre/",
+          "excerpt": "La première étape de l’expérience de circulation dans le centre de Lucerne commence à la mi-décembre 2026, avec l’annonce du 27 novembre 2026.",
+          "date": "2026-11-27T20:44:43.180Z"
         },
         {
           "title": "Tunnel du Sonnenberg fermé pour inspection structurelle",
@@ -642,12 +648,6 @@
           "url": "/fr/articles-frontalier/supporters-de-lucerne-a-lugano-fermetures-de-routes-retards-de-circulation/",
           "excerpt": "Samedi : FC Lugano-FC Lucerne à 18 h à Cornaredo.",
           "date": "2026-10-08T11:18:04.293Z"
-        },
-        {
-          "title": "Système scolaire cantonal de Lucerne : inscription et cycles",
-          "url": "/fr/articles-suisse/systeme-scolaire-canton-lucerne-inscription-et-cycles/",
-          "excerpt": "Renseignez-vous sur les cycles scolaires, l'âge d'inscription et le calendrier scolaire pour le canton de Lucerne.",
-          "date": "2026-08-14T02:37:30.479Z"
         }
       ],
       "latestCantonArticles": [],
@@ -661,7 +661,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T20:47:55.924Z"
     }
   }
 }

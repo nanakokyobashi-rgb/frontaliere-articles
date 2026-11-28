@@ -75,6 +75,9 @@ const blogMetaCantonBasileaEn: Record<string, string> = {
     'blog.article.camion-urta-a2-basilea.title': 'Truck hits guardrail on A2 in Basel: queue at the borders',
     'blog.article.camion-urta-a2-basilea.excerpt': 'On Wednesday morning, at around 8.45, a truck with Polish license plates crashed into the safety barrier near the Wettsteinallee exit in Basel.',
     'blog.article.camion-urta-a2-basilea.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.cyberattacco-basilea-campagna.title': 'Cyberattack on the Canton of Basel-Landschaft: servers isolated',
+    'blog.article.cyberattacco-basilea-campagna.excerpt': 'The canton has reported cyberattacks on its IT infrastructure since Sunday: some servers have been isolated and there have been disruptions to cantonal digital applications.',
+    'blog.article.cyberattacco-basilea-campagna.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBasileaEn;

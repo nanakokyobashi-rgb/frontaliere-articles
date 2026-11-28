@@ -370,4 +370,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'baden-energiestadt-gold-sei-volte',
+ category: 'novita',
+ date: '2026-11-27T06:37:35.148Z',
+ image: '/images/blog/article-baden-energiestadt-gold-sei-volte.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

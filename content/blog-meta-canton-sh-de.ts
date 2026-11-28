@@ -120,6 +120,12 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.neuhausen-soppressione-strisce-pedonali.title': 'Neuhausen hebt zwölf Fußgängerstreifen im Zentrum auf',
     'blog.article.neuhausen-soppressione-strisce-pedonali.excerpt': 'Der Gemeinderat von Neuhausen am Rheinfall hat beschlossen, 12 von 18 bestehenden Fußgängerstreifen aufzuheben, wobei die Umsetzung im ersten Halbjahr 2027 vorgesehen ist.',
     'blog.article.neuhausen-soppressione-strisce-pedonali.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.nuovo-sistema-stipendi-insegnanti.title': 'Neues Lohnsystem für Lehrkräfte kostet fast 9 Millionen pro Jahr',
+    'blog.article.nuovo-sistema-stipendi-insegnanti.excerpt': 'Das neue Lohnsystem für die Lehrkräfte in Schaffhausen würde für den Kanton und die Gemeinden zusätzliche Ausgaben von fast CHF 9 Millionen pro Jahr bedeuten.',
+    'blog.article.nuovo-sistema-stipendi-insegnanti.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.panne-lampioni-sciaffusa-giovedi.title': 'Straßenbeleuchtung fällt Donnerstag in Schaffhausen aus',
+    'blog.article.panne-lampioni-sciaffusa-giovedi.excerpt': 'Am Donnerstagmorgen kam es in Schaffhausen zu einer Störung der Straßenbeleuchtung.',
+    'blog.article.panne-lampioni-sciaffusa-giovedi.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;

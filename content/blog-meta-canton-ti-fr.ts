@@ -87,6 +87,9 @@ const blogMetaCantonTiFr: Record<string, string> = {
     'blog.article.reclutamento-infermieri-varese.title': 'Infirmiers lombards vers le Tessin : 7.000 CHF',
     'blog.article.reclutamento-infermieri-varese.excerpt': 'L’écart salarial continue de pousser les infirmiers italiens au-delà de la frontière : une jeune professionnelle de la province de Varese est passée des 1.800 euros mensuels de son emploi précédent à un travail en Suisse, où elle gagne 7.000 francs.',
     'blog.article.reclutamento-infermieri-varese.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.svizzera-schengen-controlli-frontalieri.title': 'Contrôles aux frontières possibles si la Suisse quitte Schengen',
+    'blog.article.svizzera-schengen-controlli-frontalieri.excerpt': 'Le rapport du Conseil fédéral a été publié le 18 septembre 2026.',
+    'blog.article.svizzera-schengen-controlli-frontalieri.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTiFr;

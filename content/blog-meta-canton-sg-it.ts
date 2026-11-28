@@ -108,6 +108,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.inverno-sgallen-controlli-strade.title': 'Inverno a St.Gallen: controlli stradali tra fine ottobre e metà aprile',
     'blog.article.inverno-sgallen-controlli-strade.excerpt': 'Neve e temperature sotto zero previste; lo sgombero segue priorità definite, con personale fino a 200 persone.',
     'blog.article.inverno-sgallen-controlli-strade.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.sg-politica-fondiaria-attiva.title': 'San Gallo avvia consultazione legge politica fondiaria attiva',
+    'blog.article.sg-politica-fondiaria-attiva.excerpt': 'La consultazione sul progetto di legge è aperta fino al 31 gennaio 2027, destinata all\'Ufficio per l\'economia e il lavoro.',
+    'blog.article.sg-politica-fondiaria-attiva.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;

@@ -8747,6 +8747,21 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.rimborso-imposta-secondo-pilastro-svizzero.title': 'Secondo pilastro svizzero: rimborso imposta alla fonte per residenti in Italia',
     'blog.article.rimborso-imposta-secondo-pilastro-svizzero.excerpt': 'Dal 2024, secondo la ricostruzione pubblicata da Fiscomania, sono stati segnalati dinieghi da parte delle autorità cantonali svizzere alle richieste di rimborso dell’imposta alla fonte trattenuta sul capitale del secondo pilastro.',
     'blog.article.rimborso-imposta-secondo-pilastro-svizzero.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.uri-targhe-collaudo-auto.title': 'Uri: targhe e immatricolazione, intervalli del collaudo',
+    'blog.article.uri-targhe-collaudo-auto.excerpt': 'Per le auto, primo collaudo dopo cinque anni dalla prima messa in circolazione, poi in genere dopo tre e due.',
+    'blog.article.uri-targhe-collaudo-auto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.salario-minimo-svitto-regole.title': 'Salario minimo in Svitto: assenza federale e regole cantonali',
+    'blog.article.salario-minimo-svitto-regole.excerpt': 'La Svizzera non ha un salario minimo federale, ma alcuni Cantoni ne hanno uno proprio; non è confermato nulla per Svitto.',
+    'blog.article.salario-minimo-svitto-regole.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.assistenza-sociale-svitto-criterio-bisogno.title': 'Assistenza sociale Svitto: amministrazione e criterio di bisogno',
+    'blog.article.assistenza-sociale-svitto-criterio-bisogno.excerpt': 'L\'assistenza sociale è generalmente amministrata dai Cantoni e dai comuni in Svizzera, basandosi sul criterio del bisogno.',
+    'blog.article.assistenza-sociale-svitto-criterio-bisogno.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.voto-federale-soglie-svitto.title': 'Quattro date di voto federale e soglie per iniziative',
+    'blog.article.voto-federale-soglie-svitto.excerpt': 'La fonte indica quattro date di voto federale all\'anno. Per un\'iniziativa popolare: 100\'000 firme in 18 mesi.',
+    'blog.article.voto-federale-soglie-svitto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.autorizzazione-edilizia-cantone-svitto.title': 'Autorizzazione edilizia Cantone Svitto: regole e uffici cantonali',
+    'blog.article.autorizzazione-edilizia-cantone-svitto.excerpt': 'Le regole e gli uffici per l\'autorizzazione edilizia nel Cantone di Svitto sono di competenza cantonale.',
+    'blog.article.autorizzazione-edilizia-cantone-svitto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

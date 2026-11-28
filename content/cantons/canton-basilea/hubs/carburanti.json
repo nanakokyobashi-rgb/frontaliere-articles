@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "carburanti",
-  "updatedAt": "2026-11-26T07:13:50.824Z",
-  "contentHash": "4e818e69fbc4cc5578bd2e602e8cce48605a0c146c9e6baf674abc6aaa661e70",
+  "updatedAt": "2026-11-27T18:34:39.174Z",
+  "contentHash": "060efe745e27f6ce37be454b9e343fb530802f5258b4845cd8c2e6ad889fbd4b",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-25T17:35:23.405Z",
+      "updatedAt": "2026-11-26T17:17:35.133Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,35 +54,41 @@
             },
             {
               "label": "Benzina 95 — Francia",
-              "value": "2,010 EUR/l",
-              "detail": "media regionale: minimo 1,908 EUR/l, 97 stazioni rilevate",
-              "date": "2026-11-25T15:24:38.000Z"
+              "value": "2,002 EUR/l",
+              "detail": "media regionale: minimo 1,905 EUR/l, 98 stazioni rilevate",
+              "date": "2026-11-26T17:00:40.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,163 EUR/l",
-              "detail": "media regionale: minimo 2,052 EUR/l, 98 stazioni rilevate",
-              "date": "2026-11-25T15:24:38.000Z"
+              "value": "2,150 EUR/l",
+              "detail": "media regionale: minimo 1,989 EUR/l, 99 stazioni rilevate",
+              "date": "2026-11-26T17:00:40.000Z"
             },
             {
               "label": "Benzina 95 — Germania",
-              "value": "1,903 EUR/l",
-              "detail": "media regionale: minimo 1,879 EUR/l, 7 stazioni rilevate",
-              "date": "2026-11-25T17:35:23.405Z"
+              "value": "1,890 EUR/l",
+              "detail": "media regionale: minimo 1,869 EUR/l, 7 stazioni rilevate",
+              "date": "2026-11-26T17:17:35.133Z"
             },
             {
               "label": "Diesel — Germania",
-              "value": "2,088 EUR/l",
-              "detail": "media regionale: minimo 2,059 EUR/l, 7 stazioni rilevate",
-              "date": "2026-11-25T17:35:23.405Z"
+              "value": "2,093 EUR/l",
+              "detail": "media regionale: minimo 2,079 EUR/l, 7 stazioni rilevate",
+              "date": "2026-11-26T17:17:35.133Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-26T17:17:35.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Cyberattacco al Canton Basilea Campagna: server isolati",
+          "url": "/articoli-basilea/cyberattacco-basilea-campagna/",
+          "excerpt": "Il cantone segnala attacchi informatici alla struttura IT da domenica: alcuni server isolati e disservizi nelle applicazioni digitali cantonali.",
+          "date": "2026-11-27T18:31:36.508Z"
+        },
         {
           "title": "Camion urta il guardrail sulla A2 a Basilea: coda ai confini",
           "url": "/articoli-basilea/camion-urta-a2-basilea/",
@@ -106,12 +112,6 @@
           "url": "/articoli-basilea/gdk-premi-piu-bassi/",
           "excerpt": "La GDK chiede un cambio EFAS a costo neutro: dal 2028 i Cantoni finanzieranno anche le prestazioni ambulatoriali; i premi dovrebbero calare o crescere meno.",
           "date": "2026-11-11T08:13:12.113Z"
-        },
-        {
-          "title": "Fuoriuscita di 1000 litri di acido a Liestal",
-          "url": "/articoli-basilea/fuoriuscita-acido-liestal/",
-          "excerpt": "Circa 1.000 litri di acido cloridrico sono fuoriusciti presso Dragon Pharma nell'area industriale Oristal a Liestal; l'allarme è cessato intorno alle 15.45.",
-          "date": "2026-11-11T06:50:50.396Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-26T07:13:50.824Z"
+      "updatedAt": "2026-11-27T18:34:39.174Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -165,35 +165,41 @@
             },
             {
               "label": "Petrol 95 — France",
-              "value": "2.010 EUR/l",
-              "detail": "regional average: lowest 1.908 EUR/l, 97 stations surveyed",
-              "date": "2026-11-25T15:24:38.000Z"
+              "value": "2.002 EUR/l",
+              "detail": "regional average: lowest 1.905 EUR/l, 98 stations surveyed",
+              "date": "2026-11-26T17:00:40.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.163 EUR/l",
-              "detail": "regional average: lowest 2.052 EUR/l, 98 stations surveyed",
-              "date": "2026-11-25T15:24:38.000Z"
+              "value": "2.150 EUR/l",
+              "detail": "regional average: lowest 1.989 EUR/l, 99 stations surveyed",
+              "date": "2026-11-26T17:00:40.000Z"
             },
             {
               "label": "Petrol 95 — Germany",
-              "value": "1.903 EUR/l",
-              "detail": "regional average: lowest 1.879 EUR/l, 7 stations surveyed",
-              "date": "2026-11-25T17:35:23.405Z"
+              "value": "1.890 EUR/l",
+              "detail": "regional average: lowest 1.869 EUR/l, 7 stations surveyed",
+              "date": "2026-11-26T17:17:35.133Z"
             },
             {
               "label": "Diesel — Germany",
-              "value": "2.088 EUR/l",
-              "detail": "regional average: lowest 2.059 EUR/l, 7 stations surveyed",
-              "date": "2026-11-25T17:35:23.405Z"
+              "value": "2.093 EUR/l",
+              "detail": "regional average: lowest 2.079 EUR/l, 7 stations surveyed",
+              "date": "2026-11-26T17:17:35.133Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-26T17:17:35.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Cyberattack on the Canton of Basel-Landschaft: servers isolated",
+          "url": "/en/basel-articles/cyberattack-basel-landschaft/",
+          "excerpt": "The canton has reported cyberattacks on its IT infrastructure since Sunday: some servers have been isolated and there have been disruptions to cantonal digital applications.",
+          "date": "2026-11-27T18:31:36.508Z"
+        },
         {
           "title": "Truck hits guardrail on A2 in Basel: queue at the borders",
           "url": "/en/basel-articles/basel-a2-truck-crash/",
@@ -217,12 +223,6 @@
           "url": "/en/basel-articles/gdk-lower-efas-premiums/",
           "excerpt": "The GDK is calling for a cost-neutral change to EFAS: from 2028, the cantons will also finance outpatient services; premiums should fall or rise less.",
           "date": "2026-11-11T08:13:12.113Z"
-        },
-        {
-          "title": "Spillage of 1000 liters of acid in Liestal",
-          "url": "/en/basel-articles/acid-leak-liestal-industrial/",
-          "excerpt": "Approximately 1.000 liters of hydrochloric acid leaked at Dragon Pharma in the Oristal industrial area in Liestal; the alarm ended around 15.45.",
-          "date": "2026-11-11T06:50:50.396Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-26T07:13:50.824Z"
+      "updatedAt": "2026-11-27T18:34:39.174Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -276,35 +276,41 @@
             },
             {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.010 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.908 EUR/l, 97 erfasste Tankstellen",
-              "date": "2026-11-25T15:24:38.000Z"
+              "value": "2.002 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.905 EUR/l, 98 erfasste Tankstellen",
+              "date": "2026-11-26T17:00:40.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.163 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.052 EUR/l, 98 erfasste Tankstellen",
-              "date": "2026-11-25T15:24:38.000Z"
+              "value": "2.150 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.989 EUR/l, 99 erfasste Tankstellen",
+              "date": "2026-11-26T17:00:40.000Z"
             },
             {
               "label": "Benzin 95 — Deutschland",
-              "value": "1.903 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.879 EUR/l, 7 erfasste Tankstellen",
-              "date": "2026-11-25T17:35:23.405Z"
+              "value": "1.890 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.869 EUR/l, 7 erfasste Tankstellen",
+              "date": "2026-11-26T17:17:35.133Z"
             },
             {
               "label": "Diesel — Deutschland",
-              "value": "2.088 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.059 EUR/l, 7 erfasste Tankstellen",
-              "date": "2026-11-25T17:35:23.405Z"
+              "value": "2.093 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.079 EUR/l, 7 erfasste Tankstellen",
+              "date": "2026-11-26T17:17:35.133Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-26T17:17:35.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Cyberangriff auf den Kanton Basel-Landschaft: Server isoliert",
+          "url": "/de/basel-artikel/cyberangriff-basel-landschaft/",
+          "excerpt": "Der Kanton meldet seit Sonntag Cyberangriffe auf die IT-Infrastruktur: Einige Server wurden vom Internet getrennt und es kommt zu Störungen bei den digitalen kantonalen Anwendungen.",
+          "date": "2026-11-27T18:31:36.508Z"
+        },
         {
           "title": "Lastwagen prallt auf A2 bei Basel gegen Leitplanke: Grenzstau",
           "url": "/de/basel-artikel/basel-a2-lkw-unfall/",
@@ -328,12 +334,6 @@
           "url": "/de/basel-artikel/gdk-tiefere-efas-praemien/",
           "excerpt": "Die GDK fordert einen kostenneutralen EFAS-Wechsel: Ab 2028 werden die Kantone auch ambulante Leistungen finanzieren; die Prämien sollten sinken oder weniger stark steigen.",
           "date": "2026-11-11T08:13:12.113Z"
-        },
-        {
-          "title": "Austritt von 1000 Litern Säure in Liestal",
-          "url": "/de/basel-artikel/saeure-auslaufen-liestal/",
-          "excerpt": "Etwa 1.000 Liter Salzsäure sind bei Dragon Pharma im Industriegebiet Oristal in Liestal ausgetreten; der Alarm endete gegen 15.45 Uhr.",
-          "date": "2026-11-11T06:50:50.396Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-26T07:13:50.824Z"
+      "updatedAt": "2026-11-27T18:34:39.174Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -387,35 +387,41 @@
             },
             {
               "label": "Essence 95 — France",
-              "value": "2,010 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,908 EUR/l, 97 stations relevées",
-              "date": "2026-11-25T15:24:38.000Z"
+              "value": "2,002 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,905 EUR/l, 98 stations relevées",
+              "date": "2026-11-26T17:00:40.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,163 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,052 EUR/l, 98 stations relevées",
-              "date": "2026-11-25T15:24:38.000Z"
+              "value": "2,150 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,989 EUR/l, 99 stations relevées",
+              "date": "2026-11-26T17:00:40.000Z"
             },
             {
               "label": "Essence 95 — Allemagne",
-              "value": "1,903 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,879 EUR/l, 7 stations relevées",
-              "date": "2026-11-25T17:35:23.405Z"
+              "value": "1,890 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,869 EUR/l, 7 stations relevées",
+              "date": "2026-11-26T17:17:35.133Z"
             },
             {
               "label": "Diesel — Allemagne",
-              "value": "2,088 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,059 EUR/l, 7 stations relevées",
-              "date": "2026-11-25T17:35:23.405Z"
+              "value": "2,093 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,079 EUR/l, 7 stations relevées",
+              "date": "2026-11-26T17:17:35.133Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-11-25T17:35:23.405Z"
+          "updatedAt": "2026-11-26T17:17:35.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Cyberattaque dans le canton de Bâle-Campagne : serveurs isolés",
+          "url": "/fr/articles-bale/cyberattaque-bale-campagne/",
+          "excerpt": "Le canton signale des attaques informatiques contre son infrastructure informatique depuis dimanche : certains serveurs sont isolés et des perturbations affectent les applications numériques cantonales.",
+          "date": "2026-11-27T18:31:36.508Z"
+        },
         {
           "title": "Camion percute la glissière sur l’A2 à Bâle : bouchon",
           "url": "/fr/articles-bale/accident-camion-a2-bale/",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-bale/gdk-baisse-primes-efas/",
           "excerpt": "La GDK demande un changement de l’EFAS à coût neutre : à partir de 2028, les cantons financeront également les prestations ambulatoires ; les primes devraient baisser ou augmenter moins.",
           "date": "2026-11-11T08:13:12.113Z"
-        },
-        {
-          "title": "Fuite de 1000 litres d’acide à Liestal",
-          "url": "/fr/articles-bale/fuite-acide-liestal/",
-          "excerpt": "Environ 1.000 litres d’acide chlorhydrique se sont échappés chez Dragon Pharma dans la zone industrielle Oristal à Liestal ; l’alerte a pris fin vers 15.45.",
-          "date": "2026-11-11T06:50:50.396Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-26T07:13:50.824Z"
+      "updatedAt": "2026-11-27T18:34:39.174Z"
     }
   }
 }

@@ -1123,6 +1123,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-risposta-petizione-fisioterapia-berna': {
+    title: 'Governo Berna prende atto petizione sulla fisioterapia',
+    description: 'Il Governo bernese ha preso atto della petizione sulla fisioterapia, impegnandosi a considerare le richieste tariffarie nelle procedure in corso.',
+    keywords: 'frontalieri, ticino, svizzera, italia, governo, berna, prende, atto',
+    ogTitle: 'Governo Berna prende atto petizione fisioterapia',
+    ogDescription: 'Il Governo del Canton Berna ha preso atto della petizione «Per una fisioterapia garantita e vicina al luogo di domicilio nel Canton Berna» e terrà conto delle richieste nelle procedure tariffarie in corso.',
+    canonicalPath: '/articoli-berna/risposta-petizione-fisioterapia-berna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Governo Berna prende atto petizione sulla fisioterapia",
+      "description": "Il Governo bernese ha preso atto della petizione sulla fisioterapia, impegnandosi a considerare le richieste tariffarie nelle procedure in corso.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-risposta-petizione-fisioterapia-berna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-27T18:50:20+00:00",
+      "dateModified": "2026-11-27T18:50:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/risposta-petizione-fisioterapia-berna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

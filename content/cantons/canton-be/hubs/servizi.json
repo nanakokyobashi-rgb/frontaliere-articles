@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "servizi",
-  "updatedAt": "2026-11-26T17:26:42.969Z",
-  "contentHash": "8c27c6c34025e1ccbc5b765644e89a8c60b05b61363f6682ce7100c7bbdf0434",
+  "updatedAt": "2026-11-27T14:54:45.873Z",
+  "contentHash": "7b12932ccc979086c47a7ebab6706320a57b28eb6d7ac4cb3b37f73110b27a68",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-26T08:20:20.334Z",
+      "updatedAt": "2026-11-26T21:36:19.183Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -75,7 +75,7 @@
           "items": [
             {
               "label": "BE226",
-              "value": "23.100 CHF",
+              "value": "23.700 CHF",
               "detail": "offerta attuale",
               "date": "2026-12-02T20:00:00.000Z",
               "url": "https://auktion-be.ch/de/auction/231757"
@@ -97,7 +97,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://auktion-be.ch/de/",
-          "updatedAt": "2026-11-26T08:20:20.334Z"
+          "updatedAt": "2026-11-26T21:36:19.183Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -115,7 +115,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -195,7 +195,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "en": {
       "canton": "BE",
@@ -248,7 +248,7 @@
           "items": [
             {
               "label": "BE226",
-              "value": "23,100 CHF",
+              "value": "23,700 CHF",
               "detail": "current bid",
               "date": "2026-12-02T20:00:00.000Z",
               "url": "https://auktion-be.ch/de/auction/231757"
@@ -270,7 +270,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://auktion-be.ch/de/",
-          "updatedAt": "2026-11-26T08:20:20.334Z"
+          "updatedAt": "2026-11-26T21:36:19.183Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -288,7 +288,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -364,7 +364,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "de": {
       "canton": "BE",
@@ -417,7 +417,7 @@
           "items": [
             {
               "label": "BE226",
-              "value": "23’100 CHF",
+              "value": "23’700 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-12-02T20:00:00.000Z",
               "url": "https://auktion-be.ch/de/auction/231757"
@@ -439,7 +439,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://auktion-be.ch/de/",
-          "updatedAt": "2026-11-26T08:20:20.334Z"
+          "updatedAt": "2026-11-26T21:36:19.183Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -457,7 +457,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -533,7 +533,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "fr": {
       "canton": "BE",
@@ -586,7 +586,7 @@
           "items": [
             {
               "label": "BE226",
-              "value": "23 100 CHF",
+              "value": "23 700 CHF",
               "detail": "offre actuelle",
               "date": "2026-12-02T20:00:00.000Z",
               "url": "https://auktion-be.ch/de/auction/231757"
@@ -608,7 +608,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://auktion-be.ch/de/",
-          "updatedAt": "2026-11-26T08:20:20.334Z"
+          "updatedAt": "2026-11-26T21:36:19.183Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -626,7 +626,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -698,7 +698,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-26T17:26:42.969Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     }
   }
 }

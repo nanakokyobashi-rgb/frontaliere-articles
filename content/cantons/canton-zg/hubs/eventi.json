@@ -4,17 +4,17 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "ddb6838c30a0ff72ab7913c3b3d2b88d159e2a77d50ac304db8ba16e7635d4f9",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "81ac011c94a0b5e681a36abcf80811a967b86fd0120c8301f7aa0a85cfe8a9ea",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T00:32:00.223Z",
+      "updatedAt": "2026-11-26T16:33:33.919Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-25T16:08:35.229Z",
+      "updatedAt": "2026-11-26T15:51:00.529Z",
       "keyFacts": 0
     }
   ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Zoe Gwerder + Gäste - HINTER DER SCHLAGZEILE",
+              "label": "Orthodoxe Chormusik von LYRA",
               "detail": "Zug",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zoe-gwerder-gaeste-hinter-der-schlagzeile/"
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/orthodoxe-chormusik-von-lyra/"
             },
             {
-              "label": "Banchetto del Giorno del Ringraziamento con Josua Romano",
-              "detail": "Zugo, Zug",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/banchetto-del-giorno-del-ringraziamento-con-josua-romano/"
+              "label": "Andreas Vollenweider & Friends – CAVERNA MAGICA – revisited",
+              "detail": "Theater Casino Zug, Zug",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/zug/andreas-vollenweider-und-friends-caverna-magica-revisited_AxSZx2K"
             },
             {
-              "label": "BeFlügelt",
-              "detail": "Lorzensaal Cham, Cham",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/cham/befluegelt_ArkwwB8"
+              "label": "Feel the Spirit - Gospelchor",
+              "detail": "Gemeindezentrum «Dreiklang», Steinhausen",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/steinhausen/feel-the-spirit-gospelchor_A1rKfNy"
+            },
+            {
+              "label": "Gospelchor Feel the Spirit",
+              "detail": "Dreiklang, Steinhausen",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/steinhausen/gospelchor-feel-the-spirit_AcgXdqJ"
+            },
+            {
+              "label": "Living Room Concert",
+              "detail": "Jugendkulturzentrum Industrie45",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/living-room-concert_Ak5yPXW"
             },
             {
               "label": "Board, Dice, Cards and Rules",
               "detail": "Zündhölzli — in corso, ultimo giorno: 16 dicembre 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/board-dice-cards-and-rules_AGxsvQt"
             },
             {
               "label": "Lightboat",
               "detail": "Zug — in corso, ultimo giorno: 18 dicembre 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lightboat/"
             },
             {
               "label": "Mittwuch-Träff",
               "detail": "Jugendanimation Zug, Zug — in corso, ultimo giorno: 9 dicembre 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/mittwuch-traeff_AwdnTHe"
             },
             {
               "label": "Runder Tisch – interkulturelle Gespräche in deutscher Sprache",
               "detail": "Bibliothek Zug, Zug — in corso, ultimo giorno: 14 dicembre 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/runder-tisch-interkulturelle-gespraeche-in-deutscher-sprache_A5HTn2S"
             },
             {
               "label": "Die Theatergruppe Oberägeri präsentiert \"Mordsfreundin\"",
               "detail": "Oberägeri — in corso, ultimo giorno: 28 novembre 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-theatergruppe-oberaegeri-praesentiert-mordsfreundin/"
-            },
-            {
-              "label": "JuMi-Treff­punkt",
-              "detail": "Jugendanimation Zug, Zug — in corso, ultimo giorno: 10 dicembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/jumi-treffpunkt_AmxXLv7"
-            },
-            {
-              "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenführung für Erwachsene",
-              "detail": "Museum Burg Zug, Zug — in corso, ultimo giorno: 27 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zugo/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://stadtzug.ch/de/news/2026/november-2026/veranstaltung-demenz-im-blick-wiederholung-aufgrund-grosser-nachfrage"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "ZG",
@@ -161,69 +161,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Zoe Gwerder + Gäste - HINTER DER SCHLAGZEILE",
+              "label": "Orthodoxe Chormusik von LYRA",
               "detail": "Zug",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zoe-gwerder-gaeste-hinter-der-schlagzeile/"
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/orthodoxe-chormusik-von-lyra/"
             },
             {
-              "label": "Thanksgiving Feast with Josua Romano",
-              "detail": "Zugo, Zug",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/banchetto-del-giorno-del-ringraziamento-con-josua-romano/"
+              "label": "Andreas Vollenweider & Friends – CAVERNA MAGICA – revisited",
+              "detail": "Theater Casino Zug, Zug",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/zug/andreas-vollenweider-und-friends-caverna-magica-revisited_AxSZx2K"
             },
             {
-              "label": "BeFlügelt",
-              "detail": "Lorzensaal Cham, Cham",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/cham/befluegelt_ArkwwB8"
+              "label": "Feel the Spirit - Gospelchor",
+              "detail": "Gemeindezentrum «Dreiklang», Steinhausen",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/steinhausen/feel-the-spirit-gospelchor_A1rKfNy"
+            },
+            {
+              "label": "Gospelchor Feel the Spirit",
+              "detail": "Dreiklang, Steinhausen",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/steinhausen/gospelchor-feel-the-spirit_AcgXdqJ"
+            },
+            {
+              "label": "Living Room Concert",
+              "detail": "Jugendkulturzentrum Industrie45",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/living-room-concert_Ak5yPXW"
             },
             {
               "label": "Boards, Dice, Cards and Rules",
               "detail": "Zündhölzli — ongoing, last day: 16 December 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/board-dice-cards-and-rules_AGxsvQt"
             },
             {
               "label": "Lightboat",
               "detail": "Zug — ongoing, last day: 18 December 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lightboat/"
             },
             {
               "label": "Mittwuch-Träff",
               "detail": "Jugendanimation Zug, Zug — ongoing, last day: 9 December 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/mittwuch-traeff_AwdnTHe"
             },
             {
               "label": "Round Table – Intercultural Discussions in German",
               "detail": "Bibliothek Zug, Zug — ongoing, last day: 14 December 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/runder-tisch-interkulturelle-gespraeche-in-deutscher-sprache_A5HTn2S"
             },
             {
               "label": "The Theater Group Oberägeri presents \"Mordsfreundin\"",
               "detail": "Oberägeri — ongoing, last day: 28 November 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-theatergruppe-oberaegeri-praesentiert-mordsfreundin/"
-            },
-            {
-              "label": "JuMi-Treff­punkt",
-              "detail": "Jugendanimation Zug, Zug — ongoing, last day: 10 December 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/jumi-treffpunkt_AmxXLv7"
-            },
-            {
-              "label": "Gallows, Wheel, and Pyre: A Flashlight Tour for Adults",
-              "detail": "Museum Burg Zug, Zug — ongoing, last day: 27 November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zug/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://stadtzug.ch/de/news/2026/november-2026/veranstaltung-demenz-im-blick-wiederholung-aufgrund-grosser-nachfrage"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "ZG",
@@ -284,69 +284,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Zoe Gwerder + Gäste - HINTER DER SCHLAGZEILE",
+              "label": "Orthodoxe Chormusik von LYRA",
               "detail": "Zug",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zoe-gwerder-gaeste-hinter-der-schlagzeile/"
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/orthodoxe-chormusik-von-lyra/"
             },
             {
-              "label": "Thanksgiving Feast mit Josua Romano",
-              "detail": "Zugo, Zug",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/banchetto-del-giorno-del-ringraziamento-con-josua-romano/"
+              "label": "Andreas Vollenweider & Friends – CAVERNA MAGICA – revisited",
+              "detail": "Theater Casino Zug, Zug",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/zug/andreas-vollenweider-und-friends-caverna-magica-revisited_AxSZx2K"
             },
             {
-              "label": "BeFlügelt",
-              "detail": "Lorzensaal Cham, Cham",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/cham/befluegelt_ArkwwB8"
+              "label": "Feel the Spirit - Gospelchor",
+              "detail": "Gemeindezentrum «Dreiklang», Steinhausen",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/steinhausen/feel-the-spirit-gospelchor_A1rKfNy"
+            },
+            {
+              "label": "Gospelchor Feel the Spirit",
+              "detail": "Dreiklang, Steinhausen",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/steinhausen/gospelchor-feel-the-spirit_AcgXdqJ"
+            },
+            {
+              "label": "Wohnzimmerkonzert",
+              "detail": "Jugendkulturzentrum Industrie45",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/living-room-concert_Ak5yPXW"
             },
             {
               "label": "Spielbrett, Würfel, Karten und Spielregeln",
               "detail": "Zündhölzli — läuft, letzter Tag: 16. Dezember 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/board-dice-cards-and-rules_AGxsvQt"
             },
             {
               "label": "Lichterschiff Zugersee",
               "detail": "Zug — läuft, letzter Tag: 18. Dezember 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lightboat/"
             },
             {
               "label": "Mittwuch-Träff",
               "detail": "Jugendanimation Zug, Zug — läuft, letzter Tag: 9. Dezember 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/mittwuch-traeff_AwdnTHe"
             },
             {
               "label": "Runder Tisch-interkulturelle Gespr Andrche in deutscher Sprache",
               "detail": "Bibliothek Zug, Zug — läuft, letzter Tag: 14. Dezember 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/runder-tisch-interkulturelle-gespraeche-in-deutscher-sprache_A5HTn2S"
             },
             {
               "label": "Die Theatergruppe Oberägeri präsentiert „Mordsfreundin“",
               "detail": "Oberägeri — läuft, letzter Tag: 28. November 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-theatergruppe-oberaegeri-praesentiert-mordsfreundin/"
-            },
-            {
-              "label": "JuMi-Treff­punkt",
-              "detail": "Jugendanimation Zug, Zug — läuft, letzter Tag: 10. Dezember 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/jumi-treffpunkt_AmxXLv7"
-            },
-            {
-              "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenf Acrymmhrung f acrymmr er Acrymmachsene",
-              "detail": "Museum Burg Zug, Zug — läuft, letzter Tag: 27. November 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zug/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://stadtzug.ch/de/news/2026/november-2026/veranstaltung-demenz-im-blick-wiederholung-aufgrund-grosser-nachfrage"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "ZG",
@@ -407,69 +407,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Zoe Gwerder + Gäste - HINTER DER SCHLAGZEILE",
+              "label": "Orthodoxe Chormusik von LYRA",
               "detail": "Zug",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zoe-gwerder-gaeste-hinter-der-schlagzeile/"
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/orthodoxe-chormusik-von-lyra/"
             },
             {
-              "label": "Fête de Thanksgiving avec Josua Romano",
-              "detail": "Zugo, Zug",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/banchetto-del-giorno-del-ringraziamento-con-josua-romano/"
+              "label": "Andreas Vollenweider & Friends – CAVERNA MAGICA – revisited",
+              "detail": "Theater Casino Zug, Zug",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/events/music/zug/andreas-vollenweider-und-friends-caverna-magica-revisited_AxSZx2K"
             },
             {
-              "label": "BeFlügelt",
-              "detail": "Lorzensaal Cham, Cham",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/cham/befluegelt_ArkwwB8"
+              "label": "Feel the Spirit - Gospelchor",
+              "detail": "Gemeindezentrum «Dreiklang», Steinhausen",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/steinhausen/feel-the-spirit-gospelchor_A1rKfNy"
+            },
+            {
+              "label": "Gospelchor Feel the Spirit",
+              "detail": "Dreiklang, Steinhausen",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/steinhausen/gospelchor-feel-the-spirit_AcgXdqJ"
+            },
+            {
+              "label": "Concert dans le salon",
+              "detail": "Jugendkulturzentrum Industrie45",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/living-room-concert_Ak5yPXW"
             },
             {
               "label": "Plateau, dés, cartes et règles",
               "detail": "Zündhölzli — en cours, dernier jour : 16 décembre 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/board-dice-cards-and-rules_AGxsvQt"
             },
             {
               "label": "Bateau-lumière du lac de Zoug",
               "detail": "Zug — en cours, dernier jour : 18 décembre 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/lightboat/"
             },
             {
               "label": "Mittwuch-Träff",
               "detail": "Jugendanimation Zug, Zug — en cours, dernier jour : 9 décembre 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/mittwuch-traeff_AwdnTHe"
             },
             {
               "label": "Table ronde – Conversations interculturelles en allemand",
               "detail": "Bibliothek Zug, Zug — en cours, dernier jour : 14 décembre 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/runder-tisch-interkulturelle-gespraeche-in-deutscher-sprache_A5HTn2S"
             },
             {
               "label": "Die Theatergruppe Oberägeri präsentiert « Mordsfreundin »",
               "detail": "Oberägeri — en cours, dernier jour : 28 novembre 2026",
-              "date": "2026-11-26",
+              "date": "2026-11-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-theatergruppe-oberaegeri-praesentiert-mordsfreundin/"
-            },
-            {
-              "label": "JuMi-Treff­punkt",
-              "detail": "Jugendanimation Zug, Zug — en cours, dernier jour : 10 décembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/jumi-treffpunkt_AmxXLv7"
-            },
-            {
-              "label": "La potence, la roue et le bûcher. La visite guidée à la lampe de poche pour adultes",
-              "detail": "Museum Burg Zug, Zug — en cours, dernier jour : 27 novembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zoug/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://stadtzug.ch/de/news/2026/november-2026/veranstaltung-demenz-im-blick-wiederholung-aufgrund-grosser-nachfrage"
             }
           ],
-          "updatedAt": "2026-11-25T16:08:35.229Z"
+          "updatedAt": "2026-11-26T15:51:00.529Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

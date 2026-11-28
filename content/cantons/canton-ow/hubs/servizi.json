@@ -4,8 +4,8 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "servizi",
-  "updatedAt": "2026-11-26T13:02:36.485Z",
-  "contentHash": "dbb3d30f466c12d6d104b36dd2baa713001732871e99d7840c2cd57e56e07e9a",
+  "updatedAt": "2026-11-27T14:54:45.873Z",
+  "contentHash": "6335864540d8d332de9010642b3caf362b13af3944980b23f834de041cef1faf",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -54,6 +54,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Regierungsrat schafft klare Regeln für die neue Abbruchprämie und den Mehrwertabgabefonds",
+              "date": "2026-11-26",
+              "url": "https://www.ow.ch/_rte/information/139756"
+            },
+            {
               "label": "Änderung der Grundbuchverordnung (Rechtsgrundausweis in Erb- und Trustsachen)",
               "date": "2026-11-17",
               "url": "https://www.ow.ch/_rte/information/139672"
@@ -69,7 +74,7 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -149,7 +154,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "en": {
       "canton": "OW",
@@ -186,6 +191,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Regierungsrat schafft klare Regeln für die neue Abbruchprämie und den Mehrwertabgabefonds",
+              "date": "2026-11-26",
+              "url": "https://www.ow.ch/_rte/information/139756"
+            },
+            {
               "label": "Änderung der Grundbuchverordnung (Rechtsgrundausweis in Erb- und Trustsachen)",
               "date": "2026-11-17",
               "url": "https://www.ow.ch/_rte/information/139672"
@@ -201,7 +211,7 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -277,7 +287,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "de": {
       "canton": "OW",
@@ -314,6 +324,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Regierungsrat schafft klare Regeln für die neue Abbruchprämie und den Mehrwertabgabefonds",
+              "date": "2026-11-26",
+              "url": "https://www.ow.ch/_rte/information/139756"
+            },
+            {
               "label": "Änderung der Grundbuchverordnung (Rechtsgrundausweis in Erb- und Trustsachen)",
               "date": "2026-11-17",
               "url": "https://www.ow.ch/_rte/information/139672"
@@ -329,7 +344,7 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -405,7 +420,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "fr": {
       "canton": "OW",
@@ -442,6 +457,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Regierungsrat schafft klare Regeln für die neue Abbruchprämie und den Mehrwertabgabefonds",
+              "date": "2026-11-26",
+              "url": "https://www.ow.ch/_rte/information/139756"
+            },
+            {
               "label": "Änderung der Grundbuchverordnung (Rechtsgrundausweis in Erb- und Trustsachen)",
               "date": "2026-11-17",
               "url": "https://www.ow.ch/_rte/information/139672"
@@ -457,7 +477,7 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -529,7 +549,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     }
   }
 }

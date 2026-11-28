@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-11-26T13:02:36.485Z",
-  "contentHash": "aad6a28a8df6d2f0dc6c88842f73141a773d764cb1145efec63713b08ed3a6e8",
+  "updatedAt": "2026-11-27T18:19:07.194Z",
+  "contentHash": "f20281d72e1ac851d326b70c0015bd4085c4722a8e9d63a3d93fa36c09696431",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-25T21:43:23.986Z",
+      "updatedAt": "2026-11-27T08:31:31.851Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -70,7 +70,7 @@
           "items": [
             {
               "label": "VD7171",
-              "value": "2300 CHF",
+              "value": "2400 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-29T21:00:00.000Z",
               "url": "https://www.encheres-vd.ch/fr/auction/120852"
@@ -92,7 +92,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.encheres-vd.ch/fr/",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-27T08:31:31.851Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +130,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26734-le-canton-de-vaud-recommande-la-vaccination-contre-la-grippe-le-covid-19-et-le-vrs-aux-personnes-a-risque"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -210,7 +210,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "en": {
       "canton": "VD",
@@ -258,7 +258,7 @@
           "items": [
             {
               "label": "VD7171",
-              "value": "2,300 CHF",
+              "value": "2,400 CHF",
               "detail": "current bid",
               "date": "2026-11-29T21:00:00.000Z",
               "url": "https://www.encheres-vd.ch/fr/auction/120852"
@@ -280,7 +280,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.encheres-vd.ch/fr/",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-27T08:31:31.851Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -318,7 +318,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26734-le-canton-de-vaud-recommande-la-vaccination-contre-la-grippe-le-covid-19-et-le-vrs-aux-personnes-a-risque"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -394,7 +394,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "de": {
       "canton": "VD",
@@ -442,7 +442,7 @@
           "items": [
             {
               "label": "VD7171",
-              "value": "2’300 CHF",
+              "value": "2’400 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-29T21:00:00.000Z",
               "url": "https://www.encheres-vd.ch/fr/auction/120852"
@@ -464,7 +464,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.encheres-vd.ch/fr/",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-27T08:31:31.851Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -502,7 +502,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26734-le-canton-de-vaud-recommande-la-vaccination-contre-la-grippe-le-covid-19-et-le-vrs-aux-personnes-a-risque"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -578,7 +578,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     },
     "fr": {
       "canton": "VD",
@@ -626,7 +626,7 @@
           "items": [
             {
               "label": "VD7171",
-              "value": "2 300 CHF",
+              "value": "2 400 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-29T21:00:00.000Z",
               "url": "https://www.encheres-vd.ch/fr/auction/120852"
@@ -648,7 +648,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.encheres-vd.ch/fr/",
-          "updatedAt": "2026-11-25T21:43:23.986Z"
+          "updatedAt": "2026-11-27T08:31:31.851Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -686,7 +686,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26734-le-canton-de-vaud-recommande-la-vaccination-contre-la-grippe-le-covid-19-et-le-vrs-aux-personnes-a-risque"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -758,7 +758,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T18:19:07.194Z"
     }
   }
 }

@@ -4,7 +4,7 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "servizi",
-  "updatedAt": "2026-11-26T13:02:36.485Z",
+  "updatedAt": "2026-11-27T14:54:45.873Z",
   "contentHash": "4e3fde42dec0a1b706ff6ca0d249089bd280495895eeef27a9d4fdb9d9945fda",
   "blocks": [
     {
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-26T01:13:56.099Z",
+      "updatedAt": "2026-11-27T01:13:06.824Z",
       "keyFacts": 0
     }
   ],
@@ -84,7 +84,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/assurance-chomage-neuchatel-et-vaud-sunissent-pour-sensibiliser-sur-limportance-danticiper-les-recherches-demploi-avant-linscription-lorp"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -146,7 +146,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "en": {
       "canton": "NE",
@@ -213,7 +213,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/assurance-chomage-neuchatel-et-vaud-sunissent-pour-sensibiliser-sur-limportance-danticiper-les-recherches-demploi-avant-linscription-lorp"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -271,7 +271,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "de": {
       "canton": "NE",
@@ -338,7 +338,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/assurance-chomage-neuchatel-et-vaud-sunissent-pour-sensibiliser-sur-limportance-danticiper-les-recherches-demploi-avant-linscription-lorp"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -396,7 +396,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     },
     "fr": {
       "canton": "NE",
@@ -463,7 +463,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/assurance-chomage-neuchatel-et-vaud-sunissent-pour-sensibiliser-sur-limportance-danticiper-les-recherches-demploi-avant-linscription-lorp"
             }
           ],
-          "updatedAt": "2026-11-26T01:13:56.099Z"
+          "updatedAt": "2026-11-27T01:13:06.824Z"
         }
       ],
       "curatedArticles": [
@@ -517,7 +517,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-26T13:02:36.485Z"
+      "updatedAt": "2026-11-27T14:54:45.873Z"
     }
   }
 }

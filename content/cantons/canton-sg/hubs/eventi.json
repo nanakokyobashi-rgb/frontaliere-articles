@@ -4,12 +4,12 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-11-26T07:02:23.749Z",
-  "contentHash": "7b953b000ba8ebe0a7d7d11983aae8f7ad0f10e76d3e14f93510346008796e2a",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "6426315c04d8cb81024f68700672df9f751d8df62f9e74515ba471439d5d9e7a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-26T00:32:00.223Z",
+      "updatedAt": "2026-11-26T16:33:33.919Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "60",
+          "value": "61",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,36 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Oropax - Zwei wie kein anderer",
-              "detail": "Wil SG",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/oropax-zwei-wie-kein-anderer-8/"
-            },
-            {
-              "label": "The Original USA Gospel Singers & Band",
-              "detail": "Stadtsaal Wil",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/the-original-usa-gospel-singers-und-band_AniBLdY"
-            },
-            {
-              "label": "Mittwinter - Bräuche in der kalten Jahreszeit",
-              "detail": "San Gallo — in corso, ultimo giorno: 11 dicembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mittwinter-braeuche-in-der-kalten-jahreszeit/"
-            },
-            {
-              "label": "Spiele-Nachmittag",
-              "detail": "DenkBar — in corso, ultimo giorno: 17 dicembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/st-gallen/spiele-nachmittag_AreBuFv"
-            },
-            {
-              "label": "Grosse Führungen im Bergwerk Gonzen Sargans",
-              "detail": "Gonzen Bergwerk, Sargans — in corso, ultimo giorno: 12 dicembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/sargans/oeffentliche-grosse-fuehrungen-im-bergwerk-gonzen-sargans_AEYXbgt"
-            },
             {
               "label": "Live Musik in der Café-Bar mit Bamert & Zwicker",
               "detail": "Café-Bar Bahnhof Unterwasser",
@@ -91,11 +61,41 @@
               "detail": "opus278",
               "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/not-absolutely-classical_A54NALm"
+            },
+            {
+              "label": "Oropax - Zwei wie kein anderer",
+              "detail": "Wil SG — in corso, ultimo giorno: 27 novembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/oropax-zwei-wie-kein-anderer-8/"
+            },
+            {
+              "label": "Mittwinter - Bräuche in der kalten Jahreszeit",
+              "detail": "San Gallo — in corso, ultimo giorno: 11 dicembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mittwinter-braeuche-in-der-kalten-jahreszeit/"
+            },
+            {
+              "label": "Spiele-Nachmittag",
+              "detail": "DenkBar — in corso, ultimo giorno: 17 dicembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/st-gallen/spiele-nachmittag_AreBuFv"
+            },
+            {
+              "label": "Grosse Führungen im Bergwerk Gonzen Sargans",
+              "detail": "Gonzen Bergwerk, Sargans — in corso, ultimo giorno: 12 dicembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/sargans/oeffentliche-grosse-fuehrungen-im-bergwerk-gonzen-sargans_AEYXbgt"
+            },
+            {
+              "label": "Trigger Concert Big Band feat. Thomas Faure & GK playing ElectroDeluxe",
+              "detail": "Rapperswil-Jona",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trigger-concert-big-band-feat-thomas-faure-gk-playing-electrodeluxe-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/san-gallo/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "SG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "60",
+          "value": "61",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,36 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Oropax - Zwei wie kein anderer",
-              "detail": "Wil SG",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/oropax-zwei-wie-kein-anderer-8/"
-            },
-            {
-              "label": "The Original USA Gospel Singers & Band",
-              "detail": "Stadtsaal Wil",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/the-original-usa-gospel-singers-und-band_AniBLdY"
-            },
-            {
-              "label": "Mittwinter - Bräuche in der kalten Jahreszeit",
-              "detail": "San Gallo — ongoing, last day: 11 December 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mittwinter-braeuche-in-der-kalten-jahreszeit/"
-            },
-            {
-              "label": "Games Afternoon",
-              "detail": "DenkBar — ongoing, last day: 17 December 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/st-gallen/spiele-nachmittag_AreBuFv"
-            },
-            {
-              "label": "Grosse Führungen im Bergwerk Gonzen Sargans",
-              "detail": "Gonzen Bergwerk, Sargans — ongoing, last day: 12 December 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/sargans/oeffentliche-grosse-fuehrungen-im-bergwerk-gonzen-sargans_AEYXbgt"
-            },
             {
               "label": "Live Musik in der Café-Bar mit Bamert & Zwicker",
               "detail": "Café-Bar Bahnhof Unterwasser",
@@ -196,11 +166,41 @@
               "detail": "opus278",
               "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/not-absolutely-classical_A54NALm"
+            },
+            {
+              "label": "Oropax - Zwei wie kein anderer",
+              "detail": "Wil SG — ongoing, last day: 27 November 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/oropax-zwei-wie-kein-anderer-8/"
+            },
+            {
+              "label": "Mittwinter - Bräuche in der kalten Jahreszeit",
+              "detail": "San Gallo — ongoing, last day: 11 December 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mittwinter-braeuche-in-der-kalten-jahreszeit/"
+            },
+            {
+              "label": "Games Afternoon",
+              "detail": "DenkBar — ongoing, last day: 17 December 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/st-gallen/spiele-nachmittag_AreBuFv"
+            },
+            {
+              "label": "Grosse Führungen im Bergwerk Gonzen Sargans",
+              "detail": "Gonzen Bergwerk, Sargans — ongoing, last day: 12 December 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/sargans/oeffentliche-grosse-fuehrungen-im-bergwerk-gonzen-sargans_AEYXbgt"
+            },
+            {
+              "label": "Trigger Concert Big Band feat. Thomas Faure & GK playing ElectroDeluxe",
+              "detail": "Rapperswil-Jona",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trigger-concert-big-band-feat-thomas-faure-gk-playing-electrodeluxe-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/st-gallen/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "SG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "60",
+          "value": "61",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,36 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Oropax - Zwei wie kein anderer",
-              "detail": "Wil SG",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/oropax-zwei-wie-kein-anderer-8/"
-            },
-            {
-              "label": "The Original USA Gospel Singers & Band",
-              "detail": "Stadtsaal Wil",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/the-original-usa-gospel-singers-und-band_AniBLdY"
-            },
-            {
-              "label": "Mittwinter - Bräuche in der kalten Jahreszeit",
-              "detail": "San Gallo — läuft, letzter Tag: 11. Dezember 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mittwinter-braeuche-in-der-kalten-jahreszeit/"
-            },
-            {
-              "label": "Nachmittagsspiele",
-              "detail": "DenkBar — läuft, letzter Tag: 17. Dezember 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/st-gallen/spiele-nachmittag_AreBuFv"
-            },
-            {
-              "label": "Grosse Führungen im Bergwerk Gonzen Sargans",
-              "detail": "Gonzen Bergwerk, Sargans — läuft, letzter Tag: 12. Dezember 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/sargans/oeffentliche-grosse-fuehrungen-im-bergwerk-gonzen-sargans_AEYXbgt"
-            },
             {
               "label": "Live Musik in der Café-Bar mit Bamert & Zwicker",
               "detail": "Café-Bar Bahnhof Unterwasser",
@@ -301,11 +271,41 @@
               "detail": "opus278",
               "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/not-absolutely-classical_A54NALm"
+            },
+            {
+              "label": "Oropax - Zwei wie kein anderer",
+              "detail": "Wil SG — läuft, letzter Tag: 27. November 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/oropax-zwei-wie-kein-anderer-8/"
+            },
+            {
+              "label": "Mittwinter - Bräuche in der kalten Jahreszeit",
+              "detail": "San Gallo — läuft, letzter Tag: 11. Dezember 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mittwinter-braeuche-in-der-kalten-jahreszeit/"
+            },
+            {
+              "label": "Nachmittagsspiele",
+              "detail": "DenkBar — läuft, letzter Tag: 17. Dezember 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/st-gallen/spiele-nachmittag_AreBuFv"
+            },
+            {
+              "label": "Grosse Führungen im Bergwerk Gonzen Sargans",
+              "detail": "Gonzen Bergwerk, Sargans — läuft, letzter Tag: 12. Dezember 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/sargans/oeffentliche-grosse-fuehrungen-im-bergwerk-gonzen-sargans_AEYXbgt"
+            },
+            {
+              "label": "Trigger Concert Big Band feat. Thomas Faure & GK playing ElectroDeluxe",
+              "detail": "Rapperswil-Jona",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trigger-concert-big-band-feat-thomas-faure-gk-playing-electrodeluxe-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/st-gallen/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "SG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "60",
+          "value": "61",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,36 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Oropax - Zwei wie kein anderer",
-              "detail": "Wil SG",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/oropax-zwei-wie-kein-anderer-8/"
-            },
-            {
-              "label": "The Original USA Gospel Singers & Band",
-              "detail": "Stadtsaal Wil",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/the-original-usa-gospel-singers-und-band_AniBLdY"
-            },
-            {
-              "label": "Mittwinter - Bräuche in der kalten Jahreszeit",
-              "detail": "San Gallo — en cours, dernier jour : 11 décembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mittwinter-braeuche-in-der-kalten-jahreszeit/"
-            },
-            {
-              "label": "Après-midi jeux",
-              "detail": "DenkBar — en cours, dernier jour : 17 décembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/st-gallen/spiele-nachmittag_AreBuFv"
-            },
-            {
-              "label": "Grosse Führungen im Bergwerk Gonzen Sargans",
-              "detail": "Gonzen Bergwerk, Sargans — en cours, dernier jour : 12 décembre 2026",
-              "date": "2026-11-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/sargans/oeffentliche-grosse-fuehrungen-im-bergwerk-gonzen-sargans_AEYXbgt"
-            },
             {
               "label": "Live Musik in der Café-Bar mit Bamert & Zwicker",
               "detail": "Café-Bar Bahnhof Unterwasser",
@@ -406,11 +376,41 @@
               "detail": "opus278",
               "date": "2026-11-27",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/not-absolutely-classical_A54NALm"
+            },
+            {
+              "label": "Oropax - Zwei wie kein anderer",
+              "detail": "Wil SG — en cours, dernier jour : 27 novembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/oropax-zwei-wie-kein-anderer-8/"
+            },
+            {
+              "label": "Mittwinter - Bräuche in der kalten Jahreszeit",
+              "detail": "San Gallo — en cours, dernier jour : 11 décembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mittwinter-braeuche-in-der-kalten-jahreszeit/"
+            },
+            {
+              "label": "Après-midi jeux",
+              "detail": "DenkBar — en cours, dernier jour : 17 décembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/st-gallen/spiele-nachmittag_AreBuFv"
+            },
+            {
+              "label": "Grosse Führungen im Bergwerk Gonzen Sargans",
+              "detail": "Gonzen Bergwerk, Sargans — en cours, dernier jour : 12 décembre 2026",
+              "date": "2026-11-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/sargans/oeffentliche-grosse-fuehrungen-im-bergwerk-gonzen-sargans_AEYXbgt"
+            },
+            {
+              "label": "Trigger Concert Big Band feat. Thomas Faure & GK playing ElectroDeluxe",
+              "detail": "Rapperswil-Jona",
+              "date": "2026-11-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trigger-concert-big-band-feat-thomas-faure-gk-playing-electrodeluxe-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/saint-gall/",
-          "updatedAt": "2026-11-26T00:32:00.223Z"
+          "updatedAt": "2026-11-26T16:33:33.919Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-26T07:02:23.749Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

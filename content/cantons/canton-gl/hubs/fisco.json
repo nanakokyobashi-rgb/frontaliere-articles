@@ -4,8 +4,8 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "fisco",
-  "updatedAt": "2026-11-26T13:26:37.913Z",
-  "contentHash": "67f0c63a6452379fc8d187413b04cc5c976afeb0bed7a2151e923bc27ceebfd9",
+  "updatedAt": "2026-11-27T04:41:16.871Z",
+  "contentHash": "306728f036ee589f1ca79eb20196aada39f68fe76e465fb0b3fa558cd1ee513e",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -138,16 +138,16 @@
           "date": "2026-08-16T23:39:37.272Z"
         },
         {
-          "title": "Imposte di successione nel Cantone di Glarona",
-          "url": "/articoli-svizzera/imposta-di-succesione-e-donazione-canton-glarona/",
-          "excerpt": "Le aliquote variano in base al grado di parentela.",
-          "date": "2026-08-17T07:30:57.313Z"
-        },
-        {
           "title": "Landsgemeinde Glarona 2026: aliquota fiscale e alloggi al centro dei dibattiti",
           "url": "/articoli-frontaliere/landsgemeinde-glarona-2026-finanze-alloggi/",
           "excerpt": "La Landsgemeinde del canton Glarona ha votato su temi finanziari e abitativi. Aliquota fiscale confermata al 58%, nuove detrazioni per pendolari e sussidi per cassa malati.",
           "date": "2026-05-03T16:15:24.619Z"
+        },
+        {
+          "title": "Imposte di successione nel Cantone di Glarona",
+          "url": "/articoli-svizzera/imposta-di-succesione-e-donazione-canton-glarona/",
+          "excerpt": "Le aliquote variano in base al grado di parentela.",
+          "date": "2026-08-17T07:30:57.313Z"
         }
       ],
       "latestCantonArticles": [],
@@ -173,7 +173,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-11-26T13:26:37.913Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "en": {
       "canton": "GL",
@@ -294,16 +294,16 @@
           "date": "2026-08-16T23:39:37.272Z"
         },
         {
-          "title": "Inheritance taxes in the Canton of Glarus",
-          "url": "/en/swiss-articles/inheritance-and-gift-tax-in-the-canton-of-glarus/",
-          "excerpt": "The rates vary according to the degree of kinship.",
-          "date": "2026-08-17T07:30:57.313Z"
-        },
-        {
           "title": "Glarus Landsgemeinde 2026: tax rate and housing at heart of debates",
           "url": "/en/cross-border-articles/glarus-landsgemeinde-2026-finances-housing/",
           "excerpt": "The Glarus Landsgemeinde voted on financial and housing issues. Tax rate confirmed at 58%, new deductions for commuters and health insurance subsidies.",
           "date": "2026-05-03T16:15:24.619Z"
+        },
+        {
+          "title": "Inheritance taxes in the Canton of Glarus",
+          "url": "/en/swiss-articles/inheritance-and-gift-tax-in-the-canton-of-glarus/",
+          "excerpt": "The rates vary according to the degree of kinship.",
+          "date": "2026-08-17T07:30:57.313Z"
         }
       ],
       "latestCantonArticles": [],
@@ -329,7 +329,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-11-26T13:26:37.913Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "de": {
       "canton": "GL",
@@ -450,16 +450,16 @@
           "date": "2026-08-16T23:39:37.272Z"
         },
         {
-          "title": "Erbschaftssteuern im Kanton Glarus",
-          "url": "/de/schweiz-artikel/erbschafts-und-schenkungssteuer-im-kanton-glarus/",
-          "excerpt": "Die Sätze variieren je nach Verwandtschaftsgrad.",
-          "date": "2026-08-17T07:30:57.313Z"
-        },
-        {
           "title": "Landsgemeinde Glarus 2026: Steuersatz und Wohnungen im Fokus",
           "url": "/de/grenzgaenger-artikel/landsgemeinde-glarus-2026-finanzen-wohnung/",
           "excerpt": "Die Landsgemeinde des Kantons Glarus hat über finanzielle und wohnungsbezogene Themen abgestimmt. Der Steuersatz bleibt bei 58%, es gibt neue Abzüge für Pendler und Subventionen für die Krankenkasse.",
           "date": "2026-05-03T16:15:24.619Z"
+        },
+        {
+          "title": "Erbschaftssteuern im Kanton Glarus",
+          "url": "/de/schweiz-artikel/erbschafts-und-schenkungssteuer-im-kanton-glarus/",
+          "excerpt": "Die Sätze variieren je nach Verwandtschaftsgrad.",
+          "date": "2026-08-17T07:30:57.313Z"
         }
       ],
       "latestCantonArticles": [],
@@ -485,7 +485,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-11-26T13:26:37.913Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     },
     "fr": {
       "canton": "GL",
@@ -606,16 +606,16 @@
           "date": "2026-08-16T23:39:37.272Z"
         },
         {
-          "title": "Impôts sur les successions dans le canton de Glaris",
-          "url": "/fr/articles-suisse/impot-de-succes-et-de-donation-dans-le-canton-de-glaris/",
-          "excerpt": "Les taux varient en fonction du degré de parenté.",
-          "date": "2026-08-17T07:30:57.313Z"
-        },
-        {
           "title": "Landsgemeinde Glaris 2026 : taux d'imposition et logements au centre des débats",
           "url": "/fr/articles-frontalier/landsgemeinde-glaris-2026-finances-logement/",
           "excerpt": "La Landsgemeinde du canton de Glaris a voté sur des thèmes financiers et immobiliers. Taux d'imposition confirmé à 58 %, nouvelles déductions pour les frontaliers et subventions pour l'assurance maladie.",
           "date": "2026-05-03T16:15:24.619Z"
+        },
+        {
+          "title": "Impôts sur les successions dans le canton de Glaris",
+          "url": "/fr/articles-suisse/impot-de-succes-et-de-donation-dans-le-canton-de-glaris/",
+          "excerpt": "Les taux varient en fonction du degré de parenté.",
+          "date": "2026-08-17T07:30:57.313Z"
         }
       ],
       "latestCantonArticles": [],
@@ -641,7 +641,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-11-26T13:26:37.913Z"
+      "updatedAt": "2026-11-27T04:41:16.871Z"
     }
   }
 }

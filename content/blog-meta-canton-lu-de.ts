@@ -93,6 +93,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.spazi-scolastici-wurzenbach.title': 'Würzenbach: neue Schulräume und eine Sporthalle werden geprüft',
     'blog.article.spazi-scolastici-wurzenbach.excerpt': 'Luzern: unzureichende Räume in Würzenbach und Büttenen; Erweiterungen und eine Dreifachturnhalle werden geprüft, Arbeiten ab 2031 möglich.',
     'blog.article.spazi-scolastici-wurzenbach.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.esperimento-viario-lucerna-centro.title': 'Verkehrsexperiment im Zentrum von Luzern ab Dezember 2026',
+    'blog.article.esperimento-viario-lucerna-centro.excerpt': 'Die erste Etappe des Verkehrsexperiments im Zentrum von Luzern beginnt Mitte Dezember 2026, mit der Ankündigung vom 27. November 2026.',
+    'blog.article.esperimento-viario-lucerna-centro.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;
