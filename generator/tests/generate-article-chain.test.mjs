@@ -1467,6 +1467,7 @@ function runChainStep({
   cooperativeStop = 'false',
   rosterBlocked = 'false',
   providerBlocked = 'false',
+  poolEmpty = '',
   sectionProduced = 'frontaliere',
   sectionRequested = 'frontaliere',
   depth = '0',
@@ -1522,6 +1523,7 @@ exit 0
         COOPERATIVE_STOP: cooperativeStop,
         ROSTER_BLOCKED: rosterBlocked,
         PROVIDER_BLOCKED: providerBlocked,
+        POOL_EMPTY: poolEmpty,
         SECTION_PRODUCED: sectionProduced,
         SECTION_REQUESTED: sectionRequested,
         CHAIN_DEPTH: depth,
@@ -1559,6 +1561,44 @@ test('un anello secco ma DICHIARATO dispatcha il successore, con la sezione alte
   assert.match(cmd, /"parent_run_id":"999"/, 'senza il padre, `admit` vedrebbe sempre una generazione in volo e salterebbe l\'anello');
   assert.match(cmd, /Authorization: Bearer pat-nanako/, 'il primario e\' il PAT del proprietario del repo');
   assert.equal(r.status, 0);
+});
+
+test('F3.A.6: pool gia\' noto come vuoto = nessun anello, anche se l\'esito e\' dichiarato', () => {
+  const empty = runChainStep({ declared: 'true', poolEmpty: '1/1' });
+  assert.equal(empty.dispatches.length, 0, 'zero run, zero richieste LLM del successore');
+  assert.match(empty.stdout, /pool gia' noto come vuoto/);
+  // Coi sibling, tutte le sezioni previste devono avere la prova.
+  assert.equal(runChainStep({ declared: 'true', poolEmpty: '2/2' }).dispatches.length, 0);
+  assert.equal(runChainStep({ declared: 'true', poolEmpty: '1/2' }).dispatches.length, 1, 'un sibling non provato vuoto');
+  assert.equal(runChainStep({ declared: 'true', poolEmpty: '0/2' }).dispatches.length, 1);
+  // Senza la prova (POOL_EMPTY assente) il comportamento e' quello di sempre.
+  assert.equal(runChainStep({ declared: 'true', poolEmpty: '0/1' }).dispatches.length, 1);
+  assert.equal(runChainStep({ declared: 'true', poolEmpty: '' }).dispatches.length, 1);
+  assert.equal(runChainStep({ declared: 'true', poolEmpty: 'false' }).dispatches.length, 1, 'un valore senza barra non e\' una prova');
+  // Esito non dichiarato: la prova di pool vuoto non vale, resta il comportamento di sempre
+  // (l'unico soccorso, come senza POOL_EMPTY).
+  assert.equal(
+    runChainStep({ declared: 'false', poolEmpty: '1/1' }).dispatches.length,
+    runChainStep({ declared: 'false', poolEmpty: '' }).dispatches.length,
+  );
+});
+
+test('F3.A.6: il filtro jq del run report distingue pool vuoto da articolo prodotto, backstop o esito ignoto', () => {
+  const jqFile = new URL('../../scripts/ci/pool-empty.jq', import.meta.url).pathname;
+  const evalJq = (report) => spawnSync('jq', ['-e', '-f', jqFile], { input: JSON.stringify(report), encoding: 'utf8' }).status === 0;
+  assert.equal(evalJq({ poolKnownEmpty: true }), true);
+  assert.equal(evalJq({ evergreenPool: { saturated: true } }), true);
+  assert.equal(evalJq({ headlines: { preSpendGateTotalRejection: true } }), true);
+  assert.equal(evalJq({ poolKnownEmpty: true, article: { id: 'x' } }), false, 'un articolo prodotto non e\' un pool vuoto');
+  assert.equal(evalJq({ headlines: { preSpendGateTotalRejection: true, preSpendGateBackstopRestored: 2 } }), false, 'i backstop D/E hanno ripristinato candidati');
+  assert.equal(evalJq({ headlines: { preSpendGateTotalRejection: true, preSpendGateBackstopRestored: 0 } }), true);
+  assert.equal(evalJq({ headlines: { preSpendGateTotalRejection: false }, evergreenPool: { saturated: false } }), false);
+  assert.equal(evalJq({}), false);
+  for (const [name, wf] of [['generate-article.yml', WF], ['core', CORE_WF]]) {
+    assert.match(wf, /jq -e -f scripts\/ci\/pool-empty\.jq "\$attempt_report" >\/dev\/null 2>&1 && empty_n=\$\(\(empty_n\+1\)\)/, name);
+    assert.match(wf, /echo "pool_empty=\$empty_n\/\$\{#sections\[@\]\}"/, name);
+    assert.match(wf, /POOL_EMPTY: \$\{\{ steps\.generate\.outputs\.pool_empty \}\}/, name);
+  }
 });
 
 test('un articolo prodotto NON dispatcha: il successore lo fa gia\' il push', () => {

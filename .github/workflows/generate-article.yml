@@ -1910,7 +1910,6 @@ jobs:
           stall_log="$diag_dir/attempt.log"
           tee_pid=""
           attempt_pipe=""
-          # Il client resta fuori dall'artifact.
           cdp_client="${RUNNER_TEMP:-/tmp}/cdp-stack.mjs"
 
           source scripts/ci/generation-watchdog-process.sh
@@ -1973,7 +1972,7 @@ jobs:
               [ "$quiet" -lt "$stall_s" ] && continue
 
               : > "$stall_flag"
-              echo "::warning::watchdog: nessun output per ${quiet}s (soglia ${stall_s}s) sulla sezione ${sec} — l'event loop e' bloccato, non e' lentezza. Prendo lo stack e uccido."
+              echo "::warning::watchdog: nessun output per ${quiet}s (soglia ${stall_s}s) sulla sezione ${sec} — event loop bloccato, non lentezza. Stack e kill."
 
               generation_capture_root_alive "$root" "$identity" "$stack_file" || return 0
               node_pids="$(create_article_pids "$root")"
@@ -2001,7 +2000,6 @@ jobs:
             done
           }
 
-          # Il watchdog termina comunque all'uscita.
           watch_pid=""
           # shellcheck disable=SC2317,SC2329
           stall_atexit() {
@@ -2029,6 +2027,7 @@ jobs:
           outcome_reason="unclassified"
           outcome_section="$TARGET_SECTION"
           cooperative_stop=false
+          empty_n=0
           run_id="${GITHUB_RUN_ID:-local}"
           run_attempt="${GITHUB_RUN_ATTEMPT:-1}"
 
@@ -2054,7 +2053,7 @@ jobs:
               outcome_kind="error"
               outcome_reason="undeclared"
               outcome_section="$sec"
-              [ -n "$undeclared_why" ] || undeclared_why="impossibile rimuovere il run report precedente per la sezione $sec: una prova stale non può attestare l'uscita corrente"
+              [ -n "$undeclared_why" ] || undeclared_why="impossibile rimuovere il run report precedente per la sezione $sec: prova stale non attestabile"
               echo "::error::impossibile rimuovere il run report precedente per la sezione $sec; rifiuto fail-closed"
               break
             fi
@@ -2069,7 +2068,7 @@ jobs:
               outcome_kind="error"
               outcome_reason="undeclared"
               outcome_section="$sec"
-              [ -n "$undeclared_why" ] || undeclared_why="impossibile rimuovere la run card precedente per la sezione $sec: una card stale non può attestare l'uscita corrente"
+              [ -n "$undeclared_why" ] || undeclared_why="impossibile rimuovere la run card precedente per la sezione $sec: card stale non attestabile"
               echo "::error::impossibile rimuovere la run card precedente per la sezione $sec; rifiuto fail-closed"
               break
             fi
@@ -2169,12 +2168,12 @@ jobs:
             fi
 
             if [ -f "$stall_flag" ]; then
-              echo "::warning::create-article.mjs muto per ${stall_s}s sulla sezione $sec — ucciso dal watchdog dello stallo, mentre il cap di durata (${cap}s) non era nemmeno vicino"
+              echo "::warning::create-article.mjs muto per ${stall_s}s sulla sezione $sec — ucciso dal watchdog dello stallo, cap di durata (${cap}s) lontano"
               outcome_kind="timeout"
               outcome_reason="stall"
               outcome_section="$sec"
               all_declared=false
-              [ -n "$undeclared_why" ] || undeclared_why="stallo: nessun output per ${stall_s}s sulla sezione $sec (kill del watchdog, exit $rc) — l'event loop e' bloccato da lavoro sincrono, ed e' un difetto DIVERSO dal kill duro per budget scaduto. Lo stack e' nell'artifact generate-article-diagnostics."
+              [ -n "$undeclared_why" ] || undeclared_why="stallo: nessun output per ${stall_s}s sulla sezione $sec (kill del watchdog, exit $rc) — event loop bloccato da lavoro sincrono, difetto DIVERSO dal kill duro per budget. Stack nell'artifact generate-article-diagnostics."
               break
             fi
             cooperative_stop=false
@@ -2265,6 +2264,7 @@ jobs:
               if grep -q 'DEDUP_GATE_UNAVAILABLE section=' "$stall_log"; then
                 declared_reason=dedup-unavailable; provider_blocked=true; effective="$sec"; break
               fi
+              jq -e -f scripts/ci/pool-empty.jq "$attempt_report" >/dev/null 2>&1 && empty_n=$((empty_n+1))
             elif [ "$rc" = "0" ]; then
               all_declared=false
               [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs e' uscito 0 sulla sezione $sec senza scrivere un corpo e senza dichiarare una ragione (attesa: exit 4)"
@@ -2320,6 +2320,7 @@ jobs:
             echo "section=$effective"
             echo "declared=$all_declared"
             echo "cooperative_stop=$cooperative_stop"
+            echo "pool_empty=$empty_n/${#sections[@]}"
             echo "outcome_kind=$outcome_kind"
             echo "roster_blocked=$roster_blocked"
             echo "provider_blocked=$provider_blocked"
@@ -3188,6 +3189,7 @@ jobs:
           ARTICLE: ${{ steps.generate.outputs.article }}
           DECLARED: ${{ steps.generate.outputs.declared }}
           COOPERATIVE_STOP: ${{ steps.generate.outputs.cooperative_stop }}
+          POOL_EMPTY: ${{ steps.generate.outputs.pool_empty }}
           ROSTER_BLOCKED: ${{ steps.generate.outputs.roster_blocked }}
           PROVIDER_BLOCKED: ${{ steps.generate.outputs.provider_blocked }}
           SECTION_PRODUCED: ${{ steps.generate.outputs.section }}
@@ -3241,6 +3243,7 @@ jobs:
           [ "${ARTICLE:-}" = "true" ] && stop "articolo prodotto — il successore lo fa gia' il push su content/**"
           [ "${PROVIDER_BLOCKED:-}" = "true" ] && stop "pool AI condiviso temporaneamente indisponibile; si cede a Cloud Scheduler"
           [ "${ROSTER_BLOCKED:-}" = "true" ] && stop "roster esaurito: il prossimo tentativo troverebbe lo stesso muro, non una finestra nuova"
+          pe="${POOL_EMPTY:-}"; [ "$pe" != "${pe%/*}" ] && [ "${pe%/*}" = "${pe#*/}" ] && [ "${DECLARED:-}" = "true" ] && stop "pool gia' noto come vuoto per la sezione in questa finestra (run report): un anello a 90 s riaprirebbe lo stesso pool; si cede a Cloud Scheduler"
           [ "${COOPERATIVE_STOP:-}" = "true" ] && stop "cap cooperativo raggiunto: nessun articolo e nessun dispatch immediato; si cede a Cloud Scheduler"
 
           # `kind` tiene distinte due cose che finiscono entrambe in un dispatch.

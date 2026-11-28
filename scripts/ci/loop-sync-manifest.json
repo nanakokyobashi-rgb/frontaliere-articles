@@ -229,6 +229,16 @@
       }
     },
     {
+      "path": "scripts/ci/pool-empty.jq",
+      "mode": "corpus-only",
+      "reason": "Filtro jq del run report di un tentativo senza articolo: prova che il pool era gia' vuoto (poolKnownEmpty, pool evergreen saturo o rifiuto totale del pre-spend gate senza ripristino dei backstop D/E). Lo legge solo lo step di generazione di generate-article.yml (e del core cantonale) per calcolare pool_empty e non riaprire l'anello della catena sullo stesso pool (F3.A.6). Il sito non esegue questi workflow.",
+      "baseline": {
+        "site": null,
+        "corpus": "e1ae343f8bde1fb4",
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
       "path": "scripts/ci/canton-generation-admit.mjs",
       "mode": "corpus-only",
       "reason": "Ammissione di una sezione cantonale alla generazione (P8 del piano sezioni cantonali, D15/D16/D19): gate Remote Config con controllo esplicito del caricamento, sezione attiva nel core, budget giornaliero sui commit delle ultime 24h, tetto globale sulle run non terminali dei chiamanti cantonali letto paginando ogni stato e seguendo i link di paginazione e validando in modo fail-closed gli id univoci e la forma delle run (inclusi stato/conclusione e timestamp ISO) prima di deduplicarle fra stati, cessione al beacon di quota; con CANTON_HIGH_CADENCE_SECTIONS (Remote Config) budget 24 per le sezioni in lista e skip admit-cadence (slot consumato nel registro senza generare) per gli slot orari fuori dalla cadenza di base di 6 ore delle altre. Se un id si ripete nella paginazione, l'intera osservazione ambigua viene scartata e si rilegge lo stesso stato con un solo tentativo aggiuntivo in totale per ammissione. Se l'ambiguita' persiste, l'ammissione resta chiusa. Lo esegue il job section_gate di generate-article-core.yml. Esiste solo qui perche' la generazione degli articoli vive solo nel corpus: il sito non ha ne' i chiamanti ne' il profilo canton-sections.json.",
@@ -3984,6 +3994,16 @@
         "site": null,
         "corpus": "bc00da980f990bce",
         "alignedAt": "2026-11-26"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/prespend-rejection-memo.mjs",
+      "mode": "corpus-only",
+      "reason": "Memo cross-run dei verdetti negativi del classifier pre-spend, usato solo da create-article.mjs del corpus per ridurre le richieste LLM di selezione (F3.A.6). Il sito non esegue questi workflow.",
+      "baseline": {
+        "site": null,
+        "corpus": "ea886f0de86b5711",
+        "alignedAt": "2026-11-28"
       }
     },
     {
