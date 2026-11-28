@@ -234,7 +234,7 @@
       "reason": "Filtro jq del run report di un tentativo senza articolo: prova che il pool era gia' vuoto (poolKnownEmpty, pool evergreen saturo o rifiuto totale del pre-spend gate senza ripristino dei backstop D/E). Lo legge solo lo step di generazione di generate-article.yml (e del core cantonale) per calcolare pool_empty e non riaprire l'anello della catena sullo stesso pool (F3.A.6). Il sito non esegue questi workflow.",
       "baseline": {
         "site": null,
-        "corpus": "a98f356446aa6ff4",
+        "corpus": "e1ae343f8bde1fb4",
         "alignedAt": "2026-11-28"
       }
     },
@@ -3982,7 +3982,7 @@
       "reason": "Memo cross-run dei verdetti negativi del classifier pre-spend, usato solo da create-article.mjs del corpus per ridurre le richieste LLM di selezione (F3.A.6). Il sito non esegue questi workflow.",
       "baseline": {
         "site": null,
-        "corpus": "765c6a60307f3b5b",
+        "corpus": "52157703c18a7708",
         "alignedAt": "2026-11-28"
       }
     },
