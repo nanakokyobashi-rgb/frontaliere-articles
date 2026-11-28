@@ -546,7 +546,7 @@ import { checkSemanticNearDuplicate } from './lib/scoring/semanticDedup.mjs';
 import { assertTopicNotRecentlyCovered, findRecentTopicCoverage, assertComuneTitleMatchesSlug, topicCoverageKey } from './lib/topic-coverage-guard.mjs';
 import { computeAdaptiveEvergreenThresholds } from './lib/scoring/constants.mjs';
 import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFromBody } from './lib/article-body-repetition.mjs';
-import { loadEmbeddingStore, loadEmbeddingMeta } from './lib/scoring/embeddingMatcher.mjs';
+import { prepareSectionDedupStore } from './lib/scoring/sectionEmbeddingStore.mjs';
 import {
   appendGeneratedImageRecord,
   createBlogImageRecordValidator,
@@ -4106,6 +4106,17 @@ function parseSectionArg(argv) {
 
 const SECTION_NAME = parseSectionArg(process.argv.slice(2));
 const SECTION = ARTICLE_SECTION_CONFIGS[SECTION_NAME];
+
+/**
+ * Opzioni del gate di dedup semantico per la sezione attiva, in produzione.
+ * Lo store si costruisce/aggiorna qui, PRIMA del confronto (M6: nel corpus
+ * nessuno lo materializzava e il gate girava fail-open in ogni run), e il gate
+ * e' fail-closed: store o modello non disponibili = nessuna pubblicazione.
+ */
+async function sectionDedupGateOptions(extra = {}) {
+  const { store, meta } = await prepareSectionDedupStore(SECTION);
+  return { section: SECTION_NAME, store, meta, failClosed: true, ...extra };
+}
 // Il TIPO della sezione (frontaliere | national | canton) viene dal core, non
 // dal nome. I rami di sezione leggono SECTION_PROFILE (pool, ranker, lessico e
 // ancore della cantonale) o i due flag qui sotto, derivati dal tipo: i rami
@@ -24687,13 +24698,10 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // vocabulary dupes the lexical Jaccard above cannot see (cosine ≥ ceiling).
   // Section-keyed embedding store so svizzera dedups against ITS OWN corpus,
   // never against frontaliere. For frontaliere these paths equal the module
-  // defaults → behavior is unchanged. Store/meta absent (e.g. svizzera not yet
-  // built) → the gate degrades to a no-op (fail-open).
-  await checkSemanticNearDuplicate(data, {
-    section: SECTION_NAME,
-    store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
-    meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
-  });
+  // defaults. The store is built/refreshed from the section's IT meta before
+  // the comparison and the gate is fail-closed (sectionDedupGateOptions): no
+  // store or no verifiable model = the run fails instead of publishing.
+  await checkSemanticNearDuplicate(data, await sectionDedupGateOptions());
   // Step 3a.4: «argomento già coperto» — l'unico gate che NON misura una
   // distanza lessicale. I due sopra confrontano quanto si somigliano due
   // testi; questo confronta DI COSA parlano. È la differenza che ha lasciato
@@ -25061,11 +25069,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     || preTranslationExcerptRepairs.length > 0 || excerptRepairs.length > 0) {
     console.error('🔍 Verifica duplicati post-riparazione:');
     checkForDuplicates(data);
-    await checkSemanticNearDuplicate(data, {
-      section: SECTION_NAME,
-      store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
-      meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
-    });
+    await checkSemanticNearDuplicate(data, await sectionDedupGateOptions());
   }
   // Entity decoding is the last content normalization before the write path.
   // Re-run the fiscal guard on every locale here: the earlier check ran before
@@ -26272,12 +26276,9 @@ export async function registerArticleFiles(data, opts = {}) {
     && isDailyBriefArticleId(data.id);
   console.error('🔍 Verifica duplicati post-riparazione nel writer condiviso:');
   checkForDuplicates(data, { allowRecurringDailyEdition });
-  await checkSemanticNearDuplicate(data, {
-    section: SECTION_NAME,
-    store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
-    meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
+  await checkSemanticNearDuplicate(data, await sectionDedupGateOptions({
     ignoreNeighbor: allowRecurringDailyEdition ? isDailyBriefArticleId : undefined,
-  });
+  }));
   // Stessa ragione, stesso percorso condiviso: i quattro produttori secondari
   // (daily-brief, events-digest, border-wait-ranking, journalist) importano
   // registerArticleFiles() direttamente e non passano mai dallo Step 3a.2 del

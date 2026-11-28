@@ -1237,6 +1237,39 @@ jobs:
       - name: Install dependencies
         run: bash scripts/lib/npm-ci-retry.sh
 
+      # M6 (dedup semantico): lo store di embedding della sezione si costruisce
+      # da services/locales/<meta>-it.ts nel generatore, PRIMA del confronto
+      # (sectionEmbeddingStore.mjs), e il gate e' fail-closed. Queste due cache
+      # sono solo un acceleratore: il modello e' ~470 MB dalla CDN pubblica
+      # HuggingFace, lo store un file per sezione aggiornato in modo incrementale.
+      # Nessun segreto, nessuna scrittura nel repo (gli store sono in .gitignore).
+      - name: Dedup store cache key
+        id: dedup_store_key
+        if: steps.mode.outputs.dry != 'true'
+        run: echo "day=$(date -u +%F)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache local embedding model (dedup)
+        if: steps.mode.outputs.dry != 'true'
+        uses: actions/cache@v6
+        with:
+          path: .cache/transformers
+          key: transformers-multilingual-e5-small-fp32-v1
+
+      - name: Cache section dedup embedding store
+        if: steps.mode.outputs.dry != 'true'
+        uses: actions/cache@v6
+        with:
+          path: |
+            data/article-embeddings.bin
+            data/article-embeddings-meta.json
+            data/swiss-article-embeddings.bin
+            data/swiss-article-embeddings-meta.json
+            data/sections/*/article-embeddings.bin
+            data/sections/*/article-embeddings-meta.json
+          key: dedup-store-v1-${{ steps.mode.outputs.section }}-${{ steps.dedup_store_key.outputs.day }}
+          restore-keys: |
+            dedup-store-v1-${{ steps.mode.outputs.section }}-
+
       - name: Prepare Firebase credentials
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}

@@ -78,3 +78,13 @@ data/image-regeneration-queue-pending.jsonl.*.tmp
 /data/topic-candidates-evergreen-rejected.json.lock
 /data/topic-candidates-evergreen-rejected.json.lock.*
 /data/.topic-candidates-evergreen-rejected.json.tmp-*
+
+# Store di embedding del dedup semantico (M6): derivato dalle meta IT, ricostruito
+# o ripristinato da cache a ogni run di generazione. Mai committato: `git add -A`
+# dei workflow di generazione non deve raccoglierlo.
+data/article-embeddings.bin
+data/article-embeddings-meta.json
+data/swiss-article-embeddings.bin
+data/swiss-article-embeddings-meta.json
+data/sections/*/article-embeddings.bin
+data/sections/*/article-embeddings-meta.json
