@@ -207,7 +207,6 @@ jobs:
       # il job si ferma prima del fixer costoso invece di proseguire senza routing.
       # Idempotente, costa una lista.
       - name: Ensure loop labels exist (idempotente)
-        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}

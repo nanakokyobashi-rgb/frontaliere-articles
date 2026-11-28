@@ -5,9 +5,11 @@
  * ## Perché
  *
  * Il corpus è nato con le sole label di default di GitHub. `gh issue edit
- * --add-label` NON crea la label che manca: fallisce. E nei workflow quel
- * fallimento è un warning non bloccante, quindi il ciclo sarebbe girato
- * inerte — instradando nulla, senza un errore da nessuna parte.
+ * --add-label` NON crea la label che manca: fallisce. Nei punti in cui quel
+ * fallimento restava un warning non bloccante il ciclo girava inerte —
+ * instradando nulla, senza un errore da nessuna parte. Oggi la riconciliazione
+ * è fail-closed: se non riesce, i workflow si fermano prima di classificare o
+ * avviare un fixer (i test `ensureLoopLabels` e il contratto dei workflow sotto).
  *
  * Due modi di sbagliare, entrambi già capitati:
  *
@@ -234,4 +236,28 @@ test('la riconciliazione completa è idempotente quando tutte le label sono alli
   assert.equal(ensureLoopLabels({ repo: 'owner/repo', runGh: fixture.runGh, logger: fixture.logger }), 0);
   assert.equal(fixture.calls.length, 1);
   assert.ok(fixture.messages.some((message) => message.includes('tutte le')));
+});
+
+test('ogni step "Ensure loop labels exist" dei workflow è fail-closed', () => {
+  const files = [
+    '.github/workflows/generation-health-watchdog.yml',
+    '.github/workflows/issue-decompose.yml',
+    '.github/workflows/issue-fix.yml',
+    '.github/workflows/issue-triage.yml',
+  ];
+  for (const file of files) {
+    const lines = fs.readFileSync(path.join(ROOT, file), 'utf8').split('\n');
+    let steps = 0;
+    lines.forEach((line, i) => {
+      if (!/^\s*- name: Ensure loop labels exist/.test(line)) return;
+      steps++;
+      // Il blocco dello step arriva fino al successivo `- name:`.
+      let end = i + 1;
+      while (end < lines.length && !/^\s*- name:/.test(lines[end])) end++;
+      const block = lines.slice(i, end).join('\n');
+      assert.match(block, /node scripts\/ci\/ensure-loop-labels\.mjs/, `${file}: step senza lo script`);
+      assert.doesNotMatch(block, /continue-on-error|\|\|\s*(true|echo)/, `${file}: lo step non deve essere non bloccante`);
+    });
+    assert.ok(steps >= 1, `${file}: manca lo step di riconciliazione delle label`);
+  }
 });

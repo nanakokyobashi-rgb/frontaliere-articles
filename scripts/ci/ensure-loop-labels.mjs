@@ -182,7 +182,7 @@ export function ensureLoopLabels({
     if (color && cur.color !== String(color).toLowerCase()) args.push('--color', color);
     if (!args.length) continue;
     const what = args.filter((a) => a.startsWith('--')).map((a) => a.slice(2)).join(' + ');
-    if (DRY) {
+    if (dryRun) {
       logger.log(`[ensure-loop-labels] (dry-run) aggiornerei ${what} di "${name}"`);
       fixed++;
       continue;
@@ -206,7 +206,7 @@ export function ensureLoopLabels({
   }
 
   for (const [name, color, description] of missing) {
-    if (DRY) {
+    if (dryRun) {
       logger.log(`[ensure-loop-labels] (dry-run) creerei "${name}"`);
       created++;
       continue;
