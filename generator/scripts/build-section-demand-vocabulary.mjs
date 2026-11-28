@@ -240,15 +240,47 @@ async function gscQuery(token, body) {
   throw lastError;
 }
 
-async function gscSweep(token, body, { rowLimit = 25000, maxPages = 8 } = {}) {
+/** Tetto documentato da Search Console: 50.000 righe per tipo di ricerca e per giorno. */
+export const GSC_DAILY_ROW_CAP = 50000;
+
+/**
+ * Pagina UNA richiesta (un giorno) fino a esaurire le righe. Fallisce chiuso:
+ * `truncated` e' true se si raggiunge il tetto giornaliero di GSC senza vedere
+ * una risposta corta (non si puo' provare che sia completa).
+ */
+export async function gscSweep(query, body, { rowLimit = 25000, dailyCap = GSC_DAILY_ROW_CAP } = {}) {
   const rows = [];
+  const maxPages = Math.ceil(dailyCap / rowLimit);
   for (let page = 0; page < maxPages; page += 1) {
-    const data = await gscQuery(token, { ...body, rowLimit, startRow: page * rowLimit });
+    const data = await query({ ...body, rowLimit, startRow: page * rowLimit });
     const batch = data.rows || [];
     rows.push(...batch);
     if (batch.length < rowLimit) return { rows, truncated: false };
   }
   return { rows, truncated: true };
+}
+
+/** Giorni ISO inclusivi da `from` a `to`. */
+export function enumerateDays(from, to) {
+  const days = [];
+  for (let ms = Date.parse(from); ms <= Date.parse(to); ms += DAY_MS) days.push(new Date(ms).toISOString().slice(0, 10));
+  return days;
+}
+
+/**
+ * Una query GSC per giorno (il tetto di 50.000 righe e' per giorno: una query
+ * su 28 giorni puo' perdere la coda senza segnalarlo) e aggregazione a valle in
+ * `buildVocabularySections`. Basta un giorno troncato per marcare l'alias.
+ */
+export async function gscSweepByDay(query, body, { from, to, ...options } = {}) {
+  const rows = [];
+  let truncated = false;
+  for (const day of enumerateDays(from, to)) {
+    const sweep = await gscSweep(query, { ...body, startDate: day, endDate: day }, options);
+    rows.push(...sweep.rows);
+    if (sweep.truncated) truncated = true;
+  }
+  return { rows, truncated };
 }
 
 const isoDay = (ms) => new Date(ms).toISOString().slice(0, 10);
@@ -271,12 +303,10 @@ async function main() {
   const rows = [];
   const truncated = [];
   for (const alias of aliasMap.keys()) {
-    const sweep = await gscSweep(token, {
-      startDate: windowFrom,
-      endDate: windowTo,
+    const sweep = await gscSweepByDay((request) => gscQuery(token, request), {
       dimensions: ['query', 'page'],
       dimensionFilterGroups: [{ filters: [{ dimension: 'page', operator: 'contains', expression: `/${alias}/` }] }],
-    });
+    }, { from: windowFrom, to: windowTo });
     if (sweep.truncated) truncated.push(alias);
     rows.push(...sweep.rows);
   }

@@ -471,3 +471,44 @@ test('workflow di rinnovo mensile: schedule + dispatch, builder, PR con PAT', ()
   assert.match(wf, /## Implementato/);
   assert.match(wf, /## Non implementato \(ancora\)/);
 });
+
+// Search Console: tetto di 50.000 righe per giorno. Una query sull'intera
+// finestra puo' perdere la coda; si interroga un giorno alla volta e si fallisce
+// chiuso quando una risposta raggiunge il limite.
+test('gscSweepByDay interroga un giorno alla volta e aggrega a valle', async () => {
+  const { gscSweepByDay, enumerateDays } = await import('../scripts/build-section-demand-vocabulary.mjs');
+  assert.deepEqual(enumerateDays('2026-11-01', '2026-11-03'), ['2026-11-01', '2026-11-02', '2026-11-03']);
+  const calls = [];
+  const query = async (req) => {
+    calls.push(req);
+    return { rows: [{ keys: ['q', 'https://x/ti/'], clicks: 1, impressions: 10, position: 2 }] };
+  };
+  const { rows, truncated } = await gscSweepByDay(query, { dimensions: ['query', 'page'] }, { from: '2026-11-01', to: '2026-11-03' });
+  assert.equal(truncated, false);
+  assert.equal(rows.length, 3);
+  assert.deepEqual(calls.map((c) => [c.startDate, c.endDate]), [
+    ['2026-11-01', '2026-11-01'], ['2026-11-02', '2026-11-02'], ['2026-11-03', '2026-11-03'],
+  ]);
+});
+
+test('gscSweepByDay segnala troncamento se un giorno raggiunge il tetto di 50.000 righe', async () => {
+  const { gscSweepByDay, GSC_DAILY_ROW_CAP } = await import('../scripts/build-section-demand-vocabulary.mjs');
+  const full = (n) => Array.from({ length: n }, (_, i) => ({ keys: [`q${i}`, 'https://x/ti/'], clicks: 0, impressions: 1, position: 1 }));
+  const query = async (req) => {
+    if (req.startDate === '2026-11-02') return { rows: full(req.rowLimit) }; // pagine sempre piene
+    return { rows: full(3) };
+  };
+  const { rows, truncated } = await gscSweepByDay(query, {}, { from: '2026-11-01', to: '2026-11-03' });
+  assert.equal(truncated, true);
+  assert.equal(rows.length, 3 + GSC_DAILY_ROW_CAP + 3);
+});
+
+test('gscSweep: risposta esattamente al limite di pagina non e` completa, risposta corta si', async () => {
+  const { gscSweep } = await import('../scripts/build-section-demand-vocabulary.mjs');
+  const mk = (n) => Array.from({ length: n }, () => ({ keys: ['q', 'p'] }));
+  const exact = await gscSweep(async (req) => ({ rows: req.startRow === 0 ? mk(req.rowLimit) : [] }), {}, { rowLimit: 10, dailyCap: 50 });
+  assert.equal(exact.truncated, false); // seconda pagina vuota = fine provata
+  const capped = await gscSweep(async (req) => ({ rows: mk(req.rowLimit) }), {}, { rowLimit: 10, dailyCap: 30 });
+  assert.equal(capped.truncated, true);
+  assert.equal(capped.rows.length, 30);
+});

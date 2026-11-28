@@ -7253,7 +7253,7 @@
       "reason": "Rigenera il vocabolario di domanda per sezione cantonale leggendo le query Search Console degli ultimi 28 giorni sulle pagine di ciascuna sezione nelle quattro lingue. Strumento del corpus che scrive un JSON sotto generator/data/; il sito non lo esegue ne' lo importa.",
       "baseline": {
         "site": null,
-        "corpus": "cc4a854d2f9bb495",
+        "corpus": "bd30cbaf80db4e69",
         "alignedAt": "2026-11-28"
       }
     },
