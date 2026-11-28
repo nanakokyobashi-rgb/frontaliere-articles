@@ -96,6 +96,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.esperimento-viario-lucerna-centro.title': 'Road experiment in central Lucerne from December 2026',
     'blog.article.esperimento-viario-lucerna-centro.excerpt': 'The first stage of the road experiment in central Lucerne begins in mid-December 2026, with the announcement on November 27, 2026.',
     'blog.article.esperimento-viario-lucerna-centro.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.lucerna-prova-corsie-autobus.title': 'Lucerne tests bus lanes and stop changes',
+    'blog.article.lucerna-prova-corsie-autobus.excerpt': 'From mid-December, the Canton is testing bus lanes, a lane reserved for buses, and changes to the Weggismatt, Seefeldstrasse and St. Klemens stops.',
+    'blog.article.lucerna-prova-corsie-autobus.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;

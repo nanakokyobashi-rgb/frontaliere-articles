@@ -96,6 +96,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.esperimento-viario-lucerna-centro.title': 'Expérience de circulation dans le centre de Lucerne à partir de décembre 2026',
     'blog.article.esperimento-viario-lucerna-centro.excerpt': 'La première étape de l’expérience de circulation dans le centre de Lucerne commence à la mi-décembre 2026, avec l’annonce du 27 novembre 2026.',
     'blog.article.esperimento-viario-lucerna-centro.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.lucerna-prova-corsie-autobus.title': 'Lucerne teste des voies de bus et des modifications aux arrêts',
+    'blog.article.lucerna-prova-corsie-autobus.excerpt': 'À partir de la mi-décembre, le canton teste des voies de bus, une voie réservée aux autobus et des modifications aux arrêts Weggismatt, Seefeldstrasse et St. Klemens.',
+    'blog.article.lucerna-prova-corsie-autobus.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonLuFr;

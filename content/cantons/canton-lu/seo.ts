@@ -1216,6 +1216,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lucerna-prova-corsie-autobus': {
+    title: 'Lucerna prova corsie bus e modifiche alle fermate',
+    description: 'Da metà dicembre Lucerna prova corsie per i bus e modifiche a tre fermate; il Cantone valuterà i risultati prima di renderle definitive.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lucerna, prova, corsie, modifiche',
+    ogTitle: 'Lucerna, corsie bus in prova da metà dicembre',
+    ogDescription: 'Il Canton Lucerna avvia da metà dicembre una prova sulle strade cantonali della città: alcune corsie diventeranno corsie bus, con accesso alle biciclette nel tratto indicato, e saranno modificate tre fermate.',
+    canonicalPath: '/articoli-lucerna/lucerna-prova-corsie-autobus/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lucerna prova corsie bus e modifiche alle fermate",
+      "description": "Da metà dicembre Lucerna prova corsie per i bus e modifiche a tre fermate; il Cantone valuterà i risultati prima di renderle definitive.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-autobus-elettrici-mendrisiotto-amsa.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-28T14:42:57+00:00",
+      "dateModified": "2026-11-28T14:42:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/lucerna-prova-corsie-autobus/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
