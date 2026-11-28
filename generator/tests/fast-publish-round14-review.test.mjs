@@ -100,7 +100,12 @@ test('1: sectionsBehindRelease elenca solo le sezioni R2 indietro e rifiuta uno 
 });
 
 /** Esegue il listener in un repo git temporaneo con gli script di piano stubbati. */
-function runListener(root, { event, behind, edgeCommit: edgeCommitOverride = null, marked = false }) {
+function runListener(root, {
+  event,
+  behind,
+  edgeCommitAtFirstCommit = false,
+  marked = false,
+}) {
   const repo = path.join(root, 'repo');
   const bin = path.join(root, 'bin');
   mkdirSync(path.join(repo, 'scripts/ci'), { recursive: true });
@@ -120,7 +125,7 @@ function runListener(root, { event, behind, edgeCommit: edgeCommitOverride = nul
   git('commit', '-qam', 'two');
   const published = git('rev-parse', 'HEAD');
   const workflowHeadSha = event === 'push' ? published : headSha;
-  const edgeCommit = edgeCommitOverride ?? published;
+  const edgeCommit = edgeCommitAtFirstCommit ? headSha : published;
   const log = path.join(root, 'calls.log');
   copyFileSync(path.join(repoRoot, 'scripts/ci/fast-publish-api-only-decision.mjs'), path.join(repo, 'scripts/ci/fast-publish-api-only-decision.mjs'));
   copyFileSync(path.join(repoRoot, 'scripts/ci/fast-publish-section-edge-candidate.sh'), path.join(repo, 'scripts/ci/fast-publish-section-edge-candidate.sh'));
@@ -211,7 +216,7 @@ test('1: il listener push usa il registro edge antenato se la HEAD API è più n
   const { result, published, headSha, workflowHeadSha, edgeCommit, dispatches, calls, output } = runListener(root, {
     event: 'push',
     behind: [],
-    edgeCommit: headSha,
+    edgeCommitAtFirstCommit: true,
   });
   assert.equal(result.status, 0, result.stderr + result.stdout);
   assert.equal(workflowHeadSha, published);
