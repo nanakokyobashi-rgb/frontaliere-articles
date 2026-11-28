@@ -7228,15 +7228,15 @@ function buildFactCheckProofRetryPrompt(basePrompt, proofFailures) {
     + 'Prima scegli e copia i passaggi esatti dai blocchi forniti, poi formula il giudizio in base a quei passaggi.';
 }
 
-const COMPACT_PROMPT_PROVIDER_HEADROOM_RATIO = 0.05;
+const FACTCHECK_PROMPT_PROVIDER_HEADROOM_RATIO = 0.05;
 
 /**
- * True only when the compact fact-check request leaves room for estimator and
+ * True only when the fact-check request leaves room for estimator and
  * tokenizer variance. Count the UTF-8 bytes of the exact serialized message as
  * an additional penalty: `estimateRequestTokens` counts JavaScript string
  * units, which can substantially understate non-ASCII payloads.
  */
-function compactPromptFitsProviderLimit(prompt, inputTokenLimit) {
+function factCheckPromptFitsProviderLimit(prompt, inputTokenLimit) {
   if (typeof prompt !== 'string' || !Number.isFinite(inputTokenLimit) || inputTokenLimit <= 0) {
     return false;
   }
@@ -7255,7 +7255,7 @@ function compactPromptFitsProviderLimit(prompt, inputTokenLimit) {
   );
   const serializedEstimate = estimateRequestTokens([{ role: 'user', content: prompt }])
     + serializedOverhead;
-  const headroom = Math.ceil(inputTokenLimit * COMPACT_PROMPT_PROVIDER_HEADROOM_RATIO);
+  const headroom = Math.ceil(inputTokenLimit * FACTCHECK_PROMPT_PROVIDER_HEADROOM_RATIO);
   return serializedEstimate + headroom <= inputTokenLimit;
 }
 
@@ -7565,7 +7565,7 @@ ${proofResponseFormat}`
     const limit = independentVerifier && getDeclaredRequestTokenLimit(independentVerifier);
     const fullEstimate = estimateRequestTokens([{ role: 'user', content: prompt }]);
     const compactEstimate = estimateRequestTokens([{ role: 'user', content: compactPrompt }]);
-    if (limit && fullEstimate > limit && compactPromptFitsProviderLimit(compactPrompt, limit)) {
+    if (limit && !factCheckPromptFitsProviderLimit(prompt, limit) && factCheckPromptFitsProviderLimit(compactPrompt, limit)) {
       // Either primary request can fall through to the independent cascade.
       // Use one base prompt so the normal proof-retry path can annotate it.
       compactRetry = { fullEstimate, compactEstimate, cap: limit };
@@ -7602,7 +7602,7 @@ ${proofResponseFormat}`
     let verificationPrompt = activePrompt;
     if (fcAttempt > 1 && editorialProofFailures.size > 0) {
       const annotatedPrompt = buildFactCheckProofRetryPrompt(activePrompt, editorialProofFailures);
-      if (observedInputCap === 0 || compactPromptFitsProviderLimit(annotatedPrompt, observedInputCap)) {
+      if (observedInputCap === 0 || factCheckPromptFitsProviderLimit(annotatedPrompt, observedInputCap)) {
         verificationPrompt = annotatedPrompt;
       }
     }
@@ -7748,7 +7748,7 @@ ${proofResponseFormat}`
       if (cap > 0 && compactPrompt && activePrompt === prompt) {
         const fullEstimate = estimateRequestTokens([{ role: 'user', content: prompt }]);
         const compactEstimate = estimateRequestTokens([{ role: 'user', content: compactPrompt }]);
-        if (fullEstimate > cap && compactPromptFitsProviderLimit(compactPrompt, cap)) {
+        if (!factCheckPromptFitsProviderLimit(prompt, cap) && factCheckPromptFitsProviderLimit(compactPrompt, cap)) {
           compactRetry = { fullEstimate, compactEstimate, cap };
         }
       }

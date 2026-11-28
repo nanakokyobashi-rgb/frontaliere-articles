@@ -231,9 +231,9 @@ test('a lone free vote never decides: collapsed verifiers are retried, and witho
   const region = SRC.slice(start, SRC.indexOf('// ── Drop verdicts the source itself refutes ──', start));
   assert.match(region, /let activePrompt = prompt;/);
   assert.match(region, /if \(compactRetry\)\s*\{\s*activePrompt = compactPrompt;/);
-  assert.match(region, /if \(limit && fullEstimate > limit && compactPromptFitsProviderLimit\(compactPrompt, limit\)\)/);
-  assert.match(region, /if \(fullEstimate > cap && compactPromptFitsProviderLimit\(compactPrompt, cap\)\)/);
-  assert.match(region, /observedInputCap === 0 \|\| compactPromptFitsProviderLimit\(annotatedPrompt, observedInputCap\)/);
+  assert.match(region, /if \(limit && !factCheckPromptFitsProviderLimit\(prompt, limit\) && factCheckPromptFitsProviderLimit\(compactPrompt, limit\)\)/);
+  assert.match(region, /if \(!factCheckPromptFitsProviderLimit\(prompt, cap\) && factCheckPromptFitsProviderLimit\(compactPrompt, cap\)\)/);
+  assert.match(region, /observedInputCap === 0 \|\| factCheckPromptFitsProviderLimit\(annotatedPrompt, observedInputCap\)/);
   assert.match(region, /_runSingleFactCheck\(codex,\s*retryPrompt,\s*\{\s*isEvergreen:\s*isEvergreenArticle,\s*editorialContext,\s*codexOnly: true,\s*deadlineMs: factCheckDeadlineMs\s*\}\)/);
   assert.match(region, /fcAttempt <= maxPrimaryRounds && \(modelResults\.length === 0 \|\| missingSecondOpinion\)/);
   assert.doesNotMatch(region, /modelResults\.length\s*=\s*0;/, 'un parere valido sullo stesso testo sopravvive al retry');

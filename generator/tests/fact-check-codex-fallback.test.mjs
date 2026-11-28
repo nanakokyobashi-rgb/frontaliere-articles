@@ -28,11 +28,11 @@ import { JSON_QUOTE_SAFETY_RULE_IT } from '../scripts/lib/llm-json-repair.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SRC = fs.readFileSync(path.join(HERE, '..', 'scripts', 'create-article.mjs'), 'utf8');
-const compactPromptFitsStart = SRC.indexOf('const COMPACT_PROMPT_PROVIDER_HEADROOM_RATIO =');
+const compactPromptFitsStart = SRC.indexOf('const FACTCHECK_PROMPT_PROVIDER_HEADROOM_RATIO =');
 const compactPromptFitsEnd = SRC.indexOf('\n}', compactPromptFitsStart);
 assert.ok(compactPromptFitsStart >= 0 && compactPromptFitsEnd > compactPromptFitsStart);
 const compactPromptFitsSource = SRC.slice(compactPromptFitsStart, compactPromptFitsEnd + 2);
-const compactPromptFitsProviderLimit = runInNewContext(`${compactPromptFitsSource}\ncompactPromptFitsProviderLimit`, {
+const factCheckPromptFitsProviderLimit = runInNewContext(`${compactPromptFitsSource}\nfactCheckPromptFitsProviderLimit`, {
   Buffer,
   estimateRequestTokens,
 });
@@ -49,15 +49,15 @@ test('the compact provider guard accounts for serialized UTF-8 bytes and leaves 
   const nearLimitAscii = 'a'.repeat(22_000);
   const legacyEstimate = estimateRequestTokens([{ role: 'user', content: nearLimitAscii }]);
   assert.ok(legacyEstimate < 7000);
-  assert.equal(compactPromptFitsProviderLimit(nearLimitAscii, 7000), false);
-  assert.equal(compactPromptFitsProviderLimit(nearLimitAscii, 8000), true);
+  assert.equal(factCheckPromptFitsProviderLimit(nearLimitAscii, 7000), false);
+  assert.equal(factCheckPromptFitsProviderLimit(nearLimitAscii, 8000), true);
 
   // A one-token-per-codepoint tokenizer would put this payload just under the
   // provider cap even though the character-count estimator remains far below it.
   const nearLimitUnicode = '漢'.repeat(7_500);
   assert.ok(estimateRequestTokens([{ role: 'user', content: nearLimitUnicode }]) < 8000);
-  assert.equal(compactPromptFitsProviderLimit(nearLimitUnicode, 8000), false);
-  assert.equal(compactPromptFitsProviderLimit(nearLimitAscii, 0), false);
+  assert.equal(factCheckPromptFitsProviderLimit(nearLimitUnicode, 8000), false);
+  assert.equal(factCheckPromptFitsProviderLimit(nearLimitAscii, 0), false);
 });
 
 test('independent fact-check retries a missing verdict inside its original window', async () => {
@@ -476,7 +476,7 @@ describe('fact-check retries under a reported input cap', () => {
     let high = 100_000;
     while (low < high) {
       const middle = Math.floor((low + high) / 2);
-      if (compactPromptFitsProviderLimit(prompt, middle)) high = middle;
+      if (factCheckPromptFitsProviderLimit(prompt, middle)) high = middle;
       else low = middle + 1;
     }
     return low;
@@ -591,8 +591,8 @@ describe('fact-check retries under a reported input cap', () => {
     const annotated = buildFactCheckProofRetryPrompt(baseline.compactPrompt, new Set([missingSourceQuote]));
     assert.ok(estimate(baseline.prompt) > cap);
     assert.ok(estimate(annotated) > estimate(baseline.compactPrompt));
-    assert.equal(compactPromptFitsProviderLimit(baseline.compactPrompt, cap), true);
-    assert.equal(compactPromptFitsProviderLimit(annotated, cap), false);
+    assert.equal(factCheckPromptFitsProviderLimit(baseline.compactPrompt, cap), true);
+    assert.equal(factCheckPromptFitsProviderLimit(annotated, cap), false);
 
     const answer = structuredReply(true);
     const { calls, modelResults, editorialContext } = await runRounds({
@@ -617,9 +617,9 @@ describe('fact-check retries under a reported input cap', () => {
     const tighterCap = minimumFittingCap(baseline.compactPrompt);
     assert.ok(estimate(baseline.prompt) > initialCap);
     assert.ok(initialCap > tighterCap);
-    assert.equal(compactPromptFitsProviderLimit(annotated, initialCap), true);
-    assert.equal(compactPromptFitsProviderLimit(annotated, tighterCap), false);
-    assert.equal(compactPromptFitsProviderLimit(baseline.compactPrompt, tighterCap), true);
+    assert.equal(factCheckPromptFitsProviderLimit(annotated, initialCap), true);
+    assert.equal(factCheckPromptFitsProviderLimit(annotated, tighterCap), false);
+    assert.equal(factCheckPromptFitsProviderLimit(baseline.compactPrompt, tighterCap), true);
 
     const answer = structuredReply(true);
     const { calls, modelResults } = await runRounds({
@@ -674,6 +674,22 @@ describe('fact-check retries under a reported input cap', () => {
     });
     assert.ok(estimate(prompt) > 8000);
     assert.ok(estimate(compactPrompt) <= 8000, `compact estimate: ${estimate(compactPrompt)}`);
+    assert.deepEqual(calls.map((call) => call.prompt), [compactPrompt, compactPrompt]);
+  });
+
+  test('the declared cap compacts a multibyte full prompt even when its character estimate fits', async () => {
+    const padding = '漢'.repeat(5000);
+    const baseline = await runRounds({ padding, replies: [firstVote, secondVote] });
+    const cap = minimumFittingCap(baseline.prompt) - 1;
+    assert.ok(estimate(baseline.prompt) <= cap);
+    assert.equal(factCheckPromptFitsProviderLimit(baseline.prompt, cap), false);
+    assert.equal(factCheckPromptFitsProviderLimit(baseline.compactPrompt, cap), true);
+
+    const { calls, compactPrompt } = await runRounds({
+      padding,
+      declaredInputCap: cap,
+      replies: [firstVote, secondVote],
+    });
     assert.deepEqual(calls.map((call) => call.prompt), [compactPrompt, compactPrompt]);
   });
 
@@ -759,6 +775,21 @@ describe('fact-check retries under a reported input cap', () => {
     });
   }
 
+  test('a reported cap compacts a multibyte full prompt even when its character estimate fits', async () => {
+    const padding = '漢'.repeat(5000);
+    const baseline = await runRounds({ padding, replies: [firstVote, secondVote] });
+    const cap = minimumFittingCap(baseline.prompt) - 1;
+    assert.ok(estimate(baseline.prompt) <= cap);
+    assert.equal(factCheckPromptFitsProviderLimit(baseline.prompt, cap), false);
+    assert.equal(factCheckPromptFitsProviderLimit(baseline.compactPrompt, cap), true);
+
+    const { calls, prompt, compactPrompt } = await runRounds({
+      padding,
+      replies: [firstVote, capError(cap), capError(cap), secondVote],
+    });
+    assert.deepEqual(calls.map((call) => call.prompt), [prompt, prompt, prompt, compactPrompt]);
+  });
+
   for (const [label, error] of [
     ['outage senza tetto strutturato', Object.assign(new Error('verificatori indisponibili (429)'), { code: 'ALL_MODELS_EXHAUSTED' })],
     ['tetto insufficiente', capError(5000)],
@@ -807,7 +838,7 @@ describe('fact-check retries under a reported input cap', () => {
     const cap = compactEstimate + 1;
     assert.ok(estimate(baseline.prompt) > cap);
     assert.ok(compactEstimate <= cap);
-    assert.equal(compactPromptFitsProviderLimit(baseline.compactPrompt, cap), false);
+    assert.equal(factCheckPromptFitsProviderLimit(baseline.compactPrompt, cap), false);
 
     const { calls, logs, prompt, compactPrompt } = await runRounds({
       ...scope,
@@ -827,7 +858,7 @@ describe('fact-check retries under a reported input cap', () => {
     const cap = compactEstimate - 1;
     assert.ok(estimate(baseline.prompt) > compactEstimate);
     assert.ok(compactEstimate > cap);
-    assert.equal(compactPromptFitsProviderLimit(baseline.compactPrompt, cap), false);
+    assert.equal(factCheckPromptFitsProviderLimit(baseline.compactPrompt, cap), false);
 
     const { calls, logs, prompt } = await runRounds({
       ...scope,
