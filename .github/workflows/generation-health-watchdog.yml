@@ -111,12 +111,9 @@ jobs:
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
-      # Le label di routing non si creano da sole: `gh issue edit --add-label`
-      # fallisce se la label non esiste, e quel fallimento qui è un warning non
-      # bloccante. Senza questo step il watchdog aprirebbe le issue e non le
-      # instraderebbe — girando, loggando e uscendo 0. Idempotente.
+      # Se il controllo delle label fallisce, il job si ferma prima di aprire
+      # issue che non potrebbero essere instradate. Idempotente.
       - name: Ensure loop labels exist (idempotente)
-        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
