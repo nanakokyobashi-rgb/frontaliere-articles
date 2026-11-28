@@ -36,25 +36,17 @@ on:
       # Un nuovo articolo aggiorna registro, slug/meta, corpo e sidecar. Il
       # bacino D17 legge anche frontaliere/svizzera con label cantonale, non
       # solo le 24 sezioni proprie.
-      # I path dei soli hub non sono inclusi: il push del refresh non riavvia
-      # se stesso, mentre il push del generatore cantonale avvia subito questo
-      # workflow (non si aspetta il cron del giorno dopo).
-      - 'content/blog-body-canton-*/**'
-      - 'content/blog-body/**'
-      - 'content/blog-body-ch/**'
-      - 'content/blog-meta-*'
-      - 'content/blog-articles-data.ts'
-      - 'content/swiss-articles-data.ts'
-      - 'content/routerBlogData.ts'
-      - 'content/routerSwissData.ts'
-      - 'content/cantons/*/registry.ts'
-      - 'content/cantons/*/seo.ts'
-      - 'content/cantons/*/slugs.ts'
-      - 'data/blog-articles/**'
-      - 'data/swiss-articles/**'
+      # Le modifiche agli articoli attendono il publisher: i link vengono
+      # verificati contro sitemap che devono gia' contenere le nuove URL.
+      # `workflow_run` avvia il refresh dopo il successo di Publish article data API.
+      # Le URL di fonte non pubblicano una pagina e restano un trigger diretto.
       - 'data/article-source-urls.json'
       - 'data/swiss-article-source-urls.json'
       - 'data/sections/canton-*/articles/**'
+  workflow_run:
+    workflows: ['Publish article data API']
+    types: [completed]
+    branches: [main]
   workflow_dispatch:
     inputs:
       sections:
@@ -74,33 +66,31 @@ concurrency:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   refresh:
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - name: Resolve run mode
-        id: mode
-        run: |
-          set -euo pipefail
-          if [ "${{ github.event_name }}" = "push" ]; then
-            # Un articolo nuovo deve rigenerare e pubblicare subito gli hub.
-            # Il commit del refresh non riavvia questo workflow: i path degli
-            # hub sono esclusi dal trigger push qui sopra.
-            DRY=false
-          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            DRY="${{ inputs.dry_run }}"
-          else
-            DRY=false
-          fi
-          echo "dry=$DRY" >> "$GITHUB_OUTPUT"
-          echo "event=${{ github.event_name }} → dry_run=$DRY"
+      - name: Download publisher Pages artifact
+        id: publisher_pages
+        if: github.event_name == 'workflow_run'
+        continue-on-error: true
+        uses: actions/download-artifact@v7
+        with:
+          name: github-pages-${{ github.event.workflow_run.run_attempt }}
+          path: ${{ runner.temp }}/publish-api-wrapper
+          repository: ${{ github.repository }}
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
 
       - name: Checkout
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
+          ref: ${{ github.event_name == 'workflow_run' && 'main' || github.sha }}
           # persist-credentials: false e' portante: altrimenti l'extraheader
           # del GITHUB_TOKEN vince sulle credenziali nell'URL di push e il
           # push su main viene rifiutato (vedi refresh-events-digest.yml).
@@ -111,15 +101,138 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Extract publisher Pages artifact safely
+        if: github.event_name == 'workflow_run' && steps.publisher_pages.outcome == 'success'
+        env:
+          ARTIFACT_ARCHIVE: ${{ runner.temp }}/publish-api-wrapper/artifact.tar
+          STAGING_DIR: ${{ runner.temp }}/publish-api-staged
+        run: python3 generator/scripts/extract-publisher-pages-artifact.py --archive "$ARTIFACT_ARCHIVE" --destination "$STAGING_DIR"
+
+      - name: Resolve publisher artifact state
+        id: publisher
+        if: github.event_name == 'workflow_run'
+        env:
+          DOWNLOAD_OUTCOME: ${{ steps.publisher_pages.outcome }}
+          ARTIFACT_DIR: ${{ runner.temp }}/publish-api-staged
+        run: |
+          set -euo pipefail
+          if [ "$DOWNLOAD_OUTCOME" = success ]; then
+            test -s "$ARTIFACT_DIR/manifest.json" || { echo '::error::Pages artifact estratto ma manifest.json assente'; exit 1; }
+            source_commit="$(jq -er '.commit | select(test("^[a-f0-9]{40}$"))' "$ARTIFACT_DIR/manifest.json")"
+            echo "state=available" >> "$GITHUB_OUTPUT"
+            echo "source_commit=$source_commit" >> "$GITHUB_OUTPUT"
+          else
+            # L'assenza e' uno skip solo se main contiene input API piu' nuovi
+            # della run; il freshness gate publish-api conserva allora una run
+            # FIFO successiva come owner. La classificazione Git e' nel resolver.
+            echo 'state=missing' >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout publisher artifact source
+        if: github.event_name == 'workflow_run' && steps.publisher.outputs.state == 'available'
+        env:
+          SOURCE_COMMIT: ${{ steps.publisher.outputs.source_commit }}
+        run: git checkout --detach "$SOURCE_COMMIT"
+
+      - name: Resolve run mode
+        id: mode
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PUSH_BEFORE: ${{ github.event.before }}
+          PUSH_AFTER: ${{ github.event.after }}
+          DRY_RUN_INPUT: ${{ inputs.dry_run }}
+          UPSTREAM_EVENT: ${{ github.event.workflow_run.event }}
+          UPSTREAM_BRANCH: ${{ github.event.workflow_run.head_branch }}
+          UPSTREAM_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          UPSTREAM_TITLE: ${{ github.event.workflow_run.display_title }}
+          UPSTREAM_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          PUBLISH_API_ARTIFACT_STATE: ${{ steps.publisher.outputs.state }}
+          PUBLISH_API_ARTIFACT_DIR: ${{ runner.temp }}/publish-api-staged
+        run: node generator/scripts/resolve-canton-hub-refresh-mode.mjs
+
+      # Un commit trailer e' un riferimento, non una prova. Per i range
+      # publisher composti solo da output hub, ricaviamo il run/attempt richiesto
+      # dal marker; l'autenticazione avviene solo dopo download e verifica API.
+      - name: Resolve hub refresh proof candidate
+        id: receipt_candidate
+        if: github.event_name == 'workflow_run' && steps.mode.outputs.run == 'true'
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PUSH_BEFORE: ${{ steps.mode.outputs.before }}
+          PUBLISHER_SOURCE_COMMIT: ${{ steps.mode.outputs.after }}
+        run: |
+          set -euo pipefail
+          if [ -n "$PUSH_BEFORE" ]; then
+            git diff --no-renames --name-only "$PUSH_BEFORE" "$PUBLISHER_SOURCE_COMMIT" \
+              | node generator/scripts/resolve-canton-hub-refresh-proof.mjs candidate
+          else
+            node generator/scripts/resolve-canton-hub-refresh-proof.mjs candidate </dev/null
+          fi
+
+      # L'artifact e' immutabile e scoped al run ID. Nome e receipt includono
+      # anche attempt; il consumer controlla entrambi contro i metadata REST.
+      - name: Download exact hub refresh proof artifact
+        id: receipt_artifact
+        if: steps.receipt_candidate.outputs.candidate == 'true'
+        continue-on-error: true
+        uses: actions/download-artifact@v7
+        with:
+          name: ${{ steps.receipt_candidate.outputs.artifact_name }}
+          path: ${{ runner.temp }}/canton-hub-refresh-proof
+          repository: ${{ github.repository }}
+          run-id: ${{ steps.receipt_candidate.outputs.run_id }}
+          github-token: ${{ github.token }}
+
+      # Una sola GET, con limite temporale. Missing, expired, timeout, API error
+      # o risposta vuota sono proof false: il resolver terra' il refresh globale.
+      - name: Read exact hub refresh run attempt metadata
+        if: steps.receipt_candidate.outputs.candidate == 'true' && steps.receipt_artifact.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RECEIPT_RUN_ID: ${{ steps.receipt_candidate.outputs.run_id }}
+          RECEIPT_RUN_ATTEMPT: ${{ steps.receipt_candidate.outputs.run_attempt }}
+          RUN_METADATA_PATH: ${{ runner.temp }}/canton-hub-refresh-proof/github-run.json
+        run: |
+          set -uo pipefail
+          tmp="$RUN_METADATA_PATH.tmp"
+          mkdir -p "$(dirname "$RUN_METADATA_PATH")"
+          if timeout 20s gh api --method GET "repos/$GITHUB_REPOSITORY/actions/runs/$RECEIPT_RUN_ID/attempts/$RECEIPT_RUN_ATTEMPT" > "$tmp"; then
+            mv "$tmp" "$RUN_METADATA_PATH"
+            echo 'metadata=available'
+          else
+            rm -f "$tmp"
+            printf '{}\n' > "$RUN_METADATA_PATH"
+            echo "::warning::metadata receipt non disponibile o timeout; il resolver fara un refresh completo"
+          fi
+
+      - name: Verify hub refresh artifact against run metadata and commit
+        id: receipt_verification
+        if: steps.receipt_candidate.outputs.candidate == 'true'
+        env:
+          RECEIPT_PATH: ${{ runner.temp }}/canton-hub-refresh-proof/receipt.json
+          RUN_METADATA_PATH: ${{ runner.temp }}/canton-hub-refresh-proof/github-run.json
+          RECEIPT_RUN_ID: ${{ steps.receipt_candidate.outputs.run_id }}
+          RECEIPT_RUN_ATTEMPT: ${{ steps.receipt_candidate.outputs.run_attempt }}
+          PUBLISHER_SOURCE_COMMIT: ${{ steps.mode.outputs.after }}
+        run: |
+          set -euo pipefail
+          if [ -n "${{ steps.mode.outputs.before }}" ]; then
+            git diff --no-renames --name-only "${{ steps.mode.outputs.before }}" "${{ steps.mode.outputs.after }}" \
+              | node generator/scripts/resolve-canton-hub-refresh-proof.mjs verify
+          else
+            node generator/scripts/resolve-canton-hub-refresh-proof.mjs verify </dev/null
+          fi
+
       # Remote Config porta sia il PAT del push sia l'elenco dei cantoni accesi
       # (D16). Il loader esce 0 anche quando non carica niente: il controllo di
       # successo e' esplicito qui sotto, perche' un elenco vuoto per un
       # fallimento di auth sarebbe indistinguibile da «nessun cantone acceso».
       - name: Setup isolated article source runtime
+        if: steps.mode.outputs.run == 'true'
         uses: ./.github/actions/setup-article-source-runtime
 
       - name: Prepare Firebase credentials
-        if: steps.mode.outputs.dry != 'true'
+        if: steps.mode.outputs.run == 'true' && steps.mode.outputs.dry != 'true'
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
@@ -132,11 +245,11 @@ jobs:
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
 
       - name: Load secrets from Remote Config
-        if: steps.mode.outputs.dry != 'true'
+        if: steps.mode.outputs.run == 'true' && steps.mode.outputs.dry != 'true'
         run: node generator/scripts/load-rc-env.mjs
 
       - name: Remote Config loaded
-        if: steps.mode.outputs.dry != 'true'
+        if: steps.mode.outputs.run == 'true' && steps.mode.outputs.dry != 'true'
         run: |
           set -euo pipefail
           # Il token del push: GITHUB_PAT_NANAKO (AGENTS.md: push, merge e
@@ -156,39 +269,39 @@ jobs:
         env:
           REQUESTED: ${{ inputs.sections }}
           EVENT_NAME: ${{ github.event_name }}
-          PUSH_BEFORE: ${{ github.event.before }}
+          PUSH_BEFORE: ${{ steps.mode.outputs.before }}
+          PUSH_AFTER: ${{ steps.mode.outputs.after }}
+          SHOULD_RUN: ${{ steps.mode.outputs.run }}
+          PUBLISHER_SOURCE_COMMIT: ${{ steps.mode.outputs.after }}
+          HUB_RECEIPT_VERIFIED: ${{ steps.receipt_verification.outputs.verified }}
         run: |
           set -euo pipefail
+          if [ "$SHOULD_RUN" != "true" ]; then
+            echo "count=0" >> "$GITHUB_OUTPUT"
+            echo "il refresh content attende il publisher, o questo run non richiede hub"
+            exit 0
+          fi
           if [ -n "${REQUESTED:-}" ]; then
             SECTIONS="$(printf '%s' "$REQUESTED" | tr -d '[:space:]')"
           else
             ENABLED="$(node generator/scripts/generate-canton-hubs.mjs --list-enabled)"
             SECTIONS="$(printf '%s\n' "$ENABLED" | paste -sd, -)"
-            # A canton-only article push changes the related-reading pool only
-            # for its own section. Shared/national or unknown changes keep
-            # the full refresh, as do missing bases and non-push runs.
-            if [[ "$EVENT_NAME" == push && -n "$PUSH_BEFORE" ]] &&
-              CHANGED="$(git diff --no-renames --name-only "$PUSH_BEFORE" HEAD)"; then
-              LOCAL='^(content/blog-body-(canton-[a-z]+)/|content/blog-meta-(canton-[a-z]+)-(it|en|de|fr)\.ts$|content/cantons/(canton-[a-z]+)/(registry|seo|slugs)\.ts$|data/sections/(canton-[a-z]+)/)'
-              AUXILIARY='^(data/generated-image-registry\.json$|public/images/blog/)'
-              CANTONS=()
-              while IFS= read -r path; do
-                if [[ "$path" =~ $LOCAL ]]; then
-                  CANTONS+=("${BASH_REMATCH[2]}${BASH_REMATCH[3]}${BASH_REMATCH[5]}${BASH_REMATCH[7]}")
-                elif [[ ! "$path" =~ $AUXILIARY ]]; then
-                  CANTONS=()
-                  break
+            # Un push diretto cantonale resta limitato al cantone cambiato.
+            # Per il publisher, il resolver allarga al set attivo salvo un
+            # receipt completo che provi che il range hub-only e' gia' coperto.
+            case "$EVENT_NAME" in
+              push|workflow_run)
+                if [ -n "$PUSH_BEFORE" ]; then
+                  CHANGED="$(git diff --no-renames --name-only "$PUSH_BEFORE" HEAD)"
+                  SECTIONS="$(printf '%s\n' "$CHANGED" | ENABLED_SECTIONS="$ENABLED" node generator/scripts/resolve-canton-hub-target-sections.mjs)"
                 fi
-              done <<< "$CHANGED"
-              if (( ${#CANTONS[@]} > 0 )); then
-                SECTIONS="$(printf '%s\n' "${CANTONS[@]}" | sort -u | awk 'NR==FNR {enabled[$0]; next} $0 in enabled' <(printf '%s\n' "$ENABLED") - | paste -sd, -)"
-              fi
-            fi
+                ;;
+            esac
           fi
           if [ -z "$SECTIONS" ]; then
             echo "count=0" >> "$GITHUB_OUTPUT"
-            echo "nessuna sezione cantonale attiva o accesa: niente da rigenerare"
-            echo "### Canton hubs — nessuna sezione attiva o accesa, niente da fare" >> "$GITHUB_STEP_SUMMARY"
+            echo "nessuna sezione da rigenerare: nessuna attiva o scope hub gia' coperto"
+            echo "### Canton hubs — nessuna sezione da rigenerare" >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
           # Valida l'elenco (un refuso non deve diventare un run vuoto) e
@@ -198,6 +311,18 @@ jobs:
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
           echo "list=$SECTIONS" >> "$GITHUB_OUTPUT"
           echo "sezioni: $SECTIONS"
+
+      # Il publisher puo' risultare verde anche con deploy saltato o upload
+      # sitemap degradato. Il suo Pages artifact contiene la sitemap canonica
+      # (e il registro live/draft) generata dal publisher; senza artifact non
+      # procediamo. Per le sezioni live aspettiamo la stessa sitemap pubblica.
+      - name: Wait for the published sitemap links
+        id: sitemap
+        if: steps.sections.outputs.count != '0' && steps.mode.outputs.event == 'workflow_run'
+        env:
+          SECTIONS: ${{ steps.sections.outputs.list }}
+          PUBLISH_API_ARTIFACT_DIR: ${{ runner.temp }}/publish-api-staged
+        run: node generator/scripts/wait-canton-hub-sitemap-ready.mjs --section "$SECTIONS" --timeout-seconds 600 --interval-seconds 20
 
       # ── Dataset di categoria (D11): letti, mai ricrawlati ────────────────
       # Uno step per dataset, ognuno soft: vedi l'intestazione. Anche in
@@ -263,13 +388,25 @@ jobs:
       # irraggiungibili sono tollerate (`--soft-network`: annotazione ed exit
       # 0), perche' un guasto di rete non dice niente sui link.
       - name: Check hub links against the published sitemaps
-        if: steps.sections.outputs.count != '0'
+        if: steps.sections.outputs.count != '0' && steps.mode.outputs.event != 'workflow_run'
         env:
           SECTIONS: ${{ steps.sections.outputs.list }}
         run: node generator/scripts/verify-canton-hub-links.mjs --section "$SECTIONS" --soft-network
 
-      - name: Commit and push
+      - name: Check live hub links after article publication
+        if: steps.sections.outputs.count != '0' && steps.mode.outputs.event == 'workflow_run' && steps.sitemap.outputs.live-count != '0'
+        env:
+          SECTIONS: ${{ steps.sitemap.outputs.live-sections }}
+        run: node generator/scripts/verify-canton-hub-links.mjs --section "$SECTIONS" --soft-network
+
+      - name: Commit canton hubs
+        id: commit
         if: steps.sections.outputs.count != '0' && steps.mode.outputs.dry != 'true'
+        env:
+          HUB_REFRESH_SOURCE_COMMIT: ${{ steps.mode.outputs.after }}
+          HUB_REFRESH_SOURCE_VERIFIED: ${{ steps.mode.outputs.event == 'workflow_run' }}
+          HUB_REFRESH_SECTIONS: ${{ steps.sections.outputs.list }}
+          EVENT_NAME: ${{ steps.mode.outputs.event }}
         run: |
           set -euo pipefail
           # Solo i file dati degli hub di QUESTE sezioni: le cache dei dataset
@@ -280,18 +417,67 @@ jobs:
           done
           if git diff --cached --quiet; then
             echo "nessun hub cambiato"
+            echo 'changed=false' >> "$GITHUB_OUTPUT"
             exit 0
+          fi
+          HUB_REFRESH_SOURCE_COMMIT="${HUB_REFRESH_SOURCE_COMMIT:-$(git rev-parse HEAD)}"
+          if [[ ! "$HUB_REFRESH_SOURCE_COMMIT" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "::error::publisher source commit non verificabile per il receipt hub"
+            exit 1
+          fi
+          if [[ "${HUB_REFRESH_SOURCE_VERIFIED:-}" != true && "${HUB_REFRESH_SOURCE_VERIFIED:-}" != false ]]; then
+            echo "::error::provenienza publisher non valida per il receipt hub"
+            exit 1
+          fi
+          if [[ ! "${HUB_REFRESH_SECTIONS:-}" =~ ^canton-[a-z]+(,canton-[a-z]+)*$ ]]; then
+            echo "::error::sezioni processate non valide per il receipt hub"
+            exit 1
           fi
           git config user.name "Valerie Linc"
           git config user.email "valerielinc@gmail.com"
-          git commit -m "Refresh canton hubs"
+          TRAILERS="$(printf 'Canton-Hub-Source-Commit: %s\nCanton-Hub-Source-Verified: %s\nCanton-Hub-Receipt-Run-Id: %s\nCanton-Hub-Receipt-Run-Attempt: %s\nCanton-Hub-Sections: %s' "$HUB_REFRESH_SOURCE_COMMIT" "$HUB_REFRESH_SOURCE_VERIFIED" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" "$HUB_REFRESH_SECTIONS")"
+          git commit -m "Refresh canton hubs" -m "$TRAILERS"
+          HUB_REFRESH_COMMIT="$(git rev-parse HEAD)"
+          echo 'changed=true' >> "$GITHUB_OUTPUT"
+          echo "commit=$HUB_REFRESH_COMMIT" >> "$GITHUB_OUTPUT"
+
+          if [[ "$HUB_REFRESH_SOURCE_VERIFIED" == true ]]; then
+            HUB_REFRESH_COMMIT="$HUB_REFRESH_COMMIT" \
+              RECEIPT_OUTPUT_PATH="$RUNNER_TEMP/canton-hub-refresh-proof/receipt.json" \
+              node generator/scripts/write-canton-hub-refresh-receipt.mjs
+          fi
+
+      # Il proof deve esistere prima del push che attiva il publisher. Un
+      # upload assente/fallito impedisce il push e non lascia un trailer fidato.
+      - name: Upload authenticated hub refresh proof
+        if: steps.sections.outputs.count != '0' && steps.commit.outputs.changed == 'true' && steps.mode.outputs.event == 'workflow_run'
+        uses: actions/upload-artifact@v7
+        with:
+          name: canton-hub-refresh-proof-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/canton-hub-refresh-proof/receipt.json
+          if-no-files-found: error
+          retention-days: 90
+          compression-level: 0
+
+      - name: Push canton hubs
+        if: steps.sections.outputs.count != '0' && steps.commit.outputs.changed == 'true' && steps.mode.outputs.dry != 'true'
+        env:
+          HUB_REFRESH_COMMIT: ${{ steps.commit.outputs.commit }}
+          HUB_REFRESH_SOURCE_VERIFIED: ${{ steps.mode.outputs.event == 'workflow_run' }}
+        run: |
+          set -euo pipefail
+          if [[ "$(git rev-parse HEAD)" != "$HUB_REFRESH_COMMIT" ]]; then
+            echo "::error::HEAD e receipt artifact non identificano piu' lo stesso commit prima del push"
+            exit 1
+          fi
+          mapfile -t HUB_PATHS < "$RUNNER_TEMP/canton-hub-paths.txt"
 
           PUSH_TOKEN="${GITHUB_PAT_NANAKO:-}"
           if [ -z "$PUSH_TOKEN" ]; then
             echo "::error::GITHUB_PAT_NANAKO assente — un push col GITHUB_TOKEN non farebbe partire publish-api.yml"
             exit 1
           fi
-          TARGET="${{ github.ref_name }}"
+          TARGET="${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_branch || github.ref_name }}"
           REMOTE="https://x-access-token:${PUSH_TOKEN}@github.com/${{ github.repository }}.git"
           push_target() {
             if [ "$TARGET" = 'main' ]; then
@@ -323,9 +509,15 @@ jobs:
             # path di questo run si passano anche in chiaro, perche' una
             # sezione accesa da Remote Config ma non ancora attiva nel core
             # non e' fra quelle.
-            bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
+            if ! bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
               --section-surfaces \
-              "${HUB_PATHS[@]}" || true
+              "${HUB_PATHS[@]}"; then
+              echo "::error::rebase non riuscito; rifiuto il push per preservare la provenienza"
+              exit 1
+            fi
+            if [[ "${HUB_REFRESH_SOURCE_VERIFIED:-false}" == true ]]; then
+              node scripts/ci/verify-canton-hub-proof-head.mjs
+            fi
           done
           echo "::error::push failed after 5 attempts (git output above)"
           exit 1
