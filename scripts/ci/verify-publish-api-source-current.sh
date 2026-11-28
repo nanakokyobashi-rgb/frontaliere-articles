@@ -5,11 +5,21 @@
 # steps to skip. The artifact source marker remains immutable because it is also
 # recorded in manifest.json and sent downstream. Keep this bounded helper so
 # every irreversible phase uses the same freshness contract.
+#
+# VERIFY_API_ADVANCE=adopt (set by the publisher job for non-replay runs) turns
+# the "newer API input on main" outcome from skip into adopt: a run that already
+# passed the preflight finishes publishing its own, self-consistent snapshot and
+# leaves the delta to the next FIFO run. Runs are serialised and each starts from
+# the then-current main, so the published commit only moves forward. Under a
+# continuous stream of commits "skip" lets every run be superseded before its
+# end and nothing is ever published. An explicit bounded replay keeps "skip": it
+# pins an older commit and must never overwrite a newer surface.
 set -euo pipefail
 
 context="${VERIFY_CONTEXT:-publish-api phase}"
 repository="${REPOSITORY:-${GITHUB_REPOSITORY:-}}"
 published_source="${PUBLISH_API_SOURCE_COMMIT:-${PUBLISHED_SOURCE_COMMIT:-}}"
+advance_policy="${VERIFY_API_ADVANCE:-skip}"
 skip_marker="${RUNNER_TEMP:-${TMPDIR:-/tmp}}/publish-api-skip"
 
 if [ -f "$skip_marker" ]; then
@@ -68,6 +78,10 @@ if [ "$current_main" != "$published_source" ]; then
     exit 1
   fi
   if [ "$api_input_changed" = 'true' ]; then
+    if [ "$advance_policy" = 'adopt' ]; then
+      echo "::notice::publish-api prosegue prima di $context: main=$current_main contiene input API piu' recenti di source=$published_source; questa run pubblica la sorgente gia' costruita e la run della nuova push pubblichera' il delta"
+      exit 0
+    fi
     if [ -n "${GITHUB_ENV:-}" ]; then
       echo 'PUBLISH_API_SKIP=true' >> "$GITHUB_ENV"
       printf 'true\n' > "$skip_marker"
