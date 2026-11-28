@@ -1,0 +1,231 @@
+{
+  "schema": 1,
+  "section": "frontaliere",
+  "articleId": "dati-frontalieri-accordo-fiscale",
+  "sourceUrl": "https://www.tvsvizzera.it/tvs/relazioni-italo-svizzere/i-dati-sui-frontalieri-inviati-in-italia-grazie-al-nuovo-accordo-fiscale/89058077",
+  "sourceContext": {
+    "headline": "I dati sui frontalieri inviati in Italia grazie al nuovo accordo fiscale - TVS tvsvizzera.it",
+    "url": "https://www.tvsvizzera.it/tvs/relazioni-italo-svizzere/i-dati-sui-frontalieri-inviati-in-italia-grazie-al-nuovo-accordo-fiscale/89058077",
+    "source": "news",
+    "relatedHeadlines": [
+      {
+        "headline": "Commercialisti, esordio da tutto esaurito per l’Anc Varese: riflettori sul fisco dei frontalieri - La Prealpina",
+        "source": "news",
+        "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxNeTJoOGgwUmk4MEctUkpTcVRDOFF0OEUtcGc3ZHpKNDdpWWFwM2RDUUplSW1jSUhSdTZLZHVFVDdzaTBhZHp1RENpVE5lbFdfSTdoZFNNYlVnX2VvUk9TdzJvTGFNVWJMcTVTNjdtdWE0X1oxanRhWVF1a0NkdkxxVzVjWTRtdVRnYmpsRXZ4ODl2R3Jwc1NuQWFudTh0MTVnMkNRNExzM2RvNnZCZXdZbGR1N0pxNFJSbUtqTGc0NXZ4ZDNfWjZJcU5JbHVFMlFpYlNyczNSRlhoQQ?oc=5"
+      },
+      {
+        "headline": "Vecchi e nuovi frontalieri e nuova lista comuni di confine - Ticinonline",
+        "source": "news",
+        "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPa0xzbHBWMmVUdlZKWldJV2pkbEJhMFd4OERlUW1ITm5RZ054SEZNc2N4SVdtNWE2dFQtQjluNzBGWUZEZTY5X3JnbmVyeS04NmhyYnAwOWgzNlhMX2VPNTVSME5IMk5ZQ1BkMjg0S0prb250WDVQTnBBQkZ2Zm5iQXdxUG5wMksxTVBZRW5tbjBTTnJrN3ZHaUx2S1lmbG8?oc=5"
+      }
+    ],
+    "_discoveryId": "discovery::news::i dati sui frontalieri inviati in italia grazie al nuovo accordo fiscale - tvs tvsvizzera.it",
+    "_discoveryCandidate": {
+      "headline": "I dati sui frontalieri inviati in Italia grazie al nuovo accordo fiscale - TVS tvsvizzera.it",
+      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPRDlnS1JXdllkWnhDRVhXcm5FVGRYbmR6MHdTS185QXNrUk1PRm9aTElVSk9IQlJzSjdLRkNrSDRCQ2drdUVaQnBHaFZXLUJYallQZUpKYUd0R1RSU3RWQU1TNUNTNk9pcFhHYklDSkk2cTNUbG82OUlNTmZCU3luUnA1N2pXc25BOFZJNjdxdzlmRVQwREdHUlE2MmUtSkMzVkdCY1RrVlEtMW5QY0ZlczZzNnVhNjhaaHNvbFh4MlpGNFFXZ3ZsUl8zbDlueFNzSmc?oc=5",
+      "source": "news",
+      "meta": {
+        "ageHours": 14598.428159166666,
+        "sourceUrl": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPRDlnS1JXdllkWnhDRVhXcm5FVGRYbmR6MHdTS185QXNrUk1PRm9aTElVSk9IQlJzSjdLRkNrSDRCQ2drdUVaQnBHaFZXLUJYallQZUpKYUd0R1RSU3RWQU1TNUNTNk9pcFhHYklDSkk2cTNUbG82OUlNTmZCU3luUnA1N2pXc25BOFZJNjdxdzlmRVQwREdHUlE2MmUtSkMzVkdCY1RrVlEtMW5QY0ZlczZzNnVhNjhaaHNvbFh4MlpGNFFXZ3ZsUl8zbDlueFNzSmc?oc=5",
+        "sourceName": "TVS tvsvizzera.it",
+        "publisherHost": "tvsvizzera.it",
+        "pubDate": "Sun, 30 Mar 2025 07:00:00 GMT",
+        "seed": "busta paga frontalieri Ticino"
+      },
+      "_scoreBreakdown": {
+        "stage": "discovery",
+        "source": "news",
+        "rawScore": 100,
+        "confidence": 0.7,
+        "freshnessFactor": 1,
+        "finalScore": 70,
+        "cluster": "fiscale"
+      },
+      "_discoveryScore": 70
+    },
+    "_publisherHost": "tvsvizzera.it",
+    "_needsGoogleNewsDecode": true,
+    "_batchReason": "Questa notizia riguarda l'impatto del nuovo accordo fiscale sui frontalieri, un tema di massima rilevanza per la comunità. Fornisce dati concreti sull'applicazione delle nuove normative fiscali.",
+    "_resolvedFromGoogleNewsRss": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPRDlnS1JXdllkWnhDRVhXcm5FVGRYbmR6MHdTS185QXNrUk1PRm9aTElVSk9IQlJzSjdLRkNrSDRCQ2drdUVaQnBHaFZXLUJYallQZUpKYUd0R1RSU3RWQU1TNUNTNk9pcFhHYklDSkk2cTNUbG82OUlNTmZCU3luUnA1N2pXc25BOFZJNjdxdzlmRVQwREdHUlE2MmUtSkMzVkdCY1RrVlEtMW5QY0ZlczZzNnVhNjhaaHNvbFh4MlpGNFFXZ3ZsUl8zbDlueFNzSmc?oc=5"
+  },
+  "pageContent": "Per la prima volta nella storia, il Canton Ticino ha trasmesso all’Italia i dati completi delle buste paga dei nuovi frontalieri, inclusi nome, cognome, stipendio e codice fiscale. Un passo fondamentale che consente anche all’Italia di conoscere e tassare i suoi cittadini che lavorano in Ticino.\n\nMi occupo soprattutto delle relazioni italo-svizzere, che siano politiche, economiche o culturali, con un occhio di riguardo alle questioni transfrontaliere. Nato in Corea del Sud e cresciuto nei Grigioni dopo studi in filosofia tra Pavia, Ginevra e Parigi, in teologia a Lugano e infine in comunicazione a Milano, mi sono dedicato al giornalismo con una lunga parentesi nel mondo del cinema.\n\nAltri articoli di quest’autore / autrice\n\nLa settimana scorsa il Canton Ticino ha inviato all’Italia i dati di 10’000 casi di nuovi frontalieri e di altri 11’000 lavoratori italiani attivi in Ticino, ma che non rientrano nella definizione di “lavoratore frontaliere” secondo il nuovo accordo fiscale. Un’operazione definita dal direttore della Divisione delle contribuzioni, Giordano Macchi, storica e metodologica. Si tratta infatti della prima volta che le autorità italiane ricevono informazioni dettagliate sui lavoratori italiani attivi in Svizzera, che fino a oggi erano conosciuti solo per numero e non per identità.\n\nQuesto scambio di dati è frutto del nuovo accordo fiscale tra la Svizzera e l’Italia, entrato in vigore il 17 luglio 2023, che ha modificato la definizione di “lavoratore frontaliere” e ha introdotto nuove modalità di tassazione.\n\nLa tassazione per i nuovi frontalieri è entrata in vigore il primo gennaio 2024: il Canton Ticino preleva ora alla fonte l’80% delle imposte dovute. I nuovi lavoratori frontalieri sono poi tassati in Italia, in base alle loro aliquote. Per evitare la doppia imposizione, l’Italia concede un “credito d’imposta”, ovvero detrae dalle imposte italiane la somma trattenuta alla fonte dalle autorità elvetiche.\n\nL’Italia, grazie a questo accordo, può tassare i nuovi frontalieri in base ai dati ricevuti dal Canton Ticino. L’Art. 7 dell’accordo stabilisce che i dati relativi ai lavoratori dipendenti vengano trasmessi entro il 20 marzo dell’anno successivo all’anno fiscale, permettendo così l’applicazione delle rispettive normative fiscali.\n\nDa parte sua, considerata la reciprocità dell’accordo, l’Italia è incaricata di fornire al Ticino i dati relativi ai lavoratori che, residenti nel Cantone, si spostano quotidianamente in Italia per motivi di lavoro. Sebbene i numeri siano decisamente contenuti, anche questi pendolari al contrario saranno soggetti a tassazione in Svizzera.\n\nNel dettaglio, sono 10’167 i nuovi frontalieri e frontaliere arrivati in Ticino dal 17 luglio 2023 al 31 dicembre 2024. Il Canton Ticino ha inoltre trasmesso le informazioni relative ad altre 11’000 casi di lavoratori attivei in Ticino ma che risiedono al di fuori della fascia dei 20 chilometri dal confine o che non rientrano quotidianamente al loro domicilio principale in Italia, o ancora non figurano nella lista dei comuni riconosciuti dal Cantone. In totale l’erario italiano ha ricevuto le informazioni inerenti a circa 21’000 casi di lavoratrici e lavoratori.\n\nÈ importante non farsi ingannare dai numeri. Il Canton Ticino ha effettivamente tramesso all’Italia 10’167 casi di lavoratori che sottostanno al nuovo accordo fiscale sui frontalieri. Questo però non si significa che dal 17 luglio 2023 siano arrivati in Ticino esattamente 10’167 nuovi frontalieri.\n\nQuesto articolo vi interessa? Volete ricevere i nostri ultimi servizi dedicati a tutto ciò che concerne le relazioni tra Italia e Svizzera? Abbonatevi alla nostra newsletter quindicinale.\n\nSecondo i dati dell’Ufficio federale di statistica, al 31 dicembre 2022 il numero di frontalieri in Ticino ammontava a 77’739, mentre al 31 dicembre 2024 erano 78’683, con una variazione di poco meno di 1’000 unità. Di conseguenza, è poco plausibile che quasi 10’000 vecchi frontalieri abbiano smesso di lavorare in Ticino per fare spazio ai nuovi arrivati.\n\nAllora, come spiegare i 10’167 casi di nuovi frontalieri registrati dopo il 17 luglio 2023? Non si tratta di un errore nei dati, ma è necessario considerare alcuni fattori che questi numeri non raccontano completamente.\n\n>>Il nostro dossier sul nuovo accordo fiscale sui frontalieri:\n\nIn primo luogo, è fondamentale chiarire che si parla appunto di “casi”, non di singoli lavoratori. Come spiegato dal direttore della Divisione delle Contribuzioni, Giordano Macchi, “un lavoratore potrebbe avere un impiego a metà tempo con un datore di lavoro e un altro a metà tempo con un altro datore di lavoro”. In statistica, questo viene conteggiato come due casi, ma il lavoratore è uno solo.\n\nInoltre, tra questi 10’000 casi, ricorda Macchi “sono inclusi anche lavoratori temporanei che pagano le imposte alla fonte ma che, in senso stretto, non sono nuovi frontalieri”. Alcuni di questi sono specialisti chiamati dalle aziende ticinesi per contratti di breve durata, inferiori ai tre mesi, che non possiedono neppure il permesso G (il permesso di lavoro per frontalieri). “Per noi – aggiunge Macchi – sono comunque conteggiati come ‘casi’, ma non sono strettamente dei nuovi frontalieri”.\n\n“È fondamentale chiarire che si parla di 10’000 “casi”, non di singoli lavoratori frontalieri” Giordano Macchi, direttore della Divisione contribuzioni del Canton Ticino\n\n“È fondamentale chiarire che si parla di 10’000 “casi”, non di singoli lavoratori frontalieri”\n\nUn’altra tipologia di lavoratori dichiarati nuovi frontalieri dal Canton Ticino riguarda i lavoratori che risiedono in comuni italiani (principalmente nelle province di Sondrio, Monza e Brianza) che non facevano parte della vecchia lista ticinese di comuni di frontiera, ma che ora sono inclusi grazie al nuovo accordo. Questi comuni, che distano meno di 20 chilometri dal confine, sono ora considerati parte della zona di frontiera. Si stima che questi lavoratori siano circa un migliaio.\n\n“Non so dare una cifra esatta dei nuovi frontalieri – commenta Macchi – comunque rappresentano una cifra importante”. Se si ipotizzasse, in modo molto prudente, che solo un ‘caso’ ogni due sia effettivamente un nuovo frontaliere, allora significherebbe che dei 10’000 ‘casi’ conteggiati, 5’000 possano essere nuovi frontalieri attivi in Ticino dal 17 luglio 2023. Questo numero sembra allinearsi con l’andamento dei flussi di lavoratori frontalieri degli ultimi 20 anni:\n\nIl nuovo accordo e l’evoluzione del mercato del lavoro\n\nNonostante le preoccupazioni iniziali, i dati sembrerebbero confermare che il nuovo accordo fiscale non ha avuto effetti negativi sul mercato del lavoro ticinese. I lavoratori italiani, anche con le nuove regole fiscali, continuano a scegliere il Ticino come destinazione lavorativa, attratti dal notevole differenziale salariale, nonostante la tassazione più elevata in Italia.\n\n>> Ecco attraverso tre esempi la differenza di stipendio tra nuovi e vecchi frontalieri:\n\nLa divisione tra nuovi e vecchi frontalieri, con i primi soggetti a tassazione in Italia, ha suscitato dubbi sul potenziale impatto economico. Tuttavia, come ha recentemente comunicato il sindacato italiano UIL-frontalieri, nonostante le nuove regole fiscali impongano ai nuovi frontalieri di pagare le imposte in Italia, notoriamente più alte rispetto a quelle svizzere, il grande divario salariale tra Italia e Svizzera continua a rappresentare un incentivo irresistibile per molti lavoratori. “Affermare che l’accordo fiscale abbia frenato l’arrivo di frontalieri – conclude la UIL – è una favola”.\n\nIl nuovo accordo ha avuto un impatto positivo sulle casse del Cantone. La massa salariale relativa ai nuovi frontalieri ammonta a circa 227 milioni di franchi, con un’imposta trattenuta di circa 13 milioni. Va notato che, rispetto ai vecchi frontalieri, i nuovi sono tassati sull’80% del reddito invece che sul 100% (a cui segue il ristorno). Gli altri 11’000 lavoratori generano una massa salariale complessiv",
+  "sourceDate": "2025-03-30T06:59:00.000Z",
+  "sourceTitle": "I dati sui frontalieri inviati in Italia grazie al nuovo accordo fiscale\nI dati sui frontalieri inviati in Italia grazie al nuovo accordo fiscale\nI dati sui frontalieri inviati in Italia grazie al nuovo accordo fiscale - TVS tvsvizzera.it\nI dati sui frontalieri inviati in Italia grazie al nuovo accordo fiscale",
+  "data": {
+    "id": "dati-frontalieri-accordo-fiscale",
+    "category": "fiscale",
+    "image": "mendrisio.webp",
+    "hasCalculator": true,
+    "imagePrompt": "Photorealistic DSLR image of a border crossing area in Ticino during the daytime, avoiding AI aesthetics.",
+    "imageAlt": {
+      "it": "Dati sui frontalieri inviati in Italia grazie al nuovo accordo fiscale.",
+      "en": "Data on cross-border workers sent to Italy via new fiscal agreement.",
+      "de": "Daten zu Grenzgängern, die dank neuer Steuervereinbarung nach Italien gesendet wurden.",
+      "fr": "Données sur les travailleurs frontaliers envoyés en Italie grâce au nouvel accord fiscal."
+    },
+    "slugs": {
+      "it": "dati-frontalieri-accordo-fiscale",
+      "en": "cross-border-worker-fiscal-agreement-data",
+      "de": "daten-grenzganger-steuer-abkommen",
+      "fr": "donnees-travailleurs-frontaliers-accord-fiscal"
+    },
+    "content": {
+      "it": {
+        "title": "Dati frontalieri inviati in Italia tramite nuovo accordo fiscale",
+        "excerpt": "Il Ticino ha inviato dati su circa 21'000 casi di lavoratori italiani.",
+        "body1": "## In breve\n- Il Ticino ha inviato dati su circa 21'000 casi di lavoratori italiani.\n- I 10'167 casi di nuovi frontalieri coprono il periodo indicato dall'accordo.\n- Per i nuovi frontalieri il prelievo ticinese è pari all'80% delle imposte dovute.\n\n## Fatti chiave\n- Accordo fiscale: in vigore dal 17 luglio 2023\n- Nuovi frontalieri: 10'167 casi dal 17 luglio 2023 al 31 dicembre 2024\n- Altri lavoratori: circa 11'000 casi trasmessi\n- Dati complessivi: circa 21'000 casi\n- Trasmissione: entro il 20 marzo dell'anno successivo a quello fiscale\n\nCome reso noto nel marzo 2025, il Canton Ticino aveva fornito all’Italia le informazioni individuali sulle paghe dei nuovi frontalieri, indicando nome, cognome, stipendio e codice fiscale. Per l’Italia era la prima occasione di ricevere dati identificativi dettagliati sui lavoratori italiani impiegati in Svizzera, fino ad allora conteggiati soltanto in forma aggregata.\n\nLa trasmissione comprendeva 10'167 casi di nuovi frontalieri arrivati in Ticino fra il 17 luglio 2023 e il 31 dicembre 2024. Il Cantone aveva inviato anche i dati di circa 11'000 altri lavoratori italiani attivi in Ticino, ma non compresi nella definizione di frontaliere introdotta dal nuovo accordo. Il totale comunicato era quindi di circa 21'000 casi.\n\nLa Divisione delle contribuzioni, attraverso il suo direttore Giordano Macchi, aveva definito l'operazione storica e metodologica. Il passaggio si inseriva nell'applicazione del nuovo accordo fiscale tra Svizzera e Italia, entrato in vigore il 17 luglio 2023. L'intesa aveva modificato la definizione di lavoratore frontaliere e introdotto nuove modalità di tassazione.\n\n### Dati personali e perimetro dello scambio\n\nIl contenuto trasmesso non si limitava al conteggio dei lavoratori: comprendeva elementi individuali della busta paga e dati identificativi. Questo consentiva all'Italia di conoscere i lavoratori interessati e di applicare la tassazione prevista per i nuovi frontalieri sulla base delle informazioni ricevute dal Ticino.\n\nLa cifra di 10'167, tuttavia, descrive casi registrati nell'ambito fiscale, non necessariamente altrettante persone distinte. La precisazione è essenziale per leggere correttamente il dato: il trasferimento di informazioni riguardava posizioni e casi trattati dalle autorità, e il numero non coincide automaticamente con quello di nuovi individui giunti in Ticino. La differenza fra casi e persone è uno dei punti centrali del chiarimento fornito nell'articolo.\n\nIl dato riguarda inoltre una finestra temporale precisa, dal 17 luglio 2023 al 31 dicembre 2024. Non è quindi un conteggio riferito a un singolo anno né una misura aggiornata del numero complessivo di frontalieri attivi oggi. La trasmissione ha reso applicabile lo scambio fiscale previsto dall'accordo, ma le cifre devono essere lette secondo il periodo e le definizioni indicati.\n\n## La distinzione fra i gruppi\n\nAccanto ai nuovi frontalieri, le autorità ticinesi hanno comunicato informazioni su lavoratori che erano attivi nel Cantone ma non rientravano nella definizione convenzionale. La presenza di questo secondo gruppo spiega perché l'invio complessivo abbia riguardato circa 21'000 casi, pur con 10'167 casi classificati come nuovi frontalieri nel periodo indicato.",
+        "body2": "## Come leggere i 10'167 casi\n\nIl numero dei casi trasmessi non equivale a un conteggio di altrettanti lavoratori distinti. Giordano Macchi ha spiegato che una stessa persona può avere due impieghi a metà tempo presso datori di lavoro diversi: nelle statistiche, ciascun rapporto può essere registrato come un caso separato. Il dato di 10'167, quindi, non permette da solo di stabilire quante persone uniche siano arrivate in Ticino.\n\nFra i casi erano inclusi anche lavoratori temporanei che pagavano l'imposta alla fonte ma che, in senso stretto, non erano nuovi frontalieri. L'articolo cita specialisti chiamati da aziende ticinesi per incarichi brevi, inferiori a tre mesi; alcuni non avevano neppure il permesso G. Anche questi rapporti comparivano nel conteggio fiscale, pur non corrispondendo alla definizione ordinaria di nuovo frontaliere.\n\nUn altro gruppo comprendeva persone residenti in comuni italiani che non facevano parte della precedente lista ticinese dei comuni di frontiera. Con il nuovo accordo, alcuni comuni situati entro 20 chilometri dal confine erano stati inclusi nella zona di frontiera. La fonte indica soprattutto le province di Sondrio e Monza e Brianza e stima in circa un migliaio i lavoratori interessati da questa estensione.\n\n### Il confronto con il totale dei frontalieri\n\nI dati dell'Ufficio federale di statistica riportati nell'articolo offrono un confronto distinto: in Ticino i frontalieri erano 77'739 al 31 dicembre 2022 e 78'683 al 31 dicembre 2024. La differenza aritmetica fra i due valori è di 944 unità, cioè poco meno di 1'000 nell'arco dei due anni considerati.\n\nQuesto confronto non misura lo stesso fenomeno dei 10'167 casi. Da un lato c'è la variazione del totale dei frontalieri presenti alle due date; dall'altro il numero di casi trasmessi come nuovi frontalieri nel periodo dell'accordo, con dentro anche rapporti part-time e lavoratori temporanei. Sono conteggi con basi diverse e non vanno sommati o confrontati come se descrivessero la stessa popolazione.\n\nProprio per questa differenza, l'articolo considera poco plausibile che quasi 10'000 vecchi frontalieri abbiano cessato di lavorare in Ticino per lasciare posto ad altrettanti nuovi arrivati. Il dato aggregato è cresciuto di 944 unità tra le due date riportate, mentre il numero di casi fiscali registra anche situazioni che non equivalgono a una persona nuova. La fonte non presenta i 10'167 come un conteggio netto degli ingressi nel mercato del lavoro ticinese.\n\nLa lettura corretta è dunque circoscritta: il Cantone ha trasmesso dati su 10'167 casi classificati nel nuovo perimetro, ma la cifra non dimostra che altrettante persone siano entrate per la prima volta nel mercato ticinese dopo il 17 luglio 2023. Per il totale complessivo, il confronto disponibile resta quello delle rilevazioni al 31 dicembre 2022 e al 31 dicembre 2024.",
+        "body3": "## La tassazione e lo scambio reciproco\n\nPer i nuovi frontalieri, la tassazione prevista è entrata in vigore il 1° gennaio 2024. Il Canton Ticino trattiene alla fonte l'80% delle imposte dovute; l'Italia tassa poi il reddito secondo le proprie aliquote e riconosce un credito d'imposta per la somma già trattenuta in Svizzera. Il credito serve a evitare la doppia imposizione. L'80% si riferisce dunque alla quota delle imposte dovute prelevata dal Ticino, non all'aliquota applicata al reddito.\n\nLa distinzione fornita per i vecchi frontalieri è diversa: sono tassati soltanto in Svizzera. In questo senso, il 100% si riferisce al Paese in cui ricade la tassazione, non a un'aliquota del 100% sul reddito. Le due percentuali non descrivono quindi la stessa cosa: l'80% riguarda il prelievo alla fonte per i nuovi frontalieri; il 100% chiarisce la ripartizione territoriale dell'imposizione per i vecchi.\n\nL'articolo 7 dell'accordo stabilisce che i dati dei lavoratori dipendenti siano trasmessi entro il 20 marzo dell'anno successivo a quello fiscale. La scadenza consente ai due Paesi di applicare le rispettive regole fiscali sulla base delle informazioni ricevute. Per il quadro informativo ticinese è disponibile il [Foglio informativo AFC](https://m4.ti.ch/fileadmin/DFE/DC/DOC-IF/nuovo_accordo/nuovo_accordo_foglio_informativo_FAQ.pdf).\n\n### Anche i pendolari verso l'Italia\n\nL'accordo prevede uno scambio reciproco. L'Italia deve fornire al Ticino i dati dei lavoratori residenti nel Cantone che si spostano quotidianamente in Italia per lavoro. La fonte descrive questi numeri come decisamente contenuti e riferisce che anche questi pendolari al contrario saranno soggetti a tassazione in Svizzera. Non specifica il numero delle persone interessate.\n\nNon documenta quindi conseguenze su quei temi. Allo stesso modo, il totale di circa 21'000 casi non consente di ricavare quanti siano i singoli lavoratori, perché include rapporti distinti della stessa persona e categorie temporanee.\n\nIl materiale descrive una trasmissione già avvenuta e i termini dell'accordo applicati ai dati, non un aggiornamento del numero attuale di frontalieri. Il dato più recente del confronto complessivo citato è quello al 31 dicembre 2024. Per passare dalle regole fiscali alla stima di imposte e busta paga, è disponibile il [calcolatore fiscale](nav:calculator).",
+        "faq": [
+          {
+            "q": "Quando è entrato in vigore l'accordo fiscale tra Svizzera e Italia?",
+            "a": "L'accordo fiscale è in vigore dal 17 luglio 2023. Questo passaggio si inserisce nell'applicazione del nuovo accordo fiscale tra Svizzera e Italia."
+          },
+          {
+            "q": "Quanti casi di nuovi frontalieri sono stati trasmessi in relazione al nuovo accordo?",
+            "a": "Sono stati trasmessi 10'167 casi di nuovi frontalieri, coprendo il periodo dal 17 luglio 2023 al 31 dicembre 2024."
+          },
+          {
+            "q": "Qual è il prelievo ticinese per i nuovi frontalieri secondo il nuovo accordo?",
+            "a": "Per i nuovi frontalieri, il prelievo ticinese è pari all'80% delle imposte dovute. L'Italia tassa poi il reddito secondo le proprie aliquote, riconoscendo un credito d'imposta per la somma trattenuta in Svizzera."
+          },
+          {
+            "q": "Qual è il totale complessivo dei casi trasmessi al marzo 2025?",
+            "a": "Il totale comunicato era di circa 21'000 casi, che comprendevano i 10'167 nuovi frontalieri e circa 11'000 altri lavoratori italiani attivi in Ticino non inclusi nella definizione di frontaliere del nuovo accordo."
+          }
+        ]
+      },
+      "en": {
+        "title": "Cross-border worker data sent to Italy under new tax agreement",
+        "excerpt": "Ticino has sent data on approximately 21'000 cases of Italian workers.",
+        "body3": "## Taxation and mutual exchange\n\nFor new border crossers, the planned taxation came into force on January 1, 2024. The Canton of Ticino withholds at source 80% of the taxes due; Italy then taxes the income according to its own rates and recognizes a tax credit for the amount already withheld in Switzerland. Credit is used to avoid double taxation. 80% therefore refers to the share of taxes due levied by Ticino, not the rate applied to income.\n\nThe distinction provided for old border crossers is different: they are taxed only in Switzerland. In this sense, 100% refers to the country where taxation falls, not a 100% rate on income. The two percentages therefore do not describe the same thing: 80% concerns the withholding tax for new border crossers; 100% clarifies the territorial distribution of the tax for the old.\n\nArticle 7 of the Agreement stipulates that the data of employees shall be transmitted by 20 March of the year following the tax year. The deadline allows the two countries to apply their respective tax rules based on the information received. For the information framework Ticino is available the [Information sheet AFC](https://m4.ti.ch/fileadmin/DFE/DC/DOC-IF/nuovo_accordo/nuovo_accordo_foglio_informativo_FAQ.pdf).\n\n### Even commuters to Italy\n\nThe agreement provides for mutual exchange. Italy must provide Ticino with the data of workers residing in the canton who move daily to Italy for work. The source describes these numbers as decidedly contained and reports that these commuters on the contrary will also be subject to taxation in Switzerland. It does not specify the number of persons concerned.\n\nIt therefore does not document consequences on those issues. Similarly, the total of about 21,000 cases does not make it possible to derive how many individual workers there are, because it includes separate reports of the same person and temporary categories.\n\nThe material describes a transmission that has already taken place and the terms of the agreement applied to the data, not an update of the current number of border crossers. The most recent figure in the overall comparison quoted is that at 31 December 2024. To move from tax rules to estimating taxes and payroll, the [calcolatore fiscale](nav:calculator) is available.",
+        "faq": [
+          {
+            "q": "When did the tax agreement between Switzerland and Italy enter into force?",
+            "a": "The tax agreement has been in force since July 17, 2023. This step is part of the implementation of the new tax agreement between Switzerland and Italy."
+          },
+          {
+            "q": "How many cases of new cross-border commuters were transmitted in relation to the new agreement?",
+            "a": "10'167 cases of new cross-border commuters were transmitted, covering the period from July 17, 2023, to December 31, 2024."
+          },
+          {
+            "q": "What is the Ticino tax levy for new cross-border commuters under the new agreement?",
+            "a": "For new cross-border workers, Ticino withholding is equal to 80% of the taxes due. Italy then taxes the income according to its own rates, granting a tax credit for the amount withheld in Switzerland."
+          },
+          {
+            "q": "What is the total number of cases transmitted as of March 2025?",
+            "a": "The reported total was approximately 21'000 cases, which included the 10'167 new cross-border commuters and approximately 11'000 other Italian workers working in Ticino who were not included in the definition of cross-border commuter under the new agreement."
+          }
+        ]
+      },
+      "de": {
+        "title": "Grenzgängerdaten im Rahmen eines neuen Steuerabkommens nach Italien übermittelt",
+        "excerpt": "Der Kanton Tessin hat Daten zu rund 21'000 Fällen italienischer Arbeitnehmer übermittelt.",
+        "body3": "## Besteuerung und gegenseitiger Austausch\n\nFür neue Grenzgänger trat die geplante Besteuerung am 1.Januar 2024 in Kraft. Der Kanton Tessin behält an der Quelle 80% der geschuldeten Steuern ein; Italien besteuert dann das Einkommen nach seinen eigenen Sätzen und erkennt eine Steuergutschrift für den bereits in der Schweiz einbehaltenen Betrag an. Der Kredit dient der Vermeidung von Doppelbesteuerung. 80% beziehen sich also auf den vom Tessin zu entrichtenden Steueranteil, nicht auf Den Einkommensteuersatz.\n\nDie Unterscheidung für alte Grenzgänger ist unterschiedlich: sie werden nur in der Schweiz besteuert. In diesem Sinne bezieht sich 100% auf das Land, in das die Besteuerung fällt, nicht auf einen Einkommensteuersatz von 100%. Die beiden Prozentsätze beschreiben also nicht dasselbe: 80% beziehen sich auf die Quellensteuer für neue Grenzgänger; 100% verdeutlichen die territoriale Aufteilung der Besteuerung für alte.\n\nArtikel 7 des Abkommens sieht vor, dass die Daten der Arbeitnehmer bis zum 20.März des auf das Steuerjahr folgenden Jahres übermittelt werden. Die Frist ermöglicht es den beiden Ländern, ihre jeweiligen Steuerregeln auf der Grundlage der erhaltenen Informationen durchzusetzen. Für den Tessiner informationsrahmen steht das [Informationsblatt AFC](https://m4.ti.ch/fileadmin/DFE/DC/DOC-IF/nuovo_accordo/nuovo_accordo_foglio_informativo_FAQ.pdf).\n\n### Auch Pendler nach Italien\n\nDas Abkommen sieht einen gegenseitigen Austausch vor. Italien muss dem Tessin die Daten der im Kanton ansässigen Arbeitnehmer zur Verfügung stellen, die täglich zur Arbeit nach Italien ziehen. Die Quelle beschreibt diese Zahlen als deutlich zurückhaltend und berichtet, dass auch diese Pendler in der Schweiz besteuert werden. Es gibt nicht die Anzahl der betroffenen Personen an.\n\nEs dokumentiert daher keine Konsequenzen für diese Themen. Ebenso lässt sich aus der Gesamtzahl von rund 21'000 Fällen nicht ableiten, wie viele einzelne Arbeitnehmer es gibt, da sie unterschiedliche Berichte derselben Person und temporäre Kategorien enthalten.\n\nDas Material beschreibt eine bereits erfolgte Übermittlung und die Bedingungen der Vereinbarung, die auf die Daten angewendet wurden, und keine Aktualisierung der aktuellen Anzahl von Grenzgängern. Die jüngste Zahl des genannten gesamtvergleichs ist die vom 31.Dezember 2024. Um von den Steuerregeln zur Schätzung von Steuern und Gehaltsschecks überzugehen, steht der [calcolatore fiscale](nav:calculator) zur Verfügung.",
+        "faq": [
+          {
+            "q": "Wann ist das Steuerabkommen zwischen der Schweiz und Italien in Kraft getreten?",
+            "a": "Das Steuerabkommen ist seit dem 17. Juli 2023 in Kraft. Dieser Schritt ist Teil der Umsetzung des neuen Steuerabkommens zwischen der Schweiz und Italien."
+          },
+          {
+            "q": "Wie viele Fälle von neuen Grenzgängern wurden im Zusammenhang mit dem neuen Abkommen übermittelt?",
+            "a": "Es wurden 10 167 Fälle neuer Grenzgänger gemeldet, die den Zeitraum vom 17. Juli 2023 bis zum 31. Dezember 2024 abdecken."
+          },
+          {
+            "q": "Wie hoch ist die Tessiner Abgabe für neue Grenzgänger gemäß dem neuen Abkommen?",
+            "a": "Für neue Grenzgänger beträgt die Abgabe im Tessin 80 % der geschuldeten Steuern. Italien besteuert dann das Einkommen nach seinen eigenen Steuersätzen und gewährt eine Steuergutschrift für den in der Schweiz einbehaltenen Betrag."
+          },
+          {
+            "q": "Wie hoch ist die Gesamtzahl der bis März 2025 übermittelten Fälle?",
+            "a": "Die gemeldete Gesamtzahl betrug rund 21 000 Fälle, darunter die 10 167 neuen Grenzgänger und rund 11 000 weitere italienische Arbeitnehmer, die im Tessin tätig sind und nicht unter die Definition von Grenzgängern im neuen Abkommen fallen."
+          }
+        ]
+      },
+      "fr": {
+        "title": "Données sur les travailleurs frontaliers envoyées en Italie dans le cadre d’un nouvel accord fiscal",
+        "excerpt": "Le Tessin a envoyé des données sur environ 21'000 cas de travailleurs italiens.",
+        "faq": [
+          {
+            "q": "Quand l’accord fiscal entre la Suisse et l’Italie est-il entré en vigueur ?",
+            "a": "L'accord fiscal est en vigueur depuis le 17 juillet 2023. Cette étape s'inscrit dans la mise en œuvre du nouvel accord fiscal entre la Suisse et l'Italie."
+          },
+          {
+            "q": "Combien de cas de nouveaux frontaliers ont été transmis dans le cadre du nouvel accord ?",
+            "a": "10'167 cas de nouveaux frontaliers ont été transmis, couvrant la période du 17 juillet 2023 au 31 décembre 2024."
+          },
+          {
+            "q": "Quel est le prélèvement tessinois pour les nouveaux frontaliers selon le nouvel accord ?",
+            "a": "Pour les nouveaux frontaliers, le prélèvement tessinois s’élève à 80 % des impôts dus. L’Italie impose ensuite le revenu selon ses propres taux, en accordant un crédit d’impôt pour le montant retenu en Suisse."
+          },
+          {
+            "q": "Quel est le total global des cas transmis à la date de mars 2025 ?",
+            "a": "Le total communiqué était d’environ 21 000 cas, qui comprenaient les 10 167 nouveaux frontaliers et environ 11 000 autres travailleurs italiens actifs au Tessin non inclus dans la définition de frontalier du nouvel accord."
+          }
+        ]
+      }
+    },
+    "seo": {
+      "title": "Dati frontalieri inviati in Italia tramite nuovo accordo fiscale",
+      "description": "Il Ticino ha inviato dati su circa 21'000 casi di lavoratori italiani. I 10'167 casi di nuovi frontalieri coprono il periodo indicato dall'accordo.",
+      "keywords": "frontalieri, ticino, svizzera, italia, dati, inviati, tramite, nuovo",
+      "ogTitle": "Dati frontalieri inviati in Italia accordo fiscale",
+      "ogDescription": "Il Ticino ha inviato dati su circa 21'000 casi di lavoratori italiani.",
+      "headline": "Dati frontalieri inviati in Italia tramite nuovo accordo fiscale",
+      "breadcrumbName": "Fiscale Lavoro"
+    },
+    "author": {
+      "slug": "marco-ferrari",
+      "name": "Marco Ferrari",
+      "linkedinUrl": "https://www.linkedin.com/in/marco-ferrari-frontaliere-ticino/"
+    }
+  },
+  "attempts": 1,
+  "missingFields": [
+    "en.body1",
+    "en.body2",
+    "de.body1",
+    "de.body2",
+    "fr.body1",
+    "fr.body2",
+    "fr.body3"
+  ],
+  "createdAt": "2026-11-28T13:51:35.905Z",
+  "updatedAt": "2026-11-28T13:56:26.964Z",
+  "verifiedAt": "2026-11-28T13:51:35.905Z",
+  "translationState": "unverified-candidate",
+  "translationsVerified": false,
+  "unverifiedFields": [
+    "en.title",
+    "en.excerpt",
+    "en.body3",
+    "en.faq[0].q",
+    "en.faq[0].a",
+    "en.faq[1].q",
+    "en.faq[1].a",
+    "en.faq[2].q",
+    "en.faq[2].a",
+    "en.faq[3].q",
+    "en.faq[3].a",
+    "de.title",
+    "de.excerpt",
+    "de.body3",
+    "de.faq[0].q",
+    "de.faq[0].a",
+    "de.faq[1].q",
+    "de.faq[1].a",
+    "de.faq[2].q",
+    "de.faq[2].a",
+    "de.faq[3].q",
+    "de.faq[3].a",
+    "fr.title",
+    "fr.excerpt",
+    "fr.faq[0].q",
+    "fr.faq[0].a",
+    "fr.faq[1].q",
+    "fr.faq[1].a",
+    "fr.faq[2].q",
+    "fr.faq[2].a",
+    "fr.faq[3].q",
+    "fr.faq[3].a"
+  ]
+}
