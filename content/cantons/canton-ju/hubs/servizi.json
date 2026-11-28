@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-11-28T06:56:04.789Z",
-  "contentHash": "4db7faaa29e7ab92d92c07f05106aa5b8cd14e8e36668c0e1c4646a3f2867ff8",
+  "updatedAt": "2026-11-28T17:11:28.288Z",
+  "contentHash": "7963995f5925603e90736d9178a0c7921e5ee8d4df7b56955d91406c60106b0f",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -59,21 +59,6 @@
           "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
           "items": [
             {
-              "label": "Pharmacie du Centre",
-              "detail": "Delémont, Delémont",
-              "date": "2026-11-21T07:00:00.000Z"
-            },
-            {
-              "label": "Pharmacie Neukomm",
-              "detail": "Courgenay, Ajoie",
-              "date": "2026-11-21T07:00:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-27T17:30:00.000Z"
-            },
-            {
               "label": "Pharmacie du Jura",
               "detail": "Delémont, Delémont",
               "date": "2026-11-28T07:00:00.000Z"
@@ -87,6 +72,21 @@
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-11-28T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-29T09:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-29T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-29T17:30:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
@@ -175,7 +175,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-28T06:56:04.789Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     },
     "en": {
       "canton": "JU",
@@ -212,21 +212,6 @@
           "description": "Upcoming duty shifts published by the canton’s official service.",
           "items": [
             {
-              "label": "Pharmacie du Centre",
-              "detail": "Delémont, Delémont",
-              "date": "2026-11-21T07:00:00.000Z"
-            },
-            {
-              "label": "Pharmacie Neukomm",
-              "detail": "Courgenay, Ajoie",
-              "date": "2026-11-21T07:00:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-27T17:30:00.000Z"
-            },
-            {
               "label": "Pharmacie du Jura",
               "detail": "Delémont, Delémont",
               "date": "2026-11-28T07:00:00.000Z"
@@ -240,6 +225,21 @@
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-11-28T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-29T09:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-29T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-29T17:30:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
@@ -324,7 +324,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-28T06:56:04.789Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     },
     "de": {
       "canton": "JU",
@@ -361,21 +361,6 @@
           "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
           "items": [
             {
-              "label": "Pharmacie du Centre",
-              "detail": "Delémont, Delémont",
-              "date": "2026-11-21T07:00:00.000Z"
-            },
-            {
-              "label": "Pharmacie Neukomm",
-              "detail": "Courgenay, Ajoie",
-              "date": "2026-11-21T07:00:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-27T17:30:00.000Z"
-            },
-            {
               "label": "Pharmacie du Jura",
               "detail": "Delémont, Delémont",
               "date": "2026-11-28T07:00:00.000Z"
@@ -389,6 +374,21 @@
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-11-28T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-29T09:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-29T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-29T17:30:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
@@ -473,7 +473,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-28T06:56:04.789Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     },
     "fr": {
       "canton": "JU",
@@ -510,21 +510,6 @@
           "description": "Prochaines gardes publiées par le service officiel du canton.",
           "items": [
             {
-              "label": "Pharmacie du Centre",
-              "detail": "Delémont, Delémont",
-              "date": "2026-11-21T07:00:00.000Z"
-            },
-            {
-              "label": "Pharmacie Neukomm",
-              "detail": "Courgenay, Ajoie",
-              "date": "2026-11-21T07:00:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
-              "date": "2026-11-27T17:30:00.000Z"
-            },
-            {
               "label": "Pharmacie du Jura",
               "detail": "Delémont, Delémont",
               "date": "2026-11-28T07:00:00.000Z"
@@ -538,6 +523,21 @@
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-11-28T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-29T09:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-29T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-29T17:30:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
@@ -618,7 +618,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-28T06:56:04.789Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     }
   }
 }

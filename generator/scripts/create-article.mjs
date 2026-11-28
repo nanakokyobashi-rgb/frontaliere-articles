@@ -606,6 +606,7 @@ import {
   resolveCantonSectionGate,
 } from './lib/canton-section-profile.mjs';
 import { loadCantonFactsBrief } from './lib/canton-facts-brief.mjs';
+import { cantonEvergreenCodes, isCantonEvergreenSection } from './lib/canton-evergreen.mjs';
 import {
   CANTON_SOURCE_USER_AGENT,
   createHostThrottle,
@@ -4160,6 +4161,20 @@ const CANTON_FACTS_BRIEF = IS_CANTON
   })
   : '';
 
+// Pool evergreen di una sezione cantonale (WP3.10b): vuoto finche' la sezione
+// non e' in `CANTON_EVERGREEN_SECTIONS` (Remote Config, default vuoto = spento).
+// I temi sono i pilastri cantonali di `svizzera` ristretti al cantone (e ai
+// membri del gruppo); il pre-flight di copertura/Jaccard e il registro dei
+// rifiuti per sezione evitano i doppioni, anche contro gli articoli di `svizzera`.
+function cantonEvergreenFallbackTopics() {
+  if (!IS_CANTON || !isCantonEvergreenSection(SECTION_NAME)) return [];
+  const codes = new Set(cantonEvergreenCodes({
+    canton: SECTION_PROFILE.canton,
+    members: cantonSectionProfile(SECTION_NAME).members,
+  }));
+  return buildStructuralEvergreenTopicsSvizzera().filter((topic) => codes.has(topic.cantonCode));
+}
+
 // ── --dry-run-scan ──
 // Misura una sezione senza toccarla: scansione delle fonti, recency e quota
 // undated, gate di ancora e topicale, ledger URL, memo del topic-gate, dedup
@@ -5199,6 +5214,9 @@ function buildStructuralEvergreenTopicsSvizzera() {
   for (const c of CANTONI) {
     for (const p of PILLARS) {
       out.push({
+        // Il codice permette di restringere il pool a una sezione cantonale
+        // (cantonEvergreenFallbackTopics, WP3.10b) senza rileggere la keyword.
+        cantonCode: c.code,
         keyword: p.k.split('%c').join(`canton ${c.name}`),
         angle: p.a.split('%C').join(`nel Cantone di ${c.name}`),
       });
@@ -10312,7 +10330,9 @@ async function fetchPageContent(url, sourceContext = null) {
     // ha prosciugato la sezione.
     const domainLine = IS_FRONTALIERE
       ? 'Usa solo fatti verificati e stabili sul dominio frontalieri Ticino-Italia.'
-      : 'Usa solo fatti verificati e stabili sul dominio svizzero a scala nazionale/cantonale (fiscalità, previdenza, lavoro, alloggio, permessi, istituzioni federali). NON restringere al Ticino né al caso frontaliere.';
+      : IS_CANTON
+        ? `Usa solo fatti verificati e stabili sul dominio federale e cantonale che vale per il Canton ${SECTION_PROFILE.cantonName}: se un dato specifico del cantone non e' nei fatti verificati, descrivi la procedura e l'ufficio competente senza cifre. NON restringere al Ticino.`
+        : 'Usa solo fatti verificati e stabili sul dominio svizzero a scala nazionale/cantonale (fiscalità, previdenza, lavoro, alloggio, permessi, istituzioni federali). NON restringere al Ticino né al caso frontaliere.';
     return `[ARTICOLO EVERGREEN SEO]\nKeyword target: ${keyword}\nAngolo editoriale: ${angle}\n\nGenera un articolo approfondito e pratico ottimizzato per questa keyword long-tail. ${domainLine} Se servono esempi, presentali come scenari ipotetici, senza nomi, aziende, città o importi specifici inventati.\n\n${evergreenFactsBriefFor(SECTION_NAME)}\n\n⚠️ I FATTI VERIFICATI qui sopra DEVONO corrispondere ESATTAMENTE (lo stesso ground truth è usato dal fact-checker, che blocca l'articolo se diverghi). Per dettagli NON coperti, attieniti a nozioni stabili e generali del dominio; se un dato specifico non è certo, ometti o usa formulazioni qualitative invece di inventare cifre/date precise.`;
   }
   // Un quirk `paywall: title+lead` è un contratto di contenuto pubblico: il
@@ -23216,11 +23236,13 @@ async function main() {
       // prima del fallback evergreen; il giro successivo puo' scegliere fonti
       // e tempi diversi. Non si abbassa nessun gate e non si pubblica slop.
       await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
-    } else if (!newsSuccess && !candidateSuccess && !SECTION_PROFILE.evergreenPool) {
+    } else if (!newsSuccess && !candidateSuccess && !SECTION_PROFILE.evergreenPool && cantonEvergreenFallbackTopics().length === 0) {
       // Sezione cantonale: nessun pool evergreen generico per costruzione (i
       // suoi temi sono frontalieri/Ticino o nazionali; gli evergreen del
       // cantone sono gli hub tematici di P10). Nessuna news utilizzabile = nessun
       // articolo in questo run, dichiarato come le altre ragioni legittime.
+      // Salvo le sezioni in `CANTON_EVERGREEN_SECTIONS` (default vuoto), che
+      // arrivano al ramo evergreen sotto con il pool dei propri pilastri.
       console.error(`CANTON_EVERGREEN_POOL_DISABLED section=${SECTION_NAME} — nessuna news utilizzabile e nessun pool evergreen per le sezioni cantonali: nessun articolo in questo run.`);
       finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, `No usable news for canton section ${SECTION_NAME} (no evergreen pool by construction)`] });
       // Ragione legittima #7 di dieci — vedi EXIT_NO_ARTICLE_DECLARED. Esiste
@@ -23256,7 +23278,9 @@ async function main() {
       // «Tutte le keyword evergreen risultano gia' coperte dal pre-flight» —
       // due dei quattro slot cron orari sprecati e la catena self-trigger
       // interrotta a ogni anello svizzero. Vedi il commento sul builder.
-      const topicPool = IS_FRONTALIERE
+      const topicPool = IS_CANTON
+        ? cantonEvergreenFallbackTopics()
+        : IS_FRONTALIERE
         ? [...PRIORITY_EVERGREEN_TOPICS, ...buildDynamicEvergreenTopics(), ...buildStructuralEvergreenTopics()]
         : [
           ...PRIORITY_EVERGREEN_TOPICS_SVIZZERA,
@@ -23381,9 +23405,11 @@ async function main() {
         }
         try {
           const topic = selectedTopic;
-          const isStaticTopic = IS_FRONTALIERE
-            ? PRIORITY_EVERGREEN_TOPICS.includes(topic)
-            : PRIORITY_EVERGREEN_TOPICS_SVIZZERA.includes(topic);
+          const isStaticTopic = IS_CANTON
+            ? false
+            : IS_FRONTALIERE
+              ? PRIORITY_EVERGREEN_TOPICS.includes(topic)
+              : PRIORITY_EVERGREEN_TOPICS_SVIZZERA.includes(topic);
           RUN_REPORT.selectedArticleType = isStaticTopic ? 'evergreen_static' : 'evergreen_dynamic';
           RUN_REPORT.selectedSource = 'evergreen';
           RUN_REPORT.selectedUrl = `evergreen://${encodeURIComponent(topic.keyword)}`;

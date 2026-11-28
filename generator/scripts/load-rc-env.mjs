@@ -486,6 +486,15 @@ export const RC_TO_ENV = {
   // ALLOW_EMPTY_RC_KEYS perche' vuoto e assente vogliono dire la stessa cosa.
   CANTON_HIGH_CADENCE_SECTIONS: ['CANTON_HIGH_CADENCE_SECTIONS'],
 
+  // Pool evergreen delle sezioni cantonali (WP3.10b): le sezioni (id `canton-ur`,
+  // codici `UR` o `all`) che, SOLO senza una notizia utilizzabile, ripiegano su
+  // un articolo evergreen del proprio cantone invece di non produrre nulla.
+  // Assente o vuoto = nessuna sezione = il comportamento di prima: il default
+  // locale sicuro. Letto da generator/scripts/lib/canton-evergreen.mjs; la
+  // chiave NON sta in ALLOW_EMPTY_RC_KEYS perche' vuoto e assente vogliono
+  // dire la stessa cosa.
+  CANTON_EVERGREEN_SECTIONS: ['CANTON_EVERGREEN_SECTIONS'],
+
   // Kill-switch delle sezioni articolo cantonali (piano «sezioni articoli per
   // cantone», D9). Il rollout lo decide il registro committato
   // sections/registry.json; questo parametro SPEGNE soltanto: le sezioni
@@ -666,6 +675,7 @@ export const EXPECTED_ABSENT_RC_KEYS = new Set([
   'ENABLE_OMNIROUTE_FALLBACK',
   'CANTON_ARTICLE_SECTIONS_KILL',
   'CANTON_HIGH_CADENCE_SECTIONS',
+  'CANTON_EVERGREEN_SECTIONS',
   'ASSISTED_APPLICATION_PAYMENT_PROVIDER',
   'SUMUP_API_KEY',
   'SERVER_META_CAPI_ACCESS_TOKEN',

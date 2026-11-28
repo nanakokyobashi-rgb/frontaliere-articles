@@ -325,7 +325,7 @@ test('reset-evergreen-strikes ricostruisce il pool COMPLETO, non solo le liste v
 // corretta che nessuno chiama passa ogni test sulla funzione.
 
 test('il ramo `svizzera` di topicPool usa il builder strutturale nazionale', () => {
-  const at = SRC.indexOf('const topicPool = IS_FRONTALIERE');
+  const at = SRC.indexOf('const topicPool = IS_CANTON');
   assert.notEqual(at, -1, 'assegnazione di topicPool non trovata — aggiornare questo guard');
   const blocco = SRC.slice(at, SRC.indexOf('const weekNum', at));
   assert.ok(
@@ -334,7 +334,8 @@ test('il ramo `svizzera` di topicPool usa il builder strutturale nazionale', () 
   );
   // E il pool frontaliere non deve ereditare quello nazionale (ne' viceversa):
   // sono due domini, e mescolarli e' il difetto del 2026-07-21 al contrario.
-  const ramoFrontaliere = blocco.slice(blocco.indexOf('?'), blocco.indexOf(': ['));
+  const dalFrontaliere = blocco.slice(blocco.indexOf('IS_FRONTALIERE'));
+  const ramoFrontaliere = dalFrontaliere.slice(dalFrontaliere.indexOf('?'), dalFrontaliere.indexOf(': ['));
   assert.ok(
     !ramoFrontaliere.includes('Svizzera'),
     'il ramo frontaliere pesca dal pool nazionale',

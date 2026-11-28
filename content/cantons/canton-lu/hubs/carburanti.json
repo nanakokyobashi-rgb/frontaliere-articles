@@ -4,12 +4,12 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-11-27T20:47:55.924Z",
-  "contentHash": "48fe4fd965e684f024d6044d3cc579234727ad9c0c8912e555fbd9632ed93adf",
+  "updatedAt": "2026-11-28T17:11:28.288Z",
+  "contentHash": "32b34f28a030bbd294db3bb64c73a68ed04f0700bc2995baee591127cb093082",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-11-26T17:17:35.133Z",
+      "updatedAt": "2026-11-27T16:58:07.780Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-12-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-26T17:17:35.133Z"
+          "updatedAt": "2026-11-27T16:58:07.780Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Lucerna prova corsie bus e modifiche alle fermate",
+          "url": "/articoli-lucerna/lucerna-prova-corsie-autobus/",
+          "excerpt": "Da metà dicembre il Cantone prova corsie bus, una corsia riservata agli autobus e modifiche alle fermate Weggismatt, Seefeldstrasse e St. Klemens.",
+          "date": "2026-11-28T14:42:57.208Z"
+        },
         {
           "title": "Esperimento viario nel centro di Lucerna dal dicembre 2026",
           "url": "/articoli-lucerna/esperimento-viario-lucerna-centro/",
@@ -82,12 +88,6 @@
           "url": "/articoli-lucerna/nav-kita-proroga-fino-2030/",
           "excerpt": "Il Normalarbeitsvertrag per le Kitas è prorogato fino al 30 giugno 2030 per monitorare le violazioni dei salari minimi, con controlli nel 2025 e 2026.",
           "date": "2026-11-07T10:23:39.187Z"
-        },
-        {
-          "title": "Nuovo semaforo St. Klemens per puntualità bus a Ebikon",
-          "url": "/articoli-lucerna/semal-st-klemens-ebikon/",
-          "excerpt": "Test alla fermata St. Klemens sulla strada cantonale verso Lucerna; decisione prevista a fine estate 2027 dopo consultazione.",
-          "date": "2026-11-07T09:26:29.750Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-27T20:47:55.924Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     },
     "en": {
       "canton": "LU",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-26T17:17:35.133Z"
+          "updatedAt": "2026-11-27T16:58:07.780Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Lucerne tests bus lanes and stop changes",
+          "url": "/en/lucerne-articles/lucerne-tests-bus-lane-measures/",
+          "excerpt": "From mid-December, the Canton is testing bus lanes, a lane reserved for buses, and changes to the Weggismatt, Seefeldstrasse and St. Klemens stops.",
+          "date": "2026-11-28T14:42:57.208Z"
+        },
         {
           "title": "Road experiment in central Lucerne from December 2026",
           "url": "/en/lucerne-articles/lucerne-city-traffic-experiment/",
@@ -169,12 +175,6 @@
           "url": "/en/lucerne-articles/nav-kita-extension-until-2030/",
           "excerpt": "The Normalarbeitsvertrag for childcare centers has been extended until June 30, 2030, to monitor violations of minimum wages, with checks in 2025 and 2026.",
           "date": "2026-11-07T10:23:39.187Z"
-        },
-        {
-          "title": "New St. Klemens traffic light for bus punctuality in Ebikon",
-          "url": "/en/lucerne-articles/st-klemens-ebikon-traffic-light/",
-          "excerpt": "Test at the St. Klemens stop on the cantonal road toward Lucerne; decision expected at the end of summer 2027 after consultation.",
-          "date": "2026-11-07T09:26:29.750Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-27T20:47:55.924Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     },
     "de": {
       "canton": "LU",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-26T17:17:35.133Z"
+          "updatedAt": "2026-11-27T16:58:07.780Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Luzern testet Busspuren und Änderungen an Haltestellen",
+          "url": "/de/luzern-artikel/luzern-testet-massnahmen-fuer-busse/",
+          "excerpt": "Seit Mitte Dezember testet der Kanton Busspuren, eine ausschließlich für Busse reservierte Spur und Änderungen an den Haltestellen Weggismatt, Seefeldstrasse und St. Klemens.",
+          "date": "2026-11-28T14:42:57.208Z"
+        },
         {
           "title": "Verkehrsexperiment im Zentrum von Luzern ab Dezember 2026",
           "url": "/de/luzern-artikel/verkehrsexperiment-luzern-zentrum/",
@@ -256,12 +262,6 @@
           "url": "/de/luzern-artikel/nav-kita-verlangerung-bis-2030/",
           "excerpt": "Der Normalarbeitsvertrag für Kitas wird bis zum 30. Juni 2030 verlängert, um Verstöße gegen die Mindestlohnvorschriften zu überwachen, mit Kontrollen in den Jahren 2025 und 2026.",
           "date": "2026-11-07T10:23:39.187Z"
-        },
-        {
-          "title": "Neue Ampel St. Klemens für Bus-Pünktlichkeit in Ebikon",
-          "url": "/de/luzern-artikel/semafor-st-klemens-ebikon/",
-          "excerpt": "Test an der Haltestelle St. Klemens an der Kantonsstrasse nach Luzern; Entscheidung nach Rücksprache für Spätsommer 2027 geplant.",
-          "date": "2026-11-07T09:26:29.750Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-27T20:47:55.924Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     },
     "fr": {
       "canton": "LU",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-11-26T17:17:35.133Z"
+          "updatedAt": "2026-11-27T16:58:07.780Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Lucerne teste des voies de bus et des modifications aux arrêts",
+          "url": "/fr/articles-lucerne/lucerne-teste-mesures-bus/",
+          "excerpt": "À partir de la mi-décembre, le canton teste des voies de bus, une voie réservée aux autobus et des modifications aux arrêts Weggismatt, Seefeldstrasse et St. Klemens.",
+          "date": "2026-11-28T14:42:57.208Z"
+        },
         {
           "title": "Expérience de circulation dans le centre de Lucerne à partir de décembre 2026",
           "url": "/fr/articles-lucerne/experimentation-routiere-lucerne-centre/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-lucerne/nav-kita-prolongation-jusqua-2030/",
           "excerpt": "Le contrat-type de travail pour les Kitas est prolongé jusqu'au 30 juin 2030 afin de surveiller les violations des salaires minimaux, avec des contrôles en 2025 et 2026.",
           "date": "2026-11-07T10:23:39.187Z"
-        },
-        {
-          "title": "Nouveau feu de signalisation à St. Klemens pour la ponctualité des bus à Ebikon",
-          "url": "/fr/articles-lucerne/semafore-st-klemens-ebikon/",
-          "excerpt": "Test à l'arrêt St. Klemens sur la route cantonale en direction de Lucerne ; décision prévue à la fin de l'été 2027 après consultation.",
-          "date": "2026-11-07T09:26:29.750Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-27T20:47:55.924Z"
+      "updatedAt": "2026-11-28T17:11:28.288Z"
     }
   }
 }

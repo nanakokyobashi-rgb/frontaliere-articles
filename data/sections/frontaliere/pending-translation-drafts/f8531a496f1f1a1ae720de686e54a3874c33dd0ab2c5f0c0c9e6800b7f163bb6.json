@@ -1,0 +1,241 @@
+{
+  "schema": 1,
+  "section": "frontaliere",
+  "articleId": "lavoro-svizzera-permessi-frontalieri",
+  "sourceUrl": "https://www.biancolavoro.it/lavorare-in-svizzera-guida-aggiornata-a-permessi-stipendi-e-frontalieri/",
+  "sourceContext": {
+    "headline": "Lavorare in Svizzera: Guida aggiornata a permessi, stipendi e frontalieri - Bianco Lavoro",
+    "url": "https://www.biancolavoro.it/lavorare-in-svizzera-guida-aggiornata-a-permessi-stipendi-e-frontalieri/",
+    "source": "news",
+    "relatedHeadlines": [
+      {
+        "headline": "Frontalieri in Svizzera: telelavoro al 25% e rischi oltre soglia - Commercialista Telematico",
+        "source": "news",
+        "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNZFUzVkV0ZWFIZlNWZXFkOTNLRUVlZjI1Nk1rTlU4a1hkTkJVRDdxNUIxUlFHZjFRSnJyNU53UmFCWlF2TWhjbEwzSktqUU9kdURzdzJBWFhLdjBCMV9Galg3OUd0V3NCd1MzUzhhUDI3UHExSlB2RTljaGZhQUpZNTQ0WEJKVC0tWXFkS2xQMC1IcjZfMFpmNmxaR0pmVmswZnE3VEIwZ1g0OGxnbTJ4QnRGcmE?oc=5"
+      },
+      {
+        "headline": "Ticino: i frontalieri calano. Ma in Svizzera italiana ci sono paesi dove un lavoratore su due arriva dal confine - Espansione TV",
+        "source": "news",
+        "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxPcVhWbG83Tm82OU1TLXZ5S01QZFJNMkJWUW1qdEtGOEs4V3ZPeDJkekF4TVAwZ19iMFo2SldFcnlzQmdsLXVXQ0NBTXM4OVVkUzFKdTVqNzdva1FUMm0wcVhlYXBFQ3BhcTFlempnV2ZnUDF3ZHh3d1JQYmNzNWphRUYtUEZwb3JxTUNBX3lNTEZSaE1BYU9lcHkyRmZ0YnJMb3RWYmxZRzJxcnBwdWpxNU1CYm5keU4yUzRIV2RmcmNNNE4zSi1rR0Qxcll4Tlh3RUIwemM1blBfRXM0bXllc09TZUM?oc=5"
+      },
+      {
+        "headline": "Vecchi e nuovi frontalieri fiscali: differenze, tabelle e calcolatori ufficiali - CambiaValute.ch",
+        "source": "news",
+        "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxObE1fTHA4bVNlcUNZX2hFaEI0SVdkMS1YUi14V2Vac0NfMjgwZFA4TE9nZVRxY2hEWXpMdFU1UFJPY3JfM1lTdEtZR24xYXE3aDNWWXVhbUplMnB2dnlSc3B0eC1xYnV3bDdkcjh3ZEVwZTFDVmF0QUhJd1phX08wdEt6cFEyRmpEaDN6X1N0aFFBeEJFbE52Mm01enVoWHFhUHFyMXFXbkhBZXFDdExualVSSFg?oc=5"
+      }
+    ],
+    "_discoveryId": "discovery::news::lavorare in svizzera: guida aggiornata a permessi, stipendi e frontalieri - bianco lavoro",
+    "_discoveryCandidate": {
+      "headline": "Lavorare in Svizzera: Guida aggiornata a permessi, stipendi e frontalieri - Bianco Lavoro",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPYlJuQ3d0TkhvRklvbmhLb2lKMHZhOTZRTWplQUxNNUpfVUQ1UjFHNnFXbGczTmlZRzY4TWNDX0VsV3llZ2NsWDdHamlhREpRQWxuaWwyX0NJR0FkRjExY3B1bjZxZXhtUDk2SUw5eWZNUUFZdXJCdG11RWFvRjNVQTR0VXNBY0g1MjlNZnQ5YUJIU2JVTTBpSVBkc3NLNk9vakE?oc=5",
+      "source": "news",
+      "meta": {
+        "ageHours": 7185.3899225,
+        "sourceUrl": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPYlJuQ3d0TkhvRklvbmhLb2lKMHZhOTZRTWplQUxNNUpfVUQ1UjFHNnFXbGczTmlZRzY4TWNDX0VsV3llZ2NsWDdHamlhREpRQWxuaWwyX0NJR0FkRjExY3B1bjZxZXhtUDk2SUw5eWZNUUFZdXJCdG11RWFvRjNVQTR0VXNBY0g1MjlNZnQ5YUJIU2JVTTBpSVBkc3NLNk9vakE?oc=5",
+        "sourceName": "Bianco Lavoro",
+        "publisherHost": "biancolavoro.it",
+        "pubDate": "Mon, 02 Feb 2026 08:00:00 GMT",
+        "seed": "frontalieri Ticino permesso G"
+      },
+      "_scoreBreakdown": {
+        "stage": "discovery",
+        "source": "news",
+        "rawScore": 100,
+        "confidence": 0.7,
+        "freshnessFactor": 1,
+        "finalScore": 70,
+        "cluster": "fiscale"
+      },
+      "_discoveryScore": 70
+    },
+    "_publisherHost": "biancolavoro.it",
+    "_needsGoogleNewsDecode": true,
+    "_batchReason": "Fornisce una guida aggiornata e pratica su permessi e stipendi, essenziale per chi lavora in Svizzera. È un contenuto di utilità diretta per la comunità frontaliere.",
+    "_resolvedFromGoogleNewsRss": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPYlJuQ3d0TkhvRklvbmhLb2lKMHZhOTZRTWplQUxNNUpfVUQ1UjFHNnFXbGczTmlZRzY4TWNDX0VsV3llZ2NsWDdHamlhREpRQWxuaWwyX0NJR0FkRjExY3B1bjZxZXhtUDk2SUw5eWZNUUFZdXJCdG11RWFvRjNVQTR0VXNBY0g1MjlNZnQ5YUJIU2JVTTBpSVBkc3NLNk9vakE?oc=5"
+  },
+  "pageContent": "La Svizzera rimane, anno dopo anno, la \"Terra Promessa\" per moltissimi lavoratori italiani. La vicinanza geografica, la stabilità economica e, soprattutto, stipendi che possono essere dalle due alle quattro volte più alti di quelli italiani, la rendono una meta ambitissima. Tuttavia, trasferirsi o fare il frontaliere non è semplice come prendere un treno per Chiasso. Ci sono regole rigide, un costo della vita tra i più alti al mondo e, recentemente, nuove dinamiche fiscali che hanno cambiato le carte in tavola per i frontalieri. In questa guida analizziamo tutto ciò che devi sapere per fare il grande passo senza brutte sorprese. \"In Svizzera la meritocrazia è legge. Se vali, vieni pagato. Ma attenzione: qui nessuno ti regala nulla e la competizione è altissima, specialmente se non parli tedesco o francese.\" I Permessi di Lavoro: Il sistema a lettere La Svizzera non è nell'UE, ma grazie agli accordi di libera circolazione, per noi italiani è relativamente semplice entrare. Tuttavia, per restare e lavorare, serve un permesso specifico rilasciato dai Cantoni. Il sistema è diviso in \"lettere\": Permesso L (Dimora temporanea): Per contratti di lavoro brevi (da 3 a 12 mesi). È legato alla durata del contratto. Permesso B (Dimora): Il più comune per chi si trasferisce. Dura 5 anni ed è concesso se hai un contratto di lavoro a tempo indeterminato o di almeno 12 mesi. Permesso C (Domicilio): Si ottiene dopo 5 o 10 anni di residenza ininterrotta (con permesso B). Ti dà diritti quasi pari ai cittadini svizzeri (eccetto il voto). Permesso G (Frontalieri): Riservato a chi lavora in Svizzera ma risiede in Italia (nella zona di confine) e rientra a casa almeno una volta alla settimana (solitamente ogni giorno). ⚠️ Importante: Il contratto viene prima Non puoi ottenere un permesso di residenza \"sulla fiducia\". Prima devi trovare un datore di lavoro che ti assuma. Una volta firmato il contratto, sarà l'azienda o tu stesso a richiedere il permesso all'ufficio della migrazione cantonale. Il Nodo \"Frontalieri\": Vecchi vs Nuovi Se vivi in Lombardia o Piemonte, l'opzione \"Frontaliere\" (lavoro in CH, vivo in IT) è sempre stata vantaggiosa. Ma attenzione: con l'entrata in vigore definitiva del Nuovo Accordo Fiscale Italia-Svizzera, la situazione è cambiata. La differenza fondamentale Oggi esistono due categorie di lavoratori frontalieri, con trattamenti fiscali molto diversi: Categoria Periodo di assunzione Tassazione \"Vecchi\" Frontalieri Assunti prima del 17 luglio 2023 (data spartiacque transitoria) Pagano le tasse solo in Svizzera (alla fonte, molto basse). In Italia non devono dichiarare nulla del reddito svizzero. È il regime \"d'oro\". \"Nuovi\" Frontalieri Assunti dopo la data di entrata in vigore del nuovo accordo Doppia tassazione concorrente. Pagano le tasse in Svizzera (fino all'80% dell'imposta) E pagano le tasse anche in Italia (IRPEF), detraendo quanto già pagato in Svizzera. Cosa significa per i nuovi arrivati? Significa che il vantaggio economico si è ridotto rispetto al passato, perché sarai soggetto alle aliquote IRPEF italiane. Tuttavia, lo stipendio svizzero lordo è talmente alto che, anche con le nuove tasse, il netto in tasca rimane spesso superiore a quello di un lavoro analogo a Milano o Torino. Quanto si guadagna? Stipendi e Costo della Vita Parliamo di numeri. In Svizzera non esiste un salario minimo nazionale (tranne in alcuni cantoni come Ticino, Ginevra, Neuchâtel, Giura e Basilea Città). Tuttavia, i contratti collettivi garantiscono paghe dignitose. Tabelle Salariali Indicative (Lorde Mensili - su 13 mensilità) Nota: Gli stipendi nella Svizzera Tedesca (Zurigo, Basilea) sono generalmente più alti del 15-20% rispetto al Canton Ticino. Professione Stipendio Medio (Ticino) Stipendio Medio (Zurigo/Berna) Cameriere / Personale Pulizie CHF 3.200 - 3.800 CHF 3.800 - 4.500 Muratore / Operaio Edile CHF 4.500 - 5.200 CHF 5.500 - 6.500 Infermiere CHF 5.000 - 6.000 CHF 6.500 - 8.000 Ingegnere / IT Developer CHF 6.500 - 8.500 CHF 8.500 - 12.000+ Impiegato Amministrativo CHF 4.000 - 5.000 CHF 5.500 - 7.000 Il \"Salasso\" del Costo della Vita Guadagnare 4.000 Franchi (circa 4.200 Euro) sembra un sogno, ma devi considerare le uscite fisse se decidi di vivere lì (non frontaliere): Cassa Malati (Sanità): In Svizzera non esiste la sanità gratuita. Devi obbligatoriamente stipulare un'assicurazione privata. Costo medio: 300-450 CHF al mese a persona. Affitto: Un bilocale a Lugano costa circa 1.200-1.500 CHF. A Zurigo si sale facilmente a 2.000-2.500 CHF. Spesa e Svago: La carne costa il triplo che in Italia. Una pizza e birra costano facilmente 35-40 CHF. 💡 Consiglio da Insider Se vuoi imparare il tedesco, la Svizzera Tedesca offre opportunità di carriera incredibili. A Zurigo o Basilea (settore farmaceutico) gli stipendi per figure qualificate sono i più alti d'Europa. Il Ticino è ottimo per iniziare perché si parla italiano, ma il mercato è più saturo e gli stipendi sono più bassi (il cosiddetto \"effetto frontaliere\" che abbassa le paghe). Dove trovare lavoro Il passaparola funziona ancora, ma i portali online sono imprescindibili. Ecco i \"Big 3\" da monitorare ogni mattina: Jobs.ch: Il sito numero 1 in Svizzera. Tutti.ch: Ottimo per lavori manuali, edilizia e servizi (simile a Subito.it). LinkedIn: Fondamentale per profili corporate, finanza e IT. Agenzie Interinali: Adecco, Manpower e Randstad sono molto potenti in Svizzera. Iscriversi alle loro filiali locali è un ottimo passo. Conclusione: Bilancio Finale Lavorare in Svizzera conviene ancora? Sì, ma con riserva. Conviene se sei un profilo specializzato (Sanità, IT, Ingegneria, Finanza) o un artigiano esperto. In questi casi, il potere d'acquisto rimane superiore all'Italia anche al netto dei costi. Se invece cerchi lavori a bassa qualifica, fai bene i conti: tra affitto e Cassa Malati, il margine di risparmio potrebbe essere più sottile di quanto pensi. La Svizzera premia chi è preciso, puntuale e qualificato. Se ti riconosci in questo profilo, prepara il CV (rigorosamente con foto professionale e data di nascita) e inizia a mandare candidature.",
+  "sourceDate": "2026-02-02T20:59:13.000Z",
+  "sourceTitle": "Lavorare in Svizzera: Guida aggiornata a permessi, stipendi e frontalieri\nLavorare in Svizzera: Guida aggiornata a permessi, stipendi e frontalieri\nLavorare in Svizzera: Guida aggiornata a permessi, stipendi e frontalieri",
+  "data": {
+    "id": "lavoro-svizzera-permessi-frontalieri",
+    "category": "pratico",
+    "image": "lugano-view.webp",
+    "hasCalculator": true,
+    "imagePrompt": "Photorealistic DSLR image of a view over Lugano, Ticino, in clear daylight. The scene should feel authentic and non-AI generated.",
+    "imageAlt": {
+      "it": "Vista sul Lago di Lugano dal Ticino, luogo di lavoro transfrontaliero.",
+      "en": "View of Lake Lugano from Ticino, a location for cross-border work.",
+      "de": "Aussicht auf Luganersee aus dem Tessin, Ort der grenzüberschreitenden Arbeit.",
+      "fr": "Vue sur le lac de Lugano depuis le Tessin, lieu de travail transfrontalier."
+    },
+    "slugs": {
+      "it": "lavoro-svizzera-permessi-frontalieri",
+      "en": "switzerland-work-permits-frontaliers",
+      "de": "schweiz-arbeit-bewilligungen-grenzganger",
+      "fr": "travail-suisse-permis-frontaliers"
+    },
+    "content": {
+      "it": {
+        "title": "Lavorare in Svizzera: permessi, stipendi e frontalieri",
+        "excerpt": "Bianco Lavoro indica il 17 luglio 2023 come data spartiacque; i permessi sono L, B, C e G, con differenze salariali del 15-20% in più in Svizzera tedesca rispetto al Canton Ticino.",
+        "body1": "## In breve\n- Bianco Lavoro indicava il 17 luglio 2023 come data spartiacque.\n- Per i nuovi frontalieri citava fino all'80% dell'imposta in Svizzera.\n- La guida distingue i permessi L, B, C e G.\n\n## Fatti chiave\n- Permesso L: contratti brevi, da 3 a 12 mesi\n- Permesso B: 5 anni, con contratto indeterminato o di almeno 12 mesi\n- Permesso C: dopo 5 o 10 anni di residenza ininterrotta\n- Permesso G: residenza in Italia nella zona di confine e rientro almeno settimanale\n- Differenza salariale generale: 15-20% in più in Svizzera tedesca rispetto al Canton Ticino\n\nIl 17 luglio 2023 è la data che Bianco Lavoro indicava come spartiacque transitorio per la distinzione fiscale tra vecchi e nuovi frontalieri. Nella ricostruzione della guida, pubblicata nel febbraio 2026, la Svizzera restava una destinazione ambita per i lavoratori italiani grazie alla vicinanza geografica, alla stabilità economica e a stipendi che potevano essere da due a quattro volte quelli italiani. Il testo avvertiva però che il confronto non si esaurisce nella cifra lorda: il costo della vita è elevato e trasferirsi comporta spese diverse da quelle di chi mantiene la residenza in Italia.\n\n### Permessi e primo contratto\n\nLa guida ricorda che la Svizzera non fa parte dell'Unione europea, ma che gli accordi di libera circolazione rendono relativamente semplice l'ingresso per gli italiani. Per restare e lavorare serve comunque un permesso specifico rilasciato dai Cantoni. Il permesso L è legato a contratti da 3 a 12 mesi. Il B, indicato come quello più comune per chi si trasferisce, dura cinque anni ed è concesso con un contratto a tempo indeterminato o di almeno dodici mesi. Il C arriva dopo cinque o dieci anni di residenza ininterrotta con permesso B; attribuisce diritti quasi pari a quelli dei cittadini svizzeri, fatta eccezione per il voto.\n\nIl permesso G riguarda invece chi lavora in Svizzera e risiede in Italia, nella zona di confine, rientrando a casa almeno una volta alla settimana, di solito ogni giorno. Questa descrizione si riferisce al permesso di frontaliere; i requisiti fiscali collegati al Nuovo Accordo Frontalieri sono precisati più avanti.\n\nBianco Lavoro sottolinea inoltre che il permesso di residenza non si ottiene senza un'assunzione. Prima occorre trovare un datore di lavoro; dopo la firma del contratto, la richiesta va presentata all'ufficio della migrazione cantonale dall'azienda o dal lavoratore. La distinzione tra permessi è quindi legata alla durata del contratto e alla scelta di vivere in Svizzera o in Italia, non soltanto alla professione. Sul piano fiscale, la guida separa i vecchi frontalieri, assunti prima della data indicata, dai nuovi e attribuisce loro trattamenti diversi. Questa distinzione, tuttavia, va letta entro il perimetro effettivo dell'accordo, non come una regola applicabile automaticamente a chiunque lavori oltre confine.",
+        "body2": "### Il regime fiscale dipende anche dai requisiti di confine\n\nLa definizione di frontaliere nel linguaggio comune non basta, da sola, a stabilire quale trattamento fiscale si applichi. La [scheda informativa AFC](https://m4.ti.ch/fileadmin/DFE/DC/DOC-IF/nuovo_accordo/nuovo_accordo_foglio_informativo_FAQ.pdf) circoscrive le categorie dei vecchi e nuovi frontalieri ai lavoratori che risiedono in un Comune entro 20 chilometri dal confine, lavorano in Canton Ticino, Grigioni o Vallese e rientrano quotidianamente in Italia. La guida descrive il permesso G con un rientro almeno settimanale; per il perimetro fiscale dell'accordo, invece, il requisito indicato è il rientro ogni giorno. Sono due descrizioni con funzioni diverse e non vanno sovrapposte.\n\nPer i lavoratori che rientrano in quel perimetro, la guida distingue chi è tassato in Svizzera (per i nuovi frontalieri anche in Italia, con credito d'imposta) da chi è soggetto anche all'imposta italiana sul reddito. Per i nuovi frontalieri, il credito d'imposta per quanto già versato in Svizzera evita che la doppia imposizione si traduca in un pagamento duplicato della stessa imposta. L'Agenzia delle Entrate descrive il riconoscimento del credito nel quadro CE del modello 730: [norme per i pendolari transfrontalieri](https://www.agenziaentrate.gov.it/portale/norme-per-i-pendolari-transfrontalieri-dei-paesi-confinanti).\n\nLa verifica del perimetro è decisiva anche per chi vive in Lombardia o Piemonte, regioni menzionate dalla guida come aree da cui si può valutare il lavoro in Svizzera. La residenza in una regione confinante non dimostra da sola che siano rispettati i requisiti del Comune, del luogo di lavoro e del rientro quotidiano. Se questi criteri non sono soddisfatti, non si applica il regime del Nuovo Accordo Frontalieri: secondo i fatti verificati, valgono la Convenzione italo-svizzera del 1976 e la tassazione in Italia con credito per le imposte pagate in Svizzera.\n\nQuesto chiarimento restringe la portata delle generalizzazioni della guida. La tabella tra vecchi e nuovi frontalieri è utile per capire le due situazioni descritte, ma non consente di attribuire automaticamente l'uno o l'altro regime a ogni lavoratore residente in Italia. Né la sola titolarità del permesso G, né la sola data di assunzione sostituiscono i requisiti territoriali e di rientro indicati nella scheda ufficiale.",
+        "body3": "### Salari indicativi e spese da mettere a confronto\n\nBianco Lavoro presenta le retribuzioni come importi lordi mensili su tredici mensilità. I valori indicativi per professione sono:\n- Cameriere o personale delle pulizie: CHF 3.200-3.800 in Ticino; CHF 3.800-4.500 a Zurigo o Berna.\n- Muratore o operaio edile: CHF 4.500-5.200 in Ticino; CHF 5.500-6.500 a Zurigo o Berna.\n- Infermiere: CHF 5.000-6.000 in Ticino; CHF 6.500-8.000 a Zurigo o Berna.\n- Ingegnere o sviluppatore IT: CHF 6.500-8.500 in Ticino; CHF 8.500-12.000 e oltre a Zurigo o Berna.\n- Impiegato amministrativo: CHF 4.000-5.000 in Ticino; CHF 5.500-7.000 a Zurigo o Berna.\n\nLa stessa guida formula un'indicazione generale sulle retribuzioni della Svizzera tedesca rispetto al Canton Ticino. La tabella, però, mette a confronto Ticino con Zurigo e Berna, mentre la frase generale cita Zurigo e Basilea. Inoltre, le fasce cambiano da una professione all'altra. Sono dunque valori indicativi, non una maggiorazione uniforme da applicare a ogni mestiere. Il testo precisa anche che non esiste un salario minimo nazionale, salvo in alcuni Cantoni: Ticino, Ginevra, Neuchâtel, Giura e Basilea Città; aggiunge che i contratti collettivi garantiscono paghe dignitose.\n\nIl capitolo sulle spese riguarda chi decide di vivere in Svizzera. La guida indica una cassa malati privata obbligatoria, con un costo medio di CHF 300-450 al mese per persona. Per un bilocale cita CHF 1.200-1.500 a Lugano e CHF 2.000-2.500 a Zurigo. Aggiunge che la carne costa il triplo rispetto all'Italia e che pizza e birra possono arrivare a CHF 35-40. Sono voci utili a leggere il divario tra lordo e disponibilità economica, ma non formano un calcolo del netto: la guida non presenta una busta paga individuale né un bilancio completo delle uscite. Anche la conversione riportata nell'esempio di CHF 4.000, circa EUR 4.200, è una stima della guida.\n\nPer la ricerca di un impiego, Bianco Lavoro segnala Jobs.ch, Tutti.ch e LinkedIn, oltre alle agenzie Adecco, Manpower e Randstad. Attribuisce a Tutti.ch un'utilità particolare per lavori manuali, edilizia e servizi, e a LinkedIn un ruolo per profili corporate, finanza e IT. La valutazione finale della guida è che i profili specializzati e gli artigiani esperti possono conservare un potere d'acquisto superiore a quello italiano, mentre per i lavori a bassa qualifica il margine di risparmio può ridursi dopo affitto e cassa malati. Per esplorare le opportunità, consulta gli [annunci di lavoro](nav:jobs).",
+        "faq": [
+          {
+            "q": "Quali sono i permessi di soggiorno distinti menzionati nella guida?",
+            "a": "La guida distingue i permessi L, B, C e G. Il permesso L è per contratti brevi da 3 a 12 mesi; il permesso B dura 5 anni con contratto indeterminato o di almeno 12 mesi; il C dopo 5 o 10 anni di residenza ininterrotta; il G per chi risiede in Italia nella zona di confine e rientra almeno settimanalmente."
+          },
+          {
+            "q": "Quale data è stata indicata da Bianco Lavoro come spartiacque per i frontalieri?",
+            "a": "Bianco Lavoro indicava il 17 luglio 2023 come data spartiacque transitorio per la distinzione fiscale tra vecchi e nuovi frontalieri."
+          },
+          {
+            "q": "Qual è la differenza salariale generale indicata tra Svizzera tedesca e Canton Ticino?",
+            "a": "La differenza salariale generale indicata è un 15-20% in più in Svizzera tedesca rispetto al Canton Ticino."
+          },
+          {
+            "q": "Quali sono i valori indicativi per un impiegato amministrativo in Ticino e a Zurigo o Berna?",
+            "a": "Per impiegato amministrativo, i valori indicativi sono CHF 4.000-5.000 in Ticino e CHF 5.500-7.000 a Zurigo o Berna."
+          }
+        ]
+      },
+      "en": {
+        "title": "Working in Switzerland: permits, salaries and cross-border commuters",
+        "excerpt": "Bianco Lavoro identifies July 17, 2023 as a watershed date; the permits are L, B, C and G, with wages 15-20% higher in German-speaking Switzerland than in Canton Ticino.",
+        "body1": "## TL;DR\n- Bianco Lavoro identified July 17, 2023 as a watershed date.\n- For new cross-border commuters, it cited up to 80% of the tax in Switzerland.\n- The guide distinguishes permits L, B, C and G.\n\n## Key facts\n- Permit L: short-term contracts, from 3 to 12 months\n- Permit B: 5 years, with an open-ended contract or a contract of at least 12 months\n- Permit C: after 5 or 10 years of uninterrupted residence\n- Permit G: residence in Italy in the border area and return at least weekly\n- General salary difference: 15-20% more in German-speaking Switzerland than in Canton Ticino\n\nJuly 17, 2023 was the date Bianco Lavoro identified as a transitional dividing line for the tax distinction between old and new cross-border commuters. In the account in the guide, published in February 2026, Switzerland remained a sought-after destination for Italian workers thanks to its geographical proximity, economic stability and salaries that could be two to four times those in Italy. The text warned, however, that the comparison does not end with the gross figure: the cost of living is high, and moving entails expenses different from those of someone who keeps their residence in Italy.\n\n### Permits and first contract\n\nThe guide notes that Switzerland is not part of the European Union, but that free movement agreements make entry relatively straightforward for Italians. A specific permit issued by the cantons is still required to stay and work. Permit L is tied to contracts from 3 to 12 months. Permit B, described as the most common for those who move, lasts five years and is granted with an open-ended contract or a contract of at least twelve months. Permit C is available after five or ten years of uninterrupted residence with Permit B; it grants rights almost equal to those of Swiss citizens, with the exception of voting.\n\nPermit G, on the other hand, applies to those who work in Switzerland and reside in Italy, in the border area, returning home at least once a week, usually every day. This description refers to the cross-border commuter permit; the tax requirements linked to the New Cross-Border Commuters Agreement are specified below.\n\nBianco Lavoro also stresses that a residence permit cannot be obtained without being hired. First, a job must be found; after the contract is signed, the application must be submitted to the cantonal migration office by the company or the worker. The distinction between permits is therefore linked to the contract duration and the choice of living in Switzerland or Italy, not just to the profession. On tax matters, the guide distinguishes between old cross-border commuters, hired before the date indicated, and new ones, and assigns them different tax treatments. This distinction, however, must be understood within the actual scope of the agreement, not as a rule that automatically applies to everyone who works across the border.",
+        "body2": "### The tax regime also depends on border requirements\n\nThe common-language definition of a cross-border commuter is not, by itself, enough to establish which tax treatment applies. The [FTA information sheet](https://m4.ti.ch/fileadmin/DFE/DC/DOC-IF/nuovo_accordo/nuovo_accordo_foglio_informativo_FAQ.pdf) limits the categories of old and new cross-border commuters to workers who live in a municipality within 20 kilometers of the border, work in Canton Ticino, Grisons or Valais, and return to Italy daily. The guide describes permit G as requiring a return at least weekly; for the tax scope of the agreement, however, the stated requirement is a return every day. These are two descriptions with different functions and should not be conflated.\n\nFor workers who fall within that scope, the guide distinguishes those taxed in Switzerland (for new cross-border commuters, in Italy as well, with a tax credit) from those who are also subject to Italian income tax. For new cross-border commuters, the tax credit for amounts already paid in Switzerland prevents double taxation from resulting in duplicate payment of the same tax. The Italian Revenue Agency describes the granting of the credit in section CE of form 730: [rules for cross-border commuters](https://www.agenziaentrate.gov.it/portale/norme-per-i-pendolari-transfrontalieri-dei-paesi-confinanti).\n\nChecking whether the requirements are met is also decisive for those who live in Lombardy or Piedmont, regions mentioned by the guide as areas from which working in Switzerland may be considered. Residence in a neighboring region does not by itself establish that the requirements concerning municipality, workplace and daily return are met. If these criteria are not met, the New Cross-Border Commuters Agreement regime does not apply: according to the verified facts, the 1976 Italy-Switzerland Convention and taxation in Italy with a credit for taxes paid in Switzerland apply.\n\nThis clarification narrows the scope of the guide's generalizations. The table comparing old and new cross-border commuters is useful for understanding the two situations described, but it does not allow one regime or the other to be automatically attributed to every worker residing in Italy. Neither holding a G permit alone, nor the date of hiring alone, replaces the territorial and return requirements set out in the official information sheet.",
+        "faq": [
+          {
+            "q": "Which different residence permits are mentioned in the guide?",
+            "a": "The guide distinguishes permits L, B, C and G. Permit L is for short-term contracts of 3 to 12 months; permit B lasts 5 years with an indefinite-term contract or one of at least 12 months; C after 5 or 10 years of uninterrupted residence; G for those who reside in Italy in the border area and return at least weekly."
+          },
+          {
+            "q": "Which date did Bianco Lavoro identify as a watershed moment for cross-border workers?",
+            "a": "Bianco Lavoro indicated July 17, 2023 as the transitional watershed date for the tax distinction between old and new cross-border workers."
+          },
+          {
+            "q": "What is the general salary difference indicated between German-speaking Switzerland and the Canton of Ticino?",
+            "a": "The general salary difference indicated is 15-20% more in German-speaking Switzerland than in the Canton of Ticino."
+          },
+          {
+            "q": "What are the indicative figures for an administrative employee in Ticino and in Zurich or Bern?",
+            "a": "For an administrative employee, the indicative values are CHF 4.000-5.000 in Ticino and CHF 5.500-7.000 in Zurich or Bern."
+          }
+        ]
+      },
+      "de": {
+        "title": "Arbeiten in der Schweiz: Bewilligungen, Löhne und Grenzgänger",
+        "excerpt": "Bianco Lavoro nennt den 17. Juli 2023 als Stichtag; die Bewilligungen sind L, B, C und G, mit Gehaltsunterschieden von 15-20% zugunsten der Deutschschweiz gegenüber dem Kanton Tessin.",
+        "body2": "### Die steuerliche Regelung hängt auch von den Grenzvoraussetzungen ab\n\nDie umgangssprachliche Definition eines Grenzgängers reicht allein nicht aus, um festzustellen, welche steuerliche Behandlung gilt. Das [Informationsblatt der ESTV](https://m4.ti.ch/fileadmin/DFE/DC/DOC-IF/nuovo_accordo/nuovo_accordo_foglio_informativo_FAQ.pdf) grenzt die Kategorien der alten und neuen Grenzgänger auf Arbeitnehmer ein, die in einer Gemeinde innerhalb von 20 Kilometern zur Grenze wohnen, im Kanton Tessin, Graubünden oder Wallis arbeiten und täglich nach Italien zurückkehren. Der Leitfaden beschreibt die Bewilligung G mit einer mindestens wöchentlichen Rückkehr; für den steuerlichen Geltungsbereich des Abkommens ist dagegen die tägliche Rückkehr die angegebene Voraussetzung. Es sind zwei Beschreibungen mit unterschiedlichen Funktionen, die nicht gleichgesetzt werden dürfen.\n\nFür Arbeitnehmer, die in diesen Geltungsbereich fallen, unterscheidet der Leitfaden zwischen Personen, die in der Schweiz besteuert werden (bei neuen Grenzgängern auch in Italien, mit Steuergutschrift), und solchen, die auch der italienischen Einkommensteuer unterliegen. Bei neuen Grenzgängern verhindert die Steuergutschrift für bereits in der Schweiz gezahlte Beträge, dass die Doppelbesteuerung zu einer doppelten Zahlung derselben Steuer führt. Die Agenzia delle Entrate beschreibt die Anrechnung der Steuergutschrift in Abschnitt CE des Formulars 730: [Regelungen für grenzüberschreitende Pendler](https://www.agenziaentrate.gov.it/portale/norme-per-i-pendolari-transfrontalieri-dei-paesi-confinanti).\n\nDie Prüfung des Geltungsbereichs ist auch für diejenigen entscheidend, die in der Lombardei oder im Piemont leben, Regionen, die der Leitfaden als Gebiete nennt, von denen aus eine Arbeit in der Schweiz in Betracht gezogen werden kann. Der Wohnsitz in einer Grenzregion belegt für sich genommen nicht, dass die Voraussetzungen bezüglich der Gemeinde, des Arbeitsorts und der täglichen Rückkehr erfüllt sind. Sind diese Kriterien nicht erfüllt, gilt die Regelung des neuen Grenzgängerabkommens nicht: Den geprüften Fakten zufolge gelten das italienisch-schweizerische Abkommen von 1976 und die Besteuerung in Italien mit Steuergutschrift für die in der Schweiz gezahlten Steuern.\n\nDiese Klarstellung schränkt die Tragweite der Verallgemeinerungen im Leitfaden ein. Die Tabelle zu alten und neuen Grenzgängern ist hilfreich, um die beiden beschriebenen Situationen zu verstehen, erlaubt es aber nicht, jedem in Italien ansässigen Arbeitnehmer automatisch die eine oder andere Regelung zuzuordnen. Weder der bloße Besitz der Bewilligung G noch das bloße Einstellungsdatum ersetzen die im offiziellen Informationsblatt genannten territorialen Voraussetzungen und die Voraussetzung der Rückkehr.",
+        "body3": "### Richtwerte für Gehälter und zu vergleichende Ausgaben\n\nBianco Lavoro gibt die Gehälter als monatliche Bruttobeträge bei dreizehn Monatsgehältern an. Die Richtwerte für die einzelnen Berufe sind:\n- Kellner oder Reinigungspersonal: CHF 3.200-3.800 im Tessin; CHF 3.800-4.500 in Zürich oder Bern.\n- Maurer oder Bauarbeiter: CHF 4.500-5.200 im Tessin; CHF 5.500-6.500 in Zürich oder Bern.\n- Pflegefachkraft: CHF 5.000-6.000 im Tessin; CHF 6.500-8.000 in Zürich oder Bern.\n- Ingenieur oder IT-Entwickler: CHF 6.500-8.500 im Tessin; CHF 8.500-12.000 und mehr in Zürich oder Bern.\n- Verwaltungsmitarbeiter: CHF 4.000-5.000 im Tessin; CHF 5.500-7.000 in Zürich oder Bern.\n\nDerselbe Ratgeber gibt eine allgemeine Einschätzung zu den Gehältern in der Deutschschweiz im Vergleich zum Kanton Tessin. Die Tabelle vergleicht jedoch das Tessin mit Zürich und Bern, während der allgemeine Satz Zürich und Basel nennt. Außerdem unterscheiden sich die Gehaltsspannen je nach Beruf. Es handelt sich daher um Richtwerte und nicht um einen einheitlichen Zuschlag, der auf jeden Beruf anzuwenden ist. Der Text weist auch darauf hin, dass es keinen nationalen Mindestlohn gibt, außer in einigen Kantonen: Tessin, Genf, Neuenburg, Jura und Basel-Stadt; außerdem heißt es, dass Gesamtarbeitsverträge angemessene Löhne garantieren.\n\nDas Kapitel zu den Ausgaben betrifft diejenigen, die sich für ein Leben in der Schweiz entscheiden. Der Ratgeber nennt eine obligatorische private Krankenversicherung mit durchschnittlichen Kosten von CHF 300-450 pro Monat und Person. Für eine Zweizimmerwohnung nennt er CHF 1.200-1.500 in Lugano und CHF 2.000-2.500 in Zürich. Außerdem heißt es, Fleisch koste dreimal so viel wie in Italien und Pizza und Bier könnten CHF 35-40 kosten. Diese Posten helfen, die Differenz zwischen Bruttoeinkommen und verfügbaren finanziellen Mitteln zu verstehen, ergeben aber keine Nettoberechnung: Der Ratgeber legt weder eine individuelle Gehaltsabrechnung noch eine vollständige Ausgabenbilanz vor. Auch die in dem Beispiel angegebene Umrechnung von CHF 4.000, etwa EUR 4.200, ist eine Schätzung des Ratgebers.\n\nFür die Arbeitssuche nennt Bianco Lavoro Jobs.ch, Tutti.ch und LinkedIn sowie die Agenturen Adecco, Manpower und Randstad. Tutti.ch misst der Ratgeber besondere Bedeutung für handwerkliche Tätigkeiten, das Bauwesen und Dienstleistungen bei und LinkedIn eine Rolle für Profile aus dem Unternehmensbereich, dem Finanzwesen und der IT. Die abschließende Einschätzung des Ratgebers lautet, dass spezialisierte Fachkräfte und erfahrene Handwerker eine höhere Kaufkraft als in Italien behalten können, während sich bei gering qualifizierten Tätigkeiten der Spielraum zum Sparen nach Abzug von Miete und Krankenversicherung verringern kann. Um die Möglichkeiten zu erkunden, sehen Sie sich [annunci di lavoro](nav:jobs) an.",
+        "faq": [
+          {
+            "q": "Welche unterschiedlichen Aufenthaltserlaubnisse werden im Leitfaden erwähnt?",
+            "a": "Der Leitfaden unterscheidet die Bewilligungen L, B, C und G. Die Bewilligung L gilt für kurze Verträge von 3 bis 12 Monaten; die Bewilligung B gilt 5 Jahre bei einem unbefristeten Vertrag oder einem Vertrag von mindestens 12 Monaten; die Bewilligung C nach 5 oder 10 Jahren ununterbrochenen Wohnsitzes; die Bewilligung G für Personen, die in Italien in der Grenzzone wohnen und mindestens wöchentlich zurückkehren."
+          },
+          {
+            "q": "Welches Datum wurde von Bianco Lavoro als Wendepunkt für Grenzgänger angegeben?",
+            "a": "Bianco Lavoro nannte den 17. Juli 2023 einen vorübergehenden Stichtag für die steuerliche Unterscheidung zwischen alten und neuen Grenzgängern."
+          },
+          {
+            "q": "Wie groß ist der angegebene allgemeine Lohnunterschied zwischen der Deutschschweiz und dem Kanton Tessin?",
+            "a": "Der angegebene allgemeine Lohnunterschied beträgt in der Deutschschweiz 15-20% mehr als im Kanton Tessin."
+          },
+          {
+            "q": "Wie lauten die Richtwerte für einen Verwaltungsangestellten im Tessin und in Zürich oder Bern?",
+            "a": "Für Verwaltungsangestellte liegen die Richtwerte bei CHF 4.000-5.000 im Tessin und bei CHF 5.500-7.000 in Zürich oder Bern."
+          }
+        ]
+      },
+      "fr": {
+        "title": "Travailler en Suisse : permis, salaires et frontaliers",
+        "excerpt": "Bianco Lavoro indique le 17 juillet 2023 comme date charnière ; les permis sont L, B, C et G, avec des écarts salariaux de 15-20 % de plus en Suisse alémanique par rapport au canton du Tessin.",
+        "body1": "## En bref\n- Bianco Lavoro indiquait le 17 juillet 2023 comme date charnière.\n- Pour les nouveaux travailleurs frontaliers, elle citait jusqu'à 80% de l'impôt en Suisse.\n- Le guide distingue les permis L, B, C et G.\n\n## Faits clés\n- Permis L : contrats courts, de 3 à 12 mois\n- Permis B : 5 ans, avec un contrat à durée indéterminée ou d’au moins 12 mois\n- Permis C : après 5 ou 10 ans de résidence ininterrompue\n- Permis G : résidence en Italie dans la zone frontalière et retour au moins hebdomadaire\n- Différence salariale générale : 15-20% de plus en Suisse alémanique qu’au canton du Tessin\n\nLe 17 juillet 2023 est la date que Bianco Lavoro indiquait comme ligne de partage transitoire pour la distinction fiscale entre anciens et nouveaux travailleurs frontaliers. Dans la présentation du guide, publié en février 2026, la Suisse restait une destination prisée des travailleurs italiens en raison de sa proximité géographique, de sa stabilité économique et de salaires pouvant être deux à quatre fois supérieurs aux salaires italiens. Le texte avertissait toutefois que la comparaison ne se résume pas au montant brut : le coût de la vie est élevé et s’installer entraîne des dépenses différentes de celles d’une personne qui conserve sa résidence en Italie.\n\n### Permis et premier contrat\n\nLe guide rappelle que la Suisse ne fait pas partie de l’Union européenne, mais que les accords de libre circulation rendent relativement facile l’entrée des Italiens. Pour séjourner et travailler, un permis spécifique délivré par les cantons reste toutefois nécessaire. Le permis L est lié à des contrats de 3 à 12 mois. Le permis B, présenté comme le plus courant pour les personnes qui s’installent, dure cinq ans et est accordé avec un contrat à durée indéterminée ou d’au moins douze mois. Le permis C est obtenu après cinq ou dix ans de résidence ininterrompue avec un permis B ; il confère des droits presque équivalents à ceux des citoyens suisses, à l’exception du droit de vote.\n\nLe permis G concerne en revanche les personnes qui travaillent en Suisse et résident en Italie, dans la zone frontalière, et rentrent chez elles au moins une fois par semaine, généralement chaque jour. Cette description se rapporte au permis de travailleur frontalier ; les conditions fiscales liées au Nouvel Accord sur les travailleurs frontaliers sont précisées plus loin.\n\nBianco Lavoro souligne également que le permis de séjour ne s’obtient pas sans embauche. Il faut d’abord trouver un employeur ; après la signature du contrat, la demande doit être présentée au service cantonal des migrations par l’entreprise ou le travailleur. La distinction entre les permis est donc liée à la durée du contrat et au choix de vivre en Suisse ou en Italie, et pas seulement à la profession. Sur le plan fiscal, le guide distingue les anciens travailleurs frontaliers, embauchés avant la date indiquée, des nouveaux et leur attribue des traitements différents. Cette distinction doit toutefois être comprise dans les limites du champ d’application effectif de l’accord, et non comme une règle applicable automatiquement à quiconque travaille au-delà de la frontière.",
+        "body2": "### Le régime fiscal dépend aussi des critères de frontière\n\nLa définition de travailleur frontalier dans le langage courant ne suffit pas, à elle seule, à déterminer le régime fiscal applicable. La [fiche d'information AFC](https://m4.ti.ch/fileadmin/DFE/DC/DOC-IF/nuovo_accordo/nuovo_accordo_foglio_informativo_FAQ.pdf) limite les catégories des anciens et nouveaux travailleurs frontaliers aux travailleurs qui résident dans une commune située à moins de 20 kilomètres de la frontière, travaillent dans le canton du Tessin, des Grisons ou du Valais et rentrent quotidiennement en Italie. Le guide décrit le permis G avec un retour au moins hebdomadaire ; pour le périmètre fiscal de l'accord, en revanche, le critère indiqué est le retour quotidien. Il s'agit de deux descriptions ayant des fonctions différentes, qu'il ne faut pas confondre.\n\nPour les travailleurs entrant dans ce périmètre, le guide distingue ceux qui sont imposés en Suisse (et, pour les nouveaux travailleurs frontaliers, également en Italie, avec un crédit d'impôt) de ceux qui sont également soumis à l'impôt italien sur le revenu. Pour les nouveaux travailleurs frontaliers, le crédit d'impôt correspondant à ce qui a déjà été payé en Suisse évite que la double imposition se traduise par le paiement en double du même impôt. L'Agenzia delle Entrate décrit l'octroi du crédit dans le cadre CE du formulaire 730 : [règles applicables aux travailleurs frontaliers des pays limitrophes](https://www.agenziaentrate.gov.it/portale/norme-per-i-pendolari-transfrontalieri-dei-paesi-confinanti).\n\nLa vérification du périmètre est également déterminante pour les personnes qui vivent en Lombardie ou au Piémont, régions mentionnées dans le guide comme des zones depuis lesquelles il est possible d'envisager de travailler en Suisse. Résider dans une région limitrophe ne prouve pas, à lui seul, que les critères relatifs à la commune, au lieu de travail et au retour quotidien sont remplis. Si ces critères ne sont pas remplis, le régime du Nouvel accord sur les travailleurs frontaliers ne s'applique pas : selon les faits vérifiés, la Convention italo-suisse de 1976 s'applique, ainsi que l'imposition en Italie avec un crédit pour les impôts payés en Suisse.\n\nCette précision réduit la portée des généralisations du guide. Le tableau entre anciens et nouveaux travailleurs frontaliers est utile pour comprendre les deux situations décrites, mais ne permet pas d'attribuer automatiquement l'un ou l'autre régime à chaque travailleur résidant en Italie. Ni la seule détention du permis G, ni la seule date d'embauche ne remplacent les critères territoriaux et de retour indiqués dans la fiche officielle.",
+        "body3": "### Salaires indicatifs et dépenses à comparer\n\nBianco Lavoro présente les rémunérations sous forme de montants bruts mensuels sur treize mensualités. Les valeurs indicatives par profession sont :\n- Serveur ou personnel de nettoyage : CHF 3.200-3.800 au Tessin ; CHF 3.800-4.500 à Zurich ou Berne.\n- Maçon ou ouvrier du bâtiment : CHF 4.500-5.200 au Tessin ; CHF 5.500-6.500 à Zurich ou Berne.\n- Infirmier : CHF 5.000-6.000 au Tessin ; CHF 6.500-8.000 à Zurich ou Berne.\n- Ingénieur ou développeur informatique : CHF 6.500-8.500 au Tessin ; CHF 8.500-12.000 et plus à Zurich ou Berne.\n- Employé administratif : CHF 4.000-5.000 au Tessin ; CHF 5.500-7.000 à Zurich ou Berne.\n\nLe même guide donne une indication générale sur les rémunérations en Suisse alémanique par rapport au canton du Tessin. Le tableau compare toutefois le Tessin à Zurich et Berne, tandis que la phrase générale cite Zurich et Bâle. De plus, les fourchettes varient d’une profession à l’autre. Il s’agit donc de valeurs indicatives, et non d’une majoration uniforme à appliquer à chaque métier. Le texte précise également qu’il n’existe pas de salaire minimum national, sauf dans certains cantons : le Tessin, Genève, Neuchâtel, le Jura et Bâle-Ville ; il ajoute que les conventions collectives garantissent des rémunérations décentes.\n\nLe chapitre consacré aux dépenses concerne les personnes qui décident de vivre en Suisse. Le guide indique qu’une assurance-maladie privée est obligatoire, avec un coût moyen de CHF 300-450 par mois et par personne. Pour un appartement de deux pièces, il cite CHF 1.200-1.500 à Lugano et CHF 2.000-2.500 à Zurich. Il ajoute que la viande coûte trois fois plus cher qu’en Italie et qu’une pizza et une bière peuvent atteindre CHF 35-40. Ces éléments sont utiles pour comprendre l’écart entre le salaire brut et les ressources disponibles, mais ne constituent pas un calcul du salaire net : le guide ne présente ni bulletin de paie individuel ni bilan complet des dépenses. La conversion indiquée dans l’exemple de CHF 4.000, soit environ EUR 4.200, est également une estimation du guide.\n\nPour la recherche d’un emploi, Bianco Lavoro mentionne Jobs.ch, Tutti.ch et LinkedIn, ainsi que les agences Adecco, Manpower et Randstad. Le guide attribue à Tutti.ch une utilité particulière pour les travaux manuels, le bâtiment et les services, et à LinkedIn un rôle pour les profils d’entreprise, la finance et l’informatique. Selon l’évaluation finale du guide, les profils spécialisés et les artisans expérimentés peuvent conserver un pouvoir d’achat supérieur à celui de l’Italie, tandis que, pour les emplois peu qualifiés, la marge d’épargne peut se réduire après le loyer et l’assurance-maladie. Pour explorer les possibilités, consultez les [annunci di lavoro](nav:jobs).",
+        "faq": [
+          {
+            "q": "Quels sont les différents permis de séjour mentionnés dans le guide ?",
+            "a": "Le guide distingue les permis L, B, C et G. Le permis L est destiné aux contrats de courte durée de 3 à 12 mois ; le permis B est valable 5 ans avec un contrat à durée indéterminée ou d’au moins 12 mois ; le permis C après 5 ou 10 ans de résidence ininterrompue ; le permis G pour les personnes qui résident en Italie dans la zone frontalière et rentrent au moins une fois par semaine."
+          },
+          {
+            "q": "Quelle date Bianco Lavoro a-t-il indiquée comme tournant pour les frontaliers ?",
+            "a": "Bianco Lavoro indiquait le 17 juillet 2023 comme date charnière transitoire pour la distinction fiscale entre les anciens et les nouveaux frontaliers."
+          },
+          {
+            "q": "Quelle est la différence salariale générale indiquée entre la Suisse alémanique et le canton du Tessin ?",
+            "a": "Le différentiel salarial général indiqué est de 15-20 % de plus en Suisse alémanique par rapport au canton du Tessin."
+          },
+          {
+            "q": "Quelles sont les valeurs indicatives pour un employé administratif au Tessin et à Zurich ou à Berne ?",
+            "a": "Pour un employé administratif, les valeurs indicatives sont CHF 4.000-5.000 au Tessin et CHF 5.500-7.000 à Zurich ou Berne."
+          }
+        ]
+      }
+    },
+    "seo": {
+      "title": "Lavorare in Svizzera: permessi, stipendi e frontalieri",
+      "description": "Guida su permessi L, B, C, G e data spartiacque 17 luglio 2023. Differenza salariale 15-20% in Svizzera tedesca.",
+      "keywords": "frontalieri, ticino, svizzera, italia, lavorare, permessi, stipendi, bianco",
+      "ogTitle": "Lavorare in Svizzera: permessi e frontalieri",
+      "ogDescription": "Conoscere i permessi L, B, C, G e la data spartiacque del 17 luglio 2023 secondo Bianco Lavoro. Confronto salariale Svizzera tedesca vs Ticino.",
+      "headline": "Lavorare in Svizzera: permessi, stipendi e frontalieri",
+      "breadcrumbName": "Lavoro Svizzera"
+    },
+    "author": {
+      "slug": "redazione",
+      "name": "Redazione Frontaliere Ticino",
+      "linkedinUrl": "https://www.linkedin.com/company/frontaliere-ticino/"
+    }
+  },
+  "attempts": 1,
+  "missingFields": [
+    "en.body3",
+    "de.body1"
+  ],
+  "createdAt": "2026-11-28T17:32:57.423Z",
+  "updatedAt": "2026-11-28T17:38:42.548Z",
+  "verifiedAt": "2026-11-28T17:32:57.423Z",
+  "translationState": "unverified-candidate",
+  "translationsVerified": false,
+  "unverifiedFields": [
+    "en.title",
+    "en.excerpt",
+    "en.body1",
+    "en.body2",
+    "en.faq[0].q",
+    "en.faq[0].a",
+    "en.faq[1].q",
+    "en.faq[1].a",
+    "en.faq[2].q",
+    "en.faq[2].a",
+    "en.faq[3].q",
+    "en.faq[3].a",
+    "de.title",
+    "de.excerpt",
+    "de.body2",
+    "de.body3",
+    "de.faq[0].q",
+    "de.faq[0].a",
+    "de.faq[1].q",
+    "de.faq[1].a",
+    "de.faq[2].q",
+    "de.faq[2].a",
+    "de.faq[3].q",
+    "de.faq[3].a",
+    "fr.title",
+    "fr.excerpt",
+    "fr.body1",
+    "fr.body2",
+    "fr.body3",
+    "fr.faq[0].q",
+    "fr.faq[0].a",
+    "fr.faq[1].q",
+    "fr.faq[1].a",
+    "fr.faq[2].q",
+    "fr.faq[2].a",
+    "fr.faq[3].q",
+    "fr.faq[3].a"
+  ]
+}
