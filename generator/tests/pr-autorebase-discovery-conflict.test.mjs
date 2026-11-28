@@ -10,9 +10,11 @@ import {
   classifyMergeTreeStatus,
   decideConflictScan,
   discoverOpenPullRequests,
+  gh,
   parsePaginatedPullRequests,
   preparePullRequestSweep,
 } from '../../scripts/ci/pr-autorebase.mjs';
+import { GitHubRateLimitError, ghWithRateLimitRetry } from '../../scripts/ci/lib/gh-rate-limit.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -102,6 +104,55 @@ describe('pr-autorebase paginated PR discovery', () => {
     } finally {
       rmSync(fakeBin, { recursive: true, force: true });
     }
+  });
+
+  it('routes discovery through the shared primary GitHub API rate-limit retry', () => {
+    const calls = [];
+    const logs = [];
+    let discoveryCalls = 0;
+    const exec = (_ghBin, args) => {
+      calls.push(args);
+      if (args[0] === 'api' && args[1] === 'rate_limit') {
+        return JSON.stringify({ resources: { core: { remaining: 1, reset: 1_800_000_000 } } });
+      }
+      if (args[0] === 'api' && args.includes('--paginate')) {
+        discoveryCalls += 1;
+        if (discoveryCalls === 1) {
+          const error = new Error('gh failed');
+          error.stderr = 'gh: API rate limit exceeded for user ID 1 (HTTP 403)';
+          throw error;
+        }
+        return '[[]]';
+      }
+      throw new Error(`unexpected gh invocation: ${args.join(' ')}`);
+    };
+    const result = gh([
+      'api', '--paginate', '--slurp',
+      'repos/owner/repo/pulls?state=open&per_page=100',
+    ], {}, (args, options) => ghWithRateLimitRetry(args, {
+      ...options,
+      exec,
+      maxWaitMs: 1_000,
+      jitterMaxMs: 0,
+      budget: { waits: 1 },
+      log: (line) => logs.push(line),
+    }));
+
+    assert.deepEqual(result, [[]]);
+    assert.deepEqual(calls, [
+      ['api', '--paginate', '--slurp', 'repos/owner/repo/pulls?state=open&per_page=100'],
+      ['api', 'rate_limit'],
+      ['api', '--paginate', '--slurp', 'repos/owner/repo/pulls?state=open&per_page=100'],
+    ]);
+    assert.match(logs.join('\n'), /pr-autorebase: bucket REST `core` esaurito/);
+  });
+
+  it('keeps a terminal primary rate limit fatal even for an optional gh call', () => {
+    const failure = new GitHubRateLimitError('GitHub API rate limit esaurito', { resetAt: 1_800_000_000 });
+    assert.throws(
+      () => gh(['api', 'repos/owner/repo/pulls/1/reviews'], { allowFail: true }, () => { throw failure; }),
+      (error) => error === failure,
+    );
   });
 });
 

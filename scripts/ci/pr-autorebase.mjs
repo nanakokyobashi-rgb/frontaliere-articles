@@ -64,6 +64,7 @@ import { createHash } from 'node:crypto';
 import { manifestPinLookup } from './manifest-pinned-issues.mjs';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
+import { ghWithRateLimitRetry, GitHubRateLimitError } from './lib/gh-rate-limit.mjs';
 import {
   VITEST_CHECK_NAME,
   VITEST_EXECUTION_JOB_NAME,
@@ -200,12 +201,21 @@ function sleepSync(ms) {
   if (ms > 0) execFileSync('sleep', [String(ms / 1_000)], { stdio: 'ignore' });
 }
 
-function gh(args, { json = true, allowFail = false } = {}) {
+export function gh(
+  args,
+  { json = true, allowFail = false } = {},
+  withRateLimitRetry = ghWithRateLimitRetry,
+) {
   try {
-    const out = execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+    // Tutte le chiamate di questo processo condividono il bucket REST del
+    // token: un 403 da rate limit primario attende il reset verificabile e
+    // ritenta una volta; senza recupero il flusso resta fail-closed.
+    const out = withRateLimitRetry(args, { context: 'pr-autorebase' });
     return json ? JSON.parse(out) : out;
   } catch (e) {
-    if (allowFail) return json ? null : '';
+    // Un errore ordinario opzionale resta ignorabile; un rate limit invece
+    // rende i dati incompleti e non deve sembrare un esito vuoto.
+    if (allowFail && !(e instanceof GitHubRateLimitError)) return json ? null : '';
     throw e;
   }
 }
