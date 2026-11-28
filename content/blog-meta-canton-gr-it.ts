@@ -69,6 +69,9 @@ const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.neve-grigioni-incidenti.title': 'Neve in Grigioni, 18 incidenti segnalati dalla polizia',
     'blog.article.neve-grigioni-incidenti.excerpt': 'Fino a 20 centimetri di neve fresca sono caduti giovedì in tutto il Grigioni; la polizia riferisce 18 incidenti legati al nevischio.',
     'blog.article.neve-grigioni-incidenti.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.coira-voto-alloggi-accessibili.title': 'Coira al voto il 29 novembre sugli alloggi accessibili',
+    'blog.article.coira-voto-alloggi-accessibili.excerpt': 'Il voto comunale è fissato al 29 novembre. A Coira si decide sull\'iniziativa per alloggi accessibili.',
+    'blog.article.coira-voto-alloggi-accessibili.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGrIt;

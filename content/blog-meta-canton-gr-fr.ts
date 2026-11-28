@@ -69,6 +69,9 @@ const blogMetaCantonGrFr: Record<string, string> = {
     'blog.article.neve-grigioni-incidenti.title': 'Neige dans les Grisons, 18 accidents signalés par la police',
     'blog.article.neve-grigioni-incidenti.excerpt': 'Jusqu’à 20 centimètres de neige fraîche sont tombés jeudi dans tout le canton des Grisons; la police fait état de 18 accidents liés au grésil.',
     'blog.article.neve-grigioni-incidenti.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.coira-voto-alloggi-accessibili.title': 'Coire aux urnes le 29 novembre sur les logements abordables',
+    'blog.article.coira-voto-alloggi-accessibili.excerpt': 'Le vote communal est fixé au 29 novembre. À Coire, on se prononce sur l\'initiative en faveur de logements abordables.',
+    'blog.article.coira-voto-alloggi-accessibili.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonGrFr;

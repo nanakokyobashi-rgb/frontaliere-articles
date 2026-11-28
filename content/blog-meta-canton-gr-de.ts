@@ -69,6 +69,9 @@ const blogMetaCantonGrDe: Record<string, string> = {
     'blog.article.neve-grigioni-incidenti.title': 'Schnee in Graubünden, 18 von der Polizei gemeldete Unfälle',
     'blog.article.neve-grigioni-incidenti.excerpt': 'Am Donnerstag fielen in ganz Graubünden bis zu 20 Zentimeter Neuschnee; die Polizei berichtet von 18 Unfällen im Zusammenhang mit Schneeregen.',
     'blog.article.neve-grigioni-incidenti.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.coira-voto-alloggi-accessibili.title': 'Chur stimmt am 29. November über bezahlbaren Wohnraum ab',
+    'blog.article.coira-voto-alloggi-accessibili.excerpt': 'Die kommunale Abstimmung findet am 29. November statt. In Chur wird über die Initiative für bezahlbaren Wohnraum entschieden.',
+    'blog.article.coira-voto-alloggi-accessibili.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGrDe;

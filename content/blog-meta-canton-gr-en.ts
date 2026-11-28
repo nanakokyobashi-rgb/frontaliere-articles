@@ -69,6 +69,9 @@ const blogMetaCantonGrEn: Record<string, string> = {
     'blog.article.neve-grigioni-incidenti.title': 'Snow in Graubünden, 18 accidents reported by police',
     'blog.article.neve-grigioni-incidenti.excerpt': 'Up to 20 centimeters of fresh snow fell across Graubünden on Thursday; police report 18 accidents related to sleet.',
     'blog.article.neve-grigioni-incidenti.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.coira-voto-alloggi-accessibili.title': 'Chur votes on November 29 on affordable housing',
+    'blog.article.coira-voto-alloggi-accessibili.excerpt': 'The municipal vote is scheduled for November 29. Chur will decide on the initiative for affordable housing.',
+    'blog.article.coira-voto-alloggi-accessibili.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGrEn;

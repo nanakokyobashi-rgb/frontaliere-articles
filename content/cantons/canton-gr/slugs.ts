@@ -25,6 +25,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'vallo-protezione-sorte-lostallo': { it: 'vallo-protezione-sorte-lostallo', en: 'protection-barrier-sorte-lostallo', de: 'schutzmauer-sorte-lostallo', fr: 'mur-protection-sorte-lostallo' },
  'imc-oberengadin-weekend': { it: 'imc-oberengadin-weekend', en: 'oberengadin-imc-closed-weekends', de: 'imc-oberengadin-wochenende-geschlossen', fr: 'imc-oberengadin-fermee-weekends' },
  'neve-grigioni-incidenti': { it: 'neve-grigioni-incidenti', en: 'graubunden-snow-18-crashes', de: 'graubuenden-schnee-18-unfaelle', fr: 'neige-grisons-18-accidents' },
+ 'coira-voto-alloggi-accessibili': { it: 'coira-voto-alloggi-accessibili', en: 'chur-vote-affordable-housing', de: 'chur-abstimmung-bezahlbarer-wohnraum', fr: 'coire-vote-logements-abordables' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
