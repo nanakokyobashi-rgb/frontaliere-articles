@@ -11,6 +11,18 @@
     "canton-be::https://www.api.news.apps.be.ch/api/atom/news/116ace7f-5dd1-4749-9bf2-dcf700473e1d": {
       "section": "canton-be",
       "ts": 1795783479154
+    },
+    "canton-be::https://www.nau.ch/politik/regional/kanton-bern-plant-mini-steuererklarung-fur-kleine-vereine-67208278": {
+      "section": "canton-be",
+      "ts": 1795868523472
+    },
+    "canton-be::https://www.api.news.apps.be.ch/api/atom/news/63dcbe4c-395c-45a1-bd39-ba0d8bc7cb9b": {
+      "section": "canton-be",
+      "ts": 1795868538332
+    },
+    "canton-be::https://www.be.ch/de/start.html?newsid=63dcbe4c-395c-45a1-bd39-ba0d8bc7cb9b": {
+      "section": "canton-be",
+      "ts": 1795868547924
     }
   }
 }
