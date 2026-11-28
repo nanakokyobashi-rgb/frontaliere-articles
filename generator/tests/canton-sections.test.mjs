@@ -63,13 +63,39 @@ test('LU non interroga i feed Luzerner Zeitung che hanno restituito 403', () => 
   const host = 'www.luzernerzeitung.ch';
   const active = lucerna.newsSources.filter((source) => new URL(source.url).hostname === host);
   const rejected = lucerna.rejectedSources.filter((source) => new URL(source.url).hostname === host);
+  const lastAvailableCounts = Object.fromEntries(rejected.map((source) => [new URL(source.url).pathname, source.items7d]));
 
   assert.equal(active.length, 0);
   assert.equal(rejected.length, 5);
   assert.ok(rejected.every((source) => source.reason === 'sourceUnavailable'));
-  assert.ok(rejected.every((source) => source.items7d === null));
+  assert.deepEqual(lastAvailableCounts, {
+    '/zentralschweiz/luzern.rss': 55,
+    '/zentralschweiz.rss': 35,
+    '/thema/luzerner-polizei.rss': 8,
+    '/thema/praemienverbilligung.rss': 3,
+    '/thema/luzerner-kantonsspital.rss': 3,
+  });
+  assert.ok(rejected.every((source) => source.verifiedAt === '2026-10-08'));
   assert.ok(rejected.every((source) => /HTTP 403/u.test(source.notes)));
   assert.ok(lucerna.newsSources.some((source) => source.url === 'https://www.stadtluzern.ch/aktuelles/news.rss'));
+});
+
+test('il feed LZ condiviso resta archiviato per LU, OW e ZG finché il runner hosted non conferma accesso', () => {
+  const sharedUrl = 'https://www.luzernerzeitung.ch/zentralschweiz.rss';
+
+  for (const code of ['LU', 'OW', 'ZG']) {
+    const profile = canton(PROFILE, code);
+    const active = profile.newsSources.filter((source) => source.url === sharedUrl);
+    const rejected = profile.rejectedSources.filter((source) => source.url === sharedUrl);
+
+    assert.equal(active.length, 0, `${code} must not fetch the hosted-403 URL`);
+    assert.equal(rejected.length, 1, `${code} must preserve one archived source record`);
+    assert.equal(rejected[0].reason, 'sourceUnavailable');
+    assert.equal(rejected[0].items7d, 35);
+    assert.equal(rejected[0].verifiedAt, '2026-10-08');
+    assert.match(rejected[0].notes, /run hosted 46098366937/u);
+    assert.match(rejected[0].notes, /restituito 200 dal laptop/u);
+  }
 });
 
 test('le fonti news sono solo di tipo notizia; i dati di categoria non entrano nel generatore (D11)', () => {

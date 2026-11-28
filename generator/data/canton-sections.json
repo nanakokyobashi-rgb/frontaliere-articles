@@ -4514,9 +4514,10 @@
           "kind": "media",
           "language": "de",
           "intendedBucket": "news",
-          "items7d": null,
+          "items7d": 55,
+          "verifiedAt": "2026-10-08",
           "origin": "rejected",
-          "notes": "Tutti e cinque i feed attivi hanno restituito HTTP 403 nel run hosted 46098366937 del 2026-11-28. Rimossi dai fetch finché il publisher non consente l’accesso; nessun retry o aggiramento del blocco.",
+          "notes": "Ultimo conteggio accessibile: 55 item/7 giorni, verificato il 2026-10-08. HTTP 403 nel run hosted 46098366937 del 2026-11-28; archiviato finché il runner operativo non conferma l’accesso, senza retry o aggiramento del blocco.",
           "reason": "sourceUnavailable",
           "decision": "exclude",
           "decisionAt": "2026-11-28"
@@ -4527,9 +4528,10 @@
           "kind": "media",
           "language": "de",
           "intendedBucket": "news",
-          "items7d": null,
+          "items7d": 35,
+          "verifiedAt": "2026-10-08",
           "origin": "rejected",
-          "notes": "Tutti e cinque i feed attivi hanno restituito HTTP 403 nel run hosted 46098366937 del 2026-11-28. Rimossi dai fetch finché il publisher non consente l’accesso; nessun retry o aggiramento del blocco.",
+          "notes": "URL condiviso da LU, OW e ZG. Ultimo conteggio accessibile: 35 item/7 giorni, verificato il 2026-10-08. HTTP 403 nel run hosted 46098366937 del 2026-11-28; una GET successiva con lo User-Agent del generatore ha restituito 200 dal laptop. Archiviato nei tre profili finché il runner operativo non conferma l’accesso; nessun retry o aggiramento del blocco.",
           "reason": "sourceUnavailable",
           "decision": "exclude",
           "decisionAt": "2026-11-28"
@@ -4540,9 +4542,10 @@
           "kind": "polizia",
           "language": "de",
           "intendedBucket": "news",
-          "items7d": null,
+          "items7d": 8,
+          "verifiedAt": "2026-10-08",
           "origin": "rejected",
-          "notes": "Tutti e cinque i feed attivi hanno restituito HTTP 403 nel run hosted 46098366937 del 2026-11-28. Rimossi dai fetch finché il publisher non consente l’accesso; nessun retry o aggiramento del blocco.",
+          "notes": "Ultimo conteggio accessibile: 8 item/7 giorni, verificato il 2026-10-08. HTTP 403 nel run hosted 46098366937 del 2026-11-28; archiviato finché il runner operativo non conferma l’accesso, senza retry o aggiramento del blocco.",
           "reason": "sourceUnavailable",
           "decision": "exclude",
           "decisionAt": "2026-11-28"
@@ -4553,9 +4556,10 @@
           "kind": "economia",
           "language": "de",
           "intendedBucket": "news",
-          "items7d": null,
+          "items7d": 3,
+          "verifiedAt": "2026-10-08",
           "origin": "rejected",
-          "notes": "Tutti e cinque i feed attivi hanno restituito HTTP 403 nel run hosted 46098366937 del 2026-11-28. Rimossi dai fetch finché il publisher non consente l’accesso; nessun retry o aggiramento del blocco.",
+          "notes": "Ultimo conteggio accessibile: 3 item/7 giorni, verificato il 2026-10-08. HTTP 403 nel run hosted 46098366937 del 2026-11-28; archiviato finché il runner operativo non conferma l’accesso, senza retry o aggiramento del blocco.",
           "reason": "sourceUnavailable",
           "decision": "exclude",
           "decisionAt": "2026-11-28"
@@ -4566,9 +4570,10 @@
           "kind": "media",
           "language": "de",
           "intendedBucket": "news",
-          "items7d": null,
+          "items7d": 3,
+          "verifiedAt": "2026-10-08",
           "origin": "rejected",
-          "notes": "Tutti e cinque i feed attivi hanno restituito HTTP 403 nel run hosted 46098366937 del 2026-11-28. Rimossi dai fetch finché il publisher non consente l’accesso; nessun retry o aggiramento del blocco.",
+          "notes": "Ultimo conteggio accessibile: 3 item/7 giorni, verificato il 2026-10-08. HTTP 403 nel run hosted 46098366937 del 2026-11-28; archiviato finché il runner operativo non conferma l’accesso, senza retry o aggiramento del blocco.",
           "reason": "sourceUnavailable",
           "decision": "exclude",
           "decisionAt": "2026-11-28"
@@ -5459,19 +5464,6 @@
           "notes": "Fonte primaria news OW: 57 item, 29 negli ultimi 7 giorni, di cui 21 con link /zentralschweiz/obwalden/ (il resto: Luzern/Nidwalden/Zentralschweiz). Alcuni articoli sono a pagamento (paywall): il feed da' titolo e lead. robots.txt: nessun blocco dei path RSS, ma vieta ClaudeBot/anthropic-ai come user-agent: usare lo user-agent generico del generatore e solo titolo/lead, non copiare testo. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
         },
         {
-          "url": "https://www.luzernerzeitung.ch/zentralschweiz.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Luzerner Zeitung (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "mobilita", "servizi"],
-          "quirks": {},
-          "items7d": 35,
-          "verifiedAt": "2026-10-08",
-          "notes": "Feed Zentralschweiz (LU/ZG/SZ/UR/OW/NW): 35 item recenti, quota Zug minoritaria (filtrare per keyword). Stesse note robots/AI del Zuger Zeitung. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
           "url": "https://www.zentralplus.ch/feed/",
           "format": "rss",
           "parser": "rss",
@@ -5566,6 +5558,20 @@
         "robots/AI: luzernerzeitung.ch, zentralplus.ch e srf.ch vietano ClaudeBot/anthropic-ai come user-agent: verificare che lo user-agent del generatore non sia tra questi e limitarsi a titolo/lead/link."
       ],
       "rejectedSources": [
+        {
+          "url": "https://www.luzernerzeitung.ch/zentralschweiz.rss",
+          "publisher": "Luzerner Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 35,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "URL condiviso da LU, OW e ZG. Ultimo conteggio accessibile: 35 item/7 giorni, verificato il 2026-10-08. HTTP 403 nel run hosted 46098366937 del 2026-11-28; una GET successiva con lo User-Agent del generatore ha restituito 200 dal laptop. Archiviato nei tre profili finché il runner operativo non conferma l’accesso; nessun retry o aggiramento del blocco.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
         {
           "url": "https://www.ksow.ch/ueber-das-ksow/news",
           "publisher": "Kantonsspital Obwalden (KSOW)",
@@ -9689,19 +9695,6 @@
           "items7d": 50,
           "verifiedAt": "2026-10-08",
           "notes": "Portale online Zentralschweiz: 50 item, tutti datati negli ultimi 7gg ma solo ~12/50 citano Zug (resto Luzern/Zentralschweiz): serve filtro per keyword Zug/Baar/Cham/Steinhausen/Risch/Rotkreuz/Hünenberg. Le pagine di categoria /zug/ e /thema/ rispondono 403 (WAF): usare solo il feed generale. Content-Signal ai-train=no, use=reference. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.luzernerzeitung.ch/zentralschweiz.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Luzerner Zeitung (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "mobilita", "servizi"],
-          "quirks": {},
-          "items7d": 35,
-          "verifiedAt": "2026-10-08",
-          "notes": "Feed Zentralschweiz (LU/ZG/SZ/UR/OW/NW): 35 item recenti, quota Zug minoritaria (filtrare per keyword). Stesse note robots/AI del Zuger Zeitung. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
         }
       ],
       "categoryDataSources": {
@@ -9821,6 +9814,22 @@
         "mobilita: ZVB news ferme a giugno; Betriebsmeldungen e SBB news (rss 403) non estraibili; il traffico A4/A14 arriva solo da Polizia e Tiefbauamt.",
         "nota legale/robots: i feed CH Media (zugerzeitung.ch, luzernerzeitung.ch, nau.ch) dichiarano nel robots.txt il divieto per crawler AI (anthropic-ai, ClaudeBot, Claude-Web) e zentralplus ha Content-Signal ai-train=no. Il generatore deve usare il proprio user agent e trattare queste fonti come segnali (titolo/lead/link), non copiarne il testo.",
         "volume: tra le fonti non-feed solo zg.ch/de/news, polizia, stadtzug, zugerwoche e zug4you hanno data nel markup; nau.ch, 20min e tele1 non hanno date, quindi items7d e' il numero di link presenti."
+      ],
+      "rejectedSources": [
+        {
+          "url": "https://www.luzernerzeitung.ch/zentralschweiz.rss",
+          "publisher": "Luzerner Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 35,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "URL condiviso da LU, OW e ZG. Ultimo conteggio accessibile: 35 item/7 giorni, verificato il 2026-10-08. HTTP 403 nel run hosted 46098366937 del 2026-11-28; una GET successiva con lo User-Agent del generatore ha restituito 200 dal laptop. Archiviato nei tre profili finché il runner operativo non conferma l’accesso; nessun retry o aggiramento del blocco.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        }
       ]
     },
     {
