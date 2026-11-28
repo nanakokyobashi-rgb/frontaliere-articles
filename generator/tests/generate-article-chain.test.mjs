@@ -1747,3 +1747,24 @@ test('national queue resolves the section before starting the production job', (
   }
   assert.match(WF, /SEC="\$\{\{ needs\.admit\.outputs\.national_section \}\}"/);
 });
+
+// ── F3.A.5: due scadenze, la dura resta quella storica ──────────────────────
+//
+// La morbida (CREATE_ARTICLE_SOFT_WALL_MS, 1380000) sta in create-article e si
+// prova in run-deadline.test.mjs. Qui si fissa che il workflow non l'ha spostata:
+// cap 2400s, deadline cooperativa = cap - 60s.
+const RUN_DEADLINE_DEFAULT_S = 2400;
+
+test('F3.A.5: la scadenza dura del tentativo resta cap 2400s e deadline cooperativa 2340s', () => {
+  const r = runGenerateStep({ section: 'svizzera', plan: ['0 0'] });
+  assert.equal(r.caps[0], `${RUN_DEADLINE_DEFAULT_S}s`);
+  assert.equal(Number(r.wallMs[0]), (RUN_DEADLINE_DEFAULT_S - 60) * 1000);
+});
+
+test('F3.A.5: il default della dura e\' lo stesso in entrambi i workflow', () => {
+  for (const [name, text] of [['generate-article.yml', WF], ['generate-article-core.yml', CORE_WF]]) {
+    const m = text.match(/hard_kill_s="\$\{GENERATE_HARD_KILL_S:-(\d+)\}"/);
+    assert.ok(m, `${name}: default di GENERATE_HARD_KILL_S non leggibile`);
+    assert.equal(Number(m[1]), RUN_DEADLINE_DEFAULT_S, `${name}: default diverso da ${RUN_DEADLINE_DEFAULT_S}s`);
+  }
+});

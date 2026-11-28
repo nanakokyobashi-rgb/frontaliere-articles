@@ -2,6 +2,11 @@
 # Sorgente: .github/workflows/generate-article.yml (job admit e generate, senza i commenti)
 #   + le sostituzioni dichiarate in CORE_REPLACEMENTS del generatore.
 # Le ragioni di ogni step stanno nella sorgente: si leggono e si modificano li'.
+# Variabili del repo: vars.CANTON_CHAIN_MAX_RUNS_PER_HOUR e' il tetto orario della catena
+# cantonale per sezione (default 3 run/ora; la variabile nazionale CHAIN_MAX_RUNS_PER_HOUR del sito ha default 20).
+# Il tetto conta le run che hanno tentato una generazione: non le skipped, non la run corrente.
+# Limite noto: l'elenco run non espone i job, quindi un'ammissione negata che chiude success
+# (il job generate non parte) conta nel tetto; il tetto resta cautelativo.
 # Rigenera: node scripts/ci/generate-canton-article-workflows.mjs
 # Verifica: node scripts/ci/generate-canton-article-workflows.mjs --check
 name: Generate Blog Article (core)
@@ -50,6 +55,11 @@ on:
         required: false
         default: false
         type: boolean
+      chain_scope:
+        description: 'canton-high-cadence = la catena e il dispatch dopo un articolo valgono solo per le sezioni in CANTON_HIGH_CADENCE_SECTIONS (Remote Config)'
+        required: false
+        default: ''
+        type: string
       url:
         required: false
         default: ''
@@ -115,7 +125,7 @@ jobs:
           PUSH_SHA: ${{ github.sha }}
           CHAIN_DEPTH: ${{ inputs.chain_depth }}
           PARENT_RUN_ID: ${{ inputs.parent_run_id }}
-          CHAIN_MAX_RUNS_PER_HOUR: ${{ vars.CHAIN_MAX_RUNS_PER_HOUR }}
+          CHAIN_MAX_RUNS_PER_HOUR: ${{ vars.CANTON_CHAIN_MAX_RUNS_PER_HOUR }}
           CALLER_WORKFLOW: ${{ inputs.caller_workflow }}
           ADMISSION_RUN_SNAPSHOT: |-
             . as $pages
@@ -424,10 +434,10 @@ jobs:
           if [ "$is_link" = "true" ]; then
             cap="${CHAIN_MAX_RUNS_PER_HOUR:-}"
             case "$cap" in
-              ''|*[!0-9]*) cap=20 ;;
+              ''|*[!0-9]*) cap=3 ;;
             esac
             last_hour=$(printf '%s' "$runs" \
-              | jq -er 'length' \
+              | jq -er --argjson me "$SELF_ID" '[.[] | select(.id != $me) | select(.conclusion != "skipped")] | length' \
               2>/dev/null) || fail_closed_admission
             case "${last_hour:-}" in
               ''|*[!0-9]*) last_hour=0 ;;
@@ -613,6 +623,8 @@ jobs:
           TARGET_REF: ${{ github.ref_name }}
           CANTON_GENERATION_MAX_PARALLEL: ${{ vars.CANTON_GENERATION_MAX_PARALLEL }}
           CANTON_DAILY_BUDGET_CAP: ${{ vars.CANTON_DAILY_BUDGET_CAP }}
+          RECOVERY_SLOT: ${{ inputs.recovery_slot }}
+          PARENT_RUN_ID: ${{ inputs.parent_run_id }}
           QUOTA_BEACON_PEER_REPO: valerielinc-ops/frontaliere-si-o-no
           CANTON_GATE_RECEIPT_PATH: ${{ runner.temp }}/canton-section-gate.json
         run: node scripts/ci/canton-generation-admit.mjs
@@ -629,8 +641,9 @@ jobs:
 
       - name: Section gate — conferma dello slot ammesso
         id: claim
-        if: inputs.dispatch_origin == 'cloud_scheduler' && steps.canton.outputs.proceed == 'true'
+        if: inputs.dispatch_origin == 'cloud_scheduler' && (steps.canton.outputs.proceed == 'true' || steps.canton.outputs.consume_slot == 'true')
         env:
+          CONSUME_SLOT: ${{ steps.canton.outputs.consume_slot }}
           SECTION: ${{ inputs.section }}
           SELF_ID: ${{ github.run_id }}
           RECOVERY_SLOT: ${{ inputs.recovery_slot }}
@@ -680,8 +693,13 @@ jobs:
             fi
           }
           if request_generation_claim admit; then
-            echo "Slot Cloud Scheduler ammesso dal registro Firestore: $RECOVERY_SLOT."
-            echo 'proceed=true' >> "$GITHUB_OUTPUT"
+            if [ "$CONSUME_SLOT" = 'true' ]; then
+              echo "Slot Cloud Scheduler consumato senza generare (fuori cadenza): $RECOVERY_SLOT."
+              echo 'proceed=false' >> "$GITHUB_OUTPUT"
+            else
+              echo "Slot Cloud Scheduler ammesso dal registro Firestore: $RECOVERY_SLOT."
+              echo 'proceed=true' >> "$GITHUB_OUTPUT"
+            fi
           else
             echo "::warning::ammissione Firestore dello slot non confermata; il generatore resta chiuso."
             echo "GENERATION_OUTCOME kind=skipped reason=generation-slot-claim-denied section=$SECTION"
@@ -1813,6 +1831,7 @@ jobs:
           RESCUE_DEPTH: ${{ inputs.rescue_depth }}
           CHAIN_ARMED: ${{ vars.CHAIN_ARMED }}
           CHAIN_DISPATCH: ${{ inputs.chain_dispatch }}
+          CHAIN_SCOPE: ${{ inputs.chain_scope }}
           CALLER_WORKFLOW: ${{ inputs.caller_workflow }}
           PRIMARY_SECTION: ${{ inputs.section }}
           SIBLING_SECTION: ${{ inputs.sibling_section }}
@@ -1844,16 +1863,29 @@ jobs:
           [ "${DRY:-}" = "true" ] && stop "self-test dry, non e' un anello"
           [ -f .github/CHAIN_DISABLED ] && stop ".github/CHAIN_DISABLED presente (kill switch in-repo)"
           [ "${CHAIN_ARMED:-}" = "false" ] && stop "vars.CHAIN_ARMED=false (kill switch)"
-          [ "${CHAIN_DISPATCH:-}" = "true" ] || stop "catena via dispatch spenta per questo chiamante (chain_dispatch != true)"
+          chain_enabled=false
+          if [ "${CHAIN_DISPATCH:-}" = "true" ]; then
+            chain_enabled=true
+          elif [ "${CHAIN_SCOPE:-}" = "canton-high-cadence" ] \
+            && node generator/scripts/lib/canton-high-cadence.mjs has "${PRIMARY_SECTION:-}" >/dev/null 2>&1; then
+            chain_enabled=true
+          fi
+          [ "$chain_enabled" = "true" ] || stop "catena via dispatch spenta per questo chiamante (chain_dispatch != true e sezione non in CANTON_HIGH_CADENCE_SECTIONS)"
 
-          [ "${ARTICLE:-}" = "true" ] && stop "articolo prodotto — il successore lo fa gia' il push su content/**"
+          article_link=false
+          if [ "${ARTICLE:-}" = "true" ]; then
+            [ "${CHAIN_SCOPE:-}" = "canton-high-cadence" ] || stop "articolo prodotto — il successore lo fa gia' il push su content/**"
+            article_link=true
+          fi
           [ "${PROVIDER_BLOCKED:-}" = "true" ] && stop "pool AI condiviso temporaneamente indisponibile; si cede a Cloud Scheduler"
           [ "${ROSTER_BLOCKED:-}" = "true" ] && stop "roster esaurito: il prossimo tentativo troverebbe lo stesso muro, non una finestra nuova"
           [ "${COOPERATIVE_STOP:-}" = "true" ] && stop "cap cooperativo raggiunto: nessun articolo e nessun dispatch immediato; si cede a Cloud Scheduler"
 
           kind='link'
           next_rescue="$rescue"
-          if [ "${DECLARED:-}" != "true" ]; then
+          if [ "$article_link" = "true" ]; then
+            kind=article
+          elif [ "${DECLARED:-}" != "true" ]; then
             kind=rescue
             [ "$rescue" -ge "$max_rescue" ] && stop "esito NON dichiarato (kill duro, stallo, exit 3, uscita muta o guasto prima del generatore), e il soccorso di questa catena e' gia' speso ($rescue/$max_rescue) — si cede a Cloud Scheduler"
             next_rescue=$(( rescue + 1 ))
@@ -1861,6 +1893,7 @@ jobs:
 
           next_depth=$(( depth + 1 ))
           next_streak=$(( streak + 1 ))
+          [ "$kind" = "article" ] && next_streak=0
           [ "$next_streak" -ge "$max_streak" ] && stop "$next_streak anelli secchi di fila (cap $max_streak) — si cede a Cloud Scheduler"
           [ "$next_depth" -ge "$max_depth" ] && stop "profondita' $next_depth (cap $max_depth) — si cede a Cloud Scheduler"
 
@@ -1875,6 +1908,7 @@ jobs:
 
           wait_s="$delay_s"
           [ "$kind" = "rescue" ] && wait_s="$rescue_delay_s"
+          [ "$kind" = "article" ] && wait_s="${CHAIN_ARTICLE_DELAY_S:-30}"
           echo "${kind}: depth ${depth}→${next_depth}, streak ${streak}→${next_streak}, soccorso ${rescue}→${next_rescue}, sezione ${base}→${next_section}, fra ${wait_s}s"
           [ "$wait_s" -gt 0 ] && sleep "$wait_s"
 

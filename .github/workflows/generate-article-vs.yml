@@ -38,6 +38,26 @@ on:
         type: string
       recovery_claim:
         type: string
+      chain_depth:
+        description: 'Chain link depth (0 = slot or human dispatch, written by the chain step: never set by hand)'
+        required: false
+        default: '0'
+        type: string
+      no_article_streak:
+        description: 'Consecutive dry chain links (written by the chain step: never set by hand)'
+        required: false
+        default: '0'
+        type: string
+      rescue_depth:
+        description: 'Rescue restarts already spent by this chain (written by the chain step: never set by hand)'
+        required: false
+        default: '0'
+        type: string
+      parent_run_id:
+        description: 'Run that dispatched this chain link (written by the chain step: never set by hand)'
+        required: false
+        default: ''
+        type: string
       url:
         description: 'Optional: specific source URL (empty = auto-scan)'
         required: false
@@ -71,8 +91,13 @@ jobs:
       body_path_regex: '^content/blog-body-canton-vs/[a-z]{2}/.+\.ts$'
       section_gate: canton
       chain_dispatch: false
+      chain_scope: canton-high-cadence
       url: ${{ inputs.url }}
-      dispatch_origin: ${{ inputs.dispatch_origin || 'manual' }}
+      dispatch_origin: ${{ inputs.chain_depth != '' && inputs.chain_depth != '0' && 'chain' || inputs.dispatch_origin || 'manual' }}
+      chain_depth: ${{ inputs.chain_depth || '0' }}
+      no_article_streak: ${{ inputs.no_article_streak || '0' }}
+      rescue_depth: ${{ inputs.rescue_depth || '0' }}
+      parent_run_id: ${{ inputs.parent_run_id }}
       loop_clock: ${{ inputs.loop_clock }}
       recovery_slot: ${{ inputs.recovery_slot }}
       recovery_claim: ${{ inputs.recovery_claim }}
