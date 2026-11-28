@@ -230,124 +230,6 @@
           "notes": "GET reale: status 200, content-type text/xml;charset=UTF-8, 200 item totali e 56 negli ultimi 7 giorni. Titoli: Stadtrat: Öffentliches Interesse zu klein; Pilzschmaus zog Hunderte nach Mellingen; Kanton - Prämienverbilligung zugute? Feed regionale ad alta cadenza. /robots.txt risponde 404 HTML (file robots assente, non una regola di blocco); nessun divieto AI osservabile. Le pagine Impressum/Datenschutz pubbliche non riportano un divieto di accesso automatizzato."
         },
         {
-          "url": "https://www.aargauerzeitung.ch/aargau.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Aargauer Zeitung (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "servizi", "mobilita", "fisco", "lavoro"],
-          "quirks": {
-            "paywall": "title+lead"
-          },
-          "items7d": 35,
-          "verifiedAt": "2026-10-08",
-          "notes": "Fonte principale AG: 44 item, tutti datati. robots.txt: User-agent * ammesso per i .rss, ma ClaudeBot/GPTBot/anthropic-ai e altri bot AI sono Disallow: / -> il crawler deve usare lo UA frontaliere-source-probe/frontaliere, MAI un UA di bot AI nominato. Molti pezzi sono paywall (titolo+lead visibili); il body va letto con cautela. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.aargauerzeitung.ch/aargau/aarau.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Aargauer Zeitung (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "servizi", "eventi"],
-          "quirks": {
-            "paywall": "title+lead"
-          },
-          "items7d": 29,
-          "verifiedAt": "2026-10-08",
-          "notes": "Feed regionale Aarau: 58 item. Stessi vincoli robots/UA e paywall del feed aargau.rss. Sovrapposizione parziale con aargau.rss: dedup per URL. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.aargauerzeitung.ch/aargau/baden.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Aargauer Zeitung (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "servizi", "eventi"],
-          "quirks": {
-            "paywall": "title+lead"
-          },
-          "items7d": 43,
-          "verifiedAt": "2026-10-08",
-          "notes": "Feed regionale Baden/Wettingen/Limmattal: 59 item. Stessi vincoli robots/UA e paywall del feed aargau.rss. Sovrapposizione parziale con aargau.rss: dedup per URL. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.aargauerzeitung.ch/aargau/fricktal.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Aargauer Zeitung (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "servizi", "eventi", "frontalieri", "mobilita"],
-          "quirks": {
-            "paywall": "title+lead"
-          },
-          "items7d": 25,
-          "verifiedAt": "2026-10-08",
-          "notes": "Feed regionale Fricktal (Rheinfelden/Laufenburg, confine DE): 57 item. Stessi vincoli robots/UA e paywall del feed aargau.rss. Sovrapposizione parziale con aargau.rss: dedup per URL. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.aargauerzeitung.ch/aargau/zofingen.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Aargauer Zeitung (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "servizi", "eventi"],
-          "quirks": {
-            "paywall": "title+lead"
-          },
-          "items7d": 31,
-          "verifiedAt": "2026-10-08",
-          "notes": "Feed regionale Zofingen/Wiggertal: 57 item. Stessi vincoli robots/UA e paywall del feed aargau.rss. Sovrapposizione parziale con aargau.rss: dedup per URL. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.aargauerzeitung.ch/aargau/brugg.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Aargauer Zeitung (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "servizi", "eventi"],
-          "quirks": {
-            "paywall": "title+lead"
-          },
-          "items7d": 22,
-          "verifiedAt": "2026-10-08",
-          "notes": "Feed regionale Brugg/Windisch/Aaretal: 57 item. Stessi vincoli robots/UA e paywall del feed aargau.rss. Sovrapposizione parziale con aargau.rss: dedup per URL. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.aargauerzeitung.ch/aargau/freiamt.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Aargauer Zeitung (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "servizi", "eventi"],
-          "quirks": {
-            "paywall": "title+lead"
-          },
-          "items7d": 34,
-          "verifiedAt": "2026-10-08",
-          "notes": "Feed regionale Freiamt (Muri/Wohlen): 57 item. Stessi vincoli robots/UA e paywall del feed aargau.rss. Sovrapposizione parziale con aargau.rss: dedup per URL. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.aargauerzeitung.ch/leben.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Aargauer Zeitung (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["eventi", "servizi"],
-          "quirks": {},
-          "items7d": 20,
-          "verifiedAt": "2026-10-08",
-          "notes": "Rubrica Leben (27 item): servizi, famiglia, consumi. Qualita' mista, serve il filtro tema. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
           "url": "https://www.suedkurier.de/hochrhein/rss",
           "format": "rss",
           "parser": "rss",
@@ -518,6 +400,120 @@
         "Radio Argovia e Tele M1 non utilizzabili; nessuna fonte TV/radio locale AG verificata. SRF regionale AG-SO non ha RSS",
         "I feed Aargauer Zeitung sono paywall parziale e robots.txt vieta bot AI nominati: il crawler deve identificarsi con il proprio UA frontaliere, non con ClaudeBot/anthropic",
         "Dominio e lingua: tutte le fonti sono in tedesco; non esistono fonti it/fr/en per AG (gli articoli vanno tradotti in pipeline). Il Grenzgaenger verso AG e' tedesco, quindi i temi Italia (INPS, Agenzia Entrate, ocst) delle liste globali sono irrilevanti"
+      ],
+      "rejectedSources": [
+        {
+          "url": "https://www.aargauerzeitung.ch/aargau.rss",
+          "publisher": "Aargauer Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 35,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 35 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.aargauerzeitung.ch/aargau/aarau.rss",
+          "publisher": "Aargauer Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 29,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 29 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.aargauerzeitung.ch/aargau/baden.rss",
+          "publisher": "Aargauer Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 43,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 43 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.aargauerzeitung.ch/aargau/fricktal.rss",
+          "publisher": "Aargauer Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 25,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 25 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.aargauerzeitung.ch/aargau/zofingen.rss",
+          "publisher": "Aargauer Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 31,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 31 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.aargauerzeitung.ch/aargau/brugg.rss",
+          "publisher": "Aargauer Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 22,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 22 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.aargauerzeitung.ch/aargau/freiamt.rss",
+          "publisher": "Aargauer Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 34,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 34 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.aargauerzeitung.ch/leben.rss",
+          "publisher": "Aargauer Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 20,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 20 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        }
       ]
     },
     {
@@ -731,21 +727,6 @@
           "notes": "Si arriva da https://www.neue.at/rss (redirect a epaper.neue.at/feed; usare l'URL finale). 10 item recenti, ma generalisti/sport: bassa resa pertinente. robots.txt: Allow /. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
         },
         {
-          "url": "https://www.tagblatt.ch/ostschweiz/appenzellerland.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "St.Galler Tagblatt / Appenzellerland",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "servizi", "eventi", "lavoro"],
-          "quirks": {
-            "paywall": "title+lead"
-          },
-          "items7d": 26,
-          "verifiedAt": "2026-10-08",
-          "notes": "Feed regionale Appenzellerland; titolo e lead pubblici nel feed, articoli parzialmente a pagamento. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
           "url": "https://appenzell24.ch/feed/",
           "format": "rss",
           "parser": "rss",
@@ -895,6 +876,22 @@
         "Mobilita: nessun feed del TP (Appenzeller Bahnen pubblica ~1-2 volte al mese; Ostwind senza news); nessuna fonte FFS/USTRA verificata (admin.ch WAF). Il path ASTRA provato risponde 404 e TCS non risponde.",
         "Servizi: AI senza ospedale/sanita' cantonale con feed (solo i comunicati generali di ai.ch); migrazione/permessi AI e AR senza pagina news verificata (i path provati hanno restituito 404).",
         "Le fonti HTML di ar.ch (TYPO3) hanno le date solo nel testo del listing (dd.mm.yyyy) e non in un attributo: l'estrattore deve leggerle dal testo vicino al link."
+      ],
+      "rejectedSources": [
+        {
+          "url": "https://www.tagblatt.ch/ostschweiz/appenzellerland.rss",
+          "publisher": "St.Galler Tagblatt / Appenzellerland",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 26,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 26 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        }
       ]
     },
     {
@@ -1361,60 +1358,6 @@
           "notes": "GET reale: status 200, content-type text/html; charset=utf-8, 10 item/entry nella pagina e 2 con data 30.09.2026 negli ultimi 7 giorni. Titoli misurati: Baustelle Mühlestiegstrasse 5; Baustelle Rebenstrasse; Baumschäden im Riehener und Bettinger Wald: Erholungsanlagen und Waldwege werden vorübergehend geschlossen. Lista server-rendered con link /aktuelles/meldungen/*.php; il volume è basso ma copre un comune Basel-Stadt non presente nelle fonti news. robots.txt 200, crawl-delay 10, nessun blocco ClaudeBot/anthropic-ai/GPTBot; impressum consultato senza divieto crawler rilevato."
         },
         {
-          "url": "https://www.bzbasel.ch/basel.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "bz Basel (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "servizi", "mobilita", "lavoro"],
-          "quirks": {
-            "paywall": "title+lead"
-          },
-          "items7d": 16,
-          "verifiedAt": "2026-10-08",
-          "notes": "Feed regionale BS+BL, 20 item. Articoli spesso a pagamento: il feed espone titolo e lead. Elenco ufficiale in bzbasel.ch/rss. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.bzbasel.ch/basel/baselland.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "bz Basel (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "servizi", "mobilita", "fisco"],
-          "quirks": {},
-          "items7d": 39,
-          "verifiedAt": "2026-10-08",
-          "notes": "Copertura specifica Basel-Landschaft (57 item). Compensa il blocco 403 di baselland.ch. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.bzbasel.ch/basel/basel-stadt.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "bz Basel (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "servizi", "mobilita", "fisco", "eventi"],
-          "quirks": {},
-          "items7d": 46,
-          "verifiedAt": "2026-10-08",
-          "notes": "Copertura specifica Basel-Stadt (57 item). D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.bzbasel.ch/kultur.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "bz Basel (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["eventi"],
-          "quirks": {},
-          "items7d": 41,
-          "verifiedAt": "2026-10-08",
-          "notes": "Feed cultura/eventi (78 item): fonte principale per hub eventi. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
           "url": "https://www.schwarzwaelder-bote.de/lokales/kreis-loerrach/",
           "format": "html",
           "parser": "html-links",
@@ -1629,6 +1572,62 @@
           "reason": "paywall",
           "decision": "exclude",
           "decisionAt": "2026-10-08"
+        },
+        {
+          "url": "https://www.bzbasel.ch/basel.rss",
+          "publisher": "bz Basel (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 16,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 16 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.bzbasel.ch/basel/baselland.rss",
+          "publisher": "bz Basel (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 39,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 39 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.bzbasel.ch/basel/basel-stadt.rss",
+          "publisher": "bz Basel (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 46,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 46 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.bzbasel.ch/kultur.rss",
+          "publisher": "bz Basel (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 41,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 41 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
         }
       ]
 
@@ -2536,40 +2535,6 @@
           "notes": "Agglomerazione francese alle porte di Ginevra (tram/bus, siccità, eventi); ~6 link articolo, volume basso."
         },
         {
-          "url": "https://www.unige.ch/actualites/rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Université de Genève - actualités",
-          "language": "fr",
-          "kind": "istituzionale",
-          "topics": [
-            "servizi",
-            "lavoro",
-            "eventi"
-          ],
-          "quirks": {},
-          "items7d": 6,
-          "verifiedAt": "2026-10-06",
-          "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/xml;charset=UTF-8. Items ultimi 7 giorni: 6. Titoli osservati: \"Dies academicus\"; \"Le programme de logement intergénérationnel 1h/m2 fête ses dix ans\"; \"IA et premier emploi - Table ronde jeudi 8 octobre\". Feed RSS con 15 item; 6 pubblicati dal 29 settembre (ricerca, campus, lavoro e vita locale). Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www.unige.ch/cookies/ -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato.  URL richiesto https://www.unige.ch/feed/rss reindirizza al canonico."
-        },
-        {
-          "url": "https://www.unige.ch/medias/rss/presse",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Université de Genève - communiqués de presse",
-          "language": "fr",
-          "kind": "istituzionale",
-          "topics": [
-            "servizi",
-            "lavoro",
-            "eventi"
-          ],
-          "quirks": {},
-          "items7d": 2,
-          "verifiedAt": "2026-10-06",
-          "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/xml; charset=UTF-8. Items ultimi 7 giorni: 2. Titoli osservati: \"Un phare cosmique détecté aux confins de l’Univers\"; \"Comment l’horloge biologique rythme les phases de l’éveil\"; \"L’hérédité n’est pas qu’une question d’ADN\". Feed RSS stampa con 20 item datati; 2 negli ultimi 7 giorni, utile per scienza, salute, innovazione e formazione. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www.unige.ch/cookies/ -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato.  URL richiesto https://www.unige.ch/feed/presse/rss reindirizza al canonico."
-        },
-        {
           "url": "https://www.hesge.ch/actualites",
           "format": "html",
           "parser": "html-links",
@@ -2798,6 +2763,34 @@
           "reason": "paywall",
           "decision": "exclude",
           "decisionAt": "2026-10-08"
+        },
+        {
+          "url": "https://www.unige.ch/actualites/rss",
+          "publisher": "Université de Genève - actualités",
+          "kind": "istituzionale",
+          "language": "fr",
+          "intendedBucket": "news",
+          "items7d": 6,
+          "verifiedAt": "2026-10-06",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 6 item/7 giorni, verificato il 2026-10-06. 2026-11-28: HTTP 403 dal WAF del sito (F5) per il nostro UA identificativo FrontaliereTicinoBot sia nei run hosted sia dal laptop; un UA di forma diversa passa, ma l'UA non si cambia per eludere la regola (D10). Archiviato finché il publisher non autorizza il nostro UA.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.unige.ch/medias/rss/presse",
+          "publisher": "Université de Genève - communiqués de presse",
+          "kind": "istituzionale",
+          "language": "fr",
+          "intendedBucket": "news",
+          "items7d": 2,
+          "verifiedAt": "2026-10-06",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 2 item/7 giorni, verificato il 2026-10-06. 2026-11-28: HTTP 403 dal WAF del sito (F5) per il nostro UA identificativo FrontaliereTicinoBot sia nei run hosted sia dal laptop; un UA di forma diversa passa, ma l'UA non si cambia per eludere la regola (D10). Archiviato finché il publisher non autorizza il nostro UA.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
         }
       ]
 
@@ -4517,7 +4510,7 @@
           "items7d": 55,
           "verifiedAt": "2026-10-08",
           "origin": "rejected",
-          "notes": "Ultimo conteggio accessibile: 55 item/7 giorni, verificato il 2026-10-08. HTTP 403 nel run hosted 46098366937 del 2026-11-28; archiviato finché il runner operativo non conferma l’accesso, senza retry o aggiramento del blocco.",
+          "notes": "Ultimo conteggio accessibile: 55 item/7 giorni, verificato il 2026-10-08. HTTP 403 nel run hosted 46098366937 del 2026-11-28; la stessa GET dal laptop il 2026-11-28 riceve ugualmente HTTP 403 con cf-mitigated: challenge (Cloudflare managed challenge, anche su /robots.txt e con qualunque UA). Archiviato senza retry né aggiramento (D10).",
           "reason": "sourceUnavailable",
           "decision": "exclude",
           "decisionAt": "2026-11-28"
@@ -4531,7 +4524,7 @@
           "items7d": 35,
           "verifiedAt": "2026-10-08",
           "origin": "rejected",
-          "notes": "URL condiviso da LU, OW e ZG. Ultimo conteggio accessibile: 35 item/7 giorni, verificato il 2026-10-08. HTTP 403 nel run hosted 46098366937 del 2026-11-28; una GET successiva con lo User-Agent del generatore ha restituito 200 dal laptop. Archiviato nei tre profili finché il runner operativo non conferma l’accesso; nessun retry o aggiramento del blocco.",
+          "notes": "URL condiviso da LU, OW e ZG. Ultimo conteggio accessibile: 35 item/7 giorni, verificato il 2026-10-08. HTTP 403 nel run hosted 46098366937 del 2026-11-28; la stessa GET dal laptop il 2026-11-28 riceve ugualmente HTTP 403 con cf-mitigated: challenge (Cloudflare managed challenge, anche su /robots.txt e con qualunque UA), quindi non è un blocco dei soli datacenter. Archiviato nei tre profili senza retry né aggiramento (D10).",
           "reason": "sourceUnavailable",
           "decision": "exclude",
           "decisionAt": "2026-11-28"
@@ -4545,7 +4538,7 @@
           "items7d": 8,
           "verifiedAt": "2026-10-08",
           "origin": "rejected",
-          "notes": "Ultimo conteggio accessibile: 8 item/7 giorni, verificato il 2026-10-08. HTTP 403 nel run hosted 46098366937 del 2026-11-28; archiviato finché il runner operativo non conferma l’accesso, senza retry o aggiramento del blocco.",
+          "notes": "Ultimo conteggio accessibile: 8 item/7 giorni, verificato il 2026-10-08. HTTP 403 nel run hosted 46098366937 del 2026-11-28; la stessa GET dal laptop il 2026-11-28 riceve ugualmente HTTP 403 con cf-mitigated: challenge (Cloudflare managed challenge, anche su /robots.txt e con qualunque UA). Archiviato senza retry né aggiramento (D10).",
           "reason": "sourceUnavailable",
           "decision": "exclude",
           "decisionAt": "2026-11-28"
@@ -4559,7 +4552,7 @@
           "items7d": 3,
           "verifiedAt": "2026-10-08",
           "origin": "rejected",
-          "notes": "Ultimo conteggio accessibile: 3 item/7 giorni, verificato il 2026-10-08. HTTP 403 nel run hosted 46098366937 del 2026-11-28; archiviato finché il runner operativo non conferma l’accesso, senza retry o aggiramento del blocco.",
+          "notes": "Ultimo conteggio accessibile: 3 item/7 giorni, verificato il 2026-10-08. HTTP 403 nel run hosted 46098366937 del 2026-11-28; la stessa GET dal laptop il 2026-11-28 riceve ugualmente HTTP 403 con cf-mitigated: challenge (Cloudflare managed challenge, anche su /robots.txt e con qualunque UA). Archiviato senza retry né aggiramento (D10).",
           "reason": "sourceUnavailable",
           "decision": "exclude",
           "decisionAt": "2026-11-28"
@@ -4573,7 +4566,7 @@
           "items7d": 3,
           "verifiedAt": "2026-10-08",
           "origin": "rejected",
-          "notes": "Ultimo conteggio accessibile: 3 item/7 giorni, verificato il 2026-10-08. HTTP 403 nel run hosted 46098366937 del 2026-11-28; archiviato finché il runner operativo non conferma l’accesso, senza retry o aggiramento del blocco.",
+          "notes": "Ultimo conteggio accessibile: 3 item/7 giorni, verificato il 2026-10-08. HTTP 403 nel run hosted 46098366937 del 2026-11-28; la stessa GET dal laptop il 2026-11-28 riceve ugualmente HTTP 403 con cf-mitigated: challenge (Cloudflare managed challenge, anche su /robots.txt e con qualunque UA). Archiviato senza retry né aggiramento (D10).",
           "reason": "sourceUnavailable",
           "decision": "exclude",
           "decisionAt": "2026-11-28"
@@ -5195,34 +5188,6 @@
           "items7d": 0,
           "verifiedAt": "2026-10-06",
           "notes": "GET reale: status 200, content-type text/html; charset=utf-8. Ultima media release 30.04.2026; campioni: «GV von Nidwalden Tourismus in der Sagi Dallenwil», «Ein kräftiger Juiz für die Region». 0 item negli ultimi 7 giorni, ma pagina e link dettaglio sono crawlable. robots.txt 200, path consentito, nessun blocco AI/ai-input=no; Impressum/AGB consultati."
-        },
-        {
-          "url": "https://www.nidwaldnerzeitung.ch/zentralschweiz/nidwalden.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Nidwaldner Zeitung (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "servizi", "mobilita", "eventi", "fisco", "lavoro"],
-          "quirks": {
-            "paywall": "title+lead"
-          },
-          "items7d": 29,
-          "verifiedAt": "2026-10-08",
-          "notes": "RSS con 57 item datati (29 negli ultimi 7 giorni, 2024-03-30..2026-10-05); ~38/57 sotto /zentralschweiz/nidwalden, il resto Luzern/Obwalden/Schwyz/sport. Unico quotidiano locale NW. Contenuti spesso a pagamento (titolo+lead nel feed). ROBOTS: robots.txt blocca per nome anthropic-ai, ClaudeBot, Claude-Web (e altri crawler AI); User-agent * consente. Decisione di policy dell'orchestratore prima di abilitarla. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.nidwaldnerzeitung.ch/zentralschweiz.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Nidwaldner Zeitung (CH Media) - Zentralschweiz",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "mobilita", "servizi"],
-          "quirks": {},
-          "items7d": 35,
-          "verifiedAt": "2026-10-08",
-          "notes": "35 item, tutti negli ultimi 7 giorni; pero' prevalentemente Luzern/Zug/Schwyz (NW marginale). Solo contesto regionale; stessa avvertenza robots della feed NW. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
         }
       ],
       "categoryDataSources": {
@@ -5302,6 +5267,36 @@
         "fisco: il feed Steuerverwaltung e' il solo con RSS ma pubblica pochi item l'anno (ultimo 14.09.2026); le novita' fiscali nel resto arrivano dai comunicati del Regierungsrat",
         "estrazione tecnica: le fonti nw.ch e dei comuni (iCMS) non hanno <a> nel sorgente: servono un parser dedicato del JSON embedded in data-entities (o la lettura /_rte/information/<id>), altrimenti l'estrattore HTML le classifica come sterili",
         "robots/policy: NWZ blocca per nome ClaudeBot/anthropic-ai/Claude-Web pur lasciando '*' libero; va deciso dal proprietario se leggerla (le sole 4 feed NWZ coprono quasi tutta la parte media del cantone)"
+      ],
+      "rejectedSources": [
+        {
+          "url": "https://www.nidwaldnerzeitung.ch/zentralschweiz/nidwalden.rss",
+          "publisher": "Nidwaldner Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 29,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 29 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.nidwaldnerzeitung.ch/zentralschweiz.rss",
+          "publisher": "Nidwaldner Zeitung (CH Media) - Zentralschweiz",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 35,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 35 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        }
       ]
     },
     {
@@ -5449,21 +5444,6 @@
           "notes": "GET reale: status 200, content-type application/rss+xml; charset=utf-8, 12 item nel feed. Quattro item OW nella finestra 29.09–06.10: «Wildunfall-Gefahr steigt im Herbst in Ob- und Nidwalden», «Eiffelturm, Burj Khalifa – und jetzt Engelberg», «Zwischen Weltcup und Bauernhof: Janik Riebli aus Giswil» e «Odermatt, Gisin & Co.: So kämpfen sich Unterwaldens Ski-Asse in den Winter»; il feed è condiviso e va filtrato per OW/NW. robots.txt nomina gli user-agent AI ma consente esplicitamente / e /feed/ (vieta solo /admin/ e /api/); AGB/Impressum consultati senza divieto di raccolta."
         },
         {
-          "url": "https://www.luzernerzeitung.ch/zentralschweiz/obwalden.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Luzerner Zeitung / Obwaldner Zeitung (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "servizi", "mobilita", "eventi", "fisco", "lavoro", "pensioni"],
-          "quirks": {
-            "paywall": "title+lead"
-          },
-          "items7d": 29,
-          "verifiedAt": "2026-10-08",
-          "notes": "Fonte primaria news OW: 57 item, 29 negli ultimi 7 giorni, di cui 21 con link /zentralschweiz/obwalden/ (il resto: Luzern/Nidwalden/Zentralschweiz). Alcuni articoli sono a pagamento (paywall): il feed da' titolo e lead. robots.txt: nessun blocco dei path RSS, ma vieta ClaudeBot/anthropic-ai come user-agent: usare lo user-agent generico del generatore e solo titolo/lead, non copiare testo. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
           "url": "https://www.zentralplus.ch/feed/",
           "format": "rss",
           "parser": "rss",
@@ -5567,7 +5547,7 @@
           "items7d": 35,
           "verifiedAt": "2026-10-08",
           "origin": "rejected",
-          "notes": "URL condiviso da LU, OW e ZG. Ultimo conteggio accessibile: 35 item/7 giorni, verificato il 2026-10-08. HTTP 403 nel run hosted 46098366937 del 2026-11-28; una GET successiva con lo User-Agent del generatore ha restituito 200 dal laptop. Archiviato nei tre profili finché il runner operativo non conferma l’accesso; nessun retry o aggiramento del blocco.",
+          "notes": "URL condiviso da LU, OW e ZG. Ultimo conteggio accessibile: 35 item/7 giorni, verificato il 2026-10-08. HTTP 403 nel run hosted 46098366937 del 2026-11-28; la stessa GET dal laptop il 2026-11-28 riceve ugualmente HTTP 403 con cf-mitigated: challenge (Cloudflare managed challenge, anche su /robots.txt e con qualunque UA), quindi non è un blocco dei soli datacenter. Archiviato nei tre profili senza retry né aggiramento (D10).",
           "reason": "sourceUnavailable",
           "decision": "exclude",
           "decisionAt": "2026-11-28"
@@ -5587,6 +5567,20 @@
           "reason": "noRecentItems",
           "decision": "exclude",
           "decisionAt": "2026-10-08"
+        },
+        {
+          "url": "https://www.luzernerzeitung.ch/zentralschweiz/obwalden.rss",
+          "publisher": "Luzerner Zeitung / Obwaldner Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 29,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 29 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
         }
       ]
 
@@ -5855,47 +5849,6 @@
           "notes": "GET reale: status 200, content-type text/html; charset=utf-8. Quattro item datati nella finestra: «Kinder-Uni 2026 – grosse Bühne für junge Superhirne» e «Mehr!»: Wirtschaftshistorisches Buch ...» (06.10), «SQUARE goes Minecraft» e «Malcolm Greens Graduation Groove» (05.10); pagina con link/paginazione HTML. robots.txt 200, path consentito, nessun blocco AI/ai-input=no; privacy/impressum consultati."
         },
         {
-          "url": "https://www.tagblatt.ch/ostschweiz.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "St.Galler Tagblatt (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "lavoro", "mobilita", "eventi", "servizi", "fisco", "frontalieri"],
-          "quirks": {
-            "paywall": "title+lead"
-          },
-          "items7d": 52,
-          "verifiedAt": "2026-10-08",
-          "notes": "Feed regionale principale (59 item, tutti datati pubDate ISO). Paywall solo sul corpo: titolo+descrizione nel feed. robots: nessun Disallow su .rss. Sovrapposizione parziale con gli altri feed tagblatt.ch/ostschweiz/*.rss (15 guid in comune col feed stgallen su 57). D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.tagblatt.ch/ostschweiz/stgallen.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "St.Galler Tagblatt (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "mobilita", "eventi", "servizi"],
-          "quirks": {},
-          "items7d": 44,
-          "verifiedAt": "2026-10-08",
-          "notes": "Città e Kanton St.Gallen; 57 item datati. Altri feed verificati 200 e datati, non inclusi per sovrapposizione: /ostschweiz/toggenburg.rss (27 in 7gg), /ostschweiz/wil.rss (28), /ostschweiz/appenzellerland.rss (AR/AI). D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.tagblatt.ch/ostschweiz/rheintal.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "St.Galler Tagblatt (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "lavoro", "frontalieri", "mobilita"],
-          "quirks": {},
-          "items7d": 15,
-          "verifiedAt": "2026-10-08",
-          "notes": "Rheintal = area di confine con Vorarlberg/Liechtenstein, quota frontalieri >11% degli occupati. /ostschweiz/werdenberg.rss fa redirect a questo feed. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
           "url": "https://www.stgallen24.ch/",
           "format": "html",
           "parser": "html-links",
@@ -6066,6 +6019,48 @@
           "reason": "noRecentItems",
           "decision": "exclude",
           "decisionAt": "2026-10-08"
+        },
+        {
+          "url": "https://www.tagblatt.ch/ostschweiz.rss",
+          "publisher": "St.Galler Tagblatt (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 52,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 52 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.tagblatt.ch/ostschweiz/stgallen.rss",
+          "publisher": "St.Galler Tagblatt (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 44,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 44 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.tagblatt.ch/ostschweiz/rheintal.rss",
+          "publisher": "St.Galler Tagblatt (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 15,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 15 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
         }
       ]
 
@@ -6250,22 +6245,6 @@
           "items7d": 0,
           "verifiedAt": "2026-10-05",
           "notes": "Guide per chi lavora/si trasferisce in CH dalla Germania. Volume basso (ultimo item 2026-07-23). Solo evergreen."
-        },
-        {
-          "url": "https://www.shpower.ch/sh-power/newsroom.html",
-          "format": "html",
-          "parser": "html-links",
-          "publisher": "SH POWER (azienda elettrica/gas/acqua di Schaffhausen)",
-          "language": "de",
-          "kind": "istituzionale",
-          "topics": ["servizi", "carburanti", "mobilita"],
-          "quirks": {
-            "articlePathPattern": "^/sh-power/newsroom/(newsbeitrag|blogpost)/"
-          },
-          "reserve": true,
-          "items7d": 1,
-          "verifiedAt": "2026-10-08",
-          "notes": "Utility cittadina: tariffe energia, gas, cantieri (Verkehrsumleitung), fotovoltaico. 115 link /sh-power/newsroom/newsbeitrag/<id>-<slug> con <time datetime>; probe locale 200 (1 negli ultimi 7 giorni, 4 negli ultimi 30, ultimo 2026-09-29), ma il runner GitHub riceve HTTP 403. Il robots.txt live pubblica sitemap.xml: l'indice e il news sitemap ufficiale rispondono 200, ma il news sitemap ha 127 URL datati e ultimo item 2026-09-30, quindi 0 recenti nella finestra di 3 giorni. Nessun canale alternativo ufficiale produttivo dal runner: resta fuori dalle fonti attive come reserve, senza UA camuffato, proxy o retry sul 403."
         },
         {
           "url": "https://www.shkb.ch/244-news-medienmitteilungen",
@@ -6592,6 +6571,20 @@
           "reason": "noRecentItems",
           "decision": "exclude",
           "decisionAt": "2026-10-08"
+        },
+        {
+          "url": "https://www.shpower.ch/sh-power/newsroom.html",
+          "publisher": "SH POWER (azienda elettrica/gas/acqua di Schaffhausen)",
+          "kind": "istituzionale",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 1,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 1 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
         }
       ],
       "ownerDecisionPending": [],
@@ -6717,123 +6710,6 @@
           "items7d": 0,
           "verifiedAt": "2026-10-05",
           "notes": "Posizioni del padronato SO (budget cantonale, mercato del lavoro, iniziativa 10 milioni)."
-        },
-        {
-          "url": "https://www.solothurnerzeitung.ch/solothurn.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Solothurner Zeitung (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "servizi", "mobilita", "eventi", "lavoro", "fisco"],
-          "quirks": {},
-          "items7d": 41,
-          "verifiedAt": "2026-10-08",
-          "notes": "CH Media (Solothurner Zeitung / Oltner Tagblatt / Grenchner Tagblatt condividono la stessa redazione). robots.txt: User-agent * consentito (solo /suche?, /api/ ecc. vietati) ma elenca esplicitamente come Disallow ClaudeBot/anthropic-ai/GPTBot e simili: il generatore deve usare il proprio UA non-AI e non richiedere /api/; decisione di policy all'orchestratore. Feed principale cantonale; stesso contenuto di oltnertagblatt.ch/solothurn.rss, grenchnertagblatt.ch/solothurn.rss e bzbasel.ch/solothurn.rss (usarne UNO solo). D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.solothurnerzeitung.ch/solothurn/kanton-solothurn.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Solothurner Zeitung (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "servizi", "fisco", "pensioni", "lavoro"],
-          "quirks": {},
-          "items7d": 35,
-          "verifiedAt": "2026-10-08",
-          "notes": "Sezione 'Kanton Solothurn' (politica/amministrazione cantonale); sottoinsieme di solothurn.rss, piu' mirato su servizi/fisco/politica. CH Media (Solothurner Zeitung / Oltner Tagblatt / Grenchner Tagblatt condividono la stessa redazione). robots.txt: User-agent * consentito (solo /suche?, /api/ ecc. vietati) ma elenca esplicitamente come Disallow ClaudeBot/anthropic-ai/GPTBot e simili: il generatore deve usare il proprio UA non-AI e non richiedere /api/; decisione di policy all'orchestratore.  D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.solothurnerzeitung.ch/solothurn/stadt-solothurn.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Solothurner Zeitung (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["eventi", "cronaca", "servizi", "mobilita"],
-          "quirks": {},
-          "items7d": 19,
-          "verifiedAt": "2026-10-08",
-          "notes": "Sezione città di Soletta (cultura, eventi, mobilita' urbana). CH Media (Solothurner Zeitung / Oltner Tagblatt / Grenchner Tagblatt condividono la stessa redazione). robots.txt: User-agent * consentito (solo /suche?, /api/ ecc. vietati) ma elenca esplicitamente come Disallow ClaudeBot/anthropic-ai/GPTBot e simili: il generatore deve usare il proprio UA non-AI e non richiedere /api/; decisione di policy all'orchestratore.  D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.oltnertagblatt.ch/solothurn/olten.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Oltner Tagblatt (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "eventi", "mobilita", "servizi"],
-          "quirks": {},
-          "items7d": 14,
-          "verifiedAt": "2026-10-08",
-          "notes": "Regione Olten/Gäu/Gösgen (Ostsolothurn, nodo ferroviario e A1/A2). CH Media (Solothurner Zeitung / Oltner Tagblatt / Grenchner Tagblatt condividono la stessa redazione). robots.txt: User-agent * consentito (solo /suche?, /api/ ecc. vietati) ma elenca esplicitamente come Disallow ClaudeBot/anthropic-ai/GPTBot e simili: il generatore deve usare il proprio UA non-AI e non richiedere /api/; decisione di policy all'orchestratore.  D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.grenchnertagblatt.ch/solothurn/grenchen.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Grenchner Tagblatt (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "eventi", "lavoro", "servizi"],
-          "quirks": {},
-          "items7d": 23,
-          "verifiedAt": "2026-10-08",
-          "notes": "Regione Grenchen/Bettlach (polo orologiero/industria). CH Media (Solothurner Zeitung / Oltner Tagblatt / Grenchner Tagblatt condividono la stessa redazione). robots.txt: User-agent * consentito (solo /suche?, /api/ ecc. vietati) ma elenca esplicitamente come Disallow ClaudeBot/anthropic-ai/GPTBot e simili: il generatore deve usare il proprio UA non-AI e non richiedere /api/; decisione di policy all'orchestratore.  D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.solothurnerzeitung.ch/thema/benzin.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Solothurner Zeitung (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["carburanti", "mobilita"],
-          "quirks": {},
-          "items7d": 1,
-          "verifiedAt": "2026-10-08",
-          "notes": "Feed tematico (tag 'Benzin'); misto SO/nazionale. CH Media (Solothurner Zeitung / Oltner Tagblatt / Grenchner Tagblatt condividono la stessa redazione). robots.txt: User-agent * consentito (solo /suche?, /api/ ecc. vietati) ma elenca esplicitamente come Disallow ClaudeBot/anthropic-ai/GPTBot e simili: il generatore deve usare il proprio UA non-AI e non richiedere /api/; decisione di policy all'orchestratore.  D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.solothurnerzeitung.ch/thema/steuern.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Solothurner Zeitung (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["fisco"],
-          "quirks": {},
-          "items7d": 2,
-          "verifiedAt": "2026-10-08",
-          "notes": "Feed tematico 'Steuern'; per l'hub fisco. CH Media (Solothurner Zeitung / Oltner Tagblatt / Grenchner Tagblatt condividono la stessa redazione). robots.txt: User-agent * consentito (solo /suche?, /api/ ecc. vietati) ma elenca esplicitamente come Disallow ClaudeBot/anthropic-ai/GPTBot e simili: il generatore deve usare il proprio UA non-AI e non richiedere /api/; decisione di policy all'orchestratore.  D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.solothurnerzeitung.ch/thema/verkehr.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Solothurner Zeitung (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["mobilita"],
-          "quirks": {},
-          "items7d": 2,
-          "verifiedAt": "2026-10-08",
-          "notes": "Feed tematico 'Verkehr'. CH Media (Solothurner Zeitung / Oltner Tagblatt / Grenchner Tagblatt condividono la stessa redazione). robots.txt: User-agent * consentito (solo /suche?, /api/ ecc. vietati) ma elenca esplicitamente come Disallow ClaudeBot/anthropic-ai/GPTBot e simili: il generatore deve usare il proprio UA non-AI e non richiedere /api/; decisione di policy all'orchestratore.  D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.solothurnerzeitung.ch/thema/arbeitslosigkeit.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Solothurner Zeitung (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["lavoro", "servizi"],
-          "quirks": {},
-          "items7d": 1,
-          "verifiedAt": "2026-10-08",
-          "notes": "Feed tematico mercato del lavoro. CH Media (Solothurner Zeitung / Oltner Tagblatt / Grenchner Tagblatt condividono la stessa redazione). robots.txt: User-agent * consentito (solo /suche?, /api/ ecc. vietati) ma elenca esplicitamente come Disallow ClaudeBot/anthropic-ai/GPTBot e simili: il generatore deve usare il proprio UA non-AI e non richiedere /api/; decisione di policy all'orchestratore.  D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
         },
         {
           "url": "https://www.srf.ch/feed/podcast/sd/56d2f86a-ae7b-463b-a5ad-93fcf9fffb58.xml",
@@ -7016,6 +6892,132 @@
           "reason": "noRecentItems",
           "decision": "exclude",
           "decisionAt": "2026-10-08"
+        },
+        {
+          "url": "https://www.solothurnerzeitung.ch/solothurn.rss",
+          "publisher": "Solothurner Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 41,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 41 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.solothurnerzeitung.ch/solothurn/kanton-solothurn.rss",
+          "publisher": "Solothurner Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 35,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 35 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.solothurnerzeitung.ch/solothurn/stadt-solothurn.rss",
+          "publisher": "Solothurner Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 19,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 19 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.oltnertagblatt.ch/solothurn/olten.rss",
+          "publisher": "Oltner Tagblatt (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 14,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 14 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.grenchnertagblatt.ch/solothurn/grenchen.rss",
+          "publisher": "Grenchner Tagblatt (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 23,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 23 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.solothurnerzeitung.ch/thema/benzin.rss",
+          "publisher": "Solothurner Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 1,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 1 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.solothurnerzeitung.ch/thema/steuern.rss",
+          "publisher": "Solothurner Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 2,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 2 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.solothurnerzeitung.ch/thema/verkehr.rss",
+          "publisher": "Solothurner Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 2,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 2 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.solothurnerzeitung.ch/thema/arbeitslosigkeit.rss",
+          "publisher": "Solothurner Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 1,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 1 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
         }
       ]
 
@@ -7564,66 +7566,6 @@
           "notes": "GET reale: status 200, content-type text/html;charset=UTF-8. Tre item nella finestra: «Bring- und Holtag in Arbon: Weitergeben statt wegwerfen» (06.10), «109 Spenden für den neuen Badesteg» (05.10), «Stadtrat befasst sich mit Einsprachen und Einwendungen zur Altstadtaufwertung» (29.09); item del 28.09 fuori finestra. robots.txt 200, path consentito, nessun blocco AI/ai-input=no; pagine legali comunali consultate."
         },
         {
-          "url": "https://www.tagblatt.ch/ostschweiz/thurgau.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Thurgauer Zeitung / St.Galler Tagblatt (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "servizi", "mobilita", "eventi", "pensioni", "fisco"],
-          "quirks": {
-            "paywall": "title+lead"
-          },
-          "items7d": 23,
-          "verifiedAt": "2026-10-08",
-          "notes": "CH Media (St.Galler Tagblatt/Thurgauer Zeitung); date ISO in pubDate; molti articoli con paywall (il feed da' titolo+lead). robots.txt: User-agent * consentito, ma vieta per nome ClaudeBot/GPTBot/anthropic-ai ecc.: usare l'UA proprio del generatore e far confermare al proprietario la policy d'uso editoriale. Feed principale Thurgau: 24 item, 23 negli ultimi 7 giorni. thurgauerzeitung.ch/ostschweiz/thurgau.rss e' lo stesso feed (stesso contenuto, dominio alias): usarne uno solo. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.tagblatt.ch/ostschweiz/kanton-thurgau.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Thurgauer Zeitung / St.Galler Tagblatt (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "servizi", "mobilita", "fisco", "pensioni"],
-          "quirks": {
-            "paywall": "title+lead"
-          },
-          "items7d": 29,
-          "verifiedAt": "2026-10-08",
-          "notes": "CH Media (St.Galler Tagblatt/Thurgauer Zeitung); date ISO in pubDate; molti articoli con paywall (il feed da' titolo+lead). robots.txt: User-agent * consentito, ma vieta per nome ClaudeBot/GPTBot/anthropic-ai ecc.: usare l'UA proprio del generatore e far confermare al proprietario la policy d'uso editoriale. Sezione politica/cantone: 57 item, 29 negli ultimi 7 giorni. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.tagblatt.ch/ostschweiz/kreuzlingen.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Thurgauer Zeitung / St.Galler Tagblatt (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["frontalieri", "carburanti", "mobilita", "cronaca", "eventi", "servizi"],
-          "quirks": {
-            "paywall": "title+lead"
-          },
-          "items7d": 55,
-          "verifiedAt": "2026-10-08",
-          "notes": "CH Media (St.Galler Tagblatt/Thurgauer Zeitung); date ISO in pubDate; molti articoli con paywall (il feed da' titolo+lead). robots.txt: User-agent * consentito, ma vieta per nome ClaudeBot/GPTBot/anthropic-ai ecc.: usare l'UA proprio del generatore e far confermare al proprietario la policy d'uso editoriale. Feed della regione Kreuzlingen/Untersee (confine con Konstanz): 57 item, 55 in 7 giorni; contiene pezzi su Tanktourismus e pendolari tedeschi. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
-          "url": "https://www.tagblatt.ch/ostschweiz/westthurgau.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Thurgauer Zeitung / St.Galler Tagblatt (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "servizi", "mobilita", "eventi"],
-          "quirks": {
-            "paywall": "title+lead"
-          },
-          "items7d": 38,
-          "verifiedAt": "2026-10-08",
-          "notes": "CH Media (St.Galler Tagblatt/Thurgauer Zeitung); date ISO in pubDate; molti articoli con paywall (il feed da' titolo+lead). robots.txt: User-agent * consentito, ma vieta per nome ClaudeBot/GPTBot/anthropic-ai ecc.: usare l'UA proprio del generatore e far confermare al proprietario la policy d'uso editoriale. Frauenfeld/Westthurgau: 57 item, 38 in 7 giorni. /ostschweiz/frauenfeld.rss restituisce gli stessi 57 item (duplicato): non aggiungerlo. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
           "url": "https://www.kreuzlingen24.ch/alle-news",
           "format": "html",
           "parser": "html-links",
@@ -7824,6 +7766,64 @@
         "mobilita: nessun feed ufficiale per cantieri/traffico (TCS/ASTRA/Verkehrsinfo non raggiungibili o 404); copertura indiretta tramite home tg.ch (chiusure strade), Kapo, Thurbo/Ostwind (poche news), SWR Bodensee (lato DE: traghetto Konstanz-Meersburg, Schwarzwaldbahn).",
         "stampa locale: Südkurier (principale quotidiano lato Konstanz) esclusa per riserva TDM; Blick 403; SRF Ostschweiz non ha piu' pagina regionale. Il volume news dipende quasi tutto da CH Media (tagblatt.ch / thurgauerzeitung.ch): rischio di monocultura e paywall (feed = titolo+lead).",
         "cross-check: i feed tagblatt.ch di Thurgau, Kanton-Thurgau, Kreuzlingen, Westthurgau/Frauenfeld hanno ampie sovrapposizioni (stessi articoli in piu' feed): deduplicare per guid 'ld.NNNNNNN'."
+      ],
+      "rejectedSources": [
+        {
+          "url": "https://www.tagblatt.ch/ostschweiz/thurgau.rss",
+          "publisher": "Thurgauer Zeitung / St.Galler Tagblatt (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 23,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 23 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.tagblatt.ch/ostschweiz/kanton-thurgau.rss",
+          "publisher": "Thurgauer Zeitung / St.Galler Tagblatt (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 29,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 29 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.tagblatt.ch/ostschweiz/kreuzlingen.rss",
+          "publisher": "Thurgauer Zeitung / St.Galler Tagblatt (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 55,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 55 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.tagblatt.ch/ostschweiz/westthurgau.rss",
+          "publisher": "Thurgauer Zeitung / St.Galler Tagblatt (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 38,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 38 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        }
       ]
     },
     {
@@ -8414,21 +8414,6 @@
           "items7d": 0,
           "verifiedAt": "2026-10-06",
           "notes": "GET reale: status 200, content-type text/html;charset=UTF-8. Elenco news con ultimo comunicato misurato 03.09.2026; campioni: «30 Jahre OK-Präsident: Urner Kantonalbank dankt Pirmin Walker», «Urner Kantonalbank: Weiterhin mit solidem Wachstum im Kerngeschäft», «Fassadenarbeiten an der Geschäftstelle Altdorf». Le date non sono esposte uniformemente nel DOM, perciò 0 conservativo negli ultimi 7 giorni. robots.txt 200, path consentito, nessun blocco AI/ai-input=no; termini/privacy consultati."
-        },
-        {
-          "url": "https://www.luzernerzeitung.ch/zentralschweiz/uri.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Luzerner Zeitung – Uri",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "servizi", "mobilita", "fisco", "lavoro"],
-          "quirks": {
-            "paywall": "title+lead"
-          },
-          "items7d": 55,
-          "verifiedAt": "2026-10-08",
-          "notes": "Feed regionale Uri; titolo e lead RSS pubblici, articoli eventualmente premium non vengono scaricati. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
         }
       ],
       "categoryDataSources": {
@@ -8479,6 +8464,22 @@
         "trasporti pubblici: FFS (news.sbb.ch 403), viasuisse feed vuoto, TCS 404, ASTRA/admin.ch 404/WAF; per cantieri e chiusure solo gotthardtunnel.ch e Kapo Uri.",
         "media locali: la fonte migliore per volume (Luzerner Zeitung/Uri, 55 item/7gg) è attiva con titolo/lead RSS pubblici; il nostro crawler non scarica eventuali corpi premium. Restano inoltre l'Urner Wochenblatt (circa 2 articoli/giorno), nau.ch e i comunicati cantonali.",
         "lingua: tutte le fonti Uri sono in tedesco; it/en/fr richiedono traduzione/adattamento dal de."
+      ],
+      "rejectedSources": [
+        {
+          "url": "https://www.luzernerzeitung.ch/zentralschweiz/uri.rss",
+          "publisher": "Luzerner Zeitung – Uri",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 55,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 55 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        }
       ]
     },
     {
@@ -9669,21 +9670,6 @@
           "notes": "GET reale: status 200, content-type text/html; charset=UTF-8. Ultima edizione 09.09.2026; campioni: «Mitteilungen, Ausgabe 09.09.2026», «Aktionswochen Für es suubers Baar», «Büroschliessung am 4. September». robots.txt 200: nessun Disallow per il path e nessun valore ai-input=no; pagina Nutzung consultata, nessun divieto crawler rilevato. Testata locale indipendente, bassa cadenza."
         },
         {
-          "url": "https://www.zugerzeitung.ch/zentralschweiz/zug.rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Zuger Zeitung (CH Media)",
-          "language": "de",
-          "kind": "media",
-          "topics": ["cronaca", "fisco", "mobilita", "servizi", "eventi", "carburanti", "economia"],
-          "quirks": {
-            "paywall": "title+lead"
-          },
-          "items7d": 56,
-          "verifiedAt": "2026-10-08",
-          "notes": "Quotidiano cantonale, 58 item/56 datati negli ultimi 7gg. Contenuto IDENTICO a luzernerzeitung.ch/zentralschweiz/zug.rss (stesso feed, due domini): crawlare uno solo. Paywall parziale: il feed da' titolo+lead. robots.txt di CH Media vieta esplicitamente i crawler AI (anthropic-ai/ClaudeBot) pur con User-agent * aperto: usare solo UA proprio e solo titoli/lead. D10 aggiornata 2026-10-08: il robots wildcard/percorso per il nostro UA è consentito; i blocchi nominativi di altri bot non escludono la fonte."
-        },
-        {
           "url": "https://www.zentralplus.ch/feed/",
           "format": "rss",
           "parser": "rss",
@@ -9825,7 +9811,21 @@
           "items7d": 35,
           "verifiedAt": "2026-10-08",
           "origin": "rejected",
-          "notes": "URL condiviso da LU, OW e ZG. Ultimo conteggio accessibile: 35 item/7 giorni, verificato il 2026-10-08. HTTP 403 nel run hosted 46098366937 del 2026-11-28; una GET successiva con lo User-Agent del generatore ha restituito 200 dal laptop. Archiviato nei tre profili finché il runner operativo non conferma l’accesso; nessun retry o aggiramento del blocco.",
+          "notes": "URL condiviso da LU, OW e ZG. Ultimo conteggio accessibile: 35 item/7 giorni, verificato il 2026-10-08. HTTP 403 nel run hosted 46098366937 del 2026-11-28; la stessa GET dal laptop il 2026-11-28 riceve ugualmente HTTP 403 con cf-mitigated: challenge (Cloudflare managed challenge, anche su /robots.txt e con qualunque UA), quindi non è un blocco dei soli datacenter. Archiviato nei tre profili senza retry né aggiramento (D10).",
+          "reason": "sourceUnavailable",
+          "decision": "exclude",
+          "decisionAt": "2026-11-28"
+        },
+        {
+          "url": "https://www.zugerzeitung.ch/zentralschweiz/zug.rss",
+          "publisher": "Zuger Zeitung (CH Media)",
+          "kind": "media",
+          "language": "de",
+          "intendedBucket": "news",
+          "items7d": 56,
+          "verifiedAt": "2026-10-08",
+          "origin": "rejected",
+          "notes": "Ultimo conteggio accessibile: 56 item/7 giorni, verificato il 2026-10-08. 2026-11-28: HTTP 403 con header cf-mitigated: challenge (Cloudflare managed challenge) con il nostro UA identificativo, anche su /robots.txt, sia nei run hosted sia da un client fuori dai datacenter e con qualunque UA; la sfida richiede un browser. Archiviato senza retry né aggiramento (D10); da riaprire solo con un feed autorizzato dal publisher.",
           "reason": "sourceUnavailable",
           "decision": "exclude",
           "decisionAt": "2026-11-28"

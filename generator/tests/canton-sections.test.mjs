@@ -76,11 +76,11 @@ test('LU non interroga i feed Luzerner Zeitung che hanno restituito 403', () => 
     '/thema/luzerner-kantonsspital.rss': 3,
   });
   assert.ok(rejected.every((source) => source.verifiedAt === '2026-10-08'));
-  assert.ok(rejected.every((source) => /HTTP 403/u.test(source.notes)));
+  assert.ok(rejected.every((source) => /HTTP 403/u.test(source.notes) && /cf-mitigated: challenge/u.test(source.notes)));
   assert.ok(lucerna.newsSources.some((source) => source.url === 'https://www.stadtluzern.ch/aktuelles/news.rss'));
 });
 
-test('il feed LZ condiviso resta archiviato per LU, OW e ZG finché il runner hosted non conferma accesso', () => {
+test('il feed LZ condiviso resta archiviato per LU, OW e ZG senza aggirare la sfida Cloudflare', () => {
   const sharedUrl = 'https://www.luzernerzeitung.ch/zentralschweiz.rss';
 
   for (const code of ['LU', 'OW', 'ZG']) {
@@ -94,8 +94,38 @@ test('il feed LZ condiviso resta archiviato per LU, OW e ZG finché il runner ho
     assert.equal(rejected[0].items7d, 35);
     assert.equal(rejected[0].verifiedAt, '2026-10-08');
     assert.match(rejected[0].notes, /run hosted 46098366937/u);
-    assert.match(rejected[0].notes, /restituito 200 dal laptop/u);
+    assert.match(rejected[0].notes, /dal laptop il 2026-11-28 riceve ugualmente HTTP 403/u);
   }
+});
+
+test('le fonti dietro una sfida Cloudflare o un blocco WAF per il nostro UA restano archiviate (nessun aggiramento, D10)', () => {
+  const challenged = {
+    AG: ['aargauerzeitung.ch'], APPENZELLO: ['tagblatt.ch'], BASILEA: ['bzbasel.ch'], NW: ['nidwaldnerzeitung.ch'],
+    OW: ['luzernerzeitung.ch'], SG: ['tagblatt.ch'], SH: ['shpower.ch'], SO: ['solothurnerzeitung.ch', 'oltnertagblatt.ch', 'grenchnertagblatt.ch'],
+    TG: ['tagblatt.ch'], UR: ['luzernerzeitung.ch'], ZG: ['zugerzeitung.ch', 'luzernerzeitung.ch'],
+  };
+  const wafBlocked = { GE: ['www.unige.ch'] };
+  const hostOf = (source) => new URL(source.url).hostname.replace(/^www\./u, '');
+  for (const [code, hosts] of Object.entries(challenged)) {
+    const c = canton(PROFILE, code);
+    assert.deepEqual(c.newsSources.filter((s) => hosts.includes(hostOf(s))).map((s) => s.url), [], `${code}: fonte con sfida ancora attiva`);
+    const archived = c.rejectedSources.filter((s) => hosts.includes(hostOf(s)) && s.decisionAt === '2026-11-28');
+    assert.ok(archived.length >= 1, `${code}: nessuna voce archiviata`);
+    for (const source of archived) {
+      assert.equal(source.reason, 'sourceUnavailable');
+      assert.equal(source.decisionAt, '2026-11-28');
+      assert.match(source.notes, /cf-mitigated: challenge/u);
+      assert.match(source.notes, /senza retry né aggiramento/u);
+    }
+  }
+  for (const [code, hosts] of Object.entries(wafBlocked)) {
+    const c = canton(PROFILE, code);
+    assert.deepEqual(c.newsSources.filter((s) => hosts.includes(new URL(s.url).hostname)).map((s) => s.url), []);
+    const archived = c.rejectedSources.filter((s) => hosts.includes(new URL(s.url).hostname));
+    assert.equal(archived.length, 2);
+    for (const source of archived) assert.match(source.notes, /l'UA non si cambia per eludere la regola/u);
+  }
+  for (const c of PROFILE.cantons) assert.ok(c.newsSources.length >= 5, `${c.code}: troppo poche fonti attive dopo l'archiviazione`);
 });
 
 test('le fonti news sono solo di tipo notizia; i dati di categoria non entrano nel generatore (D11)', () => {
@@ -146,7 +176,7 @@ test('la policy robots ha host bloccati da far valere su tutti i cantoni', () =>
 
 test('SHN e Schaffhausen24 sono ammesse quando il blocco robots è solo nominativo', () => {
   const c = canton(PROFILE, 'SH');
-  assert.equal(c.rejectedSources.length, 1);
+  assert.equal(c.rejectedSources.filter((s) => s.reason !== 'sourceUnavailable').length, 1);
   assert.equal(c.ownerDecisionPending.length, 0);
   assert.equal(c.newsSources.filter((s) => s.url.includes('shn.ch/')).length, 7);
   assert.equal(c.newsSources.some((s) => s.url === 'https://www.schaffhausen24.ch/alle-news'), true);
