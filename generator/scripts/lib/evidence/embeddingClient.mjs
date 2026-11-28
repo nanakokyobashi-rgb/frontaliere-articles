@@ -99,6 +99,35 @@ export async function initWithRetry(load, opts = {}) {
   throw lastError;
 }
 
+/** Tentativi dell'inferenza ONNX (un errore transitorio di sessione/memoria non perde l'articolo). */
+export const INFERENCE_ATTEMPTS = 2;
+export const INFERENCE_BACKOFF_MS = 1000;
+
+/**
+ * Un solo ritentativo, con attesa breve, sulla chiamata di inferenza. Copre
+ * solo l'errore dell'estrattore: la validazione della forma/dimensione dei
+ * vettori resta fuori (e' deterministica, ritentarla non la cambia). Il tetto
+ * a 2 tentativi evita che un guasto vero (input non valido, OOM persistente)
+ * allunghi il run; poi l'errore sale e il gate fail-closed lo dichiara.
+ */
+async function runInferenceWithRetry(run) {
+  const envBackoff = Number(process.env.EMBEDDING_INIT_BACKOFF_MS);
+  const delay = Number.isFinite(envBackoff) && envBackoff >= 0 ? Math.min(envBackoff, INFERENCE_BACKOFF_MS) : INFERENCE_BACKOFF_MS;
+  let lastError;
+  for (let attempt = 1; attempt <= INFERENCE_ATTEMPTS; attempt += 1) {
+    try {
+      return await run();
+    } catch (err) {
+      lastError = err;
+      if (attempt < INFERENCE_ATTEMPTS) {
+        console.error(`EMBEDDING_INFERENCE_RETRY attempt=${attempt}/${INFERENCE_ATTEMPTS} delayMs=${delay} error=${JSON.stringify(String(err?.message ?? err).slice(0, 200))}`);
+        await defaultSleep(delay);
+      }
+    }
+  }
+  throw lastError;
+}
+
 async function getExtractor() {
   if (_extractorOverride) return _extractorOverride;
   if (!_extractor) {
@@ -147,7 +176,7 @@ export async function embedBatch({ inputs, prefix = 'passage' } = {}) {
   if (!Array.isArray(inputs) || inputs.length === 0) return [];
   const extractor = await getExtractor();
   const prefixed = inputs.map((t) => `${prefix}: ${String(t ?? '')}`);
-  const out = await extractor(prefixed, { pooling: 'mean', normalize: true });
+  const out = await runInferenceWithRetry(() => extractor(prefixed, { pooling: 'mean', normalize: true }));
   const rows = typeof out?.tolist === 'function' ? out.tolist() : out;
   if (!Array.isArray(rows) || rows.length !== inputs.length) {
     throw new Error(`local embedder returned ${rows?.length} vectors for ${inputs.length} inputs`);

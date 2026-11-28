@@ -546,7 +546,7 @@ import { checkSemanticNearDuplicate, isDedupGateUnavailableError } from './lib/s
 import { assertTopicNotRecentlyCovered, findRecentTopicCoverage, assertComuneTitleMatchesSlug, topicCoverageKey } from './lib/topic-coverage-guard.mjs';
 import { computeAdaptiveEvergreenThresholds } from './lib/scoring/constants.mjs';
 import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFromBody } from './lib/article-body-repetition.mjs';
-import { prepareSectionDedupStore } from './lib/scoring/sectionEmbeddingStore.mjs';
+import { invalidatePreparedSectionDedupStore, prepareSectionDedupStore } from './lib/scoring/sectionEmbeddingStore.mjs';
 import {
   appendGeneratedImageRecord,
   createBlogImageRecordValidator,
@@ -26352,6 +26352,10 @@ export async function registerArticleFiles(data, opts = {}) {
   // approvato il payload appena registrato; in caso contrario il marker deve
   // obbligare il run successivo a riesaminare la registrazione (#1126).
   endRegisterLock();
+  // Il processo puo' registrare altri articoli (publish-journalist-article): lo
+  // store del dedup preparato prima di questo non lo contiene. Invalidarlo qui
+  // fa rileggere al gate successivo la sorgente aggiornata (incrementale).
+  invalidatePreparedSectionDedupStore(SECTION);
   // RSS regeneration removed with #4974 item 2 — see the sibling call site
   // above. `opts.skipRss` is kept accepted-and-ignored so existing callers
   // passing it keep working; there is simply nothing left to skip.

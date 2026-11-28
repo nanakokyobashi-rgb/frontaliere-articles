@@ -210,9 +210,34 @@ export async function buildSectionEmbeddingStore(opts) {
 
 const ensured = new Map();
 
+/** Testo del probe: breve, passa dallo stesso embedder e dallo stesso prefisso del gate. */
+const MODEL_PROBE_TEXT = 'probe dedup';
+
 /**
- * Una volta per processo e per store: assicura che lo store esista ed e'
+ * Con tutti i vettori riutilizzati la costruzione non tocca l'embedder: un
+ * modello non scaricabile emergerebbe solo al gate, dopo la generazione. Il
+ * probe (un embedding di una stringa breve) inizializza il modello qui, con lo
+ * stesso retry di `getExtractor` (initWithRetry), e dichiara il guasto come
+ * esito fail-closed prima che si spenda un tentativo di generazione.
+ */
+async function probeEmbeddingModel(embed) {
+  try {
+    const [vector] = await embed({ inputs: [MODEL_PROBE_TEXT] });
+    if (!(vector instanceof Float32Array) || vector.length !== EMBEDDING_DIM) {
+      throw new Error(`vettore non valido dal probe (dim ${vector?.length}, attesa ${EMBEDDING_DIM})`);
+    }
+  } catch (err) {
+    throw new DedupGateUnavailableError('model_probe_failed', `modello di embedding non utilizzabile: ${String(err?.message ?? err).slice(0, 200)}`);
+  }
+}
+
+/**
+ * Una volta per store finche' non cambia: assicura che lo store esista ed e'
  * allineato alla sorgente, poi lo restituisce nella forma che il gate accetta.
+ * Un processo che registra piu' articoli di seguito (publish-journalist-article)
+ * deve chiamare `invalidatePreparedSectionDedupStore` dopo ogni registrazione
+ * riuscita: la chiamata successiva ricostruisce in modo incrementale (solo il
+ * nuovo articolo) e il gate vede anche quello appena pubblicato.
  * Se la costruzione fallisce l'errore sale: il chiamante usa il gate fail-closed.
  *
  * @param {{section: string, embeddingsBinPath: string, embeddingsMetaPath: string, metaPrefix: string}} sectionConfig
@@ -221,15 +246,22 @@ const ensured = new Map();
 export async function prepareSectionDedupStore(sectionConfig, overrides = {}) {
   const key = sectionConfig.embeddingsBinPath;
   if (!ensured.has(key) || overrides.force) {
-    ensured.set(key, buildSectionEmbeddingStore({
+    const embed = overrides.embedFn || embedBatch;
+    const pending = buildSectionEmbeddingStore({
       section: sectionConfig.section,
       binPath: sectionConfig.embeddingsBinPath,
       metaPath: sectionConfig.embeddingsMetaPath,
       metaItPaths: overrides.metaItPaths || [`services/locales/${sectionConfig.metaPrefix}-it.ts`],
       embedFn: overrides.embedFn,
       log: overrides.log,
-    }));
-    ensured.get(key).catch(() => ensured.delete(key));
+    }).then(async (summary) => {
+      if (summary.embedded === 0) await probeEmbeddingModel(embed);
+      return summary;
+    });
+    ensured.set(key, pending);
+    pending.catch(() => {
+      if (ensured.get(key) === pending) ensured.delete(key);
+    });
   }
   try {
     await ensured.get(key);
@@ -244,6 +276,17 @@ export async function prepareSectionDedupStore(sectionConfig, overrides = {}) {
     store: loadEmbeddingStore({ binPath: sectionConfig.embeddingsBinPath, force: true }),
     meta: loadEmbeddingMeta({ metaPath: sectionConfig.embeddingsMetaPath, force: true }),
   };
+}
+
+/**
+ * Da chiamare dopo ogni registrazione riuscita di un articolo: lo store
+ * preparato prima non contiene il nuovo articolo, e il gate del documento
+ * successivo nello stesso processo lo confronterebbe con uno stato vecchio.
+ * Dimentica la preparazione: la prossima `prepareSectionDedupStore` rilegge la
+ * sorgente IT (che ora include l'articolo) e ri-embedda solo quello.
+ */
+export function invalidatePreparedSectionDedupStore(sectionConfig) {
+  ensured.delete(sectionConfig.embeddingsBinPath);
 }
 
 /** Test seam. */

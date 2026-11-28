@@ -25,6 +25,7 @@ import {
   buildSectionEmbeddingStore,
   collectSectionDedupArticles,
   prepareSectionDedupStore,
+  invalidatePreparedSectionDedupStore,
   __resetPreparedStores,
 } from '../scripts/lib/scoring/sectionEmbeddingStore.mjs';
 import { DedupGateUnavailableError, buildDedupText, checkSemanticNearDuplicate } from '../scripts/lib/scoring/semanticDedup.mjs';
@@ -217,5 +218,102 @@ describe('M6 store di embedding per sezione e dedup fail-closed', () => {
     assert.equal(summary.failOpenObservations, 0);
     assert.equal(summary.failClosedObservations, 1);
     assert.equal(summary.latestGateStatus, 'fail_closed:store_missing');
+  });
+  const sectionConfig = () => ({ section: 'svizzera', embeddingsBinPath: paths.binPath, embeddingsMetaPath: paths.metaPath, metaPrefix: 'x' });
+
+  it('stesso processo, due articoli quasi uguali: dopo la registrazione del primo il secondo e respinto', async () => {
+    write([B]);
+    const section = sectionConfig();
+    const first = await prepareSectionDedupStore(section, { ...paths });
+    // Primo articolo del processo: passa il gate contro lo store pre-registrazione.
+    await checkSemanticNearDuplicate(candidate(A[1], A[2], A[0]), gateOpts({ store: first.store, meta: first.meta, failClosed: true }));
+
+    // Registrazione riuscita: la sorgente IT include A, il produttore invalida lo store.
+    write([A, B]);
+    invalidatePreparedSectionDedupStore(section);
+    calls.length = 0;
+    const second = await prepareSectionDedupStore(section, { ...paths });
+    assert.equal(calls.filter((text) => text === buildDedupText(A[1], A[2])).length, 1, 'solo il nuovo articolo e ri-embeddato');
+    assert.equal(calls.length, 1, 'gli altri vettori sono riusati');
+    assert.equal(second.store.count, 2);
+    await assert.rejects(
+      checkSemanticNearDuplicate(candidate(A[1], `${A[2]}`, 'quasi-uguale'), gateOpts({ store: second.store, meta: second.meta, failClosed: true })),
+      /DUPLICATO SEMANTICO/,
+    );
+  });
+
+  it('senza invalidazione lo store resta quello pre-registrazione (il difetto che la chiamata chiude)', async () => {
+    write([B]);
+    const section = sectionConfig();
+    await prepareSectionDedupStore(section, { ...paths });
+    write([A, B]);
+    const stale = await prepareSectionDedupStore(section, { ...paths });
+    assert.equal(stale.store.count, 1, 'prepare e memoizzato per processo');
+  });
+
+  it('registerArticleFiles invalida lo store dopo la registrazione riuscita e prima del return', () => {
+    const source = readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf8');
+    const body = source.slice(source.indexOf('export async function registerArticleFiles'));
+    const end = body.indexOf('endRegisterLock();');
+    const invalidate = body.indexOf('invalidatePreparedSectionDedupStore(SECTION);');
+    const ret = body.indexOf('return { slugs, publishedUrls };');
+    assert.ok(end > 0 && invalidate > end && ret > invalidate);
+  });
+
+  it('preflight: con tutti i vettori riutilizzati il modello e comunque provato e un guasto e fail-closed', async () => {
+    write([A, B]);
+    const section = sectionConfig();
+    await prepareSectionDedupStore(section, { ...paths });
+    __resetPreparedStores();
+    calls.length = 0;
+    await prepareSectionDedupStore(section, { ...paths });
+    assert.deepEqual(calls, ['probe dedup'], 'un solo embedding breve, nessun articolo ri-embeddato');
+
+    __resetPreparedStores();
+    const broken = async () => { throw new Error('modello non scaricabile'); };
+    await assert.rejects(
+      prepareSectionDedupStore(section, { ...paths, embedFn: broken }),
+      (e) => e instanceof DedupGateUnavailableError && e.status === 'model_probe_failed',
+    );
+    // Il guasto non resta memoizzato: il tentativo successivo riprova.
+    calls.length = 0;
+    await prepareSectionDedupStore(section, { ...paths });
+    assert.deepEqual(calls, ['probe dedup']);
+  });
+});
+
+describe('M6 embedBatch: retry limitato sull inferenza', () => {
+  it('un errore transitorio dell estrattore e ritentato una volta, poi sale', async () => {
+    const { embedBatch, setEmbedderForTests, INFERENCE_ATTEMPTS } = await import('../scripts/lib/evidence/embeddingClient.mjs');
+    const previous = process.env.EMBEDDING_INIT_BACKOFF_MS;
+    process.env.EMBEDDING_INIT_BACKOFF_MS = '0';
+    const originalError = console.error;
+    console.error = () => {};
+    try {
+      let tries = 0;
+      setEmbedderForTests(async (inputs) => {
+        tries += 1;
+        if (tries < 2) throw new Error('onnx session error');
+        return inputs.map(() => Array.from({ length: EMBEDDING_DIM }, (_, i) => (i === 0 ? 1 : 0)));
+      });
+      const [vec] = await embedBatch({ inputs: ['x'] });
+      assert.equal(vec.length, EMBEDDING_DIM);
+      assert.equal(tries, 2);
+
+      tries = 0;
+      setEmbedderForTests(async () => { tries += 1; throw new Error('persistente'); });
+      await assert.rejects(embedBatch({ inputs: ['x'] }), /persistente/);
+      assert.equal(tries, INFERENCE_ATTEMPTS, 'tetto ai tentativi');
+
+      // La forma errata dell output e deterministica: nessun retry.
+      tries = 0;
+      setEmbedderForTests(async () => { tries += 1; return [[1, 2, 3]]; });
+      await assert.rejects(embedBatch({ inputs: ['x'] }), /dim=3/);
+      assert.equal(tries, 1);
+    } finally {
+      console.error = originalError;
+      setEmbedderForTests(null);
+      if (previous === undefined) delete process.env.EMBEDDING_INIT_BACKOFF_MS; else process.env.EMBEDDING_INIT_BACKOFF_MS = previous;
+    }
   });
 });
