@@ -7253,7 +7253,7 @@
       "reason": "Rigenera il vocabolario di domanda per sezione cantonale leggendo le query Search Console degli ultimi 28 giorni sulle pagine di ciascuna sezione nelle quattro lingue. Strumento del corpus che scrive un JSON sotto generator/data/; il sito non lo esegue ne' lo importa.",
       "baseline": {
         "site": null,
-        "corpus": "23d797de9fb16f86",
+        "corpus": "cc4a854d2f9bb495",
         "alignedAt": "2026-11-28"
       }
     },
@@ -7273,7 +7273,7 @@
       "reason": "Rinnovo mensile del vocabolario di domanda per sezione cantonale (F6.2): rigenera generator/data/section-demand-vocabulary.json da Search Console con il filtro di privacy e apre una PR di soli dati. Il sito non ha ne' il builder ne' il ranker di sezione.",
       "baseline": {
         "site": null,
-        "corpus": "da1589705804a590",
+        "corpus": "e8b9684ae3f550b6",
         "alignedAt": "2026-11-28"
       }
     }
