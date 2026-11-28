@@ -7228,6 +7228,37 @@ function buildFactCheckProofRetryPrompt(basePrompt, proofFailures) {
     + 'Prima scegli e copia i passaggi esatti dai blocchi forniti, poi formula il giudizio in base a quei passaggi.';
 }
 
+const FACTCHECK_PROMPT_PROVIDER_HEADROOM_RATIO = 0.05;
+
+/**
+ * True only when the fact-check request leaves room for estimator and
+ * tokenizer variance. Count the UTF-8 bytes of the exact serialized message as
+ * an additional penalty: `estimateRequestTokens` counts JavaScript string
+ * units, which can substantially understate non-ASCII payloads.
+ */
+function factCheckPromptFitsProviderLimit(prompt, inputTokenLimit) {
+  if (typeof prompt !== 'string' || !Number.isFinite(inputTokenLimit) || inputTokenLimit <= 0) {
+    return false;
+  }
+
+  let serializedPayload;
+  try {
+    serializedPayload = JSON.stringify([{ role: 'user', content: prompt }]);
+  } catch {
+    return false;
+  }
+  if (typeof serializedPayload !== 'string') return false;
+
+  const serializedOverhead = Math.max(
+    0,
+    Buffer.byteLength(serializedPayload, 'utf8') - prompt.length,
+  );
+  const serializedEstimate = estimateRequestTokens([{ role: 'user', content: prompt }])
+    + serializedOverhead;
+  const headroom = Math.ceil(inputTokenLimit * FACTCHECK_PROMPT_PROVIDER_HEADROOM_RATIO);
+  return serializedEstimate + headroom <= inputTokenLimit;
+}
+
 // Composizione ufficiale: https://www.admin.ch/en/members-federal-council
 const FACT_CHECK_FEDERAL_COUNCILLORS = `Baume-Schneider, Parmelin, Cassis, Keller-Sutter, Pfister, Jans, Rösti`;
 const FACT_CHECK_INVENTED_INSTITUTIONS = `"Codice federale del lavoro", "CFL", "UFOL", "UWL", "Commissione federale per i frontalieri", "Ufficio federale dell'integrazione sanitaria (UFIS)"`;
@@ -7534,7 +7565,7 @@ ${proofResponseFormat}`
     const limit = independentVerifier && getDeclaredRequestTokenLimit(independentVerifier);
     const fullEstimate = estimateRequestTokens([{ role: 'user', content: prompt }]);
     const compactEstimate = estimateRequestTokens([{ role: 'user', content: compactPrompt }]);
-    if (limit && fullEstimate > limit && compactEstimate <= limit) {
+    if (limit && !factCheckPromptFitsProviderLimit(prompt, limit) && factCheckPromptFitsProviderLimit(compactPrompt, limit)) {
       // Either primary request can fall through to the independent cascade.
       // Use one base prompt so the normal proof-retry path can annotate it.
       compactRetry = { fullEstimate, compactEstimate, cap: limit };
@@ -7571,7 +7602,7 @@ ${proofResponseFormat}`
     let verificationPrompt = activePrompt;
     if (fcAttempt > 1 && editorialProofFailures.size > 0) {
       const annotatedPrompt = buildFactCheckProofRetryPrompt(activePrompt, editorialProofFailures);
-      if (observedInputCap === 0 || estimateRequestTokens([{ role: 'user', content: annotatedPrompt }]) <= observedInputCap) {
+      if (observedInputCap === 0 || factCheckPromptFitsProviderLimit(annotatedPrompt, observedInputCap)) {
         verificationPrompt = annotatedPrompt;
       }
     }
@@ -7717,7 +7748,9 @@ ${proofResponseFormat}`
       if (cap > 0 && compactPrompt && activePrompt === prompt) {
         const fullEstimate = estimateRequestTokens([{ role: 'user', content: prompt }]);
         const compactEstimate = estimateRequestTokens([{ role: 'user', content: compactPrompt }]);
-        if (fullEstimate > cap && compactEstimate <= cap) compactRetry = { fullEstimate, compactEstimate, cap };
+        if (!factCheckPromptFitsProviderLimit(prompt, cap) && factCheckPromptFitsProviderLimit(compactPrompt, cap)) {
+          compactRetry = { fullEstimate, compactEstimate, cap };
+        }
       }
     }
   }
