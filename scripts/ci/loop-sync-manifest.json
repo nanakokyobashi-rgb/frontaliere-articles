@@ -7236,6 +7236,26 @@
         "corpus": "233c1dea7dab4923",
         "alignedAt": "2026-11-05"
       }
+    },
+    {
+      "path": "generator/scripts/lib/canton-section-demand-ranker.mjs",
+      "mode": "corpus-only",
+      "reason": "Ranker di selezione per domanda di ricerca delle sezioni cantonali (F6.2, O2): punteggia le headline del pool contro il vocabolario di query Search Console della SEZIONE (`generator/data/section-demand-vocabulary.json`), in modo deterministico e locale (zero chiamate LLM), con la freschezza come primo criterio e nessuna scelta quando il vocabolario e' insufficiente. Corpus-only: lo chiama solo create-article.mjs del corpus per i profili con `sectionDemandRanker`; il sito non genera articoli cantonali.",
+      "baseline": {
+        "site": null,
+        "corpus": "a562fbe7fdff773c",
+        "alignedAt": "2026-11-28"
+      }
+    },
+    {
+      "path": "generator/scripts/build-section-demand-vocabulary.mjs",
+      "mode": "corpus-only",
+      "reason": "Rigenera il vocabolario di domanda per sezione cantonale leggendo le query Search Console degli ultimi 28 giorni sulle pagine di ciascuna sezione nelle quattro lingue. Strumento del corpus che scrive un JSON sotto generator/data/; il sito non lo esegue ne' lo importa.",
+      "baseline": {
+        "site": null,
+        "corpus": "a52f5fdd9a535c5c",
+        "alignedAt": "2026-11-28"
+      }
     }
   ]
 }

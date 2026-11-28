@@ -763,6 +763,12 @@ import {
 // l'intestazione del modulo per la differenza fra duplicare il CONTENUTO
 // (bloccato) e coprire lo stesso TEMA con due tagli (ammesso).
 import { findCrossSectionSourceDuplicate } from './lib/cross-section-dedup.mjs';
+// Selezione per domanda di ricerca nelle sezioni cantonali (F6.2): locale, senza LLM.
+import {
+  loadSectionDemandVocabulary,
+  rankCantonHeadlines,
+  sectionVocabularyFor,
+} from './lib/canton-section-demand-ranker.mjs';
 
 // ── Smarter generator inputs (Phase 3 — spec 2026-05-06) ───────
 // data/article-performance.json is produced weekly by Phase 1A.
@@ -786,6 +792,11 @@ const _winnerFingerprintMessage = _articlePerformance
 // LLM-based selectArticle path takes over (byte-identical to today).
 const _demandVocabulary = _loadDemandVocabulary();
 const _experimentalCandidates = _loadExperimentalCandidates();
+// F6.2 — vocabolario di domanda PER SEZIONE (cantoni). OPTIONAL come i due sopra:
+// se manca o non e' leggibile il ranker di sezione non scatta.
+const _sectionDemandVocabulary = loadSectionDemandVocabulary(
+  path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'data', 'section-demand-vocabulary.json'),
+);
 
 // ── Phase 2 — Cascaded scoring inputs ─────────────────────────────
 // data/evidence-index.json: GSC + GA4 + PostHog + clusterStats, produced
@@ -22743,6 +22754,40 @@ async function main() {
                 }
               } catch {
                 console.error('RANKER_ERROR fallback=llm_selector');
+                chosen = null;
+              }
+            }
+
+            // ── Domanda di ricerca per sezione cantonale (F6.2) ──
+            // Deterministico e locale: nessuna chiamata LLM. La freschezza resta
+            // il primo criterio (la domanda decide solo dentro la fascia piu'
+            // fresca del pool); senza vocabolario sufficiente o senza match
+            // `chosen` resta null e vale la selezione LLM di sempre.
+            if (!chosen && SECTION_PROFILE.sectionDemandRanker && _sectionDemandVocabulary) {
+              try {
+                const ranked = rankCantonHeadlines(
+                  availableHeadlines,
+                  sectionVocabularyFor(_sectionDemandVocabulary, SECTION_NAME),
+                  {
+                    // Il nome del cantone nelle 4 lingue (dagli slug dell'hub) non e' domanda su un argomento.
+                    ignoreTerms: [
+                      SECTION_PROFILE.cantonName,
+                      SECTION_PROFILE.canton,
+                      ...Object.values(ARTICLE_SECTION_CORE_ALL[SECTION_NAME]?.indexSlug || {}).map((slug) => String(slug).replace(/-/g, ' ')),
+                    ],
+                    existingTitles: _existingItTitles,
+                  },
+                );
+                console.error(`SECTION_DEMAND section=${SECTION_NAME} reason=${ranked.reason} pool=${availableHeadlines.length} considered=${ranked.considered}`);
+                if (ranked.picks.length > 0) {
+                  chosen = ranked.picks[0];
+                  rankerTier = 'section-demand';
+                  rankerScoreObj = chosen._score;
+                  console.error(`   ✅ Ranker sezione: score=${chosen._score.score.toFixed(3)} fascia=${chosen._score.freshnessBand} query=${chosen._score.matchedQueries.join(' | ')}`);
+                  console.error(`   📰 ${safeTopicSelectionLogLabel(chosen)}\n`);
+                }
+              } catch {
+                console.error('SECTION_DEMAND_ERROR fallback=llm_selector');
                 chosen = null;
               }
             }
